@@ -26,10 +26,11 @@ package org.loboevolution.html.dom.svgimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGLength;
 import org.loboevolution.html.dom.svg.SVGLengthList;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGLengthListImpl class.</p>
@@ -56,7 +57,7 @@ public class SVGLengthListImpl implements SVGLengthList {
 
 	/** {@inheritDoc} */
 	@Override
-	public void clear() throws DOMException {
+	public void clear() {
 		pointList.clear();
 	}
 
@@ -70,7 +71,7 @@ public class SVGLengthListImpl implements SVGLengthList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGLength getItem(int index) throws DOMException {
+	public SVGLength getItem(int index) {
 		return pointList.get(index);
 	}
 
@@ -107,7 +108,7 @@ public class SVGLengthListImpl implements SVGLengthList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGLength removeItem(int index) throws DOMException {
+	public SVGLength removeItem(int index) {
 		return pointList.remove(index);
 	}
 

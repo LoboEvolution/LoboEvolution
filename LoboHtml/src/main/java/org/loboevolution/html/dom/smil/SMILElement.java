@@ -23,8 +23,9 @@
 
 package org.loboevolution.html.dom.smil;
 
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Element;
+
+import org.loboevolution.html.dom.nodeimpl.DOMException;
+import org.loboevolution.html.node.Element;
 
 /**
  * The SMILElement interface is the base for all SMIL element

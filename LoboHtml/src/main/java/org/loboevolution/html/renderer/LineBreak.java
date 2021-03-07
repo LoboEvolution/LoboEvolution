@@ -22,7 +22,7 @@
  */
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 /**
  * <p>LineBreak class.</p>
@@ -72,7 +72,7 @@ public class LineBreak {
 	 * <p>Constructor for LineBreak.</p>
 	 *
 	 * @param breakType a int.
-	 * @param newLineNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param newLineNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public LineBreak(final int breakType, ModelNode newLineNode) {
 		super();
@@ -92,7 +92,7 @@ public class LineBreak {
 	/**
 	 * <p>getModelNode.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @return a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public ModelNode getModelNode() {
 		return this.newLineNode;

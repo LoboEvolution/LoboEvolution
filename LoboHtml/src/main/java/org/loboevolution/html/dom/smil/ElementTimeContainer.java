@@ -23,7 +23,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.NodeList;
 
 /**
  * This is a placeholder - subject to change. This represents generic timelines.

@@ -25,9 +25,10 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.w3c.dom.Comment;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Comment;
+
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>CommentImpl class.</p>
@@ -65,19 +66,19 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 
 	/** {@inheritDoc} */
 	@Override
-	public short getNodeType() {
-		return Node.COMMENT_NODE;
+	public NodeType getNodeType() {
+		return NodeType.COMMENT_NODE;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String getNodeValue() throws DOMException {
+	public String getNodeValue() {
 		return getTextContent();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) throws DOMException {
+	public void setNodeValue(String nodeValue) {
 		setTextContent(nodeValue);
 	}
 }

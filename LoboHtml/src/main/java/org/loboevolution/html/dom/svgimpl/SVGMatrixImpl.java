@@ -28,7 +28,7 @@ import java.awt.geom.NoninvertibleTransformException;
 
 import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGMatrix;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGMatrixImpl class.</p>
@@ -78,7 +78,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setA(float a) throws DOMException {
+	public void setA(float a) {
 		final float b = getB();
 		final float c = getC();
 		final float d = getD();
@@ -96,7 +96,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setB(float b) throws DOMException {
+	public void setB(float b) {
 		final float a = getA();
 		final float c = getC();
 		final float d = getD();
@@ -114,7 +114,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setC(float c) throws DOMException {
+	public void setC(float c) {
 		final float a = getA();
 		final float b = getB();
 		final float d = getD();
@@ -132,7 +132,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setD(float d) throws DOMException {
+	public void setD(float d) {
 		final float a = getA();
 		final float b = getB();
 		final float c = getC();
@@ -150,7 +150,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setE(float e) throws DOMException {
+	public void setE(float e) {
 		final float a = getA();
 		final float b = getB();
 		final float c = getC();
@@ -168,7 +168,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setF(float f) throws DOMException {
+	public void setF(float f) {
 		final float a = getA();
 		final float b = getB();
 		final float c = getC();

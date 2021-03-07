@@ -24,14 +24,17 @@ package org.loboevolution.html.dom.domimpl;
 
 import javax.swing.JButton;
 
-import org.loboevolution.common.Nodes;
 import org.loboevolution.html.control.ButtonControl;
 import org.loboevolution.html.dom.HTMLButtonElement;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.input.FormInput;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.renderer.HtmlController;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.ValidityState;
 
 /**
  * <p>HTMLButtonElementImpl class.</p>
@@ -59,7 +62,7 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		final String disabled = getAttribute("disabled");
 		return disabled != null;
 	}
@@ -78,13 +81,6 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public String getName() {
 		return getAttribute("name");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getTabIndex() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	/** {@inheritDoc} */
@@ -123,13 +119,6 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTabIndex(int tabIndex) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public void setValue(String value) {
 		setAttribute("value", value);
 		
@@ -144,7 +133,7 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 		final JButton button = new JButton();
 		button.setContentAreaFilled(false);
 		button.setText(getText());
-		button.setEnabled(!getDisabled());
+		button.setEnabled(!isDisabled());
 		button.addActionListener(event -> HtmlController.getInstance().onMouseClick(this, null, 0, 0));
 		buttonControl.add(button);
 	}
@@ -183,22 +172,22 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 	public void resetInput() {
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
 		if (form != null && form.hasChildNodes()) {
-			NodeList childNodes = form.getChildNodes();
-			for (Node node : Nodes.iterable(childNodes)) {
+			NodeListImpl childNodes = (NodeListImpl) form.getChildNodes();
+			childNodes.forEach(node -> {
 				if (node instanceof HTMLInputElementImpl) {
 					final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
 					hie.resetInput();
 				}
-			}
+			});
 		}
 	}
 
 	private String getText() {
 		StringBuilder text = new StringBuilder();
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
-				if (child.getNodeType() == Node.TEXT_NODE) {
+			NodeListImpl childNodes = (NodeListImpl) getChildNodes();
+			childNodes.forEach(child -> {
+				if (child.getNodeType() == NodeType.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
 					String childText = "";
 					nodeValue = nodeValue.replace('\n', ' ');
@@ -207,7 +196,7 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 					childText = nodeValue;
 					text.append(childText).append(" ");
 				}
-			}
+			});
 		}
 
 		if (text.length() > 0) {
@@ -215,6 +204,204 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 		} else {
 			return text.toString();
 		}
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAutofocus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutofocus(boolean autofocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormAction(String formAction) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormEnctype() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormEnctype(String formEnctype) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormMethod() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormMethod(String formMethod) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isFormNoValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setFormNoValidate(boolean formNoValidate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormTarget() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormTarget(String formTarget) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setType(String type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean reportValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/** {@inheritDoc} */

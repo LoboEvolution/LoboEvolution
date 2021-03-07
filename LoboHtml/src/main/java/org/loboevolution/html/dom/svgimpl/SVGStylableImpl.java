@@ -28,10 +28,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Paint;
 import java.awt.Shape;
+import java.util.Iterator;
 
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.SVGElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.dom.svg.SVGStylable;
@@ -41,11 +43,10 @@ import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 import org.loboevolution.laf.LAFSettings;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>SVGStylableImpl class.</p>
@@ -404,10 +405,14 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 */
 	protected Node child(String elementId) {
 		SVGSVGElement ownerSVGElement = getOwnerSVGElement();
-		NodeList nodeList = ownerSVGElement.getChildNodes();
-		for (Node child : Nodes.iterable(nodeList)) {
-			for (Node child1 : Nodes.iterable(child.getChildNodes())) {
-				NamedNodeMap attributes2 = child1.getAttributes();
+		NodeListImpl nodeList = (NodeListImpl)ownerSVGElement.getChildNodes();
+		for (Iterator<Node> i= nodeList.iterator(); i.hasNext();) {
+			Node child = i.next();
+			NodeListImpl nodeList1 = (NodeListImpl)child.getChildNodes();
+			for (Iterator<Node> i1= nodeList1.iterator(); i1.hasNext();) {
+				Node child1 = i1.next();
+				final Element elem1 = (Element) child1;
+				NamedNodeMap attributes2 = elem1.getAttributes();
 				if (attributes2 != null) {
 					for (Attr attr : Nodes.iterable(attributes2)) {
 						if ("id".equals(attr.getNodeName()) && elementId.equals(attr.getNodeValue())) {
@@ -417,7 +422,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 				}
 			}
 
-			NamedNodeMap attributes2 = child.getAttributes();
+			final Element elem = (Element) child;
+			NamedNodeMap attributes2 = elem.getAttributes();
 			if (attributes2 != null) {
 				for (Attr attr : Nodes.iterable(attributes2)) {
 					if ("id".equals(attr.getNodeName()) && elementId.equals(attr.getNodeValue())) {

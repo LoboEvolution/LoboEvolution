@@ -23,10 +23,16 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.HTMLOptGroupElement;
+import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
 import org.loboevolution.html.dom.filter.OptionFilter;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>HTMLOptionsCollectionImpl class.</p>
@@ -43,7 +49,7 @@ public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 	/**
 	 * <p>Constructor for HTMLOptionsCollectionImpl.</p>
 	 *
-	 * @param rootNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public HTMLOptionsCollectionImpl(NodeImpl rootNode) {
 		this.rootNode = rootNode;
@@ -72,12 +78,12 @@ public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node namedItem(String name) {
+	public Element namedItem(String name) {
 		final Document doc = this.rootNode.getOwnerDocument();
 		if (doc == null) {
 			return null;
 		}
-		final Node node = doc.getElementById(name);
+		final Element node = doc.getElementById(name);
 		if (node != null && node.getParentNode() == this.rootNode) {
 			return node;
 		}
@@ -101,9 +107,75 @@ public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 	/**
 	 * <p>Getter for the field rootList.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.NodeListImpl} object.
+	 * @return a {@link org.loboevolution.html.dom.nodeimpl.NodeListImpl} object.
 	 */
 	protected NodeListImpl getRootList() {
 		return rootList;
+	}
+
+	@Override
+	public void setLength(int length) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getSelectedIndex() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setSelectedIndex(int selectedIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptGroupElement element, HTMLElement before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptGroupElement element, int before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptGroupElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptionElement element, HTMLElement before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptionElement element, int before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptionElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLOptionsCollection]";
 	}
 }

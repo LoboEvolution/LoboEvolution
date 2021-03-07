@@ -44,7 +44,8 @@ import org.loboevolution.common.GUITasks;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.BorderInsets;
@@ -55,7 +56,6 @@ import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>Abstract BaseElementRenderable class.</p>
@@ -125,7 +125,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * <p>Constructor for BaseElementRenderable.</p>
 	 *
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
 	public BaseElementRenderable(RenderableContainer container, ModelNode modelNode, UserAgentContext ucontext) {

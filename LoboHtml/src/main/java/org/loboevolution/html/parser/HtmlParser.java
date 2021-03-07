@@ -42,12 +42,15 @@ import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.domimpl.DocumentTypeImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.ElementInfo;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Code;
+
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
@@ -235,7 +238,7 @@ public class HtmlParser {
 			try {
 				safeAppendChild(parent, textNode);
 			} catch (final DOMException de) {
-				if ((parent.getNodeType() != Node.DOCUMENT_NODE) || (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+				if ((parent.getNodeType() != NodeType.DOCUMENT_NODE) || (de.getCode() != Code.HIERARCHY_REQUEST_ERR)) {
 					logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 				}
 			}
@@ -655,8 +658,8 @@ public class HtmlParser {
 					try {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
-						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
-								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+						if ((parent.getNodeType() != NodeType.DOCUMENT_NODE)
+								|| (de.getCode() != Code.HIERARCHY_REQUEST_ERR)) {
 							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}
@@ -682,8 +685,8 @@ public class HtmlParser {
 					try {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
-						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
-								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+						if ((parent.getNodeType() != NodeType.DOCUMENT_NODE)
+								|| (de.getCode() != Code.HIERARCHY_REQUEST_ERR)) {
 							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}

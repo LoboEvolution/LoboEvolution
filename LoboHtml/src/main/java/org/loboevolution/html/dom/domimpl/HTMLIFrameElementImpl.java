@@ -34,7 +34,10 @@ import org.loboevolution.html.dom.HTMLIFrameElement;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.renderstate.IFrameRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.DOMTokenList;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.js.WindowProxy;
 
 /**
  * <p>HTMLIFrameElementImpl class.</p>
@@ -203,6 +206,162 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAllow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAllow(String allow) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAllowFullscreen() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAllowFullscreen(boolean allowFullscreen) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAllowPaymentRequest() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAllowPaymentRequest(boolean allowPaymentRequest) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public WindowProxy getContentWindow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DOMTokenList getSandbox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getSrcdoc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSrcdoc(String srcdoc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Document getSVGDocument() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	/** {@inheritDoc} */

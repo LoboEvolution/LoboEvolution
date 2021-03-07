@@ -28,7 +28,7 @@ import org.loboevolution.html.dom.svg.SVGAnimatedBoolean;
 import org.loboevolution.html.dom.svg.SVGElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.dom.svg.SVGStringList;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGElementImpl class.</p>
@@ -130,7 +130,7 @@ public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement 
 	 * @param xmllang a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setXMLlang(String xmllang) throws DOMException {
+	public void setXMLlang(String xmllang) {
 		setAttribute("xml:lang", xmllang);
 	}
 
@@ -149,7 +149,7 @@ public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement 
 	 * @param xmlspace a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setXMLspace(String xmlspace) throws DOMException {
+	public void setXMLspace(String xmlspace) {
 		setAttribute("xml:space", xmlspace);
 	}
 

@@ -34,7 +34,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -42,6 +41,7 @@ import org.loboevolution.html.dom.domimpl.HTMLTableCaptionElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.dom.filter.CaptionFilter;
 import org.loboevolution.html.dom.filter.ColumnsFilter;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.renderstate.RTableCaption;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
@@ -52,8 +52,7 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.CaptionSizeInfo;
 import org.loboevolution.info.SizeInfo;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.Node;
 
 class TableMatrix {
 
@@ -949,7 +948,7 @@ class TableMatrix {
 	}
 
 	private HTMLElementImpl getParentRow(HTMLElementImpl cellNode) {
-		org.w3c.dom.Node parentNode = cellNode.getParentNode();
+		Node parentNode = cellNode.getParentNode();
 		for (;;) {
 			if (parentNode instanceof HTMLElementImpl) {				
 				return (HTMLElementImpl) parentNode;
@@ -1184,9 +1183,10 @@ class TableMatrix {
 		final List<HTMLElementImpl> rowElements = this.ROW_ELEMENTS;
 		final List<RTableCell> allCells = this.ALL_CELLS;
 		final Map<HTMLElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<>();
-		final NodeList cellList = te.getDescendents(COLUMNS_FILTER, false);
+		final NodeListImpl cellList = (NodeListImpl)te.getDescendents(COLUMNS_FILTER, false);
 		ArrayList<VirtualCell> currentNullRow = null;
-		for (Node node : Nodes.iterable(cellList)) {
+		for (Iterator<Node> i = cellList.iterator(); i.hasNext();) {
+			Node node = i.next();
 			if (node instanceof HTMLElementImpl) {
 				final HTMLElementImpl columnNode = (HTMLElementImpl) node;
 				final HTMLElementImpl rowElement = getParentRow(columnNode);

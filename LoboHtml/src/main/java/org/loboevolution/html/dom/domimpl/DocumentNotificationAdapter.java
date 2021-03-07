@@ -22,6 +22,8 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+
 /**
  * An abstract implementation of {@link org.loboevolution.html.dom.domimpl.DocumentNotificationListener} with blank
  * methods, provided for convenience.

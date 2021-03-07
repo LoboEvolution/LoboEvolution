@@ -25,7 +25,7 @@ package org.loboevolution.html.control;
 import java.awt.Dimension;
 import java.awt.Insets;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.http.UserAgentContext;
@@ -40,7 +40,7 @@ public class RImgControl extends RUIControl {
 	/**
 	 * <p>Constructor for RImgControl.</p>
 	 *
-	 * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param widget a {@link org.loboevolution.html.control.UIControl} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.

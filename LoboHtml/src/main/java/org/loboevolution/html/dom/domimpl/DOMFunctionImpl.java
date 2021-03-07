@@ -29,23 +29,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.TagNameFilter;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
-import org.w3c.dom.events.Event;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.Code;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.events.Event;
 
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
@@ -60,19 +64,19 @@ public class DOMFunctionImpl extends NodeImpl {
 	
 	private final Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<>();
 	
-	private final List<NodeImpl> clicked = new ArrayList<>();
+	private final List<Node> clicked = new ArrayList<>();
 	
 	/**
 	 * <p>getElementsByTagName.</p>
 	 *
 	 * @param tagname a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.NodeList} object.
+	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
-	public NodeList getElementsByTagName(String tagname) {
+	public HTMLCollection getElementsByTagName(String tagname) {
 		if ("*".equals(tagname)) {
-			return getNodeList(new ElementFilter(null));
+			return new HTMLCollectionImpl(this, new ElementFilter(null));
 		} else {
-			return getNodeList(new TagNameFilter(tagname));
+			return new HTMLCollectionImpl(this, new TagNameFilter(tagname));
 		}
 	}
 	
@@ -80,51 +84,53 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * <p>getElementsByClassName.</p>
 	 *
 	 * @param classNames a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.NodeList} object.
+	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
-	public NodeList getElementsByClassName(String classNames) {
-		return getNodeList(new ClassNameFilter(classNames));
+	public HTMLCollection getElementsByClassName(String classNames) {
+		return new HTMLCollectionImpl(this, new ClassNameFilter(classNames));
 	}
 	
+		
     /**
      * <p>querySelector.</p>
      *
      * @param selectors a {@link java.lang.String} object.
-     * @return a {@link org.w3c.dom.Element} object.
+     * @return a {@link org.loboevolution.html.node.Element} object.
      */
     public Element querySelector(String selectors) {
     	SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+    	List<Element> elem = new ArrayList<>();
     	if (selectorList != null) {
-    		NodeList childNodes = getDescendents(new ElementFilter(null), true);
-    		for (Node child : Nodes.iterable(childNodes)) {
-                for (Selector selector : selectorList) {                	
+    		NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+    		childNodes.forEach(child -> {
+    			for (Selector selector : selectorList) {                	
                 	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null, true)) {
-                        return (Element)child;
+                		elem.add((Element)child);
                     }
                 }
-            }
+    		});    		
         }
-        return null;
+        return elem.size() > 0  ? elem.get(0) : null;
     }
     
     /**
      * <p>querySelectorAll.</p>
      *
      * @param selectors a {@link java.lang.String} object.
-     * @return a {@link org.w3c.dom.NodeList} object.
+     * @return a {@link org.loboevolution.html.node.NodeList} object.
      */
     public NodeList querySelectorAll(String selectors) {
     	final ArrayList<Node> al = new ArrayList<>();
     	SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
     	if (selectorList != null) {
-    		NodeList childNodes = getDescendents(new ElementFilter(null), true);
-    		for (Node child : Nodes.iterable(childNodes)) {
+    		NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+    		childNodes.forEach(child -> {
                 for (Selector selector : selectorList) {                	
                 	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null, true)) {
                         al.add(child);
                     }
                 }
-            }
+    		});
         }
         return new NodeListImpl(al);
     }
@@ -192,23 +198,23 @@ public class DOMFunctionImpl extends NodeImpl {
 	/**
 	 * <p>dispatchEvent.</p>
 	 *
-	 * @param htmlElementImpl a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
-	 * @param evt a {@link org.w3c.dom.events.Event} object.
+	 * @param htmlElementImpl a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
+	 * @param evt a {@link org.loboevolution.html.node.events.Event} object.
 	 * @return a boolean.
 	 */
-	public boolean dispatchEvent(NodeImpl htmlElementImpl, Event evt) {
+	public boolean dispatchEvent(Node htmlElementImpl, Event evt) {
 		Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
 		if (map != null) {
 			List<Function> handlers = map.get(evt.getType());
 			if (handlers != null) {
 				for (final Function h : handlers) {
-					if(!clicked.contains(htmlElementImpl)){
-					Executor.executeFunction(this, h, evt, new Object[0]);
-					clicked.add(htmlElementImpl);
-				}else {
-					clicked.clear();
-				}
+					if (!clicked.contains(htmlElementImpl)) {
+						Executor.executeFunction(this, h, evt, new Object[0]);
+						clicked.add(htmlElementImpl);
+					} else {
+						clicked.clear();
 					}
+				}
 			}
 		}
 		return false;
@@ -222,8 +228,8 @@ public class DOMFunctionImpl extends NodeImpl {
 
 	/** {@inheritDoc} */
 	@Override
-	public short getNodeType() {
-		return Node.DOCUMENT_NODE;
+	public NodeType getNodeType() {
+		return NodeType.DOCUMENT_NODE;
 	}
 
 	/** {@inheritDoc} */
@@ -240,14 +246,14 @@ public class DOMFunctionImpl extends NodeImpl {
 
 	/** {@inheritDoc} */
 	@Override
-	public String getNodeValue() throws DOMException {
+	public String getNodeValue() {
 		return null;
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
-		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "Cannot set node value of document");
+		throw new DOMException(Code.INVALID_MODIFICATION_ERR, "Cannot set node value of document");
 	}
 	
 	/**
@@ -255,10 +261,10 @@ public class DOMFunctionImpl extends NodeImpl {
 	 *
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.NodeList} object.
+	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
-	public NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -266,11 +272,11 @@ public class DOMFunctionImpl extends NodeImpl {
 	 *
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Attr} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @return a {@link org.loboevolution.html.node.Attr} object.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 
 	/**
@@ -279,34 +285,34 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
 	 * <p>renameNode.</p>
 	 *
-	 * @param n a {@link org.w3c.dom.Node} object.
+	 * @param n a {@link org.loboevolution.html.node.Node} object.
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Node} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public Node renameNode(Node n, String namespaceURI, String qualifiedName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No renaming");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "No renaming");
 	}
 	
 	/**
 	 * <p>createEntityReference.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.EntityReference} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @return a {@link org.loboevolution.html.node.EntityReference} object.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public EntityReference createEntityReference(String name) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "HTML document");
 	}
 
 	/**
@@ -314,23 +320,23 @@ public class DOMFunctionImpl extends NodeImpl {
 	 *
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Attr} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @return a {@link org.loboevolution.html.node.Attr} object.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "HTML document");
 	}
 	
 	/**
 	 * <p>importNode.</p>
 	 *
-	 * @param importedNode a {@link org.w3c.dom.Node} object.
+	 * @param importedNode a {@link org.loboevolution.html.node.Node} object.
 	 * @param deep a boolean.
-	 * @return a {@link org.w3c.dom.Node} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Not implemented");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Not implemented");
 	}
 	
 	/**
@@ -338,10 +344,10 @@ public class DOMFunctionImpl extends NodeImpl {
 	 *
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -350,19 +356,19 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a boolean.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public boolean hasAttributeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
 	 * <p>getSchemaTypeInfo.</p>
 	 *
-	 * @return a {@link org.w3c.dom.TypeInfo} object.
+	 * @return a {@link org.loboevolution.html.node.TypeInfo} object.
 	 */
 	public TypeInfo getSchemaTypeInfo() {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -371,21 +377,21 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @param isId a boolean.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
 	 * <p>setAttributeNodeNS.</p>
 	 *
-	 * @param newAttr a {@link org.w3c.dom.Attr} object.
-	 * @return a {@link org.w3c.dom.Attr} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @param newAttr a {@link org.loboevolution.html.node.Attr} object.
+	 * @return a {@link org.loboevolution.html.node.Attr} object.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 
 	/**
@@ -394,10 +400,10 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -405,10 +411,10 @@ public class DOMFunctionImpl extends NodeImpl {
 	 *
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Element} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @return a {@link org.loboevolution.html.node.Element} object.
+	 * @throws org.loboevolution.html.node.DOMException if any.
 	 */
 	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 }

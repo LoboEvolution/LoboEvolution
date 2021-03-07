@@ -68,7 +68,7 @@ public class InputFile {
 		textField.setVisible(!modelNode.getHidden());
 		textField.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		textField.setEditable(Boolean.parseBoolean(modelNode.getContentEditable()));
-		textField.setEnabled(!modelNode.getDisabled());
+		textField.setEnabled(!modelNode.isDisabled());
 
 		Box buttonBar = Box.createHorizontalBox();
 		buttonBar.add(Box.createHorizontalGlue());

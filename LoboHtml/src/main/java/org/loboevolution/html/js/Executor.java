@@ -26,15 +26,15 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.events.Event;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.events.Event;
 
 /**
  * <p>Executor class.</p>
@@ -68,7 +68,7 @@ public class Executor {
 	/**
 	 * <p>executeFunction.</p>
 	 *
-	 * @param element a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
 	 * @param event a {@link org.w3c.dom.events.Event} object.
 	 * @param obj an array of {@link java.lang.Object} objects.
@@ -81,7 +81,7 @@ public class Executor {
 	/**
 	 * <p>executeFunction.</p>
 	 *
-	 * @param element a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param thisObject a {@link java.lang.Object} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
 	 * @param event a {@link org.w3c.dom.events.Event} object.

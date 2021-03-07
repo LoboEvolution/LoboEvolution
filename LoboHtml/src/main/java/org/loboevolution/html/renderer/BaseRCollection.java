@@ -29,7 +29,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
 	private BoundableRenderable renderableWithMouse = null;
@@ -38,7 +38,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	 * <p>Constructor for BaseRCollection.</p>
 	 *
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public BaseRCollection(RenderableContainer container, ModelNode modelNode) {
 		super(container, modelNode);

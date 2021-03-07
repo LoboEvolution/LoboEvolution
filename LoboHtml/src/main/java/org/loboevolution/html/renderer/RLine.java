@@ -37,7 +37,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.loboevolution.html.AlignValues;
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
@@ -64,7 +64,7 @@ class RLine extends BaseRCollection {
 	/**
 	 * <p>Constructor for RLine.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param x a int.
 	 * @param y a int.

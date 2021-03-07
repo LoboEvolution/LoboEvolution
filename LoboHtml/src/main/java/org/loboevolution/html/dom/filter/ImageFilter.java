@@ -24,7 +24,7 @@ package org.loboevolution.html.dom.filter;
 
 import org.loboevolution.html.dom.HTMLImageElement;
 import org.loboevolution.html.dom.NodeFilter;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * The Class ImageFilter.
@@ -36,7 +36,7 @@ public class ImageFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean accept(Node node) {
+	public boolean acceptNode(Node node) {
 		return node instanceof HTMLImageElement;
 	}
 }

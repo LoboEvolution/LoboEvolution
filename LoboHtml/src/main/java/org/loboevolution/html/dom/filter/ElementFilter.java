@@ -27,8 +27,8 @@ package org.loboevolution.html.dom.filter;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.NodeFilter;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>ElementFilter class.</p>
@@ -50,7 +50,7 @@ public final class ElementFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean accept(Node node) {
+	public boolean acceptNode(Node node) {
 		return Strings.isNotBlank(elementName) ? (this.elementName.equalsIgnoreCase(node.getNodeName())) : (node instanceof Element);
 	}
 }

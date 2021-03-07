@@ -24,7 +24,6 @@
 package org.loboevolution.dom;
 
 import org.junit.Test;
-import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
@@ -426,6 +425,7 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
                 + "</style>\n"
                 + "<script>\n"
                 + "function test() {\n"
+                + "  alert('ciao');\n"
                 + "  var redTags = document.querySelectorAll('.green,.red');\n"
                 + "  alert(redTags.length);\n"
                 + "  alert(redTags.item(0).id);\n"

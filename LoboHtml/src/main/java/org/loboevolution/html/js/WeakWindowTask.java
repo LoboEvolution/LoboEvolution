@@ -27,14 +27,14 @@ import java.awt.event.ActionListener;
 import java.lang.ref.WeakReference;
 
 abstract class WeakWindowTask implements ActionListener {
-	private final WeakReference<Window> windowRef;
+	private final WeakReference<WindowImpl> windowRef;
 
-	public WeakWindowTask(Window window) {
+	public WeakWindowTask(WindowImpl window) {
 		this.windowRef = new WeakReference<>(window);
 	}
 
-	protected Window getWindow() {
-		final WeakReference<Window> ref = this.windowRef;
+	protected WindowImpl getWindow() {
+		final WeakReference<WindowImpl> ref = this.windowRef;
 		return ref == null ? null : ref.get();
 	}
 }

@@ -26,7 +26,9 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLObjectElement;
 import org.loboevolution.html.style.HtmlValues;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.ValidityState;
 
 /**
  * <p>HTMLObjectElementImpl class.</p>
@@ -103,7 +105,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDeclare() {
+	public boolean isDeclare() {
 		return "declare".equalsIgnoreCase(getAttribute("declare"));
 	}
 
@@ -121,7 +123,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public int getHspace() {
+	public double getHspace() {
 		return HtmlValues.getPixelSize(getAttribute("hspace"), null, 0);
 	}
 
@@ -148,12 +150,6 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public int getTabIndex() {
-		return HtmlValues.getPixelSize(getAttribute("tabindex"), null, 0);
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getType() {
 		return getAttribute("type");
 	}
@@ -166,7 +162,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public int getVspace() {
+	public double getVspace() {
 		return HtmlValues.getPixelSize(getAttribute("vspace"), null, 0);
 	}
 
@@ -240,10 +236,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	}
 
 	/** {@inheritDoc} */
-	@Override
-	public void setHspace(int hspace) {
-		setAttribute("hspace", String.valueOf(hspace));
-	}
+	
 
 	/** {@inheritDoc} */
 	@Override
@@ -268,12 +261,6 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTabIndex(int tabIndex) {
-		setAttribute("tabindex", String.valueOf(tabIndex));
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public void setType(String type) {
 		setAttribute("type", type);
 	}
@@ -286,7 +273,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public void setVspace(int vspace) {
+	public void setVspace(double vspace) {
 		setAttribute("vspace", String.valueOf(vspace));
 	}
 
@@ -294,6 +281,145 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setWidth(String width) {
 		setAttribute("width", width);
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHspace(double hspace) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean isWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Document getSVGDocument() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean reportValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/** {@inheritDoc} */

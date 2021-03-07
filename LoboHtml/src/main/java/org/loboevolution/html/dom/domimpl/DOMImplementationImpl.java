@@ -26,11 +26,10 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.http.UserAgentContext;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
+import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Element;
 
 /**
  * <p>DOMImplementationImpl class.</p>
@@ -52,8 +51,16 @@ public class DOMImplementationImpl implements DOMImplementation {
 
 	/** {@inheritDoc} */
 	@Override
-	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException {
+	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) {
 		return new HTMLDocumentImpl(this.context);
+	}
+	
+	@Override
+	public Document createHTMLDocument() {
+		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
+		final Element body = doc.createElement("BODY");
+		doc.setBody((HTMLElementImpl)body);
+		return doc;
 	}
 	
 	/**
@@ -63,33 +70,17 @@ public class DOMImplementationImpl implements DOMImplementation {
 	 * @return a {@link org.w3c.dom.Document} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public Document createHTMLDocument(String title) throws DOMException {
-		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
-		final Element body = doc.createElement("BODY");
+	public Document createHTMLDocument(String title) {
+		DocumentImpl doc = (DocumentImpl) createHTMLDocument();
 		doc.setTitle(title);
-		doc.setBody((HTMLElementImpl)body);
 		return doc;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public DocumentType createDocumentType(String qualifiedName, String publicId, String systemId) throws DOMException {
+	public DocumentType createDocumentType(String qualifiedName, String publicId, String systemId) {
 		return new DocumentTypeImpl(qualifiedName, publicId, systemId);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public Object getFeature(String feature, String version) {
-		if ("HTML".equals(feature) && "2.0".compareTo(version) <= 0) {
-			return this;
-		} else {
-			return null;
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean hasFeature(String feature, String version) {
-		return "HTML".equals(feature) && "2.0".compareTo(version) <= 0;
-	}
+	
 }

@@ -106,8 +106,8 @@ public class InputText {
 			placeholder(modelNode.getPlaceholder());
 		}
 		
-		iText.setEnabled(!modelNode.getDisabled());
-		iText.setEditable(!modelNode.getReadOnly());
+		iText.setEnabled(!modelNode.isDisabled());
+		iText.setEditable(!modelNode.isReadOnly());
 
 		iText.addFocusListener(new FocusAdapter() {
 			@Override
@@ -264,7 +264,7 @@ public class InputText {
 
 		@Override
 		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-			int max = modelNode.getMaxLength();
+			int max = (int)modelNode.getMaxLength();
 
 			final int docLength = getLength();
 			if (docLength >= max) {

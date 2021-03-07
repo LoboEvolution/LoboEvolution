@@ -28,7 +28,7 @@ package org.loboevolution.html.js;
 import java.util.Collection;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>FilteredObjectList class.</p>
@@ -44,7 +44,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	/**
 	 * <p>Constructor for FilteredObjectList.</p>
 	 *
-	 * @param filter a {@link org.loboevolution.html.js.ObjectFilter} object.
+	 * @param filter a {@link org.loboevolution.html.node.js.ObjectFilter} object.
 	 * @param list a {@link java.util.Collection} object.
 	 * @param lock a {@link java.lang.Object} object.
 	 */
@@ -63,7 +63,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 		synchronized (this.lock) {
 			int count = 0;
 			for (Node node : sourceNodeList) {
-				if (this.filter.accept(node)) {
+				if (this.filter.acceptNode(node)) {
 					count++;
 				}
 			}
@@ -81,7 +81,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 		synchronized (this.lock) {
 			int count = 0;
 			for (Node node : sourceNodeList) {
-				if (this.filter.accept(node)) {
+				if (this.filter.acceptNode(node)) {
 					if (count == index) {
 						return node;
 					}

@@ -24,7 +24,7 @@
 package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGAnimatedString;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGAnimatedStringImpl class.</p>
@@ -53,7 +53,7 @@ public class SVGAnimatedStringImpl implements SVGAnimatedString {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBaseVal(String baseVal) throws DOMException {
+	public void setBaseVal(String baseVal) {
 		this.baseVal = baseVal;
 	}
 

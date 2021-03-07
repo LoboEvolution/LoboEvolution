@@ -38,8 +38,8 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 
@@ -75,7 +75,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	 * <p>Constructor for BaseBoundableRenderable.</p>
 	 *
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public BaseBoundableRenderable(RenderableContainer container, ModelNode modelNode) {
 		this.container = container;

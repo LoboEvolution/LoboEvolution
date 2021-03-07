@@ -32,12 +32,13 @@ import org.loboevolution.html.dom.HTMLTableElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableRowElementImpl;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>TableCellRenderState class.</p>
@@ -244,7 +245,7 @@ public class TableCellRenderState extends DisplayRenderState {
 	}
 
 	private HTMLTableElement getTableElement() {
-		org.w3c.dom.Node ancestor = this.element.getParentNode();
+		Node ancestor = this.element.getParentNode();
 		while (ancestor != null && !(ancestor instanceof HTMLTableElement)) {
 			ancestor = ancestor.getParentNode();
 		}

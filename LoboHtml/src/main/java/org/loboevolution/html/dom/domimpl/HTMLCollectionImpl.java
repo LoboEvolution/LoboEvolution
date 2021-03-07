@@ -23,10 +23,14 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import java.util.List;
+
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.NodeFilter;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>HTMLCollectionImpl class.</p>
@@ -34,76 +38,62 @@ import org.w3c.dom.Node;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLCollectionImpl implements HTMLCollection {
+public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
+	
+	private NodeImpl rootNode;
 
-	private final NodeImpl rootNode;
-	
-	private NodeListImpl rootList = null;
-	
+
 	/**
 	 * <p>Constructor for HTMLCollectionImpl.</p>
 	 *
-	 * @param rootNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
-	public HTMLCollectionImpl(NodeImpl rootNode) {
+	 public HTMLCollectionImpl(NodeImpl rootNode) {
+		super(rootNode);
 		this.rootNode = rootNode;
 	}
 
 	/**
-	 * <p>Constructor for HTMLCollectionImpl.</p>
+	 * <p>
+	 * Constructor for HTMLCollectionImpl.
+	 * </p>
 	 *
 	 * @param rootNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
+	public HTMLCollectionImpl(List<Node> nodeList) {
+		super(nodeList);
+	}
+	
+	/**
+	 * <p>Constructor for HTMLCollectionImpl.</p>
+	 *
+	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param nodeFilter a {@link org.loboevolution.html.dom.NodeFilter} object.
 	 */
 	public HTMLCollectionImpl(NodeImpl rootNode, NodeFilter nodeFilter) {
+		super(rootNode, nodeFilter);
 		this.rootNode = rootNode;
-		rootList = (NodeListImpl) rootNode.getNodeList(nodeFilter);
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
-		if(rootList == null ) {
-			return this.rootNode.getChildCount();
-		} else {
-			return this.rootList.getLength();
-		}
+		return this.size();
 	}
 
-	/**
-	 * <p>indexOf.</p>
-	 *
-	 * @param node a {@link org.w3c.dom.Node} object.
-	 * @return a int.
-	 */
-	public int indexOf(Node node) {
-		if (rootList == null) {
-			return this.rootNode.getChildIndex(node);
-		} else {
-			return this.rootList.indexOf(node);
-		}
-	}
-
-	/** {@inheritDoc} */
 	@Override
 	public Node item(int index) {
-		if (rootList == null) {
-			return this.rootNode.getChildAtIndex(index);
-		} else {
-			return this.rootList.get(index);
-		}
+		return this.get(index);
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public Node namedItem(String name) {
+	public Element namedItem(String name) {
 		final Document doc = this.rootNode.getOwnerDocument();
 		if (doc == null) {
 			return null;
 		}
 		final Node node = doc.getElementById(name);
 		if (node != null && node.getParentNode() == this.rootNode) {
-			return node;
+			return (Element) node;
 		}
 		return null;
 	}

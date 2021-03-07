@@ -71,7 +71,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		return this.disabled;
 	}
 
@@ -102,7 +102,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 				final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
 				try {
 					final CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
-					sheet.setOwnerNode(this);
+					//sheet.setOwnerNode(this);
 					sheet.setHref(baseURI);
 					doc.addStyleSheet(sheet);
 					this.styleSheet = sheet;

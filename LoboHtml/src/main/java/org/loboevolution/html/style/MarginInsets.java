@@ -23,8 +23,8 @@
 
 package org.loboevolution.html.style;
 
+import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>MarginInsets class.</p>

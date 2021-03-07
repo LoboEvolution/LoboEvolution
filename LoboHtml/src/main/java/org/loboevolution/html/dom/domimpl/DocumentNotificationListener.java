@@ -23,6 +23,8 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+
 /**
  * A listener of document changes.
  *
@@ -40,7 +42,7 @@ public interface DocumentNotificationListener {
 	 * Called when a external script (a SCRIPT tag with a src attribute) is about to
 	 * start loading.
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void externalScriptLoading(NodeImpl node);
 
@@ -49,7 +51,7 @@ public interface DocumentNotificationListener {
 	 * change or a look change. Typically, a node attribute has changed, but the set
 	 * of child nodes has not changed.
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void invalidated(NodeImpl node);
 
@@ -57,35 +59,35 @@ public interface DocumentNotificationListener {
 	 * Called if something such as a color or decoration has changed. This would be
 	 * something which does not affect the rendered size.
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void lookInvalidated(NodeImpl node);
 
 	/**
 	 * Called when the node (with all its contents) is first created by the parser.
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void nodeLoaded(NodeImpl node);
 
 	/**
 	 * Changed if the position of the node in a parent has changed.
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void positionInvalidated(NodeImpl node);
 
 	/**
 	 * Called if a property related to the node's size has changed.
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void sizeInvalidated(NodeImpl node);
 
 	/**
 	 * The children of the node might have changed.
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void structureInvalidated(NodeImpl node);
 }

@@ -73,8 +73,8 @@ public class TextArea {
 		jtArea.setSelectionColor(Color.BLUE);
 		jtArea.setPreferredSize(getPreferredSize());
 		
-		jtArea.setEnabled(!modelNode.getDisabled());
-		jtArea.setEditable(!modelNode.getReadOnly());
+		jtArea.setEnabled(!modelNode.isDisabled());
+		jtArea.setEditable(!modelNode.isReadOnly());
 		
 		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
 			@Override

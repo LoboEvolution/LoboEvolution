@@ -29,7 +29,7 @@ import java.awt.Rectangle;
 
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLHtmlElement;
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**

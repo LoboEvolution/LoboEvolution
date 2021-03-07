@@ -41,7 +41,7 @@ class FunctionTimerTask extends WeakWindowTask {
 
 	private final Integer timeIDInt;
 
-	public FunctionTimerTask(Window window, Integer timeIDInt, Function function, boolean removeTask) {
+	public FunctionTimerTask(WindowImpl window, Integer timeIDInt, Function function, boolean removeTask) {
 		super(window);
 		this.timeIDInt = timeIDInt;
 		this.functionRef = new WeakReference<>(function);
@@ -52,10 +52,10 @@ class FunctionTimerTask extends WeakWindowTask {
 	public void actionPerformed(ActionEvent e) {
 		// This executes in the GUI thread and that's good.
 		try {
-			final Window window = this.getWindow();
+			final WindowImpl window = this.getWindow();
 			if (window == null) {
 				if (logger.isLoggable(Level.INFO)) {
-					logger.info("actionPerformed(): Window is no longer available.");
+					logger.info("actionPerformed(): WindowImpl is no longer available.");
 				}
 				return;
 			}

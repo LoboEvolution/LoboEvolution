@@ -24,7 +24,6 @@ package org.loboevolution.dom;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLDListElement;
 
 /**
  * Unit tests for {@link HTMLDListElement}. */

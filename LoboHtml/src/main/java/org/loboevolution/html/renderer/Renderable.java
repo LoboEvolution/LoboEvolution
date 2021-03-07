@@ -29,7 +29,7 @@ import java.awt.Graphics;
 import java.util.Iterator;
 
 import org.loboevolution.html.dom.HTMLHtmlElement;
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 /**
  * Represents a renderer (view) node.
@@ -44,7 +44,7 @@ public interface Renderable {
 	/**
 	 * <p>getModelNode.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @return a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	ModelNode getModelNode();
 

@@ -24,7 +24,7 @@
 package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGAnimatedNumber;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGAnimatedNumberImpl class.</p>
@@ -53,7 +53,7 @@ public class SVGAnimatedNumberImpl implements SVGAnimatedNumber {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBaseVal(float baseVal) throws DOMException {
+	public void setBaseVal(float baseVal) {
 		svgNumber.setValue(baseVal);
 
 	}

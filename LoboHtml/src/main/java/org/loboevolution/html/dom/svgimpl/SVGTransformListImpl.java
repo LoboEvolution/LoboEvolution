@@ -32,7 +32,6 @@ import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.loboevolution.html.dom.svg.SVGTransform;
 import org.loboevolution.html.dom.svg.SVGTransformList;
-import org.w3c.dom.DOMException;
 
 /**
  * <p>SVGTransformListImpl class.</p>
@@ -59,13 +58,13 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/** {@inheritDoc} */
 	@Override
-	public void clear() throws DOMException {
+	public void clear() {
 		transList.clear();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform initialize(SVGTransform newItem) throws DOMException, SVGException {
+	public SVGTransform initialize(SVGTransform newItem) throws SVGException {
 		transList = new ArrayList<>();
 		transList.add(newItem);
 		return newItem;
@@ -73,13 +72,13 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform getItem(int index) throws DOMException {
+	public SVGTransform getItem(int index) {
 		return transList.get(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform insertItemBefore(SVGTransform newItem, int index) throws DOMException, SVGException {
+	public SVGTransform insertItemBefore(SVGTransform newItem, int index) throws SVGException {
 
         transList.remove(newItem);
 
@@ -95,7 +94,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform replaceItem(SVGTransform newItem, int index) throws DOMException, SVGException {
+	public SVGTransform replaceItem(SVGTransform newItem, int index) throws SVGException {
 
         transList.remove(newItem);
 
@@ -110,13 +109,13 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform removeItem(int index) throws DOMException {
+	public SVGTransform removeItem(int index) {
 		return transList.remove(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform appendItem(SVGTransform newItem) throws DOMException, SVGException {
+	public SVGTransform appendItem(SVGTransform newItem) throws SVGException {
 		transList.add(newItem);
 		return newItem;
 	}

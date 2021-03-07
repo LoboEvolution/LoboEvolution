@@ -23,7 +23,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import org.w3c.dom.DOMException;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
 
 /**
  * This interface is used by SMIL elements root-layout, top-layout and region.

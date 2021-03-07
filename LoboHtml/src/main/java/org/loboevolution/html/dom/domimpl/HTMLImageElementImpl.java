@@ -35,6 +35,7 @@ import org.loboevolution.html.dom.HTMLImageElement;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.renderstate.ImageRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.jsenum.Decoding;
 import org.mozilla.javascript.Function;
 
 /**
@@ -100,20 +101,20 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** {@inheritDoc} */
 	@Override
-	public int getHeight() {
+	public double getHeight() {
 		final UINode r = this.uiNode;
 		return r == null ? 0 : r.getBounds().height;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public int getHspace() {
+	public double getHspace() {
 		return getAttributeAsInt("hspace", 0);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getIsMap() {
+	public boolean isIsMap() {
 		return getAttributeAsBoolean("isMap");
 	}
 
@@ -157,13 +158,13 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** {@inheritDoc} */
 	@Override
-	public int getVspace() {
+	public double getVspace() {
 		return getAttributeAsInt("vspace", 0);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public int getWidth() {
+	public double getWidth() {
 		final UINode r = this.uiNode;
 		return r == null ? 0 : r.getBounds().width;
 	}
@@ -188,13 +189,13 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHeight(int height) {
+	public void setHeight(double height) {
 		setAttribute("height", String.valueOf(height));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHspace(int hspace) {
+	public void setHspace(double hspace) {
 		setAttribute("hspace", "hspace");
 	}
 
@@ -248,14 +249,123 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** {@inheritDoc} */
 	@Override
-	public void setVspace(int vspace) {
+	public void setVspace(double vspace) {
 		setAttribute("vspace", String.valueOf(vspace));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(int width) {
+	public void setWidth(double width) {
 		setAttribute("width", String.valueOf(width));
+	}
+	
+
+	@Override
+	public boolean isComplete() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getCrossOrigin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCrossOrigin(String crossOrigin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCurrentSrc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Decoding getDecoding() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDecoding(Decoding decoding) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getLowsrc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLowsrc(String lowsrc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getNaturalHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getNaturalWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getReferrerPolicy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setReferrerPolicy(String referrerPolicy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSizes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSizes(String sizes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSrcset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSrcset(String srcset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getY() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	/**
@@ -283,7 +393,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 		
 		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, uri);
 		if(getWidth() > 0 && getHeight() > 0) {
-			hpanel.setPreferredSize(new Dimension(getWidth(), getHeight()));
+			hpanel.setPreferredSize(new Dimension((int)getWidth(), (int)getHeight()));
 		}
 		imgSvgControl.add(hpanel);
 	}

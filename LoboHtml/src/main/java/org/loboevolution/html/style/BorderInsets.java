@@ -27,10 +27,10 @@ import java.awt.Color;
 import java.awt.Insets;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>BorderInsets class.</p>

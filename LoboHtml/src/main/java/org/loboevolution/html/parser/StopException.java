@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.parser;
 
-import org.w3c.dom.Element;
+import org.loboevolution.html.node.Element;
 
 class StopException extends Exception {
 	/**

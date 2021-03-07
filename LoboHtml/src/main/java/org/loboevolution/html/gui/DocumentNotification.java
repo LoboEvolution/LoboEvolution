@@ -23,7 +23,7 @@
 
 package org.loboevolution.html.gui;
 
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 
 class DocumentNotification {
 	/** Constant GENERIC=3 */
@@ -42,7 +42,7 @@ class DocumentNotification {
 	 * <p>Constructor for DocumentNotification.</p>
 	 *
 	 * @param type a int.
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public DocumentNotification(int type, NodeImpl node) {
 		this.type = type;

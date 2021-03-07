@@ -31,7 +31,7 @@ import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGTransform;
 import org.loboevolution.html.dom.svg.SVGTransformList;
 import org.loboevolution.html.dom.svg.SVGTransformable;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>SVGLocatableImpl class.</p>

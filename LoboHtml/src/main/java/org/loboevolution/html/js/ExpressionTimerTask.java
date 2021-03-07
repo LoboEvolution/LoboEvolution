@@ -40,7 +40,7 @@ class ExpressionTimerTask extends WeakWindowTask {
 	
 	private final Integer timeIDInt;
 
-	public ExpressionTimerTask(Window window, Integer timeIDInt, String expression, boolean removeTask) {
+	public ExpressionTimerTask(WindowImpl window, Integer timeIDInt, String expression, boolean removeTask) {
 		super(window);
 		this.timeIDInt = timeIDInt;
 		this.expression = expression;
@@ -51,10 +51,10 @@ class ExpressionTimerTask extends WeakWindowTask {
 	public void actionPerformed(ActionEvent e) {
 		// This executes in the GUI thread and that's good.
 		try {
-			final Window window = this.getWindow();
+			final WindowImpl window = this.getWindow();
 			if (window == null) {
 				if (logger.isLoggable(Level.INFO)) {
-					logger.info("actionPerformed(): Window is no longer available.");
+					logger.info("actionPerformed(): WindowImpl is no longer available.");
 				}
 				return;
 			}
@@ -71,7 +71,7 @@ class ExpressionTimerTask extends WeakWindowTask {
 		}
 	}
 	
-	private Object evalInScope(Window window, final String javascript) {
+	private Object evalInScope(WindowImpl window, final String javascript) {
 		HTMLDocumentImpl document = (HTMLDocumentImpl)window.getDocumentNode();
 		final Context ctx = Executor.createContext(document.getDocumentURL(), window.getUaContext());
 		try {

@@ -30,8 +30,8 @@ import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.js.Window;
-import org.loboevolution.html.js.css.MediaQueryList;
+import org.loboevolution.html.node.css.MediaQueryList;
+import org.loboevolution.html.node.js.Window;
 import org.loboevolution.store.ExternalResourcesStore;
 
 import java.io.BufferedReader;
@@ -77,7 +77,7 @@ public class CSSUtilities {
 	 * <p>matchesMedia.</p>
 	 *
 	 * @param mediaValues a {@link java.lang.String} object.
-	 * @param window a {@link org.loboevolution.html.js.Window} object.
+	 * @param window a {@link org.loboevolution.html.node.js.Window} object.
 	 * @return a boolean.
 	 */
 	public static boolean matchesMedia(String mediaValues, Window window) {

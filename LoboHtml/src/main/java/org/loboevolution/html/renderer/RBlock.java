@@ -23,8 +23,8 @@
 package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.dom.HTMLHtmlElement;
-import org.loboevolution.html.dom.domimpl.ModelNode;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
@@ -81,7 +81,7 @@ public class RBlock extends BaseElementRenderable {
 	/**
 	 * <p>Constructor for RBlock.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param listNesting a int.
 	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.

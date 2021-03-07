@@ -24,7 +24,7 @@
 package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGAngle;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGAngleImpl class.</p>
@@ -50,7 +50,7 @@ public class SVGAngleImpl implements SVGAngle {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValue(float value) throws DOMException {
+	public void setValue(float value) {
 		// TODO Auto-generated method stub
 
 	}
@@ -64,7 +64,7 @@ public class SVGAngleImpl implements SVGAngle {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValueInSpecifiedUnits(float valueInSpecifiedUnits) throws DOMException {
+	public void setValueInSpecifiedUnits(float valueInSpecifiedUnits) {
 		// TODO Auto-generated method stub
 
 	}
@@ -78,7 +78,7 @@ public class SVGAngleImpl implements SVGAngle {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValueAsString(String valueAsString) throws DOMException {
+	public void setValueAsString(String valueAsString) {
 		// TODO Auto-generated method stub
 
 	}

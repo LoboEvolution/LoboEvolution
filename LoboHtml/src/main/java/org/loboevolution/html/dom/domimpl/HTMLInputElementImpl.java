@@ -27,6 +27,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.InputControl;
+import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLInputElement;
 import org.loboevolution.html.dom.input.FormInput;
@@ -44,7 +45,11 @@ import org.loboevolution.html.dom.input.InputRange;
 import org.loboevolution.html.dom.input.InputText;
 import org.loboevolution.html.js.Executor;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.ValidityState;
+import org.loboevolution.jsenum.Direction;
 
 /**
  * <p>HTMLInputElementImpl class.</p>
@@ -102,14 +107,14 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getChecked() {
+	public boolean isChecked() {
 		final String checked = getAttribute("checked");
 		return checked != null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		final String disabled = getAttribute("disabled");
 		return disabled != null;
 	}
@@ -126,7 +131,7 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** {@inheritDoc} */
 	@Override
-	public int getMaxLength() {
+	public double getMaxLength() {
 		try {
 			final String maxLength = getAttribute("maxLength");
 			return Integer.parseInt(maxLength.trim());
@@ -143,7 +148,7 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getReadOnly() {
+	public boolean isReadOnly() {
 		final String readonly = getAttribute("readonly");
 		return readonly != null;
 	}
@@ -295,7 +300,7 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** {@inheritDoc} */
 	@Override
-	public void setMaxLength(int maxLength) {
+	public void setMaxLength(double maxLength) {
 		setAttribute("maxLength", String.valueOf(maxLength));
 	}
 
@@ -492,6 +497,451 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	 */
 	public void setFocusable(boolean focusable) {
 		this.focusable = focusable;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAlign() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAlign(String align) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocomplete(String autocomplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAutofocus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutofocus(boolean autofocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isDefaultChecked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setDefaultChecked(boolean defaultChecked) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getDefaultValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDefaultValue(String defaultValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getDirName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDirName(String dirName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormAction(String formAction) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormEnctype() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormEnctype(String formEnctype) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormMethod() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormMethod(String formMethod) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isFormNoValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setFormNoValidate(boolean formNoValidate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormTarget() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormTarget(String formTarget) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setHeight(double height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isIndeterminate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setIndeterminate(boolean indeterminate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HTMLElement getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getMax() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMax(String max) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+	@Override
+	public String getMin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMin(String min) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getMinLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setMinLength(double minLength) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isMultiple() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setMultiple(boolean multiple) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPattern() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPattern(String pattern) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isRequired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setRequired(boolean required) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSelectionDirection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSelectionDirection(String selectionDirection) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getStep() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setStep(String step) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getUseMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setUseMap(String useMap) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double getValueAsNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setValueAsNumber(double valueAsNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWidth(double width) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean reportValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setRangeText(String replacement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setRangeText(String replacement, int start, int end) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSelectionRange(int start, int end, Direction direction) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepDown(double n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepDown() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepUp(double n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepUp() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/** {@inheritDoc} */

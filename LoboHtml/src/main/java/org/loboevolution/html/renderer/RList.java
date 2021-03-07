@@ -24,7 +24,7 @@ package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.ListStyle;
@@ -35,7 +35,7 @@ class RList extends BaseRListElement {
 	/**
 	 * <p>Constructor for RList.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param listNesting a int.
 	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.

@@ -23,7 +23,7 @@
 package org.loboevolution.html.dom.filter;
 
 import org.loboevolution.html.dom.NodeFilter;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * The Class AnchorFilter.
@@ -35,7 +35,7 @@ public class AnchorFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean accept(Node node) {
+	public boolean acceptNode(Node node) {
 		String nodeName = node.getNodeName();
 		return "a".equalsIgnoreCase(nodeName);
 	}

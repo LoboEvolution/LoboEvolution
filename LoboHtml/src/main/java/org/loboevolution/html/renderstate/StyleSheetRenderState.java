@@ -50,6 +50,7 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
+import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.renderer.RFlex;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -65,7 +66,6 @@ import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>StyleSheetRenderState class.</p>

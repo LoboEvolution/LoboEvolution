@@ -38,5 +38,5 @@ public interface ObjectFilter {
 	 * @param target a {@link java.lang.Object} object.
 	 * @return a boolean.
 	 */
-	boolean accept(Object target);
+	boolean acceptNode(Object target);
 }

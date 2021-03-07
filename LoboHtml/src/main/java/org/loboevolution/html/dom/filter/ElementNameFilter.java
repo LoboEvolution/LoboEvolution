@@ -24,8 +24,8 @@ package org.loboevolution.html.dom.filter;
 
 
 import org.loboevolution.html.dom.NodeFilter;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * The Class ElementNameFilter.
@@ -54,7 +54,7 @@ public class ElementNameFilter implements NodeFilter {
 	 * @see org.loboevolution.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
 	 */
 	@Override
-	public boolean accept(Node node) {
+	public boolean acceptNode(Node node) {
 		if(node instanceof Element) {
 			Element elm = (Element)node;
 			if(elm != null && this.name != null) {

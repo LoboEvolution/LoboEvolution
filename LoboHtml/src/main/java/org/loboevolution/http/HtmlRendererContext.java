@@ -679,7 +679,7 @@ public class HtmlRendererContext {
 	 *
 	 * @param url            The requested URL.
 	 * @param windowName     A window identifier.
-	 * @param windowFeatures Window features specified in a format equivalent to
+	 * @param windowFeatures WindowImpl features specified in a format equivalent to
 	 *                       that of window.open() in Javascript.
 	 * @param replace        Whether an existing window with the same name should be
 	 *                       replaced.

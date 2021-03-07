@@ -26,10 +26,9 @@
 
 package org.loboevolution.html.dom.xpath;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.xpath.XPathNSResolver;
-
-import com.sun.org.apache.xml.internal.utils.PrefixResolverDefault;
+import org.apache.xml.utils.PrefixResolverDefault;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.xpath.XPathNSResolver;
 
 /**
  *
@@ -50,20 +49,18 @@ import com.sun.org.apache.xml.internal.utils.PrefixResolverDefault;
  * by any application.
  * </p>
  *
- * @see org.w3c.dom.xpath.XPathNSResolver
+ * @see org.loboevolution.html.xpath.XPathNSResolver
  * 
  * @author utente
  * @version $Id: $Id
  */
 public class XPathNSResolverImpl extends PrefixResolverDefault implements XPathNSResolver {
 
-	/**
-	 * Constructor for XPathNSResolverImpl.
-	 *
-	 * @param xpathExpressionContext a {@link org.w3c.dom.Node} object.
-	 */
-	public XPathNSResolverImpl(Node xpathExpressionContext) {
+	
+
+	public XPathNSResolverImpl(org.w3c.dom.Node xpathExpressionContext) {
 		super(xpathExpressionContext);
+		// TODO Broken with new interfaces
 	}
 
 	/** {@inheritDoc} */

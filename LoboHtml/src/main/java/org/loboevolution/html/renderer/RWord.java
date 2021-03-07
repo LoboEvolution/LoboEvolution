@@ -29,7 +29,7 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 final class RWord extends BaseBoundableRenderable {
@@ -41,7 +41,7 @@ final class RWord extends BaseBoundableRenderable {
 	/**
 	 * <p>Constructor for RWord.</p>
 	 *
-	 * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param word a {@link java.lang.String} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param fontMetrics a {@link java.awt.FontMetrics} object.

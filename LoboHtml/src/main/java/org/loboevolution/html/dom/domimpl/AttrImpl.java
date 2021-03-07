@@ -25,11 +25,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.TypeInfo;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>AttrImpl class.</p>
@@ -37,7 +35,8 @@ import org.w3c.dom.TypeInfo;
  * @author utente
  * @version $Id: $Id
  */
-public class AttrImpl extends NodeImpl implements Attr {
+public class AttrImpl extends AttrAbstract {
+	
 	private boolean isId;
 	private final String name;
 	private final Element ownerElement;
@@ -50,7 +49,6 @@ public class AttrImpl extends NodeImpl implements Attr {
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public AttrImpl(String name) {
-		super();
 		this.name = name;
 		this.value = "";
 		this.specified = false;
@@ -68,7 +66,6 @@ public class AttrImpl extends NodeImpl implements Attr {
 	 * @param isId a boolean.
 	 */
 	public AttrImpl(String name, String value, boolean specified, Element owner, boolean isId) {
-		super();
 		this.name = name;
 		this.value = value;
 		this.specified = specified;
@@ -102,13 +99,13 @@ public class AttrImpl extends NodeImpl implements Attr {
 
 	/** {@inheritDoc} */
 	@Override
-	public short getNodeType() {
-		return Node.ATTRIBUTE_NODE;
+	public NodeType getNodeType() {
+		return NodeType.ATTRIBUTE_NODE;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String getNodeValue() throws DOMException {
+	public String getNodeValue() {
 		return this.value;
 	}
 
@@ -120,13 +117,7 @@ public class AttrImpl extends NodeImpl implements Attr {
 
 	/** {@inheritDoc} */
 	@Override
-	public TypeInfo getSchemaTypeInfo() {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean getSpecified() {
+	public boolean isSpecified() {
 		return this.specified;
 	}
 
@@ -153,13 +144,13 @@ public class AttrImpl extends NodeImpl implements Attr {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) throws DOMException {
+	public void setNodeValue(String nodeValue) {
 		this.value = nodeValue;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValue(String value) throws DOMException {
+	public void setValue(String value) {
 		this.value = value;
 	}
 }

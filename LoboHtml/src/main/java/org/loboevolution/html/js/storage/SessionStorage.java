@@ -25,6 +25,7 @@ package org.loboevolution.html.js.storage;
 
 import java.util.Map;
 
+import org.loboevolution.html.node.js.webstorage.Storage;
 import org.loboevolution.store.TabStore;
 import org.loboevolution.store.WebStore;
 
@@ -40,7 +41,7 @@ public class SessionStorage implements Storage {
 	public int getLength() {
 		return WebStore.countStorage(index);
 	}
-
+	
 	@Override
 	public Object key(int index) {
         int counter = 0;
@@ -52,26 +53,38 @@ public class SessionStorage implements Storage {
         }
         return null;
     }
-
+	
 	@Override
 	public Object getItem(String key) {
 		return WebStore.getValue(key, index);
 	}
-
+	
 	@Override
 	public void setItem(String keyName, String keyValue) {
-		WebStore.deleteStorage(keyName, 1, index);
-		WebStore.insertStorage(keyName, keyValue, 1, index);
+		WebStore.deleteStorage(keyName, 0, index);
+		WebStore.insertStorage(keyName, keyValue, 0, index);
 	}
 
 	@Override
 	public void removeItem(String keyName) {
-		WebStore.deleteStorage(keyName, 1, index);
+		WebStore.deleteStorage(keyName, 0, index);
 
+	}
+	
+	@Override
+	public void clear() {
+		WebStore.deleteStorage(0, index);
 	}
 
 	@Override
-	public void getClear() {
-		WebStore.deleteStorage(1, index);
+	public Object get(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void set(String name, String value) {
+		// TODO Auto-generated method stub
+		
 	}
 }

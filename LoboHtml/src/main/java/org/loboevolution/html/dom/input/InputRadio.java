@@ -52,8 +52,8 @@ public class InputRadio {
 		if(modelNode.getTitle() != null) radio.setToolTipText(modelNode.getTitle());
 		radio.setVisible(!modelNode.getHidden());
 		radio.applyComponentOrientation(ic.direction(modelNode.getDir()));
-		radio.setEnabled(!modelNode.getDisabled());
-		radio.setSelected(modelNode.getChecked());
+		radio.setEnabled(!modelNode.isDisabled());
+		radio.setSelected(modelNode.isChecked());
 		final String name = modelNode.getAttribute("name");
 		final ButtonGroup prevGroup = this.buttonGroup;
 		if (prevGroup != null) {

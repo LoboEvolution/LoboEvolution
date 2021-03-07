@@ -23,10 +23,7 @@
 
 package org.loboevolution.html.js;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Logger;
 
 import javax.xml.XMLConstants;
@@ -34,43 +31,60 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.CDATASection;
-import org.w3c.dom.Comment;
-import org.w3c.dom.DOMConfiguration;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-import org.w3c.dom.EntityReference;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.ProcessingInstruction;
-import org.w3c.dom.Text;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.CDATASection;
+import org.loboevolution.html.node.Comment;
+import org.loboevolution.html.node.DOMConfiguration;
+import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.HTMLHeadElement;
+import org.loboevolution.html.dom.HTMLScriptElement;
+
+import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentFragment;
+import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeIterator;
+import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.ParentNode;
+import org.loboevolution.html.node.ProcessingInstruction;
+import org.loboevolution.html.node.Range;
+import org.loboevolution.html.node.Selection;
+import org.loboevolution.html.node.Text;
+import org.loboevolution.html.node.TreeWalker;
+import org.loboevolution.html.node.events.Event;
+import org.loboevolution.html.node.js.Location;
+import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.xpath.XPathExpression;
+import org.loboevolution.html.xpath.XPathNSResolver;
+import org.loboevolution.html.xpath.XPathResult;
+import org.loboevolution.jsenum.DocumentReadyState;
+import org.loboevolution.jsenum.VisibilityState;
+import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
-import org.xml.sax.SAXException;
 
 /**
- * <p>XMLDocument class.</p>
+ * <p>
+ * XMLDocument class.
+ * </p>
  *
  * @author utente
  * @version $Id: $Id
  */
 public class XMLDocument implements Document {
-	
+
 	/** The Constant logger. */
 	protected static final Logger logger = Logger.getLogger(XMLDocument.class.getName());
 
 	private static Document doc;
-	
+
 	/**
 	 * Load XML file
 	 *
-	 * @param fileName
-	 *            name of file in file system
+	 * @param fileName name of file in file system
 	 * @return XMLDocument
 	 */
 	public static XMLDocument load(String fileName) {
@@ -82,8 +96,7 @@ public class XMLDocument implements Document {
 	/**
 	 * Load XML file
 	 *
-	 * @param fileName
-	 *            name of file in file system
+	 * @param fileName name of file in file system
 	 * @return XML String
 	 */
 	public String loadXML(String fileName) {
@@ -94,15 +107,14 @@ public class XMLDocument implements Document {
 	/**
 	 * Load XML file
 	 * 
-	 * @param fileStr
-	 *            name of in file system
+	 * @param fileStr name of in file system
 	 */
 	private synchronized void loadFile(String fileStr) {
-		
+
 		String FEATURE = "";
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			
+
 			FEATURE = "http://apache.org/xml/features/disallow-doctype-decl";
 			factory.setFeature(FEATURE, true);
 
@@ -114,31 +126,34 @@ public class XMLDocument implements Document {
 
 			FEATURE = "http://apache.org/xml/features/nonvalidating/load-external-dtd";
 			factory.setFeature(FEATURE, false);
-			
+
 			factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 			factory.setXIncludeAware(false);
 			factory.setExpandEntityReferences(false);
-			
+
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			File f = new File(fileStr);
-			if (f.isFile()) {
+	        // TODO Broken with new interfaces
+			/*if (f.isFile()) {
 				doc = builder.parse(fileStr);
 			} else {
 				InputStream is = new ByteArrayInputStream(fileStr.getBytes());
 				doc = builder.parse(is);
-			}
+			}*/
 			doc.getDocumentElement().normalize();
 		} catch (ParserConfigurationException e) {
-			logger.info(FEATURE +  " is not supported");
-		} catch (SAXException e) {
+			logger.info(FEATURE + " is not supported");
+		} /*catch (SAXException e) {
 			logger.warning("A DOCTYPE was passed into the XML document");
 		} catch (IOException e) {
 			logger.severe("IOException occurred, XXE may still possible: " + e.getMessage());
-		}
+		}*/
 	}
 
 	/**
-	 * <p>getXML.</p>
+	 * <p>
+	 * getXML.
+	 * </p>
 	 *
 	 * @return XML String
 	 */
@@ -148,7 +163,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeList getElementsByTagName(String tagname) {
+	public HTMLCollection getElementsByTagName(String tagname) {
 		return doc.getElementsByTagName(tagname);
 	}
 
@@ -160,7 +175,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node appendChild(Node newChild) throws DOMException {
+	public Node appendChild(Node newChild) {
 		return doc.appendChild(newChild);
 	}
 
@@ -172,14 +187,8 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public short compareDocumentPosition(Node other) throws DOMException {
+	public short compareDocumentPosition(Node other) {
 		return doc.compareDocumentPosition(other);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public NamedNodeMap getAttributes() {
-		return doc.getAttributes();
 	}
 
 	/** {@inheritDoc} */
@@ -192,12 +201,6 @@ public class XMLDocument implements Document {
 	@Override
 	public NodeList getChildNodes() {
 		return doc.getChildNodes();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Object getFeature(String feature, String version) {
-		return doc.getFeature(feature, version);
 	}
 
 	/** {@inheritDoc} */
@@ -238,13 +241,13 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public short getNodeType() {
+	public NodeType getNodeType() {
 		return doc.getNodeType();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String getNodeValue() throws DOMException {
+	public String getNodeValue() {
 		return doc.getNodeValue();
 	}
 
@@ -256,7 +259,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node getParentNode() {
+	public ParentNode getParentNode() {
 		return doc.getParentNode();
 	}
 
@@ -274,7 +277,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public String getTextContent() throws DOMException {
+	public String getTextContent() {
 		return doc.getTextContent();
 	}
 
@@ -286,19 +289,13 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean hasAttributes() {
-		return doc.hasAttributes();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public boolean hasChildNodes() {
 		return doc.hasChildNodes();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node insertBefore(Node newChild, Node refChild) throws DOMException {
+	public Node insertBefore(Node newChild, Node refChild) {
 		return doc.insertBefore(newChild, refChild);
 	}
 
@@ -322,12 +319,6 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isSupported(String feature, String version) {
-		return doc.isSupported(feature, version);
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String lookupNamespaceURI(String prefix) {
 		return doc.lookupNamespaceURI(prefix);
 	}
@@ -346,31 +337,31 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node removeChild(Node oldChild) throws DOMException {
+	public Node removeChild(Node oldChild) {
 		return doc.removeChild(oldChild);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node replaceChild(Node newChild, Node oldChild) throws DOMException {
+	public Node replaceChild(Node newChild, Node oldChild) {
 		return doc.replaceChild(newChild, oldChild);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) throws DOMException {
+	public void setNodeValue(String nodeValue) {
 		doc.setNodeValue(nodeValue);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setPrefix(String prefix) throws DOMException {
+	public void setPrefix(String prefix) {
 		doc.setPrefix(prefix);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTextContent(String textContent) throws DOMException {
+	public void setTextContent(String textContent) {
 		doc.setTextContent(textContent);
 	}
 
@@ -382,25 +373,25 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node adoptNode(Node source) throws DOMException {
+	public Node adoptNode(Node source) {
 		return doc.adoptNode(source);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr createAttribute(String name) throws DOMException {
+	public Attr createAttribute(String name) {
 		return doc.createAttribute(name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
+	public Attr createAttributeNS(String namespaceURI, String qualifiedName) {
 		return doc.createAttributeNS(namespaceURI, qualifiedName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public CDATASection createCDATASection(String data) throws DOMException {
+	public CDATASection createCDATASection(String data) {
 		return doc.createCDATASection(data);
 	}
 
@@ -418,25 +409,19 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElement(String tagName) throws DOMException {
+	public Element createElement(String tagName) {
 		return doc.createElement(tagName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
+	public Element createElementNS(String namespaceURI, String qualifiedName) {
 		return doc.createElementNS(namespaceURI, qualifiedName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public EntityReference createEntityReference(String name) throws DOMException {
-		return doc.createEntityReference(name);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public ProcessingInstruction createProcessingInstruction(String target, String data) throws DOMException {
+	public ProcessingInstruction createProcessingInstruction(String target, String data) {
 		return doc.createProcessingInstruction(target, data);
 	}
 
@@ -472,7 +457,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
+	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
 		return doc.getElementsByTagNameNS(namespaceURI, localName);
 	}
 
@@ -516,7 +501,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node importNode(Node importedNode, boolean deep) throws DOMException {
+	public Node importNode(Node importedNode, boolean deep) {
 		return doc.importNode(importedNode, deep);
 	}
 
@@ -524,12 +509,6 @@ public class XMLDocument implements Document {
 	@Override
 	public void normalizeDocument() {
 		doc.normalizeDocument();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Node renameNode(Node n, String namespaceURI, String qualifiedName) throws DOMException {
-		return doc.renameNode(n, namespaceURI, qualifiedName);
 	}
 
 	/** {@inheritDoc} */
@@ -546,13 +525,578 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXmlStandalone(boolean xmlStandalone) throws DOMException {
+	public void setXmlStandalone(boolean xmlStandalone) {
 		doc.setXmlStandalone(xmlStandalone);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXmlVersion(String xmlVersion) throws DOMException {
+	public void setXmlVersion(String xmlVersion) {
 		doc.setXmlVersion(xmlVersion);
+	}
+
+	@Override
+	public boolean isIsConnected() {
+
+		return doc.isIsConnected();
+	}
+
+	@Override
+	public HTMLElement getParentElement() {
+
+		return doc.getParentElement();
+	}
+
+	@Override
+	public Node getRootNode() {
+
+		return doc.getRootNode();
+	}
+
+	@Override
+	public Node cloneNode() {
+
+		return doc.cloneNode();
+	}
+
+	@Override
+	public boolean contains(Node other) {
+
+		return doc.contains(other);
+	}
+
+	@Override
+	public void addEventListener(String type, Function listener) {
+		doc.addEventListener(type, listener);
+	}
+
+	@Override
+	public void addEventListener(String type, Function listener, boolean useCapture) {
+		doc.addEventListener(type, listener, useCapture);
+	}
+
+	@Override
+	public void removeEventListener(String script, Function function) {
+		doc.removeEventListener(script, function);
+	}
+
+	@Override
+	public void removeEventListener(String type, Function listener, boolean useCapture) {
+		doc.removeEventListener(type, listener, useCapture);
+	}
+
+	@Override
+	public boolean dispatchEvent(Node element, Event evt) {
+
+		return doc.dispatchEvent(element, evt);
+	}
+
+	@Override
+	public int getChildElementCount() {
+
+		return doc.getChildElementCount();
+	}
+
+	@Override
+	public HTMLCollection getChildren() {
+
+		return doc.getChildren();
+	}
+
+	@Override
+	public Element getFirstElementChild() {
+
+		return doc.getFirstElementChild();
+	}
+
+	@Override
+	public Element getLastElementChild() {
+
+		return doc.getLastElementChild();
+	}
+
+	@Override
+	public Element querySelector(String selectors) {
+
+		return doc.querySelector(selectors);
+	}
+
+	@Override
+	public NodeList querySelectorAll(String selectors) {
+
+		return doc.querySelectorAll(selectors);
+	}
+
+	@Override
+	public String getURL() {
+
+		return doc.getURL();
+	}
+
+	@Override
+	public Element getActiveElement() {
+
+		return doc.getActiveElement();
+	}
+
+	@Override
+	public String getAlinkColor() {
+
+		return doc.getAlinkColor();
+	}
+
+	@Override
+	public void setAlinkColor(String alinkColor) {
+		doc.setAlinkColor(alinkColor);
+	}
+
+	@Override
+	public HTMLCollection getAll() {
+
+		return doc.getAll();
+	}
+
+	@Override
+	public HTMLCollection getAnchors() {
+
+		return doc.getAnchors();
+	}
+
+	@Override
+	public HTMLCollection getApplets() {
+
+		return doc.getApplets();
+	}
+
+	@Override
+	public HTMLCollection getCommands() {
+
+		return doc.getCommands();
+	}
+
+	@Override
+	public String getBgColor() {
+
+		return doc.getBgColor();
+	}
+
+	@Override
+	public void setBgColor(String bgColor) {
+		doc.setBgColor(bgColor);
+	}
+
+	@Override
+	public HTMLElement getBody() {
+
+		return doc.getBody();
+	}
+
+	@Override
+	public void setBody(HTMLElement body) {
+		doc.setBody(body);
+	}
+
+	@Override
+	public String getCharacterSet() {
+
+		return doc.getCharacterSet();
+	}
+
+	@Override
+	public String getCharset() {
+
+		return doc.getCharset();
+	}
+
+	@Override
+	public String getCompatMode() {
+
+		return doc.getCompatMode();
+	}
+
+	@Override
+	public String getContentType() {
+
+		return doc.getContentType();
+	}
+
+	@Override
+	public String getCookie() {
+
+		return doc.getCookie();
+	}
+
+	@Override
+	public void setCookie(String cookie) {
+		doc.setCookie(cookie);
+	}
+
+	@Override
+	public HTMLScriptElement getCurrentScript() {
+
+		return doc.getCurrentScript();
+	}
+
+	@Override
+	public Window getDefaultView() {
+		return doc.getDefaultView();
+	}
+
+	@Override
+	public String getDesignMode() {
+
+		return doc.getDesignMode();
+	}
+
+	@Override
+	public void setDesignMode(String designMode) {
+		doc.setDesignMode(designMode);
+	}
+
+	@Override
+	public String getDir() {
+
+		return doc.getDesignMode();
+	}
+
+	@Override
+	public void setDir(String dir) {
+		doc.setDir(dir);
+	}
+
+	@Override
+	public String getDomain() {
+
+		return doc.getDomain();
+	}
+
+	@Override
+	public void setDomain(String domain) {
+		doc.setDomain(domain);
+	}
+
+	@Override
+	public HTMLCollection getEmbeds() {
+
+		return doc.getEmbeds();
+	}
+
+	@Override
+	public String getFgColor() {
+
+		return doc.getFgColor();
+	}
+
+	@Override
+	public void setFgColor(String fgColor) {
+		doc.setFgColor(fgColor);
+	}
+
+	@Override
+	public HTMLCollection getForms() {
+
+		return doc.getForms();
+	}
+
+	@Override
+	public boolean isFullscreen() {
+
+		return doc.isFullscreen();
+	}
+
+	@Override
+	public boolean isFullscreenEnabled() {
+
+		return doc.isFullscreenEnabled();
+	}
+
+	@Override
+	public HTMLHeadElement getHead() {
+
+		return doc.getHead();
+	}
+
+	@Override
+	public boolean isHidden() {
+
+		return doc.isHidden();
+	}
+
+	@Override
+	public HTMLCollection getImages() {
+
+		return doc.getImages();
+	}
+
+	@Override
+	public String getLastModified() {
+
+		return doc.getLastModified();
+	}
+
+	@Override
+	public HTMLCollection getLinks() {
+
+		return doc.getLinks();
+	}
+
+	@Override
+	public Location getLocation() {
+
+		return doc.getLocation();
+	}
+
+	@Override
+	public void setLocation(Location location) {
+		doc.setLocation(location);
+	}
+
+	@Override
+	public String getOrigin() {
+
+		return doc.getOrigin();
+	}
+
+	@Override
+	public HTMLCollection getPlugins() {
+
+		return doc.getPlugins();
+	}
+
+	@Override
+	public DocumentReadyState getReadyState() {
+
+		return doc.getReadyState();
+	}
+
+	@Override
+	public String getReferrer() {
+
+		return doc.getReferrer();
+	}
+
+	@Override
+	public HTMLCollection getScripts() {
+
+		return doc.getScripts();
+	}
+
+	@Override
+	public Element getScrollingElement() {
+
+		return doc.getScrollingElement();
+	}
+
+	@Override
+	public String getTitle() {
+
+		return doc.getTitle();
+	}
+
+	@Override
+	public void setTitle(String title) {
+		doc.setTitle(title);
+	}
+
+	@Override
+	public VisibilityState getVisibilityState() {
+
+		return doc.getVisibilityState();
+	}
+
+	@Override
+	public void captureEvents() {
+		doc.captureEvents();
+	}
+
+	@Override
+	public Range caretRangeFromPoint(double x, double y) {
+
+		return doc.caretRangeFromPoint(x, y);
+	}
+
+	@Override
+	public void clear() {
+		doc.clear();
+
+	}
+
+	@Override
+	public void close() {
+		doc.close();
+
+	}
+
+	@Override
+	public Element createElementNS(String namespace, String qualifiedName, String options) {
+
+		return doc.createElementNS(namespace, qualifiedName, options);
+	}
+
+	@Override
+	public Event createEvent(String eventInterface) {
+
+		return doc.createEvent(eventInterface);
+	}
+
+	@Override
+	public NodeIterator createNodeIterator(Node root) {
+
+		return doc.createNodeIterator(root);
+	}
+
+	@Override
+	public Range createRange() {
+
+		return doc.createRange();
+	}
+
+	@Override
+	public TreeWalker createTreeWalker(Node root) {
+
+		return doc.createTreeWalker(root);
+	}
+
+	@Override
+	public Element elementFromPoint(double x, double y) {
+
+		return doc.elementFromPoint(x, y);
+	}
+
+	@Override
+	public boolean execCommand(String commandId, boolean showUI, String value) {
+
+		return doc.execCommand(commandId, showUI, value);
+	}
+
+	@Override
+	public boolean execCommand(String commandId, boolean showUI) {
+
+		return doc.execCommand(commandId, showUI);
+	}
+
+	@Override
+	public boolean execCommand(String commandId) {
+
+		return doc.execCommand(commandId);
+	}
+
+	@Override
+	public HTMLCollection getElementsByClassName(String classNames) {
+
+		return doc.getElementsByClassName(classNames);
+	}
+
+	@Override
+	public HTMLCollection getElementsByName(String elementName) {
+
+		return doc.getElementsByName(elementName);
+	}
+
+	@Override
+	public Selection getSelection() {
+
+		return doc.getSelection();
+	}
+
+	@Override
+	public boolean hasFocus() {
+
+		return doc.hasFocus();
+	}
+
+	@Override
+	public Document open(String url, String name, String features, boolean replace) {
+
+		return doc.open(url, name, features, replace);
+	}
+
+	@Override
+	public Document open(String url, String name, String features) {
+
+		return doc.open(url, name, features);
+	}
+
+	@Override
+	public Document open(String url, String name) {
+
+		return doc.open(url, name);
+	}
+
+	@Override
+	public Document open(String url) {
+
+		return doc.open(url);
+	}
+
+	@Override
+	public Document open() {
+
+		return doc.open();
+	}
+
+	@Override
+	public boolean queryCommandEnabled(String commandId) {
+
+		return doc.queryCommandEnabled(commandId);
+	}
+
+	@Override
+	public boolean queryCommandIndeterm(String commandId) {
+
+		return doc.queryCommandIndeterm(commandId);
+	}
+
+	@Override
+	public boolean queryCommandState(String commandId) {
+
+		return doc.queryCommandState(commandId);
+	}
+
+	@Override
+	public boolean queryCommandSupported(String commandId) {
+
+		return doc.queryCommandSupported(commandId);
+	}
+
+	@Override
+	public String queryCommandValue(String commandId) {
+
+		return doc.queryCommandValue(commandId);
+	}
+
+	@Override
+	public void releaseEvents() {
+		doc.releaseEvents();
+
+	}
+
+	@Override
+	public void write(String text) {
+		doc.write(text);
+
+	}
+
+	@Override
+	public void writeln(String text) {
+		doc.writeln(text);
+
+	}
+
+	@Override
+	public XPathExpression createExpression() {
+
+		return doc.createExpression();
+	}
+
+	@Override
+	public XPathNSResolver createNSResolver(Node nodeResolver) {
+		return doc.createNSResolver(nodeResolver);
+	}
+
+	@Override
+	public XPathResult evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type,
+			Object result) {
+		return doc.evaluate(expression, contextNode, resolver, type, result);
 	}
 }

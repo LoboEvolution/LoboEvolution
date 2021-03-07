@@ -26,7 +26,7 @@ package org.loboevolution.html.js;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Undefined;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.Document;
 
 /**
  * <p>DOMParser class.</p>

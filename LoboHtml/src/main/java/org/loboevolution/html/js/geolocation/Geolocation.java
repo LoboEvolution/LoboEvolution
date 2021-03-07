@@ -28,9 +28,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.mozilla.javascript.Function;
 
@@ -56,14 +56,14 @@ public class Geolocation extends AbstractScriptableDelegate {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(Geolocation.class.getName());
 
-	private final Window window;
+	private final WindowImpl window;
 
 	/**
 	 * <p>Constructor for Geolocation.</p>
 	 *
-	 * @param window a {@link org.loboevolution.html.js.Window} object.
+	 * @param window a {@link org.loboevolution.html.node.js.Window} object.
 	 */
-	public Geolocation(Window window) {
+	public Geolocation(WindowImpl window) {
 		this.window = window;
 	}
 

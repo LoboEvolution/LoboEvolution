@@ -27,7 +27,7 @@ package org.loboevolution.html.renderer;
 
 import java.awt.Graphics;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 /**
  * This is used when there's padding or margins in inline elements.
@@ -36,7 +36,7 @@ final class RSpacing extends BaseBoundableRenderable {
 	/**
 	 * <p>Constructor for RSpacing.</p>
 	 *
-	 * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param width a int.
 	 * @param height a int.

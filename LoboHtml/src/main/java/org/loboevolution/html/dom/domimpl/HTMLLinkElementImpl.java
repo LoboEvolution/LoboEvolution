@@ -48,6 +48,8 @@ import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.store.StyleStore;
 import org.w3c.dom.UserDataHandler;
+import org.loboevolution.html.node.DOMTokenList;
+import org.loboevolution.html.node.Element;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
@@ -226,7 +228,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		return this.disabled;
 	}
 
@@ -341,11 +343,183 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		return super.setUserData(key, data, handler);
 	}
 
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAs(String as) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCrossOrigin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCrossOrigin(String crossOrigin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getImageSizes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setImageSizes(String imageSizes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getImageSrcset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setImageSrcset(String imageSrcset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getIntegrity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setIntegrity(String integrity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getReferrerPolicy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setReferrerPolicy(String referrerPolicy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DOMTokenList getRelList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DOMTokenList getSizes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		// Javascript code often depends on this being exactly href. See js9.html.
-		// To change, perhaps add method to AbstractScriptableDelegate.
 		return getHref();
 	}
 }

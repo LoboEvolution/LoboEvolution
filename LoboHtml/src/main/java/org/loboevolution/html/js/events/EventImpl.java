@@ -23,8 +23,12 @@
 package org.loboevolution.html.js.events;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventTarget;
+import org.loboevolution.jsenum.EventPhase;
+
+import java.util.List;
+
+import org.loboevolution.html.node.events.Event;
+import org.loboevolution.html.node.events.EventTarget;
 
 /**
  * <p>EventImpl class.</p>
@@ -61,6 +65,14 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 		canBubble = false;
 		cancelable = false;
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public void initEvent(String eventTypeArg, boolean canBubbleArg, boolean cancelableArg) {
+		eventType = eventTypeArg;
+		canBubble = canBubbleArg;
+		cancelable = cancelableArg;
+	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -84,26 +96,19 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
 	/** {@inheritDoc} */
 	@Override
-	public short getEventPhase() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean getBubbles() {
+	public boolean isBubbles() {
 		return this.canBubble;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getCancelable() {
+	public boolean isCancelable() {
 		return this.cancelable;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public long getTimeStamp() {
+	public double getTimeStamp() {
 		return System.currentTimeMillis();
 	}
 
@@ -121,11 +126,81 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 		
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public void initEvent(String eventTypeArg, boolean canBubbleArg, boolean cancelableArg) {
-		eventType = eventTypeArg;
-		canBubble = canBubbleArg;
-		cancelable = cancelableArg;
+	public void setCancelBubble(boolean cancelBubble) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isComposed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDefaultPrevented() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public EventPhase getEventPhase() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isIsTrusted() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isReturnValue() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setReturnValue(boolean returnValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public EventTarget getSrcElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventTarget> composedPath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void initEvent(String type, boolean bubbles) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initEvent(String type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stopImmediatePropagation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isCancelBubble() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

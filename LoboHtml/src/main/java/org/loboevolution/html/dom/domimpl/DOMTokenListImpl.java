@@ -23,7 +23,7 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.dom.DOMTokenList;
+import org.loboevolution.html.node.DOMTokenList;
 
 /**
  * <p>DOMTokenListImpl class.</p>
@@ -35,15 +35,15 @@ public class DOMTokenListImpl implements DOMTokenList {
 
 	private final String itemValue;
 
-	private final HTMLElementImpl element;
+	private final ElementImpl element;
 
 	/**
 	 * <p>Constructor for DOMTokenListImpl.</p>
 	 *
-	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.ElementImpl} object.
 	 * @param item a {@link java.lang.String} object.
 	 */
-	public DOMTokenListImpl(HTMLElementImpl element, String item) {
+	public DOMTokenListImpl(ElementImpl element, String item) {
 		this.element = element;
 		this.itemValue = item;
 
@@ -131,6 +131,36 @@ public class DOMTokenListImpl implements DOMTokenList {
 		}
 
 		return force;
+	}
+
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setValue(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean replace(String oldToken, String newToken) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean supports(String token) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String get(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -23,8 +23,8 @@
 
 package org.loboevolution.html.dom.smil;
 
-import org.w3c.dom.events.Event;
-import org.w3c.dom.views.AbstractView;
+import org.loboevolution.html.node.events.Event;
+import org.loboevolution.html.node.views.AbstractView;
 
 /**
  * The TimeEvent interface provides specific contextual information

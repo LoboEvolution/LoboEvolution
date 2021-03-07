@@ -51,7 +51,7 @@ import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.html.dom.domimpl.DocumentNotificationListener;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.html.renderer.BoundableRenderable;
@@ -62,8 +62,9 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 import org.xml.sax.InputSource;
 
 /**
@@ -306,7 +307,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	/**
 	 * Gets the HTML DOM node currently rendered if any.
 	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @return a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public NodeImpl getRootNode() {
 		return this.rootNode;
@@ -461,7 +462,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 *
 	 * @param node A DOM node.
 	 */
-	public void scrollTo(org.w3c.dom.Node node) {
+	public void scrollTo(Node node) {
 		final HtmlBlockPanel htmlBlock = this.htmlBlockPanel;
 		if (htmlBlock != null) {
 			htmlBlock.scrollTo(node);
@@ -508,7 +509,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		final NodeImpl node = this.rootNode;
 		if (node instanceof HTMLDocumentImpl) {
 			final HTMLDocumentImpl doc = (HTMLDocumentImpl) node;
-			final org.w3c.dom.Element element = doc.getElementById(nameOrId);
+			final Element element = doc.getElementById(nameOrId);
 			if (element != null) {
 				this.scrollTo(element);
 			}

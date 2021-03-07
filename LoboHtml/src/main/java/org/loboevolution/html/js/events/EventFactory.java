@@ -23,8 +23,8 @@
 package org.loboevolution.html.js.events;
 
 import org.loboevolution.common.Strings;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.events.Event;
+
+import org.loboevolution.html.node.events.Event;
 
 /**
  * <p>EventFactory class.</p>
@@ -41,7 +41,7 @@ public class EventFactory {
 	 * @return a {@link org.w3c.dom.events.Event} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public static Event createEvent(String eventType) throws DOMException {
+	public static Event createEvent(String eventType) {
 		Event theEvent = null;
 		String event = Strings.isNotBlank(eventType) ? eventType.toLowerCase() : "";
 		switch (event) {

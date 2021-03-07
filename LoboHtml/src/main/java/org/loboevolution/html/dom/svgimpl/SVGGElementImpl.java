@@ -36,7 +36,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.Drawable;
 import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
 import org.loboevolution.html.dom.svg.SVGGElement;
@@ -45,8 +45,7 @@ import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.dom.svg.SVGTransformable;
 import org.loboevolution.html.dom.svg.SVGUseElement;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>SVGGElementImpl class.</p>
@@ -125,8 +124,8 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 	public Shape createShape(AffineTransform transform) {
 		GeneralPath path = new GeneralPath();
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
+			NodeListImpl nodeList = (NodeListImpl)getChildNodes();
+			nodeList.forEach(child -> {
 				Shape childShape = null;
 				if (child instanceof SVGGElementImpl) {
 					childShape = ((SVGGElementImpl) child).createShape(transform);
@@ -168,7 +167,7 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 				if (childShape != null) {
 					path.append(childShape, false);
 				}
-			}
+			});
 		}
 		return path;
 	}
@@ -176,12 +175,12 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 	private void drawChildren(Graphics2D graphics) {
 		List<Node> drawableChildren = new ArrayList<>();
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
+			NodeListImpl childNodes = (NodeListImpl) getChildNodes();
+			childNodes.forEach(child -> {
 				if (child instanceof Drawable) {
 					drawableChildren.add(child);
 				}
-			}
+			});
 		}
 
 		for (Node node : drawableChildren) {

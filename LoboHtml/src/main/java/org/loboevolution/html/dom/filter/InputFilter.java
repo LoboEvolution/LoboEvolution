@@ -24,7 +24,7 @@ package org.loboevolution.html.dom.filter;
 
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.domimpl.HTMLFormElementImpl;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>InputFilter class.</p>
@@ -36,7 +36,7 @@ public class InputFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean accept(Node node) {
+	public boolean acceptNode(Node node) {
 		return HTMLFormElementImpl.isInput(node);
 	}
 }

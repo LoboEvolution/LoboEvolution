@@ -23,10 +23,10 @@
 
 package org.loboevolution.driver;
 
-import org.loboevolution.dom.css.CSS3Properties;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.js.Window;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +49,7 @@ public class LoboUnitTest extends LoboWebDriver {
     }
 
     public void checkHtmlAlert(final String html, final String[] messages) {
-        Window window = null;
+    	Window window = null;
         List<String> alerts = null;
 
         try {

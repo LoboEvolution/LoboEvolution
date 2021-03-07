@@ -24,6 +24,8 @@
 package org.loboevolution.html.js.storage;
 
 import java.util.Map;
+
+import org.loboevolution.html.node.js.webstorage.Storage;
 import org.loboevolution.store.WebStore;
 
 public class LocalStorage implements Storage {
@@ -69,7 +71,19 @@ public class LocalStorage implements Storage {
 	}
 	
 	@Override
-	public void getClear() {
+	public void clear() {
 		WebStore.deleteStorage(0, index);
+	}
+
+	@Override
+	public Object get(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void set(String name, String value) {
+		// TODO Auto-generated method stub
+		
 	}
 }

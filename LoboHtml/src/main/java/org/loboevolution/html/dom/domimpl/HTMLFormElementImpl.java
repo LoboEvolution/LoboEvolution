@@ -34,11 +34,12 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.filter.InputFilter;
 import org.loboevolution.html.dom.input.FormInput;
+import org.loboevolution.html.dom.nodeimpl.NodeVisitor;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>HTMLFormElementImpl class.</p>
@@ -311,6 +312,144 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 				this.warn("submit()", mfu);
 			}
 		}
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAutocomplete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAutocomplete(String autocomplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getEncoding() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setEncoding(String encoding) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isNoValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setNoValidate(boolean noValidate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean reportValidity() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	/** {@inheritDoc} */

@@ -25,7 +25,7 @@ package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGAnimatedRect;
 import org.loboevolution.html.dom.svg.SVGRect;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGAnimatedRectImpl class.</p>
@@ -52,7 +52,7 @@ public class SVGAnimatedRectImpl implements SVGAnimatedRect {
 		return baseVal;
 	}
 
-	void setBaseVal(SVGRect baseVal) throws DOMException {
+	void setBaseVal(SVGRect baseVal) {
 		this.baseVal = baseVal;
 	}
 

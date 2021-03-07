@@ -49,7 +49,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.http.HtmlContent;
 import org.loboevolution.info.MetaInfo;
 import org.loboevolution.net.HttpNetwork;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.Document;
 
 /**
  * <p>InfoPageWindow class.</p>

@@ -35,8 +35,8 @@ import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
-import org.loboevolution.html.dom.domimpl.ModelNode;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
@@ -66,7 +66,7 @@ public class HtmlController {
 	/**
 	 * <p>onChange.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @return a boolean.
 	 */
 	public boolean onChange(ModelNode node) {
@@ -87,7 +87,7 @@ public class HtmlController {
 	/**
 	 * <p>onContextMenu.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
@@ -126,7 +126,7 @@ public class HtmlController {
 	 * <p>onDoubleClick.</p>
 	 *
 	 * @return True to propagate further, false if consumed.
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
@@ -164,7 +164,7 @@ public class HtmlController {
 	 * <p>onEnterPressed.</p>
 	 *
 	 * @return True to propagate further and false if the event was consumed.
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public boolean onEnterPressed(ModelNode node) {
 		final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
@@ -176,7 +176,7 @@ public class HtmlController {
 	 * <p>onMouseClick.</p>
 	 *
 	 * @return True to propagate further and false if the event was consumed.
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
@@ -233,7 +233,7 @@ public class HtmlController {
 	 * <p>onMouseDisarmed.</p>
 	 *
 	 * @return True to propagate further, false if consumed.
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 */
 	public boolean onMouseDisarmed(ModelNode node, MouseEvent event) {
@@ -252,7 +252,7 @@ public class HtmlController {
 	 * <p>onMouseDown.</p>
 	 *
 	 * @return True to propagate further, false if consumed.
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
@@ -286,11 +286,11 @@ public class HtmlController {
 	/**
 	 * <p>onMouseOut.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
-	 * @param limit a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseOut(ModelNode node, MouseEvent event, int x, int y, ModelNode limit) {
 		while (node != null) {
@@ -319,11 +319,11 @@ public class HtmlController {
 	/**
 	 * <p>onMouseOver.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
-	 * @param limit a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseOver(ModelNode node, MouseEvent event, int x, int y, ModelNode limit) {
 		while (node != null) {
@@ -354,11 +354,11 @@ public class HtmlController {
 	 * <p>onMouseOver.</p>
 	 *
 	 * @param renderable a {@link org.loboevolution.html.renderer.BaseBoundableRenderable} object.
-	 * @param nodeStart a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param nodeStart a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
-	 * @param limit a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseOver(final BaseBoundableRenderable renderable, final ModelNode nodeStart, final MouseEvent event, final int x, final int y, final ModelNode limit) {
 		ModelNode node = nodeStart;
@@ -417,7 +417,7 @@ public class HtmlController {
 	 * <p>onMouseUp.</p>
 	 *
 	 * @return True to propagate further, false if consumed.
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.

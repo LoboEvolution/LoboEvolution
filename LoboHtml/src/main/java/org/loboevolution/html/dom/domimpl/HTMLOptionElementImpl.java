@@ -26,7 +26,8 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLSelectElement;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>HTMLOptionElementImpl class.</p>
@@ -48,13 +49,13 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDefaultSelected() {
+	public boolean isDefaultSelected() {
 		return getAttributeAsBoolean("selected");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		return false;
 	}
 
@@ -88,7 +89,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getSelected() {
+	public boolean isSelected() {
 		return this.selected;
 	}
 
@@ -163,6 +164,96 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 		setAttribute("value", value);
 	}
 
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

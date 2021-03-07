@@ -34,8 +34,8 @@ import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Path2D;
 import java.util.StringTokenizer;
 
-import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.SVGAnimatedEnumeration;
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGAnimatedNumberList;
@@ -43,9 +43,8 @@ import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGTextElement;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>SVGTextElementImpl class.</p>
@@ -125,7 +124,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public float getSubStringLength(int charnum, int nchars) throws DOMException {
+	public float getSubStringLength(int charnum, int nchars) {
 		String text = getText();
 		text = text.substring(charnum, nchars);
 		return text.length();
@@ -133,28 +132,28 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint getStartPositionOfChar(int charnum) throws DOMException {
+	public SVGPoint getStartPositionOfChar(int charnum) {
 		// TODO Auto-generated method stub
 		return new SVGPointImpl();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint getEndPositionOfChar(int charnum) throws DOMException {
+	public SVGPoint getEndPositionOfChar(int charnum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGRect getExtentOfChar(int charnum) throws DOMException {
+	public SVGRect getExtentOfChar(int charnum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public float getRotationOfChar(int charnum) throws DOMException {
+	public float getRotationOfChar(int charnum) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -168,7 +167,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public void selectSubString(int charnum, int nchars) throws DOMException {
+	public void selectSubString(int charnum, int nchars) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -225,15 +224,15 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 		StringBuilder text = new StringBuilder();
 		String xmlSpace = getXMLspace();
 		if (Strings.isNotBlank(xmlSpace)) {
-			xmlSpace = "default";
+			setXMLspace("default");
 		}
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
-				if (child.getNodeType() == Node.TEXT_NODE) {
+			NodeListImpl children = (NodeListImpl)getChildNodes();
+			children.forEach(child -> {
+				if (child.getNodeType() == NodeType.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
 					StringBuilder childText = new StringBuilder();
-					if ("default".equals(xmlSpace)) {
+					if ("default".equals(getXMLspace())) {
 						int newLineIndex = nodeValue.indexOf('\n');
 						while (newLineIndex != -1) {
 							nodeValue = nodeValue.substring(0, newLineIndex) + nodeValue.substring(newLineIndex + 1);
@@ -259,7 +258,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 					}
 					text.append(childText).append(" ");
 				}
-			}
+			});
 		}
 		if (text.length() > 0) {
 			return text.substring(0, text.length() - 1);

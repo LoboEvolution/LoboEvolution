@@ -138,7 +138,7 @@ public class SelectOption {
 		comboBox.setVisible(!modelNode.getHidden());
 		comboBox.applyComponentOrientation(direction(modelNode.getDir()));
 		comboBox.setEditable(Boolean.parseBoolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
-		comboBox.setEnabled(!modelNode.getDisabled());
+		comboBox.setEnabled(!modelNode.isDisabled());
 		this.list = list;
 		this.resetItemList(modelNode);
 		control.add(comboBox);
@@ -201,10 +201,10 @@ public class SelectOption {
 						} else {
 							comboBox.addItem(item);
 						}
-						if (option.getSelected()) {
+						if (option.isSelected()) {
 							selectedItem = item;
 						}
-						if (option.getDefaultSelected()) {
+						if (option.isDefaultSelected()) {
 							defaultItem = item;
 						}
 					}
@@ -235,13 +235,13 @@ public class SelectOption {
 					} else {
 						listModel.addElement(item);
 					}
-					if (option.getSelected()) {
+					if (option.isSelected()) {
 						if (selectedIndexes == null) {
 							selectedIndexes = new LinkedList<>();
 						}
 						selectedIndexes.add(index);
 					}
-					if (option.getDefaultSelected()) {
+					if (option.isDefaultSelected()) {
 						if (defaultSelectedIndexes == null) {
 							defaultSelectedIndexes = new LinkedList<>();
 						}
@@ -330,7 +330,7 @@ public class SelectOption {
 		 * @return true, if is selected
 		 */
 		public boolean isSelected() {
-			return this.option.getSelected();
+			return this.option.isSelected();
 		}
 
 		/*

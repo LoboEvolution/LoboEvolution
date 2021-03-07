@@ -25,10 +25,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.w3c.dom.DOMException;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>DocumentTypeImpl class.</p>
@@ -36,7 +35,7 @@ import org.w3c.dom.Node;
  * @author utente
  * @version $Id: $Id
  */
-public class DocumentTypeImpl extends NodeImpl implements DocumentType {
+public class DocumentTypeImpl extends DOMFunctionImpl implements DocumentType {
 	private final String publicId;
 	private final String qualifiedName;
 	private final String systemId;
@@ -61,19 +60,6 @@ public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 		return new DocumentTypeImpl(this.qualifiedName, this.publicId, this.systemId);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public NamedNodeMap getEntities() {
-		// TODO: DOCTYPE declared entities
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getInternalSubset() {
-		// TODO: DOCTYPE internal subset
-		return null;
-	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -95,20 +81,13 @@ public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 
 	/** {@inheritDoc} */
 	@Override
-	public short getNodeType() {
-		return org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
+	public NodeType getNodeType() {
+		return NodeType.DOCUMENT_TYPE_NODE;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String getNodeValue() throws DOMException {
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public NamedNodeMap getNotations() {
-		// TODO: DOCTYPE notations
+	public String getNodeValue() {
 		return null;
 	}
 
@@ -122,11 +101,5 @@ public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 	@Override
 	public String getSystemId() {
 		return this.systemId;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setNodeValue(String nodeValue) throws DOMException {
-		// nop
 	}
 }

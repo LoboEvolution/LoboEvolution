@@ -72,8 +72,8 @@ public class InputPassword {
 		pwd.setVisible(!modelNode.getHidden());
 		pwd.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		pwd.setEditable(Boolean.parseBoolean(modelNode.getContentEditable()));
-		pwd.setEnabled(!modelNode.getDisabled());
-		pwd.setEditable(!modelNode.getReadOnly());
+		pwd.setEnabled(!modelNode.isDisabled());
+		pwd.setEditable(!modelNode.isReadOnly());
 		pwd.setDocument(new LimitedDocument());
 		pwd.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode));
 		final Dimension ps = pwd.getPreferredSize();
@@ -116,7 +116,7 @@ public class InputPassword {
 
 		@Override
 		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-			int max = modelNode.getMaxLength();
+			int max = (int)modelNode.getMaxLength();
 
 			final int docLength = getLength();
 			if (docLength >= max) {

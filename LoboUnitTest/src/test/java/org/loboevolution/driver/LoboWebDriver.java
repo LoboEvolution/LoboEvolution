@@ -33,7 +33,7 @@ import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.Document;
 import org.xml.sax.InputSource;
 
 import java.awt.*;

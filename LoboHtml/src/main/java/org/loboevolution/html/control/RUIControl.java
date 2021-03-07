@@ -31,9 +31,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderer.BaseElementRenderable;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RBlockViewport;
@@ -113,7 +113,7 @@ public class RUIControl extends BaseElementRenderable {
     /**
      * <p>Constructor for RUIControl.</p>
      *
-     * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+     * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
      * @param widget a {@link org.loboevolution.html.control.UIControl} object.
      * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
      * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.

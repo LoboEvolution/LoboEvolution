@@ -25,36 +25,35 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
-import org.loboevolution.common.Nodes;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.DOMTokenList;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
-import org.loboevolution.html.gui.HtmlPanel;
-import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.node.Code;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.CSSPropertiesContext;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
-import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.laf.FontFactory;
-import org.loboevolution.laf.FontKey;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import java.awt.*;
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.List;
-import java.util.*;
-import java.util.logging.Level;
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
 /**
  * <p>HTMLElementImpl class.</p>
@@ -75,8 +74,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	private volatile AbstractCSSProperties localStyleDeclarationState;
 	
-	private String outer;
-
 	/**
 	 * <p>Constructor for HTMLElementImpl.</p>
 	 *
@@ -120,38 +117,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			style.addStyleDeclaration(cssStyleDeclarationImpl);
 		}
 		return style;
-	}
-
-	/**
-	 * <p>appendOuterHTMLImpl.</p>
-	 *
-	 * @param buffer a {@link java.lang.StringBuilder} object.
-	 */
-	protected void appendOuterHTMLImpl(StringBuilder buffer) {
-		final String tagName = getTagName().toUpperCase();
-		buffer.append('<');
-		buffer.append(tagName);
-		final Map<String, String> attributes = this.attributes;
-		if (attributes != null) {
-			attributes.forEach((k, v) -> {
-				if (v != null) {
-					buffer.append(' ');
-					buffer.append(k);
-					buffer.append("=\"");
-					buffer.append(Strings.strictHtmlEncode(v, true));
-					buffer.append("\"");
-				}
-			});
-		}
-		if (nodeList.getLength() == 0) {
-			buffer.append("/>");
-			return;
-		}
-		buffer.append('>');
-		appendInnerHTMLImpl(buffer);
-		buffer.append("</");
-		buffer.append(tagName);
-		buffer.append('>');
 	}
 
 	/** {@inheritDoc} */
@@ -239,11 +204,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			this.isHoverStyle = null;
 			this.hasHoverStyleByElement = null;
 			if (deep) {
-				for (Node node : Nodes.iterable(nodeList)) {
+				nodeList.forEach(node -> {
 					if (node instanceof HTMLElementImpl) {
 						((HTMLElementImpl) node).forgetStyle(deep);
 					}
-				}
+				});
 			}
 		}
 	}
@@ -364,22 +329,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return getAttribute("charset");
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getClassName() {
-		final String className = getAttribute("class");
-		return className == null ? "" : className;
-	}
-	
-	/**
-	 * <p>getClassList.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.dom.DOMTokenList} object.
-	 */
-	public DOMTokenList getClassList() {
-        return new DOMTokenListImpl(this, this.getClassName());
-	}
-
 	/**
 	 * <p>getComputedStyle.</p>
 	 *
@@ -493,9 +442,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/**
 	 * <p>getOffsetHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a double.
 	 */
-	public int getOffsetHeight() {
+	public double getOffsetHeight() {
 		final UINode uiNode = getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().height;
 	}
@@ -505,7 +454,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 *
 	 * @return a int.
 	 */
-	public int getOffsetLeft() {
+	public double getOffsetLeft() {
 		final UINode uiNode = getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().x;
 	}
@@ -532,18 +481,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().width;
 	}
 
-	/**
-	 * <p>getOuterHTML.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getOuterHTML() {
-		final StringBuilder buffer = new StringBuilder();
-		synchronized (this) {
-			appendOuterHTMLImpl(buffer);
-		}
-		return buffer.toString();
-	}
 	
 
 	/**
@@ -861,7 +798,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	}
 
 	private void invalidateDescendentsForHoverImpl(HTMLElementImpl ancestor) {
-		for (Node node : Nodes.iterable(nodeList)) {
+		nodeList.forEach(node -> {
 			if (node instanceof HTMLElementImpl) {
 				final HTMLElementImpl descendent = (HTMLElementImpl) node;
 				if (descendent.hasHoverStyle(ancestor)) {
@@ -869,34 +806,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 				}
 				descendent.invalidateDescendentsForHoverImpl(ancestor);
 			}
-		}
+		});
 	}
 	
-	/**
-	 * <p>setOuterHTML.</p>
-	 *
-	 * @param newHtml a {@link java.lang.String} object.
-	 */
-	public void setOuterHTML(String newHtml) {
-		this.outer = outerNewHtml(newHtml);
-		if (this.outer != null) {
-			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-			if (document == null) {
-				this.warn("setOuterHTML(): Element " + this + " does not belong to a document.");
-				return;
-			}
-			final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
-			this.nodeList.clear();
-			// Should not synchronize around parser probably.
-			try {
-				try (Reader reader = new StringReader(newHtml)) {
-					parser.parse(reader, this);
-				}
-			} catch (final Exception thrown) {
-				this.warn("setOuterHTML(): Error setting inner HTML.", thrown);
-			}
-		}
-	}
 
 	/**
 	 * <p>setCharset.</p>
@@ -907,19 +819,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		setAttribute("charset", charset);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void setClassName(String className) {
-		setAttribute("class", className);
-	}
-
 	/**
 	 * <p>setCurrentStyle.</p>
 	 *
 	 * @param value a {@link java.lang.Object} object.
 	 */
 	public void setCurrentStyle(Object value) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Cannot set currentStyle property");
+		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Cannot set currentStyle property");
 	}
 	
 	/**
@@ -931,28 +837,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return this.getAttribute("hidden") != null;
 	}
 
-	/**
-	 * <p>setInnerHTML.</p>
-	 *
-	 * @param newHtml a {@link java.lang.String} object.
-	 */
-	public void setInnerHTML(String newHtml) {
-		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-		if (document == null) {
-			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
-			return;
-		}
-		final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
-		this.nodeList.clear();
-		// Should not synchronize around parser probably.
-		try {
-			try (Reader reader = new StringReader(newHtml)) {
-				parser.parse(reader, this);
-			}
-		} catch (final Exception thrown) {
-			this.warn("setInnerHTML(): Error setting inner HTML.", thrown);
-		}
-	}
 
 	/**
 	 * <p>setMouseOver.</p>
@@ -995,42 +879,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
         this.setAttribute("contenteditable", contenteditable);
     }
  
-	public int getClientWidth() {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-		Dimension preferredSize = htmlPanel.getPreferredSize();
-		AbstractCSSProperties currentStyle = getCurrentStyle();
-		String width = currentStyle.getWidth();
-		
-		if(Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
-			width = "100%";
-		}		
-		return HtmlValues.getPixelSize(width, null, -1, preferredSize.width);
-	}
-	
-	public int getClientHeight() {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-		Dimension preferredSize = htmlPanel.getPreferredSize();
-		AbstractCSSProperties currentStyle = getCurrentStyle();	
-		String height = currentStyle.getHeight();
-						
-		if (Strings.isBlank(height) || "auto".equalsIgnoreCase(height)) {
-			if (this instanceof HTMLDivElementImpl && Strings.isBlank(getTextContent())) {
-				height = "0px";
-			}
-			
-			if (this instanceof HTMLDivElementImpl && Strings.isNotBlank(getTextContent())) {
-				FontFactory FONT_FACTORY = FontFactory.getInstance();
-				Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
-				height = DEFAULT_FONT.getSize() + "px";
-			}
-		}
-		return HtmlValues.getPixelSize(height, null, -1, preferredSize.height);
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void warn(String message) {
@@ -1043,26 +891,94 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		logger.log(Level.WARNING, message, err);
 	}
 
-	private String outerNewHtml(final String newHtml) {
-		if (newHtml != null) {
-			return newHtml.endsWith(">") || ! newHtml.startsWith("<") ? newHtml : newHtml + ">";
-		}
-		return "";
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-
-	/**
-	 * @return the outer
-	 */
-	public String getOuter() {
-		return outer;
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/**
-	 * @param outer the outer to set
-	 */
-	public void setOuter(String outer) {
-		this.outer = outer;
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/** {@inheritDoc} */

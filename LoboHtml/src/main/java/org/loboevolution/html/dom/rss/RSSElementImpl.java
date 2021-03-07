@@ -25,9 +25,7 @@ package org.loboevolution.html.dom.rss;
 
 import java.awt.Graphics2D;
 
-import org.loboevolution.common.Nodes;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 
 /**
  * <p>RSSElementImpl class.</p>
@@ -53,13 +51,13 @@ public class RSSElementImpl extends RSSElement {
 	 */
 	public void draw(Graphics2D graphics) {
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
+			NodeListImpl children = (NodeListImpl)getChildNodes();
+			children.forEach(child -> {
 				if (child instanceof RSSChanelElementImpl) {
 					RSSChanelElementImpl channel = (RSSChanelElementImpl) child;
 					channel.draw(graphics);
 				}
-			}
+			});
 		}
 	}
 }

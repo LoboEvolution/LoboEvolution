@@ -25,7 +25,7 @@ package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGAnimationElement;
 import org.loboevolution.html.dom.svg.SVGElement;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGAnimationElementImpl class.</p>
@@ -67,7 +67,7 @@ public class SVGAnimationElementImpl extends SVGAnimationImpl implements SVGAnim
 
 	/** {@inheritDoc} */
 	@Override
-	public float getSimpleDuration() throws DOMException {
+	public float getSimpleDuration() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

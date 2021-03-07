@@ -24,7 +24,7 @@
 package org.loboevolution.html.renderer;
 
 import org.loboevolution.common.ArrayUtilities;
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

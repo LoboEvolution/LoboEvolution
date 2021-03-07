@@ -28,7 +28,7 @@ import java.util.Map;
 
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.HTMLElement;
-import org.w3c.dom.DOMException;
+
 
 class ElementFactory {
 	
@@ -149,7 +149,7 @@ class ElementFactory {
 	 * @return a {@link org.loboevolution.html.dom.HTMLElement} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {
+	public final HTMLElement createElement(HTMLDocumentImpl document, String name) {
 	    final String normalName = name.toUpperCase(Locale.ENGLISH);
 		final HTMLElementBuilder builder = this.builders.get(HTMLTag.get(normalName));
 		if (builder == null) {

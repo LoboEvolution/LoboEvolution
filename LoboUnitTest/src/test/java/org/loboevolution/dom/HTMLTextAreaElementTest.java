@@ -24,7 +24,6 @@
 package org.loboevolution.dom;
 
 import org.junit.Test;
-import org.loboevolution.html.dom.HTMLTextAreaElement;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**

@@ -23,8 +23,9 @@
 
 package org.loboevolution.html.dom.smil;
 
-import org.w3c.dom.DOMException;
-import org.w3c.dom.NodeList;
+
+import org.loboevolution.html.dom.nodeimpl.DOMException;
+import org.loboevolution.html.node.NodeList;
 
 /**
  * This interface defines a time container with semantics based upon par, but

@@ -44,8 +44,9 @@ import org.loboevolution.net.HttpNetwork;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
-import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
 
 /**
  * <p>HTMLScriptElementImpl class.</p>
@@ -84,7 +85,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDefer() {
+	public boolean isDefer() {
 		return this.defer;
 	}
 
@@ -223,6 +224,156 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			processScript();
 		}
 		return super.setUserData(key, data, handler);
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAsync() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAsync(boolean async) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCrossOrigin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCrossOrigin(String crossOrigin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getIntegrity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setIntegrity(String integrity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isNoModule() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setNoModule(boolean noModule) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getReferrerPolicy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setReferrerPolicy(String referrerPolicy) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/** {@inheritDoc} */

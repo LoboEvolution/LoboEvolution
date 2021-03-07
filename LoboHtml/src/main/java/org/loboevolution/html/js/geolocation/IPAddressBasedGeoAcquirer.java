@@ -37,7 +37,7 @@ public class IPAddressBasedGeoAcquirer {
 	/**
 	 * <p>acquireLocation.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.js.geolocation.Position} object.
+	 * @return a {@link org.loboevolution.html.node.js.geolocation.Position} object.
 	 * @throws java.lang.Exception if any.
 	 */
 	protected Position acquireLocation() throws Exception {

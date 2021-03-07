@@ -27,7 +27,7 @@ package org.loboevolution.html.renderer;
 
 import java.awt.Graphics;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
@@ -40,7 +40,7 @@ final class RStyleChanger extends BaseRenderable {
 	/**
 	 * <p>Constructor for RStyleChanger.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public RStyleChanger(ModelNode modelNode) {
 		this.modelNode = modelNode;

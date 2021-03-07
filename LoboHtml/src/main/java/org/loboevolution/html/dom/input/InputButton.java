@@ -56,7 +56,7 @@ public class InputButton {
 		
 		button.setVisible(!modelNode.getHidden());
 		button.applyComponentOrientation(ic.direction(modelNode.getDir()));
-		button.setEnabled(!modelNode.getDisabled());
+		button.setEnabled(!modelNode.isDisabled());
 		button.setText(getText(modelNode));
 		button.addActionListener(event -> HtmlController.getInstance().onPressed(modelNode, null, 0, 0));
 		

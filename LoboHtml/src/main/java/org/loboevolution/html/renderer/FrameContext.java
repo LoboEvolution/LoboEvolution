@@ -22,7 +22,7 @@
  */
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 
 /**
  * Provides direct access to the GUI component where the document is rendered,
@@ -35,7 +35,7 @@ public interface FrameContext {
 	/**
 	 * <p>delayedRelayout.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void delayedRelayout(NodeImpl node);
 

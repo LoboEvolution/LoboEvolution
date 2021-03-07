@@ -16,6 +16,7 @@
     </properties>
 
     <modules>
+	    <module>LoboW3C</module>
         <module>LoboCommon</module>
         <module>LoboApi</module>
         <module>LoboParser</module>

@@ -26,7 +26,7 @@ import java.awt.Image;
 
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.ListStyle;
@@ -41,7 +41,7 @@ class BaseRListElement extends RBlock {
 	/**
 	 * <p>Constructor for BaseRListElement.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param listNesting a int.
 	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.

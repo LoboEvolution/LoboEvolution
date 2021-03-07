@@ -23,7 +23,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import org.w3c.dom.Element;
+import org.loboevolution.html.node.Element;
 
 /**
  * Defines a block of content control. See the switch element definition .

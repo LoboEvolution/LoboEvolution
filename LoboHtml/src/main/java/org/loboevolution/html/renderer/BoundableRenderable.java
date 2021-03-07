@@ -28,7 +28,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 /**
  * A renderer node with well-defined bounds. Most renderer nodes implement this
@@ -130,7 +130,7 @@ public interface BoundableRenderable extends Renderable {
 	/**
 	 * <p>getModelNode.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @return a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	ModelNode getModelNode();
 
@@ -253,7 +253,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param x a int.
 	 * @param y a int.
 	 * @param triggerEvent a boolean.
-	 * @param limit a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit);
 
@@ -321,7 +321,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
-	 * @param limit a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	void onMouseOut(MouseEvent event, int x, int y, ModelNode limit);
 

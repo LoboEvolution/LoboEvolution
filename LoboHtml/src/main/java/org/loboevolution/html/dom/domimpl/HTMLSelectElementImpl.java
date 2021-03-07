@@ -24,13 +24,20 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.control.SelectControl;
+import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLFormElement;
+import org.loboevolution.html.dom.HTMLLabelElement;
+import org.loboevolution.html.dom.HTMLOptGroupElement;
+import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
 import org.loboevolution.html.dom.HTMLSelectElement;
 import org.loboevolution.html.dom.input.SelectOption;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
+
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.ValidityState;
 
 /**
  * <p>HTMLSelectElementImpl class.</p>
@@ -55,7 +62,7 @@ public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		final String disabled = getAttribute("disabled");
 		return disabled != null;
 	}
@@ -113,13 +120,6 @@ public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public int getTabIndex() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getType() {
 		return this.getMultiple() ? "select-multiple" : "select-one";
 	}
@@ -145,7 +145,7 @@ public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public void setLength(int length) throws DOMException {
+	public void setLength(int length) {
 		setAttribute("length", String.valueOf(length));
 		
 	}
@@ -173,25 +173,11 @@ public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTabIndex(int tabIndex) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public void setValue(String value) {
 		setAttribute("value", String.valueOf(value));
 		
 	}
 	
-	/** {@inheritDoc} */
-	@Override
-	public void add(HTMLElement element, HTMLElement before) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
 	/**
 	 * <p>draw.</p>
 	 *
@@ -206,6 +192,252 @@ public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	public void resetInput() {
 		if (selectOption!= null) selectOption.resetInput();
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAutocomplete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAutocomplete(String autocomplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAutofocus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutofocus(boolean autofocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isMultiple() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isRequired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setRequired(boolean required) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLCollection getSelectedOptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSize(int size) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void add(HTMLOptionElement element, HTMLElement before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptionElement element, int before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptionElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptGroupElement element, HTMLElement before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptGroupElement element, int before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLOptGroupElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Element item(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HTMLOptionElement namedItem(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean reportValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void set(int name, Element value) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/** {@inheritDoc} */

@@ -31,16 +31,14 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.logging.Logger;
 
-import javax.xml.parsers.DocumentBuilder;
-
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -53,7 +51,7 @@ import org.xml.sax.SAXException;
  * @author J. H. S.
  * @version $Id: $Id
  */
-public class DocumentBuilderImpl extends DocumentBuilder {
+public class DocumentBuilderImpl {
 	private static final Logger logger = Logger.getLogger(DocumentBuilderImpl.class.getName());
 	private final UserAgentContext bcontext;
 	private DOMImplementation domImplementation;
@@ -147,8 +145,6 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 		return document;
 	}
 
-	/** {@inheritDoc} */
-	@Override
 	public DOMImplementation getDOMImplementation() {
 		synchronized (this) {
 			if (this.domImplementation == null) {
@@ -176,20 +172,15 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 		return this.resolver;
 	}
 
-	/** {@inheritDoc} */
-	@Override
 	public boolean isNamespaceAware() {
 		return false;
 	}
 
-	/** {@inheritDoc} */
-	@Override
 	public boolean isValidating() {
 		return false;
 	}
 
-	/** {@inheritDoc} */
-	@Override
+
 	public Document newDocument() {
 		return new HTMLDocumentImpl(this.bcontext);
 	}
@@ -199,23 +190,17 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	 *
 	 * Parses an HTML document. Note that this method will read the entire input
 	 * source before returning a Document instance.
-	 * @see #createDocument(InputSource)
 	 */
-	@Override
-	public Document parse(InputSource is) throws org.xml.sax.SAXException, IOException {
+	public Document parse(InputSource is) throws SAXException, IOException {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) createDocument(is);
 		document.load();
 		return document;
 	}
 
-	/** {@inheritDoc} */
-	@Override
 	public void setEntityResolver(EntityResolver er) {
 		this.resolver = er;
 	}
 
-	/** {@inheritDoc} */
-	@Override
 	public void setErrorHandler(ErrorHandler eh) {
 		this.errorHandler = eh;
 	}

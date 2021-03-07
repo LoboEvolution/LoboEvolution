@@ -24,7 +24,7 @@
 package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGAnimatedEnumeration;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGAnimatedEnumerationImpl class.</p>
@@ -53,7 +53,7 @@ public class SVGAnimatedEnumerationImpl implements SVGAnimatedEnumeration {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBaseVal(short baseVal) throws DOMException {
+	public void setBaseVal(short baseVal) {
 		this.baseVal = baseVal;
 	}
 

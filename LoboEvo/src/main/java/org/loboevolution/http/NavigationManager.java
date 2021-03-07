@@ -41,7 +41,7 @@ import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.ToolsStore;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.Document;
 import org.xml.sax.InputSource;
 
 /**

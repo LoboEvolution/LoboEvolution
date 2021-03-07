@@ -37,11 +37,12 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.html.HTMLDocument;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentFragment;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.dom.HTMLDocument;
+import org.loboevolution.html.dom.HTMLHeadElement;
 
 /**
  * <p>XMLSerializer class.</p>
@@ -63,7 +64,8 @@ public class XMLSerializer extends AbstractScriptableDelegate {
 	 * @return the serialized string
 	 */
 	public String serializeToString(Node root) {
-		TransformerFactory tf = TransformerFactory.newInstance();
+		// TODO Broken with new interfaces
+		/*TransformerFactory tf = TransformerFactory.newInstance();
 		Transformer transformer;
 		try {
 			if (root instanceof Document) {
@@ -82,7 +84,7 @@ public class XMLSerializer extends AbstractScriptableDelegate {
 			return writer.getBuffer().toString().replaceAll("\n|\r", "");
 		} catch (TransformerException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
+		}*/
 		return "";
 	}
 
@@ -93,14 +95,15 @@ public class XMLSerializer extends AbstractScriptableDelegate {
 	}
 
 	private void elementToStream(Element element, OutputStream out) {
-		try {
+		// TODO Broken with new interfaces
+		/*try {
 			DOMSource source = new DOMSource(element);
 			StreamResult result = new StreamResult(out);
 			TransformerFactory transFactory = TransformerFactory.newInstance();
 			Transformer transformer = transFactory.newTransformer();
 			transformer.transform(source, result);
 		} catch (Exception ex) {
-		}
+		}*/
 	}
 
 }

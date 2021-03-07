@@ -27,16 +27,14 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 
-import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.Drawable;
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGAnimatedString;
 import org.loboevolution.html.dom.svg.SVGElementInstance;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.loboevolution.html.dom.svg.SVGUseElement;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.Element;
 
 /**
  * <p>SVGUseElementImpl class.</p>
@@ -124,13 +122,13 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 				Element elementById = (Element) child(idElement);
 				if (elementById instanceof SVGSymbolElementImpl) {
 					SVGSymbolElementImpl symbol = (SVGSymbolElementImpl) elementById;
-					NodeList childNodes = symbol.getChildNodes();
-					for (Node child : Nodes.iterable(childNodes)) {
+					NodeListImpl children = (NodeListImpl) symbol.getChildNodes();
+					children.forEach(child -> {
 						if (child instanceof Drawable) {
 							Drawable drawable = (Drawable) child;
 							drawable.draw(graphics);
 						}
-					}
+					});
 				} else if (elementById instanceof Drawable) {
 					Drawable drawable = (Drawable) elementById;
 					drawable.draw(graphics);

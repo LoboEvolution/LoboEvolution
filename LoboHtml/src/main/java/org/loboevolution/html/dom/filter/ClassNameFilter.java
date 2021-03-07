@@ -25,8 +25,8 @@ package org.loboevolution.html.dom.filter;
 import java.util.regex.Pattern;
 
 import org.loboevolution.html.dom.NodeFilter;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>ClassNameFilter class.</p>
@@ -50,7 +50,7 @@ public class ClassNameFilter implements NodeFilter {
 	}
 
 	/** {@inheritDoc} */
-	public boolean accept(Node node) {
+	public boolean acceptNode(Node node) {
 		if(node instanceof Element) {
 			String classAttribute = ((Element) node).getAttribute("class");
 			if(classAttribute != null) {

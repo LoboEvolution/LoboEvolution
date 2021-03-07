@@ -31,7 +31,7 @@ import org.loboevolution.html.dom.smil.SMILAnimation;
 import org.loboevolution.html.dom.smil.Time;
 import org.loboevolution.html.dom.smil.TimeList;
 import org.loboevolution.html.dom.svg.SVGTransform;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGAnimationImpl class.</p>
@@ -168,7 +168,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDur(float dur) throws DOMException {
+	public void setDur(float dur) {
 		this.setAttribute("dur", String.valueOf(dur));
 	}
 
@@ -180,7 +180,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFill(String fill) throws DOMException {
+	public void setFill(String fill) {
 		this.setAttribute("fill", fill);
 	}
 
@@ -195,7 +195,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRepeatCount(float repeatCount) throws DOMException {
+	public void setRepeatCount(float repeatCount) {
 		this.setAttribute("repeatCount", String.valueOf(repeatCount));
 	}
 
@@ -210,7 +210,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRepeatDur(float repeatDur) throws DOMException {
+	public void setRepeatDur(float repeatDur) {
 		this.setAttribute("repeatDur", String.valueOf(repeatDur));
 	}
 
@@ -235,14 +235,14 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean beginElementAt(float offset) throws DOMException {
+	public boolean beginElementAt(float offset) {
 		setDur(offset);
 		return beginElement();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean endElementAt(float offset) throws DOMException {
+	public boolean endElementAt(float offset) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -255,7 +255,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValues(String values) throws DOMException {
+	public void setValues(String values) {
 		this.setAttribute("values", values);
 	}
 
@@ -267,7 +267,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFrom(String from) throws DOMException {
+	public void setFrom(String from) {
 		this.setAttribute("from", from);	
 	}
 
@@ -279,7 +279,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTo(String to) throws DOMException {
+	public void setTo(String to) {
 		this.setAttribute("to", to);
 	}
 
@@ -291,7 +291,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBy(String by) throws DOMException {
+	public void setBy(String by) {
 		this.setAttribute("by", by);
 	}
 	

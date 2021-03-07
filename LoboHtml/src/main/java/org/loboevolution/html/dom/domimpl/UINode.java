@@ -27,6 +27,8 @@ package org.loboevolution.html.dom.domimpl;
 
 import java.awt.Rectangle;
 
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+
 /**
  * A UI node abstraction that is used to send notifications back to the UI and
  * to obtain information the DOM needs from the UI (such as image dimensions).
@@ -62,7 +64,7 @@ public interface UINode {
 	/**
 	 * Called
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	void repaint(ModelNode modelNode);
 }

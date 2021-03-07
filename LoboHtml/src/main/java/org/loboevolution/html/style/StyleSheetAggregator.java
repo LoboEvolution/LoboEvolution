@@ -41,11 +41,12 @@ import org.loboevolution.html.dom.HTMLTextAreaElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.store.LinkStore;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.Text;
+import org.loboevolution.html.node.js.Window;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
@@ -73,7 +74,6 @@ import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.css.parser.selector.SimpleSelector;
-
 /**
  * Aggregates all style sheets in a document. Every time a new STYLE element is
  * found, it is added to the style sheet aggreagator by means of the
@@ -393,7 +393,7 @@ public class StyleSheetAggregator {
 		switch (value) {
 		case "root":
 			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
-			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_TYPE_NODE;
+			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == NodeType.DOCUMENT_TYPE_NODE;
 
 		case "enabled":
 			return element.hasAttribute("enabled") || (!element.hasAttribute("enabled") && !element.hasAttribute("disabled"));
@@ -425,7 +425,7 @@ public class StyleSheetAggregator {
 			}
 
 		case "checked":
-			return (element instanceof HTMLInputElement && ((HTMLInputElement) element).getChecked());
+			return (element instanceof HTMLInputElement && ((HTMLInputElement) element).isChecked());
 
 		case "required":
 			return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement

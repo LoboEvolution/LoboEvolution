@@ -28,9 +28,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
-import org.w3c.dom.ProcessingInstruction;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.ProcessingInstruction;
 
 /**
  * HTML DOM object representing processing instruction as per HTML 4.0
@@ -39,20 +39,20 @@ import org.w3c.dom.ProcessingInstruction;
  * @author vitek
  * @version $Id: $Id
  */
-public class HTMLProcessingInstruction extends NodeImpl implements ProcessingInstruction, Cloneable {
-	String data;
-	final String target;
+public class HTMLProcessingInstruction extends HTMLAbstractUIElement implements ProcessingInstruction, Cloneable {
+	
+	private String data;
+	private String target;
 
 	/**
-	 * <p>Constructor for HTMLProcessingInstruction.</p>
+	 * <p>Constructor for HTMLButtonElementImpl.</p>
 	 *
-	 * @param target a {@link java.lang.String} object.
-	 * @param data a {@link java.lang.String} object.
+	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLProcessingInstruction(String target, String data) {
-		this.target = target;
-		this.data = data;
+	public HTMLProcessingInstruction(String name) {
+		super(name);
 	}
+	
 
 	/** {@inheritDoc} */
 	@Override
@@ -90,13 +90,13 @@ public class HTMLProcessingInstruction extends NodeImpl implements ProcessingIns
 
 	/** {@inheritDoc} */
 	@Override
-	public short getNodeType() {
-		return Node.PROCESSING_INSTRUCTION_NODE;
+	public NodeType getNodeType() {
+		return NodeType.PROCESSING_INSTRUCTION_NODE;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String getNodeValue() throws DOMException {
+	public String getNodeValue() {
 		return this.data;
 	}
 
@@ -108,14 +108,54 @@ public class HTMLProcessingInstruction extends NodeImpl implements ProcessingIns
 
 	/** {@inheritDoc} */
 	@Override
-	public void setData(String data) throws DOMException {
+	public void setData(String data) {
 		this.data = data;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) throws DOMException {
+	public void setNodeValue(String nodeValue) {
 		this.data = nodeValue;
+	}
+	
+	public void setTarget(String target) {
+		this.target = target;
+	}
+
+	@Override
+	public int getLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void appendData(String data) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteData(int offset, int count) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void insertData(int offset, String data) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void replaceData(int offset, int count, String data) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String substringData(int offset, int count) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/** {@inheritDoc} */

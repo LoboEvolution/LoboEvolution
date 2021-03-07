@@ -30,7 +30,8 @@ import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.renderstate.BodyRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
 
 /**
  * <p>HTMLBodyElementImpl class.</p>
@@ -150,7 +151,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		final Object document = this.document;
 		if (document instanceof HTMLDocumentImpl) {
 			// Note that body.onload overrides
-			// Window.onload.
+			// WindowImpl.onload.
 			((HTMLDocumentImpl) document).setOnloadHandler(onload);
 		}
 	}
@@ -165,7 +166,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	}
 
 	@Override
-	void setOwnerDocument(Document value, boolean deep) {
+	public void setOwnerDocument(Document value, boolean deep) {
 		super.setOwnerDocument(value, deep);
 		if (value instanceof HTMLDocument) {
 			((HTMLDocument) value).setBody(this);
@@ -183,11 +184,196 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	public void setVLink(String vLink) {
 		setAttribute("vlink", vLink);
 	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnafterprint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnafterprint(Function onafterprint) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnbeforeprint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnbeforeprint(Function onbeforeprint) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnlanguagechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnlanguagechange(Function onlanguagechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnoffline() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnoffline(Function onoffline) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnonline() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnonline(Function ononline) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnunload() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnunload(Function onunload) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getBgProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setBgProperties(String bgProperties) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isNoWrap() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setNoWrap(boolean noWrap) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "[object HTMLBodyElement]";
 	}
-
 }

@@ -34,14 +34,12 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.SVGAnimatedEnumeration;
 import org.loboevolution.html.dom.svg.SVGAnimatedString;
 import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
 import org.loboevolution.html.dom.svg.SVGGradientElement;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.Element;
 
 /**
  * <p>SVGGradientElementImpl class.</p>
@@ -135,13 +133,13 @@ public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientEle
 
 	private float[] fractions(Element elem) {
 		ArrayList<Float> fractions = new ArrayList<>();
-		NodeList childNodes = elem.getChildNodes();
-		for (Node n : Nodes.iterable(childNodes)) {
-			if (n instanceof SVGStopElementImpl) {
-				SVGStopElementImpl stop = (SVGStopElementImpl) n;
+		NodeListImpl children = (NodeListImpl)elem.getChildNodes();
+		children.forEach(child -> {
+			if (child instanceof SVGStopElementImpl) {
+				SVGStopElementImpl stop = (SVGStopElementImpl)child;
 				fractions.add(stop.getOffset().getBaseVal());
 			}
-		}
+		});
 		float[] floatArray = new float[fractions.size()];
 		int i = 0;
 
@@ -154,13 +152,13 @@ public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientEle
 
 	private Color[] colors(Element elem) {
 		ArrayList<Color> colors = new ArrayList<>();
-		NodeList childNodes = elem.getChildNodes();
-		for (Node n : Nodes.iterable(childNodes)) {
-			if (n instanceof SVGStopElementImpl) {
-				SVGStopElementImpl stop = (SVGStopElementImpl) n;
+		NodeListImpl children = (NodeListImpl)elem.getChildNodes();
+		children.forEach(child -> {
+			if (child instanceof SVGStopElementImpl) {
+				SVGStopElementImpl stop = (SVGStopElementImpl) child;
 				colors.add(stop.getStopColor());
 			}
-		}
+		});
 		Color[] colorArray = new Color[colors.size()];
 		int i = 0;
 		for (Color c : colors) {

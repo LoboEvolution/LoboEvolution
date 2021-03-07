@@ -31,15 +31,15 @@ import javax.xml.transform.TransformerException;
 import org.apache.xml.utils.PrefixResolver;
 import org.apache.xpath.XPath;
 import org.apache.xpath.domapi.XPathStylesheetDOM3Exception;
-import org.apache.xpath.res.XPATHErrorResources;
-import org.apache.xpath.res.XPATHMessages;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.xpath.XPathEvaluator;
-import org.w3c.dom.xpath.XPathException;
-import org.w3c.dom.xpath.XPathExpression;
-import org.w3c.dom.xpath.XPathNSResolver;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
+import org.loboevolution.html.node.Code;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.xpath.XPathEvaluator;
+import org.loboevolution.html.xpath.XPathException;
+import org.loboevolution.html.xpath.XPathExpression;
+import org.loboevolution.html.xpath.XPathNSResolver;
 
 /**
  *
@@ -64,7 +64,7 @@ import org.w3c.dom.xpath.XPathNSResolver;
  * which are not defined in this specification.
  * </p>
  *
- * @see org.w3c.dom.xpath.XPathEvaluator
+ * @see org.loboevolution.html.xpath.XPathEvaluator
  *
  * @author utente
  * @version $Id: $Id
@@ -95,19 +95,6 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 		 * @exception DOMException
 		 *                NAMESPACE_ERR: Always throws this exceptionn
 		 *
-		 * @see org.apache.xml.utils.PrefixResolver#getNamespaceForPrefix(String,
-		 *      Node)
-		 */
-		@Override
-		public String getNamespaceForPrefix(String prefix, Node context) {
-			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NULL_RESOLVER, null);
-			throw new DOMException(DOMException.NAMESPACE_ERR, fmsg);
-		}
-
-		/**
-		 * @exception DOMException
-		 *                NAMESPACE_ERR: Always throws this exceptionn
-		 *
 		 * @see org.apache.xml.utils.PrefixResolver#getNamespaceForPrefix(String)
 		 */
 		@Override
@@ -128,6 +115,12 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 		 */
 		@Override
 		public String getBaseIdentifier() {
+			return null;
+		}
+
+		@Override
+		public String getNamespaceForPrefix(String prefix, org.w3c.dom.Node context) {
+			// TODO Auto-generated method stub
 			return null;
 		}
 
@@ -168,7 +161,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 	 *                NAMESPACE_ERR: Raised if the expression contains namespace
 	 *                prefixes which cannot be resolved by the specified
 	 *                XPathNSResolver.
-	 * @see org.w3c.dom.xpath.XPathEvaluator#createExpression(String,
+	 * @see org.loboevolution.html.xpath.XPathEvaluator#createExpression(String,
 	 *      XPathNSResolver)
 	 */
 	@Override
@@ -187,7 +180,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 			// Need to pass back exception code DOMException.NAMESPACE_ERR also.
 			// Error found in DOM Level 3 XPath Test Suite.
 			if (e instanceof XPathStylesheetDOM3Exception) {
-				throw new DOMException(DOMException.NAMESPACE_ERR, e.getMessageAndLocation());
+				throw new DOMException(Code.NAMESPACE_ERR, e.getMessageAndLocation());
 			} else {
 				throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, e.getMessageAndLocation());
 			}
@@ -205,13 +198,14 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 	 * from a given prefix using the current information available in the node's
 	 * hierarchy at the time lookupNamespaceURI is called, also correctly
 	 * resolving the implicit xml prefix.
-	 * @see org.w3c.dom.xpath.XPathEvaluator#createNSResolver(Node)
+	 * @see org.loboevolution.html.xpath.XPathEvaluator#createNSResolver(Node)
 	 */
 	@Override
 	public XPathNSResolver createNSResolver(Node nodeResolver) {
-
-		return new XPathNSResolverImpl(nodeResolver.getNodeType() == Node.DOCUMENT_NODE
-				? ((Document) nodeResolver).getDocumentElement() : nodeResolver);
+		// TODO Broken with new interfaces
+		/*return new XPathNSResolverImpl(nodeResolver.getNodeType() == NodeType.DOCUMENT_NODE
+				? ((Document) nodeResolver).getDocumentElement() : nodeResolver);*/
+		return null;
 	}
 
 	/**
@@ -233,7 +227,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 	 *                not supported by this XPathEvaluator. <br>
 	 *                NOT_SUPPORTED_ERR: The Node is not a type permitted as an
 	 *                XPath context node.
-	 * @see org.w3c.dom.xpath.XPathEvaluator#evaluate(String, Node, XPathNSResolver, short, Object)
+	 * @see org.loboevolution.html.xpath.XPathEvaluator#evaluate(String, Node, XPathNSResolver, short, Object)
 	 */
 	@Override
 	public Object evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result)

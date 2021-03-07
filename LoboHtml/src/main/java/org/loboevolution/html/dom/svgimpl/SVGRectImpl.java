@@ -24,7 +24,7 @@
 package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGRect;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGRectImpl class.</p>
@@ -65,7 +65,7 @@ public class SVGRectImpl implements SVGRect {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) throws DOMException {
+	public void setX(float x) {
 		this.x = x;
 	}
 
@@ -77,7 +77,7 @@ public class SVGRectImpl implements SVGRect {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setY(float y) throws DOMException {
+	public void setY(float y) {
 		this.y = y;
 	}
 
@@ -89,7 +89,7 @@ public class SVGRectImpl implements SVGRect {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(float width) throws DOMException {
+	public void setWidth(float width) {
 		this.width = width;
 	}
 
@@ -101,7 +101,7 @@ public class SVGRectImpl implements SVGRect {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHeight(float height) throws DOMException {
+	public void setHeight(float height) {
 		this.height = height;
 	}
 

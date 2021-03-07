@@ -28,9 +28,9 @@ package org.loboevolution.html.dom.domimpl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.DOMConfiguration;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.DOMStringList;
+import org.loboevolution.html.node.DOMConfiguration;
+
+import org.loboevolution.html.node.DOMStringList;
 
 /**
  * <p>DOMConfigurationImpl class.</p>
@@ -57,7 +57,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 
 	/** {@inheritDoc} */
 	@Override
-	public Object getParameter(String name) throws DOMException {
+	public Object getParameter(String name) {
 		synchronized (this) {
 			return this.parameters.get(name);
 		}
@@ -72,8 +72,8 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 	}
 
 	/** {@inheritDoc} */
-	@Override
-	public void setParameter(String name, Object value) throws DOMException {
+	@Override 
+	public void setParameter(String name, Object value) {
 		synchronized (this) {
 			this.parameters.put(name, value);
 		}

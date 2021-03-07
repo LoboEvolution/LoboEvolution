@@ -55,8 +55,8 @@ public class InputCheckbox {
 		checkBox.setVisible(!modelNode.getHidden());
 		checkBox.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		checkBox.setSelected(modelNode.getAttributeAsBoolean("checked"));
-		checkBox.setEnabled(!modelNode.getDisabled());
-		checkBox.setSelected(modelNode.getChecked());
+		checkBox.setEnabled(!modelNode.isDisabled());
+		checkBox.setSelected(modelNode.isChecked());
 		checkBox.addActionListener(event -> HtmlController.getInstance().onPressed(modelNode, null, 0, 0));
 		
 		MouseInputAdapter mouseHandler = new MouseInputAdapter() {

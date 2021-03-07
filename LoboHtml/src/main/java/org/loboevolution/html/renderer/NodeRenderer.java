@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 
 /**
  * <p>NodeRenderer interface.</p>
@@ -37,7 +37,7 @@ public interface NodeRenderer {
 	/**
 	 * <p>setRootNode.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	void setRootNode(NodeImpl node);
 }

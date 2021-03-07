@@ -30,7 +30,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Rectangle2D;
 
-import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.SVGAElement;
 import org.loboevolution.html.dom.svg.SVGAnimatedString;
 import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
@@ -40,8 +40,6 @@ import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.dom.svg.SVGTransformable;
 import org.loboevolution.html.dom.svg.SVGUseElement;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * <p>SVGAElementImpl class.</p>
@@ -86,8 +84,8 @@ public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 	public Shape createShape(AffineTransform transform) {
 		GeneralPath path = new GeneralPath();
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
+			NodeListImpl children = (NodeListImpl)getChildNodes();
+			children.forEach(child -> {
 				Shape childShape = null;
 				if (child instanceof SVGGElementImpl) {
 					childShape = ((SVGGElementImpl) child).createShape(transform);
@@ -122,7 +120,7 @@ public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 				if (childShape != null) {
 					path.append(childShape, false);
 				}
-			}
+			});
 		}
 		return path;
 	}

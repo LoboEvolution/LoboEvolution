@@ -25,21 +25,21 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.common.Nodes;
-import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLTableCaptionElement;
-import org.loboevolution.html.dom.HTMLTableElement;
-import org.loboevolution.html.dom.HTMLTableSectionElement;
+import java.util.Iterator;
+
+import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableRenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+
+import org.loboevolution.html.node.Code;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>HTMLTableElementImpl class.</p>
@@ -73,9 +73,9 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLElement createCaption() {
+	public HTMLTableCaptionElement createCaption() {
 		final Document doc = this.document;
-		return doc == null ? null : (HTMLElement) doc.createElement("caption");
+		return doc == null ? null : (HTMLTableCaptionElement) doc.createElement("caption");
 	}
 
 	/** {@inheritDoc} */
@@ -86,23 +86,23 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLElement createTFoot() {
+	public HTMLTableSectionElement createTFoot() {
 		final Document doc = this.document;
-		return doc == null ? null : (HTMLElement) doc.createElement("tfoot");
+		return doc == null ? null : (HTMLTableSectionElement) doc.createElement("tfoot");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLElement createTHead() {
+	public HTMLTableSectionElement createTHead() {
 		final Document doc = this.document;
-		return doc == null ? null : (HTMLElement) doc.createElement("thead");
+		return doc == null ? null : (HTMLTableSectionElement) doc.createElement("thead");
 	}
 	
 	/** {@inheritDoc} */
 	@Override
-	public HTMLElement createTBody() {
+	public HTMLTableSectionElement createTBody() {
 		Document doc = this.document;
-		return doc == null ? null : (HTMLElement) doc.createElement("tbody");
+		return doc == null ? null : (HTMLTableSectionElement) doc.createElement("tbody");
 	}
 
 	/** {@inheritDoc} */
@@ -113,9 +113,10 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	/** {@inheritDoc} */
 	@Override
-	public void deleteRow(int index) throws DOMException {
+	public void deleteRow(int index) {
 		int trcount = 0;
-		for (Node node : Nodes.iterable(nodeList)) {
+		for (Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
+			Node node = i.next();
 			if ("TR".equalsIgnoreCase(node.getNodeName())) {
 				if (trcount == index) {
 					removeChildAt(nodeList.indexOf(node));
@@ -285,18 +286,19 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 * the row is appended as the last row.
 	 */
 	@Override
-	public HTMLElement insertRow(int index) throws DOMException {
+	public HTMLTableRowElement insertRow(int index) {
 		final Document doc = this.document;
 		if (doc == null) {
-			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
+			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
-		final HTMLElement rowElement = (HTMLElement) doc.createElement("TR");
+		final HTMLTableRowElement rowElement = (HTMLTableRowElement) doc.createElement("TR");
 		if (index == -1) {
 			appendChild(rowElement);
 			return rowElement;
 		}
 		int trcount = 0;
-		for (Node node : Nodes.iterable(nodeList)) {
+		for (Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
+			Node node = i.next();
 			if ("TR".equalsIgnoreCase(node.getNodeName())) {
 				if (trcount == index) {
 					insertAt(rowElement, nodeList.indexOf(node));
@@ -307,6 +309,12 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 		}
 		appendChild(rowElement);
 		return rowElement;
+	}
+	
+	@Override
+	public HTMLTableRowElement insertRow() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/** {@inheritDoc} */
@@ -329,7 +337,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCaption(HTMLTableCaptionElement caption) throws DOMException {
+	public void setCaption(HTMLTableCaptionElement caption) {
 		this.caption = caption;
 	}
 
@@ -365,13 +373,13 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTFoot(HTMLTableSectionElement tFoot) throws DOMException {
+	public void setTFoot(HTMLTableSectionElement tFoot) {
 		this.tfoot = tFoot;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTHead(HTMLTableSectionElement tHead) throws DOMException {
+	public void setTHead(HTMLTableSectionElement tHead) {
 		this.thead = tHead;
 	}
 
@@ -379,6 +387,96 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	@Override
 	public void setWidth(String width) {
 		setAttribute("width", width);
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override

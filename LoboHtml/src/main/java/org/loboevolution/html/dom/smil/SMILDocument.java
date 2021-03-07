@@ -23,7 +23,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.Document;
 
 /**
  * A SMIL document is the root of the SMIL Hierarchy and holds the entire

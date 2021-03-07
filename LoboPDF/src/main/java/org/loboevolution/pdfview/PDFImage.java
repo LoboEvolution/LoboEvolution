@@ -62,7 +62,7 @@ import org.loboevolution.pdfview.colorspace.PDFColorSpace;
 import org.loboevolution.pdfview.colorspace.YCCKColorSpace;
 import org.loboevolution.pdfview.decode.PDFDecoder;
 import org.loboevolution.pdfview.function.FunctionType0;
-import org.w3c.dom.Attr;
+import org.loboevolution.html.node.Attr;
 import org.w3c.dom.Node;
 
 /**

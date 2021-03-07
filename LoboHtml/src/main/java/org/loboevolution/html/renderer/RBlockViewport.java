@@ -50,9 +50,9 @@ import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.DocumentFragmentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
-import org.loboevolution.html.dom.domimpl.ModelNode;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -60,7 +60,8 @@ import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.FloatingInfo;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * A substantial portion of the HTML rendering logic of the package can be found
@@ -146,7 +147,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *                     text selections are contained.
 	 * @param parent       This is usually going to be the parent of
 	 *                     container.
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
 	 */
 	public RBlockViewport(ModelNode modelNode, RenderableContainer container, int listNesting,
@@ -411,7 +412,7 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * <p>addLineBreak.</p>
 	 *
-	 * @param startNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param startNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param breakType a int.
 	 */
 	protected void addLineBreak(ModelNode startNode, int breakType) {
@@ -1173,12 +1174,12 @@ public class RBlockViewport extends BaseRCollection {
 		final NodeImpl[] childrenArray = node.getChildrenArray();
 		if (childrenArray != null) {
 			for (NodeImpl child : childrenArray) {
-				final short nodeType = child.getNodeType();
+				final NodeType nodeType = child.getNodeType();
 				switch (nodeType) {
-				case Node.TEXT_NODE:
+				case TEXT_NODE:
 					layoutText(child);
 					break;
-				case Node.ELEMENT_NODE:
+				case ELEMENT_NODE:
 					this.currentLine.addStyleChanger(new RStyleChanger(child));
 					final String nodeName = child.getNodeName().toUpperCase();
 					MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
@@ -1188,14 +1189,14 @@ public class RBlockViewport extends BaseRCollection {
 					ml.layoutMarkup(this, (HTMLElementImpl) child);
 					this.currentLine.addStyleChanger(new RStyleChanger(node));
 					break;
-				case Node.DOCUMENT_FRAGMENT_NODE:
+				case DOCUMENT_FRAGMENT_NODE:
 					final DocumentFragmentImpl fragment = (DocumentFragmentImpl) child;
 					for (final NodeImpl fragChild : fragment.getChildrenArray()) {
 						layoutChildren(fragChild);
 					}
 					break;
-				case Node.COMMENT_NODE:
-				case Node.PROCESSING_INSTRUCTION_NODE:
+				case COMMENT_NODE:
+				case PROCESSING_INSTRUCTION_NODE:
 				default:
 					break;
 				}
@@ -1269,7 +1270,7 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * <p>layoutMarkup.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	protected void layoutMarkup(NodeImpl node) {
 		// This is the "inline" layout of an element.

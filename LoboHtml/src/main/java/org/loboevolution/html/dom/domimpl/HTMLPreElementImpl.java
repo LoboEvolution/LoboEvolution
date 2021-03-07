@@ -26,6 +26,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLPreElement;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.renderstate.PreRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
@@ -54,15 +55,105 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPre
 
 	/** {@inheritDoc} */
 	@Override
-	public int getWidth() {
+	public double getWidth() {
 		final String widthText = getAttribute("width");
 		return HtmlValues.getPixelSize(widthText, null, 0);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(int width) {
+	public void setWidth(double width) {
 		setAttribute("width", String.valueOf(width));
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/** {@inheritDoc} */

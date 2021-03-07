@@ -23,7 +23,7 @@
 package org.loboevolution.html.dom.filter;
 
 import org.loboevolution.html.dom.NodeFilter;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * The Class HeadFilter.
@@ -35,7 +35,7 @@ public class HeadFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public final boolean accept(Node node) {
+	public final boolean acceptNode(Node node) {
 		return node != null && "HEAD".equalsIgnoreCase(node.getNodeName());
 	}
 }

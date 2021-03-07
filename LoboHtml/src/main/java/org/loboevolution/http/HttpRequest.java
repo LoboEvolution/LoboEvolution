@@ -48,7 +48,7 @@ import org.loboevolution.common.IORoutines;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.ReadyStateChangeListener;
 import org.loboevolution.net.HttpNetwork;
-import org.w3c.dom.Document;
+import org.loboevolution.html.node.Document;
 
 /**
  * <p>HttpRequest class.</p>
@@ -281,7 +281,9 @@ public class HttpRequest {
 		}
 		final InputStream in = new ByteArrayInputStream(bytes);
 		try {
-			return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);
+			return null;
+	        // TODO Broken with new interfaces
+			//return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);
 		} catch (final Exception err) {
 			logger.log(Level.WARNING, "Unable to parse response as XML.", err);
 			return null;

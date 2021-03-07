@@ -26,15 +26,13 @@ package org.loboevolution.http;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.info.MetaInfo;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.Document;
 
 /**
  * <p>HtmlContent class.</p>
@@ -63,13 +61,13 @@ public class HtmlContent {
 	public List<MetaInfo> getJSList() {
 		final List<MetaInfo> infoList = new ArrayList<>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		final NodeList nodeList = doc.getElementsByTagName("script");
+		final HTMLCollectionImpl nodeList = (HTMLCollectionImpl) doc.getElementsByTagName("script");
 
 		if (nodeList == null) {
 			return null;
 		}
 
-		for (final Node node : Nodes.iterable(nodeList)) {
+		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
 				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
@@ -86,7 +84,7 @@ public class HtmlContent {
 					infoList.add(info);
 				}
 			}
-		}
+		});
 		return infoList;
 	}
 
@@ -98,13 +96,13 @@ public class HtmlContent {
 	public List<MetaInfo> getMediaList() {
 		final List<MetaInfo> infoList = new ArrayList<>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		NodeList nodeList = doc.getElementsByTagName("img");
+		HTMLCollectionImpl nodeList = (HTMLCollectionImpl) doc.getElementsByTagName("img");
 
 		if (nodeList == null) {
 			return null;
 		}
-
-		for (final Node node : Nodes.iterable(nodeList)) {
+		
+		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
 				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
@@ -121,10 +119,10 @@ public class HtmlContent {
 					infoList.add(info);
 				}
 			}
-		}
+		});
 
-		nodeList = doc.getElementsByTagName("link");
-		for (final Node node : Nodes.iterable(nodeList)) {
+		nodeList = (HTMLCollectionImpl) doc.getElementsByTagName("link");
+		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
 				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
@@ -142,7 +140,7 @@ public class HtmlContent {
 					infoList.add(info);
 				}
 			}
-		}
+		});
 		return infoList;
 	}
 
@@ -154,13 +152,13 @@ public class HtmlContent {
 	public List<MetaInfo> getMetaList() {
 		final List<MetaInfo> infoList = new ArrayList<>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		final NodeList nodeList = doc.getElementsByTagName("meta");
+		final HTMLCollectionImpl nodeList = (HTMLCollectionImpl) doc.getElementsByTagName("meta");
 
 		if (nodeList == null) {
 			return null;
 		}
 
-		for (final Node node : Nodes.iterable(nodeList)) {
+		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
 				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
@@ -173,7 +171,7 @@ public class HtmlContent {
 				info.setCharset(element.getAttribute("charset"));
 				infoList.add(info);
 			}
-		}
+		});
 		return infoList;
 	}
 
@@ -185,13 +183,13 @@ public class HtmlContent {
 	public List<MetaInfo> getStyleList() {
 		final List<MetaInfo> infoList = new ArrayList<>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		final NodeList nodeList = doc.getElementsByTagName("link");
+		final HTMLCollectionImpl nodeList = (HTMLCollectionImpl) doc.getElementsByTagName("link");
 
 		if (nodeList == null) {
 			return null;
 		}
 
-		for (final Node node : Nodes.iterable(nodeList)) {
+		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
 				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
@@ -209,7 +207,7 @@ public class HtmlContent {
 					infoList.add(info);
 				}
 			}
-		}
+		});
 		return infoList;
 	}
 

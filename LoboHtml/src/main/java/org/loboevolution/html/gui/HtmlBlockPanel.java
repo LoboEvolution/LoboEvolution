@@ -66,9 +66,9 @@ import javax.swing.SwingUtilities;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.ModelNode;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderer.BoundableRenderable;
 import org.loboevolution.html.renderer.DelayedPair;
 import org.loboevolution.html.renderer.FrameContext;
@@ -84,7 +84,7 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.laf.ColorFactory;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * A Swing component that renders a HTML block, given by a DOM root or an
@@ -432,7 +432,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * <p>getRootNode.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @return a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public NodeImpl getRootNode() {
 		final RBlock block = this.rblock;
@@ -453,7 +453,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *
 	 * @return a {@link org.w3c.dom.Node} object.
 	 */
-	public org.w3c.dom.Node getSelectionNode() {
+	public Node getSelectionNode() {
 		final RenderableSpot start = this.startSelection;
 		final RenderableSpot end = this.endSelection;
 		if (start != null && end != null) {
@@ -797,7 +797,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * Implementation of UINode.repaint().
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void repaint(ModelNode modelNode) {
 		// this.rblock.invalidateRenderStyle();

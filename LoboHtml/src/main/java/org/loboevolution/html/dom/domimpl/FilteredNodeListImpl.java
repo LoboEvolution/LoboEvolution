@@ -29,8 +29,8 @@ import java.util.Collection;
 
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
 
 class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeList {
 	private final NodeFilter filter;
@@ -56,7 +56,7 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 		synchronized (this.lock) {
 			int count = 0;
 			for (Node node : sourceNodeList) {
-				if (this.filter.accept(node)) {
+				if (this.filter.acceptNode(node)) {
 					count++;
 				}
 			}
@@ -70,7 +70,7 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 		synchronized (this.lock) {
 			int count = 0;
 			for (Node node : sourceNodeList) {
-				if (this.filter.accept(node)) {
+				if (this.filter.acceptNode(node)) {
 					if (count == index) {
 						return node;
 					}
@@ -79,5 +79,10 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 			}
 			return null;
 		}
+	}
+
+	@Override
+	public Node[] toArray() {
+		return (Node[]) sourceNodeList.toArray();
 	}
 }

@@ -36,8 +36,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.filter.IdFilter;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.Drawable;
 import org.loboevolution.html.dom.svg.SVGAngle;
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
@@ -57,14 +57,11 @@ import org.loboevolution.html.dom.svg.SVGTransformable;
 import org.loboevolution.html.dom.svg.SVGUseElement;
 import org.loboevolution.html.dom.svg.SVGViewSpec;
 import org.loboevolution.html.js.events.EventFactory;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.css.CSSStyleDeclaration;
-import org.w3c.dom.events.Event;
-import org.w3c.dom.stylesheets.StyleSheetList;
-import org.w3c.dom.views.DocumentView;
+
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.events.Event;
 
 /**
  * <p>SVGSVGElementImpl class.</p>
@@ -150,43 +147,15 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 	/** {@inheritDoc} */
 	@Override
-	public void setZoomAndPan(short zoomAndPan) throws DOMException {
+	public void setZoomAndPan(short zoomAndPan) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Event createEvent(String eventType) throws DOMException {
+	public Event createEvent(String eventType) {
 		return EventFactory.createEvent(eventType);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public CSSStyleDeclaration getComputedStyle(Element elt, String pseudoElt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public DocumentView getDocument() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public CSSStyleDeclaration getOverrideStyle(Element elt, String pseudoElt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public StyleSheetList getStyleSheets() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/** {@inheritDoc} */
@@ -255,7 +224,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 	/** {@inheritDoc} */
 	@Override
-	public void setUseCurrentView(boolean useCurrentView) throws DOMException {
+	public void setUseCurrentView(boolean useCurrentView) {
 		this.useCurrentView = useCurrentView;
 	}
 
@@ -273,7 +242,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCurrentScale(float currentScale) throws DOMException {
+	public void setCurrentScale(float currentScale) {
 		this.currentScale = currentScale;
 	}
 
@@ -289,7 +258,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	 * @param currentTranslate a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setCurrentTranslate(SVGPoint currentTranslate) throws DOMException {
+	public void setCurrentTranslate(SVGPoint currentTranslate) {
 		this.currentTranslate = currentTranslate;
 	}
 
@@ -302,7 +271,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 	/** {@inheritDoc} */
 	@Override
-	public void unsuspendRedraw(int suspend_handle_id) throws DOMException {
+	public void unsuspendRedraw(int suspend_handle_id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -520,8 +489,8 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	public Shape createShape(AffineTransform transform) {
 		GeneralPath path = new GeneralPath();
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
+			NodeListImpl children = (NodeListImpl)getChildNodes();
+			children.forEach(child -> {
 				Shape childShape = null;
 				if (child instanceof SVGGElementImpl) {
 					childShape = ((SVGGElementImpl) child).createShape(transform);
@@ -563,7 +532,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 				if (childShape != null) {
 					path.append(childShape, false);
 				}
-			}
+			});
 		}
 		return path;
 	}
@@ -571,12 +540,12 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	private void drawChildren(Graphics2D graphics) {
 		List<Node> drawableChildren = new ArrayList<>();
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
+			NodeListImpl children = (NodeListImpl)getChildNodes();
+			children.forEach(child -> {
 				if (child instanceof Drawable) {
 					drawableChildren.add(child);
 				}
-			}
+			});
 		}
 		for (Node node : drawableChildren) {
 			SVGElement selem = (SVGElement)node;

@@ -31,8 +31,13 @@ import org.loboevolution.html.control.TextAreaControl;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLTextAreaElement;
 import org.loboevolution.html.dom.input.TextArea;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.ValidityState;
+import org.loboevolution.jsenum.Direction;
 
 /**
  * <p>HTMLTextAreaElementImpl class.</p>
@@ -108,7 +113,7 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		final String disabled = getAttribute("disabled");
 		return disabled != null;
 	}
@@ -131,7 +136,7 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getReadOnly() {
+	public boolean isReadOnly() {
 		final String readonly = getAttribute("readonly");
 		return "true".equals(readonly) || "readonly".equals(readonly);
 	}
@@ -149,13 +154,6 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 			}
 		}
 		return 2;
-	}
-	
-	/** {@inheritDoc} */
-	@Override
-	public int getTabIndex() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	/** {@inheritDoc} */
@@ -185,7 +183,7 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCols(Object cols) {
+	public void setCols(int cols) {
 		setAttribute("cols", String.valueOf(cols));
 		
 	}
@@ -220,15 +218,8 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRows(Object rows) {
+	public void setRows(int rows) {
 		setAttribute("rows", String.valueOf(rows));
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setTabIndex(int tabIndex) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -347,9 +338,9 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	private String getText() {
 		StringBuilder text = new StringBuilder();
 		if (hasChildNodes()) {
-			NodeList children = getChildNodes();
-			for (Node child : Nodes.iterable(children)) {
-				if (child.getNodeType() == Node.TEXT_NODE) {
+			NodeListImpl children = (NodeListImpl)getChildNodes();
+			children.forEach(child -> {
+				if (child.getNodeType() == NodeType.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
 					String childText = "";
 					nodeValue = nodeValue.replace('\n', ' ');
@@ -358,7 +349,7 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 					childText = nodeValue;
 					text.append(childText).append(" ");
 				}
-			}
+			});
 		}
 
 		if (text.length() > 0) {
@@ -380,6 +371,228 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	public void setFocusable(boolean focusable) {
 		this.focusable = focusable;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAutocomplete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAutocomplete(String autocomplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAutofocus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutofocus(boolean autofocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getDirName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDirName(String dirName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPlaceholder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPlaceholder(String placeholder) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isRequired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setRequired(boolean required) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSelectionDirection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSelectionDirection(String selectionDirection) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getWrap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setWrap(String wrap) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean reportValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setRangeText(String replacement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setRangeText(String replacement, int start, int end) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSelectionRange(int start, int end, Direction direction) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/** {@inheritDoc} */

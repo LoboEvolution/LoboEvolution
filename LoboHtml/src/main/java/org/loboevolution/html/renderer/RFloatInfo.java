@@ -24,7 +24,7 @@ package org.loboevolution.html.renderer;
 
 import java.awt.Graphics;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 final class RFloatInfo implements Renderable {
 	private final BoundableRenderable element;
@@ -34,7 +34,7 @@ final class RFloatInfo implements Renderable {
 	/**
 	 * <p>Constructor for RFloatInfo.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param element a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
 	 * @param leftFloat a boolean.
 	 */

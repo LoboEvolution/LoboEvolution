@@ -25,17 +25,19 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.common.Nodes;
-import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLTableCellElement;
-import org.loboevolution.html.dom.HTMLTableRowElement;
-import org.loboevolution.html.dom.NodeFilter;
+import java.util.Iterator;
+
+import org.loboevolution.html.dom.*;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeVisitor;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableRowRenderState;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+
+import org.loboevolution.html.node.Code;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>HTMLTableRowElementImpl class.</p>
@@ -69,9 +71,10 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 
 	/** {@inheritDoc} */
 	@Override
-	public void deleteCell(int index) throws DOMException {
+	public void deleteCell(int index) {
 		int trcount = 0;
-		for (Node node : Nodes.iterable(nodeList)) {
+		for (Iterator<Node> i= nodeList.iterator(); i.hasNext(); ) {
+			Node node = i.next();
 			if (node instanceof HTMLTableCellElement) {
 				if (trcount == index) {
 					removeChildAt(index);
@@ -151,19 +154,25 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	public String getVAlign() {
 		return getAttribute("valign");
 	}
+	
+	@Override
+	public HTMLTableDataCellElement insertCell() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLElement insertCell(int index) throws DOMException {
+	public HTMLTableDataCellElement insertCell(int index) {
 		return this.insertCell(index, "TD");
 	}
 
-	private HTMLElement insertCell(int index, String tagName) throws DOMException {
+	private HTMLTableDataCellElement insertCell(int index, String tagName) {
 		final Document doc = this.document;
 		if (doc == null) {
-			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
+			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
-		final HTMLElement cellElement = (HTMLElement) doc.createElement(tagName);
+		final HTMLTableDataCellElement cellElement = (HTMLTableDataCellElement) doc.createElement(tagName);
 		synchronized (this.treeLock) {
 			if (index == -1) {
 				appendChild(cellElement);
@@ -171,7 +180,8 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 			}
 
 			int trcount = 0;
-			for (Node node : Nodes.iterable(nodeList)) {
+			for (Iterator<Node> i= nodeList.iterator(); i.hasNext(); ) {
+				Node node = i.next();
 				if (node instanceof HTMLTableCellElement) {
 					if (trcount == index) {
 						insertAt(cellElement, nodeList.indexOf(node));
@@ -194,7 +204,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 * @return The element that was inserted.
 	 * @throws org.w3c.dom.DOMException When the index is out of range.
 	 */
-	public HTMLElement insertHeader(int index) throws DOMException {
+	public HTMLElement insertHeader(int index) {
 		return this.insertCell(index, "TH");
 	}
 
@@ -226,6 +236,96 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	@Override
 	public void setVAlign(String vAlign) {
 		setAttribute("valign", vAlign);
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAutocapitalize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSpellcheck() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTranslate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutocapitalize(String autocapitalize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTranslate(boolean translate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override

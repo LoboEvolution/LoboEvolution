@@ -31,6 +31,7 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 
 import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.SVGAnimateElement;
 import org.loboevolution.html.dom.svg.SVGAnimateTransformElement;
 import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
@@ -39,9 +40,9 @@ import org.loboevolution.html.dom.svg.SVGLangSpace;
 import org.loboevolution.html.dom.svg.SVGTests;
 import org.loboevolution.html.dom.svg.SVGTransform;
 import org.loboevolution.html.dom.svg.SVGTransformList;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
 
 /**
  * <p>SVGGraphic class.</p>
@@ -68,7 +69,7 @@ public class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SV
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXMLlang(String xmllang) throws DOMException {
+	public void setXMLlang(String xmllang) {
 		setAttribute("xml:lang", xmllang);
 
 	}
@@ -81,7 +82,7 @@ public class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SV
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXMLspace(String xmlspace) throws DOMException {
+	public void setXMLspace(String xmlspace) {
 		setAttribute("xml:space", xmlspace);
 	}
 
@@ -164,13 +165,13 @@ public class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SV
 	 * @param elem a {@link org.loboevolution.html.dom.svgimpl.SVGElementImpl} object.
 	 */
 	protected void animate(SVGElementImpl elem) {
-		NodeList childNodes = elem.getChildNodes();
-		for (Node child : Nodes.iterable(childNodes)) {
+		NodeListImpl children = (NodeListImpl)elem.getChildNodes();
+		children.forEach(child -> {
 			if (child instanceof SVGAnimateElement || child instanceof SVGAnimateTransformElement) {
 				SVGAnimateElementImpl svga = (SVGAnimateElementImpl) child;				
 				SVGAnimateImpl animate = new SVGAnimateImpl(elem, svga);
 				svga.setAnimate(animate);
 			}
-		}
+		});
 	}
 }

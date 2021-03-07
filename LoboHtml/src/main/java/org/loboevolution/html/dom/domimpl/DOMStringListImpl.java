@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.w3c.dom.DOMStringList;
+import org.loboevolution.html.node.DOMStringList;
 
 /**
  * <p>DOMStringListImpl class.</p>

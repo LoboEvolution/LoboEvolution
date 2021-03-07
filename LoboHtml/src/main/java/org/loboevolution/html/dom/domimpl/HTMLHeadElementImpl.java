@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.w3c.dom.html.HTMLHeadElement;
+import org.loboevolution.html.dom.HTMLHeadElement;
 
 /**
  * <p>HTMLHeadElementImpl class.</p>

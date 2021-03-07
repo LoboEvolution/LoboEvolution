@@ -26,10 +26,11 @@ package org.loboevolution.html.dom.svgimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGPointList;
-import org.w3c.dom.DOMException;
+
 
 /**
  * <p>SVGPointListImpl class.</p>
@@ -56,7 +57,7 @@ public class SVGPointListImpl implements SVGPointList {
 
 	/** {@inheritDoc} */
 	@Override
-	public void clear() throws DOMException {
+	public void clear() {
 		pointList.clear();
 	}
 
@@ -70,7 +71,7 @@ public class SVGPointListImpl implements SVGPointList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint getItem(int index) throws DOMException {
+	public SVGPoint getItem(int index) {
 		return pointList.get(index);
 	}
 
@@ -107,7 +108,7 @@ public class SVGPointListImpl implements SVGPointList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint removeItem(int index) throws DOMException {
+	public SVGPoint removeItem(int index) {
 		return pointList.remove(index);
 	}
 

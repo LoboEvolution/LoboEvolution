@@ -29,7 +29,7 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 
-import org.loboevolution.html.dom.domimpl.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 final class RBlank extends BaseBoundableRenderable {
@@ -40,7 +40,7 @@ final class RBlank extends BaseBoundableRenderable {
 	/**
 	 * <p>Constructor for RBlank.</p>
 	 *
-	 * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param fm a {@link java.awt.FontMetrics} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param ascentPlusLeading a int.

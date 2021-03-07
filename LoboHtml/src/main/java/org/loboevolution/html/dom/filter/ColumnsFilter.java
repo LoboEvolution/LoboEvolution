@@ -25,7 +25,7 @@ package org.loboevolution.html.dom.filter;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>ColumnsFilter class.</p>
@@ -37,7 +37,7 @@ public class ColumnsFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public final boolean accept(Node node) {
+	public final boolean acceptNode(Node node) {
         if (node instanceof HTMLElementImpl) {
             final HTMLElementImpl elem = (HTMLElementImpl) node;
             return elem.getRenderState().getDisplay() == RenderState.DISPLAY_TABLE_CELL;

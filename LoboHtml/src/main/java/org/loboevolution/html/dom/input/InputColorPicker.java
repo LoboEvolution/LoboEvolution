@@ -59,7 +59,7 @@ public class InputColorPicker {
 		}
 		widget.setVisible(!modelNode.getHidden());
 		widget.applyComponentOrientation(ic.direction(modelNode.getDir()));
-		widget.setEnabled(!modelNode.getDisabled());
+		widget.setEnabled(!modelNode.isDisabled());
 
 		widget.addActionListener(event -> {
 			Color c = JColorChooser.showDialog(null, "Choose a Color", null);

@@ -29,7 +29,7 @@ import java.awt.Insets;
 
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.ListStyle;
 import org.loboevolution.http.HtmlRendererContext;
@@ -48,7 +48,7 @@ class RListItem extends BaseRListElement {
 	/**
 	 * <p>Constructor for RListItem.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param listNesting a int.
 	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
