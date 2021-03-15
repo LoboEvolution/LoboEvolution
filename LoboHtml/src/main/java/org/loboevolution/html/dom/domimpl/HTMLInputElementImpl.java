@@ -333,6 +333,7 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 	/** {@inheritDoc} */
 	@Override
 	public void setValue(String value) {
+		if(text!= null) text.setText(value);
 		setAttribute("value", value);
 		setSelectionStart(Strings.isBlank(value) ? 0 : value.length());
         setSelectionEnd(Strings.isBlank(value) ? 0 : value.length());

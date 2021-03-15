@@ -257,7 +257,6 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	public final void submit(final FormInput[] extraFormInputs) {
 		final Function onsubmit = getOnsubmit();
 		if (onsubmit != null) {
-			// TODO: onsubmit event object?
 			if (!Executor.executeFunction(this, onsubmit, null, new Object[0])) {
 				return;
 			}

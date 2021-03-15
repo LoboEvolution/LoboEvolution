@@ -30,6 +30,8 @@ import java.awt.Insets;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,8 @@ import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -110,6 +114,19 @@ public class InputText {
 		iText.setEditable(!modelNode.isReadOnly());
 
 		iText.addFocusListener(new FocusAdapter() {
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (modelNode.getOnfocus() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnfocus(), null, new Object[] {});
+				}
+				
+				if (modelNode.getOnfocusin() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnfocusin(), null, new Object[] {});
+				}
+			};
+			
+			
 			@Override
 			public void focusLost(FocusEvent event) {
 				
@@ -129,8 +146,44 @@ public class InputText {
 					InputStore.deleteInput(text, baseUrl);
 					InputStore.insertLogin(type, text, baseUrl, isNavigation);
 				}
+				
+				if (modelNode.getOnblur() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnblur(), null, new Object[] {});
+				}
+				
+				if (modelNode.getOnfocusout() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnfocusout(), null, new Object[] {});
+				}
 			}
 		});
+		
+		KeyAdapter key = new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (modelNode.getOnkeyup() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnkeyup(), null, new Object[] {});
+				}
+			}
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (modelNode.getOnkeydown() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnkeydown(), null, new Object[] {});
+				}
+				
+				if (modelNode.getOnkeypress() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnkeypress(), null, new Object[] {});
+				}
+				
+				if (modelNode.getOninput() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOninput(), null, new Object[] {});
+				}
+			}
+		};
+		
+		
+		iText.addKeyListener(key);
+		
 
 		iText.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode));
 
@@ -142,8 +195,38 @@ public class InputText {
 					Executor.executeFunction(modelNode, modelNode.getOnmouseover(), null, new Object[] {});
 				}
 			}
+			
+			public void mousePressed(MouseEvent e) {
+				if (modelNode.getOnkeypress() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnkeypress(), null, new Object[] {});
+				}
+				
+				if (modelNode.getOnkeydown() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnkeydown(), null, new Object[] {});
+				}
+			};
+			
+			public void mouseReleased(MouseEvent e) {
+				if (modelNode.getOnkeyup() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnkeyup(), null, new Object[] {});
+				}
+			};
+			
 		};
 		iText.addMouseListener(mouseHandler);
+		
+		
+		iText.addCaretListener(new CaretListener() {
+			@Override
+			public void caretUpdate(CaretEvent e) {
+				final int dot = e.getDot();
+				final int mark = e.getMark();
+
+				if (dot != mark && modelNode.getOnselect() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnselect(), null, new Object[] {});
+				}
+			}
+		});
 
 		RUIControl ruiControl = ic.getRUIControl();
 		final Insets borderInsets = ruiControl.getBorderInsets();
@@ -160,6 +243,11 @@ public class InputText {
 				iText.select(modelNode.getSelectionStart(), modelNode.getSelectionEnd());
 				iText.requestFocus();
 			});
+			
+			if (modelNode.getOnselect() != null) {
+				Executor.executeFunction(modelNode, modelNode.getOnselect(), null, new Object[] {});
+			}
+			
 		}
 
 		ic.add(iText);
@@ -207,6 +295,13 @@ public class InputText {
 	 */
 	public void reset() {
 		iText.setText("");
+	}
+	
+	/**
+	 * <p>setText.</p>
+	 */
+	public void setText(String value) {
+		iText.setText(value);
 	}
 	
 	/**
