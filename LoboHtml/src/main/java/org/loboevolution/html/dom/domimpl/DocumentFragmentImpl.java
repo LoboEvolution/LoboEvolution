@@ -36,7 +36,7 @@ import org.loboevolution.html.node.NodeType;
  * @author utente
  * @version $Id: $Id
  */
-public class DocumentFragmentImpl extends DOMFunctionImpl implements DocumentFragment {
+public class DocumentFragmentImpl extends EventTargetImpl implements DocumentFragment {
 
 	/**
 	 * <p>

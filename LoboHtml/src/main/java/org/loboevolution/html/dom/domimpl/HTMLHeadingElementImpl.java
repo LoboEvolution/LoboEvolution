@@ -33,7 +33,7 @@ import org.loboevolution.html.style.AbstractCSSProperties;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTMLHeadingElement {
+public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadingElement {
 	/**
 	 * <p>Constructor for HTMLHeadingElementImpl.</p>
 	 *

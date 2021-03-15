@@ -29,7 +29,7 @@ package org.loboevolution.html.dom.domimpl;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLGenericMarkupElement extends HTMLAbstractUIElement {
+public class HTMLGenericMarkupElement extends HTMLElementImpl {
 	/**
 	 * <p>Constructor for HTMLGenericMarkupElement.</p>
 	 *

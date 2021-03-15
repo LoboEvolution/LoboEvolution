@@ -47,7 +47,7 @@ import org.loboevolution.html.node.Node;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFormElement {
+public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElement {
 
 	/**
 	 * <p>isInput.</p>
@@ -61,8 +61,6 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	}
 
 	private HTMLCollection elements;
-
-	private Function onsubmit;
 
 	/**
 	 * <p>Constructor for HTMLFormElementImpl.</p>
@@ -130,16 +128,8 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	public String getName() {
 		return getAttribute("name");
 	}
-
-	/**
-	 * <p>Getter for the field onsubmit.</p>
-	 *
-	 * @return a {@link org.mozilla.javascript.Function} object.
-	 */
-	public Function getOnsubmit() {
-		return getEventFunction(this.onsubmit, "onsubmit");
-	}
-
+	
+	
 	/** {@inheritDoc} */
 	@Override
 	public String getTarget() {
@@ -244,15 +234,6 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	@Override
 	public void setName(String name) {
 		setAttribute("name", name);
-	}
-
-	/**
-	 * <p>Setter for the field onsubmit.</p>
-	 *
-	 * @param value a {@link org.mozilla.javascript.Function} object.
-	 */
-	public void setOnsubmit(Function value) {
-		this.onsubmit = value;
 	}
 
 	/** {@inheritDoc} */

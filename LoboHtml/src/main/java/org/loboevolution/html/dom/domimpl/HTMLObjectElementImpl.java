@@ -36,7 +36,7 @@ import org.loboevolution.html.node.ValidityState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTMLObjectElement {
+public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObjectElement {
 	/**
 	 * <p>Constructor for HTMLObjectElementImpl.</p>
 	 *

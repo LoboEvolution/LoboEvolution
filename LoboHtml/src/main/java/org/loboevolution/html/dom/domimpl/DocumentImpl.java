@@ -82,7 +82,7 @@ import org.loboevolution.html.xpath.XPathEvaluator;
  * @author utente
  * @version $Id: $Id
  */
-public class DocumentImpl extends DOMFunctionImpl implements Document, XPathEvaluator {
+public class DocumentImpl extends GlobalEventHandlersImpl implements Document, XPathEvaluator {
 
 	private boolean strictErrorChecking = true;
 

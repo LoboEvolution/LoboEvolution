@@ -1,6 +1,6 @@
 package org.loboevolution.html.dom;
 
-import org.loboevolution.html.node.WindowEventHandlers;
+import org.loboevolution.html.node.js.WindowEventHandlers;
 
 /**
  * Provides special properties (beyond those of the regular HTMLElement interface they also inherit) for manipulating &lt;frameset&gt; elements.

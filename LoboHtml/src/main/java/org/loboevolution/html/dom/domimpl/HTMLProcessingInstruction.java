@@ -39,7 +39,7 @@ import org.loboevolution.html.node.ProcessingInstruction;
  * @author vitek
  * @version $Id: $Id
  */
-public class HTMLProcessingInstruction extends HTMLAbstractUIElement implements ProcessingInstruction, Cloneable {
+public class HTMLProcessingInstruction extends HTMLElementImpl implements ProcessingInstruction, Cloneable {
 	
 	private String data;
 	private String target;

@@ -50,17 +50,18 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.events.Event;
+import org.loboevolution.html.node.events.EventTarget;
 
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 
 /**
- * <p>DOMFunctionImpl class.</p>
+ * <p>EventTargetImpl class.</p>
  *
  * @author utente
  * @version $Id: $Id
  */
-public class DOMFunctionImpl extends NodeImpl {
+public class EventTargetImpl extends NodeImpl implements EventTarget {
 	
 	private final Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<>();
 	
@@ -141,6 +142,7 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param type a {@link java.lang.String} object.
 	 * @param listener a {@link org.mozilla.javascript.Function} object.
 	 */
+	@Override
 	public void addEventListener(final String type, final Function listener) {
 	    addEventListener(type, listener, false);
 	}
@@ -152,6 +154,7 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param listener a {@link org.mozilla.javascript.Function} object.
 	 * @param useCapture a boolean.
 	 */
+	@Override
 	public void addEventListener(String type, Function listener, boolean useCapture) {
 		if ("load".equals(type) || "DOMContentLoaded".equals(type)) {
 			onloadEvent(listener);
@@ -174,6 +177,7 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param script a {@link java.lang.String} object.
 	 * @param function a {@link org.mozilla.javascript.Function} object.
 	 */
+	@Override
 	public void removeEventListener(String script, Function function) {
 		removeEventListener(script, function, true);
 	}
@@ -185,6 +189,7 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param listener a {@link org.mozilla.javascript.Function} object.
 	 * @param useCapture a boolean.
 	 */
+	@Override
 	public void removeEventListener(String type, Function listener, boolean useCapture) {
 		Set<NodeImpl> keySet = onEventHandlers.keySet();
 		for (NodeImpl htmlElementImpl : keySet) {
@@ -202,6 +207,7 @@ public class DOMFunctionImpl extends NodeImpl {
 	 * @param evt a {@link org.loboevolution.html.node.events.Event} object.
 	 * @return a boolean.
 	 */
+	@Override
 	public boolean dispatchEvent(Node htmlElementImpl, Event evt) {
 		Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
 		if (map != null) {

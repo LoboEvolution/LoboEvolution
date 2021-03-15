@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Node;
  * @author utente
  * @version $Id: $Id
  */
-public class CharacterDataImpl extends DOMFunctionImpl implements CharacterData {
+public class CharacterDataImpl extends EventTargetImpl implements CharacterData {
 	
 	protected volatile String text;
 

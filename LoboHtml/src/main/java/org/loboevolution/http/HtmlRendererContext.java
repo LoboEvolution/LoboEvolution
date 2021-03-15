@@ -62,7 +62,6 @@ import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IToolBar;
 import org.loboevolution.html.HtmlObject;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
@@ -616,6 +615,7 @@ public class HtmlRendererContext {
 			element = elmImg;
 		}
 		HtmlContextMenu menu = new HtmlContextMenu(element, this);
+		
 		if (element instanceof HTMLImageElementImpl) {
 			JPopupMenu popupMenuImage = menu.popupMenuImage(htmlPanel.getBrowserPanel());
 			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
@@ -624,7 +624,7 @@ public class HtmlRendererContext {
 			JPopupMenu popupMenuLink = menu.popupMenuLink(htmlPanel.getBrowserPanel());
 			popupMenuLink.show(event.getComponent(), event.getX(), event.getY());
 			return false;
-		} else if (element instanceof HTMLAbstractUIElement) {
+		} else if (element instanceof HTMLElementImpl) {
 			JPopupMenu popupMenuAbstract = menu.popupMenuAbstractUI();
 			popupMenuAbstract.show(event.getComponent(), event.getX(), event.getY());
 			return false;

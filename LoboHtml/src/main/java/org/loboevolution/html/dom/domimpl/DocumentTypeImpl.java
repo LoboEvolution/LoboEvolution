@@ -35,7 +35,7 @@ import org.loboevolution.html.node.NodeType;
  * @author utente
  * @version $Id: $Id
  */
-public class DocumentTypeImpl extends DOMFunctionImpl implements DocumentType {
+public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	private final String publicId;
 	private final String qualifiedName;
 	private final String systemId;

@@ -31,7 +31,7 @@ import org.loboevolution.html.renderstate.TextDecorationRenderState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLUnderlineElementImpl extends HTMLAbstractUIElement {
+public class HTMLUnderlineElementImpl extends HTMLElementImpl {
 	/**
 	 * <p>Constructor for HTMLUnderlineElementImpl.</p>
 	 *

@@ -33,7 +33,7 @@ import org.loboevolution.html.style.FontValues;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLSmallElementImpl extends HTMLAbstractUIElement {
+public class HTMLSmallElementImpl extends HTMLElementImpl {
 
 	/**
 	 * <p>Constructor for HTMLSmallElementImpl.</p>

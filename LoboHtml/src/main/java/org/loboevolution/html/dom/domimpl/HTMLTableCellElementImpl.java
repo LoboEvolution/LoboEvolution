@@ -37,7 +37,7 @@ import org.loboevolution.html.style.HtmlValues;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements HTMLTableCellElement {
+public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTableCellElement {
 	/**
 	 * <p>Constructor for HTMLTableCellElementImpl.</p>
 	 *

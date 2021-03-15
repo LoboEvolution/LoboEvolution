@@ -45,7 +45,7 @@ import org.loboevolution.html.node.ValidityState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTMLSelectElement {
+public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelectElement {
 	
 	private SelectOption selectOption;
 	

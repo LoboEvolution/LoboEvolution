@@ -37,16 +37,7 @@ import org.loboevolution.html.dom.nodeimpl.ModelNode;
  * @version $Id: $Id
  */
 public interface UINode {
-	/**
-	 * <p>blur.</p>
-	 */
-	void blur();
-
-	/**
-	 * <p>focus.</p>
-	 */
-	void focus();
-
+	
 	/**
 	 * <p>getBounds.</p>
 	 *

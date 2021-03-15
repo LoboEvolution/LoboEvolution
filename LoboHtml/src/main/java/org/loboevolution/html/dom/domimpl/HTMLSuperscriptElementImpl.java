@@ -32,7 +32,7 @@ import org.loboevolution.html.renderstate.RenderState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLSuperscriptElementImpl extends HTMLAbstractUIElement {
+public class HTMLSuperscriptElementImpl extends HTMLElementImpl {
 	private final int superscript;
 
 	/**

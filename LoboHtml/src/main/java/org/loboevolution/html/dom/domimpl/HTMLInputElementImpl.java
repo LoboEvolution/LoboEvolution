@@ -57,7 +57,7 @@ import org.loboevolution.jsenum.Direction;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLInputElement {
+public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputElement {
 	
 	private InputText text;
 	
@@ -215,15 +215,11 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 	
-	/** {@inheritDoc} */
-	@Override
 	public void blur() {
 		if(text!= null) text.blur();
 		if(text!= null) {text.blur();} else {focusable = true;}
 	}
 	
-	/** {@inheritDoc} */
-	@Override
 	public void focus() {
 		if(text!= null) {text.focus();} else {focusable = true;}
 	}

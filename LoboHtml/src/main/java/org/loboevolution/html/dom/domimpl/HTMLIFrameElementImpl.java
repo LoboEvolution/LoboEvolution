@@ -45,7 +45,7 @@ import org.loboevolution.html.node.js.WindowProxy;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTMLIFrameElement {
+public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrameElement {
 
 	/**
 	 * <p>Constructor for HTMLIFrameElementImpl.</p>

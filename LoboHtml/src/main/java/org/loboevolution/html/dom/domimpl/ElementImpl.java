@@ -65,7 +65,7 @@ import org.loboevolution.html.node.events.EventListener;
  * @author utente
  * @version $Id: $Id
  */
-public class ElementImpl extends DOMFunctionImpl implements Element {
+public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	protected Map<String, String> attributes;
 
@@ -144,7 +144,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public String getAttribute(String name) {
-		final String normalName = normalizeAttributeName(name);
+		final String normalName = Strings.normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
 			return attributes == null ? null : attributes.get(normalName);
@@ -154,7 +154,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Attr getAttributeNode(String name) {
-		final String normalName = normalizeAttributeName(name);
+		final String normalName = Strings.normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
 			final String value = attributes == null ? null : attributes.get(normalName);
@@ -314,7 +314,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public boolean hasAttribute(String name) {
-		final String normalName = normalizeAttributeName(name);
+		final String normalName = Strings.normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
 			return attributes != null && attributes.containsKey(normalName);
@@ -340,20 +340,10 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
-	/**
-	 * <p>normalizeAttributeName.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link java.lang.String} object.
-	 */
-	protected final String normalizeAttributeName(String name) {
-		return name.toLowerCase();
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void removeAttribute(String name) {
-		final String normalName = normalizeAttributeName(name);
+		final String normalName = Strings.normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
 			if (attributes == null) {
@@ -366,7 +356,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Attr removeAttributeNode(Attr oldAttr) {
-		final String normalName = normalizeAttributeName(oldAttr.getName());
+		final String normalName = Strings.normalizeAttributeName(oldAttr.getName());
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
 			if (attributes == null) {
@@ -380,7 +370,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setAttribute(String name, String value) {
-		final String normalName = normalizeAttributeName(name);
+		final String normalName = Strings.normalizeAttributeName(name);
 		synchronized (this) {
 			Map<String, String> attribs = this.attributes;
 			if (attribs == null) {
@@ -401,7 +391,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	public void setAttributeImpl(String name, String value) {
-		final String normalName = normalizeAttributeName(name);
+		final String normalName = Strings.normalizeAttributeName(name);
 		Map<String, String> attribs = this.attributes;
 		if (attribs == null) {
 			attribs = new HashMap<>(2);
@@ -414,7 +404,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Attr setAttributeNode(Attr newAttr) {
-		final String normalName = normalizeAttributeName(newAttr.getName());
+		final String normalName = Strings.normalizeAttributeName(newAttr.getName());
 		final String value = newAttr.getValue();
 		synchronized (this) {
 			if (this.attributes == null) {
@@ -448,7 +438,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttribute(String name, boolean isId) {
-		final String normalName = normalizeAttributeName(name);
+		final String normalName = Strings.normalizeAttributeName(name);
 		if (!"id".equals(normalName)) {
 			throw new DOMException(Code.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
 		}
@@ -457,7 +447,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttributeNode(Attr idAttr, boolean isId) {
-		final String normalName = normalizeAttributeName(idAttr.getName());
+		final String normalName = Strings.normalizeAttributeName(idAttr.getName());
 		if (!"id".equals(normalName)) {
 			throw new DOMException(Code.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
 		}

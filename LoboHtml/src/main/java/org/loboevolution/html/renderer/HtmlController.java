@@ -30,8 +30,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
 import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
@@ -97,8 +97,9 @@ public class HtmlController {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("onContextMenu(): node=" + node + ",class=" + node.getClass().getName());
 		}
-		if (node instanceof HTMLAbstractUIElement) {
-			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+		
+		if (node instanceof HTMLElementImpl) {
+			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOncontextmenu();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
@@ -135,8 +136,8 @@ public class HtmlController {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("onDoubleClick(): node=" + node + ",class=" + node.getClass().getName());
 		}
-		if (node instanceof HTMLAbstractUIElement) {
-			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+		if (node instanceof HTMLElementImpl) {
+			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOndblclick();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
@@ -185,8 +186,9 @@ public class HtmlController {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("onMouseClick(): node=" + node + ",class=" + node.getClass().getName());
 		}
-		if (node instanceof HTMLAbstractUIElement) {
-			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+		
+		if (node instanceof HTMLElementImpl) {
+			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOnclick();
 			final MouseEventImpl evt = new MouseEventImpl();
 			evt.initMouseEvent("click", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
@@ -204,6 +206,7 @@ public class HtmlController {
 				}
 			}
 		}
+		
 		if (node instanceof HTMLLinkElementImpl) {
 			((HTMLLinkElementImpl) node).navigate();
 			return false;
@@ -221,7 +224,8 @@ public class HtmlController {
 				break;
 			}
 			return false;
-		}
+		} 
+				
 		final ModelNode parent = node.getParentModelNode();
 		if (parent == null) {
 			return true;
@@ -259,8 +263,9 @@ public class HtmlController {
 	 */
 	public boolean onMouseDown(ModelNode node, MouseEvent event, int x, int y) {
 		boolean pass = true;
-		if (node instanceof HTMLAbstractUIElement) {
-			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+		
+		if (node instanceof HTMLElementImpl) {
+			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOnmousedown();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
@@ -269,10 +274,12 @@ public class HtmlController {
 				pass = Executor.executeFunction(uiElement, f, evt, new Object[0]);
 			}
 		}
+		
 		if (node instanceof HTMLLinkElementImpl) {
 			((HTMLLinkElementImpl) node).getCurrentStyle().setOverlayColor("#9090FF80");
 			return false;
 		}
+		
 		if (!pass) {
 			return false;
 		}
@@ -297,8 +304,8 @@ public class HtmlController {
 			if (node == limit) {
 				break;
 			}
-			if (node instanceof HTMLAbstractUIElement) {
-				final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+			if (node instanceof HTMLElementImpl) {
+				final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 				uiElement.setMouseOver(false);
 				final Function f = uiElement.getOnmouseout();
 				if (f != null) {
@@ -330,8 +337,8 @@ public class HtmlController {
 			if (node == limit) {
 				break;
 			}
-			if (node instanceof HTMLAbstractUIElement) {
-				final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+			if (node instanceof HTMLElementImpl) {
+				final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 				uiElement.setMouseOver(true);
 				final Function f = uiElement.getOnmouseover();
 				if (f != null) {
@@ -366,8 +373,8 @@ public class HtmlController {
 			if (node == limit) {
 				break;
 			}
-			if (node instanceof HTMLAbstractUIElement) {
-				final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+			if (node instanceof HTMLElementImpl) {
+				final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 				uiElement.setMouseOver(true);
 				final Function f = uiElement.getOnmouseover();
 				if (f != null) {
@@ -424,8 +431,9 @@ public class HtmlController {
 	 */
 	public boolean onMouseUp(ModelNode node, MouseEvent event, int x, int y) {
 		boolean pass = true;
-		if (node instanceof HTMLAbstractUIElement) {
-			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+				
+		if (node instanceof HTMLElementImpl) {
+			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOnmouseup();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
@@ -434,10 +442,12 @@ public class HtmlController {
 				pass = Executor.executeFunction(uiElement, f, evt, new Object[0]);
 			}
 		}
+		
 		if (node instanceof HTMLLinkElementImpl) {
 			((HTMLLinkElementImpl) node).getCurrentStyle().setOverlayColor(null);
 			return false;
 		}
+
 		if (!pass) {
 			return false;
 		}
@@ -458,8 +468,9 @@ public class HtmlController {
 	 * @param event a {@link java.awt.event.InputEvent} object.
 	 */
 	public boolean onPressed(ModelNode node, InputEvent event, int x, int y) {
-		if (node instanceof HTMLAbstractUIElement) {
-			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+		
+		if (node instanceof HTMLElementImpl) {
+			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOnclick();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
@@ -489,6 +500,7 @@ public class HtmlController {
 				break;
 			}
 		}
+
 		return false;
 	}
 }

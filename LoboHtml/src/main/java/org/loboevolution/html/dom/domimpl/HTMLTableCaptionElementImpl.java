@@ -33,7 +33,7 @@ import org.loboevolution.html.renderstate.TableCaptionRenderState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implements HTMLTableCaptionElement {
+public class HTMLTableCaptionElementImpl extends HTMLElementImpl implements HTMLTableCaptionElement {
 
 	/**
 	 * Instantiates a new HTML table caption element impl.

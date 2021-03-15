@@ -31,7 +31,7 @@ import org.loboevolution.html.renderstate.RenderState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLCenterElementImpl extends HTMLAbstractUIElement {
+public class HTMLCenterElementImpl extends HTMLElementImpl {
 	/**
 	 * <p>Constructor for HTMLCenterElementImpl.</p>
 	 *

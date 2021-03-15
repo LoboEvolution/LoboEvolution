@@ -45,7 +45,7 @@ import org.loboevolution.jsenum.Direction;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HTMLTextAreaElement {
+public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLTextAreaElement {
 	
 	private TextArea textArea;
 	
@@ -312,15 +312,11 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
         setSelectionStart(start);
         setSelectionEnd(end);
     }
-	
-	/** {@inheritDoc} */
-	@Override
+
 	public void blur() {
 		if(textArea!= null) {textArea.blur();} else {focusable = false;}
 	}
 	
-	/** {@inheritDoc} */
-	@Override
 	public void focus() {
 		if(textArea!= null) {textArea.focus();} else {focusable = true;}
 	}

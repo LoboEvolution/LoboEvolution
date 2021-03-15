@@ -31,7 +31,7 @@ import org.loboevolution.html.renderstate.TextDecorationRenderState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLStrikeElementImpl extends HTMLAbstractUIElement {
+public class HTMLStrikeElementImpl extends HTMLElementImpl {
 	/**
 	 * <p>Constructor for HTMLStrikeElementImpl.</p>
 	 *

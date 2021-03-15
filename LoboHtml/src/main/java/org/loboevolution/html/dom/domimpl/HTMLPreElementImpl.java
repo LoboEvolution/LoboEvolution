@@ -37,7 +37,7 @@ import org.loboevolution.html.style.HtmlValues;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPreElement {
+public class HTMLPreElementImpl extends HTMLElementImpl implements HTMLPreElement {
 	/**
 	 * <p>Constructor for HTMLPreElementImpl.</p>
 	 *

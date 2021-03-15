@@ -42,7 +42,7 @@ import org.loboevolution.html.node.ValidityState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTMLButtonElement {
+public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButtonElement {
 
 	/**
 	 * <p>Constructor for HTMLButtonElementImpl.</p>

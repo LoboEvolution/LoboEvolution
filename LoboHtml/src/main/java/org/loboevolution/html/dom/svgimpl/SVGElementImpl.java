@@ -23,7 +23,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.svg.SVGAnimatedBoolean;
 import org.loboevolution.html.dom.svg.SVGElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
@@ -36,7 +36,7 @@ import org.loboevolution.html.dom.svg.SVGStringList;
  * @author utente
  * @version $Id: $Id
  */
-public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement {
+public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 
 	private SVGSVGElement ownerSvg;
 

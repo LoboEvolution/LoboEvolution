@@ -31,7 +31,7 @@ import org.loboevolution.html.renderstate.RenderState;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLStrongElementImpl extends HTMLAbstractUIElement {
+public class HTMLStrongElementImpl extends HTMLElementImpl {
 	/**
 	 * <p>Constructor for HTMLStrongElementImpl.</p>
 	 *

@@ -33,12 +33,10 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.laf.IconFactory;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Base64;
@@ -233,27 +231,5 @@ public class HtmlContextMenu {
 
 		return popupMenu;
 
-	}
-
-	/**
-	 * Gets the selected file with extension.
-	 *
-	 * @param c
-	 *            the c
-	 * @return the selected file with extension
-	 */
-	private File getSelectedFileWithExtension(JFileChooser c) {
-		File file = c.getSelectedFile();
-		if (c.getFileFilter() instanceof FileNameExtensionFilter) {
-			String[] exts = ((FileNameExtensionFilter) c.getFileFilter()).getExtensions();
-			String nameLower = file.getName().toLowerCase();
-			for (String ext : exts) {
-				if (nameLower.endsWith('.' + ext.toLowerCase())) {
-					return file;
-				}
-			}
-			file = new File(file.toString() + exts[0]);
-		}
-		return file;
 	}
 }

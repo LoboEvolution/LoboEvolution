@@ -32,7 +32,7 @@ import org.loboevolution.html.node.Element;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHRElement {
+public class HTMLHRElementImpl extends HTMLElementImpl implements HTMLHRElement {
 	/**
 	 * <p>Constructor for HTMLHRElementImpl.</p>
 	 *

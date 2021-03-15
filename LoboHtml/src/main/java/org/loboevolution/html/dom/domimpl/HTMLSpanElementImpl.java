@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLElement;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLSpanElementImpl extends HTMLAbstractUIElement implements HTMLElement {
+public class HTMLSpanElementImpl extends HTMLElementImpl implements HTMLElement {
 	/**
 	 * <p>Constructor for HTMLSpanElementImpl.</p>
 	 *

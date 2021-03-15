@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLHeadElement;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLHeadElementImpl extends HTMLAbstractUIElement implements HTMLHeadElement {
+public class HTMLHeadElementImpl extends HTMLElementImpl implements HTMLHeadElement {
 
 	/**
 	 * <p>Constructor for HTMLHeadElementImpl.</p>

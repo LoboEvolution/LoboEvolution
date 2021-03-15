@@ -59,7 +59,7 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLinkElement {
+public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElement {
 	
 	private final String COLOR_VISITED = "#551A8B";
 	

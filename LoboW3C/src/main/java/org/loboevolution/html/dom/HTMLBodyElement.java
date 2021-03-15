@@ -1,6 +1,6 @@
 package org.loboevolution.html.dom;
 
-import org.loboevolution.html.node.WindowEventHandlers;
+import org.loboevolution.html.node.js.WindowEventHandlers;
 
 /**
  * Provides special properties (beyond those inherited from the regular

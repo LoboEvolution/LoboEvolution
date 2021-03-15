@@ -47,7 +47,7 @@ import org.loboevolution.html.node.Node;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLTableElement {
+public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableElement {
 
 	private HTMLTableCaptionElement caption;
 

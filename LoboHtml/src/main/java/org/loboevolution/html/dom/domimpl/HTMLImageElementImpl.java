@@ -44,7 +44,7 @@ import org.mozilla.javascript.Function;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLImageElement {
+public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageElement {
 	
 	/**
 	 * <p>Constructor for HTMLImageElementImpl.</p>

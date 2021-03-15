@@ -38,7 +38,7 @@ import org.loboevolution.html.style.HtmlValues;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTMLCanvasElement {
+public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvasElement {
 	
 	private BufferedImage image;
 
