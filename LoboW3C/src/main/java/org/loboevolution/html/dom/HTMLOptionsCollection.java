@@ -1,5 +1,6 @@
 package org.loboevolution.html.dom;
 
+import org.loboevolution.html.node.Node;
 
 /**
  * HTMLOptionsCollection is an interface representing a collection of HTML option elements (in document order) and offers methods and properties for traversing the list as well as optionally altering its items. This type is returned solely by the "options" property of select.
@@ -39,21 +40,20 @@ public interface HTMLOptionsCollection extends HTMLCollection {
      * <p>
      * This method will throw a "HierarchyRequestError" DOMException if element is an ancestor of the element into which it is to be inserted.
      */
-    void add(HTMLOptGroupElement element, HTMLElement before);
-
-    void add(HTMLOptGroupElement element, int before);
-
-    void add(HTMLOptGroupElement element);
-
-    void add(HTMLOptionElement element, HTMLElement before);
-
-    void add(HTMLOptionElement element, int before);
+    void add(Object element, Object before);
 
     void add(HTMLOptionElement element);
 
     /**
      * Removes the item with index index from the collection.
      */
-    void remove(int index);
+    Node remove(int index);
+
+    /**
+     * Remove.
+     *
+     * @param element the element
+     */
+    boolean remove(Object element);
 
 }

@@ -23,21 +23,18 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.SelectControl;
-import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLFormElement;
-import org.loboevolution.html.dom.HTMLLabelElement;
-import org.loboevolution.html.dom.HTMLOptGroupElement;
-import org.loboevolution.html.dom.HTMLOptionElement;
-import org.loboevolution.html.dom.HTMLOptionsCollection;
-import org.loboevolution.html.dom.HTMLSelectElement;
+import org.loboevolution.html.dom.*;
+import org.loboevolution.html.dom.filter.OptionFilter;
 import org.loboevolution.html.dom.input.SelectOption;
-
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ValidityState;
+import org.mozilla.javascript.Undefined;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <p>HTMLSelectElementImpl class.</p>
@@ -49,8 +46,10 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 	
 	private SelectOption selectOption;
 	
-	private int selectedIndex = -1;
+	private HTMLOptionsCollection options;
 	
+	private Integer selectedIndex = null;
+
 	/**
 	 * <p>Constructor for HTMLSelectElementImpl.</p>
 	 *
@@ -80,18 +79,7 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
-		try {
-			final String maxLength = getAttribute("length");
-			return Integer.parseInt(maxLength.trim());
-		} catch (Exception e) {
-			return Integer.MAX_VALUE;
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean getMultiple() {
-		return this.getAttributeAsBoolean("multiple");
+		return getOptions().getLength();
 	}
 
 	/** {@inheritDoc} */
@@ -103,37 +91,71 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 	/** {@inheritDoc} */
 	@Override
 	public HTMLOptionsCollection getOptions() {
-		return new HTMLOptionsCollectionImpl(this);
+		if(options == null ) options = new HTMLOptionsCollectionImpl(this, new OptionFilter());
+		return options;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getSelectedIndex() {
-		return selectedIndex;
+		if (selectedIndex != null) return this.selectedIndex;
+		return getOptions().getSelectedIndex();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getSize() {
-		return getOptions().getLength();
+		String size = getAttribute("size");
+		if (!Strings.isNumeric(size)) {
+			return 0;
+		} else if (Strings.isNotBlank(size)) {
+			return Integer.parseInt(size);
+		} else {
+			return getOptions().getLength();
+		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getType() {
-		return this.getMultiple() ? "select-multiple" : "select-one";
+		return this.isMultiple() ? "select-multiple" : "select-one";
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getValue() {
-		return getAttribute("value");
+		AtomicReference<String> x = new AtomicReference<>();
+		String value = getAttribute("value");
+		if (Strings.isNotBlank(value)) {
+			return value;
+		} else {
+			HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
+			options.forEach(node -> {
+				HTMLOptionElement op = (HTMLOptionElement) node;
+				if(Strings.isBlank(x.get())) x.set(op.getValue());
+			});
+			return x.get();
+		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void remove(int index) {
-		removeChild(getOptions().item(index));
+	public void remove(Object element) {
+		if (getOptions().getLength() > 0) {
+			if (element instanceof Double) {
+				Double d = (Double) element;
+				if (d.intValue() < getOptions().getLength()) {
+					getOptions().remove(d.intValue());
+				}
+			} else {
+				getOptions().remove(0);
+			}
+			if (getOptions().getLength() == 1 && !isMultiple()) {
+				HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
+				options.stream().findFirst().ifPresent(option -> { ((HTMLOptionElement) option).setSelected(true); });
+			}
+			if (selectOption != null) selectOption.resetItemList(this);
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -167,15 +189,17 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 	/** {@inheritDoc} */
 	@Override
 	public void setSelectedIndex(int selectedIndex) {
-		this.selectedIndex = selectedIndex;
-		
+		if (getOptions().getLength() <= selectedIndex || selectedIndex < 0) {
+			this.selectedIndex = -1;
+		} else {
+			this.selectedIndex = selectedIndex;
+		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setValue(String value) {
 		setAttribute("value", String.valueOf(value));
-		
 	}
 	
 	/**
@@ -316,8 +340,7 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
 	@Override
 	public boolean isMultiple() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getAttributeAsBoolean("multiple");
 	}
 
 	@Override
@@ -340,8 +363,7 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
 	@Override
 	public void setSize(int size) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("size", String.valueOf(size));
 	}
 
 	@Override
@@ -363,39 +385,37 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 	}
 
 	@Override
-	public void add(HTMLOptionElement element, HTMLElement before) {
-		// TODO Auto-generated method stub
-		
+	public void add(Object element, Object before) {
+		try {
+			if (before == null || before instanceof Undefined) {
+				getOptions().add((HTMLOptionElement) element);
+			}
+
+			if (element instanceof HTMLOptionElementImpl && before instanceof Double) {
+				double d = (double) before;
+				getOptions().add(element, d);
+			}
+
+			if (element instanceof HTMLOptionElementImpl && before instanceof HTMLOptionElementImpl) {
+				HTMLOptionElementImpl d = (HTMLOptionElementImpl) before;
+				getOptions().add(element, d);
+			}
+
+			if (getOptions().getLength() == 1 && !isMultiple()) {
+				HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
+				options.stream().findFirst().ifPresent(option -> { ((HTMLOptionElement) option).setSelected(true); });
+			}
+
+			if (selectOption != null) selectOption.resetItemList(this);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void add(HTMLOptionElement element, int before) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void add(HTMLOptionElement element) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void add(HTMLOptGroupElement element, HTMLElement before) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void add(HTMLOptGroupElement element, int before) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void add(HTMLOptGroupElement element) {
-		// TODO Auto-generated method stub
-		
+	public void add(Object element) {
+		getOptions().add((HTMLOptionElementImpl)element);
+		if (selectOption!= null) selectOption.resetItemList(this);
 	}
 
 	@Override
@@ -406,8 +426,7 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
 	@Override
 	public Element item(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Element)getOptions().item(index);
 	}
 
 	@Override
@@ -418,7 +437,8 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
 	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
+		getOptions().remove(getOptions().getLength() - 1);
+		if (selectOption!= null) selectOption.resetItemList(this);
 		
 	}
 

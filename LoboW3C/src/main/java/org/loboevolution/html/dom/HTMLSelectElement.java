@@ -239,45 +239,14 @@ public interface HTMLSelectElement extends HTMLElement {
      * @param before  Variant of type Object that specifies an element to insert before, or null to append the object
      *                to the collection.
      */
-    void add(HTMLOptionElement element, HTMLElement before);
-
-    /**
-     * Add.
-     *
-     * @param element the element
-     * @param before  the before
-     */
-    void add(HTMLOptionElement element, int before);
+    void add(Object element, Object before);
 
     /**
      * Add.
      *
      * @param element the element
      */
-    void add(HTMLOptionElement element);
-
-    /**
-     * Add.
-     *
-     * @param element the element
-     * @param before  the before
-     */
-    void add(HTMLOptGroupElement element, HTMLElement before);
-
-    /**
-     * Add.
-     *
-     * @param element the element
-     * @param before  the before
-     */
-    void add(HTMLOptGroupElement element, int before);
-
-    /**
-     * Add.
-     *
-     * @param element the element
-     */
-    void add(HTMLOptGroupElement element);
+    void add(Object element);
 
     /**
      * Returns whether a form will validate when it is submitted, without having to submit it.
@@ -317,9 +286,9 @@ public interface HTMLSelectElement extends HTMLElement {
     /**
      * Remove.
      *
-     * @param index the index
+     * @param element the element
      */
-    void remove(int index);
+    void remove(Object element);
 
     /**
      * Report validity boolean.
@@ -344,7 +313,5 @@ public interface HTMLSelectElement extends HTMLElement {
     void set(int name, Element value);
 
 	int getLength();
-
-	boolean getMultiple();
 
 }

@@ -23,9 +23,9 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
-import org.loboevolution.html.dom.HTMLSelectElement;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
@@ -36,7 +36,10 @@ import org.loboevolution.html.node.Node;
  * @version $Id: $Id
  */
 public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOptionElement {
-	private boolean selected;
+
+	private Boolean selected = null;
+	
+	private String text;
 
 	/**
 	 * <p>Constructor for HTMLOptionElementImpl.</p>
@@ -46,7 +49,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	public HTMLOptionElementImpl(String name) {
 		super(name, true);
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public boolean isDefaultSelected() {
@@ -72,13 +75,15 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public int getIndex() {
-		final Object parent = getParentNode();
+		/*final Object parent = getParentNode();
 		if (parent instanceof HTMLSelectElement) {
 			final HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) ((HTMLSelectElement) parent).getOptions();
 			return options.indexOf(this);
 		} else {
 			return -1;
-		}
+		}*/
+		
+		return -1; //TODO
 	}
 
 	/** {@inheritDoc} */
@@ -90,13 +95,17 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public boolean isSelected() {
-		return this.selected;
+		if (this.selected == null) {
+			return isDefaultSelected();
+		} else {
+			return this.selected;
+		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getText() {
-		return getRawInnerText(false);
+		return Strings.isNotBlank(text) ? text : getRawInnerText(false);
 	}
 
 	/** {@inheritDoc} */
@@ -126,36 +135,17 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public void setSelected(boolean selected) {
-		final boolean changed = selected != this.selected;
-		this.selected = selected;
-		// Changing the option state changes the selected index.
-		final Object parent = getParentNode();
-		if (parent instanceof HTMLSelectElementImpl) {
-			final HTMLSelectElementImpl parentSelect = (HTMLSelectElementImpl) parent;
-			if (changed || parentSelect.getSelectedIndex() == -1) {
-				/*if (selected) {
-					parentSelect.setSelectedIndexImpl(getIndex());
-				} else {
-					final int currentIndex = parentSelect.getSelectedIndex();
-					if (currentIndex != -1 && currentIndex == getIndex()) {
-						parentSelect.setSelectedIndexImpl(-1);
-					}
-				}*/ //TODO
-			}
-		}
-	}
-
-	void setSelectedImpl(boolean selected) {
 		this.selected = selected;
 	}
 
 	/**
 	 * <p>setText.</p>
 	 *
-	 * @param value a {@link java.lang.String} object.
+	 * @param text a {@link java.lang.String} object.
 	 */
-	public void setText(String value) {
-		setTextContent(value);
+	public void setText(String text) {
+		this.text = text;
+		setTextContent(text);
 	}
 
 	/** {@inheritDoc} */

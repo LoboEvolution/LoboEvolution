@@ -149,8 +149,8 @@ public class SelectOption {
 	 * 
 	 * @param selectElement
 	 */
-	private void resetItemList(HTMLSelectElementImpl selectElement) {
-		boolean isMultiple = selectElement.getMultiple();
+	public void resetItemList(HTMLSelectElementImpl selectElement) {
+		boolean isMultiple = selectElement.isMultiple();
 		if (isMultiple && this.state != STATE_LIST) {
 			this.state = STATE_LIST;
 			control.removeAll();

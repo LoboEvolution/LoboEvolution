@@ -82,6 +82,15 @@ public class NodeListImpl extends AbstractList implements NodeList {
 		return this.toArray(new NodeImpl[0]);
 	}
 	
+	/**
+	 * <p>toArray.</p>
+	 *
+	 * @return an array of {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} objects.
+	 */
+	public List<Node> toList() {
+		return this;
+	}
+	
 	@Override
 	public String toString() {
 		return "[object NodeList]";

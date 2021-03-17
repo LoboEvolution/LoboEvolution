@@ -31,6 +31,7 @@ import java.util.ListIterator;
 
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
@@ -45,7 +46,7 @@ public class AbstractList extends AbstractScriptableDelegate implements List<Nod
 	 * Constructor for AbstractList.
 	 * </p>
 	 *
-	 * @param rootNode a {@link org.loboevolution.html.node.Node.Node} object.
+	 * @param rootNode a {@link org.loboevolution.html.node.Node} object.
 	 */
 	public AbstractList(Node rootNode) {
 		nodeList.add(rootNode);
@@ -56,7 +57,7 @@ public class AbstractList extends AbstractScriptableDelegate implements List<Nod
 	 * Constructor for AbstractList.
 	 * </p>
 	 *
-	 * @param rootNode a {@link org.loboevolution.html.node.Node.Node} object.
+	 * @param nodeList a {@link java.util.List} object.
 	 */
 	public AbstractList(List<Node> nodeList) {
 		this.nodeList = nodeList;
@@ -65,12 +66,12 @@ public class AbstractList extends AbstractScriptableDelegate implements List<Nod
 	/**
 	 * <p>Constructor for AbstractList.</p>
 	 *
-	 * @param rootNode a {@link org.loboevolution.html.node.Node.Node} object.
+	 * @param rootNode a {@link org.loboevolution.html.node.Node} object.
 	 * @param nodeFilter a {@link org.loboevolution.html.dom.NodeFilter} object.
 	 */
 	public AbstractList(Node rootNode, NodeFilter nodeFilter) {
 		final NodeImpl impl = (NodeImpl)rootNode;
-		nodeList = Arrays.asList(impl.getNodeList(nodeFilter).toArray());
+		nodeList = ((NodeListImpl)impl.getNodeList(nodeFilter)).toList();
 	}
 
 	@Override
@@ -186,5 +187,9 @@ public class AbstractList extends AbstractScriptableDelegate implements List<Nod
 	@Override
 	public List<Node> subList(int fromIndex, int toIndex) {
 		return nodeList.subList(fromIndex, toIndex);
+	}
+	
+	protected List<Node> getNodeList() {
+		return nodeList;
 	}
 }

@@ -25,6 +25,7 @@ package org.loboevolution.dom;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.HTMLOptionsCollection;
 
 /**
  * Tests for {@link HTMLOptionsCollection}.*/
@@ -272,9 +273,10 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "      try {\n"
                 + "        var oSelect = document.forms.testForm.select1;\n"
                 + "        alert(oSelect.length);\n"
-                + "        var opt = new Option('foo', '123');\n"
+                + "        var opt = document.createElement('option');\n"
+                + "        opt.text = \"foo\";\n"
+                + "        opt.value = '123';\n"
                 + "        oSelect.options.add(opt" + param + ");\n"
-
                 + "        alert(oSelect.options.length);\n"
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
                 + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
@@ -506,15 +508,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "  <script>\n"
                 + "    function doTest() {\n"
                 + "      try {\n"
-                + "        var oSelect = document.forms.testForm.select1;\n"
-                + "        alert(oSelect.length);\n"
-                + "        var opt = new Option('foo', '123');\n"
-                + "        oSelect.options[" + pos + "] = " + param + ";\n"
-
-                + "        alert(oSelect.options.length);\n"
-                + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
-                + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
-                + "        }\n"
+                + "          alert(oSelect.options[\" + pos + \"]);\\n\""
                 + "      } catch (e) { alert('exception'); }\n"
                 + "    }\n"
                 + "  </script>\n"
@@ -641,7 +635,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "      try {\n"
                 + "        var oSelect = document.forms.testForm.select1;\n"
                 + "        oSelect.options.remove(" + pos + ");\n"
-
                 + "        alert(oSelect.options.length);\n"
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
                 + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"

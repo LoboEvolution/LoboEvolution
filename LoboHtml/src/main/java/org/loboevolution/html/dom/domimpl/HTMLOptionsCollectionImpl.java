@@ -24,15 +24,15 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLOptGroupElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
-import org.loboevolution.html.dom.filter.OptionFilter;
+import org.loboevolution.html.dom.NodeFilter;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
-import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Node;
+
+import java.util.List;
 
 /**
  * <p>HTMLOptionsCollectionImpl class.</p>
@@ -40,139 +40,141 @@ import org.loboevolution.html.node.Node;
  * @author utente
  * @version $Id: $Id
  */
-public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
+public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTMLOptionsCollection {
 
-	private final NodeImpl rootNode;
+	private NodeImpl rootNode;
 
-	private NodeListImpl rootList = null;
+	private Integer selectedIndex = null;
 
 	/**
 	 * <p>Constructor for HTMLOptionsCollectionImpl.</p>
 	 *
 	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
-	public HTMLOptionsCollectionImpl(NodeImpl rootNode) {
+	public HTMLOptionsCollectionImpl(NodeImpl rootNode, NodeFilter filter) {
+		super(rootNode, filter);
 		this.rootNode = rootNode;
-		rootList = (NodeListImpl) rootNode.getNodeList(new OptionFilter());
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getLength() {
-		if (rootList == null) {
-			return this.rootNode.getChildCount();
-		} else {
-			return this.rootList.getLength();
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Node item(int index) {
-		if (rootList == null) {
-			return this.rootNode.getChildAtIndex(index);
-		} else {
-			return this.rootList.get(index);
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element namedItem(String name) {
-		final Document doc = this.rootNode.getOwnerDocument();
-		if (doc == null) {
-			return null;
-		}
-		final Element node = doc.getElementById(name);
-		if (node != null && node.getParentNode() == this.rootNode) {
-			return node;
-		}
-		return null;
-	}
-	
-	/**
-	 * <p>indexOf.</p>
-	 *
-	 * @param node a {@link org.w3c.dom.Node} object.
-	 * @return a int.
-	 */
-	public int indexOf(Node node) {
-		if (rootList == null) {
-			return this.rootNode.getChildIndex(node);
-		} else {
-			return this.rootList.indexOf(node);
-		}
-	}
-	
-	/**
-	 * <p>Getter for the field rootList.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.dom.nodeimpl.NodeListImpl} object.
-	 */
-	protected NodeListImpl getRootList() {
-		return rootList;
 	}
 
 	@Override
 	public void setLength(int length) {
-		// TODO Auto-generated method stub
-		
+		if(length == 0) clear();
 	}
 
 	@Override
 	public int getSelectedIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		if (selectedIndex != null) return this.selectedIndex;
+		if (this.getLength() == 0) return -1;
+
+		HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) this.rootNode;
+		int index = selctElement.isMultiple() ? -1 : 0;
+		for (int i = 0; i < this.getLength(); i++) {
+			Node n = item(i);
+			HTMLElementImpl element = (HTMLElementImpl) n;
+			if (element.getAttributeAsBoolean("selected")) {
+				index = i;
+				break;
+			}
+		}
+		return index;
 	}
 
 	@Override
 	public void setSelectedIndex(int selectedIndex) {
-		// TODO Auto-generated method stub
-		
+		if (getLength() <= selectedIndex || selectedIndex < 0) {
+			this.selectedIndex = -1;
+		} else {
+			this.selectedIndex = selectedIndex;
+		}
 	}
 
 	@Override
-	public void add(HTMLOptGroupElement element, HTMLElement before) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void add(Object element, Object before) {
 
-	@Override
-	public void add(HTMLOptGroupElement element, int before) {
-		// TODO Auto-generated method stub
-		
-	}
+		if (element instanceof HTMLOptionElementImpl && before instanceof HTMLElement) {
+			addElements((HTMLOptionElementImpl)element, (HTMLElement)before);
+		}
 
-	@Override
-	public void add(HTMLOptGroupElement element) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void add(HTMLOptionElement element, HTMLElement before) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void add(HTMLOptionElement element, int before) {
-		// TODO Auto-generated method stub
-		
+		if (element instanceof HTMLOptionElementImpl && before instanceof Double) {
+			double d = (double) before;
+			addElementIndex((HTMLOptionElementImpl)element, d);
+		}
 	}
 
 	@Override
 	public void add(HTMLOptionElement element) {
-		// TODO Auto-generated method stub
-		
+		List<Node> nodeList = getNodeList();
+		if(nodeList.size() == 0) element.setSelected(true);
+		nodeList.add(element);
 	}
 
 	@Override
-	public void remove(int index) {
-		// TODO Auto-generated method stub
-		
+	public boolean remove(Object element) {
+		try{
+		HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl)rootNode;
+
+		if (element instanceof HTMLOptionElementImpl) {
+			getNodeList().remove(element);
+		}
+
+		if (element instanceof Double) {
+			double d = (Double) element;
+			if(d < getNodeList().size())
+				getNodeList().remove((int) d);
+		}
+
+		if (getNodeList().size() == 1 && (selctElement == null || !selctElement.isMultiple())) {
+			List<Node> list = getNodeList();
+			for (int i = 0; i < list.size(); i++) {
+				HTMLOptionElementImpl opt = (HTMLOptionElementImpl) list.get(i);
+				if (i == 0) {
+					opt.setSelected(true);
+				} else {
+					opt.setSelected(false);
+				}
+			}
+		}
+		}catch (Exception e) {e.printStackTrace();}
+
+		return false;
 	}
-	
+
+
+
+	private void addElementIndex(HTMLOptionElement element, double before){
+		List<Node> nodeList = getNodeList();
+		if (before > nodeList.size() || before < 0) {
+			add(element);
+		} else {
+			if(nodeList.size() == 0){
+				element.setSelected(true);
+				nodeList.add(element);
+			} else	{
+				nodeList.add(before < 0 ? 0 : (int) before, element);
+			}
+		}
+	}
+
+	private void addElements(HTMLOptionElement element, HTMLElement before) {
+		List<Node> nodeList = getNodeList();
+		if (nodeList.size() == 0) {
+			nodeList.add(0, element);
+		} else {
+			boolean found = false;
+			HTMLOptionElement bef = (HTMLOptionElement) before;
+			for (int i = 0; i < nodeList.size(); i++) {
+				HTMLOptionElement elem = (HTMLOptionElement) nodeList.get(i);
+				if (elem.getText().equals(bef.getText())) {
+					nodeList.add(i < 0 ? 0 : i, element);
+					found = true;
+					break;
+				}
+			}
+			if(!found)
+				throw new DOMException(Code.NOT_FOUND_ERR, "Record not found");
+		}
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

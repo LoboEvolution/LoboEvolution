@@ -25,6 +25,7 @@ package org.loboevolution.dom;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.HTMLSelectElement;
 
 /**
  * Tests for {@link HTMLSelectElement}. */
@@ -34,7 +35,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void getSelectedIndex() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
@@ -54,7 +54,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "      <option name='option2' selected>Two</option>\n"
                         + "      <option name='option3'>Three</option>\n"
                         + "    </select>\n"
-
                         + "    <select name='selectMulti' multiple>\n"
                         + "      <option name='option1' selected>One</option>\n"
                         + "      <option name='option2'>Two</option>\n"
@@ -70,14 +69,12 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void getSelectedIndexNothingSelected() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + "    function doTest() {\n"
                         + "      alert(document.form1.select1.length);\n"
                         + "      alert(document.form1.select1.selectedIndex);\n"
-
                         + "      alert(document.form1.selectMulti.length);\n"
                         + "      alert(document.form1.selectMulti.selectedIndex);\n"
                         + "    }\n"
@@ -90,7 +87,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "      <option name='option2'>Two</option>\n"
                         + "      <option name='option3'>Three</option>\n"
                         + "    </select>\n"
-
                         + "    <select name='selectMulti' multiple>\n"
                         + "      <option name='option1'>One</option>\n"
                         + "      <option name='option2'>Two</option>\n"
@@ -106,7 +102,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void getSelectedIndexNoOption() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
@@ -135,14 +130,13 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void selectedIndex2() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + "    function doTest() {\n"
                         + "      var oSelect = document.getElementById('main');\n"
                         + "      var oOption = new Option('bla', 1);\n"
-                        + "      oSelect.options[oSelect.options.length] = oOption;\n"
+                        + "      oSelect.add(oOption);\n"
                         + "      oOption.selected = false;\n"
                         + "      alert(oSelect.selectedIndex);\n"
                         + "    }\n"
@@ -161,7 +155,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void setSelectedIndexInvalidValue() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
@@ -169,13 +162,10 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "      var s = document.form1.select1;\n"
                         + "      s.selectedIndex = -1;\n"
                         + "      alert(s.selectedIndex);\n"
-
                         + "      s.selectedIndex = 2;\n"
                         + "      alert(s.selectedIndex);\n"
-
                         + "      try { s.selectedIndex = 25; } catch (e) { alert('exception') }\n"
                         + "      alert(s.selectedIndex);\n"
-
                         + "      try { s.selectedIndex = -14; } catch (e) { alert('exception') }\n"
                         + "      alert(s.selectedIndex);\n"
                         + "    }\n"
@@ -261,7 +251,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void getOptionSelected() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
@@ -376,7 +365,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void addOptionSelected() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
@@ -386,12 +374,10 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "      var firstSelectedIndex = oSelect.selectedIndex;\n"
                         + "      alert(firstSelectedIndex);\n"
                         + "      alert(options[firstSelectedIndex].selected);\n"
-
                         + "      var index = options.length;\n"
                         + "      var oOption = new Option('Four','value4');\n"
                         + "      oOption.selected = true;\n"
                         + "      options[index] = oOption;\n"
-
                         + "      alert(options.length);\n"
                         + "      alert(options[index].text);\n"
                         + "      alert(options[index].value);\n"
@@ -418,7 +404,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void addOptionWithAddMethodIndexNull() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
@@ -451,19 +436,23 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void addOptionWithAddMethodNoSecondParameter() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + "    function doTest() {\n"
                         + "      var oSelect = document.form1.select1;\n"
                         + "      try {\n"
-                        + "        oSelect.add(new Option('Four', 'value4'));\n"
+                        + "        var opt = document.createElement('option');\n"
+                        + "        opt.text = 'Four';\n"
+                        + "        opt.value = 'value4';\n"
+                        + "        oSelect.add(opt);\n"
                         + "        alert(oSelect.length);\n"
                         + "        alert(oSelect[oSelect.length-1].text);\n"
                         + "        alert(oSelect[oSelect.length-1].value);\n"
-
-                        + "        oSelect.add(new Option('Three b', 'value3b'), 3);\n"
+                        + "        var opt1 = document.createElement('option');\n"
+                        + "        opt1.text = 'Three b';\n"
+                        + "        opt1.value = 'value3b';\n"
+                        + "        oSelect.add(opt1, 3);\n"
                         + "        alert(oSelect[3].text);\n"
                         + "        alert(oSelect[3].value);\n"
                         + "      } catch(e) { alert('exception'); }\n"
@@ -493,7 +482,10 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                 + "      var oSelect = document.form1.select1;\n"
                 + "      try {\n"
                 + "        alert(oSelect.length);\n"
-                + "        oSelect.add(new Option('test', 'testValue'), null);\n"
+                + "        var opt = document.createElement('option');\n"
+                + "        opt.text = 'test';\n"
+                + "        opt.value = 'testValue';\n"
+                + "        oSelect.add(opt, null);\n"
                 + "        alert(oSelect[oSelect.length-1].text);\n"
                 + "        alert(oSelect[oSelect.length-1].value);\n"
                 + "      } catch(e) { alert('exception'); }\n"
@@ -548,21 +540,18 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     }
 
     @Test
-
     public void addOptionMethodIndexFourEmptySelect() {
         final String[] messages = {"0", "1", "0", "foo*"};
         addOptionMethod(", 4", true, false, messages);
     }
 
     @Test
-
     public void addOptionMethodIndexFourEmptySelectMulti() {
         final String[] messages = {"0", "1", "-1", "foo"};
         addOptionMethod(", 4", true, true, messages);
     }
 
     @Test
-
     public void addOptionMethodIndexMinusOne() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three", "foo"};
         addOptionMethod(", -1", false, false, messages);
@@ -575,56 +564,48 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     }
 
     @Test
-
     public void addOptionMethodIndexZero() {
         final String[] messages = {"3", "4", "2", "foo", "One", "Two*", "Three"};
         addOptionMethod(", 0", false, false, messages);
     }
 
     @Test
-
     public void addOptionMethodIndexZeroMulti() {
         final String[] messages = {"3", "4", "2", "foo", "One", "Two*", "Three*"};
         addOptionMethod(", 0", false, true, messages);
     }
 
     @Test
-
     public void addOptionMethodIndexOne() {
         final String[] messages = {"3", "4", "2", "One", "foo", "Two*", "Three"};
         addOptionMethod(", 1", false, false, messages);
     }
 
     @Test
-
     public void addOptionMethodIndexOneMulti() {
         final String[] messages = {"3", "4", "2", "One", "foo", "Two*", "Three*"};
         addOptionMethod(", 1", false, true, messages);
     }
 
     @Test
-
     public void addOptionMethodhIndexTwo() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "foo", "Three"};
         addOptionMethod(", 2", false, false, messages);
     }
 
     @Test
-
     public void addOptionMethodhIndexTwoMulti() {
         final String[] messages =  {"3", "4", "1", "One", "Two*", "foo", "Three*"};
         addOptionMethod(", 2", false, true, messages);
     }
 
     @Test
-
     public void addOptionMethodIndexThree() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three", "foo"};
         addOptionMethod(", 3", false, false, messages);
     }
 
     @Test
-
     public void addOptionMethodIndexThreeMulti() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three*", "foo"};
         addOptionMethod(", 3", false, true, messages);
@@ -747,15 +728,16 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                 + "      try {\n"
                 + "        var oSelect = document.forms.testForm.select1;\n"
                 + "        alert(oSelect.length);\n"
-                + "        var opt = new Option('foo', '123');\n"
-                + "        oSelect.add(opt" + param + ");\n"
-
+                + "        var opt = document.createElement('option');\n"
+                + "        opt.text = \"foo\";\n"
+                + "        opt.value = '123';\n"
+                + "        oSelect.add(opt " + param + ");\n"
                 + "        alert(oSelect.length);\n"
                 + "        alert(oSelect.selectedIndex);\n"
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
                 + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
                 + "        }\n"
-                + "      } catch (e) { alert('exception'); }\n"
+                + "      } catch (e) { alert(e); }\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1029,7 +1011,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "        var oSelect = document.forms.testForm.select1;\n"
                         + "        alert(oSelect.length);\n"
                         + "        oSelect.remove(" + param + ");\n"
-
                         + "        alert(oSelect.length);\n"
                         + "        alert(oSelect.selectedIndex);\n"
                         + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
@@ -1313,7 +1294,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void optionsArrayAdd() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
@@ -1664,7 +1644,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void value() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
@@ -1714,7 +1693,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void valueByValueCase() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
@@ -1788,7 +1766,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void valueNull() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
@@ -1806,7 +1783,7 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    <option selected value='two'>Two</option>\n"
                         + "  </select>\n"
                         + "</body></html>";
-        final String[] messages = {"two", ""};
+        final String[] messages = {"two", null};
         checkHtmlAlert(html, messages);
     }
 

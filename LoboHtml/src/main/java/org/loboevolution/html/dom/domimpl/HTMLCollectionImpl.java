@@ -24,6 +24,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.NodeFilter;
@@ -58,7 +59,7 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 	 * Constructor for HTMLCollectionImpl.
 	 * </p>
 	 *
-	 * @param rootNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param nodeList a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public HTMLCollectionImpl(List<Node> nodeList) {
 		super(nodeList);
@@ -82,6 +83,7 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 
 	@Override
 	public Node item(int index) {
+		if(index >= getLength()) return null;
 		return this.get(index);
 	}
 
@@ -91,11 +93,9 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 		if (doc == null) {
 			return null;
 		}
-		final Node node = doc.getElementById(name);
-		if (node != null && node.getParentNode() == this.rootNode) {
-			return (Element) node;
-		}
-		return null;
+		final HTMLCollectionImpl nodeList = (HTMLCollectionImpl) doc.getElementsByName(name);
+		Optional<Node> node = nodeList.stream().findFirst();
+		return (Element) node.orElse(null);
 	}
 	
 	@Override
