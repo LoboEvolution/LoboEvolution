@@ -159,7 +159,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"top", "baseline", "3", "middle", "8", "bottom"};
+        final String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
         checkHtmlAlert(html, messages);
     }
 
@@ -184,7 +184,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {"", "#0000aa", "x"};
+        final String[] messages = {null, "#0000aa", "x"};
         checkHtmlAlert(html, messages);
     }
 
@@ -245,7 +245,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {"", "blah", "3", ""};
+        final String[] messages = {null, "blah", "3", ""};
         checkHtmlAlert(html, messages);
     }
 
@@ -365,7 +365,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {"", "blah", "abc , xyz", "3", ""};
+        final String[] messages = {null, "blah", "abc , xyz", "3", ""};
         checkHtmlAlert(html, messages);
     }
 

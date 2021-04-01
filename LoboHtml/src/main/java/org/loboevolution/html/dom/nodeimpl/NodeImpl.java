@@ -35,6 +35,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -462,6 +464,21 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			return this.nodeList.get(0);
 		return null;
 	}
+	
+	
+	public Node getFirstChildByFilter(NodeFilter filter) {
+		NodeListImpl nodeList = (NodeListImpl) getNodeList(filter);
+		if (nodeList.getLength() == 0) {
+			return null;
+		} else {
+			Optional<Node> findFirst = nodeList.stream().findFirst();
+			if (findFirst.isPresent()) {
+				return findFirst.get();
+			}
+		}
+		return null;
+	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -1128,7 +1145,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 *
 	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
 	 */
-	protected void removeChildren(NodeFilter filter) {
+	protected void removeTableChildren(NodeFilter filter) {
 		synchronized (this.treeLock) {
 			removeChildrenImpl(filter);
 		}
@@ -1143,13 +1160,17 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
 	 */
 	protected void removeChildrenImpl(NodeFilter filter) {
-		final int len = this.nodeList.getLength();
-		for (int i = len; --i >= 0;) {
-			final Node node = this.nodeList.item(i);
-			if (filter.acceptNode(node)) {
-				this.nodeList.remove(i);
+		AtomicInteger count = new AtomicInteger();
+		AtomicInteger index = new AtomicInteger(-1);
+		nodeList.forEach(node -> {
+			if (node instanceof Element) {
+				if (filter.acceptNode(node) && count.get() == 0) {
+					index.set(nodeList.indexOf(node));
+					count.incrementAndGet();
+				}
 			}
-		}
+		});
+		if(index.get() > -1) nodeList.remove(index.get());
 	}
 
 	/**

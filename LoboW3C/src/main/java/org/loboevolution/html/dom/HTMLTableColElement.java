@@ -1,59 +1,55 @@
 package org.loboevolution.html.dom;
 
-
 /**
- * Provides special properties (beyond the HTMLElement interface it also has available to it inheritance) for manipulating single or grouped table column elements.
+ * Provides special properties (beyond the HTMLElement interface it also has
+ * available to it inheritance) for manipulating single or grouped table column
+ * elements.
  */
 public interface HTMLTableColElement extends HTMLElement {
- 
-    /**
-     * Sets or retrieves the alignment of the object relative to the display or table.
-     */
-    @Deprecated
-    
-    String getAlign();
 
-    
-    void setAlign(String align);
+	/**
+	 * Sets or retrieves the alignment of the object relative to the display or
+	 * table.
+	 */
+	@Deprecated
 
-    @Deprecated
-    
-    String getCh();
+	String getAlign();
 
-    
-    void setCh(String ch);
+	void setAlign(String align);
 
-    @Deprecated
-    
-    String getChOff();
+	@Deprecated
 
-    
-    void setChOff(String chOff);
+	String getCh();
 
-    /**
-     * Sets or retrieves the number of columns in the group.
-     */
-    
-    int getSpan();
+	void setCh(String ch);
 
-    
-    void setSpan(int span);
+	@Deprecated
 
-    @Deprecated
-    
-    String getVAlign();
+	String getChOff();
 
-    
-    void setVAlign(String vAlign);
+	void setChOff(String chOff);
 
-    /**
-     * Sets or retrieves the width of the object.
-     */
-    @Deprecated
-    
-    String getWidth();
+	/**
+	 * Sets or retrieves the number of columns in the group.
+	 */
 
-    
-    void setWidth(String width);
+	int getSpan();
+
+	void setSpan(int span);
+
+	@Deprecated
+
+	String getvAlign();
+
+	void setvAlign(String vAlign);
+
+	/**
+	 * Sets or retrieves the width of the object.
+	 */
+	@Deprecated
+
+	String getWidth();
+
+	void setWidth(String width);
 
 }

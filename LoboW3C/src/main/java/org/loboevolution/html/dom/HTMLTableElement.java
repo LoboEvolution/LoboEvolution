@@ -103,27 +103,27 @@ public interface HTMLTableElement extends HTMLElement {
      * Retrieves a collection of all tBody objects in the table. Objects in this collection are in source order.
      */
     
-    HTMLCollection getTBodies();
+    HTMLCollection gettBodies();
 
     /**
      * Retrieves the tFoot object of the table.
      */
     
     
-    HTMLTableSectionElement getTFoot();
+    HTMLTableSectionElement gettFoot();
 
     
-    void setTFoot(HTMLTableSectionElement tFoot);
+    void settFoot(HTMLTableSectionElement tFoot);
 
     /**
      * Retrieves the tHead object of the table.
      */
     
     
-    HTMLTableSectionElement getTHead();
+    HTMLTableSectionElement gettHead();
 
     
-    void setTHead(HTMLTableSectionElement tHead);
+    void settHead(HTMLTableSectionElement tHead);
 
     /**
      * Sets or retrieves the width of the object.
@@ -138,22 +138,22 @@ public interface HTMLTableElement extends HTMLElement {
     /**
      * Creates an empty caption element in the table.
      */
-    HTMLTableCaptionElement createCaption();
+    HTMLElement createCaption();
 
     /**
      * Creates an empty tBody element in the table.
      */
-    HTMLTableSectionElement createTBody();
+    HTMLElement createTBody();
 
     /**
      * Creates an empty tFoot element in the table.
      */
-    HTMLTableSectionElement createTFoot();
+    HTMLElement createTFoot();
 
     /**
      * Returns the tHead element object if successful, or null otherwise.
      */
-    HTMLTableSectionElement createTHead();
+    HTMLElement createTHead();
 
     /**
      * Deletes the caption element and its contents from the table.
@@ -186,8 +186,9 @@ public interface HTMLTableElement extends HTMLElement {
      * Creates a new row (tr) in the table, and adds the row to the rows collection.
      *
      * @param index Number that specifies where to insert the row in the rows collection. The default value is -1, which appends the new row to the end of the rows collection.
+     * @throws Exception 
      */
-    HTMLTableRowElement insertRow(int index);
+    HTMLTableRowElement insertRow(int index) throws Exception;
 
     HTMLTableRowElement insertRow();
 

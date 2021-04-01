@@ -23,18 +23,21 @@
 /*
  * Created on Dec 3, 2005
  */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.table;
 
 import java.awt.Dimension;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.RBlock;
+import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.SizeInfo;
 
-class RTableCell extends RBlock {
+public class RTableCell extends RBlock {
 	
 	private final HTMLElementImpl cellElement;
 	
@@ -69,7 +72,7 @@ class RTableCell extends RBlock {
 	 * @param sizeOnly a boolean.
 	 * @return a {@link java.awt.Dimension} object.
 	 */
-	protected Dimension doCellLayout(int width, int height, boolean expandWidth, boolean expandHeight,
+	public Dimension doCellLayout(int width, int height, boolean expandWidth, boolean expandHeight,
 			boolean sizeOnly) {
 		try {
 			this.layout(width, height, expandWidth, expandHeight, null, sizeOnly);
@@ -134,7 +137,7 @@ class RTableCell extends RBlock {
 	/**
 	 * <p>Getter for the field topLeftVirtualCell.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.renderer.VirtualCell} object.
+	 * @return a {@link org.loboevolution.html.renderer.table.VirtualCell} object.
 	 */
 	public VirtualCell getTopLeftVirtualCell() {
 		return this.topLeftVirtualCell;
@@ -254,7 +257,7 @@ class RTableCell extends RBlock {
 	/**
 	 * <p>Setter for the field topLeftVirtualCell.</p>
 	 *
-	 * @param vc a {@link org.loboevolution.html.renderer.VirtualCell} object.
+	 * @param vc a {@link org.loboevolution.html.renderer.table.VirtualCell} object.
 	 */
 	public void setTopLeftVirtualCell(VirtualCell vc) {
 		this.topLeftVirtualCell = vc;

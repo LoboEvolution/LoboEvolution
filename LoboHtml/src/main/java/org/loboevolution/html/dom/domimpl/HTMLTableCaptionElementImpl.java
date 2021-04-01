@@ -89,6 +89,6 @@ public class HTMLTableCaptionElementImpl extends HTMLElementImpl implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "[object HTML TableCaptionElement]";
+		return "[object HTMLTableCaptionElement]";
 	}
 }

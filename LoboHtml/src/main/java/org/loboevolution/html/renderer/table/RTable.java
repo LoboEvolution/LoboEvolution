@@ -20,82 +20,38 @@
  *     Contact info: ivan.difrancesco@yahoo.it
  *
  */
-/*
- * Created on Nov 19, 2005
- */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.table;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
+import java.util.LinkedList;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.renderer.BaseElementRenderable;
+import org.loboevolution.html.renderer.BoundableRenderable;
+import org.loboevolution.html.renderer.DelayedPair;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.PositionedRenderable;
+import org.loboevolution.html.renderer.RenderableContainer;
+import org.loboevolution.html.renderer.RenderableSpot;
+import org.loboevolution.html.renderer.ZIndexComparator;
+
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 
-class RTable extends BaseElementRenderable {
-	private static class LayoutKey {
-		public final int availHeight;
-		public final int availWidth;
-		public final Font font;
-		public final int whitespace;
+public class RTable extends BaseElementRenderable {
 
-		public LayoutKey(int availWidth, int availHeight, int whitespace, Font font) {
-			super();
-			this.availWidth = availWidth;
-			this.availHeight = availHeight;
-			this.whitespace = whitespace;
-			this.font = font;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (obj == this) {
-				return true;
-			}
-			if (!(obj instanceof LayoutKey)) {
-				return false;
-			}
-			final LayoutKey other = (LayoutKey) obj;
-			return other.availWidth == this.availWidth && other.availHeight == this.availHeight
-					&& other.whitespace == this.whitespace && Objects.equals(other.font, this.font);
-		}
-
-		@Override
-		public int hashCode() {
-			final Font font = this.font;
-			return this.availWidth * 1000 + this.availHeight ^ (font == null ? 0 : font.hashCode());
-		}
-	}
-
-	private static class LayoutValue {
-		public final int height;
-		public final int width;
-
-		public LayoutValue(int width, int height) {
-			this.width = width;
-			this.height = height;
-		}
-	}
-
-	private static final int MAX_CACHE_SIZE = 10;
-	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<>(5);
-	private LayoutKey lastLayoutKey = null;
-	private LayoutValue lastLayoutValue = null;
 	private int otherOrdinal;
 
 	private SortedSet<PositionedRenderable> positionedRenderables;
@@ -141,65 +97,36 @@ class RTable extends BaseElementRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
-		final Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
-		final RenderState rs = this.modelNode.getRenderState();
-		final int whitespace = rs == null ? RenderState.WS_NORMAL : rs.getWhiteSpace();
-		final Font font = rs == null ? null : rs.getFont();
-		final LayoutKey layoutKey = new LayoutKey(availWidth, availHeight, whitespace, font);
-		LayoutValue layoutValue;
-		if (sizeOnly) {
-			layoutValue = cachedLayout.get(layoutKey);
-		} else {
-			if (Objects.equals(layoutKey, this.lastLayoutKey)) {
-				layoutValue = this.lastLayoutValue;
-			} else {
-				layoutValue = null;
-			}
+		final Collection<PositionedRenderable> prs = this.positionedRenderables;
+		if (prs != null) {
+			prs.clear();
 		}
-		if (layoutValue == null) {
-			final Collection<PositionedRenderable> prs = this.positionedRenderables;
-			if (prs != null) {
-				prs.clear();
-			}
-			this.otherOrdinal = 0;
-			clearGUIComponents();
-			clearDelayedPairs();
-			applyStyle(availWidth, availHeight);
-			final TableMatrix tm = this.tableMatrix;
-			final Insets insets = getInsets(false, false);
-			tm.reset(insets, availWidth, availHeight);
-			// TODO: No scrollbars
-			tm.build(availWidth, availHeight, sizeOnly);
-			tm.doLayout(insets);
+		this.otherOrdinal = 0;
+		clearGUIComponents();
+		clearDelayedPairs();
+		applyStyle(availWidth, availHeight);
+		final TableMatrix tm = this.tableMatrix;
+		final Insets insets = getInsets(false, false);
+		tm.reset(insets, availWidth, availHeight);
+		// TODO: No scrollbars
+		tm.build(availWidth, availHeight, sizeOnly);
+		tm.doLayout(insets);
 
-			// Import applicable delayed pairs.
-			// Only needs to be done if layout was
-			// forced. Otherwise, they should've
-			// been imported already.
-			final Collection<DelayedPair> pairs = this.delayedPairs;
-			if (pairs != null) {
-				for (DelayedPair pair : pairs) {
-					if (this == pair.getContainingBlock()) {
-						importDelayedPair(pair);
-					}
+		// Import applicable delayed pairs.
+		// Only needs to be done if layout was
+		// forced. Otherwise, they should've
+		// been imported already.
+		final Collection<DelayedPair> pairs = this.delayedPairs;
+		if (pairs != null) {
+			for (DelayedPair pair : pairs) {
+				if (this == pair.getContainingBlock()) {
+					importDelayedPair(pair);
 				}
-			}
-			layoutValue = new LayoutValue(tm.getTableWidth(), tm.getTableHeight());
-			if (sizeOnly) {
-				if (cachedLayout.size() > MAX_CACHE_SIZE) {
-					// Unlikely, but we should ensure it's bounded.
-					cachedLayout.clear();
-				}
-				cachedLayout.put(layoutKey, layoutValue);
-				this.lastLayoutKey = null;
-				this.lastLayoutValue = null;
-			} else {
-				this.lastLayoutKey = layoutKey;
-				this.lastLayoutValue = layoutValue;
 			}
 		}
-		this.width = layoutValue.width;
-		this.height = layoutValue.height;
+
+		this.width = tm.getTableWidth();
+		this.height = tm.getTableHeight();
 		sendGUIComponentsToParent();
 		sendDelayedPairsToParent();
 	}
@@ -253,7 +180,7 @@ class RTable extends BaseElementRenderable {
 	public Iterator getRenderables() {
 		final SortedSet<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			final Collection c = new java.util.LinkedList();
+			final Collection c = new LinkedList();
 			for (PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.getRenderable();
 				c.add(r);
@@ -277,9 +204,6 @@ class RTable extends BaseElementRenderable {
 	@Override
 	public void invalidateLayoutLocal() {
 		super.invalidateLayoutLocal();
-		this.cachedLayout.clear();
-		this.lastLayoutKey = null;
-		this.lastLayoutValue = null;
 	}
 
 	/** {@inheritDoc} */
@@ -299,7 +223,9 @@ class RTable extends BaseElementRenderable {
 				}
 			}
 		}
-		return this.tableMatrix.onDoubleClick(event, x, y);
+		
+		
+		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onDoubleClick(event, x, y);
 	}
 
 	/*
@@ -326,7 +252,7 @@ class RTable extends BaseElementRenderable {
 				}
 			}
 		}
-		return this.tableMatrix.onMouseClick(event, x, y);
+		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onMouseClick(event, x, y);
 	}
 
 	/*
@@ -339,7 +265,7 @@ class RTable extends BaseElementRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseDisarmed(MouseEvent event) {
-		return this.tableMatrix.onMouseDisarmed(event);
+		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onMouseDisarmed(event);
 	}
 
 	/*
@@ -366,7 +292,7 @@ class RTable extends BaseElementRenderable {
 				}
 			}
 		}
-		return this.tableMatrix.onMousePressed(event, x, y);
+		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onMousePressed(event, x, y);
 	}
 
 	/*
@@ -393,7 +319,7 @@ class RTable extends BaseElementRenderable {
 				}
 			}
 		}
-		return this.tableMatrix.onMouseReleased(event, x, y);
+		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onMouseReleased(event, x, y);
 	}
 
 	/** {@inheritDoc} */

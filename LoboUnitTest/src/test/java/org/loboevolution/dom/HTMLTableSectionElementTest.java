@@ -30,19 +30,19 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
 
     @Test
     public void align_thead() {
-        String[] messages = {"", "hello", "left", "hi", "right"};
+        String[] messages = {null, "hello", "left", "hi", "right"};
         align("th", messages);
     }
 
     @Test
     public void align_tbody() {
-        String[] messages = {"", "hello", "left", "hi", "right"};
+        String[] messages = {null, "hello", "left", "hi", "right"};
         align("tb", messages);
     }
 
     @Test
     public void align_tfoot() {
-        String[] messages = {"", "hello", "left", "hi", "right"};
+        String[] messages = {null, "hello", "left", "hi", "right"};
         align("tf", messages);
     }
 
@@ -98,7 +98,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
 
     @Test
     public void vAlign_tfoot() {
-        String[] messages = {"top", "baseline", "3", "middle", "8", "bottom"};
+        String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
         vAlign("tf", messages);
     }
 

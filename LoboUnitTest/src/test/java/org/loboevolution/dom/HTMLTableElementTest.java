@@ -51,7 +51,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    newCaption.innerHTML = 'caption3';\n"
                 + "    alert(table.caption.innerHTML);\n"
 
-                + "    try { table.caption = 123; } catch(e) { alert('exception') }\n"
+                + "    table.caption = 123;\n"
                 + "    alert(table.caption);\n"
                 + "    if (table.caption) { alert(table.caption.innerHTML) }\n"
 
@@ -62,7 +62,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "  </script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"caption1", "caption2", null, "caption3", "exception",
+        final String[] messages = {"caption1", "caption2", null, "caption3",
                 "[object HTMLTableCaptionElement]", "caption3", "caption4"};
         checkHtmlAlert(html, messages);
     }
@@ -91,18 +91,18 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    newTHead.id = 'thead3';\n"
                 + "    alert(table.tHead.id);\n"
 
-                + "    try { table.tHead = 123; } catch(e) { alert('exception') }\n"
+                + "    table.tHead = 123;\n"
                 + "    alert(table.tHead);\n"
                 + "    if (table.tHead) { alert(table.tHead.id) }\n"
 
                 + "    var tHead4 = document.createElement('tHead');\n"
                 + "    tHead4.id = 'thead4';\n"
-                + "    try { table.tHead = tHead4; } catch(e) { alert('exception') }\n"
+                + "    try { table.tHead = tHead4; } catch(e) { alert(e) }\n"
                 + "    alert(table.tHead.id);\n"
                 + "  </script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"thead1", "thead2", null, "thead3", "exception",
+        final String[] messages = {"thead1", "thead2", null, "thead3",
                 "[object HTMLTableSectionElement]", "thead3", "thead4"};
         checkHtmlAlert(html, messages);
     }
@@ -238,8 +238,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "  </script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"2", "true", "8 2 2 2 2",
-                "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"};
+        final String[] messages = {"2", "true", "8 2 2 2 2", "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"};
         checkHtmlAlert(html, messages);
     }
 
@@ -267,7 +266,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    newTFoot.id = 'tfoot3';\n"
                 + "    alert(table.tFoot.id);\n"
 
-                + "    try { table.tFoot = 123; } catch(e) { alert('exception') }\n"
+                + "   table.tFoot = 123;\n"
                 + "    alert(table.tFoot);\n"
                 + "    if (table.tFoot) { alert(table.tFoot.id) }\n"
 
@@ -278,7 +277,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "  </script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"tfoot1", "tfoot2", null, "tfoot3", "exception",
+        final String[] messages = {"tfoot1", "tfoot2", null, "tfoot3",
                 "[object HTMLTableSectionElement]", "tfoot3", "tfoot4"};
         checkHtmlAlert(html, messages);
     }
@@ -588,7 +587,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {"", "hello", "left", "hi", "right"};
+        final String[] messages = {null, "hello", "left", "hi", "right"};
         checkHtmlAlert(html, messages);
     }
 
@@ -613,7 +612,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {"", "#0000aa", "x"};
+        final String[] messages = {null, "#0000aa", "x"};
         checkHtmlAlert(html, messages);
     }
 
@@ -786,7 +785,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"", "hello", "unknown", "exception", "", "test"};
+        final String[] messages = {null, "hello", "unknown", "exception", "", "test"};
         checkHtmlAlert(html, messages);
     }
 
@@ -808,7 +807,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"none", "groups", "rows", "cols", "wrong", ""};
+        final String[] messages = {"none", "groups", "rows", "cols", "wrong", null};
         checkHtmlAlert(html, messages);
     }
 

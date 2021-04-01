@@ -20,11 +20,11 @@
  *     Contact info: ivan.difrancesco@yahoo.it
  *
  */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.table;
 
 import org.loboevolution.html.style.HtmlLength;
 
-class VirtualCell {
+public class VirtualCell {
 	private final RTableCell actualCell;
 	private int column;
 	private final boolean isTopLeft;
@@ -33,7 +33,7 @@ class VirtualCell {
 	/**
 	 * <p>Constructor for VirtualCell.</p>
 	 *
-	 * @param cell a {@link org.loboevolution.html.renderer.RTableCell} object.
+	 * @param cell a {@link org.loboevolution.html.renderer.table.RTableCell} object.
 	 * @param isTopLeft a boolean.
 	 */
 	public VirtualCell(RTableCell cell, boolean isTopLeft) {

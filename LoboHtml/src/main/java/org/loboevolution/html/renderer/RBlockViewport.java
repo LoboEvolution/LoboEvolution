@@ -54,6 +54,7 @@ import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
+import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;

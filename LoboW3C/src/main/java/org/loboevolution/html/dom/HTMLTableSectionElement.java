@@ -39,10 +39,10 @@ public interface HTMLTableSectionElement extends HTMLElement {
 
     @Deprecated
     
-    String getVAlign();
+    String getvAlign();
 
     
-    void setVAlign(String vAlign);
+    void setvAlign(String vAlign);
 
     /**
      * Removes the specified row (tr) from the element and from the rows collection.

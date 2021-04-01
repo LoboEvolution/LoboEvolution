@@ -351,7 +351,7 @@ public abstract class HTMLElementBuilder {
 	public static class Th extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
-			return new HTMLTableHeadElementImpl(name);
+			return new HTMLTableCellElementImpl(name);
 		}
 	}
 
@@ -366,6 +366,34 @@ public abstract class HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
 			return new HTMLTableRowElementImpl(name);
+		}
+	}
+	
+	public static class TFoot extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLTableSectionElementImpl(name);
+		}
+	}
+	
+	public static class THead extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLTableSectionElementImpl(name);
+		}
+	}
+	
+	public static class TBody extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLTableSectionElementImpl(name);
+		}
+	}
+	
+	public static class Col extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLTableColElementImpl(name);
 		}
 	}
 

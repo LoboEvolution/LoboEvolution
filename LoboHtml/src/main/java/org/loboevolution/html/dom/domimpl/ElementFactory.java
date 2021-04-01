@@ -70,6 +70,11 @@ class ElementFactory {
 		builders.put(HTMLTag.TD, new HTMLElementBuilder.Td());
 		builders.put(HTMLTag.TH, new HTMLElementBuilder.Th());
 		builders.put(HTMLTag.TR, new HTMLElementBuilder.Tr());
+		builders.put(HTMLTag.TFOOT, new HTMLElementBuilder.TFoot());
+		builders.put(HTMLTag.THEAD, new HTMLElementBuilder.THead());
+		builders.put(HTMLTag.TBODY, new HTMLElementBuilder.TBody());
+		builders.put(HTMLTag.COL, new HTMLElementBuilder.Col());
+		
 		builders.put(HTMLTag.FORM, new HTMLElementBuilder.Form());
 		builders.put(HTMLTag.INPUT, new HTMLElementBuilder.Input());
 		builders.put(HTMLTag.BUTTON, new HTMLElementBuilder.Button());

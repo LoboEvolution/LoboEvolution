@@ -67,7 +67,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	protected RCollection parent;
 
-	protected int x, y;
+	public int x, y;
 
 	public int width, height;
 

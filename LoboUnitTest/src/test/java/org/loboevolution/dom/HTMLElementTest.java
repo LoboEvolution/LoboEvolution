@@ -2408,7 +2408,7 @@ public class HTMLElementTest extends LoboUnitTest {
                         + "  </head>\n"
                         + "  <body id='body' onload='test()'>blah</body>\n"
                         + "</html>";
-        final String[] messages = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex"};
+        final String[] messages = {null, "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex"};
         checkHtmlAlert(html, messages);
     }
 

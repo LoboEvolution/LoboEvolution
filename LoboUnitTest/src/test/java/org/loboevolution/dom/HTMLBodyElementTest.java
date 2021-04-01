@@ -92,7 +92,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
                         + "  </head>\n"
                         + "  <body id='body' onload='test()'>blah</body>\n"
                         + "</html>";
-        final String[] messages = {"", "#0000aa", "x"};
+        final String[] messages = {null, "#0000aa", "x"};
         checkHtmlAlert(html, messages);
     }
 
@@ -137,7 +137,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
                         + "  </head>\n"
                         + "  <body id='body' onload='test()'>blah</body>\n"
                         + "</html>";
-        final String[] messages = {"", "#0000aa", "x"};
+        final String[] messages = {null, "#0000aa", "x"};
         checkHtmlAlert(html, messages);
     }
 
@@ -159,7 +159,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
                         + "  </head>\n"
                         + "  <body id='body' onload='test()'>blah</body>\n"
                         + "</html>";
-        final String[] messages = {"", "#0000aa", "x"};
+        final String[] messages = {null, "#0000aa", "x"};
         checkHtmlAlert(html, messages);
     }
 
@@ -181,7 +181,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
                         + "  </head>\n"
                         + "  <body id='body' onload='test()'>blah</body>\n"
                         + "</html>";
-        final String[] messages = {"", "#0000aa", "x"};
+        final String[] messages = {null, "#0000aa", "x"};
         checkHtmlAlert(html, messages);
     }
 
@@ -203,7 +203,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
                         + "  </head>\n"
                         + "  <body id='body' onload='test()'>blah</body>\n"
                         + "</html>";
-        final String[] messages = {"", "#0000aa", "x"};
+        final String[] messages = {null, "#0000aa", "x"};
         checkHtmlAlert(html, messages);
     }
 

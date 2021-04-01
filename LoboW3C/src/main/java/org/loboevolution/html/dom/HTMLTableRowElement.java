@@ -60,10 +60,10 @@ public interface HTMLTableRowElement extends HTMLElement {
 
     @Deprecated
     
-    String getVAlign();
+    String getvAlign();
 
     
-    void setVAlign(String vAlign);
+    void setvAlign(String vAlign);
 
     /**
      * Removes the specified cell from the table row, as well as from the cells collection.
@@ -77,8 +77,8 @@ public interface HTMLTableRowElement extends HTMLElement {
      *
      * @param index Number that specifies where to insert the cell in the tr. The default value is -1, which appends the new cell to the end of the cells collection.
      */
-    HTMLTableDataCellElement insertCell(int index);
+    HTMLTableCellElement insertCell(Object index) throws Exception;
 
-    HTMLTableDataCellElement insertCell();
+    HTMLTableCellElement insertCell();
 
 }

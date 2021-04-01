@@ -25,7 +25,7 @@ package org.loboevolution.html.renderer;
 
 import java.util.Comparator;
 
-class ZIndexComparator implements Comparator<Object> {
+public class ZIndexComparator implements Comparator<Object> {
 
 	/** {@inheritDoc} */
 	@Override

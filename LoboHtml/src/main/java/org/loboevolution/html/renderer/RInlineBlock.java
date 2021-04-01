@@ -32,6 +32,7 @@ import java.util.Iterator;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;

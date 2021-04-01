@@ -254,7 +254,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {"", "#0000aa", "x"};
+        final String[] messages = {null, "#0000aa", "x"};
         checkHtmlAlert(html, messages);
     }
 

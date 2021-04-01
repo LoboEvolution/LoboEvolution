@@ -50,7 +50,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"left", "right", "justify", "char", "center", "wrong", ""};
+        final String[] messages = {"left", "right", "justify", "char", "center", "wrong", null};
         checkHtmlAlert(html, messages);
     }
 
@@ -230,7 +230,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"top", "baseline", "3", "middle", "8", "bottom"};
+        final String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
         checkHtmlAlert(html, messages);
     }
 
@@ -327,7 +327,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
                 + "</table>\n"
                 + "</body></html>";
 
-        final String[] messages = {null, "string"};
+        final String[] messages = {null, "object"};
         checkHtmlAlert(html, messages);
     }
 

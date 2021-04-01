@@ -26,11 +26,15 @@
 package org.loboevolution.html.dom.domimpl;
 
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
-import org.loboevolution.html.dom.*;
+import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.HTMLTableCellElement;
+import org.loboevolution.html.dom.HTMLTableRowElement;
 import org.loboevolution.html.dom.nodeimpl.DOMException;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
-import org.loboevolution.html.dom.nodeimpl.NodeVisitor;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableRowRenderState;
 
@@ -46,6 +50,8 @@ import org.loboevolution.html.node.Node;
  * @version $Id: $Id
  */
 public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTableRowElement {
+	
+	private int index = -1;
 	
 	/**
 	 * <p>Constructor for HTMLTableRowElementImpl.</p>
@@ -71,16 +77,26 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 
 	/** {@inheritDoc} */
 	@Override
-	public void deleteCell(int index) {
+	public void deleteCell(int index) {	
 		int trcount = 0;
-		for (Iterator<Node> i= nodeList.iterator(); i.hasNext(); ) {
+		if(index == -1) index = this.nodeList.size() -1;
+		for (Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
 			Node node = i.next();
-			if (node instanceof HTMLTableCellElement) {
+			if ("TD".equalsIgnoreCase(node.getNodeName())) {
 				if (trcount == index) {
-					removeChildAt(index);
+					removeChildAt(nodeList.indexOf(node));
+					return;
 				}
 				trcount++;
 			}
+		}
+		
+		if (this.nodeList.size() < index) {
+            throw new DOMException(Code.INDEX_SIZE_ERR, "The index is minor than the number of cells in the table ");
+		}
+		
+		if (this.nodeList.size() > index) {
+            throw new DOMException(Code.INDEX_SIZE_ERR, "The index is greater than the number of cells in the table ");
 		}
 	}
 
@@ -99,8 +115,18 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getCells() {
-		final NodeFilter filter = node -> node instanceof HTMLTableCellElementImpl;
-        return new HTMLCollectionImpl(this, filter);
+		NodeListImpl list = this.nodeList;	
+		if (getParentNode() != null && list.size() == 0) {
+			NodeListImpl childNodes = (NodeListImpl) getParentNode().getChildNodes();
+			childNodes.forEach(node -> {
+				if (node instanceof HTMLTableCellElementImpl) {
+					list.add(node);
+				}
+			});
+			return new HTMLCollectionImpl(list);
+		}
+
+		return new HTMLCollectionImpl(list.stream().filter(node -> "TD".equalsIgnoreCase(node.getNodeName())).collect(Collectors.toList()));
 	}
 
 	/** {@inheritDoc} */
@@ -118,28 +144,20 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	/** {@inheritDoc} */
 	@Override
 	public int getRowIndex() {
-		final NodeImpl parent = (NodeImpl) getParentNode();
-		if (parent == null) {
-			return -1;
-		}
-		try {
-			parent.visit(new NodeVisitor() {
-				private int count = 0;
-
-				@Override
-				public void visit(Node node) {
-					if (node instanceof HTMLTableRowElementImpl) {
-						if (HTMLTableRowElementImpl.this == node) {
-							throw new StopVisitorException(this.count);
-						}
-						this.count++;
+		if (index >= 0) {
+			return index;
+		} else {
+			AtomicInteger index = new AtomicInteger(-1);
+			if(getParentNode() != null) {
+				NodeListImpl childNodes = (NodeListImpl) getParentNode().getChildNodes();
+				childNodes.forEach(node -> {
+					if (node instanceof HTMLTableRowElement) {
+						index.incrementAndGet();
 					}
-				}
-			});
-		} catch (final StopVisitorException sve) {
-			return (Integer) sve.getTag();
+				});
+			}
+			return index.get();
 		}
-		return -1;
 	}
 
 	/** {@inheritDoc} */
@@ -151,48 +169,76 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 
 	/** {@inheritDoc} */
 	@Override
-	public String getVAlign() {
+	public String getvAlign() {
 		return getAttribute("valign");
 	}
 	
 	@Override
-	public HTMLTableDataCellElement insertCell() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public HTMLTableDataCellElement insertCell(int index) {
-		return this.insertCell(index, "TD");
-	}
-
-	private HTMLTableDataCellElement insertCell(int index, String tagName) {
+	public HTMLTableCellElement insertCell() {
 		final Document doc = this.document;
 		if (doc == null) {
 			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
-		final HTMLTableDataCellElement cellElement = (HTMLTableDataCellElement) doc.createElement(tagName);
-		synchronized (this.treeLock) {
-			if (index == -1) {
-				appendChild(cellElement);
-				return cellElement;
-			}
+		HTMLTableCellElementImpl cellElement = (HTMLTableCellElementImpl) doc.createElement("TD");
+		appendChild(cellElement);
+		return cellElement;
+	}
 
-			int trcount = 0;
-			for (Iterator<Node> i= nodeList.iterator(); i.hasNext(); ) {
-				Node node = i.next();
-				if (node instanceof HTMLTableCellElement) {
-					if (trcount == index) {
-						insertAt(cellElement, nodeList.indexOf(node));
-						return cellElement;
-					}
-					trcount++;
-				}
+	/** {@inheritDoc} 
+	 * @throws Exception */
+	@Override
+	public HTMLTableCellElementImpl insertCell(Object index) throws Exception  {
+		return this.insertCell(index, "TD");
+	}
+
+	private HTMLTableCellElementImpl insertCell(Object objIndex, String tagName)  throws Exception {
+		final Document doc = this.document;
+		if (doc == null) {
+			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");
+		}
+		HTMLTableCellElementImpl cellElement = (HTMLTableCellElementImpl) doc.createElement(tagName);
+		
+		int index = -1;		
+		if (objIndex instanceof Double) {
+			index = ((Double) objIndex).intValue();
+		} else {
+			if (objIndex == null || "".equals(objIndex)) {
+				index = 0;
+			} else {
+				index = Integer.parseInt(objIndex.toString());
 			}
+		}
+		
+		if (index  == 0 || index  == - 1) {
 			appendChild(cellElement);
+			AtomicInteger cellIndex = new AtomicInteger(-1);
+			if (index == -1) {
+				NodeListImpl childNodes = (NodeListImpl) getParentNode().getChildNodes();
+				childNodes.forEach(node -> {
+					if (node instanceof HTMLTableCellElementImpl) {
+						cellIndex.incrementAndGet();
+					}
+				});
+			}
+			cellElement.setIndex(index == -1 ? cellIndex.get() : 0);
 			return cellElement;
 		}
+
+		AtomicInteger trcount = new AtomicInteger();
+		nodeList.forEach(node -> {
+			if (node instanceof HTMLTableCellElement) {
+				trcount.incrementAndGet();
+			}
+		});
+		
+		if (trcount.get() < index) {
+            throw new DOMException(Code.INDEX_SIZE_ERR, "The index is greater than the number of cells in the table ");
+		} else {
+			cellElement.setIndex(index);
+			insertAt(cellElement, index);
+		}
+
+		return cellElement;
 	}
 
 	/**
@@ -202,10 +248,15 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 *
 	 * @param index The cell index to insert at.
 	 * @return The element that was inserted.
+	 * @throws Exception 
 	 * @throws org.w3c.dom.DOMException When the index is out of range.
 	 */
-	public HTMLElement insertHeader(int index) {
+	public HTMLElement insertHeader(int index) throws Exception {
 		return this.insertCell(index, "TH");
+	}
+	
+	protected void setIndex(int index) {
+		this.index = index;
 	}
 
 	/** {@inheritDoc} */
@@ -234,7 +285,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 
 	/** {@inheritDoc} */
 	@Override
-	public void setVAlign(String vAlign) {
+	public void setvAlign(String vAlign) {
 		setAttribute("valign", vAlign);
 	}
 

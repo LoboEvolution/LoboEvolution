@@ -68,7 +68,7 @@ public interface HTMLTableCellElement extends HTMLElement {
     int getColSpan();
 
     
-    void setColSpan(int colSpan);
+    void setColSpan(Object colSpan);
 
     /**
      * Sets or retrieves a list of header cells that provide information for the object.
@@ -106,7 +106,7 @@ public interface HTMLTableCellElement extends HTMLElement {
     int getRowSpan();
 
     
-    void setRowSpan(int rowSpan);
+    void setRowSpan(Object rowSpan);
 
     /**
      * Sets or retrieves the group of cells in a table to which the object's information applies.
@@ -119,10 +119,10 @@ public interface HTMLTableCellElement extends HTMLElement {
 
     @Deprecated
     
-    String getVAlign();
+    String getvAlign();
 
     
-    void setVAlign(String vAlign);
+    void setvAlign(String vAlign);
 
     /**
      * Sets or retrieves the width of the object.
