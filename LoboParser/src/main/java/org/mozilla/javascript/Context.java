@@ -349,6 +349,38 @@ public class Context
      */
     public static final int FEATURE_ENABLE_XML_SECURE_PARSING = 20;
 
+    /**
+     * Configure whether the entries in a Java Map can be accessed by properties.
+     *
+     * Not enabled:
+     *
+     *   var map = new java.util.HashMap();
+     *   map.put('foo', 1);
+     *   map.foo; // undefined
+     *
+     * Enabled:
+     *
+     *   var map = new java.util.HashMap();
+     *   map.put('foo', 1);
+     *   map.foo; // 1
+     *
+     * WARNING: This feature is similar to the one in Nashorn, but incomplete.
+     *
+     * 1. A entry has priority over method.
+     *
+     *   map.put("put", "abc");
+     *   map.put;  // abc
+     *   map.put("put", "efg"); // ERROR
+     *
+     * 2. The distinction between numeric keys and string keys is ambiguous.
+     *
+     *   map.put('1', 123);
+     *   map['1']; // Not found. This means `map[1]`.
+     *
+     * @since 1.7 Release 14
+     */
+    public static final int FEATURE_ENABLE_JAVA_MAP_ACCESS = 21;
+
     public static final String languageVersionProperty = "language version";
     public static final String errorReporterProperty   = "error reporter";
 
@@ -975,40 +1007,66 @@ public class Context
         throw new EvaluatorException(message, sourceName, lineno, lineSource, lineOffset);
     }
 
-    static EvaluatorException reportRuntimeError0(String messageId)
+    static EvaluatorException reportRuntimeErrorById(String messageId, Object... args)
     {
-        String msg = ScriptRuntime.getMessage0(messageId);
+        String msg = ScriptRuntime.getMessageById(messageId, args);
         return reportRuntimeError(msg);
     }
 
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
+    @Deprecated
+    static EvaluatorException reportRuntimeError0(String messageId)
+    {
+        String msg = ScriptRuntime.getMessageById(messageId);
+        return reportRuntimeError(msg);
+    }
+
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
+    @Deprecated
     static EvaluatorException reportRuntimeError1(String messageId,
                                                   Object arg1)
     {
-        String msg = ScriptRuntime.getMessage1(messageId, arg1);
+        String msg = ScriptRuntime.getMessageById(messageId, arg1);
         return reportRuntimeError(msg);
     }
 
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
+    @Deprecated
     static EvaluatorException reportRuntimeError2(String messageId,
                                                   Object arg1, Object arg2)
     {
-        String msg = ScriptRuntime.getMessage2(messageId, arg1, arg2);
+        String msg = ScriptRuntime.getMessageById(messageId, arg1, arg2);
         return reportRuntimeError(msg);
     }
 
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
+    @Deprecated
     static EvaluatorException reportRuntimeError3(String messageId,
                                                   Object arg1, Object arg2,
                                                   Object arg3)
     {
-        String msg = ScriptRuntime.getMessage3(messageId, arg1, arg2, arg3);
+        String msg = ScriptRuntime.getMessageById(messageId, arg1, arg2, arg3);
         return reportRuntimeError(msg);
     }
 
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
+    @Deprecated
     static EvaluatorException reportRuntimeError4(String messageId,
                                                   Object arg1, Object arg2,
                                                   Object arg3, Object arg4)
     {
         String msg
-            = ScriptRuntime.getMessage4(messageId, arg1, arg2, arg3, arg4);
+            = ScriptRuntime.getMessageById(messageId, arg1, arg2, arg3, arg4);
         return reportRuntimeError(msg);
     }
 
@@ -2455,7 +2513,7 @@ public class Context
         return cx;
     }
 
-    private Object compileImpl(Scriptable scope,
+    protected Object compileImpl(Scriptable scope,
                                String sourceString, String sourceName, int lineno,
                                Object securityDomain, boolean returnFunction,
                                Evaluator compiler,

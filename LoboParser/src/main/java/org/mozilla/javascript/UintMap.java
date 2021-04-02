@@ -562,7 +562,7 @@ public class UintMap implements Serializable
         }
         checkSameMaps(map, (UintMap)writeAndRead(map));
 
-        logger.info(); System.out.flush();
+        System.out.println(); System.out.flush();
 
     }
 

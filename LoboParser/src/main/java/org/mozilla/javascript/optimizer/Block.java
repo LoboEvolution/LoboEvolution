@@ -9,7 +9,6 @@ import java.io.StringWriter;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.ObjArray;
@@ -19,9 +18,6 @@ import org.mozilla.javascript.ast.Jump;
 
 class Block
 {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(Block.class.getName());
 
     private static class FatBlock
     {
@@ -80,9 +76,9 @@ class Block
 
         if (DEBUG) {
             ++debug_blockCount;
-            logger.info("-------------------"+fn.fnode.getFunctionName()+"  "+debug_blockCount+"--------");
-            logger.info(fn.fnode.toStringTree(fn.fnode));
-            logger.info(toString(theBlocks, statementNodes));
+            System.out.println("-------------------"+fn.fnode.getFunctionName()+"  "+debug_blockCount+"--------");
+            System.out.println(fn.fnode.toStringTree(fn.fnode));
+            System.out.println(toString(theBlocks, statementNodes));
         }
 
         reachingDefDataFlow(fn, statementNodes, theBlocks, varTypes);
@@ -90,12 +86,12 @@ class Block
 
         if (DEBUG) {
             for (int i = 0; i < theBlocks.length; i++) {
-                logger.info("For block " + theBlocks[i].itsBlockID);
+                System.out.println("For block " + theBlocks[i].itsBlockID);
                 theBlocks[i].printLiveOnEntrySet(fn);
             }
-            logger.info("Variable Table, size = " + varCount);
+            System.out.println("Variable Table, size = " + varCount);
             for (int i = 0; i != varCount; i++) {
-                logger.info("["+i+"] type: "+varTypes[i]);
+                System.out.println("["+i+"] type: "+varTypes[i]);
             }
         }
 
@@ -488,6 +484,7 @@ class Block
             case Token.MUL:
             case Token.DIV:
             case Token.MOD:
+            case Token.EXP:
             case Token.BITOR:
             case Token.BITXOR:
             case Token.BITAND:
@@ -628,13 +625,13 @@ class Block
             for (int i = 0; i < fn.getVarCount(); i++) {
                 String name = fn.fnode.getParamOrVarName(i);
                 if (itsUseBeforeDefSet.get(i))
-                    logger.info(name + " is used before def'd");
+                    System.out.println(name + " is used before def'd");
                 if (itsNotDefSet.get(i))
-                    logger.info(name + " is not def'd");
+                    System.out.println(name + " is not def'd");
                 if (itsLiveOnEntrySet.get(i))
-                    logger.info(name + " is live on entry");
+                    System.out.println(name + " is live on entry");
                 if (itsLiveOnExitSet.get(i))
-                    logger.info(name + " is live on exit");
+                    System.out.println(name + " is live on exit");
             }
         }
     }

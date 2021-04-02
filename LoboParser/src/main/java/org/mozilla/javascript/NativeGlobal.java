@@ -386,7 +386,7 @@ public class NativeGlobal implements Serializable, IdFunctionCall
             if (Double.isNaN(d) || ((mask = (int) d) != d) ||
                 0 != (mask & ~(URL_XALPHAS | URL_XPALPHAS | URL_PATH)))
             {
-                throw Context.reportRuntimeError0("msg.bad.esc.mask");
+                throw Context.reportRuntimeErrorById("msg.bad.esc.mask");
             }
         }
 
@@ -722,7 +722,7 @@ public class NativeGlobal implements Serializable, IdFunctionCall
 
     private static EcmaError uriError() {
         return ScriptRuntime.constructError("URIError",
-                ScriptRuntime.getMessage0("msg.bad.uri"));
+                ScriptRuntime.getMessageById("msg.bad.uri"));
     }
 
     private static final String URI_DECODE_RESERVED = ";/?:@&=+$,#";

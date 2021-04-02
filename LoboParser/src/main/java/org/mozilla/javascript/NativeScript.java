@@ -59,7 +59,7 @@ class NativeScript extends BaseFunction
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
-        throw Context.reportRuntimeError0("msg.script.is.not.constructor");
+        throw Context.reportRuntimeErrorById("msg.script.is.not.constructor");
     }
 
     @Override
@@ -125,7 +125,7 @@ class NativeScript extends BaseFunction
           }
 
           case Id_exec: {
-            throw Context.reportRuntimeError1(
+            throw Context.reportRuntimeErrorById(
                 "msg.cant.call.indirect", "exec");
           }
 
@@ -141,9 +141,7 @@ class NativeScript extends BaseFunction
 
     private static NativeScript realThis(Scriptable thisObj, IdFunctionObject f)
     {
-        if (!(thisObj instanceof NativeScript))
-            throw incompatibleCallError(f);
-        return (NativeScript)thisObj;
+        return ensureType(thisObj, NativeScript.class, f);
     }
 
     private static Script compile(Context cx, String source)
@@ -166,16 +164,23 @@ class NativeScript extends BaseFunction
     protected int findPrototypeId(String s)
     {
         int id;
-// #generated# Last update: 2007-05-09 08:16:01 EDT
-        L0: { id = 0; String X = null;
-            L: switch (s.length()) {
-            case 4: X="exec";id=Id_exec; break L;
-            case 7: X="compile";id=Id_compile; break L;
-            case 8: X="toString";id=Id_toString; break L;
-            case 11: X="constructor";id=Id_constructor; break L;
-            }
-            if (X!=null && X!=s && !X.equals(s)) id = 0;
-            break L0;
+// #generated# Last update: 2021-03-21 09:49:23 MEZ
+        switch (s) {
+        case "constructor":
+            id = Id_constructor;
+            break;
+        case "toString":
+            id = Id_toString;
+            break;
+        case "compile":
+            id = Id_compile;
+            break;
+        case "exec":
+            id = Id_exec;
+            break;
+        default:
+            id = 0;
+            break;
         }
 // #/generated#
         return id;

@@ -67,6 +67,7 @@ import org.mozilla.javascript.ast.Symbol;
 import org.mozilla.javascript.ast.ThrowStatement;
 import org.mozilla.javascript.ast.TryStatement;
 import org.mozilla.javascript.ast.UnaryExpression;
+import org.mozilla.javascript.ast.UpdateExpression;
 import org.mozilla.javascript.ast.VariableDeclaration;
 import org.mozilla.javascript.ast.VariableInitializer;
 import org.mozilla.javascript.ast.WhileLoop;
@@ -298,8 +299,8 @@ public class Parser
 
     String lookupMessage(String messageId, String messageArg) {
         return messageArg == null
-            ? ScriptRuntime.getMessage0(messageId)
-            : ScriptRuntime.getMessage1(messageId, messageArg);
+            ? ScriptRuntime.getMessageById(messageId)
+            : ScriptRuntime.getMessageById(messageId, messageArg);
     }
 
     void reportError(String messageId) {
@@ -526,18 +527,23 @@ public class Parser
             // This is the only time during parsing that we set a node's parent
             // before parsing the children.  In order for the child node offsets
             // to be correct, we adjust the loop's reported position back to an
-            // absolute source offset, and restore it when we call exitLoop().
+            // absolute source offset, and restore it when we call
+            // restoreRelativeLoopPosition() (invoked just before setBody() is
+            // called on the loop).
             loop.setRelative(-currentLabel.getPosition());
         }
     }
 
     private void exitLoop() {
-        Loop loop = loopSet.remove(loopSet.size() - 1);
+        loopSet.remove(loopSet.size() - 1);
         loopAndSwitchSet.remove(loopAndSwitchSet.size() - 1);
+        popScope();
+    }
+
+    private void restoreRelativeLoopPosition(Loop loop) {
         if (loop.getParent() != null) {  // see comment in enterLoop
             loop.setRelative(loop.getParent().getPosition());
         }
-        popScope();
     }
 
     private void enterSwitch(SwitchStatement node) {
@@ -1430,6 +1436,7 @@ public class Parser
             pn.setParens(data.lp - pos, data.rp - pos);
             AstNode body = getNextStatementAfterInlineComments(pn);
             pn.setLength(getNodeEnd(body) - pos);
+            restoreRelativeLoopPosition(pn);
             pn.setBody(body);
         } finally {
             exitLoop();
@@ -1454,6 +1461,7 @@ public class Parser
             pn.setCondition(data.condition);
             pn.setParens(data.lp - pos, data.rp - pos);
             end = getNodeEnd(body);
+            restoreRelativeLoopPosition(pn);
             pn.setBody(body);
         } finally {
             exitLoop();
@@ -1590,6 +1598,7 @@ public class Parser
             try {
                 AstNode body = getNextStatementAfterInlineComments(pn);
                 pn.setLength(getNodeEnd(body) - forPos);
+                restoreRelativeLoopPosition(pn);
                 pn.setBody(body);
             } finally {
                 exitLoop();
@@ -1639,7 +1648,7 @@ public class Parser
         TryStatement pn = new TryStatement(tryPos);
         //Hnadled comment here because there should not be try without LC
         int lctt = peekToken();
-        if(lctt == Token.COMMENT) {
+        while(lctt == Token.COMMENT) {
             Comment commentNode = scannedComments.get(scannedComments.size()-1);
             pn.setInlineComment(commentNode);
             consumeToken();
@@ -1655,6 +1664,12 @@ public class Parser
 
         boolean sawDefaultCatch = false;
         int peek = peekToken();
+        while(peek == Token.COMMENT) {
+            Comment commentNode = scannedComments.get(scannedComments.size()-1);
+            pn.setInlineComment(commentNode);
+            consumeToken();
+            peek = peekToken();
+        }
         if (peek == Token.CATCH) {
             while (matchToken(Token.CATCH, true)) {
                 int catchLineNum = ts.lineno;
@@ -2565,7 +2580,7 @@ public class Parser
     private AstNode mulExpr()
         throws IOException
     {
-        AstNode pn = unaryExpr();
+        AstNode pn = expExpr();
         for (;;) {
             int tt = peekToken(), opPos = ts.tokenBeg;
             switch (tt) {
@@ -2573,7 +2588,28 @@ public class Parser
               case Token.DIV:
               case Token.MOD:
                 consumeToken();
-                pn = new InfixExpression(tt, pn, unaryExpr(), opPos);
+                pn = new InfixExpression(tt, pn, expExpr(), opPos);
+                continue;
+            }
+            break;
+        }
+        return pn;
+    }
+
+    private AstNode expExpr()
+        throws IOException
+    {
+        AstNode pn = unaryExpr();
+        for (;;) {
+            int tt = peekToken(), opPos = ts.tokenBeg;
+            switch (tt) {
+            case Token.EXP:
+                if (pn instanceof UnaryExpression) {
+                    reportError("msg.no.unary.expr.on.left.exp", AstNode.operatorToString(pn.getType()));
+                    return makeErrorNode();
+                }
+                consumeToken();
+                pn = new InfixExpression(tt, pn, expExpr(), opPos);
                 continue;
             }
             break;
@@ -2619,8 +2655,8 @@ public class Parser
           case Token.INC:
           case Token.DEC:
               consumeToken();
-              UnaryExpression expr = new UnaryExpression(tt, ts.tokenBeg,
-                                                         memberExpr(true));
+              UpdateExpression expr = new UpdateExpression(tt, ts.tokenBeg,
+                                                           memberExpr(true));
               expr.setLineno(line);
               checkBadIncDec(expr);
               return expr;
@@ -2651,8 +2687,8 @@ public class Parser
                   return pn;
               }
               consumeToken();
-              UnaryExpression uexpr =
-                      new UnaryExpression(tt, ts.tokenBeg, pn, true);
+              UpdateExpression uexpr =
+                      new UpdateExpression(tt, ts.tokenBeg, pn, true);
               uexpr.setLineno(line);
               checkBadIncDec(uexpr);
               return uexpr;
@@ -3147,25 +3183,7 @@ public class Parser
 
           case Token.NUMBER: {
               consumeToken();
-              String s = ts.getString();
-              if (this.inUseStrictDirective && ts.isNumberOldOctal()) {
-                  reportError("msg.no.old.octal.strict");
-              }
-              if (ts.isNumberBinary()) {
-                  s = "0b"+s;
-              }
-              if (ts.isNumberOldOctal()) {
-                  s = "0"+s;
-              }
-              if (ts.isNumberOctal()) {
-                  s = "0o"+s;
-              }
-              if (ts.isNumberHex()) {
-                  s = "0x"+s;
-              }
-              return new NumberLiteral(ts.tokenBeg,
-                                       s,
-                                       ts.getNumber());
+              return createNumberLiteral(false);
           }
 
           case Token.STRING:
@@ -3679,8 +3697,7 @@ public class Parser
               break;
 
           case Token.NUMBER:
-              pname = new NumberLiteral(
-                      ts.tokenBeg, ts.getString(), ts.getNumber());
+              pname = createNumberLiteral(true);
               break;
 
           default:
@@ -3798,6 +3815,29 @@ public class Parser
         return s;
     }
 
+    private NumberLiteral createNumberLiteral(boolean isProperty) {
+        String s = ts.getString();
+        if (this.inUseStrictDirective && ts.isNumberOldOctal()) {
+            if (compilerEnv.getLanguageVersion() >= Context.VERSION_ES6 || !isProperty) {
+                reportError("msg.no.old.octal.strict");
+            }
+        }
+        if (compilerEnv.getLanguageVersion() >= Context.VERSION_ES6 || !isProperty) {
+            if (ts.isNumberBinary()) {
+                s = "0b"+s;
+            } else if (ts.isNumberOldOctal()) {
+                s = "0"+s;
+            } else if (ts.isNumberOctal()) {
+                s = "0o"+s;
+            } else if (ts.isNumberHex()) {
+                s = "0x"+s;
+            }
+        }
+        return new NumberLiteral(ts.tokenBeg,
+                                 s,
+                                 ts.getNumber());
+    }
+
     protected void checkActivationName(String name, int token) {
         if (!insideFunction()) {
             return;
@@ -3843,7 +3883,7 @@ public class Parser
         }
     }
 
-    private void checkBadIncDec(UnaryExpression expr) {
+    private void checkBadIncDec(UpdateExpression expr) {
         AstNode op = removeParens(expr.getOperand());
         int tt = op.getType();
         if (!(tt == Token.NAME

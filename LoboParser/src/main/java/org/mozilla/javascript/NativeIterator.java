@@ -129,10 +129,7 @@ public final class NativeIterator extends IdScriptableObject {
             return jsConstructor(cx, scope, thisObj, args);
         }
 
-        if (!(thisObj instanceof NativeIterator))
-            throw incompatibleCallError(f);
-
-        NativeIterator iterator = (NativeIterator) thisObj;
+        NativeIterator iterator = ensureType(thisObj, NativeIterator.class, f);
 
         switch (id) {
 
@@ -156,7 +153,7 @@ public final class NativeIterator extends IdScriptableObject {
             args[0] == Undefined.instance)
         {
             Object argument = args.length == 0 ? Undefined.instance : args[0];
-            throw ScriptRuntime.typeError1("msg.no.properties",
+            throw ScriptRuntime.typeErrorById("msg.no.properties",
                                            ScriptRuntime.toString(argument));
         }
         Scriptable obj = ScriptRuntime.toObject(cx, scope, args[0]);
@@ -253,14 +250,20 @@ public final class NativeIterator extends IdScriptableObject {
     @Override
     protected int findPrototypeId(String s) {
         int id;
-// #generated# Last update: 2007-06-11 09:43:19 EDT
-        L0: { id = 0; String X = null;
-            int s_length = s.length();
-            if (s_length==4) { X="next";id=Id_next; }
-            else if (s_length==11) { X="constructor";id=Id_constructor; }
-            else if (s_length==12) { X="__iterator__";id=Id___iterator__; }
-            if (X!=null && X!=s && !X.equals(s)) id = 0;
-            break L0;
+// #generated# Last update: 2021-03-21 09:51:20 MEZ
+        switch (s) {
+        case "constructor":
+            id = Id_constructor;
+            break;
+        case "next":
+            id = Id_next;
+            break;
+        case "__iterator__":
+            id = Id___iterator__;
+            break;
+        default:
+            id = 0;
+            break;
         }
 // #/generated#
         return id;

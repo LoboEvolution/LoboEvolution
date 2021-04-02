@@ -1405,7 +1405,8 @@ switch (op) {
     case Token.SUB :
     case Token.MUL :
     case Token.DIV :
-    case Token.MOD : {
+    case Token.MOD :
+    case Token.EXP : {
         stackTop = doArithmetic(frame, op, stack, sDbl, stackTop);
         continue Loop;
     }
@@ -2519,7 +2520,7 @@ switch (op) {
                                      int[] varAttributes, int indexReg) {
         if (!frame.useActivation) {
             if ((varAttributes[indexReg] & ScriptableObject.READONLY) == 0) {
-                throw Context.reportRuntimeError1("msg.var.redecl",
+                throw Context.reportRuntimeErrorById("msg.var.redecl",
                                                   frame.idata.argNames[indexReg]);
             }
             if ((varAttributes[indexReg] & ScriptableObject.UNINITIALIZED_CONST)
@@ -2845,7 +2846,7 @@ switch (op) {
     {
           if (generatorState.operation == NativeGenerator.GENERATOR_CLOSE) {
               // Error: no yields when generator is closing
-              throw ScriptRuntime.typeError0("msg.yield.closing");
+              throw ScriptRuntime.typeErrorById("msg.yield.closing");
           }
           // return to our caller (which should be a method of NativeGenerator)
           frame.frozen = true;
@@ -3223,9 +3224,9 @@ switch (op) {
 
     private static int doArithmetic(CallFrame frame, int op, Object[] stack,
                                     double[] sDbl, int stackTop) {
+        double lDbl = stack_double(frame, stackTop - 1);
         double rDbl = stack_double(frame, stackTop);
         --stackTop;
-        double lDbl = stack_double(frame, stackTop);
         stack[stackTop] = DOUBLE_MARK;
         switch (op) {
           case Token.SUB:
@@ -3239,6 +3240,9 @@ switch (op) {
             break;
           case Token.MOD:
             lDbl %= rDbl;
+            break;
+          case Token.EXP:
+            lDbl = Math.pow(lDbl, rDbl);
             break;
         }
         sDbl[stackTop] = lDbl;

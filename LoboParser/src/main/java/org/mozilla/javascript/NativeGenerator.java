@@ -96,10 +96,7 @@ public final class NativeGenerator extends IdScriptableObject {
         }
         int id = f.methodId();
 
-        if (!(thisObj instanceof NativeGenerator))
-            throw incompatibleCallError(f);
-
-        NativeGenerator generator = (NativeGenerator) thisObj;
+        NativeGenerator generator = ensureType(thisObj, NativeGenerator.class, f);
 
         switch (id) {
 
@@ -117,7 +114,7 @@ public final class NativeGenerator extends IdScriptableObject {
           case Id_send: {
             Object arg = args.length > 0 ? args[0] : Undefined.instance;
             if (generator.firstTime && !arg.equals(Undefined.instance)) {
-                throw ScriptRuntime.typeError0("msg.send.newborn");
+                throw ScriptRuntime.typeErrorById("msg.send.newborn");
             }
             return generator.resume(cx, scope, GENERATOR_SEND, arg);
           }
@@ -154,7 +151,7 @@ public final class NativeGenerator extends IdScriptableObject {
               // non-reentrant.
               // See https://bugzilla.mozilla.org/show_bug.cgi?id=349263
               if (locked)
-                  throw ScriptRuntime.typeError0("msg.already.exec.gen");
+                  throw ScriptRuntime.typeErrorById("msg.already.exec.gen");
               locked = true;
             }
             return function.resumeGenerator(cx, scope, operation, savedState,
@@ -183,22 +180,26 @@ public final class NativeGenerator extends IdScriptableObject {
     @Override
     protected int findPrototypeId(String s) {
         int id;
-// #generated# Last update: 2007-06-14 13:13:03 EDT
-        L0: { id = 0; String X = null; int c;
-            int s_length = s.length();
-            if (s_length==4) {
-                c=s.charAt(0);
-                if (c=='n') { X="next";id=Id_next; }
-                else if (c=='s') { X="send";id=Id_send; }
-            }
-            else if (s_length==5) {
-                c=s.charAt(0);
-                if (c=='c') { X="close";id=Id_close; }
-                else if (c=='t') { X="throw";id=Id_throw; }
-            }
-            else if (s_length==12) { X="__iterator__";id=Id___iterator__; }
-            if (X!=null && X!=s && !X.equals(s)) id = 0;
-            break L0;
+// #generated# Last update: 2021-03-21 09:51:25 MEZ
+        switch (s) {
+        case "close":
+            id = Id_close;
+            break;
+        case "next":
+            id = Id_next;
+            break;
+        case "send":
+            id = Id_send;
+            break;
+        case "throw":
+            id = Id_throw;
+            break;
+        case "__iterator__":
+            id = Id___iterator__;
+            break;
+        default:
+            id = 0;
+            break;
         }
 // #/generated#
         return id;

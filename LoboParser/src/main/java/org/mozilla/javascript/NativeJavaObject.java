@@ -230,7 +230,7 @@ public class NativeJavaObject
             } else if (hint == ScriptRuntime.NumberClass) {
                 converterName = "doubleValue";
             } else {
-                throw Context.reportRuntimeError0("msg.default.value");
+                throw Context.reportRuntimeErrorById("msg.default.value");
             }
             Object converterObject = get(converterName, this);
             if (converterObject instanceof Function) {
@@ -694,9 +694,9 @@ public class NativeJavaObject
                     return value;
                 reportConversionError(value, type);
             }
-            else if (type.isInterface() && (value instanceof NativeObject
-                    || value instanceof NativeFunction
-                    || value instanceof ArrowFunction)) {
+            else if (type.isInterface()
+                     && (value instanceof NativeObject
+                         || (value instanceof Callable && value instanceof ScriptableObject))) {
                 // Try to use function/object as implementation of Java interface.
                 return createInterfaceAdapter(type, (ScriptableObject) value);
             } else {
@@ -900,7 +900,7 @@ public class NativeJavaObject
     {
         // It uses String.valueOf(value), not value.toString() since
         // value can be null, bug 282447.
-        throw Context.reportRuntimeError2(
+        throw Context.reportRuntimeErrorById(
             "msg.conversion.not.allowed",
             String.valueOf(value),
             JavaMembers.javaSignature(type));

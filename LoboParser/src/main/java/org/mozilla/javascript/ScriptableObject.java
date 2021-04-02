@@ -175,7 +175,7 @@ public abstract class ScriptableObject implements Scriptable,
         boolean setValue(Object value, Scriptable owner, Scriptable start) {
             if ((attributes & READONLY) != 0) {
                 if (Context.getContext().isStrictMode()) {
-                    throw ScriptRuntime.typeError1("msg.modify.readonly", name);
+                    throw ScriptRuntime.typeErrorById("msg.modify.readonly", name);
                 }
                 return true;
             }
@@ -249,7 +249,7 @@ public abstract class ScriptableObject implements Scriptable,
             String fName = name == null ? "f" : name.toString();
             if (getter != null) {
                 if ( getter instanceof MemberBox ) {
-                    desc.defineProperty("get", new FunctionObject(fName, ((MemberBox)getter).member(), scope), EMPTY);
+                    desc.defineProperty("get", ((MemberBox) getter).asGetterFunction(fName, scope), EMPTY);
                 } else if ( getter instanceof Member ) {
                     desc.defineProperty("get", new FunctionObject(fName, (Member)getter, scope), EMPTY);
                 } else {
@@ -258,7 +258,7 @@ public abstract class ScriptableObject implements Scriptable,
             }
             if (setter != null) {
                 if ( setter instanceof MemberBox ) {
-                    desc.defineProperty("set", new FunctionObject(fName, ((MemberBox) setter).member(), scope), EMPTY);
+                    desc.defineProperty("set", ((MemberBox) setter).asSetterFunction(fName, scope), EMPTY);
                 } else if ( setter instanceof Member ) {
                     desc.defineProperty("set", new FunctionObject(fName, (Member) setter, scope), EMPTY);
                 } else {
@@ -282,7 +282,7 @@ public abstract class ScriptableObject implements Scriptable,
                         if (name != null) {
                             prop = "[" + start.getClassName() + "]." + name;
                         }
-                        throw ScriptRuntime.typeError2("msg.set.prop.no.setter", prop, Context.toString(value));
+                        throw ScriptRuntime.typeErrorById("msg.set.prop.no.setter", prop, Context.toString(value));
                     }
                     // Assignment to a property with only a getter defined. The
                     // assignment is ignored. See bug 478047.
@@ -297,8 +297,7 @@ public abstract class ScriptableObject implements Scriptable,
                     // defineProperty ?
                     Class<?> valueType = pTypes[pTypes.length - 1];
                     int tag = FunctionObject.getTypeTag(valueType);
-                    Object actualArg = FunctionObject.convertArg(cx, start,
-                                                                 value, tag);
+                    Object actualArg = FunctionObject.convertArg(cx, start, value, tag);
                     Object setterThis;
                     Object[] args;
                     if (nativeSetter.delegateTo == null) {
@@ -311,8 +310,7 @@ public abstract class ScriptableObject implements Scriptable,
                     nativeSetter.invoke(setterThis, args);
                 } else if (setter instanceof Function) {
                     Function f = (Function)setter;
-                    f.call(cx, f.getParentScope(), start,
-                           new Object[] { value });
+                    f.call(cx, f.getParentScope(), start, new Object[] { value });
                 }
                 return true;
             }
@@ -837,7 +835,7 @@ public abstract class ScriptableObject implements Scriptable,
         if (!force) {
             int attributes = gslot.getAttributes();
             if ((attributes & READONLY) != 0) {
-                throw Context.reportRuntimeError1("msg.modify.readonly", name);
+                throw Context.reportRuntimeErrorById("msg.modify.readonly", name);
             }
         }
         if (isSetter) {
@@ -963,10 +961,6 @@ public abstract class ScriptableObject implements Scriptable,
     @Override
     public void setPrototype(Scriptable m)
     {
-        if (!isExtensible()
-                && Context.getContext().getLanguageVersion() >= Context.VERSION_1_8) {
-            throw ScriptRuntime.typeError0("msg.not.extensible");
-        }
         prototypeObject = m;
     }
 
@@ -1085,7 +1079,7 @@ public abstract class ScriptableObject implements Scriptable,
         }
         // fall through to error
         String arg = (typeHint == null) ? "undefined" : typeHint.getName();
-        throw ScriptRuntime.typeError1("msg.default.value", arg);
+        throw ScriptRuntime.typeErrorById("msg.default.value", arg);
     }
 
     /**
@@ -1361,7 +1355,7 @@ public abstract class ScriptableObject implements Scriptable,
             }
         }
         if (protoCtor == null) {
-            throw Context.reportRuntimeError1(
+            throw Context.reportRuntimeErrorById(
                       "msg.zero.arg.ctor", clazz.getName());
         }
 
@@ -1425,14 +1419,14 @@ public abstract class ScriptableObject implements Scriptable,
                     ctorMember = ctors[0];
             }
             if (ctorMember == null) {
-                throw Context.reportRuntimeError1(
+                throw Context.reportRuntimeErrorById(
                           "msg.ctor.multiple.parms", clazz.getName());
             }
         }
 
         FunctionObject ctor = new FunctionObject(className, ctorMember, scope);
         if (ctor.isVarArgsMethod()) {
-            throw Context.reportRuntimeError1
+            throw Context.reportRuntimeErrorById
                 ("msg.varargs.ctor", ctorMember.getName());
         }
         ctor.initAsConstructor(scope, proto);
@@ -1494,7 +1488,7 @@ public abstract class ScriptableObject implements Scriptable,
             HashSet<String> names = isStatic ? staticNames : instanceNames;
             String propName = getPropertyName(name, prefix, annotation);
             if (names.contains(propName)) {
-                throw Context.reportRuntimeError2("duplicate.defineClass.name",
+                throw Context.reportRuntimeErrorById("duplicate.defineClass.name",
                         name, propName);
             }
             names.add(propName);
@@ -1502,7 +1496,7 @@ public abstract class ScriptableObject implements Scriptable,
 
             if (annotation instanceof JSGetter || prefix == getterPrefix) {
                 if (!(proto instanceof ScriptableObject)) {
-                    throw Context.reportRuntimeError2(
+                    throw Context.reportRuntimeErrorById(
                         "msg.extend.scriptable",
                         proto.getClass().toString(), name);
                 }
@@ -1524,7 +1518,7 @@ public abstract class ScriptableObject implements Scriptable,
 
             FunctionObject f = new FunctionObject(name, method, proto);
             if (f.isVarArgsConstructor()) {
-                throw Context.reportRuntimeError1
+                throw Context.reportRuntimeErrorById
                     ("msg.varargs.fun", ctorMember.getName());
             }
             defineProperty(isStatic ? ctor : proto, name, f, DONTENUM);
@@ -1818,14 +1812,14 @@ public abstract class ScriptableObject implements Scriptable,
                 errorId = "msg.bad.getter.parms";
             }
             if (errorId != null) {
-                throw Context.reportRuntimeError1(errorId, getter.toString());
+                throw Context.reportRuntimeErrorById(errorId, getter.toString());
             }
         }
 
         MemberBox setterBox = null;
         if (setter != null) {
             if (setter.getReturnType() != Void.TYPE)
-                throw Context.reportRuntimeError1("msg.setter.return",
+                throw Context.reportRuntimeErrorById("msg.setter.return",
                                                   setter.toString());
 
             setterBox = new MemberBox(setter);
@@ -1861,7 +1855,7 @@ public abstract class ScriptableObject implements Scriptable,
                 errorId = "msg.setter.parms";
             }
             if (errorId != null) {
-                throw Context.reportRuntimeError1(errorId, setter.toString());
+                throw Context.reportRuntimeErrorById(errorId, setter.toString());
             }
         }
 
@@ -1981,21 +1975,21 @@ public abstract class ScriptableObject implements Scriptable,
             throw ScriptRuntime.notFunctionError(setter);
         }
         if (isDataDescriptor(desc) && isAccessorDescriptor(desc)) {
-            throw ScriptRuntime.typeError0("msg.both.data.and.accessor.desc");
+            throw ScriptRuntime.typeErrorById("msg.both.data.and.accessor.desc");
         }
     }
 
     protected void checkPropertyChange(Object id, ScriptableObject current,
                                        ScriptableObject desc) {
         if (current == null) { // new property
-            if (!isExtensible()) throw ScriptRuntime.typeError0("msg.not.extensible");
+            if (!isExtensible()) throw ScriptRuntime.typeErrorById("msg.not.extensible");
         } else {
             if (isFalse(current.get("configurable", current))) {
                 if (isTrue(getProperty(desc, "configurable")))
-                    throw ScriptRuntime.typeError1(
+                    throw ScriptRuntime.typeErrorById(
                         "msg.change.configurable.false.to.true", id);
                 if (isTrue(current.get("enumerable", current)) != isTrue(getProperty(desc, "enumerable")))
-                    throw ScriptRuntime.typeError1(
+                    throw ScriptRuntime.typeErrorById(
                         "msg.change.enumerable.with.configurable.false", id);
                 boolean isData = isDataDescriptor(desc);
                 boolean isAccessor = isAccessorDescriptor(desc);
@@ -2004,26 +1998,26 @@ public abstract class ScriptableObject implements Scriptable,
                 } else if (isData && isDataDescriptor(current)) {
                     if (isFalse(current.get("writable", current))) {
                         if (isTrue(getProperty(desc, "writable")))
-                            throw ScriptRuntime.typeError1(
+                            throw ScriptRuntime.typeErrorById(
                                 "msg.change.writable.false.to.true.with.configurable.false", id);
 
                         if (!sameValue(getProperty(desc, "value"), current.get("value", current)))
-                            throw ScriptRuntime.typeError1(
+                            throw ScriptRuntime.typeErrorById(
                                 "msg.change.value.with.writable.false", id);
                     }
                 } else if (isAccessor && isAccessorDescriptor(current)) {
                     if (!sameValue(getProperty(desc, "set"), current.get("set", current)))
-                        throw ScriptRuntime.typeError1(
+                        throw ScriptRuntime.typeErrorById(
                             "msg.change.setter.with.configurable.false", id);
 
                     if (!sameValue(getProperty(desc, "get"), current.get("get", current)))
-                        throw ScriptRuntime.typeError1(
+                        throw ScriptRuntime.typeErrorById(
                             "msg.change.getter.with.configurable.false", id);
                 } else {
                     if (isDataDescriptor(current))
-                        throw ScriptRuntime.typeError1(
+                        throw ScriptRuntime.typeErrorById(
                             "msg.change.property.data.to.accessor.with.configurable.false", id);
-                    throw ScriptRuntime.typeError1(
+                    throw ScriptRuntime.typeErrorById(
                         "msg.change.property.accessor.to.data.with.configurable.false", id);
                 }
             }
@@ -2120,19 +2114,19 @@ public abstract class ScriptableObject implements Scriptable,
 
     protected static Scriptable ensureScriptable(Object arg) {
         if ( !(arg instanceof Scriptable) )
-            throw ScriptRuntime.typeError1("msg.arg.not.object", ScriptRuntime.typeof(arg));
+            throw ScriptRuntime.typeErrorById("msg.arg.not.object", ScriptRuntime.typeof(arg));
         return (Scriptable) arg;
     }
 
     protected static SymbolScriptable ensureSymbolScriptable(Object arg) {
         if ( !(arg instanceof SymbolScriptable) )
-            throw ScriptRuntime.typeError1("msg.object.not.symbolscriptable", ScriptRuntime.typeof(arg));
+            throw ScriptRuntime.typeErrorById("msg.object.not.symbolscriptable", ScriptRuntime.typeof(arg));
         return (SymbolScriptable) arg;
     }
 
     protected static ScriptableObject ensureScriptableObject(Object arg) {
         if ( !(arg instanceof ScriptableObject) )
-            throw ScriptRuntime.typeError1("msg.arg.not.object", ScriptRuntime.typeof(arg));
+            throw ScriptRuntime.typeErrorById("msg.arg.not.object", ScriptRuntime.typeof(arg));
         return (ScriptableObject) arg;
     }
 
@@ -2157,7 +2151,7 @@ public abstract class ScriptableObject implements Scriptable,
             String name = names[i];
             Method m = FunctionObject.findSingleMethod(methods, name);
             if (m == null) {
-                throw Context.reportRuntimeError2(
+                throw Context.reportRuntimeErrorById(
                     "msg.method.not.found", name, clazz.getName());
             }
             FunctionObject f = new FunctionObject(name, m, this);
@@ -2306,7 +2300,7 @@ public abstract class ScriptableObject implements Scriptable,
             return;
 
         String str = (key != null) ? key.toString() : Integer.toString(index);
-        throw Context.reportRuntimeError1("msg.modify.sealed", str);
+        throw Context.reportRuntimeErrorById("msg.modify.sealed", str);
     }
 
     /**
@@ -2464,10 +2458,10 @@ public abstract class ScriptableObject implements Scriptable,
             ConstProperties cp = (ConstProperties)base;
 
             if (cp.isConst(name))
-                throw ScriptRuntime.typeError1("msg.const.redecl", name);
+                throw ScriptRuntime.typeErrorById("msg.const.redecl", name);
         }
         if (isConst)
-            throw ScriptRuntime.typeError1("msg.var.redecl", name);
+            throw ScriptRuntime.typeErrorById("msg.var.redecl", name);
     }
     /**
      * Returns whether an indexed property is defined in an object or any object
@@ -2821,7 +2815,7 @@ public abstract class ScriptableObject implements Scriptable,
                         || (!(slot instanceof GetterSlot)
                                 && (slot.getAttributes() & READONLY) != 0))
                     && Context.getContext().isStrictMode()) {
-                throw ScriptRuntime.typeError0("msg.not.extensible");
+                throw ScriptRuntime.typeErrorById("msg.not.extensible");
             }
             if (slot == null) {
                 return false;
@@ -2831,7 +2825,7 @@ public abstract class ScriptableObject implements Scriptable,
             if((slot == null
                         || (!(slot instanceof GetterSlot) && (slot.getAttributes() & READONLY) != 0))
                     && Context.getContext().isStrictMode()) {
-                throw ScriptRuntime.typeError0("msg.not.extensible");
+                throw ScriptRuntime.typeErrorById("msg.not.extensible");
             }
             if (slot == null) {
                 return true;
@@ -2864,7 +2858,7 @@ public abstract class ScriptableObject implements Scriptable,
         if (!isExtensible) {
             Context cx = Context.getContext();
             if (cx.isStrictMode()) {
-                throw ScriptRuntime.typeError0("msg.not.extensible");
+                throw ScriptRuntime.typeErrorById("msg.not.extensible");
             }
         }
         Slot slot;
@@ -2884,7 +2878,7 @@ public abstract class ScriptableObject implements Scriptable,
             slot = slotMap.get(name, index, SlotAccess.MODIFY_CONST);
             int attr = slot.getAttributes();
             if ((attr & READONLY) == 0)
-                throw Context.reportRuntimeError1("msg.var.redecl", name);
+                throw Context.reportRuntimeErrorById("msg.var.redecl", name);
             if ((attr & UNINITIALIZED_CONST) != 0) {
                 slot.value = value;
                 // clear the bit on const initialization
@@ -2901,7 +2895,7 @@ public abstract class ScriptableObject implements Scriptable,
         Slot slot = slotMap.get(name, index, accessType);
         if (slot == null) {
             String str = (name != null ? name : Integer.toString(index));
-            throw Context.reportRuntimeError1("msg.prop.not.found", str);
+            throw Context.reportRuntimeErrorById("msg.prop.not.found", str);
         }
         return slot;
     }
@@ -2910,7 +2904,7 @@ public abstract class ScriptableObject implements Scriptable,
     {
         Slot slot = slotMap.get(key, 0, accessType);
         if (slot == null) {
-            throw Context.reportRuntimeError1("msg.prop.not.found", key);
+            throw Context.reportRuntimeErrorById("msg.prop.not.found", key);
         }
         return slot;
     }

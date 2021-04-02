@@ -17,7 +17,6 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.mozilla.classfile.ByteCode;
 import org.mozilla.classfile.ClassFileWriter;
@@ -48,10 +47,6 @@ import org.mozilla.javascript.ast.ScriptNode;
 
 public class Codegen implements Evaluator
 {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(Codegen.class.getName());
-	
     @Override
     public void captureStackInfo(RhinoException ex) {
         throw new UnsupportedOperationException();
@@ -177,7 +172,7 @@ public class Codegen implements Evaluator
         transform(scriptOrFn);
 
         if (Token.printTrees) {
-            logger.info(scriptOrFn.toStringTree(scriptOrFn));
+            System.out.println(scriptOrFn.toStringTree(scriptOrFn));
         }
 
         if (returnFunction) {

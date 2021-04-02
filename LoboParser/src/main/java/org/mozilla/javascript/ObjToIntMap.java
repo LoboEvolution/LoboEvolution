@@ -594,7 +594,7 @@ public class ObjToIntMap implements Serializable
         System.out.print("."); System.out.flush();
         checkSameMaps(copy, map);
 
-        logger.info(); System.out.flush();
+        System.out.println(); System.out.flush();
     }
 
     private static void checkSameMaps(ObjToIntMap map1, ObjToIntMap map2) {

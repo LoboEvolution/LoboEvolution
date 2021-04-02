@@ -118,14 +118,20 @@ public class NativeSymbol
     @Override
     protected int findPrototypeId(String s) {
         int id = 0;
-//  #generated# Last update: 2016-01-26 16:39:41 PST
-        L0: { id = 0; String X = null;
-            int s_length = s.length();
-            if (s_length==7) { X="valueOf";id=Id_valueOf; }
-            else if (s_length==8) { X="toString";id=Id_toString; }
-            else if (s_length==11) { X="constructor";id=Id_constructor; }
-            if (X!=null && X!=s && !X.equals(s)) id = 0;
-            break L0;
+//  #generated# Last update: 2021-03-21 09:49:13 MEZ
+        switch (s) {
+        case "constructor":
+            id = Id_constructor;
+            break;
+        case "toString":
+            id = Id_toString;
+            break;
+        case "valueOf":
+            id = Id_valueOf;
+            break;
+        default:
+            id = 0;
+            break;
         }
 //  #/generated#
         return id;
@@ -195,7 +201,7 @@ public class NativeSymbol
             if (thisObj == null) {
                 if (cx.getThreadLocal(CONSTRUCTOR_SLOT) == null) {
                     // We should never get to this via "new".
-                    throw ScriptRuntime.typeError0("msg.no.symbol.new");
+                    throw ScriptRuntime.typeErrorById("msg.no.symbol.new");
                 }
                 // Unless we are being called by our own internal "new"
                 return js_constructor(args);
@@ -216,7 +222,7 @@ public class NativeSymbol
         try {
             return (NativeSymbol)thisObj;
         } catch (ClassCastException cce) {
-            throw ScriptRuntime.typeError1("msg.invalid.type", thisObj.getClass().getName());
+            throw ScriptRuntime.typeErrorById("msg.invalid.type", thisObj.getClass().getName());
         }
     }
 
@@ -291,7 +297,7 @@ public class NativeSymbol
         if (!isSymbol()) {
             super.put(name, start, value);
         } else if (isStrictMode()) {
-            throw ScriptRuntime.typeError0("msg.no.assign.symbol.strict");
+            throw ScriptRuntime.typeErrorById("msg.no.assign.symbol.strict");
         }
     }
 
@@ -301,7 +307,7 @@ public class NativeSymbol
         if (!isSymbol()) {
             super.put(index, start, value);
         } else if (isStrictMode()) {
-            throw ScriptRuntime.typeError0("msg.no.assign.symbol.strict");
+            throw ScriptRuntime.typeErrorById("msg.no.assign.symbol.strict");
         }
     }
 
@@ -311,7 +317,7 @@ public class NativeSymbol
         if (!isSymbol()) {
             super.put(key, start, value);
         } else if (isStrictMode()) {
-            throw ScriptRuntime.typeError0("msg.no.assign.symbol.strict");
+            throw ScriptRuntime.typeErrorById("msg.no.assign.symbol.strict");
         }
     }
 

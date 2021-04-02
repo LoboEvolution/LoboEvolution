@@ -89,14 +89,18 @@ public final class NativeJSON extends IdScriptableObject
             }
 
             case Id_stringify: {
-                Object value = null, replacer = null, space = null;
-                switch (args.length) {
-                    case 3: space = args[2];
-                    /* fall through */ case 2: replacer = args[1];
-                    /* fall through */ case 1: value = args[0];
-                    /* fall through */ case 0:
-                    /* fall through */ default:
+                Object value = Undefined.instance, replacer = null, space = null;
+
+                if (args.length > 0) {
+                    value = args[0];
+                    if (args.length > 1) {
+                        replacer = args[1];
+                        if (args.length > 2) {
+                            space = args[2];
+                        }
+                    }
                 }
+
                 return stringify(cx, scope, value, replacer, space);
             }
 
@@ -335,7 +339,7 @@ public final class NativeJSON extends IdScriptableObject
 
     private static String jo(Scriptable value, StringifyState state) {
         if (state.stack.search(value) != -1) {
-            throw ScriptRuntime.typeError0("msg.cyclic.value");
+            throw ScriptRuntime.typeErrorById("msg.cyclic.value");
         }
         state.stack.push(value);
 
@@ -384,7 +388,7 @@ public final class NativeJSON extends IdScriptableObject
 
     private static String ja(NativeArray value, StringifyState state) {
         if (state.stack.search(value) != -1) {
-            throw ScriptRuntime.typeError0("msg.cyclic.value");
+            throw ScriptRuntime.typeErrorById("msg.cyclic.value");
         }
         state.stack.push(value);
 
@@ -476,14 +480,20 @@ public final class NativeJSON extends IdScriptableObject
     protected int findPrototypeId(String s)
     {
         int id;
-// #generated# Last update: 2009-05-25 16:01:00 EDT
-        {   id = 0; String X = null;
-            L: switch (s.length()) {
-            case 5: X="parse";id=Id_parse; break L;
-            case 8: X="toSource";id=Id_toSource; break L;
-            case 9: X="stringify";id=Id_stringify; break L;
-            }
-            if (X!=null && X!=s && !X.equals(s)) id = 0;
+// #generated# Last update: 2021-03-21 09:51:17 MEZ
+        switch (s) {
+        case "toSource":
+            id = Id_toSource;
+            break;
+        case "parse":
+            id = Id_parse;
+            break;
+        case "stringify":
+            id = Id_stringify;
+            break;
+        default:
+            id = 0;
+            break;
         }
 // #/generated#
         return id;

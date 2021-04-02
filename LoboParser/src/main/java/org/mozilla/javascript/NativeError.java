@@ -311,11 +311,13 @@ final class NativeError extends IdScriptableObject
             }
         }
 
-        // Define a property on the specified object to get that stack
-        // that delegates to our new error. Build the stack trace lazily
-        // using the "getStack" code from NativeError.
-        obj.defineProperty("stack", err,
-                           ERROR_DELEGATE_GET_STACK, ERROR_DELEGATE_SET_STACK, 0);
+        // from https://v8.dev/docs/stack-trace-api
+        // Error.captureStackTrace(error, constructorOpt)
+        // adds a stack property to the given error object that yields the stack trace
+        // at the time captureStackTrace was called. Stack traces collected through
+        // Error.captureStackTrace are immediately collected, formatted,
+        // and attached to the given error object.
+        obj.defineProperty("stack", err.get("stack"), ScriptableObject.DONTENUM);
     }
 
     @Override
@@ -323,17 +325,20 @@ final class NativeError extends IdScriptableObject
     {
         int id;
 // #string_id_map#
-// #generated# Last update: 2007-05-09 08:15:45 EDT
-        L0: { id = 0; String X = null; int c;
-            int s_length = s.length();
-            if (s_length==8) {
-                c=s.charAt(3);
-                if (c=='o') { X="toSource";id=Id_toSource; }
-                else if (c=='t') { X="toString";id=Id_toString; }
-            }
-            else if (s_length==11) { X="constructor";id=Id_constructor; }
-            if (X!=null && X!=s && !X.equals(s)) id = 0;
-            break L0;
+// #generated# Last update: 2021-03-21 09:44:56 MEZ
+        switch (s) {
+        case "constructor":
+            id = Id_constructor;
+            break;
+        case "toString":
+            id = Id_toString;
+            break;
+        case "toSource":
+            id = Id_toSource;
+            break;
+        default:
+            id = 0;
+            break;
         }
 // #/generated#
         return id;
