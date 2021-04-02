@@ -27,6 +27,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -121,21 +122,21 @@ public class ToolBar extends JToolBar implements IToolBar {
 
 		ImageIcon icon = new ImageIcon(classLoader.getResource("org/lobo/image/back.png"));
 		final JButton back = new JButton();
-		back.setIcon(icon);
+		back.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		back.setToolTipText("Back");
 		back.setBorder(BorderFactory.createEmptyBorder());
 		back.addActionListener(new BackAction(panel, this.addressBar));
 
 		icon = new ImageIcon(classLoader.getResource("org/lobo/image/forward.png"));
 		final JButton forward = new JButton();
-		forward.setIcon(icon);
+		forward.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		forward.setToolTipText("Forward");
 		forward.setBorder(BorderFactory.createEmptyBorder());
 		forward.addActionListener(new ForwardAction(panel, this.addressBar));
 
 		icon = new ImageIcon(classLoader.getResource("org/lobo/image/reload.png"));
 		final JButton refresh = new JButton();
-		refresh.setIcon(icon);
+		refresh.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		refresh.setToolTipText("Refresh");
 		refresh.setBorder(BorderFactory.createEmptyBorder());
 		refresh.addActionListener(new GoAction(panel, this.addressBar));
@@ -145,14 +146,14 @@ public class ToolBar extends JToolBar implements IToolBar {
 
 		icon = new ImageIcon(classLoader.getResource("org/lobo/image/go.png"));
 		final JButton go = new JButton();
-		go.setIcon(icon);
+		go.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		go.setToolTipText("Go");
 		go.setBorder(BorderFactory.createEmptyBorder());
 		go.addActionListener(new GoAction(panel, this.addressBar));
 
 		icon = new ImageIcon(classLoader.getResource("org/lobo/image/home.png"));
 		final JButton home = new JButton();
-		home.setIcon(icon);
+		home.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		home.setToolTipText("Home");
 		home.setBorder(BorderFactory.createEmptyBorder());
 		home.addActionListener(new HomeAction(panel));

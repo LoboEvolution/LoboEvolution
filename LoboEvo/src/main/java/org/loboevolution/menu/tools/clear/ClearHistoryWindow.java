@@ -34,6 +34,7 @@ import javax.swing.border.LineBorder;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.gui.SwingTasks;
 
+import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboCheckBox;
 import com.jtattoo.plaf.lobo.LoboPanel;
 
@@ -60,11 +61,7 @@ public class ClearHistoryWindow extends JFrame {
 	private JButton historyButton;
 
 	/** The navigation panel. */
-	private LoboCheckBox navigation;
-		
-	/** The color text. */
-	private final Color COLOR_TEXT = new Color(108, 216, 158);
-	
+	private LoboCheckBox navigation;	
 
 	/**
 	 * <p>Constructor for ClearHistoryWindow.</p>
@@ -81,18 +78,11 @@ public class ClearHistoryWindow extends JFrame {
 		this.navigation = new LoboCheckBox("Navigation");
 		this.bookmark = new LoboCheckBox("Bookmarks");
 
-		final JButton historyButton = new JButton();
+		final LoboButton historyButton = new LoboButton();
 		historyButton.setAction(new ClearDataAction(this.cache, this.cookie, this.navigation, this.bookmark));
 		historyButton.setText("Delete Now");
 		this.historyButton = historyButton;
-		this.historyButton.setForeground(COLOR_TEXT);
-		this.historyButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		this.historyButton.setFocusPainted(false);
-		this.historyButton.setContentAreaFilled(false);
-		this.historyButton.setBorder(new LineBorder(COLOR_TEXT));
-
 		add(getHistoryBox());
-
 	}
 	
 	/**
