@@ -28,7 +28,6 @@ import org.loboevolution.component.BrowserFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.logging.Logger;
 
 /**
  * <p>StyleAction class.</p>
@@ -39,9 +38,6 @@ import java.util.logging.Logger;
 public class StyleAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
-
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(StyleAction.class.getName());
 
 	private final BrowserFrame frame;
 

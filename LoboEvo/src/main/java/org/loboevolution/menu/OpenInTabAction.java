@@ -75,7 +75,7 @@ public class OpenInTabAction extends AbstractAction {
 		String title = "";
 		
 		if(this.address != null) {
-			comp = NavigationManager.getHtmlPanel(panel, this.address, indexPanel);
+			comp = HtmlPanel.createHtmlPanel(panel, this.address);
 			final HtmlPanel hpanel = (HtmlPanel)comp;
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 			title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
@@ -87,5 +87,6 @@ public class OpenInTabAction extends AbstractAction {
 		tabbedPane.insertTab(title, null, comp, title, indexPanel);
 		tabbedPane.setSelectedIndex(indexPanel);
 		TabStore.insertTab(indexPanel, this.address, title);
+		NavigationManager.insertHistory(this.address, title, indexPanel);
 	}
 }

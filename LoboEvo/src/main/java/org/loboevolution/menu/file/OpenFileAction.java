@@ -73,12 +73,13 @@ public class OpenFileAction extends AbstractAction {
 			final int indexPanel = panel.getTabbedPane().getIndex() +1;
 			final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 			tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-			HtmlPanel hpanel = NavigationManager.getHtmlPanel(panel, url, indexPanel);
+			HtmlPanel hpanel = HtmlPanel.createHtmlPanel(panel, url);
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 			tabbedPane.insertTab(title, null, hpanel, title, indexPanel);
 			tabbedPane.setSelectedIndex(indexPanel);
 			TabStore.insertTab(indexPanel, url, title);
+			NavigationManager.insertHistory(url, title, indexPanel);
 		}
 	}
 }

@@ -99,8 +99,7 @@ public class GoAction extends AbstractAction {
 		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
 		final int indexPanel = tabbedPane.getSelectedIndex();
-		final HtmlPanel htmlPanel = NavigationManager.getHtmlPanel(panel, text, indexPanel);
-
+		final HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, text);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.remove(indexPanel);
@@ -110,6 +109,7 @@ public class GoAction extends AbstractAction {
 
 		TabStore.deleteTab(indexPanel);
 		TabStore.insertTab(indexPanel, text, title);
+		NavigationManager.insertHistory(text, title, indexPanel);
 		addressBar.removeAll();
 		Autocomplete.setupAutoComplete(addressBar, TabStore.getUrls());
 

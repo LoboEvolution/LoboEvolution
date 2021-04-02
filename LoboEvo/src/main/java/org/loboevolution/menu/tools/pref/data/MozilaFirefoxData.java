@@ -55,7 +55,7 @@ public class MozilaFirefoxData extends BrowserData {
 
 	private static final String MOZ_COOKIES = "SELECT * from moz_cookies";
 
-	private static final String MOZ_HISTORY = "SELECT DISTINCT places.url FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
+	private static final String MOZ_HISTORY = "SELECT DISTINCT places.url, places.title FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
 
 	private static List<BookmarkInfo> getBookmarkInfo(String path) {
 		final List<BookmarkInfo> bookmarks = new ArrayList<>();
@@ -97,14 +97,18 @@ public class MozilaFirefoxData extends BrowserData {
 		return cookies;
 	}
 
-	private static List<String> getHostEntries(String path) {
-		final List<String> hostEntries = new ArrayList<>();
+	private static List<BookmarkInfo> getHostEntries(String path) {
+		final List<BookmarkInfo> hostEntries = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(MOZ_HISTORY);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
-				hostEntries.add(rs.getString(1));
+				BookmarkInfo info = new BookmarkInfo();
+				info.setUrl(rs.getString(1));
+				info.setTitle(rs.getString(2));
+				hostEntries.add(info);
 			}
+
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -153,10 +157,10 @@ public class MozilaFirefoxData extends BrowserData {
 			final String pathToCookieInfos = getMozillaDirectory();
 			final List<String> files = getFiles(pathToCookieInfos, null, "places.sqlite");
 			for (final String path : files) {
-				final List<String> hosts = getHostEntries(path);
-				for (final String host : hosts) {
+				final List<BookmarkInfo> hosts = getHostEntries(path);
+				for (final BookmarkInfo info : hosts) {
 					final NavigationStore nav = new NavigationStore();
-					nav.addAsRecent(host, -1);
+					nav.addAsRecent(info.getUrl(), info.getTitle(), -1);
 				}
 			}
 		} catch (final Exception e) {

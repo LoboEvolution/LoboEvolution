@@ -157,7 +157,16 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         try {
             DownloadWindow d = new DownloadWindow(url);
             d.setVisible(true);
-        } catch (IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void downloadFile(String url)  {
+    	try {
+            DownloadWindow d = new DownloadWindow(new URL(url));
+            d.setVisible(true);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

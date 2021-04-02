@@ -25,12 +25,9 @@ package org.loboevolution.menu.bookmarks;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -96,7 +93,7 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 		contentPane.setBackground(background());
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1100, 410);
+		setBounds(100, 100, 950, 410);
 		final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/bookmark.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
@@ -107,7 +104,7 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 
 		LoboLabel label_1 = new LoboLabel("");
 		label_1.setOpaque(true);
-		label_1.setBounds(797, 11, 403, 9);
+		label_1.setBounds(650, 11, 403, 9);
 		contentPane.add(label_1);
 		
 		listBookmarks(frame, contentPane);
@@ -118,14 +115,14 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 	private void saveBookmarks(BrowserFrame frame, Container contentPane) {
 		LoboPanel panel2 = new LoboPanel();
 		panel2.setLayout(null);
-		panel2.setBounds(710, 40, 403, 436);
+		panel2.setBounds(550, 40, 403, 436);
 		contentPane.add(panel2);
 
 		LoboSeparator separator_2 = new LoboSeparator();
 		separator_2.setBounds(0, 58, 792, 12);
 		panel2.add(separator_2);
 		
-		LoboLabel editBookmark = new LoboLabel("Edit Bookmark");
+		LoboLabel editBookmark = new LoboLabel("Bookmark");
 		editBookmark.setHorizontalAlignment(SwingConstants.CENTER);
 		editBookmark.setFont(new Font("Tahoma", Font.BOLD, 17));
 		editBookmark.setBounds(70, 18, 167, 22);
@@ -144,7 +141,7 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 		panel2.add(desc);
 
 		LoboSeparator separator_9 = new LoboSeparator();
-		separator_9.setBounds(12, 115, 350, 12);
+		separator_9.setBounds(12, 115, 380, 12);
 		panel2.add(separator_9);
 
 		LoboLabel titleLbl = new LoboLabel("Title");
@@ -160,7 +157,7 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 		panel2.add(titleEditTxtFld);
 
 		LoboSeparator separator_10 = new LoboSeparator();
-		separator_10.setBounds(12, 184, 350, 12);
+		separator_10.setBounds(12, 184, 380, 12);
 		panel2.add(separator_10);
 		
 		LoboLabel url_1 = new LoboLabel("Url");
@@ -176,7 +173,7 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 		panel2.add(urlEditTxtFld);
 		
 		LoboSeparator separator_11 = new LoboSeparator();
-		separator_11.setBounds(12, 250, 350, 12);
+		separator_11.setBounds(12, 250, 380, 12);
 		panel2.add(separator_11);
 
 		LoboButton okButton = new LoboButton();
@@ -208,12 +205,12 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 
 	private void listBookmarks(BrowserFrame frame, Container contentPane) {
 		LoboSeparator separator_7 = new LoboSeparator();
-		separator_7.setBounds(0, 98, 700, 12);
+		separator_7.setBounds(0, 98, 550, 12);
 		contentPane.add(separator_7);
 		
 		LoboPanel panel = new LoboPanel();
 		panel.setLayout(null);
-		panel.setBounds(0, 40, 800, 50);
+		panel.setBounds(0, 40, 650, 50);
 		contentPane.add(panel);
 		
 		LoboLabel description = new LoboLabel("Description");
@@ -226,34 +223,26 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 		title.setBounds(200, 18, 150, 17);
 		panel.add(title);
 
-		LoboLabel url = new LoboLabel("URL");
-		url.setFont(new Font("Tahoma", Font.BOLD, 14));
-		url.setBounds(400, 18, 160, 17);
-		panel.add(url);
-		
 		LoboLabel action = new LoboLabel("Action");
 		action.setFont(new Font("Tahoma", Font.BOLD, 14));
-		action.setBounds(600, 18, 160, 17);
+		action.setBounds(400, 18, 160, 17);
 		panel.add(action);
 		
 		LoboPanel panelGeneralViewAllItems = new LoboPanel();
-		panelGeneralViewAllItems.setBounds(10, 100, 700, 313);
+		panelGeneralViewAllItems.setBounds(10, 100, 530, 313);
 		JScrollPane spViewallItems = new JScrollPane();
 		spViewallItems.setBorder(null);
 		spViewallItems.setViewportView(createItemPanel(frame));
-
 		panelGeneralViewAllItems.setLayout(new BorderLayout());
 		panelGeneralViewAllItems.add(spViewallItems, BorderLayout.CENTER);
-
 		contentPane.add(panelGeneralViewAllItems);
-		
 	}
 	
 	private LoboPanel createItemPanel(BrowserFrame frame) {
 
 		LoboPanel panel_3 = new LoboPanel();
 		panel_3.setLayout(null);
-		panel_3.setBounds(0, 191, 700, 70);
+		panel_3.setBounds(0, 191, 750, 70);
 
 		int debutCpDesc = 15;
 		int debutCpTitle = 15;
@@ -265,6 +254,7 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 			final BookmarksStore history = new BookmarksStore();
 			final List<BookmarkInfo> allEntries = history.getBookmarks(100);
 			for (final BookmarkInfo binfo : allEntries) {
+				final String url = binfo.getUrl();
 
 				LoboTextField description = new LoboTextField();
 				description.setText(binfo.getDescription());
@@ -286,58 +276,26 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 				title.setBounds(190, debutCpTitle, 150, 22);
 				panel_3.add(title);
 
-				LoboTextField url = new LoboTextField();
-				url.setText(binfo.getUrl());
-				url.setToolTipText(binfo.getUrl());
-				url.setFont(new Font("Tahoma", Font.BOLD, 12));
-				url.setEditable(false);
-				url.setColumns(10);
-				url.setBorder(null);
-				url.setBounds(370, debutCpUrl, 190, 22);
-				url.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				url.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						final BrowserPanel panel = frame.getPanel();
-						final int indexPanel = panel.getTabbedPane().getIndex() + 1;
-						final DnDTabbedPane tabbedPane = panel.getTabbedPane();
-						HtmlPanel hpanel = NavigationManager.getHtmlPanel(panel, url.getText(), indexPanel);
-						final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
-						final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
-						tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-						tabbedPane.insertTab(title, null, hpanel, title, indexPanel);
-						tabbedPane.setSelectedIndex(indexPanel);
-						TabStore.insertTab(indexPanel, url.getText(), title);
-
-					}
-				});
-				panel_3.add(url);
-				
-				LoboSeparator separatorItem = new LoboSeparator();
-				separatorItem.setBounds(0, debutCpSeparator, 700, 7);
-				panel_3.add(separatorItem);
-
 				LoboButton edit = new LoboButton();
 				edit.setText("Edit");
 				edit.setActionCommand("okButton");
-				edit.setBounds(570, debutCpUrl, 40, 40);
+				edit.setBounds(370, debutCpUrl, 40, 40);
 				edit.addActionListener(e -> {
 					desc.setText(description.getText());
 					titleEditTxtFld.setText(title.getText());
-					urlEditTxtFld.setText(url.getText());
-					tmpUrl = url.getText();
+					urlEditTxtFld.setText(url);
+					tmpUrl = url;
 
 				});
 				panel_3.add(edit);
-				
-				
+
 				LoboButton delete = new LoboButton();
 				delete.setText("Delete");
 				delete.setActionCommand("okButton");
-				delete.setBounds(610, debutCpUrl, 50, 40);
+				delete.setBounds(410, debutCpUrl, 50, 40);
 				delete.addActionListener(e -> {
 					final BookmarksStore book = new BookmarksStore();
-					book.deleteBookmark(url.getText());
+					book.deleteBookmark(binfo.getUrl());
 					JOptionPane.showMessageDialog(panel_3, "Delete Ok!");
 					setVisible(false);
 					dispose();
@@ -345,6 +303,25 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 
 				});
 				panel_3.add(delete);
+				
+				LoboButton go = new LoboButton();
+				go.setText("Go");
+				go.setActionCommand("goButton");
+				go.setBounds(460, debutCpUrl, 40, 40);
+				go.addActionListener(e -> {
+					final BrowserPanel panel = frame.getPanel();
+					final int indexPanel = panel.getTabbedPane().getIndex() + 1;
+					final DnDTabbedPane tabbedPane = panel.getTabbedPane();
+					HtmlPanel hpanel = HtmlPanel.createHtmlPanel(panel, url);
+					final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+					String htmlTitle = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+					tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
+					tabbedPane.insertTab(htmlTitle, null, hpanel, htmlTitle, indexPanel);
+					tabbedPane.setSelectedIndex(indexPanel);
+					TabStore.insertTab(indexPanel, url, htmlTitle);
+					NavigationManager.insertHistory(url, htmlTitle, indexPanel);
+				});
+				panel_3.add(go);
 				
 				debutCpDesc = debutCpDesc + incrementNouvelleLigne;
 				debutCpTitle = debutCpTitle + incrementNouvelleLigne;

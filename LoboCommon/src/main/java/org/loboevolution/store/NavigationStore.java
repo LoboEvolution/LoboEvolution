@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.loboevolution.info.BookmarkInfo;
+
 /**
  * <p>NavigationStore class.</p>
  *
@@ -48,11 +50,11 @@ public class NavigationStore {
 	
 	private final String DELETE_HOST_BY_URL = "DELETE FROM HOST where baseUrl = ?";
 
-	private final String HOST = "SELECT DISTINCT baseUrl FROM HOST LIMIT ?";
+	private final String HOST = "SELECT DISTINCT baseUrl, name FROM HOST ORDER BY dt DESC LIMIT ?";
 	
-	private final String HOST_ORDERED = "SELECT baseUrl FROM HOST where tab = ? ORDER BY dt ASC";
+	private final String HOST_TAB = "SELECT baseUrl, name FROM HOST where tab = ? ORDER BY dt DESC";
 
-	private final String INSERT_HOST = "INSERT INTO HOST (baseUrl, tab, dt) VALUES(?,?, strftime('%Y-%m-%d %H:%M:%S', 'now'))";
+	private final String INSERT_HOST = "INSERT INTO HOST (baseUrl, name, tab, dt) VALUES(?,?,?, strftime('%Y-%m-%d %H:%M:%S', 'now'))";
 
 	/**
 	 * <p>addAsRecent.</p>
@@ -60,11 +62,12 @@ public class NavigationStore {
 	 * @param uri a {@link java.lang.String} object.
 	 * @param index a int.
 	 */
-	public void addAsRecent(String uri, int index) {
+	public void addAsRecent(String uri, String title, int index) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_HOST)) {
 			pstmt.setString(1, new URL(uri).toExternalForm());
-			pstmt.setInt(2, index);
+			pstmt.setString(2, title);
+			pstmt.setInt(3, index);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -96,42 +99,17 @@ public class NavigationStore {
 		}
 	}
 	
-	/**
-	 * <p>getHostOrdered.</p>
-	 *
-	 * @param index a int.
-	 * @return a {@link java.util.List} object.
-	 */
-	public List<String> getHostOrdered(int index) {
-		final List<String> recentHostEntries = new ArrayList<>();
+	public List<BookmarkInfo> getRecentHost(int index, boolean isTab) {
+		final List<BookmarkInfo> recentHostEntries = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(HOST_ORDERED)) {
+				PreparedStatement pstmt = conn.prepareStatement(isTab ? HOST_TAB : HOST)) {
 			pstmt.setInt(1, index);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
-					recentHostEntries.add(rs.getString(1));
-				}
-			}
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-		return recentHostEntries;
-	}
-
-	/**
-	 * <p>getRecentHostEntries.</p>
-	 *
-	 * @param maxNumItems a int.
-	 * @return a {@link java.util.List} object.
-	 */
-	public List<String[]> getRecentHostEntries(int maxNumItems) {
-		final List<String[]> recentHostEntries = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(HOST)) {
-			pstmt.setInt(1, maxNumItems);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs != null && rs.next()) {
-					recentHostEntries.add(new String[] { rs.getString(1) });
+					BookmarkInfo info = new BookmarkInfo();
+					info.setUrl(rs.getString(1));
+					info.setTitle(rs.getString(2));
+					recentHostEntries.add(info);
 				}
 			}
 		} catch (final Exception e) {

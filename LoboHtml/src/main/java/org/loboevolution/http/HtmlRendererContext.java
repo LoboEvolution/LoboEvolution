@@ -72,6 +72,7 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.img.ImageViewer;
+import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.pdf.PDFViewer;
 import org.loboevolution.store.LinkStore;
@@ -166,16 +167,15 @@ public class HtmlRendererContext {
 		String url = addressBar.getText();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
 		NavigationStore nh = new NavigationStore();
-        
         final int indexPanel = tabbedPane.getSelectedIndex();
-        List<String> tabsById = nh.getHostOrdered(indexPanel);
-        
-        for (int i = 0; i < tabsById.size(); i++) {
-            String tab = tabsById.get(i);
-            if(tab.equals(url) && i > 0) {
-            	url = tabsById.get(i - 1);
-            }
-        }
+        List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
+		for (int i = 0; i < tabsById.size(); i++) {
+			BookmarkInfo info = tabsById.get(i);
+			String tab = info.getUrl();
+			if(tab.equals(url) && i > 0) {
+				url = tabsById.get(i - 1).getUrl();
+			}
+		}
 
         final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, url);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
@@ -275,14 +275,13 @@ public class HtmlRendererContext {
 		String url = addressBar.getText();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
 		NavigationStore nh = new NavigationStore();
-        
         final int indexPanel = tabbedPane.getSelectedIndex();
-        List<String> tabsById = nh.getHostOrdered(indexPanel);
-        
+        List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
 		for (int i = 0; i < tabsById.size(); i++) {
-			String tab = tabsById.get(i);
+			BookmarkInfo info = tabsById.get(i);
+			String tab = info.getUrl();
 			if (tab.equals(url) && i < tabsById.size() - 1) {
-				url = tabsById.get(i + 1);
+				url = tabsById.get(i + 1).getUrl();
 			}
 		}
 

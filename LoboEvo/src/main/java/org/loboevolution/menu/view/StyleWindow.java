@@ -49,6 +49,8 @@ import java.util.List;
  */
 public class StyleWindow extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * <p>Constructor for ClearstyleWindow.</p>
 	 *
@@ -89,12 +91,12 @@ public class StyleWindow extends JFrame {
 				final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 				tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
 				final int indexPanel = tabbedPane.getSelectedIndex();
-				final HtmlPanel htmlPanel = NavigationManager.getHtmlPanel(panel, fullURL, indexPanel);
-
+				HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, fullURL);
 				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 				final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 				tabbedPane.remove(indexPanel);
 				tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
+				NavigationManager.insertHistory(fullURL, title, indexPanel);
 				panel.getScroll().getViewport().add(tabbedPane);
 
 				dispose();

@@ -23,14 +23,10 @@
 
 package org.loboevolution.menu.tools.clear;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.border.LineBorder;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.gui.SwingTasks;
 

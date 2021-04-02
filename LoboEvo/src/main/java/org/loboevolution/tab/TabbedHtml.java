@@ -48,7 +48,7 @@ public class TabbedHtml {
 	 */
 	public void tab(BrowserPanel panel, String url, int index) {
 		final DnDTabbedPane tabbedPane = panel.getTabbedPane();
-		final HtmlPanel hpanel = NavigationManager.getHtmlPanel(panel, url, index);
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(panel, url);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 		tabbedPane.remove(index);
@@ -57,6 +57,7 @@ public class TabbedHtml {
 		final IBrowserFrame browserFrame = panel.getBrowserFrame();
 		browserFrame.getToolbar().getAddressBar().setText(url);
 		TabStore.insertTab(index, url, title);
+		NavigationManager.insertHistory(url, title, index);
 		panel.getScroll().getViewport().add(tabbedPane);
 	}
 }

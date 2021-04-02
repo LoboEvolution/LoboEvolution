@@ -57,7 +57,7 @@ public class GoogleChromeData extends BrowserData {
 
 	private static final String CHROME_COOKIES = "SELECT * from cookies";
 
-	private static final String CHROME_HISTORY = "SELECT DISTINCT url from urls";
+	private static final String CHROME_HISTORY = "SELECT DISTINCT url, title from urls";
 
 	private static List<BookmarkInfo> getBookmarkInfo(String path) {
 		final List<BookmarkInfo> listInfo = new ArrayList<>();
@@ -110,13 +110,16 @@ public class GoogleChromeData extends BrowserData {
 		return cookies;
 	}
 
-	private static List<String> getHostEntries(String path) {
-		final List<String> hostEntries = new ArrayList<>();
+	private static List<BookmarkInfo> getHostEntries(String path) {
+		final List<BookmarkInfo> hostEntries = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(CHROME_HISTORY);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
-				hostEntries.add(rs.getString(1));
+				BookmarkInfo info = new BookmarkInfo();
+				info.setUrl(rs.getString(1));
+				info.setTitle(rs.getString(2));
+				hostEntries.add(info);
 			}
 
 		} catch (final Exception e) {
@@ -166,10 +169,10 @@ public class GoogleChromeData extends BrowserData {
 			final String pathToCookieInfos = getChromeDirectory();
 			final List<String> files = getFiles(pathToCookieInfos, null, "History");
 			for (final String path : files) {
-				final List<String> hosts = getHostEntries(path);
-				for (final String host : hosts) {
+				final List<BookmarkInfo> hosts = getHostEntries(path);
+				for (final BookmarkInfo info : hosts) {
 					final NavigationStore nav = new NavigationStore();
-					nav.addAsRecent(host, -1);
+					nav.addAsRecent(info.getUrl(), info.getTitle(), -1);
 				}
 			}
 		} catch (final Exception e) {

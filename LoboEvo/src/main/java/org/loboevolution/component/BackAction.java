@@ -32,6 +32,7 @@ import javax.swing.JTextField;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
 import org.loboevolution.tab.DnDTabbedPane;
@@ -68,13 +69,13 @@ public class BackAction extends AbstractAction {
 		NavigationStore nh = new NavigationStore();
 		final String url = this.addressBar.getText();
 		String text = url;
-		final int indexPanel = this.panel.getTabbedPane().getSelectedIndex();
-		List<String> tabsById = nh.getHostOrdered(indexPanel);
-		
+		final int indexPanel = this.panel.getTabbedPane().getSelectedIndex();		
+		List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
 		for (int i = 0; i < tabsById.size(); i++) {
-			String tab = tabsById.get(i);
+			BookmarkInfo info = tabsById.get(i);
+			String tab = info.getUrl();
 			if(tab.equals(url) && i > 0) {
-				text = tabsById.get(i - 1);
+				text = tabsById.get(i - 1).getUrl();
 			}
 		}
 						

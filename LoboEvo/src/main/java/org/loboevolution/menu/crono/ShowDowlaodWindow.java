@@ -25,6 +25,7 @@ package org.loboevolution.menu.crono;
 
 import com.jtattoo.plaf.lobo.*;
 import org.loboevolution.component.BrowserFrame;
+import org.loboevolution.download.DownloadWindow;
 import org.loboevolution.store.DownloadStore;
 
 import javax.swing.*;
@@ -46,13 +47,13 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
         contentPane.setBackground(background());
         setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 800, 500);
+        setBounds(100, 100, 600, 500);
         final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/download.png"));
         setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
         LoboLabel label_6 = new LoboLabel("");
         label_6.setOpaque(true);
-        label_6.setBounds(0, 11, 792, 8);
+        label_6.setBounds(0, 11, 592, 8);
         contentPane.add(label_6);
 
         listHost(contentPane);
@@ -60,21 +61,21 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
 
     private void listHost(Container contentPane) {
         LoboSeparator separator_7 = new LoboSeparator();
-        separator_7.setBounds(0, 98, 750, 12);
+        separator_7.setBounds(0, 98, 550, 12);
         contentPane.add(separator_7);
 
         LoboPanel panel = new LoboPanel();
         panel.setLayout(null);
-        panel.setBounds(0, 40, 700, 50);
+        panel.setBounds(0, 40, 500, 50);
         contentPane.add(panel);
 
         LoboLabel url = new LoboLabel("Download");
         url.setFont(new Font("Tahoma", Font.BOLD, 14));
-        url.setBounds(400, 18, 160, 17);
+        url.setBounds(100, 18, 160, 17);
         panel.add(url);
 
         LoboPanel panelGeneralViewAllItems = new LoboPanel();
-        panelGeneralViewAllItems.setBounds(10, 100, 755, 313);
+        panelGeneralViewAllItems.setBounds(10, 100, 555, 313);
         JScrollPane spViewallItems = new JScrollPane();
         spViewallItems.setBorder(null);
         spViewallItems.setViewportView(createItemPanel());
@@ -90,7 +91,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
 
         LoboPanel panel_3 = new LoboPanel();
         panel_3.setLayout(null);
-        panel_3.setBounds(0, 191, 600, 70);
+        panel_3.setBounds(0, 191, 300, 70);
 
         int debutCpDesc = 15;
         int debutCpTitle = 15;
@@ -109,12 +110,22 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
                 url.setEditable(false);
                 url.setColumns(10);
                 url.setBorder(null);
-                url.setBounds(12, debutCpDesc, 600, 22);
+                url.setBounds(12, debutCpDesc, 420, 22);
                 panel_3.add(url);
 
                 LoboSeparator separatorItem = new LoboSeparator();
-                separatorItem.setBounds(0, debutCpSeparator, 900, 7);
+                separatorItem.setBounds(0, debutCpSeparator, 600, 7);
                 panel_3.add(separatorItem);
+                
+                LoboButton dwnl = new LoboButton();
+                dwnl.setText("Download");
+                dwnl.setActionCommand("dwnlButton");
+                dwnl.setBounds(440, debutCpUrl, 80, 40);
+                dwnl.addActionListener(e -> {
+					new DownloadWindow().downloadFile(host);
+
+				});
+				panel_3.add(dwnl);
 
                 debutCpDesc = debutCpDesc + incrementNouvelleLigne;
                 debutCpTitle = debutCpTitle + incrementNouvelleLigne;
@@ -126,7 +137,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
             e.printStackTrace();
         }
 
-        panel_3.setPreferredSize(new Dimension(0, 1000));
+        panel_3.setPreferredSize(new Dimension(0, 700));
         panel_3.revalidate();
         panel_3.repaint();
 

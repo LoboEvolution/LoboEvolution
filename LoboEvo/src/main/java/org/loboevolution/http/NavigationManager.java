@@ -85,20 +85,11 @@ public class NavigationManager {
 		return null;
 	}
 
-	/**
-	 * <p>getHtmlPanel.</p>
-	 *
-	 * @param uri a {@link java.lang.String} object.
-	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
-	 * @param index a int.
-	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
-	 */	
-	public static HtmlPanel getHtmlPanel(IBrowserPanel browserPanel, String uri, int index) {
+	public static void insertHistory(String uri, String title, int index) {
 		final NavigationStore history = new NavigationStore();
 		CookieManager.putCookies(uri);
 		history.deleteHost(uri);
-		history.addAsRecent(uri,index);
-		return HtmlPanel.createHtmlPanel(browserPanel, uri);
+		history.addAsRecent(uri,title, index);
 	}
 
 	/**
@@ -108,17 +99,17 @@ public class NavigationManager {
 	 * @param indexPanel a int.
 	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
 	 */
-	public static HtmlPanel getHtmlPanelSearch(IBrowserPanel browserPanel, String search, int indexPanel) {
+	public static HtmlPanel getHtmlPanelSearch(IBrowserPanel browserPanel, String search) {
 		final ToolsStore tools = new ToolsStore();
 		final List<SearchEngineStore> searchEngineStores = tools.getSearchEngines();
 		for (final SearchEngineStore searchEngineStore : searchEngineStores) {
 			if (searchEngineStore.isSelected()) {
 				final String uri = searchEngineStore.getBaseUrl() + search.replace(" ", "%20");
-				return getHtmlPanel(browserPanel, uri, indexPanel);
+				return HtmlPanel.createHtmlPanel(browserPanel, uri);
 			}
 		}
 
 		final String uri = "https://www.google.com/search?q=" + search.replace(" ", "%20");
-		return getHtmlPanel(browserPanel, uri, indexPanel);
+		return HtmlPanel.createHtmlPanel(browserPanel, uri);
 	}
 }

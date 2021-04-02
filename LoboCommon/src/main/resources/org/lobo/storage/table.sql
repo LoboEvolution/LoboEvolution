@@ -7,7 +7,7 @@ CREATE TABLE COOKIE (cookieName text, cookieValue text, domain text, path text, 
 CREATE TABLE CONNECTION (proxyType text, userName text, password text, authenticated integer, host text, port integer, disableProxyForLocalAddresses integer);
 CREATE TABLE FONT (name text);
 CREATE TABLE FONT_SIZE (name text);
-CREATE TABLE HOST (baseUrl text, tab integer, dt date);
+CREATE TABLE HOST (baseUrl text, name text, tab integer, dt date);
 CREATE TABLE INPUT (name text, value text, baseUrl text);
 CREATE TABLE LOOK_AND_FEEL (acryl integer, aero integer, aluminium integer, bernstein integer, fast integer, graphite integer, hiFi integer,luna integer, mcWin integer, mint integer, noire integer, smart integer, texture integer,bold integer, italic integer, underline integer, strikethrough integer, subscript integer, superscript integer, modern integer, black integer, white integer, fontSize text, font text, color text);
 CREATE TABLE NETWORK (js integer, css integer, cookie integer, cache integer, navigation integer);
