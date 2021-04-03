@@ -1,1 +1,1 @@
-INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(1,1,1,1,1);
+INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(0,1,1,1,1);
