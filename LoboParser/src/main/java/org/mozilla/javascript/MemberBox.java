@@ -21,7 +21,7 @@ import java.lang.reflect.Modifier;
  * getParameterTypes() results, recover from IllegalAccessException
  * in some cases and provide serialization support.
  *
- * @author Igor Bukanov
+ * Author Igor Bukanov
  */
 
 final class MemberBox implements Serializable
@@ -126,6 +126,7 @@ final class MemberBox implements Serializable
         return sb.toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {

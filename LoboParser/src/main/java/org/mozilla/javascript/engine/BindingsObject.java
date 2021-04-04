@@ -12,6 +12,9 @@ import javax.script.Bindings;
 /**
  * This class makes the Bindings object into a Scriptable. That way, we can query and modify
  * the contents of the Bindings on demand.
+ *
+ *
+ *
  */
 public class BindingsObject
   extends ScriptableObject {
@@ -24,11 +27,13 @@ public class BindingsObject
     this.bindings = bindings;
   }
 
+  /** {@inheritDoc} */
   @Override
   public String getClassName() {
     return "BindingsObject";
   }
 
+  /** {@inheritDoc} */
   @Override
   public Object get(String name, Scriptable start) {
     Object ret = bindings.get(name);
@@ -38,21 +43,25 @@ public class BindingsObject
     return Context.jsToJava(ret, Object.class);
   }
 
+  /** {@inheritDoc} */
   @Override
   public void put(String name, Scriptable start, Object value) {
     bindings.put(name, Context.javaToJS(value, start));
   }
 
+  /** {@inheritDoc} */
   @Override
   public void delete(String name) {
     bindings.remove(name);
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean has(String name, Scriptable start) {
     return bindings.containsKey(name);
   }
 
+  /** {@inheritDoc} */
   @Override
   public Object[] getIds() {
     return bindings.keySet().toArray();

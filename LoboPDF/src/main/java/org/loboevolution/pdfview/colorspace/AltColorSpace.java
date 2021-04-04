@@ -4,19 +4,25 @@ import java.awt.color.ColorSpace;
 
 import org.loboevolution.pdfview.function.PDFFunction;
 
-/*****************************************************************************
+/**
+ ***************************************************************************
  * Color Space implementation for handling the PDF AlternateColorSpace.
  * A PDF function is applied to colorvalues before converting.
  *
- * @author  Katja Sondermann
+ * Author  Katja Sondermann
  * @since 06.01.2011
- ****************************************************************************/
+ ***************************************************************************
+  *
+ */
 public class AltColorSpace extends ColorSpace {
 
 	private final PDFFunction fkt;
 	private final ColorSpace origCs;
 	/**
 	 * Create a new CMYKColorSpace Instance.
+	 *
+	 * @param fkt a {@link org.loboevolution.pdfview.function.PDFFunction} object.
+	 * @param origCs a {@link java.awt.color.ColorSpace} object.
 	 */
 	public AltColorSpace(PDFFunction fkt, ColorSpace origCs) {
 		super(origCs.getType(), fkt.getNumInputs());
@@ -25,8 +31,9 @@ public class AltColorSpace extends ColorSpace {
 	}
 
 	/**
-	 * Converts from CIEXYZ. 
-	 * 
+	 * {@inheritDoc}
+	 *
+	 * Converts from CIEXYZ.
 	 * @see java.awt.color.ColorSpace#fromCIEXYZ(float[])
 	 */
 	@Override
@@ -36,10 +43,9 @@ public class AltColorSpace extends ColorSpace {
 	}
 
 	/**
-	 * Converts a given RGB. 
-	 *  
-	 * @param p_rgbvalue - The color to translate 
-	 * @return a float[4] of the CMYK values.
+	 * {@inheritDoc}
+	 *
+	 * Converts a given RGB.
 	 * @see java.awt.color.ColorSpace#fromRGB(float[])
 	 */
 	@Override
@@ -48,8 +54,10 @@ public class AltColorSpace extends ColorSpace {
 		return this.origCs.fromCIEXYZ(p_rgbvalue);
 	}
 
-	/** 
-	 * Converts to CIEXYZ. 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Converts to CIEXYZ.
 	 * @see java.awt.color.ColorSpace#toCIEXYZ(float[])
 	 */
 	@Override
@@ -59,9 +67,9 @@ public class AltColorSpace extends ColorSpace {
 	}
 
 	/**
-	 * Converts to RGB. 
-	 * 
-	 * @param p_colorvalue The color in CMYK.
+	 * {@inheritDoc}
+	 *
+	 * Converts to RGB.
 	 * @see java.awt.color.ColorSpace#toRGB(float[])
 	 */
 	@Override

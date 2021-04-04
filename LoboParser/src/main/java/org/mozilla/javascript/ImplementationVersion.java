@@ -10,6 +10,9 @@ import java.util.jar.Manifest;
 /**
  * This class is a singleton that just exists to serve up the implementation version. This should
  * encourage that it's safely but lazily loaded just once per VM.
+ *
+ *
+ *
  */
 public class ImplementationVersion {
 
@@ -17,6 +20,11 @@ public class ImplementationVersion {
 
     private static final ImplementationVersion version = new ImplementationVersion();
 
+    /**
+     * <p>get.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public static String get() {
         return version.versionString;
     }

@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -27,9 +24,8 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Unit tests for {@link HTMLDocument}.
+ * Tests for {@link org.loboevolution.html.dom.HTMLDocument}.
  */
-
 public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that aren't CSS selectors.*/
 
     private String[] JQUERY_CUSTOM_SELECTORS = {"div.submenu-last:last",
@@ -38,7 +34,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
             ":odd", ":password", ":radio", ":reset", ":selected", ":submit", ":text", ":visible"
     };
 
-
+    /**
+     * <p>scriptableToString.</p>
+     */
     @Test
     public void scriptableToString() {
         final String html =
@@ -53,6 +51,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByTagName.</p>
+     */
     @Test
     public void getElementsByTagName() {
         final String html = "<html>\n"
@@ -78,6 +79,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByClassName.</p>
+     */
     @Test
     public void getElementsByClassName() {
         final String html = "<html><head><title>First</title><script>\n"
@@ -107,6 +111,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>uniqueID.</p>
+     */
     @Test
     public void uniqueID() {
         final String html = "<html>\n"
@@ -126,6 +133,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>createDocumentNS.</p>
+     */
     @Test
     public void createDocumentNS() {
         final String html = "<html>\n"
@@ -148,6 +158,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>createDocumentNS_svg.</p>
+     */
     @Test
     public void createDocumentNS_svg() {
         final String html = "<html><body>\n"
@@ -163,6 +176,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
     }
 
 
+    /**
+     * <p>createElementNS.</p>
+     */
     @Test
     public void createElementNS() {
         final String html =
@@ -178,6 +194,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>createDocumentNS_xul.</p>
+     */
     @Test
     public void createDocumentNS_xul() {
         final String html = "<html><body>\n"
@@ -199,6 +218,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>namespaces.</p>
+     */
     @Test
     public void namespaces() {
         final String html =
@@ -224,6 +246,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>documentMethodsWithoutDocument.</p>
+     */
     @Test
     public void documentMethodsWithoutDocument() {
         final String html
@@ -239,6 +264,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>prefix.</p>
+     */
     @Test
     public void prefix() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -257,6 +285,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>all_scriptableToString.</p>
+     */
     @Test
     public void all_scriptableToString() {
         final String html =
@@ -269,6 +300,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>frames.</p>
+     */
     @Test
     public void frames() {
         final String html = "<html><head><script>\n"
@@ -291,6 +325,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByName_notFound.</p>
+     */
     @Test
     public void getElementsByName_notFound() {
         final String html
@@ -307,6 +344,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByName_emptyName.</p>
+     */
     @Test
     public void getElementsByName_emptyName() {
         final String html =
@@ -327,6 +367,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByName_elements.</p>
+     */
     @Test
     public void getElementsByName_elements() {
         final String html =
@@ -394,6 +437,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getBoxObjectFor.</p>
+     */
     @Test
     public void getBoxObjectFor() {
         final String html = "<html><head><title>Test</title><script>\n"
@@ -415,6 +461,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>querySelectorAll.</p>
+     */
     @Test
     public void querySelectorAll() {
         final String html = "<html><head><title>Test</title>\n"
@@ -441,6 +490,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>querySelectorAllType.</p>
+     */
     @Test
     public void querySelectorAllType() {
         final String html = "<html><head><title>Test</title>\n"
@@ -455,6 +507,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>querySelectorAll_badSelector.</p>
+     */
     @Test
     public void querySelectorAll_badSelector() {
         for (final String selector : JQUERY_CUSTOM_SELECTORS) {
@@ -475,6 +530,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
     }
 
 
+    /**
+     * <p>querySelector_badSelector.</p>
+     */
     @Test
     public void querySelector_badSelector() {
         for (final String selector : JQUERY_CUSTOM_SELECTORS) {
@@ -494,6 +552,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>querySelectorAll_quirks.</p>
+     */
     @Test
     public void querySelectorAll_quirks() {
         final String html = "<html>\n"
@@ -527,6 +588,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>querySelectorAll_implicitAttribute.</p>
+     */
     @Test
     public void querySelectorAll_implicitAttribute() {
         final String html = "<html><head><title>Test</title>\n"
@@ -554,6 +618,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
 
 
 
+    /**
+     * <p>querySelector.</p>
+     */
     @Test
     public void querySelector() {
         final String html = "<html><head><title>Test</title>\n"
@@ -578,6 +645,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>createAttributeNameValue.</p>
+     */
     @Test
     public void createAttributeNameValue() {
         final String html = "<html>\n"
@@ -596,6 +666,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementById_strict.</p>
+     */
     @Test
     public void getElementById_strict() {
         final String html = "<html><head>\n"
@@ -612,6 +685,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementById_caseSensitivity.</p>
+     */
     @Test
     public void getElementById_caseSensitivity() {
         final String html = "<html>\n"
@@ -633,6 +709,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementById_emptyParams.</p>
+     */
     @Test
     public void getElementById_emptyParams() {
         final String html = "<html>\n"
@@ -656,6 +735,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>head.</p>
+     */
     @Test
     public void head() {
         final String html = "<html><body>\n"
@@ -670,6 +752,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>document_undefined.</p>
+     */
     @Test
     public void document_undefined() {
         final String html = "<html>\n"
@@ -690,6 +775,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>encoding.</p>
+     */
     @Test
     public void encoding() {
         final String html = "<html>\n"
@@ -708,6 +796,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>equalsString.</p>
+     */
     @Test
     public void equalsString() {
         final String html = "<html><body>\n"
@@ -720,6 +811,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>type.</p>
+     */
     @Test
     public void type() {
         final String html = "<html><head><title>foo</title>\n"
@@ -740,6 +834,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>baseURI_withBaseTag.</p>
+     */
     @Test
     public void baseURI_withBaseTag() {
         final String html = "<html>\n"
@@ -755,6 +852,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>baseURI_withBaseTagInBody.</p>
+     */
     @Test
     public void baseURI_withBaseTagInBody() {
         final String html = "<html>\n"
@@ -769,6 +869,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>hasFocus.</p>
+     */
     @Test
     public void hasFocus() {
         final String html = "<html><head>\n"
@@ -785,6 +888,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>embeds.</p>
+     */
     @Test
     public void embeds() {
         final String html = "<html><head>\n"
@@ -804,6 +910,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>plugins.</p>
+     */
     @Test
     public void plugins() {
         final String html = "<html><head>\n"
@@ -824,6 +933,9 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>images.</p>
+     */
     @Test
     public void images() {
         final String html = "<html><head>\n"

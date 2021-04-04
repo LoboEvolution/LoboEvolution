@@ -22,7 +22,10 @@ import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * @author Ronald Brill
+ * <p>MediaQuery class.</p>
+ *
+ * Author Ronald Brill
+ *
  */
 public class MediaQuery extends AbstractLocatable implements Serializable {
 
@@ -33,6 +36,7 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
 
     /**
      * Ctor.
+     *
      * @param media the media string
      */
     public MediaQuery(final String media) {
@@ -41,6 +45,7 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
 
     /**
      * Ctor.
+     *
      * @param media the media string
      * @param isOnly is only flag
      * @param isNot is not flag
@@ -53,6 +58,8 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getMedia.</p>
+     *
      * @return the media
      */
     public String getMedia() {
@@ -60,6 +67,8 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getProperties.</p>
+     *
      * @return the list of properties
      */
     public List<Property> getProperties() {
@@ -68,6 +77,7 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
 
     /**
      * Adds a property to the list.
+     *
      * @param mp the property to add
      */
     public void addMediaProperty(final Property mp) {
@@ -75,6 +85,8 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>isOnly.</p>
+     *
      * @return the is only flag
      */
     public boolean isOnly() {
@@ -82,12 +94,15 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>isNot.</p>
+     *
      * @return the is not flag
      */
     public boolean isNot() {
         return isNot_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

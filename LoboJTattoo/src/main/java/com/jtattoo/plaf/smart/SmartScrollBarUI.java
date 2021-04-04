@@ -36,8 +36,8 @@ import com.jtattoo.plaf.BaseScrollBarUI;
 /**
  * <p>SmartScrollBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class SmartScrollBarUI extends BaseScrollBarUI {
 

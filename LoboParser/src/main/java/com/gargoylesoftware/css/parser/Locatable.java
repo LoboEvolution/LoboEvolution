@@ -17,11 +17,14 @@ package com.gargoylesoftware.css.parser;
 /**
  * Locatable interface.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public interface Locatable {
 
     /**
+     * <p>getLocator.</p>
+     *
      * @return the locator
      */
     Locator getLocator();

@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Or implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>bool1|int1 bool2|int2</i> <b>or</b> <i>bool3|int3</i> <p>
 	 *
 	 * returns the logical disjunction of the operands if they

@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.download;
@@ -39,6 +36,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * <p>DownloadWindow class.</p>
+ *
+ *
+ *
+ */
 public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel {
 
     private static final long serialVersionUID = 1L;
@@ -65,8 +68,17 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
 
     private URL url = null;
 
+    /**
+     * <p>Constructor for DownloadWindow.</p>
+     */
     public DownloadWindow(){}
 
+    /**
+     * <p>Constructor for DownloadWindow.</p>
+     *
+     * @param url a {@link java.net.URL} object.
+     * @throws java.io.IOException if any.
+     */
     public DownloadWindow(URL url) throws IOException {
         final Container contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
@@ -152,6 +164,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         return box;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void downloadFile(URL url) {
         try {
@@ -162,6 +175,11 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         }
     }
     
+    /**
+     * <p>downloadFile.</p>
+     *
+     * @param url a {@link java.lang.String} object.
+     */
     public void downloadFile(String url)  {
     	try {
             DownloadWindow d = new DownloadWindow(new URL(url));
@@ -171,6 +189,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void downloadFile(InputStream inputStream) {
         try {
@@ -195,30 +214,65 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         }
     }
 
+    /**
+     * <p>Getter for the field <code>destinationFile</code>.</p>
+     *
+     * @return a {@link java.io.File} object.
+     */
     public File getDestinationFile() {
         return destinationFile;
     }
 
+    /**
+     * <p>Setter for the field <code>destinationFile</code>.</p>
+     *
+     * @param destinationFile a {@link java.io.File} object.
+     */
     public void setDestinationFile(File destinationFile) {
         this.destinationFile = destinationFile;
     }
 
+    /**
+     * <p>Getter for the field <code>httpConn</code>.</p>
+     *
+     * @return a {@link java.net.URLConnection} object.
+     */
     public URLConnection getHttpConn() {
         return httpConn;
     }
 
+    /**
+     * <p>Getter for the field <code>url</code>.</p>
+     *
+     * @return a {@link java.net.URL} object.
+     */
     public URL getUrl() {
         return url;
     }
 
+    /**
+     * <p>Getter for the field <code>progressBar</code>.</p>
+     *
+     * @return a {@link javax.swing.JProgressBar} object.
+     */
     public JProgressBar getProgressBar() {
         return progressBar;
     }
 
+    /**
+     * <p>Getter for the field <code>transferRateField</code>.</p>
+     *
+     * @return a {@link org.loboevolution.gui.FormField} object.
+     */
     public FormField getTransferRateField() {
         return transferRateField;
     }
 
+    /**
+     * <p>Getter for the field <code>transferSizeField</code>.</p>
+     *
+     * @return a {@link org.loboevolution.gui.FormField} object.
+     */
     public FormField getTransferSizeField() {
         return transferSizeField;
     }

@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Round implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1</i> <b>round</b> <i>num2</i> <p>
 	 *
 	 * returns the integer value nearest to num1.

@@ -36,8 +36,9 @@ import org.loboevolution.pdfview.PDFParser;
 /**
  * A Type 3 Font, in which each glyph consists of a sequence of PDF
  * commands.
- * 
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class Type3Font extends PDFFont {
 
@@ -58,11 +59,13 @@ public class Type3Font extends PDFFont {
 
     /**
      * Generate a Type 3 font.
+     *
      * @param baseFont the postscript name of this font
      * @param fontObj a dictionary containing references to the character
      * definitions and font information
      * @param resources a set of resources used by the character definitions
      * @param descriptor the descriptor for this font
+     * @throws java.io.IOException if any.
      */
     public Type3Font(String baseFont, PDFObject fontObj,
             HashMap<String,PDFObject> resources, PDFFontDescriptor descriptor) throws IOException {
@@ -114,6 +117,8 @@ public class Type3Font extends PDFFont {
 
     /**
      * Get the first character code
+     *
+     * @return a int.
      */
     public int getFirstChar() {
         return this.firstChar;
@@ -121,25 +126,25 @@ public class Type3Font extends PDFFont {
 
     /**
      * Get the last character code
+     *
+     * @return a int.
      */
     public int getLastChar() {
         return this.lastChar;
     }
 
-    /**
-     * Get the glyph for a given character code and name
-     *
-     * The preferred method of getting the glyph should be by name.  If the
-     * name is null or not valid, then the character code should be used.
-     * If the both the code and the name are invalid, the undefined glyph 
-     * should be returned.
-     *
-     * Note this method must *always* return a glyph.  
-     *
-     * @param src the character code of this glyph
-     * @param name the name of this glyph or null if unknown
-     * @return a glyph for this character
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the glyph for a given character code and name
+	 *
+	 * The preferred method of getting the glyph should be by name.  If the
+	 * name is null or not valid, then the character code should be used.
+	 * If the both the code and the name are invalid, the undefined glyph
+	 * should be returned.
+	 *
+	 * Note this method must *always* return a glyph.
+	 */
     @Override
 	protected PDFGlyph getGlyph(char src, String name) {
         if (name == null) {

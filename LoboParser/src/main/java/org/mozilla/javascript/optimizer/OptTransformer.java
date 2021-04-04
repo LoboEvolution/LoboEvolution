@@ -18,7 +18,7 @@ import org.mozilla.javascript.ast.ScriptNode;
  * This class performs node transforms to prepare for optimization.
  *
  * @see NodeTransformer
- * @author Norris Boyd
+ * Author Norris Boyd
  */
 
 class OptTransformer extends NodeTransformer {
@@ -29,12 +29,14 @@ class OptTransformer extends NodeTransformer {
         this.directCallTargets = directCallTargets;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void visitNew(Node node, ScriptNode tree) {
         detectDirectCall(node, tree);
         super.visitNew(node, tree);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void visitCall(Node node, ScriptNode tree) {
         detectDirectCall(node, tree);

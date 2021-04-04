@@ -45,6 +45,9 @@ import org.loboevolution.pdfview.function.PDFFunction;
 
 /**
  * A shader that performs radial shader based on a function.
+ *
+  *
+  *
  */
 public class ShaderType3 extends PDFShader {
     /** the center of the first circle */
@@ -74,14 +77,18 @@ public class ShaderType3 extends PDFShader {
     /** functions, as an array of either 1 or n functions */
     private PDFFunction[] functions;
      
-    /** Creates a new instance of ShaderType2 */
+    /**
+     * Creates a new instance of ShaderType2
+     */
     public ShaderType3() {
         super(3);
     }
     
-    /** 
-     * Parse the shader-specific data
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Parse the shader-specific data
+	 */
     @Override
 	public void parse(PDFObject shaderObj) throws IOException
     {
@@ -127,17 +134,21 @@ public class ShaderType3 extends PDFShader {
         }
     }
     
-    /**
-     * Create a paint that paints this pattern
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Create a paint that paints this pattern
+	 */
     @Override
 	public PDFPaint getPaint() {
         return PDFPaint.getPaint(new Type3Paint());
     }
     
     
-    /** 
+    /**
      * Get the domain minimum
+     *
+     * @return a float.
      */
     public float getMinT() {
         return this.minT;
@@ -145,13 +156,17 @@ public class ShaderType3 extends PDFShader {
     
     /**
      * Set the domain minimum
+     *
+     * @param minT a float.
      */
     protected void setMinT(float minT) {
         this.minT = minT;
     }
     
-    /** 
+    /**
      * Get the domain maximum
+     *
+     * @return a float.
      */
     public float getMaxT() {
         return this.maxT;
@@ -159,6 +174,8 @@ public class ShaderType3 extends PDFShader {
     
     /**
      * Set the domain maximum
+     *
+     * @param maxT a float.
      */
     protected void setMaxT(float maxT) {
         this.maxT = maxT;
@@ -166,6 +183,8 @@ public class ShaderType3 extends PDFShader {
     
     /**
      * Get whether to extend the start of the axis
+     *
+     * @return a boolean.
      */
     public boolean getExtendStart() {
         return this.extendStart;
@@ -173,6 +192,8 @@ public class ShaderType3 extends PDFShader {
     
     /**
      * Set whether to extend the start of the axis
+     *
+     * @param extendStart a boolean.
      */
     protected void setExtendStart(boolean extendStart) {
         this.extendStart = extendStart;
@@ -180,6 +201,8 @@ public class ShaderType3 extends PDFShader {
     
     /**
      * Get whether to extend the end of the axis
+     *
+     * @return a boolean.
      */
     public boolean getExtendEnd() {
         return this.extendEnd;
@@ -187,6 +210,8 @@ public class ShaderType3 extends PDFShader {
     
     /**
      * Set whether to extend the end of the axis
+     *
+     * @param extendEnd a boolean.
      */
     protected void setExtendEnd(boolean extendEnd) {
         this.extendEnd = extendEnd;
@@ -194,6 +219,8 @@ public class ShaderType3 extends PDFShader {
     
     /**
      * Get the functions associated with this shader
+     *
+     * @return an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
      */
     public PDFFunction[] getFunctions() {
         return this.functions;
@@ -201,6 +228,8 @@ public class ShaderType3 extends PDFShader {
     
     /**
      * Set the functions associated with this shader
+     *
+     * @param functions an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
      */
     protected void setFunctions(PDFFunction[] functions) {
         this.functions = functions;

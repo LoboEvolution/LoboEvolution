@@ -28,18 +28,26 @@ import org.loboevolution.pdfview.PDFPaint;
  * A color space used to implement masks.  For now, the only type of mask
  * supported is one where the image pixels specify where to paint, and the
  * painting itself is done in a pre-specified PDF Paint.
+ *
+  *
+  *
  */
 public class MaskColorSpace extends ColorSpace {
     /** The paint to paint in.  Note this cannot be a pattern or gradient. */
     private final PDFPaint paint;
     
-    /** Creates a new instance of PaintColorSpace */
+    /**
+     * Creates a new instance of PaintColorSpace
+     *
+     * @param paint a {@link org.loboevolution.pdfview.PDFPaint} object.
+     */
     public MaskColorSpace(PDFPaint paint) {
         super (TYPE_RGB, 1);
         
         this.paint = paint;
     }
     
+	/** {@inheritDoc} */
     @Override
 	public float[] fromCIEXYZ(float[] colorvalue) {
         float x = colorvalue[0];
@@ -57,6 +65,7 @@ public class MaskColorSpace extends ColorSpace {
         return mask;
     }
     
+	/** {@inheritDoc} */
     @Override
 	public float[] fromRGB(float[] rgbvalue) {
         float r = rgbvalue[0];
@@ -78,6 +87,7 @@ public class MaskColorSpace extends ColorSpace {
     final float[] prev1= this.cie.fromRGB(toRGB(new float[] {1.0f}));
     final float[] prev0= this.cie.fromRGB(toRGB(new float[] {0.0f}));
 
+	/** {@inheritDoc} */
     @Override
 	public float[] toCIEXYZ(float[] colorvalue) {
 	if (colorvalue[0]==1) {
@@ -89,11 +99,13 @@ public class MaskColorSpace extends ColorSpace {
 	}
     }
     
+	/** {@inheritDoc} */
     @Override
 	public float[] toRGB(float[] colorvalue) {
         return ((Color) this.paint.getPaint()).getRGBColorComponents(null);
     }
 
+    /** {@inheritDoc} */
     @Override public int getNumComponents() {
 	return 1;
     }

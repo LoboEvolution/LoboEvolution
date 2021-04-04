@@ -46,8 +46,8 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 /**
  * <p>BaseSplitPaneDivider class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 

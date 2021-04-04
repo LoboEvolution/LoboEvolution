@@ -20,14 +20,17 @@ import org.mozilla.javascript.ast.ScriptNode;
  * Generates class files from script sources.
  *
  * since 1.5 Release 5
- * @author Igor Bukanov
+ *
+ * Author Igor Bukanov
+ *
  */
-
 public class ClassCompiler
 {
     /**
      * Construct ClassCompiler that uses the specified compiler environment
      * when generating classes.
+     *
+     * @param compilerEnv a {@link org.mozilla.javascript.CompilerEnvirons} object.
      */
     public ClassCompiler(CompilerEnvirons compilerEnv)
     {
@@ -43,6 +46,8 @@ public class ClassCompiler
      * called when <code>main(String[] args)</code> is called in the generated
      * class. The class name should be fully qulified name and include the
      * package name like in <code>org.foo.Bar</code>.
+     *
+     * @param className a {@link java.lang.String} object.
      */
     public void setMainMethodClass(String className)
     {
@@ -52,7 +57,9 @@ public class ClassCompiler
 
     /**
      * Get the name of the class for main method implementation.
+     *
      * @see #setMainMethodClass(String)
+     * @return a {@link java.lang.String} object.
      */
     public String getMainMethodClass()
     {
@@ -61,6 +68,8 @@ public class ClassCompiler
 
     /**
      * Get the compiler environment the compiler uses.
+     *
+     * @return a {@link org.mozilla.javascript.CompilerEnvirons} object.
      */
     public CompilerEnvirons getCompilerEnv()
     {
@@ -69,6 +78,8 @@ public class ClassCompiler
 
     /**
      * Get the class that the generated target will extend.
+     *
+     * @return a {@link java.lang.Class} object.
      */
     public Class<?> getTargetExtends()
     {
@@ -87,6 +98,8 @@ public class ClassCompiler
 
     /**
      * Get the interfaces that the generated target will implement.
+     *
+     * @return an array of {@link java.lang.Class} objects.
      */
     public Class<?>[] getTargetImplements()
     {
@@ -110,6 +123,10 @@ public class ClassCompiler
      * it will call this function to build the auxiliary class name.
      * The default implementation simply appends auxMarker to mainClassName
      * but this can be overridden.
+     *
+     * @param mainClassName a {@link java.lang.String} object.
+     * @param auxMarker a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
      */
     protected String makeAuxiliaryClassName(String mainClassName,
                                             String auxMarker)
@@ -129,6 +146,10 @@ public class ClassCompiler
      *         and the following odd index gives class file body as byte[]
      *         array. The initial element of the array always holds
      *         mainClassName and array[1] holds its byte code.
+     * @param source a {@link java.lang.String} object.
+     * @param sourceLocation a {@link java.lang.String} object.
+     * @param lineno a int.
+     * @param mainClassName a {@link java.lang.String} object.
      */
     public Object[] compileToClassFiles(String source,
                                         String sourceLocation,

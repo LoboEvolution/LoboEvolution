@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.js;
@@ -39,8 +36,8 @@ import org.loboevolution.html.node.js.Location;
  * Location class.
  * </p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class LocationImpl extends AbstractScriptableDelegate implements Location {
 	private static final Logger logger = Logger.getLogger(LocationImpl.class.getName());
@@ -205,22 +202,22 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <p>
 	 * replace.
 	 * </p>
-	 *
-	 * @param href a {@link java.lang.String} object.
 	 */
 	public void replace(String href) {
 		setHref(href);
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <p>
 	 * setHref.
 	 * </p>
-	 *
-	 * @param uri a {@link java.lang.String} object.
 	 */
 	public void setHref(String uri) {
 		final HtmlRendererContext rcontext = this.window.getHtmlRendererContext();
@@ -260,66 +257,77 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		return getHref();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DOMStringList getAncestorOrigins() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setHash(String hash) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setHost(String host) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setHostname(String hostname) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getOrigin() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setPathname(String pathname) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setPort(String port) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setProtocol(String protocol) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setSearch(String search) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void assign(String url) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void reload(boolean forcedReload) {
 		// TODO Auto-generated method stub

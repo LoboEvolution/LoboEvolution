@@ -53,8 +53,8 @@ import java.util.List;
  * It can be added to a viewer by calling
  * viewer.addOverlay(new XPainter(), 10).
  *
- * @author Kazo Csaba
- * @version $Id: $Id
+ * Author Kazo Csaba
+ *
  */
 public abstract class Overlay {
 	private final List<OverlayComponent> overlayComponents = new ArrayList<>(1);

@@ -82,8 +82,8 @@ import javax.swing.plaf.basic.BasicRootPaneUI;
  * see {@link java.beans.XMLEncoder}.
  *
  * @version 1.20 04/27/04
- * @author Terry Kellerman
- * @author Michael Hagen
+ * Author Terry Kellerman
+ * Author Michael Hagen
  * @since 1.4
  */
 public class BaseRootPaneUI extends BasicRootPaneUI {

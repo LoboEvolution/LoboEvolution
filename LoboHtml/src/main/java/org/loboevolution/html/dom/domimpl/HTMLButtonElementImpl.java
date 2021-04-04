@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 package org.loboevolution.html.dom.domimpl;
 
@@ -39,8 +36,8 @@ import org.loboevolution.html.node.ValidityState;
 /**
  * <p>HTMLButtonElementImpl class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButtonElement {
 
@@ -206,198 +203,231 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAccessKeyLabel() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAutocapitalize() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getOffsetParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSpellcheck() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isDraggable() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isHidden() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isTranslate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAutocapitalize(String autocapitalize) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDraggable(boolean draggable) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setHidden(boolean hidden) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setSpellcheck(boolean spellcheck) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTranslate(boolean translate) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void click() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isAutofocus() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAutofocus(boolean autofocus) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFormAction() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFormAction(String formAction) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFormEnctype() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFormEnctype(String formEnctype) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFormMethod() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFormMethod(String formMethod) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isFormNoValidate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFormNoValidate(boolean formNoValidate) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFormTarget() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFormTarget(String formTarget) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public NodeList getLabels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setType(String type) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getValidationMessage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public ValidityState getValidity() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isWillValidate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean checkValidity() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean reportValidity() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCustomValidity(String error) {
 		// TODO Auto-generated method stub

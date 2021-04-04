@@ -31,6 +31,8 @@ package org.mozilla.javascript;
  * @see org.mozilla.javascript.Context#setSecurityController(SecurityController)
  * @see java.lang.ClassLoader
  * @since 1.5 Release 4
+ *
+ *
  */
 public abstract class SecurityController
 {
@@ -43,8 +45,10 @@ public abstract class SecurityController
     }
 
     /**
-     * Check if global {@link SecurityController} was already installed.
+     * Check if global {@link org.mozilla.javascript.SecurityController} was already installed.
+     *
      * @see #initGlobal(SecurityController controller)
+     * @return a boolean.
      */
     public static boolean hasGlobal()
     {
@@ -54,14 +58,15 @@ public abstract class SecurityController
     /**
      * Initialize global controller that will be used for all
      * security-related operations. The global controller takes precedence
-     * over already installed {@link Context}-specific controllers and cause
+     * over already installed {@link org.mozilla.javascript.Context}-specific controllers and cause
      * any subsequent call to
-     * {@link Context#setSecurityController(SecurityController)}
+     * {@link org.mozilla.javascript.Context#setSecurityController(SecurityController)}
      * to throw an exception.
      * <p>
      * The method can only be called once.
      *
      * @see #hasGlobal()
+     * @param controller a {@link org.mozilla.javascript.SecurityController} object.
      */
     public static void initGlobal(SecurityController controller)
     {
@@ -75,27 +80,31 @@ public abstract class SecurityController
     /**
      * Get class loader-like object that can be used
      * to define classes with the given security context.
+     *
      * @param parentLoader parent class loader to delegate search for classes
      *        not defined by the class loader itself
      * @param securityDomain some object specifying the security
      *        context of the code that is defined by the returned class loader.
+     * @return a {@link org.mozilla.javascript.GeneratedClassLoader} object.
      */
     public abstract GeneratedClassLoader createClassLoader(
         ClassLoader parentLoader, Object securityDomain);
 
     /**
-     * Create {@link GeneratedClassLoader} with restrictions imposed by
+     * Create {@link org.mozilla.javascript.GeneratedClassLoader} with restrictions imposed by
      * staticDomain and all current stack frames.
      * The method uses the SecurityController instance associated with the
-     * current {@link Context} to construct proper dynamic domain and create
+     * current {@link org.mozilla.javascript.Context} to construct proper dynamic domain and create
      * corresponding class loader.
      * <p>
-     * If no SecurityController is associated with the current {@link Context} ,
-     * the method calls {@link Context#createClassLoader(ClassLoader parent)}.
+     * If no SecurityController is associated with the current {@link org.mozilla.javascript.Context} ,
+     * the method calls {@link org.mozilla.javascript.Context#createClassLoader(ClassLoader parent)}.
      * </p>
+     *
      * @param parent parent class loader. If null,
-     *        {@link Context#getApplicationClassLoader()} will be used.
+     *        {@link org.mozilla.javascript.Context#getApplicationClassLoader()} will be used.
      * @param staticDomain static security domain.
+     * @return a {@link org.mozilla.javascript.GeneratedClassLoader} object.
      */
     public static GeneratedClassLoader createLoader(
         ClassLoader parent, Object staticDomain)
@@ -115,11 +124,21 @@ public abstract class SecurityController
         return loader;
     }
 
+    /**
+     * <p>getStaticSecurityDomainClass.</p>
+     *
+     * @return a {@link java.lang.Class} object.
+     */
     public static Class<?> getStaticSecurityDomainClass() {
         SecurityController sc = Context.getContext().getSecurityController();
         return sc == null ? null : sc.getStaticSecurityDomainClassInternal();
     }
 
+    /**
+     * <p>getStaticSecurityDomainClassInternal.</p>
+     *
+     * @return a {@link java.lang.Class} object.
+     */
     public Class<?> getStaticSecurityDomainClassInternal()
     {
         return null;
@@ -130,6 +149,9 @@ public abstract class SecurityController
      * by the current Java stack and <i>securityDomain</i>. If
      * <i>securityDomain</i> is null, return domain representing permissions
      * allowed by the current stack.
+     *
+     * @param securityDomain a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
      */
     public abstract Object getDynamicSecurityDomain(Object securityDomain);
 
@@ -148,6 +170,14 @@ public abstract class SecurityController
      * <p>
      * The method should always be overridden, it is not declared abstract
      * for compatibility reasons.
+     *
+     * @param securityDomain a {@link java.lang.Object} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param callable a {@link org.mozilla.javascript.Callable} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param args an array of {@link java.lang.Object} objects.
+     * @return a {@link java.lang.Object} object.
      */
     public Object callWithDomain(Object securityDomain, Context cx,
                                  final Callable callable, Scriptable scope,
@@ -165,9 +195,16 @@ public abstract class SecurityController
     }
 
     /**
+     * <p>execWithDomain.</p>
+     *
      * @deprecated The application should not override this method and instead
      * override
      * {@link #callWithDomain(Object securityDomain, Context cx, Callable callable, Scriptable scope, Scriptable thisObj, Object[] args)}.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param script a {@link org.mozilla.javascript.Script} object.
+     * @param securityDomain a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
      */
     @Deprecated
     public Object execWithDomain(Context cx, Scriptable scope,

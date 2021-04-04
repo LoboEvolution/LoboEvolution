@@ -28,10 +28,11 @@ import org.loboevolution.pdfview.font.PDFFont;
 import org.loboevolution.pdfview.font.PDFGlyph;
 
 /**
-* a class encapsulating the text state
-*
-* @author Mike Wessler
-*/
+ * a class encapsulating the text state
+ *
+ * Author Mike Wessler
+  *
+ */
 public class PDFTextFormat implements Cloneable {
     /** character spacing */
     private float tc = 0;
@@ -67,8 +68,8 @@ public class PDFTextFormat implements Cloneable {
     private final Point2D.Float prevEnd;
 
     /**
-    * create a new PDFTextFormat, with initial values
-    */
+     * create a new PDFTextFormat, with initial values
+     */
     public PDFTextFormat() {
         this.cur = new AffineTransform();
         this.line = new AffineTransform();
@@ -80,8 +81,8 @@ public class PDFTextFormat implements Cloneable {
     }
 
     /**
-    * reset the PDFTextFormat for a new run
-    */
+     * reset the PDFTextFormat for a new run
+     */
     public void reset() {
         this.cur.setToIdentity();
         this.line.setToIdentity();
@@ -90,101 +91,142 @@ public class PDFTextFormat implements Cloneable {
     }
 
     /**
-    * end a span of text
-    */
+     * end a span of text
+     */
     public void end() {
         this.inuse = false;
     }
 
-    /** get the char spacing */
+    /**
+     * get the char spacing
+     *
+     * @return a float.
+     */
     public float getCharSpacing() {
         return this.tc;
     }
 
-    /** set the character spacing */
+    /**
+     * set the character spacing
+     *
+     * @param spc a float.
+     */
     public void setCharSpacing(float spc) {
         this.tc = spc;
     }
 
-    /** get the word spacing */
+    /**
+     * get the word spacing
+     *
+     * @return a float.
+     */
     public float getWordSpacing() {
         return this.tw;
     }
 
-    /** set the word spacing */
+    /**
+     * set the word spacing
+     *
+     * @param spc a float.
+     */
     public void setWordSpacing(float spc) {
         this.tw = spc;
     }
 
     /**
-    * Get the horizontal scale
-    *
-    * @return the horizontal scale, in percent
-    */
+     * Get the horizontal scale
+     *
+     * @return the horizontal scale, in percent
+     */
     public float getHorizontalScale() {
         return this.th * 100;
     }
 
     /**
-    * set the horizontal scale.
-    *
-    * @param scl
-    * the horizontal scale, in percent (100=normal)
-    */
+     * set the horizontal scale.
+     *
+     * @param scl
+     * the horizontal scale, in percent (100=normal)
+     */
     public void setHorizontalScale(float scl) {
         this.th = scl / 100;
     }
 
-    /** get the leading */
+    /**
+     * get the leading
+     *
+     * @return a float.
+     */
     public float getLeading() {
         return this.tl;
     }
 
-    /** set the leading */
+    /**
+     * set the leading
+     *
+     * @param spc a float.
+     */
     public void setLeading(float spc) {
         this.tl = spc;
     }
 
-    /** get the font */
+    /**
+     * get the font
+     *
+     * @return a {@link org.loboevolution.pdfview.font.PDFFont} object.
+     */
     public PDFFont getFont() {
         return this.font;
     }
 
-    /** get the font size */
+    /**
+     * get the font size
+     *
+     * @return a float.
+     */
     public float getFontSize() {
         return this.fsize;
     }
 
-    /** set the font and size */
+    /**
+     * set the font and size
+     *
+     * @param f a {@link org.loboevolution.pdfview.font.PDFFont} object.
+     * @param size a float.
+     */
     public void setFont(PDFFont f, float size) {
         this.font = f;
         this.fsize = size;
     }
 
     /**
-    * Get the mode of the text
-    */
+     * Get the mode of the text
+     *
+     * @return a int.
+     */
     public int getMode() {
         return this.tm;
     }
 
     /**
-    * set the mode of the text. The correspondence of m to mode is
-    * show in the following table. m is a value from 0-7 in binary:
-    *
-    * 000 Fill
-    * 001 Stroke
-    * 010 Fill + Stroke
-    * 011 Nothing
-    * 100 Fill + Clip
-    * 101 Stroke + Clip
-    * 110 Fill + Stroke + Clip
-    * 111 Clip
-    *
-    * Therefore: Fill corresponds to the low bit being 0; Clip
-    * corresponds to the hight bit being 1; and Stroke corresponds
-    * to the middle xor low bit being 1.
-    */
+     * set the mode of the text. The correspondence of m to mode is
+     * show in the following table. m is a value from 0-7 in binary:
+     *
+     * 000 Fill
+     * 001 Stroke
+     * 010 Fill + Stroke
+     * 011 Nothing
+     * 100 Fill + Clip
+     * 101 Stroke + Clip
+     * 110 Fill + Stroke + Clip
+     * 111 Clip
+     *
+     * Therefore: Fill corresponds to the low bit being 0; Clip
+     * corresponds to the hight bit being 1; and Stroke corresponds
+     * to the middle xor low bit being 1.
+     *
+     * @param m a int.
+     */
     public void setMode(int m) {
         int mode = 0;
         if ((m & 0x1) == 0) {
@@ -200,69 +242,81 @@ public class PDFTextFormat implements Cloneable {
     }
 
     /**
-    * Set the mode from another text format mode
-    *
-    * @param mode
-    * the text render mode using the
-    * codes from PDFShapeCmd and not the wacky PDF codes
-    */
+     * Set the mode from another text format mode
+     *
+     * @param mode
+     * the text render mode using the
+     * codes from PDFShapeCmd and not the wacky PDF codes
+     */
     public void setTextFormatMode(int mode) {
         this.tm = mode;
     }
 
     /**
-    * Get the rise
-    */
+     * Get the rise
+     *
+     * @return a float.
+     */
     public float getRise() {
         return this.tr;
     }
 
     /**
-    * set the rise
-    */
+     * set the rise
+     *
+     * @param spc a float.
+     */
     public void setRise(float spc) {
         this.tr = spc;
     }
 
     /**
-    * perform a carriage return
-    */
+     * perform a carriage return
+     */
     public void carriageReturn() {
         carriageReturn(0, -this.tl);
     }
 
     /**
-    * perform a carriage return by translating by x and y. The next
-    * carriage return will be relative to the new location.
-    */
+     * perform a carriage return by translating by x and y. The next
+     * carriage return will be relative to the new location.
+     *
+     * @param x a float.
+     * @param y a float.
+     */
     public void carriageReturn(float x, float y) {
         this.line.concatenate(AffineTransform.getTranslateInstance(x, y));
         this.cur.setTransform(this.line);
     }
 
     /**
-    * Get the current transform
-    */
+     * Get the current transform
+     *
+     * @return a {@link java.awt.geom.AffineTransform} object.
+     */
     public AffineTransform getTransform() {
         return this.cur;
     }
 
     /**
-    * set the transform matrix directly
-    */
+     * set the transform matrix directly
+     *
+     * @param matrix an array of {@link float} objects.
+     */
     public void setMatrix(float[] matrix) {
         this.line = new AffineTransform(matrix);
         this.cur.setTransform(this.line);
     }
 
     /**
-    * add some text to the page.
-    *
-    * @param cmds
-    * the PDFPage to add the commands to
-    * @param text
-    * the text to add
-    */
+     * add some text to the page.
+     *
+     * @param cmds
+     * the PDFPage to add the commands to
+     * @param text
+     * the text to add
+     * @param autoAdjustStroke a boolean.
+     */
     public void doText(PDFPage cmds, String text, boolean autoAdjustStroke) {
         Point2D.Float zero = new Point2D.Float();
         AffineTransform scale = new AffineTransform(this.fsize * this.th, 0, /* 0 */
@@ -336,15 +390,17 @@ public class PDFTextFormat implements Cloneable {
     }
 
     /**
-    * add some text to the page.
-    *
-    * @param cmds
-    * the PDFPage to add the commands to
-    * @param ary
-    * an array of Strings and Doubles, where the Strings
-    * represent text to be added, and the Doubles represent kerning
-    * amounts.
-    */
+     * add some text to the page.
+     *
+     * @param cmds
+     * the PDFPage to add the commands to
+     * @param ary
+     * an array of Strings and Doubles, where the Strings
+     * represent text to be added, and the Doubles represent kerning
+     * amounts.
+     * @param autoAdjustStroke a boolean.
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
+     */
     public void doText(PDFPage cmds, Object[] ary, boolean autoAdjustStroke) throws PDFParseException {
         for (Object o : ary) {
             if (o instanceof String) {
@@ -359,15 +415,17 @@ public class PDFTextFormat implements Cloneable {
     }
 
     /**
-    * finish any unfinished words. TODO: write this!
-    */
+     * finish any unfinished words. TODO: write this!
+     */
     public void flush() {
         // TODO: finish any unfinished words
     }
 
     /**
-    * Clone the text format
-    */
+     * {@inheritDoc}
+     *
+     * Clone the text format
+     */
     @Override
     public Object clone() {
         PDFTextFormat newFormat = new PDFTextFormat();

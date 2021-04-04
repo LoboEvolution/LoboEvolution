@@ -33,8 +33,8 @@ import com.jtattoo.plaf.BaseTabbedPaneUI;
 /**
  * <p>BernsteinTabbedPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BernsteinTabbedPaneUI extends BaseTabbedPaneUI {
 

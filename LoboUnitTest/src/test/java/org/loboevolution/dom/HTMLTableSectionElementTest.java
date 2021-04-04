@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
  
 package org.loboevolution.dom;
@@ -26,20 +23,32 @@ package org.loboevolution.dom;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
+/**
+ * Tests for {@link org.loboevolution.html.dom.HTMLTableSectionElement}.
+ */
 public class HTMLTableSectionElementTest extends LoboUnitTest {
 
+    /**
+     * <p>align_thead.</p>
+     */
     @Test
     public void align_thead() {
         String[] messages = {null, "hello", "left", "hi", "right"};
         align("th", messages);
     }
 
+    /**
+     * <p>align_tbody.</p>
+     */
     @Test
     public void align_tbody() {
         String[] messages = {null, "hello", "left", "hi", "right"};
         align("tb", messages);
     }
 
+    /**
+     * <p>align_tfoot.</p>
+     */
     @Test
     public void align_tfoot() {
         String[] messages = {null, "hello", "left", "hi", "right"};
@@ -84,18 +93,27 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>vAlign_thead.</p>
+     */
     @Test
     public void vAlign_thead() {
         String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
         vAlign("th", messages);
     }
 
+    /**
+     * <p>vAlign_tbody.</p>
+     */
     @Test
     public void vAlign_tbody() {
         String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
         vAlign("tb", messages);
     }
 
+    /**
+     * <p>vAlign_tfoot.</p>
+     */
     @Test
     public void vAlign_tfoot() {
         String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
@@ -152,18 +170,27 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>ch_thead.</p>
+     */
     @Test
     public void ch_thead() {
         String[] messages = {"p", "po", "", "u", "8", "U8"};
         ch("th", messages);
     }
 
+    /**
+     * <p>ch_tbody.</p>
+     */
     @Test
     public void ch_tbody() {
         String[] messages = {"p", "po", "", "u", "8", "U8"};
         ch("tb", messages);
     }
 
+    /**
+     * <p>ch_tfoot.</p>
+     */
     @Test
     public void ch_tfoot() {
         String[] messages = {"p", "po", "", "u", "8", "U8"};
@@ -220,18 +247,27 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>chOff_thead.</p>
+     */
     @Test
     public void chOff_thead() {
         String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
         chOff("th", messages);
     }
 
+    /**
+     * <p>chOff_tbody.</p>
+     */
     @Test
     public void chOff_tbody() {
         String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
         chOff("tb", messages);
     }
 
+    /**
+     * <p>chOff_tfoot.</p>
+     */
     @Test
     public void chOff_tfoot() {
         String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
@@ -288,6 +324,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>TBODY_innerHTML.</p>
+     */
     @Test
     public void TBODY_innerHTML() {
         final String html = "<html><head>\n"
@@ -310,6 +349,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>innerText_body.</p>
+     */
     @Test
     public void innerText_body() {
         final String html
@@ -334,6 +376,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>innerText_header.</p>
+     */
     @Test
     public void innerText_header() {
         final String html
@@ -358,6 +403,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>innerText_footer.</p>
+     */
     @Test
     public void innerText_footer() {
         final String html
@@ -382,6 +430,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>textContent_body.</p>
+     */
     @Test
     public void textContent_body() {
         final String html
@@ -406,6 +457,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>textContent_header.</p>
+     */
     @Test
     public void textContent_header() {
         final String html
@@ -430,6 +484,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>textContent_footer.</p>
+     */
     @Test
     public void textContent_footer() {
         final String html
@@ -454,6 +511,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>bgColorFooter.</p>
+     */
     @Test
     public void bgColorFooter() {
         final String html =
@@ -479,6 +539,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>bgColorHeader.</p>
+     */
     @Test
     public void bgColorHeader() {
         final String html =

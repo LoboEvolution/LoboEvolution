@@ -15,6 +15,12 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+/**
+ * <p>FunctionObject class.</p>
+ *
+ *
+ *
+ */
 public class FunctionObject extends BaseFunction
 {
     private static final long serialVersionUID = -5332312783643935019L;
@@ -157,9 +163,12 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * <p>getTypeTag.</p>
+     *
      * @return One of <code>JAVA_*_TYPE</code> constants to indicate desired type
      *         or {@link #JAVA_UNSUPPORTED_TYPE} if the convertion is not
      *         possible
+     * @param type a {@link java.lang.Class} object.
      */
     public static int getTypeTag(Class<?> type)
     {
@@ -182,6 +191,15 @@ public class FunctionObject extends BaseFunction
         return JAVA_UNSUPPORTED_TYPE;
     }
 
+    /**
+     * <p>convertArg.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param arg a {@link java.lang.Object} object.
+     * @param typeTag a int.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object convertArg(Context cx, Scriptable scope,
                                     Object arg, int typeTag)
     {
@@ -213,6 +231,8 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return the value defined by  the method used to construct the object
      * (number of parameters of the method, or 1 if the method is a "varargs"
      * form).
@@ -223,6 +243,8 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return the same value as {@link #getArity()}.
      */
     @Override
@@ -230,6 +252,7 @@ public class FunctionObject extends BaseFunction
         return getArity();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getFunctionName()
     {
@@ -238,6 +261,8 @@ public class FunctionObject extends BaseFunction
 
     /**
      * Get Java method or constructor this function represent.
+     *
+     * @return a {@link java.lang.reflect.Member} object.
      */
     public Member getMethodOrConstructor()
     {
@@ -345,9 +370,16 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * <p>convertArg.</p>
+     *
      * @deprecated Use {@link #getTypeTag(Class)}
      * and {@link #convertArg(Context, Scriptable, Object, int)}
      * for type conversion.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param arg a {@link java.lang.Object} object.
+     * @param desired a {@link java.lang.Class} object.
+     * @return a {@link java.lang.Object} object.
      */
     @Deprecated
     public static Object convertArg(Context cx, Scriptable scope,
@@ -362,11 +394,12 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Performs conversions on argument types if needed and
      * invokes the underlying Java method or constructor.
      * <p>
      * Implements Function.call.
-     *
      * @see org.mozilla.javascript.Function#call(
      *          Context, Scriptable, Scriptable, Object[])
      */
@@ -474,6 +507,8 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return new {@link Scriptable} instance using the default
      * constructor for the class of the underlying Java method.
      * Return null to indicate that the call method should be used to create
@@ -531,12 +566,19 @@ public class FunctionObject extends BaseFunction
 
     private static boolean sawSecurityException;
 
+    /** Constant <code>JAVA_UNSUPPORTED_TYPE=0</code> */
     public static final int JAVA_UNSUPPORTED_TYPE = 0;
+    /** Constant <code>JAVA_STRING_TYPE=1</code> */
     public static final int JAVA_STRING_TYPE      = 1;
+    /** Constant <code>JAVA_INT_TYPE=2</code> */
     public static final int JAVA_INT_TYPE         = 2;
+    /** Constant <code>JAVA_BOOLEAN_TYPE=3</code> */
     public static final int JAVA_BOOLEAN_TYPE     = 3;
+    /** Constant <code>JAVA_DOUBLE_TYPE=4</code> */
     public static final int JAVA_DOUBLE_TYPE      = 4;
+    /** Constant <code>JAVA_SCRIPTABLE_TYPE=5</code> */
     public static final int JAVA_SCRIPTABLE_TYPE  = 5;
+    /** Constant <code>JAVA_OBJECT_TYPE=6</code> */
     public static final int JAVA_OBJECT_TYPE      = 6;
 
     MemberBox member;

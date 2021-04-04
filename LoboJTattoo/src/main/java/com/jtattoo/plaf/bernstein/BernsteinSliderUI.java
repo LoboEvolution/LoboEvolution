@@ -35,8 +35,8 @@ import com.jtattoo.plaf.BaseSliderUI;
 /**
  * <p>BernsteinSliderUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BernsteinSliderUI extends BaseSliderUI {
 

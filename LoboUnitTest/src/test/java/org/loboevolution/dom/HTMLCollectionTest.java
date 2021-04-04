@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -27,11 +24,13 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link HTMLCollection}.
-*/
-
+ * * Tests for {@link org.loboevolution.html.dom.HTMLCollection}.
+ */
 public class HTMLCollectionTest extends LoboUnitTest {
 
+   /**
+    * <p>implicitToStringConversion.</p>
+    */
    @Test
     public void implicitToStringConversion() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -47,6 +46,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>toStringFunction.</p>
+     */
     @Test
     public void toStringFunction() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -61,6 +63,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElements.</p>
+     */
     @Test
     public void getElements() {
         final String html
@@ -80,6 +85,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>for_in.</p>
+     */
     @Test
     public void for_in() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -102,6 +110,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>for_in2.</p>
+     */
     @Test
     public void for_in2() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -133,6 +144,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>tags.</p>
+     */
     @Test
     public void tags() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -148,6 +162,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>outOfBoundAccess.</p>
+     */
     @Test
     public void outOfBoundAccess() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -167,6 +184,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>inexistentProperties.</p>
+     */
     @Test
     public void inexistentProperties() {
         final String html = "<html><head><script>\n"
@@ -183,6 +203,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>childNodes.</p>
+     */
     @Test
     public void childNodes() {
         final String html = "<html><head>\n"
@@ -196,10 +219,13 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "<body onload='test()'> <div id='myDiv'> <div> </div> <div> </div> </div> </body>\n"
                 + "</html>";
 
-        final String[] messages = {"3", "#text", "5"};;
+        final String[] messages = {"3", "#text", "5"};
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>typeof.</p>
+     */
     @Test
     public void typeof() {
         final String html = "<html><head>\n"
@@ -216,6 +242,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>getElementWithDollarSign.</p>
+     */
     @Test
     public void getElementWithDollarSign() {
         final String html
@@ -228,6 +257,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>array_prototype.</p>
+     */
     @Test
     public void array_prototype() {
         final String html = "<html><head>\n"
@@ -246,6 +278,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>array_prototype_standards.</p>
+     */
     @Test
     public void array_prototype_standards() {
         final String html = "<html><head>\n"
@@ -264,6 +299,9 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>has.</p>
+     */
     @Test
     public void has() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -278,52 +316,82 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>item_Unknown.</p>
+     */
     @Test
     public void item_Unknown() {
         item("'foo'", "b1-button1");
     }
 
+    /**
+     * <p>item_ById.</p>
+     */
     @Test
     public void item_ById() {
         item("'b2'", "b1-button1");
     }
 
+    /**
+     * <p>item_ByName.</p>
+     */
     @Test
     public void item_ByName() {
         item("'button2'", "b1-button1");
     }
 
+    /**
+     * <p>item_NegativIndex.</p>
+     */
     @Test
     public void item_NegativIndex() {
         item("-1", null);
     }
 
+   /**
+    * <p>item_ZeroIndex.</p>
+    */
    @Test
    public void item_ZeroIndex() {
         item("0", "b1-button1");
     }
 
+    /**
+     * <p>item_ValidIndex.</p>
+     */
     @Test
     public void item_ValidIndex() {
         item("1", "b2-button2");
     }
 
+    /**
+     * <p>item_DoubleIndex.</p>
+     */
     @Test
             ()
     public void item_DoubleIndex() {
         item("1.1", "b2-button2");
     }
 
+    /**
+     * <p>item_InvalidIndex.</p>
+     */
     @Test
     public void item_InvalidIndex() {
         item("2", null);
     }
 
+    /**
+     * <p>item_IndexAsString.</p>
+     */
     @Test
     public void item_IndexAsString() {
         item("'1'", "b2-button2");
     }
 
+    /**
+     * <p>item_IndexDoubleAsString.</p>
+     */
     @Test
     public void item_IndexDoubleAsString() {
         item("'1.1'", "b2-button2");
@@ -363,46 +431,73 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>arrayIndex_Unknown.</p>
+     */
     @Test
     public void arrayIndex_Unknown() {
         arrayIndex("'foo'", "b2-button2");
     }
 
+    /**
+     * <p>arrayIndex_ById.</p>
+     */
     @Test
     public void arrayIndex_ById() {
         arrayIndex("'b2'", "b2-button2");
     }
 
+    /**
+     * <p>arrayIndex_ByName.</p>
+     */
     @Test
     public void arrayIndex_ByName() {
         arrayIndex("'button2'", "b2-button2");
     }
 
+    /**
+     * <p>arrayIndex_NegativIndex.</p>
+     */
     @Test
     public void arrayIndex_NegativIndex() {
         arrayIndex("-1", "undefined");
     }
 
+    /**
+     * <p>arrayIndex_ZeroIndex.</p>
+     */
     @Test
     public void arrayIndex_ZeroIndex() {
         arrayIndex("0", "b1-button1");
     }
 
+    /**
+     * <p>arrayIndex_ValidIndex.</p>
+     */
     @Test
     public void arrayIndex_ValidIndex() {
         arrayIndex("1", "b2-button2");
     }
 
+    /**
+     * <p>arrayIndex_DoubleIndex.</p>
+     */
     @Test
     public void arrayIndex_DoubleIndex() {
         arrayIndex("1.1",  "undefined");
     }
 
+    /**
+     * <p>arrayIndex_InvalidIndex.</p>
+     */
     @Test
     public void arrayIndex_InvalidIndex() {
         arrayIndex("2", "undefined");
     }
 
+    /**
+     * <p>arrayIndex_IndexAsString.</p>
+     */
     @Test
     public void arrayIndex_IndexAsString() {
         arrayIndex("'2'", "undefined");
@@ -442,47 +537,74 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>functionIndex_Unknown.</p>
+     */
     @Test
     public void functionIndex_Unknown() {
         functionIndex("'foo'","exception");
     }
 
 
+    /**
+     * <p>functionIndex_ById.</p>
+     */
     @Test
     public void functionIndex_ById() {
         functionIndex("'b2'","exception");
     }
 
+    /**
+     * <p>functionIndex_ByName.</p>
+     */
     @Test
     public void functionIndex_ByName() {
         functionIndex("'button2'","exception");
     }
 
+    /**
+     * <p>functionIndex_NegativIndex.</p>
+     */
     @Test
     public void functionIndex_NegativIndex() {
         functionIndex("-1","exception");
     }
 
+    /**
+     * <p>functionIndex_ZeroIndex.</p>
+     */
     @Test
     public void functionIndex_ZeroIndex() {
         functionIndex("0","exception");
     }
 
+    /**
+     * <p>functionIndex_ValidIndex.</p>
+     */
     @Test
     public void functionIndex_ValidIndex() {
         functionIndex("1","exception");
     }
 
+    /**
+     * <p>functionIndex_DoubleIndex.</p>
+     */
     @Test
     public void functionIndex_DoubleIndex() {
         functionIndex("1.1","exception");
     }
 
+    /**
+     * <p>functionIndex_InvalidIndex.</p>
+     */
     @Test
     public void functionIndex_InvalidIndex() {
         functionIndex("2","exception");
     }
 
+    /**
+     * <p>functionIndex_IndexAsString.</p>
+     */
     @Test
     public void functionIndex_IndexAsString() {
         functionIndex("'2'","exception");
@@ -522,66 +644,105 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>namedItem_Unknown.</p>
+     */
     @Test
     public void namedItem_Unknown() {
         namedItem("foo", null);
     }
 
+    /**
+     * <p>namedItem_ById.</p>
+     */
     @Test
     public void namedItem_ById() {
         namedItem("button1", "button1-");
     }
 
+    /**
+     * <p>namedItem_ByName_formWithoutId.</p>
+     */
     @Test
     public void namedItem_ByName_formWithoutId() {
         namedItem("button2", "-button2");
     }
 
+    /**
+     * <p>namedItem_ByName.</p>
+     */
     @Test
     public void namedItem_ByName() {
         namedItem("button3", "b3-button3");
     }
 
+    /**
+     * <p>namedItem_DuplicateId.</p>
+     */
     @Test
     public void namedItem_DuplicateId() {
         namedItem("b4", "b4-button4_1");
     }
 
+    /**
+     * <p>namedItem_DuplicateName.</p>
+     */
     @Test
     public void namedItem_DuplicateName() {
         namedItem("button5", "b5_1-button5");
     }
 
+    /**
+     * <p>namedItem_DuplicateIdName.</p>
+     */
     @Test
     public void namedItem_DuplicateIdName() {
         namedItem("button6", "b6-button6");
     }
 
+    /**
+     * <p>namedItem_ZeroIndex.</p>
+     */
     @Test
     public void namedItem_ZeroIndex() {
         item("0", "b1-button1");
     }
 
+    /**
+     * <p>namedItem_ValidIndex.</p>
+     */
     @Test
     public void namedItem_ValidIndex() {
         item("1", "b2-button2");
     }
 
+    /**
+     * <p>namedItem_DoubleIndex.</p>
+     */
     @Test
     public void namedItem_DoubleIndex() {
         item("1.1", "b2-button2");
     }
 
+    /**
+     * <p>namedItem_InvalidIndex.</p>
+     */
     @Test
     public void namedItem_InvalidIndex() {
         item("200", null);
     }
 
+    /**
+     * <p>namedItem_IndexAsString.</p>
+     */
     @Test
     public void namedItem_IndexAsString() {
         item("'1'", "b2-button2");
     }
 
+    /**
+     * <p>namedItem_IndexDoubleAsString.</p>
+     */
     @Test
     public void namedItem_IndexDoubleAsString() {
         item("'1.1'", "b2-button2");

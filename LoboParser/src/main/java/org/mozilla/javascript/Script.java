@@ -13,10 +13,11 @@ package org.mozilla.javascript;
  * <p>
  * This class encapsulates script execution relative to an
  * object scope.
+ *
  * @since 1.3
- * @author Norris Boyd
+ * Author Norris Boyd
+ *
  */
-
 public interface Script {
 
     /**

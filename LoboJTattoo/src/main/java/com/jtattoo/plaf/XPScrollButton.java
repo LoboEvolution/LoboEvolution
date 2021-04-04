@@ -38,8 +38,8 @@ import javax.swing.UIManager;
 /**
  * <p>Abstract XPScrollButton class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public abstract class XPScrollButton extends BaseScrollButton {
 

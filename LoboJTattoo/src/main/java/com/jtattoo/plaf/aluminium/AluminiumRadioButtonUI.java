@@ -34,8 +34,8 @@ import com.jtattoo.plaf.BaseRadioButtonUI;
 /**
  * <p>AluminiumRadioButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumRadioButtonUI extends BaseRadioButtonUI {
 

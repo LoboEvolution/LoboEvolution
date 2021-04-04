@@ -103,12 +103,12 @@ import javax.swing.text.View;
  * A Basic L&amp;F implementation of TabbedPaneUI.
  *
  * @version 1.87 06/08/99
- * @author Amy Fowler
- * @author Philip Milne
- * @author Steve Wilson
- * @author Tom Santos
- * @author Dave Moore
- * @author Michael Hagen
+ * Author Amy Fowler
+ * Author Philip Milne
+ * Author Steve Wilson
+ * Author Tom Santos
+ * Author Dave Moore
+ * Author Michael Hagen
  */
 public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
@@ -3844,7 +3844,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 	}
 
-    /**
+	/**
 	 * <p>paintLeftTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -3905,7 +3905,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 	}
 
-    /**
+	/**
 	 * <p>paintRightTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -3958,7 +3958,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 	}
 
-    /**
+	/**
 	 * <p>paintRoundedBottomTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -3986,7 +3986,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
 	}
 
-    /**
+	/**
 	 * <p>paintRoundedTopTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -4021,7 +4021,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
 	}
 
-    /**
+	/**
 	 * <p>paintScrollContentBorder.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
@@ -4056,7 +4056,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 	}
 
-    /**
+	/**
 	 * <p>paintTab.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
@@ -4138,7 +4138,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 	}
 
-    /**
+	/**
 	 * Paints the tabs in the tab area. Invoked by paint(). The graphics parameter
 	 * must be a valid Graphics object. Tab placement may be either:
 	 * JTabbedPane.TOP, JTabbedPane.BOTTOM,
@@ -4187,7 +4187,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		g.setClip(savedClip);
 	}
 
-    /**
+	/**
 	 * <p>paintTabBackground.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
@@ -4312,7 +4312,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 	}
 
-    /**
+	/**
 	 * <p>paintText.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
@@ -4374,7 +4374,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 	}
 
-    /**
+	/**
 	 * <p>paintTopTabBorder.</p>
 	 *
 	 * @param tabIndex a int.

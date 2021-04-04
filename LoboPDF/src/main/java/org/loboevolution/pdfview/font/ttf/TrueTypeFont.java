@@ -34,8 +34,10 @@ import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFDebugger;
 
 /**
+ * <p>TrueTypeFont class.</p>
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class TrueTypeFont {
 
@@ -45,7 +47,11 @@ public class TrueTypeFont {
 
     private final SortedMap<String, Object> tables;
 
-    /** Creates a new instance of TrueTypeParser */
+    /**
+     * Creates a new instance of TrueTypeParser
+     *
+     * @param type a int.
+     */
     public TrueTypeFont (int type) {
         this.type = type;
 
@@ -55,6 +61,9 @@ public class TrueTypeFont {
 
     /**
      * Parses a TrueType font from a byte array
+     *
+     * @param orig an array of {@link byte} objects.
+     * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
     public static TrueTypeFont parseFont (byte[] orig) {
         ByteBuffer inBuf = ByteBuffer.wrap (orig);
@@ -63,6 +72,9 @@ public class TrueTypeFont {
 
     /**
      * Parses a TrueType font from a byte buffer
+     *
+     * @param inBuf a {@link java.nio.ByteBuffer} object.
+     * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
     public static TrueTypeFont parseFont (ByteBuffer inBuf) {
         int type = inBuf.getInt ();
@@ -82,6 +94,8 @@ public class TrueTypeFont {
 
     /**
      * Get the type of this font
+     *
+     * @return a int.
      */
     public int getType () {
         return this.type;
@@ -115,6 +129,7 @@ public class TrueTypeFont {
      *
      * @param tagString the name of this table, as a 4 character string
      *        (i.e. cmap or head)
+     * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeTable} object.
      */
     public TrueTypeTable getTable (String tagString) {
         Object tableObj = this.tables.get (tagString);
@@ -147,6 +162,8 @@ public class TrueTypeFont {
 
     /**
      * Get the number of tables
+     *
+     * @return a short.
      */
     public short getNumTables () {
         return (short) this.tables.size ();
@@ -154,6 +171,8 @@ public class TrueTypeFont {
 
     /**
      * Get the search range
+     *
+     * @return a short.
      */
     public short getSearchRange () {
         double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
@@ -164,6 +183,8 @@ public class TrueTypeFont {
 
     /**
      * Get the entry selector
+     *
+     * @return a short.
      */
     public short getEntrySelector () {
         double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
@@ -174,6 +195,8 @@ public class TrueTypeFont {
 
     /**
      * Get the range shift
+     *
+     * @return a short.
      */
     public short getRangeShift () {
         double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
@@ -184,6 +207,8 @@ public class TrueTypeFont {
 
     /**
      * Write a font given the type and an array of Table Directory Entries
+     *
+     * @return an array of {@link byte} objects.
      */
     public byte[] writeFont () {
         // allocate a buffer to hold the font
@@ -392,9 +417,11 @@ public class TrueTypeFont {
         }
     }
 
-    /**
-     * Write the font to a pretty string
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Write the font to a pretty string
+	 */
     @Override
 	public String toString () {
         StringBuilder buf = new StringBuilder ();
@@ -419,6 +446,11 @@ public class TrueTypeFont {
         return buf.toString ();
     }
 
+    /**
+     * <p>getNames.</p>
+     *
+     * @return a {@link java.util.Collection} object.
+     */
     public Collection<String> getNames() {
         NameTable table = (NameTable) getTable("name");
         if (table != null) {
@@ -429,6 +461,8 @@ public class TrueTypeFont {
     }
     
     /**
+     * <p>main.</p>
+     *
      * @param args the command line arguments
      */
     public static void main (String[] args) {

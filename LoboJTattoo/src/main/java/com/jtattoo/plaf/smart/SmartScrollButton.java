@@ -30,8 +30,8 @@ import com.jtattoo.plaf.BaseScrollButton;
 /**
  * <p>SmartScrollButton class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class SmartScrollButton extends BaseScrollButton {
 

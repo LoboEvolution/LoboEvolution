@@ -24,8 +24,10 @@ package org.loboevolution.pdfview.font.ttf;
 import java.nio.ByteBuffer;
 
 /**
+ * <p>CMapFormat0 class.</p>
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class CMapFormat0 extends CMap {
     
@@ -34,7 +36,11 @@ public class CMapFormat0 extends CMap {
      */
     private byte[] glyphIndex;
     
-    /** Creates a new instance of CMapFormat0 */
+    /**
+     * Creates a new instance of CMapFormat0
+     *
+     * @param language a short.
+     */
     protected CMapFormat0(short language) {
         super((short) 0, language);
     
@@ -45,17 +51,21 @@ public class CMapFormat0 extends CMap {
         setMap(initialIndex);
     }
     
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public short getLength() {
         return (short) 262;
     }
     
-    /** 
-     * Map from a byte
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Map from a byte
+	 */
     @Override
 	public byte map(byte src) {
         int i = 0xff & src;
@@ -63,9 +73,11 @@ public class CMapFormat0 extends CMap {
         return this.glyphIndex[i];
     }
     
-    /**
-     * Cannot map from short
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Cannot map from short
+	 */
     @Override
 	public char map(char src) {
         if (src  < 0 || src > 255) {
@@ -77,9 +89,11 @@ public class CMapFormat0 extends CMap {
     }
         
     
-    /**
-     * Get the src code which maps to the given glyphID
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the src code which maps to the given glyphID
+	 */
     @Override
 	public char reverseMap(short glyphID) {
         for (int i = 0; i < this.glyphIndex.length; i++) {
@@ -93,6 +107,8 @@ public class CMapFormat0 extends CMap {
     
     /**
      * Set the entire map
+     *
+     * @param glyphIndex an array of {@link byte} objects.
      */
     public void setMap(byte[] glyphIndex) {
         if (glyphIndex.length != 256) {
@@ -104,6 +120,9 @@ public class CMapFormat0 extends CMap {
     
     /**
      * Set a single mapping entry
+     *
+     * @param src a byte.
+     * @param dest a byte.
      */
     public void setMap(byte src, byte dest) {
         int i = 0xff & src;
@@ -113,14 +132,18 @@ public class CMapFormat0 extends CMap {
     
     /**
      * Get the whole map
+     *
+     * @return an array of {@link byte} objects.
      */
     protected byte[] getMap() {
         return this.glyphIndex;
     }
     
-    /**
-     * Get the data in this map as a ByteBuffer
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the data in this map as a ByteBuffer
+	 */
     @Override
 	public ByteBuffer getData() {
         ByteBuffer buf = ByteBuffer.allocate(262);
@@ -136,9 +159,11 @@ public class CMapFormat0 extends CMap {
         return buf;
     }
     
-    /** 
-     * Read the map in from a byte buffer
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Read the map in from a byte buffer
+	 */
     @Override
 	public void setData(int length, ByteBuffer data) {
         if (length != 262) {

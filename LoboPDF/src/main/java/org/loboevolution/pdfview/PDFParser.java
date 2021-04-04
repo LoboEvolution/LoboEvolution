@@ -43,13 +43,14 @@ import org.loboevolution.pdfview.font.PDFFont;
 import org.loboevolution.pdfview.pattern.PDFShader;
 
 /**
-* PDFParser is the class that parses a PDF content stream and
-* produces PDFCmds for a PDFPage. You should never ever see it run:
-* it gets created by a PDFPage only if needed, and may even run in
-* its own thread.
-*
-* @author Mike Wessler
-*/
+ * PDFParser is the class that parses a PDF content stream and
+ * produces PDFCmds for a PDFPage. You should never ever see it run:
+ * it gets created by a PDFPage only if needed, and may even run in
+ * its own thread.
+ *
+ * Author Mike Wessler
+  *
+ */
 public class PDFParser extends BaseWatchable {
     private int mDebugCommandIndex;
     // ---- parsing variables
@@ -88,11 +89,15 @@ public class PDFParser extends BaseWatchable {
 	private boolean addAnnotation;
 
     /**
-    * Don't call this constructor directly. Instead, use
-    * PDFFile.getPage(int pagenum) to get a PDFPage. There should
-    * never be any reason for a user to create, access, or hold
-    * on to a PDFParser.
-    */
+     * Don't call this constructor directly. Instead, use
+     * PDFFile.getPage(int pagenum) to get a PDFPage. There should
+     * never be any reason for a user to create, access, or hold
+     * on to a PDFParser.
+     *
+     * @param cmds a {@link org.loboevolution.pdfview.PDFPage} object.
+     * @param stream an array of {@link byte} objects.
+     * @param resources a {@link java.util.Map} object.
+     */
     public PDFParser(PDFPage cmds, byte[] stream, Map<String, PDFObject> resources) {
         super();
         this.pageRef = new WeakReference<>(cmds);
@@ -412,8 +417,10 @@ public class PDFParser extends BaseWatchable {
     // B E G I N P A R S E R S E C T I O N
     // ///////////////////////////////////////////////////////////////
     /**
-    * Called to prepare for some iterations
-    */
+     * {@inheritDoc}
+     *
+     * Called to prepare for some iterations
+     */
     @Override
     public void setup() {
         this.stack = new Stack<>();
@@ -429,18 +436,14 @@ public class PDFParser extends BaseWatchable {
     }
 
     /**
-    * parse the stream. commands are added to the PDFPage initialized
-    * in the constructor as they are encountered.
-    * <p>
-    * Page numbers in comments refer to the Adobe PDF specification.<br>
-    * commands are listed in PDF spec 32000-1:2008 in Table A.1
-    *
-    * @return <ul>
-    * <li>Watchable.RUNNING when there are commands to be processed <li>Watchable.COMPLETED
-    * when the page is done and all the commands have been processed <li>Watchable.STOPPED
-    * if the page we are rendering into is no longer available
-    * </ul>
-    */
+     * {@inheritDoc}
+     *
+     * parse the stream. commands are added to the PDFPage initialized
+     * in the constructor as they are encountered.
+     * <p>
+     * Page numbers in comments refer to the Adobe PDF specification.<br>
+     * commands are listed in PDF spec 32000-1:2008 in Table A.1
+     */
     @SuppressWarnings("unused")
     @Override
     public int iterate() throws Exception {
@@ -864,7 +867,7 @@ public class PDFParser extends BaseWatchable {
                     // show text
                     this.state.textFormat.doText(this.cmds, popString(), this.autoAdjustStroke);
                     break;
-                case "\'":
+                case "'":
                     // next line and show text: T* string Tj
                     this.state.textFormat.carriageReturn();
                     this.state.textFormat.doText(this.cmds, popString(), this.autoAdjustStroke);
@@ -1025,8 +1028,10 @@ public class PDFParser extends BaseWatchable {
     }
 
     /**
-    * Cleanup when iteration is done
-    */
+     * {@inheritDoc}
+     *
+     * Cleanup when iteration is done
+     */
     @Override
     public void cleanup() {
         this.state.textFormat.flush();
@@ -1039,6 +1044,9 @@ public class PDFParser extends BaseWatchable {
         this.tok = null;
     }
 
+    /**
+     * <p>dumpStreamToError.</p>
+     */
     public void dumpStreamToError() {
         if (this.errorwritten) {
             return;
@@ -1554,7 +1562,6 @@ public class PDFParser extends BaseWatchable {
     * if the top of the stack does not contain
     * a PDFObject.
     */
-    @SuppressWarnings("unused")
     private PDFObject popObject() throws PDFParseException {
         Object obj = this.stack.pop();
         if (!(obj instanceof PDFObject)) {
@@ -1607,6 +1614,7 @@ public class PDFParser extends BaseWatchable {
         }
     }
     
+    /** {@inheritDoc} */
     @Override
     protected void setStatus(int status) {
     	if(status == BaseWatchable.COMPLETED) {

@@ -30,8 +30,8 @@ import com.jtattoo.plaf.hifi.HiFiIcons;
 /**
  * <p>NoireIcons class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class NoireIcons extends HiFiIcons {
 

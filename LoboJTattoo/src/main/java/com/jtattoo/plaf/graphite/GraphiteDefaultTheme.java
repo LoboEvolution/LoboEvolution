@@ -34,8 +34,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>GraphiteDefaultTheme class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class GraphiteDefaultTheme extends AbstractTheme {
 

@@ -8,16 +8,26 @@ import javax.swing.JLabel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+/**
+ * <p>LoboTree class.</p>
+ *
+ *
+ *
+ */
 public class LoboTree extends JTree implements LoboLookAndFeel {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for LoboTree.</p>
+	 */
 	public LoboTree() {
 		setBackground(background());
 		setForeground(foreground());
 		setCellRenderer(new TreeCellRenderer());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintComponent(Graphics g) {
 		g.setColor(getBackground());

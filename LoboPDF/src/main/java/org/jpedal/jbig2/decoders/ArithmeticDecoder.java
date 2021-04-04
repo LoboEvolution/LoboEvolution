@@ -54,6 +54,12 @@ import java.io.IOException;
 import org.jpedal.jbig2.io.StreamReader;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>ArithmeticDecoder class.</p>
+ *
+  *
+  *
+ */
 public class ArithmeticDecoder {
 
 	private final StreamReader reader;
@@ -84,6 +90,11 @@ public class ArithmeticDecoder {
 	
 	int counter;
 
+	/**
+	 * <p>Constructor for ArithmeticDecoder.</p>
+	 *
+	 * @param reader a {@link org.jpedal.jbig2.io.StreamReader} object.
+	 */
 	public ArithmeticDecoder(StreamReader reader) {
 		this.reader = reader;
 
@@ -106,6 +117,11 @@ public class ArithmeticDecoder {
 		iaidStats = new ArithmeticDecoderStats(1 << 1);
 	}
 
+	/**
+	 * <p>resetIntStats.</p>
+	 *
+	 * @param symbolCodeLength a int.
+	 */
 	public void resetIntStats(int symbolCodeLength) {
 		iadhStats.reset();
 		iadwStats.reset();
@@ -128,6 +144,12 @@ public class ArithmeticDecoder {
 		}
 	}
 
+	/**
+	 * <p>resetGenericStats.</p>
+	 *
+	 * @param template a int.
+	 * @param previousStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 */
 	public void resetGenericStats(int template, ArithmeticDecoderStats previousStats) {
 		int size = contextSize[template];
 
@@ -146,6 +168,12 @@ public class ArithmeticDecoder {
 		}
 	}
 
+	/**
+	 * <p>resetRefinementStats.</p>
+	 *
+	 * @param template a int.
+	 * @param previousStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 */
 	public void resetRefinementStats(int template, ArithmeticDecoderStats previousStats) {
 		int size = referredToContextSize[template];
 		if (previousStats != null && previousStats.getContextSize() == size) {
@@ -163,6 +191,11 @@ public class ArithmeticDecoder {
 		}
 	}
 
+	/**
+	 * <p>start.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 */
 	public void start() throws IOException {
 		buffer0 = reader.readByte();
 		buffer1 = reader.readByte();
@@ -174,6 +207,13 @@ public class ArithmeticDecoder {
 		a = 0x80000000l;
 	}
 
+	/**
+	 * <p>decodeInt.</p>
+	 *
+	 * @param stats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 * @return a {@link org.jpedal.jbig2.decoders.DecodeIntResult} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public DecodeIntResult decodeInt(ArithmeticDecoderStats stats) throws IOException {
 		long value;
 
@@ -235,6 +275,14 @@ public class ArithmeticDecoder {
 		return new DecodeIntResult(decodedInt, true);
 	}
 
+	/**
+	 * <p>decodeIAID.</p>
+	 *
+	 * @param codeLen a long.
+	 * @param stats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 * @return a long.
+	 * @throws java.io.IOException if any.
+	 */
 	public long decodeIAID(long codeLen, ArithmeticDecoderStats stats) throws IOException {
 		previous = 1;
 		for (long i = 0; i < codeLen; i++) {
@@ -245,6 +293,14 @@ public class ArithmeticDecoder {
 		return previous - (1 << codeLen);
 	}
 
+	/**
+	 * <p>decodeBit.</p>
+	 *
+	 * @param context a long.
+	 * @param stats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 * @return a int.
+	 * @throws java.io.IOException if any.
+	 */
 	public int decodeBit(long context, ArithmeticDecoderStats stats) throws IOException {
 		int iCX = BinaryOperation.bit8Shift(stats.getContextCodingTableValue((int) context), 1, BinaryOperation.RIGHT_SHIFT);
 		int mpsCX = stats.getContextCodingTableValue((int) context) & 1;

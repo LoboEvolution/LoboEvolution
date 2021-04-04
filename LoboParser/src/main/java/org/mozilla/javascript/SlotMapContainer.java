@@ -36,21 +36,29 @@ class SlotMapContainer
     }
   }
 
+  /** {@inheritDoc} */
   @Override
   public int size() {
     return map.size();
   }
 
+  /**
+   * <p>dirtySize.</p>
+   *
+   * @return a int.
+   */
   public int dirtySize()
   {
     return map.size();
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean isEmpty() {
     return map.isEmpty();
   }
 
+  /** {@inheritDoc} */
   @Override
   public Slot get(Object key, int index, SlotAccess accessType)
   {
@@ -60,11 +68,13 @@ class SlotMapContainer
     return map.get(key, index, accessType);
   }
 
+  /** {@inheritDoc} */
   @Override
   public Slot query(Object key, int index) {
     return map.query(key, index);
   }
 
+  /** {@inheritDoc} */
   @Override
   public void addSlot(Slot newSlot)
   {
@@ -72,22 +82,34 @@ class SlotMapContainer
     map.addSlot(newSlot);
   }
 
+  /** {@inheritDoc} */
   @Override
   public void remove(Object key, int index) {
     map.remove(key, index);
   }
 
+  /** {@inheritDoc} */
   @Override
   public Iterator<Slot> iterator() {
     return map.iterator();
   }
 
+  /**
+   * <p>readLock.</p>
+   *
+   * @return a long.
+   */
   public long readLock()
   {
     // No locking in the default implementation
     return 0L;
   }
 
+  /**
+   * <p>unlockRead.</p>
+   *
+   * @param stamp a long.
+   */
   public void unlockRead(long stamp)
   {
     // No locking in the default implementationock.unlockRead(stamp);

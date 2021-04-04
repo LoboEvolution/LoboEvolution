@@ -31,8 +31,8 @@ import com.jtattoo.plaf.BaseInternalFrameUI;
 /**
  * <p>GraphiteInternalFrameUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteInternalFrameUI extends BaseInternalFrameUI {
 

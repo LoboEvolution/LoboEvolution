@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Eq implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>any1 <i>any2</i> <b>eq</b> <i>bool</i> <p>
 	 *
 	 * pops two objects from the operand stack and pushes\

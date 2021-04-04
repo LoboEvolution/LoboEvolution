@@ -35,19 +35,20 @@ import org.loboevolution.pdfview.PDFParseException;
  * decode a JPX encoded imagestream into a byte array.  This class uses Java's
  * image_io JPEG2000 reader to do the decoding.
  *
- * @author Bernd Rosstauscher
+ * Author Bernd Rosstauscher
+  *
  */
-
 public class JPXDecode {
 	
-    /*************************************************************************
-     * @param dict
-     * @param buf
-     * @param params
-     * @return
-     * @throws PDFParseException
-     ************************************************************************/
-	
+    /**
+     * <p>decode.</p>
+     *
+     * @param dict a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param buf a {@link java.nio.ByteBuffer} object.
+     * @param params a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @return a {@link java.nio.ByteBuffer} object.
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
+     */
     protected static ByteBuffer decode(PDFObject dict, ByteBuffer buf, PDFObject params) throws PDFParseException {
         BufferedImage bimg = loadImageData(buf);
         byte[] output = ImageDataDecoder.decodeImageData(bimg);

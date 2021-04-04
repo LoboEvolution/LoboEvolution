@@ -58,8 +58,8 @@ import javax.swing.plaf.UIResource;
 /**
  * <p>BaseBorders class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseBorders {
 

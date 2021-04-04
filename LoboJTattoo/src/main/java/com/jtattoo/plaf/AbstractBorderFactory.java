@@ -28,142 +28,142 @@ import javax.swing.border.Border;
 /**
  * <p>AbstractBorderFactory interface.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public interface AbstractBorderFactory {
 
-	/**
-	 * <p>getButtonBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getButtonBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getButtonBorder();
 
-	/**
-	 * <p>getComboBoxBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getComboBoxBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getComboBoxBorder();
 
-	/**
-	 * <p>getDesktopIconBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getDesktopIconBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getDesktopIconBorder();
 
-	/**
-	 * <p>getFocusFrameBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getFocusFrameBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getFocusFrameBorder();
 
-	/**
-	 * <p>getInternalFrameBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getInternalFrameBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getInternalFrameBorder();
 
-	/**
-	 * <p>getMenuBarBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getMenuBarBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getMenuBarBorder();
 
-	/**
-	 * <p>getMenuItemBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getMenuItemBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getMenuItemBorder();
 
-	/**
-	 * <p>getPaletteBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getPaletteBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getPaletteBorder();
 
-	/**
-	 * <p>getPopupMenuBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getPopupMenuBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getPopupMenuBorder();
 
-	/**
-	 * <p>getProgressBarBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getProgressBarBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getProgressBarBorder();
 
-	/**
-	 * <p>getScrollPaneBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getScrollPaneBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getScrollPaneBorder();
 
-	/**
-	 * <p>getSpinnerBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getSpinnerBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getSpinnerBorder();
 
-	/**
-	 * <p>getTabbedPaneBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getTabbedPaneBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getTabbedPaneBorder();
 
-	/**
-	 * <p>getTableHeaderBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getTableHeaderBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getTableHeaderBorder();
 
-	/**
-	 * <p>getTableScrollPaneBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getTableScrollPaneBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getTableScrollPaneBorder();
 
-	/**
-	 * <p>getTextBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getTextBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getTextBorder();
 
-	/**
-	 * <p>getTextFieldBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getTextFieldBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getTextFieldBorder();
 
-	/**
-	 * <p>getToggleButtonBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getToggleButtonBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getToggleButtonBorder();
 
-	/**
-	 * <p>getToolBarBorder.</p>
-	 *
-	 * @return a {@link javax.swing.border.Border} object.
-	 */
+    /**
+     * <p>getToolBarBorder.</p>
+     *
+     * @return a {@link javax.swing.border.Border} object.
+     */
     Border getToolBarBorder();
 
 } // end of interface AbstractBorderFactory

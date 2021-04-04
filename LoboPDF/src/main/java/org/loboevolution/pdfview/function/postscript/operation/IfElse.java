@@ -5,6 +5,8 @@ import java.util.Stack;
 final class IfElse implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>bool {expr1} {expr2}</i> <b>ifelse</b> - <p>
 	 *
 	 * removes all three operands from the stack, then

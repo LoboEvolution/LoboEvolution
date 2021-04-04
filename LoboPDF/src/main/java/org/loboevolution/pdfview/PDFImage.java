@@ -98,7 +98,9 @@ public class PDFImage {
 	
 	/**
 	 * Create an instance of a PDFImage
-	 * @throws IOException if {@link PDFDecoder} throws one while evaluating if the image is a Jpeg 
+	 *
+	 * @param imageObj a {@link org.loboevolution.pdfview.PDFObject} object.
+	 * @throws java.io.IOException if any.
 	 */
 	protected PDFImage(PDFObject imageObj) throws IOException {
 		this.imageObj = imageObj;
@@ -107,7 +109,7 @@ public class PDFImage {
 
 	/**
 	 * Read a PDFImage from an image dictionary and stream
-	 * 
+	 *
 	 * @param obj
 	 *            the PDFObject containing the image's dictionary and stream
 	 * @param resources
@@ -116,6 +118,8 @@ public class PDFImage {
 	 *            - flag for switching colors in case image is used as sMask
 	 *            internally this is needed for handling transparency in smask
 	 *            images.
+	 * @return a {@link org.loboevolution.pdfview.PDFImage} object.
+	 * @throws java.io.IOException if any.
 	 */
 	public static PDFImage createImage(PDFObject obj, Map<String, PDFObject> resources, boolean useAsSMask)
 			throws IOException {
@@ -238,9 +242,9 @@ public class PDFImage {
 
 	/**
 	 * Get the image that this PDFImage generates.
-	 * 
+	 *
 	 * @return a buffered image containing the decoded image data
-	 * @throws PDFImageParseException 
+	 * @throws org.loboevolution.pdfview.PDFImageParseException if any.
 	 */
 	public BufferedImage getImage() throws PDFImageParseException {
 		try {
@@ -273,17 +277,19 @@ public class PDFImage {
 	 * guaranteed to be called after all the other setXXX methods have been
 	 * called.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * NOTE: the color convolving is extremely slow on large images. It would be
 	 * good to see if it could be moved out into the rendering phases, where we
-	 * might be able to scale the image down first. </p
-	 * 
+	 * might be able to scale the image down first. </p>
+	 *
 	 * @param data
 	 *            the data when already completely filtered and uncompressed
 	 * @param jpegData
 	 *            a byte buffer if data still requiring the DCDTecode filter is
 	 *            being used
+	 * @return a {@link java.awt.image.BufferedImage} object.
+	 * @throws java.io.IOException if any.
 	 */
 	protected BufferedImage parseData(byte[] data, ByteBuffer jpegData) throws IOException {
 		// pick a color model, based on the number of components and
@@ -532,9 +538,9 @@ public class PDFImage {
 	/**
 	 * Scale the softmask image to the size of the actual image
 	 * 
-	 * @param sMaskImage
-	 * @return
-	 * @throws PDFImageParseException 
+	 * @param sMaskImage a {@link java.awt.image.BufferedImage} object.
+	 * @return a {@link java.awt.image.BufferedImage} object.
+	 * @throws org.loboevolution.pdfview.PDFImageParseException if any.
 	 */
 	private BufferedImage scaleSMaskImage(PDFImage sMaskImage) throws PDFImageParseException {
 		BufferedImage before = sMaskImage.getImage();
@@ -727,6 +733,8 @@ public class PDFImage {
 
 	/**
 	 * Get the image's width
+	 *
+	 * @return a int.
 	 */
 	public int getWidth() {
 		return this.width;
@@ -734,6 +742,8 @@ public class PDFImage {
 
 	/**
 	 * Set the image's width
+	 *
+	 * @param width a int.
 	 */
 	protected void setWidth(int width) {
 		this.width = width;
@@ -741,6 +751,8 @@ public class PDFImage {
 
 	/**
 	 * Get the image's height
+	 *
+	 * @return a int.
 	 */
 	public int getHeight() {
 		return this.height;
@@ -748,6 +760,8 @@ public class PDFImage {
 
 	/**
 	 * Set the image's height
+	 *
+	 * @param height a int.
 	 */
 	protected void setHeight(int height) {
 		this.height = height;
@@ -771,6 +785,8 @@ public class PDFImage {
 
 	/**
 	 * Get the colorspace associated with this image, or null if there isn't one
+	 *
+	 * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
 	 */
 	protected PDFColorSpace getColorSpace() {
 		return this.colorSpace;
@@ -778,6 +794,8 @@ public class PDFImage {
 
 	/**
 	 * Set the colorspace associated with this image
+	 *
+	 * @param colorSpace a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
 	 */
 	protected void setColorSpace(PDFColorSpace colorSpace) {
 		this.colorSpace = colorSpace;
@@ -785,6 +803,8 @@ public class PDFImage {
 
 	/**
 	 * Get the number of bits per component sample
+	 *
+	 * @return a int.
 	 */
 	protected int getBitsPerComponent() {
 		return this.bpc;
@@ -792,6 +812,8 @@ public class PDFImage {
 
 	/**
 	 * Set the number of bits per component sample
+	 *
+	 * @param bpc a int.
 	 */
 	protected void setBitsPerComponent(int bpc) {
 		this.bpc = bpc;
@@ -799,6 +821,8 @@ public class PDFImage {
 
 	/**
 	 * Return whether or not this is an image mask
+	 *
+	 * @return a boolean.
 	 */
 	public boolean isImageMask() {
 		return this.imageMask;
@@ -806,6 +830,8 @@ public class PDFImage {
 
 	/**
 	 * Set whether or not this is an image mask
+	 *
+	 * @param imageMask a boolean.
 	 */
 	public void setImageMask(boolean imageMask) {
 		this.imageMask = imageMask;
@@ -813,6 +839,8 @@ public class PDFImage {
 
 	/**
 	 * Return the soft mask associated with this image
+	 *
+	 * @return a {@link org.loboevolution.pdfview.PDFImage} object.
 	 */
 	public PDFImage getSMask() {
 		return this.sMask;
@@ -820,6 +848,8 @@ public class PDFImage {
 
 	/**
 	 * Set the soft mask image
+	 *
+	 * @param sMask a {@link org.loboevolution.pdfview.PDFImage} object.
 	 */
 	protected void setSMask(PDFImage sMask) {
 		this.sMask = sMask;
@@ -827,6 +857,8 @@ public class PDFImage {
 
 	/**
 	 * Get the decode array
+	 *
+	 * @return an array of {@link float} objects.
 	 */
 	protected float[] getDecode() {
 		return this.decode;
@@ -834,6 +866,8 @@ public class PDFImage {
 
 	/**
 	 * Set the decode array
+	 *
+	 * @param decode an array of {@link float} objects.
 	 */
 	protected void setDecode(float[] decode) {
 		this.decode = decode;

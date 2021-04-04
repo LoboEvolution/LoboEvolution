@@ -33,7 +33,8 @@ import com.gargoylesoftware.css.util.LangUtils;
  * <code>CSSPrimitiveValue</code> or a <code>CSSValueList</code> so that
  * the type can successfully change when using <code>setCssText</code>.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public class CSSValueImpl extends AbstractLocatable implements Serializable {
 
@@ -159,6 +160,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     private Object value_;
 
     /**
+     * <p>getValue.</p>
+     *
      * @return the value
      */
     public Object getValue() {
@@ -167,6 +170,7 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
 
     /**
      * Constructor.
+     *
      * @param value the lexical unit value
      * @param forcePrimitive true or false
      */
@@ -222,6 +226,7 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
 
     /**
      * Ctor.
+     *
      * @param value the value
      */
     public CSSValueImpl(final LexicalUnit value) {
@@ -229,6 +234,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getCssText.</p>
+     *
      * @return the css text
      */
     public String getCssText() {
@@ -267,8 +274,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
 
     /**
      * Sets the css text.
+     *
      * @param cssText the new css text
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -285,6 +293,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getCssValueType.</p>
+     *
      * @return the css value type
      */
     public CSSValueType getCssValueType() {
@@ -299,6 +309,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getPrimitiveType.</p>
+     *
      * @return the primitive type
      */
     public CSSPrimitiveValueType getPrimitiveType() {
@@ -392,6 +404,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getLexicalUnitType.</p>
+     *
      * @return the lexical unit type
      */
     public LexicalUnit.LexicalUnitType getLexicalUnitType() {
@@ -405,16 +419,17 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
      * Sets the double value to a new value.
      *
      * @param doubleValue the new value
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public void setDoubleValue(final double doubleValue) throws DOMException {
         value_ = LexicalUnitImpl.createNumber(null, doubleValue);
     }
 
     /**
-     * @return the double value.
+     * <p>getDoubleValue.</p>
      *
-     * @throws DOMException in case of error
+     * @return the double value.
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public double getDoubleValue() throws DOMException {
         if (value_ instanceof LexicalUnit) {
@@ -430,8 +445,10 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getStringValue.</p>
+     *
      * @return the string value.
-     * @throws DOMException case of error
+     * @throws org.w3c.dom.DOMException case of error
      */
     public String getStringValue() throws DOMException {
         if (value_ instanceof LexicalUnit) {
@@ -459,8 +476,10 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getCounterValue.</p>
+     *
      * @return the counter value
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public CounterImpl getCounterValue() throws DOMException {
         if (value_ instanceof CounterImpl) {
@@ -473,8 +492,10 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getRectValue.</p>
+     *
      * @return the rect
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public RectImpl getRectValue() throws DOMException {
         if (value_ instanceof RectImpl) {
@@ -487,8 +508,10 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getRGBColorValue.</p>
+     *
      * @return the rgb
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public RGBColorImpl getRGBColorValue() throws DOMException {
         if (value_ instanceof RGBColorImpl) {
@@ -501,8 +524,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getLength.</p>
+     *
      * @return the length
-     * @throws DOMException in case of error
      */
     @SuppressWarnings("unchecked")
     public int getLength() {
@@ -513,9 +537,10 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>item.</p>
+     *
      * @param index the position
      * @return the value at the position
-     * @throws DOMException in case of error
      */
     @SuppressWarnings("unchecked")
     public CSSValueImpl item(final int index) {
@@ -526,11 +551,13 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -546,6 +573,7 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             && LangUtils.equals(getCssText(), cv.getCssText());
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

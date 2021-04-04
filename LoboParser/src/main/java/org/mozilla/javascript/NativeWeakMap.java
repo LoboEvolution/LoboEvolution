@@ -17,6 +17,9 @@ import java.util.WeakHashMap;
  * have the same basic structure -- entries are removed automatically when the sole
  * remaining reference to the key is a weak reference. Therefore, we can use
  * WeakHashMap as the basis of this implementation and preserve the same semantics.
+ *
+ *
+ *
  */
 public class NativeWeakMap extends IdScriptableObject {
     private static final long serialVersionUID = 8670434366883930453L;
@@ -34,11 +37,13 @@ public class NativeWeakMap extends IdScriptableObject {
         m.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "WeakMap";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
         Scriptable thisObj, Object[] args) {
@@ -124,6 +129,7 @@ public class NativeWeakMap extends IdScriptableObject {
         return nm;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id) {
         if (id == SymbolId_toStringTag) {
@@ -145,6 +151,7 @@ public class NativeWeakMap extends IdScriptableObject {
         initPrototypeMethod(MAP_TAG, id, s, fnName, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k)
     {
@@ -156,6 +163,7 @@ public class NativeWeakMap extends IdScriptableObject {
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s) {
         int id;

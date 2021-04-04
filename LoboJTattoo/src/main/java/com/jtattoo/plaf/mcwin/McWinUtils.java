@@ -34,8 +34,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>McWinUtils class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class McWinUtils {
 

@@ -32,8 +32,8 @@ import javax.swing.JComponent;
 /**
  * The JComponent implementing an overlay.
  *
- * @author Kazo Csaba
- * @version $Id: $Id
+ * Author Kazo Csaba
+ *
  */
 public class OverlayComponent extends JComponent {
 	

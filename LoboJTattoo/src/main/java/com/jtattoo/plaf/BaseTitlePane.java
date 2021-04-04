@@ -78,8 +78,8 @@ import javax.swing.plaf.UIResource;
  * style, and that if the style changes, a new one will be created.
  *
  * @version 1.12 01/23/03
- * @author Terry Kellerman
- * @author Michael Hagen
+ * Author Terry Kellerman
+ * Author Michael Hagen
  * @since 1.4
  */
 public class BaseTitlePane extends JComponent implements TitlePane {

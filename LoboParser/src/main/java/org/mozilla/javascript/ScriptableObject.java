@@ -44,9 +44,9 @@ import org.mozilla.javascript.debug.DebuggableObject;
  * Classes extending ScriptableObject must define the getClassName method.
  *
  * @see org.mozilla.javascript.Scriptable
- * @author Norris Boyd
+ * Author Norris Boyd
+ *
  */
-
 public abstract class ScriptableObject implements Scriptable,
                                                   SymbolScriptable,
                                                   Serializable,
@@ -103,6 +103,7 @@ public abstract class ScriptableObject implements Scriptable,
      */
     public static final int UNINITIALIZED_CONST = 0x08;
 
+    /** Constant <code>CONST=PERMANENT|READONLY|UNINITIALIZED_CONST</code> */
     public static final int CONST = PERMANENT|READONLY|UNINITIALIZED_CONST;
     /**
      * The prototype of this object.
@@ -207,6 +208,14 @@ public abstract class ScriptableObject implements Scriptable,
 
     }
 
+    /**
+     * <p>buildDataDescriptor.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param value a {@link java.lang.Object} object.
+     * @param attributes a int.
+     * @return a {@link org.mozilla.javascript.ScriptableObject} object.
+     */
     protected static ScriptableObject buildDataDescriptor(Scriptable scope,
                                                           Object value,
                                                           int attributes) {
@@ -369,11 +378,20 @@ public abstract class ScriptableObject implements Scriptable,
         return new SlotMapContainer(initialSize);
     }
 
+    /**
+     * <p>Constructor for ScriptableObject.</p>
+     */
     public ScriptableObject()
     {
         slotMap = createSlotMap(0);
     }
 
+    /**
+     * <p>Constructor for ScriptableObject.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param prototype a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public ScriptableObject(Scriptable scope, Scriptable prototype)
     {
         if (scope == null)
@@ -386,6 +404,7 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Gets the value that will be returned by calling the typeof operator on this object.
+     *
      * @return default is "object" unless {@link #avoidObjectDetection()} is <code>true</code> in which
      * case it returns "undefined"
      */
@@ -394,6 +413,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return the name of the class.
      *
      * This is typically the same name as the constructor.
@@ -404,11 +425,9 @@ public abstract class ScriptableObject implements Scriptable,
     public abstract String getClassName();
 
     /**
-     * Returns true if the named property is defined.
+     * {@inheritDoc}
      *
-     * @param name the name of the property
-     * @param start the object in which the lookup began
-     * @return true if and only if the property was found in the object
+     * Returns true if the named property is defined.
      */
     @Override
     public boolean has(String name, Scriptable start)
@@ -417,11 +436,9 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
-     * Returns true if the property index is defined.
+     * {@inheritDoc}
      *
-     * @param index the numeric index for the property
-     * @param start the object in which the lookup began
-     * @return true if and only if the property was found in the object
+     * Returns true if the property index is defined.
      */
     @Override
     public boolean has(int index, Scriptable start)
@@ -433,6 +450,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * A version of "has" that supports symbols.
      */
     @Override
@@ -442,14 +461,12 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns the value of the named property or NOT_FOUND.
      *
      * If the property was created using defineProperty, the
      * appropriate getter method is called.
-     *
-     * @param name the name of the property
-     * @param start the object in which the lookup began
-     * @return the value of the property (may be null), or NOT_FOUND
      */
     @Override
     public Object get(String name, Scriptable start)
@@ -462,11 +479,9 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
-     * Returns the value of the indexed property or NOT_FOUND.
+     * {@inheritDoc}
      *
-     * @param index the numeric index for the property
-     * @param start the object in which the lookup began
-     * @return the value of the property (may be null), or NOT_FOUND
+     * Returns the value of the indexed property or NOT_FOUND.
      */
     @Override
     public Object get(int index, Scriptable start)
@@ -486,6 +501,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Another version of Get that supports Symbol keyed properties.
      */
     @Override
@@ -499,6 +516,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Sets the value of the named property, creating it if need be.
      *
      * If the property was created using defineProperty, the
@@ -508,10 +527,6 @@ public abstract class ScriptableObject implements Scriptable,
      * taken.
      * This method will actually set the property in the start
      * object.
-     *
-     * @param name the name of the property
-     * @param start the object whose property is being set
-     * @param value value to set the property to
      */
     @Override
     public void put(String name, Scriptable start, Object value)
@@ -524,11 +539,9 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
-     * Sets the value of the indexed property, creating it if need be.
+     * {@inheritDoc}
      *
-     * @param index the numeric index for the property
-     * @param start the object whose property is being set
-     * @param value value to set the property to
+     * Sets the value of the indexed property, creating it if need be.
      */
     @Override
     public void put(int index, Scriptable start, Object value)
@@ -554,6 +567,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Implementation of put required by SymbolScriptable objects.
      */
     @Override
@@ -567,12 +582,12 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Removes a named property from the object.
      *
      * If the property is not found, or it has the PERMANENT attribute,
      * no action is taken.
-     *
-     * @param name the name of the property
      */
     @Override
     public void delete(String name)
@@ -582,12 +597,12 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Removes the indexed property from the object.
      *
      * If the property is not found, or it has the PERMANENT attribute,
      * no action is taken.
-     *
-     * @param index the numeric index for the property
      */
     @Override
     public void delete(int index)
@@ -597,6 +612,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Removes an object like the others, but using a Symbol as the key.
      */
     @Override
@@ -607,6 +624,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Sets the value of the named const property, creating it if need be.
      *
      * If the property was created using defineProperty, the
@@ -616,10 +635,6 @@ public abstract class ScriptableObject implements Scriptable,
      * taken.
      * This method will actually set the property in the start
      * object.
-     *
-     * @param name the name of the property
-     * @param start the object whose property is being set
-     * @param value value to set the property to
      */
     @Override
     public void putConst(String name, Scriptable start, Object value)
@@ -634,6 +649,7 @@ public abstract class ScriptableObject implements Scriptable,
             start.put(name, start, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void defineConst(String name, Scriptable start)
     {
@@ -646,10 +662,9 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns true if the named property is defined as a const on this object.
-     * @param name
-     * @return true if the named property is defined as a const, false
-     * otherwise.
      */
     @Override
     public boolean isConst(String name)
@@ -664,8 +679,13 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * <p>getAttributes.</p>
+     *
      * @deprecated Use {@link #getAttributes(String name)}. The engine always
      * ignored the start argument.
+     * @param name a {@link java.lang.String} object.
+     * @param start a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a int.
      */
     @Deprecated
     public final int getAttributes(String name, Scriptable start)
@@ -674,8 +694,13 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * <p>getAttributes.</p>
+     *
      * @deprecated Use {@link #getAttributes(int index)}. The engine always
      * ignored the start argument.
+     * @param index a int.
+     * @param start a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a int.
      */
     @Deprecated
     public final int getAttributes(int index, Scriptable start)
@@ -684,8 +709,13 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * <p>setAttributes.</p>
+     *
      * @deprecated Use {@link #setAttributes(String name, int attributes)}.
      * The engine always ignored the start argument.
+     * @param name a {@link java.lang.String} object.
+     * @param start a {@link org.mozilla.javascript.Scriptable} object.
+     * @param attributes a int.
      */
     @Deprecated
     public final void setAttributes(String name, Scriptable start,
@@ -695,8 +725,13 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * <p>setAttributes.</p>
+     *
      * @deprecated Use {@link #setAttributes(int index, int attributes)}.
      * The engine always ignored the start argument.
+     * @param index a int.
+     * @param start a {@link org.mozilla.javascript.Scriptable} object.
+     * @param attributes a int.
      */
     @Deprecated
     public void setAttributes(int index, Scriptable start,
@@ -743,6 +778,12 @@ public abstract class ScriptableObject implements Scriptable,
         return findAttributeSlot(null, index, SlotAccess.QUERY).getAttributes();
     }
 
+    /**
+     * <p>getAttributes.</p>
+     *
+     * @param sym a {@link org.mozilla.javascript.Symbol} object.
+     * @return a int.
+     */
     public int getAttributes(Symbol sym)
     {
         return findAttributeSlot(sym, SlotAccess.QUERY).getAttributes();
@@ -796,6 +837,9 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Set attributes of a Symbol-keyed property.
+     *
+     * @param key a {@link org.mozilla.javascript.Symbol} object.
+     * @param attributes a int.
      */
     public void setAttributes(Symbol key, int attributes)
     {
@@ -805,6 +849,11 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * XXX: write docs.
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param index a int.
+     * @param getterOrSetter a {@link org.mozilla.javascript.Callable} object.
+     * @param isSetter a boolean.
      */
     public void setGetterOrSetter(String name, int index,
                                   Callable getterOrSetter, boolean isSetter)
@@ -876,6 +925,7 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Returns whether a property is a getter or a setter
+     *
      * @param name property name
      * @param index property index
      * @param setter true to check for a setter, false for a getter
@@ -940,6 +990,8 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * This is a function used by setExternalArrayData to dynamically get the "length" property value.
+     *
+     * @return a {@link java.lang.Object} object.
      */
     public Object getExternalArrayLength()
     {
@@ -947,6 +999,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns the prototype of the object.
      */
     @Override
@@ -956,6 +1010,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Sets the prototype of the object.
      */
     @Override
@@ -965,6 +1021,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns the parent (enclosing) scope of the object.
      */
     @Override
@@ -974,6 +1032,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Sets the parent (enclosing) scope of the object.
      */
     @Override
@@ -983,15 +1043,11 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns an array of ids for the properties of the object.
      *
-     * <p>Any properties with the attribute DONTENUM are not listed. <p>
-     *
-     * @return an array of java.lang.Objects with an entry for every
-     * listed property. Properties accessed via an integer index will
-     * have a corresponding
-     * Integer entry in the returned array. Properties accessed by
-     * a String will have a String entry in the returned array.
+     * <p>Any properties with the attribute DONTENUM are not listed. </p>
      */
     @Override
     public Object[] getIds() {
@@ -999,15 +1055,11 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns an array of ids for the properties of the object.
      *
-     * <p>All properties, even those with attribute DONTENUM, are listed. <p>
-     *
-     * @return an array of java.lang.Objects with an entry for every
-     * listed property. Properties accessed via an integer index will
-     * have a corresponding
-     * Integer entry in the returned array. Properties accessed by
-     * a String will have a String entry in the returned array.
+     * <p>All properties, even those with attribute DONTENUM, are listed. </p>
      */
     @Override
     public Object[] getAllIds() {
@@ -1015,6 +1067,8 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Implements the [[DefaultValue]] internal method.
      *
      * <p>Note that the toPrimitive conversion is a no-op for
@@ -1022,11 +1076,6 @@ public abstract class ScriptableObject implements Scriptable,
      * is called. See ECMA 9.1.<p>
      *
      * A <code>hint</code> of null means "no hint".
-     *
-     * @param typeHint the type hint
-     * @return the default value for the object
-     *
-     * See ECMA 8.6.2.6.
      */
     @Override
     public Object getDefaultValue(Class<?> typeHint)
@@ -1034,6 +1083,13 @@ public abstract class ScriptableObject implements Scriptable,
         return getDefaultValue(this, typeHint);
     }
 
+    /**
+     * <p>getDefaultValue.</p>
+     *
+     * @param object a {@link org.mozilla.javascript.Scriptable} object.
+     * @param typeHint a {@link java.lang.Class} object.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object getDefaultValue(Scriptable object, Class<?> typeHint)
     {
         Context cx = null;
@@ -1083,14 +1139,11 @@ public abstract class ScriptableObject implements Scriptable,
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Implements the instanceof operator.
      *
      * <p>This operator has been proposed to ECMA.
-     *
-     * @param instance The value that appeared on the LHS of the instanceof
-     *              operator
-     * @return true if "this" appears in value's prototype chain
-     *
      */
     @Override
     public boolean hasInstance(Scriptable instance) {
@@ -1109,6 +1162,7 @@ public abstract class ScriptableObject implements Scriptable,
      * This is an analog to JOF_DETECTING from SpiderMonkey; see
      * https://bugzilla.mozilla.org/show_bug.cgi?id=248549.
      * Other than this special case, embeddings should return false.
+     *
      * @return true if this object should avoid object detection
      * @since 1.7R1
      */
@@ -1118,16 +1172,19 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Custom <code>==</code> operator.
-     * Must return {@link Scriptable#NOT_FOUND} if this object does not
+     * Must return {@link org.mozilla.javascript.Scriptable#NOT_FOUND} if this object does not
      * have custom equality operator for the given value,
      * <code>Boolean.TRUE</code> if this object is equivalent to <code>value</code>,
      * <code>Boolean.FALSE</code> if this object is not equivalent to
      * <code>value</code>.
      * <p>
      * The default implementation returns Boolean.TRUE
-     * if <code>this == value</code> or {@link Scriptable#NOT_FOUND} otherwise.
+     * if <code>this == value</code> or {@link org.mozilla.javascript.Scriptable#NOT_FOUND} otherwise.
      * It indicates that by default custom equality is available only if
      * <code>value</code> is <code>this</code> in which case true is returned.
+     *
+     * @param value a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
      */
     protected Object equivalentValues(Object value)
     {
@@ -1152,7 +1209,7 @@ public abstract class ScriptableObject implements Scriptable,
      *
      * First, the zero-parameter constructor of the class is called to
      * create the prototype. If no such constructor exists,
-     * a {@link EvaluatorException} is thrown. <p>
+     * a {@link org.mozilla.javascript.EvaluatorException} is thrown. <p>
      *
      * Next, all methods are scanned for special prefixes that indicate that they
      * have special meaning for defining JavaScript objects.
@@ -1188,7 +1245,7 @@ public abstract class ScriptableObject implements Scriptable,
      * If the method's name is "jsConstructor", the method is
      * considered to define the body of the constructor. Only one
      * method of this name may be defined. You may use the varargs forms
-     * for constructors documented in {@link FunctionObject#FunctionObject(String, Member, Scriptable)}
+     * for constructors documented in {@link org.mozilla.javascript.FunctionObject#FunctionObject(String, Member, Scriptable)}
      *
      * If no method is found that can serve as constructor, a Java
      * constructor will be selected to serve as the JavaScript
@@ -1196,11 +1253,11 @@ public abstract class ScriptableObject implements Scriptable,
      * Java constructor, that constructor is used to define
      * the JavaScript constructor. If the the class has two constructors,
      * one must be the zero-argument constructor (otherwise an
-     * {@link EvaluatorException} would have already been thrown
+     * {@link org.mozilla.javascript.EvaluatorException} would have already been thrown
      * when the prototype was to be created). In this case
      * the Java constructor with one or more parameters will be used
      * to define the JavaScript constructor. If the class has three
-     * or more constructors, an {@link EvaluatorException}
+     * or more constructors, an {@link org.mozilla.javascript.EvaluatorException}
      * will be thrown.<p>
      *
      * Finally, if there is a method
@@ -1226,6 +1283,10 @@ public abstract class ScriptableObject implements Scriptable,
      * @see org.mozilla.javascript.ScriptableObject#READONLY
      * @see org.mozilla.javascript.ScriptableObject
      *      #defineProperty(String, Class, int)
+     * @param <T> a T object.
+     * @throws java.lang.IllegalAccessException if any.
+     * @throws java.lang.InstantiationException if any.
+     * @throws java.lang.reflect.InvocationTargetException if any.
      */
     public static <T extends Scriptable> void defineClass(
             Scriptable scope, Class<T> clazz)
@@ -1257,6 +1318,10 @@ public abstract class ScriptableObject implements Scriptable,
      * @exception InvocationTargetException if an exception is thrown
      *            during execution of methods of the named class
      * @since 1.4R3
+     * @param <T> a T object.
+     * @throws java.lang.IllegalAccessException if any.
+     * @throws java.lang.InstantiationException if any.
+     * @throws java.lang.reflect.InvocationTargetException if any.
      */
     public static <T extends Scriptable> void defineClass(
             Scriptable scope, Class<T> clazz, boolean sealed)
@@ -1292,6 +1357,10 @@ public abstract class ScriptableObject implements Scriptable,
      * @exception InvocationTargetException if an exception is thrown
      *            during execution of methods of the named class
      * @since 1.6R2
+     * @param <T> a T object.
+     * @throws java.lang.IllegalAccessException if any.
+     * @throws java.lang.InstantiationException if any.
+     * @throws java.lang.reflect.InvocationTargetException if any.
      */
     public static <T extends Scriptable> String defineClass(
             Scriptable scope, Class<T> clazz, boolean sealed,
@@ -1639,6 +1708,7 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * A version of defineProperty that uses a Symbol key.
+     *
      * @param key symbol of the property to define.
      * @param value the initial value of the property
      * @param attributes the attributes of the JavaScript property
@@ -1656,6 +1726,7 @@ public abstract class ScriptableObject implements Scriptable,
      * If destination is instance of ScriptableObject, calls
      * defineProperty there, otherwise calls put in destination
      * ignoring attributes
+     *
      * @param destination ScriptableObject to define the property on
      * @param propertyName the name of the property to define.
      * @param value the initial value of the property
@@ -1678,6 +1749,7 @@ public abstract class ScriptableObject implements Scriptable,
      * If destination is instance of ScriptableObject, calls
      * defineProperty there, otherwise calls put in destination
      * ignoring attributes
+     *
      * @param destination ScriptableObject to define the property on
      * @param propertyName the name of the property to define.
      */
@@ -1963,6 +2035,11 @@ public abstract class ScriptableObject implements Scriptable,
         }
     }
 
+    /**
+     * <p>checkPropertyDefinition.</p>
+     *
+     * @param desc a {@link org.mozilla.javascript.ScriptableObject} object.
+     */
     protected void checkPropertyDefinition(ScriptableObject desc) {
         Object getter = getProperty(desc, "get");
         if (getter != NOT_FOUND && getter != Undefined.instance
@@ -1979,6 +2056,13 @@ public abstract class ScriptableObject implements Scriptable,
         }
     }
 
+    /**
+     * <p>checkPropertyChange.</p>
+     *
+     * @param id a {@link java.lang.Object} object.
+     * @param current a {@link org.mozilla.javascript.ScriptableObject} object.
+     * @param desc a {@link org.mozilla.javascript.ScriptableObject} object.
+     */
     protected void checkPropertyChange(Object id, ScriptableObject current,
                                        ScriptableObject desc) {
         if (current == null) { // new property
@@ -2024,10 +2108,22 @@ public abstract class ScriptableObject implements Scriptable,
         }
     }
 
+    /**
+     * <p>isTrue.</p>
+     *
+     * @param value a {@link java.lang.Object} object.
+     * @return a boolean.
+     */
     protected static boolean isTrue(Object value) {
         return (value != NOT_FOUND) && ScriptRuntime.toBoolean(value);
     }
 
+    /**
+     * <p>isFalse.</p>
+     *
+     * @param value a {@link java.lang.Object} object.
+     * @return a boolean.
+     */
     protected static boolean isFalse(Object value) {
         return !isTrue(value);
     }
@@ -2035,6 +2131,7 @@ public abstract class ScriptableObject implements Scriptable,
     /**
      * Implements SameValue as described in ES5 9.12, additionally checking
      * if new value is defined.
+     *
      * @param newValue the new value
      * @param currentValue the current value
      * @return true if values are the same as defined by ES5 9.12
@@ -2061,6 +2158,13 @@ public abstract class ScriptableObject implements Scriptable,
         return ScriptRuntime.shallowEq(currentValue, newValue);
     }
 
+    /**
+     * <p>applyDescriptorToAttributeBitset.</p>
+     *
+     * @param attributes a int.
+     * @param desc a {@link org.mozilla.javascript.ScriptableObject} object.
+     * @return a int.
+     */
     protected int applyDescriptorToAttributeBitset(int attributes,
                                                    ScriptableObject desc)
     {
@@ -2087,6 +2191,7 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Implements IsDataDescriptor as described in ES5 8.10.2
+     *
      * @param desc a property descriptor
      * @return true if this is a data descriptor.
      */
@@ -2096,6 +2201,7 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Implements IsAccessorDescriptor as described in ES5 8.10.1
+     *
      * @param desc a property descriptor
      * @return true if this is an accessor descriptor.
      */
@@ -2105,6 +2211,7 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Implements IsGenericDescriptor as described in ES5 8.10.3
+     *
      * @param desc a property descriptor
      * @return true if this is a generic descriptor.
      */
@@ -2112,18 +2219,36 @@ public abstract class ScriptableObject implements Scriptable,
         return !isDataDescriptor(desc) && !isAccessorDescriptor(desc);
     }
 
+    /**
+     * <p>ensureScriptable.</p>
+     *
+     * @param arg a {@link java.lang.Object} object.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
+     */
     protected static Scriptable ensureScriptable(Object arg) {
         if ( !(arg instanceof Scriptable) )
             throw ScriptRuntime.typeErrorById("msg.arg.not.object", ScriptRuntime.typeof(arg));
         return (Scriptable) arg;
     }
 
+    /**
+     * <p>ensureSymbolScriptable.</p>
+     *
+     * @param arg a {@link java.lang.Object} object.
+     * @return a {@link org.mozilla.javascript.SymbolScriptable} object.
+     */
     protected static SymbolScriptable ensureSymbolScriptable(Object arg) {
         if ( !(arg instanceof SymbolScriptable) )
             throw ScriptRuntime.typeErrorById("msg.object.not.symbolscriptable", ScriptRuntime.typeof(arg));
         return (SymbolScriptable) arg;
     }
 
+    /**
+     * <p>ensureScriptableObject.</p>
+     *
+     * @param arg a {@link java.lang.Object} object.
+     * @return a {@link org.mozilla.javascript.ScriptableObject} object.
+     */
     protected static ScriptableObject ensureScriptableObject(Object arg) {
         if ( !(arg instanceof ScriptableObject) )
             throw ScriptRuntime.typeErrorById("msg.arg.not.object", ScriptRuntime.typeof(arg));
@@ -2162,7 +2287,9 @@ public abstract class ScriptableObject implements Scriptable,
     /**
      * Get the Object.prototype property.
      * See ECMA 15.2.4.
+     *
      * @param scope an object in the scope chain
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
      */
     public static Scriptable getObjectPrototype(Scriptable scope) {
         return TopLevel.getBuiltinPrototype(getTopLevelScope(scope),
@@ -2172,18 +2299,32 @@ public abstract class ScriptableObject implements Scriptable,
     /**
      * Get the Function.prototype property.
      * See ECMA 15.3.4.
+     *
      * @param scope an object in the scope chain
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
      */
     public static Scriptable getFunctionPrototype(Scriptable scope) {
         return TopLevel.getBuiltinPrototype(getTopLevelScope(scope),
                 TopLevel.Builtins.Function);
     }
 
+    /**
+     * <p>getGeneratorFunctionPrototype.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public static Scriptable getGeneratorFunctionPrototype(Scriptable scope) {
         return TopLevel.getBuiltinPrototype(getTopLevelScope(scope),
                 TopLevel.Builtins.GeneratorFunction);
     }
 
+    /**
+     * <p>getArrayPrototype.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public static Scriptable getArrayPrototype(Scriptable scope) {
         return TopLevel.getBuiltinPrototype(getTopLevelScope(scope),
                 TopLevel.Builtins.Array);
@@ -2244,10 +2385,18 @@ public abstract class ScriptableObject implements Scriptable,
         }
     }
 
+    /**
+     * <p>isExtensible.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isExtensible() {
       return isExtensible;
     }
 
+    /**
+     * <p>preventExtensions.</p>
+     */
     public void preventExtensions() {
       isExtensible = false;
     }
@@ -2308,6 +2457,7 @@ public abstract class ScriptableObject implements Scriptable,
      * <p>
      * Searches the prototype chain for a property named <code>name</code>.
      * <p>
+     *
      * @param obj a JavaScript object
      * @param name a property name
      * @return the value of a property with name <code>name</code> found in
@@ -2330,6 +2480,10 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * This is a version of getProperty that works with Symbols.
+     *
+     * @param obj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param key a {@link org.mozilla.javascript.Symbol} object.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object getProperty(Scriptable obj, Symbol key)
     {
@@ -2353,15 +2507,17 @@ public abstract class ScriptableObject implements Scriptable,
      * but non-integral indicies, you should use getProperty(Scriptable,String) with
      * the string value of the index.
      * <p>
+     *
      * @param s a JavaScript object
      * @param index an integral index
      * @param type the required Java type of the result
      * @return the value of a property with name <code>name</code> found in
      *         <code>obj</code> or any object in its prototype chain, or
      *         null if not found. Note that it does not return
-     *         {@link Scriptable#NOT_FOUND} as it can ordinarily not be
+     *         {@link org.mozilla.javascript.Scriptable#NOT_FOUND} as it can ordinarily not be
      *         converted to most of the types.
      * @since 1.7R3
+     * @param <T> a T object.
      */
     public static <T> T getTypedProperty(Scriptable s, int index, Class<T> type) {
         Object val = getProperty(s, index);
@@ -2379,6 +2535,7 @@ public abstract class ScriptableObject implements Scriptable,
      * but non-integral indicies, you should use getProperty(Scriptable,String) with
      * the string value of the index.
      * <p>
+     *
      * @param obj a JavaScript object
      * @param index an integral index
      * @return the value of a property with index <code>index</code> found in
@@ -2405,15 +2562,17 @@ public abstract class ScriptableObject implements Scriptable,
      * <p>
      * Searches the prototype chain for a property named <code>name</code>.
      * <p>
+     *
      * @param s a JavaScript object
      * @param name a property name
      * @param type the required Java type of the result
      * @return the value of a property with name <code>name</code> found in
      *         <code>obj</code> or any object in its prototype chain, or
      *         null if not found. Note that it does not return
-     *         {@link Scriptable#NOT_FOUND} as it can ordinarily not be
+     *         {@link org.mozilla.javascript.Scriptable#NOT_FOUND} as it can ordinarily not be
      *         converted to most of the types.
      * @since 1.7R3
+     * @param <T> a T object.
      */
     public static <T> T getTypedProperty(Scriptable s, String name, Class<T> type) {
         Object val = getProperty(s, name);
@@ -2429,6 +2588,7 @@ public abstract class ScriptableObject implements Scriptable,
      * <p>
      * Searches the prototype chain for a property named <code>name</code>.
      * <p>
+     *
      * @param obj a JavaScript object
      * @param name a property name
      * @return the true if property was found
@@ -2447,6 +2607,10 @@ public abstract class ScriptableObject implements Scriptable,
      * A property redefinition is incompatible if the first definition was a
      * const declaration or if this one is.  They are compatible only if neither
      * was const.
+     *
+     * @param obj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param name a {@link java.lang.String} object.
+     * @param isConst a boolean.
      */
     public static void redefineProperty(Scriptable obj, String name,
                                         boolean isConst)
@@ -2469,6 +2633,7 @@ public abstract class ScriptableObject implements Scriptable,
      * <p>
      * Searches the prototype chain for a property with index <code>index</code>.
      * <p>
+     *
      * @param obj a JavaScript object
      * @param index a property index
      * @return the true if property was found
@@ -2481,6 +2646,10 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * A version of hasProperty for properties with Symbol keys.
+     *
+     * @param obj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param key a {@link org.mozilla.javascript.Symbol} object.
+     * @return a boolean.
      */
     public static boolean hasProperty(Scriptable obj, Symbol key)
     {
@@ -2492,11 +2661,12 @@ public abstract class ScriptableObject implements Scriptable,
      * <p>
      * Searches for the named property in the prototype chain. If it is found,
      * the value of the property in <code>obj</code> is changed through a call
-     * to {@link Scriptable#put(String, Scriptable, Object)} on the
+     * to {@link org.mozilla.javascript.Scriptable#put(String, Scriptable, Object)} on the
      * prototype passing <code>obj</code> as the <code>start</code> argument.
      * This allows the prototype to veto the property setting in case the
      * prototype defines the property with [[ReadOnly]] attribute. If the
      * property is not found, it is added in <code>obj</code>.
+     *
      * @param obj a JavaScript object
      * @param name a property name
      * @param value any JavaScript value accepted by Scriptable.put
@@ -2512,6 +2682,10 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * This is a version of putProperty for Symbol keys.
+     *
+     * @param obj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param key a {@link org.mozilla.javascript.Symbol} object.
+     * @param value a {@link java.lang.Object} object.
      */
     public static void putProperty(Scriptable obj, Symbol key, Object value)
     {
@@ -2526,11 +2700,12 @@ public abstract class ScriptableObject implements Scriptable,
      * <p>
      * Searches for the named property in the prototype chain. If it is found,
      * the value of the property in <code>obj</code> is changed through a call
-     * to {@link Scriptable#put(String, Scriptable, Object)} on the
+     * to {@link org.mozilla.javascript.Scriptable#put(String, Scriptable, Object)} on the
      * prototype passing <code>obj</code> as the <code>start</code> argument.
      * This allows the prototype to veto the property setting in case the
      * prototype defines the property with [[ReadOnly]] attribute. If the
      * property is not found, it is added in <code>obj</code>.
+     *
      * @param obj a JavaScript object
      * @param name a property name
      * @param value any JavaScript value accepted by Scriptable.put
@@ -2550,11 +2725,12 @@ public abstract class ScriptableObject implements Scriptable,
      * <p>
      * Searches for the indexed property in the prototype chain. If it is found,
      * the value of the property in <code>obj</code> is changed through a call
-     * to {@link Scriptable#put(int, Scriptable, Object)} on the prototype
+     * to {@link org.mozilla.javascript.Scriptable#put(int, Scriptable, Object)} on the prototype
      * passing <code>obj</code> as the <code>start</code> argument. This allows
      * the prototype to veto the property setting in case the prototype defines
      * the property with [[ReadOnly]] attribute. If the property is not found,
      * it is added in <code>obj</code>.
+     *
      * @param obj a JavaScript object
      * @param index a property index
      * @param value any JavaScript value accepted by Scriptable.put
@@ -2574,6 +2750,7 @@ public abstract class ScriptableObject implements Scriptable,
      * Searches for a property with <code>name</code> in obj or
      * its prototype chain. If it is found, the object's delete
      * method is called.
+     *
      * @param obj a JavaScript object
      * @param name a property name
      * @return true if the property doesn't exist or was successfully removed
@@ -2594,6 +2771,7 @@ public abstract class ScriptableObject implements Scriptable,
      * Searches for a property with <code>index</code> in obj or
      * its prototype chain. If it is found, the object's delete
      * method is called.
+     *
      * @param obj a JavaScript object
      * @param index a property index
      * @return true if the property doesn't exist or was successfully removed
@@ -2611,6 +2789,7 @@ public abstract class ScriptableObject implements Scriptable,
     /**
      * Returns an array of all ids from an object and its prototypes.
      * <p>
+     *
      * @param obj a JavaScript object
      * @return an array of all ids from all object in the prototype chain.
      *         If a given id occurs multiple times in the prototype chain,
@@ -2656,11 +2835,12 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Call a method of an object.
+     *
      * @param obj the JavaScript object
      * @param methodName the name of the function property
      * @param args the arguments for the call
-     *
      * @see Context#getCurrentContext()
+     * @return a {@link java.lang.Object} object.
      */
     public static Object callMethod(Scriptable obj, String methodName,
                                     Object[] args)
@@ -2670,10 +2850,12 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Call a method of an object.
+     *
      * @param cx the Context object associated with the current thread.
      * @param obj the JavaScript object
      * @param methodName the name of the function property
      * @param args the arguments for the call
+     * @return a {@link java.lang.Object} object.
      */
     public static Object callMethod(Context cx, Scriptable obj,
                                     String methodName,
@@ -2730,8 +2912,10 @@ public abstract class ScriptableObject implements Scriptable,
 
     /**
      * Get arbitrary application-specific value associated with this object.
+     *
      * @param key key object to select particular value.
      * @see #associateValue(Object key, Object value)
+     * @return a {@link java.lang.Object} object.
      */
     public final Object getAssociatedValue(Object key)
     {
@@ -2751,6 +2935,7 @@ public abstract class ScriptableObject implements Scriptable,
      * @param scope the starting scope.
      * @param key key object to select particular value.
      * @see #getAssociatedValue(Object key)
+     * @return a {@link java.lang.Object} object.
      */
     public static Object getTopScopeValue(Scriptable scope, Object key)
     {
@@ -2776,6 +2961,7 @@ public abstract class ScriptableObject implements Scriptable,
      * The method ignores any subsequent attempts to change the already
      * associated value.
      * <p> The associated values are not serialized.
+     *
      * @param key key object to select particular value.
      * @param value the value to associate
      * @return the passed value if the method is called first time for the
@@ -2998,6 +3184,13 @@ public abstract class ScriptableObject implements Scriptable,
         }
     }
 
+    /**
+     * <p>getOwnPropertyDescriptor.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param id a {@link java.lang.Object} object.
+     * @return a {@link org.mozilla.javascript.ScriptableObject} object.
+     */
     protected ScriptableObject getOwnPropertyDescriptor(Context cx, Object id) {
         Slot slot = getSlot(cx, id, SlotAccess.QUERY);
         if (slot == null) return null;
@@ -3005,6 +3198,14 @@ public abstract class ScriptableObject implements Scriptable,
         return slot.getPropertyDescriptor(cx, (scope == null ? this : scope));
     }
 
+    /**
+     * <p>getSlot.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param id a {@link java.lang.Object} object.
+     * @param accessType a {@link org.mozilla.javascript.ScriptableObject.SlotAccess} object.
+     * @return a {@link org.mozilla.javascript.ScriptableObject.Slot} object.
+     */
     protected Slot getSlot(Context cx, Object id, SlotAccess accessType) {
         if (id instanceof Symbol) {
             return slotMap.get(id, 0, accessType);
@@ -3019,15 +3220,31 @@ public abstract class ScriptableObject implements Scriptable,
     // Partial implementation of java.util.Map. See NativeObject for
     // a subclass that implements java.util.Map.
 
+    /**
+     * <p>size.</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return slotMap.size();
     }
 
+    /**
+     * <p>isEmpty.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return slotMap.isEmpty();
     }
 
 
+    /**
+     * <p>get.</p>
+     *
+     * @param key a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
+     */
     public Object get(Object key) {
         Object value = null;
         if (key instanceof String) {

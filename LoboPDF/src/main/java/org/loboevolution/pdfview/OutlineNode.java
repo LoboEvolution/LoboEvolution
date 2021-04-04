@@ -22,13 +22,19 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.loboevolution.pdfview.action.PDFAction;
 
+/**
+ * <p>OutlineNode class.</p>
+ *
+  *
+  *
+ */
 public class OutlineNode extends DefaultMutableTreeNode {
 
 	private static final long serialVersionUID = 1L;
 
     private final String title;
 
-    /** 
+    /**
      * Create a new outline node
      *
      * @param title the node's visible name in the tree
@@ -39,6 +45,8 @@ public class OutlineNode extends DefaultMutableTreeNode {
 
     /**
      * Get the PDF action associated with this node
+     *
+     * @return a {@link org.loboevolution.pdfview.action.PDFAction} object.
      */
     public PDFAction getAction() {
         return (PDFAction) getUserObject();
@@ -46,12 +54,16 @@ public class OutlineNode extends DefaultMutableTreeNode {
 
     /**
      * Set the PDF action associated with this node
+     *
+     * @param action a {@link org.loboevolution.pdfview.action.PDFAction} object.
      */
     public void setAction(PDFAction action) {
         setUserObject(action);
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return the node's visible name in the tree
      */
     @Override

@@ -37,8 +37,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>SmartComboBoxUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class SmartComboBoxUI extends BaseComboBoxUI {
 

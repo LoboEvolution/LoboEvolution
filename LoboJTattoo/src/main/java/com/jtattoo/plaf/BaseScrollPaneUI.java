@@ -30,8 +30,8 @@ import javax.swing.plaf.basic.BasicScrollPaneUI;
 /**
  * <p>BaseScrollPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseScrollPaneUI extends BasicScrollPaneUI {
 

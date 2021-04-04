@@ -32,8 +32,8 @@ import com.jtattoo.plaf.XPScrollBarUI;
 /**
  * <p>LunaScrollBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LunaScrollBarUI extends XPScrollBarUI {
 

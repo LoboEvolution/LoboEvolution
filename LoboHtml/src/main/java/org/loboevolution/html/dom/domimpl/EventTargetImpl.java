@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.dom.domimpl;
@@ -58,8 +55,8 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
 /**
  * <p>EventTargetImpl class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class EventTargetImpl extends NodeImpl implements EventTarget {
 	
@@ -137,10 +134,9 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
     }
 		
 	/**
-	 * <p>addEventListener.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
+	 * <p>addEventListener.</p>
 	 */
 	@Override
 	public void addEventListener(final String type, final Function listener) {
@@ -148,11 +144,9 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	}
 
 	/**
-	 * <p>addEventListener.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
-	 * @param useCapture a boolean.
+	 * <p>addEventListener.</p>
 	 */
 	@Override
 	public void addEventListener(String type, Function listener, boolean useCapture) {
@@ -172,10 +166,9 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	}
 		
 	/**
-	 * <p>removeEventListener.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param script a {@link java.lang.String} object.
-	 * @param function a {@link org.mozilla.javascript.Function} object.
+	 * <p>removeEventListener.</p>
 	 */
 	@Override
 	public void removeEventListener(String script, Function function) {
@@ -183,11 +176,9 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	}
 	
 	/**
-	 * <p>removeEventListener.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
-	 * @param useCapture a boolean.
+	 * <p>removeEventListener.</p>
 	 */
 	@Override
 	public void removeEventListener(String type, Function listener, boolean useCapture) {
@@ -201,11 +192,9 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	}
 	
 	/**
-	 * <p>dispatchEvent.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param htmlElementImpl a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param evt a {@link org.loboevolution.html.node.events.Event} object.
-	 * @return a boolean.
+	 * <p>dispatchEvent.</p>
 	 */
 	@Override
 	public boolean dispatchEvent(Node htmlElementImpl, Event evt) {
@@ -279,7 +268,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
@@ -291,7 +280,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
@@ -304,7 +293,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public Node renameNode(Node n, String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "No renaming");
@@ -314,8 +303,8 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * <p>createEntityReference.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.node.EntityReference} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @return a {@link org.w3c.dom.EntityReference} object.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public EntityReference createEntityReference(String name) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "HTML document");
@@ -327,7 +316,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "HTML document");
@@ -339,7 +328,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param importedNode a {@link org.loboevolution.html.node.Node} object.
 	 * @param deep a boolean.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Not implemented");
@@ -350,7 +339,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 *
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
@@ -362,7 +351,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a boolean.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public boolean hasAttributeNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
@@ -371,7 +360,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	/**
 	 * <p>getSchemaTypeInfo.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.TypeInfo} object.
+	 * @return a {@link org.w3c.dom.TypeInfo} object.
 	 */
 	public TypeInfo getSchemaTypeInfo() {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
@@ -383,7 +372,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @param isId a boolean.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
@@ -394,7 +383,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 *
 	 * @param newAttr a {@link org.loboevolution.html.node.Attr} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
@@ -406,7 +395,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.String} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
@@ -418,7 +407,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Element} object.
-	 * @throws org.loboevolution.html.node.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");

@@ -49,6 +49,12 @@
  */
 package org.jpedal.jbig2.image;
 
+/**
+ * <p>BitmapPointer class.</p>
+ *
+  *
+  *
+ */
 public class BitmapPointer {
 	private int x; 
 	private int y;
@@ -58,12 +64,23 @@ public class BitmapPointer {
 	private boolean output;
 	private final JBIG2Bitmap bitmap;
 
+	/**
+	 * <p>Constructor for BitmapPointer.</p>
+	 *
+	 * @param bitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 */
 	public BitmapPointer(JBIG2Bitmap bitmap) {
 		this.bitmap = bitmap;
 		this.height = bitmap.getHeight();
 		this.width = bitmap.getWidth();
 	}
 
+	/**
+	 * <p>setPointer.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void setPointer(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -71,6 +88,11 @@ public class BitmapPointer {
 		count = this.y * width;
 	}
 
+	/**
+	 * <p>nextPixel.</p>
+	 *
+	 * @return a int.
+	 */
 	public int nextPixel() {
 
 		// fairly certain the byte can be cached here - seems to work fine. only

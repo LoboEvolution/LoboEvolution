@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -27,10 +24,13 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link HTMLTextAreaElement}. */
-
+ * Tests for {@link org.loboevolution.html.dom.HTMLTextAreaElement}.
+ */
 public class HTMLTextAreaElementTest extends LoboUnitTest {
 	
+    /**
+     * <p>getValue.</p>
+     */
     @Test
     public void getValue() {
         final String html
@@ -55,6 +55,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setValue.</p>
+     */
     @Test
     public void setValue() {
         final String html
@@ -77,6 +80,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>textLength.</p>
+     */
     @Test
     public void textLength() {
         final String html
@@ -98,18 +104,27 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selection.</p>
+     */
     @Test
     public void selection() {
 		final String[] messages = {"0,0", "11,11", "3,11", "3,10", "7,7"};
         selection(3, 10, messages);
     }
 
+    /**
+     * <p>selection_outOfBounds.</p>
+     */
     @Test
     public void selection_outOfBounds() {
 		final String[] messages = {"0,0", "11,11", "11,11", "11,11", "7,7"};
         selection(-3, 15, messages);
     }
 
+    /**
+     * <p>selection_reverseOrder.</p>
+     */
     @Test
     public void selection_reverseOrder() {
 		final String[] messages = {"0,0", "11,11", "10,11", "5,5", "7,7"};
@@ -139,6 +154,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>doScroll.</p>
+     */
     @Test
     public void doScroll() {
         final String html =
@@ -164,6 +182,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>readOnly.</p>
+     */
     @Test
     public void readOnly() {
         final String html
@@ -188,6 +209,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>accessKey.</p>
+     */
     @Test
     public void accessKey() {
         final String html
@@ -225,6 +249,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>cols.</p>
+     */
     @Test
     public void cols() {
         final String html
@@ -271,6 +298,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>rows.</p>
+     */
     @Test
     public void rows() {
         final String html
@@ -318,6 +348,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selectionRange.</p>
+     */
     @Test
     public void selectionRange() {
         final String html
@@ -343,6 +376,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttributeAndSetValue.</p>
+     */
     @Test
     public void getAttributeAndSetValue() {
         final String html =
@@ -377,6 +413,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttributeAndSetValueNull.</p>
+     */
     @Test
     public void getAttributeAndSetValueNull() {
         final String html =
@@ -406,6 +445,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttributeAndSetValueOther.</p>
+     */
     @Test
     public void getAttributeAndSetValueOther() {
         final String html =
@@ -435,6 +477,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>maxLength.</p>
+     */
     @Test
     public void maxLength() {
         final String html
@@ -463,6 +508,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>minLength.</p>
+     */
     @Test
     public void minLength() {
         final String html
@@ -491,6 +539,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setMaxLength.</p>
+     */
     @Test
     public void setMaxLength() {
         final String html
@@ -530,6 +581,9 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>form.</p>
+     */
     @Test
     public void form() {
         final String html

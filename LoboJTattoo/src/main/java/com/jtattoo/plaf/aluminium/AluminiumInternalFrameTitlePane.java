@@ -33,8 +33,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AluminiumInternalFrameTitlePane class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 

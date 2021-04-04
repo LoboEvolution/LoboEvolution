@@ -32,8 +32,8 @@ import org.loboevolution.pdfview.BaseWatchable;
  * A ColorSpace for the CMYK color space.
  *
  * Take from net.sf.jcgm.core.CMYKColorSpace.java
- * 
- * @author XOND
+ *
+ * Author XOND
  * @version $Id: CMYKColorSpace.java,v 1.2 2011-01-06 12:12:21 xond Exp $
  */
 public class CMYKColorSpace extends ColorSpace {
@@ -58,10 +58,11 @@ public class CMYKColorSpace extends ColorSpace {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Converts to CMYK from CIEXYZ. We cheat here, using the RGB colorspace
 	 * to do the math for us. The toCIEXYZ function has a description of how
 	 * this is supposed to work, which may be implemented in the future.
-	 * 
 	 * @see java.awt.color.ColorSpace#fromCIEXYZ(float[])
 	 */
 	@Override
@@ -75,17 +76,16 @@ public class CMYKColorSpace extends ColorSpace {
 	}
 
 	/**
-	 * Converts a given RGB to CMYK. RGB doesn't really use black, so K will 
+	 * {@inheritDoc}
+	 *
+	 * Converts a given RGB to CMYK. RGB doesn't really use black, so K will
 	 * always be 0. On printers, the black should actually look dark brown.
-	 * RGB (an additive space) is simply the backwards from CMY (a subtractive 
+	 * RGB (an additive space) is simply the backwards from CMY (a subtractive
 	 * space), so all we do is:
-	 * 
+	 *
 	 * 		C = 1-R
 	 * 		M = 1-G
 	 * 		Y = 1-B
-	 * 
-	 * @param p_rgbvalue - The color to translate 
-	 * @return a float[4] of the CMYK values.
 	 * @see java.awt.color.ColorSpace#fromRGB(float[])
 	 */
 	@Override
@@ -107,27 +107,28 @@ public class CMYKColorSpace extends ColorSpace {
 		return normalize(l_res);
 	}
 
-	/** 
-	 * Converts the CMYK color to CIEXYZ. Because CIEXYZ is 3-component, we 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Converts the CMYK color to CIEXYZ. Because CIEXYZ is 3-component, we
 	 * cheat, converting to RGB and then using the RGB colorspace function
-	 * to do the conversion. Details on this colorspace are available on 
-	 * wikipedia: 
-	 * 
+	 * to do the conversion. Details on this colorspace are available on
+	 * wikipedia:
+	 *
 	 * http://en.wikipedia.org/wiki/CIE_XYZ_color_space
-	 * 
+	 *
 	 * There is also an "ideal relationship" to CMYK, which might be implemented
 	 * in the future (don't recall the reference we got this from, probably
 	 * color.org):
-	 * 
+	 *
 	 * C = (C' - K)/(1 - K)
 	 * M = (M' - K)/(1 - K)
 	 * Y = (Y' - K)/(1 - K)
 	 * K = Min(C', M', Y')
-	 * 
+	 *
 	 * X   41.2453 35.7580 18.0423 | 1-C'
 	 * Y = 21.2671 71.5160 07.2169 | 1-M'
 	 * Z   01.9334 11.9193 95.0227 | 1-Y'
-	 * 
 	 * @see java.awt.color.ColorSpace#toCIEXYZ(float[])
 	 */
 	@Override
@@ -142,15 +143,15 @@ public class CMYKColorSpace extends ColorSpace {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Converts CMYK colors to RGB. Note that converting back will be lossy. The
 	 * formula for this is:
-	 * 
+	 *
 	 * K = 1 - K (go to additive)
 	 * R = K * (1 - C)
 	 * G = K * (1 - M)
 	 * B = K * (1 - Y)
-	 * 
-	 * @param p_colorvalue The color in CMYK.
 	 * @see java.awt.color.ColorSpace#toRGB(float[])
 	 */
 	@Override
@@ -171,8 +172,8 @@ public class CMYKColorSpace extends ColorSpace {
 	
 	/**
 	 * Normalize ensures all color values returned are between 0 and 1.
-	 * 
-	 * @param p_colors
+	 *
+	 * @param p_colors an array of {@link float} objects.
 	 * @return p_colors, with any values greater than 1 set to 1, and less than
 	 * 0 set to 0.
 	 */

@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Abs implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1</i> <b>abs</b> <i>num2</i> <p>
 	 *
 	 * The type of the result is the same as the type of num1,

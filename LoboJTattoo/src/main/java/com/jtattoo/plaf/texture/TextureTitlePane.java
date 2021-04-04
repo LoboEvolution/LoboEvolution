@@ -40,8 +40,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>TextureTitlePane class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureTitlePane extends BaseTitlePane {
 

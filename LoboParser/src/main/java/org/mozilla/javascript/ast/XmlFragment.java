@@ -9,8 +9,11 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * Abstract base type for components that comprise an {@link XmlLiteral}
- * object. Node type is {@link Token#XML}.
+ * Abstract base type for components that comprise an {@link org.mozilla.javascript.ast.XmlLiteral}
+ * object. Node type is {@link org.mozilla.javascript.Token#XML}.
+ *
+ *
+ *
  */
 public abstract class XmlFragment extends AstNode {
 
@@ -18,13 +21,27 @@ public abstract class XmlFragment extends AstNode {
         type = Token.XML;
     }
 
+    /**
+     * <p>Constructor for XmlFragment.</p>
+     */
     public XmlFragment() {
     }
 
+    /**
+     * <p>Constructor for XmlFragment.</p>
+     *
+     * @param pos a int.
+     */
     public XmlFragment(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for XmlFragment.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public XmlFragment(int pos, int len) {
         super(pos, len);
     }

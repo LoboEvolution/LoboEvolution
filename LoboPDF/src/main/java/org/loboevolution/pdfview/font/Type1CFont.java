@@ -33,8 +33,9 @@ import org.loboevolution.pdfview.PDFObject;
  * http://partners.adobe.com/public/developer/en/font/5176.CFF.pdf
  * and
  * http://partners.adobe.com/public/developer/en/font/5177.Type2.pdf
- * 
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class Type1CFont extends OutlineFont {
 
@@ -76,9 +77,11 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * create a new Type1CFont based on a font data stream and a descriptor
+     *
      * @param baseFont the postscript name of this font
      * @param src a stream containing the font
      * @param descriptor the descriptor for this font
+     * @throws java.io.IOException if any.
      */
     public Type1CFont (String baseFont, PDFObject src,
                        PDFFontDescriptor descriptor) throws IOException {
@@ -244,6 +247,7 @@ public class Type1CFont extends OutlineFont {
     /**
      * get the size of the dictionary located within the stream at
      * some offset.
+     *
      * @param loc the index of the start of the dictionary
      * @return the size of the dictionary, in bytes.
      */
@@ -269,8 +273,8 @@ public class Type1CFont extends OutlineFont {
     /**
      * return the number of entries in an Index table.
      *
-     * @param loc
-     * @return
+     * @param loc a int.
+     * @return a int.
      */
     public int getTableLength (int loc) {
         int hold = this.pos;
@@ -638,6 +642,7 @@ public class Type1CFont extends OutlineFont {
      * to determine what the offset should be.
      *
      * @param base the index of the start of the dictionary
+     * @return a int.
      */
     public int calcoffset (int base) {
         int len = getTableLength (base);
@@ -652,6 +657,7 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * get the name associated with an ID.
+     *
      * @param id the index of the name
      * @return the name from the FontSupport.stdNames table augmented
      * by the local name table
@@ -1128,12 +1134,11 @@ public class Type1CFont extends OutlineFont {
         }
     }
 
-    /**
-     * Get a glyph outline by name
-     *
-     * @param name the name of the desired glyph
-     * @return the glyph outline, or null if unavailable
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get a glyph outline by name
+	 */
     @Override
 	protected GeneralPath getOutline (String name, float width) {
         // first find the index of this name
@@ -1150,14 +1155,13 @@ public class Type1CFont extends OutlineFont {
         return readGlyph (this.charstringbase, 0);
     }
 
-    /**
-     * Get a glyph outline by character code
-     *
-     * Note this method must always return an outline 
-     *
-     * @param src the character code of the desired glyph
-     * @return the glyph outline
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get a glyph outline by character code
+	 *
+	 * Note this method must always return an outline
+	 */
     @Override
 	protected GeneralPath getOutline (char src, float width) {
         // ignore high bits

@@ -37,8 +37,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>GraphiteTitlePane class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteTitlePane extends BaseTitlePane {
 

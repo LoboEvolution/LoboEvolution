@@ -29,7 +29,9 @@ import org.loboevolution.pdfview.function.FunctionType0;
 
 /**
  * A ColorSpace for calibrated RGB
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class CalRGBColor extends ColorSpace {
     private static final float[] vonKriesM = {  0.40024f, -0.22630f, 0.00000f, 
@@ -59,9 +61,11 @@ public class CalRGBColor extends ColorSpace {
     /**
      * Create a new Calibrated RGB color space object, given the
      * description in a PDF dictionary.
+     *
      * @param obj a dictionary that contains an array of 3 Numbers
      * for "WhitePoint" and "BlackPoint", a Number for "Gamma", and
      * an array of 9 Numbers for "Matrix".
+     * @throws java.io.IOException if any.
      */
     public CalRGBColor(PDFObject obj) throws IOException {
 	// obj is a dictionary that has the following parts:
@@ -119,17 +123,19 @@ public class CalRGBColor extends ColorSpace {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * get the number of components (3)
      */
     @Override public int getNumComponents() {
 	return 3;
     }
 
-    /**
-     * convert from Calibrated RGB to standard RGB
-     * @param comp the Calibrated RGB values (0-1)
-     * @return the RGB values (0-1)
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from Calibrated RGB to standard RGB
+	 */
     @Override
 	public float[] toRGB(float[] comp) {
 	if (comp.length==3) {
@@ -191,32 +197,40 @@ public class CalRGBColor extends ColorSpace {
           return rgb;
     }
     
-    /**
-     * convert from RGB to Calibrated RGB.  NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from RGB to Calibrated RGB.  NOT IMPLEMENTED
+	 */
     @Override
 	public float[] fromRGB(float[] rgbvalue) {
 	return new float[3];
     }
 
-    /**
-     * convert from CIEXYZ to Calibrated RGB.  NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from CIEXYZ to Calibrated RGB.  NOT IMPLEMENTED
+	 */
     @Override
 	public float[] fromCIEXYZ(float[] colorvalue) {
 	return new float[3];
     }
 
     /**
+     * {@inheritDoc}
+     *
      * get the type of this color space (TYPE_RGB)
      */
     @Override public int getType() {
 	return TYPE_RGB;
     }
 
-    /**
-     * convert from Calibrated RGB to CIEXYZ.  NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from Calibrated RGB to CIEXYZ.  NOT IMPLEMENTED
+	 */
     @Override
 	public float[] toCIEXYZ(float[] colorvalue) {
 	return new float[3];

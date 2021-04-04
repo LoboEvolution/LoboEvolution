@@ -24,7 +24,8 @@ import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
 /**
  * Implementation of RGBColor.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public class RGBColorImpl implements Serializable {
 
@@ -35,8 +36,9 @@ public class RGBColorImpl implements Serializable {
     /**
      * Constructor that reads the values from the given
      * chain of LexicalUnits.
+     *
      * @param lu the values
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public RGBColorImpl(final LexicalUnit lu) throws DOMException {
         LexicalUnit next = lu;
@@ -72,6 +74,8 @@ public class RGBColorImpl implements Serializable {
     }
 
     /**
+     * <p>getRed.</p>
+     *
      * @return the red part.
      */
     public CSSValueImpl getRed() {
@@ -80,6 +84,7 @@ public class RGBColorImpl implements Serializable {
 
     /**
      * Sets the red part to a new value.
+     *
      * @param red the new CSSPrimitiveValue
      */
     public void setRed(final CSSValueImpl red) {
@@ -87,6 +92,8 @@ public class RGBColorImpl implements Serializable {
     }
 
     /**
+     * <p>getGreen.</p>
+     *
      * @return the green part.
      */
     public CSSValueImpl getGreen() {
@@ -95,6 +102,7 @@ public class RGBColorImpl implements Serializable {
 
     /**
      * Sets the green part to a new value.
+     *
      * @param green the new CSSPrimitiveValue
      */
     public void setGreen(final CSSValueImpl green) {
@@ -102,6 +110,8 @@ public class RGBColorImpl implements Serializable {
     }
 
     /**
+     * <p>getBlue.</p>
+     *
      * @return the blue part.
      */
     public CSSValueImpl getBlue() {
@@ -110,15 +120,14 @@ public class RGBColorImpl implements Serializable {
 
     /**
      * Sets the blue part to a new value.
+     *
      * @param blue the new CSSPrimitiveValue
      */
     public void setBlue(final CSSValueImpl blue) {
         blue_ = blue;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

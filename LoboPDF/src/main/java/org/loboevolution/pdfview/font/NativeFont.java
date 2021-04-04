@@ -47,7 +47,8 @@ import org.loboevolution.pdfview.font.ttf.TrueTypeTable;
 /**
  * a font object derived from a true type font.
  *
- * @author Mike Wessler
+ * Author Mike Wessler
+  *
  */
 public class NativeFont extends OutlineFont {
 
@@ -87,6 +88,11 @@ public class NativeFont extends OutlineFont {
      * an in-line true-type font file (under key "FontFile2"), use the
      * true type font.  Otherwise, parse the description for key information
      * and use that to generate an appropriate font.
+     *
+     * @param baseFont a {@link java.lang.String} object.
+     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
+     * @throws java.io.IOException if any.
      */
     public NativeFont (String baseFont, PDFObject fontObj,
                        PDFFontDescriptor descriptor)
@@ -124,12 +130,11 @@ public class NativeFont extends OutlineFont {
         }
     }
 
-    /**
-     * Get a glyph outline by name
-     *
-     * @param name the name of the desired glyph
-     * @return the glyph outline, or null if unavailable
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get a glyph outline by name
+	 */
     @Override
 	protected GeneralPath getOutline (String name, float width) {
         if (this.postTable != null && this.cmapTable != null) {
@@ -163,14 +168,13 @@ public class NativeFont extends OutlineFont {
         return null;
     }
 
-    /**
-     * Get a glyph outline by character code
-     *
-     * Note this method must always return an outline 
-     *
-     * @param src the character code of the desired glyph
-     * @return the glyph outline
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get a glyph outline by character code
+	 *
+	 * Note this method must always return an outline
+	 */
     @Override
 	protected GeneralPath getOutline (char src, float width) {
         // some true type fonts put characters in the undefined
@@ -240,6 +244,8 @@ public class NativeFont extends OutlineFont {
      * Set the font
      *
      * @param fontdata the font data as a byte array
+     * @throws java.awt.FontFormatException if any.
+     * @throws java.io.IOException if any.
      */
     protected void setFont (byte[] fontdata)
             throws FontFormatException, IOException {

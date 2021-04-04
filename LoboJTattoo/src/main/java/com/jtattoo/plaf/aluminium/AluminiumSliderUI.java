@@ -35,8 +35,8 @@ import com.jtattoo.plaf.BaseSliderUI;
 /**
  * <p>AluminiumSliderUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumSliderUI extends BaseSliderUI {
 

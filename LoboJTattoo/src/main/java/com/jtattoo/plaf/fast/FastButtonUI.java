@@ -38,8 +38,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>FastButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class FastButtonUI extends BaseButtonUI {
 

@@ -38,8 +38,8 @@ import javax.swing.JPanel;
  * called. Subclasses should override this method to update the image according
  * to the new position.
  *
- * @author Kaz Csaba
- * @version $Id: $Id
+ * Author Kaz Csaba
+ *
  */
 public class ImageSequenceViewer {
 

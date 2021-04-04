@@ -32,14 +32,15 @@ import java.lang.ref.SoftReference;
  * <p>
  * The second form is used in the Java representation of the cross reference
  * table.  In this form, the id is the file position of the start of the
- * object in the PDF file.  See the use of both of these in the 
+ * object in the PDF file.  See the use of both of these in the
  * PDFFile.dereference() method, which takes a PDFXref of the first form,
  * and uses (internally) a PDFXref of the second form.
  * <p>
  * This is an unhappy state of affairs, and should be fixed.  Fortunatly,
  * the two uses have already been factored out as two different methods.
  *
- * @author Mike Wessler
+ * Author Mike Wessler
+  *
  */
 public class PDFXref {
 
@@ -52,6 +53,9 @@ public class PDFXref {
 
     /**
      * create a new PDFXref, given a parsed id and generation.
+     *
+     * @param id a int.
+     * @param gen a int.
      */
     public PDFXref(int id, int gen) {
         this.id = id;
@@ -61,6 +65,10 @@ public class PDFXref {
 
     /**
      * create a new PDFXref, given a parsed id, compressedObjId and index
+     *
+     * @param id a int.
+     * @param gen a int.
+     * @param compressed a boolean.
      */
     public PDFXref(int id, int gen, boolean compressed) {
         this.id = id;
@@ -71,6 +79,8 @@ public class PDFXref {
     /**
      * create a new PDFXref, given a sequence of bytes representing the
      * fixed-width cross reference table line
+     *
+     * @param line an array of {@link byte} objects.
      */
     public PDFXref(byte[] line) {
         if (line == null) {
@@ -85,6 +95,8 @@ public class PDFXref {
 
     /**
      * get the character index into the file of the start of this object
+     *
+     * @return a int.
      */
     public int getFilePos() {
         return this.id;
@@ -92,6 +104,8 @@ public class PDFXref {
 
     /**
      * get the generation of this object
+     *
+     * @return a int.
      */
     public int getGeneration() {
         return this.generation;
@@ -99,6 +113,8 @@ public class PDFXref {
 
     /**
      * get the generation of this object
+     *
+     * @return a int.
      */
     public int getIndex() {
         return this.generation;
@@ -106,6 +122,8 @@ public class PDFXref {
 
     /**
      * get the object number of this object
+     *
+     * @return a int.
      */
     public int getID() {
         return this.id;
@@ -113,6 +131,8 @@ public class PDFXref {
 
     /**
      * get compressed flag of this object
+     *
+     * @return a boolean.
      */
     public boolean getCompressed() {
         return this.compressed;
@@ -122,6 +142,7 @@ public class PDFXref {
     /**
      * Get the object this reference refers to, or null if it hasn't been
      * set.
+     *
      * @return the object if it exists, or null if not
      */
     public PDFObject getObject() {
@@ -134,11 +155,14 @@ public class PDFXref {
 
     /**
      * Set the object this reference refers to.
+     *
+     * @param obj a {@link org.loboevolution.pdfview.PDFObject} object.
      */
     public void setObject(PDFObject obj) {
         this.reference = new SoftReference<>(obj);
     }
     
+	/** {@inheritDoc} */
     @Override
 	public boolean equals(Object obj) {
         return (obj instanceof PDFXref) &&
@@ -146,6 +170,7 @@ public class PDFXref {
                 ((PDFXref)obj).generation == generation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return id ^ (generation << 8);

@@ -40,8 +40,8 @@ import javax.swing.plaf.basic.BasicFormattedTextFieldUI;
 /**
  * <p>BaseFormattedTextFieldUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 

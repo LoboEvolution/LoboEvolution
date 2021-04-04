@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Truncate implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1</i> <b>truncate</b> <i>num2</i> <p>
 	 *
 	 * truncates num1 toward 0 by removing its fractional part.

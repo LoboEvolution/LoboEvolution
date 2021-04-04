@@ -41,8 +41,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>BernsteinBorders class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BernsteinBorders extends BaseBorders {
 

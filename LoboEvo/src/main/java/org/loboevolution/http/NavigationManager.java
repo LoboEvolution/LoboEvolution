@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.http;
@@ -47,8 +44,8 @@ import org.xml.sax.InputSource;
 /**
  * <p>NavigationManager class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class NavigationManager {
 	
@@ -85,6 +82,13 @@ public class NavigationManager {
 		return null;
 	}
 
+	/**
+	 * <p>insertHistory.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 * @param title a {@link java.lang.String} object.
+	 * @param index a int.
+	 */
 	public static void insertHistory(String uri, String title, int index) {
 		final NavigationStore history = new NavigationStore();
 		CookieManager.putCookies(uri);
@@ -94,9 +98,9 @@ public class NavigationManager {
 
 	/**
 	 * <p>getHtmlPanelSearch.</p>
+	 *
 	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 * @param search a {@link java.lang.String} object.
-	 * @param indexPanel a int.
 	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
 	 */
 	public static HtmlPanel getHtmlPanelSearch(IBrowserPanel browserPanel, String search) {

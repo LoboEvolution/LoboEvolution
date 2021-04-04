@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Dup implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>any</i> <b>dup</b> <i>any any</i> <p>
 	 *
 	 * duplicates the top element on the operand stack.

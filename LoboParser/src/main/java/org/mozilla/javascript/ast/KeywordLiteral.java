@@ -12,28 +12,48 @@ import org.mozilla.javascript.Token;
  * AST node for keyword literals:  currently, {@code this},
  * {@code null}, {@code true}, {@code false}, and {@code debugger}.
  * Node type is one of
- * {@link Token#THIS},
- * {@link Token#NULL},
- * {@link Token#TRUE},
- * {@link Token#FALSE}, or
- * {@link Token#DEBUGGER}.
+ * {@link org.mozilla.javascript.Token#THIS},
+ * {@link org.mozilla.javascript.Token#NULL},
+ * {@link org.mozilla.javascript.Token#TRUE},
+ * {@link org.mozilla.javascript.Token#FALSE}, or
+ * {@link org.mozilla.javascript.Token#DEBUGGER}.
+ *
+ *
+ *
  */
 public class KeywordLiteral extends AstNode {
 
+    /**
+     * <p>Constructor for KeywordLiteral.</p>
+     */
     public KeywordLiteral() {
     }
 
+    /**
+     * <p>Constructor for KeywordLiteral.</p>
+     *
+     * @param pos a int.
+     */
     public KeywordLiteral(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for KeywordLiteral.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public KeywordLiteral(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Constructs a new KeywordLiteral
+     *
      * @param nodeType the token type
+     * @param pos a int.
+     * @param len a int.
      */
     public KeywordLiteral(int pos, int len, int nodeType) {
         super(pos, len);
@@ -41,8 +61,9 @@ public class KeywordLiteral extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Sets node token type
-     * @throws IllegalArgumentException if {@code nodeType} is unsupported
      */
     @Override
     public KeywordLiteral setType(int nodeType) {
@@ -58,13 +79,16 @@ public class KeywordLiteral extends AstNode {
     }
 
     /**
-     * Returns true if the token type is {@link Token#TRUE} or
-     * {@link Token#FALSE}.
+     * Returns true if the token type is {@link org.mozilla.javascript.Token#TRUE} or
+     * {@link org.mozilla.javascript.Token#FALSE}.
+     *
+     * @return a boolean.
      */
     public boolean isBooleanLiteral() {
         return type == Token.TRUE || type == Token.FALSE;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -93,6 +117,8 @@ public class KeywordLiteral extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node.  There are no children to visit.
      */
     @Override

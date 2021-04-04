@@ -44,8 +44,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>MintButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class MintButtonUI extends BaseButtonUI {
 

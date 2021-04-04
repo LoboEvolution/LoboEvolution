@@ -51,8 +51,8 @@ import javax.swing.plaf.UIResource;
 /**
  * <p>BaseIcons class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseIcons {
 

@@ -30,25 +30,29 @@ import org.mozilla.javascript.Undefined;
  * Merged bug fixes in version 1.39.
  * Merged JSFUN13_BRANCH changes up to 1.32.2.13
  *
- * @author Brendan Eich
- * @author Norris Boyd
+ * Author Brendan Eich
+ * Author Norris Boyd
+ *
  */
-
-
-
 public class NativeRegExp extends IdScriptableObject
 {
     private static final long serialVersionUID = 4965263491464903264L;
 
     private static final Object REGEXP_TAG = new Object();
 
+    /** Constant <code>JSREG_GLOB=0x1</code> */
     public static final int JSREG_GLOB = 0x1;       // 'g' flag: global
+    /** Constant <code>JSREG_FOLD=0x2</code> */
     public static final int JSREG_FOLD = 0x2;       // 'i' flag: fold
+    /** Constant <code>JSREG_MULTILINE=0x4</code> */
     public static final int JSREG_MULTILINE = 0x4;  // 'm' flag: multiline
 
     //type of match to perform
+    /** Constant <code>TEST=0</code> */
     public static final int TEST = 0;
+    /** Constant <code>MATCH=1</code> */
     public static final int MATCH = 1;
+    /** Constant <code>PREFIX=2</code> */
     public static final int PREFIX = 2;
 
     private static final boolean debug = false;
@@ -111,6 +115,13 @@ public class NativeRegExp extends IdScriptableObject
     private static final int ANCHOR_BOL = -2;
 
 
+    /**
+     * <p>init.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sealed a boolean.
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
 
@@ -144,6 +155,7 @@ public class NativeRegExp extends IdScriptableObject
         ScriptRuntime.setBuiltinProtoAndParent(this, scope, TopLevel.Builtins.RegExp);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
@@ -151,9 +163,10 @@ public class NativeRegExp extends IdScriptableObject
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Gets the value to be returned by the typeof operator called on this object.
      * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
-     * @return "object"
      */
     @Override
     public String getTypeOf()
@@ -182,6 +195,7 @@ public class NativeRegExp extends IdScriptableObject
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -2564,12 +2578,14 @@ public class NativeRegExp extends IdScriptableObject
 
         MAX_INSTANCE_ID = 5;
 
+    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -2617,6 +2633,7 @@ public class NativeRegExp extends IdScriptableObject
         return instanceIdInfo(attr, id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -2630,6 +2647,7 @@ public class NativeRegExp extends IdScriptableObject
         return super.getInstanceIdName(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -2656,6 +2674,7 @@ public class NativeRegExp extends IdScriptableObject
     }
 
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdValue(int id, Object value) {
         switch (id) {
@@ -2671,6 +2690,7 @@ public class NativeRegExp extends IdScriptableObject
         super.setInstanceIdValue(id, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdAttributes(int id, int attr) {
         switch (id) {
@@ -2681,6 +2701,7 @@ public class NativeRegExp extends IdScriptableObject
         super.setInstanceIdAttributes(id, attr);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -2707,6 +2728,7 @@ public class NativeRegExp extends IdScriptableObject
         initPrototypeMethod(REGEXP_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -2749,6 +2771,7 @@ public class NativeRegExp extends IdScriptableObject
         return ensureType(thisObj, NativeRegExp.class, f);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k)
     {
@@ -2762,6 +2785,7 @@ public class NativeRegExp extends IdScriptableObject
     }
 
 // #string_id_map#
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

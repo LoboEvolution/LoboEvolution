@@ -54,8 +54,8 @@ import javax.swing.table.TableColumnModel;
 /**
  * <p>BaseTableHeaderUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseTableHeaderUI extends BasicTableHeaderUI {
 

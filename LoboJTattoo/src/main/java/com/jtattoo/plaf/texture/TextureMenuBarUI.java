@@ -39,8 +39,8 @@ import com.jtattoo.plaf.BaseBorders;
 /**
  * <p>TextureMenuBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureMenuBarUI extends BasicMenuBarUI {
 

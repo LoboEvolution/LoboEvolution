@@ -36,8 +36,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>FastScrollButton class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class FastScrollButton extends BaseScrollButton {
 

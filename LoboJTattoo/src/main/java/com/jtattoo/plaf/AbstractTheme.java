@@ -39,8 +39,8 @@ import javax.swing.plaf.metal.MetalTheme;
 /**
  * <p>Abstract AbstractTheme class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public abstract class AbstractTheme extends MetalTheme {
 

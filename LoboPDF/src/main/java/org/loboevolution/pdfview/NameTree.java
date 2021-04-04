@@ -33,13 +33,20 @@ import java.io.IOException;
  *      as well as the limits of the data contained in that child.
  * </ul>
  * A PDF name tree is sorted in accordance with the String.compareTo() method.
+ *
+  *
+  *
  */
 public class NameTree {
 
     /** the root object */
     private final PDFObject root;
 
-    /** Creates a new instance of NameTree */
+    /**
+     * Creates a new instance of NameTree
+     *
+     * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
+     */
     public NameTree(PDFObject root) {
         this.root = root;
     }
@@ -49,6 +56,7 @@ public class NameTree {
      *
      * @param key the key we are looking for in the name tree
      * @return the object associated with str,  if found, or null if not
+     * @throws java.io.IOException if any.
      */
     public PDFObject find(String key) throws IOException {
         return find(root, key);

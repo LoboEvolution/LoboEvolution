@@ -15,7 +15,10 @@
 package com.gargoylesoftware.css.parser.selector;
 
 /**
- * @author Ronald Brill
+ * <p>GeneralAdjacentSelector class.</p>
+ *
+ * Author Ronald Brill
+ *
  */
 public class GeneralAdjacentSelector extends AbstractSelector {
 
@@ -24,6 +27,7 @@ public class GeneralAdjacentSelector extends AbstractSelector {
 
     /**
      * Ctor.
+     *
      * @param child the child selector
      * @param simpleSelector the simple selector
      */
@@ -35,23 +39,28 @@ public class GeneralAdjacentSelector extends AbstractSelector {
         simpleSelector_ = simpleSelector;
     }
 
+    /** {@inheritDoc} */
     @Override
     public SelectorType getSelectorType() {
         return SelectorType.GENERAL_ADJACENT_SELECTOR;
     }
 
     /**
+     * <p>getSelector.</p>
+     *
      * @return the selector
      */
     public Selector getSelector() {
         return selector_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public SimpleSelector getSimpleSelector() {
         return simpleSelector_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

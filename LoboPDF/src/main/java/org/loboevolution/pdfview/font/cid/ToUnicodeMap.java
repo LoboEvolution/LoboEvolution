@@ -11,16 +11,18 @@ import java.util.Map;
 
 import org.loboevolution.pdfview.PDFObject;
 
-/*****************************************************************************
+/**
+ ***************************************************************************
  * Parses a CMAP and builds a lookup table to map CMAP based codes to unicode.
  * This is not a fully functional CMAP parser but a stripped down parser
  * that should be able to parse some limited variants of CMAPs that are
  * used for the ToUnicode mapping found for some Type0 fonts.
  *
- * @author  Bernd Rosstauscher
+ * Author  Bernd Rosstauscher
  * @since 03.08.2011
- ****************************************************************************/
-
+ ***************************************************************************
+  *
+ */
 public class ToUnicodeMap extends PDFCMap {
 	
 	/*****************************************************************************
@@ -73,12 +75,13 @@ public class ToUnicodeMap extends PDFCMap {
 	private final List<CharRangeMapping> charRangeMappings;
 	private final List<CodeRangeMapping> codeRangeMappings;
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Constructor
-	 * @param map 
-	 * @throws IOException 
-	 ************************************************************************/
-	
+	 *
+	 * @param map a {@link org.loboevolution.pdfview.PDFObject} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public ToUnicodeMap(PDFObject map) throws IOException {
 		super();
 		this.singleCharMappings = new HashMap<>();
@@ -268,10 +271,14 @@ public class ToUnicodeMap extends PDFCMap {
 		}
 	}
 
-	/*************************************************************************
+	/**
+	 * {@inheritDoc}
+	 *
+	 ***********************************************************************
 	 * map
 	 * @see org.loboevolution.pdfview.font.cid.PDFCMap#map(char)
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	@Override
 	public char map(char src) {
 		Character mappedChar = null;

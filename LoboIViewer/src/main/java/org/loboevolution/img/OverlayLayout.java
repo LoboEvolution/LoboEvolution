@@ -33,8 +33,8 @@ import java.awt.LayoutManager;
 /**
  * <p>OverlayLayout class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class OverlayLayout implements LayoutManager {
 	

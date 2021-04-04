@@ -27,7 +27,8 @@ import org.loboevolution.pdfview.PDFPaint;
 /**
  * A PDFColorSpace for an IndexedColor model
  *
- * @author Mike Wessler
+ * Author Mike Wessler
+  *
  */
 public class IndexedColor extends PDFColorSpace {
 
@@ -52,6 +53,7 @@ public class IndexedColor extends PDFColorSpace {
      * @param count the number of colors in the table
      * @param stream a stream of bytes.  The number of bytes must be count*n,
      * where n is the number of components in the base colorspace.
+     * @throws java.io.IOException if any.
      */
     public IndexedColor(PDFColorSpace base, int count, PDFObject stream) throws IOException {
         super(null);
@@ -81,9 +83,10 @@ public class IndexedColor extends PDFColorSpace {
     }
 
     /**
-     * create a new IndexColor PDFColorSpace based on a table of colors.  
-     * 
+     * create a new IndexColor PDFColorSpace based on a table of colors.
+     *
      * @param table an array of colors
+     * @throws java.io.IOException if any.
      */
     public IndexedColor(Color[] table) throws IOException {
         super(null);
@@ -105,6 +108,8 @@ public class IndexedColor extends PDFColorSpace {
 
     /**
      * Get the number of indices
+     *
+     * @return a int.
      */
     public int getCount() {
         return this.count;
@@ -112,12 +117,16 @@ public class IndexedColor extends PDFColorSpace {
 
     /**
      * Get the table of color components
+     *
+     * @return an array of {@link byte} objects.
      */
     public byte[] getColorComponents() {
         return this.finalcolors;
     }
 
     /**
+     * {@inheritDoc}
+     *
      * get the number of components of this colorspace (1)
      */
     @Override
@@ -126,9 +135,9 @@ public class IndexedColor extends PDFColorSpace {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * get the color represented by the index.
-     * @param components an array of exactly one integer number whose
-     * value is between 0 and the size of the color table - 1.
      */
     @Override
     public PDFPaint getPaint(float[] components) {

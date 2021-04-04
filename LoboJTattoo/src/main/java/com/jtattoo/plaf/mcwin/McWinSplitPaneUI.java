@@ -31,8 +31,8 @@ import com.jtattoo.plaf.BaseSplitPaneUI;
 /**
  * <p>McWinSplitPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class McWinSplitPaneUI extends BaseSplitPaneUI {
 

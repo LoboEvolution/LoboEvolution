@@ -41,6 +41,9 @@ import org.loboevolution.pdfview.PDFPage;
 /**
  * A panel of thumbnails, one for each page of a PDFFile. You can add a
  * PageChangeListener to be informed of when the user clicks one of the pages.
+ *
+  *
+  *
  */
 public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObserver {
 
@@ -99,6 +102,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	/**
 	 * Creates a new ThumbPanel based on a PDFFile. The file may be null.
 	 * Automatically starts rendering thumbnails for that file.
+	 *
+	 * @param file a {@link org.loboevolution.pdfview.PDFFile} object.
 	 */
 	public ThumbPanel(PDFFile file) {
 		createAndShowGUI(file);
@@ -128,6 +133,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Renders each of the pages in the PDFFile into a thumbnail. Preferentially
 	 * works on the needdrawn thumbnail, otherwise, go in order.
 	 */
@@ -184,6 +191,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 
 	/**
 	 * Adds a PageChangeListener to receive notification of page clicks.
+	 *
+	 * @param pl a {@link org.loboevolution.pdf.PageChangeListener} object.
 	 */
 	public void addPageChangeListener(PageChangeListener pl) {
 		// [[MW: should be an array list instead of only one]]
@@ -247,6 +256,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	/**
 	 * Sets the currently viewed page, indicates it with a highlight border, and
 	 * makes sure the thumbnail is visible.
+	 *
+	 * @param pagenum a int.
 	 */
 	public void pageShown(int pagenum) {
 		if (showing != pagenum) {
@@ -272,6 +283,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * Notifies the listeners that a page has been selected. Performs the
 	 * notification in the AWT thread. Also highlights the selected page. Does
 	 * this first so that feedback is immediate.
+	 *
+	 * @param pagenum a int.
 	 */
 	public void showPage(int pagenum) {
 		pageShown(pagenum);
@@ -279,6 +292,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	}
 	
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Updates the positions of the thumbnails, and draws them to the screen.
 	 */
 	@Override
@@ -345,6 +360,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Handles notification of any image updates. Not used any more.
 	 */
 	@Override
@@ -355,32 +372,39 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 		return (infoflags & (ALLBITS | ERROR | ABORT)) == 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredScrollableViewportSize() {
 		return getPreferredSize();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getScrollableBlockIncrement(Rectangle visrect, int orientation, int direction) {
 		return Math.max(lineheight, visrect.height / lineheight * lineheight);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getScrollableTracksViewportHeight() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getScrollableTracksViewportWidth() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getScrollableUnitIncrement(Rectangle visrect, int orientation, int direction) {
 		return lineheight;
 	}
 
 	/**
+	 * <p>Getter for the field <code>listener</code>.</p>
+	 *
 	 * @return the listener
 	 */
 	public PageChangeListener getListener() {
@@ -388,6 +412,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	}
 
 	/**
+	 * <p>Setter for the field <code>listener</code>.</p>
+	 *
 	 * @param listener the listener to set
 	 */
 	public void setListener(PageChangeListener listener) {

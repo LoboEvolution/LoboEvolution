@@ -30,6 +30,12 @@ import javax.swing.JToolBar;
 
 import org.loboevolution.pdfview.PDFFile;
 
+/**
+ * <p>NavigationToolbar class.</p>
+ *
+  *
+  *
+ */
 public class NavigationToolbar extends JToolBar {
 	
 	private static final long serialVersionUID = 1L;
@@ -55,6 +61,11 @@ public class NavigationToolbar extends JToolBar {
 
 	private final PDFViewer PDFViewer;
 
+	/**
+	 * <p>Constructor for NavigationToolbar.</p>
+	 *
+	 * @param PDFViewer a {@link org.loboevolution.pdf.PDFViewer} object.
+	 */
 	public NavigationToolbar(PDFViewer PDFViewer) {
 		this.PDFViewer = PDFViewer;
 
@@ -79,10 +90,20 @@ public class NavigationToolbar extends JToolBar {
 
 	}
 
+	/**
+	 * <p>Setter for the field <code>totalNoOfPages</code>.</p>
+	 *
+	 * @param noOfPages a int.
+	 */
 	public void setTotalNoOfPages(int noOfPages) {
 		totalNoOfPages.setText("of " + noOfPages);
 	}
 
+	/**
+	 * <p>setCurrentPage.</p>
+	 *
+	 * @param currentPage a int.
+	 */
 	public void setCurrentPage(int currentPage) {
 		currentPageBox.setText(String.valueOf(currentPage));
 	}
@@ -96,6 +117,11 @@ public class NavigationToolbar extends JToolBar {
 		add(button);
 	}
 
+	/**
+	 * <p>executeCommand.</p>
+	 *
+	 * @param type a int.
+	 */
 	public void executeCommand(int type) {
 		switch (type) {
 		case FIRSTPAGE:

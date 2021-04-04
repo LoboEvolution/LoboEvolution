@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Sub implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1 num2</i> <b>sub</b> <i>difference</i> <p>
 	 *
 	 * returns the result of subtracting num2 from num1.

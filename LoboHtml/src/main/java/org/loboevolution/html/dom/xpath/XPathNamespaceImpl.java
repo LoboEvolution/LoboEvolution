@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * $Id: XPathNamespaceImpl.java 1225426 2011-12-29 04:13:08Z mrglavas $
@@ -86,9 +83,8 @@ import org.w3c.dom.UserDataHandler;
  * This implementation wraps the DOM attribute node that contained the namespace
  * declaration.
  *
- * 
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class XPathNamespaceImpl implements XPathNamespace {
 
@@ -310,55 +306,65 @@ public class XPathNamespaceImpl implements XPathNamespace {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isIsConnected() {
 		return  m_attributeNode.isIsConnected();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement getParentElement() {
 		return  m_attributeNode.getParentElement();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getRootNode() {
 		return  m_attributeNode.getRootNode();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node cloneNode() {
 		return  m_attributeNode.cloneNode();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean contains(Node other) {
 		return m_attributeNode.contains(other);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void addEventListener(String type, Function listener) {
 		m_attributeNode.addEventListener(type, listener);
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void addEventListener(String type, Function listener, boolean useCapture) {
 		m_attributeNode.addEventListener(type, listener, useCapture);
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void removeEventListener(String script, Function function) {
 		m_attributeNode.removeEventListener(script, function);
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void removeEventListener(String type, Function listener, boolean useCapture) {
 		m_attributeNode.removeEventListener(type, listener, useCapture);
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean dispatchEvent(Node element, Event evt) {
 		return m_attributeNode.dispatchEvent(element, evt);

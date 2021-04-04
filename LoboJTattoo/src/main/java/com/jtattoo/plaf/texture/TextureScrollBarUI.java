@@ -33,8 +33,8 @@ import com.jtattoo.plaf.XPScrollBarUI;
 /**
  * <p>TextureScrollBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureScrollBarUI extends XPScrollBarUI {
 

@@ -35,8 +35,8 @@ import javax.swing.ImageIcon;
 /**
  * <p>LazyImageIcon class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LazyImageIcon implements Icon {
 	

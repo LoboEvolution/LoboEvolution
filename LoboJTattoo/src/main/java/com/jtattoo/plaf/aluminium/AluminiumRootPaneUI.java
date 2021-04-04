@@ -32,8 +32,8 @@ import com.jtattoo.plaf.BaseRootPaneUI;
 /**
  * <p>AluminiumRootPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumRootPaneUI extends BaseRootPaneUI {
 

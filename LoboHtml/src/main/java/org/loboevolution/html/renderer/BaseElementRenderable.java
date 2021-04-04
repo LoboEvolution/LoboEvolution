@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.renderer;
@@ -60,8 +57,8 @@ import org.loboevolution.net.HttpNetwork;
 /**
  * <p>Abstract BaseElementRenderable class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public abstract class BaseElementRenderable extends BaseRCollection implements RElement, RenderableContainer, ImageObserver {
 
@@ -407,6 +404,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		this.paddingInsets = null;
 	}
 
+	/** {@inheritDoc} */
 	public void setupRelativePosition(final RenderableContainer container) {
 		setupRelativePosition(getModelNode().getRenderState(), container.getInnerWidth(), container.getInnerHeight());
 	}
@@ -734,13 +732,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		return getHeight() - (insets.top + insets.bottom);
 	}
 	
-	/** {@inheritDoc} */
+    /** {@inheritDoc} */
 	@Override
     public Insets getInsets(final boolean hscroll, final boolean vscroll) {
         return getInsets(hscroll, vscroll, true, true, true);
     }
 
-	/** {@inheritDoc} */
+    /** {@inheritDoc} */
 	@Override
     public Insets getInsetsMarginBorder(final boolean hscroll, final boolean vscroll) {
         return getInsets(hscroll, vscroll, true, true, false);
@@ -913,7 +911,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		}
 	}
 	
-	/** {@inheritDoc} */
+	  /** {@inheritDoc} */
 	@Override
 	  public Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
 	    final Point p = descendent.getOriginRelativeTo(this);
@@ -956,7 +954,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	@Override
 	public void paint(Graphics g) {}
 
-	 /** {@inheritDoc} */
+	  /** {@inheritDoc} */
 	 @Override
 	  public Rectangle getClipBounds() {
 	    final Insets insets = this.getInsetsPadding(false, false);

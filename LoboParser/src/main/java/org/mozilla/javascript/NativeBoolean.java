@@ -9,7 +9,7 @@ package org.mozilla.javascript;
 /**
  * This class implements the Boolean native object.
  * See ECMA 15.6.
- * @author Norris Boyd
+ * Author Norris Boyd
  */
 final class NativeBoolean extends IdScriptableObject
 {
@@ -28,12 +28,14 @@ final class NativeBoolean extends IdScriptableObject
         booleanValue = b;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Boolean";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> typeHint) {
         // This is actually non-ECMA, but will be proposed
@@ -43,6 +45,7 @@ final class NativeBoolean extends IdScriptableObject
         return super.getDefaultValue(typeHint);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -58,6 +61,7 @@ final class NativeBoolean extends IdScriptableObject
         initPrototypeMethod(BOOLEAN_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -108,6 +112,7 @@ final class NativeBoolean extends IdScriptableObject
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

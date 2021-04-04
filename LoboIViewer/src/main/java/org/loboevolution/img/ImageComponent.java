@@ -47,7 +47,7 @@ import org.loboevolution.common.Objects;
 /**
  * The component that displays the image itself.
  * 
- * @author Kaz Csaba
+ * Author Kaz Csaba
  */
 class ImageComponent extends JComponent {
 	

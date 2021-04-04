@@ -23,8 +23,8 @@ import org.mozilla.javascript.Undefined;
  * Merged bug fixes in version 1.39.
  * Merged JSFUN13_BRANCH changes up to 1.32.2.11
  *
- * @author Brendan Eich
- * @author Norris Boyd
+ * Author Brendan Eich
+ * Author Norris Boyd
  */
 class NativeRegExpCtor extends BaseFunction
 {
@@ -34,22 +34,26 @@ class NativeRegExpCtor extends BaseFunction
     {
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getFunctionName()
     {
         return "RegExp";
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getLength() {
         return 2;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getArity() {
         return 2;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -62,6 +66,7 @@ class NativeRegExpCtor extends BaseFunction
         return construct(cx, scope, args);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
@@ -113,12 +118,14 @@ class NativeRegExpCtor extends BaseFunction
 
         MAX_INSTANCE_ID = DOLLAR_ID_BASE + 9;
 
+    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return super.getMaxInstanceId() + MAX_INSTANCE_ID;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s) {
         int id;
@@ -219,6 +226,7 @@ class NativeRegExpCtor extends BaseFunction
 
 // #/string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -251,6 +259,7 @@ class NativeRegExpCtor extends BaseFunction
         return super.getInstanceIdName(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -301,6 +310,7 @@ class NativeRegExpCtor extends BaseFunction
         return super.getInstanceIdValue(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -334,6 +344,7 @@ class NativeRegExpCtor extends BaseFunction
         super.setInstanceIdValue(id, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdAttributes(int id, int attr) {
         int shifted = id - super.getMaxInstanceId();

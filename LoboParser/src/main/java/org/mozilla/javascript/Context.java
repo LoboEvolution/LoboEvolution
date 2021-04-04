@@ -49,10 +49,10 @@ import org.mozilla.javascript.xml.XMLLib;
  * Context.
  *
  * @see Scriptable
- * @author Norris Boyd
- * @author Brendan Eich
+ * Author Norris Boyd
+ * Author Brendan Eich
+ *
  */
-
 public class Context
 {
     /**
@@ -381,7 +381,9 @@ public class Context
      */
     public static final int FEATURE_ENABLE_JAVA_MAP_ACCESS = 21;
 
+    /** Constant <code>languageVersionProperty="language version"</code> */
     public static final String languageVersionProperty = "language version";
+    /** Constant <code>errorReporterProperty="error reporter"</code> */
     public static final String errorReporterProperty   = "error reporter";
 
     /**
@@ -395,10 +397,11 @@ public class Context
      *
      * Note that the Context must be associated with a thread before
      * it can be used to execute a script.
+     *
      * @deprecated this constructor is deprecated because it creates a
      * dependency on a static singleton context factory. Use
-     * {@link ContextFactory#enter()} or
-     * {@link ContextFactory#call(ContextAction)} instead. If you subclass
+     * {@link org.mozilla.javascript.ContextFactory#enter()} or
+     * {@link org.mozilla.javascript.ContextFactory#call(ContextAction)} instead. If you subclass
      * this class, consider using {@link #Context(ContextFactory)} constructor
      * instead in the subclasses' constructors.
      */
@@ -411,11 +414,12 @@ public class Context
     /**
      * Creates a new context. Provided as a preferred super constructor for
      * subclasses in place of the deprecated default public constructor.
+     *
      * @param factory the context factory associated with this context (most
      * likely, the one that created the context). Can not be null. The context
      * features are inherited from the factory, and the context will also
      * otherwise use its factory's services.
-     * @throws IllegalArgumentException if factory parameter is null.
+     * @throws java.lang.IllegalArgumentException if factory parameter is null.
      */
     protected Context(ContextFactory factory)
     {
@@ -447,8 +451,9 @@ public class Context
     }
 
     /**
-     * Same as calling {@link ContextFactory#enterContext()} on the global
+     * Same as calling {@link org.mozilla.javascript.ContextFactory#enterContext()} on the global
      * ContextFactory instance.
+     *
      * @return a Context associated with the current thread
      * @see #getCurrentContext()
      * @see #exit()
@@ -467,9 +472,10 @@ public class Context
      * is associated with the current thread and returned if
      * the current thread has no associated context and <code>cx</code>
      * is not associated with any other thread.
+     *
      * @param cx a Context to associate with the thread if possible
      * @return a Context associated with the current thread
-     * @deprecated use {@link ContextFactory#enterContext(Context)} instead as
+     * @deprecated use {@link org.mozilla.javascript.ContextFactory#enterContext(Context)} instead as
      * this method relies on usage of a static singleton "global" ContextFactory.
      * @see ContextFactory#enterContext(Context)
      * @see ContextFactory#call(ContextAction)
@@ -512,10 +518,11 @@ public class Context
      *
      * Calling <code>exit()</code> will remove the association between
      * the current thread and a Context if the prior call to
-     * {@link ContextFactory#enterContext()} on this thread newly associated a
+     * {@link org.mozilla.javascript.ContextFactory#enterContext()} on this thread newly associated a
      * Context with this thread. Once the current thread no longer has an
      * associated Context, it cannot be used to execute JavaScript until it is
      * again associated with a Context.
+     *
      * @see ContextFactory#enterContext()
      */
     public static void exit()
@@ -534,17 +541,20 @@ public class Context
     }
 
     /**
-     * Call {@link ContextAction#run(Context cx)}
+     * Call {@link org.mozilla.javascript.ContextAction#run(Context cx)}
      * using the Context instance associated with the current thread.
      * If no Context is associated with the thread, then
      * <code>ContextFactory.getGlobal().makeContext()</code> will be called to
      * construct new Context instance. The instance will be temporary
      * associated with the thread during call to
-     * {@link ContextAction#run(Context)}.
-     * @deprecated use {@link ContextFactory#call(ContextAction)} instead as
+     * {@link org.mozilla.javascript.ContextAction#run(Context)}.
+     *
+     * @deprecated use {@link org.mozilla.javascript.ContextFactory#call(ContextAction)} instead as
      * this method relies on usage of a static singleton "global"
      * ContextFactory.
-     * @return The result of {@link ContextAction#run(Context)}.
+     * @return The result of {@link org.mozilla.javascript.ContextAction#run(Context)}.
+     * @param action a {@link org.mozilla.javascript.ContextAction} object.
+     * @param <T> a T object.
      */
     @Deprecated
     public static <T> T call(ContextAction<T> action)
@@ -558,14 +568,21 @@ public class Context
      *               Object[] args)}
      * using the Context instance associated with the current thread.
      * If no Context is associated with the thread, then
-     * {@link ContextFactory#makeContext()} will be called to construct
+     * {@link org.mozilla.javascript.ContextFactory#makeContext()} will be called to construct
      * new Context instance. The instance will be temporary associated
-     * with the thread during call to {@link ContextAction#run(Context)}.
+     * with the thread during call to {@link org.mozilla.javascript.ContextAction#run(Context)}.
      * <p>
      * It is allowed but not advisable to use null for <code>factory</code>
      * argument in which case the global static singleton ContextFactory
      * instance will be used to create new context instances.
+     *
      * @see ContextFactory#call(ContextAction)
+     * @param factory a {@link org.mozilla.javascript.ContextFactory} object.
+     * @param callable a {@link org.mozilla.javascript.Callable} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param args an array of {@link java.lang.Object} objects.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object call(ContextFactory factory, final Callable callable,
                               final Scriptable scope, final Scriptable thisObj,
@@ -591,9 +608,11 @@ public class Context
     }
 
     /**
-     * @deprecated
+     * <p>addContextListener.</p>
+     *
      * @see ContextFactory#addListener(org.mozilla.javascript.ContextFactory.Listener)
      * @see ContextFactory#getGlobal()
+     * @param listener a {@link org.mozilla.javascript.ContextListener} object.
      */
     @Deprecated
     public static void addContextListener(ContextListener listener)
@@ -619,9 +638,11 @@ public class Context
     }
 
     /**
-     * @deprecated
+     * <p>removeContextListener.</p>
+     *
      * @see ContextFactory#removeListener(org.mozilla.javascript.ContextFactory.Listener)
      * @see ContextFactory#getGlobal()
+     * @param listener a {@link org.mozilla.javascript.ContextListener} object.
      */
     @Deprecated
     public static void removeContextListener(ContextListener listener)
@@ -630,7 +651,9 @@ public class Context
     }
 
     /**
-     * Return {@link ContextFactory} instance used to create this Context.
+     * Return {@link org.mozilla.javascript.ContextFactory} instance used to create this Context.
+     *
+     * @return a {@link org.mozilla.javascript.ContextFactory} object.
      */
     public final ContextFactory getFactory()
     {
@@ -641,7 +664,9 @@ public class Context
      * Checks if this is a sealed Context. A sealed Context instance does not
      * allow to modify any of its properties and will throw an exception
      * on any such attempt.
+     *
      * @see #seal(Object sealKey)
+     * @return a boolean.
      */
     public final boolean isSealed()
     {
@@ -659,6 +684,7 @@ public class Context
      *
      * @see #isSealed()
      * @see #unseal(Object)
+     * @param sealKey a {@link java.lang.Object} object.
      */
     public final void seal(Object sealKey)
     {
@@ -675,6 +701,7 @@ public class Context
      *
      * @see #isSealed()
      * @see #seal(Object sealKey)
+     * @param sealKey a {@link java.lang.Object} object.
      */
     public final void unseal(Object sealKey)
     {
@@ -726,6 +753,12 @@ public class Context
         this.version = version;
     }
 
+    /**
+     * <p>isValidLanguageVersion.</p>
+     *
+     * @param version a int.
+     * @return a boolean.
+     */
     public static boolean isValidLanguageVersion(int version)
     {
         switch (version) {
@@ -745,6 +778,11 @@ public class Context
         return false;
     }
 
+    /**
+     * <p>checkLanguageVersion.</p>
+     *
+     * @param version a int.
+     */
     public static void checkLanguageVersion(int version)
     {
         if (isValidLanguageVersion(version)) {
@@ -777,6 +815,7 @@ public class Context
      * Get the current error reporter.
      *
      * @see org.mozilla.javascript.ErrorReporter
+     * @return a {@link org.mozilla.javascript.ErrorReporter} object.
      */
     public final ErrorReporter getErrorReporter()
     {
@@ -791,6 +830,7 @@ public class Context
      *
      * @return the previous error reporter
      * @see org.mozilla.javascript.ErrorReporter
+     * @param reporter a {@link org.mozilla.javascript.ErrorReporter} object.
      */
     public final ErrorReporter setErrorReporter(ErrorReporter reporter)
     {
@@ -814,8 +854,8 @@ public class Context
      * been set.
      *
      * @see java.util.Locale
+     * @return a {@link java.util.Locale} object.
      */
-
     public final Locale getLocale()
     {
         if (locale == null)
@@ -827,6 +867,8 @@ public class Context
      * Set the current locale.
      *
      * @see java.util.Locale
+     * @param loc a {@link java.util.Locale} object.
+     * @return a {@link java.util.Locale} object.
      */
     public final Locale setLocale(Locale loc)
     {
@@ -839,6 +881,7 @@ public class Context
     /**
      * Register an object to receive notifications when a bound property
      * has changed
+     *
      * @see java.beans.PropertyChangeEvent
      * @see #removePropertyChangeListener(java.beans.PropertyChangeListener)
      * @param l the listener
@@ -852,6 +895,7 @@ public class Context
     /**
      * Remove an object from the list of objects registered to receive
      * notification of changes to a bounded property
+     *
      * @see java.beans.PropertyChangeEvent
      * @see #addPropertyChangeListener(java.beans.PropertyChangeListener)
      * @param l the listener
@@ -931,6 +975,12 @@ public class Context
         Context.reportWarning(message, filename, linep[0], null, 0);
     }
 
+    /**
+     * <p>reportWarning.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param t a {@link java.lang.Throwable} object.
+     */
     public static void reportWarning(String message, Throwable t)
     {
         int[] linep = { 0 };
@@ -1075,6 +1125,7 @@ public class Context
      *
      * @param message the error message to report
      * @see org.mozilla.javascript.ErrorReporter
+     * @return a {@link org.mozilla.javascript.EvaluatorException} object.
      */
     public static EvaluatorException reportRuntimeError(String message)
     {
@@ -1145,7 +1196,7 @@ public class Context
      *        object will be created to serve as the scope
      * @return the initialized scope. The method returns the value of the scope
      *         argument if it is not null or newly allocated scope object which
-     *         is an instance {@link ScriptableObject}.
+     *         is an instance {@link org.mozilla.javascript.ScriptableObject}.
      */
     public final Scriptable initStandardObjects(ScriptableObject scope)
     {
@@ -1176,7 +1227,7 @@ public class Context
      *        object will be created to serve as the scope
      * @return the initialized scope. The method returns the value of the scope
      *         argument if it is not null or newly allocated scope object which
-     *         is an instance {@link ScriptableObject}.
+     *         is an instance {@link org.mozilla.javascript.ScriptableObject}.
      */
     public final Scriptable initSafeStandardObjects(ScriptableObject scope)
     {
@@ -1259,6 +1310,8 @@ public class Context
 
     /**
      * Get the singleton object that represents the JavaScript Undefined value.
+     *
+     * @return a {@link java.lang.Object} object.
      */
     public static Object getUndefinedValue()
     {
@@ -1308,8 +1361,8 @@ public class Context
      *        implementations that don't care about security, this value
      *        may be null.
      * @return the result of evaluating the source
-     *
      * @exception IOException if an IOException was generated by the Reader
+     * @throws java.io.IOException if any.
      */
     public final Object evaluateReader(Scriptable scope, Reader in,
                                        String sourceName, int lineno,
@@ -1329,12 +1382,14 @@ public class Context
      * Caller must be prepared to catch a ContinuationPending exception
      * and resume execution by calling
      * {@link #resumeContinuation(Object, Scriptable, Object)}.
+     *
      * @param script The script to execute. Script must have been compiled
      *      with interpreted mode (optimization level -1)
      * @param scope The scope to execute the script against
-     * @throws ContinuationPending if the script calls a function that results
+     * @throws org.mozilla.javascript.ContinuationPending if the script calls a function that results
      *      in a call to {@link #captureContinuation()}
      * @since 1.7 Release 2
+     * @return a {@link java.lang.Object} object.
      */
     public Object executeScriptWithContinuations(Script script,
             Scriptable scope)
@@ -1356,13 +1411,15 @@ public class Context
      * Caller must be prepared to catch a ContinuationPending exception
      * and resume execution by calling
      * {@link #resumeContinuation(Object, Scriptable, Object)}.
+     *
      * @param function The function to call. The function must have been
      *      compiled with interpreted mode (optimization level -1)
      * @param scope The scope to execute the script against
      * @param args The arguments for the function
-     * @throws ContinuationPending if the script calls a function that results
+     * @throws org.mozilla.javascript.ContinuationPending if the script calls a function that results
      *      in a call to {@link #captureContinuation()}
      * @since 1.7 Release 2
+     * @return a {@link java.lang.Object} object.
      */
     public Object callFunctionWithContinuations(Callable function,
             Scriptable scope, Object[] args)
@@ -1393,6 +1450,7 @@ public class Context
      * JavaScript script. Also, there cannot be any non-JavaScript code
      * between the JavaScript frames (e.g., a call to eval()). The
      * ContinuationPending exception returned must be thrown.
+     *
      * @return A ContinuationPending exception that must be thrown
      * @since 1.7 Release 2
      */
@@ -1409,13 +1467,16 @@ public class Context
      * Execution of the script will either conclude normally and the
      * result returned, another continuation will be captured and
      * thrown, or the script will terminate abnormally and throw an exception.
+     *
      * @param continuation The value returned by
-     * {@link ContinuationPending#getContinuation()}
+     * {@link org.mozilla.javascript.ContinuationPending#getContinuation()}
      * @param functionResult This value will appear to the code being resumed
      *      as the result of the function that captured the continuation
-     * @throws ContinuationPending if another continuation is captured before
+     * @throws org.mozilla.javascript.ContinuationPending if another continuation is captured before
      *      the code terminates
      * @since 1.7 Release 2
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
      */
     public Object resumeContinuation(Object continuation,
             Scriptable scope, Object functionResult)
@@ -1463,9 +1524,17 @@ public class Context
     }
 
     /**
-     * @deprecated
+     * <p>compileReader.</p>
+     *
      * @see #compileReader(Reader in, String sourceName, int lineno,
      *                     Object securityDomain)
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param in a {@link java.io.Reader} object.
+     * @param sourceName a {@link java.lang.String} object.
+     * @param lineno a int.
+     * @param securityDomain a {@link java.lang.Object} object.
+     * @return a {@link org.mozilla.javascript.Script} object.
+     * @throws java.io.IOException if any.
      */
     @Deprecated
     public final Script compileReader(Scriptable scope, Reader in,
@@ -1492,6 +1561,7 @@ public class Context
      * @return a script that may later be executed
      * @exception IOException if an IOException was generated by the Reader
      * @see org.mozilla.javascript.Script
+     * @throws java.io.IOException if any.
      */
     public final Script compileReader(Reader in, String sourceName,
                                       int lineno, Object securityDomain)
@@ -1656,6 +1726,7 @@ public class Context
      * Create a new JavaScript object.
      *
      * Equivalent to evaluating "new Object()".
+     *
      * @param scope the scope to search for the constructor and to evaluate
      *              against
      * @return the new object
@@ -1711,6 +1782,7 @@ public class Context
     /**
      * Create an array with a specified initial length.
      * <p>
+     *
      * @param scope the scope to create the object in
      * @param length the initial length (JavaScript arrays may have
      *               additional properties added dynamically).
@@ -1757,6 +1829,7 @@ public class Context
      * Java array is then returned.
      * If the object doesn't define a length property or it is not a number,
      * empty array is returned.
+     *
      * @param object the JavaScript array or array-like object
      * @return a Java array of objects
      * @since 1.4 release 2
@@ -1801,6 +1874,7 @@ public class Context
      * <p>
      * See ECMA 9.8.
      * <p>
+     *
      * @param value a JavaScript value
      * @return the corresponding String value converted using
      *         the ECMA rules
@@ -1833,8 +1907,13 @@ public class Context
     }
 
     /**
-     * @deprecated
+     * <p>toObject.</p>
+     *
      * @see #toObject(Object, Scriptable)
+     * @param value a {@link java.lang.Object} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param staticType a {@link java.lang.Class} object.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
      */
     @Deprecated
     public static Scriptable toObject(Object value, Scriptable scope,
@@ -1860,7 +1939,7 @@ public class Context
      * length 1 and its JavaScript type will be string.
      * <p>
      * The rest of values will be wrapped as LiveConnect objects
-     * by calling {@link WrapFactory#wrap(Context cx, Scriptable scope,
+     * by calling {@link org.mozilla.javascript.WrapFactory#wrap(Context cx, Scriptable scope,
      * Object obj, Class staticType)} as in:
      * <pre>
      *    Context cx = Context.getCurrentContext();
@@ -1889,12 +1968,13 @@ public class Context
      * Convert a JavaScript value into the desired type.
      * Uses the semantics defined with LiveConnect3 and throws an
      * Illegal argument exception if the conversion cannot be performed.
+     *
      * @param value the JavaScript value to convert
      * @param desiredType the Java type to convert to. Primitive Java
      *        types are represented using the TYPE fields in the corresponding
      *        wrapper class in java.lang.
      * @return the converted value
-     * @throws EvaluatorException if the conversion cannot be performed
+     * @throws org.mozilla.javascript.EvaluatorException if the conversion cannot be performed
      */
     public static Object jsToJava(Object value, Class<?> desiredType)
         throws EvaluatorException
@@ -1903,11 +1983,15 @@ public class Context
     }
 
     /**
-     * @deprecated
+     * <p>toType.</p>
+     *
      * @see #jsToJava(Object, Class)
-     * @throws IllegalArgumentException if the conversion cannot be performed.
+     * @throws java.lang.IllegalArgumentException if the conversion cannot be performed.
      *         Note that {@link #jsToJava(Object, Class)} throws
-     *         {@link EvaluatorException} instead.
+     *         {@link org.mozilla.javascript.EvaluatorException} instead.
+     * @param value a {@link java.lang.Object} object.
+     * @param desiredType a {@link java.lang.Class} object.
+     * @return a {@link java.lang.Object} object.
      */
     @Deprecated
     public static Object toType(Object value, Class<?> desiredType)
@@ -1922,9 +2006,9 @@ public class Context
 
     /**
      * Rethrow the exception wrapping it as the script runtime exception.
-     * Unless the exception is instance of {@link EcmaError} or
-     * {@link EvaluatorException} it will be wrapped as
-     * {@link WrappedException}, a subclass of {@link EvaluatorException}.
+     * Unless the exception is instance of {@link org.mozilla.javascript.EcmaError} or
+     * {@link org.mozilla.javascript.EvaluatorException} it will be wrapped as
+     * {@link org.mozilla.javascript.WrappedException}, a subclass of {@link org.mozilla.javascript.EvaluatorException}.
      * The resulting exception object always contains
      * source name and line number of script that triggered exception.
      * <p>
@@ -1934,8 +2018,9 @@ public class Context
      * throw Context.throwAsScriptRuntimeEx(ex);
      * </pre>
      * to indicate that code after the method is unreachable.
-     * @throws EvaluatorException
-     * @throws EcmaError
+     *
+     * @param e a {@link java.lang.Throwable} object.
+     * @return a {@link java.lang.RuntimeException} object.
      */
     public static RuntimeException throwAsScriptRuntimeEx(Throwable e)
     {
@@ -1959,7 +2044,9 @@ public class Context
 
     /**
      * Tell whether debug information is being generated.
+     *
      * @since 1.3
+     * @return a boolean.
      */
     public final boolean isGeneratingDebug()
     {
@@ -1971,7 +2058,9 @@ public class Context
      * <p>
      * Setting the generation of debug information on will set the
      * optimization level to zero.
+     *
      * @since 1.3
+     * @param generatingDebug a boolean.
      */
     public final void setGeneratingDebug(boolean generatingDebug)
     {
@@ -1984,7 +2073,9 @@ public class Context
 
     /**
      * Tell whether source information is being generated.
+     *
      * @since 1.3
+     * @return a boolean.
      */
     public final boolean isGeneratingSource()
     {
@@ -1999,7 +2090,9 @@ public class Context
      * the body of the function.
      * Note that code generated without source is not fully ECMA
      * conformant.
+     *
      * @since 1.3
+     * @param generatingSource a boolean.
      */
     public final void setGeneratingSource(boolean generatingSource)
     {
@@ -2012,8 +2105,9 @@ public class Context
      * <p>
      * The optimization level is expressed as an integer between -1 and
      * 9.
-     * @since 1.3
      *
+     * @since 1.3
+     * @return a int.
      */
     public final int getOptimizationLevel()
     {
@@ -2032,10 +2126,10 @@ public class Context
      * performance for runtime performance.
      * The optimizer level can't be set greater than -1 if the optimizer
      * package doesn't exist at run time.
+     *
      * @param optimizationLevel an integer indicating the level of
      *        optimization to perform
      * @since 1.3
-     *
      */
     public final void setOptimizationLevel(int optimizationLevel)
     {
@@ -2050,11 +2144,22 @@ public class Context
         this.optimizationLevel = optimizationLevel;
     }
 
+    /**
+     * <p>isValidOptimizationLevel.</p>
+     *
+     * @param optimizationLevel a int.
+     * @return a boolean.
+     */
     public static boolean isValidOptimizationLevel(int optimizationLevel)
     {
         return -1 <= optimizationLevel && optimizationLevel <= 9;
     }
 
+    /**
+     * <p>checkOptimizationLevel.</p>
+     *
+     * @param optimizationLevel a int.
+     */
     public static void checkOptimizationLevel(int optimizationLevel)
     {
         if (isValidOptimizationLevel(optimizationLevel)) {
@@ -2096,9 +2201,9 @@ public class Context
      * setting helps prevent such situations.
      *
      * @param max the new maximum interpreter stack depth
-     * @throws IllegalStateException if this context's optimization level is not
+     * @throws java.lang.IllegalStateException if this context's optimization level is not
      * -1
-     * @throws IllegalArgumentException if the new depth is not at least 1
+     * @throws java.lang.IllegalArgumentException if the new depth is not at least 1
      */
     public final void setMaximumInterpreterStackDepth(int max)
     {
@@ -2115,10 +2220,11 @@ public class Context
     /**
      * Set the security controller for this context.
      * <p> SecurityController may only be set if it is currently null
-     * and {@link SecurityController#hasGlobal()} is <code>false</code>.
+     * and {@link org.mozilla.javascript.SecurityController#hasGlobal()} is <code>false</code>.
      * Otherwise a SecurityException is thrown.
+     *
      * @param controller a SecurityController object
-     * @throws SecurityException if there is already a SecurityController
+     * @throws java.lang.SecurityException if there is already a SecurityController
      *         object for this Context or globally installed.
      * @see SecurityController#initGlobal(SecurityController controller)
      * @see SecurityController#hasGlobal()
@@ -2138,10 +2244,11 @@ public class Context
 
     /**
      * Set the LiveConnect access filter for this context.
-     * <p> {@link ClassShutter} may only be set if it is currently null.
+     * <p> {@link org.mozilla.javascript.ClassShutter} may only be set if it is currently null.
      * Otherwise a SecurityException is thrown.
+     *
      * @param shutter a ClassShutter object
-     * @throws SecurityException if there is already a ClassShutter
+     * @throws java.lang.SecurityException if there is already a ClassShutter
      *         object for this Context
      */
     public synchronized final void setClassShutter(ClassShutter shutter)
@@ -2166,6 +2273,11 @@ public class Context
         public ClassShutter getClassShutter();
     }
 
+    /**
+     * <p>getClassShutterSetter.</p>
+     *
+     * @return a {@link org.mozilla.javascript.Context.ClassShutterSetter} object.
+     */
     public final synchronized ClassShutterSetter getClassShutterSetter() {
         if (hasClassShutter)
             return null;
@@ -2196,6 +2308,7 @@ public class Context
      * cannot be retrieved. Also, if private data is to be maintained
      * in this manner the key should be a java.lang.Object
      * whose reference is not divulged to untrusted code.
+     *
      * @param key the key used to lookup the value
      * @return a value previously stored using putThreadLocal.
      */
@@ -2209,6 +2322,7 @@ public class Context
     /**
      * Put a value that can later be retrieved using a given key.
      * <p>
+     *
      * @param key the key used to index the value
      * @param value the value to save
      */
@@ -2222,6 +2336,7 @@ public class Context
 
     /**
      * Remove values from thread-local storage.
+     *
      * @param key the key for the entry to remove.
      * @since 1.5 release 2
      */
@@ -2234,9 +2349,11 @@ public class Context
     }
 
     /**
-     * @deprecated
+     * <p>setCachingEnabled.</p>
+     *
      * @see ClassCache#get(Scriptable)
      * @see ClassCache#setCachingEnabled(boolean)
+     * @param cachingEnabled a boolean.
      */
     @Deprecated
     public static void setCachingEnabled(boolean cachingEnabled)
@@ -2248,8 +2365,10 @@ public class Context
      * <p>
      * The WrapFactory allows custom object wrapping behavior for
      * Java object manipulated with JavaScript.
+     *
      * @see WrapFactory
      * @since 1.5 Release 4
+     * @param wrapFactory a {@link org.mozilla.javascript.WrapFactory} object.
      */
     public final void setWrapFactory(WrapFactory wrapFactory)
     {
@@ -2260,8 +2379,10 @@ public class Context
 
     /**
      * Return the current WrapFactory, or null if none is defined.
+     *
      * @see WrapFactory
      * @since 1.5 Release 4
+     * @return a {@link org.mozilla.javascript.WrapFactory} object.
      */
     public final WrapFactory getWrapFactory()
     {
@@ -2273,6 +2394,7 @@ public class Context
 
     /**
      * Return the current debugger.
+     *
      * @return the debugger, or null if none is attached.
      */
     public final Debugger getDebugger()
@@ -2282,6 +2404,7 @@ public class Context
 
     /**
      * Return the debugger context data associated with current context.
+     *
      * @return the debugger data, or null if debugger is not attached
      */
     public final Object getDebuggerContextData()
@@ -2291,6 +2414,7 @@ public class Context
 
     /**
      * Set the associated debugger.
+     *
      * @param debugger the debugger to be used on callbacks from
      * the engine.
      * @param contextData arbitrary object that debugger can use to store
@@ -2307,6 +2431,9 @@ public class Context
      * Return DebuggableScript instance if any associated with the script.
      * If callable supports DebuggableScript implementation, the method
      * returns it. Otherwise null is returned.
+     *
+     * @param script a {@link org.mozilla.javascript.Script} object.
+     * @return a {@link org.mozilla.javascript.debug.DebuggableScript} object.
      */
     public static DebuggableScript getDebuggableView(Script script)
     {
@@ -2321,9 +2448,9 @@ public class Context
      * Should be overwritten to alter default behavior.
      * <p>
      * The default implementation calls
-     * {@link ContextFactory#hasFeature(Context cx, int featureIndex)}
+     * {@link org.mozilla.javascript.ContextFactory#hasFeature(Context cx, int featureIndex)}
      * that allows to customize Context behavior without introducing
-     * Context subclasses.  {@link ContextFactory} documentation gives
+     * Context subclasses.  {@link org.mozilla.javascript.ContextFactory} documentation gives
      * an example of hasFeature implementation.
      *
      * @param featureIndex feature index to check
@@ -2354,7 +2481,7 @@ public class Context
      * be considered experimental.
      *
      * The default implementation uses the implementation provided by this
-     * <code>Context</code>'s {@link ContextFactory}.
+     * <code>Context</code>'s {@link org.mozilla.javascript.ContextFactory}.
      *
      * @return An XMLLib.Factory. Should not return <code>null</code> if
      *         {@link #FEATURE_E4X} is enabled. See {@link #hasFeature}.
@@ -2370,6 +2497,8 @@ public class Context
      * otherwise each time the run-time executes at least the threshold value
      * of script instructions, <code>observeInstructionCount()</code> will
      * be called.
+     *
+     * @return a int.
      */
     public final int getInstructionObserverThreshold()
     {
@@ -2389,6 +2518,7 @@ public class Context
      * instruction counts against the threshold.
      * {@link #setGenerateObserverCount} is called with true if
      * <code>threshold</code> is greater than zero, false otherwise.
+     *
      * @param threshold The instruction threshold
      */
     public final void setInstructionObserverThreshold(int threshold)
@@ -2407,6 +2537,7 @@ public class Context
      * be counted toward instruction thresholds. Rhino's interpretive
      * mode does instruction counting without inserting callbacks, so
      * there is no requirement to compile code differently.
+     *
      * @param generateObserverCount if true, generated code will contain
      * calls to accumulate an estimate of the instructions executed.
      */
@@ -2423,14 +2554,13 @@ public class Context
      * to terminate them.
      * <p>
      * The default implementation calls
-     * {@link ContextFactory#observeInstructionCount(Context cx,
+     * {@link org.mozilla.javascript.ContextFactory#observeInstructionCount(Context cx,
      *                                               int instructionCount)}
      * that allows to customize Context behavior without introducing
      * Context subclasses.
      *
      * @param instructionCount amount of script instruction executed since
      * last call to <code>observeInstructionCount</code>
-     * @throws Error to terminate the script
      * @see #setOptimizationLevel(int)
      */
     protected void observeInstructionCount(int instructionCount)
@@ -2441,8 +2571,11 @@ public class Context
 
     /**
      * Create class loader for generated classes.
-     * The method calls {@link ContextFactory#createClassLoader(ClassLoader)}
+     * The method calls {@link org.mozilla.javascript.ContextFactory#createClassLoader(ClassLoader)}
      * using the result of {@link #getFactory()}.
+     *
+     * @param parent a {@link java.lang.ClassLoader} object.
+     * @return a {@link org.mozilla.javascript.GeneratedClassLoader} object.
      */
     public GeneratedClassLoader createClassLoader(ClassLoader parent)
     {
@@ -2450,6 +2583,11 @@ public class Context
         return f.createClassLoader(parent);
     }
 
+    /**
+     * <p>Getter for the field <code>applicationClassLoader</code>.</p>
+     *
+     * @return a {@link java.lang.ClassLoader} object.
+     */
     public final ClassLoader getApplicationClassLoader()
     {
         if (applicationClassLoader == null) {
@@ -2482,6 +2620,11 @@ public class Context
         return applicationClassLoader;
     }
 
+    /**
+     * <p>Setter for the field <code>applicationClassLoader</code>.</p>
+     *
+     * @param loader a {@link java.lang.ClassLoader} object.
+     */
     public final void setApplicationClassLoader(ClassLoader loader)
     {
         if (sealed) onSealedMutation();
@@ -2513,6 +2656,20 @@ public class Context
         return cx;
     }
 
+    /**
+     * <p>compileImpl.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sourceString a {@link java.lang.String} object.
+     * @param sourceName a {@link java.lang.String} object.
+     * @param lineno a int.
+     * @param securityDomain a {@link java.lang.Object} object.
+     * @param returnFunction a boolean.
+     * @param compiler a {@link org.mozilla.javascript.Evaluator} object.
+     * @param compilationErrorReporter a {@link org.mozilla.javascript.ErrorReporter} object.
+     * @return a {@link java.lang.Object} object.
+     * @throws java.io.IOException if any.
+     */
     protected Object compileImpl(Scriptable scope,
                                String sourceString, String sourceName, int lineno,
                                Object securityDomain, boolean returnFunction,
@@ -2694,6 +2851,11 @@ public class Context
         return securityController;
     }
 
+    /**
+     * <p>isGeneratingDebugChanged.</p>
+     *
+     * @return a boolean.
+     */
     public final boolean isGeneratingDebugChanged()
     {
         return generatingDebugChanged;
@@ -2718,7 +2880,6 @@ public class Context
      * forcing the creation of activation objects.
      *
      * @param name the name of the object to test
-     *
      * @return true if an function activation object is needed.
      */
     public final boolean isActivationNeeded(String name)
@@ -2739,6 +2900,11 @@ public class Context
             activationNames.remove(name);
     }
 
+    /**
+     * <p>isStrictMode.</p>
+     *
+     * @return a boolean.
+     */
     public final boolean isStrictMode() {
         return isTopLevelStrict || (currentActivationCall != null && currentActivationCall.isStrict);
     }

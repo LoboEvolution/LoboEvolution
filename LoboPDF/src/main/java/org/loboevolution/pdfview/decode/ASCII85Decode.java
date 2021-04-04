@@ -26,8 +26,9 @@ import org.loboevolution.pdfview.PDFParseException;
 
 /**
  * decode ASCII85 text into a byte array.
- * 
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class ASCII85Decode {
 
@@ -141,6 +142,7 @@ public class ASCII85Decode {
      * @param buf the encoded ASCII85 characters in a byte buffer
      * @param params parameters to the decoder (ignored)
      * @return the decoded bytes
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
     public static ByteBuffer decode(ByteBuffer buf, PDFObject params)
             throws PDFParseException {

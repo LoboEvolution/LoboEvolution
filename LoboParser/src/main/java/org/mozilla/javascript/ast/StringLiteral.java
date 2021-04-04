@@ -11,7 +11,10 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for a single- or double-quoted string literal.
- * Node type is {@link Token#STRING}.
+ * Node type is {@link org.mozilla.javascript.Token#STRING}.
+ *
+ *
+ *
  */
 public class StringLiteral extends AstNode {
 
@@ -22,16 +25,26 @@ public class StringLiteral extends AstNode {
         type = Token.STRING;
     }
 
+    /**
+     * <p>Constructor for StringLiteral.</p>
+     */
     public StringLiteral() {
     }
 
+    /**
+     * <p>Constructor for StringLiteral.</p>
+     *
+     * @param pos a int.
+     */
     public StringLiteral(int pos) {
         super(pos);
     }
 
     /**
      * Creates a string literal node at the specified position.
+     *
      * @param len the length <em>including</em> the enclosing quotes
+     * @param pos a int.
      */
     public StringLiteral(int pos, int len) {
         super(pos, len);
@@ -39,7 +52,8 @@ public class StringLiteral extends AstNode {
 
     /**
      * Returns the node's value:  the parsed string without the enclosing quotes
-     * @return the node's value, a {@link String} of unescaped characters
+     *
+     * @return the node's value, a {@link java.lang.String} of unescaped characters
      * that includes the delimiter quotes.
      */
     public String getValue() {
@@ -48,6 +62,9 @@ public class StringLiteral extends AstNode {
 
     /**
      * Returns the string value, optionally including the enclosing quotes.
+     *
+     * @param includeQuotes a boolean.
+     * @return a {@link java.lang.String} object.
      */
     public String getValue(boolean includeQuotes) {
         if (!includeQuotes)
@@ -57,8 +74,9 @@ public class StringLiteral extends AstNode {
 
     /**
      * Sets the node's value.  Do not include the enclosing quotes.
+     *
      * @param value the node's value
-     * @throws IllegalArgumentException} if value is {@code null}
+     * @throws java.lang.IllegalArgumentException} if value is {@code null}
      */
     public void setValue(String value) {
         assertNotNull(value);
@@ -67,15 +85,23 @@ public class StringLiteral extends AstNode {
 
     /**
      * Returns the character used as the delimiter for this string.
+     *
+     * @return a char.
      */
     public char getQuoteCharacter() {
         return quoteChar;
     }
 
+    /**
+     * <p>setQuoteCharacter.</p>
+     *
+     * @param c a char.
+     */
     public void setQuoteCharacter(char c) {
         quoteChar = c;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         return new StringBuilder(makeIndent(depth))
@@ -86,6 +112,8 @@ public class StringLiteral extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node.  There are no children to visit.
      */
     @Override

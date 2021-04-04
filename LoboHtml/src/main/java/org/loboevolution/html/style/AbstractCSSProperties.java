@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 20, 2005
@@ -50,8 +47,8 @@ import com.gargoylesoftware.css.util.CSSProperties;
 /**
  * <p>AbstractCSSProperties class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class AbstractCSSProperties extends AbstractScriptableDelegate implements CSSProperties, CSS3Properties {
 	
@@ -508,6 +505,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		return this.getPropertyValueLC(FLOAT);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public String getFlexDirection() {
 		return this.getPropertyValueLC(FLEX_DIRECTION);
@@ -525,6 +523,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		return this.getPropertyValueLC(FLEX_FLOW);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public String getJustifyContent() {
 		return this.getPropertyValueLC(JUSTIFY_CONTENT);
@@ -1780,7 +1779,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		this.context.informInvalid();
 	}
 
-	/** {@inheritDoc} */
+    /** {@inheritDoc} */
 	@Override
     public String getFill() {
         return this.getPropertyValueLC(FILL);
@@ -2113,6 +2112,11 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		}
 	}
 
+	/**
+	 * <p>Getter for the field <code>context</code>.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.CSSPropertiesContext} object.
+	 */
 	public CSSPropertiesContext getContext() {
 		return context;
 	}

@@ -1,9 +1,32 @@
+/*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact info: ivan.difrancesco@yahoo.it
+ */
+
 package org.loboevolution.html.node.events;
 
 import org.mozilla.javascript.Function;
 
 /**
  * The interface Global event handlers.
+ *
+ *
+ *
  */
 public interface GlobalEventHandlers extends EventTarget {
 	/**
@@ -11,7 +34,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onabort
 	 */
-
 	Function getOnabort();
 
 	/**
@@ -19,7 +41,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onabort the onabort
 	 */
-
 	void setOnabort(Function onabort);
 
 	/**
@@ -65,7 +86,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onanimationcancel
 	 */
-
 	Function getOnanimationcancel();
 
 	/**
@@ -73,7 +93,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onanimationcancel the onanimationcancel
 	 */
-
 	void setOnanimationcancel(Function onanimationcancel);
 
 	/**
@@ -119,7 +138,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onanimationend
 	 */
-
 	Function getOnanimationend();
 
 	/**
@@ -127,7 +145,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onanimationend the onanimationend
 	 */
-
 	void setOnanimationend(Function onanimationend);
 
 	/**
@@ -173,7 +190,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onanimationiteration
 	 */
-
 	Function getOnanimationiteration();
 
 	/**
@@ -181,7 +197,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onanimationiteration the onanimationiteration
 	 */
-
 	void setOnanimationiteration(Function onanimationiteration);
 
 	/**
@@ -227,7 +242,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onanimationstart
 	 */
-
 	Function getOnanimationstart();
 
 	/**
@@ -235,7 +249,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onanimationstart the onanimationstart
 	 */
-
 	void setOnanimationstart(Function onanimationstart);
 
 	/**
@@ -281,7 +294,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onauxclick
 	 */
-
 	Function getOnauxclick();
 
 	/**
@@ -289,7 +301,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onauxclick the onauxclick
 	 */
-
 	void setOnauxclick(Function onauxclick);
 
 	/**
@@ -333,11 +344,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Fires when the object loses the input focus.
 	 *
-	 *
-	 *
 	 * @return the onblur
 	 */
-
 	Function getOnblur();
 
 	/**
@@ -345,7 +353,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onblur the onblur
 	 */
-
 	void setOnblur(Function onblur);
 
 	/**
@@ -391,7 +398,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the oncancel
 	 */
-
 	Function getOncancel();
 
 	/**
@@ -399,7 +405,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param oncancel the oncancel
 	 */
-
 	void setOncancel(Function oncancel);
 
 	/**
@@ -445,7 +450,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the oncanplay
 	 */
-
 	Function getOncanplay();
 
 	/**
@@ -453,7 +457,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param oncanplay the oncanplay
 	 */
-
 	void setOncanplay(Function oncanplay);
 
 	/**
@@ -499,7 +502,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the oncanplaythrough
 	 */
-
 	Function getOncanplaythrough();
 
 	/**
@@ -507,7 +509,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param oncanplaythrough the oncanplaythrough
 	 */
-
 	void setOncanplaythrough(Function oncanplaythrough);
 
 	/**
@@ -553,7 +554,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onchange
 	 */
-
 	Function getOnchange();
 
 	/**
@@ -561,7 +561,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onchange the onchange
 	 */
-
 	void setOnchange(Function onchange);
 
 	/**
@@ -605,11 +604,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Fires when the user clicks the left mouse button on the object
 	 *
-	 *
-	 *
 	 * @return the onclick
 	 */
-
 	Function getOnclick();
 
 	/**
@@ -617,7 +613,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onclick the onclick
 	 */
-
 	void setOnclick(Function onclick);
 
 	/**
@@ -663,7 +658,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onclose
 	 */
-
 	Function getOnclose();
 
 	/**
@@ -671,7 +665,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onclose the onclose
 	 */
-
 	void setOnclose(Function onclose);
 
 	/**
@@ -716,11 +709,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	 * Fires when the user clicks the right mouse button in the client area, opening
 	 * the context menu.
 	 *
-	 *
-	 *
 	 * @return the oncontextmenu
 	 */
-
 	Function getOncontextmenu();
 
 	/**
@@ -728,7 +718,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param oncontextmenu the oncontextmenu
 	 */
-
 	void setOncontextmenu(Function oncontextmenu);
 
 	/**
@@ -774,7 +763,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the oncuechange
 	 */
-
 	Function getOncuechange();
 
 	/**
@@ -782,7 +770,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param oncuechange the oncuechange
 	 */
-
 	void setOncuechange(Function oncuechange);
 
 	/**
@@ -826,11 +813,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Fires when the user double-clicks the object.
 	 *
-	 *
-	 *
 	 * @return the ondblclick
 	 */
-
 	Function getOndblclick();
 
 	/**
@@ -838,7 +822,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondblclick the ondblclick
 	 */
-
 	void setOndblclick(Function ondblclick);
 
 	/**
@@ -884,7 +867,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ondrag
 	 */
-
 	Function getOndrag();
 
 	/**
@@ -892,7 +874,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondrag the ondrag
 	 */
-
 	void setOndrag(Function ondrag);
 
 	/**
@@ -939,7 +920,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ondragend
 	 */
-
 	Function getOndragend();
 
 	/**
@@ -947,7 +927,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondragend the ondragend
 	 */
-
 	void setOndragend(Function ondragend);
 
 	/**
@@ -992,11 +971,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	 * Fires on the target element when the user drags the object to a valid drop
 	 * target.
 	 *
-	 *
-	 *
 	 * @return the ondragenter
 	 */
-
 	Function getOndragenter();
 
 	/**
@@ -1004,7 +980,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondragenter the ondragenter
 	 */
-
 	void setOndragenter(Function ondragenter);
 
 	/**
@@ -1050,7 +1025,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ondragexit
 	 */
-
 	Function getOndragexit();
 
 	/**
@@ -1058,7 +1032,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondragexit the ondragexit
 	 */
-
 	void setOndragexit(Function ondragexit);
 
 	/**
@@ -1103,11 +1076,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	 * Fires on the target object when the user moves the mouse out of a valid drop
 	 * target during a drag operation.
 	 *
-	 *
-	 *
 	 * @return the ondragleave
 	 */
-
 	Function getOndragleave();
 
 	/**
@@ -1115,7 +1085,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondragleave the ondragleave
 	 */
-
 	void setOndragleave(Function ondragleave);
 
 	/**
@@ -1162,7 +1131,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ondragover
 	 */
-
 	Function getOndragover();
 
 	/**
@@ -1170,7 +1138,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondragover the ondragover
 	 */
-
 	void setOndragover(Function ondragover);
 
 	/**
@@ -1217,7 +1184,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ondragstart
 	 */
-
 	Function getOndragstart();
 
 	/**
@@ -1225,7 +1191,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondragstart the ondragstart
 	 */
-
 	void setOndragstart(Function ondragstart);
 
 	/**
@@ -1271,7 +1236,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ondrop
 	 */
-
 	Function getOndrop();
 
 	/**
@@ -1279,7 +1243,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondrop the ondrop
 	 */
-
 	void setOndrop(Function ondrop);
 
 	/**
@@ -1325,7 +1288,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ondurationchange
 	 */
-
 	Function getOndurationchange();
 
 	/**
@@ -1333,7 +1295,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ondurationchange the ondurationchange
 	 */
-
 	void setOndurationchange(Function ondurationchange);
 
 	/**
@@ -1379,7 +1340,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onemptied
 	 */
-
 	Function getOnemptied();
 
 	/**
@@ -1387,7 +1347,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onemptied the onemptied
 	 */
-
 	void setOnemptied(Function onemptied);
 
 	/**
@@ -1431,11 +1390,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Occurs when the end of playback is reached.
 	 *
-	 *
-	 *
 	 * @return the onended
 	 */
-
 	Function getOnended();
 
 	/**
@@ -1443,7 +1399,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onended the onended
 	 */
-
 	void setOnended(Function onended);
 
 	/**
@@ -1489,7 +1444,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onerror
 	 */
-
 	Function getOnerror();
 
 	/**
@@ -1497,7 +1451,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onerror the onerror
 	 */
-
 	void setOnerror(Function onerror);
 
 	/**
@@ -1543,7 +1496,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onfocus
 	 */
-
 	Function getOnfocus();
 
 	/**
@@ -1551,7 +1503,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onfocus the onfocus
 	 */
-
 	void setOnfocus(Function onfocus);
 
 	/**
@@ -1597,7 +1548,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onfocusin
 	 */
-
 	Function getOnfocusin();
 
 	/**
@@ -1605,7 +1555,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onfocusin the onfocusin
 	 */
-
 	void setOnfocusin(Function onfocusin);
 
 	/**
@@ -1651,7 +1600,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onfocusout
 	 */
-
 	Function getOnfocusout();
 
 	/**
@@ -1659,7 +1607,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onfocusout the onfocusout
 	 */
-
 	void setOnfocusout(Function onfocusout);
 
 	/**
@@ -1705,7 +1652,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ongotpointercapture
 	 */
-
 	Function getOngotpointercapture();
 
 	/**
@@ -1713,7 +1659,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ongotpointercapture the ongotpointercapture
 	 */
-
 	void setOngotpointercapture(Function ongotpointercapture);
 
 	/**
@@ -1759,7 +1704,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the oninput
 	 */
-
 	Function getOninput();
 
 	/**
@@ -1767,7 +1711,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param oninput the oninput
 	 */
-
 	void setOninput(Function oninput);
 
 	/**
@@ -1813,7 +1756,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the oninvalid
 	 */
-
 	Function getOninvalid();
 
 	/**
@@ -1821,7 +1763,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param oninvalid the oninvalid
 	 */
-
 	void setOninvalid(Function oninvalid);
 
 	/**
@@ -1865,11 +1806,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Fires when the user presses a key.
 	 *
-	 *
-	 *
 	 * @return the onkeydown
 	 */
-
 	Function getOnkeydown();
 
 	/**
@@ -1877,7 +1815,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onkeydown the onkeydown
 	 */
-
 	void setOnkeydown(Function onkeydown);
 
 	/**
@@ -1923,7 +1860,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onkeypress
 	 */
-
 	Function getOnkeypress();
 
 	/**
@@ -1931,7 +1867,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onkeypress the onkeypress
 	 */
-
 	void setOnkeypress(Function onkeypress);
 
 	/**
@@ -1975,11 +1910,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Fires when the user releases a key.
 	 *
-	 *
-	 *
 	 * @return the onkeyup
 	 */
-
 	Function getOnkeyup();
 
 	/**
@@ -1987,7 +1919,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onkeyup the onkeyup
 	 */
-
 	void setOnkeyup(Function onkeyup);
 
 	/**
@@ -2033,7 +1964,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onload
 	 */
-
 	Function getOnload();
 
 	/**
@@ -2041,7 +1971,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onload the onload
 	 */
-
 	void setOnload(Function onload);
 
 	/**
@@ -2087,7 +2016,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onloadeddata
 	 */
-
 	Function getOnloadeddata();
 
 	/**
@@ -2095,7 +2023,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onloadeddata the onloadeddata
 	 */
-
 	void setOnloadeddata(Function onloadeddata);
 
 	/**
@@ -2141,7 +2068,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onloadedmetadata
 	 */
-
 	Function getOnloadedmetadata();
 
 	/**
@@ -2149,7 +2075,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onloadedmetadata the onloadedmetadata
 	 */
-
 	void setOnloadedmetadata(Function onloadedmetadata);
 
 	/**
@@ -2195,7 +2120,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onloadend
 	 */
-
 	Function getOnloadend();
 
 	/**
@@ -2203,7 +2127,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onloadend the onloadend
 	 */
-
 	void setOnloadend(Function onloadend);
 
 	/**
@@ -2249,7 +2172,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onloadstart
 	 */
-
 	Function getOnloadstart();
 
 	/**
@@ -2257,7 +2179,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onloadstart the onloadstart
 	 */
-
 	void setOnloadstart(Function onloadstart);
 
 	/**
@@ -2303,7 +2224,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onlostpointercapture
 	 */
-
 	Function getOnlostpointercapture();
 
 	/**
@@ -2311,7 +2231,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onlostpointercapture the onlostpointercapture
 	 */
-
 	void setOnlostpointercapture(Function onlostpointercapture);
 
 	/**
@@ -2355,11 +2274,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Fires when the user clicks the object with either mouse button.
 	 *
-	 *
-	 *
 	 * @return the onmousedown
 	 */
-
 	Function getOnmousedown();
 
 	/**
@@ -2367,7 +2283,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onmousedown the onmousedown
 	 */
-
 	void setOnmousedown(Function onmousedown);
 
 	/**
@@ -2413,7 +2328,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onmouseenter
 	 */
-
 	Function getOnmouseenter();
 
 	/**
@@ -2421,7 +2335,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onmouseenter the onmouseenter
 	 */
-
 	void setOnmouseenter(Function onmouseenter);
 
 	/**
@@ -2467,7 +2380,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onmouseleave
 	 */
-
 	Function getOnmouseleave();
 
 	/**
@@ -2475,7 +2387,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onmouseleave the onmouseleave
 	 */
-
 	void setOnmouseleave(Function onmouseleave);
 
 	/**
@@ -2519,11 +2430,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Fires when the user moves the mouse over the object.
 	 *
-	 *
-	 *
 	 * @return the onmousemove
 	 */
-
 	Function getOnmousemove();
 
 	/**
@@ -2531,7 +2439,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onmousemove the onmousemove
 	 */
-
 	void setOnmousemove(Function onmousemove);
 
 	/**
@@ -2576,11 +2483,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	 * Fires when the user moves the mouse pointer outside the boundaries of the
 	 * object.
 	 *
-	 *
-	 *
 	 * @return the onmouseout
 	 */
-
 	Function getOnmouseout();
 
 	/**
@@ -2588,7 +2492,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onmouseout the onmouseout
 	 */
-
 	void setOnmouseout(Function onmouseout);
 
 	/**
@@ -2632,11 +2535,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	/**
 	 * Fires when the user moves the mouse pointer into the object.
 	 *
-	 *
-	 *
 	 * @return the onmouseover
 	 */
-
 	Function getOnmouseover();
 
 	/**
@@ -2644,7 +2544,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onmouseover the onmouseover
 	 */
-
 	void setOnmouseover(Function onmouseover);
 
 	/**
@@ -2689,11 +2588,8 @@ public interface GlobalEventHandlers extends EventTarget {
 	 * Fires when the user releases a mouse button while the mouse is over the
 	 * object.
 	 *
-	 *
-	 *
 	 * @return the onmouseup
 	 */
-
 	Function getOnmouseup();
 
 	/**
@@ -2701,7 +2597,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onmouseup the onmouseup
 	 */
-
 	void setOnmouseup(Function onmouseup);
 
 	/**
@@ -2747,7 +2642,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpause
 	 */
-
 	Function getOnpause();
 
 	/**
@@ -2755,7 +2649,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpause the onpause
 	 */
-
 	void setOnpause(Function onpause);
 
 	/**
@@ -2801,7 +2694,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onplay
 	 */
-
 	Function getOnplay();
 
 	/**
@@ -2809,7 +2701,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onplay the onplay
 	 */
-
 	void setOnplay(Function onplay);
 
 	/**
@@ -2855,7 +2746,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onplaying
 	 */
-
 	Function getOnplaying();
 
 	/**
@@ -2863,7 +2753,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onplaying the onplaying
 	 */
-
 	void setOnplaying(Function onplaying);
 
 	/**
@@ -2909,7 +2798,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpointercancel
 	 */
-
 	Function getOnpointercancel();
 
 	/**
@@ -2917,7 +2805,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpointercancel the onpointercancel
 	 */
-
 	void setOnpointercancel(Function onpointercancel);
 
 	/**
@@ -2963,7 +2850,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpointerdown
 	 */
-
 	Function getOnpointerdown();
 
 	/**
@@ -2971,7 +2857,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpointerdown the onpointerdown
 	 */
-
 	void setOnpointerdown(Function onpointerdown);
 
 	/**
@@ -3017,7 +2902,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpointerenter
 	 */
-
 	Function getOnpointerenter();
 
 	/**
@@ -3025,7 +2909,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpointerenter the onpointerenter
 	 */
-
 	void setOnpointerenter(Function onpointerenter);
 
 	/**
@@ -3072,7 +2955,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpointerleave
 	 */
-
 	Function getOnpointerleave();
 
 	/**
@@ -3080,7 +2962,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpointerleave the onpointerleave
 	 */
-
 	void setOnpointerleave(Function onpointerleave);
 
 	/**
@@ -3126,7 +3007,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpointermove
 	 */
-
 	Function getOnpointermove();
 
 	/**
@@ -3134,7 +3014,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpointermove the onpointermove
 	 */
-
 	void setOnpointermove(Function onpointermove);
 
 	/**
@@ -3180,7 +3059,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpointerout
 	 */
-
 	Function getOnpointerout();
 
 	/**
@@ -3188,7 +3066,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpointerout the onpointerout
 	 */
-
 	void setOnpointerout(Function onpointerout);
 
 	/**
@@ -3234,7 +3111,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpointerover
 	 */
-
 	Function getOnpointerover();
 
 	/**
@@ -3242,7 +3118,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpointerover the onpointerover
 	 */
-
 	void setOnpointerover(Function onpointerover);
 
 	/**
@@ -3288,7 +3163,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onpointerup
 	 */
-
 	Function getOnpointerup();
 
 	/**
@@ -3296,7 +3170,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onpointerup the onpointerup
 	 */
-
 	void setOnpointerup(Function onpointerup);
 
 	/**
@@ -3342,7 +3215,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onprogress
 	 */
-
 	Function getOnprogress();
 
 	/**
@@ -3350,7 +3222,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onprogress the onprogress
 	 */
-
 	void setOnprogress(Function onprogress);
 
 	/**
@@ -3396,7 +3267,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onratechange
 	 */
-
 	Function getOnratechange();
 
 	/**
@@ -3404,7 +3274,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onratechange the onratechange
 	 */
-
 	void setOnratechange(Function onratechange);
 
 	/**
@@ -3450,7 +3319,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onreset
 	 */
-
 	Function getOnreset();
 
 	/**
@@ -3458,7 +3326,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onreset the onreset
 	 */
-
 	void setOnreset(Function onreset);
 
 	/**
@@ -3504,7 +3371,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onresize
 	 */
-
 	Function getOnresize();
 
 	/**
@@ -3512,7 +3378,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onresize the onresize
 	 */
-
 	void setOnresize(Function onresize);
 
 	/**
@@ -3559,7 +3424,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onscroll
 	 */
-
 	Function getOnscroll();
 
 	/**
@@ -3567,7 +3431,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onscroll the onscroll
 	 */
-
 	void setOnscroll(Function onscroll);
 
 	/**
@@ -3613,7 +3476,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onsecuritypolicyviolation
 	 */
-
 	Function getOnsecuritypolicyviolation();
 
 	/**
@@ -3621,7 +3483,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onsecuritypolicyviolation the onsecuritypolicyviolation
 	 */
-
 	void setOnsecuritypolicyviolation(Function onsecuritypolicyviolation);
 
 	/**
@@ -3667,7 +3528,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onseeked
 	 */
-
 	Function getOnseeked();
 
 	/**
@@ -3675,7 +3535,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onseeked the onseeked
 	 */
-
 	void setOnseeked(Function onseeked);
 
 	/**
@@ -3721,7 +3580,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onseeking
 	 */
-
 	Function getOnseeking();
 
 	/**
@@ -3729,7 +3587,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onseeking the onseeking
 	 */
-
 	void setOnseeking(Function onseeking);
 
 	/**
@@ -3775,7 +3632,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onselect
 	 */
-
 	Function getOnselect();
 
 	/**
@@ -3783,7 +3639,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onselect the onselect
 	 */
-
 	void setOnselect(Function onselect);
 
 	/**
@@ -3829,7 +3684,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onselectionchange
 	 */
-
 	Function getOnselectionchange();
 
 	/**
@@ -3837,7 +3691,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onselectionchange the onselectionchange
 	 */
-
 	void setOnselectionchange(Function onselectionchange);
 
 	/**
@@ -3883,7 +3736,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onselectstart
 	 */
-
 	Function getOnselectstart();
 
 	/**
@@ -3891,7 +3743,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onselectstart the onselectstart
 	 */
-
 	void setOnselectstart(Function onselectstart);
 
 	/**
@@ -3937,7 +3788,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onstalled
 	 */
-
 	Function getOnstalled();
 
 	/**
@@ -3945,7 +3795,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onstalled the onstalled
 	 */
-
 	void setOnstalled(Function onstalled);
 
 	/**
@@ -3991,7 +3840,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onsubmit
 	 */
-
 	Function getOnsubmit();
 
 	/**
@@ -3999,7 +3847,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onsubmit the onsubmit
 	 */
-
 	void setOnsubmit(Function onsubmit);
 
 	/**
@@ -4045,7 +3892,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onsuspend
 	 */
-
 	Function getOnsuspend();
 
 	/**
@@ -4053,7 +3899,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onsuspend the onsuspend
 	 */
-
 	void setOnsuspend(Function onsuspend);
 
 	/**
@@ -4099,7 +3944,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontimeupdate
 	 */
-
 	Function getOntimeupdate();
 
 	/**
@@ -4107,7 +3951,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontimeupdate the ontimeupdate
 	 */
-
 	void setOntimeupdate(Function ontimeupdate);
 
 	/**
@@ -4153,7 +3996,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontoggle
 	 */
-
 	Function getOntoggle();
 
 	/**
@@ -4161,7 +4003,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontoggle the ontoggle
 	 */
-
 	void setOntoggle(Function ontoggle);
 
 	/**
@@ -4207,7 +4048,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontouchcancel
 	 */
-
 	Function getOntouchcancel();
 
 	/**
@@ -4215,7 +4055,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontouchcancel the ontouchcancel
 	 */
-
 	void setOntouchcancel(Function ontouchcancel);
 
 	/**
@@ -4261,7 +4100,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontouchend
 	 */
-
 	Function getOntouchend();
 
 	/**
@@ -4269,7 +4107,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontouchend the ontouchend
 	 */
-
 	void setOntouchend(Function ontouchend);
 
 	/**
@@ -4315,7 +4152,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontouchmove
 	 */
-
 	Function getOntouchmove();
 
 	/**
@@ -4323,7 +4159,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontouchmove the ontouchmove
 	 */
-
 	void setOntouchmove(Function ontouchmove);
 
 	/**
@@ -4369,7 +4204,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontouchstart
 	 */
-
 	Function getOntouchstart();
 
 	/**
@@ -4377,7 +4211,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontouchstart the ontouchstart
 	 */
-
 	void setOntouchstart(Function ontouchstart);
 
 	/**
@@ -4423,7 +4256,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontransitioncancel
 	 */
-
 	Function getOntransitioncancel();
 
 	/**
@@ -4431,7 +4263,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontransitioncancel the ontransitioncancel
 	 */
-
 	void setOntransitioncancel(Function ontransitioncancel);
 
 	/**
@@ -4477,7 +4308,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontransitionend
 	 */
-
 	Function getOntransitionend();
 
 	/**
@@ -4485,7 +4315,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontransitionend the ontransitionend
 	 */
-
 	void setOntransitionend(Function ontransitionend);
 
 	/**
@@ -4531,7 +4360,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontransitionrun
 	 */
-
 	Function getOntransitionrun();
 
 	/**
@@ -4539,7 +4367,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontransitionrun the ontransitionrun
 	 */
-
 	void setOntransitionrun(Function ontransitionrun);
 
 	/**
@@ -4585,7 +4412,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the ontransitionstart
 	 */
-
 	Function getOntransitionstart();
 
 	/**
@@ -4593,7 +4419,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param ontransitionstart the ontransitionstart
 	 */
-
 	void setOntransitionstart(Function ontransitionstart);
 
 	/**
@@ -4639,7 +4464,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onvolumechange
 	 */
-
 	Function getOnvolumechange();
 
 	/**
@@ -4647,7 +4471,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onvolumechange the onvolumechange
 	 */
-
 	void setOnvolumechange(Function onvolumechange);
 
 	/**
@@ -4694,7 +4517,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onwaiting
 	 */
-
 	Function getOnwaiting();
 
 	/**
@@ -4702,7 +4524,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onwaiting the onwaiting
 	 */
-
 	void setOnwaiting(Function onwaiting);
 
 	/**
@@ -4748,7 +4569,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @return the onwheel
 	 */
-
 	Function getOnwheel();
 
 	/**
@@ -4756,7 +4576,6 @@ public interface GlobalEventHandlers extends EventTarget {
 	 *
 	 * @param onwheel the onwheel
 	 */
-
 	void setOnwheel(Function onwheel);
 
 	/**

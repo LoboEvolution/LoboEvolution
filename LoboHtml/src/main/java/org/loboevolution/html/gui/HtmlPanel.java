@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 19, 2005
@@ -76,8 +73,8 @@ import org.xml.sax.InputSource;
  * Invoke method {@link #setDocument(Document, HtmlRendererContext)} in order to
  * schedule a document for rendering.
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class HtmlPanel extends JComponent implements FrameContext {
 	
@@ -560,7 +557,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 *                 <p>
 	 * @param rcontext A renderer context.
 	 * @see org.loboevolution.html.parser.DocumentBuilderImpl#parse(org.xml.sax.InputSource)
-	 * 
 	 */
 	public void setDocument(final Document node, final HtmlRendererContext rcontext) {
 		if (SwingUtilities.isEventDispatchThread()) {
@@ -603,7 +599,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @param htmlSource The HTML source code.
 	 * @param uri        A base URI used to resolve item URIs.
 	 * @param rcontext   The {@link org.loboevolution.http.HtmlRendererContext} instance.
-	 * 
 	 * @see #setDocument(Document, HtmlRendererContext)
 	 */
 	public void setHtml(String htmlSource, String uri, HtmlRendererContext rcontext) {

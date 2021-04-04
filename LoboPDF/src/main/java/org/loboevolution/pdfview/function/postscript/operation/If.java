@@ -6,6 +6,8 @@ import java.util.Stack;
 final class If implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>bool {proc}</i> <b>if</b> - <p>
 	 *
 	 * removes both operands from the stack, then executes proc

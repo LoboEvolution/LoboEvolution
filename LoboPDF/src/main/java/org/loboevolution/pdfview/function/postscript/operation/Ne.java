@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Ne implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>any1 any2</i> <b>ne</b> <i>bool</i> <p>
 	 *
 	 * pops two objects from the operand stack and pushes false

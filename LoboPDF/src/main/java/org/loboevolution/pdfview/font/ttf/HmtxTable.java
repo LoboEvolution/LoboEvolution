@@ -24,7 +24,8 @@ import java.util.Arrays;
 /**
  * Model the TrueType Post table
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class HmtxTable extends TrueTypeTable {
     
@@ -34,7 +35,11 @@ public class HmtxTable extends TrueTypeTable {
     /** left side bearings for each glyph */
     final short[] leftSideBearings;
 
-    /** Creates a new instance of HmtxTable */
+    /**
+     * Creates a new instance of HmtxTable
+     *
+     * @param ttf a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
+     */
     protected HmtxTable(TrueTypeFont ttf) {
         super (TrueTypeTable.HMTX_TABLE);
 
@@ -50,7 +55,12 @@ public class HmtxTable extends TrueTypeTable {
         this.leftSideBearings = new short[numGlyphs]; 
     }
     
-    /** get the advance of a given glyph */
+    /**
+     * get the advance of a given glyph
+     *
+     * @param glyphID a int.
+     * @return a short.
+     */
     public short getAdvance(int glyphID) {
         if (glyphID < this.advanceWidths.length) {
             return this.advanceWidths[glyphID];
@@ -59,12 +69,21 @@ public class HmtxTable extends TrueTypeTable {
         }
     }
       
-    /** get the left side bearing of a given glyph */
+    /**
+     * get the left side bearing of a given glyph
+     *
+     * @param glyphID a int.
+     * @return a short.
+     */
     public short getLeftSideBearing(int glyphID) {
         return this.leftSideBearings[glyphID];
     }
     
-    /** get the data in this map as a ByteBuffer */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * get the data in this map as a ByteBuffer
+	 */
     @Override
 	public ByteBuffer getData() {
         int size = getLength();
@@ -86,7 +105,11 @@ public class HmtxTable extends TrueTypeTable {
         return buf;
     }
     
-    /** Initialize this structure from a ByteBuffer */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Initialize this structure from a ByteBuffer
+	 */
     @Override
 	public void setData(ByteBuffer data) {
         // some PDF writers subset the font but don't update the number of glyphs in the maxp table,
@@ -113,9 +136,11 @@ public class HmtxTable extends TrueTypeTable {
         }
     }
     
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public int getLength() {
         return (this.advanceWidths.length * 2) + (this.leftSideBearings.length * 2);

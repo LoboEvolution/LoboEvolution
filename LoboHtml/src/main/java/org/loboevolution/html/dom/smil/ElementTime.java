@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.dom.smil;
@@ -29,8 +26,8 @@ import org.loboevolution.html.dom.nodeimpl.DOMException;
  * This interface defines the set of timing attributes that are common to all
  * timed elements.
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public interface ElementTime {
 
@@ -98,6 +95,7 @@ public interface ElementTime {
 	 *
 	 * @param dur a float.
 	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	void setDur(float dur) throws DOMException;
 
@@ -119,7 +117,7 @@ public interface ElementTime {
 	 */
 	default void setRestart(short restart) {}
 
-    /**
+	/**
 	 * A code representing the value of the fill attribute, as defined above.
 	 * Default value is FILL_REMOVE .
 	 *
@@ -135,6 +133,7 @@ public interface ElementTime {
 	 *
 	 * @param fill a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	void setFill(String fill) throws DOMException;
 
@@ -155,6 +154,7 @@ public interface ElementTime {
 	 *
 	 * @param repeatCount a float.
 	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	void setRepeatCount(float repeatCount) throws DOMException;
 
@@ -174,6 +174,7 @@ public interface ElementTime {
 	 *
 	 * @param repeatDur a float.
 	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	void setRepeatDur(float repeatDur) throws DOMException;
 

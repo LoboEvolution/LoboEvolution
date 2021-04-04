@@ -47,7 +47,8 @@ import org.loboevolution.pdfview.PDFStringUtil;
  * password-based decryption mechanisms, as described in section 3.5 of
  * the PDF Reference version 1.7.
  *
- * @author Luke Kirby
+ * Author Luke Kirby
+  *
  */
 public class StandardDecrypter implements PDFDecrypter {
 
@@ -136,11 +137,9 @@ public class StandardDecrypter implements PDFDecrypter {
      * @param encryptMetadata whether metadata is being encrypted, as identified
      * by the Encrypt dict (with default true if not explicitly identified)
      * @param password the password; not null
-     * @throws IOException if there's a problem reading the file
-     * @throws EncryptionUnsupportedByPlatformException if the encryption is not
-     * supported by the environment in which the code is executing
-     * @throws EncryptionUnsupportedByProductException if PDFRenderer does not
-     * currently support the specified encryption
+     * @throws java.io.IOException if any.
+     * @throws org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByProductException if any.
+     * @throws org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByPlatformException if any.
      */
     public StandardDecrypter(
             EncryptionAlgorithm encryptionAlgorithm,
@@ -202,6 +201,7 @@ public class StandardDecrypter implements PDFDecrypter {
 
     }
 
+	/** {@inheritDoc} */
     @Override
 	public ByteBuffer decryptBuffer(
             String cryptFilterName, PDFObject streamObj, ByteBuffer streamBuf)
@@ -228,6 +228,7 @@ public class StandardDecrypter implements PDFDecrypter {
         return decryptBuffer(streamBuf, decryptionKeyBytes);
     }
 
+	/** {@inheritDoc} */
     @Override
 	public String decryptString(int objNum, int objGen, String inputBasicString)
             throws PDFParseException {
@@ -237,16 +238,19 @@ public class StandardDecrypter implements PDFDecrypter {
         return PDFStringUtil.asBasicString(decrypted.array(), decrypted.arrayOffset(), decrypted.limit());
     }
 
+	/** {@inheritDoc} */
     @Override
 	public boolean isOwnerAuthorised() {
         return this.ownerAuthorised;
     }
 
+	/** {@inheritDoc} */
     @Override
 	public boolean isEncryptionPresent() {
         return true;
     }
     
+	/** {@inheritDoc} */
     @Override
 	public boolean isEncryptionPresent(String cryptFilterName) {
         return true;

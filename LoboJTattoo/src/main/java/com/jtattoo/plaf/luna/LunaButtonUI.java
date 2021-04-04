@@ -43,8 +43,8 @@ import com.jtattoo.plaf.BaseButtonUI;
 /**
  * <p>LunaButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LunaButtonUI extends BaseButtonUI {
 

@@ -76,6 +76,9 @@ import org.loboevolution.pdfview.action.ZoomOutAction;
 
 /**
  * The Class PDFViewer.
+ *
+  *
+  *
  */
 public class PDFViewer extends JFrame implements KeyListener, PageChangeListener, TreeSelectionListener {
 
@@ -262,11 +265,10 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Changes the displayed page, desyncing if we're not on the same page as a
 	 * presenter.
-	 *
-	 * @param pagenum
-	 *            the page to display
 	 */
 	@Override
 	public void gotoPage(int pagenum) {
@@ -341,8 +343,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *
 	 * @param url
 	 *            the url
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws java.io.IOException if any.
 	 */
 	public void openFile(URL url) throws IOException {
 		try {
@@ -376,8 +377,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *
 	 * @param file
 	 *            the file to open
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws java.io.IOException if any.
 	 */
 	public void openFile(File file) throws IOException {
 		// first open the file for random access
@@ -483,6 +483,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 
 	/**
 	 * makes the page fit in the window
+	 *
+	 * @param width a boolean.
+	 * @param height a boolean.
 	 */
 	public void doFit(boolean width, boolean height) {
 		assert width || height;
@@ -603,6 +606,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		}
 	}
 	
+	/**
+	 * <p>doCloseOutline.</p>
+	 */
 	public void doCloseOutline() {
 		if (olf != null) {
 			olf.setVisible(false);
@@ -612,10 +618,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	}
 
 	/**
-	 * Handle a key press for navigation.
+	 * {@inheritDoc}
 	 *
-	 * @param evt
-	 *            the evt
+	 * Handle a key press for navigation.
 	 */
 	@Override
 	public void keyPressed(KeyEvent evt) {
@@ -655,16 +660,16 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *
 	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void keyReleased(KeyEvent evt) {
 		// Method not implemented
 	}
 
 	/**
-	 * gets key presses and tries to build a page if they're numeric.
+	 * {@inheritDoc}
 	 *
-	 * @param evt
-	 *            the evt
+	 * gets key presses and tries to build a page if they're numeric.
 	 */
 	@Override
 	public void keyTyped(KeyEvent evt) {
@@ -676,10 +681,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	}
 
 	/**
-	 * Someone changed the selection of the outline tree. Go to the new page.
+	 * {@inheritDoc}
 	 *
-	 * @param e
-	 *            the e
+	 * Someone changed the selection of the outline tree. Go to the new page.
 	 */
 	@Override
 	public void valueChanged(TreeSelectionEvent e) {

@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Neg implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1</i> <b>neg</b> <i>num2</i> <p>
 	 *
 	 * returns the negative of num1. The type of the result

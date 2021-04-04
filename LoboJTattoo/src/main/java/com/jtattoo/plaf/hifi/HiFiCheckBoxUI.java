@@ -30,8 +30,8 @@ import javax.swing.plaf.ComponentUI;
 /**
  * <p>HiFiCheckBoxUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiCheckBoxUI extends HiFiRadioButtonUI {
 

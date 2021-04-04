@@ -22,8 +22,10 @@ package org.loboevolution.pdfview.font.ttf;
 import java.nio.ByteBuffer;
 
 /**
+ * <p>HheaTable class.</p>
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class HheaTable extends TrueTypeTable {
     
@@ -66,7 +68,8 @@ public class HheaTable extends TrueTypeTable {
     /** Holds value of property numOfLongHorMetrics. */
     private short numOfLongHorMetrics;
     
-    /** Creates a new instance of HeadTable 
+    /**
+     * Creates a new instance of HeadTable
      * Makes up reasonable(?) defaults for all values
      */
     protected HheaTable() {
@@ -75,9 +78,11 @@ public class HheaTable extends TrueTypeTable {
         setVersion(0x10000);
     }
     
-    /**
-     * Parse the data before it is set
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Parse the data before it is set
+	 */
     @Override
 	public void setData(ByteBuffer data) {
         if (data.remaining() != 36) {
@@ -105,9 +110,11 @@ public class HheaTable extends TrueTypeTable {
         setNumOfLongHorMetrics(data.getShort());
     }
     
-    /**
-     * Get the data we have stored
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the data we have stored
+	 */
     @Override
 	public ByteBuffer getData() {
         ByteBuffer buf = ByteBuffer.allocate(getLength());
@@ -139,33 +146,39 @@ public class HheaTable extends TrueTypeTable {
         return buf;
     }
     
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public int getLength() {
         return 36;
     }
     
-    /** Getter for property version.
-     * @return Value of property version.
+    /**
+     * Getter for property version.
      *
+     * @return Value of property version.
      */
     public int getVersion() {
         return this.version;
     }
    
-    /** Setter for property version.
-     * @param version New value of property version.
+    /**
+     * Setter for property version.
      *
+     * @param version New value of property version.
      */
     public void setVersion(int version) {
         this.version = version;
     }
     
-    /**
-     * Create a pretty string
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Create a pretty string
+	 */
     @Override
 	public String toString() {
         StringBuilder buf = new StringBuilder();
@@ -187,193 +200,217 @@ public class HheaTable extends TrueTypeTable {
         return buf.toString();
     }
     
-    /** Getter for property ascent.
-     * @return Value of property ascent.
+    /**
+     * Getter for property ascent.
      *
+     * @return Value of property ascent.
      */
     public short getAscent() {
         return this.ascent;
     }
     
-    /** Setter for property ascent.
-     * @param ascent New value of property ascent.
+    /**
+     * Setter for property ascent.
      *
+     * @param ascent New value of property ascent.
      */
     public void setAscent(short ascent) {
         this.ascent = ascent;
     }
     
-    /** Getter for property descent.
-     * @return Value of property descent.
+    /**
+     * Getter for property descent.
      *
+     * @return Value of property descent.
      */
     public short getDescent() {
         return this.descent;
     }
     
-    /** Setter for property descent.
-     * @param descent New value of property descent.
+    /**
+     * Setter for property descent.
      *
+     * @param descent New value of property descent.
      */
     public void setDescent(short descent) {
         this.descent = descent;
     }
     
-    /** Getter for property lineGap.
-     * @return Value of property lineGap.
+    /**
+     * Getter for property lineGap.
      *
+     * @return Value of property lineGap.
      */
     public short getLineGap() {
         return this.lineGap;
     }
     
-    /** Setter for property lineGap.
-     * @param lineGap New value of property lineGap.
+    /**
+     * Setter for property lineGap.
      *
+     * @param lineGap New value of property lineGap.
      */
     public void setLineGap(short lineGap) {
         this.lineGap = lineGap;
     }
     
-    /** Getter for property advanceWidthMax.
-     * @return Value of property advanceWidthMax.
+    /**
+     * Getter for property advanceWidthMax.
      *
+     * @return Value of property advanceWidthMax.
      */
     public short getAdvanceWidthMax() {
         return this.advanceWidthMax;
     }
     
-    /** Setter for property advanceWidthMax.
-     * @param advanceWidthMax New value of property advanceWidthMax.
+    /**
+     * Setter for property advanceWidthMax.
      *
+     * @param advanceWidthMax New value of property advanceWidthMax.
      */
     public void setAdvanceWidthMax(short advanceWidthMax) {
         this.advanceWidthMax = advanceWidthMax;
     }
     
-    /** Getter for property minLeftSideBearing.
-     * @return Value of property minLeftSideBearing.
+    /**
+     * Getter for property minLeftSideBearing.
      *
+     * @return Value of property minLeftSideBearing.
      */
     public short getMinLeftSideBearing() {
         return this.minLeftSideBearing;
     }
     
-    /** Setter for property minLeftSideBearing.
-     * @param minLeftSideBearing New value of property minLeftSideBearing.
+    /**
+     * Setter for property minLeftSideBearing.
      *
+     * @param minLeftSideBearing New value of property minLeftSideBearing.
      */
     public void setMinLeftSideBearing(short minLeftSideBearing) {
         this.minLeftSideBearing = minLeftSideBearing;
     }
     
-    /** Getter for property minRIghtSideBearing.
-     * @return Value of property minRIghtSideBearing.
+    /**
+     * Getter for property minRIghtSideBearing.
      *
+     * @return Value of property minRIghtSideBearing.
      */
     public short getMinRightSideBearing() {
         return this.minRightSideBearing;
     }
     
-    /** Setter for property minRIghtSideBearing.
-     * @param minRightSideBearing New value of property minRIghtSideBearing.
+    /**
+     * Setter for property minRIghtSideBearing.
      *
+     * @param minRightSideBearing New value of property minRIghtSideBearing.
      */
     public void setMinRightSideBearing(short minRightSideBearing) {
         this.minRightSideBearing = minRightSideBearing;
     }
     
-    /** Getter for property xMaxExtent.
-     * @return Value of property xMaxExtent.
+    /**
+     * Getter for property xMaxExtent.
      *
+     * @return Value of property xMaxExtent.
      */
     public short getXMaxExtent() {
         return this.xMaxExtent;
     }
     
-    /** Setter for property xMaxExtent.
-     * @param xMaxExtent New value of property xMaxExtent.
+    /**
+     * Setter for property xMaxExtent.
      *
+     * @param xMaxExtent New value of property xMaxExtent.
      */
     public void setXMaxExtent(short xMaxExtent) {
         this.xMaxExtent = xMaxExtent;
     }
     
-    /** Getter for property caretSlopeRise.
-     * @return Value of property caretSlopeRise.
+    /**
+     * Getter for property caretSlopeRise.
      *
+     * @return Value of property caretSlopeRise.
      */
     public short getCaretSlopeRise() {
         return this.caretSlopeRise;
     }
     
-    /** Setter for property caretSlopeRise.
-     * @param caretSlopeRise New value of property caretSlopeRise.
+    /**
+     * Setter for property caretSlopeRise.
      *
+     * @param caretSlopeRise New value of property caretSlopeRise.
      */
     public void setCaretSlopeRise(short caretSlopeRise) {
         this.caretSlopeRise = caretSlopeRise;
     }
     
-    /** Getter for property caretSlopeRun.
-     * @return Value of property caretSlopeRun.
+    /**
+     * Getter for property caretSlopeRun.
      *
+     * @return Value of property caretSlopeRun.
      */
     public short getCaretSlopeRun() {
         return this.caretSlopeRun;
     }
     
-    /** Setter for property caretSlopeRun.
-     * @param caretSlopeRun New value of property caretSlopeRun.
+    /**
+     * Setter for property caretSlopeRun.
      *
+     * @param caretSlopeRun New value of property caretSlopeRun.
      */
     public void setCaretSlopeRun(short caretSlopeRun) {
         this.caretSlopeRun = caretSlopeRun;
     }
     
-    /** Getter for property caretOffset.
-     * @return Value of property caretOffset.
+    /**
+     * Getter for property caretOffset.
      *
+     * @return Value of property caretOffset.
      */
     public short getCaretOffset() {
         return this.caretOffset;
     }
     
-    /** Setter for property caretOffset.
-     * @param caretOffset New value of property caretOffset.
+    /**
+     * Setter for property caretOffset.
      *
+     * @param caretOffset New value of property caretOffset.
      */
     public void setCaretOffset(short caretOffset) {
         this.caretOffset = caretOffset;
     }
     
-    /** Getter for property metricDataFormat.
-     * @return Value of property metricDataFormat.
+    /**
+     * Getter for property metricDataFormat.
      *
+     * @return Value of property metricDataFormat.
      */
     public short getMetricDataFormat() {
         return this.metricDataFormat;
     }
     
-    /** Setter for property metricDataFormat.
-     * @param metricDataFormat New value of property metricDataFormat.
+    /**
+     * Setter for property metricDataFormat.
      *
+     * @param metricDataFormat New value of property metricDataFormat.
      */
     public void setMetricDataFormat(short metricDataFormat) {
         this.metricDataFormat = metricDataFormat;
     }
     
-    /** Getter for property numOfLongHorMetrics.
-     * @return Value of property numOfLongHorMetrics.
+    /**
+     * Getter for property numOfLongHorMetrics.
      *
+     * @return Value of property numOfLongHorMetrics.
      */
     public int getNumOfLongHorMetrics() {
         return this.numOfLongHorMetrics & 0xFFFF;
     }
     
-    /** Setter for property numOfLongHorMetrics.
-     * @param numOfLongHorMetrics New value of property numOfLongHorMetrics.
+    /**
+     * Setter for property numOfLongHorMetrics.
      *
+     * @param numOfLongHorMetrics New value of property numOfLongHorMetrics.
      */
     public void setNumOfLongHorMetrics(short numOfLongHorMetrics) {
         this.numOfLongHorMetrics = numOfLongHorMetrics;

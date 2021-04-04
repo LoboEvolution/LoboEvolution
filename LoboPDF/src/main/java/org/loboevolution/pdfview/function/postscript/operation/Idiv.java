@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Idiv implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>int1 int2</i> <b>idiv</b> <i>quotient</i> <p>
 	 *
 	 * divides int1 by int2 and returns the integer part

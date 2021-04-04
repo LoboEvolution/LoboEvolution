@@ -8,20 +8,26 @@ final class PushAsNumber implements PostScriptOperation {
 
 	private final String token;
 	
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Constructor
+	 *
 	 * @param numberToken
-	 ************************************************************************/
-	
+	 ***********************************************************************
+	 */
 	public PushAsNumber(String numberToken) {
 		super();
 		this.token = numberToken;
 	}
 	
-	/*************************************************************************
+	/**
+	 * {@inheritDoc}
+	 *
+	 ***********************************************************************
 	 * eval
 	 * @see org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation#eval(java.util.Stack)
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	@Override
 	public void eval(Stack<Object> environment) {
 		try {

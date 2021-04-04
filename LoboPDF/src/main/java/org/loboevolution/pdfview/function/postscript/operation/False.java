@@ -6,6 +6,8 @@ import java.util.Stack;
 final class False implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <b>false</b> <i>false</i> <p>
 	 *
 	 * pushes a boolean object whose value is false on the

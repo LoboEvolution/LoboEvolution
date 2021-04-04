@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.store;
@@ -32,6 +29,12 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * <p>WebStore class.</p>
+ *
+ *
+ *
+ */
 public class WebStore {
 	
 	/** The Constant logger. */
@@ -42,7 +45,7 @@ public class WebStore {
 	 * <p>getValue.</p>
 	 *
 	 * @param key a {@link java.lang.String} object.
-	 * @param index
+	 * @param index a int.
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getValue(String key, int index) {
@@ -66,6 +69,7 @@ public class WebStore {
 	 * <p>getMapStorage.</p>
 	 *
 	 * @return a {@link java.util.Map} object.
+	 * @param index a int.
 	 */
 	public static Map<String, String> getMapStorage(int index) {
 		Map<String, String> map = new HashMap<>();
@@ -88,6 +92,8 @@ public class WebStore {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.String} object.
+	 * @param session a int.
+	 * @param tabIndex a int.
 	 */
 	public static void insertStorage(String name, String value, int session, int tabIndex) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -104,6 +110,7 @@ public class WebStore {
 	
 	/**
 	 * <p>deleteStorage.</p>
+	 *
 	 * @param name a {@link java.lang.String} object.
 	 * @param session int object
 	 * @param index int object.
@@ -122,6 +129,7 @@ public class WebStore {
 	
 	/**
 	 * <p>deleteStorage.</p>
+	 *
 	 * @param session int object.
 	 * @param index int object.
 	 */
@@ -151,6 +159,7 @@ public class WebStore {
 	
 	/**
 	 * <p>countStorage.</p>
+	 *
 	 * @param index int object.
 	 * @return a int object.
 	 */

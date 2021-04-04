@@ -45,8 +45,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>LunaBorders class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LunaBorders extends BaseBorders {
 

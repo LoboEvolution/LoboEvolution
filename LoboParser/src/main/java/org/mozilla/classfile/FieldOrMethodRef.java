@@ -15,21 +15,37 @@ final class FieldOrMethodRef
     this.type = type;
   }
 
+  /**
+   * <p>Getter for the field <code>className</code>.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   */
   public String getClassName()
   {
     return className;
   }
 
+  /**
+   * <p>Getter for the field <code>name</code>.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   */
   public String getName()
   {
     return name;
   }
 
+  /**
+   * <p>Getter for the field <code>type</code>.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   */
   public String getType()
   {
     return type;
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean equals(Object obj)
   {
@@ -40,6 +56,7 @@ final class FieldOrMethodRef
         && type.equals(x.type);
   }
 
+  /** {@inheritDoc} */
   @Override
   public int hashCode()
   {

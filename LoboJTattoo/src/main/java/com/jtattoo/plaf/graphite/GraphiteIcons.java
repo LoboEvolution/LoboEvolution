@@ -33,8 +33,8 @@ import com.jtattoo.plaf.BaseIcons;
 /**
  * <p>GraphiteIcons class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteIcons extends BaseIcons {
 

@@ -17,7 +17,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * A JavaScript function declaration or expression.
- * <p>Node type is {@link Token#FUNCTION}.</p>
+ * <p>Node type is {@link org.mozilla.javascript.Token#FUNCTION}.</p>
  *
  * <pre><i>FunctionDeclaration</i> :
  *        <b>function</b> Identifier ( FormalParameterListopt ) { FunctionBody }
@@ -42,6 +42,9 @@ import org.mozilla.javascript.Token;
  *
  * In this case the FunctionNode node will have no body but will have an
  * expression.
+ *
+ *
+ *
  */
 public class FunctionNode extends ScriptNode {
 
@@ -61,8 +64,11 @@ public class FunctionNode extends ScriptNode {
      * distinguished.
      */
     public static final int FUNCTION_STATEMENT            = 1;
+    /** Constant <code>FUNCTION_EXPRESSION=2</code> */
     public static final int FUNCTION_EXPRESSION           = 2;
+    /** Constant <code>FUNCTION_EXPRESSION_STATEMENT=3</code> */
     public static final int FUNCTION_EXPRESSION_STATEMENT = 3;
+    /** Constant <code>ARROW_FUNCTION=4</code> */
     public static final int ARROW_FUNCTION                = 4;
 
     public static enum Form { FUNCTION, GETTER, SETTER, METHOD }
@@ -91,13 +97,27 @@ public class FunctionNode extends ScriptNode {
         type = Token.FUNCTION;
     }
 
+    /**
+     * <p>Constructor for FunctionNode.</p>
+     */
     public FunctionNode() {
     }
 
+    /**
+     * <p>Constructor for FunctionNode.</p>
+     *
+     * @param pos a int.
+     */
     public FunctionNode(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for FunctionNode.</p>
+     *
+     * @param pos a int.
+     * @param name a {@link org.mozilla.javascript.ast.Name} object.
+     */
     public FunctionNode(int pos, Name name) {
         super(pos);
         setFunctionName(name);
@@ -105,6 +125,7 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Returns function name
+     *
      * @return function name, {@code null} for anonymous functions
      */
     public Name getFunctionName() {
@@ -113,6 +134,7 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Sets function name, and sets its parent to this node.
+     *
      * @param name function name, {@code null} for anonymous functions
      */
     public void setFunctionName(Name name) {
@@ -123,6 +145,7 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Returns the function name as a string
+     *
      * @return the function name, {@code ""} if anonymous
      */
     public String getName() {
@@ -131,6 +154,7 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Returns the function parameter list
+     *
      * @return the function parameter list.  Returns an immutable empty
      *         list if there are no parameters.
      */
@@ -141,6 +165,7 @@ public class FunctionNode extends ScriptNode {
     /**
      * Sets the function parameter list, and sets the parent for
      * each element of the list.
+     *
      * @param params the function parameter list, or {@code null} if no params
      */
     public void setParams(List<AstNode> params) {
@@ -157,8 +182,9 @@ public class FunctionNode extends ScriptNode {
     /**
      * Adds a parameter to the function parameter list.
      * Sets the parent of the param node to this node.
+     *
      * @param param the parameter
-     * @throws IllegalArgumentException if param is {@code null}
+     * @throws java.lang.IllegalArgumentException if param is {@code null}
      */
     public void addParam(AstNode param) {
         assertNotNull(param);
@@ -170,17 +196,20 @@ public class FunctionNode extends ScriptNode {
     }
 
     /**
-     * Returns true if the specified {@link AstNode} node is a parameter
+     * Returns true if the specified {@link org.mozilla.javascript.ast.AstNode} node is a parameter
      * of this Function node.  This provides a way during AST traversal
      * to disambiguate the function name node from the parameter nodes.
+     *
+     * @param node a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @return a boolean.
      */
     public boolean isParam(AstNode node) {
         return params == null ? false : params.contains(node);
     }
 
     /**
-     * Returns function body.  Normally a {@link Block}, but can be a plain
-     * {@link AstNode} if it's a function closure.
+     * Returns function body.  Normally a {@link org.mozilla.javascript.ast.Block}, but can be a plain
+     * {@link org.mozilla.javascript.ast.AstNode} if it's a function closure.
      *
      * @return the body.  Can be {@code null} only if the AST is malformed.
      */
@@ -196,8 +225,7 @@ public class FunctionNode extends ScriptNode {
      *
      * @param body function body.  Its parent is set to this node, and its
      * position is updated to be relative to this node.
-     *
-     * @throws IllegalArgumentException if body is {@code null}
+     * @throws java.lang.IllegalArgumentException if body is {@code null}
      */
     public void setBody(AstNode body) {
         assertNotNull(body);
@@ -213,6 +241,8 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Returns left paren position, -1 if missing
+     *
+     * @return a int.
      */
     public int getLp() {
         return lp;
@@ -220,6 +250,8 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Sets left paren position
+     *
+     * @param lp a int.
      */
     public void setLp(int lp) {
         this.lp = lp;
@@ -227,6 +259,8 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Returns right paren position, -1 if missing
+     *
+     * @return a int.
      */
     public int getRp() {
         return rp;
@@ -234,6 +268,8 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Sets right paren position
+     *
+     * @param rp a int.
      */
     public void setRp(int rp) {
         this.rp = rp;
@@ -241,6 +277,9 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Sets both paren positions
+     *
+     * @param lp a int.
+     * @param rp a int.
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
@@ -249,6 +288,8 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Returns whether this is a 1.8 function closure
+     *
+     * @return a boolean.
      */
     public boolean isExpressionClosure() {
         return isExpressionClosure;
@@ -256,6 +297,8 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Sets whether this is a 1.8 function closure
+     *
+     * @param isExpressionClosure a boolean.
      */
     public void setIsExpressionClosure(boolean isExpressionClosure) {
         this.isExpressionClosure = isExpressionClosure;
@@ -275,47 +318,88 @@ public class FunctionNode extends ScriptNode {
         return needsActivation;
     }
 
+    /**
+     * <p>setRequiresActivation.</p>
+     */
     public void setRequiresActivation() {
         needsActivation = true;
     }
 
+    /**
+     * <p>isGenerator.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isGenerator() {
       return isGenerator;
     }
 
+    /**
+     * <p>Setter for the field <code>isGenerator</code>.</p>
+     */
     public void setIsGenerator() {
         isGenerator = true;
     }
 
+    /**
+     * <p>isES6Generator.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isES6Generator() {
         return isES6Generator;
     }
 
+    /**
+     * <p>Setter for the field <code>isES6Generator</code>.</p>
+     */
     public void setIsES6Generator() {
         isES6Generator = true;
         isGenerator = true;
     }
 
+    /**
+     * <p>addResumptionPoint.</p>
+     *
+     * @param target a {@link org.mozilla.javascript.Node} object.
+     */
     public void addResumptionPoint(Node target) {
         if (generatorResumePoints == null)
             generatorResumePoints = new ArrayList<Node>();
         generatorResumePoints.add(target);
     }
 
+    /**
+     * <p>getResumptionPoints.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<Node> getResumptionPoints() {
         return generatorResumePoints;
     }
 
+    /**
+     * <p>Getter for the field <code>liveLocals</code>.</p>
+     *
+     * @return a {@link java.util.Map} object.
+     */
     public Map<Node,int[]> getLiveLocals() {
         return liveLocals;
     }
 
+    /**
+     * <p>addLiveLocals.</p>
+     *
+     * @param node a {@link org.mozilla.javascript.Node} object.
+     * @param locals an array of {@link int} objects.
+     */
     public void addLiveLocals(Node node, int[] locals) {
         if (liveLocals == null)
             liveLocals = new HashMap<Node,int[]>();
         liveLocals.put(node, locals);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int addFunction(FunctionNode fnNode) {
         int result = super.addFunction(fnNode);
@@ -327,39 +411,75 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Returns the function type (statement, expr, statement expr)
+     *
+     * @return a int.
      */
     public int getFunctionType() {
         return functionType;
     }
 
+    /**
+     * <p>Setter for the field <code>functionType</code>.</p>
+     *
+     * @param type a int.
+     */
     public void setFunctionType(int type) {
         functionType = type;
     }
 
+    /**
+     * <p>isMethod.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isMethod() {
         return functionForm == Form.GETTER || functionForm == Form.SETTER || functionForm == Form.METHOD;
     }
 
+    /**
+     * <p>isGetterMethod.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isGetterMethod() {
         return functionForm == Form.GETTER;
     }
 
+    /**
+     * <p>isSetterMethod.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isSetterMethod() {
         return functionForm == Form.SETTER;
     }
 
+    /**
+     * <p>isNormalMethod.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isNormalMethod() {
         return functionForm == Form.METHOD;
     }
 
+    /**
+     * <p>setFunctionIsGetterMethod.</p>
+     */
     public void setFunctionIsGetterMethod() {
         functionForm = Form.GETTER;
     }
 
+    /**
+     * <p>setFunctionIsSetterMethod.</p>
+     */
     public void setFunctionIsSetterMethod() {
         functionForm = Form.SETTER;
     }
 
+    /**
+     * <p>setFunctionIsNormalMethod.</p>
+     */
     public void setFunctionIsNormalMethod() {
         functionForm = Form.METHOD;
     }
@@ -373,6 +493,8 @@ public class FunctionNode extends ScriptNode {
      * <p>
      * This extension is only available by setting the CompilerEnv option
      * "isAllowMemberExprAsFunctionName" in the Parser.
+     *
+     * @param node a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public void setMemberExprNode(AstNode node) {
         memberExprNode = node;
@@ -380,10 +502,16 @@ public class FunctionNode extends ScriptNode {
             node.setParent(this);
     }
 
+    /**
+     * <p>Getter for the field <code>memberExprNode</code>.</p>
+     *
+     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
+     */
     public AstNode getMemberExprNode() {
         return memberExprNode;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -436,6 +564,8 @@ public class FunctionNode extends ScriptNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node, the function name node if supplied,
      * the parameters, and the body.  If there is a member-expr node,
      * it is visited last.

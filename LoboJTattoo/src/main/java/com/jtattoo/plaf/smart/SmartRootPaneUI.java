@@ -31,8 +31,8 @@ import com.jtattoo.plaf.BaseRootPaneUI;
 /**
  * <p>SmartRootPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class SmartRootPaneUI extends BaseRootPaneUI {
 

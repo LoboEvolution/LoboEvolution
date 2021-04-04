@@ -17,7 +17,10 @@ package com.gargoylesoftware.css.parser.condition;
 import com.gargoylesoftware.css.parser.Locatable;
 
 /**
- * @author Ronald Brill
+ * <p>Condition interface.</p>
+ *
+ * Author Ronald Brill
+ *
  */
 public interface Condition extends Locatable {
 
@@ -38,16 +41,22 @@ public interface Condition extends Locatable {
     }
 
     /**
+     * <p>getConditionType.</p>
+     *
      * @return the associated condition type
      */
     ConditionType getConditionType();
 
     /**
+     * <p>getValue.</p>
+     *
      * @return the value
      */
     String getValue();
 
     /**
+     * <p>getLocalName.</p>
+     *
      * @return the local name
      */
     String getLocalName();

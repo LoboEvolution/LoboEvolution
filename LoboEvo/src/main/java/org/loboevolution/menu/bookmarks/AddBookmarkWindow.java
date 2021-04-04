@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.menu.bookmarks;
@@ -48,8 +45,8 @@ import com.jtattoo.plaf.lobo.LoboTextField;
 /**
  * <p>AddBookmarkWindow class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, ActionListener{
 
@@ -163,6 +160,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 		panel.add(closeButton);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();		
@@ -193,6 +191,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	/**
+	 * <p>Getter for the field <code>descriptionField</code>.</p>
+	 *
 	 * @return the descriptionField
 	 */
 	public LoboTextField getDescriptionField() {
@@ -200,6 +200,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	/**
+	 * <p>Setter for the field <code>descriptionField</code>.</p>
+	 *
 	 * @param descriptionField the descriptionField to set
 	 */
 	public void setDescriptionField(LoboTextField descriptionField) {
@@ -207,6 +209,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	/**
+	 * <p>Getter for the field <code>titleField</code>.</p>
+	 *
 	 * @return the titleField
 	 */
 	public LoboTextField getTitleField() {
@@ -214,6 +218,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	/**
+	 * <p>Setter for the field <code>titleField</code>.</p>
+	 *
 	 * @param titleField the titleField to set
 	 */
 	public void setTitleField(LoboTextField titleField) {
@@ -221,6 +227,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	/**
+	 * <p>Getter for the field <code>tagsField</code>.</p>
+	 *
 	 * @return the tagsField
 	 */
 	public LoboTextField getTagsField() {
@@ -228,6 +236,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	/**
+	 * <p>Setter for the field <code>tagsField</code>.</p>
+	 *
 	 * @param tagsField the tagsField to set
 	 */
 	public void setTagsField(LoboTextField tagsField) {
@@ -235,6 +245,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	/**
+	 * <p>Getter for the field <code>urlField</code>.</p>
+	 *
 	 * @return the urlField
 	 */
 	public LoboTextField getUrlField() {
@@ -242,6 +254,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	/**
+	 * <p>Setter for the field <code>urlField</code>.</p>
+	 *
 	 * @param urlField the urlField to set
 	 */
 	public void setUrlField(LoboTextField urlField) {

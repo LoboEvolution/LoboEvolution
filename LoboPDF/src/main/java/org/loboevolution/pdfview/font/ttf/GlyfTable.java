@@ -22,6 +22,9 @@ import java.nio.ByteBuffer;
 
 /**
  * Model the TrueType Glyf table
+ *
+  *
+  *
  */
 public class GlyfTable extends TrueTypeTable {
     /** 
@@ -35,7 +38,11 @@ public class GlyfTable extends TrueTypeTable {
      */
     private final LocaTable loca;
     
-    /** Creates a new instance of HmtxTable */
+    /**
+     * Creates a new instance of HmtxTable
+     *
+     * @param ttf a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
+     */
     protected GlyfTable(TrueTypeFont ttf) {
         super (TrueTypeTable.GLYF_TABLE);
     
@@ -49,6 +56,9 @@ public class GlyfTable extends TrueTypeTable {
   
     /**
      * Get the glyph at a given index, parsing it as needed
+     *
+     * @param index a int.
+     * @return a {@link org.loboevolution.pdfview.font.ttf.Glyf} object.
      */
     public Glyf getGlyph(int index) {
         Object o = this.glyphs[index];
@@ -66,7 +76,11 @@ public class GlyfTable extends TrueTypeTable {
         }
     }
   
-    /** get the data in this map as a ByteBuffer */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * get the data in this map as a ByteBuffer
+	 */
     @Override
 	public ByteBuffer getData() {
         int size = getLength();
@@ -97,7 +111,11 @@ public class GlyfTable extends TrueTypeTable {
         return buf;
     }
     
-    /** Initialize this structure from a ByteBuffer */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Initialize this structure from a ByteBuffer
+	 */
     @Override
 	public void setData(ByteBuffer data) {
         for (int i = 0; i < this.glyphs.length; i++) {
@@ -117,9 +135,11 @@ public class GlyfTable extends TrueTypeTable {
         }
     }
     
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public int getLength() {
         int length = 0;
@@ -139,9 +159,11 @@ public class GlyfTable extends TrueTypeTable {
         return length;
     }
     
-    /**
-     * Create a pretty String
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Create a pretty String
+	 */
     @Override
 	public String toString() {
         StringBuilder buf = new StringBuilder();

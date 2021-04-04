@@ -27,7 +27,8 @@ import java.awt.color.ColorSpace;
  * CMYK color profiles to be used with YCCK images.  If no CMYK color space is
  * provided then by default it uses a CMYKColorSpace. Only toRGB is supported.
  *
- * @author Ben Day
+ * Author Ben Day
+  *
  */
 public class YCCKColorSpace extends ColorSpace
 {
@@ -36,6 +37,8 @@ public class YCCKColorSpace extends ColorSpace
 
     /**
      * create a new YCCK color space:  a ColorSpace with 4 components
+     *
+     * @param existingCmykColorSpace a {@link java.awt.color.ColorSpace} object.
      */
     public YCCKColorSpace(ColorSpace existingCmykColorSpace)
     {
@@ -43,12 +46,17 @@ public class YCCKColorSpace extends ColorSpace
         cmykColorSpace = existingCmykColorSpace;
     }
 
+    /**
+     * <p>Constructor for YCCKColorSpace.</p>
+     */
     public YCCKColorSpace()
     {
         this(new CMYKColorSpace());
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Convert from CIEXYZ to RGB.  NOT IMPLEMENTED
      */
     @Override
@@ -58,10 +66,9 @@ public class YCCKColorSpace extends ColorSpace
     }
 
     /**
-     * Convert from RGB to YCCK.  NOT IMPLEMENTED
+     * {@inheritDoc}
      *
-     * @param rgbvalue the red, green, and blue values (0-1)
-     * @return the YCCK values (0-1)
+     * Convert from RGB to YCCK.  NOT IMPLEMENTED
      */
     @Override
     public float[] fromRGB(float[] rgbvalue)
@@ -70,6 +77,8 @@ public class YCCKColorSpace extends ColorSpace
     }
 
     /**
+     * {@inheritDoc}
+     *
      * the number of components
      */
     @Override
@@ -79,6 +88,8 @@ public class YCCKColorSpace extends ColorSpace
     }
 
     /**
+     * {@inheritDoc}
+     *
      * the name of this color space
      */
     @Override
@@ -88,6 +99,8 @@ public class YCCKColorSpace extends ColorSpace
     }
 
     /**
+     * {@inheritDoc}
+     *
      * the type of this color space (TYPE_4CLR)
      */
     @Override
@@ -97,6 +110,8 @@ public class YCCKColorSpace extends ColorSpace
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Convert from YCCK to CIEXYZ.  NOT IMPLEMENTED
      */
     @Override
@@ -106,10 +121,9 @@ public class YCCKColorSpace extends ColorSpace
     }
 
     /**
-     * Convert from YCCK to RGB.
+     * {@inheritDoc}
      *
-     * @param colorvalue the YCCK values (0-1)
-     * @return the RGB values (0-1)
+     * Convert from YCCK to RGB.
      */
     @Override
     public float[] toRGB(float[] colorvalue)

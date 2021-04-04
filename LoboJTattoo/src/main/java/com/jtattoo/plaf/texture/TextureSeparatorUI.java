@@ -37,8 +37,8 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 /**
  * <p>TextureSeparatorUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureSeparatorUI extends BasicSeparatorUI {
 

@@ -35,8 +35,8 @@ import javax.swing.plaf.basic.BasicSeparatorUI;
 /**
  * <p>AluminiumPopupMenuSeparatorUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 

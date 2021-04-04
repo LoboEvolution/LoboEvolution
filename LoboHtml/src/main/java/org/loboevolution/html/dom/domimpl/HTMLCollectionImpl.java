@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.dom.domimpl;
@@ -36,19 +33,19 @@ import org.loboevolution.html.node.Node;
 /**
  * <p>HTMLCollectionImpl class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 	
 	private NodeImpl rootNode;
 
 
-	/**
-	 * <p>Constructor for HTMLCollectionImpl.</p>
-	 *
-	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 */
+	 /**
+	  * <p>Constructor for HTMLCollectionImpl.</p>
+	  *
+	  * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
+	  */
 	 public HTMLCollectionImpl(NodeImpl rootNode) {
 		super(rootNode);
 		this.rootNode = rootNode;
@@ -76,17 +73,20 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 		this.rootNode = rootNode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		return this.size();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node item(int index) {
 		if(index >= getLength()) return null;
 		return this.get(index);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element namedItem(String name) {
 		final Document doc = this.rootNode.getOwnerDocument();
@@ -98,6 +98,7 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 		return (Element) node.orElse(null);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "[object HTMLCollection]";

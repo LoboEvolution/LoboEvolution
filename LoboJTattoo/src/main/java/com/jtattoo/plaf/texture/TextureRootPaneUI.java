@@ -31,8 +31,8 @@ import com.jtattoo.plaf.BaseRootPaneUI;
 /**
  * <p>TextureRootPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureRootPaneUI extends BaseRootPaneUI {
 

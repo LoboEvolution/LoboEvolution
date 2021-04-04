@@ -13,12 +13,12 @@ package org.mozilla.javascript;
  * in all other references to the same package (as with Packages.java.lang
  * and java.lang).
  *
- * @author Mike Shaver
+ * Author Mike Shaver
  * @see NativeJavaArray
  * @see NativeJavaObject
  * @see NativeJavaClass
+ *
  */
-
 public class NativeJavaTopPackage
     extends NativeJavaPackage implements Function, IdFunctionCall
 {
@@ -42,6 +42,7 @@ public class NativeJavaTopPackage
         super(true, "", loader);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -49,6 +50,7 @@ public class NativeJavaTopPackage
         return construct(cx, scope, args);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
@@ -71,6 +73,13 @@ public class NativeJavaTopPackage
         return pkg;
     }
 
+    /**
+     * <p>init.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sealed a boolean.
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         ClassLoader loader = cx.getApplicationClassLoader();
@@ -113,6 +122,7 @@ public class NativeJavaTopPackage
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)

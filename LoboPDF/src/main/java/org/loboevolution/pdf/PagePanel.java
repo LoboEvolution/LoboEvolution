@@ -35,6 +35,9 @@ import org.loboevolution.pdfview.PDFPage;
  * A Swing-based panel that displays a PDF page image.  If the zoom tool
  * is in use, allows the user to select a particular region of the image to
  * be zoomed.
+ *
+  *
+  *
  */
 public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 
@@ -70,6 +73,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 
 	/**
 	 * Stop the generation of any previous page, and draw the new one.
+	 *
 	 * @param page the PDFPage to draw.
 	 */
 	public synchronized void showPage(PDFPage page) {
@@ -101,6 +105,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 		}
 	}
 
+	/** {@inheritDoc} */
 	public void setPreferredSize(Dimension size) {
 		if (super.getPreferredSize() != size) {
 			super.setPreferredSize(size);
@@ -110,12 +115,19 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 		}
 	}
 
+	/**
+	 * <p>getPreferredSize.</p>
+	 *
+	 * @return a {@link java.awt.Dimension} object.
+	 */
 	public Dimension getPreferredSize() {
 		return size == null ? super.getPreferredSize() : this.size;
 	}
 
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Draw the image.
 	 */
 	public void paint(Graphics g) {
@@ -152,6 +164,8 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 
 	/**
 	 * Gets the page currently being displayed
+	 *
+	 * @return a {@link org.loboevolution.pdfview.PDFPage} object.
 	 */
 	public PDFPage getPage() {
 		return page;
@@ -159,6 +173,8 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 
 	/**
 	 * Gets the size of the image currently being displayed
+	 *
+	 * @return a {@link java.awt.Dimension} object.
 	 */
 	public Dimension getCurSize() {
 		return size;
@@ -172,9 +188,10 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Handles notification of the fact that some part of the image
 	 * changed.  Repaints that portion.
-	 * @return true if more updates are desired.
 	 */
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
 		if ((infoflags & (SOMEBITS | ALLBITS)) != 0) {
@@ -188,13 +205,18 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 		}
 	}
 
+	/** {@inheritDoc} */
 	public void mouseClicked(MouseEvent e) {
 		requestFocus();
 	}
 
+	/** {@inheritDoc} */
 	public void mouseEntered(MouseEvent e) {}
+	/** {@inheritDoc} */
 	public void mouseExited(MouseEvent e) {}
+	/** {@inheritDoc} */
 	public void mousePressed(MouseEvent e) {}
+	/** {@inheritDoc} */
 	public void mouseReleased(MouseEvent e) {}
 
 }

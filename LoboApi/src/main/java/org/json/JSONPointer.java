@@ -187,6 +187,7 @@ public class JSONPointer {
      * @param document the JSON document which should be the subject of querying.
      * @return the result of the evaluation
      * @throws org.json.JSONPointerException if an error occurs during evaluation
+     * @throws org.json.JSONPointerException if any.
      */
     public Object queryFrom(Object document) throws JSONPointerException {
         if (this.refTokens.isEmpty()) {

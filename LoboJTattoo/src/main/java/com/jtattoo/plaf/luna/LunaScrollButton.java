@@ -27,8 +27,8 @@ import com.jtattoo.plaf.XPScrollButton;
 /**
  * <p>LunaScrollButton class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LunaScrollButton extends XPScrollButton {
 

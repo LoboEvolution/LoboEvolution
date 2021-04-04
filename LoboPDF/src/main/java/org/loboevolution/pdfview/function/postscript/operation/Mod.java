@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Mod implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>int1 int2</i> <b>mod</b> <i>remainder</i> <p>
 	 *
 	 * returns the remainder that results from

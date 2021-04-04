@@ -24,7 +24,8 @@ package org.loboevolution.pdfview.font;
  * for "open" to indicate that the path this point is a member of has
  * or hasn't been closed.
  *
- * @author Mike Wessler
+ * Author Mike Wessler
+  *
  */
 public class FlPoint {
     /** x coordinate of the point */
@@ -39,7 +40,9 @@ public class FlPoint {
      */
     public boolean open= false;
     
-    /** reset the values to (0,0) and closed */
+    /**
+     * reset the values to (0,0) and closed
+     */
     public final void reset() {
 	this.x= 0;
 	this.y= 0;

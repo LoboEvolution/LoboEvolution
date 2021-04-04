@@ -22,14 +22,27 @@ import java.io.IOException;
 
 /**
  * an exception class for recording parse errors in the PDF file
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class PDFParseException extends IOException {
 
+    /**
+     * <p>Constructor for PDFParseException.</p>
+     *
+     * @param msg a {@link java.lang.String} object.
+     */
     public PDFParseException(String msg) {
         super(msg);
     }
 
+    /**
+     * <p>Constructor for PDFParseException.</p>
+     *
+     * @param msg a {@link java.lang.String} object.
+     * @param cause a {@link java.lang.Throwable} object.
+     */
     public PDFParseException(String msg, Throwable cause) {
 	this(msg);
         initCause(cause);

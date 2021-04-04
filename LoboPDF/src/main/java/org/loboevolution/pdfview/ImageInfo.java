@@ -21,6 +21,12 @@ package org.loboevolution.pdfview;
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * <p>ImageInfo class.</p>
+ *
+  *
+  *
+ */
 public class ImageInfo {
 
     final int width;
@@ -28,10 +34,25 @@ public class ImageInfo {
     final Rectangle2D clip;
     Color bgColor;
 
+    /**
+     * <p>Constructor for ImageInfo.</p>
+     *
+     * @param width a int.
+     * @param height a int.
+     * @param clip a {@link java.awt.geom.Rectangle2D} object.
+     */
     public ImageInfo(int width, int height, Rectangle2D clip) {
         this(width, height, clip, Color.WHITE);
     }
 
+    /**
+     * <p>Constructor for ImageInfo.</p>
+     *
+     * @param width a int.
+     * @param height a int.
+     * @param clip a {@link java.awt.geom.Rectangle2D} object.
+     * @param bgColor a {@link java.awt.Color} object.
+     */
     public ImageInfo(int width, int height, Rectangle2D clip, Color bgColor) {
         this.width = width;
         this.height = height;
@@ -40,6 +61,7 @@ public class ImageInfo {
     }
 
     // a hashcode that uses width, height and clip to generate its number
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int code = (this.width ^ this.height << 16);
@@ -53,6 +75,7 @@ public class ImageInfo {
     }
 
     // an equals method that compares values
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof ImageInfo)) {

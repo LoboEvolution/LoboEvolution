@@ -42,7 +42,7 @@ class PagePreparer extends Thread {
 	 *
 	 * @param waitforPage
 	 *            the current page number, 0 based
-	 * @param PDFViewer 
+	 * @param PDFViewer a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
 	public PagePreparer(int waitforPage, PDFViewer PDFViewer) {
 		setDaemon(true);
@@ -64,6 +64,7 @@ class PagePreparer extends Thread {
 	 *
 	 * @see java.lang.Thread#run()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void run() {
 		Dimension size = null;

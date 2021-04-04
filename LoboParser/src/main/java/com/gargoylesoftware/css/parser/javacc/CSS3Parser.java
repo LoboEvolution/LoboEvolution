@@ -41,21 +41,37 @@ import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.css.util.LangUtils;
 
 /**
- * @author David Schweinsberg
- * @author waldbaer
- * @author Ahmed Ashour
- * @author Ronald Brill
+ * <p>CSS3Parser class.</p>
+ *
+ * Author David Schweinsberg
+ * Author waldbaer
+ * Author Ahmed Ashour
+ * Author Ronald Brill
+ *
  */
 public class CSS3Parser extends AbstractCSSParser implements CSS3ParserConstants {
 
+    /**
+     * <p>Constructor for CSS3Parser.</p>
+     */
     public CSS3Parser() {
         this((CharStream) null);
     }
 
+    /**
+     * <p>getParserVersion.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getParserVersion() {
         return "http://www.w3.org/Style/CSS/";
     }
 
+    /**
+     * <p>getGrammarUri.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     protected String getGrammarUri()
     {
         return "http://www.w3.org/TR/WD-css3-syntax-20030813";
@@ -68,6 +84,11 @@ public class CSS3Parser extends AbstractCSSParser implements CSS3ParserConstants
 //    [ [ ruleset | media | page | font_face ] [S|CDO|CDC]* ]*
 //  ;
 //
+  /**
+   * <p>styleSheet.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void styleSheet() throws ParseException {
     try {
 handleStartDocument();
@@ -78,6 +99,11 @@ handleEndDocument();
     }
 }
 
+  /**
+   * <p>styleSheetRuleList.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void styleSheetRuleList() throws ParseException {boolean ruleFound = false;
     label_1:
     while (true) {
@@ -304,6 +330,11 @@ Token t = getNextToken();
 //
 // This is used by ASTStyleSheet.insertRule to parse a single rule
 //
+  /**
+   * <p>styleSheetRuleSingle.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void styleSheetRuleSingle() throws ParseException {
     label_5:
     while (true) {
@@ -372,6 +403,11 @@ Token t = getNextToken();
     }
 }
 
+  /**
+   * <p>charsetRule.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void charsetRule() throws ParseException {Token t;
   Locator locator;
     try {
@@ -386,6 +422,11 @@ getErrorHandler().error(toCSSParseException("invalidCharsetRule", e));
     }
 }
 
+  /**
+   * <p>unknownAtRule.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void unknownAtRule() throws ParseException {String s;
     Locator locator;
     try {
@@ -404,6 +445,12 @@ getErrorHandler().error(toCSSParseException("invalidUnknownRule", generateParseE
 //    [STRING|URI] S* [ medium [ COMMA S* medium]* ]? ';' S*
 //  ;
 //
+  /**
+   * <p>importRule.</p>
+   *
+   * @param nonImportRuleFoundBefore a boolean.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void importRule(final boolean nonImportRuleFoundBefore) throws ParseException {Token t;
     MediaQueryList ml = new MediaQueryList();
     Locator locator;
@@ -490,6 +537,11 @@ getErrorHandler().error(toCSSParseException("invalidImportRule", e));
 //  : MEDIA_SYM S* medium [ COMMA S* medium ]* '{' S* ruleset* '}' S*
 //  ;
 //
+  /**
+   * <p>mediaRule.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void mediaRule() throws ParseException {boolean start = false;
     MediaQueryList ml = new MediaQueryList();
     Locator locator;
@@ -559,6 +611,7 @@ if (start) {
     }
 }
 
+  /** {@inheritDoc} */
   final public void mediaList(MediaQueryList ml) throws ParseException {MediaQuery mq;
     try {
       mq = mediaQuery();
@@ -603,6 +656,12 @@ throw toCSSParseException("invalidMediaList", e);
 //   | expression [ AND S* expression ]*
 //   ;
 //
+  /**
+   * <p>mediaQuery.</p>
+   *
+   * @return a {@link com.gargoylesoftware.css.parser.media.MediaQuery} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public MediaQuery mediaQuery() throws ParseException {String s;
     MediaQuery mq;
     Property p;
@@ -732,6 +791,12 @@ return mq;
 //   : '(' S* media_feature S* [ ':' S* expr ]? ')' S*
 //   ;
 //
+  /**
+   * <p>mediaExpression.</p>
+   *
+   * @return a {@link com.gargoylesoftware.css.dom.Property} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public Property mediaExpression() throws ParseException {String p;
   LexicalUnit e = null;
   Property prop;
@@ -798,6 +863,11 @@ if(e==null)
         return prop;
 }
 
+  /**
+   * <p>mediaRuleList.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void mediaRuleList() throws ParseException {
     label_21:
     while (true) {
@@ -871,6 +941,12 @@ if(e==null)
 //   : IDENT S*
 //   ;
 //
+  /**
+   * <p>medium.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public String medium() throws ParseException {Token t;
   String medium;
     t = jj_consume_token(IDENT);
@@ -898,6 +974,11 @@ medium = unescape(t.image, false);
 //    '{' S* declaration [ ';' S* declaration ]* '}' S*
 //  ;
 //
+  /**
+   * <p>pageRule.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void pageRule() throws ParseException {String sel = null;
     boolean start = false;
     Locator locator;
@@ -964,6 +1045,12 @@ if (start) {
 //   : [ pageSelector S* [ ',' pageSelector S* ]* ]?
 //   ;
 //
+  /**
+   * <p>pageSelectorList.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public String pageSelectorList() throws ParseException {String sel;
   LinkedList selectors = new LinkedList<String>();
     sel = pageSelector();
@@ -1004,6 +1091,12 @@ return String.join(", ", selectors);
 //   : pseudoPage+ | IDENT pseudoPage*
 //   ;
 //
+  /**
+   * <p>pageSelector.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public String pageSelector() throws ParseException {StringBuilder pseudos = new StringBuilder();
   String pseudo;
   Token ident;
@@ -1058,6 +1151,12 @@ return pseudos.toString();
 //   : ':' IDENT
 //   ;
 //
+  /**
+   * <p>pseudoPage.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public String pseudoPage() throws ParseException {Token t;
     jj_consume_token(COLON);
     t = jj_consume_token(IDENT);
@@ -1070,6 +1169,11 @@ return ":" + unescape(t.image, false);
 //    '{' S* declaration [ ';' S* declaration ]* '}' S*
 //  ;
 //
+  /**
+   * <p>fontFaceRule.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void fontFaceRule() throws ParseException {boolean start = false;
     Locator locator;
     try {
@@ -1119,6 +1223,13 @@ if (start) {
 //  : '/' S* | COMMA S* | /* empty */
 //  ;
 //
+  /**
+   * <p>operator.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit operator(LexicalUnit prev) throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case SLASH:{
@@ -1169,6 +1280,12 @@ return LexicalUnitImpl.createComma(prev);
 //  | S
 //  ;
 //
+  /**
+   * <p>combinator.</p>
+   *
+   * @return a char.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public char combinator() throws ParseException {char c = ' ';
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case PLUS:{
@@ -1286,6 +1403,12 @@ return c;
 //  : '-' | PLUS
 //  ;
 //
+  /**
+   * <p>unaryOperator.</p>
+   *
+   * @return a char.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public char unaryOperator() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case MINUS:{
@@ -1308,6 +1431,12 @@ return '+';
 //   : IDENT S*
 //   ;
 //
+  /**
+   * <p>property.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public String property() throws ParseException {Token t;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENT:{
@@ -1357,6 +1486,11 @@ return unescape(t.image, false);
 //    '{' S* declaration [ ';' S* declaration ]* '}' S*
 //  ;
 //
+  /**
+   * <p>styleRule.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void styleRule() throws ParseException {SelectorList selList = null;
     boolean start = false;
     Token t;
@@ -1408,6 +1542,12 @@ if (start) {
     }
 }
 
+  /**
+   * <p>parseSelectorsInternal.</p>
+   *
+   * @return a {@link com.gargoylesoftware.css.parser.selector.SelectorList} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public SelectorList parseSelectorsInternal() throws ParseException {SelectorList selectors;
     label_41:
     while (true) {
@@ -1427,6 +1567,12 @@ if (start) {
 return selectors;
 }
 
+  /**
+   * <p>selectorList.</p>
+   *
+   * @return a {@link com.gargoylesoftware.css.parser.selector.SelectorList} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public SelectorList selectorList() throws ParseException {SelectorListImpl selList = new SelectorListImpl();
     Selector sel;
     sel = selector();
@@ -1469,6 +1615,12 @@ selList.add(sel);
 //   : simple_selector_sequence [ combinator simple_selector_sequence ]*
 //   ;
 //
+  /**
+   * <p>selector.</p>
+   *
+   * @return a {@link com.gargoylesoftware.css.parser.selector.Selector} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public Selector selector() throws ParseException {Selector sel;
     char comb;
     try {
@@ -1507,6 +1659,14 @@ throw toCSSParseException("invalidSelector", e);
 //  | [ HASH | class | attrib | pseudo ]+
 //  ;
 //
+  /**
+   * <p>simpleSelector.</p>
+   *
+   * @param sel a {@link com.gargoylesoftware.css.parser.selector.Selector} object.
+   * @param comb a char.
+   * @return a {@link com.gargoylesoftware.css.parser.selector.Selector} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public Selector simpleSelector(Selector sel, char comb) throws ParseException {ElementSelector elemSel = null;
     SimpleSelector simpleSel = null;
     Condition c = null;
@@ -1655,6 +1815,13 @@ throw toCSSParseException("invalidSimpleSelector", e);
 //   : '.' IDENT
 //   ;
 //
+  /**
+   * <p>_class.</p>
+   *
+   * @param pseudoElementFound a boolean.
+   * @return a {@link com.gargoylesoftware.css.parser.condition.Condition} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public Condition _class(boolean pseudoElementFound) throws ParseException {Token t;
     Locator locator;
     ParseException pe = null;
@@ -1674,6 +1841,12 @@ throw toCSSParseException("invalidClassSelector", e);
 //   : IDENT | '*'
 //   ;
 //
+  /**
+   * <p>elementName.</p>
+   *
+   * @return a {@link com.gargoylesoftware.css.parser.selector.ElementSelector} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public ElementSelector elementName() throws ParseException {Token t;
     try {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1701,6 +1874,13 @@ throw toCSSParseException("invalidElementName", e);
 //     [ IDENT | STRING ] S* ]? ']'
 //   ;
 //
+  /**
+   * <p>attrib.</p>
+   *
+   * @param pseudoElementFound a boolean.
+   * @return a {@link com.gargoylesoftware.css.parser.condition.Condition} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public Condition attrib(boolean pseudoElementFound) throws ParseException {Token t;
     String name = null;
     String value = null;
@@ -1870,6 +2050,13 @@ throw toCSSParseException("invalidAttrib", e);
 //        ]
 //  ;
 //
+  /**
+   * <p>pseudo.</p>
+   *
+   * @param pseudoElementFound a boolean.
+   * @return a {@link java.lang.Object} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public Object pseudo(boolean pseudoElementFound) throws ParseException {Condition c = null;
     Token t;
     String function;
@@ -2065,6 +2252,13 @@ throw toCSSParseException("invalidPseudo", e);
     }
 }
 
+  /**
+   * <p>hash.</p>
+   *
+   * @param pseudoElementFound a boolean.
+   * @return a {@link com.gargoylesoftware.css.parser.condition.Condition} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public Condition hash(boolean pseudoElementFound) throws ParseException {Token t;
     ParseException pe = null;
     try {
@@ -2076,6 +2270,11 @@ throw toCSSParseException("invalidHash", e);
     }
 }
 
+  /**
+   * <p>styleDeclaration.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void styleDeclaration() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENT:
@@ -2133,6 +2332,11 @@ throw toCSSParseException("invalidHash", e);
 //   |
 //   ;
 //
+  /**
+   * <p>declaration.</p>
+   *
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public void declaration() throws ParseException {String p;
   LexicalUnit e;
   Token t;
@@ -2214,6 +2418,12 @@ CSSParseException cpe = toCSSParseException("invalidDeclaration", ex);
 // prio
 //   : IMPORTANT_SYM S*
 //   ;
+  /**
+   * <p>prio.</p>
+   *
+   * @return a boolean.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public boolean prio() throws ParseException {
     jj_consume_token(IMPORTANT_SYM);
     label_62:
@@ -2236,6 +2446,12 @@ return true;
 // expr
 //   : term [ operator term ]*
 //   ;
+  /**
+   * <p>expr.</p>
+   *
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit expr() throws ParseException {LexicalUnit head;
     LexicalUnit body;
     try {
@@ -2316,6 +2532,13 @@ throw toCSSParseException("invalidExpr", ex);
 //  S*
 //  ;
 //
+  /**
+   * <p>term.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit term(LexicalUnit prev) throws ParseException {Token t;
   char op = ' ';
   LexicalUnit value = null;
@@ -2499,6 +2722,13 @@ if(value != null)
 //   : FUNCTION S* ((EQUALS | COMMA | (unaryOperator? NUMBER) | STRING | IDENT | URI)? S*)+ ')' S*
 //   ;
 //
+  /**
+   * <p>function.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit function(LexicalUnit prev) throws ParseException {Token t;
     LexicalUnit param = null;
     LexicalUnit body = null;
@@ -2664,6 +2894,13 @@ return functionInternal(prev, funct, param);
 // https://www.w3.org/TR/css3-values/#calc-syntax
 // <calc()> = calc( <calc-sum> )
 //
+  /**
+   * <p>calc.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit calc(LexicalUnit prev) throws ParseException {Token t;
     LexicalUnit head = LexicalUnitImpl.createIdent(null, "");
     String funct = "";
@@ -2691,6 +2928,13 @@ return functionInternal(prev, funct, head.getNextLexicalUnit());
 // calcSum()
 // <calc-sum> = <calc-product> [ [ '+' | '-' ] <calc-product> ]*
 //
+  /**
+   * <p>calcSum.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit calcSum(LexicalUnit prev) throws ParseException {
     prev = calcProduct(prev);
     label_69:
@@ -2747,6 +2991,13 @@ if (prev != null)
 // calcProduct()
 // <calc-product> = <calc-value> [ '*' <calc-value> | '/' <calc-number-value> ]*
 //
+  /**
+   * <p>calcProduct.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit calcProduct(LexicalUnit prev) throws ParseException {LexicalUnit prod = null;
     prev = calcValue(prev);
     label_71:
@@ -2817,6 +3068,13 @@ if (prev != null)
 // calcValue()
 // <calc-value> = <number> | <dimension> | <percentage> | ( <calc-sum> )
 //
+  /**
+   * <p>calcValue.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit calcValue(LexicalUnit prev) throws ParseException {Token t;
     char op = ' ';
     String funct = "(";
@@ -2958,6 +3216,13 @@ if (prev != null)
 // calcNumberSum()
 // <calc-number-sum> = <calc-number-product> [ [ '+' | '-' ] <calc-number-product> ]*
 //
+  /**
+   * <p>calcNumberSum.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit calcNumberSum(LexicalUnit prev) throws ParseException {
     prev = calcNumberProduct(prev);
     label_75:
@@ -3014,6 +3279,13 @@ if (prev != null)
 // calcNumberProduct()
 // <calc-number-product> = <calc-number-value> [ '*' <calc-number-value> | '/' <calc-number-value> ]*
 //
+  /**
+   * <p>calcNumberProduct.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit calcNumberProduct(LexicalUnit prev) throws ParseException {
     prev = calcNumberValue(prev);
     label_77:
@@ -3084,6 +3356,13 @@ if (prev != null)
 // calcNumberValue()
 // <calc-number-value> = <number> | ( <calc-number-sum> )
 //
+  /**
+   * <p>calcNumberValue.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit calcNumberValue(LexicalUnit prev) throws ParseException {Token t;
     char op = ' ';
     String funct = "(";
@@ -3162,6 +3441,13 @@ if (prev != null)
 // https://developer.mozilla.org/en-US/docs/Web/CSS/var
 // var( <custom-property-name> , <declaration-value>? )
 //
+  /**
+   * <p>var.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit var(LexicalUnit prev) throws ParseException {Token t;
     LexicalUnit value, current, propertyName;
     String funct = "";
@@ -3277,6 +3563,12 @@ return functionInternal(prev, funct, propertyName);
 //   : type_selector | universal | HASH | class | attrib | pseudo
 //   ;
 //
+  /**
+   * <p>negation_arg.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public String negation_arg() throws ParseException {Condition c = null;
     SimpleSelector simpleSel = null;
     Object o;
@@ -3312,6 +3604,14 @@ if (o instanceof Condition) { return o.toString();}          return new Descenda
 //
 // number()
 //
+  /**
+   * <p>number.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @param op a char.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit number(LexicalUnit prev, char op) throws ParseException {Token t;
     LexicalUnit value = null;
     t = jj_consume_token(NUMBER);
@@ -3333,6 +3633,14 @@ try
 //
 // percentage()
 //
+  /**
+   * <p>percentage.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @param op a char.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit percentage(LexicalUnit prev, char op) throws ParseException {Token t;
     LexicalUnit value = null;
     t = jj_consume_token(PERCENTAGE);
@@ -3347,6 +3655,14 @@ if (value != null)
 //
 // dimension()
 //
+  /**
+   * <p>dimension.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @param op a char.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit dimension(LexicalUnit prev, char op) throws ParseException {Token t;
     LexicalUnit value = null;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -3480,6 +3796,13 @@ if (value != null)
 //
 // unicodeRange
 //
+  /**
+   * <p>unicodeRange.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit unicodeRange(LexicalUnit prev) throws ParseException {Token t;
     StringBuilder range = new StringBuilder();
     t = jj_consume_token(UNICODE_RANGE);
@@ -3492,6 +3815,13 @@ return LexicalUnitImpl.createIdent(prev, range.toString().toUpperCase(Locale.ROO
 //   : HASH S*
 //   ;
 //
+  /**
+   * <p>hexcolor.</p>
+   *
+   * @param prev a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @return a {@link com.gargoylesoftware.css.parser.LexicalUnit} object.
+   * @throws com.gargoylesoftware.css.parser.javacc.ParseException if any.
+   */
   final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {Token t;
     t = jj_consume_token(HASH);
 return hexcolorInternal(prev, t);
@@ -3944,7 +4274,11 @@ return hexcolorInternal(prev, t);
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
-  /** Constructor with user supplied CharStream. */
+  /**
+   * Constructor with user supplied CharStream.
+   *
+   * @param stream a {@link com.gargoylesoftware.css.parser.javacc.CharStream} object.
+   */
   public CSS3Parser(CharStream stream) {
 	 token_source = new CSS3ParserTokenManager(stream);
 	 token = new Token();
@@ -3954,7 +4288,11 @@ return hexcolorInternal(prev, t);
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /** Reinitialise. */
+  /**
+   * {@inheritDoc}
+   *
+   * Reinitialise.
+   */
   public void ReInit(CharStream stream) {
 	 token_source.ReInit(stream);
 	 token = new Token();
@@ -3964,7 +4302,11 @@ return hexcolorInternal(prev, t);
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /** Constructor with generated Token Manager. */
+  /**
+   * Constructor with generated Token Manager.
+   *
+   * @param tm a {@link com.gargoylesoftware.css.parser.javacc.CSS3ParserTokenManager} object.
+   */
   public CSS3Parser(CSS3ParserTokenManager tm) {
 	 token_source = tm;
 	 token = new Token();
@@ -3974,7 +4316,11 @@ return hexcolorInternal(prev, t);
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /** Reinitialise. */
+  /**
+   * Reinitialise.
+   *
+   * @param tm a {@link com.gargoylesoftware.css.parser.javacc.CSS3ParserTokenManager} object.
+   */
   public void ReInit(CSS3ParserTokenManager tm) {
 	 token_source = tm;
 	 token = new Token();
@@ -4033,7 +4379,11 @@ return hexcolorInternal(prev, t);
   }
 
 
-/** Get the next Token. */
+  /**
+   * Get the next Token.
+   *
+   * @return a {@link com.gargoylesoftware.css.parser.javacc.Token} object.
+   */
   final public Token getNextToken() {
 	 if (token.next != null) token = token.next;
 	 else token = token.next = token_source.getNextToken();
@@ -4042,7 +4392,12 @@ return hexcolorInternal(prev, t);
 	 return token;
   }
 
-/** Get the specific Token. */
+  /**
+   * Get the specific Token.
+   *
+   * @param index a int.
+   * @return a {@link com.gargoylesoftware.css.parser.javacc.Token} object.
+   */
   final public Token getToken(int index) {
 	 Token t = token;
 	 for (int i = 0; i < index; i++) {
@@ -4103,7 +4458,11 @@ return hexcolorInternal(prev, t);
 	 }
   }
 
-  /** Generate ParseException. */
+  /**
+   * Generate ParseException.
+   *
+   * @return a {@link com.gargoylesoftware.css.parser.javacc.ParseException} object.
+   */
   public ParseException generateParseException() {
 	 jj_expentries.clear();
 	 boolean[] la1tokens = new boolean[115];
@@ -4149,16 +4508,24 @@ return hexcolorInternal(prev, t);
   private int trace_indent = 0;
   private boolean trace_enabled;
 
-/** Trace enabled. */
+  /**
+   * Trace enabled.
+   *
+   * @return a boolean.
+   */
   final public boolean trace_enabled() {
 	 return trace_enabled;
   }
 
-  /** Enable tracing. */
+  /**
+   * Enable tracing.
+   */
   final public void enable_tracing() {
   }
 
-  /** Disable tracing. */
+  /**
+   * Disable tracing.
+   */
   final public void disable_tracing() {
   }
 

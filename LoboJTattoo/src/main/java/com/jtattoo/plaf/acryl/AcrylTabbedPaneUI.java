@@ -45,8 +45,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * author Michael Hagen
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 

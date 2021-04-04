@@ -27,7 +27,8 @@ import org.loboevolution.pdfview.PDFObject;
  * Type 0 fonts are composite fonts with a CMAP to map between
  * source character codes and destination fonts/codes
  *
- * @author  Jonathan Kaplan
+ * Author  Jonathan Kaplan
+  *
  */
 public class Type0Font extends PDFFont {
    
@@ -36,7 +37,14 @@ public class Type0Font extends PDFFont {
      */
     PDFFont[] fonts;
         
-    /** Creates a new instance of Type0Font */
+    /**
+     * Creates a new instance of Type0Font
+     *
+     * @param baseFont a {@link java.lang.String} object.
+     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
+     * @throws java.io.IOException if any.
+     */
     public Type0Font(String baseFont, PDFObject fontObj,
                      PDFFontDescriptor descriptor) throws IOException {
         super (baseFont, descriptor);
@@ -54,16 +62,21 @@ public class Type0Font extends PDFFont {
         }
     }
     
-    /** 
+    /**
      * Get a descendant font of this font by fontId
+     *
+     * @param fontID a int.
+     * @return a {@link org.loboevolution.pdfview.font.PDFFont} object.
      */
     public PDFFont getDescendantFont(int fontID) {
         return this.fonts[fontID];
     }
     
-    /**
-     * Get a character from the first font in the descendant fonts array
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get a character from the first font in the descendant fonts array
+	 */
     @Override
 	protected PDFGlyph getGlyph(char src, String name) {
         return (getDescendantFont(0).getGlyph(src, name));

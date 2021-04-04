@@ -23,8 +23,8 @@ import java.util.Map;
 
 /**
  *
- * @author Mike Shaver
- * @author Norris Boyd
+ * Author Mike Shaver
+ * Author Norris Boyd
  * @see NativeJavaObject
  * @see NativeJavaClass
  */
@@ -890,6 +890,7 @@ class FieldAndMethods extends NativeJavaMethod
         setPrototype(ScriptableObject.getFunctionPrototype(scope));
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> hint)
     {

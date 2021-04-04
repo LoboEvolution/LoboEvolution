@@ -28,10 +28,14 @@ import org.loboevolution.pdfview.PDFParseException;
 /**
  * The abstract superclass of various predictor objects that undo well-known
  * prediction algorithms.
+ *
+  *
+  *
  */
 public abstract class Predictor {
     /** well known algorithms */
     public static final int TIFF = 0;
+    /** Constant <code>PNG=1</code> */
     public static final int PNG = 1;
     
     /** the algorithm to use */
@@ -46,9 +50,11 @@ public abstract class Predictor {
     /** the number of columns per row */
     private int columns = 1;
     
-    /** 
+    /**
      * Create an instance of a predictor.  Use <code>getPredictor()</code>
      * instead of this.
+     *
+     * @param algorithm a int.
      */
     protected Predictor(int algorithm) {
         this.algorithm = algorithm;
@@ -57,6 +63,10 @@ public abstract class Predictor {
     /**
      * Actually perform this algorithm on decoded image data.
      * Subclasses must implement this method
+     *
+     * @param imageData a {@link java.nio.ByteBuffer} object.
+     * @return a {@link java.nio.ByteBuffer} object.
+     * @throws java.io.IOException if any.
      */
     public abstract ByteBuffer unpredict(ByteBuffer imageData)
         throws IOException;
@@ -65,6 +75,8 @@ public abstract class Predictor {
      * Get an instance of a predictor
      *
      * @param params the filter parameters
+     * @return a {@link org.loboevolution.pdfview.decode.Predictor} object.
+     * @throws java.io.IOException if any.
      */
     public static Predictor getPredictor(PDFObject params)
         throws IOException
@@ -131,6 +143,8 @@ public abstract class Predictor {
     
     /**
      * Get the number of colors per sample
+     *
+     * @return a int.
      */
     public int getColors() {
         return this.colors;
@@ -138,6 +152,8 @@ public abstract class Predictor {
     
     /**
      * Set the number of colors per sample
+     *
+     * @param colors a int.
      */
     protected void setColors(int colors) {
         this.colors = colors;
@@ -145,6 +161,8 @@ public abstract class Predictor {
     
     /**
      * Get the number of bits per color component
+     *
+     * @return a int.
      */
     public int getBitsPerComponent() {
         return this.bpc;
@@ -152,6 +170,8 @@ public abstract class Predictor {
     
     /**
      * Set the number of bits per color component
+     *
+     * @param bpc a int.
      */
     public void setBitsPerComponent(int bpc) {
         this.bpc = bpc;
@@ -159,6 +179,8 @@ public abstract class Predictor {
     
     /**
      * Get the number of columns
+     *
+     * @return a int.
      */
     public int getColumns() {
         return this.columns;
@@ -166,6 +188,8 @@ public abstract class Predictor {
     
     /**
      * Set the number of columns
+     *
+     * @param columns a int.
      */
     public void setColumns(int columns) {
         this.columns = columns;

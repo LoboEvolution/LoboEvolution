@@ -138,6 +138,7 @@ final class SuperBlock {
     return end;
   }
 
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return "sb " + index;

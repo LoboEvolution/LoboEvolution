@@ -34,8 +34,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>NoireDefaultTheme class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class NoireDefaultTheme extends AbstractTheme {
 

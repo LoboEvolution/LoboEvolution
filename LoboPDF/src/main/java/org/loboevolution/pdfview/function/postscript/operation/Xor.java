@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Xor implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>bool1|int1 bool2|int2</i> <b>xor</b> <i>bool3|int3</i> <p>
 	 *
 	 * returns the logical "exclusive or" of the operands if they

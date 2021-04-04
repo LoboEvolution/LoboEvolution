@@ -48,8 +48,8 @@ import javax.swing.plaf.metal.MetalToolTipUI;
 /**
  * <p>BaseToolTipUI class.</p>
  *
- * @author Michael Hagen, Daniel Raedel
- * @version $Id: $Id
+ * Author Michael Hagen, Daniel Raedel
+ *
  */
 public class BaseToolTipUI extends MetalToolTipUI {
 

@@ -6,6 +6,12 @@
 
 package org.mozilla.javascript;
 
+/**
+ * <p>ES6Generator class.</p>
+ *
+ *
+ *
+ */
 public final class ES6Generator extends IdScriptableObject {
     private static final long serialVersionUID = 1645892441041347273L;
 
@@ -39,6 +45,13 @@ public final class ES6Generator extends IdScriptableObject {
      */
     private ES6Generator() { }
 
+    /**
+     * <p>Constructor for ES6Generator.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param function a {@link org.mozilla.javascript.NativeFunction} object.
+     * @param savedState a {@link java.lang.Object} object.
+     */
     public ES6Generator(Scriptable scope, NativeFunction function,
                         Object savedState)
     {
@@ -54,11 +67,13 @@ public final class ES6Generator extends IdScriptableObject {
         this.setPrototype(prototype);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Generator";
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id) {
         if (id == SymbolId_iterator) {
@@ -77,6 +92,7 @@ public final class ES6Generator extends IdScriptableObject {
         initPrototypeMethod(GENERATOR_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -369,6 +385,7 @@ public final class ES6Generator extends IdScriptableObject {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k) {
         if (SymbolKey.ITERATOR.equals(k)) {
@@ -379,6 +396,7 @@ public final class ES6Generator extends IdScriptableObject {
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s) {
         int id;

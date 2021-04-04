@@ -32,8 +32,8 @@ import com.jtattoo.plaf.BaseDesktopPaneUI;
 /**
  * <p>AluminiumDesktopPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumDesktopPaneUI extends BaseDesktopPaneUI {
 

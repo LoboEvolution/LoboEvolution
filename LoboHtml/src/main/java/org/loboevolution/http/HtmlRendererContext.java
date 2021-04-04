@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Oct 22, 2005
@@ -92,8 +89,8 @@ import org.xml.sax.InputSource;
  * A simple way to load a URL into the {@link org.loboevolution.html.gui.HtmlPanel} of the renderer context
  * is to invoke {@link #navigate(String)}.
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class HtmlRendererContext {
 	private static final Logger logger = Logger.getLogger(HtmlRendererContext.class.getName());
@@ -224,8 +221,8 @@ public class HtmlRendererContext {
 	 * specialized document implmentations.
 	 *
 	 * @param inputSource The document input source.
-	 * @throws java.lang.Exception if any
 	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
+	 * @throws java.lang.Exception if any.
 	 */
 	protected HTMLDocumentImpl createDocument(InputSource inputSource) throws Exception {
 		final DocumentBuilderImpl builder = new DocumentBuilderImpl(getUserAgentContext(), this);
@@ -418,7 +415,7 @@ public class HtmlRendererContext {
 	/**
 	 * Gets the connection proxy used in {@link #navigate(URL, String)}. If
 	 * {@link #getUserAgentContext()} returns an instance assignable to
-	 * {@link UserAgentContext}. The method may be overridden to provide a
+	 * {@link org.loboevolution.http.UserAgentContext}. The method may be overridden to provide a
 	 * different proxy setting.
 	 *
 	 * @return a {@link java.net.Proxy} object.
@@ -462,7 +459,7 @@ public class HtmlRendererContext {
 	/**
 	 * If a {@link org.loboevolution.http.UserAgentContext} instance was provided in
 	 * the constructor, then that instance is returned. Otherwise, an instance of
-	 * {@link UserAgentContext} is created and returned.
+	 * {@link org.loboevolution.http.UserAgentContext} is created and returned.
 	 * <p>
 	 * The context returned by this method is used by local request facilities and
 	 * other parts of the renderer.
@@ -574,8 +571,8 @@ public class HtmlRendererContext {
 	 * Convenience method provided to allow loading a document into the renderer.
 	 *
 	 * @param fullURL The absolute URL of the document.
-	 * @throws java.lang.Exception if any
 	 * @see #navigate(URL, String)
+	 * @throws java.lang.Exception if any.
 	 */
 	public void navigate(String fullURL) throws Exception {
 		final URL href = Urls.createURL(null, fullURL);
@@ -811,6 +808,8 @@ public class HtmlRendererContext {
 	
 	/**
 	 * <p> getInnerHeight.</p>
+	 *
+	 * @return a int.
 	 */
 	public int getInnerHeight() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
@@ -822,6 +821,8 @@ public class HtmlRendererContext {
 	
 	/**
 	 * <p> getInnerWidth.</p>
+	 *
+	 * @return a int.
 	 */
 	public int getInnerWidth() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
@@ -833,6 +834,8 @@ public class HtmlRendererContext {
 	
 	/**
 	 * <p> getOuterHeight.</p>
+	 *
+	 * @return a int.
 	 */
 	public int getOuterHeight() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
@@ -844,6 +847,8 @@ public class HtmlRendererContext {
 	
 	/**
 	 * <p> getOuterWidth.</p>
+	 *
+	 * @return a int.
 	 */
 	public int getOuterWidth() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
@@ -1184,10 +1189,20 @@ public class HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * <p>isTest.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isTest() {
 		return test;
 	}
 
+	/**
+	 * <p>Setter for the field <code>test</code>.</p>
+	 *
+	 * @param test a boolean.
+	 */
 	public void setTest(boolean test) {
 		this.test = test;
 	}

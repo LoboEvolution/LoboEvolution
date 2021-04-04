@@ -40,8 +40,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>McWinInternalFrameTitlePane class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 

@@ -65,6 +65,12 @@ import org.jpedal.jbig2.segment.region.RegionSegment;
 import org.jpedal.jbig2.segment.symboldictionary.SymbolDictionarySegment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>TextRegionSegment class.</p>
+ *
+  *
+  *
+ */
 public class TextRegionSegment extends RegionSegment {
 	
 	private static final Logger logger = Logger.getLogger(TextRegionSegment.class.getName());
@@ -77,12 +83,24 @@ public class TextRegionSegment extends RegionSegment {
 	private final short[] symbolRegionAdaptiveTemplateX = new short[2];
     private final short[] symbolRegionAdaptiveTemplateY = new short[2];
 
+	/**
+	 * <p>Constructor for TextRegionSegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 * @param inlineImage a boolean.
+	 */
 	public TextRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage) {
 		super(streamDecoder);
 
 		this.inlineImage = inlineImage;
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 		if (JBIG2StreamDecoder.debug)
 			logger.info("==== Reading Text Region ====");
@@ -351,10 +369,20 @@ public class TextRegionSegment extends RegionSegment {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field <code>textRegionFlags</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.segment.region.text.TextRegionFlags} object.
+	 */
 	public TextRegionFlags getTextRegionFlags() {
 		return textRegionFlags;
 	}
 
+	/**
+	 * <p>Getter for the field <code>textRegionHuffmanFlags</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.segment.region.text.TextRegionHuffmanFlags} object.
+	 */
 	public TextRegionHuffmanFlags getTextRegionHuffmanFlags() {
 		return textRegionHuffmanFlags;
 	}

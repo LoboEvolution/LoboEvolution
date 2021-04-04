@@ -19,10 +19,17 @@ import org.mozilla.javascript.InterfaceAdapter;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.VMBridge;
 
+/**
+ * <p>VMBridge_jdk18 class.</p>
+ *
+ *
+ *
+ */
 public class VMBridge_jdk18 extends VMBridge
 {
     private static final ThreadLocal<Object[]> contextLocal = new ThreadLocal<Object[]>();
 
+    /** {@inheritDoc} */
     @Override
     protected Object getThreadContextHelper()
     {
@@ -43,6 +50,7 @@ public class VMBridge_jdk18 extends VMBridge
         return storage;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Context getContext(Object contextHelper)
     {
@@ -50,6 +58,7 @@ public class VMBridge_jdk18 extends VMBridge
         return (Context)storage[0];
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setContext(Object contextHelper, Context cx)
     {
@@ -57,6 +66,7 @@ public class VMBridge_jdk18 extends VMBridge
         storage[0] = cx;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected boolean tryToMakeAccessible(AccessibleObject accessible)
     {
@@ -70,6 +80,7 @@ public class VMBridge_jdk18 extends VMBridge
         return accessible.isAccessible();
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInterfaceProxyHelper(ContextFactory cf,
                                              Class<?>[] interfaces)
@@ -88,6 +99,7 @@ public class VMBridge_jdk18 extends VMBridge
         return c;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object newInterfaceProxy(Object proxyHelper,
                                        final ContextFactory cf,

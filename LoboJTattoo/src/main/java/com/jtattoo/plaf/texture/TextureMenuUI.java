@@ -44,8 +44,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>TextureMenuUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureMenuUI extends BaseMenuUI {
 

@@ -26,6 +26,9 @@ import org.loboevolution.pdfview.PDFObject;
 
 /**
  * Supports width operations for Type1, Type1C, TrueType and Type3 fonts
+ *
+  *
+  *
  */
 public abstract class OutlineFont extends PDFFont {
 
@@ -36,7 +39,14 @@ public abstract class OutlineFont extends PDFFont {
     /** the widths for each character code */
     private float[] widths;
 
-    /** Creates a new instance of OutlineFont */
+    /**
+     * Creates a new instance of OutlineFont
+     *
+     * @param baseFont a {@link java.lang.String} object.
+     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
+     * @throws java.io.IOException if any.
+     */
     public OutlineFont(String baseFont, PDFObject fontObj,
             PDFFontDescriptor descriptor) throws IOException {
         super(baseFont, descriptor);
@@ -63,27 +73,49 @@ public abstract class OutlineFont extends PDFFont {
         }
     }
 
-    /** Get the first character code */
+    /**
+     * Get the first character code
+     *
+     * @return a int.
+     */
     public int getFirstChar() {
         return this.firstChar;
     }
 
-    /** Get the last character code */
+    /**
+     * Get the last character code
+     *
+     * @return a int.
+     */
     public int getLastChar() {
         return this.lastChar;
     }
 
-    /** Get the default width in text space */
+    /**
+     * Get the default width in text space
+     *
+     * @return a int.
+     */
     public int getDefaultWidth() {
         return 1000;
     }
 
-    /** Get the number of characters */
+    /**
+     * Get the number of characters
+     *
+     * @return a int.
+     */
     public int getCharCount() {
         return (getLastChar() - getFirstChar()) + 1;
     }
 
-    /** Get the width of a given character */
+    /**
+     * Get the width of a given character
+     *
+     * @param code a char.
+     * @param name a {@link java.lang.String} object.
+     * @return a float.
+     */
     public float getWidth(char code, String name) {
         int idx = (code & 0xff) - getFirstChar();
 
@@ -100,20 +132,18 @@ public abstract class OutlineFont extends PDFFont {
         return this.widths[idx];
     }
 
-    /**
-     * Get the glyph for a given character code and name
-     *
-     * The preferred method of getting the glyph should be by name.  If the
-     * name is null or not valid, then the character code should be used.
-     * If the both the code and the name are invalid, the undefined glyph 
-     * should be returned.
-     *
-     * Note this method must *always* return a glyph.  
-     *
-     * @param src the character code of this glyph
-     * @param name the name of this glyph or null if unknown
-     * @return a glyph for this character
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the glyph for a given character code and name
+	 *
+	 * The preferred method of getting the glyph should be by name.  If the
+	 * name is null or not valid, then the character code should be used.
+	 * If the both the code and the name are invalid, the undefined glyph
+	 * should be returned.
+	 *
+	 * Note this method must *always* return a glyph.
+	 */
     @Override
 	protected PDFGlyph getGlyph(char src, String name) {
         GeneralPath outline = null;
@@ -139,16 +169,18 @@ public abstract class OutlineFont extends PDFFont {
      *
      * @param name the name of the desired glyph
      * @return the glyph outline, or null if unavailable
+     * @param width a float.
      */
     protected abstract GeneralPath getOutline(String name, float width);
 
     /**
      * Get a glyph outline by character code
      *
-     * Note this method must always return an outline 
+     * Note this method must always return an outline
      *
      * @param src the character code of the desired glyph
      * @return the glyph outline
+     * @param width a float.
      */
     protected abstract GeneralPath getOutline(char src, float width);
 }

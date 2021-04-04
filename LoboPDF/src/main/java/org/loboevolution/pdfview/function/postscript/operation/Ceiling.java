@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Ceiling implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1</i> <b>ceiling</b> <i>num2</i> <p>
 	 *
 	 * returns the least integer value greater than or equal

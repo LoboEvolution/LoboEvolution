@@ -49,8 +49,8 @@ import com.jtattoo.plaf.LazyImageIcon;
 /**
  * <p>AcrylIcons class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AcrylIcons extends BaseIcons {
 

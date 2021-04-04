@@ -30,15 +30,16 @@ import java.util.Map;
  * (if that) are represented in the PDFDocEncoding, so users should be
  * prepared to deal with unmappable character exceptions.
  *
- * @see "PDF Reference version 1.7, Appendix D"
- *
- * @author Luke Kirby
+ * see "PDF Reference version 1.7, Appendix D"
+ * Author Luke Kirby
+  *
  */
 public class PDFDocCharsetEncoder extends CharsetEncoder {
 
     /**
      * Identify whether a particular character preserves the same byte value
      * upon encoding in PDFDocEncoding
+     *
      * @param ch the character
      * @return whether the character is identity encoded
      */
@@ -73,10 +74,14 @@ public class PDFDocCharsetEncoder extends CharsetEncoder {
         }
     }
 
+    /**
+     * <p>Constructor for PDFDocCharsetEncoder.</p>
+     */
     public PDFDocCharsetEncoder() {
         super(null, 1, 1);
     }
 
+	/** {@inheritDoc} */
     @Override
 	protected CoderResult encodeLoop(CharBuffer in, ByteBuffer out) {
         while (in.remaining() > 0) {
@@ -98,6 +103,7 @@ public class PDFDocCharsetEncoder extends CharsetEncoder {
         return CoderResult.UNDERFLOW;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean isLegalReplacement(byte[] repl) {
         // avoid referencing the non-existent character set

@@ -24,13 +24,14 @@ import java.awt.geom.PathIterator;
 import java.awt.geom.Rectangle2D;
 
 /**
-* Encapsulates a path. Also contains extra fields and logic to check
-* for consecutive abutting anti-aliased regions. We stroke the shared
-* line between these regions again with a 1-pixel wide line so that
-* the background doesn't show through between them.
-*
-* @author Mike Wessler
-*/
+ * Encapsulates a path. Also contains extra fields and logic to check
+ * for consecutive abutting anti-aliased regions. We stroke the shared
+ * line between these regions again with a 1-pixel wide line so that
+ * the background doesn't show through between them.
+ *
+ * Author Mike Wessler
+  *
+ */
 public class PDFShapeCmd extends PDFCmd {
     /** stroke the outline of the path with the stroke paint */
     public static final int STROKE = 1;
@@ -51,15 +52,16 @@ public class PDFShapeCmd extends PDFCmd {
     private boolean autoAdjustStroke = false;
 
     /**
-    * create a new PDFShapeCmd and check it against the previous one
-    * to find any shared edges.
-    *
-    * @param gp
-    * the path
-    * @param style
-    * the style: an OR of STROKE, FILL, or CLIP. As a
-    * convenience, BOTH = STROKE | FILL.
-    */
+     * create a new PDFShapeCmd and check it against the previous one
+     * to find any shared edges.
+     *
+     * @param gp
+     * the path
+     * @param style
+     * the style: an OR of STROKE, FILL, or CLIP. As a
+     * convenience, BOTH = STROKE | FILL.
+     * @param autoAdjustStroke a boolean.
+     */
     public PDFShapeCmd(GeneralPath gp, int style, boolean autoAdjustStroke) {
         this.gp = gp;
         this.style = style;
@@ -67,8 +69,10 @@ public class PDFShapeCmd extends PDFCmd {
     }
 
     /**
-    * perform the stroke and record the dirty region
-    */
+     * {@inheritDoc}
+     *
+     * perform the stroke and record the dirty region
+     */
     @Override
     public Rectangle2D execute(PDFRenderer state) {
         Rectangle2D rect = null;
@@ -183,8 +187,10 @@ public class PDFShapeCmd extends PDFCmd {
     }
 
     /**
-    * Get detailed information about this shape
-    */
+     * {@inheritDoc}
+     *
+     * Get detailed information about this shape
+     */
     @Override
     public String getDetails() {
         StringBuilder sb = new StringBuilder();

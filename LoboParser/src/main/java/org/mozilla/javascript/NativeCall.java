@@ -12,7 +12,8 @@ package org.mozilla.javascript;
  * See ECMA 10.1.6
  *
  * @see org.mozilla.javascript.Arguments
- * @author Norris Boyd
+ * Author Norris Boyd
+ *
  */
 public final class NativeCall extends IdScriptableObject
 {
@@ -72,18 +73,21 @@ public final class NativeCall extends IdScriptableObject
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Call";
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {
         return s.equals("constructor") ? Id_constructor : 0;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -97,6 +101,7 @@ public final class NativeCall extends IdScriptableObject
         initPrototypeMethod(CALL_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -117,6 +122,9 @@ public final class NativeCall extends IdScriptableObject
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /**
+     * <p>defineAttributesForArguments.</p>
+     */
     public void defineAttributesForArguments() {
         if (arguments != null) {
             arguments.defineAttributesForStrictMode();

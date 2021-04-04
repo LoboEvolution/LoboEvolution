@@ -44,8 +44,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AeroTabbedPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
 	/** {@inheritDoc} */

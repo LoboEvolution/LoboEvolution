@@ -30,8 +30,8 @@ import com.jtattoo.plaf.BaseSplitPaneDivider;
 /**
  * <p>FastSplitPaneDivider class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class FastSplitPaneDivider extends BaseSplitPaneDivider {
 

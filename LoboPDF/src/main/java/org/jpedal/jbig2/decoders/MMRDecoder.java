@@ -55,6 +55,12 @@ import java.util.logging.Logger;
 import org.jpedal.jbig2.io.StreamReader;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>MMRDecoder class.</p>
+ *
+  *
+  *
+ */
 public class MMRDecoder {
 	
 	private static final Logger logger = Logger.getLogger(MMRDecoder.class.getName());
@@ -63,16 +69,30 @@ public class MMRDecoder {
 
 	private long bufferLength = 0, buffer = 0, noOfBytesRead = 0;
 
+	/**
+	 * <p>Constructor for MMRDecoder.</p>
+	 *
+	 * @param reader a {@link org.jpedal.jbig2.io.StreamReader} object.
+	 */
 	public MMRDecoder(StreamReader reader) {
 		this.reader = reader;
 	}
 
+	/**
+	 * <p>reset.</p>
+	 */
 	public void reset() {
 		bufferLength = 0;
 		noOfBytesRead = 0;
 		buffer = 0;
 	}
 
+	/**
+	 * <p>skipTo.</p>
+	 *
+	 * @param length a int.
+	 * @throws java.io.IOException if any.
+	 */
 	public void skipTo(int length) throws IOException {
 		while (noOfBytesRead < length) {
 			reader.readByte();
@@ -80,6 +100,12 @@ public class MMRDecoder {
 		}
 	}
 
+	/**
+	 * <p>get24Bits.</p>
+	 *
+	 * @return a long.
+	 * @throws java.io.IOException if any.
+	 */
 	public long get24Bits() throws IOException {
 		while (bufferLength < 24) {
 
@@ -91,6 +117,12 @@ public class MMRDecoder {
 		return (BinaryOperation.bit32ShiftR(buffer, (int) (bufferLength - 24))) & 0xffffff;
 	}
 
+	/**
+	 * <p>get2DCode.</p>
+	 *
+	 * @return a int.
+	 * @throws java.io.IOException if any.
+	 */
 	public int get2DCode() throws IOException {
 		int[] tuple;
 
@@ -136,6 +168,12 @@ public class MMRDecoder {
 		return tuple[1];
 	}
 
+	/**
+	 * <p>getWhiteCode.</p>
+	 *
+	 * @return a int.
+	 * @throws java.io.IOException if any.
+	 */
 	public int getWhiteCode() throws IOException {
 		int[] tuple;
 		long code;
@@ -186,6 +224,12 @@ public class MMRDecoder {
 		return 1;
 	}
 
+	/**
+	 * <p>getBlackCode.</p>
+	 *
+	 * @return a int.
+	 * @throws java.io.IOException if any.
+	 */
 	public int getBlackCode() throws IOException {
 		int[] tuple;
 		long code;
@@ -247,16 +291,26 @@ public class MMRDecoder {
 		return 1;
 	}
 
+	/** Constant <code>ccittEndOfLine=-2</code> */
 	public static final int ccittEndOfLine = -2;
 
+	/** Constant <code>twoDimensionalPass=0</code> */
 	public static final int twoDimensionalPass = 0;
+	/** Constant <code>twoDimensionalHorizontal=1</code> */
 	public static final int twoDimensionalHorizontal = 1;
+	/** Constant <code>twoDimensionalVertical0=2</code> */
 	public static final int twoDimensionalVertical0 = 2;
+	/** Constant <code>twoDimensionalVerticalR1=3</code> */
 	public static final int twoDimensionalVerticalR1 = 3;
+	/** Constant <code>twoDimensionalVerticalL1=4</code> */
 	public static final int twoDimensionalVerticalL1 = 4;
+	/** Constant <code>twoDimensionalVerticalR2=5</code> */
 	public static final int twoDimensionalVerticalR2 = 5;
+	/** Constant <code>twoDimensionalVerticalL2=6</code> */
 	public static final int twoDimensionalVerticalL2 = 6;
+	/** Constant <code>twoDimensionalVerticalR3=7</code> */
 	public static final int twoDimensionalVerticalR3 = 7;
+	/** Constant <code>twoDimensionalVerticalL3=8</code> */
 	public static final int twoDimensionalVerticalL3 = 8;
 
 	private final int[][] twoDimensionalTable1 = { { -1, -1 }, { -1, -1 }, { 7, twoDimensionalVerticalL3 }, { 7, twoDimensionalVerticalR3 }, { 6, twoDimensionalVerticalL2 }, { 6, twoDimensionalVerticalL2 }, { 6, twoDimensionalVerticalR2 }, { 6, twoDimensionalVerticalR2 }, { 4, twoDimensionalPass }, { 4, twoDimensionalPass }, { 4, twoDimensionalPass }, { 4, twoDimensionalPass }, { 4, twoDimensionalPass }, { 4, twoDimensionalPass }, { 4, twoDimensionalPass }, { 4, twoDimensionalPass }, { 3, twoDimensionalHorizontal }, { 3, twoDimensionalHorizontal }, { 3, twoDimensionalHorizontal }, { 3, twoDimensionalHorizontal },

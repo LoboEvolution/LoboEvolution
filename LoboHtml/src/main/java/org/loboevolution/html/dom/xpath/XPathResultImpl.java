@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * $Id: XPathResultImpl.java 1225426 2011-12-29 04:13:08Z mrglavas $
@@ -39,7 +36,6 @@ import org.loboevolution.html.node.NodeIterator;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventListener;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathResult;
@@ -68,9 +64,8 @@ import org.loboevolution.html.xpath.XPathResult;
  *
  * @see org.apache.xpath.objects.XObject
  * @see org.loboevolution.html.xpath.XPathResult
- * 
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class XPathResultImpl implements XPathResult {
 
@@ -509,10 +504,11 @@ public class XPathResultImpl implements XPathResult {
 	 * {@inheritDoc}
 	 *
 	 * Handle event.
-	 * @see org.w3c.dom.events.EventListener#handleEvent(Event)
+	 *
+	 * @see org.loboevolution.html.node.events.EventListener#handleEvent(Event)
+	 * @param event a {@link org.loboevolution.html.node.events.Event} object.
 	 */
 	// TODO Broken with new interfaces @Override
-	
 	public void handleEvent(Event event) {
 
 		if (event.getType().equals("DOMSubtreeModified")) {

@@ -31,8 +31,8 @@ import com.jtattoo.plaf.BaseInternalFrameUI;
 /**
  * <p>FastInternalFrameUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class FastInternalFrameUI extends BaseInternalFrameUI {
 

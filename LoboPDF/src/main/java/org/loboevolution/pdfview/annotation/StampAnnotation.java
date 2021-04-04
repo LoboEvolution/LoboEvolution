@@ -15,12 +15,15 @@ import org.loboevolution.pdfview.PDFPage;
 import org.loboevolution.pdfview.PDFParseException;
 import org.loboevolution.pdfview.PDFParser;
 
-/*****************************************************************************
+/**
+ ***************************************************************************
  * PDF annotation describing a stamp
  *
- * @author Katja Sondermann
+ * Author Katja Sondermann
  * @since 26.03.2012
- ****************************************************************************/
+ ***************************************************************************
+  *
+ */
 public class StampAnnotation extends PDFAnnotation {
 	private String iconName;
 	private PDFAnnotation popupAnnotation;
@@ -30,11 +33,14 @@ public class StampAnnotation extends PDFAnnotation {
 	private List<PDFCmd> offCmd;
 	private boolean appearanceStateOn;
 	
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Constructor
-	 * @param annotObject
-	 * @throws IOException 
-	 ************************************************************************/
+	 *
+	 * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
+	 * @param type a ANNOTATION_TYPE object.
+	 * @throws java.io.IOException if any.
+	 */
 	public StampAnnotation(PDFObject annotObject, ANNOTATION_TYPE type) throws IOException {
 		super(annotObject, type);
 		
@@ -43,11 +49,13 @@ public class StampAnnotation extends PDFAnnotation {
 		parseAP(annotObject.getDictRef("AP"));			
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Constructor
-	 * @param annotObject
-	 * @throws IOException 
-	 ************************************************************************/
+	 *
+	 * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public StampAnnotation(PDFObject annotObject) throws IOException {
 		this(annotObject, ANNOTATION_TYPE.STAMP);
 	}
@@ -173,6 +181,8 @@ public class StampAnnotation extends PDFAnnotation {
 	}
 
 	/**
+	 * <p>Getter for the field <code>iconName</code>.</p>
+	 *
 	 * @return the iconName
 	 */
 	public String getIconName() {
@@ -180,6 +190,8 @@ public class StampAnnotation extends PDFAnnotation {
 	}
 
 	/**
+	 * <p>Getter for the field <code>popupAnnotation</code>.</p>
+	 *
 	 * @return the popupAnnotation
 	 */
 	public PDFAnnotation getPopupAnnotation() {
@@ -187,6 +199,8 @@ public class StampAnnotation extends PDFAnnotation {
 	}
 
 	/**
+	 * <p>Getter for the field <code>onAppearance</code>.</p>
+	 *
 	 * @return the onAppearance
 	 */
 	public PDFObject getOnAppearance() {
@@ -194,6 +208,8 @@ public class StampAnnotation extends PDFAnnotation {
 	}
 
 	/**
+	 * <p>Getter for the field <code>offAppearance</code>.</p>
+	 *
 	 * @return the offAppearance
 	 */
 	public PDFObject getOffAppearance() {
@@ -201,24 +217,40 @@ public class StampAnnotation extends PDFAnnotation {
 	}
 
 	/**
+	 * <p>isAppearanceStateOn.</p>
+	 *
 	 * @return the appearanceStateOn
 	 */
 	public boolean isAppearanceStateOn() {
 		return appearanceStateOn;
 	}
 
+	/**
+	 * <p>switchAppearance.</p>
+	 */
 	public void switchAppearance() {
 		this.appearanceStateOn = !this.appearanceStateOn;
 	}
 
+	/**
+	 * <p>getCurrentAppearance.</p>
+	 *
+	 * @return a {@link org.loboevolution.pdfview.PDFObject} object.
+	 */
 	public PDFObject getCurrentAppearance() {
 		return appearanceStateOn?onAppearance:offAppearance;
 	}
 
+	/**
+	 * <p>getCurrentCommand.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<PDFCmd> getCurrentCommand() {
 		return appearanceStateOn?onCmd:offCmd;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public List<PDFCmd> getPageCommandsForAnnotation() {
 		List<PDFCmd> pageCommandsForAnnotation = super.getPageCommandsForAnnotation();

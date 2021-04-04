@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 package org.loboevolution.html.dom.svg;
 
@@ -30,8 +27,8 @@ import org.loboevolution.html.node.events.Event;
 /**
  * <p>SVGSVGElement interface.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
 		SVGLocatable, SVGFitToViewBox, SVGZoomAndPan {
@@ -199,22 +196,22 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 */
 	void setCurrentTime(float seconds);
 
-	/**
-	 * <p>getIntersectionList.</p>
-	 *
-	 * @param rect a {@link org.loboevolution.html.dom.svg.SVGRect} object.
-	 * @param referenceElement a {@link org.loboevolution.html.dom.svg.SVGElement} object.
-	 * @return a {@link org.w3c.dom.NodeList} object.
-	 */
+    /**
+     * <p>getIntersectionList.</p>
+     *
+     * @param rect a {@link org.loboevolution.html.dom.svg.SVGRect} object.
+     * @param referenceElement a {@link org.loboevolution.html.dom.svg.SVGElement} object.
+     * @return a {@link org.w3c.dom.NodeList} object.
+     */
     NodeList getIntersectionList(SVGRect rect, SVGElement referenceElement);
 
-	/**
-	 * <p>getEnclosureList.</p>
-	 *
-	 * @param rect a {@link org.loboevolution.html.dom.svg.SVGRect} object.
-	 * @param referenceElement a {@link org.loboevolution.html.dom.svg.SVGElement} object.
-	 * @return a {@link org.w3c.dom.NodeList} object.
-	 */
+    /**
+     * <p>getEnclosureList.</p>
+     *
+     * @param rect a {@link org.loboevolution.html.dom.svg.SVGRect} object.
+     * @param referenceElement a {@link org.loboevolution.html.dom.svg.SVGElement} object.
+     * @return a {@link org.w3c.dom.NodeList} object.
+     */
     NodeList getEnclosureList(SVGRect rect, SVGElement referenceElement);
 
 	/**
@@ -297,13 +294,19 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 */
 	SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix);
 
-	/**
-	 * <p>getElementById.</p>
-	 *
-	 * @param elementId a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Element} object.
-	 */
+    /**
+     * <p>getElementById.</p>
+     *
+     * @param elementId a {@link java.lang.String} object.
+     * @return a {@link org.w3c.dom.Element} object.
+     */
     Element getElementById(String elementId);
     
+    /**
+     * <p>createEvent.</p>
+     *
+     * @param eventType a {@link java.lang.String} object.
+     * @return a {@link org.loboevolution.html.node.events.Event} object.
+     */
     Event createEvent(String eventType);
 }

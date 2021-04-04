@@ -22,7 +22,8 @@ import org.mozilla.javascript.UintMap;
  * provided to create fields and methods, and within methods to write
  * Java bytecodes.
  *
- * @author Roger Lawrence
+ * Author Roger Lawrence
+ *
  */
 public class ClassFileWriter {
 	
@@ -64,6 +65,11 @@ public class ClassFileWriter {
         itsFlags = ACC_PUBLIC | ACC_SUPER;
     }
 
+    /**
+     * <p>getClassName.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public final String getClassName() {
         return generatedClassName;
     }
@@ -81,6 +87,17 @@ public class ClassFileWriter {
         itsInterfaces.add(Short.valueOf(interfaceIndex));
     }
 
+    /** Constant <code>ACC_PUBLIC=0x0001</code> */
+    /** Constant <code>ACC_PRIVATE=0x0002</code> */
+    /** Constant <code>ACC_PROTECTED=0x0004</code> */
+    /** Constant <code>ACC_STATIC=0x0008</code> */
+    /** Constant <code>ACC_FINAL=0x0010</code> */
+    /** Constant <code>ACC_SUPER=0x0020</code> */
+    /** Constant <code>ACC_SYNCHRONIZED=0x0020</code> */
+    /** Constant <code>ACC_VOLATILE=0x0040</code> */
+    /** Constant <code>ACC_TRANSIENT=0x0080</code> */
+    /** Constant <code>ACC_NATIVE=0x0100</code> */
+    /** Constant <code>ACC_ABSTRACT=0x0400</code> */
     public static final short
         ACC_PUBLIC = 0x0001,
         ACC_PRIVATE = 0x0002,
@@ -113,6 +130,9 @@ public class ClassFileWriter {
     /**
      * Convert Java class name in dot notation into "Lname-with-dots-replaced-by-slashes;" form
      * suitable for use as JVM type signatures.
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
      */
     public static String classNameToSignature(String name) {
         int nameLength = name.length();
@@ -731,6 +751,12 @@ public class ClassFileWriter {
 
     }
 
+    /**
+     * <p>add.</p>
+     *
+     * @param theOpCode a int.
+     * @param className a {@link java.lang.String} object.
+     */
     public void add(int theOpCode, String className) {
         if (DEBUGCODE) {
             logger.info("Add " + bytecodeStr(theOpCode)
@@ -764,6 +790,14 @@ public class ClassFileWriter {
     }
 
 
+    /**
+     * <p>add.</p>
+     *
+     * @param theOpCode a int.
+     * @param className a {@link java.lang.String} object.
+     * @param fieldName a {@link java.lang.String} object.
+     * @param fieldType a {@link java.lang.String} object.
+     */
     public void add(int theOpCode, String className, String fieldName,
         String fieldType) {
         if (DEBUGCODE) {
@@ -803,6 +837,14 @@ public class ClassFileWriter {
         }
     }
 
+    /**
+     * <p>addInvoke.</p>
+     *
+     * @param theOpCode a int.
+     * @param className a {@link java.lang.String} object.
+     * @param methodName a {@link java.lang.String} object.
+     * @param methodType a {@link java.lang.String} object.
+     */
     public void addInvoke(int theOpCode, String className, String methodName,
         String methodType) {
         if (DEBUGCODE) {
@@ -855,6 +897,14 @@ public class ClassFileWriter {
         }
     }
 
+    /**
+     * <p>addInvokeDynamic.</p>
+     *
+     * @param methodName a {@link java.lang.String} object.
+     * @param methodType a {@link java.lang.String} object.
+     * @param bsm a {@link org.mozilla.classfile.ClassFileWriter.MHandle} object.
+     * @param bsmArgs a {@link java.lang.Object} object.
+     */
     public void addInvokeDynamic(String methodName, String methodType,
         MHandle bsm, Object... bsmArgs) {
         if (DEBUGCODE) {
@@ -923,6 +973,11 @@ public class ClassFileWriter {
         }
     }
 
+    /**
+     * <p>addPush.</p>
+     *
+     * @param k a boolean.
+     */
     public void addPush(boolean k) {
         add(k ? ByteCode.ICONST_1 : ByteCode.ICONST_0);
     }
@@ -1011,6 +1066,7 @@ public class ClassFileWriter {
      * Check if k fits limit on string constant size imposed by class file format.
      *
      * @param k the string constant
+     * @return a boolean.
      */
     public boolean isUnderStringSizeLimit(String k) {
         return itsConstantPool.isUnderUtfEncodingLimit(k);
@@ -1132,6 +1188,13 @@ public class ClassFileWriter {
         }
     }
 
+    /**
+     * <p>addTableSwitch.</p>
+     *
+     * @param low a int.
+     * @param high a int.
+     * @return a int.
+     */
     public int addTableSwitch(int low, int high) {
         if (DEBUGCODE) {
             logger.info("Add " + bytecodeStr(ByteCode.TABLESWITCH)
@@ -1169,18 +1232,36 @@ public class ClassFileWriter {
         return switchStart;
     }
 
+    /**
+     * <p>markTableSwitchDefault.</p>
+     *
+     * @param switchStart a int.
+     */
     public final void markTableSwitchDefault(int switchStart) {
         addSuperBlockStart(itsCodeBufferTop);
         itsJumpFroms.put(itsCodeBufferTop, switchStart);
         setTableSwitchJump(switchStart, -1, itsCodeBufferTop);
     }
 
+    /**
+     * <p>markTableSwitchCase.</p>
+     *
+     * @param switchStart a int.
+     * @param caseIndex a int.
+     */
     public final void markTableSwitchCase(int switchStart, int caseIndex) {
         addSuperBlockStart(itsCodeBufferTop);
         itsJumpFroms.put(itsCodeBufferTop, switchStart);
         setTableSwitchJump(switchStart, caseIndex, itsCodeBufferTop);
     }
 
+    /**
+     * <p>markTableSwitchCase.</p>
+     *
+     * @param switchStart a int.
+     * @param caseIndex a int.
+     * @param stackTop a int.
+     */
     public final void markTableSwitchCase(int switchStart, int caseIndex,
         int stackTop) {
         if (!(0 <= stackTop && stackTop <= itsMaxStack))
@@ -1194,6 +1275,10 @@ public class ClassFileWriter {
     /**
      * Set a jump case for a tableswitch instruction. The jump target should be marked as a super
      * block start for stack map generation.
+     *
+     * @param switchStart a int.
+     * @param caseIndex a int.
+     * @param jumpTarget a int.
      */
     public void setTableSwitchJump(int switchStart, int caseIndex,
         int jumpTarget) {
@@ -1228,6 +1313,11 @@ public class ClassFileWriter {
         putInt32(jumpTarget - switchStart, itsCodeBuffer, caseOffset);
     }
 
+    /**
+     * <p>acquireLabel.</p>
+     *
+     * @return a int.
+     */
     public int acquireLabel() {
         int top = itsLabelTableTop;
         if (itsLabelTable == null || top == itsLabelTable.length) {
@@ -1244,6 +1334,11 @@ public class ClassFileWriter {
         return top | 0x80000000;
     }
 
+    /**
+     * <p>markLabel.</p>
+     *
+     * @param label a int.
+     */
     public void markLabel(int label) {
         if (!(label < 0))
             throw new IllegalArgumentException("Bad label, no biscuit");
@@ -1259,16 +1354,33 @@ public class ClassFileWriter {
         itsLabelTable[label] = itsCodeBufferTop;
     }
 
+    /**
+     * <p>markLabel.</p>
+     *
+     * @param label a int.
+     * @param stackTop a short.
+     */
     public void markLabel(int label, short stackTop) {
         markLabel(label);
         itsStackTop = stackTop;
     }
 
+    /**
+     * <p>markHandler.</p>
+     *
+     * @param theLabel a int.
+     */
     public void markHandler(int theLabel) {
         itsStackTop = 1;
         markLabel(theLabel);
     }
 
+    /**
+     * <p>getLabelPC.</p>
+     *
+     * @param label a int.
+     * @return a int.
+     */
     public int getLabelPC(int label) {
         if (!(label < 0))
             throw new IllegalArgumentException("Bad label, no biscuit");
@@ -1331,14 +1443,29 @@ public class ClassFileWriter {
         return itsCodeBufferTop;
     }
 
+    /**
+     * <p>getStackTop.</p>
+     *
+     * @return a short.
+     */
     public short getStackTop() {
         return itsStackTop;
     }
 
+    /**
+     * <p>setStackTop.</p>
+     *
+     * @param n a short.
+     */
     public void setStackTop(short n) {
         itsStackTop = n;
     }
 
+    /**
+     * <p>adjustStackTop.</p>
+     *
+     * @param delta a int.
+     */
     public void adjustStackTop(int delta) {
         int newStack = itsStackTop + delta;
         if (newStack < 0 || Short.MAX_VALUE < newStack)
@@ -1380,6 +1507,14 @@ public class ClassFileWriter {
         return oldTop;
     }
 
+    /**
+     * <p>addExceptionHandler.</p>
+     *
+     * @param startLabel a int.
+     * @param endLabel a int.
+     * @param handlerLabel a int.
+     * @param catchClassName a {@link java.lang.String} object.
+     */
     public void addExceptionHandler(int startLabel, int endLabel,
         int handlerLabel, String catchClassName) {
         if ((startLabel & 0x80000000) != 0x80000000)
@@ -1415,6 +1550,11 @@ public class ClassFileWriter {
 
     }
 
+    /**
+     * <p>addLineNumberEntry.</p>
+     *
+     * @param lineNumber a short.
+     */
     public void addLineNumberEntry(short lineNumber) {
         if (itsCurrentMethod == null)
             throw new IllegalArgumentException("No method to stop");
@@ -2742,7 +2882,7 @@ public class ClassFileWriter {
      * Write the class file to the OutputStream.
      *
      * @param oStream the stream to write to
-     * @throws IOException if writing to the stream produces an exception
+     * @throws java.io.IOException if writing to the stream produces an exception
      */
     public void write(OutputStream oStream)
         throws IOException {
@@ -2793,6 +2933,8 @@ public class ClassFileWriter {
 
     /**
      * Get the class file as array of bytesto the OutputStream.
+     *
+     * @return an array of {@link byte} objects.
      */
     public byte[] toByteArray() {
         short bootstrapMethodsAttrNameIndex = 0;

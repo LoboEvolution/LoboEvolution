@@ -31,8 +31,8 @@ import java.awt.image.BufferedImage;
 /**
  * Helper class that manages the actual painting.
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class PaintManager {
 	private BufferedImage cachedImage = null;

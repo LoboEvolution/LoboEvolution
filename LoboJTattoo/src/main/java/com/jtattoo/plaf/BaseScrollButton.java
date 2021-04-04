@@ -36,8 +36,8 @@ import javax.swing.plaf.basic.BasicArrowButton;
 /**
  * <p>BaseScrollButton class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseScrollButton extends BasicArrowButton {
 

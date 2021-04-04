@@ -32,17 +32,27 @@ import java.io.IOException;
  * </ul>
  *
  * All three of these cases are handled by the getDestination() method.
+ *
+  *
+  *
  */
 public class PDFDestination {
 
 	/** The known types of destination */
 	public static final int XYZ = 0;
+	/** Constant <code>FIT=1</code> */
 	public static final int FIT = 1;
+	/** Constant <code>FITH=2</code> */
 	public static final int FITH = 2;
+	/** Constant <code>FITV=3</code> */
 	public static final int FITV = 3;
+	/** Constant <code>FITR=4</code> */
 	public static final int FITR = 4;
+	/** Constant <code>FITB=5</code> */
 	public static final int FITB = 5;
+	/** Constant <code>FITBH=6</code> */
 	public static final int FITBH = 6;
+	/** Constant <code>FITBV=7</code> */
 	public static final int FITBV = 7;
 	/** the type of this destination (from the list above) */
 	private final int type;
@@ -80,6 +90,8 @@ public class PDFDestination {
 	 *            the PDFObject representing this destination
 	 * @param root
 	 *            the root of the PDF object tree
+	 * @return a {@link org.loboevolution.pdfview.PDFDestination} object.
+	 * @throws java.io.IOException if any.
 	 */
 	public static PDFDestination getDestination(PDFObject obj, PDFObject root) throws IOException {
 		// resolve string and name issues
@@ -161,6 +173,8 @@ public class PDFDestination {
 
 	/**
 	 * Get the type of this destination
+	 *
+	 * @return a int.
 	 */
 	public int getType() {
 		return this.type;
@@ -168,6 +182,8 @@ public class PDFDestination {
 
 	/**
 	 * Get the PDF Page object associated with this destination
+	 *
+	 * @return a {@link org.loboevolution.pdfview.PDFObject} object.
 	 */
 	public PDFObject getPage() {
 		return this.pageObj;
@@ -175,6 +191,8 @@ public class PDFDestination {
 
 	/**
 	 * Get the left coordinate value
+	 *
+	 * @return a float.
 	 */
 	public float getLeft() {
 		return this.left;
@@ -182,6 +200,8 @@ public class PDFDestination {
 
 	/**
 	 * Set the left coordinate value
+	 *
+	 * @param left a float.
 	 */
 	public void setLeft(float left) {
 		this.left = left;
@@ -189,6 +209,8 @@ public class PDFDestination {
 
 	/**
 	 * Get the right coordinate value
+	 *
+	 * @return a float.
 	 */
 	public float getRight() {
 		return this.right;
@@ -196,6 +218,8 @@ public class PDFDestination {
 
 	/**
 	 * Set the right coordinate value
+	 *
+	 * @param right a float.
 	 */
 	public void setRight(float right) {
 		this.right = right;
@@ -203,6 +227,8 @@ public class PDFDestination {
 
 	/**
 	 * Get the top coordinate value
+	 *
+	 * @return a float.
 	 */
 	public float getTop() {
 		return this.top;
@@ -210,6 +236,8 @@ public class PDFDestination {
 
 	/**
 	 * Set the top coordinate value
+	 *
+	 * @param top a float.
 	 */
 	public void setTop(float top) {
 		this.top = top;
@@ -217,6 +245,8 @@ public class PDFDestination {
 
 	/**
 	 * Get the bottom coordinate value
+	 *
+	 * @return a float.
 	 */
 	public float getBottom() {
 		return this.bottom;
@@ -224,6 +254,8 @@ public class PDFDestination {
 
 	/**
 	 * Set the bottom coordinate value
+	 *
+	 * @param bottom a float.
 	 */
 	public void setBottom(float bottom) {
 		this.bottom = bottom;
@@ -231,6 +263,8 @@ public class PDFDestination {
 
 	/**
 	 * Get the zoom value
+	 *
+	 * @return a float.
 	 */
 	public float getZoom() {
 		return this.zoom;
@@ -238,6 +272,8 @@ public class PDFDestination {
 
 	/**
 	 * Set the zoom value
+	 *
+	 * @param zoom a float.
 	 */
 	public void setZoom(float zoom) {
 		this.zoom = zoom;

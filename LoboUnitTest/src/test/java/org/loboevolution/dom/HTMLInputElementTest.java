@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -27,10 +24,13 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link HTMLInputElement} and buttons.*/
-
+ * Tests for {@link org.loboevolution.html.dom.HTMLInputElement} and buttons.
+ */
 public class HTMLInputElementTest extends LoboUnitTest {
 
+    /**
+     * <p>standardProperties_Text.</p>
+     */
     @Test
     public void standardProperties_Text() {
         final String html
@@ -55,6 +55,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setValueString.</p>
+     */
     @Test
     public void setValueString() {
          final String[] messages = {
@@ -65,6 +68,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
          testValue("'abc'", messages);
     }
 
+    /**
+     * <p>setValueEmptyString.</p>
+     */
     @Test
     public void setValueEmptyString() {
          final String[] messages = {
@@ -75,6 +81,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
          testValue("''", messages);
     }
 
+    /**
+     * <p>setValueBlankString.</p>
+     */
     @Test
     public void setValueBlankString() {
          final String[] messages = {
@@ -86,6 +95,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>setValueNumber.</p>
+     */
     @Test
     public void setValueNumber() {
          final String[] messages = {
@@ -96,6 +108,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
          testValue("12", messages);
     }
 
+    /**
+     * <p>setValueNull.</p>
+     */
     @Test
     public void setValueNull() {
          final String[] messages =  {
@@ -210,6 +225,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>type.</p>
+     */
     @Test
     public void type() {
         final String[] messages = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
@@ -220,6 +238,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         testAttribute("type", "", null, messages);
     }
 
+    /**
+     * <p>files.</p>
+     */
     @Test
     public void files() {
         final String[] messages = {
@@ -230,6 +251,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         testAttribute("files", "", null, messages);
     }
 
+    /**
+     * <p>checked.</p>
+     */
     @Test
     public void checked() {
         final String[] messages = {
@@ -241,6 +265,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         testAttribute("checked", "", null, messages);
     }
 
+    /**
+     * <p>checkedWithAttribute.</p>
+     */
     @Test
     public void checkedWithAttribute() {
         final String[] messages = {
@@ -252,6 +279,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         testAttribute("checked", "checked", null, messages);
     }
 
+    /**
+     * <p>setCheckedTrue.</p>
+     */
     @Test
     public void setCheckedTrue() {
         final String[] messages = {
@@ -262,6 +292,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         }; testAttribute("checked", "", "true", messages);
     }
 
+    /**
+     * <p>setCheckedBlank.</p>
+     */
     @Test
     public void setCheckedBlank() {
         final String[] messages = {
@@ -273,6 +306,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         testAttribute("checked", "", "", messages);
     }
 
+    /**
+     * <p>setValueAttribute.</p>
+     */
     @Test
     public void setValueAttribute() {
         final String[] messages = {
@@ -392,6 +428,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>checkedAttribute_Radio.</p>
+     */
     @Test
     public void checkedAttribute_Radio() {
         final String html
@@ -420,6 +459,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>disabledAttribute.</p>
+     */
     @Test
     public void disabledAttribute() {
         final String html
@@ -450,6 +492,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>fieldDotForm.</p>
+     */
     @Test
     public void fieldDotForm() {
         final String html
@@ -479,6 +524,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+     /**
+      * <p>defautValue.</p>
+      */
      @Test
     public void defautValue() {
         final String html
@@ -498,6 +546,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>changeType.</p>
+     */
     @Test
     public void changeType() {
         final String html
@@ -539,6 +590,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>defaultValues.</p>
+     */
     @Test
     public void defaultValues() {
         final String html
@@ -586,6 +640,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>createInputAndChangeType.</p>
+     */
     @Test
     public void createInputAndChangeType() {
         final String html
@@ -607,6 +664,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>createInputAndChangeTypeToText.</p>
+     */
     @Test
     public void createInputAndChangeTypeToText() {
         final String html
@@ -628,6 +688,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>maxLength.</p>
+     */
     @Test
     public void maxLength() {
         final String html
@@ -656,6 +719,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>minLength.</p>
+     */
     @Test
     public void minLength() {
         final String html
@@ -685,6 +751,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>typeCase.</p>
+     */
     @Test
     public void typeCase() {
         final String html
@@ -726,6 +795,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>typeTrim.</p>
+     */
     @Test
     public void typeTrim() {
         final String html
@@ -760,6 +832,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>readOnly.</p>
+     */
     @Test
     public void readOnly() {
         final String html
@@ -781,6 +856,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>readOnlyInputFile.</p>
+     */
     @Test
     public void readOnlyInputFile() {
         final String html
@@ -805,6 +883,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAlign.</p>
+     */
     @Test
     public void getAlign() {
         final String html
@@ -830,6 +911,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAlign.</p>
+     */
     @Test
     public void setAlign() {
         final String html
@@ -864,6 +948,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>accessKey.</p>
+     */
     @Test
     public void accessKey() {
         final String html
@@ -899,6 +986,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttributeAndSetValue.</p>
+     */
     @Test
     public void getAttributeAndSetValue() {
         final String html
@@ -933,6 +1023,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttributeAndSetValueNull.</p>
+     */
     @Test
     public void getAttributeAndSetValueNull() {
         final String html
@@ -963,6 +1056,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selectionRange.</p>
+     */
     @Test
     public void selectionRange() {
         final String html
@@ -987,6 +1083,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>min.</p>
+     */
     @Test
     public void min() {
         final String html
@@ -1013,6 +1112,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>max.</p>
+     */
     @Test
     public void max() {
         final String html
@@ -1039,6 +1141,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>labels.</p>
+     */
     @Test
     public void labels() {
         final String html =
@@ -1071,6 +1176,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         final String[] messages = {"0", "2", "1", "2", "1", "1"};
         checkHtmlAlert(html, messages);
     }
+    /**
+     * <p>defaultClientWidthHeight.</p>
+     */
     @Test
     public void defaultClientWidthHeight() {
         final String html = "<html><head><title>foo</title>\n"
@@ -1102,6 +1210,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>form.</p>
+     */
     @Test
     public void form() {
         final String html
@@ -1119,6 +1230,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttribute.</p>
+     */
     @Test
     public void getAttribute() {
         final String html
@@ -1139,6 +1253,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttributeCase.</p>
+     */
     @Test
     public void getAttributeCase() {
         final String html
@@ -1159,6 +1276,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAttribute.</p>
+     */
     @Test
     public void setAttribute() {
         final String html
@@ -1179,6 +1299,9 @@ public class HTMLInputElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAttributeFromJavaScript.</p>
+     */
     @Test
     public void setAttributeFromJavaScript() {
         final String html

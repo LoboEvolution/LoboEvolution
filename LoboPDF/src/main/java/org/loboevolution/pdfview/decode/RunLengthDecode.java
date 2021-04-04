@@ -26,8 +26,9 @@ import org.loboevolution.pdfview.PDFParseException;
 
 /**
  * decode an array of Run Length encoded bytes into a byte array
- * 
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class RunLengthDecode {
 	/** the end of data in the RunLength encoding. */
@@ -79,13 +80,13 @@ public class RunLengthDecode {
 	 * length+1 (1 to 128) bytes are to be copied. If the length is 129 through
 	 * 255, the following single byte is copied 257-length (2 to 128) times. A
 	 * length value of 128 means and End of Data (EOD).
-	 * 
+	 *
 	 * @param buf
 	 *            the RUnLEngth encoded bytes in a byte buffer
-	 * 
 	 * @param params
 	 *            parameters to the decoder (ignored)
 	 * @return the decoded bytes
+	 * @throws org.loboevolution.pdfview.PDFParseException if any.
 	 */
 	public static ByteBuffer decode(ByteBuffer buf, PDFObject params) throws PDFParseException {
 		RunLengthDecode me = new RunLengthDecode(buf);

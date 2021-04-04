@@ -74,8 +74,8 @@ import com.jtattoo.plaf.hifi.HiFiToolBarUI;
 /**
  * <p>NoireLookAndFeel class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class NoireLookAndFeel extends AbstractLookAndFeel {
 
@@ -174,9 +174,9 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 	}
 
 	/**
-	 * <p>setTheme.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * <p>setTheme.</p>
 	 */
 	public static void setTheme(String name) {
 		AbstractTheme.setInternalName(name);

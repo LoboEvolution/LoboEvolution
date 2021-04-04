@@ -17,11 +17,13 @@ class NativeRegExpCallable extends NativeRegExp implements Function {
         super();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
         return execSub(cx, scope, args, MATCH);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
         return (Scriptable) execSub(cx, scope, args, MATCH);

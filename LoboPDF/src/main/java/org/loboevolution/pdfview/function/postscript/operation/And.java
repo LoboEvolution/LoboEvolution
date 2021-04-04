@@ -5,6 +5,8 @@ import java.util.Stack;
 final class And implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>bool1|int1 bool2|int2</i> <b>and</b> <i>bool3|int3</i> <p>
 	 *
 	 * returns the logical conjunction of the operands

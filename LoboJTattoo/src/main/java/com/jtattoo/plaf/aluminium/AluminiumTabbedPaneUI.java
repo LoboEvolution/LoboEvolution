@@ -39,8 +39,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AluminiumTabbedPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 

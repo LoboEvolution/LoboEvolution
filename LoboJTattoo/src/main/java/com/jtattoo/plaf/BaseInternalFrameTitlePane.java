@@ -60,10 +60,10 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
  * Class that manages a JLF title bar
  * <p>
  *
- * @author Steve Wilson
- * @author Brian Beck
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Steve Wilson
+ * Author Brian Beck
+ * Author Michael Hagen
+ *
  */
 public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane implements ActionListener {
 

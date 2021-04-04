@@ -6,6 +6,12 @@ import javax.swing.AbstractAction;
 
 import org.loboevolution.pdf.PDFViewer;
 
+/**
+ * <p>ZoomOutAction class.</p>
+ *
+  *
+  *
+ */
 public class ZoomOutAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -14,12 +20,19 @@ public class ZoomOutAction extends AbstractAction {
 	
 	private final float zoomfactor;
 
+	/**
+	 * <p>Constructor for ZoomOutAction.</p>
+	 *
+	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
+	 * @param factor a float.
+	 */
 	public ZoomOutAction(PDFViewer dialog, float factor) {
 		super("Zoom out", dialog.getIcon("/org/loboevolution/images/zoomout.png"));
 		zoomfactor = factor;
 		this.dialog = dialog;
 	}
 
+	/** {@inheritDoc} */
 	public void actionPerformed(ActionEvent evt) {
 		dialog.doZoom(zoomfactor);
 	}

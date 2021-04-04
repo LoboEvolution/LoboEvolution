@@ -41,8 +41,8 @@ import com.jtattoo.plaf.BaseButtonUI;
 /**
  * <p>GraphiteButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteButtonUI extends BaseButtonUI {
 

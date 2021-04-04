@@ -49,15 +49,21 @@ import org.loboevolution.pdfview.PDFRenderer;
 
 /**
  * A type 1 (tiling) pattern
+ *
+  *
+  *
  */
 public class PatternType1 extends PDFPattern {
     /** paint types */
     public static final int PAINT_COLORED = 1;
+    /** Constant <code>PAINT_UNCOLORED=2</code> */
     public static final int PAINT_UNCOLORED = 2;
    
     /** tiling types */
     public static final int TILE_CONSTANT = 1;
+    /** Constant <code>TILE_NODISTORT=2</code> */
     public static final int TILE_NODISTORT = 2;
+    /** Constant <code>TILE_FASTER=3</code> */
     public static final int TILE_FASTER = 3;
     
     /** the resources used by the image we will tile */
@@ -81,16 +87,20 @@ public class PatternType1 extends PDFPattern {
     /** the stream data */
     private byte[] data;
     
-    /** Creates a new instance of PatternType1 */
+    /**
+     * Creates a new instance of PatternType1
+     */
     public PatternType1() {
         super(1);    
     }
     
-    /**
-     * Parse the pattern from the PDFObject
-     *
-     * Note the resources passed in are ignored...
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Parse the pattern from the PDFObject
+	 *
+	 * Note the resources passed in are ignored...
+	 */
     @Override
 	protected void parse(PDFObject patternObj, Map rsrc) throws IOException
     {
@@ -110,14 +120,14 @@ public class PatternType1 extends PDFPattern {
         this.yStep = patternObj.getDictRef("YStep").getIntValue();
     }
     
-    /** 
-     * Create a PDFPaint from this pattern and set of components.  
-     * This creates a buffered image of this pattern using
-     * the given paint, then uses that image to create the correct 
-     * TexturePaint to use in the PDFPaint.
-     *
-     * @param basePaint the base paint to use, or null if not needed
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Create a PDFPaint from this pattern and set of components.
+	 * This creates a buffered image of this pattern using
+	 * the given paint, then uses that image to create the correct
+	 * TexturePaint to use in the PDFPaint.
+	 */
     @Override
 	public PDFPaint getPaint(PDFPaint basePaint) {
       
@@ -165,32 +175,56 @@ public class PatternType1 extends PDFPattern {
         return new TilingPatternPaint(paint, this);
     }
     
-    /** get the associated resources */
+    /**
+     * get the associated resources
+     *
+     * @return a {@link java.util.Map} object.
+     */
     public Map<String,PDFObject> getResources() {
         return this.resources;
     }
     
-    /** get the paint type */
+    /**
+     * get the paint type
+     *
+     * @return a int.
+     */
     public int getPaintType() {
         return this.paintType;
     }
     
-    /** get the tiling type */
+    /**
+     * get the tiling type
+     *
+     * @return a int.
+     */
     public int getTilingType() {
         return this.tilingType;
     }
     
-    /** get the bounding box */
+    /**
+     * get the bounding box
+     *
+     * @return a {@link java.awt.geom.Rectangle2D} object.
+     */
     public Rectangle2D getBBox() {
         return this.bbox;
     }
     
-    /** get the x step */
+    /**
+     * get the x step
+     *
+     * @return a int.
+     */
     public int getXStep() {
         return this.xStep;
     }
     
-    /** get the y step */
+    /**
+     * get the y step
+     *
+     * @return a int.
+     */
     public int getYStep() {
         return this.yStep;
     }

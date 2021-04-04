@@ -62,8 +62,8 @@ import javax.swing.JViewport;
  *
  * @see StatusBar
  * @see Overlay
- * @author Kaz Csaba
- * @version $Id: $Id
+ * Author Kaz Csaba
+ *
  */
 public final class ImageViewer {
 	private final LayeredImageView view;

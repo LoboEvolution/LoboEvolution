@@ -23,17 +23,17 @@ import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
 
 /**
- * <p> Utility methods for dealing with PDF Strings, such as:
+ *  Utility methods for dealing with PDF Strings, such as:
  * <ul>
  * <li>{@link #asTextString(String) converting to text strings}
  * <li>{@link #asPDFDocEncoded(String) converting to PDFDocEncoded strings}
  * <li>{@link #asUTF16BEEncoded converting to UTF-16BE strings}
  * <li>converting basic strings between {@link #asBytes(String) byte} and
  * {@link #asBasicString(byte[], int, int) string} representations
- * </ul></p>
+ * </ul>
  *
  * <p>We refer to basic strings as those corresponding to the PDF 'string' type.
- * PDFRenderer represents these as {@link String}s, though this is somewhat
+ * PDFRenderer represents these as {@link java.lang.String}s, though this is somewhat
  * deceiving, as they are, effectively, just sequences of bytes, although byte
  * values &lt;= 127 do correspond to the ASCII character set. Outside of this,
  * the 'string' type, as repesented by basic strings do not possess any
@@ -49,11 +49,12 @@ import java.nio.charset.CharacterCodingException;
  * (though without consequence if the string consists only of ASCII
  * alphanumeric values). Care must be taken to either convert basic strings to
  * text strings (also expressed as a String) when appropriate, using either the
- * methods in this class, or {@link PDFObject#getTextStringValue()}}. For
+ * methods in this class, or {@link org.loboevolution.pdfview.PDFObject#getTextStringValue()}}. For
  * strings that are 'byte strings', {@link #asBytes(String)} or {@link
  * PDFObject#getStream()} should be used. </p>.
  *
- * @author Luke Kirby
+ * Author Luke Kirby
+  *
  */
 public class PDFStringUtil {
 
@@ -64,7 +65,7 @@ public class PDFStringUtil {
      * UTF-16BE encoding of those bytes. If the BOM is not present, the bytes
      * from the input string are decoded using the PDFDocEncoding charset.</p>
      *
-     * <p>From the PDF Reference 1.7, p158:
+     * From the PDF Reference 1.7, p158:
      *
      * <blockquote>The text string type is used for character strings that are
      * encoded in either PDFDocEncoding or the UTF-16BE Unicode character
@@ -74,7 +75,6 @@ public class PDFStringUtil {
      * described in the Unicode Standard by the Unicode Consortium (see the
      * Bibliography). Note that PDFDocEncoding does not support all Unicode
      * characters whereas UTF-16BE does.</blockquote>
-     * </p>
      *
      * @param basicString the basic PDF string, as offered by {@link
      *  PDFObject#getStringValue()}
@@ -114,6 +114,13 @@ public class PDFStringUtil {
         return buf.toString();
     }
 
+    /**
+     * <p>toPDFDocEncoded.</p>
+     *
+     * @param string a {@link java.lang.String} object.
+     * @return an array of {@link byte} objects.
+     * @throws java.nio.charset.CharacterCodingException if any.
+     */
     public byte[] toPDFDocEncoded(String string)
             throws CharacterCodingException {
         // we can just grab array since we know that if charset completes
@@ -162,6 +169,7 @@ public class PDFStringUtil {
     /**
      * Create a basic string from bytes. This is effectively the byte array
      * cast to a char array and turned into a String.
+     *
      * @param bytes the source of the bytes for the basic string
      * @param offset the offset into butes where the string starts
      * @param length the number of bytes to turn into a string
@@ -179,6 +187,7 @@ public class PDFStringUtil {
     /**
      * Create a basic string from bytes. This is effectively the byte array
      * cast to a char array and turned into a String.
+     *
      * @param bytes the bytes, all of which are used
      * @return the corresponding string
      */

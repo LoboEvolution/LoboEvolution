@@ -29,10 +29,14 @@ import org.loboevolution.pdfview.PDFParseException;
 /**
  * A sampled function maps input values to output values by interpolating
  * along a line or cubic between two known values.
+ *
+  *
+  *
  */
 public class FunctionType0 extends PDFFunction {
     /** the valid interpolation methods */
     protected static final int LINEAR_INTERPOLATION = 1;
+    /** Constant <code>CUBIC_INTERPOLATION=3</code> */
     protected static final int CUBIC_INTERPOLATION = 3;
     
     /** the size of each input dimension, as an array of <i>m</i> integers */
@@ -57,12 +61,18 @@ public class FunctionType0 extends PDFFunction {
      */
     private int[][] samples;
     
-    /** Creates a new instance of FunctionType0 */
+    /**
+     * Creates a new instance of FunctionType0
+     */
     protected FunctionType0() {
         super (TYPE_0);
     }
     
-    /** Read the function information from a PDF Object */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Read the function information from a PDF Object
+	 */
     @Override
 	protected void parse(PDFObject obj) throws IOException {
         // read the size array (required)
@@ -116,16 +126,14 @@ public class FunctionType0 extends PDFFunction {
         setSamples(readSamples(obj.getStreamBuffer()));
     }
     
-    /**
-     * Map from <i>m</i> input values to <i>n</i> output values.
-     * The number of inputs <i>m</i> must be exactly one half the size of the
-     * domain.  The number of outputs should match one half the size of the
-     * range.
-     *
-     * @param inputs an array of <i>m</i> input values
-     * @param outputs an array of size <i>n</i> which will be filled
-     *                with the output values, or null to return a new array
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Map from <i>m</i> input values to <i>n</i> output values.
+	 * The number of inputs <i>m</i> must be exactly one half the size of the
+	 * domain.  The number of outputs should match one half the size of the
+	 * range.
+	 */
     @Override
 	protected void doFunction(float[] inputs, int inputOffset, 
                               float[] outputs, int outputOffset) 
@@ -177,16 +185,20 @@ public class FunctionType0 extends PDFFunction {
         return this.size[dimension];
     }
     
-    /** 
+    /**
      * Set the size of all input dimensions
+     *
+     * @param size an array of {@link int} objects.
      */
     protected void setSize(int[] size) {
         this.size = size;
     }
     
     
-    /** 
+    /**
      * Get the number of bits per sample
+     *
+     * @return a int.
      */
     protected int getBitsPerSample() {
         return this.bitsPerSample;
@@ -194,6 +206,8 @@ public class FunctionType0 extends PDFFunction {
     
     /**
      * Set the number of bits per sample
+     *
+     * @param bits a int.
      */
     protected void setBitsPerSample(int bits) {
         this.bitsPerSample = bits;
@@ -201,6 +215,8 @@ public class FunctionType0 extends PDFFunction {
     
     /**
      * Get the interpolation type
+     *
+     * @return a int.
      */
     protected int getOrder() {
         return this.order;
@@ -208,6 +224,8 @@ public class FunctionType0 extends PDFFunction {
     
     /**
      * Set the interpolation type
+     *
+     * @param order a int.
      */
     protected void setOrder(int order) {
         this.order = order;
@@ -217,9 +235,9 @@ public class FunctionType0 extends PDFFunction {
      * Get the encoding for a particular input parameter
      *
      * @param i the index into the encoding array, which has size 2 * <i>m</i>.
-     *          the <i>i</i>th entry in the array has index 2<i>i</i>, 
+     *          the <i>i</i>th entry in the array has index 2<i>i</i>,
      *           2<i>i</i> + 1
-     * @return the encoding value if the encoding array is set, or the default 
+     * @return the encoding value if the encoding array is set, or the default
      */
     protected float getEncode(int i) {
         if (this.encode != null) {
@@ -233,6 +251,8 @@ public class FunctionType0 extends PDFFunction {
     
     /**
      * Set the encode array
+     *
+     * @param encode an array of {@link float} objects.
      */
     protected void setEncode(float[] encode) {
         this.encode = encode;
@@ -242,9 +262,9 @@ public class FunctionType0 extends PDFFunction {
      * Get the decoding for a particular input parameter
      *
      * @param i the index into the decoding array, which has size 2 * <i>n</i>.
-     *          the <i>i</i>th entry in the array has index 2<i>i</i>, 
+     *          the <i>i</i>th entry in the array has index 2<i>i</i>,
      *           2<i>i</i> + 1
-     * @return the decoding value if the decoding array is set, or the default 
+     * @return the decoding value if the decoding array is set, or the default
      */
     protected float getDecode(int i) {
         if (this.decode != null) {
@@ -256,6 +276,8 @@ public class FunctionType0 extends PDFFunction {
     
     /**
      * Set the decode array
+     *
+     * @param decode an array of {@link float} objects.
      */
     protected void setDecode(float[] decode) {
         this.decode = decode;
@@ -263,7 +285,7 @@ public class FunctionType0 extends PDFFunction {
     
     /**
      * Get a component for a sample given <i>m</i> indices and output
-     * dimension. 
+     * dimension.
      *
      * @param values an array of <i>m</i> values determining which sample
      *               to select
@@ -283,6 +305,8 @@ public class FunctionType0 extends PDFFunction {
     
     /**
      * Set the table of samples
+     *
+     * @param samples an array of {@link int} objects.
      */
     protected void setSamples(int[][] samples) {
         this.samples = samples;

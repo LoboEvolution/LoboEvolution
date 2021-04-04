@@ -58,6 +58,12 @@ import org.jpedal.jbig2.image.JBIG2Bitmap;
 import org.jpedal.jbig2.segment.Segment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>PageInformationSegment class.</p>
+ *
+  *
+  *
+ */
 public class PageInformationSegment extends Segment {
 
 	private static final Logger logger = Logger.getLogger(PageInformationSegment.class.getName());
@@ -69,18 +75,39 @@ public class PageInformationSegment extends Segment {
 
 	private JBIG2Bitmap pageBitmap;
 
+	/**
+	 * <p>Constructor for PageInformationSegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 */
 	public PageInformationSegment(JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
+	/**
+	 * <p>Getter for the field <code>pageInformationFlags</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.segment.pageinformation.PageInformationFlags} object.
+	 */
 	public PageInformationFlags getPageInformationFlags() {
 		return pageInformationFlags;
 	}
 
+	/**
+	 * <p>Getter for the field <code>pageBitmap</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 */
 	public JBIG2Bitmap getPageBitmap() {
 		return pageBitmap;
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 
 		if (JBIG2StreamDecoder.debug)
@@ -137,6 +164,11 @@ public class PageInformationSegment extends Segment {
 		pageBitmap.clear(defPix);
 	}
 
+	/**
+	 * <p>Getter for the field <code>pageBitmapHeight</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getPageBitmapHeight() {
 		return pageBitmapHeight;
 	}

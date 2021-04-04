@@ -44,8 +44,8 @@ import javax.swing.plaf.basic.BasicPopupMenuUI;
 /**
  * <p>BasePopupMenuUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BasePopupMenuUI extends BasicPopupMenuUI {
 

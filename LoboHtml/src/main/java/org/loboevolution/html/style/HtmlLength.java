@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 19, 2005
@@ -28,8 +25,8 @@ package org.loboevolution.html.style;
 /**
  * <p>HtmlLength class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public final class HtmlLength {
 	/** Constant EMPTY_ARRAY */
@@ -60,6 +57,8 @@ public final class HtmlLength {
 	 * <p>Constructor for HtmlLength.</p>
 	 *
 	 * @param spec a {@link java.lang.String} object.
+	 * @throws java.lang.IndexOutOfBoundsException if any.
+	 * @throws java.lang.NumberFormatException if any.
 	 * @throws java.lang.IndexOutOfBoundsException if any.
 	 * @throws java.lang.NumberFormatException if any.
 	 */

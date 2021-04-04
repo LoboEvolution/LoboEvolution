@@ -22,8 +22,8 @@ import java.util.EnumMap;
  * <p>In order to implement this efficiently, this class provides a mechanism
  * to access the original built-in global constructors and their prototypes
  * via numeric class-ids. To make use of this, the new
- * {@link ScriptRuntime#newBuiltinObject ScriptRuntime.newBuiltinObject} and
- * {@link ScriptRuntime#setBuiltinProtoAndParent ScriptRuntime.setBuiltinProtoAndParent}
+ * {@link org.mozilla.javascript.ScriptRuntime#newBuiltinObject ScriptRuntime.newBuiltinObject} and
+ * {@link org.mozilla.javascript.ScriptRuntime#setBuiltinProtoAndParent ScriptRuntime.setBuiltinProtoAndParent}
  * methods should be used to create and initialize objects of built-in classes
  * instead of their generic counterparts.</p>
  *
@@ -34,6 +34,9 @@ import java.util.EnumMap;
  * (e.g. with dynamic scopes) embeddings should explicitly call
  * {@link #cacheBuiltins(Scriptable, boolean)} to initialize the class cache for each top-level
  * scope.</p>
+ *
+ *
+ *
  */
 public class TopLevel extends IdScriptableObject {
 
@@ -92,6 +95,7 @@ public class TopLevel extends IdScriptableObject {
     private EnumMap<Builtins, BaseFunction> ctors;
     private EnumMap<NativeErrors, BaseFunction> errors;
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "global";
@@ -100,10 +104,13 @@ public class TopLevel extends IdScriptableObject {
     /**
      * Cache the built-in ECMAScript objects to protect them against
      * modifications by the script. This method is called automatically by
-     * {@link ScriptRuntime#initStandardObjects ScriptRuntime.initStandardObjects}
+     * {@link org.mozilla.javascript.ScriptRuntime#initStandardObjects ScriptRuntime.initStandardObjects}
      * if the scope argument is an instance of this class. It only has to be
      * called by the embedding if a top-level scope is not initialized through
      * <code>initStandardObjects()</code>.
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sealed a boolean.
      */
     public void cacheBuiltins(Scriptable scope, boolean sealed) {
         ctors = new EnumMap<Builtins, BaseFunction>(Builtins.class);
@@ -224,6 +231,7 @@ public class TopLevel extends IdScriptableObject {
      * Get the cached built-in object constructor from this scope with the
      * given <code>type</code>. Returns null if {@link #cacheBuiltins(Scriptable, boolean)} has not
      * been called on this object.
+     *
      * @param type the built-in type
      * @return the built-in constructor
      */
@@ -246,6 +254,7 @@ public class TopLevel extends IdScriptableObject {
      * Get the cached built-in object prototype from this scope with the
      * given <code>type</code>. Returns null if {@link #cacheBuiltins(Scriptable, boolean)} has not
      * been called on this object.
+     *
      * @param type the built-in type
      * @return the built-in prototype
      */

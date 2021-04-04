@@ -30,8 +30,8 @@ import javax.swing.plaf.ComponentUI;
 /**
  * <p>BernsteinCheckBoxUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BernsteinCheckBoxUI extends BernsteinRadioButtonUI {
 

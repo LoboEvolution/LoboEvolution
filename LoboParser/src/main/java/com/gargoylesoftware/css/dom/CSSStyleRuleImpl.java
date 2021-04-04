@@ -26,7 +26,8 @@ import com.gargoylesoftware.css.util.LangUtils;
 /**
  * Implementation of CSSStyleRule.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
 
@@ -35,6 +36,7 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Ctor.
+     *
      * @param parentStyleSheet the parent style sheet
      * @param parentRule the parent rule
      * @param selectors the selectors
@@ -46,6 +48,8 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
+     * <p>getSelectors.</p>
+     *
      * @return all selectors
      */
     public SelectorList getSelectors() {
@@ -54,15 +58,14 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Updates the selectors.
+     *
      * @param selectors the new selectors
      */
     public void setSelectors(final SelectorList selectors) {
         selectors_ = selectors;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getCssText() {
         final CSSStyleDeclarationImpl style = getStyle();
@@ -80,9 +83,7 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
         return selectorText + " { " + styleText + " }";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -115,6 +116,8 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
+     * <p>getSelectorText.</p>
+     *
      * @return the selector text
      */
     public String getSelectorText() {
@@ -123,8 +126,9 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Sets the selector text.
+     *
      * @param selectorText the new selector text
-     * @throws DOMException in clase of error
+     * @throws org.w3c.dom.DOMException in clase of error
      */
     public void setSelectorText(final String selectorText) throws DOMException {
         try {
@@ -146,6 +150,8 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
+     * <p>getStyle.</p>
+     *
      * @return the style
      */
     public CSSStyleDeclarationImpl getStyle() {
@@ -154,17 +160,20 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Replaces the style.
+     *
      * @param style the new style
      */
     public void setStyle(final CSSStyleDeclarationImpl style) {
         style_ = style;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -179,6 +188,7 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
             && LangUtils.equals(getStyle(), csr.getStyle());
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

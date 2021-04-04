@@ -204,6 +204,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             If there is a syntax error in the source string or a
      *             duplicated key.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject(JSONTokener x) throws JSONException {
         this();
@@ -353,6 +354,7 @@ public class JSONObject {
      *                If there is a syntax error in the source string or a
      *                duplicated key.
      * @throws org.json.JSONException if any.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject(String source) throws JSONException {
         this(new JSONTokener(source));
@@ -367,6 +369,7 @@ public class JSONObject {
      *            The Locale to load the ResourceBundle for.
      * @throws org.json.JSONException if any.
      *             If any org.json.JSONExceptions are detected.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject(String baseName, Locale locale) throws JSONException {
         this();
@@ -430,6 +433,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             If the value is an invalid number or if the key is null.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject accumulate(String key, Object value) throws JSONException {
         testValidity(value);
@@ -460,6 +464,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             If the key is null or if the current value associated with
      *             the key is not a JSONArray.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject append(String key, Object value) throws JSONException {
         testValidity(value);
@@ -511,6 +516,7 @@ public class JSONObject {
      * @return The object associated with the key.
      * @throws org.json.JSONException if any.
      *             if the key is not found.
+     * @throws org.json.JSONException if any.
      */
     public Object get(String key) throws JSONException {
         if (key == null) {
@@ -534,7 +540,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value cannot be converted
      *             to an enum.
-     * @param <E> a E object.
+     * @throws org.json.JSONException if any.
      */
     public <E extends Enum<E>> E getEnum(Class<E> clazz, String key) throws JSONException {
         E val = optEnum(clazz, key);
@@ -558,6 +564,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the value is not a Boolean or the String "true" or
      *             "false".
+     * @throws org.json.JSONException if any.
      */
     public boolean getBoolean(String key) throws JSONException {
         Object object = this.get(key);
@@ -583,6 +590,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value cannot
      *             be converted to BigInteger.
+     * @throws org.json.JSONException if any.
      */
     public BigInteger getBigInteger(String key) throws JSONException {
         Object object = this.get(key);
@@ -603,6 +611,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value
      *             cannot be converted to BigDecimal.
+     * @throws org.json.JSONException if any.
      */
     public BigDecimal getBigDecimal(String key) throws JSONException {
         Object object = this.get(key);
@@ -626,6 +635,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value is not a Number
      *             object and cannot be converted to a number.
+     * @throws org.json.JSONException if any.
      */
     public double getDouble(String key) throws JSONException {
         Object object = this.get(key);
@@ -647,6 +657,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value is not a Number
      *             object and cannot be converted to a number.
+     * @throws org.json.JSONException if any.
      */
     public float getFloat(String key) throws JSONException {
         Object object = this.get(key);
@@ -668,6 +679,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value is not a Number
      *             object and cannot be converted to a number.
+     * @throws org.json.JSONException if any.
      */
     public Number getNumber(String key) throws JSONException {
         Object object = this.get(key);
@@ -691,6 +703,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value cannot be converted
      *             to an integer.
+     * @throws org.json.JSONException if any.
      */
     public int getInt(String key) throws JSONException {
         Object object = this.get(key);
@@ -711,6 +724,7 @@ public class JSONObject {
      * @return A JSONArray which is the value.
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value is not a JSONArray.
+     * @throws org.json.JSONException if any.
      */
     public JSONArray getJSONArray(String key) throws JSONException {
         Object object = this.get(key);
@@ -729,6 +743,7 @@ public class JSONObject {
      * @return A JSONObject which is the value.
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value is not a JSONObject.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject getJSONObject(String key) throws JSONException {
         Object object = this.get(key);
@@ -748,6 +763,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             if the key is not found or if the value cannot be converted
      *             to a long.
+     * @throws org.json.JSONException if any.
      */
     public long getLong(String key) throws JSONException {
         Object object = this.get(key);
@@ -805,6 +821,7 @@ public class JSONObject {
      * @return A string which is the value.
      * @throws org.json.JSONException if any.
      *             if there is no string value for the key.
+     * @throws org.json.JSONException if any.
      */
     public String getString(String key) throws JSONException {
         Object object = this.get(key);
@@ -836,6 +853,7 @@ public class JSONObject {
      * @throws org.json.JSONException if any.
      *             If there is already a property with this name that is not an
      *             Integer, Long, Double, or Float.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject increment(String key) throws JSONException {
         Object value = this.opt(key);
@@ -940,6 +958,7 @@ public class JSONObject {
      * @return A String.
      * @throws org.json.JSONException if any.
      *             If n is a non-finite number.
+     * @throws org.json.JSONException if any.
      */
     public static String numberToString(Number number) throws JSONException {
         if (number == null) {
@@ -981,7 +1000,6 @@ public class JSONObject {
      * @param key
      *            A key string.
      * @return The enum value associated with the key or null if not found
-     * @param <E> a E object.
      */
     public <E extends Enum<E>> E optEnum(Class<E> clazz, String key) {
         return this.optEnum(clazz, key, null);
@@ -998,7 +1016,6 @@ public class JSONObject {
      *            The default in case the value is not found
      * @return The enum value associated with the key or defaultValue
      *            if the value is not found or cannot be assigned to clazz
-     * @param <E> a E object.
      */
     public <E extends Enum<E>> E optEnum(Class<E> clazz, String key, E defaultValue) {
         try {
@@ -1489,6 +1506,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             If the key is null.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject put(String key, boolean value) throws JSONException {
         this.put(key, value ? Boolean.TRUE : Boolean.FALSE);
@@ -1504,6 +1522,7 @@ public class JSONObject {
      * @param value
      *            A Collection value.
      * @return this.
+     * @throws org.json.JSONException if any.
      * @throws org.json.JSONException if any.
      */
     public JSONObject put(String key, Collection<?> value) throws JSONException {
@@ -1521,6 +1540,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             If the key is null or if the number is invalid.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject put(String key, double value) throws JSONException {
         this.put(key, Double.valueOf(value));
@@ -1537,6 +1557,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             If the key is null or if the number is invalid.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject put(String key, float value) throws JSONException {
         this.put(key, Float.valueOf(value));
@@ -1553,6 +1574,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             If the key is null.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject put(String key, int value) throws JSONException {
         this.put(key, Integer.valueOf(value));
@@ -1569,6 +1591,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             If the key is null.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject put(String key, long value) throws JSONException {
         this.put(key, Long.valueOf(value));
@@ -1584,6 +1607,7 @@ public class JSONObject {
      * @param value
      *            A Map value.
      * @return this.
+     * @throws org.json.JSONException if any.
      * @throws org.json.JSONException if any.
      */
     public JSONObject put(String key, Map<?, ?> value) throws JSONException {
@@ -1604,6 +1628,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             If the value is non-finite number or if the key is null.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject put(String key, Object value) throws JSONException {
         if (key == null) {
@@ -1628,6 +1653,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             if the key is a duplicate
+     * @throws org.json.JSONException if any.
      */
     public JSONObject putOnce(String key, Object value) throws JSONException {
         if (key != null && value != null) {
@@ -1652,6 +1678,7 @@ public class JSONObject {
      * @return this.
      * @throws org.json.JSONException if any.
      *             If the value is a non-finite number.
+     * @throws org.json.JSONException if any.
      */
     public JSONObject putOpt(String key, Object value) throws JSONException {
         if (key != null && value != null) {
@@ -1898,6 +1925,7 @@ public class JSONObject {
      * @return Number representation of the value.
      * @throws java.lang.NumberFormatException thrown if the value is not a valid number. A public
      *      caller should catch this and wrap it in a {@link org.json.JSONException} if applicable.
+     * @throws java.lang.NumberFormatException if any.
      */
     protected static Number stringToNumber(final String val) throws NumberFormatException {
         char initial = val.charAt(0);
@@ -2014,6 +2042,7 @@ public class JSONObject {
      *            The object to test.
      * @throws org.json.JSONException if any.
      *             If o is a non-finite number.
+     * @throws org.json.JSONException if any.
      */
     public static void testValidity(Object o) throws JSONException {
         if (o != null) {
@@ -2041,6 +2070,7 @@ public class JSONObject {
      * @return A JSONArray of values.
      * @throws org.json.JSONException if any.
      *             If any of the values are non-finite numbers.
+     * @throws org.json.JSONException if any.
      */
     public JSONArray toJSONArray(JSONArray names) throws JSONException {
         if (names == null || names.length() == 0) {
@@ -2083,6 +2113,7 @@ public class JSONObject {
      *         brace)</small>.
      * @throws org.json.JSONException if any.
      *             If the object contains an invalid number.
+     * @throws org.json.JSONException if any.
      */
     public String toString(int indentFactor) throws JSONException {
         StringWriter w = new StringWriter();
@@ -2114,6 +2145,7 @@ public class JSONObject {
      *         brace)</small>.
      * @throws org.json.JSONException if any.
      *             If the value is or contains an invalid number.
+     * @throws org.json.JSONException if any.
      */
     public static String valueToString(Object value) throws JSONException {
     	// moves the implementation to JSONWriter as:
@@ -2186,6 +2218,7 @@ public class JSONObject {
      * @return The writer.
      * @throws org.json.JSONException if any.
      * @param writer a {@link java.io.Writer} object.
+     * @throws org.json.JSONException if any.
      */
     public Writer write(Writer writer) throws JSONException {
         return this.write(writer, 0, 0);
@@ -2255,6 +2288,7 @@ public class JSONObject {
      * @param indent
      *            The indentation of the top level.
      * @return The writer.
+     * @throws org.json.JSONException if any.
      * @throws org.json.JSONException if any.
      */
     public Writer write(Writer writer, int indentFactor, int indent)

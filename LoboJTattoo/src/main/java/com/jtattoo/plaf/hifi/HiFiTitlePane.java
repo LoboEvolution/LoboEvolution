@@ -35,8 +35,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>HiFiTitlePane class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiTitlePane extends BaseTitlePane {
 

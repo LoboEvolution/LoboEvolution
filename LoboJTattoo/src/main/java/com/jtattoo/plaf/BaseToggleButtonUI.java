@@ -49,8 +49,8 @@ import javax.swing.text.View;
 /**
  * <p>BaseToggleButtonUI class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class BaseToggleButtonUI extends BasicToggleButtonUI {
 

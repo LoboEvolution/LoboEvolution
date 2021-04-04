@@ -48,8 +48,8 @@ import javax.swing.text.JTextComponent;
 /**
  * <p>BaseTextAreaUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseTextAreaUI extends BasicTextAreaUI {
 

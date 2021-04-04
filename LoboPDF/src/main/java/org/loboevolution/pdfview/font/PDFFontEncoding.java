@@ -40,6 +40,9 @@ import org.loboevolution.pdfview.font.cid.PDFCMap;
  * Note that the data in the PDF might be ASCII characters (bytes) or it might
  * be a multi-byte format such as unicode.  For now we will assume all
  * glyph ids fit into at most the two bytes of a character.
+ *
+  *
+  *
  */
 public class PDFFontEncoding {
 
@@ -63,13 +66,24 @@ public class PDFFontEncoding {
     private int type;
 	private PDFObject mapName;
     
+    /**
+     * <p>Constructor for PDFFontEncoding.</p>
+     *
+     * @param cmap a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
+     */
     public PDFFontEncoding(PDFCMap cmap) {
     	super();
     	this.type = TYPE_CMAP;
     	this.cmap = cmap;
     }
 
-    /** Creates a new instance of PDFFontEncoding */
+    /**
+     * Creates a new instance of PDFFontEncoding
+     *
+     * @param fontType a {@link java.lang.String} object.
+     * @param encoding a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
+     */
     public PDFFontEncoding(String fontType, PDFObject encoding)
             throws IOException {
         if (encoding.getType() == PDFObject.NAME) {
@@ -105,7 +119,13 @@ public class PDFFontEncoding {
         }
     }
 
-	/** Get the glyphs associated with a given String */
+	/**
+	 * Get the glyphs associated with a given String
+	 *
+	 * @param font a {@link org.loboevolution.pdfview.font.PDFFont} object.
+	 * @param text a {@link java.lang.String} object.
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<PDFGlyph> getGlyphs(PDFFont font, String text) {
 		List<PDFGlyph> outList = new ArrayList<>(text.length());
 
@@ -168,6 +188,9 @@ public class PDFFontEncoding {
 
     /**
      * Parse a PDF encoding object for the actual encoding
+     *
+     * @param encoding a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
      */
     public void parseEncoding(PDFObject encoding) throws IOException {
         this.differences = new HashMap<>();
@@ -215,6 +238,11 @@ public class PDFFontEncoding {
         }
     }
     
+    /**
+     * <p>isOneByteIdentity.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isOneByteIdentity() {
     	if(this.mapName != null) {
     		try {

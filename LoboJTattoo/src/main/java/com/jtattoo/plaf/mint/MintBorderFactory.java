@@ -30,8 +30,8 @@ import com.jtattoo.plaf.BaseBorders;
 /**
  * <p>MintBorderFactory class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class MintBorderFactory implements AbstractBorderFactory {
 

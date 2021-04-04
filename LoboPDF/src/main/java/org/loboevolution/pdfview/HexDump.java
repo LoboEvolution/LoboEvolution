@@ -22,9 +22,20 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.logging.Logger;
 
+/**
+ * <p>HexDump class.</p>
+ *
+  *
+  *
+ */
 public class HexDump {
 	
 	private static final Logger logger = Logger.getLogger(HexDump.class.getName());
+    /**
+     * <p>printData.</p>
+     *
+     * @param data an array of {@link byte} objects.
+     */
     public static void printData(byte[] data) {
         char[] parts = new char[17];
         int partsloc = 0;
@@ -63,6 +74,11 @@ public class HexDump {
         }
     }
 
+    /**
+     * <p>main.</p>
+     *
+     * @param args an array of {@link java.lang.String} objects.
+     */
     public static void main(String[] args) {
         if (args.length != 1) {
             logger.info("Usage: ");

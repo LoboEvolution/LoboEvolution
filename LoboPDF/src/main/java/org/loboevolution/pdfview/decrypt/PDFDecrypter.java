@@ -27,18 +27,20 @@ import org.loboevolution.pdfview.PDFStringUtil;
 
 /**
  * A decrypter decrypts streams and strings in a PDF document. {@link
- * #decryptBuffer(String, PDFObject, ByteBuffer)} } should be used for decoding
+ *#decryptBuffer(String, PDFObject, ByteBuffer)} } should be used for decoding
  * streams, and {@link #decryptString(int, int, String)} for string values in
  * the PDF. It is possible for strings and streams to be encrypted with
  * different mechanisms, so the appropriate method must alwayus be used.
  *
- * @see "PDFReference 1.7, Section 3.5 Encryption"
- * @author Luke Kirby
+ * see "PDFReference 1.7, Section 3.5 Encryption"
+ * Author Luke Kirby
+  *
  */
 public interface PDFDecrypter {
 
     /**
      * Decrypt a buffer of data
+     *
      * @param cryptFilterName the name of the crypt filter, if V4
      *  encryption is being used, where individual crypt filters may
      *  be specified for individual streams. If encryption is not using
@@ -55,9 +57,7 @@ public interface PDFDecrypter {
      * @return a buffer containing the decrypted stream, positioned at its
      *  beginning; will only be the same buffer as streamBuf if the identity
      *  decrypter is being used
-     * @throws PDFParseException if the named crypt filter does not exist, or
-     *  if a crypt filter is named when named crypt filters are not supported.
-     *  Problems due to incorrect passwords are revealed prior to this point.
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
     ByteBuffer decryptBuffer(
             String cryptFilterName,
@@ -67,13 +67,12 @@ public interface PDFDecrypter {
 
     /**
      * Decrypt a {@link PDFStringUtil basic string}.
+     *
      * @param objNum the object number of the containing object
      * @param objGen the generation number of the containing object
      * @param inputBasicString the string to be decrypted
      * @return the decrypted string
-     * @throws PDFParseException if the named crypt filter does not exist, or
-     *  if a crypt filter is named when named crypt filters are not supported.
-     *  Problems due to incorrect passwords are revealed prior to this point.
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
     String decryptString(int objNum, int objGen, String inputBasicString)
             throws PDFParseException;
@@ -83,6 +82,7 @@ public interface PDFDecrypter {
      * the user is the owner of the document. Can be used, in conjunction
      * with {@link #isEncryptionPresent()} to determine whether any
      * permissions apply.
+     *
      * @return whether owner authentication is being used to decrypt the
      *  document
      */
@@ -91,12 +91,14 @@ public interface PDFDecrypter {
     /**
      * Determine whether this actually applies a decryption other than
      * identity decryption.
+     *
      * @return whether encryption is present
      */
     boolean isEncryptionPresent();
 
     /**
      * Determines whether decryption applies for a given crypt filter name
+     *
      * @param cryptFilterName the crypt filter name
      * @return whether the given crypt filter decrypts or not
      */

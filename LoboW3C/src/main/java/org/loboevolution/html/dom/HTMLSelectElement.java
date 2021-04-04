@@ -1,3 +1,23 @@
+/*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact info: ivan.difrancesco@yahoo.it
+ */
+
 package org.loboevolution.html.dom;
 
 import org.loboevolution.html.node.Element;
@@ -7,6 +27,9 @@ import org.loboevolution.html.node.ValidityState;
 /**
  * A &lt;select&gt; HTML Element. These elements also share all of the properties and methods of other HTML elements via
  * the HTMLElement interface.
+ *
+ *
+ *
  */
 public interface HTMLSelectElement extends HTMLElement {
 
@@ -15,7 +38,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the autocomplete
      */
-    
     String getAutocomplete();
 
     /**
@@ -23,7 +45,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param autocomplete the autocomplete
      */
-    
     void setAutocomplete(String autocomplete);
 
     /**
@@ -33,7 +54,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the boolean
      */
-    
     boolean isAutofocus();
 
     /**
@@ -41,7 +61,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param autofocus the autofocus
      */
-    
     void setAutofocus(boolean autofocus);
 
     /**
@@ -49,7 +68,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the boolean
      */
-    
     boolean isDisabled();
 
     /**
@@ -57,7 +75,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param disabled the disabled
      */
-    
     void setDisabled(boolean disabled);
 
     /**
@@ -65,8 +82,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the form
      */
-    
-    
     HTMLFormElement getForm();
 
     /**
@@ -74,7 +89,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the labels
      */
-    
     NodeList getLabels();
 
     /**
@@ -82,7 +96,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param length the length
      */
-    
     void setLength(int length);
 
     /**
@@ -90,7 +103,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the boolean
      */
-    
     boolean isMultiple();
 
     /**
@@ -98,7 +110,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param multiple the multiple
      */
-    
     void setMultiple(boolean multiple);
 
     /**
@@ -106,7 +117,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the name
      */
-    
     String getName();
 
     /**
@@ -114,7 +124,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param name the name
      */
-    
     void setName(String name);
 
     /**
@@ -122,7 +131,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the options
      */
-    
     HTMLOptionsCollection getOptions();
 
     /**
@@ -130,7 +138,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the boolean
      */
-    
     boolean isRequired();
 
     /**
@@ -138,7 +145,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param required the required
      */
-    
     void setRequired(boolean required);
 
     /**
@@ -146,7 +152,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the selected index
      */
-    
     int getSelectedIndex();
 
     /**
@@ -154,7 +159,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param selectedIndex the selected index
      */
-    
     void setSelectedIndex(int selectedIndex);
 
     /**
@@ -162,7 +166,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the selected options
      */
-    
     HTMLCollection getSelectedOptions();
 
     /**
@@ -170,7 +173,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the size
      */
-    
     int getSize();
 
     /**
@@ -178,7 +180,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param size the size
      */
-    
     void setSize(int size);
 
     /**
@@ -186,7 +187,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the type
      */
-    
     String getType();
 
     /**
@@ -196,7 +196,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the validation message
      */
-    
     String getValidationMessage();
 
     /**
@@ -204,7 +203,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the validity
      */
-
     ValidityState getValidity();
 
     /**
@@ -212,7 +210,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the value
      */
-    
     String getValue();
 
     /**
@@ -220,7 +217,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param value the value
      */
-    
     void setValue(String value);
 
     /**
@@ -228,7 +224,6 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the boolean
      */
-    
     boolean isWillValidate();
 
     /**
@@ -260,10 +255,8 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param index Variant of type Number that specifies the zero-based index of the object to retrieve when a
      *              collection is returned.
-     *
      * @return the element
      */
-    
     Element item(int index);
 
     /**
@@ -271,15 +264,12 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @param name A String that specifies the name or id property of the object to retrieve. A collection is
      *             returned           if more than one match is made.
-     *
      * @return the html option element
      */
-    
     HTMLOptionElement namedItem(String name);
 
     /**
      * Removes an element from the collection.
-     *
      */
     void remove();
 
@@ -312,6 +302,11 @@ public interface HTMLSelectElement extends HTMLElement {
      */
     void set(int name, Element value);
 
+	/**
+	 * <p>getLength.</p>
+	 *
+	 * @return a int.
+	 */
 	int getLength();
 
 }

@@ -7,12 +7,15 @@ import org.loboevolution.pdfview.PDFDestination;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
-/*****************************************************************************
+/**
+ ***************************************************************************
  * Action directing to a location within an embedded PDF document
  *
- * @author  Katja Sondermann
+ * Author  Katja Sondermann
  * @since 07.07.2009
- ****************************************************************************/
+ ***************************************************************************
+  *
+ */
 public class GoToEAction extends PDFAction {
 
 	/** the destination within the remote PDF file */
@@ -24,10 +27,12 @@ public class GoToEAction extends PDFAction {
 	/** The target dictionary*/
 	private GoToETarget target;
 
-	/** 
+	/**
 	 * Creates a new instance of GoToEAction from an object
+	 *
 	 * @param obj the PDFObject with the action information
-	 * @throws IOException - in case the action can not be parsed
+	 * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
+	 * @throws java.io.IOException if any.
 	 */
 	public GoToEAction(PDFObject obj, PDFObject root) throws IOException {
 		super("GoToE");
@@ -48,7 +53,7 @@ public class GoToEAction extends PDFAction {
 
 	/*************************************************************************
 	 * Parse a target dictionary if available 
-	 * @param targetObj
+	 * @param targetObj a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @param list - a list of all already parsed targets, for not getting in an endless loop 
 	 * 					(if a target is found which is already contained, the recursive calling
 	 * 					of this method will stop).
@@ -98,12 +103,15 @@ public class GoToEAction extends PDFAction {
 		return target;
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Create a new GoToEAction from the given attributes
-	 * @param dest
-	 * @param file
-	 * @param newWindow
-	 ************************************************************************/
+	 *
+	 * @param dest a {@link org.loboevolution.pdfview.PDFDestination} object.
+	 * @param file a {@link java.lang.String} object.
+	 * @param newWindow a {@link java.lang.Boolean} object.
+	 ***********************************************************************
+	 */
 	public GoToEAction(PDFDestination dest, String file, boolean newWindow) {
 		super("GoToR");
 		this.file = file;
@@ -111,34 +119,46 @@ public class GoToEAction extends PDFAction {
 		this.newWindow = newWindow;
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Get the destination this action refers to
+	 *
 	 * @return PDFDestination
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public PDFDestination getDestination() {
 		return this.destination;
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Get the file this action refers to
+	 *
 	 * @return PDFDestination
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public String getFile() {
 		return this.file;
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Should the remote file be opened in a new window?
+	 *
 	 * @return boolean
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public boolean isNewWindow() {
 		return this.newWindow;
 	}
 	
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Get the target dictionary
+	 *
 	 * @return GoToETarget
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public GoToETarget getTarget() {
 		return this.target;
 	}
@@ -148,7 +168,7 @@ public class GoToEAction extends PDFAction {
 	 * Inner class for holding the target dictionary's information
 	 *
 	 * @version $Id: GoToEAction.java,v 1.1 2009-07-10 12:47:31 xond Exp $ 
-	 * @author  xond
+	 * Author  xond
 	 * @since 07.07.2009
 	 ****************************************************************************/
 	public static class GoToETarget {
@@ -160,7 +180,7 @@ public class GoToEAction extends PDFAction {
 
 		/*************************************************************************
 		 * Relation between current document and the target. Can either be "P" or "C"
-		 * @return String 
+		 * @return a {@link java.lang.String} object.
 		 ************************************************************************/
 		public String getRelation() {
 			return this.relation;
@@ -168,7 +188,7 @@ public class GoToEAction extends PDFAction {
 
 		/*************************************************************************
 		 * Relation between current document and the target. Can either be "P" or "C"
-		 * @param relation 
+		 * @param relation a {@link java.lang.String} object.
 		 ************************************************************************/
 		public void setRelation(String relation) {
 			this.relation = relation;
@@ -176,7 +196,7 @@ public class GoToEAction extends PDFAction {
 
 		/*************************************************************************
 		 * The file name in the embedded files tree
-		 * @return String
+		 * @return a {@link java.lang.String} object.
 		 ************************************************************************/
 		public String getNameInTree() {
 			return this.nameInTree;
@@ -184,7 +204,7 @@ public class GoToEAction extends PDFAction {
 
 		/*************************************************************************
 		 * The file name in the embedded files tree
-		 * @param nameInTree
+		 * @param nameInTree a {@link java.lang.String} object.
 		 ************************************************************************/
 		public void setNameInTree(String nameInTree) {
 			this.nameInTree = nameInTree;
@@ -210,7 +230,7 @@ public class GoToEAction extends PDFAction {
 		 * value is a string, it defines a named destination in the current document 
 		 * that provides the page number of the file attachment annotation.
 		 * 
-		 * @param pageNo 
+		 * @param pageNo a {@link java.lang.String} object.
 		 ************************************************************************/
 		public void setPageNo(String pageNo) {
 			this.pageNo = pageNo;
@@ -218,7 +238,7 @@ public class GoToEAction extends PDFAction {
 
 		/*************************************************************************
 		 * The index of the according annotation in the annotations array
-		 * @return String
+		 * @return a {@link java.lang.String} object.
 		 ************************************************************************/
 		public String getAnnotNo() {
 			return this.annotNo;
@@ -226,7 +246,7 @@ public class GoToEAction extends PDFAction {
 
 		/*************************************************************************
 		 * The index of the according annotation in the annotations array
-		 * @param annotNo
+		 * @param annotNo a {@link java.lang.String} object.
 		 ************************************************************************/
 		public void setAnnotNo(String annotNo) {
 			this.annotNo = annotNo;
@@ -244,7 +264,7 @@ public class GoToEAction extends PDFAction {
 		/*************************************************************************
 		 * A target dictionary specifying additional target information. If missing, 
 		 * the current document is the target file containing the destination.
-		 * @param targetDictionary
+		 * @param targetDictionary a {@link GoToETarget} object.
 		 ************************************************************************/
 		public void setTargetDictionary(GoToETarget targetDictionary) {
 			this.targetDictionary = targetDictionary;

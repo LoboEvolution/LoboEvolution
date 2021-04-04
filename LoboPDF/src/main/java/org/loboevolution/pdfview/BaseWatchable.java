@@ -21,6 +21,9 @@ package org.loboevolution.pdfview;
 /**
  * An abstract implementation of the watchable interface, that is extended
  * by the parser and renderer to do their thing.
+ *
+  *
+  *
  */
 public abstract class BaseWatchable implements Watchable, Runnable {
 
@@ -41,7 +44,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
     // handle exceptions via this class
     private static PDFErrorHandler errorHandler = new PDFErrorHandler(); 
 
-    /** 
+    /**
      * Creates a new instance of BaseWatchable
      */
     protected BaseWatchable() {
@@ -58,10 +61,11 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      *              the execution is not yet complete
      *         <li> Watchable.COMPLETED if the execution is complete
      *  </ul>
+     * @throws java.lang.Exception if any.
      */
     protected abstract int iterate() throws Exception;
 
-    /** 
+    /**
      * Prepare for a set of iterations.  Called before the first iterate() call
      * in a sequence.  Subclasses should extend this method if they need to do
      * anything to setup.
@@ -78,6 +82,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         // do nothing
     }
 
+	/** {@inheritDoc} */
     @Override
 	public void run() {
         try {
@@ -143,11 +148,11 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         this.thread = null;
     }
 
-    /**
-     * Get the status of this watchable
-     *
-     * @return one of the well-known statuses
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the status of this watchable
+	 */
     @Override
 	public int getStatus() {
         return this.status;
@@ -156,6 +161,8 @@ public abstract class BaseWatchable implements Watchable, Runnable {
     /**
      * Return whether this watchable has finished.  A watchable is finished
      * when its status is either COMPLETED, STOPPED or ERROR
+     *
+     * @return a boolean.
      */
     public boolean isFinished() {
         int s = getStatus();
@@ -165,28 +172,34 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 
     /**
      * return true if this watchable is ready to be executed
+     *
+     * @return a boolean.
      */
     public boolean isExecutable() {
         return ((this.status == Watchable.PAUSED || this.status == Watchable.RUNNING) &&
                 (this.gate == null || !this.gate.stop()));
     }
 
-    /**
-     * Stop this watchable if it is not already finished.  
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Stop this watchable if it is not already finished.
 	 * Stop will cause all processing to cease,
-     * and the watchable to be destroyed.
-     */
+	 * and the watchable to be destroyed.
+	 */
     @Override
 	public void stop() {
     	if (!isFinished()) setStatus(Watchable.STOPPED);
     }
 
-    /**
-     * Start this watchable and run in a new thread until it is finished or
-     * stopped.
-     * Note the watchable may be stopped if go() with a
-     * different time is called during execution.
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Start this watchable and run in a new thread until it is finished or
+	 * stopped.
+	 * Note the watchable may be stopped if go() with a
+	 * different time is called during execution.
+	 */
     @Override
 	public synchronized void go() {
         this.gate = null;
@@ -207,12 +220,12 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         execute(synchronous);
     }
 
-    /**
-     * Start this watchable and run for the given number of steps or until
-     * finished or stopped.
-     *
-     * @param steps the number of steps to run for
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Start this watchable and run for the given number of steps or until
+	 * finished or stopped.
+	 */
     @Override
 	public synchronized void go(int steps) {
         this.gate = new Gate();
@@ -221,12 +234,12 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         execute(false);
     }
 
-    /**
-     * Start this watchable and run for the given amount of time, or until
-     * finished or stopped.
-     *
-     * @param millis the number of milliseconds to run for
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Start this watchable and run for the given amount of time, or until
+	 * finished or stopped.
+	 */
     @Override
 	public synchronized void go(long millis) {
         this.gate = new Gate();
@@ -292,6 +305,8 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 
     /**
      * Set the status of this watchable
+     *
+     * @param status a int.
      */
     protected void setStatus(int status) {
         synchronized (this.statusLock) {
@@ -303,7 +318,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 
     /**
      * return true if we would be suppressing setError stack traces.
-     * 
+     *
      * @return  boolean
      */
     public static boolean isSuppressSetErrorStackTrace () {
@@ -312,8 +327,8 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 
     /**
      * set suppression of stack traces from setError.
-     * 
-     * @param suppressTrace
+     *
+     * @param suppressTrace a boolean.
      */
     public static void setSuppressSetErrorStackTrace(boolean suppressTrace) {
         SuppressSetErrorStackTrace = suppressTrace;
@@ -321,6 +336,8 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 
     /**
      * Set an error on this watchable
+     *
+     * @param error a {@link java.lang.Exception} object.
      */
     protected void setError(Exception error) {
     	exception = error;
@@ -331,6 +348,11 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         setStatus(Watchable.ERROR);
     }
 
+	/**
+	 * <p>Getter for the field <code>exception</code>.</p>
+	 *
+	 * @return a {@link java.lang.Exception} object.
+	 */
 	public Exception getException() {
 		return exception;
 	}
@@ -379,10 +401,20 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         }
     }
     
+    /**
+     * <p>Setter for the field <code>errorHandler</code>.</p>
+     *
+     * @param e a {@link org.loboevolution.pdfview.PDFErrorHandler} object.
+     */
     public static void setErrorHandler(PDFErrorHandler e) {
         errorHandler = e;
     }
     
+    /**
+     * <p>Getter for the field <code>errorHandler</code>.</p>
+     *
+     * @return a {@link org.loboevolution.pdfview.PDFErrorHandler} object.
+     */
     public static PDFErrorHandler getErrorHandler(){
         if(errorHandler == null) {
             errorHandler = new PDFErrorHandler();

@@ -31,8 +31,8 @@ import com.jtattoo.plaf.XPScrollButton;
 /**
  * <p>HiFiScrollButton class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiScrollButton extends XPScrollButton {
 

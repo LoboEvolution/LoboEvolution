@@ -65,8 +65,8 @@ import com.jtattoo.plaf.BaseTreeUI;
 /**
  * <p>LunaLookAndFeel class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LunaLookAndFeel extends AbstractLookAndFeel {
 
@@ -164,9 +164,9 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
 	}
 
 	/**
-	 * <p>setTheme.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * <p>setTheme.</p>
 	 */
 	public static void setTheme(String name) {
 		setTheme(themesMap.get(name));

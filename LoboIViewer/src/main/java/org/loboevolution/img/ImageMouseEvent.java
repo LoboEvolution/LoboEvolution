@@ -29,8 +29,8 @@ import java.util.EventObject;
 /**
  * An event indicating that a mouse action occured over an image.
  *
- * @author Kazo Csaba
- * @version $Id: $Id
+ * Author Kazo Csaba
+ *
  */
 public class ImageMouseEvent extends EventObject {
 	private static final long serialVersionUID = 1L;

@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 
@@ -27,8 +24,14 @@ package org.loboevolution.dom;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
+/**
+ * Tests for {@link org.loboevolution.html.dom.HTMLElement}.
+ */
 public class HTMLElementTest extends LoboUnitTest {
 
+    /**
+     * <p>all_IndexByInt.</p>
+     */
     @Test
     public void all_IndexByInt() {
         final String html = "<html><head>\n"
@@ -65,6 +68,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttribute.</p>
+     */
     @Test
     public void getAttribute() {
         final String html = "<html>\n"
@@ -90,6 +96,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttribute_styleAttribute.</p>
+     */
     @Test
     public void getAttribute_styleAttribute() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -106,6 +115,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttribute_styleAttributeWithFlag.</p>
+     */
     @Test
     public void getAttribute_styleAttributeWithFlag() {
         final String html =
@@ -122,6 +134,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>attributes.</p>
+     */
     @Test
     public void attributes() {
         final String html = "<html>\n"
@@ -146,6 +161,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSetAttributeNS.</p>
+     */
     @Test
     public void getSetAttributeNS() {
         final String html = "<html>\n"
@@ -171,6 +189,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>attributesAccess.</p>
+     */
     @Test
     public void attributesAccess() {
         final String html
@@ -193,6 +214,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAttribute.</p>
+     */
     @Test
     public void setAttribute() {
         final String html = "<html>\n"
@@ -220,6 +244,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttributeNode.</p>
+     */
     @Test
     public void getAttributeNode() {
         final String html =
@@ -263,6 +290,9 @@ public class HTMLElementTest extends LoboUnitTest {
                 "specified=true", "value=bleh"};   checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAttributeNode.</p>
+     */
     @Test
     public void setAttributeNode() {
         final String html =
@@ -293,6 +323,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByTagName.</p>
+     */
     @Test
     public void getElementsByTagName() {
         final String html
@@ -316,6 +349,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByTagName2.</p>
+     */
     @Test
     public void getElementsByTagName2() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -335,6 +371,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByTagNameCollection.</p>
+     */
     @Test
     public void getElementsByTagNameCollection() {
         final String html
@@ -360,6 +399,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByTagNameAsterisk.</p>
+     */
     @Test
     public void getElementsByTagNameAsterisk() {
         final String html = "<html><body onload='test()'><script>\n"
@@ -374,6 +416,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByTagNameEquality.</p>
+     */
     @Test
     public void getElementsByTagNameEquality() {
         final String html =
@@ -389,6 +434,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getClassName.</p>
+     */
     @Test
     public void getClassName() {
         final String html
@@ -407,6 +455,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setClassName.</p>
+     */
     @Test
     public void setClassName() {
         final String html
@@ -426,6 +477,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getInnerHTML.</p>
+     */
     @Test
     public void getInnerHTML() {
         final String html = "<html>\n"
@@ -448,6 +502,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getInnerHTML_EmptyAttributes.</p>
+     */
     @Test
     public void getInnerHTML_EmptyAttributes() {
         final String html = "<body onload='alert(document.body.innerHTML)'><div id='i' foo='' name=''></div></body>";
@@ -455,6 +512,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSetInnerHTMLSimple_FF.</p>
+     */
     @Test
     public void getSetInnerHTMLSimple_FF() {
         final String html = "<html>\n"
@@ -478,6 +538,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSetInnerHTMLNewInput.</p>
+     */
     @Test
     public void getSetInnerHTMLNewInput() {
         final String html = "<html>\n"
@@ -500,6 +563,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSetInnerHTMLChar_FF.</p>
+     */
     @Test
     public void getSetInnerHTMLChar_FF() {
         final String html = "<html>\n"
@@ -524,6 +590,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setInnerHTMLDeclareJavaScript.</p>
+     */
     @Test
     public void setInnerHTMLDeclareJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -546,6 +615,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>outerHTMLinNewDiv.</p>
+     */
     @Test
     public void outerHTMLinNewDiv() {
         final String html = "<html><body onload='test()'><script>\n"
@@ -563,6 +635,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSetInnerHtmlEmptyTag_FF.</p>
+     */
     @Test
     public void getSetInnerHtmlEmptyTag_FF() {
         final String html = "<html><body onload='test()'><script>\n"
@@ -580,6 +655,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSetInnerHtmlAttributeWithWhitespace_FF.</p>
+     */
     @Test
     public void getSetInnerHtmlAttributeWithWhitespace_FF() {
         final String html = "<html><body onload='test()'><script>\n"
@@ -597,6 +675,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setInnerHTMLEmpty.</p>
+     */
     @Test
     public void setInnerHTMLEmpty() {
         final String html = "<html><head></head><body>\n"
@@ -611,6 +692,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setInnerHTMLNull.</p>
+     */
     @Test
     public void setInnerHTMLNull() {
         final String html = "<html><head></head><body>\n"
@@ -625,6 +709,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setInnerHTMLResetsStyle.</p>
+     */
     @Test
     public void setInnerHTMLResetsStyle() {
         final String html = "<html><head></head>\n"
@@ -641,6 +728,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOuterHTMLFromBlock.</p>
+     */
     @Test
     public void getOuterHTMLFromBlock() {
         final String html = createPageForGetOuterHTML("div", "New  cell value", false);
@@ -648,6 +738,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOuterHTMLFromInline.</p>
+     */
     @Test
     public void getOuterHTMLFromInline() {
         final String html = createPageForGetOuterHTML("span", "New  cell value", false);
@@ -655,6 +748,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOuterHTMLFromEmpty.</p>
+     */
     @Test
     public void getOuterHTMLFromEmpty() {
         final String html = createPageForGetOuterHTML("br", "", true);
@@ -662,6 +758,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOuterHTMLFromUnclosedParagraph.</p>
+     */
     @Test
     public void getOuterHTMLFromUnclosedParagraph() {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
@@ -686,6 +785,9 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</html>";
     }
 
+    /**
+     * <p>setOuterHTMLNull.</p>
+     */
     @Test
     public void setOuterHTMLNull() {
         final String html = createPageForSetOuterHTML("div", null);
@@ -693,6 +795,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLEmpty.</p>
+     */
     @Test
     public void setOuterHTMLEmpty() {
         final String html = createPageForSetOuterHTML("div", "");
@@ -700,6 +805,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLBlank.</p>
+     */
     @Test
     public void setOuterHTMLBlank() {
         final String html = createPageForSetOuterHTML("div", "  ");
@@ -707,6 +815,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddTextToBlock.</p>
+     */
     @Test
     public void setOuterHTMLAddTextToBlock() {
         final String html = createPageForSetOuterHTML("div", "New  cell value");
@@ -714,6 +825,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddTextToInline.</p>
+     */
     @Test
     public void setOuterHTMLAddTextToInline() {
         final String html = createPageForSetOuterHTML("span", "New  cell value");
@@ -721,6 +835,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddBlockToBlock.</p>
+     */
     @Test
     public void setOuterHTMLAddBlockToBlock() {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
@@ -728,6 +845,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddBlockToInline.</p>
+     */
     @Test
     public void setOuterHTMLAddBlockToInline() {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
@@ -736,6 +856,9 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>setOuterHTMLAddInlineToInline.</p>
+     */
     @Test
     public void setOuterHTMLAddInlineToInline() {
         final String html = createPageForSetOuterHTML("span", "<span>test</span>");
@@ -743,6 +866,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddInlineToBlock.</p>
+     */
     @Test
     public void setOuterHTMLAddInlineToBlock() {
         final String html = createPageForSetOuterHTML("div", "<span>test</span>");
@@ -750,6 +876,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddEmpty.</p>
+     */
     @Test
     public void setOuterHTMLAddEmpty() {
         final String html = createPageForSetOuterHTML("div", "<br>");
@@ -757,6 +886,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLToReadOnly.</p>
+     */
     @Test
     public void setOuterHTMLToReadOnly() {
         final String html = "<html>\n"
@@ -793,6 +925,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddBlockToParagraph.</p>
+     */
     @Test
     public void setOuterHTMLAddBlockToParagraph() {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
@@ -800,6 +935,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddParagraphToParagraph.</p>
+     */
     @Test
     public void setOuterHTMLAddParagraphToParagraph() {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
@@ -807,6 +945,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddAnchorToAnchor.</p>
+     */
     @Test
     public void setOuterHTMLAddAnchorToAnchor() {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
@@ -814,6 +955,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddSelfClosingBlock.</p>
+     */
     @Test
     public void setOuterHTMLAddSelfClosingBlock() {
         final String html = createPageForSetOuterHTML("div", "<div/>");
@@ -821,6 +965,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddMultipleSelfClosingBlock.</p>
+     */
     @Test
     public void setOuterHTMLAddMultipleSelfClosingBlock() {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
@@ -829,6 +976,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddSelfClosingInline.</p>
+     */
     @Test
     public void setOuterHTMLAddSelfClosingInline() {
         final String html = createPageForSetOuterHTML("div", "<span/>");
@@ -836,6 +986,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLAddSelfClosingEmpty.</p>
+     */
     @Test
     public void setOuterHTMLAddSelfClosingEmpty() {
         final String html = createPageForSetOuterHTML("div", "<br/>");
@@ -870,6 +1023,9 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</html>";
     }
 
+    /**
+     * <p>setOuterHTMLDetachedElementNull.</p>
+     */
     @Test
     public void setOuterHTMLDetachedElementNull() {
         final String html = "<html>\n"
@@ -896,6 +1052,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLDetachedElementUndefined.</p>
+     */
     @Test
     public void setOuterHTMLDetachedElementUndefined() {
         final String html = "<html>\n"
@@ -922,6 +1081,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLDetachedElementEmpty.</p>
+     */
     @Test
     public void setOuterHTMLDetachedElementEmpty() {
         final String html = "<html>\n"
@@ -949,6 +1111,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLDetachedElementBlank.</p>
+     */
     @Test
     public void setOuterHTMLDetachedElementBlank() {
         final String html = "<html>\n"
@@ -976,6 +1141,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setOuterHTMLDetachedElement.</p>
+     */
     @Test
     public void setOuterHTMLDetachedElement() {
         final String html = "<html>\n"
@@ -1002,6 +1170,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addBehaviorDefaultClientCaps.</p>
+     */
     @Test
     public void addBehaviorDefaultClientCaps() {
         final String html = "<html><body><script>\n"
@@ -1020,6 +1191,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>removeBehavior.</p>
+     */
     @Test
     public void removeBehavior() {
         final String html = "<html><body><script>\n"
@@ -1041,6 +1215,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>children.</p>
+     */
     @Test
     public void children() {
         final String html = "<html><body>\n"
@@ -1060,6 +1237,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>childrenDoesNotCountTextNodes.</p>
+     */
     @Test
     public void childrenDoesNotCountTextNodes() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1078,6 +1258,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>childrenFunctionAccess.</p>
+     */
     @Test
     public void childrenFunctionAccess() {
         final String html = "<html><body>\n"
@@ -1094,6 +1277,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSetInnerTextSimple.</p>
+     */
     @Test
     public void getSetInnerTextSimple() {
         final String html = "<html>\n"
@@ -1116,6 +1302,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>removeAttribute.</p>
+     */
     @Test
     public void removeAttribute() {
         final String html = "<html>\n"
@@ -1138,6 +1327,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>removeAttribute_property.</p>
+     */
     @Test
     public void removeAttribute_property() {
         final String html = "<html>\n"
@@ -1161,6 +1353,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scrolls.</p>
+     */
     @Test
     public void scrolls() {
         final String html = "<html>\n"
@@ -1186,11 +1381,17 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scrollLeft_overflowScroll.</p>
+     */
     @Test
     public void scrollLeft_overflowScroll() {
         scrollLeft("scroll");
     }
 
+    /**
+     * <p>scrollLeft_overflowAuto.</p>
+     */
     @Test
     public void scrollLeft_overflowAuto() {
         scrollLeft("auto");
@@ -1229,6 +1430,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scrollLeft.</p>
+     */
     @Test
     public void scrollLeft() {
         final String html = "<html>\n"
@@ -1259,11 +1463,17 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scrollTop_overflowScroll.</p>
+     */
     @Test
     public void scrollTop_overflowScroll() {
         scrollTop("scroll");
     }
 
+    /**
+     * <p>scrollTop_overflowAuto.</p>
+     */
     @Test
     public void scrollTop_overflowAuto() {
         scrollTop("auto");
@@ -1302,6 +1512,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scrollIntoView.</p>
+     */
     @Test
     public void scrollIntoView() {
         final String html = "<html>\n"
@@ -1312,6 +1525,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>offsetParent_Basic.</p>
+     */
     @Test
     public void offsetParent_Basic() {
         final String html = "<html><head>\n"
@@ -1372,6 +1588,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>offsetParent_newElement.</p>
+     */
     @Test
     public void offsetParent_newElement() {
         final String html = "<html><body>\n"
@@ -1387,6 +1606,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>offsetParent_WithCSS.</p>
+     */
     @Test
     public void offsetParent_WithCSS() {
         final String html = "<html>\n"
@@ -1443,6 +1665,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>prototype.</p>
+     */
     @Test
     public void prototype() {
         final String html = "<html><head><title>Prototype test</title>\n"
@@ -1473,6 +1698,9 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>prototype_Element.</p>
+     */
     @Test
     public void prototype_Element() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1490,6 +1718,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>instanceOf.</p>
+     */
     @Test
     public void instanceOf() {
         final String html = "<html><head><title>instanceof test</title>\n"
@@ -1508,6 +1739,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>parentElement.</p>
+     */
     @Test
     public void parentElement() {
         final String html
@@ -1526,11 +1760,17 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>currentStyle.</p>
+     */
     @Test
     public void currentStyle() {
         style("currentStyle");
     }
 
+    /**
+     * <p>runtimeStyle.</p>
+     */
     @Test
     public void runtimeStyle() {
         style("runtimeStyle");
@@ -1555,6 +1795,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>clientLeftTop.</p>
+     */
     @Test
     public void clientLeftTop() {
         final String html = "<html><body>"
@@ -1568,6 +1811,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>clientLeftTop_documentElement.</p>
+     */
     @Test
     public void clientLeftTop_documentElement() {
         final String html =
@@ -1584,6 +1830,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>clientLeftTopWithBorder.</p>
+     */
     @Test
     public void clientLeftTopWithBorder() {
         final String html = "<html><body>"
@@ -1597,6 +1846,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getBoundingClientRect.</p>
+     */
     @Test
     public void getBoundingClientRect() {
         final String html = "<html><body>\n"
@@ -1610,6 +1862,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getBoundingClientRect2.</p>
+     */
     @Test
     public void getBoundingClientRect2() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1628,6 +1883,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getBoundingClientRect_Scroll.</p>
+     */
     @Test
     public void getBoundingClientRect_Scroll() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1659,6 +1917,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getBoundingClientRectDisconnected.</p>
+     */
     @Test
     public void getBoundingClientRectDisconnected() {
         final String html = "<html>\n"
@@ -1681,6 +1942,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getClientRects.</p>
+     */
     @Test
     public void getClientRects() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1698,6 +1962,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getClientRectsDisconnected.</p>
+     */
     @Test
     public void getClientRectsDisconnected() {
         final String html =
@@ -1715,6 +1982,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getClientRectsDisplayNone.</p>
+     */
     @Test
     public void getClientRectsDisplayNone() {
         final String html =
@@ -1741,6 +2011,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>innerHTML_parentNode.</p>
+     */
     @Test
     public void innerHTML_parentNode() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1760,6 +2033,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>innerText_parentNode.</p>
+     */
     @Test
     public void innerText_parentNode() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1779,6 +2055,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>uniqueID.</p>
+     */
     @Test
     public void uniqueID() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1798,6 +2077,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>uniqueIDFormatIE.</p>
+     */
     @Test
     public void uniqueIDFormatIE() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1822,6 +2104,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setExpression.</p>
+     */
     @Test
     public void setExpression() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1838,6 +2123,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>removeExpression.</p>
+     */
     @Test
     public void removeExpression() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1860,6 +2148,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>dispatchEvent.</p>
+     */
     @Test
     public void dispatchEvent() {
         final String html =
@@ -1879,6 +2170,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>hasAttribute.</p>
+     */
     @Test
     public void hasAttribute() {
         final String html
@@ -1900,6 +2194,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>hasAttributeTypeOf.</p>
+     */
     @Test
     public void hasAttributeTypeOf() {
         final String html
@@ -1919,6 +2216,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>hasAttributeQuirksMode.</p>
+     */
     @Test
     public void hasAttributeQuirksMode() {
         final String html =
@@ -1940,6 +2240,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getComponentVersion.</p>
+     */
     @Test
     public void getComponentVersion() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1961,6 +2264,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>clientWidthAndHeight.</p>
+     */
     @Test
     public void clientWidthAndHeight() {
         final String html =
@@ -1981,6 +2287,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>clientWidthAndHeightPositionAbsolute.</p>
+     */
     @Test
     public void clientWidthAndHeightPositionAbsolute() {
         final String html =
@@ -2009,6 +2318,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>clientWidthAndHeightPositionAbsoluteEmpty.</p>
+     */
     @Test
     public void clientWidthAndHeightPositionAbsoluteEmpty() {
         final String html =
@@ -2028,6 +2340,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scrollWidthAndHeight.</p>
+     */
     @Test
     public void scrollWidthAndHeight() {
         final String html =
@@ -2059,6 +2374,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scrollWidthAndHeightDisplayNone.</p>
+     */
     @Test
     public void scrollWidthAndHeightDisplayNone() {
         final String html =
@@ -2077,6 +2395,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scrollWidthAndHeightDetached.</p>
+     */
     @Test
     public void scrollWidthAndHeightDetached() {
         final String html =
@@ -2095,6 +2416,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>class_className_attribute.</p>
+     */
     @Test
     public void class_className_attribute() {
         final String html
@@ -2121,6 +2445,9 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
 
+    /**
+     * <p>class_className_attribute2.</p>
+     */
     @Test
     public void class_className_attribute2() {
         final String html
@@ -2150,6 +2477,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>contains.</p>
+     */
     @Test
     public void contains() {
         final String html
@@ -2192,6 +2522,9 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
 
+    /**
+     * <p>contains_invalid_argument.</p>
+     */
     @Test
     public void contains_invalid_argument() {
         final String html = "<html><body><script>\n"
@@ -2204,6 +2537,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>filters.</p>
+     */
     @Test
     public void filters() {
         final String html
@@ -2223,6 +2559,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>attributes_trimmed.</p>
+     */
     @Test
     public void attributes_trimmed() {
         final String html
@@ -2243,6 +2582,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getElementsByClassName.</p>
+     */
     @Test
     public void getElementsByClassName() {
         final String html
@@ -2279,6 +2621,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>parentElement2.</p>
+     */
     @Test
     public void parentElement2() {
         final String html
@@ -2300,6 +2645,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>doScroll.</p>
+     */
     @Test
     public void doScroll() {
         final String html
@@ -2321,6 +2669,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>removeNode.</p>
+     */
     @Test
     public void removeNode() {
         final String html
@@ -2351,6 +2702,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>document.</p>
+     */
     @Test
     public void document() {
         final String html
@@ -2366,6 +2720,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>prototype_innerHTML.</p>
+     */
     @Test
     public void prototype_innerHTML() {
         final String html = "<html><body>\n"
@@ -2384,6 +2741,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setColorAttribute.</p>
+     */
     @Test
     public void setColorAttribute() {
         final String html =
@@ -2412,6 +2772,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>innerHTMLwithQuotes.</p>
+     */
     @Test
     public void innerHTMLwithQuotes() {
         final String html = "<html>\n"
@@ -2429,6 +2792,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>attributeNS.</p>
+     */
     @Test
     public void attributeNS() {
         final String html
@@ -2454,6 +2820,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>dataset.</p>
+     */
     @Test
     public void dataset() {
         final String html
@@ -2471,6 +2840,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAttribute_className.</p>
+     */
     @Test
     public void setAttribute_className() {
         final String html = "<html><head>\n"
@@ -2488,6 +2860,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAttribute_class.</p>
+     */
     @Test
     public void setAttribute_class() {
         final String html = "<html><head>\n"
@@ -2505,6 +2880,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAttribute_className_standards.</p>
+     */
     @Test
     public void setAttribute_className_standards() {
         final String html = "<html><head>\n"
@@ -2522,6 +2900,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAttribute_class_standards.</p>
+     */
     @Test
     public void setAttribute_class_standards() {
         final String html = "<html><head>\n"
@@ -2539,6 +2920,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttribute2.</p>
+     */
     @Test
     public void getAttribute2() {
         final String html = "<html>\n"
@@ -2564,6 +2948,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttribute2_standards.</p>
+     */
     @Test
     public void getAttribute2_standards() {
         final String html = "<head>\n"
@@ -2588,6 +2975,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>nodeNameVsOuterElement.</p>
+     */
     @Test
     public void nodeNameVsOuterElement() {
         final String html = "<html>\n"
@@ -2610,6 +3000,9 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
 
+    /**
+     * <p>getSetAttribute_in_xml.</p>
+     */
     @Test
     public void getSetAttribute_in_xml() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2643,6 +3036,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>textContentShouldNotDetachNestedNode.</p>
+     */
     @Test
     public void textContentShouldNotDetachNestedNode() {
         final String html = "<html><body><div><div id='it'>foo</div></div><script>\n"
@@ -2657,6 +3053,9 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>innerHTML_svg.</p>
+     */
     @Test
     public void innerHTML_svg() {
         final String html = "<html>\n"
@@ -2678,6 +3077,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>appendChildExecuteJavaScript.</p>
+     */
     @Test
     public void appendChildExecuteJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2699,6 +3101,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>appendChildExecuteNestedJavaScript.</p>
+     */
     @Test
     public void appendChildExecuteNestedJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2722,6 +3127,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>appendChildDeclareJavaScript.</p>
+     */
     @Test
     public void appendChildDeclareJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2742,6 +3150,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>insertBeforeExecuteJavaScript.</p>
+     */
     @Test
     public void insertBeforeExecuteJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2764,6 +3175,9 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>insertBeforeExecuteNestedJavaScript.</p>
+     */
     @Test
     public void insertBeforeExecuteNestedJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2787,6 +3201,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>insertBeforeDeclareJavaScript.</p>
+     */
     @Test
     public void insertBeforeDeclareJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2808,6 +3225,9 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>replaceChildExecuteJavaScript.</p>
+     */
     @Test
     public void replaceChildExecuteJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2830,6 +3250,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>replaceChildExecuteNestedJavaScript.</p>
+     */
     @Test
     public void replaceChildExecuteNestedJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2854,6 +3277,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>replaceChildDeclareJavaScript.</p>
+     */
     @Test
     public void replaceChildDeclareJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2875,6 +3301,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>insertAdjacentHTML.</p>
+     */
     @Test
     public void insertAdjacentHTML() {
         insertAdjacentHTML("beforeend", "afterend", "beforebegin", "afterbegin");
@@ -2921,6 +3350,9 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
 
+    /**
+     * <p>insertAdjacentHTMLExecuteJavaScript.</p>
+     */
     @Test
     public void insertAdjacentHTMLExecuteJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2941,6 +3373,9 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
 
+    /**
+     * <p>insertAdjacentHTMLExecuteNestedJavaScript.</p>
+     */
     @Test
     public void insertAdjacentHTMLExecuteNestedJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2958,6 +3393,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>insertAdjacentHTMLDeclareJavaScript.</p>
+     */
     @Test
     public void insertAdjacentHTMLDeclareJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2980,6 +3418,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>insertAdjacentElement.</p>
+     */
     @Test
     public void insertAdjacentElement() {
         insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
@@ -3030,6 +3471,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>insertAdjacentElementExecuteJavaScript.</p>
+     */
     @Test
     public void insertAdjacentElementExecuteJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -3055,6 +3499,9 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
 
+    /**
+     * <p>insertAdjacentElementExecuteNestedJavaScript.</p>
+     */
     @Test
     public void insertAdjacentElementExecuteNestedJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -3079,6 +3526,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>insertAdjacentElementDeclareJavaScript.</p>
+     */
     @Test
     public void insertAdjacentElementDeclareJavaScript() {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -3101,6 +3551,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>insertAdjacentText.</p>
+     */
     @Test
     public void insertAdjacentText() {
         insertAdjacentText("beforeend", "afterend", "beforebegin", "afterbegin");
@@ -3141,6 +3594,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setCapture.</p>
+     */
     @Test
     public void setCapture() {
         final String html = "<html><head><title>foo</title>\n"
@@ -3164,6 +3620,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>releaseCapture.</p>
+     */
     @Test
     public void releaseCapture() {
         final String html = "<html><head><title>foo</title>\n"
@@ -3184,6 +3643,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>contentEditable.</p>
+     */
     @Test
     public void contentEditable() {
         final String html =
@@ -3206,6 +3668,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>oninput.</p>
+     */
     @Test
     public void oninput() {
         final String html = "<html>\n"
@@ -3226,6 +3691,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>focus.</p>
+     */
     @Test
     public void focus() {
         final String html = "<html>\n"
@@ -3261,6 +3729,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>innerHTML.</p>
+     */
     @Test
     public void innerHTML() {
         final String html = "<html>\n"
@@ -3282,6 +3753,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>innerHTMLGetElementsByTagName.</p>
+     */
     @Test
     public void innerHTMLGetElementsByTagName() {
         final String html = "<html>\n"
@@ -3302,6 +3776,9 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>hidden.</p>
+     */
     @Test
     public void hidden() {
         final String html =

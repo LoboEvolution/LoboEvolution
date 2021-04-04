@@ -6,12 +6,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -19,24 +19,23 @@
 
 package org.loboevolution.pdfview.decode;
 
-import java.awt.Image;
-import java.awt.Toolkit;
+import org.loboevolution.pdfview.PDFObject;
+import org.loboevolution.pdfview.PDFParseException;
+import org.monte.media.jpeg.JPEGImageIO;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.ByteArrayInputStream;
 import java.nio.ByteBuffer;
 
-import javax.swing.ImageIcon;
-
-import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.PDFParseException;
-import org.monte.media.jpeg.JPEGImageIO;
-
 /**
  * decode a DCT encoded array into a byte array.  This class uses Java's
  * built-in JPEG image class to do the decoding.
  *
- * @author Mike Wessler
+ * Author Mike Wessler
+  *
  */
 public class DCTDecode {
 
@@ -54,60 +53,60 @@ public class DCTDecode {
      * in the stream object's dictionary to decide how to decode this image.
      * If no colorspace is present, we guess 3 samples per pixel.
      *
-     * @param dict the stream dictionary
-     * @param buf the DCT-encoded buffer
+     * @param dict   the stream dictionary
+     * @param buf    the DCT-encoded buffer
      * @param params the parameters to the decoder (ignored)
      * @return the decoded buffer
-     * @throws PDFParseException 
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
     protected static ByteBuffer decode(PDFObject dict, ByteBuffer buf, PDFObject params) throws PDFParseException {
-		// BEGIN PATCH W. Randelshofer Completely rewrote decode routine in
-		// order to
-		// support JPEG images in the CMYK color space.
-		BufferedImage bimg = loadImageData(buf);
-		byte[] output = ImageDataDecoder.decodeImageData(bimg);
-		return ByteBuffer.wrap(output);
-		// END PATCH W. Randelshofer Completely rewrote decode routine in order
-		// to
-		// support JPEG images in the CMYK color space.
+        // BEGIN PATCH W. Randelshofer Completely rewrote decode routine in
+        // order to
+        // support JPEG images in the CMYK color space.
+        BufferedImage bimg = loadImageData(buf);
+        byte[] output = ImageDataDecoder.decodeImageData(bimg);
+        return ByteBuffer.wrap(output);
+        // END PATCH W. Randelshofer Completely rewrote decode routine in order
+        // to
+        // support JPEG images in the CMYK color space.
 
     }
 
-	
-	/*************************************************************************
-	 * @param buf
-	 * @return
-	 * @throws PDFParseException
-	 ************************************************************************/
-	
-	private static BufferedImage loadImageData(ByteBuffer buf)
-			throws PDFParseException {
-		buf.rewind();
-		byte[] input = new byte[buf.remaining()];
-		buf.get(input);
-		BufferedImage bimg;
-		try {
-			try {
-				bimg = JPEGImageIO.read(new ByteArrayInputStream(input), false);				
-			} catch (IllegalArgumentException colorProfileMismatch) {
-				// we experienced this problem with an embedded jpeg
-				// that specified a icc color profile with 4 components 
-				// but the raster had only 3 bands (apparently YCC encoded)
-				Image img = Toolkit.getDefaultToolkit().createImage(input);
-				// wait until image is loaded using ImageIcon for convenience
-				ImageIcon imageIcon = new ImageIcon(img);
-				// copy to buffered image
-				bimg = new BufferedImage(imageIcon.getIconWidth(), imageIcon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
-				bimg.getGraphics().drawImage(img, 0, 0 , null);
-			}			
-		} catch (Exception ex) {
-			PDFParseException ex2 = new PDFParseException("DCTDecode failed");
-			ex2.initCause(ex);
-			throw ex2;
-		}
 
-		return bimg;
-	}
+    /*************************************************************************
+     * @param buf  a {@link java.nio.ByteBuffer} object.
+     * @return a {@link java.awt.image.BufferedImage} object.
+     * @throws PDFParseException in case of error
+     ************************************************************************/
+
+    private static BufferedImage loadImageData(ByteBuffer buf)
+            throws PDFParseException {
+        buf.rewind();
+        byte[] input = new byte[buf.remaining()];
+        buf.get(input);
+        BufferedImage bimg;
+        try {
+            try {
+                bimg = JPEGImageIO.read(new ByteArrayInputStream(input), false);
+            } catch (IllegalArgumentException colorProfileMismatch) {
+                // we experienced this problem with an embedded jpeg
+                // that specified a icc color profile with 4 components
+                // but the raster had only 3 bands (apparently YCC encoded)
+                Image img = Toolkit.getDefaultToolkit().createImage(input);
+                // wait until image is loaded using ImageIcon for convenience
+                ImageIcon imageIcon = new ImageIcon(img);
+                // copy to buffered image
+                bimg = new BufferedImage(imageIcon.getIconWidth(), imageIcon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+                bimg.getGraphics().drawImage(img, 0, 0, null);
+            }
+        } catch (Exception ex) {
+            PDFParseException ex2 = new PDFParseException("DCTDecode failed");
+            ex2.initCause(ex);
+            throw ex2;
+        }
+
+        return bimg;
+    }
 }
 
 
@@ -116,40 +115,44 @@ public class DCTDecode {
  * image tracker for this one.
  */
 class MyTracker implements ImageObserver {
-    boolean done= false;
-    
-    /**
-     * create a new MyTracker that watches this image.  The image
-     * will start loading immediately.
-     */
+    boolean done = false;
+
+     /**
+      * create a new MyTracker that watches this image.
+      * The image will start loading immediately.
+      *
+      * @param img a {@link java.awt.Image} object.
+      */
     public MyTracker(Image img) {
-	img.getWidth(this);
+        img.getWidth(this);
     }
-    
+
     /**
+     * {@inheritDoc}
      * More information has come in about the image.
      */
     @Override
-	public boolean imageUpdate(Image img, int infoflags, int x, int y,
-			       int width, int height) {
-	if ((infoflags & (ALLBITS | ERROR | ABORT))!=0) {
-	    synchronized(this) {
-		this.done= true;
-		notifyAll();
-	    }
-	    return false;
-	}
-	return true;
+    public boolean imageUpdate(Image img, int infoflags, int x, int y,
+                               int width, int height) {
+        if ((infoflags & (ALLBITS | ERROR | ABORT)) != 0) {
+            synchronized (this) {
+                this.done = true;
+                notifyAll();
+            }
+            return false;
+        }
+        return true;
     }
-    
-    /**
-     * Wait until the image is done, then return.
-     */
+
+     /**
+      * Wait until the image is done, then return.
+      */
     public synchronized void waitForAll() {
-	if (!this.done) {
-	    try {
-		wait();
-	    } catch (InterruptedException ie) {}
-	}
+        if (!this.done) {
+            try {
+                wait();
+            } catch (InterruptedException ie) {
+            }
+        }
     }
 }

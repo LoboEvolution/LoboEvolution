@@ -31,8 +31,8 @@ import com.jtattoo.plaf.BaseSplitPaneUI;
 /**
  * <p>FastSplitPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class FastSplitPaneUI extends BaseSplitPaneUI {
 

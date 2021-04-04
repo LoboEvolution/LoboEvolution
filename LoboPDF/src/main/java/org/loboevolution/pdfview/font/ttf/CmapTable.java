@@ -30,7 +30,8 @@ import org.loboevolution.pdfview.PDFDebugger;
 /**
  * Represents the TTF "cmap" table
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class CmapTable extends TrueTypeTable {
     
@@ -42,7 +43,9 @@ public class CmapTable extends TrueTypeTable {
      */
     private final SortedMap<CmapSubtable,CMap> subtables;
     
-    /** Creates a new instance of CmapTable */
+    /**
+     * Creates a new instance of CmapTable
+     */
     protected CmapTable() {
         super(TrueTypeTable.CMAP_TABLE);
         
@@ -51,8 +54,12 @@ public class CmapTable extends TrueTypeTable {
         this.subtables = Collections.synchronizedSortedMap(new TreeMap<>());
     }
     
-      /**
+    /**
      * Add a CMap
+     *
+     * @param platformID a short.
+     * @param platformSpecificID a short.
+     * @param cMap a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
      */
     public void addCMap(short platformID, short platformSpecificID,
                         CMap cMap) {
@@ -62,6 +69,10 @@ public class CmapTable extends TrueTypeTable {
     
     /**
      * Get a CMap by platform and specific ID
+     *
+     * @param platformID a short.
+     * @param platformSpecificID a short.
+     * @return a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
      */
     public CMap getCMap(short platformID, short platformSpecificID) {
         CmapSubtable key = new CmapSubtable(platformID, platformSpecificID);
@@ -70,6 +81,8 @@ public class CmapTable extends TrueTypeTable {
     
     /**
      * Get all CMaps
+     *
+     * @return an array of {@link org.loboevolution.pdfview.font.ttf.CMap} objects.
      */
     public CMap[] getCMaps() {
         Collection<CMap> c = new ArrayList<>();
@@ -97,12 +110,16 @@ public class CmapTable extends TrueTypeTable {
     
     /**
      * Remove a CMap
+     *
+     * @param platformID a short.
+     * @param platformSpecificID a short.
      */
     public void removeCMap(short platformID, short platformSpecificID) {
         CmapSubtable key = new CmapSubtable(platformID, platformSpecificID);
         this.subtables.remove(key);
     }
     
+    /** {@inheritDoc} */
     @Override public void setData(ByteBuffer data) {
         setVersion(data.getShort());
         
@@ -136,6 +153,7 @@ public class CmapTable extends TrueTypeTable {
         }
     }
     
+    /** {@inheritDoc} */
     @Override public ByteBuffer getData() {
         ByteBuffer buf = ByteBuffer.allocate(getLength());
     
@@ -170,6 +188,8 @@ public class CmapTable extends TrueTypeTable {
     }
     
     /**
+     * {@inheritDoc}
+     *
      * Get the size of the table, in bytes
      */
     @Override public int getLength() {
@@ -189,17 +209,19 @@ public class CmapTable extends TrueTypeTable {
     }
     
     
-    /** Getter for property version.
-     * @return Value of property version.
+    /**
+     * Getter for property version.
      *
+     * @return Value of property version.
      */
     public short getVersion() {
         return this.version;
     }
     
-    /** Setter for property version.
-     * @param version New value of property version.
+    /**
+     * Setter for property version.
      *
+     * @param version New value of property version.
      */
     public void setVersion(short version) {
         this.version = version;
@@ -207,12 +229,18 @@ public class CmapTable extends TrueTypeTable {
 
     /**
      * Get the number of tables
+     *
+     * @return a short.
      */
     public short getNumberSubtables() {
         return (short) this.subtables.size();
     }
     
-    /** Print a pretty string */
+    /**
+     * {@inheritDoc}
+     *
+     * Print a pretty string
+     */
     @Override public String toString() {
         StringBuilder buf = new StringBuilder();
         String indent = "    ";

@@ -23,6 +23,9 @@ import java.nio.ByteBuffer;
 
 /**
  * A single glyph in a pdf font.  May be simple or compound via subclasses
+ *
+  *
+  *
  */
 public class Glyf {
     /** If true, the glyf is compound */
@@ -43,8 +46,8 @@ public class Glyf {
     /** the maximum y value */
     private short maxY;
     
-    /** 
-     * Creates a new instance of glyf 
+    /**
+     * Creates a new instance of glyf
      * Don't use this directly, use <code>Glyf.getGlyf()</code>
      */
     protected Glyf() {
@@ -55,6 +58,9 @@ public class Glyf {
      *
      * This method reads the format, data and length variables of
      * the map.
+     *
+     * @param data a {@link java.nio.ByteBuffer} object.
+     * @return a {@link org.loboevolution.pdfview.font.ttf.Glyf} object.
      */
     public static Glyf getGlyf(ByteBuffer data) {
         short numContours = data.getShort();
@@ -89,6 +95,8 @@ public class Glyf {
     /**
      * Set the data for this glyf.  Do nothing, since a glyf with
      * no contours has no glyf data.
+     *
+     * @param data a {@link java.nio.ByteBuffer} object.
      */
     public void setData(ByteBuffer data) {
         return;
@@ -99,6 +107,8 @@ public class Glyf {
      * glyf data only, since there is no specific data.  This method returns
      * the data un-flipped, so subclasses can simply append to the allocated
      * buffer.
+     *
+     * @return a {@link java.nio.ByteBuffer} object.
      */
     public ByteBuffer getData() {
         ByteBuffer buf = ByteBuffer.allocate(getLength());
@@ -116,6 +126,8 @@ public class Glyf {
     /**
      * Get the length of this glyf.  A glyf with no data has a length
      * of 10 (2 bytes each for 5 short values)
+     *
+     * @return a short.
      */
     public short getLength() {
         return 10;
@@ -123,13 +135,17 @@ public class Glyf {
     
     /**
      * Get whether this is a simple or compound glyf
+     *
+     * @return a boolean.
      */
     public boolean isCompound() {
         return this.isCompound;
     }
     
-    /** 
+    /**
      * Set whether this is a simple or compound glyf
+     *
+     * @param isCompound a boolean.
      */
     protected void setCompound(boolean isCompound) {
         this.isCompound = isCompound;
@@ -137,6 +153,8 @@ public class Glyf {
     
     /**
      * Get the number of contours in this glyf
+     *
+     * @return a short.
      */
     public short getNumContours() {
         return this.numContours;
@@ -144,6 +162,8 @@ public class Glyf {
     
     /**
      * Set the number of contours in this glyf
+     *
+     * @param numContours a short.
      */
     protected void setNumContours(short numContours) {
         this.numContours = numContours;
@@ -151,6 +171,8 @@ public class Glyf {
     
     /**
      * Get the minimum x in this glyf
+     *
+     * @return a short.
      */
     public short getMinX() {
         return this.minX;
@@ -158,6 +180,8 @@ public class Glyf {
     
     /**
      * Set the minimum X in this glyf
+     *
+     * @param minX a short.
      */
     protected void setMinX(short minX) {
         this.minX = minX;
@@ -165,6 +189,8 @@ public class Glyf {
     
     /**
      * Get the minimum y in this glyf
+     *
+     * @return a short.
      */
     public short getMinY() {
         return this.minY;
@@ -172,12 +198,16 @@ public class Glyf {
     
     /**
      * Set the minimum Y in this glyf
+     *
+     * @param minY a short.
      */
     protected void setMinY(short minY) {
         this.minY = minY;
     }
     /**
      * Get the maximum x in this glyf
+     *
+     * @return a short.
      */
     public short getMaxX() {
         return this.maxX;
@@ -185,6 +215,8 @@ public class Glyf {
     
     /**
      * Set the maximum X in this glyf
+     *
+     * @param maxX a short.
      */
     protected void setMaxX(short maxX) {
         this.maxX = maxX;
@@ -192,6 +224,8 @@ public class Glyf {
     
     /**
      * Get the maximum y in this glyf
+     *
+     * @return a short.
      */
     public short getMaxY() {
         return this.maxY;
@@ -199,6 +233,8 @@ public class Glyf {
     
     /**
      * Set the maximum Y in this glyf
+     *
+     * @param maxY a short.
      */
     protected void setMaxY(short maxY) {
         this.maxY = maxY;

@@ -31,8 +31,8 @@ import javax.swing.plaf.ComponentUI;
 /**
  * <p>BaseCheckBoxUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseCheckBoxUI extends BaseRadioButtonUI {
 

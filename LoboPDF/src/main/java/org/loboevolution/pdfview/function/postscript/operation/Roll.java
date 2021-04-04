@@ -4,6 +4,12 @@ import java.util.Stack;
 
 final class Roll implements PostScriptOperation {
 	
+	/**
+	 * <p>popAsInteger.</p>
+	 *
+	 * @param st a {@link java.util.Stack} object.
+	 * @return a int.
+	 */
 	public static int popAsInteger(Stack<Object> st) {
 		Object e = st.pop();
 		if (e instanceof Double) {
@@ -15,6 +21,7 @@ final class Roll implements PostScriptOperation {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void eval(Stack<Object> environment) {
 	    // <i>anyn-1 ... any0 n j</i> <b>roll</b> <i>any(j-1)mod n ... anyn-1 ... any</i>

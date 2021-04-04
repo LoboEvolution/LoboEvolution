@@ -35,8 +35,8 @@ import com.jtattoo.plaf.BaseSliderUI;
 /**
  * <p>McWinSliderUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class McWinSliderUI extends BaseSliderUI {
 

@@ -50,8 +50,8 @@ import com.jtattoo.plaf.LazyMenuArrowImageIcon;
 /**
  * <p>HiFiIcons class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiIcons extends BaseIcons {
 

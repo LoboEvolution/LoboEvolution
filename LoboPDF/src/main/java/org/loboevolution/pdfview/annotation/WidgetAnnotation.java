@@ -17,7 +17,10 @@ import org.loboevolution.pdfview.PDFParser;
 
 /**
  * PDF annotation describing a widget.
+ *
  * @since Aug 20, 2010
+  *
+  *
  */
 public class WidgetAnnotation extends PDFAnnotation {
 
@@ -30,7 +33,7 @@ public class WidgetAnnotation extends PDFAnnotation {
 	/**
 	 * Type for PDF form elements
 	 * @version $Id: WidgetAnnotation.java,v 1.2 2010-09-30 10:34:44 xphc Exp $ 
-	 * @author  xphc
+	 * Author  xphc
 	 * @since Aug 20, 2010
 	 */
 	public enum FieldType {
@@ -59,6 +62,12 @@ public class WidgetAnnotation extends PDFAnnotation {
 		}
 	}
 
+	/**
+	 * <p>Constructor for WidgetAnnotation.</p>
+	 *
+	 * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public WidgetAnnotation(PDFObject annotObject) throws IOException {
 		super(annotObject, ANNOTATION_TYPE.WIDGET);
 		
@@ -246,6 +255,7 @@ public class WidgetAnnotation extends PDFAnnotation {
 
 	/**
 	 * Returns the type of the field
+	 *
 	 * @return Field type
 	 */
 	public FieldType getFieldType() {
@@ -254,6 +264,7 @@ public class WidgetAnnotation extends PDFAnnotation {
 	
 	/**
 	 * The field's value as a string. Might be {@code null}.
+	 *
 	 * @return The field value or {@code null}.
 	 */
 	public String getFieldValue() {
@@ -263,7 +274,7 @@ public class WidgetAnnotation extends PDFAnnotation {
 	/**
 	 * Sets the field value for a text field. Note: this doesn't actually change
 	 * the PDF file yet.
-	 * 
+	 *
 	 * @param fieldValue
 	 *            The new value for the text field
 	 */
@@ -273,12 +284,14 @@ public class WidgetAnnotation extends PDFAnnotation {
 
 	/**
 	 * Name for this widget.
+	 *
 	 * @return Widget name
 	 */
 	public String getFieldName() {
 		return this.fieldName;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public List<PDFCmd> getPageCommandsForAnnotation() {
 		List<PDFCmd> pageCommandsForAnnotation = super.getPageCommandsForAnnotation();

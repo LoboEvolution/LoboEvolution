@@ -20,9 +20,10 @@ import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSParseException;
 
 /**
- * Helper implementation of {@link CSSErrorHandler}, which throws CssException in case of problems.
+ * Helper implementation of {@link com.gargoylesoftware.css.parser.CSSErrorHandler}, which throws CssException in case of problems.
  *
- * @author Ronadl Brill
+ * Author Ronadl Brill
+ *
  */
 public class ThrowCssExceptionErrorHandler implements CSSErrorHandler, Serializable {
 
@@ -31,25 +32,19 @@ public class ThrowCssExceptionErrorHandler implements CSSErrorHandler, Serializa
      */
     public static final ThrowCssExceptionErrorHandler INSTANCE = new ThrowCssExceptionErrorHandler();
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void error(final CSSParseException exception) {
         throw exception;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void fatalError(final CSSParseException exception) {
         throw exception;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void warning(final CSSParseException exception) {
         // ignore warnings

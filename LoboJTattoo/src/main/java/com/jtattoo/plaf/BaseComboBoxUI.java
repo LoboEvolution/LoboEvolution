@@ -50,8 +50,8 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 /**
  * <p>BaseComboBoxUI class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class BaseComboBoxUI extends BasicComboBoxUI {
 

@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Bitshift implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>int1 <i>shift</i> <b>bitshift</b> <i>int2</i> <p>
 	 *
 	 * shifts the binary representation of int1 left by

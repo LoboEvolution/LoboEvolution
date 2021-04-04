@@ -53,8 +53,8 @@ import com.jtattoo.plaf.LazyImageIcon;
 /**
  * <p>TextureBorders class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureBorders extends BaseBorders {
 

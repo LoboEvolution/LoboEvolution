@@ -56,8 +56,17 @@ import javax.imageio.ImageReader;
 import javax.imageio.spi.ImageReaderSpi;
 import javax.imageio.stream.ImageInputStream;
 
+/**
+ * <p>JBIG2ImageReaderSpi class.</p>
+ *
+  *
+  *
+ */
 public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 
+	/**
+	 * <p>Constructor for JBIG2ImageReaderSpi.</p>
+	 */
 	public JBIG2ImageReaderSpi() {
 		super("JPedal", // vendorName
 				"1.0", // version
@@ -80,6 +89,7 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 		
 	}
 
+	/** {@inheritDoc} */
 	public boolean canDecodeInput(Object input) throws IOException {
 
 		// The input source must be an ImageInputStream because the constructor
@@ -114,6 +124,7 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 		return Arrays.equals(controlHeader, header);
 	}
 
+	/** {@inheritDoc} */
 	public ImageReader createReaderInstance(Object extension) throws IOException {
 		// Inform the JBIG2 image reader that this JBIG2 image reader SPI is the
 		// originating provider -- the object that creates the JBIG2 image
@@ -121,6 +132,7 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 		return new JBIG2ImageReader(this);
 	}
 
+	/** {@inheritDoc} */
 	public String getDescription(java.util.Locale locale) {
 		return "JPedal JBIG2 Image Decoder provided by IDRsolutions.  See http://www.jpedal.org/jbig.php";
 	}

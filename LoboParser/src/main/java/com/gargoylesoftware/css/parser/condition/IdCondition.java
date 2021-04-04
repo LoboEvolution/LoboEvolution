@@ -20,7 +20,10 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.parser.Locator;
 
 /**
- * @author Ronald Brill
+ * <p>IdCondition class.</p>
+ *
+ * Author Ronald Brill
+ *
  */
 public class IdCondition extends AbstractLocatable implements Condition, Serializable {
 
@@ -28,6 +31,7 @@ public class IdCondition extends AbstractLocatable implements Condition, Seriali
 
     /**
      * Ctor.
+     *
      * @param value the value
      * @param locator the locator
      */
@@ -36,30 +40,25 @@ public class IdCondition extends AbstractLocatable implements Condition, Seriali
         setLocator(locator);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.ID_CONDITION;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getLocalName() {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getValue() {
         return value_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final String value = getValue();

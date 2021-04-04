@@ -30,8 +30,8 @@ import com.jtattoo.plaf.BaseTableHeaderUI;
 /**
  * <p>LunaTableHeaderUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LunaTableHeaderUI extends BaseTableHeaderUI {
 

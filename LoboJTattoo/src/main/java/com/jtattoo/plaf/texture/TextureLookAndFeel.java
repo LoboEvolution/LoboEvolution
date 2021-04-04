@@ -54,8 +54,8 @@ import com.jtattoo.plaf.BaseTreeUI;
 /**
  * <p>TextureLookAndFeel class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureLookAndFeel extends AbstractLookAndFeel {
 
@@ -409,9 +409,9 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 	}
 
 	/**
-	 * <p>setTheme.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * <p>setTheme.</p>
 	 */
 	public static void setTheme(String name) {
 		setTheme(themesMap.get(name));

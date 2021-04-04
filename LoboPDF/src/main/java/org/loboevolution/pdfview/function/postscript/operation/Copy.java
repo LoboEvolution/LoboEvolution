@@ -4,6 +4,8 @@ import java.util.Stack;
 	final class Copy implements PostScriptOperation {
 		@Override
 		/**
+		 * {@inheritDoc}
+		 *
 		 * <i>any1 ... anyn n</i> <b>copy</b> <i>any1 ... anyn any1 ... anyn</i>
 		 * <i>array1 array2</i> <b>copy</b> <i>subarray2</i> <br>
 		 * <i>string1 string2</i> <b>copy</b> <i>substring2</i> <p>
@@ -20,7 +22,7 @@ import java.util.Stack;
 		 * (a) (b) (c) 2 copy Þ (a) (b) (c) (b) (c) <br>
 		 * (a) (b) (c) 0 copy Þ (a) (b) (c) <p>
 		 *
-		 * In the other forms, copy copies all the elements of the 
+		 * In the other forms, copy copies all the elements of the
 		 * first composite object into the second. The composite
 		 * object operands must be of the same type, except that
 		 * a packed array can be copied into an array (and only into
@@ -38,7 +40,7 @@ import java.util.Stack;
 		 * substring of the second operand into which the elements
 		 * were copied. Any remaining elements of array2 or
 		 * string2 are unaffected. <p>
-		 * 
+		 *
 		 * Example: <br>
 		 * /a1 [1 2 3] def<br>
 		 * a1 dup length array copy Þ [1 2 3] <p>

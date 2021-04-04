@@ -36,8 +36,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>GraphiteInternalFrameTitlePane class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 

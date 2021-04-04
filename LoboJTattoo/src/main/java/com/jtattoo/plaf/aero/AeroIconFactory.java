@@ -31,8 +31,8 @@ import com.jtattoo.plaf.BaseIcons;
 /**
  * <p>AeroIconFactory class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AeroIconFactory implements AbstractIconFactory {
 

@@ -38,8 +38,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>FastScrollBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class FastScrollBarUI extends BaseScrollBarUI {
 

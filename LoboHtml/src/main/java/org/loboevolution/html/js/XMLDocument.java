@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.js;
@@ -71,8 +68,8 @@ import org.w3c.dom.UserDataHandler;
  * XMLDocument class.
  * </p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class XMLDocument implements Document {
 
@@ -535,565 +532,662 @@ public class XMLDocument implements Document {
 		doc.setXmlVersion(xmlVersion);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isIsConnected() {
 
 		return doc.isIsConnected();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement getParentElement() {
 
 		return doc.getParentElement();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getRootNode() {
 
 		return doc.getRootNode();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node cloneNode() {
 
 		return doc.cloneNode();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean contains(Node other) {
 
 		return doc.contains(other);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void addEventListener(String type, Function listener) {
 		doc.addEventListener(type, listener);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void addEventListener(String type, Function listener, boolean useCapture) {
 		doc.addEventListener(type, listener, useCapture);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void removeEventListener(String script, Function function) {
 		doc.removeEventListener(script, function);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void removeEventListener(String type, Function listener, boolean useCapture) {
 		doc.removeEventListener(type, listener, useCapture);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean dispatchEvent(Node element, Event evt) {
 
 		return doc.dispatchEvent(element, evt);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getChildElementCount() {
 
 		return doc.getChildElementCount();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getChildren() {
 
 		return doc.getChildren();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getFirstElementChild() {
 
 		return doc.getFirstElementChild();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getLastElementChild() {
 
 		return doc.getLastElementChild();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element querySelector(String selectors) {
 
 		return doc.querySelector(selectors);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public NodeList querySelectorAll(String selectors) {
 
 		return doc.querySelectorAll(selectors);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getURL() {
 
 		return doc.getURL();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getActiveElement() {
 
 		return doc.getActiveElement();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlinkColor() {
 
 		return doc.getAlinkColor();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlinkColor(String alinkColor) {
 		doc.setAlinkColor(alinkColor);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getAll() {
 
 		return doc.getAll();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getAnchors() {
 
 		return doc.getAnchors();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getApplets() {
 
 		return doc.getApplets();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getCommands() {
 
 		return doc.getCommands();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBgColor() {
 
 		return doc.getBgColor();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBgColor(String bgColor) {
 		doc.setBgColor(bgColor);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement getBody() {
 
 		return doc.getBody();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBody(HTMLElement body) {
 		doc.setBody(body);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCharacterSet() {
 
 		return doc.getCharacterSet();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCharset() {
 
 		return doc.getCharset();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCompatMode() {
 
 		return doc.getCompatMode();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getContentType() {
 
 		return doc.getContentType();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCookie() {
 
 		return doc.getCookie();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCookie(String cookie) {
 		doc.setCookie(cookie);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLScriptElement getCurrentScript() {
 
 		return doc.getCurrentScript();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Window getDefaultView() {
 		return doc.getDefaultView();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDesignMode() {
 
 		return doc.getDesignMode();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDesignMode(String designMode) {
 		doc.setDesignMode(designMode);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDir() {
 
 		return doc.getDesignMode();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDir(String dir) {
 		doc.setDir(dir);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDomain() {
 
 		return doc.getDomain();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDomain(String domain) {
 		doc.setDomain(domain);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getEmbeds() {
 
 		return doc.getEmbeds();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFgColor() {
 
 		return doc.getFgColor();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFgColor(String fgColor) {
 		doc.setFgColor(fgColor);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getForms() {
 
 		return doc.getForms();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isFullscreen() {
 
 		return doc.isFullscreen();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isFullscreenEnabled() {
 
 		return doc.isFullscreenEnabled();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLHeadElement getHead() {
 
 		return doc.getHead();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isHidden() {
 
 		return doc.isHidden();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getImages() {
 
 		return doc.getImages();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getLastModified() {
 
 		return doc.getLastModified();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getLinks() {
 
 		return doc.getLinks();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Location getLocation() {
 
 		return doc.getLocation();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setLocation(Location location) {
 		doc.setLocation(location);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getOrigin() {
 
 		return doc.getOrigin();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getPlugins() {
 
 		return doc.getPlugins();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DocumentReadyState getReadyState() {
 
 		return doc.getReadyState();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getReferrer() {
 
 		return doc.getReferrer();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getScripts() {
 
 		return doc.getScripts();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getScrollingElement() {
 
 		return doc.getScrollingElement();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTitle() {
 
 		return doc.getTitle();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTitle(String title) {
 		doc.setTitle(title);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public VisibilityState getVisibilityState() {
 
 		return doc.getVisibilityState();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void captureEvents() {
 		doc.captureEvents();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Range caretRangeFromPoint(double x, double y) {
 
 		return doc.caretRangeFromPoint(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void clear() {
 		doc.clear();
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void close() {
 		doc.close();
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespace, String qualifiedName, String options) {
 
 		return doc.createElementNS(namespace, qualifiedName, options);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Event createEvent(String eventInterface) {
 
 		return doc.createEvent(eventInterface);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public NodeIterator createNodeIterator(Node root) {
 
 		return doc.createNodeIterator(root);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Range createRange() {
 
 		return doc.createRange();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TreeWalker createTreeWalker(Node root) {
 
 		return doc.createTreeWalker(root);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element elementFromPoint(double x, double y) {
 
 		return doc.elementFromPoint(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId, boolean showUI, String value) {
 
 		return doc.execCommand(commandId, showUI, value);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId, boolean showUI) {
 
 		return doc.execCommand(commandId, showUI);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId) {
 
 		return doc.execCommand(commandId);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElementsByClassName(String classNames) {
 
 		return doc.getElementsByClassName(classNames);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElementsByName(String elementName) {
 
 		return doc.getElementsByName(elementName);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Selection getSelection() {
 
 		return doc.getSelection();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasFocus() {
 
 		return doc.hasFocus();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name, String features, boolean replace) {
 
 		return doc.open(url, name, features, replace);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name, String features) {
 
 		return doc.open(url, name, features);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name) {
 
 		return doc.open(url, name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open(String url) {
 
 		return doc.open(url);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open() {
 
 		return doc.open();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandEnabled(String commandId) {
 
 		return doc.queryCommandEnabled(commandId);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandIndeterm(String commandId) {
 
 		return doc.queryCommandIndeterm(commandId);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandState(String commandId) {
 
 		return doc.queryCommandState(commandId);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandSupported(String commandId) {
 
 		return doc.queryCommandSupported(commandId);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String queryCommandValue(String commandId) {
 
 		return doc.queryCommandValue(commandId);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void releaseEvents() {
 		doc.releaseEvents();
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void write(String text) {
 		doc.write(text);
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void writeln(String text) {
 		doc.writeln(text);
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public XPathExpression createExpression() {
 
 		return doc.createExpression();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public XPathNSResolver createNSResolver(Node nodeResolver) {
 		return doc.createNSResolver(nodeResolver);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public XPathResult evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type,
 			Object result) {

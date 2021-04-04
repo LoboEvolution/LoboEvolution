@@ -10,10 +10,13 @@ import org.mozilla.javascript.Token;
 
 /**
  * Node representing a catch-clause of a try-statement.
- * Node type is {@link Token#CATCH}.
+ * Node type is {@link org.mozilla.javascript.Token#CATCH}.
  *
  * <pre><i>CatchClause</i> :
  *        <b>catch</b> ( <i><b>Identifier</b></i> [<b>if</b> Expression] ) Block</pre>
+ *
+ *
+ *
  */
 public class CatchClause extends AstNode {
 
@@ -28,19 +31,34 @@ public class CatchClause extends AstNode {
         type = Token.CATCH;
     }
 
+    /**
+     * <p>Constructor for CatchClause.</p>
+     */
     public CatchClause() {
     }
 
+    /**
+     * <p>Constructor for CatchClause.</p>
+     *
+     * @param pos a int.
+     */
     public CatchClause(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for CatchClause.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public CatchClause(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns catch variable node
+     *
      * @return catch variable
      */
     public Name getVarName() {
@@ -49,8 +67,9 @@ public class CatchClause extends AstNode {
 
     /**
      * Sets catch variable node, and sets its parent to this node.
+     *
      * @param varName catch variable
-     * @throws IllegalArgumentException if varName is {@code null}
+     * @throws java.lang.IllegalArgumentException if varName is {@code null}
      */
     public void setVarName(Name varName) {
         assertNotNull(varName);
@@ -60,6 +79,7 @@ public class CatchClause extends AstNode {
 
     /**
      * Returns catch condition node, if present
+     *
      * @return catch condition node, {@code null} if not present
      */
     public AstNode getCatchCondition() {
@@ -68,6 +88,7 @@ public class CatchClause extends AstNode {
 
     /**
      * Sets catch condition node, and sets its parent to this node.
+     *
      * @param catchCondition catch condition node.  Can be {@code null}.
      */
     public void setCatchCondition(AstNode catchCondition) {
@@ -78,6 +99,8 @@ public class CatchClause extends AstNode {
 
     /**
      * Returns catch body
+     *
+     * @return a {@link org.mozilla.javascript.ast.Block} object.
      */
     public Block getBody() {
         return body;
@@ -85,7 +108,9 @@ public class CatchClause extends AstNode {
 
     /**
      * Sets catch body, and sets its parent to this node.
-     * @throws IllegalArgumentException if body is {@code null}
+     *
+     * @throws java.lang.IllegalArgumentException if body is {@code null}
+     * @param body a {@link org.mozilla.javascript.ast.Block} object.
      */
     public void setBody(Block body) {
         assertNotNull(body);
@@ -95,6 +120,8 @@ public class CatchClause extends AstNode {
 
     /**
      * Returns left paren position
+     *
+     * @return a int.
      */
     public int getLp() {
         return lp;
@@ -102,6 +129,8 @@ public class CatchClause extends AstNode {
 
     /**
      * Sets left paren position
+     *
+     * @param lp a int.
      */
     public void setLp(int lp) {
         this.lp = lp;
@@ -109,6 +138,8 @@ public class CatchClause extends AstNode {
 
     /**
      * Returns right paren position
+     *
+     * @return a int.
      */
     public int getRp() {
         return rp;
@@ -116,6 +147,8 @@ public class CatchClause extends AstNode {
 
     /**
      * Sets right paren position
+     *
+     * @param rp a int.
      */
     public void setRp(int rp) {
         this.rp = rp;
@@ -123,6 +156,9 @@ public class CatchClause extends AstNode {
 
     /**
      * Sets both paren positions
+     *
+     * @param lp a int.
+     * @param rp a int.
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
@@ -131,6 +167,7 @@ public class CatchClause extends AstNode {
 
     /**
      * Returns position of "if" keyword
+     *
      * @return position of "if" keyword, if present, or -1
      */
     public int getIfPosition() {
@@ -139,12 +176,14 @@ public class CatchClause extends AstNode {
 
     /**
      * Sets position of "if" keyword
+     *
      * @param ifPosition position of "if" keyword, if present, or -1
      */
     public void setIfPosition(int ifPosition) {
         this.ifPosition = ifPosition;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -161,6 +200,8 @@ public class CatchClause extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node, the catch var name node, the condition if
      * non-{@code null}, and the catch body.
      */

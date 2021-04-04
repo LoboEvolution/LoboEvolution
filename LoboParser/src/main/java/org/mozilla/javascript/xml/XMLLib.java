@@ -12,6 +12,12 @@ import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+/**
+ * <p>Abstract XMLLib class.</p>
+ *
+ *
+ *
+ */
 public abstract class XMLLib
 {
     private static final Object XML_LIB_KEY = new Object();
@@ -39,6 +45,12 @@ public abstract class XMLLib
     public abstract String getImplementationClassName();
   }
 
+    /**
+     * <p>extractFromScopeOrNull.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.xml.XMLLib} object.
+     */
     public static XMLLib extractFromScopeOrNull(Scriptable scope)
     {
         ScriptableObject so = ScriptRuntime.getLibraryScopeOrNull(scope);
@@ -54,6 +66,12 @@ public abstract class XMLLib
         return (XMLLib)so.getAssociatedValue(XML_LIB_KEY);
     }
 
+    /**
+     * <p>extractFromScope.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.xml.XMLLib} object.
+     */
     public static XMLLib extractFromScope(Scriptable scope)
     {
         XMLLib lib = extractFromScopeOrNull(scope);
@@ -64,6 +82,12 @@ public abstract class XMLLib
         throw Context.reportRuntimeError(msg);
     }
 
+    /**
+     * <p>bindToScope.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.xml.XMLLib} object.
+     */
     protected final XMLLib bindToScope(Scriptable scope)
     {
         ScriptableObject so = ScriptRuntime.getLibraryScopeOrNull(scope);
@@ -74,11 +98,37 @@ public abstract class XMLLib
         return (XMLLib)so.associateValue(XML_LIB_KEY, this);
     }
 
+    /**
+     * <p>isXMLName.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param name a {@link java.lang.Object} object.
+     * @return a boolean.
+     */
     public abstract boolean isXMLName(Context cx, Object name);
 
+    /**
+     * <p>nameRef.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param name a {@link java.lang.Object} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param memberTypeFlags a int.
+     * @return a {@link org.mozilla.javascript.Ref} object.
+     */
     public abstract Ref nameRef(Context cx, Object name,
                                 Scriptable scope, int memberTypeFlags);
 
+    /**
+     * <p>nameRef.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param namespace a {@link java.lang.Object} object.
+     * @param name a {@link java.lang.Object} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param memberTypeFlags a int.
+     * @return a {@link org.mozilla.javascript.Ref} object.
+     */
     public abstract Ref nameRef(Context cx, Object namespace, Object name,
                                 Scriptable scope, int memberTypeFlags);
 
@@ -101,45 +151,99 @@ public abstract class XMLLib
 
     /**
      * Construct namespace for default xml statement.
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param uriValue a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
      */
     public abstract Object toDefaultXmlNamespace(Context cx, Object uriValue);
 
+    /**
+     * <p>setIgnoreComments.</p>
+     *
+     * @param b a boolean.
+     */
     public void setIgnoreComments(boolean b) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>setIgnoreWhitespace.</p>
+     *
+     * @param b a boolean.
+     */
     public void setIgnoreWhitespace(boolean b) {
       throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>setIgnoreProcessingInstructions.</p>
+     *
+     * @param b a boolean.
+     */
     public void setIgnoreProcessingInstructions(boolean b) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>setPrettyPrinting.</p>
+     *
+     * @param b a boolean.
+     */
     public void setPrettyPrinting(boolean b) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>setPrettyIndent.</p>
+     *
+     * @param i a int.
+     */
     public void setPrettyIndent(int i) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>isIgnoreComments.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isIgnoreComments() {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>isIgnoreProcessingInstructions.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isIgnoreProcessingInstructions() {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>isIgnoreWhitespace.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isIgnoreWhitespace() {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>isPrettyPrinting.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isPrettyPrinting() {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * <p>getPrettyIndent.</p>
+     *
+     * @return a int.
+     */
     public int getPrettyIndent() {
         throw new UnsupportedOperationException();
     }

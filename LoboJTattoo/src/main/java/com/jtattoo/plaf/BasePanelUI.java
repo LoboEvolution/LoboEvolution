@@ -36,8 +36,8 @@ import javax.swing.plaf.basic.BasicPanelUI;
 /**
  * <p>BasePanelUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BasePanelUI extends BasicPanelUI {
 

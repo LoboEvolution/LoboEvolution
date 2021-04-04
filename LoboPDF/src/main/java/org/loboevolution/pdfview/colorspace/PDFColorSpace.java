@@ -37,7 +37,9 @@ import org.loboevolution.pdfview.function.PDFFunction;
 /**
  * A color space that can convert a set of color components into
  * PDFPaint.
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class PDFColorSpace {
     /** the name of the device-dependent gray color space */
@@ -84,6 +86,7 @@ public class PDFColorSpace {
 
     /**
      * create a PDFColorSpace based on a Java ColorSpace
+     *
      * @param cs the Java ColorSpace
      */
     public PDFColorSpace(ColorSpace cs) {
@@ -94,6 +97,7 @@ public class PDFColorSpace {
      * Get a color space by name
      *
      * @param name the name of one of the device-dependent color spaces
+     * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
      */
     public static PDFColorSpace getColorSpace(int name) {
         switch (name) {
@@ -121,6 +125,9 @@ public class PDFColorSpace {
      * Get a color space specified in a PDFObject
      *
      * @param csobj the PDFObject with the colorspace information
+     * @param resources a {@link java.util.Map} object.
+     * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
+     * @throws java.io.IOException if any.
      */
     public static PDFColorSpace getColorSpace(PDFObject csobj, Map resources)
         throws IOException {
@@ -235,6 +242,8 @@ public class PDFColorSpace {
 
     /**
      * get the number of components expected in the getPaint command
+     *
+     * @return a int.
      */
     public int getNumComponents() {
         return this.cs.getNumComponents();
@@ -243,6 +252,7 @@ public class PDFColorSpace {
     /**
      * get the PDFPaint representing the color described by the
      * given color components
+     *
      * @param components the color components corresponding to the given
      * colorspace
      * @return a PDFPaint object representing the closest Color to the
@@ -256,6 +266,8 @@ public class PDFColorSpace {
 
     /**
      * get the original Java ColorSpace.
+     *
+     * @return a {@link java.awt.color.ColorSpace} object.
      */
     public ColorSpace getColorSpace() {
         return this.cs;

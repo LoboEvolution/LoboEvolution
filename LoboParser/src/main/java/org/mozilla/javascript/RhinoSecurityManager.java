@@ -11,11 +11,15 @@ package org.mozilla.javascript;
  * the current action. It is required for JavaAdapters to have the same
  * <code>ProtectionDomain</code> as the script code that created them.
  * Embeddings that implement their own SecurityManager can use this as base class.
+ *
+ *
+ *
  */
 public class RhinoSecurityManager extends SecurityManager {
 
     /**
      * Get the class of the top-most stack element representing a script.
+     *
      * @return The class of the top-most script in the current stack,
      *         or null if no script is currently running
      */

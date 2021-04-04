@@ -32,8 +32,8 @@ import javax.swing.plaf.basic.BasicButtonListener;
 /**
  * <p>BaseButtonListener class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class BaseButtonListener extends BasicButtonListener {
 

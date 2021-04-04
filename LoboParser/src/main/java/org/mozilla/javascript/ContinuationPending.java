@@ -14,7 +14,9 @@ package org.mozilla.javascript;
  * {@link org.mozilla.javascript.Context#captureContinuation()}.
  * Exception will contain the captured state needed to restart the continuation
  * with {@link org.mozilla.javascript.Context#resumeContinuation(Object, Scriptable, Object)}.
- * @author Norris Boyd
+ *
+ * Author Norris Boyd
+ *
  */
 public class ContinuationPending extends RuntimeException {
     private static final long serialVersionUID = 4956008116771118856L;
@@ -27,6 +29,7 @@ public class ContinuationPending extends RuntimeException {
      * calling {@link org.mozilla.javascript.Context#executeScriptWithContinuations(Script, Scriptable)}
      * and {@link org.mozilla.javascript.Context#callFunctionWithContinuations(Callable, Scriptable, Object[])}
      * Creating subclasses allowed.
+     *
      * @param continuationState Internal Continuation object
      */
     protected ContinuationPending(NativeContinuation continuationState) {
@@ -37,6 +40,7 @@ public class ContinuationPending extends RuntimeException {
      * Get continuation object. The only
      * use for this object is to be passed to
      * {@link org.mozilla.javascript.Context#resumeContinuation(Object, Scriptable, Object)}.
+     *
      * @return continuation object
      */
     public Object getContinuation() {
@@ -45,6 +49,7 @@ public class ContinuationPending extends RuntimeException {
 
     /**
      * Set continuation object. Allows subclasses to modify the internal state.
+     *
      * @param continuation object
      */
     public void setContinuation(NativeContinuation continuation) {
@@ -61,6 +66,7 @@ public class ContinuationPending extends RuntimeException {
     /**
      * Store an arbitrary object that applications can use to associate
      * their state with the continuation.
+     *
      * @param applicationState arbitrary application state
      */
     public void setApplicationState(Object applicationState) {
@@ -68,6 +74,8 @@ public class ContinuationPending extends RuntimeException {
     }
 
     /**
+     * <p>Getter for the field <code>applicationState</code>.</p>
+     *
      * @return arbitrary application state
      */
     public Object getApplicationState() {

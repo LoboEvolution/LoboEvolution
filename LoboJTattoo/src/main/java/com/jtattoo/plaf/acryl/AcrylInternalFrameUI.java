@@ -32,8 +32,8 @@ import com.jtattoo.plaf.BaseInternalFrameUI;
 /**
  * <p>AcrylInternalFrameUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AcrylInternalFrameUI extends BaseInternalFrameUI {
 

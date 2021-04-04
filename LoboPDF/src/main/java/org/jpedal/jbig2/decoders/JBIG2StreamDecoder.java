@@ -71,6 +71,12 @@ import org.jpedal.jbig2.segment.stripes.EndOfStripeSegment;
 import org.jpedal.jbig2.segment.symboldictionary.SymbolDictionarySegment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>JBIG2StreamDecoder class.</p>
+ *
+  *
+  *
+ */
 public class JBIG2StreamDecoder {
 	
 	private static final Logger logger = Logger.getLogger(JBIG2StreamDecoder.class.getName());
@@ -93,16 +99,34 @@ public class JBIG2StreamDecoder {
 
 	private MMRDecoder mmrDecoder;
 	
+	/** Constant <code>debug=false</code> */
 	public static final boolean debug = false;
 
+	/**
+	 * <p>movePointer.</p>
+	 *
+	 * @param i a int.
+	 */
 	public void movePointer(int i){
 		reader.movePointer(i);
 	}
 	
+	/**
+	 * <p>Setter for the field <code>globalData</code>.</p>
+	 *
+	 * @param data an array of {@link byte} objects.
+	 */
 	public void setGlobalData(byte[] data) {
 		globalData = data;
 	}
 
+	/**
+	 * <p>decodeJBIG2.</p>
+	 *
+	 * @param data an array of {@link byte} objects.
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void decodeJBIG2(byte[] data) throws IOException, JBIG2Exception {
 		reader = new StreamReader(data);
 
@@ -176,14 +200,29 @@ public class JBIG2StreamDecoder {
 		readSegments();
 	}
 	
+	/**
+	 * <p>Getter for the field <code>huffmanDecoder</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.decoders.HuffmanDecoder} object.
+	 */
 	public HuffmanDecoder getHuffmanDecoder() {
 		return huffmanDecoder;
 	}
 	
+	/**
+	 * <p>getMMRDecoder.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.decoders.MMRDecoder} object.
+	 */
 	public MMRDecoder getMMRDecoder() {
 		return mmrDecoder;
 	}
 	
+	/**
+	 * <p>Getter for the field <code>arithmeticDecoder</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.decoders.ArithmeticDecoder} object.
+	 */
 	public ArithmeticDecoder getArithmeticDecoder() {
 		return arithmeticDecoder;
 	}
@@ -431,6 +470,12 @@ public class JBIG2StreamDecoder {
 		}
 	}
 
+	/**
+	 * <p>findPageSegement.</p>
+	 *
+	 * @param page a int.
+	 * @return a {@link org.jpedal.jbig2.segment.pageinformation.PageInformationSegment} object.
+	 */
 	public PageInformationSegment findPageSegement(int page) {
 		for (Segment segment : segments) {
 			SegmentHeader segmentHeader = segment.getSegmentHeader();
@@ -442,6 +487,12 @@ public class JBIG2StreamDecoder {
 		return null;
 	}
 
+	/**
+	 * <p>findSegment.</p>
+	 *
+	 * @param segmentNumber a int.
+	 * @return a {@link org.jpedal.jbig2.segment.Segment} object.
+	 */
 	public Segment findSegment(int segmentNumber) {
 		for (Segment segment : segments) {
 			if (segment.getSegmentHeader().getSegmentNumber() == segmentNumber) {
@@ -634,30 +685,71 @@ public class JBIG2StreamDecoder {
 		return Arrays.equals(controlHeader, actualHeader);
 	}
 
+	/**
+	 * <p>readBits.</p>
+	 *
+	 * @param num a int.
+	 * @return a int.
+	 * @throws java.io.IOException if any.
+	 */
 	public int readBits(int num) throws IOException {
 		return reader.readBits(num);
 	}
 
+	/**
+	 * <p>readBit.</p>
+	 *
+	 * @return a int.
+	 * @throws java.io.IOException if any.
+	 */
 	public int readBit() throws IOException {
 		return reader.readBit();
 	}
 
+	/**
+	 * <p>readByte.</p>
+	 *
+	 * @param buff an array of {@link short} objects.
+	 * @throws java.io.IOException if any.
+	 */
 	public void readByte(short[] buff) throws IOException {
 		reader.readByte(buff);
 	}
 
+	/**
+	 * <p>consumeRemainingBits.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 */
 	public void consumeRemainingBits() throws IOException {
 		reader.consumeRemainingBits();
 	}
 
+	/**
+	 * <p>readByte.</p>
+	 *
+	 * @return a short.
+	 * @throws java.io.IOException if any.
+	 */
 	public short readByte() throws java.io.IOException {
 		return reader.readByte();
 	}
 
+	/**
+	 * <p>appendBitmap.</p>
+	 *
+	 * @param bitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 */
 	public void appendBitmap(JBIG2Bitmap bitmap) {
 		bitmaps.add(bitmap);
 	}
 
+	/**
+	 * <p>findBitmap.</p>
+	 *
+	 * @param bitmapNumber a int.
+	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 */
 	public JBIG2Bitmap findBitmap(int bitmapNumber) {
 		for (JBIG2Bitmap bitmap : bitmaps) {
 			if (bitmap.getBitmapNumber() == bitmapNumber) {
@@ -668,23 +760,49 @@ public class JBIG2StreamDecoder {
 		return null;
 	}
 
+	/**
+	 * <p>getPageAsJBIG2Bitmap.</p>
+	 *
+	 * @param i a int.
+	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 */
 	public JBIG2Bitmap getPageAsJBIG2Bitmap(int i) {
 		JBIG2Bitmap pageBitmap = findPageSegement(1).getPageBitmap();
 		return pageBitmap;
 	}
 
+	/**
+	 * <p>isNumberOfPagesKnown.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isNumberOfPagesKnown() {
 		return noOfPagesKnown;
 	}
 
+	/**
+	 * <p>getNumberOfPages.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getNumberOfPages() {
 		return noOfPages;
 	}
 
+	/**
+	 * <p>isRandomAccessOrganisationUsed.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isRandomAccessOrganisationUsed() {
 		return randomAccessOrganisation;
 	}
 
+	/**
+	 * <p>getAllSegments.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<Segment> getAllSegments() {
 		return segments;
 	}

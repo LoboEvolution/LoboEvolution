@@ -13,33 +13,45 @@ import java.lang.reflect.Proxy;
 
 /**
  * This class implements the Undefined value in JavaScript.
+ *
+ *
+ *
  */
 public class Undefined implements Serializable
 {
     private static final long serialVersionUID = 9195680630202616767L;
 
+    /** Constant <code>instance</code> */
     public static final Object instance = new Undefined();
 
     private Undefined()
     {
     }
 
+    /**
+     * <p>readResolve.</p>
+     *
+     * @return a {@link java.lang.Object} object.
+     */
     public Object readResolve()
     {
         return instance;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         return isUndefined(obj) || super.equals(obj);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         // All instances of Undefined are equivalent!
         return 0;
     }
 
+    /** Constant <code>SCRIPTABLE_UNDEFINED</code> */
     public static final Scriptable SCRIPTABLE_UNDEFINED;
 
     static {
@@ -55,6 +67,12 @@ public class Undefined implements Serializable
         });
     }
 
+    /**
+     * <p>isUndefined.</p>
+     *
+     * @param obj a {@link java.lang.Object} object.
+     * @return a boolean.
+     */
     public static boolean isUndefined(Object obj)
     {
         return Undefined.instance == obj || Undefined.SCRIPTABLE_UNDEFINED == obj;

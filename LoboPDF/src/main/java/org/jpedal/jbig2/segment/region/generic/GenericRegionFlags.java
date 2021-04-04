@@ -54,13 +54,23 @@ import java.util.logging.Logger;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
+/**
+ * <p>GenericRegionFlags class.</p>
+ *
+  *
+  *
+ */
 public class GenericRegionFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(GenericRegionFlags.class.getName());
+	/** Constant <code>MMR="MMR"</code> */
 	public static final String MMR = "MMR";
+	/** Constant <code>GB_TEMPLATE="GB_TEMPLATE"</code> */
 	public static final String GB_TEMPLATE = "GB_TEMPLATE";
+	/** Constant <code>TPGDON="TPGDON"</code> */
 	public static final String TPGDON = "TPGDON";
 
+	/** {@inheritDoc} */
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 		

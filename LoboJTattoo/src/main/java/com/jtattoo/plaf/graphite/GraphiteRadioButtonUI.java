@@ -36,8 +36,8 @@ import com.jtattoo.plaf.BaseRadioButtonUI;
 /**
  * <p>GraphiteRadioButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteRadioButtonUI extends BaseRadioButtonUI {
 

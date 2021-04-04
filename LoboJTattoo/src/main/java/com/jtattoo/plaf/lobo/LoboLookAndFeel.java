@@ -6,8 +6,19 @@ import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.LAFColorType;
 import org.loboevolution.laf.LAFSettings;
 
+/**
+ * <p>LoboLookAndFeel interface.</p>
+ *
+ *
+ *
+ */
 public interface LoboLookAndFeel {
 
+	/**
+	 * <p>background.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	default Color background() {
 		ColorFactory instance = ColorFactory.getInstance();
 
@@ -26,6 +37,11 @@ public interface LoboLookAndFeel {
 		return color;
 	}
 
+	/**
+	 * <p>foreground.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	default Color foreground() {
 		ColorFactory instance = ColorFactory.getInstance();
 
@@ -46,6 +62,11 @@ public interface LoboLookAndFeel {
 	}
 	
 	
+	/**
+	 * <p>interactive.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	default Color interactive() {
 		final LAFSettings settings = new LAFSettings().getInstance();
 		Color color = null;

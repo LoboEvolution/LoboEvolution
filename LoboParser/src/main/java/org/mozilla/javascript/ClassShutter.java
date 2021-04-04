@@ -8,15 +8,16 @@
 
 package org.mozilla.javascript;
 
-/**
-Embeddings that wish to filter Java classes that are visible to scripts
-through the LiveConnect, should implement this interface.
-
-@see Context#setClassShutter(ClassShutter)
-@since 1.5 Release 4
-@author Norris Boyd
-*/
-
+ /**
+  *Embeddings that wish to filter Java classes that are visible to scripts
+  *through the LiveConnect, should implement this interface.
+  *
+  *@see Context#setClassShutter(ClassShutter)
+  *@since 1.5 Release 4
+  *Author Norris Boyd
+  *
+  *
+  */
  public interface ClassShutter {
 
     /**
@@ -47,6 +48,7 @@ through the LiveConnect, should implement this interface.
      * Rhino attempts to load the class "java.lang.System.out" because
      * it assumes that "java.lang.System" is a package name.
      * <p>
+     *
      * @param fullClassName the full name of the class (including the package
      *                      name, with '.' as a delimiter). For example the
      *                      standard string class is "java.lang.String"

@@ -32,8 +32,8 @@ import com.jtattoo.plaf.BaseScrollPaneUI;
 /**
  * <p>HiFiScrollPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiScrollPaneUI extends BaseScrollPaneUI {
 

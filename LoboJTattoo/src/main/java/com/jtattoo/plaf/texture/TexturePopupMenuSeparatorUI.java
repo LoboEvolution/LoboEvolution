@@ -39,8 +39,8 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 /**
  * <p>TexturePopupMenuSeparatorUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 

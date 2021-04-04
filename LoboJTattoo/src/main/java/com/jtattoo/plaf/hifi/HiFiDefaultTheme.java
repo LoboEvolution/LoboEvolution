@@ -34,8 +34,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>HiFiDefaultTheme class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiDefaultTheme extends AbstractTheme {
 

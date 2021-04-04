@@ -45,8 +45,8 @@ import com.jtattoo.plaf.LazyImageIcon;
 /**
  * <p>AluminiumUtils class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumUtils {
 

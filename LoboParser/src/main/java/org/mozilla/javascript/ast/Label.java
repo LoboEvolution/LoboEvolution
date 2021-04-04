@@ -11,7 +11,10 @@ import org.mozilla.javascript.Token;
 /**
  * AST node representing a label.  It is a distinct node type so it can
  * record its length and position for code-processing tools.
- * Node type is {@link Token#LABEL}.
+ * Node type is {@link org.mozilla.javascript.Token#LABEL}.
+ *
+ *
+ *
  */
 public class Label extends Jump {
 
@@ -21,19 +24,40 @@ public class Label extends Jump {
         type = Token.LABEL;
     }
 
+    /**
+     * <p>Constructor for Label.</p>
+     */
     public Label() {
     }
 
+    /**
+     * <p>Constructor for Label.</p>
+     *
+     * @param pos a int.
+     */
     public Label(int pos) {
         this(pos, -1);
     }
 
+    /**
+     * <p>Constructor for Label.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public Label(int pos, int len) {
         // can't call super (Jump) for historical reasons
         position = pos;
         length = len;
     }
 
+    /**
+     * <p>Constructor for Label.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     * @param name a {@link java.lang.String} object.
+     */
     public Label(int pos, int len, String name) {
         this(pos, len);
         setName(name);
@@ -41,6 +65,8 @@ public class Label extends Jump {
 
     /**
      * Returns the label text
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getName() {
         return name;
@@ -48,8 +74,10 @@ public class Label extends Jump {
 
     /**
      * Sets the label text
-     * @throws IllegalArgumentException if name is {@code null} or the
+     *
+     * @throws java.lang.IllegalArgumentException if name is {@code null} or the
      * empty string.
+     * @param name a {@link java.lang.String} object.
      */
     public void setName(String name) {
         name = name == null ? null : name.trim();
@@ -58,6 +86,7 @@ public class Label extends Jump {
         this.name = name;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -68,6 +97,8 @@ public class Label extends Jump {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this label.  There are no children to visit.
      */
     @Override

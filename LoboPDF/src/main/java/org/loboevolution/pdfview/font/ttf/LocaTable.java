@@ -23,6 +23,9 @@ import java.nio.ByteBuffer;
 
 /**
  * Model the TrueType Loca table
+ *
+  *
+  *
  */
 public class LocaTable extends TrueTypeTable {
     /** if true, the table stores glyphs in long format */
@@ -31,7 +34,11 @@ public class LocaTable extends TrueTypeTable {
     /** the offsets themselves */
     private final int[] offsets;
     
-    /** Creates a new instance of HmtxTable */
+    /**
+     * Creates a new instance of HmtxTable
+     *
+     * @param ttf a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
+     */
     protected LocaTable(TrueTypeFont ttf) {
         super (TrueTypeTable.LOCA_TABLE);
     
@@ -45,16 +52,22 @@ public class LocaTable extends TrueTypeTable {
         this.offsets = new int[numGlyphs + 1]; 
     }
     
-    /** 
+    /**
      * get the offset, in bytes, of a given glyph from the start of
      * the glyph table
+     *
+     * @param glyphID a int.
+     * @return a int.
      */
     public int getOffset(int glyphID) {
         return this.offsets[glyphID];
     }
       
-    /** 
-     * get the size, in bytes, of the given glyph 
+    /**
+     * get the size, in bytes, of the given glyph
+     *
+     * @param glyphID a int.
+     * @return a int.
      */
     public int getSize(int glyphID) {
         return this.offsets[glyphID + 1] - this.offsets[glyphID];
@@ -63,13 +76,19 @@ public class LocaTable extends TrueTypeTable {
     /**
      * Return true if the glyphs arte in long (int) format, or
      * false if they are in short (short) format
+     *
+     * @return a boolean.
      */
     public boolean isLongFormat() {
         return this.isLong;
     }
     
    
-    /** get the data in this map as a ByteBuffer */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * get the data in this map as a ByteBuffer
+	 */
     @Override
 	public ByteBuffer getData() {
         int size = getLength();
@@ -91,7 +110,11 @@ public class LocaTable extends TrueTypeTable {
         return buf;
     }
     
-    /** Initialize this structure from a ByteBuffer */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Initialize this structure from a ByteBuffer
+	 */
     @Override
 	public void setData(ByteBuffer data) {
         for (int i = 0; i < this.offsets.length; i++) {
@@ -103,9 +126,11 @@ public class LocaTable extends TrueTypeTable {
         }
     }
     
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public int getLength() {
         if (isLongFormat()) {

@@ -68,7 +68,7 @@ import org.loboevolution.common.Objects;
  * synchronizer adjusts the scroll panes of the other viewers to match the
  * originator.
  * 
- * @author Kazo Csaba
+ * Author Kazo Csaba
  */
 class Synchronizer {
 	private final WeakHashMap<ImageViewer, Void> viewers = new WeakHashMap<>(4);

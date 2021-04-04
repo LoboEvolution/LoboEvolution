@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.dom.domimpl;
@@ -79,8 +76,8 @@ import org.loboevolution.html.xpath.XPathEvaluator;
 /**
  * <p>DocumentImpl class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class DocumentImpl extends GlobalEventHandlersImpl implements Document, XPathEvaluator {
 
@@ -126,6 +123,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		return null;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName, String options) {
 		return createElementNS(namespaceURI, qualifiedName);
@@ -322,204 +320,238 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		return (XPathResult) evaluator.evaluate(expression, contextNode, resolver, type, result);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public XPathExpression createExpression() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getChildElementCount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getFirstElementChild() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getLastElementChild() {
 		// TODO Auto-generated method stub
 		return null;
 	}	
 
+	/** {@inheritDoc} */
 	@Override
 	public String getURL() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getActiveElement() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlinkColor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlinkColor(String alinkColor) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getApplets() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBgColor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBgColor(String bgColor) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement getBody() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBody(HTMLElement body) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCharacterSet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCharset() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCompatMode() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getContentType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCookie() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCookie(String cookie) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLScriptElement getCurrentScript() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Window getDefaultView() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDesignMode() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDesignMode(String designMode) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDir() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDir(String dir) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDomain() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDomain(String domain) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFgColor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFgColor(String fgColor) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isFullscreen() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isFullscreenEnabled() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLHeadElement getHead() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isHidden() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getImages() {
         synchronized (this) {
@@ -527,6 +559,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
         }
     }
 	
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getLinks() {
         synchronized (this) {
@@ -534,7 +567,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
         }
     }
 	
-	/** {@inheritDoc} */
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getForms() {
         synchronized (this) {
@@ -573,99 +606,114 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
         }
     }
     
-    /** {@inheritDoc} */
+	/** {@inheritDoc} */
     @Override
 	public HTMLCollection getAnchors() {
     	return new HTMLCollectionImpl(this, new AnchorFilter());
 	}
     
-    /** {@inheritDoc} */
+	/** {@inheritDoc} */
     @Override
 	public HTMLCollection getAll() {
     	 return new HTMLCollectionImpl(this, new ElementFilter(null));
 	}
     
+    /** {@inheritDoc} */
     @Override
 	public HTMLCollection getElementsByName(String elementName) {
 		return new HTMLCollectionImpl(this, new ElementNameFilter(elementName));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getLastModified() {
 		// TODO Auto-generated method stub
 		return null;
 	}  
 
+	/** {@inheritDoc} */
 	@Override
 	public Location getLocation() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setLocation(Location location) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getOrigin() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DocumentReadyState getReadyState() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getReferrer() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getScrollingElement() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTitle() {
 		return this.title;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public VisibilityState getVisibilityState() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void captureEvents() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Range caretRangeFromPoint(double x, double y) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void close() {
 		synchronized (this.treeLock) {
@@ -681,80 +729,94 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	}
 
 
+	/** {@inheritDoc} */
 	@Override
 	public NodeIterator createNodeIterator(Node root) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Range createRange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TreeWalker createTreeWalker(Node root) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element elementFromPoint(double x, double y) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId, boolean showUI, String value) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId, boolean showUI) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Selection getSelection() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasFocus() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name, String features, boolean replace) {
 		return open();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name, String features) {
 		return open();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name) {
 		return open();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open(String url) {
 		return open();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document open() {
 		synchronized (this.treeLock) {
@@ -778,36 +840,42 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		return this;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandEnabled(String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandIndeterm(String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandState(String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandSupported(String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String queryCommandValue(String commandId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void releaseEvents() {
 		// TODO Auto-generated method stub

@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Add implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1 num2</i> <b>add</b> <i>sum</i> <p>
 	 *
 	 * If both operands are integers and the result is

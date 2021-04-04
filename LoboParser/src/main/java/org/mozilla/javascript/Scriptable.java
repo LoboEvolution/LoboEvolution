@@ -22,11 +22,11 @@ package org.mozilla.javascript;
  * <p>
  *
  * @see org.mozilla.javascript.ScriptableObject
- * @author Norris Boyd
- * @author Nick Thompson
- * @author Brendan Eich
+ * Author Norris Boyd
+ * Author Nick Thompson
+ * Author Brendan Eich
+ *
  */
-
 public interface Scriptable {
 
     /**
@@ -34,6 +34,8 @@ public interface Scriptable {
      * This corresponds to the [[Class]] operation in ECMA and is used
      * by Object.prototype.toString() in ECMA.<p>
      * See ECMA 8.6.2 and 15.2.4.2.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getClassName();
 
@@ -55,6 +57,7 @@ public interface Scriptable {
      * this method or the form of <code>get</code> that takes an
      * integer:
      * <table>
+     * <caption>JavaScript</caption>
      * <tr><th>JavaScript code</th><th>Java code</th></tr>
      * <tr><td>a.b      </td><td>a.get("b", a)</td></tr>
      * <tr><td>a["foo"] </td><td>a.get("foo", a)</td></tr>
@@ -76,6 +79,7 @@ public interface Scriptable {
      * <LI>The value returned by Context.getUndefinedValue()</LI>
      * <LI>NOT_FOUND</LI>
      * </UL>
+     *
      * @param name the name of the property
      * @param start the object in which the lookup began
      * @return the value of the property (may be null), or NOT_FOUND
@@ -167,6 +171,7 @@ public interface Scriptable {
      * property is defined.
      * Note that this method is not expected to traverse the prototype chain,
      * which is different from the ECMA [[Put]] operation.
+     *
      * @param name the name of the property
      * @param start the object whose property is being set
      * @param value value to set the property to
@@ -212,6 +217,7 @@ public interface Scriptable {
      * <p>
      * To delete properties defined in a prototype chain,
      * see deleteProperty in ScriptableObject.
+     *
      * @param name the identifier for the property
      * @see org.mozilla.javascript.Scriptable#get(String, Scriptable)
      * @see org.mozilla.javascript.ScriptableObject#deleteProperty(Scriptable, String)
@@ -238,24 +244,28 @@ public interface Scriptable {
 
     /**
      * Get the prototype of the object.
+     *
      * @return the prototype
      */
     public Scriptable getPrototype();
 
     /**
      * Set the prototype of the object.
+     *
      * @param prototype the prototype to set
      */
     public void setPrototype(Scriptable prototype);
 
     /**
      * Get the parent scope of the object.
+     *
      * @return the parent scope
      */
     public Scriptable getParentScope();
 
     /**
      * Set the parent scope of the object.
+     *
      * @param parent the parent scope to set
      */
     public void setParentScope(Scriptable parent);
@@ -302,7 +312,6 @@ public interface Scriptable {
      *
      * @param instance The value that appeared on the LHS of the instanceof
      *              operator
-     *
      * @return an implementation dependent value
      */
     public boolean hasInstance(Scriptable instance);

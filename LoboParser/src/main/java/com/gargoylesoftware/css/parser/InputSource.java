@@ -21,7 +21,8 @@ import java.io.Reader;
 /**
  * The input supported by the parser.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public class InputSource implements Closeable {
     private String uri_;
@@ -31,6 +32,7 @@ public class InputSource implements Closeable {
 
     /**
      * Create a new input source backed by a reader.
+     *
      * @param reader the reader
      */
     public InputSource(final Reader reader) {
@@ -38,6 +40,8 @@ public class InputSource implements Closeable {
     }
 
     /**
+     * <p>getReader.</p>
+     *
      * @return the reader if defined
      */
     public Reader getReader() {
@@ -45,6 +49,8 @@ public class InputSource implements Closeable {
     }
 
     /**
+     * <p>getURI.</p>
+     *
      * @return the uri if set
      */
     public String getURI() {
@@ -52,6 +58,8 @@ public class InputSource implements Closeable {
     }
 
     /**
+     * <p>setURI.</p>
+     *
      * @param uri the uri
      */
     public void setURI(final String uri) {
@@ -59,6 +67,8 @@ public class InputSource implements Closeable {
     }
 
     /**
+     * <p>getMedia.</p>
+     *
      * @return the media if set
      */
     public String getMedia() {
@@ -69,6 +79,8 @@ public class InputSource implements Closeable {
     }
 
     /**
+     * <p>setMedia.</p>
+     *
      * @param media the media
      */
     public void setMedia(final String media) {
@@ -76,6 +88,8 @@ public class InputSource implements Closeable {
     }
 
     /**
+     * <p>getTitle.</p>
+     *
      * @return the title if set
      */
     public String getTitle() {
@@ -83,12 +97,15 @@ public class InputSource implements Closeable {
     }
 
     /**
+     * <p>setTitle.</p>
+     *
      * @param title the title
      */
     public void setTitle(final String title) {
         title_ = title;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void close() throws IOException {
         reader_.close();

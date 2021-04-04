@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Mul implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1 num2</i> <b>mul</b> <i>product</i> <p>
 	 *
 	 * returns the product of num1 and num2.

@@ -37,8 +37,8 @@ import javax.swing.plaf.basic.BasicSeparatorUI;
 /**
  * <p>BaseSeparatorUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseSeparatorUI extends BasicSeparatorUI {
 

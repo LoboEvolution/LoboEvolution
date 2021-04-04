@@ -9,22 +9,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>NativeJavaMap class.</p>
+ *
+ *
+ *
+ */
 public class NativeJavaMap extends NativeJavaObject {
 
     private Map<Object, Object> map;
 
     @SuppressWarnings("unchecked")
+    /**
+     * <p>Constructor for NativeJavaMap.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param map a {@link java.lang.Object} object.
+     */
     public NativeJavaMap(Scriptable scope, Object map) {
         super(scope, map, map.getClass());
         assert map instanceof Map;
         this.map = (Map<Object, Object>) map;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "JavaMap";
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(String name, Scriptable start) {
         Context cx = Context.getCurrentContext();
@@ -36,6 +50,7 @@ public class NativeJavaMap extends NativeJavaObject {
         return super.has(name, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start) {
         Context cx = Context.getCurrentContext();
@@ -47,6 +62,7 @@ public class NativeJavaMap extends NativeJavaObject {
         return super.has(index, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(String name, Scriptable start) {
         Context cx = Context.getCurrentContext();
@@ -59,6 +75,7 @@ public class NativeJavaMap extends NativeJavaObject {
         return super.get(name, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start) {
         Context cx = Context.getCurrentContext();
@@ -71,6 +88,7 @@ public class NativeJavaMap extends NativeJavaObject {
         return super.get(index, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(String name, Scriptable start, Object value) {
         Context cx = Context.getCurrentContext();
@@ -81,6 +99,7 @@ public class NativeJavaMap extends NativeJavaObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value) {
         Context cx = Context.getContext();
@@ -91,6 +110,7 @@ public class NativeJavaMap extends NativeJavaObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object[] getIds() {
         Context cx = Context.getCurrentContext();

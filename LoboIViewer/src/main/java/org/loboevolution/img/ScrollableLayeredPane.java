@@ -32,8 +32,8 @@ import javax.swing.Scrollable;
 /**
  * <p>ScrollableLayeredPane class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 	

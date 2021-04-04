@@ -14,7 +14,7 @@ import java.util.TimeZone;
 /**
  * This class implements the Date native object.
  * See ECMA 15.9.
- * @author Mike McCabe
+ * Author Mike McCabe
  *
  * Significant parts of this code are adapted from the venerable jsdate.cpp (also Mozilla):
  * https://dxr.mozilla.org/mozilla-central/source/js/src/jsdate.cpp
@@ -39,12 +39,14 @@ final class NativeDate extends IdScriptableObject
     {
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Date";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> typeHint)
     {
@@ -58,6 +60,7 @@ final class NativeDate extends IdScriptableObject
         return date;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -70,6 +73,7 @@ final class NativeDate extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -128,6 +132,7 @@ final class NativeDate extends IdScriptableObject
         initPrototypeMethod(DATE_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -1571,6 +1576,7 @@ final class NativeDate extends IdScriptableObject
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

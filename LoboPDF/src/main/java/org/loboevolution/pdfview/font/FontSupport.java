@@ -20,7 +20,9 @@ package org.loboevolution.pdfview.font;
 
 /**
  * some constants and utility functions for font support.
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class FontSupport {
 
@@ -354,6 +356,9 @@ public class FontSupport {
     /**
      * get the name of a glyph from its encoding value (NOT the character
      * value), using the standard encoding.
+     *
+     * @param i a int.
+     * @return a {@link java.lang.String} object.
      */
     public static String getName (int i) {
         if (i < stdNames.length) {
@@ -369,6 +374,7 @@ public class FontSupport {
 
     /**
      * get the encoding value a glyph given its name and a name table.
+     *
      * @param name the name of the glyph
      * @param table the charset as an array of names
      * @return the index of the name in the table, or -1 if the name
@@ -385,6 +391,7 @@ public class FontSupport {
 
     /**
      * get the encoding value of a glyph given its name and a charset.
+     *
      * @param name the name of the glyph
      * @param table the charset table
      * @return the index of the name in the charset.
@@ -401,6 +408,7 @@ public class FontSupport {
     /**
      * get the encoding value of a glyph given its name, in the standard
      * charset.  This is equivalent to findName(name, FontSupport.stdNames).
+     *
      * @param name the name of the glyph
      * @return the index of the name in stdNames, or -1 if the name doesn't
      * appear in stdNames.

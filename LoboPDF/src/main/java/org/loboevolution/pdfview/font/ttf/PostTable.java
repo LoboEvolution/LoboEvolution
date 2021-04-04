@@ -27,7 +27,8 @@ import org.loboevolution.pdfview.PDFDebugger;
 /**
  * Model the TrueType Post table
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class PostTable extends TrueTypeTable {
     
@@ -61,7 +62,9 @@ public class PostTable extends TrueTypeTable {
     /** A map which character values to names and vice versa */
     private PostMap nameMap;
       
-    /** Creates a new instance of PostTable */
+    /**
+     * Creates a new instance of PostTable
+     */
     protected PostTable() {
         super (TrueTypeTable.POST_TABLE);
         
@@ -70,19 +73,29 @@ public class PostTable extends TrueTypeTable {
       
     /**
      * Map a character name to a glyphNameIndex
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a short.
      */
     public short getGlyphNameIndex(String name) {
         return this.nameMap.getCharIndex(name);
     }
     
-    /** 
+    /**
      * Map a character code to a glyphIndex name
+     *
+     * @param c a char.
+     * @return a {@link java.lang.String} object.
      */
     public String getGlyphName(char c) {
         return this.nameMap.getCharName(c);
     }
     
-    /** get the data in this map as a ByteBuffer */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * get the data in this map as a ByteBuffer
+	 */
     @Override
 	public ByteBuffer getData() {
         int size = getLength();
@@ -110,7 +123,11 @@ public class PostTable extends TrueTypeTable {
         return buf;
     }
     
-    /** Initialize this structure from a ByteBuffer */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Initialize this structure from a ByteBuffer
+	 */
     @Override
 	public void setData(ByteBuffer data) {
         setFormat(data.getInt());
@@ -147,9 +164,11 @@ public class PostTable extends TrueTypeTable {
         this.nameMap.setData(data);
     }
     
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public int getLength() {
         int size = 32;
@@ -160,145 +179,163 @@ public class PostTable extends TrueTypeTable {
         return size;
     }
     
-    /** Getter for property format.
-     * @return Value of property format.
+    /**
+     * Getter for property format.
      *
+     * @return Value of property format.
      */
     public int getFormat() {
         return this.format;
     }
     
-    /** Setter for property format.
-     * @param format New value of property format.
+    /**
+     * Setter for property format.
      *
+     * @param format New value of property format.
      */
     public void setFormat(int format) {
         this.format = format;
     }
     
-    /** Getter for property italicAngle.
-     * @return Value of property italicAngle.
+    /**
+     * Getter for property italicAngle.
      *
+     * @return Value of property italicAngle.
      */
     public int getItalicAngle() {
         return this.italicAngle;
     }
     
-    /** Setter for property italicAngle.
-     * @param italicAngle New value of property italicAngle.
+    /**
+     * Setter for property italicAngle.
      *
+     * @param italicAngle New value of property italicAngle.
      */
     public void setItalicAngle(int italicAngle) {
         this.italicAngle = italicAngle;
     }
     
-    /** Getter for property underlinePosition.
-     * @return Value of property underlinePosition.
+    /**
+     * Getter for property underlinePosition.
      *
+     * @return Value of property underlinePosition.
      */
     public short getUnderlinePosition() {
         return this.underlinePosition;
     }
     
-    /** Setter for property underlinePosition.
-     * @param underlinePosition New value of property underlinePosition.
+    /**
+     * Setter for property underlinePosition.
      *
+     * @param underlinePosition New value of property underlinePosition.
      */
     public void setUnderlinePosition(short underlinePosition) {
         this.underlinePosition = underlinePosition;
     }
     
-    /** Getter for property underlineThickness.
-     * @return Value of property underlineThickness.
+    /**
+     * Getter for property underlineThickness.
      *
+     * @return Value of property underlineThickness.
      */
     public short getUnderlineThickness() {
         return this.underlineThickness;
     }
     
-    /** Setter for property underlineThickness.
-     * @param underlineThickness New value of property underlineThickness.
+    /**
+     * Setter for property underlineThickness.
      *
+     * @param underlineThickness New value of property underlineThickness.
      */
     public void setUnderlineThickness(short underlineThickness) {
         this.underlineThickness = underlineThickness;
     }
     
-    /** Getter for property isFixedPitch.
-     * @return Value of property isFixedPitch.
+    /**
+     * Getter for property isFixedPitch.
      *
+     * @return Value of property isFixedPitch.
      */
     public short getIsFixedPitch() {
         return this.isFixedPitch;
     }
     
-    /** Setter for property isFixedPitch.
-     * @param isFixedPitch New value of property isFixedPitch.
+    /**
+     * Setter for property isFixedPitch.
      *
+     * @param isFixedPitch New value of property isFixedPitch.
      */
     public void setIsFixedPitch(short isFixedPitch) {
         this.isFixedPitch = isFixedPitch;
     }
     
-    /** Getter for property minMemType42.
-     * @return Value of property minMemType42.
+    /**
+     * Getter for property minMemType42.
      *
+     * @return Value of property minMemType42.
      */
     public int getMinMemType42() {
         return this.minMemType42;
     }
     
-    /** Setter for property minMemType42.
-     * @param minMemType42 New value of property minMemType42.
+    /**
+     * Setter for property minMemType42.
      *
+     * @param minMemType42 New value of property minMemType42.
      */
     public void setMinMemType42(int minMemType42) {
         this.minMemType42 = minMemType42;
     }
     
-    /** Getter for property maxMemType42.
-     * @return Value of property maxMemType42.
+    /**
+     * Getter for property maxMemType42.
      *
+     * @return Value of property maxMemType42.
      */
     public int getMaxMemType42() {
         return this.maxMemType42;
     }
     
-    /** Setter for property maxMemType42.
-     * @param maxMemType42 New value of property maxMemType42.
+    /**
+     * Setter for property maxMemType42.
      *
+     * @param maxMemType42 New value of property maxMemType42.
      */
     public void setMaxMemType42(int maxMemType42) {
         this.maxMemType42 = maxMemType42;
     }
     
-    /** Getter for property minMemType1.
-     * @return Value of property minMemType1.
+    /**
+     * Getter for property minMemType1.
      *
+     * @return Value of property minMemType1.
      */
     public int getMinMemType1() {
         return this.minMemType1;
     }
     
-    /** Setter for property minMemType1.
-     * @param minMemType1 New value of property minMemType1.
+    /**
+     * Setter for property minMemType1.
      *
+     * @param minMemType1 New value of property minMemType1.
      */
     public void setMinMemType1(int minMemType1) {
         this.minMemType1 = minMemType1;
     }
     
-    /** Getter for property maxMemType1.
-     * @return Value of property maxMemType1.
+    /**
+     * Getter for property maxMemType1.
      *
+     * @return Value of property maxMemType1.
      */
     public int getMaxMemType1() {
         return this.maxMemType1;
     }
     
-    /** Setter for property maxMemType1.
-     * @param maxMemType1 New value of property maxMemType1.
+    /**
+     * Setter for property maxMemType1.
      *
+     * @param maxMemType1 New value of property maxMemType1.
      */
     public void setMaxMemType1(int maxMemType1) {
         this.maxMemType1 = maxMemType1;

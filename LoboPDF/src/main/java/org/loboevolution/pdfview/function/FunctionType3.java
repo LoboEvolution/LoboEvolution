@@ -24,49 +24,47 @@ import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
 /**
- * 3.9.3 - A stitching function define a <i>stitching</i> of the subdomains of
- * several 1-input functions to produce a single new 1-input function.
- * Since the resulting stitching function is a 1-input function, the
- * domain is given by a two-element array, [ <b>Domain</b>0 <b>Domain</b>1 ].
+ *  3.9.3 - A stitching function define a <i>stitching</i> of the subdomains of
+ *  several 1-input functions to produce a single new 1-input function.
+ *  Since the resulting stitching function is a 1-input function, the
+ *  domain is given by a two-element array, [ <b>Domain</b>0 <b>Domain</b>1 ].
  *
- * <pre>
- * Example 4.25
- * 5 0 obj                          % Shading dictionary
- *  << /ShadingType 3
- *      /ColorSpace /DeviceCMYK
- *      /Coords [ 0.0 0.0 0.096 0.0 0.0 1.0 00]% Concentric circles
- *      /Function 10 0 R
- *      /Extend [ true true ]
- *  >>
- * endobj
+ *  Example 4.25
+ *  5 0 obj                          % Shading dictionary
+ *    ShadingType 3
+ *       ColorSpace DeviceCMYK
+ *       Coords [ 0.0 0.0 0.096 0.0 0.0 1.0 00]% Concentric circles
+ *       Function 10 0 R
+ *       Extend [ true true ]
  *
- * 10 0 obj                         % Color function
- *  << /FunctionType 3
- *      /Domain [ 0.0 1.0 ]
- *      /Functions [ 11 0 R 12 0 R ]
- *      /Bounds [ 0.708 ]
- *      /Encode [ 1.0 0.0 0.0 1.0 ]
- *  >>
- * endobj
+ *  endobj
  *
- * 11 0 obj                         % First subfunction
- *  << /FunctionType 2
- *      /Domain [ 0.0 1.0 ]
- *      /C0 [ 0.929 0.357 1.000 0.298 ]
- *      /C1 [ 0.631 0.278 1.000 0.027 ]
- *      /N 1.048
- *  >>
- * endobj
+ *  10 0 obj                         % Color function
+ *    FunctionType 3
+ *       Domain [ 0.0 1.0 ]
+ *       Functions [ 11 0 R 12 0 R ]
+ *       Bounds [ 0.708 ]
+ *       Encode [ 1.0 0.0 0.0 1.0 ]
  *
- * 12 0 obj                         % Second subfunction
- *  << /FunctionType 2
- *      /Domain [ 0.0 1.0 ]
- *      /C0 [ 0.929 0.357 1.000 0.298 ]
- *      /C1 [ 0.941 0.400 1.000 0.102 ]
- *      /N 1.374
- *  >>
- * endobj
- * </pre>
+ *  endobj
+ *
+ *  11 0 obj                         % First subfunction
+ *    FunctionType 2
+ *       Domain [ 0.0 1.0 ]
+ *       C0 [ 0.929 0.357 1.000 0.298 ]
+ *       C1 [ 0.631 0.278 1.000 0.027 ]
+ *       N 1.048
+ *
+ *  endobj
+ *
+ *  12 0 obj                         % Second subfunction
+ *    FunctionType 2
+ *       Domain [ 0.0 1.0 ]
+ *       C0 [ 0.929 0.357 1.000 0.298 ]
+ *       C1 [ 0.941 0.400 1.000 0.102 ]
+ *       N 1.374
+ *
+ *  endobj
  */
 public class FunctionType3 extends PDFFunction {
     
@@ -74,36 +72,39 @@ public class FunctionType3 extends PDFFunction {
     private float[] bounds;
     private float[] encode;
     
-    /** Creates a new instance of FunctionType3 */
+    /**
+     * Creates a new instance of FunctionType3
+     */
     protected FunctionType3() {
         super(TYPE_3);
     }
 
-    /**
-     * <p>Read the function information from a PDF Object.</p>
-     * <p>Required entries ( Table 3.38)  (3200-1:2008:7.10.4, table: 41)
-     * are:<li>
-     *
-     * <b>Functions</b> <i>array</i> (Required) An array of k 1-input functions making up
-     * the stitching function. The output dimensionality of all functions
-     * must be the same, and compatible with the value of <b>Range</b>
-     * if <b>Range</b> is present.</li><li>
-     *
-     * <b>Domain</b><i>array</i> (Required) A 2 element array where
-     * <b>Domain</b>0 is less than <b>Domain</b>1. This is read by the
-     * <code>PDFFunction</code> superclass.</li><li>
-     *
-     * <b>Bounds</b> <i>array</i> (Required) An array of k-1 numbers that,
-     * in combination with <b>Domain</b>, define the intervals to which each
-     * function from the <b>Functions</b> array applies. <b>Bounds</b> elements
-     * must be in order of increasing value, and each value must be within
-     * the domain defined by >b>Domain</b>.</li><li>
-     *
-     * <b>Encode</b> <i>array</i> (Required) An array of 2 * k numbers that,
-     * taken in pairs, map each subset of the domain defined by <bDomain</b>
-     * and the <b>Bounds</b> array to the domain of the corresponding function.
-     * </li></p>
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Read the function information from a PDF Object.</p>
+	 * Required entries ( Table 3.38)  (3200-1:2008:7.10.4, table: 41)
+	 * are:
+	 *
+	 * <b>Functions</b> <i>array</i> (Required) An array of k 1-input functions making up
+	 * the stitching function. The output dimensionality of all functions
+	 * must be the same, and compatible with the value of <b>Range</b>
+	 * if <b>Range</b> is present.
+	 *
+	 * <b>Domain</b><i>array</i> (Required) A 2 element array where
+	 * <b>Domain</b>0 is less than <b>Domain</b>1. This is read by the
+	 * <code>PDFFunction</code> superclass.
+	 *
+	 * <b>Bounds</b> <i>array</i> (Required) An array of k-1 numbers that,
+	 * in combination with <b>Domain</b>, define the intervals to which each
+	 * function from the <b>Functions</b> array applies. <b>Bounds</b> elements
+	 * must be in order of increasing value, and each value must be within
+	 * the domain defined by <b>Domain</b>.
+	 *
+	 * <b>Encode</b> <i>array</i> (Required) An array of 2 * k numbers that,
+	 * taken in pairs, map each subset of the domain defined by <b>Domain</b>
+	 * and the <b>Bounds</b> array to the domain of the corresponding function.
+	 */
     @Override
 	protected void parse(PDFObject obj) throws IOException {
         // read the Functions array (required)
@@ -149,12 +150,7 @@ public class FunctionType3 extends PDFFunction {
         }
     }
 
-    /**
-     *
-     * @param inputs an array of <i>1</i> input values
-     * @param outputs an array of size <i>n</i> which will be filled
-     *                with the output values, or null to return a new array
-     */
+	/** {@inheritDoc} */
     @Override
 	protected void doFunction(float[] inputs, int inputOffset,
 			float[] outputs, int outputOffset) {
@@ -169,11 +165,13 @@ public class FunctionType3 extends PDFFunction {
         System.arraycopy(out, 0, outputs, 0 + outputOffset, out.length);
     }
     
+    /** {@inheritDoc} */
     @Override
     public int getNumInputs() {
     	return 1;
     }
     
+    /** {@inheritDoc} */
     @Override
     public int getNumOutputs() {
     	return functions[0].getNumOutputs();

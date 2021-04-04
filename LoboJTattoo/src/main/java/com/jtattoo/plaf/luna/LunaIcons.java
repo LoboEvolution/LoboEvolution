@@ -43,8 +43,8 @@ import com.jtattoo.plaf.LazyImageIcon;
 /**
  * <p>LunaIcons class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LunaIcons extends BaseIcons {
 

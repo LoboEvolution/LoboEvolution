@@ -35,8 +35,8 @@ import com.jtattoo.plaf.XPScrollBarUI;
 /**
  * <p>HiFiScrollBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiScrollBarUI extends XPScrollBarUI {
 

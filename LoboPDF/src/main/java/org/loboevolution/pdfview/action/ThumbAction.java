@@ -10,6 +10,9 @@ import org.loboevolution.pdf.PDFViewer;
 
 /**
  * The Class ThumbAction.
+ *
+  *
+  *
  */
 public class ThumbAction extends AbstractAction implements PropertyChangeListener {
 
@@ -23,6 +26,8 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 
 	/**
 	 * Instantiates a new thumb action.
+	 *
+	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
 	public ThumbAction(PDFViewer dialog) {
 		super("Hide thumbnails");
@@ -35,6 +40,7 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
 	 * PropertyChangeEvent )
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		int v = (Integer) evt.getNewValue();
@@ -55,6 +61,7 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
 	 * ActionEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		dialog.doThumbs(!isOpen);

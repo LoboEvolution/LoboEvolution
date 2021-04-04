@@ -32,8 +32,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>McWinDefaultTheme class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class McWinDefaultTheme extends AbstractTheme {
 

@@ -27,8 +27,10 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
+ * <p>CMapFormat4 class.</p>
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class CMapFormat4 extends CMap {
    
@@ -37,7 +39,11 @@ public class CMapFormat4 extends CMap {
      */
     public final SortedMap<Segment,Object> segments;
     
-    /** Creates a new instance of CMapFormat0 */
+    /**
+     * Creates a new instance of CMapFormat0
+     *
+     * @param language a short.
+     */
     protected CMapFormat4(short language) {
         super((short) 4, language);
     
@@ -49,7 +55,11 @@ public class CMapFormat4 extends CMap {
     }
     
     /**
-     * Add a segment with a map 
+     * Add a segment with a map
+     *
+     * @param startCode a short.
+     * @param endCode a short.
+     * @param map an array of {@link char} objects.
      */
     public void addSegment(short startCode, short endCode, char[] map) {
         if (map.length != (endCode - startCode) + 1) {
@@ -64,6 +74,10 @@ public class CMapFormat4 extends CMap {
     
     /**
      * Add a segment with an idDelta
+     *
+     * @param startCode a short.
+     * @param endCode a short.
+     * @param idDelta a short.
      */
     public void addSegment(short startCode, short endCode, short idDelta) {
         Segment s = new Segment(startCode, endCode, false);
@@ -74,15 +88,20 @@ public class CMapFormat4 extends CMap {
     
     /**
      * Remove a segment
+     *
+     * @param startCode a short.
+     * @param endCode a short.
      */
     public void removeSegment(short startCode, short endCode) {
         Segment s = new Segment(startCode, endCode, true);
         this.segments.remove(s);
     }
     
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public short getLength() {
         // start with the size of the fixed header
@@ -104,9 +123,11 @@ public class CMapFormat4 extends CMap {
         return size;
     }
     
-    /** 
-     * Cannot map from a byte
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Cannot map from a byte
+	 */
     @Override
 	public byte map(byte src) {
         char c = map((char) src);
@@ -118,9 +139,11 @@ public class CMapFormat4 extends CMap {
         return (byte) c;
     }
     
-    /**
-     * Map from char
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Map from char
+	 */
     @Override
 	public char map(char src) {
         // find first segment with endcode > src
@@ -149,9 +172,11 @@ public class CMapFormat4 extends CMap {
         return (char) 0;
     }
     
-    /**
-     * Get the src code which maps to the given glyphID
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the src code which maps to the given glyphID
+	 */
     @Override
 	public char reverseMap(short glyphID) {
         // look at each segment
@@ -185,9 +210,11 @@ public class CMapFormat4 extends CMap {
     }
     
     
-    /**
-     * Get the data in this map as a ByteBuffer
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the data in this map as a ByteBuffer
+	 */
     @Override
 	public void setData(int length, ByteBuffer data) {
         // read the table size values
@@ -254,9 +281,11 @@ public class CMapFormat4 extends CMap {
         }       
     }
     
-    /** 
-     * Get the data in the map as a byte buffer
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the data in the map as a byte buffer
+	 */
     @Override
 	public ByteBuffer getData() {
         ByteBuffer buf = ByteBuffer.allocate(getLength());
@@ -338,6 +367,8 @@ public class CMapFormat4 extends CMap {
     
     /**
      * Get the segment count
+     *
+     * @return a short.
      */
     public short getSegmentCount() {
         return (short) this.segments.size();
@@ -345,6 +376,8 @@ public class CMapFormat4 extends CMap {
     
     /**
      * Get the search range
+     *
+     * @return a short.
      */
     public short getSearchRange() {
         double pow = Math.floor(Math.log(getSegmentCount()) / Math.log(2));
@@ -355,6 +388,8 @@ public class CMapFormat4 extends CMap {
     
     /**
      * Get the entry selector
+     *
+     * @return a short.
      */
     public short getEntrySelector() {
         int sr2 = getSearchRange() / 2;
@@ -363,12 +398,18 @@ public class CMapFormat4 extends CMap {
     
     /**
      * Get the rangeShift()
+     *
+     * @return a short.
      */
     public short getRangeShift() {
         return (short) ((2 * getSegmentCount()) - getSearchRange());
     }
     
-    /** Get a pretty string */
+    /**
+     * {@inheritDoc}
+     *
+     * Get a pretty string
+     */
     @Override public String toString() {
         StringBuilder buf = new StringBuilder();
         String indent = "        ";

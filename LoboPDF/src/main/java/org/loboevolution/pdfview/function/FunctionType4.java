@@ -30,11 +30,14 @@ import org.loboevolution.pdfview.function.postscript.operation.PostScriptOperati
 
 /**
  * <p>A PostScript function is represented as a stream containing code
- * written in a small subset of the PostScript language. 
+ * written in a small subset of the PostScript language.
  * This reference is taken from the (3200-1:2008:7.10.5)<p>
  *
  * http://www.adobe.com/devnet/acrobat/pdfs/adobe_supplement_iso32000.pdf
  * </p>
+ *
+  *
+  *
  */
 public class FunctionType4 extends PDFFunction {
 
@@ -44,12 +47,18 @@ public class FunctionType4 extends PDFFunction {
     /** the stack of operations. The stack contents should all be Comparable. */
     private Stack<Object> stack;
 
-    /** Creates a new instance of FunctionType4 */
+    /**
+     * Creates a new instance of FunctionType4
+     */
     protected FunctionType4() {
         super(TYPE_4);
     }
 
-    /** Read the function information from a PDF Object */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Read the function information from a PDF Object
+	 */
     @Override
 	protected void parse(PDFObject obj) throws IOException {
     	ByteBuffer buf = obj.getStreamBuffer();
@@ -60,18 +69,14 @@ public class FunctionType4 extends PDFFunction {
     	this.tokens = new PostScriptParser().parse(scriptContent);
     }
 
-    /**
-     * Map from <i>m</i> input values to <i>n</i> output values.
-     * The number of inputs <i>m</i> must be exactly one half the size of the
-     * domain.  The number of outputs should match one half the size of the
-     * range.
-     *
-     * @param inputs an array of <i>m</i> input values
-     * @param inputOffset the offset into the input array to read from
-     * @param outputs an array of size >= <i>n</i> which will be filled
-     *                with the output values
-     * @param outputOffset the offset into the output array to write to
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Map from <i>m</i> input values to <i>n</i> output values.
+	 * The number of inputs <i>m</i> must be exactly one half the size of the
+	 * domain.  The number of outputs should match one half the size of the
+	 * range.
+	 */
     @Override
 	protected void doFunction(float[] inputs, int inputOffset, float[] outputs, int outputOffset) {
     	prepareInitialStack(inputs, inputOffset);

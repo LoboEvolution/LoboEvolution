@@ -60,6 +60,12 @@ import org.jpedal.jbig2.segment.pageinformation.PageInformationSegment;
 import org.jpedal.jbig2.segment.region.RegionFlags;
 import org.jpedal.jbig2.segment.region.RegionSegment;
 
+/**
+ * <p>GenericRegionSegment class.</p>
+ *
+  *
+  *
+ */
 public class GenericRegionSegment extends RegionSegment {
 	
 	private static final Logger logger = Logger.getLogger(GenericRegionSegment.class.getName());
@@ -69,12 +75,24 @@ public class GenericRegionSegment extends RegionSegment {
 
     private boolean unknownLength = false;
     
+    /**
+     * <p>Constructor for GenericRegionSegment.</p>
+     *
+     * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+     * @param inlineImage a boolean.
+     */
     public GenericRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage) {
         super(streamDecoder);
 
         this.inlineImage = inlineImage;
     }
 
+    /**
+     * <p>readSegment.</p>
+     *
+     * @throws java.io.IOException if any.
+     * @throws org.jpedal.jbig2.JBIG2Exception if any.
+     */
     public void readSegment() throws IOException, JBIG2Exception {
     	
     	if(JBIG2StreamDecoder.debug)
@@ -195,6 +213,11 @@ public class GenericRegionSegment extends RegionSegment {
         	logger.info("generic region Segment flags = " + genericRegionFlagsField);
     }
 
+    /**
+     * <p>Getter for the field <code>genericRegionFlags</code>.</p>
+     *
+     * @return a {@link org.jpedal.jbig2.segment.region.generic.GenericRegionFlags} object.
+     */
     public GenericRegionFlags getGenericRegionFlags() {
         return genericRegionFlags;
     }

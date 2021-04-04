@@ -38,8 +38,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>GraphiteMenuItemUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteMenuItemUI extends BaseMenuItemUI {
 

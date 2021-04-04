@@ -31,6 +31,8 @@ import org.loboevolution.pdfview.PDFParseException;
 /**
  * The abstract superclass of all PDF Pattern types
  *
+  *
+  *
  */
 public abstract class PDFPattern {
  
@@ -40,7 +42,11 @@ public abstract class PDFPattern {
     /** the matrix to transform from pattern space to PDF space */
     private AffineTransform xform;
  
-    /** Creates a new instance of PDFPattern */
+    /**
+     * Creates a new instance of PDFPattern
+     *
+     * @param type a int.
+     */
     protected PDFPattern(int type) 
     {
         this.type = type;
@@ -48,6 +54,11 @@ public abstract class PDFPattern {
  
     /**
      * Read a pattern from the given pattern stream
+     *
+     * @param patternObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param resources a {@link java.util.Map} object.
+     * @return a {@link org.loboevolution.pdfview.pattern.PDFPattern} object.
+     * @throws java.io.IOException if any.
      */
     public static PDFPattern getPattern(PDFObject patternObj, Map resources)
         throws IOException
@@ -100,6 +111,8 @@ public abstract class PDFPattern {
     
     /**
      * Get the type of this pattern
+     *
+     * @return a int.
      */
     public int getPatternType() {
         return this.type;
@@ -107,6 +120,8 @@ public abstract class PDFPattern {
     
     /**
      * Get the transform associated with this pattern
+     *
+     * @return a {@link java.awt.geom.AffineTransform} object.
      */
     public AffineTransform getTransform() {
         return this.xform;
@@ -114,6 +129,8 @@ public abstract class PDFPattern {
     
     /**
      * Set the transform associated with this pattern
+     *
+     * @param xform a {@link java.awt.geom.AffineTransform} object.
      */
     protected void setTransform(AffineTransform xform) {
         this.xform = xform;
@@ -123,6 +140,8 @@ public abstract class PDFPattern {
      * Parse the pattern-specific information from the pdf object
      *
      * @param patternObj the pdfobject with data for this pattern
+     * @param resources a {@link java.util.Map} object.
+     * @throws java.io.IOException if any.
      */
     protected abstract void parse(PDFObject patternObj, Map resources) 
         throws IOException;
@@ -131,6 +150,7 @@ public abstract class PDFPattern {
      * Returns paint that represents the selected pattern
      *
      * @param basePaint the background paint color, or null for none
+     * @return a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
     public abstract PDFPaint getPaint(PDFPaint basePaint);
 }

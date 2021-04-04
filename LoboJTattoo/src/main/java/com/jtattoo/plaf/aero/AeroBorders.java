@@ -44,8 +44,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AeroBorders class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AeroBorders extends BaseBorders {
 

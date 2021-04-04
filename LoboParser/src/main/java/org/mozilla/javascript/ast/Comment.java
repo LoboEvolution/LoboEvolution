@@ -37,6 +37,9 @@ import org.mozilla.javascript.Token;
  * <p>Note the node start position for Comment nodes is still relative to the
  * parent, but Comments are always stored directly in the AstRoot node, so
  * they are also effectively absolute offsets.
+ *
+ *
+ *
  */
 public class Comment extends AstNode {
 
@@ -49,6 +52,7 @@ public class Comment extends AstNode {
 
     /**
      * Constructs a new Comment
+     *
      * @param pos the start position
      * @param len the length including delimiter(s)
      * @param type the comment type
@@ -62,6 +66,8 @@ public class Comment extends AstNode {
 
     /**
      * Returns the comment style
+     *
+     * @return a {@link org.mozilla.javascript.Token.CommentType} object.
      */
     public Token.CommentType getCommentType() {
         return commentType;
@@ -69,6 +75,7 @@ public class Comment extends AstNode {
 
     /**
      * Sets the comment style
+     *
      * @param type the comment style, a
      * {@link org.mozilla.javascript.Token.CommentType}
      */
@@ -78,6 +85,8 @@ public class Comment extends AstNode {
 
     /**
      * Returns a string of the comment value.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getValue() {
         return value;
@@ -85,13 +94,15 @@ public class Comment extends AstNode {
 
     /**
      * Set the comment Value with the new commentString. and updates the length with new Length.
-     * @param commentString
+     *
+     * @param commentString a {@link java.lang.String} object.
      */
     public void setValue(String commentString) {
         this.value = commentString;
         this.setLength(this.value.length());
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder(getLength() + 10);
@@ -104,6 +115,8 @@ public class Comment extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Comment nodes are not visited during normal visitor traversals,
      * but comply with the {@link AstNode#visit} interface.
      */

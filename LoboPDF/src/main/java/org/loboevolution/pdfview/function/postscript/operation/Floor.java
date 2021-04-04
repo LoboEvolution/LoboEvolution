@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Floor implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1</i> <b>floor</b> <i>num2</i> <p>
 	 *
 	 * returns the greatest integer value less than or equal

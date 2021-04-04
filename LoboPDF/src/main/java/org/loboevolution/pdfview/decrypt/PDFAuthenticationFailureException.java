@@ -23,11 +23,18 @@ import org.loboevolution.pdfview.PDFParseException;
 /**
  * Identifies that the supplied password was incorrect or non-existent
  * and required.
- * @author Luke Kirby
+ *
+ * Author Luke Kirby
+  *
  */
 // TODO - consider having this not extend PDFParseException so that
 // it will be handled more explicitly?
 public class PDFAuthenticationFailureException extends PDFParseException {
+    /**
+     * <p>Constructor for PDFAuthenticationFailureException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public PDFAuthenticationFailureException(String message) {
         super(message);
     }

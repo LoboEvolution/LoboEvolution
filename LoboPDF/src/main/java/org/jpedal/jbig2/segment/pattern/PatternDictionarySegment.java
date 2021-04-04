@@ -58,6 +58,12 @@ import org.jpedal.jbig2.image.JBIG2Bitmap;
 import org.jpedal.jbig2.segment.Segment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>PatternDictionarySegment class.</p>
+ *
+  *
+  *
+ */
 public class PatternDictionarySegment extends Segment {
 	
 	private static final Logger logger = Logger.getLogger(PatternDictionarySegment.class.getName());
@@ -68,10 +74,21 @@ public class PatternDictionarySegment extends Segment {
 	private JBIG2Bitmap[] bitmaps;
 	private int size;
 
+	/**
+	 * <p>Constructor for PatternDictionarySegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 */
 	public PatternDictionarySegment(JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 		/** read text region Segment flags */
 		readPatternDictionaryFlags();
@@ -126,6 +143,11 @@ public class PatternDictionarySegment extends Segment {
 	}
 
 
+	/**
+	 * <p>Getter for the field <code>bitmaps</code>.</p>
+	 *
+	 * @return an array of {@link org.jpedal.jbig2.image.JBIG2Bitmap} objects.
+	 */
 	public JBIG2Bitmap[] getBitmaps() {
 		return bitmaps;
 	}
@@ -139,10 +161,20 @@ public class PatternDictionarySegment extends Segment {
 			logger.info("pattern Dictionary flags = " + patternDictionaryFlagsField);
 	}
 
+	/**
+	 * <p>Getter for the field <code>patternDictionaryFlags</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.segment.pattern.PatternDictionaryFlags} object.
+	 */
 	public PatternDictionaryFlags getPatternDictionaryFlags() {
 		return patternDictionaryFlags;
 	}
 
+	/**
+	 * <p>Getter for the field <code>size</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getSize() {
 		return size;
 	}

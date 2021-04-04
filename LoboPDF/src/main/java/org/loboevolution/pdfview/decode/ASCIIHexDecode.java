@@ -29,7 +29,8 @@ import org.loboevolution.pdfview.PDFParseException;
 /**
  * decode an array of hex nybbles into a byte array
  *
- * @author Mike Wessler
+ * Author Mike Wessler
+  *
  */
 public class ASCIIHexDecode {
     private final ByteBuffer buf;
@@ -110,11 +111,12 @@ public class ASCIIHexDecode {
      * ASCIIHex format consists of a sequence of Hexidecimal
      * digits, with possible whitespace, ending with the
      * '&gt;' character.
-     * 
+     *
      * @param buf the encoded ASCII85 characters in a byte
      *        buffer
      * @param params parameters to the decoder (ignored)
      * @return the decoded bytes
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
     public static ByteBuffer decode(ByteBuffer buf, PDFObject params)
 	throws PDFParseException 

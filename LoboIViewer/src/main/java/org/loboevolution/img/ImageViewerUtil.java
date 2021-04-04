@@ -29,8 +29,8 @@ import java.util.Iterator;
 /**
  * Utility methods for image viewers.
  *
- * @author Kazo Csaba
- * @version $Id: $Id
+ * Author Kazo Csaba
+ *
  */
 public final class ImageViewerUtil {
 	/** Private constructor. */

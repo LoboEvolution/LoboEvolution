@@ -99,83 +99,106 @@ final class InterpreterData implements Serializable, DebuggableScript
     /** true if the function has been declared like "!function() {}". */
     boolean declaredAsFunctionExpression;
 
+    /** {@inheritDoc} */
     @Override
     public boolean isTopLevel()
     {
         return topLevel;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean isFunction()
     {
         return itsFunctionType != 0;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getFunctionName()
     {
         return itsName;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getParamCount()
     {
         return argCount;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getParamAndVarCount()
     {
         return argNames.length;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getParamOrVarName(int index)
     {
         return argNames[index];
     }
 
+    /**
+     * <p>getParamOrVarConst.</p>
+     *
+     * @param index a int.
+     * @return a boolean.
+     */
     public boolean getParamOrVarConst(int index)
     {
         return argIsConst[index];
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getSourceName()
     {
         return itsSourceFile;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean isGeneratedScript()
     {
         return ScriptRuntime.isGeneratedScript(itsSourceFile);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int[] getLineNumbers()
     {
         return Interpreter.getLineNumbers(this);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getFunctionCount()
     {
         return (itsNestedFunctions == null) ? 0 : itsNestedFunctions.length;
     }
 
+    /** {@inheritDoc} */
     @Override
     public DebuggableScript getFunction(int index)
     {
         return itsNestedFunctions[index];
     }
 
+    /** {@inheritDoc} */
     @Override
     public DebuggableScript getParent()
     {
          return parentData;
     }
 
+    /**
+     * <p>icodeHashCode.</p>
+     *
+     * @return a int.
+     */
     public int icodeHashCode()
     {
         int h = icodeHashCode;

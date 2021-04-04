@@ -42,8 +42,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>SmartIcons class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class SmartIcons extends BaseIcons {
 

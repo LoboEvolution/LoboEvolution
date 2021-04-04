@@ -52,6 +52,9 @@ import org.loboevolution.pdfview.PDFRenderer;
  * A class representing a print job for a particular PDFFile. The class
  * maintains a status dialog as it prints, allowing the user to cancel the print
  * job.
+ *
+  *
+  *
  */
 public class PDFPrintPage implements Printable {
 
@@ -208,6 +211,7 @@ public class PDFPrintPage implements Printable {
 
 	// from Printable interface: prints a single page, given a Graphics
 	// to draw into, the page format, and the page number.
+	/** {@inheritDoc} */
 	@Override
 	public int print(Graphics g, PageFormat format, int index) throws PrinterException {
 		int pagenum = index + 1;

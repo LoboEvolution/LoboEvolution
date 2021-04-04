@@ -33,8 +33,8 @@ import com.jtattoo.plaf.BasePanelUI;
 /**
  * <p>HiFiPanelUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiPanelUI extends BasePanelUI {
 

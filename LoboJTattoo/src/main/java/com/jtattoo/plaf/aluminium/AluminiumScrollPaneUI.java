@@ -33,8 +33,8 @@ import com.jtattoo.plaf.BaseScrollPaneUI;
 /**
  * <p>AluminiumScrollPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumScrollPaneUI extends BaseScrollPaneUI {
 

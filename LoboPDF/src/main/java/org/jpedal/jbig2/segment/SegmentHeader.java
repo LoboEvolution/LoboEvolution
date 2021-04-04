@@ -53,6 +53,12 @@ import java.util.logging.Logger;
 
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 
+/**
+ * <p>SegmentHeader class.</p>
+ *
+  *
+  *
+ */
 public class SegmentHeader {
 
 	private static final Logger logger = Logger.getLogger(SegmentHeader.class.getName());
@@ -69,10 +75,20 @@ public class SegmentHeader {
 	private int pageAssociation;
 	private int dataLength;
 
+	/**
+	 * <p>Setter for the field <code>segmentNumber</code>.</p>
+	 *
+	 * @param SegmentNumber a int.
+	 */
 	public void setSegmentNumber(int SegmentNumber) {
 		this.segmentNumber = SegmentNumber;
 	}
 
+	/**
+	 * <p>setSegmentHeaderFlags.</p>
+	 *
+	 * @param SegmentHeaderFlags a short.
+	 */
 	public void setSegmentHeaderFlags(short SegmentHeaderFlags) {
 		segmentType = SegmentHeaderFlags & 63; // 63 = 00111111
 		pageAssociationSizeSet = (SegmentHeaderFlags & 64) == 64; // 64 = // 01000000
@@ -85,62 +101,137 @@ public class SegmentHeader {
 		}
 	}
 
+	/**
+	 * <p>Setter for the field <code>referredToSegmentCount</code>.</p>
+	 *
+	 * @param referredToSegmentCount a int.
+	 */
 	public void setReferredToSegmentCount(int referredToSegmentCount) {
 		this.referredToSegmentCount = referredToSegmentCount;
 	}
 
+	/**
+	 * <p>Setter for the field <code>rententionFlags</code>.</p>
+	 *
+	 * @param rententionFlags an array of {@link short} objects.
+	 */
 	public void setRententionFlags(short[] rententionFlags) {
 		this.rententionFlags = rententionFlags;
 	}
 
+	/**
+	 * <p>Setter for the field <code>referredToSegments</code>.</p>
+	 *
+	 * @param referredToSegments an array of {@link int} objects.
+	 */
 	public void setReferredToSegments(int[] referredToSegments) {
 		this.referredToSegments = referredToSegments;
 	}
 
+	/**
+	 * <p>Getter for the field <code>referredToSegments</code>.</p>
+	 *
+	 * @return an array of {@link int} objects.
+	 */
 	public int[] getReferredToSegments() {
 		return referredToSegments;
 	}
 
+	/**
+	 * <p>Getter for the field <code>segmentType</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getSegmentType() {
 		return segmentType;
 	}
 
+	/**
+	 * <p>Getter for the field <code>segmentNumber</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getSegmentNumber() {
 		return segmentNumber;
 	}
 
+	/**
+	 * <p>isPageAssociationSizeSet.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isPageAssociationSizeSet() {
 		return pageAssociationSizeSet;
 	}
 
+	/**
+	 * <p>isDeferredNonRetainSet.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isDeferredNonRetainSet() {
 		return deferredNonRetainSet;
 	}
 
+	/**
+	 * <p>Getter for the field <code>referredToSegmentCount</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getReferredToSegmentCount() {
 		return referredToSegmentCount;
 	}
 
+	/**
+	 * <p>Getter for the field <code>rententionFlags</code>.</p>
+	 *
+	 * @return an array of {@link short} objects.
+	 */
 	public short[] getRententionFlags() {
 		return rententionFlags;
 	}
 
+	/**
+	 * <p>Getter for the field <code>pageAssociation</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getPageAssociation() {
 		return pageAssociation;
 	}
 
+	/**
+	 * <p>Setter for the field <code>pageAssociation</code>.</p>
+	 *
+	 * @param pageAssociation a int.
+	 */
 	public void setPageAssociation(int pageAssociation) {
 		this.pageAssociation = pageAssociation;
 	}
 
+	/**
+	 * <p>Setter for the field <code>dataLength</code>.</p>
+	 *
+	 * @param dataLength a int.
+	 */
 	public void setDataLength(int dataLength) {
 		this.dataLength = dataLength;
 	}
 
+	/**
+	 * <p>Setter for the field <code>segmentType</code>.</p>
+	 *
+	 * @param type a int.
+	 */
 	public void setSegmentType(int type) {
 		this.segmentType = type;
 	}
 
+	/**
+	 * <p>getSegmentDataLength.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getSegmentDataLength() {
 		return dataLength;
 	}

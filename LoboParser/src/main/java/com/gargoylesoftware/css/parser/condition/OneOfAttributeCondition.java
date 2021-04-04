@@ -19,7 +19,10 @@ import java.io.Serializable;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * @author Ronald Brill
+ * <p>OneOfAttributeCondition class.</p>
+ *
+ * Author Ronald Brill
+ *
  */
 public class OneOfAttributeCondition extends AbstractLocatable implements Condition, Serializable {
 
@@ -28,6 +31,7 @@ public class OneOfAttributeCondition extends AbstractLocatable implements Condit
 
     /**
      * Ctor.
+     *
      * @param localName the local name
      * @param value the value
      */
@@ -36,27 +40,25 @@ public class OneOfAttributeCondition extends AbstractLocatable implements Condit
         value_ = value;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.ONE_OF_ATTRIBUTE_CONDITION;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getLocalName() {
         return localName_;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getValue() {
         return value_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final String value = getValue();

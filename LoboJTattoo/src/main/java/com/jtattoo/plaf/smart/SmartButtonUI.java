@@ -40,8 +40,8 @@ import com.jtattoo.plaf.BaseButtonUI;
 /**
  * <p>SmartButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class SmartButtonUI extends BaseButtonUI {
 

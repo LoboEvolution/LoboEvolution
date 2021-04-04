@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Sin implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>angle</i> <b>sin</b> <i>real</i> <p>
 	 *
 	 * returns the sine of angle, which is interpreted as an

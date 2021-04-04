@@ -27,8 +27,8 @@ import com.jtattoo.plaf.XPScrollButton;
 /**
  * <p>TextureScrollButton class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureScrollButton extends XPScrollButton {
 

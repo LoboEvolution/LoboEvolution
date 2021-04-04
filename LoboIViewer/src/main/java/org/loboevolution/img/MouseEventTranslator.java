@@ -35,8 +35,8 @@ import javax.swing.event.MouseInputListener;
  * Helper class that generates ImageMouseEvents by translating normal mouse
  * events onto the image.
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class MouseEventTranslator implements MouseInputListener, PropertyChangeListener {
 	/** This flag is true if the mouse cursor is inside the bounds of the image. */

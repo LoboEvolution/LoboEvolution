@@ -34,8 +34,8 @@ import com.jtattoo.plaf.BaseBorders;
 /**
  * <p>BernsteinToolBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BernsteinToolBarUI extends AbstractToolBarUI {
 

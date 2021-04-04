@@ -20,6 +20,9 @@
 
 /**
  * A generic synchronized flag, because Java doesn't have one.
+ *
+  *
+  *
  */
 public class Flag {
 
@@ -58,6 +61,8 @@ public class Flag {
 
 	/**
 	 * Waits for the flag to be set, if it is not set already.
+	 *
+	 * @throws java.lang.InterruptedException if any.
 	 */
 	public synchronized void interruptibleWaitForFlag() throws InterruptedException {
 		if (!isSet) {

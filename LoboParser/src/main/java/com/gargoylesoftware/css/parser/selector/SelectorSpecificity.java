@@ -20,10 +20,11 @@ import com.gargoylesoftware.css.parser.condition.Condition;
 
 /**
  * Calculates a selector's specificity.
- * @see <a href="http://www.w3.org/TR/CSS21/cascade.html#specificity">W3C CSS21</a>
  *
- * @author Marc Guillemot
- * @author Ronald Brill
+ * @see <a href="http://www.w3.org/TR/CSS21/cascade.html#specificity">W3C CSS21</a>
+ * Author Marc Guillemot
+ * Author Ronald Brill
+ *
  */
 public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {
 
@@ -43,6 +44,7 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
 
     /**
      * Ctor.
+     *
      * @param selector the selector to read from
      */
     public SelectorSpecificity(final Selector selector) {
@@ -140,17 +142,13 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return fieldA_ + "," + fieldB_ + "," + fieldC_ + "," + fieldD_;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int compareTo(final SelectorSpecificity other) {
         if (fieldA_ != other.fieldA_) {
@@ -168,6 +166,7 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         return 0;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -179,6 +178,7 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {

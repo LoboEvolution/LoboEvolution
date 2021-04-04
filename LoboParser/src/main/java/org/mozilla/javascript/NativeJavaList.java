@@ -7,23 +7,37 @@ package org.mozilla.javascript;
 
 import java.util.List;
 
+/**
+ * <p>NativeJavaList class.</p>
+ *
+ *
+ *
+ */
 public class NativeJavaList extends NativeJavaObject {
 
     private List<Object> list;
 
     @SuppressWarnings("unchecked")
+    /**
+     * <p>Constructor for NativeJavaList.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param list a {@link java.lang.Object} object.
+     */
     public NativeJavaList(Scriptable scope, Object list) {
         super(scope, list, list.getClass());
         assert list instanceof List;
         this.list = (List<Object>) list;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "JavaList";
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(String name, Scriptable start) {
         if (name.equals("length")) {
@@ -32,6 +46,7 @@ public class NativeJavaList extends NativeJavaObject {
         return super.has(name, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start) {
         if (isWithValidIndex(index)) {
@@ -40,6 +55,7 @@ public class NativeJavaList extends NativeJavaObject {
         return super.has(index, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(Symbol key, Scriptable start) {
         if (SymbolKey.IS_CONCAT_SPREADABLE.equals(key)) {
@@ -48,6 +64,7 @@ public class NativeJavaList extends NativeJavaObject {
         return super.has(key, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(String name, Scriptable start) {
         if ("length".equals(name)) {
@@ -56,6 +73,7 @@ public class NativeJavaList extends NativeJavaObject {
         return super.get(name, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start) {
         if (isWithValidIndex(index)) {
@@ -69,6 +87,7 @@ public class NativeJavaList extends NativeJavaObject {
         return Undefined.instance;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(Symbol key, Scriptable start) {
         if (SymbolKey.IS_CONCAT_SPREADABLE.equals(key)) {
@@ -77,6 +96,7 @@ public class NativeJavaList extends NativeJavaObject {
         return super.get(key, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value) {
         if (isWithValidIndex(index)) {
@@ -86,6 +106,7 @@ public class NativeJavaList extends NativeJavaObject {
         super.put(index, start, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object[] getIds() {
         List<?> list = (List<?>) javaObject;

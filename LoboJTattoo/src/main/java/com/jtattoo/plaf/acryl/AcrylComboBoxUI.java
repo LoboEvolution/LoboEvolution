@@ -39,8 +39,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AcrylComboBoxUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AcrylComboBoxUI extends BaseComboBoxUI {
 

@@ -26,16 +26,23 @@ import java.util.List;
 
 /**
  * Undo prediction based on the PNG algorithm.
+ *
+  *
+  *
  */
 public class PNGPredictor extends Predictor {
-    /** Creates a new instance of PNGPredictor */
+    /**
+     * Creates a new instance of PNGPredictor
+     */
     public PNGPredictor() {
         super (PNG);
     }
     
-    /**
-     * Undo data based on the png algorithm
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Undo data based on the png algorithm
+	 */
     @Override
 	public ByteBuffer unpredict(ByteBuffer imageData)
         throws IOException
@@ -99,6 +106,8 @@ public class PNGPredictor extends Predictor {
     /**
      * Return the value of the Sub algorithm on the line (compare bytes to
      * the previous byte of the same color on this line).
+     *
+     * @param curLine an array of {@link byte} objects.
      */
     protected void doSubLine(byte[] curLine) {
         // get the number of bytes per sample
@@ -115,6 +124,9 @@ public class PNGPredictor extends Predictor {
     /**
      * Return the value of the up algorithm on the line (compare bytes to
      * the same byte in the previous line)
+     *
+     * @param curLine an array of {@link byte} objects.
+     * @param prevLine an array of {@link byte} objects.
      */
     protected void doUpLine(byte[] curLine, byte[] prevLine) {
         if (prevLine == null) {
@@ -129,8 +141,11 @@ public class PNGPredictor extends Predictor {
     
     /**
      * Return the value of the average algorithm on the line (compare
-     * bytes to the average of the previous byte of the same color and 
+     * bytes to the average of the previous byte of the same color and
      * the same byte on the previous line)
+     *
+     * @param curLine an array of {@link byte} objects.
+     * @param prevLine an array of {@link byte} objects.
      */
     protected void doAverageLine(byte[] curLine, byte[] prevLine) {
          // get the number of bytes per sample
@@ -156,10 +171,13 @@ public class PNGPredictor extends Predictor {
         }      
     }
     
-     /**
+    /**
      * Return the value of the average algorithm on the line (compare
-     * bytes to the average of the previous byte of the same color and 
+     * bytes to the average of the previous byte of the same color and
      * the same byte on the previous line)
+     *
+     * @param curLine an array of {@link byte} objects.
+     * @param prevLine an array of {@link byte} objects.
      */
     protected void doPaethLine(byte[] curLine, byte[] prevLine) {
          // get the number of bytes per sample
@@ -192,6 +210,11 @@ public class PNGPredictor extends Predictor {
     
     /**
      * The paeth algorithm
+     *
+     * @param left a int.
+     * @param up a int.
+     * @param upLeft a int.
+     * @return a int.
      */
     protected int paeth(int left, int up, int upLeft) {
         int p = left + up - upLeft;

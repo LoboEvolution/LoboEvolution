@@ -33,8 +33,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>AcrylDefaultTheme class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class AcrylDefaultTheme extends AbstractTheme {
 

@@ -28,8 +28,8 @@ import javax.swing.JComponent;
 /**
  * Abstract superclass for status bars of the image viewer.
  *
- * @author Kazo Csaba
- * @version $Id: $Id
+ * Author Kazo Csaba
+ *
  */
 public abstract class StatusBar {
 	/**

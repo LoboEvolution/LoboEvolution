@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -28,11 +25,13 @@ import org.loboevolution.driver.LoboUnitTest;
 
 
 /**
- * Tests for {@link HTMLEmbedElement}. */
-
-
+ * Tests for {@link org.loboevolution.html.dom.HTMLEmbedElement}.
+ */
 public class HTMLEmbedElementTest extends LoboUnitTest {
 
+    /**
+     * <p>getAlign.</p>
+     */
     @Test
     public void getAlign() {
         final String html
@@ -60,6 +59,9 @@ public class HTMLEmbedElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setAlign.</p>
+     */
     @Test
     public void setAlign() {
         final String html
@@ -96,6 +98,9 @@ public class HTMLEmbedElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getHeight.</p>
+     */
     @Test
     public void getHeight() {
         final String html
@@ -117,6 +122,9 @@ public class HTMLEmbedElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setHeight.</p>
+     */
     @Test
     public void setHeight() {
         final String html
@@ -143,6 +151,9 @@ public class HTMLEmbedElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getWidth.</p>
+     */
     @Test
     public void getWidth() {
         final String html
@@ -164,6 +175,9 @@ public class HTMLEmbedElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setWidth.</p>
+     */
     @Test
     public void setWidth() {
         final String html

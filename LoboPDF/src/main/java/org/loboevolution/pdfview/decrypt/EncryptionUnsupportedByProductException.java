@@ -23,13 +23,19 @@ package org.loboevolution.pdfview.decrypt;
  * Identifies that the specified encryption mechanism is not
  * supported by this product, that is, PDFRenderer, as opposed to
  * a {@link EncryptionUnsupportedByPlatformException limitation in
- * the platform}. 
+ * the platform}.
  *
- * @author Luke Kirby
+ * Author Luke Kirby
+  *
  */
 public class EncryptionUnsupportedByProductException
         extends UnsupportedEncryptionException {
 
+    /**
+     * <p>Constructor for EncryptionUnsupportedByProductException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public EncryptionUnsupportedByProductException(String message) {
         super(message);
     }

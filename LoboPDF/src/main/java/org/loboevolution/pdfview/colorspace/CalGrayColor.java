@@ -26,7 +26,9 @@ import org.loboevolution.pdfview.PDFObject;
 
 /**
  * A ColorSpace for calibrated gray
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class CalGrayColor extends ColorSpace {
 	final float[] white = {1f, 1f, 1f};
@@ -37,8 +39,10 @@ public class CalGrayColor extends ColorSpace {
     /**
      * Create a new Calibrated Gray color space object, given
      * the description in a PDF dictionary.
+     *
      * @param obj a dictionary that contains an Array of 3 Numbers
      * for "WhitePoint" and "BlackPoint", and a Number for "Gamma"
+     * @throws java.io.IOException if any.
      */
     public CalGrayColor(PDFObject obj) throws IOException {
 	// obj is a dictionary that has the following parts:
@@ -73,17 +77,19 @@ public class CalGrayColor extends ColorSpace {
     }
     
     /**
+     * {@inheritDoc}
+     *
      * get the number of components (1).
      */
     @Override public int getNumComponents() {
 	return 1;
     }
 
-    /**
-     * convert from Calibrated Gray to RGB.
-     * @param comp the gray value (0-1)
-     * @return the RGB values (0-1)
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from Calibrated Gray to RGB.
+	 */
     @Override
 	public float[] toRGB(float[] comp) {
 	if (comp.length==1) {
@@ -99,32 +105,40 @@ public class CalGrayColor extends ColorSpace {
 	}
     }
 
-    /**
-     * convert from RGB to Calibrated Gray.  NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from RGB to Calibrated Gray.  NOT IMPLEMENTED
+	 */
     @Override
 	public float[] fromRGB(float[] rgbvalue) {
 	return new float[1];
     }
 
-    /**
-     * convert from CIEXYZ to Calibrated Gray.  NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from CIEXYZ to Calibrated Gray.  NOT IMPLEMENTED
+	 */
     @Override
 	public float[] fromCIEXYZ(float[] colorvalue) {
 	return new float[1];
     }
 
     /**
+     * {@inheritDoc}
+     *
      * get the type of this ColorSpace (TYPE_GRAY)
      */
     @Override public int getType() {
 	return TYPE_GRAY;
     }
 
-    /**
-     * convert from Calibrated Gray to CIEXYZ.  NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from Calibrated Gray to CIEXYZ.  NOT IMPLEMENTED
+	 */
     @Override
 	public float[] toCIEXYZ(float[] colorvalue) {
 	return new float[3];

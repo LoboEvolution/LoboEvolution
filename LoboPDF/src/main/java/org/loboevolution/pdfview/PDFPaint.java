@@ -28,7 +28,9 @@ import java.awt.geom.Rectangle2D;
  * PDFPaint is some kind of shader that knows how to fill a path.
  * At the moment, only a solid color is implemented, but gradients
  * and textures should be possible, too.
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class PDFPaint {
 
@@ -36,6 +38,8 @@ public class PDFPaint {
 
     /**
      * create a new PDFPaint based on a solid color
+     *
+     * @param p a {@link java.awt.Paint} object.
      */
     protected PDFPaint(Paint p) {
         this.mainPaint = p;
@@ -43,6 +47,9 @@ public class PDFPaint {
 
     /**
      * get the PDFPaint representing a solid color
+     *
+     * @param c a {@link java.awt.Color} object.
+     * @return a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
     public static PDFPaint getColorPaint(Color c) {
         return getPaint(c);
@@ -50,6 +57,9 @@ public class PDFPaint {
 
     /**
      * get the PDFPaint representing a generic paint
+     *
+     * @param p a {@link java.awt.Paint} object.
+     * @return a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
     public static PDFPaint getPaint(Paint p) {
         return new PDFPaint(p);
@@ -57,9 +67,11 @@ public class PDFPaint {
 
     /**
      * fill a path with the paint, and record the dirty area.
+     *
      * @param state the current graphics state
      * @param g the graphics into which to draw
      * @param s the path to fill
+     * @return a {@link java.awt.geom.Rectangle2D} object.
      */
     public Rectangle2D fill(PDFRenderer state, Graphics2D g,
             GeneralPath s) {
@@ -71,6 +83,8 @@ public class PDFPaint {
 
     /**
      * get the primary color associated with this PDFPaint.
+     *
+     * @return a {@link java.awt.Paint} object.
      */
     public Paint getPaint() {
         return this.mainPaint;

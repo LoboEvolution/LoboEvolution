@@ -239,7 +239,6 @@ public class JSONML {
      * name/value pairs. If the tag contains children, then strings and
      * JSONArrays will represent the child tags.
      *
-     *
      * @param string The source string.
      * @return A JSONArray containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown on error converting to a JSONArray
@@ -260,12 +259,12 @@ public class JSONML {
      * any text node or attribute value to any type
      * but just leaves it as a string.
      *
-     *
      * @param string The source string.
      * @param keepStrings If true, then values will not be coerced into boolean
      *  or numeric values and will instead be left as strings
      * @return A JSONArray containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown on error converting to a JSONArray
+     * @throws org.json.JSONException if any.
      */
     public static JSONArray toJSONArray(String string, boolean keepStrings) throws JSONException {
         return (JSONArray)parse(new XMLTokener(string), true, null, keepStrings);
@@ -283,12 +282,12 @@ public class JSONML {
      * any text node or attribute value to any type
      * but just leaves it as a string.
      *
-     *
      * @param x An XMLTokener.
      * @param keepStrings If true, then values will not be coerced into boolean
      *  or numeric values and will instead be left as strings
      * @return A JSONArray containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown on error converting to a JSONArray
+     * @throws org.json.JSONException if any.
      */
     public static JSONArray toJSONArray(XMLTokener x, boolean keepStrings) throws JSONException {
         return (JSONArray)parse(x, true, null, keepStrings);
@@ -303,10 +302,10 @@ public class JSONML {
      * name/value pairs. If the tag contains children, then strings and
      * JSONArrays will represent the child content and tags.
      *
-     *
      * @param x An XMLTokener.
      * @return A JSONArray containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown on error converting to a JSONArray
+     * @throws org.json.JSONException if any.
      */
     public static JSONArray toJSONArray(XMLTokener x) throws JSONException {
         return (JSONArray)parse(x, true, null, false);
@@ -321,11 +320,10 @@ public class JSONML {
      * contains children, the object will have a "childNodes" property which
      * will be an array of strings and JsonML JSONObjects.
      *
-     *
-     *
      * @param string The XML source text.
      * @return A JSONObject containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown on error converting to a JSONObject
+     * @throws org.json.JSONException if any.
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
         return (JSONObject)parse(new XMLTokener(string), false, null, false);
@@ -340,13 +338,12 @@ public class JSONML {
      * contains children, the object will have a "childNodes" property which
      * will be an array of strings and JsonML JSONObjects.
      *
-     *
-     *
      * @param string The XML source text.
      * @param keepStrings If true, then values will not be coerced into boolean
      *  or numeric values and will instead be left as strings
      * @return A JSONObject containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown on error converting to a JSONObject
+     * @throws org.json.JSONException if any.
      */
     public static JSONObject toJSONObject(String string, boolean keepStrings) throws JSONException {
         return (JSONObject)parse(new XMLTokener(string), false, null, keepStrings);
@@ -361,11 +358,10 @@ public class JSONML {
      * contains children, the object will have a "childNodes" property which
      * will be an array of strings and JsonML JSONObjects.
      *
-     *
-     *
      * @param x An XMLTokener of the XML source text.
      * @return A JSONObject containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown on error converting to a JSONObject
+     * @throws org.json.JSONException if any.
      */
     public static JSONObject toJSONObject(XMLTokener x) throws JSONException {
            return (JSONObject)parse(x, false, null, false);
@@ -380,13 +376,12 @@ public class JSONML {
      * contains children, the object will have a "childNodes" property which
      * will be an array of strings and JsonML JSONObjects.
      *
-     *
-     *
      * @param x An XMLTokener of the XML source text.
      * @param keepStrings If true, then values will not be coerced into boolean
      *  or numeric values and will instead be left as strings
      * @return A JSONObject containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown on error converting to a JSONObject
+     * @throws org.json.JSONException if any.
      */
     public static JSONObject toJSONObject(XMLTokener x, boolean keepStrings) throws JSONException {
            return (JSONObject)parse(x, false, null, keepStrings);
@@ -399,6 +394,7 @@ public class JSONML {
      * @param ja A JSONArray.
      * @return An XML string.
      * @throws org.json.JSONException Thrown on error converting to a string
+     * @throws org.json.JSONException if any.
      */
     public static String toString(JSONArray ja) throws JSONException {
         int                 i;
@@ -480,6 +476,7 @@ public class JSONML {
      * @param jo A JSONObject.
      * @return An XML string.
      * @throws org.json.JSONException Thrown on error converting to a string
+     * @throws org.json.JSONException if any.
      */
     public static String toString(JSONObject jo) throws JSONException {
         StringBuilder sb = new StringBuilder();

@@ -7,6 +7,12 @@ package org.mozilla.javascript.engine;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+/**
+ * <p>RhinoInvocationHandler class.</p>
+ *
+ *
+ *
+ */
 public class RhinoInvocationHandler
     implements InvocationHandler {
 
@@ -18,6 +24,7 @@ public class RhinoInvocationHandler
     this.thiz = thiz;
   }
 
+  /** {@inheritDoc} */
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     return engine.invokeMethodRaw(thiz, method.getName(), method.getReturnType(), args);

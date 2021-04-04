@@ -1,42 +1,21 @@
 /*
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- * This code is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License version 2 only, as
- * published by the Free Software Foundation.  Oracle designates this
- * particular file as subject to the "Classpath" exception as provided
- * by Oracle in the LICENSE file that accompanied this code.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- * This code is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
- * version 2 for more details (a copy is included in the LICENSE file that
- * accompanied this code).
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- * You should have received a copy of the GNU General Public License version
- * 2 along with this work; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
- * or visit www.oracle.com if you need additional information or have any
- * questions.
- */
-
-/*
- * This file is available under and governed by the GNU General Public
- * License version 2 only, as published by the Free Software Foundation.
- * However, the following notice accompanied the original version of this
- * file and, per its terms, should not be removed:
- *
- * Copyright (c) 2002 World Wide Web Consortium,
- * (Massachusetts Institute of Technology, Institut National de
- * Recherche en Informatique et en Automatique, Keio University). All
- * Rights Reserved. This program is distributed under the W3C's Software
- * Intellectual Property License. This program is distributed in the
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- * PURPOSE.
- * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.xpath;
@@ -61,8 +40,8 @@ import org.loboevolution.html.node.Node;
  * specifications.
  * <p>See also the <a href='http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820'>Document Object Model (DOM) Level 3 XPath Specification</a>.
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public interface XPathEvaluator {
     /**
@@ -82,12 +61,8 @@ public interface XPathEvaluator {
      * @exception XPathException
      *   INVALID_EXPRESSION_ERR: Raised if the expression is not legal
      *   according to the rules of the XPathEvaluatori
-     * @exception DOMException
-     *   NAMESPACE_ERR: Raised if the expression contains namespace prefixes
-     *   which cannot be resolved by the specified
-     *   XPathNSResolver.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.w3c.dom.DOMException if any.
+     * @throws org.loboevolution.html.xpath.XPathException if any.
      */
     public XPathExpression createExpression(String expression,
                                             XPathNSResolver resolver)
@@ -148,17 +123,8 @@ public interface XPathEvaluator {
      *   according to the rules of the XPathEvaluatori
      *   <br>TYPE_ERR: Raised if the result cannot be converted to return the
      *   specified type.
-     * @exception DOMException
-     *   NAMESPACE_ERR: Raised if the expression contains namespace prefixes
-     *   which cannot be resolved by the specified
-     *   XPathNSResolver.
-     *   <br>WRONG_DOCUMENT_ERR: The Node is from a document that is not
-     *   supported by this XPathEvaluator.
-     *   <br>NOT_SUPPORTED_ERR: The Node is not a type permitted as an XPath
-     *   context node or the request type is not permitted by this
-     *   XPathEvaluator.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.w3c.dom.DOMException if any.
+     * @throws org.loboevolution.html.xpath.XPathException if any.
      */
     public Object evaluate(String expression,
                            Node contextNode,

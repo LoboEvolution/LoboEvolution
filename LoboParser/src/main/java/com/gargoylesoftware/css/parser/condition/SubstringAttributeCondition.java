@@ -19,7 +19,10 @@ import java.io.Serializable;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * @author Ronald Brill
+ * <p>SubstringAttributeCondition class.</p>
+ *
+ * Author Ronald Brill
+ *
  */
 public class SubstringAttributeCondition extends AbstractLocatable implements Condition, Serializable {
 
@@ -28,6 +31,7 @@ public class SubstringAttributeCondition extends AbstractLocatable implements Co
 
     /**
      * Ctor.
+     *
      * @param localName the loacl value
      * @param value the value
      */
@@ -36,27 +40,25 @@ public class SubstringAttributeCondition extends AbstractLocatable implements Co
         value_ = value;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.SUBSTRING_ATTRIBUTE_CONDITION; //for now
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getLocalName() {
         return localName_;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getValue() {
         return value_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final String value = getValue();

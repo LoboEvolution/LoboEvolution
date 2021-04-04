@@ -5,12 +5,15 @@ import java.io.IOException;
 import org.loboevolution.pdfview.PDFDestination;
 import org.loboevolution.pdfview.PDFObject;
 
-/*****************************************************************************
- * Action directing to a location within another PDF document 
+/**
+ ***************************************************************************
+ * Action directing to a location within another PDF document
  *
- * @author  Katja Sondermann
+ * Author  Katja Sondermann
  * @since 07.07.2009
- ****************************************************************************/
+ ***************************************************************************
+  *
+ */
 public class GoToRAction extends PDFAction {
 
 	/** the destination within the remote PDF file */
@@ -19,10 +22,12 @@ public class GoToRAction extends PDFAction {
     private final String file;
     /** Should the remote file be opened in a new window? (optional)*/
     private boolean newWindow=false;
-	/** 
+    /**
      * Creates a new instance of GoToRAction from an object
+     *
      * @param obj the PDFObject with the action information
-     * @throws IOException - in case the action can not be parsed
+     * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
      */
     public GoToRAction(PDFObject obj, PDFObject root) throws IOException {
         super("GoToR");
@@ -36,12 +41,15 @@ public class GoToRAction extends PDFAction {
        	this.newWindow = PdfObjectParseUtil.parseBooleanFromDict("NewWindow", obj, false);
     }    
 
-    /*************************************************************************
+    /**
+     ***********************************************************************
      * Create a new GoToRAction from the given attributes
-     * @param dest
-     * @param file
-     * @param newWindow
-     ************************************************************************/
+     *
+     * @param dest a {@link org.loboevolution.pdfview.PDFDestination} object.
+     * @param file a {@link java.lang.String} object.
+     * @param newWindow a {@link java.lang.String} object.
+     ***********************************************************************
+     */
     public GoToRAction(PDFDestination dest, String file, boolean newWindow){
     	super("GoToR");
     	this.file = file;
@@ -49,26 +57,35 @@ public class GoToRAction extends PDFAction {
     	this.newWindow = newWindow;
     }
     
-    /*************************************************************************
-     * Get the destination this action refers to
-     * @return PDFDestination
-     ************************************************************************/
+	/**
+	 ***********************************************************************
+	 * Get the destination this action refers to
+	 *
+	 * @return PDFDestination
+	 ***********************************************************************
+	 */
 	public PDFDestination getDestination() {
 		return this.destination;
 	}
 
-    /*************************************************************************
-     * Get the file this action refers to
-     * @return PDFDestination
-     ************************************************************************/
+	/**
+	 ***********************************************************************
+	 * Get the file this action refers to
+	 *
+	 * @return PDFDestination
+	 ***********************************************************************
+	 */
 	public String getFile() {
 		return this.file;
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Should the remote file be opened in a new window?
+	 *
 	 * @return boolean
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public boolean isNewWindow() {
 		return this.newWindow;
 	}

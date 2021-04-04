@@ -74,6 +74,12 @@ import org.jpedal.jbig2.JBIG2Decoder;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
 
+/**
+ * <p>JBIG2ImageReader class.</p>
+ *
+  *
+  *
+ */
 public class JBIG2ImageReader extends ImageReader {
 	
 	/** The Constant logger. */
@@ -83,12 +89,18 @@ public class JBIG2ImageReader extends ImageReader {
 	private ImageInputStream stream;
 	private boolean readFile;
 
+	/**
+	 * <p>Constructor for JBIG2ImageReader.</p>
+	 *
+	 * @param originatingProvider a {@link javax.imageio.spi.ImageReaderSpi} object.
+	 */
 	protected JBIG2ImageReader(ImageReaderSpi originatingProvider) {
 		// Save the identity of the ImageReaderSpi subclass that invoked this
 		// constructor.
 		super(originatingProvider);
 	}
 
+	/** {@inheritDoc} */
 	public void setInput(Object input, boolean seekForwardOnly, boolean ignoreMetadata) {
 		super.setInput(input, seekForwardOnly, ignoreMetadata);
 
@@ -109,6 +121,7 @@ public class JBIG2ImageReader extends ImageReader {
 			throw new IllegalArgumentException("ImageInputStream expected!");
 	}
 
+	/** {@inheritDoc} */
 	public BufferedImage read(int imageIndex, ImageReadParam param) throws IOException {
 
 		BufferedImage dst = null;
@@ -214,14 +227,22 @@ public class JBIG2ImageReader extends ImageReader {
 
 	}
 
+	/** {@inheritDoc} */
 	public IIOMetadata getImageMetadata(int imageIndex) throws IOException {
 		return null;
 	}
 
+	/**
+	 * <p>getStreamMetadata.</p>
+	 *
+	 * @return a {@link javax.imageio.metadata.IIOMetadata} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public IIOMetadata getStreamMetadata() throws IOException {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	public Iterator<ImageTypeSpecifier> getImageTypes(int imageIndex) throws IOException {
 		readFile();
 
@@ -246,12 +267,14 @@ public class JBIG2ImageReader extends ImageReader {
 		return l.iterator();
 	}
 
+	/** {@inheritDoc} */
 	public int getNumImages(boolean allowSearch) throws IOException {
 		readFile();
 
 		return decoder.getNumberOfPages();
 	}
 
+	/** {@inheritDoc} */
 	public int getHeight(int imageIndex) throws IOException {
 		readFile();
 
@@ -260,6 +283,7 @@ public class JBIG2ImageReader extends ImageReader {
 		return decoder.getPageAsJBIG2Bitmap(imageIndex).getHeight();
 	}
 
+	/** {@inheritDoc} */
 	public int getWidth(int imageIndex) throws IOException {
 		readFile();
 

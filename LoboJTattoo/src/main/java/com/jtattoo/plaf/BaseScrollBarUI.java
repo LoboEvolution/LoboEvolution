@@ -44,8 +44,8 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 /**
  * <p>BaseScrollBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseScrollBarUI extends BasicScrollBarUI {
 

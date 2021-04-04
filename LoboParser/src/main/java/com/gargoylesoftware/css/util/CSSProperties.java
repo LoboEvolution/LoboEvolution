@@ -6,8 +6,8 @@ package com.gargoylesoftware.css.util;
 /**
  * <p>CSSProperties interface.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public interface CSSProperties {
 	

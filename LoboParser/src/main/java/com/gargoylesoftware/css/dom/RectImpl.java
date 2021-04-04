@@ -24,7 +24,8 @@ import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
 /**
  * Implementation of Rect.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public class RectImpl implements Serializable {
 
@@ -36,8 +37,9 @@ public class RectImpl implements Serializable {
     /**
      * Constructor that reads the values from the given
      * chain of LexicalUnits.
+     *
      * @param lu the values
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public RectImpl(final LexicalUnit lu) throws DOMException {
         // top
@@ -116,6 +118,8 @@ public class RectImpl implements Serializable {
     }
 
     /**
+     * <p>getTop.</p>
+     *
      * @return the top part.
      */
     public CSSValueImpl getTop() {
@@ -124,6 +128,7 @@ public class RectImpl implements Serializable {
 
     /**
      * Sets the top part to a new value.
+     *
      * @param top the new CSSPrimitiveValue
      */
     public void setTop(final CSSValueImpl top) {
@@ -131,6 +136,8 @@ public class RectImpl implements Serializable {
     }
 
     /**
+     * <p>getRight.</p>
+     *
      * @return the right part.
      */
     public CSSValueImpl getRight() {
@@ -139,6 +146,7 @@ public class RectImpl implements Serializable {
 
     /**
      * Sets the right part to a new value.
+     *
      * @param right the new CSSPrimitiveValue
      */
     public void setRight(final CSSValueImpl right) {
@@ -146,6 +154,8 @@ public class RectImpl implements Serializable {
     }
 
     /**
+     * <p>getBottom.</p>
+     *
      * @return the bottom part.
      */
     public CSSValueImpl getBottom() {
@@ -154,6 +164,7 @@ public class RectImpl implements Serializable {
 
     /**
      * Sets the bottom part to a new value.
+     *
      * @param bottom the new CSSPrimitiveValue
      */
     public void setBottom(final CSSValueImpl bottom) {
@@ -161,6 +172,8 @@ public class RectImpl implements Serializable {
     }
 
     /**
+     * <p>getLeft.</p>
+     *
      * @return the left part.
      */
     public CSSValueImpl getLeft() {
@@ -169,15 +182,14 @@ public class RectImpl implements Serializable {
 
     /**
      * Sets the left part to a new value.
+     *
      * @param left the new CSSPrimitiveValue
      */
     public void setLeft(final CSSValueImpl left) {
         left_ = left;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return new StringBuilder("rect(")

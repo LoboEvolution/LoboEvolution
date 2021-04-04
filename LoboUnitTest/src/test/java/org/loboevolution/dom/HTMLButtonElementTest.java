@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -27,9 +24,15 @@ package org.loboevolution.dom;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
+/**
+ * Tests for {@link org.loboevolution.html.dom.HTMLButtonElement}.
+ */
 public class HTMLButtonElementTest extends LoboUnitTest {
 
 
+    /**
+     * <p>readWriteAccessKey.</p>
+     */
     @Test
     public void readWriteAccessKey() {
         final String html
@@ -54,6 +57,9 @@ public class HTMLButtonElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>type.</p>
+     */
     @Test
     public void type() {
         final String html = "<html><head><script>\n"
@@ -73,6 +79,9 @@ public class HTMLButtonElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getType.</p>
+     */
     @Test
     public void getType() {
         final String html = "<html>\n"
@@ -106,6 +115,9 @@ public class HTMLButtonElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+     /**
+      * <p>getForm.</p>
+      */
      @Test
     public void getForm() {
         final String html = "<html>\n"
@@ -154,6 +166,9 @@ public class HTMLButtonElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+     /**
+      * <p>getAttributeAndSetValue.</p>
+      */
      @Test
     public void getAttributeAndSetValue() {
         final String html =
@@ -188,6 +203,9 @@ public class HTMLButtonElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getAttributeAndSetValueNull.</p>
+     */
     @Test
     public void getAttributeAndSetValueNull() {
         final String html =
@@ -217,6 +235,9 @@ public class HTMLButtonElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>labels.</p>
+     */
     @Test
     public void labels() {
         final String html =
@@ -250,6 +271,9 @@ public class HTMLButtonElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>form.</p>
+     */
     @Test
     public void form() {
         final String html

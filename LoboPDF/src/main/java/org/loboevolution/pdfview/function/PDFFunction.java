@@ -25,39 +25,35 @@ import org.loboevolution.pdfview.PDFParseException;
 
 /**
  * <p>PDF Functions are defined in the reference as Section 3.9.</p>
- * 
+ *
  * <p>A PDF function maps some set of <i>m</i> inputs into some set
  * of <i>n</i> outputs.  There are 4 types of functions:
- * <ul><li>Type 0: Sampled functions. (PDF 1.2)<br> 
- *                  A sampled function (type 0) uses a table of sample values 
- *                  to define the function. Various techniques are used to 
- *                  interpolate values between the sample values 
+ * <ul><li>Type 0: Sampled functions. (PDF 1.2)<br>
+ *                  A sampled function (type 0) uses a table of sample values
+ *                  to define the function. Various techniques are used to
+ *                  interpolate values between the sample values
  *                  (see Section 3.9.1, "Type 0 (Sampled) Functions").</li>
  *     <li>Type 2: Exponential Interpolation. (PDF 1.3)<br>
- *                  An exponential interpolation function (type 2) 
- *                  defines a set of coefficients for an exponential function 
- *                  (see Section 3.9.2, 
+ *                  An exponential interpolation function (type 2)
+ *                  defines a set of coefficients for an exponential function
+ *                  (see Section 3.9.2,
  *                  "Type 2 (Exponential Interpolation) Functions").</li>
  *     <li>Type 3: Stitching functions. (PDF 1.3)<br>
- *                  A stitching function (type 3) is a combination of 
- *                  other functions, partitioned across a domain 
+ *                  A stitching function (type 3) is a combination of
+ *                  other functions, partitioned across a domain
  *                  (see Section 3.9.3, "Type 3 (Stitching) Functions").</li>
  *     <li>Type 4: Postscript calculations. (PDF 1.3)<br>
- *                  A PostScript calculator function (type 4) uses operators 
- *                  from the PostScript language to describe an arithmetic 
- *                  expression (see Section 3.9.4, 
+ *                  A PostScript calculator function (type 4) uses operators
+ *                  from the PostScript language to describe an arithmetic
+ *                  expression (see Section 3.9.4,
  *                  "Type 4 (PostScript Calculator) Functions").</li>
  * </ul>
- * </p>
- * 
- * <p>
+ *
  * The function interface contains a single method, <i>calculate</i> which
  * takes an array of <i>m</i> floats an interprets them into an array of
- * </i>n</i> floats.
- * <p> 
+ * <i>n</i> floats.
  * PDFFunctions do not have accessible constructors.  Instead, use the
  * static <i>getFunction()</i> method to read a functions from a PDF Object.
- *
  */
 public abstract class PDFFunction {
 
@@ -84,13 +80,21 @@ public abstract class PDFFunction {
      */
     private float[] range;
 
-    /** Creates a new instance of PDFFunction */
+    /**
+     * Creates a new instance of PDFFunction
+     *
+     * @param type a int.
+     */
     protected PDFFunction (int type) {
         this.type = type;
     }
 
     /**
      * Get a PDFFunction from a PDFObject
+     *
+     * @param obj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @return a {@link org.loboevolution.pdfview.function.PDFFunction} object.
+     * @throws java.io.IOException if any.
      */
     public static PDFFunction getFunction (PDFObject obj)
             throws IOException {
@@ -168,9 +172,9 @@ public abstract class PDFFunction {
         return function;
     }
 
-    /**
+	/**
 	 * Perform a linear interpolation.  Given a value x, and two points,
-	 * (xmin, ymin), (xmax, ymax), where xmin <= x <= xmax, calculate a value
+	 * (xmin, ymin), (xmax, ymax), where xmin {@literal <}= x {@literal <}= xmax, calculate a value
 	 * y on the line from (xmin, ymin) to (xmax, ymax).
 	 *
 	 * @param x the x value of the input
@@ -189,7 +193,7 @@ public abstract class PDFFunction {
 			    return value;
 			}
 
-	/**
+    /**
      * Get the type of this function
      *
      * @return one of the types of function (0-4)
@@ -223,9 +227,9 @@ public abstract class PDFFunction {
      * Get a component of the domain of this function
      *
      * @param i the index into the domain array, which has size 2 * <i>m</i>.
-     *          the <i>i</i>th entry in the array has index 2<i>i</i>, 
+     *          the <i>i</i>th entry in the array has index 2<i>i</i>,
      *           2<i>i</i> + 1
-     * @return the <i>i</i>th entry in the domain array 
+     * @return the <i>i</i>th entry in the domain array
      */
     protected float getDomain (int i) {
         return this.domain[i];
@@ -233,6 +237,8 @@ public abstract class PDFFunction {
 
     /**
      *  Set the domain of this function
+     *
+     * @param domain an array of {@link float} objects.
      */
     protected void setDomain (float[] domain) {
         this.domain = domain;
@@ -242,9 +248,9 @@ public abstract class PDFFunction {
      * Get a component of the range of this function
      *
      * @param i the index into the range array, which has size 2 * <i>n</i>.
-     *          the <i>i</i>th entry in the array has index 2<i>i</i>, 
+     *          the <i>i</i>th entry in the array has index 2<i>i</i>,
      *           2<i>i</i> + 1
-     * @return the <i>i</i>th entry in the range array 
+     * @return the <i>i</i>th entry in the range array
      */
     protected float getRange (int i) {
         if (this.range == null) {
@@ -259,6 +265,8 @@ public abstract class PDFFunction {
 
     /**
      * Set the range of this function
+     *
+     * @param range an array of {@link float} objects.
      */
     protected void setRange (float[] range) {
         this.range = range;
@@ -270,7 +278,7 @@ public abstract class PDFFunction {
      * domain.  The number of outputs should match one half the size of the
      * range.
      *
-     * @param inputs an array of >= <i>m</i> input values
+     * @param inputs an array of {@literal >}= <i>m</i> input values
      * @return the array of <i>n</i> output values
      */
     public float[] calculate (float[] inputs) {
@@ -285,9 +293,9 @@ public abstract class PDFFunction {
      * domain.  The number of outputs should match one half the size of the
      * range.
      *
-     * @param inputs an array of >= <i>m</i> input values
+     * @param inputs an array of {@literal >}= <i>m</i> input values
      * @param inputOffset the offset into the input array to read from
-     * @param outputs an array of size >= <i>n</i> which will be filled
+     * @param outputs an array of size {@literal >}= <i>n</i> which will be filled
      *                with the output values
      * @param outputOffset the offset into the output array to write to
      * @return the array of <i>n</i> output values
@@ -332,16 +340,20 @@ public abstract class PDFFunction {
      * clipped to the domain, while the outputs will be automatically clipped
      * to the range after being returned from this function.
      *
-     * @param inputs guaranteed to be at least as big as 
-     *        <code>getNumInputs()</code> and all values within range
      * @param inputOffset the offset into the inputs array to read from
      * @param outputs guaranteed to be at least as big as
      *        <code>getNumOutputs()</code>, but not yet clipped to domain
      * @param outputOffset the offset into the output array to write to
+     * @param inputs an array of {@link float} objects.
      */
     protected abstract void doFunction (float[] inputs, int inputOffset,
                                         float[] outputs, int outputOffset);
 
-    /** Read the function information from a PDF Object */
+    /**
+     * Read the function information from a PDF Object
+     *
+     * @param obj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
+     */
     protected abstract void parse (PDFObject obj) throws IOException;
 }

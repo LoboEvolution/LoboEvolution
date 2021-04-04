@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Sep 3, 2005
@@ -78,9 +75,6 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
 
 /**
  * Implementation of the W3C HTMLDocument interface.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, DocumentView {
 
@@ -331,6 +325,13 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/**
+	 * <p>getFullURL.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 * @param baseURI a {@link java.lang.String} object.
+	 * @return a {@link java.net.URL} object.
+	 */
 	public final URL getFullURL(String uri, String baseURI) {
 		try {
 			final URL documentURL = baseURI == null ? null : new URL(baseURI);
@@ -387,7 +388,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		return "UTF-8";
 	}
     
-    /** {@inheritDoc} */
+	/** {@inheritDoc} */
     @Override
 	public HTMLHeadElementImpl getHead() {
 		synchronized (this) {
@@ -400,7 +401,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
     
-    /** {@inheritDoc} */
+	/** {@inheritDoc} */
     @Override
 	public HTMLElement getBody() {
 		synchronized (this) {
@@ -429,7 +430,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * <p>getLocation.</p>
 	 *
-	 * @return a {@link org.org.loboevolution.html.node.js.Location} object.
+	 * @return a {@link org.loboevolution.html.node.js.Location} object.
 	 */
 	public final Location getLocation() {
 		return this.window.getLocation();
@@ -702,9 +703,9 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 
 	/**
-	 * <p>Setter for the field domain.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param domain a {@link java.lang.String} object.
+	 * <p>Setter for the field domain.</p>
 	 */
 	public void setDomain(String domain) {
 		final String oldDomain = this.domain;
@@ -771,6 +772,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	
 	
 	/**
+	 * <p>Getter for the field <code>window</code>.</p>
+	 *
 	 * @return the window
 	 */
 	public Window getWindow() {
@@ -822,6 +825,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	}
 
 	/**
+	 * <p>Getter for the field <code>ucontext</code>.</p>
+	 *
 	 * @return the ucontext
 	 */
 	public UserAgentContext getUcontext() {

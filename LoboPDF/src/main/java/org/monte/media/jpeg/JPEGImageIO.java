@@ -36,10 +36,10 @@ import javax.imageio.stream.ImageInputStream;
 
 
 /**
- * JPEGImageIO supports reading of JPEG images with YUV, CMYK and YCCK color 
+ * JPEGImageIO supports reading of JPEG images with YUV, CMYK and YCCK color
  * encoding.
  *
- * @author Werner Randelshofer, Hausmatt 10, CH-6405 Goldau
+ * Author Werner Randelshofer, Hausmatt 10, CH-6405 Goldau
  * @version 1.0.1 2010-10-10 Do not close input stream in method read(InputStream).
  * <br>1.0 2008-10-17 Created.
  */
@@ -53,8 +53,8 @@ public class JPEGImageIO {
      * Reads a JPEG image from the provided InputStream and convert it into a
      * color space which can be handled by Java2D (that is RGB or Gray in J2SE 5).
      * The image data in the file can be in the YUV, Gray, YCCK or CMYK color space.
-     * 
-     * @param in An InputStream in the JPEG File Interchange Format (JFIF). 
+     *
+     * @param in An InputStream in the JPEG File Interchange Format (JFIF).
      * @return a BufferedImage containing the decoded image converted into the
      * RGB color space.
      * @throws java.io.IOException if any.
@@ -62,6 +62,14 @@ public class JPEGImageIO {
     public static BufferedImage read(InputStream in) throws IOException {
         return read(in, true);
     }
+    /**
+     * <p>read.</p>
+     *
+     * @param in a {@link java.io.InputStream} object.
+     * @param inverseYCCKColors a boolean.
+     * @return a {@link java.awt.image.BufferedImage} object.
+     * @throws java.io.IOException if any.
+     */
     public static BufferedImage read(InputStream in, boolean inverseYCCKColors) throws IOException {
         // Read the stream into a byte array
         // --------------------------------------
@@ -183,7 +191,7 @@ public class JPEGImageIO {
      * <p>
      * Use this method, if you have already determined that the input stream
      * contains a YUV or Gray JPEG image.
-     * 
+     *
      * @param in An InputStream, preferably an ImageInputStream, in the JPEG
      * File Interchange Format (JFIF).
      * @return a BufferedImage containing the decoded image converted into the
@@ -202,7 +210,7 @@ public class JPEGImageIO {
      * <p>
      * Use this method, if you have already determined that the input stream
      * contains a CMYK JPEG image.
-     * 
+     *
      * @param in An InputStream, preferably an ImageInputStream, in the JPEG
      * File Interchange Format (JFIF).
      * @param cmykProfile An ICC_Profile for conversion from the CMYK color space
@@ -228,7 +236,7 @@ public class JPEGImageIO {
      * <p>
      * Use this method, if you have already determined that the input stream
      * contains a YCCK JPEG image.
-     * 
+     *
      * @param in An InputStream, preferably an ImageInputStream, in the JPEG
      * File Interchange Format (JFIF).
      * @param cmykProfile An ICC_Profile for conversion from the CMYK color space
@@ -254,7 +262,7 @@ public class JPEGImageIO {
      * <p>
      * Use this method, if you have already determined that the input stream
      * contains an inverted-YCCK JPEG image.
-     * 
+     *
      * @param in An InputStream, preferably an ImageInputStream, in the JPEG
      * File Interchange Format (JFIF).
      * @param cmykProfile An ICC_Profile for conversion from the CMYK color space
@@ -277,12 +285,12 @@ public class JPEGImageIO {
     /**
      * Creates a buffered image from a raster in the YCCK color space, converting
      * the colors to RGB using the provided CMYK ICC_Profile.
-     * 
+     *
      * @param ycckRaster A raster with (at least) 4 bands of samples.
      * @param cmykProfile An ICC_Profile for conversion from the CMYK color space
      * to the RGB color space. If this parameter is null, a default profile is used.
      * @return a BufferedImage in the RGB color space.
-     * @throws NullPointerException
+     * @throws java.lang.NullPointerException in case of error
      */
     public static BufferedImage createRGBImageFromYCCK(Raster ycckRaster, ICC_Profile cmykProfile) {
         BufferedImage image;
@@ -321,9 +329,9 @@ public class JPEGImageIO {
     }
 
     /**
-     * Creates a buffered image from a raster in the inverted YCCK color space, 
+     * Creates a buffered image from a raster in the inverted YCCK color space,
      * converting the colors to RGB using the provided CMYK ICC_Profile.
-     * 
+     *
      * @param ycckRaster A raster with (at least) 4 bands of samples.
      * @param cmykProfile An ICC_Profile for conversion from the CMYK color space
      * to the RGB color space. If this parameter is null, a default profile is used.
@@ -368,10 +376,10 @@ public class JPEGImageIO {
     /**
      * Creates a buffered image from a raster in the CMYK color space, converting
      * the colors to RGB using the provided CMYK ICC_Profile.
-     * 
+     *
      * As seen from a comment made by 'phelps' at
      * http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4799903
-     * 
+     *
      * @param cmykRaster A raster with (at least) 4 bands of samples.
      * @param cmykProfile An ICC_Profile for conversion from the CMYK color space
      * to the RGB color space. If this parameter is null, a default profile is used.

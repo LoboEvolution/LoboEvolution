@@ -38,8 +38,8 @@ import com.jtattoo.plaf.BaseRadioButtonUI;
 /**
  * <p>TextureRadioButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureRadioButtonUI extends BaseRadioButtonUI {
 

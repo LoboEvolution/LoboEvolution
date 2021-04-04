@@ -64,6 +64,12 @@
  */
 package org.loboevolution.pdfview.decode;
 
+/**
+ * <p>CCITTFaxDecoder class.</p>
+ *
+  *
+  *
+ */
 public class CCITTFaxDecoder {
 	static final int[] table1 = { 0x00, // 0 bits are left in first byte - SHOULD
 			// NOT HAPPEN
@@ -559,10 +565,12 @@ public class CCITTFaxDecoder {
 	private boolean fillBits = false;
 
 	/**
+	 * <p>Constructor for CCITTFaxDecoder.</p>
+	 *
 	 * @param fillOrder
 	 *            The fill order of the compressed data bytes.
-	 * @param w
-	 * @param h
+	 * @param w a int.
+	 * @param h a int.
 	 */
 	public CCITTFaxDecoder(int fillOrder, int w, int h) {
 		this.fillOrder = fillOrder;
@@ -589,6 +597,11 @@ public class CCITTFaxDecoder {
 		return false;
 	}
 
+	/**
+	 * <p>consumeEOL.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean consumeEOL() {
 		// Get the next 12 bits.
 		int next12Bits = nextNBits(12);
@@ -670,6 +683,13 @@ public class CCITTFaxDecoder {
 		return runLength;
 	}
 
+	/**
+	 * <p>decodeNextScanline.</p>
+	 *
+	 * @param buffer an array of {@link byte} objects.
+	 * @param lineOffset a int.
+	 * @param bitOffset a int.
+	 */
 	protected void decodeNextScanline(byte[] buffer, int lineOffset,
 			int bitOffset) {
 		int bits = 0;
@@ -813,6 +833,14 @@ public class CCITTFaxDecoder {
 	}
 
 	// One-dimensional decoding methods
+	/**
+	 * <p>decodeT41D.</p>
+	 *
+	 * @param buffer an array of {@link byte} objects.
+	 * @param compData an array of {@link byte} objects.
+	 * @param startX a int.
+	 * @param height a int.
+	 */
 	public void decodeT41D(byte[] buffer, byte[] compData, int startX,
 			int height) {
 		this.data = compData;
@@ -829,6 +857,14 @@ public class CCITTFaxDecoder {
 	}
 
 	// Two-dimensional decoding methods
+	/**
+	 * <p>decodeT42D.</p>
+	 *
+	 * @param buffer an array of {@link byte} objects.
+	 * @param compData an array of {@link byte} objects.
+	 * @param startX a int.
+	 * @param height a int.
+	 */
 	public void decodeT42D(byte[] buffer, byte[] compData, int startX,
 			int height) {
 		this.data = compData;
@@ -969,6 +1005,14 @@ public class CCITTFaxDecoder {
 		}
 	}
 
+	/**
+	 * <p>decodeT6.</p>
+	 *
+	 * @param buffer an array of {@link byte} objects.
+	 * @param compData an array of {@link byte} objects.
+	 * @param startX a int.
+	 * @param height a int.
+	 */
 	public synchronized void decodeT6(byte[] buffer, byte[] compData,
 			int startX, int height) {
 		this.data = compData;
@@ -1279,10 +1323,20 @@ public class CCITTFaxDecoder {
 		}
 	}
 
+	/**
+	 * <p>isAlign.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isAlign() {
 		return this.align;
 	}
 
+	/**
+	 * <p>isFillBits.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isFillBits() {
 		return this.fillBits;
 	}
@@ -1519,10 +1573,20 @@ public class CCITTFaxDecoder {
 		return false;
 	}
 
+	/**
+	 * <p>Setter for the field <code>align</code>.</p>
+	 *
+	 * @param align a boolean.
+	 */
 	public void setAlign(boolean align) {
 		this.align = align;
 	}
 
+	/**
+	 * <p>Setter for the field <code>fillBits</code>.</p>
+	 *
+	 * @param fillBits a boolean.
+	 */
 	public void setFillBits(boolean fillBits) {
 		this.fillBits = fillBits;
 	}

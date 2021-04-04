@@ -62,6 +62,12 @@ import org.jpedal.jbig2.segment.region.RegionFlags;
 import org.jpedal.jbig2.segment.region.RegionSegment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>HalftoneRegionSegment class.</p>
+ *
+  *
+  *
+ */
 public class HalftoneRegionSegment extends RegionSegment {
 	
 	private static final Logger logger = Logger.getLogger(HalftoneRegionSegment.class.getName());
@@ -69,12 +75,24 @@ public class HalftoneRegionSegment extends RegionSegment {
 
 	private final boolean inlineImage;
 
+	/**
+	 * <p>Constructor for HalftoneRegionSegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 * @param inlineImage a boolean.
+	 */
 	public HalftoneRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage) {
 		super(streamDecoder);
 
 		this.inlineImage = inlineImage;
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 		super.readSegment();
 
@@ -239,6 +257,11 @@ public class HalftoneRegionSegment extends RegionSegment {
 			logger.info("generic region Segment flags = " + halftoneRegionFlagsField);
 	}
 
+	/**
+	 * <p>Getter for the field <code>halftoneRegionFlags</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.segment.region.halftone.HalftoneRegionFlags} object.
+	 */
 	public HalftoneRegionFlags getHalftoneRegionFlags() {
 		return halftoneRegionFlags;
 	}

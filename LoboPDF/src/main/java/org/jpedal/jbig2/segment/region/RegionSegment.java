@@ -57,6 +57,12 @@ import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Segment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>Abstract RegionSegment class.</p>
+ *
+  *
+  *
+ */
 public abstract class RegionSegment extends Segment {
 	
 	private static final Logger logger = Logger.getLogger(RegionSegment.class.getName());
@@ -65,10 +71,21 @@ public abstract class RegionSegment extends Segment {
 
 	protected final RegionFlags regionFlags = new RegionFlags();
 
+	/**
+	 * <p>Constructor for RegionSegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 */
 	public RegionSegment(JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 		short[] buff = new short[4];
 		decoder.readByte(buff);

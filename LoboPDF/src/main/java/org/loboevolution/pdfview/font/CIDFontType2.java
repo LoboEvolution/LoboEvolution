@@ -29,7 +29,8 @@ import org.loboevolution.pdfview.PDFObject;
 /**
  * a font object derived from a CID font.
  *
- * @author Jonathan Kaplan
+ * Author Jonathan Kaplan
+  *
  */
 public class CIDFontType2 extends TTFFont {
 
@@ -56,10 +57,12 @@ public class CIDFontType2 extends TTFFont {
     /**
      * create a new CIDFontType2 object based on the name of a built-in font
      * and the font descriptor
+     *
      * @param baseName the name of the font, from the PDF file
      * @param fontObj a dictionary that contains the DW (defaultWidth) and
      * W (width) parameters
      * @param descriptor a descriptor for the font
+     * @throws java.io.IOException if any.
      */
     public CIDFontType2(String baseName, PDFObject fontObj,
             PDFFontDescriptor descriptor) throws IOException {
@@ -213,13 +216,21 @@ public class CIDFontType2 extends TTFFont {
         }
     }
 
-    /** Get the default width in text space */
+    /**
+     * {@inheritDoc}
+     *
+     * Get the default width in text space
+     */
     @Override
     public int getDefaultWidth() {
         return this.defaultWidth;
     }
 
-    /** Get the width of a given character */
+    /**
+     * {@inheritDoc}
+     *
+     * Get the width of a given character
+     */
     @Override
     public float getWidth(char code, String name) {
         if (this.widths == null) {
@@ -233,12 +244,22 @@ public class CIDFontType2 extends TTFFont {
         return w / getDefaultWidth();
     }
 
-    /** Get the default vertical width in text space */
+    /**
+     * Get the default vertical width in text space
+     *
+     * @return a int.
+     */
     public int getDefaultWidthVertical() {
         return this.defaultWidthVertical;
     }
 
-    /** Get the vertical width of a given character */
+    /**
+     * Get the vertical width of a given character
+     *
+     * @param code a char.
+     * @param name a {@link java.lang.String} object.
+     * @return a float.
+     */
     public float getWidthVertical(char code, String name) {
         if (this.widthsVertical == null) {
             return 1f;
@@ -252,6 +273,8 @@ public class CIDFontType2 extends TTFFont {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Get the outline of a character given the character code.  We
      * interpose here in order to avoid using the CMap of the font in
      * a CID mapped font.

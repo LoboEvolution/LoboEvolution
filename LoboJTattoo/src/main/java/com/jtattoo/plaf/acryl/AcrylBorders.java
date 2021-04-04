@@ -46,8 +46,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AcrylBorders class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AcrylBorders extends BaseBorders {
 

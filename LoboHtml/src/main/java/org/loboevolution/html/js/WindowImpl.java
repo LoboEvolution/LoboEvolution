@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 12, 2005
@@ -72,8 +69,8 @@ import java.util.logging.Logger;
 /**
  * <p>WindowImpl class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
@@ -178,9 +175,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>alert.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param message a {@link java.lang.String} object.
+	 * <p>alert.</p>
 	 */
 	public void alert(String message) {
 		if (this.rcontext != null) {
@@ -263,10 +260,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>confirm.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param message a {@link java.lang.String} object.
-	 * @return a boolean.
+	 * <p>confirm.</p>
 	 */
 	public boolean confirm(String message) {
 		final HtmlRendererContext rcontext = this.rcontext;
@@ -337,11 +333,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>getComputedStyle.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param element a {@link orrg.loboevolution.html.node.Element} object.
-	 * @param pseudoElement a {@link java.lang.String} object.
-	 * @return a {@link CSS3Properties} object.
+	 * <p>getComputedStyle.</p>
 	 */
 	public CSS3Properties getComputedStyle(Element element, String pseudoElement) {
 		if (element instanceof HTMLElementImpl) {
@@ -352,10 +346,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 	
     /**
-     * <p>getComputedStyle.</p>
+     * {@inheritDoc}
      *
-      * @param element a {@link orrg.loboevolution.html.node.Element} object.
-     * @return a {@link CSS3Properties} object.
+     * <p>getComputedStyle.</p>
      */
     public CSS3Properties getComputedStyle(Element elt) {
         return getComputedStyle(elt, null);
@@ -393,7 +386,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/**
 	 * <p>Getter for the field history.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.js.History} object.
+	 * @return a {@link org.loboevolution.html.node.history.History} object.
 	 */
 	public History getHistory() {
 		synchronized (this) {
@@ -406,20 +399,20 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		}
 	}
 	
-	/**
-	 * <p>Getter for the field local storage.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.js.webstorage.Storage} object.
-	 */
+    /**
+     * <p>Getter for the field local storage.</p>
+     *
+     * @return a {@link org.loboevolution.html.node.js.webstorage.Storage} object.
+     */
     public Storage getLocalStorage() {
         return new LocalStorage();
     }
 
     /**
-	 * <p>Getter for the field session storage.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.js.webstorage.Storage} object.
-	 */
+     * <p>Getter for the field session storage.</p>
+     *
+     * @return a {@link org.loboevolution.html.node.js.webstorage.Storage} object.
+     */
     public Storage getSessionStorage() {
     	 return new SessionStorage();
     }
@@ -448,7 +441,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/**
 	 * <p>Getter for the field location.</p>
 	 *
-	 * @return a {@link oorg.loboevolution.html.node.js.Location} object.
+	 * @return a {@link org.loboevolution.html.node.js.Location} object.
 	 */
 	public Location getLocation() {
 		synchronized (this) {
@@ -478,7 +471,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/**
 	 * <p>Getter for the field navigator.</p>
 	 *
-	 * @return a {@link org.org.loboevolution.html.node.js.Navigator} object.
+	 * @return a {@link org.loboevolution.html.node.js.Navigator} object.
 	 */
 	public Navigator getNavigator() {
 		synchronized (this) {
@@ -737,46 +730,36 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>open.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param url a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.js.WindowImpl} object.
+	 * <p>open.</p>
 	 */
 	public WindowImpl open(String url) {
 		return this.open(url, "windows");
 	}
 
 	/**
-	 * <p>open.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param url a {@link java.lang.String} object.
-	 * @param windowName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.js.WindowImpl} object.
+	 * <p>open.</p>
 	 */
 	public WindowImpl open(String url, String windowName) {
 		return this.open(url, windowName, "", false);
 	}
 
 	/**
-	 * <p>open.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param url a {@link java.lang.String} object.
-	 * @param windowName a {@link java.lang.String} object.
-	 * @param windowFeatures a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.js.WindowImpl} object.
+	 * <p>open.</p>
 	 */
 	public WindowImpl open(String url, String windowName, String windowFeatures) {
 		return this.open(url, windowName, windowFeatures, false);
 	}
 
 	/**
-	 * <p>open.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param relativeUrl a {@link java.lang.String} object.
-	 * @param windowName a {@link java.lang.String} object.
-	 * @param windowFeatures a {@link java.lang.String} object.
-	 * @param replace a boolean.
-	 * @return a {@link org.loboevolution.html.js.WindowImpl} object.
+	 * <p>open.</p>
 	 */
 	public WindowImpl open(String relativeUrl, String windowName, String windowFeatures, boolean replace) {
 		final HtmlRendererContext rcontext = this.rcontext;
@@ -800,10 +783,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>prompt.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param message a {@link java.lang.String} object.
-	 * @return a {@link java.lang.String} object.
+	 * <p>prompt.</p>
 	 */
 	public String prompt(String message) {
 		return this.prompt(message, "");
@@ -821,11 +803,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>prompt.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param message a {@link java.lang.String} object.
-	 * @param inputDefault a {@link java.lang.String} object.
-	 * @return a {@link java.lang.String} object.
+	 * <p>prompt.</p>
 	 */
 	public String prompt(String message, String inputDefault) {
 		final HtmlRendererContext rcontext = this.rcontext;
@@ -948,7 +928,6 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	 * @param aFunction Javascript function to invoke on each loop.
 	 * @param aTimeInMs Time in millisecund between each loop.
 	 * @return Return the timer ID to use as reference
-	 *       
 	 */
 	public int setInterval(final Function aFunction, final double aTimeInMs) {
 		if (aTimeInMs > Integer.MAX_VALUE || aTimeInMs < 0) {
@@ -1011,9 +990,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>setOnload.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param onload a {@link org.mozilla.javascript.Function} object.
+	 * <p>setOnload.</p>
 	 */
 	public void setOnload(Function onload) {
 		final Document doc = this.document;
@@ -1023,9 +1002,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>Setter for the field onunload.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param onunload a {@link org.mozilla.javascript.Function} object.
+	 * <p>Setter for the field onunload.</p>
 	 */
 	public void setOnunload(Function onunload) {
 		this.onunload = onunload;
@@ -1048,9 +1027,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>setStatus.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param message a {@link java.lang.String} object.
+	 * <p>setStatus.</p>
 	 */
 	public void setStatus(String message) {
 		final HtmlRendererContext rcontext = this.rcontext;
@@ -1128,10 +1107,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 	
 	/**
-	 * <p>addEventListener.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
+	 * <p>addEventListener.</p>
 	 */
 	public void addEventListener(String type, Function listener) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
@@ -1141,11 +1119,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>addEventListener.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
-	 * @param useCapture a boolean.
+	 * <p>addEventListener.</p>
 	 */
 	public void addEventListener(String type, Function listener, boolean useCapture) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
@@ -1160,6 +1136,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	 * @param evt a {@link org.w3c.dom.events.Event} object.
 	 * @return a boolean.
 	 * @throws org.w3c.dom.events.EventException if any.
+	 * @throws org.w3c.dom.events.EventException if any.
 	 */
 	public boolean dispatchEvent(Event evt) throws EventException {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
@@ -1170,10 +1147,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>removeEventListener.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
+	 * <p>removeEventListener.</p>
 	 */
 	public void removeEventListener(String type, Function listener) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
@@ -1183,11 +1159,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>removeEventListener.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
-	 * @param useCapture a boolean.
+	 * <p>removeEventListener.</p>
 	 */
 	public void removeEventListener(String type, Function listener, boolean useCapture) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
@@ -1249,307 +1223,368 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
         return -1;
     }
 
+	/** {@inheritDoc} */
 	public MediaQueryListImpl matchMedia(final String mediaQueryString) {
 		return new MediaQueryListImpl(this, mediaQueryString);
 	}
 
 	/**
+	 * <p>Getter for the field <code>uaContext</code>.</p>
+	 *
 	 * @return the uaContext
 	 */
 	public UserAgentContext getUaContext() {
 		return uaContext;
 	}
 
+	/**
+	 * <p>Getter for the field <code>msg</code>.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<String> getMsg() {
 		return msg;
 	}
 
+	/**
+	 * <p>Setter for the field <code>msg</code>.</p>
+	 *
+	 * @param msg a {@link java.util.List} object.
+	 */
 	public void setMsg(List<String> msg) {
 		this.msg = msg;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String atob(String encodedString) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String btoa(String rawString) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Console getConsole() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Navigator getClientInformation() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDefaultStatus(String defaultStatus) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getDevicePixelRatio() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDoNotTrack() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isIsSecureContext() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setLocation(Location location) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BarProp getLocationbar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BarProp getMenubar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setName(String name) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setOffscreenBuffering(String offscreenBuffering) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setOffscreenBuffering(boolean offscreenBuffering) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setOpener(String opener) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getPageXOffset() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getPageYOffset() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BarProp getPersonalbar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScreenLeft() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScreenTop() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScreenX() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScreenY() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScrollX() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScrollY() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BarProp getScrollbars() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BarProp getStatusbar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BarProp getToolbar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void alert() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean confirm() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public CSSRuleListImpl getMatchedCSSRules(Element elt, String pseudoElt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public CSSRuleListImpl getMatchedCSSRules(Element elt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Selection getSelection() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void moveBy(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void moveTo(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Window open() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void postMessage(String message, String targetOrigin) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void print() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String prompt() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void resizeBy(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void resizeTo(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scroll() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scroll(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollBy() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollBy(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollTo() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollTo(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Window get(int index) {
 		// TODO Auto-generated method stub

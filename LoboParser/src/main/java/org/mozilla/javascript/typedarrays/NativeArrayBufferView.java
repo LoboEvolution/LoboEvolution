@@ -14,8 +14,10 @@ import org.mozilla.javascript.Undefined;
 /**
  * This class is the abstract parent for all views of the array. It shows a view of the underlying
  * NativeArrayBuffer. Many views may simultaneously share the same buffer, and changes to one will affect all.
+ *
+ *
+ *
  */
-
 public abstract class NativeArrayBufferView
     extends IdScriptableObject
 {
@@ -30,6 +32,9 @@ public abstract class NativeArrayBufferView
     /** The length, in bytes, of the portion of the backing array that we use */
     protected final int byteLength;
 
+    /**
+     * <p>Constructor for NativeArrayBufferView.</p>
+     */
     public NativeArrayBufferView()
     {
         arrayBuffer = new NativeArrayBuffer();
@@ -37,6 +42,13 @@ public abstract class NativeArrayBufferView
         byteLength = 0;
     }
 
+    /**
+     * <p>Constructor for NativeArrayBufferView.</p>
+     *
+     * @param ab a {@link org.mozilla.javascript.typedarrays.NativeArrayBuffer} object.
+     * @param offset a int.
+     * @param byteLength a int.
+     */
     protected NativeArrayBufferView(NativeArrayBuffer ab, int offset, int byteLength)
     {
         this.offset = offset;
@@ -46,6 +58,8 @@ public abstract class NativeArrayBufferView
 
     /**
      * Return the buffer that backs this view.
+     *
+     * @return a {@link org.mozilla.javascript.typedarrays.NativeArrayBuffer} object.
      */
     public NativeArrayBuffer getBuffer() {
         return arrayBuffer;
@@ -53,6 +67,8 @@ public abstract class NativeArrayBufferView
 
     /**
      * Return the offset in bytes from the start of the buffer that this view represents.
+     *
+     * @return a int.
      */
     public int getByteOffset() {
         return offset;
@@ -60,11 +76,18 @@ public abstract class NativeArrayBufferView
 
     /**
      * Return the length, in bytes, of the part of the buffer that this view represents.
+     *
+     * @return a int.
      */
     public int getByteLength() {
         return byteLength;
     }
 
+    /**
+     * <p>useLittleEndian.</p>
+     *
+     * @return a boolean.
+     */
     protected static boolean useLittleEndian() {
         if (useLittleEndian == null) {
             Context ctx = Context.getCurrentContext();
@@ -77,6 +100,13 @@ public abstract class NativeArrayBufferView
         return useLittleEndian.booleanValue();
     }
 
+    /**
+     * <p>isArg.</p>
+     *
+     * @param args an array of {@link java.lang.Object} objects.
+     * @param i a int.
+     * @return a boolean.
+     */
     protected static boolean isArg(Object[] args, int i)
     {
         return ((args.length > i) && !Undefined.instance.equals(args[i]));
@@ -84,12 +114,14 @@ public abstract class NativeArrayBufferView
 
     // Property dispatcher
 
+    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -101,6 +133,7 @@ public abstract class NativeArrayBufferView
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -118,6 +151,7 @@ public abstract class NativeArrayBufferView
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -150,6 +184,7 @@ public abstract class NativeArrayBufferView
         Id_byteLength           = 3;
 
     // to be visible by subclasses
+    /** Constant <code>MAX_INSTANCE_ID=Id_byteLength</code> */
     protected static final int
         MAX_INSTANCE_ID         = Id_byteLength;
 

@@ -8,15 +8,20 @@ import org.loboevolution.pdfview.PDFParseException;
 
 /**
  * An action which specifies going to a particular destination
+ *
+  *
+  *
  */
 public class GoToAction extends PDFAction {
     /** the destination to go to */
     private final PDFDestination dest;
     
-    /** 
+    /**
      * Creates a new instance of GoToAction from an object
      *
      * @param obj the PDFObject with the action information
+     * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
      */
     public GoToAction(PDFObject obj, PDFObject root) throws IOException {
         super("GoTo");
@@ -33,6 +38,8 @@ public class GoToAction extends PDFAction {
     
     /**
      * Create a new GoToAction from a destination
+     *
+     * @param dest a {@link org.loboevolution.pdfview.PDFDestination} object.
      */
     public GoToAction(PDFDestination dest) {
         super("GoTo");
@@ -42,6 +49,8 @@ public class GoToAction extends PDFAction {
       
     /**
      * Get the destination this action refers to
+     *
+     * @return a {@link org.loboevolution.pdfview.PDFDestination} object.
      */
     public PDFDestination getDestination() {
         return this.dest;

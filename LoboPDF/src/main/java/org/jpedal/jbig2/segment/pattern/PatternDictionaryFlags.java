@@ -54,12 +54,21 @@ import java.util.logging.Logger;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
+/**
+ * <p>PatternDictionaryFlags class.</p>
+ *
+  *
+  *
+ */
 public class PatternDictionaryFlags extends Flags {
 	
 	private static final Logger logger = Logger.getLogger(PatternDictionaryFlags.class.getName());
+	/** Constant <code>HD_MMR="HD_MMR"</code> */
 	public static final String HD_MMR = "HD_MMR";
+	/** Constant <code>HD_TEMPLATE="HD_TEMPLATE"</code> */
 	public static final String HD_TEMPLATE = "HD_TEMPLATE";
 
+	/** {@inheritDoc} */
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 

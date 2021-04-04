@@ -34,15 +34,27 @@ import org.loboevolution.pdfview.decrypt.PDFDecrypterFactory;
  * <p>
  * You should use the decodeStream() method of this object rather than using
  * any of the decoders directly.
+ *
+  *
+  *
  */
 public class PDFDecoder {
 
+    /** Constant <code>DCT_FILTERS</code> */
     public final static Set<String> DCT_FILTERS = new HashSet<>(Arrays.asList("DCT", "DCTDecode"));
 
     /** Creates a new instance of PDFDecoder */
     private PDFDecoder() {
     }
 
+    /**
+     * <p>isLastFilter.</p>
+     *
+     * @param dict a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param filters a {@link java.util.Set} object.
+     * @return a boolean.
+     * @throws java.io.IOException if any.
+     */
     public static boolean isLastFilter(PDFObject dict, Set<String> filters) throws IOException {
         PDFObject filter = dict.getDictRef("Filter");
         if (filter == null) {
@@ -86,8 +98,12 @@ public class PDFDecoder {
     /**
      * decode a byte[] stream using the filters specified in the object's
      * dictionary (passed as argument 1).
+     *
      * @param dict the dictionary associated with the stream
      * @param streamBuf the data in the stream, as a byte buffer
+     * @param filterLimits a {@link java.util.Set} object.
+     * @return a {@link java.nio.ByteBuffer} object.
+     * @throws java.io.IOException if any.
      */
     public static ByteBuffer decodeStream(PDFObject dict, ByteBuffer streamBuf, Set<String> filterLimits)
             throws IOException {
@@ -179,9 +195,10 @@ public class PDFDecoder {
     /**
      * Determines whether a stream is encrypted or not; note that encodings
      * (e.g., Flate, LZW) are not considered encryptions.
+     *
      * @param dict the stream dictionary
      * @return whether the stream is encrypted
-     * @throws IOException if the stream dictionary can't be read
+     * @throws java.io.IOException if any.
      */
     public static boolean isEncrypted(PDFObject dict)
             throws IOException {

@@ -26,21 +26,26 @@ import java.util.Map;
 
 /**
  * A cache of PDF pages and images.
+ *
+  *
+  *
  */
 public class Cache {
 
     /** the pages in the cache, mapped by page number */
     private final Map<Integer, SoftReference<PageRecord>> pages;
 
-    /** Creates a new instance of a Cache */
+    /**
+     * Creates a new instance of a Cache
+     */
     public Cache() {
         this.pages = Collections.synchronizedMap(new HashMap<>());
     }
 
     /**
      * Add a page to the cache.  This method should be used for
-     * pages which have already been completely rendered.  
-     * 
+     * pages which have already been completely rendered.
+     *
      * @param pageNumber the page number of this page
      * @param page the page to add
      */
@@ -88,7 +93,7 @@ public class Cache {
 
     /**
      * Get a page from the cache
-     * 
+     *
      * @param pageNumber the number of the page to get
      * @return the page, if it is in the cache, or null if not
      */
@@ -123,7 +128,6 @@ public class Cache {
      *
      * @param page the page the image is associated with
      * @param info the image info that describes the image
-     *
      * @return the image if it is in the cache, or null if not
      */
     public BufferedImage getImage(PDFPage page, ImageInfo info) {

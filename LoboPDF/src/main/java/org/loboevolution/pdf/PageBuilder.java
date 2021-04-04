@@ -39,6 +39,11 @@ class PageBuilder implements Serializable, Runnable {
 	
 	private final PDFViewer PDFViewer;
 	
+	/**
+	 * <p>Constructor for PageBuilder.</p>
+	 *
+	 * @param PDFViewer a {@link org.loboevolution.pdf.PDFViewer} object.
+	 */
 	public PageBuilder(PDFViewer PDFViewer) {
 		this.PDFViewer = PDFViewer;
 	}
@@ -60,6 +65,8 @@ class PageBuilder implements Serializable, Runnable {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * waits for the timeout, and if time expires, go to the specified page
 	 * number.
 	 */

@@ -8,6 +8,12 @@
 
 package org.mozilla.javascript;
 
+/**
+ * <p>ConstProperties interface.</p>
+ *
+ *
+ *
+ */
 public interface ConstProperties {
     /**
      * Sets a named const property in this object.
@@ -48,6 +54,7 @@ public interface ConstProperties {
      * property is defined.
      * Note that this method is not expected to traverse the prototype chain,
      * which is different from the ECMA [[Put]] operation.
+     *
      * @param name the name of the property
      * @param start the object whose property is being set
      * @param value value to set the property to
@@ -62,6 +69,7 @@ public interface ConstProperties {
      * Reserves a definition spot for a const.  This will set up a definition
      * of the const property, but set its value to undefined.  The semantics of
      * the start parameter is the same as for putConst.
+     *
      * @param name The name of the property.
      * @param start The object whose property is being reserved.
      */
@@ -69,7 +77,8 @@ public interface ConstProperties {
 
     /**
      * Returns true if the named property is defined as a const on this object.
-     * @param name
+     *
+     * @param name a {@link java.lang.String} object.
      * @return true if the named property is defined as a const, false
      * otherwise.
      */

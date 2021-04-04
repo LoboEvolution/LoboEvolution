@@ -50,8 +50,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AluminiumToggleButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AluminiumToggleButtonUI extends BaseToggleButtonUI {
 

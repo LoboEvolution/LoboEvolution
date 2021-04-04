@@ -26,14 +26,22 @@ import java.nio.ByteBuffer;
 
 /**
  * Undo prediction based on the TIFF Predictor 2 algorithm
+ *
+  *
+  *
  */
 public class TIFFPredictor extends Predictor {
 
+    /**
+     * <p>Constructor for TIFFPredictor.</p>
+     */
     public TIFFPredictor() {
         super (TIFF);
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Undo data based on the png algorithm
      */
     public ByteBuffer unpredict(ByteBuffer imageData)

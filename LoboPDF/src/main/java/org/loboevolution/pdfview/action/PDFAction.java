@@ -26,6 +26,9 @@ import org.loboevolution.pdfview.PDFParseException;
 
 /**
  * The common super-class of all PDF actions.
+ *
+  *
+  *
  */
 public class PDFAction {
     /** the type of this action */
@@ -34,7 +37,11 @@ public class PDFAction {
     /** the next action or array of actions */
     private PDFObject next;
     
-    /** Creates a new instance of PDFAction */
+    /**
+     * Creates a new instance of PDFAction
+     *
+     * @param type a {@link java.lang.String} object.
+     */
     public PDFAction(String type) {
         this.type = type;
     }
@@ -44,6 +51,8 @@ public class PDFAction {
      *
      * @param obj the PDF object containing the action to parse
      * @param root the root of the PDF object tree
+     * @return a {@link org.loboevolution.pdfview.action.PDFAction} object.
+     * @throws java.io.IOException if any.
      */
     public static PDFAction getAction(PDFObject obj, PDFObject root)
         throws IOException
@@ -90,6 +99,8 @@ public class PDFAction {
     
     /**
      * Get the type of this action
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getType() {
         return this.type;
@@ -97,6 +108,8 @@ public class PDFAction {
     
     /**
      * Get the next action or array of actions
+     *
+     * @return a {@link org.loboevolution.pdfview.PDFObject} object.
      */
     public PDFObject getNext() {
         return this.next;
@@ -104,6 +117,8 @@ public class PDFAction {
     
     /**
      * Set the next action or array of actions
+     *
+     * @param next a {@link org.loboevolution.pdfview.PDFObject} object.
      */
     public void setNext(PDFObject next) {
         this.next = next;

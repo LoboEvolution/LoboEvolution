@@ -54,12 +54,21 @@ import java.util.logging.Logger;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
+/**
+ * <p>RefinementRegionFlags class.</p>
+ *
+  *
+  *
+ */
 public class RefinementRegionFlags extends Flags {
 	
 	private static final Logger logger = Logger.getLogger(RefinementRegionFlags.class.getName());
+	/** Constant <code>GR_TEMPLATE="GR_TEMPLATE"</code> */
 	public static final String GR_TEMPLATE = "GR_TEMPLATE";
+	/** Constant <code>TPGDON="TPGDON"</code> */
 	public static final String TPGDON = "TPGDON";
 
+	/** {@inheritDoc} */
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 

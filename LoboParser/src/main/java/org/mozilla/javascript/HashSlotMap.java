@@ -17,24 +17,29 @@ import org.mozilla.javascript.ScriptableObject.SlotAccess;
  * object. However it is much more resistant to large number of hash collisions than
  * EmbeddedSlotMap and therefore we use this implementation when an object gains a large
  * number of properties.
+ *
+ *
+ *
  */
-
 public class HashSlotMap
     implements SlotMap {
 
     private final LinkedHashMap<Object, ScriptableObject.Slot> map =
         new LinkedHashMap<Object, ScriptableObject.Slot>();
 
+    /** {@inheritDoc} */
     @Override
     public int size() {
         return map.size();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() {
         return map.isEmpty();
     }
 
+    /** {@inheritDoc} */
     @Override
     public ScriptableObject.Slot query(Object key, int index)
     {
@@ -42,6 +47,7 @@ public class HashSlotMap
         return map.get(name);
     }
 
+    /** {@inheritDoc} */
     @Override
     public ScriptableObject.Slot get(Object key, int index, ScriptableObject.SlotAccess accessType) {
         Object name = key == null ? String.valueOf(index) : key;
@@ -99,12 +105,14 @@ public class HashSlotMap
         return newSlot;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void addSlot(ScriptableObject.Slot newSlot) {
         Object name = newSlot.name == null ? String.valueOf(newSlot.indexOrHash) : newSlot.name;
         map.put(name, newSlot);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void remove(Object key, int index) {
         Object name = key == null ? String.valueOf(index) : key;
@@ -122,6 +130,7 @@ public class HashSlotMap
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Iterator<ScriptableObject.Slot> iterator() {
         return map.values().iterator();

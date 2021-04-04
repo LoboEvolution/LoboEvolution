@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.js;
@@ -31,8 +28,8 @@ import org.loboevolution.net.HttpNetwork;
 /**
  * <p>Navigator class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class NavigatorImpl extends AbstractScriptableDelegate implements Navigator {
 	
@@ -50,7 +47,7 @@ public class NavigatorImpl extends AbstractScriptableDelegate implements Navigat
 	/**
 	 * <p>getGeolocation.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.js.geolocation.Geolocation} object.
+	 * @return a {@link org.loboevolution.html.js.geolocation.Geolocation} object.
 	 */
 	public Geolocation getGeolocation() {
 		return new Geolocation(window);
@@ -119,42 +116,49 @@ public class NavigatorImpl extends AbstractScriptableDelegate implements Navigat
 		return HttpNetwork.getUserAgentValue();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMaxTouchPoints() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isMsManipulationViewsEnabled() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMsMaxTouchPoints() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isMsPointerEnabled() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isPointerEnabled() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean vibrate(int pattern) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean vibrate(int... pattern) {
 		// TODO Auto-generated method stub

@@ -9,10 +9,13 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * Throw statement.  Node type is {@link Token#THROW}.
+ * Throw statement.  Node type is {@link org.mozilla.javascript.Token#THROW}.
  *
  * <pre><i>ThrowStatement</i> :
  *      <b>throw</b> [<i>no LineTerminator here</i>] Expression ;</pre>
+ *
+ *
+ *
  */
 public class ThrowStatement extends AstNode {
 
@@ -22,26 +25,58 @@ public class ThrowStatement extends AstNode {
         type = Token.THROW;
     }
 
+    /**
+     * <p>Constructor for ThrowStatement.</p>
+     */
     public ThrowStatement() {
     }
 
+    /**
+     * <p>Constructor for ThrowStatement.</p>
+     *
+     * @param pos a int.
+     */
     public ThrowStatement(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for ThrowStatement.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public ThrowStatement(int pos, int len) {
         super(pos, len);
     }
 
+    /**
+     * <p>Constructor for ThrowStatement.</p>
+     *
+     * @param expr a {@link org.mozilla.javascript.ast.AstNode} object.
+     */
     public ThrowStatement(AstNode expr) {
         setExpression(expr);
     }
 
+    /**
+     * <p>Constructor for ThrowStatement.</p>
+     *
+     * @param pos a int.
+     * @param expr a {@link org.mozilla.javascript.ast.AstNode} object.
+     */
     public ThrowStatement(int pos, AstNode expr) {
         super(pos, expr.getLength());
         setExpression(expr);
     }
 
+    /**
+     * <p>Constructor for ThrowStatement.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     * @param expr a {@link org.mozilla.javascript.ast.AstNode} object.
+     */
     public ThrowStatement(int pos, int len, AstNode expr) {
         super(pos, len);
         setExpression(expr);
@@ -49,6 +84,8 @@ public class ThrowStatement extends AstNode {
 
     /**
      * Returns the expression being thrown
+     *
+     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getExpression() {
         return expression;
@@ -57,7 +94,9 @@ public class ThrowStatement extends AstNode {
     /**
      * Sets the expression being thrown, and sets its parent
      * to this node.
-     * @throws IllegalArgumentException} if expression is {@code null}
+     *
+     * @throws java.lang.IllegalArgumentException} if expression is {@code null}
+     * @param expression a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public void setExpression(AstNode expression) {
         assertNotNull(expression);
@@ -65,6 +104,7 @@ public class ThrowStatement extends AstNode {
         expression.setParent(this);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -77,6 +117,8 @@ public class ThrowStatement extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node, then the thrown expression.
      */
     @Override

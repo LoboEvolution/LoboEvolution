@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Le implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1 num2</i> <b>le</b> <i>bool</i> <p>
 	 *
 	 * pops two objects from the operand stack and pushes true

@@ -44,8 +44,8 @@ import java.util.Set;
  * {@link #addPoint(Point)}, and {@link #clear()} functions. All of these
  * mutator functions cause the overlay to be repainted.
  *
- * @author Kazo Csaba
- * @version $Id: $Id
+ * Author Kazo Csaba
+ *
  */
 public final class PixelMarkerOverlay extends Overlay {
 
@@ -74,7 +74,7 @@ public final class PixelMarkerOverlay extends Overlay {
 	 *
 	 * @param color
 	 *            the new color
-	 * @throws java.lang.NullPointerException
+	 * @throws java.lang.NullPointerException in case of error
 	 *             if {@code color} is {@code null}
 	 */
 	public void setColor(Color color) {
@@ -89,7 +89,7 @@ public final class PixelMarkerOverlay extends Overlay {
 	 *
 	 * @param p
 	 *            a new point
-	 * @throws java.lang.NullPointerException
+	 * @throws java.lang.NullPointerException in case of error
 	 *             if {@code p} is {@code null}
 	 */
 	public void addPoint(Point p) {
@@ -119,7 +119,7 @@ public final class PixelMarkerOverlay extends Overlay {
 	 *
 	 * @param points
 	 *            an iterable of all the pixels that should be selected
-	 * @throws java.lang.NullPointerException
+	 * @throws java.lang.NullPointerException in case of error
 	 *             if {@code points} or any individual point is {@code null}
 	 */
 	public void setPoints(Iterable<Point> points) {

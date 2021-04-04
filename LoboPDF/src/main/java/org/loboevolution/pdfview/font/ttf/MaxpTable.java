@@ -21,8 +21,10 @@ package org.loboevolution.pdfview.font.ttf;
 import java.nio.ByteBuffer;
 
 /**
+ * <p>MaxpTable class.</p>
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class MaxpTable extends TrueTypeTable {
     
@@ -73,7 +75,9 @@ public class MaxpTable extends TrueTypeTable {
     /** Holds value of property maxComponentDepth. */
     private int maxComponentDepth;
     
-    /** Creates a new instance of MaxpTable */
+    /**
+     * Creates a new instance of MaxpTable
+     */
     protected MaxpTable() {
         super (TrueTypeTable.MAXP_TABLE);
         
@@ -94,9 +98,11 @@ public class MaxpTable extends TrueTypeTable {
         setMaxComponentDepth(0);
     }
     
-    /**
-     * Set the values from data
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Set the values from data
+	 */
     @Override
 	public void setData(ByteBuffer data) {
         if (data.remaining() != 32) {
@@ -120,9 +126,11 @@ public class MaxpTable extends TrueTypeTable {
         setMaxComponentDepth(data.getShort());
     }
     
-    /**
-     * Get a buffer from the data
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get a buffer from the data
+	 */
     @Override
 	public ByteBuffer getData() {
         ByteBuffer buf = ByteBuffer.allocate(getLength());
@@ -149,257 +157,291 @@ public class MaxpTable extends TrueTypeTable {
         return buf;
     }
     
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public int getLength() {
         return 32;
     }
     
-    /** Getter for property version.
-     * @return Value of property version.
+    /**
+     * Getter for property version.
      *
+     * @return Value of property version.
      */
     public int getVersion() {
         return this.version;
     }
     
-    /** Setter for property version.
-     * @param version New value of property version.
+    /**
+     * Setter for property version.
      *
+     * @param version New value of property version.
      */
     public void setVersion(int version) {
         this.version = version;
     }
     
-    /** Getter for property numGlyphs.
-     * @return Value of property numGlyphs.
+    /**
+     * Getter for property numGlyphs.
      *
+     * @return Value of property numGlyphs.
      */
     public int getNumGlyphs() {
         return this.numGlyphs & 0xFFFF;
     }
     
-    /** Setter for property numGlyphs.
-     * @param numGlyphs New value of property numGlyphs.
+    /**
+     * Setter for property numGlyphs.
      *
+     * @param numGlyphs New value of property numGlyphs.
      */
     public void setNumGlyphs(int numGlyphs) {
         this.numGlyphs = numGlyphs;
     }
     
-    /** Getter for property maxPoints.
-     * @return Value of property maxPoints.
+    /**
+     * Getter for property maxPoints.
      *
+     * @return Value of property maxPoints.
      */
     public int getMaxPoints() {
         return this.maxPoints & 0xFFFF;
     }
     
-    /** Setter for property maxPoints.
-     * @param maxPoints New value of property maxPoints.
+    /**
+     * Setter for property maxPoints.
      *
+     * @param maxPoints New value of property maxPoints.
      */
     public void setMaxPoints(int maxPoints) {
         this.maxPoints = maxPoints;
     }
     
-    /** Getter for property maxContours.
-     * @return Value of property maxContours.
+    /**
+     * Getter for property maxContours.
      *
+     * @return Value of property maxContours.
      */
     public int getMaxContours() {
         return this.maxContours & 0xFFFF;
     }
     
-    /** Setter for property maxContours.
-     * @param maxContours New value of property maxContours.
+    /**
+     * Setter for property maxContours.
      *
+     * @param maxContours New value of property maxContours.
      */
     public void setMaxContours(int maxContours) {
         this.maxContours = maxContours;
     }
     
-    /** Getter for property maxComponentPoints.
-     * @return Value of property maxComponentPoints.
+    /**
+     * Getter for property maxComponentPoints.
      *
+     * @return Value of property maxComponentPoints.
      */
     public int getMaxComponentPoints() {
         return this.maxComponentPoints & 0xFFFF;
     }
     
-    /** Setter for property maxComponentPoints.
-     * @param maxComponentPoints New value of property maxComponentPoints.
+    /**
+     * Setter for property maxComponentPoints.
      *
+     * @param maxComponentPoints New value of property maxComponentPoints.
      */
     public void setMaxComponentPoints(int maxComponentPoints) {
         this.maxComponentPoints = maxComponentPoints;
     }
     
-    /** Getter for property maxComponentContours.
-     * @return Value of property maxComponentContours.
+    /**
+     * Getter for property maxComponentContours.
      *
+     * @return Value of property maxComponentContours.
      */
     public int getMaxComponentContours() {
         return this.maxComponentContours & 0xFFFF;
     }
     
-    /** Setter for property maxComponentContours.
-     * @param maxComponentContours New value of property maxComponentContours.
+    /**
+     * Setter for property maxComponentContours.
      *
+     * @param maxComponentContours New value of property maxComponentContours.
      */
     public void setMaxComponentContours(int maxComponentContours) {
         this.maxComponentContours = maxComponentContours;
     }
     
-    /** Getter for property maxZones.
-     * @return Value of property maxZones.
+    /**
+     * Getter for property maxZones.
      *
+     * @return Value of property maxZones.
      */
     public int getMaxZones() {
         return this.maxZones & 0xFFFF;
     }
     
-    /** Setter for property maxZones.
-     * @param maxZones New value of property maxZones.
+    /**
+     * Setter for property maxZones.
      *
+     * @param maxZones New value of property maxZones.
      */
     public void setMaxZones(int maxZones) {
         this.maxZones = maxZones;
     }
     
-    /** Getter for property maxTwilightPoints.
-     * @return Value of property maxTwilightPoints.
+    /**
+     * Getter for property maxTwilightPoints.
      *
+     * @return Value of property maxTwilightPoints.
      */
     public int getMaxTwilightPoints() {
         return this.maxTwilightPoints & 0xFFFF;
     }
     
-    /** Setter for property maxTwilightPoints.
-     * @param maxTwilightPoints New value of property maxTwilightPoints.
+    /**
+     * Setter for property maxTwilightPoints.
      *
+     * @param maxTwilightPoints New value of property maxTwilightPoints.
      */
     public void setMaxTwilightPoints(int maxTwilightPoints) {
         this.maxTwilightPoints = maxTwilightPoints;
     }
     
-    /** Getter for property maxStorage.
-     * @return Value of property maxStorage.
+    /**
+     * Getter for property maxStorage.
      *
+     * @return Value of property maxStorage.
      */
     public int getMaxStorage() {
         return this.maxStorage & 0xFFFF;
     }
     
-    /** Setter for property maxStorage.
-     * @param maxStorage New value of property maxStorage.
+    /**
+     * Setter for property maxStorage.
      *
+     * @param maxStorage New value of property maxStorage.
      */
     public void setMaxStorage(int maxStorage) {
         this.maxStorage = maxStorage;
     }
     
-    /** Getter for property maxFunctionDefs.
-     * @return Value of property maxFunctionDefs.
+    /**
+     * Getter for property maxFunctionDefs.
      *
+     * @return Value of property maxFunctionDefs.
      */
     public int getMaxFunctionDefs() {
         return this.maxFunctionDefs & 0xFFFF;
     }
     
-    /** Setter for property maxFunctionDefs.
-     * @param maxFunctionDefs New value of property maxFunctionDefs.
+    /**
+     * Setter for property maxFunctionDefs.
      *
+     * @param maxFunctionDefs New value of property maxFunctionDefs.
      */
     public void setMaxFunctionDefs(int maxFunctionDefs) {
         this.maxFunctionDefs = maxFunctionDefs;
     }
     
-    /** Getter for property maxInstructionDefs.
-     * @return Value of property maxInstructionDefs.
+    /**
+     * Getter for property maxInstructionDefs.
      *
+     * @return Value of property maxInstructionDefs.
      */
     public int getMaxInstructionDefs() {
         return this.maxInstructionDefs & 0xFFFF;
     }
     
-    /** Setter for property maxInstructionDefs.
-     * @param maxInstructionDefs New value of property maxInstructionDefs.
+    /**
+     * Setter for property maxInstructionDefs.
      *
+     * @param maxInstructionDefs New value of property maxInstructionDefs.
      */
     public void setMaxInstructionDefs(int maxInstructionDefs) {
         this.maxInstructionDefs = maxInstructionDefs;
     }
     
-    /** Getter for property maxStackElements.
-     * @return Value of property maxStackElements.
+    /**
+     * Getter for property maxStackElements.
      *
+     * @return Value of property maxStackElements.
      */
     public int getMaxStackElements() {
         return this.maxStackElements & 0xFFFF;
     }
     
-    /** Setter for property maxStackElements.
-     * @param maxStackElements New value of property maxStackElements.
+    /**
+     * Setter for property maxStackElements.
      *
+     * @param maxStackElements New value of property maxStackElements.
      */
     public void setMaxStackElements(int maxStackElements) {
         this.maxStackElements = maxStackElements;
     }
     
-    /** Getter for property maxSizeOfInstructions.
-     * @return Value of property maxSizeOfInstructions.
+    /**
+     * Getter for property maxSizeOfInstructions.
      *
+     * @return Value of property maxSizeOfInstructions.
      */
     public int getMaxSizeOfInstructions() {
         return this.maxSizeOfInstructions & 0xFFFF;
     }
     
-    /** Setter for property maxSizeOfInstructions.
-     * @param maxSizeOfInstructions New value of property maxSizeOfInstructions.
+    /**
+     * Setter for property maxSizeOfInstructions.
      *
+     * @param maxSizeOfInstructions New value of property maxSizeOfInstructions.
      */
     public void setMaxSizeOfInstructions(int maxSizeOfInstructions) {
         this.maxSizeOfInstructions = maxSizeOfInstructions;
     }
     
-    /** Getter for property maxComponentElements.
-     * @return Value of property maxComponentElements.
+    /**
+     * Getter for property maxComponentElements.
      *
+     * @return Value of property maxComponentElements.
      */
     public int getMaxComponentElements() {
         return this.maxComponentElements & 0xFFFF;
     }
     
-    /** Setter for property maxComponentElements.
-     * @param maxComponentElements New value of property maxComponentElements.
+    /**
+     * Setter for property maxComponentElements.
      *
+     * @param maxComponentElements New value of property maxComponentElements.
      */
     public void setMaxComponentElements(int maxComponentElements) {
         this.maxComponentElements = maxComponentElements;
     }
     
-    /** Getter for property maxComponentDepth.
-     * @return Value of property maxComponentDepth.
+    /**
+     * Getter for property maxComponentDepth.
      *
+     * @return Value of property maxComponentDepth.
      */
     public int getMaxComponentDepth() {
         return this.maxComponentDepth & 0xFFFF;
     }
     
-    /** Setter for property maxComponentDepth.
-     * @param maxComponentDepth New value of property maxComponentDepth.
+    /**
+     * Setter for property maxComponentDepth.
      *
+     * @param maxComponentDepth New value of property maxComponentDepth.
      */
     public void setMaxComponentDepth(int maxComponentDepth) {
         this.maxComponentDepth = maxComponentDepth;
     }
     
-    /**
-     * Create a pretty String
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Create a pretty String
+	 */
     @Override
 	public String toString() {
         StringBuilder buf = new StringBuilder();

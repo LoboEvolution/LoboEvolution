@@ -25,6 +25,9 @@ import javax.swing.JOptionPane;
 
 /**
  * A thread for printing in.
+ *
+  *
+  *
  */
 public class PrintThread extends Thread {
 
@@ -43,6 +46,7 @@ public class PrintThread extends Thread {
 	 *            the pages
 	 * @param pjob
 	 *            the pjob
+	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
 	public PrintThread(PDFPrintPage pages, PrinterJob pjob, PDFViewer dialog) {
 		ptPages = pages;
@@ -56,6 +60,7 @@ public class PrintThread extends Thread {
 	 *
 	 * @see java.lang.Thread#run()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void run() {
 		try {

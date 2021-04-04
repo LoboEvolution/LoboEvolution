@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.css.selector;
@@ -26,8 +23,14 @@ package org.loboevolution.css.selector;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
+/**
+ * <p>AttributeSelectorTest class.</p>
+ */
 public class AttributeSelectorTest extends LoboUnitTest{
 	
+	/**
+	 * <p>attributeSelector.</p>
+	 */
 	@Test
     public void attributeSelector() {
 		final String css = "div[id] {color: red}";		
@@ -47,6 +50,9 @@ public class AttributeSelectorTest extends LoboUnitTest{
         
     }
 	
+	/**
+	 * <p>attributeValueSelector.</p>
+	 */
 	@Test
     public void attributeValueSelector() {
 		final String css = "div[id] {color: green} div[id=myId] {color: red}";
@@ -66,6 +72,9 @@ public class AttributeSelectorTest extends LoboUnitTest{
         
     }
 	
+	/**
+	 * <p>attributeValueContainsSelector.</p>
+	 */
 	@Test
     public void attributeValueContainsSelector() {
 		final String css = "div[class~=intro2] {color: red}";
@@ -85,6 +94,9 @@ public class AttributeSelectorTest extends LoboUnitTest{
         
     }
 	
+	/**
+	 * <p>attributeValueStartingSelector.</p>
+	 */
 	@Test
     public void attributeValueStartingSelector() {
 		final String css = "div[class|=intro1] {color: red}";
@@ -104,6 +116,9 @@ public class AttributeSelectorTest extends LoboUnitTest{
         
     }
 	
+	/**
+	 * <p>attributeValueBeginSelector.</p>
+	 */
 	@Test
     public void attributeValueBeginSelector() {
 		final String css = "div[id^=my] {color: red}";
@@ -123,6 +138,9 @@ public class AttributeSelectorTest extends LoboUnitTest{
         
     }
 	
+	/**
+	 * <p>attributeValueEndSelector.</p>
+	 */
 	@Test
     public void attributeValueEndSelector() {
 		final String css = "div[class$=intro2] {color: red}";
@@ -142,6 +160,9 @@ public class AttributeSelectorTest extends LoboUnitTest{
         
     }
 	
+	/**
+	 * <p>attributeValueContainSelector.</p>
+	 */
 	@Test
     public void attributeValueContainSelector() {
 		final String css = "div[class*=intro2] {color: red}";

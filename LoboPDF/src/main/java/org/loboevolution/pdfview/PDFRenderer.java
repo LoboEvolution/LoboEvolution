@@ -52,6 +52,9 @@ import java.util.Stack;
  * When the run method is called, this class goes through all remaining commands
  * in the PDF Page and draws them to its buffered image.  It then updates any
  * ImageConsumers with the drawn data.
+ *
+  *
+  *
  */
 public class PDFRenderer extends BaseWatchable implements Runnable {
 
@@ -88,18 +91,26 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /** how long (in milliseconds) to wait between image updates */
     public static final long UPDATE_DURATION = 200;
+    /** Constant <code>NOPHASE=-1000</code> */
     public static final float NOPHASE = -1000;
+    /** Constant <code>NOWIDTH=-1000</code> */
     public static final float NOWIDTH = -1000;
+    /** Constant <code>NOLIMIT=-1000</code> */
     public static final float NOLIMIT = -1000;
+    /** Constant <code>NOCAP=-1000</code> */
     public static final int NOCAP = -1000;
+    /** Constant <code>NODASH</code> */
     public static final float[] NODASH = null;
+    /** Constant <code>NOJOIN=-1000</code> */
     public static final int NOJOIN = -1000;
     
 
     /**
      * create a new PDFGraphics state
+     *
      * @param page the current page
      * @param imageinfo the paramters of the image to render
+     * @param bi a {@link java.awt.image.BufferedImage} object.
      */
     public PDFRenderer(PDFPage page, ImageInfo imageinfo, BufferedImage bi) {
         super();
@@ -116,6 +127,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
      * create a new PDFGraphics state, given a Graphics2D. This version
      * will <b>not</b> create an image, and you will get a NullPointerException
      * if you attempt to call getImage().
+     *
      * @param page the current page
      * @param g the Graphics2D object to use for drawing
      * @param imgbounds the bounds of the image into which to fit the page
@@ -205,10 +217,12 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * draw an outline using the current stroke and draw paint
+     *
      * @param s the path to stroke
      * @return a Rectangle2D to which the current region being
      * drawn will be added.  May also be null, in which case no dirty
      * region will be recorded.
+     * @param autoAdjustStroke a boolean.
      */
     public Rectangle2D stroke(GeneralPath s, boolean autoAdjustStroke) {
         // TODO: consider autoAdjustStroke here instead of during parsing
@@ -248,6 +262,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * draw an outline.
+     *
      * @param p the path to draw
      * @param bs the stroke with which to draw the path
      */
@@ -260,7 +275,9 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * fill an outline using the current fill paint
+     *
      * @param s the path to fill
+     * @return a {@link java.awt.geom.Rectangle2D} object.
      */
     public Rectangle2D fill(GeneralPath s) {
         this.g.setComposite(this.state.fillAlpha);
@@ -275,7 +292,9 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * draw an image.
+     *
      * @param image the image to draw
+     * @return a {@link java.awt.geom.Rectangle2D} object.
      */
     public Rectangle2D drawImage(PDFImage image) {
 
@@ -471,6 +490,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     /**
      * add the path to the current clip.  The new clip will be the intersection
      * of the old clip and given path.
+     *
+     * @param s a {@link java.awt.geom.GeneralPath} object.
      */
     public void clip(GeneralPath s) {
         this.g.clip(s);
@@ -488,6 +509,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * get the current affinetransform
+     *
+     * @return a {@link java.awt.geom.AffineTransform} object.
      */
     public AffineTransform getTransform() {
         return this.state.xform;
@@ -495,6 +518,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * concatenate the given transform with the current transform
+     *
+     * @param at a {@link java.awt.geom.AffineTransform} object.
      */
     public void transform(AffineTransform at) {
         this.state.xform.concatenate(at);
@@ -503,6 +528,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * replace the current transform with the given one.
+     *
+     * @param at a {@link java.awt.geom.AffineTransform} object.
      */
     public void setTransform(AffineTransform at) {
         this.state.xform = at;
@@ -511,6 +538,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * get the initial transform from page space to Java space
+     *
+     * @return a {@link java.awt.geom.AffineTransform} object.
      */
     public AffineTransform getInitialTransform() {
         return this.page.getInitialTransform(this.imageinfo.width,
@@ -520,6 +549,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * Set some or all aspects of the current stroke.
+     *
      * @param w the width of the stroke, or NOWIDTH to leave it unchanged
      * @param cap the end cap style, or NOCAP to leave it unchanged
      * @param join the join style, or NOJOIN to leave it unchanged
@@ -558,6 +588,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * get the current stroke as a BasicStroke
+     *
+     * @return a {@link java.awt.BasicStroke} object.
      */
     public BasicStroke getStroke() {
         return this.state.stroke;
@@ -565,6 +597,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * set the current stroke as a BasicStroke
+     *
+     * @param bs a {@link java.awt.BasicStroke} object.
      */
     public void setStroke(BasicStroke bs) {
         this.state.stroke = bs;
@@ -572,6 +606,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * set the stroke color
+     *
+     * @param paint a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
     public void setStrokePaint(PDFPaint paint) {
         this.state.strokePaint = paint;
@@ -579,6 +615,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * set the fill color
+     *
+     * @param paint a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
     public void setFillPaint(PDFPaint paint) {
         this.state.fillPaint = paint;
@@ -586,6 +624,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * set the stroke alpha
+     *
+     * @param alpha a float.
      */
     public void setStrokeAlpha(float alpha) {
         this.state.strokeAlpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
@@ -594,6 +634,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * set the stroke alpha
+     *
+     * @param alpha a float.
      */
     public void setFillAlpha(float alpha) {
         this.state.fillAlpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
@@ -602,6 +644,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * Add an image observer
+     *
+     * @param observer a {@link java.awt.image.ImageObserver} object.
      */
     public void addObserver(ImageObserver observer) {
         if (observer == null) {
@@ -635,6 +679,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * Remove an image observer
+     *
+     * @param observer a {@link java.awt.image.ImageObserver} object.
      */
     public void removeObserver(ImageObserver observer) {
         synchronized (this.observers) {
@@ -644,6 +690,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * Set the last shape drawn
+     *
+     * @param shape a {@link java.awt.geom.GeneralPath} object.
      */
     public void setLastShape(GeneralPath shape) {
         this.lastShape = shape;
@@ -651,6 +699,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * Get the last shape drawn
+     *
+     * @return a {@link java.awt.geom.GeneralPath} object.
      */
     public GeneralPath getLastShape() {
         return this.lastShape;
@@ -658,6 +708,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * If exists, returns the image which is used by the renderer.
+     *
      * @return a BufferedImage or null
      */
     public BufferedImage getImage() {
@@ -666,6 +717,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     }
     
     /**
+     * {@inheritDoc}
+     *
      * Setup rendering.  Called before iteration begins
      */
     @Override
@@ -687,20 +740,13 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         }
     }
 
-    /**
-     * Draws the next command in the PDFPage to the buffered image.
-     * The image will be notified about changes no less than every
-     * UPDATE_DURATION milliseconds.
-     *
-     * @return <ul><li>Watchable.RUNNING when there are commands to be processed
-     *             <li>Watchable.NEEDS_DATA when there are no commands to be
-     *                 processed, but the page is not yet complete
-     *             <li>Watchable.COMPLETED when the page is done and all
-     *                 the commands have been processed
-     *             <li>Watchable.STOPPED if the image we are rendering into
-     *                 has gone away
-     *         </ul>
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Draws the next command in the PDFPage to the buffered image.
+	 * The image will be notified about changes no less than every
+	 * UPDATE_DURATION milliseconds.
+	 */
     @Override
 	public int iterate() throws Exception {
         // make sure we have a page to render
@@ -765,6 +811,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Called when iteration has stopped
      */
     @Override
@@ -1022,16 +1070,21 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         }
     }
 
-	/*************************************************************************
+	/**
+	 * <p>Getter for the field <code>lastTransform</code>.</p>
+	 *
 	 * @return Returns the lastTransform.
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public AffineTransform getLastTransform() {
 		return this.lastTransform;
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Remember the current transformation
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public void rememberTransformation() {
 		this.lastTransform = this.state.xform;
 	}

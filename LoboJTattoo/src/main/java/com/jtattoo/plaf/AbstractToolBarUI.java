@@ -50,8 +50,8 @@ import javax.swing.plaf.basic.BasicToolBarUI;
 /**
  * <p>Abstract AbstractToolBarUI class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public abstract class AbstractToolBarUI extends BasicToolBarUI {
 

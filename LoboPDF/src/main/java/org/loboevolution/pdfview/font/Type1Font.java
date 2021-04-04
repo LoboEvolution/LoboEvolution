@@ -34,7 +34,9 @@ import org.loboevolution.pdfview.PDFObject;
 
 /**
  * A representation, with parser, of an Adobe Type 1 font.
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class Type1Font extends OutlineFont {
 
@@ -57,9 +59,11 @@ public class Type1Font extends OutlineFont {
 
     /**
      * create a new Type1Font based on a font data stream and an encoding.
+     *
      * @param baseName the postscript name of this font
      * @param src the Font object as a stream with a dictionary
      * @param descriptor the descriptor for this font
+     * @throws java.io.IOException if any.
      */
     public Type1Font(String baseName, PDFObject src,
             PDFFontDescriptor descriptor) throws IOException {
@@ -75,7 +79,13 @@ public class Type1Font extends OutlineFont {
         }
     }
 
-    /** Read a font from it's data, start position and length */
+    /**
+     * Read a font from it's data, start position and length
+     *
+     * @param font an array of {@link byte} objects.
+     * @param start a int.
+     * @param len a int.
+     */
     protected void parseFont(byte[] font, int start, int len) {
         this.name2width = new HashMap<>();
 
@@ -794,7 +804,9 @@ public class Type1Font extends OutlineFont {
         gp.append(pathA, false);
     }
 
-    /** 
+    /**
+     * {@inheritDoc}
+     *
      * Get the width of a given character
      *
      * This method is overridden to work if the width array hasn't been
@@ -846,12 +858,11 @@ public class Type1Font extends OutlineFont {
         return gp;
     }
 
-    /**
-     * Get a glyph outline by name
-     *
-     * @param name the name of the desired glyph
-     * @return the glyph outline, or null if unavailable
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get a glyph outline by name
+	 */
     @Override
 	protected GeneralPath getOutline(String name, float width) {
         // make sure we have a valid name
@@ -889,19 +900,23 @@ public class Type1Font extends OutlineFont {
         }
     }
 
-    /**
-     * Get a glyph outline by character code
-     *
-     * Note this method must always return an outline 
-     *
-     * @param src the character code of the desired glyph
-     * @return the glyph outline
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get a glyph outline by character code
+	 *
+	 * Note this method must always return an outline
+	 */
     @Override
 	protected GeneralPath getOutline(char src, float width) {
         return getOutline(this.chr2name[src & 0xff], width);
     }
     
+    /**
+     * <p>isName2OutlineFilled.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isName2OutlineFilled() {
     	return (name2outline!=null) && !name2outline.isEmpty();
     }

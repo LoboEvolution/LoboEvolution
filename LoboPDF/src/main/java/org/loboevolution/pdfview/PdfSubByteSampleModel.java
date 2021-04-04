@@ -32,7 +32,8 @@ import java.awt.image.SampleModel;
  * components, does not allow for such byte spanning, while the PDF
  * specification does permit it -- hence the existence of this class.
  *
- * @author Luke Kirby, Pirion Systems
+ * Author Luke Kirby, Pirion Systems
+  *
  */
 public class PdfSubByteSampleModel extends SampleModel
 {
@@ -44,6 +45,14 @@ public class PdfSubByteSampleModel extends SampleModel
     private final int[] sampleSize;
     private final int ignoredBitsPerComponentPerByte;
 
+    /**
+     * <p>Constructor for PdfSubByteSampleModel.</p>
+     *
+     * @param w a int.
+     * @param h a int.
+     * @param numComponents a int.
+     * @param bitsPerComponent a int.
+     */
     public PdfSubByteSampleModel(int w, int h, int numComponents, int bitsPerComponent)
     {
         super(DataBuffer.TYPE_BYTE, w, h, numComponents);
@@ -65,12 +74,14 @@ public class PdfSubByteSampleModel extends SampleModel
         ignoredBitsPerComponentPerByte = 8 - bitsPerBand;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getNumDataElements()
     {
         return transferBytesPerPixel;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object getDataElements(int x, int y, Object obj, DataBuffer data)
     {
@@ -92,18 +103,21 @@ public class PdfSubByteSampleModel extends SampleModel
         return (b >>> shift) & componentMask;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setDataElements(int x, int y, Object obj, DataBuffer data)
     {
         throw new UnsupportedOperationException("read only");
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getSample(int x, int y, int b, DataBuffer data)
     {
         return getComponent(data, y * bitsPerLine + storageBitsPerPixel * x + bitsPerBand * b);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setSample(int x, int y, int b, int s, DataBuffer data)
     {
@@ -111,30 +125,35 @@ public class PdfSubByteSampleModel extends SampleModel
 
     }
 
+    /** {@inheritDoc} */
     @Override
     public SampleModel createCompatibleSampleModel(int w, int h)
     {
         throw new UnsupportedOperationException("Not required");
     }
 
+    /** {@inheritDoc} */
     @Override
     public SampleModel createSubsetSampleModel(int[] bands)
     {
         throw new UnsupportedOperationException("Not required");
     }
 
+    /** {@inheritDoc} */
     @Override
     public DataBuffer createDataBuffer()
     {
         throw new UnsupportedOperationException("Not required");
     }
 
+    /** {@inheritDoc} */
     @Override
     public int[] getSampleSize()
     {
         return sampleSize;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getSampleSize(int band)
     {

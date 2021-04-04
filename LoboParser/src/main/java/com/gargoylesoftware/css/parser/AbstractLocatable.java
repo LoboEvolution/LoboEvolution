@@ -17,17 +17,20 @@ package com.gargoylesoftware.css.parser;
 /**
  * Abstract base class of all locatables.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public class AbstractLocatable implements Locatable {
 
     private Locator locator_;
 
+    /** {@inheritDoc} */
     @Override
     public Locator getLocator() {
         return locator_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setLocator(final Locator locator) {
         locator_ = locator;

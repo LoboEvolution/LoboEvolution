@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.dom.smil;
@@ -29,8 +26,8 @@ import org.loboevolution.html.dom.nodeimpl.DOMException;
  * This interface define the set of animation extensions for SMIL. The
  * attributes will go in a XLink interface.
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public interface SMILAnimation extends SMILElement, ElementTargetAttributes, ElementTime, ElementTimeControl {
 	
@@ -99,7 +96,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 */
 	default void setAccumulate(short accumulate) {}
 
-    /**
+	/**
 	 * A code representing the value of the calcMode attribute, as defined
 	 * above.
 	 *
@@ -117,7 +114,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 */
 	default void setCalcMode(short calcMode) {}
 
-    /**
+	/**
 	 * A DOMString representing the value of the keySplines
 	 * attribute. Need an interface a point (x1,y1,x2,y2)
 	 *
@@ -135,7 +132,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 */
 	default void setKeySplines(String keySplines) {}
 
-    /**
+	/**
 	 * A list of the time value of the keyTimes attribute.
 	 *
 	 * @exception DOMException
@@ -152,7 +149,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 */
 	default void setKeyTimes(TimeList keyTimes)  {}
 
-    /**
+	/**
 	 * A DOMString representing the value of the values attribute.
 	 *
 	 * @exception DOMException
@@ -167,6 +164,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *
 	 * @param values a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	void setValues(String values) throws DOMException;
 
@@ -185,6 +183,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *
 	 * @param from a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	void setFrom(String from) throws DOMException;
 
@@ -203,6 +202,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *
 	 * @param to a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	void setTo(String to) throws DOMException;
 
@@ -221,6 +221,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *
 	 * @param by a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
 	 */
 	void setBy(String by) throws DOMException;
 

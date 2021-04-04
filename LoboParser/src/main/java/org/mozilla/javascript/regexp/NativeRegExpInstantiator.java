@@ -3,6 +3,12 @@ package org.mozilla.javascript.regexp;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
+/**
+ * <p>NativeRegExpInstantiator class.</p>
+ *
+ *
+ *
+ */
 public class NativeRegExpInstantiator {
 
     private NativeRegExpInstantiator() {}

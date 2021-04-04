@@ -32,8 +32,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>MintDefaultTheme class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class MintDefaultTheme extends AbstractTheme {
 

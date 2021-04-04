@@ -30,8 +30,8 @@ import com.jtattoo.plaf.BaseIcons;
 /**
  * <p>MintIconFactory class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class MintIconFactory implements AbstractIconFactory {
 

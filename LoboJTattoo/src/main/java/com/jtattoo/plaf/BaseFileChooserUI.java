@@ -40,8 +40,8 @@ import javax.swing.plaf.metal.MetalFileChooserUI;
 /**
  * <p>BaseFileChooserUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseFileChooserUI extends MetalFileChooserUI {
 

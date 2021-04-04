@@ -44,8 +44,8 @@ import javax.swing.plaf.basic.BasicSliderUI;
 /**
  * <p>BaseSliderUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseSliderUI extends BasicSliderUI {
 

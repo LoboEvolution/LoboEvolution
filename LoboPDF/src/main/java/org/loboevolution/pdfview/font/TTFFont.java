@@ -42,6 +42,9 @@ import org.loboevolution.pdfview.font.ttf.TrueTypeFont;
 
 /**
  * A true-type font
+ *
+  *
+  *
  */
 public class TTFFont extends OutlineFont {
 
@@ -51,6 +54,14 @@ public class TTFFont extends OutlineFont {
     /** the number of units per em in the font */
     private float unitsPerEm;
 
+    /**
+     * <p>Constructor for TTFFont.</p>
+     *
+     * @param baseFont a {@link java.lang.String} object.
+     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
+     * @throws java.io.IOException if any.
+     */
     public TTFFont (String baseFont, PDFObject fontObj,
                     PDFFontDescriptor descriptor) throws IOException {
         this(baseFont, fontObj, descriptor, null);
@@ -61,6 +72,12 @@ public class TTFFont extends OutlineFont {
      * an in-line true-type font file (under key "FontFile2"), use the
      * true type font.  Otherwise, parse the description for key information
      * and use that to generate an appropriate font.
+     *
+     * @param baseFont a {@link java.lang.String} object.
+     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
+     * @param fontFile a {@link java.io.File} object.
+     * @throws java.io.IOException if any.
      */
     public TTFFont (String baseFont, PDFObject fontObj,
                     PDFFontDescriptor descriptor, File fontFile)
@@ -100,14 +117,21 @@ public class TTFFont extends OutlineFont {
         }
     }
 
+    /**
+     * <p>getNames.</p>
+     *
+     * @return a {@link java.util.Collection} object.
+     */
     public Collection<String> getNames()
     {
         return font.getNames();
     }
 
-    /**
-     * Get the outline of a character given the character code
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the outline of a character given the character code
+	 */
     @Override
 	protected synchronized GeneralPath getOutline (char src, float width) {
         // find the cmaps
@@ -149,9 +173,9 @@ public class TTFFont extends OutlineFont {
     /**
      * lookup the outline using the (3, 1) cmap, as specified in 32000-1:2008,
      * 9.6.6.4, when an Encoding is specified.
-     * 
-     * @param val
-     * @param width
+     *
+     * @param val a char.
+     * @param width a float.
      * @return GeneralPath
      */
     protected synchronized GeneralPath getOutlineFrom31CMap (char val,
@@ -176,9 +200,11 @@ public class TTFFont extends OutlineFont {
         return null;
     }
 
-    /**
-     * Get the outline of a character given the character name
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the outline of a character given the character name
+	 */
     @Override
 	protected synchronized GeneralPath getOutline (String name, float width) {
         int idx;
@@ -199,6 +225,8 @@ public class TTFFont extends OutlineFont {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Get the outline of a character given the glyph id
      */
     protected synchronized GeneralPath getOutline (int glyphId, float width) {
@@ -235,6 +263,9 @@ public class TTFFont extends OutlineFont {
 
     /**
      * Render a simple glyf
+     *
+     * @param g a {@link org.loboevolution.pdfview.font.ttf.GlyfSimple} object.
+     * @return a {@link java.awt.geom.GeneralPath} object.
      */
     protected GeneralPath renderSimpleGlyph (GlyfSimple g) {
         // the current contour
@@ -276,6 +307,10 @@ public class TTFFont extends OutlineFont {
 
     /**
      * Render a compound glyf
+     *
+     * @param glyf a {@link org.loboevolution.pdfview.font.ttf.GlyfTable} object.
+     * @param g a {@link org.loboevolution.pdfview.font.ttf.GlyfCompound} object.
+     * @return a {@link java.awt.geom.GeneralPath} object.
      */
     protected GeneralPath renderCompoundGlyph (GlyfTable glyf, GlyfCompound g) {
         GeneralPath gp = new GeneralPath ();

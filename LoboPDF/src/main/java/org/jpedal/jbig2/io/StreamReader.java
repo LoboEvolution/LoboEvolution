@@ -53,6 +53,12 @@ import java.io.IOException;
 
 import org.jpedal.jbig2.pdf.PDFSegment;
 
+/**
+ * <p>StreamReader class.</p>
+ *
+  *
+  *
+ */
 public class StreamReader {
 	private final byte[] data;
 
@@ -60,10 +66,21 @@ public class StreamReader {
 
 	private int bytePointer = 0;
 
+	/**
+	 * <p>Constructor for StreamReader.</p>
+	 *
+	 * @param data an array of {@link byte} objects.
+	 */
 	public StreamReader(byte[] data) {
 		this.data = data;
 	}
 
+	/**
+	 * <p>readByte.</p>
+	 *
+	 * @param pdfSeg a {@link org.jpedal.jbig2.pdf.PDFSegment} object.
+	 * @return a short.
+	 */
 	public short readByte(PDFSegment pdfSeg) {
 		short bite = (short) (data[bytePointer++] & 255);
 
@@ -73,6 +90,13 @@ public class StreamReader {
 		return bite;
 	}
 
+	/**
+	 * <p>readByte.</p>
+	 *
+	 * @param buf an array of {@link short} objects.
+	 * @param pdfSeg a {@link org.jpedal.jbig2.pdf.PDFSegment} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public void readByte(short[] buf, PDFSegment pdfSeg) throws IOException {
 		for (int i = 0; i < buf.length; i++) {
 			buf[i] = (short) (data[bytePointer++] & 255);
@@ -82,18 +106,33 @@ public class StreamReader {
 			pdfSeg.writeToHeader(buf);
 	}
 
+	/**
+	 * <p>readByte.</p>
+	 *
+	 * @return a short.
+	 */
 	public short readByte() {
 		short bite = (short) (data[bytePointer++] & 255);
 
 		return bite;
 	}
 
+	/**
+	 * <p>readByte.</p>
+	 *
+	 * @param buf an array of {@link short} objects.
+	 */
 	public void readByte(short[] buf) {
 		for (int i = 0; i < buf.length; i++) {
 			buf[i] = (short) (data[bytePointer++] & 255);
 		}
 	}
 
+	/**
+	 * <p>readBit.</p>
+	 *
+	 * @return a int.
+	 */
 	public int readBit() {
 		short buf = readByte();
 		short mask = (short) (1 << bitPointer);
@@ -110,6 +149,12 @@ public class StreamReader {
 		return bit;
 	}
 
+	/**
+	 * <p>readBits.</p>
+	 *
+	 * @param num a int.
+	 * @return a int.
+	 */
 	public int readBits(int num) {
 		int result = 0;
 
@@ -120,15 +165,28 @@ public class StreamReader {
 		return result;
 	}
 
+	/**
+	 * <p>movePointer.</p>
+	 *
+	 * @param ammount a int.
+	 */
 	public void movePointer(int ammount) {
 		bytePointer += ammount;
 	}
 
+	/**
+	 * <p>consumeRemainingBits.</p>
+	 */
 	public void consumeRemainingBits() {
 		if (bitPointer != 7)
 			readBits(bitPointer + 1);
 	}
 
+	/**
+	 * <p>isFinished.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isFinished() {
 		return bytePointer == data.length;
 	}

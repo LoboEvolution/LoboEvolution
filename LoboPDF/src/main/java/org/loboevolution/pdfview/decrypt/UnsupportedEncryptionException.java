@@ -25,14 +25,26 @@ package org.loboevolution.pdfview.decrypt;
  *
  * @see EncryptionUnsupportedByPlatformException
  * @see EncryptionUnsupportedByProductException
- * @author Luke Kirby
+ * Author Luke Kirby
+  *
  */
 public abstract class UnsupportedEncryptionException extends Exception {
 
+    /**
+     * <p>Constructor for UnsupportedEncryptionException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     protected UnsupportedEncryptionException(String message) {
         super(message);
     }
 
+    /**
+     * <p>Constructor for UnsupportedEncryptionException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param cause a {@link java.lang.Throwable} object.
+     */
     protected UnsupportedEncryptionException(String message, Throwable cause) {
         super(message, cause);
     }

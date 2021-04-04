@@ -30,8 +30,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>FastDefaultTheme class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class FastDefaultTheme extends AbstractTheme {
 

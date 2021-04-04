@@ -28,7 +28,10 @@ import org.loboevolution.pdfview.function.PDFFunction;
  * A color space that uses another color space to return values, and a
  * function to map between values in the input and input values to the
  * alternate color space
- */ 
+ *
+  *
+  *
+ */
 public class AlternateColorSpace extends PDFColorSpace {
     /** The alternate color space */
     private final PDFColorSpace alternate;
@@ -38,7 +41,12 @@ public class AlternateColorSpace extends PDFColorSpace {
     
     private AltColorSpace altcolorspace;
     
-    /** Creates a new instance of AlternateColorSpace */
+    /**
+     * Creates a new instance of AlternateColorSpace
+     *
+     * @param alternate a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
+     * @param function a {@link org.loboevolution.pdfview.function.PDFFunction} object.
+     */
     public AlternateColorSpace(PDFColorSpace alternate, PDFFunction function) {
         super(null);
         
@@ -47,6 +55,8 @@ public class AlternateColorSpace extends PDFColorSpace {
     }
     
     /**
+     * {@inheritDoc}
+     *
      * get the number of components expected in the getPaint command
      */
     @Override public int getNumComponents() {
@@ -58,12 +68,10 @@ public class AlternateColorSpace extends PDFColorSpace {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * get the PDFPaint representing the color described by the
      * given color components
-     * @param components the color components corresponding to the given
-     * colorspace
-     * @return a PDFPaint object representing the closest Color to the
-     * given components.
      */
     @Override public PDFPaint getPaint(float[] components) {
         if (this.function != null) {
@@ -75,6 +83,8 @@ public class AlternateColorSpace extends PDFColorSpace {
     }
     
     /**
+     * {@inheritDoc}
+     *
      * get the original Java ColorSpace.
      */
     @Override public ColorSpace getColorSpace() {
@@ -83,10 +93,13 @@ public class AlternateColorSpace extends PDFColorSpace {
     	//return this.alternate.getColorSpace();
     }
     
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Get the PDF function
+	 *
 	 * @return PDFFunction
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public PDFFunction getFunktion() {
 		return this.function;		
 	}

@@ -1,3 +1,23 @@
+/*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact info: ivan.difrancesco@yahoo.it
+ */
+
 package org.loboevolution.html.io;
 
 import java.io.IOException;
@@ -9,12 +29,21 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.parser.HtmlParser;
 import org.xml.sax.ErrorHandler;
 
+/**
+ * <p>LocalWritableLineReader class.</p>
+ *
+ *
+ *
+ */
 public class LocalWritableLineReader extends WritableLineReader {
 	
 	private HTMLDocumentImpl doc;
 	
 	/**
-	 * @param reader
+	 * <p>Constructor for LocalWritableLineReader.</p>
+	 *
+	 * @param reader a {@link java.io.LineNumberReader} object.
+	 * @param doc a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
 	public LocalWritableLineReader(HTMLDocumentImpl doc, LineNumberReader reader) {
 		super(reader);
@@ -22,12 +51,15 @@ public class LocalWritableLineReader extends WritableLineReader {
 	}
 
 	/**
-	 * @param reader
+	 * <p>Constructor for LocalWritableLineReader.</p>
+	 *
+	 * @param reader a {@link java.io.Reader} object.
 	 */
 	public LocalWritableLineReader(Reader reader) {
 		super(reader);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void write(String text) throws IOException {
 		super.write(text);

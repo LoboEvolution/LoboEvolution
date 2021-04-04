@@ -21,7 +21,8 @@ import java.util.List;
  * of selectors, without defining or constraining how this collection is
  * implemented.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public interface SelectorList extends List<Selector> {
 }

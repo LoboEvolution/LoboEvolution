@@ -21,7 +21,8 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
 /**
  * Basic interface of the CSS parser.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public interface CSSParser {
 
@@ -83,6 +84,8 @@ public interface CSSParser {
      * @see InputSource
      * @see #setDocumentHandler
      * @see #setErrorHandler
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
+     * @throws java.io.IOException if any.
      */
     void parseStyleSheet(InputSource source) throws CSSException, IOException;
 
@@ -95,6 +98,8 @@ public interface CSSParser {
      * @exception java.io.IOException An IO exception from the parser,
      *            possibly from a byte stream or character stream
      *            supplied by the application.
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
+     * @throws java.io.IOException if any.
      */
     void parseStyleDeclaration(InputSource source) throws CSSException, IOException;
 
@@ -107,10 +112,14 @@ public interface CSSParser {
      * @exception java.io.IOException An IO exception from the parser,
      *            possibly from a byte stream or character stream
      *            supplied by the application.
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
+     * @throws java.io.IOException if any.
      */
     void parseRule(InputSource source) throws CSSException, IOException;
 
     /**
+     * <p>getParserVersion.</p>
+     *
      * @return a string about which CSS language is supported by this
      * parser. For CSS Level 1, it returns "http://www.w3.org/TR/REC-CSS1", for
      * CSS Level 2, it returns "http://www.w3.org/TR/REC-CSS2". Note that a
@@ -129,6 +138,8 @@ public interface CSSParser {
      * @exception java.io.IOException An IO exception from the parser,
      *            possibly from a byte stream or character stream
      *            supplied by the application.
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
+     * @throws java.io.IOException if any.
      */
     SelectorList parseSelectors(InputSource source) throws CSSException, IOException;
 
@@ -142,6 +153,8 @@ public interface CSSParser {
      * @exception java.io.IOException An IO exception from the parser,
      *            possibly from a byte stream or character stream
      *            supplied by the application.
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
+     * @throws java.io.IOException if any.
      */
     LexicalUnit parsePropertyValue(InputSource source) throws CSSException, IOException;
 
@@ -155,15 +168,21 @@ public interface CSSParser {
      * @exception java.io.IOException An IO exception from the parser,
      *            possibly from a byte stream or character stream
      *            supplied by the application.
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
+     * @throws java.io.IOException if any.
      */
     boolean parsePriority(InputSource source) throws CSSException, IOException;
 
     /**
+     * <p>setIeStarHackAccepted.</p>
+     *
      * @param accepted trur if the parser should accept ie star hack
      */
     void setIeStarHackAccepted(boolean accepted);
 
     /**
+     * <p>isIeStarHackAccepted.</p>
+     *
      * @return accepted trur if the parser should accept ie star hack
      */
     boolean isIeStarHackAccepted();

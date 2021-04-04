@@ -25,9 +25,9 @@ import org.mozilla.javascript.regexp.NativeRegExp;
  * ported directly from C. Latest port is from version 1.40.12.19
  * in the JSFUN13_BRANCH.
  *
- * @author Mike McCabe
- * @author Norris Boyd
- * @author Ronald Brill
+ * Author Mike McCabe
+ * Author Norris Boyd
+ * Author Ronald Brill
  */
 final class NativeString extends IdScriptableObject
 {
@@ -45,6 +45,7 @@ final class NativeString extends IdScriptableObject
         string = s;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "String";
@@ -54,12 +55,14 @@ final class NativeString extends IdScriptableObject
         Id_length                    =  1,
         MAX_INSTANCE_ID              =  1;
 
+    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -69,6 +72,7 @@ final class NativeString extends IdScriptableObject
         return super.findInstanceIdInfo(s);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -76,6 +80,7 @@ final class NativeString extends IdScriptableObject
         return super.getInstanceIdName(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -85,6 +90,7 @@ final class NativeString extends IdScriptableObject
         return super.getInstanceIdValue(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -129,6 +135,7 @@ final class NativeString extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -194,6 +201,7 @@ final class NativeString extends IdScriptableObject
         initPrototypeMethod(STRING_TAG, id, s, fnName, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -581,10 +589,16 @@ final class NativeString extends IdScriptableObject
         return result.toString();
     }
 
+    /**
+     * <p>toCharSequence.</p>
+     *
+     * @return a {@link java.lang.CharSequence} object.
+     */
     public CharSequence toCharSequence() {
         return string;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return string instanceof String ? (String)string : string.toString();
@@ -593,6 +607,7 @@ final class NativeString extends IdScriptableObject
     /* Make array-style property lookup work for strings.
      * XXX is this ECMA?  A version check is probably needed. In js too.
      */
+    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start) {
         if (0 <= index && index < string.length()) {
@@ -601,6 +616,7 @@ final class NativeString extends IdScriptableObject
         return super.get(index, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value) {
         if (0 <= index && index < string.length()) {
@@ -609,6 +625,7 @@ final class NativeString extends IdScriptableObject
         super.put(index, start, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start) {
         if (0 <= index && index < string.length()) {
@@ -617,6 +634,7 @@ final class NativeString extends IdScriptableObject
         return super.has(index, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getAttributes(int index) {
         if (0 <= index && index < string.length()) {
@@ -629,6 +647,7 @@ final class NativeString extends IdScriptableObject
         return super.getAttributes(index);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object[] getIds(boolean nonEnumerable, boolean getSymbols) {
         // In ES6, Strings have entries in the property map for each character.
@@ -646,6 +665,7 @@ final class NativeString extends IdScriptableObject
         return super.getIds(nonEnumerable, getSymbols);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected ScriptableObject getOwnPropertyDescriptor(Context cx, Object id) {
        if (!(id instanceof Symbol)
@@ -932,6 +952,7 @@ final class NativeString extends IdScriptableObject
         return concat.insert(0, pad).toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k)
     {
@@ -943,6 +964,7 @@ final class NativeString extends IdScriptableObject
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

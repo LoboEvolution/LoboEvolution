@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Apr 16, 2005
@@ -41,7 +38,7 @@ import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
- * @author J. H. S.
+ * Author J. H. S.
  */
 class RLine extends BaseRCollection {
 	private boolean allowOverflow = false;
@@ -90,9 +87,8 @@ class RLine extends BaseRCollection {
 	 * This method adds and positions a renderable in the line, if possible. Note
 	 * that RLine does not set sizes, but only origins.
 	 *
-	 * @throws org.loboevolution.html.renderer.OverflowException Thrown if the renderable overflows the line. All
-	 *                           overflowing renderables are added to the exception.
 	 * @param renderable a {@link org.loboevolution.html.renderer.Renderable} object.
+	 * @throws org.loboevolution.html.renderer.OverflowException if any.
 	 */
 	public final void add(Renderable renderable) throws OverflowException {
 		if (renderable instanceof RWord) {

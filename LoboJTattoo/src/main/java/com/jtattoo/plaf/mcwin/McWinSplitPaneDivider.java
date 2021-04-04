@@ -30,8 +30,8 @@ import com.jtattoo.plaf.BaseSplitPaneDivider;
 /**
  * <p>McWinSplitPaneDivider class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
 

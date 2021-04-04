@@ -23,9 +23,10 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /**
- * Exposes a {@link ByteBuffer} as an {@link InputStream}.
+ * Exposes a {@link java.nio.ByteBuffer} as an {@link java.io.InputStream}.
  *
- * @author Luke Kirby
+ * Author Luke Kirby
+  *
  */
 public class ByteBufferInputStream extends InputStream {
 
@@ -34,6 +35,7 @@ public class ByteBufferInputStream extends InputStream {
 
     /**
      * Class constructor
+     *
      * @param buffer the buffer to present as an input stream, positioned
      *  at the current read position of the byte buffer
      */
@@ -41,6 +43,7 @@ public class ByteBufferInputStream extends InputStream {
         this.buffer = buffer;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
 
@@ -64,6 +67,7 @@ public class ByteBufferInputStream extends InputStream {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public long skip(long n) throws IOException {
         if (n <= 0) {
@@ -80,26 +84,31 @@ public class ByteBufferInputStream extends InputStream {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int read() throws IOException {
         return buffer.get();
     }
 
+    /** {@inheritDoc} */
     @Override
     public int available() throws IOException {
         return buffer.remaining();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void mark(int readlimit) {
         buffer.mark();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean markSupported() {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void reset() throws IOException {
         buffer.reset();

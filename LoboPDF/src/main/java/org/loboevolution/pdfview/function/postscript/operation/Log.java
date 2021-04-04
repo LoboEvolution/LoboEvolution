@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Log implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num</i> <b>log</b> <i>real</i> <p>
 	 *
 	 * returns the common logarithm (base 10) of num.

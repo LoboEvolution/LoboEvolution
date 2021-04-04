@@ -52,7 +52,8 @@ import org.loboevolution.pdfview.PDFStringUtil;
  * guess at a String representation for a password for encryption versions up to
  * and including 4.</p>
  *
- * @author Luke Kirby
+ * Author Luke Kirby
+  *
  */
 public class PDFPassword {
 
@@ -63,6 +64,7 @@ public class PDFPassword {
     /**
      * Ensure a non-null PDFPassword by substituting the empty password
      * for a null password
+     *
      * @param password the password, may be null
      * @return a non-null password
      */
@@ -77,6 +79,7 @@ public class PDFPassword {
 
     /**
      * Construct a byte-based password
+     *
      * @param passwordBytes the password bytes
      */
     public PDFPassword(byte[] passwordBytes) {
@@ -86,6 +89,7 @@ public class PDFPassword {
 
     /**
      * Construct a string-based password
+     *
      * @param passwordString the password
      */
     public PDFPassword(String passwordString) {

@@ -22,7 +22,10 @@ package org.loboevolution.pdfview.font.ttf;
 import java.nio.ByteBuffer;
 
 /**
- * A single simple glyph in a pdf font. 
+ * A single simple glyph in a pdf font.
+ *
+  *
+  *
  */
 public class GlyfSimple extends Glyf {
     /** the end points of the various contours */
@@ -40,15 +43,17 @@ public class GlyfSimple extends Glyf {
     /** the y coordinates */
     private short[] yCoords;
     
-    /** 
+    /**
      * Creates a new instance of a simple glyf
      */
     protected GlyfSimple() {
     }
     
-    /**
-     * Set the data for this glyf.
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Set the data for this glyf.
+	 */
     @Override
 	public void setData(ByteBuffer data) {
         // int pos = data.position();
@@ -135,12 +140,14 @@ public class GlyfSimple extends Glyf {
         setYCoords(yCoords);
     }
     
-    /**
-     * Get the data in this glyf as a byte buffer.  Return the basic
-     * glyf data only, since there is no specific data.  This method returns
-     * the data un-flipped, so subclasses can simply append to the allocated
-     * buffer.
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the data in this glyf as a byte buffer.  Return the basic
+	 * glyf data only, since there is no specific data.  This method returns
+	 * the data un-flipped, so subclasses can simply append to the allocated
+	 * buffer.
+	 */
     @Override
 	public ByteBuffer getData() {
         ByteBuffer buf = super.getData();
@@ -193,9 +200,11 @@ public class GlyfSimple extends Glyf {
         return buf;
     }
     
-    /**
-     * Get the length of this glyf. 
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this glyf.
+	 */
     @Override
 	public short getLength() {
         // start with the length of the superclass
@@ -234,6 +243,9 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Get the end point of a given contour
+     *
+     * @param index a int.
+     * @return a short.
      */
     public short getContourEndPoint(int index) {
         return this.contourEndPts[index];
@@ -241,20 +253,27 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Set the number of contours in this glyf
+     *
+     * @param contourEndPts an array of {@link short} objects.
      */
     protected void setContourEndPoints(short[] contourEndPts) {
         this.contourEndPts = contourEndPts;
     }
     
-   /**
-    * Get the number of instructions
-    */
+    /**
+     * Get the number of instructions
+     *
+     * @return a short.
+     */
     public short getNumInstructions() {
         return (short) this.instructions.length;
     }
     
     /**
      * Get a given instruction
+     *
+     * @param index a int.
+     * @return a byte.
      */
     public byte getInstruction(int index) {
         return this.instructions[index];
@@ -262,6 +281,8 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Set the instructions
+     *
+     * @param instructions an array of {@link byte} objects.
      */
     protected void setInstructions(byte[] instructions) {
         this.instructions = instructions;
@@ -269,6 +290,8 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Get the number of points in the glyf
+     *
+     * @return a short.
      */
     public short getNumPoints() {
         return (short) this.flags.length;
@@ -276,6 +299,9 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Get a given flag
+     *
+     * @param pointIndex a int.
+     * @return a byte.
      */
     public byte getFlag(int pointIndex) {
         return this.flags[pointIndex];
@@ -283,7 +309,10 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Determine whether the given point is on the curve
-     */ 
+     *
+     * @param pointIndex a int.
+     * @return a boolean.
+     */
     public boolean onCurve(int pointIndex) {
         return ((getFlag(pointIndex) & 0x1) != 0);
     }
@@ -291,7 +320,10 @@ public class GlyfSimple extends Glyf {
     /**
      * Determine whether the x value for the given point is byte or short.
      * If true, it is a byte, if false it is a short
-     */ 
+     *
+     * @param pointIndex a int.
+     * @return a boolean.
+     */
     protected boolean xIsByte(int pointIndex) {
         return ((getFlag(pointIndex) & 0x2) != 0);
     }
@@ -299,36 +331,50 @@ public class GlyfSimple extends Glyf {
     /**
      * Determine whether the x value for the given point is byte or short.
      * If true, it is a byte, if false it is a short
-     */ 
+     *
+     * @param pointIndex a int.
+     * @return a boolean.
+     */
     protected boolean yIsByte(int pointIndex) {
         return ((getFlag(pointIndex) & 0x4) != 0);
     }
     
     /**
      * Determine whether this flag repeats
-     */ 
+     *
+     * @param pointIndex a int.
+     * @return a boolean.
+     */
     protected boolean repeat(int pointIndex) {
         return ((getFlag(pointIndex) & 0x8) != 0);
     }
     
     /**
-     * Determine whether the x value for the given point is the same as 
+     * Determine whether the x value for the given point is the same as
      * the previous value.
-     */ 
+     *
+     * @param pointIndex a int.
+     * @return a boolean.
+     */
     protected boolean xIsSame(int pointIndex) {
         return ((getFlag(pointIndex) & 0x10) != 0);
     }
     
     /**
-     * Determine whether the y value for the given point is the same as 
+     * Determine whether the y value for the given point is the same as
      * the previous value.
-     */ 
+     *
+     * @param pointIndex a int.
+     * @return a boolean.
+     */
     protected boolean yIsSame(int pointIndex) {
         return ((getFlag(pointIndex) & 0x20) != 0);
     }
     
     /**
      * Set the flags
+     *
+     * @param flags an array of {@link byte} objects.
      */
     protected void setFlags(byte[] flags) {
         this.flags = flags;
@@ -336,6 +382,9 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Get a given x coordinate
+     *
+     * @param pointIndex a int.
+     * @return a short.
      */
     public short getXCoord(int pointIndex) {
         return this.xCoords[pointIndex];
@@ -343,6 +392,8 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Set the x coordinates
+     *
+     * @param xCoords an array of {@link short} objects.
      */
     protected void setXCoords(short[] xCoords) {
         this.xCoords = xCoords;
@@ -350,6 +401,9 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Get a given y coordinate
+     *
+     * @param pointIndex a int.
+     * @return a short.
      */
     public short getYCoord(int pointIndex) {
         return this.yCoords[pointIndex];
@@ -357,6 +411,8 @@ public class GlyfSimple extends Glyf {
     
     /**
      * Set the x coordinates
+     *
+     * @param yCoords an array of {@link short} objects.
      */
     protected void setYCoords(short[] yCoords) {
         this.yCoords = yCoords;

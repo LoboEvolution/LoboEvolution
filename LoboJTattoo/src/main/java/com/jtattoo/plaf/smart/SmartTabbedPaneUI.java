@@ -37,8 +37,8 @@ import com.jtattoo.plaf.BaseTabbedPaneUI;
 /**
  * author Michael Hagen
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 

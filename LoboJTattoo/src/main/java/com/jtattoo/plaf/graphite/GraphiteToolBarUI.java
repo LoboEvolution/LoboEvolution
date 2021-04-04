@@ -32,8 +32,8 @@ import com.jtattoo.plaf.BaseBorders;
 /**
  * <p>GraphiteToolBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteToolBarUI extends AbstractToolBarUI {
 

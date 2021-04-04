@@ -50,6 +50,7 @@ class SpecialRef extends Ref
         return new SpecialRef(target, type, name);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(Context cx)
     {
@@ -65,12 +66,14 @@ class SpecialRef extends Ref
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     @Deprecated
     public Object set(Context cx, Object value) {
         throw new IllegalStateException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object set(Context cx, Scriptable scope, Object value)
     {
@@ -131,6 +134,7 @@ class SpecialRef extends Ref
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(Context cx)
     {
@@ -140,6 +144,7 @@ class SpecialRef extends Ref
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean delete(Context cx)
     {

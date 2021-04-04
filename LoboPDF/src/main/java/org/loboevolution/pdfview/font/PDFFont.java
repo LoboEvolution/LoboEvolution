@@ -38,7 +38,9 @@ import org.loboevolution.pdfview.font.ttf.TrueTypeFont;
 
 /**
  * a Font definition for PDF files
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public abstract class PDFFont {
 
@@ -81,6 +83,11 @@ public abstract class PDFFont {
      * FontMatrix = (array, typically [0.001, 0, 0, 0.001, 0, 0])<br>
      * CharProcs = (dictionary)
      * Resources = (dictionary)
+     *
+     * @param obj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param resources a {@link java.util.HashMap} object.
+     * @return a {@link org.loboevolution.pdfview.font.PDFFont} object.
+     * @throws java.io.IOException if any.
      */
     public synchronized static PDFFont getFont(PDFObject obj,
             HashMap<String,PDFObject> resources)
@@ -338,6 +345,7 @@ public abstract class PDFFont {
 
     /**
      * Get the subtype of this font.
+     *
      * @return the subtype, one of: Type0, Type1, TrueType or Type3
      */
     public String getSubtype() {
@@ -346,6 +354,8 @@ public abstract class PDFFont {
 
     /**
      * Set the font subtype
+     *
+     * @param subtype a {@link java.lang.String} object.
      */
     public void setSubtype(String subtype) {
         this.subtype = subtype;
@@ -353,6 +363,7 @@ public abstract class PDFFont {
 
     /**
      * Get the postscript name of this font
+     *
      * @return the postscript name of this font
      */
     public String getBaseFont() {
@@ -361,6 +372,7 @@ public abstract class PDFFont {
 
     /**
      * Set the postscript name of this font
+     *
      * @param baseFont the postscript name of the font
      */
     public void setBaseFont(String baseFont) {
@@ -369,6 +381,7 @@ public abstract class PDFFont {
 
     /**
      * Get the encoding for this font
+     *
      * @return the encoding which maps from this font to actual characters
      */
     public PDFFontEncoding getEncoding() {
@@ -377,6 +390,8 @@ public abstract class PDFFont {
 
     /**
      * Set the encoding for this font
+     *
+     * @param encoding a {@link org.loboevolution.pdfview.font.PDFFontEncoding} object.
      */
     public void setEncoding(PDFFontEncoding encoding) {
         this.encoding = encoding;
@@ -384,6 +399,7 @@ public abstract class PDFFont {
 
     /**
      * Get the descriptor for this font
+     *
      * @return the font descriptor
      */
     public PDFFontDescriptor getDescriptor() {
@@ -392,6 +408,8 @@ public abstract class PDFFont {
 
     /**
      * Set the descriptor font descriptor
+     *
+     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      */
     public void setDescriptor(PDFFontDescriptor descriptor) {
         this.descriptor = descriptor;
@@ -399,6 +417,8 @@ public abstract class PDFFont {
 
     /**
      * Get the CMap which maps the characters in this font to unicode names
+     *
+     * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
      */
     public PDFCMap getUnicodeMap() {
         return this.unicodeMap;
@@ -406,6 +426,8 @@ public abstract class PDFFont {
 
     /**
      * Set the CMap which maps the characters in this font to unicode names
+     *
+     * @param unicodeMap a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
      */
     public void setUnicodeMap(PDFCMap unicodeMap) {
         this.unicodeMap = unicodeMap;
@@ -415,6 +437,7 @@ public abstract class PDFFont {
      * Get the glyphs associated with a given String in this font
      *
      * @param text the text to translate into glyphs
+     * @return a {@link java.util.List} object.
      */
     public List<PDFGlyph> getGlyphs(String text) {
         List<PDFGlyph> outList = null;
@@ -464,6 +487,7 @@ public abstract class PDFFont {
 
     /**
      * Create a PDFFont given the base font name and the font descriptor
+     *
      * @param baseFont the postscript name of this font
      * @param descriptor the descriptor for the font
      */
@@ -477,10 +501,10 @@ public abstract class PDFFont {
      *
      * The preferred method of getting the glyph should be by name.  If the
      * name is null or not valid, then the character code should be used.
-     * If the both the code and the name are invalid, the undefined glyph 
+     * If the both the code and the name are invalid, the undefined glyph
      * should be returned.
      *
-     * Note this method must *always* return a glyph.  
+     * Note this method must *always* return a glyph.
      *
      * @param src the character code of this glyph
      * @param name the name of this glyph or null if unknown
@@ -489,6 +513,8 @@ public abstract class PDFFont {
     protected abstract PDFGlyph getGlyph(char src, String name);
 
     /**
+     * {@inheritDoc}
+     *
      * Turn this font into a pretty String
      */
     @Override
@@ -496,7 +522,9 @@ public abstract class PDFFont {
         return getBaseFont();
     }
 
-    /** 
+    /**
+     * {@inheritDoc}
+     *
      * Compare two fonts base on the baseFont
      */
     @Override
@@ -509,6 +537,8 @@ public abstract class PDFFont {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Hash a font based on its base font
      */
     @Override

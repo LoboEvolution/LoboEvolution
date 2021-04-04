@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Sep 3, 2005
@@ -74,8 +71,8 @@ import org.loboevolution.html.node.Text;
 /**
  * <p>Abstract NodeImpl class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode {
 		
@@ -218,6 +215,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public boolean contains(Node other) {
 		// TODO Auto-generated method stub
@@ -367,14 +365,31 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return document == null ? null : document.getBaseURI();
 	}
 
+	/**
+	 * <p>getChildAtIndex.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
+	 */
 	public Node getChildAtIndex(int index) {
 		return this.nodeList.get(index);
 	}
 
+	/**
+	 * <p>getChildCount.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getChildCount() {
 		return nodeList.getLength();
 	}
 
+	/**
+	 * <p>getChildIndex.</p>
+	 *
+	 * @param child a {@link org.loboevolution.html.node.Node} object.
+	 * @return a int.
+	 */
 	public int getChildIndex(Node child) {
 		return this.nodeList.indexOf(child);
 	}
@@ -466,6 +481,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 	
 	
+	/**
+	 * <p>getFirstChildByFilter.</p>
+	 *
+	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
+	 */
 	public Node getFirstChildByFilter(NodeFilter filter) {
 		NodeListImpl nodeList = (NodeListImpl) getNodeList(filter);
 		if (nodeList.getLength() == 0) {
@@ -927,6 +948,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 	
 	/**
+	 * <p>getDocumentNode.</p>
+	 *
 	 * @return the document
 	 */
 	public Document getDocumentNode() {
@@ -1307,6 +1330,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		this.treeLock = value == null ? this : value;
 	}
 
+	/**
+	 * <p>setOwnerDocument.</p>
+	 *
+	 * @param value a {@link org.loboevolution.html.node.Document} object.
+	 * @param deep a boolean.
+	 */
 	public void setOwnerDocument(Document value, boolean deep) {
 		this.document = value;
 		this.treeLock = value == null ? this : value;
@@ -1318,6 +1347,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>setParentImpl.</p>
+	 *
+	 * @param parent a {@link org.loboevolution.html.node.Node} object.
+	 */
 	protected final void setParentImpl(Node parent) {
 		this.parentNode = (ParentNode) parent;
 	}
@@ -1390,11 +1424,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public boolean isIsConnected() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getRootNode() {
 		return this;
@@ -1407,12 +1443,22 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return getNodeName();
 	}
 
+	/**
+	 * <p>visit.</p>
+	 *
+	 * @param visitor a {@link org.loboevolution.html.dom.nodeimpl.NodeVisitor} object.
+	 */
 	public void visit(NodeVisitor visitor) {
 		synchronized (this.treeLock) {
 			visitImpl(visitor);
 		}
 	}
 
+	/**
+	 * <p>visitImpl.</p>
+	 *
+	 * @param visitor a {@link org.loboevolution.html.dom.nodeimpl.NodeVisitor} object.
+	 */
 	protected void visitImpl(NodeVisitor visitor) {
 		try {
 			visitor.visit(this);

@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -27,10 +24,13 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link HTMLStyleElement}. */
-
+ * Tests for {@link org.loboevolution.html.dom.HTMLStyleElement}.
+ */
 public class HTMLStyleElementTest extends LoboUnitTest {
 	
+    /**
+     * <p>stylesheet.</p>
+     */
     @Test
     public void stylesheet() {
         final String html
@@ -49,6 +49,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 	
+    /**
+     * <p>styleChildren.</p>
+     */
     @Test
     public void styleChildren() {
         final String html
@@ -72,6 +75,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 	
+    /**
+     * <p>innerHtml.</p>
+     */
     @Test
     public void innerHtml() {
         final String html
@@ -98,6 +104,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>type.</p>
+     */
     @Test
     public void type() {
         final String html
@@ -124,6 +133,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>media.</p>
+     */
     @Test
     public void media() {
         final String html
@@ -150,6 +162,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>media_setter.</p>
+     */
     @Test
     public void media_setter() {
         final String html
@@ -184,6 +199,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 	
+    /**
+     * <p>scoped.</p>
+     */
     @Test
     public void scoped() {
         final String html
@@ -208,6 +226,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scoped_setter.</p>
+     */
     @Test
     public void scoped_setter() {
         final String html
@@ -235,6 +256,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 	
+    /**
+     * <p>type_setter.</p>
+     */
     @Test
     public void type_setter() {
         final String html
@@ -256,6 +280,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>disabled.</p>
+     */
     @Test
     public void disabled() {
         final String html
@@ -280,6 +307,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>scriptInCdataHtml.</p>
+     */
     @Test
     public void scriptInCdataHtml() {
         final String html =

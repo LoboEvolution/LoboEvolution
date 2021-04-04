@@ -29,7 +29,9 @@ import org.loboevolution.pdfview.PDFParseException;
 
 /**
  * decode a deFlated byte array
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class FlateDecode {
 
@@ -42,6 +44,8 @@ public class FlateDecode {
      * @param buf the deflated input buffer
      * @param params parameters to the decoder (unused)
      * @return the decoded (inflated) bytes
+     * @param dict a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
      */
     public static ByteBuffer decode(PDFObject dict, ByteBuffer buf,
             PDFObject params) throws IOException {

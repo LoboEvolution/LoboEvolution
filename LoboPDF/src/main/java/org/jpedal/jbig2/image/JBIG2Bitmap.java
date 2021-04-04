@@ -66,6 +66,12 @@ import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.decoders.MMRDecoder;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>JBIG2Bitmap class.</p>
+ *
+  *
+  *
+ */
 public final class JBIG2Bitmap {
 	
 	private static final Logger logger = Logger.getLogger(JBIG2Bitmap.class.getName());
@@ -83,6 +89,15 @@ public final class JBIG2Bitmap {
 	private final HuffmanDecoder huffmanDecoder;
 	private final MMRDecoder mmrDecoder;
 	
+	/**
+	 * <p>Constructor for JBIG2Bitmap.</p>
+	 *
+	 * @param width a int.
+	 * @param height a int.
+	 * @param arithmeticDecoder a {@link org.jpedal.jbig2.decoders.ArithmeticDecoder} object.
+	 * @param huffmanDecoder a {@link org.jpedal.jbig2.decoders.HuffmanDecoder} object.
+	 * @param mmrDecoder a {@link org.jpedal.jbig2.decoders.MMRDecoder} object.
+	 */
 	public JBIG2Bitmap(int width, int height, ArithmeticDecoder arithmeticDecoder, HuffmanDecoder huffmanDecoder, MMRDecoder mmrDecoder) {
 		this.width = width;
 		this.height = height;
@@ -95,6 +110,20 @@ public final class JBIG2Bitmap {
 		this.data = new FastBitSet(width * height);
 	}
 
+	/**
+	 * <p>readBitmap.</p>
+	 *
+	 * @param useMMR a boolean.
+	 * @param template a int.
+	 * @param typicalPredictionGenericDecodingOn a boolean.
+	 * @param useSkip a boolean.
+	 * @param skipBitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 * @param adaptiveTemplateX an array of {@link short} objects.
+	 * @param adaptiveTemplateY an array of {@link short} objects.
+	 * @param mmrDataLength a int.
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readBitmap(boolean useMMR, int template, boolean typicalPredictionGenericDecodingOn, boolean useSkip, JBIG2Bitmap skipBitmap, short[] adaptiveTemplateX, short[] adaptiveTemplateY, int mmrDataLength) throws IOException, JBIG2Exception {
 
 		if (useMMR) {
@@ -465,6 +494,19 @@ public final class JBIG2Bitmap {
 		}
 	}
 
+	/**
+	 * <p>readGenericRefinementRegion.</p>
+	 *
+	 * @param template a int.
+	 * @param typicalPredictionGenericRefinementOn a boolean.
+	 * @param referredToBitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 * @param referenceDX a int.
+	 * @param referenceDY a int.
+	 * @param adaptiveTemplateX an array of {@link short} objects.
+	 * @param adaptiveTemplateY an array of {@link short} objects.
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readGenericRefinementRegion(int template, boolean typicalPredictionGenericRefinementOn, JBIG2Bitmap referredToBitmap, int referenceDX, int referenceDY, short[] adaptiveTemplateX, short[] adaptiveTemplateY) throws IOException, JBIG2Exception {
 
 		//ArithmeticDecoder arithmeticDecoder = ArithmeticDecoder.getInstance();
@@ -649,6 +691,37 @@ public final class JBIG2Bitmap {
 		}
 	}
 
+	/**
+	 * <p>readTextRegion.</p>
+	 *
+	 * @param huffman a boolean.
+	 * @param symbolRefine a boolean.
+	 * @param noOfSymbolInstances a int.
+	 * @param logStrips a int.
+	 * @param noOfSymbols a int.
+	 * @param symbolCodeTable an array of {@link int} objects.
+	 * @param symbolCodeLength a int.
+	 * @param symbols an array of {@link org.jpedal.jbig2.image.JBIG2Bitmap} objects.
+	 * @param defaultPixel a int.
+	 * @param combinationOperator a int.
+	 * @param transposed a boolean.
+	 * @param referenceCorner a int.
+	 * @param sOffset a int.
+	 * @param huffmanFSTable an array of {@link int} objects.
+	 * @param huffmanDSTable an array of {@link int} objects.
+	 * @param huffmanDTTable an array of {@link int} objects.
+	 * @param huffmanRDWTable an array of {@link int} objects.
+	 * @param huffmanRDHTable an array of {@link int} objects.
+	 * @param huffmanRDXTable an array of {@link int} objects.
+	 * @param huffmanRDYTable an array of {@link int} objects.
+	 * @param huffmanRSizeTable an array of {@link int} objects.
+	 * @param template a int.
+	 * @param symbolRegionAdaptiveTemplateX an array of {@link short} objects.
+	 * @param symbolRegionAdaptiveTemplateY an array of {@link short} objects.
+	 * @param decoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 * @throws java.io.IOException if any.
+	 */
 	public void readTextRegion(boolean huffman, boolean symbolRefine, int noOfSymbolInstances, int logStrips, int noOfSymbols, int[][] symbolCodeTable, int symbolCodeLength, JBIG2Bitmap[] symbols, int defaultPixel, int combinationOperator, boolean transposed, int referenceCorner, int sOffset, int[][] huffmanFSTable, int[][] huffmanDSTable, int[][] huffmanDTTable, int[][] huffmanRDWTable, int[][] huffmanRDHTable, int[][] huffmanRDXTable, int[][] huffmanRDYTable, int[][] huffmanRSizeTable, int template, short[] symbolRegionAdaptiveTemplateX,
 			short[] symbolRegionAdaptiveTemplateY, JBIG2StreamDecoder decoder) throws JBIG2Exception, IOException {
 
@@ -810,11 +883,24 @@ public final class JBIG2Bitmap {
 		}
 	}
 
+	/**
+	 * <p>clear.</p>
+	 *
+	 * @param defPixel a int.
+	 */
 	public void clear(int defPixel) {
 		data.setAll(defPixel == 1);
 		//data.set(0, data.size(), defPixel == 1);
 	}
 
+	/**
+	 * <p>combine.</p>
+	 *
+	 * @param bitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param combOp a long.
+	 */
 	public void combine(JBIG2Bitmap bitmap, int x, int y, long combOp) {
 		int srcWidth = bitmap.width;
 		int srcHeight = bitmap.height;
@@ -965,6 +1051,16 @@ public final class JBIG2Bitmap {
 		//return data.getByte(row, col);
 //	}
 
+//	public byte getPixelByte(int col, int row) {
+		//return data.getByte(row, col);
+//	}
+//	public byte getPixelByte(int col, int row) {
+		//return data.getByte(row, col);
+//	}
+
+//	public byte getPixelByte(int col, int row) {
+		//return data.getByte(row, col);
+//	}
 	private void duplicateRow(int yDest, int ySrc) {
 //		for (int i = 0; i < width;) {
 //			setPixelByte(i, yDest, getPixelByte(i, ySrc));
@@ -975,14 +1071,30 @@ public final class JBIG2Bitmap {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field <code>width</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * <p>Getter for the field <code>height</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * <p>Getter for the field <code>data</code>.</p>
+	 *
+	 * @param switchPixelColor a boolean.
+	 * @return an array of {@link byte} objects.
+	 */
 	public byte[] getData(boolean switchPixelColor) {
 //		byte[] bytes = new byte[height * line];
 //
@@ -1035,6 +1147,15 @@ public final class JBIG2Bitmap {
 		return bytes;
 	}
 
+	/**
+	 * <p>getSlice.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 * @param width a int.
+	 * @param height a int.
+	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+	 */
 	public JBIG2Bitmap getSlice(int x, int y, int width, int height) {
 //		JBIG2Bitmap slice = new JBIG2Bitmap(width, height);
 //
@@ -1118,20 +1239,77 @@ public final class JBIG2Bitmap {
 //		return data.get(row, col) ? 1 : 0;
 //	}
 
+
+//	private void setPixelByte(int col, int row, FastBitSet data, byte bits) {
+//		data.setByte(row, col, bits);
+//	}
+
+//	public void setPixel(int col, int row, int value) {
+//		setPixel(col, row, data, value);
+//	}
+
+//	public int getPixel(int col, int row) {
+//		return data.get(row, col) ? 1 : 0;
+//	}
+
+//	private void setPixelByte(int col, int row, FastBitSet data, byte bits) {
+//		data.setByte(row, col, bits);
+//	}
+
+//	public void setPixel(int col, int row, int value) {
+//		setPixel(col, row, data, value);
+//	}
+
+//	public int getPixel(int col, int row) {
+//		return data.get(row, col) ? 1 : 0;
+//	}
+
+
+//	private void setPixelByte(int col, int row, FastBitSet data, byte bits) {
+//		data.setByte(row, col, bits);
+//	}
+
+//	public void setPixel(int col, int row, int value) {
+//		setPixel(col, row, data, value);
+//	}
+
+//	public int getPixel(int col, int row) {
+//		return data.get(row, col) ? 1 : 0;
+//	}
 	private void setPixel(int col, int row, FastBitSet data, int value) {
 		int index = (row * width) + col;
 
 		data.set(index, value == 1);
 	}
 
+	/**
+	 * <p>setPixel.</p>
+	 *
+	 * @param col a int.
+	 * @param row a int.
+	 * @param value a int.
+	 */
 	public void setPixel(int col, int row, int value) {
 		setPixel(col, row, data, value);
 	}
 
+	/**
+	 * <p>getPixel.</p>
+	 *
+	 * @param col a int.
+	 * @param row a int.
+	 * @return a int.
+	 */
 	public int getPixel(int col, int row) {
 		return data.get((row * width) + col) ? 1 : 0;
 	}
 	
+	/**
+	 * <p>expand.</p>
+	 *
+	 * @param newHeight a int.
+	 * @param defaultPixel a int.
+	 */
 	public void expand(int newHeight, int defaultPixel) {
 //		logger.info("expand FastBitSet");
 //		FastBitSet newData = new FastBitSet(width, newHeight);
@@ -1155,14 +1333,29 @@ public final class JBIG2Bitmap {
 		this.data = newData;
 	}
 
+	/**
+	 * <p>Setter for the field <code>bitmapNumber</code>.</p>
+	 *
+	 * @param segmentNumber a int.
+	 */
 	public void setBitmapNumber(int segmentNumber) {
 		this.bitmapNumber = segmentNumber;
 	}
 
+	/**
+	 * <p>Getter for the field <code>bitmapNumber</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getBitmapNumber() {
 		return bitmapNumber;
 	}
 
+	/**
+	 * <p>getBufferedImage.</p>
+	 *
+	 * @return a {@link java.awt.image.BufferedImage} object.
+	 */
 	public BufferedImage getBufferedImage() {
 		byte[] bytes = getData(true);
 
@@ -1188,7 +1381,7 @@ public final class JBIG2Bitmap {
 	/**
 	 * Faster BitSet implementation. Does not perfom any bound checks.
 	 *  
-	 * @author Boris von Loesch
+	 * Author Boris von Loesch
 	 *
 	 */
 	static final class FastBitSet {

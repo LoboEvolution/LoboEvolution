@@ -13,12 +13,22 @@ import org.mozilla.javascript.TopLevel;
  * A top-level module scope. This class provides methods to retrieve the
  * module's source and base URIs in order to resolve relative module IDs
  * and check sandbox constraints.
+ *
+ *
+ *
  */
 public class ModuleScope extends TopLevel {
     private static final long serialVersionUID = 1L;
     private final URI uri;
     private final URI base;
 
+    /**
+     * <p>Constructor for ModuleScope.</p>
+     *
+     * @param prototype a {@link org.mozilla.javascript.Scriptable} object.
+     * @param uri a {@link java.net.URI} object.
+     * @param base a {@link java.net.URI} object.
+     */
     public ModuleScope(Scriptable prototype, URI uri, URI base) {
         this.uri = uri;
         this.base = base;
@@ -26,10 +36,20 @@ public class ModuleScope extends TopLevel {
         cacheBuiltins(prototype, false);
     }
 
+    /**
+     * <p>Getter for the field <code>uri</code>.</p>
+     *
+     * @return a {@link java.net.URI} object.
+     */
     public URI getUri() {
         return uri;
     }
 
+    /**
+     * <p>Getter for the field <code>base</code>.</p>
+     *
+     * @return a {@link java.net.URI} object.
+     */
     public URI getBase() {
         return base;
     }

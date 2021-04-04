@@ -46,8 +46,8 @@ import javax.swing.plaf.basic.BasicMenuUI;
 /**
  * <p>BaseMenuUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseMenuUI extends BasicMenuUI {
 

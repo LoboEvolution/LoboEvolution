@@ -33,8 +33,8 @@ import javax.swing.plaf.basic.BasicDesktopPaneUI;
 /**
  * <p>BaseDesktopPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseDesktopPaneUI extends BasicDesktopPaneUI {
 

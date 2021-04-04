@@ -28,7 +28,8 @@ import org.loboevolution.pdfview.PDFObject;
  * A CMap maps from a character in a composite font to a font/glyph number
  * pair in a CID font.
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public abstract class PDFCMap {
     /**
@@ -36,13 +37,19 @@ public abstract class PDFCMap {
      */
     private static HashMap<String, PDFCMap> cache;
     
-    /** Creates a new instance of CMap */
+    /**
+     * Creates a new instance of CMap
+     */
     protected PDFCMap() {}
     
     /**
      * Get a CMap, given a PDF object containing one of the following:
      *  a string name of a known CMap
      *  a stream containing a CMap definition
+     *
+     * @param map a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
+     * @throws java.io.IOException if any.
      */
     public static PDFCMap getCMap(PDFObject map) throws IOException {
         if (map.getType() == PDFObject.NAME) {
@@ -56,6 +63,10 @@ public abstract class PDFCMap {
        
     /**
      * Get a CMap, given a string name
+     *
+     * @param mapName a {@link java.lang.String} object.
+     * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
+     * @throws java.io.IOException if any.
      */
     public static PDFCMap getCMap(String mapName) throws IOException {
         if (cache == null) {
@@ -88,6 +99,10 @@ public abstract class PDFCMap {
     
     /**
      * Parse a CMap from a CMap stream
+     *
+     * @param map a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
+     * @throws java.io.IOException if any.
      */
     protected static PDFCMap parseCMap(PDFObject map) throws IOException {
        	return new ToUnicodeMap(map);
@@ -95,11 +110,17 @@ public abstract class PDFCMap {
     
     /**
      * Map a given source character to a destination character
+     *
+     * @param src a char.
+     * @return a char.
      */
     public abstract char map(char src);
     
     /**
      * Get the font number assoicated with a given source character
+     *
+     * @param src a char.
+     * @return a int.
      */
     public int getFontID(char src) {
         return 0;

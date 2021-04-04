@@ -27,8 +27,8 @@ import com.jtattoo.plaf.BaseIcons;
 /**
  * <p>FastIcons class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class FastIcons extends BaseIcons {
 

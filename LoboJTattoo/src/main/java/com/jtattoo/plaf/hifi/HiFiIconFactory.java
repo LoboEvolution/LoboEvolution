@@ -30,8 +30,8 @@ import com.jtattoo.plaf.BaseIcons;
 /**
  * <p>HiFiIconFactory class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiIconFactory implements AbstractIconFactory {
 

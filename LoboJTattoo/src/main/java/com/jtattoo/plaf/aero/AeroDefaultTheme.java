@@ -33,8 +33,8 @@ import com.jtattoo.plaf.ColorHelper;
 /**
  * <p>AeroDefaultTheme class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class AeroDefaultTheme extends AbstractTheme {
 

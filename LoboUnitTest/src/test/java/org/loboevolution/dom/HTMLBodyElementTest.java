@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -26,8 +23,14 @@ package org.loboevolution.dom;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
+/**
+ * Tests for {@link org.loboevolution.html.dom.HTMLBodyElement}.
+ */
 public class HTMLBodyElementTest extends LoboUnitTest {
 
+    /**
+     * <p>defaultPaddingAndMargins.</p>
+     */
     @Test
     public void defaultPaddingAndMargins() {
         final String html =
@@ -50,6 +53,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>doScroll.</p>
+     */
     @Test
     public void doScroll() {
         final String html =
@@ -74,6 +80,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>aLink.</p>
+     */
     @Test
     public void aLink() {
         final String html =
@@ -96,6 +105,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>background.</p>
+     */
     @Test
     public void background() {
         final String html =
@@ -119,6 +131,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>bgColor.</p>
+     */
     @Test
     public void bgColor() {
         final String html =
@@ -141,6 +156,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>link.</p>
+     */
     @Test
     public void link() {
         final String html =
@@ -163,6 +181,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>text.</p>
+     */
     @Test
     public void text() {
         final String html =
@@ -185,6 +206,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>vLink.</p>
+     */
     @Test
     public void vLink() {
         final String html =
@@ -207,6 +231,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>enumeratedProperties.</p>
+     */
     @Test
     public void enumeratedProperties() {
         final String html
@@ -237,6 +264,9 @@ public class HTMLBodyElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+     /**
+      * <p>top.</p>
+      */
      @Test
     public void top() {
         final String html =

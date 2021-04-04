@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Div implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1 num2</i> <b>div</b> <i>quotient</i> <p>
 	 *
 	 * divides num1 by num2, producing a result that is

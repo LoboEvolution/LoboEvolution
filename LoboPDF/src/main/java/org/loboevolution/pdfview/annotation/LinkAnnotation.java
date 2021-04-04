@@ -8,32 +8,37 @@ import org.loboevolution.pdfview.PDFParseException;
 import org.loboevolution.pdfview.action.GoToAction;
 import org.loboevolution.pdfview.action.PDFAction;
 
-/*****************************************************************************
+/**
+ ***************************************************************************
  * PDF annotation describing a link to either a location within the current
- * document, a location in another PDF file, an application/file to be opened 
+ * document, a location in another PDF file, an application/file to be opened
  * or a web site.
  * In the PDF structure a link can be a destination ("DEST") or an action ("A").
- * Both ways are handled as actions internally, i.e. for getting the links 
+ * Both ways are handled as actions internally, i.e. for getting the links
  * destination, you should get the action from this annotation object. It can be
  * one of the following actions:
- * <li>GotoAction - for a file internal destination</li>
- * <li>GoToRAction - for a destination in a remote PDF file</li>
- * <li>GoToEAction - for a destination in an embedded PDF file</li>
- * <li>UriAction - for a web link</li>
- * <li>LaunchAction - for launching an application/opening a file</li>
+ * <p>GotoAction - for a file internal destination</p>
+ * <p>GoToRAction - for a destination in a remote PDF file</p>
+ * <p>GoToEAction - for a destination in an embedded PDF file</p>
+ * <p>UriAction - for a web link</p>
+ * <p>LaunchAction - for launching an application/opening a file</p>
  *
- * @author Katja Sondermann
+ * Author Katja Sondermann
  * @since 06.07.2009
- ****************************************************************************/
+ ***************************************************************************
+  *
+ */
 public class LinkAnnotation extends PDFAnnotation {
 
 	private PDFAction action = null;
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Constructor
-	 * @param annotObject
-	 * @throws IOException 
-	 ************************************************************************/
+	 *
+	 * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public LinkAnnotation(PDFObject annotObject) throws IOException {
 		super(annotObject, ANNOTATION_TYPE.LINK);
 		// a link annotation can either have an action (GoTo or URI) or a destination (DEST)
@@ -56,11 +61,12 @@ public class LinkAnnotation extends PDFAnnotation {
 		}
 	}
 	
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Get the contained PDFAction
-	 * @return PDFAction - can be <code>null</code> in case the contains 
-	 * 						a destination object
-	 ************************************************************************/
+	 *
+	 * @return a {@link org.loboevolution.pdfview.action.PDFAction} object.
+	 */
 	public PDFAction getAction() {
 		return this.action;
 	}

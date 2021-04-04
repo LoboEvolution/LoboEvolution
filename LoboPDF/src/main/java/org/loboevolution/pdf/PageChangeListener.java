@@ -21,10 +21,14 @@ package org.loboevolution.pdf;
  * A listener to indicate that some control has asked for a particular page to
  * be displayed.
  *
+  *
+  *
  */
 public interface PageChangeListener {
-	/**
-	 * Notifies the listener that it should go to a particular page number.
-	 */
+    /**
+     * Notifies the listener that it should go to a particular page number.
+     *
+     * @param page a int.
+     */
     void gotoPage(int page);
 }

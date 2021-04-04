@@ -32,8 +32,8 @@ import javax.swing.plaf.basic.BasicTreeUI;
 /**
  * author Michael Hagen
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class BaseTreeUI extends BasicTreeUI {
 

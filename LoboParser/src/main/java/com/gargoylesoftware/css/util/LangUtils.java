@@ -17,7 +17,8 @@ package com.gargoylesoftware.css.util;
 /**
  * Some utils.
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public final class LangUtils {
 
@@ -31,6 +32,8 @@ public final class LangUtils {
     }
 
     /**
+     * <p>hashCode.</p>
+     *
      * @param seed the seed to be used
      * @param hashcode the hashcode to be used as input
      * @return a hash code calculated based on a given one.
@@ -40,6 +43,8 @@ public final class LangUtils {
     }
 
     /**
+     * <p>hashCode.</p>
+     *
      * @param seed the seed to be used
      * @param b the boolean to be used as input
      * @return a hash code calculated based on a given boolean.
@@ -49,6 +54,8 @@ public final class LangUtils {
     }
 
     /**
+     * <p>hashCode.</p>
+     *
      * @param seed the seed to be used
      * @param obj the object to be used as input
      * @return a hash code calculated based on a given object.
@@ -58,6 +65,8 @@ public final class LangUtils {
     }
 
     /**
+     * <p>equals.</p>
+     *
      * @param obj1 the first object
      * @param obj2 the second object
      * @return true if the both objects are equals

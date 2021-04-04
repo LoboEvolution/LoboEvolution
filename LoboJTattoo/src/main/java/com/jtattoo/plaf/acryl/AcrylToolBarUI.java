@@ -40,8 +40,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AcrylToolBarUI class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class AcrylToolBarUI extends AbstractToolBarUI {
 

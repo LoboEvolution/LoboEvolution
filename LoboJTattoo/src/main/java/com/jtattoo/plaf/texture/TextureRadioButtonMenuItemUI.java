@@ -43,8 +43,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>TextureRadioButtonMenuItemUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureRadioButtonMenuItemUI extends BaseRadioButtonMenuItemUI {
 

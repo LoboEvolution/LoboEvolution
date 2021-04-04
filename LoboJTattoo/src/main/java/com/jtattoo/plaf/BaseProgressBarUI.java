@@ -44,8 +44,8 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 /**
  * <p>BaseProgressBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseProgressBarUI extends BasicProgressBarUI {
 

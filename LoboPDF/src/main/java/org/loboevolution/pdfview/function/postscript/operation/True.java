@@ -6,6 +6,8 @@ import java.util.Stack;
 final class True implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <b>true</b> <i>true</i> <p>
 	 *
 	 * pushes a boolean object whose value is true on the operand

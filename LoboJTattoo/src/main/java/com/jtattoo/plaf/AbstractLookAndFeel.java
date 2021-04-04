@@ -38,8 +38,8 @@ import javax.swing.plaf.metal.MetalTheme;
 /**
  * <p>Abstract AbstractLookAndFeel class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 

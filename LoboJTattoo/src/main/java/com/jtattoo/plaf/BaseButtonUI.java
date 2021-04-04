@@ -49,8 +49,8 @@ import javax.swing.text.View;
 /**
  * <p>BaseButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseButtonUI extends BasicButtonUI {
 

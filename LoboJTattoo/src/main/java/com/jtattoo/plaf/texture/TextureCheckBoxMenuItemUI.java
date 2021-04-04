@@ -43,8 +43,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>TextureCheckBoxMenuItemUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
 

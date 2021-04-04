@@ -17,7 +17,7 @@ package org.mozilla.javascript;
  * will forward requests to execute to the nonnull 'script' field.
  *
  * @since 1.3
- * @author Norris Boyd
+ * Author Norris Boyd
  */
 
 class NativeScript extends BaseFunction
@@ -38,6 +38,8 @@ class NativeScript extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns the name of this JavaScript class, "Script".
      */
     @Override
@@ -46,6 +48,7 @@ class NativeScript extends BaseFunction
         return "Script";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -56,18 +59,21 @@ class NativeScript extends BaseFunction
         return Undefined.instance;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
         throw Context.reportRuntimeErrorById("msg.script.is.not.constructor");
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getLength()
     {
         return 0;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getArity()
     {
@@ -83,6 +89,7 @@ class NativeScript extends BaseFunction
         return super.decompile(indent, flags);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -98,6 +105,7 @@ class NativeScript extends BaseFunction
         initPrototypeMethod(SCRIPT_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -160,6 +168,7 @@ class NativeScript extends BaseFunction
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

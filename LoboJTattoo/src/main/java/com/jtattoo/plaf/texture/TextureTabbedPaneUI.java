@@ -51,8 +51,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>TextureTabbedPaneUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 

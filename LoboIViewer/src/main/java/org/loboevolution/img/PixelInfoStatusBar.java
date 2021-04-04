@@ -44,8 +44,8 @@ import org.loboevolution.common.Objects;
  * {@link #updateLabel(java.awt.image.BufferedImage, int, int, int)} to
  * customize this information.
  *
- * @author Kazo Csaba
- * @version $Id: $Id
+ * Author Kazo Csaba
+ *
  */
 public class PixelInfoStatusBar extends StatusBar {
 
@@ -79,7 +79,7 @@ public class PixelInfoStatusBar extends StatusBar {
 	 *
 	 * @param newModel
 	 *            the new model
-	 * @throws java.lang.NullPointerException
+	 * @throws java.lang.NullPointerException in case of error
 	 *             if {@code newModel} is {@code null}
 	 */
 	public final void setModel(PixelModel newModel) {

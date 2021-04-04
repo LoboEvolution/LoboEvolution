@@ -6,8 +6,22 @@
 
 package org.mozilla.javascript;
 
+/**
+ * <p>ScriptRuntimeES6 class.</p>
+ *
+ *
+ *
+ */
 public class ScriptRuntimeES6 {
 
+    /**
+     * <p>requireObjectCoercible.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param val a {@link java.lang.Object} object.
+     * @param idFuncObj a {@link org.mozilla.javascript.IdFunctionObject} object.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object requireObjectCoercible(Context cx, Object val, IdFunctionObject idFuncObj) {
         if (val == null || Undefined.isUndefined(val)) {
             throw ScriptRuntime.typeErrorById("msg.called.null.or.undefined", idFuncObj.getTag(), idFuncObj.getFunctionName());

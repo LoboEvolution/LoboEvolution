@@ -1,34 +1,49 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.download;
 
+/**
+ * <p>TimingDowload class.</p>
+ *
+ *
+ *
+ */
 public class TimingDowload {
 
+    /**
+     * <p>round1.</p>
+     *
+     * @param value a double.
+     * @return a double.
+     */
     public static double round1(double value) {
         return Math.round(value * 10.0) / 10.0;
     }
 
+    /**
+     * <p>getSizeText.</p>
+     *
+     * @param numBytes a long.
+     * @return a {@link java.lang.String} object.
+     */
     public static String getSizeText(long numBytes) {
         if (numBytes == -1) {
             return "Not known";
@@ -50,6 +65,12 @@ public class TimingDowload {
         }
     }
 
+    /**
+     * <p>getElapsedText.</p>
+     *
+     * @param cl a int.
+     * @return a {@link java.lang.String} object.
+     */
     public static String getElapsedText(int cl) {
 
         if (cl == -1) {

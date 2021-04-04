@@ -8,6 +8,12 @@ package org.mozilla.javascript;
 
 import java.util.Objects;
 
+/**
+ * <p>NativeContinuation class.</p>
+ *
+ *
+ *
+ */
 public final class NativeContinuation extends IdScriptableObject
     implements Function
 {
@@ -17,34 +23,54 @@ public final class NativeContinuation extends IdScriptableObject
 
     private Object implementation;
 
+    /**
+     * <p>init.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sealed a boolean.
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeContinuation obj = new NativeContinuation();
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * <p>Getter for the field <code>implementation</code>.</p>
+     *
+     * @return a {@link java.lang.Object} object.
+     */
     public Object getImplementation()
     {
         return implementation;
     }
 
+    /**
+     * <p>initImplementation.</p>
+     *
+     * @param implementation a {@link java.lang.Object} object.
+     */
     public void initImplementation(Object implementation)
     {
         this.implementation = implementation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Continuation";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
         throw Context.reportRuntimeError("Direct call is not supported");
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -52,6 +78,12 @@ public final class NativeContinuation extends IdScriptableObject
         return Interpreter.restartContinuation(this, cx, scope, args);
     }
 
+    /**
+     * <p>isContinuationConstructor.</p>
+     *
+     * @param f a {@link org.mozilla.javascript.IdFunctionObject} object.
+     * @return a boolean.
+     */
     public static boolean isContinuationConstructor(IdFunctionObject f)
     {
         if (f.hasTag(FTAG) && f.methodId() == Id_constructor) {
@@ -62,15 +94,17 @@ public final class NativeContinuation extends IdScriptableObject
 
     /**
      * Returns true if both continuations have equal implementations.
+     *
      * @param c1 one continuation
      * @param c2 another continuation
      * @return true if the implementations of both continuations are equal, or they are both null.
-     * @throws NullPointerException if either continuation is null
+     * @throws java.lang.NullPointerException if either continuation is null
      */
     public static boolean equalImplementations(NativeContinuation c1, NativeContinuation c2) {
         return Objects.equals(c1.implementation, c2.implementation);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -83,6 +117,7 @@ public final class NativeContinuation extends IdScriptableObject
         initPrototypeMethod(FTAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -100,6 +135,7 @@ public final class NativeContinuation extends IdScriptableObject
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

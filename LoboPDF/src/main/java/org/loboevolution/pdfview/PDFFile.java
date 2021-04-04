@@ -35,7 +35,6 @@ import org.loboevolution.pdfview.annotation.PDFAnnotation;
 import org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByPlatformException;
 import org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByProductException;
 import org.loboevolution.pdfview.decrypt.IdentityDecrypter;
-import org.loboevolution.pdfview.decrypt.PDFAuthenticationFailureException;
 import org.loboevolution.pdfview.decrypt.PDFDecrypter;
 import org.loboevolution.pdfview.decrypt.PDFDecrypterFactory;
 import org.loboevolution.pdfview.decrypt.PDFPassword;
@@ -48,11 +47,15 @@ import org.loboevolution.pdfview.decrypt.UnsupportedEncryptionException;
  * access to the pages in the PDF file.  Typically, you create
  * a new PDFFile, ask it for the number of pages, and then
  * request one or more PDFPages.
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class PDFFile {
 
+    /** Constant <code>NUL_CHAR=0</code> */
     public final static int             NUL_CHAR = 0;
+    /** Constant <code>FF_CHAR=12</code> */
     public final static int             FF_CHAR = 12;
 
     private String versionString = "1.1";
@@ -100,20 +103,21 @@ public class PDFFile {
      * at the moment.  It should really be a file mapping from the nio package.
      * <p>
      * Use the getPage(...) methods to get a page from the PDF file.
+     *
      * @param buf the RandomAccessFile containing the PDF.
-     * @throws IOException if there's a problem reading from the buffer
-     * @throws PDFParseException if the document appears to be malformed, or
-     *  its features are unsupported. If the file is encrypted in a manner that
-     *  the product or platform does not support then the exception's {@link
-     *  PDFParseException#getCause() cause} will be an instance of {@link
-     *  UnsupportedEncryptionException}.
-     * @throws PDFAuthenticationFailureException if the file is password
-     *  protected and requires a password
+     * @throws java.io.IOException if any.
      */
     public PDFFile(ByteBuffer buf) throws IOException {
 	this(buf, null);
     }
 
+    /**
+     * <p>Constructor for PDFFile.</p>
+     *
+     * @param buf a {@link java.nio.ByteBuffer} object.
+     * @param doNotParse a boolean.
+     * @throws java.io.IOException if any.
+     */
     public PDFFile(ByteBuffer buf, boolean doNotParse) throws IOException {
     	this.buf = buf;
     }
@@ -123,16 +127,10 @@ public class PDFFile {
      * at the moment.  It should really be a file mapping from the nio package.
      * <p>
      * Use the getPage(...) methods to get a page from the PDF file.
+     *
      * @param buf the RandomAccessFile containing the PDF.
      * @param password the user or owner password
-     * @throws IOException if there's a problem reading from the buffer
-     * @throws PDFParseException if the document appears to be malformed, or
-     *  its features are unsupported. If the file is encrypted in a manner that
-     *  the product or platform does not support then the exception's {@link
-     *  PDFParseException#getCause() cause} will be an instance of {@link
-     *  UnsupportedEncryptionException}.
-     * @throws PDFAuthenticationFailureException if the file is password
-     *  protected and the supplied password does not decrypt the document
+     * @throws java.io.IOException if any.
      */
     public PDFFile(ByteBuffer buf, PDFPassword password) throws IOException {
         this.buf = buf;
@@ -145,6 +143,7 @@ public class PDFFile {
     /**
      * Gets whether the owner of the file has given permission to print
      * the file.
+     *
      * @return true if it is okay to print the file
      */
     public boolean isPrintable() {
@@ -154,6 +153,7 @@ public class PDFFile {
     /**
      * Gets whether the owner of the file has given permission to save
      * a copy of the file.
+     *
      * @return true if it is okay to save the file
      */
     public boolean isSaveable() {
@@ -163,6 +163,8 @@ public class PDFFile {
     /**
      * get the root PDFObject of this PDFFile.  You generally shouldn't need
      * this, but we've left it open in case you want to go spelunking.
+     *
+     * @return a {@link org.loboevolution.pdfview.PDFObject} object.
      */
     public PDFObject getRoot() {
         return this.root;
@@ -171,6 +173,8 @@ public class PDFFile {
     /**
      * return the number of pages in this PDFFile.  The pages will be
      * numbered from 1 to getNumPages(), inclusive.
+     *
+     * @return a int.
      */
     public int getNumPages() {
         try {
@@ -183,9 +187,10 @@ public class PDFFile {
     /**
      * Get metadata (e.g., Author, Title, Creator) from the Info dictionary
      * as a string.
+     *
      * @param name the name of the metadata key (e.g., Author)
      * @return the info
-     * @throws IOException if the metadata cannot be read
+     * @throws java.io.IOException if any.
      */
     public String getStringMetadata(String name)
             throws IOException {
@@ -200,8 +205,9 @@ public class PDFFile {
     /**
      * Get the keys into the Info metadata, for use with
      * {@link #getStringMetadata(String)}
+     *
      * @return the keys present into the Info dictionary
-     * @throws IOException if the keys cannot be read
+     * @throws java.io.IOException if any.
      */
     public Iterator<String> getMetadataKeys()
             throws IOException {
@@ -226,6 +232,10 @@ public class PDFFile {
      * and restores it afterwards, so callers need not know that the position
      * has changed.
      *
+     * @param ref a {@link org.loboevolution.pdfview.PDFXref} object.
+     * @param decrypter a {@link org.loboevolution.pdfview.decrypt.PDFDecrypter} object.
+     * @return a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
      */
     public synchronized PDFObject dereference(PDFXref ref, PDFDecrypter decrypter)
             throws IOException {
@@ -305,6 +315,9 @@ public class PDFFile {
     /**
      * Is the argument a white space character according to the PDF spec?.
      * ISO Spec 32000-1:2008 - Table 1
+     *
+     * @param c a int.
+     * @return a boolean.
      */
     public static boolean isWhiteSpace(int c) {
         return c == ' ' || c == NUL_CHAR || c == '\t' || c == '\n' || c == '\r' || c == FF_CHAR;
@@ -327,6 +340,7 @@ public class PDFFile {
      * ISO 32000-1:2008 - Table 2
      *
      * @param c the character to test
+     * @return a boolean.
      */
     public static boolean isDelimiter(int c) {
         switch (c) {
@@ -490,7 +504,7 @@ public class PDFFile {
      * must be in the file
      * @return true if the next characters match; false otherwise.
      */
-    private boolean nextItemIs(String match) throws IOException {
+    private boolean nextItemIs(String match) {
         // skip whitespace
         int c = nextNonWhitespaceChar(buf);
         for (int i = 0; i < match.length(); i++) {
@@ -523,7 +537,7 @@ public class PDFFile {
 
     /**
      * return the major version of the PDF header.
-     * 
+     *
      * @return int
      */
     public int getMajorVersion() {
@@ -532,7 +546,7 @@ public class PDFFile {
 
     /**
      * return the minor version of the PDF header.
-     * 
+     *
      * @return int
      */
     public int getMinorVersion() {
@@ -541,7 +555,7 @@ public class PDFFile {
 
     /**
      * return the version string from the PDF header.
-     * 
+     *
      * @return String
      */
     public String getVersionString() {
@@ -588,7 +602,7 @@ public class PDFFile {
      * hexidecimal character.  Returns -1 if the next character isn't in
      * [0-9a-fA-F]
      */
-    private int readHexDigit() throws IOException {
+    private int readHexDigit() {
         int a;
         while (isWhiteSpace(a = this.buf.get())) {
         }
@@ -913,7 +927,7 @@ public class PDFFile {
      * read a bare keyword.  The initial character is passed in as the
      * argument.
      */
-    private PDFObject readKeyword(char start) throws IOException {
+    private PDFObject readKeyword(char start) {
         // we've read the first character (it's passed in as the argument)
         StringBuilder sb = new StringBuilder(String.valueOf(start));
         int c;
@@ -1435,6 +1449,9 @@ public class PDFFile {
      * Gets the outline tree as a tree of OutlineNode, which is a subclass
      * of DefaultMutableTreeNode.  If there is no outline tree, this method
      * returns null.
+     *
+     * @return a {@link org.loboevolution.pdfview.OutlineNode} object.
+     * @throws java.io.IOException if any.
      */
     public OutlineNode getOutline() throws IOException {
         // find the outlines entry in the root object
@@ -1512,8 +1529,11 @@ public class PDFFile {
      * Gets the page number (starting from 1) of the page represented by
      * a particular PDFObject.  The PDFObject must be a Page dictionary or
      * a destination description (or an action).
+     *
      * @return a number between 1 and the number of pages indicating the
      * page number, or 0 if the PDFObject is not in the page tree.
+     * @param page a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
      */
     public int getPageNumber(PDFObject page) throws IOException {
         if (page.getType() == PDFObject.ARRAY) {
@@ -1554,6 +1574,7 @@ public class PDFFile {
      * Get the page commands for a given page in a separate thread.
      *
      * @param pagenum the number of the page to get commands for
+     * @return a {@link org.loboevolution.pdfview.PDFPage} object.
      */
     public PDFPage getPage(int pagenum) {
         return getPage(pagenum, false);
@@ -1564,6 +1585,7 @@ public class PDFFile {
      *
      * @param pagenum the number of the page to get commands for
      * @param wait if true, do not exit until the page is complete.
+     * @return a {@link org.loboevolution.pdfview.PDFPage} object.
      */
     public PDFPage getPage(int pagenum, boolean wait) {
         Integer key = pagenum;
@@ -1609,6 +1631,8 @@ public class PDFFile {
 
     /**
      * Stop the rendering of a particular image on this page
+     *
+     * @param pageNum a int.
      */
     public void stop(int pageNum) {
         PDFParser parser = this.cache.getPageParser(pageNum);
@@ -1794,6 +1818,13 @@ public class PDFFile {
         return null;
     }
 
+    /**
+     * <p>parseNormalisedRectangle.</p>
+     *
+     * @param obj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @return a {@link java.awt.geom.Rectangle2D} object.
+     * @throws java.io.IOException if any.
+     */
     public static Rectangle2D parseNormalisedRectangle(PDFObject obj)
             throws IOException {
 
@@ -1842,6 +1873,7 @@ public class PDFFile {
 
     /**
      * Get the default decrypter for the document
+     *
      * @return the default decrypter; never null, even for documents that
      *  aren't encrypted
      */

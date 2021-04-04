@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Oct 29, 2005
@@ -62,8 +59,8 @@ import org.loboevolution.html.node.events.EventListener;
 /**
  * <p>ElementImpl class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
@@ -85,10 +82,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 
 	/**
-	 * <p>assignAttributeField.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param normalName a {@link java.lang.String} object.
-	 * @param value a {@link java.lang.String} object.
+	 * <p>assignAttributeField.</p>
 	 */
 	protected void assignAttributeField(String normalName, String value) {
 		boolean isName = false;
@@ -427,9 +423,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 
 	/**
-	 * <p>Setter for the field id.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param id a {@link java.lang.String} object.
+	 * <p>Setter for the field id.</p>
 	 */
 	public void setId(String id) {
 		setAttribute("id", id);
@@ -548,11 +544,11 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <p>
 	 * setInnerHTML.
 	 * </p>
-	 *
-	 * @param newHtml a {@link java.lang.String} object.
 	 */
 	@Override
 	public void setInnerHTML(String newHtml) {
@@ -574,6 +570,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 	
 	/**
+	 * <p>Getter for the field <code>outer</code>.</p>
+	 *
 	 * @return the outer
 	 */
 	public String getOuter() {
@@ -581,6 +579,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 
 	/**
+	 * <p>Setter for the field <code>outer</code>.</p>
+	 *
 	 * @param outer the outer to set
 	 */
 	public void setOuter(String outer) {
@@ -589,26 +589,29 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	
 	/**
-	 * <p>getClassList.</p>
+	 * {@inheritDoc}
 	 *
-	 * @return a {@link org.loboevolution.html.dom.DOMTokenList} object.
+	 * <p>getClassList.</p>
 	 */
 	@Override
 	public DOMTokenList getClassList() {
         return new DOMTokenListImpl(this, this.getClassName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getClassName() {
 		final String className = getAttribute("class");
 		return className == null ? "" : className;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setClassName(String className) {
 		setAttribute("class", className);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClientHeight() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -632,18 +635,21 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return HtmlValues.getPixelSize(height, null, -1, preferredSize.height);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClientLeft() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClientTop() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClientWidth() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -659,6 +665,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return HtmlValues.getPixelSize(width, null, -1, preferredSize.width);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public EventListener<Event> getOnfullscreenchange() {
 		// TODO Auto-generated method stub
@@ -667,9 +674,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	
 	/**
-	 * <p>getOuterHTML.</p>
+	 * {@inheritDoc}
 	 *
-	 * @return a {@link java.lang.String} object.
+	 * <p>getOuterHTML.</p>
 	 */
 	@Override
 	public String getOuterHTML() {
@@ -681,9 +688,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 	
 	/**
-	 * <p>setOuterHTML.</p>
+	 * {@inheritDoc}
 	 *
-	 * @param newHtml a {@link java.lang.String} object.
+	 * <p>setOuterHTML.</p>
 	 */
 	@Override
 	public void setOuterHTML(String newHtml) {
@@ -707,150 +714,175 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScrollHeight() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScrollLeft() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setScrollLeft(double scrollLeft) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScrollTop() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setScrollTop(double scrollTop) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getScrollWidth() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getSlot() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setSlot(String slot) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public <E extends Element> E closest(String selector) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String[] getAttributeNames() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasPointerCapture(int pointerId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean matches(String selectors) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void releasePointerCapture(int pointerId) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void requestPointerLock() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scroll() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scroll(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollBy() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollBy(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollIntoView(boolean arg) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollIntoView() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollTo() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scrollTo(double x, double y) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setPointerCapture(int pointerId) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean toggleAttribute(String qualifiedName, boolean force) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean toggleAttribute(String qualifiedName) {
 		// TODO Auto-generated method stub

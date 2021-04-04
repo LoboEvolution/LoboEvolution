@@ -6,8 +6,10 @@ package org.mozilla.javascript;
 
 /**
  * This class distinguishes between the three different supported stack trace formats.
+ *
+ *
+ *
  */
-
 public enum StackStyle {
     /**
      * This is the default stack trace style in Rhino, which is like Java:

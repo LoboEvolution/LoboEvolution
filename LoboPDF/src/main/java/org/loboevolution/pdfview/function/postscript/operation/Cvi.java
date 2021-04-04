@@ -4,6 +4,8 @@ import java.util.Stack;
 final class Cvi implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num</i> <b>cvi</b> <i>int</i> <u>or</u> <i>string</i> <b>cvi</b> <i>int</i> <p>
 	 *
 	 * takes an integer, real, or string and produces an

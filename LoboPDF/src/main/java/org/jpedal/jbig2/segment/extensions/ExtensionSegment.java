@@ -55,12 +55,29 @@ import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Segment;
 
+/**
+ * <p>ExtensionSegment class.</p>
+ *
+  *
+  *
+ */
 public class ExtensionSegment extends Segment {
 
+	/**
+	 * <p>Constructor for ExtensionSegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 */
 	public ExtensionSegment(JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 		for (int i = 0; i < getSegmentHeader().getSegmentDataLength(); i++) {
 			decoder.readByte();

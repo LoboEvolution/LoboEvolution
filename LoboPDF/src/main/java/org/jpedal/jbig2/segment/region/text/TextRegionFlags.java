@@ -54,19 +54,35 @@ import java.util.logging.Logger;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
+/**
+ * <p>TextRegionFlags class.</p>
+ *
+  *
+  *
+ */
 public class TextRegionFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(TextRegionFlags.class.getName());
+	/** Constant <code>SB_HUFF="SB_HUFF"</code> */
 	public static final String SB_HUFF = "SB_HUFF";
+	/** Constant <code>SB_REFINE="SB_REFINE"</code> */
 	public static final String SB_REFINE = "SB_REFINE";
+	/** Constant <code>LOG_SB_STRIPES="LOG_SB_STRIPES"</code> */
 	public static final String LOG_SB_STRIPES = "LOG_SB_STRIPES";
+	/** Constant <code>REF_CORNER="REF_CORNER"</code> */
 	public static final String REF_CORNER = "REF_CORNER";
+	/** Constant <code>TRANSPOSED="TRANSPOSED"</code> */
 	public static final String TRANSPOSED = "TRANSPOSED";
+	/** Constant <code>SB_COMB_OP="SB_COMB_OP"</code> */
 	public static final String SB_COMB_OP = "SB_COMB_OP";
+	/** Constant <code>SB_DEF_PIXEL="SB_DEF_PIXEL"</code> */
 	public static final String SB_DEF_PIXEL = "SB_DEF_PIXEL";
+	/** Constant <code>SB_DS_OFFSET="SB_DS_OFFSET"</code> */
 	public static final String SB_DS_OFFSET = "SB_DS_OFFSET";
+	/** Constant <code>SB_R_TEMPLATE="SB_R_TEMPLATE"</code> */
 	public static final String SB_R_TEMPLATE = "SB_R_TEMPLATE";
 
+	/** {@inheritDoc} */
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 

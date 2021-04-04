@@ -17,8 +17,10 @@ package com.gargoylesoftware.css.parser.selector;
 import com.gargoylesoftware.css.parser.Locator;
 
 /**
+ * <p>PseudoElementSelector class.</p>
  *
- * @author Ronald Brill
+ * Author Ronald Brill
+ *
  */
 public class PseudoElementSelector extends AbstractSelector implements SimpleSelector {
 
@@ -27,6 +29,7 @@ public class PseudoElementSelector extends AbstractSelector implements SimpleSel
 
     /**
      * Ctor.
+     *
      * @param localName the local name
      * @param locator the locator
      * @param doubleColon double column flag
@@ -37,23 +40,28 @@ public class PseudoElementSelector extends AbstractSelector implements SimpleSel
         doubleColon_ = doubleColon;
     }
 
+    /** {@inheritDoc} */
     @Override
     public SelectorType getSelectorType() {
         return SelectorType.PSEUDO_ELEMENT_SELECTOR;
     }
 
+    /** {@inheritDoc} */
     @Override
     public SimpleSelector getSimpleSelector() {
         return this;
     }
 
     /**
+     * <p>getLocalName.</p>
+     *
      * @return the local name
      */
     public String getLocalName() {
         return localName_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         if (localName_ == null) {

@@ -61,6 +61,12 @@ import org.jpedal.jbig2.image.JBIG2Bitmap;
 import org.jpedal.jbig2.segment.Segment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+/**
+ * <p>SymbolDictionarySegment class.</p>
+ *
+  *
+  *
+ */
 public class SymbolDictionarySegment extends Segment {
 
 	private static final Logger logger = Logger.getLogger(SymbolDictionarySegment.class.getName());
@@ -79,10 +85,21 @@ public class SymbolDictionarySegment extends Segment {
 	private ArithmeticDecoderStats genericRegionStats;
 	private ArithmeticDecoderStats refinementRegionStats;
 
+	/**
+	 * <p>Constructor for SymbolDictionarySegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 */
 	public SymbolDictionarySegment(JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 
 		if (JBIG2StreamDecoder.debug)
@@ -465,46 +482,101 @@ public class SymbolDictionarySegment extends Segment {
 			logger.info("noOfNewSymbols = " + noOfNewSymbols);
 	}
 
+	/**
+	 * <p>Getter for the field <code>noOfExportedSymbols</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getNoOfExportedSymbols() {
 		return noOfExportedSymbols;
 	}
 
+	/**
+	 * <p>Setter for the field <code>noOfExportedSymbols</code>.</p>
+	 *
+	 * @param noOfExportedSymbols a int.
+	 */
 	public void setNoOfExportedSymbols(int noOfExportedSymbols) {
 		this.noOfExportedSymbols = noOfExportedSymbols;
 	}
 
+	/**
+	 * <p>Getter for the field <code>noOfNewSymbols</code>.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getNoOfNewSymbols() {
 		return noOfNewSymbols;
 	}
 
+	/**
+	 * <p>Setter for the field <code>noOfNewSymbols</code>.</p>
+	 *
+	 * @param noOfNewSymbols a int.
+	 */
 	public void setNoOfNewSymbols(int noOfNewSymbols) {
 		this.noOfNewSymbols = noOfNewSymbols;
 	}
 
+	/**
+	 * <p>Getter for the field <code>bitmaps</code>.</p>
+	 *
+	 * @return an array of {@link org.jpedal.jbig2.image.JBIG2Bitmap} objects.
+	 */
 	public JBIG2Bitmap[] getBitmaps() {
 		return bitmaps;
 	}
 
+	/**
+	 * <p>Getter for the field <code>symbolDictionaryFlags</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.segment.symboldictionary.SymbolDictionaryFlags} object.
+	 */
 	public SymbolDictionaryFlags getSymbolDictionaryFlags() {
 		return symbolDictionaryFlags;
 	}
 
+	/**
+	 * <p>Setter for the field <code>symbolDictionaryFlags</code>.</p>
+	 *
+	 * @param symbolDictionaryFlags a {@link org.jpedal.jbig2.segment.symboldictionary.SymbolDictionaryFlags} object.
+	 */
 	public void setSymbolDictionaryFlags(SymbolDictionaryFlags symbolDictionaryFlags) {
 		this.symbolDictionaryFlags = symbolDictionaryFlags;
 	}
 
+	/**
+	 * <p>Getter for the field <code>genericRegionStats</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 */
 	public ArithmeticDecoderStats getGenericRegionStats() {
 		return genericRegionStats;
 	}
 
+	/**
+	 * <p>Setter for the field <code>genericRegionStats</code>.</p>
+	 *
+	 * @param genericRegionStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 */
 	public void setGenericRegionStats(ArithmeticDecoderStats genericRegionStats) {
 		this.genericRegionStats = genericRegionStats;
 	}
 
+	/**
+	 * <p>Setter for the field <code>refinementRegionStats</code>.</p>
+	 *
+	 * @param refinementRegionStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 */
 	public void setRefinementRegionStats(ArithmeticDecoderStats refinementRegionStats) {
 		this.refinementRegionStats = refinementRegionStats;
 	}
 
+	/**
+	 * <p>Getter for the field <code>refinementRegionStats</code>.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+	 */
 	public ArithmeticDecoderStats getRefinementRegionStats() {
 		return refinementRegionStats;
 	}

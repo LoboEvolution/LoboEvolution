@@ -24,8 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * <p>CMapFormat6 class.</p>
  *
- * @author  jkaplan
+ * Author  jkaplan
+  *
  */
 public class CMapFormat6 extends CMap {
     /** First character code of subrange. */
@@ -37,14 +39,20 @@ public class CMapFormat6 extends CMap {
     /** a reverse lookup from glyph id to index. */
     private final Map<Short,Short> glyphLookup = new HashMap<>();
 
-    /** Creates a new instance of CMapFormat0 */
+    /**
+     * Creates a new instance of CMapFormat0
+     *
+     * @param language a short.
+     */
     protected CMapFormat6(short language) {
         super((short) 6, language);
     }
 
-    /**
-     * Get the length of this table
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the length of this table
+	 */
     @Override
 	public short getLength() {
         // start with the size of the fixed header
@@ -55,9 +63,11 @@ public class CMapFormat6 extends CMap {
         return size;
     }
 
-    /**
-     * Cannot map from a byte
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Cannot map from a byte
+	 */
     @Override
 	public byte map(byte src) {
         char c = map((char) src);
@@ -68,9 +78,11 @@ public class CMapFormat6 extends CMap {
         return (byte) c;
     }
 
-    /**
-     * Map from char
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Map from char
+	 */
     @Override
 	public char map(char src) {
 
@@ -83,9 +95,11 @@ public class CMapFormat6 extends CMap {
         return (char) this.glyphIndexArray[src - this.firstCode];
     }
 
-    /**
-     * Get the src code which maps to the given glyphID
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the src code which maps to the given glyphID
+	 */
     @Override
 	public char reverseMap(short glyphID) {
         Short result = this.glyphLookup.get(glyphID);
@@ -96,9 +110,11 @@ public class CMapFormat6 extends CMap {
     }
 
 
-    /**
-     * Get the data in this map as a ByteBuffer
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the data in this map as a ByteBuffer
+	 */
     @Override
 	public void setData(int length, ByteBuffer data) {
         // read the table size values
@@ -113,9 +129,11 @@ public class CMapFormat6 extends CMap {
         }
     }
 
-    /**
-     * Get the data in the map as a byte buffer
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Get the data in the map as a byte buffer
+	 */
     @Override
 	public ByteBuffer getData() {
         ByteBuffer buf = ByteBuffer.allocate(getLength());

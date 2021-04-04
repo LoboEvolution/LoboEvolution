@@ -4,29 +4,34 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-/*****************************************************************************
+/**
+ ***************************************************************************
  * Very simple post script parser / tokenizer
  *
- * @author  Bernd Rosstauscher
+ * Author  Bernd Rosstauscher
  * @since 22.10.2010
- ****************************************************************************/
-
+ ***************************************************************************
+  *
+ */
 public class PostScriptParser {
 	
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Constructor
-	 ************************************************************************/
-	
+	 ***********************************************************************
+	 */
 	public PostScriptParser() {
 		super();
 	}
 	
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Parses the given script and returns a list of tokens.
+	 *
 	 * @param scriptContent to parse.
 	 * @return the list of tokens.
-	 ************************************************************************/
-	
+	 ***********************************************************************
+	 */
 	public List<String> parse(String scriptContent) {
 		List<String> tokens = new LinkedList<>();
 		StringTokenizer tok = new StringTokenizer(scriptContent, " \t\n\r"); 

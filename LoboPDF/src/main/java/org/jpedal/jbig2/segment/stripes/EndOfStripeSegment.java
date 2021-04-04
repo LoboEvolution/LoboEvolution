@@ -55,12 +55,29 @@ import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Segment;
 
+/**
+ * <p>EndOfStripeSegment class.</p>
+ *
+  *
+  *
+ */
 public class EndOfStripeSegment extends Segment {
 
+	/**
+	 * <p>Constructor for EndOfStripeSegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 */
 	public EndOfStripeSegment(JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 		for (int i = 0; i < this.getSegmentHeader().getSegmentDataLength(); i++) {
 			decoder.readByte();

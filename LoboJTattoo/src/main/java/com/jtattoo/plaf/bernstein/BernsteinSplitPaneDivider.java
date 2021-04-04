@@ -29,8 +29,8 @@ import com.jtattoo.plaf.BaseSplitPaneDivider;
 /**
  * <p>BernsteinSplitPaneDivider class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BernsteinSplitPaneDivider extends BaseSplitPaneDivider {
 

@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Oct 15, 2005
@@ -48,8 +45,8 @@ import org.xml.sax.SAXException;
  * The DocumentBuilderImpl class is an HTML DOM parser that
  * implements the standard W3C DocumentBuilder interface.
  *
- * @author J. H. S.
- * @version $Id: $Id
+ * Author J. H. S.
+ *
  */
 public class DocumentBuilderImpl {
 	private static final Logger logger = Logger.getLogger(DocumentBuilderImpl.class.getName());
@@ -90,7 +87,7 @@ public class DocumentBuilderImpl {
 	 *                 which may be an instance of
 	 *                 {@link org.loboevolution.http.UserAgentContext}.
 	 * @param rcontext An instance of
-	 *                 {@link  org.loboevolution.http.HtmlRendererContext}
+	 *                 {@link org.loboevolution.http.HtmlRendererContext}
 	 */
 	public DocumentBuilderImpl(UserAgentContext ucontext, HtmlRendererContext rcontext) {
 		this.rcontext = rcontext;
@@ -145,6 +142,11 @@ public class DocumentBuilderImpl {
 		return document;
 	}
 
+	/**
+	 * <p>getDOMImplementation.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.node.DOMImplementation} object.
+	 */
 	public DOMImplementation getDOMImplementation() {
 		synchronized (this) {
 			if (this.domImplementation == null) {
@@ -172,15 +174,30 @@ public class DocumentBuilderImpl {
 		return this.resolver;
 	}
 
+	/**
+	 * <p>isNamespaceAware.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isNamespaceAware() {
 		return false;
 	}
 
+	/**
+	 * <p>isValidating.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isValidating() {
 		return false;
 	}
 
 
+	/**
+	 * <p>newDocument.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.node.Document} object.
+	 */
 	public Document newDocument() {
 		return new HTMLDocumentImpl(this.bcontext);
 	}
@@ -190,6 +207,11 @@ public class DocumentBuilderImpl {
 	 *
 	 * Parses an HTML document. Note that this method will read the entire input
 	 * source before returning a Document instance.
+	 *
+	 * @param is a {@link org.xml.sax.InputSource} object.
+	 * @return a {@link org.loboevolution.html.node.Document} object.
+	 * @throws org.xml.sax.SAXException if any.
+	 * @throws java.io.IOException if any.
 	 */
 	public Document parse(InputSource is) throws SAXException, IOException {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) createDocument(is);
@@ -197,10 +219,20 @@ public class DocumentBuilderImpl {
 		return document;
 	}
 
+	/**
+	 * <p>setEntityResolver.</p>
+	 *
+	 * @param er a {@link org.xml.sax.EntityResolver} object.
+	 */
 	public void setEntityResolver(EntityResolver er) {
 		this.resolver = er;
 	}
 
+	/**
+	 * <p>Setter for the field <code>errorHandler</code>.</p>
+	 *
+	 * @param eh a {@link org.xml.sax.ErrorHandler} object.
+	 */
 	public void setErrorHandler(ErrorHandler eh) {
 		this.errorHandler = eh;
 	}

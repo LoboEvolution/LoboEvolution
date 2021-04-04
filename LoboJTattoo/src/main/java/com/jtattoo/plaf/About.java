@@ -41,8 +41,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 /**
  * <p>About class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 
 // TODO:

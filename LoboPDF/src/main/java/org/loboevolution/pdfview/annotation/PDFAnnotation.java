@@ -13,15 +13,18 @@ import org.loboevolution.pdfview.PDFCmd;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
-/*****************************************************************************
- * Encapsulate a PDF annotation. This is only the super-class of PDF annotations, 
- * which has an "unknown" annotation type. 
- * Use the createAnnotation() method for getting an annotation of the correct 
+/**
+ ***************************************************************************
+ * Encapsulate a PDF annotation. This is only the super-class of PDF annotations,
+ * which has an "unknown" annotation type.
+ * Use the createAnnotation() method for getting an annotation of the correct
  * type (if implemented).
  *
- * @author  Katja Sondermann
+ * Author  Katja Sondermann
  * @since 03.07.2009
- ****************************************************************************/
+ ***************************************************************************
+  *
+ */
 public class PDFAnnotation{
 	public enum ANNOTATION_TYPE{
 		UNKNOWN("-", 0, PDFAnnotation.class),
@@ -63,8 +66,8 @@ public class PDFAnnotation{
 		
 		/**
 		 * Get annotation type by it's type 
-		 * @param definition
-		 * @return
+		 * @param definition a {@link java.lang.String} object.
+		 * @return a {@link org.loboevolution.pdfview.annotation.PDFAnnotation.ANNOTATION_TYPE} object.
 		 */
 		public static ANNOTATION_TYPE getByDefinition(String definition) {
 			for (ANNOTATION_TYPE type : values()) {
@@ -78,28 +81,36 @@ public class PDFAnnotation{
 	
 	/** Definition of some annotation sub-types*/
 	public static final String GOTO = "GoTo";
+	/** Constant <code>GOTOE="GoToE"</code> */
 	public static final String GOTOE = "GoToE";
+	/** Constant <code>GOTOR="GoToR"</code> */
 	public static final String GOTOR = "GoToR";
+	/** Constant <code>URI="URI"</code> */
 	public static final String URI = "URI";
 	
 	private final PDFObject pdfObj;
 	private final ANNOTATION_TYPE type;
 	private final Float rect;
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Constructor
+	 *
 	 * @param annotObject - the PDFObject which contains the annotation description
-	 * @throws IOException 
-	 ************************************************************************/
+	 * @throws java.io.IOException if any.
+	 */
 	public PDFAnnotation(PDFObject annotObject) throws IOException{
 		this(annotObject, ANNOTATION_TYPE.UNKNOWN);
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Constructor
+	 *
 	 * @param annotObject - the PDFObject which contains the annotation description
-	 * @throws IOException 
-	 ************************************************************************/
+	 * @param type a {@link org.loboevolution.pdfview.annotation.PDFAnnotation.ANNOTATION_TYPE} object.
+	 * @throws java.io.IOException if any.
+	 */
 	protected PDFAnnotation(PDFObject annotObject, ANNOTATION_TYPE type) throws IOException{
 		this.pdfObj = annotObject;
 		// in case a general "PdfAnnotation" is created the type is unknown
@@ -107,16 +118,17 @@ public class PDFAnnotation{
 		this.rect = this.parseRect(annotObject.getDictRef("Rect"));
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Create a new PDF annotation object.
-	 * 
+	 *
 	 * Currently supported annotation types:
-	 * <li>Link annotation</li>
-	 * 
-	 * @param parent
-	 * @return PDFAnnotation
-	 * @throws IOException 
-	 ************************************************************************/
+	 * Link annotation
+	 *
+	 * @param parent a {@link org.loboevolution.pdfview.PDFObject} object.
+	 * @return PDFAnnotation a {@link org.loboevolution.pdfview.annotation.PDFAnnotation} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public static PDFAnnotation createAnnotation(PDFObject parent) throws IOException{
 		PDFObject subtypeValue = parent.getDictRef("Subtype");
 		if(subtypeValue == null) {
@@ -162,11 +174,14 @@ public class PDFAnnotation{
 		}
 	}
 
-	/**
+    /**
      * Get a Rectangle2D.Float representation for a PDFObject that is an
      * array of four Numbers.
+     *
      * @param obj a PDFObject that represents an Array of exactly four
      * Numbers.
+     * @return a {@link java.awt.geom.Rectangle2D.Float} object.
+     * @throws java.io.IOException if any.
      */
     public Rectangle2D.Float parseRect(PDFObject obj) throws IOException {
         if (obj.getType() == PDFObject.ARRAY) {
@@ -184,30 +199,40 @@ public class PDFAnnotation{
         }
     }
 
-	/*************************************************************************
-     * Get the PDF Object which contains the annotation values
-     * @return PDFObject
-     ************************************************************************/
+	/**
+	 ***********************************************************************
+	 * Get the PDF Object which contains the annotation values
+	 *
+	 * @return PDFObject
+	 ***********************************************************************
+	 */
 	public PDFObject getPdfObj() {
 		return this.pdfObj;
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Get the annotation type
+	 *
 	 * @return int
-	 ************************************************************************/
+	 ***********************************************************************
+	 */
 	public ANNOTATION_TYPE getType() {
 		return this.type;
 	}
 
-	/*************************************************************************
+	/**
+	 ***********************************************************************
 	 * Get the rectangle on which the annotation should be applied to
-	 * @return Rectangle2D.Float	
-	 ************************************************************************/
+	 *
+	 * @return Rectangle2D.Float
+	 ***********************************************************************
+	 */
 	public Float getRect() {
 		return this.rect;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return this.pdfObj.toString();
@@ -215,13 +240,20 @@ public class PDFAnnotation{
 	
 	/**
 	 * Get list of pdf commands for this annotation
-	 * @return 
+	 *
+	 * @return a {@link java.util.List} object.
 	 */
 	public List<PDFCmd> getPageCommandsForAnnotation() {
 		return new ArrayList<>();
 	}
 	
 
+	/**
+	 * <p>getScalingTransformation.</p>
+	 *
+	 * @param bbox a {@link java.awt.geom.Rectangle2D.Float} object.
+	 * @return a {@link java.awt.geom.AffineTransform} object.
+	 */
 	protected AffineTransform getScalingTransformation(Float bbox) {
 		AffineTransform at = new AffineTransform();		
 		double scaleHeight = getRect().getHeight()/bbox.getHeight();

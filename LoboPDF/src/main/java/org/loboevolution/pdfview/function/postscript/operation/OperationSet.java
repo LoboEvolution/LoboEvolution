@@ -3,6 +3,12 @@ package org.loboevolution.pdfview.function.postscript.operation;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>OperationSet class.</p>
+ *
+  *
+  *
+ */
 public class OperationSet {
 	
     /** the set of all Operations we support. These operations are defined
@@ -20,10 +26,11 @@ public class OperationSet {
     	initOperations();
     }
     
-    /*************************************************************************
-     * @return
-     ************************************************************************/
-    
+    /**
+     * <p>Getter for the field <code>instance</code>.</p>
+     *
+     * @return a {@link org.loboevolution.pdfview.function.postscript.operation.OperationSet} object.
+     */
     public static synchronized OperationSet getInstance() {
     	if (instance == null) {
     		instance = new OperationSet();
@@ -31,11 +38,12 @@ public class OperationSet {
     	return instance;
     }
     
-    /*************************************************************************
-     * @param token
-     * @return
-     ************************************************************************/
-    
+    /**
+     * <p>getOperation.</p>
+     *
+     * @param token a {@link java.lang.String} object.
+     * @return a {@link org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation} object.
+     */
     public PostScriptOperation getOperation(String token) {
     	PostScriptOperation result = this.operationSet.get(token.trim().toLowerCase());
     	if (result == null) {

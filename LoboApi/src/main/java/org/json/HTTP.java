@@ -39,6 +39,7 @@ public class HTTP {
 
     /**
      * Convert an HTTP header string into a JSONObject.
+     *
      * @param string An HTTP header string.
      * @return A JSONObject containing the elements and attributes
      * of the XML string.
@@ -100,6 +101,7 @@ public class HTTP {
      * @return An HTTP header string.
      * @throws org.json.JSONException if any. if the object does not contain enough
      *  information.
+     * @throws org.json.JSONException if any.
      */
     public static String toString(JSONObject jo) throws JSONException {
         StringBuilder       sb = new StringBuilder();

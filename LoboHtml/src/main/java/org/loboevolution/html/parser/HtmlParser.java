@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.parser;
@@ -60,8 +57,8 @@ import org.xml.sax.SAXException;
  * {@link org.loboevolution.html.parser.DocumentBuilderImpl}. This parser class
  * may be used directly when a different DOM implementation is preferred.
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class HtmlParser {
 	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());
@@ -179,8 +176,8 @@ public class HtmlParser {
 	 * document provided to the parser.
 	 *
 	 * @param reader An instance of Reader.
-	 * @throws java.io.IOException if any.  Thrown if there are errors reading the input stream.
-	 * @throws org.xml.sax.SAXException Thrown if there are parse errors.
+	 * @throws java.io.IOException if any.
+	 * @throws org.xml.sax.SAXException if any.
 	 */
 	public void parse(final Reader reader) throws IOException, SAXException {
 		this.parse(new LineNumberReader(reader));

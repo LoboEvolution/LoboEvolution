@@ -26,7 +26,9 @@ import org.loboevolution.pdfview.PDFObject;
 
 /**
  * A ColorSpace for Lab color
- * @author Mike Wessler
+ *
+ * Author Mike Wessler
+  *
  */
 public class LabColor extends ColorSpace {
 	
@@ -38,9 +40,11 @@ public class LabColor extends ColorSpace {
     /**
      * Create a new Lab color space object, given the description in
      * a PDF dictionary.
+     *
      * @param obj a dictionary that contains an Array of 3 Numbers for
      * "WhitePoint" and "BlackPoint", and an array of 4 Numbers for
      * "Range".
+     * @throws java.io.IOException if any.
      */
     public LabColor(PDFObject obj) throws IOException {
 	// obj is a dictionary that has the following parts:
@@ -69,6 +73,8 @@ public class LabColor extends ColorSpace {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * get the number of components for this color space (3)
      */
     @Override public int getNumComponents() {
@@ -78,16 +84,19 @@ public class LabColor extends ColorSpace {
     /**
      * Stage 2 of the conversion algorithm.  Pulled out because
      * it gets invoked for each component
+     *
+     * @param s1 a float.
+     * @return a float.
      */
     public final float stage2(float s1) {
 	return (s1>=6f/29f)?s1*s1*s1:108f/841f*(s1-4f/29f);
     }
 
-    /**
-     * convert from Lab to RGB
-     * @param comp the Lab values (0-1)
-     * @return the RGB values (0-1)
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from Lab to RGB
+	 */
     @Override
 	public float[] toRGB(float[] comp) {
 	if (comp.length==3) {
@@ -105,32 +114,40 @@ public class LabColor extends ColorSpace {
 	}
     }
 
-    /**
-     * convert from RGB to Lab.  NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from RGB to Lab.  NOT IMPLEMENTED
+	 */
     @Override
 	public float[] fromRGB(float[] rgbvalue) {
 	return new float[3];
     }
 
-    /**
-     * convert from CIEXYZ to Lab.  NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from CIEXYZ to Lab.  NOT IMPLEMENTED
+	 */
     @Override
 	public float[] fromCIEXYZ(float[] colorvalue) {
 	return new float[3];
     }
 
     /**
+     * {@inheritDoc}
+     *
      * get the type of this colorspace (TYPE_Lab)
      */
     @Override public int getType() {
 	return TYPE_Lab;
     }
 
-    /**
-     * convert from Lab to CIEXYZ.   NOT IMPLEMENTED
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * convert from Lab to CIEXYZ.   NOT IMPLEMENTED
+	 */
     @Override
 	public float[] toCIEXYZ(float[] colorvalue) {
 	return new float[3];

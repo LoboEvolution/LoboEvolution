@@ -37,8 +37,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>GraphiteCheckBoxMenuItemUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class GraphiteCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
 

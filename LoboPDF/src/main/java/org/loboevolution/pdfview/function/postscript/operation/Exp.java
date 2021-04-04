@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Exp implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>base exponent</i> <b>exp</b> <i>real</i> <p>
 	 *
 	 * raises base to the exponent power. The operands may be

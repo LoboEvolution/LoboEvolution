@@ -7,6 +7,9 @@ package org.loboevolution.pdfview;
  *
  * Typically you would configure the global instance before using any other
  * PDFRenderer API.
+ *
+  *
+  *
  */
 public class Configuration {
 	private static Configuration INSTANCE;
@@ -31,6 +34,11 @@ public class Configuration {
     /** Print link annotations on pdf **/
     private boolean printLinkAnnotations = true;
     
+	/**
+	 * <p>getInstance.</p>
+	 *
+	 * @return a {@link org.loboevolution.pdfview.Configuration} object.
+	 */
 	public static synchronized Configuration getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new Configuration();
@@ -38,13 +46,14 @@ public class Configuration {
 		return INSTANCE;
 	}
 
-    /**
+	/**
 	 * Enables or disables the conversion of greyscale images to ARGB.
 	 * Disabling this may have a lower memory overhead with high resolution
 	 * (e.g. scanned) images. Note that this has to be called before
 	 *  is called to have an effect.
 	 *
 	 * Enabled by default.
+	 *
 	 * @param aFlag whether greyscale images shall be converted to ARGB.
 	 */
 	public void setConvertGreyscaleImagesToArgb(boolean aFlag) {
@@ -53,6 +62,8 @@ public class Configuration {
 
 	/**
 	 * Returns <code>true</code> if greyscale images will be converted to ARGB
+	 *
+	 * @return a boolean.
 	 */
 	public boolean isConvertGreyscaleImagesToArgb() {
 		return convertGreyscaleImagesToArgb;
@@ -64,7 +75,7 @@ public class Configuration {
 	 * This may lead to lower memory consumption for e.g. scanned PDFs with
 	 * large images.
 	 *
-	 * Set to a value <= 0 to disable banded image rendering.
+	 * Set to a value &lt;= 0 to disable banded image rendering.
 	 * Defaults to 0 (off)
 	 *
 	 * @param aSize the height threshold at which to enable banded image rendering
@@ -75,34 +86,35 @@ public class Configuration {
 
 	/**
 	 * Returns the image height threshold at which to enable banded image rendering.
-	 * @return the threshold value, or a value <= 0 if banded rendering is disabled
+	 *
+	 * @return the threshold value, or a value {@literal <}= 0 if banded rendering is disabled
 	 */
 	public int getThresholdForBandedImageRendering() {
 		return thresholdForBandedImageRendering;
 	}
 
-	/**
-	 * Is the color converting op switched on or off?
-	 * @return - the usage of this color convert op 
-	 */
+    /**
+     * Is the color converting op switched on or off?
+     *
+     * @return - the usage of this color convert op
+     */
     public boolean isAvoidColorConvertOp() {
         return avoidColorConvertOp;
     }
     
-    /** 
+    /**
      * Set this to false to switch off the
      * use of this color convert op which may segfault on some platforms
      * due to a variety of problems related to thread safety and
-     * the native cmm library underlying this conversion op, e.g.,
-     * https://forums.oracle.com/forums/thread.jspa?threadID=1261882&;tstart=225&messageID=5356357
-     * (Unix platforms seem the most affected)
-     * 
+     * the native cmm library underlying this conversion op
+     *
      * If the system is bug-free, though, this does make use
      * of native libraries and sees a not insignificant speed-up,
      * though it's still not exactly fast. If we don't run this op
      * now, it's performed at some later stage, but without using
      * the native code
-     * @param avoidColorConvertOp
+     *
+     * @param avoidColorConvertOp a boolean.
      */
     public void setAvoidColorConvertOp(boolean avoidColorConvertOp) {
         this.avoidColorConvertOp = avoidColorConvertOp;
@@ -110,6 +122,7 @@ public class Configuration {
 
     /**
      * Use blur before image resize to enhance the result (Antialias)?
+     *
      * @return the useBlurResizingForImages
      */
     public boolean isUseBlurResizingForImages() {
@@ -118,8 +131,8 @@ public class Configuration {
 
     /**
      * Use blur before image resize to enhance the result (Antialias)
-     * 
-     * @param useBlurResizingForImages 
+     *
+     * @param useBlurResizingForImages a boolean.
      */
     public void setUseBlurResizingForImages(boolean useBlurResizingForImages) {
         this.useBlurResizingForImages = useBlurResizingForImages;
@@ -127,14 +140,16 @@ public class Configuration {
     
     /**
      * Print signature fields on pdf
-     * 
-     * @param printSignatureFields
+     *
+     * @param printSignatureFields a boolean.
      */
     public void setPrintSignatureFields(boolean printSignatureFields) {
     	this.printSigantureFields = printSignatureFields;
     }
     
     /**
+     * <p>isPrintSignatureFields.</p>
+     *
      * @return <code>true</code> if signature fields will be printed on pdf
      */
     public boolean isPrintSignatureFields() {
@@ -143,14 +158,16 @@ public class Configuration {
 
     /**
      * Print stamp annotations on pdf
-     * 
-     * @param printStampAnnotations
+     *
+     * @param printStampAnnotations a boolean.
      */
     public void setPrintStampAnnotations(boolean printStampAnnotations) {
     	this.printStampAnnotations = printStampAnnotations;
     }
     
     /**
+     * <p>isPrintStampAnnotations.</p>
+     *
      * @return <code>true</code> if stamp annotations will be printed on pdf
      */
     public boolean isPrintStampAnnotations() {
@@ -159,14 +176,16 @@ public class Configuration {
     
     /**
      * Print widget annotations on pdf
-     * 
-     * @param printWidgetAnnotations
+     *
+     * @param printWidgetAnnotations a boolean.
      */
     public void setPrintWidgetAnnotations(boolean printWidgetAnnotations) {
     	this.printWidgetAnnotations = printWidgetAnnotations;
     }
     
     /**
+     * <p>isPrintWidgetAnnotations.</p>
+     *
      * @return <code>true</code> if widget annotations will be printed on pdf
      */
     public boolean isPrintWidgetAnnotations() {
@@ -175,14 +194,16 @@ public class Configuration {
     
     /**
      * Print freetext annotations on pdf
-     * 
-     * @param printFreetextAnnotations
+     *
+     * @param printFreetextAnnotations a boolean.
      */
     public void setPrintFreetextAnnotations(boolean printFreetextAnnotations) {
     	this.printFreetextAnnotations = printFreetextAnnotations;
     }
     
     /**
+     * <p>isPrintFreetextAnnotations.</p>
+     *
      * @return <code>true</code> if freetext annotations will be printed on pdf
      */
     public boolean isPrintFreetextAnnotations() {
@@ -191,14 +212,16 @@ public class Configuration {
     
     /**
      * Print link annotations on pdf
-     * 
-     * @param printLinkAnnotations
+     *
+     * @param printLinkAnnotations a boolean.
      */
     public void setPrintLinkAnnotations(boolean printLinkAnnotations) {
     	this.printLinkAnnotations = printLinkAnnotations;
     }
     
     /**
+     * <p>isPrintLinkAnnotations.</p>
+     *
      * @return <code>true</code> if link annotations will be printed on pdf
      */
     public boolean isPrintLinkAnnotations() {

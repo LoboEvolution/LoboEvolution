@@ -34,8 +34,8 @@ import javax.swing.plaf.basic.BasicLabelUI;
 /**
  * <p>BaseLabelUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseLabelUI extends BasicLabelUI {
 

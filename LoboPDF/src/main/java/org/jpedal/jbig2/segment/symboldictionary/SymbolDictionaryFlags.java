@@ -54,20 +54,37 @@ import java.util.logging.Logger;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
+/**
+ * <p>SymbolDictionaryFlags class.</p>
+ *
+  *
+  *
+ */
 public class SymbolDictionaryFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(SymbolDictionaryFlags.class.getName());
+	/** Constant <code>SD_HUFF="SD_HUFF"</code> */
 	public static final String SD_HUFF = "SD_HUFF";
+	/** Constant <code>SD_REF_AGG="SD_REF_AGG"</code> */
 	public static final String SD_REF_AGG = "SD_REF_AGG";
+	/** Constant <code>SD_HUFF_DH="SD_HUFF_DH"</code> */
 	public static final String SD_HUFF_DH = "SD_HUFF_DH";
+	/** Constant <code>SD_HUFF_DW="SD_HUFF_DW"</code> */
 	public static final String SD_HUFF_DW = "SD_HUFF_DW";
+	/** Constant <code>SD_HUFF_BM_SIZE="SD_HUFF_BM_SIZE"</code> */
 	public static final String SD_HUFF_BM_SIZE = "SD_HUFF_BM_SIZE";
+	/** Constant <code>SD_HUFF_AGG_INST="SD_HUFF_AGG_INST"</code> */
 	public static final String SD_HUFF_AGG_INST = "SD_HUFF_AGG_INST";
+	/** Constant <code>BITMAP_CC_USED="BITMAP_CC_USED"</code> */
 	public static final String BITMAP_CC_USED = "BITMAP_CC_USED";
+	/** Constant <code>BITMAP_CC_RETAINED="BITMAP_CC_RETAINED"</code> */
 	public static final String BITMAP_CC_RETAINED = "BITMAP_CC_RETAINED";
+	/** Constant <code>SD_TEMPLATE="SD_TEMPLATE"</code> */
 	public static final String SD_TEMPLATE = "SD_TEMPLATE";
+	/** Constant <code>SD_R_TEMPLATE="SD_R_TEMPLATE"</code> */
 	public static final String SD_R_TEMPLATE = "SD_R_TEMPLATE";
 
+	/** {@inheritDoc} */
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 

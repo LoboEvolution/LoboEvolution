@@ -60,6 +60,12 @@ import org.jpedal.jbig2.segment.pageinformation.PageInformationSegment;
 import org.jpedal.jbig2.segment.region.RegionFlags;
 import org.jpedal.jbig2.segment.region.RegionSegment;
 
+/**
+ * <p>RefinementRegionSegment class.</p>
+ *
+  *
+  *
+ */
 public class RefinementRegionSegment extends RegionSegment {
 	
 	private static final Logger logger = Logger.getLogger(RefinementRegionSegment.class.getName());
@@ -71,6 +77,14 @@ public class RefinementRegionSegment extends RegionSegment {
 
 	final int[] referedToSegments;
 
+	/**
+	 * <p>Constructor for RefinementRegionSegment.</p>
+	 *
+	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+	 * @param inlineImage a boolean.
+	 * @param referedToSegments an array of {@link int} objects.
+	 * @param noOfReferedToSegments a int.
+	 */
 	public RefinementRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage, int[] referedToSegments, int noOfReferedToSegments) {
 		super(streamDecoder);
 
@@ -79,6 +93,12 @@ public class RefinementRegionSegment extends RegionSegment {
 		this.noOfReferedToSegments = noOfReferedToSegments;
 	}
 
+	/**
+	 * <p>readSegment.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
+	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 		if (JBIG2StreamDecoder.debug)
 			logger.info("==== Reading Generic Refinement Region ====");
@@ -157,6 +177,11 @@ public class RefinementRegionSegment extends RegionSegment {
 			logger.info("generic region Segment flags = " + refinementRegionFlagsField);
 	}
 
+	/**
+	 * <p>getGenericRegionFlags.</p>
+	 *
+	 * @return a {@link org.jpedal.jbig2.segment.region.refinement.RefinementRegionFlags} object.
+	 */
 	public RefinementRegionFlags getGenericRegionFlags() {
 		return refinementRegionFlags;
 	}

@@ -17,8 +17,10 @@ import org.mozilla.javascript.Scriptable;
  * This class converts a stream of JSON tokens into a JSON value.
  *
  * See ECMA 15.12.
- * @author Raphael Speyer
- * @author Hannes Wallnoefer
+ *
+ * Author Raphael Speyer
+ * Author Hannes Wallnoefer
+ *
  */
 public class JsonParser {
 
@@ -29,11 +31,24 @@ public class JsonParser {
     private int length;
     private String src;
 
+    /**
+     * <p>Constructor for JsonParser.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public JsonParser(Context cx, Scriptable scope) {
         this.cx = cx;
         this.scope = scope;
     }
 
+    /**
+     * <p>parseValue.</p>
+     *
+     * @param json a {@link java.lang.String} object.
+     * @return a {@link java.lang.Object} object.
+     * @throws org.mozilla.javascript.json.JsonParser.ParseException if any.
+     */
     public synchronized Object parseValue(String json) throws ParseException {
         if (json == null) {
             throw new ParseException("Input string may not be null");

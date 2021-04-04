@@ -54,15 +54,27 @@ import java.util.logging.Logger;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
+/**
+ * <p>HalftoneRegionFlags class.</p>
+ *
+  *
+  *
+ */
 public class HalftoneRegionFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(HalftoneRegionFlags.class.getName());
+    /** Constant <code>H_MMR="H_MMR"</code> */
     public static final String H_MMR = "H_MMR";
+    /** Constant <code>H_TEMPLATE="H_TEMPLATE"</code> */
     public static final String H_TEMPLATE = "H_TEMPLATE";
+    /** Constant <code>H_ENABLE_SKIP="H_ENABLE_SKIP"</code> */
     public static final String H_ENABLE_SKIP = "H_ENABLE_SKIP";
+    /** Constant <code>H_COMB_OP="H_COMB_OP"</code> */
     public static final String H_COMB_OP = "H_COMB_OP";
+    /** Constant <code>H_DEF_PIXEL="H_DEF_PIXEL"</code> */
     public static final String H_DEF_PIXEL = "H_DEF_PIXEL";
 
+    /** {@inheritDoc} */
     public void setFlags(int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
 

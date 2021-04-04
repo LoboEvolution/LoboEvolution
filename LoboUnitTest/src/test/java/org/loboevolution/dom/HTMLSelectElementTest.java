@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -28,10 +25,13 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLSelectElement;
 
 /**
- * Tests for {@link HTMLSelectElement}. */
-
+ * Tests for {@link org.loboevolution.html.dom.HTMLSelectElement}.
+ */
 public class HTMLSelectElementTest extends LoboUnitTest {
 
+    /**
+     * <p>getSelectedIndex.</p>
+     */
     @Test
     public void getSelectedIndex() {
         final String html =
@@ -66,6 +66,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSelectedIndexNothingSelected.</p>
+     */
     @Test
     public void getSelectedIndexNothingSelected() {
         final String html =
@@ -99,6 +102,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getSelectedIndexNoOption.</p>
+     */
     @Test
     public void getSelectedIndexNoOption() {
         final String html =
@@ -127,6 +133,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selectedIndex2.</p>
+     */
     @Test
     public void selectedIndex2() {
         final String html =
@@ -152,6 +161,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setSelectedIndexInvalidValue.</p>
+     */
     @Test
     public void setSelectedIndexInvalidValue() {
         final String html =
@@ -186,6 +198,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOptions.</p>
+     */
     @Test
     public void getOptions() {
         final String html =
@@ -217,6 +232,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOptionLabel.</p>
+     */
     @Test
     public void getOptionLabel() {
         final String html =
@@ -248,6 +266,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOptionSelected.</p>
+     */
     @Test
     public void getOptionSelected() {
         final String html =
@@ -278,6 +299,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOptionByIndex.</p>
+     */
     @Test
     public void getOptionByIndex() {
         final String html =
@@ -304,6 +328,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getOptionByOptionIndex.</p>
+     */
     @Test
     public void getOptionByOptionIndex() {
         final String html =
@@ -331,6 +358,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addOption.</p>
+     */
     @Test
     public void addOption() {
         final String html =
@@ -362,6 +392,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addOptionSelected.</p>
+     */
     @Test
     public void addOptionSelected() {
         final String html =
@@ -401,6 +434,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addOptionWithAddMethodIndexNull.</p>
+     */
     @Test
     public void addOptionWithAddMethodIndexNull() {
         final String html =
@@ -433,6 +469,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addOptionWithAddMethodNoSecondParameter.</p>
+     */
     @Test
     public void addOptionWithAddMethodNoSecondParameter() {
         final String html =
@@ -473,6 +512,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addOptionTooEmptySelectWithAddMethodIndexNull.</p>
+     */
     @Test
     public void addOptionTooEmptySelectWithAddMethodIndexNull() {
         final String html = "<html>\n"
@@ -503,192 +545,288 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexMinusOneEmptySelect.</p>
+     */
     @Test
     public void addOptionMethodIndexMinusOneEmptySelect() {
         final String[] messages = {"0", "1", "0", "foo*"};
         addOptionMethod(", -1", true, false,messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexMinusOneEmptySelectMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexMinusOneEmptySelectMulti() {
         final String[] messages = {"0", "1", "-1", "foo"};
         addOptionMethod(", -1", true, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexZeroEmptySelect.</p>
+     */
     @Test
     public void addOptionMethodIndexZeroEmptySelect() {
         final String[] messages =  {"0", "1", "0", "foo*"};
         addOptionMethod(", 0", true, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexZeroEmptySelectMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexZeroEmptySelectMulti() {
         final String[] messages = {"0", "1", "-1", "foo"};
         addOptionMethod(", 0", true, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexOneEmptySelect.</p>
+     */
     @Test
     public void addOptionMethodIndexOneEmptySelect() {
         final String[] messages = {"0", "1", "0", "foo*"};
         addOptionMethod(", 1", true, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexOneEmptySelectMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexOneEmptySelectMulti() {
         final String[] messages = {"0", "1", "-1", "foo"};
         addOptionMethod(", 1", true, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexFourEmptySelect.</p>
+     */
     @Test
     public void addOptionMethodIndexFourEmptySelect() {
         final String[] messages = {"0", "1", "0", "foo*"};
         addOptionMethod(", 4", true, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexFourEmptySelectMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexFourEmptySelectMulti() {
         final String[] messages = {"0", "1", "-1", "foo"};
         addOptionMethod(", 4", true, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexMinusOne.</p>
+     */
     @Test
     public void addOptionMethodIndexMinusOne() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three", "foo"};
         addOptionMethod(", -1", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexMinusOneMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexMinusOneMulti() {
         final String[] messages =  {"3", "4", "1", "One", "Two*", "Three*", "foo"};
         addOptionMethod(", -1", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexZero.</p>
+     */
     @Test
     public void addOptionMethodIndexZero() {
         final String[] messages = {"3", "4", "2", "foo", "One", "Two*", "Three"};
         addOptionMethod(", 0", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexZeroMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexZeroMulti() {
         final String[] messages = {"3", "4", "2", "foo", "One", "Two*", "Three*"};
         addOptionMethod(", 0", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexOne.</p>
+     */
     @Test
     public void addOptionMethodIndexOne() {
         final String[] messages = {"3", "4", "2", "One", "foo", "Two*", "Three"};
         addOptionMethod(", 1", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexOneMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexOneMulti() {
         final String[] messages = {"3", "4", "2", "One", "foo", "Two*", "Three*"};
         addOptionMethod(", 1", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodhIndexTwo.</p>
+     */
     @Test
     public void addOptionMethodhIndexTwo() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "foo", "Three"};
         addOptionMethod(", 2", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodhIndexTwoMulti.</p>
+     */
     @Test
     public void addOptionMethodhIndexTwoMulti() {
         final String[] messages =  {"3", "4", "1", "One", "Two*", "foo", "Three*"};
         addOptionMethod(", 2", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexThree.</p>
+     */
     @Test
     public void addOptionMethodIndexThree() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three", "foo"};
         addOptionMethod(", 3", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexThreeMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexThreeMulti() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three*", "foo"};
         addOptionMethod(", 3", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexFour.</p>
+     */
     @Test
     public void addOptionMethodIndexFour() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three", "foo"};
         addOptionMethod(", 4", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodIndexFourMulti.</p>
+     */
     @Test
     public void addOptionMethodIndexFourMulti() {
         final String[] messages =  {"3", "4", "1", "One", "Two*", "Three*", "foo"};
         addOptionMethod(", 4", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionNullEmptySelect.</p>
+     */
     @Test
     public void addOptionMethodOptionNullEmptySelect() {
         final String[] messages = {"0", "1", "0", "foo*"};
         addOptionMethod(", null", true, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionNullEmptySelectMulti.</p>
+     */
     @Test
     public void addOptionMethodOptionNullEmptySelectMulti() {
         final String[] messages = {"0", "1", "-1", "foo"};
         addOptionMethod(", null", true, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodNewOptionEmptySelect.</p>
+     */
     @Test
     public void addOptionMethodNewOptionEmptySelect() {
         final String[] messages = {"0", "exception"};
         addOptionMethod(", new Option('foo', '123')", true, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodNewOptionEmptySelectMulti.</p>
+     */
     @Test
     public void addOptionMethodNewOptionEmptySelectMulti() {
         final String[] messages =  {"0", "exception"};
         addOptionMethod(", new Option('foo', '123')", true, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionNull.</p>
+     */
     @Test
     public void addOptionMethodOptionNull() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three", "foo"};
         addOptionMethod(", null", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionNullMulti.</p>
+     */
     @Test
     public void addOptionMethodOptionNullMulti() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three*", "foo"};
         addOptionMethod(", null", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodNewOption.</p>
+     */
     @Test
     public void addOptionMethodNewOption() {
         final String[] messages = {"3", "exception"};
         addOptionMethod(", new Option('foo', '123')", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodNewOptionMulti.</p>
+     */
     @Test
     public void addOptionMethodNewOptionMulti() {
         final String[] messages = {"3", "exception"};
         addOptionMethod(", new Option('foo', '123')", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionFirst.</p>
+     */
     @Test
     public void addOptionMethodOptionFirst() {
         final String[] messages = {"3", "4", "2", "foo", "One", "Two*", "Three"};
         addOptionMethod(", oSelect.options[0]", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionFirstMulti.</p>
+     */
     @Test
     public void addOptionMethodOptionFirstMulti() {
         final String[] messages = {"3", "4", "2", "foo", "One", "Two*", "Three*"};
         addOptionMethod(", oSelect.options[0]", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionSecond.</p>
+     */
     @Test
     public void addOptionMethodOptionSecond() {
         final String[] messages = {"3", "4", "2", "One", "foo", "Two*", "Three"};
         addOptionMethod(", oSelect.options[1]", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionSecondMulti.</p>
+     */
     @Test
 
     public void addOptionMethodOptionSecondMulti() {
@@ -696,24 +834,36 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         addOptionMethod(", oSelect.options[1]", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionThird.</p>
+     */
     @Test
     public void addOptionMethodOptionThird() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "foo", "Three"};
         addOptionMethod(", oSelect.options[2]", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionThirdMulti.</p>
+     */
     @Test
     public void addOptionMethodOptionThirdMulti() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "foo", "Three*"};
         addOptionMethod(", oSelect.options[2]", false, true, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionLast.</p>
+     */
     @Test
     public void addOptionMethodOptionLast() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three", "foo"};
         addOptionMethod(", oSelect.options[3]", false, false, messages);
     }
 
+    /**
+     * <p>addOptionMethodOptionLastMulti.</p>
+     */
     @Test
     public void addOptionMethodOptionLastMulti() {
         final String[] messages = {"3", "4", "1", "One", "Two*", "Three*", "foo"};
@@ -758,6 +908,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addWithIndexEmptySelect.</p>
+     */
     @Test
     public void addWithIndexEmptySelect() {
         final String html =
@@ -786,216 +939,324 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexMinusOneEmptySelect.</p>
+     */
     @Test
     public void removeOptionMethodIndexMinusOneEmptySelect() {
         final String[] messages =  {"0", "0", "-1"};
         removeOptionMethod("-1", true, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexMinusOneEmptySelectMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexMinusOneEmptySelectMulti() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod("-1", true, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexZeroEmptySelect.</p>
+     */
     @Test
     public void removeOptionMethodIndexZeroEmptySelect() {
         final String[] messages =  {"0", "0", "-1"};
         removeOptionMethod("0", true, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexZeroEmptySelectMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexZeroEmptySelectMulti() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod("0", true, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexOneEmptySelect.</p>
+     */
     @Test
     public void removeOptionMethodIndexOneEmptySelect() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod("1", true, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexOneEmptySelectMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexOneEmptySelectMulti() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod("1", true, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexFourEmptySelect.</p>
+     */
     @Test
     public void removeOptionMethodIndexFourEmptySelect() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod("4", true, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexFourEmptySelectMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexFourEmptySelectMulti() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod("4", true, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexMinusOne.</p>
+     */
     @Test
     public void removeOptionMethodIndexMinusOne() {
         final String[] messages = {"3", "3", "1", "One", "Two*", "Three"};
         removeOptionMethod("-1", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexMinusOneMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexMinusOneMulti() {
         final String[] messages = {"3", "3", "1", "One", "Two*", "Three*"};
         removeOptionMethod("-1", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexZero.</p>
+     */
     @Test
     public void removeOptionMethodIndexZero() {
         final String[] messages =  {"3", "2", "0", "Two*", "Three"};
         removeOptionMethod("0", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexZeroMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexZeroMulti() {
         final String[] messages = {"3", "2", "0", "Two*", "Three*"};
         removeOptionMethod("0", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexOne.</p>
+     */
     @Test
     public void removeOptionMethodIndexOne() {
         final String[] messages = {"3", "2", "0", "One*", "Three"};
         removeOptionMethod("1", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexOneMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexOneMulti() {
         final String[] messages =  {"3", "2", "1", "One", "Three*"};
         removeOptionMethod("1", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodhIndexTwo.</p>
+     */
     @Test
     public void removeOptionMethodhIndexTwo() {
         final String[] messages = {"3", "2", "1", "One", "Two*"};
         removeOptionMethod("2", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodhIndexTwoMulti.</p>
+     */
     @Test
     public void removeOptionMethodhIndexTwoMulti() {
         final String[] messages =  {"3", "2", "1", "One", "Two*"};
         removeOptionMethod("2", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexThree.</p>
+     */
     @Test
     public void removeOptionMethodIndexThree() {
         final String[] messages = {"3", "3", "1", "One", "Two*", "Three"};
         removeOptionMethod("3", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexThreeMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexThreeMulti() {
         final String[] messages = {"3", "3", "1", "One", "Two*", "Three*"};
         removeOptionMethod("3", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexFour.</p>
+     */
     @Test
     public void removeOptionMethodIndexFour() {
         final String[] messages = {"3", "3", "1", "One", "Two*", "Three"};
         removeOptionMethod("4", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodIndexFourMulti.</p>
+     */
     @Test
     public void removeOptionMethodIndexFourMulti() {
         final String[] messages =  {"3", "3", "1", "One", "Two*", "Three*"};
         removeOptionMethod("4", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionNullEmptySelect.</p>
+     */
     @Test
     public void removeOptionMethodOptionNullEmptySelect() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod(null, true, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionNullEmptySelectMulti.</p>
+     */
     @Test
     public void removeOptionMethodOptionNullEmptySelectMulti() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod(null, true, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodNewOptionEmptySelect.</p>
+     */
     @Test
     public void removeOptionMethodNewOptionEmptySelect() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod("new Option('foo', '123')", true, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodNewOptionEmptySelectMulti.</p>
+     */
     @Test
     public void removeOptionMethodNewOptionEmptySelectMulti() {
         final String[] messages = {"0", "0", "-1"};
         removeOptionMethod("new Option('foo', '123')", true, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionNull.</p>
+     */
     @Test
     public void removeOptionMethodOptionNull() {
         final String[] messages = {"3", "2", "0", "Two*", "Three"};
         removeOptionMethod(null, false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionNullMulti.</p>
+     */
     @Test
     public void removeOptionMethodOptionNullMulti() {
         final String[] messages = {"3", "2", "0", "Two*", "Three*"};
         removeOptionMethod(null, false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodNewOption.</p>
+     */
     @Test
     public void removeOptionMethodNewOption() {
         final String[] messages = {"3", "2", "0", "Two*", "Three"};
         removeOptionMethod("new Option('foo', '123')", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodNewOptionMulti.</p>
+     */
     @Test
     public void removeOptionMethodNewOptionMulti() {
         final String[] messages = {"3", "2", "0", "Two*", "Three*"};
         removeOptionMethod("new Option('foo', '123')", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionFirst.</p>
+     */
     @Test
     public void removeOptionMethodOptionFirst() {
         final String[] messages = {"3", "2", "0", "Two*", "Three"};
         removeOptionMethod("oSelect.options[0]", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionFirstMulti.</p>
+     */
     @Test
     public void removeOptionMethodOptionFirstMulti() {
         final String[] messages = {"3", "2", "0", "Two*", "Three*"};
         removeOptionMethod("oSelect.options[0]", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionSecond.</p>
+     */
     @Test
     public void removeOptionMethodOptionSecond() {
         final String[] messages = {"3", "2", "0", "Two*", "Three"};
         removeOptionMethod("oSelect.options[1]", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionSecondMulti.</p>
+     */
     @Test
     public void removeOptionMethodOptionSecondMulti() {
         final String[] messages = {"3", "2", "0", "Two*", "Three*"};
         removeOptionMethod("oSelect.options[1]", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionThird.</p>
+     */
     @Test
     public void removeOptionMethodOptionThird() {
         final String[] messages = {"3", "2", "0", "Two*", "Three"};
         removeOptionMethod("oSelect.options[2]", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionThirdMulti.</p>
+     */
     @Test
     public void removeOptionMethodOptionThirdMulti() {
         final String[] messages = {"3", "2", "0", "Two*", "Three*"};
         removeOptionMethod("oSelect.options[2]", false, true, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionLast.</p>
+     */
     @Test
     public void removeOptionMethodOptionLast() {
         final String[] messages = {"3", "2", "0", "Two*", "Three"};
         removeOptionMethod("oSelect.options[3]", false, false, messages);
     }
 
+    /**
+     * <p>removeOptionMethodOptionLastMulti.</p>
+     */
     @Test
     public void removeOptionMethodOptionLastMulti() {
         final String[] messages = {"3", "2", "0", "Two*", "Three*"};
@@ -1037,6 +1298,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>removeOption.</p>
+     */
     @Test
     public void removeOption() {
         final String html = "<html>\n"
@@ -1062,6 +1326,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>removeOptionWithRemoveMethod.</p>
+     */
     @Test
     public void removeOptionWithRemoveMethod() {
         final String html = "<html>\n"
@@ -1087,6 +1354,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>optionsRemoveMethod.</p>
+     */
     @Test
     public void optionsRemoveMethod() {
         final String html =
@@ -1115,6 +1385,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>clearOptions.</p>
+     */
     @Test
     public void clearOptions() {
         final String html =
@@ -1139,6 +1412,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>increaseOptionsSettingLength.</p>
+     */
     @Test
     public void increaseOptionsSettingLength() {
         final String html =
@@ -1170,6 +1446,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>optionArrayHasItemMethod.</p>
+     */
     @Test
     public void optionArrayHasItemMethod() {
         final String html = "<html>\n"
@@ -1193,6 +1472,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>getValue.</p>
+     */
     @Test
     public void getValue() {
         final String html =
@@ -1231,6 +1513,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>setValue.</p>
+     */
     @Test
     public void setValue() {
         final String html =
@@ -1255,6 +1540,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>optionsDelegateToSelect.</p>
+     */
     @Test
     public void optionsDelegateToSelect() {
         final String html =
@@ -1291,6 +1579,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     }
 
 
+    /**
+     * <p>optionsArrayAdd.</p>
+     */
     @Test
     public void optionsArrayAdd() {
         final String html =
@@ -1324,6 +1615,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selectedIndex.</p>
+     */
     @Test
     public void selectedIndex() {
         final String html =
@@ -1347,60 +1641,90 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeNegativeOne.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeNegativeOne() {
          final String[] messages ={"0", "true", "false", "false", "0"};
          defaultSelectedValue("-1", false, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeNegativeOne_Multi.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeNegativeOne_Multi() {
          final String[] messages =  {"0", "false", "false", "false", "-1"};
          defaultSelectedValue("-1", true, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeZero.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeZero() {
          final String[] messages = {"0", "true", "false", "false", "0"};
          defaultSelectedValue("0", false, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeZero_Multi.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeZero_Multi() {
          final String[] messages = {"0", "false", "false", "false", "-1"};
          defaultSelectedValue("0", true, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeOne.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeOne() {
          final String[] messages =  {"1", "true", "false", "false", "0"};
          defaultSelectedValue("1", false, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeOne_Multi.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeOne_Multi() {
          final String[] messages = {"1", "false", "false", "false", "-1"};
          defaultSelectedValue("1", true, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeTwo.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeTwo() {
          final String[] messages =  {"2", "false", "false", "false", "-1"};
          defaultSelectedValue("2", false, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeTwo_Multi.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeTwo_Multi() {
          final String[] messages =  {"2", "false", "false", "false", "-1"};
          defaultSelectedValue("2", true, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeInvalid.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeInvalid() {
          final String[] messages =  {"0", "true", "false", "false", "0"};
          defaultSelectedValue("x", false, messages);
     }
 
+    /**
+     * <p>defaultSelectedValue_SizeInvalid_Mulzi.</p>
+     */
     @Test
     public void defaultSelectedValue_SizeInvalid_Mulzi() {
          final String[] messages =  {"0", "false", "false", "false", "-1"};
@@ -1430,6 +1754,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>size.</p>
+     */
     @Test
     public void size() {
         final String html =
@@ -1450,6 +1777,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>multiple.</p>
+     */
     @Test
     public void multiple() {
         final String html =
@@ -1484,6 +1814,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selectedIndex_onfocus.</p>
+     */
     @Test
     public void selectedIndex_onfocus() {
         final String html =
@@ -1510,6 +1843,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>value_onfocus.</p>
+     */
     @Test
     public void value_onfocus() {
         final String html =
@@ -1536,6 +1872,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selectedIndex_appendChild.</p>
+     */
     @Test
     public void selectedIndex_appendChild() {
         final String html =
@@ -1562,6 +1901,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selectedIndex_insertBefore.</p>
+     */
     @Test
 
     public void selectedIndex_insertBefore() {
@@ -1589,6 +1931,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>selectedIndex_add.</p>
+     */
     @Test
     public void selectedIndex_add() {
         final String html =
@@ -1618,6 +1963,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>item.</p>
+     */
     @Test
     public void item() {
         final String html =
@@ -1641,6 +1989,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>value.</p>
+     */
     @Test
     public void value() {
         final String html =
@@ -1665,6 +2016,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>valueByValue.</p>
+     */
     @Test
     public void valueByValue() {
         final String html =
@@ -1690,6 +2044,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>valueByValueCase.</p>
+     */
     @Test
     public void valueByValueCase() {
         final String html =
@@ -1714,6 +2071,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>valueByText.</p>
+     */
     @Test
     public void valueByText() {
         final String html =
@@ -1738,6 +2098,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>valueByTextTrim.</p>
+     */
     @Test
     public void valueByTextTrim() {
         final String html =
@@ -1763,6 +2126,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>valueNull.</p>
+     */
     @Test
     public void valueNull() {
         final String html =
@@ -1787,6 +2153,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>valueOther.</p>
+     */
     @Test
     public void valueOther() {
         final String html =
@@ -1813,6 +2182,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>valueAfterReset.</p>
+     */
     @Test
     public void valueAfterReset() {
         final String html =
@@ -1844,6 +2216,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>labels.</p>
+     */
     @Test
     public void labels() {
         final String html =
@@ -1877,6 +2252,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>in.</p>
+     */
     @Test
     public void in() {
         final String html =
@@ -1905,6 +2283,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addOptionByAssigningViaIndex.</p>
+     */
     @Test
     public void addOptionByAssigningViaIndex() {
         final String html =
@@ -1930,6 +2311,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>addOptionByAssigningViaIndex2.</p>
+     */
     @Test
     public void addOptionByAssigningViaIndex2() {
         final String html =
@@ -1955,6 +2339,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>form.</p>
+     */
     @Test
     public void form() {
         final String html

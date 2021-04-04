@@ -457,6 +457,7 @@ public class XML {
      *            The source string.
      * @return A JSONObject containing the structured data from the XML string.
      * @throws org.json.JSONException Thrown if there is an errors while parsing the string
+     * @throws org.json.JSONException if any.
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
         return toJSONObject(string, false);

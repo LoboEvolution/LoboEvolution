@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Ln implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num</i> <b>ln</b> <i>real</i> <p>
 	 *
 	 * returns the natural logarithm (base e) of num.

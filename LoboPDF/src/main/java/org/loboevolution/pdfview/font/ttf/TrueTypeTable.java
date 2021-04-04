@@ -22,6 +22,9 @@ import java.nio.ByteBuffer;
 /**
  * The base class for TrueType tables.  Specific tables can extend this
  * to add more functionality
+ *
+  *
+  *
  */
 public class TrueTypeTable {
 
@@ -29,13 +32,21 @@ public class TrueTypeTable {
      * Well known tables
      */
     public static final int CMAP_TABLE = 0x636d6170;
+    /** Constant <code>GLYF_TABLE=0x676c7966</code> */
     public static final int GLYF_TABLE = 0x676c7966;
+    /** Constant <code>HEAD_TABLE=0x68656164</code> */
     public static final int HEAD_TABLE = 0x68656164;
+    /** Constant <code>HHEA_TABLE=0x68686561</code> */
     public static final int HHEA_TABLE = 0x68686561;
+    /** Constant <code>HMTX_TABLE=0x686d7478</code> */
     public static final int HMTX_TABLE = 0x686d7478;
+    /** Constant <code>MAXP_TABLE=0x6d617870</code> */
     public static final int MAXP_TABLE = 0x6d617870;
+    /** Constant <code>NAME_TABLE=0x6e616d65</code> */
     public static final int NAME_TABLE = 0x6e616d65;
+    /** Constant <code>POST_TABLE=0x706f7374</code> */
     public static final int POST_TABLE = 0x706f7374;
+    /** Constant <code>LOCA_TABLE=0x6c6f6361</code> */
     public static final int LOCA_TABLE = 0x6c6f6361;
     /**
      * This table's tag
@@ -46,7 +57,7 @@ public class TrueTypeTable {
      */
     private ByteBuffer data;
 
-    /** 
+    /**
      * Creates a new instance of TrueTypeTable.
      *
      * This method is protected.  Use the <code>getTable()</code> methods
@@ -64,6 +75,7 @@ public class TrueTypeTable {
      * @param ttf the font that contains this table
      * @param tagString the tag for this table, as a 4 character string
      *        (e.g. head or cmap)
+     * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeTable} object.
      */
     public static TrueTypeTable createTable(TrueTypeFont ttf,
             String tagString) {
@@ -77,6 +89,7 @@ public class TrueTypeTable {
      * @param tagString the tag for this table, as a 4 character string
      *        (e.g. head or cmap)
      * @param data the table data
+     * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeTable} object.
      */
     public static TrueTypeTable createTable(TrueTypeFont ttf,
             String tagString, ByteBuffer data) {
@@ -126,6 +139,8 @@ public class TrueTypeTable {
 
     /**
      * Get the table's tag
+     *
+     * @return a int.
      */
     public int getTag() {
         return this.tag;
@@ -133,6 +148,8 @@ public class TrueTypeTable {
 
     /**
      * Get the data in the table
+     *
+     * @return a {@link java.nio.ByteBuffer} object.
      */
     public ByteBuffer getData() {
         return this.data;
@@ -140,6 +157,8 @@ public class TrueTypeTable {
 
     /**
      * Set the data in the table
+     *
+     * @param data a {@link java.nio.ByteBuffer} object.
      */
     public void setData(ByteBuffer data) {
         this.data = data;
@@ -147,6 +166,8 @@ public class TrueTypeTable {
 
     /**
      * Get the size of the table, in bytes
+     *
+     * @return a int.
      */
     public int getLength() {
         return getData().remaining();
@@ -154,6 +175,9 @@ public class TrueTypeTable {
 
     /**
      * Get the tag as a string
+     *
+     * @param tag a int.
+     * @return a {@link java.lang.String} object.
      */
     public static String tagToString(int tag) {
         char[] c = new char[4];
@@ -167,6 +191,9 @@ public class TrueTypeTable {
 
     /**
      * Turn a string into a tag
+     *
+     * @param tag a {@link java.lang.String} object.
+     * @return a int.
      */
     public static int stringToTag(String tag) {
         char[] c = tag.toCharArray();
@@ -178,9 +205,11 @@ public class TrueTypeTable {
         return c[0] << 24 | c[1] << 16 | c[2] << 8 | c[3];
     }
 
-    /**
-     * Put into a nice string
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Put into a nice string
+	 */
     @Override
 	public String toString() {
         String out = "    " + tagToString(getTag()) + " Table.  Data is: ";

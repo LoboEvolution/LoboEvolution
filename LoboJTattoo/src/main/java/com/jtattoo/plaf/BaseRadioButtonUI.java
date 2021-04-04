@@ -47,8 +47,8 @@ import javax.swing.text.View;
 /**
  * <p>BaseRadioButtonUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseRadioButtonUI extends BasicRadioButtonUI {
 

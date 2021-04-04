@@ -30,6 +30,9 @@ import org.loboevolution.pdfview.PDFObject;
  * This class represents the 14 built-in fonts.  It reads these fonts
  * from files in the "res" directory, as specified in
  * BaseNames.properties.
+ *
+  *
+  *
  */
 public class BuiltinFont extends Type1Font {
 
@@ -88,6 +91,7 @@ public class BuiltinFont extends Type1Font {
      *
      * @param baseFont the name of the font, from the PDF file
      * @param fontObj the object containing font information
+     * @throws java.io.IOException if any.
      */
     public BuiltinFont(String baseFont, PDFObject fontObj) throws IOException {
         super(baseFont, fontObj, null);
@@ -99,6 +103,11 @@ public class BuiltinFont extends Type1Font {
      * create a new BuiltingFont object based on a description of the
      * font from the PDF file. Parse the description for key information
      * and use that to generate an appropriate font.
+     *
+     * @param baseFont a {@link java.lang.String} object.
+     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
+     * @throws java.io.IOException if any.
      */
     public BuiltinFont(String baseFont, PDFObject fontObj,
             PDFFontDescriptor descriptor)

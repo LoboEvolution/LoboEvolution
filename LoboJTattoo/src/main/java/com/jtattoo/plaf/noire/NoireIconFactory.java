@@ -31,8 +31,8 @@ import com.jtattoo.plaf.hifi.HiFiIcons;
 /**
  * <p>NoireIconFactory class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class NoireIconFactory implements AbstractIconFactory {
 

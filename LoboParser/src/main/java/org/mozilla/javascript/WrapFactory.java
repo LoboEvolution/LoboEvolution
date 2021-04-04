@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Embeddings that wish to provide their own custom wrappings for Java
  * objects may extend this class and call
- * {@link Context#setWrapFactory(WrapFactory)}
+ * {@link org.mozilla.javascript.Context#setWrapFactory(WrapFactory)}
  * Once an instance of this class or an extension of this class is enabled
  * for a given context (by calling setWrapFactory on that context), Rhino
  * will call the methods of this class whenever it needs to wrap a value
@@ -22,6 +22,8 @@ import java.util.Map;
  *
  * @see org.mozilla.javascript.Context#setWrapFactory(WrapFactory)
  * @since 1.5 Release 4
+ *
+ *
  */
 public class WrapFactory
 {
@@ -37,11 +39,12 @@ public class WrapFactory
      * <LI>The value returned by Context.getUndefinedValue()</LI>
      * <LI>null</LI>
      * </UL>
+     *
      * @param cx the current Context for this thread
      * @param scope the scope of the executing script
      * @param obj the object to be wrapped. Note it can be null.
      * @param staticType type hint. If security restrictions prevent to wrap
-              object based on its class, staticType will be used instead.
+     *              object based on its class, staticType will be used instead.
      * @return the wrapped value.
      */
     public Object wrap(Context cx, Scriptable scope,
@@ -82,6 +85,7 @@ public class WrapFactory
 
     /**
      * Wrap an object newly created by a constructor call.
+     *
      * @param cx the current Context for this thread
      * @param scope the scope of the executing script
      * @param obj the object to be wrapped
@@ -110,11 +114,12 @@ public class WrapFactory
      * <p>
      * Subclasses can override the method to provide custom wrappers
      * for Java objects.
+     *
      * @param cx the current Context for this thread
      * @param scope the scope of the executing script
      * @param javaObject the object to be wrapped
      * @param staticType type hint. If security restrictions prevent to wrap
-                object based on its class, staticType will be used instead.
+     *                object based on its class, staticType will be used instead.
      * @return the wrapped value which shall not be null
      */
     public Scriptable wrapAsJavaObject(Context cx, Scriptable scope,
@@ -157,6 +162,8 @@ public class WrapFactory
      * <code>Character</code> should be wrapped as any other Java object and
      * scripts can access any Java method available in these objects.
      * Use {@link #setJavaPrimitiveWrap(boolean)} to change this.
+     *
+     * @return a boolean.
      */
     public final boolean isJavaPrimitiveWrap()
     {
@@ -164,7 +171,10 @@ public class WrapFactory
     }
 
     /**
+     * <p>Setter for the field <code>javaPrimitiveWrap</code>.</p>
+     *
      * @see #isJavaPrimitiveWrap()
+     * @param value a boolean.
      */
     public final void setJavaPrimitiveWrap(boolean value)
     {

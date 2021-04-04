@@ -13,11 +13,10 @@ package org.mozilla.javascript;
  * in the jsref package.
  *
  * @see org.mozilla.javascript.Parser
+ * Author Mike McCabe
+ * Author Brendan Eich
  *
- * @author Mike McCabe
- * @author Brendan Eich
  */
-
 public class Token
 {
     public static enum CommentType {
@@ -25,6 +24,7 @@ public class Token
     }
 
     // debug flags
+    /** Constant <code>printTrees=false</code> */
     public static final boolean printTrees = false;
     static final boolean printICode = false;
     static final boolean printNames = printTrees || printICode;
@@ -34,6 +34,90 @@ public class Token
      * jsscan.c.
      */
 
+    /** Constant <code>EOF=0</code> */
+    /** Constant <code>EOL=1</code> */
+    /** Constant <code>FIRST_BYTECODE_TOKEN=2</code> */
+    /** Constant <code>ENTERWITH=2</code> */
+    /** Constant <code>LEAVEWITH=3</code> */
+    /** Constant <code>RETURN=4</code> */
+    /** Constant <code>GOTO=5</code> */
+    /** Constant <code>IFEQ=6</code> */
+    /** Constant <code>IFNE=7</code> */
+    /** Constant <code>SETNAME=8</code> */
+    /** Constant <code>BITOR=9</code> */
+    /** Constant <code>BITXOR=10</code> */
+    /** Constant <code>BITAND=11</code> */
+    /** Constant <code>EQ=12</code> */
+    /** Constant <code>NE=13</code> */
+    /** Constant <code>LT=14</code> */
+    /** Constant <code>LE=15</code> */
+    /** Constant <code>GT=16</code> */
+    /** Constant <code>GE=17</code> */
+    /** Constant <code>LSH=18</code> */
+    /** Constant <code>RSH=19</code> */
+    /** Constant <code>URSH=20</code> */
+    /** Constant <code>ADD=21</code> */
+    /** Constant <code>SUB=22</code> */
+    /** Constant <code>MUL=23</code> */
+    /** Constant <code>DIV=24</code> */
+    /** Constant <code>MOD=25</code> */
+    /** Constant <code>NOT=26</code> */
+    /** Constant <code>BITNOT=27</code> */
+    /** Constant <code>POS=28</code> */
+    /** Constant <code>NEG=29</code> */
+    /** Constant <code>NEW=30</code> */
+    /** Constant <code>DELPROP=31</code> */
+    /** Constant <code>TYPEOF=32</code> */
+    /** Constant <code>GETPROP=33</code> */
+    /** Constant <code>GETPROPNOWARN=34</code> */
+    /** Constant <code>SETPROP=35</code> */
+    /** Constant <code>GETELEM=36</code> */
+    /** Constant <code>SETELEM=37</code> */
+    /** Constant <code>CALL=38</code> */
+    /** Constant <code>NAME=39</code> */
+    /** Constant <code>NUMBER=40</code> */
+    /** Constant <code>STRING=41</code> */
+    /** Constant <code>NULL=42</code> */
+    /** Constant <code>THIS=43</code> */
+    /** Constant <code>FALSE=44</code> */
+    /** Constant <code>TRUE=45</code> */
+    /** Constant <code>SHEQ=46</code> */
+    /** Constant <code>SHNE=47</code> */
+    /** Constant <code>REGEXP=48</code> */
+    /** Constant <code>BINDNAME=49</code> */
+    /** Constant <code>THROW=50</code> */
+    /** Constant <code>RETHROW=51</code> */
+    /** Constant <code>IN=52</code> */
+    /** Constant <code>INSTANCEOF=53</code> */
+    /** Constant <code>LOCAL_LOAD=54</code> */
+    /** Constant <code>GETVAR=55</code> */
+    /** Constant <code>SETVAR=56</code> */
+    /** Constant <code>CATCH_SCOPE=57</code> */
+    /** Constant <code>ENUM_INIT_KEYS=58</code> */
+    /** Constant <code>ENUM_INIT_VALUES=59</code> */
+    /** Constant <code>ENUM_INIT_ARRAY=60</code> */
+    /** Constant <code>ENUM_INIT_VALUES_IN_ORDER=61</code> */
+    /** Constant <code>ENUM_NEXT=62</code> */
+    /** Constant <code>ENUM_ID=63</code> */
+    /** Constant <code>THISFN=64</code> */
+    /** Constant <code>RETURN_RESULT=65</code> */
+    /** Constant <code>ARRAYLIT=66</code> */
+    /** Constant <code>OBJECTLIT=67</code> */
+    /** Constant <code>GET_REF=68</code> */
+    /** Constant <code>SET_REF=69</code> */
+    /** Constant <code>DEL_REF=70</code> */
+    /** Constant <code>REF_CALL=71</code> */
+    /** Constant <code>REF_SPECIAL=72</code> */
+    /** Constant <code>YIELD=73</code> */
+    /** Constant <code>STRICT_SETNAME=74</code> */
+    /** Constant <code>EXP=75</code> */
+    /** Constant <code>DEFAULTNAMESPACE=76</code> */
+    /** Constant <code>ESCXMLATTR=77</code> */
+    /** Constant <code>ESCXMLTEXT=78</code> */
+    /** Constant <code>REF_MEMBER=79</code> */
+    /** Constant <code>REF_NS_MEMBER=80</code> */
+    /** Constant <code>REF_NAME=81</code> */
+    /** Constant <code>REF_NS_NAME=82</code> */
     public final static int
     // start enum
         ERROR          = -1, // well-known as the only code < EOF
@@ -128,6 +212,29 @@ public class Token
         REF_NS_NAME    = 82; // Reference for ns::y, @ns::y@[y] etc.
 
         // End of interpreter bytecodes
+    /** Constant <code>LAST_BYTECODE_TOKEN=REF_NS_NAME</code> */
+    /** Constant <code>TRY=83</code> */
+    /** Constant <code>SEMI=84</code> */
+    /** Constant <code>LB=85</code> */
+    /** Constant <code>RB=86</code> */
+    /** Constant <code>LC=87</code> */
+    /** Constant <code>RC=88</code> */
+    /** Constant <code>LP=89</code> */
+    /** Constant <code>RP=90</code> */
+    /** Constant <code>COMMA=91</code> */
+    /** Constant <code>ASSIGN=92</code> */
+    /** Constant <code>ASSIGN_BITOR=93</code> */
+    /** Constant <code>ASSIGN_BITXOR=94</code> */
+    /** Constant <code>ASSIGN_BITAND=95</code> */
+    /** Constant <code>ASSIGN_LSH=96</code> */
+    /** Constant <code>ASSIGN_RSH=97</code> */
+    /** Constant <code>ASSIGN_URSH=98</code> */
+    /** Constant <code>ASSIGN_ADD=99</code> */
+    /** Constant <code>ASSIGN_SUB=100</code> */
+    /** Constant <code>ASSIGN_MUL=101</code> */
+    /** Constant <code>ASSIGN_DIV=102</code> */
+    /** Constant <code>ASSIGN_MOD=103</code> */
+    /** Constant <code>ASSIGN_EXP=104</code> */
     public final static int
         LAST_BYTECODE_TOKEN    = REF_NS_NAME,
 
@@ -155,6 +262,73 @@ public class Token
         ASSIGN_MOD     = 103, // %=
         ASSIGN_EXP     = 104; // **=
 
+    /** Constant <code>FIRST_ASSIGN=ASSIGN</code> */
+    /** Constant <code>LAST_ASSIGN=ASSIGN_EXP</code> */
+    /** Constant <code>HOOK=105</code> */
+    /** Constant <code>COLON=106</code> */
+    /** Constant <code>OR=107</code> */
+    /** Constant <code>AND=108</code> */
+    /** Constant <code>INC=109</code> */
+    /** Constant <code>DEC=110</code> */
+    /** Constant <code>DOT=111</code> */
+    /** Constant <code>FUNCTION=112</code> */
+    /** Constant <code>EXPORT=113</code> */
+    /** Constant <code>IMPORT=114</code> */
+    /** Constant <code>IF=115</code> */
+    /** Constant <code>ELSE=116</code> */
+    /** Constant <code>SWITCH=117</code> */
+    /** Constant <code>CASE=118</code> */
+    /** Constant <code>DEFAULT=119</code> */
+    /** Constant <code>WHILE=120</code> */
+    /** Constant <code>DO=121</code> */
+    /** Constant <code>FOR=122</code> */
+    /** Constant <code>BREAK=123</code> */
+    /** Constant <code>CONTINUE=124</code> */
+    /** Constant <code>VAR=125</code> */
+    /** Constant <code>WITH=126</code> */
+    /** Constant <code>CATCH=127</code> */
+    /** Constant <code>FINALLY=128</code> */
+    /** Constant <code>VOID=129</code> */
+    /** Constant <code>RESERVED=130</code> */
+    /** Constant <code>EMPTY=131</code> */
+    /** Constant <code>BLOCK=132</code> */
+    /** Constant <code>LABEL=133</code> */
+    /** Constant <code>TARGET=134</code> */
+    /** Constant <code>LOOP=135</code> */
+    /** Constant <code>EXPR_VOID=136</code> */
+    /** Constant <code>EXPR_RESULT=137</code> */
+    /** Constant <code>JSR=138</code> */
+    /** Constant <code>SCRIPT=139</code> */
+    /** Constant <code>TYPEOFNAME=140</code> */
+    /** Constant <code>USE_STACK=141</code> */
+    /** Constant <code>SETPROP_OP=142</code> */
+    /** Constant <code>SETELEM_OP=143</code> */
+    /** Constant <code>LOCAL_BLOCK=144</code> */
+    /** Constant <code>SET_REF_OP=145</code> */
+    /** Constant <code>DOTDOT=146</code> */
+    /** Constant <code>COLONCOLON=147</code> */
+    /** Constant <code>XML=148</code> */
+    /** Constant <code>DOTQUERY=149</code> */
+    /** Constant <code>XMLATTR=150</code> */
+    /** Constant <code>XMLEND=151</code> */
+    /** Constant <code>TO_OBJECT=152</code> */
+    /** Constant <code>TO_DOUBLE=153</code> */
+    /** Constant <code>GET=154</code> */
+    /** Constant <code>SET=155</code> */
+    /** Constant <code>LET=156</code> */
+    /** Constant <code>CONST=157</code> */
+    /** Constant <code>SETCONST=158</code> */
+    /** Constant <code>SETCONSTVAR=159</code> */
+    /** Constant <code>ARRAYCOMP=160</code> */
+    /** Constant <code>LETEXPR=161</code> */
+    /** Constant <code>WITHEXPR=162</code> */
+    /** Constant <code>DEBUGGER=163</code> */
+    /** Constant <code>COMMENT=164</code> */
+    /** Constant <code>GENEXPR=165</code> */
+    /** Constant <code>METHOD=166</code> */
+    /** Constant <code>ARROW=167</code> */
+    /** Constant <code>YIELD_STAR=168</code> */
+    /** Constant <code>LAST_TOKEN=169</code> */
     public final static int
         FIRST_ASSIGN   = ASSIGN,
         LAST_ASSIGN    = ASSIGN_EXP,
@@ -241,6 +415,9 @@ public class Token
      * Returns a name for the token.  If Rhino is compiled with certain
      * hardcoded debugging flags in this file, it calls {@code #typeToName};
      * otherwise it returns a string whose value is the token number.
+     *
+     * @param token a int.
+     * @return a {@link java.lang.String} object.
      */
     public static String name(int token)
     {
@@ -253,6 +430,7 @@ public class Token
     /**
      * Always returns a human-readable string for the token name.
      * For instance, {@link #FINALLY} has the name "FINALLY".
+     *
      * @param token the token code
      * @return the actual name for the token code
      */
@@ -434,7 +612,8 @@ public class Token
 
     /**
      * Convert a keyword token to a name string for use with the
-     * {@link Context#FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER} feature.
+     * {@link org.mozilla.javascript.Context#FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER} feature.
+     *
      * @param token A token
      * @return the corresponding name string
      */
@@ -478,6 +657,7 @@ public class Token
 
     /**
      * Return true if the passed code is a valid Token constant.
+     *
      * @param code a potential token code
      * @return true if it's a known token
      */

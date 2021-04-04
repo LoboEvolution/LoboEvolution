@@ -28,6 +28,9 @@ import org.loboevolution.pdfview.PDFParseException;
  * A type 2 function is an exponential interpolation function, which maps
  * from one input value to n output values using a simple exponential
  * formula.
+ *
+  *
+  *
  */
 public class FunctionType2 extends PDFFunction {
     /** the function's value at zero for the n outputs */
@@ -39,14 +42,18 @@ public class FunctionType2 extends PDFFunction {
     /** the exponent */
     private float n;
     
-    /** Creates a new instance of FunctionType2 */
+    /**
+     * Creates a new instance of FunctionType2
+     */
     public FunctionType2() {
         super(TYPE_2);
     }
     
-    /**
-     * Read the zeros, ones and exponent
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Read the zeros, ones and exponent
+	 */
     @Override
 	protected void parse(PDFObject obj) throws IOException 
     {
@@ -80,11 +87,13 @@ public class FunctionType2 extends PDFFunction {
         }
     }
     
-    /**
-     * Calculate the function value for the input.  For each output (j),
-     * the function value is:
-     * C0(j) + x^N * (C1(j) - C0(j))
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Calculate the function value for the input.  For each output (j),
+	 * the function value is:
+	 * C0(j) + x^N * (C1(j) - C0(j))
+	 */
     @Override
 	protected void doFunction(float[] inputs, int inputOffset, 
                               float[] outputs, int outputOffset)
@@ -99,6 +108,7 @@ public class FunctionType2 extends PDFFunction {
         }
     }
     
+    /** {@inheritDoc} */
     @Override
     public int getNumOutputs()
     {
@@ -108,6 +118,8 @@ public class FunctionType2 extends PDFFunction {
     
     /**
      * Get the exponent
+     *
+     * @return a float.
      */
     public float getN() {
         return this.n;
@@ -115,6 +127,8 @@ public class FunctionType2 extends PDFFunction {
     
     /**
      * Set the exponent
+     *
+     * @param n a float.
      */
     protected void setN(float n) {
         this.n = n;
@@ -122,6 +136,9 @@ public class FunctionType2 extends PDFFunction {
     
     /**
      * Get the values at zero
+     *
+     * @param index a int.
+     * @return a float.
      */
     public float getC0(int index) {
         return this.c0[index];
@@ -129,6 +146,8 @@ public class FunctionType2 extends PDFFunction {
     
     /**
      * Set the values at zero
+     *
+     * @param c0 an array of {@link float} objects.
      */
     protected void setC0(float[] c0) {
         this.c0 = c0;
@@ -136,6 +155,9 @@ public class FunctionType2 extends PDFFunction {
     
     /**
      * Get the values at one
+     *
+     * @param index a int.
+     * @return a float.
      */
     public float getC1(int index) {
         return this.c1[index];
@@ -143,6 +165,8 @@ public class FunctionType2 extends PDFFunction {
     
     /**
      * Set the values at one
+     *
+     * @param c1 an array of {@link float} objects.
      */
     protected void setC1(float[] c1) {
         this.c1 = c1;

@@ -43,6 +43,9 @@ import org.loboevolution.pdfview.function.PDFFunction;
 
 /**
  * A shader that performs axial shader based on a function.
+ *
+  *
+  *
  */
 public class ShaderType2 extends PDFShader {
     /** the start of the axis */
@@ -66,14 +69,18 @@ public class ShaderType2 extends PDFShader {
     /** functions, as an array of either 1 or n functions */
     private PDFFunction[] functions;
      
-    /** Creates a new instance of ShaderType2 */
+    /**
+     * Creates a new instance of ShaderType2
+     */
     public ShaderType2() {
         super(2);
     }
     
-    /** 
-     * Parse the shader-specific data
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Parse the shader-specific data
+	 */
     @Override
 	public void parse(PDFObject shaderObj) throws IOException
     {
@@ -120,16 +127,20 @@ public class ShaderType2 extends PDFShader {
         
     }
     
-    /**
-     * Create a paint that paints this pattern
-     */
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Create a paint that paints this pattern
+	 */
     @Override
 	public PDFPaint getPaint() {
         return PDFPaint.getPaint(new Type2Paint());
     }
     
-    /** 
+    /**
      * Get the start of the axis
+     *
+     * @return a {@link java.awt.geom.Point2D} object.
      */
     public Point2D getAxisStart() {
         return this.axisStart;
@@ -137,13 +148,17 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Set the start of the axis
+     *
+     * @param axisStart a {@link java.awt.geom.Point2D} object.
      */
     protected void setAxisStart(Point2D axisStart) {
         this.axisStart = axisStart;
     }
     
-    /** 
+    /**
      * Get the end of the axis
+     *
+     * @return a {@link java.awt.geom.Point2D} object.
      */
     public Point2D getAxisEnd() {
         return this.axisEnd;
@@ -151,13 +166,17 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Set the start of the axis
+     *
+     * @param axisEnd a {@link java.awt.geom.Point2D} object.
      */
     protected void setAxisEnd(Point2D axisEnd) {
         this.axisEnd = axisEnd;
     }
     
-    /** 
+    /**
      * Get the domain minimum
+     *
+     * @return a float.
      */
     public float getMinT() {
         return this.minT;
@@ -165,13 +184,17 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Set the domain minimum
+     *
+     * @param minT a float.
      */
     protected void setMinT(float minT) {
         this.minT = minT;
     }
     
-    /** 
+    /**
      * Get the domain maximum
+     *
+     * @return a float.
      */
     public float getMaxT() {
         return this.maxT;
@@ -179,6 +202,8 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Set the domain maximum
+     *
+     * @param maxT a float.
      */
     protected void setMaxT(float maxT) {
         this.maxT = maxT;
@@ -186,6 +211,8 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Get whether to extend the start of the axis
+     *
+     * @return a boolean.
      */
     public boolean getExtendStart() {
         return this.extendStart;
@@ -193,6 +220,8 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Set whether to extend the start of the axis
+     *
+     * @param extendStart a boolean.
      */
     protected void setExtendStart(boolean extendStart) {
         this.extendStart = extendStart;
@@ -200,6 +229,8 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Get whether to extend the end of the axis
+     *
+     * @return a boolean.
      */
     public boolean getExtendEnd() {
         return this.extendEnd;
@@ -207,6 +238,8 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Set whether to extend the end of the axis
+     *
+     * @param extendEnd a boolean.
      */
     protected void setExtendEnd(boolean extendEnd) {
         this.extendEnd = extendEnd;
@@ -214,6 +247,8 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Get the functions associated with this shader
+     *
+     * @return an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
      */
     public PDFFunction[] getFunctions() {
         return this.functions;
@@ -221,6 +256,8 @@ public class ShaderType2 extends PDFShader {
     
     /**
      * Set the functions associated with this shader
+     *
+     * @param functions an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
      */
     protected void setFunctions(PDFFunction[] functions) {
         this.functions = functions;

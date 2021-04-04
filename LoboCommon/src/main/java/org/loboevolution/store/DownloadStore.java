@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.store;
@@ -36,8 +33,8 @@ import java.util.logging.Logger;
 /**
  * <p>DownloadStore class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class DownloadStore {
 	
@@ -53,7 +50,7 @@ public class DownloadStore {
 	/**
 	 * <p>addAsRecent.</p>
 	 *
-	 * @param uri a {@link String} object.
+	 * @param uri a {@link java.lang.String} object.
 	 */
 	public void addAsRecent(String uri) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -79,7 +76,8 @@ public class DownloadStore {
 
 	/**
 	 * <p>getDownload.</p>
-	 * @return a {@link List} object.
+	 *
+	 * @return a {@link java.util.List} object.
 	 */
 	public List<String> getDownload() {
 		final List<String> recent = new ArrayList<>();

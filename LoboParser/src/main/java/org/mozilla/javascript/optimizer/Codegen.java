@@ -41,37 +41,43 @@ import org.mozilla.javascript.ast.ScriptNode;
 /**
  * This class generates code for a given IR tree.
  *
- * @author Norris Boyd
- * @author Roger Lawrence
+ * Author Norris Boyd
+ * Author Roger Lawrence
+ *
  */
-
 public class Codegen implements Evaluator
 {
+    /** {@inheritDoc} */
     @Override
     public void captureStackInfo(RhinoException ex) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getSourcePositionFromStack(Context cx, int[] linep) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getPatchedStack(RhinoException ex, String nativeStackTrace) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<String> getScriptStack(RhinoException ex) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setEvalScriptFlag(Script script) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object compile(CompilerEnvirons compilerEnv,
                           ScriptNode tree,
@@ -100,6 +106,7 @@ public class Codegen implements Evaluator
         return new Object[] { mainClassName, mainClassBytes };
     }
 
+    /** {@inheritDoc} */
     @Override
     public Script createScriptObject(Object bytecode,
                                      Object staticSecurityDomain)
@@ -116,6 +123,7 @@ public class Codegen implements Evaluator
         return script;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Function createFunctionObject(Context cx, Scriptable scope,
                                          Object bytecode,
@@ -161,6 +169,16 @@ public class Codegen implements Evaluator
         throw new RuntimeException("Malformed optimizer package " + e);
     }
 
+    /**
+     * <p>compileToClassFile.</p>
+     *
+     * @param compilerEnv a {@link org.mozilla.javascript.CompilerEnvirons} object.
+     * @param mainClassName a {@link java.lang.String} object.
+     * @param scriptOrFn a {@link org.mozilla.javascript.ast.ScriptNode} object.
+     * @param encodedSource a {@link java.lang.String} object.
+     * @param returnFunction a boolean.
+     * @return an array of {@link byte} objects.
+     */
     public byte[] compileToClassFile(CompilerEnvirons compilerEnv,
                                      String mainClassName,
                                      ScriptNode scriptOrFn,
@@ -1226,6 +1244,11 @@ public class Codegen implements Evaluator
         throw new RuntimeException("Bad tree in codegen");
     }
 
+     /**
+      * <p>Setter for the field <code>mainMethodClass</code>.</p>
+      *
+      * @param className a {@link java.lang.String} object.
+      */
      public void setMainMethodClass(String className)
      {
          mainMethodClass = className;

@@ -16,6 +16,9 @@ import java.io.Serializable;
  * instances of UniqueTag as under this JDK version the default
  * ObjectInputStream would not restore them correctly as it lacks support
  * for readResolve method
+ *
+ *
+ *
  */
 public final class UniqueTag implements Serializable
 {
@@ -51,6 +54,11 @@ public final class UniqueTag implements Serializable
         this.tagId = tagId;
     }
 
+    /**
+     * <p>readResolve.</p>
+     *
+     * @return a {@link java.lang.Object} object.
+     */
     public Object readResolve()
     {
         switch (tagId) {
@@ -65,6 +73,7 @@ public final class UniqueTag implements Serializable
     }
 
 // Overridden for better debug printouts
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {

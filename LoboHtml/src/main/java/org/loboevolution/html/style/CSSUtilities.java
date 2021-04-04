@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.html.style;
@@ -46,8 +43,8 @@ import java.util.logging.Logger;
 /**
  * <p>CSSUtilities class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class CSSUtilities {
 	
@@ -68,6 +65,13 @@ public class CSSUtilities {
 		return is;
 	}
 
+	/**
+	 * <p>parseMedia.</p>
+	 *
+	 * @param mediaString a {@link java.lang.String} object.
+	 * @return a {@link com.gargoylesoftware.css.dom.MediaListImpl} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public static MediaListImpl parseMedia(String mediaString) throws Exception {
 		final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 		return new MediaListImpl(parser.parseMedia(mediaString));

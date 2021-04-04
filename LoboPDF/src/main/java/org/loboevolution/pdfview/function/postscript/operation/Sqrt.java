@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Sqrt implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num</i> <b>sqrt</b> <i>real</i> <p>
 	 *
 	 * returns the square root of num, which must be a

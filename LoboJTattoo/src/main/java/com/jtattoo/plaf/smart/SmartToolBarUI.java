@@ -39,8 +39,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>SmartToolBarUI class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class SmartToolBarUI extends AbstractToolBarUI {
 

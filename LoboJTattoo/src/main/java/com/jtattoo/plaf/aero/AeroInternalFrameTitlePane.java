@@ -39,8 +39,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>AeroInternalFrameTitlePane class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 

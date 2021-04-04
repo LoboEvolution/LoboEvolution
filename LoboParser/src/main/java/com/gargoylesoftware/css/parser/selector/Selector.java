@@ -17,7 +17,10 @@ package com.gargoylesoftware.css.parser.selector;
 import com.gargoylesoftware.css.parser.Locatable;
 
 /**
- * @author Ronald Brill
+ * <p>Selector interface.</p>
+ *
+ * Author Ronald Brill
+ *
  */
 public interface Selector extends Locatable {
 
@@ -34,16 +37,22 @@ public interface Selector extends Locatable {
     }
 
     /**
+     * <p>getSelectorType.</p>
+     *
      * @return the associated selector type
      */
     SelectorType getSelectorType();
 
     /**
+     * <p>getSimpleSelector.</p>
+     *
      * @return the simple selector part
      */
     SimpleSelector getSimpleSelector();
 
     /**
+     * <p>getSelectorSpecificity.</p>
+     *
      * @return the selector specificity
      */
     SelectorSpecificity getSelectorSpecificity();

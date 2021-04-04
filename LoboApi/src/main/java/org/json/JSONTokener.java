@@ -104,6 +104,7 @@ public class JSONTokener {
      *
      * @throws org.json.JSONException Thrown if trying to step back more than 1 step
      *  or if already at the start of the string
+     * @throws org.json.JSONException if any.
      */
     public void back() throws JSONException {
         if (this.usePrevious || this.index <= 0) {
@@ -164,6 +165,7 @@ public class JSONTokener {
      * @return true if not yet at the end of the source.
      * @throws org.json.JSONException thrown if there is an error stepping forward
      *  or backward while checking for more data.
+     * @throws org.json.JSONException if any.
      */
     public boolean more() throws JSONException {
         if(this.usePrevious) {
@@ -193,6 +195,7 @@ public class JSONTokener {
      *
      * @return The next character, or 0 if past the end of the source string.
      * @throws org.json.JSONException Thrown if there is an error reading the source string.
+     * @throws org.json.JSONException if any.
      */
     public char next() throws JSONException {
         int c;
@@ -246,6 +249,7 @@ public class JSONTokener {
      * @param c The character to match.
      * @return The character.
      * @throws org.json.JSONException if the character does not match.
+     * @throws org.json.JSONException if any.
      */
     public char next(char c) throws JSONException {
         char n = this.next();
@@ -268,6 +272,7 @@ public class JSONTokener {
      * @throws org.json.JSONException if any
      *   Substring bounds error if there are not
      *   n characters remaining in the source string.
+     * @throws org.json.JSONException if any.
      */
     public String next(int n) throws JSONException {
         if (n == 0) {
@@ -293,6 +298,7 @@ public class JSONTokener {
      *
      * @throws org.json.JSONException Thrown if there is an error reading the source string.
      * @return  A character, or 0 if there are no more characters.
+     * @throws org.json.JSONException if any.
      */
     public char nextClean() throws JSONException {
         for (;;) {
@@ -315,6 +321,7 @@ public class JSONTokener {
      *      '&nbsp;<small>(single quote)</small>.
      * @return      A String.
      * @throws org.json.JSONException Unterminated string.
+     * @throws org.json.JSONException if any.
      */
     public String nextString(char quote) throws JSONException {
         char c;
@@ -379,6 +386,7 @@ public class JSONTokener {
      * @return   A string.
      * @throws org.json.JSONException Thrown if there is an error while searching
      *  for the delimiter
+     * @throws org.json.JSONException if any.
      */
     public String nextTo(char delimiter) throws JSONException {
         StringBuilder sb = new StringBuilder();
@@ -477,6 +485,7 @@ public class JSONTokener {
      * is not found.
      * @throws org.json.JSONException Thrown if there is an error while searching
      *  for the to character
+     * @throws org.json.JSONException if any.
      */
     public char skipTo(char to) throws JSONException {
         char c;

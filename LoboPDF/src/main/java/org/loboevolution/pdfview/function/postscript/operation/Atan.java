@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Atan implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num den</i> <b>atan</b> <i>angle</i> <p>
 	 *
 	 * returns the angle (in degress between

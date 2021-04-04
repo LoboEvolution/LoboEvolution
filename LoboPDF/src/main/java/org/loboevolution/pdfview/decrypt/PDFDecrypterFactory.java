@@ -27,15 +27,16 @@ import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
 /**
- * Produces a {@link PDFDecrypter} for documents given a (possibly non-existent)
+ * Produces a {@link org.loboevolution.pdfview.decrypt.PDFDecrypter} for documents given a (possibly non-existent)
  * Encrypt dictionary. Supports decryption of versions 1, 2 and 4 of the
  * password-based encryption mechanisms as described in PDF Reference version
  * 1.7. This means that it supports RC4 and AES encryption with keys of
  * 40-128 bits; esentially, password-protected documents with compatibility
  * up to Acrobat 8.
  *
- * @See "PDF Reference version 1.7, section 3.5: Encryption"
- * @author Luke Kirby
+ * See "PDF Reference version 1.7, section 3.5: Encryption"
+ * Author Luke Kirby
+  *
  */
 public class PDFDecrypterFactory {
 
@@ -51,23 +52,17 @@ public class PDFDecrypterFactory {
      * described by the encryption specification.
      *
      * @param encryptDict the Encrypt dict as found in the document's trailer.
-     *  May be null, in which case the {@link IdentityDecrypter} will
+     *  May be null, in which case the {@link org.loboevolution.pdfview.decrypt.IdentityDecrypter} will
      *  be returned.
      * @param documentId the object with key "ID" in the trailer's dictionary.
      *  Should always be present if Encrypt is.
      * @param password the password to use; may be <code>null</code>
      * @return The decryptor that should be used for all encrypted data in the
      *  PDF
-     * @throws IOException will typically be a {@link
-     *  org.loboevolution.pdfview.PDFParseException}, indicating an IO problem, an error
-     *  in the structure of the document, or a failure to obtain various ciphers
-     *  from the installed JCE providers
-     * @throws EncryptionUnsupportedByPlatformException if the encryption
-     *  is not supported by the environment in which the code is executing
-     * @throws EncryptionUnsupportedByProductException if PDFRenderer does
-     *  not currently support the specified encryption
-     * @throws PDFAuthenticationFailureException if the supplied password
-     *  was not able to 
+     * @throws java.io.IOException if any.
+     * @throws org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByPlatformException if any.
+     * @throws org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByProductException if any.
+     * @throws org.loboevolution.pdfview.decrypt.PDFAuthenticationFailureException if any.
      */
     public static PDFDecrypter createDecryptor
             (PDFObject encryptDict, PDFObject documentId, PDFPassword password)
@@ -320,6 +315,8 @@ public class PDFDecrypterFactory {
     }
 
     /**
+     * <p>isFilterExist.</p>
+     *
      * @param encryptDict the Encrypt dict as found in the document's trailer.
      * @return true if the Filter exist in the current dictionary
      */

@@ -46,8 +46,8 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 /**
  * <p>BaseInternalFrameUI class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class BaseInternalFrameUI extends BasicInternalFrameUI {
 

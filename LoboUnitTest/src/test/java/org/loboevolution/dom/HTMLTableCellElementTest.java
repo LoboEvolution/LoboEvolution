@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 
 package org.loboevolution.dom;
@@ -27,8 +24,14 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 
+/**
+ * Tests for {@link org.loboevolution.html.dom.HTMLTableCellElement}.
+ */
 public class HTMLTableCellElementTest extends LoboUnitTest {
 
+    /**
+     * <p>align.</p>
+     */
     @Test
     public void align() {
         final String html
@@ -66,6 +69,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>ch.</p>
+     */
     @Test
     public void ch() {
         final String html
@@ -96,6 +102,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>chOff.</p>
+     */
     @Test
     public void chOff() {
         final String html
@@ -126,6 +135,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>vAlign.</p>
+     */
     @Test
     public void vAlign() {
         final String html
@@ -163,6 +175,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>bgColor.</p>
+     */
     @Test
     public void bgColor() {
         final String html =
@@ -188,6 +203,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>noWrap.</p>
+     */
     @Test
     public void noWrap() {
         final String html =
@@ -222,6 +240,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>abbr.</p>
+     */
     @Test
     public void abbr() {
         final String html =
@@ -249,6 +270,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>colSpan.</p>
+     */
     @Test
     public void colSpan() {
         final String html
@@ -292,6 +316,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>rowSpan.</p>
+     */
     @Test
     public void rowSpan() {
         final String html
@@ -340,6 +367,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>axis.</p>
+     */
     @Test
     public void axis() {
         final String html =
@@ -369,6 +399,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>cellWidthHeightWithBorderCollapse.</p>
+     */
     @Test
     public void cellWidthHeightWithBorderCollapse() {
         final String html = "<html><body><table id='t'><tr>\n"
@@ -390,6 +423,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>cellWidthHeightWithBorderCollapseCellsInRow.</p>
+     */
     @Test
     public void cellWidthHeightWithBorderCollapseCellsInRow() {
         final String html = "<html><body><table id='t'><tr>\n"
@@ -420,6 +456,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>cellWidthHeightWithBorderCollapseSameCellLayout.</p>
+     */
     @Test
     public void cellWidthHeightWithBorderCollapseSameCellLayout() {
         final String html = "<html><body><table id='t'><tr>\n"
@@ -447,6 +486,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>width.</p>
+     */
     @Test
     public void width() {
         final String html =
@@ -488,6 +530,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>offsetHeight.</p>
+     */
     @Test
     public void offsetHeight() {
         final String html =
@@ -506,6 +551,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>borderColor.</p>
+     */
     @Test
     public void borderColor() {
         final String html
@@ -537,6 +585,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>borderColorDark.</p>
+     */
     @Test
     public void borderColorDark() {
         final String html
@@ -568,6 +619,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>borderColorLight.</p>
+     */
     @Test
     public void borderColorLight() {
         final String html
@@ -599,6 +653,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
+    /**
+     * <p>offsetHeightParentHidden.</p>
+     */
     @Test
     public void offsetHeightParentHidden() {
         final String html = "<html>\n"

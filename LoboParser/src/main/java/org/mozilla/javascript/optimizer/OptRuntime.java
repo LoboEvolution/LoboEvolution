@@ -22,13 +22,27 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.Undefined;
 
+/**
+ * <p>OptRuntime class.</p>
+ *
+ *
+ *
+ */
 public final class OptRuntime extends ScriptRuntime
 {
+    /** Constant <code>oneObj</code> */
     public static final Double oneObj = Double.valueOf(1.0);
+    /** Constant <code>minusOneObj</code> */
     public static final Double minusOneObj = Double.valueOf(-1.0);
 
     /**
      * Implement ....() call shrinking optimizer code.
+     *
+     * @param fun a {@link org.mozilla.javascript.Callable} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object call0(Callable fun, Scriptable thisObj,
                                Context cx, Scriptable scope)
@@ -38,6 +52,13 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement ....(arg) call shrinking optimizer code.
+     *
+     * @param fun a {@link org.mozilla.javascript.Callable} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param arg0 a {@link java.lang.Object} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object call1(Callable fun, Scriptable thisObj, Object arg0,
                                Context cx, Scriptable scope)
@@ -47,6 +68,14 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement ....(arg0, arg1) call shrinking optimizer code.
+     *
+     * @param fun a {@link org.mozilla.javascript.Callable} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param arg0 a {@link java.lang.Object} object.
+     * @param arg1 a {@link java.lang.Object} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object call2(Callable fun, Scriptable thisObj,
                                Object arg0, Object arg1,
@@ -57,6 +86,13 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement ....(arg0, arg1, ...) call shrinking optimizer code.
+     *
+     * @param fun a {@link org.mozilla.javascript.Callable} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param args an array of {@link java.lang.Object} objects.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object callN(Callable fun, Scriptable thisObj,
                                Object[] args,
@@ -67,6 +103,12 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement name(args) call shrinking optimizer code.
+     *
+     * @param args an array of {@link java.lang.Object} objects.
+     * @param name a {@link java.lang.String} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object callName(Object[] args, String name,
                                   Context cx, Scriptable scope)
@@ -78,6 +120,11 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement name() call shrinking optimizer code.
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object callName0(String name,
                                    Context cx, Scriptable scope)
@@ -89,6 +136,12 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement x.property() call shrinking optimizer code.
+     *
+     * @param value a {@link java.lang.Object} object.
+     * @param property a {@link java.lang.String} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object callProp0(Object value, String property,
                                    Context cx, Scriptable scope)
@@ -98,6 +151,13 @@ public final class OptRuntime extends ScriptRuntime
         return f.call(cx, scope, thisObj, ScriptRuntime.emptyArgs);
     }
 
+    /**
+     * <p>add.</p>
+     *
+     * @param val1 a {@link java.lang.Object} object.
+     * @param val2 a double.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object add(Object val1, double val2)
     {
         if (val1 instanceof Scriptable)
@@ -107,6 +167,7 @@ public final class OptRuntime extends ScriptRuntime
         return new ConsString((CharSequence)val1, toString(val2));
     }
 
+    /** {@inheritDoc} */
     public static Object add(double val1, Object val2)
     {
         if (val2 instanceof Scriptable)
@@ -116,9 +177,7 @@ public final class OptRuntime extends ScriptRuntime
         return new ConsString(toString(val1), (CharSequence)val2);
     }
 
-    /**
-     * @deprecated Use {@link #elemIncrDecr(Object, double, Context, Scriptable, int)} instead
-     */
+    /** {@inheritDoc} */
     @Deprecated
     public static Object elemIncrDecr(Object obj, double index,
                                       Context cx, int incrDecrMask)
@@ -126,6 +185,7 @@ public final class OptRuntime extends ScriptRuntime
         return elemIncrDecr(obj, index, cx, getTopCallScope(cx), incrDecrMask);
     }
 
+    /** {@inheritDoc} */
     public static Object elemIncrDecr(Object obj, double index,
                                       Context cx, Scriptable scope,
                                       int incrDecrMask)
@@ -134,23 +194,48 @@ public final class OptRuntime extends ScriptRuntime
                                           incrDecrMask);
     }
 
+    /**
+     * <p>padStart.</p>
+     *
+     * @param currentArgs an array of {@link java.lang.Object} objects.
+     * @param count a int.
+     * @return an array of {@link java.lang.Object} objects.
+     */
     public static Object[] padStart(Object[] currentArgs, int count) {
         Object[] result = new Object[currentArgs.length + count];
         System.arraycopy(currentArgs, 0, result, count, currentArgs.length);
         return result;
     }
 
+    /**
+     * <p>initFunction.</p>
+     *
+     * @param fn a {@link org.mozilla.javascript.NativeFunction} object.
+     * @param functionType a int.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     */
     public static void initFunction(NativeFunction fn, int functionType,
                                     Scriptable scope, Context cx)
     {
         ScriptRuntime.initFunction(cx, scope, fn, functionType, false);
     }
 
+    /**
+     * <p>bindThis.</p>
+     *
+     * @param fn a {@link org.mozilla.javascript.NativeFunction} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.Function} object.
+     */
     public static Function bindThis(NativeFunction fn, Context cx, Scriptable scope, Scriptable thisObj)
     {
         return new ArrowFunction(cx, scope, fn, thisObj);
     }
 
+    /** {@inheritDoc} */
     public static Object callSpecial(Context cx, Callable fun,
                                      Scriptable thisObj, Object[] args,
                                      Scriptable scope,
@@ -162,6 +247,17 @@ public final class OptRuntime extends ScriptRuntime
                                          fileName, lineNumber);
     }
 
+    /**
+     * <p>newObjectSpecial.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param fun a {@link java.lang.Object} object.
+     * @param args an array of {@link java.lang.Object} objects.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param callerThis a {@link org.mozilla.javascript.Scriptable} object.
+     * @param callType a int.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object newObjectSpecial(Context cx, Object fun,
                                           Object[] args, Scriptable scope,
                                           Scriptable callerThis, int callType)
@@ -169,6 +265,12 @@ public final class OptRuntime extends ScriptRuntime
         return ScriptRuntime.newSpecial(cx, fun, args, scope, callType);
     }
 
+    /**
+     * <p>wrapDouble.</p>
+     *
+     * @param num a double.
+     * @return a {@link java.lang.Double} object.
+     */
     public static Double wrapDouble(double num)
     {
         if (num == 0.0) {
@@ -220,6 +322,16 @@ public final class OptRuntime extends ScriptRuntime
         return array;
     }
 
+    /**
+     * <p>newArrayLiteral.</p>
+     *
+     * @param objects an array of {@link java.lang.Object} objects.
+     * @param encodedInts a {@link java.lang.String} object.
+     * @param skipCount a int.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public static Scriptable newArrayLiteral(Object[] objects,
                                              String encodedInts,
                                              int skipCount,
@@ -230,6 +342,12 @@ public final class OptRuntime extends ScriptRuntime
         return newArrayLiteral(objects, skipIndexces, cx, scope);
     }
 
+    /**
+     * <p>main.</p>
+     *
+     * @param script a {@link org.mozilla.javascript.Script} object.
+     * @param args an array of {@link java.lang.String} objects.
+     */
     public static void main(final Script script, final String[] args)
     {
         ContextFactory.getGlobal().call(cx -> {
@@ -247,6 +365,12 @@ public final class OptRuntime extends ScriptRuntime
         });
     }
 
+    /**
+     * <p>throwStopIteration.</p>
+     *
+     * @param scope a {@link java.lang.Object} object.
+     * @param genState a {@link java.lang.Object} object.
+     */
     public static void throwStopIteration(Object scope, Object genState) {
         Object value = getGeneratorReturnValue(genState);
         Object si =
@@ -256,6 +380,16 @@ public final class OptRuntime extends ScriptRuntime
         throw new JavaScriptException(si, "", 0);
     }
 
+    /**
+     * <p>createNativeGenerator.</p>
+     *
+     * @param funObj a {@link org.mozilla.javascript.NativeFunction} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param maxLocals a int.
+     * @param maxStack a int.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public static Scriptable createNativeGenerator(NativeFunction funObj,
                                                    Scriptable scope,
                                                    Scriptable thisObj,
@@ -270,6 +404,12 @@ public final class OptRuntime extends ScriptRuntime
         }
     }
 
+    /**
+     * <p>getGeneratorStackState.</p>
+     *
+     * @param obj a {@link java.lang.Object} object.
+     * @return an array of {@link java.lang.Object} objects.
+     */
     public static Object[] getGeneratorStackState(Object obj) {
         GeneratorState rgs = (GeneratorState) obj;
         if (rgs.stackState == null)
@@ -277,6 +417,12 @@ public final class OptRuntime extends ScriptRuntime
         return rgs.stackState;
     }
 
+    /**
+     * <p>getGeneratorLocalsState.</p>
+     *
+     * @param obj a {@link java.lang.Object} object.
+     * @return an array of {@link java.lang.Object} objects.
+     */
     public static Object[] getGeneratorLocalsState(Object obj) {
         GeneratorState rgs = (GeneratorState) obj;
         if (rgs.localsState == null)
@@ -284,11 +430,23 @@ public final class OptRuntime extends ScriptRuntime
         return rgs.localsState;
     }
 
+    /**
+     * <p>setGeneratorReturnValue.</p>
+     *
+     * @param obj a {@link java.lang.Object} object.
+     * @param val a {@link java.lang.Object} object.
+     */
     public static void setGeneratorReturnValue(Object obj, Object val) {
         GeneratorState rgs = (GeneratorState) obj;
         rgs.returnValue = val;
     }
 
+    /**
+     * <p>getGeneratorReturnValue.</p>
+     *
+     * @param obj a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object getGeneratorReturnValue(Object obj) {
         GeneratorState rgs = (GeneratorState) obj;
         return (rgs.returnValue == null ? Undefined.instance : rgs.returnValue);

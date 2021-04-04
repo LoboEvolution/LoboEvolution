@@ -21,25 +21,43 @@ import java.util.Map;
  * reflect fields directly, and uses NativeJavaMethod objects to reflect (possibly
  * overloaded) methods.<p>
  *
- * @author Mike Shaver
+ * Author Mike Shaver
  * @see NativeJavaArray
  * @see NativeJavaPackage
  * @see NativeJavaClass
+ *
  */
-
 public class NativeJavaObject
     implements Scriptable, SymbolScriptable, Wrapper, Serializable
 {
     private static final long serialVersionUID = -6948590651130498591L;
 
+    /**
+     * <p>Constructor for NativeJavaObject.</p>
+     */
     public NativeJavaObject() { }
 
+    /**
+     * <p>Constructor for NativeJavaObject.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param javaObject a {@link java.lang.Object} object.
+     * @param staticType a {@link java.lang.Class} object.
+     */
     public NativeJavaObject(Scriptable scope, Object javaObject,
                             Class<?> staticType)
     {
         this(scope, javaObject, staticType, false);
     }
 
+    /**
+     * <p>Constructor for NativeJavaObject.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param javaObject a {@link java.lang.Object} object.
+     * @param staticType a {@link java.lang.Class} object.
+     * @param isAdapter a boolean.
+     */
     public NativeJavaObject(Scriptable scope, Object javaObject,
                             Class<?> staticType, boolean isAdapter)
     {
@@ -50,6 +68,9 @@ public class NativeJavaObject
         initMembers();
     }
 
+    /**
+     * <p>initMembers.</p>
+     */
     protected void initMembers() {
         Class<?> dynamicType;
         if (javaObject != null) {
@@ -63,21 +84,25 @@ public class NativeJavaObject
             = members.getFieldAndMethodsObjects(this, javaObject, false);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(String name, Scriptable start) {
         return members.has(name, false);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start) {
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(Symbol key, Scriptable start) {
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(String name, Scriptable start) {
         if (fieldAndMethods != null) {
@@ -91,17 +116,20 @@ public class NativeJavaObject
         return members.get(this, name, javaObject, false);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(Symbol key, Scriptable start) {
         // Native Java objects have no Symbol members
         return Scriptable.NOT_FOUND;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start) {
         throw members.reportMemberNotFound(Integer.toString(index));
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(String name, Scriptable start, Object value) {
         // We could be asked to modify the value of a property in the
@@ -113,6 +141,7 @@ public class NativeJavaObject
             prototype.put(name, prototype, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(Symbol symbol, Scriptable start, Object value) {
         // We could be asked to modify the value of a property in the
@@ -126,29 +155,35 @@ public class NativeJavaObject
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value) {
         throw members.reportMemberNotFound(Integer.toString(index));
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean hasInstance(Scriptable value) {
         // This is an instance of a Java class, so always return false
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void delete(String name) {
     }
 
+    /** {@inheritDoc} */
     @Override
     public void delete(Symbol key) {
     }
 
+    /** {@inheritDoc} */
     @Override
     public void delete(int index) {
     }
 
+    /** {@inheritDoc} */
     @Override
     public Scriptable getPrototype() {
         if (prototype == null && javaObject instanceof String) {
@@ -160,6 +195,8 @@ public class NativeJavaObject
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Sets the prototype of the object.
      */
     @Override
@@ -168,6 +205,8 @@ public class NativeJavaObject
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns the parent (enclosing) scope of the object.
      */
     @Override
@@ -176,6 +215,8 @@ public class NativeJavaObject
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Sets the parent (enclosing) scope of the object.
      */
     @Override
@@ -183,14 +224,21 @@ public class NativeJavaObject
         parent = m;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object[] getIds() {
         return members.getIds(false);
     }
 
     /**
-     * @deprecated Use {@link Context#getWrapFactory()} together with calling {@link
+     * <p>wrap.</p>
+     *
+     * @deprecated Use {@link org.mozilla.javascript.Context#getWrapFactory()} together with calling {@link
      * WrapFactory#wrap(Context, Scriptable, Object, Class)}
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param obj a {@link java.lang.Object} object.
+     * @param staticType a {@link java.lang.Class} object.
+     * @return a {@link java.lang.Object} object.
      */
     @Deprecated
     public static Object wrap(Scriptable scope, Object obj, Class<?> staticType) {
@@ -199,16 +247,19 @@ public class NativeJavaObject
         return cx.getWrapFactory().wrap(cx, scope, obj, staticType);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object unwrap() {
         return javaObject;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "JavaObject";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> hint)
     {
@@ -255,6 +306,10 @@ public class NativeJavaObject
      * Determine whether we can/should convert between the given type and the
      * desired one.  This should be superceded by a conversion-cost calculation
      * function, but for now I'll hide behind precedent.
+     *
+     * @param fromObj a {@link java.lang.Object} object.
+     * @param to a {@link java.lang.Class} object.
+     * @return a boolean.
      */
     public static boolean canConvert(Object fromObj, Class<?> to) {
         int weight = getConversionWeight(fromObj, to);
@@ -510,8 +565,12 @@ public class NativeJavaObject
     /**
      * Not intended for public use. Callers should use the
      * public API Context.toType.
+     *
      * @deprecated as of 1.5 Release 4
      * @see org.mozilla.javascript.Context#jsToJava(Object, Class)
+     * @param type a {@link java.lang.Class} object.
+     * @param value a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
      */
     @Deprecated
     public static Object coerceType(Class<?> type, Object value)
@@ -708,6 +767,13 @@ public class NativeJavaObject
         return value;
     }
 
+    /**
+     * <p>createInterfaceAdapter.</p>
+     *
+     * @param type a {@link java.lang.Class} object.
+     * @param so a {@link org.mozilla.javascript.ScriptableObject} object.
+     * @return a {@link java.lang.Object} object.
+     */
     protected static Object createInterfaceAdapter(Class<?>type, ScriptableObject so) {
         // XXX: Currently only instances of ScriptableObject are
         // supported since the resulting interface proxies should

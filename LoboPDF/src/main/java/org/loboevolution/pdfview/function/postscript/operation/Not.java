@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Not implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>bool1|int1</i> <b>not</b> <i>bool2|int2</i> <p>
 	 *
 	 * returns the logical negation of the operand if it is

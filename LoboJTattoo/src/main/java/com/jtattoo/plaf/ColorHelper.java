@@ -28,8 +28,8 @@ import java.awt.Color;
 /**
  * A helper class for handling color values.
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class ColorHelper {
 

@@ -46,8 +46,8 @@ import com.jtattoo.plaf.LazyImageIcon;
 /**
  * <p>HiFiBorders class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class HiFiBorders extends BaseBorders {
 

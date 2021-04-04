@@ -54,18 +54,33 @@ import java.util.logging.Logger;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
+/**
+ * <p>TextRegionHuffmanFlags class.</p>
+ *
+  *
+  *
+ */
 public class TextRegionHuffmanFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(TextRegionHuffmanFlags.class.getName());
+	/** Constant <code>SB_HUFF_FS="SB_HUFF_FS"</code> */
 	public static final String SB_HUFF_FS = "SB_HUFF_FS";
+	/** Constant <code>SB_HUFF_DS="SB_HUFF_DS"</code> */
 	public static final String SB_HUFF_DS = "SB_HUFF_DS";
+	/** Constant <code>SB_HUFF_DT="SB_HUFF_DT"</code> */
 	public static final String SB_HUFF_DT = "SB_HUFF_DT";
+	/** Constant <code>SB_HUFF_RDW="SB_HUFF_RDW"</code> */
 	public static final String SB_HUFF_RDW = "SB_HUFF_RDW";
+	/** Constant <code>SB_HUFF_RDH="SB_HUFF_RDH"</code> */
 	public static final String SB_HUFF_RDH = "SB_HUFF_RDH";
+	/** Constant <code>SB_HUFF_RDX="SB_HUFF_RDX"</code> */
 	public static final String SB_HUFF_RDX = "SB_HUFF_RDX";
+	/** Constant <code>SB_HUFF_RDY="SB_HUFF_RDY"</code> */
 	public static final String SB_HUFF_RDY = "SB_HUFF_RDY";
+	/** Constant <code>SB_HUFF_RSIZE="SB_HUFF_RSIZE"</code> */
 	public static final String SB_HUFF_RSIZE = "SB_HUFF_RSIZE";
 
+	/** {@inheritDoc} */
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 

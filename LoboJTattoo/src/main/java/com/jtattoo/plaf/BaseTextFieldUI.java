@@ -46,8 +46,8 @@ import javax.swing.text.DefaultEditorKit;
 /**
  * <p>BaseTextFieldUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BaseTextFieldUI extends MetalTextFieldUI {
 

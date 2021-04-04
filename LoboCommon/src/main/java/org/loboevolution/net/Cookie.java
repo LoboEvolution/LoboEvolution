@@ -1,24 +1,21 @@
 /*
+ * GNU GENERAL LICENSE
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
- *     GNU GENERAL LICENSE
- *     Copyright (C) 2014 - 2021 Lobo Evolution
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * verion 3 of the License, or (at your option) any later version.
  *
- *     This program is free software; you can redistribute it and/or
- *     modify it under the terms of the GNU General Public
- *     License as published by the Free Software Foundation; either
- *     verion 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General License for more details.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *     General License for more details.
+ * You should have received a copy of the GNU General Public
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You should have received a copy of the GNU General Public
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- *     Contact info: ivan.difrancesco@yahoo.it
- *
+ * Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jun 2, 2005
@@ -31,8 +28,8 @@ import java.net.URLEncoder;
 /**
  * The Class Cookie.
  *
- * @author J. H. S.
- * @version $Id: $Id
+ * Author J. H. S.
+ *
  */
 public class Cookie extends NameValuePair {
 	
@@ -74,8 +71,7 @@ public class Cookie extends NameValuePair {
 	 * Gets the encoded name.
 	 *
 	 * @return the encoded name
-	 * @throws java.io.UnsupportedEncodingException
-	 *             the unsupported encoding exception
+	 * @throws java.io.UnsupportedEncodingException if any.
 	 */
 	public String getEncodedName() throws UnsupportedEncodingException {
 		return URLEncoder.encode(this.name, "UTF-8");
@@ -85,8 +81,7 @@ public class Cookie extends NameValuePair {
 	 * Gets the encoded value.
 	 *
 	 * @return the encoded value
-	 * @throws java.io.UnsupportedEncodingException
-	 *             the unsupported encoding exception
+	 * @throws java.io.UnsupportedEncodingException if any.
 	 */
 	public String getEncodedValue() throws UnsupportedEncodingException {
 		return URLEncoder.encode(this.value, "UTF-8");

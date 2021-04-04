@@ -46,8 +46,8 @@ import com.jtattoo.plaf.luna.LunaIcons;
 /**
  * <p>TextureComboBoxUI class.</p>
  *
- * @author utente
- * @version $Id: $Id
+ *
+ *
  */
 public class TextureComboBoxUI extends BaseComboBoxUI {
 

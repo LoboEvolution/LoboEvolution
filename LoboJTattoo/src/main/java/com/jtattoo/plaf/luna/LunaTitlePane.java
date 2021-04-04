@@ -35,8 +35,8 @@ import com.jtattoo.plaf.JTattooUtilities;
 /**
  * <p>LunaTitlePane class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class LunaTitlePane extends BaseTitlePane {
 

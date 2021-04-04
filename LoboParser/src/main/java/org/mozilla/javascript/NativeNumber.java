@@ -11,7 +11,7 @@ package org.mozilla.javascript;
  *
  * See ECMA 15.7.
  *
- * @author Norris Boyd
+ * Author Norris Boyd
  */
 final class NativeNumber extends IdScriptableObject
 {
@@ -38,12 +38,14 @@ final class NativeNumber extends IdScriptableObject
         doubleValue = number;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Number";
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -81,6 +83,7 @@ final class NativeNumber extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -100,6 +103,7 @@ final class NativeNumber extends IdScriptableObject
         initPrototypeMethod(NUMBER_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -236,6 +240,7 @@ final class NativeNumber extends IdScriptableObject
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return ScriptRuntime.numberToString(doubleValue, 10);
@@ -328,6 +333,7 @@ final class NativeNumber extends IdScriptableObject
     }
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

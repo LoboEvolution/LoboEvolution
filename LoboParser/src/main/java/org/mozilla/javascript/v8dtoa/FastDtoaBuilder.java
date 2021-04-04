@@ -8,6 +8,12 @@ package org.mozilla.javascript.v8dtoa;
 
 import java.util.Arrays;
 
+/**
+ * <p>FastDtoaBuilder class.</p>
+ *
+ *
+ *
+ */
 public class FastDtoaBuilder {
 
     // allocate buffer for generated digits + extra notation + padding zeroes
@@ -24,16 +30,25 @@ public class FastDtoaBuilder {
         chars[end - 1]--;
     }
 
+    /**
+     * <p>reset.</p>
+     */
     public void reset() {
         end = 0;
         formatted = false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[chars:" + new String(chars, 0, end) + ", point:" + point + "]";
     }
 
+    /**
+     * <p>format.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String format() {
         if (!formatted) {
             // check for minus sign

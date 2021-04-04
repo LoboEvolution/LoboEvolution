@@ -5,6 +5,8 @@ import java.util.Stack;
 final class Cvr implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num</i> <b>cvr</b> <i>real</i> <u>or</u> <i>string</i> <b>cvr</b> <i>real</i> <p>
 	 *
 	 * (convert to real) takes an integer, real, or string

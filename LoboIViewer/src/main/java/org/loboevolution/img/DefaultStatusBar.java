@@ -26,8 +26,8 @@ package org.loboevolution.img;
  * A default status bar implementation that displays the current mouse position
  * (in pixel coordinates) and the colour of the pixel under the cursor.
  *
- * @author Kazo Csaba
- * @version $Id: $Id
+ * Author Kazo Csaba
+ *
  */
 public class DefaultStatusBar extends PixelInfoStatusBar implements ImageMouseMotionListener {
 

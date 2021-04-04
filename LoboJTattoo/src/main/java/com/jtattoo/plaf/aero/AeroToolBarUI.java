@@ -33,8 +33,8 @@ import com.jtattoo.plaf.BaseBorders;
 /**
  * <p>AeroToolBarUI class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class AeroToolBarUI extends AbstractToolBarUI {
 

@@ -9,7 +9,7 @@ package org.mozilla.javascript;
 /**
  * This class implements the Math native object.
  * See ECMA 15.8.
- * @author Norris Boyd
+ * Author Norris Boyd
  */
 
 final class NativeMath extends IdScriptableObject
@@ -35,9 +35,11 @@ final class NativeMath extends IdScriptableObject
     {
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() { return "Math"; }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -103,6 +105,7 @@ final class NativeMath extends IdScriptableObject
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -461,6 +464,7 @@ final class NativeMath extends IdScriptableObject
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

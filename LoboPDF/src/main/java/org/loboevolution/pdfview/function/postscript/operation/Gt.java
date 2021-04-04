@@ -6,6 +6,8 @@ import java.util.Stack;
 final class Gt implements PostScriptOperation {
 	@Override
 	/**
+	 * {@inheritDoc}
+	 *
 	 * <i>num1 num2</i> <b>gt</b> <i>bool</i> <p>
 	 *
 	 * pops two objects from the operand stack and pushes true

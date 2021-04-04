@@ -7,8 +7,6 @@ package org.json;
  * toJSONString method will be used instead of the default behavior
  * of using the Object's toString() method and quoting the result.
  *
- * @author utente
- * @version $Id: $Id
  */
 public interface JSONString {
     /**

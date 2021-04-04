@@ -35,8 +35,8 @@ import com.jtattoo.plaf.LazyImageIcon;
 /**
  * <p>BernsteinUtils class.</p>
  *
- * @author Michael Hagen
- * @version $Id: $Id
+ * Author Michael Hagen
+ *
  */
 public class BernsteinUtils {
 
