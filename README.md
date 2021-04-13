@@ -69,7 +69,7 @@ Show report in [doc folder](https://github.com/LoboEvolution/LoboEvolution/tree/
 <dependency>
   <groupId>com.github.oswetto</groupId>
   <artifactId>loboevolution</artifactId>
-  <version>1.0</version>
+  <version>2.0</version>
 </dependency>
 ```
 
