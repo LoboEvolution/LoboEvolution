@@ -60,19 +60,6 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#cloneNode(boolean)
-	 */
-	/** {@inheritDoc} */
-	@Override
-	public Node cloneNode(boolean deep) {
-		final CharacterDataImpl newNode = (CharacterDataImpl) super.cloneNode(deep);
-		newNode.setData(getData());
-		return newNode;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void deleteData(int offset, int count) {

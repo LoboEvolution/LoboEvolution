@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
@@ -54,9 +55,6 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
 
 /**
  * <p>EventTargetImpl class.</p>
- *
- *
- *
  */
 public class EventTargetImpl extends NodeImpl implements EventTarget {
 	
@@ -225,12 +223,6 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	@Override
 	public NodeType getNodeType() {
 		return NodeType.DOCUMENT_NODE;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	protected Node createSimilarNode() {
-		return new HTMLDocumentImpl(new UserAgentContext());
 	}
 
 	/** {@inheritDoc} */
@@ -411,5 +403,34 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 */
 	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+	}
+
+	/**
+	 * <p>getFirstElementChild.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Element} object.
+	 */
+	public Element getFirstElementChild() {
+		return (Element) nodeList.stream().filter(n -> n instanceof Element).findFirst().orElse(null);
+	}
+
+	/**
+	 * <p>getLastElementChild.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Element} object.
+	 */
+	public Element getLastElementChild() {
+		long count = nodeList.stream().filter(n -> n instanceof Element).count();
+		Stream<Node> stream = nodeList.stream();
+		return (Element) stream.filter(n -> n instanceof Element).skip(count - 1).findFirst().orElse(null);
+	}
+
+	/**
+	 * <p>getChildElementCount.</p>
+	 *
+	 * @return a int.
+	 */
+	public int getChildElementCount() {
+		return (int) nodeList.stream().filter(n -> n instanceof Element).count();
 	}
 }

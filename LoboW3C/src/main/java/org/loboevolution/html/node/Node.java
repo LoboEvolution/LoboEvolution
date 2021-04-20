@@ -142,9 +142,9 @@ public interface Node extends EventTarget {
 	/**
 	 * Returns the parent.
 	 *
-	 * @return a {@link org.loboevolution.html.node.ParentNode} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
-	ParentNode getParentNode();
+	Node getParentNode();
 
 	/**
 	 * Returns the previous sibling.

@@ -256,7 +256,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public ParentNode getParentNode() {
+	public Node getParentNode() {
 		return doc.getParentNode();
 	}
 

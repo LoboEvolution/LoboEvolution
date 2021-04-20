@@ -75,9 +75,6 @@ import org.loboevolution.html.xpath.XPathEvaluator;
 
 /**
  * <p>DocumentImpl class.</p>
- *
- *
- *
  */
 public class DocumentImpl extends GlobalEventHandlersImpl implements Document, XPathEvaluator {
 
@@ -326,27 +323,6 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getChildElementCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element getFirstElementChild() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element getLastElementChild() {
-		// TODO Auto-generated method stub
-		return null;
-	}	
 
 	/** {@inheritDoc} */
 	@Override

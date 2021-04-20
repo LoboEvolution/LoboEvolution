@@ -37,9 +37,6 @@ import org.loboevolution.html.node.events.GlobalEventHandlers;
 
 /**
  * Implements common functionality of most elements.
- *
- *
- *
  */
 public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEventHandlers {
 	

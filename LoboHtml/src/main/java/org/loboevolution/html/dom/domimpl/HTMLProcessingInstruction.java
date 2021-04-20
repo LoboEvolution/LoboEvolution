@@ -36,7 +36,7 @@ import org.loboevolution.html.node.ProcessingInstruction;
  * Author vitek
  *
  */
-public class HTMLProcessingInstruction extends HTMLElementImpl implements ProcessingInstruction, Cloneable {
+public class HTMLProcessingInstruction extends HTMLElementImpl implements ProcessingInstruction {
 	
 	private String data;
 	private String target;
@@ -50,23 +50,6 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 		super(name);
 	}
 	
-
-	/** {@inheritDoc} */
-	@Override
-	public Object clone() {
-		try {
-			return super.clone();
-		} catch (final CloneNotSupportedException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	protected Node createSimilarNode() {
-		return (Node) clone();
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public String getData() {

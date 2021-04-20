@@ -22,21 +22,15 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLSlotElement;
 import org.loboevolution.html.dom.domimpl.CharacterDataImpl;
 import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.Text;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventListener;
 
 /**
  * <p>TextImpl class.</p>
- *
- *
- *
  */
 public class TextImpl extends CharacterDataImpl implements Text {
 	/**
@@ -53,12 +47,6 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 */
 	public TextImpl(String text) {
 		this.text = text;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	protected Node createSimilarNode() {
-		return new TextImpl(this.text);
 	}
 
 	/*

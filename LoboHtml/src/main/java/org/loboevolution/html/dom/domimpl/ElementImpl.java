@@ -26,11 +26,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.parser.HtmlParser;
@@ -104,13 +100,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				}
 			}
 		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	protected Node createSimilarNode() {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		return doc == null ? null : doc.createElement(getTagName());
 	}
 
 	/** {@inheritDoc} */
@@ -494,55 +483,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		setAttribute("title", title);
 	}
 	
-	/**
-	 * <p>getFirstElementChild.</p>
-	 *
-	 * @return a {@link org.w3c.dom.Element} object.
-	 */
-	public Element getFirstElementChild() {
-		for (Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
-			Node n = i.next();
-			if (n instanceof Element) {
-				return (Element) n;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <p>getLastElementChild.</p>
-	 *
-	 * @return a {@link org.w3c.dom.Element} object.
-	 */
-	public Element getLastElementChild() {
-		final int N = this.nodeList.getLength();
-		for (int i = N - 1; i >= 0; i--) {
-			final Node n = this.nodeList.get(i);
-			if (n instanceof Element) {
-				return (Element) n;
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * <p>getChildElementCount.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getChildElementCount() {
-		int count = 0;
-		for (Iterator<Node> i= nodeList.iterator(); i.hasNext(); ) {
-			Node n = i.next();
-			if (n instanceof Element) {
-				count++;
-			}
-		}
-
-		return count;
-	}
-
 	/**
 	 * {@inheritDoc}
 	 *

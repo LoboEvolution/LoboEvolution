@@ -72,12 +72,6 @@ public class AttrImpl extends AttrAbstract {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Node createSimilarNode() {
-		return new AttrImpl(this.name, this.value, this.specified, this.ownerElement, this.isId);
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getLocalName() {
 		return this.name;
 	}

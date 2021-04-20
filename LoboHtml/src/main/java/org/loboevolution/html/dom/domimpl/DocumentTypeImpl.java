@@ -53,13 +53,6 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Node createSimilarNode() {
-		return new DocumentTypeImpl(this.qualifiedName, this.publicId, this.systemId);
-	}
-
-
-	/** {@inheritDoc} */
-	@Override
 	public String getLocalName() {
 		return null;
 	}

@@ -45,12 +45,6 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Node createSimilarNode() {
-		return new CommentImpl(this.text);
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getLocalName() {
 		return null;
 	}

@@ -22,32 +22,15 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.NodeFilter;
-import org.loboevolution.html.dom.domimpl.ElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.TextFilter;
+import org.loboevolution.html.node.*;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
@@ -55,26 +38,18 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.w3c.dom.UserDataHandler;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Code;
-import org.loboevolution.html.node.Comment;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
-import org.loboevolution.html.node.ParentNode;
-import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.ProcessingInstruction;
-import org.loboevolution.html.node.Text;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>Abstract NodeImpl class.</p>
- *
- *
- *
  */
-public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode {
+public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode, Cloneable {
 		
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
 	
@@ -89,7 +64,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	protected volatile boolean notificationsSuspended = false;
 
-	protected volatile ParentNode parentNode;
+	protected volatile Node parentNode;
 
 	private volatile String prefix;
 
@@ -119,7 +94,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				((NodeImpl) newChild).setParentImpl(this);
 			}
 		}
-
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}
@@ -188,27 +162,24 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public Node cloneNode(boolean deep) {
 		try {
-			final Node newNode = createSimilarNode();
-			final NodeListImpl children = (NodeListImpl)getChildNodes();
-			final int length = children.getLength();
-			for (int i = 0; i < length; i++) {
-				final Node child = children.item(i);
-				final Node newChild = deep ? child.cloneNode(deep) : child;
-				newNode.appendChild(newChild);
-			}
-			
-			if (newNode instanceof Element) {
-				final Element elem = (Element) newNode;
-				final NamedNodeMap nnmap = elem.getAttributes();
-				if (nnmap != null) {
-					final int nnlength = nnmap.getLength();
-					for (int i = 0; i < nnlength; i++) {
-						final Attr attr = (Attr) nnmap.item(i);
-						elem.setAttributeNode((Attr) attr.cloneNode(true));
+			final Node newNode = clone();
+			final int length = newNode.getChildNodes().getLength();
+			if (deep && length == 0) {
+				NodeListImpl childNodes = (NodeListImpl) getChildNodes();
+				childNodes.forEach(child -> {
+					newNode.appendChild(child.cloneNode(true));
+				});
+
+				if (newNode instanceof Element) {
+					final Element elem = (Element) newNode;
+					final NamedNodeMap nnmap = elem.getAttributes();
+					if (nnmap != null) {
+						for (Attr attr : Nodes.iterable(nnmap)) {
+							elem.setAttributeNode((Attr) attr.cloneNode(true));
+						}
 					}
 				}
 			}
-
 			return newNode;
 		} catch (final Exception err) {
 			throw new IllegalStateException(err.getMessage());
@@ -218,7 +189,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public boolean contains(Node other) {
-		// TODO Auto-generated method stub
+		for (Node parent = other; parent != null; parent = parent.getParentElement()) {
+			if (this == parent) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -259,14 +234,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return prevRenderState;
 	}
-
-	/**
-	 * Should create a node with some cloned properties, like the node name, but not
-	 * attributes or children.
-	 *
-	 * @return a {@link org.w3c.dom.Node} object.
-	 */
-	protected abstract Node createSimilarNode();
 
 	/**
 	 * <p>equalAttributes.</p>
@@ -672,14 +639,18 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	/** {@inheritDoc} */
 	@Override
-	public ParentNode getParentNode() {
+	public Node getParentNode() {
 		return this.parentNode;
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public HTMLElement getParentElement() {
-		return (HTMLElement) this.parentNode;
+		if (this.parentNode instanceof HTMLElement) {
+			return (HTMLElement) this.parentNode;
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -1353,7 +1324,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param parent a {@link org.loboevolution.html.node.Node} object.
 	 */
 	protected final void setParentImpl(Node parent) {
-		this.parentNode = (ParentNode) parent;
+		this.parentNode = parent;
 	}
 
 	/** {@inheritDoc} */
@@ -1488,5 +1459,15 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public void warn(String message, Throwable err) {
 		logger.log(Level.WARNING, message, err);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Node clone() {
+		try {
+			return (Node)super.clone();
+		} catch (final CloneNotSupportedException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 }

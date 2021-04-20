@@ -133,7 +133,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** {@inheritDoc} */
 	@Override
-	public ParentNode getParentNode() {
+	public Node getParentNode() {
 		return m_attributeNode.getParentNode();
 	}
 
