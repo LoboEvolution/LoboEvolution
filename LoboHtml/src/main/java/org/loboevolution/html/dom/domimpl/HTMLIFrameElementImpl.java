@@ -20,21 +20,21 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.Dimension;
-import java.net.URL;
-import java.util.logging.Level;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.control.FrameControl;
 import org.loboevolution.html.dom.HTMLIFrameElement;
 import org.loboevolution.html.gui.HtmlPanel;
-import org.loboevolution.html.renderstate.IFrameRenderState;
-import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.js.WindowProxy;
+import org.loboevolution.html.renderstate.IFrameRenderState;
+import org.loboevolution.html.renderstate.RenderState;
+
+import java.awt.*;
+import java.net.URL;
+import java.util.logging.Level;
 
 /**
  * <p>HTMLIFrameElementImpl class.</p>
@@ -192,14 +192,18 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	 */
 	public void draw(FrameControl frameControl) {
 		try {
-			HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
-			URL baseURL = new URL(doc.getBaseURI());
-			URL createURL = Urls.createURL(baseURL, getSrc());
-			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, createURL.toString());
-			if (Strings.isNotBlank(getWidth()) && Strings.isNotBlank(getHeight())) {
-				hpanel.setPreferredSize(new Dimension(Integer.parseInt(getWidth()), Integer.parseInt(getHeight())));
+			if (Strings.isBlank(getSrc())) {
+				frameControl.add(new HtmlPanel());
+			} else {
+				HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+				URL baseURL = new URL(doc.getBaseURI());
+				URL createURL = Urls.createURL(baseURL, getSrc());
+				final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, createURL.toString());
+				if (Strings.isNotBlank(getWidth()) && Strings.isNotBlank(getHeight())) {
+					hpanel.setPreferredSize(new Dimension(Integer.parseInt(getWidth()), Integer.parseInt(getHeight())));
+				}
+				frameControl.add(hpanel);
 			}
-			frameControl.add(hpanel);
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
