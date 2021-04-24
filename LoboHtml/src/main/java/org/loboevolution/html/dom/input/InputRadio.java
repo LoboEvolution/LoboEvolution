@@ -47,7 +47,7 @@ public class InputRadio {
 	public InputRadio(HTMLInputElementImpl modelNode, InputControl ic) {
 		radio.setOpaque(false);
 		if(modelNode.getTitle() != null) radio.setToolTipText(modelNode.getTitle());
-		radio.setVisible(!modelNode.getHidden());
+		radio.setVisible(!modelNode.isHidden());
 		radio.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		radio.setEnabled(!modelNode.isDisabled());
 		radio.setSelected(modelNode.isChecked());

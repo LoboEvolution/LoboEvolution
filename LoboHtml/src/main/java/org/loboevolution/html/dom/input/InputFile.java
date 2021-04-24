@@ -62,7 +62,7 @@ public class InputFile {
 		this.textField.setEditable(false);
 		if (modelNode.getTitle() != null)
 			this.textField.setToolTipText(modelNode.getTitle());
-		textField.setVisible(!modelNode.getHidden());
+		textField.setVisible(!modelNode.isHidden());
 		textField.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		textField.setEditable(Boolean.parseBoolean(modelNode.getContentEditable()));
 		textField.setEnabled(!modelNode.isDisabled());

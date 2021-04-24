@@ -49,7 +49,7 @@ public class InputCheckbox {
 	public InputCheckbox(HTMLInputElementImpl modelNode, InputControl ic) {
 		checkBox.setOpaque(false);
 		if(modelNode.getTitle() != null) checkBox.setToolTipText(modelNode.getTitle());
-		checkBox.setVisible(!modelNode.getHidden());
+		checkBox.setVisible(!modelNode.isHidden());
 		checkBox.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		checkBox.setSelected(modelNode.getAttributeAsBoolean("checked"));
 		checkBox.setEnabled(!modelNode.isDisabled());

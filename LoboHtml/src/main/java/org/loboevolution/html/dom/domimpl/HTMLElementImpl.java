@@ -826,16 +826,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	}
 	
 	/**
-	 * <p>getHidden.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean getHidden() {
-		return this.getAttribute("hidden") != null;
-	}
-
-
-	/**
 	 * <p>setMouseOver.</p>
 	 *
 	 * @param mouseOver a boolean.
@@ -933,8 +923,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/** {@inheritDoc} */
 	@Override
 	public boolean isHidden() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getAttribute("hidden") != null;
 	}
 
 	/** {@inheritDoc} */

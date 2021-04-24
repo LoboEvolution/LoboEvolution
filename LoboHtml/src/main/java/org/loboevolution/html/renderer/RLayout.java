@@ -214,7 +214,7 @@ public class RLayout {
 		
 		private int calculateLayout(HTMLElementImpl markupElement) {
 			final RenderState rs = markupElement.getRenderState();
-			final boolean isHidden = markupElement.getHidden();
+			final boolean isHidden = markupElement.isHidden();
 			final int defaultDispaly = rs == null ? this.display : rs.getDisplay();
 			int display = isHidden ? RenderState.DISPLAY_NONE : defaultDispaly;
 

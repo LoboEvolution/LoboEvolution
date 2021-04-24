@@ -132,7 +132,7 @@ public class SelectOption {
 		if (modelNode.getTitle() != null) {
 			comboBox.setToolTipText(modelNode.getTitle());
 		}
-		comboBox.setVisible(!modelNode.getHidden());
+		comboBox.setVisible(!modelNode.isHidden());
 		comboBox.applyComponentOrientation(direction(modelNode.getDir()));
 		comboBox.setEditable(Boolean.parseBoolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		comboBox.setEnabled(!modelNode.isDisabled());

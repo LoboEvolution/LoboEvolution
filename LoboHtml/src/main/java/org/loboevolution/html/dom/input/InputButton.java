@@ -51,7 +51,7 @@ public class InputButton {
 			button.setToolTipText(modelNode.getTitle());
 		}
 		
-		button.setVisible(!modelNode.getHidden());
+		button.setVisible(!modelNode.isHidden());
 		button.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		button.setEnabled(!modelNode.isDisabled());
 		button.setText(getText(modelNode));

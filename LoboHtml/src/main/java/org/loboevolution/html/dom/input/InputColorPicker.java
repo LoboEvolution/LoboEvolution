@@ -54,7 +54,7 @@ public class InputColorPicker {
 		if (modelNode.getTitle() != null) {
 			widget.setToolTipText(modelNode.getTitle());
 		}
-		widget.setVisible(!modelNode.getHidden());
+		widget.setVisible(!modelNode.isHidden());
 		widget.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		widget.setEnabled(!modelNode.isDisabled());
 
