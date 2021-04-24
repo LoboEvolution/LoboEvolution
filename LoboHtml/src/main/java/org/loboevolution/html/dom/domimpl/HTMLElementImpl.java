@@ -978,8 +978,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/** {@inheritDoc} */
 	@Override
 	public void click() {
-		// TODO Auto-generated method stub
-		
+		HtmlController.getInstance().onMouseClick(this, null, 0, 0);
 	}
 	
 	/** {@inheritDoc} */
