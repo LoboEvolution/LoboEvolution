@@ -31,6 +31,8 @@ import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.FloatingInfo;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -45,9 +47,6 @@ import java.util.logging.Logger;
  * <p>
  * Immediately below an RBlock you will find a node of type
  * {@link org.loboevolution.html.renderer.RBlockViewport}.
- *
- *
- *
  */
 public class RBlock extends BaseElementRenderable {
 
@@ -475,6 +474,8 @@ public class RBlock extends BaseElementRenderable {
 			// Should never go back to null
 			sb = new JScrollBar(JScrollBar.HORIZONTAL);
 			sb.addAdjustmentListener(new LocalAdjustmentListener(JScrollBar.HORIZONTAL));
+			BoundedRangeModel model = sb.getModel();
+			model.addChangeListener(new BoundedChangeListener(JScrollBar.HORIZONTAL));
 			this.hScrollBar = sb;
 		}
 		return sb;
@@ -568,9 +569,10 @@ public class RBlock extends BaseElementRenderable {
 	private JScrollBar getVScrollBar() {
 		JScrollBar sb = this.vScrollBar;
 		if (sb == null) {
-			// Should never go back to null
 			sb = new JScrollBar(JScrollBar.VERTICAL);
 			sb.addAdjustmentListener(new LocalAdjustmentListener(JScrollBar.VERTICAL));
+			BoundedRangeModel model = sb.getModel();
+			model.addChangeListener(new BoundedChangeListener(JScrollBar.VERTICAL));
 			this.vScrollBar = sb;
 		}
 		return sb;
@@ -1212,6 +1214,26 @@ public class RBlock extends BaseElementRenderable {
 			this.height = height;
 			this.hasHScrollBar = hasHScrollBar;
 			this.hasVScrollBar = hasVScrollBar;
+		}
+	}
+
+	private class BoundedChangeListener implements ChangeListener {
+
+		private int orientation;
+
+		BoundedChangeListener(int orientation){
+			this.orientation = orientation;
+		}
+
+		public void stateChanged(ChangeEvent changeEvent) {
+			Object source = changeEvent.getSource();
+			if (source instanceof BoundedRangeModel) {
+				BoundedRangeModel aModel = (BoundedRangeModel) source;
+				if (!aModel.getValueIsAdjusting()) {
+					if(orientation == JScrollBar.HORIZONTAL) rendererContext.setScrollx(aModel.getValue());
+					if(orientation == JScrollBar.VERTICAL) rendererContext.setScrolly(aModel.getValue());
+				}
+			}
 		}
 	}
 

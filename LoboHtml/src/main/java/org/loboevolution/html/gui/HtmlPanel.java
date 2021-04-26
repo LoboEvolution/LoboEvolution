@@ -429,10 +429,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	/**
 	 * <p>scrollBy.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
 	 */
-	public void scrollBy(final int x, final int y) {
+	public void scrollBy(int x, int y) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			scrollByImpl(x, y);
 		} else {

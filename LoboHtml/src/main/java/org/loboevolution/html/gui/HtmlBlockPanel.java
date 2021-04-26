@@ -160,9 +160,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
-				onMousePressed(e);
-			}
+			public void mousePressed(MouseEvent e) { onMousePressed(e); }
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -170,22 +168,11 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			}
 		});
 		addMouseMotionListener(new MouseMotionListener() {
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
-			 */
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				onMouseDragged(e);
 			}
 
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
-			 */
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
 				onMouseMoved(arg0);

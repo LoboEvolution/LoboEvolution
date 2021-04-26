@@ -88,20 +88,9 @@ import org.xml.sax.InputSource;
  * <p>
  * A simple way to load a URL into the {@link org.loboevolution.html.gui.HtmlPanel} of the renderer context
  * is to invoke {@link #navigate(String)}.
- *
- *
- *
  */
 public class HtmlRendererContext {
 	private static final Logger logger = Logger.getLogger(HtmlRendererContext.class.getName());
-
-	private static java.awt.Window getWindow(Component c) {
-		Component current = c;
-		while (current != null && !(current instanceof java.awt.Window)) {
-			current = current.getParent();
-		}
-		return (java.awt.Window) current;
-	}
 
 	private UserAgentContext bcontext = null;
 
@@ -116,6 +105,10 @@ public class HtmlRendererContext {
 	private volatile String sourceCode;
 
 	private boolean test = false;
+
+	private int scrollx;
+
+	private int scrolly;
 
 	/**
 	 * Constructs a HtmlRendererContext that is a child of another
@@ -883,6 +876,23 @@ public class HtmlRendererContext {
 		this.htmlPanel.scrollBy(x, y);
 	}
 
+
+	public int getScrollx() {
+		return scrollx;
+	}
+
+	public void setScrollx(int scrollx) {
+		this.scrollx = scrollx;
+	}
+
+	public int getScrolly() {
+		return scrolly;
+	}
+
+	public void setScrolly(int scrolly) {
+		this.scrolly = scrolly;
+	}
+
 	/**
 	 * <p>setDefaultStatus.</p>
 	 *
@@ -1129,7 +1139,7 @@ public class HtmlRendererContext {
 					if (location == null) {
 						logger.warning("No Location header in redirect from " + action + ".");
 					} else {
-						java.net.URL href;
+						URL href;
 						href = Urls.createURL(action, location);
 						navigate(href, target);
 					}
@@ -1187,6 +1197,14 @@ public class HtmlRendererContext {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, message, throwable);
 		}
+	}
+
+	private static Window getWindow(Component c) {
+		Component current = c;
+		while (current != null && !(current instanceof Window)) {
+			current = current.getParent();
+		}
+		return (Window) current;
 	}
 
 	/**

@@ -21,14 +21,12 @@
 package org.loboevolution.html.node;
 
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventListener;
+import org.mozilla.javascript.Function;
 
 /**
- * Element is the most general base class from which all objects in a Document inherit. It only has methods and properties common to all kinds of elements. More specific classes inherit from Element.
- *
- *
- *
+ * Element is the most general base class from which all objects in a Document inherit.
+ * It only has methods and properties common to all kinds of elements.
+ * More specific classes inherit from Element.
  */
 public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, ParentNode {
 
@@ -171,9 +169,9 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>setScrollLeft.</p>
      *
-     * @param scrollLeft a double.
+     * @param scrollLeft a int.
      */
-    void setScrollLeft(double scrollLeft);
+    void setScrollLeft(int scrollLeft);
 
 
     /**
@@ -187,9 +185,9 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>setScrollTop.</p>
      *
-     * @param scrollTop a double.
+     * @param scrollTop a int.
      */
-    void setScrollTop(double scrollTop);
+    void setScrollTop(int scrollTop);
 
 
     /**
@@ -226,8 +224,8 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * Returns the first (starting at element) inclusive ancestor that matches selectors, and null otherwise.
      *
      * @param selector a {@link java.lang.String} object.
+     * @param <E>      a E object.
      * @return a E object.
-     * @param <E> a E object.
      */
     <E extends Element> E closest(String selector);
 
@@ -270,7 +268,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * <p>getAttributeNodeNS.</p>
      *
      * @param namespaceURI a {@link java.lang.String} object.
-     * @param localName a {@link java.lang.String} object.
+     * @param localName    a {@link java.lang.String} object.
      * @return a {@link org.loboevolution.html.node.Attr} object.
      */
     Attr getAttributeNodeNS(String namespaceURI, String localName);
@@ -295,7 +293,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * <p>getElementsByTagNameNS.</p>
      *
      * @param namespaceURI a {@link java.lang.String} object.
-     * @param localName a {@link java.lang.String} object.
+     * @param localName    a {@link java.lang.String} object.
      * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
      */
     HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName);
@@ -377,21 +375,11 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
 
     /**
      * <p>scroll.</p>
-     */
-    void scroll();
-
-    /**
-     * <p>scroll.</p>
      *
      * @param x a double.
      * @param y a double.
      */
-    void scroll(double x, double y);
-
-    /**
-     * <p>scrollBy.</p>
-     */
-    void scrollBy();
+    void scroll(int x, int y);
 
     /**
      * <p>scrollBy.</p>
@@ -399,7 +387,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * @param x a double.
      * @param y a double.
      */
-    void scrollBy(double x, double y);
+    void scrollBy(int x, int y);
 
     /**
      * <p>scrollIntoView.</p>
@@ -415,31 +403,26 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
 
     /**
      * <p>scrollTo.</p>
-     */
-    void scrollTo();
-
-    /**
-     * <p>scrollTo.</p>
      *
      * @param x a double.
      * @param y a double.
      */
-    void scrollTo(double x, double y);
+    void scrollTo(int x, int y);
 
     /**
      * Sets the value of element's first attribute whose qualified name is qualifiedName to value.
      *
      * @param qualifiedName a {@link java.lang.String} object.
-     * @param value a {@link java.lang.String} object.
+     * @param value         a {@link java.lang.String} object.
      */
     void setAttribute(String qualifiedName, String value);
 
     /**
      * Sets the value of element's attribute whose namespace is namespace and local name is localName to value.
      *
-     * @param namespace a {@link java.lang.String} object.
+     * @param namespace     a {@link java.lang.String} object.
      * @param qualifiedName a {@link java.lang.String} object.
-     * @param value a {@link java.lang.String} object.
+     * @param value         a {@link java.lang.String} object.
      */
     void setAttributeNS(String namespace, String qualifiedName, String value);
 
@@ -459,7 +442,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * @return a {@link org.loboevolution.html.node.Attr} object.
      */
     Attr setAttributeNodeNS(Attr attr);
-    
+
     /**
      * <p>setIdAttribute.</p>
      *
@@ -467,12 +450,12 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * @param isId a boolean.
      */
     void setIdAttribute(String name, boolean isId);
-    
+
     /**
      * <p>setIdAttributeNode.</p>
      *
      * @param idAttr a {@link org.loboevolution.html.node.Attr} object.
-     * @param isId a boolean.
+     * @param isId   a boolean.
      */
     void setIdAttributeNode(Attr idAttr, boolean isId);
 
@@ -489,7 +472,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * Returns true if qualifiedName is now present, and false otherwise.
      *
      * @param qualifiedName a {@link java.lang.String} object.
-     * @param force a boolean.
+     * @param force         a boolean.
      * @return a boolean.
      */
     boolean toggleAttribute(String qualifiedName, boolean force);

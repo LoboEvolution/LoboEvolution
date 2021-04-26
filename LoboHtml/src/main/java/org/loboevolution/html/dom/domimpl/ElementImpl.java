@@ -656,48 +656,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public double getScrollHeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public double getScrollLeft() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setScrollLeft(double scrollLeft) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public double getScrollTop() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setScrollTop(double scrollTop) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public double getScrollWidth() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getSlot() {
 		// TODO Auto-generated method stub
 		return null;
@@ -751,33 +709,17 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		// TODO Auto-generated method stub
 		
 	}
-
 	/** {@inheritDoc} */
 	@Override
-	public void scroll() {
-		// TODO Auto-generated method stub
-		
+	public void scroll(int x, int y) {
+		setScrollLeft(x);
+		setScrollTop(y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void scroll(double x, double y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void scrollBy() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void scrollBy(double x, double y) {
-		// TODO Auto-generated method stub
-		
+	public void scrollBy(int x, int y) {
+		scroll(x, y);
 	}
 
 	/** {@inheritDoc} */
@@ -796,16 +738,56 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void scrollTo() {
-		// TODO Auto-generated method stub
-		
+	public void scrollTo(int x, int y) {
+		scroll(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void scrollTo(double x, double y) {
+	public double getScrollHeight() {
 		// TODO Auto-generated method stub
-		
+		return 0;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public double getScrollLeft() {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		return htmlRendererContext.getScrollx();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setScrollLeft(int scrollLeft) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		htmlRendererContext.setScrollx(scrollLeft);
+
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public double getScrollTop() {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		return htmlRendererContext.getScrolly();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setScrollTop(int scrollTop) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		htmlRendererContext.setScrolly(scrollTop);
+
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public double getScrollWidth() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	/** {@inheritDoc} */
