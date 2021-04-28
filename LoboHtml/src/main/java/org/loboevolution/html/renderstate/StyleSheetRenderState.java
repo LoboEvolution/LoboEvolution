@@ -336,7 +336,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		final AbstractCSSProperties props = getCssProperties();
 		if (props != null) {
-			binfo = BorderInsets.getBorderInfo(props, this);
+			binfo = BorderInsets.getBorderInfo(props, element, this);
 		} else {
 			binfo = null;
 		}
@@ -630,7 +630,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (props == null) {
 			mi = null;
 		} else {
-			mi = MarginInsets.getMarginInsets(props, this);
+			mi = MarginInsets.getMarginInsets(props, element, this);
 		}
 		this.marginInsets = mi;
 		return mi;
@@ -768,7 +768,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (props == null) {
 			mi = null;
 		} else {
-			mi = MarginInsets.getPaddingInsets(props, this);
+			mi = MarginInsets.getPaddingInsets(props, element,this);
 			this.paddingInsets = mi;
 		}
 		return mi;

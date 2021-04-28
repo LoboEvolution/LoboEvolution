@@ -20,14 +20,13 @@
 
 package org.loboevolution.html.style;
 
+import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>MarginInsets class.</p>
- *
- *
- *
  */
 public class MarginInsets {
 	
@@ -35,40 +34,43 @@ public class MarginInsets {
 	 * <p>getMarginInsets.</p>
 	 *
 	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
-	public static HtmlInsets getMarginInsets(CSS3Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		final String topText = cssProperties.getMarginTop();
-		insets = HtmlInsets.updateTopInset(insets, topText, renderState);
-		final String leftText = cssProperties.getMarginLeft();
-		insets = HtmlInsets.updateLeftInset(insets, leftText, renderState);
-		final String bottomText = cssProperties.getMarginBottom();
-		insets = HtmlInsets.updateBottomInset(insets, bottomText, renderState);
-		final String rightText = cssProperties.getMarginRight();
-		insets = HtmlInsets.updateRightInset(insets, rightText, renderState);
-		return insets;
+	public static HtmlInsets getMarginInsets(CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
+		final AbstractCSSProperties props = element.getParentStyle();
+		if (props == null) {
+			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", renderState);
+		}
+		final String topText = isInherit(cssProperties.getMarginTop()) ? props.getMarginTop() : cssProperties.getMarginTop();
+		final String leftText = isInherit(cssProperties.getMarginLeft()) ? props.getMarginLeft() : cssProperties.getMarginLeft();
+		final String bottomText = isInherit(cssProperties.getMarginBottom()) ? props.getMarginBottom() : cssProperties.getMarginBottom();
+		final String rightText = isInherit(cssProperties.getMarginRight()) ? props.getMarginRight() : cssProperties.getMarginRight();
+		return HtmlInsets.getInsets(topText, leftText, bottomText, rightText, renderState);
 	}
 
 	/**
 	 * <p>getPaddingInsets.</p>
 	 *
 	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
-	public static HtmlInsets getPaddingInsets(CSS3Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		final String topText = cssProperties.getPaddingTop();
-		insets = HtmlInsets.updateTopInset(insets, topText, renderState);
-		final String leftText = cssProperties.getPaddingLeft();
-		insets = HtmlInsets.updateLeftInset(insets, leftText, renderState);
-		final String bottomText = cssProperties.getPaddingBottom();
-		insets = HtmlInsets.updateBottomInset(insets, bottomText, renderState);
-		final String rightText = cssProperties.getPaddingRight();
-		insets = HtmlInsets.updateRightInset(insets, rightText, renderState);
-		return insets;
+	public static HtmlInsets getPaddingInsets(CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
+		final AbstractCSSProperties props = element.getParentStyle();
+		if (props == null) {
+			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", renderState);
+		}
+		final String topText = isInherit(cssProperties.getPaddingTop()) ? props.getPaddingTop() : cssProperties.getPaddingTop();
+		final String leftText = isInherit(cssProperties.getPaddingLeft()) ? props.getPaddingLeft() : cssProperties.getPaddingLeft();
+		final String bottomText = isInherit(cssProperties.getPaddingBottom()) ? props.getPaddingBottom() : cssProperties.getPaddingBottom();
+		final String rightText = isInherit(cssProperties.getPaddingRight()) ? props.getPaddingRight() : cssProperties.getPaddingRight();
+		return HtmlInsets.getInsets(topText, leftText, bottomText, rightText, renderState);
 	}
 
+	private static boolean isInherit(String value){
+		return CSSValues.INHERIT.equals(CSSValues.get(value));
+	}
 }

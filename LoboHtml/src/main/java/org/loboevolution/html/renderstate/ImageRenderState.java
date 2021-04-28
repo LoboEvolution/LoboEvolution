@@ -121,7 +121,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 		if (props == null) {
 			mi = null;
 		} else {
-			mi = MarginInsets.getMarginInsets(props, this);
+			mi = MarginInsets.getMarginInsets(props, element,this);
 		}
 		if (mi == null) {
 			int hspace = 0;

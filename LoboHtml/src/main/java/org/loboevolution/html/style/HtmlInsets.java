@@ -19,15 +19,13 @@
  */
 package org.loboevolution.html.style;
 
-import java.awt.Insets;
-
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.renderstate.RenderState;
+
+import java.awt.*;
 
 /**
  * <p>HtmlInsets class.</p>
- *
- *
- *
  */
 public class HtmlInsets {
 	
@@ -39,7 +37,7 @@ public class HtmlInsets {
 	
 	/** Constant TYPE_AUTO=2 */
 	public static final int TYPE_AUTO = 2;
-	
+
 	/** Constant TYPE_PERCENT=3 */
 	public static final int TYPE_PERCENT = 3;
 	
@@ -71,144 +69,48 @@ public class HtmlInsets {
 		return new Insets(top, left, bottom, right);
 	}
 
-	/**
-	 * <p>updateBottomInset.</p>
-	 *
-	 * @param insets a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 * @param sizeText a {@link java.lang.String} object.
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 */
-	protected static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			return insets;
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
-			insets.bottomType = HtmlInsets.TYPE_AUTO;
-		} else if (sizeText.endsWith("%")) {
-			insets.bottomType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.bottom = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (final Exception nfe) {
-				insets.bottom = 0;
-			}
-		} else {
-			insets.bottomType = HtmlInsets.TYPE_PIXELS;
-			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
+	protected static HtmlInsets getInsets(String topText, String leftText, String bottomText, String rightText, RenderState renderState) {
+		BasicInset basicInset;
+		HtmlInsets insets = new HtmlInsets();
+
+		basicInset = updateInset(topText, renderState);
+		insets.top = basicInset.getValue();
+		insets.topType = basicInset.getType();
+
+		basicInset = updateInset(leftText, renderState);
+		insets.left = basicInset.getValue();
+		insets.leftType = basicInset.getType();
+
+		basicInset = updateInset(bottomText, renderState);
+		insets.bottom = basicInset.getValue();
+		insets.bottomType = basicInset.getType();
+
+		basicInset = updateInset(rightText, renderState);
+		insets.right = basicInset.getValue();
+		insets.rightType = basicInset.getType();
+
 		return insets;
 	}
 
-	/**
-	 * <p>updateLeftInset.</p>
-	 *
-	 * @param insets a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 * @param sizeText a {@link java.lang.String} object.
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 */
-	protected static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			return insets;
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
-			insets.leftType = HtmlInsets.TYPE_AUTO;
-		} else if (sizeText.endsWith("%")) {
-			insets.leftType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.left = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (final Exception nfe) {
-				insets.left = 0;
+	private static BasicInset updateInset(String sizeText, RenderState renderState) {
+		int type = 0;
+		int value = 0;
+		if (Strings.isNotBlank(sizeText)) {
+			if ("auto".equalsIgnoreCase(sizeText)) {
+				type = HtmlInsets.TYPE_AUTO;
+			} else if (sizeText.endsWith("%")) {
+				type = HtmlInsets.TYPE_PERCENT;
+				try {
+					value = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+				} catch (final Exception nfe) {
+					value = 0;
+				}
+			} else {
+				type = HtmlInsets.TYPE_PIXELS;
+				value = HtmlValues.getPixelSize(sizeText, renderState, 0);
 			}
-		} else {
-			insets.leftType = HtmlInsets.TYPE_PIXELS;
-			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
 		}
-		return insets;
-	}
-
-	/**
-	 * <p>updateRightInset.</p>
-	 *
-	 * @param insets a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 * @param sizeText a {@link java.lang.String} object.
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 */
-	protected static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			return insets;
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
-			insets.rightType = HtmlInsets.TYPE_AUTO;
-		} else if (sizeText.endsWith("%")) {
-			insets.rightType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.right = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (final Exception nfe) {
-				insets.right = 0;
-			}
-		} else {
-			insets.rightType = HtmlInsets.TYPE_PIXELS;
-			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
-	}
-
-	/**
-	 * <p>updateTopInset.</p>
-	 *
-	 * @param insets a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 * @param sizeText a {@link java.lang.String} object.
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 */
-	protected static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			return insets;
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
-			insets.topType = HtmlInsets.TYPE_AUTO;
-		} else if (sizeText.endsWith("%")) {
-			insets.topType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.top = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (final Exception nfe) {
-				insets.top = 0;
-			}
-		} else {
-			insets.topType = HtmlInsets.TYPE_PIXELS;
-			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
+		return new BasicInset(type, value);
 	}
 
 	private int getInsetPixels(int value, int type, int availSize, int autoValue) {

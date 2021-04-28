@@ -20,20 +20,18 @@
 
 package org.loboevolution.html.style;
 
-import java.awt.Color;
-import java.awt.Insets;
-
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
 
+import java.awt.*;
+
 /**
  * <p>BorderInsets class.</p>
- *
- *
- *
  */
 public class BorderInsets {
 	
@@ -74,21 +72,22 @@ public class BorderInsets {
 	 * <p>getBorderInfo.</p>
 	 *
 	 * @param properties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.info.BorderInfo} object.
 	 */
-	public static BorderInfo getBorderInfo(CSS3Properties properties, RenderState renderState) {
+	public static BorderInfo getBorderInfo(CSS3Properties properties, HTMLElementImpl element, RenderState renderState) {
 		final BorderInfo binfo = new BorderInfo();
 		
-		final int topStyle = getBorderStyle(properties.getBorderTopStyle());
-		final int rightStyle = getBorderStyle(properties.getBorderRightStyle());
-		final int bottomStyle = getBorderStyle(properties.getBorderBottomStyle());
-		final int leftStyle = getBorderStyle(properties.getBorderLeftStyle());
+		final int topStyle = getBorderStyle(element, properties.getBorderTopStyle());
+		final int rightStyle = getBorderStyle(element, properties.getBorderRightStyle());
+		final int bottomStyle = getBorderStyle(element, properties.getBorderBottomStyle());
+		final int leftStyle = getBorderStyle(element, properties.getBorderLeftStyle());
 		
-		final Color topColor = getBorderColor(properties.getBorderTopColor(), renderState);
-		final Color rightColor = getBorderColor(properties.getBorderRightColor(), renderState);
-		final Color bottomColor = getBorderColor(properties.getBorderBottomColor(), renderState);
-		final Color leftColor = getBorderColor(properties.getBorderLeftColor(), renderState);
+		final Color topColor = getBorderColor(element, properties.getBorderTopColor(), renderState);
+		final Color rightColor = getBorderColor(element, properties.getBorderRightColor(), renderState);
+		final Color bottomColor = getBorderColor(element, properties.getBorderBottomColor(), renderState);
+		final Color leftColor = getBorderColor(element, properties.getBorderLeftColor(), renderState);
 
 		binfo.setTopStyle(topStyle);
 		binfo.setRightStyle(rightStyle);
@@ -100,74 +99,56 @@ public class BorderInsets {
 	    binfo.setBottomColor(bottomColor);
 	    binfo.setLeftColor(leftColor);
 
-		populateBorderInsets(binfo, properties, renderState);
+		populateBorderInsets(binfo, properties, element ,renderState);
 
 		return binfo;
 	}
 
 	/**
-	 * <p>getBorderInsets.</p>
-	 *
-	 * @param borderStyles a {@link java.awt.Insets} object.
-	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
-	 */
-	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS3Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		if (borderStyles.top != BORDER_STYLE_NONE) {
-			final String topText = cssProperties.getBorderTopWidth();
-			insets = HtmlInsets.updateTopInset(insets, topText, renderState);
-		}
-		if (borderStyles.left != BORDER_STYLE_NONE) {
-			final String leftText = cssProperties.getBorderLeftWidth();
-			insets = HtmlInsets.updateLeftInset(insets, leftText, renderState);
-		}
-		if (borderStyles.bottom != BORDER_STYLE_NONE) {
-			final String bottomText = cssProperties.getBorderBottomWidth();
-			insets = HtmlInsets.updateBottomInset(insets, bottomText, renderState);
-		}
-		if (borderStyles.right != BORDER_STYLE_NONE) {
-			final String rightText = cssProperties.getBorderRightWidth();
-			insets = HtmlInsets.updateRightInset(insets, rightText, renderState);
-		}
-		return insets;
-	}
-	
-	/**
 	 * <p>populateBorderInsets.</p>
 	 *
 	 * @param binfo a {@link org.loboevolution.info.BorderInfo} object.
 	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */
-	public static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		if (binfo.getTopStyle() != BORDER_STYLE_NONE) {
-			final String topText = cssProperties.getBorderTopWidth();
-			insets = HtmlInsets.updateTopInset(insets, topText, renderState);
+	private static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
+		final AbstractCSSProperties props = element.getParentStyle();
+		if (props == null) {
+			final HtmlInsets insets = HtmlInsets.getInsets("0px", "0px", "0px", "0px", renderState);
+			binfo.setInsets(insets);
+		} else {
+			final String topText = borderInsets(props.getBorderTopWidth(), binfo.getTopStyle(), cssProperties.getBorderTopWidth());
+			final String leftText =  borderInsets(props.getBorderLeftWidth(), binfo.getLeftStyle(), cssProperties.getBorderLeftWidth());
+			final String bottomText = borderInsets(props.getBorderBottomWidth(), binfo.getBottomStyle(), cssProperties.getBorderBottomWidth());
+			final String rightText = borderInsets(props.getBorderRightWidth(), binfo.getRightStyle(), cssProperties.getBorderRightWidth());
+			final HtmlInsets insets = HtmlInsets.getInsets(topText, leftText, bottomText, rightText, renderState);
+			binfo.setInsets(insets);
 		}
-		if (binfo.getLeftStyle() != BORDER_STYLE_NONE) {
-			final String leftText = cssProperties.getBorderLeftWidth();
-			insets = HtmlInsets.updateLeftInset(insets, leftText, renderState);
-		}
-		if (binfo.getBottomStyle() != BORDER_STYLE_NONE) {
-			final String bottomText = cssProperties.getBorderBottomWidth();
-			insets = HtmlInsets.updateBottomInset(insets, bottomText, renderState);
-		}
-		if (binfo.getRightStyle() != BORDER_STYLE_NONE) {
-			final String rightText = cssProperties.getBorderRightWidth();
-			insets = HtmlInsets.updateRightInset(insets, rightText, renderState);
-		}
-		binfo.setInsets(insets);
 	}
-	
-	private static Color getBorderColor(final String colorSpec, final RenderState renderState) {
+
+	private static String borderInsets(String parentStyle, int style, String value){
+		if(isNone(style)) return "0px";
+		if(isInherit(value)) return parentStyle;
+		return value;
+	}
+
+	private static boolean isNone(int value){
+		return BORDER_STYLE_NONE == value;
+	}
+
+	private static boolean isInherit(String value){
+		return CSSValues.INHERIT.equals(CSSValues.get(value));
+	}
+
+	private static Color getBorderColor(HTMLElementImpl element, final String colorSpec, final RenderState renderState) {
 		final ColorFactory cf = ColorFactory.getInstance();
 		if (Strings.isNotBlank(colorSpec)) {
 	      if ("currentColor".equalsIgnoreCase(colorSpec)) {
 	        return renderState.getColor();
-	      } else {
+	      } else  if ("inherit".equalsIgnoreCase(colorSpec)) {
+			  return cf.getColor(element.getParentStyle().getBorderColor());
+		  } else {
 	        return cf.getColor(colorSpec);
 	      }
 	    } else {
@@ -175,31 +156,33 @@ public class BorderInsets {
 	    }
 	  }
 	
-	private static int getBorderStyle(String styleText) {
-		if (styleText == null || styleText.length() == 0) {
+	private static int getBorderStyle(HTMLElementImpl element, String styleText) {
+		if (Strings.isBlank(styleText)) {
 			return BorderInsets.BORDER_STYLE_NONE;
 		}
 		final String stl = styleText.toLowerCase();
-		switch (stl) {
-		case "solid":
+		switch (CSSValues.get(stl)) {
+		case SOLID:
 			return BORDER_STYLE_SOLID;
-		case "dashed":
+		case DASHED:
 			return BORDER_STYLE_DASHED;
-		case "dotted":
+		case DOTTED:
 			return BORDER_STYLE_DOTTED;
-		case "hidden":
+		case HIDDEN:
 			return BORDER_STYLE_HIDDEN;
-		case "double":
+		case DOUBLE:
 			return BORDER_STYLE_DOUBLE;
-		case "groove":
+		case GROOVE:
 			return BORDER_STYLE_GROOVE;
-		case "ridge":
+		case RIDGE:
 			return BORDER_STYLE_RIDGE;
-		case "inset":
+		case INSET:
 			return BORDER_STYLE_INSET;
-		case "outset":
+		case OUTSET:
 			return BORDER_STYLE_OUTSET;
-		case "none":
+		case INHERIT:
+			return getBorderStyle(element, element.getParentStyle().getBorderStyle());
+		case NONE:
 			default:
 			return BORDER_STYLE_NONE;
 		}
