@@ -49,14 +49,9 @@ import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.Text;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventListener;
 
 /**
  * <p>ElementImpl class.</p>
- *
- *
- *
  */
 public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
@@ -605,14 +600,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return HtmlValues.getPixelSize(width, null, -1, preferredSize.width);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public EventListener<Event> getOnfullscreenchange() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 	/**
 	 * {@inheritDoc}
 	 *
@@ -780,7 +767,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		htmlRendererContext.setScrolly(scrollTop);
-
 	}
 
 	/** {@inheritDoc} */

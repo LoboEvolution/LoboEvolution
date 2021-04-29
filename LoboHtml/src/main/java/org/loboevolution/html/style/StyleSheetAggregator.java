@@ -146,7 +146,7 @@ public class StyleSheetAggregator {
 	 * <p>selects.</p>
 	 *
 	 * @param selector a {@link com.gargoylesoftware.css.parser.selector.Selector} object.
-	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @param node a {@link org.loboevolution.html.node.Node} object.
 	 * @param pseudoElement a {@link java.lang.String} object.
 	 * @param fromQuerySelectorAll a boolean.
 	 * @return a boolean.

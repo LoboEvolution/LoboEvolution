@@ -22,15 +22,10 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
@@ -39,7 +34,7 @@ import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -47,10 +42,8 @@ import org.loboevolution.html.style.CSSPropertiesContext;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import java.util.*;
+import java.util.logging.Level;
 
 /**
  * <p>HTMLElementImpl class.</p>
@@ -77,16 +70,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public HTMLElementImpl(String name) {
-		super(name);
-	}
-
-	/**
-	 * <p>Constructor for HTMLElementImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @param noStyleSheet a boolean.
-	 */
-	public HTMLElementImpl(String name, boolean noStyleSheet) {
 		super(name);
 	}
 
@@ -128,25 +111,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 		super.assignAttributeField(normalName, value);
 	}
-
-	private boolean classMatch(String classTL) {
-		final String classNames = getClassName();
-		if (classNames == null || classNames.length() == 0) {
-			return classTL == null;
-		}
-		final StringTokenizer tok = new StringTokenizer(classNames, " \t\r\n");
-		while (tok.hasMoreTokens()) {
-			final String token = tok.nextToken();
-			if (token.toLowerCase().equals(classTL)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	/**
 	 * <p>createDefaultStyleSheet.</p>
-	 *
 	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
 	 */
 	protected AbstractCSSProperties createDefaultStyleSheet() {
@@ -251,51 +217,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	}
 
 	/**
-	 * Get an ancestor that matches the element tag name given and the style class
-	 * given.
-	 *
-	 * @param elementTL An tag name in lowercase or an asterisk (*).
-	 * @param classTL   A class name in lowercase.
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getAncestorWithClass(String elementTL, String classTL) {
-		final Object nodeObj = getParentNode();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final HTMLElementImpl parentElement = (HTMLElementImpl) nodeObj;
-			final String pelementTL = parentElement.getTagName().toLowerCase();
-			if (("*".equals(elementTL) || elementTL.equals(pelementTL)) && parentElement.classMatch(classTL)) {
-				return parentElement;
-			}
-			return parentElement.getAncestorWithClass(elementTL, classTL);
-		} else {
-			return null;
-		}
-	}
-
-	/**
-	 * <p>getAncestorWithId.</p>
-	 *
-	 * @param elementTL a {@link java.lang.String} object.
-	 * @param idTL a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getAncestorWithId(String elementTL, String idTL) {
-		final Object nodeObj = getParentNode();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final HTMLElementImpl parentElement = (HTMLElementImpl) nodeObj;
-			final String pelementTL = parentElement.getTagName().toLowerCase();
-			final String pid = parentElement.getId();
-			final String pidTL = pid == null ? null : pid.toLowerCase();
-			if (("*".equals(elementTL) || elementTL.equals(pelementTL)) && idTL.equals(pidTL)) {
-				return parentElement;
-			}
-			return parentElement.getAncestorWithId(elementTL, idTL);
-		} else {
-			return null;
-		}
-	}
-
-	/**
 	 * <p>getAttributeAsBoolean.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
@@ -352,10 +273,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
 			sds = new AbstractCSSProperties(this);
-			sds.setLocalStyleProperties(localStyle);
-		} else {
-			sds.setLocalStyleProperties(localStyle);
 		}
+		sds.setLocalStyleProperties(localStyle);
 		synchronized (this) {
 			// Check if style properties were set while outside
 			// the synchronized block (can happen). We need to
@@ -389,22 +308,14 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 				return sds;
 			}
 		}
-		// Can't do the following in synchronized block (reverse locking order with
-		// document).
-		// First, add declarations from stylesheet
 		sds = createDefaultStyleSheet();
 		sds = addStyleSheetDeclarations(sds);
-		// Now add local style if any.
 		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
 			sds = new AbstractCSSProperties(this);
-			sds.setLocalStyleProperties(localStyle);
-		} else {
-			sds.setLocalStyleProperties(localStyle);
 		}
+		sds.setLocalStyleProperties(localStyle);
 		synchronized (this) {
-			// Check if style properties were set while outside
-			// the synchronized block (can happen).
 			final AbstractCSSProperties setProps = this.currentStyleDeclarationState;
 			if (setProps != null) {
 				return setProps;
@@ -509,149 +420,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			return ((HTMLElementImpl) parent).getCurrentStyle();
 		}
 		return null;
-	}
-
-	/**
-	 * <p>getParentWithClass.</p>
-	 *
-	 * @param elementTL a {@link java.lang.String} object.
-	 * @param classTL a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getParentWithClass(String elementTL, String classTL) {
-		final Object nodeObj = getParentNode();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final HTMLElementImpl parentElement = (HTMLElementImpl) nodeObj;
-			final String pelementTL = parentElement.getTagName().toLowerCase();
-			if (("*".equals(elementTL) || elementTL.equals(pelementTL)) && parentElement.classMatch(classTL)) {
-				return parentElement;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <p>getParentWithId.</p>
-	 *
-	 * @param elementTL a {@link java.lang.String} object.
-	 * @param idTL a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getParentWithId(String elementTL, String idTL) {
-		final Object nodeObj = getParentNode();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final HTMLElementImpl parentElement = (HTMLElementImpl) nodeObj;
-			final String pelementTL = parentElement.getTagName().toLowerCase();
-			final String pid = parentElement.getId();
-			final String pidTL = pid == null ? null : pid.toLowerCase();
-			if (("*".equals(elementTL) || elementTL.equals(pelementTL)) && idTL.equals(pidTL)) {
-				return parentElement;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <p>getPreceedingSibling.</p>
-	 *
-	 * @param elementTL a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getPreceedingSibling(String elementTL) {
-		final HTMLElementImpl psibling = getPreceedingSiblingElement();
-		if (psibling != null) {
-			if ("*".equals(elementTL)) {
-				return psibling;
-			}
-			final String pelementTL = psibling.getTagName().toLowerCase();
-			if (elementTL.equals(pelementTL)) {
-				return psibling;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <p>getPreceedingSiblingElement.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getPreceedingSiblingElement() {
-		final Node parentNode = getParentNode();
-		if (parentNode == null) {
-			return null;
-		}
-		final NodeList childNodes = parentNode.getChildNodes();
-		if (childNodes == null) {
-			return null;
-		}
-		final int length = childNodes.getLength();
-		HTMLElementImpl priorElement = null;
-		for (int i = 0; i < length; i++) {
-			final Node child = childNodes.item(i);
-			if (child == this) {
-				return priorElement;
-			}
-			if (child instanceof HTMLElementImpl) {
-				priorElement = (HTMLElementImpl) child;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <p>getPreceedingSiblingWithClass.</p>
-	 *
-	 * @param elementTL a {@link java.lang.String} object.
-	 * @param classTL a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getPreceedingSiblingWithClass(String elementTL, String classTL) {
-		final HTMLElementImpl psibling = getPreceedingSiblingElement();
-		if (psibling != null) {
-			final String pelementTL = psibling.getTagName().toLowerCase();
-			if (("*".equals(elementTL) || elementTL.equals(pelementTL)) && psibling.classMatch(classTL)) {
-				return psibling;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <p>getPreceedingSiblingWithId.</p>
-	 *
-	 * @param elementTL a {@link java.lang.String} object.
-	 * @param idTL a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getPreceedingSiblingWithId(String elementTL, String idTL) {
-		final HTMLElementImpl psibling = getPreceedingSiblingElement();
-		if (psibling != null) {
-			final String pelementTL = psibling.getTagName().toLowerCase();
-			final String pid = psibling.getId();
-			final String pidTL = pid == null ? null : pid.toLowerCase();
-			if (("*".equals(elementTL) || elementTL.equals(pelementTL)) && idTL.equals(pidTL)) {
-				return psibling;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the pseudo-element lowercase names currently applicable to this element.
-	 * Method must return null if there are no such pseudo-elements.
-	 *
-	 * @return a {@link java.util.Set} object.
-	 */
-	public Set<String> getPseudoNames() {
-		Set<String> pnset = null;
-		if (this.isMouseOver) {
-			if (pnset == null) {
-				pnset = new HashSet<>(1);
-			}
-			pnset.add("hover");
-		}
-		return pnset;
 	}
 
 	/**

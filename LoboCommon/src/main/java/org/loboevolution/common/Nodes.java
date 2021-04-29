@@ -37,9 +37,9 @@ public class Nodes {
 	/**
 	 * <p>getCommonAncestor.</p>
 	 *
-	 * @param node1 a {@link org.w3c.dom.Node} object.
-	 * @param node2 a {@link org.w3c.dom.Node} object.
-	 * @return a {@link org.w3c.dom.Node} object.
+	 * @param node1 a {@link org.loboevolution.html.node.Node} object.
+	 * @param node2 a {@link org.loboevolution.html.node.Node} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
 	public static Node getCommonAncestor(Node node1, Node node2) {
 		if (node1 == null || node2 == null) {
@@ -58,8 +58,8 @@ public class Nodes {
 	/**
 	 * <p>isSameOrAncestorOf.</p>
 	 *
-	 * @param node a {@link org.w3c.dom.Node} object.
-	 * @param child a {@link org.w3c.dom.Node} object.
+	 * @param node a {@link org.loboevolution.html.node.Node} object.
+	 * @param child a {@link org.loboevolution.html.node.Node} object.
 	 * @return a boolean.
 	 */
 	public static boolean isSameOrAncestorOf(Node node, Node child) {

@@ -35,7 +35,7 @@ public interface NodeVisitor {
 	 * Visits a node. The call should be expected to occur in a synchronized block.
 	 * The lock will be node-dependent.
 	 *
-	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @param node a {@link org.loboevolution.html.node.Node} object.
 	 */
 	void visit(Node node);
 }

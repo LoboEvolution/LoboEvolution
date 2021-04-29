@@ -82,12 +82,6 @@ public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLText
 
 	/** {@inheritDoc} */
 	@Override
-	public String getAccessKey() {
-		return getAttribute("accessKey");
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public int getCols() {	
 		String cols = this.getAttribute("cols");
 		if(Strings.isNotBlank(cols)  && Strings.isNumeric(cols)) {

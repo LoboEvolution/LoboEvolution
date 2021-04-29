@@ -435,7 +435,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * <p>getSelectionNode.</p>
 	 *
-	 * @return a {@link org.w3c.dom.Node} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
 	public Node getSelectionNode() {
 		final RenderableSpot start = this.startSelection;

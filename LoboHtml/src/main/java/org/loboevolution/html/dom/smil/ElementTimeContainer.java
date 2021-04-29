@@ -35,7 +35,7 @@ public interface ElementTimeContainer extends ElementTime {
      * more appropriate here than a node list but it requires Traversal module
      * support.
      *
-     * @return a {@link org.w3c.dom.NodeList} object.
+     * @return a {@link org.loboevolution.html.node.NodeList} object.
      */
     NodeList getTimeChildren();
 

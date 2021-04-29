@@ -92,12 +92,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
 	/** {@inheritDoc} */
 	@Override
-	public String getAccessKey() {
-		return getAttribute("accessKey");
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getAlt() {
 		return getAttribute("alit");
 	}

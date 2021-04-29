@@ -47,9 +47,6 @@ import org.loboevolution.html.node.Element;
 
 /**
  * <p>HTMLScriptElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScriptElement {
 	private static final Logger logger = Logger.getLogger(HTMLScriptElementImpl.class.getName());
@@ -62,7 +59,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 * <p>Constructor for HTMLScriptElementImpl.</p>
 	 */
 	public HTMLScriptElementImpl() {
-		super("SCRIPT", true);
+		super("SCRIPT");
 	}
 
 	/**
@@ -71,13 +68,35 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public HTMLScriptElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	protected void appendInnerTextImpl(StringBuilder buffer) {
 		// nop
+	}
+
+	@Override
+	public boolean isAsync() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAsync(boolean async) {
+// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String getCrossOrigin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCrossOrigin(String crossOrigin) {
+		// TODO Auto-generated method stub
 	}
 
 	/** {@inheritDoc} */
@@ -222,182 +241,39 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		}
 		return super.setUserData(key, data, handler);
 	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKeyLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAutocapitalize() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element getOffsetParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isSpellcheck() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isDraggable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isHidden() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isTranslate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutocapitalize(String autocapitalize) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setDraggable(boolean draggable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSpellcheck(boolean spellcheck) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setTranslate(boolean translate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isAsync() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAsync(boolean async) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getCrossOrigin() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setCrossOrigin(String crossOrigin) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
 	@Override
 	public String getIntegrity() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public void setIntegrity(String integrity) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public boolean isNoModule() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public void setNoModule(boolean noModule) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public String getReferrerPolicy() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public void setReferrerPolicy(String referrerPolicy) {
 		// TODO Auto-generated method stub
-		
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

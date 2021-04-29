@@ -44,7 +44,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public HTMLOptionElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 	
 	/** {@inheritDoc} */
@@ -151,110 +151,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 		setAttribute("value", value);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKeyLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAutocapitalize() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element getOffsetParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isSpellcheck() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isDraggable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isHidden() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isTranslate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutocapitalize(String autocapitalize) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setDraggable(boolean draggable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSpellcheck(boolean spellcheck) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setTranslate(boolean translate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	/** {@inheritDoc} */
 	@Override

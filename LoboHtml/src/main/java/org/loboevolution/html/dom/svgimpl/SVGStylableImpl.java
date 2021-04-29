@@ -398,7 +398,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * <p>child.</p>
 	 *
 	 * @param elementId a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Node} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
 	protected Node child(String elementId) {
 		SVGSVGElement ownerSVGElement = getOwnerSVGElement();
@@ -436,7 +436,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>drawStyle.</p>
 	 *
-	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @param node a {@link org.loboevolution.html.node.Node} object.
 	 */
 	protected void drawStyle(Node node) {
 		AbstractCSSProperties style = getStyle();

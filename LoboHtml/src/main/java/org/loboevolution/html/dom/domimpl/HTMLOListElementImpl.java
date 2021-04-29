@@ -30,9 +30,6 @@ import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>HTMLOListElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLOListElementImpl extends HTMLElementImpl implements HTMLOListElement {
 	/**
@@ -70,10 +67,27 @@ public class HTMLOListElementImpl extends HTMLElementImpl implements HTMLOListEl
 		return getAttribute("type");
 	}
 
+	@Override
+	public boolean isCompact() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void setCompact(boolean compact) {
 		setAttribute("compact", compact ? "compact" : null);
+	}
+
+	@Override
+	public boolean isReversed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setReversed(boolean reversed) {
+	// TODO Auto-generated method stub
 	}
 
 	/** {@inheritDoc} */
@@ -88,132 +102,7 @@ public class HTMLOListElementImpl extends HTMLElementImpl implements HTMLOListEl
 		setAttribute("type", type);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKeyLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAutocapitalize() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element getOffsetParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isSpellcheck() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isDraggable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isHidden() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isTranslate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutocapitalize(String autocapitalize) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setDraggable(boolean draggable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSpellcheck(boolean spellcheck) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setTranslate(boolean translate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isCompact() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isReversed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setReversed(boolean reversed) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

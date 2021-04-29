@@ -29,9 +29,6 @@ import org.loboevolution.html.node.ValidityState;
 
 /**
  * <p>HTMLObjectElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObjectElement {
 	/**
@@ -122,6 +119,11 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	@Override
 	public double getHspace() {
 		return HtmlValues.getPixelSize(getAttribute("hspace"), null, 0);
+	}
+
+	@Override
+	public void setHspace(double hspace) {
+
 	}
 
 	/** {@inheritDoc} */
@@ -268,6 +270,16 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 		setAttribute("usemap", useMap);
 	}
 
+	@Override
+	public String getValidationMessage() {
+		return null;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		return null;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void setVspace(double vspace) {
@@ -280,168 +292,32 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 		setAttribute("width", width);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKeyLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAutocapitalize() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element getOffsetParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isSpellcheck() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isDraggable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isHidden() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isTranslate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutocapitalize(String autocapitalize) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setDraggable(boolean draggable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSpellcheck(boolean spellcheck) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setTranslate(boolean translate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHspace(double hspace) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getValidationMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public ValidityState getValidity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	/** {@inheritDoc} */
 	@Override
 	public boolean isWillValidate() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public boolean checkValidity() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public Document getSVGDocument() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public boolean reportValidity() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public void setCustomValidity(String error) {
-		// TODO Auto-generated method stub
-		
+
 	}
-	
+
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

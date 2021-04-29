@@ -238,7 +238,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>equalAttributes.</p>
 	 *
-	 * @param arg a {@link org.w3c.dom.Node} object.
+	 * @param arg a {@link org.loboevolution.html.node.Node} object.
 	 * @return a boolean.
 	 */
 	public boolean equalAttributes(Node arg) {
@@ -249,8 +249,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * Extracts all descendents that match the filter, except those descendents of
 	 * nodes that match the filter.
 	 * 
-	 * @param filter
-	 * @param al
+	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param al a {@link java.util.ArrayList} object.
 	 */
 	private void extractDescendentsArrayImpl(NodeFilter filter, ArrayList<Node> al, boolean nestIntoMatchingNodes) {
 		nodeList.forEach(child -> {
@@ -398,7 +398,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 *
 	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
 	 * @param nestIntoMatchingNodes a boolean.
-	 * @return a {@link org.w3c.dom.NodeList} object.
+	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
 	public NodeList getDescendents(NodeFilter filter, boolean nestIntoMatchingNodes) {
 		final ArrayList<Node> al = new ArrayList<>();
@@ -573,10 +573,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 					return (Element) next;
 				}
 			} while (next != null);
-			return null;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	private Node getNextTo(Node node) {
@@ -603,7 +601,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * <p>Getter for the field nodeList.</p>
 	 *
 	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
-	 * @return a {@link org.w3c.dom.NodeList} object.
+	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
 	public NodeList getNodeList(NodeFilter filter) {
 		final List<Node> collection = new ArrayList<>();
@@ -695,10 +693,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 					return (Element) previous;
 				}
 			} while (previous != null);
-			return null;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	private Node getPreviousTo(Node node) {
@@ -930,9 +926,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>insertAfter.</p>
 	 *
-	 * @param newChild a {@link org.w3c.dom.Node} object.
-	 * @param refChild a {@link org.w3c.dom.Node} object.
-	 * @return a {@link org.w3c.dom.Node} object.
+	 * @param newChild a {@link org.loboevolution.html.node.Node} object.
+	 * @param refChild a {@link org.loboevolution.html.node.Node} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
 	public Node insertAfter(Node newChild, Node refChild) {
 		final int idx = this.nodeList.indexOf(refChild);
@@ -953,9 +949,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>insertAt.</p>
 	 *
-	 * @param newChild a {@link org.w3c.dom.Node} object.
+	 * @param newChild a {@link org.loboevolution.html.node.Node} object.
 	 * @param idx a int.
-	 * @return a {@link org.w3c.dom.Node} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	protected Node insertAt(Node newChild, int idx) {
@@ -1117,7 +1113,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * <p>removeChildAt.</p>
 	 *
 	 * @param index a int.
-	 * @return a {@link org.w3c.dom.Node} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	public Node removeChildAt(int index) {

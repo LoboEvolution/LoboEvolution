@@ -36,7 +36,7 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public HTMLTitleElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/** {@inheritDoc} */

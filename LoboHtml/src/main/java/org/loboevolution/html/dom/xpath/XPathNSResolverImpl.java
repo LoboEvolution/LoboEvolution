@@ -57,7 +57,7 @@ public class XPathNSResolverImpl extends PrefixResolverDefault implements XPathN
 	/**
 	 * <p>Constructor for XPathNSResolverImpl.</p>
 	 *
-	 * @param xpathExpressionContext a {@link org.w3c.dom.Node} object.
+	 * @param xpathExpressionContext a {@link org.loboevolution.html.node.Node} object.
 	 */
 	public XPathNSResolverImpl(org.w3c.dom.Node xpathExpressionContext) {
 		super(xpathExpressionContext);

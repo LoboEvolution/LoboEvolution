@@ -718,7 +718,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	 * <p>namedItem.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Node} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
 	public Node namedItem(String name) {
 		final HTMLDocumentImpl doc = this.document;

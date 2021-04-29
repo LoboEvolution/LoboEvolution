@@ -35,7 +35,7 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 	 * <p>Constructor for HTMLHtmlElementImpl.</p>
 	 */
 	public HTMLHtmlElementImpl() {
-		super("HTML", true);
+		super("HTML");
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public HTMLHtmlElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/** {@inheritDoc} */

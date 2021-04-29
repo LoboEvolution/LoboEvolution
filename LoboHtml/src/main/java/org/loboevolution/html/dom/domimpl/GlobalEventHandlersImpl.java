@@ -120,6 +120,19 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 	 * {@inheritDoc}
 	 *
 	 * <p>
+	 * Getter for the field onfocus.
+	 * </p>
+	 */
+	public Function getOnfullscreenchange() {
+		return getEventFunction(this.onfocus, "onfullscreenchange");
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>
 	 * Getter for the field onkeydown.
 	 * </p>
 	 */

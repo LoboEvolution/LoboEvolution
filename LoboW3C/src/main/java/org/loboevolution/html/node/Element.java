@@ -124,9 +124,9 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>getOnfullscreenchange.</p>
      *
-     * @return a {@link org.loboevolution.html.node.events.EventListener} object.
+     * @return a {@link org.mozilla.javascript.Function} object.
      */
-    EventListener<Event> getOnfullscreenchange();
+    Function getOnfullscreenchange();
 
     /**
      * <p>getOuterHTML.</p>

@@ -181,7 +181,7 @@ public interface XPathResult {
      *   TYPE_ERR: raised if resultType is not
      *   ANY_UNORDERED_NODE_TYPE or
      *   FIRST_ORDERED_NODE_TYPE.
-     * @return a {@link org.w3c.dom.Node} object.
+     * @return a {@link org.loboevolution.html.node.Node} object.
      * @throws org.loboevolution.html.xpath.XPathException if any.
      * @throws org.w3c.dom.xpath.XPathException if any.
      * @throws org.w3c.dom.xpath.XPathException if any.

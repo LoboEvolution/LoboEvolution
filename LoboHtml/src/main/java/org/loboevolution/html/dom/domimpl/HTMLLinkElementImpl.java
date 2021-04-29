@@ -52,9 +52,6 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
 /**
  * <p>HTMLLinkElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElement {
 	
@@ -223,6 +220,26 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 		}
 	}
 
+	@Override
+	public String getAs() {
+		return null;
+	}
+
+	@Override
+	public void setAs(String as) {
+
+	}
+
+	@Override
+	public String getCrossOrigin() {
+		return null;
+	}
+
+	@Override
+	public void setCrossOrigin(String crossOrigin) {
+
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean isDisabled() {
@@ -299,10 +316,50 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 		setAttribute("hreflang", hreflang);
 	}
 
+	@Override
+	public String getImageSizes() {
+		return null;
+	}
+
+	@Override
+	public void setImageSizes(String imageSizes) {
+
+	}
+
+	@Override
+	public String getImageSrcset() {
+		return null;
+	}
+
+	@Override
+	public void setImageSrcset(String imageSrcset) {
+
+	}
+
+	@Override
+	public String getIntegrity() {
+		return null;
+	}
+
+	@Override
+	public void setIntegrity(String integrity) {
+
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void setMedia(String media) {
 		setAttribute("media", media);
+	}
+
+	@Override
+	public String getReferrerPolicy() {
+		return null;
+	}
+
+	@Override
+	public void setReferrerPolicy(String referrerPolicy) {
+
 	}
 
 	/** {@inheritDoc} */
@@ -311,10 +368,20 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 		setAttribute("rel", rel);
 	}
 
+	@Override
+	public DOMTokenList getRelList() {
+		return null;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void setRev(String rev) {
 		setAttribute("rev", rev);
+	}
+
+	@Override
+	public DOMTokenList getSizes() {
+		return null;
 	}
 
 	/** {@inheritDoc} */
@@ -338,209 +405,6 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 		return super.setUserData(key, data, handler);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKeyLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAutocapitalize() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element getOffsetParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isSpellcheck() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isDraggable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isHidden() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isTranslate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutocapitalize(String autocapitalize) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setDraggable(boolean draggable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSpellcheck(boolean spellcheck) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setTranslate(boolean translate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAs() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAs(String as) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getCrossOrigin() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setCrossOrigin(String crossOrigin) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getImageSizes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setImageSizes(String imageSizes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getImageSrcset() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setImageSrcset(String imageSrcset) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getIntegrity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setIntegrity(String integrity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getReferrerPolicy() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setReferrerPolicy(String referrerPolicy) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public DOMTokenList getRelList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public DOMTokenList getSizes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

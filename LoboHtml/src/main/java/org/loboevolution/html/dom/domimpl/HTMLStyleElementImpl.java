@@ -48,7 +48,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	 * <p>Constructor for HTMLStyleElementImpl.</p>
 	 */
 	public HTMLStyleElementImpl() {
-		super("STYLE", true);
+		super("STYLE");
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public HTMLStyleElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/** {@inheritDoc} */

@@ -35,7 +35,7 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public HTMLBaseElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	private void processBaseTag() {
