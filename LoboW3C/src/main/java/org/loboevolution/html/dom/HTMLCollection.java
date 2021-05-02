@@ -50,6 +50,6 @@ public interface HTMLCollection {
      * @param index a int.
      * @return a {@link org.loboevolution.html.node.Node} object.
      */
-    Node item(int index);
+    Node item(Object index);
 
 }

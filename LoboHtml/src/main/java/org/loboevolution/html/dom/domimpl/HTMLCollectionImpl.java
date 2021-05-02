@@ -20,9 +20,6 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
@@ -30,11 +27,11 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * <p>HTMLCollectionImpl class.</p>
- *
- *
- *
  */
 public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 	
@@ -81,9 +78,14 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node item(int index) {
-		if(index >= getLength()) return null;
-		return this.get(index);
+	public Node item(Object index) {
+		try {
+			Double idx = Double.parseDouble(index.toString());
+			if (idx >= getLength() || idx == -1) return null;
+			return this.get(idx.intValue());
+		} catch (NumberFormatException e) {
+			return this.get(0);
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -94,8 +96,12 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 			return null;
 		}
 		final HTMLCollectionImpl nodeList = (HTMLCollectionImpl) doc.getElementsByName(name);
-		Optional<Node> node = nodeList.stream().findFirst();
-		return (Element) node.orElse(null);
+		if(nodeList.size() > 0){
+			Optional<Node> node = nodeList.stream().findFirst();
+			return (Element) node.orElse(null);
+		} else{
+			return doc.getElementById(name);
+		}
 	}
 	
 	/** {@inheritDoc} */

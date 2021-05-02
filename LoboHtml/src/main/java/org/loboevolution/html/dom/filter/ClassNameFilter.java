@@ -27,9 +27,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>ClassNameFilter class.</p>
- *
- *
- *
  */
 public class ClassNameFilter implements NodeFilter {
 	
@@ -50,7 +47,7 @@ public class ClassNameFilter implements NodeFilter {
 	public boolean acceptNode(Node node) {
 		if(node instanceof Element) {
 			String classAttribute = ((Element) node).getAttribute("class");
-			if(classAttribute != null) {
+			if(classAttribute != null && className != null) {
 				final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
 				for (String aClassName : classNames) {
 					if (!classAttribute.contains(aClassName)) {
