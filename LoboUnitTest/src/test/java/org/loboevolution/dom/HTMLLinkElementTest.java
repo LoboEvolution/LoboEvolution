@@ -83,7 +83,7 @@ public class HTMLLinkElementTest extends LoboUnitTest {
                 + "alert(l2.rel);\n"
 
                 + "</script></body></html>";
-        final String[] messages = {"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"};
+        final String[] messages = {null, "alternate help", "prefetch", "prefetch", "not supported", "notsupported"};
         checkHtmlAlert(html, messages);
     }
 

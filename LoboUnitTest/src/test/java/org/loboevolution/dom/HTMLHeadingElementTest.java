@@ -48,7 +48,7 @@ public class HTMLHeadingElementTest extends LoboUnitTest {
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"left", "right", "center", "justify", "wrong", ""};
+        final String[] messages = {"left", "right", "center", "justify", "wrong", null};
         checkHtmlAlert(html, messages);
     }
 

@@ -47,7 +47,7 @@ public class HTMLHRElementTest extends LoboUnitTest {
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"left", "right", "center", "wrong", ""};
+        final String[] messages = {"left", "right", "center", "wrong", null};
         checkHtmlAlert(html, messages);
     }
 

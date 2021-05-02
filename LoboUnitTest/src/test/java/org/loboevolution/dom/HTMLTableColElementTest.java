@@ -370,7 +370,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"<table><colgroup><col></colgroup></table>"};
+        final String[] messages = {"<TABLE><COLGROUP><COL/></COLGROUP></TABLE>"};
         checkHtmlAlert(html, messages);
     }
 }

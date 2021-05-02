@@ -127,7 +127,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
                         + "  <body id='body' onload='test()'>blah</body>\n"
                         + "</html>";
 
-        final String[] messages = {"", "http://www.foo.com/blah.gif", "blah.gif"};
+        final String[] messages = {null, "http://www.foo.com/blah.gif", "blah.gif"};
         checkHtmlAlert(html, messages);
     }
 

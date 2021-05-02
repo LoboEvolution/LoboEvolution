@@ -80,7 +80,7 @@ public class HTMLBRElementTest extends LoboUnitTest {
                 + "alert(br6.clear);\n"
                 + "alert(br7.clear);\n"
                 + "</script></body></html>";
-        final String[] messages = {"", "left", "all", "right", "none", "2", "foo", "left",
+        final String[] messages = {null, "left", "all", "right", "none", "2", "foo", "left",
                 "none", "right", "all", "2", "abc", "8"};
         checkHtmlAlert(html, messages);
     }
@@ -99,7 +99,7 @@ public class HTMLBRElementTest extends LoboUnitTest {
                 + "  <br id='myId'>\n"
                 + "</body></html>";
 
-        final String[] messages = {"<br id=\"myId\">"};
+        final String[] messages = {"<BR id=\"myId\"/>"};
         checkHtmlAlert(html, messages);
     }
 }

@@ -50,8 +50,6 @@ public class HTMLHtmlElementTest extends LoboUnitTest {
      */
     @Test
     public void childNodes_1() {
-        // The whitespace in this HTML is very important, because we're verifying
-        // that it doesn't get included in the childNodes collection.
         final String html = "<html> \n <body> \n <script>\n"
                 + "var nodes = document.documentElement.childNodes;\n"
                 + "alert(nodes.length);\n"
