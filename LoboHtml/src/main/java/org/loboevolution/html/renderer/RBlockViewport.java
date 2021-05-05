@@ -1915,7 +1915,7 @@ public class RBlockViewport extends BaseRCollection {
 		pair.setInitY(currentLine.getY() + currentLine.getHeight());
 		pair.setInitX(currentLine.getX());
 		pair.setFixed(fixed);
-		pair.setRelative(!absolute);
+		pair.setRelative(!absolute && !fixed);
 		this.container.addDelayedPair(pair);
 	}
 
