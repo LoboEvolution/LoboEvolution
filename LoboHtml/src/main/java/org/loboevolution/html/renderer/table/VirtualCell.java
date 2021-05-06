@@ -19,6 +19,8 @@
  */
 package org.loboevolution.html.renderer.table;
 
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlLength;
 
 /**
@@ -70,7 +72,9 @@ public class VirtualCell {
 	public HtmlLength getHeightLength() {
 		final RTableCell cell = this.actualCell;
 		final String heightText = cell.getHeightText();
-		HtmlLength length = heightText == null ? null : new HtmlLength(heightText); 
+		HTMLElementImpl elem = cell.getCellElement();
+		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getOwnerDocument();
+		HtmlLength length = heightText == null ? null : new HtmlLength(heightText, doc);
 		if (length != null) {
 			length.divideBy(cell.getRowSpan());
 		}
@@ -94,7 +98,9 @@ public class VirtualCell {
 	public HtmlLength getWidthLength() {
 		final RTableCell cell = this.actualCell;
 		final String widthText = cell.getWidthText();
-		HtmlLength length = widthText == null ? null : new HtmlLength(widthText); 
+		HTMLElementImpl elem = cell.getCellElement();
+		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getOwnerDocument();
+		HtmlLength length = widthText == null ? null : new HtmlLength(widthText, doc);
 		if (length != null) {
 			length.divideBy(cell.getColSpan());
 		}

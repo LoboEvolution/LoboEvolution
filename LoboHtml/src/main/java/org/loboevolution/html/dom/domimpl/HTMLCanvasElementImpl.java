@@ -52,7 +52,8 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	@Override
 	public int getWidth() {
 		String widthText = this.getAttribute("width");
-		return HtmlValues.getPixelSize(widthText, null, 1);
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		return HtmlValues.getPixelSize(widthText, null, doc.getWindow(), 1);
 	}
 
 	/** {@inheritDoc} */
@@ -65,7 +66,8 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	@Override
 	public int getHeight() {
 		String heightText = this.getAttribute("height");
-		return HtmlValues.getPixelSize(heightText, null, 1);
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		return HtmlValues.getPixelSize(heightText, null, doc.getWindow(), 1);
 	}
 
 	/** {@inheritDoc} */

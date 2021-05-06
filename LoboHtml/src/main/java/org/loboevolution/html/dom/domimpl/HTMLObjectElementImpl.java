@@ -118,7 +118,8 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	/** {@inheritDoc} */
 	@Override
 	public double getHspace() {
-		return HtmlValues.getPixelSize(getAttribute("hspace"), null, 0);
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		return HtmlValues.getPixelSize(getAttribute("hspace"), null, doc.getWindow(), 0);
 	}
 
 	@Override
@@ -162,7 +163,8 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	/** {@inheritDoc} */
 	@Override
 	public double getVspace() {
-		return HtmlValues.getPixelSize(getAttribute("vspace"), null, 0);
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		return HtmlValues.getPixelSize(getAttribute("vspace"), null, doc.getWindow(), 0);
 	}
 
 	/** {@inheritDoc} */

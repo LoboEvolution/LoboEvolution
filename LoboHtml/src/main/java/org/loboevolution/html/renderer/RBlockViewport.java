@@ -1902,6 +1902,7 @@ public class RBlockViewport extends BaseRCollection {
 			final RenderState rs, final RLine line, final boolean absolute, final boolean fixed) {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container)  : getRootContainer(container);
 		final DelayedPair pair = new DelayedPair();
+		pair.setModelNode(getModelNode());
 		pair.setImmediateContainingBlock(container);
 		pair.setContainingBlock(containingBlock);
 		pair.setChild(renderable);

@@ -514,7 +514,7 @@ public class StyleSheetAggregator {
 						index++;
 					}
 				}
-				return getNth(nth, index);
+				return getNth(element, nth, index);
 			} else if (value.startsWith("nth-last-child(")) {
 				final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
 				int index = 0;
@@ -523,7 +523,7 @@ public class StyleSheetAggregator {
 						index++;
 					}
 				}
-				return getNth(nth, index);
+				return getNth(element, nth, index);
 			} else if (value.startsWith("nth-of-type(")) {
 				final String nthType = element.getNodeName();
 				final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
@@ -533,7 +533,7 @@ public class StyleSheetAggregator {
 						index++;
 					}
 				}
-				return getNth(nth, index);
+				return getNth(element, nth, index);
 			} else if (value.startsWith("nth-last-of-type(")) {
 				final String nthLastType = element.getNodeName();
 				final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
@@ -543,7 +543,7 @@ public class StyleSheetAggregator {
 						index++;
 					}
 				}
-				return getNth(nth, index);
+				return getNth(element, nth, index);
 			} else if (value.startsWith("not(")) {
 				final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
 				final AtomicBoolean errorOccured = new AtomicBoolean(false);
@@ -623,7 +623,7 @@ public class StyleSheetAggregator {
 
 					case "max-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, -1);
+					val = HtmlValues.getPixelSize(value, null,  window, -1);
 					if (val == -1 || val < window.getInnerWidth()) {
 						return false;
 					}
@@ -633,7 +633,7 @@ public class StyleSheetAggregator {
 
 					case "min-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, -1);
+					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val > window.getInnerWidth()) {
 						return false;
 					}
@@ -643,7 +643,7 @@ public class StyleSheetAggregator {
 
 					case "max-device-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, -1);
+					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val < window.getScreen().getWidth()) {
 						return false;
 					}
@@ -653,7 +653,7 @@ public class StyleSheetAggregator {
 
 					case "min-device-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, -1);
+					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val > window.getScreen().getWidth()) {
 						return false;
 					}
@@ -721,7 +721,9 @@ public class StyleSheetAggregator {
 		return true;
 	}
 
-	private boolean getNth(final String nth, final int index) {
+	private boolean getNth(HTMLElement element, final String nth, final int index) {
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getOwnerDocument();
+
 		if ("odd".equalsIgnoreCase(nth)) {
 			return index % 2 != 0;
 		}
@@ -740,7 +742,7 @@ public class StyleSheetAggregator {
 				if (value.length() > 0 && value.charAt(0) == '+') {
 					value = value.substring(1);
 				}
-				a = HtmlValues.getPixelSize(value, null, 1);
+				a = HtmlValues.getPixelSize(value, null, doc.getWindow(), 1);
 			}
 		}
 
@@ -748,7 +750,7 @@ public class StyleSheetAggregator {
 		if (value.length() > 0 && value.charAt(0) == '+') {
 			value = value.substring(1);
 		}
-		final int b = HtmlValues.getPixelSize(value, null, 0);
+		final int b = HtmlValues.getPixelSize(value, null, doc.getWindow(), 0);
 		if (a == 0) {
 			return index == b && b > 0;
 		}

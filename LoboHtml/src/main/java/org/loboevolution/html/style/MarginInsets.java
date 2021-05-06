@@ -41,13 +41,13 @@ public class MarginInsets {
 	public static HtmlInsets getMarginInsets(CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
 		final AbstractCSSProperties props = element.getParentStyle();
 		if (props == null) {
-			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", renderState);
+			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
 		}
 		final String topText = isInherit(cssProperties.getMarginTop()) ? props.getMarginTop() : cssProperties.getMarginTop();
 		final String leftText = isInherit(cssProperties.getMarginLeft()) ? props.getMarginLeft() : cssProperties.getMarginLeft();
 		final String bottomText = isInherit(cssProperties.getMarginBottom()) ? props.getMarginBottom() : cssProperties.getMarginBottom();
 		final String rightText = isInherit(cssProperties.getMarginRight()) ? props.getMarginRight() : cssProperties.getMarginRight();
-		return HtmlInsets.getInsets(topText, leftText, bottomText, rightText, renderState);
+		return HtmlInsets.getInsets(topText, leftText, bottomText, rightText, element, renderState);
 	}
 
 	/**
@@ -61,13 +61,13 @@ public class MarginInsets {
 	public static HtmlInsets getPaddingInsets(CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
 		final AbstractCSSProperties props = element.getParentStyle();
 		if (props == null) {
-			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", renderState);
+			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
 		}
 		final String topText = isInherit(cssProperties.getPaddingTop()) ? props.getPaddingTop() : cssProperties.getPaddingTop();
 		final String leftText = isInherit(cssProperties.getPaddingLeft()) ? props.getPaddingLeft() : cssProperties.getPaddingLeft();
 		final String bottomText = isInherit(cssProperties.getPaddingBottom()) ? props.getPaddingBottom() : cssProperties.getPaddingBottom();
 		final String rightText = isInherit(cssProperties.getPaddingRight()) ? props.getPaddingRight() : cssProperties.getPaddingRight();
-		return HtmlInsets.getInsets(topText, leftText, bottomText, rightText, renderState);
+		return HtmlInsets.getInsets(topText, leftText, bottomText, rightText, element, renderState);
 	}
 
 	private static boolean isInherit(String value){

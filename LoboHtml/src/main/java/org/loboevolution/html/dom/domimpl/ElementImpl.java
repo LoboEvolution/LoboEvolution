@@ -567,7 +567,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				height = DEFAULT_FONT.getSize() + "px";
 			}
 		}
-		return HtmlValues.getPixelSize(height, null, -1, preferredSize.height);
+		return HtmlValues.getPixelSize(height, null, doc.getWindow(), -1, preferredSize.height);
 	}
 
 	/** {@inheritDoc} */
@@ -597,7 +597,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		if(Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
 			width = "100%";
 		}		
-		return HtmlValues.getPixelSize(width, null, -1, preferredSize.width);
+		return HtmlValues.getPixelSize(width, null, doc.getWindow(), -1, preferredSize.width);
 	}
 
 	/**

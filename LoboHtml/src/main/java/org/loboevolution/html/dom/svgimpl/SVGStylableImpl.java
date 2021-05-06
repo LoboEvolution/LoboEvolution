@@ -30,6 +30,7 @@ import java.util.Iterator;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.SVGElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
@@ -193,7 +194,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		int strokeWidth = 1;
 		final String strokeWidthProp = Strings.isNotBlank(style.getStrokeWidth()) ? style.getStrokeWidth() : getAttribute("stroke-width");
 		if (Strings.isNotBlank(strokeWidthProp)) {
-			strokeWidth = HtmlValues.getPixelSize(strokeWidthProp, null, 1);
+			SVGSVGElement ownerSVGElement = getOwnerSVGElement();
+			HTMLDocumentImpl doc =  (HTMLDocumentImpl)ownerSVGElement.getOwnerDocument();
+			strokeWidth = HtmlValues.getPixelSize(strokeWidthProp, null, doc.getWindow(), 1);
 		}
 		return strokeWidth;
 	}
@@ -208,7 +211,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		int miterlimit = 4;
 		final String strokeMiterlimit = Strings.isNotBlank(style.getStrokeMiterLimit()) ? style.getStrokeMiterLimit() : getAttribute("stroke-miterlimit");
 		if (Strings.isNotBlank(strokeMiterlimit)) {
-			miterlimit = HtmlValues.getPixelSize(strokeMiterlimit, null, 4);
+			SVGSVGElement ownerSVGElement = getOwnerSVGElement();
+			HTMLDocumentImpl doc =  (HTMLDocumentImpl)ownerSVGElement.getOwnerDocument();
+			miterlimit = HtmlValues.getPixelSize(strokeMiterlimit, null, doc.getWindow(), 4);
 		}
 		return miterlimit;
 	}

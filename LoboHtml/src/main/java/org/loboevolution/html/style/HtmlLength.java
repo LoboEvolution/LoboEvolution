@@ -22,6 +22,8 @@
  */
 package org.loboevolution.html.style;
 
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+
 /**
  * <p>HtmlLength class.</p>
  *
@@ -62,7 +64,7 @@ public final class HtmlLength {
 	 * @throws java.lang.IndexOutOfBoundsException if any.
 	 * @throws java.lang.NumberFormatException if any.
 	 */
-	public HtmlLength(String spec) throws IndexOutOfBoundsException, NumberFormatException {
+	public HtmlLength(String spec, HTMLDocumentImpl doc) throws IndexOutOfBoundsException, NumberFormatException {
 		spec = spec.trim();
 		final int length = spec.length();
 		final char lastChar = spec.charAt(length - 1);
@@ -81,7 +83,7 @@ public final class HtmlLength {
 			this.lengthType = PIXELS;
 			parseable = spec;
 		}
-		this.value = HtmlValues.getPixelSize(parseable, null, -1);
+		this.value = HtmlValues.getPixelSize(parseable, null, doc.getWindow(), -1);
 	}
 
 	/**

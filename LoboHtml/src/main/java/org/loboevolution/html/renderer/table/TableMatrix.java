@@ -30,10 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLTableCaptionElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
+import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.CaptionFilter;
 import org.loboevolution.html.dom.filter.ColumnsFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
@@ -115,11 +112,11 @@ class TableMatrix {
 		this.rows.clear();
 		this.allCells.clear();
 		this.rowElements.clear();
-		
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.tableElement.getDocumentNode();
 		final String borderText = this.tableElement.getAttribute("border");
-		int border = HtmlValues.getPixelSize(borderText, null, 0);
+		int border = HtmlValues.getPixelSize(borderText, null, doc.getWindow(), 0);
 		final String cellSpacingText = this.tableElement.getAttribute("cellspacing");
-		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, null, 0);
+		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, null, doc.getWindow(), 0);
 		this.cellSpacingX = cellSpacing;
 		this.cellSpacingY = cellSpacing;
 

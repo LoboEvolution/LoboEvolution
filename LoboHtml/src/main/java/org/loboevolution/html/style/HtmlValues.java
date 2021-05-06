@@ -20,27 +20,23 @@
 
 package org.loboevolution.html.style;
 
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-
+import com.gargoylesoftware.css.dom.CSSValueImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
+import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.FontInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
+import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.net.HttpNetwork;
 
-import com.gargoylesoftware.css.dom.CSSValueImpl;
-import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>HtmlValues class.</p>
@@ -61,74 +57,6 @@ public class HtmlValues {
 		SYSTEM_FONTS.put("message-box", systemFont);
 		SYSTEM_FONTS.put("small-caption", systemFont);
 		SYSTEM_FONTS.put("status-bar", systemFont);
-	}
-
-	/**
-	 * <p>getInsets.</p>
-	 *
-	 * @param insetsSpec a {@link java.lang.String} object.
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param negativeOK a boolean.
-	 * @return a {@link java.awt.Insets} object.
-	 */
-	public static Insets getInsets(String insetsSpec, RenderState renderState, boolean negativeOK) {
-		final int[] insetsArray = new int[4];
-		int size = 0;
-		final StringTokenizer tok = new StringTokenizer(insetsSpec);
-		if (tok.hasMoreTokens()) {
-			String token = tok.nextToken();
-			insetsArray[0] = getPixelSize(token, renderState, 0);
-			if (negativeOK || insetsArray[0] >= 0) {
-				size = 1;
-				if (tok.hasMoreTokens()) {
-					token = tok.nextToken();
-					insetsArray[1] = getPixelSize(token, renderState, 0);
-					if (negativeOK || insetsArray[1] >= 0) {
-						size = 2;
-						if (tok.hasMoreTokens()) {
-							token = tok.nextToken();
-							insetsArray[2] = getPixelSize(token, renderState, 0);
-							if (negativeOK || insetsArray[2] >= 0) {
-								size = 3;
-								if (tok.hasMoreTokens()) {
-									token = tok.nextToken();
-									insetsArray[3] = getPixelSize(token, renderState, 0);
-									size = 4;
-									if (negativeOK || insetsArray[3] >= 0) {
-										// nop
-									} else {
-										insetsArray[3] = 0;
-									}
-								}
-							} else {
-								size = 4;
-								insetsArray[2] = 0;
-							}
-						}
-					} else {
-						size = 4;
-						insetsArray[1] = 0;
-					}
-				}
-			} else {
-				size = 1;
-				insetsArray[0] = 0;
-			}
-		}
-
-		switch (size) {
-		case 1:
-			final int val = insetsArray[0];
-			return new Insets(val, val, val, val);
-		case 2:
-			return new Insets(insetsArray[0], insetsArray[1], insetsArray[0], insetsArray[1]);
-		case 3:
-			return new Insets(insetsArray[0], insetsArray[1], insetsArray[2], insetsArray[1]);
-		case 4:
-			return new Insets(insetsArray[0], insetsArray[3], insetsArray[2], insetsArray[1]);
-		default:
-			return null;
-		}
 	}
 
 	/**
@@ -167,7 +95,7 @@ public class HtmlValues {
 	 * @param baseUri a {@link java.lang.String} object.
 	 */
 	public static Image getListStyleImage(String token, String baseUri) {
-		Image image = null;
+		Image image;
 		String start = "url(";
 		int startIdx = start.length();
 		int closingIdx = token.lastIndexOf(')');
@@ -254,7 +182,7 @@ public class HtmlValues {
 	 * @param errorValue a int.
 	 * @return a int.
 	 */
-	public static int getPixelSize(String spec, RenderState renderState, int errorValue) {
+	public static int getPixelSize(String spec, RenderState renderState, Window window, int errorValue) {
 		try {
 			final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			final String lcSpec = spec.toLowerCase();
@@ -282,6 +210,9 @@ public class HtmlValues {
 				final int fontSize = f.getSize();
 				final double pixelSize = fontSize * dpi / 96;
 				return (int) Math.round(pixelSize * Double.parseDouble(text));
+			case "rem":
+					final float fs = new LAFSettings().getInstance().getFontSize();
+					return (int) Math.round(fs * Double.parseDouble(text));
 			case "pt":
 				return inches(72, dpi, text);
 			case "pc":
@@ -297,6 +228,20 @@ public class HtmlValues {
 				return (int) Math.round(xHeight * Double.parseDouble(text));
 			case "in":
 				return (int) Math.round(dpi * Double.parseDouble(text));
+			case "vh":
+				if (window != null) {
+					final double ih = window.getInnerHeight();
+					return (int) Math.round(ih * Double.parseDouble(text) / 100.0);
+				} else {
+					return (int) Math.round(Double.parseDouble(lcSpec));
+				}
+			case "vw":
+				if (window != null) {
+					final double iw = window.getInnerWidth();
+					return (int) Math.round(iw * Double.parseDouble(text) / 100.0);
+				} else {
+					return (int) Math.round(Double.parseDouble(lcSpec));
+				}
 			default:
 				return (int) Math.round(Double.parseDouble(lcSpec));
 			}
@@ -314,14 +259,14 @@ public class HtmlValues {
 	 * @param availSize a int.
 	 * @return a int.
 	 */
-	public static int getPixelSize(String spec, RenderState renderState, int errorValue, int availSize) {
+	public static int getPixelSize(String spec, RenderState renderState, Window window, int errorValue, int availSize) {
 		try {
 			if (spec.endsWith("%")) {
 				final String perText = spec.substring(0, spec.length() - 1);
 				final double val = Double.parseDouble(perText);
 				return (int) Math.round(availSize * val / 100.0);
 			} else {
-				return getPixelSize(spec, renderState, errorValue);
+				return getPixelSize(spec, renderState, window, errorValue);
 			}
 		} catch (final Exception nfe) {
 			return errorValue;
@@ -392,44 +337,6 @@ public class HtmlValues {
 				|| tokenTL.equals("outset");
 	}
 
-	/**
-	 * <p>isFontStyle.</p>
-	 *
-	 * @param token a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public static boolean isFontStyle(String token) {
-		return "italic".equals(token) || "normal".equals(token) || "oblique".equals(token);
-	}
-
-	/**
-	 * <p>isFontVariant.</p>
-	 *
-	 * @param token a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public static boolean isFontVariant(String token) {
-		return "small-caps".equals(token) || "normal".equals(token);
-	}
-
-	/**
-	 * <p>isFontWeight.</p>
-	 *
-	 * @param token a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public static boolean isFontWeight(String token) {
-		if ("bold".equals(token) || "bolder".equals(token) || "lighter".equals(token)) {
-			return true;
-		}
-		try {
-			final int value = Integer.parseInt(token);
-			return value % 100 == 0 && value >= 100 && value <= 900;
-		} catch (final Exception nfe) {
-			return false;
-		}
-	}
-	
 	/**
 	 * <p>isUrl.</p>
 	 *

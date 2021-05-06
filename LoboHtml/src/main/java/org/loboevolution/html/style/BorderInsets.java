@@ -115,14 +115,14 @@ public class BorderInsets {
 	private static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
 		final AbstractCSSProperties props = element.getParentStyle();
 		if (props == null) {
-			final HtmlInsets insets = HtmlInsets.getInsets("0px", "0px", "0px", "0px", renderState);
+			final HtmlInsets insets = HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
 			binfo.setInsets(insets);
 		} else {
 			final String topText = borderInsets(props.getBorderTopWidth(), binfo.getTopStyle(), cssProperties.getBorderTopWidth());
 			final String leftText =  borderInsets(props.getBorderLeftWidth(), binfo.getLeftStyle(), cssProperties.getBorderLeftWidth());
 			final String bottomText = borderInsets(props.getBorderBottomWidth(), binfo.getBottomStyle(), cssProperties.getBorderBottomWidth());
 			final String rightText = borderInsets(props.getBorderRightWidth(), binfo.getRightStyle(), cssProperties.getBorderRightWidth());
-			final HtmlInsets insets = HtmlInsets.getInsets(topText, leftText, bottomText, rightText, renderState);
+			final HtmlInsets insets = HtmlInsets.getInsets(topText, leftText, bottomText, rightText, element, renderState);
 			binfo.setInsets(insets);
 		}
 	}

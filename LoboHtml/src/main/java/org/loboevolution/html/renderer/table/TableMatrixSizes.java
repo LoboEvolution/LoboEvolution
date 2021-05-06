@@ -24,6 +24,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
@@ -68,8 +69,11 @@ class TableMatrixSizes {
 				if (widthAttr == null) {
 					return null;
 				}
-				return new HtmlLength(widthAttr);
+				HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
+				return new HtmlLength(widthAttr, doc);
 			} else {
+
+				HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
 
 				if ("inherit".equals(widthText)) {
 					widthText = element.getParentStyle().getWidth();
@@ -78,12 +82,11 @@ class TableMatrixSizes {
 				int width = -1;
 
 				if (widthText != null) {
-					width = HtmlValues.getPixelSize(widthText, element.getRenderState(), 0, availWidth);
+					width = HtmlValues.getPixelSize(widthText, element.getRenderState(), doc.getWindow(), 0, availWidth);
 				}
 
 				if (props.getMaxWidth() != null) {
-					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), 0,
-							availWidth);
+					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), doc.getWindow(), 0, availWidth);
 
 					if (width == 0 || width > maxWidth) {
 						width = maxWidth;
@@ -91,8 +94,7 @@ class TableMatrixSizes {
 				}
 
 				if (props.getMinWidth() != null) {
-					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0,
-							availWidth);
+					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getWindow(), 0,  availWidth);
 
 					if (width == 0 || width < minWidth) {
 						width = minWidth;
@@ -122,9 +124,12 @@ class TableMatrixSizes {
 				if (ha == null) {
 					return null;
 				} else {
-					return new HtmlLength(ha);
+					HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
+					return new HtmlLength(ha, doc);
 				}
 			} else {
+
+				HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
 
 				if ("inherit".equals(heightText)) {
 					heightText = element.getParentStyle().getHeight();
@@ -133,12 +138,11 @@ class TableMatrixSizes {
 				int height = -1;
 
 				if (heightText != null) {
-					height = HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight);
+					height = HtmlValues.getPixelSize(heightText, element.getRenderState(), doc.getWindow(),  0, availHeight);
 				}
 
 				if (props.getMaxHeight() != null) {
-					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), 0,
-							availHeight);
+					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), doc.getWindow(),  0, availHeight);
 
 					if (height == 0 || height > maxHeight) {
 						height = maxHeight;
@@ -146,15 +150,14 @@ class TableMatrixSizes {
 				}
 
 				if (props.getMinHeight() != null) {
-					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), 0,
-							availHeight);
+					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), doc.getWindow(),  0, availHeight);
 
 					if (height == 0 || height < minHeight) {
 						height = minHeight;
 					}
 				}
 
-				return new HtmlLength(HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight));
+				return new HtmlLength(HtmlValues.getPixelSize(heightText, element.getRenderState(), doc.getWindow(), 0, availHeight));
 			}
 		} catch (Exception err) {
 			return null;
@@ -192,8 +195,8 @@ class TableMatrixSizes {
 			HtmlLength rowHeightLength = null;
 			if (rowHeightText != null) {
 				try {
-					rowHeightLength = new HtmlLength(
-							HtmlValues.getPixelSize(rowHeightText, rowElement.getRenderState(), 0));
+					HTMLDocumentImpl doc =  (HTMLDocumentImpl)rowElement.getDocumentNode();
+					rowHeightLength = new HtmlLength(HtmlValues.getPixelSize(rowHeightText, rowElement.getRenderState(), doc.getWindow(), 0));
 				} catch (final Exception err) {
 					// ignore
 				}

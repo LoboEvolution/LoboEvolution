@@ -20,6 +20,7 @@
 package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.ListValues;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
@@ -85,8 +86,9 @@ class RList extends BaseRListElement {
 			return;
 		}
 		final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)rootElement.getDocumentNode();
 		final String startText = rootElement.getAttribute("start");
-		int counterStart = HtmlValues.getPixelSize(startText, renderState, 0);
+		int counterStart = HtmlValues.getPixelSize(startText, renderState, doc.getWindow(), 0);
 
 		renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, counterStart);
 		super.doLayout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX,

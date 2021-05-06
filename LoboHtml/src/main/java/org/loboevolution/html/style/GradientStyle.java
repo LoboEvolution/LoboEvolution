@@ -35,6 +35,7 @@ import java.util.Collections;
 
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.store.GeneralStore;
@@ -49,28 +50,28 @@ public class GradientStyle {
 	
 	/**
 	 * <p>gradientToImg.</p>
-	 *
+	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 * @param props a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param backgroundImage a {@link java.lang.String} object.
 	 * @return a {@link java.awt.image.BufferedImage} object.
 	 */
-	public BufferedImage gradientToImg(AbstractCSSProperties props, RenderState renderState, String backgroundImage) {
+	public BufferedImage gradientToImg(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState, String backgroundImage) {
 		BufferedImage image = null;
 		final int idx = backgroundImage.indexOf("(");
 		final String quote = backgroundImage.substring(0, idx);
         switch (quote) {
 		case "linear-gradient":
-			image = linearGadient(props, renderState, backgroundImage, quote, CycleMethod.NO_CYCLE);
+			image = linearGadient(document, props, renderState, backgroundImage, quote, CycleMethod.NO_CYCLE);
 			break;
 		case "radial-gradient":
-			image = radialGadient(props, renderState, backgroundImage, quote, CycleMethod.NO_CYCLE);
+			image = radialGadient(document, props, renderState, backgroundImage, quote, CycleMethod.NO_CYCLE);
 			break;
 		case "repeating-linear-gradient":
-			image = linearGadient(props, renderState, backgroundImage, quote, CycleMethod.REPEAT);
+			image = linearGadient(document, props, renderState, backgroundImage, quote, CycleMethod.REPEAT);
 			break;
 		case "repeating-radial-gradient":
-			image = radialGadient(props, renderState, backgroundImage, quote, CycleMethod.REPEAT);
+			image = radialGadient(document, props, renderState, backgroundImage, quote, CycleMethod.REPEAT);
 			break;
 		default:
 			break;
@@ -78,7 +79,7 @@ public class GradientStyle {
 		return image;
 	}
 
-	private BufferedImage linearGadient(AbstractCSSProperties props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
+	private BufferedImage linearGadient(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
 		start = start + "(";
 		final int startIdx = start.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');
@@ -87,8 +88,8 @@ public class GradientStyle {
 		final String direction = direction(quote); 
 		final float[] fractions = fractions(values);
 		final Color[] colors = colors(values);
-		final int width = getWidth(props, renderState);
-		final int height = getHeight(props, renderState);
+		final int width = getWidth(document, props, renderState);
+		final int height = getHeight(document, props, renderState);
 		LinearGradientPaint linearGradientPaint = null;
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = image.createGraphics();
@@ -133,14 +134,14 @@ public class GradientStyle {
 		return image;
 	}
 
-	private BufferedImage radialGadient(AbstractCSSProperties props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
+	private BufferedImage radialGadient(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
 		start = start + "(";
 		final int startIdx = start.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');
 		final String quote = backgroundImage.substring(startIdx, closingIdx);
 		final String values = gradientValues(quote);
-		final int width = getWidth(props, renderState);
-		final int height = getHeight(props, renderState);
+		final int width = getWidth(document, props, renderState);
+		final int height = getHeight(document, props, renderState);
 		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();
 		final Point2D center = new Point2D.Float(width/2, height/2);
@@ -267,8 +268,8 @@ public class GradientStyle {
 		}
 	}
 
-	private int getHeight(AbstractCSSProperties props, RenderState renderState) {
-		int heightSize = HtmlValues.getPixelSize(props.getHeight(), renderState, -1);
+	private int getHeight(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState) {
+		int heightSize = HtmlValues.getPixelSize(props.getHeight(), renderState, document.getWindow(), -1);
 		if(heightSize < 0) {
 			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 			heightSize = (int)initialWindowBounds.getHeight() * 2;
@@ -276,8 +277,8 @@ public class GradientStyle {
 		return heightSize;
 	}
 	
-	private int getWidth(AbstractCSSProperties props, RenderState renderState) {
-		int widthSize = HtmlValues.getPixelSize(props.getWidth(), renderState, -1);
+	private int getWidth(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState) {
+		int widthSize = HtmlValues.getPixelSize(props.getWidth(), renderState, document.getWindow(),-1);
 		if(widthSize < 0) {
 			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 			widthSize = (int)initialWindowBounds.getWidth() * 2;

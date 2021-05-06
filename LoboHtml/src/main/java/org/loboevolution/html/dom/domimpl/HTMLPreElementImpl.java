@@ -54,7 +54,8 @@ public class HTMLPreElementImpl extends HTMLElementImpl implements HTMLPreElemen
 	@Override
 	public double getWidth() {
 		final String widthText = getAttribute("width");
-		return HtmlValues.getPixelSize(widthText, null, 0);
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		return HtmlValues.getPixelSize(widthText, null, doc.getWindow(), 0);
 	}
 
 	/** {@inheritDoc} */

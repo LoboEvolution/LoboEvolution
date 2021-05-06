@@ -26,6 +26,7 @@ import java.util.Base64;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLTableElement;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableRowElementImpl;
@@ -224,7 +225,8 @@ public class TableCellRenderState extends DisplayRenderState {
 			String cellPaddingText = tableElement.getAttribute("cellpadding");
 			if (Strings.isNotBlank(cellPaddingText)) {
 				cellPaddingText = cellPaddingText.trim();
-				int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, 0);
+				HTMLDocumentImpl doc =  (HTMLDocumentImpl)tableElement.getOwnerDocument();
+				int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, doc.getWindow(), 0);
 				int cellPaddingType = HtmlInsets.TYPE_PIXELS;
 
 				if (cellPaddingText.endsWith("%")) {

@@ -37,15 +37,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.loboevolution.html.control.InputControl;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>InputImage class.</p>
- *
- *
- *
  */
 public class InputImage {
 	
@@ -75,8 +73,9 @@ public class InputImage {
 		BufferedImage bimage = null;
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		try {
-			final int dw = HtmlValues.getPixelSize(modelNode.getAttribute("width"), null, image.getWidth(null), 0);
-			final int dh = HtmlValues.getPixelSize(modelNode.getAttribute("height"), null, image.getHeight(null), 0);
+			HTMLDocumentImpl doc = (HTMLDocumentImpl)modelNode.getDocumentNode();
+			final int dw = HtmlValues.getPixelSize(modelNode.getAttribute("width"), null, doc.getWindow(), image.getWidth(null), 0);
+			final int dh = HtmlValues.getPixelSize(modelNode.getAttribute("height"), null, doc.getWindow(), image.getHeight(null), 0);
 
 			int transparency = Transparency.OPAQUE;
 			if (hasAlpha) {

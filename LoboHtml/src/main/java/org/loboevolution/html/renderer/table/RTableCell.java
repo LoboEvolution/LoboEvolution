@@ -24,6 +24,7 @@ package org.loboevolution.html.renderer.table;
 
 import java.awt.Dimension;
 
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RBlock;
@@ -41,7 +42,7 @@ import org.loboevolution.info.SizeInfo;
  *
  */
 public class RTableCell extends RBlock {
-	
+
 	private final HTMLElementImpl cellElement;
 	
 	private int colSpan = -1;
@@ -183,6 +184,15 @@ public class RTableCell extends RBlock {
         }
 	}
 
+	/**
+	 * <p>getCellElement.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
+	public HTMLElementImpl getCellElement() {
+		return cellElement;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	protected boolean isMarginBoundary() {
@@ -239,12 +249,14 @@ public class RTableCell extends RBlock {
 	
     private static int getColSpan(final HTMLElementImpl elem) {
         String colSpanText = elem.getAttribute("colspan");
-        return HtmlValues.getPixelSize(colSpanText, null, 1);
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getDocumentNode();
+        return HtmlValues.getPixelSize(colSpanText, null, doc.getWindow(), 1);
     }
     
     private static int getRowSpan(final HTMLElementImpl elem) {
         String rowSpanText = elem.getAttribute("rowspan");
-        return HtmlValues.getPixelSize(rowSpanText, null, 1);
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getDocumentNode();
+        return HtmlValues.getPixelSize(rowSpanText, null, doc.getWindow(), 1);
     }
 
 

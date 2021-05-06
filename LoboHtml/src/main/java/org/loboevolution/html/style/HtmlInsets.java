@@ -20,6 +20,8 @@
 package org.loboevolution.html.style;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 
 import java.awt.*;
@@ -69,30 +71,30 @@ public class HtmlInsets {
 		return new Insets(top, left, bottom, right);
 	}
 
-	protected static HtmlInsets getInsets(String topText, String leftText, String bottomText, String rightText, RenderState renderState) {
+	protected static HtmlInsets getInsets(String topText, String leftText, String bottomText, String rightText, HTMLElementImpl element, RenderState renderState) {
 		BasicInset basicInset;
 		HtmlInsets insets = new HtmlInsets();
 
-		basicInset = updateInset(topText, renderState);
+		basicInset = updateInset(element, topText, renderState);
 		insets.top = basicInset.getValue();
 		insets.topType = basicInset.getType();
 
-		basicInset = updateInset(leftText, renderState);
+		basicInset = updateInset(element, leftText, renderState);
 		insets.left = basicInset.getValue();
 		insets.leftType = basicInset.getType();
 
-		basicInset = updateInset(bottomText, renderState);
+		basicInset = updateInset(element, bottomText, renderState);
 		insets.bottom = basicInset.getValue();
 		insets.bottomType = basicInset.getType();
 
-		basicInset = updateInset(rightText, renderState);
+		basicInset = updateInset(element, rightText, renderState);
 		insets.right = basicInset.getValue();
 		insets.rightType = basicInset.getType();
 
 		return insets;
 	}
 
-	private static BasicInset updateInset(String sizeText, RenderState renderState) {
+	private static BasicInset updateInset(HTMLElementImpl element, String sizeText, RenderState renderState) {
 		int type = 0;
 		int value = 0;
 		if (Strings.isNotBlank(sizeText)) {
@@ -106,8 +108,9 @@ public class HtmlInsets {
 					value = 0;
 				}
 			} else {
+				HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
 				type = HtmlInsets.TYPE_PIXELS;
-				value = HtmlValues.getPixelSize(sizeText, renderState, 0);
+				value = HtmlValues.getPixelSize(sizeText, renderState, doc.getWindow(), 0);
 			}
 		}
 		return new BasicInset(type, value);

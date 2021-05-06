@@ -22,14 +22,15 @@ package org.loboevolution.html.renderer;
 import java.awt.Insets;
 import java.awt.Point;
 
+import org.loboevolution.html.dom.HTMLDocument;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>DelayedPair class.</p>
- *
- *
- *
  */
 public class DelayedPair {
 
@@ -38,6 +39,8 @@ public class DelayedPair {
 	private BoundableRenderable child;
 
 	private RenderableContainer immediateContainingBlock;
+
+	private ModelNode modelNode;
 
 	private RenderState rs;
 
@@ -159,10 +162,16 @@ public class DelayedPair {
 		return helperGetPixelSize(height, rs, 0, containingBlock.getInnerHeight());
 	}
 
-	private static Integer helperGetPixelSize(final String spec, final RenderState rs, final int errorValue,
+	private Integer helperGetPixelSize(final String spec, final RenderState rs, final int errorValue,
 			final int avail) {
 		if (spec != null) {
-			return "auto".equals(spec) ? null : HtmlValues.getPixelSize(spec, rs, errorValue, avail);
+			Window window = null;
+			ModelNode node  = getModelNode();
+			if (node instanceof HTMLDocument) {
+				HTMLDocumentImpl doc = (HTMLDocumentImpl)node;
+				window = doc.getWindow();
+			}
+			return "auto".equals(spec) ? null : HtmlValues.getPixelSize(spec, rs, window, errorValue, avail);
 		} else {
 			return null;
 		}
@@ -202,6 +211,16 @@ public class DelayedPair {
 	 */
 	public RenderState getRs() {
 		return rs;
+	}
+
+	/**
+	 * <p>Getter for the model Node.</p>
+	 *
+	 * @return the modelNode
+	 */
+
+	public ModelNode getModelNode() {
+		return modelNode;
 	}
 
 	/**
@@ -283,6 +302,15 @@ public class DelayedPair {
 	 */
 	public void setRs(RenderState rs) {
 		this.rs = rs;
+	}
+
+	/**
+	 * <p>Setter for the field modelNode.</p>
+	 *
+	 * @param modelNode the model node
+	 */
+	public void setModelNode(ModelNode modelNode) {
+		this.modelNode = modelNode;
 	}
 
 	/**

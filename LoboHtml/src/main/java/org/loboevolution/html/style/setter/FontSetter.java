@@ -22,6 +22,7 @@ package org.loboevolution.html.style.setter;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.FontInfo;
 
@@ -78,15 +79,15 @@ public class FontSetter implements SubPropertySetter {
 			int i;
 			for (i = 0; i < length; i++) {
 				token = tokens[i];
-				if (HtmlValues.isFontStyle(token)) {
+				if (FontValues.isFontStyle(token)) {
 					properties.setPropertyValueLCAlt(FONT_STYLE, token, important);
 					continue;
 				}
-				if (HtmlValues.isFontVariant(token)) {
+				if (FontValues.isFontVariant(token)) {
 					properties.setPropertyValueLCAlt(FONT_VARIANT, token, important);
 					continue;
 				}
-				if (HtmlValues.isFontWeight(token)) {
+				if (FontValues.isFontWeight(token)) {
 					properties.setPropertyValueLCAlt(FONT_WEIGHT, token, important);
 					continue;
 				}

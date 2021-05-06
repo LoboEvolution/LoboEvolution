@@ -49,7 +49,9 @@ import org.loboevolution.html.dom.HTMLImageElement;
 import org.loboevolution.html.dom.ImageData;
 import org.loboevolution.html.dom.TextMetrics;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
@@ -218,15 +220,15 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		int i;
 		for (i = 0; i < length; i++) {
 			token = tokens[i];
-			if (HtmlValues.isFontStyle(token)) {
+			if (FontValues.isFontStyle(token)) {
 				key.setFontStyle(token);
 				continue;
 			}
-			if (HtmlValues.isFontVariant(token)) {
+			if (FontValues.isFontVariant(token)) {
 				key.setFontVariant(token);
 				continue;
 			}
-			if (HtmlValues.isFontWeight(token)) {
+			if (FontValues.isFontWeight(token)) {
 				key.setFontWeight(token);
 				continue;
 			}
@@ -236,7 +238,8 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 			final int slashIdx = token.indexOf('/');
 			final String fontSizeText = slashIdx == -1 ? token : token.substring(0, slashIdx);
 			int errorValue = Float.valueOf(new LAFSettings().getInstance().getFontSize()).intValue();
-			key.setFontSize(HtmlValues.getPixelSize(fontSizeText, null, errorValue));
+			HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.canvas.getDocumentNode();
+			key.setFontSize(HtmlValues.getPixelSize(fontSizeText, null, doc.getWindow(), errorValue));
 			if (++i < length) {
 				final StringBuilder fontFamilyBuff = new StringBuilder();
 				do {

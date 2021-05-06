@@ -235,7 +235,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 */
 	protected int getAttributeAsInt(String name, int defaultValue) {
 		final String value = getAttribute(name);
-		return HtmlValues.getPixelSize(value, null, defaultValue);
+		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		return HtmlValues.getPixelSize(value, null, doc.getWindow(), defaultValue);
 	}
 
 	/**

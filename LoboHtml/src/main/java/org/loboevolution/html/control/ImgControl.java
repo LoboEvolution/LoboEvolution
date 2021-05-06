@@ -33,6 +33,7 @@ import java.awt.event.MouseEvent;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.AlignValues;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
@@ -219,6 +220,8 @@ public class ImgControl extends BaseControl {
 		} else{
 			size = Strings.isNotBlank(styleAttribute) ? styleAttribute : "";
 		}
-		return  HtmlValues.getPixelSize(size, null, -1, availSize);
+		final HTMLElementImpl element = this.controlElement;
+		HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
+		return  HtmlValues.getPixelSize(size, null, doc.getWindow(), -1, availSize);
 	}
 }

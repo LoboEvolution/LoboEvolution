@@ -589,10 +589,10 @@ public class StyleSheetRenderState implements RenderState {
 		key.setFontStyle(FontValues.getFontStyle(style.getFontStyle()));
 		key.setFontVariant(style.getFontVariant());
 		key.setFontWeight(FontValues.getFontWeight(style.getFontWeight()));
-		key.setFontSize(FontValues.getFontSize(style.getFontSize(), prs));
+		key.setFontSize(FontValues.getFontSize(style.getFontSize(), document.getWindow(), prs));
 		key.setLocales(document == null ? null : document.getLocales());
 		key.setSuperscript(FontValues.getFontSuperScript(style.getVerticalAlign(), prs));
-		key.setLetterSpacing(HtmlValues.getPixelSize(style.getLetterSpacing(), prs, 0));
+		key.setLetterSpacing(HtmlValues.getPixelSize(style.getLetterSpacing(), prs, document.getWindow(), 0));
 		key.setStrikethrough(FontValues.getFontStrikeThrough(style.getTextDecoration()));
 		key.setUnderline(FontValues.getFontUnderline(style.getTextDecoration()));
 		Font f = FONT_FACTORY.getFont(key);
@@ -904,7 +904,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (tiText.length() == 0) {
 			return 0;
 		} else {
-			return HtmlValues.getPixelSize(tiText, this, 0, availSize);
+			return HtmlValues.getPixelSize(tiText, this, document.getWindow(), 0, availSize);
 		}
 	}
 
@@ -1409,7 +1409,7 @@ public class StyleSheetRenderState implements RenderState {
 			case INITIAL:
 			default:
 				binfo.setBackgroundYPositionAbsolute(true);
-				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, prevRenderState, 0));
+				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, prevRenderState, document.getWindow(), 0));
 				break;
 			}
 		}
@@ -1451,7 +1451,7 @@ public class StyleSheetRenderState implements RenderState {
 			case INITIAL:
 			default:
 				binfo.setBackgroundXPositionAbsolute(true);
-				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));
+				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, document.getWindow(), 0));
 				break;
 			}
 		}
@@ -1481,7 +1481,7 @@ public class StyleSheetRenderState implements RenderState {
 		} else if (HtmlValues.isGradient(backgroundImageText)) {
 			try {
 				GradientStyle style = new GradientStyle();
-				BufferedImage img = style.gradientToImg(props, this, backgroundImageText);
+				BufferedImage img = style.gradientToImg(document, props, this, backgroundImageText);
 				if (img != null) {
 					File f = File.createTempFile("temp", null);
 					ImageIO.write(img, "png", f);
