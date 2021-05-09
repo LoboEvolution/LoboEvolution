@@ -49,45 +49,6 @@ final class RStyleChanger extends BaseRenderable {
 		return this.modelNode;
 	}
 
-	/**
-	 * <p>invalidateLayoutUpTree.</p>
-	 */
-	public void invalidateLayoutUpTree() {
-	}
-
-	/**
-	 * <p>onMouseClick.</p>
-	 *
-	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
-	 */
-	public void onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
-		throw new UnsupportedOperationException("unexpected");
-	}
-
-	/**
-	 * <p>onMousePressed.</p>
-	 *
-	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
-	 */
-	public void onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
-		throw new UnsupportedOperationException("unexpected");
-	}
-
-	/**
-	 * <p>onMouseReleased.</p>
-	 *
-	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
-	 */
-	public void onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
-		throw new UnsupportedOperationException("unexpected");
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {

@@ -24,12 +24,10 @@ import org.loboevolution.html.renderstate.FontStyleRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
- * Element used for SUB
- *
- *
- *
+ * Element used for SUB and SUP
  */
 public class HTMLSuperscriptElementImpl extends HTMLElementImpl {
+
 	private final int superscript;
 
 	/**
@@ -46,8 +44,7 @@ public class HTMLSuperscriptElementImpl extends HTMLElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = FontStyleRenderState.createSuperscriptFontStyleRenderState(prevRenderState,
-                this.superscript);
+		prevRenderState = new FontStyleRenderState(prevRenderState, this.superscript);
 		return super.createRenderState(prevRenderState);
 	}
 	

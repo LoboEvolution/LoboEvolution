@@ -20,34 +20,19 @@
 
 package org.loboevolution.html.renderstate;
 
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Toolkit;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
+import org.loboevolution.laf.LAFType;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>FontStyleRenderState class.</p>
- *
- *
- *
  */
 public class FontStyleRenderState extends RenderStateDelegator {
-	/**
-	 * <p>createSuperscriptFontStyleRenderState.</p>
-	 *
-	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param superscript a {@link java.lang.Integer} object.
-	 * @return a {@link org.loboevolution.html.renderstate.FontStyleRenderState} object.
-	 */
-	public static FontStyleRenderState createSuperscriptFontStyleRenderState(RenderState prevRenderState,
-			Integer superscript) {
-		return new FontStyleRenderState(prevRenderState, prevRenderState.getFont().getStyle(), superscript);
-	}
 
 	private Font iFont;
 
@@ -55,53 +40,58 @@ public class FontStyleRenderState extends RenderStateDelegator {
 
 	Map<String, WordInfo> iWordInfoMap = null;
 
-	private final int style;
+	private final LAFType type;
 
-	private final Integer superscript;
+	private int superscript;
 
 	/**
 	 * <p>Constructor for FontStyleRenderState.</p>
 	 *
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param style a int.
+	 * @param type a {@link org.loboevolution.laf.LAFType} object.
 	 */
-	public FontStyleRenderState(RenderState prevRenderState, int style) {
-		this(prevRenderState, style, null);
+	public FontStyleRenderState(RenderState prevRenderState, LAFType type) {
+		super(prevRenderState);
+		this.type = type;
+		this.iFont = null;
 	}
 
-	FontStyleRenderState(RenderState prevRenderState, int style, Integer superscript) {
+	/**
+	 * <p>Constructor for FontStyleRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param superscript a {@link java.lang.Integer} object.
+	 */
+	public FontStyleRenderState(RenderState prevRenderState, Integer superscript) {
 		super(prevRenderState);
-		this.style = style;
+		this.iFont = prevRenderState.getFont();
 		this.superscript = superscript;
+		this.type = null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
-		Font f = this.iFont;
-		if (f != null) {
-			return f;
+		FontKey fontkey = new FontKey();
+
+		if(iFont != null) {
+			fontkey.setSuperscript(this.superscript);
+			return  FontFactory.getInstance().scriptFont(this.iFont, fontkey);
 		}
-		final Font parentFont = this.delegate.getFont();
-		if (parentFont.getStyle() != this.style) {
-			f = parentFont.deriveFont(this.style | parentFont.getStyle());
-		} else {
-			f = parentFont;
+
+		if(LAFType.BOLD.equals(type)){
+			fontkey.setFontWeight(LAFType.BOLD.getValue());
 		}
-		final FontKey key = new FontKey();
-		key.setFontFamily("");
-		key.setFontStyle("");
-		key.setFontVariant("");
-		key.setFontWeight("");
-		key.setFontSize(0);
-		key.setLocales(null);
-		key.setSuperscript(this.superscript);
-		key.setLetterSpacing(0);
-		key.setStrikethrough(false);
-		key.setUnderline(0);
-		f = FontFactory.scriptFont(f, key);
-		this.iFont = f;
-		return f;
+
+		if(LAFType.ITALIC.equals(type)){
+			fontkey.setFontStyle(LAFType.ITALIC.getValue());
+		}
+
+		if(LAFType.MONOSPACED.equals(type)){
+			fontkey.setFontFamily(LAFType.MONOSPACED.getValue());
+		}
+
+		return FontFactory.getInstance().getFont(fontkey);
 	}
 
 	/** {@inheritDoc} */

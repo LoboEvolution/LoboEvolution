@@ -137,8 +137,6 @@ public class StyleSheetRenderState implements RenderState {
 	
 	private Color iColor;
 
-	private Font iFont;
-
 	private FontMetrics iFontMetrics;
 
 	private boolean iHighlight;
@@ -367,7 +365,7 @@ public class StyleSheetRenderState implements RenderState {
 		case INITIAL:
 			return Color.BLACK;
 		default:
-			if (colorValue == null || "".equals(colorValue)) {
+			if (Strings.isBlank(colorValue)) {
 				RenderState prs = this.prevRenderState;
 				if (prs != null) {
 					c = prs.getColor();
@@ -378,7 +376,7 @@ public class StyleSheetRenderState implements RenderState {
 					return Color.BLACK;
 				}
 			} else {
-				c = colorValue == null ? null : ColorFactory.getInstance().getColor(colorValue);
+				c = ColorFactory.getInstance().getColor(colorValue);
 				this.iColor = c;
 			}
 			break;
@@ -509,13 +507,11 @@ public class StyleSheetRenderState implements RenderState {
 		case RIGHT:
 			floatValue = FLOAT_RIGHT;
 			break;
-		case NONE:
-			floatValue = FLOAT_NONE;
-			break;
 		case INHERIT:
 			floatValue = this.getPreviousRenderState().getFloat();
 			break;
 		case INITIAL:
+		case NONE:
 		default:
 			floatValue = FLOAT_NONE;
 			break;
@@ -570,16 +566,11 @@ public class StyleSheetRenderState implements RenderState {
 		AbstractCSSProperties style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
 
-		if (this.iFont != null) {
-			return this.iFont;
-		}
-
-		if (style == null) {
+		String font = style == null ? null : style.getFont();
+		if (Strings.isBlank(font)) {
 			if (prs != null) {
-				this.iFont = prs.getFont();
-				return this.iFont;
+				return prs.getFont();
 			}
-			this.iFont = DEFAULT_FONT;
 			return DEFAULT_FONT;
 		}
 
@@ -590,14 +581,12 @@ public class StyleSheetRenderState implements RenderState {
 		key.setFontVariant(style.getFontVariant());
 		key.setFontWeight(FontValues.getFontWeight(style.getFontWeight()));
 		key.setFontSize(FontValues.getFontSize(style.getFontSize(), document.getWindow(), prs));
-		key.setLocales(document == null ? null : document.getLocales());
+		key.setLocales(document.getLocales());
 		key.setSuperscript(FontValues.getFontSuperScript(style.getVerticalAlign(), prs));
 		key.setLetterSpacing(HtmlValues.getPixelSize(style.getLetterSpacing(), prs, document.getWindow(), 0));
 		key.setStrikethrough(FontValues.getFontStrikeThrough(style.getTextDecoration()));
 		key.setUnderline(FontValues.getFontUnderline(style.getTextDecoration()));
-		Font f = FONT_FACTORY.getFont(key);
-		this.iFont = f;
-		return f;
+		return FONT_FACTORY.getFont(key);
 	}
 
 	/** {@inheritDoc} */
@@ -988,15 +977,13 @@ public class StyleSheetRenderState implements RenderState {
 		case HIDDEN:
 			visibility = VISIBILITY_HIDDEN;
 			break;
-		case VISIBLE:
-			visibility = VISIBILITY_VISIBLE;
-			break;
 		case COLLAPSE:
 			visibility = VISIBILITY_COLLAPSE;
 			break;
 		case INHERIT:
 			visibility = this.getPreviousRenderState().getVisibility();
 			break;
+		case VISIBLE:
 		case INITIAL:
 		default:
 			visibility = VISIBILITY_VISIBLE;
@@ -1102,7 +1089,6 @@ public class StyleSheetRenderState implements RenderState {
 		if (map != null) {
 			map.clear();
 		}
-		this.iFont = null;
 		this.iFontMetrics = null;
 		this.iColor = null;
 		this.iTextDecoration = -1;
@@ -1257,67 +1243,63 @@ public class StyleSheetRenderState implements RenderState {
 			prevCursorOpt = this.cursor;
 		}
 
-		if (props == null) {
-			return prevCursorOpt;
-		} else {
-
+		if (props != null) {
 			String cursor = props.getPropertyValue("cursor");
 			CSSValues key = CSSValues.get(cursor);
 
 			switch (key) {
-			case AUTO:
-			case TEXT_CSS:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-				break;
-			case CROSSHAIR:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-				break;
-			case E_RESIZE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
-				break;
-			case MOVE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-				break;
-			case N_RESIZE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
-				break;
-			case NE_RESIZE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
-				break;
-			case NW_RESIZE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
-				break;
-			case GRAB:
-			case POINTER:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				break;
-			case S_RESIZE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
-				break;
-			case SE_RESIZE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
-				break;
-			case SW_RESIZE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
-				break;
-			case W_RESIZE:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
-				break;
-			case WAIT:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				break;
-			case INHERIT:
-				prevCursorOpt = this.getPreviousRenderState().getCursor();
-				break;
-			case DEFAULT:
-			case INITIAL:
-			default:
-				prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				break;
+				case AUTO:
+				case TEXT_CSS:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+					break;
+				case CROSSHAIR:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+					break;
+				case E_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
+					break;
+				case MOVE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+					break;
+				case N_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
+					break;
+				case NE_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
+					break;
+				case NW_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
+					break;
+				case GRAB:
+				case POINTER:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					break;
+				case S_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
+					break;
+				case SE_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+					break;
+				case SW_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
+					break;
+				case W_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
+					break;
+				case WAIT:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					break;
+				case INHERIT:
+					prevCursorOpt = this.getPreviousRenderState().getCursor();
+					break;
+				case DEFAULT:
+				case INITIAL:
+				default:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					break;
 			}
-
-			return prevCursorOpt;
 		}
+		return prevCursorOpt;
 	}
    
    /** {@inheritDoc} */
@@ -1498,7 +1480,6 @@ public class StyleSheetRenderState implements RenderState {
 			HTMLLinkElementImpl elm = (HTMLLinkElementImpl) element;
 			final String rel = elm.getAttribute("rel");
 			if (rel != null) {
-				final String href = elm.getHref();
 				final String cleanRel = rel.trim().toLowerCase();
 				final boolean isStyleSheet = cleanRel.equals("stylesheet");
 				final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");

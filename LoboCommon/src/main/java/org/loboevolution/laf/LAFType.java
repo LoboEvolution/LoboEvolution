@@ -25,9 +25,6 @@ import java.util.Map;
 
 /**
  * <p>LAFType class.</p>
- *
- *
- *
  */
 public enum LAFType {
 
@@ -50,6 +47,8 @@ public enum LAFType {
 	ITALIC("Italic"),
 
 	LUNA("Luna"),
+
+	MONOSPACED("Monospaced"),
 
 	MCWIN("McWin"),
 
@@ -88,16 +87,6 @@ public enum LAFType {
 	 */
 	public String getValue() {
 		return value;
-	}
-
-	/**
-	 * <p>isEqual.</p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public boolean isEqual(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

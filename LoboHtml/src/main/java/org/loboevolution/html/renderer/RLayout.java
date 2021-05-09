@@ -20,44 +20,20 @@
 
 package org.loboevolution.html.renderer;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.HtmlObject;
-import org.loboevolution.html.control.ButtonControl;
-import org.loboevolution.html.control.CanvasControl;
-import org.loboevolution.html.control.FrameControl;
-import org.loboevolution.html.control.ImgControl;
-import org.loboevolution.html.control.ImgSvgControl;
-import org.loboevolution.html.control.InputControl;
-import org.loboevolution.html.control.RImgControl;
-import org.loboevolution.html.control.RSSControl;
-import org.loboevolution.html.control.RUIControl;
-import org.loboevolution.html.control.SVGControl;
-import org.loboevolution.html.control.SelectControl;
-import org.loboevolution.html.control.TextAreaControl;
-import org.loboevolution.html.control.UIControl;
-import org.loboevolution.html.control.UIControlWrapper;
-import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
-import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.control.*;
+import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.rss.RSSElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>RLayout class.</p>
- *
- *
- *
  */
 public class RLayout {
 	
@@ -66,22 +42,44 @@ public class RLayout {
 	
 	static {
 		final Map<HTMLTag, MarkupLayout> el = elementLayout;
-		final EmLayout em = new EmLayout();
-		el.put(HTMLTag.I,em);
-		el.put(HTMLTag.EM,em);
-		el.put(HTMLTag.CITE,em);
-		el.put(HTMLTag.H1,new HLayout(24));
-		el.put(HTMLTag.H2,new HLayout(18));
-		el.put(HTMLTag.H3,new HLayout(15));
-		el.put(HTMLTag.H4,new HLayout(12));
-		el.put(HTMLTag.H5,new HLayout(10));
-		el.put(HTMLTag.H6,new HLayout(8));
-		final StrongLayout strong = new StrongLayout();
-		el.put(HTMLTag.B,strong);
-		el.put(HTMLTag.STRONG,strong);
-		el.put(HTMLTag.TH,strong);
-		el.put(HTMLTag.U,new ULayout());
-		el.put(HTMLTag.STRIKE,new StrikeLayout());
+
+		final InLineLayout inline = new InLineLayout();
+		el.put(HTMLTag.A, inline);
+		el.put(HTMLTag.ANCHOR, inline);
+		el.put(HTMLTag.B, inline);
+		el.put(HTMLTag.CITE, inline);
+		el.put(HTMLTag.CODE, inline);
+		el.put(HTMLTag.EM, inline);
+		el.put(HTMLTag.I, inline);
+		el.put(HTMLTag.KBD, inline);
+		el.put(HTMLTag.SAMP, inline);
+		el.put(HTMLTag.STRONG, inline);
+		el.put(HTMLTag.STRIKE, inline);
+		el.put(HTMLTag.SPAN, inline);
+		el.put(HTMLTag.TH, inline);
+		el.put(HTMLTag.U, inline);
+		el.put(HTMLTag.VAR, inline);
+
+		final BlockLayout block = new BlockLayout();
+		el.put(HTMLTag.ARTICLE, block);
+		el.put(HTMLTag.BODY, block);
+		el.put(HTMLTag.BLOCKQUOTE, block);
+		el.put(HTMLTag.CAPTION, block);
+		el.put(HTMLTag.CENTER, block);
+		el.put(HTMLTag.DD, block);
+		el.put(HTMLTag.DIV, block);
+		el.put(HTMLTag.DL, block);
+		el.put(HTMLTag.DT, block);
+		el.put(HTMLTag.H1, block);
+		el.put(HTMLTag.H2, block);
+		el.put(HTMLTag.H3, block);
+		el.put(HTMLTag.H4, block);
+		el.put(HTMLTag.H5, block);
+		el.put(HTMLTag.H6, block);
+		el.put(HTMLTag.HTML, block);
+		el.put(HTMLTag.MAIN, block);
+		el.put(HTMLTag.PRE, block);
+
 		el.put(HTMLTag.BR,new BrLayout());
 		el.put(HTMLTag.P,new PLayout());
 		el.put(HTMLTag.NOSCRIPT,new NoScriptLayout());
@@ -96,9 +94,6 @@ public class RLayout {
 		el.put(HTMLTag.TABLE,new TableLayout());
 		el.put(HTMLTag.TR, new TableRowLayout());
 		el.put(HTMLTag.TD, new TableCellLayout());
-		final AnchorLayout anchor = new AnchorLayout();
-		el.put(HTMLTag.A,anchor);
-		el.put(HTMLTag.ANCHOR,anchor);
 		el.put(HTMLTag.INPUT,new InputLayout());
 		el.put(HTMLTag.TEXTAREA,new TextAreaLayout());
 		el.put(HTMLTag.SELECT,new SelectLayout());
@@ -107,21 +102,8 @@ public class RLayout {
 		el.put(HTMLTag.UL,list);
 		el.put(HTMLTag.OL,list);
 		el.put(HTMLTag.LI,list);
-		final CommonBlockLayout cbl = new CommonBlockLayout();
-		el.put(HTMLTag.PRE,cbl);
-		el.put(HTMLTag.CENTER,cbl);
-		el.put(HTMLTag.CAPTION,cbl);
-		final DivLayout div = new DivLayout();
-		el.put(HTMLTag.DIV,div);
-		el.put(HTMLTag.BODY,div);
-		el.put(HTMLTag.DL,div);
-		el.put(HTMLTag.DT,div);
-		el.put(HTMLTag.HTML,div);
-		final BlockQuoteLayout bq = new BlockQuoteLayout();
-		el.put(HTMLTag.BLOCKQUOTE,bq);
-		el.put(HTMLTag.DD,bq);
 		el.put(HTMLTag.HR,new HrLayout());
-		el.put(HTMLTag.SPAN,new SpanLayout());
+
 		final ObjectLayout ol = new ObjectLayout(false);
 		el.put(HTMLTag.OBJECT,new ObjectLayout(true));
 		el.put(HTMLTag.APPLET,ol);
@@ -131,15 +113,15 @@ public class RLayout {
 		el.put(HTMLTag.IFRAME,new IFrameLayout());
 		el.put(HTMLTag.RSS,new RSSLayout());
 	}
-	
-	protected static class AnchorLayout extends CommonLayout {
-		public AnchorLayout() {
+
+	protected static class InLineLayout extends CommonLayout {
+		public InLineLayout() {
 			super(RenderState.DISPLAY_INLINE);
 		}
 	}
 
-	protected static class BlockQuoteLayout extends CommonLayout {
-		public BlockQuoteLayout() {
+	protected static class BlockLayout extends CommonLayout {
+		public BlockLayout() {
 			super(RenderState.DISPLAY_BLOCK);
 		}
 	}
@@ -150,12 +132,6 @@ public class RLayout {
 		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			final String clear = markupElement.getAttribute("clear");
 			bodyLayout.addLineBreak(markupElement, LineBreak.getBreakType(clear));
-		}
-	}
-
-	protected static class CommonBlockLayout extends CommonLayout {
-		public CommonBlockLayout() {
-			super(RenderState.DISPLAY_BLOCK);
 		}
 	}
 
@@ -252,7 +228,7 @@ public class RLayout {
 	    @Override
 	    public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 	        final UINode node = markupElement.getUINode();
-	        RElement renderable = null;
+	        RElement renderable;
 	        if (node == null) {
 	            renderable = createRenderable(bodyLayout, markupElement);
 	            if (renderable == null) {
@@ -289,8 +265,7 @@ public class RLayout {
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 	}
-	
-	
+
 	protected static class SVGLayout extends CommonWidgetLayout {
 		public SVGLayout() {
 			super(ADD_AS_BLOCK);
@@ -316,36 +291,6 @@ public class RLayout {
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 	}
-	
-	
-	protected static class DivLayout extends CommonLayout {
-		public DivLayout() {
-			super(RenderState.DISPLAY_BLOCK);
-		}
-	}
-
-	protected static class EmLayout extends CommonLayout {
-		public EmLayout() {
-			super(RenderState.DISPLAY_INLINE);
-		}
-
-
-		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			super.layoutMarkup(bodyLayout, markupElement);
-		}
-	}
-
-	protected static class HLayout extends CommonLayout {
-		public HLayout(int fontSize) {
-			super(RenderState.DISPLAY_BLOCK);
-		}
-
-		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			super.layoutMarkup(bodyLayout, markupElement);
-		}
-	}
 
 	protected static class HrLayout implements MarkupLayout {
 
@@ -362,7 +307,7 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = null;
+			UIControl control;
 			HTMLImageElementImpl image = (HTMLImageElementImpl) markupElement;
 			if(image.getSrc() != null && image.getSrc().endsWith(".svg")) {
 				control = new ImgSvgControl(image);
@@ -437,8 +382,7 @@ public class RLayout {
 		private final boolean tryToRenderContent;
 
 		/**
-		 * @param tryToRenderContent If the object is unknown, content is rendered as
-		 *                           HTML.
+		 * @param tryToRenderContent If the object is unknown, content is rendered as  HTML.
 		 */
 		public ObjectLayout(boolean tryToRenderContent) {
 			super(ADD_INLINE);
@@ -449,9 +393,7 @@ public class RLayout {
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			final HtmlObject ho = this.htmlObject.get();
 			final UIControl uiControl = new UIControlWrapper(ho);
-			final RUIControl ruiControl = new RUIControl(markupElement, uiControl, bodyLayout.container,
-					bodyLayout.frameContext, bodyLayout.userAgentContext);
-			return ruiControl;
+			return new RUIControl(markupElement, uiControl, bodyLayout.container, bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 
 		@Override
@@ -488,24 +430,6 @@ public class RLayout {
 			UIControl control = new SelectControl((HTMLSelectElementImpl) markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
-		}
-	}
-
-	protected static class SpanLayout extends CommonLayout {
-		public SpanLayout() {
-			super(RenderState.DISPLAY_INLINE);
-		}
-	}
-
-	protected static class StrikeLayout extends CommonLayout {
-		public StrikeLayout() {
-			super(RenderState.DISPLAY_INLINE);
-		}
-	}
-
-	protected static class StrongLayout extends CommonLayout {
-		public StrongLayout() {
-			super(RenderState.DISPLAY_INLINE);
 		}
 	}
 
@@ -550,17 +474,6 @@ public class RLayout {
 			UIControl control = new ButtonControl((HTMLButtonElementImpl) markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
-		}
-	}
-
-	protected static class ULayout extends CommonLayout {
-		public ULayout() {
-			super(RenderState.DISPLAY_INLINE);
-		}
-
-		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			super.layoutMarkup(bodyLayout, markupElement);
 		}
 	}
 }

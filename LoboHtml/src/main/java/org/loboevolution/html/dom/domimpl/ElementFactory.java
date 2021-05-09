@@ -44,8 +44,11 @@ class ElementFactory {
         builders.put(HTMLTag.HEAD, new HTMLElementBuilder.Head());
 
 		final HTMLElementBuilder div = new HTMLElementBuilder.Div();
+		builders.put(HTMLTag.ARTICLE, div);
 		builders.put(HTMLTag.DIV, div);
 		builders.put(HTMLTag.DL, div);
+		builders.put(HTMLTag.DT, div);
+		builders.put(HTMLTag.MAIN, div);
 
 		builders.put(HTMLTag.BODY, new HTMLElementBuilder.Body());
 		builders.put(HTMLTag.CENTER, new HTMLElementBuilder.Center());
@@ -88,7 +91,6 @@ class ElementFactory {
 		builders.put(HTMLTag.EMBED, new HTMLElementBuilder.NonStandard());
 
 		builders.put(HTMLTag.TT, new HTMLElementBuilder.Tt());
-		builders.put(HTMLTag.CODE, new HTMLElementBuilder.Code());
 		builders.put(HTMLTag.SMALL, new HTMLElementBuilder.Small());
 		builders.put(HTMLTag.B, new HTMLElementBuilder.Strong());
 		builders.put(HTMLTag.STRONG, new HTMLElementBuilder.Strong());
@@ -98,10 +100,16 @@ class ElementFactory {
 		builders.put(HTMLTag.SUP, new HTMLElementBuilder.Sup());
 		builders.put(HTMLTag.SUB, new HTMLElementBuilder.Sub());
 
+		final HTMLElementBuilder code = new HTMLElementBuilder.Code();
+		builders.put(HTMLTag.CODE, code);
+		builders.put(HTMLTag.SAMP, code);
+		builders.put(HTMLTag.KBD, code);
+
 		final HTMLElementBuilder em = new HTMLElementBuilder.Em();
 		builders.put(HTMLTag.I, em);
 		builders.put(HTMLTag.EM, em);
 		builders.put(HTMLTag.CITE, em);
+		builders.put(HTMLTag.VAR, em);
 
 		final HTMLElementBuilder heading = new HTMLElementBuilder.Heading();
 		builders.put(HTMLTag.H1, heading);

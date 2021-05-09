@@ -21,12 +21,10 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.renderstate.FontStyleRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.laf.LAFType;
 
 /**
- * Element used for I, EM and CITE.
- *
- *
- *
+ * Element used for I, EM, CITE, VAR.
  */
 public class HTMLEmElementImpl extends HTMLElementImpl {
 	/**
@@ -41,7 +39,8 @@ public class HTMLEmElementImpl extends HTMLElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.ITALIC);
+		prevRenderState = new FontStyleRenderState(prevRenderState, LAFType.ITALIC);
+
 		return super.createRenderState(prevRenderState);
 	}
 	

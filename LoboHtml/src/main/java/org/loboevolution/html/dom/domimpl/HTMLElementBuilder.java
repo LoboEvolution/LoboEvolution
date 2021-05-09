@@ -52,9 +52,6 @@ import org.loboevolution.html.dom.svgimpl.SVGUseElementImpl;
 
 /**
  * <p>Abstract HTMLElementBuilder class.</p>
- *
- *
- *
  */
 public abstract class HTMLElementBuilder {
 
@@ -153,13 +150,6 @@ public abstract class HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
 			return new HTMLFormElementImpl(name);
-		}
-	}
-
-	public static class GenericMarkup extends HTMLElementBuilder {
-		@Override
-		public HTMLElementImpl build(String name) {
-			return new HTMLGenericMarkupElement(name);
 		}
 	}
 

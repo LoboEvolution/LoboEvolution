@@ -26,9 +26,6 @@ import java.util.Map;
 
 /**
  * <p>HTMLTag class.</p>
- *
- *
- *
  */
 public enum HTMLTag {
 	
@@ -37,6 +34,7 @@ public enum HTMLTag {
 	ANIMATE("ANIMATE"),
 	ANIMATE_TRASFORM("ANIMATETRANSFORM"),
 	APPLET("APPLET"),
+	ARTICLE("ARTICLE"),
 	B("B"),
 	BASE("BASE"),
 	BLOCKQUOTE("BLOCKQUOTE"),
@@ -82,6 +80,7 @@ public enum HTMLTag {
 	LINE("LINE"),
 	LINEAR_GRADIENT("LINEARGRADIENT"),
 	LINK("LINK"),
+	MAIN("MAIN"),
 	META("META"),
 	NOSCRIPT("NOSCRIPT"),
 	OBJECT("OBJECT"),
@@ -95,6 +94,7 @@ public enum HTMLTag {
 	RADIAL_GRADIENT("RADIALGRADIENT"),
 	RECT("RECT"),
 	RSS("RSS"),
+	SAMP("SAMP"),
 	SCRIPT("SCRIPT"),
 	SELECT("SELECT"),
 	SMALL("SMALL"),
@@ -121,7 +121,9 @@ public enum HTMLTag {
 	TT("TT"),
 	U("U"),
 	UL("UL"),
-	USE("USE");
+	USE("USE"),
+	KBD("KBD"),
+	VAR("VAR");
 	
 	private final String value;
 	private static final Map<String, HTMLTag> ENUM_MAP;

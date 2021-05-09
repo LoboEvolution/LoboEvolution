@@ -22,22 +22,12 @@
  */
 package org.loboevolution.laf;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.font.TextAttribute;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
+import org.loboevolution.common.Strings;
 
 import javax.swing.text.StyleContext;
-
-import org.loboevolution.common.Strings;
+import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.util.*;
 
 /**
  * A factory for creating Font objects.
@@ -46,10 +36,6 @@ import org.loboevolution.common.Strings;
  *
  */
 public class FontFactory {
-	
-	
-	/** The default font name. */
-	private String defaultFontName = new LAFSettings().getInstance().getFont();
 
 	/** The font families. */
 	private final Set<String> fontFamilies = new HashSet<>();
@@ -79,7 +65,7 @@ public class FontFactory {
 	 * @return the font
 	 * @param key a {@link org.loboevolution.laf.FontKey} object.
 	 */
-	public static Font scriptFont(Font baseFont, FontKey key) {
+	public Font scriptFont(Font baseFont, FontKey key) {
 
 		final Map<TextAttribute, Object> additionalAttributes = new HashMap<>();
 
@@ -101,6 +87,11 @@ public class FontFactory {
 		}
 		additionalAttributes.put(TextAttribute.STRIKETHROUGH, fontStrikethrough);
 
+		Float bold = (Float) baseFont.getAttributes().get(TextAttribute.WEIGHT_BOLD);
+		if (bold == null && Strings.isNotBlank(key.getFontWeight())) {
+			bold = TextAttribute.WEIGHT_BOLD;
+		}
+		additionalAttributes.put(TextAttribute.WEIGHT, bold);
 		return baseFont.deriveFont(additionalAttributes);
 	}
 
@@ -208,16 +199,8 @@ public class FontFactory {
 			// Otherwise, fall through.
 		}
 		// Last resort:
-		return createFont(this.defaultFontName, fontStyle, Math.round(key.getFontSize())).deriveFont(attributes);
-	}
-
-	/**
-	 * Gets the default font name.
-	 *
-	 * @return the default font name
-	 */
-	public String getDefaultFontName() {
-		return this.defaultFontName;
+		String defaultFontName = new LAFSettings().getInstance().getFont();
+		return createFont(defaultFontName, fontStyle, Math.round(key.getFontSize())).deriveFont(attributes);
 	}
 
 	/**
@@ -234,50 +217,6 @@ public class FontFactory {
 				this.fontMap.put(key, font);
 			}
 			return font;
-		}
-	}
-
-	/**
-	 * Registers a font family. It does not close the stream provided. Fonts should
-	 * be registered before the renderer has a chance to cache document font
-	 * specifications.
-	 *
-	 * @param fontName   The name of a font as it would appear in a font-family
-	 *                   specification.
-	 * @param fontFormat Should be {@link java.awt.Font#TRUETYPE_FONT}.
-	 * @param fontStream the font stream
-	 * @throws java.awt.FontFormatException if any.
-	 * @throws java.io.IOException if any.
-	 */
-	public void registerFont(String fontName, int fontFormat, InputStream fontStream)
-			throws FontFormatException, IOException {
-		final Font f = Font.createFont(fontFormat, fontStream);
-		synchronized (this) {
-			this.registeredFonts.put(fontName.toLowerCase(), f);
-		}
-	}
-
-	/**
-	 * Sets the default font name.
-	 *
-	 * @param defaultFontName the new default font name
-	 */
-	public void setDefaultFontName(String defaultFontName) {
-		if (defaultFontName == null) {
-			throw new IllegalArgumentException("defaultFontName cannot be null");
-		}
-		this.defaultFontName = defaultFontName;
-	}
-
-	/**
-	 * Unregisters a font previously registered with
-	 * {@link #registerFont(String, int, java.io.InputStream)}.
-	 *
-	 * @param fontName The font name to be removed.
-	 */
-	public void unregisterFont(String fontName) {
-		synchronized (this) {
-			this.registeredFonts.remove(fontName.toLowerCase());
 		}
 	}
 }

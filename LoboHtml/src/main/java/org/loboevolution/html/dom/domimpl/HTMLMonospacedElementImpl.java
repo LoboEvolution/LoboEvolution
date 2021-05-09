@@ -19,14 +19,12 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.renderstate.FontNameRenderState;
+import org.loboevolution.html.renderstate.FontStyleRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.laf.LAFType;
 
 /**
  * Element used for TT and CODE.
- *
- *
- *
  */
 public class HTMLMonospacedElementImpl extends HTMLElementImpl {
 	/**
@@ -41,7 +39,7 @@ public class HTMLMonospacedElementImpl extends HTMLElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-        prevRenderState = new FontNameRenderState(prevRenderState, this, "Monospaced");
+        prevRenderState = new FontStyleRenderState(prevRenderState, LAFType.MONOSPACED);
         return super.createRenderState(prevRenderState);
 	}
 	

@@ -21,12 +21,10 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.renderstate.FontStyleRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.laf.LAFType;
 
 /**
  * Element used for TH.
- *
- *
- *
  */
 public class HTMLTableHeadElementImpl extends HTMLTableCellElementImpl {
 	/**
@@ -41,7 +39,7 @@ public class HTMLTableHeadElementImpl extends HTMLTableCellElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.BOLD);
+		prevRenderState = new FontStyleRenderState(prevRenderState, LAFType.BOLD);
 		return super.createRenderState(prevRenderState);
 	}
 	
