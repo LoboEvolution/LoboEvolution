@@ -37,12 +37,9 @@ import org.mozilla.javascript.Function;
 
 /**
  * <p>HTMLImageElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageElement {
-	
+
 	/**
 	 * <p>Constructor for HTMLImageElementImpl.</p>
 	 */
@@ -99,8 +96,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	/** {@inheritDoc} */
 	@Override
 	public double getHeight() {
-		final UINode r = this.uiNode;
-		return r == null ? 0 : r.getBounds().height;
+		return getAttributeAsInt("height", -1);
 	}
 
 	/** {@inheritDoc} */
@@ -162,8 +158,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	/** {@inheritDoc} */
 	@Override
 	public double getWidth() {
-		final UINode r = this.uiNode;
-		return r == null ? 0 : r.getBounds().width;
+		return getAttributeAsInt("width", -1);
 	}
 
 	/** {@inheritDoc} */
@@ -255,7 +250,6 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	public void setWidth(double width) {
 		setAttribute("width", String.valueOf(width));
 	}
-	
 
 	/** {@inheritDoc} */
 	@Override
@@ -310,7 +304,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	@Override
 	public void setLowsrc(String lowsrc) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -407,9 +401,10 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 		}
 		
 		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, uri);
-		if(getWidth() > 0 && getHeight() > 0) {
-			hpanel.setPreferredSize(new Dimension((int)getWidth(), (int)getHeight()));
-		}
+		final Dimension dim = hpanel.getPreferredSize();
+		final double height = getHeight() == -1 ? dim.getHeight() : getHeight();
+		final double width = getWidth() == -1 ? dim.getWidth() : getWidth();
+		hpanel.setPreferredSize(new Dimension((int)width, (int)height));
 		imgSvgControl.add(hpanel);
 	}
 	
