@@ -814,7 +814,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param point a {@link java.awt.Point} object.
 	 * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
 	 */
-	public BoundableRenderable getRenderable(java.awt.Point point) {
+	public BoundableRenderable getRenderable(Point point) {
 		return this.getRenderable(point.x, point.y);
 	}
 
