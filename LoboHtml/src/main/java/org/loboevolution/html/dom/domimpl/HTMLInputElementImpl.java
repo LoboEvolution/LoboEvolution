@@ -27,34 +27,13 @@ import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLInputElement;
-import org.loboevolution.html.dom.input.FormInput;
-import org.loboevolution.html.dom.input.InputButton;
-import org.loboevolution.html.dom.input.InputCheckbox;
-import org.loboevolution.html.dom.input.InputColorPicker;
-import org.loboevolution.html.dom.input.InputDataTime;
-import org.loboevolution.html.dom.input.InputFile;
-import org.loboevolution.html.dom.input.InputHidden;
-import org.loboevolution.html.dom.input.InputImage;
-import org.loboevolution.html.dom.input.InputNumber;
-import org.loboevolution.html.dom.input.InputPassword;
-import org.loboevolution.html.dom.input.InputRadio;
-import org.loboevolution.html.dom.input.InputRange;
-import org.loboevolution.html.dom.input.InputText;
-import org.loboevolution.html.js.Executor;
-import org.mozilla.javascript.Function;
-import org.loboevolution.html.node.Element;
+import org.loboevolution.html.dom.input.*;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.ValidityState;
-import org.loboevolution.jsenum.Direction;
 
 /**
  * <p>HTMLInputElementImpl class.</p>
- *
- *
- *
  */
-public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputElement {
+public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLInputElement {
 	
 	private InputText text;
 	
@@ -67,13 +46,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 	private InputPassword password;
 	
 	private InputColorPicker color;
-	
-	private int selectionStart = 0;
-	
-	private int selectionEnd = 0;
-	
-	private boolean focusable = false;
-
 	
 	/**
 	 * <p>Constructor for HTMLInputElementImpl.</p>
@@ -105,13 +77,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isDisabled() {
-		final String disabled = getAttribute("disabled");
-		return disabled != null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public HTMLFormElement getForm() {
 		Node parent = getParentNode();
 		while (parent != null && !(parent instanceof HTMLFormElement)) {
@@ -122,34 +87,16 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
 	/** {@inheritDoc} */
 	@Override
-	public double getMaxLength() {
-		try {
-			final String maxLength = getAttribute("maxLength");
-			return Integer.parseInt(maxLength.trim());
-		} catch (Exception e) {
-			return Integer.MAX_VALUE;
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getName() {
 		return getAttribute("name");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isReadOnly() {
-		final String readonly = getAttribute("readonly");
-		return readonly != null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public int getSize() {
 		try {
-			final String maxLength = getAttribute("size");
-			return Integer.parseInt(maxLength.trim());
+			final String size = getAttribute("size");
+			return Integer.parseInt(size.trim());
 		} catch (Exception e) {
 			return 20;
 		}
@@ -175,86 +122,28 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 		return val == null ? "" : val;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public boolean getAutocomplete() {
-		String autocomplete = this.getAttribute("autocomplete");
-		return "on".equalsIgnoreCase(autocomplete);
-	}
 
-	/**
-	 * <p>getPlaceholder.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getPlaceholder() {
-		return this.getAttribute("placeholder");
-	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void select() {
 		if(text!= null) text.selectAll();
 	}
-	
-	/** {@inheritDoc} */
-	@Override
-	public void click() {
-		Function onclick = getOnclick();		
-		if(onclick!= null) {
-			Executor.executeFunction(this, onclick, null, new Object[] {});
-		}
-	}
-	
+
 	/**
 	 * <p>blur.</p>
 	 */
 	public void blur() {
-		if(text!= null) text.blur();
-		if(text!= null) {text.blur();} else {focusable = true;}
+		if(text!= null) {text.blur();} else {setFocusable(false);}
 	}
 	
 	/**
 	 * <p>focus.</p>
 	 */
 	public void focus() {
-		if(text!= null) {text.focus();} else {focusable = true;}
+		if(text!= null) {text.focus();} else {setFocusable(true);}
 	}
-	
-    /** {@inheritDoc} */
-	@Override
-    public int getSelectionStart() {
-		final int textLenght = getTextLength();
-        return (selectionStart > textLenght || selectionStart < 0) ? textLenght : selectionStart;
-    }
 
-    /** {@inheritDoc} */
-	@Override
-    public void setSelectionStart(int start) {
-       this.selectionStart = start;
-    }
-	
-    /** {@inheritDoc} */
-	@Override
-    public int getSelectionEnd() {
-		final int textLenght = getTextLength();
-        return (selectionEnd > textLenght || selectionEnd < 0) ? textLenght : selectionEnd;
-    }
-
-    /** {@inheritDoc} */
-	@Override
-    public void setSelectionEnd(int end) {
-        this.selectionEnd = end;
-    }
-
-    /** {@inheritDoc} */
-	@Override
-    public void setSelectionRange(int start, int end) {
-        setSelectionStart(start);
-        setSelectionEnd(end);
-    }
-	
-		
 	/** {@inheritDoc} */
 	@Override
 	public void setRangeText(String select, int start, int end, String preserve) {
@@ -265,12 +154,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 	@Override
 	public void setAccept(String accept) {
 		setAttribute("accept", accept);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAccessKey(String accessKey) {
-		setAttribute("accessKey", accessKey);
 	}
 
 	/** {@inheritDoc} */
@@ -287,26 +170,8 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDisabled(boolean disabled) {
-		setAttribute("disabled", String.valueOf(disabled));
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setMaxLength(double maxLength) {
-		setAttribute("maxLength", String.valueOf(maxLength));
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public void setName(String name) {
 		setAttribute("name", name);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setReadOnly(boolean readOnly) {
-		setAttribute("readonly", String.valueOf(readOnly));
 	}
 
 	/** {@inheritDoc} */
@@ -330,30 +195,9 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 	/** {@inheritDoc} */
 	@Override
 	public void setValue(String value) {
-		if(text!= null) text.setText(value);
 		setAttribute("value", value);
 		setSelectionStart(Strings.isBlank(value) ? 0 : value.length());
         setSelectionEnd(Strings.isBlank(value) ? 0 : value.length());
-	}
-		
-	/**
-	 * <p>getTextLength.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getTextLength() {
-		return getValue().length();
-	}
-	
-	
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>setPlaceholder.</p>
-	 */
-	public void setPlaceholder(String placeholder) {
-		this.setAttribute("placeholder", placeholder);
-
 	}
 
 	/**
@@ -369,9 +213,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 		}
 
 		switch (type.toLowerCase()) {
-		case "text":
-			text = new InputText(this, ic);
-			break;
 		case "hidden":
 			new InputHidden(this, ic);
 			break;
@@ -410,6 +251,7 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 		case "time":
 			new InputDataTime(this, ic);
 			break;
+		case "text":
 		default:
 			text = new InputText(this, ic);
 			break;
@@ -483,142 +325,17 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 		if(number != null) number.reset();
 		if(password != null) password.reset();
 	}
-	
-	/**
-	 * <p>isFocusable.</p>
-	 *
-	 * @return the focusable
-	 */
-	public boolean isFocusable() {
-		return focusable;
-	}
-
-	/**
-	 * <p>Setter for the field <code>focusable</code>.</p>
-	 *
-	 * @param focusable the focusable to set
-	 */
-	public void setFocusable(boolean focusable) {
-		this.focusable = focusable;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAccessKeyLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getAutocapitalize() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Element getOffsetParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isSpellcheck() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isDraggable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isHidden() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isTranslate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutocapitalize(String autocapitalize) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setDraggable(boolean draggable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSpellcheck(boolean spellcheck) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setTranslate(boolean translate) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getAlign() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("align");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setAlign(String align) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutocomplete(String autocomplete) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isAutofocus() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutofocus(boolean autofocus) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("align", align);
 	}
 
 	/** {@inheritDoc} */
@@ -631,34 +348,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 	/** {@inheritDoc} */
 	@Override
 	public void setDefaultChecked(boolean defaultChecked) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getDefaultValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setDefaultValue(String defaultValue) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getDirName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setDirName(String dirName) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -760,14 +449,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 		// TODO Auto-generated method stub
 		
 	}
-
-	/** {@inheritDoc} */
-	@Override
-	public NodeList getLabels() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public HTMLElement getList() {
@@ -806,20 +487,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
 	/** {@inheritDoc} */
 	@Override
-	public double getMinLength() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setMinLength(double minLength) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public boolean isMultiple() {
 		// TODO Auto-generated method stub
 		return false;
@@ -842,34 +509,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 	/** {@inheritDoc} */
 	@Override
 	public void setPattern(String pattern) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isRequired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setRequired(boolean required) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getSelectionDirection() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSelectionDirection(String selectionDirection) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -904,20 +543,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
 	/** {@inheritDoc} */
 	@Override
-	public String getValidationMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public ValidityState getValidity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public double getValueAsNumber() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -940,55 +565,6 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 	/** {@inheritDoc} */
 	@Override
 	public void setWidth(double width) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isWillValidate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean checkValidity() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean reportValidity() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setCustomValidity(String error) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setRangeText(String replacement) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setRangeText(String replacement, int start, int end) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSelectionRange(int start, int end, Direction direction) {
 		// TODO Auto-generated method stub
 		
 	}

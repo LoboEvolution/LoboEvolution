@@ -34,9 +34,6 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
 /**
  * <p>InputNumber class.</p>
- *
- *
- *
  */
 public class InputNumber extends InputText {
 

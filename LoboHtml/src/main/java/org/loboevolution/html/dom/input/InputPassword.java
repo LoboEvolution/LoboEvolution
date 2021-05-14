@@ -21,8 +21,6 @@
 package org.loboevolution.html.dom.input;
 
 import java.awt.Dimension;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -43,11 +41,8 @@ import org.loboevolution.store.InputStore;
 
 /**
  * <p>InputPassword class.</p>
- *
- *
- *
  */
-public class InputPassword {
+public class InputPassword extends BasicInput {
 	
 	private final HTMLInputElementImpl modelNode;
 	
@@ -61,6 +56,8 @@ public class InputPassword {
 	 */
 	public InputPassword(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
+		setElement(this.modelNode);
+		setjComponent(pwd);
 		final String type = modelNode.getType();
 		
 		if (modelNode.getTitle() != null)
@@ -81,17 +78,11 @@ public class InputPassword {
 
 		List<String> list = suggestionList(type, "", baseUrl);
 		Autocomplete.setupAutoComplete(pwd, list);
-		
-		pwd.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent event) {
-				final boolean isNavigation = modelNode.getUserAgentContext().isNavigationEnabled();
-				final String password = String.valueOf(pwd.getPassword());
-				InputStore.deleteInput(password, baseUrl);
-				InputStore.insertLogin(type, password, baseUrl, isNavigation);
-			}
-		});
-		
+
+		pwd.addFocusListener(this);
+		pwd.addKeyListener(this);
+		pwd.addCaretListener(this);
+		pwd.addMouseListener(this);
 		ic.add(pwd);
 	}
 	

@@ -26,21 +26,17 @@ import org.loboevolution.html.node.ValidityState;
 import org.loboevolution.jsenum.Direction;
 
 /**
- * Provides special properties and methods for manipulating the layout and presentation of &lt;textarea&gt; elements.
- *
- *
- *
+ * Provides special properties and methods for manipulating the layout and presentation of textarea elements.
  */
 public interface HTMLTextAreaElement extends HTMLElement {
 
     /**
      * <p>getAutocomplete.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return a {@link java.lang.Boolean} object.
      */
-    String getAutocomplete();
+    boolean isAutocomplete();
 
-    
     /**
      * <p>setAutocomplete.</p>
      *
@@ -55,7 +51,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     boolean isAutofocus();
 
-    
+
     /**
      * <p>setAutofocus.</p>
      *
@@ -70,7 +66,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     int getCols();
 
-    
+
     /**
      * <p>setCols.</p>
      *
@@ -85,7 +81,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     String getDefaultValue();
 
-    
+
     /**
      * <p>setDefaultValue.</p>
      *
@@ -93,7 +89,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     void setDefaultValue(String defaultValue);
 
-    
+
     /**
      * <p>getDirName.</p>
      *
@@ -101,7 +97,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     String getDirName();
 
-    
+
     /**
      * <p>setDirName.</p>
      *
@@ -109,7 +105,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     void setDirName(String dirName);
 
-    
+
     /**
      * <p>isDisabled.</p>
      *
@@ -117,7 +113,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     boolean isDisabled();
 
-    
+
     /**
      * <p>setDisabled.</p>
      *
@@ -132,7 +128,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     HTMLFormElement getForm();
 
-    
+
     /**
      * <p>getLabels.</p>
      *
@@ -147,7 +143,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     int getMaxLength();
 
-    
+
     /**
      * <p>setMaxLength.</p>
      *
@@ -155,7 +151,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     void setMaxLength(int maxLength);
 
-    
+
     /**
      * <p>getMinLength.</p>
      *
@@ -163,7 +159,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     int getMinLength();
 
-    
+
     /**
      * <p>setMinLength.</p>
      *
@@ -178,7 +174,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     String getName();
 
-    
+
     /**
      * <p>setName.</p>
      *
@@ -193,7 +189,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     String getPlaceholder();
 
-    
+
     /**
      * <p>setPlaceholder.</p>
      *
@@ -208,7 +204,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     boolean isReadOnly();
 
-    
+
     /**
      * <p>setReadOnly.</p>
      *
@@ -223,7 +219,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     boolean isRequired();
 
-    
+
     /**
      * <p>setRequired.</p>
      *
@@ -238,7 +234,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     int getRows();
 
-    
+
     /**
      * <p>setRows.</p>
      *
@@ -246,7 +242,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     void setRows(int rows);
 
-    
+
     /**
      * <p>getSelectionDirection.</p>
      *
@@ -254,7 +250,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     String getSelectionDirection();
 
-    
+
     /**
      * <p>setSelectionDirection.</p>
      *
@@ -269,7 +265,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     int getSelectionEnd();
 
-    
+
     /**
      * <p>setSelectionEnd.</p>
      *
@@ -284,7 +280,6 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     int getSelectionStart();
 
-    
     /**
      * <p>setSelectionStart.</p>
      *
@@ -292,7 +287,6 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     void setSelectionStart(int selectionStart);
 
-    
     /**
      * <p>getTextLength.</p>
      *
@@ -300,12 +294,6 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     int getTextLength();
 
-    /**
-     * Retrieves the type of control.
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    String getType();
 
     /**
      * Returns the error message that would be displayed if the user submits the form, or an empty string if no error message. It also triggers the standard error message, such as "this is a required field". The result is that the user sees validation messages without actually submitting.
@@ -328,7 +316,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     String getValue();
 
-    
+
     /**
      * <p>setValue.</p>
      *
@@ -350,7 +338,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      */
     String getWrap();
 
-    
+
     /**
      * <p>setWrap.</p>
      *
@@ -395,8 +383,8 @@ public interface HTMLTextAreaElement extends HTMLElement {
      * <p>setRangeText.</p>
      *
      * @param replacement a {@link java.lang.String} object.
-     * @param start a int.
-     * @param end a int.
+     * @param start       a int.
+     * @param end         a int.
      */
     void setRangeText(String replacement, int start, int end);
 
@@ -413,7 +401,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
      * <p>setSelectionRange.</p>
      *
      * @param start a int.
-     * @param end a int.
+     * @param end   a int.
      */
     void setSelectionRange(int start, int end);
 

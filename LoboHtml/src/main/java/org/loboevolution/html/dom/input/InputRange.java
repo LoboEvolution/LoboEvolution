@@ -31,9 +31,6 @@ import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>InputRange class.</p>
- *
- *
- *
  */
 public class InputRange {
 

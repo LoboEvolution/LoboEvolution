@@ -27,9 +27,6 @@ import org.loboevolution.jsenum.Direction;
 
 /**
  * Provides special properties and methods for manipulating the options, layout, and presentation of &lt;input&gt; elements.
- *
- *
- *
  */
 public interface HTMLInputElement extends HTMLElement {
 
@@ -39,7 +36,7 @@ public interface HTMLInputElement extends HTMLElement {
      * @return a {@link java.lang.String} object.
      */
     String getAccept();
-    
+
     /**
      * <p>setAccept.</p>
      *
@@ -70,7 +67,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getAlt();
 
-    
+
     /**
      * <p>setAlt.</p>
      *
@@ -83,9 +80,8 @@ public interface HTMLInputElement extends HTMLElement {
      *
      * @return a boolean.
      */
-    boolean getAutocomplete();
+    boolean isAutocomplete();
 
-    
     /**
      * <p>setAutocomplete.</p>
      *
@@ -100,7 +96,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isAutofocus();
 
-    
+
     /**
      * <p>setAutofocus.</p>
      *
@@ -115,7 +111,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isChecked();
 
-    
+
     /**
      * <p>setChecked.</p>
      *
@@ -130,7 +126,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isDefaultChecked();
 
-    
+
     /**
      * <p>setDefaultChecked.</p>
      *
@@ -145,7 +141,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getDefaultValue();
 
-    
+
     /**
      * <p>setDefaultValue.</p>
      *
@@ -153,7 +149,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     void setDefaultValue(String defaultValue);
 
-    
+
     /**
      * <p>getDirName.</p>
      *
@@ -161,7 +157,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getDirName();
 
-    
+
     /**
      * <p>setDirName.</p>
      *
@@ -169,7 +165,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     void setDirName(String dirName);
 
-    
+
     /**
      * <p>isDisabled.</p>
      *
@@ -177,7 +173,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isDisabled();
 
-    
+
     /**
      * <p>setDisabled.</p>
      *
@@ -186,12 +182,12 @@ public interface HTMLInputElement extends HTMLElement {
     void setDisabled(boolean disabled);
 
 
-        /**
-         * Retrieves a reference to the form that the object is embedded in.
-         *
-         * @return a {@link org.loboevolution.html.dom.HTMLFormElement} object.
-         */
-        HTMLFormElement getForm();
+    /**
+     * Retrieves a reference to the form that the object is embedded in.
+     *
+     * @return a {@link org.loboevolution.html.dom.HTMLFormElement} object.
+     */
+    HTMLFormElement getForm();
 
     /**
      * Overrides the action attribute (where the data on a form is sent) on the parent form element.
@@ -200,7 +196,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getFormAction();
 
-    
+
     /**
      * <p>setFormAction.</p>
      *
@@ -215,7 +211,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getFormEnctype();
 
-    
+
     /**
      * <p>setFormEnctype.</p>
      *
@@ -230,7 +226,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getFormMethod();
 
-    
+
     /**
      * <p>setFormMethod.</p>
      *
@@ -245,7 +241,6 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isFormNoValidate();
 
-    
     /**
      * <p>setFormNoValidate.</p>
      *
@@ -260,7 +255,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getFormTarget();
 
-    
+
     /**
      * <p>setFormTarget.</p>
      *
@@ -275,7 +270,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     double getHeight();
 
-    
+
     /**
      * <p>setHeight.</p>
      *
@@ -283,7 +278,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     void setHeight(double height);
 
-    
+
     /**
      * <p>isIndeterminate.</p>
      *
@@ -291,7 +286,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isIndeterminate();
 
-    
+
     /**
      * <p>setIndeterminate.</p>
      *
@@ -299,8 +294,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     void setIndeterminate(boolean indeterminate);
 
-    
-    
+
     /**
      * <p>getLabels.</p>
      *
@@ -322,7 +316,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getMax();
 
-    
+
     /**
      * <p>setMax.</p>
      *
@@ -333,17 +327,16 @@ public interface HTMLInputElement extends HTMLElement {
     /**
      * Sets or retrieves the maximum number of characters that the user can enter in a text control.
      *
-     * @return a double.
+     * @return a int.
      */
-    double getMaxLength();
+    int getMaxLength();
 
-    
     /**
      * <p>setMaxLength.</p>
      *
-     * @param maxLength a double.
+     * @param maxLength a int.
      */
-    void setMaxLength(double maxLength);
+    void setMaxLength(int maxLength);
 
     /**
      * Defines the minimum acceptable value for an input element with type="number". When used with the max and step attributes, lets you control the range and increment (such as even numbers only) that the user can enter into an input field.
@@ -352,7 +345,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getMin();
 
-    
+
     /**
      * <p>setMin.</p>
      *
@@ -360,21 +353,21 @@ public interface HTMLInputElement extends HTMLElement {
      */
     void setMin(String min);
 
-    
+
     /**
      * <p>getMinLength.</p>
      *
-     * @return a double.
+     * @return a int.
      */
-    double getMinLength();
+    int getMinLength();
 
-    
+
     /**
      * <p>setMinLength.</p>
      *
-     * @param minLength a double.
+     * @param minLength a int.
      */
-    void setMinLength(double minLength);
+    void setMinLength(int minLength);
 
     /**
      * Sets or retrieves the Boolean value indicating whether multiple items can be selected from a list.
@@ -383,7 +376,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isMultiple();
 
-    
+
     /**
      * <p>setMultiple.</p>
      *
@@ -398,7 +391,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getName();
 
-    
+
     /**
      * <p>setName.</p>
      *
@@ -413,7 +406,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getPattern();
 
-    
+
     /**
      * <p>setPattern.</p>
      *
@@ -428,7 +421,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getPlaceholder();
 
-    
+
     /**
      * <p>setPlaceholder.</p>
      *
@@ -436,7 +429,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     void setPlaceholder(String placeholder);
 
-    
+
     /**
      * <p>isReadOnly.</p>
      *
@@ -444,7 +437,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isReadOnly();
 
-    
+
     /**
      * <p>setReadOnly.</p>
      *
@@ -459,7 +452,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     boolean isRequired();
 
-    
+
     /**
      * <p>setRequired.</p>
      *
@@ -467,8 +460,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     void setRequired(boolean required);
 
-    
-    
+
     /**
      * <p>getSelectionDirection.</p>
      *
@@ -476,7 +468,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getSelectionDirection();
 
-    
+
     /**
      * <p>setSelectionDirection.</p>
      *
@@ -491,7 +483,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     int getSelectionEnd();
 
-    
+
     /**
      * <p>setSelectionEnd.</p>
      *
@@ -506,7 +498,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     int getSelectionStart();
 
-    
+
     /**
      * <p>setSelectionStart.</p>
      *
@@ -514,7 +506,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     void setSelectionStart(int selectionStart);
 
-    
+
     /**
      * <p>getSize.</p>
      *
@@ -522,7 +514,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     int getSize();
 
-    
+
     /**
      * <p>setSize.</p>
      *
@@ -537,7 +529,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getSrc();
 
-    
+
     /**
      * <p>setSrc.</p>
      *
@@ -552,7 +544,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getStep();
 
-    
+
     /**
      * <p>setStep.</p>
      *
@@ -567,7 +559,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getType();
 
-    
+
     /**
      * <p>setType.</p>
      *
@@ -583,7 +575,7 @@ public interface HTMLInputElement extends HTMLElement {
     @Deprecated
     String getUseMap();
 
-    
+
     /**
      * <p>setUseMap.</p>
      *
@@ -612,7 +604,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     String getValue();
 
-    
+
     /**
      * <p>setValue.</p>
      *
@@ -627,7 +619,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     double getValueAsNumber();
 
-    
+
     /**
      * <p>setValueAsNumber.</p>
      *
@@ -642,7 +634,7 @@ public interface HTMLInputElement extends HTMLElement {
      */
     double getWidth();
 
-    
+
     /**
      * <p>setWidth.</p>
      *
@@ -694,17 +686,17 @@ public interface HTMLInputElement extends HTMLElement {
      * <p>setRangeText.</p>
      *
      * @param replacement a {@link java.lang.String} object.
-     * @param start a int.
-     * @param end a int.
+     * @param start       a int.
+     * @param end         a int.
      */
     void setRangeText(String replacement, int start, int end);
-    
+
     /**
      * <p>setRangeText.</p>
      *
-     * @param select a {@link java.lang.String} object.
-     * @param start a int.
-     * @param end a int.
+     * @param select   a {@link java.lang.String} object.
+     * @param start    a int.
+     * @param end      a int.
      * @param preserve a {@link java.lang.String} object.
      */
     void setRangeText(String select, int start, int end, String preserve);
@@ -722,7 +714,7 @@ public interface HTMLInputElement extends HTMLElement {
      * <p>setSelectionRange.</p>
      *
      * @param start a int.
-     * @param end a int.
+     * @param end   a int.
      */
     void setSelectionRange(int start, int end);
 

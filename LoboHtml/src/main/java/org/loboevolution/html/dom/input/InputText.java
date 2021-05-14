@@ -24,24 +24,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.event.MouseInputAdapter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -58,11 +49,8 @@ import org.loboevolution.store.InputStore;
 
 /**
  * <p>InputText class.</p>
- *
- *
- *
  */
-public class InputText {
+public class InputText extends BasicInput {
 	
 	private static final Logger logger = Logger.getLogger(InputText.class.getName());
 
@@ -82,9 +70,9 @@ public class InputText {
 	 */
 	public InputText(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
-		final boolean autocomplete = modelNode.getAutocomplete();
+		setElement(this.modelNode);
+		setjComponent(iText);
 		final String type = modelNode.getType();
-		
 		final Font font = iText.getFont();
 		iText.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
 		iText.setDocument(new LimitedDocument());
@@ -96,7 +84,7 @@ public class InputText {
 		iText.setPreferredSize(new Dimension(width, ps.height));
 		final String baseUrl = modelNode.getBaseURI();
 
-		if (autocomplete) {
+		if (modelNode.isAutocomplete()) {
 			List<String> list = suggestionList(type, "", baseUrl);
 			if (ArrayUtilities.isNotBlank(list)) {
 				Autocomplete.setupAutoComplete(iText, list);
@@ -110,120 +98,11 @@ public class InputText {
 		iText.setEnabled(!modelNode.isDisabled());
 		iText.setEditable(!modelNode.isReadOnly());
 
-		iText.addFocusListener(new FocusAdapter() {
-			
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (modelNode.getOnfocus() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnfocus(), null, new Object[] {});
-				}
-				
-				if (modelNode.getOnfocusin() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnfocusin(), null, new Object[] {});
-				}
-			};
-			
-			
-			@Override
-			public void focusLost(FocusEvent event) {
-				
-				String selectedText = iText.getSelectedText();
-				if(Strings.isNotBlank(selectedText)) {
-					Pattern word = Pattern.compile(selectedText);
-					Matcher match = word.matcher(modelNode.getValue());
-					
-					while (match.find()) {
-					     modelNode.setSelectionRange(match.start(), match.end()-1);
-					}
-				}
-				
-				if (autocomplete) {
-					final String text = iText.getText();
-					final boolean isNavigation = modelNode.getUserAgentContext().isNavigationEnabled();
-					InputStore.deleteInput(text, baseUrl);
-					InputStore.insertLogin(type, text, baseUrl, isNavigation);
-				}
-				
-				if (modelNode.getOnblur() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnblur(), null, new Object[] {});
-				}
-				
-				if (modelNode.getOnfocusout() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnfocusout(), null, new Object[] {});
-				}
-			}
-		});
-		
-		KeyAdapter key = new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (modelNode.getOnkeyup() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnkeyup(), null, new Object[] {});
-				}
-			}
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				if (modelNode.getOnkeydown() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnkeydown(), null, new Object[] {});
-				}
-				
-				if (modelNode.getOnkeypress() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnkeypress(), null, new Object[] {});
-				}
-				
-				if (modelNode.getOninput() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOninput(), null, new Object[] {});
-				}
-			}
-		};
-		
-		
-		iText.addKeyListener(key);
-		
-
+		iText.addFocusListener(this);
+		iText.addKeyListener(this);
+		iText.addCaretListener(this);
+		iText.addMouseListener(this);
 		iText.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode));
-
-		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
-
-			@Override
-			public void mouseEntered(final MouseEvent e) {
-				if (modelNode.getOnmouseover() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnmouseover(), null, new Object[] {});
-				}
-			}
-			
-			public void mousePressed(MouseEvent e) {
-				if (modelNode.getOnkeypress() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnkeypress(), null, new Object[] {});
-				}
-				
-				if (modelNode.getOnkeydown() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnkeydown(), null, new Object[] {});
-				}
-			};
-			
-			public void mouseReleased(MouseEvent e) {
-				if (modelNode.getOnkeyup() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnkeyup(), null, new Object[] {});
-				}
-			};
-			
-		};
-		iText.addMouseListener(mouseHandler);
-		
-		
-		iText.addCaretListener(new CaretListener() {
-			@Override
-			public void caretUpdate(CaretEvent e) {
-				final int dot = e.getDot();
-				final int mark = e.getMark();
-
-				if (dot != mark && modelNode.getOnselect() != null) {
-					Executor.executeFunction(modelNode, modelNode.getOnselect(), null, new Object[] {});
-				}
-			}
-		});
 
 		RUIControl ruiControl = ic.getRUIControl();
 		final Insets borderInsets = ruiControl.getBorderInsets();
@@ -244,7 +123,6 @@ public class InputText {
 			if (modelNode.getOnselect() != null) {
 				Executor.executeFunction(modelNode, modelNode.getOnselect(), null, new Object[] {});
 			}
-			
 		}
 
 		ic.add(iText);

@@ -33,9 +33,6 @@ import org.loboevolution.html.js.Executor;
 
 /**
  * <p>InputColorPicker class.</p>
- *
- *
- *
  */
 public class InputColorPicker {
 	

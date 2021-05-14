@@ -35,11 +35,8 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
 /**
  * <p>InputFile class.</p>
- *
- *
- *
  */
-public class InputFile {
+public class InputFile extends BasicInput {
 	
 	private final JTextField textField = new JTextField();
 	
@@ -53,6 +50,8 @@ public class InputFile {
 	 */
 	public InputFile(HTMLInputElementImpl modelNode, InputControl ic) {
 		control = ic;
+		setElement(modelNode);
+		setjComponent(textField);
 		final JButton browseButton = new JButton();
 		browseButton.setContentAreaFilled(false);
 		browseButton.setAction(new BrowseAction());
@@ -66,15 +65,17 @@ public class InputFile {
 		textField.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		textField.setEditable(Boolean.parseBoolean(modelNode.getContentEditable()));
 		textField.setEnabled(!modelNode.isDisabled());
+		textField.addFocusListener(this);
+		textField.addKeyListener(this);
+		textField.addCaretListener(this);
+		textField.addMouseListener(this);
 
 		Box buttonBar = Box.createHorizontalBox();
 		buttonBar.add(Box.createHorizontalGlue());
 		buttonBar.add(textField);
 		buttonBar.add(browseButton);
 		ic.add(buttonBar, BorderLayout.SOUTH);
-
 	}
-	
 	
 	private class BrowseAction extends AbstractAction {
 

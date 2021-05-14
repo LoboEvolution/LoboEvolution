@@ -47,11 +47,8 @@ import org.loboevolution.html.js.Executor;
 
 /**
  * <p>TextArea class.</p>
- *
- *
- *
  */
-public class TextArea {
+public class TextArea extends BasicInput {
 	
 	private static final float DEFAULT_FONT_SIZE = 14.0f;
 	
@@ -67,7 +64,8 @@ public class TextArea {
 	 */
 	public TextArea(HTMLTextAreaElementImpl modelNode, TextAreaControl ic) {
 		this.modelNode = modelNode;
-		this.modelNode = modelNode;
+		setElement(modelNode);
+		setjComponent(jtArea);
 		
 		final Font font = jtArea.getFont();
 		jtArea.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
@@ -104,6 +102,11 @@ public class TextArea {
 				}
 			}
 		});
+
+		jtArea.addFocusListener(this);
+		jtArea.addKeyListener(this);
+		jtArea.addCaretListener(this);
+		jtArea.addMouseListener(this);
 		
 		RUIControl ruiControl = ic.getRUIControl();
 		final Insets borderInsets = ruiControl.getBorderInsets();

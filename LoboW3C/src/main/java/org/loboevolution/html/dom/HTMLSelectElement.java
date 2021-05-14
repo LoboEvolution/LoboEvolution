@@ -27,9 +27,6 @@ import org.loboevolution.html.node.ValidityState;
 /**
  * A &lt;select&gt; HTML Element. These elements also share all of the properties and methods of other HTML elements via
  * the HTMLElement interface.
- *
- *
- *
  */
 public interface HTMLSelectElement extends HTMLElement {
 
@@ -38,7 +35,7 @@ public interface HTMLSelectElement extends HTMLElement {
      *
      * @return the autocomplete
      */
-    String getAutocomplete();
+    boolean isAutocomplete();
 
     /**
      * Sets autocomplete.

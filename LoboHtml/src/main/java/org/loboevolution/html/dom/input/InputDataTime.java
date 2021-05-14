@@ -34,11 +34,8 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
 /**
  * <p>InputDataTime class.</p>
- *
- *
- *
  */
-public class InputDataTime {
+public class InputDataTime extends BasicInput {
 
 	private final static Logger logger = Logger.getLogger(InputDataTime.class.getName());
 
@@ -75,10 +72,18 @@ public class InputDataTime {
 				break;
 			}
 
+			setElement(modelNode);
+			setjComponent(tf);
 			final Dimension ps = tf.getPreferredSize();
 			tf.setPreferredSize(new Dimension(128, ps.height));
 			ic.add(tf);
 			dateMask.install(tf);
+
+			tf.addFocusListener(this);
+			tf.addKeyListener(this);
+			tf.addCaretListener(this);
+			tf.addMouseListener(this);
+
 		} catch (ParseException err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}

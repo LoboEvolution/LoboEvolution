@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * <p>HTMLSelectElementImpl class.</p>
  */
-public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelectElement {
+public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTMLSelectElement {
 	
 	private SelectOption selectOption;
 	
@@ -214,57 +214,8 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
 	/** {@inheritDoc} */
 	@Override
-	public String getAutocomplete() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutocomplete(String autocomplete) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isAutofocus() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAutofocus(boolean autofocus) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public NodeList getLabels() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public boolean isMultiple() {
 		return this.getAttributeAsBoolean("multiple");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isRequired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setRequired(boolean required) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -278,27 +229,6 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 	@Override
 	public void setSize(int size) {
 		setAttribute("size", String.valueOf(size));
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getValidationMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public ValidityState getValidity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isWillValidate() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	/** {@inheritDoc} */
@@ -339,13 +269,6 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean checkValidity() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Element item(int index) {
 		return (Element)getOptions().item(index);
 	}
@@ -362,20 +285,6 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 	public void remove() {
 		getOptions().remove(getOptions().getLength() - 1);
 		if (selectOption!= null) selectOption.resetItemList(this);
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean reportValidity() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setCustomValidity(String error) {
-		// TODO Auto-generated method stub
 		
 	}
 

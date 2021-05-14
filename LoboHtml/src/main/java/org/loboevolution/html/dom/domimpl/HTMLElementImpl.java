@@ -692,7 +692,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/** {@inheritDoc} */
 	@Override
 	public boolean isHidden() {
-		return this.getAttribute("hidden") != null;
+		final String hidden = getAttribute("hidden");
+		return hidden != null;
 	}
 
 	/** {@inheritDoc} */
@@ -705,8 +706,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/** {@inheritDoc} */
 	@Override
 	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("accessKey", accessKey);
 	}
 
 	/** {@inheritDoc} */
@@ -726,8 +726,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/** {@inheritDoc} */
 	@Override
 	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("hidden", String.valueOf(hidden));
 	}
 
 	/** {@inheritDoc} */

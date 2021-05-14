@@ -23,11 +23,7 @@ package org.loboevolution.html.dom.input;
 import java.io.File;
 
 /**
- * The FormInput class contains the state of an HTML form input
- * item.
- *
- *
- *
+ * The FormInput class contains the state of an HTML form input item.
  */
 public class FormInput {
 
