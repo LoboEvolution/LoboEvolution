@@ -131,18 +131,18 @@ public class FastBorders extends BaseBorders {
 				for (int i = 1; i < DW; i++) {
 					g.drawRect(i, i, w - 2 * i - 1, h - 2 * i - 1);
 				}
-				return;
-			}
-			JTattooUtilities.draw3DBorder(g, cHi, cLo, x, y, w, h);
-			cHi = ColorHelper.brighter(borderColor, 40);
-			cLo = ColorHelper.darker(borderColor, 20);
-			JTattooUtilities.draw3DBorder(g, cHi, cLo, x + 1, y + 1, w - 2, h - 2);
+			} else {
+				JTattooUtilities.draw3DBorder(g, cHi, cLo, x, y, w, h);
+				cHi = ColorHelper.brighter(borderColor, 40);
+				cLo = ColorHelper.darker(borderColor, 20);
+				JTattooUtilities.draw3DBorder(g, cHi, cLo, x + 1, y + 1, w - 2, h - 2);
 
-			g.setColor(borderColor);
-			g.drawRect(x + 2, y + 2, w - 5, h - 5);
-			g.drawRect(x + 3, y + 3, w - 7, h - 7);
-			JTattooUtilities.draw3DBorder(g, ColorHelper.darker(borderColor, 5), ColorHelper.brighter(borderColor, 30),
-					x + 4, y + 4, w - 8, h - 8);
+				g.setColor(borderColor);
+				g.drawRect(x + 2, y + 2, w - 5, h - 5);
+				g.drawRect(x + 3, y + 3, w - 7, h - 7);
+				JTattooUtilities.draw3DBorder(g, ColorHelper.darker(borderColor, 5), ColorHelper.brighter(borderColor, 30),
+						x + 4, y + 4, w - 8, h - 8);
+			}
 		}
 	} // end of class InternalFrameBorder
 

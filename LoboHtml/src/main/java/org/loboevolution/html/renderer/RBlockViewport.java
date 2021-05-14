@@ -513,11 +513,10 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param usesAlignAttribute a boolean.
 	 */
 	protected void addRenderableToLineCheckStyle(RElement renderable, HTMLElementImpl element, boolean usesAlignAttribute) {
-		if (addElsewhereIfPositioned(renderable, element, usesAlignAttribute, true, true)) {
-			return;
+		if (!addElsewhereIfPositioned(renderable, element, usesAlignAttribute, true, true)) {
+			renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
+			addRenderableToLine(renderable);
 		}
-		renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
-		addRenderableToLine(renderable);
 	}
 
 	private void addWordToLine(RWord renderable) {

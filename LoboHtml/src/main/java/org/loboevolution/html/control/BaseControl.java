@@ -81,21 +81,6 @@ public abstract class BaseControl extends JComponent implements UIControl {
 		return AlignValues.BASELINE.getValue();
 	}
 
-	/**
-	 * Method invoked when image changes size. It's expected to be called outside
-	 * the GUI thread.
-	 */
-	protected void invalidateAndRepaint() {
-		final RUIControl rc = this.ruicontrol;
-		if (rc == null) {
-			logger.severe("invalidateAndPaint(): RUIControl not set.");
-			return;
-		}
-		if (rc.isValid()) {
-			rc.relayout();
-		}
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void reset(int availWidth, int availHeight) {

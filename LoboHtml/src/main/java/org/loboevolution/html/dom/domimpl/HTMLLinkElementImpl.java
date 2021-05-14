@@ -46,7 +46,6 @@ import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.store.StyleStore;
 import org.w3c.dom.UserDataHandler;
 import org.loboevolution.html.node.DOMTokenList;
-import org.loboevolution.html.node.Element;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
@@ -54,9 +53,9 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
  * <p>HTMLLinkElementImpl class.</p>
  */
 public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElement {
-	
+
 	private final String COLOR_VISITED = "#551A8B";
-	
+
 	private final String DEFAULT_COLOR = "Blue";
 	
 	private boolean disabled;
@@ -134,11 +133,8 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	 * <p>navigate.</p>
 	 */
 	public void navigate() {
-		if (this.disabled) {
-			return;
-		}
 		final HtmlRendererContext rcontext = getHtmlRendererContext();
-		if (rcontext != null) {
+		if (!this.disabled && rcontext != null) {
 			final String href = getHref();
 			if (Strings.isNotBlank(href)) {
 				try {

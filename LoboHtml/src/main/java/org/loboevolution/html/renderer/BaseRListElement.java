@@ -56,54 +56,53 @@ class BaseRListElement extends RBlock {
 		this.listStyle = null;
 		super.applyStyle(availWidth, availHeight);
 		final Object rootNode = this.modelNode;
-		if (!(rootNode instanceof HTMLElementImpl)) {
-			return;
-		}
-		final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-		final AbstractCSSProperties props = rootElement.getCurrentStyle();
-		if (props == null) {
-			return;
-		}
-		ListStyle listStyle = null;
-		final String listStyleText = props.getListStyle();
-		if (listStyleText != null) {
-			listStyle = HtmlValues.getListStyle(listStyleText, rootElement.getDocumentBaseURI());
-		}
-		final String listStyleTypeText = props.getListStyleType();
-		if (listStyleTypeText != null) {
-			final ListValues listType = HtmlValues.getListStyleType(listStyleTypeText);
-			if (listType != ListValues.TYPE_UNSET) {
-				if (listStyle == null) {
-					listStyle = new ListStyle();
+		if (rootNode instanceof HTMLElementImpl) {
+
+			final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
+			final AbstractCSSProperties props = rootElement.getCurrentStyle();
+			if (props != null) {
+				ListStyle listStyle = null;
+				final String listStyleText = props.getListStyle();
+				if (listStyleText != null) {
+					listStyle = HtmlValues.getListStyle(listStyleText, rootElement.getDocumentBaseURI());
 				}
-				listStyle.setType(listType.getValue());
-			}
-		}
-	
-		final String listStyleImage = props.getListStyleImage();
-		if (listStyleImage != null && HtmlValues.isUrl(listStyleImage)) {
-			final Image img = HtmlValues.getListStyleImage(listStyleImage, rootElement.getDocumentBaseURI());
-			if (listStyle == null) {
-				listStyle = new ListStyle();
-			}
-			listStyle.setType(ListValues.TYPE_URL.getValue());
-			listStyle.setImage(img);
-		}
-		
-		if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
-			final String typeAttributeText = rootElement.getAttribute("type");
-			if (typeAttributeText != null) {
-				final ListValues newStyleType = HtmlValues.getListStyleType(typeAttributeText);
-				if (newStyleType != ListValues.TYPE_UNSET) {
+				final String listStyleTypeText = props.getListStyleType();
+				if (listStyleTypeText != null) {
+					final ListValues listType = HtmlValues.getListStyleType(listStyleTypeText);
+					if (listType != ListValues.TYPE_UNSET) {
+						if (listStyle == null) {
+							listStyle = new ListStyle();
+						}
+						listStyle.setType(listType.getValue());
+					}
+				}
+
+				final String listStyleImage = props.getListStyleImage();
+				if (listStyleImage != null && HtmlValues.isUrl(listStyleImage)) {
+					final Image img = HtmlValues.getListStyleImage(listStyleImage, rootElement.getDocumentBaseURI());
 					if (listStyle == null) {
 						listStyle = new ListStyle();
-						this.listStyle = listStyle;
 					}
-					listStyle.setType(newStyleType.getValue());
+					listStyle.setType(ListValues.TYPE_URL.getValue());
+					listStyle.setImage(img);
 				}
+
+				if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
+					final String typeAttributeText = rootElement.getAttribute("type");
+					if (typeAttributeText != null) {
+						final ListValues newStyleType = HtmlValues.getListStyleType(typeAttributeText);
+						if (newStyleType != ListValues.TYPE_UNSET) {
+							if (listStyle == null) {
+								listStyle = new ListStyle();
+								this.listStyle = listStyle;
+							}
+							listStyle.setType(newStyleType.getValue());
+						}
+					}
+				}
+				this.listStyle = listStyle;
 			}
 		}
-		this.listStyle = listStyle;
 	}
 
 	/** {@inheritDoc} */

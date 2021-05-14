@@ -148,64 +148,58 @@ final class RWord extends BaseBoundableRenderable {
 	public boolean isContainedByNode() {
 		return true;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
-	 */
+	
 	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
-        if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
-            return;
-        }
-		
-        final String word = this.shownWord;
-		final int width = this.width;
-		final int ascentPlusLeading = this.ascentPlusLeading;
-		final int height = this.height;
-		final int textDecoration = rs.getTextDecorationMask();
-		final Color bkg = rs.getTextBackgroundColor();
-		if (bkg != null) {
-			final Color oldColor = g.getColor();
-			try {
-				g.setColor(bkg);
-				g.fillRect(0, 0, width, height);
-			} finally {
-				g.setColor(oldColor);
+		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
+
+			final String word = this.shownWord;
+			final int width = this.width;
+			final int ascentPlusLeading = this.ascentPlusLeading;
+			final int height = this.height;
+			final int textDecoration = rs.getTextDecorationMask();
+			final Color bkg = rs.getTextBackgroundColor();
+			if (bkg != null) {
+				final Color oldColor = g.getColor();
+				try {
+					g.setColor(bkg);
+					g.fillRect(0, 0, width, height);
+				} finally {
+					g.setColor(oldColor);
+				}
 			}
-		}
-		g.drawString(word, 0, ascentPlusLeading);
-		final int td = textDecoration;
-		if (td != 0) {
-			if ((td & RenderState.MASK_TEXTDECORATION_UNDERLINE) != 0) {
-				final int lineOffset = ascentPlusLeading + 2;
-				g.drawLine(0, lineOffset, width, lineOffset);
+			g.drawString(word, 0, ascentPlusLeading);
+			final int td = textDecoration;
+			if (td != 0) {
+				if ((td & RenderState.MASK_TEXTDECORATION_UNDERLINE) != 0) {
+					final int lineOffset = ascentPlusLeading + 2;
+					g.drawLine(0, lineOffset, width, lineOffset);
+				}
+				if ((td & RenderState.MASK_TEXTDECORATION_LINE_THROUGH) != 0) {
+					final FontMetrics fm = this.fontMetrics;
+					final int lineOffset = fm.getLeading() + (fm.getAscent() + fm.getDescent()) / 2;
+					g.drawLine(0, lineOffset, width, lineOffset);
+				}
+				if ((td & RenderState.MASK_TEXTDECORATION_OVERLINE) != 0) {
+					final FontMetrics fm = this.fontMetrics;
+					final int lineOffset = fm.getLeading();
+					g.drawLine(0, lineOffset, width, lineOffset);
+				}
+				if ((td & RenderState.MASK_TEXTDECORATION_BLINK) != 0) {
+					// TODO
+				}
 			}
-			if ((td & RenderState.MASK_TEXTDECORATION_LINE_THROUGH) != 0) {
-				final FontMetrics fm = this.fontMetrics;
-				final int lineOffset = fm.getLeading() + (fm.getAscent() + fm.getDescent()) / 2;
-				g.drawLine(0, lineOffset, width, lineOffset);
-			}
-			if ((td & RenderState.MASK_TEXTDECORATION_OVERLINE) != 0) {
-				final FontMetrics fm = this.fontMetrics;
-				final int lineOffset = fm.getLeading();
-				g.drawLine(0, lineOffset, width, lineOffset);
-			}
-			if ((td & RenderState.MASK_TEXTDECORATION_BLINK) != 0) {
-				// TODO
-			}
-		}
-		final Color over = rs.getOverlayColor();
-		if (over != null) {
-			final Color oldColor = g.getColor();
-			try {
-				g.setColor(over);
-				g.fillRect(0, 0, width, height);
-			} finally {
-				g.setColor(oldColor);
+			final Color over = rs.getOverlayColor();
+			if (over != null) {
+				final Color oldColor = g.getColor();
+				try {
+					g.setColor(over);
+					g.fillRect(0, 0, width, height);
+				} finally {
+					g.setColor(oldColor);
+				}
 			}
 		}
 	}

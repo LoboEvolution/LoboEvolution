@@ -1277,10 +1277,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public void setDocumentItem(String name, Object value) {
 		final Document document = this.document;
-		if (document == null) {
-			return;
+		if (document != null) {
+			document.setUserData(name, value, null);
 		}
-		document.setUserData(name, value, null);
 	}
 
 	/** {@inheritDoc} */

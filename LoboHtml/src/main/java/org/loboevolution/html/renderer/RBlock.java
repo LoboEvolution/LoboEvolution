@@ -826,90 +826,77 @@ public class RBlock extends BaseElementRenderable {
 	@Override
 	public void paint(final Graphics gIn) {
 		final RenderState rs = this.modelNode.getRenderState();
-		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
-			return;
-		}
+		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
+			final boolean isRelative = (relativeOffsetX | relativeOffsetY) != 0;
+			final Graphics g = isRelative ? gIn.create() : gIn;
+			if (isRelative) {
+				g.translate(relativeOffsetX, relativeOffsetY);
+			}
 
-		final boolean isRelative = (relativeOffsetX | relativeOffsetY) != 0;
-		final Graphics g = isRelative ? gIn.create() : gIn;
-		if (isRelative) {
-			g.translate(relativeOffsetX, relativeOffsetY);
-		}
-
-		try {
-			this.prePaint(g);
-			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-			final RBlockViewport bodyLayout = this.bodyLayout;
-			if (bodyLayout != null) {
-				final int overflowX = this.overflowX;
-				final int overflowY = this.overflowY;
-				if ((overflowX == RenderState.OVERFLOW_NONE || overflowX == RenderState.OVERFLOW_VISIBLE)
-						&& (overflowY == RenderState.OVERFLOW_NONE || overflowY == RenderState.OVERFLOW_VISIBLE)) {
-			          bodyLayout.paint(g);
-				} else {
-					// Clip when there potential scrolling or hidden overflow
-					// was requested.
-					final Graphics newG = g.create(insets.left, insets.top, this.width - insets.left - insets.right,
-							this.height - insets.top - insets.bottom);
-					try {
-						// Second, translate
-			            newG.translate(-insets.left, -insets.top);
-						// Third, paint in clipped + translated region.
-						bodyLayout.paint(newG);
-					} finally {
-						newG.dispose();
+			try {
+				this.prePaint(g);
+				final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
+				final RBlockViewport bodyLayout = this.bodyLayout;
+				if (bodyLayout != null) {
+					final int overflowX = this.overflowX;
+					final int overflowY = this.overflowY;
+					if ((overflowX == RenderState.OVERFLOW_NONE || overflowX == RenderState.OVERFLOW_VISIBLE)
+							&& (overflowY == RenderState.OVERFLOW_NONE || overflowY == RenderState.OVERFLOW_VISIBLE)) {
+						bodyLayout.paint(g);
+					} else {
+						// Clip when there potential scrolling or hidden overflow
+						// was requested.
+						final Graphics newG = g.create(insets.left, insets.top, this.width - insets.left - insets.right,
+								this.height - insets.top - insets.bottom);
+						try {
+							// Second, translate
+							newG.translate(-insets.left, -insets.top);
+							// Third, paint in clipped + translated region.
+							bodyLayout.paint(newG);
+						} finally {
+							newG.dispose();
+						}
 					}
 				}
 
+				// Paint FrameContext selection.
+				// This is only done by root RBlock.
 
-			}
-
-			// Paint FrameContext selection.
-			// This is only done by root RBlock.
-
-			final RenderableSpot start = this.startSelection;
-			final RenderableSpot end = this.endSelection;
-			final boolean inSelection = false;
-			if (start != null && end != null && !start.equals(end)) {
-				paintSelection(g, inSelection, start, end);
-			}
-			// Must paint scrollbars too.
-			final JScrollBar hsb = this.hScrollBar;
-			if (hsb != null) {
-				final Graphics sbg = g.create(insets.left, this.height - insets.bottom,
-						this.width - insets.left - insets.right, SCROLL_BAR_THICKNESS);
-				try {
-					hsb.paint(sbg);
-				} finally {
-					sbg.dispose();
+				final RenderableSpot start = this.startSelection;
+				final RenderableSpot end = this.endSelection;
+				final boolean inSelection = false;
+				if (start != null && end != null && !start.equals(end)) {
+					paintSelection(g, inSelection, start, end);
 				}
-			}
-			final JScrollBar vsb = this.vScrollBar;
-			if (vsb != null) {
-				final Graphics sbg = g.create(this.width - insets.right, insets.top, SCROLL_BAR_THICKNESS,
-						this.height - insets.top - insets.bottom);
-				try {
-					vsb.paint(sbg);
-				} finally {
-					sbg.dispose();
+				// Must paint scrollbars too.
+				final JScrollBar hsb = this.hScrollBar;
+				if (hsb != null) {
+					final Graphics sbg = g.create(insets.left, this.height - insets.bottom, this.width - insets.left - insets.right, SCROLL_BAR_THICKNESS);
+					try {
+						hsb.paint(sbg);
+					} finally {
+						sbg.dispose();
+					}
 				}
-			}
+				final JScrollBar vsb = this.vScrollBar;
+				if (vsb != null) {
+					final Graphics sbg = g.create(this.width - insets.right, insets.top, SCROLL_BAR_THICKNESS,this.height - insets.top - insets.bottom);
+					try {
+						vsb.paint(sbg);
+					} finally {
+						sbg.dispose();
+					}
+				}
 
-		} finally {
-			if (isRelative) {
-				g.dispose();
+			} finally {
+				if (isRelative) {
+					g.dispose();
+				}
+				super.paint(gIn);
 			}
-			super.paint(gIn);
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.UIControl#paintSelection(java.awt.Graphics,
-	 * boolean, org.loboevolution.html.rendered.RenderablePoint,
-	 * org.loboevolution.html.rendered.RenderablePoint)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
@@ -1246,21 +1233,20 @@ public class RBlock extends BaseElementRenderable {
 
 		@Override
 		public void adjustmentValueChanged(AdjustmentEvent e) {
-			if (RBlock.this.resettingScrollBars) {
-				return;
-			}
-			switch (e.getAdjustmentType()) {
-				case AdjustmentEvent.UNIT_INCREMENT:
-				case AdjustmentEvent.UNIT_DECREMENT:
-				case AdjustmentEvent.BLOCK_INCREMENT:
-				case AdjustmentEvent.BLOCK_DECREMENT:
-				case AdjustmentEvent.TRACK: {
-					final int value = e.getValue();
-					scrollToSBValue(this.orientation, value);
-					break;
+			if (!RBlock.this.resettingScrollBars) {
+				switch (e.getAdjustmentType()) {
+					case AdjustmentEvent.UNIT_INCREMENT:
+					case AdjustmentEvent.UNIT_DECREMENT:
+					case AdjustmentEvent.BLOCK_INCREMENT:
+					case AdjustmentEvent.BLOCK_DECREMENT:
+					case AdjustmentEvent.TRACK: {
+						final int value = e.getValue();
+						scrollToSBValue(this.orientation, value);
+						break;
+					}
+					default:
+						break;
 				}
-				default:
-					break;
 			}
 		}
 	}

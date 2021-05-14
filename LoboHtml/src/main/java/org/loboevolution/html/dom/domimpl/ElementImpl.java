@@ -326,10 +326,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final String normalName = Strings.normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
-			if (attributes == null) {
-				return;
+			if (attributes != null) {
+				attributes.remove(normalName);
 			}
-			attributes.remove(normalName);
 		}
 	}
 
@@ -440,13 +439,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 */
 	public void setInnerText(String newText) {
 		final Document document = this.document;
-		if (document == null) {
+		if (document != null) {
+			this.nodeList.clear();
+			final Node textNode = document.createTextNode(newText);
+			appendChild(textNode);
+		} else {
 			this.warn("setInnerText(): Element " + this + " does not belong to a document.");
-			return;
 		}
-		this.nodeList.clear();
-		final Node textNode = document.createTextNode(newText);
-		appendChild(textNode);
 	}
 
 	/**
@@ -488,19 +487,18 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void setInnerHTML(String newHtml) {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-		if (document == null) {
-			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
-			return;
-		}
-		final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
-		this.nodeList.clear();
-		// Should not synchronize around parser probably.
-		try {
-			try (Reader reader = new StringReader(newHtml)) {
-				parser.parse(reader, this);
+		if (document != null) {
+			final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
+			this.nodeList.clear();
+			try {
+				try (Reader reader = new StringReader(newHtml)) {
+					parser.parse(reader, this);
+				}
+			} catch (final Exception thrown) {
+				this.warn("setInnerHTML(): Error setting inner HTML.", thrown);
 			}
-		} catch (final Exception thrown) {
-			this.warn("setInnerHTML(): Error setting inner HTML.", thrown);
+		} else {
+			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
 		}
 	}
 	
@@ -624,19 +622,18 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		this.outer = outerNewHtml(newHtml);
 		if (this.outer != null) {
 			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-			if (document == null) {
-				this.warn("setOuterHTML(): Element " + this + " does not belong to a document.");
-				return;
-			}
-			final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
-			this.nodeList.clear();
-			// Should not synchronize around parser probably.
-			try {
-				try (Reader reader = new StringReader(newHtml)) {
-					parser.parse(reader, this);
+			if (document != null) {
+				final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
+				this.nodeList.clear();
+				try {
+					try (Reader reader = new StringReader(newHtml)) {
+						parser.parse(reader, this);
+					}
+				} catch (final Exception thrown) {
+					this.warn("setOuterHTML(): Error setting inner HTML.", thrown);
 				}
-			} catch (final Exception thrown) {
-				this.warn("setOuterHTML(): Error setting inner HTML.", thrown);
+			} else {
+				this.warn("setOuterHTML(): Element " + this + " does not belong to a document.");
 			}
 		}
 	}
@@ -820,13 +817,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 		if (nodeList.getLength() == 0) {
 			buffer.append("/>");
-			return;
+		} else {
+			buffer.append('>');
+			appendInnerHTMLImpl(buffer);
+			buffer.append("</");
+			buffer.append(tagName);
+			buffer.append('>');
 		}
-		buffer.append('>');
-		appendInnerHTMLImpl(buffer);
-		buffer.append("</");
-		buffer.append(tagName);
-		buffer.append('>');
 	}
 	
 	private String outerNewHtml(final String newHtml) {

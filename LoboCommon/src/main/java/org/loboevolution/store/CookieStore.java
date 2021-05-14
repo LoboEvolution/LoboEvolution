@@ -101,39 +101,34 @@ public class CookieStore {
 				}
 			}
 		}
-		
-		if (cookieName == null) {
-			return;
-		}
-		
-		if (domain != null) {
-			if (!Domains.isValidCookieDomain(domain, urlHostName)) {
-				return;
-			} else {
-				if (domain.startsWith(".")) {
-					domain = domain.substring(1);
-				}
 
+		if (Strings.isNotBlank(cookieName)) {
+			if (domain != null) {
+				if (Domains.isValidCookieDomain(domain, urlHostName)) {
+					if (domain.startsWith(".")) {
+						domain = domain.substring(1);
+					}
+				}
+			} else {
+				domain = urlHostName;
 			}
-		} else {
-			domain = urlHostName;
-		}
-		
-		Date expiresDate = null;
-		if (maxAge != null) {
-			try {
-				expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
-			} catch (NumberFormatException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+
+			Date expiresDate = null;
+			if (maxAge != null) {
+				try {
+					expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
+				} catch (NumberFormatException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			} else if (expires != null) {
+				DateUtil du = new DateUtil();
+				expiresDate = du.determineDateFormat(expires, Locale.US);
 			}
-		} else if (expires != null) {
-			DateUtil du = new DateUtil();
-			expiresDate = du.determineDateFormat(expires, Locale.US);
-		}
-		
-		GeneralStore settings = GeneralStore.getNetwork();
-		if (settings.isCookie()) {
-			saveCookie(domain, path, cookieName, expiresDate, cookieValue, maxAge, Strings.isNotBlank(secure), Strings.isNotBlank(httpOnly));
+
+			GeneralStore settings = GeneralStore.getNetwork();
+			if (settings.isCookie()) {
+				saveCookie(domain, path, cookieName, expiresDate, cookieValue, maxAge, Strings.isNotBlank(secure), Strings.isNotBlank(httpOnly));
+			}
 		}
 	}
 

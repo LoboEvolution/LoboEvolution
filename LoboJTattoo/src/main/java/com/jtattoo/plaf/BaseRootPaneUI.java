@@ -375,22 +375,22 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		public void mouseClicked(MouseEvent ev) {
 			if (ev.getSource() instanceof Window) {
 				Window window = (Window) ev.getSource();
-				if (!(window instanceof Frame)) {
-					return;
-				}
-				Frame frame = (Frame) window;
-				Point convertedPoint = SwingUtilities.convertPoint(window, ev.getPoint(), internalGetTitlePane());
-				int state = frame.getExtendedState();
-				if (titlePane != null && titlePane instanceof TitlePane && titlePane.contains(convertedPoint)
-						&& frame.isResizable()) {
-					if (ev.getClickCount() % 2 == 0 && (ev.getModifiers() & InputEvent.BUTTON1_MASK) != 0) {
-						if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
-							((TitlePane) titlePane).restore();
-						} else {
-							((TitlePane) titlePane).maximize();
+				if (window instanceof Frame) {
+					Frame frame = (Frame) window;
+					Point convertedPoint = SwingUtilities.convertPoint(window, ev.getPoint(), internalGetTitlePane());
+					int state = frame.getExtendedState();
+					if (titlePane != null && titlePane instanceof TitlePane && titlePane.contains(convertedPoint)
+							&& frame.isResizable()) {
+						if (ev.getClickCount() % 2 == 0 && (ev.getModifiers() & InputEvent.BUTTON1_MASK) != 0) {
+							if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
+								((TitlePane) titlePane).restore();
+							} else {
+								((TitlePane) titlePane).maximize();
+							}
 						}
 					}
 				}
+
 			}
 		}
 
@@ -398,88 +398,83 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		public void mouseDragged(MouseEvent ev) {
 			if (ev.getSource() instanceof Window) {
 				Window w = (Window) ev.getSource();
-				if (!w.isShowing()) {
-					return;
-				}
-				if (w instanceof Frame) {
-					Frame frame = (Frame) w;
-					int frameState = frame.getExtendedState();
-					if ((frameState & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
-						if (internalGetTitlePane() instanceof TitlePane) {
-							Point pt = ev.getPoint();
-							Point dragWindowOffset = ev.getPoint();
-							Point convertedDragWindowOffset = SwingUtilities.convertPoint(w, dragWindowOffset,
-									internalGetTitlePane());
-							if (internalGetTitlePane().contains(convertedDragWindowOffset)) {
-								int ow = w.getWidth();
-								((TitlePane) internalGetTitlePane()).restore();
-								int nw = w.getWidth();
-								int nx = pt.x * nw / ow;
-								int ny = pt.y;
-								w.setLocation(nx, ny);
-								dragOffsetX = nx;
-								dragOffsetY = ny;
-								isMovingWindow = true;
-								for (PropertyChangeListener pcl : frame.getPropertyChangeListeners()) {
-									pcl.propertyChange(new PropertyChangeEvent(window, "windowMoving", Boolean.FALSE,
-											Boolean.FALSE));
+				if (w.isShowing()) {
+					if (w instanceof Frame) {
+						Frame frame = (Frame) w;
+						int frameState = frame.getExtendedState();
+						if ((frameState & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
+							if (internalGetTitlePane() instanceof TitlePane) {
+								Point pt = ev.getPoint();
+								Point dragWindowOffset = ev.getPoint();
+								Point convertedDragWindowOffset = SwingUtilities.convertPoint(w, dragWindowOffset,
+										internalGetTitlePane());
+								if (internalGetTitlePane().contains(convertedDragWindowOffset)) {
+									int ow = w.getWidth();
+									((TitlePane) internalGetTitlePane()).restore();
+									int nw = w.getWidth();
+									int nx = pt.x * nw / ow;
+									int ny = pt.y;
+									w.setLocation(nx, ny);
+									dragOffsetX = nx;
+									dragOffsetY = ny;
+									isMovingWindow = true;
+									for (PropertyChangeListener pcl : frame.getPropertyChangeListeners()) {
+										pcl.propertyChange(new PropertyChangeEvent(window, "windowMoving", Boolean.FALSE,
+												Boolean.FALSE));
+									}
 								}
 							}
 						}
 					}
-				}
 
-				int minScreenY = getMinScreenY();
-				if (isMovingWindow) {
-					Point location = ev.getLocationOnScreen();
-					location.x -= dragOffsetX;
-					location.y = Math.max(minScreenY, location.y - dragOffsetY);
-					w.setLocation(location);
-				} else if (dragCursor != 0) {
-					Point pt = ev.getPoint();
-					Rectangle bounds = w.getBounds();
-					Rectangle startBounds = new Rectangle(bounds);
-					Dimension min = MINIMUM_SIZE;
-					switch (dragCursor) {
-					case Cursor.E_RESIZE_CURSOR:
-						adjust(bounds, min, 0, 0, pt.x + dragWidth - dragOffsetX - bounds.width, 0);
-						break;
-					case Cursor.S_RESIZE_CURSOR:
-						adjust(bounds, min, 0, 0, 0, pt.y + dragHeight - dragOffsetY - bounds.height);
-						break;
-					case Cursor.N_RESIZE_CURSOR:
-						adjust(bounds, min, 0, pt.y - dragOffsetY, 0, -(pt.y - dragOffsetY));
-						break;
-					case Cursor.W_RESIZE_CURSOR:
-						adjust(bounds, min, pt.x - dragOffsetX, 0, -(pt.x - dragOffsetX), 0);
-						break;
-					case Cursor.NE_RESIZE_CURSOR:
-						adjust(bounds, min, 0, pt.y - dragOffsetY, pt.x + dragWidth - dragOffsetX - bounds.width,
-								-(pt.y - dragOffsetY));
-						break;
-					case Cursor.SE_RESIZE_CURSOR:
-						adjust(bounds, min, 0, 0, pt.x + dragWidth - dragOffsetX - bounds.width,
-								pt.y + dragHeight - dragOffsetY - bounds.height);
-						break;
-					case Cursor.NW_RESIZE_CURSOR:
-						adjust(bounds, min, pt.x - dragOffsetX, pt.y - dragOffsetY, -(pt.x - dragOffsetX),
-								-(pt.y - dragOffsetY));
-						break;
-					case Cursor.SW_RESIZE_CURSOR:
-						adjust(bounds, min, pt.x - dragOffsetX, 0, -(pt.x - dragOffsetX),
-								pt.y + dragHeight - dragOffsetY - bounds.height);
-						break;
-					default:
-						break;
-					}
-					if (!bounds.equals(startBounds)) {
-						if (bounds.y < minScreenY) {
-							int delta = minScreenY - bounds.y;
-							bounds.y = minScreenY;
-							bounds.height -= delta;
+					int minScreenY = getMinScreenY();
+					if (isMovingWindow) {
+						Point location = ev.getLocationOnScreen();
+						location.x -= dragOffsetX;
+						location.y = Math.max(minScreenY, location.y - dragOffsetY);
+						w.setLocation(location);
+					} else if (dragCursor != 0) {
+						Point pt = ev.getPoint();
+						Rectangle bounds = w.getBounds();
+						Rectangle startBounds = new Rectangle(bounds);
+						Dimension min = MINIMUM_SIZE;
+						switch (dragCursor) {
+							case Cursor.E_RESIZE_CURSOR:
+								adjust(bounds, min, 0, 0, pt.x + dragWidth - dragOffsetX - bounds.width, 0);
+								break;
+							case Cursor.S_RESIZE_CURSOR:
+								adjust(bounds, min, 0, 0, 0, pt.y + dragHeight - dragOffsetY - bounds.height);
+								break;
+							case Cursor.N_RESIZE_CURSOR:
+								adjust(bounds, min, 0, pt.y - dragOffsetY, 0, -(pt.y - dragOffsetY));
+								break;
+							case Cursor.W_RESIZE_CURSOR:
+								adjust(bounds, min, pt.x - dragOffsetX, 0, -(pt.x - dragOffsetX), 0);
+								break;
+							case Cursor.NE_RESIZE_CURSOR:
+								adjust(bounds, min, 0, pt.y - dragOffsetY, pt.x + dragWidth - dragOffsetX - bounds.width, -(pt.y - dragOffsetY));
+								break;
+							case Cursor.SE_RESIZE_CURSOR:
+								adjust(bounds, min, 0, 0, pt.x + dragWidth - dragOffsetX - bounds.width, pt.y + dragHeight - dragOffsetY - bounds.height);
+								break;
+							case Cursor.NW_RESIZE_CURSOR:
+								adjust(bounds, min, pt.x - dragOffsetX, pt.y - dragOffsetY, -(pt.x - dragOffsetX), -(pt.y - dragOffsetY));
+								break;
+							case Cursor.SW_RESIZE_CURSOR:
+								adjust(bounds, min, pt.x - dragOffsetX, 0, -(pt.x - dragOffsetX),pt.y + dragHeight - dragOffsetY - bounds.height);
+								break;
+							default:
+								break;
 						}
-						w.setBounds(bounds);
-						w.validate();
+						if (!bounds.equals(startBounds)) {
+							if (bounds.y < minScreenY) {
+								int delta = minScreenY - bounds.y;
+								bounds.y = minScreenY;
+								bounds.height -= delta;
+							}
+							w.setBounds(bounds);
+							w.validate();
+						}
 					}
 				}
 			}
@@ -503,32 +498,30 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		public void mouseMoved(MouseEvent ev) {
 			if (ev.getSource() instanceof Window) {
 				JRootPane root = getRootPane();
-				if (root.getWindowDecorationStyle() == NONE) {
-					return;
-				}
+				if (root.getWindowDecorationStyle() != NONE) {
+					Window w = (Window) ev.getSource();
+					Frame f = null;
+					Dialog d = null;
 
-				Window w = (Window) ev.getSource();
-				Frame f = null;
-				Dialog d = null;
-
-				if (w instanceof Frame) {
-					f = (Frame) w;
-				} else if (w instanceof Dialog) {
-					d = (Dialog) w;
-				}
-
-				// Update the cursor
-				int cursor = getCursor(calculateCorner(w, ev.getX(), ev.getY()));
-				if (!isMovingWindow && cursor != 0
-						&& (f != null && f.isResizable() && (f.getExtendedState() & BaseRootPaneUI.MAXIMIZED_BOTH) == 0
-								|| d != null && d.isResizable())) {
-					if (savedCursor == null) {
-						savedCursor = w.getCursor();
+					if (w instanceof Frame) {
+						f = (Frame) w;
+					} else if (w instanceof Dialog) {
+						d = (Dialog) w;
 					}
-					w.setCursor(Cursor.getPredefinedCursor(cursor));
-				} else if (savedCursor != null) {
-					w.setCursor(savedCursor);
-					savedCursor = null;
+
+					// Update the cursor
+					int cursor = getCursor(calculateCorner(w, ev.getX(), ev.getY()));
+					if (!isMovingWindow && cursor != 0
+							&& (f != null && f.isResizable() && (f.getExtendedState() & BaseRootPaneUI.MAXIMIZED_BOTH) == 0
+							|| d != null && d.isResizable())) {
+						if (savedCursor == null) {
+							savedCursor = w.getCursor();
+						}
+						w.setCursor(Cursor.getPredefinedCursor(cursor));
+					} else if (savedCursor != null) {
+						w.setCursor(savedCursor);
+						savedCursor = null;
+					}
 				}
 			}
 		}
@@ -538,79 +531,71 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 			Window w = (Window) ev.getSource();
 			if (w instanceof Window) {
 				JRootPane root = getRootPane();
-				if (root.getWindowDecorationStyle() == NONE) {
-					return;
-				}
-				w.toFront();
+				if (root.getWindowDecorationStyle() != NONE) {
+					w.toFront();
 
-				Point dragWindowOffset = ev.getPoint();
-				Point convertedDragWindowOffset = SwingUtilities.convertPoint(w, dragWindowOffset,
-						internalGetTitlePane());
+					Point dragWindowOffset = ev.getPoint();
+					Point convertedDragWindowOffset = SwingUtilities.convertPoint(w, dragWindowOffset, internalGetTitlePane());
 
-				Frame f = null;
-				Dialog d = null;
+					Frame f = null;
+					Dialog d = null;
 
-				if (w instanceof Frame) {
-					f = (Frame) w;
-				} else if (w instanceof Dialog) {
-					d = (Dialog) w;
-				}
+					if (w instanceof Frame) {
+						f = (Frame) w;
+					} else if (w instanceof Dialog) {
+						d = (Dialog) w;
+					}
 
-				int frameState = f != null ? f.getExtendedState() : 0;
+					int frameState = f != null ? f.getExtendedState() : 0;
 
-				if (internalGetTitlePane() != null && internalGetTitlePane().contains(convertedDragWindowOffset)) {
-					if ((f != null && (frameState & BaseRootPaneUI.MAXIMIZED_BOTH) == 0 || d != null)
-							&& dragWindowOffset.y >= BORDER_DRAG_THICKNESS
-							&& dragWindowOffset.x >= BORDER_DRAG_THICKNESS
-							&& dragWindowOffset.x < w.getWidth() - BORDER_DRAG_THICKNESS) {
-						isMovingWindow = true;
+					if (internalGetTitlePane() != null && internalGetTitlePane().contains(convertedDragWindowOffset)) {
+						if ((f != null && (frameState & BaseRootPaneUI.MAXIMIZED_BOTH) == 0 || d != null)
+								&& dragWindowOffset.y >= BORDER_DRAG_THICKNESS
+								&& dragWindowOffset.x >= BORDER_DRAG_THICKNESS
+								&& dragWindowOffset.x < w.getWidth() - BORDER_DRAG_THICKNESS) {
+							isMovingWindow = true;
+							dragOffsetX = dragWindowOffset.x;
+							dragOffsetY = dragWindowOffset.y;
+							if (window instanceof JFrame) {
+								JFrame frame = (JFrame) window;
+								for (PropertyChangeListener pcl : frame.getPropertyChangeListeners()) {
+									pcl.propertyChange(new PropertyChangeEvent(window, "windowMoving", Boolean.FALSE, Boolean.FALSE));
+								}
+							}
+							if (window instanceof JDialog) {
+								JDialog dialog = (JDialog) window;
+								for (PropertyChangeListener pcl : dialog.getPropertyChangeListeners()) {
+									pcl.propertyChange(new PropertyChangeEvent(window, "windowMoving", Boolean.FALSE, Boolean.FALSE));
+								}
+							}
+						}
+					} else if (f != null && f.isResizable() && (frameState & BaseRootPaneUI.MAXIMIZED_BOTH) == 0
+							|| d != null && d.isResizable()) {
+						isResizingWindow = true;
+						if (!isDynamicLayout()) {
+							savedContentPane = getRootPane().getContentPane();
+							GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+							BufferedImage bi = gc.createCompatibleImage(savedContentPane.getWidth(), savedContentPane.getHeight());
+							savedContentPane.paint(bi.getGraphics());
+							resizingPanel = new ResizingPanel(bi);
+							getRootPane().setContentPane(resizingPanel);
+						}
 						dragOffsetX = dragWindowOffset.x;
 						dragOffsetY = dragWindowOffset.y;
+						dragWidth = w.getWidth();
+						dragHeight = w.getHeight();
+						dragCursor = getCursor(calculateCorner(w, dragWindowOffset.x, dragWindowOffset.y));
 						if (window instanceof JFrame) {
 							JFrame frame = (JFrame) window;
 							for (PropertyChangeListener pcl : frame.getPropertyChangeListeners()) {
-								pcl.propertyChange(
-										new PropertyChangeEvent(window, "windowMoving", Boolean.FALSE, Boolean.FALSE));
+								pcl.propertyChange(new PropertyChangeEvent(window, "windowResizing", Boolean.FALSE, Boolean.FALSE));
 							}
 						}
 						if (window instanceof JDialog) {
 							JDialog dialog = (JDialog) window;
 							for (PropertyChangeListener pcl : dialog.getPropertyChangeListeners()) {
-								pcl.propertyChange(
-										new PropertyChangeEvent(window, "windowMoving", Boolean.FALSE, Boolean.FALSE));
+								pcl.propertyChange(new PropertyChangeEvent(window, "windowResizing", Boolean.FALSE, Boolean.FALSE));
 							}
-						}
-					}
-				} else if (f != null && f.isResizable() && (frameState & BaseRootPaneUI.MAXIMIZED_BOTH) == 0
-						|| d != null && d.isResizable()) {
-					isResizingWindow = true;
-					if (!isDynamicLayout()) {
-						savedContentPane = getRootPane().getContentPane();
-						GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment()
-								.getDefaultScreenDevice().getDefaultConfiguration();
-						BufferedImage bi = gc.createCompatibleImage(savedContentPane.getWidth(),
-								savedContentPane.getHeight());
-						savedContentPane.paint(bi.getGraphics());
-						resizingPanel = new ResizingPanel(bi);
-						getRootPane().setContentPane(resizingPanel);
-					}
-					dragOffsetX = dragWindowOffset.x;
-					dragOffsetY = dragWindowOffset.y;
-					dragWidth = w.getWidth();
-					dragHeight = w.getHeight();
-					dragCursor = getCursor(calculateCorner(w, dragWindowOffset.x, dragWindowOffset.y));
-					if (window instanceof JFrame) {
-						JFrame frame = (JFrame) window;
-						for (PropertyChangeListener pcl : frame.getPropertyChangeListeners()) {
-							pcl.propertyChange(
-									new PropertyChangeEvent(window, "windowResizing", Boolean.FALSE, Boolean.FALSE));
-						}
-					}
-					if (window instanceof JDialog) {
-						JDialog dialog = (JDialog) window;
-						for (PropertyChangeListener pcl : dialog.getPropertyChangeListeners()) {
-							pcl.propertyChange(
-									new PropertyChangeEvent(window, "windowResizing", Boolean.FALSE, Boolean.FALSE));
 						}
 					}
 				}

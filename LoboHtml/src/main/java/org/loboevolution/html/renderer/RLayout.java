@@ -248,7 +248,7 @@ public class RLayout {
 	            bodyLayout.positionRElement(markupElement, renderable, true, true, false);
 	            break;
 	        default:
-	            return;
+				break;
 	        }
 	    }
 	}

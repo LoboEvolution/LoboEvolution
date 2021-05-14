@@ -362,78 +362,68 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 	/** {@inheritDoc} */
 	@Override
 	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
-		if (!c.isEnabled()) {
-			return;
-		}
+		if (c.isEnabled()) {
+			g.translate(thumbBounds.x, thumbBounds.y);
+			Color[] colors = getThumbColors();
+			Color frameColorHi = ColorHelper.brighter(colors[1], 20);
+			Color frameColorLo = ColorHelper.darker(colors[colors.length - 1], 10);
+			Graphics2D g2D = (Graphics2D) g;
+			Composite savedComposite = g2D.getComposite();
+			if (scrollbar.getOrientation() == Adjustable.VERTICAL) {
+				JTattooUtilities.fillVerGradient(g, colors, 1, 1, thumbBounds.width - 1, thumbBounds.height - 1);
+				JTattooUtilities.draw3DBorder(g, frameColorLo, ColorHelper.darker(frameColorLo, 15), 0, 0, thumbBounds.width, thumbBounds.height);
+				g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+				g.setColor(frameColorHi);
+				g.drawLine(1, 1, thumbBounds.width - 2, 1);
+				g.drawLine(1, 1, 1, thumbBounds.height - 2);
 
-		g.translate(thumbBounds.x, thumbBounds.y);
+				if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+					int dx = 5;
+					int dy = thumbBounds.height / 2 - 3;
+					int dw = thumbBounds.width - 11;
 
-		Color[] colors = getThumbColors();
+					Color c1 = Color.white;
+					Color c2 = Color.darkGray;
 
-		Color frameColorHi = ColorHelper.brighter(colors[1], 20);
-		Color frameColorLo = ColorHelper.darker(colors[colors.length - 1], 10);
+					for (int i = 0; i < 4; i++) {
+						g.setColor(c1);
+						g.drawLine(dx, dy, dx + dw, dy);
+						dy++;
+						g.setColor(c2);
+						g.drawLine(dx, dy, dx + dw, dy);
+						dy++;
+					}
+				}
+				g2D.setComposite(savedComposite);
+			} else { // HORIZONTAL
+				JTattooUtilities.fillHorGradient(g, colors, 1, 1, thumbBounds.width - 1, thumbBounds.height - 1);
+				JTattooUtilities.draw3DBorder(g, frameColorLo, ColorHelper.darker(frameColorLo, 10), 0, 0, thumbBounds.width, thumbBounds.height);
+				g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+				g.setColor(frameColorHi);
+				g.drawLine(1, 1, thumbBounds.width - 2, 1);
+				g.drawLine(1, 1, 1, thumbBounds.height - 2);
 
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
-		if (scrollbar.getOrientation() == Adjustable.VERTICAL) {
-			JTattooUtilities.fillVerGradient(g, colors, 1, 1, thumbBounds.width - 1, thumbBounds.height - 1);
-			JTattooUtilities.draw3DBorder(g, frameColorLo, ColorHelper.darker(frameColorLo, 15), 0, 0,
-					thumbBounds.width, thumbBounds.height);
+				if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+					int dx = thumbBounds.width / 2 - 3;
+					int dy = 5;
+					int dh = thumbBounds.height - 11;
 
-			g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
-			g.setColor(frameColorHi);
-			g.drawLine(1, 1, thumbBounds.width - 2, 1);
-			g.drawLine(1, 1, 1, thumbBounds.height - 2);
+					Color c1 = Color.white;
+					Color c2 = Color.darkGray;
 
-			if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
-				int dx = 5;
-				int dy = thumbBounds.height / 2 - 3;
-				int dw = thumbBounds.width - 11;
-
-				Color c1 = Color.white;
-				Color c2 = Color.darkGray;
-
-				for (int i = 0; i < 4; i++) {
-					g.setColor(c1);
-					g.drawLine(dx, dy, dx + dw, dy);
-					dy++;
-					g.setColor(c2);
-					g.drawLine(dx, dy, dx + dw, dy);
-					dy++;
+					for (int i = 0; i < 4; i++) {
+						g.setColor(c1);
+						g.drawLine(dx, dy, dx, dy + dh);
+						dx++;
+						g.setColor(c2);
+						g.drawLine(dx, dy, dx, dy + dh);
+						dx++;
+					}
 				}
 			}
 			g2D.setComposite(savedComposite);
-		} else { // HORIZONTAL
-			JTattooUtilities.fillHorGradient(g, colors, 1, 1, thumbBounds.width - 1, thumbBounds.height - 1);
-			JTattooUtilities.draw3DBorder(g, frameColorLo, ColorHelper.darker(frameColorLo, 10), 0, 0,
-					thumbBounds.width, thumbBounds.height);
-
-			g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
-			g.setColor(frameColorHi);
-			g.drawLine(1, 1, thumbBounds.width - 2, 1);
-			g.drawLine(1, 1, 1, thumbBounds.height - 2);
-
-			if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
-				int dx = thumbBounds.width / 2 - 3;
-				int dy = 5;
-				int dh = thumbBounds.height - 11;
-
-				Color c1 = Color.white;
-				Color c2 = Color.darkGray;
-
-				for (int i = 0; i < 4; i++) {
-					g.setColor(c1);
-					g.drawLine(dx, dy, dx, dy + dh);
-					dx++;
-					g.setColor(c2);
-					g.drawLine(dx, dy, dx, dy + dh);
-					dx++;
-				}
-			}
+			g.translate(-thumbBounds.x, -thumbBounds.y);
 		}
-		g2D.setComposite(savedComposite);
-
-		g.translate(-thumbBounds.x, -thumbBounds.y);
 	}
 
 	/** {@inheritDoc} */

@@ -52,25 +52,28 @@ class RList extends BaseRListElement {
 		ListStyle listStyle = this.listStyle;
 		if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
 			final Object rootNode = this.modelNode;
-			if (!(rootNode instanceof HTMLElementImpl)) {
-				return;
-			}
-			final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-			if (listStyle == null) {
-				listStyle = new ListStyle();
-				this.listStyle = listStyle;
-			}
-			if ("ul".equalsIgnoreCase(rootElement.getTagName())) {
-				final int listNesting = this.listNesting;
-				if (listNesting == 0) {
-					listStyle.setType(ListValues.TYPE_DISC.getValue());
-				} else if (listNesting == 1) {
-					listStyle.setType(ListValues.TYPE_CIRCLE.getValue());
-				} else {
-					listStyle.setType(ListValues.TYPE_SQUARE.getValue());
+			if (rootNode instanceof HTMLElementImpl) {
+				final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
+				if (listStyle == null) {
+					listStyle = new ListStyle();
+					this.listStyle = listStyle;
 				}
-			} else {
-				listStyle.setType(ListValues.TYPE_DECIMAL.getValue());
+				if ("ul".equalsIgnoreCase(rootElement.getTagName())) {
+					final int listNesting = this.listNesting;
+					switch (listNesting) {
+						case 0:
+							listStyle.setType(ListValues.TYPE_DISC.getValue());
+							break;
+						case 1:
+							listStyle.setType(ListValues.TYPE_CIRCLE.getValue());
+							break;
+						default:
+							listStyle.setType(ListValues.TYPE_SQUARE.getValue());
+							break;
+					}
+				} else {
+					listStyle.setType(ListValues.TYPE_DECIMAL.getValue());
+				}
 			}
 		}
 	}
@@ -78,20 +81,20 @@ class RList extends BaseRListElement {
 	/** {@inheritDoc} */
 	@Override
 	public void doLayout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
-			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
+						 FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
 		final RenderState renderState = this.modelNode.getRenderState();
-		
-		final Object rootNode = this.modelNode;
-		if (!(rootNode instanceof HTMLElementImpl)) {
-			return;
-		}
-		final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-		HTMLDocumentImpl doc =  (HTMLDocumentImpl)rootElement.getDocumentNode();
-		final String startText = rootElement.getAttribute("start");
-		int counterStart = HtmlValues.getPixelSize(startText, renderState, doc.getWindow(), 0);
 
-		renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, counterStart);
-		super.doLayout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX,
-				defaultOverflowY, sizeOnly);
+		final Object rootNode = this.modelNode;
+		if (rootNode instanceof HTMLElementImpl) {
+
+			final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
+			HTMLDocumentImpl doc = (HTMLDocumentImpl) rootElement.getDocumentNode();
+			final String startText = rootElement.getAttribute("start");
+			int counterStart = HtmlValues.getPixelSize(startText, renderState, doc.getWindow(), 0);
+
+			renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, counterStart);
+			super.doLayout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX,
+					defaultOverflowY, sizeOnly);
+		}
 	}
 }

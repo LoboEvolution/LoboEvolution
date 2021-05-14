@@ -554,37 +554,31 @@ class RLine extends BaseRCollection {
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
-        
-		if (rs != null) {
-			if (rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
-	            return;
-	        }
-			
+		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
 			final Color textColor = rs.getColor();
 			g.setColor(textColor);
 			final Font font = rs.getFont();
 			g.setFont(font);
-		}
-
-		final Iterator<Renderable> i = this.renderables.iterator();
-		if (i != null) {
-			while (i.hasNext()) {
-				final Object r = i.next();
-				if (r instanceof RElement) {
-					// RElements should be translated.
-					final RElement relement = (RElement) r;
-					final Graphics newG = g.create();
-					newG.translate(relement.getX(), relement.getY());
-					try {
-						relement.paint(newG);
-					} finally {
-						newG.dispose();
+			final Iterator<Renderable> i = this.renderables.iterator();
+			if (i != null) {
+				while (i.hasNext()) {
+					final Object r = i.next();
+					if (r instanceof RElement) {
+						// RElements should be translated.
+						final RElement relement = (RElement) r;
+						final Graphics newG = g.create();
+						newG.translate(relement.getX(), relement.getY());
+						try {
+							relement.paint(newG);
+						} finally {
+							newG.dispose();
+						}
+					} else if (r instanceof BoundableRenderable) {
+						final BoundableRenderable br = (BoundableRenderable) r;
+						br.paintTranslated(g);
+					} else {
+						((Renderable) r).paint(g);
 					}
-				} else if (r instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) r;
-					br.paintTranslated(g);
-				} else {
-					((Renderable) r).paint(g);
 				}
 			}
 		}
