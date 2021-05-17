@@ -49,6 +49,7 @@ class ElementFactory {
 		builders.put(HTMLTag.DL, div);
 		builders.put(HTMLTag.DT, div);
 		builders.put(HTMLTag.MAIN, div);
+		builders.put(HTMLTag.NAV, div);
 
 		builders.put(HTMLTag.BODY, new HTMLElementBuilder.Body());
 		builders.put(HTMLTag.CENTER, new HTMLElementBuilder.Center());

@@ -37,7 +37,6 @@ import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
-import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.TypeInfo;
@@ -100,7 +99,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
     		NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
     		childNodes.forEach(child -> {
     			for (Selector selector : selectorList) {                	
-                	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null, true)) {
+                	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
                 		elem.add((Element)child);
                     }
                 }
@@ -122,7 +121,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
     		NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
     		childNodes.forEach(child -> {
                 for (Selector selector : selectorList) {                	
-                	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null, true)) {
+                	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
                         al.add(child);
                     }
                 }

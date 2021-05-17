@@ -20,39 +20,7 @@
 
 package org.loboevolution.html.style;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.regex.Pattern;
-
-import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLInputElement;
-import org.loboevolution.html.dom.HTMLLinkElement;
-import org.loboevolution.html.dom.HTMLSelectElement;
-import org.loboevolution.html.dom.HTMLTextAreaElement;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
-import org.loboevolution.store.LinkStore;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
-import org.loboevolution.html.node.Text;
-import org.loboevolution.html.node.js.Window;
-
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
-import com.gargoylesoftware.css.dom.CSSRuleListImpl;
-import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.dom.CSSValueImpl;
-import com.gargoylesoftware.css.dom.MediaListImpl;
-import com.gargoylesoftware.css.dom.Property;
+import com.gargoylesoftware.css.dom.*;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
@@ -61,23 +29,31 @@ import com.gargoylesoftware.css.parser.condition.Condition;
 import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
-import com.gargoylesoftware.css.parser.selector.ChildSelector;
-import com.gargoylesoftware.css.parser.selector.DescendantSelector;
-import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
-import com.gargoylesoftware.css.parser.selector.ElementSelector;
-import com.gargoylesoftware.css.parser.selector.GeneralAdjacentSelector;
-import com.gargoylesoftware.css.parser.selector.PseudoElementSelector;
-import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.*;
 import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
-import com.gargoylesoftware.css.parser.selector.SelectorList;
-import com.gargoylesoftware.css.parser.selector.SimpleSelector;
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.*;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.Text;
+import org.loboevolution.html.node.js.Window;
+import org.loboevolution.store.LinkStore;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
+
 /**
  * Aggregates all style sheets in a document. Every time a new STYLE element is
  * found, it is added to the style sheet aggreagator by means of the
  * {@link #addStyleSheet(CSSStyleSheetImpl)} method.
- *
- *
- *
  */
 public class StyleSheetAggregator {
 
@@ -96,28 +72,11 @@ public class StyleSheetAggregator {
 	 * <p>addStyleSheets.</p>
 	 *
 	 * @param styleSheets a {@link java.util.List} object.
-	 * @throws java.lang.Exception if any.
 	 */
-	public final void addStyleSheets(List<CSSStyleSheetImpl> styleSheets) throws Exception {
+	public final void addStyleSheets(List<CSSStyleSheetImpl> styleSheets) {
 		for (CSSStyleSheetImpl sheet : styleSheets) {
 			addStyleSheet(sheet);
 		}
-	}
-
-	/**
-	 * <p>affectedByPseudoNameInAncestor.</p>
-	 *
-	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param ancestor a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param elementName a {@link java.lang.String} object.
-	 * @param elementId a {@link java.lang.String} object.
-	 * @param classArray an array of {@link java.lang.String} objects.
-	 * @param pseudoName a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public final boolean affectedByPseudoNameInAncestor(HTMLElementImpl element, HTMLElementImpl ancestor,
-			String elementName, String elementId, String[] classArray, String pseudoName) {
-		return false;
 	}
 	
 	/**
@@ -126,16 +85,16 @@ public class StyleSheetAggregator {
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param elementName a {@link java.lang.String} object.
 	 * @param classes an array of {@link java.lang.String} objects.
+	 * @param mouseOver a {@link java.lang.Boolean } object.
 	 * @return a {@link java.util.List} object.
 	 */
-	public final List<CSSStyleSheetImpl.SelectorEntry> getActiveStyleDeclarations(HTMLElementImpl element, String elementName, final String[] classes) {
+	public final List<CSSStyleSheetImpl.SelectorEntry> getActiveStyleDeclarations(HTMLElementImpl element, String elementName, final String[] classes, boolean mouseOver) {
 		List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
-		
 		for (CSSStyleSheetImpl sheet : styleSheets) {
 			if(matchingRules.size() == 0) {
-				matchingRules = selects(sheet.getRuleIndex(), element, elementName, false, classes);
+				matchingRules = selects(sheet.getRuleIndex(), element, elementName, mouseOver, classes);
 			} else {
-				final List<CSSStyleSheetImpl.SelectorEntry> _matchingRules = selects(sheet.getRuleIndex(), element, elementName, false, classes);
+				final List<CSSStyleSheetImpl.SelectorEntry> _matchingRules = selects(sheet.getRuleIndex(), element, elementName, mouseOver, classes);
 				matchingRules.addAll(_matchingRules);
 			}
 		}
@@ -148,16 +107,14 @@ public class StyleSheetAggregator {
 	 * @param selector a {@link com.gargoylesoftware.css.parser.selector.Selector} object.
 	 * @param node a {@link org.loboevolution.html.node.Node} object.
 	 * @param pseudoElement a {@link java.lang.String} object.
-	 * @param fromQuerySelectorAll a boolean.
 	 * @return a boolean.
 	 */
-	public static boolean selects(final Selector selector, final Node node, final String pseudoElement,
-			final boolean fromQuerySelectorAll) {
-		return new StyleSheetAggregator().selects(selector, (HTMLElement)node, pseudoElement, fromQuerySelectorAll);
+	public static boolean selects(final Selector selector, final Node node, final String pseudoElement) {
+		return new StyleSheetAggregator().selects(selector, (HTMLElement)node, pseudoElement, false);
 	}
 
 	private List<CSSStyleSheetImpl.SelectorEntry> selects(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
-			final HTMLElement element, final String pseudoElement, final boolean fromQuerySelectorAll,
+			final HTMLElement element, final String pseudoElement, final boolean mouseOver,
 			final String[] classes) {
 
 		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
@@ -166,21 +123,20 @@ public class StyleSheetAggregator {
 			final Iterator<CSSStyleSheetImpl.SelectorEntry> iter = index.getSelectorEntriesIteratorFor(elementName, classes);
 			CSSStyleSheetImpl.SelectorEntry entry = iter.next();
 			while (null != entry) {
-				if (selects(entry.getSelector(), element, pseudoElement, fromQuerySelectorAll)) {
+				if (selects(entry.getSelector(), element, pseudoElement, mouseOver)) {
 					matchingRules.add(entry);
 				}
 				entry = iter.next();
 			}
 
 			for (CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
-				matchingRules.addAll(selects(child, element, pseudoElement, fromQuerySelectorAll, classes));
+				matchingRules.addAll(selects(child, element, pseudoElement, mouseOver, classes));
 			}
 		}
 		return matchingRules;
 	}
 
-	private boolean selects(final Selector selector, final HTMLElement element, final String pseudoElement,
-			final boolean fromQuerySelectorAll) {
+	private boolean selects(final Selector selector, final HTMLElement element, final String pseudoElement, final boolean mouseOver) {
 		switch (selector.getSelectorType()) {
 		case ELEMENT_NODE_SELECTOR:
 			final ElementSelector es = (ElementSelector) selector;
@@ -189,7 +145,7 @@ public class StyleSheetAggregator {
 				final List<Condition> conditions = es.getConditions();
 				if (conditions != null) {
 					for (Condition condition : conditions) {
-						if (!selects(condition, element, fromQuerySelectorAll)) {
+						if (!selects(condition, element, mouseOver)) {
 							return false;
 						}
 					}
@@ -204,20 +160,20 @@ public class StyleSheetAggregator {
 				return false; // for instance parent is a DocumentFragment
 			}
 			final ChildSelector cs = (ChildSelector) selector;
-			return selects(cs.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)
-					&& selects(cs.getAncestorSelector(), (HTMLElement) parentNode, pseudoElement, fromQuerySelectorAll);
+			return selects(cs.getSimpleSelector(), element, pseudoElement, mouseOver)
+					&& selects(cs.getAncestorSelector(), (HTMLElement) parentNode, pseudoElement, mouseOver);
 
 		case DESCENDANT_SELECTOR:
 			final DescendantSelector ds = (DescendantSelector) selector;
 			final SimpleSelector simpleSelector = ds.getSimpleSelector();
-			if (selects(simpleSelector, element, pseudoElement, fromQuerySelectorAll)) {
+			if (selects(simpleSelector, element, pseudoElement, mouseOver)) {
 				Node ancestor = element;
 				if (simpleSelector.getSelectorType() != SelectorType.PSEUDO_ELEMENT_SELECTOR) {
 					ancestor = ancestor.getParentNode();
 				}
 				final Selector dsAncestorSelector = ds.getAncestorSelector();
 				while (ancestor instanceof HTMLElement) {
-					if (selects(dsAncestorSelector, (HTMLElement) ancestor, pseudoElement, fromQuerySelectorAll)) {
+					if (selects(dsAncestorSelector, (HTMLElement) ancestor, pseudoElement, mouseOver)) {
 						return true;
 					}
 					ancestor = ancestor.getParentNode();
@@ -227,22 +183,22 @@ public class StyleSheetAggregator {
 
 		case DIRECT_ADJACENT_SELECTOR:
 			final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
-			if (selects(das.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
+			if (selects(das.getSimpleSelector(), element, pseudoElement, mouseOver)) {
 				Node prev = element.getPreviousSibling();
 				while (prev != null && !(prev instanceof HTMLElement)) {
 					prev = prev.getPreviousSibling();
 				}
 				return prev != null
-						&& selects(das.getSelector(), (HTMLElement) prev, pseudoElement, fromQuerySelectorAll);
+						&& selects(das.getSelector(), (HTMLElement) prev, pseudoElement, mouseOver);
 			}
 			return false;
 
 		case GENERAL_ADJACENT_SELECTOR:
 			final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
-			if (selects(gas.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
+			if (selects(gas.getSimpleSelector(), element, pseudoElement, mouseOver)) {
 				for (Node prev1 = element.getPreviousSibling(); prev1 != null; prev1 = prev1.getPreviousSibling()) {
 					if (prev1 instanceof HTMLElement
-							&& selects(gas.getSelector(), (HTMLElement) prev1, pseudoElement, fromQuerySelectorAll)) {
+							&& selects(gas.getSelector(), (HTMLElement) prev1, pseudoElement, mouseOver)) {
 						return true;
 					}
 				}
@@ -260,7 +216,7 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private boolean selects(final Condition condition, final HTMLElement element, final boolean fromQuerySelectorAll) {
+	private boolean selects(final Condition condition, final HTMLElement element, final boolean mouseOver) {
 		switch (condition.getConditionType()) {
 		case ID_CONDITION:
 			return condition.getValue().equals(element.getId());
@@ -322,7 +278,7 @@ public class StyleSheetAggregator {
 			return false;
 
 		case PSEUDO_CLASS_CONDITION:
-			return selectsPseudoClass(condition, element, fromQuerySelectorAll);
+			return selectsPseudoClass(condition, element, mouseOver);
 
 		default:
 			return false;
@@ -383,11 +339,11 @@ public class StyleSheetAggregator {
 		return false;
 	}
 
-	private boolean selectsPseudoClass(final Condition condition, final HTMLElement element,
-			final boolean fromQuerySelectorAll) {
-
+	private boolean selectsPseudoClass(final Condition condition, final HTMLElement element, final boolean mouseOver) {
 		final String value = condition.getValue();
 		switch (value) {
+			case "hover":
+			return mouseOver;
 		case "root":
 			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
 			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == NodeType.DOCUMENT_TYPE_NODE;
@@ -571,7 +527,7 @@ public class StyleSheetAggregator {
 						throw new CSSException("Invalid selectors: " + selectors);
 					}
 					
-					return !selects(selectorList.get(0), element, null, fromQuerySelectorAll);
+					return !selects(selectorList.get(0), element, null, mouseOver);
 				} catch (final IOException e) {
 					throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
 				}
@@ -630,8 +586,7 @@ public class StyleSheetAggregator {
 					break;
 
 				case "min-width":
-
-					case "min-height":
+				case "min-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val > window.getInnerWidth()) {
@@ -640,8 +595,7 @@ public class StyleSheetAggregator {
 					break;
 
 				case "max-device-width":
-
-					case "max-device-height":
+				case "max-device-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val < window.getScreen().getWidth()) {
@@ -650,16 +604,14 @@ public class StyleSheetAggregator {
 					break;
 
 				case "min-device-width":
-
-					case "min-device-height":
+				case "min-device-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val > window.getScreen().getWidth()) {
 						return false;
 					}
 					break;
-
-					case "resolution":
+				case "resolution":
 					final CSSValueImpl propValue = property.getValue();
 					val = HtmlValues.resolutionValue(propValue);
 					if (propValue == null) {
@@ -669,8 +621,7 @@ public class StyleSheetAggregator {
 						return false;
 					}
 					break;
-
-				case "max-resolution":
+  			    case "max-resolution":
 					val = HtmlValues.resolutionValue(property.getValue());
 					if (val == -1 || val < window.getScreen().getPixelDepth()) {
 						return false;
@@ -759,18 +710,18 @@ public class StyleSheetAggregator {
 		return n >= 0 && n % 1 == 0;
 	}
 
-	private void addStyleSheet(CSSStyleSheetImpl styleSheet) throws Exception {
+	private void addStyleSheet(CSSStyleSheetImpl styleSheet) {
 		CSSRuleListImpl ruleList = styleSheet.getCssRules();
 		CSSStyleSheetImpl.CSSStyleSheetRuleIndex index = styleSheet.getRuleIndex();
 		if (index == null) {
 			index = new CSSStyleSheetImpl.CSSStyleSheetRuleIndex();
 		}
-		index(index, ruleList, new HashSet<>());
+		index(index, ruleList);
 		styleSheet.setRuleIndex(index);
 		styleSheets.add(styleSheet);
 	}
 
-	private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList, final Set<String> alreadyProcessing) {
+	private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList) {
 		for (AbstractCSSRuleImpl rule : ruleList.getRules()) {
 			if (rule instanceof CSSStyleRuleImpl) {
 				final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
@@ -799,9 +750,9 @@ public class StyleSheetAggregator {
 				final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
 				final MediaListImpl mediaList = mediaRule.getMediaList();
 				if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
-					index(index, mediaRule.getCssRules(), alreadyProcessing);
+					index(index, mediaRule.getCssRules());
 				} else {
-					index(index.addMedia(mediaList), mediaRule.getCssRules(), alreadyProcessing);
+					index(index.addMedia(mediaList), mediaRule.getCssRules());
 				}
 			}
 		}

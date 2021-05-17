@@ -42,25 +42,20 @@ import org.loboevolution.html.style.CSSPropertiesContext;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
  * <p>HTMLElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSPropertiesContext {
+
 	private Map<String, AbstractCSSProperties> computedStyles;
 
 	private volatile AbstractCSSProperties currentStyleDeclarationState;
-
-	private Map<HTMLElementImpl, Boolean> hasHoverStyleByElement = null;
-	
-	private Boolean isHoverStyle = null;
-
-	private boolean isMouseOver = false;
 
 	private volatile AbstractCSSProperties localStyleDeclarationState;
 	
@@ -78,9 +73,10 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * is created if necessary when the one passed is null.
 	 *
 	 * @param style a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @param mouseOver a {@link java.lang.Boolean } object.
 	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
 	 */
-	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style) {
+	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style, boolean mouseOver) {
 		final Node pn = this.parentNode;
 		if (pn == null) {
 			return style;
@@ -88,7 +84,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		final String classNames = getClassName();
 		final String elementName = getTagName();
 		final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
-		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray);
+		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray, mouseOver);
 		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
 			final CSSStyleDeclarationImpl cssStyleDeclarationImpl = entry.getRule().getStyle();
 			if (style == null) {
@@ -133,15 +129,17 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 *
 	 * @param elementName a {@link java.lang.String} object.
 	 * @param classes an array of {@link java.lang.String} objects.
+	 * @param mouseOver a {@link java.lang.Boolean } object.
 	 * @return a {@link java.util.List} object.
 	 */
-	protected final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes) {
+	protected final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes, boolean mouseOver) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+
 		if (doc == null) {
 			return new ArrayList<>();
 		}
 		final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
-		return ssa.getActiveStyleDeclarations(this, elementName, classes);
+		return ssa.getActiveStyleDeclarations(this, elementName, classes, mouseOver);
 	}
 
 	/**
@@ -164,8 +162,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		synchronized (this) {
 			this.currentStyleDeclarationState = null;
 			this.computedStyles = null;
-			this.isHoverStyle = null;
-			this.hasHoverStyleByElement = null;
 			if (deep) {
 				nodeList.forEach(node -> {
 					if (node instanceof HTMLElementImpl) {
@@ -269,7 +265,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 
 		AbstractCSSProperties sds = createDefaultStyleSheet();
-		sds = addStyleSheetDeclarations(sds);
+		sds = addStyleSheetDeclarations(sds, false);
 		// Now add local style if any.
 		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
@@ -310,7 +306,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			}
 		}
 		sds = createDefaultStyleSheet();
-		sds = addStyleSheetDeclarations(sds);
+		sds = addStyleSheetDeclarations(sds, false);
 		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
 			sds = new AbstractCSSProperties(this);
@@ -390,8 +386,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().width;
 	}
 
-	
-
 	/**
 	 * <p>getParent.</p>
 	 *
@@ -457,71 +451,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return sds;
 	}
 
-	private boolean hasHoverStyle() {
-		Boolean ihs;
-		synchronized (this) {
-			ihs = this.isHoverStyle;
-			if (ihs != null) {
-				return ihs;
-			}
-		}
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		if (doc == null) {
-			ihs = Boolean.FALSE;
-		} else {
-			final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
-			final String id = getId();
-			final String elementName = getTagName();
-			final String classNames = getClassName();
-			String[] classNameArray = null;
-			if (classNames != null && classNames.length() != 0) {
-				classNameArray = Strings.split(classNames);
-			}
-			ihs = ssa.affectedByPseudoNameInAncestor(this, this, elementName, id, classNameArray, "hover");
-		}
-		synchronized (this) {
-			this.isHoverStyle = ihs;
-		}
-		return ihs;
-	}
-
-	private boolean hasHoverStyle(HTMLElementImpl ancestor) {
-		Map<HTMLElementImpl, Boolean> ihs;
-		synchronized (this) {
-			ihs = this.hasHoverStyleByElement;
-			if (ihs != null) {
-				final Boolean f = ihs.get(ancestor);
-				if (f != null) {
-					return f;
-				}
-			}
-		}
-		boolean hhs;
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		if (doc == null) {
-			hhs = Boolean.FALSE;
-		} else {
-			final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
-			final String id = getId();
-			final String elementName = getTagName();
-			final String classNames = getClassName();
-			String[] classNameArray = null;
-			if (classNames != null && classNames.length() != 0) {
-				classNameArray = Strings.split(classNames);
-			}
-			hhs = ssa.affectedByPseudoNameInAncestor(this, ancestor, elementName, id, classNameArray, "hover");
-		}
-		synchronized (this) {
-			ihs = this.hasHoverStyleByElement;
-			if (ihs == null) {
-				ihs = new HashMap<>(2);
-				this.hasHoverStyleByElement = ihs;
-			}
-			ihs.put(ancestor, hhs);
-		}
-		return hhs;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void informInvalid() {
@@ -557,25 +486,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
-	private void invalidateDescendentsForHover() {
-		synchronized (this.treeLock) {
-			invalidateDescendentsForHoverImpl(this);
-		}
-	}
-
-	private void invalidateDescendentsForHoverImpl(HTMLElementImpl ancestor) {
-		nodeList.forEach(node -> {
-			if (node instanceof HTMLElementImpl) {
-				final HTMLElementImpl descendent = (HTMLElementImpl) node;
-				if (descendent.hasHoverStyle(ancestor)) {
-					descendent.informInvalid();
-				}
-				descendent.invalidateDescendentsForHoverImpl(ancestor);
-			}
-		});
-	}
-	
-
 	/**
 	 * <p>setCharset.</p>
 	 *
@@ -600,16 +510,15 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param mouseOver a boolean.
 	 */
 	public void setMouseOver(boolean mouseOver) {
-		if (this.isMouseOver != mouseOver) {
-			// Change isMouseOver field before checking to invalidate.
-			this.isMouseOver = mouseOver;
-			// Check if descendents are affected (e.g. div:hover a { ... } )
-			invalidateDescendentsForHover();
-			if (this.hasHoverStyle()) {
-				// TODO: OPTIMIZATION: In some cases it should be much
-				// better to simply invalidate the "look" of the node.
-				informInvalid();
+		if (mouseOver) {
+			AbstractCSSProperties sds = createDefaultStyleSheet();
+			currentStyleDeclarationState = addStyleSheetDeclarations(sds, mouseOver);
+			if (currentStyleDeclarationState != null) {
+				informInvalidRecursive();
 			}
+		} else {
+			forgetStyle(true);
+			informInvalidRecursive();
 		}
 	}
 
@@ -617,6 +526,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * <p>setStyle.</p>
 	 *
 	 * @param value a {@link java.lang.String} object.
+	 *
 	 */
 	public void setStyle(String value) {
 		this.setAttribute("style", value);

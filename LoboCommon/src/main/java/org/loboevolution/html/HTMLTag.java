@@ -82,6 +82,7 @@ public enum HTMLTag {
 	LINK("LINK"),
 	MAIN("MAIN"),
 	META("META"),
+	NAV("NAV"),
 	NOSCRIPT("NOSCRIPT"),
 	OBJECT("OBJECT"),
 	OL("OL"),
