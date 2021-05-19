@@ -19,7 +19,9 @@
  */
 package org.loboevolution.html.control;
 
-import java.awt.ComponentOrientation;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
@@ -35,23 +37,26 @@ public class InputControl extends BaseControl {
 	private static final long serialVersionUID = 1L;
 	
 	private final HTMLInputElementImpl  modelNode;
+
+	private Map<String, Image> map;
 	
 	/**
 	 * <p>Constructor for InputControl.</p>
-	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param map a {@link java.util.Map} object.
 	 */
-	public InputControl(HTMLInputElementImpl modelNode) {
+	public InputControl(HTMLInputElementImpl modelNode,  Map<String, Image> map) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;
+		this.map = map;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
-		modelNode.draw(this);
+		modelNode.draw(this, map);
 	}
 	
 	/**

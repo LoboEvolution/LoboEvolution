@@ -29,6 +29,7 @@ import java.io.Reader;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -177,7 +178,12 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					} catch (SocketTimeoutException e) {
 						logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
 				    } catch (Exception e) {
-						logger.log(Level.SEVERE, e.getMessage(), e);
+						if(e instanceof MissingResourceException){
+							logger.log(Level.INFO, e.getMessage());
+						} else{
+							logger.log(Level.SEVERE, e.getMessage(), e);
+						}
+
 					}
 				} else {
 					String scriptURI = doc.getBaseURI();

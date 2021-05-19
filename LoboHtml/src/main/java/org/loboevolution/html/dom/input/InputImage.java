@@ -30,6 +30,7 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.PixelGrabber;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,8 +51,6 @@ public class InputImage {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(InputImage.class.getName());
 
-	private final BufferedImage image;
-	
 	private final HTMLInputElementImpl modelNode;
 
 	/**
@@ -60,9 +59,18 @@ public class InputImage {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputImage(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputImage(HTMLInputElementImpl modelNode, InputControl ic, Map<String, Image> map) {
 		this.modelNode = modelNode;
-		image = toBufferedImage(HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI()));
+		final Image img = map.get(modelNode.getSrc());
+
+		BufferedImage image;
+		if(img == null){
+			image = toBufferedImage(HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI()));
+			map.put(modelNode.getSrc(), image);
+		} else{
+			image = toBufferedImage(img);
+		}
+
 		JLabel wIcon = new JLabel(new ImageIcon(image));
 		ic.add(wIcon);
 	}

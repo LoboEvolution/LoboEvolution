@@ -29,6 +29,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.WrapperLayout;
@@ -43,15 +45,12 @@ import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>ImgControl class.</p>
- *
- *
- *
  */
 public class ImgControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 
-	private final Image image;
+	private Image image;
 
 	private final String alt;
 
@@ -60,17 +59,22 @@ public class ImgControl extends BaseControl {
 	private int valign = AlignValues.BASELINE.getValue();
 	
 	private boolean mouseBeingPressed;
-	
+
 	/**
 	 * <p>Constructor for ImgControl.</p>
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLImageElementImpl} object.
 	 */
-	public ImgControl(HTMLImageElementImpl modelNode) {
+	public ImgControl(HTMLImageElementImpl modelNode, Map<String, Image> map) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
-		image = HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI());
+
+		image = map.get(modelNode.getSrc());
+		if(image == null){
+			image = HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI());
+			map.put(modelNode.getSrc(), image);
+		}
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

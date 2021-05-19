@@ -30,11 +30,14 @@ import org.loboevolution.html.dom.HTMLInputElement;
 import org.loboevolution.html.dom.input.*;
 import org.loboevolution.html.node.Node;
 
+import java.awt.*;
+import java.util.Map;
+
 /**
  * <p>HTMLInputElementImpl class.</p>
  */
 public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLInputElement {
-	
+
 	private InputText text;
 	
 	private InputRadio radio;
@@ -204,8 +207,9 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	 * <p>draw.</p>
 	 *
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 * @param map a {@link java.util.Map} object.
 	 */
-	public void draw(InputControl ic) {
+	public void draw(InputControl ic, Map<String, Image> map) {
 		String type = getType();
 		
 		if (Strings.isBlank(type)) {
@@ -217,8 +221,8 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 			new InputHidden(this, ic);
 			break;
 		case "submit":
-			case "reset":
-			case "button":
+		case "reset":
+		case "button":
 				new InputButton(this, ic);
 			break;
 		case "password":
@@ -239,10 +243,10 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 		case "checkbox":
 			checkbox = new InputCheckbox(this, ic);
 			break;
-			case "image":
-			new InputImage(this, ic);
+		case "image":
+			new InputImage(this, ic, map);
 			break;
-			case "range":
+		case "range":
 			new InputRange(this, ic);
 			break;
 		case "date":

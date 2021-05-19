@@ -23,12 +23,7 @@ package org.loboevolution.net;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
@@ -147,8 +142,7 @@ public class HttpNetwork {
 				final URL u = new URL(scriptURI);
 				final URLConnection connection = u.openConnection();
 				connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
-				try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-						Reader reader = new InputStreamReader(in, "utf-8")) {
+				try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
 
 					if (href.contains(";base64,")) {
 						final String base64 = href.split(";base64,")[1];
@@ -182,7 +176,9 @@ public class HttpNetwork {
 					}
 				} catch (SocketTimeoutException e) {
 					logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
-			    }
+			    } catch (FileNotFoundException e) {
+					logger.log(Level.INFO, e.getMessage());
+				}
 			}
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
