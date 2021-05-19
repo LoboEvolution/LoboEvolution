@@ -46,9 +46,6 @@ import com.gargoylesoftware.css.util.CSSProperties;
 
 /**
  * <p>AbstractCSSProperties class.</p>
- *
- *
- *
  */
 public class AbstractCSSProperties extends AbstractScriptableDelegate implements CSSProperties, CSS3Properties {
 	

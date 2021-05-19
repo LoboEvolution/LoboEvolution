@@ -60,6 +60,8 @@ public class StyleSheetAggregator {
 	private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\]\\.:])");
 
 	private final List<CSSStyleSheetImpl> styleSheets;
+
+	private boolean mouseOver = false;
 	
 	/**
 	 * <p>Constructor for StyleSheetAggregator.</p>
@@ -343,7 +345,8 @@ public class StyleSheetAggregator {
 		final String value = condition.getValue();
 		switch (value) {
 			case "hover":
-			return mouseOver;
+				setMouseOver(true);
+				return mouseOver;
 		case "root":
 			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
 			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == NodeType.DOCUMENT_TYPE_NODE;
@@ -587,7 +590,7 @@ public class StyleSheetAggregator {
 
 				case "min-width":
 				case "min-height":
-						value = String.valueOf(property.getValue().getDoubleValue());
+					value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val > window.getInnerWidth()) {
 						return false;
@@ -596,7 +599,7 @@ public class StyleSheetAggregator {
 
 				case "max-device-width":
 				case "max-device-height":
-						value = String.valueOf(property.getValue().getDoubleValue());
+					value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val < window.getScreen().getWidth()) {
 						return false;
@@ -605,7 +608,7 @@ public class StyleSheetAggregator {
 
 				case "min-device-width":
 				case "min-device-height":
-						value = String.valueOf(property.getValue().getDoubleValue());
+					value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, window, -1);
 					if (val == -1 || val > window.getScreen().getWidth()) {
 						return false;
@@ -758,4 +761,11 @@ public class StyleSheetAggregator {
 		}
 	}
 
+	public boolean isMouseOver() {
+		return mouseOver;
+	}
+
+	public void setMouseOver(boolean mouseOver) {
+		this.mouseOver = mouseOver;
+	}
 }

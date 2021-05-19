@@ -58,6 +58,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	private volatile AbstractCSSProperties currentStyleDeclarationState;
 
 	private volatile AbstractCSSProperties localStyleDeclarationState;
+
+	private boolean hasMouseOver;
 	
 	/**
 	 * <p>Constructor for HTMLElementImpl.</p>
@@ -139,7 +141,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			return new ArrayList<>();
 		}
 		final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
-		return ssa.getActiveStyleDeclarations(this, elementName, classes, mouseOver);
+		final List<CSSStyleSheetImpl.SelectorEntry> list = ssa.getActiveStyleDeclarations(this, elementName, classes, mouseOver);
+		hasMouseOver = ssa.isMouseOver();
+		return list;
 	}
 
 	/**
@@ -510,15 +514,17 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param mouseOver a boolean.
 	 */
 	public void setMouseOver(boolean mouseOver) {
-		if (mouseOver) {
-			AbstractCSSProperties sds = createDefaultStyleSheet();
-			currentStyleDeclarationState = addStyleSheetDeclarations(sds, mouseOver);
-			if (currentStyleDeclarationState != null) {
+		if (hasMouseOver) {
+			if (mouseOver) {
+				AbstractCSSProperties sds = createDefaultStyleSheet();
+				currentStyleDeclarationState = addStyleSheetDeclarations(sds, mouseOver);
+				if (currentStyleDeclarationState != null) {
+					informInvalidRecursive();
+				}
+			} else {
+				forgetStyle(true);
 				informInvalidRecursive();
 			}
-		} else {
-			forgetStyle(true);
-			informInvalidRecursive();
 		}
 	}
 
