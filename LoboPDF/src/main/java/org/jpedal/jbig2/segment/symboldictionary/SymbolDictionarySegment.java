@@ -227,7 +227,7 @@ public class SymbolDictionarySegment extends Segment {
 			}
 
 			if (instanceDeltaHeight < 0 && -instanceDeltaHeight >= deltaHeight) {
-				if(JBIG2StreamDecoder.debug)
+				if (JBIG2StreamDecoder.debug)
 					logger.info("Bad delta-height value in JBIG2 symbol dictionary");
 			}
 
@@ -253,7 +253,7 @@ public class SymbolDictionarySegment extends Segment {
 				deltaWidth = decodeIntResult.intResult();
 
 				if (deltaWidth < 0 && -deltaWidth >= symbolWidth) {
-					if(JBIG2StreamDecoder.debug)
+					if (JBIG2StreamDecoder.debug)
 						logger.info("Bad delta-width value in JBIG2 symbol dictionary");
 				}
 				
@@ -376,7 +376,7 @@ public class SymbolDictionarySegment extends Segment {
 				}
 
 				int x = 0;
-				while (j < i){
+				while (j < i) {
 					bitmaps[numberOfInputSymbols + j] = collectiveBitmap.getSlice(x, 0, deltaWidths[j], deltaHeight);
 					x += deltaWidths[j];
 					

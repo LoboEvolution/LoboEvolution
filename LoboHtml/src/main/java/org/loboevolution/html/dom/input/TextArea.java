@@ -92,7 +92,7 @@ public class TextArea extends BasicInput {
 			@Override
 			public void focusLost(FocusEvent event) {
 				String selectedText = jtArea.getSelectedText();
-				if(Strings.isNotBlank(selectedText)) {
+				if (Strings.isNotBlank(selectedText)) {
 					Pattern word = Pattern.compile(selectedText);
 					Matcher match = word.matcher(modelNode.getValue());
 					

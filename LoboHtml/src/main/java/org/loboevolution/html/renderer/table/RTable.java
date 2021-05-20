@@ -211,7 +211,7 @@ public class RTable extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onDoubleClick(MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
@@ -240,7 +240,7 @@ public class RTable extends BaseElementRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseClick(MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
@@ -267,7 +267,7 @@ public class RTable extends BaseElementRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseDisarmed(MouseEvent event) {
+	public boolean onMouseDisarmed(final MouseEvent event) {
 		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onMouseDisarmed(event);
 	}
 
@@ -280,7 +280,7 @@ public class RTable extends BaseElementRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMousePressed(MouseEvent event, int x, int y) {
+	public boolean onMousePressed(final MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
@@ -307,7 +307,7 @@ public class RTable extends BaseElementRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseReleased(MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
@@ -327,7 +327,7 @@ public class RTable extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
 			// Just don't paint it.

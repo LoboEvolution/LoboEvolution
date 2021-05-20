@@ -48,7 +48,7 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGUseElementImpl(String name) {
+	public SVGUseElementImpl(final String name) {
 		super(name);
 	}
 
@@ -102,7 +102,7 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		this.graphics = graphics;
 		final SVGMatrix ctm = getCTM();
 		createShape(ctm.getAffineTransform());

@@ -291,7 +291,7 @@ public class StyleSheetRenderState implements RenderState {
 
 			if (Strings.isNotBlank(backgroundColorText)) {
 				CSSValues bc = CSSValues.get(backgroundColorText);
-				if(bc.equals(CSSValues.INHERIT)) {
+				if (bc.equals(CSSValues.INHERIT)) {
 					binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
 				} else {
 					binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
@@ -357,7 +357,7 @@ public class StyleSheetRenderState implements RenderState {
 		CSSValues color = CSSValues.get(colorValue);
 		switch (color) {
 		case INHERIT:
-			if(this.getPreviousRenderState() != null) {
+			if (this.getPreviousRenderState() != null) {
 				return this.getPreviousRenderState().getColor();
 			} else {
 				return Color.BLACK;

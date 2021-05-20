@@ -43,7 +43,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class GraphiteCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new GraphiteCheckBoxMenuItemUI();
 	}
 

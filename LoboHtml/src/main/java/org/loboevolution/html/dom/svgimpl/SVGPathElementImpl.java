@@ -74,7 +74,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGPathElementImpl(String name) {
+	public SVGPathElementImpl(final String name) {
 		super(name);
 	}
 
@@ -247,7 +247,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		String attribute = getAttribute("d");
 		constructPathSegList(attribute);
 		final Shape shape = createShape(null);

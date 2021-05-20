@@ -57,7 +57,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 	/** {@inheritDoc} */
 	@Override
 	public void setLength(int length) {
-		if(length == 0) clear();
+		if (length == 0) clear();
 	}
 
 	/** {@inheritDoc} */
@@ -107,7 +107,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 	@Override
 	public void add(HTMLOptionElement element) {
 		List<Node> nodeList = getNodeList();
-		if(nodeList.size() == 0) element.setSelected(true);
+		if (nodeList.size() == 0) element.setSelected(true);
 		nodeList.add(element);
 	}
 
@@ -123,7 +123,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 
 		if (element instanceof Double) {
 			double d = (Double) element;
-			if(d < getNodeList().size())
+			if (d < getNodeList().size())
 				getNodeList().remove((int) d);
 		}
 
@@ -145,12 +145,12 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 
 
 
-	private void addElementIndex(HTMLOptionElement element, double before){
+	private void addElementIndex(HTMLOptionElement element, double before) {
 		List<Node> nodeList = getNodeList();
 		if (before > nodeList.size() || before < 0) {
 			add(element);
 		} else {
-			if(nodeList.size() == 0){
+			if (nodeList.size() == 0) {
 				element.setSelected(true);
 				nodeList.add(element);
 			} else	{
@@ -174,7 +174,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 					break;
 				}
 			}
-			if(!found)
+			if (!found)
 				throw new DOMException(Code.NOT_FOUND_ERR, "Record not found");
 		}
 	}

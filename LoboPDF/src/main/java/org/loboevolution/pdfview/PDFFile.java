@@ -54,16 +54,16 @@ import org.loboevolution.pdfview.decrypt.UnsupportedEncryptionException;
 public class PDFFile {
 
     /** Constant <code>NUL_CHAR=0</code> */
-    public final static int             NUL_CHAR = 0;
+    public static final  int             NUL_CHAR = 0;
     /** Constant <code>FF_CHAR=12</code> */
-    public final static int             FF_CHAR = 12;
+    public static final  int             FF_CHAR = 12;
 
     private String versionString = "1.1";
     private int majorVersion = 1;
     private int minorVersion = 1;
     /** the end of line character */
     /** the comment text to begin the file to determine it's version */
-    private final static String VERSION_COMMENT = "%PDF-";
+    private static final  String VERSION_COMMENT = "%PDF-";
     /**
      * A ByteBuffer containing the file data
      */
@@ -406,7 +406,7 @@ public class PDFFile {
         PDFObject obj = null;
         while (obj == null && this.buf.hasRemaining()) {
             while (isWhiteSpace(c = this.buf.get())) {
-            	if(!buf.hasRemaining()) {
+            	if (!buf.hasRemaining()) {
             		break;
             	}
             }
@@ -1728,7 +1728,7 @@ public class PDFFile {
         	for (PDFObject object : array) {
                 try {
             		PDFAnnotation pdfAnnot = PDFAnnotation.createAnnotation(object);
-            		if(pdfAnnot != null) {
+            		if (pdfAnnot != null) {
                 		annotationList.add(pdfAnnot);
             		}
                 }catch (PDFParseException e) {

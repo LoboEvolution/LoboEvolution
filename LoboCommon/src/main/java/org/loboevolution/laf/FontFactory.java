@@ -35,7 +35,7 @@ import java.util.*;
  * Author J. H. S.
  *
  */
-public class FontFactory {
+public final class FontFactory {
 
 	/** The font families. */
 	private final Set<String> fontFamilies = new HashSet<>();

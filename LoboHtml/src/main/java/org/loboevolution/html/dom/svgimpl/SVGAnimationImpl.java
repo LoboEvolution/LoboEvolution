@@ -45,7 +45,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGAnimationImpl(String name) {
+	public SVGAnimationImpl(final String name) {
 		super(name);
 	}
 
@@ -185,8 +185,8 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	@Override
 	public float getRepeatCount() {
 		String rc = this.getAttribute("repeatCount");
-		if(rc == null) return 0;
-		if("indefinite".equals(rc)) return Float.MAX_VALUE;
+		if (rc == null) return 0;
+		if ("indefinite".equals(rc)) return Float.MAX_VALUE;
 		return Float.parseFloat(rc);
 	}
 
@@ -200,8 +200,8 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	@Override
 	public float getRepeatDur() {
 		String rd = this.getAttribute("repeatDur");
-		if(rd == null) return 5000;
-		if("indefinite".equals(rd)) return Float.MAX_VALUE;
+		if (rd == null) return 5000;
+		if ("indefinite".equals(rd)) return Float.MAX_VALUE;
 		return TimeImpl.getClockMilliSecs(rd);
 	}
 

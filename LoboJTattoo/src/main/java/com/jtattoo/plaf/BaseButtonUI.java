@@ -64,7 +64,7 @@ public class BaseButtonUI extends BasicButtonUI {
 	protected static Color[] defaultColors = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseButtonUI();
 	}
 
@@ -98,7 +98,7 @@ public class BaseButtonUI extends BasicButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		Graphics2D g2D = (Graphics2D) g;
 
 		AbstractButton b = (AbstractButton) c;

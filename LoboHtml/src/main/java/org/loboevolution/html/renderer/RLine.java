@@ -477,7 +477,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onDoubleClick(MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -490,7 +490,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseClick(MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final MouseEvent event, int x, int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -503,7 +503,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseDisarmed(MouseEvent event) {
+	public boolean onMouseDisarmed(final MouseEvent event) {
 		final BoundableRenderable target = this.mousePressTarget;
 		if (target != null) {
 			this.mousePressTarget = null;
@@ -515,7 +515,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMousePressed(MouseEvent event, int x, int y) {
+	public boolean onMousePressed(final MouseEvent event, int x, int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -529,7 +529,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseReleased(MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -552,7 +552,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
 			final Color textColor = rs.getColor();

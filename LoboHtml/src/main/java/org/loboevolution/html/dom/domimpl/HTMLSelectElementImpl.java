@@ -49,7 +49,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLSelectElementImpl(String name) {
+	public HTMLSelectElementImpl(final String name) {
 		super(name);
 	}
 
@@ -85,7 +85,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public HTMLOptionsCollection getOptions() {
-		if(options == null ) options = new HTMLOptionsCollectionImpl(this, new OptionFilter());
+		if (options == null ) options = new HTMLOptionsCollectionImpl(this, new OptionFilter());
 		return options;
 	}
 
@@ -126,7 +126,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 			HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
 			options.forEach(node -> {
 				HTMLOptionElement op = (HTMLOptionElement) node;
-				if(Strings.isBlank(x.get())) x.set(op.getValue());
+				if (Strings.isBlank(x.get())) x.set(op.getValue());
 			});
 			return x.get();
 		}
@@ -251,11 +251,11 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 
 			if (getOptions().getLength() == 1 && !isMultiple()) {
 				HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
-				options.stream().findFirst().ifPresent(option -> { ((HTMLOptionElement) option).setSelected(true); });
+				options.stream().findFirst().ifPresent(option -> ((HTMLOptionElement) option).setSelected(true));
 			}
 
 			if (selectOption != null) selectOption.resetItemList(this);
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

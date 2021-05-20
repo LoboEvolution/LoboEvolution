@@ -38,7 +38,7 @@ import javax.swing.plaf.basic.BasicTreeUI;
 public class BaseTreeUI extends BasicTreeUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseTreeUI();
 	}
 

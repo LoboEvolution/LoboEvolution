@@ -78,7 +78,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			if (isResizable(c)) {
 				return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 			} else {
@@ -87,7 +87,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
@@ -182,7 +182,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			if (hasLogo(c)) {
 				if (JTattooUtilities.isLeftToRight(c)) {
 					return new Insets(leftLogoInsets.top, leftLogoInsets.left, leftLogoInsets.bottom + shadowSize,
@@ -197,7 +197,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
@@ -424,12 +424,12 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -454,12 +454,12 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -488,12 +488,12 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -522,12 +522,12 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -573,12 +573,12 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -614,7 +614,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			if (tableBorder) {
 				return new Insets(TABLE_INSETS.top, TABLE_INSETS.left, TABLE_INSETS.bottom, TABLE_INSETS.right);
 			} else {
@@ -623,7 +623,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
@@ -651,12 +651,12 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -681,12 +681,12 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(2, 2, 2, 0);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -717,12 +717,12 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -747,7 +747,7 @@ public class BaseBorders {
 		private static final Color SHADOW_COLOR = new Color(160, 160, 160);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			Insets insets = new Insets(2, 2, 2, 2);
 			if (((JToolBar) c).isFloatable()) {
 				if (((JToolBar) c).getOrientation() == HORIZONTAL) {
@@ -771,7 +771,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets insets = getBorderInsets(c);
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
@@ -821,11 +821,11 @@ public class BaseBorders {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;

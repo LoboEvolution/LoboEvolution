@@ -83,7 +83,7 @@ final class RSpacing extends BaseBoundableRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		// Nothing to paint in spacing.
 	}
 

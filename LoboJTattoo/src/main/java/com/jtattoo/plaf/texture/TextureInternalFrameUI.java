@@ -37,7 +37,7 @@ import com.jtattoo.plaf.BaseInternalFrameUI;
 public class TextureInternalFrameUI extends BaseInternalFrameUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new TextureInternalFrameUI((JInternalFrame) c);
 	}
 

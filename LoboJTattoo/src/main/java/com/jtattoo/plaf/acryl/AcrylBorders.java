@@ -56,11 +56,11 @@ public class AcrylBorders extends BaseBorders {
 		private static final Insets insets = new Insets(3, 6, 3, 6);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return insets;
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -114,12 +114,12 @@ public class AcrylBorders extends BaseBorders {
 		private static final Insets insets = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(insets.top, insets.left, insets.bottom, insets.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -193,11 +193,11 @@ public class AcrylBorders extends BaseBorders {
 		private static final Insets insets = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(insets.top, insets.left, insets.bottom, insets.right);
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -269,7 +269,7 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			if (tableBorder) {
 				return new Insets(tableInsets.top, tableInsets.left, tableInsets.bottom, tableInsets.right);
 			} else {
@@ -278,7 +278,7 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
@@ -306,12 +306,12 @@ public class AcrylBorders extends BaseBorders {
 		private static final Insets insets = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(insets.top, insets.left, insets.bottom, insets.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -340,12 +340,12 @@ public class AcrylBorders extends BaseBorders {
 		private static final Insets insets = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(insets.top, insets.left, insets.bottom, insets.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;

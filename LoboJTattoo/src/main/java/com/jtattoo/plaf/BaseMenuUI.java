@@ -54,7 +54,7 @@ public class BaseMenuUI extends BasicMenuUI {
 	protected class MyMouseInputHandler extends BasicMenuUI.MouseInputHandler {
 
 		@Override
-		public void mouseEntered(MouseEvent evt) {
+		public void mouseEntered(final MouseEvent evt) {
 			super.mouseEntered(evt);
 
 			JMenu menu = (JMenu) evt.getSource();
@@ -65,7 +65,7 @@ public class BaseMenuUI extends BasicMenuUI {
 		}
 
 		@Override
-		public void mouseExited(MouseEvent evt) {
+		public void mouseExited(final MouseEvent evt) {
 			super.mouseExited(evt);
 
 			JMenu menu = (JMenu) evt.getSource();
@@ -78,7 +78,7 @@ public class BaseMenuUI extends BasicMenuUI {
 	} // end of class MyMouseInputHandler
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseMenuUI();
 	}
 

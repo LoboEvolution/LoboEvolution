@@ -32,11 +32,8 @@ import javax.crypto.spec.PBEKeySpec;
 
 /**
  * The Class Strings.
- *
- *
- *
  */
-public class Strings {
+public final class Strings {
 	
 	private static final int iterations = 20*1000;
         
@@ -48,8 +45,7 @@ public class Strings {
 	/**
 	 * Instantiates a strings.
 	 */
-	private Strings() {
-	}
+	private Strings() { }
 
 	/**
 	 * Compare versions.
@@ -146,98 +142,6 @@ public class Strings {
 	}
 
 	/**
-	 * Gets the CRLF string.
-	 *
-	 * @param original the original
-	 * @return the CRLF string
-	 */
-	public static String getCRLFString(String original) {
-		if (original == null) {
-			return null;
-		}
-		final StringBuilder buffer = new StringBuilder();
-		boolean lastSlashR = false;
-		final char[] list = original.toCharArray();
-		for (final char ch : list) {
-			switch (ch) {
-			case '\r':
-				lastSlashR = true;
-				break;
-			case '\n':
-				lastSlashR = false;
-				buffer.append("\r\n");
-				break;
-			default:
-				if (lastSlashR) {
-					lastSlashR = false;
-					buffer.append("\r\n");
-				}
-				buffer.append(ch);
-				break;
-			}
-		}
-		return buffer.toString();
-	}
-
-	/**
-	 * Gets the java identifier.
-	 *
-	 * @param candidateID the candidate id
-	 * @return the java identifier
-	 */
-	public static String getJavaIdentifier(String candidateID) {
-		final int len = candidateID.length();
-		final StringBuilder buf = new StringBuilder();
-		for (int i = 0; i < len; i++) {
-			final char ch = candidateID.charAt(i);
-			final boolean good = i == 0 ? Character.isJavaIdentifierStart(ch) : Character.isJavaIdentifierPart(ch);
-			if (good) {
-				buf.append(ch);
-			} else {
-				buf.append('_');
-			}
-		}
-		return buf.toString();
-	}
-
-	/**
-	 * Gets the java string literal.
-	 *
-	 * @param text the text
-	 * @return the java string literal
-	 */
-	public static String getJavaStringLiteral(String text) {
-		final StringBuilder buf = new StringBuilder();
-		buf.append('"');
-		final int len = text.length();
-		for (int i = 0; i < len; i++) {
-			final char ch = text.charAt(i);
-			switch (ch) {
-			case '\\':
-				buf.append("\\\\");
-				break;
-			case '\n':
-				buf.append("\\n");
-				break;
-			case '\r':
-				buf.append("\\r");
-				break;
-			case '\t':
-				buf.append("\\t");
-				break;
-			case '"':
-				buf.append("\\\"");
-				break;
-			default:
-				buf.append(ch);
-				break;
-			}
-		}
-		buf.append('"');
-		return buf.toString();
-	}
-
-	/**
 	 * Checks if is blank.
 	 *
 	 * @param text the text
@@ -255,31 +159,6 @@ public class Strings {
 	 */
 	public static String linearize(String text) {
 		return text == null ? "" : text.replaceAll("(\r\n|\n)", "").replaceAll("\\s+", "");
-	}
-
-	/**
-	 * Checks if is java identifier.
-	 *
-	 * @param id the id
-	 * @return true, if is java identifier
-	 */
-	public static boolean isJavaIdentifier(String id) {
-		if (id == null) {
-			return false;
-		}
-		final int len = id.length();
-		if (len == 0) {
-			return false;
-		}
-		if (!Character.isJavaIdentifierStart(id.charAt(0))) {
-			return false;
-		}
-		for (int i = 1; i < len; i++) {
-			if (!Character.isJavaIdentifierPart(id.charAt(i))) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	/**

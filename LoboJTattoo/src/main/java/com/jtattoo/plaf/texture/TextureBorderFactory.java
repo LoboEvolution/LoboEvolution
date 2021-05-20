@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public class TextureBorderFactory implements AbstractBorderFactory {
+public final class TextureBorderFactory implements AbstractBorderFactory {
 
 	private static TextureBorderFactory instance = null;
 

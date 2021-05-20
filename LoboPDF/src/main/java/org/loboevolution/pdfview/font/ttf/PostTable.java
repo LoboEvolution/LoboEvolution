@@ -566,7 +566,7 @@ public class PostTable extends TrueTypeTable {
             // the length is stored in the first byte, followed by
             // the data
             for (int i = 0; i < maxGlyph; i++) {
-            	if(data.hasRemaining()) {
+            	if (data.hasRemaining()) {
                     // size in the first byte
                     byte size = data.get();
                             

@@ -51,7 +51,7 @@ public class FastSplitPaneDivider extends BaseSplitPaneDivider {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		g.setColor(AbstractLookAndFeel.getBackgroundColor());
 		g.fillRect(0, 0, getSize().width, getSize().height);
 		paintComponents(g);

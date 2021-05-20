@@ -36,7 +36,7 @@ public class SVGLinearGradientElementImpl extends SVGGradientElementImpl impleme
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGLinearGradientElementImpl(String name) {
+	public SVGLinearGradientElementImpl(final String name) {
 		super(name);
 	}
 

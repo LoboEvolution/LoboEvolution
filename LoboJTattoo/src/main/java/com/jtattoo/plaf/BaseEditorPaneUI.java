@@ -51,7 +51,7 @@ import javax.swing.text.JTextComponent;
 public class BaseEditorPaneUI extends BasicEditorPaneUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseEditorPaneUI();
 	}
 

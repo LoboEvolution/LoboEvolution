@@ -158,7 +158,7 @@ public class MMRDecoder {
 			}
 		}
 		if (tuple[0] < 0) {
-			if(JBIG2StreamDecoder.debug)
+			if (JBIG2StreamDecoder.debug)
 				logger.info("Bad two dim code in JBIG2 MMR stream");
 			
 			return 0;
@@ -216,7 +216,7 @@ public class MMRDecoder {
 			bufferLength += 8;
 			noOfBytesRead++;
 		}
-		if(JBIG2StreamDecoder.debug)
+		if (JBIG2StreamDecoder.debug)
 			logger.info("Bad white code in JBIG2 MMR stream");
 
 		bufferLength--;
@@ -284,7 +284,7 @@ public class MMRDecoder {
 			noOfBytesRead++;
 		}
 		
-		if(JBIG2StreamDecoder.debug)
+		if (JBIG2StreamDecoder.debug)
 			logger.info("Bad black code in JBIG2 MMR stream");
 
 		bufferLength--;

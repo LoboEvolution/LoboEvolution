@@ -48,7 +48,7 @@ public class ShowRecentDownloadAction extends AbstractAction {
 
     /** {@inheritDoc} */
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         final ShowDowlaodWindow window = new ShowDowlaodWindow(this.frame);
         window.setLocationByPlatform(true);
         window.setResizable(false);

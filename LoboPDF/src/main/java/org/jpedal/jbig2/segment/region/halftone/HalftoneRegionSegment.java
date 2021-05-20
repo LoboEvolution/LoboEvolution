@@ -136,7 +136,7 @@ public class HalftoneRegionSegment extends RegionSegment {
 
 		Segment segment = decoder.findSegment(referedToSegments[0]);
 		if (segment.getSegmentHeader().getSegmentType() != Segment.PATTERN_DICTIONARY) {
-			if(JBIG2StreamDecoder.debug)
+			if (JBIG2StreamDecoder.debug)
 				logger.info("Error in halftone Segment. bad symbol dictionary reference");
 		}
 		

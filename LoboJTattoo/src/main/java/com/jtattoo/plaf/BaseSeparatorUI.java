@@ -45,7 +45,7 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
 	private static final Dimension size = new Dimension(2, 3);
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseSeparatorUI();
 	}
 
@@ -57,7 +57,7 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		boolean horizontal = true;
 		if (c instanceof JSeparator) {
 			horizontal = ((JSeparator) c).getOrientation() == SwingConstants.HORIZONTAL;

@@ -77,7 +77,7 @@ public class BackgroundSetter implements SubPropertySetter {
 				}
 			}
 			if (color != null) {
-				if(CSSValues.INITIAL.equals(CSSValues.get(color))){
+				if (CSSValues.INITIAL.equals(CSSValues.get(color))) {
 					color = "white";
 				}
 				properties.setPropertyValueLCAlt(BACKGROUND_COLOR, color, important);

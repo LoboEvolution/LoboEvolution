@@ -37,7 +37,7 @@ import com.jtattoo.plaf.BaseInternalFrameUI;
 public class McWinInternalFrameUI extends BaseInternalFrameUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new McWinInternalFrameUI((JInternalFrame) c);
 	}
 

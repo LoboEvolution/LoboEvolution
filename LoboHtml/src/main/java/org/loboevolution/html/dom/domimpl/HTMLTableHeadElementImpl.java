@@ -32,7 +32,7 @@ public class HTMLTableHeadElementImpl extends HTMLTableCellElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLTableHeadElementImpl(String name) {
+	public HTMLTableHeadElementImpl(final String name) {
 		super(name);
 	}
 

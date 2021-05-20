@@ -55,7 +55,7 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLInputElementImpl(String name) {
+	public HTMLInputElementImpl(final String name) {
 		super(name);
 	}
 
@@ -130,21 +130,21 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	/** {@inheritDoc} */
 	@Override
 	public void select() {
-		if(text!= null) text.selectAll();
+		if (text!= null) text.selectAll();
 	}
 
 	/**
 	 * <p>blur.</p>
 	 */
 	public void blur() {
-		if(text!= null) {text.blur();} else {setFocusable(false);}
+		if (text!= null) {text.blur();} else {setFocusable(false);}
 	}
 	
 	/**
 	 * <p>focus.</p>
 	 */
 	public void focus() {
-		if(text!= null) {text.focus();} else {setFocusable(true);}
+		if (text!= null) {text.focus();} else {setFocusable(true);}
 	}
 
 	/** {@inheritDoc} */
@@ -322,12 +322,12 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	 * <p>resetInput.</p>
 	 */
 	public void resetInput() {
-		if(text != null) text.reset();
-		if(radio != null) radio.reset();
-		if(checkbox != null) checkbox.reset();
-		if(color != null) color.reset();
-		if(number != null) number.reset();
-		if(password != null) password.reset();
+		if (text != null) text.reset();
+		if (radio != null) radio.reset();
+		if (checkbox != null) checkbox.reset();
+		if (color != null) color.reset();
+		if (number != null) number.reset();
+		if (password != null) password.reset();
 	}
 
 	/** {@inheritDoc} */

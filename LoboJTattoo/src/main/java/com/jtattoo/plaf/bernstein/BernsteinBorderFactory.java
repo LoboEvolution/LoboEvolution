@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public class BernsteinBorderFactory implements AbstractBorderFactory {
+public final class BernsteinBorderFactory implements AbstractBorderFactory {
 
 	private static BernsteinBorderFactory instance = null;
 

@@ -41,7 +41,7 @@ public class BernsteinPanelUI extends BasePanelUI {
 	private static BernsteinPanelUI panelUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (panelUI == null) {
 			panelUI = new BernsteinPanelUI();
 		}

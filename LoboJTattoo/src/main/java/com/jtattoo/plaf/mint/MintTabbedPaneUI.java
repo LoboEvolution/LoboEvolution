@@ -36,7 +36,7 @@ import com.jtattoo.plaf.BaseTabbedPaneUI;
 public class MintTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new MintTabbedPaneUI();
 	}
 

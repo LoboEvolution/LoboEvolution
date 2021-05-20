@@ -37,7 +37,7 @@ import com.jtattoo.plaf.AbstractToolBarUI;
 public class FastToolBarUI extends AbstractToolBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new FastToolBarUI();
 	}
 

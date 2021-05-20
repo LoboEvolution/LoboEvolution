@@ -57,7 +57,7 @@ public interface SVGRect {
 	 * @param y a float.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	void setY(float y);;
+	void setY(final float y);
 
 	/**
 	 * <p>getWidth.</p>

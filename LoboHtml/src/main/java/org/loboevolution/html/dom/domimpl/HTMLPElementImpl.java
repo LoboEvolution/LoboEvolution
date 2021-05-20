@@ -36,7 +36,7 @@ public class HTMLPElementImpl extends HTMLElementImpl implements HTMLParagraphEl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLPElementImpl(String name) {
+	public HTMLPElementImpl(final String name) {
 		super(name);
 	}
 

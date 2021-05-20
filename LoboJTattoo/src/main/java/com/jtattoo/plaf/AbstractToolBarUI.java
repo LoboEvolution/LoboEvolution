@@ -94,7 +94,7 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		private static final Insets INSETS = new Insets(0, 0, 0, 0);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return INSETS;
 		}
 
@@ -109,9 +109,9 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 
 	} // end of class NullBorder
 
-	private final static String IS_ROLLOVER = "JToolBar.isRollover";
-	private final static Insets BUTTON_MARGIN = new Insets(1, 1, 1, 1);
-	private final static Border INNER_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
+	private static final  String IS_ROLLOVER = "JToolBar.isRollover";
+	private static final  Insets BUTTON_MARGIN = new Insets(1, 1, 1, 1);
+	private static final  Border INNER_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
 	private boolean rolloverEnabled = true;
 	private MyPropertyChangeListener propertyChangeListener = null;
 

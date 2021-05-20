@@ -141,12 +141,12 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 		List<TabInfo> tabs = TabStore.getTabs();
 		for (int i = 0; i < tabs.size(); i++) {
 			
-			if(i == index) {
+			if (i == index) {
 				WebStore.deleteStorage(1, index);
 				TabStore.deleteTab(index);
 			}
 			
-			if(i > index) {
+			if (i > index) {
 				WebStore.deleteStorage(1, index);
 				TabInfo tabInfo = tabs.get(i);
 				TabStore.deleteTab(i);
@@ -171,7 +171,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 	private void closeOtherTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
 		List<TabInfo> tabs = TabStore.getTabs();
 		for (int i = 0; i < tabs.size(); i++) {
-			if(i != index) {
+			if (i != index) {
 				WebStore.deleteStorage(1, i);
 				TabStore.deleteTab(i);
 			} else {

@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public class GraphiteBorderFactory implements AbstractBorderFactory {
+public final class GraphiteBorderFactory implements AbstractBorderFactory {
 
 	private static GraphiteBorderFactory instance = null;
 

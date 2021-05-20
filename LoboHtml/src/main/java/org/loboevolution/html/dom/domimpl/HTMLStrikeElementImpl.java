@@ -34,7 +34,7 @@ public class HTMLStrikeElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLStrikeElementImpl(String name) {
+	public HTMLStrikeElementImpl(final String name) {
 		super(name);
 	}
 

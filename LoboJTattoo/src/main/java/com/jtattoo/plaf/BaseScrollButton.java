@@ -96,7 +96,7 @@ public class BaseScrollButton extends BasicArrowButton {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		boolean isPressed = getModel().isPressed();
 		boolean isRollover = getModel().isRollover();
 

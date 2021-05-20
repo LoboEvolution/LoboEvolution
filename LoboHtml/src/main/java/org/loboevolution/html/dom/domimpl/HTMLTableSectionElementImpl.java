@@ -39,7 +39,7 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLTableSectionElementImpl(String name) {
+	public HTMLTableSectionElementImpl(final String name) {
 		super(name);
 	}
 

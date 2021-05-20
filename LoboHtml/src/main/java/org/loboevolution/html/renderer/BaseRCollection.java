@@ -177,7 +177,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	@Override
-	public void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
+	public void onMouseMoved(final MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
 		super.onMouseMoved(event, x, y, triggerEvent, limit);
 		final BoundableRenderable oldRenderable = this.renderableWithMouse;
 		final Renderable r = getRenderable(x, y);
@@ -203,7 +203,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	@Override
-	public void onMouseOut(MouseEvent event, int x, int y, ModelNode limit) {
+	public void onMouseOut(final MouseEvent event, int x, int y, ModelNode limit) {
 		super.onMouseOut(event, x, y, limit);
 		final BoundableRenderable oldRenderable = this.renderableWithMouse;
 		if (oldRenderable != null) {
@@ -220,7 +220,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onRightClick(MouseEvent event, int x, int y) {
+	public boolean onRightClick(final MouseEvent event, int x, int y) {
 		final BoundableRenderable br = getRenderable(x, y);
 		if (br == null) {
 			return HtmlController.getInstance().onContextMenu(this.modelNode, event, x, y);

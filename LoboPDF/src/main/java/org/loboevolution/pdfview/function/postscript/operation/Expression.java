@@ -14,7 +14,7 @@ public class Expression extends LinkedList<Object> {
 
 	/** {@inheritDoc} */
     @Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
         // actually validate the list contents are the same expressions
         return obj instanceof Expression;
     }

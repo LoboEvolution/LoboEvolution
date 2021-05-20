@@ -42,7 +42,7 @@ public class McWinRadioButtonUI extends BaseRadioButtonUI {
 	private static McWinRadioButtonUI radioButtonUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new McWinRadioButtonUI();
 		}

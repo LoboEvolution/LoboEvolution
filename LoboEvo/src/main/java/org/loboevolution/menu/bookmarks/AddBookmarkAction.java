@@ -50,7 +50,7 @@ public class AddBookmarkAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		final ToolBar toolbar = this.frame.getToolbar();
 		final AddBookmarkWindow bookmark = new AddBookmarkWindow(toolbar.getAddressBar().getText());
 		bookmark.setLocationByPlatform(true);

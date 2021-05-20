@@ -41,7 +41,7 @@ import com.jtattoo.plaf.XPScrollBarUI;
 public class HiFiScrollBarUI extends XPScrollBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new HiFiScrollBarUI();
 	}
 
@@ -57,7 +57,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected JButton createIncreaseButton(int orientation) {
+	protected JButton createIncreaseButton(final int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 			return super.createIncreaseButton(orientation);
 		} else {

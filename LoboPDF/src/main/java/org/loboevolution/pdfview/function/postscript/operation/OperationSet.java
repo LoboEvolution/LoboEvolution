@@ -5,11 +5,8 @@ import java.util.Map;
 
 /**
  * <p>OperationSet class.</p>
- *
-  *
-  *
  */
-public class OperationSet {
+public final class OperationSet {
 	
     /** the set of all Operations we support. These operations are defined
      * in Appendix B - Operators.*/

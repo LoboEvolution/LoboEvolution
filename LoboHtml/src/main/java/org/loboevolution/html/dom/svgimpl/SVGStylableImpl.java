@@ -59,7 +59,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGStylableImpl(String name) {
+	public SVGStylableImpl(final String name) {
 		super(name);
 		this.setStyle(getAttribute("style"));
 	}

@@ -61,19 +61,19 @@ public class StampAnnotation extends PDFAnnotation {
 	}
 	
 	private void parseAP(PDFObject dictRef) throws IOException {
-		if(dictRef == null) {
+		if (dictRef == null) {
 			return;
 		}
 		PDFObject normalAP = dictRef.getDictRef("N");
-		if(normalAP == null) {
+		if (normalAP == null) {
 			return;
 		}
-		if(normalAP.getType() == PDFObject.DICTIONARY) {
+		if (normalAP.getType() == PDFObject.DICTIONARY) {
 			this.onAppearance = normalAP.getDictRef("On");
 			this.offAppearance = normalAP.getDictRef("Off");
 			PDFObject as = dictRef.getDictRef("AS");			
 			this.appearanceStateOn = (as != null) && ("On".equals(as.getStringValue()));
-		}else {
+		} else {
 			this.onAppearance = normalAP;
 			this.offAppearance = null;
 			appearanceStateOn = true;
@@ -82,10 +82,10 @@ public class StampAnnotation extends PDFAnnotation {
 	}
 
 	private void parseCommands() throws IOException {
-		if(onAppearance != null) {
+		if (onAppearance != null) {
 			onCmd = parseCommand(onAppearance);
 		}
-		if(offAppearance != null) {
+		if (offAppearance != null) {
 			offCmd = parseCommand(offAppearance);
 		}
 	}

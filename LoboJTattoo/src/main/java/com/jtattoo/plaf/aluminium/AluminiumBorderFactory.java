@@ -34,7 +34,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public class AluminiumBorderFactory implements AbstractBorderFactory {
+public final class AluminiumBorderFactory implements AbstractBorderFactory {
 
 	private static AluminiumBorderFactory instance = null;
 

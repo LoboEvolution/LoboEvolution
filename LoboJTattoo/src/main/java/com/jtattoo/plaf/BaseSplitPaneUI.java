@@ -39,7 +39,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 public class BaseSplitPaneUI extends BasicSplitPaneUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseSplitPaneUI();
 	}
 

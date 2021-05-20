@@ -75,7 +75,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 	protected class MyTrackListener extends TrackListener {
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
+		public void mouseEntered(final MouseEvent e) {
 			super.mouseEntered(e);
 			isRollover = true;
 			Rectangle r = getTrackBounds();
@@ -83,7 +83,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
+		public void mouseExited(final MouseEvent e) {
 			super.mouseExited(e);
 			isRollover = false;
 			Rectangle r = getTrackBounds();
@@ -91,14 +91,14 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
+		public void mousePressed(final MouseEvent e) {
 			super.mousePressed(e);
 			Rectangle r = getTrackBounds();
 			scrollbar.repaint(r.x, r.y, r.width, r.height);
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
+		public void mouseReleased(final MouseEvent e) {
 			super.mouseReleased(e);
 			Rectangle r = getTrackBounds();
 			scrollbar.repaint(r.x, r.y, r.width, r.height);
@@ -107,7 +107,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 	} // end of class MyTrackListener
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseScrollBarUI();
 	}
 
@@ -131,7 +131,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected JButton createIncreaseButton(int orientation) {
+	protected JButton createIncreaseButton(final int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 			return new InvisibleScrollButton();
 		} else {

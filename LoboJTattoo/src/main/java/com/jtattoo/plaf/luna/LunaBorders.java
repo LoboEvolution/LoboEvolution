@@ -61,11 +61,11 @@ public class LunaBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(3, 6, 3, 6);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return INSETS;
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -141,12 +141,12 @@ public class LunaBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -217,11 +217,11 @@ public class LunaBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -294,7 +294,7 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			if (tableBorder) {
 				return new Insets(TABLE_INSETS.top, TABLE_INSETS.left, TABLE_INSETS.bottom, TABLE_INSETS.right);
 			} else {
@@ -303,7 +303,7 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
@@ -331,12 +331,12 @@ public class LunaBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(0, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -366,12 +366,12 @@ public class LunaBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;

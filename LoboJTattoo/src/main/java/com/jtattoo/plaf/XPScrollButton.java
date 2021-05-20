@@ -115,7 +115,7 @@ public abstract class XPScrollButton extends BaseScrollButton {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
 		Composite savedComposite = g2D.getComposite();
 		Paint savedPaint = g2D.getPaint();

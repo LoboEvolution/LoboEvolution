@@ -37,7 +37,7 @@ public class HTMLHeadElementImpl extends HTMLElementImpl implements HTMLHeadElem
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLHeadElementImpl(String name) {
+	public HTMLHeadElementImpl(final String name) {
 		super(name);
 	}
 

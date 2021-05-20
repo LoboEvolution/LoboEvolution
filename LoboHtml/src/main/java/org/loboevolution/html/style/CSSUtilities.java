@@ -42,11 +42,8 @@ import java.util.logging.Logger;
 
 /**
  * <p>CSSUtilities class.</p>
- *
- *
- *
  */
-public class CSSUtilities {
+public final class CSSUtilities {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CSSUtilities.class.getName());

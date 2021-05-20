@@ -57,7 +57,7 @@ public class SetAsDefaultAction<T> extends AbstractAction {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		if (JOptionPane.showConfirmDialog(this.item, "Are you sure you want set as default the selected item?",
 				"Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			setDefault();

@@ -73,19 +73,19 @@ import org.loboevolution.pdfview.colorspace.PDFColorSpace;
 public abstract class PDFShader {
     
     /** Constant <code>FUNCTION_SHADING=1</code> */
-    public final static int             FUNCTION_SHADING = 1;
+    public static final  int             FUNCTION_SHADING = 1;
     /** Constant <code>AXIAL_SHADING=2</code> */
-    public final static int             AXIAL_SHADING = 2;
+    public static final  int             AXIAL_SHADING = 2;
     /** Constant <code>RADIAL_SHADING=3</code> */
-    public final static int             RADIAL_SHADING = 3;
+    public static final  int             RADIAL_SHADING = 3;
     /** Constant <code>FREE_FORM_SHADING=4</code> */
-    public final static int             FREE_FORM_SHADING = 4;
+    public static final  int             FREE_FORM_SHADING = 4;
     /** Constant <code>LATTICE_SHADING=5</code> */
-    public final static int             LATTICE_SHADING = 5;
+    public static final  int             LATTICE_SHADING = 5;
     /** Constant <code>COONS_PATCH_MESH_SHADING=6</code> */
-    public final static int             COONS_PATCH_MESH_SHADING = 6;
+    public static final  int             COONS_PATCH_MESH_SHADING = 6;
     /** Constant <code>TENSOR_PRODUCTS_MESH_SHADING=7</code> */
-    public final static int             TENSOR_PRODUCTS_MESH_SHADING = 7;
+    public static final  int             TENSOR_PRODUCTS_MESH_SHADING = 7;
 
     /** The tolerance for reevaluating the shading function again */
     public static final float TOLERANCE = 1e-4f;

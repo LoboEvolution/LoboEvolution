@@ -36,7 +36,7 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLObjectElementImpl(String name) {
+	public HTMLObjectElementImpl(final String name) {
 		super(name);
 	}
 

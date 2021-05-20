@@ -56,7 +56,7 @@ public class BernsteinMenuBarUI extends BasicMenuBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		BernsteinUtils.fillComponent(g, c);
 	}
 

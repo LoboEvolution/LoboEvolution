@@ -94,7 +94,7 @@ public class HalftoneRegionFlags extends Flags {
 		flags.put(H_DEF_PIXEL, (flagsAsInt >> 7) & 1);
 
 		
-		if(JBIG2StreamDecoder.debug)
+		if (JBIG2StreamDecoder.debug)
 			logger.info("flags: " + flags);
     }
 }

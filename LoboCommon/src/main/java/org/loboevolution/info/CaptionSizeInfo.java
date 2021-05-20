@@ -94,7 +94,7 @@ public class CaptionSizeInfo implements Serializable {
 	 * @param width
 	 *            the new width
 	 */
-	public void setWidth(int width) {
+	public void setWidth(final int width) {
 		this.width = width;
 	}
 }

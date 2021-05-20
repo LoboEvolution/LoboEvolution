@@ -37,7 +37,7 @@ import com.jtattoo.plaf.BaseSplitPaneUI;
 public class AluminiumSplitPaneUI extends BaseSplitPaneUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new AluminiumSplitPaneUI();
 	}
 

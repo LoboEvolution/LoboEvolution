@@ -72,24 +72,24 @@ public class GoToEAction extends PDFAction {
 			
 			// find the page number and parse it
 			String page = PdfObjectParseUtil.parseStringFromDict("P", targetObj, false);
-			if(page == null){
+			if (page == null) {
 				page = ""+PdfObjectParseUtil.parseIntegerFromDict("P", targetObj, false);
 			}
 			target.setPageNo(page);
 			
 			// find the annotation index and parse it
 			String annot = PdfObjectParseUtil.parseStringFromDict("A", targetObj, false);
-			if(annot == null){
+			if (annot == null) {
 				annot = ""+PdfObjectParseUtil.parseIntegerFromDict("A", targetObj, false);
 			}
 			target.setAnnotNo(annot);
 			
 			//find target dictionary and parse it
 			PDFObject subTargetObj = targetObj.getDictRef("T");
-			if(subTargetObj != null){
+			if (subTargetObj != null) {
 				// call this method recursive, in case the target was not already contained in the 
 				// list (this is checked for not getting into an infinite loop)
-				if(!list.contains(target)){
+				if (!list.contains(target)) {
 					list.add(target);
 					GoToETarget subTargetDictionary = parseTargetDistionary(subTargetObj, list);
 					target.setTargetDictionary(subTargetDictionary);
@@ -271,11 +271,11 @@ public class GoToEAction extends PDFAction {
 		}
 
 		@Override
-		public boolean equals(Object obj) {
-			if(!(obj instanceof GoToETarget)){
+		public boolean equals(final Object obj) {
+			if (!(obj instanceof GoToETarget)) {
 				return false;
 			}
-			if(super.equals(obj)){
+			if (super.equals(obj)) {
 				return true;
 			}			
 			GoToETarget that = (GoToETarget)obj;

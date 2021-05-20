@@ -59,7 +59,7 @@ public class ColorComboBox extends JComboBox<Object> {
 		}
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			setBackground(this.m_c);
 			super.paint(g);
 		}

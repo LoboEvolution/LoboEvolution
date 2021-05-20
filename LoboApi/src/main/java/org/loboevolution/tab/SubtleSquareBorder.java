@@ -50,7 +50,7 @@ class SubtleSquareBorder implements Border {
 
 	/** {@inheritDoc} */
 	@Override
-	public Insets getBorderInsets(Component c) {
+	public Insets getBorderInsets(final Component c) {
 		return new Insets(this.m_h, this.m_w, this.m_h, this.m_w);
 	}
 

@@ -43,7 +43,7 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLButtonElementImpl(String name) {
+	public HTMLButtonElementImpl(final String name) {
 		super(name);
 	}
 

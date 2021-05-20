@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseIcons;
  * Author Michael Hagen
  *
  */
-public class HiFiIconFactory implements AbstractIconFactory {
+public final class HiFiIconFactory implements AbstractIconFactory {
 
 	private static HiFiIconFactory instance = null;
 

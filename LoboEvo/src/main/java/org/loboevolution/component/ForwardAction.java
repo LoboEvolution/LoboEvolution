@@ -71,7 +71,7 @@ public class ForwardAction extends AbstractAction {
 		for (int i = 0; i < tabsById.size(); i++) {
 			BookmarkInfo info = tabsById.get(i);
 			String tab = info.getUrl();
-			if(tab.equals(url) && i < tabsById.size()-1) {
+			if (tab.equals(url) && i < tabsById.size()-1) {
 				text = tabsById.get(i + 1).getUrl();
 			}
 		}

@@ -105,7 +105,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element createElement(String tagName) {
-		if("rss".equalsIgnoreCase(tagName)) {isrss = true;}
+		if ("rss".equalsIgnoreCase(tagName)) {isrss = true;}
 		return new ElementFactory(isrss).createElement((HTMLDocumentImpl) this, tagName);
 	}
 

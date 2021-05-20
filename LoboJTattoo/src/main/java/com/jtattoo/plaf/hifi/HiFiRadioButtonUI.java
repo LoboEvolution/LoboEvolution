@@ -51,7 +51,7 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
 	private static HiFiRadioButtonUI radioButtonUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new HiFiRadioButtonUI();
 		}

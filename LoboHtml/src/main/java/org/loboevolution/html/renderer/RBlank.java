@@ -98,7 +98,7 @@ final class RBlank extends BaseBoundableRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
 		final Color bkg = rs.getTextBackgroundColor();
 		if (bkg != null) {

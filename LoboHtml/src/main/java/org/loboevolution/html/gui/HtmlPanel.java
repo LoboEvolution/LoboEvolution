@@ -125,7 +125,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private class NotificationTimerAction implements java.awt.event.ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			processNotifications();
 		}
 	}

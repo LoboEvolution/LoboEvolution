@@ -36,7 +36,7 @@ public class HTMLSpanElementImpl extends HTMLElementImpl implements HTMLElement 
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLSpanElementImpl(String name) {
+	public HTMLSpanElementImpl(final String name) {
 		super(name);
 	}
 	

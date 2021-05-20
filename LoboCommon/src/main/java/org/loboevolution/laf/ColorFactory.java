@@ -39,7 +39,7 @@ import org.loboevolution.store.SQLiteCommon;
  * Author J. H. S.
  *
  */
-public class ColorFactory {
+public final class ColorFactory {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ColorFactory.class.getName());

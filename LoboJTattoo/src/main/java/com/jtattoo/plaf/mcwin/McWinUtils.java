@@ -37,7 +37,7 @@ import com.jtattoo.plaf.JTattooUtilities;
  * Author Michael Hagen
  *
  */
-public class McWinUtils {
+public final class McWinUtils {
 
 	/**
 	 * <p>fillComponent.</p>

@@ -74,20 +74,20 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	public Font getFont() {
 		FontKey fontkey = new FontKey();
 
-		if(iFont != null) {
+		if (iFont != null) {
 			fontkey.setSuperscript(this.superscript);
 			return  FontFactory.getInstance().scriptFont(this.iFont, fontkey);
 		}
 
-		if(LAFType.BOLD.equals(type)){
+		if (LAFType.BOLD.equals(type)) {
 			fontkey.setFontWeight(LAFType.BOLD.getValue());
 		}
 
-		if(LAFType.ITALIC.equals(type)){
+		if (LAFType.ITALIC.equals(type)) {
 			fontkey.setFontStyle(LAFType.ITALIC.getValue());
 		}
 
-		if(LAFType.MONOSPACED.equals(type)){
+		if (LAFType.MONOSPACED.equals(type)) {
 			fontkey.setFontFamily(LAFType.MONOSPACED.getValue());
 		}
 

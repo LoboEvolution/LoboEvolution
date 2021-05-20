@@ -24,8 +24,6 @@ package org.loboevolution.html.control;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.util.logging.Logger;
 
 import javax.swing.JComponent;
 
@@ -34,18 +32,9 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * <p>Abstract BaseControl class.</p>
- *
- *
- *
  */
 public abstract class BaseControl extends JComponent implements UIControl {
-	private static final Logger logger = Logger.getLogger(BaseControl.class.getName());
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	/** Constant ZERO_DIMENSION */
-	protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
 	protected final HTMLElementImpl controlElement;
 	protected RUIControl ruicontrol;
 
@@ -58,11 +47,7 @@ public abstract class BaseControl extends JComponent implements UIControl {
 		this.controlElement = modelNode;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.UIControl#getBackgroundColor()
-	 */
+
 	/** {@inheritDoc} */
 	@Override
 	public Color getBackgroundColor() {
@@ -83,7 +68,7 @@ public abstract class BaseControl extends JComponent implements UIControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void reset(int availWidth, int availHeight) {
+	public void reset(final int availWidth, final int availHeight) {
 	}
 
 	/** {@inheritDoc} */

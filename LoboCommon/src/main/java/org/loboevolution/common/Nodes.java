@@ -93,7 +93,7 @@ public class Nodes {
             public Attr next() {
                 if (!hasNext())
                     throw new NoSuchElementException();
-                return (Attr) attrList.item(index++);
+                return attrList.item(index++);
             }
         };
 	}

@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseIcons;
  * Author Michael Hagen
  *
  */
-public class LunaIconFactory implements AbstractIconFactory {
+public final class LunaIconFactory implements AbstractIconFactory {
 
 	private static LunaIconFactory instance = null;
 

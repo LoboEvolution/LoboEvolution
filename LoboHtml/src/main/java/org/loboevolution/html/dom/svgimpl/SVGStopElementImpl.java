@@ -36,7 +36,7 @@ public class SVGStopElementImpl extends SVGGraphic implements SVGStopElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGStopElementImpl(String name) {
+	public SVGStopElementImpl(final String name) {
 		super(name);
 	}
 

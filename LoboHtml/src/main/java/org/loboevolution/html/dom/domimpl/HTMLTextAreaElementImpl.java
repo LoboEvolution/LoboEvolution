@@ -47,7 +47,7 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLTextAreaElementImpl(String name) {
+	public HTMLTextAreaElementImpl(final String name) {
 		super(name);
 	}
 
@@ -55,9 +55,9 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	@Override
 	public int getCols() {	
 		String cols = this.getAttribute("cols");
-		if(Strings.isNotBlank(cols)  && Strings.isNumeric(cols)) {
+		if (Strings.isNotBlank(cols)  && Strings.isNumeric(cols)) {
 			Float rowsInt = Float.parseFloat(cols);
-			if(rowsInt > -1) {
+			if (rowsInt > -1) {
 				return rowsInt.intValue();
 			} else {
 				return 20;
@@ -88,9 +88,9 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	@Override
 	public int getRows() {
 		String rows = this.getAttribute("rows");
-		if(Strings.isNotBlank(rows)  && Strings.isNumeric(rows)) {
+		if (Strings.isNotBlank(rows)  && Strings.isNumeric(rows)) {
 			Float rowsInt = Float.parseFloat(rows);
-			if(rowsInt > -1) {
+			if (rowsInt > -1) {
 				return rowsInt.intValue();
 			} else {
 				return 2;
@@ -108,7 +108,7 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public void select() {
-		if(textArea!= null) textArea.selectAll();
+		if (textArea!= null) textArea.selectAll();
 		
 	}
 
@@ -145,14 +145,14 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	 * <p>blur.</p>
 	 */
 	public void blur() {
-		if(textArea!= null) {textArea.blur();} else {setFocusable(false);}
+		if (textArea!= null) {textArea.blur();} else {setFocusable(false);}
 	}
 	
 	/**
 	 * <p>focus.</p>
 	 */
 	public void focus() {
-		if(textArea!= null) {textArea.focus();} else {setFocusable(true);}
+		if (textArea!= null) {textArea.focus();} else {setFocusable(true);}
 	}
 
 	/**

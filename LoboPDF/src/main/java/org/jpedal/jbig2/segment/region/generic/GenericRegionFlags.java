@@ -84,7 +84,7 @@ public class GenericRegionFlags extends Flags {
 		flags.put(TPGDON, (flagsAsInt >> 3) & 1);
 		
 		
-		if(JBIG2StreamDecoder.debug)
+		if (JBIG2StreamDecoder.debug)
 			logger.info("flags: " + flags);
 	}
 }

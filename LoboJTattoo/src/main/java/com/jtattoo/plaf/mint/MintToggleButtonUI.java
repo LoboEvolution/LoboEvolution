@@ -53,7 +53,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class MintToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new MintToggleButtonUI();
 	}
 

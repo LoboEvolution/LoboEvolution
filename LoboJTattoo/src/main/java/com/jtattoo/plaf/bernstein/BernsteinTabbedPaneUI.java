@@ -42,7 +42,7 @@ public class BernsteinTabbedPaneUI extends BaseTabbedPaneUI {
 			new Color(247, 225, 0), new Color(243, 216, 0), new Color(229, 187, 0), };
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BernsteinTabbedPaneUI();
 	}
 

@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public class MintBorderFactory implements AbstractBorderFactory {
+public final class MintBorderFactory implements AbstractBorderFactory {
 
 	private static MintBorderFactory instance = null;
 

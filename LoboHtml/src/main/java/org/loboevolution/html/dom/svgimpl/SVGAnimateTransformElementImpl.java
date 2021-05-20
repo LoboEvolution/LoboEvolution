@@ -35,7 +35,7 @@ public class SVGAnimateTransformElementImpl extends SVGAnimateElementImpl implem
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGAnimateTransformElementImpl(String name) {
+	public SVGAnimateTransformElementImpl(final String name) {
 		super(name);
 	}
 }

@@ -42,7 +42,7 @@ public class AluminiumRadioButtonUI extends BaseRadioButtonUI {
 	private static AluminiumRadioButtonUI radioButtonUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new AluminiumRadioButtonUI();
 		}

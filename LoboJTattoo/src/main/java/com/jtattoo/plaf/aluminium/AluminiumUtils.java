@@ -48,7 +48,7 @@ import com.jtattoo.plaf.LazyImageIcon;
  * Author Michael Hagen
  *
  */
-public class AluminiumUtils {
+public final class AluminiumUtils {
 
 	private static final Icon BG_IMAGE = new LazyImageIcon("aluminium/icons/background.jpg");
 	// private static final Icon ALTER_BG_IMAGE = new

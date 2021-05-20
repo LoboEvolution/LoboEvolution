@@ -107,7 +107,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGSVGElementImpl(String name) {
+	public SVGSVGElementImpl(final String name) {
 		super(name);
 		currentTranslate = new SVGPointImpl();
 		float x = getX().getBaseVal().getValue();
@@ -420,7 +420,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		boolean display = getDisplay();
 		float opacity = getOpacity();
 

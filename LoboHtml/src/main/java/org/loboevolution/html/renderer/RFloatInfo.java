@@ -67,7 +67,7 @@ final class RFloatInfo implements Renderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		// nop
 	}
 }

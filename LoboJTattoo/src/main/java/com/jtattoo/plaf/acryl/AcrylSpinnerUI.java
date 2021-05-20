@@ -52,7 +52,7 @@ public class AcrylSpinnerUI extends BaseSpinnerUI {
 	 * allocated one per JSpinner.
 	 * @see ComponentUI#createUI
 	 */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new AcrylSpinnerUI();
 	}
 

@@ -84,21 +84,21 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 		addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseEntered(MouseEvent e) {
+			public void mouseEntered(final MouseEvent e) {
 				LoginButton.this.loginButtonColors[0] = LoginButton.this.COLOR_INTERACTIVE_DARKER;
 				LoginButton.this.loginButtonColors[1] = LoginButton.this.OFFWHITE;
 				repaint();
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e) {
+			public void mouseExited(final MouseEvent e) {
 				LoginButton.this.loginButtonColors[0] = LoginButton.this.COLOR_INTERACTIVE;
 				LoginButton.this.loginButtonColors[1] = LoginButton.this.foreground();
 				repaint();
 			}
 
 			@Override
-			public void mousePressed(MouseEvent me) {
+			public void mousePressed(final MouseEvent me) {
 				final int indexPanel = panel.getTabbedPane().getIndex();
 				panel.getTabbedPane().remove(indexPanel);
 				final DnDTabbedPane tabbedPane = panel.getTabbedPane();

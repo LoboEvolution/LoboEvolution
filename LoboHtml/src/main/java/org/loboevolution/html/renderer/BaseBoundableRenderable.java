@@ -351,7 +351,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onDoubleClick(MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onDoubleClick(me, event, x, y);
@@ -362,7 +362,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseClick(MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final MouseEvent event, int x, int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseClick(me, event, x, y);
@@ -373,7 +373,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseDisarmed(MouseEvent event) {
+	public boolean onMouseDisarmed(final MouseEvent event) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseDisarmed(me, event);
@@ -384,7 +384,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMousePressed(MouseEvent event, int x, int y) {
+	public boolean onMousePressed(final MouseEvent event, int x, int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseDown(me, event, x, y);
@@ -395,7 +395,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseReleased(MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseUp(me, event, x, y);
@@ -406,7 +406,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onRightClick(MouseEvent event, int x, int y) {
+	public boolean onRightClick(final MouseEvent event, int x, int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onContextMenu(me, event, x, y);
@@ -417,7 +417,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
+	public void onMouseMoved(final MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
 		if (triggerEvent) {
 			if (isContainedByNode()) {
 				HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
@@ -428,7 +428,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public void onMouseOut(MouseEvent event, int x, int y, ModelNode limit) {
+	public void onMouseOut(final MouseEvent event, int x, int y, ModelNode limit) {
 		if (isContainedByNode()) {
 			HtmlController.getInstance().onMouseOut(this.modelNode, event, x, y, limit);
 		}
@@ -576,7 +576,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(int width) {
+	public void setWidth(final int width) {
 		this.width = width;
 	}
 

@@ -46,7 +46,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class AcrylToolBarUI extends AbstractToolBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new AcrylToolBarUI();
 	}
 
@@ -70,7 +70,7 @@ public class AcrylToolBarUI extends AbstractToolBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		int w = c.getWidth();
 		int h = c.getHeight();
 		JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getToolBarColors(), 0, 0, w, h - 2);

@@ -151,7 +151,7 @@ final class RWord extends BaseBoundableRenderable {
 	
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
 

@@ -119,7 +119,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 			addMouseListener(new MouseAdapter() {
 
 				@Override
-				public void mouseClicked(MouseEvent evt) {
+				public void mouseClicked(final MouseEvent evt) {
 					handleClick(evt.getX(), evt.getY());
 				}
 			});
@@ -297,7 +297,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * Updates the positions of the thumbnails, and draws them to the screen.
 	 */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		int x = 0;
 		int y = 0;
 		int maxwidth = 0;

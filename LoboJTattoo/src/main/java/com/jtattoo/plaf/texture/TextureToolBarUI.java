@@ -40,7 +40,7 @@ import com.jtattoo.plaf.BaseBorders;
 public class TextureToolBarUI extends AbstractToolBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new TextureToolBarUI();
 	}
 
@@ -64,7 +64,7 @@ public class TextureToolBarUI extends AbstractToolBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		TextureUtils.fillComponent(g, c, TextureUtils.getTextureType(c));
 	}
 

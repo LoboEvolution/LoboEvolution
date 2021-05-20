@@ -25,12 +25,14 @@ import java.util.WeakHashMap;
 
 /**
  * <p>JavaClassWrapperFactory class.</p>
- *
- *
- *
  */
-public class JavaClassWrapperFactory {
+public final class JavaClassWrapperFactory {
+
 	private static JavaClassWrapperFactory instance;
+
+	private final Map<Class, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap();
+
+	private JavaClassWrapperFactory() { }
 
 	/**
 	 * <p>Getter for the field instance.</p>
@@ -46,11 +48,6 @@ public class JavaClassWrapperFactory {
 			}
 		}
 		return instance;
-	}
-
-	private final Map<Class, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap();
-
-	private JavaClassWrapperFactory() {
 	}
 
 	/**

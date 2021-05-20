@@ -43,7 +43,7 @@ public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseEleme
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGEllipseElementImpl(String name) {
+	public SVGEllipseElementImpl(final String name) {
 		super(name);
 	}
 
@@ -73,7 +73,7 @@ public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseEleme
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
 		final Shape shape = createShape(ctm.getAffineTransform());
 		animate(this);

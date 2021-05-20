@@ -150,7 +150,7 @@ public final class ImageViewer {
 			theImage.addMouseListener(new MouseAdapter() {
 				JPopupMenu popup;
 
-				private void showPopup(MouseEvent e) {
+				private void showPopup(final MouseEvent e) {
 					e.consume();
 					if (popup == null)
 						popup = new DefaultViewerPopup(ImageViewer.this);
@@ -162,14 +162,14 @@ public final class ImageViewer {
 				}
 
 				@Override
-				public void mousePressed(MouseEvent e) {
+				public void mousePressed(final MouseEvent e) {
 					if (e.isPopupTrigger()) {
 						showPopup(e);
 					}
 				}
 
 				@Override
-				public void mouseReleased(MouseEvent e) {
+				public void mouseReleased(final MouseEvent e) {
 					if (e.isPopupTrigger()) {
 						showPopup(e);
 					}

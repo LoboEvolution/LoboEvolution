@@ -41,7 +41,7 @@ import org.loboevolution.pdfview.decrypt.PDFDecrypterFactory;
 public class PDFDecoder {
 
     /** Constant <code>DCT_FILTERS</code> */
-    public final static Set<String> DCT_FILTERS = new HashSet<>(Arrays.asList("DCT", "DCTDecode"));
+    public static final  Set<String> DCT_FILTERS = new HashSet<>(Arrays.asList("DCT", "DCTDecode"));
 
     /** Creates a new instance of PDFDecoder */
     private PDFDecoder() {

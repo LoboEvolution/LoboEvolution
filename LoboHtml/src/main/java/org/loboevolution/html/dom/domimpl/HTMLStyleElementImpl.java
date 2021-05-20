@@ -56,7 +56,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLStyleElementImpl(String name) {
+	public HTMLStyleElementImpl(final String name) {
 		super(name);
 	}
 

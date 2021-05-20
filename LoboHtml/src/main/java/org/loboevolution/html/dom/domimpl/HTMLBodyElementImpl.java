@@ -39,7 +39,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLBodyElementImpl(String name) {
+	public HTMLBodyElementImpl(final String name) {
 		super(name);
 	}
 

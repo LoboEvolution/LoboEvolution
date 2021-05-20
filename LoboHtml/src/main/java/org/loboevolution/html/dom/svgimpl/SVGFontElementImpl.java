@@ -35,7 +35,7 @@ public class SVGFontElementImpl extends SVGElementImpl implements SVGFontElement
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGFontElementImpl(String name) {
+	public SVGFontElementImpl(final String name) {
 		super(name);
 	}
 }

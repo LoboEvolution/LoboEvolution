@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public class HiFiBorderFactory implements AbstractBorderFactory {
+public final class HiFiBorderFactory implements AbstractBorderFactory {
 
 	private static HiFiBorderFactory instance = null;
 

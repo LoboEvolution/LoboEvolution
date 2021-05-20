@@ -38,7 +38,7 @@ import com.jtattoo.plaf.LazyImageIcon;
  * Author Michael Hagen
  *
  */
-public class BernsteinUtils {
+public final class BernsteinUtils {
 
 	private static final Icon BG_IMAGE = new LazyImageIcon("bernstein/icons/background.jpg");
 	private static final int IMAGE_WIDTH = BG_IMAGE.getIconWidth();

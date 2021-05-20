@@ -263,8 +263,8 @@ public class McWinIcons extends BaseIcons {
 		 *
 		 */
 		private static final long serialVersionUID = 1L;
-		private final static int WIDTH = 15;
-		private final static int HEIGHT = 15;
+		private static final  int WIDTH = 15;
+		private static final  int HEIGHT = 15;
 		private boolean isRollover = false;
 
 		public ThumbIcon(boolean isRollover) {

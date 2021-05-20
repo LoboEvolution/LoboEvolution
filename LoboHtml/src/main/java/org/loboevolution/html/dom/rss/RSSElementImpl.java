@@ -37,7 +37,7 @@ public class RSSElementImpl extends RSSElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public RSSElementImpl(String name) {
+	public RSSElementImpl(final String name) {
 		super(name);
 	}
 
@@ -46,7 +46,7 @@ public class RSSElementImpl extends RSSElement {
 	 *
 	 * @param graphics a {@link java.awt.Graphics2D} object.
 	 */
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		if (hasChildNodes()) {
 			NodeListImpl children = (NodeListImpl)getChildNodes();
 			children.forEach(child -> {

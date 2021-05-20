@@ -74,7 +74,7 @@ public interface HTMLCanvasElement extends HTMLElement {
      * @param width
      *            the new width
      */
-    void setWidth(int width);
+    void setWidth(final int width);
 
     /**
      * Gets the height.

@@ -40,7 +40,7 @@ public class RSSChanelElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public RSSChanelElementImpl(String name) {
+	public RSSChanelElementImpl(final String name) {
 		super(name);
 	}
 
@@ -49,7 +49,7 @@ public class RSSChanelElementImpl extends HTMLElementImpl {
 	 *
 	 * @param graphics a {@link java.awt.Graphics2D} object.
 	 */
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		if (hasChildNodes()) {
 			int y = 10;
 			NodeListImpl children = (NodeListImpl)getChildNodes();

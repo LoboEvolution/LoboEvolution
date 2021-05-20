@@ -98,11 +98,11 @@ public class HtmlParser {
 
 	private boolean needRoot = false;
 
-	private final static Pattern doctypePattern = Pattern.compile("(\\S+)\\s+PUBLIC\\s+\"([^\"]*)\"\\s+\"([^\"]*)\".*>");
+	private static final  Pattern doctypePattern = Pattern.compile("(\\S+)\\s+PUBLIC\\s+\"([^\"]*)\"\\s+\"([^\"]*)\".*>");
 
-	private final static String[] elementsThatDontNeedBodyElement = { "HTML", "HEAD", "META", "TITLE", "LINK", "SCRIPT", "STYLE" };
+	private static final  String[] elementsThatDontNeedBodyElement = { "HTML", "HEAD", "META", "TITLE", "LINK", "SCRIPT", "STYLE" };
 
-	private final static String[] elementsThatDontNeedHeadElement = { "HTML", "P", "DIV", "SPAN", "UL", "OL", "LI", "A",
+	private static final  String[] elementsThatDontNeedHeadElement = { "HTML", "P", "DIV", "SPAN", "UL", "OL", "LI", "A",
 			"IMG", "IFRAME", "TABLE", "TBODY", "THEAD", "TR", "TH", "TD", "MATHML", "FRAMESET" };
 
 	/**

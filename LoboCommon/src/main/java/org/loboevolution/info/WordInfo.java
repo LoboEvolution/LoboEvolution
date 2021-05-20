@@ -128,7 +128,7 @@ public class WordInfo {
 	 *
 	 * @param width the width to set
 	 */
-	public void setWidth(int width) {
+	public void setWidth(final int width) {
 		this.width = width;
 	}
 }

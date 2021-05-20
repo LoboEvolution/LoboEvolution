@@ -41,7 +41,7 @@ import com.jtattoo.plaf.BaseSliderUI;
 public class HiFiSliderUI extends BaseSliderUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new HiFiSliderUI((JSlider) c);
 	}
 

@@ -58,7 +58,7 @@ public class TextureSplitPaneDivider extends BaseSplitPaneDivider {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		if (!isFlatMode()) {
 			TextureUtils.fillComponent(g, this, TextureUtils.getTextureType(splitPane));
 

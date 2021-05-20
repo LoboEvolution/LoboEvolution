@@ -132,7 +132,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		}
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			paintBackground(g);
 			super.paint(g);
 		}
@@ -293,7 +293,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		myMouseAdapter = new MouseAdapter() {
 
 			@Override
-			public void mouseEntered(MouseEvent e) {
+			public void mouseEntered(final MouseEvent e) {
 				if (header == null || header.getTable() == null) {
 					return;
 				}
@@ -307,7 +307,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e) {
+			public void mouseExited(final MouseEvent e) {
 				if (header == null || header.getTable() == null) {
 					return;
 				}
@@ -321,7 +321,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 			}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
+			public void mouseReleased(final MouseEvent e) {
 				if (header == null || header.getTable() == null) {
 					return;
 				}
@@ -346,7 +346,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		myMouseMotionAdapter = new MouseMotionAdapter() {
 
 			@Override
-			public void mouseDragged(MouseEvent e) {
+			public void mouseDragged(final MouseEvent e) {
 				if (header == null || header.getTable() == null) {
 					return;
 				}
@@ -362,7 +362,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 			}
 
 			@Override
-			public void mouseMoved(MouseEvent e) {
+			public void mouseMoved(final MouseEvent e) {
 				if (header == null || header.getTable() == null) {
 					return;
 				}
@@ -396,7 +396,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		if (header == null || header.getColumnModel().getColumnCount() <= 0) {
 			return;
 		}

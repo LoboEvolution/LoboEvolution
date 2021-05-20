@@ -139,7 +139,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 	private static final String PALETTE_FRAME = "palette";
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseInternalFrameUI((JInternalFrame) c);
 	}
 

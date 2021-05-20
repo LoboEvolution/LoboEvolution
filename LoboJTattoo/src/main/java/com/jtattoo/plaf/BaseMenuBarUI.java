@@ -38,13 +38,13 @@ import javax.swing.plaf.basic.BasicMenuBarUI;
 public class BaseMenuBarUI extends BasicMenuBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseMenuBarUI();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getMenuBarColors(), 0, 0, c.getWidth(),
 				c.getHeight());
 	}

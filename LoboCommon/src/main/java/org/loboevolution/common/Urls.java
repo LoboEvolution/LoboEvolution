@@ -162,23 +162,6 @@ public class Urls {
 	}
 
 	/**
-	 * Converts the given URL into a valid URL by removing control characters (ASCII code).
-	 *
-	 * @return the encoded URL
-	 * @param url a {@link java.lang.String} object.
-	 */
-	public static String removeControlCharacters(final String url) {
-		final StringBuilder sb = new StringBuilder(url.length());
-		for (int i = 0; i < url.length(); i++) {
-			final char c = url.charAt(i);
-			if (c >= 32) {
-				sb.append(c);
-			}
-		}
-		return sb.toString();
-	}
-	
-	/**
 	 * <p>getExpiration.</p>
 	 *
 	 * @param connection a {@link java.net.URLConnection} object.

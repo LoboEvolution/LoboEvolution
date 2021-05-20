@@ -719,7 +719,7 @@ public class RBlock extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onDoubleClick(MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			if (!bodyLayout.onDoubleClick(event, x - bodyLayout.x, y - bodyLayout.y)) {
@@ -731,7 +731,7 @@ public class RBlock extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseClick(MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			if (!bodyLayout.onMouseClick(event, x - bodyLayout.x, y - bodyLayout.y)) {
@@ -746,7 +746,7 @@ public class RBlock extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseDisarmed(MouseEvent event) {
+	public boolean onMouseDisarmed(final MouseEvent event) {
 		final BoundableRenderable br = this.armedRenderable;
 		if (br != null) {
 			try {
@@ -768,7 +768,7 @@ public class RBlock extends BaseElementRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMousePressed(MouseEvent event, int x, int y) {
+	public boolean onMousePressed(final MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			final int newX = x - bodyLayout.x;
@@ -799,7 +799,7 @@ public class RBlock extends BaseElementRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseReleased(MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			final int newX = x - bodyLayout.x;
@@ -1208,7 +1208,7 @@ public class RBlock extends BaseElementRenderable {
 
 		private int orientation;
 
-		BoundedChangeListener(int orientation){
+		BoundedChangeListener(int orientation) {
 			this.orientation = orientation;
 		}
 
@@ -1217,8 +1217,8 @@ public class RBlock extends BaseElementRenderable {
 			if (source instanceof BoundedRangeModel) {
 				BoundedRangeModel aModel = (BoundedRangeModel) source;
 				if (!aModel.getValueIsAdjusting()) {
-					if(orientation == JScrollBar.HORIZONTAL) rendererContext.setScrollx(aModel.getValue());
-					if(orientation == JScrollBar.VERTICAL) rendererContext.setScrolly(aModel.getValue());
+					if (orientation == JScrollBar.HORIZONTAL) rendererContext.setScrollx(aModel.getValue());
+					if (orientation == JScrollBar.VERTICAL) rendererContext.setScrolly(aModel.getValue());
 				}
 			}
 		}

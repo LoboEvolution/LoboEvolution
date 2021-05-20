@@ -96,7 +96,7 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 			return null;
 		}
 		final HTMLCollectionImpl nodeList = (HTMLCollectionImpl) doc.getElementsByName(name);
-		if(nodeList.size() > 0){
+		if (nodeList.size() > 0) {
 			Optional<Node> node = nodeList.stream().findFirst();
 			return (Element) node.orElse(null);
 		} else{

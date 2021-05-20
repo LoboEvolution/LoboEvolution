@@ -766,21 +766,21 @@ public class PDFParser extends BaseWatchable {
                     this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(3)));
                     break;
                 case "K":
-//                if(strokeOverprint && strokeOverprintMode == 1) {
+//                if (strokeOverprint && strokeOverprintMode == 1) {
 //                    if (this.state.strokeCS instanceof PatternSpace) {
 //                        this.cmds.addFillPaint(doPattern((PatternSpace) this.state.strokeCS));
 //                    } else {
 //                        int n = this.state.strokeCS.getNumComponents();
 //                        this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(n)));
 //                    }
-//                }else {
+//                } else {
                     // set the stroke color to a CMYK value
                     this.state.strokeCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_CMYK);
                     this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(4)));
 //                }
                     break;
                 case "k":
-//                if(fillOverprint && fillOverprintMode == 1) {
+//                if (fillOverprint && fillOverprintMode == 1) {
 //                    // if OP = true and OPM = 1 apply the same as in "scn"
 //                    if (this.state.fillCS instanceof PatternSpace) {
 //                        this.cmds.addFillPaint(doPattern((PatternSpace) this.state.fillCS));
@@ -789,7 +789,7 @@ public class PDFParser extends BaseWatchable {
 //                        int n = this.state.fillCS.getNumComponents();
 //                        this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(n)));
 //                    }
-//                }else {
+//                } else {
                     this.state.fillCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_CMYK);
                     this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(4)));
 //                }
@@ -1258,7 +1258,7 @@ public class PDFParser extends BaseWatchable {
             }
             // it should be a name;
             String name = t.name;
-            if(PDFDebugger.DEBUG_IMAGES) {
+            if (PDFDebugger.DEBUG_IMAGES) {
                 PDFDebugger.debug("ParseInlineImage, token: " + name);
             }
             switch (name) {
@@ -1335,7 +1335,7 @@ public class PDFParser extends BaseWatchable {
     */
     private void doShader(PDFObject shaderObj) throws IOException {
         PDFShader shader = PDFShader.getShader(shaderObj, this.resources);
-        if(shader == null) {
+        if (shader == null) {
         	return;
         }
         this.cmds.addPush();
@@ -1415,28 +1415,28 @@ public class PDFParser extends BaseWatchable {
             this.cmds.addFillAlpha(d.getFloatValue());
             handled = true;
         }
-        if((d = gsobj.getDictRef("SA")) != null) {
+        if ((d = gsobj.getDictRef("SA")) != null) {
             // automatic stroke adjustment
             this.autoAdjustStroke  = d.getBooleanValue();
             handled = true;
         }
-        if((d = gsobj.getDictRef("OP")) != null) {
+        if ((d = gsobj.getDictRef("OP")) != null) {
             this.strokeOverprint = d.getBooleanValue();
             PDFObject x = gsobj.getDictRef("OPM");
-            if(x!= null) {
+            if (x!= null) {
                 this.strokeOverprintMode = x.getIntValue();
             }
             handled = true;
         }
-        if((d = gsobj.getDictRef("op")) != null) {
+        if ((d = gsobj.getDictRef("op")) != null) {
             this.fillOverprint = d.getBooleanValue();
             PDFObject x = gsobj.getDictRef("OPM");
-            if(x!= null) {
+            if (x!= null) {
                 this.fillOverprintMode = x.getIntValue();
             }
             handled = true;
         }
-        if(!handled) {
+        if (!handled) {
             PDFDebugger.debug("graphic state command unknown!", 10);
         }
     }
@@ -1617,8 +1617,8 @@ public class PDFParser extends BaseWatchable {
     /** {@inheritDoc} */
     @Override
     protected void setStatus(int status) {
-    	if(status == BaseWatchable.COMPLETED) {
-    		if(!addAnnotation){
+    	if (status == BaseWatchable.COMPLETED) {
+    		if (!addAnnotation) {
     			// corresponding push in constructor PDFPage
     			this.cmds.addPop();
     			this.cmds.addAnnotations();

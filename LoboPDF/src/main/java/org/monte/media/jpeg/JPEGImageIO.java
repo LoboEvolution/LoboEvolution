@@ -426,14 +426,14 @@ public class JPEGImageIO {
     
     
     /** Define tables for YCC->RGB colorspace conversion. */
-    private final static int SCALEBITS = 16;
-    private final static int MAXJSAMPLE = 255;
-    private final static int CENTERJSAMPLE = 128;
-    private final static int ONE_HALF = 1 << (SCALEBITS - 1);
-    private final static int[] Cr_r_tab = new int[MAXJSAMPLE + 1];
-    private final static int[] Cb_b_tab = new int[MAXJSAMPLE + 1];
-    private final static int[] Cr_g_tab = new int[MAXJSAMPLE + 1];
-    private final static int[] Cb_g_tab = new int[MAXJSAMPLE + 1];
+    private static final  int SCALEBITS = 16;
+    private static final  int MAXJSAMPLE = 255;
+    private static final  int CENTERJSAMPLE = 128;
+    private static final  int ONE_HALF = 1 << (SCALEBITS - 1);
+    private static final  int[] Cr_r_tab = new int[MAXJSAMPLE + 1];
+    private static final  int[] Cb_b_tab = new int[MAXJSAMPLE + 1];
+    private static final  int[] Cr_g_tab = new int[MAXJSAMPLE + 1];
+    private static final  int[] Cb_g_tab = new int[MAXJSAMPLE + 1];
 
     /*
      * Initialize tables for YCC->RGB colorspace conversion.

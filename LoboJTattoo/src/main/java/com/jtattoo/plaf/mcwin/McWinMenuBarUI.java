@@ -61,7 +61,7 @@ public class McWinMenuBarUI extends BaseMenuBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
 			McWinUtils.fillComponent(g, c, SHADOW_COLORS);
 		} else {

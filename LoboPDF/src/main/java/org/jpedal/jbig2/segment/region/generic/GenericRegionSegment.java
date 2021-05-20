@@ -95,7 +95,7 @@ public class GenericRegionSegment extends RegionSegment {
      */
     public void readSegment() throws IOException, JBIG2Exception {
     	
-    	if(JBIG2StreamDecoder.debug)
+    	if (JBIG2StreamDecoder.debug)
     		logger.info("==== Reading Immediate Generic Region ====");
     	
     	super.readSegment();
@@ -132,7 +132,7 @@ public class GenericRegionSegment extends RegionSegment {
         int length = segmentHeader.getSegmentDataLength();
         int bytesRead = 0;
 
-        if(length == -1) { 
+        if (length == -1) {
         	/** 
         	 * length of data is unknown, so it needs to be determined through examination of the data.
         	 * See 7.2.7 - Segment data length of the JBIG2 specification.
@@ -143,7 +143,7 @@ public class GenericRegionSegment extends RegionSegment {
         	short match1;
         	short match2;
         	
-        	if(useMMR) {
+        	if (useMMR) {
         		// look for 0x00 0x00 (0, 0)
         		
         		match1 = 0;
@@ -160,11 +160,11 @@ public class GenericRegionSegment extends RegionSegment {
     			short bite1 = decoder.readByte();
     			bytesRead++;
     			
-    			if(bite1 == match1){
+    			if (bite1 == match1) {
     				short bite2 = decoder.readByte();
     				bytesRead++;
     				
-    				if(bite2 == match2){
+    				if (bite2 == match2) {
     					length = bytesRead - 2;
     					break;
     				}
@@ -185,7 +185,7 @@ public class GenericRegionSegment extends RegionSegment {
 
             int extCombOp = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
             
-            if(pageSegment.getPageBitmapHeight() == -1 && regionBitmapYLocation + regionBitmapHeight > pageBitmap.getHeight()) {
+            if (pageSegment.getPageBitmapHeight() == -1 && regionBitmapYLocation + regionBitmapHeight > pageBitmap.getHeight()) {
             	pageBitmap.expand(regionBitmapYLocation + regionBitmapHeight, 
             			pageSegment.getPageInformationFlags().getFlagValue(PageInformationFlags.DEFAULT_PIXEL_VALUE));
             }
@@ -197,7 +197,7 @@ public class GenericRegionSegment extends RegionSegment {
 		}
 
         
-        if(unknownLength) {
+        if (unknownLength) {
         	decoder.movePointer(4);
         }
         
@@ -209,7 +209,7 @@ public class GenericRegionSegment extends RegionSegment {
 
         genericRegionFlags.setFlags(genericRegionFlagsField);
         
-        if(JBIG2StreamDecoder.debug)
+        if (JBIG2StreamDecoder.debug)
         	logger.info("generic region Segment flags = " + genericRegionFlagsField);
     }
 

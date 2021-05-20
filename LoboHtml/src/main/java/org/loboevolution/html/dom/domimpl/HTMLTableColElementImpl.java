@@ -35,7 +35,7 @@ public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTabl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLTableColElementImpl(String name) {
+	public HTMLTableColElementImpl(final String name) {
 		super(name);
 	}
 

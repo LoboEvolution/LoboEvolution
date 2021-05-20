@@ -48,7 +48,7 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGElementImpl(String name) {
+	public SVGElementImpl(final String name) {
 		super(name);
 	}
 

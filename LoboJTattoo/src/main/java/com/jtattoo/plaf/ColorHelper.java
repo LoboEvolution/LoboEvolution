@@ -31,7 +31,7 @@ import java.awt.Color;
  * Author Michael Hagen
  *
  */
-public class ColorHelper {
+public final class ColorHelper {
 
 	/**
 	 * Creates a color that is the brighter version of the color parameter c.

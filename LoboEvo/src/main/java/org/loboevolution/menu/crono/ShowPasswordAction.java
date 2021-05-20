@@ -53,7 +53,7 @@ public class ShowPasswordAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		final ShowPasswordWindow bookmark = new ShowPasswordWindow(this.frame, this.num);
 		bookmark.setLocationByPlatform(true);
 		bookmark.setVisible(true);

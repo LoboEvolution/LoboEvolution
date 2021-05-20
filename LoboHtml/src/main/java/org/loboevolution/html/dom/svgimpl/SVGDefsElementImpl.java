@@ -35,7 +35,7 @@ public class SVGDefsElementImpl extends SVGGraphic implements SVGDefsElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGDefsElementImpl(String name) {
+	public SVGDefsElementImpl(final String name) {
 		super(name);
 	}
 }

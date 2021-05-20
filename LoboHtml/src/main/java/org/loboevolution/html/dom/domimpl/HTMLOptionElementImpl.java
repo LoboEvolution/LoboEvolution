@@ -43,7 +43,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLOptionElementImpl(String name) {
+	public HTMLOptionElementImpl(final String name) {
 		super(name);
 	}
 	

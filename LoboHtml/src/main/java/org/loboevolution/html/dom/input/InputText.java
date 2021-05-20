@@ -160,7 +160,7 @@ public class InputText extends BasicInput {
 	 * @param start a int.
 	 * @param end a int.
 	 */
-	public void setSelectionRange(int start, int end){
+	public void setSelectionRange(int start, int end) {
 		iText.setSelectionStart(start);
 		iText.setSelectionEnd(end);
 	}

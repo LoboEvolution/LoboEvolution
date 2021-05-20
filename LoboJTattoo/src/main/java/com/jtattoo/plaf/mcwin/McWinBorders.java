@@ -53,7 +53,7 @@ public class McWinBorders extends BaseBorders {
 		private static final Insets SQUARE_INSETS = new Insets(3, 4, 3, 4);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
 				return SQUARE_INSETS;
 			} else {
@@ -61,7 +61,7 @@ public class McWinBorders extends BaseBorders {
 			}
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets insets = getBorderInsets(c);
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
@@ -151,11 +151,11 @@ public class McWinBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return INSETS;
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.top = 1;
 			borderInsets.left = 1;
 			borderInsets.bottom = 1;

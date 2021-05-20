@@ -52,7 +52,7 @@ public class SmartScrollButton extends BaseScrollButton {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		super.paint(g);
 		if (getModel().isRollover()) {
 			g.setColor(AbstractLookAndFeel.getFocusColor());

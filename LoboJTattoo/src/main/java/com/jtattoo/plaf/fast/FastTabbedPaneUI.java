@@ -44,7 +44,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new FastTabbedPaneUI();
 	}
 

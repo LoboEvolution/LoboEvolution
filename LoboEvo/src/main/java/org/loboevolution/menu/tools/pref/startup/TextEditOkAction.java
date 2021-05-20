@@ -61,7 +61,7 @@ public class TextEditOkAction extends AbstractAction {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		this.search.setResultingText(this.textArea.getText());
 		this.search.dispose();
 	}

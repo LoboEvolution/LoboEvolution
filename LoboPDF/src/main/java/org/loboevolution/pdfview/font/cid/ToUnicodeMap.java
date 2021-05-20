@@ -135,7 +135,7 @@ public class ToUnicodeMap extends PDFCMap {
 
 	private void parseCodeRangeMappingSection(BufferedReader bf, String line) throws IOException {
 		//check if the prev line contains "endcodespacerange"
-		if(line.contains("endcodespacerange")) {
+		if (line.contains("endcodespacerange")) {
 			int indexOf = line.indexOf("endcodespacerange");
 			line = line.substring(0, indexOf);
 			indexOf = line.indexOf("begincodespacerange");
@@ -167,7 +167,7 @@ public class ToUnicodeMap extends PDFCMap {
 			Character srcStart = parseChar(mapping[0]);
 			Character srcEnd = parseChar(mapping[1]);
 			Character destStart;
-			if(isCid) {
+			if (isCid) {
 				destStart = (char)Integer.parseInt(mapping[2]);
 			}
 			else {
@@ -186,7 +186,7 @@ public class ToUnicodeMap extends PDFCMap {
 			int indexOf4 = line.indexOf("<", indexOf3);
 			String substring3 = line.substring(indexOf4);
 			
-			if(!substring1.isEmpty() && !substring2.isEmpty() && !substring3.isEmpty()) {
+			if (!substring1.isEmpty() && !substring2.isEmpty() && !substring3.isEmpty()) {
 				Character srcStart = parseChar(substring1);
 				Character srcEnd = parseChar(substring2);
 				Character destStart = parseChar(substring3);
@@ -209,7 +209,7 @@ public class ToUnicodeMap extends PDFCMap {
 			int indexOf2 = line.indexOf("<", indexOf1);
 			String substring2 = line.substring(indexOf2);
 			
-			if(!substring1.isEmpty() && !substring2.isEmpty()) {
+			if (!substring1.isEmpty() && !substring2.isEmpty()) {
 				Character srcStart = parseChar(substring1);
 				Character srcEnd = parseChar(substring2);
 				this.codeRangeMappings.add(new CodeRangeMapping(srcStart, srcEnd));
@@ -241,7 +241,7 @@ public class ToUnicodeMap extends PDFCMap {
 	private void parseSingleCharMappingLine(String line, boolean isCID) {
 		String[] mapping = line.split(" ");
 		if (mapping.length == 2) {
-			if(isCID) {
+			if (isCID) {
 				this.singleCharMappings.put(parseChar(mapping[0]), (char)Integer.parseInt(mapping[1]));
 			}
 			else {
@@ -283,7 +283,7 @@ public class ToUnicodeMap extends PDFCMap {
 	public char map(char src) {
 		Character mappedChar = null;
 		for (CodeRangeMapping codeRange : this.codeRangeMappings) {
-			if(codeRange.contains(src)) {
+			if (codeRange.contains(src)) {
 				mappedChar = this.singleCharMappings.get(src);
 				if (mappedChar == null) {
 					mappedChar = lookupInRanges(src);

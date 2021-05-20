@@ -51,7 +51,7 @@ public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientEle
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGGradientElementImpl(String name) {
+	public SVGGradientElementImpl(final String name) {
 		super(name);
 	}
 

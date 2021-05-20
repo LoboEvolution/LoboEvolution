@@ -38,7 +38,7 @@ import com.jtattoo.plaf.BaseBorders;
 public class GraphiteToolBarUI extends AbstractToolBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new GraphiteToolBarUI();
 	}
 

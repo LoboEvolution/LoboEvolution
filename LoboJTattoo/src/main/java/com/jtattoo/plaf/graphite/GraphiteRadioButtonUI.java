@@ -44,7 +44,7 @@ public class GraphiteRadioButtonUI extends BaseRadioButtonUI {
 	private static GraphiteRadioButtonUI radioButtonUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new GraphiteRadioButtonUI();
 		}

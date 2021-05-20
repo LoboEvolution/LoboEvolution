@@ -77,7 +77,7 @@ public class SVGPathSegMovetoRelImpl implements SVGPathSegMovetoRel {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setY(float y) {
+	public void setY(final float y) {
 		this.y = y;
 	}
 }

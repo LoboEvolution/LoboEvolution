@@ -37,7 +37,7 @@ public class SVGAnimationElementImpl extends SVGAnimationImpl implements SVGAnim
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGAnimationElementImpl(String name) {
+	public SVGAnimationElementImpl(final String name) {
 		super(name);
 	}
 

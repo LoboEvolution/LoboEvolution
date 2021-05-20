@@ -119,7 +119,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		nodeList.forEach(child -> {
 			if (child instanceof HTMLElementImpl) {
 				HTMLElementImpl elem = (HTMLElementImpl) child;
-				if(elem.getOuter() != null) {
+				if (elem.getOuter() != null) {
 					buffer.append(elem.getOuter());
 				} else {
 					((HTMLElementImpl) child).appendOuterHTMLImpl(buffer);
@@ -166,9 +166,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			final int length = newNode.getChildNodes().getLength();
 			if (deep && length == 0) {
 				NodeListImpl childNodes = (NodeListImpl) getChildNodes();
-				childNodes.forEach(child -> {
-					newNode.appendChild(child.cloneNode(true));
-				});
+				childNodes.forEach(child -> newNode.appendChild(child.cloneNode(true)));
 
 				if (newNode instanceof Element) {
 					final Element elem = (Element) newNode;
@@ -290,9 +288,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		synchronized (this.treeLock) {
 			if (this.renderState != INVALID_RENDER_STATE) {
 				this.renderState = INVALID_RENDER_STATE;
-				nodeList.forEach(child -> {
-					((NodeImpl) child).forgetRenderState();
-				});
+				nodeList.forEach(child -> ((NodeImpl) child).forgetRenderState());
 			}
 		}
 	}
@@ -529,7 +525,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node getLastChild() {
-		if(this.nodeList == null)
+		if (this.nodeList == null)
 			return null;
 
 		int size = this.nodeList.getLength();
@@ -1160,7 +1156,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				}
 			}
 		});
-		if(index.get() > -1) nodeList.remove(index.get());
+		if (index.get() > -1) nodeList.remove(index.get());
 	}
 
 	/**

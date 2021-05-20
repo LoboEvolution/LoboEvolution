@@ -62,7 +62,7 @@ public class BaseButtonListener extends BasicButtonListener {
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(final MouseEvent e) {
 		super.mouseEntered(e);
 		AbstractButton button = (AbstractButton) e.getSource();
 		button.getModel().setRollover(true);
@@ -70,7 +70,7 @@ public class BaseButtonListener extends BasicButtonListener {
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(final MouseEvent e) {
 		super.mouseExited(e);
 		AbstractButton button = (AbstractButton) e.getSource();
 		button.getModel().setRollover(false);
@@ -78,7 +78,7 @@ public class BaseButtonListener extends BasicButtonListener {
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(final MouseEvent e) {
 		super.mouseReleased(e);
 	}
 

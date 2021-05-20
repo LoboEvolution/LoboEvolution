@@ -372,7 +372,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		@Override
-		public void mouseClicked(MouseEvent ev) {
+		public void mouseClicked(final MouseEvent ev) {
 			if (ev.getSource() instanceof Window) {
 				Window window = (Window) ev.getSource();
 				if (window instanceof Frame) {
@@ -395,7 +395,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		@Override
-		public void mouseDragged(MouseEvent ev) {
+		public void mouseDragged(final MouseEvent ev) {
 			if (ev.getSource() instanceof Window) {
 				Window w = (Window) ev.getSource();
 				if (w.isShowing()) {
@@ -481,12 +481,12 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent ev) {
+		public void mouseEntered(final MouseEvent ev) {
 			mouseMoved(ev);
 		}
 
 		@Override
-		public void mouseExited(MouseEvent ev) {
+		public void mouseExited(final MouseEvent ev) {
 			if (ev.getSource() instanceof Window && savedCursor != null) {
 				Window w = (Window) ev.getSource();
 				w.setCursor(savedCursor);
@@ -495,7 +495,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		@Override
-		public void mouseMoved(MouseEvent ev) {
+		public void mouseMoved(final MouseEvent ev) {
 			if (ev.getSource() instanceof Window) {
 				JRootPane root = getRootPane();
 				if (root.getWindowDecorationStyle() != NONE) {
@@ -527,7 +527,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		@Override
-		public void mousePressed(MouseEvent ev) {
+		public void mousePressed(final MouseEvent ev) {
 			Window w = (Window) ev.getSource();
 			if (w instanceof Window) {
 				JRootPane root = getRootPane();
@@ -603,7 +603,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent ev) {
+		public void mouseReleased(final MouseEvent ev) {
 			if (ev.getSource() instanceof Window) {
 				Window w = (Window) ev.getSource();
 				if (w != null) {
@@ -665,7 +665,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			super.paint(g);
 			g.drawImage(bi, 0, 0, null);
 		}
@@ -733,7 +733,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 	 *
 	 * Creates a UI for a JRootPane.
 	 */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseRootPaneUI();
 	}
 

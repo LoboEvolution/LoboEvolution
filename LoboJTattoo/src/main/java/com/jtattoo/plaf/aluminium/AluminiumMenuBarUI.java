@@ -42,7 +42,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class AluminiumMenuBarUI extends BaseMenuBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new AluminiumMenuBarUI();
 	}
 
@@ -57,7 +57,7 @@ public class AluminiumMenuBarUI extends BaseMenuBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		if (JTattooUtilities.isMac() || !AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
 			super.paint(g, c);
 		} else {

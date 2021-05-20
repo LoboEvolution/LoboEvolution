@@ -43,7 +43,7 @@ public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 	private static final Dimension SIZE = new Dimension(1, 1);
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new AluminiumPopupMenuSeparatorUI();
 	}
 
@@ -55,7 +55,7 @@ public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		if (c != null) {
 			boolean horizontal = true;
 			if (c instanceof JSeparator) {

@@ -49,7 +49,7 @@ public class ShowRecentHostsAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		final ShowRecentWindow window = new ShowRecentWindow(this.frame);
 		window.setLocationByPlatform(true);
 		window.setResizable(false);

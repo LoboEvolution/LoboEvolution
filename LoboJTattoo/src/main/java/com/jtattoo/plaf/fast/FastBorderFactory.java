@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public class FastBorderFactory implements AbstractBorderFactory {
+public final class FastBorderFactory implements AbstractBorderFactory {
 
 	private static FastBorderFactory instance = null;
 

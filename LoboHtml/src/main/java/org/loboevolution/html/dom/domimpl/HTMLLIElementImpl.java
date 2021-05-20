@@ -39,7 +39,7 @@ public class HTMLLIElementImpl extends HTMLElementImpl implements HTMLLIElement 
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLLIElementImpl(String name) {
+	public HTMLLIElementImpl(final String name) {
 		super(name);
 	}
 

@@ -347,7 +347,7 @@ public class GeneralStore implements Serializable {
 	 *
 	 * @param cache the cache to set
 	 */
-	public void setCache(boolean cache) {
+	public void setCache(final boolean cache) {
 		this.cache = cache;
 	}
 

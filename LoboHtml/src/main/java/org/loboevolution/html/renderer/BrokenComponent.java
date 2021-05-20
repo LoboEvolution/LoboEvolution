@@ -43,7 +43,7 @@ public class BrokenComponent extends Component {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		g.setColor(Color.RED);
 		final Dimension size = this.getSize();
 		g.drawRect(0, 0, size.width, size.height);

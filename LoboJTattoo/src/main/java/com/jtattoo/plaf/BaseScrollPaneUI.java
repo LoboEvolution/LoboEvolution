@@ -36,7 +36,7 @@ import javax.swing.plaf.basic.BasicScrollPaneUI;
 public class BaseScrollPaneUI extends BasicScrollPaneUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseScrollPaneUI();
 	}
 

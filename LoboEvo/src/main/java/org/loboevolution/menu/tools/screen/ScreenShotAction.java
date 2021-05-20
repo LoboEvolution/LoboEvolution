@@ -49,7 +49,7 @@ public class ScreenShotAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		new ScreenShootWindow(this.frame);
 	}
 

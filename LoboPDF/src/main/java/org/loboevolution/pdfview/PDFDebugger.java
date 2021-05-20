@@ -22,7 +22,7 @@ public class PDFDebugger {
 	
 	private static final Logger logger = Logger.getLogger(PDFDebugger.class.getName());
     /** Constant <code>DEBUG_DCTDECODE_DATA="debugdctdecode"</code> */
-    public final static String DEBUG_DCTDECODE_DATA = "debugdctdecode";
+    public static final  String DEBUG_DCTDECODE_DATA = "debugdctdecode";
     /** Constant <code>DEBUG_TEXT=false</code> */
     public static final boolean DEBUG_TEXT = false;
     /** Constant <code>DEBUG_IMAGES=false</code> */
@@ -74,7 +74,7 @@ public class PDFDebugger {
      */
     public static void debugImage(BufferedImage image, String name) {
         if (PDFDebugger.DEBUG_IMAGES) {
-            if(image == null) {
+            if (image == null) {
                 return;
             }
             try {
@@ -155,7 +155,7 @@ public class PDFDebugger {
      * @param operation a {@link java.lang.String} object.
      */
     public static void logPath(GeneralPath path, String operation) {
-        if (PDFDebugger.DEBUG_PATH){
+        if (PDFDebugger.DEBUG_PATH) {
             if (operation != null) {
                 logger.info("Operation: " + operation + "; ");
             }

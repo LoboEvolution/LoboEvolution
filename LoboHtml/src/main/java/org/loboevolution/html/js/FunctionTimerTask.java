@@ -55,7 +55,7 @@ class FunctionTimerTask extends WeakWindowTask {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		// This executes in the GUI thread and that's good.
 		try {
 			final WindowImpl window = this.getWindow();

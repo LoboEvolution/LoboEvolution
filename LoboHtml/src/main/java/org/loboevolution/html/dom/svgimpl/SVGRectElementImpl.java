@@ -44,7 +44,7 @@ public class SVGRectElementImpl extends SVGGraphic implements SVGRectElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGRectElementImpl(String name) {
+	public SVGRectElementImpl(final String name) {
 		super(name);
 	}
 
@@ -86,7 +86,7 @@ public class SVGRectElementImpl extends SVGGraphic implements SVGRectElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
 		final Shape shape = createShape(ctm.getAffineTransform());
 		animate(this);

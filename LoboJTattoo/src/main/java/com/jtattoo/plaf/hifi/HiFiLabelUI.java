@@ -45,7 +45,7 @@ public class HiFiLabelUI extends BasicLabelUI {
 	private static HiFiLabelUI hifiLabelUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (hifiLabelUI == null) {
 			hifiLabelUI = new HiFiLabelUI();
 		}

@@ -55,7 +55,7 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		// Important for layout caching.
 		if (!(obj instanceof ParentFloatingBoundsSource)) {
 			return false;

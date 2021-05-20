@@ -55,7 +55,7 @@ public class AeroTitlePane extends BaseTitlePane {
 		}
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			boolean isPressed = getModel().isPressed();
 			boolean isArmed = getModel().isArmed();
 			boolean isRollover = getModel().isRollover();

@@ -52,7 +52,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLImageElementImpl(String name) {
+	public HTMLImageElementImpl(final String name) {
 		super(name);
 	}
 	

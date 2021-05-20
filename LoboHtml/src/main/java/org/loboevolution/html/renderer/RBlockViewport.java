@@ -1390,7 +1390,7 @@ public class RBlockViewport extends BaseRCollection {
 	public void layoutRFlex(final HTMLElementImpl markupElement) {
 		final RenderState renderState = markupElement.getRenderState();
 		RFlex flex = new RFlex(renderState);
-		if(flex.isFlexTable()) {
+		if (flex.isFlexTable()) {
 			layoutRTable(markupElement);
 		} else {
 			flex.flexAlign(markupElement);
@@ -1523,7 +1523,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onDoubleClick(MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
 		if (i != null) {
 			while (i.hasNext()) {
@@ -1548,7 +1548,7 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseClick(MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final MouseEvent event, int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
 		if (i != null) {
 			while (i.hasNext()) {
@@ -1573,7 +1573,7 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseDisarmed(MouseEvent event) {
+	public boolean onMouseDisarmed(final MouseEvent event) {
 		final BoundableRenderable br = this.armedRenderable;
 		if (br != null) {
 			try {
@@ -1595,7 +1595,7 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMousePressed(MouseEvent event, int x, int y) {
+	public boolean onMousePressed(final MouseEvent event, int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
 		if (i != null) {
 			while (i.hasNext()) {
@@ -1621,7 +1621,7 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseReleased(MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
 		if (i != null) {
 			while (i.hasNext()) {

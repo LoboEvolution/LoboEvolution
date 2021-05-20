@@ -34,7 +34,7 @@ import com.jtattoo.plaf.BaseIcons;
  * Author Michael Hagen
  *
  */
-public class AcrylIconFactory implements AbstractIconFactory {
+public final class AcrylIconFactory implements AbstractIconFactory {
 
 	private static AcrylIconFactory instance = null;
 

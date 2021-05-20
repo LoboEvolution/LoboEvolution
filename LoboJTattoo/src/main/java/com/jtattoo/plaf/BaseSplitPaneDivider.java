@@ -193,7 +193,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 			}
 
 			@Override
-			public void paint(Graphics g) {
+			public void paint(final Graphics g) {
 				Color color = getBackground();
 				int w = getSize().width;
 				int h = getSize().height;
@@ -251,7 +251,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 			}
 
 			@Override
-			public void paint(Graphics g) {
+			public void paint(final Graphics g) {
 				Color color = getBackground();
 				int w = getSize().width;
 				int h = getSize().height;
@@ -319,7 +319,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		if (!isFlatMode()) {
 			Graphics2D g2D = (Graphics2D) g;
 			Composite savedComposite = g2D.getComposite();

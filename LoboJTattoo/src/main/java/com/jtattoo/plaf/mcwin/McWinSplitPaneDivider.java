@@ -51,7 +51,7 @@ public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		if (AbstractLookAndFeel.getTheme().isBrightMode()) {
 			centerOneTouchButtons = true;
 			doLayout();

@@ -32,7 +32,7 @@ public class HTMLStrongElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLStrongElementImpl(String name) {
+	public HTMLStrongElementImpl(final String name) {
 		super(name);
 	}
 

@@ -35,7 +35,7 @@ public class SVGPolylineElementImpl extends SVGPolygonElementImpl implements SVG
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGPolylineElementImpl(String name) {
+	public SVGPolylineElementImpl(final String name) {
 		super(name);
 	}
 }

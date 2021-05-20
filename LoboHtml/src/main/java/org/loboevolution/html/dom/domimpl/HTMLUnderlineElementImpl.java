@@ -34,7 +34,7 @@ public class HTMLUnderlineElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLUnderlineElementImpl(String name) {
+	public HTMLUnderlineElementImpl(final String name) {
 		super(name);
 	}
 

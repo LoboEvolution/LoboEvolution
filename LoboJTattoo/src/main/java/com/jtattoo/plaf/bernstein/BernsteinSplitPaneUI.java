@@ -38,7 +38,7 @@ import com.jtattoo.plaf.BaseSplitPaneUI;
 public class BernsteinSplitPaneUI extends BaseSplitPaneUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BernsteinSplitPaneUI();
 	}
 

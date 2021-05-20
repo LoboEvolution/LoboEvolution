@@ -136,7 +136,7 @@ public class RLayout {
 		}
 	}
 
-	protected static abstract class CommonLayout implements MarkupLayout {
+	protected abstract static class CommonLayout implements MarkupLayout {
 	
 	    private final int display;
 
@@ -214,7 +214,7 @@ public class RLayout {
 	 * This is layout common to elements that render themselves, except RBlock,
 	 * RTable and RList.
 	 */
-	protected static abstract class CommonWidgetLayout implements MarkupLayout {
+	protected abstract static class CommonWidgetLayout implements MarkupLayout {
 		protected static final int ADD_INLINE = 0;
 	    protected static final int ADD_AS_BLOCK = 1;
 	    protected static final int ADD_INLINE_BLOCK = 2;
@@ -312,7 +312,7 @@ public class RLayout {
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			UIControl control;
 			HTMLImageElementImpl image = (HTMLImageElementImpl) markupElement;
-			if(image.getSrc() != null && image.getSrc().endsWith(".svg")) {
+			if (image.getSrc() != null && image.getSrc().endsWith(".svg")) {
 				control = new ImgSvgControl(image);
 			} else {
 				control = new ImgControl(image, map);

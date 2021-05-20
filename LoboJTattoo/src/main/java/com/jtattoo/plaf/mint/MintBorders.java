@@ -56,11 +56,11 @@ public class MintBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(3, 8, 5, 10);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return INSETS;
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -168,11 +168,11 @@ public class MintBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;

@@ -108,7 +108,7 @@ class RListItem extends BaseRListElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		super.paint(g);
 		final RenderState rs = this.modelNode.getRenderState();
 		final Insets marginInsets = this.marginInsets;
@@ -149,7 +149,7 @@ class RListItem extends BaseRListElement {
 						numberText = bulletNumber + ".";
 						break;
 					case TYPE_DECIMAL_LEADING_ZERO:
-						if(bulletNumber<10)	
+						if (bulletNumber<10)	
 							numberText = "0" + bulletNumber + ".";
 						else
 							numberText = bulletNumber + ".";

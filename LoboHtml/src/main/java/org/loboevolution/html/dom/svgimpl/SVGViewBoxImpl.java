@@ -116,7 +116,7 @@ public class SVGViewBoxImpl {
 	 *
 	 * @param y a float.
 	 */
-	public void setY(float y) {
+	public void setY(final float y) {
 		this.y = y;
 	}
 

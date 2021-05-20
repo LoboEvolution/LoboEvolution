@@ -130,7 +130,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 	 *
 	 * Draw the image.
 	 */
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		Dimension sz = getSize();
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
@@ -206,17 +206,17 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 	}
 
 	/** {@inheritDoc} */
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(final MouseEvent e) {
 		requestFocus();
 	}
 
 	/** {@inheritDoc} */
-	public void mouseEntered(MouseEvent e) {}
+	public void mouseEntered(final MouseEvent e) {}
 	/** {@inheritDoc} */
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(final MouseEvent e) {}
 	/** {@inheritDoc} */
-	public void mousePressed(MouseEvent e) {}
+	public void mousePressed(final MouseEvent e) {}
 	/** {@inheritDoc} */
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(final MouseEvent e) {}
 
 }

@@ -69,7 +69,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 	protected static final Rectangle textRect = new Rectangle();
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new BaseRadioButtonUI();
 		}
@@ -86,7 +86,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		AbstractButton b = (AbstractButton) c;
 		g.setFont(c.getFont());
 		FontMetrics fm = JTattooUtilities.getFontMetrics(c, g, c.getFont());

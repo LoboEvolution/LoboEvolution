@@ -111,7 +111,7 @@ public class BinaryOperation {
 		return number >> shift;
 	}
 
-	/*public final static long bit32Shift(long number, int shift, int direction) {
+	/*public static final  long bit32Shift(long number, int shift, int direction) {
 		if (direction == LEFT_SHIFT)
 			number <<= shift;
 		else

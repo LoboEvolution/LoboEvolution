@@ -156,7 +156,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			super.paint(g);
 			// Draw the arrow
 			int w = getSize().width;
@@ -309,7 +309,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			ui.navigateSelectedTab(SOUTH);
@@ -352,7 +352,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			ui.navigateSelectedTab(WEST);
@@ -367,7 +367,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	public class MouseHandler extends MouseAdapter {
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked(final MouseEvent e) {
 			if (scrollableTabLayoutEnabled()) {
 				MouseListener[] ml = tabPane.getMouseListeners();
 				for (MouseListener ml1 : ml) {
@@ -377,7 +377,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
+		public void mouseEntered(final MouseEvent e) {
 			if (scrollableTabLayoutEnabled()) {
 				for (MouseListener ml : tabPane.getMouseListeners()) {
 					ml.mouseEntered(e);
@@ -386,7 +386,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
+		public void mouseExited(final MouseEvent e) {
 			if (scrollableTabLayoutEnabled()) {
 				for (MouseListener ml : tabPane.getMouseListeners()) {
 					ml.mouseExited(e);
@@ -405,7 +405,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
+		public void mousePressed(final MouseEvent e) {
 			if (scrollableTabLayoutEnabled()) {
 				for (MouseListener ml : tabPane.getMouseListeners()) {
 					ml.mousePressed(e);
@@ -428,7 +428,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
+		public void mouseReleased(final MouseEvent e) {
 			if (scrollableTabLayoutEnabled()) {
 				for (MouseListener ml : tabPane.getMouseListeners()) {
 					ml.mouseReleased(e);
@@ -445,7 +445,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	public class MouseMotionHandler extends MouseMotionAdapter {
 
 		@Override
-		public void mouseDragged(MouseEvent e) {
+		public void mouseDragged(final MouseEvent e) {
 			if (scrollableTabLayoutEnabled()) {
 				for (MouseMotionListener mml : tabPane.getMouseMotionListeners()) {
 					mml.mouseDragged(e);
@@ -454,7 +454,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 
 		@Override
-		public void mouseMoved(MouseEvent e) {
+		public void mouseMoved(final MouseEvent e) {
 			if (scrollableTabLayoutEnabled()) {
 				for (MouseMotionListener mml : tabPane.getMouseMotionListeners()) {
 					mml.mouseMoved(e);
@@ -492,7 +492,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			ui.navigateSelectedTab(NEXT);
@@ -507,7 +507,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			int tabPlacement = pane.getTabPlacement();
@@ -527,7 +527,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			int tabPlacement = pane.getTabPlacement();
@@ -547,7 +547,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			ui.navigateSelectedTab(PREVIOUS);
@@ -633,7 +633,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			pane.requestFocus();
 		}
@@ -647,7 +647,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			ui.requestFocusForVisibleComponent();
@@ -662,7 +662,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			ui.navigateSelectedTab(EAST);
@@ -938,7 +938,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane;
 			Object src = e.getSource();
 			if (src instanceof JTabbedPane) {
@@ -964,7 +964,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane;
 			Object src = e.getSource();
 			if (src instanceof JTabbedPane) {
@@ -991,7 +991,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private JTabbedPane tabbedPane = null;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			Object src = e.getSource();
 			if (src instanceof JTabbedPane) {
 				tabbedPane = (JTabbedPane) src;
@@ -1035,7 +1035,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			tabbedPane.setSelectedIndex(selectIndex);
 		}
 	}
@@ -1053,7 +1053,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 
 			if (pane != null && pane.getUI() instanceof BaseTabbedPaneUI) {
@@ -2102,7 +2102,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			JTabbedPane pane = (JTabbedPane) e.getSource();
 			BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
 			ui.navigateSelectedTab(NORTH);
@@ -2116,7 +2116,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	private static final int CROP_SEGMENT = 12;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseTabbedPaneUI();
 	}
 
@@ -3546,7 +3546,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	// UI Rendering
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		int tc = tabPane.getTabCount();
 		if (tabCount != tc) {
 			tabCount = tc;

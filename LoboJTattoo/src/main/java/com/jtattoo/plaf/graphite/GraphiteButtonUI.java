@@ -47,7 +47,7 @@ import com.jtattoo.plaf.BaseButtonUI;
 public class GraphiteButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new GraphiteButtonUI();
 	}
 

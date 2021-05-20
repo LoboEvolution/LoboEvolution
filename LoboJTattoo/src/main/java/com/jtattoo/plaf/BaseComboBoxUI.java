@@ -63,7 +63,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			Dimension size = getSize();
 			Color[] colors;
 			if (isEnabled()) {
@@ -112,7 +112,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
 //-----------------------------------------------------------------------------    
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseComboBoxUI();
 	}
 

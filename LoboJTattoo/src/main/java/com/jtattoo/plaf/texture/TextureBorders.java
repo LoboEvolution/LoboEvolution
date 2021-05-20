@@ -68,11 +68,11 @@ public class TextureBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(3, 4, 3, 4);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return INSETS;
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -168,7 +168,7 @@ public class TextureBorders extends BaseBorders {
 				new Color(184, 184, 184), new Color(172, 172, 172) };
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			if (isResizable(c)) {
 				return new Insets(5, 8, 6, 8);
 			} else {
@@ -286,12 +286,12 @@ public class TextureBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -411,11 +411,11 @@ public class TextureBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;
@@ -470,7 +470,7 @@ public class TextureBorders extends BaseBorders {
 		private static final LazyImageIcon VER_RUBBER_ICON = new LazyImageIcon("texture/icons/VerRubber.gif");
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			Insets insets = new Insets(2, 2, 2, 2);
 			if (((JToolBar) c).isFloatable()) {
 				if (((JToolBar) c).getOrientation() == HORIZONTAL) {
@@ -494,7 +494,7 @@ public class TextureBorders extends BaseBorders {
 		}
 
 		@Override
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets insets = getBorderInsets(c);
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;

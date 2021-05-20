@@ -55,7 +55,7 @@ public class CancelAction<T> extends AbstractAction {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		this.item.setResultingItem(null);
 		this.item.dispose();
 	}

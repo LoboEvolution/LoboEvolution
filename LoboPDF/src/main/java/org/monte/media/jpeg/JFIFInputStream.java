@@ -112,96 +112,96 @@ public class JFIFInputStream extends FilterInputStream {
     private long offset = 0;
     private boolean isStuffed0xff = false;
     /** JUNK_MARKER Marker (for data which is not part of the JFIF stream. */
-    public final static int JUNK_MARKER = -1;
+    public static final  int JUNK_MARKER = -1;
     /** Start of image */
-    public final static int SOI_MARKER = 0xffd8;
+    public static final  int SOI_MARKER = 0xffd8;
     /** End of image */
-    public final static int EOI_MARKER = 0xffd9;
+    public static final  int EOI_MARKER = 0xffd9;
     /** Temporary private use in arithmetic coding */
-    public final static int TEM_MARKER = 0xff01;
+    public static final  int TEM_MARKER = 0xff01;
     /** Start of scan */
-    public final static int SOS_MARKER = 0xffda;
+    public static final  int SOS_MARKER = 0xffda;
     /** APP1_MARKER Reserved for application use */
-    public final static int APP1_MARKER = 0xffe1;
+    public static final  int APP1_MARKER = 0xffe1;
     /** APP2_MARKER Reserved for application use */
-    public final static int APP2_MARKER = 0xffe2;
+    public static final  int APP2_MARKER = 0xffe2;
     /** Reserved for JPEG extensions */
-    public final static int JPG0_MARKER = 0xfff0;
+    public static final  int JPG0_MARKER = 0xfff0;
     /** Constant <code>JPG1_MARKER=0xfff1</code> */
-    public final static int JPG1_MARKER = 0xfff1;
+    public static final  int JPG1_MARKER = 0xfff1;
     /** Constant <code>JPG2_MARKER=0xfff2</code> */
-    public final static int JPG2_MARKER = 0xfff2;
+    public static final  int JPG2_MARKER = 0xfff2;
     /** Constant <code>JPG3_MARKER=0xfff3</code> */
-    public final static int JPG3_MARKER = 0xfff3;
+    public static final  int JPG3_MARKER = 0xfff3;
     /** Constant <code>JPG4_MARKER=0xfff4</code> */
-    public final static int JPG4_MARKER = 0xfff4;
+    public static final  int JPG4_MARKER = 0xfff4;
     /** Constant <code>JPG5_MARKER=0xfff5</code> */
-    public final static int JPG5_MARKER = 0xfff5;
+    public static final  int JPG5_MARKER = 0xfff5;
     /** Constant <code>JPG6_MARKER=0xfff6</code> */
-    public final static int JPG6_MARKER = 0xfff6;
+    public static final  int JPG6_MARKER = 0xfff6;
     /** Constant <code>JPG7_MARKER=0xfff7</code> */
-    public final static int JPG7_MARKER = 0xfff7;
+    public static final  int JPG7_MARKER = 0xfff7;
     /** Constant <code>JPG8_MARKER=0xfff8</code> */
-    public final static int JPG8_MARKER = 0xfff8;
+    public static final  int JPG8_MARKER = 0xfff8;
     /** Constant <code>JPG9_MARKER=0xfff9</code> */
-    public final static int JPG9_MARKER = 0xfff9;
+    public static final  int JPG9_MARKER = 0xfff9;
     /** Constant <code>JPGA_MARKER=0xfffA</code> */
-    public final static int JPGA_MARKER = 0xfffA;
+    public static final  int JPGA_MARKER = 0xfffA;
     /** Constant <code>JPGB_MARKER=0xfffB</code> */
-    public final static int JPGB_MARKER = 0xfffB;
+    public static final  int JPGB_MARKER = 0xfffB;
     /** Constant <code>JPGC_MARKER=0xfffC</code> */
-    public final static int JPGC_MARKER = 0xfffC;
+    public static final  int JPGC_MARKER = 0xfffC;
     /** Constant <code>JPGD_MARKER=0xfffD</code> */
-    public final static int JPGD_MARKER = 0xfffD;
+    public static final  int JPGD_MARKER = 0xfffD;
     /** Start of frame markers */
-    public final static int SOF0_MARKER = 0xffc0;//nondifferential Huffman-coding frames with baseline DCT.
+    public static final  int SOF0_MARKER = 0xffc0;//nondifferential Huffman-coding frames with baseline DCT.
     /** Constant <code>SOF1_MARKER=0xffc1</code> */
-    public final static int SOF1_MARKER = 0xffc1;//nondifferential Huffman-coding frames with extended sequential DCT.
+    public static final  int SOF1_MARKER = 0xffc1;//nondifferential Huffman-coding frames with extended sequential DCT.
     /** Constant <code>SOF2_MARKER=0xffc2</code> */
-    public final static int SOF2_MARKER = 0xffc2;//nondifferential Huffman-coding frames with progressive DCT.
+    public static final  int SOF2_MARKER = 0xffc2;//nondifferential Huffman-coding frames with progressive DCT.
     /** Constant <code>SOF3_MARKER=0xffc3</code> */
-    public final static int SOF3_MARKER = 0xffc3;//nondifferential Huffman-coding frames with lossless (sequential) data.
+    public static final  int SOF3_MARKER = 0xffc3;//nondifferential Huffman-coding frames with lossless (sequential) data.
 
-    //public final static int SOF4_MARKER = 0xffc4;//
+    //public static final  int SOF4_MARKER = 0xffc4;//
     /** Constant <code>SOF5_MARKER=0xffc5</code> */
-    public final static int SOF5_MARKER = 0xffc5;//differential Huffman-coding frames with differential sequential DCT.
+    public static final  int SOF5_MARKER = 0xffc5;//differential Huffman-coding frames with differential sequential DCT.
     /** Constant <code>SOF6_MARKER=0xffc6</code> */
-    public final static int SOF6_MARKER = 0xffc6;//differential Huffman-coding frames with differential progressive DCT.
+    public static final  int SOF6_MARKER = 0xffc6;//differential Huffman-coding frames with differential progressive DCT.
     /** Constant <code>SOF7_MARKER=0xffc7</code> */
-    public final static int SOF7_MARKER = 0xffc7;//differential Huffman-coding frames with differential lossless data.
+    public static final  int SOF7_MARKER = 0xffc7;//differential Huffman-coding frames with differential lossless data.
 
-    //public final static int SOF8_MARKER = 0xffc8;//
+    //public static final  int SOF8_MARKER = 0xffc8;//
     /** Constant <code>SOF9_MARKER=0xffc9</code> */
-    public final static int SOF9_MARKER = 0xffc9;//nondifferential Arithmetic-coding frames with extended sequential DCT.
+    public static final  int SOF9_MARKER = 0xffc9;//nondifferential Arithmetic-coding frames with extended sequential DCT.
     /** Constant <code>SOFA_MARKER=0xffcA</code> */
-    public final static int SOFA_MARKER = 0xffcA;//nondifferential Arithmetic-coding frames with progressive DCT.
+    public static final  int SOFA_MARKER = 0xffcA;//nondifferential Arithmetic-coding frames with progressive DCT.
     /** Constant <code>SOFB_MARKER=0xffcB</code> */
-    public final static int SOFB_MARKER = 0xffcB;//nondifferential Arithmetic-coding frames with lossless (sequential) data.
-    //public final static int SOFC_MARKER = 0xffcC;//
+    public static final  int SOFB_MARKER = 0xffcB;//nondifferential Arithmetic-coding frames with lossless (sequential) data.
+    //public static final  int SOFC_MARKER = 0xffcC;//
     /** Constant <code>SOFD_MARKER=0xffcD</code> */
-    public final static int SOFD_MARKER = 0xffcD;//differential Arithmetic-coding frames with differential sequential DCT.
+    public static final  int SOFD_MARKER = 0xffcD;//differential Arithmetic-coding frames with differential sequential DCT.
     /** Constant <code>SOFE_MARKER=0xffcE</code> */
-    public final static int SOFE_MARKER = 0xffcE;//differential Arithmetic-coding frames with differential progressive DCT.
+    public static final  int SOFE_MARKER = 0xffcE;//differential Arithmetic-coding frames with differential progressive DCT.
     /** Constant <code>SOFF_MARKER=0xffcF</code> */
-    public final static int SOFF_MARKER = 0xffcF;//differential Arithmetic-coding frames with differential lossless DCT.
+    public static final  int SOFF_MARKER = 0xffcF;//differential Arithmetic-coding frames with differential lossless DCT.
 
     // Restart markers
     /** Constant <code>RST0_MARKER=0xffd0</code> */
-    public final static int RST0_MARKER = 0xffd0;
+    public static final  int RST0_MARKER = 0xffd0;
     /** Constant <code>RST1_MARKER=0xffd1</code> */
-    public final static int RST1_MARKER = 0xffd1;
+    public static final  int RST1_MARKER = 0xffd1;
     /** Constant <code>RST2_MARKER=0xffd2</code> */
-    public final static int RST2_MARKER = 0xffd2;
+    public static final  int RST2_MARKER = 0xffd2;
     /** Constant <code>RST3_MARKER=0xffd3</code> */
-    public final static int RST3_MARKER = 0xffd3;
+    public static final  int RST3_MARKER = 0xffd3;
     /** Constant <code>RST4_MARKER=0xffd4</code> */
-    public final static int RST4_MARKER = 0xffd4;
+    public static final  int RST4_MARKER = 0xffd4;
     /** Constant <code>RST5_MARKER=0xffd5</code> */
-    public final static int RST5_MARKER = 0xffd5;
+    public static final  int RST5_MARKER = 0xffd5;
     /** Constant <code>RST6_MARKER=0xffd6</code> */
-    public final static int RST6_MARKER = 0xffd6;
+    public static final  int RST6_MARKER = 0xffd6;
     /** Constant <code>RST7_MARKER=0xffd7</code> */
-    public final static int RST7_MARKER = 0xffd7;
+    public static final  int RST7_MARKER = 0xffd7;
 
     /**
      * <p>Constructor for JFIFInputStream.</p>

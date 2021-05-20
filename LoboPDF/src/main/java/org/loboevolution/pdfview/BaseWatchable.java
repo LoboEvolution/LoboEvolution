@@ -415,8 +415,8 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      *
      * @return a {@link org.loboevolution.pdfview.PDFErrorHandler} object.
      */
-    public static PDFErrorHandler getErrorHandler(){
-        if(errorHandler == null) {
+    public static PDFErrorHandler getErrorHandler() {
+        if (errorHandler == null) {
             errorHandler = new PDFErrorHandler();
         }
         return errorHandler;

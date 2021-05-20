@@ -79,7 +79,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		Graphics2D g2D = (Graphics2D) g;
 
 		AbstractButton b = (AbstractButton) c;

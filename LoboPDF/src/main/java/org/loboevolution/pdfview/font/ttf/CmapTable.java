@@ -281,7 +281,7 @@ public class CmapTable extends TrueTypeTable {
         /**
          * Compare two subtables
          */
-        @Override public boolean equals(Object obj) {
+        @Override public boolean equals(final Object obj) {
             return (compareTo(obj) == 0);
         }
         

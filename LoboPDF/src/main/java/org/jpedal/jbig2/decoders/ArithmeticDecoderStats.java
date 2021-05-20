@@ -97,7 +97,7 @@ public class ArithmeticDecoderStats {
 	 * @param index a int.
 	 * @return a int.
 	 */
-	public int getContextCodingTableValue(int index){
+	public int getContextCodingTableValue(int index) {
 		return codingContextTable[index];
 	}
 	
@@ -107,7 +107,7 @@ public class ArithmeticDecoderStats {
 	 * @param index a int.
 	 * @param value a int.
 	 */
-	public void setContextCodingTableValue(int index, int value){
+	public void setContextCodingTableValue(int index, int value) {
 		codingContextTable[index] = value;
 	}
 	

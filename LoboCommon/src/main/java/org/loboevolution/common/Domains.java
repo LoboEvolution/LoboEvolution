@@ -21,16 +21,17 @@ package org.loboevolution.common;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 /**
  * <p>Domains class.</p>
- *
- * Author J. H. S.
- *
  */
-public class Domains {
+public final class Domains {
+
 	private static final Collection<String> gTLDs;
+
+	private Domains() {
+		super();
+	}
 
 	static {
 		gTLDs = new HashSet<>();
@@ -49,64 +50,6 @@ public class Domains {
 		gTLDs.add(".coop");
 		gTLDs.add(".museum");
 		// TODO: New gTLDs?
-	}
-
-	/**
-	 * <p>endsWithGTLD.</p>
-	 *
-	 * @param host A host name in lower case.
-	 * @return a boolean.
-	 */
-	public static boolean endsWithGTLD(String host) {
-		for (String ending : gTLDs) {
-			if (host.endsWith(ending)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * <p>getPossibleDomains.</p>
-	 *
-	 * @param hostName a {@link java.lang.String} object.
-	 * @return a {@link java.util.Collection} object.
-	 */
-	public static Collection<String> getPossibleDomains(String hostName) {
-		final Collection<String> domains = new LinkedList<>();
-		domains.add(hostName);
-		final int dotIdx = hostName.indexOf('.', 1);
-		if (dotIdx == -1) {
-			return domains;
-		}
-		final String testDomain = hostName.substring(dotIdx);
-		if (!Domains.isValidCookieDomain(testDomain, hostName)) {
-			return domains;
-		}
-		domains.addAll(Domains.getPossibleDomains(testDomain.substring(1)));
-		return domains;
-	}
-
-	/**
-	 * <p>isLikelyHostName.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public static boolean isLikelyHostName(String name) {
-		final String nameTL = name.toLowerCase();
-		if (nameTL.startsWith("www.")) {
-			return true;
-		}
-		if (endsWithGTLD(name)) {
-			return true;
-		}
-		final int lastDotIdx = nameTL.lastIndexOf('.');
-		if (lastDotIdx == -1) {
-			return false;
-		}
-		// Check for country code.
-		return lastDotIdx == nameTL.length() - 3;
 	}
 
 	/**
@@ -143,12 +86,5 @@ public class Domains {
 		} else {
 			return Strings.countChars(domain, '.') >= 3;
 		}
-	}
-
-	/**
-	 * 
-	 */
-	private Domains() {
-		super();
 	}
 }

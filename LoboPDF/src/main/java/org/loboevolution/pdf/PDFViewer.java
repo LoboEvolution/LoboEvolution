@@ -381,7 +381,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 */
 	public void openFile(File file) throws IOException {
 		// first open the file for random access
-		try (RandomAccessFile raf = new RandomAccessFile(file, "r")){
+		try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
 			// extract a file channel
 			FileChannel channel = raf.getChannel();
 			// now memory-map a byte-buffer

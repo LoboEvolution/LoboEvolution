@@ -41,7 +41,7 @@ public class RSSTitleElementImpl extends RSSElement implements RSSDrawable {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public RSSTitleElementImpl(String name) {
+	public RSSTitleElementImpl(final String name) {
 		super(name);
 	}
 	

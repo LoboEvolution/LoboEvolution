@@ -41,7 +41,7 @@ public class HiFiPanelUI extends BasePanelUI {
 	private static HiFiPanelUI panelUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (panelUI == null) {
 			panelUI = new HiFiPanelUI();
 		}

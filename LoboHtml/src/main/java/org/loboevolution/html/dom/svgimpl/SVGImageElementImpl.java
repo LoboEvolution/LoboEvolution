@@ -44,7 +44,7 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGImageElementImpl(String name) {
+	public SVGImageElementImpl(final String name) {
 		super(name);
 	}
 
@@ -87,7 +87,7 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		Image image = HttpNetwork.getImage(getHref().getBaseVal(), null);
 		int realWidth = image.getWidth(null);
 		int realHeight = image.getHeight(null);

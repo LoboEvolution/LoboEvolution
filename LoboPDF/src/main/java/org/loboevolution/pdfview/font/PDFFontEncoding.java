@@ -244,7 +244,7 @@ public class PDFFontEncoding {
      * @return a boolean.
      */
     public boolean isOneByteIdentity() {
-    	if(this.mapName != null) {
+    	if (this.mapName != null) {
     		try {
 				return "OneByteIdentityH".equals(this.mapName.getStringValue());
 			} catch (IOException e) {

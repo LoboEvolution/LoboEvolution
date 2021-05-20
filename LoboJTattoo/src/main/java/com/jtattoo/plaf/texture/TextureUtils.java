@@ -43,7 +43,7 @@ import com.jtattoo.plaf.LazyImageIcon;
  * Author Michael Hagen
  *
  */
-public class TextureUtils {
+public final class TextureUtils {
 
 	/** Constant WINDOW_TEXTURE_TYPE=0 */
 	public static final int WINDOW_TEXTURE_TYPE = 0;

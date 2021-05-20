@@ -55,7 +55,7 @@ public class DefaultsAction extends AbstractAction {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		if (JOptionPane.showConfirmDialog(this.prefer, "Are you sure you want to restore defaults?", "Confirm",
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			this.prefer.getPreferencesPanel().restoreDefaults();

@@ -50,7 +50,7 @@ public class GoToRAction extends PDFAction {
      * @param newWindow a {@link java.lang.String} object.
      ***********************************************************************
      */
-    public GoToRAction(PDFDestination dest, String file, boolean newWindow){
+    public GoToRAction(PDFDestination dest, String file, boolean newWindow) {
     	super("GoToR");
     	this.file = file;
     	this.destination = dest;

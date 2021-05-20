@@ -127,17 +127,17 @@ public class BorderInsets {
 		}
 	}
 
-	private static String borderInsets(String parentStyle, int style, String value){
-		if(isNone(style)) return "0px";
-		if(isInherit(value)) return parentStyle;
+	private static String borderInsets(String parentStyle, int style, String value) {
+		if (isNone(style)) return "0px";
+		if (isInherit(value)) return parentStyle;
 		return value;
 	}
 
-	private static boolean isNone(int value){
+	private static boolean isNone(int value) {
 		return BORDER_STYLE_NONE == value;
 	}
 
-	private static boolean isInherit(String value){
+	private static boolean isInherit(String value) {
 		return CSSValues.INHERIT.equals(CSSValues.get(value));
 	}
 

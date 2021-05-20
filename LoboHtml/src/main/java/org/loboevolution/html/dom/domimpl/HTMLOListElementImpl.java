@@ -37,7 +37,7 @@ public class HTMLOListElementImpl extends HTMLElementImpl implements HTMLOListEl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLOListElementImpl(String name) {
+	public HTMLOListElementImpl(final String name) {
 		super(name);
 	}
 

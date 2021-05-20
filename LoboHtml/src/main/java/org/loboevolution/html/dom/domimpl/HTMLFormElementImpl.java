@@ -68,7 +68,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLFormElementImpl(String name) {
+	public HTMLFormElementImpl(final String name) {
 		super(name);
 	}
 

@@ -131,35 +131,35 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 		addMouseListener(new MouseListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(final MouseEvent e) {
 				onMouseClick(e);
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent e) {
+			public void mouseEntered(final MouseEvent e) {
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e) {
+			public void mouseExited(final MouseEvent e) {
 				onMouseExited(e);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) { onMousePressed(e); }
+			public void mousePressed(final MouseEvent e) { onMousePressed(e); }
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
+			public void mouseReleased(final MouseEvent e) {
 				onMouseReleased(e);
 			}
 		});
 		addMouseMotionListener(new MouseMotionListener() {
 			@Override
-			public void mouseDragged(MouseEvent e) {
+			public void mouseDragged(final MouseEvent e) {
 				onMouseDragged(e);
 			}
 
 			@Override
-			public void mouseMoved(MouseEvent arg0) {
+			public void mouseMoved(final MouseEvent arg0) {
 				onMouseMoved(arg0);
 			}
 		});
@@ -509,7 +509,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public void lostOwnership(Clipboard arg0, Transferable arg1) {
 	}
 
-	private void onMouseClick(MouseEvent event) {
+	private void onMouseClick(final MouseEvent event) {
 		// Rely on AWT mouse-click only for double-clicks
 		final RBlock block = this.rblock;
 		if (block != null) {
@@ -526,7 +526,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
-	private void onMouseDragged(MouseEvent event) {
+	private void onMouseDragged(final MouseEvent event) {
 		final RBlock block = this.rblock;
 		if (block != null) {
 			final Point point = event.getPoint();
@@ -538,7 +538,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
-	private void onMouseExited(MouseEvent event) {
+	private void onMouseExited(final MouseEvent event) {
 		final BoundableRenderable oldTarget = this.mousePressTarget;
 		if (oldTarget != null) {
 			this.mousePressTarget = null;
@@ -551,7 +551,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
-	private void onMouseMoved(MouseEvent event) {
+	private void onMouseMoved(final MouseEvent event) {
 		final RBlock block = this.rblock;
 		if (block != null) {
 			final Point point = event.getPoint();
@@ -559,7 +559,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
-	private void onMousePressed(MouseEvent event) {
+	private void onMousePressed(final MouseEvent event) {
 		this.requestFocus();
 		final RBlock block = this.rblock;
 		if (block != null) {
@@ -573,7 +573,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
-	private void onMouseReleased(MouseEvent event) {
+	private void onMouseReleased(final MouseEvent event) {
 		final RBlock block = this.rblock;
 		if (block != null) {
 			final Point point = event.getPoint();
@@ -674,7 +674,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	// protected void paintComponent(Graphics g) {
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		// We go against Sun's advice and override
 		// paint() instead of paintComponent(). Scrollbars
 		// do not repaint correctly if we use

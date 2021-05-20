@@ -66,7 +66,7 @@ public class BaseTitleButton extends NoFocusButton {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		if (JTattooUtilities.isActive(this) || alpha >= 1.0) {
 			super.paint(g);
 		} else {

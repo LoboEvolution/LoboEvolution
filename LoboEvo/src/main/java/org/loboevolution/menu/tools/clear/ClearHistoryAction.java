@@ -50,7 +50,7 @@ public class ClearHistoryAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		final ClearHistoryWindow clear = new ClearHistoryWindow(this.frame);
 		clear.setLocationByPlatform(true);
 		clear.setResizable(false);

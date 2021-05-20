@@ -1168,7 +1168,7 @@ public final class JBIG2Bitmap {
 //		logger.info(">>> baseImage width = "+this.width+ " height = "+this.height);
 //		
 //		logger.info("counter = "+counter);
-//		if(counter == 17){
+//		if (counter == 17) {
 //			logger.info();
 //			//ShowGUIMessage.showGUIMessage("x", this.getBufferedImage(), "xx");
 //		}
@@ -1178,7 +1178,7 @@ public final class JBIG2Bitmap {
 //		for (int row = y; row < height; row++) {
 //			for (int col = x; col < maxCol; col += 8, sliceCol += 8) {
 //				slice.setPixelByte(sliceCol, sliceRow, getPixelByte(col, row));
-//				//if(counter > 10)
+//				//if (counter > 10)
 //					//ShowGUIMessage.showGUIMessage("new", slice.getBufferedImage(), "new");
 //			}
 //			sliceCol = 0;
@@ -1404,11 +1404,11 @@ public final class JBIG2Bitmap {
 
 		public void setAll(boolean value) {
 			if (value)
-				for (int i = 0; i<w.length; i++){
+				for (int i = 0; i<w.length; i++) {
 					w[i] = -1L;
 				}
 			else
-				for (int i = 0; i<w.length; i++){
+				for (int i = 0; i<w.length; i++) {
 					w[i] = 0;
 				}
 				
@@ -1442,7 +1442,7 @@ public final class JBIG2Bitmap {
 			}
 			else{
 				for (int i=0; i<length; i++) {
-					if ((setStartIndex & mask) == 0){ 
+					if ((setStartIndex & mask) == 0) { 
 						k = set.w[(setStartIndex) >> pot];
 						k = (k << shift) | (k >>> (Long.SIZE - shift));
 					}

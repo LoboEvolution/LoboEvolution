@@ -68,7 +68,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public ElementImpl(String name) {
+	public ElementImpl(final String name) {
 		this.name = name;
 	}
 
@@ -592,7 +592,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		String width = currentStyle.getWidth();
 		
-		if(Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
+		if (Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
 			width = "100%";
 		}		
 		return HtmlValues.getPixelSize(width, null, doc.getWindow(), -1, preferredSize.width);

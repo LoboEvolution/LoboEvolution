@@ -55,7 +55,7 @@ public class BaseSliderUI extends BasicSliderUI {
 	protected class MyTrackListener extends TrackListener {
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
+		public void mouseEntered(final MouseEvent e) {
 			super.mouseEntered(e);
 			if (slider.isEnabled()) {
 				isRollover = thumbRect.contains(e.getPoint());
@@ -64,7 +64,7 @@ public class BaseSliderUI extends BasicSliderUI {
 		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
+		public void mouseExited(final MouseEvent e) {
 			super.mouseExited(e);
 			if (slider.isEnabled()) {
 				isRollover = false;
@@ -73,7 +73,7 @@ public class BaseSliderUI extends BasicSliderUI {
 		}
 
 		@Override
-		public void mouseMoved(MouseEvent e) {
+		public void mouseMoved(final MouseEvent e) {
 			super.mouseMoved(e);
 			if (slider.isEnabled()) {
 				boolean rollover = thumbRect.contains(e.getPoint());
@@ -87,7 +87,7 @@ public class BaseSliderUI extends BasicSliderUI {
 	} // end of class MyTrackListener
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseSliderUI((JSlider) c);
 	}
 
@@ -193,7 +193,7 @@ public class BaseSliderUI extends BasicSliderUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		paintBackground(g, c);
 		recalculateIfInsetsChanged();
 		recalculateIfOrientationChanged();

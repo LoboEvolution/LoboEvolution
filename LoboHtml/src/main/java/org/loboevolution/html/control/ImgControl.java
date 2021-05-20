@@ -71,25 +71,25 @@ public class ImgControl extends BaseControl {
 		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
 
 		image = map.get(modelNode.getSrc());
-		if(image == null){
+		if (image == null) {
 			image = HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI());
 			map.put(modelNode.getSrc(), image);
 		}
 		addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mousePressed(final MouseEvent e) {
 				mouseBeingPressed = true;
 				repaint();
 			}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
+			public void mouseReleased(final MouseEvent e) {
 				mouseBeingPressed = false;
 				repaint();
 				HtmlController.getInstance().onPressed(modelNode, e, e.getX(), e.getY());
 			}
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(final MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					HtmlController.getInstance().onContextMenu(modelNode, e, e.getX(), e.getY());
 				}
@@ -138,7 +138,7 @@ public class ImgControl extends BaseControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void reset(int availWidth, int availHeight) {
+	public void reset(final int availWidth, final int availHeight) {
 		super.reset(availWidth, availHeight);
 		final HTMLElementImpl element = this.controlElement;
 		AbstractCSSProperties currentStyle = element.getCurrentStyle();
@@ -189,10 +189,10 @@ public class ImgControl extends BaseControl {
 		return new Dimension(dw, dh);
 	}
 
-	private int getValign(HTMLElementImpl element){
+	private int getValign(HTMLElementImpl element) {
 		String alignText = element.getAttribute("align");
 
-		if(Strings.isNotBlank(alignText)){
+		if (Strings.isNotBlank(alignText)) {
 			alignText = alignText.toLowerCase().trim();
 		} else{
 			AbstractCSSProperties style = element.getCurrentStyle();
@@ -219,7 +219,7 @@ public class ImgControl extends BaseControl {
 	
 	private int getValueSize(String attribute, String styleAttribute, int availSize) {
 		String size;
-		if(Strings.isNotBlank(attribute)){
+		if (Strings.isNotBlank(attribute)) {
 			size = attribute.toLowerCase().trim();
 		} else{
 			size = Strings.isNotBlank(styleAttribute) ? styleAttribute : "";

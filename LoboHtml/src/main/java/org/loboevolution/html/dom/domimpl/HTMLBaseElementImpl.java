@@ -34,7 +34,7 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLBaseElementImpl(String name) {
+	public HTMLBaseElementImpl(final String name) {
 		super(name);
 	}
 

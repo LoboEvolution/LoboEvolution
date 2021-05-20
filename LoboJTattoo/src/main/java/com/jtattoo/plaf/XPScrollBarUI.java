@@ -48,7 +48,7 @@ public class XPScrollBarUI extends BaseScrollBarUI {
 	protected static Color[] dragColors = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new XPScrollBarUI();
 	}
 

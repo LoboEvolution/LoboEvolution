@@ -66,7 +66,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLElementImpl(String name) {
+	public HTMLElementImpl(final String name) {
 		super(name);
 	}
 

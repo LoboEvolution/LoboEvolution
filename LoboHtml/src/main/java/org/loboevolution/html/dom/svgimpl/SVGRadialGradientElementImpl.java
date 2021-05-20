@@ -36,7 +36,7 @@ public class SVGRadialGradientElementImpl extends SVGGradientElementImpl impleme
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGRadialGradientElementImpl(String name) {
+	public SVGRadialGradientElementImpl(final String name) {
 		super(name);
 	}
 

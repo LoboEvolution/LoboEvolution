@@ -93,7 +93,7 @@ public class StyleSheetAggregator {
 	public final List<CSSStyleSheetImpl.SelectorEntry> getActiveStyleDeclarations(HTMLElementImpl element, String elementName, final String[] classes, boolean mouseOver) {
 		List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
 		for (CSSStyleSheetImpl sheet : styleSheets) {
-			if(matchingRules.size() == 0) {
+			if (matchingRules.size() == 0) {
 				matchingRules = selects(sheet.getRuleIndex(), element, elementName, mouseOver, classes);
 			} else {
 				final List<CSSStyleSheetImpl.SelectorEntry> _matchingRules = selects(sheet.getRuleIndex(), element, elementName, mouseOver, classes);
@@ -367,9 +367,9 @@ public class StyleSheetAggregator {
 				return !element.hasAttribute("readonly");
 
 		case "out-of-range":
-			if(element instanceof HTMLInputElement){
+			if (element instanceof HTMLInputElement) {
 				HTMLInputElementImpl input = (HTMLInputElementImpl)element;
-				if("number".equals(input.getType())){
+				if ("number".equals(input.getType())) {
 					String minTxt = input.getAttribute("min");
 					String maxTxt = input.getAttribute("max");
 
@@ -395,7 +395,7 @@ public class StyleSheetAggregator {
 			return (element instanceof HTMLLinkElement);
 
 		case "visited":
-			if(element instanceof HTMLLinkElement) {
+			if (element instanceof HTMLLinkElement) {
 				HTMLLinkElement elem = (HTMLLinkElement)element;
 				return LinkStore.isVisited(elem.getHref());
 			}

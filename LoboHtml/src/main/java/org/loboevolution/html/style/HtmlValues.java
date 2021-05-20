@@ -188,8 +188,8 @@ public class HtmlValues {
 			final String lcSpec = spec.toLowerCase();
 			String units = "";
 			String text = "";
-			if(isUnits(spec)) {
-				if(spec.endsWith("q")) {
+			if (isUnits(spec)) {
+				if (spec.endsWith("q")) {
 					units = lcSpec.substring(lcSpec.length() - 1);
 					text = lcSpec.substring(0, lcSpec.length() - 1);
 				} else {

@@ -66,7 +66,7 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
 		}
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			Graphics2D g2D = (Graphics2D) g;
 
 			boolean isPressed = getModel().isPressed();
@@ -123,7 +123,7 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
 	} // end of class ArrowButton
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new TextureComboBoxUI();
 	}
 

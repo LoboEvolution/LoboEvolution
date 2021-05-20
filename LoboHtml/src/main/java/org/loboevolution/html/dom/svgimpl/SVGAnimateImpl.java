@@ -120,7 +120,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	}
 
 	/** {@inheritDoc} */
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		final String attribute = animate.getAttributeName().toLowerCase();
 		switch (attribute) {
 		case "width":
@@ -164,7 +164,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 		elem.setAttribute(type, String.valueOf(from));		
 		
-		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
+		if (animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)) {
 			timer.stop();
 		}
 
@@ -212,7 +212,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		
 		boolean end = (++counter > 255);
 				
-		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
+		if (animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)) {
 			timer.stop();
 		}
 		
@@ -370,7 +370,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		}
 
 		elem.setAttribute("transform", transformString);
-		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
+		if (animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)) {
 			timer.stop();
 		}
 		counter++;
@@ -405,7 +405,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		}
 	}
 	
-	private int begin(SVGAnimationImpl animate){
+	private int begin(SVGAnimationImpl animate) {
 		TimeList begin = animate.getBegin();
 		TimeImpl time = (TimeImpl)begin.item(0);
 		return Double.valueOf(time.getResolvedOffset()).intValue();
@@ -424,7 +424,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		Color from = ColorFactory.getInstance().getColor(animate.getFrom());
 		Color to = ColorFactory.getInstance().getColor(animate.getTo());
 		float range = (to.getRed() - from.getRed()) + (to.getBlue() - from.getBlue()) + (to.getGreen() - from.getGreen());
-		if(range == 0) return 255;
+		if (range == 0) return 255;
 		return Math.round(dur / range);
 	}
 

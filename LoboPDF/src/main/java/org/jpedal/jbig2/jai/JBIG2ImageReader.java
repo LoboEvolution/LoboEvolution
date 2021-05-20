@@ -447,13 +447,13 @@ public class JBIG2ImageReader extends ImageReader {
 
 								// set value as white or average of pixels
 								if (count > 0)
-									// if(index==null)
+									// if (index==null)
 									newData[jj + (x * comp) + (newW * y * comp)] = (byte) ((byteTotal) / count);
 								// else
 								// newData[x+(newW*y)]=(byte)(((index[1] &
 								// 255)*byteTotal)/count);
 								else {
-									// if(index==null)
+									// if (index==null)
 									// newData[jj+x+(newW*y*comp)]=(byte) 255;
 									// else
 									// newData[x+(newW*y)]=index[0];

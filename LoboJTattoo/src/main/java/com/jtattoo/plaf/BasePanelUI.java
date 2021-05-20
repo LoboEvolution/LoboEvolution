@@ -44,7 +44,7 @@ public class BasePanelUI extends BasicPanelUI {
 	private static BasePanelUI panelUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		if (panelUI == null) {
 			panelUI = new BasePanelUI();
 		}
@@ -60,7 +60,7 @@ public class BasePanelUI extends BasicPanelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		Graphics2D g2D = (Graphics2D) g;
 		Object savedRenderingHint = null;
 		if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {

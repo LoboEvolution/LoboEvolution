@@ -21,28 +21,14 @@
  * Created on Apr 16, 2005
  */
 package org.loboevolution.html.renderer;
-
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-class MarkupUtilities {
+final class MarkupUtilities {
 
   private MarkupUtilities() {
     super();
-  }
-
-  /**
-   * <p>findRenderable.</p>
-   *
-   * @param renderables an array of {@link org.loboevolution.html.renderer.Renderable} objects.
-   * @param point a {@link java.awt.Point} object.
-   * @param vertical a boolean.
-   * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
-   */
-  public static BoundableRenderable findRenderable(final Renderable[] renderables, final Point point, final boolean vertical) {
-    return findRenderable(renderables, point, 0, renderables.length, vertical);
   }
 
   /**
@@ -56,11 +42,6 @@ class MarkupUtilities {
    */
   public static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y, final boolean vertical) {
     return findRenderable(renderables, x, y, 0, renderables.length, vertical);
-  }
-
-  private static BoundableRenderable findRenderable(final Renderable[] renderables, final Point point, final int firstIndex,
-      final int length, final boolean vertical) {
-    return findRenderable(renderables, point.x, point.y, firstIndex, length, vertical);
   }
 
   private static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y, final int firstIndex,

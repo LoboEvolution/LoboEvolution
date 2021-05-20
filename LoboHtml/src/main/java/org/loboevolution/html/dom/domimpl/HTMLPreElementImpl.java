@@ -40,7 +40,7 @@ public class HTMLPreElementImpl extends HTMLElementImpl implements HTMLPreElemen
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLPreElementImpl(String name) {
+	public HTMLPreElementImpl(final String name) {
 		super(name);
 	}
 

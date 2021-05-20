@@ -34,7 +34,7 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLBRElementImpl(String name) {
+	public HTMLBRElementImpl(final String name) {
 		super(name);
 	}
 

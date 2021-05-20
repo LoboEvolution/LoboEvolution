@@ -54,7 +54,7 @@ public class ApplyAction extends AbstractAction {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		this.prefer.getPreferencesPanel().save();
 	}
 }

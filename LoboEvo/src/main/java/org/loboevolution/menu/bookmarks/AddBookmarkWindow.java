@@ -162,7 +162,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		String actionCommand = e.getActionCommand();		
 		switch (actionCommand) {
 		case "save":

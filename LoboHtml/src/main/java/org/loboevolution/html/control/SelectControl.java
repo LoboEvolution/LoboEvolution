@@ -48,7 +48,7 @@ private static final long serialVersionUID = 1L;
 
 	/** {@inheritDoc} */
 	@Override
-	public void reset(int availWidth, int availHeight) {
+	public void reset(final int availWidth, final int availHeight) {
 		super.reset(availWidth, availHeight);
 		modelNode.draw(this);
 	}

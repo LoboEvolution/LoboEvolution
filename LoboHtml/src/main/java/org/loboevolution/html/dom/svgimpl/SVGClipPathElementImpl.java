@@ -50,7 +50,7 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGClipPathElementImpl(String name) {
+	public SVGClipPathElementImpl(final String name) {
 		super(name);
 	}
 

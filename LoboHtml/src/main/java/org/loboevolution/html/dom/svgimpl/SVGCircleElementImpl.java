@@ -43,7 +43,7 @@ public class SVGCircleElementImpl extends SVGGraphic implements SVGCircleElement
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGCircleElementImpl(String name) {
+	public SVGCircleElementImpl(final String name) {
 		super(name);
 	}
 
@@ -67,7 +67,7 @@ public class SVGCircleElementImpl extends SVGGraphic implements SVGCircleElement
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
 		final Shape shape = createShape(ctm.getAffineTransform());
 		animate(this);

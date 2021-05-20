@@ -49,7 +49,7 @@ public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 			new Color(48, 48, 48), new Color(128, 128, 128) };
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new TexturePopupMenuSeparatorUI();
 	}
 
@@ -72,7 +72,7 @@ public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		TextureUtils.fillComponent(g, c, TextureUtils.MENUBAR_TEXTURE_TYPE);
 		if (AbstractLookAndFeel.getTheme().getTextureSet().equals("Default")) {
 			Graphics2D g2D = (Graphics2D) g;

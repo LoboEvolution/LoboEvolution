@@ -71,7 +71,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
     /**
      * <p>Constructor for DownloadWindow.</p>
      */
-    public DownloadWindow(){}
+    public DownloadWindow() {}
 
     /**
      * <p>Constructor for DownloadWindow.</p>

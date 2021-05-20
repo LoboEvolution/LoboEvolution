@@ -37,7 +37,7 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
  */
 public class InputDataTime extends BasicInput {
 
-	private final static Logger logger = Logger.getLogger(InputDataTime.class.getName());
+	private static final  Logger logger = Logger.getLogger(InputDataTime.class.getName());
 
 	/**
 	 * <p>Constructor for InputDataTime.</p>

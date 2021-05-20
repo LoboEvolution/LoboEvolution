@@ -57,13 +57,13 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGGElementImpl(String name) {
+	public SVGGElementImpl(final String name) {
 		super(name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		boolean display = getDisplay();
 		float opacity = getOpacity();
 

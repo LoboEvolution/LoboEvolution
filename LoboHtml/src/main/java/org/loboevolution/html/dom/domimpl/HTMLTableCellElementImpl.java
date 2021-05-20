@@ -47,7 +47,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLTableCellElementImpl(String name) {
+	public HTMLTableCellElementImpl(final String name) {
 		super(name);
 	}
 

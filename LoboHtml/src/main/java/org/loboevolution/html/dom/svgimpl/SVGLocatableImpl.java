@@ -43,7 +43,7 @@ public class SVGLocatableImpl extends SVGStylableImpl implements SVGLocatable {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGLocatableImpl(String name) {
+	public SVGLocatableImpl(final String name) {
 		super(name);
 	}
 

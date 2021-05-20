@@ -46,7 +46,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLIFrameElementImpl(String name) {
+	public HTMLIFrameElementImpl(final String name) {
 		super(name);
 	}
 	

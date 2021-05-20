@@ -35,13 +35,13 @@ public class CloseDownloadAction extends AbstractAction {
 
     private final DownloadWindow action;
 
-    CloseDownloadAction(DownloadWindow action){
+    CloseDownloadAction(DownloadWindow action) {
         this.action = action;
 
     }
 
     /** {@inheritDoc} */
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         action.dispose();
     }
 }

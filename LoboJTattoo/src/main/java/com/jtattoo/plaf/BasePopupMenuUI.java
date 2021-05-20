@@ -89,7 +89,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 	protected static Robot robot = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BasePopupMenuUI();
 	}
 

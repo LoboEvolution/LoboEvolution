@@ -55,7 +55,7 @@ public class OkAction<T> extends AbstractAction {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		this.item.getEditor().validateItem();
 		this.item.setResultingItem(this.item.getEditor().getItem());
 		this.item.dispose();

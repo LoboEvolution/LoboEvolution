@@ -17,7 +17,7 @@ import org.loboevolution.pdfview.PDFParseException;
 public class LaunchAction extends PDFAction {
 	// file separator according to PDF spec
 	/** Constant <code>SOLIDUS="/"</code> */
-	public final static String SOLIDUS = "/";
+	public static final  String SOLIDUS = "/";
 
 	/** the file/application to be opened (optional)*/
 	private final FileSpec file;
@@ -86,7 +86,7 @@ public class LaunchAction extends PDFAction {
 		FileSpec file = null;
 		if (fileObj != null) {
 			file = new FileSpec(); 
-			if(fileObj.getType() == PDFObject.DICTIONARY){
+			if (fileObj.getType() == PDFObject.DICTIONARY) {
 				file.setFileSystem(PdfObjectParseUtil.parseStringFromDict("FS", fileObj, false));
 				file.setFileName(PdfObjectParseUtil.parseStringFromDict("F", fileObj, false));
 				file.setUnicode(PdfObjectParseUtil.parseStringFromDict("UF", fileObj, false));
@@ -99,7 +99,7 @@ public class LaunchAction extends PDFAction {
 				file.setEmbeddedFile(fileObj.getDictRef("EF"));
 				file.setRelatedFile(fileObj.getDictRef("RF"));
 				file.setCollectionItem(fileObj.getDictRef("CI"));
-			}else if(fileObj.getType() == PDFObject.STRING){
+			}else if (fileObj.getType() == PDFObject.STRING) {
 				file.setFileName(fileObj.getStringValue());
 			}else{
 				throw new PDFParseException("File specification could not be parsed " +
@@ -324,16 +324,16 @@ public class LaunchAction extends PDFAction {
 		 ************************************************************************/
 		public String getFileName() {
 			String system = System.getProperty("os.name");
-			if(system.startsWith("Windows")){
-				if(this.dosFileName != null){
+			if (system.startsWith("Windows")) {
+				if (this.dosFileName != null) {
 					return this.dosFileName;
 				}
-			}else if(system.startsWith("mac os x")){
-				if(this.macFileName != null){
+			}else if (system.startsWith("mac os x")) {
+				if (this.macFileName != null) {
 					return this.macFileName;
 				}
-			}else {
-				if(this.unixFileName != null){
+			} else {
+				if (this.unixFileName != null) {
 					return this.unixFileName;
 				}
 			}

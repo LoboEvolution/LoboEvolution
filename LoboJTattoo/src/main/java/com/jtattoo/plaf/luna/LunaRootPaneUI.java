@@ -37,7 +37,7 @@ import com.jtattoo.plaf.BaseRootPaneUI;
 public class LunaRootPaneUI extends BaseRootPaneUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new LunaRootPaneUI();
 	}
 

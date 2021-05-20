@@ -38,7 +38,7 @@ import javax.swing.plaf.basic.BasicTableUI;
 public class BaseTableUI extends BasicTableUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseTableUI();
 	}
 

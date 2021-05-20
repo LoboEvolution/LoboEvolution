@@ -38,17 +38,17 @@ public final class PositionError {
 	/**
 	 * Error code used to convey "permission denied" error.
 	 */
-	public final static short PERMISSION_DENIED = 1;
+	public static final  short PERMISSION_DENIED = 1;
 	
 	/**
 	 * Error code used to convey "position unavailable" error.
 	 */
-	public final static short POSITION_UNAVAILABLE = 2;
+	public static final  short POSITION_UNAVAILABLE = 2;
 	
 	/**
 	 * Error code used to convey "timeout" error.
 	 */
-	public final static short TIMEOUT = 3;
+	public static final  short TIMEOUT = 3;
 	
 	/*
 	 * The error code.

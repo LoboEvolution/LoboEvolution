@@ -65,7 +65,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLTableRowElementImpl(String name) {
+	public HTMLTableRowElementImpl(final String name) {
 		super(name);
 	}
 
@@ -73,7 +73,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	@Override
 	public void deleteCell(int index) {	
 		int trcount = 0;
-		if(index == -1) index = this.nodeList.size() -1;
+		if (index == -1) index = this.nodeList.size() -1;
 		for (Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
 			Node node = i.next();
 			if ("TD".equalsIgnoreCase(node.getNodeName())) {
@@ -142,7 +142,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 			return index;
 		} else {
 			AtomicInteger index = new AtomicInteger(-1);
-			if(getParentNode() != null) {
+			if (getParentNode() != null) {
 				NodeListImpl childNodes = (NodeListImpl) getParentNode().getChildNodes();
 				childNodes.forEach(node -> {
 					if (node instanceof HTMLTableRowElement) {

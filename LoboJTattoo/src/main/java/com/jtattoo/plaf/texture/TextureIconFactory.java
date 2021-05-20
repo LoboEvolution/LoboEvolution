@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseIcons;
  * Author Michael Hagen
  *
  */
-public class TextureIconFactory implements AbstractIconFactory {
+public final class TextureIconFactory implements AbstractIconFactory {
 
 	private static TextureIconFactory instance = null;
 

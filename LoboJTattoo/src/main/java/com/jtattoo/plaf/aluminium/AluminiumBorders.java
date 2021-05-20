@@ -54,7 +54,7 @@ public class AluminiumBorders extends BaseBorders {
 	public static class ButtonBorder implements Border, UIResource {
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
 				return new Insets(3, 4, 3, 4);
 			} else {
@@ -62,7 +62,7 @@ public class AluminiumBorders extends BaseBorders {
 			}
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			Insets insets = getBorderInsets(c);
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
@@ -145,11 +145,11 @@ public class AluminiumBorders extends BaseBorders {
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = INSETS.left;
 			borderInsets.top = INSETS.top;
 			borderInsets.right = INSETS.right;

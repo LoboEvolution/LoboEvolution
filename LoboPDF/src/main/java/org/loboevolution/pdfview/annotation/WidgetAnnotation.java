@@ -104,11 +104,11 @@ public class WidgetAnnotation extends PDFAnnotation {
 	}
 	
 	private void parseAP(PDFObject dictRef) throws IOException {
-		if(dictRef == null) {
+		if (dictRef == null) {
 			return;
 		}
 		PDFObject normalAP = dictRef.getDictRef("N");
-		if(normalAP == null) {
+		if (normalAP == null) {
 			return;
 		}
 		cmd = parseCommand(normalAP);
@@ -117,32 +117,32 @@ public class WidgetAnnotation extends PDFAnnotation {
 	private List<PDFCmd> parseCommand(PDFObject obj) throws IOException {
         PDFObject dictRefSubType = obj.getDictRef("Subtype");
 		String type = null;
-		if(dictRefSubType != null) {
+		if (dictRefSubType != null) {
 			type = dictRefSubType.getStringValue();
 		}
 		
         if (type == null) {
         	PDFObject dictRefS = obj.getDictRef("S");
-        	if(dictRefS != null) {
+        	if (dictRefS != null) {
         		type = dictRefS.getStringValue();
         	}
         }
         
         //if type is still null, check for AcroForm, if AcroForm is available the PDF could be not compatible
         //with the PDF specification, anyway check if obj is in AcroForm, if so, proceed as for a good PDF
-        if(type == null) {
+        if (type == null) {
         	PDFObject acroForm = obj.getRoot().getDictRef("AcroForm");
         	PDFObject fields = acroForm.getDictRef("Fields");
         	PDFObject[] arrayFields = fields.getArray();
         	
         	for (PDFObject pdfObject : arrayFields) {
 				PDFObject dictRefAP = pdfObject.getDictRef("AP");
-				if(dictRefAP != null) {
+				if (dictRefAP != null) {
 					PDFObject dictRefN = dictRefAP.getDictRef("N");
 				
-					if(dictRefN.equals(obj)) {					
+					if (dictRefN.equals(obj)) {
 						PDFObject dictRefAS = pdfObject.getDictRef("AS");
-						if(dictRefAS != null) {		//this is a combobox
+						if (dictRefAS != null) {		//this is a combobox
 							PDFObject dictRef = dictRefN.getDictRef(dictRefAS.getStringValue());
 							obj = dictRef;
 						}
@@ -153,20 +153,20 @@ public class WidgetAnnotation extends PDFAnnotation {
 				}
 			}
         	
-        	if(type == null) {	//check for radiobutton
+        	if (type == null) {	//check for radiobutton
         		PDFObject dictRef = obj.getDictRef("Off");
-        		if(dictRef != null) {
+        		if (dictRef != null) {
         			for (PDFObject pdfObject : arrayFields) {
 						PDFObject dictRefT = pdfObject.getDictRef("T");
-						if(dictRefT != null && dictRefT.getStringValue().contains("Group")) {
+						if (dictRefT != null && dictRefT.getStringValue().contains("Group")) {
 							PDFObject kids = pdfObject.getDictRef("Kids");
 							PDFObject[] arrayKids = kids.getArray();
 							for (PDFObject kid : arrayKids) {
 								PDFObject kidAP = kid.getDictRef("AP");
 								PDFObject kidN = kidAP.getDictRef("N");
-								if(kidN.equals(obj)) {					
+								if (kidN.equals(obj)) {
 									PDFObject kidAS = kid.getDictRef("AS");
-									if(kidAS != null) {		
+									if (kidAS != null) {
 										PDFObject kidRef = kidN.getDictRef(kidAS.getStringValue());
 										obj = kidRef;
 									}

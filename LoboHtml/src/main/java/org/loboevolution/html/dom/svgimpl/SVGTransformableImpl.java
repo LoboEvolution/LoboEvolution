@@ -39,7 +39,7 @@ public class SVGTransformableImpl extends SVGLocatableImpl implements SVGTransfo
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGTransformableImpl(String name) {
+	public SVGTransformableImpl(final String name) {
 		super(name);
 	}
 

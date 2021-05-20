@@ -82,7 +82,7 @@ public class InputFile extends BasicInput {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			final JFileChooser chooser = new JFileChooser();
 			if (chooser.showOpenDialog(control) == JFileChooser.APPROVE_OPTION) {
 				String paths = chooser.getSelectedFile().getAbsolutePath();

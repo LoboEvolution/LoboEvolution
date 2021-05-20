@@ -50,7 +50,7 @@ public class PreferencesAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		final PreferenceWindow pref = new PreferenceWindow(this.frame);
 		pref.setSize(new Dimension(600, 500));
 		pref.setLocationByPlatform(true);

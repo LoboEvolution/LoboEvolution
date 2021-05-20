@@ -37,7 +37,7 @@ public class SVGSymbolElementImpl extends SVGGraphic implements SVGSymbolElement
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGSymbolElementImpl(String name) {
+	public SVGSymbolElementImpl(final String name) {
 		super(name);
 	}
 

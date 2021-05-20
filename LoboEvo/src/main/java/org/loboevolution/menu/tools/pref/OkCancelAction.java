@@ -56,7 +56,7 @@ public class OkCancelAction extends AbstractAction {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		try {
 			this.prefer.dispose();
 			this.prefer.getFrame().dispose();

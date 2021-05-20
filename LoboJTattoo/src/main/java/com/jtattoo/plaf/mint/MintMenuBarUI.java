@@ -40,13 +40,13 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class MintMenuBarUI extends BasicMenuBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new MintMenuBarUI();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		int w = c.getWidth();
 		int h = c.getHeight();
 		JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getMenuBarColors(), 0, 0, w, h);

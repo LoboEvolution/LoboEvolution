@@ -223,7 +223,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	boolean onDoubleClick(MouseEvent event, int x, int y);
+	boolean onDoubleClick(final MouseEvent event, int x, int y);
 
 	/**
 	 * <p>onMouseClick.</p>
@@ -233,7 +233,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	boolean onMouseClick(MouseEvent event, int x, int y);
+	boolean onMouseClick(final MouseEvent event, int x, int y);
 
 	/**
 	 * <p>onMouseDisarmed.</p>
@@ -241,7 +241,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @return a boolean.
 	 */
-	boolean onMouseDisarmed(MouseEvent event);
+	boolean onMouseDisarmed(final MouseEvent event);
 
 	/**
 	 * <p>onMouseMoved.</p>
@@ -252,7 +252,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param triggerEvent a boolean.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit);
+	void onMouseMoved(final MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit);
 
 	/**
 	 * <p>onMousePressed.</p>
@@ -262,7 +262,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	boolean onMousePressed(MouseEvent event, int x, int y);
+	boolean onMousePressed(final MouseEvent event, int x, int y);
 
 	/**
 	 * <p>onMouseReleased.</p>
@@ -272,7 +272,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	boolean onMouseReleased(MouseEvent event, int x, int y);
+	boolean onMouseReleased(final MouseEvent event, int x, int y);
 
 	/**
 	 * <p>onRightClick.</p>
@@ -282,7 +282,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	boolean onRightClick(MouseEvent event, int x, int y);
+	boolean onRightClick(final MouseEvent event, int x, int y);
 
 	/**
 	 * <p>paintSelection.</p>
@@ -320,7 +320,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a int.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	void onMouseOut(MouseEvent event, int x, int y, ModelNode limit);
+	void onMouseOut(final MouseEvent event, int x, int y, ModelNode limit);
 
 	/**
 	 * <p>paintTranslated.</p>
@@ -400,7 +400,7 @@ public interface BoundableRenderable extends Renderable {
 	 *
 	 * @param width a int.
 	 */
-	void setWidth(int width);
+	void setWidth(final int width);
 
 	/**
 	 * <p>setX.</p>

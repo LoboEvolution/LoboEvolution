@@ -32,7 +32,7 @@ public class HTMLHRElementImpl extends HTMLElementImpl implements HTMLHRElement 
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLHRElementImpl(String name) {
+	public HTMLHRElementImpl(final String name) {
 		super(name);
 	}
 

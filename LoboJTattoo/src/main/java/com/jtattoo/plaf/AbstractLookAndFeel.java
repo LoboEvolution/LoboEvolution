@@ -41,7 +41,7 @@ import javax.swing.plaf.metal.MetalTheme;
  * Author Michael Hagen
  *
  */
-abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
+public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -547,7 +547,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 	 *
 	 * @return a {@link com.jtattoo.plaf.AbstractBorderFactory} object.
 	 */
-	abstract public AbstractBorderFactory getBorderFactory();
+	public abstract AbstractBorderFactory getBorderFactory();
 
 	/**
 	 * <p>getControlDarkShadowColor.</p>
@@ -581,7 +581,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 	 *
 	 * @return a {@link com.jtattoo.plaf.AbstractIconFactory} object.
 	 */
-	abstract public AbstractIconFactory getIconFactory();
+	public abstract AbstractIconFactory getIconFactory();
 
 	/** {@inheritDoc} */
 	@Override

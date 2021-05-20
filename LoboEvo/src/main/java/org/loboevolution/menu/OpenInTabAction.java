@@ -63,7 +63,7 @@ public class OpenInTabAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		final BrowserPanel panel = this.frame.getPanel();
 		final int indexPanel = panel.getTabbedPane().getIndex() +1;
 		final DnDTabbedPane tabbedPane = panel.getTabbedPane();
@@ -71,7 +71,7 @@ public class OpenInTabAction extends AbstractAction {
 		JComponent comp = null;
 		String title = "";
 		
-		if(this.address != null) {
+		if (this.address != null) {
 			comp = HtmlPanel.createHtmlPanel(panel, this.address);
 			final HtmlPanel hpanel = (HtmlPanel)comp;
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();

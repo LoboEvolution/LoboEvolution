@@ -38,7 +38,7 @@ import org.loboevolution.common.IORoutines;
  */
 public class IconFactory {
 
-    private final static Logger logger = Logger.getLogger(IconFactory.class.getName());
+    private static final  Logger logger = Logger.getLogger(IconFactory.class.getName());
 
 	/** The Constant instance. */
 	private static final IconFactory instance = new IconFactory();

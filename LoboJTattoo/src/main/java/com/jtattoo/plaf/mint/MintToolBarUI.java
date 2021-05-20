@@ -42,7 +42,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class MintToolBarUI extends AbstractToolBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new MintToolBarUI();
 	}
 
@@ -66,7 +66,7 @@ public class MintToolBarUI extends AbstractToolBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getToolBarColors(), 0, 0, c.getWidth(),
 				c.getHeight());
 	}

@@ -38,7 +38,6 @@ import java.io.InputStream;
  */
 public class RecordedInputStream extends InputStream {
 	private final InputStream delegate;
-	private boolean hasReachedEOF = false;
 	private boolean hasReachedMaxBufferSize = false;
 	private int markPosition = -1;
 	private final int maxBufferSize;
@@ -81,30 +80,6 @@ public class RecordedInputStream extends InputStream {
 	}
 
 	/**
-	 * <p>consumeToEOF.</p>
-	 *
-	 * @throws java.io.IOException if any.
-	 */
-	public void consumeToEOF() throws IOException {
-		final byte[] buffer = new byte[8192];
-		while (this.read(buffer) != -1) {
-        }
-	}
-
-	/**
-	 * <p>getBytesRead.</p>
-	 *
-	 * @return an array of {@link byte} objects.
-	 * @throws org.loboevolution.common.BufferExceededException if any.
-	 */
-	public byte[] getBytesRead() throws BufferExceededException {
-		if (this.hasReachedMaxBufferSize) {
-			throw new BufferExceededException();
-		}
-		return this.store.toByteArray();
-	}
-
-	/**
 	 * <p>getString.</p>
 	 *
 	 * @param encoding a {@link java.lang.String} object.
@@ -116,17 +91,7 @@ public class RecordedInputStream extends InputStream {
 		if (this.hasReachedMaxBufferSize) {
 			throw new BufferExceededException();
 		}
-		final byte[] bytes = this.store.toByteArray();
-		return new String(bytes, encoding);
-	}
-
-	/**
-	 * <p>hasReachedEOF.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean hasReachedEOF() {
-		return this.hasReachedEOF;
+		return this.store.toString(encoding);
 	}
 
 	/** {@inheritDoc} */
@@ -170,8 +135,6 @@ public class RecordedInputStream extends InputStream {
 						this.hasReachedMaxBufferSize = true;
 					}
 				}
-			} else {
-				this.hasReachedEOF = true;
 			}
 			return b;
 		}
@@ -199,8 +162,6 @@ public class RecordedInputStream extends InputStream {
 						this.hasReachedMaxBufferSize = true;
 					}
 				}
-			} else {
-				this.hasReachedEOF = true;
 			}
 			return numRead;
 		}

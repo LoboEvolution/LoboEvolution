@@ -55,7 +55,7 @@ public class McWinComboBoxUI extends BaseComboBoxUI {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			Dimension size = getSize();
 			if (isEnabled()) {
 				if (getModel().isArmed() && getModel().isPressed()) {
@@ -93,7 +93,7 @@ public class McWinComboBoxUI extends BaseComboBoxUI {
 	}
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new McWinComboBoxUI();
 	}
 

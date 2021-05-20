@@ -70,7 +70,7 @@ public class MarginInsets {
 		return HtmlInsets.getInsets(topText, leftText, bottomText, rightText, element, renderState);
 	}
 
-	private static boolean isInherit(String value){
+	private static boolean isInherit(String value) {
 		return CSSValues.INHERIT.equals(CSSValues.get(value));
 	}
 }

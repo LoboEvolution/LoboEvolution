@@ -107,7 +107,7 @@ public class JBIG2StreamDecoder {
 	 *
 	 * @param i a int.
 	 */
-	public void movePointer(int i){
+	public void movePointer(int i) {
 		reader.movePointer(i);
 	}
 	

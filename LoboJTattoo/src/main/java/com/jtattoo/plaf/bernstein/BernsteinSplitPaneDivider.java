@@ -50,7 +50,7 @@ public class BernsteinSplitPaneDivider extends BaseSplitPaneDivider {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		BernsteinUtils.fillComponent(g, this);
 		paintComponents(g);
 	}

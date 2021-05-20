@@ -51,7 +51,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class TextureToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new TextureToggleButtonUI();
 	}
 

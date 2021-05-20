@@ -129,7 +129,7 @@ public class RefinementRegionSegment extends RegionSegment {
 		}
 
 		if (noOfReferedToSegments > 1) {
-			if(JBIG2StreamDecoder.debug)
+			if (JBIG2StreamDecoder.debug)
 				logger.info("Bad reference in JBIG2 generic refinement Segment");
 			
 			return;

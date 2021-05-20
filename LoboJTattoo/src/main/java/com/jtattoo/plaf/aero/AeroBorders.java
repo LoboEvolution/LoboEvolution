@@ -57,11 +57,11 @@ public class AeroBorders extends BaseBorders {
 		private static final Insets insets = new Insets(4, 8, 4, 8);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return insets;
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -250,11 +250,11 @@ public class AeroBorders extends BaseBorders {
 		private static final Insets insets = new Insets(1, 1, 1, 1);
 
 		@Override
-		public Insets getBorderInsets(Component c) {
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(insets.top, insets.left, insets.bottom, insets.right);
 		}
 
-		public Insets getBorderInsets(Component c, Insets borderInsets) {
+		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;

@@ -34,7 +34,7 @@ public class HTMLCenterElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLCenterElementImpl(String name) {
+	public HTMLCenterElementImpl(final String name) {
 		super(name);
 	}
 

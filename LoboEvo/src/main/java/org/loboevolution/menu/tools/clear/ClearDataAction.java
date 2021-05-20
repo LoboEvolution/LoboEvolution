@@ -66,7 +66,7 @@ public class ClearDataAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 
 		final ClearHistory ch = new ClearHistory();
 

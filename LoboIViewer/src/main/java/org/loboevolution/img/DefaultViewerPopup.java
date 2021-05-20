@@ -201,7 +201,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 			saveChooserHelpLabel.addMouseListener(new MouseAdapter() {
 
 				@Override
-				public void mouseClicked(MouseEvent e) {
+				public void mouseClicked(final MouseEvent e) {
 					saveChooser.getAccessory().removeAll();
 					saveChooser.getAccessory().add(saveChooserHelpButton);
 					saveChooser.revalidate();

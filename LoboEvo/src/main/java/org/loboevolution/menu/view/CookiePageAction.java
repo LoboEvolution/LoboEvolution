@@ -52,7 +52,7 @@ public class CookiePageAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		final ToolBar toolbar = this.frame.getToolbar();
 		final CookieWindow cookie = new CookieWindow(CookieManager.getCookieList(toolbar.getAddressBar().getText()));
 		cookie.setSize(new Dimension(600, 400));

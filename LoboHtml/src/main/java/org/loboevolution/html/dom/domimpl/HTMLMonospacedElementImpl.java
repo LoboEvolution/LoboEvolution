@@ -32,7 +32,7 @@ public class HTMLMonospacedElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLMonospacedElementImpl(String name) {
+	public HTMLMonospacedElementImpl(final String name) {
 		super(name);
 	}
 

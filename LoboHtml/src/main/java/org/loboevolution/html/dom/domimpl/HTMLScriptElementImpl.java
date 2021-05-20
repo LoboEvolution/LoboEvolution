@@ -68,7 +68,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLScriptElementImpl(String name) {
+	public HTMLScriptElementImpl(final String name) {
 		super(name);
 	}
 
@@ -178,7 +178,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					} catch (SocketTimeoutException e) {
 						logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
 				    } catch (Exception e) {
-						if(e instanceof MissingResourceException){
+						if (e instanceof MissingResourceException) {
 							logger.log(Level.INFO, e.getMessage());
 						} else{
 							logger.log(Level.SEVERE, e.getMessage(), e);

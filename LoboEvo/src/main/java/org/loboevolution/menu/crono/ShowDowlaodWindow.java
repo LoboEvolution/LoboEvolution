@@ -129,10 +129,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
                 dwnl.setText("Download");
                 dwnl.setActionCommand("dwnlButton");
                 dwnl.setBounds(440, debutCpUrl, 80, 40);
-                dwnl.addActionListener(e -> {
-					new DownloadWindow().downloadFile(host);
-
-				});
+                dwnl.addActionListener(e -> new DownloadWindow().downloadFile(host));
 				panel_3.add(dwnl);
 
                 debutCpDesc = debutCpDesc + incrementNouvelleLigne;

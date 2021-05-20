@@ -34,7 +34,7 @@ public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteEl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLQuoteElementImpl(String name) {
+	public HTMLQuoteElementImpl(final String name) {
 		super(name);
 	}
 

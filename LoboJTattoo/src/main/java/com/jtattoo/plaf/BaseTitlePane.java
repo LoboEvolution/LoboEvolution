@@ -96,7 +96,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			close();
 		}
 	}
@@ -113,7 +113,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			iconify();
 		}
 	}
@@ -130,7 +130,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			maximize();
 		}
 	}
@@ -207,7 +207,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			restore();
 		}
 	}
@@ -254,7 +254,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			Image image = getFrameIconImage();
 			if (image != null) {
 				Graphics2D g2D = (Graphics2D) g;

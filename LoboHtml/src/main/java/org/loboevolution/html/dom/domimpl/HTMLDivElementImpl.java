@@ -37,7 +37,7 @@ public class HTMLDivElementImpl extends HTMLElementImpl implements HTMLDivElemen
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLDivElementImpl(String name) {
+	public HTMLDivElementImpl(final String name) {
 		super(name);
 	}
 

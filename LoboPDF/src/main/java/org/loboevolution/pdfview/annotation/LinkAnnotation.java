@@ -48,7 +48,7 @@ public class LinkAnnotation extends PDFAnnotation {
 		} else {
 			// if a destination is given, create a GoToAction from it
 			PDFObject dest = annotObject.getDictRef("Dest");
-			if(dest == null) {
+			if (dest == null) {
 				dest = annotObject.getDictRef("DEST");
 			}
 			if (dest != null) {

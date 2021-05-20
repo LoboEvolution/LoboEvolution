@@ -843,7 +843,7 @@ class TableMatrixSizes {
 	 * @return a int.
 	 */
 	private static int adjustCurrentTotal2(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
-			List<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols, int widthTotal, int difference,
+			List<ArrayList<VirtualCell>> rows, int cellSpacingY, int numCols, int widthTotal, int difference,
 			int cellSpacingX, int hasBorder, int numNoWidth, int cellAvailWidth, int currTotal) {
 
 		int currentTotal = currTotal;
@@ -871,7 +871,7 @@ class TableMatrixSizes {
 				sizeInfo.setActualSize(newActualSize);
 				if (newActualSize < sizeInfo.getLayoutSize()) {
 					// See if it actually fits.
-					TableMatrix.layoutColumn(columnSizes, rowLenght, ROWS, sizeInfo, i, cellSpacingY, cellSpacingX,
+					TableMatrix.layoutColumn(columnSizes, rowLenght, rows, sizeInfo, i, cellSpacingY, cellSpacingX,
 							hasBorder);
 					if (newActualSize < sizeInfo.getLayoutSize()) {
 						// Didn't fit.
@@ -953,7 +953,7 @@ class TableMatrixSizes {
 	 * @param currTotal    a int.
 	 * @return a int.
 	 */
-	int adjustCurrentTotal(SizeInfo[] columnSizes, SizeInfo[] rowLenght, List<ArrayList<VirtualCell>> ROWS,
+	int adjustCurrentTotal(SizeInfo[] columnSizes, SizeInfo[] rowLenght, List<ArrayList<VirtualCell>> rows,
 			int cellSpacingY, int numCols, int widthTotal, int difference, int cellSpacingX, int hasBorder,
 			int currTotal) {
 
@@ -972,7 +972,7 @@ class TableMatrixSizes {
 				sizeInfo.setActualSize(newActualSize);
 				if (newActualSize < sizeInfo.getLayoutSize()) {
 					// See if it actually fits.
-					TableMatrix.layoutColumn(columnSizes, rowLenght, ROWS, sizeInfo, i, cellSpacingY, cellSpacingX,
+					TableMatrix.layoutColumn(columnSizes, rowLenght, rows, sizeInfo, i, cellSpacingY, cellSpacingX,
 							hasBorder);
 					if (newActualSize < sizeInfo.getLayoutSize()) {
 						// Didn't fit.

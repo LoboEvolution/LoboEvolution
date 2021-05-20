@@ -35,7 +35,7 @@ import com.jtattoo.plaf.JTattooUtilities;
  * Author Michael Hagen
  *
  */
-public class HiFiUtils {
+public final class HiFiUtils {
 
 	/**
 	 * <p>fillComponent.</p>

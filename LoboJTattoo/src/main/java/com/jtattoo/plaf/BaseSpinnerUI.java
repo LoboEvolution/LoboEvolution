@@ -182,7 +182,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 		}
 
 		@Override
-		public void paint(Graphics g) {
+		public void paint(final Graphics g) {
 			Color[] colors;
 			if (isEnabled()) {
 				if (getModel().isPressed() && getModel().isArmed()) {
@@ -232,7 +232,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 	 * allocated one per JSpinner.
 	 * @see ComponentUI#createUI
 	 */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseSpinnerUI();
 	}
 

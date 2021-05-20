@@ -226,7 +226,7 @@ public class GradientStyle {
 				}
 			}
 			
-			if(Strings.isNotBlank(color) || c != ',') {
+			if (Strings.isNotBlank(color) || c != ',') {
 				color += c;
 			}
 			
@@ -270,7 +270,7 @@ public class GradientStyle {
 
 	private int getHeight(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState) {
 		int heightSize = HtmlValues.getPixelSize(props.getHeight(), renderState, document.getWindow(), -1);
-		if(heightSize < 0) {
+		if (heightSize < 0) {
 			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 			heightSize = (int)initialWindowBounds.getHeight() * 2;
 		}	
@@ -279,7 +279,7 @@ public class GradientStyle {
 	
 	private int getWidth(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState) {
 		int widthSize = HtmlValues.getPixelSize(props.getWidth(), renderState, document.getWindow(),-1);
-		if(widthSize < 0) {
+		if (widthSize < 0) {
 			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 			widthSize = (int)initialWindowBounds.getWidth() * 2;
 		}	

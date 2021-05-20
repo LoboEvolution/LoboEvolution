@@ -52,7 +52,7 @@ import javax.swing.text.DefaultEditorKit;
 public class BaseTextFieldUI extends MetalTextFieldUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseTextFieldUI();
 	}
 

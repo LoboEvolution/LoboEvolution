@@ -38,7 +38,7 @@ import com.jtattoo.plaf.BaseInternalFrameUI;
 public class AcrylInternalFrameUI extends BaseInternalFrameUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new AcrylInternalFrameUI((JInternalFrame) c);
 	}
 

@@ -207,7 +207,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
      * push() was called.
      */
     public void pop() {
-    	if(!this.stack.isEmpty()) {
+    	if (!this.stack.isEmpty()) {
             this.state = this.stack.pop();
     	}
 
@@ -321,7 +321,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         
         if (Configuration.getInstance().isUseBlurResizingForImages() && 
         		bi.getType() != BufferedImage.TYPE_CUSTOM && 
-        		bi.getWidth() >= 1.75*r.getWidth() && bi.getHeight() >= 1.75*r.getHeight()){
+        		bi.getWidth() >= 1.75*r.getWidth() && bi.getHeight() >= 1.75*r.getHeight()) {
         	try {
             	return smartDrawImage(image, bi, r, at);
         	}catch (Exception e) {
@@ -380,14 +380,14 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         
         if (Configuration.getInstance().isUseBlurResizingForImages() && 
         		bi.getType() != BufferedImage.TYPE_CUSTOM && 
-        		bi.getWidth() >= 1.75*r.getWidth() && bi.getHeight() >= 1.75*r.getHeight()){
+        		bi.getWidth() >= 1.75*r.getWidth() && bi.getHeight() >= 1.75*r.getHeight()) {
 
         	BufferedImageOp op;
         	// indexed colored images need to be converted for the convolveOp
         	boolean colorConversion = (bi.getColorModel() instanceof IndexColorModel);
         	final float maxFactor = 3.5f;
         	final boolean RESIZE = true;
-        	if (bi.getWidth() > maxFactor*r.getWidth() && bi.getHeight() > maxFactor*r.getHeight()){
+        	if (bi.getWidth() > maxFactor*r.getWidth() && bi.getHeight() > maxFactor*r.getHeight()) {
         		//First resize, otherwise we risk that we get out of heapspace
         		int newHeight = (int)Math.round(maxFactor*r.getHeight());
         		int newWidth = (int)Math.round(maxFactor*r.getWidth());
@@ -955,7 +955,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         					0, 0, 0, 0 // the background is transparent
         					};    				
     			}
-    			else if (rgbValues[1] == 0xff000000){
+    			else if (rgbValues[1] == 0xff000000) {
     				// alternate case color at 1
         			colorComponents = new byte[]{        					
         					0, 0, 0, 0, // the background is transparent

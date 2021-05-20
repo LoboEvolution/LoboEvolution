@@ -46,7 +46,7 @@ import com.jtattoo.plaf.BaseButtonUI;
 public class AcrylButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new AcrylButtonUI();
 	}
 

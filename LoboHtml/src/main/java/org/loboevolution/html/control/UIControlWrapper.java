@@ -82,7 +82,7 @@ public class UIControlWrapper implements UIControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		this.component.paint(g);
 	}
 
@@ -102,7 +102,7 @@ public class UIControlWrapper implements UIControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void reset(int availWidth, int availHeight) {
+	public void reset(final int availWidth, final int availHeight) {
 		this.htmlObject.reset(availWidth, availHeight);
 	}
 

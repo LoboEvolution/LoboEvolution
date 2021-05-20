@@ -38,7 +38,7 @@ public class HTMLTableCaptionElementImpl extends HTMLElementImpl implements HTML
 	 * @param name
 	 *            the name
 	 */
-	public HTMLTableCaptionElementImpl(String name) {
+	public HTMLTableCaptionElementImpl(final String name) {
 		super(name);
 	}
 

@@ -60,7 +60,7 @@ public class FullScreenAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		if (this.countFs == 0) {
 			this.countFs = this.countFs + 1;
 			device.setFullScreenWindow(this.frame);

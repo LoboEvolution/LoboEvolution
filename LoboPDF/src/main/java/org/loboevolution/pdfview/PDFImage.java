@@ -745,7 +745,7 @@ public class PDFImage {
 	 *
 	 * @param width a int.
 	 */
-	protected void setWidth(int width) {
+	protected void setWidth(final int width) {
 		this.width = width;
 	}
 
@@ -957,7 +957,7 @@ public class PDFImage {
 			}
 			ColorSpace colorSpace = cs.getColorSpace();
 			int[] bits = new int[colorSpace.getNumComponents()];
-			for (int i = 0; i < bits.length; i++){
+			for (int i = 0; i < bits.length; i++) {
 				bits[i] = getBitsPerComponent();
 			}
 

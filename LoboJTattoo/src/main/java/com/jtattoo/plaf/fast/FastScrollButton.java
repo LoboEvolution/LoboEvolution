@@ -58,7 +58,7 @@ public class FastScrollButton extends BaseScrollButton {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		boolean isPressed = getModel().isPressed();
 
 		int width = getWidth();

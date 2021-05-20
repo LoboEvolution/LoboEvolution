@@ -37,7 +37,7 @@ public class HTMLSmallElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLSmallElementImpl(String name) {
+	public HTMLSmallElementImpl(final String name) {
 		super(name);
 	}
 

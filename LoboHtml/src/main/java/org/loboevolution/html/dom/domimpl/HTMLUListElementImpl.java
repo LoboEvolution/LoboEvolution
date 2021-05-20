@@ -39,7 +39,7 @@ public class HTMLUListElementImpl extends HTMLElementImpl implements HTMLUListEl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLUListElementImpl(String name) {
+	public HTMLUListElementImpl(final String name) {
 		super(name);
 	}
 

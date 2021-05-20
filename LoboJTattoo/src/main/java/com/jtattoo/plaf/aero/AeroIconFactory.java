@@ -34,7 +34,7 @@ import com.jtattoo.plaf.BaseIcons;
  * Author Michael Hagen
  *
  */
-public class AeroIconFactory implements AbstractIconFactory {
+public final class AeroIconFactory implements AbstractIconFactory {
 
 	private static AeroIconFactory instance = null;
 

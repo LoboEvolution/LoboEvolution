@@ -64,7 +64,7 @@ public class InputImage {
 		final Image img = map.get(modelNode.getSrc());
 
 		BufferedImage image;
-		if(img == null){
+		if (img == null) {
 			image = toBufferedImage(HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI()));
 			map.put(modelNode.getSrc(), image);
 		} else{

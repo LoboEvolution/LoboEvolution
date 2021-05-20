@@ -576,7 +576,7 @@ public class CCITTFaxDecoder {
 		this.fillOrder = fillOrder;
 		// Some of the decode methods assume prevChangingElms 
 		// and currChaningElems are at least of length 2.
-		if(w<2) {
+		if (w<2) {
 		   w=2;
 		}
 

@@ -43,7 +43,7 @@ public class SVGLineElementImpl extends SVGGraphic implements SVGLineElement {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGLineElementImpl(String name) {
+	public SVGLineElementImpl(final String name) {
 		super(name);
 	}
 
@@ -73,7 +73,7 @@ public class SVGLineElementImpl extends SVGGraphic implements SVGLineElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public void draw(Graphics2D graphics) {
+	public void draw(final Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
 		final Shape shape = createShape(ctm.getAffineTransform());
 		animate(this);

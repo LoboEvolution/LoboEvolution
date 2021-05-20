@@ -88,7 +88,7 @@ public class HrControl extends BaseControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void reset(int availWidth, int availHeight) {
+	public void reset(final int availWidth, final int availHeight) {
 		this.availWidth = availWidth;
 	}
 }

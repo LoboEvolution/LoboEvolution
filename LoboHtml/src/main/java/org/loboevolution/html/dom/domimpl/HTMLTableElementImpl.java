@@ -63,7 +63,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLTableElementImpl(String name) {
+	public HTMLTableElementImpl(final String name) {
 		super(name);
 	}
 
@@ -71,7 +71,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	@Override
 	public HTMLElement createCaption() {
 		final Document doc = this.document;
-		if(doc == null ) return null;
+		if (doc == null ) return null;
 		HTMLElement newChild = (HTMLElement) doc.createElement("caption");
 		appendChild(newChild);
 		return newChild;
@@ -87,7 +87,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	@Override
 	public HTMLElement createTFoot() {		
 		final Document doc = this.document;
-		if(doc == null ) return null;
+		if (doc == null ) return null;
 		HTMLElement newChild = (HTMLElement) doc.createElement("tfoot");
 		appendChild(newChild);
 		return newChild;
@@ -97,7 +97,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	@Override
 	public HTMLElement createTHead() {
 		final Document doc = this.document;
-		if(doc == null ) return null;
+		if (doc == null ) return null;
 		HTMLElement newChild = (HTMLElement) doc.createElement("thead");
 		appendChild(newChild);
 		return newChild;
@@ -107,7 +107,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	@Override
 	public HTMLElement createTBody() {		
 		final Document doc = this.document;
-		if(doc == null ) return null;
+		if (doc == null ) return null;
 		HTMLElement newChild = (HTMLElement) doc.createElement("tbody");
 		appendChild(newChild);
 		return newChild;

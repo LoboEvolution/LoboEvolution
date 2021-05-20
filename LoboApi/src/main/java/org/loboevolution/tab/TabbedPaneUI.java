@@ -51,7 +51,7 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	private static final Color TAB_COLOR = Color.BLACK;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new TabbedPaneUI((JTabbedPane) c);
 	}
 

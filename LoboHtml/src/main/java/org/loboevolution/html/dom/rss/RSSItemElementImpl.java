@@ -40,7 +40,7 @@ public class RSSItemElementImpl extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public RSSItemElementImpl(String name) {
+	public RSSItemElementImpl(final String name) {
 		super(name);
 	}
 	

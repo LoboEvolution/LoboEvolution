@@ -32,8 +32,8 @@ public class PdfObjectParseUtil {
 		PDFObject val = parent;
 		while (val.getType() == PDFObject.DICTIONARY) {
 			val = val.getDictRef(key);
-			if(val == null){
-				if(mandatory){
+			if (val == null) {
+				if (mandatory) {
 					throw new PDFParseException(key + "value could not be parsed : " + parent.toString());	
 				}
 				return null;
@@ -55,8 +55,8 @@ public class PdfObjectParseUtil {
 	 */
 	public static boolean parseBooleanFromDict(String key, PDFObject parent, boolean mandatory) throws IOException{
 		PDFObject val = parent.getDictRef(key);
-		if(val == null){
-			if(mandatory){
+		if (val == null) {
+			if (mandatory) {
 				throw new PDFParseException(key + "value could not be parsed : " + parent.toString());	
 			}
 			return false;
@@ -77,8 +77,8 @@ public class PdfObjectParseUtil {
 	 */
 	public static int parseIntegerFromDict(String key, PDFObject parent, boolean mandatory) throws IOException{
 		PDFObject val = parent.getDictRef(key);
-		if(val == null){
-			if(mandatory){
+		if (val == null) {
+			if (mandatory) {
 				throw new PDFParseException(key + "value could not be parsed : " + parent.toString());	
 			}
 			return 0;
@@ -100,7 +100,7 @@ public class PdfObjectParseUtil {
 	public static PDFDestination parseDestination(String key, PDFObject parent, PDFObject root, boolean mandatory) throws IOException{
 		PDFObject destObj = parent.getDictRef(key);
 		if (destObj == null) {
-			if(mandatory){
+			if (mandatory) {
 				throw new PDFParseException("Error parsing destination " + parent);
 			}
 			return null;

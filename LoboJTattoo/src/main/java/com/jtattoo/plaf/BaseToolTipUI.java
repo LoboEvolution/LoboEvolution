@@ -54,7 +54,7 @@ import javax.swing.plaf.metal.MetalToolTipUI;
 public class BaseToolTipUI extends MetalToolTipUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new BaseToolTipUI();
 	}
 
@@ -103,7 +103,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(final Graphics g, final JComponent c) {
 		Graphics2D g2D = (Graphics2D) g;
 		Composite savedComposit = g2D.getComposite();
 		Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);

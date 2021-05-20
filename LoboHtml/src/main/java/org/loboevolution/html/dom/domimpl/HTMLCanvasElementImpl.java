@@ -44,7 +44,7 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLCanvasElementImpl(String name) {
+	public HTMLCanvasElementImpl(final String name) {
 		super(name);
 	}
 
@@ -58,7 +58,7 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(int width) {
+	public void setWidth(final int width) {
 		this.setAttribute("width", String.valueOf(width));
 	}
 

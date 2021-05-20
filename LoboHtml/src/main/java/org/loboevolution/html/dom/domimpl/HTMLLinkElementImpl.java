@@ -67,7 +67,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLLinkElementImpl(String name) {
+	public HTMLLinkElementImpl(final String name) {
 		super(name);
 	}
 
@@ -179,7 +179,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 					URL scriptURL = Urls.createURL(baseURL, href);
 					if (Strings.isBlank(title)) {
 						URI uri = scriptURL.toURI();
-						if(Urls.isLocalFile(scriptURL)){
+						if (Urls.isLocalFile(scriptURL)) {
 							title = Paths.get(uri).getFileName().toString();
 						} else {
 							title = new File(uri.getPath()).getName();

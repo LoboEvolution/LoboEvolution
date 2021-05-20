@@ -71,7 +71,7 @@ public class PDFAnnotation{
 		 */
 		public static ANNOTATION_TYPE getByDefinition(String definition) {
 			for (ANNOTATION_TYPE type : values()) {
-				if(type.definition.equals(definition)) {
+				if (type.definition.equals(definition)) {
 					return type;
 				}
 			}
@@ -131,24 +131,24 @@ public class PDFAnnotation{
 	 */
 	public static PDFAnnotation createAnnotation(PDFObject parent) throws IOException{
 		PDFObject subtypeValue = parent.getDictRef("Subtype");
-		if(subtypeValue == null) {
+		if (subtypeValue == null) {
 			return null;
 		}
 		String subtypeS = subtypeValue.getStringValue();
 		ANNOTATION_TYPE annotationType = ANNOTATION_TYPE.getByDefinition(subtypeS);
 		
 		//if Subtype is Widget than check if it is also a Signature
-		if(annotationType == ANNOTATION_TYPE.WIDGET) {
+		if (annotationType == ANNOTATION_TYPE.WIDGET) {
 			PDFObject sigType = parent.getDictRef("FT");
-			if(sigType != null) {
+			if (sigType != null) {
 				String sigTypeS = sigType.getStringValue();
-				if(ANNOTATION_TYPE.getByDefinition(sigTypeS) == ANNOTATION_TYPE.SIGNATURE) {
+				if (ANNOTATION_TYPE.getByDefinition(sigTypeS) == ANNOTATION_TYPE.SIGNATURE) {
 					annotationType = ANNOTATION_TYPE.getByDefinition(sigTypeS);
 				}
 			}
 		}
 		
-		if(displayAnnotation(annotationType)) {
+		if (displayAnnotation(annotationType)) {
 			Class<?> className = annotationType.getClassName();
 			
 			Constructor<?> constructor;

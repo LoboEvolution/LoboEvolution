@@ -55,7 +55,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class HiFiButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new HiFiButtonUI();
 	}
 

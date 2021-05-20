@@ -45,7 +45,7 @@ public class AttrImpl extends AttrAbstract {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public AttrImpl(String name) {
+	public AttrImpl(final String name) {
 		this.name = name;
 		this.value = "";
 		this.specified = false;

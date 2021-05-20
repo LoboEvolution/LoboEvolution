@@ -33,7 +33,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public class LunaBorderFactory implements AbstractBorderFactory {
+public final class LunaBorderFactory implements AbstractBorderFactory {
 
 	private static LunaBorderFactory instance = null;
 

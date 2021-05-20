@@ -674,18 +674,18 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				width = HtmlValues.getPixelSize(widthText, renderState, doc.getWindow(), -1, availWidth);
 			}
 
-			if(width == -1 && Strings.isNotBlank(textContent) && renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK) {
+			if (width == -1 && Strings.isNotBlank(textContent) && renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK) {
 				HtmlInsets paddingInsets = renderState.getPaddingInsets();
 				HtmlInsets marginInsets = renderState.getMarginInsets();
 				int right = 0;
 				int left = 0;
 
-				if(paddingInsets != null) {
+				if (paddingInsets != null) {
 					right = right + paddingInsets.right;
 					left = left + paddingInsets.left;
 				}
 
-				if(marginInsets != null) {
+				if (marginInsets != null) {
 					right = right + marginInsets.right;
 					left =  left + marginInsets.left;
 				}
@@ -957,7 +957,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics g) {}
+	public void paint(final Graphics g) {}
 
 	  /** {@inheritDoc} */
 	 @Override

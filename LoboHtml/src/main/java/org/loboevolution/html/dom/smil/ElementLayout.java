@@ -103,6 +103,6 @@ public interface ElementLayout {
      * @throws org.w3c.dom.DOMException if any.
      * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
      */
-    void setWidth(int width) throws DOMException;
+    void setWidth(final int width) throws DOMException;
 
 }

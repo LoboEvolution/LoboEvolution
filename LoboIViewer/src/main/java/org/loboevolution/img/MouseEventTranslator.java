@@ -107,7 +107,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(final MouseEvent e) {
 		if (ic.getImage() == null || !on)
 			return;
 		Point p = ic.pointToPixel(e.getPoint());
@@ -118,7 +118,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(final MouseEvent e) {
 		if (ic.getImage() != null) {
 			Point p = ic.pointToPixel(e.getPoint());
 			if (p != null) {
@@ -131,7 +131,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(final MouseEvent e) {
 		if (on) {
 			on = false;
 			fireMouseExit();
@@ -140,13 +140,13 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(final MouseEvent e) {
 		handleMouseAt(e.getPoint(), e);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseDragged(MouseEvent e) {
+	public void mouseDragged(final MouseEvent e) {
 		if (ic.getImage() == null)
 			return;
 		Point p = ic.pointToPixel(e.getPoint(), false);
@@ -224,11 +224,11 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 
 	/** {@inheritDoc} */
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(final MouseEvent e) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(final MouseEvent e) {
 	}
 }

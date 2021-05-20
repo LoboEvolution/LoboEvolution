@@ -78,11 +78,11 @@ public class BorderSetter2 implements SubPropertySetter {
 			final String name = this.name;
 			if (style != null) {
 				properties.setPropertyValueLCAlt(name + "-style", style, important);
-				if(color == null) {
+				if (color == null) {
 					color = "black";
 				}
 				
-				if(width == null) {
+				if (width == null) {
 					width = "2px";
 				}
 			}
