@@ -83,7 +83,7 @@ public final class HtmlLength {
 			this.lengthType = PIXELS;
 			parseable = spec;
 		}
-		this.value = HtmlValues.getPixelSize(parseable, null, doc.getWindow(), -1);
+		this.value = HtmlValues.getPixelSize(parseable, null, doc.getDefaultView(), -1);
 	}
 
 	/**

@@ -49,7 +49,7 @@ public class LoboUnitTest extends LoboWebDriver {
      */
     public void checkSelectorsTest(final String html, final String result1, final String result2) {
         HTMLDocumentImpl doc = loadHtml(html);
-        Window window = doc.getWindow();
+        Window window = doc.getDefaultView();
         HTMLElement div = (HTMLElement)doc.getElementById("myId");
         HTMLElement div2 = (HTMLElement)doc.getElementById("myId2");
         CSS3Properties computedStyle = window.getComputedStyle(div);
@@ -70,7 +70,7 @@ public class LoboUnitTest extends LoboWebDriver {
 
         try {
             HTMLDocumentImpl doc = loadHtml(html);
-            window = doc.getWindow();
+            window = doc.getDefaultView();
             alerts = Arrays.asList(messages);
             assertEquals(alerts, window.getMsg());
         } catch (AssertionError e) {

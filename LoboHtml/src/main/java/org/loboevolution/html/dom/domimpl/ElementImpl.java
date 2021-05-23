@@ -241,8 +241,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 */
 	protected String getRawInnerText(boolean includeComment) {
 		StringBuilder sb = null;
-		for (Iterator<Node> i= nodeList.iterator(); i.hasNext(); ) {
-			Node node = i.next();
+		for (Node node : nodeList) {
 			if (node instanceof Text) {
 				final Text tn = (Text) node;
 				final String txt = tn.getNodeValue();
@@ -359,25 +358,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			attribs.put(normalName, value);
 		}
 		assignAttributeField(normalName, value);
-	}
-
-	/**
-	 * Fast method to set attributes. It is not thread safe. Calling thread should
-	 * hold a treeLock.
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @param value a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
-	 */
-	public void setAttributeImpl(String name, String value) {
-		final String normalName = Strings.normalizeAttributeName(name);
-		Map<String, String> attribs = this.attributes;
-		if (attribs == null) {
-			attribs = new HashMap<>(2);
-			this.attributes = attribs;
-		}
-		assignAttributeField(normalName, value);
-		attribs.put(normalName, value);
 	}
 
 	/** {@inheritDoc} */
@@ -565,7 +545,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				height = DEFAULT_FONT.getSize() + "px";
 			}
 		}
-		return HtmlValues.getPixelSize(height, null, doc.getWindow(), -1, preferredSize.height);
+		return HtmlValues.getPixelSize(height, null, doc.getDefaultView(), -1, preferredSize.height);
 	}
 
 	/** {@inheritDoc} */
@@ -595,7 +575,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		if (Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
 			width = "100%";
 		}		
-		return HtmlValues.getPixelSize(width, null, doc.getWindow(), -1, preferredSize.width);
+		return HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, preferredSize.width);
 	}
 
 	/**

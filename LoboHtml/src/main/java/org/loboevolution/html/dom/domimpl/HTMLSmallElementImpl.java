@@ -48,7 +48,7 @@ public class HTMLSmallElementImpl extends HTMLElementImpl {
 	 */
 	protected AbstractCSSProperties createDefaultStyleSheet() {
 		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.getOwnerDocument();
-        final String fontSize = String.valueOf(FontValues.getFontSize("SMALL", doc.getWindow(),null));
+        final String fontSize = String.valueOf(FontValues.getFontSize("SMALL", doc.getDefaultView(),null));
 		final AbstractCSSProperties css = new AbstractCSSProperties(this);
 		if (fontSize != null) {
 			css.setPropertyValueLCAlt("font-size", fontSize, false);

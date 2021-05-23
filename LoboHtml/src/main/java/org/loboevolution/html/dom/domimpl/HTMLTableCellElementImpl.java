@@ -121,7 +121,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	public int getColSpan() {
 		final String colSpanText = getAttribute("colspan");
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
-		return HtmlValues.getPixelSize(colSpanText, null, doc.getWindow(), 1);
+		return HtmlValues.getPixelSize(colSpanText, null, doc.getDefaultView(), 1);
 	}
 
 	/** {@inheritDoc} */
@@ -147,7 +147,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	public int getRowSpan() {
 		final String rowSpanText = getAttribute("rowspan");
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
-		return HtmlValues.getPixelSize(rowSpanText, null, doc.getWindow(), 1);
+		return HtmlValues.getPixelSize(rowSpanText, null, doc.getDefaultView(), 1);
 	}
 
 	/** {@inheritDoc} */

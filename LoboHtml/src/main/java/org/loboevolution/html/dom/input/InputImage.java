@@ -82,8 +82,8 @@ public class InputImage {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		try {
 			HTMLDocumentImpl doc = (HTMLDocumentImpl)modelNode.getDocumentNode();
-			final int dw = HtmlValues.getPixelSize(modelNode.getAttribute("width"), null, doc.getWindow(), image.getWidth(null), 0);
-			final int dh = HtmlValues.getPixelSize(modelNode.getAttribute("height"), null, doc.getWindow(), image.getHeight(null), 0);
+			final int dw = HtmlValues.getPixelSize(modelNode.getAttribute("width"), null, doc.getDefaultView(), image.getWidth(null), 0);
+			final int dh = HtmlValues.getPixelSize(modelNode.getAttribute("height"), null, doc.getDefaultView(), image.getHeight(null), 0);
 
 			int transparency = Transparency.OPAQUE;
 			if (hasAlpha) {

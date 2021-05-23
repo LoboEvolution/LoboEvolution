@@ -114,9 +114,9 @@ class TableMatrix {
 		this.rowElements.clear();
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.tableElement.getDocumentNode();
 		final String borderText = this.tableElement.getAttribute("border");
-		int border = HtmlValues.getPixelSize(borderText, null, doc.getWindow(), 0);
+		int border = HtmlValues.getPixelSize(borderText, null, doc.getDefaultView(), 0);
 		final String cellSpacingText = this.tableElement.getAttribute("cellspacing");
-		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, null, doc.getWindow(), 0);
+		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, null, doc.getDefaultView(), 0);
 		this.cellSpacingX = cellSpacing;
 		this.cellSpacingY = cellSpacing;
 

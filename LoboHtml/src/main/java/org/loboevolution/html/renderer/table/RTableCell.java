@@ -250,13 +250,13 @@ public class RTableCell extends RBlock {
     private static int getColSpan(final HTMLElementImpl elem) {
         String colSpanText = elem.getAttribute("colspan");
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getDocumentNode();
-        return HtmlValues.getPixelSize(colSpanText, null, doc.getWindow(), 1);
+        return HtmlValues.getPixelSize(colSpanText, null, doc.getDefaultView(), 1);
     }
     
     private static int getRowSpan(final HTMLElementImpl elem) {
         String rowSpanText = elem.getAttribute("rowspan");
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getDocumentNode();
-        return HtmlValues.getPixelSize(rowSpanText, null, doc.getWindow(), 1);
+        return HtmlValues.getPixelSize(rowSpanText, null, doc.getDefaultView(), 1);
     }
 
 

@@ -226,7 +226,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			if (Strings.isNotBlank(cellPaddingText)) {
 				cellPaddingText = cellPaddingText.trim();
 				HTMLDocumentImpl doc =  (HTMLDocumentImpl)tableElement.getOwnerDocument();
-				int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, doc.getWindow(), 0);
+				int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, doc.getDefaultView(), 0);
 				int cellPaddingType = HtmlInsets.TYPE_PIXELS;
 
 				if (cellPaddingText.endsWith("%")) {

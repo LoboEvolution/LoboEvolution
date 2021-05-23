@@ -418,22 +418,22 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			final String topText = rs.getTop();
 			int left = 0;
 			if (leftText != null) {
-				left = HtmlValues.getPixelSize(leftText, rs, doc.getWindow(), 0, availWidth);
+				left = HtmlValues.getPixelSize(leftText, rs, doc.getDefaultView(), 0, availWidth);
 			} else {
 				final String rightText = rs.getRight();
 				if (rightText != null) {
-					final int right = HtmlValues.getPixelSize(rightText, rs, doc.getWindow(),0, availWidth);
+					final int right = HtmlValues.getPixelSize(rightText, rs, doc.getDefaultView(),0, availWidth);
 					left = -right;
 				}
 			}
 
 			int top = 0;
 			if (topText != null) {
-				top = HtmlValues.getPixelSize(topText, rs, doc.getWindow(), top, availHeight);
+				top = HtmlValues.getPixelSize(topText, rs, doc.getDefaultView(), top, availHeight);
 			} else {
 				final String bottomText = rs.getBottom();
 				if (bottomText != null) {
-					final int bottom = HtmlValues.getPixelSize(bottomText, rs, doc.getWindow(),0, availHeight);
+					final int bottom = HtmlValues.getPixelSize(bottomText, rs, doc.getDefaultView(),0, availHeight);
 					top = -bottom;
 				}
 			}
@@ -607,11 +607,11 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			int height = -1;
 
 			if (heightText != null) {
-				height = HtmlValues.getPixelSize(heightText, renderState, doc.getWindow(), -1, availHeight);
+				height = HtmlValues.getPixelSize(heightText, renderState, doc.getDefaultView(), -1, availHeight);
 			}
 
 			if (props.getMaxHeight() != null) {
-				int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getWindow(),-1, availHeight);
+				int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getDefaultView(),-1, availHeight);
 
 				if (height == 0 || height > maxHeight) {
 					height = maxHeight;
@@ -619,7 +619,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			}
 
 			if (props.getMinHeight() != null) {
-				int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getWindow(),-1, availHeight);
+				int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(),-1, availHeight);
 
 				if (height == 0 || height < minHeight) {
 					height = minHeight;
@@ -671,7 +671,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			int width = -1;
 
 			if (widthText != null) {
-				width = HtmlValues.getPixelSize(widthText, renderState, doc.getWindow(), -1, availWidth);
+				width = HtmlValues.getPixelSize(widthText, renderState, doc.getDefaultView(), -1, availWidth);
 			}
 
 			if (width == -1 && Strings.isNotBlank(textContent) && renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK) {
@@ -696,7 +696,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			}
 
 			if (props.getMaxWidth() != null) {
-				int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), renderState, doc.getWindow(), -1, availWidth);
+				int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), renderState, doc.getDefaultView(), -1, availWidth);
 
 				if (width == -1 || width > maxWidth) {
 					width = maxWidth;
@@ -704,7 +704,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			}
 
 			if (props.getMinWidth() != null) {
-				int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getWindow(), 0, availWidth);
+				int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
 
 				if (width == 0 || width < minWidth) {
 					width = minWidth;

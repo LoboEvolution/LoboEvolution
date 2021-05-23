@@ -125,13 +125,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 					((HTMLElementImpl) child).appendOuterHTMLImpl(buffer);
 				}
 			} else if (child instanceof Comment) {
-				buffer.append("<!--").append(((Comment) child).getTextContent()).append("-->");
+				buffer.append("<!--").append((child).getTextContent()).append("-->");
 			} else if (child instanceof Text) {
 				final String text = child.getTextContent();
 				final String encText = htmlEncodeChildText(text);
 				buffer.append(encText);
 			} else if (child instanceof ProcessingInstruction) {
-				buffer.append(child.toString());
+				buffer.append(child);
 			}
 		});
 	}
@@ -293,58 +293,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.RenderableContext#getAlignmentX()
-	 */
-	/**
-	 * <p>getAlignmentX.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getAlignmentX() {
-		return 0.5f;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.RenderableContext#getAlignmentY()
-	 */
-	/**
-	 * <p>getAlignmentY.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getAlignmentY() {
-		return 0.5f;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public String getBaseURI() {
 		final Document document = this.document;
 		return document == null ? null : document.getBaseURI();
-	}
-
-	/**
-	 * <p>getChildAtIndex.</p>
-	 *
-	 * @param index a int.
-	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 */
-	public Node getChildAtIndex(int index) {
-		return this.nodeList.get(index);
-	}
-
-	/**
-	 * <p>getChildCount.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getChildCount() {
-		return nodeList.getLength();
 	}
 
 	/**
@@ -434,9 +387,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node getFirstChild() {
-		if (this.nodeList == null)
-			return null;
-
 		int size = this.nodeList.getLength();
 		if (size > 0)
 			return this.nodeList.get(0);
@@ -525,9 +475,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node getLastChild() {
-		if (this.nodeList == null)
-			return null;
-
 		int size = this.nodeList.getLength();
 		int index = size - 1;
 		if (size > index && index > -1) {
@@ -565,7 +512,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			Node next = this;
 			do {
 				next = parent.getNextTo(next);
-				if ((next != null) && (next instanceof Element)) {
+				if (next instanceof Element) {
 					return (Element) next;
 				}
 			} while (next != null);
@@ -581,7 +528,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 		int size = this.nodeList.getLength();
 		int index = idx + 1;
-		if (size > index && index > -1) {
+		if (size > index) {
 			return this.nodeList.item(index);
 		} else {
 			return null;
@@ -685,7 +632,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			Node previous = this;
 			do {
 				previous = parent.getPreviousTo(previous);
-				if ((previous != null) && (previous instanceof Element)) {
+				if (previous instanceof Element) {
 					return (Element) previous;
 				}
 			} while (previous != null);
@@ -809,33 +756,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 
 	/**
-	 * <p>informDocumentInvalid.</p>
-	 */
-	public void informDocumentInvalid() {
-		// This is called when an attribute or child changes.
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		if (doc != null) {
-			doc.allInvalidated(true);
-		}
-	}
-
-	/**
-	 * <p>informExternalScriptLoading.</p>
-	 */
-	protected void informExternalScriptLoading() {
-		// This is called when an attribute or child changes.
-		forgetRenderState();
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		if (doc != null) {
-			doc.externalScriptLoading(this);
-		}
-	}
-
-	/**
 	 * <p>informInvalid.</p>
 	 */
 	public void informInvalid() {
-		// This is called when an attribute or child changes.
 		forgetRenderState();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
@@ -1051,8 +974,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public void normalize() {
 		final List<Node> textNodes = new LinkedList<>();
 		boolean prevText = false;
-		for (Iterator<Node> i= nodeList.iterator(); i.hasNext(); ) {
-			Node child = i.next();
+		for (Node child : nodeList) {
 			if (child.getNodeType() == NodeType.TEXT_NODE) {
 				if (!prevText) {
 					prevText = true;
@@ -1067,25 +989,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			this.replaceAdjacentTextNodes(text);
 		}
 
-		if (!this.notificationsSuspended) {
-			informStructureInvalid();
-		}
-	}
-
-	/**
-	 * <p>removeAllChildren.</p>
-	 */
-	protected void removeAllChildren() {
-		synchronized (this.treeLock) {
-			removeAllChildrenImpl();
-		}
-	}
-
-	/**
-	 * <p>removeAllChildrenImpl.</p>
-	 */
-	protected void removeAllChildrenImpl() {
-		this.nodeList.clear();
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}

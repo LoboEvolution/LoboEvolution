@@ -59,7 +59,7 @@ public class HTMLOListElementImpl extends HTMLElementImpl implements HTMLOListEl
 	public int getStart() {
 		final String startText = getAttribute("start");
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
-		return HtmlValues.getPixelSize(startText, null, doc.getWindow(), 1);
+		return HtmlValues.getPixelSize(startText, null, doc.getDefaultView(), 1);
 	}
 
 	/** {@inheritDoc} */

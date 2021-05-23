@@ -110,7 +110,7 @@ public class HtmlInsets {
 			} else {
 				HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
 				type = HtmlInsets.TYPE_PIXELS;
-				value = HtmlValues.getPixelSize(sizeText, renderState, doc.getWindow(), 0);
+				value = HtmlValues.getPixelSize(sizeText, renderState, doc.getDefaultView(), 0);
 			}
 		}
 		return new BasicInset(type, value);

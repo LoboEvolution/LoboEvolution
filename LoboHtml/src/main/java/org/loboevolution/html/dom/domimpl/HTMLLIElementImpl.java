@@ -60,7 +60,7 @@ public class HTMLLIElementImpl extends HTMLElementImpl implements HTMLLIElement 
 	public int getValue() {
 		final String valueText = getAttribute("value");
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
-		return HtmlValues.getPixelSize(valueText, null, doc.getWindow(), 0);
+		return HtmlValues.getPixelSize(valueText, null, doc.getDefaultView(), 0);
 	}
 
 	/** {@inheritDoc} */

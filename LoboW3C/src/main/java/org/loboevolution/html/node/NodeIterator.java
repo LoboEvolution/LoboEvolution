@@ -25,9 +25,6 @@ import org.loboevolution.html.dom.NodeFilter;
 /**
  * An iterator over the members of a list of the nodes in a subtree of the DOM.
  * The nodes will be returned in document order.
- *
- *
- *
  */
 public interface NodeIterator {
 

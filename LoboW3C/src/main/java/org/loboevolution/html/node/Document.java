@@ -42,9 +42,6 @@ import org.loboevolution.jsenum.VisibilityState;
 /**
  * Any web page loaded in the browser and serves as an entry point into the web
  * page's content, which is the DOM tree.
- *
- *
- *
  */
 public interface Document extends Node, NonElementParentNode, ParentNode {
 

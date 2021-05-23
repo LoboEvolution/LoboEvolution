@@ -90,7 +90,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	protected void processStyle() {
 		this.styleSheet = null;
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
-		if (CSSUtilities.matchesMedia(getMedia(), doc.getWindow())) {
+		if (CSSUtilities.matchesMedia(getMedia(), doc.getDefaultView())) {
 			final String text = getRawInnerText(true);
 			if (Strings.isNotBlank(text)) {
 				final String processedText = CSSUtilities.preProcessCss(text);

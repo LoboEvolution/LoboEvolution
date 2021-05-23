@@ -22,23 +22,8 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.SocketPermission;
-import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.loboevolution.common.Domains;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
@@ -51,6 +36,10 @@ import org.loboevolution.html.io.LocalErrorHandler;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
+import org.loboevolution.html.node.Code;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.views.DocumentView;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
@@ -59,19 +48,19 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
-
-import org.loboevolution.html.node.Code;
-import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.js.Location;
-import org.loboevolution.html.node.js.Window;
-import org.loboevolution.html.node.views.DocumentView;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.SocketPermission;
+import java.net.URL;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implementation of the W3C HTMLDocument interface.
@@ -90,10 +79,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private URL documentURL;
 
-	private String domain;
-
-	private DOMImplementation domImplementation;
-	
     private final Map<String, Element> elementsById = new HashMap<>();
 
 	private final Map<String, Element> elementsByName = new HashMap<>();
@@ -104,16 +89,11 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private final HtmlRendererContext rcontext;
 
-	private String referrer;
-
 	private StyleSheetAggregator styleSheetAggregator = null;
+
     private final CSSStyleSheetListImpl styleSheets = new CSSStyleSheetListImpl();
 
 	private final UserAgentContext ucontext;
-
-	private final Window window;
-
-	private String xmlEncoding;
 
 	/**
 	 * <p>Constructor for HTMLDocumentImpl.</p>
@@ -153,22 +133,15 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 				sm.checkPermission(new SocketPermission(docURL.getHost(), "connect"));
 			}
 			this.documentURL = docURL;
-			this.domain = docURL.getHost();
-			this. setDocumentURI(documentURI);
+			setDomain(docURL.getHost());
+			this.setDocumentURI(documentURI);
 		} catch (final MalformedURLException mfu) {
 			logger.warning("HTMLDocumentImpl(): Document URI [" + documentURI + "] is malformed.");
 		}
 		this.document = this;
 		// Get WindowImpl object
-		WindowImpl window;
-		if (rcontext != null) {
-			window = WindowImpl.getWindow(rcontext);
-		} else {
-			// Plain parsers may use Javascript too.
-			window = new WindowImpl(null, ucontext);
-		}
-		// WindowImpl must be retained or it will be garbage collected.
-		this.window = window;
+		setWindow(rcontext, ucontext);
+		WindowImpl window = (WindowImpl)getDefaultView();
 		window.setDocument(this);
 	}
 
@@ -284,28 +257,10 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	/** {@inheritDoc} */
 	@Override
-	public Window getDefaultView() {
-		return this.window;
-	}
-
-
-	String getDocumentHost() {
-		final URL docUrl = this.documentURL;
-		return docUrl == null ? null : docUrl.getHost();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public URL getDocumentURL() {
 		return this.documentURL;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getDomain() {
-		return this.domain;
-	}
-	
 	/** {@inheritDoc} */
 	@Override
 	public final URL getFullURL(String uri) {
@@ -352,22 +307,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	@Override
 	public final HtmlRendererContext getHtmlRendererContext() {
 		return this.rcontext;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.w3c.dom.Document#getImplementation()
-	 */
-	/** {@inheritDoc} */
-	@Override
-	public DOMImplementation getImplementation() {
-		synchronized (this) {
-			if (this.domImplementation == null) {
-				this.domImplementation = new DOMImplementationImpl(this.getUcontext());
-			}
-			return this.domImplementation;
-		}
 	}
 
 	/** {@inheritDoc} */
@@ -426,16 +365,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		return this.locales;
 	}
 
-	
-	/**
-	 * <p>getLocation.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.js.Location} object.
-	 */
-	public final Location getLocation() {
-		return this.window.getLocation();
-	}
-
 	/**
 	 * <p>Getter for the field onloadHandler.</p>
 	 *
@@ -443,12 +372,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 */
 	public Function getOnloadHandler() {
 		return this.onloadHandler;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getReferrer() {
-		return this.referrer;
 	}
 
 	final StyleSheetAggregator getStyleSheetAggregator() {
@@ -492,12 +415,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	@Override
 	public UserAgentContext getUserAgentContext() {
 		return this.getUcontext();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getXmlEncoding() {
-		return this.xmlEncoding;
 	}
 
 	/** {@inheritDoc} */
@@ -643,12 +560,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	void removeElementById(String id) {
-		synchronized (this) {
-			this.elementsById.remove(id);
-		}
-	}
-
 	void removeNamedItem(String name) {
 		synchronized (this) {
 			this.elementsByName.remove(name);
@@ -701,22 +612,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		this.defaultTarget = value;
 	}
 
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>Setter for the field domain.</p>
-	 */
-	public void setDomain(String domain) {
-		final String oldDomain = this.domain;
-		if (oldDomain != null && Domains.isValidCookieDomain(domain, oldDomain)) {
-			this.domain = domain;
-		} else {
-			throw new SecurityException(
-					"Cannot set domain to '" + domain + "' when current domain is '" + oldDomain + "'");
-		}
-	}
-
 	/**
 	 * Caller should synchronize on document.
 	 */
@@ -737,14 +632,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		this.locales = locales;
 	}
 
-	/**
-	 * <p>setLocation.</p>
-	 *
-	 * @param location a {@link java.lang.String} object.
-	 */
-	public void setLocation(String location) {
-		getLocation().setHref(location);
-	}
 
 	void setNamedItem(String name, Element element) {
 		synchronized (this) {
@@ -761,32 +648,11 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		this.onloadHandler = onloadHandler;
 	}
 
-	/**
-	 * <p>Setter for the field referrer.</p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 */
-	public void setReferrer(String value) {
-		this.referrer = value;
-	}
-	
-	
-	/**
-	 * <p>Getter for the field <code>window</code>.</p>
-	 *
-	 * @return the window
-	 */
-	public Window getWindow() {
-		return window;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void setTextContent(String textContent) {
 		// NOP, per spec
 	}
-
-
 
 	/** {@inheritDoc} */
 	@Override

@@ -567,7 +567,7 @@ public class StyleSheetAggregator {
 	private static boolean isActive(HTMLElement element, final MediaListImpl mediaList) {
         HTMLElementImpl impl = (HTMLElementImpl) element;
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
-		return isActive(document.getWindow(), mediaList);
+		return isActive(document.getDefaultView(), mediaList);
     }
 	
 	private static boolean isActive(Window window, final MediaQuery mediaQuery) {
@@ -696,7 +696,7 @@ public class StyleSheetAggregator {
 				if (value.length() > 0 && value.charAt(0) == '+') {
 					value = value.substring(1);
 				}
-				a = HtmlValues.getPixelSize(value, null, doc.getWindow(), 1);
+				a = HtmlValues.getPixelSize(value, null, doc.getDefaultView(), 1);
 			}
 		}
 
@@ -704,7 +704,7 @@ public class StyleSheetAggregator {
 		if (value.length() > 0 && value.charAt(0) == '+') {
 			value = value.substring(1);
 		}
-		final int b = HtmlValues.getPixelSize(value, null, doc.getWindow(), 0);
+		final int b = HtmlValues.getPixelSize(value, null, doc.getDefaultView(), 0);
 		if (a == 0) {
 			return index == b && b > 0;
 		}

@@ -20,58 +20,32 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import java.io.IOException;
-import java.io.LineNumberReader;
-import java.util.Iterator;
-
+import org.loboevolution.common.Domains;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLHeadElement;
-import org.loboevolution.html.dom.HTMLScriptElement;
-import org.loboevolution.html.dom.filter.AnchorFilter;
-import org.loboevolution.html.dom.filter.CommandFilter;
-import org.loboevolution.html.dom.filter.ElementFilter;
-import org.loboevolution.html.dom.filter.ElementNameFilter;
-import org.loboevolution.html.dom.filter.EmbedFilter;
-import org.loboevolution.html.dom.filter.FormFilter;
-import org.loboevolution.html.dom.filter.IdFilter;
-import org.loboevolution.html.dom.filter.ImageFilter;
-import org.loboevolution.html.dom.filter.LinkFilter;
-import org.loboevolution.html.dom.filter.ScriptFilter;
+import org.loboevolution.html.dom.*;
+import org.loboevolution.html.dom.filter.*;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
 import org.loboevolution.html.dom.xpath.XPathEvaluatorImpl;
 import org.loboevolution.html.io.LocalWritableLineReader;
 import org.loboevolution.html.io.WritableLineReader;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.events.EventFactory;
-import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.jsenum.DocumentReadyState;
-import org.loboevolution.jsenum.VisibilityState;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.CDATASection;
-import org.loboevolution.html.node.Comment;
-import org.loboevolution.html.node.DOMConfiguration;
-import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeIterator;
-import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.ProcessingInstruction;
-import org.loboevolution.html.node.Range;
-import org.loboevolution.html.node.Selection;
-import org.loboevolution.html.node.Text;
-import org.loboevolution.html.node.TreeWalker;
+import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.xpath.XPathEvaluator;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
-import org.loboevolution.html.xpath.XPathEvaluator;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.jsenum.DocumentReadyState;
+import org.loboevolution.jsenum.VisibilityState;
+
+import java.io.IOException;
+import java.io.LineNumberReader;
 
 /**
  * <p>DocumentImpl class.</p>
@@ -82,16 +56,24 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	private boolean xmlStandalone;
 
+	private boolean isrss = false;
+
 	private String xmlVersion = null;
 
 	private String documentURI;
 
-	private DocumentType doctype;
-	
-	private boolean isrss = false;
-	
 	private String title;
-	
+
+	private String domain;
+
+	private String referrer;
+
+	private DocumentType doctype;
+
+	private HTMLElement body;
+
+	private Window window;
+
 	public WritableLineReader reader;
 
 	/** {@inheritDoc} */
@@ -144,8 +126,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element getDocumentElement() {
-		for (Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
-			Node node = i.next();
+		for (Node node : nodeList) {
 			if (node instanceof Element) {
 				return (Element) node;
 			}
@@ -327,8 +308,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public String getURL() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDocumentURI();
 	}
 
 	/** {@inheritDoc} */
@@ -341,50 +321,33 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public String getAlinkColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		final HTMLElement elem = getBody();
+		HTMLBodyElement body = (HTMLBodyElement) elem;
+		return body.getALink();
+}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setAlinkColor(String alinkColor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public HTMLCollection getApplets() {
-		// TODO Auto-generated method stub
-		return null;
+		final HTMLElement elem = getBody();
+		HTMLBodyElement body = (HTMLBodyElement) elem;
+		body.setALink(alinkColor);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getBgColor() {
-		// TODO Auto-generated method stub
-		return null;
+		final HTMLElement elem = getBody();
+		HTMLBodyElement body = (HTMLBodyElement) elem;
+		return body.getBgColor();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setBgColor(String bgColor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public HTMLElement getBody() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setBody(HTMLElement body) {
-		// TODO Auto-generated method stub
-		
+		final HTMLElement elem = getBody();
+		HTMLBodyElement body = (HTMLBodyElement) elem;
+		body.setBgColor(bgColor);
 	}
 
 	/** {@inheritDoc} */
@@ -439,8 +402,15 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Window getDefaultView() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.window;
+	}
+	public void setWindow(final HtmlRendererContext rcontext, final UserAgentContext ucontext){
+		if (rcontext != null) {
+			window = WindowImpl.getWindow(rcontext);
+		} else {
+			// Plain parsers may use Javascript too.
+			window = new WindowImpl(null, ucontext);
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -474,29 +444,29 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public String getDomain() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.domain;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setDomain(String domain) {
-		// TODO Auto-generated method stub
-		
+		this.domain = domain;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getFgColor() {
-		// TODO Auto-generated method stub
-		return null;
+		final HTMLElement elem = getBody();
+		HTMLBodyElement body = (HTMLBodyElement) elem;
+		return body.getText();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setFgColor(String fgColor) {
-		// TODO Auto-generated method stub
-		
+		final HTMLElement elem = getBody();
+		HTMLBodyElement body = (HTMLBodyElement) elem;
+		body.setText(fgColor);
 	}
 
 	/** {@inheritDoc} */
@@ -515,16 +485,44 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLHeadElement getHead() {
+	public boolean isHidden() {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isHidden() {
-		// TODO Auto-generated method stub
-		return false;
+	public HTMLHeadElement getHead() {
+		synchronized (this) {
+			HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
+			if(collection.getLength() > 0) return (HTMLHeadElement)collection.item(0);
+			else return null;
+		}
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLElement getBody() {
+		synchronized (this) {
+			if(this.body != null) return this.body;
+			HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
+			if(collection.getLength() > 0) return (HTMLElement) collection.item(0);
+			else return null;
+		}
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setBody(HTMLElement body) {
+		this.body = body;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getApplets() {
+		synchronized (this) {
+			return new HTMLCollectionImpl(this, new ElementFilter("APPLET"));
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -610,15 +608,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Location getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getDefaultView().getLocation();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setLocation(Location location) {
-		// TODO Auto-generated method stub
-		
+		getDefaultView().setLocation(location);
 	}
 
 	/** {@inheritDoc} */
@@ -638,8 +634,16 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public String getReferrer() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.referrer;
+	}
+
+	/**
+	 * <p>Setter for the field referrer.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 */
+	public void setReferrer(String value) {
+		this.referrer = value;
 	}
 
 	/** {@inheritDoc} */
@@ -805,8 +809,6 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					}
 					this.reader = null;
 				} else {
-					// Already open, return.
-					// Do not close http/file documents in progress.
 					return this;
 				}
 			}
@@ -814,6 +816,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			this.reader = new LocalWritableLineReader((HTMLDocumentImpl)this, new LineNumberReader(this.reader));
 		}
 		return this;
+	}
+
+	public void removeAllChildrenImpl() {
+		this.nodeList.clear();
+		if (!this.notificationsSuspended) {
+			informStructureInvalid();
+		}
 	}
 
 	/** {@inheritDoc} */

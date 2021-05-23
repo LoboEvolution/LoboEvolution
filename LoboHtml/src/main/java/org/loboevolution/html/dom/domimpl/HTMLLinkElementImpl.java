@@ -196,7 +196,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 						final UserAgentContext uacontext = getUserAgentContext();
 						if (uacontext.isExternalCSSEnabled()) {
 							final String media = getMedia();
-								if (CSSUtilities.matchesMedia(media, doc.getWindow())) {
+								if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
 								final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI);
 								if (sheet != null) {
 									this.styleSheet = sheet;

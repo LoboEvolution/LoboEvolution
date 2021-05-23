@@ -196,7 +196,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		if (Strings.isNotBlank(strokeWidthProp)) {
 			SVGSVGElement ownerSVGElement = getOwnerSVGElement();
 			HTMLDocumentImpl doc =  (HTMLDocumentImpl)ownerSVGElement.getOwnerDocument();
-			strokeWidth = HtmlValues.getPixelSize(strokeWidthProp, null, doc.getWindow(), 1);
+			strokeWidth = HtmlValues.getPixelSize(strokeWidthProp, null, doc.getDefaultView(), 1);
 		}
 		return strokeWidth;
 	}
@@ -213,7 +213,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		if (Strings.isNotBlank(strokeMiterlimit)) {
 			SVGSVGElement ownerSVGElement = getOwnerSVGElement();
 			HTMLDocumentImpl doc =  (HTMLDocumentImpl)ownerSVGElement.getOwnerDocument();
-			miterlimit = HtmlValues.getPixelSize(strokeMiterlimit, null, doc.getWindow(), 4);
+			miterlimit = HtmlValues.getPixelSize(strokeMiterlimit, null, doc.getDefaultView(), 4);
 		}
 		return miterlimit;
 	}

@@ -169,7 +169,7 @@ public class DelayedPair {
 			ModelNode node  = getModelNode();
 			if (node instanceof HTMLDocument) {
 				HTMLDocumentImpl doc = (HTMLDocumentImpl)node;
-				window = doc.getWindow();
+				window = doc.getDefaultView();
 			}
 			return "auto".equals(spec) ? null : HtmlValues.getPixelSize(spec, rs, window, errorValue, avail);
 		} else {

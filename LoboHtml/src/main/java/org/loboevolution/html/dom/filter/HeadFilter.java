@@ -24,9 +24,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * The Class HeadFilter.
- *
- *
- *
  */
 public class HeadFilter implements NodeFilter {
 

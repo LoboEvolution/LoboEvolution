@@ -226,6 +226,6 @@ public class ImgControl extends BaseControl {
 		}
 		final HTMLElementImpl element = this.controlElement;
 		HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
-		return  HtmlValues.getPixelSize(size, null, doc.getWindow(), -1, availSize);
+		return  HtmlValues.getPixelSize(size, null, doc.getDefaultView(), -1, availSize);
 	}
 }
