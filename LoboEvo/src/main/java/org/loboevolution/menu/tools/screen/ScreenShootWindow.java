@@ -20,8 +20,7 @@
 
 package org.loboevolution.menu.tools.screen;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
@@ -33,42 +32,46 @@ import org.loboevolution.img.ImageViewer;
 
 /**
  * <p>ScreenShootWindow class.</p>
- *
- *
- *
  */
 public class ScreenShootWindow extends JFrame {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * <p>Constructor for ScreenShootWindow.</p>
-	 *
-	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
-	 */
-	public ScreenShootWindow(BrowserFrame frame) {
-		createAndShowGUI(frame);
-	}
+    /**
+     * <p>Constructor for ScreenShootWindow.</p>
+     *
+     * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+     */
+    public ScreenShootWindow(BrowserFrame frame) {
+		initLayout();
+		initComponents(frame);
+    }
 
-	private void createAndShowGUI(BrowserFrame frame) {
-		setTitle("Screenshot");
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setPreferredSize(new Dimension(700, 600));
+    private void initComponents(BrowserFrame frame) {
+        add(new CapturePane(frame));
+    }
 
-		final JPanel panel = new JPanel();
-		final Dimension size = frame.getSize();
+    private void initLayout() {
+        setUndecorated(true);
+        setBackground(new Color(0, 0, 0, 0));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Rectangle bounds = getVirtualBounds();
+        setLocation(bounds.getLocation());
+        setSize(bounds.getSize());
+        setAlwaysOnTop(true);
+        setVisible(true);
+    }
 
-		final BufferedImage image = (BufferedImage) frame.createImage(size.width, size.height);
-		final Graphics g = image.getGraphics();
-		frame.paint(g);
-
-		final ImageViewer viewer = new ImageViewer(image);
-		panel.add(viewer.getComponent());
-		add(panel);
-		revalidate();
-		repaint();
-		pack();
-		setVisible(true);
-	}
+    public static Rectangle getVirtualBounds() {
+        Rectangle bounds = new Rectangle(0, 0, 0, 0);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice lstGDs[] = ge.getScreenDevices();
+        for (GraphicsDevice gd : lstGDs) {
+            bounds.add(gd.getDefaultConfiguration().getBounds());
+        }
+        return bounds;
+    }
 }
