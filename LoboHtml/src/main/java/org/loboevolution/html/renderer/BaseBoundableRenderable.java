@@ -434,6 +434,15 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		}
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public void onMouseScroll() {
+		final ModelNode me = this.modelNode;
+		if (me != null) {
+			HtmlController.getInstance().onMouseScroll(this.modelNode);
+		}
+	}
+
 	private static void resetCursorOnMouseOut(final ModelNode nodeStart, final ModelNode limit) {
 		Optional<Cursor> foundCursorOpt = Optional.empty();
 		ModelNode node = limit;

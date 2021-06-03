@@ -284,6 +284,8 @@ public interface BoundableRenderable extends Renderable {
 	 */
 	boolean onRightClick(final MouseEvent event, int x, int y);
 
+	void onMouseScroll();
+
 	/**
 	 * <p>paintSelection.</p>
 	 *
@@ -415,4 +417,6 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a int.
 	 */
 	void setY(int y);
+
+
 }

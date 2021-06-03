@@ -20,18 +20,7 @@
 
 package org.loboevolution.html.renderer;
 
-import java.awt.Cursor;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseEvent;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
+import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
@@ -40,6 +29,13 @@ import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
+
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>HtmlController class.</p>
@@ -390,6 +386,25 @@ public class HtmlController {
 
 		setMouseOnMouseOver(renderable, nodeStart, limit);
 	}
+
+	/**
+	 * <p>onMouseScroll.</p>
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 */
+	public void onMouseScroll(ModelNode node) {
+		if (node instanceof HTMLElementImpl) {
+			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
+			final Function f = uiElement.getOnscroll();
+			final MouseEventImpl evt = new MouseEventImpl();
+			evt.initMouseEvent("scroll", false, false, null, 0, 0, 0, 0, 0, true, true, true, true, (short) 0, null);
+			uiElement.dispatchEvent(uiElement, evt);
+			if (f != null) {
+				Executor.executeFunction(uiElement, f, evt, new Object[0]);
+			}
+		}
+	}
+
+
 
 	private static void setMouseOnMouseOver(final BaseBoundableRenderable renderable, final ModelNode nodeStart, final ModelNode limit) {
 		ModelNode node = nodeStart;

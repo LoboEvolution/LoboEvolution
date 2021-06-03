@@ -25,17 +25,12 @@ import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
-import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.FloatingInfo;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -54,7 +49,7 @@ public class RBlock extends BaseElementRenderable {
 	protected static final Logger logger = Logger.getLogger(RBlock.class.getName());
 	private BoundableRenderable armedRenderable;
 	protected final RBlockViewport bodyLayout;
-
+	private final RBlockScroll scroll;
 	protected int defaultOverflowX = RenderState.OVERFLOW_NONE;
 	protected int defaultOverflowY = RenderState.OVERFLOW_NONE;
 	protected RenderableSpot endSelection;
@@ -62,17 +57,11 @@ public class RBlock extends BaseElementRenderable {
 	protected boolean hasHScrollBar = false;
 
 	protected boolean hasVScrollBar = false;
-	protected JScrollBar hScrollBar;
-
 	protected final int listNesting;
 
 	protected final HtmlRendererContext rendererContext;
 
-	private boolean resettingScrollBars = false;
-
 	protected RenderableSpot startSelection;
-
-	protected JScrollBar vScrollBar;
 
 	/**
 	 * <p>Constructor for RBlock.</p>
@@ -90,12 +79,11 @@ public class RBlock extends BaseElementRenderable {
 		this.listNesting = listNesting;
 		this.frameContext = frameContext;
 		this.rendererContext = rcontext;
-		final RBlockViewport bl = new RBlockViewport(modelNode, this, getViewportListNesting(listNesting), pcontext,
-				rcontext, frameContext, this);
-		this.bodyLayout = bl;
-		bl.setOriginalParent(this);
-		bl.setX(Short.MAX_VALUE);
-		bl.setY(Short.MAX_VALUE);
+		this.scroll = new RBlockScroll(this);
+		this.bodyLayout = new RBlockViewport(modelNode, this, getViewportListNesting(listNesting), pcontext, rcontext, frameContext, this);
+		this.bodyLayout.setOriginalParent(this);
+		this.bodyLayout.setX(Short.MAX_VALUE);
+		this.bodyLayout.setY(Short.MAX_VALUE);
 	}
 
 	/** {@inheritDoc} */
@@ -176,8 +164,7 @@ public class RBlock extends BaseElementRenderable {
 			if (hscroll || vscroll) {
 				correctViewportOrigin(insets, this.width, this.height);
 				if (origX != bodyLayout.x || origY != bodyLayout.y) {
-					resetScrollBars(null);
-					// TODO: This could be paintImmediately.
+					scroll.resetScrollBars(null);
 					this.repaint();
 				}
 			}
@@ -386,50 +373,25 @@ public class RBlock extends BaseElementRenderable {
 			}
 		}
 
-		if (vscroll) {
-			final JScrollBar sb = getVScrollBar();
-			addComponent(sb);
-			// Bounds set by updateWidgetBounds
-		}
-		if (hscroll) {
-			final JScrollBar sb = getHScrollBar();
-			addComponent(sb);
-			// Bounds set by updateWidgetBounds
-		}
-
 		if (hscroll || vscroll) {
-			// In this case, viewport origin should not be reset.
-			// We don't want to cause the document to scroll back
-			// up while rendering.
+
+			if (vscroll) {
+				addComponent(scroll.getVScrollBar());
+			}
+			if (hscroll) {
+				addComponent(scroll.getHScrollBar());
+			}
+
+
 			correctViewportOrigin(insets, resultingWidth, resultingHeight);
-			// Now reset the scrollbar state. Depends
-			// on block width and height.
 			this.width = resultingWidth;
 			this.height = resultingHeight;
-			resetScrollBars(rs);
+			scroll.resetScrollBars(rs);
 		} else {
 			bodyLayout.x = insets.left;
 			bodyLayout.y = insets.top;
 		}
 		return new LayoutValue(resultingWidth, resultingHeight, hscroll, vscroll);
-	}
-
-	/**
-	 * <p>Getter for the field defaultOverflowX.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getDefaultOverflowX() {
-		return this.defaultOverflowX;
-	}
-
-	/**
-	 * <p>Getter for the field defaultOverflowY.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getDefaultOverflowY() {
-		return this.defaultOverflowY;
 	}
 
 	/**
@@ -468,25 +430,7 @@ public class RBlock extends BaseElementRenderable {
 		return this.bodyLayout.getFirstLineHeight();
 	}
 
-	private JScrollBar getHScrollBar() {
-		JScrollBar sb = this.hScrollBar;
-		if (sb == null) {
-			// Should never go back to null
-			sb = new JScrollBar(JScrollBar.HORIZONTAL);
-			sb.addAdjustmentListener(new LocalAdjustmentListener(JScrollBar.HORIZONTAL));
-			BoundedRangeModel model = sb.getModel();
-			model.addChangeListener(new BoundedChangeListener(JScrollBar.HORIZONTAL));
-			this.hScrollBar = sb;
-		}
-		return sb;
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderablePoint(int,
-	 * int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
@@ -566,17 +510,6 @@ public class RBlock extends BaseElementRenderable {
 		return blockNesting;
 	}
 
-	private JScrollBar getVScrollBar() {
-		JScrollBar sb = this.vScrollBar;
-		if (sb == null) {
-			sb = new JScrollBar(JScrollBar.VERTICAL);
-			sb.addAdjustmentListener(new LocalAdjustmentListener(JScrollBar.VERTICAL));
-			BoundedRangeModel model = sb.getModel();
-			model.addChangeListener(new BoundedChangeListener(JScrollBar.VERTICAL));
-			this.vScrollBar = sb;
-		}
-		return sb;
-	}
 
 	/**
 	 * Gets the width the vertical scrollbar has when shown.
@@ -585,14 +518,6 @@ public class RBlock extends BaseElementRenderable {
 	 */
 	public int getVScrollBarWidth() {
 		return SCROLL_BAR_THICKNESS;
-	}
-
-	private int getVUnitIncrement(RenderState renderState) {
-		if (renderState != null) {
-			return renderState.getFontMetrics().getHeight();
-		} else {
-			return new BlockRenderState(null).getFontMetrics().getHeight();
-		}
 	}
 
 	/**
@@ -605,16 +530,7 @@ public class RBlock extends BaseElementRenderable {
 	@Override
 	public void invalidateLayoutLocal() {
 		super.invalidateLayoutLocal();
-		final JScrollBar hScrollBar = this.hScrollBar;
-		if (hScrollBar != null) {
-			// Necessary
-			hScrollBar.invalidate();
-		}
-		final JScrollBar vScrollBar = this.vScrollBar;
-		if (vScrollBar != null) {
-			// Necessary
-			vScrollBar.invalidate();
-		}
+		scroll.invalidateLayoutLocal();
 	}
 
 	/** {@inheritDoc} */
@@ -759,13 +675,7 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMousePressed(final MouseEvent event, int x, int y) {
@@ -790,13 +700,6 @@ public class RBlock extends BaseElementRenderable {
 		return this.backgroundColor == null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
@@ -820,6 +723,11 @@ public class RBlock extends BaseElementRenderable {
 			return false;
 		}
 		return this.backgroundColor == null;
+	}
+
+	@Override
+	public void onMouseScroll() {
+		HtmlController.getInstance().onMouseScroll(this.modelNode);
 	}
 
 	/** {@inheritDoc} */
@@ -868,26 +776,7 @@ public class RBlock extends BaseElementRenderable {
 				if (start != null && end != null && !start.equals(end)) {
 					paintSelection(g, inSelection, start, end);
 				}
-				// Must paint scrollbars too.
-				final JScrollBar hsb = this.hScrollBar;
-				if (hsb != null) {
-					final Graphics sbg = g.create(insets.left, this.height - insets.bottom, this.width - insets.left - insets.right, SCROLL_BAR_THICKNESS);
-					try {
-						hsb.paint(sbg);
-					} finally {
-						sbg.dispose();
-					}
-				}
-				final JScrollBar vsb = this.vScrollBar;
-				if (vsb != null) {
-					final Graphics sbg = g.create(this.width - insets.right, insets.top, SCROLL_BAR_THICKNESS,this.height - insets.top - insets.bottom);
-					try {
-						vsb.paint(sbg);
-					} finally {
-						sbg.dispose();
-					}
-				}
-
+				scroll.paintSroll(g);
 			} finally {
 				if (isRelative) {
 					g.dispose();
@@ -915,64 +804,7 @@ public class RBlock extends BaseElementRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public void repaint(ModelNode modelNode) {
-		// this.invalidateRenderStyle();
 		this.repaint();
-	}
-
-	/**
-	 * Changes scroll bar state to match viewport origin.
-	 */
-	private void resetScrollBars(RenderState renderState) {
-		// Expected to be called only in the GUI thread.
-		this.resettingScrollBars = true;
-		try {
-			final RBlockViewport bodyLayout = this.bodyLayout;
-			if (bodyLayout != null) {
-				final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-				final JScrollBar vsb = this.vScrollBar;
-				if (vsb != null) {
-					final int newValue = insets.top - bodyLayout.y;
-					final int newExtent = this.height - insets.top - insets.bottom;
-					final int newMin = 0;
-					final int newMax = bodyLayout.height;
-					vsb.setValues(newValue, newExtent, newMin, newMax);
-					vsb.setUnitIncrement(getVUnitIncrement(renderState));
-					vsb.setBlockIncrement(newExtent);
-				}
-				final JScrollBar hsb = this.hScrollBar;
-				if (hsb != null) {
-					final int newValue = insets.left - bodyLayout.x;
-					final int newExtent = this.width - insets.left - insets.right;
-					final int newMin = 0;
-					final int newMax = bodyLayout.width;
-					hsb.setValues(newValue, newExtent, newMin, newMax);
-				}
-			}
-		} finally {
-			this.resettingScrollBars = false;
-		}
-	}
-
-	/**
-	 * <p>scrollBy.</p>
-	 *
-	 * @param orientation a int.
-	 * @param offset a int.
-	 * @return a boolean.
-	 */
-	public boolean scrollBy(int orientation, int offset) {
-		final RBlockViewport bodyLayout = this.bodyLayout;
-		if (bodyLayout != null) {
-			switch (orientation) {
-			case JScrollBar.HORIZONTAL:
-				return scrollHorizontalTo(bodyLayout.x - offset);
-			case JScrollBar.VERTICAL:
-				return scrollVerticalTo(bodyLayout.y - offset);
-			default:
-				break;
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -983,34 +815,8 @@ public class RBlock extends BaseElementRenderable {
 	 * @return a boolean.
 	 */
 	public boolean scrollByUnits(int orientation, int units) {
-		final int offset = orientation == JScrollBar.VERTICAL ? getVUnitIncrement(null) * units : units;
-		return this.scrollBy(orientation, offset);
-	}
-
-	/**
-	 * <p>scrollHorizontalTo.</p>
-	 *
-	 * @param newX a int.
-	 * @return a boolean.
-	 */
-	public boolean scrollHorizontalTo(int newX) {
-		final RBlockViewport bodyLayout = this.bodyLayout;
-		if (bodyLayout != null) {
-			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-			final int prevX = bodyLayout.x;
-			if (newX > insets.left) {
-				bodyLayout.x = insets.left;
-			} else if (newX < this.width - insets.right - bodyLayout.width) {
-				bodyLayout.x = Math.min(insets.left, this.width - insets.right - bodyLayout.width);
-			} else {
-				bodyLayout.x = newX;
-			}
-			resetScrollBars(null);
-			this.updateWidgetBounds();
-			this.repaint();
-			return bodyLayout.x != prevX;
-		}
-		return false;
+		final int offset = orientation == JScrollBar.VERTICAL ? scroll.getVUnitIncrement(null) * units : units;
+		return scroll.scrollBy(orientation, offset);
 	}
 
 	/**
@@ -1049,51 +855,12 @@ public class RBlock extends BaseElementRenderable {
 			}
 			if (needCorrection) {
 				correctViewportOrigin(insets, this.width, this.height);
-		        this.resetScrollBars(null);
+				scroll.resetScrollBars(null);
 			}
 		}
 	}
 
-	private void scrollToSBValue(int orientation, int value) {
-		final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-		switch (orientation) {
-		case JScrollBar.HORIZONTAL:
-			final int xOrigin = insets.left - value;
-			scrollHorizontalTo(xOrigin);
-			break;
-		case JScrollBar.VERTICAL:
-			final int yOrigin = insets.top - value;
-			scrollVerticalTo(yOrigin);
-			break;
-		}
-	}
 
-	/**
-	 * <p>scrollVerticalTo.</p>
-	 *
-	 * @param newY a int.
-	 * @return a boolean.
-	 */
-	public boolean scrollVerticalTo(int newY) {
-		final RBlockViewport bodyLayout = this.bodyLayout;
-		if (bodyLayout != null) {
-			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-			final int prevY = bodyLayout.y;
-			if (newY > insets.top) {
-				bodyLayout.y = insets.top;
-			} else if (newY < this.height - insets.bottom - bodyLayout.height) {
-				bodyLayout.y = Math.min(insets.top, this.height - insets.bottom - bodyLayout.height);
-			} else {
-				bodyLayout.y = newY;
-			}
-			resetScrollBars(null);
-			this.updateWidgetBounds();
-			this.repaint();
-			return bodyLayout.y != prevY;
-		}
-		return false;
-	}
-	
 	/** {@inheritDoc} */
 	@Override
 	public Rectangle getClipBoundsWithoutInsets() {
@@ -1152,25 +919,11 @@ public class RBlock extends BaseElementRenderable {
 	@Override
 	public void updateWidgetBounds(int guiX, int guiY) {
 		super.updateWidgetBounds(guiX, guiY);
-		final boolean hscroll = this.hasHScrollBar;
-		final boolean vscroll = this.hasVScrollBar;
-		if (hscroll || vscroll) {
-			final Insets insets = getInsetsMarginBorder(hscroll, vscroll);
-			if (hscroll) {
-				final JScrollBar hsb = this.hScrollBar;
-				if (hsb != null) {
-					hsb.setBounds(guiX + insets.left, guiY + this.height - insets.bottom,
-							this.width - insets.left - insets.right, SCROLL_BAR_THICKNESS);
-				}
-			}
-			if (vscroll) {
-				final JScrollBar vsb = this.vScrollBar;
-				if (vsb != null) {
-					vsb.setBounds(guiX + this.width - insets.right, guiY + insets.top, SCROLL_BAR_THICKNESS,
-							this.height - insets.top - insets.bottom);
-				}
-			}
-		}
+		scroll.updateWidgetBounds(guiX, guiY);
+	}
+
+	public RBlockScroll getScroll() {
+		return scroll;
 	}
 
 	private void correctViewportOrigin(Insets insets, int blockWidth, int blockHeight) {
@@ -1201,53 +954,6 @@ public class RBlock extends BaseElementRenderable {
 			this.height = height;
 			this.hasHScrollBar = hasHScrollBar;
 			this.hasVScrollBar = hasVScrollBar;
-		}
-	}
-
-	private class BoundedChangeListener implements ChangeListener {
-
-		private int orientation;
-
-		BoundedChangeListener(int orientation) {
-			this.orientation = orientation;
-		}
-
-		public void stateChanged(ChangeEvent changeEvent) {
-			Object source = changeEvent.getSource();
-			if (source instanceof BoundedRangeModel) {
-				BoundedRangeModel aModel = (BoundedRangeModel) source;
-				if (!aModel.getValueIsAdjusting()) {
-					if (orientation == JScrollBar.HORIZONTAL) rendererContext.setScrollx(aModel.getValue());
-					if (orientation == JScrollBar.VERTICAL) rendererContext.setScrolly(aModel.getValue());
-				}
-			}
-		}
-	}
-
-	private class LocalAdjustmentListener implements AdjustmentListener {
-		private final int orientation;
-
-		public LocalAdjustmentListener(int orientation) {
-			this.orientation = orientation;
-		}
-
-		@Override
-		public void adjustmentValueChanged(AdjustmentEvent e) {
-			if (!RBlock.this.resettingScrollBars) {
-				switch (e.getAdjustmentType()) {
-					case AdjustmentEvent.UNIT_INCREMENT:
-					case AdjustmentEvent.UNIT_DECREMENT:
-					case AdjustmentEvent.BLOCK_INCREMENT:
-					case AdjustmentEvent.BLOCK_DECREMENT:
-					case AdjustmentEvent.TRACK: {
-						final int value = e.getValue();
-						scrollToSBValue(this.orientation, value);
-						break;
-					}
-					default:
-						break;
-				}
-			}
 		}
 	}
 }

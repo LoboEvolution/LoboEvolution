@@ -261,24 +261,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		grabFocus();
 	}
 
-	/**
-	 * <p>Getter for the field defaultOverflowX.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getDefaultOverflowX() {
-		return this.defaultOverflowX;
-	}
-
-	/**
-	 * <p>Getter for the field defaultOverflowY.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getDefaultOverflowY() {
-		return this.defaultOverflowY;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public Collection<?> getDelayedPairs() {
@@ -877,10 +859,10 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		final RBlock block = this.rblock;
 		if (block != null) {
 			if (xOffset != 0) {
-				block.scrollBy(JScrollBar.HORIZONTAL, xOffset);
+				block.getScroll().scrollBy(JScrollBar.HORIZONTAL, xOffset);
 			}
 			if (yOffset != 0) {
-				block.scrollBy(JScrollBar.VERTICAL, yOffset);
+				block.getScroll().scrollBy(JScrollBar.VERTICAL, yOffset);
 			}
 		}
 	}
