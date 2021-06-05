@@ -106,9 +106,9 @@ public class HtmlRendererContext {
 
 	private boolean test = false;
 
-	private int scrollx;
+	private double scrollx;
 
-	private int scrolly;
+	private double scrolly;
 
 	/**
 	 * Constructs a HtmlRendererContext that is a child of another
@@ -877,19 +877,19 @@ public class HtmlRendererContext {
 	}
 
 
-	public int getScrollx() {
+	public double getScrollx() {
 		return scrollx;
 	}
 
-	public void setScrollx(int scrollx) {
+	public void setScrollx(double scrollx) {
 		this.scrollx = scrollx;
 	}
 
-	public int getScrolly() {
+	public double getScrolly() {
 		return scrolly;
 	}
 
-	public void setScrolly(int scrolly) {
+	public void setScrolly(double scrolly) {
 		this.scrolly = scrolly;
 	}
 

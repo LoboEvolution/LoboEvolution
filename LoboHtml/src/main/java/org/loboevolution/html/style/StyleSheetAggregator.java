@@ -344,9 +344,9 @@ public class StyleSheetAggregator {
 	private boolean selectsPseudoClass(final Condition condition, final HTMLElement element, final boolean mouseOver) {
 		final String value = condition.getValue();
 		switch (value) {
-			case "hover":
-				setMouseOver(true);
-				return mouseOver;
+		case "hover":
+			setMouseOver(true);
+			return mouseOver;
 		case "root":
 			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
 			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == NodeType.DOCUMENT_TYPE_NODE;

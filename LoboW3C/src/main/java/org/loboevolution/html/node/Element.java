@@ -171,7 +171,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      *
      * @param scrollLeft a int.
      */
-    void setScrollLeft(int scrollLeft);
+    void setScrollLeft(double scrollLeft);
 
 
     /**
@@ -187,7 +187,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      *
      * @param scrollTop a int.
      */
-    void setScrollTop(int scrollTop);
+    void setScrollTop(double scrollTop);
 
 
     /**

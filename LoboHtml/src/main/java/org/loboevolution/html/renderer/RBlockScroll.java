@@ -200,36 +200,33 @@ public class RBlockScroll {
      * @param offset a {@link java.lang.Integer} object.
      * @return a a {@link java.lang.Boolean} object.
      */
-    public boolean scrollBy(int orientation, int offset) {
-        final RBlockViewport bodyLayout = rBlock.bodyLayout;
-        if (bodyLayout != null) {
-            switch (orientation) {
-                case JScrollBar.HORIZONTAL:
-                    return scrollHorizontalTo(bodyLayout.x - offset);
-                case JScrollBar.VERTICAL:
-                    return scrollVerticalTo(bodyLayout.y - offset);
-                default:
-                    break;
-            }
+    public boolean scrollBy(int orientation, double offset) {
+        switch (orientation) {
+            case JScrollBar.HORIZONTAL:
+                return scrollHorizontalTo(- offset);
+            case JScrollBar.VERTICAL:
+                return scrollVerticalTo(- offset);
+            default:
+                break;
         }
         return false;
     }
 
-    private void scrollToSBValue(int orientation, int value) {
+    private void scrollToSBValue(int orientation, double value) {
         final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
         switch (orientation) {
             case JScrollBar.HORIZONTAL:
-                final int xOrigin = insets.left - value;
+                final double xOrigin = insets.left - value;
                 scrollHorizontalTo(xOrigin);
                 break;
             case JScrollBar.VERTICAL:
-                final int yOrigin = insets.top - value;
+                final double yOrigin = insets.top - value;
                 scrollVerticalTo(yOrigin);
                 break;
         }
     }
 
-    private boolean scrollVerticalTo(int newY) {
+    private boolean scrollVerticalTo(double newY) {
         final RBlockViewport bodyLayout = rBlock.bodyLayout;
         if (bodyLayout != null) {
             final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
@@ -239,7 +236,7 @@ public class RBlockScroll {
             } else if (newY < rBlock.height - insets.bottom - bodyLayout.height) {
                 bodyLayout.y = Math.min(insets.top, rBlock.height - insets.bottom - bodyLayout.height);
             } else {
-                bodyLayout.y = newY;
+                bodyLayout.y = (int) newY;
             }
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
@@ -249,7 +246,7 @@ public class RBlockScroll {
         return false;
     }
 
-    private boolean scrollHorizontalTo(int newX) {
+    private boolean scrollHorizontalTo(double newX) {
         final RBlockViewport bodyLayout = rBlock.bodyLayout;
         if (bodyLayout != null) {
             final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
@@ -259,7 +256,7 @@ public class RBlockScroll {
             } else if (newX < rBlock.width - insets.right - bodyLayout.width) {
                 bodyLayout.x = Math.min(insets.left, rBlock.width - insets.right - bodyLayout.width);
             } else {
-                bodyLayout.x = newX;
+                bodyLayout.x = (int)newX;
             }
             resetScrollBars(null);
             rBlock.updateWidgetBounds();

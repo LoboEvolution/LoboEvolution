@@ -29,7 +29,9 @@ import java.io.StringReader;
 import java.util.*;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
@@ -49,6 +51,8 @@ import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.Text;
+
+import javax.swing.*;
 
 /**
  * <p>ElementImpl class.</p>
@@ -551,15 +555,17 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public int getClientLeft() {
-		// TODO Auto-generated method stub
-		return 0;
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		return HtmlValues.getPixelSize(currentStyle.getBorderLeftWidth(), null, doc.getDefaultView(), 0);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getClientTop() {
-		// TODO Auto-generated method stub
-		return 0;
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		return HtmlValues.getPixelSize(currentStyle.getBorderTopWidth(), null, doc.getDefaultView(), 0);
 	}
 
 	/** {@inheritDoc} */
@@ -709,48 +715,69 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public double getScrollHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return isVScrollable() ? getClientHeight() : 0;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public double getScrollLeft() {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		return htmlRendererContext.getScrollx();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getScrollLeft() {
+        final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+        HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+        return isHScrollable() ? htmlRendererContext.getScrollx() : 0;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void setScrollLeft(int scrollLeft) {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		htmlRendererContext.setScrollx(scrollLeft);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setScrollLeft(double scrollLeft) {
+        final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+        HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 
-	}
+        if (scrollLeft < 0 || !isHScrollable()) {
+            scrollLeft = 0;
+        }
 
-	/** {@inheritDoc} */
-	@Override
-	public double getScrollTop() {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		return htmlRendererContext.getScrolly();
-	}
+        htmlRendererContext.setScrollx(scrollLeft);
+        RBlock bodyBlock = (RBlock) this.getUINode();
+        if (bodyBlock != null && bodyBlock.getScroll() != null)
+            bodyBlock.getScroll().scrollBy(JScrollBar.HORIZONTAL, scrollLeft);
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void setScrollTop(int scrollTop) {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		htmlRendererContext.setScrolly(scrollTop);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getScrollTop() {
+        final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+        HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		return isVScrollable() ? htmlRendererContext.getScrolly() : 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setScrollTop(double scrollTop) {
+        final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+        HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+
+        if (scrollTop < 0 || !isVScrollable()) {
+            scrollTop = 0;
+        }
+
+        htmlRendererContext.setScrolly(scrollTop);
+        RBlock bodyBlock = (RBlock) this.getUINode();
+        if (bodyBlock != null && bodyBlock.getScroll() != null)
+            bodyBlock.getScroll().scrollBy(JScrollBar.VERTICAL, scrollTop);
+    }
 
 	/** {@inheritDoc} */
 	@Override
 	public double getScrollWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return isHScrollable() ? getClientWidth() : 0;
 	}
 
 	/** {@inheritDoc} */
@@ -812,4 +839,29 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 		return "";
 	}
+
+    private boolean isHScrollable() {
+        String overflow;
+        AbstractCSSProperties currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+        overflow = currentStyle.getOverflow();
+        int widthChild = 0;
+
+        for (final Node child : (NodeListImpl) this.getChildNodes()) {
+            if (child instanceof HTMLElementImpl) widthChild += ((HTMLElementImpl) child).getClientWidth();
+        }
+
+        return ("scroll".equals(overflow) || "auto".equals(overflow)) && (widthChild > this.getClientWidth());
+    }
+
+    private boolean isVScrollable() {
+        String overflow;
+        AbstractCSSProperties currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+        overflow = currentStyle.getOverflow();
+        int heightChild = 0;
+
+        for (final Node child : (NodeListImpl) this.getChildNodes()) {
+            if (child instanceof HTMLElementImpl) heightChild += ((HTMLElementImpl) child).getClientHeight();
+        }
+        return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
+    }
 }
