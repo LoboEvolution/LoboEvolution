@@ -50,6 +50,8 @@ class ElementFactory {
 		builders.put(HTMLTag.DT, div);
 		builders.put(HTMLTag.MAIN, div);
 		builders.put(HTMLTag.NAV, div);
+		builders.put(HTMLTag.HEADER, div);
+		builders.put(HTMLTag.FOOTER, div);
 
 		builders.put(HTMLTag.BODY, new HTMLElementBuilder.Body());
 		builders.put(HTMLTag.CENTER, new HTMLElementBuilder.Center());

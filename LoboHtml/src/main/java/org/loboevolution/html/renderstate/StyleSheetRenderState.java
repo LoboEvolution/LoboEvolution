@@ -137,6 +137,8 @@ public class StyleSheetRenderState implements RenderState {
 	
 	private Color iColor;
 
+	private Font iFont;
+
 	private FontMetrics iFontMetrics;
 
 	private boolean iHighlight;
@@ -562,15 +564,19 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
-
 		AbstractCSSProperties style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
 
-		String font = style == null ? null : style.getFont();
-		if (Strings.isBlank(font)) {
+		if (this.iFont != null) {
+			return this.iFont;
+		}
+
+		if (style == null) {
 			if (prs != null) {
-				return prs.getFont();
+				this.iFont = prs.getFont();
+				return this.iFont;
 			}
+			this.iFont = DEFAULT_FONT;
 			return DEFAULT_FONT;
 		}
 
@@ -586,7 +592,9 @@ public class StyleSheetRenderState implements RenderState {
 		key.setLetterSpacing(HtmlValues.getPixelSize(style.getLetterSpacing(), prs, document.getDefaultView(), 0));
 		key.setStrikethrough(FontValues.getFontStrikeThrough(style.getTextDecoration()));
 		key.setUnderline(FontValues.getFontUnderline(style.getTextDecoration()));
-		return FONT_FACTORY.getFont(key);
+		Font f = FONT_FACTORY.getFont(key);
+		this.iFont = f;
+		return f;
 	}
 
 	/** {@inheritDoc} */
@@ -1089,6 +1097,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (map != null) {
 			map.clear();
 		}
+		this.iFont = null;
 		this.iFontMetrics = null;
 		this.iColor = null;
 		this.iTextDecoration = -1;
