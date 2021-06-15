@@ -24,9 +24,6 @@ import org.mozilla.javascript.Function;
 
 /**
  * <p>WindowEventHandlersImpl class.</p>
- *
- *
- *
  */
 public class WindowEventHandlersImpl extends GlobalEventHandlersImpl implements WindowEventHandlers {
 	

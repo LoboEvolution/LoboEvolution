@@ -22,11 +22,32 @@ package org.loboevolution.html.node.js;
 
 /**
  * <p>WindowOrWorkerGlobalScope interface.</p>
- *
- *
- *
  */
 public interface WindowOrWorkerGlobalScope {
-    
-   
+
+    /**
+     * <p>setTimeout.</p>
+     *
+     * @param function a {@link org.mozilla.javascript.Function} object.
+     * @return a {@link java.lang.Integer} object.
+     */
+    int setTimeout(final Object function);
+
+    /**
+     * <p>setTimeout.</p>
+     *
+     * @param function a {@link java.lang.Object} object.
+     * @param millis a {@link java.lang.Double} object.
+     * @return a {@link java.lang.Integer} object.
+     */
+    int setTimeout(final Object function, double millis);
+
+    /**
+     * <p>setInterval.</p>
+     *
+     * @param function a {@link java.lang.Object} object.
+     * @param millis a {@link java.lang.Double} object.
+     * @return a {@link java.lang.Integer} object.
+     */
+    int setInterval(final Object function, double millis);
 }

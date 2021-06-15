@@ -22,12 +22,10 @@ package org.loboevolution.html.node.events;
 
 import org.loboevolution.html.node.Node;
 import org.mozilla.javascript.Function;
+import org.w3c.dom.events.EventException;
 
 /**
  * <p>EventTarget interface.</p>
- *
- *
- *
  */
 public interface EventTarget {
 
@@ -73,5 +71,14 @@ public interface EventTarget {
 	 * @return a boolean.
 	 */
 	boolean dispatchEvent(Node element, Event evt);
+
+	/**
+	 * <p>dispatchEvent.</p>
+	 *
+	 * @param evt a {@link org.w3c.dom.events.Event} object.
+	 * @return a boolean.
+	 * @throws org.w3c.dom.events.EventException if any.
+	 */
+	boolean dispatchEvent(Event evt) throws EventException;
 
 }

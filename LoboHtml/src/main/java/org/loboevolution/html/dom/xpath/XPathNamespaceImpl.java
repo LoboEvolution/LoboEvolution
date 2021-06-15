@@ -37,6 +37,7 @@ import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.xpath.XPathNamespace;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
+import org.w3c.dom.events.EventException;
 
 /**
  *
@@ -368,5 +369,10 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	@Override
 	public boolean dispatchEvent(Node element, Event evt) {
 		return m_attributeNode.dispatchEvent(element, evt);
+	}
+
+	@Override
+	public boolean dispatchEvent(Event evt) throws EventException {
+		return m_attributeNode.dispatchEvent(evt);
 	}
 }

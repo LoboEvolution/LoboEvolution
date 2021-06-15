@@ -418,7 +418,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @param x The x coordinate.
 	 * @param y The y coordinate.
 	 */
-	public void scroll(final int x, final int y) {
+	public void scroll(final double x, double y) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			scrollImpl(x, y);
 		} else {
@@ -429,10 +429,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	/**
 	 * <p>scrollBy.</p>
 	 *
-	 * @param x The x coordinate.
-	 * @param y The y coordinate.
+	 * @param x a {@link java.lang.Double} object.
+	 * @param y a {@link java.lang.Double} object.
 	 */
-	public void scrollBy(int x, int y) {
+	public void scrollBy(double x, double y) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			scrollByImpl(x, y);
 		} else {
@@ -440,15 +440,15 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		}
 	}
 
-	private void scrollByImpl(int xOffset, int yOffset) {
+	private void scrollByImpl(double xOffset, double yOffset) {
 		final HtmlBlockPanel bp = this.htmlBlockPanel;
 		if (bp != null) {
 			bp.scrollBy(xOffset, yOffset);
 		}
 	}
 
-	private void scrollImpl(int x, int y) {
-		this.scrollTo(new Rectangle(x, y, 16, 16), false, false);
+	private void scrollImpl(double x, double y) {
+		this.scrollTo(new Rectangle((int)x, (int)y, 16, 16), false, false);
 	}
 
 	/**

@@ -278,35 +278,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
-	/**
-	 * Gets the constructor.
-	 *
-	 * @param className    the class name
-	 * @param classWrapper the class wrapper
-	 * @return the constructor
-	 */
-	public static Function getConstructor(String className, JavaClassWrapper classWrapper) {
-		return new JavaConstructorObject(className, classWrapper);
-	}
 
-	/**
-	 * Gets the constructor.
-	 *
-	 * @param className    the class name
-	 * @param classWrapper the class wrapper
-	 * @param instantiator the instantiator
-	 * @return the constructor
-	 */
-	public static Function getConstructor(String className, JavaClassWrapper classWrapper,
-			JavaInstantiator instantiator) {
-		return new JavaConstructorObject(className, classWrapper, instantiator);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Object getDefaultValue(Class hint) {

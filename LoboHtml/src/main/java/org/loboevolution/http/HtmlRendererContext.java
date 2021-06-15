@@ -39,6 +39,7 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -92,7 +93,7 @@ import org.xml.sax.InputSource;
 public class HtmlRendererContext {
 	private static final Logger logger = Logger.getLogger(HtmlRendererContext.class.getName());
 
-	private UserAgentContext bcontext = null;
+	private UserAgentContext bcontext;
 
 	protected URLConnection currentConnection;
 
@@ -470,17 +471,6 @@ public class HtmlRendererContext {
 	}
 
 	/**
-	 * <p>goToHistoryURL.</p>
-	 *
-	 * @param url a {@link java.lang.String} object.
-	 */
-	public void goToHistoryURL(String url) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "goToHistoryURL() does nothing, unless overridden.");
-		}
-	}
-
-	/**
 	 * Should return true if and only if the current browser window is closed. This
 	 * implementation returns false and should be overridden.
 	 *
@@ -776,26 +766,26 @@ public class HtmlRendererContext {
 	/**
 	 * <p>resizeBy.</p>
 	 *
-	 * @param byWidth a int.
-	 * @param byHeight a int.
+	 * @param byWidth a {@link java.lang.Double} object.
+	 * @param byHeight a {@link java.lang.Double} object.
 	 */
-	public void resizeBy(int byWidth, int byHeight) {
+	public void resizeBy(double byWidth, double byHeight) {
 		final Window window = getWindow(this.htmlPanel);
 		if (window != null) {
-			window.setSize(window.getWidth() + byWidth, window.getHeight() + byHeight);
+			window.setSize(window.getWidth() + (int)byWidth, window.getHeight() + (int)byHeight);
 		}
 	}
 
 	/**
 	 * <p>resizeTo.</p>
 	 *
-	 * @param width a int.
-	 * @param height a int.
+	 * @param width a {@link java.lang.Double} object.
+	 * @param height a {@link java.lang.Double} object.
 	 */
-	public void resizeTo(int width, int height) {
+	public void resizeTo(double width, double height) {
 		final Window window = getWindow(this.htmlPanel);
 		if (window != null) {
-			window.setSize(width, height);
+			window.setSize((int)width, (int)height);
 		}
 	}
 	
@@ -862,17 +852,17 @@ public class HtmlRendererContext {
 	 * @param x The new x coordinate for the origin.
 	 * @param y The new y coordinate for the origin.
 	 */
-	public void scroll(int x, int y) {
+	public void scroll(double x, double y) {
 		this.htmlPanel.scroll(x, y);
 	}
 
 	/**
 	 * <p>scrollBy.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Double} object.
+	 * @param y a {@link java.lang.Double} object.
 	 */
-	public void scrollBy(int x, int y) {
+	public void scrollBy(double x, double y) {
 		this.htmlPanel.scrollBy(x, y);
 	}
 
@@ -1105,9 +1095,9 @@ public class HtmlRendererContext {
 							}
 							final String valueStr = parameter.getTextValue();
 							final String encValue = URLEncoder.encode(valueStr, "UTF-8");
-							bufOut.write(encName.getBytes("UTF-8"));
+							bufOut.write(encName.getBytes(StandardCharsets.UTF_8));
 							bufOut.write((byte) '=');
-							bufOut.write(encValue.getBytes("UTF-8"));
+							bufOut.write(encValue.getBytes(StandardCharsets.UTF_8));
 						} else {
 							logger.warning("postData(): Ignoring non-textual parameter " + name + " for POST.");
 						}

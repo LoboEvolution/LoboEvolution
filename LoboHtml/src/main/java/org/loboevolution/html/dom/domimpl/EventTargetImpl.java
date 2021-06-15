@@ -51,6 +51,7 @@ import org.loboevolution.html.node.events.EventTarget;
 
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
+import org.w3c.dom.events.EventException;
 
 /**
  * <p>EventTargetImpl class.</p>
@@ -209,6 +210,11 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 				}
 			}
 		}
+		return false;
+	}
+
+	@Override
+	public boolean dispatchEvent(Event evt) throws EventException {
 		return false;
 	}
 

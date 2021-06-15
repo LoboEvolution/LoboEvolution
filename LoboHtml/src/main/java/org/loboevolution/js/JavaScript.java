@@ -22,7 +22,10 @@ package org.loboevolution.js;
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
 
+import org.loboevolution.html.node.Document;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.Undefined;
 
 /**
@@ -160,6 +163,25 @@ public class JavaScript {
 				return jow;
 			}
 		}
+	}
+
+	public void defineElementClass(Scriptable scope, final Document document, final String jsClassName, final String elementName, Class<?> javaClass) {
+		JavaInstantiator ji = () -> {
+			Document d = document;
+			if (d == null) {
+				throw new IllegalStateException("Document not set in current context.");
+			}
+			return d.createElement(elementName);
+		};
+		JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
+		Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, ji);
+		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
+	}
+
+	public void defineJsObject(Scriptable scope, final String jsClassName, Class<?> javaClass, JavaInstantiator instantiator) {
+		JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
+		Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, instantiator);
+		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
 	}
 	
 	private boolean isBoxClass(Class clazz) {

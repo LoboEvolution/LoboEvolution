@@ -125,20 +125,6 @@ public class HistoryImpl extends AbstractScriptableDelegate implements History {
 		}
 	}
 
-	/**
-	 * <p>
-	 * go.
-	 * </p>
-	 *
-	 * @param url a {@link java.lang.String} object.
-	 */
-	public void go(String url) {
-		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
-		if (ctx != null) {
-			ctx.goToHistoryURL(url);
-		}
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public ScrollRestoration getScrollRestoration() {

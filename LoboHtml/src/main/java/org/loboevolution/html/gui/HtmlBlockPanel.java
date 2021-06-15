@@ -852,10 +852,10 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * <p>scrollBy.</p>
 	 *
-	 * @param xOffset a int.
-	 * @param yOffset a int.
+	 * @param xOffset a {@link java.lang.Double} object.
+	 * @param yOffset a {@link java.lang.Double} object.
 	 */
-	public void scrollBy(int xOffset, int yOffset) {
+	public void scrollBy(double xOffset, double yOffset) {
 		final RBlock block = this.rblock;
 		if (block != null) {
 			if (xOffset != 0) {

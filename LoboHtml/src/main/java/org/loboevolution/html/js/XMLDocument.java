@@ -62,6 +62,7 @@ import org.loboevolution.jsenum.DocumentReadyState;
 import org.loboevolution.jsenum.VisibilityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
+import org.w3c.dom.events.EventException;
 
 /**
  * <p>
@@ -596,6 +597,11 @@ public class XMLDocument implements Document {
 	public boolean dispatchEvent(Node element, Event evt) {
 
 		return doc.dispatchEvent(element, evt);
+	}
+
+	@Override
+	public boolean dispatchEvent(Event evt) throws EventException {
+		return doc.dispatchEvent(evt);
 	}
 
 	/** {@inheritDoc} */
