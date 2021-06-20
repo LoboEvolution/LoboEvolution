@@ -22,9 +22,6 @@ package org.loboevolution.html.node.css;
 
 /**
  * <p>CSS2Properties interface.</p>
- *
- *
- *
  */
 public interface CSS2Properties {
 

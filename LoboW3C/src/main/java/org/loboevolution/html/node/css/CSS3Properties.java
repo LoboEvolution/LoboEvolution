@@ -24,9 +24,6 @@ package org.loboevolution.html.node.css;
  * <p>
  * CSS3Properties interface.
  * </p>
- *
- *
- *
  */
 public interface CSS3Properties extends CSS2Properties {
 
