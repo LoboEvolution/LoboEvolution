@@ -335,10 +335,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>getChildrenArray.</p>
 	 *
-	 * @return an array of {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} objects.
+	 * @return an array of {@link org.loboevolution.html.dom.nodeimpl.NodeListImpl} objects.
 	 */
-	public NodeImpl[] getChildrenArray() {
-		return this.nodeList.toArray();
+	public NodeListImpl getNodeList() {
+		return nodeList;
 	}
 
 	/**

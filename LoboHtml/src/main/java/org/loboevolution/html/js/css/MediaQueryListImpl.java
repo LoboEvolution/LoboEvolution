@@ -29,9 +29,6 @@ import org.loboevolution.html.style.StyleSheetAggregator;
 
 /**
  * <p>MediaQueryListImpl class.</p>
- *
- *
- *
  */
 public class MediaQueryListImpl implements MediaQueryList {
 

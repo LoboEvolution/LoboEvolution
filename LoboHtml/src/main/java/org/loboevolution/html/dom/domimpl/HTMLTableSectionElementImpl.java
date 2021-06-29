@@ -26,6 +26,8 @@ import org.loboevolution.html.dom.HTMLTableSectionElement;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.w3c.dom.DOMException;
 
+import java.util.Arrays;
+
 /**
  * <p>HTMLTableSectionElementImpl class.</p>
  *
@@ -71,7 +73,7 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getRows() {
-		 return new HTMLCollectionImpl(this, new ElementFilter("TR"));
+		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter("TR")).toArray()));
 	}
 
 	/** {@inheritDoc} */

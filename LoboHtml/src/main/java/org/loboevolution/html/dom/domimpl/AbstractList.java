@@ -19,28 +19,20 @@
  */
 package org.loboevolution.html.dom.domimpl;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.loboevolution.html.dom.NodeFilter;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
-import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 /**
  * <p>AbstractList class.</p>
- *
- *
- *
  */
-public class AbstractList extends AbstractScriptableDelegate implements List<Node> {
+public class AbstractList<E> extends AbstractScriptableDelegate implements List<E> {
 
-    private List<Node> nodeList = Collections.synchronizedList(new ArrayList<>());
+    private List<E> list = Collections.synchronizedList(new ArrayList<>());
 	
 	/**
 	 * <p>Constructor for AbstractList.</p>
@@ -54,8 +46,8 @@ public class AbstractList extends AbstractScriptableDelegate implements List<Nod
 	 *
 	 * @param rootNode a {@link org.loboevolution.html.node.Node} object.
 	 */
-	public AbstractList(Node rootNode) {
-		nodeList.add(rootNode);
+	public AbstractList(E rootNode) {
+		list.add(rootNode);
 	}
 	
 	/**
@@ -63,167 +55,156 @@ public class AbstractList extends AbstractScriptableDelegate implements List<Nod
 	 * Constructor for AbstractList.
 	 * </p>
 	 *
-	 * @param nodeList a {@link java.util.List} object.
+	 * @param list a {@link java.util.List} object.
 	 */
-	public AbstractList(List<Node> nodeList) {
-		this.nodeList = nodeList;
-	}
-	
-	/**
-	 * <p>Constructor for AbstractList.</p>
-	 *
-	 * @param rootNode a {@link org.loboevolution.html.node.Node} object.
-	 * @param nodeFilter a {@link org.loboevolution.html.dom.NodeFilter} object.
-	 */
-	public AbstractList(Node rootNode, NodeFilter nodeFilter) {
-		final NodeImpl impl = (NodeImpl)rootNode;
-		nodeList = ((NodeListImpl)impl.getNodeList(nodeFilter)).toList();
+	public AbstractList(List<E> list) {
+		this.list = list;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int size() {
-		return nodeList.size();
+		return list.size();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean isEmpty() {
-		return nodeList.isEmpty();
+		return list.isEmpty();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean contains(Object o) {
-		return nodeList.contains(o);
+		return list.contains(o);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Iterator<Node> iterator() {
-		return nodeList.iterator();
+	public Iterator<E> iterator() {
+		return list.iterator();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node[] toArray() {
-		return nodeList.stream().toArray(Node[]::new);
+	public E[] toArray() {
+		return (E[]) list.toArray();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public <T> T[] toArray(T[] a) {
-		return nodeList.toArray(a);
+		return list.toArray(a);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean add(Node e) {
-		return nodeList.add(e);
+	public boolean add(E e) {
+		return list.add(e);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean remove(Object o) {
-		return nodeList.remove(o);
+		return list.remove(o);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		return nodeList.containsAll(c);
+		return list.containsAll(c);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean addAll(Collection<? extends Node> c) {
-		return nodeList.addAll(c);
+	public boolean addAll(Collection<? extends E> c) {
+		return list.addAll(c);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean addAll(int index, Collection<? extends Node> c) {
-		return nodeList.addAll(index, c);
+	public boolean addAll(int index, Collection<? extends E> c) {
+		return list.addAll(index, c);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		return nodeList.removeAll(c);
+		return list.removeAll(c);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		return nodeList.retainAll(c);
+		return list.retainAll(c);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void clear() {
-		nodeList.clear();
+		list.clear();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node get(int index) {
-		return nodeList.get(index);
+	public E get(int index) {
+		return list.get(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node set(int index, Node element) {
-		return nodeList.set(index, element);
+	public E set(int index, E element) {
+		return list.set(index, element);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void add(int index, Node element) {
-		nodeList.add(index, element);
+	public void add(int index, E element) {
+		list.add(index, element);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node remove(int index) {
-		return nodeList.remove(index);
+	public E remove(int index) {
+		return list.remove(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int indexOf(Object o) {
-		return nodeList.indexOf(o);
+		return list.indexOf(o);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int lastIndexOf(Object o) {
-		return nodeList.lastIndexOf(o);
+		return list.lastIndexOf(o);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public ListIterator<Node> listIterator() {
-		return nodeList.listIterator();
+	public ListIterator<E> listIterator() {
+		return list.listIterator();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public ListIterator<Node> listIterator(int index) {
-		return nodeList.listIterator(index);
+	public ListIterator<E> listIterator(int index) {
+		return list.listIterator(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public List<Node> subList(int fromIndex, int toIndex) {
-		return nodeList.subList(fromIndex, toIndex);
+	public List<E> subList(int fromIndex, int toIndex) {
+		return list.subList(fromIndex, toIndex);
 	}
 	
 	/**
-	 * <p>Getter for the field <code>nodeList</code>.</p>
+	 * <p>Getter for the field <code>list</code>.</p>
 	 *
 	 * @return a {@link java.util.List} object.
 	 */
-	protected List<Node> getNodeList() {
-		return nodeList;
+	protected List<E> getList() {
+		return list;
 	}
 }

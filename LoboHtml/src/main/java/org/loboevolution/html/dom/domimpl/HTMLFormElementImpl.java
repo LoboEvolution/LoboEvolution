@@ -25,6 +25,7 @@ package org.loboevolution.html.dom.domimpl;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.loboevolution.html.dom.HTMLCollection;
@@ -89,7 +90,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	public HTMLCollection getElements() {
 		HTMLCollection elements = this.elements;
 		if (elements == null) {
-			elements = new HTMLCollectionImpl(this, new InputFilter());
+			elements = new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new InputFilter()).toArray()));
 			this.elements = elements;
 		}
 		return elements;

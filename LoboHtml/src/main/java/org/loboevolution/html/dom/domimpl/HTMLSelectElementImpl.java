@@ -27,10 +27,12 @@ import org.loboevolution.html.dom.filter.OptionFilter;
 import org.loboevolution.html.dom.input.SelectOption;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.ValidityState;
 import org.mozilla.javascript.Undefined;
 
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -85,7 +87,10 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public HTMLOptionsCollection getOptions() {
-		if (options == null ) options = new HTMLOptionsCollectionImpl(this, new OptionFilter());
+		if (options == null ) {
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new OptionFilter()).toArray()));
+			options = new HTMLOptionsCollectionImpl(this, list);
+		}
 		return options;
 	}
 
@@ -146,7 +151,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 			}
 			if (getOptions().getLength() == 1 && !isMultiple()) {
 				HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
-				options.stream().findFirst().ifPresent(option -> { ((HTMLOptionElement) option).setSelected(true); });
+				options.stream().findFirst().ifPresent(option -> ((HTMLOptionElement) option).setSelected(true));
 			}
 			if (selectOption != null) selectOption.resetItemList(this);
 		}

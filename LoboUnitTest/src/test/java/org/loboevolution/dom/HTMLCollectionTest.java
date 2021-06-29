@@ -86,10 +86,10 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
     /**
-     * <p>for_in.</p>
+     * <p>forin.</p>
      */
     @Test
-    public void for_in() {
+    public void forin() {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  function test() {\n"
                 + "    var arr = new Array();\n"
@@ -111,10 +111,10 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
     /**
-     * <p>for_in2.</p>
+     * <p>forin2.</p>
      */
     @Test
-    public void for_in2() {
+    public void forin2() {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  function test() {\n"
                 + "    var form = document.getElementById('myForm');\n"
@@ -130,11 +130,11 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "<form id='myForm'>\n"
-                + "  <input type='text' id='id1' name='val1' id='input_enabled' value='4'>\n"
+                + "  <input type='text' id='id1' name='val1' id='inputenabled' value='4'>\n"
                 + "  <div>This is not a form element</div>\n"
-                + "  <input type='text' name='val2' id='input_disabled' disabled='disabled' value='5'>\n"
-                + "  <input type='submit' name='first_submit' value='Commit it!'>\n"
-                + "  <input type='submit' id='second_submit' value='Delete it!'>\n"
+                + "  <input type='text' name='val2' id='inputdisabled' disabled='disabled' value='5'>\n"
+                + "  <input type='submit' name='firstsubmit' value='Commit it!'>\n"
+                + "  <input type='submit' id='secondsubmit' value='Delete it!'>\n"
                 + "  <input type='text' name='action' value='blah'>\n"
                 + "</form>\n"
                 + "</body></html>";
@@ -258,15 +258,15 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
     /**
-     * <p>array_prototype.</p>
+     * <p>arrayprototype.</p>
      */
     @Test
-    public void array_prototype() {
+    public void arrayprototype() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    alert(typeof Object.prototype.__defineGetter__);\n"
-                + "    alert(typeof Object.prototype.__lookupGetter__);\n"
+                + "    alert(typeof Object.prototype.defineGetter);\n"
+                + "    alert(typeof Object.prototype.lookupGetter);\n"
                 + "    alert(typeof Array.prototype.indexOf);\n"
                 + "    alert(typeof Array.prototype.map);\n"
                 + "  }\n"
@@ -279,15 +279,15 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
     /**
-     * <p>array_prototype_standards.</p>
+     * <p>arrayprototypestandards.</p>
      */
     @Test
-    public void array_prototype_standards() {
+    public void arrayprototypestandards() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    alert(typeof Object.prototype.__defineGetter__);\n"
-                + "    alert(typeof Object.prototype.__lookupGetter__);\n"
+                + "    alert(typeof Object.prototype.defineGetter);\n"
+                + "    alert(typeof Object.prototype.lookupGetter);\n"
                 + "    alert(typeof Array.prototype.indexOf);\n"
                 + "    alert(typeof Array.prototype.map);\n"
                 + "  }\n"
@@ -317,83 +317,83 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
     /**
-     * <p>item_Unknown.</p>
+     * <p>itemUnknown.</p>
      */
     @Test
-    public void item_Unknown() {
+    public void itemUnknown() {
         item("'foo'", "b1-button1");
     }
 
     /**
-     * <p>item_ById.</p>
+     * <p>itemById.</p>
      */
     @Test
-    public void item_ById() {
+    public void itemById() {
         item("'b2'", "b1-button1");
     }
 
     /**
-     * <p>item_ByName.</p>
+     * <p>itemByName.</p>
      */
     @Test
-    public void item_ByName() {
+    public void itemByName() {
         item("'button2'", "b1-button1");
     }
 
     /**
-     * <p>item_NegativIndex.</p>
+     * <p>itemNegativIndex.</p>
      */
     @Test
-    public void item_NegativIndex() {
+    public void itemNegativIndex() {
         item("-1", null);
     }
 
    /**
-    * <p>item_ZeroIndex.</p>
+    * <p>itemZeroIndex.</p>
     */
    @Test
-   public void item_ZeroIndex() {
+   public void itemZeroIndex() {
         item("0", "b1-button1");
     }
 
     /**
-     * <p>item_ValidIndex.</p>
+     * <p>itemValidIndex.</p>
      */
     @Test
-    public void item_ValidIndex() {
+    public void itemValidIndex() {
         item("1", "b2-button2");
     }
 
     /**
-     * <p>item_DoubleIndex.</p>
+     * <p>itemDoubleIndex.</p>
      */
     @Test
             ()
-    public void item_DoubleIndex() {
+    public void itemDoubleIndex() {
         item("1.1", "b2-button2");
     }
 
     /**
-     * <p>item_InvalidIndex.</p>
+     * <p>itemInvalidIndex.</p>
      */
     @Test
-    public void item_InvalidIndex() {
+    public void itemInvalidIndex() {
         item("2", null);
     }
 
     /**
-     * <p>item_IndexAsString.</p>
+     * <p>itemIndexAsString.</p>
      */
     @Test
-    public void item_IndexAsString() {
+    public void itemIndexAsString() {
         item("'1'", "b2-button2");
     }
 
     /**
-     * <p>item_IndexDoubleAsString.</p>
+     * <p>itemIndexDoubleAsString.</p>
      */
     @Test
-    public void item_IndexDoubleAsString() {
+    public void itemIndexDoubleAsString() {
         item("'1.1'", "b2-button2");
     }
 
@@ -432,74 +432,74 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
     /**
-     * <p>arrayIndex_Unknown.</p>
+     * <p>arrayIndexUnknown.</p>
      */
     @Test
-    public void arrayIndex_Unknown() {
+    public void arrayIndexUnknown() {
         arrayIndex("'foo'", "b2-button2");
     }
 
     /**
-     * <p>arrayIndex_ById.</p>
+     * <p>arrayIndexById.</p>
      */
     @Test
-    public void arrayIndex_ById() {
+    public void arrayIndexById() {
         arrayIndex("'b2'", "b2-button2");
     }
 
     /**
-     * <p>arrayIndex_ByName.</p>
+     * <p>arrayIndexByName.</p>
      */
     @Test
-    public void arrayIndex_ByName() {
+    public void arrayIndexByName() {
         arrayIndex("'button2'", "b2-button2");
     }
 
     /**
-     * <p>arrayIndex_NegativIndex.</p>
+     * <p>arrayIndexNegativIndex.</p>
      */
     @Test
-    public void arrayIndex_NegativIndex() {
+    public void arrayIndexNegativIndex() {
         arrayIndex("-1", "undefined");
     }
 
     /**
-     * <p>arrayIndex_ZeroIndex.</p>
+     * <p>arrayIndexZeroIndex.</p>
      */
     @Test
-    public void arrayIndex_ZeroIndex() {
+    public void arrayIndexZeroIndex() {
         arrayIndex("0", "b1-button1");
     }
 
     /**
-     * <p>arrayIndex_ValidIndex.</p>
+     * <p>arrayIndexValidIndex.</p>
      */
     @Test
-    public void arrayIndex_ValidIndex() {
+    public void arrayIndexValidIndex() {
         arrayIndex("1", "b2-button2");
     }
 
     /**
-     * <p>arrayIndex_DoubleIndex.</p>
+     * <p>arrayIndexDoubleIndex.</p>
      */
     @Test
-    public void arrayIndex_DoubleIndex() {
+    public void arrayIndexDoubleIndex() {
         arrayIndex("1.1",  "undefined");
     }
 
     /**
-     * <p>arrayIndex_InvalidIndex.</p>
+     * <p>arrayIndexInvalidIndex.</p>
      */
     @Test
-    public void arrayIndex_InvalidIndex() {
+    public void arrayIndexInvalidIndex() {
         arrayIndex("2", "undefined");
     }
 
     /**
-     * <p>arrayIndex_IndexAsString.</p>
+     * <p>arrayIndexIndexAsString.</p>
      */
     @Test
-    public void arrayIndex_IndexAsString() {
+    public void arrayIndexIndexAsString() {
         arrayIndex("'2'", "undefined");
     }
 
@@ -538,75 +538,75 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
     /**
-     * <p>functionIndex_Unknown.</p>
+     * <p>functionIndexUnknown.</p>
      */
     @Test
-    public void functionIndex_Unknown() {
+    public void functionIndexUnknown() {
         functionIndex("'foo'","exception");
     }
 
 
     /**
-     * <p>functionIndex_ById.</p>
+     * <p>functionIndexById.</p>
      */
     @Test
-    public void functionIndex_ById() {
+    public void functionIndexById() {
         functionIndex("'b2'","exception");
     }
 
     /**
-     * <p>functionIndex_ByName.</p>
+     * <p>functionIndexByName.</p>
      */
     @Test
-    public void functionIndex_ByName() {
+    public void functionIndexByName() {
         functionIndex("'button2'","exception");
     }
 
     /**
-     * <p>functionIndex_NegativIndex.</p>
+     * <p>functionIndexNegativIndex.</p>
      */
     @Test
-    public void functionIndex_NegativIndex() {
+    public void functionIndexNegativIndex() {
         functionIndex("-1","exception");
     }
 
     /**
-     * <p>functionIndex_ZeroIndex.</p>
+     * <p>functionIndexZeroIndex.</p>
      */
     @Test
-    public void functionIndex_ZeroIndex() {
+    public void functionIndexZeroIndex() {
         functionIndex("0","exception");
     }
 
     /**
-     * <p>functionIndex_ValidIndex.</p>
+     * <p>functionIndexValidIndex.</p>
      */
     @Test
-    public void functionIndex_ValidIndex() {
+    public void functionIndexValidIndex() {
         functionIndex("1","exception");
     }
 
     /**
-     * <p>functionIndex_DoubleIndex.</p>
+     * <p>functionIndexDoubleIndex.</p>
      */
     @Test
-    public void functionIndex_DoubleIndex() {
+    public void functionIndexDoubleIndex() {
         functionIndex("1.1","exception");
     }
 
     /**
-     * <p>functionIndex_InvalidIndex.</p>
+     * <p>functionIndexInvalidIndex.</p>
      */
     @Test
-    public void functionIndex_InvalidIndex() {
+    public void functionIndexInvalidIndex() {
         functionIndex("2","exception");
     }
 
     /**
-     * <p>functionIndex_IndexAsString.</p>
+     * <p>functionIndexIndexAsString.</p>
      */
     @Test
-    public void functionIndex_IndexAsString() {
+    public void functionIndexIndexAsString() {
         functionIndex("'2'","exception");
     }
 
@@ -645,106 +645,106 @@ public class HTMLCollectionTest extends LoboUnitTest {
     }
 
     /**
-     * <p>namedItem_Unknown.</p>
+     * <p>namedItemUnknown.</p>
      */
     @Test
-    public void namedItem_Unknown() {
+    public void namedItemUnknown() {
         namedItem("foo", null);
     }
 
     /**
-     * <p>namedItem_ById.</p>
+     * <p>namedItemById.</p>
      */
     @Test
-    public void namedItem_ById() {
+    public void namedItemById() {
         namedItem("button1", "button1-");
     }
 
     /**
-     * <p>namedItem_ByName_formWithoutId.</p>
+     * <p>namedItemByNameformWithoutId.</p>
      */
     @Test
-    public void namedItem_ByName_formWithoutId() {
+    public void namedItemByNameformWithoutId() {
         namedItem("button2", "-button2");
     }
 
     /**
-     * <p>namedItem_ByName.</p>
+     * <p>namedItemByName.</p>
      */
     @Test
-    public void namedItem_ByName() {
+    public void namedItemByName() {
         namedItem("button3", "b3-button3");
     }
 
     /**
-     * <p>namedItem_DuplicateId.</p>
+     * <p>namedItemDuplicateId.</p>
      */
     @Test
-    public void namedItem_DuplicateId() {
-        namedItem("b4", "b4-button4_1");
+    public void namedItemDuplicateId() {
+        namedItem("b4", "b4-button41");
     }
 
     /**
-     * <p>namedItem_DuplicateName.</p>
+     * <p>namedItemDuplicateName.</p>
      */
     @Test
-    public void namedItem_DuplicateName() {
-        namedItem("button5", "b5_1-button5");
+    public void namedItemDuplicateName() {
+        namedItem("button5", "b51-button5");
     }
 
     /**
-     * <p>namedItem_DuplicateIdName.</p>
+     * <p>namedItemDuplicateIdName.</p>
      */
     @Test
-    public void namedItem_DuplicateIdName() {
+    public void namedItemDuplicateIdName() {
         namedItem("button6", "b6-button6");
     }
 
     /**
-     * <p>namedItem_ZeroIndex.</p>
+     * <p>namedItemZeroIndex.</p>
      */
     @Test
-    public void namedItem_ZeroIndex() {
+    public void namedItemZeroIndex() {
         item("0", "b1-button1");
     }
 
     /**
-     * <p>namedItem_ValidIndex.</p>
+     * <p>namedItemValidIndex.</p>
      */
     @Test
-    public void namedItem_ValidIndex() {
+    public void namedItemValidIndex() {
         item("1", "b2-button2");
     }
 
     /**
-     * <p>namedItem_DoubleIndex.</p>
+     * <p>namedItemDoubleIndex.</p>
      */
     @Test
-    public void namedItem_DoubleIndex() {
+    public void namedItemDoubleIndex() {
         item("1.1", "b2-button2");
     }
 
     /**
-     * <p>namedItem_InvalidIndex.</p>
+     * <p>namedItemInvalidIndex.</p>
      */
     @Test
-    public void namedItem_InvalidIndex() {
+    public void namedItemInvalidIndex() {
         item("200", null);
     }
 
     /**
-     * <p>namedItem_IndexAsString.</p>
+     * <p>namedItemIndexAsString.</p>
      */
     @Test
-    public void namedItem_IndexAsString() {
+    public void namedItemIndexAsString() {
         item("'1'", "b2-button2");
     }
 
     /**
-     * <p>namedItem_IndexDoubleAsString.</p>
+     * <p>namedItemIndexDoubleAsString.</p>
      */
     @Test
-    public void namedItem_IndexDoubleAsString() {
+    public void namedItemIndexDoubleAsString() {
         item("'1.1'", "b2-button2");
     }
 
@@ -773,12 +773,12 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "  <button id='button1'></button>\n"
                 + "  <button name='button2'></button>\n"
                 + "  <button id='b3' name='button3'></button>\n"
-                + "  <button id='b4' name='button4_1'></button>\n"
-                + "  <button id='b4' name='button4_2'></button>\n"
-                + "  <button id='b5_1' name='button5'></button>\n"
-                + "  <button id='b5_2' name='button5'></button>\n"
+                + "  <button id='b4' name='button41'></button>\n"
+                + "  <button id='b4' name='button42'></button>\n"
+                + "  <button id='b51' name='button5'></button>\n"
+                + "  <button id='b52' name='button5'></button>\n"
                 + "  <button id='b6' name='button6'></button>\n"
-                + "  <button id='button6' name='button6_2'></button>\n"
+                + "  <button id='button6' name='button62'></button>\n"
                 + "</body></html>";
 
         final String[] messages = {message};

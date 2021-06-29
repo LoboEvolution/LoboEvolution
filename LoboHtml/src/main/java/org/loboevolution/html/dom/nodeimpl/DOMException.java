@@ -67,12 +67,5 @@ public class DOMException extends RuntimeException {
 		return name;
 	}
 	
-	/**
-	 * <p>toString.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String toString() {
-		return "[Object DOMException]";
-	}
+
 }

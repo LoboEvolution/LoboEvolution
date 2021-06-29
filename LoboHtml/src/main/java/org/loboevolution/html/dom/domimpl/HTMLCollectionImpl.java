@@ -21,7 +21,6 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
@@ -33,9 +32,9 @@ import java.util.Optional;
 /**
  * <p>HTMLCollectionImpl class.</p>
  */
-public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
+public class HTMLCollectionImpl extends AbstractList<Node> implements HTMLCollection {
 	
-	private NodeImpl rootNode;
+	private final NodeImpl rootNode;
 
 
 	 /**
@@ -52,21 +51,11 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 	 * <p>
 	 * Constructor for HTMLCollectionImpl.
 	 * </p>
-	 *
-	 * @param nodeList a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 */
-	public HTMLCollectionImpl(List<Node> nodeList) {
-		super(nodeList);
-	}
-	
-	/**
-	 * <p>Constructor for HTMLCollectionImpl.</p>
-	 *
 	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param nodeFilter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param nodeList a {@link java.util.List} object.
 	 */
-	public HTMLCollectionImpl(NodeImpl rootNode, NodeFilter nodeFilter) {
-		super(rootNode, nodeFilter);
+	public HTMLCollectionImpl(NodeImpl rootNode, List<Node> nodeList) {
+		super(nodeList);
 		this.rootNode = rootNode;
 	}
 
@@ -80,9 +69,9 @@ public class HTMLCollectionImpl extends AbstractList implements HTMLCollection {
 	@Override
 	public Node item(Object index) {
 		try {
-			Double idx = Double.parseDouble(index.toString());
+			double idx = Double.parseDouble(index.toString());
 			if (idx >= getLength() || idx == -1) return null;
-			return this.get(idx.intValue());
+			return this.get((int) idx);
 		} catch (NumberFormatException e) {
 			return this.get(0);
 		}

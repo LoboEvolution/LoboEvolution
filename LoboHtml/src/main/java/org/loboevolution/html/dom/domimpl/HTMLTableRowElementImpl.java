@@ -22,23 +22,20 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLTableCellElement;
 import org.loboevolution.html.dom.HTMLTableRowElement;
 import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.node.Code;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableRowRenderState;
 
-import org.loboevolution.html.node.Code;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * <p>HTMLTableRowElementImpl class.</p>
@@ -74,8 +71,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	public void deleteCell(int index) {	
 		int trcount = 0;
 		if (index == -1) index = this.nodeList.size() -1;
-		for (Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
-			Node node = i.next();
+		for (Node node : nodeList) {
 			if ("TD".equalsIgnoreCase(node.getNodeName())) {
 				if (trcount == index) {
 					removeChildAt(nodeList.indexOf(node));
@@ -117,10 +113,10 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 					list.add(node);
 				}
 			});
-			return new HTMLCollectionImpl(list);
+			return new HTMLCollectionImpl(this, list);
 		}
 
-		return new HTMLCollectionImpl(list.stream().filter(node -> "TD".equalsIgnoreCase(node.getNodeName())).collect(Collectors.toList()));
+		return new HTMLCollectionImpl(this, list.stream().filter(node -> "TD".equalsIgnoreCase(node.getNodeName())).collect(Collectors.toList()));
 	}
 
 	/** {@inheritDoc} */
@@ -181,11 +177,11 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLTableCellElementImpl insertCell(Object index) throws Exception  {
+	public HTMLTableCellElementImpl insertCell(Object index) {
 		return this.insertCell(index, "TD");
 	}
 
-	private HTMLTableCellElementImpl insertCell(Object objIndex, String tagName)  throws Exception {
+	private HTMLTableCellElementImpl insertCell(Object objIndex, String tagName) {
 		final Document doc = this.document;
 		if (doc == null) {
 			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");

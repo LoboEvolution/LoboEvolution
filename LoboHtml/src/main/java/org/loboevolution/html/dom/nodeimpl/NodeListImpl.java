@@ -30,11 +30,8 @@ import org.loboevolution.html.node.NodeList;
 
 /**
  * <p>NodeListImpl class.</p>
- *
- *
- *
  */
-public class NodeListImpl extends AbstractList implements NodeList {
+public class NodeListImpl extends AbstractList<Node> implements NodeList {
 
 	/**
 	 * <p>Constructor for NodeListImpl.</p>
@@ -73,10 +70,10 @@ public class NodeListImpl extends AbstractList implements NodeList {
 	/**
 	 * <p>toArray.</p>
 	 *
-	 * @return an array of {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} objects.
+	 * @return an array of {@link org.loboevolution.html.node.Node} objects.
 	 */
-	public NodeImpl[] toArray() {
-		return this.toArray(new NodeImpl[0]);
+	public Node[] toArray() {
+		return this.toArray(new Node[0]);
 	}
 	
 	/**

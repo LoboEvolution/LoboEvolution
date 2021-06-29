@@ -19,25 +19,6 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.SwingUtilities;
-
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.control.HrControl;
@@ -50,6 +31,8 @@ import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
 import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
@@ -58,8 +41,14 @@ import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.FloatingInfo;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A substantial portion of the HTML rendering logic of the package can be found
@@ -1168,36 +1157,38 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private void layoutChildren(NodeImpl node) {
-		final NodeImpl[] childrenArray = node.getChildrenArray();
-		if (childrenArray != null) {
-			for (NodeImpl child : childrenArray) {
+		final NodeListImpl nodeList = node.getNodeList();
+		if (nodeList != null) {
+			nodeList.forEach(nd -> {
+				final NodeImpl child = (NodeImpl) nd;
 				final NodeType nodeType = child.getNodeType();
 				switch (nodeType) {
-				case TEXT_NODE:
-					layoutText(child);
-					break;
-				case ELEMENT_NODE:
-					this.currentLine.addStyleChanger(new RStyleChanger(child));
-					final String nodeName = child.getNodeName().toUpperCase();
-					MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
-					if (ml == null) {
-						ml = miscLayout;
-					}
-					ml.layoutMarkup(this, (HTMLElementImpl) child);
-					this.currentLine.addStyleChanger(new RStyleChanger(node));
-					break;
-				case DOCUMENT_FRAGMENT_NODE:
-					final DocumentFragmentImpl fragment = (DocumentFragmentImpl) child;
-					for (final NodeImpl fragChild : fragment.getChildrenArray()) {
-						layoutChildren(fragChild);
-					}
-					break;
-				case COMMENT_NODE:
-				case PROCESSING_INSTRUCTION_NODE:
-				default:
-					break;
+					case TEXT_NODE:
+						layoutText(child);
+						break;
+					case ELEMENT_NODE:
+						this.currentLine.addStyleChanger(new RStyleChanger(child));
+						final String nodeName = child.getNodeName().toUpperCase();
+						MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
+						if (ml == null) {
+							ml = miscLayout;
+						}
+						ml.layoutMarkup(this, (HTMLElementImpl) child);
+						this.currentLine.addStyleChanger(new RStyleChanger(node));
+						break;
+					case DOCUMENT_FRAGMENT_NODE:
+						final DocumentFragmentImpl fragment = (DocumentFragmentImpl) child;
+						fragment.getNodeList().forEach(fragNode -> {
+							final NodeImpl fragChild = (NodeImpl) fragNode;
+							layoutChildren(fragChild);
+						});
+						break;
+					case COMMENT_NODE:
+					case PROCESSING_INSTRUCTION_NODE:
+					default:
+						break;
 				}
-			}
+			});
 		}
 	}
 

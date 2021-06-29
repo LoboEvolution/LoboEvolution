@@ -21,12 +21,10 @@
 package org.loboevolution.html.dom;
 
 
+import org.loboevolution.html.node.css.CSSStyleSheet;
 
 /**
  * A &lt;style&gt; element. It inherits properties and methods from its parent, HTMLElement, and from LinkStyle.
- *
- *
- *
  */
 public interface HTMLStyleElement extends HTMLElement {
 
@@ -66,7 +64,7 @@ public interface HTMLStyleElement extends HTMLElement {
 	/**
 	 * <p>setDisabled.</p>
 	 *
-	 * @param disabled a boolean.
+	 * @param disabled a {@link java.lang.Boolean} object.
 	 */
 	void setDisabled(boolean disabled);
 
@@ -74,8 +72,16 @@ public interface HTMLStyleElement extends HTMLElement {
 	/**
 	 * <p>isDisabled.</p>
 	 *
-	 * @return a boolean.
+	 * @return a {@link java.lang.Boolean} object.
 	 */
 	boolean isDisabled();
+
+	/**
+	 * <p>isDisabled.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.node.css.CSSStyleSheet} object.
+	 */
+	CSSStyleSheet getStyleSheet();
+
 
 }

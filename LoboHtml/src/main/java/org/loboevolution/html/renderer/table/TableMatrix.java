@@ -24,15 +24,12 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.CaptionFilter;
 import org.loboevolution.html.dom.filter.ColumnsFilter;
+import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderer.FrameContext;
@@ -122,7 +119,7 @@ class TableMatrix {
 
 		this.tableWidthLength = TableMatrixSizes.getWidthLength(this.tableElement, availWidth);
 		
-		HTMLCollectionImpl captionList = new HTMLCollectionImpl(tableElement, new CaptionFilter());
+		HTMLCollectionImpl captionList = new HTMLCollectionImpl(tableElement, Arrays.asList(tableElement.getNodeList(new CaptionFilter()).toArray()));
 		if (captionList.getLength() > 0) {
 			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.item(0);
 			this.captionElement = capt;

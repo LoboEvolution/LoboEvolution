@@ -22,11 +22,13 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
+import org.loboevolution.html.dom.filter.ScriptFilter;
 import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Code;
@@ -193,7 +195,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getRows() {
-        return new HTMLCollectionImpl(this, new ElementFilter("TR"));
+		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter("TR")).toArray()));
 	}
 
 	/** {@inheritDoc} */
@@ -225,7 +227,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection gettBodies() {
-		return new HTMLCollectionImpl(this, new ElementFilter("TBODY"));
+		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter("TBODY")).toArray()));
 	}
 
 	/** {@inheritDoc} */

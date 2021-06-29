@@ -22,23 +22,25 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.filter.HeadFilter;
+import org.loboevolution.html.dom.filter.OptionFilter;
 import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.io.LocalErrorHandler;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
+import org.loboevolution.html.js.css.CSSStyleSheetImpl;
+import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.css.StyleSheetList;
 import org.loboevolution.html.node.views.DocumentView;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
@@ -91,7 +93,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private StyleSheetAggregator styleSheetAggregator = null;
 
-    private final CSSStyleSheetListImpl styleSheets = new CSSStyleSheetListImpl();
+    private final StyleSheetListImpl styleSheets = new StyleSheetListImpl();
 
 	private final UserAgentContext ucontext;
 
@@ -223,11 +225,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getbaseURI()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String getBaseURI() {
@@ -331,7 +328,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
     @Override
 	public HTMLHeadElementImpl getHead() {
 		synchronized (this) {
-			HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new HeadFilter()).toArray()));
+			HTMLCollection collection = new HTMLCollectionImpl(this, list);
 			if (collection.getLength() > 0) {
 				return (HTMLHeadElementImpl) collection.item(0);
 			} else {
@@ -345,7 +343,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public HTMLElement getBody() {
 		synchronized (this) {
 			if (this.body == null) {
-				HTMLCollection collection = new HTMLCollectionImpl(this, new BodyFilter());
+				final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new BodyFilter()).toArray()));
+				HTMLCollection collection = new HTMLCollectionImpl(this, list);
 				if (collection.getLength() > 0) {
 					return (HTMLElement) collection.item(0);
 				} else {
@@ -380,7 +379,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			if (ssa == null) {
 				ssa = new StyleSheetAggregator();
 				try {
-                    ssa.addStyleSheets(this.styleSheets.getCSSStyleSheets());
+                    ssa.addStyleSheets(this.styleSheets);
 				} catch (Exception mfu) {
 					logger.log(Level.WARNING, "getStyleSheetAggregator()", mfu);
 				}
@@ -393,9 +392,9 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
     /**
      * <p>Getter for the field styleSheets.</p>
      *
-     * @return a {@link com.gargoylesoftware.css.dom.CSSStyleSheetListImpl} object.
+     * @return a {@link org.loboevolution.html.node.css.StyleSheetList} object.
      */
-    public CSSStyleSheetListImpl getStyleSheets() {
+    public StyleSheetList getStyleSheets() {
 		return this.styleSheets;
 	}
 
@@ -463,7 +462,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			setTitle(null);
 			setBaseURI(null);
 			setDefaultTarget(null);
-            this.styleSheets.getCSSStyleSheets().clear();
+            this.styleSheets.clear();
 			this.styleSheetAggregator = null;
 			reader = this.reader;
 		}

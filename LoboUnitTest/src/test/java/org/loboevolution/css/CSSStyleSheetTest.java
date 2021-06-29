@@ -37,7 +37,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  alert(stylesheet.owningElement == myStyle);\n"
                 + "}\n"
                 + "</script>\n"
-                + "<style id='myStyle' type='text/css'></style>\n"
+                + "<style id='myStyle' type='text/css'>body{color:red;}</style>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
         final String[] messages = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false"};
@@ -71,80 +71,6 @@ public class CSSStyleSheetTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
-
-    @Test
-    public void addRule() {
-        final String html = "<html>\n"
-                + "<head>\n"
-                + "<script>\n"
-                + "  function doTest() {\n"
-                + "    var f = document.getElementById('myStyle');\n"
-                + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                + "    var rules = s.cssRules || s.rules;\n"
-                + "    alert(rules.length);\n"
-                + "    alert(s.addRule == undefined);\n"
-                + "    if (s.addRule) {\n"
-                + "      alert(s.addRule('div', 'color: red;'));\n"
-                + "      alert(rules[rules.length - 1].selectorText);\n"
-                + "      alert(rules[rules.length - 1].style.cssText);\n"
-                + "    }\n"
-                + "    alert(rules.length);\n"
-                + "  }\n"
-                + "</script>\n"
-                + "<style id='myStyle'>p { vertical-align:top }</style>\n"
-                + "</head>\n"
-                + "<body onload='doTest()'>\n"
-                + "</body></html>";
-        final String[] messages = {"1", "false", "-1", "div", "color: red;", "2"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void addRuleInvalidRule() {
-        final String html = "<html>\n"
-                + "<head>\n"
-                + "<script>\n"
-                + "  function doTest() {\n"
-                + "    var f = document.getElementById('myStyle');\n"
-                + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                + "    var rules = s.cssRules || s.rules;\n"
-                + "    alert(rules.length);\n"
-                + "    if (s.addRule) {\n"
-                + "      alert(s.addRule('div', 'invalid'));\n"
-                + "      alert(rules[rules.length - 1].selectorText);\n"
-                + "      alert(rules[rules.length - 1].style.cssText);\n"
-                + "    }\n"
-                + "    alert(rules.length);\n"
-                + "  }\n"
-                + "  </script>\n"
-                + "  <style id='myStyle'>p { vertical-align: top } h1 { color: blue; }</style>\n"
-                + "</head>\n"
-                + "<body onload='doTest()'>\n"
-                + "</body></html>";
-        final String[] messages = {"2", "-1", "div", "", "3"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void addInvalidRule() {
-        final String html = "<html><head><script>\n"
-                + "function doTest() {\n"
-                + "  var f = document.getElementById('myStyle');\n"
-                + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                + "  var rules = s.cssRules || s.rules;\n"
-                + "  try {\n"
-                + "    if (s.addRule)\n"
-                + "      s.addRule('.testStyle1;', '', 1);\n"
-                + "    alert('added');\n"
-                + "  } catch(err) { alert('exception'); }\n"
-                + "}</script>\n"
-                + "<style id='myStyle'></style>\n"
-                + "</head><body onload='doTest()'>\n"
-                + "</body></html>";
-        final String[] messages = {"exception"};
-        checkHtmlAlert(html, messages);
-    }
-
     @Test
     public void insertRule() {
         final String html = "<html>\n"
@@ -168,7 +94,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
                 + "</body></html>";
-        final String[] messages = {"1", "false", "0", "div", "color: red;", "2"};
+        final String[] messages = {"1", "false", "0", "div", "color: red", "2"};
         checkHtmlAlert(html, messages);
     }
 
@@ -212,7 +138,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "    alert('inserted');\n"
                 + "  } catch(err) { alert('exception'); }\n"
                 + "}</script>\n"
-                + "<style id='myStyle'></style>\n"
+                + "<style id='myStyle'>color: red</style>\n"
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
         final String[] messages = {"exception"};
@@ -220,7 +146,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    public void removeRule_deleteRule() {
+    public void removeRuledeleteRule() {
         final String html = "<html><head><script>\n"
                 + "function doTest() {\n"
                 + "  var f = document.getElementById('myStyle');\n"
@@ -228,11 +154,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  var rules = s.cssRules || s.rules;\n"
                 + "  alert(rules.length);\n"
                 + "  alert(s.deleteRule == undefined);\n"
-                + "  alert(s.removeRule == undefined);\n"
-                + "  if (s.deleteRule)\n"
-                + "    alert(s.deleteRule(0));\n"
-                + "  else\n"
-                + "    alert(s.removeRule(0));\n"
+                + "  alert(s.deleteRule(0));\n"
                 + "  alert(rules.length);\n"
                 + "  alert(rules[0].selectorText);\n"
                 + "  alert(rules[0].style.cssText);\n"
@@ -240,7 +162,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "<style id='myStyle'>p { vertical-align:top } div { color: red; }</style>\n"
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
-        final String[] messages = {"2", "false", "false", "undefined", "1", "div", "color: red;"};
+        final String[] messages = {"2", "false", null, "1", "div", "color: red"};
         checkHtmlAlert(html, messages);
     }
 
@@ -252,14 +174,11 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
                 + "  var rules = s.cssRules || s.rules;\n"
                 + "  try {\n"
-                + "    if (s.deleteRule)\n"
-                + "      s.deleteRule(19);\n"
-                + "    else\n"
-                + "      s.removeRule(19);\n"
+                + "    s.deleteRule(19);\n"
                 + "    alert('deleted');\n"
                 + "  } catch(err) { alert('exception'); }\n"
                 + "}</script>\n"
-                + "<style id='myStyle'></style>\n"
+                + "<style id='myStyle'>color: red</style>\n"
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
         final String[] messages = {"exception"};
@@ -277,8 +196,6 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  try {\n"
                 + "    if (s.deleteRule)\n"
                 + "      s.deleteRule(0);\n"
-                + "    else\n"
-                + "      s.removeRule(0);\n"
                 + "    alert(rules.length);\n"
                 + "    alert(rules[0].selectorText);\n"
                 + "    alert(rules[0].style.cssText);\n"
@@ -291,7 +208,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "</style>\n"
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
-        final String[] messages = {"2", "1", "div", "color: red;"};
+        final String[] messages = {"2", "1", "div", "color: red"};
         checkHtmlAlert(html, messages);
     }
 
@@ -306,8 +223,6 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  try {\n"
                 + "    if (s.deleteRule)\n"
                 + "      s.deleteRule(1);\n"
-                + "    else\n"
-                + "      s.removeRule(1);\n"
                 + "    alert(rules.length);\n"
                 + "    alert(rules[0].selectorText);\n"
                 + "    alert(rules[0].style.cssText);\n"
@@ -342,10 +257,10 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "    alert(rules[1].style.cssText);\n"
                 + "  }\n"
                 + "}</script>\n"
-                + "<style id='myStyle'></style>\n"
+                + "<style id='myStyle'>color: red</style>\n"
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
-        final String[] messages = {"2", ".testStyleDef", "height: 42px;", ".testStyle", "width: 24px;"};
+        final String[] messages = {"2", "*.testStyleDef", "height: 42px", "*.testStyle", "width: 24px"};
         checkHtmlAlert(html, messages);
     }
 
@@ -371,20 +286,20 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    public void css2_root() {
+    public void css2root() {
         final String[] messages = {"true", "false"};
         doTest(":root", "", messages);
     }
 
     @Test
-    public void css3_not() {
+    public void css3not() {
         final String[] messages = {"true", "true", "false"};
         doTest(":not(span)", "<span id='elt2'></span>", messages);
     }
 
 
     @Test
-    public void css3_enabled() {
+    public void css3enabled() {
         final String htmlSnippet = "<input id='elt2'>\n"
                 + "<input id='elt3' disabled>\n"
                 + "<input id='elt4' type='checkbox'>\n"
@@ -396,7 +311,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    public void css3_disabled() {
+    public void css3disabled() {
         final String htmlSnippet = "<input id='elt2' disabled>\n"
                 + "<input id='elt3'>\n"
                 + "<input id='elt4' type='checkbox' disabled>\n"
@@ -409,7 +324,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    public void css3_checked() {
+    public void css3checked() {
         final String htmlSnippet = "  <input id='elt2'>\n"
                 + "  <input id='elt3' checked>\n"
                 + "  <input id='elt4' type='checkbox' checked>\n"
@@ -422,7 +337,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    public void css3_required() {
+    public void css3required() {
         final String htmlSnippet =
                 "  <input id='elt2' required>\n"
                         + "  <input id='elt3' type='text'>\n"
@@ -436,7 +351,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    public void css3_optional() {
+    public void css3optional() {
         final String htmlSnippet =
                 "  <input id='elt2' required>\n"
                         + "  <input id='elt3' type='text'>\n"
@@ -517,7 +432,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    public void rulePriority_specificity() {
+    public void rulePriorityspecificity() {
         final String html = "<html><head>\n"
                 + "<style>\n"
                 + "div { z-index: 60 }\n"
@@ -538,7 +453,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    public void rulePriority_specificity2() {
+    public void rulePriorityspecificity2() {
         final String html = "<html><head>\n"
                 + "<style>\n"
                 + ".classA .classB .classC { z-index: 60 }\n"
@@ -562,7 +477,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    public void rulePriority_position() {
+    public void rulePriorityposition() {
         final String html = "<html><head>\n"
                 + "<style>\n"
                 + ".classA { z-index: 60 }\n"
@@ -585,42 +500,42 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    public void mediaOnStyleTag_noMedia() {
+    public void mediaOnStyleTagnoMedia() {
         mediaOnStyleTag("");
     }
 
     @Test
-    public void mediaOnStyleTag_whitespace() {
+    public void mediaOnStyleTagwhitespace() {
         mediaOnStyleTag(" ");
     }
 
     @Test
-    public void mediaOnStyleTag_all() {
+    public void mediaOnStyleTagall() {
         mediaOnStyleTag("all");
     }
 
     @Test
-    public void mediaOnStyleTag_screen() {
+    public void mediaOnStyleTagscreen() {
         mediaOnStyleTag("screen");
     }
 
     @Test
-    public void mediaOnStyleTag_print() {
+    public void mediaOnStyleTagprint() {
         mediaOnStyleTag("print");
     }
 
     @Test
-    public void mediaOnStyleTag_print_not() {
+    public void mediaOnStyleTagprintnot() {
         mediaOnStyleTag("not print");
     }
 
     @Test
-    public void mediaOnStyleTag_multipleWithScreen() {
+    public void mediaOnStyleTagmultipleWithScreen() {
         mediaOnStyleTag("print, screen, tv");
     }
 
     @Test
-    public void mediaOnStyleTag_multipleWithoutScreen() {
+    public void mediaOnStyleTagmultipleWithoutScreen() {
         mediaOnStyleTag("print, projection, tv");
     }
 
@@ -642,43 +557,43 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    public void mediaOnLinkTag_noMedia() {
+    public void mediaOnLinkTagnoMedia() {
         final String[] messages = {"none", "1"};
         mediaOnLinkTag("", messages);
     }
 
     @Test
-    public void mediaOnLinkTag_whitespace() {
+    public void mediaOnLinkTagwhitespace() {
         final String[] messages = {"none", "1"};
         mediaOnLinkTag(" ", messages);
     }
 
     @Test
-    public void mediaOnLinkTag_all() {
+    public void mediaOnLinkTagall() {
         final String[] messages = {"none", "1"};
         mediaOnLinkTag("all", messages);
     }
 
     @Test
-    public void mediaOnLinkTag_screen() {
+    public void mediaOnLinkTagscreen() {
         final String[] messages = {"none", "1"};
         mediaOnLinkTag("screen", messages);
     }
 
     @Test
-    public void mediaOnLinkTag_notScreen() {
+    public void mediaOnLinkTagnotScreen() {
         final String[] messages = {"block", "1"};
         mediaOnLinkTag("print", messages);
     }
 
     @Test
-    public void mediaOnLinkTag_multipleWithScreen() {
+    public void mediaOnLinkTagmultipleWithScreen() {
         final String[] messages = {"none", "1"};
         mediaOnLinkTag("print, screen, tv", messages);
     }
 
     @Test
-    public void mediaOnLinkTag_multipleWithoutScreen() {
+    public void mediaOnLinkTagmultipleWithoutScreen() {
         final String[] messages = {"block", "1"};
         mediaOnLinkTag("print, projection, tv", messages);
     }
@@ -702,246 +617,246 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    public void mediaRule_screen() {
+    public void mediaRulescreen() {
         final String[] messages = {"none", "1"};
         mediaRule("screen", messages);
     }
 
     @Test
-    public void mediaRule_notScreen() {
+    public void mediaRulenotScreen() {
         final String[] messages = {"block", "1"};
         mediaRule("print", messages);
     }
 
     @Test
-    public void mediaRule_multipleWithScreen() {
+    public void mediaRulemultipleWithScreen() {
         final String[] messages = {"none", "1"};
         mediaRule("print, screen, tv", messages);
     }
 
 
     @Test
-    public void mediaRule_multipleWithoutScreen() {
+    public void mediaRulemultipleWithoutScreen() {
         final String[] messages = {"block", "1"};
         mediaRule("print, projection, tv", messages);
     }
 
 
     @Test
-    public void mediaRule_max_width() {
+    public void mediaRulemaxwidth() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-width: 123px)", messages);
     }
 
     @Test
-    public void mediaRule_max_width_match() {
+    public void mediaRulemaxwidthmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (max-width: 10000px)", messages);
     }
 
 
     @Test
-    public void mediaRule_max_width_invalid() {
+    public void mediaRulemaxwidthinvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-width: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_max_width_without_unit() {
+    public void mediaRulemaxwidthwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-width: 10000)", messages);
     }
 
 
     @Test
-    public void mediaRule_max_width_without_value() {
+    public void mediaRulemaxwidthwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-width)", messages);
         mediaRule("screen and (max-width:)", messages);
     }
 
     @Test
-    public void mediaRule_min_width() {
+    public void mediaRuleminwidth() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-width: 10000px)", messages);
     }
 
     @Test
-    public void mediaRule_min_width_match() {
+    public void mediaRuleminwidthmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (min-width: 123px)", messages);
     }
 
     @Test
-    public void mediaRule_min_width_invalid() {
+    public void mediaRuleminwidthinvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-width: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_min_width_without_unit() {
+    public void mediaRuleminwidthwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-width: 123)", messages);
     }
 
     @Test
-    public void mediaRule_min_width_without_value() {
+    public void mediaRuleminwidthwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-width)", messages);
         mediaRule("screen and (min-width:)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_width() {
+    public void mediaRulemaxdevicewidth() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-device-width: 123px)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_width_match() {
+    public void mediaRulemaxdevicewidthmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (max-device-width: 10000px)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_width_invalid() {
+    public void mediaRulemaxdevicewidthinvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-device-width: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_width_without_unit() {
+    public void mediaRulemaxdevicewidthwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-device-width: 10000)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_width_without_value() {
+    public void mediaRulemaxdevicewidthwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-device-width)", messages);
         mediaRule("screen and (max-device-width:)", messages);
     }
 
     @Test
-    public void mediaRule_min_device_width() {
+    public void mediaRulemindevicewidth() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-device-width: 10000px)", messages);
     }
 
     @Test
-    public void mediaRule_min_device_width_match() {
+    public void mediaRulemindevicewidthmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (min-device-width: 123px)", messages);
     }
 
     @Test
-    public void mediaRule_min_device_width_invalid() {
+    public void mediaRulemindevicewidthinvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-device-width: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_min_device_width_without_unit() {
+    public void mediaRulemindevicewidthwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-device-width: 123)", messages);
     }
 
     @Test
-    public void mediaRule_min_device_width_without_value() {
+    public void mediaRulemindevicewidthwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-device-width)", messages);
         mediaRule("screen and (min-device-width:)", messages);
     }
 
     @Test
-    public void mediaRule_max_height() {
+    public void mediaRulemaxheight() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-height: 123px)", messages);
     }
 
     @Test
-    public void mediaRule_max_height_match() {
+    public void mediaRulemaxheightmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (max-height: 10000px)", messages);
     }
 
     @Test
-    public void mediaRule_max_height_invalid() {
+    public void mediaRulemaxheightinvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-height: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_max_height_without_unit() {
+    public void mediaRulemaxheightwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-height: 10000)", messages);
     }
 
     @Test
-    public void mediaRule_max_height_without_value() {
+    public void mediaRulemaxheightwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-height)", messages);
         mediaRule("screen and (max-height:)", messages);
     }
 
     @Test
-    public void mediaRule_min_height() {
+    public void mediaRuleminheight() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-height: 10000px)", messages);
     }
 
     @Test
-    public void mediaRule_min_height_match() {
+    public void mediaRuleminheightmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (min-height: 123px)", messages);
     }
 
     @Test
-    public void mediaRule_min_height_invalid() {
+    public void mediaRuleminheightinvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-height: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_min_height_without_unit() {
+    public void mediaRuleminheightwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-height: 123)", messages);
     }
 
     @Test
-    public void mediaRule_min_height_without_value() {
+    public void mediaRuleminheightwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-height)", messages);
         mediaRule("screen and (min-height:)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_height() {
+    public void mediaRulemaxdeviceheight() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-device-height: 123px)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_height_match() {
+    public void mediaRulemaxdeviceheightmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (max-device-height: 10000px)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_height_invalid() {
+    public void mediaRulemaxdeviceheightinvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-device-height: 5kilo)", messages);
     }
 
 
     @Test
-    public void mediaRule_max_device_height_without_unit() {
+    public void mediaRulemaxdeviceheightwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-device-height: 10000)", messages);
     }
 
     @Test
-    public void mediaRule_max_device_height_without_value() {
+    public void mediaRulemaxdeviceheightwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-device-height)", messages);
         mediaRule("screen and (max-device-height:)", messages);
@@ -949,132 +864,132 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    public void mediaRule_min_device_height() {
+    public void mediaRulemindeviceheight() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-device-height: 10000px)", messages);
     }
 
 
     @Test
-    public void mediaRule_min_device_height_match() {
+    public void mediaRulemindeviceheightmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (min-device-height: 123px)", messages);
     }
 
     @Test
-    public void mediaRule_min_device_height_invalid() {
+    public void mediaRulemindeviceheightinvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-device-height: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_min_device_height_without_unit() {
+    public void mediaRulemindeviceheightwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-device-height: 123)", messages);
     }
 
     @Test
-    public void mediaRule_min_device_height_without_value() {
+    public void mediaRulemindeviceheightwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-device-height)", messages);
         mediaRule("screen and (min-device-height:)", messages);
     }
 
     @Test
-    public void mediaRule_resolution() {
+    public void mediaRuleresolution() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (resolution: 4dpi)", messages);
     }
 
     @Test
-    public void mediaRule_resolution_match() {
+    public void mediaRuleresolutionmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (resolution: 96dpi)", messages);
     }
 
     @Test
-    public void mediaRule_resolution_invalid() {
+    public void mediaRuleresolutioninvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (resolution: 5kilo)", messages);
     }
 
 
     @Test
-    public void mediaRule_resolution_without_unit() {
+    public void mediaRuleresolutionwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (resolution: 96)", messages);
     }
 
     @Test
-    public void mediaRule_resolution_without_value() {
+    public void mediaRuleresolutionwithoutvalue() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (resolution)", messages);
     }
 
     @Test
-    public void mediaRule_resolution_without_value_empty() {
+    public void mediaRuleresolutionwithoutvalueempty() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (resolution:)", messages);
     }
 
     @Test
-    public void mediaRule_max_resolution() {
+    public void mediaRulemaxresolution() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-resolution: 90dpi)", messages);
     }
 
     @Test
-    public void mediaRule_max_resolution_match() {
+    public void mediaRulemaxresolutionmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (max-resolution: 10000dpi)", messages);
     }
 
 
     @Test
-    public void mediaRule_max_resolution_invalid() {
+    public void mediaRulemaxresolutioninvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-resolution: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_max_resolution_without_unit() {
+    public void mediaRulemaxresolutionwithoutunit() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-resolution: 10000)", messages);
     }
 
     @Test
-    public void mediaRule_max_resolution_without_value() {
+    public void mediaRulemaxresolutionwithoutvalue() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (max-resolution)", messages);
         mediaRule("screen and (max-resolution:)", messages);
     }
 
     @Test
-    public void mediaRule_min_resolution() {
+    public void mediaRuleminresolution() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-resolution: 10000dpi)", messages);
     }
 
     @Test
-    public void mediaRule_min_resolution_match() {
+    public void mediaRuleminresolutionmatch() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (min-resolution: 10dpi)", messages);
     }
 
     @Test
-    public void mediaRule_min_resolution_invalid() {
+    public void mediaRuleminresolutioninvalid() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (min-resolution: 5kilo)", messages);
     }
 
     @Test
-    public void mediaRule_min_resolution_without_unit() {
+    public void mediaRuleminresolutionwithoutunit() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (min-resolution: 10)", messages);
     }
 
     @Test
-    public void mediaRule_min_resolution_without_value() {
+    public void mediaRuleminresolutionwithoutvalue() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (min-resolution)", messages);
         mediaRule("screen and (min-resolution:)", messages);
@@ -1082,46 +997,46 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    public void mediaRule_portrait() {
+    public void mediaRuleportrait() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (orientation: portrait)", messages);
     }
 
     @Test
-    public void mediaRule_portrait_not() {
+    public void mediaRuleportraitnot() {
         final String[] messages = {"none", "1"};
         mediaRule("not screen and (orientation: portrait)", messages);
     }
 
     @Test
-    public void mediaRule_landscape() {
+    public void mediaRulelandscape() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (orientation: landscape)", messages);
     }
 
 
     @Test
-    public void mediaRule_landscape_not() {
+    public void mediaRulelandscapenot() {
         final String[] messages = {"block", "1"};
         mediaRule("not screen and (orientation: landscape)", messages);
     }
 
 
     @Test
-    public void mediaRule_invalidOrientation() {
+    public void mediaRuleinvalidOrientation() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (orientation: unknown)", messages);
     }
 
     @Test
-    public void mediaRule_orientation_without_value() {
+    public void mediaRuleorientationwithoutvalue() {
         final String[] messages = {"none", "1"};
         mediaRule("screen and (orientation)", messages);
     }
 
 
     @Test
-    public void mediaRule_orientation_without_value_empty() {
+    public void mediaRuleorientationwithoutvalueempty() {
         final String[] messages = {"block", "1"};
         mediaRule("screen and (orientation:)", messages);
     }
@@ -1153,13 +1068,11 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  try {\n"
                 + "    if (s.insertRule) {\n"
                 + "      s.insertRule('.testStyle1 { color: red; }', 0);\n"
-                + "    } else {\n"
-                + "      s.addRule('.testStyle1', 'color: red;', 0);\n"
                 + "    }\n"
                 + "    alert('inserted');\n"
                 + "  } catch(err) { alert('exception'); }\n"
                 + "}</script>\n"
-                + "<style id='myStyle'></style>\n"
+                + "<style id='myStyle'>color: red</style>\n"
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
                 + "</body></html>";

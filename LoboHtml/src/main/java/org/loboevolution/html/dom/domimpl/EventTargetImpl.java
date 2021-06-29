@@ -20,13 +20,8 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Stream;
-
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;
@@ -35,23 +30,18 @@ import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.events.Event;
+import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.TypeInfo;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Code;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.NodeType;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventTarget;
-
-import com.gargoylesoftware.css.parser.selector.Selector;
-import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.w3c.dom.events.EventException;
+
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * <p>EventTargetImpl class.</p>
@@ -70,9 +60,9 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 */
 	public HTMLCollection getElementsByTagName(String tagname) {
 		if ("*".equals(tagname)) {
-			return new HTMLCollectionImpl(this, new ElementFilter(null));
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		} else {
-			return new HTMLCollectionImpl(this, new TagNameFilter(tagname));
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname)).toArray()));
 		}
 	}
 	
@@ -83,7 +73,8 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
 	public HTMLCollection getElementsByClassName(String classNames) {
-		return new HTMLCollectionImpl(this, new ClassNameFilter(classNames));
+		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ClassNameFilter(classNames)).toArray()));
+
 	}
 	
 		
@@ -112,17 +103,31 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
     /**
      * <p>querySelectorAll.</p>
      *
-     * @param selectors a {@link java.lang.String} object.
+     * @param selector a {@link java.lang.String} object.
      * @return a {@link org.loboevolution.html.node.NodeList} object.
      */
-    public NodeList querySelectorAll(String selectors) {
-    	final ArrayList<Node> al = new ArrayList<>();
-    	SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+    public NodeList querySelectorAll(String selector) {
+
+		final ArrayList<Node> al = new ArrayList<>();
+
+		if(selector == null) {
+			return new NodeListImpl(al);
+		}
+
+    	if(selector.isEmpty()){
+			throw new DOMException(Code.NOT_FOUND_ERR, "The provided selector is empty.");
+		}
+
+		if(selector.trim().isEmpty()){
+			throw new DOMException(Code.NOT_FOUND_ERR, "is not a valid selector.");
+		}
+
+    	SelectorList selectorList = CSSUtilities.getSelectorList(selector);
     	if (selectorList != null) {
     		NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
     		childNodes.forEach(child -> {
-                for (Selector selector : selectorList) {                	
-                	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
+                for (Selector select : selectorList) {
+                	if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
                         al.add(child);
                     }
                 }

@@ -21,10 +21,7 @@
 package org.loboevolution.html.node.css;
 
 /**
- * <p>MediaQueryList interface.</p>
- *
- *
- *
+ * <p>Media Query List interface.</p>
  */
 public interface MediaQueryList {
 

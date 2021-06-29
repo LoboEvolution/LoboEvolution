@@ -24,22 +24,21 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLStyleElement;
+import org.loboevolution.html.js.css.CSSStyleSheetImpl;
+import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.style.CSSUtilities;
 import org.w3c.dom.UserDataHandler;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
 /**
  * <p>HTMLStyleElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleElement {
+
 	private boolean disabled;
 
 	private CSSStyleSheetImpl styleSheet;
@@ -74,6 +73,12 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	/** {@inheritDoc} */
 	@Override
+	public CSSStyleSheet getStyleSheet() {
+		return this.styleSheet;
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public String getMedia() {
 		return getAttribute("media");
 	}
@@ -82,33 +87,6 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	@Override
 	public String getType() {
 		return getAttribute("type");
-	}
-
-	/**
-	 * <p>processStyle.</p>
-	 */
-	protected void processStyle() {
-		this.styleSheet = null;
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
-		if (CSSUtilities.matchesMedia(getMedia(), doc.getDefaultView())) {
-			final String text = getRawInnerText(true);
-			if (Strings.isNotBlank(text)) {
-				final String processedText = CSSUtilities.preProcessCss(text);
-                final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-				final String baseURI = doc.getBaseURI();
-				final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
-				try {
-					final CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
-					//sheet.setOwnerNode(this);
-					sheet.setHref(baseURI);
-					doc.addStyleSheet(sheet);
-					this.styleSheet = sheet;
-					sheet.setDisabled(this.disabled);
-				} catch (final Throwable err) {
-					this.warn("Unable to parse style sheet", err);
-				}
-			}
-		}
 	}
 
 	/** {@inheritDoc} */
@@ -140,6 +118,34 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 			processStyle();
 		}
 		return super.setUserData(key, data, handler);
+	}
+
+	/**
+	 * <p>processStyle.</p>
+	 */
+	private void processStyle() {
+		this.styleSheet = null;
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
+		if (CSSUtilities.matchesMedia(getMedia(), doc.getDefaultView())) {
+			final String text = getRawInnerText(true);
+			if (Strings.isNotBlank(text)) {
+				final String processedText = CSSUtilities.preProcessCss(text);
+				final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+				final String baseURI = doc.getBaseURI();
+				final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
+				try {
+					final com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
+					sheet.setHref(baseURI);
+					sheet.setDisabled(this.disabled);
+					CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
+					cssStyleSheet.setOwnerNode(this);
+					doc.addStyleSheet(cssStyleSheet);
+					this.styleSheet = cssStyleSheet;
+				} catch (final Throwable err) {
+					this.warn("Unable to parse style sheet", err);
+				}
+			}
+		}
 	}
 	
 	/** {@inheritDoc} */

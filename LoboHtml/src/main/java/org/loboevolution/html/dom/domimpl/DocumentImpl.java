@@ -20,7 +20,6 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.common.Domains;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.*;
@@ -46,6 +45,9 @@ import org.loboevolution.jsenum.VisibilityState;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * <p>DocumentImpl class.</p>
@@ -494,7 +496,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public HTMLHeadElement getHead() {
 		synchronized (this) {
-			HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new HeadFilter()).toArray()));
+			HTMLCollection collection =  new HTMLCollectionImpl(this, list);
 			if(collection.getLength() > 0) return (HTMLHeadElement)collection.item(0);
 			else return null;
 		}
@@ -505,7 +508,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public HTMLElement getBody() {
 		synchronized (this) {
 			if(this.body != null) return this.body;
-			HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new HeadFilter()).toArray()));
+			HTMLCollection collection =  new HTMLCollectionImpl(this, list);
 			if(collection.getLength() > 0) return (HTMLElement) collection.item(0);
 			else return null;
 		}
@@ -521,7 +525,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public HTMLCollection getApplets() {
 		synchronized (this) {
-			return new HTMLCollectionImpl(this, new ElementFilter("APPLET"));
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ElementFilter("APPLET")).toArray()));
+			return new HTMLCollectionImpl(this, list);
 		}
 	}
 
@@ -529,7 +534,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public HTMLCollection getImages() {
         synchronized (this) {
-            return new HTMLCollectionImpl(this, new ImageFilter());
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ImageFilter()).toArray()));
+			return  new HTMLCollectionImpl(this, list);
         }
     }
 	
@@ -537,15 +543,17 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public HTMLCollection getLinks() {
         synchronized (this) {
-            return new HTMLCollectionImpl(this, new LinkFilter());
-        }
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new LinkFilter()).toArray()));
+			return  new HTMLCollectionImpl(this, list);
+		}
     }
 	
     /** {@inheritDoc} */
     @Override
     public HTMLCollection getForms() {
         synchronized (this) {
-            return new HTMLCollectionImpl(this, new FormFilter());
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new FormFilter()).toArray()));
+			return  new HTMLCollectionImpl(this, list);
         }
     }
         
@@ -554,7 +562,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
     @Override
     public HTMLCollection getEmbeds() {
         synchronized (this) {
-            return new HTMLCollectionImpl(this, new EmbedFilter());
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new EmbedFilter()).toArray()));
+			return  new HTMLCollectionImpl(this, list);
         }
     }
 
@@ -568,7 +577,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
     @Override
     public HTMLCollection getScripts() {
         synchronized (this) {
-            return new HTMLCollectionImpl(this, new ScriptFilter());
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ScriptFilter()).toArray()));
+			return  new HTMLCollectionImpl(this, list);
         }
     }
 
@@ -576,26 +586,30 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
     @Override
     public HTMLCollection getCommands() {
         synchronized (this) {
-            return new HTMLCollectionImpl(this, new CommandFilter());
+			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new CommandFilter()).toArray()));
+			return  new HTMLCollectionImpl(this, list);
         }
     }
     
 	/** {@inheritDoc} */
     @Override
 	public HTMLCollection getAnchors() {
-    	return new HTMLCollectionImpl(this, new AnchorFilter());
+		final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new AnchorFilter()).toArray()));
+		return new HTMLCollectionImpl(this, list);
 	}
     
 	/** {@inheritDoc} */
     @Override
 	public HTMLCollection getAll() {
-    	 return new HTMLCollectionImpl(this, new ElementFilter(null));
+		final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
+		return new HTMLCollectionImpl(this, list);
 	}
     
     /** {@inheritDoc} */
     @Override
 	public HTMLCollection getElementsByName(String elementName) {
-		return new HTMLCollectionImpl(this, new ElementNameFilter(elementName));
+		final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ElementNameFilter(elementName)).toArray()));
+		return new HTMLCollectionImpl(this, list);
 	}
 
 	/** {@inheritDoc} */

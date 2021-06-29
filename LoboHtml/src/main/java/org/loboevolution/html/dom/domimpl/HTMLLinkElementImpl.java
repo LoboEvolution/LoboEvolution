@@ -19,21 +19,13 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Optional;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLLinkElement;
+import org.loboevolution.html.js.css.CSSStyleSheetImpl;
+import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.ColorRenderState;
 import org.loboevolution.html.renderstate.CursorRenderState;
@@ -45,9 +37,15 @@ import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.store.StyleStore;
 import org.w3c.dom.UserDataHandler;
-import org.loboevolution.html.node.DOMTokenList;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import java.awt.*;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>HTMLLinkElementImpl class.</p>
@@ -196,13 +194,12 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 						final UserAgentContext uacontext = getUserAgentContext();
 						if (uacontext.isExternalCSSEnabled()) {
 							final String media = getMedia();
-								if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
-								final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI);
-								if (sheet != null) {
-									this.styleSheet = sheet;
-									sheet.setDisabled(this.disabled);
-									doc.addStyleSheet(sheet);
-								}
+							if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
+								final com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI);
+								sheet.setHref(baseURI);
+								sheet.setDisabled(this.disabled);
+								CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
+								cssStyleSheet.setOwnerNode(this);
 							}
 						}
 					}

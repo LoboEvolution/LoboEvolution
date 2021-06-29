@@ -37,9 +37,11 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.Text;
+import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.store.LinkStore;
 
@@ -73,11 +75,12 @@ public class StyleSheetAggregator {
 	/**
 	 * <p>addStyleSheets.</p>
 	 *
-	 * @param styleSheets a {@link java.util.List} object.
+	 * @param styleSheets a {@link org.loboevolution.html.js.css.StyleSheetListImpl} object.
 	 */
-	public final void addStyleSheets(List<CSSStyleSheetImpl> styleSheets) {
-		for (CSSStyleSheetImpl sheet : styleSheets) {
-			addStyleSheet(sheet);
+	public final void addStyleSheets(StyleSheetListImpl styleSheets) {
+		for (CSSStyleSheet sheet : styleSheets) {
+			org.loboevolution.html.js.css.CSSStyleSheetImpl impl = (org.loboevolution.html.js.css.CSSStyleSheetImpl)sheet;
+			addStyleSheet(impl.getCssStyleSheet());
 		}
 	}
 	

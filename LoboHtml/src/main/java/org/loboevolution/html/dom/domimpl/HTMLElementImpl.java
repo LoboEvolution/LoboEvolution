@@ -30,7 +30,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.DOMException;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
@@ -476,17 +476,17 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		informInvalidRecursive();
 
 	}
-	
+
 	private void informInvalidRecursive() {
 		super.informInvalid();
-		NodeImpl[] nodeList = this.getChildrenArray();
+		NodeListImpl nodeList = this.getNodeList();
 		if (nodeList != null) {
-			for (NodeImpl n : nodeList) {
+			nodeList.forEach(n -> {
 				if (n instanceof HTMLElementImpl) {
 					HTMLElementImpl htmlElementImpl = (HTMLElementImpl) n;
 					htmlElementImpl.informInvalidRecursive();
 				}
-			}
+			});
 		}
 	}
 
