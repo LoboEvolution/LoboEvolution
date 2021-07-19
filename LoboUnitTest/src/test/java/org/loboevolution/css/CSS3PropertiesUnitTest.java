@@ -157,7 +157,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_A() {
+    public void defaultDisplayValuesA() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'>\n"
                 + "    <a id='a'></a>\n"
@@ -198,7 +198,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void defaultDisplayValues_B() {
+    public void defaultDisplayValuesB() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'>\n"
                 + "    <b id='b'></b>\n"
@@ -233,7 +233,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void defaultDisplayValues_C() {
+    public void defaultDisplayValuesC() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <canvas id='canvas'></canvas>\n"
                 + "  <center id='center'></center>\n"
@@ -275,7 +275,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void defaultDisplayValues_D() {
+    public void defaultDisplayValuesD() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <datalist id='datalist'></datalist>\n"
                 + "  <dl id='dl'>\n"
@@ -318,7 +318,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void defaultDisplayValues_E() {
+    public void defaultDisplayValuesE() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'>\n"
                 + "    <em id='em'></em>\n"
@@ -342,7 +342,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_F() {
+    public void defaultDisplayValuesF() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <form id='form'>\n"
                 + "    <fieldset id='fieldset'></fieldset>\n"
@@ -376,7 +376,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_H() {
+    public void defaultDisplayValuesH() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <h1 id='h1'></h1>\n"
                 + "  <h2 id='h2'></h2>\n"
@@ -410,7 +410,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_I() {
+    public void defaultDisplayValuesI() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'>\n"
                 + "    <i id='i'></i>\n"
@@ -453,7 +453,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_KL() {
+    public void defaultDisplayValuesKL() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'>\n"
                 + "    <kbd id='kbd'></kbd>\n"
@@ -489,7 +489,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_M() {
+    public void defaultDisplayValuesM() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <img usemap='#imgmap'>\n"
                 + "    <map id='map' name='imgmap'>\n"
@@ -524,7 +524,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void defaultDisplayValues_NO() {
+    public void defaultDisplayValuesNO() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <nav id='nav'>\n"
                 + "    <a id='a'></a>\n"
@@ -566,7 +566,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_PQ() {
+    public void defaultDisplayValuesPQ() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'><q id='q'></q></p>\n"
                 + "  <object>\n"
@@ -595,7 +595,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_R() {
+    public void defaultDisplayValuesR() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <ruby id='ruby'>\n"
                 + "    <rt id='rt'>\n"
@@ -621,7 +621,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void defaultDisplayValues_S() {
+    public void defaultDisplayValuesS() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p>\n"
                 + "    <s id='s'></s>\n"
@@ -674,7 +674,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void defaultDisplayValues_T() {
+    public void defaultDisplayValuesT() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <table id='table'>\n"
                 + "    <thead id='thead'><tr id='tr'><th id='th'>header</th></tr></thead>\n"
@@ -720,7 +720,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void defaultDisplayValues_UVW() {
+    public void defaultDisplayValuesUVW() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p>\n"
                 + "    <u id='u'></u>\n"

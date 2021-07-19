@@ -25,15 +25,14 @@ import java.util.Map;
 
 /**
  * <p>CSSValues class.</p>
- *
- *
- *
  */
 public enum CSSValues {
 
 	ABSOLUTE("absolute"),
 
 	AUTO("auto"),
+	
+	BASELINE("baseline"),
 
 	BLINK("blink"),
 
@@ -134,6 +133,8 @@ public enum CSSValues {
 	LOWER_ROMAN("lower-roman"),
 
 	LOWERCASE("lowercase"),
+
+	MARGIN("margin"),
 
 	MEDIUM("medium"),
 
@@ -297,6 +298,6 @@ public enum CSSValues {
 	 */
 	public static CSSValues get(String actionName) {
 		CSSValues value = ENUM_MAP.get(actionName);
-		return value == null ? CSSValues.DEFAULT : value;
+		return value == null ? CSSValues.NONE : value;
 	}
 }

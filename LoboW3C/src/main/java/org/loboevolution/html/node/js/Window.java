@@ -24,7 +24,7 @@ import com.gargoylesoftware.css.dom.CSSRuleListImpl;
 import org.loboevolution.html.node.BarProp;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Selection;
-import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.MediaQueryList;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.node.events.GlobalEventHandlers;
@@ -386,17 +386,17 @@ public interface Window
      *
      * @param elt       a {@link org.loboevolution.html.node.Element} object.
      * @param pseudoElt a {@link java.lang.String} object.
-     * @return a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+     * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
      */
-    CSS3Properties getComputedStyle(Element elt, String pseudoElt);
+    CSSStyleDeclaration getComputedStyle(Element elt, String pseudoElt);
 
     /**
      * <p>getComputedStyle.</p>
      *
      * @param elt a {@link org.loboevolution.html.node.Element} object.
-     * @return a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+     * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
      */
-    CSS3Properties getComputedStyle(Element elt);
+    CSSStyleDeclaration getComputedStyle(Element elt);
 
     /**
      * <p>getMatchedCSSRules.</p>

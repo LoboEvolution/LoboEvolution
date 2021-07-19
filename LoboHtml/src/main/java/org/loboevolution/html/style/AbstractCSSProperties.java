@@ -41,7 +41,6 @@ import org.loboevolution.html.style.setter.SubPropertySetter;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.util.CSSProperties;
 
 /**
@@ -104,14 +103,13 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				this.styleDeclarations = sd;
 			}
 			sd.add(styleDeclaration);
-			for (Property prop : styleDeclaration.getProperties()) {
+			styleDeclaration.getProperties().forEach(prop -> {
 				final String propertyName = prop.getName();
 				final String propertyValue = styleDeclaration.getPropertyValue(propertyName);
 				final String priority = styleDeclaration.getPropertyPriority(propertyName);
 				final boolean important = priority != null && priority.length() != 0 && "important".equals(priority);
 				setPropertyValueProcessed(propertyName.toLowerCase(), propertyValue, styleDeclaration, important);
-	      
-	        }
+			});
 		}
 	}
 
@@ -2118,14 +2116,22 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		return context;
 	}
 
+	/**
+	 * <p>Getter list of <code>styleDeclaration</code>.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
+	public List<CSSStyleDeclarationImpl> getStyleDeclarations() {
+		return styleDeclarations;
+	}
+
+	public void setStyleDeclarations(List<CSSStyleDeclarationImpl> styleDeclarations) {
+		this.styleDeclarations = styleDeclarations;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		int size;
-		synchronized (this) {
-			final Map<String, PropertyCSS> map = this.valueMap;
-			size = map == null ? 0 : map.size();
-		}
-		return this.getClass().getSimpleName() + "[size=" + size + "]";
+		return "[Object CSSStyleDeclaration]";
 	}
 }

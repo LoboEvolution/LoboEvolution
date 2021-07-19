@@ -33,7 +33,6 @@ import org.loboevolution.html.js.events.UIEventImpl;
 import org.loboevolution.html.js.storage.LocalStorage;
 import org.loboevolution.html.js.storage.SessionStorage;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.history.History;
 import org.loboevolution.html.node.js.Location;
@@ -43,6 +42,7 @@ import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.console.Console;
 import org.loboevolution.html.node.js.webstorage.Storage;
 import org.loboevolution.html.node.views.DocumentView;
+import org.loboevolution.html.style.ComputedCSSStyleDeclaration;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaInstantiator;
@@ -316,7 +316,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	/** {@inheritDoc} */
 	@Override
-	public CSS3Properties getComputedStyle(final Element element, final String pseudoElement) {
+	public ComputedCSSStyleDeclaration getComputedStyle(final Element element, final String pseudoElement) {
 		if (element instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) element).getComputedStyle(pseudoElement);
 		} else {
@@ -326,7 +326,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	/** {@inheritDoc} */
 	@Override
-    public CSS3Properties getComputedStyle(final Element elt) {
+    public ComputedCSSStyleDeclaration getComputedStyle(final Element elt) {
         return getComputedStyle(elt, null);
     }
 

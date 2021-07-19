@@ -37,10 +37,7 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
-import org.loboevolution.html.style.AbstractCSSProperties;
-import org.loboevolution.html.style.CSSPropertiesContext;
-import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.html.style.StyleSheetAggregator;
+import org.loboevolution.html.style.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -252,34 +249,37 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * <p>getComputedStyle.</p>
 	 *
 	 * @param pseudoElement a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @return a {@link org.loboevolution.html.style.ComputedCSSStyleDeclaration} object.
 	 */
-	public AbstractCSSProperties getComputedStyle(String pseudoElement) {
+	public ComputedCSSStyleDeclaration getComputedStyle(String pseudoElement) {
+
 		if (pseudoElement == null) {
 			pseudoElement = "";
 		}
+
 		synchronized (this) {
 			final Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs != null) {
 				final AbstractCSSProperties sds = cs.get(pseudoElement);
 				if (sds != null) {
-					return sds;
+					return new ComputedCSSStyleDeclaration(this, sds);
 				}
 			}
 		}
 
 		AbstractCSSProperties sds = createDefaultStyleSheet();
 		sds = addStyleSheetDeclarations(sds, false);
-		// Now add local style if any.
+
 		final AbstractCSSProperties localStyle = getStyle();
+
 		if (sds == null) {
 			sds = new AbstractCSSProperties(this);
+			sds.setStyleDeclarations(localStyle.getStyleDeclarations());
 		}
+
 		sds.setLocalStyleProperties(localStyle);
+
 		synchronized (this) {
-			// Check if style properties were set while outside
-			// the synchronized block (can happen). We need to
-			// return instance already set for consistency.
 			Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs == null) {
 				cs = new HashMap<>(2);
@@ -287,12 +287,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			} else {
 				final AbstractCSSProperties sds2 = cs.get(pseudoElement);
 				if (sds2 != null) {
-					return sds2;
+					return new ComputedCSSStyleDeclaration(this, sds2);
 				}
 			}
 			cs.put(pseudoElement, sds);
 		}
-		return sds;
+		return new ComputedCSSStyleDeclaration(this, sds);
 	}
 
 	/**
@@ -438,7 +438,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			sds = new AbstractCSSProperties(this);
 			// Add any declarations in style attribute (last takes precedence).
 			final String style = getAttribute("style");
-			if (style != null && style.length() != 0) {
+			if (Strings.isNotBlank(style)) {
                 final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 				try {
 					final CSSStyleDeclarationImpl sd = parser.parseStyleDeclaration(style);

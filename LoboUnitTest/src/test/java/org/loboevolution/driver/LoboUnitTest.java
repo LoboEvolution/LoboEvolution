@@ -23,7 +23,9 @@ package org.loboevolution.driver;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.style.ComputedCSSStyleDeclaration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,8 +54,8 @@ public class LoboUnitTest extends LoboWebDriver {
         Window window = doc.getDefaultView();
         HTMLElement div = (HTMLElement)doc.getElementById("myId");
         HTMLElement div2 = (HTMLElement)doc.getElementById("myId2");
-        CSS3Properties computedStyle = window.getComputedStyle(div);
-        CSS3Properties computedStyle2 = window.getComputedStyle(div2);
+        ComputedCSSStyleDeclaration computedStyle = (ComputedCSSStyleDeclaration) window.getComputedStyle(div);
+        ComputedCSSStyleDeclaration computedStyle2 = (ComputedCSSStyleDeclaration) window.getComputedStyle(div2);
         assertEquals(result1, computedStyle.getColor());
         assertEquals(result2, computedStyle2.getColor());
     }

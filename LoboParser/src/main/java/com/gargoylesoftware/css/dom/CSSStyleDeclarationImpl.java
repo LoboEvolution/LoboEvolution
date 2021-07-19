@@ -46,6 +46,12 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
+     * Ctor.
+     */
+    public CSSStyleDeclarationImpl() {
+    }
+
+    /**
      * <p>getProperties.</p>
      *
      * @return the properties

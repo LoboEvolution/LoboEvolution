@@ -533,6 +533,8 @@ public class HtmlValues {
 				token.endsWith("ex") ||
 				token.endsWith("em") ||
 				token.endsWith("in") ||
-				token.endsWith("q");
+				token.endsWith("q") ||
+				token.endsWith("vh") ||
+				token.endsWith("vw");
 	}
 }
