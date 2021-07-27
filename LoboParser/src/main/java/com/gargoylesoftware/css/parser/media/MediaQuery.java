@@ -31,6 +31,7 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
 
     private String media_;
     private List<Property> properties_;
+    private boolean implicitAll_;
     private boolean isOnly_;
     private boolean isNot_;
 
@@ -52,6 +53,10 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
      */
     public MediaQuery(final String media, final boolean isOnly, final boolean isNot) {
         media_ = media;
+        if (media == null) {
+            implicitAll_ = true;
+            media_ = "all";
+        }
         properties_ = new ArrayList<>(10);
         isOnly_ = isOnly;
         isNot_ = isNot;
@@ -107,19 +112,34 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
+        boolean hasMedia = false;
         if (isOnly_) {
             sb.append("only ");
+            sb.append(getMedia());
+            hasMedia = true;
         }
-        if (isNot_) {
+        else if (isNot_) {
             sb.append("not ");
+            sb.append(getMedia());
+            hasMedia = true;
+        }
+        else {
+            if (!implicitAll_) {
+                sb.append(getMedia());
+                hasMedia = true;
+            }
         }
 
-        sb.append(getMedia());
-
-        for (Property prop : properties_) {
-            sb.append(" and (")
-                .append(prop.toString())
-                .append(')');
+        for (final Property prop : properties_) {
+            if (hasMedia) {
+                sb.append(" and ");
+            }
+            else {
+                hasMedia = true;
+            }
+            sb.append("(");
+            sb.append(prop.toString());
+            sb.append(')');
         }
         return sb.toString();
     }

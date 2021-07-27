@@ -46,15 +46,14 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
  */
 public class CSSOMParser {
 
-    private CSSParser parser_;
+    private AbstractCSSParser parser_;
     private CSSStyleSheetImpl parentStyleSheet_;
 
     /**
      * Creates new CSSOMParser.
-     *
      * @param parser the parser
      */
-    public CSSOMParser(final CSSParser parser) {
+    public CSSOMParser(final AbstractCSSParser parser) {
         parser_ = parser;
     }
 
@@ -80,7 +79,7 @@ public class CSSOMParser {
      * @param source the SAC input source
      * @param href the href
      * @return the CSSOM style sheet
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public CSSStyleSheetImpl parseStyleSheet(final InputSource source, final String href) throws IOException {
         final CSSOMHandler handler = new CSSOMHandler();
@@ -99,7 +98,7 @@ public class CSSOMParser {
      *
      * @param styleDecl the input string
      * @return the CSSOM style declaration
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public CSSStyleDeclarationImpl parseStyleDeclaration(final String styleDecl) throws IOException {
         final CSSStyleDeclarationImpl sd = new CSSStyleDeclarationImpl(null);
@@ -112,7 +111,7 @@ public class CSSOMParser {
      *
      * @param styleDecl the input string
      * @param sd the CSSOM style declaration
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public void parseStyleDeclaration(final CSSStyleDeclarationImpl sd, final String styleDecl) throws IOException {
         try (InputSource source = new InputSource(new StringReader(styleDecl))) {
@@ -129,7 +128,7 @@ public class CSSOMParser {
      *
      * @param propertyValue the input string
      * @return the css value
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public CSSValueImpl parsePropertyValue(final String propertyValue) throws IOException {
         try (InputSource source = new InputSource(new StringReader(propertyValue))) {
@@ -148,7 +147,7 @@ public class CSSOMParser {
      *
      * @param rule the input string
      * @return the css rule
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public AbstractCSSRuleImpl parseRule(final String rule) throws IOException {
         try (InputSource source = new InputSource(new StringReader(rule))) {
@@ -164,7 +163,7 @@ public class CSSOMParser {
      *
      * @param selectors the input string
      * @return the css selector list
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public SelectorList parseSelectors(final String selectors) throws IOException {
         try (InputSource source = new InputSource(new StringReader(selectors))) {
@@ -179,16 +178,13 @@ public class CSSOMParser {
      *
      * @param media the input string
      * @return the css media query list
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public MediaQueryList parseMedia(final String media) throws IOException {
         try (InputSource source = new InputSource(new StringReader(media))) {
             final HandlerBase handler = new HandlerBase();
             parser_.setDocumentHandler(handler);
-            if (parser_ instanceof AbstractCSSParser) {
-                return ((AbstractCSSParser) parser_).parseMedia(source);
-            }
-            return null;
+            return parser_.parseMedia(source);
         }
     }
 
@@ -422,12 +418,7 @@ public class CSSOMParser {
                 decl.addProperty(property);
             }
             catch (final DOMException e) {
-                if (parser_ instanceof AbstractCSSParser) {
-                    final AbstractCSSParser parser = (AbstractCSSParser) parser_;
-                    parser.getErrorHandler().error(parser.toCSSParseException(e));
-
-                }
-                // call ErrorHandler?
+                parser_.getErrorHandler().error(parser_.toCSSParseException(e));
             }
         }
 

@@ -30,12 +30,11 @@ import com.gargoylesoftware.css.parser.media.MediaQueryList;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 
 /**
- * Base implementation of {@link com.gargoylesoftware.css.parser.CSSParser}.
+ * Base implementation.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
-public abstract class AbstractCSSParser implements CSSParser {
+public abstract class AbstractCSSParser {
     private DocumentHandler documentHandler_;
     private CSSErrorHandler errorHandler_;
     private InputSource source_;
@@ -85,8 +84,6 @@ public abstract class AbstractCSSParser implements CSSParser {
         parserMessages_.put("domException", "DOM exception: ''{0}''");
     }
 
-    private boolean ieStarHackAccepted_;
-
     private static final String NUM_CHARS = "0123456789.";
 
     /**
@@ -101,8 +98,21 @@ public abstract class AbstractCSSParser implements CSSParser {
         return documentHandler_;
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * Allow an application to register a document event handler.
+     *
+     * <p>If the application does not register a document handler, all
+     * document events reported by the CSS parser will be silently
+     * ignored (this is the default behaviour implemented by
+     * HandlerBase).</p>
+     *
+     * <p>Applications may register a new or different handler in the
+     * middle of a parse, and the CSS parser must begin using the new
+     * handler immediately.</p>
+     *
+     * @param handler The document handler.
+     * @see DocumentHandler
+     */
     public void setDocumentHandler(final DocumentHandler handler) {
         documentHandler_ = handler;
     }
@@ -119,10 +129,24 @@ public abstract class AbstractCSSParser implements CSSParser {
         return errorHandler_;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public void setErrorHandler(final CSSErrorHandler eh) {
-        errorHandler_ = eh;
+    /**
+     * Allow an application to register an error event handler.
+     *
+     * <p>If the application does not register an error event handler,
+     * all error events reported by the CSS parser will be silently
+     * ignored, except for fatalError, which will throw a CSSException
+     * (this is the default behaviour implemented by HandlerBase).</p>
+     *
+     * <p>Applications may register a new or different handler in the
+     * middle of a parse, and the CSS parser must begin using the new
+     * handler immediately.</p>
+     *
+     * @param handler The error handler.
+     * @see CSSErrorHandler
+     * @see CSSException
+     */
+    public void setErrorHandler(final CSSErrorHandler handler) {
+        errorHandler_ = handler;
     }
 
     /**
@@ -134,21 +158,7 @@ public abstract class AbstractCSSParser implements CSSParser {
         return source_;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public void setIeStarHackAccepted(final boolean accepted) {
-        ieStarHackAccepted_ = accepted;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean isIeStarHackAccepted() {
-        return ieStarHackAccepted_;
-    }
-
     /**
-     * <p>getParserMessage.</p>
-     *
      * @param key the lookup key
      * @return the parser message
      */
@@ -162,7 +172,6 @@ public abstract class AbstractCSSParser implements CSSParser {
 
     /**
      * Returns a new locator for the given token.
-     *
      * @param t the token to generate the locator for
      * @return a new locator
      */
@@ -174,7 +183,6 @@ public abstract class AbstractCSSParser implements CSSParser {
 
     /**
      * Escapes some chars in the given string.
-     *
      * @param str the input
      * @return a new string with the escaped values
      */
@@ -298,8 +306,6 @@ public abstract class AbstractCSSParser implements CSSParser {
     }
 
     /**
-     * <p>toCSSParseException.</p>
-     *
      * @param messageKey the message key
      * @param msgParams the params
      * @param locator the locator
@@ -312,8 +318,6 @@ public abstract class AbstractCSSParser implements CSSParser {
     }
 
     /**
-     * <p>createSkipWarning.</p>
-     *
      * @param messageKey the message key
      * @param e a CSSParseException
      * @return a new CSSParseException
@@ -322,8 +326,30 @@ public abstract class AbstractCSSParser implements CSSParser {
         return new CSSParseException(getParserMessage(messageKey), e.getURI(), e.getLineNumber(), e.getColumnNumber());
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * Parse a CSS document.
+     *
+     * <p>The application can use this method to instruct the CSS parser
+     * to begin parsing an CSS document from any valid input
+     * source (a character stream, a byte stream, or a URI).</p>
+     *
+     * <p>Applications may not invoke this method while a parse is in
+     * progress (they should create a new Parser instead for each
+     * additional CSS document).  Once a parse is complete, an
+     * application may reuse the same Parser object, possibly with a
+     * different input source.</p>
+     *
+     * @param source The input source for the top-level of the
+     *        CSS document.
+     * @exception CSSException Any CSS exception, possibly
+     *            wrapping another exception.
+     * @exception java.io.IOException An IO exception from the parser,
+     *            possibly from a byte stream or character stream
+     *            supplied by the application.
+     * @see InputSource
+     * @see #setDocumentHandler
+     * @see #setErrorHandler
+     */
     public void parseStyleSheet(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -341,8 +367,16 @@ public abstract class AbstractCSSParser implements CSSParser {
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * Parse a CSS style declaration (without '{' and '}').
+     *
+     * @param source source to be parsed
+     * @exception CSSException Any CSS exception, possibly
+     *            wrapping another exception.
+     * @exception java.io.IOException An IO exception from the parser,
+     *            possibly from a byte stream or character stream
+     *            supplied by the application.
+     */
     public void parseStyleDeclaration(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -360,8 +394,16 @@ public abstract class AbstractCSSParser implements CSSParser {
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * Parse a CSS rule.
+     *
+     * @param source source to be parsed
+     * @exception CSSException Any CSS exception, possibly
+     *            wrapping another exception.
+     * @exception java.io.IOException An IO exception from the parser,
+     *            possibly from a byte stream or character stream
+     *            supplied by the application.
+     */
     public void parseRule(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -379,8 +421,17 @@ public abstract class AbstractCSSParser implements CSSParser {
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * Parse a comma separated list of selectors.
+     *
+     * @param source source to be parsed
+     * @return a selector list
+     * @exception CSSException Any CSS exception, possibly
+     *            wrapping another exception.
+     * @exception java.io.IOException An IO exception from the parser,
+     *            possibly from a byte stream or character stream
+     *            supplied by the application.
+     */
     public SelectorList parseSelectors(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -400,8 +451,17 @@ public abstract class AbstractCSSParser implements CSSParser {
         return sl;
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * Parse a CSS property value.
+     *
+     * @param source source to be parsed
+     * @return a lexical unit
+     * @exception CSSException Any CSS exception, possibly
+     *            wrapping another exception.
+     * @exception java.io.IOException An IO exception from the parser,
+     *            possibly from a byte stream or character stream
+     *            supplied by the application.
+     */
     public LexicalUnit parsePropertyValue(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -421,8 +481,17 @@ public abstract class AbstractCSSParser implements CSSParser {
         return lu;
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * Parse a CSS priority value (e.g. "!important").
+     *
+     * @param source source to be parsed
+     * @return true or flase
+     * @exception CSSException Any CSS exception, possibly
+     *            wrapping another exception.
+     * @exception java.io.IOException An IO exception from the parser,
+     *            possibly from a byte stream or character stream
+     *            supplied by the application.
+     */
     public boolean parsePriority(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -444,10 +513,9 @@ public abstract class AbstractCSSParser implements CSSParser {
 
     /**
      * Parse the given input source and return the media list.
-     *
      * @param source the input source
      * @return new media list
-     * @throws java.io.IOException in case of errors
+     * @throws IOException in case of errors
      */
     public MediaQueryList parseMedia(final InputSource source) throws IOException {
         source_ = source;
@@ -479,13 +547,17 @@ public abstract class AbstractCSSParser implements CSSParser {
         return null;
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * @return a string about which CSS language is supported by this
+     * parser. For CSS Level 1, it returns "http://www.w3.org/TR/REC-CSS1", for
+     * CSS Level 2, it returns "http://www.w3.org/TR/REC-CSS2". Note that a
+     * "CSSx" parser can return lexical unit other than those allowed by CSS
+     * Level x but this usage is not recommended.
+     */
     public abstract String getParserVersion();
 
     /**
      * Re intit the stream.
-     *
      * @param charStream the stream
      */
     protected abstract void ReInit(CharStream charStream);
@@ -493,22 +565,22 @@ public abstract class AbstractCSSParser implements CSSParser {
     /**
      * Process a style sheet.
      *
-     * @throws com.gargoylesoftware.css.parser.CSSParseException in case of error
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws CSSParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract void styleSheet() throws CSSParseException, ParseException;
 
     /**
      * Process a style sheet declaration.
      *
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract void styleDeclaration() throws ParseException;
 
     /**
      * Process a style sheet rule.
      *
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract void styleSheetRuleSingle() throws ParseException;
 
@@ -516,7 +588,7 @@ public abstract class AbstractCSSParser implements CSSParser {
      * Process a selector list.
      *
      * @return the selector list
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract SelectorList parseSelectorsInternal() throws ParseException;
 
@@ -599,16 +671,6 @@ public abstract class AbstractCSSParser implements CSSParser {
      */
     protected void handleStartMedia(final MediaQueryList media, final Locator locator) {
         getDocumentHandler().startMedia(media, locator);
-    }
-
-    /**
-     * medium handler.
-     *
-     * @param medium the medium
-     * @param locator the locator
-     */
-    protected void handleMedium(final String medium, final Locator locator) {
-        // empty default impl
     }
 
     /**
@@ -714,6 +776,9 @@ public abstract class AbstractCSSParser implements CSSParser {
         }
         else if ("rgb(".equalsIgnoreCase(funct)) {
             return LexicalUnitImpl.createRgbColor(prev, params);
+        }
+        else if ("calc(".equalsIgnoreCase(funct)) {
+            return LexicalUnitImpl.createCalc(prev, params);
         }
         return LexicalUnitImpl.createFunction(
             prev,

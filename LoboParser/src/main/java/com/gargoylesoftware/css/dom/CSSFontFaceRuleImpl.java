@@ -46,13 +46,16 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
     @Override
     public String getCssText() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("@font-face {");
+        sb.append("@font-face { ");
 
         final CSSStyleDeclarationImpl style = getStyle();
         if (null != style) {
             sb.append(style.getCssText());
+            if (style.getProperties().size() > 0) {
+                sb.append(";");
+            }
         }
-        sb.append("}");
+        sb.append(" }");
         return sb.toString();
     }
 

@@ -60,9 +60,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
         sb.append(" {");
         for (int i = 0; i < getCssRules().getLength(); i++) {
             final AbstractCSSRuleImpl rule = getCssRules().getRules().get(i);
-            sb.append(rule.getCssText()).append(" ");
+            sb.append("\n  ").append(rule.getCssText());
         }
-        sb.append("}");
+        sb.append("\n}");
         return sb.toString();
     }
 
@@ -137,6 +137,7 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
             // Insert the rule into the list of rules
             getCssRules().insert(r, index);
+            r.setParentRule(this);
 
         }
         catch (final IndexOutOfBoundsException e) {

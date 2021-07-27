@@ -122,7 +122,7 @@ public class ElementSelector extends AbstractSelector implements SimpleSelector 
         result.append(getElementName());
 
         if (conditions_ != null) {
-            for (Condition condition : conditions_) {
+            for (final Condition condition : conditions_) {
                 result.append(condition);
             }
         }

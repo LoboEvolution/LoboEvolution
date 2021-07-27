@@ -22,12 +22,12 @@ import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.util.LangUtils;
+import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
 
 /**
  * Implementation of CSSStyleDeclaration.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public class CSSStyleDeclarationImpl implements Serializable {
 
@@ -61,8 +61,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getCssText.</p>
-     *
      * @return the current css text
      */
     public String getCssText() {
@@ -89,6 +87,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
     public void setCssText(final String cssText) throws DOMException {
         try {
             final CSSOMParser parser = new CSSOMParser();
+            parser.setErrorHandler(ThrowCssExceptionErrorHandler.INSTANCE);
             properties_.clear();
             parser.parseStyleDeclaration(this, cssText);
         }
@@ -275,7 +274,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
         if ((csd == null) || (getLength() != csd.getLength())) {
             return false;
         }
-        for (Property property : properties_) {
+        for (final Property property : properties_) {
             final String propertyName = property.getName();
             // CSSValue propertyCSSValue1 = getPropertyCSSValue(propertyName);
             // CSSValue propertyCSSValue2 = csd.getPropertyCSSValue(propertyName);

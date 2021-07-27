@@ -49,7 +49,7 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         CSS_INHERIT,
 
         /** CSS_PRIMITIVE_VALUE. */
-        CSS_PRIMITIVE_VALUE;
+        CSS_PRIMITIVE_VALUE
     }
 
     /**
@@ -384,6 +384,7 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
                 case UNICODERANGE:
                 case SUB_EXPRESSION:
                 case FUNCTION:
+                case FUNCTION_CALC:
                     return CSSPrimitiveValueType.CSS_STRING;
                 case DIMENSION:
                     return CSSPrimitiveValueType.CSS_DIMENSION;
@@ -462,7 +463,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             }
 
             // for rgba values we are using this type
-            if (lu.getLexicalUnitType() == LexicalUnitType.FUNCTION) {
+            if (lu.getLexicalUnitType() == LexicalUnitType.FUNCTION
+                    || lu.getLexicalUnitType() == LexicalUnitType.FUNCTION_CALC) {
                 return lu.toString();
             }
         }

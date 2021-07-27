@@ -59,7 +59,7 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
 
         final String href = getHref();
         if (null != href) {
-            sb.append(" url(").append(href).append(")");
+            sb.append(" url(\"").append(href).append("\")");
         }
 
         final MediaListImpl ml = getMedia();

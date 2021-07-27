@@ -74,6 +74,7 @@ public interface LexicalUnit {
         UNICODERANGE,
         SUB_EXPRESSION,
         FUNCTION,
+        FUNCTION_CALC,
         DIMENSION
     }
 

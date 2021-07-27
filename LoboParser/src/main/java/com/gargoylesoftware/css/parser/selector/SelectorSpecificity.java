@@ -76,7 +76,7 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                     fieldD_++;
                 }
                 if (es.getConditions() != null) {
-                    for (Condition condition : es.getConditions()) {
+                    for (final Condition condition : es.getConditions()) {
                         readSelectorSpecificity(condition);
                     }
                 }

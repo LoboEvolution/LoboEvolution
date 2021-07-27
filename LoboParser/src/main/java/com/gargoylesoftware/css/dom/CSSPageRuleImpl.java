@@ -57,15 +57,18 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
         sb.append("@page ").append(sel);
 
         if (sel.length() > 0) {
-            sb.append(" ");
+            sb.append(' ');
         }
-        sb.append("{");
+        sb.append("{ ");
 
         final CSSStyleDeclarationImpl style = getStyle();
         if (null != style) {
             sb.append(style.getCssText());
+            if (style.getProperties().size() > 0) {
+                sb.append("; ");
+            }
         }
-        sb.append("}");
+        sb.append('}');
         return sb.toString();
     }
 

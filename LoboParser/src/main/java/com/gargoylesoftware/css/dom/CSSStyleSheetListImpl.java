@@ -98,7 +98,7 @@ public class CSSStyleSheetListImpl {
             return false;
         }
         int i = 0;
-        for (CSSStyleSheetImpl styleSheet : cssStyleSheets_) {
+        for (final CSSStyleSheetImpl styleSheet : cssStyleSheets_) {
             final CSSStyleSheetImpl styleSheet2 = ssl.cssStyleSheets_.get(i);
             if (!LangUtils.equals(styleSheet, styleSheet2)) {
                 return false;

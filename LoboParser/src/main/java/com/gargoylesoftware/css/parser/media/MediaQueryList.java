@@ -67,7 +67,7 @@ public class MediaQueryList extends AbstractLocatable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        for (MediaQuery mediaQuery : mediaQueries_) {
+        for (final MediaQuery mediaQuery : mediaQueries_) {
             if (sb.length() > 0) {
                 sb.append(", ");
             }

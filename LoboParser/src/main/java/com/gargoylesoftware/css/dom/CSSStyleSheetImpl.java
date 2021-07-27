@@ -31,6 +31,7 @@ import org.w3c.dom.Node;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.media.MediaQueryList;
 import com.gargoylesoftware.css.parser.selector.ElementSelector;
 import com.gargoylesoftware.css.parser.selector.Selector;
@@ -277,6 +278,13 @@ public class CSSStyleSheetImpl implements Serializable {
      * @param mediaText the new media text
      */
     public void setMediaText(final String mediaText) {
+        if (mediaText == null || mediaText.length() == 0) {
+            final MediaQueryList sml = new MediaQueryList();
+            sml.add(new MediaQuery(null));
+            media_ = new MediaListImpl(sml);
+            return;
+        }
+
         try {
             final CSSOMParser parser = new CSSOMParser();
             final MediaQueryList sml = parser.parseMedia(mediaText);
@@ -504,7 +512,7 @@ public class CSSStyleSheetImpl implements Serializable {
          */
         public CSSStyleSheetRuleIndex addMedia(final MediaListImpl mediaList) {
             final String media = mediaList.getMediaText();
-            for (CSSStyleSheetRuleIndex cssStyleSheetRuleIndex : children_) {
+            for (final CSSStyleSheetRuleIndex cssStyleSheetRuleIndex : children_) {
                 if (media.equals(cssStyleSheetRuleIndex.getMediaList().getMediaText())) {
                     return cssStyleSheetRuleIndex;
                 }
@@ -561,7 +569,7 @@ public class CSSStyleSheetImpl implements Serializable {
             }
 
             if (classes != null) {
-                for (String clazz : classes) {
+                for (final String clazz : classes) {
                     selectors = index.classSelectors_.get("." + clazz);
                     if (selectors != null && !selectors.isEmpty()) {
                         iterators_.add(selectors.iterator());

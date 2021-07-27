@@ -412,7 +412,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                 }
                 break;
             case URI:
-                sb.append("url(").append(getStringValue()).append(")");
+                sb.append("url(\"").append(getStringValue()).append("\")");
                 break;
             case COUNTER_FUNCTION:
                 sb.append("counter(");
@@ -465,6 +465,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                 }
                 break;
             case FUNCTION:
+            case FUNCTION_CALC:
                 final String functName = getFunctionName();
                 if (null != functName) {
                     sb.append(functName);
@@ -732,6 +733,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                     .append(")");
                 break;
             case FUNCTION:
+            case FUNCTION_CALC:
                 sb.append("FUNCTION(")
                     .append(getFunctionName())
                     .append("(");
@@ -752,29 +754,40 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
         LexicalUnit l = parameters_;
         if (l != null) {
             sb.append(l.toString());
+
+            LexicalUnit last = l;
             l = l.getNextLexicalUnit();
             while (l != null) {
-                if (l.getLexicalUnitType() != LexicalUnitType.OPERATOR_COMMA) {
+                if (l.getLexicalUnitType() != LexicalUnitType.OPERATOR_COMMA
+                        && !"=".equals(l.toString())
+                        && !"=".equals(last.toString())) {
                     sb.append(" ");
                 }
                 sb.append(l.toString());
+
+                last = l;
                 l = l.getNextLexicalUnit();
             }
         }
     }
 
     private String getTrimedDoubleValue() {
-        final double f = getDoubleValue();
-        final int i = (int) f;
+        final double d = getDoubleValue();
+        final int i = (int) d;
 
-        if (f - i == 0) {
-            return Integer.toString((int) f);
+        if (d - i == 0) {
+            return Integer.toString(i);
         }
 
-        final DecimalFormat decimalFormat = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
-        decimalFormat.setGroupingUsed(false);
-        decimalFormat.setMaximumFractionDigits(4);
-        return decimalFormat.format(f);
+        // i know this is uggly - suggestions are welcome
+        final String str = Double.toString(d);
+        if (str.contains("E")) {
+          final DecimalFormat decimalFormat = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+          decimalFormat.setGroupingUsed(false);
+          decimalFormat.setMaximumFractionDigits(7);
+          return decimalFormat.format(d);
+        }
+        return str;
     }
 
     /**
@@ -1111,8 +1124,15 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
     }
 
     /**
-     * <p>createFunction.</p>
-     *
+     * @param prev the previous LexicalUnit
+     * @param params the params
+     * @return lexical unit with type calc
+     */
+    public static LexicalUnit createCalc(final LexicalUnit prev, final LexicalUnit params) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.FUNCTION_CALC, "calc", params);
+    }
+
+    /**
      * @param prev the previous LexicalUnit
      * @param name the name
      * @param params the params
