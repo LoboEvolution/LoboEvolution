@@ -183,12 +183,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
         int fontSize = -1;
         if (parent != null) {
             AbstractCSSProperties currentStyle = parent.getCurrentStyle();
-            System.out.println("currentStyle.getFontSize() " + currentStyle.getFontSize());
             fontSize = FontValues.getPixelSize(currentStyle.getFontSize(), null, doc.getDefaultView(), -1);
         }
 
         if(fontSize == -1){
-            System.out.println("style.getFontSize() " + style.getFontSize());
             fontSize = FontValues.getPixelSize(style.getFontSize(), renderState, window, 0);
         }
 

@@ -354,8 +354,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @return a double.
 	 */
 	public double getOffsetHeight() {
-		final UINode uiNode = getUINode();
-		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().height;
+		return calculateHeight(true, true);
 	}
 
 	/**
@@ -386,8 +385,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @return a int.
 	 */
 	public int getOffsetWidth() {
-		final UINode uiNode = getUINode();
-		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().width;
+		return calculateWidth(true, true);
 	}
 
 	/**

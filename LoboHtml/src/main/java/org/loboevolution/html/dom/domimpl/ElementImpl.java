@@ -22,37 +22,26 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.*;
-
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.nodeimpl.DOMException;
+import org.loboevolution.html.dom.nodeimpl.NamedNodeMapImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.html.node.*;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.laf.FontFactory;
-import org.loboevolution.laf.FontKey;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
-import org.loboevolution.html.dom.nodeimpl.NamedNodeMapImpl;
-import org.loboevolution.html.gui.HtmlPanel;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Code;
-import org.loboevolution.html.node.Comment;
-import org.loboevolution.html.node.DOMTokenList;
-
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
-import org.loboevolution.html.node.Text;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>ElementImpl class.</p>
@@ -531,25 +520,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public int getClientHeight() {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-		Dimension preferredSize = htmlPanel.getPreferredSize();
-		AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();	
-		String height = currentStyle.getHeight();
-						
-		if (Strings.isBlank(height) || "auto".equalsIgnoreCase(height)) {
-			if (this instanceof HTMLDivElementImpl && Strings.isBlank(getTextContent())) {
-				height = "0px";
-			}
-			
-			if (this instanceof HTMLDivElementImpl && Strings.isNotBlank(getTextContent())) {
-				FontFactory FONT_FACTORY = FontFactory.getInstance();
-				Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
-				height = DEFAULT_FONT.getSize() + "px";
-			}
-		}
-		return HtmlValues.getPixelSize(height, null, doc.getDefaultView(), -1, preferredSize.height);
+		return calculateHeight(false, true);
 	}
 
 	/** {@inheritDoc} */
@@ -571,17 +542,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public int getClientWidth() {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-		Dimension preferredSize = htmlPanel.getPreferredSize();
-		AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
-		String width = currentStyle.getWidth();
-		
-		if (Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
-			width = "100%";
-		}		
-		return HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, preferredSize.width);
+		return calculateWidth(false, true);
 	}
 
 	/**
@@ -864,4 +825,100 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
         }
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
     }
+
+	protected int calculateWidth(boolean border, boolean padding) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+		final Dimension preferredSize = htmlPanel.getPreferredSize();
+		final AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		String width = currentStyle.getWidth();
+		String paddingRight = currentStyle.getPaddingRight();
+		String paddingLeft = currentStyle.getPaddingLeft();
+		String borderLeftWidth = currentStyle.getBorderLeftWidth();
+		String borderRightWidth = currentStyle.getBorderRightWidth();
+		String boxSizing = currentStyle.getBoxSizing();
+		int sizeWidth = preferredSize.width;
+
+		final Node nodeObj = getParentNode();
+		if (nodeObj instanceof HTMLElementImpl) {
+			HTMLElementImpl p = (HTMLElementImpl)nodeObj;
+			if(p.getClientHeight() != -1) {
+				sizeWidth = p.getClientWidth();
+			}
+		}
+
+		if (Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
+			width = "100%";
+		}
+
+		int widthSize = HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, sizeWidth);
+
+		if ("border-box".equals(boxSizing)) {
+			padding = false;
+			border = false;
+		}
+
+		if (padding) {
+			widthSize += HtmlValues.getPixelSize(paddingRight, null, doc.getDefaultView(), 0);
+			widthSize += HtmlValues.getPixelSize(paddingLeft, null, doc.getDefaultView(), 0);
+		}
+
+		if (border) {
+			widthSize += HtmlValues.getPixelSize(borderRightWidth, null, doc.getDefaultView(), 0);
+			widthSize += HtmlValues.getPixelSize(borderLeftWidth, null, doc.getDefaultView(), 0);
+		}
+
+		return widthSize;
+	}
+
+	protected int calculateHeight(boolean border, boolean padding) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+		final Dimension preferredSize = htmlPanel.getPreferredSize();
+		final AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		String height = currentStyle.getHeight();
+		String paddingTop = currentStyle.getPaddingTop();
+		String paddingBottom = currentStyle.getPaddingBottom();
+		String borderTopWidth = currentStyle.getBorderTopWidth();
+		String borderBottomWidth = currentStyle.getBorderBottomWidth();
+		String boxSizing = currentStyle.getBoxSizing();
+		int sizeHeight = preferredSize.height;
+
+		final Node nodeObj = getParentNode();
+		if (nodeObj instanceof HTMLElementImpl) {
+			HTMLElementImpl p = (HTMLElementImpl)nodeObj;
+			if(p.getClientHeight() != -1) {
+				sizeHeight = p.getClientHeight();
+			}
+		}
+
+		if ("auto".equalsIgnoreCase(height)) {
+			height = "100%";
+		}
+
+		if (Strings.isBlank(height)) {
+			height = "18";
+		}
+
+		int heightSize = HtmlValues.getPixelSize(height, null, doc.getDefaultView(), -1, sizeHeight);
+
+		if ("border-box".equals(boxSizing)) {
+			padding = false;
+			border = false;
+		}
+
+		if (padding) {
+			heightSize += HtmlValues.getPixelSize(paddingTop, null, doc.getDefaultView(), 0);
+			heightSize += HtmlValues.getPixelSize(paddingBottom, null, doc.getDefaultView(), 0);
+		}
+
+		if (border) {
+			heightSize += HtmlValues.getPixelSize(borderTopWidth, null, doc.getDefaultView(), 0);
+			heightSize += HtmlValues.getPixelSize(borderBottomWidth, null, doc.getDefaultView(), 0);
+		}
+
+		return heightSize;
+	}
 }

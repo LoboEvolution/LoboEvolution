@@ -1120,7 +1120,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void offsetHeight_empty_tag() {
+    public void offsetHeightemptytag() {
         final String html = "<html><head><script>\n"
 
                 + "  function test() {\n"
@@ -1136,7 +1136,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void offsetHeight_empty() {
+    public void offsetHeightempty() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementById('div1').offsetHeight);\n"
@@ -1151,7 +1151,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void offsetHeight_displayNone() {
+    public void offsetHeightdisplayNone() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementById('div1').offsetHeight);\n"
@@ -1166,7 +1166,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void offsetHeight_with_content() {
+    public void offsetHeightwithcontent() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementById('div1').offsetHeight);\n"
@@ -1181,7 +1181,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void offsetHeight_with_child() {
+    public void offsetHeightwithchild() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementById('div1').offsetHeight);\n"
@@ -1196,7 +1196,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void offsetHeight_with_childHeight() {
+    public void offsetHeightwithchildHeight() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementById('div1').offsetHeight);\n"
@@ -1211,7 +1211,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void offsetHeight_setting_height() {
+    public void offsetHeightsettingheight() {
         final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  .v-loading-indicator {\n"

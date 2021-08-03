@@ -22,31 +22,32 @@
  */
 package org.loboevolution.html.style;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import com.gargoylesoftware.css.util.CSSProperties;
+import org.loboevolution.common.Objects;
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.style.setter.*;
+import org.loboevolution.js.AbstractScriptableDelegate;
+import org.w3c.dom.DOMException;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import org.loboevolution.common.Objects;
-import org.loboevolution.html.node.css.CSS3Properties;
-import org.loboevolution.html.style.setter.BackgroundImageSetter;
-import org.loboevolution.html.style.setter.BackgroundSetter;
-import org.loboevolution.html.style.setter.BorderSetter1;
-import org.loboevolution.html.style.setter.BorderSetter2;
-import org.loboevolution.html.style.setter.BorderStyleSetter;
-import org.loboevolution.html.style.setter.FontSetter;
-import org.loboevolution.html.style.setter.FourCornersSetter;
-import org.loboevolution.html.style.setter.PropertyCSS;
-import org.loboevolution.html.style.setter.SubPropertySetter;
-import org.loboevolution.js.AbstractScriptableDelegate;
-
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.util.CSSProperties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>AbstractCSSProperties class.</p>
  */
 public class AbstractCSSProperties extends AbstractScriptableDelegate implements CSSProperties, CSS3Properties {
+
+	/** Constant logger */
+	protected static final Logger logger = Logger.getLogger(AbstractCSSProperties.class.getName());
 	
 	private static final Map<String, SubPropertySetter> SUB_SETTERS = new HashMap<>();
 
@@ -81,6 +82,8 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 
 	private Map<String, PropertyCSS> valueMap = null;
 
+	private String cssText;
+
 	/**
 	 * <p>Constructor for AbstractCSSProperties.</p>
 	 *
@@ -107,7 +110,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				final String propertyName = prop.getName();
 				final String propertyValue = styleDeclaration.getPropertyValue(propertyName);
 				final String priority = styleDeclaration.getPropertyPriority(propertyName);
-				final boolean important = priority != null && priority.length() != 0 && "important".equals(priority);
+				final boolean important = "important".equals(priority);
 				setPropertyValueProcessed(propertyName.toLowerCase(), propertyValue, styleDeclaration, important);
 			});
 		}
@@ -2002,6 +2005,35 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	public void setZIndex(String zIndex) {
 		this.setPropertyValueLC(Z_INDEX, zIndex);
 		this.context.informPositionInvalid();
+	}
+
+	/**
+	 * <p>setCssText.</p>
+	 *
+	 * @param cssText a {@link java.lang.String} object.
+	 */
+	public void setCssText(final String cssText) throws DOMException {
+		this.cssText = cssText;
+		AbstractCSSProperties sds = new AbstractCSSProperties(null);
+		if (Strings.isNotBlank(cssText)) {
+			final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+			try {
+				final CSSStyleDeclarationImpl sd = parser.parseStyleDeclaration(cssText);
+				sds.addStyleDeclaration(sd);
+				setLocalStyleProperties(sds);
+			} catch (final Exception err) {
+				logger.log(Level.WARNING, "Unable to parse style attribute value", err);
+			}
+		}
+	}
+
+	/**
+	 * <p>getCssText.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
+	public String getCssText() throws DOMException {
+		return this.cssText;
 	}
 	
 	/**
