@@ -161,6 +161,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
                     return CSSValues.TABLE_CELL.getValue();
                 case RenderState.DISPLAY_TABLE:
                     return CSSValues.TABLE.getValue();
+                case RenderState.DISPLAY_TABLE_CAPTION:
+                    return CSSValues.TABLE_CAPTION.getValue();
+                case RenderState.DISPLAY_TABLE_COLUMN:
+                    return CSSValues.TABLE_COLUMN.getValue();
+                case RenderState.DISPLAY_TABLE_COLUMN_GROUP:
+                    return CSSValues.TABLE_COLUMN_GROUP.getValue();
+                case RenderState.DISPLAY_TABLE_ROW_GROUP:
+                    return CSSValues.TABLE_ROW_GROUP.getValue();
+                case RenderState.DISPLAY_TABLE_HEADER_GROUP:
+                    return CSSValues.TABLE_HEADER_GROUP.getValue();
+                case RenderState.DISPLAY_TABLE_FOOTER_GROUP:
+                    return CSSValues.TABLE_FOOTER_GROUP.getValue();
                 case RenderState.DISPLAY_INLINE_BLOCK:
                     return CSSValues.INLINE_BLOCK.getValue();
                 case RenderState.DISPLAY_INLINE_TABLE:

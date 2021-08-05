@@ -27,6 +27,8 @@ import org.loboevolution.html.dom.filter.OptionFilter;
 import org.loboevolution.html.dom.input.SelectOption;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Undefined;
 
 
@@ -298,6 +300,12 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	public void set(int name, Element value) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
 	}
 	
 	/** {@inheritDoc} */

@@ -162,11 +162,9 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  <p id='p'>\n"
                 + "    <a id='a'></a>\n"
                 + "    <abbr id='abbr'></abbr>\n"
-                + "    <acronym id='acronym'></acronym>\n"
                 + "    <address id='address'></address>\n"
                 + "    <article id='article'></article>\n"
                 + "    <aside id='aside'></aside>\n"
-                + "    <audio id='audio'></audio>\n"
                 + "  </p>\n"
                 + "  <img usemap='#imgmap'>\n"
                 + "    <map name='imgmap'>\n"
@@ -184,15 +182,13 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  <script>\n"
                 + "    x('a');\n"
                 + "    x('abbr');\n"
-                + "    x('acronym');\n"
                 + "    x('address');\n"
                 + "    x('area');\n"
                 + "    x('article');\n"
                 + "    x('aside');\n"
-                + "    x('audio');\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none"};
+        final String[] messages = {"inline", "inline", "inline", "inline", "block", "block"};
         checkHtmlAlert(html, messages);
     }
 
@@ -204,7 +200,6 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    <b id='b'></b>\n"
                 + "    <bdi id='bdi'></bdi>\n"
                 + "    <bdo id='bdo'></bdo>\n"
-                + "    <big id='big'></big>\n"
                 + "    <blockquote id='blockquote'></blockquote>\n"
                 + "    <br id='br'>\n"
                 + "    <button id='button' type='button'></button>\n"
@@ -221,13 +216,12 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    x('b');\n"
                 + "    x('bdi');\n"
                 + "    x('bdo');\n"
-                + "    x('big');\n"
                 + "    x('blockquote');\n"
                 + "    x('br');\n"
                 + "    x('button');\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"inline", "inline", "inline", "inline", "block", "inline", "inline-block"};
+        final String[] messages = {"inline", "inline", "inline", "inline", "inline", "inline-block"};
         checkHtmlAlert(html, messages);
     }
 
@@ -277,7 +271,6 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
     @Test
     public void defaultDisplayValuesD() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
-                + "  <datalist id='datalist'></datalist>\n"
                 + "  <dl id='dl'>\n"
                 + "    <dt id='dt'></dt>\n"
                 + "      <dd id='dd'><dd>\n"
@@ -299,7 +292,6 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    }\n"
                 + "  </script>\n"
                 + "  <script>\n"
-                + "    x('datalist');\n"
                 + "    x('dd');\n"
                 + "    x('del');\n"
                 + "    x('details');\n"
@@ -309,10 +301,9 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    x('div');\n"
                 + "    x('dl');\n"
                 + "    x('dt');\n"
-
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"};
+        final String[] messages = {"block", "inline", "block", "inline", "none", "block", "block", "block", "block"};
         checkHtmlAlert(html, messages);
     }
 
@@ -350,9 +341,6 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  <figure id='figure'>\n"
                 + "    <figcaption id='figcaption'></figcaption>\n"
                 + "  </figure>\n"
-                + "  <p id='p'>\n"
-                + "    <font id='font'></font>\n"
-                + "  </p>\n"
                 + "  <footer id='footer'></footer>\n"
                 + "  <script>\n"
                 + "    function x(id) {\n"
@@ -366,12 +354,11 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    x('fieldset');\n"
                 + "    x('figcaption');\n"
                 + "    x('figure');\n"
-                + "    x('font');\n"
                 + "    x('footer');\n"
                 + "    x('form');\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"block", "block", "block", "inline", "block", "block"};
+        final String[] messages = {"block", "block", "block", "block", "block"};
         checkHtmlAlert(html, messages);
     }
 
@@ -502,7 +489,6 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  <menu id='menu'>\n"
                 + "    <li id='li'></li>\n"
                 + "  </menu>\n"
-                + "  <meter id='meter'></meter>\n"
                 + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
@@ -515,10 +501,9 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    x('map');\n"
                 + "    x('mark');\n"
                 + "    x('menu');\n"
-                + "    x('meter');\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"inline", "inline", "block", "inline-block"};
+        final String[] messages = {"inline", "inline", "block"};
         checkHtmlAlert(html, messages);
     }
 
@@ -584,39 +569,12 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  </script>\n"
                 + "  <script>\n"
                 + "    x('p');\n"
-                + "    x('param');\n"
                 + "    x('pre');\n"
                 + "    x('progress');\n"
                 + "    x('q');\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"block", "none", "block", "inline-block", "inline"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void defaultDisplayValuesR() {
-        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
-                + "  <ruby id='ruby'>\n"
-                + "    <rt id='rt'>\n"
-                + "      <rp id='rp'></rp>\n"
-                + "    </rt>\n"
-                + "  </ruby> \n"
-                + "  <script>\n"
-                + "    function x(id) {\n"
-                + "      var e = document.getElementById(id);\n"
-                + "      var cs = window.getComputedStyle(e, null);\n"
-                + "      var disp = cs ? cs.display : null;\n"
-                + "      alert(disp);\n"
-                + "    }\n"
-                + "  </script>\n"
-                + "  <script>\n"
-                + "    x('ruby');\n"
-                + "    x('rt');\n"
-                + "    x('rp');\n"
-                + "  </script>\n"
-                + "</body></html>";
-        final String[] messages = {"inline", "block", "none"};
+        final String[] messages = {"block", "block", "inline-block", "inline"};
         checkHtmlAlert(html, messages);
     }
 
@@ -671,7 +629,6 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 "inline", "inline", "inline", "inline", "inline", "block", "inline"};
         checkHtmlAlert(html, messages);
     }
-
 
     @Test
     public void defaultDisplayValuesT() {

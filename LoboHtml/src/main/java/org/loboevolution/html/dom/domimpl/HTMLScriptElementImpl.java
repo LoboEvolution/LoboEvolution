@@ -37,6 +37,8 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLScriptElement;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
 import org.mozilla.javascript.Context;
@@ -278,6 +280,12 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	@Override
 	public void setReferrerPolicy(String referrerPolicy) {
 		// TODO Auto-generated method stub
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_NONE);
 	}
 
 	/** {@inheritDoc} */

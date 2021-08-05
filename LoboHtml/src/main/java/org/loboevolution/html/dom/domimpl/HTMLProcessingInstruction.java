@@ -28,6 +28,8 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.ProcessingInstruction;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * HTML DOM object representing processing instruction as per HTML 4.0

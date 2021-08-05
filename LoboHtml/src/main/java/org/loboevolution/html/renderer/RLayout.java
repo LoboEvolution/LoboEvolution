@@ -147,46 +147,46 @@ public class RLayout {
 		@Override
 		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			final int display = calculateLayout(markupElement);
-			
-	        switch (display) {
-	        case RenderState.DISPLAY_TABLE_COLUMN:
-	        case RenderState.DISPLAY_TABLE_COLUMN_GROUP:
-	        case RenderState.DISPLAY_NONE:
-	            final UINode node = markupElement.getUINode();
-	            if (node instanceof BaseBoundableRenderable) {
-	                ((BaseBoundableRenderable) node).markLayoutValid();
-	            }
-	            break;
-	        case RenderState.DISPLAY_BLOCK:
-	        case RenderState.DISPLAY_TABLE_ROW:
-	            bodyLayout.layoutRBlock(markupElement);
-	            break;
-	        case RenderState.DISPLAY_LIST_ITEM:
-	            final String tagName = markupElement.getTagName();
-	            if ("UL".equalsIgnoreCase(tagName) || "OL".equalsIgnoreCase(tagName)) {
-	                bodyLayout.layoutList(markupElement);
-	            } else {
-	                bodyLayout.layoutListItem(markupElement);
-	            }
-	            break;
-			case RenderState.DISPLAY_TABLE:
-                bodyLayout.layoutRTable(markupElement);
-                break;
-	        case RenderState.DISPLAY_INLINE_TABLE:
-	        case RenderState.DISPLAY_INLINE_BLOCK:
-	            bodyLayout.layoutRInlineBlock(markupElement);
-	            break;
-	      case RenderState.DISPLAY_FLEX_BOX:
-	        	 bodyLayout.layoutRFlex(markupElement);
-	        	 break;
-	      case RenderState.DISPLAY_FLEX_CHILD:
-	        	 bodyLayout.layoutChildFlex(markupElement);
-	        	 break; 
-	      case RenderState.DISPLAY_TABLE_CELL:
-	        default:
-	            bodyLayout.layoutMarkup(markupElement);
-	            break;
-	        }
+
+			switch (display) {
+				case RenderState.DISPLAY_TABLE_COLUMN:
+				case RenderState.DISPLAY_TABLE_COLUMN_GROUP:
+				case RenderState.DISPLAY_NONE:
+					final UINode node = markupElement.getUINode();
+					if (node instanceof BaseBoundableRenderable) {
+						((BaseBoundableRenderable) node).markLayoutValid();
+					}
+					break;
+				case RenderState.DISPLAY_BLOCK:
+				case RenderState.DISPLAY_TABLE_ROW:
+					bodyLayout.layoutRBlock(markupElement);
+					break;
+				case RenderState.DISPLAY_LIST_ITEM:
+					final String tagName = markupElement.getTagName();
+					if ("UL".equalsIgnoreCase(tagName) || "OL".equalsIgnoreCase(tagName)) {
+						bodyLayout.layoutList(markupElement);
+					} else {
+						bodyLayout.layoutListItem(markupElement);
+					}
+					break;
+				case RenderState.DISPLAY_TABLE:
+					bodyLayout.layoutRTable(markupElement);
+					break;
+				case RenderState.DISPLAY_INLINE_TABLE:
+				case RenderState.DISPLAY_INLINE_BLOCK:
+					bodyLayout.layoutRInlineBlock(markupElement);
+					break;
+				case RenderState.DISPLAY_FLEX_BOX:
+					bodyLayout.layoutRFlex(markupElement);
+					break;
+				case RenderState.DISPLAY_FLEX_CHILD:
+					bodyLayout.layoutChildFlex(markupElement);
+					break;
+				case RenderState.DISPLAY_TABLE_CELL:
+				default:
+					bodyLayout.layoutMarkup(markupElement);
+					break;
+			}
 		}
 		
 		private int calculateLayout(HTMLElementImpl markupElement) {
@@ -302,7 +302,7 @@ public class RLayout {
 	}
 
 	protected static class ImgLayout extends CommonWidgetLayout {
-		private Map<String, Image> map = new HashMap<>();
+		private final Map<String, Image> map = new HashMap<>();
 
 		public ImgLayout() {
 			super(ADD_INLINE);
@@ -323,7 +323,7 @@ public class RLayout {
 	}
 
 	protected static class InputLayout extends CommonWidgetLayout {
-		private Map<String, Image> map = new HashMap<>();
+		private final Map<String, Image> map = new HashMap<>();
 
 		public InputLayout() {
 			super(ADD_INLINE);

@@ -21,7 +21,8 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLHRElement;
-import org.loboevolution.html.node.Element;
+import org.loboevolution.html.renderstate.BlockRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLHRElementImpl class.</p>
@@ -94,6 +95,13 @@ public class HTMLHRElementImpl extends HTMLElementImpl implements HTMLHRElement 
 	public void setWidth(String width) {
 		setAttribute("width", width);
 	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new BlockRenderState(prevRenderState, this);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

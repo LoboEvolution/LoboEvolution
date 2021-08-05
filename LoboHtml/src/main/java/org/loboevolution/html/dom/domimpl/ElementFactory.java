@@ -45,11 +45,16 @@ class ElementFactory {
 
 		final HTMLElementBuilder div = new HTMLElementBuilder.Div();
 		builders.put(HTMLTag.ARTICLE, div);
+		builders.put(HTMLTag.ASIDE, div);
 		builders.put(HTMLTag.DIV, div);
 		builders.put(HTMLTag.DL, div);
 		builders.put(HTMLTag.DT, div);
+		builders.put(HTMLTag.FIGCAPTION, div);
 		builders.put(HTMLTag.MAIN, div);
+		builders.put(HTMLTag.MENU, div);
 		builders.put(HTMLTag.NAV, div);
+		builders.put(HTMLTag.SECTION, div);
+		builders.put(HTMLTag.SUMMARY, div);
 		builders.put(HTMLTag.HEADER, div);
 		builders.put(HTMLTag.FOOTER, div);
 
@@ -58,6 +63,7 @@ class ElementFactory {
 		builders.put(HTMLTag.CAPTION, new HTMLElementBuilder.Caption());
 		builders.put(HTMLTag.PRE, new HTMLElementBuilder.Pre());
 		builders.put(HTMLTag.P, new HTMLElementBuilder.P());
+		builders.put(HTMLTag.PROGRESS, new HTMLElementBuilder.Progress());
 
 		final HTMLElementBuilder quote = new HTMLElementBuilder.Quote();
 		builders.put(HTMLTag.BLOCKQUOTE, quote);
@@ -77,6 +83,7 @@ class ElementFactory {
 		builders.put(HTMLTag.THEAD, new HTMLElementBuilder.THead());
 		builders.put(HTMLTag.TBODY, new HTMLElementBuilder.TBody());
 		builders.put(HTMLTag.COL, new HTMLElementBuilder.Col());
+		builders.put(HTMLTag.COLGROUP, new HTMLElementBuilder.ColGroup());
 		
 		builders.put(HTMLTag.FORM, new HTMLElementBuilder.Form());
 		builders.put(HTMLTag.INPUT, new HTMLElementBuilder.Input());

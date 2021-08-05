@@ -17,62 +17,37 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Feb 12, 2006
- */
+
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.dom.HTMLUListElement;
-import org.loboevolution.html.renderstate.BlockRenderState;
+import org.loboevolution.html.dom.HTMLTableCaptionElement;
+import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
- * <p>HTMLUListElementImpl class.</p>
+ * The Class HTMLProgressElementImpl.
  */
-public class HTMLUListElementImpl extends HTMLElementImpl implements HTMLUListElement {
+public class HTMLProgressElementImpl extends HTMLElementImpl {
+
 	/**
-	 * <p>Constructor for HTMLUListElementImpl.</p>
+	 * Instantiates a new HTML table caption element impl.
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name
+	 *            the name
 	 */
-	public HTMLUListElementImpl(final String name) {
+	public HTMLProgressElementImpl(final String name) {
 		super(name);
 	}
 
-	/** {@inheritDoc} */
+		/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new BlockRenderState(prevRenderState, this);
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
 	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isCompact() {
-		final String compactText = getAttribute("compact");
-		return "compact".equalsIgnoreCase(compactText);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getType() {
-		return getAttribute("type");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setCompact(boolean compact) {
-		setAttribute("compact", compact ? "compact" : null);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setType(String type) {
-		setAttribute("type", type);
-	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "[object HTMLTableUListlement]";
+		return "[object HTMLProgressElement]";
 	}
 }

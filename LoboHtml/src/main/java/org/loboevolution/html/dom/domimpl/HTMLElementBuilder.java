@@ -251,6 +251,13 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
+	public static class Progress extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLProgressElementImpl(name);
+		}
+	}
+
 	public static class Script extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
@@ -381,6 +388,13 @@ public abstract class HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
 			return new HTMLTableColElementImpl(name);
+		}
+	}
+
+	public static class ColGroup extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLTableColGroupElementImpl(name);
 		}
 	}
 

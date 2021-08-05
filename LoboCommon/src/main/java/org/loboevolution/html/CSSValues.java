@@ -224,6 +224,18 @@ public enum CSSValues {
 
 	TABLE_ROW("table-row"),
 
+	TABLE_ROW_GROUP("table-row-group"),
+
+	TABLE_CAPTION("table-caption"),
+
+	TABLE_COLUMN("table-column"),
+
+	TABLE_COLUMN_GROUP("table-column-group"),
+
+	TABLE_HEADER_GROUP("table-header-group"),
+
+	TABLE_FOOTER_GROUP("table-footer-group"),
+
 	TEXT_CSS("text"),
 
 	TOP("top"),

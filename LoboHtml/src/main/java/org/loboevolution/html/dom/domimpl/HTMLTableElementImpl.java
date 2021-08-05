@@ -52,7 +52,6 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
 	private HTMLTableSectionElement thead;
 
-
 	/**
 	 * <p>Constructor for HTMLTableElementImpl.</p>
 	 */

@@ -21,14 +21,11 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLTableCaptionElement;
+import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.renderstate.TableCaptionRenderState;
 
 /**
  * The Class HTMLTableCaptionElementImpl.
- *
- *
- *
  */
 public class HTMLTableCaptionElementImpl extends HTMLElementImpl implements HTMLTableCaptionElement {
 
@@ -41,7 +38,6 @@ public class HTMLTableCaptionElementImpl extends HTMLElementImpl implements HTML
 	public HTMLTableCaptionElementImpl(final String name) {
 		super(name);
 	}
-
 
 	/** {@inheritDoc} */
 	@Override
@@ -75,12 +71,10 @@ public class HTMLTableCaptionElementImpl extends HTMLElementImpl implements HTML
 		this.setAttribute("caption-side", captionSide);
 	}
 
-
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		RenderState tmpRenderState = prevRenderState;
-		return new TableCaptionRenderState(tmpRenderState, this);
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_CAPTION);
 	}
 	
 	/** {@inheritDoc} */

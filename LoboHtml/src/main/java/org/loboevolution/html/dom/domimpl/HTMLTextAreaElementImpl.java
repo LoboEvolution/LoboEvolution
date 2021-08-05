@@ -30,6 +30,8 @@ import org.loboevolution.html.dom.input.TextArea;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLTextAreaElementImpl class.</p>
@@ -56,9 +58,9 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	public int getCols() {	
 		String cols = this.getAttribute("cols");
 		if (Strings.isNotBlank(cols)  && Strings.isNumeric(cols)) {
-			Float rowsInt = Float.parseFloat(cols);
+			float rowsInt = Float.parseFloat(cols);
 			if (rowsInt > -1) {
-				return rowsInt.intValue();
+				return (int) rowsInt;
 			} else {
 				return 20;
 			}
@@ -89,9 +91,9 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	public int getRows() {
 		String rows = this.getAttribute("rows");
 		if (Strings.isNotBlank(rows)  && Strings.isNumeric(rows)) {
-			Float rowsInt = Float.parseFloat(rows);
+			float rowsInt = Float.parseFloat(rows);
 			if (rowsInt > -1) {
-				return rowsInt.intValue();
+				return (int) rowsInt;
 			} else {
 				return 2;
 			}
@@ -200,7 +202,12 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	@Override
 	public void setWrap(String wrap) {
 		// TODO Auto-generated method stub
-		
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
 	}
 
 	/** {@inheritDoc} */

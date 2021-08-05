@@ -17,27 +17,36 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.renderstate;
 
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+package org.loboevolution.html.dom.domimpl;
+
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
- * The Class TableCaptionRenderState.
- *
- *
- *
+ * <p>HTMLTableColGroupElementImpl class.</p>
  */
-public class TableCaptionRenderState extends DisplayRenderState {
-	
+public class HTMLTableColGroupElementImpl extends HTMLElementImpl {
+
 	/**
-	 * Instantiates a new table caption render state.
+	 * <p>Constructor for HTMLTableColElementImpl.</p>
 	 *
-	 * @param prevRenderState
-	 *            the prev render state
-	 * @param element
-	 *            the element
+	 * @param name a {@link String} object.
 	 */
-	public TableCaptionRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-		super(prevRenderState, element, DISPLAY_TABLE_CAPTION);
+	public HTMLTableColGroupElementImpl(final String name) {
+		super(name);
 	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_COLUMN_GROUP);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLTableColGroupElement]";
+	}
+
 }

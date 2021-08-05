@@ -23,9 +23,6 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * <p>DisplayRenderState class.</p>
- *
- *
- *
  */
 public class DisplayRenderState extends StyleSheetRenderState {
 	private final int defaultDisplay;

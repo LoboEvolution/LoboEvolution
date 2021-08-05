@@ -27,11 +27,12 @@ import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.renderer.HtmlController;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.ValidityState;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLButtonElementImpl class.</p>
@@ -168,7 +169,7 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 			childNodes.forEach(child -> {
 				if (child.getNodeType() == NodeType.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
-					String childText = "";
+					String childText;
 					nodeValue = nodeValue.replace('\n', ' ');
 					nodeValue = nodeValue.replace('\r', ' ');
 					nodeValue = nodeValue.replace('\t', ' ');
@@ -183,6 +184,11 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 		} else {
 			return text.toString();
 		}
+	}
+
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
 	}
 
 	/** {@inheritDoc} */

@@ -80,9 +80,6 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		getHeadingFontSize();
-		// (can't put a RenderState in the middle - messes up "em" sizes).
-		// prevRenderState = new FontSizeRenderState(prevRenderState, fontSize,
-		// java.awt.Font.BOLD);
 		return new HeadingRenderState(prevRenderState, this);
 	}
 

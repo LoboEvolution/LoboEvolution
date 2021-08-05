@@ -24,15 +24,14 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLTableRowElement;
 import org.loboevolution.html.dom.HTMLTableSectionElement;
 import org.loboevolution.html.dom.filter.ElementFilter;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 import org.w3c.dom.DOMException;
 
 import java.util.Arrays;
 
 /**
  * <p>HTMLTableSectionElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTMLTableSectionElement {
 
@@ -121,7 +120,22 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 	@Override
 	public void setvAlign(String vAlign) {
 		setAttribute("valign", vAlign);
-		
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		final String name = getNodeName();
+		switch (name) {
+			case "TFOOT":
+				return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_FOOTER_GROUP);
+			case "TBODY":
+				return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_ROW_GROUP);
+			case "THEAD":
+				return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_HEADER_GROUP);
+			default:
+				return null;
+		}
 	}
 	
 	/** {@inheritDoc} */

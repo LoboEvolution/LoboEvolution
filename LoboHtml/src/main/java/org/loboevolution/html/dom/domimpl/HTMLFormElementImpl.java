@@ -34,6 +34,8 @@ import org.loboevolution.html.dom.filter.InputFilter;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.NodeVisitor;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.renderstate.BlockRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
 import org.loboevolution.html.node.Element;
@@ -343,6 +345,12 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	public boolean reportValidity() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new BlockRenderState(prevRenderState, this);
 	}
 	
 	/** {@inheritDoc} */

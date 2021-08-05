@@ -23,14 +23,12 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.renderstate.BlockRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLOptionElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOptionElement {
 
@@ -151,8 +149,12 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 		setAttribute("value", value);
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new BlockRenderState(prevRenderState, this);
+	}
 
-	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -21,12 +21,11 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLTableColElement;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLTableColElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTableColElement {
 
@@ -116,7 +115,18 @@ public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTabl
 	@Override
 	public void setWidth(String width) {
 		// TODO Auto-generated method stub
-		
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_COLUMN);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLTableColElement]";
 	}
 
 

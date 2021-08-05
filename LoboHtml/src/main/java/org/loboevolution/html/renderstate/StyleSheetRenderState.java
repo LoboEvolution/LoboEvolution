@@ -466,6 +466,15 @@ public class StyleSheetRenderState implements RenderState {
 		case TABLE_ROW:
 			displayInt = DISPLAY_TABLE_ROW;
 			break;
+		case TABLE_CAPTION:
+			displayInt = DISPLAY_TABLE_CAPTION;
+			break;
+		case TABLE_COLUMN:
+			displayInt = DISPLAY_TABLE_COLUMN;
+			break;
+		case TABLE_COLUMN_GROUP:
+			displayInt = DISPLAY_TABLE_COLUMN_GROUP;
+			break;
 		case INLINE:
 			displayInt = DISPLAY_INLINE;
 			break;

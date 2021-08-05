@@ -200,6 +200,8 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 								sheet.setDisabled(this.disabled);
 								CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
 								cssStyleSheet.setOwnerNode(this);
+								doc.addStyleSheet(cssStyleSheet);
+								this.styleSheet = cssStyleSheet;
 							}
 						}
 					}

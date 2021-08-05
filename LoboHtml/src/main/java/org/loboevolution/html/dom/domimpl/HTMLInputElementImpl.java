@@ -29,6 +29,8 @@ import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLInputElement;
 import org.loboevolution.html.dom.input.*;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 import java.awt.*;
 import java.util.Map;
@@ -599,6 +601,12 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	public void stepUp() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
 	}
 	
 	/** {@inheritDoc} */
