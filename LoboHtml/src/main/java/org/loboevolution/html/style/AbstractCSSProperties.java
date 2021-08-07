@@ -2064,6 +2064,16 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		}
 		return null;
 	}
+
+	/**
+	 * Sets the value of the specified property.
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param valueString a {@link java.lang.String} object.
+	 */
+	public void setProperty(final String name, final String valueString) {
+		setLengthPropertyValueLC(name, valueString);
+	}
 	
 	/**
 	 * <p>setPropertyValueLC.</p>

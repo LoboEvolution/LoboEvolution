@@ -1403,8 +1403,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     private void setLengthProperty(final String cssProp, final String prop) {
-        final String[] expected = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                "17px", "17px", "17px", null, "17px", null, "17px", "17px", "17px"};
+        final String[] expected = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+                "17px", "17px", "17px", null, "17px", "17px", "17px", "17px"};
         setLengthProperty(cssProp, prop, "'4', ''", expected[0]);
         setLengthProperty(cssProp, prop, "'5px', ''", expected[1]);
         setLengthProperty(cssProp, prop, "'6em', ''", expected[2]);
