@@ -1492,14 +1492,14 @@ public class CSSSelectorTest extends LoboUnitTest {
 
     @Test
     public void activeEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:active", messages);
         emptyAndDetached(":active", messages);
     }
 
     @Test
     public void checkedEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:checked", messages);
         emptyAndDetached(":checked", messages);
     }
@@ -1507,126 +1507,126 @@ public class CSSSelectorTest extends LoboUnitTest {
 
     @Test
     public void disabledEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:disabled", messages);
         emptyAndDetached(":disabled", messages);
     }
 
     @Test
     public void emptyEmptyDetached() {
-        final String[] messages = {"null", "null", "[object HTMLSpanElement]"};
+        final String[] messages = {null, null, "[object HTMLSpanElement]"};
         emptyAndDetached("*:empty", messages);
         emptyAndDetached(":empty", messages);
     }
 
     @Test
     public void enabledEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:enabled", messages);
         emptyAndDetached(":enabled", messages);
     }
 
     @Test
     public void firstchildEmptyDetached() {
-        final String[] messages = {"null", "null", "[object HTMLSpanElement]"};
+        final String[] messages = {null, null, "[object HTMLSpanElement]"};
         emptyAndDetached("*:first-child", messages);
         emptyAndDetached(":first-child", messages);
     }
 
     @Test
     public void firstoftypeEmptyDetached() {
-        final String[] messages = {"null", "null", "[object HTMLSpanElement]"};
+        final String[] messages = {null, null, "[object HTMLSpanElement]"};
         emptyAndDetached("*:first-of-type", messages);
         emptyAndDetached(":first-of-type", messages);
     }
 
     @Test
     public void focusEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:focus", messages);
         emptyAndDetached(":focus", messages);
     }
 
     @Test
     public void hoverEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:hover", messages);
         emptyAndDetached(":hover", messages);
     }
 
     @Test
     public void lastchildEmptyDetached() {
-        final String[] messages = {"null", "null", "[object HTMLSpanElement]"};
+        final String[] messages = {null, null, "[object HTMLSpanElement]"};
         emptyAndDetached("*:last-child", messages);
         emptyAndDetached(":last-child", messages);
     }
 
     @Test
     public void lastoftypeEmptyDetached() {
-        final String[] messages = {"null", "null", "[object HTMLSpanElement]"};
+        final String[] messages = {null, null, "[object HTMLSpanElement]"};
         emptyAndDetached("*:last-of-type", messages);
         emptyAndDetached(":last-of-type", messages);
     }
 
     @Test
     public void linkEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:link", messages);
         emptyAndDetached(":link", messages);
     }
 
     @Test
     public void notEmptyDetached() {
-        final String[] messages = {"null", "null", "[object HTMLSpanElement]"};
+        final String[] messages = {null, null, "[object HTMLSpanElement]"};
         emptyAndDetached("*:not(p)", messages);
         emptyAndDetached(":not(p)", messages);
     }
 
     @Test
     public void nthchildEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:nth-child(2n)", messages);
         emptyAndDetached(":nth-child(2n)", messages);
     }
 
     @Test
     public void nthlastchildEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:nth-last-child(2n)", messages);
         emptyAndDetached(":nth-last-child(2n)", messages);
     }
 
     @Test
     public void nthoftypeEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:nth-of-type(2n)", messages);
         emptyAndDetached(":nth-of-type(2n)", messages);
     }
 
     @Test
     public void onlychildEmptyDetached() {
-        final String[] messages = {"null", "null", "[object HTMLSpanElement]"};
+        final String[] messages = {null, null, "[object HTMLSpanElement]"};
         emptyAndDetached("*:only-child", messages);
         emptyAndDetached(":only-child", messages);
     }
 
     @Test
     public void onlyoftypeEmptyDetached() {
-        final String[] messages = {"null", "null", "[object HTMLSpanElement]"};
+        final String[] messages = {null, null, "[object HTMLSpanElement]"};
         emptyAndDetached("*:only-of-type", messages);
         emptyAndDetached(":only-of-type", messages);
     }
 
     @Test
     public void rootEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:root", messages);
         emptyAndDetached(":root", messages);
     }
 
     @Test
     public void visitedEmptyDetached() {
-        final String[] messages = {"null", "null", "null"};
+        final String[] messages = {null, null, null};
         emptyAndDetached("*:visited", messages);
         emptyAndDetached(":visited", messages);
     }

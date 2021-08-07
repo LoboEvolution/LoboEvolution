@@ -505,6 +505,20 @@ public class HtmlValues {
 		return result.toString();
 	}
 
+	public static boolean isUnits(String token) {
+		return token.endsWith("px") ||
+				token.endsWith("pt") ||
+				token.endsWith("pc") ||
+				token.endsWith("cm") ||
+				token.endsWith("mm") ||
+				token.endsWith("ex") ||
+				token.endsWith("em") ||
+				token.endsWith("in") ||
+				token.endsWith("q") ||
+				token.endsWith("vh") ||
+				token.endsWith("vw");
+	}
+
 	private static int inches(double value, int dpi, String text) {
 		double val = Double.parseDouble(text);
 		final double inches = val / value;
@@ -522,19 +536,5 @@ public class HtmlValues {
 				return false;
 			}
 		}
-	}
-	
-	private static boolean isUnits(String token) {
-		return token.endsWith("px") ||
-				token.endsWith("pt") ||
-				token.endsWith("pc") ||
-				token.endsWith("cm") ||
-				token.endsWith("mm") ||
-				token.endsWith("ex") ||
-				token.endsWith("em") ||
-				token.endsWith("in") ||
-				token.endsWith("q") ||
-				token.endsWith("vh") ||
-				token.endsWith("vw");
 	}
 }

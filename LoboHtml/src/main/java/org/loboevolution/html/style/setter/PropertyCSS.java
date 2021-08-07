@@ -22,11 +22,9 @@ package org.loboevolution.html.style.setter;
 
 /**
  * <p>PropertyCSS class.</p>
- *
- *
- *
  */
 public class PropertyCSS {
+
 	public final boolean important;
 	public final String value;
 

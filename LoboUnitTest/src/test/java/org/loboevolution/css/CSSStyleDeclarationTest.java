@@ -1002,8 +1002,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "</script></head>\n"
                         + "<body onload='test()'>\n"
                         + "<a id='a' href='#' style='color:green'>go</a></body></html>";
-        final String[] messages = {"null"};
-        checkHtmlAlert(html, messages);
+        checkHtmlAlert(html, null);
     }
 
     @Test
@@ -1418,15 +1417,14 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         setLengthProperty(cssProp, prop, "'undefined', ''", expected[9]);
         setLengthProperty(cssProp, prop, "'', null", expected[10]);
         setLengthProperty(cssProp, prop, "NaN, ''", expected[11]);
-        setLengthProperty(cssProp, prop, "null, ''", expected[12]);
-        setLengthProperty(cssProp, prop, "'NaNpx', ''", expected[13]);
-        setLengthProperty(cssProp, prop, "true, ''", expected[14]);
-        setLengthProperty(cssProp, prop, "Infinity, ''", expected[15]);
+        setLengthProperty(cssProp, prop, "'NaNpx', ''", expected[12]);
+        setLengthProperty(cssProp, prop, "true, ''", expected[13]);
+        setLengthProperty(cssProp, prop, "Infinity, ''", expected[14]);
     }
 
     private void setLength(final String cssProp, final String prop) {
         final String[] expected = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                "17px", "17px", "17px", null, "17px", null, "17px", "17px", "17px"};
+                "17px", "17px", "17px", null, "17px", "17px", "17px", "17px"};
         setLength(cssProp, prop, "4", expected[0]);
         setLength(cssProp, prop, "'5px'", expected[1]);
         setLength(cssProp, prop, "'6em'", expected[2]);
@@ -1439,10 +1437,9 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         setLength(cssProp, prop, "'undefined'", expected[9]);
         setLength(cssProp, prop, "''", expected[10]);
         setLength(cssProp, prop, "NaN", expected[11]);
-        setLength(cssProp, prop, "null", expected[12]);
-        setLength(cssProp, prop, "'NaNpx'", expected[13]);
-        setLength(cssProp, prop, "true", expected[14]);
-        setLength(cssProp, prop, "Infinity", expected[15]);
+        setLength(cssProp, prop, "'NaNpx'", expected[12]);
+        setLength(cssProp, prop, "true", expected[13]);
+        setLength(cssProp, prop, "Infinity", expected[14]);
     }
 
     private void setLengthProperty(final String cssProp, final String prop,

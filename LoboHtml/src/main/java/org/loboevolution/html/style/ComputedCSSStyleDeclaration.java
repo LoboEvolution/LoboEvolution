@@ -133,11 +133,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
     }
 
     public String getColor() {
-        if (Strings.isBlank(style.getColor())) {
-            return "rgb(0, 0, 0)";
-        }
-        final Color c = ColorFactory.getInstance().getColor(style.getColor());
-        return "rgb(" + c.getRed() + "," + c.getGreen() + "," + c.getBlue() + ")";
+        return style.getColor();
     }
 
     public String getCssFloat() {

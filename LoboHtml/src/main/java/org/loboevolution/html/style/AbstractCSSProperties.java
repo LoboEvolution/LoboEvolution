@@ -28,7 +28,7 @@ import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.util.CSSProperties;
 import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.style.setter.*;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -1017,7 +1017,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setBorderBottomWidth(String borderBottomWidth) {
-		this.setPropertyValueLC(BORDER_BOTTOM_WIDTH, borderBottomWidth);
+		this.setLengthPropertyValueLC(BORDER_BOTTOM_WIDTH, borderBottomWidth);
 		this.context.informInvalid();
 	}
 
@@ -1059,7 +1059,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setBorderLeftWidth(String borderLeftWidth) {
-		this.setPropertyValueLC(BORDER_LEFT_WIDTH, borderLeftWidth);
+		this.setLengthPropertyValueLC(BORDER_LEFT_WIDTH, borderLeftWidth);
 		this.context.informInvalid();
 	}
 
@@ -1087,7 +1087,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setBorderRightWidth(String borderRightWidth) {
-		this.setPropertyValueLC(BORDER_RIGHT_WIDTH, borderRightWidth);
+		this.setLengthPropertyValueLC(BORDER_RIGHT_WIDTH, borderRightWidth);
 		this.context.informInvalid();
 	}
 
@@ -1129,7 +1129,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setBorderTopWidth(String borderTopWidth) {
-		this.setPropertyValueLC(BORDER_TOP_WIDTH, borderTopWidth);
+		this.setLengthPropertyValueLC(BORDER_TOP_WIDTH, borderTopWidth);
 		this.context.informInvalid();
 	}
 
@@ -1143,7 +1143,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setBottom(String bottom) {
-		this.setPropertyValueLC(BOTTOM, bottom);
+		this.setLengthPropertyValueLC(BOTTOM, bottom);
 		this.context.informPositionInvalid();
 	}
 
@@ -1282,7 +1282,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setFontSize(String fontSize) {
-		this.setPropertyValueLC(FONT_SIZE, fontSize);
+		this.setLengthPropertyValueLC(FONT_SIZE, fontSize);
 		this.context.informInvalid();
 	}
 
@@ -1331,21 +1331,21 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setHeight(String height) {
-		this.setPropertyValueLC(HEIGHT, height);
+		this.setLengthPropertyValueLC(HEIGHT, height);
 		this.context.informSizeInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setLeft(String left) {
-		this.setPropertyValueLC(LEFT, left);
+		this.setLengthPropertyValueLC(LEFT, left);
 		this.context.informPositionInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setLetterSpacing(String letterSpacing) {
-		this.setPropertyValueLC(LETTER_SPACING, letterSpacing);
+		this.setLengthPropertyValueLC(LETTER_SPACING, letterSpacing);
 		this.context.informInvalid();
 	}
 
@@ -1394,28 +1394,28 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setMarginBottom(String marginBottom) {
-		this.setPropertyValueLC(MARGIN_BOTTOM, marginBottom);
+		this.setLengthPropertyValueLC(MARGIN_BOTTOM, marginBottom);
 		this.context.informInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setMarginLeft(String marginLeft) {
-		this.setPropertyValueLC(MARGIN_LEFT, marginLeft);
+		this.setLengthPropertyValueLC(MARGIN_LEFT, marginLeft);
 		this.context.informInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setMarginRight(String marginRight) {
-		this.setPropertyValueLC(MARGIN_RIGHT, marginRight);
+		this.setLengthPropertyValueLC(MARGIN_RIGHT, marginRight);
 		this.context.informInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setMarginTop(String marginTop) {
-		this.setPropertyValueLC(MARGIN_TOP, marginTop);
+		this.setLengthPropertyValueLC(MARGIN_TOP, marginTop);
 		this.context.informInvalid();
 	}
 
@@ -1434,28 +1434,28 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setMaxHeight(String maxHeight) {
-		this.setPropertyValueLC(MAX_HEIGHT, maxHeight);
+		this.setLengthPropertyValueLC(MAX_HEIGHT, maxHeight);
 		this.context.informSizeInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setMaxWidth(String maxWidth) {
-		this.setPropertyValueLC(MAX_WIDTH, maxWidth);
+		this.setLengthPropertyValueLC(MAX_WIDTH, maxWidth);
 		this.context.informSizeInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setMinHeight(String minHeight) {
-		this.setPropertyValueLC(MIN_HEIGHT, minHeight);
+		this.setLengthPropertyValueLC(MIN_HEIGHT, minHeight);
 		this.context.informSizeInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setMinWidth(String minWidth) {
-		this.setPropertyValueLC(MIN_WIDTH, minWidth);
+		this.setLengthPropertyValueLC(MIN_WIDTH, minWidth);
 		this.context.informSizeInvalid();
 	}
 
@@ -1489,7 +1489,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setOutlineWidth(String outlineWidth) {
-		this.setPropertyValueLC(OUTLINE_WIDTH, outlineWidth);
+		this.setLengthPropertyValueLC(OUTLINE_WIDTH, outlineWidth);
 		this.context.informInvalid();
 	}
 
@@ -1510,28 +1510,28 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setPaddingBottom(String paddingBottom) {
-		this.setPropertyValueLC(PADDING_BOTTOM, paddingBottom);
+		this.setLengthPropertyValueLC(PADDING_BOTTOM, paddingBottom);
 		this.context.informInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setPaddingLeft(String paddingLeft) {
-		this.setPropertyValueLC(PADDING_LEFT, paddingLeft);
+		this.setLengthPropertyValueLC(PADDING_LEFT, paddingLeft);
 		this.context.informInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setPaddingRight(String paddingRight) {
-		this.setPropertyValueLC(PADDING_RIGHT, paddingRight);
+		this.setLengthPropertyValueLC(PADDING_RIGHT, paddingRight);
 		this.context.informInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setPaddingTop(String paddingTop) {
-		this.setPropertyValueLC(PADDING_TOP, paddingTop);
+		this.setLengthPropertyValueLC(PADDING_TOP, paddingTop);
 		this.context.informInvalid();
 	}
 
@@ -1621,7 +1621,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setRight(String right) {
-		this.setPropertyValueLC(RIGHT, right);
+		this.setLengthPropertyValueLC(RIGHT, right);
 		this.context.informPositionInvalid();
 	}
 
@@ -1692,7 +1692,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setTextIndent(String textIndent) {
-		this.setPropertyValueLC(TEXT_INDENT, textIndent);
+		this.setLengthPropertyValueLC(TEXT_INDENT, textIndent);
 		this.context.informLayoutInvalid();
 	}
 
@@ -1713,7 +1713,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setTop(String top) {
-		this.setPropertyValueLC(TOP, top);
+		this.setLengthPropertyValueLC(TOP, top);
 		this.context.informPositionInvalid();
 	}
 
@@ -1727,7 +1727,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setVerticalAlign(String verticalAlign) {
-		this.setPropertyValueLC(VERTICAL_ALIGN, verticalAlign);
+		this.setLengthPropertyValueLC(VERTICAL_ALIGN, verticalAlign);
 		this.context.informInvalid();
 	}
 
@@ -1766,14 +1766,14 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public void setWidth(String width) {
-		this.setPropertyValueLC(WIDTH, width);
+		this.setLengthPropertyValueLC(WIDTH, width);
 		this.context.informSizeInvalid();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setWordSpacing(String wordSpacing) {
-		this.setPropertyValueLC(WORD_SPACING, wordSpacing);
+		this.setLengthPropertyValueLC(WORD_SPACING, wordSpacing);
 		this.context.informInvalid();
 	}
 
@@ -2079,6 +2079,45 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				this.valueMap = vm;
 			}
 			vm.put(lowerCaseName, new PropertyCSS(value, true));
+		}
+	}
+
+
+	/**
+	 * <p>setLengthPropertyValueLC.</p>
+	 *
+	 * @param name  a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
+	private void setLengthPropertyValueLC(final String name, final String value) {
+		if (value != null) {
+			String unit = "px";
+			String valueString = value;
+			if ("".equals(value) || "null".equals(value)) {
+				setPropertyValueLC(name, null);
+			} else if (!HtmlValues.isUnits(valueString) &&
+					!CSSValues.AUTO.getValue().equals(value) &&
+					!CSSValues.INHERIT.getValue().equals(value) &&
+					!CSSValues.INITIAL.getValue().equals(value) &&
+					!value.endsWith("%")) {
+				try {
+					final Double d = Double.parseDouble(valueString);
+					if (!Double.isNaN(d) && !Double.isInfinite(d)) {
+						valueString += unit;
+						setPropertyValueLC(name, valueString);
+					}
+				} catch (final Exception nfe) {}
+
+			} else {
+				if (HtmlValues.isUnits(valueString)) {
+					final int val = HtmlValues.getPixelSize(valueString, null, null, -1);
+					if (val > -1) {
+						setPropertyValueLC(name, valueString);
+					}
+				} else {
+					setPropertyValueLC(name, valueString);
+				}
+			}
 		}
 	}
 	
