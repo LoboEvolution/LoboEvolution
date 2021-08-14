@@ -167,8 +167,8 @@ public class WebStore {
 		int check = 0;
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_SIZE)) {
+			pstmt.setInt(1, index);
 			try (ResultSet rs = pstmt.executeQuery()) {
-				pstmt.setInt(1, index);
 				while (rs != null && rs.next()) {
 					check = rs.getInt(1);
 				}

@@ -76,7 +76,7 @@ public class SQLiteCommon {
     public static final String WEBSTORAGE_VALUE = "SELECT VALUE FROM WEB_STORAGE WHERE KEY = ? AND TABINDEX = ?";
     
     /** Constant LINK="SELECT NAME, VALUE FROM WEB_STORAGE"{trunked} */
-    public static final String WEBSTORAGE_MAP = "SELECT KEY, VALUE FROM WEB_STORAGE AND TABINDEX = ?";
+    public static final String WEBSTORAGE_MAP = "SELECT KEY, VALUE FROM WEB_STORAGE WHERE TABINDEX = ?";
         
     /** Constant WEBSTORAGE_DELETE_KEY="DELETE FROM WEB_STORAGE WHER"{trunked} */
     public static final String WEBSTORAGE_DELETE_KEY = "DELETE FROM WEB_STORAGE WHERE KEY = ? AND SESSION = ? AND TABINDEX = ?";
@@ -91,7 +91,7 @@ public class SQLiteCommon {
 	public static final String WEBSTORAGE= "INSERT INTO WEB_STORAGE (key, value, session, tabIndex) VALUES(?,?,?,?)";
 	
 	 /** Constant WEBSTORAGE_SIZE="SELECT COUNT(*) FROM LINK_VISITED WHERE"{trunked} */
-    public static final String WEBSTORAGE_SIZE = "SELECT COUNT(*) FROM WEB_STORAGE AND TABINDEX = ?";
+    public static final String WEBSTORAGE_SIZE = "SELECT COUNT(*) FROM WEB_STORAGE WHERE TABINDEX = ?";
     
 	/** The Constant SETTINGS_DIR. */
 	public static final String JDBC_SQLITE = "jdbc:sqlite:";

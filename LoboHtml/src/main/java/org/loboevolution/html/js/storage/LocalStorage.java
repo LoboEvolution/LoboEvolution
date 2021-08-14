@@ -27,9 +27,6 @@ import org.loboevolution.store.WebStore;
 
 /**
  * <p>LocalStorage class.</p>
- *
- *
- *
  */
 public class LocalStorage implements Storage {
 	
@@ -99,5 +96,10 @@ public class LocalStorage implements Storage {
 	public void set(String name, String value) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String toString() {
+		return "[object Storage]";
 	}
 }
