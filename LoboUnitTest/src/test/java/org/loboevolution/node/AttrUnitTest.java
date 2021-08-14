@@ -62,11 +62,10 @@ public class AttrUnitTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var div = document.getElementById('div');\n"
                 + "    alert(div.attributes.id.specified);\n"
-                + "    alert(div.attributes.class.specified);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"true", "true"};
+        final String[] messages = {"true"};
         checkHtmlAlert(html, messages);
     }
 

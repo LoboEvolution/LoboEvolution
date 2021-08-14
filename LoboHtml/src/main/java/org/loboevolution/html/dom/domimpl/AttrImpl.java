@@ -28,9 +28,6 @@ import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>AttrImpl class.</p>
- *
- *
- *
  */
 public class AttrImpl extends AttrAbstract {
 	
@@ -112,10 +109,20 @@ public class AttrImpl extends AttrAbstract {
 		return this.specified;
 	}
 
+	public boolean getSpecified() {
+		return this.specified;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+
+	@Override
+	public String getTextContent() {
+		return getValue();
 	}
 
 	/** {@inheritDoc} */

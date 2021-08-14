@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.html.dom.domimpl.AttrImpl;
 import org.loboevolution.html.node.Attr;
@@ -38,9 +39,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>NamedNodeMapImpl class.</p>
- *
- *
- *
  */
 public class NamedNodeMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
 	
@@ -72,7 +70,10 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Attr getNamedItem(String name) {
-		return this.attributes.get(name);
+		if(Strings.isNotBlank(name)){
+			return this.attributes.get(name.toLowerCase());
+		}
+		return null;
 	}
 
 	/** {@inheritDoc} */
@@ -130,5 +131,10 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	@Override
 	public Attr setNamedItemNS(Attr arg) {
 		throw new DOMException(Code.NOT_SUPPORTED_ERR, "No namespace support");
+	}
+
+	@Override
+	public String toString() {
+		return "[object NamedNodeMap]";
 	}
 }

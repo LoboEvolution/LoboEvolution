@@ -24,9 +24,6 @@ import org.loboevolution.html.node.Attr;
 
 /**
  * <p>Abstract AttrAbstract class.</p>
- *
- *
- *
  */
 public abstract class AttrAbstract extends EventTargetImpl implements Attr {
 
