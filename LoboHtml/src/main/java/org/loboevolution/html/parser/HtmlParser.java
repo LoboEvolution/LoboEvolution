@@ -1072,7 +1072,6 @@ public class HtmlParser {
 
 	private void ensureRootElement(final Node parent) {
 		if (lastRootElement == null) {
-		    //logger.info("Inserting HTML");
 			lastRootElement = document.createElement("HTML");
 			parent.appendChild(lastRootElement);
 		}
@@ -1090,26 +1089,14 @@ public class HtmlParser {
 	private void ensureBodyAppendChild(final Node parent, final Node child) {
 		Node newParent = parent;
 		if (needRoot) {
-			// final String nodeName = child.getNodeName();
 			final String nodeNameTU = child.getNodeName().toUpperCase();
 			if ("BODY".equals(nodeNameTU)) {
 				lastBodyElement = child;
-				// logger.info("Found body elem: " + child);
 			} else if ("HEAD".equals(nodeNameTU)) {
 				lastHeadElement = child;
-			} else if ((child instanceof Element) && (depthAtMost(parent, 2))) {
-				final boolean dontNeedBody = ArrayUtilities.contains(elementsThatDontNeedBodyElement, nodeNameTU);
-				final boolean dontNeedHead = ArrayUtilities.contains(elementsThatDontNeedHeadElement, nodeNameTU);
-				if ((!hasAncestorTag(parent, "BODY")) && (!dontNeedBody)) {
-					ensureBodyElement(parent);
-					newParent = lastBodyElement;
-				} else if ((!hasAncestorTag(parent, "HEAD")) && (!dontNeedHead)) {
-					ensureHeadElement(parent);
-					newParent = lastHeadElement;
-				}
 			}
 		}
-		newParent.appendChild(child);
+		if(newParent != null) newParent.appendChild(child);
 	}
 
 	private void ensureBodyElement(final Node parent) {

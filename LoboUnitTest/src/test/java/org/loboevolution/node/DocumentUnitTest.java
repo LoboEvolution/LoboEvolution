@@ -1373,13 +1373,13 @@ public class DocumentUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void createEvent_Event() {
+    public void createEventEvent() {
         final String[] messages = {"true", "object", "[object Event]", "false"};
         createEvent("Event", messages);
     }
 
     @Test
-    public void createEvent_Events() {
+    public void createEventEvents() {
         final String[] messages = {"true", "object", "[object Event]", "false"};
         createEvent("Events", messages);
     }
@@ -1449,26 +1449,6 @@ public class DocumentUnitTest extends LoboUnitTest {
                         + "</html>";
 
         final String[] messages = {"true"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void createEventObject_IE() {
-        final String html =
-                "<html><head>\n"
-                        + "<script>\n"
-                        + "try {\n"
-                        + "  var e = document.createEventObject();\n"
-                        + "  alert(e != null);\n"
-                        + "  alert(typeof e);\n"
-                        + "  alert(e);\n"
-                        + "} catch(ex) {\n"
-                        + "  alert('exception');\n"
-                        + "}\n"
-                        + "</script></head><body>\n"
-                        + "</body></html>";
-
-        final String[] messages = {"exception"};
         checkHtmlAlert(html, messages);
     }
 

@@ -109,10 +109,6 @@ public class AttrImpl extends AttrAbstract {
 		return this.specified;
 	}
 
-	public boolean getSpecified() {
-		return this.specified;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public String getValue() {

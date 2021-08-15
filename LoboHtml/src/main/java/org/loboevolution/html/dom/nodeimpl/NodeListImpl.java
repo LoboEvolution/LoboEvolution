@@ -22,11 +22,16 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import java.util.List;
-
 import org.loboevolution.html.dom.domimpl.AbstractList;
+import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
+import org.mozilla.javascript.ES6Iterator;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.NativeArrayIterator;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p>NodeListImpl class.</p>
@@ -66,23 +71,40 @@ public class NodeListImpl extends AbstractList<Node> implements NodeList {
 			return null;
 		}
 	}
-	
-	/**
-	 * <p>toArray.</p>
-	 *
-	 * @return an array of {@link org.loboevolution.html.node.Node} objects.
-	 */
+
+	/** {@inheritDoc} */
+	@Override
+	public ES6Iterator entries() {
+		return new NativeArrayIterator(getScriptable(), getScriptable(), NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
+	}
+
+	/** {@inheritDoc}*/
+	@Override
+	public ES6Iterator keys() {
+		return new NativeArrayIterator(getScriptable(), getScriptable(), NativeArrayIterator.ARRAY_ITERATOR_TYPE.KEYS);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public ES6Iterator values() {
+		return new NativeArrayIterator(getScriptable(), getScriptable(), NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void forEach(final Function function) {
+		AtomicInteger integer = new AtomicInteger(0);
+		this.forEach(node -> {
+			final int i = integer.getAndIncrement();
+			final NodeImpl n = (NodeImpl) node;
+			Executor.executeFunction(n, function, null, new Object[] { n.getScriptable(), i, this});
+		});
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public Node[] toArray() {
 		return this.toArray(new Node[0]);
-	}
-	
-	/**
-	 * <p>toArray.</p>
-	 *
-	 * @return an array of {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} objects.
-	 */
-	public List<Node> toList() {
-		return this;
 	}
 	
 	/** {@inheritDoc} */

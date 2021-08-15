@@ -29,9 +29,6 @@ import org.loboevolution.html.node.events.EventTarget;
 
 /**
  * <p>EventImpl class.</p>
- *
- *
- *
  */
 public class EventImpl extends AbstractScriptableDelegate implements Event {
 	
@@ -212,5 +209,10 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	public boolean isCancelBubble() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "[object Event]";
 	}
 }

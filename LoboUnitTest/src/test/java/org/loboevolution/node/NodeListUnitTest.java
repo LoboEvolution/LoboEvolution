@@ -54,7 +54,6 @@ public class NodeListUnitTest extends LoboUnitTest {
                 + "    alert(0 in nodeList);\n"
                 + "    alert(4 in nodeList);\n"
                 + "    alert(5 in nodeList);\n"
-
                 + "    alert('entries' in nodeList);\n"
                 + "    alert('forEach' in nodeList);\n"
                 + "    alert('item' in nodeList);\n"
@@ -77,7 +76,6 @@ public class NodeListUnitTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var nodeList = document.querySelectorAll('*');\n"
                 + "    alert(nodeList.length);\n"
-
                 + "    alert('length' in nodeList);\n"
                 + "    alert(Object.getOwnPropertyDescriptor(nodeList, 'length'));\n"
                 + "  }\n"
