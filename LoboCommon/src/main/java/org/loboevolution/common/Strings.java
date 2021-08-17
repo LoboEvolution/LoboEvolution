@@ -114,7 +114,7 @@ public final class Strings {
 		final int len = text.length();
 		int count = 0;
 		for (int i = 0; i < len; i++) {
-			if (ch == text.charAt(i)) {
+			if (ch == text.trim().charAt(i)) {
 				count++;
 			}
 		}

@@ -38,10 +38,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.List;
 
 /**
  * <p>ElementImpl class.</p>
@@ -501,7 +499,16 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 */
 	@Override
 	public DOMTokenList getClassList() {
-        return new DOMTokenListImpl(this, this.getClassName());
+		DOMTokenListImpl tokList = new DOMTokenListImpl(this);
+		final String className = getClassName();
+		if(Strings.isNotBlank(className)){
+			final String[] listString = className.split(" ");
+			List<String> names = Arrays.asList(listString);
+			names.forEach(name -> {
+				tokList.populate(name);
+			});
+		}
+        return tokList;
 	}
 
 	/** {@inheritDoc} */
