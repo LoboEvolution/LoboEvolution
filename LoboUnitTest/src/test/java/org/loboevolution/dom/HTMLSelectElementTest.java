@@ -1878,7 +1878,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void selectedIndex_appendChild() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
@@ -1902,14 +1901,12 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     }
 
     /**
-     * <p>selectedIndex_insertBefore.</p>
+     * <p>selectedIndexinsertBefore.</p>
      */
     @Test
-
-    public void selectedIndex_insertBefore() {
+    public void selectedIndexinsertBefore() {
         final String html =
-
-                "<html>\n"
+                        "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
                         + "  function test() {\n"

@@ -496,31 +496,31 @@ public class NodeUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void insertBefore_nullRef() {
-        final String[] messages = {"3", "SPAN"};
+    public void insertBeforenullRef() {
+        final String[] messages = {"3", "span"};
         insertBefore("aNode.insertBefore(newNode, null);", messages);
     }
 
     @Test
-    public void insertBefore_myself() {
+    public void insertBeforemyself() {
         final String[] messages = {"exception"};
         insertBefore("aNode.insertBefore(newNode, newNode);", messages);
     }
 
     @Test
-    public void insertBefore_sibling() {
+    public void insertBeforesibling() {
         final String[] messages = {"exception"};
         insertBefore("aNode.insertBefore(newNode, siblingNode);", messages);
     }
 
     @Test
-    public void insertBefore_noArgs() {
+    public void insertBeforenoArgs() {
         final String[] messages = {"exception"};
         insertBefore("aNode.insertBefore();", messages);
     }
 
     @Test
-    public void insertBefore_noSecondArg() {
+    public void insertBeforenoSecondArg() {
         final String[] messages = {"exception"};
         insertBefore("aNode.insertBefore(newNode);", messages);
     }
@@ -552,7 +552,7 @@ public class NodeUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void insertBefore_parentNode() {
+    public void insertBeforeparentNode() {
         final String html = "<html><head><script>\n"
 
                 + "  function test() {\n"
@@ -574,7 +574,7 @@ public class NodeUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void insertBefore_inTable() {
+    public void insertBeforeinTable() {
         final String html
                 = "<html><head>\n"
                 + "<script>\n"
@@ -592,7 +592,7 @@ public class NodeUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void insertBefore_newElement() {
+    public void insertBeforenewElement() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "function doTest() {\n"

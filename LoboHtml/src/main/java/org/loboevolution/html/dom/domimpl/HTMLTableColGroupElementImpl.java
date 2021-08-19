@@ -46,7 +46,7 @@ public class HTMLTableColGroupElementImpl extends HTMLElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "[object HTMLTableColGroupElement]";
+		return "[object HTMLTableColElement]";
 	}
 
 }

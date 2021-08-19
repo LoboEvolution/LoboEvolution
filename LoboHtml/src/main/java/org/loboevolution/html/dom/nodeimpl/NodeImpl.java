@@ -183,7 +183,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new IllegalStateException(err.getMessage());
 		}
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean contains(Node other) {
@@ -194,8 +194,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 		return false;
 	}
-	
-	
+
+
 	/** {@inheritDoc} */
 	@Override
 	public short compareDocumentPosition(Node other) {
@@ -203,6 +203,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		if (!(other instanceof NodeImpl)) {
 			throw new DOMException(Code.NOT_SUPPORTED_ERR, "Unknwon node implementation");
 		}
+
+		if (other == this) {
+			return 0;
+		}
+
 		if (parent != null && parent == other.getParentNode()) {
 			final int thisIndex = getNodeIndex();
 			final int otherIndex = ((NodeImpl) other).getNodeIndex();
@@ -889,6 +894,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public Node insertBefore(Node newChild, Node refChild) {
 		synchronized (this.treeLock) {
+			if(refChild == null) {
+				appendChild(newChild);
+				if (!this.notificationsSuspended) {
+					informStructureInvalid();
+				}
+				return newChild;
+			}
+
 			final int idx = this.nodeList.indexOf(refChild);
 			if (idx == -1) {
 				throw new DOMException(Code.NOT_FOUND_ERR, "refChild not found");

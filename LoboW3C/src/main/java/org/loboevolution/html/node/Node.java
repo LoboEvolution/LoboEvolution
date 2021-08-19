@@ -28,9 +28,6 @@ import org.w3c.dom.UserDataHandler;
  * Node is an interface from which a number of DOM API object types inherit. It
  * allows those types to be treated similarly; for example, inheriting the same
  * set of methods, or being tested in the same way.
- *
- *
- *
  */
 public interface Node extends EventTarget {
 
@@ -42,10 +39,10 @@ public interface Node extends EventTarget {
 	short DOCUMENT_POSITION_FOLLOWING = 4;
 	/** Constant <code>DOCUMENT_POSITION_CONTAINS=8</code> */
 	short DOCUMENT_POSITION_CONTAINS = 8;
-	/** Constant <code>DOCUMENT_POSITION_CONTAINED_BY=16</code> */
-	short DOCUMENT_POSITION_CONTAINED_BY = 16;
-	/** Constant <code>DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC=32</code> */
-	short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 32;
+	/** Constant <code>DOCUMENT_POSITION_CONTAINED_BY=10</code> */
+	short DOCUMENT_POSITION_CONTAINED_BY = 10;
+	/** Constant <code>DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC=20</code> */
+	short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC =20;
 
 	/**
 	 * Returns node's node document's document base URL.
