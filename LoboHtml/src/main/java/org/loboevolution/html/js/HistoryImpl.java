@@ -25,25 +25,17 @@ import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.jsenum.ScrollRestoration;
 
 /**
- * <p>
- * History class.
- * </p>
- *
- *
- *
+ * The History class.
  */
 public class HistoryImpl extends AbstractScriptableDelegate implements History {
 	private final WindowImpl window;
 
-	HistoryImpl(WindowImpl window) {
+	public HistoryImpl(WindowImpl window) {
 		this.window = window;
 	}
 
-	/**
-	 * <p>
-	 * back.
-	 * </p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void back() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		if (ctx != null) {
@@ -51,11 +43,8 @@ public class HistoryImpl extends AbstractScriptableDelegate implements History {
 		}
 	}
 
-	/**
-	 * <p>
-	 * forward.
-	 * </p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void forward() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		if (ctx != null) {
@@ -63,61 +52,15 @@ public class HistoryImpl extends AbstractScriptableDelegate implements History {
 		}
 	}
 
-	/**
-	 * <p>
-	 * getCurrent.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getCurrent() {
-		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
-		return ctx != null ? ctx.getCurrentURL() : null;
-	}
-
-	/**
-	 * <p>
-	 * getLength.
-	 * </p>
-	 *
-	 * @return a int.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getLength() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		return ctx != null ? ctx.getHistoryLength() : 0;
 	}
 
-	/**
-	 * <p>
-	 * getNext.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getNext() {
-		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
-		return ctx != null ? ctx.getNextURL() : null;
-	}
-
-	/**
-	 * <p>
-	 * getPrevious.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getPrevious() {
-		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
-		return ctx != null ? ctx.getPreviousURL() : null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * go.
-	 * </p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void go(int offset) {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		if (ctx != null) {
@@ -172,5 +115,10 @@ public class HistoryImpl extends AbstractScriptableDelegate implements History {
 	public void replaceState(Object data, String title) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String toString() {
+		return "[object History]";
 	}
 }

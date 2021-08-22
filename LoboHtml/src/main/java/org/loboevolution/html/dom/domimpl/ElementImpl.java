@@ -38,8 +38,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 /**
  * <p>ElementImpl class.</p>
@@ -847,11 +847,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		String boxSizing = currentStyle.getBoxSizing();
 		int sizeWidth = preferredSize.width;
 
+		if (this instanceof HTMLBodyElementImpl) {
+			width = String.valueOf(doc.getDefaultView().getInnerWidth());
+		}
+
 		final Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
-			HTMLElementImpl p = (HTMLElementImpl)nodeObj;
-			if(p.getClientHeight() != -1) {
-				sizeWidth = p.getClientWidth();
+			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
+			if(elem.getClientHeight() != -1) {
+				sizeWidth = elem.getClientWidth();
 			}
 		}
 
@@ -893,11 +897,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		String boxSizing = currentStyle.getBoxSizing();
 		int sizeHeight = preferredSize.height;
 
+		if (this instanceof HTMLBodyElementImpl) {
+			height = String.valueOf(doc.getDefaultView().getInnerHeight());
+		}
+
 		final Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
-			HTMLElementImpl p = (HTMLElementImpl)nodeObj;
-			if(p.getClientHeight() != -1) {
-				sizeHeight = p.getClientHeight();
+			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
+			if(elem.getClientHeight() != -1) {
+				sizeHeight = elem.getClientHeight();
 			}
 		}
 

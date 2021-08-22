@@ -34,7 +34,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void firstChildSelector() {
 		final String css ="p:first-child {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -47,9 +46,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", null);
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 	
 	/**
@@ -58,7 +55,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void firstOfTypeChildSelector() {
 		final String css ="p:first-of-type {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -71,9 +67,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", null);
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 	
 	/**
@@ -82,7 +76,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void lastChildSelector() {
 		final String css ="p:last-child {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -95,9 +88,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, null, "red");
-        
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
     }
 
 	
@@ -107,7 +98,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void lastOfTypeChildSelector() {
 		final String css ="p:last-of-type {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -120,9 +110,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, null, "red");
-        
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
     }
 	
 	
@@ -132,7 +120,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void notSelector() {
 		final String css =":not(p) {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -145,9 +132,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, null, "red");
-        
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -156,7 +141,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void childParentSelector() {
 		final String css ="p:nth-child(2) {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -169,9 +153,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, null, "red");
-        
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -180,7 +162,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void lastChildParentSelector() {
 		final String css ="p:nth-last-child(2) {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -193,9 +174,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", null);
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 	
 	/**
@@ -204,7 +183,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void childTypeParentSelector() {
 		final String css ="p:nth-of-type(2) {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -217,9 +195,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, null, "red");
-        
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
     }
 	
 	
@@ -229,7 +205,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void lastChildTypeParentSelector() {
 		final String css ="p:nth-last-of-type(2) {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -242,9 +217,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", null);
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 	
 	/**
@@ -253,7 +226,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
 	@Test
     public void onlyTypeParentSelector() {
 		final String css ="p:only-of-type {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -265,9 +237,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", null);
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -276,7 +246,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
     @Test
     public void langSelector() {
         final String css ="p:lang(it) {color:red}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -288,9 +257,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, "red", null);
-
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -299,7 +266,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
     @Test
     public void linkSelector() {
         final String css ="a:link {color:red}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -312,9 +278,6 @@ public class PseudoSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, "red", "red");
-
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
-
 }

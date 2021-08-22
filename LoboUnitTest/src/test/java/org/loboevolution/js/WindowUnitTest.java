@@ -33,7 +33,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html><head></head><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert(this);\n"
                 + "  try {\n"
                 + "    alert(abc);\n"
@@ -57,7 +56,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html><head></head><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function hello() {\n"
                 + "    var x = 1;\n"
                 + "  } \n"
@@ -70,7 +68,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void onload_prototype() {
+    public void onloadPrototype() {
         final String html
                 = "<html><body onload='alert(1)'>\n"
                 + "<script>Function.prototype.x='a'; alert(window.onload.x);</script>\n"
@@ -84,7 +82,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html><head></head><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  var data = window.btoa('Hello World!');\n"
                 + "  alert(data);\n"
                 + "  alert(atob(data));\n"
@@ -99,7 +96,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html><head></head><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  try {\n"
                 + "    window.btoa('I \\u2661 Unicode!');\n"
                 + "  } catch(e) {alert('exception')}\n"
@@ -108,7 +104,7 @@ public class WindowUnitTest extends LoboUnitTest {
                 + "  } catch(e) {alert('exception')}\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"exception", "exception"};
+        final String[] messages = {"exception"};
         checkHtmlAlert(html, messages);
     }
 
@@ -145,13 +141,12 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html><head></head><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  var data = window.btoa(null);\n"
                 + "  alert(data);\n"
                 + "  alert(atob(data));\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"bnVsbA==", null};
+        final String[] messages = {"bnVsbA==", "null"};
         checkHtmlAlert(html, messages);
     }
 
@@ -160,7 +155,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html><head></head><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  var data = window.btoa(undefined);\n"
                 + "  alert(data);\n"
                 + "  alert(atob(data));\n"
@@ -182,7 +176,6 @@ public class WindowUnitTest extends LoboUnitTest {
 
         final String html = "<html><head></head><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  var props = ['" + String.join("', '", properties) + "'];\n"
                 + "  for (var i = 0; i < props.length; i++)\n"
                 + "    alert(props[i] + ': ' + typeof(window[props[i]]) + ',' + typeof(eval('this.' + props[i])));\n"
@@ -207,39 +200,8 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void execScript2() {
-        final String html = "<html><head><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
-                + "  function test() {\n"
-                + "    try {\n"
-                + "      window.execScript('alert(1);');\n"
-                + "    }\n"
-                + "    catch(e) { alert('exception') }\n"
-                + "  }\n"
-                + "</script></head><body onload='test()'>\n"
-                + "</body></html>";
-        final String[] messages = {"exception"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void execScript_returnValue() {
-        final String html = "<html><head><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
-                + "try {\n"
-                + "  alert(window.execScript('1') === undefined);\n"
-                + "}\n"
-                + "catch(e) { alert('exception') }\n"
-                + "</script></head><body>\n"
-                + "</body></html>";
-        final String[] messages = {"exception"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
     public void collectGarbage() {
         final String html = "<html><head><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    alert(typeof CollectGarbage);\n"
                 + "  }\n"
@@ -252,7 +214,6 @@ public class WindowUnitTest extends LoboUnitTest {
     @Test
     public void eval_localVariable() {
         final String html = "<html><head><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    var f = document.getElementById('testForm1');\n"
                 + "    alert(f.text1.value);\n"
@@ -271,7 +232,6 @@ public class WindowUnitTest extends LoboUnitTest {
     @Test
     public void windowProperties() {
         final String html = "<html><head><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    alert(window.Node);\n"
                 + "    alert(window.Element);\n"
@@ -287,7 +247,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void framesLengthZero() {
         final String html
                 = "<html><head><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "alert(window.length);\n"
                 + "alert(window.frames.length);\n"
                 + "</script></head><body>\n"
@@ -297,56 +256,8 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void framesLengthAndFrameAccess() {
-        final String html =
-                "<html>\n"
-                        + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
-                        + "function test() {\n"
-                        + "  alert(window.length);\n"
-                        + "  alert(window.frames.length);\n"
-                        + "  alert(window.frames[0].name);\n"
-                        + "  alert(window.frames.frame2.name);\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "<frameset rows='50,*' onload='test()'>\n"
-                        + "<frame name='frame1' src='about:blank'/>\n"
-                        + "<frame name='frame2' src='about:blank'/>\n"
-                        + "</frameset>\n"
-                        + "</html>";
-        final String[] messages = {"2", "2", "frame1", "frame2"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void windowFramesLive() {
-        final String html =
-                "<html>\n"
-                        + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
-                        + "alert(window.length);\n"
-                        + "var oFrames = window.frames;\n"
-                        + "alert(oFrames.length);\n"
-                        + "function test() {\n"
-                        + "  alert(oFrames.length);\n"
-                        + "  alert(window.length);\n"
-                        + "  alert(window.frames.length);\n"
-                        + "  alert(oFrames == window.frames);\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "<frameset rows='50,*' onload='test()'>\n"
-                        + "<frame src='about:blank'/>\n"
-                        + "<frame src='about:blank'/>\n"
-                        + "</frameset>\n"
-                        + "</html>";
-        final String[] messages = {"0", "0", "2", "2", "2", "true"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
     public void overwriteFunctions_navigator() {
         final String html = "<html><head><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    function navigator() {\n"
                 + "      alert('hello');\n"
@@ -361,7 +272,6 @@ public class WindowUnitTest extends LoboUnitTest {
     @Test
     public void framesAreWindows() {
         final String html = "<html><body><iframe name='f'></iframe><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "alert(window.frames);\n"
                 + "alert(window.f);\n"
                 + "alert(window.frames.f);\n"
@@ -371,13 +281,6 @@ public class WindowUnitTest extends LoboUnitTest {
                 + "alert(window[0]);\n"
                 + "alert(window[0] == window.frames[0]);\n"
                 + "alert(window[0] == window.frames.frames[0]);\n"
-                + "try {\n"
-                + "  alert(window(0));\n"
-                + "  alert(window(0) == window.frames(0));\n"
-                + "  alert(window(0) == window.frames.frames(0));\n"
-                + "} catch(e) {\n"
-                + "  alert('no function');\n"
-                + "}\n"
                 + "alert(window[1]);\n"
                 + "alert(window[1] == window.frames[1]);\n"
                 + "alert(window[1] == window.frames.frames[1]);\n"
@@ -389,7 +292,7 @@ public class WindowUnitTest extends LoboUnitTest {
                 + "alert(window.self == window.frames.frames.self);\n"
                 + "</script></body></html>";
         final String[] messages = {"[object Window]", "[object Window]", "[object Window]", "1", "true", "true",
-                "[object Window]", "true", "true", "no function", "undefined", "true", "true",
+                "[object Window]", "true", "true", "undefined", "true", "true",
                 "[object History]", "true", "true", "[object Window]", "true", "true"};
         checkHtmlAlert(html, messages);
     }
@@ -398,7 +301,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void heightsAndWidths() {
         final String html
                 = "<html><body onload='test()'><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "function test() {\n"
                 + "  alert(window.innerHeight > 0);\n"
                 + "  alert(window.innerHeight == document.body.clientHeight);\n"
@@ -417,7 +319,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void setInnerWidth() {
         final String html
                 = "<html><body onload='test()'><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "function test() {\n"
                 + "  alert(window.innerWidth > 0);\n"
                 + "  window.innerWidth = 1234;\n"
@@ -433,7 +334,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void setInnerHeight() {
         final String html
                 = "<html><body onload='test()'><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "function test() {\n"
                 + "  alert(window.innerHeight > 0);\n"
                 + "  window.innerHeight = 1234;\n"
@@ -449,7 +349,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void setOuterWidth() {
         final String html
                 = "<html><body onload='test()'><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "function test() {\n"
                 + "  alert(window.outerWidth > 0);\n"
                 + "  window.outerWidth = 1234;\n"
@@ -465,7 +364,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void setOuterHeight() {
         final String html
                 = "<html><body onload='test()'><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "function test() {\n"
                 + "  alert(window.outerHeight > 0);\n"
                 + "  window.outerHeight = 1234;\n"
@@ -482,7 +380,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
                 + "<script language='javascript'>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    var oldHeight = document.body.clientHeight;\n"
                 + "    var oldWidth = document.body.clientWidth;\n"
@@ -504,16 +401,11 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void scrolling1() {
-        scrolling(true);
-    }
-
-    private void scrolling(final boolean addHugeDiv) {
+    public void scrolling() {
         final String html
                 = "<html><body onload='test()'>\n"
-                + (addHugeDiv ? "<div id='d' style='width:10000px;height:10000px;background-color:blue;'></div>\n" : "")
+                + "<div id='d' style='width:10000px;height:10000px;background-color:blue;'></div>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "function test() {\n"
                 + "  var b = document.body;\n"
                 + "  alert(b.scrollLeft + ',' + b.scrollTop);\n"
@@ -547,7 +439,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void pageXOffset() {
         final String html
                 = "<html><body onload='test()'><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "function test() {\n"
                 + "  window.scrollBy(5, 10);\n"
                 + "  alert(window.pageXOffset);\n"
@@ -565,7 +456,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void typeof() {
         final String html
                 = "<html><body><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert(typeof window);\n"
                 + "</script></body></html>";
         final String[] messages = {"object"};
@@ -576,7 +466,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void eval() {
         final String html
                 = "<html><body onload='test()'><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "function test() {\n"
                 + "  var x = new Object();\n"
                 + "  x.a = 'Success';\n"
@@ -598,11 +487,10 @@ public class WindowUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void firedEvent_equals_original_event() {
+    public void firedEventEqualsEriginalEvent() {
         final String html =
                 "<html><head>\n"
                         + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
                         + "function test() {\n"
                         + "  var myEvent;\n"
                         + "  var listener = function(x) {\n"
@@ -627,7 +515,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html =
                 "<html><head>\n"
                         + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
                         + "function test() {\n"
                         + "  alert(this === window);\n"
                         + "  alert(window === this);\n"
@@ -646,7 +533,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html =
                 "<html><head>\n"
                         + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
                         + "function test() {\n"
                         + "  alert(window.onbeforeunload);\n"
                         + "  var handle = function() {};\n"
@@ -671,7 +557,6 @@ public class WindowUnitTest extends LoboUnitTest {
                 "<html>\n"
                         + "<body onload='test()'>\n"
                         + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
                         + "  function test() {\n"
                         + " \n"
                         + "    Function.prototype.doAlerts = function() {\n"
@@ -701,7 +586,6 @@ public class WindowUnitTest extends LoboUnitTest {
                 "<html>\n"
                         + "<body onload='test()'>\n"
                         + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
                         + "  function test() {\n"
                         + " \n"
                         + "    Function.prototype.doAlerts = function() {\n"
@@ -732,7 +616,6 @@ public class WindowUnitTest extends LoboUnitTest {
                 "<html>\n"
                         + "<body onload='test()'>\n"
                         + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
                         + "  function test() {\n"
                         + "    var o = function() {};\n"
                         + "    o.x = function() {\n"
@@ -759,15 +642,13 @@ public class WindowUnitTest extends LoboUnitTest {
     public void onError() {
         final String html
                 = "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert(window.onerror);\n"
                 + "  window.onerror = function() { alert(arguments.length); };\n"
                 + "  alert(typeof window.onerror);\n"
                 + "  try { alert(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
-                + "  alert(undef);\n"
                 + "</script>";
 
-        final String[] messages = {null, "function", "5"};
+        final String[] messages = {null, "function"};
         checkHtmlAlert(html, messages);
     }
 
@@ -776,7 +657,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
                 + "    alert(typeof messageOrEvent + ' ' + typeof source + ' '"
                 + " + lineno + ' ' + typeof colno + ' ' + typeof error);\n"
@@ -795,7 +675,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
                 + "    alert(typeof messageOrEvent + ' ' + typeof source + ' '"
                 + " + lineno + ' ' + typeof colno + ' ' + typeof error);\n"
@@ -813,7 +692,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
                 + "    error.property = 'success'\n"
                 + "    alert(error.property);\n"
@@ -830,7 +708,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<div id='myDiv'></div>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  var e = document.getElementById('myDiv');\n"
                 + "  alert(window.getComputedStyle(e, null).color);\n"
                 + "</script>\n"
@@ -840,13 +717,12 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void getComputedStyle_WithComputedColor() {
+    public void getComputedStyleWithComputedColor() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
                         + "    <style>div.x { color: red; }</style>\n"
                         + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
                         + "  function test() {\n"
                         + "    var e = document.getElementById('d');\n"
                         + "    alert(window.getComputedStyle(e, '').color);\n"
@@ -857,16 +733,15 @@ public class WindowUnitTest extends LoboUnitTest {
                         + "  <div id='d' class='x'>foo bar</div>\n"
                         + "</body>\n"
                         + "</html>";
-        final String[] messages = {"rgb(255, 0, 0)"};
+        final String[] messages = {"rgb(255,0,0)"};
         checkHtmlAlert(html, messages);
     }
 
     @Test
-    public void getComputedStyle_svg() {
+    public void getComputedStyleSvg() {
         final String html = "<html><body>\n"
                 + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'></svg>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  var e = document.getElementById('myId');\n"
                 + "  alert(window.getComputedStyle(e, null).color);\n"
                 + "</script>\n"
@@ -881,7 +756,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<iframe id='it'></iframe>;\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  Object(top);\n"
                 + "  alert(window.foo);\n"
                 + "</script>\n"
@@ -894,7 +768,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void equalsString() {
         final String html = "<html><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert('foo' == window);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -906,7 +779,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void equalsInt() {
         final String html = "<html><body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  var i = 0;\n"
                 + "  alert(i == window);\n"
                 + "</script>\n"
@@ -916,10 +788,9 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void onchange_noHandler() {
+    public void onchangenoHandler() {
         final String html
                 = "<html><body><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert('onchange' in window);\n"
                 + "  alert(window.onchange);\n"
                 + "</script></body></html>";
@@ -928,28 +799,10 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void openWindow_emptyUrl() {
-        final String html
-                = "<html><head>\n"
-                + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
-                + "var w = window.open('');\n"
-                + "alert(w ? w.document.location : w);\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body>\n"
-                + "</body>\n"
-                + "</html>";
-        final String[] messages = {"about:blank"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
     public void location() {
         final String html
                 = "<html><head>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert(location === window.location);\n"
                 + "  alert(location === document.location);\n"
                 + "  alert(window.location === document.location);\n"
@@ -964,7 +817,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    var str = '';\n"
                 + "    alert(window);\n"
@@ -989,7 +841,6 @@ public class WindowUnitTest extends LoboUnitTest {
                 = "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert(typeof window.dump);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -998,22 +849,9 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void requestAnimationFrame() {
-        final String html
-                = "<html><body><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
-                + "  alert(typeof window.requestAnimationFrame);\n"
-                + "  alert(typeof window.cancelAnimationFrame);\n"
-                + "</script></body></html>";
-        final String[] messages = {"function", "function"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
     public void showModalDiaalert() {
         final String html
                 = "<html><body><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert(typeof window.showModalDialog);\n"
                 + "</script></body></html>";
         final String[] messages = {"undefined"};
@@ -1024,7 +862,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void showModelessDiaalert() {
         final String html
                 = "<html><body><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert(typeof window.showModelessDialog);\n"
                 + "</script></body></html>";
         final String[] messages = {"undefined"};
@@ -1035,7 +872,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void find() {
         final String html
                 = "<html><body><script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  alert(typeof window.find);\n"
                 + "</script></body></html>";
         final String[] messages = {"function"};
@@ -1049,7 +885,6 @@ public class WindowUnitTest extends LoboUnitTest {
                 + "  tt { display: none; }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    var iframe = document.createElement('iframe');\n"
                 + "    document.body.appendChild(iframe);\n"
@@ -1067,32 +902,9 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void in() {
-        final String html =
-                "<html>\n"
-                        + "<script>\n"
-                        + "  function alert(msg) { window.document.title += msg + '§';}\n"
-                        + "function test() {\n"
-                        + "  alert(window.length);\n"
-                        + "  alert(-1 in window);\n"
-                        + "  alert(0 in window);\n"
-                        + "  alert(1 in window);\n"
-                        + "  alert(42 in window);\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "<frameset rows='50,*' onload='test()'>\n"
-                        + "<frame name='frame1' src='about:blank'/>\n"
-                        + "</frameset>\n"
-                        + "</html>";
-        final String[] messages = {"1", "false", "true", "false", "false"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
     public void calledTwice() {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -1109,7 +921,6 @@ public class WindowUnitTest extends LoboUnitTest {
     public void constructor() {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      alert(new Window());\n"
@@ -1127,17 +938,14 @@ public class WindowUnitTest extends LoboUnitTest {
     public void clientInformation() {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
-                + "    alert(window.clientInformation);\n"
-                + "    window.clientInformation = '##test##';\n"
                 + "    alert(window.clientInformation);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"[object Navigator]", "##test##"};
+        final String[] messages = {"[object Navigator]"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1146,7 +954,6 @@ public class WindowUnitTest extends LoboUnitTest {
         final String html
                 = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:me='http://mysite'>\n"
                 + "<script>\n"
-                + "  function alert(msg) { window.document.title += msg + '§';}\n"
                 + "  function test() {\n"
                 + "    alert('XML' in window);\n"
                 + "    alert('XMLList' in window);\n"
@@ -1163,7 +970,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void formByName() throws Exception {
+    public void formByName() {
         final String html =
                 "<html><head><title>foo</title><script>\n"
                         + "  function test() {\n"
@@ -1182,7 +989,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void elementsByName() throws Exception {
+    public void elementsByName() {
         final String html =
                 "<html><head><title>foo</title><script>\n"
                         + "  function test() {\n"
@@ -1331,7 +1138,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void elementsByName_changedAfterGet() throws Exception {
+    public void elementsByName_changedAfterGet() {
         final String html =
                 "<html><head><title>foo</title><script>\n"
                         + "  function test() {\n"
@@ -1393,7 +1200,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void elementsByName_changedAfterGet2() throws Exception {
+    public void elementsByName_changedAfterGet2() {
         final String html =
                 "<html><head><title>foo</title><script>\n"
                         + "  function test() {\n"
@@ -1419,7 +1226,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void elementsById() throws Exception {
+    public void elementsById() {
         final String html =
                 "<html><head><title>foo</title><script>\n"
                         + "  function test() {\n"
@@ -1445,42 +1252,11 @@ public class WindowUnitTest extends LoboUnitTest {
                         + "  <div id='element1'></table>\n"
                         + "</body></html>";
         final String[] messages = {"form1", "form1", "f1", "f1", "input1", "input1", "anchor1", "anchor1", "image1", "image1", "element1", "element1"};
-        ;
         checkHtmlAlert(html, messages);
     }
 
     @Test
-    public void execScript() throws Exception {
-        final String html =
-                "<html>\n"
-                        + "<head><title>test</title>\n"
-                        + "<script>\n"
-                        + "  function test() {\n"
-                        + "    try {\n"
-                        + "      window.execScript('alert(\"JavaScript\")', 'JavaScript');\n"
-                        + "      window.execScript('alert(\"JScript\")',    'JScript');\n"
-                        + "      try {\n"
-                        + "        window.execScript('alert(\"VBScript\")', 'VBScript');\n"
-                        + "      } catch (e) { alert('exception1'); }\n"
-                        + "      try {\n"
-                        + "        window.execScript('alert(\"BadLanguage\")', 'BadLanguage');\n"
-                        + "      } catch (e) {\n"
-                        + "        alert('exception2: ' + e.message.substr(0, 20)); // msg now contains info on error location\n"
-                        + "      }\n"
-                        + "    } catch (e) { alert('exception'); }\n"
-                        + "  }\n"
-                        + "</script>\n"
-                        + "</head>\n"
-                        + "<body onload='test()'>\n"
-                        + "  <div id='div1'>blah</div>\n"
-                        + "</body>\n"
-                        + "</html>";
-        final String[] messages = {"exception"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void onLoadFunction() throws Exception {
+    public void onLoadFunction() {
         final String html =
                 "<html>\n"
                         + "<head><title>test</title>\n"
@@ -1508,19 +1284,19 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void onloadNotAFunction() throws Exception {
+    public void onloadNotAFunction() {
         final String html =
                 "<html><body><script>\n"
                         + "window.onload = new function() {alert('a')};\n"
                         + "window.onload = undefined;\n"
                         + "alert(window.onload);\n"
                         + "</script></body></html>";
-        final String[] messages = {"a", "null"};
+        final String[] messages = {"a", null};
         checkHtmlAlert(html, messages);
     }
 
     @Test
-    public void addOnLoadEventListener() throws Exception {
+    public void addOnLoadEventListener() {
         final String html =
                 "<html>\n"
                         + "<head><title>test</title>\n"
@@ -1542,7 +1318,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void attachOnLoadEvent() throws Exception {
+    public void attachOnLoadEvent() {
         final String html =
                 "<html>\n"
                         + "<head><title>test</title>\n"
@@ -1567,7 +1343,7 @@ public class WindowUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void detachEventInAttachEvent() throws Exception {
+    public void detachEventInAttachEvent() {
         final String html =
                 "<html>\n"
                         + "<head><title>test</title>\n"
@@ -1586,7 +1362,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void windowName() throws Exception {
+    public void windowName() {
         final String html =
                 "<html>\n"
                         + "<head><title>window.name test</title></head>\n"
@@ -1603,7 +1379,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void viewport() throws Exception {
+    public void viewport() {
         final String html =
                 "<html>\n"
                         + "<head></head>\n"
@@ -1621,7 +1397,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void evalScopeLocal() throws Exception {
+    public void evalScopeLocal() {
         final String html =
                 "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>\n"
                         + "<script>\n"
@@ -1640,7 +1416,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void evalScopeEvent() throws Exception {
+    public void evalScopeEvent() {
         final String html =
                 "<html><body onload='test()'><script>\n"
                         + "   function test() {\n"
@@ -1658,7 +1434,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void functionEquality() throws Exception {
+    public void functionEquality() {
         final String html =
                 "<html><body>\n"
                         + "<script>\n"
@@ -1670,7 +1446,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void onLoadContext() throws Exception {
+    public void onLoadContext() {
         final String html =
                 "<html><body><script>\n"
                         + "var x = function() { alert(this==window) };\n"
@@ -1681,7 +1457,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void undefinedProperty() throws Exception {
+    public void undefinedProperty() {
         final String html =
                 "<html><head><title>foo</title><script>\n"
                         + "  function test() {\n"
@@ -1696,54 +1472,7 @@ public class WindowUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void openWindow_numericName() throws Exception {
-        final String html =
-                "<html><head><script>\n"
-                        + "function test() {\n"
-                        + "  var w1 = window.open('about:blank', 1);\n"
-                        + "  alert(w1 != null);\n"
-                        + "}\n"
-                        + "</script></head><body onload='test()'>\n"
-                        + "<iframe name='myFrame' id='myFrame'></iframe>\n"
-                        + "</body></html>";
-        final String[] messages = {"true"};
-        checkHtmlAlert(html, messages);
-    }
-
-
-    @Test
-    public void openWindow_aboutblank_location() throws Exception {
-        final String html =
-                "<html><head><script>\n"
-                        + "function test() {\n"
-                        + "  var win = window.open('about:blank', 'test');\n"
-                        + "  alert(win.location);\n"
-                        + "}\n"
-                        + "</script></head>\n"
-                        + "<body onload='test()'>\n"
-                        + "</body></html>";
-        final String[] messages = {"about:blank"};
-        checkHtmlAlert(html, messages);
-    }
-
-
-    @Test
-    public void openWindow_empty_location() throws Exception {
-        final String html =
-                "<html><head><script>\n"
-                        + "function test() {\n"
-                        + "  var win = window.open('', 'test');\n"
-                        + "  alert(win.location);\n"
-                        + "}\n"
-                        + "</script></head>\n"
-                        + "<body onload='test()'>\n"
-                        + "</body></html>";
-        final String[] messages = {"about:blank"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void stop() throws Exception {
+    public void stop() {
         final String html =
                 "<html><head><script>\n"
                         + "function test() {\n"
@@ -1762,7 +1491,7 @@ public class WindowUnitTest extends LoboUnitTest {
 
 
     @Test
-    public void devicePixelRatio() throws Exception {
+    public void devicePixelRatio() {
         final String html
                 = "<html><head><script>\n"
                 + "  function test() {\n"
@@ -1771,19 +1500,6 @@ public class WindowUnitTest extends LoboUnitTest {
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
         final String[] messages = {"1"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void offscreenBuffering() throws Exception {
-        final String html
-                = "<html><head><script>\n"
-                + "  function test() {\n"
-                + "    alert(window.offscreenBuffering);\n"
-                + "  }\n"
-                + "</script></head><body onload='test()'>\n"
-                + "</body></html>";
-        final String[] messages = {"undefined"};
         checkHtmlAlert(html, messages);
     }
 }

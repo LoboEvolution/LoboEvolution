@@ -23,7 +23,10 @@
 package org.loboevolution.html.js;
 
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
+import com.gargoylesoftware.css.dom.DOMExceptionImpl;
+import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.*;
+import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
 import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.js.css.MediaQueryListImpl;
@@ -52,6 +55,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.events.EventException;
+import org.w3c.dom.DOMException;
 
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
@@ -59,6 +63,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -70,16 +75,30 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	private static final Logger logger = Logger.getLogger(WindowImpl.class.getName());
 
 	private static final Map<HtmlRendererContext, WeakReference<WindowImpl>> CONTEXT_WINDOWS = new WeakHashMap<>();
-	
+
+	private Map<Integer, TaskWrapper> taskMap;
+
+	private List<String> msg;
+
 	private static int timerIdCounter = 0;
+
+	private int length;
+
+	private int outerHeight;
+
+	private int outerWidth;
+
+	private int innerHeight;
+
+	private int innerWidth;
+
+	private boolean lengthSet = false;
+
+	private String name = "";
 
 	private volatile HTMLDocumentImpl document;
 
 	private History history;
-
-	private int length;
-
-	private boolean lengthSet = false;
 
 	private Location location;
 
@@ -89,13 +108,10 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	private ScreenImpl screen;
 
-	private Map<Integer, TaskWrapper> taskMap;
+	private Scriptable windowScope;
 
 	private final UserAgentContext uaContext;
-	
-    private Scriptable windowScope;
 
-	private List<String> msg;
     
 	/**
 	 * <p>Constructor for WindowImpl.</p>
@@ -383,8 +399,12 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	public int getLength() {
 		if (this.lengthSet) {
 			return this.length;
+		} else {
+			final HTMLDocumentImpl doc = this.document;
+			final List<Node> list = new LinkedList<>(Arrays.asList(doc.getNodeList(new BodyFilter()).toArray()));
+			HTMLCollection collection = new HTMLCollectionImpl(doc, list);
+			return collection.getLength();
 		}
-		return 0;
 	}
 
 	/** {@inheritDoc} */
@@ -403,12 +423,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public String getName() {
-		final HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return rcontext.getName();
-		} else {
-			return null;
-		}
+		return this.name;
 	}
 
 	/** {@inheritDoc} */
@@ -739,10 +754,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public void addEventListener(final String type, final Function listener) {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
-		if (doc != null) {
-			doc.addEventListener(type, listener);
-		}
+		addEventListener(type, listener, false);
 	}
 
 	/** {@inheritDoc} */
@@ -767,10 +779,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public void removeEventListener(final String type, final Function listener) {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
-		if (doc != null) {
-			doc.removeEventListener(type, listener);
-		}
+		removeEventListener(type, listener, false);
 	}
 
 	/** {@inheritDoc} */
@@ -785,6 +794,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public double getInnerHeight() {
+		if(innerHeight > 0) {
+			return innerHeight;
+		}
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
 			return rcontext.getInnerHeight();
@@ -792,9 +804,23 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
         return -1;
     }
 
+	/**
+	 * <p>setInnerHeight.</p>
+	 *
+	 * @param innerHeight a boolean.
+	 */
+	@Override
+	public void setInnerHeight(double innerHeight) {
+		this.innerHeight = Double.valueOf(innerHeight).intValue();
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public double getInnerWidth() {
+		if(innerWidth > 0) {
+			return innerWidth;
+		}
+
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
 			return rcontext.getInnerWidth();
@@ -802,10 +828,23 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
         return -1;
     }
 
+	/**
+	 * <p>setInnerWidth.</p>
+	 *
+	 * @param innerWidth a boolean.
+	 */
+	@Override
+	public void setInnerWidth(double innerWidth) {
+		this.innerWidth = Double.valueOf(innerWidth).intValue();
+	}
 
 	/** {@inheritDoc} */
 	@Override
 	public double getOuterHeight() {
+		if(outerHeight > 0) {
+			return outerHeight;
+		}
+
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
 			return rcontext.getOuterHeight();
@@ -813,15 +852,38 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
         return -1;
     }
 
+	/**
+	 * <p>setOuterHeight.</p>
+	 *
+	 * @param outerHeight a boolean.
+	 */
+	@Override
+	public void setOuterHeight(double outerHeight) {
+		this.outerHeight = Double.valueOf(outerHeight).intValue();
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public double getOuterWidth() {
+		if(outerWidth > 0) {
+			return outerWidth;
+		}
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
 			return rcontext.getOuterWidth();
 		}
         return -1;
     }
+
+	/**
+	 * <p>setOuterWidth.</p>
+	 *
+	 * @param outerWidth a boolean.
+	 */
+	@Override
+	public void setOuterWidth(double outerWidth) {
+		this.outerWidth = Double.valueOf(outerWidth).intValue();
+	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -831,30 +893,39 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	/** {@inheritDoc} */
 	@Override
-	public String atob(final String encodedString) {
-		// TODO Auto-generated method stub
-		return null;
+	public String atob(String encodedString) throws DOMException {
+		final int l = encodedString.length();
+		for (int i = 0; i < l; i++) {
+			if (encodedString.charAt(i) > 255) {
+				throw new DOMExceptionImpl(DOMException.INVALID_CHARACTER_ERR, DOMExceptionImpl.INVALID_CHARACTER_ERR, "The string to be decoded is not correctly encoded.");
+			}
+		}
+
+		final byte[] bytes = encodedString.getBytes(StandardCharsets.ISO_8859_1);
+		return new String(Base64.getDecoder().decode(bytes), StandardCharsets.ISO_8859_1);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String btoa(final String rawString) {
-		// TODO Auto-generated method stub
-		return null;
+	public String btoa(String rawString) {
+		if(rawString == null) {
+			rawString = "null";
+		}
+
+		final byte[] bytes = rawString.getBytes(StandardCharsets.ISO_8859_1);
+		return new String(Base64.getEncoder().encode(bytes), StandardCharsets.UTF_8);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Console getConsole() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ConsoleImpl();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Navigator getClientInformation() {
-		// TODO Auto-generated method stub
-		return null;
+		return getNavigator();
 	}
 
 	/** {@inheritDoc} */
@@ -867,8 +938,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public double getDevicePixelRatio() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	/** {@inheritDoc} */
@@ -902,21 +972,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public void setName(final String name) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setOffscreenBuffering(final String offscreenBuffering) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setOffscreenBuffering(final boolean offscreenBuffering) {
-		// TODO Auto-generated method stub
+		this.name = name;
 		
 	}
 
@@ -1104,9 +1160,14 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	/** {@inheritDoc} */
 	@Override
-	public Window get(final int index) {
-		// TODO Auto-generated method stub
-		return null;
+	public WindowImpl get(final int index) {
+		return this;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public WindowImpl getFrames(){
+		return this;
 	}
 
 	private void initWindowScope(final Document doc) {
@@ -1215,5 +1276,10 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		if (oldTimer != null && cancel) {
 			oldTimer.timer.stop();
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "[object Window]";
 	}
 }

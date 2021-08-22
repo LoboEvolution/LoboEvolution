@@ -35,7 +35,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void elementSelector() {
 		final String css ="div {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -46,8 +45,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <div id='myId2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -56,7 +54,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void idSelector() {
 		final String css ="#myId {color:red} #myId2 {color:green}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -67,8 +64,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <div id='myId2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "green");
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0,255,0)");
     }
 	
 	/**
@@ -77,7 +73,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void classSelector() {
 		final String css =".intro1 {color:red} .intro2 {color: green}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -88,8 +83,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "green");
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0,255,0)");
     }
 	
 	/**
@@ -98,7 +92,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void elementClassSelector() {
 		final String css ="div.intro1 {color:red} div.intro2 {color: green}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -109,8 +102,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "green");
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0,255,0)");
         
     }
 	
@@ -120,7 +112,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void elementElementSelector() {
 		final String css ="div, p {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -131,8 +122,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <p id='myId2' class='intro2'></p>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
         
     }
 	
@@ -142,7 +132,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void elementElement2Selector() {
 		final String css ="div p {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -155,9 +144,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -166,7 +153,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void elementParentSelector() {
 		final String css ="div > p {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -179,9 +165,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -190,7 +174,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void elementAfterSelector() {
 		final String css ="div + p {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -202,9 +185,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <p id='myId2'/>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", null);
-        
+		checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 	
 	/**
@@ -213,7 +194,6 @@ public class ElementSelectorTest extends LoboUnitTest {
 	@Test
     public void elementPrecededSelector() {
 		final String css ="div ~ p {color:red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -225,8 +205,6 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <p id='myId2'/>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 }

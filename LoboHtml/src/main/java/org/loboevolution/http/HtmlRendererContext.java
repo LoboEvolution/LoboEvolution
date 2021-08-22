@@ -22,9 +22,7 @@
  */
 package org.loboevolution.http;
 
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Window;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
@@ -73,6 +71,7 @@ import org.loboevolution.img.ImageViewer;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.pdf.PDFViewer;
+import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.LinkStore;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
@@ -358,17 +357,6 @@ public class HtmlRendererContext {
 		return this.htmlPanel;
 	}
 
-	/**
-	 * It should return the name of the browser window, if this renderer context is
-	 * for the top frame in the window. This implementation returns a blank string,
-	 * so it should be overridden.
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getName() {
-		this.warn("getName(): Not overridden");
-		return "";
-	}
 
 	/**
 	 * <p>getNextURL.</p>
@@ -796,10 +784,11 @@ public class HtmlRendererContext {
 	 */
 	public int getInnerHeight() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		if (bpanel != null) {
+		if (bpanel != null && bpanel.getHeight() > 0) {
 			return bpanel.getHeight();
 		}
-		return -1;
+		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
+		return Double.valueOf(initialWindowBounds.getHeight()).intValue();
 	}
 	
 	/**
@@ -809,10 +798,11 @@ public class HtmlRendererContext {
 	 */
 	public int getInnerWidth() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		if (bpanel != null) {
+		if (bpanel != null && bpanel.getWidth() > 0) {
 			return bpanel.getWidth();
 		}
-		return -1;
+		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
+		return Double.valueOf(initialWindowBounds.getWidth()).intValue();
 	}
 	
 	/**
@@ -822,10 +812,11 @@ public class HtmlRendererContext {
 	 */
 	public int getOuterHeight() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		if (bpanel != null) {
+		if (bpanel != null && bpanel.getHeight() > 0) {
 			return bpanel.getHeight();
 		}
-		return -1;
+		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
+		return Double.valueOf(initialWindowBounds.getHeight()).intValue();
 	}
 	
 	/**
@@ -835,10 +826,11 @@ public class HtmlRendererContext {
 	 */
 	public int getOuterWidth() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		if (bpanel != null) {
+		if (bpanel != null && bpanel.getWidth() > 0) {
 			return bpanel.getWidth();
 		}
-		return -1;
+		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
+		return Double.valueOf(initialWindowBounds.getWidth()).intValue();
 	}
 
 

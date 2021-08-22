@@ -34,7 +34,6 @@ public class InputSelectorTest extends LoboUnitTest {
     @Test
     public void required() {
         final String css ="input:required { color: red;}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -47,8 +46,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, "red", null);
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -57,7 +55,6 @@ public class InputSelectorTest extends LoboUnitTest {
     @Test
     public void enabled() {
         final String css ="input[type=text]:enabled { color: red;}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -70,8 +67,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, "red", null);
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -80,7 +76,6 @@ public class InputSelectorTest extends LoboUnitTest {
     @Test
     public void disabled() {
         final String css ="input[type=text]:disabled { color: red;}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -93,8 +88,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, null, "red");
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
     }
 
     /**
@@ -103,7 +97,6 @@ public class InputSelectorTest extends LoboUnitTest {
     @Test
     public void checked() {
         final String css ="input:checked { color: red;}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -116,8 +109,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, "red", "red");
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 
     /**
@@ -126,7 +118,6 @@ public class InputSelectorTest extends LoboUnitTest {
     @Test
     public void placeholder() {
         final String css ="::placeholder { color: red;}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -139,8 +130,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, "red", null);
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -149,7 +139,6 @@ public class InputSelectorTest extends LoboUnitTest {
     @Test
     public void readOnly() {
         final String css ="input:read-only { color: red;}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -162,8 +151,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, "red", null);
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -172,7 +160,6 @@ public class InputSelectorTest extends LoboUnitTest {
     @Test
     public void readWrite() {
         final String css ="input:read-write { color: red;}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -185,8 +172,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, null, "red");
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
     }
 
     /**
@@ -195,7 +181,6 @@ public class InputSelectorTest extends LoboUnitTest {
     @Test
     public void outOfRange() {
         final String css ="input:out-of-range { color: red;}";
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -208,7 +193,6 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-
-        checkSelectorsTest(html, "red", null);
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
     }
 }

@@ -33,8 +33,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
 	 */
 	@Test
     public void attributeSelector() {
-		final String css = "div[id] {color: red}";		
-		
+		final String css = "div[id] {color: red}";
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -45,9 +44,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -56,7 +53,6 @@ public class AttributeSelectorTest extends LoboUnitTest{
 	@Test
     public void attributeValueSelector() {
 		final String css = "div[id] {color: green} div[id=myId] {color: red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -67,9 +63,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "green");
-        
+		checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0,255,0)");
     }
 	
 	/**
@@ -89,9 +83,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -100,7 +92,6 @@ public class AttributeSelectorTest extends LoboUnitTest{
 	@Test
     public void attributeValueStartingSelector() {
 		final String css = "div[class|=intro1] {color: red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -111,9 +102,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro1-intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -122,7 +111,6 @@ public class AttributeSelectorTest extends LoboUnitTest{
 	@Test
     public void attributeValueBeginSelector() {
 		final String css = "div[id^=my] {color: red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -133,9 +121,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -144,7 +130,6 @@ public class AttributeSelectorTest extends LoboUnitTest{
 	@Test
     public void attributeValueEndSelector() {
 		final String css = "div[class$=intro2] {color: red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -155,9 +140,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 	
 	/**
@@ -166,7 +149,6 @@ public class AttributeSelectorTest extends LoboUnitTest{
 	@Test
     public void attributeValueContainSelector() {
 		final String css = "div[class*=intro2] {color: red}";
-		
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -177,8 +159,6 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        
-        checkSelectorsTest(html, "red", "red");
-        
+        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
     }
 }

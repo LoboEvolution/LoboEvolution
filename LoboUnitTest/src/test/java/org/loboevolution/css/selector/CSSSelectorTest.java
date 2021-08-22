@@ -29,7 +29,7 @@ import org.loboevolution.driver.LoboUnitTest;
 public class CSSSelectorTest extends LoboUnitTest {
 
     @Test
-    public void querySelectorAll_nullUndefined() {
+    public void querySelectorAllnullUndefined() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -50,7 +50,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void querySelectorAll_emptyString() {
+    public void querySelectorAllemptyString() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -75,7 +75,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void nth_child() {
+    public void nthchild() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -103,7 +103,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void nth_child_even_odd() {
+    public void nthchildevenodd() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -127,7 +127,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void childSelector_html_body() {
+    public void childSelectorhtmlbody() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -149,7 +149,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void nth_child_no_argument() {
+    public void nthchildnoargument() {
         final String html
                 = "<html><head><script>\n"
                 + "function test() {\n"
@@ -170,7 +170,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void nth_child_equation() {
+    public void nthchildequation() {
         final String html
                 = "<html><head><script>\n"
                 + "function test() {\n"
@@ -568,7 +568,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void nth_last_child() {
+    public void nthlastchild() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -591,7 +591,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void nth_last_child2() {
+    public void nthlastchild2() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -625,7 +625,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void nth_of_type() {
+    public void nthoftype() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -645,7 +645,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void nth_last_of_type() {
+    public void nthlastoftype() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -765,7 +765,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void first_child() {
+    public void firstchild() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -785,7 +785,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void last_child() {
+    public void lastchild() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -805,7 +805,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void first_of_type() {
+    public void firstoftype() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -827,7 +827,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void invalid_not() {
+    public void invalidnot() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -854,7 +854,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void last_of_type() {
+    public void lastoftype() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -876,7 +876,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void only_child() {
+    public void onlychild() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
@@ -898,7 +898,7 @@ public class CSSSelectorTest extends LoboUnitTest {
     }
 
     @Test
-    public void only_of_type() {
+    public void onlyoftype() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"

@@ -18,26 +18,25 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.node.js;
+package org.loboevolution.html.dom.filter;
 
+import org.loboevolution.html.dom.NodeFilter;
+import org.loboevolution.html.node.Node;
 
 /**
- * <p>WindowBase64 interface.</p>
+ * The Class IFrameFilter.
  */
-public interface WindowBase64 {
-    /**
-     * <p>atob.</p>
-     *
-     * @param encodedString a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    String atob(String encodedString);
+public class IFrameFilter implements NodeFilter {
 
     /**
-     * <p>btoa.</p>
+     * <p>acceptNode.</p>
      *
-     * @param rawString a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
+     * @param node a {@link Node} object.
+     * @return a boolean.
      */
-    String btoa(String rawString);
+    @Override
+    public boolean acceptNode(Node node) {
+        String nodeName = node.getNodeName();
+        return "iframe".equalsIgnoreCase(nodeName);
+    }
 }

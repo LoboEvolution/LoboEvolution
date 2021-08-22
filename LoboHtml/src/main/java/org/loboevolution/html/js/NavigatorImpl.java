@@ -27,9 +27,6 @@ import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>Navigator class.</p>
- *
- *
- *
  */
 public class NavigatorImpl extends AbstractScriptableDelegate implements Navigator {
 	
@@ -163,5 +160,10 @@ public class NavigatorImpl extends AbstractScriptableDelegate implements Navigat
 	public boolean vibrate(int... pattern) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "[object Navigator]";
 	}
 }

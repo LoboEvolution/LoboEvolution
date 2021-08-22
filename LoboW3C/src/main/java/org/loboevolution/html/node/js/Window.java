@@ -100,11 +100,25 @@ public interface Window
     double getInnerHeight();
 
     /**
+     * <p>setInnerHeight.</p>
+     *
+     * @param innerHeight a boolean.
+     */
+    void setInnerHeight(double innerHeight);
+
+    /**
      * <p>getInnerWidth.</p>
      *
      * @return a {@link java.lang.Double} object.
      */
     double getInnerWidth();
+
+    /**
+     * <p>setInnerWidth.</p>
+     *
+     * @param innerWidth a boolean.
+     */
+    void setInnerWidth(double innerWidth);
 
     /**
      * <p>isIsSecureContext.</p>
@@ -176,20 +190,6 @@ public interface Window
      */
     Navigator getNavigator();
 
-    /**
-     * <p>setOffscreenBuffering.</p>
-     *
-     * @param offscreenBuffering a {@link java.lang.String} object.
-     */
-    void setOffscreenBuffering(String offscreenBuffering);
-
-    /**
-     * <p>setOffscreenBuffering.</p>
-     *
-     * @param offscreenBuffering a boolean.
-     */
-    void setOffscreenBuffering(boolean offscreenBuffering);
-
      /**
      * <p>getOuterHeight.</p>
      *
@@ -198,11 +198,26 @@ public interface Window
     double getOuterHeight();
 
     /**
+     * <p>setOuterHeight.</p>
+     *
+     * @param outerHeight a boolean.
+     */
+    void setOuterHeight(double outerHeight);
+
+    /**
      * <p>getOuterWidth.</p>
      *
      * @return a {@link java.lang.Double} object.
      */
     double getOuterWidth();
+
+    /**
+     * <p>setOuterWidth.</p>
+     *
+     * @param outerWidth a boolean.
+     */
+    void setOuterWidth(double outerWidth);
+
 
     /**
      * <p>getPageXOffset.</p>
@@ -631,6 +646,12 @@ public interface Window
      * @return a {@link org.loboevolution.html.node.js.Window} object.
      */
     Window get(int index);
+
+    /**
+     * <p>getFrames.</p>
+     * @return a {@link org.loboevolution.html.node.js.Window} object.
+     */
+    Window getFrames();
 
     /**
      * <p>getMsg.</p>
