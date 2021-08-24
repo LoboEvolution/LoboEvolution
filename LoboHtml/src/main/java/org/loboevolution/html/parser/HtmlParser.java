@@ -33,16 +33,14 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.loboevolution.common.ArrayUtilities;
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.Entities;
 import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.domimpl.DocumentTypeImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.ElementInfo;
-import org.loboevolution.html.node.Code;
 
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
@@ -235,7 +233,7 @@ public class HtmlParser {
 			try {
 				safeAppendChild(parent, textNode);
 			} catch (final DOMException de) {
-				if ((parent.getNodeType() != NodeType.DOCUMENT_NODE) || (de.getCode() != Code.HIERARCHY_REQUEST_ERR)) {
+				if ((parent.getNodeType() != NodeType.DOCUMENT_NODE) || (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
 					logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 				}
 			}
@@ -656,7 +654,7 @@ public class HtmlParser {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
 						if ((parent.getNodeType() != NodeType.DOCUMENT_NODE)
-								|| (de.getCode() != Code.HIERARCHY_REQUEST_ERR)) {
+								|| (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
 							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}
@@ -683,7 +681,7 @@ public class HtmlParser {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
 						if ((parent.getNodeType() != NodeType.DOCUMENT_NODE)
-								|| (de.getCode() != Code.HIERARCHY_REQUEST_ERR)) {
+								|| (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
 							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}

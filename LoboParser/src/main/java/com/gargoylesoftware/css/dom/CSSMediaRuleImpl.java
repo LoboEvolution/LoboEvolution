@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.w3c.dom.DOMException;
-
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.util.LangUtils;
@@ -79,21 +77,19 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
                 cssRules_ = ((CSSMediaRuleImpl) r).cssRules_;
             }
             else {
-                throw new DOMExceptionImpl(
+                throw new DOMException(
                     DOMException.INVALID_MODIFICATION_ERR,
-                    DOMExceptionImpl.EXPECTING_MEDIA_RULE);
+                    DOMException.EXPECTING_MEDIA_RULE);
             }
         }
         catch (final CSSException e) {
-            throw new DOMExceptionImpl(
+            throw new DOMException(
                 DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
                 e.getMessage());
         }
         catch (final IOException e) {
-            throw new DOMExceptionImpl(
-                DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
+            throw new DOMException(
+                    DOMException.SYNTAX_ERR,
                 e.getMessage());
         }
     }
@@ -124,7 +120,7 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
      *
      * @param rule the rule to be inserted
      * @param index the insert pos
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
      */
     public void insertRule(final String rule, final int index) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheet();
@@ -141,21 +137,18 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
         }
         catch (final IndexOutOfBoundsException e) {
-            throw new DOMExceptionImpl(
-                DOMException.INDEX_SIZE_ERR,
-                DOMExceptionImpl.INDEX_OUT_OF_BOUNDS,
+            throw new DOMException(
+                    DOMException.INDEX_SIZE_ERR,
                 e.getMessage());
         }
         catch (final CSSException e) {
-            throw new DOMExceptionImpl(
+            throw new DOMException(
                 DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
                 e.getMessage());
         }
         catch (final IOException e) {
-            throw new DOMExceptionImpl(
+            throw new DOMException(
                 DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
                 e.getMessage());
         }
     }
@@ -164,16 +157,15 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
      * Removes a rule at the given index.
      *
      * @param index the insert pos
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
      */
     public void deleteRule(final int index) throws DOMException {
         try {
             getCssRules().delete(index);
         }
         catch (final IndexOutOfBoundsException e) {
-            throw new DOMExceptionImpl(
+            throw new DOMException(
                 DOMException.INDEX_SIZE_ERR,
-                DOMExceptionImpl.INDEX_OUT_OF_BOUNDS,
                 e.getMessage());
         }
     }

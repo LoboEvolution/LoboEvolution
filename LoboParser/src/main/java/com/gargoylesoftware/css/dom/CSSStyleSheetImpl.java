@@ -14,21 +14,6 @@
  */
 package com.gargoylesoftware.css.dom;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
-
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
@@ -37,12 +22,18 @@ import com.gargoylesoftware.css.parser.selector.ElementSelector;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.util.LangUtils;
 import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
+import org.w3c.dom.Node;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * Implementation of CSSStyleSheet.
- *
+ * <p>
  * Author Ronald Brill
- *
  */
 public class CSSStyleSheetImpl implements Serializable {
 
@@ -141,7 +132,7 @@ public class CSSStyleSheetImpl implements Serializable {
     /**
      * inserts a new rule.
      *
-     * @param rule the rule to insert
+     * @param rule  the rule to insert
      * @param index the insert pos
      * @throws org.w3c.dom.DOMException in case of error
      */
@@ -154,76 +145,66 @@ public class CSSStyleSheetImpl implements Serializable {
 
             if (r == null) {
                 // this should neven happen because of the ThrowCssExceptionErrorHandler
-                throw new DOMExceptionImpl(
+                throw new DOMException(
                         DOMException.SYNTAX_ERR,
-                        DOMExceptionImpl.SYNTAX_ERROR,
                         "Parsing rule '" + rule + "' failed.");
             }
 
             if (getCssRules().getLength() > 0) {
                 // We need to check that this type of rule can legally go into
                 // the requested position.
-                int msg = -1;
+                short msg = -1;
                 if (r instanceof CSSCharsetRuleImpl) {
 
                     // Index must be 0, and there can be only one charset rule
                     if (index != 0) {
-                        msg = DOMExceptionImpl.CHARSET_NOT_FIRST;
+                        msg = DOMException.CHARSET_NOT_FIRST;
+                    } else if (getCssRules().getRules().get(0) instanceof CSSCharsetRuleImpl) {
+                        msg = DOMException.CHARSET_NOT_UNIQUE;
                     }
-                    else if (getCssRules().getRules().get(0) instanceof CSSCharsetRuleImpl) {
-                        msg = DOMExceptionImpl.CHARSET_NOT_UNIQUE;
-                    }
-                }
-                else if (r instanceof CSSImportRuleImpl) {
+                } else if (r instanceof CSSImportRuleImpl) {
                     // Import rules must preceed all other rules (except
                     // charset rules)
                     if (index <= getCssRules().getLength()) {
                         for (int i = 0; i < index; i++) {
                             final AbstractCSSRuleImpl ri = getCssRules().getRules().get(i);
                             if (!(ri instanceof CSSCharsetRuleImpl) && !(ri instanceof CSSImportRuleImpl)) {
-                                msg = DOMExceptionImpl.IMPORT_NOT_FIRST;
+                                msg = DOMException.IMPORT_NOT_FIRST;
                                 break;
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     if (index <= getCssRules().getLength()) {
                         for (int i = index; i < getCssRules().getLength(); i++) {
                             final AbstractCSSRuleImpl ri = getCssRules().getRules().get(i);
                             if ((ri instanceof CSSCharsetRuleImpl) || (ri instanceof CSSImportRuleImpl)) {
-                                msg = DOMExceptionImpl.INSERT_BEFORE_IMPORT;
+                                msg = DOMException.INSERT_BEFORE_IMPORT;
                                 break;
                             }
                         }
                     }
                 }
                 if (msg > -1) {
-                    throw new DOMExceptionImpl(DOMException.HIERARCHY_REQUEST_ERR, msg);
+                    throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, msg);
                 }
             }
 
             // Insert the rule into the list of rules
             getCssRules().insert(r, index);
 
-        }
-        catch (final IndexOutOfBoundsException e) {
-            throw new DOMExceptionImpl(
-                DOMException.INDEX_SIZE_ERR,
-                DOMExceptionImpl.INDEX_OUT_OF_BOUNDS,
-                e.getMessage());
-        }
-        catch (final CSSException e) {
-            throw new DOMExceptionImpl(
-                DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
-                e.getMessage());
-        }
-        catch (final IOException e) {
-            throw new DOMExceptionImpl(
-                DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
-                e.getMessage());
+        } catch (final IndexOutOfBoundsException e) {
+            throw new DOMException(
+                    DOMException.INDEX_SIZE_ERR,
+                    e.getMessage());
+        } catch (final CSSException e) {
+            throw new DOMException(
+                    DOMException.SYNTAX_ERR,
+                    e.getMessage());
+        } catch (final IOException e) {
+            throw new DOMException(
+                    DOMException.SYNTAX_ERR,
+                    e.getMessage());
         }
     }
 
@@ -236,12 +217,10 @@ public class CSSStyleSheetImpl implements Serializable {
     public void deleteRule(final int index) throws DOMException {
         try {
             getCssRules().delete(index);
-        }
-        catch (final IndexOutOfBoundsException e) {
-            throw new DOMExceptionImpl(
-                DOMException.INDEX_SIZE_ERR,
-                DOMExceptionImpl.INDEX_OUT_OF_BOUNDS,
-                e.getMessage());
+        } catch (final IndexOutOfBoundsException e) {
+            throw new DOMException(
+                    DOMException.INDEX_SIZE_ERR,
+                    e.getMessage());
         }
     }
 
@@ -289,8 +268,7 @@ public class CSSStyleSheetImpl implements Serializable {
             final CSSOMParser parser = new CSSOMParser();
             final MediaQueryList sml = parser.parseMedia(mediaText);
             media_ = new MediaListImpl(sml);
-        }
-        catch (final IOException e) {
+        } catch (final IOException e) {
             // TODO handle exception
         }
     }
@@ -313,13 +291,17 @@ public class CSSStyleSheetImpl implements Serializable {
         cssRules_ = rules;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return getCssRules().toString();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -337,7 +319,9 @@ public class CSSStyleSheetImpl implements Serializable {
         return eq;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;
@@ -464,11 +448,11 @@ public class CSSStyleSheetImpl implements Serializable {
          * Add an ElementSelector.
          *
          * @param elementSelector the selector to be added
-         * @param s the selector
-         * @param styleRule the rule
+         * @param s               the selector
+         * @param styleRule       the rule
          */
         public void addElementSelector(final ElementSelector elementSelector,
-                                        final Selector s, final CSSStyleRuleImpl styleRule) {
+                                       final Selector s, final CSSStyleRuleImpl styleRule) {
             final String elementName = elementSelector.getLocalNameLowerCase();
             elementSelectors_.add(elementName, new SelectorEntry(s, styleRule));
         }
@@ -477,18 +461,17 @@ public class CSSStyleSheetImpl implements Serializable {
          * Add a ClassSelector.
          *
          * @param elementSelector the selector to be added
-         * @param className the class name
-         * @param s the selector
-         * @param styleRule the rule
+         * @param className       the class name
+         * @param s               the selector
+         * @param styleRule       the rule
          */
         public void addClassSelector(final ElementSelector elementSelector, final String className,
-                final Selector s, final CSSStyleRuleImpl styleRule) {
+                                     final Selector s, final CSSStyleRuleImpl styleRule) {
             final String elementName = elementSelector.getLocalNameLowerCase();
             final String key;
             if (elementName == null) {
                 key = "." + className;
-            }
-            else {
+            } else {
                 key = elementName + "." + className;
             }
             classSelectors_.add(key, new SelectorEntry(s, styleRule));
@@ -497,7 +480,7 @@ public class CSSStyleSheetImpl implements Serializable {
         /**
          * Add a OtherSelector.
          *
-         * @param s the selector
+         * @param s         the selector
          * @param styleRule the rule
          */
         public void addOtherSelector(final Selector s, final CSSStyleRuleImpl styleRule) {
@@ -507,6 +490,7 @@ public class CSSStyleSheetImpl implements Serializable {
 
         /**
          * Add a media list.
+         *
          * @param mediaList the list to add
          * @return the CSSStyleSheetRuleIndex
          */
@@ -541,7 +525,7 @@ public class CSSStyleSheetImpl implements Serializable {
 
         /**
          * @param elementName the element
-         * @param classes the classes
+         * @param classes     the classes
          * @return Iterator of SelectorEntry
          */
         public Iterator<SelectorEntry> getSelectorEntriesIteratorFor(final String elementName, final String[] classes) {
@@ -553,8 +537,8 @@ public class CSSStyleSheetImpl implements Serializable {
         private LinkedList<Iterator<SelectorEntry>> iterators_;
 
         SelectorEntriesIterator(final CSSStyleSheetRuleIndex index,
-                final String elementName,
-                final String[] classes) {
+                                final String elementName,
+                                final String[] classes) {
 
             iterators_ = new LinkedList<>();
 

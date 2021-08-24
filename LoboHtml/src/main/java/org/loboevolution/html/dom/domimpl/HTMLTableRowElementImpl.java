@@ -22,13 +22,12 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLTableCellElement;
 import org.loboevolution.html.dom.HTMLTableRowElement;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.RenderState;
@@ -82,11 +81,11 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 		}
 		
 		if (this.nodeList.size() < index) {
-            throw new DOMException(Code.INDEX_SIZE_ERR, "The index is minor than the number of cells in the table ");
+            throw new DOMException(DOMException.INDEX_SIZE_ERR, "The index is minor than the number of cells in the table ");
 		}
 		
 		if (this.nodeList.size() > index) {
-            throw new DOMException(Code.INDEX_SIZE_ERR, "The index is greater than the number of cells in the table ");
+            throw new DOMException(DOMException.INDEX_SIZE_ERR, "The index is greater than the number of cells in the table ");
 		}
 	}
 
@@ -168,7 +167,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	public HTMLTableCellElement insertCell() {
 		final Document doc = this.document;
 		if (doc == null) {
-			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
 		HTMLTableCellElementImpl cellElement = (HTMLTableCellElementImpl) doc.createElement("TD");
 		appendChild(cellElement);
@@ -184,7 +183,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	private HTMLTableCellElementImpl insertCell(Object objIndex, String tagName) {
 		final Document doc = this.document;
 		if (doc == null) {
-			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
 		HTMLTableCellElementImpl cellElement = (HTMLTableCellElementImpl) doc.createElement(tagName);
 		
@@ -222,7 +221,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 		});
 		
 		if (trcount.get() < index) {
-            throw new DOMException(Code.INDEX_SIZE_ERR, "The index is greater than the number of cells in the table ");
+            throw new DOMException(DOMException.INDEX_SIZE_ERR, "The index is greater than the number of cells in the table ");
 		} else {
 			cellElement.setIndex(index);
 			insertAt(cellElement, index);

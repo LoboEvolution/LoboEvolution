@@ -20,13 +20,13 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.TagNameFilter;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.Executor;
@@ -115,11 +115,11 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 		}
 
     	if(selector.isEmpty()){
-			throw new DOMException(Code.NOT_FOUND_ERR, "The provided selector is empty.");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "The provided selector is empty.");
 		}
 
 		if(selector.trim().isEmpty()){
-			throw new DOMException(Code.NOT_FOUND_ERR, "is not a valid selector.");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "is not a valid selector.");
 		}
 
     	SelectorList selectorList = CSSUtilities.getSelectorList(selector);
@@ -250,7 +250,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
-		throw new DOMException(Code.INVALID_MODIFICATION_ERR, "Cannot set node value of document");
+		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "Cannot set node value of document");
 	}
 	
 	/**
@@ -261,7 +261,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
 	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -270,10 +270,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 
 	/**
@@ -282,10 +282,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -295,10 +295,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public Node renameNode(Node n, String namespaceURI, String qualifiedName) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "No renaming");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No renaming");
 	}
 	
 	/**
@@ -306,10 +306,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 * @return a {@link org.w3c.dom.EntityReference} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public EntityReference createEntityReference(String name) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "HTML document");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
 
 	/**
@@ -318,10 +318,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "HTML document");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
 	
 	/**
@@ -330,10 +330,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param importedNode a {@link org.loboevolution.html.node.Node} object.
 	 * @param deep a boolean.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Not implemented");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Not implemented");
 	}
 	
 	/**
@@ -341,10 +341,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 *
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -353,10 +353,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a boolean.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public boolean hasAttributeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -365,7 +365,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @return a {@link org.w3c.dom.TypeInfo} object.
 	 */
 	public TypeInfo getSchemaTypeInfo() {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -374,10 +374,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param localName a {@link java.lang.String} object.
 	 * @param isId a boolean.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -385,10 +385,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 *
 	 * @param newAttr a {@link org.loboevolution.html.node.Attr} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 
 	/**
@@ -397,10 +397,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.String} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 	
 	/**
@@ -409,10 +409,10 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 * @param namespaceURI a {@link java.lang.String} object.
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Element} object.
-	 * @throws org.loboevolution.html.dom.nodeimpl.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 
 	/**

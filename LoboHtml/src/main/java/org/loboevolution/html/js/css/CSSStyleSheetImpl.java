@@ -20,8 +20,7 @@
 
 package org.loboevolution.html.js.css;
 
-import org.loboevolution.html.dom.nodeimpl.DOMException;
-import org.loboevolution.html.node.Code;
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSRuleList;
 import org.loboevolution.html.node.css.CSSStyleSheet;
@@ -59,7 +58,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
             this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
         } catch (Exception e) {
             throw new DOMException(
-                    Code.INDEX_SIZE_ERR, e.getMessage());
+                    DOMException.INDEX_SIZE_ERR, e.getMessage());
         }
         return index;
     }
@@ -72,7 +71,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
             this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
         } catch (Exception e) {
             throw new DOMException(
-                    Code.INDEX_SIZE_ERR, e.getMessage());
+                    DOMException.INDEX_SIZE_ERR, e.getMessage());
         }
     }
 

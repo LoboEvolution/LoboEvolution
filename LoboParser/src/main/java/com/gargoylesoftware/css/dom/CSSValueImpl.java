@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.w3c.dom.DOMException;
-
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.LexicalUnit;
@@ -285,9 +283,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             value_ = v2.value_;
         }
         catch (final Exception e) {
-            throw new DOMExceptionImpl(
+            throw new DOMException(
                 DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
                 e.getMessage());
         }
     }
@@ -437,9 +434,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             final LexicalUnit lu = (LexicalUnit) value_;
             return lu.getDoubleValue();
         }
-        throw new DOMExceptionImpl(
+        throw new DOMException(
             DOMException.INVALID_ACCESS_ERR,
-            DOMExceptionImpl.FLOAT_ERROR);
+            DOMException.FLOAT_ERROR);
 
         // We need to attempt a conversion
         // return 0;
@@ -472,9 +469,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             return null;
         }
 
-        throw new DOMExceptionImpl(
+        throw new DOMException(
             DOMException.INVALID_ACCESS_ERR,
-            DOMExceptionImpl.STRING_ERROR);
+            DOMException.STRING_ERROR);
     }
 
     /**
@@ -488,9 +485,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             return (CounterImpl) value_;
         }
 
-        throw new DOMExceptionImpl(
+        throw new DOMException(
                 DOMException.INVALID_ACCESS_ERR,
-                DOMExceptionImpl.COUNTER_ERROR);
+                DOMException.COUNTER_ERROR);
     }
 
     /**
@@ -504,9 +501,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             return (RectImpl) value_;
         }
 
-        throw new DOMExceptionImpl(
+        throw new DOMException(
                 DOMException.INVALID_ACCESS_ERR,
-                DOMExceptionImpl.RECT_ERROR);
+                DOMException.RECT_ERROR);
     }
 
     /**
@@ -520,9 +517,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             return (RGBColorImpl) value_;
         }
 
-        throw new DOMExceptionImpl(
+        throw new DOMException(
             DOMException.INVALID_ACCESS_ERR,
-            DOMExceptionImpl.RGBCOLOR_ERROR);
+            DOMException.RGBCOLOR_ERROR);
     }
 
     /**

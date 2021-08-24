@@ -16,8 +16,6 @@ package com.gargoylesoftware.css.dom;
 
 import java.io.IOException;
 
-import org.w3c.dom.DOMException;
-
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.util.LangUtils;
@@ -68,21 +66,14 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
                 text_ = ((CSSUnknownRuleImpl) r).text_;
             }
             else {
-                throw new DOMExceptionImpl(
+                throw new DOMException(
                     DOMException.INVALID_MODIFICATION_ERR,
-                    DOMExceptionImpl.EXPECTING_FONT_FACE_RULE);
+                    DOMException.EXPECTING_FONT_FACE_RULE);
             }
         }
-        catch (final CSSException e) {
-            throw new DOMExceptionImpl(
+        catch (final CSSException | IOException e) {
+            throw new DOMException(
                 DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
-                e.getMessage());
-        }
-        catch (final IOException e) {
-            throw new DOMExceptionImpl(
-                DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
                 e.getMessage());
         }
     }

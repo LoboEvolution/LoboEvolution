@@ -23,7 +23,7 @@
 package org.loboevolution.html.js;
 
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
-import com.gargoylesoftware.css.dom.DOMExceptionImpl;
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.BodyFilter;
@@ -55,7 +55,6 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.events.EventException;
-import org.w3c.dom.DOMException;
 
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
@@ -897,7 +896,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		final int l = encodedString.length();
 		for (int i = 0; i < l; i++) {
 			if (encodedString.charAt(i) > 255) {
-				throw new DOMExceptionImpl(DOMException.INVALID_CHARACTER_ERR, DOMExceptionImpl.INVALID_CHARACTER_ERR, "The string to be decoded is not correctly encoded.");
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The string to be decoded is not correctly encoded.");
 			}
 		}
 

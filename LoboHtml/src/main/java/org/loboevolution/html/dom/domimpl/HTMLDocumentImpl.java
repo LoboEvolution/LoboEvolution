@@ -22,14 +22,13 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.filter.HeadFilter;
-import org.loboevolution.html.dom.filter.OptionFilter;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.io.LocalErrorHandler;
 import org.loboevolution.html.io.WritableLineReader;
@@ -37,7 +36,6 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.StyleSheetList;
@@ -419,7 +417,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/** {@inheritDoc} */
 	@Override
 	public Node importNode(Node importedNode, boolean deep) {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Not implemented");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Not implemented");
 	}
 
 	/**
@@ -568,7 +566,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/** {@inheritDoc} */
 	@Override
 	public Node renameNode(Node n, String namespaceURI, String qualifiedName) {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "No renaming");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No renaming");
 	}
 
 	/**

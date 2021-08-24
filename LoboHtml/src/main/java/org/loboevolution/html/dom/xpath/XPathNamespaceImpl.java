@@ -23,16 +23,14 @@
 
 package org.loboevolution.html.dom.xpath;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.NodeType;
-import org.loboevolution.html.node.ParentNode;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.xpath.XPathNamespace;
 import org.mozilla.javascript.Function;
@@ -207,7 +205,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	/** {@inheritDoc} */
 	@Override
 	public Node cloneNode(boolean arg0) {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, null);
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, null);
 	}
 
 	/** {@inheritDoc} */

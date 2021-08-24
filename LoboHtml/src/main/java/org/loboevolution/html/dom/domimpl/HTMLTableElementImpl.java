@@ -26,12 +26,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
-import org.loboevolution.html.dom.filter.ScriptFilter;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.RenderState;
@@ -279,7 +277,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	private HTMLTableRowElementImpl insertRow(Object objIndex, String tagName)  throws Exception {
 		final Document doc = this.document;
 		if (doc == null) {
-			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
 		final HTMLTableRowElementImpl rowElement = (HTMLTableRowElementImpl) doc.createElement("TR");
 		
@@ -317,7 +315,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 		});
 		
 		if (trcount.get() < index) {
-            throw new DOMException(Code.INDEX_SIZE_ERR, "The index is greater than the number of cells in the table ");
+            throw new DOMException(DOMException.INDEX_SIZE_ERR, "The index is greater than the number of cells in the table ");
 		} else {
 			rowElement.setIndex(index);
 			insertAt(rowElement, index);
@@ -331,7 +329,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	public HTMLTableRowElement insertRow() {
 		final Document doc = this.document;
 		if (doc == null) {
-			throw new DOMException(Code.WRONG_DOCUMENT_ERR, "Orphan element");
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
 		final HTMLTableRowElement rowElement = (HTMLTableRowElement) doc.createElement("TR");
 		appendChild(rowElement);

@@ -25,14 +25,12 @@ package org.loboevolution.html.dom.xpath;
 
 import javax.xml.transform.TransformerException;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.apache.xml.utils.PrefixResolver;
 import org.apache.xpath.XPath;
 import org.apache.xpath.domapi.XPathStylesheetDOM3Exception;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.xpath.XPathEvaluator;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
@@ -176,7 +174,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 			// Need to pass back exception code DOMException.NAMESPACE_ERR also.
 			// Error found in DOM Level 3 XPath Test Suite.
 			if (e instanceof XPathStylesheetDOM3Exception) {
-				throw new DOMException(Code.NAMESPACE_ERR, e.getMessageAndLocation());
+				throw new DOMException(DOMException.NAMESPACE_ERR, e.getMessageAndLocation());
 			} else {
 				throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, e.getMessageAndLocation());
 			}

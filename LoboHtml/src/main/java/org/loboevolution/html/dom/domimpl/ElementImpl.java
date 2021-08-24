@@ -22,8 +22,8 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NamedNodeMapImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.gui.HtmlPanel;
@@ -390,7 +390,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public void setIdAttribute(String name, boolean isId) {
 		final String normalName = Strings.normalizeAttributeName(name);
 		if (!"id".equals(normalName)) {
-			throw new DOMException(Code.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
 		}
 	}
 
@@ -399,7 +399,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public void setIdAttributeNode(Attr idAttr, boolean isId) {
 		final String normalName = Strings.normalizeAttributeName(idAttr.getName());
 		if (!"id".equals(normalName)) {
-			throw new DOMException(Code.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
 		}
 	}
 

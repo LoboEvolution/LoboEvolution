@@ -23,9 +23,8 @@ package org.loboevolution.html.dom.svgimpl;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
-import org.loboevolution.html.dom.nodeimpl.DOMException;
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.svg.SVGLength;
-import org.loboevolution.html.node.Code;
 
 
 /**
@@ -112,7 +111,7 @@ public class SVGLengthImpl implements SVGLength {
 	public String getValueAsString() {
 		String suffix = getUnitTypeAsString(this.unitType);
 		if ("unkown".equals(suffix)) {
-			throw new DOMException(Code.NOT_SUPPORTED_ERR, "Unknow unit type");
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknow unit type");
 		}
 		if (this.valueInSpecifiedUnits == (long) this.valueInSpecifiedUnits) {
 			return String.format("%f" + suffix, (long) this.valueInSpecifiedUnits);
@@ -165,7 +164,7 @@ public class SVGLengthImpl implements SVGLength {
 		try {
 			this.valueInSpecifiedUnits = Float.parseFloat(valueString);
 		} catch (NumberFormatException e) {
-			throw new DOMException(Code.SYNTAX_ERR, "Invalid value: '" + valueString + "'!");
+			throw new DOMException(DOMException.SYNTAX_ERR, "Invalid value: '" + valueString + "'!");
 		}
 	}
 
@@ -188,7 +187,7 @@ public class SVGLengthImpl implements SVGLength {
 			this.valueInSpecifiedUnits = valueInSpecifiedUnits;
 			break;
 		default:
-			throw new DOMException(Code.NOT_SUPPORTED_ERR, "Invalid unit type");
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Invalid unit type");
 		}
 	}
 
@@ -304,7 +303,7 @@ public class SVGLengthImpl implements SVGLength {
 			suffix = "unknown";
 			break;
 		default:
-			throw new DOMException(Code.NOT_SUPPORTED_ERR, "Invalid unit type");
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Invalid unit type");
 		}
 		return suffix;
 	}

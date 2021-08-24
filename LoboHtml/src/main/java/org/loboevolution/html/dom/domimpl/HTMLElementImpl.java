@@ -24,14 +24,13 @@ package org.loboevolution.html.dom.domimpl;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderer.HtmlController;
@@ -503,7 +502,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param value a {@link java.lang.Object} object.
 	 */
 	public void setCurrentStyle(Object value) {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "Cannot set currentStyle property");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Cannot set currentStyle property");
 	}
 	
 	/**

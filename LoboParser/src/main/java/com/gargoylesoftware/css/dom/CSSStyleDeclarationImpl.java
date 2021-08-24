@@ -18,8 +18,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.w3c.dom.DOMException;
-
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.util.LangUtils;
 import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
@@ -92,9 +90,8 @@ public class CSSStyleDeclarationImpl implements Serializable {
             parser.parseStyleDeclaration(this, cssText);
         }
         catch (final Exception e) {
-            throw new DOMExceptionImpl(
+            throw new DOMException(
                 DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
                 e.getMessage());
         }
     }
@@ -192,9 +189,8 @@ public class CSSStyleDeclarationImpl implements Serializable {
             }
         }
         catch (final Exception e) {
-            throw new DOMExceptionImpl(
+            throw new DOMException(
                     DOMException.SYNTAX_ERR,
-                    DOMExceptionImpl.SYNTAX_ERROR,
                     e.getMessage());
         }
     }

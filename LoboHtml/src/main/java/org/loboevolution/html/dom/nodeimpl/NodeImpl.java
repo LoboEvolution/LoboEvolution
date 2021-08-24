@@ -22,6 +22,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
@@ -201,7 +202,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public short compareDocumentPosition(Node other) {
 		final Node parent = getParentNode();
 		if (!(other instanceof NodeImpl)) {
-			throw new DOMException(Code.NOT_SUPPORTED_ERR, "Unknwon node implementation");
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
 		}
 
 		if (other == this) {
@@ -528,7 +529,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	private Node getNextTo(Node node) {
 		int idx = this.nodeList.indexOf(node);
 		if (idx == -1) {
-			throw new DOMException(Code.NOT_FOUND_ERR, "node not found");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "node not found");
 		}
 
 		int size = this.nodeList.getLength();
@@ -648,7 +649,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	private Node getPreviousTo(Node node) {
 		final int idx = this.nodeList.indexOf(node);
 		if (idx == -1) {
-			throw new DOMException(Code.NOT_FOUND_ERR, "node not found");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "node not found");
 		}
 		
 		int size = this.nodeList.getLength();
@@ -857,7 +858,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public Node insertAfter(Node newChild, Node refChild) {
 		final int idx = this.nodeList.indexOf(refChild);
 		if (idx == -1) {
-			throw new DOMException(Code.NOT_FOUND_ERR, "refChild not found");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
 		}
 		this.nodeList.add(idx + 1, newChild);
 		if (newChild instanceof NodeImpl) {
@@ -904,7 +905,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 			final int idx = this.nodeList.indexOf(refChild);
 			if (idx == -1) {
-				throw new DOMException(Code.NOT_FOUND_ERR, "refChild not found");
+				throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
 			}
 			this.nodeList.add(idx, newChild);
 			if (newChild instanceof NodeImpl) {
@@ -1012,7 +1013,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public Node removeChild(Node oldChild) {
 		synchronized (this.treeLock) {
 			if (!this.nodeList.remove(oldChild)) {
-				throw new DOMException(Code.NOT_FOUND_ERR, "oldChild not found");
+				throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
 			}
 		}
 		if (!this.notificationsSuspended) {
@@ -1032,7 +1033,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		try {
 			final Node n = this.nodeList.remove(index);
 			if (n == null) {
-				throw new DOMException(Code.INDEX_SIZE_ERR, "No node with that index");
+				throw new DOMException(DOMException.INDEX_SIZE_ERR, "No node with that index");
 			}
 			return n;
 		} finally {
@@ -1085,7 +1086,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		try {
 				final int idx = nodeList.indexOf(node);
 				if (idx == -1) {
-					throw new DOMException(Code.NOT_FOUND_ERR, "Node not a child");
+					throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not a child");
 				}
 				final StringBuilder textBuffer = new StringBuilder();
 				int firstIdx = idx;
@@ -1130,7 +1131,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		try {
 			final int idx = this.nodeList.indexOf(node);
 			if (idx == -1) {
-				throw new DOMException(Code.NOT_FOUND_ERR, "Node not a child");
+				throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not a child");
 			}
 			int firstIdx = idx;
 			final List<Node> toDelete = new LinkedList<>();
@@ -1168,7 +1169,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	
 			final int idx = this.nodeList.indexOf(oldChild);
 			if (idx == -1) {
-				throw new DOMException(Code.NOT_FOUND_ERR, "oldChild not found");
+				throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
 			}
 			this.nodeList.set(idx, newChild);
 		

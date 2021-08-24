@@ -25,15 +25,12 @@ package org.loboevolution.html.dom.xpath;
 
 import java.util.Objects;
 
-import javax.xml.transform.TransformerException;
-
+import com.gargoylesoftware.css.dom.DOMException;
 import org.apache.xpath.XPath;
 import org.apache.xpath.XPathContext;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
 import org.apache.xpath.res.XPATHMessages;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
@@ -121,7 +118,7 @@ public class XPathExpressionImpl implements XPathExpression {
 			// Check that the context node is owned by the same document
 			if (!Objects.equals(contextNode, m_doc) && !contextNode.getOwnerDocument().equals(m_doc)) {
 				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_DOCUMENT, null);
-				throw new DOMException(Code.WRONG_DOCUMENT_ERR, fmsg);
+				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, fmsg);
 			}
 
 			// Check that the context node is an acceptable node type

@@ -25,12 +25,11 @@ package org.loboevolution.html.dom.xpath;
 
 import javax.xml.transform.TransformerException;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.apache.xpath.XPath;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
 import org.apache.xpath.res.XPATHMessages;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeIterator;
 import org.loboevolution.html.node.NodeList;
@@ -423,7 +422,7 @@ public class XPathResultImpl implements XPathResult {
 
 		if (getInvalidIteratorState()) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_DOC_MUTATED, null);
-			throw new DOMException(Code.INVALID_STATE_ERR, fmsg);
+			throw new DOMException(DOMException.INVALID_STATE_ERR, fmsg);
 		}
 
 		Node node = m_iterator.nextNode();

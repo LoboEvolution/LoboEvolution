@@ -22,10 +22,9 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLSlotElement;
 import org.loboevolution.html.dom.domimpl.CharacterDataImpl;
-import org.loboevolution.html.node.Code;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.Text;
 
@@ -103,7 +102,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	public String getWholeText() {
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		if (parent == null) {
-			throw new DOMException(Code.HIERARCHY_REQUEST_ERR, "Text node has no parent");
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
 		}
 		return parent.getTextContent();
 	}
@@ -130,7 +129,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	public Text replaceWholeText(String content) {
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		if (parent == null) {
-			throw new DOMException(Code.HIERARCHY_REQUEST_ERR, "Text node has no parent");
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
 		}
 		return parent.replaceAdjacentTextNodes(this, content);
 	}
@@ -162,11 +161,11 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	public Text splitText(int offset) {
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		if (parent == null) {
-			throw new DOMException(Code.HIERARCHY_REQUEST_ERR, "Text node has no parent");
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
 		}
 		final String t = this.text;
 		if (offset < 0 || offset > t.length()) {
-			throw new DOMException(Code.INDEX_SIZE_ERR, "Bad offset: " + offset);
+			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Bad offset: " + offset);
 		}
 		final String content1 = t.substring(0, offset);
 		final String content2 = t.substring(offset);

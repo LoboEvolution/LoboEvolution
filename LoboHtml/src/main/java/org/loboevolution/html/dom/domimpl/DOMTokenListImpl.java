@@ -20,10 +20,9 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.DOMExceptionImpl;
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.DOMTokenList;
-import org.w3c.dom.DOMException;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -76,11 +75,11 @@ public class DOMTokenListImpl implements DOMTokenList {
 		if (token != null && !tokenset.contains(token)) {
 			final String tok = token.trim();
 			if (Strings.isBlank(tok)) {
-				throw new DOMExceptionImpl(DOMException.INVALID_CHARACTER_ERR, DOMExceptionImpl.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
 
 			if (tok.contains(" ") || tok.contains("\t")) {
-				throw new DOMExceptionImpl(DOMException.INVALID_CHARACTER_ERR, DOMExceptionImpl.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
 
 			tokenset.add(tok);
@@ -103,11 +102,11 @@ public class DOMTokenListImpl implements DOMTokenList {
 			final String tokTrim = token.trim();
 
 			if (Strings.isBlank(tokTrim)) {
-				throw new DOMExceptionImpl(DOMException.INVALID_CHARACTER_ERR, DOMExceptionImpl.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
 
 			if (tokTrim.contains(" ") || tokTrim.contains("\t")) {
-				throw new DOMExceptionImpl(DOMException.INVALID_CHARACTER_ERR, DOMExceptionImpl.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
 
 			tokenset.remove(tokTrim);
@@ -124,11 +123,11 @@ public class DOMTokenListImpl implements DOMTokenList {
 			final String tok = token.trim();
 
 			if (Strings.isBlank(tok)) {
-				throw new DOMExceptionImpl(DOMException.INVALID_CHARACTER_ERR, DOMExceptionImpl.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
 
 			if (tok.contains(" ")) {
-				throw new DOMExceptionImpl(DOMException.INVALID_CHARACTER_ERR, DOMExceptionImpl.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
 
 			if (!tokenset.remove(tok)) {
@@ -182,7 +181,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 	@Override
 	public void setValue(String value) throws DOMException {
 		if (value == null) {
-			throw new DOMExceptionImpl(DOMException.SYNTAX_ERR, DOMExceptionImpl.SYNTAX_ERROR, "Token cannot be null");
+			throw new DOMException(DOMException.SYNTAX_ERR, "Token cannot be null");
 		}
 		tokenset.clear();
 		StringTokenizer st = new StringTokenizer(value);

@@ -27,11 +27,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.html.dom.domimpl.AttrImpl;
 import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Code;
 
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
@@ -79,7 +79,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Attr getNamedItemNS(String namespaceURI, String localName) {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "No namespace support");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");
 	}
 
 	/** {@inheritDoc} */
@@ -113,7 +113,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Attr removeNamedItemNS(String namespaceURI, String localName) {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "No namespace support");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");
 	}
 
 	/** {@inheritDoc} */
@@ -130,7 +130,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Attr setNamedItemNS(Attr arg) {
-		throw new DOMException(Code.NOT_SUPPORTED_ERR, "No namespace support");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");
 	}
 
 	@Override

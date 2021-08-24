@@ -20,12 +20,11 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
-import org.loboevolution.html.dom.nodeimpl.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
-import org.loboevolution.html.node.Code;
 import org.loboevolution.html.node.Node;
 
 import java.util.List;
@@ -167,7 +166,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 				}
 			}
 			if (!found)
-				throw new DOMException(Code.NOT_FOUND_ERR, "Record not found");
+				throw new DOMException(DOMException.NOT_FOUND_ERR, "Record not found");
 		}
 	}
 

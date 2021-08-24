@@ -23,7 +23,7 @@ package org.loboevolution.html.dom.svgimpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.loboevolution.html.dom.nodeimpl.DOMException;
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGPointList;
