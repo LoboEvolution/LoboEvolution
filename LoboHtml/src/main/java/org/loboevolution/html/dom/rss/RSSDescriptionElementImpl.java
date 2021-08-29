@@ -24,14 +24,12 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 
 /**
  * <p>RSSDescriptionElementImpl class.</p>
- *
- *
- *
  */
 public class RSSDescriptionElementImpl extends RSSElement implements RSSDrawable {
 
@@ -49,7 +47,6 @@ public class RSSDescriptionElementImpl extends RSSElement implements RSSDrawable
 	public void draw(Graphics2D graphics, int y) {
 		String text = getText();
 		FontKey key = new FontKey();
-		key.setFontFamily(Font.SANS_SERIF);
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		Font font = FontFactory.getInstance().getFont(key);
 		graphics.setFont(font);

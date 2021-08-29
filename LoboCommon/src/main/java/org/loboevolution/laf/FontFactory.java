@@ -23,6 +23,7 @@
 package org.loboevolution.laf;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
 
 import javax.swing.text.StyleContext;
 import java.awt.*;
@@ -31,9 +32,6 @@ import java.util.*;
 
 /**
  * A factory for creating Font objects.
- *
- * Author J. H. S.
- *
  */
 public final class FontFactory {
 
@@ -56,6 +54,36 @@ public final class FontFactory {
 	 */
 	public static FontFactory getInstance() {
 		return instance;
+	}
+
+	/**
+	 * Instantiates a new font factory.
+	 */
+	private FontFactory() {
+		final String[] ffns = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+		final Set<String> fontFamilies = this.fontFamilies;
+		synchronized (this) {
+			for (final String ffn : ffns) {
+				fontFamilies.add(ffn.toLowerCase());
+			}
+		}
+	}
+
+	/**
+	 * Gets the font.
+	 *
+	 * @param key the key
+	 * @return a {@link java.awt.Font} object.
+	 */
+	public Font getFont(FontKey key) {
+		synchronized (this) {
+			Font font = this.fontMap.get(key);
+			if (font == null) {
+				font = this.createFont(key);
+				this.fontMap.put(key, font);
+			}
+			return font;
+		}
 	}
 
 	/**
@@ -87,25 +115,7 @@ public final class FontFactory {
 		}
 		additionalAttributes.put(TextAttribute.STRIKETHROUGH, fontStrikethrough);
 
-		Float bold = (Float) baseFont.getAttributes().get(TextAttribute.WEIGHT_BOLD);
-		if (bold == null && Strings.isNotBlank(key.getFontWeight())) {
-			bold = TextAttribute.WEIGHT_BOLD;
-		}
-		additionalAttributes.put(TextAttribute.WEIGHT, bold);
 		return baseFont.deriveFont(additionalAttributes);
-	}
-
-	/**
-	 * Instantiates a new font factory.
-	 */
-	private FontFactory() {
-		final String[] ffns = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-		final Set<String> fontFamilies = this.fontFamilies;
-		synchronized (this) {
-			for (final String ffn : ffns) {
-				fontFamilies.add(ffn.toLowerCase());
-			}
-		}
 	}
 
 	/**
@@ -161,17 +171,20 @@ public final class FontFactory {
 			}
 		}
 
+		Map<TextAttribute, Object> attributes;
+
+		if (Strings.isNotBlank(key.getFontWeight())) {
+			attributes = getBoldAttributes(key.getFontWeight());
+		} else{
+			attributes = new HashMap<>();
+		}
+
+		attributes.put(TextAttribute.TRACKING, (double) letterSpacing / 10 / 2);
+
 		int fontStyle = Font.PLAIN;
 		if ("italic".equalsIgnoreCase(key.getFontStyle())) {
 			fontStyle |= Font.ITALIC;
 		}
-
-		if ("bold".equalsIgnoreCase(key.getFontWeight()) || "bolder".equalsIgnoreCase(key.getFontWeight())) {
-			fontStyle |= Font.BOLD;
-		}
-
-		final Map<TextAttribute, Object> attributes = new HashMap<>();
-		attributes.put(TextAttribute.TRACKING, (double) letterSpacing / 10 / 2);
 
 		if (baseFont != null) {
 			final Font f = baseFont.deriveFont(fontStyle, key.getFontSize());
@@ -196,27 +209,50 @@ public final class FontFactory {
 					return font.deriveFont(attributes);
 				}
 			}
-			// Otherwise, fall through.
 		}
-		// Last resort:
 		String defaultFontName = new LAFSettings().getInstance().getFont();
 		return createFont(defaultFontName, fontStyle, Math.round(key.getFontSize())).deriveFont(attributes);
 	}
 
-	/**
-	 * Gets the font.
-	 *
-	 * @param key the key
-	 * @return a {@link java.awt.Font} object.
-	 */
-	public Font getFont(FontKey key) {
-		synchronized (this) {
-			Font font = this.fontMap.get(key);
-			if (font == null) {
-				font = this.createFont(key);
-				this.fontMap.put(key, font);
-			}
-			return font;
+	private Map<TextAttribute, Object> getBoldAttributes(String fontWeight){
+
+		Map<TextAttribute, Object> attributes = new HashMap<>();
+
+		switch (CSSValues.get(fontWeight)) {
+			case BOLD100:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_EXTRA_LIGHT);
+				break;
+			case BOLD200:
+			case LIGHTER:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_LIGHT);
+				break;
+			case BOLD300:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_DEMILIGHT);
+				break;
+			case NORMAL:
+			case BOLD400:
+			default:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_REGULAR);
+				break;
+			case BOLD500:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_MEDIUM);
+				break;
+			case BOLD600:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_DEMIBOLD);
+				break;
+			case BOLD:
+			case BOLDER:
+			case BOLD700:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
+				break;
+			case BOLD800:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_HEAVY);
+				break;
+			case BOLD900:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_EXTRABOLD);
+				break;
 		}
+		return attributes;
 	}
+
 }

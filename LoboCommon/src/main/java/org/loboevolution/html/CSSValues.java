@@ -40,6 +40,24 @@ public enum CSSValues {
 
 	BOLD("bold"),
 
+	BOLD100("100"),
+
+	BOLD200("200"),
+
+	BOLD300("300"),
+
+	BOLD400("400"),
+
+	BOLD500("500"),
+
+	BOLD600("600"),
+
+	BOLD700("700"),
+
+	BOLD800("800"),
+
+	BOLD900("900"),
+
 	BOLDER("bolder"),
 
 	BORDER_BOX("border-box"),

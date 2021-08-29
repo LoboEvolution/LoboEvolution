@@ -107,11 +107,11 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 			case 6:
 				return 8.0f;
 			default:
-				return 14.0f;
+				return 16.0f;
 			}
 		} catch (final Exception thrown) {
 			this.warn("getHeadingFontSize(): Bad heading tag: " + getTagName(), thrown);
-			return 14.0f;
+			return 16.0f;
 		}
 	}
 

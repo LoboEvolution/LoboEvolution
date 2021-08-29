@@ -90,7 +90,7 @@ public class LAFSettings implements Serializable {
 	private String font = FontType.TIMES_NEW_ROMAN.getValue();
 
 	/** The Font Size . */
-	private float fontSize = 14.0f;
+	private float fontSize = 16.0f;
 
 	private final String LOOK_AND_FEEL = 
 			" SELECT DISTINCT acryl, aero, aluminium, bernstein, fast, graphite," +

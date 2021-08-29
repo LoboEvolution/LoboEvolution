@@ -27,7 +27,6 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.info.FontInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 import org.loboevolution.laf.LAFSettings;
@@ -35,29 +34,11 @@ import org.loboevolution.net.HttpNetwork;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <p>HtmlValues class.</p>
- *
- *
- *
  */
 public class HtmlValues {
-
-	/** Constant SYSTEM_FONTS */
-	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<>();
-
-	static {
-		final FontInfo systemFont = new FontInfo();
-		SYSTEM_FONTS.put("caption", systemFont);
-		SYSTEM_FONTS.put("icon", systemFont);
-		SYSTEM_FONTS.put("menu", systemFont);
-		SYSTEM_FONTS.put("message-box", systemFont);
-		SYSTEM_FONTS.put("small-caption", systemFont);
-		SYSTEM_FONTS.put("status-bar", systemFont);
-	}
 
 	/**
 	 * <p>getListStyle.</p>

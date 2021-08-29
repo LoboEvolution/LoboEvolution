@@ -20,98 +20,129 @@
 
 package org.loboevolution.html.style.setter;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.info.FontInfo;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import java.util.Arrays;
 
 /**
  * <p>FontSetter class.</p>
- *
- *
- *
  */
 public class FontSetter implements SubPropertySetter {
 
-	/**
-	 * <p>changeValue.</p>
-	 *
-	 * @param properties a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 * @param newValue a {@link java.lang.String} object.
-	 * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
-	 */
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
-		this.changeValue(properties, newValue, declaration, true);
-	}
+    /**
+     * <p>changeValue.</p>
+     *
+     * @param properties  a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+     * @param newValue    a {@link java.lang.String} object.
+     * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
+     */
+    public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
+        this.changeValue(properties, newValue, declaration, true);
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
-			boolean important) {
-		properties.setPropertyValueLCAlt(FONT, newValue, important);
-		if (Strings.isNotBlank(newValue)) {
-			final String fontSpecTL = newValue.toLowerCase();
-			final FontInfo fontInfo = HtmlValues.SYSTEM_FONTS.get(fontSpecTL);
-			if (fontInfo != null) {
-				if (fontInfo.getFontFamily() != null) {
-					properties.setPropertyValueLCAlt(FONT_FAMILY, fontInfo.getFontFamily(), important);
-				}
-				if (fontInfo.getFontSize() != null) {
-					properties.setPropertyValueLCAlt(FONT_SIZE, fontInfo.getFontSize(), important);
-				}
-				if (fontInfo.getFontStyle() != null) {
-					properties.setPropertyValueLCAlt(FONT_STYLE, fontInfo.getFontStyle(), important);
-				}
-				if (fontInfo.getFontVariant() != null) {
-					properties.setPropertyValueLCAlt(FONT_VARIANT, fontInfo.getFontVariant(), important);
-				}
-				if (fontInfo.getFontWeight() != null) {
-					properties.setPropertyValueLCAlt(FONT_WEIGHT, fontInfo.getFontWeight(), important);
-				}
-				return;
-			}
-			final String[] tokens = HtmlValues.splitCssValue(fontSpecTL);
-			String token = null;
-			final int length = tokens.length;
-			int i;
-			for (i = 0; i < length; i++) {
-				token = tokens[i];
-				if (FontValues.isFontStyle(token)) {
-					properties.setPropertyValueLCAlt(FONT_STYLE, token, important);
-					continue;
-				}
-				if (FontValues.isFontVariant(token)) {
-					properties.setPropertyValueLCAlt(FONT_VARIANT, token, important);
-					continue;
-				}
-				if (FontValues.isFontWeight(token)) {
-					properties.setPropertyValueLCAlt(FONT_WEIGHT, token, important);
-					continue;
-				}
-				// Otherwise exit loop
-				break;
-			}
-			if (token != null) {
-				final int slashIdx = token.indexOf('/');
-				final String fontSizeText = slashIdx == -1 ? token : token.substring(0, slashIdx);
-				properties.setPropertyValueLCAlt(FONT_SIZE, fontSizeText, important);
-				final String lineHeightText = slashIdx == -1 ? null : token.substring(slashIdx + 1);
-				if (lineHeightText != null) {
-					properties.setPropertyValueLCAlt(LINE_HEIGHT, lineHeightText, important);
-				}
-				if (++i < length) {
-					final StringBuilder fontFamilyBuff = new StringBuilder();
-					do {
-						token = tokens[i];
-						fontFamilyBuff.append(token);
-						fontFamilyBuff.append(' ');
-					} while (++i < length);
-					properties.setPropertyValueLCAlt(FONT_FAMILY, fontFamilyBuff.toString(), important);
-				}
-			}
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration, boolean important) {
+        if (Strings.isNotBlank(newValue)) {
+            final String fontSpecTL = newValue.toLowerCase();
+            final String[] tokens = fontSpecTL.split(" ");
+            String token = null;
+            boolean isSlash = false;
+            final int length = tokens.length;
+            int i;
+
+            if (length > 0) {
+                properties.setPropertyValueLCAlt(FONT, newValue, important);
+                setDfaultFontValus(properties, important);
+            }
+
+            for (i = 0; i < length; i++) {
+                token = tokens[i].trim().replace(",", "");
+
+                if (Strings.isBlank(token)) {
+                    continue;
+                }
+
+                if (FontValues.isFontStyle(token)) {
+                    properties.setPropertyValueLCAlt(FONT_STYLE, token, important);
+                    continue;
+                }
+
+                if (FontValues.isFontVariant(token)) {
+                    properties.setPropertyValueLCAlt(FONT_VARIANT, token, important);
+                    continue;
+                }
+
+                if (FontValues.isFontWeight(token)) {
+                    properties.setPropertyValueLCAlt(FONT_WEIGHT, token, important);
+                    continue;
+                }
+
+                if ("/".equals(token)) {
+                    isSlash = true;
+                    continue;
+                }
+
+                if ((token.contains("/") || isSlash) && properties.getPropertyValue(FONT_SIZE) != null) {
+                    final int slashIdx = token.indexOf('/');
+                    final String lineHeightText = slashIdx == -1 ? null : token.substring(slashIdx + 1);
+
+
+                    if(lineHeightText == null) {
+                        properties.setPropertyValueLCAlt(LINE_HEIGHT, token, important);
+                    } else{
+                        properties.setPropertyValueLCAlt(LINE_HEIGHT, lineHeightText, important);
+                    }
+
+                    isSlash = false;
+                    continue;
+                }
+
+                if (token.contains("/") && properties.getPropertyValue(FONT_SIZE) == null) {
+
+                    final int slashIdx = token.indexOf('/');
+                    final String fontSizeText = slashIdx == -1 ? token : token.substring(0, slashIdx);
+                    final String lineHeightText = slashIdx == -1 ? null : token.substring(slashIdx + 1);
+
+                    if (HtmlValues.isUnits(fontSizeText)) {
+                        properties.setPropertyValueLCAlt(FONT_SIZE, fontSizeText, important);
+                    }
+
+                  if (lineHeightText != null && HtmlValues.isUnits(lineHeightText)) {
+                        properties.setPropertyValueLCAlt(LINE_HEIGHT, lineHeightText, important);
+                    } else {
+                        isSlash = true;
+                    }
+
+                    continue;
+                }
+
+                if (HtmlValues.isUnits(token)) {
+                    properties.setPropertyValueLCAlt(FONT_SIZE, token, important);
+                    continue;
+                }
+
+                String fontFamily = properties.getPropertyValue(FONT_FAMILY);
+                if(fontFamily == null) {
+                    properties.setPropertyValueLCAlt(FONT_FAMILY, token.trim(), important);
+                } else {
+                    properties.setPropertyValueLCAlt(FONT_FAMILY, fontFamily + ", " + token.trim(), important);
+                }
+                continue;
+            }
+        }
+    }
+
+    private void setDfaultFontValus(AbstractCSSProperties properties, boolean important) {
+        properties.setPropertyValueLCAlt(FONT_STYLE, CSSValues.NORMAL.getValue(), important);
+        properties.setPropertyValueLCAlt(FONT_VARIANT, CSSValues.NORMAL.getValue(), important);
+        properties.setPropertyValueLCAlt(FONT_WEIGHT, CSSValues.BOLD400.getValue(), important);
+    }
 }

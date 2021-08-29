@@ -452,7 +452,21 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/** {@inheritDoc} */
 	@Override
 	public String getFont() {
-		return this.getPropertyValueLC(FONT);
+		final String fontStyle = this.getPropertyValueLC(FONT_STYLE);
+		final String fontVariant = this.getPropertyValueLC(FONT_VARIANT);
+		final String fontWeight = this.getPropertyValueLC(FONT_WEIGHT);
+		final String fontSize = this.getPropertyValueLC(FONT_SIZE);
+		final String fontLineHeight = this.getPropertyValueLC(LINE_HEIGHT);
+		final String fontFamily = this.getPropertyValueLC(FONT_FAMILY);
+
+		StringBuilder font = new StringBuilder();
+		if(Strings.isBlank(fontSize)) return "";
+		if (Strings.isNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) font.append(fontStyle + " ");
+		if (Strings.isNotBlank(fontVariant) && !fontVariant.equals(CSSValues.NORMAL.getValue())) font.append(fontVariant + " ");
+		if (Strings.isNotBlank(fontWeight) && !fontWeight.equals(CSSValues.BOLD400.getValue())) font.append(fontWeight + " ");
+		if (Strings.isNotBlank(fontLineHeight) && !fontLineHeight.equals(CSSValues.NORMAL.getValue())) font.append(fontSize + " / " + fontLineHeight + " "); else font.append(fontSize + " ");
+		if (Strings.isNotBlank(fontFamily)) font.append(fontFamily + " ");
+		return font.toString().trim();
 	}
 
 	/** {@inheritDoc} */

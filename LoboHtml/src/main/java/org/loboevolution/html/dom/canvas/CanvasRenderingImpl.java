@@ -62,9 +62,6 @@ import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>CanvasRenderingImpl class.</p>
- *
- *
- *
  */
 public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	
@@ -208,11 +205,9 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	@Override
 	public void setFont(String fontSpec) {
 		FontKey key = new FontKey();
-		key.setFontFamily(Font.SANS_SERIF);
 		key.setFontStyle(LAFType.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		key.setFontWeight(LAFType.BOLD.getValue());
-		key.setFontSize(new LAFSettings().getInstance().getFontSize());
 
 		final String[] tokens = HtmlValues.splitCssValue(fontSpec);
 		String token = null;

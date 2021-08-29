@@ -770,7 +770,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  alert(cs1.fontSize);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"9.6px"};
+        final String[] messages = {"10px"};
         checkHtmlAlert(html, messages);
     }
 
@@ -790,7 +790,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  alert(cs1.fontSize);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"4.11667px"};
+        final String[] messages = {"2px"};
         checkHtmlAlert(html, messages);
     }
 
@@ -810,7 +810,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  alert(cs1.fontSize);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"7.55px"};
+        final String[] messages = {"5px"};
         checkHtmlAlert(html, messages);
     }
 

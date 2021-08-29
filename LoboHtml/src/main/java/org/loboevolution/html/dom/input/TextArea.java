@@ -44,14 +44,13 @@ import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.TextAreaControl;
 import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.laf.LAFSettings;
 
 /**
  * <p>TextArea class.</p>
  */
 public class TextArea extends BasicInput {
-	
-	private static final float DEFAULT_FONT_SIZE = 14.0f;
-	
+
 	private final JTextArea  jtArea = new JTextArea();
 	
 	private HTMLTextAreaElementImpl modelNode;
@@ -68,7 +67,7 @@ public class TextArea extends BasicInput {
 		setjComponent(jtArea);
 		
 		final Font font = jtArea.getFont();
-		jtArea.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
+		jtArea.setFont(font.deriveFont(new LAFSettings().getInstance().getFontSize()));
 		jtArea.setDocument(new LimitedDocument());
 		jtArea.setText(modelNode.getValue());
 		jtArea.setSelectionColor(Color.BLUE);

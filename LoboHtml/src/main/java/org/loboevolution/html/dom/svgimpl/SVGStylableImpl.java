@@ -48,9 +48,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>SVGStylableImpl class.</p>
- *
- *
- *
  */
 public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	
@@ -367,11 +364,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 */
 	public Font getFont() {
 		FontKey key = new FontKey();
-		key.setFontFamily(Font.SANS_SERIF);
 		key.setFontStyle(CSSValues.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		key.setFontWeight(CSSValues.BOLD.getValue());
-		key.setFontSize(new LAFSettings().getInstance().getFontSize());
 		key.setLocales(null);
 		key.setSuperscript(null);
 		key.setLetterSpacing(0);

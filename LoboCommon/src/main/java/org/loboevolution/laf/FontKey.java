@@ -20,7 +20,6 @@
 
 package org.loboevolution.laf;
 
-import java.awt.Font;
 import java.util.Locale;
 import java.util.Set;
 
@@ -28,9 +27,6 @@ import org.loboevolution.common.Objects;
 
 /**
  * The Class FontKey.
- *
- *
- *
  */
 public class FontKey {
 
@@ -71,7 +67,7 @@ public class FontKey {
 	 * <p>Constructor for FontKey.</p>
 	 */
 	public FontKey() {
-		this.fontFamily = Font.SANS_SERIF;
+		this.fontFamily = "Times New Roman";
 		this.fontStyle = null;
 		this.fontVariant = null;
 		this.fontWeight = null;

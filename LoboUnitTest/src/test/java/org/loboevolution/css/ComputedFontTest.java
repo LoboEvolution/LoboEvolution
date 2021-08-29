@@ -44,7 +44,7 @@ public class ComputedFontTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='mydiv'></div>\n"
                 + "</body></html>";
-        final String[] messages = {"", "16px", "2em", "32px", "150%", "24px"};
+        final String[] messages = {null, "16px", "2em", "32px", "150%", "24px"};
         checkHtmlAlert(html, messages);
     }
 
@@ -54,7 +54,6 @@ public class ComputedFontTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.createElement('div');\n"
-                + "    debug(div);\n"
                 + "    document.body.appendChild(div);\n"
                 + "    debug(div);\n"
                 + "  }\n"
@@ -79,9 +78,8 @@ public class ComputedFontTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                "", "16px \"Times New Roman\"",
-                "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "\"Times New Roman\""};
+        final String[] messages = {"", "16px Times New Roman", null, "normal", null, "normal", null, "400", null,
+                                   "16px", null, "normal", null, "Times New Roman"};
         checkHtmlAlert(html, messages);
     }
 
@@ -95,22 +93,9 @@ public class ComputedFontTest extends LoboUnitTest {
     }
 
     @Test
-    public void wrongFontFamily() {
-        final String[] messages = {"", "16px \"Times New Roman\"", "", "\"Times New Roman\""};
-        font("xyz", "fontFamily", null, messages);
-    }
-
-    @Test
     public void minimalFontFamily() {
         final String[] messages = {"1px xyz", "1px xyz", "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"};
         font("1px xyz", "fontFamily", "abc", messages);
-    }
-
-
-    @Test
-    public void minimalFontFamilyReversed() {
-        final String[] messages = {"", "16px \"Times New Roman\"", "", "\"Times New Roman\"", "", "16px abc", "abc", "abc"};
-        font("xyz 1px", "fontFamily", "abc", messages);
     }
 
     @Test

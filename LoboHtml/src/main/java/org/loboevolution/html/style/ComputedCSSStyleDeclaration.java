@@ -33,6 +33,10 @@ import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;
 
+/**
+ * <p>ComputedCSSStyleDeclaration class.</p>
+ */
+
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
 
     private final HTMLElementImpl element;
@@ -187,7 +191,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
     }
 
     public String getFont() {
-        return style.getFont();
+        StringBuilder font = new StringBuilder();
+        final String fontStyle = style.getFontStyle();
+        final String lineHeight = getLineHeight();
+        if (Strings.isNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) font.append(CSSValues.ITALIC.getValue() + " ");
+        font.append(getFontSize());
+        if(Strings.isNotBlank(lineHeight) && !lineHeight.equals(CSSValues.NORMAL.getValue())) {
+            font.append(" / " + lineHeight);
+        }
+        font.append( " " + getFontFamily());
+        return font.toString().trim();
     }
 
     public String getFontSize() {
@@ -200,18 +213,30 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
         }
 
         if(fontSize == -1){
-            fontSize = FontValues.getPixelSize(style.getFontSize(), renderState, window, 0);
+            fontSize = Float.valueOf(FontValues.getFontSize(style.getFontSize(), doc.getDefaultView(), null)).intValue();
         }
 
         return fontSize + "px";
     }
 
-    public String getLineHeight() {
-        return style.getLineHeight();
+    public String getFontStyle() {
+        final String fontStyle = style.getFontStyle();
+        if (Strings.isNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) return CSSValues.ITALIC.getValue();
+        return CSSValues.NORMAL.getValue();
     }
 
+    public String getFontVariant() {
+        return FontValues.getFontVariant(style.getFontWeight());
+    }
+
+    public String getFontWeight() { return FontValues.getFontWeight(style.getFontWeight()); }
+
     public String getFontFamily() {
-        return style.getFontFamily();
+        return FontValues.getFontFamily(style.getFontFamily(), null);
+    }
+
+    public String getLineHeight() {
+        return Strings.isBlank(style.getLineHeight()) ? CSSValues.NORMAL.getValue() : style.getLineHeight();
     }
 
     public String getHeight() {

@@ -45,6 +45,7 @@ import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderer.HtmlController;
+import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.store.InputStore;
 
 /**
@@ -54,8 +55,6 @@ public class InputText extends BasicInput {
 	
 	private static final Logger logger = Logger.getLogger(InputText.class.getName());
 
-	private static final float DEFAULT_FONT_SIZE = 14.0f;
-		
 	protected final JTextField iText = new JTextField();
 	
 	private boolean textWrittenIn;
@@ -74,7 +73,7 @@ public class InputText extends BasicInput {
 		setjComponent(iText);
 		final String type = modelNode.getType();
 		final Font font = iText.getFont();
-		iText.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
+		iText.setFont(font.deriveFont(new LAFSettings().getInstance().getFontSize()));
 		iText.setDocument(new LimitedDocument());
 		iText.setText(modelNode.getValue());
 		iText.setSelectionColor(Color.BLUE);
