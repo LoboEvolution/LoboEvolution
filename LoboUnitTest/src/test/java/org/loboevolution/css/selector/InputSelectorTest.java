@@ -46,7 +46,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -67,7 +67,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -88,7 +88,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255, 0, 0)");
     }
 
     /**
@@ -109,7 +109,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 
     /**
@@ -130,7 +130,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -151,7 +151,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 0, 0)");
     }
 
     /**
@@ -172,7 +172,7 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(0, 0, 0)", "rgb(255, 0, 0)");
     }
 
     /**
@@ -193,6 +193,6 @@ public class InputSelectorTest extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 0, 0)");
     }
 }

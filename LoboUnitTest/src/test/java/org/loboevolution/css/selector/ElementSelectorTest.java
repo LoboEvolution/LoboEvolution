@@ -45,7 +45,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <div id='myId2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 	
 	/**
@@ -64,7 +64,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <div id='myId2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0,255,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 128, 0)");
     }
 	
 	/**
@@ -83,7 +83,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0,255,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 128, 0)");
     }
 	
 	/**
@@ -102,7 +102,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0,255,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 128, 0)");
         
     }
 	
@@ -122,7 +122,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <p id='myId2' class='intro2'></p>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
         
     }
 	
@@ -144,7 +144,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 	
 	/**
@@ -165,7 +165,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 	
 	/**
@@ -185,7 +185,7 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <p id='myId2'/>\n"
             + "  </body>\n"
             + "</html>";
-		checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0, 0, 0)");
+		checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 0, 0)");
     }
 	
 	/**
@@ -205,6 +205,6 @@ public class ElementSelectorTest extends LoboUnitTest {
             + "    <p id='myId2'/>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 }

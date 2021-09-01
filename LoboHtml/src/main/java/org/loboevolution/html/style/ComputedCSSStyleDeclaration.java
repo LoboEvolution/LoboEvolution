@@ -69,7 +69,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
             return "rgb(0, 0, 0)";
         }
         final Color c = ColorFactory.getInstance().getColor(style.getBackgroundColor());
-        return "rgb(" + c.getRed() + "," + c.getGreen() + "," + c.getBlue() + ")";
+        if (c != null) {
+            final float alpha = (float) (c.getAlpha()) / 255.0f;
+            if (alpha > 0 && alpha < 1) {
+                return "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
+            } else {
+                return "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
+            }
+        } else {
+            return "rgb(0, 0, 0)";
+        }
     }
 
     public String getBackgroundImage() {
@@ -140,9 +149,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
         if (Strings.isBlank(style.getColor())) {
             return "rgb(0, 0, 0)";
         }
-
         final Color c = ColorFactory.getInstance().getColor(style.getColor());
-        return "rgb(" + c.getRed() + "," + c.getGreen() + "," + c.getBlue() + ")";
+        if (c != null) {
+            final float alpha = (float) (c.getAlpha()) / 255.0f;
+            if (alpha > 0 && alpha < 1) {
+                return "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
+            } else {
+                return "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
+            }
+        } else {
+            return "rgb(0, 0, 0)";
+        }
     }
 
     public String getCssFloat() {

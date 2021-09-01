@@ -44,7 +44,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+         checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 	
 	/**
@@ -63,7 +63,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-		checkSelectorsTest(html, "rgb(255,0,0)", "rgb(0,255,0)");
+		checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(0, 128, 0)");
     }
 	
 	/**
@@ -83,7 +83,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+         checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 	
 	/**
@@ -102,7 +102,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro1-intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+         checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 	
 	/**
@@ -121,7 +121,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+         checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 	
 	/**
@@ -140,7 +140,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-         checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+         checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 	
 	/**
@@ -159,6 +159,6 @@ public class AttributeSelectorTest extends LoboUnitTest{
             + "    <div id='myId2' class='intro2'></div>\n"
             + "  </body>\n"
             + "</html>";
-        checkSelectorsTest(html, "rgb(255,0,0)", "rgb(255,0,0)");
+        checkSelectorsTest(html, "rgb(255, 0, 0)", "rgb(255, 0, 0)");
     }
 }

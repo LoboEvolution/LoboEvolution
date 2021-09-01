@@ -733,7 +733,7 @@ public class WindowUnitTest extends LoboUnitTest {
                         + "  <div id='d' class='x'>foo bar</div>\n"
                         + "</body>\n"
                         + "</html>";
-        final String[] messages = {"rgb(255,0,0)"};
+        final String[] messages = {"rgb(255, 0, 0)"};
         checkHtmlAlert(html, messages);
     }
 

@@ -20,40 +20,39 @@
 
 package org.loboevolution.laf;
 
-import java.awt.Color;
+import org.loboevolution.common.Strings;
+import org.loboevolution.store.SQLiteCommon;
+
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.loboevolution.common.Strings;
-import org.loboevolution.store.SQLiteCommon;
-
 /**
  * A factory for creating Color objects.
- *
- * Author J. H. S.
- *
  */
 public final class ColorFactory {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ColorFactory.class.getName());
 
-	/** The instance. */
-	private static ColorFactory instance;
-
 	/** Constant TRANSPARENT */
 	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+
+	/** Constant COLORS */
+	private final String COLORS = "SELECT DISTINCT name, value FROM COLOR";
+
+	/** The instance. */
+	private static ColorFactory instance;
 	
 	/** The color map. */
-	private Map<String, Color> colorMap = new HashMap<>(510);
-
-	private final String COLORS = "SELECT DISTINCT name, value FROM COLOR";
+	private final Map<String, Color> colorMap;
 
 	/** The Constant HSL_START. */
 	private final String HSL_START = "hsl(";
@@ -115,11 +114,11 @@ public final class ColorFactory {
 		synchronized (this) {
 			Color color = this.colorMap.get(normalSpec);
 			if (color == null) {
-				color = getRGBA(color, normalSpec);
-				color = getRGB(color, normalSpec);
+				color = getRGB(color, normalSpec, RGBA_START);
+				color = getRGB(color, normalSpec, RGB_START);
 				color = getHex(color, normalSpec);
-				color = getHSLA(color, normalSpec);
-				color = getHSL(color, normalSpec);
+				color = getHSL(color, normalSpec, HSLA_START);
+				color = getHSL(color, normalSpec, HSL_START);
 			}
 			return color;
 		}
@@ -133,7 +132,7 @@ public final class ColorFactory {
 	 * @return the color
 	 */
 	private Color getHex(Color c, String normalSpec) {
-		Color color = null;
+		Color color;
 		if (normalSpec.startsWith("#")) {
 			color = HexToColor(normalSpec);
 			this.colorMap.put(normalSpec, color);
@@ -143,49 +142,18 @@ public final class ColorFactory {
 		return color;
 	}
 
-	private Color getHSL(Color c, String normalSpec) {
-		Color color = null;
-		if (c == null && normalSpec.startsWith(this.HSL_START)) {
-			final int endIdx = normalSpec.lastIndexOf(')');
-			String commaValues = "";
-
-			if (endIdx == -1) {
-				commaValues = normalSpec.substring(this.HSL_START.length());
-			} else {
-				commaValues = normalSpec.substring(this.HSL_START.length(), endIdx);
+	private Color getHSL(Color c, String normalSpec, String colorStart) {
+		Color color;
+		if (c == null && normalSpec.startsWith(colorStart)) {
+			final String commaValues = getCommaValues(normalSpec, colorStart);
+			final String[] splitComma = commaValues.contains(",")  ? commaValues.split(",") : commaValues.split(" ");
+			final float h = parseValue(splitComma[0].trim(), 360);
+			final float s = parsePercent(splitComma[1].trim());
+			final float l = parsePercent(splitComma[2].trim());
+			float alpha = 1;
+			if(splitComma.length > 3) {
+				alpha = parseAlpha(splitComma[splitComma.length -1].trim());
 			}
-
-			final String[] strs = Strings.splitUsingTokenizer(commaValues, ",");
-			final float h = parseValue(strs[0].trim(), 360);
-			final float s = parsePercent(strs[1].trim());
-			final float l = parsePercent(strs[2].trim());
-
-			color = toRGB(h, s, l, 1);
-			this.colorMap.put(normalSpec, color);
-		} else {
-			color = c;
-		}
-		return color;
-	}
-
-	private Color getHSLA(Color c, String normalSpec) {
-		Color color = null;
-		if (c == null && normalSpec.startsWith(this.HSLA_START)) {
-			final int endIdx = normalSpec.lastIndexOf(')');
-			String commaValues = "";
-
-			if (endIdx == -1) {
-				commaValues = normalSpec.substring(this.HSLA_START.length());
-			} else {
-				commaValues = normalSpec.substring(this.HSLA_START.length(), endIdx);
-			}
-
-			final String[] strs = Strings.splitUsingTokenizer(commaValues, ",");
-
-			final float h = parseValue(strs[0].trim(), 360);
-			final float s = parsePercent(strs[1].trim());
-			final float l = parsePercent(strs[2].trim());
-			final float alpha = parseAlpha(strs[3].trim());
 			color = toRGB(h, s, l, alpha);
 			this.colorMap.put(normalSpec, color);
 		} else {
@@ -201,55 +169,20 @@ public final class ColorFactory {
 	 * @param normalSpec the color spec
 	 * @return the color
 	 */
-	private Color getRGB(Color c, String normalSpec) {
-		Color color = null;
-		if (c == null && normalSpec.startsWith(this.RGB_START)) {
-			final int endIdx = normalSpec.indexOf(')');
-			String commaValues = "";
-
-			if (endIdx == -1) {
-				commaValues = normalSpec.substring(this.RGB_START.length());
+	private Color getRGB(Color c, String normalSpec, String colorStart) {
+		Color color;
+		if (c == null && normalSpec.startsWith(colorStart)) {
+			final String commaValues = getCommaValues(normalSpec,colorStart);
+			final String[] splitComma = Strings.splitUsingTokenizer(commaValues, ",");
+			final int red = (int) parseValue(splitComma[0].trim(), 255);
+			final int green =  (int) parseValue(splitComma[1].trim(), 255);
+			final int blue =  (int) parseValue(splitComma[2].trim(), 255);
+			if (splitComma.length > 3) {
+				float alpha = parseAlpha(splitComma[splitComma.length - 1].trim());
+				color = new Color(normalize(red), normalize(green), normalize(blue), alpha);
 			} else {
-				commaValues = normalSpec.substring(this.RGB_START.length(), endIdx);
+				color = new Color(normalize(red), normalize(green), normalize(blue));
 			}
-
-			final String[] strs = Strings.splitUsingTokenizer(commaValues, ",");
-			final int red = (int) parseValue(strs[0].trim(), 255);
-			final int green =  (int) parseValue(strs[1].trim(), 255);
-			final int blue =  (int) parseValue(strs[2].trim(), 255);
-			color = new Color(normalize(red), normalize(green), normalize(blue));
-			this.colorMap.put(normalSpec, color);
-		} else {
-			color = c;
-		}
-		return color;
-	}
-
-	/**
-	 * Get RGBA color.
-	 *
-	 * @param c          the color
-	 * @param normalSpec the color spec
-	 * @return the color
-	 */
-	private Color getRGBA(Color c, String normalSpec) {
-		Color color = null;
-		if (c == null && normalSpec.startsWith(this.RGBA_START)) {
-			final int endIdx = normalSpec.lastIndexOf(')');
-			String commaValues = "";
-
-			if (endIdx == -1) {
-				commaValues = normalSpec.substring(this.RGBA_START.length());
-			} else {
-				commaValues = normalSpec.substring(this.RGBA_START.length(), endIdx);
-			}
-
-			final String[] strs = Strings.splitUsingTokenizer(commaValues, ",");
-			final int red = (int) parseValue(strs[0].trim(), 255);
-			final int green =  (int) parseValue(strs[1].trim(), 255);
-			final int blue =  (int) parseValue(strs[2].trim(), 255);
-			final int alpha = Float.valueOf(255 * Float.parseFloat(strs[3].trim())).intValue();
-			color = new Color(normalize(red), normalize(green), normalize(blue), alpha);
 			this.colorMap.put(normalSpec, color);
 		} else {
 			color = c;
@@ -289,21 +222,8 @@ public final class ColorFactory {
 	 */
 	public boolean isColor(String colorSpec) {
 		final String normalSpec = colorSpec.toLowerCase();
-
-		if (colorSpec.startsWith("#")) {
-			return true;
-		} else if (normalSpec.startsWith(this.RGBA_START)) {
-			return true;
-		} else if (normalSpec.startsWith(this.RGB_START)) {
-			return true;
-		} else if (normalSpec.startsWith(this.HSLA_START)) {
-			return true;
-		} else if (normalSpec.startsWith(this.HSL_START)) {
-			return true;
-		}
-		synchronized (this) {
-			return this.colorMap.containsKey(normalSpec);
-		}
+		final String[] list = {"#", RGBA_START, RGB_START, HSLA_START, HSL_START};
+		return Arrays.asList(list).contains(normalSpec) || this.colorMap.containsKey(normalSpec);
 	}
 	
 	/**
@@ -314,14 +234,8 @@ public final class ColorFactory {
 	 */
 	public boolean isRgbOrHsl(String colorSpec) {
 		final String normalSpec = colorSpec.toLowerCase();
-
-		if (normalSpec.startsWith(this.RGBA_START)) {
-			return true;
-		} else if (normalSpec.startsWith(this.RGB_START)) {
-			return true;
-		} else if (normalSpec.startsWith(this.HSLA_START)) {
-			return true;
-		} else return normalSpec.startsWith(this.HSL_START);
+		final String[] list = {RGBA_START, RGB_START, HSLA_START, HSL_START};
+		return Arrays.asList(list).contains(normalSpec);
 	}
 	
 	/**
@@ -355,6 +269,9 @@ public final class ColorFactory {
 	}
 
 	private float parseAlpha(String alpha) {
+		if (alpha.endsWith("%")) {
+			return parsePercent(alpha) / 100;
+		}
 		return Float.parseFloat(alpha);
 	}
 
@@ -364,7 +281,7 @@ public final class ColorFactory {
 
 	private float parseValue(String val, int max) {
 		if (val.endsWith("%")) {
-			return (int) (parsePercent(val) * max);
+			return (parsePercent(val) * max) / 100;
 		}
 		return Float.parseFloat(val);
 	}
@@ -375,7 +292,7 @@ public final class ColorFactory {
 		s /= 100f;
 		l /= 100f;
 
-		float q = 0;
+		float q;
 
 		if (l < 0.5) {
 			q = l * (1 + s);
@@ -392,15 +309,14 @@ public final class ColorFactory {
 		r = Math.min(r, 1.0f);
 		g = Math.min(g, 1.0f);
 		b = Math.min(b, 1.0f);
-
 		return new Color(r, g, b, alpha);
 	}
 
 	private Color HexToColor(String hex) {
-		int red = -1;
-		int green = -1;
-		int blue = -1;
-		int alpha = -1;
+		int red;
+		int green;
+		int blue;
+		int alpha;
 		hex = hex.replace("#", "");
 		switch (hex.length()) {
 		case 6:
@@ -418,13 +334,7 @@ public final class ColorFactory {
 			return null;
 		}
 	}
-	
-	/**
-	 * Normalize color component within allow range 0..255
-	 *
-	 * @param colorComponent any value
-	 * @return 0 <= value <= 255
-	 */
+
 	private static int normalize(int colorComponent) {
 		if (colorComponent > 255) {
 			colorComponent = 255;
@@ -432,5 +342,17 @@ public final class ColorFactory {
 			colorComponent = 0;
 		}
 		return colorComponent;
+	}
+
+	private String getCommaValues (String normalSpec, String str){
+		final int endIdx = normalSpec.lastIndexOf(')');
+		String commaValues;
+
+		if (endIdx == -1) {
+			commaValues = normalSpec.substring(str.length());
+		} else {
+			commaValues = normalSpec.substring(str.length(), endIdx);
+		}
+		return commaValues.replace("/", " ");
 	}
 }
