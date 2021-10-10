@@ -254,9 +254,9 @@ class TableMatrixSizes {
 					}
 				}
 			}
-			final SizeInfo colSizeInfo = new SizeInfo();
-			colSizeInfo.setHtmlLength(bestWidthLength);
-			columnSizes[i] = colSizeInfo;
+			columnSizes[i] = SizeInfo.builder()
+							.htmlLength(bestWidthLength)
+							.build();
 		}
 		return columnSizes;
 	}

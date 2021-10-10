@@ -19,14 +19,20 @@
  */
 package org.loboevolution.info;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * The Class CaptionSizeInfo.
- *
- *
- *
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CaptionSizeInfo implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -41,60 +47,5 @@ public class CaptionSizeInfo implements Serializable {
 	/** The width. */
 	private int width;
 
-	/**
-	 * Gets the height.
-	 *
-	 * @return the height
-	 */
-	public int getHeight() {
-		return height;
-	}
 
-	/**
-	 * Sets the height.
-	 *
-	 * @param height
-	 *            the new height
-	 */
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	/**
-	 * Gets the height offset.
-	 *
-	 * @return the height offset
-	 */
-	public int getHeightOffset() {
-		return heightOffset;
-	}
-
-	/**
-	 * Sets the height offset.
-	 *
-	 * @param heightOffset
-	 *            the new height offset
-	 */
-	public void setHeightOffset(int heightOffset) {
-		this.heightOffset = heightOffset;
-	}
-
-	/**
-	 * Gets the width.
-	 *
-	 * @return the width
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Sets the width.
-	 *
-	 * @param width
-	 *            the new width
-	 */
-	public void setWidth(final int width) {
-		this.width = width;
-	}
 }

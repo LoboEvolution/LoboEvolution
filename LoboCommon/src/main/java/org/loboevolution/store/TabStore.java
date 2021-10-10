@@ -20,6 +20,8 @@
 
 package org.loboevolution.store;
 
+import org.loboevolution.info.TabInfo;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,13 +31,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.loboevolution.info.TabInfo;
-
 /**
  * <p>TabStore class.</p>
- *
- *
- *
  */
 public class TabStore {
 	
@@ -140,15 +137,14 @@ public class TabStore {
 	public static List<TabInfo> getTabs() {
 		List<TabInfo> urls = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(TABS)) {
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs != null && rs.next()) {
-					TabInfo ti = new TabInfo();
-					ti.setIndexTab(rs.getString(1));
-					ti.setUrl(rs.getString(2));
-					ti.setTitle(rs.getString(3));
-					urls.add(ti);
-				}
+			 PreparedStatement pstmt = conn.prepareStatement(TABS);
+			 ResultSet rs = pstmt.executeQuery()) {
+			while (rs != null && rs.next()) {
+				urls.add(TabInfo.builder()
+						.indexTab(rs.getString(1))
+						.url(rs.getString(2))
+						.title(rs.getString(3))
+						.build());
 			}
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -164,11 +160,10 @@ public class TabStore {
 	public static List<String> getUrls() {
 		List<String> urls = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(TAB_URL)) {
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs != null && rs.next()) {
-					urls.add(rs.getString(1));
-				}
+			 PreparedStatement pstmt = conn.prepareStatement(TAB_URL);
+			 ResultSet rs = pstmt.executeQuery()) {
+			while (rs != null && rs.next()) {
+				urls.add(rs.getString(1));
 			}
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

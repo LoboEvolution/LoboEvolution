@@ -698,11 +698,10 @@ public class RBlockViewport extends BaseRCollection {
 			return null;
 		}
 		final ExportableFloat[] floats = ef.toArray(ExportableFloat.EMPTY_ARRAY);
-		final FloatingInfo fInfo = new FloatingInfo();
-		fInfo.setShiftX(0);
-		fInfo.setShiftY(0);
-		fInfo.setFloats(floats);
-		return fInfo;
+		return FloatingInfo.builder().
+				shiftX(0).
+				shiftY(0).
+				floats(floats).build();
 	}
 
 	/**

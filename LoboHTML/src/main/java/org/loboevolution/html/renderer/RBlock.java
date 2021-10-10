@@ -405,11 +405,10 @@ public class RBlock extends BaseElementRenderable {
 			return null;
 		}
 		final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-		final FloatingInfo fInfo = new FloatingInfo();
-		fInfo.setShiftX(info.getShiftX() + insets.left);
-		fInfo.setShiftY(info.getShiftY() + insets.top);
-		fInfo.setFloats(info.getFloats());
-		return fInfo;
+		return FloatingInfo.builder().
+				shiftX(info.getShiftX() + insets.left).
+				shiftY(info.getShiftY() + insets.top).
+				floats(info.getFloats()).build();
 	}
 
 	/**

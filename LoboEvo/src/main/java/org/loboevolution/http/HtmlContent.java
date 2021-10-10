@@ -20,22 +20,19 @@
 
 package org.loboevolution.http;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.info.MetaInfo;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.info.MetaInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>HtmlContent class.</p>
- *
- *
- *
  */
 public class HtmlContent {
 
@@ -66,7 +63,6 @@ public class HtmlContent {
 
 		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
-				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
 				String src = element.getAttribute("src");
 				if (Strings.isNotBlank(src)) {
@@ -76,9 +72,7 @@ public class HtmlContent {
 					if (src.startsWith("//")) {
 						src = "http:" + src;
 					}
-
-					info.setName(src);
-					infoList.add(info);
+					infoList.add(MetaInfo.builder().name(src).build());
 				}
 			}
 		});
@@ -101,7 +95,6 @@ public class HtmlContent {
 		
 		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
-				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
 				String src = element.getAttribute("src");
 				if (Strings.isNotBlank(src)) {
@@ -112,8 +105,7 @@ public class HtmlContent {
 						src = "http:" + src;
 					}
 
-					info.setName(src);
-					infoList.add(info);
+					infoList.add(MetaInfo.builder().name(src).build());
 				}
 			}
 		});
@@ -121,7 +113,6 @@ public class HtmlContent {
 		nodeList = (HTMLCollectionImpl) doc.getElementsByTagName("link");
 		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
-				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
 				final String rel = element.getAttribute("rel");
 				String href = element.getAttribute("href");
@@ -132,9 +123,7 @@ public class HtmlContent {
 					if (href.startsWith("//")) {
 						href = "http:" + href;
 					}
-
-					info.setName(href);
-					infoList.add(info);
+					infoList.add(MetaInfo.builder().name(href).build());
 				}
 			}
 		});
@@ -157,16 +146,16 @@ public class HtmlContent {
 
 		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
-				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
-				info.setName(element.getAttribute("name"));
-				info.setItemprop(element.getAttribute("itemprop"));
-				info.setProperty(element.getAttribute("property"));
-				info.setHttpEqui(element.getAttribute("http-equi"));
-				info.setContent(element.getAttribute("content"));
-				info.setDescription(element.getAttribute("description"));
-				info.setCharset(element.getAttribute("charset"));
-				infoList.add(info);
+				infoList.add(MetaInfo.builder()
+						.name(element.getAttribute("name"))
+						.itemprop(element.getAttribute("itemprop"))
+						.property(element.getAttribute("property"))
+						.httpEqui(element.getAttribute("http-equi"))
+						.content(element.getAttribute("content"))
+						.description(element.getAttribute("description"))
+						.charset(element.getAttribute("charset"))
+						.build());
 			}
 		});
 		return infoList;
@@ -188,7 +177,6 @@ public class HtmlContent {
 
 		nodeList.forEach(node -> {
 			if (node instanceof HTMLElement) {
-				final MetaInfo info = new MetaInfo();
 				final HTMLElement element = (HTMLElement) node;
 				final String rel = element.getAttribute("rel");
 				String href = element.getAttribute("href");
@@ -199,9 +187,7 @@ public class HtmlContent {
 					if (href.startsWith("//")) {
 						href = "http:" + href;
 					}
-
-					info.setName(href);
-					infoList.add(info);
+					infoList.add(MetaInfo.builder().name(href).build());
 				}
 			}
 		});

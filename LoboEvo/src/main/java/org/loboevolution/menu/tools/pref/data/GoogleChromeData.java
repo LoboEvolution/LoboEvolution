@@ -20,6 +20,15 @@
 
 package org.loboevolution.menu.tools.pref.data;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.loboevolution.http.CookieManager;
+import org.loboevolution.info.BookmarkInfo;
+import org.loboevolution.info.CookieInfo;
+import org.loboevolution.store.BookmarksStore;
+import org.loboevolution.store.NavigationStore;
+import org.loboevolution.store.SQLiteCommon;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,15 +40,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.loboevolution.http.CookieManager;
-import org.loboevolution.info.BookmarkInfo;
-import org.loboevolution.info.CookieInfo;
-import org.loboevolution.store.BookmarksStore;
-import org.loboevolution.store.NavigationStore;
-import org.loboevolution.store.SQLiteCommon;
 
 /**
  * <p>GoogleChromeData class.</p>
@@ -91,15 +91,15 @@ public class GoogleChromeData extends BrowserData {
 				PreparedStatement pstmt = conn.prepareStatement(CHROME_COOKIES);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
-				final CookieInfo cookie = new CookieInfo();
-				cookie.setDomain(rs.getString(2));
-				cookie.setName(rs.getString(3));
-				cookie.setValue(rs.getString(4));
-				cookie.setPath(rs.getString(5));
-				cookie.setExpires(rs.getString(6));
-				cookie.setSecure(rs.getInt(7) > 0);
-				cookie.setHttpOnly(rs.getInt(8) > 0);
-				cookies.add(cookie);
+				cookies.add(CookieInfo.builder()
+						.domain(rs.getString(2))
+						.name(rs.getString(3))
+						.value(rs.getString(4))
+						.path(rs.getString(5))
+						.expires(rs.getString(6))
+						.secure(rs.getInt(7) > 0)
+						.httpOnly(rs.getInt(8) > 0)
+						.build());
 			}
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

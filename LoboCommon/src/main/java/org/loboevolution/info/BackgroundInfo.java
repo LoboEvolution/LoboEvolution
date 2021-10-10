@@ -19,15 +19,21 @@
  */
 package org.loboevolution.info;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.awt.Color;
 import java.net.URL;
 
 /**
  * <p>BackgroundInfo class.</p>
- *
- *
- *
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BackgroundInfo {
 	
 	/** Constant BR_NO_REPEAT=1 */
@@ -42,143 +48,24 @@ public class BackgroundInfo {
 	/** Constant BR_REPEAT_Y=3 */
 	public static final int BR_REPEAT_Y = 3;
 	
+	/** The backgroundColor*/
 	private Color backgroundColor;
-	
+
+	/** The backgroundColor*/
 	private URL backgroundImage;
-	
+
+	/** The backgroundColor*/
 	private int backgroundRepeat = BR_REPEAT;
 
+	/** The backgroundColor*/
 	private int backgroundXPosition;
-	
+
+	/** The backgroundColor*/
 	private boolean backgroundXPositionAbsolute;
-	
+
+	/** The backgroundColor*/
 	private int backgroundYPosition;
-	
+
+	/** The backgroundColor*/
 	private boolean backgroundYPositionAbsolute;
-
-	/**
-	 * <p>Getter for the field backgroundColor.</p>
-	 *
-	 * @return the backgroundColor
-	 */
-	public Color getBackgroundColor() {
-		return backgroundColor;
-	}
-
-	/**
-	 * <p>Getter for the field backgroundImage.</p>
-	 *
-	 * @return the backgroundImage
-	 */
-	public URL getBackgroundImage() {
-		return backgroundImage;
-	}
-
-	/**
-	 * <p>Getter for the field backgroundRepeat.</p>
-	 *
-	 * @return the backgroundRepeat
-	 */
-	public int getBackgroundRepeat() {
-		return backgroundRepeat;
-	}
-
-	/**
-	 * <p>Getter for the field backgroundXPosition.</p>
-	 *
-	 * @return the backgroundXPosition
-	 */
-	public int getBackgroundXPosition() {
-		return backgroundXPosition;
-	}
-
-	/**
-	 * <p>isBackgroundXPositionAbsolute.</p>
-	 *
-	 * @return the backgroundXPositionAbsolute
-	 */
-	public boolean isBackgroundXPositionAbsolute() {
-		return backgroundXPositionAbsolute;
-	}
-
-	/**
-	 * <p>Getter for the field backgroundYPosition.</p>
-	 *
-	 * @return the backgroundYPosition
-	 */
-	public int getBackgroundYPosition() {
-		return backgroundYPosition;
-	}
-
-	/**
-	 * <p>isBackgroundYPositionAbsolute.</p>
-	 *
-	 * @return the backgroundYPositionAbsolute
-	 */
-	public boolean isBackgroundYPositionAbsolute() {
-		return backgroundYPositionAbsolute;
-	}
-
-	/**
-	 * <p>Setter for the field backgroundColor.</p>
-	 *
-	 * @param backgroundColor the backgroundColor to set
-	 */
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
-	}
-
-	/**
-	 * <p>Setter for the field backgroundImage.</p>
-	 *
-	 * @param backgroundImage the backgroundImage to set
-	 */
-	public void setBackgroundImage(URL backgroundImage) {
-		this.backgroundImage = backgroundImage;
-	}
-
-	/**
-	 * <p>Setter for the field backgroundRepeat.</p>
-	 *
-	 * @param backgroundRepeat the backgroundRepeat to set
-	 */
-	public void setBackgroundRepeat(int backgroundRepeat) {
-		this.backgroundRepeat = backgroundRepeat;
-	}
-
-	/**
-	 * <p>Setter for the field backgroundXPosition.</p>
-	 *
-	 * @param backgroundXPosition the backgroundXPosition to set
-	 */
-	public void setBackgroundXPosition(int backgroundXPosition) {
-		this.backgroundXPosition = backgroundXPosition;
-	}
-
-	/**
-	 * <p>Setter for the field backgroundXPositionAbsolute.</p>
-	 *
-	 * @param backgroundXPositionAbsolute the backgroundXPositionAbsolute to set
-	 */
-	public void setBackgroundXPositionAbsolute(boolean backgroundXPositionAbsolute) {
-		this.backgroundXPositionAbsolute = backgroundXPositionAbsolute;
-	}
-
-	/**
-	 * <p>Setter for the field backgroundYPosition.</p>
-	 *
-	 * @param backgroundYPosition the backgroundYPosition to set
-	 */
-	public void setBackgroundYPosition(int backgroundYPosition) {
-		this.backgroundYPosition = backgroundYPosition;
-	}
-
-	/**
-	 * <p>Setter for the field backgroundYPositionAbsolute.</p>
-	 *
-	 * @param backgroundYPositionAbsolute the backgroundYPositionAbsolute to set
-	 */
-	public void setBackgroundYPositionAbsolute(boolean backgroundYPositionAbsolute) {
-		this.backgroundYPositionAbsolute = backgroundYPositionAbsolute;
-	}
 }

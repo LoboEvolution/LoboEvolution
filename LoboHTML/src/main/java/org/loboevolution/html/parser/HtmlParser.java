@@ -136,7 +136,7 @@ public class HtmlParser {
 	 */
 	public static boolean isDecodeEntities(String elementName) {
 		final ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
-		return einfo == null || einfo.decodeEntities;
+		return einfo == null || einfo.isDecodeEntities();
 	}
 
 	/**
@@ -301,10 +301,10 @@ public class HtmlParser {
 						safeAppendChild(parent, element);
 						if (!this.justReadEmptyElement) {
 							ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(localName.toUpperCase()));
-							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
+							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.getEndElementType();
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
-								boolean childrenOk = einfo == null || einfo.childElementOk;
-								Set<HTMLTag> newStopSet = einfo == null ? null : einfo.stopTags;
+								boolean childrenOk = einfo == null || einfo.isChildElementOk();
+								Set<HTMLTag> newStopSet = einfo == null ? null : einfo.getStopTags();
 								if (newStopSet == null) {
 									if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
 										newStopSet = Collections.singleton(HTMLTag.get(normalTag));
@@ -325,7 +325,7 @@ public class HtmlParser {
 									for (;;) {
 										try {
 											int token;
-											if ((einfo != null) && einfo.noScriptElement) {
+											if ((einfo != null) && einfo.isNoScriptElement()) {
 												final UserAgentContext ucontext = this.ucontext;
 												if ((ucontext == null) || ucontext.isScriptingEnabled()) {
 													token = this.parseForEndTag(parent, reader, tag, false, shouldDecodeEntities(einfo));
@@ -346,7 +346,7 @@ public class HtmlParser {
 													final ElementInfo closeTagInfo = HTMLEntities.ELEMENT_INFOS
 															.get(HTMLTag.get(normalLastTag.toUpperCase()));
 													if ((closeTagInfo == null)
-															|| (closeTagInfo.endElementType != ElementInfo.END_ELEMENT_FORBIDDEN)) {
+															|| (closeTagInfo.getEndElementType() != ElementInfo.END_ELEMENT_FORBIDDEN)) {
 														// TODO: Rather inefficient algorithm, but it's
 														// probably executed infrequently?
 														final Iterator<String> i = ancestors.iterator();
@@ -376,9 +376,9 @@ public class HtmlParser {
 											}
 											einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(normalTag.toUpperCase()));
 											endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED
-													: einfo.endElementType;
-											childrenOk = einfo == null || einfo.childElementOk;
-											newStopSet = einfo == null ? null : einfo.stopTags;
+													: einfo.getEndElementType();
+											childrenOk = einfo == null || einfo.isChildElementOk();
+											newStopSet = einfo == null ? null : einfo.getStopTags();
 											if (newStopSet == null) {
 												if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
 													newStopSet = Collections.singleton(HTMLTag.get(normalTag));
@@ -1113,7 +1113,7 @@ public class HtmlParser {
 	}
 
 	private boolean shouldDecodeEntities(final ElementInfo einfo) {
-		return (einfo == null || einfo.decodeEntities);
+		return (einfo == null || einfo.isDecodeEntities());
 	}
 
 	private static StringBuilder entityDecode(final StringBuilder rawText) throws org.xml.sax.SAXException {

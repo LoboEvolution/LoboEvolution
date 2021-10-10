@@ -19,70 +19,26 @@
  */
 package org.loboevolution.info;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>FloatingInfo class.</p>
- *
- *
- *
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FloatingInfo {
-	
+
+	/** The floats. */
 	private Object[] floats;
-	
-	private int shiftX, shiftY;
 
-	/**
-	 * <p>Getter for the field floats.</p>
-	 *
-	 * @return the floats
-	 */
-	public Object[] getFloats() {
-		return floats;
-	}
+	/** The shiftX. */
+	private int shiftX;
 
-	/**
-	 * <p>Getter for the field shiftX.</p>
-	 *
-	 * @return the shiftX
-	 */
-	public int getShiftX() {
-		return shiftX;
-	}
-
-	/**
-	 * <p>Getter for the field shiftY.</p>
-	 *
-	 * @return the shiftY
-	 */
-	public int getShiftY() {
-		return shiftY;
-	}
-
-	/**
-	 * <p>Setter for the field floats.</p>
-	 *
-	 * @param floats the floats to set
-	 */
-	public void setFloats(Object[] floats) {
-		this.floats = floats;
-	}
-
-	/**
-	 * <p>Setter for the field shiftX.</p>
-	 *
-	 * @param shiftX the shiftX to set
-	 */
-	public void setShiftX(int shiftX) {
-		this.shiftX = shiftX;
-	}
-
-	/**
-	 * <p>Setter for the field shiftY.</p>
-	 *
-	 * @param shiftY the shiftY to set
-	 */
-	public void setShiftY(int shiftY) {
-		this.shiftY = shiftY;
-	}
+	/** The shiftY. */
+	private int shiftY;
 }

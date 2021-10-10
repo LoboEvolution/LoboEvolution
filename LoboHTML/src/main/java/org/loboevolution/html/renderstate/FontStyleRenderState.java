@@ -120,13 +120,14 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		if (wi != null) {
 			return wi;
 		}
-		wi = new WordInfo();
 		final FontMetrics fm = getFontMetrics();
-		wi.setFontMetrics(fm);
-		wi.setAscentPlusLeading(fm.getAscent() + fm.getLeading());
-		wi.setDescent(fm.getDescent());
-		wi.setHeight(fm.getHeight());
-		wi.setWidth(fm.stringWidth(word));
+		wi = WordInfo.builder()
+				.fontMetrics(fm)
+				.ascentPlusLeading(fm.getAscent() + fm.getLeading())
+				.descent(fm.getDescent())
+				.height(fm.getHeight())
+				.width(fm.stringWidth(word))
+				.build();
 		map.put(word, wi);
 		return wi;
 	}

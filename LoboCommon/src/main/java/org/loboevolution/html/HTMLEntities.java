@@ -20,12 +20,12 @@
 
 package org.loboevolution.html;
 
+import org.loboevolution.info.ElementInfo;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import org.loboevolution.info.ElementInfo;
 
 /**
  * <p>HTMLEntities class.</p>
@@ -318,29 +318,82 @@ public class HTMLEntities {
 		entities.put(Entities.circ, (char) 710);
 		entities.put(Entities.tilde, (char) 732);
 
-		final ElementInfo optionalEndElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL);
-		final ElementInfo forbiddenEndElement = new ElementInfo(false, ElementInfo.END_ELEMENT_FORBIDDEN);
-		final ElementInfo only = new ElementInfo(true, ElementInfo.END_ELEMENT_REQUIRED, null, true);
-		final ElementInfo onlyText = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, false);
-		final ElementInfo onlyTextDE = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, true);
-		
+		final ElementInfo optionalEndElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.stopTags(null)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
+
+		final ElementInfo forbiddenEndElement = ElementInfo.builder()
+				.childElementOk(false)
+				.endElementType(ElementInfo.END_ELEMENT_FORBIDDEN)
+				.stopTags(null)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
+
+		final ElementInfo onlyText = ElementInfo.builder()
+				.childElementOk(false)
+				.endElementType(ElementInfo.END_ELEMENT_REQUIRED)
+				.stopTags(null)
+				.noScriptElement(false)
+				.decodeEntities(false)
+				.build();
+
+		final ElementInfo onlyTextDE = ElementInfo.builder()
+				.childElementOk(false)
+				.endElementType(ElementInfo.END_ELEMENT_REQUIRED)
+				.stopTags(null)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
+
+		final ElementInfo only = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_REQUIRED)
+				.stopTags(null)
+				.noScriptElement(true)
+				.decodeEntities(true)
+				.build();
+
+
 		final Set<HTMLTag> tableCellStopElements = new HashSet<>();
 		tableCellStopElements.add(HTMLTag.TH);
 		tableCellStopElements.add(HTMLTag.TD);
 		tableCellStopElements.add(HTMLTag.TR);
-		final ElementInfo tableCellElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, tableCellStopElements);
+		final ElementInfo tableCellElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.stopTags(tableCellStopElements)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
 
 		final Set<HTMLTag> headStopElements = new HashSet<>();
 		headStopElements.add(HTMLTag.BODY);
 		headStopElements.add(HTMLTag.DIV);
 		headStopElements.add(HTMLTag.SPAN);
 		headStopElements.add(HTMLTag.TABLE);
-		final ElementInfo headElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
+		final ElementInfo headElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.stopTags(headStopElements)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
 
 		final Set<HTMLTag> optionStopElements = new HashSet<>();
 		optionStopElements.add(HTMLTag.OPTION);
 		optionStopElements.add(HTMLTag.SELECT);
-		final ElementInfo optionElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
+		final ElementInfo optionElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.stopTags(optionStopElements)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
 
 		final Set<HTMLTag> paragraphStopElements = new HashSet<>();
 		paragraphStopElements.add(HTMLTag.P);
@@ -349,7 +402,13 @@ public class HTMLEntities {
 		paragraphStopElements.add(HTMLTag.PRE);
 		paragraphStopElements.add(HTMLTag.UL);
 		paragraphStopElements.add(HTMLTag.OL);
-		final ElementInfo paragraphElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, paragraphStopElements);
+		final ElementInfo paragraphElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.stopTags(paragraphStopElements)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
 
 		final Map<HTMLTag, ElementInfo> elementInfos = ELEMENT_INFOS;
 		elementInfos.put(HTMLTag.NOSCRIPT, only);
@@ -378,5 +437,4 @@ public class HTMLEntities {
 		elementInfos.put(HTMLTag.A, optionalEndElement);
 		elementInfos.put(HTMLTag.ANCHOR, optionalEndElement);
 	}
-
 }

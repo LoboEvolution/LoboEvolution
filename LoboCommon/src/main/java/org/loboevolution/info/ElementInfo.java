@@ -24,85 +24,37 @@ package org.loboevolution.info;
 
 import java.util.Set;
 
+import lombok.Builder;
+import lombok.Data;
 import org.loboevolution.html.HTMLTag;
 
 /**
  * <p>ElementInfo class.</p>
- *
- *
- *
  */
+@Data
+@Builder
 public class ElementInfo {
+
 	/** Constant END_ELEMENT_FORBIDDEN=0 */
 	public static final int END_ELEMENT_FORBIDDEN = 0;
+
 	/** Constant END_ELEMENT_OPTIONAL=1 */
 	public static final int END_ELEMENT_OPTIONAL = 1;
+
 	/** Constant END_ELEMENT_REQUIRED=2 */
 	public static final int END_ELEMENT_REQUIRED = 2;
-	public final boolean childElementOk;
-	public final boolean decodeEntities;
 
-	public final int endElementType;
-	public final boolean noScriptElement;
-	public final Set<HTMLTag> stopTags;
+	/** The childElementOk. */
+	private boolean childElementOk;
 
-	/**
-	 * <p>Constructor for ElementInfo.</p>
-	 *
-	 * @param ok a boolean.
-	 * @param type a int.
-	 */
-	public ElementInfo(boolean ok, int type) {
-		this.childElementOk = ok;
-		this.endElementType = type;
-		this.stopTags = null;
-		this.noScriptElement = false;
-		this.decodeEntities = true;
-	}
+	/** The decodeEntities. */
+	private boolean decodeEntities;
 
-	/**
-	 * <p>Constructor for ElementInfo.</p>
-	 *
-	 * @param ok a boolean.
-	 * @param type a int.
-	 * @param decodeEntities a boolean.
-	 */
-	public ElementInfo(boolean ok, int type, boolean decodeEntities) {
-		this.childElementOk = ok;
-		this.endElementType = type;
-		this.stopTags = null;
-		this.noScriptElement = false;
-		this.decodeEntities = decodeEntities;
-	}
+	/** The endElementType. */
+	private int endElementType;
+	/** The noScriptElement. */
+	private boolean noScriptElement;
 
-	/**
-	 * <p>Constructor for ElementInfo.</p>
-	 *
-	 * @param ok a boolean.
-	 * @param type a int.
-	 * @param stopTags a {@link java.util.Set} object.
-	 */
-	public ElementInfo(boolean ok, int type, Set<HTMLTag> stopTags) {
-		this.childElementOk = ok;
-		this.endElementType = type;
-		this.stopTags = stopTags;
-		this.noScriptElement = false;
-		this.decodeEntities = true;
-	}
-
-	/**
-	 * <p>Constructor for ElementInfo.</p>
-	 *
-	 * @param ok a boolean.
-	 * @param type a int.
-	 * @param stopTags a {@link java.util.Set} object.
-	 * @param noScriptElement a boolean.
-	 */
-	public ElementInfo(boolean ok, int type, Set<HTMLTag> stopTags, boolean noScriptElement) {
-		this.childElementOk = ok;
-		this.endElementType = type;
-		this.stopTags = stopTags;
-		this.noScriptElement = noScriptElement;
-		this.decodeEntities = true;
-	}
+	/** The stopTags. */
+	private Set<HTMLTag> stopTags;
 }

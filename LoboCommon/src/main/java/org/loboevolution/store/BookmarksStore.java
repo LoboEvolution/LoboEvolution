@@ -36,9 +36,6 @@ import org.loboevolution.info.BookmarkInfo;
 
 /**
  * The Class BookmarksStore.
- *
- *
- *
  */
 public class BookmarksStore implements Serializable {
 
@@ -46,8 +43,6 @@ public class BookmarksStore implements Serializable {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(BookmarksStore.class.getName());
-
-	private final String BOOKMARKS = "SELECT DISTINCT name, description, baseUrl, tags FROM BOOKMARKS WHERE baseUrl = ?";
 
 	private final String DELETE_BOOKMARKS = "DELETE FROM BOOKMARKS";
 	
@@ -111,32 +106,6 @@ public class BookmarksStore implements Serializable {
 			}
 			return values;
 		}
-	}
-
-	/**
-	 * Gets the existing info.
-	 *
-	 * @param item the item
-	 * @return the existing info
-	 */
-	public BookmarkInfo getExistingInfo(String item) {
-		BookmarkInfo info = null;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(this.BOOKMARKS)) {
-			pstmt.setString(1, item);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs != null && rs.next()) {
-					info = new BookmarkInfo();
-					info.setTitle(rs.getString(1));
-					info.setDescription(rs.getString(2));
-					info.setUrl(rs.getString(3));
-					info.setTags(Strings.splitUsingTokenizer(rs.getString(4), " "));
-				}
-			}
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-		return info;
 	}
 
 	/**

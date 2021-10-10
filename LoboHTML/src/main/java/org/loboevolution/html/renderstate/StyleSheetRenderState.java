@@ -22,25 +22,6 @@
  */
 package org.loboevolution.html.renderstate;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLElement;
@@ -50,19 +31,22 @@ import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.renderer.RFlex;
-import org.loboevolution.html.style.AbstractCSSProperties;
-import org.loboevolution.html.style.BorderInsets;
-import org.loboevolution.html.style.FontValues;
-import org.loboevolution.html.style.GradientStyle;
-import org.loboevolution.html.style.HtmlInsets;
-import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.html.style.MarginInsets;
+import org.loboevolution.html.style.*;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>StyleSheetRenderState class.</p>
@@ -80,7 +64,7 @@ public class StyleSheetRenderState implements RenderState {
 	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
 	
 	/** Constant INVALID_BACKGROUND_INFO */
-	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
+	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = BackgroundInfo.builder().build();
 	
 	/** Constant INVALID_BORDER_INFO */
 	protected static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
@@ -288,7 +272,7 @@ public class StyleSheetRenderState implements RenderState {
 				Strings.isNotBlank(backgroundImageText)  || 
 				Strings.isNotBlank(backgroundRepeatText) || 
 				Strings.isNotBlank(backgroundPositionText)) {
-				binfo = new BackgroundInfo();
+				binfo = BackgroundInfo.builder().build();
 			}
 
 			if (Strings.isNotBlank(backgroundColorText)) {
@@ -1064,13 +1048,15 @@ public class StyleSheetRenderState implements RenderState {
 		if (wi != null) {
 			return wi;
 		}
-		wi = new WordInfo();
+
 		final FontMetrics fm = getFontMetrics();
-		wi.setFontMetrics(fm);
-		wi.setAscentPlusLeading(fm.getAscent() + fm.getLeading());
-		wi.setDescent(fm.getDescent());
-		wi.setHeight(fm.getHeight());
-		wi.setWidth(fm.stringWidth(word));
+		wi = WordInfo.builder()
+				.fontMetrics(fm)
+				.ascentPlusLeading(fm.getAscent() + fm.getLeading())
+				.descent(fm.getDescent())
+				.height(fm.getHeight())
+				.width(fm.stringWidth(word))
+				.build();
 		map.put(word, wi);
 		return wi;
 	}

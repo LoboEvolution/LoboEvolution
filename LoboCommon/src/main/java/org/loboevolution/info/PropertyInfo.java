@@ -19,17 +19,27 @@
  */
 package org.loboevolution.info;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.lang.reflect.Method;
 
 /**
  * <p>PropertyInfo class.</p>
- *
- *
- *
  */
+@Data
 public class PropertyInfo {
-	private Method getter, setter;
+
+	/** The getter. */
+	private Method getter;
+
+	/** The setter. */
+	private Method setter;
+
+	/** The name. */
 	private final String name;
+
+	/** The propertyType. */
 	private final Class propertyType;
 
 	/**
@@ -42,59 +52,5 @@ public class PropertyInfo {
 		super();
 		this.name = name;
 		this.propertyType = propType;
-	}
-
-	/**
-	 * <p>Getter for the field getter.</p>
-	 *
-	 * @return a {@link java.lang.reflect.Method} object.
-	 */
-	public Method getGetter() {
-		return this.getter;
-	}
-
-	/**
-	 * <p>Getter for the field name.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * <p>Getter for the field propertyType.</p>
-	 *
-	 * @return a {@link java.lang.Class} object.
-	 */
-	public Class getPropertyType() {
-		return this.propertyType;
-	}
-
-	/**
-	 * <p>Getter for the field setter.</p>
-	 *
-	 * @return a {@link java.lang.reflect.Method} object.
-	 */
-	public Method getSetter() {
-		return this.setter;
-	}
-
-	/**
-	 * <p>Setter for the field getter.</p>
-	 *
-	 * @param getter a {@link java.lang.reflect.Method} object.
-	 */
-	public void setGetter(Method getter) {
-		this.getter = getter;
-	}
-
-	/**
-	 * <p>Setter for the field setter.</p>
-	 *
-	 * @param setter a {@link java.lang.reflect.Method} object.
-	 */
-	public void setSetter(Method setter) {
-		this.setter = setter;
 	}
 }

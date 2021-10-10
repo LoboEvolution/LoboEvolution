@@ -20,14 +20,20 @@
 
 package org.loboevolution.info;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * <p>BookmarkInfo class.</p>
- *
- *
- *
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookmarkInfo implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -44,24 +50,6 @@ public class BookmarkInfo implements Serializable {
 
 	/** The url. */
 	private String url;
-
-	/**
-	 * Gets the description.
-	 *
-	 * @return the description
-	 */
-	public String getDescription() {
-		return this.description;
-	}
-
-	/**
-	 * Gets the tags.
-	 *
-	 * @return the tags
-	 */
-	public String[] getTags() {
-		return this.tags;
-	}
 
 	/**
 	 * Gets the tags text.
@@ -84,59 +72,5 @@ public class BookmarkInfo implements Serializable {
 			buffer.append(tag);
 		}
 		return buffer.toString();
-	}
-
-	/**
-	 * Gets the title.
-	 *
-	 * @return the title
-	 */
-	public String getTitle() {
-		return this.title;
-	}
-
-	/**
-	 * Gets the url.
-	 *
-	 * @return the url
-	 */
-	public String getUrl() {
-		return this.url;
-	}
-
-	/**
-	 * Sets the description.
-	 *
-	 * @param description the new description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * Sets the tags.
-	 *
-	 * @param tags the new tags
-	 */
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
-
-	/**
-	 * Sets the title.
-	 *
-	 * @param title the new title
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	/**
-	 * Sets the url.
-	 *
-	 * @param url the new url
-	 */
-	public void setUrl(String url) {
-		this.url = url;
 	}
 }

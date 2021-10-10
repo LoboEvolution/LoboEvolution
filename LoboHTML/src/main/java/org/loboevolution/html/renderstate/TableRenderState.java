@@ -97,7 +97,6 @@ public class TableRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		binfo = super.getBorderInfo();
 		if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
 				&& binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE
 				&& binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE

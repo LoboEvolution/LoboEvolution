@@ -20,6 +20,13 @@
 
 package org.loboevolution.menu.tools.pref.data;
 
+import org.loboevolution.http.CookieManager;
+import org.loboevolution.info.BookmarkInfo;
+import org.loboevolution.info.CookieInfo;
+import org.loboevolution.store.BookmarksStore;
+import org.loboevolution.store.NavigationStore;
+import org.loboevolution.store.SQLiteCommon;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,13 +36,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.loboevolution.http.CookieManager;
-import org.loboevolution.info.BookmarkInfo;
-import org.loboevolution.info.CookieInfo;
-import org.loboevolution.store.BookmarksStore;
-import org.loboevolution.store.NavigationStore;
-import org.loboevolution.store.SQLiteCommon;
 
 /**
  * <p>MozilaFirefoxData class.</p>
@@ -78,15 +78,15 @@ public class MozilaFirefoxData extends BrowserData {
 				PreparedStatement pstmt = conn.prepareStatement(MOZ_COOKIES);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
-				final CookieInfo cookie = new CookieInfo();
-				cookie.setDomain(rs.getString(2));
-				cookie.setName(rs.getString(4));
-				cookie.setValue(rs.getString(5));
-				cookie.setPath(rs.getString(7));
-				cookie.setExpires(rs.getString(8));
-				cookie.setSecure(rs.getInt(11) > 0);
-				cookie.setHttpOnly(rs.getInt(12) > 0);
-				cookies.add(cookie);
+				cookies.add(CookieInfo.builder()
+						.domain(rs.getString(2))
+						.name(rs.getString(4))
+						.value(rs.getString(5))
+						.path(rs.getString(7))
+						.expires(rs.getString(8))
+						.secure(rs.getInt(11) > 0)
+						.httpOnly(rs.getInt(12) > 0)
+						.build());
 			}
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
