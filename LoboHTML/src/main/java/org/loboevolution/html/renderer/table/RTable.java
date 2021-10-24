@@ -43,15 +43,13 @@ import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.renderer.ZIndexComparator;
 
+import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 
 /**
  * <p>RTable class.</p>
- *
- *
- *
  */
 public class RTable extends BaseElementRenderable {
 
@@ -64,16 +62,11 @@ public class RTable extends BaseElementRenderable {
 	/**
 	 * <p>Constructor for RTable.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
-	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RTable(HTMLElementImpl modelNode, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer container) {
-		super(container, modelNode, pcontext);
-		this.tableMatrix = new TableMatrix(modelNode, pcontext, rcontext, frameContext, this, this);
+	public RTable(RBlockInfo info) {
+		super(info.getParentContainer(), info.getModelNode(), info.getPcontext());
+		this.tableMatrix = new TableMatrix(info, this);
 	}
 
 	private void addPositionedRenderable(final BoundableRenderable renderable, final boolean verticalAlignable,

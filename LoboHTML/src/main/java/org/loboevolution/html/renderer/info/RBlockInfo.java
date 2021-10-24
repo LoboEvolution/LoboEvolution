@@ -17,39 +17,34 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.renderstate;
 
-import org.loboevolution.html.dom.domimpl.HTMLTableCaptionElementImpl;
+package org.loboevolution.html.renderer.info;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderer.FrameContext;
-import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 
-/**
- * The Class RTableCaption.
- *
- *
- *
- */
-public class RTableCaption extends RBlock {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class RBlockInfo {
 
-	/**
-	 * Instantiates a new r table caption.
-	 *
-	 * @param element
-	 *            the element
-	 * @param pcontext
-	 *            the pcontext
-	 * @param rcontext
-	 *            the rcontext
-	 * @param frameContext
-	 *            the frame context
-	 * @param tableAsContainer
-	 *            the table as container
-	 */
-	public RTableCaption(HTMLTableCaptionElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer tableAsContainer) {
-		super(element, 0, pcontext, rcontext, frameContext, tableAsContainer);
-	}
+    private NodeImpl modelNode;
+
+    private UserAgentContext pcontext;
+
+    private HtmlRendererContext rcontext;
+
+    private FrameContext frameContext;
+
+    private RenderableContainer parentContainer;
+
+    private int listNesting;
 }

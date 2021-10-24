@@ -19,23 +19,23 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Color;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Insets;
-
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.renderer.info.RBlockInfo;
+import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.ListStyle;
-import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.http.UserAgentContext;
+
+import java.awt.*;
 
 class RListItem extends BaseRListElement {
+
 	private static final int BULLET_HEIGHT = 5;
+
 	private static final int BULLET_RMARGIN = 5;
+
 	private static final int BULLET_WIDTH = 5;
+
 	private static final Integer UNSET = Integer.MIN_VALUE;
 
 	private int count;
@@ -45,24 +45,16 @@ class RListItem extends BaseRListElement {
 	/**
 	 * <p>Constructor for RListItem.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param listNesting a int.
-	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
-	 * @param parentContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RListItem(NodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer parentContainer) {
-		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
+	public RListItem(RBlockInfo info) {
+		super(info);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void doLayout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
-			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
-		super.doLayout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX,
-				defaultOverflowY, sizeOnly);
+	public void doLayout(RLayoutInfo info) {
+		super.doLayout(info);
 		final RenderState renderState = this.modelNode.getRenderState();
 		final Integer value = getValue();
 		if (value == UNSET) {

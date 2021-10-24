@@ -22,51 +22,32 @@
  */
 package org.loboevolution.html.gui;
 
-import java.awt.Adjustable;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.ClipboardOwner;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.JComponent;
-import javax.swing.JScrollBar;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderer.*;
+import org.loboevolution.html.renderer.info.RBlockInfo;
+import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.html.node.Node;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.event.*;
+import java.util.List;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A Swing component that renders a HTML block, given by a DOM root or an
@@ -234,7 +215,14 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			clearComponents();
 			final RBlock block = this.rblock;
 			if (block != null) {
-				block.layout(size.width, size.height, true, true, null, false);
+				block.layout(RLayoutInfo.builder()
+						.availWidth(size.width)
+						.availHeight(size.height)
+						.expandWidth(true)
+						.expandHeight(true)
+						.blockFloatBoundsSource(null)
+						.sizeOnly(false)
+						.build());
 				// Only set origin
 				block.setOrigin(0, 0);
 				block.updateWidgetBounds(0, 0);
@@ -379,11 +367,26 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			if (block != null) {
 				// Layout should always be done in the GUI thread.
 				if (SwingUtilities.isEventDispatchThread()) {
-					block.layout(pw, 0, false, false, RenderState.OVERFLOW_VISIBLE, RenderState.OVERFLOW_VISIBLE, true);
+					block.layout(RLayoutInfo.builder()
+									.availWidth(pw)
+									.availHeight(0)
+									.expandWidth(false)
+									.expandHeight(false)
+									.defaultOverflowY(RenderState.OVERFLOW_VISIBLE)
+									.defaultOverflowX(RenderState.OVERFLOW_VISIBLE)
+									.sizeOnly(true)
+									.build());
 				} else {
 					try {
-						EventQueue.invokeAndWait(() -> block.layout(pw, 0, false, false, RenderState.OVERFLOW_VISIBLE,
-								RenderState.OVERFLOW_VISIBLE, true));
+						EventQueue.invokeAndWait(() -> block.layout(RLayoutInfo.builder()
+								.availWidth(pw)
+								.availHeight(0)
+								.expandWidth(false)
+								.expandHeight(false)
+								.defaultOverflowY(RenderState.OVERFLOW_VISIBLE)
+								.defaultOverflowX(RenderState.OVERFLOW_VISIBLE)
+								.sizeOnly(true)
+								.build()));
 					} catch (final Exception err) {
 						logger.log(Level.SEVERE, "Unable to do preferred size layout.", err);
 					}
@@ -957,7 +960,14 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	@Override
 	public void setRootNode(NodeImpl node) {
 		if (node != null) {
-			final RBlock block = new RBlock(node, 0, this.ucontext, this.rcontext, this.frameContext, this);
+			final RBlock block = new RBlock(RBlockInfo.builder()
+					.modelNode(node)
+					.listNesting(0)
+					.pcontext(ucontext)
+					.rcontext(rcontext)
+					.frameContext(frameContext)
+					.parentContainer(this)
+					.build());
 			block.setDefaultOverflowX(this.defaultOverflowX);
 			block.setDefaultOverflowY(this.defaultOverflowY);
 			node.setUINode(block);

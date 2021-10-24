@@ -22,24 +22,19 @@
  */
 package org.loboevolution.html.renderer.table;
 
-import java.awt.Dimension;
-
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RBlock;
-import org.loboevolution.html.renderer.RenderableContainer;
+import org.loboevolution.html.renderer.info.RBlockInfo;
+import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.SizeInfo;
+
+import java.awt.*;
 
 /**
  * <p>RTableCell class.</p>
- *
- *
- *
  */
 public class RTableCell extends RBlock {
 
@@ -54,16 +49,11 @@ public class RTableCell extends RBlock {
 	/**
 	 * <p>Constructor for RTableCell.</p>
 	 *
-	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
-	 * @param tableAsContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RTableCell(HTMLElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer tableAsContainer) {
-		super(element, 0, pcontext, rcontext, frameContext, tableAsContainer);
-		this.cellElement = element;
+	public RTableCell(RBlockInfo info) {
+		super(info);
+		this.cellElement = (HTMLElementImpl)info.getModelNode();
 	}
 
 	/**
@@ -78,13 +68,18 @@ public class RTableCell extends RBlock {
 	 */
 	public Dimension doCellLayout(int width, int height, boolean expandWidth, boolean expandHeight,
 			boolean sizeOnly) {
-		try {
-			this.layout(width, height, expandWidth, expandHeight, null, sizeOnly);
-			return new Dimension(this.width, this.height);
-		} finally {
-			this.layoutUpTreeCanBeInvalidated = true;
-			this.layoutDeepCanBeInvalidated = true;
-		}
+
+		this.layout(RLayoutInfo.builder()
+				.availWidth(width)
+				.availHeight(height)
+				.expandWidth(expandWidth)
+				.expandHeight(expandHeight)
+				.blockFloatBoundsSource(null)
+				.defaultOverflowX(defaultOverflowX)
+				.defaultOverflowY(defaultOverflowY)
+				.sizeOnly(sizeOnly)
+				.build());
+		return new Dimension(this.width, this.height);
 	}
 
 	/** {@inheritDoc} */

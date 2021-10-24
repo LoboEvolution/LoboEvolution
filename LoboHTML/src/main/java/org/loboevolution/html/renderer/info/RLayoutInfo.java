@@ -17,14 +17,34 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.renderer;
 
-public interface FloatingBoundsSource {
-	/**
-	 * <p>getChildBlockFloatingBounds.</p>
-	 *
-	 * @param apparentBlockWidth a int.
-	 * @return a {@link org.loboevolution.html.renderer.FloatingBounds} object.
-	 */
-	FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth);
+package org.loboevolution.html.renderer.info;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.loboevolution.html.renderer.FloatingBoundsSource;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class RLayoutInfo {
+
+    private int availWidth;
+
+    private int availHeight;
+
+    private int defaultOverflowX;
+
+    private int defaultOverflowY;
+
+    private boolean expandWidth;
+
+    private boolean expandHeight;
+
+    private boolean sizeOnly;
+
+    private FloatingBoundsSource blockFloatBoundsSource;
 }

@@ -22,11 +22,13 @@ package org.loboevolution.html.renderer;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.renderer.info.RBlockInfo;
+import org.loboevolution.html.renderer.info.RBlockLayoutInfo;
+import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
 import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.FloatingInfo;
 
 import javax.swing.*;
@@ -66,21 +68,15 @@ public class RBlock extends BaseElementRenderable {
 	/**
 	 * <p>Constructor for RBlock.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param listNesting a int.
-	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
-	 * @param parentContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RBlock(NodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer parentContainer) {
-		super(parentContainer, modelNode, pcontext);
-		this.listNesting = listNesting;
-		this.frameContext = frameContext;
-		this.rendererContext = rcontext;
+	public RBlock(RBlockInfo info) {
+		super(info.getParentContainer(), info.getModelNode(), info.getPcontext());
+		this.listNesting = info.getListNesting();
+		this.frameContext = info.getFrameContext();
+		this.rendererContext = info.getRcontext();
 		this.scroll = new RBlockScroll(this);
-		this.bodyLayout = new RBlockViewport(modelNode, this, getViewportListNesting(listNesting), pcontext, rcontext, frameContext, this);
+		this.bodyLayout = new RBlockViewport(info, this, this);
 		this.bodyLayout.setOriginalParent(this);
 		this.bodyLayout.setX(Short.MAX_VALUE);
 		this.bodyLayout.setY(Short.MAX_VALUE);
@@ -94,12 +90,21 @@ public class RBlock extends BaseElementRenderable {
 		this.overflowY = this.defaultOverflowY;
 	}
 
-	/** {@inheritDoc} */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public final void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
-		// This is an override of an abstract method.
-		this.doLayout(availWidth, availHeight, true, false, null, this.defaultOverflowX, this.defaultOverflowY,
-				sizeOnly);
+		this.doLayout(RLayoutInfo.builder()
+				.availWidth(availWidth)
+				.availHeight(availHeight)
+				.expandWidth(true)
+				.expandHeight(false)
+				.blockFloatBoundsSource(null)
+				.defaultOverflowX(defaultOverflowX)
+				.defaultOverflowY(defaultOverflowY)
+				.sizeOnly(sizeOnly)
+				.build());
 	}
 
 	/**
@@ -107,24 +112,16 @@ public class RBlock extends BaseElementRenderable {
 	 * out), if the parameters passed differ from the last layout, or if the current
 	 * font differs from the font for the last layout.
 	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
-	 * @param expandWidth a boolean.
-	 * @param expandHeight a boolean.
-	 * @param floatBoundsSource a {@link org.loboevolution.html.renderer.FloatingBoundsSource} object.
-	 * @param defaultOverflowX a int.
-	 * @param defaultOverflowY a int.
-	 * @param sizeOnly a boolean.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RLayoutInfo} object.
 	 */
-	public void doLayout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
-			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
+	public void doLayout(RLayoutInfo info) {
 
 		final RenderState renderState = this.modelNode.getRenderState();
-		LayoutValue value = forceLayout(renderState, availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX, defaultOverflowY, sizeOnly);
-		this.width = value.width;
-		this.height = value.height;
-		this.hasHScrollBar = value.hasHScrollBar;
-		this.hasVScrollBar = value.hasVScrollBar;
+        RBlockLayoutInfo value = forceLayout(renderState, info);
+		this.width = value.getWidth();
+		this.height = value.getHeight();
+		this.hasHScrollBar = value.isHasHScrollBar();
+		this.hasVScrollBar = value.isHasVScrollBar();
 
 		bodyLayout.positionDelayed();
 
@@ -134,81 +131,30 @@ public class RBlock extends BaseElementRenderable {
 	}
 
 	/**
-	 * <p>ensureVisible.</p>
+	 * <p>layout.</p>
 	 *
-	 * @param point a {@link java.awt.Point} object.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RLayoutInfo} object.
 	 */
-	public void ensureVisible(Point point) {
-		final RBlockViewport bodyLayout = this.bodyLayout;
-		if (bodyLayout != null) {
-			final boolean hscroll = this.hasHScrollBar;
-			final boolean vscroll = this.hasVScrollBar;
-			final int origX = bodyLayout.x;
-			final int origY = bodyLayout.y;
-			final Insets insets = getInsetsMarginBorder(hscroll, vscroll);
-
-			if (hscroll) {
-				if (point.x < insets.left) {
-					bodyLayout.x += insets.left - point.x;
-				} else if (point.x > this.width - insets.right) {
-					bodyLayout.x -= point.x - this.width + insets.right;
-				}
-			}
-			if (vscroll) {
-				if (point.y < insets.top) {
-					bodyLayout.y += insets.top - point.y;
-				} else if (point.y > this.height - insets.bottom) {
-					bodyLayout.y -= point.y - this.height + insets.bottom;
-				}
-			}
-			if (hscroll || vscroll) {
-				correctViewportOrigin(insets, this.width, this.height);
-				if (origX != bodyLayout.x || origY != bodyLayout.y) {
-					scroll.resetScrollBars(null);
-					this.repaint();
-				}
-			}
+	public void layout(RLayoutInfo info) {
+		try {
+			this.doLayout(info);
+		} finally {
+			this.layoutUpTreeCanBeInvalidated = true;
+			this.layoutDeepCanBeInvalidated = true;
 		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
-			RenderableSpot endPoint) {
-		final boolean result = super.extractSelectionText(buffer, inSelection, startPoint, endPoint);
-		final String br = System.getProperty("line.separator");
-		if (inSelection) {
-			buffer.insert(0, br);
-		}
-		if (result) {
-			buffer.append(br);
-		}
-		return result;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	/**
 	 * Lays out the block without checking for prior dimensions.
-	 *
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param availWidth a int.
-	 * @param availHeight a int.
-	 * @param expandWidth a boolean.
-	 * @param expandHeight a boolean.
-	 * @param blockFloatBoundsSource a {@link org.loboevolution.html.renderer.FloatingBoundsSource} object.
-	 * @param defaultOverflowX a int.
-	 * @param defaultOverflowY a int.
-	 * @param sizeOnly a boolean.
-	 * @return a {@link org.loboevolution.html.renderer.RBlock.LayoutValue} object.
 	 */
-	private LayoutValue forceLayout(RenderState renderState, int availWidth, int availHeight, boolean expandWidth,
-			boolean expandHeight, FloatingBoundsSource blockFloatBoundsSource, int defaultOverflowX,
-			int defaultOverflowY, boolean sizeOnly) {
+	private RBlockLayoutInfo forceLayout(RenderState renderState, RLayoutInfo info) {
+
+		final int availWidth = info.getAvailWidth();
+		final int availHeight = info.getAvailHeight();
+		final boolean expandWidth = info.isExpandWidth();
+		final boolean expandHeight = info.isExpandHeight();
+		final boolean sizeOnly = info.isSizeOnly();
+		final FloatingBoundsSource blockFloatBoundsSource = info.getBlockFloatBoundsSource();
 
 		RenderState rs = renderState;
 		if (rs == null) {
@@ -219,10 +165,15 @@ public class RBlock extends BaseElementRenderable {
 
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		final NodeImpl node = (NodeImpl) this.modelNode;
-		if (node == null || bodyLayout == null) {
-			final Insets insets = getInsetsMarginBorder(false, false);
-			return new LayoutValue(insets.left + insets.right, insets.bottom + insets.top, false, false);
-		}
+        if (node == null || bodyLayout == null) {
+            final Insets insets = getInsetsMarginBorder(false, false);
+            return RBlockLayoutInfo.builder().
+                    width(insets.left + insets.right).
+                    height(insets.bottom + insets.top).
+                    hasHScrollBar(false).
+                    hasVScrollBar(false).
+                    build();
+        }
 
 		Insets paddingInsets = (this.paddingInsets == null) ? RBlockViewport.ZERO_INSETS : this.paddingInsets;
 
@@ -391,7 +342,71 @@ public class RBlock extends BaseElementRenderable {
 			bodyLayout.x = insets.left;
 			bodyLayout.y = insets.top;
 		}
-		return new LayoutValue(resultingWidth, resultingHeight, hscroll, vscroll);
+		return RBlockLayoutInfo.builder().
+                width(resultingWidth).
+                height(resultingHeight).
+                hasHScrollBar(hscroll).
+                hasVScrollBar(vscroll).
+                build();
+	}
+
+	/**
+	 * <p>ensureVisible.</p>
+	 *
+	 * @param point a {@link java.awt.Point} object.
+	 */
+	public void ensureVisible(Point point) {
+		final RBlockViewport bodyLayout = this.bodyLayout;
+		if (bodyLayout != null) {
+			final boolean hscroll = this.hasHScrollBar;
+			final boolean vscroll = this.hasVScrollBar;
+			final int origX = bodyLayout.x;
+			final int origY = bodyLayout.y;
+			final Insets insets = getInsetsMarginBorder(hscroll, vscroll);
+
+			if (hscroll) {
+				if (point.x < insets.left) {
+					bodyLayout.x += insets.left - point.x;
+				} else if (point.x > this.width - insets.right) {
+					bodyLayout.x -= point.x - this.width + insets.right;
+				}
+			}
+			if (vscroll) {
+				if (point.y < insets.top) {
+					bodyLayout.y += insets.top - point.y;
+				} else if (point.y > this.height - insets.bottom) {
+					bodyLayout.y -= point.y - this.height + insets.bottom;
+				}
+			}
+			if (hscroll || vscroll) {
+				correctViewportOrigin(insets, this.width, this.height);
+				if (origX != bodyLayout.x || origY != bodyLayout.y) {
+					scroll.resetScrollBars(null);
+					this.repaint();
+				}
+			}
+		}
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
+										RenderableSpot endPoint) {
+		final boolean result = super.extractSelectionText(buffer, inSelection, startPoint, endPoint);
+		final String br = System.getProperty("line.separator");
+		if (inSelection) {
+			buffer.insert(0, br);
+		}
+		if (result) {
+			buffer.append(br);
+		}
+		return result;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void finalize() throws Throwable {
+		super.finalize();
 	}
 
 	/**
@@ -405,10 +420,11 @@ public class RBlock extends BaseElementRenderable {
 			return null;
 		}
 		final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-		return FloatingInfo.builder().
-				shiftX(info.getShiftX() + insets.left).
-				shiftY(info.getShiftY() + insets.top).
-				floats(info.getFloats()).build();
+		final FloatingInfo fInfo = new FloatingInfo();
+		fInfo.setShiftX(info.getShiftX() + insets.left);
+		fInfo.setShiftY(info.getShiftY() + insets.top);
+		fInfo.setFloats(info.getFloats());
+		return fInfo;
 	}
 
 	/**
@@ -574,62 +590,6 @@ public class RBlock extends BaseElementRenderable {
 	public final boolean isOverflowVisibleY() {
 		final int overflow = this.overflowY;
 		return overflow == RenderState.OVERFLOW_NONE || overflow == RenderState.OVERFLOW_VISIBLE;
-	}
-
-	/**
-	 * <p>layout.</p>
-	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
-	 * @param expandWidth a boolean.
-	 * @param expandHeight a boolean.
-	 * @param floatBoundsSource a {@link org.loboevolution.html.renderer.FloatingBoundsSource} object.
-	 * @param sizeOnly a boolean.
-	 */
-	public final void layout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
-			FloatingBoundsSource floatBoundsSource, boolean sizeOnly) {
-		this.layout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, this.defaultOverflowX,
-				this.defaultOverflowY, sizeOnly);
-	}
-
-	/**
-	 * <p>layout.</p>
-	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
-	 * @param expandWidth a boolean.
-	 * @param expandHeight a boolean.
-	 * @param floatBoundsSource a {@link org.loboevolution.html.renderer.FloatingBoundsSource} object.
-	 * @param defaultOverflowX a int.
-	 * @param defaultOverflowY a int.
-	 * @param sizeOnly a boolean.
-	 */
-	public final void layout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
-			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
-		try {
-			this.doLayout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX,
-					defaultOverflowY, sizeOnly);
-		} finally {
-			this.layoutUpTreeCanBeInvalidated = true;
-			this.layoutDeepCanBeInvalidated = true;
-		}
-	}
-
-	/**
-	 * <p>layout.</p>
-	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
-	 * @param expandWidth a boolean.
-	 * @param expandHeight a boolean.
-	 * @param defaultOverflowX a int.
-	 * @param defaultOverflowY a int.
-	 * @param sizeOnly a boolean.
-	 */
-	public final void layout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
-			int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
-		this.layout(availWidth, availHeight, expandWidth, expandHeight, null, defaultOverflowX, defaultOverflowY,
-				sizeOnly);
 	}
 
 	/** {@inheritDoc} */
@@ -939,20 +899,6 @@ public class RBlock extends BaseElementRenderable {
 			bodyLayout.y = insets.top;
 		} else if (viewPortY < blockHeight - insets.bottom - bodyLayout.height) {
 			bodyLayout.y = Math.min(insets.top, blockHeight - insets.bottom - bodyLayout.height);
-		}
-	}
-
-	private static class LayoutValue {
-		public final boolean hasHScrollBar;
-		public final boolean hasVScrollBar;
-		public final int height;
-		public final int width;
-
-		public LayoutValue(int width, int height, boolean hasHScrollBar, boolean hasVScrollBar) {
-			this.width = width;
-			this.height = height;
-			this.hasHScrollBar = hasHScrollBar;
-			this.hasVScrollBar = hasVScrollBar;
 		}
 	}
 }

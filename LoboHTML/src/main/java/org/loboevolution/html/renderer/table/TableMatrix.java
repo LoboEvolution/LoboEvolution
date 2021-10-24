@@ -19,24 +19,13 @@
  */
 package org.loboevolution.html.renderer.table;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.util.*;
-
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.CaptionFilter;
 import org.loboevolution.html.dom.filter.ColumnsFilter;
-import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.renderer.FrameContext;
-import org.loboevolution.html.renderer.RElement;
-import org.loboevolution.html.renderer.RenderableContainer;
-import org.loboevolution.html.renderer.RenderableSpot;
-import org.loboevolution.html.renderstate.RTableCaption;
+import org.loboevolution.html.renderer.*;
+import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlLength;
@@ -45,6 +34,10 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.CaptionSizeInfo;
 import org.loboevolution.info.SizeInfo;
+
+import java.awt.*;
+import java.util.List;
+import java.util.*;
 
 class TableMatrix {
 
@@ -63,7 +56,7 @@ class TableMatrix {
 	protected SizeInfo[] columnSizes;
 	protected SizeInfo[] rowSizes;
 	protected CaptionSizeInfo captionSize;
-	protected RTableCaption caption;
+	protected RBlock caption;
 	protected HtmlLength tableWidthLength;
 	protected HTMLElementImpl tableElement;
 
@@ -77,21 +70,15 @@ class TableMatrix {
 	/**
 	 * <p>Constructor for TableMatrix.</p>
 	 *
-	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
-	 * @param tableAsContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param relement a {@link org.loboevolution.html.renderer.RElement} object.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public TableMatrix(HTMLElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer tableAsContainer, RElement relement) {
-		this.tableElement = element;
-		this.parserContext = pcontext;
-		this.rendererContext = rcontext;
-		this.frameContext = frameContext;
+	public TableMatrix(RBlockInfo info, RElement relement) {
+		this.tableElement = (HTMLElementImpl)info.getModelNode();
+		this.parserContext = info.getPcontext();
+		this.rendererContext = info.getRcontext();
+		this.frameContext = info.getFrameContext();
 		this.relement = relement;
-		this.container = tableAsContainer;
+		this.container = info.getParentContainer();
 	}
 	
 	
@@ -123,7 +110,14 @@ class TableMatrix {
 		if (captionList.getLength() > 0) {
 			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.item(0);
 			this.captionElement = capt;
-			this.caption = new RTableCaption(capt, parserContext, rendererContext, frameContext, container);
+			this.caption = new RBlock(RBlockInfo.builder()
+					.modelNode(capt)
+					.listNesting(0)
+					.pcontext(parserContext)
+					.rcontext(rendererContext)
+					.frameContext(frameContext)
+					.parentContainer(container)
+					.build());
 		} else {
 			this.caption = null;
 		}
@@ -182,10 +176,9 @@ class TableMatrix {
 			yoffset += this.captionSize.getHeight();
 			yoffset += hasBorder;
 		}
-		for (SizeInfo rowSize : rowSizes) {
+		for (SizeInfo rowSizeInfo : rowSizes) {
 			yoffset += cellSpacingY;
 			yoffset += hasBorder;
-			SizeInfo rowSizeInfo = rowSize;
 			rowSizeInfo.setOffset(yoffset);
 			yoffset += rowSizeInfo.getActualSize();
 			yoffset += hasBorder;
@@ -203,10 +196,9 @@ class TableMatrix {
 		SizeInfo[] colSizes = this.columnSizes;
 		int xoffset = insets.left;
 		int cellSpacingX = this.cellSpacingX;
-		for (SizeInfo colSize : colSizes) {
+		for (SizeInfo colSizeInfo : colSizes) {
 			xoffset += cellSpacingX;
 			xoffset += hasBorder;
-			SizeInfo colSizeInfo = colSize;
 			colSizeInfo.setOffset(xoffset);
 			xoffset += colSizeInfo.getActualSize();
 			xoffset += hasBorder;
@@ -232,8 +224,7 @@ class TableMatrix {
 	 */
 	public final void paint(Graphics g, Dimension size) {
 		final List<RTableCell> allCells = this.allCells;
-		for (RTableCell rTableCell : allCells) {
-			final RTableCell cell = rTableCell;
+		for (RTableCell cell : allCells) {
 			final Graphics newG = g.create(cell.x, cell.y, cell.width, cell.height);
 			try {
 				cell.paint(newG);
@@ -322,7 +313,13 @@ class TableMatrix {
 				if (rowElement != null && rowElement.getRenderState().getDisplay() != RenderState.DISPLAY_NONE) {
 					RTableCell ac = (RTableCell) columnNode.getUINode();
 					if (ac == null) {
-						ac = new RTableCell(columnNode, this.parserContext, this.rendererContext, this.frameContext, this.container);
+						ac = new RTableCell(RBlockInfo.builder()
+								.modelNode(columnNode)
+								.pcontext(this.parserContext)
+								.rcontext(this.rendererContext)
+								.frameContext(this.frameContext)
+								.parentContainer(container)
+								.build());
 						ac.setParent(this.relement);
 						columnNode.setUINode(ac);
 					}

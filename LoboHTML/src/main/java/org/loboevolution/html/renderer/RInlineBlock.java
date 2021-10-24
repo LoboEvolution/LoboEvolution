@@ -20,46 +20,33 @@
 
 package org.loboevolution.html.renderer;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
+import org.loboevolution.common.ArrayUtilities;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.renderer.info.RBlockInfo;
+import org.loboevolution.html.renderer.table.RTable;
+import org.loboevolution.html.renderstate.RenderState;
+
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
-import org.loboevolution.common.ArrayUtilities;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
-import org.loboevolution.html.renderer.table.RTable;
-import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.http.UserAgentContext;
-
 /**
  * <p>RInlineBlock class.</p>
- *
- *
- *
  */
 public class RInlineBlock extends BaseElementRenderable {
+
 	private final BaseElementRenderable child;
 
 	/**
 	 * <p>Constructor for RInlineBlock.</p>
 	 *
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param uacontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rendererContext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RInlineBlock(final RenderableContainer container, final HTMLElementImpl modelNode,
-			final UserAgentContext uacontext, final HtmlRendererContext rendererContext,
-			final FrameContext frameContext) {
-		super(container, modelNode, uacontext);
+	public RInlineBlock(final RenderableContainer container, RBlockInfo info) {
+		super(container, info.getModelNode(), info.getPcontext());
 		final int display = modelNode.getRenderState().getDisplay();
-		final BaseElementRenderable child = (display == RenderState.DISPLAY_INLINE_TABLE)
-				? new RTable(modelNode, userAgentContext, rendererContext, frameContext, this)
-				: new RBlock(modelNode, 0, userAgentContext, rendererContext, frameContext, this);
+		final BaseElementRenderable child = (display == RenderState.DISPLAY_INLINE_TABLE) ? new RTable(info) : new RBlock(info);
 		child.setOriginalParent(this);
 		child.setParent(this);
 		this.child = child;

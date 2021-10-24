@@ -34,6 +34,8 @@ import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
+import org.loboevolution.html.renderer.info.RBlockInfo;
+import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -120,34 +122,27 @@ public class RBlockViewport extends BaseRCollection {
 	
 	protected final FrameContext frameContext;
 
+	private RBlockInfo info;
+
 	/** Constant ZERO_INSETS */
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
 	
 	/**
 	 * Constructs an HtmlBlockLayout.
 	 *
-	 * @param container    This is usually going to be an RBlock.
-	 * @param listNesting  The nesting level for lists. This is zero except inside a
-	 *                     list.
-	 * @param pcontext     The HTMLParserContext instance.
-	 * @param frameContext This is usually going to be HtmlBlock, an object where
-	 *                     text selections are contained.
-	 * @param parent       This is usually going to be the parent of
-	 *                     container.
-	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RBlockViewport(ModelNode modelNode, RenderableContainer container, int listNesting,
-			UserAgentContext pcontext, HtmlRendererContext rcontext, FrameContext frameContext, RCollection parent) {
-		super(container, modelNode);
+	public RBlockViewport(RBlockInfo info, RenderableContainer container, RCollection parent) {
+		super(container, info.getModelNode());
 		this.parent = parent;
-		this.userAgentContext = pcontext;
-		this.rendererContext = rcontext;
-		this.frameContext = frameContext;
+		this.userAgentContext = info.getPcontext();
+		this.rendererContext = info.getRcontext();
+		this.frameContext = info.getFrameContext();
 		this.container = container;
-		this.listNesting = listNesting;
+		this.listNesting = info.getListNesting();
 		// Layout here can always be "invalidated"
 		this.layoutUpTreeCanBeInvalidated = true;
+		this.info = info;
 	}
 	
 	private static int getPosition(HTMLElementImpl element) {
@@ -299,7 +294,16 @@ public class RBlockViewport extends BaseRCollection {
 			if (layoutIfPositioned) {
 				if (renderable instanceof RBlock) {
 					final RBlock block = (RBlock) renderable;
-			          block.layout(this.availContentWidth, this.availContentHeight, false, false, null, this.sizeOnly);
+					block.layout(RLayoutInfo.builder()
+							.availWidth(this.availContentWidth)
+							.availHeight(this.availContentHeight)
+							.expandWidth(false)
+							.expandHeight(false)
+							.blockFloatBoundsSource(null)
+							.defaultOverflowX(block.defaultOverflowX)
+							.defaultOverflowY(block.defaultOverflowY)
+							.sizeOnly(this.sizeOnly)
+							.build());
 				} else {
 					renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 				}
@@ -698,10 +702,11 @@ public class RBlockViewport extends BaseRCollection {
 			return null;
 		}
 		final ExportableFloat[] floats = ef.toArray(ExportableFloat.EMPTY_ARRAY);
-		return FloatingInfo.builder().
-				shiftX(0).
-				shiftY(0).
-				floats(floats).build();
+		final FloatingInfo fInfo = new FloatingInfo();
+		fInfo.setShiftX(0);
+		fInfo.setShiftY(0);
+		fInfo.setFloats(floats);
+		return fInfo;
 	}
 
 	/**
@@ -1198,8 +1203,16 @@ public class RBlockViewport extends BaseRCollection {
 			final int availHeight = this.availContentHeight;
 			if (renderable instanceof RBlock) {
 				final RBlock block = (RBlock) renderable;
-				// Float boxes don't inherit float bounds?
-				block.layout(availWidth, availHeight, false, false, null, this.sizeOnly);
+				block.layout(RLayoutInfo.builder()
+						.availWidth(availWidth)
+						.availHeight(availHeight)
+						.expandWidth(false)
+						.expandHeight(false)
+						.blockFloatBoundsSource(null)
+						.defaultOverflowX(block.defaultOverflowX)
+						.defaultOverflowY(block.defaultOverflowY)
+						.sizeOnly(sizeOnly)
+						.build());
 			} else if (renderable instanceof RElement) {
 				final RElement e = (RElement) renderable;
 				e.layout(availWidth, availHeight, this.sizeOnly);
@@ -1232,7 +1245,8 @@ public class RBlockViewport extends BaseRCollection {
 	protected final void layoutList(HTMLElementImpl markupElement) {
 		RList renderable = (RList) markupElement.getUINode();
 		if (renderable == null) {
-			renderable = new RList(markupElement, this.listNesting, this.userAgentContext, this.rendererContext, this.frameContext, this.container);
+			info.setModelNode(markupElement);
+			renderable = new RList(info);
 			markupElement.setUINode(renderable);
 		}
 		renderable.setOriginalParent(this);
@@ -1247,7 +1261,8 @@ public class RBlockViewport extends BaseRCollection {
 	protected final void layoutListItem(HTMLElementImpl markupElement) {
 		RListItem renderable = (RListItem) markupElement.getUINode();
 		if (renderable == null) {
-			renderable = new RListItem(markupElement, this.listNesting, this.userAgentContext, this.rendererContext, this.frameContext, this.container);
+			info.setModelNode(markupElement);
+			renderable = new RListItem(info);
 			markupElement.setUINode(renderable);
 		}
 		renderable.setOriginalParent(this);
@@ -1331,7 +1346,8 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		    
 		if (renderable == null) {
-			renderable = new RBlock(markupElement, this.listNesting, this.userAgentContext, this.rendererContext, this.frameContext, this.container);
+			info.setModelNode(markupElement);
+			renderable = new RBlock(info);
 			markupElement.setUINode(renderable);
 		}
 		renderable.setOriginalParent(this);
@@ -1346,7 +1362,8 @@ public class RBlockViewport extends BaseRCollection {
 	protected final void layoutRTable(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
-			renderable = new RTable(markupElement, this.userAgentContext, this.rendererContext, this.frameContext, this.container);
+			info.setModelNode(markupElement);
+			renderable = new RTable(info);
 			markupElement.setUINode(renderable);
 		}
 		renderable.setOriginalParent(this);
@@ -1364,7 +1381,8 @@ public class RBlockViewport extends BaseRCollection {
 		if (uINode instanceof RInlineBlock) {
 			inlineBlock = (RInlineBlock) uINode;
 		} else {
-			final RInlineBlock newInlineBlock = new RInlineBlock(container, markupElement, userAgentContext, rendererContext, frameContext);
+			info.setModelNode(markupElement);
+			final RInlineBlock newInlineBlock = new RInlineBlock(container, info);
 			markupElement.setUINode(newInlineBlock);
 			inlineBlock = newInlineBlock;
 		}
@@ -1837,9 +1855,22 @@ public class RBlockViewport extends BaseRCollection {
 			final int blockShiftRight = paddingInsets.right;
 			final int newX = paddingInsets.left;
 			final FloatingBounds floatBounds = this.floatBounds;
-			final FloatingBoundsSource floatBoundsSource = floatBounds == null ? null
-					: new ParentFloatingBoundsSource(blockShiftRight, expectedWidth, newX, newLineY, floatBounds);
-			renderable.layout(availContentWidth, availContentHeight, true, false, floatBoundsSource, this.sizeOnly);
+			FloatingBoundsSource floatBoundsSource = null;
+			if (floatBounds != null) {
+				floatBoundsSource = new ParentFloatingBoundsSource(blockShiftRight, expectedWidth, newX, newLineY, floatBounds);
+			}
+
+			renderable.layout(RLayoutInfo.builder()
+					.availWidth(availContentWidth)
+					.availHeight(availContentHeight)
+					.expandWidth(true)
+					.expandHeight(false)
+					.blockFloatBoundsSource(floatBoundsSource)
+					.defaultOverflowX(renderable.defaultOverflowX)
+					.defaultOverflowY(renderable.defaultOverflowY)
+					.sizeOnly(sizeOnly)
+					.build());
+
 			this.addAsSeqBlock(renderable, false, false, false, false);
 			// Calculate new floating bounds after block has been put in place.
 			final FloatingInfo floatingInfo = renderable.getExportableFloatingInfo();

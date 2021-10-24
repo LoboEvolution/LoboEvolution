@@ -20,12 +20,9 @@
 
 package org.loboevolution.html.renderer.table;
 
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -34,9 +31,13 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.CaptionSizeInfo;
 import org.loboevolution.info.SizeInfo;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 class TableMatrixSizes {
 
-	private TableMatrix matrix;
+	private final TableMatrix matrix;
 
 	private int numCols = 0;
 
@@ -254,9 +255,9 @@ class TableMatrixSizes {
 					}
 				}
 			}
-			columnSizes[i] = SizeInfo.builder()
-							.htmlLength(bestWidthLength)
-							.build();
+			final SizeInfo colSizeInfo = new SizeInfo();
+			colSizeInfo.setHtmlLength(bestWidthLength);
+			columnSizes[i] = colSizeInfo;
 		}
 		return columnSizes;
 	}
@@ -702,8 +703,16 @@ class TableMatrixSizes {
 		}
 
 		if (matrix.captionSize != null) {
-			matrix.caption.doLayout(matrix.captionSize.getWidth(), matrix.captionSize.getHeight(), true, true, null,
-					RenderState.OVERFLOW_NONE, RenderState.OVERFLOW_NONE, true);
+			matrix.caption.doLayout(RLayoutInfo.builder()
+							.availWidth(matrix.captionSize.getWidth())
+							.availHeight(matrix.captionSize.getHeight())
+							.expandWidth(true)
+							.expandHeight(true)
+							.blockFloatBoundsSource(null)
+							.defaultOverflowX(RenderState.OVERFLOW_NONE)
+							.defaultOverflowY(RenderState.OVERFLOW_NONE)
+							.sizeOnly(true)
+							.build());
 		}
 	}
 
@@ -731,7 +740,16 @@ class TableMatrixSizes {
 
 		final List<RTableCell> allCells = matrix.getAllCells();
 		if (matrix.caption != null) {
-			matrix.caption.doLayout(0, 0, true, true, null, 0, 0, true);
+			matrix.caption.doLayout(RLayoutInfo.builder()
+					.availWidth(0)
+					.availHeight(0)
+					.expandWidth(true)
+					.expandHeight(true)
+					.blockFloatBoundsSource(null)
+					.defaultOverflowX(0)
+					.defaultOverflowY(0)
+					.sizeOnly(true)
+					.build());
 			matrix.captionSize.setHeight(matrix.caption.height);
 			matrix.captionSize.setWidth(matrix.caption.width);
 		}
