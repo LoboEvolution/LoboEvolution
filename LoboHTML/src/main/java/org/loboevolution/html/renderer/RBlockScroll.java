@@ -236,7 +236,9 @@ public class RBlockScroll {
             } else if (newY < rBlock.height - insets.bottom - bodyLayout.height) {
                 bodyLayout.y = Math.min(insets.top, rBlock.height - insets.bottom - bodyLayout.height);
             } else {
-                bodyLayout.y = (int) newY;
+                if(bodyLayout.y < bodyLayout.height) {
+                    bodyLayout.y = bodyLayout.y + (int) newY;
+                }
             }
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
@@ -256,7 +258,9 @@ public class RBlockScroll {
             } else if (newX < rBlock.width - insets.right - bodyLayout.width) {
                 bodyLayout.x = Math.min(insets.left, rBlock.width - insets.right - bodyLayout.width);
             } else {
-                bodyLayout.x = (int)newX;
+                if(bodyLayout.x < bodyLayout.width) {
+                    bodyLayout.x = bodyLayout.x + (int) newX;
+                }
             }
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
