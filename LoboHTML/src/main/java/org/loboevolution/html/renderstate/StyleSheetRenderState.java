@@ -40,6 +40,7 @@ import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -1239,7 +1240,8 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public Optional<Cursor> getCursor() {
-
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		final ClassLoader classLoader = getClass().getClassLoader();
 		Optional<Cursor> prevCursorOpt = Optional.empty();
 		AbstractCSSProperties props = this.getCssProperties();
 
@@ -1260,6 +1262,7 @@ public class StyleSheetRenderState implements RenderState {
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 					break;
 				case E_RESIZE:
+				case EW_RESIZE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
 					break;
 				case MOVE:
@@ -1269,9 +1272,11 @@ public class StyleSheetRenderState implements RenderState {
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
 					break;
 				case NE_RESIZE:
+				case NESW_RESIZE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
 					break;
 				case NW_RESIZE:
+				case NWSE_RESIZE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
 					break;
 				case GRAB:
@@ -1291,7 +1296,14 @@ public class StyleSheetRenderState implements RenderState {
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
 					break;
 				case WAIT:
+				case PROGRESS:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					break;
+				case ZOOM_IN:
+					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(classLoader.getResource("org/lobo/image/zoomin.png")).getImage(), new Point(5,5), "zoomin"));
+					break;
+				case ZOOM_OUT:
+					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(classLoader.getResource("org/lobo/image/zoomout.png")).getImage(), new Point(5,5), "zoomout"));
 					break;
 				case INHERIT:
 					prevCursorOpt = this.getPreviousRenderState().getCursor();

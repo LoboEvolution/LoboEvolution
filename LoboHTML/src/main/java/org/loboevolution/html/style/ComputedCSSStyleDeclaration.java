@@ -166,6 +166,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
         return HtmlValues.getPixelSize(style.getCssFloat(), renderState, window, 0) + "px";
     }
 
+    public String getCursor() {
+        final RenderState rs = element.getRenderState();
+        return rs.getCursor().get().getType() == 0 ? "auto" : style.getCursor();
+    }
+
     public String getDisplay() {
         final String value = style.getDisplay();
         if (Strings.isBlank(value)) {

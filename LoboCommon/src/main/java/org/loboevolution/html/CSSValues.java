@@ -100,6 +100,8 @@ public enum CSSValues {
 	
 	E_RESIZE("e-resize"),
 
+	EW_RESIZE("ew-resize"),
+
 	FIXED("fixed"),
 	
 	FLEX("flex"),
@@ -166,6 +168,8 @@ public enum CSSValues {
 	
 	NE_RESIZE("ne-resize"),
 
+	NESW_RESIZE("nesw-resize"),
+
 	NONE("none"),
 
 	NORMAL("normal"),
@@ -173,6 +177,8 @@ public enum CSSValues {
 	NOWRAP("nowrap"),
 
 	NW_RESIZE("nw-resize"),
+
+	NWSE_RESIZE("nwse-resize"),
 
 	OBLIQUE("oblique"),
 
@@ -185,6 +191,8 @@ public enum CSSValues {
 	POINTER("pointer"),
 
 	PRE("pre"),
+
+	PROGRESS("progress"),
 
 	RELATIVE("relative"),
 
@@ -284,7 +292,11 @@ public enum CSSValues {
 
 	XX_LARGE("xx-large"),
 
-	XX_SMALL("xx-small");
+	XX_SMALL("xx-small"),
+
+	ZOOM_IN("zoom-in"),
+
+	ZOOM_OUT("zoom-out");
 	
 	private final String value;
 	private static final Map<String, CSSValues> ENUM_MAP;
