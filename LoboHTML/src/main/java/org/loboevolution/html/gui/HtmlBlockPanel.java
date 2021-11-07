@@ -251,7 +251,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	public Collection<?> getDelayedPairs() {
+	public Collection<DelayedPair> getDelayedPairs() {
 		return null;
 	}
 
@@ -295,7 +295,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 		Rectangle bounds;
 
-		RCollection relativeTo = relativeToScrollable ? (RCollection) block.getRBlockViewport() : (RCollection) block;
+		RCollection relativeTo = relativeToScrollable ? block.getRBlockViewport() : block;
 		if (Objects.equals(node, currentNode)) {
 			BoundableRenderable br = (BoundableRenderable) uiNode;
 			Point guiPoint = br.getOriginRelativeTo(relativeTo);

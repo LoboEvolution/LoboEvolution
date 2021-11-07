@@ -30,9 +30,6 @@ import org.loboevolution.html.dom.nodeimpl.ModelNode;
 /**
  * A renderer node with well-defined bounds. Most renderer nodes implement this
  * interface.
- *
- *
- *
  */
 public interface BoundableRenderable extends Renderable {
 
@@ -341,6 +338,12 @@ public interface BoundableRenderable extends Renderable {
 	 */
 	void repaint();
 
+
+	/**
+	 * <p>isDelegated.</p>
+	 * @return a boolean. */
+	boolean isDelegated();
+
 	/**
 	 * <p>repaint.</p>
 	 *
@@ -418,5 +421,11 @@ public interface BoundableRenderable extends Renderable {
 	 */
 	void setY(int y);
 
+	/**
+	 * <p>setParent.</p>
+	 *
+	 * @param pDelegator a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
+	 */
+	void setDelegator(final BoundableRenderable pDelegator);
 
 }

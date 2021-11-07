@@ -76,14 +76,14 @@ public class RTable extends BaseElementRenderable {
 			others = new TreeSet<>(new ZIndexComparator());
 			this.positionedRenderables = others;
 		}
-		
-		final PositionedRenderable posRes = new PositionedRenderable();
-		posRes.setRenderable(renderable);
-		posRes.setVerticalAlignable(verticalAlignable);
-		posRes.setOrdinal(otherOrdinal++);
-		posRes.setFloat(isFloat);
-		posRes.setFixed(isFixed);
-		others.add(posRes);
+
+		others.add(PositionedRenderable.builder().
+				renderable(renderable).
+				verticalAlignable(verticalAlignable).
+				ordinal(otherOrdinal++).
+				isFloat(isFloat).
+				isFixed(isFixed).build());
+
 		renderable.setParent(this);
 		if (renderable instanceof RUIControl) {
 			this.container.addComponent(((RUIControl) renderable).widget.getComponent());

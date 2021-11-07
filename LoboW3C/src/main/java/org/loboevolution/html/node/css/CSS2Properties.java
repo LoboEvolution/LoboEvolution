@@ -485,7 +485,7 @@ public interface CSS2Properties {
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	String getMarginTop();;
+	String getMarginTop();
 
 	/**
 	 * <p>getMarkerOffset.</p>
