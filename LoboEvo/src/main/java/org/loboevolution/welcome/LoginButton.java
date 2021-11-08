@@ -20,14 +20,7 @@
 
 package org.loboevolution.welcome;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
@@ -35,6 +28,7 @@ import javax.swing.JLabel;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.IBrowserPanel;
+import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
@@ -101,15 +95,15 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 			public void mousePressed(final MouseEvent me) {
 				final int indexPanel = panel.getTabbedPane().getIndex();
 				panel.getTabbedPane().remove(indexPanel);
-				final DnDTabbedPane tabbedPane = panel.getTabbedPane();
-				tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
+				final ITabbedPane tabbedPane = panel.getTabbedPane();
+				tabbedPane.setComponentPopupMenu(panel);
 				HtmlPanel hpanel = NavigationManager.getHtmlPanelSearch(panel, text.getText());
 				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 				final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 				tabbedPane.insertTab(title, null, hpanel, title, indexPanel);
 				tabbedPane.setSelectedIndex(indexPanel);
 				final IBrowserPanel bpanel = hpanel.getBrowserPanel();
-				bpanel.getScroll().getViewport().add(tabbedPane);
+				bpanel.getScroll().getViewport().add((Component)tabbedPane);
 				TabStore.deleteTab(indexPanel);
 				TabStore.insertTab(indexPanel, text.getText(), title);
 				NavigationManager.insertHistory(text.getText(), title, indexPanel);

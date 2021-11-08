@@ -30,7 +30,13 @@ import java.util.Map;
  *
  */
 public enum FontType {
-	
+
+	BOLD("Bold"),
+
+	ITALIC("Italic"),
+
+	MONOSPACED( "Monospaced"),
+
 	STRIKETHROUGH("Strikethrough"),
 
 	SUBSCRIPT("Subscript"),
@@ -42,7 +48,7 @@ public enum FontType {
 	TIMES_NEW_ROMAN("TimesNewRoman"),
 
 	UNDERLINE("Underline");
-	
+
 	private final String value;
 	private static final Map<String, FontType> ENUM_MAP;
 	

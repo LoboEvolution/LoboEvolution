@@ -16,15 +16,16 @@
     </properties>
 
     <modules>
-	    <module>LoboW3C</module>
+      <module>LoboW3C</module>
         <module>LoboCommon</module>
+        <module>LoboStore</module>
         <module>LoboApi</module>
         <module>LoboParser</module>
         <module>LoboPDF</module>
         <module>LoboIViewer</module>
         <module>LoboJTattoo</module>
         <module>LoboHTML</module>
-		<module>LoboUnitTest</module>
+        <module>LoboUnitTest</module>
         <module>LoboEvo</module>
     </modules>
 
@@ -32,6 +33,11 @@
         <dependency>
             <groupId>org.loboevolution</groupId>
             <artifactId>LoboCommon</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.loboevolution</groupId>
+            <artifactId>LoboStore</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
@@ -120,3 +126,4 @@
         </plugins>
     </build>
 </project>
+

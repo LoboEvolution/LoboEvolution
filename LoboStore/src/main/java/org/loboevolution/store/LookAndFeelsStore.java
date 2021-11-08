@@ -20,14 +20,14 @@
 
 package org.loboevolution.store;
 
-import java.awt.Color;
+import com.loboevolution.store.laf.LAFSettings;
+
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.loboevolution.laf.LAFSettings;
 
 /**
  * <p>LookAndFeelsStore class.</p>
@@ -96,7 +96,7 @@ public class LookAndFeelsStore {
 	/**
 	 * Insert a new row into the look_and_feel table
 	 *
-	 * @param laf a {@link org.loboevolution.laf.LAFSettings} object.
+	 * @param laf a {@link LAFSettings} object.
 	 */
 	public void insertLAF(LAFSettings laf) {
 		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());

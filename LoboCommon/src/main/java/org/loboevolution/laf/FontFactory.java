@@ -30,6 +30,9 @@ import java.awt.*;
 import java.awt.font.TextAttribute;
 import java.util.*;
 
+import static java.lang.Math.*;
+import static org.loboevolution.laf.FontType.TIMES_NEW_ROMAN;
+
 /**
  * A factory for creating Font objects.
  */
@@ -190,7 +193,7 @@ public final class FontFactory {
 			final Font f = baseFont.deriveFont(fontStyle, key.getFontSize());
 			return f.deriveFont(attributes);
 		} else if (matchingFace != null) {
-			final Font font = createFont(matchingFace, fontStyle, Math.round(key.getFontSize()));
+			final Font font = createFont(matchingFace, fontStyle, round(key.getFontSize()));
 			final Set<Locale> locales = key.getLocales();
 			if (locales == null) {
 				final Locale locale = Locale.getDefault();
@@ -210,12 +213,15 @@ public final class FontFactory {
 				}
 			}
 		}
-		String defaultFontName = new LAFSettings().getInstance().getFont();
-		return createFont(defaultFontName, fontStyle, Math.round(key.getFontSize())).deriveFont(attributes);
+
+		return createFont(
+			TIMES_NEW_ROMAN.getValue(),
+			fontStyle,
+			round(key.getFontSize())).deriveFont(attributes
+		);
 	}
 
 	private Map<TextAttribute, Object> getBoldAttributes(String fontWeight){
-
 		Map<TextAttribute, Object> attributes = new HashMap<>();
 
 		switch (CSSValues.get(fontWeight)) {

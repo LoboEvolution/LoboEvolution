@@ -18,53 +18,29 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.component;
+package com.jtattoo.plaf;
 
-import javax.swing.JScrollPane;
+import java.awt.*;
 
 /**
- * <p>IBrowserPanel interface.</p>
- *
- *
- *
+ * <p>LAFColorType class.</p>
  */
-public interface IBrowserPanel {
-	
-	ITabbedPane getTabbedPane();
-	
-	/**
-	 * <p>getScroll.</p>
-	 *
-	 * @return a {@link javax.swing.JScrollPane} object.
-	 */
-	JScrollPane getScroll();
-	
-	/**
-	 * <p>getBrowserFrame.</p>
-	 *
-	 * @return a {@link org.loboevolution.component.IBrowserFrame} object.
-	 */
-	IBrowserFrame getBrowserFrame();
-	
-	/**
-	 * <p>getWelcome.</p>
-	 *
-	 * @return a {@link org.loboevolution.component.IWelcomePanel} object.
-	 */
-	IWelcomePanel getWelcome();
-	
-	/**
-	 * <p>getWidth.</p>
-	 *
-	 * @return a int object.
-	 */
-	int getWidth();
-	
-	/**
-	 * <p>getWelcome.</p>
-	 *
-	 * @return a int object.
-	 */
-	int getHeight();
+public class LAFColorType {
 
+	public static final Color BACKGROUND_MODERN = new Color( 37, 51, 61);
+
+	public static final Color FOREGROUND_MODERN = new Color(108, 216, 158);
+
+	public static final Color BACKGROUND_BLACK_WHITE = new Color(0,0,0);
+
+	public static final Color FOREGROUND_BLACK_WHITE = new Color(255,255,255);
+
+	public static final Color BACKGROUND_WHITE_BLACK = new Color(255,255,240);
+
+	public static final Color FOREGROUND_WHITE_BLACK = new Color(0,0,0);
+
+	/**
+	 * Prevent instantiation (see Joshua Bloch, Effective Java).
+	 */
+	private LAFColorType() {}
 }

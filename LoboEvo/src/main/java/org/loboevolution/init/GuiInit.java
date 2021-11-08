@@ -28,7 +28,7 @@ import javax.swing.WindowConstants;
 
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.install.ProgressBar;
-import org.loboevolution.laf.LAFSettings;
+import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.store.SQLiteCommon;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;

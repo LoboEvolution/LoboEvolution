@@ -24,7 +24,6 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFSettings;
 
 import java.awt.*;
 import java.awt.font.TextAttribute;
@@ -33,6 +32,11 @@ import java.awt.font.TextAttribute;
  * <p>FontValues class.</p>
  */
 public class FontValues extends HtmlValues {
+	/**
+	 * 12pt font by default.
+	 */
+	public static final float FONT_SIZE = 16.0f;
+
 	/**
 	 * <p>getFontFamily.</p>
 	 *
@@ -60,8 +64,8 @@ public class FontValues extends HtmlValues {
 	 * @return the font size
 	 */
 	public static float getFontSize(String spec, Window window, RenderState parentRenderState) {
-
-		final float defaultSize = new LAFSettings().getInstance().getFontSize();
+		// Default font size is 12 point.
+		final float defaultSize = FONT_SIZE;
 
 		if (spec == null) {
 			return defaultSize;
@@ -90,7 +94,7 @@ public class FontValues extends HtmlValues {
 			return (int) Math.round(parentFontSize * value);
 		}  else if (specTL.endsWith("px") || specTL.endsWith("pt") || specTL.endsWith("pc")
 				|| specTL.endsWith("mm") || specTL.endsWith("ex")) {
-			final int pixelSize = getPixelSize(spec, parentRenderState, window, (int) new LAFSettings().getInstance().getFontSize());
+			final int pixelSize = getPixelSize(spec, parentRenderState, window, (int)FONT_SIZE);
 			final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			return pixelSize * 96 / dpi;
 		} else if (specTL.endsWith("%")) {
@@ -122,19 +126,19 @@ public class FontValues extends HtmlValues {
 			case XX_LARGE:
 				return 40.0f;
 			case LARGER:
-				parentFontSize = (int) new LAFSettings().getInstance().getFontSize();
+				parentFontSize = (int) defaultSize;
 				if (parentRenderState != null) {
 					parentFontSize = parentRenderState.getFont().getSize();
 				}
 				return parentFontSize * 1.2f;
 			case SMALLER:
-				parentFontSize = (int) new LAFSettings().getInstance().getFontSize();
+				parentFontSize = (int) defaultSize;
 				if (parentRenderState != null) {
 					parentFontSize = parentRenderState.getFont().getSize();
 				}
 				return parentFontSize / 1.2f;
 			case INHERIT:
-				parentFontSize = (int) new LAFSettings().getInstance().getFontSize();
+				parentFontSize = (int) defaultSize;
 				if (parentRenderState != null && parentRenderState.getPreviousRenderState() != null) {
 					parentRenderState.getPreviousRenderState().getFont().getSize();
 				}
@@ -153,12 +157,7 @@ public class FontValues extends HtmlValues {
 	 * @return a boolean.
 	 */
 	public static boolean getFontStrikeThrough(String spec) {
-		final String strikethrough = spec;
-		if (CSSValues.get(strikethrough).equals(CSSValues.LINE_THROUGH)) {
-			return TextAttribute.STRIKETHROUGH_ON;
-		}
-
-		if (strikethrough == null && new LAFSettings().getInstance().isStrikethrough()) {
+		if (CSSValues.get( spec ).equals( CSSValues.LINE_THROUGH)) {
 			return TextAttribute.STRIKETHROUGH_ON;
 		}
 		return false;
@@ -171,11 +170,7 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getFontStyle(String spec) {
-		final String fontStyle = spec;
-		if (fontStyle == null && new LAFSettings().getInstance().isItalic()) {
-			return CSSValues.ITALIC.getValue();
-		}
-		return fontStyle;
+		return spec;
 	}
 
 	/**
@@ -185,11 +180,10 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getFontVariant(String spec) {
-		final String fontVariant = spec;
-		if (fontVariant == null){
+		if ( spec == null){
 			return CSSValues.NORMAL.getValue();
 		}
-		return fontVariant;
+		return spec;
 	}
 
 	/**
@@ -200,15 +194,14 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.Integer} object.
 	 */
 	public static Integer getFontSuperScript(String spec, RenderState parentRenderState) {
-		final String verticalAlign = spec;
 		Integer superscript = null;
 
-		final boolean isSuper = "super".equalsIgnoreCase(verticalAlign);
-		final boolean isSub = "sub".equalsIgnoreCase(verticalAlign);
+		final boolean isSuper = "super".equalsIgnoreCase( spec );
+		final boolean isSub = "sub".equalsIgnoreCase( spec );
 
-		if (isSuper || new LAFSettings().getInstance().isSuperscript()) {
+		if (isSuper) {
 			superscript = TextAttribute.SUPERSCRIPT_SUPER;
-		} else if (isSub || new LAFSettings().getInstance().isSubscript()) {
+		} else if (isSub ) {
 			superscript = TextAttribute.SUPERSCRIPT_SUB;
 		}
 
@@ -225,15 +218,10 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.Integer} object.
 	 */
 	public static Integer getFontUnderline(String spec) {
-		final String underline = spec;
-
-		if (CSSValues.get(underline).equals(CSSValues.UNDERLINE)) {
+		if (CSSValues.get( spec ).equals( CSSValues.UNDERLINE)) {
 			return TextAttribute.UNDERLINE_LOW_TWO_PIXEL;
 		}
 
-		if (underline == null && new LAFSettings().getInstance().isUnderline()) {
-			return TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
-		}
 		return null;
 	}
 
@@ -244,15 +232,7 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getFontWeight(String spec) {
-		final String fontWeight = spec;
-		if (fontWeight == null && new LAFSettings().getInstance().isBold()) {
-			return CSSValues.BOLD.getValue();
-		}
-
-		if (fontWeight == null) {
-			return CSSValues.BOLD400.getValue();
-		}
-		return fontWeight;
+		return spec;
 	}
 
 	/**
@@ -308,21 +288,5 @@ public class FontValues extends HtmlValues {
 				return false;
 			}
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Checks if is font weight.
-	 */
-	public static boolean isFontFamily(String familyFont) {
-		String[] fonts = LAFSettings.getFonts("FONT");
-		for (int i = 0; i < fonts.length; i++) {
-			final String font = fonts[i];
-			if (font.equalsIgnoreCase(familyFont.replace(" ", "").replace("-", ""))) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

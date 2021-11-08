@@ -18,7 +18,7 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.laf;
+package com.loboevolution.store.laf;
 
 import java.awt.Color;
 import java.io.Serializable;
@@ -87,7 +87,7 @@ public class LAFSettings implements Serializable {
 	private Color color = Color.BLACK;
 	
 	/** The Font . */
-	private String font = FontType.TIMES_NEW_ROMAN.getValue();
+	private String font = "TimesNewRoman";
 
 	/** The Font Size . */
 	private float fontSize = 16.0f;
@@ -156,14 +156,14 @@ public class LAFSettings implements Serializable {
 	 * @return the instance
 	 */
 	public LAFSettings getInstance() {
-		LAFSettings laf = retriveFontDate();
+		LAFSettings laf = retrieveFontDate();
 		if (laf == null) {
 			laf = this;
 		}
 		return laf;
 	}
 	
-	private LAFSettings retriveFontDate() {
+	private LAFSettings retrieveFontDate() {
 		LAFSettings laf = null;
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				Statement stmt = conn.createStatement();
@@ -190,7 +190,7 @@ public class LAFSettings implements Serializable {
 				laf.setStrikethrough(rs.getInt(18) == 1);
 				laf.setFontSize(Float.parseFloat(rs.getString(19)));
 				laf.setFont(rs.getString(20));
-				laf.setColor(ColorFactory.getInstance().getColor(rs.getString(21)));
+				laf.setColor(Color.BLACK);
 				laf.setBold(rs.getInt(22) == 1);
 				laf.setModern(rs.getInt(23) == 1);
 				laf.setBlackWhite(rs.getInt(24) == 1);

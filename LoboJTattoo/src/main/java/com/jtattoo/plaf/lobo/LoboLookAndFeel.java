@@ -2,9 +2,9 @@ package com.jtattoo.plaf.lobo;
 
 import java.awt.Color;
 
+import com.jtattoo.plaf.LAFColorType;
+import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.laf.LAFColorType;
-import org.loboevolution.laf.LAFSettings;
 
 /**
  * <p>LoboLookAndFeel interface.</p>
@@ -27,12 +27,12 @@ public interface LoboLookAndFeel {
 
 		if (settings.isBlackWhite() || settings.isNoire() || settings.isHiFi() || settings.isTexture()
 				|| settings.isGraphite() || settings.isAcryl()) {
-			color = instance.getColor(LAFColorType.BACKGROUND_BLACK_WHITE);
+			color = LAFColorType.BACKGROUND_BLACK_WHITE;
 		} else if (settings.isWhiteBlack() || settings.isAluminium() || settings.isBernstein() || settings.isFast()
 				|| settings.isMcWin() || settings.isMint() || settings.isSmart()) {
-			color = instance.getColor(LAFColorType.BACKGROUND_WHITE_BLACK);
+			color = LAFColorType.BACKGROUND_WHITE_BLACK;
 		} else {
-			color = instance.getColor(LAFColorType.BACKGROUND_MODERN);
+			color = LAFColorType.BACKGROUND_MODERN;
 		}
 		return color;
 	}
@@ -50,12 +50,12 @@ public interface LoboLookAndFeel {
 
 		if (settings.isBlackWhite() || settings.isNoire() || settings.isHiFi() || settings.isTexture()
 				|| settings.isGraphite() || settings.isAcryl()) {
-			color = instance.getColor(LAFColorType.FOREGROUND_BLACK_WHITE);
+			color = LAFColorType.FOREGROUND_BLACK_WHITE;
 		} else if (settings.isWhiteBlack() || settings.isAluminium() || settings.isBernstein() || settings.isFast()
 				|| settings.isMcWin() || settings.isMint() || settings.isSmart()) {
-			color = instance.getColor(LAFColorType.FOREGROUND_WHITE_BLACK);
+			color = LAFColorType.FOREGROUND_WHITE_BLACK;
 		} else {
-			color = instance.getColor(LAFColorType.FOREGROUND_MODERN);
+			color = LAFColorType.FOREGROUND_MODERN;
 		}
 		
 		return color;

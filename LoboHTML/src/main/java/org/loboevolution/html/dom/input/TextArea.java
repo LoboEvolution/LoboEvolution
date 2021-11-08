@@ -20,31 +20,25 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Insets;
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.control.RUIControl;
+import org.loboevolution.html.control.TextAreaControl;
+import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
+import org.loboevolution.html.js.Executor;
+
+import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.BorderFactory;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.event.MouseInputAdapter;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
-
-import org.loboevolution.common.Strings;
-import org.loboevolution.html.control.RUIControl;
-import org.loboevolution.html.control.TextAreaControl;
-import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
-import org.loboevolution.html.js.Executor;
-import org.loboevolution.laf.LAFSettings;
+import static org.loboevolution.html.style.FontValues.FONT_SIZE;
 
 /**
  * <p>TextArea class.</p>
@@ -67,7 +61,7 @@ public class TextArea extends BasicInput {
 		setjComponent(jtArea);
 		
 		final Font font = jtArea.getFont();
-		jtArea.setFont(font.deriveFont(new LAFSettings().getInstance().getFontSize()));
+		jtArea.setFont(font.deriveFont(FONT_SIZE));
 		jtArea.setDocument(new LimitedDocument());
 		jtArea.setText(modelNode.getValue());
 		jtArea.setSelectionColor(Color.BLUE);

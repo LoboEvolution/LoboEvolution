@@ -20,14 +20,12 @@
 
 package org.loboevolution.html.dom.rss;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
-
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.style.FontValues;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFType;
+import org.loboevolution.laf.FontType;
+
+import java.awt.*;
 
 /**
  * <p>RSSTitleElementImpl class.</p>
@@ -48,9 +46,9 @@ public class RSSTitleElementImpl extends RSSElement implements RSSDrawable {
 	public void draw(Graphics2D graphics, int y) {
 		String text = getText();
 		FontKey key = new FontKey();
-		key.setFontStyle(LAFType.ITALIC.getValue());
+		key.setFontStyle(FontType.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
-		key.setFontWeight(LAFType.BOLD.getValue());
+		key.setFontWeight(FontType.BOLD.getValue());
 		Font font = FontFactory.getInstance().getFont(key);
 		graphics.setFont(font);
 		graphics.drawString(text, 10, y);

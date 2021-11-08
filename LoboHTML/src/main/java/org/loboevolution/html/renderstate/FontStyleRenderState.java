@@ -23,7 +23,7 @@ package org.loboevolution.html.renderstate;
 import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFType;
+import org.loboevolution.laf.FontType;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -38,9 +38,9 @@ public class FontStyleRenderState extends RenderStateDelegator {
 
 	private FontMetrics iFontMetrics;
 
-	Map<String, WordInfo> iWordInfoMap = null;
+	private FontType fontType;
 
-	private final LAFType type;
+	Map<String, WordInfo> iWordInfoMap = null;
 
 	private int superscript;
 
@@ -48,12 +48,11 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	 * <p>Constructor for FontStyleRenderState.</p>
 	 *
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param type a {@link org.loboevolution.laf.LAFType} object.
 	 */
-	public FontStyleRenderState(RenderState prevRenderState, LAFType type) {
+	public FontStyleRenderState(RenderState prevRenderState, FontType fontType) {
 		super(prevRenderState);
-		this.type = type;
 		this.iFont = null;
+		this.fontType = fontType;
 	}
 
 	/**
@@ -66,7 +65,6 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		super(prevRenderState);
 		this.iFont = prevRenderState.getFont();
 		this.superscript = superscript;
-		this.type = null;
 	}
 
 	/** {@inheritDoc} */
@@ -79,16 +77,16 @@ public class FontStyleRenderState extends RenderStateDelegator {
 			return  FontFactory.getInstance().scriptFont(this.iFont, fontkey);
 		}
 
-		if (LAFType.BOLD.equals(type)) {
-			fontkey.setFontWeight(LAFType.BOLD.getValue());
+		if (FontType.BOLD.equals(fontType)) {
+			fontkey.setFontWeight(FontType.BOLD.getValue());
 		}
 
-		if (LAFType.ITALIC.equals(type)) {
-			fontkey.setFontStyle(LAFType.ITALIC.getValue());
+		if (FontType.ITALIC.equals(fontType)) {
+			fontkey.setFontStyle(FontType.ITALIC.getValue());
 		}
 
-		if (LAFType.MONOSPACED.equals(type)) {
-			fontkey.setFontFamily(LAFType.MONOSPACED.getValue());
+		if (FontType.MONOSPACED.equals(fontType)) {
+			fontkey.setFontFamily(FontType.MONOSPACED.getValue());
 		}
 
 		return FontFactory.getInstance().getFont(fontkey);

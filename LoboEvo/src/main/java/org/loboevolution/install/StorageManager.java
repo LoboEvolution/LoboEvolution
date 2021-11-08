@@ -115,13 +115,11 @@ public class StorageManager extends SwingWorker<Void, Void> {
 		final List<String> files = new ArrayList<>();
 		files.add(0, "table.sql");
 		files.add("char.sql");
-		files.add("color.sql");
 		files.add("font_size.sql");
 		files.add("font.sql");
 		files.add("network.sql");
 		files.add("searchEngine.sql");
 		files.add("size.sql");
-		files.add("userAgent.sql");
 		files.add("lookAndFeel.sql");
 		return files;
 	}

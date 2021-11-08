@@ -20,23 +20,6 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Insets;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
-import javax.swing.BorderFactory;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
-
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.input.Autocomplete;
@@ -45,8 +28,20 @@ import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderer.HtmlController;
-import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.store.InputStore;
+
+import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
+import static org.loboevolution.html.style.FontValues.FONT_SIZE;
 
 /**
  * <p>InputText class.</p>
@@ -73,7 +68,7 @@ public class InputText extends BasicInput {
 		setjComponent(iText);
 		final String type = modelNode.getType();
 		final Font font = iText.getFont();
-		iText.setFont(font.deriveFont(new LAFSettings().getInstance().getFontSize()));
+		iText.setFont(font.deriveFont(FONT_SIZE));
 		iText.setDocument(new LimitedDocument());
 		iText.setText(modelNode.getValue());
 		iText.setSelectionColor(Color.BLUE);

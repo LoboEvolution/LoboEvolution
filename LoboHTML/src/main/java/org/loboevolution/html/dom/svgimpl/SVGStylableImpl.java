@@ -20,13 +20,6 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.util.Iterator;
-
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
@@ -35,16 +28,18 @@ import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.SVGElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.dom.svg.SVGStylable;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFSettings;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
+
+import java.awt.*;
+import java.util.Iterator;
 
 /**
  * <p>SVGStylableImpl class.</p>

@@ -43,6 +43,11 @@
             <artifactId>LoboCommon</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.loboevolution</groupId>
+            <artifactId>LoboStore</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>

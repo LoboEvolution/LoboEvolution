@@ -54,8 +54,8 @@ import org.loboevolution.gui.ColorComboBox;
 import org.loboevolution.gui.FontLabel;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.laf.FontType;
-import org.loboevolution.laf.LAFSettings;
-import org.loboevolution.laf.LAFType;
+import com.loboevolution.store.laf.LAFSettings;
+import com.jtattoo.plaf.LAFType;
 import org.loboevolution.store.LookAndFeelsStore;
 
 import com.jtattoo.plaf.lobo.LoboCheckBox;

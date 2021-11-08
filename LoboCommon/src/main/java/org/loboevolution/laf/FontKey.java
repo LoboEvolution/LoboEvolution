@@ -71,7 +71,7 @@ public class FontKey {
 		this.fontStyle = null;
 		this.fontVariant = null;
 		this.fontWeight = null;
-		this.fontSize = new LAFSettings().getInstance().getFontSize();
+		this.fontSize = 12;
 		this.locales = null;
 		this.superscript = null;
 		this.letterSpacing = 0;

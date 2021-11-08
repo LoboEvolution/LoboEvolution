@@ -29,11 +29,12 @@ import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.net.HttpNetwork;
 
 import java.awt.*;
 import java.util.ArrayList;
+
+import static org.loboevolution.html.style.FontValues.FONT_SIZE;
 
 /**
  * <p>HtmlValues class.</p>
@@ -192,8 +193,7 @@ public class HtmlValues {
 				final double pixelSize = fontSize * dpi / 96;
 				return (int) Math.round(pixelSize * Double.parseDouble(text));
 			case "rem":
-					final float fs = new LAFSettings().getInstance().getFontSize();
-					return (int) Math.round(fs * Double.parseDouble(text));
+				return (int) Math.round( FONT_SIZE * Double.parseDouble( text));
 			case "pt":
 				return inches(72, dpi, text);
 			case "pc":

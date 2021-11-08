@@ -20,21 +20,16 @@
 
 package org.loboevolution.tab;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragSource;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetListener;
-
-import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeListener;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
+import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.store.TabStore;
+
+import javax.swing.*;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.dnd.*;
 
 /**
  * <p>DnDTabbedPane class.</p>
@@ -42,7 +37,7 @@ import org.loboevolution.store.TabStore;
  *
  *
  */
-public class DnDTabbedPane extends JTabbedPane {
+public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 
 	private static final long serialVersionUID = 1L;
 
@@ -101,6 +96,21 @@ public class DnDTabbedPane extends JTabbedPane {
 	 */
 	public int getIndex() {
 		return this.index;
+	}
+
+	@Override
+	public void setComponentPopupMenu( final IBrowserPanel panel ) {
+		super.setComponentPopupMenu( new TabbedPanePopupMenu( panel ) );
+	}
+
+	@Override
+	public void insertTab(
+		final String title,
+		final Icon icon,
+		final Component component,
+		final String tip,
+		final int index ) {
+		super.insertTab( title, icon, component, tip, index );
 	}
 
 	private void init(IBrowserPanel browserPanel) {
