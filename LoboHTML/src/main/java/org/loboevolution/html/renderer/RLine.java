@@ -22,25 +22,22 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import org.loboevolution.html.AlignValues;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.renderstate.RenderState;
+
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.loboevolution.html.AlignValues;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
-import org.loboevolution.html.renderstate.RenderState;
-
 /**
  * Author J. H. S.
  */
 class RLine extends BaseRCollection {
+
 	private boolean allowOverflow = false;
 	private int baseLineOffset;
 	private int desiredMaxWidth;
@@ -167,12 +164,6 @@ class RLine extends BaseRCollection {
 		final int newX = origXOffset + pw;
 		this.width = this.xoffset = newX;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
-	 */
 
 	/**
 	 * <p>addSpacing.</p>
@@ -432,11 +423,6 @@ class RLine extends BaseRCollection {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.RCollection#getRenderables()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Iterator<Renderable> getRenderables() {
@@ -562,22 +548,24 @@ class RLine extends BaseRCollection {
 			final Iterator<Renderable> i = this.renderables.iterator();
 			if (i != null) {
 				while (i.hasNext()) {
-					final Object r = i.next();
+					final Renderable r = i.next();
 					if (r instanceof RElement) {
-						// RElements should be translated.
 						final RElement relement = (RElement) r;
-						final Graphics newG = g.create();
-						newG.translate(relement.getX(), relement.getY());
-						try {
-							relement.paint(newG);
-						} finally {
-							newG.dispose();
+						if (!relement.isDelegated()) {
+							final Graphics newG = g.create();
+							newG.translate(relement.getX(), relement.getY());
+							try {
+								relement.paint(newG);
+							} finally {
+								newG.dispose();
+							}
 						}
+
 					} else if (r instanceof BoundableRenderable) {
 						final BoundableRenderable br = (BoundableRenderable) r;
-						br.paintTranslated(g);
+						if (!br.isDelegated()) br.paintTranslated(g);
 					} else {
-						((Renderable) r).paint(g);
+						r.paint(g);
 					}
 				}
 			}

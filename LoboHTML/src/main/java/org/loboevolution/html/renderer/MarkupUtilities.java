@@ -49,7 +49,7 @@ final class MarkupUtilities {
     for (int i = firstIndex + length - 1; i >= firstIndex; i--) {
       if (renderables[i] instanceof BoundableRenderable) {
         final BoundableRenderable br2 = (BoundableRenderable) renderables[i];
-        if (br2.contains(x, y)) {
+        if ((!br2.isDelegated()) && br2.contains(x, y)) {
           return br2;
         }
       }
@@ -72,7 +72,7 @@ final class MarkupUtilities {
     for (Renderable renderable : renderables) {
       if (renderable instanceof BoundableRenderable) {
         final BoundableRenderable br = (BoundableRenderable) renderable;
-        if (br.contains(x, y)) {
+        if ((!br.isDelegated()) && br.contains(x, y)) {
           if (found == null) {
             found = new ArrayList<>();
           }

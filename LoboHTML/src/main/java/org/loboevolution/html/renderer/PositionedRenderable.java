@@ -24,6 +24,9 @@ import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
@@ -31,10 +34,10 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>PositionedRenderable class.</p>
- *
- *
- *
  */
+@Data
+@Builder
+@AllArgsConstructor
 public class PositionedRenderable implements Renderable {
 
 	/** Constant EMPTY_ARRAY */
@@ -50,11 +53,6 @@ public class PositionedRenderable implements Renderable {
 
 	private int ordinal;
 
-	/**
-	 * <p>Constructor for PositionedRenderable.</p>
-	 */
-	public PositionedRenderable() {
-	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -144,95 +142,5 @@ public class PositionedRenderable implements Renderable {
 	@Override
 	public ModelNode getModelNode() {
 		return this.renderable.getModelNode();
-	}
-
-	/**
-	 * <p>Getter for the field renderable.</p>
-	 *
-	 * @return the renderable
-	 */
-	public BoundableRenderable getRenderable() {
-		return renderable;
-	}
-
-	/**
-	 * <p>isVerticalAlignable.</p>
-	 *
-	 * @return the verticalAlignable
-	 */
-	public boolean isVerticalAlignable() {
-		return verticalAlignable;
-	}
-
-	/**
-	 * <p>isFloat.</p>
-	 *
-	 * @return the isFloat
-	 */
-	public boolean isFloat() {
-		return isFloat;
-	}
-
-	/**
-	 * <p>isFixed.</p>
-	 *
-	 * @return the isFixed
-	 */
-	public boolean isFixed() {
-		return isFixed;
-	}
-
-	/**
-	 * <p>Getter for the field ordinal.</p>
-	 *
-	 * @return the ordinal
-	 */
-	public int getOrdinal() {
-		return ordinal;
-	}
-
-	/**
-	 * <p>Setter for the field renderable.</p>
-	 *
-	 * @param renderable the renderable to set
-	 */
-	public void setRenderable(BoundableRenderable renderable) {
-		this.renderable = renderable;
-	}
-
-	/**
-	 * <p>Setter for the field verticalAlignable.</p>
-	 *
-	 * @param verticalAlignable the verticalAlignable to set
-	 */
-	public void setVerticalAlignable(boolean verticalAlignable) {
-		this.verticalAlignable = verticalAlignable;
-	}
-
-	/**
-	 * <p>setFloat.</p>
-	 *
-	 * @param isFloat the isFloat to set
-	 */
-	public void setFloat(boolean isFloat) {
-		this.isFloat = isFloat;
-	}
-
-	/**
-	 * <p>setFixed.</p>
-	 *
-	 * @param isFixed the isFixed to set
-	 */
-	public void setFixed(boolean isFixed) {
-		this.isFixed = isFixed;
-	}
-
-	/**
-	 * <p>Setter for the field ordinal.</p>
-	 *
-	 * @param ordinal the ordinal to set
-	 */
-	public void setOrdinal(int ordinal) {
-		this.ordinal = ordinal;
 	}
 }

@@ -66,7 +66,7 @@ public interface RenderableContainer {
 	 *
 	 * @return a {@link java.util.Collection} object.
 	 */
-	Collection getDelayedPairs();
+	Collection<DelayedPair> getDelayedPairs();
 
 	/**
 	 * <p>getPaintedBackgroundColor.</p>

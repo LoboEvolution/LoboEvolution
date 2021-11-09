@@ -56,6 +56,8 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	protected final RenderableContainer container;
 
+	private BoundableRenderable delegator;
+
 	protected boolean layoutUpTreeCanBeInvalidated = true;
 
 	protected final ModelNode modelNode;
@@ -63,6 +65,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	protected RCollection originalParent;
 
 	protected RCollection parent;
+
 
 	public int x, y;
 
@@ -535,7 +538,13 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	/** {@inheritDoc} */
 	@Override
-	public void repaint(int x, int y, int width, int height) {
+	public void repaint(final int x, final int y, final int width, final int height) {
+
+		if (isDelegated()) {
+			delegator.repaint(x, y, width, height);
+			return;
+		}
+
 		final Renderable parent = this.parent;
 		if (parent instanceof BoundableRenderable) {
 			 ((BoundableRenderable) parent).repaint(x + this.getX(), y + this.getY(), width, height);
@@ -600,4 +609,13 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	public void setY(int y) {
 		this.y = y;
 	}
-}
+
+	public void setDelegator(final BoundableRenderable pDelegator) {
+		this.delegator = pDelegator;
+	}
+
+	public boolean isDelegated() {
+		return delegator != null;
+	}
+
+	}

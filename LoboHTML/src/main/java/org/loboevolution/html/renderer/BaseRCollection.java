@@ -29,6 +29,7 @@ import java.util.Iterator;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
+
 	private BoundableRenderable renderableWithMouse = null;
 
 	/**
@@ -47,8 +48,6 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		final RCollection parent = this.parent;
 		if (parent != null) {
 			parent.focus();
-		} else {
-			// TODO: Remove local focus
 		}
 	}
 	
@@ -147,7 +146,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 					if (br instanceof RBlockViewport) {
 						return br;
 					}
-					if (br.contains(x, y)) {
+					if ((!br.isDelegated()) && br.contains(x, y)) {
 						return br;
 					}
 				}
@@ -180,8 +179,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	public void onMouseMoved(final MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
 		super.onMouseMoved(event, x, y, triggerEvent, limit);
 		final BoundableRenderable oldRenderable = this.renderableWithMouse;
-		final Renderable r = getRenderable(x, y);
-		final BoundableRenderable newRenderable = r instanceof BoundableRenderable ? (BoundableRenderable) r : null;
+		final BoundableRenderable newRenderable = getRenderable(x, y);
 		ModelNode newLimit;
 		if (isContainedByNode()) {
 			newLimit = this.modelNode;

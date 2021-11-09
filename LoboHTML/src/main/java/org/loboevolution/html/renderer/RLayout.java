@@ -242,7 +242,7 @@ public class RLayout {
 	        renderable.setOriginalParent(bodyLayout);
 	        switch (method) {
 	        case ADD_INLINE:
-	            bodyLayout.addRenderableToLineCheckStyle(renderable, markupElement, true);
+	            bodyLayout.addRenderableToLineCheckStyle(renderable, markupElement);
 	            break;
 	        case ADD_AS_BLOCK:
 	        case ADD_INLINE_BLOCK:
