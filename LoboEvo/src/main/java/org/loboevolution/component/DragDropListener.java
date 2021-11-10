@@ -20,30 +20,21 @@
 
 package org.loboevolution.component;
 
-import java.awt.Color;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.store.TabStore;
-import org.loboevolution.tab.DnDTabbedPane;
-import org.loboevolution.tab.TabbedPanePopupMenu;
+
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.*;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>DragDropListener class.</p>
- *
- *
- *
  */
 public class DragDropListener implements DropTargetListener {
 	
@@ -87,8 +78,8 @@ public class DragDropListener implements DropTargetListener {
 	
 	private void openFileDrop(String fullURL) {
 		fullURL = fullURL.replace("\\", "/");
-		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
+		tabbedPane.setComponentPopupMenu(bpanel);
 		int index = TabStore.getTabs().size();
 		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, fullURL);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
@@ -101,7 +92,7 @@ public class DragDropListener implements DropTargetListener {
 		browserFrame.getToolbar().getAddressBar().setText(fullURL);
 		TabStore.insertTab(index+1, fullURL, title);
 		welcome.setBackground(new Color(37, 51, 61));		
-		bpanel.getScroll().getViewport().add(tabbedPane);
+		bpanel.getScroll().getViewport().add((Component)tabbedPane);
 	}
 
 	/** {@inheritDoc} */
@@ -119,8 +110,8 @@ public class DragDropListener implements DropTargetListener {
 		IBrowserPanel panel = browserFrame.getPanel();
 		IWelcomePanel welcome = panel.getWelcome();
 		welcome.setBackground(new Color(37, 51, 61));
-		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-		bpanel.getScroll().getViewport().add(tabbedPane);
+		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
+		bpanel.getScroll().getViewport().add((Component)tabbedPane);
 	}
 
 	/** {@inheritDoc} */
@@ -130,7 +121,7 @@ public class DragDropListener implements DropTargetListener {
 		IBrowserPanel panel = browserFrame.getPanel();
 		IWelcomePanel welcome = panel.getWelcome();
 		welcome.setBackground(new Color(37, 51, 61, 65));
-		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-		bpanel.getScroll().getViewport().add(tabbedPane);
+		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
+		bpanel.getScroll().getViewport().add((Component)tabbedPane);
 	}
 }

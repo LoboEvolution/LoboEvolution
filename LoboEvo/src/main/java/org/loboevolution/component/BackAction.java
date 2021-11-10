@@ -20,6 +20,7 @@
 
 package org.loboevolution.component;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -32,14 +33,9 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
-import org.loboevolution.tab.DnDTabbedPane;
-import org.loboevolution.tab.TabbedPanePopupMenu;
 
 /**
  * <p>BackAction class.</p>
- *
- *
- *
  */
 public class BackAction extends AbstractAction {
 
@@ -76,15 +72,15 @@ public class BackAction extends AbstractAction {
 			}
 		}
 						
-		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
+		final ITabbedPane tabbedPane = this.panel.getTabbedPane();
+		tabbedPane.setComponentPopupMenu(this.panel);
 		final HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, text);		
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.remove(indexPanel);
 		tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
 		this.addressBar.setText(text);
-		panel.getScroll().getViewport().add(tabbedPane);
+		panel.getScroll().getViewport().add((Component) tabbedPane);
 		
 		TabStore.deleteTab(indexPanel);
 		TabStore.insertTab(indexPanel, text, title);

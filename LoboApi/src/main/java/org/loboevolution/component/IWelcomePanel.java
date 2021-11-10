@@ -27,9 +27,6 @@ import javax.swing.JPanel;
 
 /**
  * <p>IWelcomePanel interface.</p>
- *
- *
- *
  */
 public interface IWelcomePanel {
 

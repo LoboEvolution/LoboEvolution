@@ -22,39 +22,13 @@
  */
 package org.loboevolution.http;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
-
 import org.loboevolution.common.BufferExceededException;
 import org.loboevolution.common.RecordedInputStream;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
+import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.component.IToolBar;
 import org.loboevolution.html.HtmlObject;
 import org.loboevolution.html.dom.HTMLElement;
@@ -75,9 +49,20 @@ import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.LinkStore;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
-import org.loboevolution.tab.DnDTabbedPane;
-import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.xml.sax.InputSource;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The HtmlRendererContext class implements the
@@ -150,12 +135,12 @@ public class HtmlRendererContext {
 	 */
 	public void back() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
 		final IToolBar toolbar = browserFrame.getToolbar();
 		final JTextField addressBar = toolbar.getAddressBar();
 		String url = addressBar.getText();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+		tabbedPane.setComponentPopupMenu(bpanel);
 		NavigationStore nh = new NavigationStore();
         final int indexPanel = tabbedPane.getSelectedIndex();
         List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
@@ -174,7 +159,7 @@ public class HtmlRendererContext {
         tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
 		
         browserFrame.getToolbar().getAddressBar().setText(url);
-        bpanel.getScroll().getViewport().add(tabbedPane);
+        bpanel.getScroll().getViewport().add((Component)tabbedPane);
         
         TabStore.deleteTab(indexPanel);
         TabStore.insertTab(indexPanel, url, title);
@@ -258,12 +243,12 @@ public class HtmlRendererContext {
 	 */
 	public void forward() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
 		final IToolBar toolbar = browserFrame.getToolbar();
 		final JTextField addressBar = toolbar.getAddressBar();
 		String url = addressBar.getText();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+		tabbedPane.setComponentPopupMenu(bpanel);
 		NavigationStore nh = new NavigationStore();
         final int indexPanel = tabbedPane.getSelectedIndex();
         List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
@@ -282,7 +267,7 @@ public class HtmlRendererContext {
         tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
 		
         browserFrame.getToolbar().getAddressBar().setText(url);
-        bpanel.getScroll().getViewport().add(tabbedPane);
+        bpanel.getScroll().getViewport().add((Component)tabbedPane);
         
         TabStore.deleteTab(indexPanel);
         TabStore.insertTab(indexPanel, url, title);
@@ -501,8 +486,8 @@ public class HtmlRendererContext {
 			viewer.doOpen(fullURL);
 		} else {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-			tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+			final ITabbedPane tabbedPane = bpanel.getTabbedPane();
+			tabbedPane.setComponentPopupMenu(bpanel);
 			int index = -1;
 
 			if (isNewTab) {
@@ -523,7 +508,7 @@ public class HtmlRendererContext {
 			browserFrame.getToolbar().getAddressBar().setText(fullURL);
 			TabStore.insertTab(index, fullURL, title);
 			LinkStore.insertLinkVisited(fullURL);
-			bpanel.getScroll().getViewport().add(tabbedPane);
+			bpanel.getScroll().getViewport().add((Component)tabbedPane);
 		}
 	}
 
@@ -654,8 +639,8 @@ public class HtmlRendererContext {
 	 */
 	public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
+		tabbedPane.setComponentPopupMenu(bpanel);
 		int index = TabStore.getTabs().size();
 		String fullURL = url.toString();
 		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, fullURL);
@@ -667,7 +652,7 @@ public class HtmlRendererContext {
 		browserFrame.getToolbar().getAddressBar().setText(fullURL);
 		TabStore.insertTab(index, fullURL, title);
 		LinkStore.insertLinkVisited(fullURL);
-		bpanel.getScroll().getViewport().add(tabbedPane);
+		bpanel.getScroll().getViewport().add((Component)tabbedPane);
 		return nodeImpl.getHtmlRendererContext();
 	}
 	
@@ -680,7 +665,7 @@ public class HtmlRendererContext {
 	public void openImageViewer(URL srcUrl) {
 		try {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+			final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
 			final BufferedImage img = ImageIO.read(srcUrl);
 			final ImageViewer viewer = new ImageViewer(img);
@@ -693,7 +678,7 @@ public class HtmlRendererContext {
 			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
 			TabStore.insertTab(index, fullURL, title);
 			LinkStore.insertLinkVisited(fullURL);
-			bpanel.getScroll().getViewport().add(tabbedPane);
+			bpanel.getScroll().getViewport().add((Component)tabbedPane);
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -708,7 +693,7 @@ public class HtmlRendererContext {
 	public void openImageViewer(String fullURL, InputStream stream) {
 		try {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+			final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
 			final BufferedImage img = ImageIO.read(stream);
 			final ImageViewer viewer = new ImageViewer(img);
@@ -718,7 +703,7 @@ public class HtmlRendererContext {
 			jPanel.add(viewer.getComponent());
 			browserFrame.getToolbar().getAddressBar().setText(fullURL);
 			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
-			bpanel.getScroll().getViewport().add(tabbedPane);
+			bpanel.getScroll().getViewport().add((Component)tabbedPane);
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -973,7 +958,7 @@ public class HtmlRendererContext {
 
 		try {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+			final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 			final int indexPanel = tabbedPane.getSelectedIndex();
 			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
 			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, action.toString());
@@ -982,7 +967,7 @@ public class HtmlRendererContext {
 			tabbedPane.remove(indexPanel);
 			tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
 			browserFrame.getToolbar().getAddressBar().setText(action.toString());
-			bpanel.getScroll().getViewport().add(tabbedPane);
+			bpanel.getScroll().getViewport().add((Component)tabbedPane);
 			submitFormSync(method, action, target, enctype, formInputs);
 		} catch (final Exception err) {
 			error("navigate(): Error loading or parsing request.", err);

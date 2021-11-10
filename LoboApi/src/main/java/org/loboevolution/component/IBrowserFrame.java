@@ -22,9 +22,6 @@ package org.loboevolution.component;
 
 /**
  * <p>IBrowserFrame interface.</p>
- *
- *
- *
  */
 public interface IBrowserFrame {
 	

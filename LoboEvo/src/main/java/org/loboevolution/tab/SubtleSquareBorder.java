@@ -27,6 +27,9 @@ import java.awt.Insets;
 
 import javax.swing.border.Border;
 
+/**
+ * <p>SubtleSquareBorder class.</p>
+ */
 class SubtleSquareBorder implements Border {
 
 	protected final Color m_bottomColor = Color.gray;

@@ -32,6 +32,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/**
+ * <p>GlassPane class.</p>
+ */
 class GlassPane extends JPanel {
 
 	private static final long serialVersionUID = 1L;

@@ -24,15 +24,10 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import org.loboevolution.tab.DnDTabbedPane;
-import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.welcome.WelcomePanel;
 
 /**
  * <p>HomeAction class.</p>
- *
- *
- *
  */
 public class HomeAction extends AbstractAction {
 
@@ -54,8 +49,8 @@ public class HomeAction extends AbstractAction {
 	public void actionPerformed(ActionEvent evt) {
 		final int indexPanel = this.panel.getTabbedPane().getSelectedIndex();
 		this.panel.getTabbedPane().remove(indexPanel);
-		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
+		final ITabbedPane tabbedPane = panel.getTabbedPane();
+		tabbedPane.setComponentPopupMenu(this.panel);
 		tabbedPane.insertTab("Welcome", null, new WelcomePanel(panel), "Welcome", indexPanel);
 		tabbedPane.setSelectedIndex(indexPanel);
 	}

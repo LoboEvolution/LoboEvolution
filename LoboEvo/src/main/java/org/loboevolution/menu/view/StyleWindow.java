@@ -25,12 +25,11 @@ import com.jtattoo.plaf.lobo.LoboPanel;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
+import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.store.StyleStore;
-import org.loboevolution.tab.DnDTabbedPane;
-import org.loboevolution.tab.TabbedPanePopupMenu;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -40,9 +39,6 @@ import java.util.List;
 
 /**
  * <p>StyleWindow class.</p>
- *
- *
- *
  */
 public class StyleWindow extends JFrame {
 
@@ -85,8 +81,8 @@ public class StyleWindow extends JFrame {
 				style.selectStyle(buttonModel.getActionCommand());
 
 				final IBrowserPanel panel = frame.getPanel();
-				final DnDTabbedPane tabbedPane = panel.getTabbedPane();
-				tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
+				final ITabbedPane tabbedPane = panel.getTabbedPane();
+				tabbedPane.setComponentPopupMenu(panel);
 				final int indexPanel = tabbedPane.getSelectedIndex();
 				HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, fullURL);
 				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
@@ -94,7 +90,7 @@ public class StyleWindow extends JFrame {
 				tabbedPane.remove(indexPanel);
 				tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
 				NavigationManager.insertHistory(fullURL, title, indexPanel);
-				panel.getScroll().getViewport().add(tabbedPane);
+				panel.getScroll().getViewport().add((Component) tabbedPane);
 
 				dispose();
 				setVisible(false);

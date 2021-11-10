@@ -27,9 +27,6 @@ import java.io.IOException;
 
 /**
  * <p>TransferableImpl class.</p>
- *
- *
- *
  */
 public class TransferableImpl implements Transferable {
 

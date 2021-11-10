@@ -24,9 +24,6 @@ import javax.swing.JTextField;
 
 /**
  * <p>IToolBar interface.</p>
- *
- *
- *
  */
 public interface IToolBar {
 	

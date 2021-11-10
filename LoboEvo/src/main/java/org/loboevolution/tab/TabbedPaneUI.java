@@ -34,9 +34,6 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 /**
  * <p>TabbedPaneUI class.</p>
- *
- *
- *
  */
 public class TabbedPaneUI extends BasicTabbedPaneUI {
 

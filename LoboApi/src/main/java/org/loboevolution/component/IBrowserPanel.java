@@ -22,22 +22,17 @@ package org.loboevolution.component;
 
 import javax.swing.JScrollPane;
 
-import org.loboevolution.tab.DnDTabbedPane;
-
 /**
  * <p>IBrowserPanel interface.</p>
- *
- *
- *
  */
 public interface IBrowserPanel {
 	
 	/**
 	 * <p>getTabbedPane.</p>
 	 *
-	 * @return a {@link org.loboevolution.tab.DnDTabbedPane} object.
+	 * @return a {@link org.loboevolution.component.ITabbedPane} object.
 	 */
-	DnDTabbedPane getTabbedPane();
+	ITabbedPane getTabbedPane();
 	
 	/**
 	 * <p>getScroll.</p>

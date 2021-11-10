@@ -23,16 +23,16 @@ package org.loboevolution.tab;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserPanel;
 import org.loboevolution.component.IBrowserFrame;
+import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.store.TabStore;
 
+import java.awt.*;
+
 /**
  * <p>TabbedHtml class.</p>
- *
- *
- *
  */
 public class TabbedHtml {
 
@@ -44,7 +44,7 @@ public class TabbedHtml {
 	 * @param index a int.
 	 */
 	public void tab(BrowserPanel panel, String url, int index) {
-		final DnDTabbedPane tabbedPane = panel.getTabbedPane();
+		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(panel, url);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
@@ -55,6 +55,6 @@ public class TabbedHtml {
 		browserFrame.getToolbar().getAddressBar().setText(url);
 		TabStore.insertTab(index, url, title);
 		NavigationManager.insertHistory(url, title, index);
-		panel.getScroll().getViewport().add(tabbedPane);
+		panel.getScroll().getViewport().add((Component) tabbedPane);
 	}
 }

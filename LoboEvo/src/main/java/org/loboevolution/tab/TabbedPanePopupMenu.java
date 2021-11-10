@@ -35,9 +35,6 @@ import org.loboevolution.store.WebStore;
 
 /**
  * <p>TabbedPanePopupMenu class.</p>
- *
- *
- *
  */
 public class TabbedPanePopupMenu extends JPopupMenu {
 
@@ -134,7 +131,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 		TabStore.insertTab(index, "");
 		IBrowserFrame browserFrame = panel.getBrowserFrame();
 		browserFrame.getToolbar().getAddressBar().setText("");
-		panel.getScroll().getViewport().add(tabbedPane);
+		panel.getScroll().getViewport().add((Component) tabbedPane);
 	}
 	
 	private void closeTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
@@ -155,7 +152,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 				browserFrame.getToolbar().getAddressBar().setText(tabInfo.getUrl());
 			}
 		}
-		panel.getScroll().getViewport().add(tabbedPane);
+		panel.getScroll().getViewport().add((Component) tabbedPane);
 	}
 	
 	
@@ -184,7 +181,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 			}
 
 		}
-		panel.getScroll().getViewport().add(tabbedPane);
+		panel.getScroll().getViewport().add((Component) tabbedPane);
 	}
 	
 }

@@ -27,6 +27,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 
+/**
+ * <p>OuterFrame class.</p>
+ */
 class OuterFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 

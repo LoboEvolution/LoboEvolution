@@ -20,29 +20,21 @@
 
 package org.loboevolution.tab;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragSource;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetListener;
-
-import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeListener;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
+import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.store.TabStore;
+
+import javax.swing.*;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.dnd.*;
 
 /**
  * <p>DnDTabbedPane class.</p>
- *
- *
- *
  */
-public class DnDTabbedPane extends JTabbedPane {
+public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 
 	private static final long serialVersionUID = 1L;
 
@@ -52,8 +44,6 @@ public class DnDTabbedPane extends JTabbedPane {
 
 	private final DropTargetListener dropTargetListener = new DropTargetListenerImpl(this);
 
-	private GlassPane glass;
-	
 	private IBrowserPanel browserPanel;
 
 	private int index;
@@ -91,7 +81,7 @@ public class DnDTabbedPane extends JTabbedPane {
 	 * @return the glass
 	 */
 	protected GlassPane getGlass() {
-		return this.glass == null ? new GlassPane(this) : this.glass;
+		return new GlassPane(this);
 	}
 
 	/**
@@ -136,5 +126,20 @@ public class DnDTabbedPane extends JTabbedPane {
 	 */
 	public IBrowserPanel getBrowserPanel() {
 		return browserPanel;
+	}
+
+	@Override
+	public void setComponentPopupMenu(final IBrowserPanel panel) {
+		super.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
+	}
+
+	@Override
+	public void insertTab(
+			final String title,
+			final Icon icon,
+			final Component component,
+			final String tip,
+			final int index) {
+		super.insertTab(title, icon, component, tip, index);
 	}
 }

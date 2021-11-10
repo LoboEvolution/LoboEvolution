@@ -33,9 +33,6 @@ import java.awt.event.KeyEvent;
 
 /**
  * <p>DragSourceAdapterImpl class.</p>
- *
- *
- *
  */
 public class DragSourceAdapterImpl extends DragSourceAdapter {
 

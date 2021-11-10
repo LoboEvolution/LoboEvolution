@@ -20,6 +20,7 @@
 
 package org.loboevolution.component;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -38,14 +39,9 @@ import org.loboevolution.http.NavigationManager;
 import org.loboevolution.img.ImageViewer;
 import org.loboevolution.pdf.PDFViewer;
 import org.loboevolution.store.TabStore;
-import org.loboevolution.tab.DnDTabbedPane;
-import org.loboevolution.tab.TabbedPanePopupMenu;
 
 /**
  * <p>GoAction class.</p>
- *
- *
- *
  */
 public class GoAction extends AbstractAction {
 
@@ -93,8 +89,8 @@ public class GoAction extends AbstractAction {
 	}
 
 	private void goURL(String text) {
-		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
+		final ITabbedPane tabbedPane = panel.getTabbedPane();
+		tabbedPane.setComponentPopupMenu(this.panel);
 		final int indexPanel = tabbedPane.getSelectedIndex();
 		final HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, text);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
@@ -102,7 +98,7 @@ public class GoAction extends AbstractAction {
 		tabbedPane.remove(indexPanel);
 		tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
 		this.addressBar.setText(text);
-		panel.getScroll().getViewport().add(tabbedPane);
+		panel.getScroll().getViewport().add((Component) tabbedPane);
 
 		TabStore.deleteTab(indexPanel);
 		TabStore.insertTab(indexPanel, text, title);
@@ -113,7 +109,7 @@ public class GoAction extends AbstractAction {
 	}
 
 	private void goUrlImage(BufferedImage img, String fullURL) {
-		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
+		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		final ImageViewer viewer = new ImageViewer(img);
 		final String title = "Image Viewer";
 		final int indexPanel = tabbedPane.getSelectedIndex();
@@ -122,7 +118,7 @@ public class GoAction extends AbstractAction {
 		tabbedPane.remove(indexPanel);
 		tabbedPane.insertTab(title, null, viewer.getComponent(), title, indexPanel);
 		this.addressBar.setText(fullURL);
-		panel.getScroll().getViewport().add(tabbedPane);
+		panel.getScroll().getViewport().add((Component) tabbedPane);
 		TabStore.deleteTab(indexPanel);
 		TabStore.insertTab(indexPanel, fullURL, title);
 		addressBar.removeAll();

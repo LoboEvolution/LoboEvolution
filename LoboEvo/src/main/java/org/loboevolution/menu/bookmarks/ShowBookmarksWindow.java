@@ -35,14 +35,13 @@ import javax.swing.SwingConstants;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.BrowserPanel;
+import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.BookmarksStore;
 import org.loboevolution.store.TabStore;
-import org.loboevolution.tab.DnDTabbedPane;
-import org.loboevolution.tab.TabbedPanePopupMenu;
 
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLabel;
@@ -53,9 +52,6 @@ import com.jtattoo.plaf.lobo.LoboTextField;
 
 /**
  * <p>ShowBookmarksWindow class.</p>
- *
- *
- *
  */
 public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 
@@ -308,11 +304,11 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 				go.addActionListener(e -> {
 					final BrowserPanel panel = frame.getPanel();
 					final int indexPanel = panel.getTabbedPane().getIndex() + 1;
-					final DnDTabbedPane tabbedPane = panel.getTabbedPane();
+					final ITabbedPane tabbedPane = panel.getTabbedPane();
 					HtmlPanel hpanel = HtmlPanel.createHtmlPanel(panel, url);
 					final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 					String htmlTitle = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
-					tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
+					tabbedPane.setComponentPopupMenu(panel);
 					tabbedPane.insertTab(htmlTitle, null, hpanel, htmlTitle, indexPanel);
 					tabbedPane.setSelectedIndex(indexPanel);
 					TabStore.insertTab(indexPanel, url, htmlTitle);

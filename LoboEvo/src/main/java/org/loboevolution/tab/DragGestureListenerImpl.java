@@ -36,9 +36,6 @@ import javax.swing.SwingUtilities;
 
 /**
  * <p>DragGestureListenerImpl class.</p>
- *
- *
- *
  */
 public class DragGestureListenerImpl implements DragGestureListener {
 	

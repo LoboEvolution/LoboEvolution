@@ -25,9 +25,6 @@ import java.net.URL;
 
 /**
  * <p>IDownload interface.</p>
- *
- *
- *
  */
 public interface IDownload {
 

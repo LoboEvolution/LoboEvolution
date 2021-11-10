@@ -35,9 +35,6 @@ import org.loboevolution.store.TabStore;
 
 /**
  * <p>DropTargetListenerImpl class.</p>
- *
- *
- *
  */
 public class DropTargetListenerImpl extends DropTargetAdapter {
 
