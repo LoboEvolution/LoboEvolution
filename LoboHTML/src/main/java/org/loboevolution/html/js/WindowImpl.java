@@ -259,7 +259,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	@Override
 	public void alert(final String message) {
 		if (this.rcontext != null) {
-			if (this.rcontext.isTest()) {
+			if (this.rcontext.isTestEnabled()) {
 				if (msg == null) msg = new ArrayList<>();
 				msg.add(message);
 			} else {

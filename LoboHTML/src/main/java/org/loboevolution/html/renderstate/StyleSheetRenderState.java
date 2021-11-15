@@ -61,9 +61,7 @@ public class StyleSheetRenderState implements RenderState {
 	private static final Logger logger = Logger.getLogger(StyleSheetRenderState.class.getName());
 	
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
-	
-	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
-	
+
 	/** Constant INVALID_BACKGROUND_INFO */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = BackgroundInfo.builder().build();
 	
@@ -560,6 +558,7 @@ public class StyleSheetRenderState implements RenderState {
 	public Font getFont() {
 		AbstractCSSProperties style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
+		FontKey key = FontValues.getDefaultFontKey();
 
 		if (this.iFont != null) {
 			return this.iFont;
@@ -570,12 +569,11 @@ public class StyleSheetRenderState implements RenderState {
 				this.iFont = prs.getFont();
 				return this.iFont;
 			}
-			this.iFont = DEFAULT_FONT;
-			return DEFAULT_FONT;
+			this.iFont = FONT_FACTORY.getFont(key);
+			return this.iFont;
 		}
 
 		HTMLDocumentImpl document = this.document;
-		FontKey key = new FontKey();
 		key.setFontFamily(FontValues.getFontFamily(style.getFontFamily(), prs));
 		key.setFontStyle(FontValues.getFontStyle(style.getFontStyle()));
 		key.setFontVariant(style.getFontVariant());

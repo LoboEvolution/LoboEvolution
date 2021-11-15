@@ -41,9 +41,6 @@ public final class FontFactory {
 	/** The font map. */
 	private final Map<FontKey, Font> fontMap = new HashMap<>();
 
-	/** The registered fonts. */
-	private final Map<String, Font> registeredFonts = new HashMap<>();
-
 	/** The Constant instance. */
 	private static final FontFactory instance = new FontFactory();
 
@@ -152,17 +149,13 @@ public final class FontFactory {
 		final int letterSpacing = key.getLetterSpacing();
 		String matchingFace = null;
 		final Set<String> fontFamilies = this.fontFamilies;
-		final Map<String, Font> registeredFonts = this.registeredFonts;
 		Font baseFont = null;
 		if (fontNames != null) {
 			final StringTokenizer tok = new StringTokenizer(fontNames, ",");
 			while (tok.hasMoreTokens()) {
 				final String face = Strings.unquoteSingle(tok.nextToken().trim());
 				final String faceTL = face.toLowerCase();
-				if (registeredFonts.containsKey(faceTL)) {
-					baseFont = registeredFonts.get(faceTL);
-					break;
-				} else if (fontFamilies.contains(faceTL)) {
+				if (fontFamilies.contains(faceTL)) {
 					matchingFace = faceTL;
 					break;
 				} else if ("monospace".equals(faceTL)) {
@@ -210,8 +203,7 @@ public final class FontFactory {
 				}
 			}
 		}
-		String defaultFontName = new LAFSettings().getInstance().getFont();
-		return createFont(defaultFontName, fontStyle, Math.round(key.getFontSize())).deriveFont(attributes);
+		return createFont(key.getFont(), fontStyle, Math.round(key.getFontSize())).deriveFont(attributes);
 	}
 
 	private Map<TextAttribute, Object> getBoldAttributes(String fontWeight){

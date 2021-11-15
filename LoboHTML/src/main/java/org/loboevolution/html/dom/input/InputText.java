@@ -37,6 +37,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.input.Autocomplete;
@@ -45,7 +46,6 @@ import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderer.HtmlController;
-import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.store.InputStore;
 
 /**

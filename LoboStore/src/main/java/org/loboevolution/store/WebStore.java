@@ -31,15 +31,14 @@ import java.util.logging.Logger;
 
 /**
  * <p>WebStore class.</p>
- *
- *
- *
  */
 public class WebStore {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(WebStore.class.getName());
-	
+
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 	
 	/**
 	 * <p>getValue.</p>
@@ -50,7 +49,7 @@ public class WebStore {
 	 */
 	public static String getValue(String key, int index) {
 		String name = null;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_VALUE)) {
 			pstmt.setString(1, key);
 			pstmt.setInt(2, index);
@@ -73,7 +72,7 @@ public class WebStore {
 	 */
 	public static Map<String, String> getMapStorage(int index) {
 		Map<String, String> map = new HashMap<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_MAP)) {
 			pstmt.setInt(1, index);
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -96,7 +95,7 @@ public class WebStore {
 	 * @param tabIndex a int.
 	 */
 	public static void insertStorage(String name, String value, int session, int tabIndex) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE)) {
 			pstmt.setString(1, name);
 			pstmt.setString(2, value);
@@ -116,7 +115,7 @@ public class WebStore {
 	 * @param index int object.
 	 */
 	public static void deleteStorage(String name, int session, int index) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_DELETE_KEY)) {
 			pstmt.setString(1, name);
 			pstmt.setInt(2, session);
@@ -134,7 +133,7 @@ public class WebStore {
 	 * @param index int object.
 	 */
 	public static void deleteStorage(int session, int index) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_WEBSTORAGE)) {
 			pstmt.setInt(1, session);
 			pstmt.setInt(2, index);
@@ -148,7 +147,7 @@ public class WebStore {
 	 * <p>deleteSessionStorage.</p>
 	 */
 	public static void deleteSessionStorage() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_ALL_WEBSTORAGE)) {
 			pstmt.setInt(1, 1);
 			pstmt.executeUpdate();
@@ -165,7 +164,7 @@ public class WebStore {
 	 */
 	public static int countStorage(int index) {
 		int check = 0;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_SIZE)) {
 			pstmt.setInt(1, index);
 			try (ResultSet rs = pstmt.executeQuery()) {

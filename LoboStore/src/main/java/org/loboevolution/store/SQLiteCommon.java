@@ -20,13 +20,8 @@
 
 package org.loboevolution.store;
 
-import java.io.File;
-
 /**
  * <p>SQLiteCommon class.</p>
- *
- *
- *
  */
 public class SQLiteCommon {
 
@@ -92,57 +87,5 @@ public class SQLiteCommon {
 	
 	 /** Constant WEBSTORAGE_SIZE="SELECT COUNT(*) FROM LINK_VISITED WHERE"{trunked} */
     public static final String WEBSTORAGE_SIZE = "SELECT COUNT(*) FROM WEB_STORAGE WHERE TABINDEX = ?";
-    
-	/** The Constant SETTINGS_DIR. */
-	public static final String JDBC_SQLITE = "jdbc:sqlite:";
 
-	/** The Constant LOBO_DB. */
-	private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE.sqlite";
-
-	/**
-	 * <p>createDatabaseDirectory.</p>
-	 */
-	public static void createDatabaseDirectory() {
-		final File homeDir = new File(System.getProperty("user.home"));
-		final File storeDir = new File(homeDir, "lobo");
-		final File store = new File(storeDir, "store");
-		store.mkdirs();
-	}
-
-	/**
-	 * <p>getCacheStore.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public static String getCacheStore() {
-		final File homeDir = new File(System.getProperty("user.home"));
-		final File storeDir = new File(homeDir, ".lobo");
-		final File store = new File(storeDir, "cache");
-		return store.getPath();
-	}
-
-	/**
-	 * <p>getDatabaseDirectory.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public static String getDatabaseDirectory() {
-		final File homeDir = new File(System.getProperty("user.home"));
-		final File storeDir = new File(homeDir, "lobo");
-		final File store = new File(storeDir, "store");
-		new File(JDBC_SQLITE + store + "\\" + LOBO_DB);
-		return JDBC_SQLITE + store + "\\" + LOBO_DB;
-	}
-
-	/**
-	 * <p>getDatabaseStore.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public static String getDatabaseStore() {
-		final File homeDir = new File(System.getProperty("user.home"));
-		final File storeDir = new File(homeDir, "lobo");
-		final File store = new File(storeDir, "store");
-		return store + "\\" + LOBO_DB;
-	}
 }

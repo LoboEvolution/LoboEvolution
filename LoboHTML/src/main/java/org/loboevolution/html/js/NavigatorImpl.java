@@ -24,6 +24,7 @@ import org.loboevolution.html.js.geolocation.Geolocation;
 import org.loboevolution.html.node.js.Navigator;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.UserAgent;
 
 /**
  * <p>Navigator class.</p>
@@ -110,7 +111,7 @@ public class NavigatorImpl extends AbstractScriptableDelegate implements Navigat
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getUserAgent() {
-		return HttpNetwork.getUserAgentValue();
+		return UserAgent.getUserAgent();
 	}
 
 	/** {@inheritDoc} */

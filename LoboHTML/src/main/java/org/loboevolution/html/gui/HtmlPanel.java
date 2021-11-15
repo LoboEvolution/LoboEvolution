@@ -62,6 +62,7 @@ import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.net.UserAgent;
 import org.xml.sax.InputSource;
 
 /**
@@ -72,9 +73,6 @@ import org.xml.sax.InputSource;
  * <p>
  * Invoke method {@link #setDocument(Document, HtmlRendererContext)} in order to
  * schedule a document for rendering.
- *
- *
- *
  */
 public class HtmlPanel extends JComponent implements FrameContext {
 	
@@ -629,7 +627,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		try {
 			final URL url = new URL(uri);
 			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 
 			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 					Reader reader = new InputStreamReader(in, "utf-8")) {

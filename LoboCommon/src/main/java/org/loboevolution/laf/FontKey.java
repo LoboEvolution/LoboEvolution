@@ -23,67 +23,62 @@ package org.loboevolution.laf;
 import java.util.Locale;
 import java.util.Set;
 
+import lombok.*;
 import org.loboevolution.common.Objects;
 
 /**
  * The Class FontKey.
  */
+@Data
+@Builder
 public class FontKey {
 
 	/** The cached hash. */
 	private int cachedHash = -1;
 
 	/** The font family. */
-	private String fontFamily;
+	@Builder.Default
+	private String fontFamily = "Times New Roman";
 
 	/** The font size. */
-	private float fontSize;
+	@Builder.Default
+	private float fontSize = 16.0F;
 
 	/** The font style. */
-	private String fontStyle;
+	@Builder.Default
+	private String fontStyle = null;
 
 	/** The font variant. */
-	private String fontVariant;
+	@Builder.Default
+	private String fontVariant = null;
 
 	/** The font weight. */
-	private String fontWeight;
+	@Builder.Default
+	private String fontWeight = null;
 
 	/** The letterSpacing. */
-	private Integer letterSpacing;
+	@Builder.Default
+	private Integer letterSpacing = 0;
 
 	/** The locales. */
-	private Set<Locale> locales;
+	@Builder.Default
+	private Set<Locale> locales = null;
 
 	/** The strikethrough. */
-	private Boolean strikethrough;
+	@Builder.Default
+	private Boolean strikethrough = null;
 
 	/** The superscript. */
-	private Integer superscript;
+	@Builder.Default
+	private Integer superscript = null;
 
 	/** The underline. */
-	private Integer underline;
+	@Builder.Default
+	private Integer underline = null;
 
-	/**
-	 * <p>Constructor for FontKey.</p>
-	 */
-	public FontKey() {
-		this.fontFamily = "Times New Roman";
-		this.fontStyle = null;
-		this.fontVariant = null;
-		this.fontWeight = null;
-		this.fontSize = new LAFSettings().getInstance().getFontSize();
-		this.locales = null;
-		this.superscript = null;
-		this.letterSpacing = 0;
-		this.strikethrough = false;
-		this.underline = null;
-	}
+	/** The font. */
+	private String font;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object other) {
@@ -96,117 +91,16 @@ public class FontKey {
 		} else {
 			return false;
 		}
-		// Note that we use String.intern() for all string fields,
-		// so we can do instance comparisons.
-		return this.fontSize == ors.fontSize && this.fontFamily == ors.fontFamily && this.fontStyle == ors.fontStyle
-				&& this.fontWeight == ors.fontWeight && this.fontVariant == ors.fontVariant
-				&& this.superscript == ors.superscript && Objects.equals(this.locales, ors.locales);
+
+		return this.fontSize == ors.fontSize &&
+				Objects.equals(this.fontFamily, ors.fontFamily) &&
+				Objects.equals(this.fontStyle, ors.fontStyle) &&
+				Objects.equals(this.fontWeight, ors.fontWeight) &&
+				Objects.equals(this.fontVariant, ors.fontVariant) &&
+				Objects.equals(this.superscript, ors.superscript) &&
+				Objects.equals(this.locales, ors.locales);
 	}
 
-	/**
-	 * <p>Getter for the field cachedHash.</p>
-	 *
-	 * @return the cachedHash
-	 */
-	public int getCachedHash() {
-		return this.cachedHash;
-	}
-
-	/**
-	 * <p>Getter for the field fontFamily.</p>
-	 *
-	 * @return the fontFamily
-	 */
-	public String getFontFamily() {
-		return this.fontFamily;
-	}
-
-	/**
-	 * <p>Getter for the field fontSize.</p>
-	 *
-	 * @return the fontSize
-	 */
-	public float getFontSize() {
-		return this.fontSize;
-	}
-
-	/**
-	 * <p>Getter for the field fontStyle.</p>
-	 *
-	 * @return the fontStyle
-	 */
-	public String getFontStyle() {
-		return this.fontStyle;
-	}
-
-	/**
-	 * <p>Getter for the field fontVariant.</p>
-	 *
-	 * @return the fontVariant
-	 */
-	public String getFontVariant() {
-		return this.fontVariant;
-	}
-
-	/**
-	 * <p>Getter for the field fontWeight.</p>
-	 *
-	 * @return the fontWeight
-	 */
-	public String getFontWeight() {
-		return this.fontWeight;
-	}
-
-	/**
-	 * <p>Getter for the field letterSpacing.</p>
-	 *
-	 * @return the letterSpacing
-	 */
-	public Integer getLetterSpacing() {
-		return this.letterSpacing;
-	}
-
-	/**
-	 * <p>Getter for the field locales.</p>
-	 *
-	 * @return the locales
-	 */
-	public Set<Locale> getLocales() {
-		return this.locales;
-	}
-
-	/**
-	 * <p>Getter for the field strikethrough.</p>
-	 *
-	 * @return the strikethrough
-	 */
-	public Boolean getStrikethrough() {
-		return this.strikethrough;
-	}
-
-	/**
-	 * <p>Getter for the field superscript.</p>
-	 *
-	 * @return the superscript
-	 */
-	public Integer getSuperscript() {
-		return this.superscript;
-	}
-
-	/**
-	 * <p>Getter for the field underline.</p>
-	 *
-	 * @return the underline
-	 */
-	public Integer getUnderline() {
-		return this.underline;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
@@ -233,110 +127,6 @@ public class FontKey {
 		return ch;
 	}
 
-	/**
-	 * <p>Setter for the field cachedHash.</p>
-	 *
-	 * @param cachedHash the cachedHash to set
-	 */
-	public void setCachedHash(int cachedHash) {
-		this.cachedHash = cachedHash;
-	}
-
-	/**
-	 * <p>Setter for the field fontFamily.</p>
-	 *
-	 * @param fontFamily the fontFamily to set
-	 */
-	public void setFontFamily(String fontFamily) {
-		this.fontFamily = fontFamily;
-	}
-
-	/**
-	 * <p>Setter for the field fontSize.</p>
-	 *
-	 * @param fontSize the fontSize to set
-	 */
-	public void setFontSize(float fontSize) {
-		this.fontSize = fontSize;
-	}
-
-	/**
-	 * <p>Setter for the field fontStyle.</p>
-	 *
-	 * @param fontStyle the fontStyle to set
-	 */
-	public void setFontStyle(String fontStyle) {
-		this.fontStyle = fontStyle;
-	}
-
-	/**
-	 * <p>Setter for the field fontVariant.</p>
-	 *
-	 * @param fontVariant the fontVariant to set
-	 */
-	public void setFontVariant(String fontVariant) {
-		this.fontVariant = fontVariant;
-	}
-
-	/**
-	 * <p>Setter for the field fontWeight.</p>
-	 *
-	 * @param fontWeight the fontWeight to set
-	 */
-	public void setFontWeight(String fontWeight) {
-		this.fontWeight = fontWeight;
-	}
-
-	/**
-	 * <p>Setter for the field letterSpacing.</p>
-	 *
-	 * @param letterSpacing the letterSpacing to set
-	 */
-	public void setLetterSpacing(Integer letterSpacing) {
-		this.letterSpacing = letterSpacing;
-	}
-
-	/**
-	 * <p>Setter for the field locales.</p>
-	 *
-	 * @param locales the locales to set
-	 */
-	public void setLocales(Set<Locale> locales) {
-		this.locales = locales;
-	}
-
-	/**
-	 * <p>Setter for the field strikethrough.</p>
-	 *
-	 * @param strikethrough the strikethrough to set
-	 */
-	public void setStrikethrough(Boolean strikethrough) {
-		this.strikethrough = strikethrough;
-	}
-
-	/**
-	 * <p>Setter for the field superscript.</p>
-	 *
-	 * @param superscript the superscript to set
-	 */
-	public void setSuperscript(Integer superscript) {
-		this.superscript = superscript;
-	}
-
-	/**
-	 * <p>Setter for the field underline.</p>
-	 *
-	 * @param underline the underline to set
-	 */
-	public void setUnderline(Integer underline) {
-		this.underline = underline;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

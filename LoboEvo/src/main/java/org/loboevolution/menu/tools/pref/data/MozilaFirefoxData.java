@@ -25,7 +25,7 @@ import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.info.CookieInfo;
 import org.loboevolution.store.BookmarksStore;
 import org.loboevolution.store.NavigationStore;
-import org.loboevolution.store.SQLiteCommon;
+import org.loboevolution.store.DatabseSQLite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,14 +39,14 @@ import java.util.logging.Logger;
 
 /**
  * <p>MozilaFirefoxData class.</p>
- *
- *
- *
  */
 public class MozilaFirefoxData extends BrowserData {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(MozilaFirefoxData.class.getName());
+
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 
 	private static final String MOZ_BOOKMARKS = "SELECT DISTINCT places.url, book.title, places.description FROM moz_bookmarks book, moz_places places WHERE book.fk = places.id AND instr(places.url, 'http') > 0";
 
@@ -56,7 +56,7 @@ public class MozilaFirefoxData extends BrowserData {
 
 	private static List<BookmarkInfo> getBookmarkInfo(String path) {
 		final List<BookmarkInfo> bookmarks = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
+		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(MOZ_BOOKMARKS);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
@@ -74,7 +74,7 @@ public class MozilaFirefoxData extends BrowserData {
 
 	private static List<CookieInfo> getCookieInfo(String path) {
 		final List<CookieInfo> cookies = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
+		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(MOZ_COOKIES);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
@@ -96,7 +96,7 @@ public class MozilaFirefoxData extends BrowserData {
 
 	private static List<BookmarkInfo> getHostEntries(String path) {
 		final List<BookmarkInfo> hostEntries = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
+		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(MOZ_HISTORY);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {

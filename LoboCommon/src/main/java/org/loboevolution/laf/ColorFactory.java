@@ -21,32 +21,18 @@
 package org.loboevolution.laf;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.store.SQLiteCommon;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A factory for creating Color objects.
  */
 public final class ColorFactory {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ColorFactory.class.getName());
 
 	/** Constant TRANSPARENT */
 	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
-
-	/** Constant COLORS */
-	private final String COLORS = "SELECT DISTINCT name, value FROM COLOR";
 
 	/** The instance. */
 	private static ColorFactory instance;
@@ -83,7 +69,7 @@ public final class ColorFactory {
 	 */
 	private ColorFactory() {
 		synchronized (this) {
-			this.colorMap = mapColor();
+			this.colorMap = ColorMap.colorMap();
 		}
 	}
 
@@ -249,23 +235,6 @@ public final class ColorFactory {
 		double f = 1 - Math.min(Math.abs(factor), 1);
 		double inc = (factor > 0 ? 255 * (1 - f) : 0);
 		return new Color((int) (c.getRed() * f + inc), (int) (c.getGreen() * f + inc), (int) (c.getBlue() * f + inc));
-	}
-
-	private Map<String, Color> mapColor() {
-		final Map<String, Color> colorMap = new HashMap<>();
-		colorMap.put("transparent", new Color(0, 0, 0, 0));
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				Statement stmt = conn.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery(this.COLORS)) {
-				while (rs != null && rs.next()) {
-					int color = Integer.parseInt(rs.getString(2).replace("0x",""), 16);
-					colorMap.put(rs.getString(1), new Color(color));
-				}
-			}
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-		return colorMap;
 	}
 
 	private float parseAlpha(String alpha) {

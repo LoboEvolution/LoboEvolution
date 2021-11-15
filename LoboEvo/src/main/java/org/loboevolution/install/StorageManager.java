@@ -39,13 +39,11 @@ import javax.swing.SwingWorker;
 import org.loboevolution.common.Files;
 import org.loboevolution.common.Strings;
 import org.loboevolution.init.GuiInit;
+import org.loboevolution.store.DatabseSQLite;
 import org.loboevolution.store.SQLiteCommon;
 
 /**
  * <p>StorageManager class.</p>
- *
- *
- *
  */
 public class StorageManager extends SwingWorker<Void, Void> {
 	
@@ -73,7 +71,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 
 		try {
 
-			SQLiteCommon.createDatabaseDirectory();
+			DatabseSQLite.createDatabaseDirectory();
 			ClassLoader.getSystemClassLoader();
 			int count = 1;
 			for (final String name : getList()) {
@@ -115,19 +113,17 @@ public class StorageManager extends SwingWorker<Void, Void> {
 		final List<String> files = new ArrayList<>();
 		files.add(0, "table.sql");
 		files.add("char.sql");
-		files.add("color.sql");
 		files.add("font_size.sql");
 		files.add("font.sql");
 		files.add("network.sql");
 		files.add("searchEngine.sql");
 		files.add("size.sql");
-		files.add("userAgent.sql");
 		files.add("lookAndFeel.sql");
 		return files;
 	}
 
 	private void populateDatabse(File fl) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DatabseSQLite.getDatabaseDirectory());
 				Statement stmt = conn.createStatement()) {
 			String s = new String();
 			final StringBuilder sb = new StringBuilder();

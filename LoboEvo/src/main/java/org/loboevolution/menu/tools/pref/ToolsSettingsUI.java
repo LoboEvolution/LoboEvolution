@@ -30,6 +30,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.gui.ItemEditorFactory;
 import org.loboevolution.gui.SwingTasks;
+import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.menu.tools.pref.data.ImportDataAction;
 import org.loboevolution.menu.tools.pref.search.ItemListControl;
 import org.loboevolution.menu.tools.pref.search.SearchEngineEditor;
@@ -44,9 +45,6 @@ import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * The Class ToolsSettingsUI.
- *
- *
- *
  */
 public class ToolsSettingsUI extends AbstractSettingsUI {
 
@@ -78,7 +76,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 
 	/** The search engine list control. */
 	private ItemListControl<SearchEngineStore> searchEngineListControl;
-	
+
+	static final GeneralInfo genSettings = GeneralStore.getGeneralInfo();
 
 	/**
 	 * Instantiates a new tools settings ui.
@@ -169,7 +168,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 */
 	private void loadSettings() {
 		final ToolsStore settings = new ToolsStore();
-		final GeneralStore genSettings = GeneralStore.getNetwork();
 		if (genSettings.isNavigation()) {
 			this.searchEngineListControl.setItems(settings.getSearchEngines());
 		}
@@ -187,7 +185,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	@Override
 	public void save() {
 		final ToolsStore settings = new ToolsStore();
-		final GeneralStore genSettings = GeneralStore.getNetwork();
 		final Collection<SearchEngineStore> items = this.searchEngineListControl.getItems();
 		settings.deleteSearchEngine();
 		int i = 0;

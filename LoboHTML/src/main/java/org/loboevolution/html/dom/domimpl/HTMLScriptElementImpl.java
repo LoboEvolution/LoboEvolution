@@ -41,12 +41,12 @@ import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.UserAgent;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.UserDataHandler;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 
 /**
  * <p>HTMLScriptElementImpl class.</p>
@@ -172,7 +172,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
 					final URL u = new URL(scriptURI);
 					final URLConnection connection = u.openConnection();
-					connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 					try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 							Reader reader = new InputStreamReader(in, "utf-8")) {
 						BufferedReader br = new BufferedReader(reader);						

@@ -32,14 +32,14 @@ import java.util.logging.Logger;
 
 /**
  * <p>DownloadStore class.</p>
- *
- *
- *
  */
 public class DownloadStore {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(DownloadStore.class.getName());
+
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 
 	private final String DELETE_DOWNLOAD = "DELETE FROM DOWNLOAD";
 
@@ -53,7 +53,7 @@ public class DownloadStore {
 	 * @param uri a {@link java.lang.String} object.
 	 */
 	public void addAsRecent(String uri) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_DOWNLOAD)) {
 			pstmt.setString(1, new URL(uri).toExternalForm());
 			pstmt.executeUpdate();
@@ -66,7 +66,7 @@ public class DownloadStore {
 	 * <p>deleteDownload.</p>
 	 */
 	public void deleteDownload() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_DOWNLOAD)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -81,7 +81,7 @@ public class DownloadStore {
 	 */
 	public List<String> getDownload() {
 		final List<String> recent = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(DOWNLOAD_ORDERED)) {
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {

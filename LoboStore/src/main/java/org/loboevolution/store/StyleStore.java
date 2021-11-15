@@ -32,9 +32,6 @@ import java.util.logging.Logger;
 
 /**
  * <p>StyleStore class.</p>
- *
- *
- *
  */
 public class StyleStore implements Serializable {
 
@@ -42,6 +39,9 @@ public class StyleStore implements Serializable {
 
     /** The Constant logger. */
     private static final Logger logger = Logger.getLogger(StyleStore.class.getName());
+
+    /** The Constant DB_PATH. */
+    private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 
     private final String DELETE_STYLE = "DELETE FROM STYLE";
 
@@ -66,7 +66,7 @@ public class StyleStore implements Serializable {
      */
     public List<String> getStyles(String href, String baseUrl) {
         final List<String> values = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+        try (Connection conn = DriverManager.getConnection(DB_PATH);
              PreparedStatement pstmt = conn.prepareStatement(this.STYLE)) {
             pstmt.setString(1, href);
             pstmt.setString(1, baseUrl);
@@ -87,7 +87,7 @@ public class StyleStore implements Serializable {
      * @param title a {@link java.lang.String} object.
      */
     public void selectStyle(String title) {
-        try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+        try (Connection conn = DriverManager.getConnection(DB_PATH);
              PreparedStatement pstmt = conn.prepareStatement(UPDATE_STYLE_ALL)) {
             pstmt.executeUpdate();
 
@@ -111,7 +111,7 @@ public class StyleStore implements Serializable {
      */
     public List<String> getStylesAll(String baseUrl) {
         final List<String> values = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+        try (Connection conn = DriverManager.getConnection(DB_PATH);
              PreparedStatement pstmt = conn.prepareStatement(this.STYLE_ALL)) {
             pstmt.setString(1, baseUrl);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -135,7 +135,7 @@ public class StyleStore implements Serializable {
      */
     public void insertStyle(String title, String href, String baseUrl, int enable) {
 
-        try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+        try (Connection conn = DriverManager.getConnection(DB_PATH);
              PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE_HREF)) {
             pstmt.setString(1, href);
             pstmt.setString(2, baseUrl);
@@ -161,7 +161,7 @@ public class StyleStore implements Serializable {
      * <p>deleteStyle.</p>
      */
     public void deleteStyle() {
-        try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+        try (Connection conn = DriverManager.getConnection(DB_PATH);
              PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE)) {
             pstmt.executeUpdate();
         } catch (final Exception e) {

@@ -31,6 +31,7 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.net.UserAgent;
 import org.xml.sax.InputSource;
 
 import java.awt.*;
@@ -49,9 +50,6 @@ import java.util.logging.Logger;
 
 /**
  * <p>LoboWebDriver class.</p>
- *
- *
- *
  */
 public class LoboWebDriver {
 	
@@ -93,7 +91,7 @@ public class LoboWebDriver {
 		try {
 			final URL url = new URL(uri);
 			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 
 			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 					Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
@@ -102,6 +100,7 @@ public class LoboWebDriver {
 				final UserAgentContext ucontext = new UserAgentContext();
 				final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
 				rendererContext.setTest(true);
+				ucontext.setUserAgentEnabled(true);
 				panel.setPreferredSize(new Dimension(800, 400));
 				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext);
 				final Document document = builder.parse(is);

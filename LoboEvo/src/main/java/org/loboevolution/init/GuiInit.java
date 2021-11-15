@@ -26,9 +26,10 @@ import java.util.Properties;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.install.ProgressBar;
-import org.loboevolution.laf.LAFSettings;
+import org.loboevolution.store.DatabseSQLite;
 import org.loboevolution.store.SQLiteCommon;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
@@ -46,9 +47,6 @@ import com.jtattoo.plaf.texture.TextureLookAndFeel;
 
 /**
  * <p>GuiInit class.</p>
- *
- *
- *
  */
 public class GuiInit {
 
@@ -143,8 +141,7 @@ public class GuiInit {
 	 * @throws java.lang.Exception if any.
 	 */
 	public void install() throws Exception {
-		final File f = new File(SQLiteCommon.getDatabaseStore());
-		if (!f.exists()) {
+		if (!DatabseSQLite.storeExist()) {
 			new ProgressBar();
 		} else {
 			createAndShowGui();

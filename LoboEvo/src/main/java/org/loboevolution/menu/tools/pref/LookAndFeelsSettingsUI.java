@@ -20,52 +20,27 @@
 
 package org.loboevolution.menu.tools.pref;
 
-import static java.awt.font.TextAttribute.FAMILY;
-import static java.awt.font.TextAttribute.POSTURE;
-import static java.awt.font.TextAttribute.POSTURE_OBLIQUE;
-import static java.awt.font.TextAttribute.SIZE;
-import static java.awt.font.TextAttribute.STRIKETHROUGH;
-import static java.awt.font.TextAttribute.STRIKETHROUGH_ON;
-import static java.awt.font.TextAttribute.SUPERSCRIPT;
-import static java.awt.font.TextAttribute.SUPERSCRIPT_SUB;
-import static java.awt.font.TextAttribute.SUPERSCRIPT_SUPER;
-import static java.awt.font.TextAttribute.UNDERLINE;
-import static java.awt.font.TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
-import static java.awt.font.TextAttribute.WEIGHT;
-import static java.awt.font.TextAttribute.WEIGHT_BOLD;
+import com.jtattoo.plaf.lobo.LoboCheckBox;
+import com.jtattoo.plaf.lobo.LoboPanel;
+import com.loboevolution.store.laf.LAFSettings;
+import org.loboevolution.gui.ColorComboBox;
+import org.loboevolution.gui.FontLabel;
+import org.loboevolution.gui.SwingTasks;
+import org.loboevolution.laf.FontType;
+import org.loboevolution.laf.LAFType;
+import org.loboevolution.store.LookAndFeelsStore;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import org.loboevolution.gui.ColorComboBox;
-import org.loboevolution.gui.FontLabel;
-import org.loboevolution.gui.SwingTasks;
-import org.loboevolution.laf.FontType;
-import org.loboevolution.laf.LAFSettings;
-import org.loboevolution.laf.LAFType;
-import org.loboevolution.store.LookAndFeelsStore;
-
-import com.jtattoo.plaf.lobo.LoboCheckBox;
-import com.jtattoo.plaf.lobo.LoboPanel;
+import static java.awt.font.TextAttribute.*;
 
 /**
  * The Class LookAndFeelsSettingsUI.
- *
- *
- *
  */
 public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
@@ -381,32 +356,33 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	/** {@inheritDoc} */
 	@Override
 	public void save() {
-		final LAFSettings laf = new LAFSettings();
-		laf.setAcryl(this.acrylCheckBox.isSelected());
-		laf.setAero(this.aeroCheckBox.isSelected());
-		laf.setAluminium(this.aluminiumCheckBox.isSelected());
-		laf.setBernstein(this.bernsteinCheckBox.isSelected());
-		laf.setFast(this.fastCheckBox.isSelected());
-		laf.setGraphite(this.graphiteCheckBox.isSelected());
-		laf.setHiFi(this.hiFiCheckBox.isSelected());
-		laf.setLuna(this.lunaCheckBox.isSelected());
-		laf.setMcWin(this.mcWinCheckBox.isSelected());
-		laf.setMint(this.mintCheckBox.isSelected());
-		laf.setNoire(this.noireCheckBox.isSelected());
-		laf.setSmart(this.smartCheckBox.isSelected());
-		laf.setTexture(this.textureCheckBox.isSelected());
-		laf.setSubscript(this.subscriptCheckBox.isSelected());
-		laf.setSuperscript(this.superscriptCheckBox.isSelected());
-		laf.setUnderline(this.underlineCheckBox.isSelected());
-		laf.setItalic(this.italicCheckBox.isSelected());
-		laf.setStrikethrough(this.strikethroughCheckBox.isSelected());
-		laf.setFontSize(Float.parseFloat(this.fontSizeList.getSelectedItem().toString()));
-		laf.setFont(this.fontList.getSelectedItem().toString());
-		laf.setColor((Color) this.colorComboBox.getSelectedItem());
-		laf.setBold(this.boldCheckBox.isSelected());
-		laf.setModern(modernCheckBox.isSelected());
-		laf.setBlackWhite(blackWhiteCheckBox.isSelected());
-		laf.setWhiteBlack(whiteBlackCheckBox.isSelected());
+
+		final LAFSettings laf = LAFSettings.builder().
+				acryl(this.acrylCheckBox.isSelected()).
+				aero(this.aeroCheckBox.isSelected()).
+				aluminium(this.aluminiumCheckBox.isSelected()).
+				bernstein(this.bernsteinCheckBox.isSelected()).
+				fast(this.fastCheckBox.isSelected()).
+				graphite(this.graphiteCheckBox.isSelected()).
+				hiFi(this.hiFiCheckBox.isSelected()).
+				luna(this.lunaCheckBox.isSelected()).
+				mcWin(this.mcWinCheckBox.isSelected()).
+				mint(this.mintCheckBox.isSelected()).
+				noire(this.noireCheckBox.isSelected()).
+				smart(this.smartCheckBox.isSelected()).
+				texture(this.textureCheckBox.isSelected()).
+				subscript(this.subscriptCheckBox.isSelected()).
+				superscript(this.superscriptCheckBox.isSelected()).
+				underline(this.underlineCheckBox.isSelected()).
+				italic(this.italicCheckBox.isSelected()).
+				strikethrough(this.strikethroughCheckBox.isSelected()).
+				fontSize(Float.parseFloat(this.fontSizeList.getSelectedItem().toString())).
+				font(this.fontList.getSelectedItem().toString()).
+				color((Color) this.colorComboBox.getSelectedItem()).
+				bold(this.boldCheckBox.isSelected()).
+				modern(modernCheckBox.isSelected()).
+				blackWhite(blackWhiteCheckBox.isSelected()).
+				whiteBlack(whiteBlackCheckBox.isSelected()).build();
 
 		if (validate(laf)) {
 			final LookAndFeelsStore sql = new LookAndFeelsStore();

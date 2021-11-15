@@ -28,9 +28,6 @@ import java.net.URLEncoder;
 
 /**
  * The Class SearchEngineStore.
- *
- *
- *
  */
 public class SearchEngineStore implements Serializable {
 

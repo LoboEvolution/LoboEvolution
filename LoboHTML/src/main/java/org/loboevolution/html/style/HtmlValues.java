@@ -22,14 +22,13 @@ package org.loboevolution.html.style;
 
 import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
+import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.FontFactory;
-import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.net.HttpNetwork;
 
 import java.awt.*;
@@ -186,7 +185,7 @@ public class HtmlValues {
                 return (int) Math.round(dpi * inches);
 			case "em":
 				final FontFactory FONT_FACTORY = FontFactory.getInstance();
-				final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
+				final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey());
 				final Font f = (renderState == null) ? DEFAULT_FONT : renderState.getFont();
 				final int fontSize = f.getSize();
 				final double pixelSize = fontSize * dpi / 96;

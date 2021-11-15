@@ -26,8 +26,8 @@ import org.loboevolution.http.CookieManager;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.info.CookieInfo;
 import org.loboevolution.store.BookmarksStore;
+import org.loboevolution.store.DatabseSQLite;
 import org.loboevolution.store.NavigationStore;
-import org.loboevolution.store.SQLiteCommon;
 
 import java.io.File;
 import java.sql.Connection;
@@ -87,7 +87,7 @@ public class GoogleChromeData extends BrowserData {
 
 	private static List<CookieInfo> getCookieInfo(String path) {
 		final List<CookieInfo> cookies = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
+		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(CHROME_COOKIES);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
@@ -109,9 +109,9 @@ public class GoogleChromeData extends BrowserData {
 
 	private static List<BookmarkInfo> getHostEntries(String path) {
 		final List<BookmarkInfo> hostEntries = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(CHROME_HISTORY);
-				ResultSet rs = pstmt.executeQuery()) {
+		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
+			 PreparedStatement pstmt = conn.prepareStatement(CHROME_HISTORY);
+			 ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				BookmarkInfo info = new BookmarkInfo();
 				info.setUrl(rs.getString(1));

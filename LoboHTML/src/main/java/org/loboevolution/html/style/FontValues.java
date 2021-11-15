@@ -20,11 +20,11 @@
 
 package org.loboevolution.html.style;
 
+import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFSettings;
 
 import java.awt.*;
 import java.awt.font.TextAttribute;
@@ -33,20 +33,33 @@ import java.awt.font.TextAttribute;
  * <p>FontValues class.</p>
  */
 public class FontValues extends HtmlValues {
+	
+	private static final LAFSettings laf = new LAFSettings().getInstance();
+
+	/**
+	 *  <p>getDefaultFontKey.</p>
+	 * @return a {@link org.loboevolution.laf.FontKey} object.
+	 */
+	public static FontKey getDefaultFontKey() {
+		return FontKey.builder().
+				font(laf.getFont()).
+				fontSize(laf.getFontSize()).
+				build();
+	}
+	
 	/**
 	 * <p>getFontFamily.</p>
 	 *
-	 * @param spec a {@link java.lang.String} object.
+	 * @param fontFamily a {@link java.lang.String} object.
 	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getFontFamily(String spec, RenderState parentRenderState) {
-		final String fontFamily = spec;
+	public static String getFontFamily(String fontFamily, RenderState parentRenderState) {
 		if (fontFamily == null) {
 			if (parentRenderState != null) {
 				return parentRenderState.getFont().getFamily();
 			} else {
-				return new FontKey().getFontFamily();
+				return FontKey.builder().build().getFontFamily();
 			}
 		}
 		return fontFamily;
@@ -61,7 +74,7 @@ public class FontValues extends HtmlValues {
 	 */
 	public static float getFontSize(String spec, Window window, RenderState parentRenderState) {
 
-		final float defaultSize = new LAFSettings().getInstance().getFontSize();
+		final float defaultSize = laf.getFontSize();
 
 		if (spec == null) {
 			return defaultSize;
@@ -90,7 +103,7 @@ public class FontValues extends HtmlValues {
 			return (int) Math.round(parentFontSize * value);
 		}  else if (specTL.endsWith("px") || specTL.endsWith("pt") || specTL.endsWith("pc")
 				|| specTL.endsWith("mm") || specTL.endsWith("ex")) {
-			final int pixelSize = getPixelSize(spec, parentRenderState, window, (int) new LAFSettings().getInstance().getFontSize());
+			final int pixelSize = getPixelSize(spec, parentRenderState, window, (int) laf.getFontSize());
 			final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			return pixelSize * 96 / dpi;
 		} else if (specTL.endsWith("%")) {
@@ -104,7 +117,7 @@ public class FontValues extends HtmlValues {
 			}
 		} else {
 
-			int parentFontSize = 0;
+			int parentFontSize;
 			CSSValues fontZize = CSSValues.get(specTL);
 			switch (fontZize) {
 			case SMALL:
@@ -122,21 +135,21 @@ public class FontValues extends HtmlValues {
 			case XX_LARGE:
 				return 40.0f;
 			case LARGER:
-				parentFontSize = (int) new LAFSettings().getInstance().getFontSize();
+				parentFontSize = (int) laf.getFontSize();
 				if (parentRenderState != null) {
 					parentFontSize = parentRenderState.getFont().getSize();
 				}
 				return parentFontSize * 1.2f;
 			case SMALLER:
-				parentFontSize = (int) new LAFSettings().getInstance().getFontSize();
+				parentFontSize = (int) laf.getFontSize();
 				if (parentRenderState != null) {
 					parentFontSize = parentRenderState.getFont().getSize();
 				}
 				return parentFontSize / 1.2f;
 			case INHERIT:
-				parentFontSize = (int) new LAFSettings().getInstance().getFontSize();
+				parentFontSize = (int) laf.getFontSize();
 				if (parentRenderState != null && parentRenderState.getPreviousRenderState() != null) {
-					parentRenderState.getPreviousRenderState().getFont().getSize();
+					parentFontSize = parentRenderState.getPreviousRenderState().getFont().getSize();
 				}
 				return parentFontSize;
 			case INITIAL:
@@ -149,16 +162,15 @@ public class FontValues extends HtmlValues {
 	/**
 	 * <p>getFontStrikeThrough.</p>
 	 *
-	 * @param spec a {@link java.lang.String} object.
+	 * @param strikethrough a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public static boolean getFontStrikeThrough(String spec) {
-		final String strikethrough = spec;
+	public static boolean getFontStrikeThrough(String strikethrough) {
 		if (CSSValues.get(strikethrough).equals(CSSValues.LINE_THROUGH)) {
 			return TextAttribute.STRIKETHROUGH_ON;
 		}
 
-		if (strikethrough == null && new LAFSettings().getInstance().isStrikethrough()) {
+		if (strikethrough == null && laf.isStrikethrough()) {
 			return TextAttribute.STRIKETHROUGH_ON;
 		}
 		return false;
@@ -167,12 +179,11 @@ public class FontValues extends HtmlValues {
 	/**
 	 * <p>getFontStyle.</p>
 	 *
-	 * @param spec a {@link java.lang.String} object.
+	 * @param fontStyle a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getFontStyle(String spec) {
-		final String fontStyle = spec;
-		if (fontStyle == null && new LAFSettings().getInstance().isItalic()) {
+	public static String getFontStyle(String fontStyle) {
+		if (fontStyle == null && laf.isItalic()) {
 			return CSSValues.ITALIC.getValue();
 		}
 		return fontStyle;
@@ -181,11 +192,10 @@ public class FontValues extends HtmlValues {
 	/**
 	 * <p>getFontVariant.</p>
 	 *
-	 * @param spec a {@link java.lang.String} object.
+	 * @param fontVariant a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getFontVariant(String spec) {
-		final String fontVariant = spec;
+	public static String getFontVariant(String fontVariant) {
 		if (fontVariant == null){
 			return CSSValues.NORMAL.getValue();
 		}
@@ -195,20 +205,19 @@ public class FontValues extends HtmlValues {
 	/**
 	 * <p>getFontSuperScript.</p>
 	 *
-	 * @param spec a {@link java.lang.String} object.
+	 * @param verticalAlign a {@link java.lang.String} object.
 	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	public static Integer getFontSuperScript(String spec, RenderState parentRenderState) {
-		final String verticalAlign = spec;
+	public static Integer getFontSuperScript(String verticalAlign, RenderState parentRenderState) {
 		Integer superscript = null;
 
 		final boolean isSuper = "super".equalsIgnoreCase(verticalAlign);
 		final boolean isSub = "sub".equalsIgnoreCase(verticalAlign);
 
-		if (isSuper || new LAFSettings().getInstance().isSuperscript()) {
+		if (isSuper || laf.isSuperscript()) {
 			superscript = TextAttribute.SUPERSCRIPT_SUPER;
-		} else if (isSub || new LAFSettings().getInstance().isSubscript()) {
+		} else if (isSub || laf.isSubscript()) {
 			superscript = TextAttribute.SUPERSCRIPT_SUB;
 		}
 
@@ -221,17 +230,15 @@ public class FontValues extends HtmlValues {
 	/**
 	 * <p>getFontUnderline.</p>
 	 *
-	 * @param spec a {@link java.lang.String} object.
+	 * @param underline a {@link java.lang.String} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	public static Integer getFontUnderline(String spec) {
-		final String underline = spec;
-
+	public static Integer getFontUnderline(String underline) {
 		if (CSSValues.get(underline).equals(CSSValues.UNDERLINE)) {
 			return TextAttribute.UNDERLINE_LOW_TWO_PIXEL;
 		}
 
-		if (underline == null && new LAFSettings().getInstance().isUnderline()) {
+		if (underline == null && laf.isUnderline()) {
 			return TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
 		}
 		return null;
@@ -240,12 +247,11 @@ public class FontValues extends HtmlValues {
 	/**
 	 * <p>getFontWeight.</p>
 	 *
-	 * @param spec a {@link java.lang.String} object.
+	 * @param fontWeight a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getFontWeight(String spec) {
-		final String fontWeight = spec;
-		if (fontWeight == null && new LAFSettings().getInstance().isBold()) {
+	public static String getFontWeight(String fontWeight) {
+		if (fontWeight == null && laf.isBold()) {
 			return CSSValues.BOLD.getValue();
 		}
 
@@ -308,21 +314,5 @@ public class FontValues extends HtmlValues {
 				return false;
 			}
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Checks if is font weight.
-	 */
-	public static boolean isFontFamily(String familyFont) {
-		String[] fonts = LAFSettings.getFonts("FONT");
-		for (int i = 0; i < fonts.length; i++) {
-			final String font = fonts[i];
-			if (font.equalsIgnoreCase(familyFont.replace(" ", "").replace("-", ""))) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

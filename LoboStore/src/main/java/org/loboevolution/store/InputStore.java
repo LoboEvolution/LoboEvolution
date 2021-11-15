@@ -33,14 +33,14 @@ import org.loboevolution.info.BookmarkInfo;
 
 /**
  * <p>InputStore class.</p>
- *
- *
- *
  */
 public class InputStore {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(InputStore.class.getName());
+
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 	
 	/**
 	 * <p>autocomplete.</p>
@@ -52,7 +52,7 @@ public class InputStore {
 	 */
 	public static List<String> autocomplete(String type, String value, String baseUrl) {
         List<String> autoList = new ArrayList<>();
-    	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+    	try (Connection conn = DriverManager.getConnection(DB_PATH);
 			PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT)) {
     		pstmt.setString(1, type);
 			pstmt.setString(2, "%"+value+"%");
@@ -76,7 +76,7 @@ public class InputStore {
 	 */
 	public List<BookmarkInfo> getPassword(int maxNumItems) {
         List<BookmarkInfo> autoList = new ArrayList<>();
-    	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+    	try (Connection conn = DriverManager.getConnection(DB_PATH);
 			PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT_LIMIT)) {
     		pstmt.setInt(1, maxNumItems);
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -104,7 +104,7 @@ public class InputStore {
 	 */
 	public static void insertLogin(String type, String value, String baseUrl, boolean navigationEnabled) {
 		if (navigationEnabled) {
-			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+			try (Connection conn = DriverManager.getConnection(DB_PATH);
 					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_INPUT)) {
 				pstmt.setString(1, type);
 				pstmt.setString(2, value);
@@ -120,7 +120,7 @@ public class InputStore {
 	 * <p>deleteInput.</p>
 	 */
 	public static void deleteInput() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -135,7 +135,7 @@ public class InputStore {
 	 * @param baseUrl a {@link java.lang.String} object.
 	 */
 	public static void deleteInput(String value, String baseUrl) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT2)) {
 			pstmt.setString(1, value);
 			pstmt.setString(2, baseUrl);

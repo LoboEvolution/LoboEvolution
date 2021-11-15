@@ -35,6 +35,7 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.UserAgent;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.ToolsStore;
@@ -43,9 +44,6 @@ import org.xml.sax.InputSource;
 
 /**
  * <p>NavigationManager class.</p>
- *
- *
- *
  */
 public class NavigationManager {
 	
@@ -63,7 +61,7 @@ public class NavigationManager {
 		try {
 			final URL url = new URL(uri);
 			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 					Reader reader = new InputStreamReader(in, "utf-8")) {
 

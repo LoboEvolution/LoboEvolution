@@ -20,33 +20,31 @@
 
 package org.loboevolution.store;
 
-import java.awt.Color;
+import com.loboevolution.store.laf.LAFSettings;
+
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.loboevolution.laf.LAFSettings;
-
 /**
  * <p>LookAndFeelsStore class.</p>
- *
- *
- *
  */
 public class LookAndFeelsStore {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(LookAndFeelsStore.class.getName());
 
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
+
 	private final String DELETE_LAF = "DELETE FROM LOOK_AND_FEEL";
 
 	private final String INSERT_LAF = " INSERT INTO LOOK_AND_FEEL (acryl, aero, aluminium, bernstein, fast, graphite,"
 			+ "hiFi,luna, mcWin, mint, noire, smart, texture, subscript, superscript, underline, italic, "
 			+ "strikethrough, fontSize, font, color, bold, modern, black, white) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-	private final String INSERT_SEARCH2 = "INSERT INTO SEARCH (name, description, type, selected) VALUES(?,?,?,?)";
 
 	/**
 	 * Connect to the test.db database
@@ -67,26 +65,8 @@ public class LookAndFeelsStore {
 	 * <p>deleteLAF.</p>
 	 */
 	public void deleteLAF() {
-		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = connect(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_LAF)) {
-			pstmt.executeUpdate();
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-	}
-
-	/**
-	 * Insert a new row into the search selected table
-	 *
-	 * @param search a {@link org.loboevolution.store.SearchEngineStore} object.
-	 */
-	public void insertFileSelected(SearchEngineStore search) {
-		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_SEARCH2)) {
-			pstmt.setString(1, search.getName());
-			pstmt.setString(2, search.getDescription());
-			pstmt.setString(3, search.getType());
-			pstmt.setInt(4, search.isSelected() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -96,10 +76,10 @@ public class LookAndFeelsStore {
 	/**
 	 * Insert a new row into the look_and_feel table
 	 *
-	 * @param laf a {@link org.loboevolution.laf.LAFSettings} object.
+	 * @param laf a {@link LAFSettings} object.
 	 */
 	public void insertLAF(LAFSettings laf) {
-		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = connect(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_LAF)) {
 
 			pstmt.setInt(1, laf.isAcryl() ? 1 : 0);

@@ -36,14 +36,14 @@ import org.loboevolution.net.NetRoutines;
 
 /**
  * <p>ConnectionStore class.</p>
- *
- *
- *
  */
 public class ConnectionStore implements Serializable {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ConnectionStore.class.getName());
+
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 
 	private static final String CONNECTIONS = "SELECT DISTINCT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
 
@@ -87,7 +87,7 @@ public class ConnectionStore implements Serializable {
 	 */
 	public static ConnectionStore getConnection() {
 		final ConnectionStore setting = new ConnectionStore();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(CONNECTIONS)) {
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
@@ -110,7 +110,7 @@ public class ConnectionStore implements Serializable {
 	 * <p>deleteConnection.</p>
 	 */
 	public void deleteConnection() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_CONNECTIONS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -196,7 +196,7 @@ public class ConnectionStore implements Serializable {
 	 * <p>insertConnection.</p>
 	 */
 	public void insertConnection() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_CONNECTIONS)) {
 			pstmt.setString(1, getProxyType().name());
 			pstmt.setString(2, getUserName());

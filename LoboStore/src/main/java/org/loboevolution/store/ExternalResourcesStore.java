@@ -40,14 +40,14 @@ import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>ExternalResourcesStore class.</p>
- *
- *
- *
  */
 public class ExternalResourcesStore {
 
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ExternalResourcesStore.class.getName());
+
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 
 	/** The date pattern. */
 	private static final String DATE_PATTERN = "yyyy-MM-dd hh:mm:ss";
@@ -61,7 +61,7 @@ public class ExternalResourcesStore {
 	 */
 	public static String getSourceCache(String baseUrl, String type) {
 		String source = "";
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SOURCE_CACHE)) {
 			pstmt.setString(1, baseUrl);
 			pstmt.setString(2, type);
@@ -144,7 +144,7 @@ public class ExternalResourcesStore {
 
 	private static int checkCache(String baseUrl, int contentLenght, String eTag, String type) {
 		int check = 0;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CHECK_CACHE)) {
 			pstmt.setString(1, baseUrl);
 			pstmt.setInt(2, contentLenght);
@@ -163,7 +163,7 @@ public class ExternalResourcesStore {
 
 	private static void insertCache(String baseUrl, String source, int contentLenght, String eTag, Date lastModified,
 			String type) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_CACHE)) {
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_PATTERN);
 			pstmt.setString(1, baseUrl);
@@ -179,7 +179,7 @@ public class ExternalResourcesStore {
 	}
 
 	private static void deleteCache(String baseUrl, String type) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_SOURCE_CACHE)) {
 			pstmt.setString(1, baseUrl);
 			pstmt.setString(2, type);

@@ -44,6 +44,7 @@ import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.img.ImageViewer;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.UserAgent;
 import org.loboevolution.pdf.PDFViewer;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.LinkStore;
@@ -89,7 +90,7 @@ public class HtmlRendererContext {
 
 	private volatile String sourceCode;
 
-	private boolean test = false;
+	private boolean testEnabled = false;
 
 	private double scrollx;
 
@@ -1049,7 +1050,7 @@ public class HtmlRendererContext {
 				: urlForLoading.openConnection(proxy);
 		this.currentConnection = connection;
 		try {
-			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			connection.setRequestProperty("Cookie", "");
 			if (connection instanceof HttpURLConnection) {
 				final HttpURLConnection hc = (HttpURLConnection) connection;
@@ -1179,16 +1180,16 @@ public class HtmlRendererContext {
 	 *
 	 * @return a boolean.
 	 */
-	public boolean isTest() {
-		return test;
+	public boolean isTestEnabled() {
+		return testEnabled;
 	}
 
 	/**
-	 * <p>Setter for the field <code>test</code>.</p>
+	 * <p>Setter for the field <code>testEnabled</code>.</p>
 	 *
-	 * @param test a boolean.
+	 * @param testEnabled a boolean.
 	 */
-	public void setTest(boolean test) {
-		this.test = test;
+	public void setTest(boolean testEnabled) {
+		this.testEnabled = testEnabled;
 	}
 }

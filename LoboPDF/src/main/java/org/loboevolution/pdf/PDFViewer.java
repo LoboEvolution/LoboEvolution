@@ -57,6 +57,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
 import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.UserAgent;
 import org.loboevolution.pdfview.OutlineNode;
 import org.loboevolution.pdfview.PDFDestination;
 import org.loboevolution.pdfview.PDFFile;
@@ -348,7 +349,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	public void openFile(URL url) throws IOException {
 		try {
 			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			try (InputStream istr = HttpNetwork.openConnectionCheckRedirects(connection)) {
 				ByteBuffer byteBuffer = ByteBuffer.allocate(istr.available());
 				while (istr.available() > 0) {

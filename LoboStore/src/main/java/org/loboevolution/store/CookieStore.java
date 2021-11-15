@@ -34,22 +34,25 @@ import java.util.logging.Logger;
 
 import org.loboevolution.common.Domains;
 import org.loboevolution.common.Strings;
+import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.net.Cookie;
 import org.loboevolution.util.DateUtil;
 
 /**
  * <p>CookieStore class.</p>
- *
- *
- *
  */
 public class CookieStore {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CookieStore.class.getName());
+
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 	
 	/** The date pattern. */
 	private static final String PATTERN = "dd/MM/yyyy";
+
+	static final GeneralInfo settings = GeneralStore.getGeneralInfo();
 	
 	/**
 	 * <p>saveCookie.</p>
@@ -125,7 +128,6 @@ public class CookieStore {
 				expiresDate = du.determineDateFormat(expires, Locale.US);
 			}
 
-			GeneralStore settings = GeneralStore.getNetwork();
 			if (settings.isCookie()) {
 				saveCookie(domain, path, cookieName, expiresDate, cookieValue, maxAge, Strings.isNotBlank(secure), Strings.isNotBlank(httpOnly));
 			}
@@ -150,7 +152,7 @@ public class CookieStore {
 	 * @param httponly a boolean.
 	 */
 	public static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge, boolean secure, boolean httponly) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COOKIES)) {
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(PATTERN);
 			pstmt.setString(1, name);
@@ -176,9 +178,8 @@ public class CookieStore {
 	 */
 	public static List<Cookie> getCookies(String hostName, String path) {
 		List<Cookie> cookies = new ArrayList<>();
-		GeneralStore settings = GeneralStore.getNetwork();
 		if (settings.isCookie()) {
-			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+			try (Connection conn = DriverManager.getConnection(DB_PATH);
 					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
 				pstmt.setString(1, hostName);
 				pstmt.setString(2, path);

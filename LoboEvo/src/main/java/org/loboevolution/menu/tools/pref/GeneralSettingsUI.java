@@ -33,8 +33,8 @@ import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
 import org.loboevolution.gui.SwingTasks;
+import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.menu.tools.pref.startup.StartupListControl;
-import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.GeneralStore;
 
 import com.jtattoo.plaf.lobo.LoboCheckBox;
@@ -43,9 +43,6 @@ import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * <p>GeneralSettingsUI class.</p>
- *
- *
- *
  */
 public class GeneralSettingsUI extends AbstractSettingsUI {
 
@@ -76,17 +73,11 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	/** The javscript panel. */
 	private final LoboCheckBox javscriptPanel;
 
-	/** The moz panel. */
-	private final FormPanel mozPanel;
-
 	/** The navigationPanel panel. */
 	private final LoboCheckBox navigationPanel;
 
 	/** The startup pages string list control. */
 	private final StartupListControl startupPages;
-
-	/** The user agent field. */
-	private final transient FormField userAgentField;
 
 	/** The width field. */
 	private final transient FormField width;
@@ -95,8 +86,6 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * Instantiates a new general settings ui.
 	 */
 	public GeneralSettingsUI() {
-
-		this.userAgentField = new FormField(FieldType.TEXT, "User Agent:");
 
 		final FormPanel dimensionPanel = new FormPanel();
 		this.dimensionPanel = dimensionPanel;
@@ -113,14 +102,10 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.cookiePanel = new LoboCheckBox("Enable Cookie");
 		this.cachePanel = new LoboCheckBox("Enable Cache");
 		this.navigationPanel = new LoboCheckBox("Enable Navigation");
-
-		this.mozPanel = new FormPanel();
-		this.mozPanel.addField(this.userAgentField);
 		this.startupPages = new StartupListControl();
 		this.startupPages.setEditListCaption(EDIT_LIST_CAPTION);
 
 		this.add(getStartupGroupBox());
-		this.add(getUserAgentGroupBox());
 		this.add(getDimensionGroupBox());
 		this.add(getNetworkBox());
 		this.add(SwingTasks.createVerticalFill());
@@ -172,30 +157,17 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		return groupBox;
 	}
 
-	/**
-	 * Gets the user agent group box.
-	 *
-	 * @return the user agent group box
-	 */
-	private Component getUserAgentGroupBox() {
-		final LoboPanel groupBox = new LoboPanel("User Agent");
-		groupBox.setPreferredSize(new Dimension(420, 50));
-		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.add(mozPanel);
-		return groupBox;
-	}
 
 	/**
 	 * Load settings.
 	 */
 	private void loadSettings() {
-		final GeneralStore network = GeneralStore.getNetwork();
+		final GeneralInfo network = GeneralStore.getGeneralInfo();
 		this.javscriptPanel.setSelected(network.isJs());
 		this.cssPanel.setSelected(network.isCss());
 		this.cookiePanel.setSelected(network.isCookie());
 		this.cachePanel.setSelected(network.isCache());
 		this.navigationPanel.setSelected(network.isNavigation());
-		this.userAgentField.setValue(HttpNetwork.getUserAgentValue());
 
 		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 		this.width.setValue(String.valueOf(initialWindowBounds.getWidth()));
@@ -222,7 +194,6 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	@Override
 	public void save() {
 		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
-		final String userAgent = this.userAgentField.getValue();
 		final boolean js = this.javscriptPanel.isSelected();
 		final boolean css = this.cssPanel.isSelected();
 		final boolean cookie = this.cookiePanel.isSelected();
@@ -232,10 +203,8 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		final int height = Double.valueOf(this.height.getValue()).intValue();
 
 		GeneralStore.deleteNetwork();
-		GeneralStore.deleteUserAgent();
 		GeneralStore.deleteStartUpUrl();
 		GeneralStore.insertNetwork(js, css, cookie, cache, navigation);
-		GeneralStore.insertUserAgent(userAgent);
 		GeneralStore.insertBounds(new Rectangle(width, height));
 
 		final List<String> strings = this.startupPages.getStrings();

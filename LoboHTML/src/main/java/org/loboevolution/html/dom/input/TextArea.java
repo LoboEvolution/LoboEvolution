@@ -39,12 +39,12 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.TextAreaControl;
 import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
 import org.loboevolution.html.js.Executor;
-import org.loboevolution.laf.LAFSettings;
 
 /**
  * <p>TextArea class.</p>

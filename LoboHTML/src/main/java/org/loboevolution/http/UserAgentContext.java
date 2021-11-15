@@ -20,6 +20,7 @@
 
 package org.loboevolution.http;
 
+import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.net.Cookie;
 import org.loboevolution.store.CookieStore;
 import org.loboevolution.store.GeneralStore;
@@ -30,12 +31,13 @@ import java.util.List;
 
 /**
  * <p>UserAgentContext class.</p>
- *
- *
- *
  */
 public class UserAgentContext {
-	
+
+	static final GeneralInfo settings = GeneralStore.getGeneralInfo();
+
+	private boolean userAgentEnabled = false;
+
 	/**
 	 * <p>createHttpRequest.</p>
 	 *
@@ -51,8 +53,7 @@ public class UserAgentContext {
 	 * @return a boolean.
 	 */
 	public boolean isScriptingEnabled() {
-		GeneralStore settings = GeneralStore.getNetwork();
-		return settings.isJs();
+		return userAgentEnabled || settings.isJs();
 	}
 	
 	/**
@@ -61,8 +62,7 @@ public class UserAgentContext {
 	 * @return a boolean.
 	 */
 	public boolean isExternalCSSEnabled() {
-		GeneralStore settings = GeneralStore.getNetwork();
-		return settings.isCss();
+		return userAgentEnabled ||settings.isCss();
 	}
 	
 	/**
@@ -71,8 +71,12 @@ public class UserAgentContext {
 	 * @return a boolean.
 	 */
 	public boolean isNavigationEnabled() {
-		GeneralStore settings = GeneralStore.getNetwork();
-		return settings.isNavigation();
+		return userAgentEnabled ||settings.isNavigation();
+	}
+
+
+	public void setUserAgentEnabled(boolean userAgentEnabled) {
+		this.userAgentEnabled = userAgentEnabled;
 	}
 	
 	/**

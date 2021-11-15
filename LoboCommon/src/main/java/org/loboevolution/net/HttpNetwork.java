@@ -20,8 +20,12 @@
 
 package org.loboevolution.net;
 
-import java.awt.Image;
-import java.awt.Toolkit;
+import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -29,10 +33,6 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,18 +40,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
-import org.loboevolution.common.Strings;
-import org.loboevolution.common.Urls;
-import org.loboevolution.store.SQLiteCommon;
-
 /**
  * <p>HttpNetwork class.</p>
- *
- *
- *
  */
 public class HttpNetwork {
 	
@@ -63,8 +53,6 @@ public class HttpNetwork {
 	
 	/** Constant TIMEOUT_VALUE="2000" */
 	public static final int TIMEOUT_VALUE = 2000;
-
-	private static final String USER_AGENT = "SELECT DISTINCT description FROM USER_AGENT";
 
 	private static InputStream getGzipStream(URLConnection con) throws IOException {
 		final InputStream cis = con.getInputStream();
@@ -141,7 +129,7 @@ public class HttpNetwork {
 
 				final URL u = new URL(scriptURI);
 				final URLConnection connection = u.openConnection();
-				connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+				connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 				try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
 
 					if (href.contains(";base64,")) {
@@ -197,33 +185,13 @@ public class HttpNetwork {
 
 		final URL url = new URL(uri);
 		final URLConnection connection = url.openConnection();
-		connection.setRequestProperty("User-Agent", getUserAgentValue());
+		connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 		try (InputStream in = openConnectionCheckRedirects(connection)) {
 			return toString(in);
 		} catch (SocketTimeoutException e) {
 			logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
 	    }
 		return "";
-	}
-
-	/**
-	 * <p>getUserAgentValue.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public static String getUserAgentValue() {
-		String userAgent = "";
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(USER_AGENT)) {
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs != null && rs.next()) {
-					userAgent = rs.getString(1);
-				}
-			}
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-		return userAgent;
 	}
 
 	/**
@@ -236,7 +204,7 @@ public class HttpNetwork {
 	public static InputStream openConnectionCheckRedirects(URLConnection c) throws Exception {
 		boolean redir;
 		int redirects = 0;
-		InputStream in = null;
+		InputStream in;
 		c.setConnectTimeout(TIMEOUT_VALUE);
 		c.setReadTimeout(TIMEOUT_VALUE);
 		do {
@@ -285,7 +253,7 @@ public class HttpNetwork {
 	
 	private static String removeNonASCIIChar(String str) {
 		StringBuffer buff = new StringBuffer();
-		char chars[] = str.toCharArray();
+		char[] chars = str.toCharArray();
 		for (char c : chars) {
 			if (0 < c && c < 127) {
 				buff.append(c);

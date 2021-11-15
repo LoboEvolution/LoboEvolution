@@ -46,6 +46,7 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.html.ReadyStateChangeListener;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.net.UserAgent;
 
 /**
  * <p>HttpRequest class.</p>
@@ -430,13 +431,12 @@ public class HttpRequest {
 	 */
 	protected void sendSync(String content) throws Exception {
 		try {
-			// FireFox posts a "loading" state twice as well.
 			changeState(HttpRequest.STATE_LOADING, 0, null, null);
 			URLConnection c;
 			synchronized (this) {
 				c = this.connection;
 			}
-			c.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+			c.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			int istatus;
 			String istatusText;
 			InputStream err;

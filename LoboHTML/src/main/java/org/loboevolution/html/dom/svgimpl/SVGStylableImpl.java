@@ -36,11 +36,11 @@ import org.loboevolution.html.dom.svg.SVGElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.dom.svg.SVGStylable;
 import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
@@ -363,7 +363,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a {@link java.awt.Font} object.
 	 */
 	public Font getFont() {
-		FontKey key = new FontKey();
+		FontKey key = FontValues.getDefaultFontKey();
 		key.setFontStyle(CSSValues.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		key.setFontWeight(CSSValues.BOLD.getValue());

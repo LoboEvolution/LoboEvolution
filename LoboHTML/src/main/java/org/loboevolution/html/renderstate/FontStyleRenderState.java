@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.renderstate;
 
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
@@ -72,7 +73,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
-		FontKey fontkey = new FontKey();
+		FontKey fontkey = FontValues.getDefaultFontKey();
 
 		if (iFont != null) {
 			fontkey.setSuperscript(this.superscript);

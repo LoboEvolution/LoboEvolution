@@ -25,9 +25,6 @@ import java.util.Map;
 
 /**
  * <p>FontType class.</p>
- *
- *
- *
  */
 public enum FontType {
 	

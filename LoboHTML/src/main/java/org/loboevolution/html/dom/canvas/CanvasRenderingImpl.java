@@ -39,6 +39,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.CanvasGradient;
@@ -56,7 +57,6 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.laf.LAFType;
 import org.loboevolution.net.HttpNetwork;
 
@@ -195,7 +195,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	public Font getFont() {
 		if (this.font == null) {
 			final FontFactory fontFactory = FontFactory.getInstance();
-			final Font font = fontFactory.getFont(new FontKey());
+			final Font font = fontFactory.getFont(FontValues.getDefaultFontKey());
 			this.font = font;
 		}
 		return this.font;
@@ -204,7 +204,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public void setFont(String fontSpec) {
-		FontKey key = new FontKey();
+		FontKey key = FontValues.getDefaultFontKey();
 		key.setFontStyle(LAFType.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		key.setFontWeight(LAFType.BOLD.getValue());

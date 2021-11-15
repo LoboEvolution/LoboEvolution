@@ -39,6 +39,9 @@ public class TabStore {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(TabStore.class.getName());
 
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
+
 	private static final String INSERT_TAB = "INSERT INTO TAB (index_tab, url, title) VALUES(?,?,?)";
 
 	private static final String DELETE_TAB = "DELETE FROM TAB WHERE index_tab = ?";
@@ -69,7 +72,7 @@ public class TabStore {
 	 * @param title a {@link java.lang.String} object.
 	 */
 	public static void insertTab(Integer index, String url, String title) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_TAB)) {
 			pstmt.setInt(1, index);
 			pstmt.setString(2, url);
@@ -86,7 +89,7 @@ public class TabStore {
 	 * @param index a {@link java.lang.Integer} object.
 	 */
 	public static void deleteTab(Integer index) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB)) {
 			pstmt.setInt(1, index);
 			pstmt.executeUpdate();
@@ -99,7 +102,7 @@ public class TabStore {
 	 * <p>deleteAll.</p>
 	 */
 	public static void deleteAll() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB_ALL)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -115,16 +118,18 @@ public class TabStore {
 	 */
 	public static String getTab(Integer index) {
 		String url = "";
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(TAB)) {
-			pstmt.setInt(1, index);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs != null && rs.next()) {
-					url = rs.getString(1);
+		if (DatabseSQLite.storeExist()) {
+			try (Connection conn = DriverManager.getConnection(DB_PATH);
+				 PreparedStatement pstmt = conn.prepareStatement(TAB)) {
+				pstmt.setInt(1, index);
+				try (ResultSet rs = pstmt.executeQuery()) {
+					while (rs != null && rs.next()) {
+						url = rs.getString(1);
+					}
 				}
+			} catch (final Exception e) {
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return url;
 	}
@@ -136,7 +141,7 @@ public class TabStore {
 	 */
 	public static List<TabInfo> getTabs() {
 		List<TabInfo> urls = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 			 PreparedStatement pstmt = conn.prepareStatement(TABS);
 			 ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
@@ -159,7 +164,7 @@ public class TabStore {
 	 */
 	public static List<String> getUrls() {
 		List<String> urls = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 			 PreparedStatement pstmt = conn.prepareStatement(TAB_URL);
 			 ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {

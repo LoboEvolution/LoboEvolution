@@ -34,14 +34,14 @@ import org.loboevolution.info.BookmarkInfo;
 
 /**
  * <p>NavigationStore class.</p>
- *
- *
- *
  */
 public class NavigationStore {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(NavigationStore.class.getName());
+
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 
 	private final String DELETE_HOST = "DELETE FROM HOST";
 	
@@ -61,7 +61,7 @@ public class NavigationStore {
 	 * @param title a {@link java.lang.String} object.
 	 */
 	public void addAsRecent(String uri, String title, int index) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_HOST)) {
 			pstmt.setString(1, new URL(uri).toExternalForm());
 			pstmt.setString(2, title);
@@ -76,7 +76,7 @@ public class NavigationStore {
 	 * <p>deleteHost.</p>
 	 */
 	public void deleteHost() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -90,7 +90,7 @@ public class NavigationStore {
 	 * @param host a {@link java.lang.String} object.
 	 */
 	public void deleteHost(String host) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST_BY_URL)) {
 			pstmt.setString(1, host);
 			pstmt.executeUpdate();
@@ -108,7 +108,7 @@ public class NavigationStore {
 	 */
 	public List<BookmarkInfo> getRecentHost(int index, boolean isTab) {
 		final List<BookmarkInfo> recentHostEntries = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(isTab ? HOST_TAB : HOST)) {
 			pstmt.setInt(1, index);
 			try (ResultSet rs = pstmt.executeQuery()) {

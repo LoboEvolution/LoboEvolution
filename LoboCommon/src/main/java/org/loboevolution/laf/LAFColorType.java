@@ -26,9 +26,6 @@ import java.util.Map;
 
 /**
  * <p>LAFColorType class.</p>
- *
- *
- *
  */
 public enum LAFColorType {
 

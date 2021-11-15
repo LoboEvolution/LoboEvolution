@@ -38,31 +38,35 @@ import java.util.logging.Logger;
 import org.loboevolution.common.Domains;
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.CookieInfo;
+import org.loboevolution.info.GeneralInfo;
+import org.loboevolution.store.DatabseSQLite;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.SQLiteCommon;
 import org.loboevolution.util.DateUtil;
 
 /**
  * <p>CookieManager class.</p>
- *
- *
- *
  */
 public class CookieManager {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CookieManager.class.getName());
 
+	/** The Constant DB_PATH. */
+	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
+
 	private static final String DELETE_COOKIES = "DELETE FROM COOKIE";
 
 	/** The date pattern. */
 	private static final String PATTERN = "dd/MM/yyyy";
 
+	static final GeneralInfo settings = GeneralStore.getGeneralInfo();
+
 	/**
 	 * <p>deleteCookies.</p>
 	 */
 	public static void deleteCookies() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_COOKIES)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -91,9 +95,8 @@ public class CookieManager {
 
 	private static List<CookieInfo> getCookies(String hostName, String path) {
 		final List<CookieInfo> cookies = new ArrayList<>();
-		final GeneralStore settings = GeneralStore.getNetwork();
 		if (settings.isCookie()) {
-			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+			try (Connection conn = DriverManager.getConnection(DB_PATH);
 					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
 				pstmt.setString(1, hostName);
 				pstmt.setString(2, path);
@@ -218,7 +221,6 @@ public class CookieManager {
 			expiresDate = du.determineDateFormat(expires, Locale.US);
 		}
 
-		final GeneralStore settings = GeneralStore.getNetwork();
 		if (settings.isCookie()) {
 			saveCookie(domain, path, cookieName, expiresDate, cookieValue, maxAge, Strings.isNotBlank(secure),
 					Strings.isNotBlank(httpOnly));
@@ -239,7 +241,7 @@ public class CookieManager {
 	 */
 	public static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge,
 			boolean secure, boolean httponly) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COOKIES)) {
 			final SimpleDateFormat dateFormatter = new SimpleDateFormat(PATTERN);
 			pstmt.setString(1, name);
