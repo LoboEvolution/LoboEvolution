@@ -30,9 +30,6 @@ import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>HTMLPreElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLPreElementImpl extends HTMLElementImpl implements HTMLPreElement {
 	/**

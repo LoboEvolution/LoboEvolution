@@ -24,9 +24,6 @@ import org.loboevolution.html.style.HtmlInsets;
 
 /**
  * <p>Abstract AbstractMarginRenderState class.</p>
- *
- *
- *
  */
 public abstract class AbstractMarginRenderState extends BlockRenderState {
 	/**
@@ -54,7 +51,10 @@ public abstract class AbstractMarginRenderState extends BlockRenderState {
 			return insets;
 		}
 		insets = super.getMarginInsets();
-		if (insets == null) {
+
+		if (insets == null ||
+				(insets.top == 0 && insets.bottom == 0 &&
+						insets.left == 0 && insets.right == 0)) {
 			insets = getDefaultMarginInsets();
 		}
 		this.marginInsets = insets;

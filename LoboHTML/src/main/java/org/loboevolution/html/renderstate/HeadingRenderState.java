@@ -19,18 +19,25 @@
  */
 package org.loboevolution.html.renderstate;
 
-import java.awt.FontMetrics;
-
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
+import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.laf.FontFactory;
+import org.loboevolution.laf.FontKey;
+
+import java.awt.*;
 
 /**
  * <p>HeadingRenderState class.</p>
- *
- *
- *
  */
 public class HeadingRenderState extends AbstractMarginRenderState {
+
+	private final HTMLElementImpl element;
+
 	/**
 	 * <p>Constructor for HeadingRenderState.</p>
 	 *
@@ -39,19 +46,98 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 	 */
 	public HeadingRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
+		this.element = element;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	protected HtmlInsets getDefaultMarginInsets() {
 		final HtmlInsets insets = new HtmlInsets();
-		final RenderState prevRS = getPreviousRenderState();
-		final FontMetrics fm = prevRS == null ? getFontMetrics() : prevRS.getFontMetrics();
-		insets.top = fm.getHeight();
-		insets.bottom = fm.getHeight();
-		insets.topType = HtmlInsets.TYPE_PIXELS;
-		insets.bottomType = HtmlInsets.TYPE_PIXELS;
+		final String tagName = element.getTagName();
+		final int lastCharValue = tagName.charAt(1) - '0';
+		switch (lastCharValue) {
+			case 1:
+				final int topBottom1 = HtmlValues.getPixelSize("0.67rem", null, element.getDocumentNode().getDefaultView(), -1);
+				insets.top = topBottom1;
+				insets.bottom = topBottom1;
+				insets.topType = HtmlInsets.TYPE_PIXELS;
+				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				break;
+			case 2:
+				final int topBottom2 = HtmlValues.getPixelSize("0.83rem", null, element.getDocumentNode().getDefaultView(), -1);
+				insets.top = topBottom2;
+				insets.bottom = topBottom2;
+				insets.topType = HtmlInsets.TYPE_PIXELS;
+				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				break;
+			case 3:
+				final int topBottom3 = HtmlValues.getPixelSize("1rem", null, element.getDocumentNode().getDefaultView(), -1);
+				insets.top = topBottom3;
+				insets.bottom = topBottom3;
+				insets.topType = HtmlInsets.TYPE_PIXELS;
+				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				break;
+			case 4:
+				final int topBottom4 = HtmlValues.getPixelSize("1.33rem", null, element.getDocumentNode().getDefaultView(), -1);
+				insets.top = topBottom4;
+				insets.bottom = topBottom4;
+				insets.topType = HtmlInsets.TYPE_PIXELS;
+				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				break;
+			case 5:
+				final int topBottom5 = HtmlValues.getPixelSize("1.67rem", null, element.getDocumentNode().getDefaultView(), -1);
+				insets.top = topBottom5;
+				insets.bottom = topBottom5;
+				insets.topType = HtmlInsets.TYPE_PIXELS;
+				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				break;
+			case 6:
+				final int topBottom6 = HtmlValues.getPixelSize("2.33rem", null, element.getDocumentNode().getDefaultView(), -1);
+				insets.top = topBottom6;
+				insets.bottom = topBottom6;
+				insets.topType = HtmlInsets.TYPE_PIXELS;
+				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				break;
+			default:
+				break;
+		}
+
 		return insets;
 	}
 
+	@Override
+	public Font getFont() {
+		final CSS3Properties props = this.getCssProperties();
+		final String fontSize = props == null ? null : props.getFontSize();
+		FontKey key = FontValues.getDefaultFontKey();
+		key.setFontWeight(CSSValues.BOLD.getValue());
+		final String fSize = Strings.isNotBlank(fontSize) ? fontSize : getHeadingFontSize();
+		key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), null));
+		return FontFactory.getInstance().getFont(key);
+	}
+
+	private String getHeadingFontSize() {
+		final String tagName = element.getTagName();
+		try {
+			final int lastCharValue = tagName.charAt(1) - '0';
+			switch (lastCharValue) {
+				case 1:
+					return "2rem";
+				case 2:
+					return "1.5rem";
+				case 3:
+					return "1.2rem";
+				case 4:
+					return "1rem";
+				case 5:
+					return "0.83rem";
+				case 6:
+					return "0.67rem";
+				default:
+					return "";
+			}
+		} catch (final Exception thrown) {
+			return "";
+		}
+	}
 }

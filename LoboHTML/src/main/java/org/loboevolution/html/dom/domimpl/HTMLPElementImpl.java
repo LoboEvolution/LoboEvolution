@@ -26,9 +26,6 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLPElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLPElementImpl extends HTMLElementImpl implements HTMLParagraphElement {
 	/**

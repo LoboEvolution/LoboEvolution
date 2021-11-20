@@ -20,12 +20,12 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLQuoteElement;
+import org.loboevolution.html.renderstate.HeadingRenderState;
+import org.loboevolution.html.renderstate.QuoteRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLQuoteElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteElement {
 
@@ -36,6 +36,12 @@ public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteEl
 	 */
 	public HTMLQuoteElementImpl(final String name) {
 		super(name);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new QuoteRenderState(prevRenderState, this);
 	}
 
 	/**

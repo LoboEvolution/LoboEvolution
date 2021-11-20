@@ -18,29 +18,49 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.dom;
+package org.loboevolution.html.dom.domimpl;
+
+import org.loboevolution.html.dom.HTMLDListElement;
+import org.loboevolution.html.renderstate.DListRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
- * Provides special properties (beyond those of the regular HTMLElement interface it also has available to it by inheritance)
- * for manipulating definition list (&lt;dl&gt;) elements.
+ * <p>HTMLDListElementImpl class.</p>
  */
-public interface HTMLDListElement extends HTMLElement {
+public class HTMLDListElementImpl extends HTMLElementImpl implements HTMLDListElement {
 
+    /**
+     * <p>Constructor for HTMLElementImpl.</p>
+     *
+     * @param name a {@link String} object.
+     */
+    public HTMLDListElementImpl(String name) {
+        super(name);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected RenderState createRenderState(RenderState prevRenderState) {
+        return new DListRenderState(prevRenderState, this);
+    }
 
     /**
      * <p>isCompact.</p>
      *
      * @return a boolean.
      */
-    @Deprecated
-    boolean isCompact();
+    @Override
+    public boolean isCompact() {
+        return false;
+    }
 
-    
     /**
      * <p>setCompact.</p>
      *
      * @param compact a boolean.
      */
-    void setCompact(boolean compact);
+    @Override
+    public void setCompact(boolean compact) {
 
+    }
 }

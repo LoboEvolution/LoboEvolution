@@ -47,7 +47,6 @@ class ElementFactory {
 		builders.put(HTMLTag.ARTICLE, div);
 		builders.put(HTMLTag.ASIDE, div);
 		builders.put(HTMLTag.DIV, div);
-		builders.put(HTMLTag.DL, div);
 		builders.put(HTMLTag.DT, div);
 		builders.put(HTMLTag.FIGCAPTION, div);
 		builders.put(HTMLTag.MAIN, div);
@@ -58,6 +57,7 @@ class ElementFactory {
 		builders.put(HTMLTag.HEADER, div);
 		builders.put(HTMLTag.FOOTER, div);
 
+		builders.put(HTMLTag.DL, new HTMLElementBuilder.Dl());
 		builders.put(HTMLTag.BODY, new HTMLElementBuilder.Body());
 		builders.put(HTMLTag.CENTER, new HTMLElementBuilder.Center());
 		builders.put(HTMLTag.CAPTION, new HTMLElementBuilder.Caption());
@@ -68,6 +68,7 @@ class ElementFactory {
 		final HTMLElementBuilder quote = new HTMLElementBuilder.Quote();
 		builders.put(HTMLTag.BLOCKQUOTE, quote);
 		builders.put(HTMLTag.DD, quote);
+		builders.put(HTMLTag.FIGURE, quote);
 
 		builders.put(HTMLTag.SPAN, new HTMLElementBuilder.Span());
 		builders.put(HTMLTag.SCRIPT, new HTMLElementBuilder.Script());
@@ -129,6 +130,9 @@ class ElementFactory {
 		builders.put(HTMLTag.H5, heading);
 		builders.put(HTMLTag.H6, heading);
 
+
+		builders.put(HTMLTag.FIGURE, new HTMLElementBuilder.Figure());
+		builders.put(HTMLTag.FIELDSET, new HTMLElementBuilder.Fieldset());
 		builders.put(HTMLTag.CANVAS, new HTMLElementBuilder.Canvas());
 
 		builders.put(HTMLTag.SVG, new HTMLElementBuilder.SVG());
@@ -152,6 +156,7 @@ class ElementFactory {
 		builders.put(HTMLTag.ANIMATE_TRASFORM, new HTMLElementBuilder.SVGAnimateTrasform());
 		builders.put(HTMLTag.IMAGE, new HTMLElementBuilder.SVGImage());
 		builders.put(HTMLTag.LINK, new HTMLElementBuilder.Link());
+		builders.put(HTMLTag.LEGEND, new HTMLElementBuilder.Legend());
 
 		builders.put(HTMLTag.RSS, new HTMLElementBuilder.RSS());
 		builders.put(HTMLTag.CHANNEL, new HTMLElementBuilder.Channel());

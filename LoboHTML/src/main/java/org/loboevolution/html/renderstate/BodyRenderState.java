@@ -19,8 +19,6 @@
  */
 package org.loboevolution.html.renderstate;
 
-import java.awt.Color;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
@@ -28,136 +26,110 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.laf.ColorFactory;
 
+import java.awt.*;
+
 /**
  * <p>BodyRenderState class.</p>
- *
- *
- *
  */
 public class BodyRenderState extends StyleSheetRenderState {
 
-	/**
-	 * <p>Constructor for BodyRenderState.</p>
-	 *
-	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public BodyRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-		super(prevRenderState, element);
-	}
+    /**
+     * <p>Constructor for BodyRenderState.</p>
+     *
+     * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+     * @param element         a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+     */
+    public BodyRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+        super(prevRenderState, element);
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public BackgroundInfo getBackgroundInfo() {
-		BackgroundInfo binfo = this.iBackgroundInfo;
-		if (binfo != INVALID_BACKGROUND_INFO) {
-			return binfo;
-		}
-		binfo = super.getBackgroundInfo();
-		if (binfo == null || binfo.getBackgroundColor() == null) {
-			final String bgcolor = this.element.getAttribute("bgcolor");
-			final String background = this.element.getAttribute("background");
-			if (Strings.isNotBlank(bgcolor)) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
-				}
-				binfo.setBackgroundColor(ColorFactory.getInstance().getColor(bgcolor));
-			}
-			
-			if (Strings.isNotBlank(background)) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
-				}
-				binfo.setBackgroundImage(this.document.getFullURL(background));
-			}
-		}
-		this.iBackgroundInfo = binfo;
-		return binfo;
-	}
-	
-	/** {@inheritDoc} */
-	@Override
-	public Color getColor() {
-		Color c = super.getColor();
-		if (c != null) {
-			return c;
-		}
-		String tcolor = this.element.getAttribute("text");
-		
-		if (Strings.isNotBlank(tcolor)) {
-			c = ColorFactory.getInstance().getColor(tcolor);
-		} else {
-			tcolor = "black";
-		}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BackgroundInfo getBackgroundInfo() {
+        BackgroundInfo binfo = this.iBackgroundInfo;
+        if (binfo != INVALID_BACKGROUND_INFO) {
+            return binfo;
+        }
+        binfo = super.getBackgroundInfo();
+        if (binfo == null || binfo.getBackgroundColor() == null) {
+            final String bgcolor = this.element.getAttribute("bgcolor");
+            final String background = this.element.getAttribute("background");
+            if (Strings.isNotBlank(bgcolor)) {
+                if (binfo == null) {
+                    binfo = new BackgroundInfo();
+                }
+                binfo.setBackgroundColor(ColorFactory.getInstance().getColor(bgcolor));
+            }
 
-		return c;
-	}
+            if (Strings.isNotBlank(background)) {
+                if (binfo == null) {
+                    binfo = new BackgroundInfo();
+                }
+                binfo.setBackgroundImage(this.document.getFullURL(background));
+            }
+        }
+        this.iBackgroundInfo = binfo;
+        return binfo;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public HtmlInsets getMarginInsets() {
-		HtmlInsets insets = this.marginInsets;
-		if (insets != INVALID_INSETS) {
-			return insets;
-		}
-		insets = super.getMarginInsets();
-		if (insets == null) {
-			final HTMLElementImpl element = this.element;
-			String leftMargin = element.getAttribute("leftmargin");
-			String rightMargin = element.getAttribute("rightmargin");
-            String bottomMargin = element.getAttribute("bottommargin");
-			String topMargin = element.getAttribute("topmargin");
-			final String marginWidth = element.getAttribute("marginwidth");
-			final String marginHeight = element.getAttribute("marginheight");
-			if (leftMargin == null) {
-				leftMargin = marginWidth;
-			}
-			if (rightMargin == null) {
-				rightMargin = marginWidth;
-			}
-			if (topMargin == null) {
-				topMargin = marginHeight;
-			}
-			if (bottomMargin == null) {
-				bottomMargin = marginHeight;
-			}
-			if (leftMargin != null) {
-				if (insets == null) {
-					insets = new HtmlInsets();
-				}
-				insets.left = HtmlValues.getPixelSize(leftMargin, null, this.document.getDefaultView(), 0);
-				insets.leftType = HtmlInsets.TYPE_PIXELS;
-			}
-			if (rightMargin != null) {
-				if (insets == null) {
-					insets = new HtmlInsets();
-				}
-				insets.right = HtmlValues.getPixelSize(rightMargin, null, this.document.getDefaultView(), 0);
-				insets.rightType = HtmlInsets.TYPE_PIXELS;
-			}
-			if (topMargin != null) {
-				if (insets == null) {
-					insets = new HtmlInsets();
-				}
-				insets.top = HtmlValues.getPixelSize(topMargin, null, this.document.getDefaultView(), 0);
-				insets.topType = HtmlInsets.TYPE_PIXELS;
-			}
-			if (bottomMargin != null) {
-				if (insets == null) {
-					insets = new HtmlInsets();
-				}
-				insets.bottom = HtmlValues.getPixelSize(bottomMargin, null, this.document.getDefaultView(), 0);
-				insets.bottomType = HtmlInsets.TYPE_PIXELS;
-			}
-		}
-		this.marginInsets = insets;
-		return insets;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Color getColor() {
+        Color c = super.getColor();
+        if (c != null) {
+            return c;
+        }
+        String tcolor = this.element.getAttribute("text");
 
-	/** {@inheritDoc} */
-	@Override
-	public void invalidate() {
-		super.invalidate();
-	}
+        if (Strings.isNotBlank(tcolor)) {
+            c = ColorFactory.getInstance().getColor(tcolor);
+        } else {
+            tcolor = "black";
+        }
+
+        return c;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HtmlInsets getMarginInsets() {
+        HtmlInsets insets = this.marginInsets;
+
+        if (insets != INVALID_INSETS) {
+            return insets;
+        }
+        insets = super.getMarginInsets();
+		if (insets == null ||
+				(insets.top == 0 && insets.bottom == 0 &&
+                insets.left == 0 && insets.right == 0)) {
+
+            insets = new HtmlInsets();
+            final int margin = HtmlValues.getPixelSize("8px", null, this.document.getDefaultView(), 0);
+            insets.top = margin;
+            insets.bottom = margin;
+            insets.right = margin;
+            insets.left = margin;
+            insets.leftType = HtmlInsets.TYPE_PIXELS;
+            insets.rightType = HtmlInsets.TYPE_PIXELS;
+            insets.bottomType = HtmlInsets.TYPE_PIXELS;
+        }
+
+        this.marginInsets = insets;
+        return insets;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void invalidate() {
+        super.invalidate();
+    }
 
 }

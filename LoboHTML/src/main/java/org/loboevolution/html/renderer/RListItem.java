@@ -117,9 +117,9 @@ class RListItem extends BaseRListElement {
 					}
 					if (parent instanceof RList) {
 						final ListStyle parentListStyle = ((RList) parent).listStyle;
-						bulletType = parentListStyle == null ? ListValues.TYPE_DISC : ListValues.get(parentListStyle.getType());
+						bulletType = parentListStyle == null ? ListValues.TYPE_DECIMAL : ListValues.get(parentListStyle.getType());
 					} else {
-						bulletType = ListValues.TYPE_DISC;
+						bulletType = ListValues.TYPE_DECIMAL;
 					}
 				}
 

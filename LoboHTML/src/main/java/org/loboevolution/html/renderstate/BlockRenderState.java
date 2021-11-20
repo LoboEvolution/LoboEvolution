@@ -25,9 +25,6 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * Render state for elements that are displayed as blocks by default.
- *
- *
- *
  */
 public class BlockRenderState extends StyleSheetRenderState {
 	/**

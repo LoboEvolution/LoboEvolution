@@ -26,9 +26,6 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLDivElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLDivElementImpl extends HTMLElementImpl implements HTMLDivElement {
 

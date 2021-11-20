@@ -20,22 +20,19 @@
 
 package org.loboevolution.html.style;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
+/**
+ * <p>BasicInset class.</p>
+ */
+@Data
+@Builder
+@AllArgsConstructor
 public class BasicInset {
 
     private int type;
 
     private int value;
-
-    public BasicInset(int type, int value) {
-        this.type = type;
-        this.value = value;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public int getValue() {
-        return value;
-    }
 }

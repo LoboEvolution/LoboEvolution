@@ -19,16 +19,12 @@
  */
 package org.loboevolution.html.renderstate;
 
-import java.awt.FontMetrics;
-
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
+import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>ParagraphRenderState class.</p>
- *
- *
- *
  */
 public class ParagraphRenderState extends AbstractMarginRenderState {
 	/**
@@ -45,10 +41,9 @@ public class ParagraphRenderState extends AbstractMarginRenderState {
 	@Override
 	protected HtmlInsets getDefaultMarginInsets() {
 		final HtmlInsets insets = new HtmlInsets();
-		final RenderState prevRS = getPreviousRenderState();
-		final FontMetrics fm = prevRS == null ? getFontMetrics() : prevRS.getFontMetrics();
-		insets.top = fm.getHeight();
-		insets.bottom = fm.getHeight();
+		final int topBottom = HtmlValues.getPixelSize("1rem", null, element.getDocumentNode().getDefaultView(), -1);
+		insets.top = topBottom;
+		insets.bottom = topBottom;
 		insets.topType = HtmlInsets.TYPE_PIXELS;
 		insets.bottomType = HtmlInsets.TYPE_PIXELS;
 		return insets;

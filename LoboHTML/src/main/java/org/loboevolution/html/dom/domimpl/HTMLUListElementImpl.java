@@ -25,6 +25,7 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.dom.HTMLUListElement;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.renderstate.UListRenderState;
 
 /**
  * <p>HTMLUListElementImpl class.</p>
@@ -42,7 +43,7 @@ public class HTMLUListElementImpl extends HTMLElementImpl implements HTMLUListEl
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new BlockRenderState(prevRenderState, this);
+		return new UListRenderState(prevRenderState, this);
 	}
 
 	/** {@inheritDoc} */

@@ -20,15 +20,11 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSSProperties;
-import org.loboevolution.html.style.FontValues;
+import org.loboevolution.html.renderstate.SmallRenderState;
 
 
 /**
  * <p>HTMLSmallElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLSmallElementImpl extends HTMLElementImpl {
 
@@ -41,25 +37,11 @@ public class HTMLSmallElementImpl extends HTMLElementImpl {
 		super(name);
 	}
 
-	/**
-	 * <p>createDefaultStyleSheet.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 */
-	protected AbstractCSSProperties createDefaultStyleSheet() {
-		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.getOwnerDocument();
-        final String fontSize = String.valueOf(FontValues.getFontSize("SMALL", doc.getDefaultView(),null));
-		final AbstractCSSProperties css = new AbstractCSSProperties(this);
-		if (fontSize != null) {
-			css.setPropertyValueLCAlt("font-size", fontSize, false);
-		}
-		return css;
-	}
 
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return super.createRenderState(prevRenderState);
+		return new SmallRenderState(prevRenderState, this);
 	}
 	
 	/** {@inheritDoc} */

@@ -18,29 +18,28 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.dom;
+package org.loboevolution.html.dom.domimpl;
+
+import org.loboevolution.html.renderstate.QuoteRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
- * Provides special properties (beyond those of the regular HTMLElement interface it also has available to it by inheritance)
- * for manipulating definition list (&lt;dl&gt;) elements.
+ * <p>HTMLFigureElementImpl class.</p>
  */
-public interface HTMLDListElement extends HTMLElement {
-
+public class HTMLFigureElementImpl extends HTMLElementImpl /*implements HTMLFigureElement*/ {
 
     /**
-     * <p>isCompact.</p>
+     * <p>Constructor for HTMLFigureElementImpl.</p>
      *
-     * @return a boolean.
+     * @param name a {@link String} object.
      */
-    @Deprecated
-    boolean isCompact();
+    public HTMLFigureElementImpl(String name) {
+        super(name);
+    }
 
-    
-    /**
-     * <p>setCompact.</p>
-     *
-     * @param compact a boolean.
-     */
-    void setCompact(boolean compact);
-
+    /** {@inheritDoc} */
+    @Override
+    protected RenderState createRenderState(RenderState prevRenderState) {
+        return new QuoteRenderState(prevRenderState, this);
+    }
 }

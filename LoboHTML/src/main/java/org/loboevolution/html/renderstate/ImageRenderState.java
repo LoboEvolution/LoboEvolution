@@ -160,4 +160,9 @@ public class ImageRenderState extends StyleSheetRenderState {
 		this.marginInsets = mi;
 		return mi;
 	}
+
+	@Override
+	protected int getDefaultDisplay() {
+		return DISPLAY_INLINE_BLOCK;
+	}
 }

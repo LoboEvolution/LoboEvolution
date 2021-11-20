@@ -26,11 +26,9 @@ import org.loboevolution.html.style.AbstractCSSProperties;
 
 /**
  * <p>HTMLHeadingElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadingElement {
+
 	/**
 	 * <p>Constructor for HTMLHeadingElementImpl.</p>
 	 *
@@ -69,17 +67,7 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 
 	/** {@inheritDoc} */
 	@Override
-	protected AbstractCSSProperties createDefaultStyleSheet() {
-		final AbstractCSSProperties css = new AbstractCSSProperties(this);
-		css.setPropertyValueLCAlt("font-size", getHeadingFontSizeText(), false);
-		css.setPropertyValueLCAlt("font-weight", "bolder", false);
-		return css;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		getHeadingFontSize();
 		return new HeadingRenderState(prevRenderState, this);
 	}
 
@@ -87,58 +75,6 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 	@Override
 	public String getAlign() {
 		return getAttribute("align");
-	}
-
-	private float getHeadingFontSize() {
-		final String tagName = getTagName();
-		try {
-			final int lastCharValue = tagName.charAt(1) - '0';
-			switch (lastCharValue) {
-			case 1:
-				return 24.0f;
-			case 2:
-				return 18.0f;
-			case 3:
-				return 15.0f;
-			case 4:
-				return 12.0f;
-			case 5:
-				return 10.0f;
-			case 6:
-				return 8.0f;
-			default:
-				return 16.0f;
-			}
-		} catch (final Exception thrown) {
-			this.warn("getHeadingFontSize(): Bad heading tag: " + getTagName(), thrown);
-			return 16.0f;
-		}
-	}
-
-	private String getHeadingFontSizeText() {
-		final String tagName = getTagName();
-		try {
-			final int lastCharValue = tagName.charAt(1) - '0';
-			switch (lastCharValue) {
-			case 1:
-				return "24pt";
-			case 2:
-				return "18pt";
-			case 3:
-				return "13.55pt";
-			case 4:
-				return "12pt";
-			case 5:
-				return "10pt";
-			case 6:
-				return "7.55pt";
-			default:
-				return "16px";
-			}
-		} catch (final Exception thrown) {
-			this.warn("getHeadingFontSizeText(): Bad heading tag: " + getTagName(), thrown);
-			return "16px";
-		}
 	}
 
 	/** {@inheritDoc} */

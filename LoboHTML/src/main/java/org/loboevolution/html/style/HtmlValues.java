@@ -172,12 +172,15 @@ public class HtmlValues {
 				if (spec.endsWith("q")) {
 					units = lcSpec.substring(lcSpec.length() - 1);
 					text = lcSpec.substring(0, lcSpec.length() - 1);
+				} else if (spec.endsWith("rem")) {
+					units = lcSpec.substring(lcSpec.length() - 3);
+					text = lcSpec.substring(0, lcSpec.length() - 3);
 				} else {
 					units = lcSpec.substring(lcSpec.length() - 2);
 					text = lcSpec.substring(0, lcSpec.length() - 2);
 				}
 			}
-					
+
 			switch (units) {
 			case "px":
                 final double val = Double.parseDouble(text);
@@ -496,7 +499,8 @@ public class HtmlValues {
 				token.endsWith("in") ||
 				token.endsWith("q") ||
 				token.endsWith("vh") ||
-				token.endsWith("vw");
+				token.endsWith("vw") ||
+				token.endsWith("rem");
 	}
 
 	private static int inches(double value, int dpi, String text) {

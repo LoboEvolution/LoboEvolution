@@ -50,6 +50,8 @@ import org.loboevolution.html.dom.svgimpl.SVGSymbolElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGTextElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGUseElementImpl;
 
+import java.awt.font.TextAttribute;
+
 /**
  * <p>Abstract HTMLElementBuilder class.</p>
  */
@@ -139,10 +141,31 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
+	public static class Dl extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLDListElementImpl(name);
+		}
+	}
+
 	public static class Em extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
 			return new HTMLEmElementImpl(name);
+		}
+	}
+
+	public static class Fieldset extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLFieldsetElementImpl(name);
+		}
+	}
+
+	public static class Figure extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLFigureElementImpl(name);
 		}
 	}
 
@@ -199,6 +222,13 @@ public abstract class HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
 			return new HTMLInputElementImpl(name);
+		}
+	}
+
+	public static class Legend extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLLegendElementImpl(name);
 		}
 	}
 
@@ -310,14 +340,14 @@ public abstract class HTMLElementBuilder {
 	public static class Sub extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
-			return new HTMLSuperscriptElementImpl(name, -1);
+			return new HTMLSuperscriptElementImpl(name, TextAttribute.SUPERSCRIPT_SUB);
 		}
 	}
 
 	public static class Sup extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
-			return new HTMLSuperscriptElementImpl(name, 1);
+			return new HTMLSuperscriptElementImpl(name, TextAttribute.SUPERSCRIPT_SUPER);
 		}
 	}
 

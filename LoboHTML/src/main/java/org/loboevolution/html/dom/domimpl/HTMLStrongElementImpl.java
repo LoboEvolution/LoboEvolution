@@ -27,6 +27,7 @@ import org.loboevolution.laf.LAFType;
  * Element used for B and STRONG.
  */
 public class HTMLStrongElementImpl extends HTMLElementImpl {
+
 	/**
 	 * <p>Constructor for HTMLStrongElementImpl.</p>
 	 *

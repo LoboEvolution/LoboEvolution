@@ -27,10 +27,7 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
 
 /**
- * <p>ListRenderState class.</p>
- *
- *
- *
+ * <p>ListRenderState class.</p>s
  */
 public class ListRenderState extends AbstractMarginRenderState {
 	/**
