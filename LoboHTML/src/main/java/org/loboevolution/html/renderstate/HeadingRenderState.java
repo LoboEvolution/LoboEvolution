@@ -19,10 +19,8 @@
  */
 package org.loboevolution.html.renderstate;
 
-import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
@@ -38,6 +36,8 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 
 	private final HTMLElementImpl element;
 
+	private final RenderState prevRenderState;
+
 	/**
 	 * <p>Constructor for HeadingRenderState.</p>
 	 *
@@ -47,6 +47,8 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 	public HeadingRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 		this.element = element;
+		this.prevRenderState = prevRenderState;
+
 	}
 
 	/** {@inheritDoc} */
@@ -107,13 +109,10 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 
 	@Override
 	public Font getFont() {
-		final CSS3Properties props = this.getCssProperties();
-		final String fontSize = props == null ? null : props.getFontSize();
 		FontKey key = FontValues.getDefaultFontKey();
 		key.setFontWeight(CSSValues.BOLD.getValue());
-		final String fSize = Strings.isNotBlank(fontSize) ? fontSize : getHeadingFontSize();
-		key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), null));
-		return FontFactory.getInstance().getFont(key);
+		key.setFontSize(FontValues.getFontSize(getHeadingFontSize(), element.getDocumentNode().getDefaultView(), prevRenderState));
+		return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, this.getCssProperties(), prevRenderState));
 	}
 
 	private String getHeadingFontSize() {

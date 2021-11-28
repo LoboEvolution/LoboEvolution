@@ -363,6 +363,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a {@link java.awt.Font} object.
 	 */
 	public Font getFont() {
+		AbstractCSSProperties style = getStyle();
 		FontKey key = FontValues.getDefaultFontKey();
 		key.setFontStyle(CSSValues.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
@@ -372,7 +373,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		key.setLetterSpacing(0);
 		key.setStrikethrough(false);
 		key.setUnderline(null);
-		return FontFactory.getInstance().getFont(key);
+		return FontFactory.getInstance().getFont(FontValues.getFontKey(key, this, style, null));
 	}
 	
 	/**

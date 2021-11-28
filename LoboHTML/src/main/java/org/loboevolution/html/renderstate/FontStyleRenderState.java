@@ -20,6 +20,10 @@
 
 package org.loboevolution.html.renderstate;
 
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.FontFactory;
@@ -39,9 +43,13 @@ public class FontStyleRenderState extends RenderStateDelegator {
 
 	private FontMetrics iFontMetrics;
 
-	Map<String, WordInfo> iWordInfoMap = null;
+	private final HTMLElementImpl element;
+
+	private final RenderState prevRenderState;
 
 	private final LAFType type;
+
+	Map<String, WordInfo> iWordInfoMap = null;
 
 	private int superscript;
 
@@ -51,10 +59,12 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param type a {@link org.loboevolution.laf.LAFType} object.
 	 */
-	public FontStyleRenderState(RenderState prevRenderState, LAFType type) {
+	public FontStyleRenderState(RenderState prevRenderState, HTMLElementImpl element, LAFType type) {
 		super(prevRenderState);
 		this.type = type;
 		this.iFont = null;
+		this.element = element;
+		this.prevRenderState = prevRenderState;
 	}
 
 	/**
@@ -63,11 +73,13 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param superscript a {@link java.lang.Integer} object.
 	 */
-	public FontStyleRenderState(RenderState prevRenderState, Integer superscript) {
+	public FontStyleRenderState(RenderState prevRenderState, HTMLElementImpl element, Integer superscript) {
 		super(prevRenderState);
 		this.iFont = prevRenderState.getFont();
 		this.superscript = superscript;
 		this.type = null;
+		this.element = element;
+		this.prevRenderState = prevRenderState;
 	}
 
 	/** {@inheritDoc} */
@@ -92,7 +104,11 @@ public class FontStyleRenderState extends RenderStateDelegator {
 			fontkey.setFontFamily(LAFType.MONOSPACED.getValue());
 		}
 
-		return FontFactory.getInstance().getFont(fontkey);
+		final CSS3Properties props = element.getCurrentStyle();
+		final String fontSize = props == null ? null : props.getFontSize();
+		final String fSize = Strings.isNotBlank(fontSize) ? fontSize : "1.2rem";
+		fontkey.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), prevRenderState));
+		return FontFactory.getInstance().getFont(FontValues.getFontKey(fontkey, element, props, prevRenderState));
 	}
 
 	/** {@inheritDoc} */

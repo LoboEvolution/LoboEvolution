@@ -573,18 +573,7 @@ public class StyleSheetRenderState implements RenderState {
 			return this.iFont;
 		}
 
-		HTMLDocumentImpl document = this.document;
-		key.setFontFamily(FontValues.getFontFamily(style.getFontFamily(), prs));
-		key.setFontStyle(FontValues.getFontStyle(style.getFontStyle()));
-		key.setFontVariant(style.getFontVariant());
-		key.setFontWeight(FontValues.getFontWeight(style.getFontWeight()));
-		key.setFontSize(FontValues.getFontSize(style.getFontSize(), document.getDefaultView(), prs));
-		key.setLocales(document.getLocales());
-		key.setSuperscript(FontValues.getFontSuperScript(style.getVerticalAlign(), prs));
-		key.setLetterSpacing(HtmlValues.getPixelSize(style.getLetterSpacing(), prs, document.getDefaultView(), 0));
-		key.setStrikethrough(FontValues.getFontStrikeThrough(style.getTextDecoration()));
-		key.setUnderline(FontValues.getFontUnderline(style.getTextDecoration()));
-		Font f = FONT_FACTORY.getFont(key);
+		Font f = FONT_FACTORY.getFont(FontValues.getFontKey(key, element, style, prs));
 		this.iFont = f;
 		return f;
 	}

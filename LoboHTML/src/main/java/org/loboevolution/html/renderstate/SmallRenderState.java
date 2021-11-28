@@ -37,6 +37,8 @@ public class SmallRenderState extends RenderStateDelegator {
 
     private final HTMLElementImpl element;
 
+    private final RenderState prevRenderState;
+
     /**
      * <p>Constructor for SmallRenderState.</p>
      *
@@ -46,6 +48,7 @@ public class SmallRenderState extends RenderStateDelegator {
     public SmallRenderState(RenderState prevRenderState, HTMLElementImpl element) {
         super(prevRenderState);
         this.element = element;
+        this.prevRenderState = prevRenderState;
     }
 
 
@@ -55,6 +58,6 @@ public class SmallRenderState extends RenderStateDelegator {
         final String fontSize = props == null ? null : props.getFontSize();
         FontKey key = FontValues.getDefaultFontKey();
         final String fSize = Strings.isNotBlank(fontSize) ? fontSize : CSSValues.SMALLER.getValue();
-        key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), null));
-        return FontFactory.getInstance().getFont(key);
+        key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), prevRenderState));
+        return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, props, prevRenderState));
     }}

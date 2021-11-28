@@ -40,8 +40,7 @@ public class HTMLStrongElementImpl extends HTMLElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontStyleRenderState(prevRenderState, LAFType.BOLD);
-		return super.createRenderState(prevRenderState);
+		return new FontStyleRenderState(prevRenderState, this, LAFType.BOLD);
 	}
 	
 	/** {@inheritDoc} */

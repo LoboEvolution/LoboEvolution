@@ -44,8 +44,7 @@ public class HTMLSuperscriptElementImpl extends HTMLElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontStyleRenderState(prevRenderState, this.superscript);
-		return super.createRenderState(prevRenderState);
+		return new FontStyleRenderState(prevRenderState, this, this.superscript);
 	}
 	
 	/** {@inheritDoc} */

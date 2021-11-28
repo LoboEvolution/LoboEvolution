@@ -251,7 +251,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
         return FontValues.getFontVariant(style.getFontWeight());
     }
 
-    public String getFontWeight() { return FontValues.getFontWeight(style.getFontWeight()); }
+    public String getFontWeight() { return FontValues.getFontWeight(style.getFontWeight(), null); }
 
     public String getFontFamily() {
         return FontValues.getFontFamily(style.getFontFamily(), null);
