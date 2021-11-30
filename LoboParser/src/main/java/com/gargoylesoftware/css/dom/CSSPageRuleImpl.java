@@ -88,9 +88,16 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
                     DOMException.EXPECTING_PAGE_RULE);
             }
         }
-        catch (final CSSException | IOException e) {
+        catch (final CSSException e) {
             throw new DOMException(
                 DOMException.SYNTAX_ERR,
+                DOMException.SYNTAX_ERROR,
+                e.getMessage());
+        }
+        catch (final IOException e) {
+            throw new DOMException(
+                DOMException.SYNTAX_ERR,
+                DOMException.SYNTAX_ERROR,
                 e.getMessage());
         }
     }

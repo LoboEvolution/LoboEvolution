@@ -187,49 +187,57 @@ public interface CSS3ParserConstants {
   /** RegularExpression Id. */
   int LENGTH_PC = 91;
   /** RegularExpression Id. */
-  int ANGLE_DEG = 92;
+  int LENGTH_Q = 92;
   /** RegularExpression Id. */
-  int ANGLE_RAD = 93;
+  int ANGLE_DEG = 93;
   /** RegularExpression Id. */
-  int ANGLE_GRAD = 94;
+  int ANGLE_RAD = 94;
   /** RegularExpression Id. */
-  int TIME_MS = 95;
+  int ANGLE_GRAD = 95;
   /** RegularExpression Id. */
-  int TIME_S = 96;
+  int ANGLE_TURN = 96;
   /** RegularExpression Id. */
-  int FREQ_HZ = 97;
+  int TIME_MS = 97;
   /** RegularExpression Id. */
-  int FREQ_KHZ = 98;
+  int TIME_S = 98;
   /** RegularExpression Id. */
-  int RESOLUTION_DPI = 99;
+  int FREQ_HZ = 99;
   /** RegularExpression Id. */
-  int RESOLUTION_DPCM = 100;
+  int FREQ_KHZ = 100;
   /** RegularExpression Id. */
-  int PERCENTAGE = 101;
+  int RESOLUTION_DPI = 101;
   /** RegularExpression Id. */
-  int DIMENSION = 102;
+  int RESOLUTION_DPCM = 102;
   /** RegularExpression Id. */
-  int H_PLACEHOLDER = 103;
+  int PERCENTAGE = 103;
   /** RegularExpression Id. */
-  int UNICODE_RANGE = 104;
+  int DIMENSION = 104;
   /** RegularExpression Id. */
-  int URI = 105;
+  int H_PLACEHOLDER = 105;
   /** RegularExpression Id. */
-  int FUNCTION_NOT = 106;
+  int UNICODE_RANGE = 106;
   /** RegularExpression Id. */
-  int FUNCTION_LANG = 107;
+  int URI = 107;
   /** RegularExpression Id. */
-  int FUNCTION_CALC = 108;
+  int FUNCTION_NOT = 108;
   /** RegularExpression Id. */
-  int FUNCTION_VAR = 109;
+  int FUNCTION_LANG = 109;
   /** RegularExpression Id. */
-  int CUSTOM_PROPERTY_NAME = 110;
+  int FUNCTION_CALC = 110;
   /** RegularExpression Id. */
-  int FUNCTION = 111;
+  int FUNCTION_VAR = 111;
   /** RegularExpression Id. */
-  int ATKEYWORD = 112;
+  int FUNCTION_RGB = 112;
   /** RegularExpression Id. */
-  int UNKNOWN = 113;
+  int FUNCTION_HSL = 113;
+  /** RegularExpression Id. */
+  int CUSTOM_PROPERTY_NAME = 114;
+  /** RegularExpression Id. */
+  int FUNCTION = 115;
+  /** RegularExpression Id. */
+  int ATKEYWORD = 116;
+  /** RegularExpression Id. */
+  int UNKNOWN = 117;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -330,9 +338,11 @@ public interface CSS3ParserConstants {
     "<LENGTH_IN>",
     "<LENGTH_PT>",
     "<LENGTH_PC>",
+    "<LENGTH_Q>",
     "<ANGLE_DEG>",
     "<ANGLE_RAD>",
     "<ANGLE_GRAD>",
+    "<ANGLE_TURN>",
     "<TIME_MS>",
     "<TIME_S>",
     "<FREQ_HZ>",
@@ -348,6 +358,8 @@ public interface CSS3ParserConstants {
     "<FUNCTION_LANG>",
     "<FUNCTION_CALC>",
     "<FUNCTION_VAR>",
+    "<FUNCTION_RGB>",
+    "<FUNCTION_HSL>",
     "<CUSTOM_PROPERTY_NAME>",
     "<FUNCTION>",
     "<ATKEYWORD>",

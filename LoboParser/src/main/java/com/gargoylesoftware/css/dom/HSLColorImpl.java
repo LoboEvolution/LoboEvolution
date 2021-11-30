@@ -25,15 +25,14 @@ import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
 /**
  * Implementation of RGBColor.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
-public class RGBColorImpl implements Serializable {
+public class HSLColorImpl implements Serializable {
     private String function_;
 
-    private CSSValueImpl red_;
-    private CSSValueImpl green_;
-    private CSSValueImpl blue_;
+    private CSSValueImpl hue_;
+    private CSSValueImpl saturation_;
+    private CSSValueImpl lightness_;
     private CSSValueImpl alpha_;
     private final boolean commaSeparated_;
 
@@ -44,20 +43,18 @@ public class RGBColorImpl implements Serializable {
      * @param lu the values
      * @throws DOMException in case of error
      */
-    public RGBColorImpl(final String function, final LexicalUnit lu) throws DOMException {
+    public HSLColorImpl(final String function, final LexicalUnit lu) throws DOMException {
         if (function == null) {
-            throw new DOMException(DOMException.SYNTAX_ERR, "Color space rgb or rgba is required.");
+            throw new DOMException(DOMException.SYNTAX_ERR, "Color space rgb or rgba is requiredc");
         }
         final String functionLC = function.toLowerCase(Locale.ROOT);
-        if (!"rgb".equals(functionLC) && !"rgba".equals(functionLC)) {
+        if (!"hsl".equals(functionLC) && !"hsla".equals(functionLC)) {
             throw new DOMException(DOMException.SYNTAX_ERR, "Color space '" + functionLC + "' not supported.");
         }
         function_ = functionLC;
 
         LexicalUnit next = lu;
-
-        final boolean percentage = LexicalUnitType.PERCENTAGE == next.getLexicalUnitType();
-        red_ = getPart(next);
+        hue_ = new CSSValueImpl(next, true);
 
         next = next.getNextLexicalUnit();
         if (next == null) {
@@ -71,13 +68,11 @@ public class RGBColorImpl implements Serializable {
                 throw new DOMException(DOMException.SYNTAX_ERR, function_ + " requires at least three values.");
             }
 
-            if (percentage && LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
-                throw new DOMException(DOMException.SYNTAX_ERR, function_ + " mixing numbers and percentages.");
+            if (LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
+                throw new DOMException(DOMException.SYNTAX_ERR, "Saturation part has to be percentage.");
             }
-            if (!percentage && LexicalUnitType.PERCENTAGE == next.getLexicalUnitType()) {
-                throw new DOMException(DOMException.SYNTAX_ERR, function_ + " mixing numbers and percentages.");
-            }
-            green_ = getPart(next);
+            saturation_ = new CSSValueImpl(next, true);
+
             next = next.getNextLexicalUnit();
             if (next == null) {
                 throw new DOMException(DOMException.SYNTAX_ERR, function_ + " requires at least three values.");
@@ -92,13 +87,10 @@ public class RGBColorImpl implements Serializable {
                 throw new DOMException(DOMException.SYNTAX_ERR, function_ + "b requires at least three values.");
             }
 
-            if (percentage && LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
-                throw new DOMException(DOMException.SYNTAX_ERR, function_ + " mixing numbers and percentages.");
+            if (LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
+                throw new DOMException(DOMException.SYNTAX_ERR, "Lightness part has to be percentage.");
             }
-            if (!percentage && LexicalUnitType.PERCENTAGE == next.getLexicalUnitType()) {
-                throw new DOMException(DOMException.SYNTAX_ERR, function_ + " mixing numbers and percentages.");
-            }
-            blue_ = getPart(next);
+            lightness_ = new CSSValueImpl(next, true);
 
             next = next.getNextLexicalUnit();
             if (next == null) {
@@ -110,10 +102,15 @@ public class RGBColorImpl implements Serializable {
             }
             next = next.getNextLexicalUnit();
             if (next == null) {
-                throw new DOMException(DOMException.SYNTAX_ERR, "Missing alpha value");
+                throw new DOMException(DOMException.SYNTAX_ERR, "Missing alpha value.");
             }
 
-            alpha_ = getPart(next);
+            if (LexicalUnitType.INTEGER != next.getLexicalUnitType()
+                    && LexicalUnitType.REAL != next.getLexicalUnitType()
+                    && LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
+                new DOMException(DOMException.SYNTAX_ERR, "Alpha part has to be numeric or percentage.");
+            }
+            alpha_ = new CSSValueImpl(next, true);
             next = next.getNextLexicalUnit();
             if (next != null) {
                 throw new DOMException(DOMException.SYNTAX_ERR, "Too many parameters for " + function_ +  " function.");
@@ -121,13 +118,11 @@ public class RGBColorImpl implements Serializable {
             return;
         }
 
-        if (percentage && LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
-            throw new DOMException(DOMException.SYNTAX_ERR, function_ + " mixing numbers and percentages.");
+        if (LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
+            throw new DOMException(DOMException.SYNTAX_ERR, "Saturation part has to be percentage.");
         }
-        if (!percentage && LexicalUnitType.PERCENTAGE == next.getLexicalUnitType()) {
-            throw new DOMException(DOMException.SYNTAX_ERR, function_ + " mixing numbers and percentages.");
-        }
-        green_ = getPart(next);
+        saturation_ = new CSSValueImpl(next, true);
+
         next = next.getNextLexicalUnit();
         if (next == null) {
             throw new DOMException(DOMException.SYNTAX_ERR, function_ + " requires at least three values.");
@@ -137,13 +132,10 @@ public class RGBColorImpl implements Serializable {
                     function_ + " requires consitent separators (blank or comma).");
         }
 
-        if (percentage && LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
-            throw new DOMException(DOMException.SYNTAX_ERR, function_ + " mixing numbers and percentages.");
+        if (LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
+            throw new DOMException(DOMException.SYNTAX_ERR, "Lightness part has to be percentage.");
         }
-        if (!percentage && LexicalUnitType.PERCENTAGE == next.getLexicalUnitType()) {
-            throw new DOMException(DOMException.SYNTAX_ERR, function_ + " mixing numbers and percentages.");
-        }
-        blue_ = getPart(next);
+        lightness_ = new CSSValueImpl(next, true);
         next = next.getNextLexicalUnit();
         if (next == null) {
             return;
@@ -157,78 +149,67 @@ public class RGBColorImpl implements Serializable {
             throw new DOMException(DOMException.SYNTAX_ERR, "Missing alpha value.");
         }
 
-        alpha_ = getPart(next);
+        if (LexicalUnitType.INTEGER != next.getLexicalUnitType()
+                && LexicalUnitType.REAL != next.getLexicalUnitType()
+                && LexicalUnitType.PERCENTAGE != next.getLexicalUnitType()) {
+            new DOMException(DOMException.SYNTAX_ERR, "Alpha part has to be numeric or percentage.");
+        }
+        alpha_ = new CSSValueImpl(next, true);
+
         next = next.getNextLexicalUnit();
         if (next != null) {
             throw new DOMException(DOMException.SYNTAX_ERR, "Too many parameters for " + function_ +  " function.");
         }
     }
 
-    private static CSSValueImpl getPart(final LexicalUnit next) {
-        if (LexicalUnitType.PERCENTAGE == next.getLexicalUnitType()
-                || LexicalUnitType.INTEGER == next.getLexicalUnitType()
-                || LexicalUnitType.REAL == next.getLexicalUnitType()) {
-            return new CSSValueImpl(next, true);
-        }
-
-        throw new DOMException(DOMException.SYNTAX_ERR, "Color part has to be numeric or percentage.");
-    }
-
     /**
-     * <p>getRed.</p>
-     *
      * @return the red part.
      */
     public CSSValueImpl getRed() {
-        return red_;
+        return hue_;
     }
 
     /**
      * Sets the red part to a new value.
-     *
      * @param red the new CSSPrimitiveValue
      */
     public void setRed(final CSSValueImpl red) {
-        red_ = red;
+        hue_ = red;
     }
 
     /**
-     * <p>getGreen.</p>
-     *
      * @return the green part.
      */
     public CSSValueImpl getGreen() {
-        return green_;
+        return saturation_;
     }
 
     /**
      * Sets the green part to a new value.
-     *
      * @param green the new CSSPrimitiveValue
      */
     public void setGreen(final CSSValueImpl green) {
-        green_ = green;
+        saturation_ = green;
     }
 
     /**
-     * <p>getBlue.</p>
-     *
      * @return the blue part.
      */
     public CSSValueImpl getBlue() {
-        return blue_;
+        return lightness_;
     }
 
     /**
      * Sets the blue part to a new value.
-     *
      * @param blue the new CSSPrimitiveValue
      */
     public void setBlue(final CSSValueImpl blue) {
-        blue_ = blue;
+        lightness_ = blue;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -236,13 +217,13 @@ public class RGBColorImpl implements Serializable {
         sb
             .append(function_)
             .append("(")
-            .append(red_);
+            .append(hue_);
         if (commaSeparated_) {
             sb
                 .append(", ")
-                .append(green_)
+                .append(saturation_)
                 .append(", ")
-                .append(blue_);
+                .append(lightness_);
 
             if (null != alpha_) {
                 sb.append(", ").append(alpha_);
@@ -251,9 +232,9 @@ public class RGBColorImpl implements Serializable {
         else {
             sb
                 .append(" ")
-                .append(green_)
+                .append(saturation_)
                 .append(" ")
-                .append(blue_);
+                .append(lightness_);
 
             if (null != alpha_) {
                 sb.append(" / ").append(alpha_);

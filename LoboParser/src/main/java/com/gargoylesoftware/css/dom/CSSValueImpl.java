@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,7 @@ import com.gargoylesoftware.css.util.LangUtils;
  * <code>CSSPrimitiveValue</code> or a <code>CSSValueList</code> so that
  * the type can successfully change when using <code>setCssText</code>.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public class CSSValueImpl extends AbstractLocatable implements Serializable {
 
@@ -103,6 +102,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         /** CSS_PC. */
         CSS_PC,
 
+        /** CSS_Q. */
+        CSS_Q,
+
         /** CSS_PERCENTAGE. */
         CSS_PERCENTAGE,
 
@@ -123,6 +125,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
 
         /** CSS_RAD. */
         CSS_RAD,
+
+        /** CSS_TURN. */
+        CSS_TURN,
 
         /** CSS_MS. */
         CSS_MS,
@@ -188,7 +193,11 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             }
             else if (value.getLexicalUnitType() == LexicalUnitType.RGBCOLOR) {
                 // RGBColor
-                value_ = new RGBColorImpl(value.getParameters());
+                value_ = new RGBColorImpl(value.getFunctionName(), value.getParameters());
+            }
+            else if (value.getLexicalUnitType() == LexicalUnitType.HSLCOLOR) {
+                // HSLColor
+                value_ = new HSLColorImpl(value.getFunctionName(), value.getParameters());
             }
             else if (value.getLexicalUnitType() == LexicalUnitType.COUNTER_FUNCTION) {
                 // Counter
@@ -284,8 +293,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         }
         catch (final Exception e) {
             throw new DOMException(
-                DOMException.SYNTAX_ERR,
-                e.getMessage());
+                    DOMException.SYNTAX_ERR,
+                    DOMException.SYNTAX_ERROR,
+                    e.getMessage());
         }
     }
 
@@ -347,6 +357,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
                     return CSSPrimitiveValueType.CSS_PT;
                 case PICA:
                     return CSSPrimitiveValueType.CSS_PC;
+                case QUATER:
+                    return CSSPrimitiveValueType.CSS_Q;
                 case PERCENTAGE:
                     return CSSPrimitiveValueType.CSS_PERCENTAGE;
                 case URI:
@@ -362,6 +374,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
                     return CSSPrimitiveValueType.CSS_GRAD;
                 case RADIAN:
                     return CSSPrimitiveValueType.CSS_RAD;
+                case TURN:
+                    return CSSPrimitiveValueType.CSS_TURN;
                 case MILLISECOND:
                     return CSSPrimitiveValueType.CSS_MS;
                 case SECOND:
@@ -435,8 +449,8 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
             return lu.getDoubleValue();
         }
         throw new DOMException(
-            DOMException.INVALID_ACCESS_ERR,
-            DOMException.FLOAT_ERROR);
+                DOMException.INVALID_ACCESS_ERR,
+                DOMException.FLOAT_ERROR);
 
         // We need to attempt a conversion
         // return 0;
@@ -452,10 +466,10 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         if (value_ instanceof LexicalUnit) {
             final LexicalUnit lu = (LexicalUnit) value_;
             if ((lu.getLexicalUnitType() == LexicalUnitType.IDENT)
-                || (lu.getLexicalUnitType() == LexicalUnitType.STRING_VALUE)
-                || (lu.getLexicalUnitType() == LexicalUnitType.URI)
-                || (lu.getLexicalUnitType() == LexicalUnitType.INHERIT)
-                || (lu.getLexicalUnitType() == LexicalUnitType.ATTR)) {
+                    || (lu.getLexicalUnitType() == LexicalUnitType.STRING_VALUE)
+                    || (lu.getLexicalUnitType() == LexicalUnitType.URI)
+                    || (lu.getLexicalUnitType() == LexicalUnitType.INHERIT)
+                    || (lu.getLexicalUnitType() == LexicalUnitType.ATTR)) {
                 return lu.getStringValue();
             }
 
@@ -470,62 +484,13 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         }
 
         throw new DOMException(
-            DOMException.INVALID_ACCESS_ERR,
-            DOMException.STRING_ERROR);
-    }
-
-    /**
-     * <p>getCounterValue.</p>
-     *
-     * @return the counter value
-     * @throws org.w3c.dom.DOMException in case of error
-     */
-    public CounterImpl getCounterValue() throws DOMException {
-        if (value_ instanceof CounterImpl) {
-            return (CounterImpl) value_;
-        }
-
-        throw new DOMException(
                 DOMException.INVALID_ACCESS_ERR,
-                DOMException.COUNTER_ERROR);
+                DOMException.STRING_ERROR);
     }
 
     /**
-     * <p>getRectValue.</p>
-     *
-     * @return the rect
-     * @throws org.w3c.dom.DOMException in case of error
-     */
-    public RectImpl getRectValue() throws DOMException {
-        if (value_ instanceof RectImpl) {
-            return (RectImpl) value_;
-        }
-
-        throw new DOMException(
-                DOMException.INVALID_ACCESS_ERR,
-                DOMException.RECT_ERROR);
-    }
-
-    /**
-     * <p>getRGBColorValue.</p>
-     *
-     * @return the rgb
-     * @throws org.w3c.dom.DOMException in case of error
-     */
-    public RGBColorImpl getRGBColorValue() throws DOMException {
-        if (value_ instanceof RGBColorImpl) {
-            return (RGBColorImpl) value_;
-        }
-
-        throw new DOMException(
-            DOMException.INVALID_ACCESS_ERR,
-            DOMException.RGBCOLOR_ERROR);
-    }
-
-    /**
-     * <p>getLength.</p>
-     *
      * @return the length
+     * @throws DOMException in case of error
      */
     @SuppressWarnings("unchecked")
     public int getLength() {

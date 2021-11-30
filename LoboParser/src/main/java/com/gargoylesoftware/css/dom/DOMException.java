@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,83 +56,71 @@ public class DOMException extends RuntimeException {
     /**
      * SYNTAX_ERROR = 0.
      */
-    public static final short SYNTAX_ERROR = 0;
+    public static final int SYNTAX_ERROR = 0;
     /**
      * INDEX_OUT_OF_BOUNDS = 1.
      */
-    public static final short INDEX_OUT_OF_BOUNDS = 1;
+    public static final int INDEX_OUT_OF_BOUNDS = 1;
     /**
      * READ_ONLY_STYLE_SHEET = 2.
      */
-    public static final short READ_ONLY_STYLE_SHEET = 2;
+    public static final int READ_ONLY_STYLE_SHEET = 2;
     /**
      * EXPECTING_STYLE_RULE = 3.
      */
-    public static final short EXPECTING_STYLE_RULE = 3;
+    public static final int EXPECTING_STYLE_RULE = 3;
     /**
      * EXPECTING_CHARSET_RULE = 4.
      */
-    public static final short EXPECTING_CHARSET_RULE = 4;
+    public static final int EXPECTING_CHARSET_RULE = 4;
     /**
      * EXPECTING_IMPORT_RULE = 5.
      */
-    public static final short EXPECTING_IMPORT_RULE = 5;
+    public static final int EXPECTING_IMPORT_RULE = 5;
     /**
      * EXPECTING_MEDIA_RULE = 6.
      */
-    public static final short EXPECTING_MEDIA_RULE = 6;
+    public static final int EXPECTING_MEDIA_RULE = 6;
     /**
      * EXPECTING_FONT_FACE_RULE = 7.
      */
-    public static final short EXPECTING_FONT_FACE_RULE = 7;
+    public static final int EXPECTING_FONT_FACE_RULE = 7;
     /**
      * EXPECTING_PAGE_RULE = 8.
      */
-    public static final short EXPECTING_PAGE_RULE = 8;
+    public static final int EXPECTING_PAGE_RULE = 8;
     /**
      * FLOAT_ERROR = 9.
      */
-    public static final short FLOAT_ERROR = 9;
+    public static final int FLOAT_ERROR = 9;
     /**
      * STRING_ERROR = 10.
      */
-    public static final short STRING_ERROR = 10;
+    public static final int STRING_ERROR = 10;
     /**
-     * COUNTER_ERROR = 11.
+     * CHARSET_NOT_FIRST = 11.
      */
-    public static final short COUNTER_ERROR = 11;
+    public static final int CHARSET_NOT_FIRST = 11;
     /**
-     * RECT_ERROR = 12.
+     * CHARSET_NOT_UNIQUE = 12.
      */
-    public static final short RECT_ERROR = 12;
+    public static final int CHARSET_NOT_UNIQUE = 12;
     /**
-     * RGBCOLOR_ERROR = 13.
+     * IMPORT_NOT_FIRST = 13.
      */
-    public static final short RGBCOLOR_ERROR = 13;
+    public static final int IMPORT_NOT_FIRST = 13;
     /**
-     * CHARSET_NOT_FIRST = 14.
+     * NOT_FOUND = 14.
      */
-    public static final short CHARSET_NOT_FIRST = 14;
+    public static final int NOT_FOUND = 14;
     /**
-     * CHARSET_NOT_UNIQUE = 15.
+     * NOT_IMPLEMENTED = 15.
      */
-    public static final short CHARSET_NOT_UNIQUE = 15;
+    public static final int NOT_IMPLEMENTED = 15;
     /**
-     * IMPORT_NOT_FIRST = 16.
+     * INSERT_BEFORE_IMPORT = 16.
      */
-    public static final short IMPORT_NOT_FIRST = 16;
-    /**
-     * NOT_FOUND = 17.
-     */
-    public static final short NOT_FOUND = 17;
-    /**
-     * NOT_IMPLEMENTED = 18.
-     */
-    public static final short NOT_IMPLEMENTED = 18;
-    /**
-     * INSERT_BEFORE_IMPORT = 19.
-     */
-    public static final short INSERT_BEFORE_IMPORT = 19;
+    public static final int INSERT_BEFORE_IMPORT = 16;
 
     static final String[] messages = {
             "Syntax error",
@@ -146,9 +134,6 @@ public class DOMException extends RuntimeException {
             "The text does not represent a page rule",
             "This isn't a Float type",
             "This isn't a String type",
-            "This isn't a Counter type",
-            "This isn't a Rect type",
-            "This isn't an RGBColor type",
             "A charset rule must be the first rule",
             "A charset rule already exists",
             "An import rule must preceed all other rules",
@@ -157,11 +142,9 @@ public class DOMException extends RuntimeException {
             "Can't insert a rule before the last charset or import rule"
     };
 
-
     private final short code;
 
     private final String message;
-
 
     public DOMException(short code, String message) {
         super(message);
@@ -173,6 +156,24 @@ public class DOMException extends RuntimeException {
         super(messages[codeMessage]);
         this.code = code;
         this.message = messages[codeMessage];
+    }
+
+    public DOMException(short code, int codeMessage) {
+        super(messages[codeMessage]);
+        this.code = code;
+        this.message = messages[codeMessage];
+    }
+
+    /**
+     * Ctor.
+     * @param code the code
+     * @param messageKey the message key
+     * @param info additional info
+     */
+    public DOMException(final int code, final int messageKey, final String info) {
+        super(messages[messageKey] + " (" + info + ")");
+        this.code = (short)code;
+        this.message = messages[messageKey] + " (" + info + ")";
     }
 
     /**

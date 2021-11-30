@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -774,9 +774,6 @@ public abstract class AbstractCSSParser {
         else if ("rect(".equalsIgnoreCase(funct)) {
             return LexicalUnitImpl.createRect(prev, params);
         }
-        else if ("rgb(".equalsIgnoreCase(funct)) {
-            return LexicalUnitImpl.createRgbColor(prev, params);
-        }
         else if ("calc(".equalsIgnoreCase(funct)) {
             return LexicalUnitImpl.createCalc(prev, params);
         }
@@ -786,6 +783,16 @@ public abstract class AbstractCSSParser {
             params);
     }
 
+    protected LexicalUnit rgbColorInternal(final LexicalUnit prev, final String funct,
+            final LexicalUnit param) {
+        return LexicalUnitImpl.createRgbColor(prev, funct, param);
+    }
+
+    protected LexicalUnit hslColorInternal(final LexicalUnit prev, final String funct,
+            final LexicalUnit param) {
+        return LexicalUnitImpl.createHslColor(prev, funct, param);
+    }
+
     /**
      * Processes a hexadecimal color definition.
      *
@@ -793,12 +800,14 @@ public abstract class AbstractCSSParser {
      * @param t the token
      * @return a new lexical unit
      */
-    protected LexicalUnit hexcolorInternal(final LexicalUnit prev, final Token t) {
+    protected LexicalUnit hexColorInternal(final LexicalUnit prev, final Token t) {
         // Step past the hash at the beginning
         final int i = 1;
         int r = 0;
         int g = 0;
         int b = 0;
+        Double a = null;
+
         final int len = t.image.length() - 1;
         try {
             if (len == 3) {
@@ -809,10 +818,28 @@ public abstract class AbstractCSSParser {
                 g = (g << 4) | g;
                 b = (b << 4) | b;
             }
+            else if (len == 4) {
+                r = Integer.parseInt(t.image.substring(i + 0, i + 1), 16);
+                g = Integer.parseInt(t.image.substring(i + 1, i + 2), 16);
+                b = Integer.parseInt(t.image.substring(i + 2, i + 3), 16);
+                int ai = Integer.parseInt(t.image.substring(i + 3, i + 4), 16);
+                r = (r << 4) | r;
+                g = (g << 4) | g;
+                b = (b << 4) | b;
+                ai = (ai << 4) | ai;
+                a = ai / 255d;
+            }
             else if (len == 6) {
                 r = Integer.parseInt(t.image.substring(i + 0, i + 2), 16);
                 g = Integer.parseInt(t.image.substring(i + 2, i + 4), 16);
                 b = Integer.parseInt(t.image.substring(i + 4, i + 6), 16);
+            }
+            else if (len == 8) {
+                r = Integer.parseInt(t.image.substring(i + 0, i + 2), 16);
+                g = Integer.parseInt(t.image.substring(i + 2, i + 4), 16);
+                b = Integer.parseInt(t.image.substring(i + 4, i + 6), 16);
+                final int ai = Integer.parseInt(t.image.substring(i + 6, i + 8), 16);
+                a = ai / 255d;
             }
             else {
                 final String pattern = getParserMessage("invalidColor");
@@ -824,12 +851,18 @@ public abstract class AbstractCSSParser {
 
             // Turn into an "rgb()"
             final LexicalUnit lr = LexicalUnitImpl.createNumber(null, r);
-            final LexicalUnit lc1 = LexicalUnitImpl.createComma(lr);
-            final LexicalUnit lg = LexicalUnitImpl.createNumber(lc1, g);
-            final LexicalUnit lc2 = LexicalUnitImpl.createComma(lg);
-            LexicalUnitImpl.createNumber(lc2, b);
+            final LexicalUnit lg = LexicalUnitImpl.createNumber(LexicalUnitImpl.createComma(lr), g);
+            final LexicalUnit lb = LexicalUnitImpl.createNumber(LexicalUnitImpl.createComma(lg), b);
 
-            return LexicalUnitImpl.createRgbColor(prev, lr);
+            if (a != null) {
+                a = Math.round(a * 1000d) / 1000d;
+                LexicalUnitImpl.createNumber(LexicalUnitImpl.createComma(lb), a);
+
+                return LexicalUnitImpl.createRgbColor(prev, "rgba", lr);
+            }
+
+            return LexicalUnitImpl.createRgbColor(prev, "rgb", lr);
+
         }
         catch (final NumberFormatException ex) {
             final String pattern = getParserMessage("invalidColor");

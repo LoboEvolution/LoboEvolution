@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
             return selectorText + " { }";
         }
 
-        return selectorText + " { " + styleText + " }";
+        return selectorText + " { " + styleText + "; }";
     }
 
     /** {@inheritDoc} */
@@ -95,14 +95,21 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
             }
             else {
                 throw new DOMException(
-                    DOMException.INVALID_MODIFICATION_ERR,
-                    DOMException.EXPECTING_STYLE_RULE);
+                        DOMException.INVALID_MODIFICATION_ERR,
+                        DOMException.EXPECTING_STYLE_RULE);
             }
         }
-        catch (final CSSException | IOException e) {
+        catch (final CSSException e) {
             throw new DOMException(
-                DOMException.SYNTAX_ERR,
-                e.getMessage());
+                    DOMException.SYNTAX_ERR,
+                    DOMException.SYNTAX_ERROR,
+                    e.getMessage());
+        }
+        catch (final IOException e) {
+            throw new DOMException(
+                    DOMException.SYNTAX_ERR,
+                    DOMException.SYNTAX_ERROR,
+                    e.getMessage());
         }
     }
 

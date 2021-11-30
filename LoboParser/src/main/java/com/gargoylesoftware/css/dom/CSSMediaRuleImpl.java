@@ -85,11 +85,13 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
         catch (final CSSException e) {
             throw new DOMException(
                 DOMException.SYNTAX_ERR,
+                DOMException.SYNTAX_ERROR,
                 e.getMessage());
         }
         catch (final IOException e) {
             throw new DOMException(
-                    DOMException.SYNTAX_ERR,
+                DOMException.SYNTAX_ERR,
+                DOMException.SYNTAX_ERROR,
                 e.getMessage());
         }
     }

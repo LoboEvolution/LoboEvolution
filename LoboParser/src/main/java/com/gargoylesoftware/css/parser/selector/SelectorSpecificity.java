@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,10 @@ import com.gargoylesoftware.css.parser.condition.Condition;
 
 /**
  * Calculates a selector's specificity.
- *
  * @see <a href="http://www.w3.org/TR/CSS21/cascade.html#specificity">W3C CSS21</a>
- * Author Marc Guillemot
- * Author Ronald Brill
  *
+ * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {
 
@@ -44,7 +43,6 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
 
     /**
      * Ctor.
-     *
      * @param selector the selector to read from
      */
     public SelectorSpecificity(final Selector selector) {

@@ -58,14 +58,21 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
             }
             else {
                 throw new DOMException(
-                    DOMException.INVALID_MODIFICATION_ERR,
-                    DOMException.EXPECTING_CHARSET_RULE);
+                        DOMException.INVALID_MODIFICATION_ERR,
+                        DOMException.EXPECTING_CHARSET_RULE);
             }
         }
-        catch (final CSSException | IOException e) {
+        catch (final CSSException e) {
             throw new DOMException(
-                DOMException.SYNTAX_ERR,
-                e.getMessage());
+                    DOMException.SYNTAX_ERR,
+                    DOMException.SYNTAX_ERROR,
+                    e.getMessage());
+        }
+        catch (final IOException e) {
+            throw new DOMException(
+                    DOMException.SYNTAX_ERR,
+                    DOMException.SYNTAX_ERROR,
+                    e.getMessage());
         }
     }
 

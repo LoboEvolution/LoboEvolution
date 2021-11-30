@@ -18,9 +18,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.util.LangUtils;
-import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
 
 /**
  * Implementation of CSSStyleDeclaration.
@@ -82,17 +82,18 @@ public class CSSStyleDeclarationImpl implements Serializable {
      * @param cssText the new css text
      * @throws org.w3c.dom.DOMException in case of error
      */
-    public void setCssText(final String cssText) throws DOMException {
+    public void setCssText(final String cssText, final CSSErrorHandler cssErrorHandler) throws DOMException {
         try {
             final CSSOMParser parser = new CSSOMParser();
-            parser.setErrorHandler(ThrowCssExceptionErrorHandler.INSTANCE);
+            parser.setErrorHandler(cssErrorHandler);
             properties_.clear();
             parser.parseStyleDeclaration(this, cssText);
         }
         catch (final Exception e) {
             throw new DOMException(
-                DOMException.SYNTAX_ERR,
-                e.getMessage());
+                    DOMException.SYNTAX_ERR,
+                    DOMException.SYNTAX_ERROR,
+                    e.getMessage());
         }
     }
 
@@ -191,6 +192,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
         catch (final Exception e) {
             throw new DOMException(
                     DOMException.SYNTAX_ERR,
+                    DOMException.SYNTAX_ERROR,
                     e.getMessage());
         }
     }
