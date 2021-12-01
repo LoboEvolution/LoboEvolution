@@ -60,4 +60,10 @@ public class SmallRenderState extends RenderStateDelegator {
         final String fSize = Strings.isNotBlank(fontSize) ? fontSize : CSSValues.SMALLER.getValue();
         key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), prevRenderState));
         return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, props, prevRenderState));
-    }}
+    }
+
+    @Override
+    public int getDisplay() {
+        return DISPLAY_INLINE;
+    }
+}

@@ -160,4 +160,9 @@ public class FontStyleRenderState extends RenderStateDelegator {
 			map.clear();
 		}
 	}
+
+	@Override
+	public int getDisplay() {
+		return DISPLAY_INLINE;
+	}
 }

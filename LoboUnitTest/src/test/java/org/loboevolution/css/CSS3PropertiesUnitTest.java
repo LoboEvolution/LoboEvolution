@@ -221,7 +221,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    x('button');\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"inline", "inline", "inline", "inline", "inline", "inline-block"};
+        final String[] messages = {"inline", "inline", "inline", "block", "inline", "inline-block"};
         checkHtmlAlert(html, messages);
     }
 
@@ -434,7 +434,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    x('ins');\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"inline", "inline", "inline", "inline-block", "inline-block",
+        final String[] messages = {"inline", "inline", "inline-block", "inline-block", "inline-block",
                 "inline-block", "inline-block", "inline-block", "inline-block", "inline"};
         checkHtmlAlert(html, messages);
     }
@@ -625,7 +625,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    x('sup');\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"inline", "inline", "none", "block", "inline-block", "inline",
+        final String[] messages = {"inline", "inline", "none", "block", "inline-block", "block",
                 "inline", "inline", "inline", "inline", "inline", "block", "inline"};
         checkHtmlAlert(html, messages);
     }

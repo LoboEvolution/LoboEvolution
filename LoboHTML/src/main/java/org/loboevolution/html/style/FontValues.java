@@ -21,6 +21,7 @@
 package org.loboevolution.html.style;
 
 import com.loboevolution.store.laf.LAFSettings;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -91,12 +92,12 @@ public class FontValues extends HtmlValues {
 		final float defaultSize = laf.getFontSize();
 		float parentFontSize = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
 
-		if (parentFontSize != defaultSize) {
-			return parentFontSize;
-		}
-
-		if (spec == null) {
-			return defaultSize;
+		if (Strings.isBlank(spec)) {
+			if (parentFontSize != defaultSize) {
+				return parentFontSize;
+			} else {
+				return defaultSize;
+			}
 		}
 
 		String units;
@@ -325,10 +326,14 @@ public class FontValues extends HtmlValues {
 	public static String getFontWeight(String fontWeight, RenderState parentRenderState) {
 		if (fontWeight == null) {
 			if (parentRenderState != null) {
+				if(parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT) == null){
+					return CSSValues.BOLD400.getValue();
+				}
+
 				return (String) parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT);
 			} else {
 				if (laf.isBold())
-					return CSSValues.BOLD.getValue();
+					return CSSValues.BOLD400.getValue();
 			}
 		}
 
