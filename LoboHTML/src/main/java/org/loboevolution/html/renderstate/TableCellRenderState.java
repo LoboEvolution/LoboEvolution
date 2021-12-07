@@ -20,10 +20,8 @@
 
 package org.loboevolution.html.renderstate;
 
-import java.awt.Color;
-import java.util.Base64;
-
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLTableElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -33,16 +31,19 @@ import org.loboevolution.html.dom.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.laf.ColorFactory;
+import org.loboevolution.laf.FontFactory;
+import org.loboevolution.laf.FontKey;
+
+import java.awt.*;
+import java.util.Base64;
 
 /**
  * <p>TableCellRenderState class.</p>
- *
- *
- *
  */
 public class TableCellRenderState extends DisplayRenderState {
 	private int alignXPercent = -1;
@@ -307,6 +308,22 @@ public class TableCellRenderState extends DisplayRenderState {
 		return wsValue;
 	}
 
+	@Override
+	public Font getFont() {
+
+		if ("TH".equals(element.getNodeName())) {
+			final CSS3Properties props = element.getCurrentStyle();
+			final String fontSize = props == null ? null : props.getFontSize();
+			final String fSize = Strings.isNotBlank(fontSize) ? fontSize : "1.2rem";
+			FontKey key = FontValues.getDefaultFontKey();
+			key.setFontWeight(CSSValues.BOLD.getValue());
+			key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), prevRenderState));
+			return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, props, prevRenderState));
+		}
+
+		return super.getFont();
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void invalidate() {
@@ -316,5 +333,4 @@ public class TableCellRenderState extends DisplayRenderState {
 		this.backgroundInfo = INVALID_BACKGROUND_INFO;
 		this.paddingInsets = INVALID_INSETS;
 	}
-
 }
