@@ -27,10 +27,7 @@ import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.parser.HtmlParser;
-import org.loboevolution.html.renderstate.ColorRenderState;
-import org.loboevolution.html.renderstate.CursorRenderState;
-import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.renderstate.TextDecorationRenderState;
+import org.loboevolution.html.renderstate.*;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
@@ -45,17 +42,12 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * <p>HTMLLinkElementImpl class.</p>
  */
 public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElement {
 
-	private final String COLOR_VISITED = "#551A8B";
-
-	private final String DEFAULT_COLOR = "Blue";
-	
 	private boolean disabled;
 
 	private CSSStyleSheetImpl styleSheet;
@@ -74,35 +66,9 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		RenderState tmpRenderState = prevRenderState;
 		if (hasAttribute("href")) {
-			tmpRenderState = new TextDecorationRenderState(tmpRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
-			tmpRenderState = new ColorRenderState(tmpRenderState, this.linkColor());
-			tmpRenderState = new CursorRenderState(tmpRenderState, Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
+			return new LinkRenderState(prevRenderState, getHtmlRendererContext(), this);
 		}
 		return super.createRenderState(tmpRenderState);
-	}
-	
-	private Color linkColor() {
-		HtmlRendererContext rcontext = this.getHtmlRendererContext();
-		if (rcontext != null) {
-			boolean visited = rcontext.isVisitedLink(this);
-			String vlink = null;
-			String link = null;
-			HTMLDocument doc = (HTMLDocument) this.document;
-			if (doc != null) {
-				HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
-				if (body != null) {
-					vlink = body.getVLink();
-					link = body.getLink();
-				}
-			}
-			vlink = (vlink == null) ? COLOR_VISITED : vlink;
-			link = (link == null) ? DEFAULT_COLOR : link;
-			String colorText = visited ? vlink : link;
-			if (colorText != null) {
-				return ColorFactory.getInstance().getColor(colorText);
-			}
-		}
-		return Color.BLUE;
 	}
 
 	/**
