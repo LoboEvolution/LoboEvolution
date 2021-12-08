@@ -41,8 +41,7 @@ public class FontKey {
 	private String fontFamily = "Times New Roman";
 
 	/** The font size. */
-	@Builder.Default
-	private float fontSize = 16.0F;
+	private float fontSize;
 
 	/** The font style. */
 	@Builder.Default

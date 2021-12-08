@@ -47,22 +47,31 @@ public class FontValues extends HtmlValues {
 	public static FontKey getDefaultFontKey() {
 		return FontKey.builder().
 				font(laf.getFont()).
-				fontSize(laf.getFontSize()).
 				build();
 	}
 
 	public static FontKey getFontKey(FontKey key, HTMLElementImpl element, CSS3Properties style, RenderState prevRenderState) {
 		HTMLDocumentImpl document = (HTMLDocumentImpl) element.getDocumentNode();
 
-		if (style != null) {
-			final String fontSize = style.getFontSize();
-			final String fontFamiy = style.getFontFamily();
-			final String fontStyle = style.getFontStyle();
-			final String fontVariant = style.getFontVariant();
-			final String fontWeight = style.getFontWeight();
-			final String verticalAlign = style.getVerticalAlign();
-			final String letterSpacing = style.getLetterSpacing();
-			final String textDecoration = style.getTextDecoration();
+		String fontSize = style.getFontSize();
+		final String fontFamiy = style.getFontFamily();
+		final String fontStyle = style.getFontStyle();
+		final String fontVariant = style.getFontVariant();
+		final String fontWeight = style.getFontWeight();
+		final String verticalAlign = style.getVerticalAlign();
+		final String letterSpacing = style.getLetterSpacing();
+		final String textDecoration = style.getTextDecoration();
+
+		if (key.getFontSize() > 0 ||
+				Strings.isNotBlank(fontSize) ||
+				Strings.isNotBlank(fontFamiy) ||
+				Strings.isNotBlank(fontVariant) ||
+				Strings.isNotBlank(fontWeight) ||
+				Strings.isNotBlank(verticalAlign) ||
+				Strings.isNotBlank(letterSpacing) ||
+				Strings.isNotBlank(textDecoration)) {
+
+			if (Strings.isBlank(fontSize) && key.getFontSize() == 0) fontSize = null;
 
 			key.setFontFamily(FontValues.getFontFamily(fontFamiy, prevRenderState));
 			key.setFontStyle(FontValues.getFontStyle(fontStyle, prevRenderState));
@@ -73,7 +82,22 @@ public class FontValues extends HtmlValues {
 			key.setStrikethrough(FontValues.getFontStrikeThrough(textDecoration, prevRenderState));
 			key.setUnderline(FontValues.getFontUnderline(textDecoration, prevRenderState));
 			key.setFontWeight(FontValues.getFontWeight(fontWeight, prevRenderState));
-			key.setFontSize(FontValues.getFontSize(fontSize, element.getDocumentNode().getDefaultView(), prevRenderState));
+
+			if(key.getFontSize() == 0)
+				key.setFontSize(FontValues.getFontSize(fontSize, element.getDocumentNode().getDefaultView(), prevRenderState));
+
+		} else {
+
+			key.setFontFamily(FontValues.getFontFamily(null, prevRenderState));
+			key.setFontStyle(FontValues.getFontStyle(null, prevRenderState));
+			key.setFontVariant(FontValues.getFontVariant(null));
+			key.setLocales(document.getLocales());
+			key.setSuperscript(FontValues.getFontSuperScript(null, prevRenderState));
+			key.setLetterSpacing(HtmlValues.getPixelSize(null, prevRenderState, document.getDefaultView(), 0));
+			key.setStrikethrough(FontValues.getFontStrikeThrough(null, prevRenderState));
+			key.setUnderline(FontValues.getFontUnderline(null, prevRenderState));
+			key.setFontWeight(FontValues.getFontWeight(null, prevRenderState));
+			key.setFontSize(FontValues.getFontSize(null, element.getDocumentNode().getDefaultView(), prevRenderState));
 		}
 
 		return key;
@@ -90,10 +114,10 @@ public class FontValues extends HtmlValues {
 	public static float getFontSize(String spec, Window window, RenderState parentRenderState) {
 
 		final float defaultSize = laf.getFontSize();
-		float parentFontSize = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
 
 		if (Strings.isBlank(spec)) {
-			if (parentFontSize != defaultSize) {
+			float parentFontSize = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
+			if (parentFontSize > 0 && parentFontSize != defaultSize) {
 				return parentFontSize;
 			} else {
 				return defaultSize;
@@ -125,6 +149,7 @@ public class FontValues extends HtmlValues {
 				}
 			case "em":
 				try {
+					float parentFontSize = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
 					return (int) Math.round(parentFontSize * Double.parseDouble(text));
 				} catch (final NumberFormatException nfe) {
 					return defaultSize;
@@ -140,6 +165,7 @@ public class FontValues extends HtmlValues {
 			case "%":
 				final String value = specTL.substring(0, specTL.length() - 1);
 				try {
+					float parentFontSize = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
 					final double valued = Double.parseDouble(value);
 					return (float) (parentFontSize * valued / 100.0);
 				} catch (final NumberFormatException nfe) {
@@ -163,23 +189,17 @@ public class FontValues extends HtmlValues {
 					case XX_LARGE:
 						return 40.0f;
 					case LARGER:
-						parentFontSize = (int) laf.getFontSize();
-						if (parentRenderState != null) {
-							parentFontSize = parentRenderState.getFont().getSize();
-						}
-						return parentFontSize * 1.2f;
+						float lager = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
+						return lager * 1.2f;
 					case SMALLER:
-						parentFontSize = (int) laf.getFontSize();
-						if (parentRenderState != null) {
-							parentFontSize = parentRenderState.getFont().getSize();
-						}
-						return parentFontSize / 1.2f;
+						float smaller = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
+						return smaller / 1.2f;
 					case INHERIT:
-						parentFontSize = (int) laf.getFontSize();
+						float inherit = defaultSize;
 						if (parentRenderState != null && parentRenderState.getPreviousRenderState() != null) {
-							parentFontSize = parentRenderState.getPreviousRenderState().getFont().getSize();
+							inherit = parentRenderState.getPreviousRenderState().getFont().getSize();
 						}
-						return parentFontSize;
+						return inherit;
 					case INITIAL:
 					default:
 						return getPixelSize(spec, parentRenderState, window, (int) defaultSize);
