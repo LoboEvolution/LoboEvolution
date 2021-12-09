@@ -20,6 +20,8 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.*;
@@ -784,6 +786,53 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public boolean hasFocus() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Node importNode(Node importedNode, boolean deep) throws DOMException {
+		switch (importedNode.getNodeType()) {
+			case ATTRIBUTE_NODE:
+				Attr attr = createAttribute(importedNode.getNodeName());
+				attr.setValue(importedNode.getNodeValue());
+				return attr;
+			case ELEMENT_NODE:
+				Element foreignElm = (Element) importedNode;
+				Element elm = createElement(foreignElm.getNodeName());
+				NamedNodeMap attributes = foreignElm.getAttributes();
+				for (Attr attribute : Nodes.iterable(attributes)) {
+					Attr attrNode = (Attr) importNode(attribute, true);
+					elm.setAttributeNode(attrNode);
+				}
+				if (deep) {
+					Node node = importedNode.getFirstChild();
+					while (node != null) {
+						elm.appendChild(importNode(node, true));
+						node = node.getNextSibling();
+					}
+				}
+				return elm;
+			case TEXT_NODE:
+				return createTextNode(importedNode.getNodeValue());
+			case CDATA_SECTION_NODE:
+				return createCDATASection(importedNode.getNodeValue());
+			case COMMENT_NODE:
+				return createComment(importedNode.getNodeValue());
+			case DOCUMENT_FRAGMENT_NODE:
+				DocumentFragment df = createDocumentFragment();
+				if (deep) {
+					Node node = importedNode.getFirstChild();
+					while (node != null) {
+						df.appendChild(importNode(node, true));
+						node = node.getNextSibling();
+					}
+				}
+				return df;
+			case PROCESSING_INSTRUCTION_NODE:
+				return createProcessingInstruction(importedNode.getNodeName(), importedNode.getNodeValue());
+			default:
+				throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Node Not supported.");
+		}
 	}
 
 	/** {@inheritDoc} */

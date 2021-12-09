@@ -26,9 +26,9 @@ import org.loboevolution.driver.LoboUnitTest;
 /**
  * Tests for {@link org.loboevolution.html.dom.HTMLDocument}.
  */
-public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that aren't CSS selectors.*/
+public class HTMLDocumentTest extends LoboUnitTest {
 
-    private String[] JQUERY_CUSTOM_SELECTORS = {"div.submenu-last:last",
+    private final String[] JQUERY_CUSTOM_SELECTORS = {"div.submenu-last:last",
             "*#__sizzle__ div.submenu-last:last", "div:animated", "div:animated", "*:button", "*:checkbox", "div:even",
             "*:file", "div:first", "td:gt(4)", "div:has(p)", ":header", ":hidden", ":image", ":input", "td:lt(4)",
             ":odd", ":password", ":radio", ":reset", ":selected", ":submit", ":text", ":visible"
@@ -951,6 +951,52 @@ public class HTMLDocumentTest extends LoboUnitTest {/* jQuery selectors that are
                 + "</body></html>";
 
         final String[] messages = {"exception"};
+        checkHtmlAlert(html, messages);
+    }
+
+    /**
+     * <p>importNodeDeep.</p>
+     */
+    @Test
+    public void importNodeDeep() {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var node = document.importNode(document.getElementById('div1'), true);\n"
+                + "    alert(node.id);\n"
+                + "    alert(node.parentNode);\n"
+                + "    alert(node.childNodes.length);\n"
+                + "    if (node.childNodes.length != 0)\n"
+                + "      alert(node.childNodes[0].childNodes.length);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='div1'><div id='div1_1'><div id='div1_1_1'></div></div><div id='div1_2'></div></div>\n"
+                + "</body></html>";
+
+        final String[] messages = {"div1", null, "2", "1"};
+        checkHtmlAlert(html, messages);
+    }
+
+    /**
+     * <p>importNodeNotDeep.</p>
+     */
+    @Test
+    public void importNodeNotDeep() {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var node = document.importNode(document.getElementById('div1'), false);\n"
+                + "    alert(node.id);\n"
+                + "    alert(node.parentNode);\n"
+                + "    alert(node.childNodes.length);\n"
+                + "    if (node.childNodes.length != 0)\n"
+                + "      alert(node.childNodes[0].childNodes.length);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='div1'><div id='div1_1'><div id='div1_1_1'></div></div><div id='div1_2'></div></div>\n"
+                + "</body></html>";
+
+        final String[] messages = {"div1", null, "0"};
         checkHtmlAlert(html, messages);
     }
 }

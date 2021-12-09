@@ -414,12 +414,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		return this.getUcontext();
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public Node importNode(Node importedNode, boolean deep) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Not implemented");
-	}
-
 	/**
 	 * This is called when the node has changed, but it is unclear if it's a size
 	 * change or a look change. An attribute change should trigger this.

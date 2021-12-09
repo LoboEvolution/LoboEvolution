@@ -302,17 +302,6 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	}
 	
 	/**
-	 * <p>createEntityReference.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.EntityReference} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
-	 */
-	public EntityReference createEntityReference(String name) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
-	}
-
-	/**
 	 * <p>createAttributeNS.</p>
 	 *
 	 * @param namespaceURI a {@link java.lang.String} object.
@@ -322,18 +311,6 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	 */
 	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
-	}
-	
-	/**
-	 * <p>importNode.</p>
-	 *
-	 * @param importedNode a {@link org.loboevolution.html.node.Node} object.
-	 * @param deep a boolean.
-	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
-	 */
-	public Node importNode(Node importedNode, boolean deep) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Not implemented");
 	}
 	
 	/**
