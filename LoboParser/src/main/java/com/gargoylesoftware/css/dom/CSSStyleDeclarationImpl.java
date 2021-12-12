@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import java.util.List;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.util.LangUtils;
+import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
 
 /**
  * Implementation of CSSStyleDeclaration.
@@ -31,8 +32,8 @@ public class CSSStyleDeclarationImpl implements Serializable {
 
     private static final String PRIORITY_IMPORTANT = "important";
 
-    private AbstractCSSRuleImpl parentRule_;
-    private List<Property> properties_ = new ArrayList<>();
+    private final AbstractCSSRuleImpl parentRule_;
+    private final List<Property> properties_ = new ArrayList<>();
 
     /**
      * Ctor.
@@ -47,6 +48,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
      * Ctor.
      */
     public CSSStyleDeclarationImpl() {
+        parentRule_ = null;
     }
 
     /**
@@ -66,7 +68,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
         for (int i = 0; i < properties_.size(); ++i) {
             final Property p = properties_.get(i);
             if (p != null) {
-                sb.append(p.toString());
+                sb.append(p);
             }
             if (i < properties_.size() - 1) {
                 sb.append(";");
@@ -78,9 +80,18 @@ public class CSSStyleDeclarationImpl implements Serializable {
 
     /**
      * Sets the css text.
-     *
      * @param cssText the new css text
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
+     */
+    public void setCssText(final String cssText) throws DOMException {
+        setCssText(cssText, ThrowCssExceptionErrorHandler.INSTANCE);
+    }
+
+    /**
+     * Sets the css text.
+     * @param cssText the new css text
+     * @param cssErrorHandler the CSSErrorHandler to be used
+     * @throws DOMException in case of error
      */
     public void setCssText(final String cssText, final CSSErrorHandler cssErrorHandler) throws DOMException {
         try {

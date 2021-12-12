@@ -17,10 +17,7 @@ package com.gargoylesoftware.css.parser.selector;
 import com.gargoylesoftware.css.parser.Locatable;
 
 /**
- * <p>Selector interface.</p>
- *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public interface Selector extends Locatable {
 
@@ -28,11 +25,17 @@ public interface Selector extends Locatable {
      * SelectorType enum.
      */
     enum SelectorType {
+        /** CHILD_SELECTOR. */
         CHILD_SELECTOR,
+        /** DESCENDANT_SELECTOR. */
         DESCENDANT_SELECTOR,
+        /** DIRECT_ADJACENT_SELECTOR. */
         DIRECT_ADJACENT_SELECTOR,
+        /** ELEMENT_NODE_SELECTOR. */
         ELEMENT_NODE_SELECTOR,
+        /** GENERAL_ADJACENT_SELECTOR. */
         GENERAL_ADJACENT_SELECTOR,
+        /** PSEUDO_ELEMENT_SELECTOR. */
         PSEUDO_ELEMENT_SELECTOR
     }
 

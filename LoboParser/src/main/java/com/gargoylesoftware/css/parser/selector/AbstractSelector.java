@@ -21,7 +21,7 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 /**
  * <p>Abstract AbstractSelector class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public abstract class AbstractSelector extends AbstractLocatable implements Selector, Serializable {

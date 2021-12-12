@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,7 @@ package com.gargoylesoftware.css.parser;
 /**
  * Abstract base class of all locatables.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public class AbstractLocatable implements Locatable {
 

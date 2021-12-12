@@ -24,16 +24,16 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 /**
  * <p>MediaQuery class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class MediaQuery extends AbstractLocatable implements Serializable {
 
     private String media_;
-    private List<Property> properties_;
+    private final List<Property> properties_;
     private boolean implicitAll_;
-    private boolean isOnly_;
-    private boolean isNot_;
+    private final boolean isOnly_;
+    private final boolean isNot_;
 
     /**
      * Ctor.

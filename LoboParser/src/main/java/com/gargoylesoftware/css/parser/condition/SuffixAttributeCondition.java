@@ -21,7 +21,7 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 /**
  * <p>SuffixAttributeCondition class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class SuffixAttributeCondition extends AbstractLocatable implements Condition, Serializable {

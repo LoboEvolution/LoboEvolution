@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.gargoylesoftware.css.util.LangUtils;
 /**
  * <p>Property class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class Property extends AbstractLocatable implements Serializable {
@@ -105,7 +105,7 @@ public class Property extends AbstractLocatable implements Serializable {
         sb.append(name_);
         if (null != value_) {
             sb.append(": ");
-            sb.append(value_.toString());
+            sb.append(value_);
         }
         if (important_) {
             sb.append(" !important");

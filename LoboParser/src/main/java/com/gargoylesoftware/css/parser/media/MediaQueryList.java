@@ -22,7 +22,7 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 /**
  * Implementation of MediaQueryList.
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class MediaQueryList extends AbstractLocatable {

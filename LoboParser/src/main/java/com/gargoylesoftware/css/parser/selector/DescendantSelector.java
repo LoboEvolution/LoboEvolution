@@ -17,7 +17,7 @@ package com.gargoylesoftware.css.parser.selector;
 /**
  * <p>DescendantSelector class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class DescendantSelector extends AbstractSelector {
@@ -67,7 +67,7 @@ public class DescendantSelector extends AbstractSelector {
         final StringBuilder sb = new StringBuilder();
 
         if (null != ancestorSelector_) {
-            sb.append(ancestorSelector_.toString());
+            sb.append(ancestorSelector_);
         }
 
         if (SelectorType.PSEUDO_ELEMENT_SELECTOR != getSimpleSelector().getSelectorType()) {
@@ -75,7 +75,7 @@ public class DescendantSelector extends AbstractSelector {
         }
 
         if (null != simpleSelector_) {
-            sb.append(simpleSelector_.toString());
+            sb.append(simpleSelector_);
         }
 
         return sb.toString();

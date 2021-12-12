@@ -22,7 +22,7 @@ import com.gargoylesoftware.css.parser.Locator;
 /**
  * <p>PseudoClassCondition class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class PseudoClassCondition extends AbstractLocatable implements Condition, Serializable {

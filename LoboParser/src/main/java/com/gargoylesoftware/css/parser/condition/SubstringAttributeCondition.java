@@ -21,7 +21,7 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 /**
  * <p>SubstringAttributeCondition class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class SubstringAttributeCondition extends AbstractLocatable implements Condition, Serializable {

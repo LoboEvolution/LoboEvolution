@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
 /**
  * Implementation of CSSMediaRule.
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
@@ -141,11 +141,13 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
         catch (final IndexOutOfBoundsException e) {
             throw new DOMException(
                     DOMException.INDEX_SIZE_ERR,
+					DOMException.INDEX_OUT_OF_BOUNDS,
                 e.getMessage());
         }
         catch (final CSSException e) {
             throw new DOMException(
                 DOMException.SYNTAX_ERR,
+				DOMException.SYNTAX_ERROR,
                 e.getMessage());
         }
         catch (final IOException e) {
@@ -168,6 +170,7 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
         catch (final IndexOutOfBoundsException e) {
             throw new DOMException(
                 DOMException.INDEX_SIZE_ERR,
+				DOMException.INDEX_OUT_OF_BOUNDS,
                 e.getMessage());
         }
     }

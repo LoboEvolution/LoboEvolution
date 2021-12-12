@@ -21,7 +21,7 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 /**
  * <p>OneOfAttributeCondition class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class OneOfAttributeCondition extends AbstractLocatable implements Condition, Serializable {

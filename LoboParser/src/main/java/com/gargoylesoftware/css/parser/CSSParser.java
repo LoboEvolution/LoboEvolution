@@ -21,7 +21,7 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
 /**
  * Basic interface of the CSS parser.
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public interface CSSParser {

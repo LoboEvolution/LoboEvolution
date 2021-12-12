@@ -24,7 +24,7 @@ import com.gargoylesoftware.css.parser.condition.Condition;
 /**
  * <p>ElementSelector class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class ElementSelector extends AbstractSelector implements SimpleSelector {
@@ -118,7 +118,7 @@ public class ElementSelector extends AbstractSelector implements SimpleSelector 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        final StringBuffer result = new StringBuffer();
+        final StringBuilder result = new StringBuilder();
         result.append(getElementName());
 
         if (conditions_ != null) {

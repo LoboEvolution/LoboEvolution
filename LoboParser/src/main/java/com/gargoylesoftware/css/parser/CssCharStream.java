@@ -9,9 +9,6 @@ import com.gargoylesoftware.css.parser.javacc.CharStream;
  * There is no processing of escaping in this class because the escaping is
  * part of the parser. CSS has some strange rules about that, so processing
  * unicode escapes in this class is too early.
- *
- *
- *
  */
 @SuppressWarnings("all")
 public final class CssCharStream implements CharStream
@@ -136,11 +133,7 @@ public final class CssCharStream implements CharStream
     }
   }
 
-/**
- * {@inheritDoc}
- *
- * Start.
- */
+  /** Start. */
   @Override
 public final char BeginToken() throws java.io.IOException
   {

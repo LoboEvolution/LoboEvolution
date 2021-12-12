@@ -21,7 +21,7 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 /**
  * <p>BeginHyphenAttributeCondition class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class BeginHyphenAttributeCondition extends AbstractLocatable implements Condition, Serializable {

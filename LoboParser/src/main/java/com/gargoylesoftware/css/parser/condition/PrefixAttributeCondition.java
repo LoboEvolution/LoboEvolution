@@ -21,7 +21,7 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 /**
  * <p>PrefixAttributeCondition class.</p>
  *
- * Author Ronlad Brill
+ * @author Ronald Brill
  *
  */
 public class PrefixAttributeCondition extends AbstractLocatable implements Condition, Serializable {

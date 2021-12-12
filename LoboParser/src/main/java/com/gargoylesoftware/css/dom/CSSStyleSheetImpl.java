@@ -404,8 +404,8 @@ public class CSSStyleSheetImpl implements Serializable {
      * SelectorEntry.
      */
     public static final class SelectorEntry {
-        private Selector selector_;
-        private CSSStyleRuleImpl rule_;
+        private final Selector selector_;
+        private final CSSStyleRuleImpl rule_;
 
         SelectorEntry(final Selector selector, final CSSStyleRuleImpl rule) {
             selector_ = selector;
@@ -437,11 +437,7 @@ public class CSSStyleSheetImpl implements Serializable {
             private final Map<String, List<SelectorEntry>> keyToSelectors_ = new HashMap<>();
 
             void add(final String key, final SelectorEntry selector) {
-                List<SelectorEntry> entry = keyToSelectors_.get(key);
-                if (entry == null) {
-                    entry = new ArrayList<>();
-                    keyToSelectors_.put(key, entry);
-                }
+                final List<SelectorEntry> entry = keyToSelectors_.computeIfAbsent(key, k -> new ArrayList<>());
                 entry.add(selector);
             }
 
@@ -500,7 +496,7 @@ public class CSSStyleSheetImpl implements Serializable {
         /**
          * Add a OtherSelector.
          *
-         * @param s         the selector
+         * @param s the selector
          * @param styleRule the rule
          */
         public void addOtherSelector(final Selector s, final CSSStyleRuleImpl styleRule) {
@@ -545,7 +541,7 @@ public class CSSStyleSheetImpl implements Serializable {
 
         /**
          * @param elementName the element
-         * @param classes     the classes
+         * @param classes the classes
          * @return Iterator of SelectorEntry
          */
         public Iterator<SelectorEntry> getSelectorEntriesIteratorFor(final String elementName, final String[] classes) {
@@ -554,7 +550,7 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     static final class SelectorEntriesIterator implements Iterator<SelectorEntry> {
-        private LinkedList<Iterator<SelectorEntry>> iterators_;
+        private final LinkedList<Iterator<SelectorEntry>> iterators_;
 
         SelectorEntriesIterator(final CSSStyleSheetRuleIndex index,
                 final String elementName,

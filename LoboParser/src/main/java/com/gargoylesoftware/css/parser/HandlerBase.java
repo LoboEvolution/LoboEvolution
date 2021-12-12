@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
 /**
  * Empty implementation of the DocumentHandlerExt interface.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public class HandlerBase implements DocumentHandler, CSSErrorHandler {
 
@@ -121,7 +120,7 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb.toString());
+        System.err.println(sb);
     }
 
     /** {@inheritDoc} */
@@ -135,7 +134,7 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb.toString());
+        System.err.println(sb);
     }
 
     /** {@inheritDoc} */
@@ -149,6 +148,6 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb.toString());
+        System.err.println(sb);
     }
 }

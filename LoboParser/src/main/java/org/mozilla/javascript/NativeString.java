@@ -27,7 +27,7 @@ import org.mozilla.javascript.regexp.NativeRegExp;
  *
  * Author Mike McCabe
  * Author Norris Boyd
- * Author Ronald Brill
+ * @author Ronald Brill
  */
 final class NativeString extends IdScriptableObject
 {

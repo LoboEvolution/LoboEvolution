@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
  * interface and registers an instance with the CSS parser using the
  * setCSSHandler method.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public interface DocumentHandler {
 

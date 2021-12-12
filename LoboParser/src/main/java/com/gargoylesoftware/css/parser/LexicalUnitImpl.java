@@ -26,7 +26,7 @@ import java.util.Locale;
  */
 public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, Serializable {
 
-    private LexicalUnitType lexicalUnitType_;
+    private final LexicalUnitType lexicalUnitType_;
     private LexicalUnit nextLexicalUnit_;
     private LexicalUnit previousLexicalUnit_;
     private double doubleValue_;
@@ -438,12 +438,6 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                     sb.append(range);
                 }
                 break;
-            case SUB_EXPRESSION:
-                final String subExpression = getStringValue();
-                if (null != subExpression) {
-                    sb.append(subExpression);
-                }
-                break;
             case FUNCTION:
             case FUNCTION_CALC:
                 final String functName = getFunctionName();
@@ -721,11 +715,6 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                     .append(getStringValue())
                     .append(")");
                 break;
-            case SUB_EXPRESSION:
-                sb.append("SUB_EXPRESSION(")
-                    .append(getStringValue())
-                    .append(")");
-                break;
             case FUNCTION:
             case FUNCTION_CALC:
                 sb.append("FUNCTION(")
@@ -733,7 +722,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                     .append("(");
                 LexicalUnit l = parameters_;
                 while (l != null) {
-                    sb.append(l.toString());
+                    sb.append(l);
                     l = l.getNextLexicalUnit();
                 }
                 sb.append("))");
@@ -747,7 +736,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
     private void appendParams(final StringBuilder sb) {
         LexicalUnit l = parameters_;
         if (l != null) {
-            sb.append(l.toString());
+            sb.append(l);
 
             LexicalUnit last = l;
             l = l.getNextLexicalUnit();
@@ -757,7 +746,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                         && !"=".equals(last.toString())) {
                     sb.append(" ");
                 }
-                sb.append(l.toString());
+                sb.append(l);
 
                 last = l;
                 l = l.getNextLexicalUnit();

@@ -19,8 +19,7 @@ import com.gargoylesoftware.css.parser.Locator;
 /**
  * <p>PseudoElementSelector class.</p>
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public class PseudoElementSelector extends AbstractSelector implements SimpleSelector {
 

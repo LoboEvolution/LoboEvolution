@@ -17,7 +17,7 @@ package com.gargoylesoftware.css.util;
 /**
  * Some utils.
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public final class LangUtils {

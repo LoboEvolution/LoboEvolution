@@ -393,7 +393,6 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
     //            case RECT_FUNCTION:
     //                return CSSPrimitiveValueType.CSS_RECT;
                 case UNICODERANGE:
-                case SUB_EXPRESSION:
                 case FUNCTION:
                 case FUNCTION_CALC:
                     return CSSPrimitiveValueType.CSS_STRING;
@@ -466,10 +465,10 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         if (value_ instanceof LexicalUnit) {
             final LexicalUnit lu = (LexicalUnit) value_;
             if ((lu.getLexicalUnitType() == LexicalUnitType.IDENT)
-                    || (lu.getLexicalUnitType() == LexicalUnitType.STRING_VALUE)
-                    || (lu.getLexicalUnitType() == LexicalUnitType.URI)
-                    || (lu.getLexicalUnitType() == LexicalUnitType.INHERIT)
-                    || (lu.getLexicalUnitType() == LexicalUnitType.ATTR)) {
+                || (lu.getLexicalUnitType() == LexicalUnitType.STRING_VALUE)
+                || (lu.getLexicalUnitType() == LexicalUnitType.URI)
+                || (lu.getLexicalUnitType() == LexicalUnitType.INHERIT)
+                || (lu.getLexicalUnitType() == LexicalUnitType.ATTR)) {
                 return lu.getStringValue();
             }
 

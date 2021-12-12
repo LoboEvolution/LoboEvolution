@@ -17,7 +17,7 @@ package com.gargoylesoftware.css.parser.selector;
 /**
  * <p>DirectAdjacentSelector class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class DirectAdjacentSelector extends AbstractSelector {
@@ -66,13 +66,13 @@ public class DirectAdjacentSelector extends AbstractSelector {
         final StringBuilder sb = new StringBuilder();
 
         if (null != selector_) {
-            sb.append(selector_.toString());
+            sb.append(selector_);
         }
 
         sb.append(" + ");
 
         if (null != simpleSelector_) {
-            sb.append(simpleSelector_.toString());
+            sb.append(simpleSelector_);
         }
 
         return sb.toString();

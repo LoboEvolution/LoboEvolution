@@ -25,11 +25,10 @@ import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
 /**
  * Implementation of RGBColor.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public class RGBColorImpl implements Serializable {
-    private String function_;
+    private final String function_;
 
     private CSSValueImpl red_;
     private CSSValueImpl green_;
@@ -221,14 +220,30 @@ public class RGBColorImpl implements Serializable {
 
     /**
      * Sets the blue part to a new value.
-     *
      * @param blue the new CSSPrimitiveValue
      */
     public void setBlue(final CSSValueImpl blue) {
         blue_ = blue;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * @return the alpha part.
+     */
+    public CSSValueImpl getAlpha() {
+        return alpha_;
+    }
+
+    /**
+     * Sets the alpha part to a new value.
+     * @param alpha the new CSSPrimitiveValue
+     */
+    public void setAlpha(final CSSValueImpl alpha) {
+        alpha_ = alpha;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Ronald Brill.
+ * Copyright (c) 2019-2021 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,11 @@ import java.io.Reader;
 /**
  * The input supported by the parser.
  *
- * Author Ronald Brill
- *
+ * @author Ronald Brill
  */
 public class InputSource implements Closeable {
     private String uri_;
-    private Reader reader_;
+    private final Reader reader_;
     private String media_;
     private String title_;
 
@@ -73,7 +72,7 @@ public class InputSource implements Closeable {
      */
     public String getMedia() {
         if (media_ == null) {
-            return "all";
+            return "";
         }
         return media_;
     }

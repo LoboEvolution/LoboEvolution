@@ -22,12 +22,12 @@ import com.gargoylesoftware.css.parser.Locator;
 /**
  * <p>LangCondition class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class LangCondition extends AbstractLocatable implements Condition, Serializable {
 
-    private String lang_;
+    private final String lang_;
 
     /**
      * Ctor.

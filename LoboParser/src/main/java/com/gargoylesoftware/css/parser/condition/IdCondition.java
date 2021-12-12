@@ -22,7 +22,7 @@ import com.gargoylesoftware.css.parser.Locator;
 /**
  * <p>IdCondition class.</p>
  *
- * Author Ronald Brill
+ * @author Ronald Brill
  *
  */
 public class IdCondition extends AbstractLocatable implements Condition, Serializable {
