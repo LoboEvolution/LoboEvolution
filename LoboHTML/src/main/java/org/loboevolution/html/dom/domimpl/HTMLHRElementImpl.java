@@ -22,12 +22,14 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLHRElement;
 import org.loboevolution.html.renderstate.BlockRenderState;
+import org.loboevolution.html.renderstate.HRRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLHRElementImpl class.</p>
  */
 public class HTMLHRElementImpl extends HTMLElementImpl implements HTMLHRElement {
+
 	/**
 	 * <p>Constructor for HTMLHRElementImpl.</p>
 	 *
@@ -99,7 +101,7 @@ public class HTMLHRElementImpl extends HTMLElementImpl implements HTMLHRElement 
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new BlockRenderState(prevRenderState, this);
+		return new HRRenderState(prevRenderState, this);
 	}
 
 	/** {@inheritDoc} */

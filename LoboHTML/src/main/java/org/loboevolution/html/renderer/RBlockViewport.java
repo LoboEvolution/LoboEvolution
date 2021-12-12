@@ -22,7 +22,6 @@ package org.loboevolution.html.renderer;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.HTMLTag;
-import org.loboevolution.html.control.HrControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.UIControl;
 import org.loboevolution.html.dom.HTMLDocument;
@@ -1175,20 +1174,6 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	/**
-	 * <p>layoutHr.</p>
-	 *
-	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	protected final void layoutHr(HTMLElementImpl markupElement) {
-		RElement renderable = (RElement) markupElement.getUINode();
-		if (renderable == null) {
-			renderable = setupNewUIControl(this.container, markupElement, new HrControl(markupElement));
-		}
-		renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
-		addAlignableAsBlock(markupElement, renderable);
-	}
-
-	/**
 	 * <p>layoutList.</p>
 	 *
 	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
@@ -1926,8 +1911,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private RElement setupNewUIControl(RenderableContainer container, HTMLElementImpl element, UIControl control) {
-		final RElement renderable = new RUIControl(element, control, container, this.frameContext,
-				this.userAgentContext);
+		final RElement renderable = new RUIControl(element, control, container, this.frameContext, this.userAgentContext);
 		element.setUINode(renderable);
 		return renderable;
 	}

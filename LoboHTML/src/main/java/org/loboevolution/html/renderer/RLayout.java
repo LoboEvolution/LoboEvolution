@@ -103,7 +103,6 @@ public class RLayout {
 		el.put(HTMLTag.UL,list);
 		el.put(HTMLTag.OL,list);
 		el.put(HTMLTag.LI,list);
-		el.put(HTMLTag.HR,new HrLayout());
 
 		final ObjectLayout ol = new ObjectLayout(false);
 		el.put(HTMLTag.OBJECT,new ObjectLayout(true));
@@ -290,14 +289,6 @@ public class RLayout {
 			UIControl control = new RSSControl((RSSElementImpl) markupElement);
 			return new RUIControl(markupElement,control, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
-		}
-	}
-
-	protected static class HrLayout implements MarkupLayout {
-
-		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			bodyLayout.layoutHr(markupElement);
 		}
 	}
 
