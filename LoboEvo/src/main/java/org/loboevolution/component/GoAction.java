@@ -88,7 +88,14 @@ public class GoAction extends AbstractAction {
 		}
 	}
 
-	private void goURL(String text) {
+	private void goURL(String url) {
+		String text = url;
+
+		if (url.matches("^(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$")) {
+			// TODO try add www ... have multiple options ... try https:// ... if not working try http://
+			text = "https://" + url;
+		}
+
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(this.panel);
 		final int indexPanel = tabbedPane.getSelectedIndex();

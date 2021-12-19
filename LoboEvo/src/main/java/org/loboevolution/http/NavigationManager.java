@@ -106,6 +106,11 @@ public class NavigationManager {
 			return HtmlPanel.createHtmlPanel(browserPanel, search);
 		}
 
+		if (search.matches("^(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$")) {
+			// TODO try add www ... have multiple options ... try https:// ... if not working try http://
+			return HtmlPanel.createHtmlPanel(browserPanel, "https://" + search);
+		}
+
 		final ToolsStore tools = new ToolsStore();
 		final List<SearchEngineStore> searchEngineStores = tools.getSearchEngines();
 
