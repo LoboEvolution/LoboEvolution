@@ -79,7 +79,27 @@ public class GradientStyle {
 		return image;
 	}
 
+	// TODO static util
+	// TODO support "linear-gradient(to bottom, rgb(0, 0, 0.5) 0 rgb(0, 0, 1) 100%)
+	private static String evalFunctionsThenInline(String expression/*, String format */) {
+		//return "linear-gradient(to bottom, 0,0,0 0 255,255,255 100%)";
+		return "linear-gradient(to bottom, white, black);";
+
+		// TODO NYI
+
+//		String[] parts = expression.split("rgb\\w*\\(");
+//
+//		if (parts.length == 0) {
+//			return "";
+//		}
+//
+//		String result = parts[0];
+
+	}
+
 	private BufferedImage linearGadient(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
+		backgroundImage = evalFunctionsThenInline(backgroundImage);
+
 		start = start + "(";
 		final int startIdx = start.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');

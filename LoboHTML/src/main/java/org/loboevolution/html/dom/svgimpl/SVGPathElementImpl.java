@@ -782,7 +782,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 			absolute = false;
 		}
 
-		String delims = " ,-\n\t\r";
+		String delims = " ,\n\t\r";
 
 		parameters = parameters.trim();
 		parameters = trimCommas(parameters);
@@ -1114,37 +1114,33 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		return token;
 	}
 
+	// 1.2.3, 4.6 => 1.2 0.3 4.6
 	private String trimCommas(String params) {
-		int dot = 0;
 		StringBuilder tok = new StringBuilder();
-		final List<String> tokensWithCollection = Strings.getTokensWithCollection(params, " ,.-\n\t\r");
-		
+		String delimiters = " ,\n\t\r";
+		final List<String> tokensWithCollection = Strings.getTokensWithCollection(params, delimiters);
+
 		for (String token : tokensWithCollection) {
-			switch (token) {
-			case ".":
-				if (dot == 1) {
-					tok.append(" .");
-					dot = 0;
-				} else {
-					tok.append(token);
+			if (delimiters.contains(token)) {
+				tok.append(" ");
+				continue;
+			}
+
+			String[] parts = token.split("\\.");
+			for (int i = 0 ; i < parts.length; i++) {
+				if (i == 0) {
+					tok.append(parts[i]);
 				}
-				dot++;
-				break;
-			default:
-				switch (token) {
-				case " ":
-					dot = 0;
-					break;
-				case "-":
-					tok.append(" ");
-					dot = 0;
-					break;
-				default:
-					break;
+				else if (i == 1) {
+					tok.append(".");
+					tok.append(parts[i]);
 				}
-				tok.append(token);
+				else {
+					tok.append(" 0.");
+					tok.append(parts[i]);
+				}
 			}
 		}
-		return Strings.isNotBlank(tok.toString()) ? tok.toString() : params;
+		return tok.toString();
 	}
 }

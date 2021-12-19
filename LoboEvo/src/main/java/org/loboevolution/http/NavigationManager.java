@@ -102,8 +102,13 @@ public class NavigationManager {
 	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
 	 */
 	public static HtmlPanel getHtmlPanelSearch(IBrowserPanel browserPanel, String search) {
+		if (search.toLowerCase().startsWith("http://") || search.toLowerCase().startsWith("https://")) {
+			return HtmlPanel.createHtmlPanel(browserPanel, search);
+		}
+
 		final ToolsStore tools = new ToolsStore();
 		final List<SearchEngineStore> searchEngineStores = tools.getSearchEngines();
+
 		for (final SearchEngineStore searchEngineStore : searchEngineStores) {
 			if (searchEngineStore.isSelected()) {
 				final String uri = searchEngineStore.getBaseUrl() + search.replace(" ", "%20");

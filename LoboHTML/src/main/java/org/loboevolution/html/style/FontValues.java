@@ -346,11 +346,16 @@ public class FontValues extends HtmlValues {
 	public static String getFontWeight(String fontWeight, RenderState parentRenderState) {
 		if (fontWeight == null) {
 			if (parentRenderState != null) {
-				if(parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT) == null){
+				Object ret = parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT);
+				if (ret == null){
 					return CSSValues.BOLD400.getValue();
+				} else {
+					if (ret instanceof String)
+						return (String) ret;
+					else
+						// TODO
+						return CSSValues.BOLD400.getValue();
 				}
-
-				return (String) parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT);
 			} else {
 				if (laf.isBold())
 					return CSSValues.BOLD400.getValue();
