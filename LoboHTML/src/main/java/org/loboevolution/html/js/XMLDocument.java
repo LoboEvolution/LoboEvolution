@@ -550,7 +550,7 @@ public class XMLDocument implements Document {
 	/** {@inheritDoc} */
 	@Override
 	public Node getRootNode() {
-
+		// TODO is this the root node?
 		return doc.getRootNode();
 	}
 

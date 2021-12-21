@@ -126,13 +126,14 @@ public class GuiInit {
 	 *
 	 * @throws java.lang.Exception if any.
 	 */
-	public static void createAndShowGui() throws Exception {
+	public static BrowserFrame createAndShowGui() throws Exception {
 		initLookAndFeel();
 		final BrowserFrame frame = new BrowserFrame("LoboEvo");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		return frame;
 	}
 
 	/**
@@ -140,12 +141,12 @@ public class GuiInit {
 	 *
 	 * @throws java.lang.Exception if any.
 	 */
-	public void install() throws Exception {
+	public BrowserFrame install() throws Exception {
 		if (!DatabseSQLite.storeExist()) {
 			new ProgressBar();
-		} else {
-			createAndShowGui();
 		}
+		// todo ... why was there an else here?
+		return createAndShowGui();
 	}
 
 }
