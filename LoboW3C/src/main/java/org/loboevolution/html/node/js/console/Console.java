@@ -21,10 +21,8 @@
 package org.loboevolution.html.node.js.console;
 
 /**
- * Provides access to the browser's debugging console (e.g. the Web Console in Firefox). The specifics of how it works varies from browser to browser, but there is a de facto set of features that are typically provided.
- *
- *
- *
+ * Provides access to the browser's debugging console.
+ * The specifics of how it works varies from browser to browser, but there is a de facto set of features that are typically provided.
  */
 public interface Console {
    
@@ -53,35 +51,16 @@ public interface Console {
     void debug(Object message);
 
     /**
-     * <p>debug.</p>
-     *
-     * @param message a int.
-     */
-    void debug(int message);
-
-    /**
-     * <p>debug.</p>
-     *
-     * @param message a double.
-     */
-    void debug(double message);
-
-    /**
-     * <p>debug.</p>
-     *
-     * @param message a boolean.
-     */
-    void debug(boolean message);
-
-    /**
-     * <p>debug.</p>
-     */
-    void debug();
-
-    /**
      * <p>dir.</p>
      */
     void dir();
+
+    /**
+     * <p>log.</p>
+     *
+     * @param message a {@link java.lang.Object} object.
+     */
+    void log(Object message);
 
     /**
      * <p>error.</p>
@@ -89,43 +68,6 @@ public interface Console {
      * @param message a {@link java.lang.Object} object.
      */
     void error(Object message);
-
-    /**
-     * <p>error.</p>
-     *
-     * @param message a int.
-     */
-    void error(int message);
-
-    /**
-     * <p>error.</p>
-     *
-     * @param message a double.
-     */
-    void error(double message);
-
-    /**
-     * <p>error.</p>
-     *
-     * @param message a boolean.
-     */
-    void error(boolean message);
-
-    /**
-     * <p>error.</p>
-     */
-    void error();
-    /**
-     * <p>exception.</p>
-     *
-     * @param message a {@link java.lang.Object} object.
-     */
-    void exception(Object message);
-
-    /**
-     * <p>exception.</p>
-     */
-    void exception();
 
     /**
      * <p>group.</p>
@@ -162,65 +104,6 @@ public interface Console {
      * @param message a {@link java.lang.Object} object.
      */
     void info(Object message);
-
-    /**
-     * <p>info.</p>
-     *
-     * @param message a int.
-     */
-    void info(int message);
-
-    /**
-     * <p>info.</p>
-     *
-     * @param message a double.
-     */
-    void info(double message);
-
-    /**
-     * <p>info.</p>
-     *
-     * @param message a boolean.
-     */
-    void info(boolean message);
-
-    /**
-     * <p>info.</p>
-     */
-    void info();
-
-    /**
-     * <p>log.</p>
-     *
-     * @param message a {@link java.lang.Object} object.
-     */
-    void log(Object message);
-
-    /**
-     * <p>log.</p>
-     *
-     * @param message a int.
-     */
-    void log(int message);
-
-    /**
-     * <p>log.</p>
-     *
-     * @param message a double.
-     */
-    void log(double message);
-
-    /**
-     * <p>log.</p>
-     *
-     * @param message a boolean.
-     */
-    void log(boolean message);
-
-    /**
-     * <p>log.</p>
-     */
-    void log();
 
     /**
      * <p>markTimeline.</p>
@@ -326,62 +209,10 @@ public interface Console {
     void trace(Object message);
 
     /**
-     * <p>trace.</p>
-     *
-     * @param message a int.
-     */
-    void trace(int message);
-
-    /**
-     * <p>trace.</p>
-     *
-     * @param message a double.
-     */
-    void trace(double message);
-
-    /**
-     * <p>trace.</p>
-     *
-     * @param message a boolean.
-     */
-    void trace(boolean message);
-
-    /**
-     * <p>trace.</p>
-     */
-    void trace();
-
-    /**
      * <p>warn.</p>
      *
      * @param message a {@link java.lang.Object} object.
      */
     void warn(Object message);
-
-    /**
-     * <p>warn.</p>
-     *
-     * @param message a int.
-     */
-    void warn(int message);
-
-    /**
-     * <p>warn.</p>
-     *
-     * @param message a double.
-     */
-    void warn(double message);
-
-    /**
-     * <p>warn.</p>
-     *
-     * @param message a boolean.
-     */
-    void warn(boolean message);
-
-    /**
-     * <p>warn.</p>
-     */
-    void warn();
 
 }

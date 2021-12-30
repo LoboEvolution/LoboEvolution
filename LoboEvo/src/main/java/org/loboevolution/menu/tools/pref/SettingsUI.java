@@ -31,6 +31,7 @@ import javax.swing.border.EmptyBorder;
 import org.loboevolution.gui.ItemEditorFactory;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.info.GeneralInfo;
+import org.loboevolution.menu.tools.AbstractToolsUI;
 import org.loboevolution.menu.tools.pref.data.ImportDataAction;
 import org.loboevolution.menu.tools.pref.search.ItemListControl;
 import org.loboevolution.menu.tools.pref.search.SearchEngineEditor;
@@ -46,7 +47,7 @@ import com.jtattoo.plaf.lobo.LoboPanel;
 /**
  * The Class ToolsSettingsUI.
  */
-public class ToolsSettingsUI extends AbstractSettingsUI {
+public class SettingsUI extends AbstractToolsUI {
 
 	private static final String BOOKMARKS = "BOOKMARKS";
 
@@ -82,7 +83,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	/**
 	 * Instantiates a new tools settings ui.
 	 */
-	public ToolsSettingsUI() {
+	public SettingsUI() {
 		createAndShowGUI();
 	}
 

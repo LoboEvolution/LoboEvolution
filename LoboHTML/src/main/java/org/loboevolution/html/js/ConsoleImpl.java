@@ -20,452 +20,306 @@
 
 package org.loboevolution.html.js;
 
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import org.loboevolution.html.js.storage.SessionStorage;
 import org.loboevolution.html.node.js.console.Console;
+
+import java.util.Date;
 
 /**
  * <p>ConsoleImpl class.</p>
- *
- *
- *
  */
 public class ConsoleImpl implements Console {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ConsoleImpl.class.getName());
 
+    /**
+     * The time.
+     */
+    private Date time;
 
-	/** The time. */
-	private Date time;
+    /**
+     * The str time.
+     */
+    private String strTime;
 
-	/** The str time. */
-	private String strTime;
+    private final SessionStorage sessionStorage;
 
-	/**
-	 * <p>log.</p>
-	 *
-	 * @param obj a {@link java.lang.Object} object.
-	 */
-	public void log(Object obj) {
-		logger.log(Level.FINE, obj.toString());
-	}
+    public ConsoleImpl() {
+        this.sessionStorage = new SessionStorage();
+    }
 
-	/**
-	 * <p>debug.</p>
-	 *
-	 * @param obj a {@link java.lang.Object} object.
-	 */
-	public void debug(Object obj) {
-		logger.log(Level.ALL, obj.toString());
-
-	}
-
-	/**
-	 * <p>info.</p>
-	 *
-	 * @param obj a {@link java.lang.Object} object.
-	 */
-	public void info(Object obj) {
-		logger.log(Level.INFO, obj.toString());
-
-	}
-
-	/**
-	 * <p>warn.</p>
-	 *
-	 * @param obj a {@link java.lang.Object} object.
-	 */
-	public void warn(Object obj) {
-		logger.log(Level.WARNING, obj.toString());
-
-	}
-
-	/**
-	 * <p>error.</p>
-	 *
-	 * @param obj a {@link java.lang.Object} object.
-	 */
-	public void error(Object obj) {
-		logger.log(Level.SEVERE ,obj.toString());
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>time.</p>
-	 */
-	public void time(String name) {
-		time = new Date();
-		logger.info(name + ": timer started");
-		strTime = name;
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>timeEnd.</p>
-	 */
-	public void timeEnd(String name) {
-		if (name.equals(strTime)) {
-			Date date = new Date();
-			Date result = new Date(time.getTime() - date.getTime());
-			logger.info(strTime + ": " + result);
-		}
-
-	}
-
-	/** {@inheritDoc} */
+	/** {@inheritDoc}*/
 	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
+    public void log(Object message) {
+		logging(message);
 	}
 
-	/** {@inheritDoc} */
+	/** {@inheritDoc}*/
 	@Override
-	public void count(String label) {
-		// TODO Auto-generated method stub
-		
+    public void debug(Object message) {
+		logging(message);
 	}
 
-	/** {@inheritDoc} */
+	/** {@inheritDoc}*/
 	@Override
-	public void count() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void info(Object message) {
+		logging(message);
+    }
 
-	/** {@inheritDoc} */
+	/** {@inheritDoc}*/
 	@Override
-	public void debug(int message) {
-		// TODO Auto-generated method stub
-		
+    public void warn(Object message) {
+        logging(message);
 	}
 
-	/** {@inheritDoc} */
+	/** {@inheritDoc}*/
 	@Override
-	public void debug(double message) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void error(Object message) {
+		logging(message);
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void debug(boolean message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void debug() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void dir() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void error(int message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void error(double message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void error(boolean message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void error() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void exception(Object message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void exception() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void group(String groupTitle) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void group() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void groupCollapsed(String groupTitle) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void groupCollapsed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void groupEnd() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void info(int message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void info(double message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void info(boolean message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void info() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void log(int message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void log(double message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void log(boolean message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void log() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void markTimeline(String label) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void markTimeline() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void profile(String reportName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void profile() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void profileEnd(String reportName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void profileEnd() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void time() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void timeEnd() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void timeStamp(String label) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void timeStamp() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void timeline(String label) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void timeline() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void timelineEnd(String label) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void timelineEnd() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
+	/** {@inheritDoc}*/
 	@Override
 	public void trace(Object message) {
-		// TODO Auto-generated method stub
-		
+		logging(message);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void trace(int message) {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * {@inheritDoc}
+     *
+     * <p>time.</p>
+     */
+    public void time(String name) {
+        time = new Date();
+       // logger.info(name + ": timer started");
+        strTime = name;
 
-	/** {@inheritDoc} */
-	@Override
-	public void trace(double message) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void trace(boolean message) {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * {@inheritDoc}
+     *
+     * <p>timeEnd.</p>
+     */
+    public void timeEnd(String name) {
+        if (name.equals(strTime)) {
+            Date date = new Date();
+            Date result = new Date(time.getTime() - date.getTime());
+           // logger.info(strTime + ": " + result);
+        }
 
-	/** {@inheritDoc} */
-	@Override
-	public void trace() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void warn(int message) {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clear() {
+        sessionStorage.removeItem("log");
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void warn(double message) {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void count(String label) {
+        // TODO Auto-generated method stub
 
-	/** {@inheritDoc} */
-	@Override
-	public void warn(boolean message) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void warn() {
-		// TODO Auto-generated method stub
-		
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void count() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dir() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void group(String groupTitle) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void group() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void groupCollapsed(String groupTitle) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void groupCollapsed() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void groupEnd() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void markTimeline(String label) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void markTimeline() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void profile(String reportName) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void profile() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void profileEnd(String reportName) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void profileEnd() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void time() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timeEnd() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timeStamp(String label) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timeStamp() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timeline(String label) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timeline() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timelineEnd(String label) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void timelineEnd() {
+        // TODO Auto-generated method stub
+
+    }
+
+	private void logging(Object message){
+		final Object log = sessionStorage.getItem("log");
+		if (log == null) {
+			sessionStorage.setItem("log", String.valueOf(message));
+		} else {
+			sessionStorage.setItem("log", log + "\n" + message);
+		}
 	}
 }

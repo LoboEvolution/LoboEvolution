@@ -44,15 +44,17 @@ public class WebStore {
 	 * <p>getValue.</p>
 	 *
 	 * @param key a {@link java.lang.String} object.
-	 * @param index a int.
+	 * @param session a {@link java.lang.Integer} object.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getValue(String key, int index) {
+	public static String getValue(String key, int session, int index) {
 		String name = null;
 		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_VALUE)) {
 			pstmt.setString(1, key);
-			pstmt.setInt(2, index);
+			pstmt.setInt(2, session);
+			pstmt.setInt(3, index);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					name = rs.getString(1);
@@ -68,13 +70,15 @@ public class WebStore {
 	 * <p>getMapStorage.</p>
 	 *
 	 * @return a {@link java.util.Map} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
+	 * @param session a {@link java.lang.Integer} object.
 	 */
-	public static Map<String, String> getMapStorage(int index) {
+	public static Map<String, String> getMapStorage(int index,  int session) {
 		Map<String, String> map = new HashMap<>();
 		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_MAP)) {
 			pstmt.setInt(1, index);
+			pstmt.setInt(2, session);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					map.put(rs.getString(1), rs.getString(2));

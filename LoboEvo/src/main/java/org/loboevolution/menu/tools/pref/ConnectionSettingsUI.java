@@ -34,6 +34,7 @@ import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
 import org.loboevolution.gui.SwingTasks;
+import org.loboevolution.menu.tools.AbstractToolsUI;
 import org.loboevolution.store.ConnectionStore;
 
 import com.jtattoo.plaf.lobo.LoboCheckBox;
@@ -42,11 +43,8 @@ import com.jtattoo.plaf.lobo.LoboRadioButton;
 
 /**
  * <p>ConnectionSettingsUI class.</p>
- *
- *
- *
  */
-public class ConnectionSettingsUI extends AbstractSettingsUI {
+public class ConnectionSettingsUI extends AbstractToolsUI {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

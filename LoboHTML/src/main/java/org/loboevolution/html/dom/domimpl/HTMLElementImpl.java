@@ -130,7 +130,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param mouseOver a {@link java.lang.Boolean } object.
 	 * @return a {@link java.util.List} object.
 	 */
-	protected final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes, boolean mouseOver) {
+	public final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes, boolean mouseOver) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 
 		if (doc == null) {

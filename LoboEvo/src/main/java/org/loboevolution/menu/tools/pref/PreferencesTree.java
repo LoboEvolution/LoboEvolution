@@ -25,12 +25,11 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import com.jtattoo.plaf.lobo.LoboTree;
+import org.loboevolution.menu.tools.AbstractToolsUI;
+import org.loboevolution.menu.tools.ToolsInfo;
 
 /**
  * <p>PreferencesTree class.</p>
- *
- *
- *
  */
 public class PreferencesTree extends LoboTree {
 
@@ -60,7 +59,7 @@ public class PreferencesTree extends LoboTree {
 		root.add(new DefaultMutableTreeNode(getConnectionSettingsInfo()));
 		root.add(new DefaultMutableTreeNode(getGeneralSettingsInfo()));
 		root.add(new DefaultMutableTreeNode(getLookAndFeelsSettingsInfo()));
-		root.add(new DefaultMutableTreeNode(getToolsSettingsInfo()));
+		root.add(new DefaultMutableTreeNode(getSettingsInfo()));
 		return root;
 	}
 
@@ -69,10 +68,10 @@ public class PreferencesTree extends LoboTree {
 	 *
 	 * @return the connection settings info
 	 */
-	private SettingsInfo getConnectionSettingsInfo() {
-		return new SettingsInfo() {
+	private ToolsInfo getConnectionSettingsInfo() {
+		return new ToolsInfo() {
 			@Override
-			public AbstractSettingsUI createSettingsUI() {
+			public AbstractToolsUI createSettingsUI() {
 				return new ConnectionSettingsUI();
 			}
 
@@ -98,10 +97,10 @@ public class PreferencesTree extends LoboTree {
 	 *
 	 * @return the general settings info
 	 */
-	private SettingsInfo getGeneralSettingsInfo() {
-		return new SettingsInfo() {
+	private ToolsInfo getGeneralSettingsInfo() {
+		return new ToolsInfo() {
 			@Override
-			public AbstractSettingsUI createSettingsUI() {
+			public AbstractToolsUI createSettingsUI() {
 				return new GeneralSettingsUI();
 			}
 
@@ -127,10 +126,10 @@ public class PreferencesTree extends LoboTree {
 	 *
 	 * @return the look and feels settings info
 	 */
-	private SettingsInfo getLookAndFeelsSettingsInfo() {
-		return new SettingsInfo() {
+	private ToolsInfo getLookAndFeelsSettingsInfo() {
+		return new ToolsInfo() {
 			@Override
-			public AbstractSettingsUI createSettingsUI() {
+			public AbstractToolsUI createSettingsUI() {
 				return new LookAndFeelsSettingsUI();
 			}
 
@@ -156,21 +155,21 @@ public class PreferencesTree extends LoboTree {
 	 *
 	 * @return the tools settings info
 	 */
-	private SettingsInfo getToolsSettingsInfo() {
-		return new SettingsInfo() {
+	private ToolsInfo getSettingsInfo() {
+		return new ToolsInfo() {
 			@Override
-			public AbstractSettingsUI createSettingsUI() {
-				return new ToolsSettingsUI();
+			public AbstractToolsUI createSettingsUI() {
+				return new SettingsUI();
 			}
 
 			@Override
 			public String getDescription() {
-				return "Tools settings.";
+				return "Settings.";
 			}
 
 			@Override
 			public String getName() {
-				return "Tools";
+				return "Settings";
 			}
 
 			@Override

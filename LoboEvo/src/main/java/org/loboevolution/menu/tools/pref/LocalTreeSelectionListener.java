@@ -20,6 +20,9 @@
 
 package org.loboevolution.menu.tools.pref;
 
+import org.loboevolution.menu.tools.AbstractToolsUI;
+import org.loboevolution.menu.tools.ToolsInfo;
+
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -27,9 +30,6 @@ import javax.swing.tree.TreePath;
 
 /**
  * <p>LocalTreeSelectionListener class.</p>
- *
- *
- *
  */
 public class LocalTreeSelectionListener implements TreeSelectionListener {
 
@@ -44,21 +44,21 @@ public class LocalTreeSelectionListener implements TreeSelectionListener {
 		this.preferenceWindow = preferenceWindow;
 	}
 
-	private void updatePreferencesPanel(SettingsInfo settingsInfo) {
-		if (settingsInfo != null) {
-			final AbstractSettingsUI newUI = settingsInfo.createSettingsUI();
-			this.preferenceWindow.getPreferencesPanel().setSettingsUI(newUI);
-		} else {
-			this.preferenceWindow.getPreferencesPanel().setSettingsUI(null);
-		}
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void valueChanged(TreeSelectionEvent evt) {
 		final TreePath path = evt.getPath();
 		final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-		final SettingsInfo si = node == null ? null : (SettingsInfo) node.getUserObject();
+		final ToolsInfo si = node == null ? null : (ToolsInfo) node.getUserObject();
 		updatePreferencesPanel(si);
+	}
+
+	private void updatePreferencesPanel(ToolsInfo settingsInfo) {
+		if (settingsInfo != null) {
+			final AbstractToolsUI newUI = settingsInfo.createSettingsUI();
+			this.preferenceWindow.getPreferencesPanel().setSettingsUI(newUI);
+		} else {
+			this.preferenceWindow.getPreferencesPanel().setSettingsUI(null);
+		}
 	}
 }

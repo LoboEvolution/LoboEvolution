@@ -24,9 +24,6 @@ package org.loboevolution.html.node.js.webstorage;
  * This Web Storage API interface provides access to a particular domain's
  * session or local storage. It allows, for example, the addition, modification,
  * or deletion of stored data items.
- *
- *
- *
  */
 public interface Storage {
 	
@@ -81,21 +78,5 @@ public interface Storage {
 	 * @param value a {@link java.lang.String} object.
 	 */
 	void setItem(String key, String value);
-
-	/**
-	 * <p>get.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link java.lang.Object} object.
-	 */
-	Object get(String name);
-
-	/**
-	 * <p>set.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @param value a {@link java.lang.String} object.
-	 */
-	void set(String name, String value);
 
 }

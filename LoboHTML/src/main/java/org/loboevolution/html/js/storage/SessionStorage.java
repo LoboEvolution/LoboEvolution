@@ -31,13 +31,14 @@ import org.loboevolution.store.WebStore;
  */
 public class SessionStorage implements Storage {
 	
-	private final int index;
+	private int index;
 	
 	/**
 	 * <p>Constructor for SessionStorage.</p>
 	 */
 	public SessionStorage() {
 		this.index = TabStore.getTabs().size();
+		if(this.index > 0) this.index = this.index -1;
 	}
 
 	/** {@inheritDoc} */
@@ -50,7 +51,7 @@ public class SessionStorage implements Storage {
 	@Override
 	public Object key(int index) {
         int counter = 0;
-        Map<String, String> store = WebStore.getMapStorage(index);
+        Map<String, String> store = WebStore.getMapStorage(index, 1);
         for (final String key : store.keySet()) {
             if (counter++ == index) {
                 return key;
@@ -62,41 +63,27 @@ public class SessionStorage implements Storage {
 	/** {@inheritDoc} */
 	@Override
 	public Object getItem(String key) {
-		return WebStore.getValue(key, index);
+		return WebStore.getValue(key, 1, index);
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void setItem(String keyName, String keyValue) {
-		WebStore.deleteStorage(keyName, 0, index);
-		WebStore.insertStorage(keyName, keyValue, 0, index);
+		WebStore.deleteStorage(keyName, 1, index);
+		WebStore.insertStorage(keyName, keyValue, 1, index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void removeItem(String keyName) {
-		WebStore.deleteStorage(keyName, 0, index);
+		WebStore.deleteStorage(keyName, 1, index);
 
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void clear() {
-		WebStore.deleteStorage(0, index);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Object get(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void set(String name, String value) {
-		// TODO Auto-generated method stub
-		
+		WebStore.deleteStorage(1, index);
 	}
 
 	@Override

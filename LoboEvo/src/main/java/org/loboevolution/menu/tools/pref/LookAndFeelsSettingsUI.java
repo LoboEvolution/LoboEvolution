@@ -28,6 +28,7 @@ import org.loboevolution.gui.FontLabel;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.laf.FontType;
 import org.loboevolution.laf.LAFType;
+import org.loboevolution.menu.tools.AbstractToolsUI;
 import org.loboevolution.store.LookAndFeelsStore;
 
 import javax.swing.*;
@@ -42,7 +43,7 @@ import static java.awt.font.TextAttribute.*;
 /**
  * The Class LookAndFeelsSettingsUI.
  */
-public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
+public class LookAndFeelsSettingsUI extends AbstractToolsUI {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

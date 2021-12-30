@@ -18,34 +18,18 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.menu.tools.pref;
+package org.loboevolution.menu.tools;
+
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
- * <p>SettingsInfo interface.</p>
- *
- *
- *
+ * <p>Abstract AbstractSettingsUI class.</p>
  */
-public interface SettingsInfo {
+public abstract class AbstractToolsUI extends LoboPanel implements ToolsUIInfo {
 
-	/**
-	 * Creates the settings ui.
-	 *
-	 * @return the abstract settings ui
-	 */
-	AbstractSettingsUI createSettingsUI();
+	@Override
+	public void restoreDefaults() {}
 
-	/**
-	 * Gets the description.
-	 *
-	 * @return the description
-	 */
-	String getDescription();
-
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	String getName();
+	@Override
+	public void save() {}
 }

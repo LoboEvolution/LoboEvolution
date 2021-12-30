@@ -38,15 +38,13 @@ import org.loboevolution.menu.crono.ShowRecentHostsAction;
 import org.loboevolution.menu.file.OpenFileAction;
 import org.loboevolution.menu.file.SaveFileAction;
 import org.loboevolution.menu.tools.clear.ClearHistoryAction;
+import org.loboevolution.menu.tools.developer.DeveloperToolsAction;
 import org.loboevolution.menu.tools.pref.PreferencesAction;
 import org.loboevolution.menu.tools.screen.ScreenShotAction;
 import org.loboevolution.menu.view.*;
 
 /**
  * <p>MenuBar class.</p>
- *
- *
- *
  */
 public class MenuBar extends JMenuBar {
 
@@ -152,6 +150,7 @@ public class MenuBar extends JMenuBar {
 		final JMenu menu = new JMenu("Tools");
 		menu.setMnemonic('T');
 		menu.add(menuItem("Preferences...", 'P', new PreferencesAction(frame)));
+		menu.add(menuItem("Developer Tools", ' ', "", new DeveloperToolsAction(frame)));
 		menu.add(menuItem("Screenshot", ' ', "", new ScreenShotAction(frame)));
 		menu.add(menuItem("Clear History", 'M', "ctrl M", new ClearHistoryAction(frame)));
 		return menu;
@@ -166,9 +165,6 @@ public class MenuBar extends JMenuBar {
 	public JMenu getViewMenu(BrowserFrame frame) {
 		final JMenu menu = new JMenu("View");
 		menu.setMnemonic('V');
-		menu.add(menuItem("Page Source", 'S', new SourceAction(frame)));
-		menu.add(menuItem("Info Page", ' ', new InfoPageAction(frame)));
-		menu.add(menuItem("Cookie Page", ' ', new CookiePageAction(frame)));
 		menu.add(menuItem("Style", ' ', new StyleAction(frame)));
 		menu.add(menuItem("Full Screen", ' ', KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), new FullScreenAction(frame)));
 		return menu;

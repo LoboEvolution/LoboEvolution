@@ -18,28 +18,17 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.menu.tools.pref;
+package org.loboevolution.menu.tools;
 
-import com.jtattoo.plaf.lobo.LoboPanel;
+public interface ToolsUIInfo {
 
-/**
- * <p>Abstract AbstractSettingsUI class.</p>
- *
- *
- *
- */
-public abstract class AbstractSettingsUI extends LoboPanel {
+    /**
+     * Restore defaults.
+     */
+    void restoreDefaults();
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Restore defaults.
-	 */
-	public abstract void restoreDefaults();
-
-	/**
-	 * Save.
-	 */
-	public abstract void save();
+    /**
+     * Save.
+     */
+    void save();
 }

@@ -18,21 +18,20 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.menu.tools.pref;
+package org.loboevolution.menu.tools.developer;
+
+import com.jtattoo.plaf.lobo.LoboPanel;
+import org.loboevolution.common.WrapperLayout;
+import org.loboevolution.menu.tools.AbstractToolsUI;
 
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import org.loboevolution.common.WrapperLayout;
-
-import com.jtattoo.plaf.lobo.LoboPanel;
-import org.loboevolution.menu.tools.AbstractToolsUI;
-
 /**
- * The Class PreferencesPanel.
+ * The Class DeveloperToolPanel.
  */
-public class PreferencesPanel extends LoboPanel {
+public class DeveloperToolPanel extends LoboPanel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -43,36 +42,13 @@ public class PreferencesPanel extends LoboPanel {
 	/**
 	 * Instantiates a new preferences panel.
 	 */
-	public PreferencesPanel() {
+	public DeveloperToolPanel() {
 		createAndShowGUI();
 	}
 
 	private void createAndShowGUI() {
 		setLayout(WrapperLayout.getInstance());
 		setBorder(new CompoundBorder(new EtchedBorder(), new EmptyBorder(8, 8, 8, 8)));
-	}
-
-	/**
-	 * Restore defaults.
-	 */
-	public void restoreDefaults() {
-		final AbstractToolsUI ui = this.setting;
-		if (ui != null) {
-			ui.restoreDefaults();
-		}
-	}
-
-	/**
-	 * Save.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean save() {
-		final AbstractToolsUI ui = this.setting;
-		if (ui != null) {
-			ui.save();
-		}
-		return true;
 	}
 
 	/**

@@ -18,18 +18,31 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.node.js.console;
+package org.loboevolution.menu.tools;
 
 /**
- * <p>WindowConsole interface.</p>
+ * <p>ToolsInfo interface.</p>
  */
-public interface WindowConsole  {
-    
-    /**
-     * <p>getConsole.</p>
-     *
-     * @return a {@link org.loboevolution.html.node.js.console.Console} object.
-     */
-    Console getConsole();
+public interface ToolsInfo {
 
+	/**
+	 * Creates the settings ui.
+	 *
+	 * @return the abstract settings ui
+	 */
+	AbstractToolsUI createSettingsUI();
+
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
+	String getDescription();
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	String getName();
 }

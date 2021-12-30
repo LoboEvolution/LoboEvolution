@@ -49,7 +49,7 @@ public class LocalStorage implements Storage {
 	@Override
 	public Object key(int index) {
         int counter = 0;
-        Map<String, String> store = WebStore.getMapStorage(index);
+        Map<String, String> store = WebStore.getMapStorage(index, 0);
         for (final String key : store.keySet()) {
             if (counter++ == index) {
                 return key;
@@ -61,7 +61,7 @@ public class LocalStorage implements Storage {
 	/** {@inheritDoc} */
 	@Override
 	public Object getItem(String key) {
-		return WebStore.getValue(key, index);
+		return WebStore.getValue(key, 0, index);
 	}
 	
 	/** {@inheritDoc} */
@@ -75,27 +75,12 @@ public class LocalStorage implements Storage {
 	@Override
 	public void removeItem(String keyName) {
 		WebStore.deleteStorage(keyName, 0, index);
-
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void clear() {
 		WebStore.deleteStorage(0, index);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Object get(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void set(String name, String value) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

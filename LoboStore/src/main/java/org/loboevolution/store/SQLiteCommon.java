@@ -68,10 +68,10 @@ public class SQLiteCommon {
     public static final String LINK = "SELECT COUNT(*) FROM LINK_VISITED WHERE HREF = ?";
     
     /** Constant LINK="SELECT NAME FROM WEB_STORAGE WHERE"{trunked} */
-    public static final String WEBSTORAGE_VALUE = "SELECT VALUE FROM WEB_STORAGE WHERE KEY = ? AND TABINDEX = ?";
+    public static final String WEBSTORAGE_VALUE = "SELECT VALUE FROM WEB_STORAGE WHERE KEY = ? AND SESSION = ? AND TABINDEX = ?";
     
     /** Constant LINK="SELECT NAME, VALUE FROM WEB_STORAGE"{trunked} */
-    public static final String WEBSTORAGE_MAP = "SELECT KEY, VALUE FROM WEB_STORAGE WHERE TABINDEX = ?";
+    public static final String WEBSTORAGE_MAP = "SELECT KEY, VALUE FROM WEB_STORAGE WHERE TABINDEX = ? AND SESSION = ?";
         
     /** Constant WEBSTORAGE_DELETE_KEY="DELETE FROM WEB_STORAGE WHER"{trunked} */
     public static final String WEBSTORAGE_DELETE_KEY = "DELETE FROM WEB_STORAGE WHERE KEY = ? AND SESSION = ? AND TABINDEX = ?";

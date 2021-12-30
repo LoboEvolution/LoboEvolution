@@ -34,6 +34,7 @@ import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.info.GeneralInfo;
+import org.loboevolution.menu.tools.AbstractToolsUI;
 import org.loboevolution.menu.tools.pref.startup.StartupListControl;
 import org.loboevolution.store.GeneralStore;
 
@@ -44,7 +45,7 @@ import com.jtattoo.plaf.lobo.LoboPanel;
 /**
  * <p>GeneralSettingsUI class.</p>
  */
-public class GeneralSettingsUI extends AbstractSettingsUI {
+public class GeneralSettingsUI extends AbstractToolsUI {
 
 	/** The Constant EDIT_LIST_CAPTION. */
 	private static final String EDIT_LIST_CAPTION = "Startup URLs, one per line.";
