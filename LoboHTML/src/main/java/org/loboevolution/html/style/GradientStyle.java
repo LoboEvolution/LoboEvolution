@@ -20,31 +20,26 @@
 
 package org.loboevolution.html.style;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.LinearGradientPaint;
+import org.loboevolution.common.ArrayUtilities;
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.info.GradientInfo;
+import org.loboevolution.laf.ColorFactory;
+import org.loboevolution.store.GeneralStore;
+
+import java.awt.*;
 import java.awt.MultipleGradientPaint.CycleMethod;
-import java.awt.RadialGradientPaint;
-import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.loboevolution.common.ArrayUtilities;
-import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.store.GeneralStore;
-
 /**
  * <p>GradientStyle class.</p>
- *
- *
- *
  */
 public class GradientStyle {
 	
@@ -85,9 +80,9 @@ public class GradientStyle {
 		final int closingIdx = backgroundImage.lastIndexOf(')');
 		final String quote = backgroundImage.substring(startIdx, closingIdx);
 		final String values = gradientValues(quote);
-		final String direction = direction(quote); 
-		final float[] fractions = fractions(values);
-		final Color[] colors = colors(values);
+		final String direction = direction(quote);
+		GradientInfo info = parseGradint(values);
+		final Color[] colors = info.getColors();
 		final int width = getWidth(document, props, renderState);
 		final int height = getHeight(document, props, renderState);
 		LinearGradientPaint linearGradientPaint = null;
@@ -95,22 +90,22 @@ public class GradientStyle {
 		Graphics2D g2 = image.createGraphics();
 		switch (direction) {
 		case "to right":
-			linearGradientPaint = new LinearGradientPaint(0, 0, width, 0, fractions, colors, cMethod);
+			linearGradientPaint = new LinearGradientPaint(0, 0, width, 0, info.getFractions(), colors, cMethod);
 			break;
 		case "to left":
 			Collections.reverse(Arrays.asList(colors));
-			linearGradientPaint = new LinearGradientPaint(0, 0, width, 0, fractions, colors, cMethod);
+			linearGradientPaint = new LinearGradientPaint(0, 0, width, 0, info.getFractions(), colors, cMethod);
 			break;
 		case "to top":
 			Collections.reverse(Arrays.asList(colors));
-			linearGradientPaint = new LinearGradientPaint(0, 0, 0, height, fractions, colors, cMethod);
+			linearGradientPaint = new LinearGradientPaint(0, 0, 0, height, info.getFractions(), colors, cMethod);
 			break;
 		case "to bottom left":
 			Collections.reverse(Arrays.asList(colors));
-			linearGradientPaint = new LinearGradientPaint(0, 0, width, height, fractions, colors, cMethod);
+			linearGradientPaint = new LinearGradientPaint(0, 0, width, height, info.getFractions(), colors, cMethod);
 			break;
 		case "to bottom right":
-			linearGradientPaint = new LinearGradientPaint(0, 0, width, height, fractions, colors, cMethod);
+			linearGradientPaint = new LinearGradientPaint(0, 0, width, height, info.getFractions(), colors, cMethod);
 			break;
 		case "to bottom":
 		default:
@@ -121,9 +116,9 @@ public class GradientStyle {
 		        tf.preConcatenate(AffineTransform.getRotateInstance(Math.toRadians(rotation)));
 		        tf.preConcatenate(AffineTransform.getTranslateInstance(width / 2, height / 2));
 		        g2.setTransform(tf);
-				linearGradientPaint = new LinearGradientPaint(0, 0, width, height, fractions, colors, cMethod);
+				linearGradientPaint = new LinearGradientPaint(0, 0, width, height, info.getFractions(), colors, cMethod);
 			} else {
-				linearGradientPaint = new LinearGradientPaint(0, 0, 0, height, fractions, colors, cMethod);
+				linearGradientPaint = new LinearGradientPaint(0, 0, 0, height, info.getFractions(), colors, cMethod);
 			}
 			break;
 		}
@@ -146,31 +141,45 @@ public class GradientStyle {
 		final Graphics2D g2 = image.createGraphics();
 		final Point2D center = new Point2D.Float(width/2, height/2);
 		final float radius = width/2;
-		final float[] fractions = fractions(values.substring(0, values.lastIndexOf(",")));
-		Color[] colors = colors(values);
+		final GradientInfo info = parseGradint(values);
+		Color[] colors = info.getColors();
+		float[] fractions = ArrayUtilities.removeFloat(info.getFractions(), info.getFractions().length-1);
 		final Color background = colors[colors.length-1];
 		colors = ArrayUtilities.removeColor(colors, colors.length-1);
 		RadialGradientPaint p = new RadialGradientPaint(center, radius, fractions, colors, cMethod);
 		g2.setColor(background);
 		g2.fillRect(0, 0, width, height);
 		g2.setPaint(p);
-		g2.fillOval(0, 0, width - 1, height - 1);
+
+
+		switch (info.getShape()) {
+			case "circle":
+				g2.fillOval(0, 0, width - 1, height - 1);
+				break;
+			default:
+				g2.draw(new Ellipse2D.Double(0, 0, width - 1, height - 1));
+				break;
+		}
+
 		return image;
 	}
 
-	private static float[] fractions(final String quote) {
+	private GradientInfo parseGradint(String quote){
+		String shape = null;
+		String size = null;
 		ArrayList<Float> listFractions = new ArrayList<>();
-		String quoteTmp = quote;
-		quoteTmp = quoteTmp.replace(" ", "");
-		char[] charArray = quoteTmp.toCharArray();
+		ArrayList<Color> colors = new ArrayList<>();
+		quote = quote.replace(" ", "");
+		char[] charArray = quote.toCharArray();
 		boolean isColored = false;
 		String color = "";
 		for (int i = 0; i < charArray.length; i++) {
 			char c = charArray[i];
-			if (Strings.isNotBlank(color) &&  !ColorFactory.getInstance().isRgbOrHsl(color)) {
+			if (Strings.isNotBlank(color) && !ColorFactory.getInstance().isRgbOrHsl(color)) {
 				Color clr = ColorFactory.getInstance().getColor(color);
 				if (clr != null) {
 					setFractions(listFractions, charArray, i, color);
+					colors.add(ColorFactory.getInstance().getColor(color));
 					color = "";
 					isColored = true;
 				}
@@ -179,7 +188,7 @@ public class GradientStyle {
 			if (Strings.isNotBlank(color) || c != ',') {
 				color += c;
 			}
-			
+
 			if (isColored && (c == ',' || c == '%')) {
 				isColored = false;
 				color = "";
@@ -187,15 +196,33 @@ public class GradientStyle {
 
 			if (ColorFactory.getInstance().isRgbOrHsl(color) && c == ')') {
 				setFractions(listFractions, charArray, i, color);
+				colors.add(ColorFactory.getInstance().getColor(color));
 				isColored = true;
 			} else if (Strings.isNotBlank(color) &&  !ColorFactory.getInstance().isRgbOrHsl(color) && i == charArray.length - 1) {
-				
 				Color clr = ColorFactory.getInstance().getColor(color);
 				if (clr != null) {
 					setFractions(listFractions, charArray, i, color);
+					colors.add(ColorFactory.getInstance().getColor(color));
 					color = "";
 				}
 			}
+
+			if("circle".equals(color) || "ellipse".equals(color)){
+				shape = color;
+				color = "";
+			}
+
+			if(("farthest-corner".equals(color) || "closest-corner".equals(color) ||
+					"farthest-side".equals(color) || "closest-side".equals(color)) && (c == 'e' || c == 'r')) {
+				size = color;
+				color = "";
+			}
+		}
+
+		Color[] colorArray = new Color[colors.size()];
+		int a = 0;
+		for (Color c : colors) {
+			colorArray[a++] = c;
 		}
 
 		float[] fractions = new float[listFractions.size()];
@@ -205,56 +232,33 @@ public class GradientStyle {
 			fractions[i++] = f != null ? f : Float.NaN;
 		}
 		Arrays.sort(fractions);
-		return fractions;
+
+		return GradientInfo.builder().
+				colors(colorArray).
+				fractions(fractions).
+				shape(shape).
+				sizeAtPosition(size).
+				build();
 	}
 
-	private  Color[] colors(final String quote) {
-		ArrayList<Color> colors = new ArrayList<>();
-		String quoteTmp = quote;
-		quoteTmp = quote.replace(" ", "");
-		char[] charArray = quoteTmp.toCharArray();
-		boolean isColored = false;
-		String color = "";
-		for (int i = 0; i < charArray.length; i++) {
-			char c = charArray[i];
-			if (Strings.isNotBlank(color) && !ColorFactory.getInstance().isRgbOrHsl(color)) {
-				Color clr = ColorFactory.getInstance().getColor(color);
-				if (clr != null) {
-					colors.add(ColorFactory.getInstance().getColor(color));
-					color = "";
-					isColored = true;
-				}
-			}
-			
-			if (Strings.isNotBlank(color) || c != ',') {
-				color += c;
-			}
-			
-			if (isColored && (c == ',' || c == '%')) {
-				isColored = false;
-				color = "";
-			}
-			
-			if (ColorFactory.getInstance().isRgbOrHsl(color) && c == ')') {
-				colors.add(ColorFactory.getInstance().getColor(color));
-				isColored = true;
-			} else if (Strings.isNotBlank(color) &&  !ColorFactory.getInstance().isRgbOrHsl(color) && i == charArray.length - 1) {
-				Color clr = ColorFactory.getInstance().getColor(color);
-				if (clr != null) {
-					colors.add(ColorFactory.getInstance().getColor(color));
-					color = "";
-				}
-			}
+	public static void main(String[] args) {
+		GradientStyle s = new GradientStyle();
+		String quote = "circle farthest-side, rgb(153, 153, 153, 0.4), rgb(153, 153, 153, 0.4) 80%, rgb(153, 153, 153, 0) 100%";
+		final String values = s.gradientValues(quote);
+		System.out.println(values);
+		GradientInfo info = s.parseGradint(quote);
+		for (float fraction : info.getFractions()) {
+			System.out.println("fraction " + fraction);
 		}
-		
-		Color[] colorArray = new Color[colors.size()];
-		int a = 0;
-		for (Color c : colors) {
-			colorArray[a++] = c;
+		for (Color color : info.getColors()) {
+			System.out.println("color " + color);
 		}
-		return colorArray;
+
+
+		System.out.println("getShape " + info.getShape());
+		System.out.println("getSizeAtPosition " + info.getSizeAtPosition());
 	}
-	
+
 	private static void setFractions(ArrayList<Float> listFractions, char[] charArray, int index, String color) {
 		final boolean isPercent = color.contains("%");
 		final float numberOnly = isPercent ? Float.parseFloat(color.replaceAll("[^0-9]", "")) /100 : 0f;

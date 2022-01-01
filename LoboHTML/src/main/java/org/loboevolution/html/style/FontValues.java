@@ -350,7 +350,7 @@ public class FontValues extends HtmlValues {
 					return CSSValues.BOLD400.getValue();
 				}
 
-				return (String) parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT);
+				return parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT).toString();
 			} else {
 				if (laf.isBold())
 					return CSSValues.BOLD400.getValue();

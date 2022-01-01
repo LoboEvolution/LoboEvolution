@@ -136,7 +136,7 @@ public final class ColorFactory {
 			final float h = parseValue(splitComma[0].trim(), 360);
 			final float s = parsePercent(splitComma[1].trim());
 			final float l = parsePercent(splitComma[2].trim());
-			float alpha = 1;
+			int alpha = 1;
 			if(splitComma.length > 3) {
 				alpha = parseAlpha(splitComma[splitComma.length -1].trim());
 			}
@@ -157,14 +157,14 @@ public final class ColorFactory {
 	 */
 	private Color getRGB(Color c, String normalSpec, String colorStart) {
 		Color color;
-		if (c == null && normalSpec.startsWith(colorStart)) {
+		if (c == null && normalSpec.startsWith(colorStart) && normalSpec.endsWith(")")) {
 			final String commaValues = getCommaValues(normalSpec,colorStart);
 			final String[] splitComma = Strings.splitUsingTokenizer(commaValues, ",");
 			final int red = (int) parseValue(splitComma[0].trim(), 255);
 			final int green =  (int) parseValue(splitComma[1].trim(), 255);
 			final int blue =  (int) parseValue(splitComma[2].trim(), 255);
 			if (splitComma.length > 3) {
-				float alpha = parseAlpha(splitComma[splitComma.length - 1].trim());
+				int alpha = parseAlpha(splitComma[splitComma.length - 1].trim());
 				color = new Color(normalize(red), normalize(green), normalize(blue), alpha);
 			} else {
 				color = new Color(normalize(red), normalize(green), normalize(blue));
@@ -220,8 +220,10 @@ public final class ColorFactory {
 	 */
 	public boolean isRgbOrHsl(String colorSpec) {
 		final String normalSpec = colorSpec.toLowerCase();
-		final String[] list = {RGBA_START, RGB_START, HSLA_START, HSL_START};
-		return Arrays.asList(list).contains(normalSpec);
+		return (normalSpec.startsWith(RGBA_START) ||
+				normalSpec.startsWith(RGB_START) ||
+				normalSpec.startsWith(HSLA_START) ||
+				normalSpec.startsWith(HSL_START));
 	}
 	
 	/**
@@ -237,11 +239,11 @@ public final class ColorFactory {
 		return new Color((int) (c.getRed() * f + inc), (int) (c.getGreen() * f + inc), (int) (c.getBlue() * f + inc));
 	}
 
-	private float parseAlpha(String alpha) {
+	private int parseAlpha(String alpha) {
 		if (alpha.endsWith("%")) {
-			return parsePercent(alpha) / 100;
+			return (int)parsePercent(alpha) / 100;
 		}
-		return Float.parseFloat(alpha);
+		return (int)Float.parseFloat(alpha);
 	}
 
 	private float parsePercent(String perc) {

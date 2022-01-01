@@ -125,7 +125,7 @@ public class ArrayUtilities {
 	 * <p>removeColor.</p>
 	 *
 	 * @param arr an array of {@link java.awt.Color} objects.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object
 	 * @return an array of {@link java.awt.Color} objects.
 	 */
 	public static Color[] removeColor(Color[] arr, int index) {
@@ -133,6 +133,23 @@ public class ArrayUtilities {
 			return arr;
 		}
 		Color[] anotherArray = new Color[arr.length - 1];
+		System.arraycopy(arr, 0, anotherArray, 0, index);
+		System.arraycopy(arr, index + 1, anotherArray, index, arr.length - index - 1);
+		return anotherArray;
+	}
+
+	/**
+	 * <p>removeFloat.</p>
+	 *
+	 * @param arr an array of {@link java.lang.Float} objects.
+	 * @param index a {@link java.lang.Integer} object
+	 * @return an array of {@link java.awt.Float} objects.
+	 */
+	public static float[] removeFloat(float[] arr, int index) {
+		if (arr == null || index < 0 || index >= arr.length) {
+			return arr;
+		}
+		float[] anotherArray = new float[arr.length - 1];
 		System.arraycopy(arr, 0, anotherArray, 0, index);
 		System.arraycopy(arr, index + 1, anotherArray, index, arr.length - index - 1);
 		return anotherArray;
