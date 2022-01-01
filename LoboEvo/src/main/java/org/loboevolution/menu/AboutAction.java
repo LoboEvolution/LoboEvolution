@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2022 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -39,7 +39,7 @@ public class AboutAction extends AbstractAction {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		final String text = "This is Lobo Evolution 2.0, a pure Java web browser.\r\n"
-				+ "Copyright (c) 2021 The Lobo Evolution.\r\n https://github.com/LoboEvolution/LoboEvolution/";
+				+ "Copyright (c) 2022 The Lobo Evolution.\r\n https://github.com/LoboEvolution/LoboEvolution/";
 		JOptionPane.showMessageDialog(null, text, "About", JOptionPane.INFORMATION_MESSAGE);
 
 	}
