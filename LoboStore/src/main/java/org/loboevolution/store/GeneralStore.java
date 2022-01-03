@@ -50,13 +50,13 @@ public class GeneralStore implements Serializable {
 
 	private static final String DELETE_STARTUP = "DELETE FROM STARTUP";
 
-	private static final String INSERT_NETWORK = "INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)";
+	private static final String INSERT_NETWORK = "INSERT INTO NETWORK (js, css, cookie, cache, navigation, image) VALUES(?, ?,?,?,?,?)";
 
 	private static final String INSERT_SIZE = "INSERT INTO SIZE (width, height) VALUES(?,?)";
 
 	private static final String INSERT_STARTUP = "INSERT INTO STARTUP (baseUrl) VALUES(?)";
 
-	private static final String NETWORK = "SELECT DISTINCT js, css, cookie, cache, navigation FROM NETWORK";
+	private static final String NETWORK = "SELECT DISTINCT js, css, cookie, cache, navigation, image FROM NETWORK";
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500070000402L;
@@ -146,6 +146,7 @@ public class GeneralStore implements Serializable {
 						setting.setCookie(rs.getInt(3) == 1);
 						setting.setCache(rs.getInt(4) == 1);
 						setting.setNavigation(rs.getInt(5) == 1);
+						setting.setImage(rs.getInt(6) == 1);
 					}
 				}
 			} catch (final Exception e) {
@@ -196,13 +197,13 @@ public class GeneralStore implements Serializable {
 	/**
 	 * <p>insertNetwork.</p>
 	 *
-	 * @param js a boolean.
-	 * @param css a boolean.
-	 * @param cookie a boolean.
-	 * @param cache a boolean.
-	 * @param navigation a boolean.
+	 * @param js a {@link java.lang.Boolean} object.
+	 * @param css a {@link java.lang.Boolean} object.
+	 * @param cookie a {@link java.lang.Boolean} object.
+	 * @param cache a {@link java.lang.Boolean} object.
+	 * @param navigation a {@link java.lang.Boolean} object.
 	 */
-	public static void insertNetwork(boolean js, boolean css, boolean cookie, boolean cache, boolean navigation) {
+	public static void insertNetwork(boolean js, boolean css, boolean image, boolean cookie, boolean cache, boolean navigation) {
 		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_NETWORK)) {
 			pstmt.setInt(1, js ? 1 : 0);
@@ -210,6 +211,7 @@ public class GeneralStore implements Serializable {
 			pstmt.setInt(3, cookie ? 1 : 0);
 			pstmt.setInt(4, cache ? 1 : 0);
 			pstmt.setInt(5, navigation ? 1 : 0);
+			pstmt.setInt(6, image ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -238,7 +240,7 @@ public class GeneralStore implements Serializable {
 		deleteNetwork();
 		deleteBounds();
 		deleteStartUpUrl();
-		insertNetwork(true, true, true, true, true);
+		insertNetwork(true, true, true,true, true, true);
 		insertBounds(new Rectangle(800, 400));
 	}
 }

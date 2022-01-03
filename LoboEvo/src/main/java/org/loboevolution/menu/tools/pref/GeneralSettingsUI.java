@@ -65,6 +65,9 @@ public class GeneralSettingsUI extends AbstractToolsUI {
 	/** The css panel. */
 	private final LoboCheckBox cssPanel;
 
+	/** The image panel. */
+	private final LoboCheckBox imagePanel;
+
 	/** The dimension panel. */
 	private final FormPanel dimensionPanel;
 
@@ -100,6 +103,7 @@ public class GeneralSettingsUI extends AbstractToolsUI {
 
 		this.javscriptPanel = new LoboCheckBox("Enable Javascript");
 		this.cssPanel = new LoboCheckBox("Enable Cascading Style Sheets");
+		this.imagePanel = new LoboCheckBox("Enable Image");
 		this.cookiePanel = new LoboCheckBox("Enable Cookie");
 		this.cachePanel = new LoboCheckBox("Enable Cache");
 		this.navigationPanel = new LoboCheckBox("Enable Navigation");
@@ -137,6 +141,7 @@ public class GeneralSettingsUI extends AbstractToolsUI {
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 		groupBox.add(javscriptPanel);
 		groupBox.add(cssPanel);
+		groupBox.add(imagePanel);
 		groupBox.add(cookiePanel);
 		groupBox.add(navigationPanel);
 		return groupBox;
@@ -166,6 +171,7 @@ public class GeneralSettingsUI extends AbstractToolsUI {
 		final GeneralInfo network = GeneralStore.getGeneralInfo();
 		this.javscriptPanel.setSelected(network.isJs());
 		this.cssPanel.setSelected(network.isCss());
+		this.imagePanel.setSelected(network.isImage());
 		this.cookiePanel.setSelected(network.isCookie());
 		this.cachePanel.setSelected(network.isCache());
 		this.navigationPanel.setSelected(network.isNavigation());
@@ -178,6 +184,7 @@ public class GeneralSettingsUI extends AbstractToolsUI {
 
 		this.javscriptPanel.revalidate();
 		this.cssPanel.revalidate();
+		this.imagePanel.revalidate();
 		this.cookiePanel.revalidate();
 		this.cachePanel.revalidate();
 		this.navigationPanel.revalidate();
@@ -197,6 +204,7 @@ public class GeneralSettingsUI extends AbstractToolsUI {
 		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 		final boolean js = this.javscriptPanel.isSelected();
 		final boolean css = this.cssPanel.isSelected();
+		final boolean image = this.imagePanel.isSelected();
 		final boolean cookie = this.cookiePanel.isSelected();
 		final boolean cache = this.cachePanel.isSelected();
 		final boolean navigation = this.navigationPanel.isSelected();
@@ -205,7 +213,7 @@ public class GeneralSettingsUI extends AbstractToolsUI {
 
 		GeneralStore.deleteNetwork();
 		GeneralStore.deleteStartUpUrl();
-		GeneralStore.insertNetwork(js, css, cookie, cache, navigation);
+		GeneralStore.insertNetwork(js, css, image, cookie, cache, navigation);
 		GeneralStore.insertBounds(new Rectangle(width, height));
 
 		final List<String> strings = this.startupPages.getStrings();

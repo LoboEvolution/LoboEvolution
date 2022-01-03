@@ -53,4 +53,8 @@ public class GeneralInfo {
     /** The navigation. */
     @Builder.Default
     private boolean navigation = true;
+
+    /** The navigation. */
+    @Builder.Default
+    private boolean image = true;
 }

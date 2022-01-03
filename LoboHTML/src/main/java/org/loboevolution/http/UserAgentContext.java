@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class UserAgentContext {
 
-	static final GeneralInfo settings = GeneralStore.getGeneralInfo();
+	final GeneralInfo settings = GeneralStore.getGeneralInfo();
 
 	private boolean userAgentEnabled = false;
 
@@ -78,7 +78,16 @@ public class UserAgentContext {
 	public void setUserAgentEnabled(boolean userAgentEnabled) {
 		this.userAgentEnabled = userAgentEnabled;
 	}
-	
+
+	/**
+	 * <p>isImagesEnabled.</p>
+	 *
+	 * @return a boolean.
+	 */
+	public boolean isImagesEnabled() {
+		return settings.isImage();
+	}
+
 	/**
 	 * <p>getCookie.</p>
 	 *

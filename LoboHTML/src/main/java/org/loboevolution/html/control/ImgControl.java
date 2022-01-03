@@ -22,16 +22,6 @@
  */
 package org.loboevolution.html.control;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.AlignValues;
@@ -41,7 +31,13 @@ import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
+
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Map;
 
 /**
  * <p>ImgControl class.</p>
@@ -68,12 +64,15 @@ public class ImgControl extends BaseControl {
 	public ImgControl(HTMLImageElementImpl modelNode, Map<String, Image> map) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
+		UserAgentContext bcontext = modelNode.getUserAgentContext();
 		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
 
-		image = map.get(modelNode.getSrc());
-		if (image == null) {
-			image = HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI());
-			map.put(modelNode.getSrc(), image);
+		if (bcontext.isImagesEnabled()) {
+			image = map.get(modelNode.getSrc());
+			if (image == null) {
+				image = HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI());
+				map.put(modelNode.getSrc(), image);
+			}
 		}
 		addMouseListener(new MouseAdapter() {
 			@Override
