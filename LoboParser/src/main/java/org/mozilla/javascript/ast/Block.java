@@ -12,13 +12,10 @@ import org.mozilla.javascript.Token;
 /**
  * A block statement delimited by curly braces.  The node position is the
  * position of the open-curly, and the length extends to the position of
- * the close-curly.  Node type is {@link org.mozilla.javascript.Token#BLOCK}.
+ * the close-curly.  Node type is {@link Token#BLOCK}.
  *
  * <pre><i>Block</i> :
  *     <b>{</b> Statement* <b>}</b></pre>
- *
- *
- *
  */
 public class Block extends AstNode {
 
@@ -26,41 +23,24 @@ public class Block extends AstNode {
         this.type = Token.BLOCK;
     }
 
-    /**
-     * <p>Constructor for Block.</p>
-     */
     public Block() {
     }
 
-    /**
-     * <p>Constructor for Block.</p>
-     *
-     * @param pos a int.
-     */
     public Block(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for Block.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public Block(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Alias for {@link #addChild}.
-     *
-     * @param statement a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public void addStatement(AstNode statement) {
         addChild(statement);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -82,7 +62,6 @@ public class Block extends AstNode {
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void visit(NodeVisitor v) {
         if (v.visit(this)) {

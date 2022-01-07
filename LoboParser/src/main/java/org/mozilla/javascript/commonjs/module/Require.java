@@ -29,14 +29,13 @@ import org.mozilla.javascript.ScriptableObject;
  * top-level scope is also safe.
  * <h1>Creation</h1>
  * If you need to create many otherwise identical require() functions for
- * different scopes, you might want to use {@link org.mozilla.javascript.commonjs.module.RequireBuilder} for
+ * different scopes, you might want to use {@link RequireBuilder} for
  * convenience.
  * <h1>Making it available</h1>
  * In order to make the require() function available to your JavaScript
  * program, you need to invoke either {@link #install(Scriptable)} or
  * {@link #requireMain(Context, String)}.
- *
- * Author Attila Szegedi
+ * @author Attila Szegedi
  * @version $Id: Require.java,v 1.4 2011/04/07 20:26:11 hannes%helma.at Exp $
  */
 public class Require extends BaseFunction {
@@ -65,7 +64,6 @@ public class Require extends BaseFunction {
      * using {@link #install(Scriptable)}, or alternatively, you can load the
      * program's main module using {@link #requireMain(Context, String)} and
      * then act on the main module's exports.
-     *
      * @param cx the current context
      * @param nativeScope a scope that provides the standard native JavaScript
      * objects.
@@ -106,11 +104,10 @@ public class Require extends BaseFunction {
      * that the main module will execute in its own scope and not in the global
      * scope. Since all other modules see the global scope, executing the main
      * module in the global scope would open it for tampering by other modules.
-     *
      * @param cx the current context
      * @param mainModuleId the ID of the main module
      * @return the "exports" property of the main module
-     * @throws java.lang.IllegalStateException if the main module is already loaded when
+     * @throws IllegalStateException if the main module is already loaded when
      * required, or if this require() instance already has a different main
      * module set.
      */
@@ -168,14 +165,12 @@ public class Require extends BaseFunction {
     /**
      * Binds this instance of require() into the specified scope under the
      * property name "require".
-     *
      * @param scope the scope where the require() function is to be installed.
      */
     public void install(Scriptable scope) {
         ScriptableObject.putProperty(scope, "require", this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
             Object[] args)
@@ -221,7 +216,6 @@ public class Require extends BaseFunction {
         return getExportedModuleInterface(cx, id, uri, base, false);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
         throw ScriptRuntime.throwError(cx, scope,
@@ -381,19 +375,16 @@ public class Require extends BaseFunction {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getFunctionName() {
         return "require";
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getArity() {
         return 1;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getLength() {
         return 1;

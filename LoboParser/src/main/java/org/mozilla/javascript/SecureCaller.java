@@ -20,10 +20,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * <p>Abstract SecureCaller class.</p>
- *
- * Author Attila Szegedi
- *
+ * @author Attila Szegedi
  */
 public abstract class SecureCaller
 {
@@ -37,16 +34,6 @@ public abstract class SecureCaller
     callers =
         new WeakHashMap<CodeSource,Map<ClassLoader,SoftReference<SecureCaller>>>();
 
-    /**
-     * <p>call.</p>
-     *
-     * @param callable a {@link org.mozilla.javascript.Callable} object.
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
-     * @param args an array of {@link java.lang.Object} objects.
-     * @return a {@link java.lang.Object} object.
-     */
     public abstract Object call(Callable callable, Context cx,
             Scriptable scope, Scriptable thisObj, Object[] args);
 

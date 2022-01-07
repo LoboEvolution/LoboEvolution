@@ -16,27 +16,21 @@ import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.Undefined;
 
 /**
- * <p>RegExpImpl class.</p>
- *
- *
  *
  */
 public class RegExpImpl implements RegExpProxy {
 
-    /** {@inheritDoc} */
     @Override
     public boolean isRegExp(Scriptable obj) {
         return obj instanceof NativeRegExp;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object compileRegExp(Context cx, String source, String flags)
     {
         return NativeRegExp.compileRE(cx, source, flags, false);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Scriptable wrapRegExp(Context cx, Scriptable scope,
                                  Object compiled)
@@ -45,7 +39,6 @@ public class RegExpImpl implements RegExpProxy {
                 .withLanguageVersionScopeCompiled(cx.getLanguageVersion(), scope, (RECompiled) compiled);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object action(Context cx, Scriptable scope,
                          Scriptable thisObj, Object[] args,
@@ -234,7 +227,6 @@ public class RegExpImpl implements RegExpProxy {
 
 
 
-    /** {@inheritDoc} */
     @Override
     public int find_split(Context cx, Scriptable scope, String target,
                           String separator, Scriptable reObj,
@@ -549,7 +541,6 @@ public class RegExpImpl implements RegExpProxy {
      * a limit argument and accepts a regular expression as the split
      * argument.
      */
-    /** {@inheritDoc} */
     @Override
     public Object js_split(Context cx, Scriptable scope,
                                    String target, Object[] args)

@@ -8,16 +8,15 @@
 
 package org.mozilla.javascript;
 
- /**
-  *Embeddings that wish to filter Java classes that are visible to scripts
-  *through the LiveConnect, should implement this interface.
-  *
-  *@see Context#setClassShutter(ClassShutter)
-  *@since 1.5 Release 4
-  *Author Norris Boyd
-  *
-  *
-  */
+/**
+Embeddings that wish to filter Java classes that are visible to scripts
+through the LiveConnect, should implement this interface.
+
+@see Context#setClassShutter(ClassShutter)
+@since 1.5 Release 4
+@author Norris Boyd
+*/
+
  public interface ClassShutter {
 
     /**
@@ -42,13 +41,12 @@ package org.mozilla.javascript;
      * visibleToScripts before attempting to look up the class name. If
      * visibleToScripts returns false, the class name lookup is not
      * performed and subsequent Rhino execution assumes the class is
-     * not present. So for "java.lang.logger.info" the lookup
+     * not present. So for "java.lang.System.out.println" the lookup
      * of "java.lang.System" is skipped and thus Rhino assumes that
      * "java.lang.System" doesn't exist. So then for "java.lang.System.out",
      * Rhino attempts to load the class "java.lang.System.out" because
      * it assumes that "java.lang.System" is a package name.
      * <p>
-     *
      * @param fullClassName the full name of the class (including the package
      *                      name, with '.' as a delimiter). For example the
      *                      standard string class is "java.lang.String"

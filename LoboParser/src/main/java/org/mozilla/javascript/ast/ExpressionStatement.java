@@ -10,11 +10,8 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node representing an expression in a statement context.  The node type is
- * {@link org.mozilla.javascript.Token#EXPR_VOID} if inside a function, or else
- * {@link org.mozilla.javascript.Token#EXPR_RESULT} if inside a script.
- *
- *
- *
+ * {@link Token#EXPR_VOID} if inside a function, or else
+ * {@link Token#EXPR_RESULT} if inside a script.
  */
 public class ExpressionStatement extends AstNode {
 
@@ -32,9 +29,6 @@ public class ExpressionStatement extends AstNode {
         type = Token.EXPR_RESULT;
     }
 
-    /**
-     * <p>Constructor for ExpressionStatement.</p>
-     */
     public ExpressionStatement() {
     }
 
@@ -44,7 +38,6 @@ public class ExpressionStatement extends AstNode {
      * position of the wrapped node, and sets the wrapped node's
      * position to zero.  Sets this node's length to the length of
      * the wrapped node.
-     *
      * @param expr the wrapped expression
      * @param hasResult {@code true} if this expression has side
      * effects.  If true, sets node type to EXPR_RESULT, else to EXPR_VOID.
@@ -60,32 +53,22 @@ public class ExpressionStatement extends AstNode {
      * position of the wrapped node, and sets the wrapped node's
      * position to zero.  Sets this node's length to the length of
      * the wrapped node.
-     *
      * @param expr the wrapped expression
      */
     public ExpressionStatement(AstNode expr) {
         this(expr.getPosition(), expr.getLength(), expr);
     }
 
-    /**
-     * <p>Constructor for ExpressionStatement.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public ExpressionStatement(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Constructs a new {@code ExpressionStatement}
-     *
-     * @param expr the wrapped {@link org.mozilla.javascript.ast.AstNode}.
+     * @param expr the wrapped {@link AstNode}.
      * The {@code ExpressionStatement}'s bounds are set to those of expr,
      * and expr's parent is set to this node.
-     * @throws java.lang.IllegalArgumentException if {@code expr} is null
-     * @param pos a int.
-     * @param len a int.
+     * @throws IllegalArgumentException if {@code expr} is null
      */
     public ExpressionStatement(int pos, int len, AstNode expr) {
         super(pos, len);
@@ -94,8 +77,6 @@ public class ExpressionStatement extends AstNode {
 
     /**
      * Returns the wrapped expression
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getExpression() {
         return expr;
@@ -103,9 +84,7 @@ public class ExpressionStatement extends AstNode {
 
     /**
      * Sets the wrapped expression, and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException} if expression is {@code null}
-     * @param expression a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException} if expression is {@code null}
      */
     public void setExpression(AstNode expression) {
         assertNotNull(expression);
@@ -115,16 +94,15 @@ public class ExpressionStatement extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Returns true if this node has side effects
+     * @throws IllegalStateException if expression has not yet
+     * been set.
      */
     @Override
     public boolean hasSideEffects() {
         return type == Token.EXPR_RESULT || expr.hasSideEffects();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -138,8 +116,6 @@ public class ExpressionStatement extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then the wrapped statement.
      */
     @Override

@@ -9,15 +9,12 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * For-in or for-each-in or for-of statement.  Node type is {@link org.mozilla.javascript.Token#FOR}.
+ * For-in or for-each-in or for-of statement.  Node type is {@link Token#FOR}.
  *
  * <pre><b>for</b> [<b>each</b>] ( LeftHandSideExpression <b>in</b> Expression ) Statement</pre>
  * <pre><b>for</b> [<b>each</b>] ( <b>var</b> VariableDeclarationNoIn <b>in</b> Expression ) Statement</pre>
  * <pre><b>for</b> ( LeftHandSideExpression <b>of</b> Expression ) Statement</pre>
  * <pre><b>for</b> ( ForDeclaration <b>of</b> Expression ) Statement</pre>
- *
- *
- *
  */
 public class ForInLoop extends Loop {
 
@@ -32,35 +29,19 @@ public class ForInLoop extends Loop {
         type = Token.FOR;
     }
 
-    /**
-     * <p>Constructor for ForInLoop.</p>
-     */
     public ForInLoop() {
     }
 
-    /**
-     * <p>Constructor for ForInLoop.</p>
-     *
-     * @param pos a int.
-     */
     public ForInLoop(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for ForInLoop.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public ForInLoop(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns loop iterator expression
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getIterator() {
         return iterator;
@@ -69,9 +50,7 @@ public class ForInLoop extends Loop {
     /**
      * Sets loop iterator expression:  the part before the "in" or "of" keyword.
      * Also sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code iterator} is {@code null}
-     * @param iterator a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if {@code iterator} is {@code null}
      */
     public void setIterator(AstNode iterator) {
         assertNotNull(iterator);
@@ -81,8 +60,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Returns object being iterated over
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getIteratedObject() {
         return iteratedObject;
@@ -90,9 +67,7 @@ public class ForInLoop extends Loop {
 
     /**
      * Sets object being iterated over, and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code object} is {@code null}
-     * @param object a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if {@code object} is {@code null}
      */
     public void setIteratedObject(AstNode object) {
         assertNotNull(object);
@@ -102,8 +77,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Returns whether the loop is a for-each loop
-     *
-     * @return a boolean.
      */
     public boolean isForEach() {
         return isForEach;
@@ -111,8 +84,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Sets whether the loop is a for-each loop
-     *
-     * @param isForEach a boolean.
      */
     public void setIsForEach(boolean isForEach) {
         this.isForEach = isForEach;
@@ -120,8 +91,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Returns whether the loop is a for-of loop
-     *
-     * @return a boolean.
      */
     public boolean isForOf() {
         return isForOf;
@@ -129,8 +98,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Sets whether the loop is a for-each loop
-     *
-     * @param isForOf a boolean.
      */
     public void setIsForOf(boolean isForOf) {
         this.isForOf = isForOf;
@@ -138,8 +105,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Returns position of "in" or "of" keyword
-     *
-     * @return a int.
      */
     public int getInPosition() {
         return inPosition;
@@ -147,7 +112,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Sets position of "in" or "of" keyword
-     *
      * @param inPosition position of "in" or "of" keyword,
      * or -1 if not present (e.g. in presence of a syntax error)
      */
@@ -157,8 +121,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Returns position of "each" keyword
-     *
-     * @return a int.
      */
     public int getEachPosition() {
         return eachPosition;
@@ -166,7 +128,6 @@ public class ForInLoop extends Loop {
 
     /**
      * Sets position of "each" keyword
-     *
      * @param eachPosition position of "each" keyword,
      * or -1 if not present.
      */
@@ -174,7 +135,6 @@ public class ForInLoop extends Loop {
         this.eachPosition = eachPosition;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -201,8 +161,6 @@ public class ForInLoop extends Loop {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the iterator, the iterated object, and the body.
      */
     @Override

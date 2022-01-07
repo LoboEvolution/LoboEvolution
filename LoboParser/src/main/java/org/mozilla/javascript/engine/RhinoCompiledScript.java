@@ -10,12 +10,6 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import org.mozilla.javascript.Script;
 
-/**
- * <p>RhinoCompiledScript class.</p>
- *
- *
- *
- */
 public class RhinoCompiledScript
   extends CompiledScript {
 
@@ -27,13 +21,11 @@ public class RhinoCompiledScript
     this.script = script;
   }
 
-  /** {@inheritDoc} */
   @Override
   public Object eval(ScriptContext context) throws ScriptException {
     return engine.eval(script, context);
   }
 
-  /** {@inheritDoc} */
   @Override
   public ScriptEngine getEngine() {
     return engine;

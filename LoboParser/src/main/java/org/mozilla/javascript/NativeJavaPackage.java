@@ -18,12 +18,12 @@ import java.util.Set;
  * in all other references to the same package (as with Packages.java.lang
  * and java.lang).
  *
- * Author Mike Shaver
+ * @author Mike Shaver
  * @see NativeJavaArray
  * @see NativeJavaObject
  * @see NativeJavaClass
- *
  */
+
 public class NativeJavaPackage extends ScriptableObject
 {
     private static final long serialVersionUID = 7445054382212031523L;
@@ -36,12 +36,8 @@ public class NativeJavaPackage extends ScriptableObject
     }
 
     /**
-     * <p>Constructor for NativeJavaPackage.</p>
-     *
      * @deprecated NativeJavaPackage is an internal class, do not use
      * it directly.
-     * @param packageName a {@link java.lang.String} object.
-     * @param classLoader a {@link java.lang.ClassLoader} object.
      */
     @Deprecated
     public NativeJavaPackage(String packageName, ClassLoader classLoader) {
@@ -49,11 +45,8 @@ public class NativeJavaPackage extends ScriptableObject
     }
 
     /**
-     * <p>Constructor for NativeJavaPackage.</p>
-     *
      * @deprecated NativeJavaPackage is an internal class, do not use
      * it directly.
-     * @param packageName a {@link java.lang.String} object.
      */
     @Deprecated
     public NativeJavaPackage(String packageName) {
@@ -61,43 +54,36 @@ public class NativeJavaPackage extends ScriptableObject
              Context.getCurrentContext().getApplicationClassLoader());
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "JavaPackage";
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(String id, Scriptable start) {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start) {
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(String id, Scriptable start, Object value) {
         // Can't add properties to Java packages.  Sorry.
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value) {
         throw Context.reportRuntimeErrorById("msg.pkg.int");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(String id, Scriptable start) {
         return getPkgProperty(id, start, true);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start) {
         return NOT_FOUND;
@@ -170,7 +156,6 @@ public class NativeJavaPackage extends ScriptableObject
         return newValue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> ignored) {
         return toString();
@@ -181,13 +166,11 @@ public class NativeJavaPackage extends ScriptableObject
         this.classLoader = Context.getCurrentContext().getApplicationClassLoader();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[JavaPackage " + packageName + "]";
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof NativeJavaPackage) {
@@ -198,7 +181,6 @@ public class NativeJavaPackage extends ScriptableObject
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return packageName.hashCode() ^

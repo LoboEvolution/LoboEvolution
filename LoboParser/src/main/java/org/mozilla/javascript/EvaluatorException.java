@@ -9,19 +9,11 @@ package org.mozilla.javascript;
 
 /**
  * The class of exceptions thrown by the JavaScript engine.
- *
- *
- *
  */
 public class EvaluatorException extends RhinoException
 {
     private static final long serialVersionUID = -8743165779676009808L;
 
-    /**
-     * <p>Constructor for EvaluatorException.</p>
-     *
-     * @param detail a {@link java.lang.String} object.
-     */
     public EvaluatorException(String detail)
     {
         super(detail);
@@ -65,10 +57,7 @@ public class EvaluatorException extends RhinoException
     }
 
     /**
-     * <p>getSourceName.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.RhinoException#sourceName()} from the super class.
-     * @return a {@link java.lang.String} object.
+     * @deprecated Use {@link RhinoException#sourceName()} from the super class.
      */
     @Deprecated
     public String getSourceName()
@@ -77,10 +66,7 @@ public class EvaluatorException extends RhinoException
     }
 
     /**
-     * <p>getLineNumber.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.RhinoException#lineNumber()} from the super class.
-     * @return a int.
+     * @deprecated Use {@link RhinoException#lineNumber()} from the super class.
      */
     @Deprecated
     public int getLineNumber()
@@ -89,10 +75,7 @@ public class EvaluatorException extends RhinoException
     }
 
     /**
-     * <p>getColumnNumber.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.RhinoException#columnNumber()} from the super class.
-     * @return a int.
+     * @deprecated Use {@link RhinoException#columnNumber()} from the super class.
      */
     @Deprecated
     public int getColumnNumber()
@@ -101,10 +84,7 @@ public class EvaluatorException extends RhinoException
     }
 
     /**
-     * <p>getLineSource.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.RhinoException#lineSource()} from the super class.
-     * @return a {@link java.lang.String} object.
+     * @deprecated Use {@link RhinoException#lineSource()} from the super class.
      */
     @Deprecated
     public String getLineSource()

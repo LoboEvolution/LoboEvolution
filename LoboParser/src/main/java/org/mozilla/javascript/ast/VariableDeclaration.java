@@ -13,19 +13,16 @@ import org.mozilla.javascript.Token;
 
 /**
  * A list of one or more var, const or let declarations.
- * Node type is {@link org.mozilla.javascript.Token#VAR}, {@link org.mozilla.javascript.Token#CONST} or
- * {@link org.mozilla.javascript.Token#LET}.<p>
+ * Node type is {@link Token#VAR}, {@link Token#CONST} or
+ * {@link Token#LET}.<p>
  *
  * If the node is for {@code var} or {@code const}, the node position
  * is the beginning of the {@code var} or {@code const} keyword.
  * For {@code let} declarations, the node position coincides with the
- * first {@link org.mozilla.javascript.ast.VariableInitializer} child.<p>
+ * first {@link VariableInitializer} child.<p>
  *
  * A standalone variable declaration in a statement context returns {@code true}
  * from its {@link #isStatement()} method.
- *
- *
- *
  */
 public class VariableDeclaration extends AstNode {
 
@@ -36,35 +33,19 @@ public class VariableDeclaration extends AstNode {
         type = Token.VAR;
     }
 
-    /**
-     * <p>Constructor for VariableDeclaration.</p>
-     */
     public VariableDeclaration() {
     }
 
-    /**
-     * <p>Constructor for VariableDeclaration.</p>
-     *
-     * @param pos a int.
-     */
     public VariableDeclaration(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for VariableDeclaration.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public VariableDeclaration(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns variable list.  Never {@code null}.
-     *
-     * @return a {@link java.util.List} object.
      */
     public List<VariableInitializer> getVariables() {
         return variables;
@@ -72,9 +53,7 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Sets variable list
-     *
-     * @throws java.lang.IllegalArgumentException if variables list is {@code null}
-     * @param variables a {@link java.util.List} object.
+     * @throws IllegalArgumentException if variables list is {@code null}
      */
     public void setVariables(List<VariableInitializer> variables) {
         assertNotNull(variables);
@@ -87,9 +66,7 @@ public class VariableDeclaration extends AstNode {
     /**
      * Adds a variable initializer node to the child list.
      * Sets initializer node's parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if v is {@code null}
-     * @param v a {@link org.mozilla.javascript.ast.VariableInitializer} object.
+     * @throws IllegalArgumentException if v is {@code null}
      */
     public void addVariable(VariableInitializer v) {
         assertNotNull(v);
@@ -98,9 +75,8 @@ public class VariableDeclaration extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Sets the node type and returns this node.
+     * @throws IllegalArgumentException if {@code declType} is invalid
      */
     @Override
     public org.mozilla.javascript.Node setType(int type) {
@@ -114,26 +90,21 @@ public class VariableDeclaration extends AstNode {
     /**
      * Returns true if this is a {@code var} (not
      * {@code const} or {@code let}) declaration.
-     *
-     * @return true if {@code declType} is {@link org.mozilla.javascript.Token#VAR}
+     * @return true if {@code declType} is {@link Token#VAR}
      */
     public boolean isVar() {
         return type == Token.VAR;
     }
 
     /**
-     * Returns true if this is a {@link org.mozilla.javascript.Token#CONST} declaration.
-     *
-     * @return a boolean.
+     * Returns true if this is a {@link Token#CONST} declaration.
      */
     public boolean isConst() {
         return type == Token.CONST;
     }
 
     /**
-     * Returns true if this is a {@link org.mozilla.javascript.Token#LET} declaration.
-     *
-     * @return a boolean.
+     * Returns true if this is a {@link Token#LET} declaration.
      */
     public boolean isLet() {
         return type == Token.LET;
@@ -141,8 +112,6 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Returns true if this node represents a statement.
-     *
-     * @return a boolean.
      */
     public boolean isStatement() {
         return isStatement;
@@ -150,8 +119,6 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Set or unset the statement flag.
-     *
-     * @param isStatement a boolean.
      */
     public void setIsStatement(boolean isStatement) {
         this.isStatement = isStatement;
@@ -161,7 +128,6 @@ public class VariableDeclaration extends AstNode {
         return Token.typeToName(type).toLowerCase();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -181,8 +147,6 @@ public class VariableDeclaration extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then each {@link VariableInitializer} child.
      */
     @Override

@@ -11,12 +11,6 @@ import org.mozilla.javascript.Token;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
 
-/**
- * <p>OptFunctionNode class.</p>
- *
- *
- *
- */
 public final class OptFunctionNode
 {
     OptFunctionNode(FunctionNode fnode)
@@ -25,45 +19,22 @@ public final class OptFunctionNode
         fnode.setCompilerData(this);
     }
 
-    /**
-     * <p>get.</p>
-     *
-     * @param scriptOrFn a {@link org.mozilla.javascript.ast.ScriptNode} object.
-     * @param i a int.
-     * @return a {@link org.mozilla.javascript.optimizer.OptFunctionNode} object.
-     */
     public static OptFunctionNode get(ScriptNode scriptOrFn, int i)
     {
         FunctionNode fnode = scriptOrFn.getFunctionNode(i);
         return (OptFunctionNode)fnode.getCompilerData();
     }
 
-    /**
-     * <p>get.</p>
-     *
-     * @param scriptOrFn a {@link org.mozilla.javascript.ast.ScriptNode} object.
-     * @return a {@link org.mozilla.javascript.optimizer.OptFunctionNode} object.
-     */
     public static OptFunctionNode get(ScriptNode scriptOrFn)
     {
         return (OptFunctionNode)scriptOrFn.getCompilerData();
     }
 
-    /**
-     * <p>isTargetOfDirectCall.</p>
-     *
-     * @return a boolean.
-     */
     public boolean isTargetOfDirectCall()
     {
         return directTargetIndex >= 0;
     }
 
-    /**
-     * <p>Getter for the field <code>directTargetIndex</code>.</p>
-     *
-     * @return a int.
-     */
     public int getDirectTargetIndex()
     {
         return directTargetIndex;
@@ -82,43 +53,21 @@ public final class OptFunctionNode
         itsParameterNumberContext = b;
     }
 
-    /**
-     * <p>getParameterNumberContext.</p>
-     *
-     * @return a boolean.
-     */
     public boolean getParameterNumberContext()
     {
         return itsParameterNumberContext;
     }
 
-    /**
-     * <p>getVarCount.</p>
-     *
-     * @return a int.
-     */
     public int getVarCount()
     {
         return fnode.getParamAndVarCount();
     }
 
-    /**
-     * <p>isParameter.</p>
-     *
-     * @param varIndex a int.
-     * @return a boolean.
-     */
     public boolean isParameter(int varIndex)
     {
         return varIndex < fnode.getParamCount();
     }
 
-    /**
-     * <p>isNumberVar.</p>
-     *
-     * @param varIndex a int.
-     * @return a boolean.
-     */
     public boolean isNumberVar(int varIndex)
     {
         varIndex -= fnode.getParamCount();
@@ -140,12 +89,6 @@ public final class OptFunctionNode
         numberVarFlags[varIndex] = true;
     }
 
-    /**
-     * <p>getVarIndex.</p>
-     *
-     * @param n a {@link org.mozilla.javascript.Node} object.
-     * @return a int.
-     */
     public int getVarIndex(Node n)
     {
         int index = n.getIntProp(Node.VARIABLE_PROP, -1);

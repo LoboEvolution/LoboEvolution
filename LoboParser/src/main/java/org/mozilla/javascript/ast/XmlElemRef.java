@@ -10,7 +10,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for an E4X XML {@code [expr]} member-ref expression.
- * The node type is {@link org.mozilla.javascript.Token#REF_MEMBER}.<p>
+ * The node type is {@link Token#REF_MEMBER}.<p>
  *
  * Syntax:
  * <pre> @<i><sub>opt</sub></i> ns:: <i><sub>opt</sub></i> [ expr ]</pre>
@@ -20,7 +20,7 @@ import org.mozilla.javascript.Token;
  *
  * Note that the form {@code [expr]} (i.e. no namespace or
  * attribute-qualifier) is not a legal {@code XmlElemRef} expression,
- * since it's already used for standard JavaScript {@link org.mozilla.javascript.ast.ElementGet}
+ * since it's already used for standard JavaScript {@link ElementGet}
  * array-indexing.  Hence, an {@code XmlElemRef} node always has
  * either the attribute-qualifier, a non-{@code null} namespace node,
  * or both.<p>
@@ -29,9 +29,6 @@ import org.mozilla.javascript.Token;
  * at the namespace name.  The node bounds extend through the closing
  * right-bracket, or if it is missing due to a syntax error, through the
  * end of the index expression.
- *
- *
- *
  */
 public class XmlElemRef extends XmlRef {
 
@@ -43,27 +40,13 @@ public class XmlElemRef extends XmlRef {
         type = Token.REF_MEMBER;
     }
 
-    /**
-     * <p>Constructor for XmlElemRef.</p>
-     */
     public XmlElemRef() {
     }
 
-    /**
-     * <p>Constructor for XmlElemRef.</p>
-     *
-     * @param pos a int.
-     */
     public XmlElemRef(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for XmlElemRef.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public XmlElemRef(int pos, int len) {
         super(pos, len);
     }
@@ -71,8 +54,6 @@ public class XmlElemRef extends XmlRef {
     /**
      * Returns index expression: the 'expr' in {@code @[expr]}
      * or {@code @*::[expr]}.
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getExpression() {
         return indexExpr;
@@ -80,9 +61,7 @@ public class XmlElemRef extends XmlRef {
 
     /**
      * Sets index expression, and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code expr} is {@code null}
-     * @param expr a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if {@code expr} is {@code null}
      */
     public void setExpression(AstNode expr) {
         assertNotNull(expr);
@@ -92,8 +71,6 @@ public class XmlElemRef extends XmlRef {
 
     /**
      * Returns left bracket position, or -1 if missing.
-     *
-     * @return a int.
      */
     public int getLb() {
         return lb;
@@ -101,8 +78,6 @@ public class XmlElemRef extends XmlRef {
 
     /**
      * Sets left bracket position, or -1 if missing.
-     *
-     * @param lb a int.
      */
     public void setLb(int lb) {
         this.lb = lb;
@@ -110,8 +85,6 @@ public class XmlElemRef extends XmlRef {
 
     /**
      * Returns left bracket position, or -1 if missing.
-     *
-     * @return a int.
      */
     public int getRb() {
         return rb;
@@ -119,8 +92,6 @@ public class XmlElemRef extends XmlRef {
 
     /**
      * Sets right bracket position, -1 if missing.
-     *
-     * @param rb a int.
      */
     public void setRb(int rb) {
         this.rb = rb;
@@ -128,16 +99,12 @@ public class XmlElemRef extends XmlRef {
 
     /**
      * Sets both bracket positions.
-     *
-     * @param lb a int.
-     * @param rb a int.
      */
     public void setBrackets(int lb, int rb) {
         this.lb = lb;
         this.rb = rb;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -156,8 +123,6 @@ public class XmlElemRef extends XmlRef {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then the namespace if provided, then the
      * index expression.
      */

@@ -12,9 +12,8 @@ package org.mozilla.javascript;
  * implementations of Symbol.
  *
  * @since 1.7.8
- *
- *
  */
+
 public interface Symbol
 {
 }

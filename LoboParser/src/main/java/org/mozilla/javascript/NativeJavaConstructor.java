@@ -14,29 +14,23 @@ package org.mozilla.javascript;
  * always construct the same NativeJavaClass regardless of any reparenting
  * that may occur.
  *
- * Author Frank Mitchell
+ * @author Frank Mitchell
  * @see NativeJavaMethod
  * @see NativeJavaPackage
  * @see NativeJavaClass
- *
  */
+
 public class NativeJavaConstructor extends BaseFunction
 {
     private static final long serialVersionUID = -8149253217482668463L;
 
     MemberBox ctor;
 
-    /**
-     * <p>Constructor for NativeJavaConstructor.</p>
-     *
-     * @param ctor a {@link org.mozilla.javascript.MemberBox} object.
-     */
     public NativeJavaConstructor(MemberBox ctor)
     {
         this.ctor = ctor;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -44,7 +38,6 @@ public class NativeJavaConstructor extends BaseFunction
         return NativeJavaClass.constructSpecific(cx, scope, args, ctor);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getFunctionName()
     {
@@ -52,7 +45,6 @@ public class NativeJavaConstructor extends BaseFunction
         return "<init>".concat(sig);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -14,16 +14,13 @@ import org.mozilla.javascript.Token;
 
 /**
  * Node for the root of a parse tree.  It contains the statements and functions
- * in the script, and a list of {@link org.mozilla.javascript.ast.Comment} nodes associated with the script
- * as a whole.  Node type is {@link org.mozilla.javascript.Token#SCRIPT}.
+ * in the script, and a list of {@link Comment} nodes associated with the script
+ * as a whole.  Node type is {@link Token#SCRIPT}.
  *
  * <p>Note that the tree itself does not store errors. To collect the parse errors
  * and warnings, pass an {@link org.mozilla.javascript.ErrorReporter} to the
  * {@link org.mozilla.javascript.Parser} via the
  * {@link org.mozilla.javascript.CompilerEnvirons}.
- *
- *
- *
  */
 public class AstRoot extends ScriptNode {
 
@@ -33,24 +30,15 @@ public class AstRoot extends ScriptNode {
         type = Token.SCRIPT;
     }
 
-    /**
-     * <p>Constructor for AstRoot.</p>
-     */
     public AstRoot() {
     }
 
-    /**
-     * <p>Constructor for AstRoot.</p>
-     *
-     * @param pos a int.
-     */
     public AstRoot(int pos) {
         super(pos);
     }
 
     /**
      * Returns comment set
-     *
      * @return comment set, sorted by start position. Can be {@code null}.
      */
     public SortedSet<Comment> getComments() {
@@ -60,7 +48,6 @@ public class AstRoot extends ScriptNode {
     /**
      * Sets comment list, and updates the parent of each entry to point
      * to this node.  Replaces any existing comments.
-     *
      * @param comments comment list.  can be {@code null}.
      */
     public void setComments(SortedSet<Comment> comments) {
@@ -76,9 +63,8 @@ public class AstRoot extends ScriptNode {
 
     /**
      * Add a comment to the comment set.
-     *
      * @param comment the comment node.
-     * @throws java.lang.IllegalArgumentException if comment is {@code null}
+     * @throws IllegalArgumentException if comment is {@code null}
      */
     public void addComment(Comment comment) {
         assertNotNull(comment);
@@ -93,7 +79,6 @@ public class AstRoot extends ScriptNode {
      * Visits the comment nodes in the order they appear in the source code.
      * The comments are not visited by the {@link #visit} function - you must
      * use this function to visit them.
-     *
      * @param visitor the callback object.  It is passed each comment node.
      * The return value is ignored.
      */
@@ -110,7 +95,6 @@ public class AstRoot extends ScriptNode {
      * This method is equivalent to calling {@link #visit}, then
      * {@link #visitComments}.  The return value
      * is ignored while visiting comment nodes.
-     *
      * @param visitor the callback object.
      */
     public void visitAll(NodeVisitor visitor) {
@@ -118,7 +102,6 @@ public class AstRoot extends ScriptNode {
         visitComments(visitor);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -132,8 +115,6 @@ public class AstRoot extends ScriptNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * A debug-printer that includes comments (at the end).
      */
     @Override
@@ -146,8 +127,7 @@ public class AstRoot extends ScriptNode {
     /**
      * Debugging function to check that the parser has set the parent
      * link for every node in the tree.
-     *
-     * @throws java.lang.IllegalStateException if a parent link is missing
+     * @throws IllegalStateException if a parent link is missing
      */
     public void checkParentLinks() {
         this.visit(new NodeVisitor() {

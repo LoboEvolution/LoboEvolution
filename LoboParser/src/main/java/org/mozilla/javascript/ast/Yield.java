@@ -10,54 +10,29 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for JavaScript 1.7 {@code yield} expression or statement.
- * Node type is {@link org.mozilla.javascript.Token#YIELD}.
+ * Node type is {@link Token#YIELD}.
  *
  * <pre><i>Yield</i> :
  *   <b>yield</b> [<i>no LineTerminator here</i>] [non-paren Expression] ;</pre>
- *
- *
- *
  */
 public class Yield extends AstNode {
 
     private AstNode value;
 
-    /**
-     * <p>Constructor for Yield.</p>
-     */
     public Yield() {
         type = Token.YIELD;
     }
 
-    /**
-     * <p>Constructor for Yield.</p>
-     *
-     * @param pos a int.
-     */
     public Yield(int pos) {
         super(pos);
         type = Token.YIELD;
     }
 
-    /**
-     * <p>Constructor for Yield.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public Yield(int pos, int len) {
         super(pos, len);
         type = Token.YIELD;
     }
 
-    /**
-     * <p>Constructor for Yield.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     * @param value a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param isStar a boolean.
-     */
     public Yield(int pos, int len, AstNode value, boolean isStar) {
         super(pos, len);
         type = isStar ? Token.YIELD_STAR : Token.YIELD;
@@ -66,8 +41,6 @@ public class Yield extends AstNode {
 
     /**
      * Returns yielded expression, {@code null} if none
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getValue() {
         return value;
@@ -75,7 +48,6 @@ public class Yield extends AstNode {
 
     /**
      * Sets yielded expression, and sets its parent to this node.
-     *
      * @param expr the value to yield. Can be {@code null}.
      */
     public void setValue(AstNode expr) {
@@ -84,7 +56,6 @@ public class Yield extends AstNode {
             expr.setParent(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         return value == null
@@ -93,8 +64,6 @@ public class Yield extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, and if present, the yielded value.
      */
     @Override

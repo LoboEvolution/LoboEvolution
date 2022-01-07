@@ -9,14 +9,11 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * If-else statement.  Node type is {@link org.mozilla.javascript.Token#IF}.
+ * If-else statement.  Node type is {@link Token#IF}.
  *
  * <pre><i>IfStatement</i> :
  *       <b>if</b> ( Expression ) Statement <b>else</b> Statement
  *       <b>if</b> ( Expression ) Statement</pre>
- *
- *
- *
  */
 public class IfStatement extends AstNode {
 
@@ -32,35 +29,19 @@ public class IfStatement extends AstNode {
         type = Token.IF;
     }
 
-    /**
-     * <p>Constructor for IfStatement.</p>
-     */
     public IfStatement() {
     }
 
-    /**
-     * <p>Constructor for IfStatement.</p>
-     *
-     * @param pos a int.
-     */
     public IfStatement(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for IfStatement.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public IfStatement(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns if condition
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getCondition() {
         return condition;
@@ -68,9 +49,7 @@ public class IfStatement extends AstNode {
 
     /**
      * Sets if condition.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code condition} is {@code null}.
-     * @param condition a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if {@code condition} is {@code null}.
      */
     public void setCondition(AstNode condition) {
         assertNotNull(condition);
@@ -80,8 +59,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Returns statement to execute if condition is true
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getThenPart() {
         return thenPart;
@@ -89,9 +66,7 @@ public class IfStatement extends AstNode {
 
     /**
      * Sets statement to execute if condition is true
-     *
-     * @throws java.lang.IllegalArgumentException if thenPart is {@code null}
-     * @param thenPart a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if thenPart is {@code null}
      */
     public void setThenPart(AstNode thenPart) {
         assertNotNull(thenPart);
@@ -101,8 +76,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Returns statement to execute if condition is false
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getElsePart() {
         return elsePart;
@@ -110,7 +83,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Sets statement to execute if condition is false
-     *
      * @param elsePart statement to execute if condition is false.
      * Can be {@code null}.
      */
@@ -122,8 +94,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Returns position of "else" keyword, or -1
-     *
-     * @return a int.
      */
     public int getElsePosition() {
         return elsePosition;
@@ -131,8 +101,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Sets position of "else" keyword, -1 if not present
-     *
-     * @param elsePosition a int.
      */
     public void setElsePosition(int elsePosition) {
         this.elsePosition = elsePosition;
@@ -140,8 +108,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Returns left paren offset
-     *
-     * @return a int.
      */
     public int getLp() {
         return lp;
@@ -149,8 +115,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Sets left paren offset
-     *
-     * @param lp a int.
      */
     public void setLp(int lp) {
         this.lp = lp;
@@ -158,8 +122,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Returns right paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getRp() {
         return rp;
@@ -167,8 +129,6 @@ public class IfStatement extends AstNode {
 
     /**
      * Sets right paren position, -1 if missing
-     *
-     * @param rp a int.
      */
     public void setRp(int rp) {
         this.rp = rp;
@@ -176,16 +136,12 @@ public class IfStatement extends AstNode {
 
     /**
      * Sets both paren positions
-     *
-     * @param lp a int.
-     * @param rp a int.
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
         this.rp = rp;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         String pad = makeIndent(depth);
@@ -227,8 +183,6 @@ public class IfStatement extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the condition, the then-part, and
      * if supplied, the else-part.
      */
@@ -243,20 +197,10 @@ public class IfStatement extends AstNode {
         }
     }
 
-    /**
-     * <p>Getter for the field <code>elseKeyWordInlineComment</code>.</p>
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     public AstNode getElseKeyWordInlineComment() {
         return elseKeyWordInlineComment;
     }
 
-    /**
-     * <p>Setter for the field <code>elseKeyWordInlineComment</code>.</p>
-     *
-     * @param elseKeyWordInlineComment a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     public void setElseKeyWordInlineComment(AstNode elseKeyWordInlineComment) {
         this.elseKeyWordInlineComment = elseKeyWordInlineComment;
     }

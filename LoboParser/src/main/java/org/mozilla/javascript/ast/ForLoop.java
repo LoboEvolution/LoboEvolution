@@ -10,13 +10,10 @@ import org.mozilla.javascript.Token;
 
 /**
  * C-style for-loop statement.
- * Node type is {@link org.mozilla.javascript.Token#FOR}.
+ * Node type is {@link Token#FOR}.
  *
  * <pre><b>for</b> ( ExpressionNoInopt; Expressionopt ; Expressionopt ) Statement</pre>
  * <pre><b>for</b> ( <b>var</b> VariableDeclarationListNoIn; Expressionopt ; Expressionopt ) Statement</pre>
- *
- *
- *
  */
 public class ForLoop extends Loop {
 
@@ -28,38 +25,22 @@ public class ForLoop extends Loop {
         type = Token.FOR;
     }
 
-    /**
-     * <p>Constructor for ForLoop.</p>
-     */
     public ForLoop() {
     }
 
-    /**
-     * <p>Constructor for ForLoop.</p>
-     *
-     * @param pos a int.
-     */
     public ForLoop(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for ForLoop.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public ForLoop(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns loop initializer variable declaration list.
-     * This is either a {@link org.mozilla.javascript.ast.VariableDeclaration}, an
-     * {@link org.mozilla.javascript.ast.Assignment}, or an {@link org.mozilla.javascript.ast.InfixExpression} of
+     * This is either a {@link VariableDeclaration}, an
+     * {@link Assignment}, or an {@link InfixExpression} of
      * type COMMA that chains multiple variable assignments.
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getInitializer() {
         return initializer;
@@ -69,10 +50,9 @@ public class ForLoop extends Loop {
      * Sets loop initializer expression, and sets its parent
      * to this node.  Virtually any expression can be in the initializer,
      * so no error-checking is done other than a {@code null}-check.
-     *
      * @param initializer loop initializer.  Pass an
-     * {@link org.mozilla.javascript.ast.EmptyExpression} if the initializer is not specified.
-     * @throws java.lang.IllegalArgumentException if condition is {@code null}
+     * {@link EmptyExpression} if the initializer is not specified.
+     * @throws IllegalArgumentException if condition is {@code null}
      */
     public void setInitializer(AstNode initializer) {
         assertNotNull(initializer);
@@ -82,8 +62,6 @@ public class ForLoop extends Loop {
 
     /**
      * Returns loop condition
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getCondition() {
         return condition;
@@ -91,10 +69,9 @@ public class ForLoop extends Loop {
 
     /**
      * Sets loop condition, and sets its parent to this node.
-     *
-     * @param condition loop condition.  Pass an {@link org.mozilla.javascript.ast.EmptyExpression}
+     * @param condition loop condition.  Pass an {@link EmptyExpression}
      * if the condition is missing.
-     * @throws java.lang.IllegalArgumentException} if condition is {@code null}
+     * @throws IllegalArgumentException} if condition is {@code null}
      */
     public void setCondition(AstNode condition) {
         assertNotNull(condition);
@@ -104,8 +81,6 @@ public class ForLoop extends Loop {
 
     /**
      * Returns loop increment expression
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getIncrement() {
         return increment;
@@ -114,10 +89,9 @@ public class ForLoop extends Loop {
     /**
      * Sets loop increment expression, and sets its parent to
      * this node.
-     *
      * @param increment loop increment expression.  Pass an
-     * {@link org.mozilla.javascript.ast.EmptyExpression} if increment is {@code null}.
-     * @throws java.lang.IllegalArgumentException} if increment is {@code null}
+     * {@link EmptyExpression} if increment is {@code null}.
+     * @throws IllegalArgumentException} if increment is {@code null}
      */
     public void setIncrement(AstNode increment) {
         assertNotNull(increment);
@@ -125,7 +99,6 @@ public class ForLoop extends Loop {
         increment.setParent(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -156,8 +129,6 @@ public class ForLoop extends Loop {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the initializer expression, the loop condition
      * expression, the increment expression, and then the loop body.
      */

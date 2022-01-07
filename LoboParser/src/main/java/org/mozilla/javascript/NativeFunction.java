@@ -11,33 +11,18 @@ import org.mozilla.javascript.debug.DebuggableScript;
 /**
  * This class implements the Function native object.
  * See ECMA 15.3.
- *
- * Author Norris Boyd
- *
+ * @author Norris Boyd
  */
 public abstract class NativeFunction extends BaseFunction
 {
 
     private static final long serialVersionUID = 8713897114082216401L;
 
-    /**
-     * <p>initScriptFunction.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     */
     public final void initScriptFunction(Context cx, Scriptable scope)
     {
         initScriptFunction(cx, scope, isGeneratorFunction());
     }
 
-    /**
-     * <p>initScriptFunction.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param es6GeneratorFunction a boolean.
-     */
     public final void initScriptFunction(Context cx, Scriptable scope, boolean es6GeneratorFunction)
     {
         ScriptRuntime.setFunctionProtoAndParent(this, scope, es6GeneratorFunction);
@@ -60,7 +45,6 @@ public abstract class NativeFunction extends BaseFunction
         return Decompiler.decompile(encodedSource, flags, properties);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getLength()
     {
@@ -76,7 +60,6 @@ public abstract class NativeFunction extends BaseFunction
         return activation.originalArgs.length;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getArity()
     {
@@ -84,12 +67,9 @@ public abstract class NativeFunction extends BaseFunction
     }
 
     /**
-     * <p>jsGet_name.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.BaseFunction#getFunctionName()} instead.
+     * @deprecated Use {@link BaseFunction#getFunctionName()} instead.
      * For backwards compatibility keep an old method name used by
      * Batik and possibly others.
-     * @return a {@link java.lang.String} object.
      */
     @Deprecated
     public String jsGet_name()
@@ -99,19 +79,12 @@ public abstract class NativeFunction extends BaseFunction
 
     /**
      * Get encoded source string.
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String getEncodedSource()
     {
         return null;
     }
 
-    /**
-     * <p>getDebuggableView.</p>
-     *
-     * @return a {@link org.mozilla.javascript.debug.DebuggableScript} object.
-     */
     public DebuggableScript getDebuggableView()
     {
         return null;
@@ -119,7 +92,6 @@ public abstract class NativeFunction extends BaseFunction
 
     /**
      * Resume execution of a suspended generator.
-     *
      * @param cx The current context
      * @param scope Scope for the parent generator function
      * @param operation The resumption operation (next, send, etc.. )
@@ -134,25 +106,16 @@ public abstract class NativeFunction extends BaseFunction
     }
 
 
-    /**
-     * <p>getLanguageVersion.</p>
-     *
-     * @return a int.
-     */
     protected abstract int getLanguageVersion();
 
     /**
      * Get number of declared parameters. It should be 0 for scripts.
-     *
-     * @return a int.
      */
     protected abstract int getParamCount();
 
     /**
      * Get number of declared parameters and variables defined through var
      * statements.
-     *
-     * @return a int.
      */
     protected abstract int getParamAndVarCount();
 
@@ -160,9 +123,6 @@ public abstract class NativeFunction extends BaseFunction
      * Get parameter or variable name.
      * If <code>index &lt; {@link #getParamCount()}</code>, then return the name of the
      * corresponding parameter. Otherwise return the name of variable.
-     *
-     * @param index a int.
-     * @return a {@link java.lang.String} object.
      */
     protected abstract String getParamOrVarName(int index);
 
@@ -171,9 +131,6 @@ public abstract class NativeFunction extends BaseFunction
      * If <code>index &lt; {@link #getParamCount()}</code>, then return the const-ness
      * of the corresponding parameter. Otherwise return whether the variable is
      * const.
-     *
-     * @param index a int.
-     * @return a boolean.
      */
     protected boolean getParamOrVarConst(int index)
     {

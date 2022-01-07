@@ -9,24 +9,20 @@
 package org.mozilla.javascript;
 
 /**
- * Java reflection of JavaScript exceptions.
- * Instances of this class are thrown by the JavaScript 'throw' keyword.
+ * Java reflection of JavaScript exceptions. Instances of this class are thrown by the JavaScript
+ * 'throw' keyword.
  *
- * Author Mike McCabe
- *
+ * @author Mike McCabe
  */
-public class JavaScriptException extends RhinoException
-{
+public class JavaScriptException extends RhinoException {
     private static final long serialVersionUID = -7666130513694669293L;
 
     /**
-     * <p>Constructor for JavaScriptException.</p>
-     *
-     * @param value a {@link java.lang.Object} object.
+     * @deprecated Use {@link WrappedException#WrappedException(Throwable)} to report exceptions in
+     *     Java code.
      */
     @Deprecated
-    public JavaScriptException(Object value)
-    {
+    public JavaScriptException(Object value) {
         this(value, "", 0);
     }
 
@@ -34,17 +30,14 @@ public class JavaScriptException extends RhinoException
      * Create a JavaScript exception wrapping the given JavaScript value
      *
      * @param value the JavaScript value thrown.
-     * @param sourceName a {@link java.lang.String} object.
-     * @param lineNumber a int.
      */
-    public JavaScriptException(Object value, String sourceName, int lineNumber)
-    {
+    public JavaScriptException(Object value, String sourceName, int lineNumber) {
         recordErrorOrigin(sourceName, lineNumber, null, 0);
         this.value = value;
         // Fill in fileName and lineNumber automatically when not specified
         // explicitly, see Bugzilla issue #342807
-        if (value instanceof NativeError && Context.getContext()
-                .hasFeature(Context.FEATURE_LOCATION_INFORMATION_IN_ERROR)) {
+        if (value instanceof NativeError
+                && Context.getContext().hasFeature(Context.FEATURE_LOCATION_INFORMATION_IN_ERROR)) {
             NativeError error = (NativeError) value;
             if (!error.has("fileName", error)) {
                 error.put("fileName", error, sourceName);
@@ -55,61 +48,54 @@ public class JavaScriptException extends RhinoException
             // set stack property, see bug #549604
             error.setStackProvider(this);
         }
+
+        // generate details string when exception is first created,
+        // since details() may be called later from a different thread
+        // (e.g. when printing failed test results), which
+        // would cause ScriptRuntime.toString to fail.
+        this.details = getDetails();
     }
 
-    /** {@inheritDoc} */
     @Override
-    public String details()
-    {
+    public String details() {
+        return this.details;
+    }
+
+    public String getDetails() {
         if (value == null) {
             return "null";
         } else if (value instanceof NativeError) {
             return value.toString();
         }
+
         try {
             return ScriptRuntime.toString(value);
         } catch (RuntimeException rte) {
             // ScriptRuntime.toString may throw a RuntimeException
             if (value instanceof Scriptable) {
-                return ScriptRuntime.defaultObjectToString((Scriptable)value);
+                return ScriptRuntime.defaultObjectToString((Scriptable) value);
             }
             return value.toString();
         }
     }
 
-    /**
-     * <p>Getter for the field <code>value</code>.</p>
-     *
-     * @return the value wrapped by this exception
-     */
-    public Object getValue()
-    {
+    /** @return the value wrapped by this exception */
+    public Object getValue() {
         return value;
     }
 
-    /**
-     * <p>getSourceName.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.RhinoException#sourceName()} from the super class.
-     * @return a {@link java.lang.String} object.
-     */
+    /** @deprecated Use {@link RhinoException#sourceName()} from the super class. */
     @Deprecated
-    public String getSourceName()
-    {
+    public String getSourceName() {
         return sourceName();
     }
 
-    /**
-     * <p>getLineNumber.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.RhinoException#lineNumber()} from the super class.
-     * @return a int.
-     */
+    /** @deprecated Use {@link RhinoException#lineNumber()} from the super class. */
     @Deprecated
-    public int getLineNumber()
-    {
+    public int getLineNumber() {
         return lineNumber();
     }
 
     private Object value;
+    private String details;
 }

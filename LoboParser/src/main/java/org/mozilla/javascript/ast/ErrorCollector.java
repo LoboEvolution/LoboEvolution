@@ -17,18 +17,16 @@ import org.mozilla.javascript.EvaluatorException;
  * {@link org.mozilla.javascript.CompilerEnvirons} is set to
  * ide-mode (for IDEs).
  *
- * Author Steve Yegge
- *
+ * @author Steve Yegge
  */
 public class ErrorCollector implements IdeErrorReporter {
 
     private List<ParseProblem> errors = new ArrayList<ParseProblem>();
 
     /**
-     * {@inheritDoc}
-     *
      * This is not called during AST generation.
      * {@link #warning(String,String,int,int)} is used instead.
+     * @throws UnsupportedOperationException
      */
     @Override
     public void warning(String message, String sourceName, int line,
@@ -36,7 +34,9 @@ public class ErrorCollector implements IdeErrorReporter {
         throw new UnsupportedOperationException();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void warning(String message, String sourceName, int offset, int length)
     {
@@ -46,10 +46,9 @@ public class ErrorCollector implements IdeErrorReporter {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * This is not called during AST generation.
      * {@link #warning(String,String,int,int)} is used instead.
+     * @throws UnsupportedOperationException
      */
     @Override
     public void error(String message, String sourceName, int line,
@@ -58,7 +57,9 @@ public class ErrorCollector implements IdeErrorReporter {
         throw new UnsupportedOperationException();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void error(String message, String sourceName,
                       int fileOffset, int length)
@@ -68,7 +69,9 @@ public class ErrorCollector implements IdeErrorReporter {
                                     fileOffset, length));
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public EvaluatorException runtimeError(String message, String sourceName,
                                            int line, String lineSource,
@@ -79,14 +82,11 @@ public class ErrorCollector implements IdeErrorReporter {
 
     /**
      * Returns the list of errors and warnings produced during parsing.
-     *
-     * @return a {@link java.util.List} object.
      */
     public List<ParseProblem> getErrors() {
         return errors;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(errors.size() * 100);

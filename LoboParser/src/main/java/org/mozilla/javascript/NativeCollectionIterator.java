@@ -6,12 +6,6 @@ import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.Iterator;
 
-/**
- * <p>NativeCollectionIterator class.</p>
- *
- *
- *
- */
 public class NativeCollectionIterator extends ES6Iterator {
     private static final long serialVersionUID = 7094840979404373443L;
     private String className;
@@ -23,11 +17,6 @@ public class NativeCollectionIterator extends ES6Iterator {
         ES6Iterator.init(scope, sealed, new NativeCollectionIterator(tag), tag);
     }
 
-    /**
-     * <p>Constructor for NativeCollectionIterator.</p>
-     *
-     * @param tag a {@link java.lang.String} object.
-     */
     public NativeCollectionIterator(String tag)
     {
         this.className = tag;
@@ -35,14 +24,6 @@ public class NativeCollectionIterator extends ES6Iterator {
         this.type = Type.BOTH;
     }
 
-    /**
-     * <p>Constructor for NativeCollectionIterator.</p>
-     *
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param className a {@link java.lang.String} object.
-     * @param type a {@link org.mozilla.javascript.NativeCollectionIterator.Type} object.
-     * @param iterator a {@link java.util.Iterator} object.
-     */
     public NativeCollectionIterator(
         Scriptable scope, String className,
         Type type, Iterator<Hashtable.Entry> iterator)
@@ -53,19 +34,16 @@ public class NativeCollectionIterator extends ES6Iterator {
         this.type = type;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return className;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean isDone(Context cx, Scriptable scope) {
         return !iterator.hasNext();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object nextValue(Context cx, Scriptable scope) {
         final Hashtable.Entry e = iterator.next();

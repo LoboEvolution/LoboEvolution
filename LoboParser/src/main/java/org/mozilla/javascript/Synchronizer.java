@@ -23,9 +23,9 @@ package org.mozilla.javascript;
  * calling the above constructor.
  *
  * @see org.mozilla.javascript.Delegator
- * Author Matthias Radestock
- *
+ * @author Matthias Radestock
  */
+
 public class Synchronizer extends Delegator {
 
     private Object syncObject;
@@ -51,7 +51,9 @@ public class Synchronizer extends Delegator {
         this.syncObject = syncObject;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * @see org.mozilla.javascript.Function#call
+     */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)

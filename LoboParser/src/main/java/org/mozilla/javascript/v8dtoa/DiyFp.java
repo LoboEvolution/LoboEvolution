@@ -142,7 +142,6 @@ class DiyFp {
     void setF(long new_value) { f = new_value; }
     void setE(int new_value) { e = new_value; }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[DiyFp f:" + f + ", e:" + e + "]";

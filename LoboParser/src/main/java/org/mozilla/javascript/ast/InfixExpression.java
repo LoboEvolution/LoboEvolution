@@ -10,10 +10,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node representing an infix (binary operator) expression.
- * The operator is the node's {@link org.mozilla.javascript.Token} type.
- *
- *
- *
+ * The operator is the node's {@link Token} type.
  */
 public class InfixExpression extends AstNode {
 
@@ -21,39 +18,17 @@ public class InfixExpression extends AstNode {
     protected AstNode right;
     protected int operatorPosition = -1;
 
-    /**
-     * <p>Constructor for InfixExpression.</p>
-     */
     public InfixExpression() {
     }
 
-    /**
-     * <p>Constructor for InfixExpression.</p>
-     *
-     * @param pos a int.
-     */
     public InfixExpression(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for InfixExpression.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public InfixExpression(int pos, int len) {
         super(pos, len);
     }
 
-    /**
-     * <p>Constructor for InfixExpression.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     * @param left a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param right a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     public InfixExpression(int pos, int len,
                            AstNode left,
                            AstNode right) {
@@ -65,9 +40,6 @@ public class InfixExpression extends AstNode {
     /**
      * Constructs a new {@code InfixExpression}.  Updates bounds to include
      * left and right nodes.
-     *
-     * @param left a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param right a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public InfixExpression(AstNode left, AstNode right) {
         setLeftAndRight(left, right);
@@ -75,11 +47,7 @@ public class InfixExpression extends AstNode {
 
     /**
      * Constructs a new {@code InfixExpression}.
-     *
      * @param operatorPos the <em>absolute</em> position of the operator
-     * @param operator a int.
-     * @param left a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param right a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public InfixExpression(int operator, AstNode left,
                            AstNode right, int operatorPos) {
@@ -88,12 +56,6 @@ public class InfixExpression extends AstNode {
         setLeftAndRight(left, right);
     }
 
-    /**
-     * <p>setLeftAndRight.</p>
-     *
-     * @param left a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param right a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     public void setLeftAndRight(AstNode left, AstNode right) {
         assertNotNull(left);
         assertNotNull(right);
@@ -109,8 +71,6 @@ public class InfixExpression extends AstNode {
 
     /**
      * Returns operator token &ndash; alias for {@link #getType}
-     *
-     * @return a int.
      */
     public int getOperator() {
         return getType();
@@ -119,10 +79,8 @@ public class InfixExpression extends AstNode {
     /**
      * Sets operator token &ndash; like {@link #setType}, but throws
      * an exception if the operator is invalid.
-     *
-     * @throws java.lang.IllegalArgumentException if operator is not a valid token
+     * @throws IllegalArgumentException if operator is not a valid token
      * code
-     * @param operator a int.
      */
     public void setOperator(int operator) {
         if (!Token.isValidToken(operator))
@@ -132,8 +90,6 @@ public class InfixExpression extends AstNode {
 
     /**
      * Returns the left-hand side of the expression
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getLeft() {
         return left;
@@ -142,9 +98,8 @@ public class InfixExpression extends AstNode {
     /**
      * Sets the left-hand side of the expression, and sets its
      * parent to this node.
-     *
      * @param left the left-hand side of the expression
-     * @throws java.lang.IllegalArgumentException} if left is {@code null}
+     * @throws IllegalArgumentException} if left is {@code null}
      */
     public void setLeft(AstNode left) {
         assertNotNull(left);
@@ -156,9 +111,8 @@ public class InfixExpression extends AstNode {
 
     /**
      * Returns the right-hand side of the expression
-     *
      * @return the right-hand side.  It's usually an
-     * {@link org.mozilla.javascript.ast.AstNode} node, but can also be a {@link org.mozilla.javascript.ast.FunctionNode}
+     * {@link AstNode} node, but can also be a {@link FunctionNode}
      * representing Function expressions.
      */
     public AstNode getRight() {
@@ -168,9 +122,7 @@ public class InfixExpression extends AstNode {
     /**
      * Sets the right-hand side of the expression, and sets its parent to this
      * node.
-     *
-     * @throws java.lang.IllegalArgumentException} if right is {@code null}
-     * @param right a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException} if right is {@code null}
      */
     public void setRight(AstNode right) {
         assertNotNull(right);
@@ -180,8 +132,6 @@ public class InfixExpression extends AstNode {
 
     /**
      * Returns relative offset of operator token
-     *
-     * @return a int.
      */
     public int getOperatorPosition() {
         return operatorPosition;
@@ -189,14 +139,12 @@ public class InfixExpression extends AstNode {
 
     /**
      * Sets operator token's relative offset
-     *
      * @param operatorPosition offset in parent of operator token
      */
     public void setOperatorPosition(int operatorPosition) {
         this.operatorPosition = operatorPosition;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasSideEffects() {
         // the null-checks are for malformed expressions in IDE-mode
@@ -212,7 +160,6 @@ public class InfixExpression extends AstNode {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -226,8 +173,6 @@ public class InfixExpression extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the left operand, and the right operand.
      */
     @Override

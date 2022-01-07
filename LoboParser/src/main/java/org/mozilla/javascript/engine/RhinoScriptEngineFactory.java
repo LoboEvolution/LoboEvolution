@@ -27,14 +27,10 @@ import org.mozilla.javascript.Context;
  * you are sure you are running in an environment that has Nashorn, the best way to get this
  * engine is to call ScriptEngine.getEngineByName("rhino") to ask for Rhino directly.
  * </p>
- *
- *
- *
  */
 public class RhinoScriptEngineFactory
   implements ScriptEngineFactory {
 
-  /** Constant <code>NAME="rhino"</code> */
   public static final String NAME = "rhino";
   private static final String LANGUAGE = "javascript";
   private static final List<String> NAMES =
@@ -47,55 +43,44 @@ public class RhinoScriptEngineFactory
   private static final String LANGUAGE_VERSION =
       String.valueOf(RhinoScriptEngine.DEFAULT_LANGUAGE_VERSION);
 
-  /** {@inheritDoc} */
   @Override
   public String getEngineName() {
     return NAME;
   }
 
-  /** {@inheritDoc} */
   @Override
   public String getEngineVersion() {
-    Context cx = Context.enter();
-    try {
+    try (Context cx = Context.enter()) {
       String v = cx.getImplementationVersion();
       return (v == null ? "unknown" : v);
-    } finally {
-      Context.exit();
     }
   }
 
-  /** {@inheritDoc} */
   @Override
   public List<String> getExtensions() {
     return EXTENSIONS;
   }
 
-  /** {@inheritDoc} */
   @Override
   public List<String> getMimeTypes() {
     return MIME_TYPES;
   }
 
-  /** {@inheritDoc} */
   @Override
   public List<String> getNames() {
     return NAMES;
   }
 
-  /** {@inheritDoc} */
   @Override
   public String getLanguageName() {
     return LANGUAGE;
   }
 
-  /** {@inheritDoc} */
   @Override
   public String getLanguageVersion() {
     return LANGUAGE_VERSION;
   }
 
-  /** {@inheritDoc} */
   @Override
   public Object getParameter(String key) {
     switch (key) {
@@ -117,7 +102,6 @@ public class RhinoScriptEngineFactory
     }
   }
 
-  /** {@inheritDoc} */
   @Override
   public String getMethodCallSyntax(String obj, String m, String... args) {
     StringBuilder sb = new StringBuilder();
@@ -132,13 +116,11 @@ public class RhinoScriptEngineFactory
     return sb.toString();
   }
 
-  /** {@inheritDoc} */
   @Override
   public String getOutputStatement(String toDisplay) {
     return "print('" + toDisplay + "');";
   }
 
-  /** {@inheritDoc} */
   @Override
   public String getProgram(String... statements) {
     StringBuilder sb = new StringBuilder();
@@ -148,7 +130,6 @@ public class RhinoScriptEngineFactory
     return sb.toString();
   }
 
-  /** {@inheritDoc} */
   @Override
   public ScriptEngine getScriptEngine() {
     return new RhinoScriptEngine(this);

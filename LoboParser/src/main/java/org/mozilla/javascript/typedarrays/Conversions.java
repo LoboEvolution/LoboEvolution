@@ -10,40 +10,20 @@ import org.mozilla.javascript.ScriptRuntime;
 
 /**
  * Numeric conversions from section 7 of the ECMAScript 6 standard.
- *
- *
- *
  */
+
 public class Conversions
 {
-    /**
-     * <p>toInt8.</p>
-     *
-     * @param arg a {@link java.lang.Object} object.
-     * @return a int.
-     */
     public static int toInt8(Object arg)
     {
         return (byte)ScriptRuntime.toInt32(arg);
     }
 
-    /**
-     * <p>toUint8.</p>
-     *
-     * @param arg a {@link java.lang.Object} object.
-     * @return a int.
-     */
     public static int toUint8(Object arg)
     {
         return ScriptRuntime.toInt32(arg) & 0xff;
     }
 
-    /**
-     * <p>toUint8Clamp.</p>
-     *
-     * @param arg a {@link java.lang.Object} object.
-     * @return a int.
-     */
     public static int toUint8Clamp(Object arg)
     {
         double d = ScriptRuntime.toNumber(arg);
@@ -68,45 +48,21 @@ public class Conversions
         return (int)f;
     }
 
-    /**
-     * <p>toInt16.</p>
-     *
-     * @param arg a {@link java.lang.Object} object.
-     * @return a int.
-     */
     public static int toInt16(Object arg)
     {
         return (short)ScriptRuntime.toInt32(arg);
     }
 
-    /**
-     * <p>toUint16.</p>
-     *
-     * @param arg a {@link java.lang.Object} object.
-     * @return a int.
-     */
     public static int toUint16(Object arg)
     {
         return ScriptRuntime.toInt32(arg) & 0xffff;
     }
 
-    /**
-     * <p>toInt32.</p>
-     *
-     * @param arg a {@link java.lang.Object} object.
-     * @return a int.
-     */
     public static int toInt32(Object arg)
     {
         return ScriptRuntime.toInt32(arg);
     }
 
-    /**
-     * <p>toUint32.</p>
-     *
-     * @param arg a {@link java.lang.Object} object.
-     * @return a long.
-     */
     public static long toUint32(Object arg)
     {
         return ScriptRuntime.toUint32(arg);

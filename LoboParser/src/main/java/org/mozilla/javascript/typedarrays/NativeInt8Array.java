@@ -14,10 +14,8 @@ import org.mozilla.javascript.Undefined;
 /**
  * An array view that stores 8-bit quantities and implements the JavaScript "Int8Array" interface.
  * It also implements List&lt;Byte&gt; for direct manipulation in Java.
- *
- *
- *
  */
+
 public class NativeInt8Array
     extends NativeTypedArrayView<Byte>
 {
@@ -25,77 +23,50 @@ public class NativeInt8Array
 
     private static final String CLASS_NAME = "Int8Array";
 
-    /**
-     * <p>Constructor for NativeInt8Array.</p>
-     */
     public NativeInt8Array()
     {
     }
 
-    /**
-     * <p>Constructor for NativeInt8Array.</p>
-     *
-     * @param ab a {@link org.mozilla.javascript.typedarrays.NativeArrayBuffer} object.
-     * @param off a int.
-     * @param len a int.
-     */
     public NativeInt8Array(NativeArrayBuffer ab, int off, int len)
     {
         super(ab, off, len, len);
     }
 
-    /**
-     * <p>Constructor for NativeInt8Array.</p>
-     *
-     * @param len a int.
-     */
     public NativeInt8Array(int len)
     {
         this(new NativeArrayBuffer(len), 0, len);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
-    /**
-     * <p>init.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param sealed a boolean.
-     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeInt8Array a = new NativeInt8Array();
         a.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected NativeInt8Array construct(NativeArrayBuffer ab, int off, int len)
     {
         return new NativeInt8Array(ab, off, len);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getBytesPerElement()
     {
         return 1;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected NativeInt8Array realThis(Scriptable thisObj, IdFunctionObject f)
     {
         return ensureType(thisObj, NativeInt8Array.class, f);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object js_get(int index)
     {
@@ -105,7 +76,6 @@ public class NativeInt8Array
         return ByteIo.readInt8(arrayBuffer.buffer, index + offset);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object js_set(int index, Object c)
     {
@@ -119,7 +89,6 @@ public class NativeInt8Array
 
     // List implementation (much of it handled by the superclass)
 
-    /** {@inheritDoc} */
     @Override
     public Byte get(int i)
     {
@@ -129,7 +98,6 @@ public class NativeInt8Array
         return (Byte)js_get(i);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Byte set(int i, Byte aByte)
     {

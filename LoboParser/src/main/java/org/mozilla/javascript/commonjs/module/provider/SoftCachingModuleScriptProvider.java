@@ -23,11 +23,10 @@ import org.mozilla.javascript.commonjs.module.ModuleScript;
 /**
  * A module script provider that uses a module source provider to load modules
  * and caches the loaded modules. It softly references the loaded modules'
- * Rhino {@link org.mozilla.javascript.Script} objects, thus a module once loaded can become eligible
+ * Rhino {@link Script} objects, thus a module once loaded can become eligible
  * for garbage collection if it is otherwise unused under memory pressure.
  * Instances of this class are thread safe.
- *
- * Author Attila Szegedi
+ * @author Attila Szegedi
  * @version $Id: SoftCachingModuleScriptProvider.java,v 1.3 2011/04/07 20:26:12 hannes%helma.at Exp $
  */
 public class SoftCachingModuleScriptProvider extends CachingModuleScriptProviderBase {
@@ -37,7 +36,6 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
 
     /**
      * Creates a new module provider with the specified module source provider.
-     *
      * @param moduleSourceProvider provider for modules' source code
      */
     public SoftCachingModuleScriptProvider(
@@ -46,7 +44,6 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
         super(moduleSourceProvider);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ModuleScript getModuleScript(Context cx, String moduleId,
             URI uri, URI base, Scriptable paths)
@@ -64,14 +61,12 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
         return super.getModuleScript(cx, moduleId, uri, base, paths);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected CachedModuleScript getLoadedModule(String moduleId) {
         final ScriptReference scriptRef = scripts.get(moduleId);
         return scriptRef != null ? scriptRef.getCachedModuleScript() : null;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void putLoadedModule(String moduleId, ModuleScript moduleScript,
             Object validator)

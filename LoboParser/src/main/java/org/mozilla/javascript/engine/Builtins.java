@@ -22,9 +22,6 @@ import org.mozilla.javascript.ScriptableObject;
  * <li>print(arg, arg, ...): Write each argument, concatenated to the ScriptEngine's
  * "standard output" as a string.</li>
  * </ul>
- *
- *
- *
  */
 public class Builtins {
 
@@ -44,15 +41,6 @@ public class Builtins {
         ScriptableObject.PERMANENT | ScriptableObject.DONTENUM);
   }
 
-  /**
-   * <p>print.</p>
-   *
-   * @param cx a {@link org.mozilla.javascript.Context} object.
-   * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
-   * @param args an array of {@link java.lang.Object} objects.
-   * @param f a {@link org.mozilla.javascript.Function} object.
-   * @throws java.io.IOException if any.
-   */
   public static void print(Context cx, Scriptable thisObj, Object[] args, Function f)
       throws IOException {
     Builtins self = getSelf(thisObj);

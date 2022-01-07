@@ -30,12 +30,6 @@
 
 package org.mozilla.javascript.v8dtoa;
 
-/**
- * <p>CachedPowers class.</p>
- *
- *
- *
- */
 public class CachedPowers {
 
 

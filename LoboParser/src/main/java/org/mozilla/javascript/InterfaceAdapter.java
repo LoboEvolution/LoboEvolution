@@ -14,9 +14,6 @@ import java.util.HashSet;
 /**
  * Adapter to use JS function as implementation of Java interfaces with
  * single method or multiple methods with the same signature.
- *
- *
- *
  */
 public class InterfaceAdapter
 {
@@ -109,17 +106,6 @@ public class InterfaceAdapter
                 cf, new Class[] { cl });
     }
 
-    /**
-     * <p>invoke.</p>
-     *
-     * @param cf a {@link org.mozilla.javascript.ContextFactory} object.
-     * @param target a {@link java.lang.Object} object.
-     * @param topScope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param thisObject a {@link java.lang.Object} object.
-     * @param method a {@link java.lang.reflect.Method} object.
-     * @param args an array of {@link java.lang.Object} objects.
-     * @return a {@link java.lang.Object} object.
-     */
     public Object invoke(ContextFactory cf,
                          final Object target,
                          final Scriptable topScope,

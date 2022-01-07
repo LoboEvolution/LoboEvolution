@@ -8,9 +8,6 @@ package org.mozilla.javascript.ast;
 
 /**
  * Abstract base type for loops.
- *
- *
- *
  */
 public abstract class Loop extends Scope {
 
@@ -18,35 +15,19 @@ public abstract class Loop extends Scope {
     protected int lp = -1;
     protected int rp = -1;
 
-    /**
-     * <p>Constructor for Loop.</p>
-     */
     public Loop() {
     }
 
-    /**
-     * <p>Constructor for Loop.</p>
-     *
-     * @param pos a int.
-     */
     public Loop(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for Loop.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public Loop(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns loop body
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getBody() {
         return body;
@@ -56,8 +37,6 @@ public abstract class Loop extends Scope {
      * Sets loop body.  Sets the parent of the body to this loop node,
      * and updates its offset to be relative.  Extends the length of this
      * node to include the body.
-     *
-     * @param body a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public void setBody(AstNode body) {
         this.body = body;
@@ -68,8 +47,6 @@ public abstract class Loop extends Scope {
 
     /**
      * Returns left paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getLp() {
         return lp;
@@ -77,8 +54,6 @@ public abstract class Loop extends Scope {
 
     /**
      * Sets left paren position
-     *
-     * @param lp a int.
      */
     public void setLp(int lp) {
         this.lp = lp;
@@ -86,8 +61,6 @@ public abstract class Loop extends Scope {
 
     /**
      * Returns right paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getRp() {
         return rp;
@@ -95,8 +68,6 @@ public abstract class Loop extends Scope {
 
     /**
      * Sets right paren position
-     *
-     * @param rp a int.
      */
     public void setRp(int rp) {
         this.rp = rp;
@@ -104,9 +75,6 @@ public abstract class Loop extends Scope {
 
     /**
      * Sets both paren positions
-     *
-     * @param lp a int.
-     * @param rp a int.
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;

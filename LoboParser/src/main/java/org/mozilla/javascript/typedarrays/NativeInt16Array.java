@@ -14,10 +14,8 @@ import org.mozilla.javascript.Undefined;
 /**
  * An array view that stores 16-bit quantities and implements the JavaScript "Int16Array" interface.
  * It also implements List&lt;Short&gt; for direct manipulation in Java.
- *
- *
- *
  */
+
 public class NativeInt16Array
     extends NativeTypedArrayView<Short>
 {
@@ -26,77 +24,50 @@ public class NativeInt16Array
     private static final String CLASS_NAME = "Int16Array";
     private static final int BYTES_PER_ELEMENT = 2;
 
-    /**
-     * <p>Constructor for NativeInt16Array.</p>
-     */
     public NativeInt16Array()
     {
     }
 
-    /**
-     * <p>Constructor for NativeInt16Array.</p>
-     *
-     * @param ab a {@link org.mozilla.javascript.typedarrays.NativeArrayBuffer} object.
-     * @param off a int.
-     * @param len a int.
-     */
     public NativeInt16Array(NativeArrayBuffer ab, int off, int len)
     {
         super(ab, off, len, len * BYTES_PER_ELEMENT);
     }
 
-    /**
-     * <p>Constructor for NativeInt16Array.</p>
-     *
-     * @param len a int.
-     */
     public NativeInt16Array(int len)
     {
         this(new NativeArrayBuffer((double)len * BYTES_PER_ELEMENT), 0, len);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
-    /**
-     * <p>init.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param sealed a boolean.
-     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeInt16Array a = new NativeInt16Array();
         a.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected NativeInt16Array construct(NativeArrayBuffer ab, int off, int len)
     {
         return new NativeInt16Array(ab, off, len);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getBytesPerElement()
     {
         return BYTES_PER_ELEMENT;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected NativeInt16Array realThis(Scriptable thisObj, IdFunctionObject f)
     {
         return ensureType(thisObj, NativeInt16Array.class, f);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object js_get(int index)
     {
@@ -106,7 +77,6 @@ public class NativeInt16Array
         return ByteIo.readInt16(arrayBuffer.buffer, (index * BYTES_PER_ELEMENT) + offset, useLittleEndian());
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object js_set(int index, Object c)
     {
@@ -118,7 +88,6 @@ public class NativeInt16Array
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Short get(int i)
     {
@@ -128,7 +97,6 @@ public class NativeInt16Array
         return (Short)js_get(i);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Short set(int i, Short aByte)
     {

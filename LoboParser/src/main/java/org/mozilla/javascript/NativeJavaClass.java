@@ -20,12 +20,12 @@ import java.util.Map;
  * method return or property access, rather than by walking the
  * Packages/java tree.
  *
- * Author Mike Shaver
+ * @author Mike Shaver
  * @see NativeJavaArray
  * @see NativeJavaObject
  * @see NativeJavaPackage
- *
  */
+
 public class NativeJavaClass extends NativeJavaObject implements Function
 {
     private static final long serialVersionUID = -6460763940409461664L;
@@ -33,34 +33,17 @@ public class NativeJavaClass extends NativeJavaObject implements Function
     // Special property for getting the underlying Java class object.
     static final String javaClassPropertyName = "__javaObject__";
 
-    /**
-     * <p>Constructor for NativeJavaClass.</p>
-     */
     public NativeJavaClass() {
     }
 
-    /**
-     * <p>Constructor for NativeJavaClass.</p>
-     *
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param cl a {@link java.lang.Class} object.
-     */
     public NativeJavaClass(Scriptable scope, Class<?> cl) {
         this(scope, cl, false);
     }
 
-    /**
-     * <p>Constructor for NativeJavaClass.</p>
-     *
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param cl a {@link java.lang.Class} object.
-     * @param isAdapter a boolean.
-     */
     public NativeJavaClass(Scriptable scope, Class<?> cl, boolean isAdapter) {
         super(scope, cl, null, isAdapter);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initMembers() {
         Class<?> cl = (Class<?>)javaObject;
@@ -68,19 +51,16 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         staticFieldAndMethods = members.getFieldAndMethodsObjects(this, cl, true);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "JavaClass";
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(String name, Scriptable start) {
         return members.has(name, true) || javaClassPropertyName.equals(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(String name, Scriptable start) {
         // When used as a constructor, ScriptRuntime.newObject() asks
@@ -122,28 +102,20 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         throw members.reportMemberNotFound(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(String name, Scriptable start, Object value) {
         members.put(this, name, javaObject, value, true);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object[] getIds() {
         return members.getIds(true);
     }
 
-    /**
-     * <p>getClassObject.</p>
-     *
-     * @return a {@link java.lang.Class} object.
-     */
     public Class<?> getClassObject() {
         return (Class<?>) super.unwrap();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> hint) {
         if (hint == null || hint == ScriptRuntime.StringClass)
@@ -155,7 +127,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -178,7 +149,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return construct(cx, scope, args);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
@@ -298,15 +268,12 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return ctor.newInstance(args);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[JavaClass " + getClassObject().getName() + "]";
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Determines if prototype is a wrapped Java object and performs
      * a Java "instanceof".
      * Exception: if value is an instance of NativeJavaClass, it isn't

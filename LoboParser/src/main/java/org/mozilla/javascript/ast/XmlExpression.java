@@ -10,48 +10,25 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for an embedded JavaScript expression within an E4X XML literal.
- * Node type, like {@link org.mozilla.javascript.ast.XmlLiteral}, is {@link org.mozilla.javascript.Token#XML}.  The node length
+ * Node type, like {@link XmlLiteral}, is {@link Token#XML}.  The node length
  * includes the curly braces.
- *
- *
- *
  */
 public class XmlExpression extends XmlFragment {
 
     private AstNode expression;
     private boolean isXmlAttribute;
 
-    /**
-     * <p>Constructor for XmlExpression.</p>
-     */
     public XmlExpression() {
     }
 
-    /**
-     * <p>Constructor for XmlExpression.</p>
-     *
-     * @param pos a int.
-     */
     public XmlExpression(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for XmlExpression.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public XmlExpression(int pos, int len) {
         super(pos, len);
     }
 
-    /**
-     * <p>Constructor for XmlExpression.</p>
-     *
-     * @param pos a int.
-     * @param expr a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     public XmlExpression(int pos, AstNode expr) {
         super(pos);
         setExpression(expr);
@@ -59,8 +36,6 @@ public class XmlExpression extends XmlFragment {
 
     /**
      * Returns the expression embedded in {}
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getExpression() {
         return expression;
@@ -68,9 +43,7 @@ public class XmlExpression extends XmlFragment {
 
     /**
      * Sets the expression embedded in {}, and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code expression} is {@code null}
-     * @param expression a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if {@code expression} is {@code null}
      */
     public void setExpression(AstNode expression) {
         assertNotNull(expression);
@@ -80,8 +53,6 @@ public class XmlExpression extends XmlFragment {
 
     /**
      * Returns whether this is part of an xml attribute value
-     *
-     * @return a boolean.
      */
     public boolean isXmlAttribute() {
       return isXmlAttribute;
@@ -89,22 +60,17 @@ public class XmlExpression extends XmlFragment {
 
     /**
      * Sets whether this is part of an xml attribute value
-     *
-     * @param isXmlAttribute a boolean.
      */
     public void setIsXmlAttribute(boolean isXmlAttribute) {
       this.isXmlAttribute = isXmlAttribute;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         return makeIndent(depth) + "{" + expression.toSource(depth) + "}";
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then the child expression.
      */
     @Override
