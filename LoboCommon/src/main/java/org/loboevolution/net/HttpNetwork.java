@@ -205,8 +205,12 @@ public class HttpNetwork {
 		boolean redir;
 		int redirects = 0;
 		InputStream in;
-		c.setConnectTimeout(TIMEOUT_VALUE);
-		c.setReadTimeout(TIMEOUT_VALUE);
+
+		if (c.getConnectTimeout() == 0) {
+			c.setConnectTimeout(TIMEOUT_VALUE);
+			c.setReadTimeout(TIMEOUT_VALUE);
+		}
+
 		do {
 			if (c instanceof HttpURLConnection) {
 				((HttpURLConnection) c).setInstanceFollowRedirects(false);
@@ -252,7 +256,7 @@ public class HttpNetwork {
 	}
 	
 	private static String removeNonASCIIChar(String str) {
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 		char[] chars = str.toCharArray();
 		for (char c : chars) {
 			if (0 < c && c < 127) {

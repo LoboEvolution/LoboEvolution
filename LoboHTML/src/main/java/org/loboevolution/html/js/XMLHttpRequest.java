@@ -37,23 +37,17 @@ import org.loboevolution.html.node.Document;
 
 /**
  * <p>XMLHttpRequest class.</p>
- *
- *
- *
  */
 public class XMLHttpRequest extends AbstractScriptableDelegate {
-	// TODO: See reference:
-	// http://www.xulplanet.com/references/objref/XMLHttpRequest.html
 
 	private static final Logger logger = Logger.getLogger(XMLHttpRequest.class.getName());
-	private final java.net.URL codeSource;
 	private boolean listenerAdded;
+	private final URL codeSource;
 	private Function onreadystatechange;
 	private final UserAgentContext pcontext;
-
 	private final HttpRequest request;
-
 	private final Scriptable scope;
+	private int timeout = 0;
 
 	/**
 	 * <p>Constructor for XMLHttpRequest.</p>
@@ -77,14 +71,12 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	}
 
 	private void executeReadyStateChange() {
-		// Not called in GUI thread to ensure consistency of readyState.
 		try {
-			final Function f = XMLHttpRequest.this.getOnreadystatechange();
+			final Function f = getOnreadystatechange();
 			if (f != null) {
 				final Context ctx = Executor.createContext(this.codeSource, this.pcontext);
 				try {
-					final Scriptable newScope = (Scriptable) JavaScript.getInstance()
-							.getJavascriptObject(XMLHttpRequest.this, this.scope);
+					final Scriptable newScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(XMLHttpRequest.this, this.scope);
 					f.call(ctx, newScope, newScope, new Object[0]);
 				} finally {
 					Context.exit();
@@ -240,7 +232,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @throws java.lang.Exception if any.
 	 */
 	public void send(String content) throws Exception {
-		this.request.send(content);
+		this.request.send(content, timeout);
 	}
 	
 	/**
@@ -249,7 +241,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @throws java.lang.Exception if any.
 	 */
 	public void send() throws Exception {
-		this.request.send(null);
+		this.request.send(null, timeout);
 	}
 
 	/**
@@ -267,4 +259,11 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 		}
 	}
 
+	public int getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
+	}
 }

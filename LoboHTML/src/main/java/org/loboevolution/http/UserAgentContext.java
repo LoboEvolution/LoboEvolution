@@ -44,7 +44,7 @@ public class UserAgentContext {
 	 * @return a {@link org.loboevolution.http.HttpRequest} object.
 	 */
 	public HttpRequest createHttpRequest() {
-		return new HttpRequest(this, Proxy.NO_PROXY);
+		return new HttpRequest(Proxy.NO_PROXY);
 	}
 	
 	/**

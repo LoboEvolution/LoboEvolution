@@ -22,104 +22,61 @@
  */
 package org.loboevolution.http;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import org.loboevolution.common.EventDispatch;
+import org.loboevolution.common.IORoutines;
+import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
+import org.loboevolution.html.ReadyStateChangeListener;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.ReadyStateType;
+import org.loboevolution.net.UserAgent;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.loboevolution.common.EventDispatch;
-import org.loboevolution.common.IORoutines;
-import org.loboevolution.common.Urls;
-import org.loboevolution.html.ReadyStateChangeListener;
-import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.net.UserAgent;
-
 /**
  * <p>HttpRequest class.</p>
- *
- *
- *
  */
 public class HttpRequest {
 
 	private static final Logger logger = Logger.getLogger(HttpRequest.class.getName());
 
-	/**
-	 * The complete request state. All operations are finished.
-	 */
-	public static final int STATE_COMPLETE = 4;
+	private URLConnection connection;
+	private URL requestURL;
 
-	/**
-	 * The interactive request state. Downloading response.
-	 */
-	public static final int STATE_INTERACTIVE = 3;
-
-	/**
-	 * The loaded request state. Headers and status are now available.
-	 */
-	public static final int STATE_LOADED = 2;
-
-	/**
-	 * The loading request state. The open method has been called, but
-	 * a response has not been received yet.
-	 */
-	public static final int STATE_LOADING = 1;
-
-	/**
-	 * The uninitialized request state.
-	 */
-	public static final int STATE_UNINITIALIZED = 0;
-
-	/**
-	 * The URLConnection is assigned to this field while it is ongoing.
-	 */
-	protected java.net.URLConnection connection;
-	private boolean isAsync;
 	private final Proxy proxy;
 	private final EventDispatch readyEvent = new EventDispatch();
-	private int readyState;
+	private ReadyStateType readyState = ReadyStateType.UNSENT;
 
-	protected String requestMethod;
-	protected String requestPassword;
-	private java.net.URL requestURL;
-	protected String requestUserName;
+	private String requestMethod;
+	private String requestPassword;
+	private String requestUserName;
+	protected String responseHeaders;
+	private String statusText;
+
+	protected Map<String, List<String>> responseHeadersMap = new HashMap<>();
 	private byte[] responseBytes;
 
-	/**
-	 * Response headers are set in this string after a response is received.
-	 */
-	protected String responseHeaders;
-
-	/**
-	 * Response headers are set in this map after a response is received.
-	 */
-	protected Map<String, List<String>> responseHeadersMap;
+	private boolean isAsync;
 
 	private int status;
 
-	private String statusText;
-
 	/**
 	 * <p>Constructor for HttpRequest.</p>
-	 *
-	 * @param context a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @param proxy a {@link java.net.Proxy} object.
 	 */
-	public HttpRequest(UserAgentContext context, Proxy proxy) {
+	public HttpRequest(Proxy proxy) {
 		this.proxy = proxy;
 	}
 
@@ -140,6 +97,9 @@ public class HttpRequest {
 				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
+
+		responseHeadersMap.clear();
+		changeState(ReadyStateType.UNSENT, 0, null, null);
 	}
 
 	/**
@@ -151,16 +111,6 @@ public class HttpRequest {
 		this.readyEvent.addListener(event -> listener.readyStateChanged());
 	}
 
-	private void changeState(int readyState, int status, String statusMessage, byte[] bytes) {
-		synchronized (this) {
-			this.readyState = readyState;
-			this.status = status;
-			this.statusText = statusMessage;
-			this.responseBytes = bytes;
-		}
-		this.readyEvent.fireEvent(null);
-	}
-
 	/**
 	 * <p>getAllResponseHeaders.</p>
 	 *
@@ -170,22 +120,8 @@ public class HttpRequest {
 		return this.responseHeaders;
 	}
 
-	private String getAllResponseHeaders(URLConnection c) {
-		int idx = 0;
-		String value;
-		final StringBuilder buf = new StringBuilder();
-		while ((value = c.getHeaderField(idx)) != null) {
-			final String key = c.getHeaderFieldKey(idx);
-			buf.append(key);
-			buf.append(": ");
-			buf.append(value);
-			idx++;
-		}
-		return buf.toString();
-	}
-
 	/**
-	 * This is the charset used to post data provided to {@link #send(String)}. It
+	 * This is the charset used to post data provided to send. It
 	 * returns "UTF-8" unless overridden.
 	 *
 	 * @return a {@link java.lang.String} object.
@@ -200,7 +136,7 @@ public class HttpRequest {
 	 * @return a int.
 	 */
 	public synchronized int getReadyState() {
-		return this.readyState;
+		return this.readyState.getValue();
 	}
 
 	/**
@@ -223,24 +159,6 @@ public class HttpRequest {
 		return headers == null ? null : headers.get(headerName);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.HttpRequest#getResponseImage()
-	 */
-	/**
-	 * <p>getResponseImage.</p>
-	 *
-	 * @return a {@link java.awt.Image} object.
-	 */
-	public synchronized Image getResponseImage() {
-		final byte[] bytes = this.responseBytes;
-		if (bytes == null) {
-			return null;
-		}
-		return Toolkit.getDefaultToolkit().createImage(bytes);
-	}
-
 	/**
 	 * <p>getResponseText.</p>
 	 *
@@ -248,7 +166,7 @@ public class HttpRequest {
 	 */
 	public synchronized String getResponseText() {
 		final byte[] bytes = this.responseBytes;
-		final java.net.URLConnection connection = this.connection;
+		final URLConnection connection = this.connection;
 		String encoding = connection == null ? "ISO-8859-1" : Urls.getCharset(connection);
 		if (encoding == null) {
 			encoding = "ISO-8859-1";
@@ -258,12 +176,7 @@ public class HttpRequest {
 		} catch (final UnsupportedEncodingException uee) {
 			logger.log(Level.WARNING,
 					"getResponseText(): Charset '" + encoding + "' did not work. Retrying with ISO-8859-1.", uee);
-			try {
-				return new String(bytes, "ISO-8859-1");
-			} catch (final UnsupportedEncodingException uee2) {
-				// Ignore this time
-				return null;
-			}
+			return new String(bytes, StandardCharsets.ISO_8859_1);
 		}
 	}
 
@@ -367,7 +280,7 @@ public class HttpRequest {
 	}
 
 	/**
-	 * Opens the request. Call {@link #send(String)} to complete it.
+	 * Opens the request. Call send to complete it.
 	 *
 	 * @param method    The request method.
 	 * @param url       The request URL.
@@ -389,7 +302,8 @@ public class HttpRequest {
 			this.requestUserName = userName;
 			this.requestPassword = password;
 		}
-		changeState(HttpRequest.STATE_LOADING, 0, null, null);
+
+		changeState(ReadyStateType.OPENED, 0, null, null);
 	}
 
 	/**
@@ -400,51 +314,59 @@ public class HttpRequest {
 	 * @param content POST content or null if there's no such content.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void send(final String content) throws Exception {
-		final java.net.URL url = this.requestURL;
+	public void send(final String content, int timeout) throws Exception {
+		final URL url = this.requestURL;
 		if (url == null) {
 			throw new Exception("No URL has been provided.");
 		}
 		if (this.isAsync) {
-			// Should use a thread pool instead
 			new Thread("SimpleHttpRequest-" + url.getHost()) {
 				@Override
 				public void run() {
 					try {
-						sendSync(content);
+						sendSync(content, timeout);
 					} catch (final Throwable thrown) {
 						logger.log(Level.WARNING, "send(): Error in asynchronous request on " + url, thrown);
 					}
 				}
 			}.start();
 		} else {
-			sendSync(content);
+			sendSync(content, timeout);
 		}
 	}
 
 	/**
-	 * This is a synchronous implementation of {@link #send(String)} method
+	 * This is a synchronous implementation of send method
 	 * functionality. It may be overridden to change the behavior of the class.
 	 *
 	 * @param content POST content if any. It may be null.
 	 * @throws java.lang.Exception if any.
 	 */
-	protected void sendSync(String content) throws Exception {
+	private void sendSync(String content, int timeout) throws Exception {
 		try {
-			changeState(HttpRequest.STATE_LOADING, 0, null, null);
+			changeState(ReadyStateType.LOADING, 0, null, null);
 			URLConnection c;
 			synchronized (this) {
 				c = this.connection;
 			}
 			c.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+
+			if (Strings.isNotBlank(requestUserName) && Strings.isNotBlank(requestPassword)) {
+				String userpass = requestUserName + ":" + requestPassword;
+				String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+				c.setRequestProperty("Authorization", basicAuth);
+			}
+
+			c.setConnectTimeout(timeout);
+			c.setReadTimeout(timeout);
+
 			int istatus;
 			String istatusText;
-			InputStream err;
 			if (c instanceof HttpURLConnection) {
 				final HttpURLConnection hc = (HttpURLConnection) c;
 				String method = this.requestMethod;
 				if (method == null) {
-					throw new java.io.IOException("Null method.");
+					throw new IOException("Null method.");
 				}
 				method = method.toUpperCase();
 				hc.setRequestMethod(method);
@@ -461,28 +383,50 @@ public class HttpRequest {
 				}
 				istatus = hc.getResponseCode();
 				istatusText = hc.getResponseMessage();
-				err = hc.getErrorStream();
 			} else {
 				istatus = 0;
 				istatusText = "";
-				err = null;
 			}
 			synchronized (this) {
 				this.responseHeaders = this.getAllResponseHeaders(c);
 				this.responseHeadersMap = c.getHeaderFields();
+				changeState(ReadyStateType.HEADERS_RECEIVED, istatus, istatusText, null);
 			}
-			changeState(HttpRequest.STATE_LOADED, istatus, istatusText, null);
-			final InputStream in = err == null ? HttpNetwork.openConnectionCheckRedirects(c) : err;
-			final int contentLength = c.getContentLength();
-			// TODO: In the "interactive" state, some response text is supposed to be
-			// available.
-			changeState(HttpRequest.STATE_INTERACTIVE, istatus, istatusText, null);
-			final byte[] bytes = IORoutines.load(in, contentLength == -1 ? 4096 : contentLength);
-			changeState(HttpRequest.STATE_COMPLETE, istatus, istatusText, bytes);
+
+			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(c)) {
+				final int contentLength = c.getContentLength();
+				final byte[] bytes = IORoutines.load(in, contentLength == -1 ? 4096 : contentLength);
+				changeState(ReadyStateType.DONE, istatus, istatusText, bytes);
+			}
+
 		} finally {
 			synchronized (this) {
 				this.connection = null;
 			}
 		}
+	}
+
+	private void changeState(ReadyStateType readyState, int status, String statusMessage, byte[] bytes) {
+		synchronized (this) {
+			this.readyState = readyState;
+			this.status = status;
+			this.statusText = statusMessage;
+			this.responseBytes = bytes;
+		}
+		this.readyEvent.fireEvent(null);
+	}
+
+	private String getAllResponseHeaders(URLConnection c) {
+		int idx = 0;
+		String value;
+		final StringBuilder buf = new StringBuilder();
+		while ((value = c.getHeaderField(idx)) != null) {
+			final String key = c.getHeaderFieldKey(idx);
+			buf.append(key);
+			buf.append(": ");
+			buf.append(value);
+			idx++;
+		}
+		return buf.toString();
 	}
 }
