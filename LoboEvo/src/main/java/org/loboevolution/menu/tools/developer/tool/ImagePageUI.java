@@ -23,10 +23,12 @@ package org.loboevolution.menu.tools.developer.tool;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.ToolBar;
+import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.http.HtmlContent;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.info.MetaInfo;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.menu.tools.AbstractToolsUI;
 import org.loboevolution.net.HttpNetwork;
 
@@ -91,7 +93,9 @@ public class ImagePageUI extends AbstractToolsUI {
                 for (final int element : selectedRow) {
                     for (final int selectedColumn : selectedColumns) {
                         final String href = (String) jtable.getValueAt(element, selectedColumn);
-                        jPanelImg.add(new JLabel(new ImageIcon(HttpNetwork.getImage(href, null))));
+                        HTMLImageElementImpl img = new HTMLImageElementImpl();
+                        img.setSrc(href);
+                        jPanelImg.add(new JLabel(new ImageIcon(HttpNetwork.getImage(img, new TimingInfo(), false))));
                         jPanelImg.repaint();
                     }
                 }
