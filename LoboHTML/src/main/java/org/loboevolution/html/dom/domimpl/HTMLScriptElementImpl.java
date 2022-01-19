@@ -26,20 +26,26 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLScriptElement;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.UserAgent;
 import org.mozilla.javascript.Context;
@@ -166,18 +172,23 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			ctx.setLanguageVersion(Context.VERSION_1_8);
 			ctx.setOptimizationLevel(-1);
 			final String src = getSrc();
+			Instant start = Instant.now();
 			try {
+
 				if (Strings.isNotBlank(src)) {
+					TimingInfo info = new TimingInfo();
 					final URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
 					final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
 					final URL u = new URL(scriptURI);
-					final URLConnection connection = u.openConnection();
+					info.setName(u.getFile());
+					final HttpURLConnection connection =(HttpURLConnection)u.openConnection();
 					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 					try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 							Reader reader = new InputStreamReader(in, "utf-8")) {
 						BufferedReader br = new BufferedReader(reader);						
 						ctx.evaluateReader(scope, br, scriptURI, 1, null);
 					} catch (SocketTimeoutException e) {
+						info.setHttpResponse(connection.getResponseCode());
 						logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
 				    } catch (Exception e) {
 						if (e instanceof MissingResourceException) {
@@ -185,7 +196,16 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						} else{
 							logger.log(Level.SEVERE, e.getMessage(), e);
 						}
-
+					} finally {
+						Instant finish = Instant.now();
+						long timeElapsed = Duration.between(start, finish).toMillis();
+						info.setTimeElapsed(timeElapsed);
+						info.setPath(scriptURI);
+						info.setType(connection.getContentType());
+						info.setHttpResponse(connection.getResponseCode());
+						final HtmlRendererContext htmlRendererContext = this.getHtmlRendererContext();
+						final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+						htmlPanel.getBrowserPanel().getTimingList.add(info);
 					}
 				} else {
 					String scriptURI = doc.getBaseURI();
@@ -195,7 +215,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			} catch (final RhinoException ecmaError) {
 				final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();
 				logger.log(Level.WARNING, "Javascript error at " + error, ecmaError.getMessage());
-			} catch (java.util.MissingResourceException mre) {
+			} catch (MissingResourceException mre) {
 				logger.log(Level.WARNING, mre.getMessage());
 			} catch (final Throwable err) {
 				logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);

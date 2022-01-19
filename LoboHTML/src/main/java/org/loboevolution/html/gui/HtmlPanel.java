@@ -22,33 +22,15 @@
  */
 package org.loboevolution.html.gui;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringReader;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.EventObject;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-
 import org.loboevolution.common.EventDispatch2;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.html.dom.domimpl.DocumentNotificationListener;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.html.renderer.BoundableRenderable;
@@ -59,11 +41,24 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.net.UserAgent;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.*;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.EventObject;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The HtmlPanel class is a Swing component that can render a HTML
@@ -607,10 +602,25 @@ public class HtmlPanel extends JComponent implements FrameContext {
 				final Document document = builder.parse(is);
 				setDocument(document, rcontext);
 			}
-		} catch (final java.io.IOException ioe) {
+		} catch (final IOException | SAXException ioe) {
 			throw new IllegalStateException("Unexpected condition.", ioe);
-		} catch (final org.xml.sax.SAXException se) {
-			throw new IllegalStateException("Unexpected condition.", se);
+		}
+	}
+
+	/**
+	 * <p>createHtmlPanel.</p>
+	 *
+	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 * @param uri a {@link java.lang.String} object.
+	 * @param connection a {@link java.net.URLConnection} object.
+	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
+	 */
+	public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri, URLConnection connection) {
+		try {
+			return createPanel(browserPanel, connection, uri);
+		} catch (final Exception e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+			return new HtmlPanel();
 		}
 	}
 	
@@ -622,29 +632,32 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
 	 */
 	public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri) {
-		final HtmlPanel panel = new HtmlPanel();
-		panel.setBrowserPanel(browserPanel);
 		try {
 			final URL url = new URL(uri);
 			final URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-
-			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-					Reader reader = new InputStreamReader(in, "utf-8")) {
-
-				final InputSource is = new InputSourceImpl(reader, uri);
-				final UserAgentContext ucontext = new UserAgentContext();
-				final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
-				panel.setPreferredSize(new Dimension(800, 400));
-				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext);
-				final Document document = builder.parse(is);
-				panel.setDocument(document, rendererContext);
-			} catch (SocketTimeoutException e) {
-				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
-		    }
-
+			return createPanel(browserPanel, connection, uri);
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
+		}
+		return new HtmlPanel();
+	}
+
+	private static HtmlPanel createPanel(IBrowserPanel browserPanel, URLConnection connection, String uri) throws Exception {
+		final HtmlPanel panel = new HtmlPanel();
+		panel.setBrowserPanel(browserPanel);
+		try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+			 Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+
+			final InputSource is = new InputSourceImpl(reader, uri);
+			final UserAgentContext ucontext = new UserAgentContext();
+			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
+			panel.setPreferredSize(new Dimension(800, 400));
+			final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext);
+			final Document document = builder.parse(is);
+			panel.setDocument(document, rendererContext);
+		} catch (SocketTimeoutException e) {
+			logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
 		}
 		return panel;
 	}

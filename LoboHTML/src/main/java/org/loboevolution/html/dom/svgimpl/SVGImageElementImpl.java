@@ -27,6 +27,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 
 import org.loboevolution.html.dom.svg.*;
+import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;
 
 /**
@@ -101,7 +104,8 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 	/** {@inheritDoc} */
 	@Override
 	public void draw(final Graphics2D graphics) {
-		Image image = HttpNetwork.getImage(getHref().getBaseVal(), null);
+		TimingInfo info = new TimingInfo();
+		Image image = HttpNetwork.getImage(this, info, false);
 		int realWidth = image.getWidth(null);
 		int realHeight = image.getHeight(null);
 
@@ -112,6 +116,10 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 		at.translate(getX().getAnimVal().getValue(), getY().getAnimVal().getValue());
 		at.scale(drawWidth / realWidth, drawHeight / realHeight);
 		graphics.drawImage(image, at, null);
+
+		final HtmlRendererContext htmlRendererContext = this.getHtmlRendererContext();
+		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+		htmlPanel.getBrowserPanel().getTimingList.add(info);
 	}
 
 	/** {@inheritDoc} */

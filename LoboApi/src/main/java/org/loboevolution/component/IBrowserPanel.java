@@ -20,7 +20,11 @@
 
 package org.loboevolution.component;
 
+import org.loboevolution.info.TimingInfo;
+
 import javax.swing.JScrollPane;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>IBrowserPanel interface.</p>
@@ -68,5 +72,10 @@ public interface IBrowserPanel {
 	 * @return a int object.
 	 */
 	int getHeight();
+
+	/**
+	 * <p>timingList.</p>
+	 */
+	List<TimingInfo> getTimingList = new ArrayList<>();
 
 }

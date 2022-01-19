@@ -41,16 +41,20 @@ import org.loboevolution.common.GUITasks;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.net.HttpNetwork;
 
@@ -225,13 +229,20 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			this.lastBackgroundImageUri = null;
 		} else if (!backgroundImageUri.equals(this.lastBackgroundImageUri)) {
 			this.lastBackgroundImageUri = backgroundImageUri;
-			backgroundImage = HttpNetwork.getImage(lastBackgroundImageUri.toString(), null);
+			HTMLImageElementImpl img = new HTMLImageElementImpl();
+			TimingInfo info = new TimingInfo();
+			img.setSrc(lastBackgroundImageUri.toString());
+			backgroundImage = HttpNetwork.getImage(img, info, false);
 			if (backgroundImage != null) {
 				final int w = backgroundImage.getWidth(BaseElementRenderable.this);
 				final int h = backgroundImage.getHeight(BaseElementRenderable.this);
 				if (w != -1 && h != -1) {
 					BaseElementRenderable.this.repaint();
 				}
+
+				final HtmlRendererContext htmlRendererContext = img.getHtmlRendererContext();
+				final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+				htmlPanel.getBrowserPanel().getTimingList.add(info);
 			}
 		}
 	}

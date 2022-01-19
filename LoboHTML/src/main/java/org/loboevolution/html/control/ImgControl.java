@@ -28,21 +28,28 @@ import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * <p>ImgControl class.</p>
  */
 public class ImgControl extends BaseControl {
+
+	/** Constant logger */
+	protected static final Logger logger = Logger.getLogger(ImgControl.class.getName());
 
 	private static final long serialVersionUID = 1L;
 
@@ -66,12 +73,19 @@ public class ImgControl extends BaseControl {
 		setLayout(WrapperLayout.getInstance());
 		UserAgentContext bcontext = modelNode.getUserAgentContext();
 		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
-
+		TimingInfo info = null;
 		if (bcontext.isImagesEnabled()) {
 			image = map.get(modelNode.getSrc());
 			if (image == null) {
-				image = HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI());
+				info = new TimingInfo();
+				image = HttpNetwork.getImage(modelNode, info, true);
 				map.put(modelNode.getSrc(), image);
+			}
+
+			if(info != null) {
+				final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
+				final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+				htmlPanel.getBrowserPanel().getTimingList.add(info);
 			}
 		}
 		addMouseListener(new MouseAdapter() {

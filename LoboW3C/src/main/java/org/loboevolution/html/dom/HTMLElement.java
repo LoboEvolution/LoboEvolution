@@ -25,9 +25,6 @@ import org.loboevolution.html.node.Element;
 /**
  * Any HTML element. Some elements directly implement this interface, while
  * others implement it via an interface that inherits it.
- *
- *
- *
  */
 public interface HTMLElement extends Element {
 
@@ -231,5 +228,4 @@ public interface HTMLElement extends Element {
 	 * <p>click.</p>
 	 */
 	void click();
-
 }

@@ -52,8 +52,11 @@ import org.loboevolution.html.dom.TextMetrics;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
@@ -556,11 +559,16 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	public void drawImage(Object oImage, Integer x, Integer y) {
 		if (oImage instanceof HTMLImageElementImpl) {
 			HTMLImageElementImpl hImage = (HTMLImageElementImpl)oImage;
-			Image image = HttpNetwork.getImage(hImage.getSrc(), null);
+			TimingInfo info = new TimingInfo();
+			Image image = HttpNetwork.getImage(hImage, info, false);
 			Graphics2D graphics = createGraphics();
 			AffineTransform at = new AffineTransform();
 			at.setToTranslation(x, y);
 			graphics.drawImage(image, at, null);
+
+			final HtmlRendererContext htmlRendererContext = hImage.getHtmlRendererContext();
+			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+			htmlPanel.getBrowserPanel().getTimingList.add(info);
 		}
 	}
 
@@ -569,10 +577,16 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	public void drawImage(Object oImage, Integer x, Integer y, Integer width, Integer height) {
 		if (oImage instanceof HTMLImageElementImpl) {
 			HTMLImageElementImpl hImage = (HTMLImageElementImpl)oImage;
-			Image image = HttpNetwork.getImage(hImage.getSrc(), null);
+			TimingInfo info = new TimingInfo();
+			Image image = HttpNetwork.getImage(hImage, info, false);
 			Graphics2D graphics = createGraphics();
 			AffineTransform at = new AffineTransform(width / image.getWidth(null), 0, 0, height / image.getHeight(null), x, y);
 			graphics.drawImage(image, at, null);
+
+			final HtmlRendererContext htmlRendererContext = hImage.getHtmlRendererContext();
+			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+			htmlPanel.getBrowserPanel().getTimingList.add(info);
+
 		}
 	}
 
@@ -581,7 +595,8 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	public void drawImage(Object oImage, Integer sx, Integer sy, Integer sw, Integer sh, Integer dx, Integer dy, Integer dw, Integer dh) {
 		if (oImage instanceof HTMLImageElementImpl) {
 			HTMLImageElementImpl hImage = (HTMLImageElementImpl)oImage;
-			Image image = HttpNetwork.getImage(hImage.getSrc(), null);
+			TimingInfo info = new TimingInfo();
+			Image image = HttpNetwork.getImage(hImage, info, false);
 			Graphics2D graphics = createGraphics();
 			graphics.clip(new Rectangle2D.Float(dx, dy, dw, dh));
 			float scaleX = dw / sw;
@@ -590,6 +605,10 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 			float y0 = dy - sy * scaleY;
 			AffineTransform at = new AffineTransform(scaleX, 0, 0, scaleY, x0, y0);
 			graphics.drawImage(image, at, null);
+
+			final HtmlRendererContext htmlRendererContext = hImage.getHtmlRendererContext();
+			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+			htmlPanel.getBrowserPanel().getTimingList.add(info);
 		}
 	}
 

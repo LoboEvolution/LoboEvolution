@@ -58,7 +58,7 @@ class BaseRListElement extends RBlock {
 				ListStyle listStyle = null;
 				final String listStyleText = props.getListStyle();
 				if (listStyleText != null) {
-					listStyle = HtmlValues.getListStyle(listStyleText, rootElement.getDocumentBaseURI());
+					listStyle = HtmlValues.getListStyle(listStyleText);
 				}
 				final String listStyleTypeText = props.getListStyleType();
 				if (listStyleTypeText != null) {
@@ -73,7 +73,7 @@ class BaseRListElement extends RBlock {
 
 				final String listStyleImage = props.getListStyleImage();
 				if (listStyleImage != null && HtmlValues.isUrl(listStyleImage)) {
-					final Image img = HtmlValues.getListStyleImage(listStyleImage, rootElement.getDocumentBaseURI());
+					final Image img = HtmlValues.getListStyleImage(listStyleImage);
 					if (listStyle == null) {
 						listStyle = new ListStyle();
 					}

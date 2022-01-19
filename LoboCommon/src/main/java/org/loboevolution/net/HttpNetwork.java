@@ -22,6 +22,9 @@ package org.loboevolution.net;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.HTMLImageElement;
+import org.loboevolution.info.TimingInfo;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -33,6 +36,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,11 +108,14 @@ public class HttpNetwork {
 	/**
 	 * <p>getImage.</p>
 	 *
-	 * @param href a {@link java.lang.String} object.
-	 * @param baseUri a {@link java.lang.String} object.
+	 * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param useBaseUri a {@link java.lang.Boolean} object.
 	 * @return a {@link java.awt.Image} object.
 	 */
-	public static Image getImage(String href, String baseUri) {
+	public static Image getImage(HTMLElement element, TimingInfo info, boolean useBaseUri) {
+		Instant start = Instant.now();
+		String href = ((HTMLImageElement)element).getSrc();
+		String baseUri = useBaseUri ? element.getBaseURI() : null;
 		try {
 			if (Strings.isBlank(href))
 				return null;
@@ -119,7 +127,6 @@ public class HttpNetwork {
 					return ImageIO.read(stream);
 				}
 			} else {
-
 				String scriptURI = href;
 				if (Strings.isNotBlank(baseUri)) {
 					final URL baseURL = new URL(baseUri);
@@ -127,11 +134,14 @@ public class HttpNetwork {
 					scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
 				}
 
+				info.setPath(scriptURI);
 				final URL u = new URL(scriptURI);
-				final URLConnection connection = u.openConnection();
+				info.setName(u.getFile());
+				final HttpURLConnection connection =(HttpURLConnection)u.openConnection();
 				connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 				try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
-
+					info.setType(connection.getContentType());
+					info.setHttpResponse(connection.getResponseCode());
 					if (href.contains(";base64,")) {
 						final String base64 = href.split(";base64,")[1];
 						byte[] decodedBytes = Base64.getDecoder().decode(base64);
@@ -163,13 +173,18 @@ public class HttpNetwork {
 						return ImageIO.read(in);
 					}
 				} catch (SocketTimeoutException e) {
+					info.setHttpResponse(connection.getResponseCode());
 					logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
-			    } catch (FileNotFoundException e) {
+				} catch (FileNotFoundException e) {
 					logger.log(Level.INFO, e.getMessage());
 				}
 			}
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
+		} finally {
+			Instant finish = Instant.now();
+			long timeElapsed = Duration.between(start, finish).toMillis();
+			info.setTimeElapsed(timeElapsed);
 		}
 		return null;
 	}

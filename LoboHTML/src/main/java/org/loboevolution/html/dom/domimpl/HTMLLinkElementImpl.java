@@ -24,6 +24,7 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLLinkElement;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.parser.HtmlParser;
@@ -31,7 +32,9 @@ import org.loboevolution.html.renderstate.*;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.laf.ColorFactory;
+import org.loboevolution.net.MimeType;
 import org.loboevolution.store.StyleStore;
 import org.w3c.dom.UserDataHandler;
 
@@ -41,6 +44,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -161,6 +166,8 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 						if (uacontext.isExternalCSSEnabled()) {
 							final String media = getMedia();
 							if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
+								Instant start = Instant.now();
+								TimingInfo info = new TimingInfo();
 								final com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI);
 								sheet.setHref(baseURI);
 								sheet.setDisabled(this.disabled);
@@ -168,6 +175,16 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 								cssStyleSheet.setOwnerNode(this);
 								doc.addStyleSheet(cssStyleSheet);
 								this.styleSheet = cssStyleSheet;
+								Instant finish = Instant.now();
+								long timeElapsed = Duration.between(start, finish).toMillis();
+								info.setName(title);
+								info.setTimeElapsed(timeElapsed);
+								info.setPath(scriptURL.toExternalForm());
+								info.setType(MimeType.CSS.getValue());
+								info.setHttpResponse(200);
+								final HtmlRendererContext htmlRendererContext = this.getHtmlRendererContext();
+								final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+								htmlPanel.getBrowserPanel().getTimingList.add(info);
 							}
 						}
 					}

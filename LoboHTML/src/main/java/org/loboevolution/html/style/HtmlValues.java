@@ -26,8 +26,12 @@ import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
+import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.net.HttpNetwork;
 
@@ -44,9 +48,8 @@ public class HtmlValues {
 	 *
 	 * @param listStyleText a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.style.ListStyle} object.
-	 * @param baseUri a {@link java.lang.String} object.
 	 */
-	public static ListStyle getListStyle(String listStyleText, String baseUri) {
+	public static ListStyle getListStyle(String listStyleText) {
 		final ListStyle listStyle = new ListStyle();
 		final String[] tokens = HtmlValues.splitCssValue(listStyleText);
 		for (final String token : tokens) {
@@ -55,7 +58,7 @@ public class HtmlValues {
 				listStyle.setType(listStyleType.getValue());
 			} else if (HtmlValues.isUrl(token)) {
 				listStyle.setType(ListValues.TYPE_URL.getValue());
-				listStyle.setImage(getListStyleImage(token, baseUri));
+				listStyle.setImage(getListStyleImage(token));
 			} else {
 				final ListValues listStylePosition = HtmlValues.getListStylePosition(token);
 				if (listStylePosition != ListValues.POSITION_UNSET && listStylePosition != ListValues.NONE) {
@@ -72,27 +75,36 @@ public class HtmlValues {
 	 *
 	 * @param token a {@link java.lang.String} object.
 	 * @return a {@link java.awt.Image} object.
-	 * @param baseUri a {@link java.lang.String} object.
 	 */
-	public static Image getListStyleImage(String token, String baseUri) {
+	public static Image getListStyleImage(String token) {
 		Image image;
 		String start = "url(";
 		int startIdx = start.length();
 		int closingIdx = token.lastIndexOf(')');
 		String quotedUri = token.substring(startIdx, closingIdx);
 		String[] items = { "http", "https", "file" };
+		TimingInfo info = new TimingInfo();
+		HTMLImageElementImpl img = new HTMLImageElementImpl();
 		if (Strings.containsWords(quotedUri, items)) {
 			try {
-				image = HttpNetwork.getImage(quotedUri, null);
+				img.setSrc(quotedUri);
+				image = HttpNetwork.getImage(img, info, false);
 			} catch (Exception e) {
 				image = null;
 			}
 		} else {
 			try {
-				image = HttpNetwork.getImage(quotedUri, baseUri);
+				img.setSrc(quotedUri);
+				image = HttpNetwork.getImage(img, info, true);
 			} catch (Exception e) {
 				image = null;
 			}
+		}
+
+		if(image != null) {
+			final HtmlRendererContext htmlRendererContext = img.getHtmlRendererContext();
+			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+			htmlPanel.getBrowserPanel().getTimingList.add(info);
 		}
 
 		return image;
@@ -303,7 +315,7 @@ public class HtmlValues {
 	 */
 	public static boolean isBackgroundRepeat(String repeat) {
 		final String repeatTL = repeat.toLowerCase();
-		return repeatTL.indexOf("repeat") != -1;
+		return repeatTL.contains("repeat");
 	}
 
 	/**

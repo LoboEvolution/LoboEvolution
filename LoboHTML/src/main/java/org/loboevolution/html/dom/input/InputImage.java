@@ -40,7 +40,10 @@ import javax.swing.JLabel;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;
 
 /**
@@ -64,11 +67,20 @@ public class InputImage {
 		final Image img = map.get(modelNode.getSrc());
 
 		BufferedImage image;
+		TimingInfo info = null;
+
 		if (img == null) {
-			image = toBufferedImage(HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI()));
+			info = new TimingInfo();
+			image = toBufferedImage(HttpNetwork.getImage(modelNode, info, true));
 			map.put(modelNode.getSrc(), image);
 		} else{
 			image = toBufferedImage(img);
+		}
+
+		if(info != null) {
+			final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
+			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+			htmlPanel.getBrowserPanel().getTimingList.add(info);
 		}
 
 		JLabel wIcon = new JLabel(new ImageIcon(image));
