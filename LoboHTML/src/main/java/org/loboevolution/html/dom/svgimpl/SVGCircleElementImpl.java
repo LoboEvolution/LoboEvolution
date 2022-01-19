@@ -29,12 +29,10 @@ import java.awt.geom.NoninvertibleTransformException;
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGCircleElement;
 import org.loboevolution.html.dom.svg.SVGMatrix;
+import org.loboevolution.html.dom.svg.SVGRect;
 
 /**
  * <p>SVGCircleElementImpl class.</p>
- *
- *
- *
  */
 public class SVGCircleElementImpl extends SVGGraphic implements SVGCircleElement {
 
@@ -45,6 +43,12 @@ public class SVGCircleElementImpl extends SVGGraphic implements SVGCircleElement
 	 */
 	public SVGCircleElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		Shape shape = createShape(null);
+		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */

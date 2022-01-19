@@ -20,13 +20,15 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import org.loboevolution.html.dom.svg.SVGPoint;
+import org.loboevolution.html.dom.svg.SVGPointList;
 import org.loboevolution.html.dom.svg.SVGPolylineElement;
+import org.loboevolution.html.dom.svg.SVGRect;
+
+import java.awt.geom.GeneralPath;
 
 /**
  * <p>SVGPolylineElementImpl class.</p>
- *
- *
- *
  */
 public class SVGPolylineElementImpl extends SVGPolygonElementImpl implements SVGPolylineElement {
 
@@ -37,5 +39,28 @@ public class SVGPolylineElementImpl extends SVGPolygonElementImpl implements SVG
 	 */
 	public SVGPolylineElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		GeneralPath shape = createShape();
+		return new SVGRectImpl(shape.getBounds2D());
+	}
+
+	private GeneralPath createShape() {
+		GeneralPath path = new GeneralPath();
+		SVGPointList points = getAnimatedPoints();
+		int numPoints = points.getNumberOfItems();
+		for (int i = 0; i < numPoints; i++) {
+			SVGPoint point = points.getItem(i);
+			float x = point.getX();
+			float y = point.getY();
+			if (i == 0) {
+				path.moveTo(x, y);
+			} else {
+				path.lineTo(x, y);
+			}
+		}
+		return path;
 	}
 }

@@ -40,9 +40,6 @@ import org.loboevolution.html.dom.svg.SVGUseElement;
 
 /**
  * <p>SVGAElementImpl class.</p>
- *
- *
- *
  */
 public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 
@@ -74,6 +71,12 @@ public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 		final Shape shape = createShape(ctm.getAffineTransform());
 		animate(this);
 		drawable(graphics, shape);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		Shape shape = createShape(null);
+		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */

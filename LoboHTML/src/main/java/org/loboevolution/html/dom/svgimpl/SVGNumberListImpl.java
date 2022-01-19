@@ -31,9 +31,6 @@ import org.loboevolution.html.dom.svg.SVGNumberList;
 
 /**
  * <p>SVGNumberListImpl class.</p>
- *
- *
- *
  */
 public class SVGNumberListImpl implements SVGNumberList {
 
@@ -44,6 +41,17 @@ public class SVGNumberListImpl implements SVGNumberList {
 	 */
 	public SVGNumberListImpl() {
 		pointList = new ArrayList<>();
+	}
+
+	/**
+	 * <p>Constructor for SVGNumberListImpl.</p>
+	 *
+	 * @param numb a {@link java.lang.String} object.
+	 */
+	public SVGNumberListImpl(String numb) {
+		pointList = new ArrayList<>();
+		SVGNumber number = new SVGNumberImpl(numb);
+		pointList.add(number);
 	}
 
 	/** {@inheritDoc} */

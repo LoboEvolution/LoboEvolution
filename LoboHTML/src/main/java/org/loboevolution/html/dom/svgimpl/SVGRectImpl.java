@@ -22,12 +22,11 @@ package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGRect;
 
+import java.awt.geom.Rectangle2D;
+
 
 /**
  * <p>SVGRectImpl class.</p>
- *
- *
- *
  */
 public class SVGRectImpl implements SVGRect {
 
@@ -42,16 +41,28 @@ public class SVGRectImpl implements SVGRect {
 	/**
 	 * <p>Constructor for SVGRectImpl.</p>
 	 *
-	 * @param x a float.
-	 * @param y a float.
-	 * @param width a float.
-	 * @param height a float.
+	 * @param x a {@link java.lang.Float} object.
+	 * @param y a {@link java.lang.Float} object.
+	 * @param width a {@link java.lang.Float} object.
+	 * @param height a {@link java.lang.Float} object.
 	 */
 	public SVGRectImpl(float x, float y, float width, float height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+	}
+
+	/**
+	 * <p>Constructor for SVGRectImpl.</p>
+	 *
+	 * @param rect a {@link java.awt.geom.Rectangle2D} object.
+	 */
+	public SVGRectImpl(Rectangle2D rect) {
+		x = (float) rect.getX();
+		y = (float) rect.getY();
+		width = (float) rect.getWidth();
+		height = (float) rect.getHeight();
 	}
 
 	/** {@inheritDoc} */

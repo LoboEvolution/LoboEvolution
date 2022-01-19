@@ -29,9 +29,6 @@ import org.loboevolution.html.dom.svg.SVGLength;
 
 /**
  * <p>SVGLengthImpl class.</p>
- *
- *
- *
  */
 public class SVGLengthImpl implements SVGLength {
 
@@ -128,7 +125,7 @@ public class SVGLengthImpl implements SVGLength {
 			valueAsString = "0";
 		}
 
-		String valueString = null;
+		String valueString;
 		if (valueAsString.endsWith("cm")) {
 			valueString = valueAsString.substring(0, valueAsString.length() - 2);
 			this.unitType = SVGLength.SVG_LENGTHTYPE_CM;

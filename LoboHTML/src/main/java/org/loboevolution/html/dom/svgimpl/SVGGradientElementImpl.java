@@ -40,11 +40,8 @@ import org.loboevolution.html.node.Element;
 
 /**
  * <p>SVGGradientElementImpl class.</p>
- *
- *
- *
  */
-public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientElement {
+public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradientElement {
 
 	/**
 	 * <p>Constructor for SVGGradientElementImpl.</p>
@@ -121,7 +118,6 @@ public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientEle
 		double delta = newCenter.distance(new Point2D.Double(shape.getBounds2D().getCenterX(), shape.getBounds2D().getCenterY()));
 		final double r = Math.sqrt(w * w + h * h) / 2;
 		final float newRadius = (float) (delta + r * (radius / 100));
-
 		return new RadialGradientPaint(newCenter, newRadius, newCenter, fractions, colors,
 				MultipleGradientPaint.CycleMethod.REFLECT, MultipleGradientPaint.ColorSpaceType.SRGB,
 				new AffineTransform());
@@ -153,7 +149,8 @@ public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientEle
 		children.forEach(child -> {
 			if (child instanceof SVGStopElementImpl) {
 				SVGStopElementImpl stop = (SVGStopElementImpl) child;
-				colors.add(stop.getStopColor());
+				Color stopColor = stop.getStopColor();
+				colors.add(stopColor);
 			}
 		});
 		Color[] colorArray = new Color[colors.size()];

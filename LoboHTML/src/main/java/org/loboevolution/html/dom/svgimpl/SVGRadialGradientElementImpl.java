@@ -25,9 +25,6 @@ import org.loboevolution.html.dom.svg.SVGRadialGradientElement;
 
 /**
  * <p>SVGRadialGradientElementImpl class.</p>
- *
- *
- *
  */
 public class SVGRadialGradientElementImpl extends SVGGradientElementImpl implements SVGRadialGradientElement {
 

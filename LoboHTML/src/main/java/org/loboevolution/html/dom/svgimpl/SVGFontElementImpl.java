@@ -22,13 +22,12 @@ package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGFontElement;
 
+import java.awt.geom.Rectangle2D;
+
 /**
  * <p>SVGFontElementImpl class.</p>
- *
- *
- *
  */
-public class SVGFontElementImpl extends SVGElementImpl implements SVGFontElement {
+public class SVGFontElementImpl extends SVGStylableImpl implements SVGFontElement {
 
 	/**
 	 * <p>Constructor for SVGFontElementImpl.</p>
@@ -37,5 +36,23 @@ public class SVGFontElementImpl extends SVGElementImpl implements SVGFontElement
 	 */
 	public SVGFontElementImpl(final String name) {
 		super(name);
+	}
+
+	public Rectangle2D getBounds(String text, float x, float y, float fontSize) {
+		float fontAscent = getFontAscent();
+		float fontDescent = getFontDescent();
+		if (fontDescent < 0) {
+			fontDescent = -fontDescent;
+		}
+		float horizAdvX = getHorizAdvX();
+		float scaleFactor = fontSize / getFontUnitsPerEm();
+
+		Rectangle2D bounds = new Rectangle2D.Float();
+		float bottom = y + fontDescent * scaleFactor;
+		float width = horizAdvX * scaleFactor;
+		float top = y - fontAscent * scaleFactor;
+		float left = x;
+		bounds.setRect(left, top, width, bottom - top);
+		return bounds;
 	}
 }

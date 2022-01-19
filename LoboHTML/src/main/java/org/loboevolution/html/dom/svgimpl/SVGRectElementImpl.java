@@ -29,13 +29,11 @@ import java.awt.geom.RoundRectangle2D;
 
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGMatrix;
+import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGRectElement;
 
 /**
  * <p>SVGRectElementImpl class.</p>
- *
- *
- *
  */
 public class SVGRectElementImpl extends SVGGraphic implements SVGRectElement {
 
@@ -46,6 +44,12 @@ public class SVGRectElementImpl extends SVGGraphic implements SVGRectElement {
 	 */
 	public SVGRectElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		Shape shape = createShape(null);
+		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */

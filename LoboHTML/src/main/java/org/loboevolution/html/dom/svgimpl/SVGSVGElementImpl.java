@@ -35,24 +35,7 @@ import java.util.List;
 
 import org.loboevolution.html.dom.filter.IdFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.dom.svg.Drawable;
-import org.loboevolution.html.dom.svg.SVGAngle;
-import org.loboevolution.html.dom.svg.SVGAnimatedLength;
-import org.loboevolution.html.dom.svg.SVGAnimatedPreserveAspectRatio;
-import org.loboevolution.html.dom.svg.SVGAnimatedRect;
-import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
-import org.loboevolution.html.dom.svg.SVGElement;
-import org.loboevolution.html.dom.svg.SVGImageElement;
-import org.loboevolution.html.dom.svg.SVGLength;
-import org.loboevolution.html.dom.svg.SVGMatrix;
-import org.loboevolution.html.dom.svg.SVGNumber;
-import org.loboevolution.html.dom.svg.SVGPoint;
-import org.loboevolution.html.dom.svg.SVGRect;
-import org.loboevolution.html.dom.svg.SVGSVGElement;
-import org.loboevolution.html.dom.svg.SVGTransform;
-import org.loboevolution.html.dom.svg.SVGTransformable;
-import org.loboevolution.html.dom.svg.SVGUseElement;
-import org.loboevolution.html.dom.svg.SVGViewSpec;
+import org.loboevolution.html.dom.svg.*;
 import org.loboevolution.html.js.events.EventFactory;
 
 import org.loboevolution.html.node.Element;
@@ -62,9 +45,6 @@ import org.loboevolution.html.node.events.Event;
 
 /**
  * <p>SVGSVGElementImpl class.</p>
- *
- *
- *
  */
 public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement, Drawable {
 	
@@ -85,24 +65,6 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	private boolean painted;
 
 	/**
-	 * <p>isPainted.</p>
-	 *
-	 * @return the painted
-	 */
-	public boolean isPainted() {
-		return painted;
-	}
-
-	/**
-	 * <p>Setter for the field painted.</p>
-	 *
-	 * @param painted the painted to set
-	 */
-	public void setPainted(boolean painted) {
-		this.painted = painted;
-	}
-
-	/**
 	 * <p>Constructor for SVGSVGElementImpl.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
@@ -115,6 +77,13 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		float width = getWidth().getBaseVal().getValue();
 		float height = getHeight().getBaseVal().getValue();
 		viewport = new SVGRectImpl(x, y, width, height);
+		recalculateViewboxToViewportTransform();
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		Shape shape = createShape(null);
+		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */
@@ -131,8 +100,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedPreserveAspectRatio getPreserveAspectRatio() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGAnimatedPreserveAspectRatioImpl(new SVGPreserveAspectRatioImpl(), this);
 	}
 
 	/** {@inheritDoc} */
@@ -418,9 +386,33 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		return nodeList != null && nodeList.getLength() > 0 ? (Element)nodeList.item(0) : null;
 	}
 
+	/**
+	 * <p>isPainted.</p>
+	 *
+	 * @return the painted
+	 */
+	public boolean isPainted() {
+		return painted;
+	}
+
+	/**
+	 * <p>Setter for the field painted.</p>
+	 *
+	 * @param painted the painted to set
+	 */
+	public void setPainted(boolean painted) {
+		this.painted = painted;
+	}
+
+
+	public AffineTransform getViewboxToViewportTransform() {
+		return viewboxToViewportTransform;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void draw(final Graphics2D graphics) {
+		recalculateViewboxToViewportTransform();
 		boolean display = getDisplay();
 		float opacity = getOpacity();
 
@@ -431,11 +423,6 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 			if (opacity < 1) {
 				SVGSVGElement root = this;
 				float currentScale = root.getCurrentScale();
-				SVGPoint currentTranslate = root.getCurrentTranslate();
-				if (currentTranslate == null) {
-					currentTranslate = new SVGPointImpl();
-				}
-
 				// create buffer to draw on
 				Shape shape = createShape(null);
 				AffineTransform screenCTM = getScreenCTM().getAffineTransform();
@@ -478,6 +465,134 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 			graphics.setTransform(oldGraphicsTransform);
 			graphics.setClip(oldClip);
+		}
+	}
+
+	private void recalculateViewboxToViewportTransform() {
+
+		viewboxToViewportTransform = new AffineTransform();
+
+		short align = getPreserveAspectRatio().getAnimVal().getAlign();
+		short meetOrSlice = getPreserveAspectRatio().getAnimVal().getMeetOrSlice();
+
+		float sx = getViewport().getWidth() / getViewBox().getAnimVal().getWidth();
+		float sy = getViewport().getHeight() / getViewBox().getAnimVal().getHeight();
+
+		if (align == SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_NONE) {
+			viewboxToViewportTransform.scale(sx, sy);
+
+			float tx = -getViewBox().getAnimVal().getX();
+			float ty = -getViewBox().getAnimVal().getY();
+			viewboxToViewportTransform.translate(tx, ty);
+
+		} else {
+
+			float scale;
+			if (meetOrSlice == SVGPreserveAspectRatio.SVG_MEETORSLICE_MEET) {
+				scale = Math.min(sx, sy);
+			} else {
+				scale = Math.max(sx, sy);
+			}
+
+			float vpX = 0;
+			float vpY = 0;
+			float vpWidth = getViewport().getWidth();
+			float vpHeight = getViewport().getHeight();
+
+			float vbX = getViewBox().getAnimVal().getX();
+			float vbY = getViewBox().getAnimVal().getY();
+			float vbWidth = getViewBox().getAnimVal().getWidth();
+			float vbHeight = getViewBox().getAnimVal().getHeight();
+
+			float tx;
+			float ty;
+
+			if (meetOrSlice == SVGPreserveAspectRatio.SVG_MEETORSLICE_MEET) {
+				if (sy < sx) {
+					ty = vpY / scale - vbY;
+					switch (align) {
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMAX:
+							tx = vpX / scale - vbX;
+							break;
+
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMAX:
+							tx = (vpX + vpWidth / 2) / scale - (vbX + vbWidth / 2);
+							break;
+						default:
+							tx = vpX + vpWidth / scale - (vbX + vbWidth);
+							break;
+					}
+				} else {
+					tx = vpX / scale - vbX;
+
+					switch (align) {
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMIN:
+							ty = vpY / scale - vbY;
+							break;
+
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMID:
+							ty = (vpY + vpHeight / 2) / scale - (vbY + vbHeight / 2);
+							break;
+						default:
+							ty = (vpY + vpHeight) / scale - (vbY + vbHeight);
+							break;
+					}
+				}
+			} else { // SLICE
+
+				if (sy > sx) {
+					ty = vpY / scale - vbY;
+
+					switch (align) {
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMAX:
+							tx = vpX / scale - vbX;
+							break;
+
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMAX:
+							tx = (vpX + vpWidth / 2) / scale - (vbX + vbWidth / 2);
+							break;
+						default:
+							tx = (vpX + vpWidth) / scale - (vbX + vbWidth);
+							break;
+					}
+
+
+				} else {
+					tx = vpX - vbX * scale;
+
+					switch (align) {
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMIN:
+							ty = vpY / scale - vbY;
+							break;
+
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID:
+						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMID:
+							ty = (vpY + vpHeight / 2) / scale - (vbY + vbHeight / 2);
+							break;
+						default:
+							ty = (vpY + vpHeight) / scale - (vbY + vbHeight);
+							break;
+					}
+				}
+			}
+
+			viewboxToViewportTransform.scale(scale, scale);
+			viewboxToViewportTransform.translate(tx, ty);
 		}
 	}
 

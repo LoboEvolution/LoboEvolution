@@ -26,11 +26,8 @@ import org.loboevolution.html.dom.svg.SVGSymbolElement;
 
 /**
  * <p>SVGSymbolElementImpl class.</p>
- *
- *
- *
  */
-public class SVGSymbolElementImpl extends SVGGraphic implements SVGSymbolElement {
+public class SVGSymbolElementImpl extends SVGStylableImpl implements SVGSymbolElement {
 
 	/**
 	 * <p>Constructor for SVGSymbolElementImpl.</p>

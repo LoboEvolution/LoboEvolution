@@ -29,12 +29,10 @@ import java.awt.geom.NoninvertibleTransformException;
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGEllipseElement;
 import org.loboevolution.html.dom.svg.SVGMatrix;
+import org.loboevolution.html.dom.svg.SVGRect;
 
 /**
  * <p>SVGEllipseElementImpl class.</p>
- *
- *
- *
  */
 public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseElement {
 
@@ -45,6 +43,12 @@ public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseEleme
 	 */
 	public SVGEllipseElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		Shape shape = createShape(null);
+		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */

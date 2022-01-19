@@ -22,15 +22,11 @@ package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGNumber;
 
-
 /**
  * <p>SVGNumberImpl class.</p>
- *
- *
- *
  */
 public class SVGNumberImpl implements SVGNumber {
-	
+
 	private float value;
 
 	/**
@@ -39,15 +35,25 @@ public class SVGNumberImpl implements SVGNumber {
 	public SVGNumberImpl() {
 		this.value= 0;
 	}
-	
+
 	/**
 	 * <p>Constructor for SVGNumberImpl.</p>
 	 *
-	 * @param value a float.
+	 * @param value a {@link java.lang.Float} object.
 	 */
 	public SVGNumberImpl(float value) {
 		this.value = value;
 	}
+
+	/**
+	 * <p>Constructor for SVGNumberImpl.</p>
+	 *
+	 * @param strValue a {@link java.lang.String} object.
+	 */
+	public SVGNumberImpl(String strValue) {
+		this.value = Float.parseFloat(strValue);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public float getValue() {

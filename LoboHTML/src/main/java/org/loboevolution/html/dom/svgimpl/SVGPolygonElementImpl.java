@@ -27,6 +27,7 @@ import java.awt.geom.GeneralPath;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGPointList;
@@ -34,9 +35,6 @@ import org.loboevolution.html.dom.svg.SVGPolygonElement;
 
 /**
  * <p>SVGPolygonElementImpl class.</p>
- *
- *
- *
  */
 public class SVGPolygonElementImpl extends SVGGraphic implements SVGPolygonElement {
 
@@ -47,6 +45,12 @@ public class SVGPolygonElementImpl extends SVGGraphic implements SVGPolygonEleme
 	 */
 	public SVGPolygonElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		Shape shape = createShape(null);
+		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */

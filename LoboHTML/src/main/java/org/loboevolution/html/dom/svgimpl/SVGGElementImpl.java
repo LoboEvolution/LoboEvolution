@@ -20,11 +20,11 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Shape;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.dom.svg.*;
+import org.loboevolution.html.node.Node;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.NoninvertibleTransformException;
@@ -33,22 +33,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.dom.svg.Drawable;
-import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
-import org.loboevolution.html.dom.svg.SVGGElement;
-import org.loboevolution.html.dom.svg.SVGImageElement;
-import org.loboevolution.html.dom.svg.SVGRect;
-import org.loboevolution.html.dom.svg.SVGSVGElement;
-import org.loboevolution.html.dom.svg.SVGTransformable;
-import org.loboevolution.html.dom.svg.SVGUseElement;
-import org.loboevolution.html.node.Node;
-
 /**
  * <p>SVGGElementImpl class.</p>
- *
- *
- *
  */
 public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 
@@ -67,11 +53,28 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 		boolean display = getDisplay();
 		float opacity = getOpacity();
 
+        SVGClipPathElementImpl clipPath = getClippingPath();
+        Shape clipShape = null;
+        if (clipPath != null) {
+            clipShape = clipPath.getClippingShape(this);
+        }
+
 		if (display && opacity > 0) {
 			AffineTransform oldGraphicsTransform = graphics.getTransform();
 			Shape oldClip = graphics.getClip();
+            final SVGTransformList transform = getTransform().getAnimVal();
+
+            if (transform != null) {
+                graphics.transform(((SVGTransformListImpl) transform).getAffineTransform());
+            }
+
+            if (clipShape != null) {
+                graphics.clip(clipShape);
+            }
+
 			if (opacity < 1) {
-				float currentScale = 1;
+				SVGSVGElement root = this.getOwnerSVGElement();
+				float currentScale = root.getCurrentScale();
 				Shape shape = createShape(null);
 				AffineTransform screenCTM = getScreenCTM().getAffineTransform();
 				Shape transformedShape = screenCTM.createTransformedShape(shape);
@@ -116,6 +119,12 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 		}
 	}
 
+	@Override
+	public SVGRect getBBox() {
+		Shape shape = createShape(null);
+		return new SVGRectImpl(shape.getBounds2D());
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
@@ -156,8 +165,9 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 				}
 				if (child instanceof SVGTransformable) {
 					SVGAnimatedTransformList childTransformList = ((SVGTransformable) child).getTransform();
-					if (childTransformList != null) {
-						AffineTransform childTransform = ((SVGTransformListImpl) childTransformList.getAnimVal()).getAffineTransform();
+					SVGTransformList list = childTransformList.getAnimVal();
+					if (list != null) {
+						AffineTransform childTransform = ((SVGTransformListImpl)list).getAffineTransform();
 						childShape = childTransform.createTransformedShape(childShape);
 					}
 				}
@@ -181,6 +191,8 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 		}
 
 		for (Node node : drawableChildren) {
+			SVGElement selem = (SVGElement)node;
+			selem.setOwnerSVGElement(getOwnerSVGElement());
 			drawStyle(node);
 			Drawable child = (Drawable) node;
 			child.draw(graphics);

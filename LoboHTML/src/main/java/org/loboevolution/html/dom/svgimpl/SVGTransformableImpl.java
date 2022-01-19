@@ -28,11 +28,8 @@ import org.loboevolution.html.style.AbstractCSSProperties;
 
 /**
  * <p>SVGTransformableImpl class.</p>
- *
- *
- *
  */
-public class SVGTransformableImpl extends SVGLocatableImpl implements SVGTransformable {
+public abstract class SVGTransformableImpl extends SVGLocatableImpl implements SVGTransformable {
 
 	/**
 	 * <p>Constructor for SVGTransformableImpl.</p>

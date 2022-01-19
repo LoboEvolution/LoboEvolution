@@ -43,11 +43,8 @@ import org.loboevolution.html.node.NodeList;
 
 /**
  * <p>SVGGraphic class.</p>
- *
- *
- *
  */
-public class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
+public abstract class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
 
 	/**
 	 * <p>Constructor for SVGGraphic.</p>

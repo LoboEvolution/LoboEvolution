@@ -21,26 +21,16 @@
 package org.loboevolution.html.dom.svgimpl;
 
 import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Path2D;
+import java.awt.geom.*;
 import java.util.Iterator;
 
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.dom.svg.Drawable;
-import org.loboevolution.html.dom.svg.SVGAnimatedEnumeration;
-import org.loboevolution.html.dom.svg.SVGClipPathElement;
-import org.loboevolution.html.dom.svg.SVGElement;
-import org.loboevolution.html.dom.svg.SVGTransformable;
+import org.loboevolution.html.dom.svg.*;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
 /**
  * <p>SVGClipPathElementImpl class.</p>
- *
- *
- *
  */
 public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathElement {
 	
@@ -52,6 +42,13 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 	 */
 	public SVGClipPathElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		Shape clipShape = getClippingShape(this.getOwnerSVGElement());
+		Rectangle2D bounds = clipShape.getBounds2D();
+		return new SVGRectImpl(bounds);
 	}
 
 	/** {@inheritDoc} */
@@ -71,8 +68,7 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 		AffineTransform clipTransform = new AffineTransform();
 		if (hasChildNodes()) {
 			NodeListImpl children = (NodeListImpl) getChildNodes();
-			for (Iterator<Node> i = children.iterator(); i.hasNext();) {
-				Node child = i.next();
+			for (Node child : children) {
 				if (child instanceof SVGUseElementImpl) {
 					String href = ((SVGUseElementImpl) child).getHref().getAnimVal();
 					if (href.length() > 0) {
@@ -123,18 +119,17 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 				} else if (child instanceof Drawable) {
 					Shape childShape = ((Drawable) child).createShape(clipTransform);
 					if (childShape != null) {
-						AffineTransform childAffineTransform = clipTransform;
 						if (child instanceof SVGTransformable) {
 							SVGAnimatedTransformListImpl childTransform = (SVGAnimatedTransformListImpl) ((SVGTransformable) child)
 									.getTransform();
 							if (childTransform != null) {
-								childAffineTransform.concatenate(
+								clipTransform.concatenate(
 										((SVGTransformListImpl) childTransform.getAnimVal()).getAffineTransform());
 							}
 						}
 
 						GeneralPath path = new GeneralPath(childShape);
-						path.transform(childAffineTransform);
+						path.transform(clipTransform);
 
 						String clipRule = ((SVGStylableImpl) child).getClipRule();
 						SVGClipPathElementImpl clipPath = ((SVGStylableImpl) child).getClippingPath();

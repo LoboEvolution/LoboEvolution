@@ -24,18 +24,13 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 
-import org.loboevolution.html.dom.svg.SVGAnimatedLength;
-import org.loboevolution.html.dom.svg.SVGAnimatedPreserveAspectRatio;
-import org.loboevolution.html.dom.svg.SVGAnimatedString;
-import org.loboevolution.html.dom.svg.SVGImageElement;
+import org.loboevolution.html.dom.svg.*;
 import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>SVGImageElementImpl class.</p>
- *
- *
- *
  */
 public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 
@@ -46,6 +41,24 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 	 */
 	public SVGImageElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+
+		AffineTransform ctm = getCTM().getAffineTransform();
+		AffineTransform inverseTransform;
+		try {
+			inverseTransform = ctm.createInverse();
+		} catch (NoninvertibleTransformException e) {
+			inverseTransform = null;
+		}
+		float x = ((SVGLengthImpl) getX().getAnimVal()).getTransformedLength(inverseTransform);
+		float y = ((SVGLengthImpl) getY().getAnimVal()).getTransformedLength(inverseTransform);
+		float width = ((SVGLengthImpl) getWidth().getAnimVal()).getTransformedLength(inverseTransform);
+		float height = ((SVGLengthImpl) getHeight().getAnimVal()).getTransformedLength(inverseTransform);
+
+		return new SVGRectImpl(x, y, width, height);
 	}
 
 	/** {@inheritDoc} */

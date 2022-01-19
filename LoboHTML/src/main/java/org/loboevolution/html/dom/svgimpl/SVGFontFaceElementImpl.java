@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -20,27 +20,16 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import org.loboevolution.html.dom.svg.SVGDefsElement;
-import org.loboevolution.html.dom.svg.SVGRect;
+import org.loboevolution.html.dom.svg.SVGFontFaceElement;
 
-import java.awt.geom.Rectangle2D;
+public class SVGFontFaceElementImpl extends SVGElementImpl implements SVGFontFaceElement {
 
-/**
- * <p>SVGDefsElementImpl class.</p>
- */
-public class SVGDefsElementImpl extends SVGGraphic implements SVGDefsElement {
-
-	/**
-	 * <p>Constructor for SVGDefsElementImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public SVGDefsElementImpl(final String name) {
-		super(name);
-	}
-
-	@Override
-	public SVGRect getBBox() {
-		return new SVGRectImpl(new Rectangle2D.Double(0, 0, 0, 0));
-	}
+    /**
+     * <p>Constructor for SVGElementImpl.</p>
+     *
+     * @param name a {@link String} object.
+     */
+    public SVGFontFaceElementImpl(String name) {
+        super(name);
+    }
 }

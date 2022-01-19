@@ -30,13 +30,12 @@ import org.loboevolution.html.dom.svg.SVGTransformList;
 import org.loboevolution.html.dom.svg.SVGTransformable;
 import org.loboevolution.html.node.Node;
 
+import java.awt.geom.AffineTransform;
+
 /**
  * <p>SVGLocatableImpl class.</p>
- *
- *
- *
  */
-public class SVGLocatableImpl extends SVGStylableImpl implements SVGLocatable {
+public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLocatable {
 
 	/**
 	 * <p>Constructor for SVGLocatableImpl.</p>
@@ -57,13 +56,6 @@ public class SVGLocatableImpl extends SVGStylableImpl implements SVGLocatable {
 	/** {@inheritDoc} */
 	@Override
 	public SVGElement getFarthestViewportElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGRect getBBox() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -98,8 +90,59 @@ public class SVGLocatableImpl extends SVGStylableImpl implements SVGLocatable {
 	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix getScreenCTM() {
-		// TODO Auto-generated method stub
-		return null;
+
+		AffineTransform screenCTM = getCTM().getAffineTransform();
+		SVGSVGElementImpl root = (SVGSVGElementImpl)getOwnerSVGElement();
+		SVGSVGElementImpl parentSVGElement = (SVGSVGElementImpl) getOwnerSVGElement();
+
+		if (parentSVGElement != null) {
+
+			AffineTransform viewboxToViewportTransform = parentSVGElement.getViewboxToViewportTransform();
+			if (viewboxToViewportTransform != null) {
+				screenCTM.preConcatenate(viewboxToViewportTransform);
+			}
+
+			screenCTM.preConcatenate(AffineTransform.getTranslateInstance(
+					parentSVGElement.getX().getAnimVal().getValue(), parentSVGElement.getY().getAnimVal().getValue()));
+		}
+
+		while (parentSVGElement != root) {
+
+			if (parentSVGElement.getParentNode() instanceof SVGLocatable
+					&& !(parentSVGElement.getParentNode() instanceof SVGSVGElementImpl)) {
+				SVGMatrix ctmMatrix = ((SVGLocatable) parentSVGElement.getParentNode()).getCTM();
+				AffineTransform ctm = ctmMatrix.getAffineTransform();
+				screenCTM.preConcatenate(ctm);
+				parentSVGElement = (SVGSVGElementImpl) ((SVGElement) parentSVGElement.getParentNode())
+						.getOwnerSVGElement();
+
+			} else if (parentSVGElement.getParentNode() instanceof SVGSVGElementImpl) {
+				parentSVGElement = (SVGSVGElementImpl) parentSVGElement.getParentNode();
+			} else {
+				parentSVGElement = null;
+			}
+
+			if (parentSVGElement != null) {
+				AffineTransform viewboxToViewportTransform = parentSVGElement.getViewboxToViewportTransform();
+
+				if (viewboxToViewportTransform != null) {
+					screenCTM.preConcatenate(viewboxToViewportTransform);
+				}
+
+				screenCTM.preConcatenate(
+						AffineTransform.getTranslateInstance(parentSVGElement.getX().getAnimVal().getValue(),
+								parentSVGElement.getY().getAnimVal().getValue()));
+			}
+		}
+
+		SVGMatrix screenCTMMatrix = new SVGMatrixImpl();
+		screenCTMMatrix.setA((float) screenCTM.getScaleX());
+		screenCTMMatrix.setB((float) screenCTM.getShearY());
+		screenCTMMatrix.setC((float) screenCTM.getShearX());
+		screenCTMMatrix.setD((float) screenCTM.getScaleY());
+		screenCTMMatrix.setE((float) screenCTM.getTranslateX());
+		screenCTMMatrix.setF((float) screenCTM.getTranslateY());
+		return screenCTMMatrix;
 	}
 
 	/** {@inheritDoc} */

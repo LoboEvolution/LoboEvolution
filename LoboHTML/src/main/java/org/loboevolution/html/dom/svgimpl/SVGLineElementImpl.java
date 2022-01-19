@@ -29,12 +29,10 @@ import java.awt.geom.NoninvertibleTransformException;
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGLineElement;
 import org.loboevolution.html.dom.svg.SVGMatrix;
+import org.loboevolution.html.dom.svg.SVGRect;
 
 /**
  * <p>SVGLineElementImpl class.</p>
- *
- *
- *
  */
 public class SVGLineElementImpl extends SVGGraphic implements SVGLineElement {
 
@@ -45,6 +43,12 @@ public class SVGLineElementImpl extends SVGGraphic implements SVGLineElement {
 	 */
 	public SVGLineElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+		Shape shape = createShape(null);
+		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */

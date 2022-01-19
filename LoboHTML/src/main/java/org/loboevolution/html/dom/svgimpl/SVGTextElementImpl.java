@@ -25,10 +25,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.NoninvertibleTransformException;
-import java.awt.geom.Path2D;
+import java.awt.geom.*;
 import java.util.StringTokenizer;
 
 import org.loboevolution.common.Strings;
@@ -45,9 +42,6 @@ import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>SVGTextElementImpl class.</p>
- *
- *
- *
  */
 public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
@@ -58,6 +52,29 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 	 */
 	public SVGTextElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	public SVGRect getBBox() {
+
+		SVGFontElementImpl font = getFontElement();
+		if (font != null) {
+			AffineTransform transform = getCTM().getAffineTransform();
+			AffineTransform inverseTransform;
+			try {
+				inverseTransform = transform.createInverse();
+			} catch (NoninvertibleTransformException e) {
+				inverseTransform = null;
+			}
+			float fontSize = getFontSize(inverseTransform);
+			float xPos = ((SVGLengthImpl) getX().getAnimVal()).getTransformedLength(inverseTransform);
+			float yPos = ((SVGLengthImpl) getY().getAnimVal()).getTransformedLength(inverseTransform);
+			return new SVGRectImpl(font.getBounds(getText(), xPos, yPos, fontSize));
+
+		} else {
+			Shape shape = createShape(getCTM().getAffineTransform());
+			return new SVGRectImpl(shape.getBounds2D());
+		}
 	}
 
 	/** {@inheritDoc} */

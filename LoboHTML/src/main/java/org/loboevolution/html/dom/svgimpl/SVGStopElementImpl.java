@@ -25,11 +25,8 @@ import org.loboevolution.html.dom.svg.SVGStopElement;
 
 /**
  * <p>SVGStopElementImpl class.</p>
- *
- *
- *
  */
-public class SVGStopElementImpl extends SVGGraphic implements SVGStopElement {
+public class SVGStopElementImpl extends SVGStylableImpl implements SVGStopElement {
 
 	/**
 	 * <p>Constructor for SVGStopElementImpl.</p>
