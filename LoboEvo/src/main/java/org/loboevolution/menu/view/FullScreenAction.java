@@ -31,9 +31,6 @@ import org.loboevolution.component.BrowserFrame;
 
 /**
  * <p>FullScreenAction class.</p>
- *
- *
- *
  */
 public class FullScreenAction extends AbstractAction {
 

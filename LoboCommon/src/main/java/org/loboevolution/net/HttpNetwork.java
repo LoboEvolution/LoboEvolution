@@ -24,6 +24,8 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLImageElement;
+import org.loboevolution.html.dom.HTMLInputElement;
+import org.loboevolution.html.dom.svg.SVGImageElement;
 import org.loboevolution.info.TimingInfo;
 
 import javax.imageio.ImageIO;
@@ -114,7 +116,15 @@ public class HttpNetwork {
 	 */
 	public static Image getImage(HTMLElement element, TimingInfo info, boolean useBaseUri) {
 		Instant start = Instant.now();
-		String href = ((HTMLImageElement)element).getSrc();
+		String href = null;
+		if(element instanceof HTMLImageElement) {
+			href = ((HTMLImageElement) element).getSrc();
+		} else if(element instanceof HTMLInputElement){
+			href = ((HTMLInputElement) element).getSrc();
+		} else if(element instanceof SVGImageElement){
+			href = ((SVGImageElement) element).getHref().getBaseVal();
+		}
+
 		String baseUri = useBaseUri ? element.getBaseURI() : null;
 		try {
 			if (Strings.isBlank(href))

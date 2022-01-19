@@ -24,6 +24,7 @@ package org.loboevolution.common;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URLConnection;
 import java.util.zip.GZIPInputStream;
@@ -35,6 +36,60 @@ import java.util.zip.GZIPInputStream;
  *
  */
 public class IORoutines {
+
+
+
+	/**
+	 * Load as text.
+	 *
+	 * @param in
+	 *            the in
+	 * @param encoding
+	 *            the encoding
+	 * @return the string
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public static String loadAsText(InputStream in, String encoding) throws IOException {
+		return loadAsText(in, encoding, 4096);
+	}
+
+	/**
+	 * Load as text.
+	 *
+	 * @param in
+	 *            the in
+	 * @param encoding
+	 *            the encoding
+	 * @param bufferSize
+	 *            the buffer size
+	 * @return the string
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public static String loadAsText(InputStream in, String encoding, int bufferSize) throws IOException {
+		InputStreamReader reader = new InputStreamReader(in, encoding);
+		char[] buffer = new char[bufferSize];
+		int offset = 0;
+		while (true) {
+			int remain = buffer.length - offset;
+			if (remain <= 0) {
+				char[] newBuffer = new char[buffer.length * 2];
+				System.arraycopy(buffer, 0, newBuffer, 0, offset);
+				buffer = newBuffer;
+				remain = buffer.length - offset;
+			}
+			int numRead = reader.read(buffer, offset, remain);
+			if (numRead == -1) {
+				break;
+			}
+			offset += numRead;
+		}
+		return String.valueOf(buffer, 0, offset);
+	}
+
+
+
 	/**
 	 * <p>load.</p>
 	 *

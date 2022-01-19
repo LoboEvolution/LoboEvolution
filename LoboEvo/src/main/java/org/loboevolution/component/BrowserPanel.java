@@ -34,9 +34,6 @@ import org.loboevolution.welcome.WelcomePanel;
 
 /**
  * <p>BrowserPanel class.</p>
- *
- *
- *
  */
 public class BrowserPanel extends JPanel implements IBrowserPanel {
 	private static final long serialVersionUID = 1L;

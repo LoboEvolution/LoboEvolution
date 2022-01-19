@@ -28,9 +28,6 @@ import org.loboevolution.component.BrowserFrame;
 
 /**
  * <p>ScreenShotAction class.</p>
- *
- *
- *
  */
 public class ScreenShotAction extends AbstractAction {
 

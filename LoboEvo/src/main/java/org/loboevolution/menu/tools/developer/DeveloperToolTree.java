@@ -66,6 +66,12 @@ public class DeveloperToolTree extends LoboTree {
 		moduleDebug.add(new DefaultMutableTreeNode(getDomTree()));
 		root.add(moduleDebug);
 
+		final DefaultMutableTreeNode moduleNet = new DefaultMutableTreeNode("Network");
+		moduleNet.add(new DefaultMutableTreeNode(getNetworkHeaders()));
+		moduleNet.add(new DefaultMutableTreeNode(getNetworkTiming()));
+
+		root.add(moduleNet);
+
 		final DefaultMutableTreeNode mediaNode = new DefaultMutableTreeNode("Media");
 		mediaNode.add(new DefaultMutableTreeNode(getCss()));
 		mediaNode.add(new DefaultMutableTreeNode(getJS()));
@@ -148,6 +154,54 @@ public class DeveloperToolTree extends LoboTree {
 			@Override
 			public String getName() {
 				return "Dom Tree";
+			}
+
+			@Override
+			public String toString() {
+				return getName();
+			}
+		};
+	}
+
+	private ToolsInfo getNetworkHeaders() {
+		return new ToolsInfo() {
+			@Override
+			public AbstractToolsUI createSettingsUI() {
+				return new HeadersPageUI(DeveloperToolTree.frame);
+			}
+
+			@Override
+			public String getDescription() {
+				return "";
+			}
+
+			@Override
+			public String getName() {
+				return "Headers";
+			}
+
+			@Override
+			public String toString() {
+				return getName();
+			}
+		};
+	}
+
+	private ToolsInfo getNetworkTiming() {
+		return new ToolsInfo() {
+			@Override
+			public AbstractToolsUI createSettingsUI() {
+				return new TimingPageUI(DeveloperToolTree.frame);
+			}
+
+			@Override
+			public String getDescription() {
+				return "";
+			}
+
+			@Override
+			public String getName() {
+				return "Timing";
 			}
 
 			@Override
