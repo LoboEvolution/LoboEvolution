@@ -288,7 +288,7 @@ public final class ColorFactory {
 		int green;
 		int blue;
 		int alpha;
-		hex = hex.replace("#", "");
+		hex = hex.split("#")[1];
 		switch (hex.length()) {
 		case 6:
 			red = Integer.valueOf(hex.substring(0, 2), 16);
@@ -301,6 +301,11 @@ public final class ColorFactory {
 			blue = Integer.valueOf(hex.substring(4, 6), 16);
 			alpha = Integer.valueOf(hex.substring(6, 8), 16);
 			return new Color(red, green, blue, alpha);
+		case 3:
+			red = Integer.valueOf(hex.charAt(0)+ "" + hex.charAt(0), 16);
+			green = Integer.valueOf(hex.charAt(1)+ "" + hex.charAt(1), 16);
+			blue = Integer.valueOf(hex.charAt(2)+ "" + hex.charAt(2), 16);
+			return new Color(red, green, blue);
 		default:
 			return null;
 		}
