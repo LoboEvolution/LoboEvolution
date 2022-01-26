@@ -702,7 +702,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "  <script>\n"
                 + "    function doTest() {\n"
                 + "      try {\n"
-                + "          alert(oSelect.options[\" + pos + \"]);\\n\""
+                + "          alert(oSelect.options[" + pos + "]);\n"
                 + "      } catch (e) { alert('exception'); }\n"
                 + "    }\n"
                 + "  </script>\n"

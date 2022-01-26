@@ -21,7 +21,9 @@
 package org.loboevolution.html.node;
 
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.node.js.geom.DOMRectList;
 import org.mozilla.javascript.Function;
+import org.loboevolution.html.node.js.geom.DOMRect;
 
 /**
  * Element is the most general base class from which all objects in a Document inherit.
@@ -63,7 +65,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>getClientHeight.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getClientHeight();
 
@@ -71,7 +73,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>getClientLeft.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getClientLeft();
 
@@ -79,7 +81,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>getClientTop.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getClientTop();
 
@@ -87,7 +89,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>getClientWidth.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getClientWidth();
 
@@ -134,6 +136,20 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * @return a {@link java.lang.String} object.
      */
     String getOuterHTML();
+
+    /**
+     * <p>getBoundingClientRect.</p>
+     *
+     * @return a {@link DOMRect} object.
+     */
+    DOMRect getBoundingClientRect();
+
+    /**
+     * <p>getClientRects.</p>
+     *
+     * @return a {@link DOMRectList} object.
+     */
+    DOMRectList getClientRects();
 
     /**
      * <p>setOuterHTML.</p>

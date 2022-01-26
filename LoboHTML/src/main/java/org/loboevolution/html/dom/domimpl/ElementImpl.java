@@ -24,12 +24,20 @@ package org.loboevolution.html.dom.domimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.nodeimpl.NamedNodeMapImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.dom.nodeimpl.TextImpl;
 import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.html.js.geom.DOMRectImpl;
+import org.loboevolution.html.js.geom.DOMRectListImpl;
 import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.node.js.geom.DOMRect;
+import org.loboevolution.html.node.js.geom.DOMRectList;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderer.RBlock;
+import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
@@ -46,13 +54,15 @@ import java.util.*;
  */
 public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
-	protected Map<String, String> attributes;
+	private Map<String, String> attributes;
 
 	private String id;
 
 	private final String name;
 	
 	private String outer;
+
+	private double scrollTop;
 
 	/**
 	 * <p>Constructor for ElementImpl.</p>
@@ -504,9 +514,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		if(Strings.isNotBlank(className)){
 			final String[] listString = className.split(" ");
 			List<String> names = Arrays.asList(listString);
-			names.forEach(name -> {
-				tokList.populate(name);
-			});
+			names.forEach(tokList::populate);
 		}
         return tokList;
 	}
@@ -719,6 +727,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
      */
     @Override
     public double getScrollTop() {
+		if (scrollTop > 0) return scrollTop;
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
         HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		return isVScrollable() ? htmlRendererContext.getScrolly() : 0;
@@ -729,6 +738,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
      */
     @Override
     public void setScrollTop(double scrollTop) {
+		this.scrollTop = scrollTop;
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
         HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 
@@ -768,7 +778,67 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
+	/** {@inheritDoc} */
+	@Override
+	public DOMRect getBoundingClientRect() {
+
+		AbstractCSSProperties currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		final Window win = doc.getDefaultView();
+		final RenderState rs  = doc.getRenderState();
+		int width = calculateWidth(true, true);
+		int height = calculateHeight(true, true);
+		int top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
+		int left = HtmlValues.getPixelSize(currentStyle.getLeft(), rs, win, 0);
+
+		for (Node n = getParentNode(); n != null; n = n.getParentNode()) {
+
+			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
+				HTMLElementImpl p = (HTMLElementImpl) n;
+				AbstractCSSProperties pCurrentStyle = p.getCurrentStyle();
+				String topTxt = pCurrentStyle.getTop();
+				String leftTxt = pCurrentStyle.getLeft();
+				int scrollTop = (int) p.getScrollTop();
+				int scrollLeft = (int) p.getScrollLeft();
+				if (Strings.isNotBlank(topTxt)) {
+					top += HtmlValues.getPixelSize(topTxt, rs, win, 0);
+				}
+
+				if (Strings.isNotBlank(leftTxt)) {
+					left += HtmlValues.getPixelSize(leftTxt, rs, win, 0);
+				}
+
+				top -= scrollTop;
+				left -= scrollLeft;
+			}
+		}
+
+		return new DOMRectImpl(width, height, top, 0, 0, left);
+	}
+
+	@Override
+	public DOMRectList getClientRects() {
+		DOMRectListImpl list = new DOMRectListImpl();
+		AbstractCSSProperties style = ((HTMLElementImpl) this).getCurrentStyle();
+		String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
+		if (!"none".equals(display)) {
+			for (Node n = getParentNode(); n != null; n = n.getPreviousSibling()) {
+				if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
+					HTMLElementImpl p = (HTMLElementImpl) n;
+					AbstractCSSProperties st = p.getStyle();
+					display = st.getDisplay();
+				}
+			}
+		}
+
+		if (!"none".equals(display)) {
+			list.add(getBoundingClientRect());
+		}
+
+		return list;
+	}
+
 	/**
 	 * <p>appendOuterHTMLImpl.</p>
 	 *
@@ -908,7 +978,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				sizeHeight = elem.getClientHeight();
 			}
 		}
-
 		if ("auto".equalsIgnoreCase(height)) {
 			height = "100%";
 		}

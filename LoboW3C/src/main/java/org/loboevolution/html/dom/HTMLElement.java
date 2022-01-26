@@ -108,14 +108,14 @@ public interface HTMLElement extends Element {
 	/**
 	 * <p>getOffsetTop.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getOffsetTop();
 
 	/**
 	 * <p>getOffsetWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getOffsetWidth();
 

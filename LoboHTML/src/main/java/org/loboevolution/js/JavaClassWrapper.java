@@ -141,7 +141,9 @@ public class JavaClassWrapper {
 	}
 
 	private boolean isPropertyMethod(String name, Method method) {
-		if (name.startsWith("get") || name.startsWith("is")) {
+		if ((name.startsWith("get") || name.startsWith("is")) &&
+				!name.equals("getBoundingClientRect") &&
+				!name.equals("getClientRects")) {
 			return method.getParameterTypes().length == 0;
 		} else if (name.startsWith("set") && !name.equals("setTimeout")) {
 			return method.getParameterTypes().length == 1;
