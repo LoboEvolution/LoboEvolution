@@ -55,8 +55,9 @@ mvn install -Dmaven.test.skip=true
 mvn surefire-report:report
 ```
 
-Show report in [doc folder](https://github.com/LoboEvolution/LoboEvolution/tree/master/docs) or [current result](https://loboevolution.github.io/LoboEvolution/)
-
+| Unit Tests | Passed | Failures | Rate Success |                         Result                         |
+|:----------:|:------:|:--------:|:------------:|:------------------------------------------------------:|
+|    1555    |  938   |   621    |   60,193%    | [see](https://loboevolution.github.io/LoboEvolution/)  |
 
 ### How To Do
 [TODO](https://github.com/oswetto/LoboEvolution/wiki/How-TODO)
