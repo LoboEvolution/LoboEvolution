@@ -941,25 +941,19 @@ public class PDFImage {
 			// cs).getFunktion(), cs.getColorSpace());
 			ColorSpace altCS = cs.getColorSpace();
 			int[] bits = new int[altCS.getNumComponents()];
-			for (int i = 0; i < bits.length; i++) {
-				bits[i] = getBitsPerComponent();
-			}
+			Arrays.fill(bits, getBitsPerComponent());
 			return new DecodeComponentColorModel(altCS, bits);
 		} else {
 			// If the image is a JPEG, then CMYK color space has been converted to RGB in DCTDecode
 			if (this.jpegDecode && cs.getColorSpace().getType() == ColorSpace.TYPE_CMYK) {
 				ColorSpace rgbCS = ColorSpace.getInstance(ColorSpace.CS_sRGB);
 				int[] bits = new int[rgbCS.getNumComponents()];
-				for (int i = 0; i < bits.length; i++) {
-					bits[i] = getBitsPerComponent();
-				}
+				Arrays.fill(bits, getBitsPerComponent());
 				return new DecodeComponentColorModel(rgbCS, bits);
 			}
 			ColorSpace colorSpace = cs.getColorSpace();
 			int[] bits = new int[colorSpace.getNumComponents()];
-			for (int i = 0; i < bits.length; i++) {
-				bits[i] = getBitsPerComponent();
-			}
+			Arrays.fill(bits, getBitsPerComponent());
 
 			return new DecodeComponentColorModel(cs.getColorSpace(), bits);
 		}

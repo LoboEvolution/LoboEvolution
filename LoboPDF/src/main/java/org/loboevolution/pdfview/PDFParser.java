@@ -203,7 +203,7 @@ public class PDFParser extends BaseWatchable {
         }
         int c = this.stream[this.loc++];
         // examine the character:
-        while (c == '%') {
+        while (c == '%' || c == 28) {
             // skip comments
             StringBuilder comment = new StringBuilder();
             while (this.loc < this.stream.length && c != '\n') {
