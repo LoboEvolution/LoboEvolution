@@ -21,8 +21,8 @@ package org.loboevolution.pdfview.decode;
 
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
-import org.monte.media.jpeg.JPEGImageIO;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -87,7 +87,7 @@ public class DCTDecode {
         BufferedImage bimg;
         try {
             try {
-                bimg = JPEGImageIO.read(new ByteArrayInputStream(input), false);
+                bimg = ImageIO.read(new ByteArrayInputStream(input));
             } catch (IllegalArgumentException colorProfileMismatch) {
                 // we experienced this problem with an embedded jpeg
                 // that specified a icc color profile with 4 components

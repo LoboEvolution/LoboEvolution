@@ -18,10 +18,16 @@
  */
 package org.loboevolution.pdf;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import org.loboevolution.common.BytesUtilities;
+import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.UserAgent;
+import org.loboevolution.pdfview.*;
+import org.loboevolution.pdfview.action.*;
+
+import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.Book;
@@ -32,7 +38,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationTargetException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
@@ -40,46 +45,8 @@ import java.nio.channels.FileChannel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTree;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-
-import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.net.UserAgent;
-import org.loboevolution.pdfview.OutlineNode;
-import org.loboevolution.pdfview.PDFDestination;
-import org.loboevolution.pdfview.PDFFile;
-import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.PDFPage;
-import org.loboevolution.pdfview.action.CloseOutlineAction;
-import org.loboevolution.pdfview.action.FitAction;
-import org.loboevolution.pdfview.action.FitHeightAction;
-import org.loboevolution.pdfview.action.GoToAction;
-import org.loboevolution.pdfview.action.OutlineAction;
-import org.loboevolution.pdfview.action.PDFAction;
-import org.loboevolution.pdfview.action.PrintAction;
-import org.loboevolution.pdfview.action.SetupAction;
-import org.loboevolution.pdfview.action.ThumbAction;
-import org.loboevolution.pdfview.action.ZoomInAction;
-import org.loboevolution.pdfview.action.ZoomOutAction;
-
 /**
  * The Class PDFViewer.
- *
-  *
-  *
  */
 public class PDFViewer extends JFrame implements KeyListener, PageChangeListener, TreeSelectionListener {
 
@@ -90,10 +57,6 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	private static final Logger logger = Logger.getLogger(PDFViewer.class.getName());
 	
 	private final float ZOOM_FACTOR = 1.2f;
-	
-	private final int MIN_ZOOM_SIZE = 100;
-	
-	private final int MAX_ZOOM_SIZE = 4000;
 
 	/** The Constant TITLE. */
 	public static final String TITLE = "LoboEvolution PDF Viewer";
@@ -346,25 +309,16 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *            the url
 	 * @throws java.io.IOException if any.
 	 */
-	public void openFile(URL url) throws IOException {
-		try {
-			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-			try (InputStream istr = HttpNetwork.openConnectionCheckRedirects(connection)) {
-				ByteBuffer byteBuffer = ByteBuffer.allocate(istr.available());
-				while (istr.available() > 0) {
-					byteBuffer.put((byte) istr.read());
-				}
-				openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
-			} catch (SocketTimeoutException e) {
-				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
-		    } catch (Exception e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
-			}
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-	}
+    public void openFile(URL url) throws IOException {
+        final URLConnection connection = url.openConnection();
+        connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+        try (InputStream inputStream = HttpNetwork.openConnectionCheckRedirects(connection)) {
+            ByteBuffer byteBuffer = BytesUtilities.readStream(inputStream);
+            openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
 
 	/**
 	 * <p>
@@ -404,11 +358,11 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	private void openPDFByteBuffer(ByteBuffer buf, String path, String name) {
 		
 		// create a PDFFile from the data
-		PDFFile newfile = null;
+		PDFFile newfile;
 		
 		try {
 			newfile = new PDFFile(buf);
-		} catch (IOException ioe) {
+		} catch (IOException e) {
 			openError(path + " doesn't appear to be a PDF file.");
 			return;
 		}
@@ -539,6 +493,8 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *            the factor
 	 */
 	public void doZoom(float factor) {
+        final int MIN_ZOOM_SIZE = 100;
+        final int MAX_ZOOM_SIZE = 4000;
 		page.setPreferredSize(new Dimension(
 			Math.max(MIN_ZOOM_SIZE, Math.min(MAX_ZOOM_SIZE, Math.round(page.getPreferredSize().width * factor))),
 			Math.max(MIN_ZOOM_SIZE, Math.min(MAX_ZOOM_SIZE, Math.round(page.getPreferredSize().height * factor)))
@@ -576,9 +532,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	
 	/**
 	 * Open outline.
+     * the root of the outline, or null if there is no outline./
 	 */
 	public void doOutline() {
-		/** the root of the outline, or null if there is no outline. */
 		OutlineNode outline = null;
 
 		// if the PDF has an outline, display it.
@@ -727,7 +683,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 */
 	public Icon getIcon(String name) {
 		Icon icon = null;
-		URL url = null;
+		URL url;
 		try {
 			url = getClass().getResource(name);
 			icon = new ImageIcon(url);
