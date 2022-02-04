@@ -20,23 +20,6 @@
 
 package org.loboevolution.html.renderer;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.image.ImageObserver;
-import java.net.URL;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.logging.Level;
-
 import org.loboevolution.common.GUITasks;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -57,6 +40,13 @@ import org.loboevolution.info.BorderInfo;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.net.HttpNetwork;
+
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.net.URL;
+import java.util.List;
+import java.util.*;
+import java.util.logging.Level;
 
 /**
  * <p>Abstract BaseElementRenderable class.</p>
@@ -241,8 +231,10 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				}
 
 				final HtmlRendererContext htmlRendererContext = img.getHtmlRendererContext();
-				final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-				htmlPanel.getBrowserPanel().getTimingList.add(info);
+				if (htmlRendererContext != null) {
+					final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+					htmlPanel.getBrowserPanel().getTimingList.add(info);
+				}
 			}
 		}
 	}

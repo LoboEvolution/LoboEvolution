@@ -147,11 +147,17 @@ public class HttpNetwork {
 				info.setPath(scriptURI);
 				final URL u = new URL(scriptURI);
 				info.setName(u.getFile());
-				final HttpURLConnection connection =(HttpURLConnection)u.openConnection();
-				connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+				URLConnection connection = u.openConnection();
+				if (connection instanceof HttpURLConnection) {
+					final HttpURLConnection conn =(HttpURLConnection)u.openConnection();
+					conn.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+					info.setHttpResponse(conn.getResponseCode());
+					connection = conn;
+				}
+
 				try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
 					info.setType(connection.getContentType());
-					info.setHttpResponse(connection.getResponseCode());
+
 					if (href.contains(";base64,")) {
 						final String base64 = href.split(";base64,")[1];
 						byte[] decodedBytes = Base64.getDecoder().decode(base64);
@@ -183,7 +189,10 @@ public class HttpNetwork {
 						return ImageIO.read(in);
 					}
 				} catch (SocketTimeoutException e) {
-					info.setHttpResponse(connection.getResponseCode());
+					if (connection instanceof HttpURLConnection) {
+						info.setHttpResponse(((HttpURLConnection)connection).getResponseCode());
+					}
+
 					logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
 				} catch (FileNotFoundException e) {
 					logger.log(Level.INFO, e.getMessage());
