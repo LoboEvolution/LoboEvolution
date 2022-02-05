@@ -99,9 +99,10 @@ public class LinkRenderState extends StyleSheetRenderState {
             vlink = (vlink == null) ? COLOR_VISITED : vlink;
             link = (link == null) ? DEFAULT_COLOR : link;
             String colorText = visited ? vlink : link;
-            if (colorText != null) {
-                return ColorFactory.getInstance().getColor(colorText);
-            }
+
+            AbstractCSSProperties props = this.getCssProperties();
+            String color = props == null ? null : props.getColor();
+            return ColorFactory.getInstance().getColor(color == null ? colorText : color);
         }
         return Color.BLUE;
     }
