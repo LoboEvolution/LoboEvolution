@@ -37,23 +37,16 @@ import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 
 /**
  * <p>TextFieldUsername class.</p>
- *
- *
- *
  */
 public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 
 	private static final long serialVersionUID = 1L;
-	
-	private final Color COLOR_BACKGROUND = background();
 
 	private final Color COLOR_INTERACTIVE = foreground();
 
 	private final Color COLOR_OUTLINE = foreground();
 
 	private Color borderColor = COLOR_INTERACTIVE;
-	
-	private final Font FONT_GENERAL_UI = new Font("Segoe UI", Font.PLAIN, 20);
 
 	private final String PLACEHOLDER_TEXT_USERNAME = "Surf in the web! Surf in the web!";
 
@@ -64,13 +57,13 @@ public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 	 */
 	public TextFieldUsername() {
 		setOpaque(false);
-		setBackground(COLOR_BACKGROUND);
+		setBackground(background());
 		setForeground(COLOR_OUTLINE);
 		setBorderColor(COLOR_OUTLINE);
 		setCaretColor(Color.white);
 		setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		setHorizontalAlignment(SwingConstants.CENTER);
-		setFont(FONT_GENERAL_UI);
+		setFont(new Font("Segoe UI", Font.PLAIN, 20));
 
 		setText(PLACEHOLDER_TEXT_USERNAME);
 		addFocusListener(new FocusListener() {

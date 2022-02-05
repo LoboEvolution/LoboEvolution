@@ -20,18 +20,16 @@
 
 package org.loboevolution.tab;
 
-import java.awt.Component;
-import java.util.List;
-
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.info.TabInfo;
 import org.loboevolution.store.TabStore;
 import org.loboevolution.store.WebStore;
+import org.loboevolution.welcome.WelcomePanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
 /**
  * <p>TabbedPanePopupMenu class.</p>
@@ -126,12 +124,12 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 	
 	
 	private void newTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
-		tabbedPane.insertTab("New Tab", null, new JPanel(), null, index);
+		tabbedPane.insertTab("New Tab", null, new WelcomePanel(panel), null, index);
 		tabbedPane.setSelectedIndex(index);
 		TabStore.insertTab(index, "");
 		IBrowserFrame browserFrame = panel.getBrowserFrame();
 		browserFrame.getToolbar().getAddressBar().setText("");
-		panel.getScroll().getViewport().add((Component) tabbedPane);
+		panel.getScroll().getViewport().add(tabbedPane);
 	}
 	
 	private void closeTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
@@ -152,7 +150,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 				browserFrame.getToolbar().getAddressBar().setText(tabInfo.getUrl());
 			}
 		}
-		panel.getScroll().getViewport().add((Component) tabbedPane);
+		panel.getScroll().getViewport().add(tabbedPane);
 	}
 	
 	
@@ -161,7 +159,6 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 		for (int i = 0; i < tabs.size(); i++) {
 			WebStore.deleteStorage(1, i);
 			TabStore.deleteTab(i);
-
 		}
 	}
 	
@@ -179,9 +176,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 				IBrowserFrame browserFrame = panel.getBrowserFrame();
 				browserFrame.getToolbar().getAddressBar().setText(tabInfo.getUrl());
 			}
-
 		}
-		panel.getScroll().getViewport().add((Component) tabbedPane);
+		panel.getScroll().getViewport().add(tabbedPane);
 	}
-	
 }
