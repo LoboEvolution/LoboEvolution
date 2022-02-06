@@ -44,9 +44,6 @@ import org.loboevolution.store.WebStore;
 
 /**
  * <p>BrowserFrame class.</p>
- *
- *
- *
  */
 public class BrowserFrame extends JFrame implements IBrowserFrame {
 

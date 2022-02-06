@@ -25,11 +25,11 @@ import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.store.TabStore;
+import org.sexydock.tabs.jhrome.JhromeTabbedPaneUI;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.dnd.*;
 
 /**
  * <p>DnDTabbedPane class.</p>
@@ -37,12 +37,6 @@ import java.awt.dnd.*;
 public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 
 	private static final long serialVersionUID = 1L;
-
-	private final DragGestureListener dragGestureListener = new DragGestureListenerImpl(this);
-
-	protected int dragTabIdx = -1;
-
-	private final DropTargetListener dropTargetListener = new DropTargetListenerImpl(this);
 
 	private IBrowserPanel browserPanel;
 
@@ -57,47 +51,13 @@ public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 		init(browserPanel);
 	}
 
-	/**
-	 * <p>getDropIndex.</p>
-	 *
-	 * @param p a {@link java.awt.Point} object.
-	 * @return a int.
-	 */
-	protected int getDropIndex(Point p) {
-		int idx = indexAtLocation(p.x, p.y);
-		if (idx == -1 && getTabCount() > 0) {
-			final Rectangle tabBounds = getBoundsAt(getTabCount() - 1);
-			if (tabBounds.x + tabBounds.width <= p.x && tabBounds.y <= p.y + 1
-					&& p.y <= tabBounds.y + tabBounds.height) {
-				idx = getTabCount() - 1;
-			}
-		}
-		return idx;
-	}
-
-	/**
-	 * <p>Getter for the field glass.</p>
-	 *
-	 * @return the glass
-	 */
-	protected GlassPane getGlass() {
-		return new GlassPane(this);
-	}
-
-	/**
-	 * <p>Getter for the field index.</p>
-	 *
-	 * @return the index
-	 */
-	public int getIndex() {
-		return this.index;
-	}
-
 	private void init(IBrowserPanel browserPanel) {
-		setUI(new TabbedPaneUI(this));
+		setUI(new JhromeTabbedPaneUI());
+		putClientProperty(JhromeTabbedPaneUI.NEW_TAB_BUTTON_VISIBLE, false);
+		putClientProperty(JhromeTabbedPaneUI.TAB_CLOSE_BUTTONS_VISIBLE, true);
+		putClientProperty(JhromeTabbedPaneUI.ANIMATION_FACTOR, 0.95);
+
 		this.browserPanel = browserPanel;
-		new DropTarget(this, DnDConstants.ACTION_COPY_OR_MOVE, this.dropTargetListener, true);
-		new DragSource().createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, this.dragGestureListener);
 		final ChangeListener changeListener = changeEvent -> {
 			final JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
 			IBrowserFrame browserFrame = browserPanel.getBrowserFrame();
@@ -108,6 +68,15 @@ public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 			setIndex(sourceTabbedPane.getSelectedIndex());
 		};
 		addChangeListener(changeListener);
+	}
+
+	/**
+	 * <p>Getter for the field index.</p>
+	 *
+	 * @return the index
+	 */
+	public int getIndex() {
+		return this.index;
 	}
 
 	/**
