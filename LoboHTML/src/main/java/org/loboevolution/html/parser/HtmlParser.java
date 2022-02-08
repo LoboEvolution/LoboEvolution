@@ -98,11 +98,6 @@ public class HtmlParser {
 
 	private static final  Pattern doctypePattern = Pattern.compile("(\\S+)\\s+PUBLIC\\s+\"([^\"]*)\"\\s+\"([^\"]*)\".*>");
 
-	private static final  String[] elementsThatDontNeedBodyElement = { "HTML", "HEAD", "META", "TITLE", "LINK", "SCRIPT", "STYLE" };
-
-	private static final  String[] elementsThatDontNeedHeadElement = { "HTML", "P", "DIV", "SPAN", "UL", "OL", "LI", "A",
-			"IMG", "IFRAME", "TABLE", "TBODY", "THEAD", "TR", "TH", "TD", "MATHML", "FRAMESET" };
-
 	/**
 	 * Constructs a HtmlParser.
 	 *
@@ -247,22 +242,28 @@ public class HtmlParser {
 			try {
 				if (tag.startsWith("!")) {
 					if ("!--".equals(tag)) {
-						// int commentLine = reader.getLineNumber();
 						final StringBuilder comment = this.passEndOfComment(reader);
 						final StringBuilder decText = entityDecode(comment);
 						safeAppendChild(parent, doc.createComment(decText.toString()));
 						return TOKEN_COMMENT;
 					} else if ("!DOCTYPE".equals(tag)) {
 						final String doctypeStr = this.parseEndOfTag(reader);
-						final Matcher doctypeMatcher = doctypePattern.matcher(doctypeStr);
-						if (doctypeMatcher.matches()) {
-							final String qName = doctypeMatcher.group(1);
-							final String publicId = doctypeMatcher.group(2);
-							final String systemId = doctypeMatcher.group(3);
-							final DocumentTypeImpl doctype = new DocumentTypeImpl(qName, publicId, systemId);
-							htmlDoc.setDoctype(doctype);
-							needRoot = false;
+						String qName = null;
+						String publicId = null;
+						String systemId = null;
+						if(doctypeStr.contains("PUBLIC")){
+							final Matcher doctypeMatcher = doctypePattern.matcher(doctypeStr);
+							if (doctypeMatcher.matches()) {
+							qName = doctypeMatcher.group(1);
+							publicId = doctypeMatcher.group(2);
+							systemId = doctypeMatcher.group(3);}
+						} else{
+							qName = doctypeStr.replace(">", "");
 						}
+
+						final DocumentTypeImpl doctype = new DocumentTypeImpl(qName, publicId, systemId);
+						htmlDoc.setDoctype(doctype);
+						needRoot = false;
 						return TOKEN_BAD;
 					} else {
 						passEndOfTag(reader);

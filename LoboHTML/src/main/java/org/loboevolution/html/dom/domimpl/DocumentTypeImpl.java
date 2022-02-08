@@ -28,11 +28,9 @@ import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>DocumentTypeImpl class.</p>
- *
- *
- *
  */
 public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
+
 	private final String publicId;
 	private final String qualifiedName;
 	private final String systemId;
@@ -45,7 +43,6 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	 * @param systemId a {@link java.lang.String} object.
 	 */
 	public DocumentTypeImpl(String qname, String publicId, String systemId) {
-		super();
 		this.qualifiedName = qname;
 		this.publicId = publicId;
 		this.systemId = systemId;
