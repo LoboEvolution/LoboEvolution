@@ -23,6 +23,7 @@ package org.loboevolution.html.dom.domimpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.*;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
@@ -371,8 +372,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public String getCompatMode() {
-		// TODO Auto-generated method stub
-		return null;
+		return (getDoctype() != null && getDoctype().getName() != null) ? CSSValues.CSS1COMPAT.getValue() : CSSValues.BACKCOMPAT.getValue();
 	}
 
 	/** {@inheritDoc} */

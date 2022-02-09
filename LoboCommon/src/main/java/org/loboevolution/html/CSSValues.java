@@ -34,6 +34,8 @@ public enum CSSValues {
 	
 	BASELINE("baseline"),
 
+	BACKCOMPAT("BackCompat"),
+
 	BLINK("blink"),
 
 	BLOCK("block"),
@@ -83,6 +85,8 @@ public enum CSSValues {
 	CONTENT_BOX("content-box"),
 
 	CROSSHAIR("crosshair"),
+
+	CSS1COMPAT("CSS1Compat"),
 
 	DASHED("dashed"),
 
