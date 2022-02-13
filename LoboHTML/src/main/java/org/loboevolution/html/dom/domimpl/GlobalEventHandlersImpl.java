@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
-import org.loboevolution.common.Strings;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
@@ -1293,14 +1292,13 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 	 * </p>
 	 *
 	 * @param varValue      a {@link org.mozilla.javascript.Function} object.
-	 * @param attributeName a {@link java.lang.String} object.
+	 * @param normalAttributeName a {@link java.lang.String} object.
 	 * @return a {@link org.mozilla.javascript.Function} object.
 	 */
-	protected Function getEventFunction(Function varValue, String attributeName) {
+	protected Function getEventFunction(Function varValue, String normalAttributeName) {
 		if (varValue != null) {
 			return varValue;
 		}
-		final String normalAttributeName = Strings.normalizeAttributeName(attributeName);
 		synchronized (this) {
 			Map<String, Function> fba = this.functionByAttribute;
 			Function f = fba == null ? null : fba.get(normalAttributeName);
@@ -1313,7 +1311,7 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 			}
 			if (uac.isScriptingEnabled() && this instanceof ElementImpl) {								
 				ElementImpl elem = (ElementImpl)this;
-				final String attributeValue = elem.getAttribute(attributeName);
+				final String attributeValue = elem.getAttribute(normalAttributeName);
 				if (attributeValue == null || attributeValue.length() == 0) {
 					f = null;
 				} else {
@@ -1331,7 +1329,7 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 						final Scriptable thisScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this,scope);
 						try {
 							ctx.setLanguageVersion(Context.VERSION_1_8);
-							f = ctx.compileFunction(thisScope, functionCode, elem.getTagName() + "[" + elem.getId() + "]." + attributeName, 1, null);
+							f = ctx.compileFunction(thisScope, functionCode, elem.getTagName() + "[" + elem.getId() + "]." + normalAttributeName, 1, null);
 						} catch (final RhinoException ecmaError) {
 							logger.log(Level.WARNING, "Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage(), ecmaError.getMessage());
 							f = null;

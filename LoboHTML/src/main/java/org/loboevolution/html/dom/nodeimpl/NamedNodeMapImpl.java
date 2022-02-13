@@ -22,10 +22,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
@@ -35,7 +32,6 @@ import org.loboevolution.html.node.Attr;
 
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
 
 /**
  * <p>NamedNodeMapImpl class.</p>
@@ -43,7 +39,7 @@ import org.loboevolution.html.node.Node;
 public class NamedNodeMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
 	
 	private final List<Attr> attributeList = new ArrayList<>();
-	private final Map<String, Attr> attributes = new HashMap<>();
+	private final Map<String, Attr> attributes = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
 	/**
 	 * <p>Constructor for NamedNodeMapImpl.</p>
@@ -71,7 +67,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	@Override
 	public Attr getNamedItem(String name) {
 		if(Strings.isNotBlank(name)){
-			return this.attributes.get(name.toLowerCase());
+			return this.attributes.get(name);
 		}
 		return null;
 	}
@@ -91,17 +87,6 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
         } else {
             return null;
         }
-	}
-
-	/**
-	 * <p>namedItem.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 */
-	public Node namedItem(String name) {
-		// Method needed for Javascript indexing.
-		return getNamedItem(name);
 	}
 
 	/** {@inheritDoc} */

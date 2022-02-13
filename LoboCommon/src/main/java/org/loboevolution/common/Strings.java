@@ -453,14 +453,4 @@ public final class Strings {
 		}
 		return builder.toString();
 	}
-	
-	/**
-	 * <p>normalizeAttributeName.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link java.lang.String} object.
-	 */
-	public static String normalizeAttributeName(String name) {
-		return name.toLowerCase();
-	}
 }

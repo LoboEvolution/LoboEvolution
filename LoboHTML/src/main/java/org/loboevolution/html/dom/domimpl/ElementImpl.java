@@ -23,6 +23,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.nodeimpl.NamedNodeMapImpl;
@@ -54,7 +55,7 @@ import java.util.*;
  */
 public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
-	private Map<String, String> attributes;
+	private final NamedNodeMapImpl map;
 
 	private String id;
 
@@ -71,6 +72,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 */
 	public ElementImpl(final String name) {
 		this.name = name;
+		this.map = new NamedNodeMapImpl(this, new HashMap<>());
 	}
 
 	/**
@@ -102,17 +104,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public boolean equalAttributes(Node arg) {
 		if (arg instanceof ElementImpl) {
-			synchronized (this) {
-				Map<String, String> attrs1 = this.attributes;
-				if (attrs1 == null) {
-					attrs1 = Collections.emptyMap();
-				}
-				Map<String, String> attrs2 = ((ElementImpl) arg).attributes;
-				if (attrs2 == null) {
-					attrs2 = Collections.emptyMap();
-				}
-				return Objects.equals(attrs1, attrs2);
-			}
+			return Objects.equals(map, ((ElementImpl) arg).getAttributes());
 		} else {
 			return false;
 		}
@@ -125,40 +117,21 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public String getAttribute(String name) {
-		final String normalName = Strings.normalizeAttributeName(name);
-		synchronized (this) {
-			final Map<String, String> attributes = this.attributes;
-			return attributes == null ? null : attributes.get(normalName);
-		}
+		final Attr attr = getAttributeNode(name);
+		return attr == null ? null : attr.getValue();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Attr getAttributeNode(String name) {
-		final String normalName = Strings.normalizeAttributeName(name);
-		synchronized (this) {
-			final Map<String, String> attributes = this.attributes;
-			final String value = attributes == null ? null : attributes.get(normalName);
-			return value == null ? null : getAttr(normalName, value);
-		}
+		Attr attributes = map.getNamedItem(name);
+		return attributes == null ? null : getAttr(name, attributes.getValue());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getattributes()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public NamedNodeMap getAttributes() {
-		synchronized (this) {
-			Map<String, String> attrs = this.attributes;
-			if (attrs == null) {
-				attrs = new HashMap<>();
-				this.attributes = attrs;
-			}
-			return new NamedNodeMapImpl(this, this.attributes);
-		}
+		return this.map;
 	}
 
 	/**
@@ -294,20 +267,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public boolean hasAttribute(String name) {
-		final String normalName = Strings.normalizeAttributeName(name);
-		synchronized (this) {
-			final Map<String, String> attributes = this.attributes;
-			return attributes != null && attributes.containsKey(normalName);
-		}
+		return map.getNamedItem(name) != null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean hasAttributes() {
-		synchronized (this) {
-			final Map<String, String> attrs = this.attributes;
-			return attrs != null && !attrs.isEmpty();
-		}
+		return map.getLength() > 0;
 	}
 
 	/** {@inheritDoc} */
@@ -323,58 +289,28 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void removeAttribute(String name) {
-		final String normalName = Strings.normalizeAttributeName(name);
-		synchronized (this) {
-			final Map<String, String> attributes = this.attributes;
-			if (attributes != null) {
-				attributes.remove(normalName);
-			}
-		}
+		map.removeNamedItem(name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Attr removeAttributeNode(Attr oldAttr) {
-		final String normalName = Strings.normalizeAttributeName(oldAttr.getName());
-		synchronized (this) {
-			final Map<String, String> attributes = this.attributes;
-			if (attributes == null) {
-				return null;
-			}
-			final String oldValue = attributes.remove(normalName);
-			return oldValue == null ? null : getAttr(normalName, oldValue);
-		}
+		return map.removeNamedItem(name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setAttribute(String name, String value) {
-		final String normalName = Strings.normalizeAttributeName(name);
-		synchronized (this) {
-			Map<String, String> attribs = this.attributes;
-			if (attribs == null) {
-				attribs = new HashMap<>(2);
-				this.attributes = attribs;
-			}
-			attribs.put(normalName, value);
-		}
-		assignAttributeField(normalName, value);
+		map.setNamedItem(getAttr(name, value));
+		assignAttributeField(name, value);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Attr setAttributeNode(Attr newAttr) {
-		final String normalName = Strings.normalizeAttributeName(newAttr.getName());
 		final String value = newAttr.getValue();
-		synchronized (this) {
-			if (this.attributes == null) {
-				this.attributes = new HashMap<>();
-			}
-			this.attributes.put(normalName, value);
-			// this.setIdAttribute(normalName, newAttr.isId());
-		}
-		assignAttributeField(normalName, value);
-		return newAttr;
+		assignAttributeField(newAttr.getName(), value);
+		return map.setNamedItem(newAttr);
 	}
 
 	/**
@@ -398,8 +334,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttribute(String name, boolean isId) {
-		final String normalName = Strings.normalizeAttributeName(name);
-		if (!"id".equals(normalName)) {
+		if (!"id".equals(name)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
 		}
 	}
@@ -407,8 +342,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttributeNode(Attr idAttr, boolean isId) {
-		final String normalName = Strings.normalizeAttributeName(idAttr.getName());
-		if (!"id".equals(normalName)) {
+		if (!"id".equals(idAttr.getName())) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
 		}
 	}
@@ -839,6 +773,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return list;
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public TypeInfo getSchemaTypeInfo() {
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+	}
+
 	/**
 	 * <p>appendOuterHTMLImpl.</p>
 	 *
@@ -848,18 +788,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final String tagName = getTagName().toUpperCase();
 		buffer.append('<');
 		buffer.append(tagName);
-		final Map<String, String> attributes = this.attributes;
-		if (attributes != null) {
-			attributes.forEach((k, v) -> {
-				if (v != null) {
-					buffer.append(' ');
-					buffer.append(k);
-					buffer.append("=\"");
-					buffer.append(Strings.strictHtmlEncode(v, true));
-					buffer.append("\"");
-				}
-			});
+		for (Attr attr : Nodes.iterable(map)) {
+			buffer.append(' ');
+			buffer.append(attr.getName());
+			buffer.append("=\"");
+			buffer.append(Strings.strictHtmlEncode(attr.getValue(), true));
+			buffer.append("\"");
 		}
+
 		if (nodeList.getLength() == 0) {
 			buffer.append("/>");
 		} else {

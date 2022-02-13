@@ -171,7 +171,7 @@ public class AttrUnitTest extends LoboUnitTest {
 
     @Test
     public void html_localName() {
-        final String[] messages = {"[object Attr]", "testattr"};
+        final String[] messages = {"[object Attr]", "testAttr"};
         html("localName", messages);
     }
 
