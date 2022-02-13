@@ -22,25 +22,25 @@ package org.loboevolution.driver;
 
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.node.css.CSS3Properties;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.style.ComputedCSSStyleDeclaration;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Level;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * <p>LoboUnitTest class.</p>
- *
- *
- *
  */
 public class LoboUnitTest extends LoboWebDriver {
 
-    public final String URL_SECOND = fileToElab("test");
+    public final String URL_SECOND = mockCssLink("test");
 
     /**
      * <p>checkSelectorsTest.</p>
@@ -89,6 +89,13 @@ public class LoboUnitTest extends LoboWebDriver {
      * @return a {@link java.lang.String} object.
      */
     public String mockCssLink(final String css) {
-        return fileToElab(css);
+        try {
+            Path tempFile = Files.createTempFile(null, null);
+            Files.write(tempFile, css.getBytes(StandardCharsets.UTF_8));
+            return tempFile.toUri().toString();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+        return null;
     }
 }

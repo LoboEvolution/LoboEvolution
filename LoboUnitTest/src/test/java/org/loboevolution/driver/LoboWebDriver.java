@@ -20,32 +20,12 @@
 
 package org.loboevolution.driver;
 
-import org.loboevolution.component.BrowserFrame;
-import org.loboevolution.component.BrowserPanel;
-import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
-import org.loboevolution.html.parser.DocumentBuilderImpl;
-import org.loboevolution.html.parser.InputSourceImpl;
+import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.net.UserAgent;
-import org.xml.sax.InputSource;
 
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.logging.Level;
+import java.io.StringReader;
 import java.util.logging.Logger;
 
 /**
@@ -63,56 +43,19 @@ public class LoboWebDriver {
 	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
 	protected HTMLDocumentImpl loadHtml(String html) {
-		BrowserFrame frame = new BrowserFrame("Unit Test");
-		BrowserPanel panel = new BrowserPanel(frame);
-		return createHtmlPanel(panel, fileToElab(html));
-	}
-	
-	/**
-	 * <p>fileToElab.</p>
-	 *
-	 * @param html a {@link java.lang.String} object.
-	 * @return a {@link java.lang.String} object.
-	 */
-	protected String fileToElab(String html) {
+		HTMLDocumentImpl doc = null;
 		try {
-			Path tempFile = Files.createTempFile(null, null);
-			Files.write(tempFile, html.getBytes(StandardCharsets.UTF_8));
-			return tempFile.toUri().toString();
-		} catch (IOException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			WritableLineReader wis = new WritableLineReader(new StringReader(html));
+			UserAgentContext context = new UserAgentContext();
+			final UserAgentContext ucontext = new UserAgentContext();
+			final HtmlRendererContext rendererContext = new HtmlRendererContext(null, ucontext);
+			rendererContext.setTest(true);
+			ucontext.setUserAgentEnabled(true);
+			doc = new HTMLDocumentImpl(context, rendererContext, wis, "http://www.example.com/");
+			doc.load();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		 return null; 
-	}
-
-	private HTMLDocumentImpl createHtmlPanel(IBrowserPanel browserPanel, String uri) {
-		final HtmlPanel panel = new HtmlPanel();
-		panel.setBrowserPanel(browserPanel);
-		try {
-			final URL url = new URL(uri);
-			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-
-			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-					Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
-
-				final InputSource is = new InputSourceImpl(reader, uri);
-				final UserAgentContext ucontext = new UserAgentContext();
-				final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
-				rendererContext.setTest(true);
-				ucontext.setUserAgentEnabled(true);
-				panel.setPreferredSize(new Dimension(800, 400));
-				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext);
-				final Document document = builder.parse(is);
-				panel.setDocument(document, rendererContext);
-				return (HTMLDocumentImpl)document;
-			} catch (SocketTimeoutException e) {
-				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
-		    }
-
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-		return null;
+		return doc;
 	}
 }
