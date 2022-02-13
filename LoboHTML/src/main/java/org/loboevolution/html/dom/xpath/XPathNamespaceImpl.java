@@ -81,9 +81,6 @@ import org.w3c.dom.events.EventException;
  *
  * This implementation wraps the DOM attribute node that contained the namespace
  * declaration.
- *
- *
- *
  */
 public class XPathNamespaceImpl implements XPathNamespace {
 
@@ -193,6 +190,17 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	/** {@inheritDoc} */
 	@Override
 	public Node appendChild(Node arg0) {
+		return null;
+	}
+
+	/**
+	 * <p>prependChild.</p>
+	 *
+	 * @param newChild a {@link Node} object.
+	 * @return a {@link Node} object.
+	 */
+	@Override
+	public Node prependChild(Node newChild) {
 		return null;
 	}
 

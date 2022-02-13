@@ -64,6 +64,13 @@ public interface Attr extends Node {
 	String getPrefix();
 
 	/**
+	 * <p>getCurrentNode.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.node.TypeInfo} object.
+	 */
+	TypeInfo getSchemaTypeInfo();
+
+	/**
 	 * <p>isSpecified.</p>
 	 *
 	 * @return a boolean.

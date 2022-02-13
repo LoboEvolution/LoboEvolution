@@ -27,6 +27,7 @@ import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
+import org.loboevolution.html.node.css.StyleSheet;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.*;
 import org.loboevolution.html.style.CSSUtilities;
@@ -372,6 +373,12 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	@Override
 	public void setType(String type) {
 		setAttribute("type", type);
+	}
+
+
+	@Override
+	public StyleSheet getSheet() {
+		return styleSheet;
 	}
 
 	/** {@inheritDoc} */

@@ -20,15 +20,14 @@
 
 package org.loboevolution.html.dom;
 
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
+import org.loboevolution.html.node.css.StyleSheet;
 
 /**
  * Reference information for external resources and the relationship of those
  * resources to a document and vice-versa. This object inherits all of the
  * properties and methods of the HTMLElement interface.
- *
- *
- *
  */
 public interface HTMLLinkElement extends HTMLElement {
 
@@ -260,5 +259,12 @@ public interface HTMLLinkElement extends HTMLElement {
 	 * @param type a {@link java.lang.String} object.
 	 */
 	void setType(String type);
+
+	/**
+	 * getSheet().
+	 * @return a {@link org.loboevolution.html.node.css.StyleSheet} object.
+	 */
+	StyleSheet getSheet();
+
 
 }

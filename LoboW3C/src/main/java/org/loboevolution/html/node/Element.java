@@ -152,6 +152,13 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     DOMRectList getClientRects();
 
     /**
+     * <p>getSchemaTypeInfo.</p>
+     *
+     * @return a {@link org.loboevolution.html.node.TypeInfo} object.
+     */
+     TypeInfo getSchemaTypeInfo();
+
+    /**
      * <p>setOuterHTML.</p>
      *
      * @param outerHTML a {@link java.lang.String} object.

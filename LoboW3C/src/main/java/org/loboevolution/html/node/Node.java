@@ -306,6 +306,14 @@ public interface Node extends EventTarget {
 	Node appendChild(Node newChild);
 
 	/**
+	 * <p>prependChild.</p>
+	 *
+	 * @param newChild a {@link org.loboevolution.html.node.Node} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
+	 */
+	Node prependChild(Node newChild);
+
+	/**
 	 * <p>removeChild.</p>
 	 *
 	 * @param oldChild a {@link org.loboevolution.html.node.Node} object.

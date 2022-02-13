@@ -65,12 +65,7 @@ import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
 
 /**
- * <p>
  * XMLDocument class.
- * </p>
- *
- *
- *
  */
 public class XMLDocument implements Document {
 
@@ -175,6 +170,17 @@ public class XMLDocument implements Document {
 	@Override
 	public Node appendChild(Node newChild) {
 		return doc.appendChild(newChild);
+	}
+
+	/**
+	 * <p>prependChild.</p>
+	 *
+	 * @param newChild a {@link Node} object.
+	 * @return a {@link Node} object.
+	 */
+	@Override
+	public Node prependChild(Node newChild) {
+		return doc.prependChild(newChild);
 	}
 
 	/** {@inheritDoc} */

@@ -22,9 +22,10 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.TypeInfo;
 
 /**
  * <p>AttrImpl class.</p>
@@ -115,10 +116,16 @@ public class AttrImpl extends AttrAbstract {
 		return this.value;
 	}
 
-
+	/** {@inheritDoc} */
 	@Override
 	public String getTextContent() {
 		return getValue();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public TypeInfo getSchemaTypeInfo() {
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 
 	/** {@inheritDoc} */

@@ -36,8 +36,6 @@ import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.EntityReference;
-import org.w3c.dom.TypeInfo;
 import org.w3c.dom.events.EventException;
 
 import java.util.*;
@@ -335,16 +333,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	public boolean hasAttributeNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
-	
-	/**
-	 * <p>getSchemaTypeInfo.</p>
-	 *
-	 * @return a {@link org.w3c.dom.TypeInfo} object.
-	 */
-	public TypeInfo getSchemaTypeInfo() {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
-	}
-	
+
 	/**
 	 * <p>setIdAttributeNS.</p>
 	 *
