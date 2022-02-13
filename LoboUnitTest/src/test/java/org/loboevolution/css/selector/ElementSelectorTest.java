@@ -38,7 +38,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+		    + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId'></div>\n"
@@ -57,7 +57,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId'></div>\n"
@@ -76,7 +76,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1'></div>\n"
@@ -95,7 +95,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1'></div>\n"
@@ -115,7 +115,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1'></div>\n"
@@ -135,7 +135,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -156,7 +156,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -177,7 +177,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div></div>\n"
@@ -197,7 +197,7 @@ public class ElementSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div></div>\n"

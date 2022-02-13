@@ -37,7 +37,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1'></div>\n"
@@ -56,7 +56,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1'></div>\n"
@@ -76,7 +76,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1 intro2'></div>\n"
@@ -95,7 +95,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1'></div>\n"
@@ -114,7 +114,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1 intro2'></div>\n"
@@ -133,7 +133,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1 intro2'></div>\n"
@@ -152,7 +152,7 @@ public class AttributeSelectorTest extends LoboUnitTest{
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='myId' class='intro1intro2'></div>\n"

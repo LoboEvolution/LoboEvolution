@@ -21,10 +21,12 @@
 package org.loboevolution.driver;
 
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 
+import java.awt.*;
 import java.io.StringReader;
 import java.util.logging.Logger;
 
@@ -48,7 +50,9 @@ public class LoboWebDriver {
 			WritableLineReader wis = new WritableLineReader(new StringReader(html));
 			UserAgentContext context = new UserAgentContext();
 			final UserAgentContext ucontext = new UserAgentContext();
-			final HtmlRendererContext rendererContext = new HtmlRendererContext(null, ucontext);
+			HtmlPanel panel = new HtmlPanel();
+			panel.setPreferredSize(new Dimension(800, 400));
+			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
 			rendererContext.setTest(true);
 			ucontext.setUserAgentEnabled(true);
 			doc = new HTMLDocumentImpl(context, rendererContext, wis, "http://www.example.com/");

@@ -37,7 +37,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -58,7 +58,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -79,7 +79,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -101,7 +101,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -123,7 +123,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -144,7 +144,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -165,7 +165,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -186,7 +186,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -208,7 +208,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div>\n"
@@ -229,7 +229,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+            + "  <style type=\"text/css\">" + css + "</style>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div><p id='myId'>This is a paragraph.</p></div>"
@@ -249,7 +249,7 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div><p id='myId' lang='it'>Ciao.</p></div>"
@@ -269,12 +269,12 @@ public class PseudoSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
-                        + "    <a id='myId' href='" + mockCssLink(css) + "'>css</a>\n"
-                        + "    <a id='myId2' href='" + mockCssLink(css) + "'>css2</a>\n"
+                        + "    <a id='myId' style='" + css + "'>css</a>\n"
+                        + "    <a id='myId2' style='" + css + "'>css2</a>\n"
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";

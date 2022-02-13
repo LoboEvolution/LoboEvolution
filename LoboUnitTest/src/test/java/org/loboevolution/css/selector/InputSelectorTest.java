@@ -37,7 +37,7 @@ public class InputSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
@@ -58,7 +58,7 @@ public class InputSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
@@ -79,7 +79,7 @@ public class InputSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
@@ -100,7 +100,7 @@ public class InputSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
@@ -121,7 +121,7 @@ public class InputSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
@@ -142,7 +142,7 @@ public class InputSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
@@ -163,7 +163,7 @@ public class InputSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
@@ -184,7 +184,7 @@ public class InputSelectorTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + mockCssLink(css) + "'/>\n"
+                        + "  <style type=\"text/css\">" + css + "</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
                         + "    <div>\n"
