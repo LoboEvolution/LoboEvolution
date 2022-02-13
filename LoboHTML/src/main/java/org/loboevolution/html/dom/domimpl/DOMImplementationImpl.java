@@ -22,19 +22,18 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
+import org.loboevolution.http.UserAgentContext;
 
 /**
  * <p>DOMImplementationImpl class.</p>
- *
- *
- *
  */
 public class DOMImplementationImpl implements DOMImplementation {
+
 	private final UserAgentContext context;
 
 	/**
@@ -49,7 +48,15 @@ public class DOMImplementationImpl implements DOMImplementation {
 	/** {@inheritDoc} */
 	@Override
 	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) {
-		return new HTMLDocumentImpl(this.context);
+		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
+		doc.setDoctype(doctype);
+
+		if (Strings.isNotBlank(qualifiedName)) {
+			final Element elem = doc.createElement(qualifiedName.toUpperCase());
+			doc.appendChild(elem);
+		}
+
+		return doc;
 	}
 	
 	/** {@inheritDoc} */

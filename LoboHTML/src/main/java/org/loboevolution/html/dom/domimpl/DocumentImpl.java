@@ -99,9 +99,9 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName) {
-		if (Strings.isBlank(namespaceURI) || "http://www.w3.org/1999/xhtml".equalsIgnoreCase(namespaceURI)) {
+		if (Strings.isBlank(namespaceURI) || Document.XML_NAMESPACE_URI.equalsIgnoreCase(namespaceURI)) {
 			return createElement(qualifiedName);
-		} else if ("http://www.w3.org/2000/svg".equalsIgnoreCase(namespaceURI)) {
+		} else if (Document.NAMESPACE_SVG.equalsIgnoreCase(namespaceURI)) {
 			return createElement(qualifiedName);
 		}
 		return null;
