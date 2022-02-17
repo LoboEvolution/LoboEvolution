@@ -32,7 +32,7 @@ import org.loboevolution.html.dom.HTMLImageElement;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.renderstate.ImageRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.jsenum.Decoding;
+import org.loboevolution.type.Decoding;
 import org.mozilla.javascript.Function;
 
 /**

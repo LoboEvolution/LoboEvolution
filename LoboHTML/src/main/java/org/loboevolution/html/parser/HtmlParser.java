@@ -45,7 +45,7 @@ import org.loboevolution.info.ElementInfo;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 

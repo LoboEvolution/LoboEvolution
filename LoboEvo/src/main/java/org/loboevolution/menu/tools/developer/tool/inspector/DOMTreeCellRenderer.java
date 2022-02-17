@@ -22,7 +22,7 @@ package org.loboevolution.menu.tools.developer.tool.inspector;
 
 import org.loboevolution.html.dom.domimpl.ElementImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;

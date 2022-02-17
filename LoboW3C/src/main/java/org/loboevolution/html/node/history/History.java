@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.node.history;
 
-import org.loboevolution.jsenum.ScrollRestoration;
+import org.loboevolution.type.ScrollRestoration;
 
 /**
  * Allows manipulation of the browser session history, that is the pages visited
@@ -38,14 +38,14 @@ public interface History {
 	/**
 	 * <p>getScrollRestoration.</p>
 	 *
-	 * @return a {@link org.loboevolution.jsenum.ScrollRestoration} object.
+	 * @return a {@link org.loboevolution.type.ScrollRestoration} object.
 	 */
 	ScrollRestoration getScrollRestoration();
 
 	/**
 	 * <p>setScrollRestoration.</p>
 	 *
-	 * @param scrollRestoration a {@link org.loboevolution.jsenum.ScrollRestoration} object.
+	 * @param scrollRestoration a {@link org.loboevolution.type.ScrollRestoration} object.
 	 */
 	void setScrollRestoration(ScrollRestoration scrollRestoration);
 

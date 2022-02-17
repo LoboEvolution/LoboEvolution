@@ -18,35 +18,35 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.jsenum;
+package org.loboevolution.type;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>VisibilityState class.</p>
+ * <p>ScrollRestoration class.</p>
  *
  *
  *
  */
-public enum VisibilityState {
-	HIDDEN("hidden"),
+public enum ScrollRestoration {
+	AUTO("auto"),
 
-	VISIBLE("visible");
+	MANUAL("manual");
 
 	private final String value;
-	private static final Map<String, VisibilityState> ENUM_MAP;
+	private static final Map<String, ScrollRestoration> ENUM_MAP;
 
 	static {
-		Map<String, VisibilityState> map = new HashMap<>();
-		for (VisibilityState instance : VisibilityState.values()) {
+		Map<String, ScrollRestoration> map = new HashMap<>();
+		for (ScrollRestoration instance : ScrollRestoration.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	VisibilityState(String value) {
+	ScrollRestoration(String value) {
 		this.value = value;
 	}
 
@@ -79,11 +79,11 @@ public enum VisibilityState {
 	 * </p>
 	 *
 	 * @param actionName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.jsenum} object.
+	 * @return a {@link org.loboevolution.type} object.
 	 */
-	public static VisibilityState get(String actionName) {
-		VisibilityState value = ENUM_MAP.get(actionName);
-		return value == null ? VisibilityState.VISIBLE : value;
+	public static ScrollRestoration get(String actionName) {
+		ScrollRestoration value = ENUM_MAP.get(actionName);
+		return value == null ? ScrollRestoration.AUTO : value;
 	}
 
 }

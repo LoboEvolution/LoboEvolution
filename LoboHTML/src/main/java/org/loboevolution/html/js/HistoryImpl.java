@@ -22,7 +22,7 @@ package org.loboevolution.html.js;
 import org.loboevolution.html.node.history.History;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.jsenum.ScrollRestoration;
+import org.loboevolution.type.ScrollRestoration;
 
 /**
  * The History class.

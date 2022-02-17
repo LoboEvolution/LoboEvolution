@@ -18,45 +18,45 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.jsenum;
+package org.loboevolution.type;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>Direction class.</p>
+ * <p>Mode class.</p>
  *
  *
  *
  */
-public enum Direction {
+public enum Mode {
+	
+	END_TO_END("Range.END_TO_END"),
 
-	FORWARD("forward"),
+    END_TO_START("Range.END_TO_START"),
 
-	BACKWARD("backward"),
+    START_TO_END("Range.START_TO_END"),
 
-	NONE("none");
-
-	private final String value;
-	private static final Map<String, Direction> ENUM_MAP;
-
+    START_TO_START("Range.START_TO_START");
+    
+    private final String value;
+	private static final Map<String, Mode> ENUM_MAP;
+	
 	static {
-		Map<String, Direction> map = new HashMap<>();
-		for (Direction instance : Direction.values()) {
+		Map<String, Mode> map = new HashMap<>();
+		for (Mode instance : Mode.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	Direction(String value) {
+	Mode(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * <p>
-	 * Getter for the field value.
-	 * </p>
+	 * <p>Getter for the field value.</p>
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
@@ -65,9 +65,7 @@ public enum Direction {
 	}
 
 	/**
-	 * <p>
-	 * isEqual.
-	 * </p>
+	 * <p>isEqual.</p>
 	 *
 	 * @param value a {@link java.lang.String} object.
 	 * @return a boolean.
@@ -77,16 +75,14 @@ public enum Direction {
 	}
 
 	/**
-	 * <p>
-	 * get.
-	 * </p>
+	 * <p>get.</p>
 	 *
 	 * @param actionName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.jsenum} object.
+	 * @return a {@link org.loboevolution.type} object.
 	 */
-	public static Direction get(String actionName) {
-		Direction value = ENUM_MAP.get(actionName);
-		return value == null ? Direction.NONE : value;
+	public static Mode get(String actionName) {
+		Mode value = ENUM_MAP.get(actionName);
+		return value == null ? Mode.START_TO_START : value;
 	}
 
 }

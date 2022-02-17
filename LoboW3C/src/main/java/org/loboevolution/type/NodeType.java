@@ -18,7 +18,7 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.node;
+package org.loboevolution.type;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,9 +26,6 @@ import java.util.Map;
 
 /**
  * <p>NodeType class.</p>
- *
- *
- *
  */
 public enum NodeType {
 	
@@ -84,7 +81,7 @@ public enum NodeType {
 	 * <p>get.</p>
 	 *
 	 * @param actionName a {@link java.lang.Integer} object.
-	 * @return a {@link org.loboevolution.html.node.NodeType} object.
+	 * @return a {@link NodeType} object.
 	 */
 	public static NodeType get(Integer actionName) {
 		NodeType value = ENUM_MAP.get(actionName);

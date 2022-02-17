@@ -18,14 +18,11 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.js;
-
-import java.net.URL;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package org.loboevolution.html.js.xml;
 
 import org.loboevolution.common.Urls;
+import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.http.HttpRequest;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -33,7 +30,12 @@ import org.loboevolution.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
-import org.loboevolution.html.node.Document;
+
+import java.net.URL;
+import java.util.List;
+import java.util.MissingResourceException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>XMLHttpRequest class.</p>
@@ -78,6 +80,8 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 				try {
 					final Scriptable newScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(XMLHttpRequest.this, this.scope);
 					f.call(ctx, newScope, newScope, new Object[0]);
+				} catch (MissingResourceException mre) {
+					logger.log(Level.WARNING, mre.getMessage());
 				} finally {
 					Context.exit();
 				}

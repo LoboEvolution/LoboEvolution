@@ -38,7 +38,7 @@ import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGTextElement;
 
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 
 /**
  * <p>SVGTextElementImpl class.</p>

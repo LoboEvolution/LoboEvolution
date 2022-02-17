@@ -23,7 +23,7 @@ package org.loboevolution.html.dom;
 
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ValidityState;
-import org.loboevolution.jsenum.Direction;
+import org.loboevolution.type.Direction;
 
 /**
  * Provides special properties and methods for manipulating the layout and presentation of textarea elements.

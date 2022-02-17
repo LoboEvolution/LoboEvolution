@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2022 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -33,6 +33,7 @@ import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.type.NodeType;
 
 import static org.junit.Assert.*;
 

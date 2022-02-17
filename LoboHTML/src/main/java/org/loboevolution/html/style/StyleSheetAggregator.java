@@ -39,7 +39,7 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 import org.loboevolution.html.node.Text;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.node.js.Window;

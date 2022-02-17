@@ -22,7 +22,7 @@ package org.loboevolution.html.node.events;
 
 import java.util.List;
 
-import org.loboevolution.jsenum.EventPhase;
+import org.loboevolution.type.EventPhase;
 
 /**
  * An event which takes place in the DOM.
@@ -94,7 +94,7 @@ public interface Event {
 	 * Returns the event's phase, which is one of NONE, CAPTURING_PHASE, AT_TARGET,
 	 * and BUBBLING_PHASE.
 	 *
-	 * @return a {@link org.loboevolution.jsenum.EventPhase} object.
+	 * @return a {@link org.loboevolution.type.EventPhase} object.
 	 */
 	EventPhase getEventPhase();
 

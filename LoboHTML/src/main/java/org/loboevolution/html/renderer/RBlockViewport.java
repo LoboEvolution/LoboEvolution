@@ -32,7 +32,7 @@ import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderer.info.RLayoutInfo;

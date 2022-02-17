@@ -18,45 +18,46 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.jsenum;
+package org.loboevolution.type;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * <p>Decoding class.</p>
+ * <p>EventPhase class.</p>
  *
  *
  *
  */
-public enum Decoding {
+public enum EventPhase {
+	
+	 AT_TARGET("AT_TARGET"),
 
-	ASYNC("async"),
+	 BUBBLING_PHASE("BUBBLING_PHASE"),
 
-	SYNC("sync"),
+	 CAPTURING_PHASE("CAPTURING_PHASE"),
 
-	AUTO("auto");
+	 NONE("NONE");
 
 	private final String value;
-	private static final Map<String, Decoding> ENUM_MAP;
-
+	private static final Map<String, EventPhase> ENUM_MAP;
+	
 	static {
-		Map<String, Decoding> map = new HashMap<>();
-		for (Decoding instance : Decoding.values()) {
+		Map<String, EventPhase> map = new HashMap<>();
+		for (EventPhase instance : EventPhase.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	Decoding(String value) {
+	EventPhase(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * <p>
-	 * Getter for the field value.
-	 * </p>
+	 * <p>Getter for the field value.</p>
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
@@ -65,9 +66,7 @@ public enum Decoding {
 	}
 
 	/**
-	 * <p>
-	 * isEqual.
-	 * </p>
+	 * <p>isEqual.</p>
 	 *
 	 * @param value a {@link java.lang.String} object.
 	 * @return a boolean.
@@ -77,16 +76,14 @@ public enum Decoding {
 	}
 
 	/**
-	 * <p>
-	 * get.
-	 * </p>
+	 * <p>get.</p>
 	 *
 	 * @param actionName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.jsenum} object.
+	 * @return a {@link org.loboevolution.type} object.
 	 */
-	public static Decoding get(String actionName) {
-		Decoding value = ENUM_MAP.get(actionName);
-		return value == null ? Decoding.SYNC : value;
+	public static EventPhase get(String actionName) {
+		EventPhase value = ENUM_MAP.get(actionName);
+		return value == null ? EventPhase.NONE : value;
 	}
 
 }

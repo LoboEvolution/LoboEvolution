@@ -22,7 +22,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ValidityState;
-import org.loboevolution.jsenum.Direction;
+import org.loboevolution.type.Direction;
 
 /**
  * <p>HTMLBasicInputElement class.</p>

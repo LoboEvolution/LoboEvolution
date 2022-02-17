@@ -18,46 +18,42 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.jsenum;
+package org.loboevolution.type;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * <p>EventPhase class.</p>
+ * <p>VisibilityState class.</p>
  *
  *
  *
  */
-public enum EventPhase {
-	
-	 AT_TARGET("AT_TARGET"),
+public enum VisibilityState {
+	HIDDEN("hidden"),
 
-	 BUBBLING_PHASE("BUBBLING_PHASE"),
-
-	 CAPTURING_PHASE("CAPTURING_PHASE"),
-
-	 NONE("NONE");
+	VISIBLE("visible");
 
 	private final String value;
-	private static final Map<String, EventPhase> ENUM_MAP;
-	
+	private static final Map<String, VisibilityState> ENUM_MAP;
+
 	static {
-		Map<String, EventPhase> map = new HashMap<>();
-		for (EventPhase instance : EventPhase.values()) {
+		Map<String, VisibilityState> map = new HashMap<>();
+		for (VisibilityState instance : VisibilityState.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	EventPhase(String value) {
+	VisibilityState(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * <p>Getter for the field value.</p>
+	 * <p>
+	 * Getter for the field value.
+	 * </p>
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
@@ -66,7 +62,9 @@ public enum EventPhase {
 	}
 
 	/**
-	 * <p>isEqual.</p>
+	 * <p>
+	 * isEqual.
+	 * </p>
 	 *
 	 * @param value a {@link java.lang.String} object.
 	 * @return a boolean.
@@ -76,14 +74,16 @@ public enum EventPhase {
 	}
 
 	/**
-	 * <p>get.</p>
+	 * <p>
+	 * get.
+	 * </p>
 	 *
 	 * @param actionName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.jsenum} object.
+	 * @return a {@link org.loboevolution.type} object.
 	 */
-	public static EventPhase get(String actionName) {
-		EventPhase value = ENUM_MAP.get(actionName);
-		return value == null ? EventPhase.NONE : value;
+	public static VisibilityState get(String actionName) {
+		VisibilityState value = ENUM_MAP.get(actionName);
+		return value == null ? VisibilityState.VISIBLE : value;
 	}
 
 }

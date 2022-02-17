@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom;
 
-import org.loboevolution.jsenum.Decoding;
+import org.loboevolution.type.Decoding;
 
 /**
  * Provides special properties and methods for manipulating &lt;img&gt; elements.
@@ -113,7 +113,7 @@ public interface HTMLImageElement extends HTMLElement {
     /**
      * <p>getDecoding.</p>
      *
-     * @return a {@link org.loboevolution.jsenum.Decoding} object.
+     * @return a {@link org.loboevolution.type.Decoding} object.
      */
     Decoding getDecoding();
 
@@ -121,7 +121,7 @@ public interface HTMLImageElement extends HTMLElement {
     /**
      * <p>setDecoding.</p>
      *
-     * @param decoding a {@link org.loboevolution.jsenum.Decoding} object.
+     * @param decoding a {@link org.loboevolution.type.Decoding} object.
      */
     void setDecoding(Decoding decoding);
 

@@ -25,7 +25,7 @@ package org.loboevolution.html.dom.nodeimpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLSlotElement;
 import org.loboevolution.html.dom.domimpl.CharacterDataImpl;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 import org.loboevolution.html.node.Text;
 
 /**

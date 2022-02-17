@@ -33,7 +33,7 @@ import org.apache.xpath.res.XPATHErrorResources;
 import org.apache.xpath.res.XPATHMessages;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 

@@ -18,7 +18,7 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.js;
+package org.loboevolution.html.js.xml;
 
 import java.io.File;
 import java.util.logging.Logger;
@@ -45,8 +45,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeIterator;
 import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.NodeType;
-import org.loboevolution.html.node.ParentNode;
+import org.loboevolution.type.NodeType;
 import org.loboevolution.html.node.ProcessingInstruction;
 import org.loboevolution.html.node.Range;
 import org.loboevolution.html.node.Selection;
@@ -58,8 +57,8 @@ import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
-import org.loboevolution.jsenum.DocumentReadyState;
-import org.loboevolution.jsenum.VisibilityState;
+import org.loboevolution.type.DocumentReadyState;
+import org.loboevolution.type.VisibilityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;

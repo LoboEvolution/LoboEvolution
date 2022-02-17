@@ -24,20 +24,14 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLHeadElement;
 import org.loboevolution.html.dom.HTMLScriptElement;
-import org.loboevolution.html.node.CDATASection;
-import org.loboevolution.html.node.Comment;
-import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
-import org.loboevolution.jsenum.DocumentReadyState;
-import org.loboevolution.jsenum.VisibilityState;
+import org.loboevolution.type.DocumentReadyState;
+import org.loboevolution.type.VisibilityState;
 
 /**
  * Any web page loaded in the browser and serves as an entry point into the web
@@ -415,7 +409,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode {
 	/**
 	 * Retrieves a value that indicates the current state of the object.
 	 *
-	 * @return a {@link org.loboevolution.jsenum.DocumentReadyState} object.
+	 * @return a {@link org.loboevolution.type.DocumentReadyState} object.
 	 */
 	DocumentReadyState getReadyState();
 
@@ -457,7 +451,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode {
 	/**
 	 * <p>getVisibilityState.</p>
 	 *
-	 * @return a {@link org.loboevolution.jsenum.VisibilityState} object.
+	 * @return a {@link org.loboevolution.type.VisibilityState} object.
 	 */
 	VisibilityState getVisibilityState();
 

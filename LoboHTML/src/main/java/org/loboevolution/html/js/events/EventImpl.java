@@ -20,7 +20,7 @@
 package org.loboevolution.html.js.events;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.jsenum.EventPhase;
+import org.loboevolution.type.EventPhase;
 
 import java.util.List;
 

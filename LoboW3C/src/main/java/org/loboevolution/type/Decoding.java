@@ -18,38 +18,38 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.jsenum;
+package org.loboevolution.type;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>DocumentReadyState class.</p>
+ * <p>Decoding class.</p>
  *
  *
  *
  */
-public enum DocumentReadyState {
+public enum Decoding {
 
-	LOADING("loading"),
+	ASYNC("async"),
 
-	INTERACTIVE("interactive"),
+	SYNC("sync"),
 
-	COMPLETE("complete");
+	AUTO("auto");
 
 	private final String value;
-	private static final Map<String, DocumentReadyState> ENUM_MAP;
+	private static final Map<String, Decoding> ENUM_MAP;
 
 	static {
-		Map<String, DocumentReadyState> map = new HashMap<>();
-		for (DocumentReadyState instance : DocumentReadyState.values()) {
+		Map<String, Decoding> map = new HashMap<>();
+		for (Decoding instance : Decoding.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	DocumentReadyState(String value) {
+	Decoding(String value) {
 		this.value = value;
 	}
 
@@ -82,10 +82,11 @@ public enum DocumentReadyState {
 	 * </p>
 	 *
 	 * @param actionName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.jsenum} object.
+	 * @return a {@link org.loboevolution.type} object.
 	 */
-	public static DocumentReadyState get(String actionName) {
-		DocumentReadyState value = ENUM_MAP.get(actionName);
-		return value == null ? DocumentReadyState.COMPLETE : value;
+	public static Decoding get(String actionName) {
+		Decoding value = ENUM_MAP.get(actionName);
+		return value == null ? Decoding.SYNC : value;
 	}
+
 }

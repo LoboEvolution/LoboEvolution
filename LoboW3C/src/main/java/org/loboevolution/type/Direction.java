@@ -18,35 +18,38 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.jsenum;
+package org.loboevolution.type;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>ScrollRestoration class.</p>
+ * <p>Direction class.</p>
  *
  *
  *
  */
-public enum ScrollRestoration {
-	AUTO("auto"),
+public enum Direction {
 
-	MANUAL("manual");
+	FORWARD("forward"),
+
+	BACKWARD("backward"),
+
+	NONE("none");
 
 	private final String value;
-	private static final Map<String, ScrollRestoration> ENUM_MAP;
+	private static final Map<String, Direction> ENUM_MAP;
 
 	static {
-		Map<String, ScrollRestoration> map = new HashMap<>();
-		for (ScrollRestoration instance : ScrollRestoration.values()) {
+		Map<String, Direction> map = new HashMap<>();
+		for (Direction instance : Direction.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	ScrollRestoration(String value) {
+	Direction(String value) {
 		this.value = value;
 	}
 
@@ -79,11 +82,11 @@ public enum ScrollRestoration {
 	 * </p>
 	 *
 	 * @param actionName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.jsenum} object.
+	 * @return a {@link org.loboevolution.type} object.
 	 */
-	public static ScrollRestoration get(String actionName) {
-		ScrollRestoration value = ENUM_MAP.get(actionName);
-		return value == null ? ScrollRestoration.AUTO : value;
+	public static Direction get(String actionName) {
+		Direction value = ENUM_MAP.get(actionName);
+		return value == null ? Direction.NONE : value;
 	}
 
 }

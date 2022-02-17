@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.node;
 
-import org.loboevolution.jsenum.Mode;
+import org.loboevolution.type.Mode;
 
 /**
  * A fragment of a document that can contain nodes and parts of text nodes.
@@ -66,7 +66,7 @@ public interface Range {
     /**
      * <p>compareBoundaryPoints.</p>
      *
-     * @param how a {@link org.loboevolution.jsenum.Mode} object.
+     * @param how a {@link org.loboevolution.type.Mode} object.
      * @param sourceRange a {@link org.loboevolution.html.node.Range} object.
      * @return a int.
      */

@@ -23,7 +23,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 
 /**
  * <p>

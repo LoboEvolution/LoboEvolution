@@ -23,8 +23,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.type.NodeType;
 
 /**
  * <p>DocumentTypeImpl class.</p>

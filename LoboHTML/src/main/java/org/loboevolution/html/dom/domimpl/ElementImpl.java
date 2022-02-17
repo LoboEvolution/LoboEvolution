@@ -42,6 +42,7 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.type.NodeType;
 
 import javax.swing.*;
 import java.awt.*;

@@ -18,45 +18,45 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.jsenum;
+package org.loboevolution.type;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>Mode class.</p>
+ * <p>DocumentReadyState class.</p>
  *
  *
  *
  */
-public enum Mode {
-	
-	END_TO_END("Range.END_TO_END"),
+public enum DocumentReadyState {
 
-    END_TO_START("Range.END_TO_START"),
+	LOADING("loading"),
 
-    START_TO_END("Range.START_TO_END"),
+	INTERACTIVE("interactive"),
 
-    START_TO_START("Range.START_TO_START");
-    
-    private final String value;
-	private static final Map<String, Mode> ENUM_MAP;
-	
+	COMPLETE("complete");
+
+	private final String value;
+	private static final Map<String, DocumentReadyState> ENUM_MAP;
+
 	static {
-		Map<String, Mode> map = new HashMap<>();
-		for (Mode instance : Mode.values()) {
+		Map<String, DocumentReadyState> map = new HashMap<>();
+		for (DocumentReadyState instance : DocumentReadyState.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	Mode(String value) {
+	DocumentReadyState(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * <p>Getter for the field value.</p>
+	 * <p>
+	 * Getter for the field value.
+	 * </p>
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
@@ -65,7 +65,9 @@ public enum Mode {
 	}
 
 	/**
-	 * <p>isEqual.</p>
+	 * <p>
+	 * isEqual.
+	 * </p>
 	 *
 	 * @param value a {@link java.lang.String} object.
 	 * @return a boolean.
@@ -75,14 +77,15 @@ public enum Mode {
 	}
 
 	/**
-	 * <p>get.</p>
+	 * <p>
+	 * get.
+	 * </p>
 	 *
 	 * @param actionName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.jsenum} object.
+	 * @return a {@link org.loboevolution.type} object.
 	 */
-	public static Mode get(String actionName) {
-		Mode value = ENUM_MAP.get(actionName);
-		return value == null ? Mode.START_TO_START : value;
+	public static DocumentReadyState get(String actionName) {
+		DocumentReadyState value = ENUM_MAP.get(actionName);
+		return value == null ? DocumentReadyState.COMPLETE : value;
 	}
-
 }

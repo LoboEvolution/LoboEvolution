@@ -18,28 +18,16 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.js;
+package org.loboevolution.html.js.xml;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
-import java.io.StringWriter;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.HTMLHeadElement;
 
 /**
  * <p>XMLSerializer class.</p>
