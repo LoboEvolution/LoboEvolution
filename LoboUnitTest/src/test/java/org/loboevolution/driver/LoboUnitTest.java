@@ -22,9 +22,12 @@ package org.loboevolution.driver;
 
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.style.ComputedCSSStyleDeclaration;
+import org.loboevolution.junit.HTMLDocumentTest;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,6 +56,13 @@ public class LoboUnitTest extends LoboWebDriver {
         ComputedCSSStyleDeclaration computedStyle2 = (ComputedCSSStyleDeclaration) window.getComputedStyle(div2);
         assertEquals(result1, computedStyle.getColor());
         assertEquals(result2, computedStyle2.getColor());
+    }
+
+    /**
+     * <p>sampleHtmlFile.</p>.
+     */
+    public static Document sampleHtmlFile() {
+        return loadHtml(HTMLDocumentTest.class.getResourceAsStream("/org/lobo/html/htmlsample.html"));
     }
 
     /**

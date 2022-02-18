@@ -38,7 +38,7 @@ public class DOMImplementationTest extends LoboUnitTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-        UserAgentContext context = new UserAgentContext();
+        UserAgentContext context = new UserAgentContext(true);
         context.setUserAgentEnabled(false);
         domImpl = new DOMImplementationImpl(context);
     }

@@ -43,10 +43,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		UserAgentContext context = new UserAgentContext();
-		context.setUserAgentEnabled(false);
-		DOMImplementationImpl domImpl = new DOMImplementationImpl(context);
-		document = domImpl.createDocument(null, "HTML", null);
+		document = sampleHtmlFile();
 	}
 
 	@Test
@@ -90,15 +87,15 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertNull(attr.getParentNode());
 		assertEquals("style", attr.getName());
 		assertEquals("style", attr.getNodeName());
-		assertEquals("display: block; ", attr.getValue());
-		assertEquals("display: block; ", attr.getNodeValue());
+		assertEquals("display:block", attr.getValue());
+		assertEquals("display:block", attr.getNodeValue());
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		assertNull(html.getStyle());
 		html.setAttributeNode(attr);
 		CSSStyleDeclarationImpl style = html.getStyle().getStyleDeclarations().get(0);
 		assertNotNull(style);
-		assertEquals("display: block; ", style.getCssText());
-		assertEquals("display: block; ", html.getAttribute("style"));
+		assertEquals("display:block", style.getCssText());
+		assertEquals("display:block", html.getAttribute("style"));
 		style.setCssText("margin-top: 10%");
 		assertEquals("margin-top: 10%; ", html.getAttribute("style"));
 	}

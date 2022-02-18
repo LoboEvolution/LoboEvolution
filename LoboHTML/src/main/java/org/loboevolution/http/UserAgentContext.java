@@ -34,9 +34,17 @@ import java.util.List;
  */
 public class UserAgentContext {
 
-	final GeneralInfo settings = GeneralStore.getGeneralInfo();
+	private GeneralInfo settings;
 
 	private boolean userAgentEnabled = false;
+
+	public UserAgentContext(){
+		settings = GeneralStore.getGeneralInfo();
+	}
+
+	public UserAgentContext(boolean test){
+		settings = !test ? GeneralStore.getGeneralInfo() : GeneralInfo.builder().build();
+	}
 
 	/**
 	 * <p>createHttpRequest.</p>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example HTML file</title>
+<meta name="referrer" content="same-origin"/>
+<link href="http://www.example.com/css/common.css" rel="stylesheet" type="text/css" referrerpolicy="strict-origin" />
+<link href="http://www.example.com/css/alter1.css" rel="alternate stylesheet" type="text/css" title="Alter 1" />
+<link href="http://www.example.com/css/alter2.css" rel="alternate stylesheet" type="text/css" title="Alter 2" />
+<link href="http://www.example.com/css/default.css" rel="stylesheet" type="text/css" title="Default" />
+<link href="http://www.example.com/media/print.css" rel="stylesheet" media="print" type="text/css" />
+<style type="text/css">
+body {
+font-family: Arial, Helvetica;
+font-size: 12pt;
+margin-left: 5%;
+margin-right: 5%;
+margin-top: 3em;
+margin-bottom: 4em;
+background-color: white;
+width: 900px;
+}
+h1 {
+  font-size: 3em;
+  font-weight: bold;
+  margin: .67em 0;
+}
+h2 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: .83em 0;
+}
+h3 {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 1em 0;
+  border-width: 2pt;
+  border-style: none;
+  content: "  foo  bar  ";
+}
+p {margin-right: 1%;}
+@media print {
+    body { font-size: 10pt}
+    #span1 {font-size: 8pt}
+}
+@media screen {
+    body { font-size: 14pt }
+    p {font-size: 16pt}
+    #span1 {font-size: 20pt}
+}
+p.boldmargin {font-weight: bold; margin-left: 2%; border: solid blue; }
+p.smallitalic {font-size: small; font-style: italic; margin-left: 2%;}
+#tablepara {color: green; margin: 1em 2em 3em;}
+#tablerow1 {margin: 5pt; }
+#cell12 {padding:4pt 6pt;margin-left:5pt;}
+ul, ol {margin-top: 1em; margin-bottom: 2em;}
+li {margin-top: 1em; margin-bottom: 1em;}
+div.test1 {margin-top: 2em; margin-bottom: 3em; background-position: 20% 0%; padding-left: calc((10% - 3em) - max(6px, 1em)); }
+</style>
+<base href="http://www.example.com/" />
+</head>
+<body>
+<h1 id="h1" style="background: url(headerbg.png);">Header 1</h1>
+<p id="para1" class="boldmargin">Paragraph <span ID="entity" class="ent&quot;ity">&lt;&gt;</span></p><p id="para2">Paragraph 2 with a <span id="span1">span</span>.</p>
+<h2 id="h2">Header 2</h2>
+<p id="smip" class="smallitalic">New paragraph</p>
+<p id="tablepara">Then, one <span style="font-size: 150%">table</span>:</p>
+<table class="tableclass">
+<tr id="tablerow1" style="margin: 10px"><th>Header 1</th><th>Header 2</th><th>Header 3</th></tr>
+<tr><td>Cell</td><td>Cell</td><td id="cell12">Cell</td></tr>
+<tr><td>Cell</td><td>Cell</td><td>Cell</td></tr>
+<tr><td>Cell</td><td>Cell</td><td>Cell</td></tr>
+<tr><td>Cell</td><td>Cell</td><td>Cell</td></tr>
+<tr><td>Cell</td><td>Cell</td><td>Cell</td></tr>
+<tr><td>Cell</td><td>Cell</td><td>Cell</td></tr>
+<tr><td>Cell</td><td>Cell</td><td><img id="fooimg" src="foo.png" alt="Foo image" height="180" width="200"/></td></tr>
+</table>
+<h3 id="firstH3" style="font-family: 'Does Not Exist', Neither; color: navy">Header 3</h3>
+<div id="div1" class="test1" data-foo="bar" data-bar="foo">
+<p id="listpara" style="font-family: 'Does Not Exist', Neither, Helvetica; padding-left: inherit">Now, a <nonexistenttag>list</nonexistenttag>:</p>
+<ul id="ul1">
+<li ID="ul1li1" class="liclass" STYLE="color: blue">List item 1</li>
+<li class="liclass">List item 2</li>
+<li class="liclass">List item 3</li>
+<li class="liclass">List item 4</li>
+<li class="liclass">List <span ID="entiacute">&iacute;tem</span> 5</li>
+<li class="liclass"><a href="li6dir" id="inflink">List item &infin;</a></li>
+</ul>
+<form id="loginform1" action="/servlet/login1">
+<label for="name">Username:</label>
+<input type="text" id="username" name="Username" data-default-user="foo_user" value="foo_user"/>
+<label for="passwd">Password:</label>
+<input type="text" id="passwd" name="Password"/>
+<button type="submit">Login</button>
+</form>
+<!-- An html-friendly svg element -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" id="svg1" style="width:100%; height:100%;">
+  <rect x="0" y="0" width="100" height="100" fill="yellow" />
+  <style>
+text.foo {
+  font-size: 9pt;
+}
+  </style>
+</svg>
+</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2022 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -36,6 +36,12 @@ import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSRuleList;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.type.NodeType;
+
+import java.awt.color.ICC_Profile;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import static org.junit.Assert.*;
 
@@ -45,10 +51,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-        UserAgentContext context = new UserAgentContext();
-        context.setUserAgentEnabled(false);
-        DOMImplementationImpl domImpl = new DOMImplementationImpl(context);
-        document = domImpl.createDocument(null, null, null);
+        document = sampleHtmlFile();
     }
 
     @Test
@@ -56,7 +59,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         DocumentType docType = document.getDoctype();
         assertNotNull(docType);
         assertEquals("html", docType.getName());
-        assertEquals("<!DOCTYPE html>", docType.toString());
+        assertEquals("html", docType.toString());
     }
 
     @Test
@@ -143,7 +146,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     public void testAppendChildTwoDoctypesError() throws DOMException {
-        UserAgentContext context = new UserAgentContext();
+        UserAgentContext context = new UserAgentContext(true);
         context.setUserAgentEnabled(false);
         Document document = new DOMImplementationImpl(context).createDocument(null, null, null);
         document.appendChild(document.getImplementation().createDocumentType("foo", null, null));
@@ -491,17 +494,17 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertEquals("id=\"para&gt;Id\"", attr.toString());
         attr.setValue("para<Id");
         assertEquals("para<Id", attr.getValue());
-        assertEquals("id=\"para&lt;Id\"", attr.toString());
+        assertEquals("[object Attr]", attr.toString());
 
         p.setAttribute("class", "\"fooclass&");
         assertEquals("\"fooclass&", p.getAttribute("class"));
         attr = p.getAttributeNode("class");
-        assertEquals("class=\"&quot;fooclass&amp;\"", attr.toString());
+        assertEquals("[object Attr]", attr.toString());
 
         p.setAttribute("foo", "bar\"");
         assertEquals("bar\"", p.getAttribute("foo"));
         attr = p.getAttributeNode("foo");
-        assertEquals("foo=\"bar&quot;\"", attr.toString());
+        assertEquals("[object Attr]", attr.toString());
     }
 
     @Test
@@ -551,7 +554,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testProcessingInstruction() {
         ProcessingInstruction pi = document.createProcessingInstruction("xml-stylesheet",
                 "type=\"text/xsl\" href=\"style.xsl\"");
-        assertEquals("<?xml-stylesheet type=\"text/xsl\" href=\"style.xsl\"?>", pi.toString());
+        assertEquals("[object HTMLProcessingElement]", pi.toString());
         Node clone = pi.cloneNode(false);
         assertNotNull(clone);
         assertEquals(pi.getNodeType(), clone.getNodeType());
@@ -1112,7 +1115,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testRawText() {
         Element style = (Element) document.getElementsByTagName("style").item(0);
         Text text = document.createTextNode("data");
-        assertEquals("data", text.toString());
+        assertEquals("[object Text]", text.toString());
         text.setData("hello</style>");
         assertEquals("hello&lt;/style&gt;", text.toString());
         style.appendChild(text);

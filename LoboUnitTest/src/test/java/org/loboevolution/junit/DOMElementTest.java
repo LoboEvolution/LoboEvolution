@@ -43,10 +43,7 @@ public class DOMElementTest extends LoboUnitTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		UserAgentContext context = new UserAgentContext();
-		context.setUserAgentEnabled(false);
-		DOMImplementationImpl domImpl = new DOMImplementationImpl(context);
-		document = domImpl.createDocument(null, "HTML", null);
+		document = sampleHtmlFile();
 	}
 
 	@Test

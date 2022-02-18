@@ -39,10 +39,10 @@ public class DOMNodeTest extends LoboUnitTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		UserAgentContext context = new UserAgentContext();
+		UserAgentContext context = new UserAgentContext(true);
 		context.setUserAgentEnabled(false);
-		DOMImplementationImpl domImpl = new DOMImplementationImpl(context);
-		document = domImpl.createDocument(null, null, null);
+		impl = new DOMImplementationImpl(context);
+		document = sampleHtmlFile();
 	}
 
 	@Test
@@ -94,7 +94,7 @@ public class DOMNodeTest extends LoboUnitTest {
 	}
 
 	private int buildTree(Node currnode, int baseindex, int depth, int maxindex) {
-		Element elm = null;
+		Element elm;
 		for (int i = 0; i < maxindex; i++) {
 			elm = document.createElement("p");
 			elm.setAttribute("index", Integer.toString(baseindex));
@@ -455,7 +455,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		//
 		DocumentFragment fragment = createDocumentFragment();
 		try {
-			((ParentNode) fragment).prependChild(docType);
+			fragment.prependChild(docType);
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(docType.getParentNode());
@@ -470,8 +470,8 @@ public class DOMNodeTest extends LoboUnitTest {
 		assertSame(pi, text.getNextSibling());
 		assertSame(text, pi.getPreviousSibling());
 		assertSame(appended, elm.getChildNodes().item(0));
-		assertNull(((NonDocumentTypeChildNode) text).getNextElementSibling());
-		assertNull(((NonDocumentTypeChildNode) text).getPreviousElementSibling());
+		assertNull(text.getNextElementSibling());
+		assertNull(text.getPreviousElementSibling());
 		// Test appending to void elements
 		Element head = document.createElement("head");
 		html.prependChild(head);
@@ -704,8 +704,8 @@ public class DOMNodeTest extends LoboUnitTest {
 		assertSame(pi, text.getPreviousSibling());
 		assertSame(text, pi.getNextSibling());
 		assertSame(appended, elm.getChildNodes().item(1));
-		assertNull(((NonDocumentTypeChildNode) text).getNextElementSibling());
-		assertNull(((NonDocumentTypeChildNode) text).getPreviousElementSibling());
+		assertNull(text.getNextElementSibling());
+		assertNull(text.getPreviousElementSibling());
 		// Test appending to void elements
 		Element head = document.createElement("head");
 		html.appendChild(head);

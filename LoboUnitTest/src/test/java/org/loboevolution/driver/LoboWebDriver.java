@@ -27,7 +27,11 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 
 import java.awt.*;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
 /**
@@ -48,18 +52,42 @@ public class LoboWebDriver {
 		HTMLDocumentImpl doc = null;
 		try {
 			WritableLineReader wis = new WritableLineReader(new StringReader(html));
-			UserAgentContext context = new UserAgentContext();
-			final UserAgentContext ucontext = new UserAgentContext();
+			final UserAgentContext ucontext = new UserAgentContext(true);
 			HtmlPanel panel = new HtmlPanel();
 			panel.setPreferredSize(new Dimension(800, 400));
 			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
 			rendererContext.setTest(true);
 			ucontext.setUserAgentEnabled(true);
-			doc = new HTMLDocumentImpl(context, rendererContext, wis, "http://www.example.com/");
+			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, "http://www.example.com/");
 			doc.load();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return doc;
 	}
+
+	/**
+	 * <p>loadHtml.</p>
+	 *
+	 * @param in a {@link java.io.InputStream} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
+	 */
+	protected static HTMLDocumentImpl loadHtml(InputStream in) {
+		HTMLDocumentImpl doc = null;
+		try {
+			WritableLineReader wis = new WritableLineReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+			final UserAgentContext ucontext = new UserAgentContext(true);
+			HtmlPanel panel = new HtmlPanel();
+			panel.setPreferredSize(new Dimension(800, 400));
+			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
+			rendererContext.setTest(true);
+			ucontext.setUserAgentEnabled(true);
+			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, "http://www.example.com/");
+			doc.load();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return doc;
+	}
+
 }

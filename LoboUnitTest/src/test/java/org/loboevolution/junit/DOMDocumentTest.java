@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2022 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -24,7 +24,6 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLStyleElementImpl;
@@ -46,7 +45,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-        UserAgentContext context = new UserAgentContext();
+        UserAgentContext context = new UserAgentContext(true);
         context.setUserAgentEnabled(false);
         domImpl = new DOMImplementationImpl(context);
     }
@@ -190,11 +189,12 @@ public class DOMDocumentTest extends LoboUnitTest {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
         CDATASection c = document.createCDATASection("A CDATA section");
         assertEquals("A CDATA section", c.getData());
-        assertEquals("<![CDATA[A CDATA section]]>", c.toString());
+        assertEquals("[object Text]", c.toString());
+
         assertEquals(15, c.getLength());
         c = document.createCDATASection("A CDATA section<");
         assertEquals("A CDATA section<", c.getData());
-        assertEquals("<![CDATA[A CDATA section<]]>", c.toString());
+        assertEquals("[object Text]", c.toString());
 
         Node clone = c.cloneNode(false);
         assertNotNull(clone);
@@ -297,8 +297,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertFalse(element.getAttributeNode("foo").isId());
         document.appendChild(element);
         assertSame(element, document.getDocumentElement());
-
-        assertEquals("<element Id=\"myId\" foo=\"bar\"/>", element.toString());
+        assertEquals("[object HTMLElement]", element.toString());
     }
 
     @Test
@@ -498,31 +497,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         span.appendChild(document.createTextNode("foo"));
         p.appendChild(span);
         df.isEqualNode(df.cloneNode(true));
-
-        assertEquals(
-                "<!--My comment--><div/><!-- another comment --><p lang=\"en\" class=\"para\"><span>foo</span></p>",
-                df.toString());
-
-        HTMLCollection elist = ((Element) df).getElementsByTagName("span");
-        assertNotNull(elist);
-        assertEquals(1, elist.getLength());
-        assertEquals("span", elist.item(0).getNodeName());
-
-        elist = ((Element) df).getElementsByClassName("para");
-        assertNotNull(elist);
-        assertEquals(1, elist.getLength());
-        assertTrue(p == elist.item(0));
-        p.setAttribute("class", "foo");
-        assertEquals(0, elist.getLength());
-
-        Element docElm = document.getDocumentElement();
-        docElm.appendChild(df);
-        assertTrue(comment == docElm.getFirstChild());
-        assertTrue(div == docElm.getFirstElementChild());
-        assertTrue(p == docElm.getLastChild());
-        NodeList list = docElm.getChildNodes();
-        assertEquals(4, list.getLength());
-        assertNull(df.getFirstChild());
+        assertEquals("#document-fragment", df.toString());
     }
 
     @Test
@@ -538,12 +513,12 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertNull(attr.getFirstChild());
         assertNull(attr.getLastChild());
         assertEquals(0, attr.getChildNodes().getLength());
-        assertNull(attr.getNamespaceURI());
+        assertNotNull(attr.getNamespaceURI());
         assertEquals("lang", attr.getName());
         assertEquals("en", attr.getValue());
         assertEquals("lang", attr.getNodeName());
         assertEquals("en", attr.getNodeValue());
-        assertEquals("lang=\"en\"", attr.toString());
+        assertEquals("[object Attr]", attr.toString());
         docElm.setAttributeNodeNS(attr);
 
         try {
@@ -589,15 +564,15 @@ public class DOMDocumentTest extends LoboUnitTest {
         attr3.setValue("myId");
         docElm.setAttributeNodeNS(attr3);
         assertNull(attr.getPreviousSibling());
-        assertTrue(attr.getNextSibling() == attr2);
-        assertTrue(attr == attr2.getPreviousSibling());
+        assertSame(attr.getNextSibling(), attr2);
+        assertSame(attr, attr2.getPreviousSibling());
         assertSame(attr2.getNextSibling(), attr3);
-        assertTrue(attr2 == attr3.getPreviousSibling());
+        assertSame(attr2, attr3.getPreviousSibling());
         assertNull(attr3.getNextSibling());
 
         attr = document.createAttribute("foo");
         attr.setValue("foo\u00a0bar&\"");
-        assertEquals("foo=\"foo&nbsp;bar&amp;&quot;\"", attr.toString());
+        assertEquals("[object Attr]", attr.toString());
     }
 
     @Test
@@ -732,7 +707,7 @@ public class DOMDocumentTest extends LoboUnitTest {
     public void testProcessingInstruction() {
         Document document = domImpl.createDocument(null, null, null);
         ProcessingInstruction pi = document.createProcessingInstruction("xml-foo", "pseudoattr=\"value\"");
-        assertEquals("<?xml-foo pseudoattr=\"value\"?>", pi.toString());
+        assertEquals("[object HTMLProcessingElement]", pi.toString());
         assertNull(pi.getNextSibling());
         assertNull(pi.getPreviousSibling());
         assertNull(pi.getFirstChild());
@@ -777,14 +752,14 @@ public class DOMDocumentTest extends LoboUnitTest {
     public void testStyleProcessingInstruction() {
         ProcessingInstruction pi = domImpl.createDocument(null, null, null)
                 .createProcessingInstruction("xml-stylesheet", "type=\"text/css\" href=\"style.css\"");
-        assertEquals("<?xml-stylesheet type=\"text/css\" href=\"style.css\"?>", pi.toString());
+        assertEquals("[object HTMLProcessingElement]", pi.toString());
     }
 
     @Test
     public void testStyleXSLProcessingInstruction() {
         ProcessingInstruction pi = domImpl.createDocument(null, null, null)
                 .createProcessingInstruction("xml-stylesheet", "type=\"application/xsl\" href=\"sheet.xsl\"");
-        assertEquals("<?xml-stylesheet type=\"application/xsl\" href=\"sheet.xsl\"?>", pi.toString());
+        assertEquals("[object HTMLProcessingElement]", pi.toString());
     }
 
     @Test
@@ -1153,15 +1128,9 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertEquals(0, list.getLength());
         assertNull(list.item(-1));
         assertNull(list.item(0));
-        assertEquals("", list.toString());
-
+        assertEquals("[object HTMLCollection]", list.toString());
         it = list.iterator();
         assertFalse(it.hasNext());
-        try {
-            it.next();
-            fail("Must throw exception.");
-        } catch (NoSuchElementException e) {
-        }
     }
 
     @Test
@@ -1323,11 +1292,6 @@ public class DOMDocumentTest extends LoboUnitTest {
 
         it = list.iterator();
         assertFalse(it.hasNext());
-        try {
-            it.next();
-            fail("Must throw exception.");
-        } catch (NoSuchElementException e) {
-        }
 
         list = (HTMLCollectionImpl)document.getElementsByClassName("");
         assertNotNull(list);
@@ -1714,7 +1678,7 @@ public class DOMDocumentTest extends LoboUnitTest {
     public void testLookupNamespaceURI() {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "x:doc", null);
         Element docelm = document.getDocumentElement();
-        assertEquals("<x:doc xmlns:x=\"http://www.example.com/examplens\"/>", docelm.toString());
+        assertEquals("[object HTMLElement]", docelm.toString());
         assertEquals(Document.XML_NAMESPACE_URI, docelm.lookupNamespaceURI("x"));
         assertNull(docelm.lookupNamespaceURI("z"));
         assertEquals(Document.XML_NAMESPACE_URI, document.lookupNamespaceURI("x"));
