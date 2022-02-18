@@ -25,9 +25,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>ParentNode interface.</p>
- *
- *
- *
  */
 public interface ParentNode extends Node {
 

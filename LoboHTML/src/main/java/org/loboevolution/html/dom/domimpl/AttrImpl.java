@@ -134,6 +134,10 @@ public class AttrImpl extends AttrAbstract {
 		return this.isId;
 	}
 
+	public void setIsId(boolean isId){
+		this.isId = isId;
+	}
+
 	/**
 	 * <p>setId.</p>
 	 *

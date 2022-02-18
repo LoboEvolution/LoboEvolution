@@ -22,7 +22,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
@@ -555,12 +554,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		synchronized (this) {
 			this.elementsByName.remove(name);
 		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Node renameNode(Node n, String namespaceURI, String qualifiedName) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No renaming");
 	}
 
 	/**

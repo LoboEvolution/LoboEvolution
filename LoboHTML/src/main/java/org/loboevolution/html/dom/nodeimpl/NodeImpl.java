@@ -38,6 +38,7 @@ import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.loboevolution.type.NodeType;
 import org.w3c.dom.UserDataHandler;
 
 import java.net.MalformedURLException;
@@ -68,6 +69,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	protected volatile Node parentNode;
 
 	private volatile String prefix;
+
+	private String namespaceURI;
 
 	private RenderState renderState = INVALID_RENDER_STATE;
 
@@ -504,7 +507,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public String getNamespaceURI() {
-		return null;
+		return Strings.isBlank(namespaceURI)  ? Document.HTML_NAMESPACE_URI : namespaceURI;
 	}
 
 	/** {@inheritDoc} */
@@ -939,7 +942,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public boolean isDefaultNamespace(String namespaceURI) {
-		return namespaceURI == null;
+		return Document.HTML_NAMESPACE_URI.equals(namespaceURI);
 	}
 
 	/** {@inheritDoc} */
@@ -1246,6 +1249,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
+	}
+
+	public void setNamespaceURI(String namespaceURI) {
+		this.namespaceURI = namespaceURI;
 	}
 
 	/** {@inheritDoc} */

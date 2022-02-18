@@ -21,12 +21,14 @@
 package org.loboevolution.html.dom.domimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.common.Nodes;
-import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.*;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
 import org.loboevolution.html.dom.xpath.XPathEvaluatorImpl;
 import org.loboevolution.html.io.LocalWritableLineReader;
@@ -37,20 +39,24 @@ import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.style.CSSUtilities;
+import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.html.xpath.XPathEvaluator;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.jsenum.DocumentReadyState;
-import org.loboevolution.jsenum.VisibilityState;
+import org.loboevolution.type.DocumentReadyState;
+import org.loboevolution.type.VisibilityState;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * <p>DocumentImpl class.</p>
@@ -99,18 +105,114 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName) {
-		if (Strings.isBlank(namespaceURI) || Document.XML_NAMESPACE_URI.equalsIgnoreCase(namespaceURI)) {
-			return createElement(qualifiedName);
-		} else if (Document.NAMESPACE_SVG.equalsIgnoreCase(namespaceURI)) {
-			return createElement(qualifiedName);
-		}
-		return null;
+		ElementImpl elem = (ElementImpl) createElement(qualifiedName);
+		elem.setNamespaceURI(namespaceURI);
+		return elem;
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName, String options) {
 		return createElementNS(namespaceURI, qualifiedName);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getElementsByClassName(String classNames) {
+		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ClassNameFilter(classNames)).toArray()));
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getElementsByTagName(String tagname) {
+		if ("*".equals(tagname)) {
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
+		} else {
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname)).toArray()));
+		}
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
+		HTMLCollectionImpl coll = (HTMLCollectionImpl) getElementsByTagName(localName);
+		HTMLCollectionImpl list = new HTMLCollectionImpl(this, new ArrayList<>());
+		for (Node node : coll) {
+			if ((namespaceURI == null || "*".equals(namespaceURI)) || node.getNamespaceURI().equals(namespaceURI)) {
+				list.add(node);
+			}
+		}
+		return list;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element getFirstElementChild() {
+		return (Element) nodeList.stream().filter(n -> n instanceof Element).findFirst().orElse(null);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element getLastElementChild() {
+		long count = nodeList.stream().filter(n -> n instanceof Element).count();
+		Stream<Node> stream = nodeList.stream();
+		return (Element) stream.filter(n -> n instanceof Element).skip(count - 1).findFirst().orElse(null);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public int getChildElementCount() {
+		return (int) nodeList.stream().filter(n -> n instanceof Element).count();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element querySelector(String selectors) {
+		SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+		List<Element> elem = new ArrayList<>();
+		if (selectorList != null) {
+			NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+			childNodes.forEach(child -> {
+				for (Selector selector : selectorList) {
+					if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
+						elem.add((Element)child);
+					}
+				}
+			});
+		}
+		return elem.size() > 0  ? elem.get(0) : null;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public NodeList querySelectorAll(String selector) {
+
+		final ArrayList<Node> al = new ArrayList<>();
+
+		if(selector == null) {
+			return new NodeListImpl(al);
+		}
+
+		if(selector.isEmpty()){
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "The provided selector is empty.");
+		}
+
+		if(selector.trim().isEmpty()){
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "is not a valid selector.");
+		}
+
+		SelectorList selectorList = CSSUtilities.getSelectorList(selector);
+		if (selectorList != null) {
+			NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+			childNodes.forEach(child -> {
+				for (Selector select : selectorList) {
+					if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
+						al.add(child);
+					}
+				}
+			});
+		}
+		return new NodeListImpl(al);
 	}
 
 	/** {@inheritDoc} */
@@ -151,6 +253,14 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Attr createAttribute(String name) {
 		return new AttrImpl(name);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
+		AttrImpl attr = new AttrImpl(qualifiedName);
+		attr.setNamespaceURI(namespaceURI);
+		return attr;
 	}
 
 	/** {@inheritDoc} */

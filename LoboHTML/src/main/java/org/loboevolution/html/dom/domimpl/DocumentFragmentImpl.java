@@ -26,12 +26,7 @@ import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.type.NodeType;
 
 /**
- * <p>
- * DocumentFragmentImpl class.
- * </p>
- *
- *
- *
+ * <p>DocumentFragmentImpl class. </p>
  */
 public class DocumentFragmentImpl extends EventTargetImpl implements DocumentFragment {
 

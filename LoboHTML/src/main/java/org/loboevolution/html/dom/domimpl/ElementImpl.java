@@ -23,9 +23,15 @@
 package org.loboevolution.html.dom.domimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLBodyElement;
+import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.filter.ClassNameFilter;
+import org.loboevolution.html.dom.filter.ElementFilter;
+import org.loboevolution.html.dom.filter.TagNameFilter;
 import org.loboevolution.html.dom.nodeimpl.NamedNodeMapImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
@@ -40,7 +46,9 @@ import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.type.NodeType;
 
@@ -50,6 +58,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * <p>ElementImpl class.</p>
@@ -57,8 +66,6 @@ import java.util.*;
 public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	private final NamedNodeMapImpl map;
-
-	private String id;
 
 	private final String name;
 	
@@ -76,31 +83,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		this.map = new NamedNodeMapImpl(this, new HashMap<>());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>assignAttributeField.</p>
-	 */
-	protected void assignAttributeField(String normalName, String value) {
-		boolean isName = false;
-		if ("id".equals(normalName) || (isName = "name".equals(normalName))) {
-			if (!isName) {
-				this.id = value;
-			}
-			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-			if (document != null) {
-				document.setElementById(value, this);
-				if (isName) {
-					final String oldName = getAttribute("name");
-					if (oldName != null) {
-						document.removeNamedItem(oldName);
-					}
-					document.setNamedItem(value, this);
-				}
-			}
-		}
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public boolean equalAttributes(Node arg) {
@@ -109,10 +91,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		} else {
 			return false;
 		}
-	}
-
-	private Attr getAttr(String normalName, String value) {
-		return new AttrImpl(normalName, value, true, this, "id".equals(normalName));
 	}
 
 	/** {@inheritDoc} */
@@ -124,9 +102,109 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
+	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
+		final Attr attr = getAttributeNode(localName);
+		if (attr != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attr.getNamespaceURI()))) {
+			return attr.getValue();
+		}
+		return null;
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public Attr getAttributeNode(String name) {
-		Attr attributes = map.getNamedItem(name);
-		return attributes == null ? null : getAttr(name, attributes.getValue());
+		Attr attribute = map.getNamedItem(name);
+		return attribute == null ? null : new AttrImpl(name, attribute.getValue(), true, this, "id".equalsIgnoreCase(name));
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
+		final Attr attribute = map.getNamedItem(localName);
+		if (attribute != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attribute.getNamespaceURI()))) {
+			return new AttrImpl(localName, attribute.getValue(), true, this, "id".equalsIgnoreCase(localName));
+		}
+		return null;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void removeAttribute(String name) {
+		map.removeNamedItem(name);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
+		final Attr attr = getAttributeNode(localName);
+		if (attr != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attr.getNamespaceURI()))) {
+			removeAttribute(localName);
+		}
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Attr removeAttributeNode(Attr oldAttr) {
+		return map.removeNamedItem(name);
+	}
+
+
+	/** {@inheritDoc} */
+	@Override
+	public void setAttribute(String name, String value) {
+		map.setNamedItem(new AttrImpl(name, value, true, this, "id".equalsIgnoreCase(name)));
+		assignAttributeField(name, value);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
+		final AttrImpl attr = new AttrImpl(qualifiedName, value, true, this, "id".equalsIgnoreCase(qualifiedName));
+		attr.setNamespaceURI(namespaceURI);
+		map.setNamedItem(attr);
+		assignAttributeField(qualifiedName, value);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setIdAttribute(String localName, boolean isId) throws DOMException {
+		final AttrImpl attr = (AttrImpl)getAttributeNode(name);
+		if(attr != null) attr.setIsId(isId);
+	}
+
+		/** {@inheritDoc} */
+	@Override
+	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
+		final AttrImpl attr = (AttrImpl)getAttributeNode(localName);
+		if (attr != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attr.getNamespaceURI()))) {
+			attr.setIsId(isId);
+		}
+	}
+	/** {@inheritDoc} */
+	@Override
+	public void setIdAttributeNode(Attr idAttr, boolean isId) {
+		final AttrImpl attr = (AttrImpl)idAttr;
+		attr.setIsId(isId);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Attr setAttributeNode(Attr newAttr) {
+		final String value = newAttr.getValue();
+		assignAttributeField(newAttr.getName(), value);
+		return map.setNamedItem(newAttr);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
+		return setAttributeNode(newAttr);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public boolean hasAttributeNS(String namespaceURI, String localName) throws DOMException {
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 
 	/** {@inheritDoc} */
@@ -150,8 +228,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getId() {
-		final String id = this.id;
-		return id == null ? "" : id;
+		return getAttribute("id");
 	}
 
 	/**
@@ -163,44 +240,24 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return getAttribute("lang");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getLocalName()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
 		return getNodeName();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeName()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
 		return this.name;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeType()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public NodeType getNodeType() {
 		return NodeType.ELEMENT_NODE;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeValue()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeValue() {
@@ -287,33 +344,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void removeAttribute(String name) {
-		map.removeNamedItem(name);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Attr removeAttributeNode(Attr oldAttr) {
-		return map.removeNamedItem(name);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAttribute(String name, String value) {
-		map.setNamedItem(getAttr(name, value));
-		assignAttributeField(name, value);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Attr setAttributeNode(Attr newAttr) {
-		final String value = newAttr.getValue();
-		assignAttributeField(newAttr.getName(), value);
-		return map.setNamedItem(newAttr);
-	}
-
 	/**
 	 * <p>setDir.</p>
 	 *
@@ -323,29 +353,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		setAttribute("dir", dir);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>Setter for the field id.</p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void setId(String id) {
 		setAttribute("id", id);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setIdAttribute(String name, boolean isId) {
-		if (!"id".equals(name)) {
-			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setIdAttributeNode(Attr idAttr, boolean isId) {
-		if (!"id".equals(idAttr.getName())) {
-			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
-		}
 	}
 
 	/**
@@ -373,11 +384,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		setAttribute("lang", lang);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#setNodeValue(java.lang.String)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String nodeValue) {
@@ -392,14 +398,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public void setTitle(String title) {
 		setAttribute("title", title);
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * setInnerHTML.
-	 * </p>
-	 */
+
+	/** {@inheritDoc} */
 	@Override
 	public void setInnerHTML(String newHtml) {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
@@ -417,7 +417,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
 		}
 	}
-	
+
 	/**
 	 * <p>Getter for the field <code>outer</code>.</p>
 	 *
@@ -436,12 +436,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		this.outer = outer;
 	}
 
-	
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>getClassList.</p>
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public DOMTokenList getClassList() {
 		DOMTokenListImpl tokList = new DOMTokenListImpl(this);
@@ -495,11 +490,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return calculateWidth(false, true);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>getOuterHTML.</p>
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getOuterHTML() {
 		final StringBuilder buffer = new StringBuilder();
@@ -508,12 +499,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 		return buffer.toString();
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>setOuterHTML.</p>
-	 */
+
+	/** {@inheritDoc} */
 	@Override
 	public void setOuterHTML(String newHtml) {
 		this.outer = outerNewHtml(newHtml);
@@ -629,20 +616,16 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return isVScrollable() ? getClientHeight() : 0;
 	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
+	/** {@inheritDoc} */
+	@Override
     public double getScrollLeft() {
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
         HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
         return isHScrollable() ? htmlRendererContext.getScrollx() : 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
+	/** {@inheritDoc} */
+	@Override
     public void setScrollLeft(double scrollLeft) {
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
         HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
@@ -752,6 +735,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return new DOMRectImpl(width, height, top, 0, 0, left);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DOMRectList getClientRects() {
 		DOMRectListImpl list = new DOMRectListImpl();
@@ -778,6 +762,124 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public TypeInfo getSchemaTypeInfo() {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getElementsByClassName(String classNames) {
+		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ClassNameFilter(classNames)).toArray()));
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getElementsByTagName(String tagname) {
+		if ("*".equals(tagname)) {
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
+		} else {
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname)).toArray()));
+		}
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
+		HTMLCollectionImpl coll = (HTMLCollectionImpl) getElementsByTagName(localName);
+		HTMLCollectionImpl list = new HTMLCollectionImpl(this, new ArrayList<>());
+		for (Node node : coll) {
+			if ((namespaceURI == null || "*".equals(namespaceURI)) || node.getNamespaceURI().equals(namespaceURI)) {
+				list.add(node);
+			}
+		}
+		return list;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element getFirstElementChild() {
+		return (Element) nodeList.stream().filter(n -> n instanceof Element).findFirst().orElse(null);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element getLastElementChild() {
+		long count = nodeList.stream().filter(n -> n instanceof Element).count();
+		Stream<Node> stream = nodeList.stream();
+		return (Element) stream.filter(n -> n instanceof Element).skip(count - 1).findFirst().orElse(null);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public int getChildElementCount() {
+		return (int) nodeList.stream().filter(n -> n instanceof Element).count();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element querySelector(String selectors) {
+		SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+		List<Element> elem = new ArrayList<>();
+		if (selectorList != null) {
+			NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+			childNodes.forEach(child -> {
+				for (Selector selector : selectorList) {
+					if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
+						elem.add((Element)child);
+					}
+				}
+			});
+		}
+		return elem.size() > 0  ? elem.get(0) : null;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public NodeList querySelectorAll(String selector) {
+
+		final ArrayList<Node> al = new ArrayList<>();
+
+		if(selector == null) {
+			return new NodeListImpl(al);
+		}
+
+		if(selector.isEmpty()){
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "The provided selector is empty.");
+		}
+
+		if(selector.trim().isEmpty()){
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "is not a valid selector.");
+		}
+
+		SelectorList selectorList = CSSUtilities.getSelectorList(selector);
+		if (selectorList != null) {
+			NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+			childNodes.forEach(child -> {
+				for (Selector select : selectorList) {
+					if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
+						al.add(child);
+					}
+				}
+			});
+		}
+		return new NodeListImpl(al);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected void assignAttributeField(String normalName, String value) {
+		boolean isName = false;
+		if ("id".equalsIgnoreCase(normalName) || (isName = "name".equals(normalName))) {
+			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
+			if (document != null) {
+				document.setElementById(value, this);
+				if (isName) {
+					final String oldName = getAttribute("name");
+					if (oldName != null) {
+						document.removeNamedItem(oldName);
+					}
+					document.setNamedItem(value, this);
+				}
+			}
+		}
 	}
 
 	/**

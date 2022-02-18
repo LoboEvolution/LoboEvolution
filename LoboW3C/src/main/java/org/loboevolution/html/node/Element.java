@@ -483,6 +483,15 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     void setIdAttributeNode(Attr idAttr, boolean isId);
 
     /**
+     * <p>setIdAttributeNode.</p>
+     *
+     * @param namespaceURI a {@link java.lang.String} object.
+     * @param localName  a {@link java.lang.String} object.
+     * @param isId       a boolean.
+     */
+    void setIdAttributeNS(String namespaceURI, String localName, boolean isId);
+
+    /**
      * <p>setPointerCapture.</p>
      *
      * @param pointerId a int.
