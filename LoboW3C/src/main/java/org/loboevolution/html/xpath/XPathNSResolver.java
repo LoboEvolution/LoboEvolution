@@ -28,9 +28,6 @@ package org.loboevolution.html.xpath;
  * construct an implementation of XPathNSResolver from a node,
  * or the interface may be implemented by any application.
  * <p>See also the <a href='http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820'>Document Object Model (DOM) Level 3 XPath Specification</a>.
- *
- *
- *
  */
 public interface XPathNSResolver {
     /**
@@ -42,6 +39,6 @@ public interface XPathNSResolver {
      * @return Returns the associated namespace URI or null if
      *   none is found.
      */
-    public String lookupNamespaceURI(String prefix);
+    String lookupNamespaceURI(String prefix);
 
 }

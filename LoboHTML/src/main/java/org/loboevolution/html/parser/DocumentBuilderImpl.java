@@ -22,6 +22,15 @@
  */
 package org.loboevolution.html.parser;
 
+import org.loboevolution.common.Urls;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.io.WritableLineReader;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.http.UserAgentContext;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,19 +38,6 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Logger;
-
-import org.loboevolution.common.Urls;
-import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.io.WritableLineReader;
-import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.Document;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 /**
  * The DocumentBuilderImpl class is an HTML DOM parser that
@@ -53,33 +49,7 @@ import org.xml.sax.SAXException;
 public class DocumentBuilderImpl {
 	private static final Logger logger = Logger.getLogger(DocumentBuilderImpl.class.getName());
 	private final UserAgentContext bcontext;
-	private DOMImplementation domImplementation;
-	private ErrorHandler errorHandler;
 	private final HtmlRendererContext rcontext;
-
-	private EntityResolver resolver;
-
-	/**
-	 * Constructs a DocumentBuilderImpl. This constructor should be
-	 * used when rendering is expected.
-	 *
-	 * @param rcontext An instance of {@link org.loboevolution.http.HtmlRendererContext}
-	 */
-	public DocumentBuilderImpl(HtmlRendererContext rcontext) {
-		this.rcontext = rcontext;
-		this.bcontext = rcontext.getUserAgentContext();
-	}
-
-	/**
-	 * Constructs a DocumentBuilderImpl. This constructor should be
-	 * used when only the parsing functionality (without rendering) is required.
-	 *
-	 * @param context An instance of {@link org.loboevolution.http.UserAgentContext}
-	 */
-	public DocumentBuilderImpl(UserAgentContext context) {
-		this.rcontext = null;
-		this.bcontext = context;
-	}
 
 	/**
 	 * Constructs a DocumentBuilderImpl. This constructor should be
@@ -104,7 +74,7 @@ public class DocumentBuilderImpl {
 	 *           {@link org.loboevolution.html.parser.InputSourceImpl}. The input
 	 *           source must provide either an input stream or a reader.
 	 * @see HTMLDocumentImpl#load()
-	 * @return a {@link org.w3c.dom.Document} object.
+	 * @return a {@link org.loboevolution.html.node.Document} object.
 	 * @throws org.xml.sax.SAXException if any.
 	 * @throws java.io.IOException if any.
 	 */
@@ -138,68 +108,7 @@ public class DocumentBuilderImpl {
 						"The InputSource must have either a reader, an input stream or a URI.");
 			}
 		}
-		final HTMLDocumentImpl document = new HTMLDocumentImpl(this.bcontext, this.rcontext, wis, uri);
-		return document;
-	}
-
-	/**
-	 * <p>getDOMImplementation.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.DOMImplementation} object.
-	 */
-	public DOMImplementation getDOMImplementation() {
-		synchronized (this) {
-			if (this.domImplementation == null) {
-				this.domImplementation = new DOMImplementationImpl(this.bcontext);
-			}
-			return this.domImplementation;
-		}
-	}
-
-	/**
-	 * <p>Getter for the field errorHandler.</p>
-	 *
-	 * @return a {@link org.xml.sax.ErrorHandler} object.
-	 */
-	public ErrorHandler getErrorHandler() {
-		return this.errorHandler;
-	}
-
-	/**
-	 * <p>Getter for the field resolver.</p>
-	 *
-	 * @return a {@link org.xml.sax.EntityResolver} object.
-	 */
-	public EntityResolver getResolver() {
-		return this.resolver;
-	}
-
-	/**
-	 * <p>isNamespaceAware.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isNamespaceAware() {
-		return false;
-	}
-
-	/**
-	 * <p>isValidating.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isValidating() {
-		return false;
-	}
-
-
-	/**
-	 * <p>newDocument.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.Document} object.
-	 */
-	public Document newDocument() {
-		return new HTMLDocumentImpl(this.bcontext);
+		return new HTMLDocumentImpl(this.bcontext, this.rcontext, wis, uri);
 	}
 
 	/**
@@ -217,23 +126,5 @@ public class DocumentBuilderImpl {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) createDocument(is);
 		document.load();
 		return document;
-	}
-
-	/**
-	 * <p>setEntityResolver.</p>
-	 *
-	 * @param er a {@link org.xml.sax.EntityResolver} object.
-	 */
-	public void setEntityResolver(EntityResolver er) {
-		this.resolver = er;
-	}
-
-	/**
-	 * <p>Setter for the field <code>errorHandler</code>.</p>
-	 *
-	 * @param eh a {@link org.xml.sax.ErrorHandler} object.
-	 */
-	public void setErrorHandler(ErrorHandler eh) {
-		this.errorHandler = eh;
 	}
 }

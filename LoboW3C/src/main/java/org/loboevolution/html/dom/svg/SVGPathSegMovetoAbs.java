@@ -40,7 +40,7 @@ public interface SVGPathSegMovetoAbs extends SVGPathSeg {
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setX(float x);
 
@@ -55,7 +55,7 @@ public interface SVGPathSegMovetoAbs extends SVGPathSeg {
 	 * <p>setY.</p>
 	 *
 	 * @param y a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setY(final float y);
 }

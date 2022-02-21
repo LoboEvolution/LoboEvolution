@@ -30,7 +30,7 @@ public interface GetSVGDocument {
 	 * <p>getSVGDocument.</p>
 	 *
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGDocument} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGDocument getSVGDocument();
 }

@@ -106,7 +106,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * <p>setUseCurrentView.</p>
 	 *
 	 * @param useCurrentView a boolean.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setUseCurrentView(boolean useCurrentView);
 
@@ -128,7 +128,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * <p>setCurrentScale.</p>
 	 *
 	 * @param currentScale a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setCurrentScale(float currentScale);
 
@@ -151,7 +151,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * <p>unsuspendRedraw.</p>
 	 *
 	 * @param suspend_handle_id a int.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void unsuspendRedraw(int suspend_handle_id);
 
@@ -298,7 +298,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
      * <p>getElementById.</p>
      *
      * @param elementId a {@link java.lang.String} object.
-     * @return a {@link org.w3c.dom.Element} object.
+     * @return a {@link org.loboevolution.html.node.Element} object.
      */
     Element getElementById(String elementId);
     

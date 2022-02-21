@@ -32,7 +32,7 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.style.setter.*;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.w3c.dom.DOMException;
+import com.gargoylesoftware.css.dom.DOMException;
 
 import java.util.HashMap;
 import java.util.LinkedList;

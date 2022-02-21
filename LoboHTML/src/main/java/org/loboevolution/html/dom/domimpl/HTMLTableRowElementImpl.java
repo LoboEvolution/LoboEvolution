@@ -238,7 +238,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 * @param index The cell index to insert at.
 	 * @return The element that was inserted.
 	 * @throws java.lang.Exception if any.
-	 * @throws org.w3c.dom.DOMException When the index is out of range.
+	 * @throws com.gargoylesoftware.css.dom When the index is out of range.
 	 */
 	public HTMLElement insertHeader(int index) throws Exception {
 		return this.insertCell(index, "TH");

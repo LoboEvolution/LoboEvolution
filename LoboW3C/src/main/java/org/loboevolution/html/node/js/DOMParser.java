@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -17,36 +17,13 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Oct 23, 2005
- */
-package org.loboevolution.html.parser;
 
-import org.loboevolution.html.node.Element;
+package org.loboevolution.html.node.js;
 
-class StopException extends Exception {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private final Element element;
+import org.loboevolution.html.node.Document;
+/**The design of DOMParser, as a class that needs to be constructed and then have its parseFromString() method called, is an unfortunate historical artifact.
+ * If we were designing this functionality today it would be a standalone function.**/
+public interface DOMParser {
 
-	/**
-	 * <p>Constructor for StopException.</p>
-	 *
-	 * @param element a {@link org.loboevolution.html.node.Element} object.
-	 */
-	public StopException(Element element) {
-		super();
-		this.element = element;
-	}
-
-	/**
-	 * <p>Getter for the field element.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.Element} object.
-	 */
-	public Element getElement() {
-		return this.element;
-	}
+      Document parseFromString(String string, String type);
 }

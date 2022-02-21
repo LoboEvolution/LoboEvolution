@@ -38,7 +38,7 @@ public interface SVGTransformList {
 	/**
 	 * <p>clear.</p>
 	 *
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void clear();
 
@@ -47,7 +47,7 @@ public interface SVGTransformList {
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -61,7 +61,7 @@ public interface SVGTransformList {
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGTransform getItem(int index);
 
@@ -71,7 +71,7 @@ public interface SVGTransformList {
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -86,7 +86,7 @@ public interface SVGTransformList {
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -100,7 +100,7 @@ public interface SVGTransformList {
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGTransform removeItem(int index);
 
@@ -109,7 +109,7 @@ public interface SVGTransformList {
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.

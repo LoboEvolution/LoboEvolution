@@ -181,18 +181,12 @@ public class XPathResultImpl implements XPathResult {
 			this.m_resultType = type;
 		}
 
-		// If the context node supports DOM Events and the type is one of the
-		// iterator
-		// types register this result as an event listener
 		if (m_resultType == ORDERED_NODE_ITERATOR_TYPE || m_resultType == UNORDERED_NODE_ITERATOR_TYPE) {
 			addEventListener();
 
-		} // else can we handle iterator types if contextNode doesn't support
-			// EventTarget??
+		}
 
-		// If this is an iterator type get the iterator
-		/*TODO Broken with new interfaces
-		 * if (m_resultType == ORDERED_NODE_ITERATOR_TYPE || m_resultType == UNORDERED_NODE_ITERATOR_TYPE
+		 /*if (m_resultType == ORDERED_NODE_ITERATOR_TYPE || m_resultType == UNORDERED_NODE_ITERATOR_TYPE
 				|| m_resultType == ANY_UNORDERED_NODE_TYPE || m_resultType == FIRST_ORDERED_NODE_TYPE) {
 
 			try {
@@ -218,26 +212,13 @@ public class XPathResultImpl implements XPathResult {
 		}*/
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Gets the result type.
-	 * @see org.loboevolution.html.xpath.XPathResult#getResultType()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public short getResultType() {
 		return m_resultType;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * The value of this number result.
-	 * @see org.loboevolution.html.xpath.XPathResult#getNumberValue()
-	 * @exception XPathException
-	 *                TYPE_ERR: raised if resultType is not
-	 *                NUMBER_TYPE.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public double getNumberValue() throws XPathException {
 		if (getResultType() != NUMBER_TYPE) {
@@ -258,15 +239,7 @@ public class XPathResultImpl implements XPathResult {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * The value of this string result.
-	 * @see org.loboevolution.html.xpath.XPathResult#getStringValue()
-	 * @exception XPathException
-	 *                TYPE_ERR: raised if resultType is not
-	 *                STRING_TYPE.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getStringValue() throws XPathException {
 		if (getResultType() != STRING_TYPE) {
@@ -286,12 +259,7 @@ public class XPathResultImpl implements XPathResult {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Gets the boolean value.
-	 * @see org.loboevolution.html.xpath.XPathResult#getBooleanValue()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean getBooleanValue() throws XPathException {
 		if (getResultType() != BOOLEAN_TYPE) {
@@ -312,16 +280,7 @@ public class XPathResultImpl implements XPathResult {
 		return false;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * The value of this single node result, which may be null.
-	 * @see org.loboevolution.html.xpath.XPathResult#getSingleNodeValue()
-	 * @exception XPathException
-	 *                TYPE_ERR: raised if resultType is not
-	 *                ANY_UNORDERED_NODE_TYPE or
-	 *                FIRST_ORDERED_NODE_TYPE.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node getSingleNodeValue() throws XPathException {
 
@@ -336,9 +295,7 @@ public class XPathResultImpl implements XPathResult {
 		}
 
 		NodeIterator result = null;
-		// TODO Broken with new interfaces
-		/*
-		try {
+		/*try {
 			result = m_resultObj.nodeset();
 		} catch (TransformerException te) {
 			throw new XPathException(XPathException.TYPE_ERR, te.getMessage());
@@ -350,7 +307,6 @@ public class XPathResultImpl implements XPathResult {
 
 		Node node = result.nextNode();
 
-		// Wrap "namespace node" in an XPathNamespace
 		if (isNamespaceNode(node)) {
 			return new XPathNamespaceImpl(node);
 		} else {
@@ -358,28 +314,13 @@ public class XPathResultImpl implements XPathResult {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Gets the invalid iterator state.
-	 * @see org.loboevolution.html.xpath.XPathResult#getInvalidIteratorState()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean getInvalidIteratorState() {
 		return m_isInvalidIteratorState;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * The number of nodes in the result snapshot. Valid values for snapshotItem
-	 * indices are 0 to snapshotLength-1 inclusive.
-	 * @see org.loboevolution.html.xpath.XPathResult#getSnapshotLength()
-	 * @exception XPathException
-	 *                TYPE_ERR: raised if resultType is not
-	 *                UNORDERED_NODE_SNAPSHOT_TYPE or
-	 *                ORDERED_NODE_SNAPSHOT_TYPE.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public int getSnapshotLength() throws XPathException {
 
@@ -394,20 +335,7 @@ public class XPathResultImpl implements XPathResult {
 		return m_list.getLength();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Iterates and returns the next node from the node set or null if
-	 * there are no more nodes.
-	 * @see org.loboevolution.html.xpath.XPathResult#iterateNext()
-	 * @exception XPathException
-	 *                TYPE_ERR: raised if resultType is not
-	 *                UNORDERED_NODE_ITERATOR_TYPE or
-	 *                ORDERED_NODE_ITERATOR_TYPE.
-	 * @exception DOMException
-	 *                INVALID_STATE_ERR: The document has been mutated since the
-	 *                result was returned.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node iterateNext() throws XPathException, DOMException {
 		if (m_resultType != UNORDERED_NODE_ITERATOR_TYPE && m_resultType != ORDERED_NODE_ITERATOR_TYPE) {
@@ -437,20 +365,7 @@ public class XPathResultImpl implements XPathResult {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Returns the indexth item in the snapshot collection. If
-	 * index is greater than or equal to the number of nodes in the
-	 * list, this method returns null. Unlike the iterator result, the
-	 * snapshot does not become invalid, but may not correspond to the current
-	 * document if it is mutated.
-	 * @see org.loboevolution.html.xpath.XPathResult#snapshotItem(int)
-	 * @exception XPathException
-	 *                TYPE_ERR: raised if resultType is not
-	 *                UNORDERED_NODE_SNAPSHOT_TYPE or
-	 *                ORDERED_NODE_SNAPSHOT_TYPE.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node snapshotItem(int index) throws XPathException {
 
@@ -507,14 +422,9 @@ public class XPathResultImpl implements XPathResult {
 	 * @see org.loboevolution.html.node.events.EventListener#handleEvent(Event)
 	 * @param event a {@link org.loboevolution.html.node.events.Event} object.
 	 */
-	// TODO Broken with new interfaces @Override
 	public void handleEvent(Event event) {
-
 		if (event.getType().equals("DOMSubtreeModified")) {
-			// invalidate the iterator
 			m_isInvalidIteratorState = true;
-
-			// deregister as a listener to reduce computational load
 			removeEventListener();
 		}
 	}
@@ -565,29 +475,13 @@ public class XPathResultImpl implements XPathResult {
 		case XObject.CLASS_BOOLEAN:
 			return BOOLEAN_TYPE;
 		case XObject.CLASS_NODESET:
-			return UNORDERED_NODE_ITERATOR_TYPE;
+			case XObject.CLASS_RTREEFRAG:
+				return UNORDERED_NODE_ITERATOR_TYPE;
 		case XObject.CLASS_NUMBER:
 			return NUMBER_TYPE;
 		case XObject.CLASS_STRING:
 			return STRING_TYPE;
-		// XPath 2.0 types
-		// case XObject.CLASS_DATE:
-		// case XObject.CLASS_DATETIME:
-		// case XObject.CLASS_DTDURATION:
-		// case XObject.CLASS_GDAY:
-		// case XObject.CLASS_GMONTH:
-		// case XObject.CLASS_GMONTHDAY:
-		// case XObject.CLASS_GYEAR:
-		// case XObject.CLASS_GYEARMONTH:
-		// case XObject.CLASS_TIME:
-		// case XObject.CLASS_YMDURATION: return STRING_TYPE; // treat all
-		// date types as strings?
-
-		case XObject.CLASS_RTREEFRAG:
-			return UNORDERED_NODE_ITERATOR_TYPE;
-		case XObject.CLASS_NULL:
-			return ANY_TYPE; // throw exception ?
-		default:
+			default:
 			return ANY_TYPE; // throw exception ?
 		}
 
@@ -610,7 +504,6 @@ public class XPathResultImpl implements XPathResult {
 	 * Add m_contextNode to Event Listner to listen for Mutations Events.
 	 */
 	private void addEventListener() {
-		// TODO Broken with new interfaces
 		if (m_contextNode instanceof EventTarget) {
 			//((EventTarget) m_contextNode).addEventListener("DOMSubtreeModified", this, true);
 		}
@@ -621,7 +514,6 @@ public class XPathResultImpl implements XPathResult {
 	 * Remove m_contextNode to Event Listner to listen for Mutations Events.
 	 */
 	private void removeEventListener() {
-		// TODO Broken with new interfaces
 		if (m_contextNode instanceof EventTarget) {
 			//((EventTarget) m_contextNode).removeEventListener("DOMSubtreeModified", this, true);
 		}

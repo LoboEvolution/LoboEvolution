@@ -39,7 +39,7 @@ public interface SVGLangSpace {
 	 * <p>setXMLlang.</p>
 	 *
 	 * @param xmllang a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setXMLlang(String xmllang);
 
@@ -54,7 +54,7 @@ public interface SVGLangSpace {
 	 * <p>setXMLspace.</p>
 	 *
 	 * @param xmlspace a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setXMLspace(String xmlspace);
 }

@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link org.w3c.dom.DOMException}.
+ * Tests for {@link com.gargoylesoftware.css.dom}.
  */
 
 public class DOMExceptionUnitTest extends LoboUnitTest {

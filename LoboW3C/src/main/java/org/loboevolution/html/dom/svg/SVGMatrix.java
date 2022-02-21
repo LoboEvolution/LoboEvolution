@@ -42,7 +42,7 @@ public interface SVGMatrix {
 	 * <p>setA.</p>
 	 *
 	 * @param a a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setA(float a);
 
@@ -57,7 +57,7 @@ public interface SVGMatrix {
 	 * <p>setB.</p>
 	 *
 	 * @param b a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setB(float b);
 
@@ -72,7 +72,7 @@ public interface SVGMatrix {
 	 * <p>setC.</p>
 	 *
 	 * @param c a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setC(float c);
 
@@ -87,7 +87,7 @@ public interface SVGMatrix {
 	 * <p>setD.</p>
 	 *
 	 * @param d a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setD(float d);
 
@@ -102,7 +102,7 @@ public interface SVGMatrix {
 	 * <p>setE.</p>
 	 *
 	 * @param e a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setE(float e);
 
@@ -117,7 +117,7 @@ public interface SVGMatrix {
 	 * <p>setF.</p>
 	 *
 	 * @param f a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setF(float f);
 

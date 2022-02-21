@@ -20,48 +20,29 @@
 
 package org.loboevolution.html.js.xml;
 
-import java.io.File;
-import java.util.logging.Logger;
-
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.CDATASection;
-import org.loboevolution.html.node.Comment;
-import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLHeadElement;
 import org.loboevolution.html.dom.HTMLScriptElement;
-
-import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeIterator;
-import org.loboevolution.html.node.NodeList;
-import org.loboevolution.type.NodeType;
-import org.loboevolution.html.node.ProcessingInstruction;
-import org.loboevolution.html.node.Range;
-import org.loboevolution.html.node.Selection;
-import org.loboevolution.html.node.Text;
-import org.loboevolution.html.node.TreeWalker;
+import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.type.DocumentReadyState;
+import org.loboevolution.type.NodeType;
 import org.loboevolution.type.VisibilityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
+import org.xml.sax.SAXException;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Logger;
 
 /**
  * XMLDocument class.
@@ -102,44 +83,22 @@ public class XMLDocument implements Document {
 	 * @param fileStr name of in file system
 	 */
 	private synchronized void loadFile(String fileStr) {
-
-		String FEATURE = "";
 		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
-			FEATURE = "http://apache.org/xml/features/disallow-doctype-decl";
-			factory.setFeature(FEATURE, true);
-
-			FEATURE = "http://xml.org/sax/features/external-general-entities";
-			factory.setFeature(FEATURE, false);
-
-			FEATURE = "http://xml.org/sax/features/external-parameter-entities";
-			factory.setFeature(FEATURE, false);
-
-			FEATURE = "http://apache.org/xml/features/nonvalidating/load-external-dtd";
-			factory.setFeature(FEATURE, false);
-
-			factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-			factory.setXIncludeAware(false);
-			factory.setExpandEntityReferences(false);
-
-			DocumentBuilder builder = factory.newDocumentBuilder();
 			File f = new File(fileStr);
-	        // TODO Broken with new interfaces
-			/*if (f.isFile()) {
-				doc = builder.parse(fileStr);
+			XMLDocumentBuilder builder = new XMLDocumentBuilder();
+			if (f.isFile()) {
+				doc = builder.parse(new InputSourceImpl(new FileInputStream(f), "", StandardCharsets.UTF_8));
 			} else {
-				InputStream is = new ByteArrayInputStream(fileStr.getBytes());
-				doc = builder.parse(is);
-			}*/
-			doc.getDocumentElement().normalize();
-		} catch (ParserConfigurationException e) {
-			logger.info(FEATURE + " is not supported");
-		} /*catch (SAXException e) {
+				InputStream in = new ByteArrayInputStream(fileStr.getBytes());
+				doc = builder.parse(new InputSourceImpl(in, "", StandardCharsets.UTF_8));
+			}
+		} catch (SAXException e) {
 			logger.warning("A DOCTYPE was passed into the XML document");
 		} catch (IOException e) {
 			logger.severe("IOException occurred, XXE may still possible: " + e.getMessage());
-		}*/
+		} catch (Exception e) {
+			logger.severe(e.getMessage());
+		}
 	}
 
 	/**

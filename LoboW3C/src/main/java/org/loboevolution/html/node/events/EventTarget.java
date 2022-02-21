@@ -75,7 +75,7 @@ public interface EventTarget {
 	/**
 	 * <p>dispatchEvent.</p>
 	 *
-	 * @param evt a {@link org.w3c.dom.events.Event} object.
+	 * @param evt a {@link org.loboevolution.html.node.events.Event} object.
 	 * @return a boolean.
 	 * @throws org.w3c.dom.events.EventException if any.
 	 */

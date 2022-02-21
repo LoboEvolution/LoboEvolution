@@ -40,7 +40,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setX(float x);
 
@@ -55,7 +55,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setY.</p>
 	 *
 	 * @param y a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setY(final float y);
 
@@ -70,7 +70,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setR1.</p>
 	 *
 	 * @param r1 a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setR1(float r1);
 
@@ -85,7 +85,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setR2.</p>
 	 *
 	 * @param r2 a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setR2(float r2);
 
@@ -100,7 +100,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setAngle.</p>
 	 *
 	 * @param angle a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setAngle(float angle);
 
@@ -115,7 +115,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setLargeArcFlag.</p>
 	 *
 	 * @param largeArcFlag a boolean.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setLargeArcFlag(boolean largeArcFlag);
 
@@ -130,7 +130,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setSweepFlag.</p>
 	 *
 	 * @param sweepFlag a boolean.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setSweepFlag(boolean sweepFlag);
 }

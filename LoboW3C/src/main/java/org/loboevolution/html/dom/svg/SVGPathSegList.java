@@ -38,7 +38,7 @@ public interface SVGPathSegList {
 	/**
 	 * <p>clear.</p>
 	 *
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void clear();
 
@@ -47,7 +47,7 @@ public interface SVGPathSegList {
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -61,7 +61,7 @@ public interface SVGPathSegList {
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGPathSeg getItem(int index);
 
@@ -71,7 +71,7 @@ public interface SVGPathSegList {
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -86,7 +86,7 @@ public interface SVGPathSegList {
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -100,7 +100,7 @@ public interface SVGPathSegList {
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGPathSeg removeItem(int index);
 
@@ -109,7 +109,7 @@ public interface SVGPathSegList {
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSeg} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.

@@ -76,7 +76,7 @@ public class Nodes {
 	/**
 	 * <p>iterable.</p>
 	 *
-	 * @param attrList a {@link org.w3c.dom.NamedNodeMap} object.
+	 * @param attrList a {@link org.loboevolution.html.node.NamedNodeMap} object.
 	 * @return a {@link java.lang.Iterable} object.
 	 */
 	public static Iterable<Attr> iterable(final NamedNodeMap attrList) {

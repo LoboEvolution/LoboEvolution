@@ -23,51 +23,67 @@
 
 package org.loboevolution.html.dom.xpath;
 
-import org.apache.xml.utils.PrefixResolverDefault;
+import org.apache.xml.utils.Constants;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.xpath.XPathNSResolver;
+import org.loboevolution.type.NodeType;
 
 /**
- *
- * The class provides an implementation XPathNSResolver according to the DOM L3
- * XPath Specification, Working Group Note 26 February 2004.
- *
- * <p>
- * See also the
- * <a href='http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>Document
- * Object Model (DOM) Level 3 XPath Specification</a>.
- * </p>
- *
- * <p>
- * The XPathNSResolver interface permit prefix strings
- * in the expression to be properly bound to namespaceURI strings.
- * XPathEvaluator can construct an implementation of
- * XPathNSResolver from a node, or the interface may be implemented
- * by any application.
- * </p>
- *
- * @see org.loboevolution.html.xpath.XPathNSResolver
- *
- *
+ * <p>XPathNSResolverImpl class.</p>
  */
-public class XPathNSResolverImpl extends PrefixResolverDefault implements XPathNSResolver {
+public class XPathNSResolverImpl implements XPathNSResolver {
 
-	
+    private Node parent;
 
-	/**
-	 * <p>Constructor for XPathNSResolverImpl.</p>
-	 *
-	 * @param xpathExpressionContext a {@link org.loboevolution.html.node.Node} object.
-	 */
-	public XPathNSResolverImpl(org.w3c.dom.Node xpathExpressionContext) {
-		super(xpathExpressionContext);
-		// TODO Broken with new interfaces
-	}
+    /**
+     * <p>Constructor for XPathNSResolverImpl.</p>
+     *
+     * @param xpathExpressionContext a {@link org.loboevolution.html.node.Node} object.
+     */
+    public XPathNSResolverImpl(Node xpathExpressionContext) {
+        this.parent = xpathExpressionContext;
+
+    }
 
 	/** {@inheritDoc} */
 	@Override
-	public String lookupNamespaceURI(String prefix) {
-		return super.getNamespaceForPrefix(prefix);
-	}
+    public String lookupNamespaceURI(String prefix) {
 
+        String namespace = null;
+
+        if (prefix.equals("xml")) {
+            namespace = Constants.S_XMLNAMESPACEURI;
+        } else {
+            NodeType type;
+            while ((null != parent) && (null == namespace)
+                    && (((type = parent.getNodeType()) == NodeType.ELEMENT_NODE)
+                    || (type == NodeType.ENTITY_REFERENCE_NODE))) {
+
+                if (type == NodeType.ELEMENT_NODE) {
+                    if (parent.getNodeName().indexOf(prefix + ":") == 0) {
+                        return parent.getNamespaceURI();
+                    }
+                    NamedNodeMap nnm = ((Element) parent).getAttributes();
+                    for (int i = 0; i < nnm.getLength(); i++) {
+                        Node attr = nnm.item(i);
+                        String aname = attr.getNodeName();
+                        boolean isPrefix = aname.startsWith("xmlns:");
+                        if (isPrefix || aname.equals("xmlns")) {
+                            int index = aname.indexOf(':');
+                            String p = isPrefix ? aname.substring(index + 1) : "";
+                            if (p.equals(prefix)) {
+                                namespace = attr.getNodeValue();
+
+                                break;
+                            }
+                        }
+                    }
+                }
+                parent = parent.getParentNode();
+            }
+        }
+        return namespace;
+    }
 }

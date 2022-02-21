@@ -86,7 +86,7 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 	/**
 	 * <p>gradient.</p>
 	 *
-	 * @param gradient a {@link org.w3c.dom.Element} object.
+	 * @param gradient a {@link org.loboevolution.html.node.Element} object.
 	 * @param shape2d a {@link java.awt.Shape} object.
 	 * @return a {@link java.awt.Paint} object.
 	 */

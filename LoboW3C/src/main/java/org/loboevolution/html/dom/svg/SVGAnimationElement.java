@@ -52,7 +52,7 @@ public interface SVGAnimationElement extends SVGElement, SVGTests, SVGExternalRe
 	 * <p>getSimpleDuration.</p>
 	 *
 	 * @return a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	float getSimpleDuration();
 }

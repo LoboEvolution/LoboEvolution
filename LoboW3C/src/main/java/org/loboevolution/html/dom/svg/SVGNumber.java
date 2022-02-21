@@ -39,7 +39,7 @@ public interface SVGNumber {
 	 * <p>setValue.</p>
 	 *
 	 * @param value a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setValue(float value);
 }

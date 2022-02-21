@@ -58,7 +58,7 @@ public interface SVGAngle {
 	 * <p>setValue.</p>
 	 *
 	 * @param value a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setValue(float value);
 
@@ -73,7 +73,7 @@ public interface SVGAngle {
 	 * <p>setValueInSpecifiedUnits.</p>
 	 *
 	 * @param valueInSpecifiedUnits a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setValueInSpecifiedUnits(float valueInSpecifiedUnits);
 
@@ -88,7 +88,7 @@ public interface SVGAngle {
 	 * <p>setValueAsString.</p>
 	 *
 	 * @param valueAsString a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setValueAsString(String valueAsString);
 

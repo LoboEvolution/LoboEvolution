@@ -70,7 +70,7 @@ public interface XPathNamespace extends Node {
      * if the document changes such that the namespace goes out of scope on
      * that element and this node is no longer found there by XPath.
      *
-     * @return a {@link org.w3c.dom.Element} object.
+     * @return a {@link org.loboevolution.html.node.Element} object.
      */
     public Element getOwnerElement();
 

@@ -495,7 +495,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * <p>namedItem.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Element} object.
+	 * @return a {@link org.loboevolution.html.node.Element} object.
 	 */
 	public Element namedItem(String name) {
 		Element element;

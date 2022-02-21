@@ -39,7 +39,7 @@ public interface SVGColorProfileElement extends SVGElement, SVGURIReference, SVG
 	 * <p>setLocal.</p>
 	 *
 	 * @param local a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setLocal(String local);
 
@@ -54,7 +54,7 @@ public interface SVGColorProfileElement extends SVGElement, SVGURIReference, SVG
 	 * <p>setName.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setName(String name);
 
@@ -69,7 +69,7 @@ public interface SVGColorProfileElement extends SVGElement, SVGURIReference, SVG
 	 * <p>setRenderingIntent.</p>
 	 *
 	 * @param renderingIntent a short.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setRenderingIntent(short renderingIntent);
 }

@@ -40,6 +40,6 @@ public class TextFilter implements NodeFilter {
 	/** {@inheritDoc} */
 	@Override
 	public boolean acceptNode(Node node) {
-		return node instanceof org.w3c.dom.Text;
+		return node instanceof org.loboevolution.html.node.Text;
 	}
 }

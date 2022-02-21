@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -17,36 +17,23 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Oct 23, 2005
+
+package org.loboevolution.html.node.js.xml;
+
+import org.loboevolution.html.node.Node;
+
+/**
+ * <p>XMLSerializer interface.</p>
  */
-package org.loboevolution.html.parser;
+public interface XMLSerializer {
 
-import org.loboevolution.html.node.Element;
-
-class StopException extends Exception {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private final Element element;
-
-	/**
-	 * <p>Constructor for StopException.</p>
-	 *
-	 * @param element a {@link org.loboevolution.html.node.Element} object.
-	 */
-	public StopException(Element element) {
-		super();
-		this.element = element;
-	}
-
-	/**
-	 * <p>Getter for the field element.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.Element} object.
-	 */
-	public Element getElement() {
-		return this.element;
-	}
+    /**
+     * The subtree rooted by the specified element is serialized to a string.
+     *
+     * @param root
+     *            the root of the subtree to be serialized (this may be any
+     *            node, even a document)
+     * @return the serialized string
+     */
+    String serializeToString(Node root);
 }

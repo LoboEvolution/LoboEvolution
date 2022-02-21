@@ -22,7 +22,7 @@ package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGAnimationElement;
 import org.loboevolution.html.dom.svg.SVGElement;
-import org.w3c.dom.DOMException;
+import com.gargoylesoftware.css.dom.DOMException;
 
 import java.util.StringTokenizer;
 import java.util.Vector;

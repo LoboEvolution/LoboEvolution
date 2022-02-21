@@ -37,7 +37,7 @@ public interface SVGAltGlyphElement extends SVGTextPositioningElement, SVGURIRef
 	 * <p>setGlyphRef.</p>
 	 *
 	 * @param glyphRef a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setGlyphRef(String glyphRef);
 
@@ -52,7 +52,7 @@ public interface SVGAltGlyphElement extends SVGTextPositioningElement, SVGURIRef
 	 * <p>setFormat.</p>
 	 *
 	 * @param format a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setFormat(String format);
 }

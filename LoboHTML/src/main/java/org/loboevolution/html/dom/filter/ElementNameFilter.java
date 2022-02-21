@@ -48,7 +48,7 @@ public class ElementNameFilter implements NodeFilter {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 * @see org.loboevolution.html.domfilter.NodeFilter#accept(org.loboevolution.html.node.Node)
 	 */
 	/** {@inheritDoc} */
 	@Override

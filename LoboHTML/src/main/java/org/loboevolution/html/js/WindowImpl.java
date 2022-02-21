@@ -35,6 +35,8 @@ import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.js.events.UIEventImpl;
 import org.loboevolution.html.js.storage.LocalStorage;
 import org.loboevolution.html.js.storage.SessionStorage;
+import org.loboevolution.html.js.xml.XMLHttpRequest;
+import org.loboevolution.html.js.xml.XMLSerializerImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.history.History;
@@ -900,8 +902,8 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			}
 		}
 
-		final byte[] bytes = encodedString.getBytes(StandardCharsets.ISO_8859_1);
-		return new String(Base64.getDecoder().decode(bytes), StandardCharsets.ISO_8859_1);
+		final byte[] bytes = encodedString.getBytes(StandardCharsets.UTF_8);
+		return new String(Base64.getDecoder().decode(bytes), StandardCharsets.UTF_8);
 	}
 
 	/** {@inheritDoc} */
@@ -911,7 +913,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			rawString = "null";
 		}
 
-		final byte[] bytes = rawString.getBytes(StandardCharsets.ISO_8859_1);
+		final byte[] bytes = rawString.getBytes(StandardCharsets.UTF_8);
 		return new String(Base64.getEncoder().encode(bytes), StandardCharsets.UTF_8);
 	}
 
@@ -1173,28 +1175,22 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		final Scriptable ws = this.getWindowScope();
 		final JavaScript js = JavaScript.getInstance();
 		JavaInstantiator jiXhttp = () -> {
-			if (doc == null) {
-				throw new IllegalStateException("Cannot perform operation when document is unset.");
-			}
-			HTMLDocumentImpl hd;
-			try {
-				hd = (HTMLDocumentImpl) doc;
-			} catch (ClassCastException err) {
-				throw new IllegalStateException(
-						"Cannot perform operation with documents of type " + doc.getClass().getName() + ".");
-			}
+			HTMLDocumentImpl hd = (HTMLDocumentImpl) doc;
 			return new XMLHttpRequest(getUaContext(), hd.getDocumentURL(), ws);
 		};
 
-		js.defineJsObject(ws, "XMLSerializer",  XMLSerializer.class, XMLSerializer::new);
-		js.defineJsObject(ws, "XPathResult", XPathResultImpl.class, XPathResultImpl::new);
+		JavaInstantiator jidomp = () -> new DOMParserImpl(document);
+
 		js.defineJsObject(ws, "XMLHttpRequest", XMLHttpRequest.class, jiXhttp);
+		js.defineJsObject(ws, "DOMParser",  DOMParserImpl.class, jidomp);
+
+		js.defineJsObject(ws, "XMLSerializer",  XMLSerializerImpl.class, XMLSerializerImpl::new);
+		js.defineJsObject(ws, "XPathResult", XPathResultImpl.class, XPathResultImpl::new);
 		js.defineJsObject(ws, "MouseEvent", MouseEventImpl.class, MouseEventImpl::new);
 		js.defineJsObject(ws, "UIEvent",  UIEventImpl.class, MouseEventImpl::new);
 		js.defineJsObject(ws, "Element", Element.class, MouseEventImpl::new);
 		js.defineJsObject(ws, "Event", EventImpl.class, EventImpl::new);
 		js.defineJsObject(ws, "Text", TextImpl.class, TextImpl::new);
-		js.defineJsObject(ws, "DOMParser",  DOMParser.class, DOMParser::new);
 		js.defineJsObject(ws, "Storage", LocalStorage.class, LocalStorage::new);
 
 		js.defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);

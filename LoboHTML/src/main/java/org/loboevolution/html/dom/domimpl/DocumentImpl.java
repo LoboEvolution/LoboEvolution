@@ -224,7 +224,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/**
 	 * <p>Setter for the field doctype.</p>
 	 *
-	 * @param doctype a {@link org.w3c.dom.DocumentType} object.
+	 * @param doctype a {@link org.loboevolution.html.node.DocumentType} object.
 	 */
 	public void setDoctype(DocumentType doctype) {
 		this.doctype = doctype;

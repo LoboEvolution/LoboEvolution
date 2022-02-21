@@ -43,7 +43,6 @@ import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.UserAgent;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -192,35 +191,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	public void addSelectionChangeListener(SelectionChangeListener listener) {
 		this.selectionDispatch.addListener(listener);
-	}
-
-	/**
-	 * Clears the current document if any. If called outside the GUI thread, the
-	 * operation will be scheduled to be performed in the GUI thread.
-	 */
-	public void clearDocument() {
-		if (SwingUtilities.isEventDispatchThread()) {
-			clearDocumentImpl();
-		} else {
-			SwingUtilities.invokeLater(HtmlPanel.this::clearDocumentImpl);
-		}
-	}
-
-	private void clearDocumentImpl() {
-		final HTMLDocumentImpl prevDocument = (HTMLDocumentImpl) this.rootNode;
-		if (prevDocument != null) {
-			prevDocument.removeDocumentNotificationListener(this.notificationListener);
-		}
-		final NodeRenderer nr = this.nodeRenderer;
-		if (nr != null) {
-			nr.setRootNode(null);
-		}
-		this.rootNode = null;
-		this.htmlBlockPanel = null;
-		this.nodeRenderer = null;
-		removeAll();
-		revalidate();
-		this.repaint();
 	}
 
 	/**
@@ -583,27 +553,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			invalidate();
 			validate();
 			this.repaint();
-		}
-	}
-
-	/**
-	 * Renders HTML given as a string.
-	 *
-	 * @param htmlSource The HTML source code.
-	 * @param uri        A base URI used to resolve item URIs.
-	 * @param rcontext   The {@link org.loboevolution.http.HtmlRendererContext} instance.
-	 * @see #setDocument(Document, HtmlRendererContext)
-	 */
-	public void setHtml(String htmlSource, String uri, HtmlRendererContext rcontext) {
-		try {
-			final DocumentBuilderImpl builder = new DocumentBuilderImpl(rcontext.getUserAgentContext(), rcontext);
-			try (Reader reader = new StringReader(htmlSource)) {
-				final InputSourceImpl is = new InputSourceImpl(reader, uri);
-				final Document document = builder.parse(is);
-				setDocument(document, rcontext);
-			}
-		} catch (final IOException | SAXException ioe) {
-			throw new IllegalStateException("Unexpected condition.", ioe);
 		}
 	}
 

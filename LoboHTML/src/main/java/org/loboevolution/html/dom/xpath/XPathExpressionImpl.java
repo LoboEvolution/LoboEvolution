@@ -37,6 +37,8 @@ import org.loboevolution.type.NodeType;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 
+import javax.xml.transform.TransformerException;
+
 /**
  *
  * The class provides an implementation of XPathExpression according to the DOM
@@ -82,33 +84,7 @@ public class XPathExpressionImpl implements XPathExpression {
 		m_doc = doc;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 *
-	 * This method provides an implementation XPathResult.evaluate according to
-	 * the DOM L3 XPath Specification, Working Group Note 26 February 2004.
-	 *
-	 * <p>
-	 * See also the <a href=
-	 * 'http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>Document
-	 * Object Model (DOM) Level 3 XPath Specification</a>.
-	 * </p>
-	 *
-	 * <p>
-	 * Evaluates this XPath expression and returns a result.
-	 * </p>
-	 * @exception XPathException
-	 *                TYPE_ERR: Raised if the result cannot be converted to
-	 *                return the specified type.
-	 * @exception DOMException
-	 *                WRONG_DOCUMENT_ERR: The Node is from a document that is
-	 *                not supported by the XPathEvaluator that created this
-	 *                XPathExpression. <br>
-	 *                NOT_SUPPORTED_ERR: The Node is not a type permitted as an
-	 *                XPath context node.
-	 * @see org.loboevolution.html.xpath.XPathExpression#evaluate(Node, short, Object)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Object evaluate(Node contextNode, short type, Object result) throws XPathException, DOMException {
 
@@ -139,40 +115,27 @@ public class XPathExpressionImpl implements XPathExpression {
 			}
 		}
 
-		//
-		// If the type is not a supported type, throw an exception and be
-		// done with it!
 		if (!XPathResultImpl.isValidType(type)) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
 					new Object[] {(int) type});
 			throw new XPathException(XPathException.TYPE_ERR, fmsg);
 		}
 
-		// Create an XPathContext that doesn't support pushing and popping of
-		// variable resolution scopes. Sufficient for simple XPath 1.0
-		// expressions.
-		// Cache xpath context?
 		XPathContext xpathSupport = new XPathContext(false);
 		XObject xobj = null;
 
-		/* TODO Broken with new interfaces
-		 * if m_document is not null, build the DTM from the document
-		if (null != m_doc) {
+		/*if (null != m_doc) {
 			//xpathSupport.getDTMHandleFromNode(m_doc);
 		}
 
-		XObject xobj = null;
 		try {
-			//xobj = m_xpath.execute(xpathSupport, contextNode, null);
+			xobj = m_xpath.execute(xpathSupport, contextNode, null);
 		} catch (TransformerException te) {
 			// What should we do here?
 			throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, te.getMessageAndLocation());
-		}*/
+		}
+		*/
 
-		// Create a new XPathResult object
-		// Reuse result object passed in?
-		// The constructor will check the compatibility of type and xobj and
-		// throw an exception if they are not compatible.
 		return new XPathResultImpl(type, xobj, contextNode, m_xpath);
 	}
 

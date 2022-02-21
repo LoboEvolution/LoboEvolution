@@ -31,10 +31,12 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.TextFilter;
+import org.loboevolution.html.dom.xpath.XPathNSResolverImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
+import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -520,7 +522,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>getNextElementSibling.</p>
 	 *
-	 * @return a {@link org.w3c.dom.Element} object.
+	 * @return a {@link org.loboevolution.html.node.Element} object.
 	 */
 	public Element getNextElementSibling() {
 		final NodeImpl parent = (NodeImpl) this.getParentNode();
@@ -640,7 +642,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>getPreviousElementSibling.</p>
 	 *
-	 * @return a {@link org.w3c.dom.Element} object.
+	 * @return a {@link org.loboevolution.html.node.Element} object.
 	 */
 	public Element getPreviousElementSibling() {
 		final NodeImpl parent = (NodeImpl) this.getParentNode();
@@ -887,7 +889,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param newChild a {@link org.loboevolution.html.node.Node} object.
 	 * @param idx a int.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	protected Node insertAt(Node newChild, int idx) {
 		this.nodeList.add(idx, newChild);
@@ -984,7 +986,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public String lookupNamespaceURI(String prefix) {
-		return null;
+		XPathNSResolver xpath = new XPathNSResolverImpl(this);
+		return xpath.lookupNamespaceURI(prefix);
 	}
 
 	/** {@inheritDoc} */
@@ -1037,7 +1040,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public Node removeChildAt(int index) {
 		try {
@@ -1089,8 +1092,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>replaceAdjacentTextNodes.</p>
 	 *
-	 * @param node a {@link org.w3c.dom.Text} object.
-	 * @return a {@link org.w3c.dom.Text} object.
+	 * @param node a {@link org.loboevolution.html.node.Text} object.
+	 * @return a {@link org.loboevolution.html.node.Text} object.
 	 */
 	public Text replaceAdjacentTextNodes(Text node) {
 		try {
@@ -1133,9 +1136,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>replaceAdjacentTextNodes.</p>
 	 *
-	 * @param node a {@link org.w3c.dom.Text} object.
+	 * @param node a {@link org.loboevolution.html.node.Text} object.
 	 * @param textContent a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Text} object.
+	 * @return a {@link org.loboevolution.html.node.Text} object.
 	 */
 	public Text replaceAdjacentTextNodes(Text node, String textContent) {
 		try {
@@ -1212,7 +1215,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>setOwnerDocument.</p>
 	 *
-	 * @param value a {@link org.w3c.dom.Document} object.
+	 * @param value a {@link org.loboevolution.html.node.Document} object.
 	 */
 	public void setOwnerDocument(Document value) {
 		this.document = value;

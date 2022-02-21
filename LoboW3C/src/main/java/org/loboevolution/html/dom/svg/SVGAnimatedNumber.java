@@ -39,7 +39,7 @@ public interface SVGAnimatedNumber {
 	 * <p>setBaseVal.</p>
 	 *
 	 * @param baseVal a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setBaseVal(float baseVal);
 

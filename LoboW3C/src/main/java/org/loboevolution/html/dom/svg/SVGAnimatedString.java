@@ -38,7 +38,7 @@ public interface SVGAnimatedString {
 	 * <p>setBaseVal.</p>
 	 *
 	 * @param baseVal a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setBaseVal(String baseVal);
 

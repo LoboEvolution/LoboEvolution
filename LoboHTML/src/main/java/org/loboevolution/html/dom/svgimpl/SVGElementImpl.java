@@ -125,7 +125,7 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 	 * <p>setXMLlang.</p>
 	 *
 	 * @param xmllang a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public void setXMLlang(String xmllang) {
 		setAttribute("xml:lang", xmllang);
@@ -144,7 +144,7 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 	 * <p>setXMLspace.</p>
 	 *
 	 * @param xmlspace a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public void setXMLspace(String xmlspace) {
 		setAttribute("xml:space", xmlspace);

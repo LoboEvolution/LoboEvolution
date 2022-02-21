@@ -39,7 +39,7 @@ public interface SVGAnimatedInteger {
 	 * <p>setBaseVal.</p>
 	 *
 	 * @param baseVal a int.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setBaseVal(int baseVal);
 

@@ -71,7 +71,7 @@ public interface SVGPreserveAspectRatio {
 	 * <p>setAlign.</p>
 	 *
 	 * @param align a short.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setAlign(short align);
 
@@ -86,7 +86,7 @@ public interface SVGPreserveAspectRatio {
 	 * <p>setMeetOrSlice.</p>
 	 *
 	 * @param meetOrSlice a short.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setMeetOrSlice(short meetOrSlice);
 }

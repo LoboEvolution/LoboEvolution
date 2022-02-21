@@ -30,10 +30,6 @@ import org.loboevolution.html.dom.domimpl.HTMLStyleElementImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -95,7 +91,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertEquals("A text ", c.getData());
         assertEquals("node", d.getData());
         assertEquals(2, elm.getChildNodes().getLength());
-        assertTrue(d == c.getNextSibling());
+        assertSame(d, c.getNextSibling());
 
         c = document.createTextNode("A text node<");
         assertEquals("A text node<", c.getData());
@@ -264,7 +260,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
         Document cloned = (Document) document.cloneNode(false);
         assertTrue(document.isEqualNode(cloned));
-        assertTrue(document.getClass() == cloned.getClass());
+        assertSame(document.getClass(), cloned.getClass());
         DocumentType docType = domImpl.createDocumentType("foo", null, "http://www.example.com/foo.dtd");
         document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "foo", docType);
         Element docElm = document.getDocumentElement();
@@ -824,7 +820,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertSame(elem4, list.item(3));
         assertNull(list.item(4));
 
-        assertFalse(list.getLength() == 0);
+        assertNotEquals(0, list.getLength());
         assertTrue(list.contains(elem1));
         assertTrue(list.contains(elem2));
         assertTrue(list.contains(elem3));
@@ -961,7 +957,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
 
-        HTMLCollectionImpl list = (HTMLCollectionImpl)(HTMLCollectionImpl)document.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
+        HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -1439,11 +1435,8 @@ public class DOMDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    public void testImportNodeForeign() throws ParserConfigurationException {
-        DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docb = dbFac.newDocumentBuilder();
-        DOMImplementation impl = (DOMImplementation) docb.getDOMImplementation();
-        Document document = impl.createDocument(null, "doc", null);
+    public void testImportNodeForeign()  {
+        Document document = domImpl.createDocument(null, "doc", null);
         Element docElm = document.getDocumentElement();
         Element head = document.createElement("body");
         head.appendChild(document.createComment(" head comment "));

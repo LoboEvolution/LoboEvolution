@@ -57,7 +57,7 @@ public class AttrImpl extends AttrAbstract {
 	 * @param name a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.String} object.
 	 * @param specified a boolean.
-	 * @param owner a {@link org.w3c.dom.Element} object.
+	 * @param owner a {@link org.loboevolution.html.node.Element} object.
 	 * @param isId a boolean.
 	 */
 	public AttrImpl(String name, String value, boolean specified, Element owner, boolean isId) {

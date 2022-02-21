@@ -44,7 +44,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/**
 	 * <p>Constructor for NamedNodeMapImpl.</p>
 	 *
-	 * @param owner a {@link org.w3c.dom.Element} object.
+	 * @param owner a {@link org.loboevolution.html.node.Element} object.
 	 * @param attribs a {@link java.util.Map} object.
 	 */
 	public NamedNodeMapImpl(Element owner, Map<?, ?> attribs) {

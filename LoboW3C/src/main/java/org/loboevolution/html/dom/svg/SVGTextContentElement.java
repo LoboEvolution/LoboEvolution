@@ -71,7 +71,7 @@ public interface SVGTextContentElement
 	 * @param charnum a int.
 	 * @param nchars a int.
 	 * @return a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	float getSubStringLength(int charnum, int nchars);
 
@@ -80,7 +80,7 @@ public interface SVGTextContentElement
 	 *
 	 * @param charnum a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGPoint getStartPositionOfChar(int charnum);
 
@@ -89,7 +89,7 @@ public interface SVGTextContentElement
 	 *
 	 * @param charnum a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGPoint getEndPositionOfChar(int charnum);
 
@@ -98,7 +98,7 @@ public interface SVGTextContentElement
 	 *
 	 * @param charnum a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGRect} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGRect getExtentOfChar(int charnum);
 
@@ -107,7 +107,7 @@ public interface SVGTextContentElement
 	 *
 	 * @param charnum a int.
 	 * @return a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	float getRotationOfChar(int charnum);
 
@@ -124,7 +124,7 @@ public interface SVGTextContentElement
 	 *
 	 * @param charnum a int.
 	 * @param nchars a int.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void selectSubString(int charnum, int nchars);
 }

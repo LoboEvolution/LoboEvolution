@@ -117,14 +117,14 @@ public interface Time {
      * @exception DOMException
      *                NO_MODIFICATION_ALLOWED_ERR: Raised on attempts to modify
      *                this readonly attribute.
-     * @return a {@link org.w3c.dom.Element} object.
+     * @return a {@link org.loboevolution.html.node.Element} object.
      */
     Element getBaseElement();
 
     /**
      * <p>setBaseElement.</p>
      *
-     * @param baseElement a {@link org.w3c.dom.Element} object.
+     * @param baseElement a {@link org.loboevolution.html.node.Element} object.
      * @throws com.gargoylesoftware.css.dom.DOMException if any.
      */
     void setBaseElement(Element baseElement) throws DOMException;

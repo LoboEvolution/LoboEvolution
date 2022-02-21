@@ -221,7 +221,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	 * <p>Setter for the field currentTranslate.</p>
 	 *
 	 * @param currentTranslate a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public void setCurrentTranslate(SVGPoint currentTranslate) {
 		this.currentTranslate = currentTranslate;

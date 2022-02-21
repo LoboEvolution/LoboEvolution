@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -155,7 +155,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	/**
 	 * <p>getResponseXML.</p>
 	 *
-	 * @return a {@link org.w3c.dom.Document} object.
+	 * @return a {@link org.loboevolution.html.node.Document} object.
 	 */
 	public Document getResponseXML() {
 		return this.request.getResponseXML();

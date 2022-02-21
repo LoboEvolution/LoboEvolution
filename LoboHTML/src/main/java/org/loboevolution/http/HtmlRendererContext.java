@@ -59,6 +59,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
@@ -308,9 +309,9 @@ public class HtmlRendererContext {
 	 * @param connection A URL connection.
 	 * @return a {@link java.lang.String} object.
 	 */
-	protected String getDocumentCharset(URLConnection connection) {
+	protected Charset getDocumentCharset(URLConnection connection) {
 		final String encoding = Urls.getCharset(connection);
-		return encoding == null ? "ISO-8859-1" : encoding;
+		return encoding == null ? StandardCharsets.UTF_8 : Charset.forName(encoding);
 	}
 
 

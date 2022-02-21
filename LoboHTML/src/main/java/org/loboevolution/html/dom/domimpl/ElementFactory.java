@@ -172,7 +172,7 @@ class ElementFactory {
 	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 * @param name a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.dom.HTMLElement} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) {
 	    final String normalName = name.toUpperCase(Locale.ENGLISH);

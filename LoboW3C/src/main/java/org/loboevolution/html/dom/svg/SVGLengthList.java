@@ -39,7 +39,7 @@ public interface SVGLengthList {
 	/**
 	 * <p>clear.</p>
 	 *
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void clear();
 
@@ -48,7 +48,7 @@ public interface SVGLengthList {
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -62,7 +62,7 @@ public interface SVGLengthList {
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGLength getItem(int index);
 
@@ -72,7 +72,7 @@ public interface SVGLengthList {
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -87,7 +87,7 @@ public interface SVGLengthList {
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -101,7 +101,7 @@ public interface SVGLengthList {
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	SVGLength removeItem(int index);
 
@@ -110,7 +110,7 @@ public interface SVGLengthList {
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.

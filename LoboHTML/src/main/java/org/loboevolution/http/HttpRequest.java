@@ -27,7 +27,9 @@ import org.loboevolution.common.IORoutines;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.ReadyStateChangeListener;
+import org.loboevolution.html.js.xml.XMLDocumentBuilder;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.ReadyStateType;
 import org.loboevolution.net.UserAgent;
@@ -183,7 +185,7 @@ public class HttpRequest {
 	/**
 	 * <p>getResponseXML.</p>
 	 *
-	 * @return a {@link org.w3c.dom.Document} object.
+	 * @return a {@link org.loboevolution.html.node.Document} object.
 	 */
 	public synchronized Document getResponseXML() {
 		final byte[] bytes = this.responseBytes;
@@ -192,9 +194,8 @@ public class HttpRequest {
 		}
 		final InputStream in = new ByteArrayInputStream(bytes);
 		try {
-			return null;
-	        // TODO Broken with new interfaces
-			//return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);
+			XMLDocumentBuilder builder = new XMLDocumentBuilder();
+			return builder.parse(new InputSourceImpl(in, "", StandardCharsets.UTF_8));
 		} catch (final Exception err) {
 			logger.log(Level.WARNING, "Unable to parse response as XML.", err);
 			return null;

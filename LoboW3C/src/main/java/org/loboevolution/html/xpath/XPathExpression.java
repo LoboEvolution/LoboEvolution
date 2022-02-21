@@ -20,17 +20,13 @@
 
 package org.loboevolution.html.xpath;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.Node;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.xpath.XPathException;
 
 /**
  * The XPathExpression interface represents a parsed and resolved
  * XPath expression.
  * <p>See also the <a href='http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820'>Document Object Model (DOM) Level 3 XPath Specification</a>.
- *
- *
- *
  */
 public interface XPathExpression {
     /**
@@ -70,17 +66,17 @@ public interface XPathExpression {
      *   context node or the request type is not permitted by this
      *   XPathExpression.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.w3c.dom.DOMException if any.
-     * @throws org.w3c.dom.DOMException if any.
-     * @throws org.w3c.dom.xpath.XPathException if any.
-     * @throws org.w3c.dom.DOMException if any.
-     * @throws org.w3c.dom.DOMException if any.
-     * @throws org.w3c.dom.xpath.XPathException if any.
-     * @throws org.w3c.dom.DOMException if any.
+     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws org.loboevolution.html.xpath.XPathException if any.
+     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws org.loboevolution.html.xpath.XPathException if any.
+     * @throws com.gargoylesoftware.css.dom.DOMException if any.
      */
-    public Object evaluate(Node contextNode,
-                           short type,
-                           Object result)
+    Object evaluate(Node contextNode,
+                    short type,
+                    Object result)
                            throws XPathException, DOMException;
 
 }

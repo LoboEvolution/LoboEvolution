@@ -26,7 +26,7 @@ import org.loboevolution.html.dom.HTMLTableSectionElement;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.w3c.dom.DOMException;
+import com.gargoylesoftware.css.dom.DOMException;
 
 import java.util.Arrays;
 

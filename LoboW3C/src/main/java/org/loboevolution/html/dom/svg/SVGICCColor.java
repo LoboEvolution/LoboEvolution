@@ -39,7 +39,7 @@ public interface SVGICCColor {
 	 * <p>setColorProfile.</p>
 	 *
 	 * @param colorProfile a {@link java.lang.String} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setColorProfile(String colorProfile);
 

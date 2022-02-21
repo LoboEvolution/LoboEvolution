@@ -47,7 +47,7 @@ public interface SVGZoomAndPan {
 	 * <p>setZoomAndPan.</p>
 	 *
 	 * @param zoomAndPan a short.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setZoomAndPan(short zoomAndPan);
 }

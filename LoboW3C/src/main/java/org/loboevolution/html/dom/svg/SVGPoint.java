@@ -39,7 +39,7 @@ public interface SVGPoint {
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setX(float x);
 
@@ -54,7 +54,7 @@ public interface SVGPoint {
 	 * <p>setY.</p>
 	 *
 	 * @param y a float.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setY(final float y);
 

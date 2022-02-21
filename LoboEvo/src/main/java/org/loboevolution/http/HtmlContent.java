@@ -41,7 +41,7 @@ public class HtmlContent {
 	/**
 	 * <p>Constructor for HtmlContent.</p>
 	 *
-	 * @param document a {@link org.w3c.dom.Document} object.
+	 * @param document a {@link org.loboevolution.html.node.Document} object.
 	 */
 	public HtmlContent(Document document) {
 		this.document = document;

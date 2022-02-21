@@ -32,7 +32,7 @@ public interface TimeEvent extends Event {
      * The view attribute identifies the AbstractView
      * from which the event was generated.
      *
-     * @return a {@link org.w3c.dom.views.AbstractView} object.
+     * @return a {@link org.loboevolution.html.node.views.AbstractView} object.
      */
     AbstractView getView();
 

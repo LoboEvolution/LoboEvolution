@@ -54,7 +54,7 @@ public class NavigationManager {
 	 * <p>getDocument.</p>
 	 *
 	 * @param uri a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.Document} object.
+	 * @return a {@link org.loboevolution.html.node.Document} object.
 	 */
 	public static Document getDocument(String uri) {
 		final HtmlPanel panel = new HtmlPanel();

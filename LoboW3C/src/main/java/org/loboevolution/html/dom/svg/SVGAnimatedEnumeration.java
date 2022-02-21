@@ -39,7 +39,7 @@ public interface SVGAnimatedEnumeration {
 	 * <p>setBaseVal.</p>
 	 *
 	 * @param baseVal a short.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	void setBaseVal(short baseVal);
 

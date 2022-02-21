@@ -35,8 +35,8 @@ public class EventFactory {
 	 * <p>createEvent.</p>
 	 *
 	 * @param eventType a {@link java.lang.String} object.
-	 * @return a {@link org.w3c.dom.events.Event} object.
-	 * @throws org.w3c.dom.DOMException if any.
+	 * @return a {@link org.loboevolution.html.node.events.Event} object.
+	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public static Event createEvent(String eventType) {
 		Event theEvent = null;

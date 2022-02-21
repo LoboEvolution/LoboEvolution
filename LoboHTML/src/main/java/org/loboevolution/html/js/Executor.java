@@ -67,7 +67,7 @@ public class Executor {
 	 *
 	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
-	 * @param event a {@link org.w3c.dom.events.Event} object.
+	 * @param event a {@link org.loboevolution.html.node.events.Event} object.
 	 * @param obj an array of {@link java.lang.Object} objects.
 	 * @return a boolean.
 	 */
@@ -81,7 +81,7 @@ public class Executor {
 	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param thisObject a {@link java.lang.Object} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
-	 * @param event a {@link org.w3c.dom.events.Event} object.
+	 * @param event a {@link org.loboevolution.html.node.events.Event} object.
 	 * @param obj an array of {@link java.lang.Object} objects.
 	 * @return a boolean.
 	 */

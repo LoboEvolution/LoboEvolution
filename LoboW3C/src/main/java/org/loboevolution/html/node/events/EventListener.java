@@ -22,9 +22,6 @@ package org.loboevolution.html.node.events;
 
 /**
  * <p>EventListener interface.</p>
- *
- *
- *
  */
 @FunctionalInterface
 public interface EventListener<E extends Event> {
