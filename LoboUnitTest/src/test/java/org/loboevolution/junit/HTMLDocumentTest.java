@@ -32,16 +32,12 @@ import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
+import org.loboevolution.html.js.css.MediaListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSRuleList;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.type.NodeType;
-
-import java.awt.color.ICC_Profile;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 import static org.junit.Assert.*;
 
@@ -66,7 +62,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void getDocumentElement() {
         Element elm = document.getDocumentElement();
         assertNotNull(elm);
-        assertEquals("html", elm.getTagName());
+        assertEquals("HTML", elm.getTagName());
     }
 
     @Test
@@ -210,8 +206,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertTrue(elm instanceof HTMLLinkElement);
         elm = document.createElement("LINK");
         assertTrue(elm instanceof HTMLLinkElement);
-        assertEquals("link", elm.getLocalName());
-        assertEquals("link", elm.getTagName());
+        assertEquals("LINK", elm.getLocalName());
+        assertEquals("LINK", elm.getTagName());
         elm = document.createElement("style");
         assertTrue(elm instanceof HTMLLinkElement);
         elm = document.createElement("STYLE");
@@ -264,8 +260,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
         elm = document.createElementNS(HTMLDocument.HTML_NAMESPACE_URI, "LINK");
         assertTrue(elm instanceof HTMLLinkElement);
-        assertEquals("link", elm.getLocalName());
-        assertEquals("link", elm.getTagName());
+        assertEquals("LINK", elm.getLocalName());
+        assertEquals("LINK", elm.getTagName());
         assertEquals(HTMLDocument.HTML_NAMESPACE_URI, elm.getNamespaceURI());
 
         elm = document.createElementNS(HTMLDocument.HTML_NAMESPACE_URI, "style");
@@ -440,7 +436,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testEntities1() {
         Element elm = document.getElementById("entity");
         assertNotNull(elm);
-        assertEquals("span", elm.getTagName());
+        assertEquals("SPAN", elm.getTagName());
         assertEquals("<>", elm.getTextContent());
         NodeList nl = elm.getChildNodes();
         assertNotNull(nl);
@@ -459,7 +455,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testEntities2() {
         Element elm = document.getElementById("entiacute");
         assertNotNull(elm);
-        assertEquals("span", elm.getTagName());
+        assertEquals("SPAN", elm.getTagName());
         assertEquals("ítem", elm.getTextContent());
         NodeList nl = elm.getChildNodes();
         assertNotNull(nl);
@@ -532,7 +528,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testComment() {
         Comment c = document.createComment(" A comment ");
         assertEquals(" A comment ", c.getData());
-        assertEquals("<!-- A comment -->", c.toString());
         Node clone = c.cloneNode(false);
         assertNotNull(clone);
         assertEquals(c.getNodeType(), clone.getNodeType());
@@ -621,7 +616,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void getElementById() {
         HTMLElementImpl elm = (HTMLElementImpl) document.getElementById("ul1");
         assertNotNull(elm);
-        assertEquals("ul", elm.getTagName());
+        assertEquals("UL", elm.getTagName());
         assertNull(document.getElementById("xxxxxx"));
         assertEquals("ul1", elm.getAttribute("id"));
         assertEquals("ul1", elm.getId());
@@ -637,15 +632,15 @@ public class HTMLDocumentTest extends LoboUnitTest {
         HTMLCollectionImpl stylelist = (HTMLCollectionImpl) document.getElementsByTagName("style");
         assertNotNull(stylelist);
         assertEquals(2, stylelist.getLength());
-        assertEquals("style", stylelist.item(0).getNodeName());
-        assertEquals("style", stylelist.item(1).getNodeName());
+        assertEquals("STYLE", stylelist.item(0).getNodeName());
+        assertEquals("STYLE", stylelist.item(1).getNodeName());
         assertNull(stylelist.item(-1));
         assertNull(stylelist.item(2));
         assertFalse(stylelist.isEmpty());
         HTMLCollection list = document.getElementsByTagName("li");
         assertNotNull(list);
         assertEquals(6, list.getLength());
-        assertEquals("li", list.item(0).getNodeName());
+        assertEquals("LI", list.item(0).getNodeName());
         list.item(0).getParentNode().appendChild(document.createElement("li"));
         assertEquals(7, list.getLength());
         list = document.getElementsByTagName("xxxxxx");
@@ -931,9 +926,9 @@ public class HTMLDocumentTest extends LoboUnitTest {
         HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
         HTMLElementImpl elm = (HTMLElementImpl) doc.getElementById("firstH3");
         assertNotNull(elm);
-        assertEquals("font-family: 'Does Not Exist', Neither; color: navy; ", elm.getAttribute("style"));
+        assertEquals("font-family: 'Does Not Exist', Neither; color: navy", elm.getAttribute("style"));
         CSSStyleDeclarationImpl style = elm.getStyle().getStyleDeclarations().get(0);
-        assertEquals("font-family: 'Does Not Exist', Neither; color: navy; ", style.getCssText());
+        assertEquals("font-family: 'Does Not Exist', Neither; color: navy", style.getCssText());
         assertEquals(2, style.getLength());
         assertEquals("'Does Not Exist', Neither", style.getPropertyValue("font-family"));
         Attr attr = elm.getAttributeNode("style");
@@ -959,9 +954,10 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testCompatComputedStyle() {
         HTMLElementImpl elm = (HTMLElementImpl) document.getElementById("cell12");
         assertNotNull(elm);
-        CSSStyleDeclarationImpl style = elm.getStyle().getStyleDeclarations().get(0);
-        assertNull(style);
+        assertNotNull(elm.getStyle());
+        assertNotNull(elm.getStyle().getStyleDeclarations());
         CSSStyleDeclarationImpl styledecl = elm.getStyle().getStyleDeclarations().get(0);
+        assertNull(styledecl);
         assertEquals(12, styledecl.getLength());
         assertEquals("5pt", styledecl.getPropertyValue("margin-left"));
         assertEquals("4pt", styledecl.getPropertyValue("padding-top"));
@@ -980,7 +976,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertSame(sheet.getOwnerNode(), style);
 
         style.setAttribute("media", "screen");
-        CSSStyleSheetImpl sheet2 = (CSSStyleSheetImpl) ((HTMLLinkElement) style).getSheet();
+        CSSStyleSheetImpl sheet2 = (CSSStyleSheetImpl) ((HTMLLinkElementImpl) style).getSheet();
         assertNotNull(sheet2);
         assertSame(sheet2, sheet);
         assertEquals(1, sheet2.getMedia().getLength());
@@ -1150,7 +1146,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertEquals(1, sheet2.getMedia().getLength());
         assertEquals("screen", sheet2.getMedia().item(0));
 
-        link.setAttribute("href", "http://www.example.com/css/alter1.css");
+        link.setAttribute("href", "css/alter1.css");
         sheet = (CSSStyleSheetImpl) ((HTMLLinkElement) link).getSheet();
         assertSame(sheet2, sheet);
         assertSame(sheet.getOwnerNode(), link);

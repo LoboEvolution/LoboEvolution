@@ -50,9 +50,15 @@ public class DOMImplementationImpl implements DOMImplementation {
 	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) {
 		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
 		doc.setDoctype(doctype);
+		doc.setNamespaceURI(namespaceURI);
 
 		if (Strings.isNotBlank(qualifiedName)) {
-			final Element elem = doc.createElement(qualifiedName.toUpperCase());
+			ElementImpl elem;
+			if(Strings.isNotBlank(namespaceURI)){
+				elem = (ElementImpl)doc.createElementNS(namespaceURI, qualifiedName);
+			} else {
+				elem = (ElementImpl)doc.createElement(qualifiedName);
+			}
 			doc.appendChild(elem);
 		}
 

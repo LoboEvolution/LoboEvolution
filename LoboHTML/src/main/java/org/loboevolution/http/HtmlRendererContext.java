@@ -283,10 +283,14 @@ public class HtmlRendererContext {
 	public String getCurrentURL() {
 		HtmlPanel html = htmlPanel;
 		IBrowserPanel panel = html.getBrowserPanel();
-		IBrowserFrame frame = panel.getBrowserFrame();
-		IToolBar toolbar = frame.getToolbar();
-		JTextField jtf = toolbar.getAddressBar();
-		return jtf.getText();
+		if (panel != null) {
+			IBrowserFrame frame = panel.getBrowserFrame();
+			IToolBar toolbar = frame.getToolbar();
+			JTextField jtf = toolbar.getAddressBar();
+			return jtf.getText();
+		} else {
+			return "";
+		}
 	}
 
 	/**

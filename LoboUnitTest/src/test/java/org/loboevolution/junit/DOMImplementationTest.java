@@ -50,7 +50,6 @@ public class DOMImplementationTest extends LoboUnitTest {
         assertNull(doctype.getPreviousSibling());
         assertNull(doctype.getParentNode());
         assertNull(doctype.getOwnerDocument());
-        doctype.setNodeValue("foo"); // No effect
         Document document = domImpl.createDocument(null, null, doctype);
         assertNull(doctype.getNextSibling());
         assertNull(doctype.getPreviousSibling());

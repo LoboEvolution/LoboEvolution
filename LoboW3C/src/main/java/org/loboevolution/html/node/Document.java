@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.node;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLHeadElement;
@@ -621,7 +622,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode {
 	 * @param data String that specifies the nodeValue property of the text node.
 	 * @return a {@link org.loboevolution.html.node.Text} object.
 	 */
-	Text createTextNode(String data);
+	Text createTextNode(String data) throws DOMException;
 
 	/**
 	 * Creates a TreeWalker object that you can use to traverse filtered lists of

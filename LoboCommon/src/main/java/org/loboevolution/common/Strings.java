@@ -24,6 +24,7 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
@@ -47,61 +48,6 @@ public final class Strings {
 	 */
 	private Strings() { }
 
-	/**
-	 * Compare versions.
-	 *
-	 * @param version1         the version1
-	 * @param version2         the version2
-	 * @param startsWithDigits the starts with digits
-	 * @return the int
-	 */
-	public static int compareVersions(String version1, String version2, boolean startsWithDigits) {
-		if (version1 == null) {
-			return version2 == null ? 0 : -1;
-		} else if (version2 == null) {
-			return +1;
-		}
-		if (startsWithDigits) {
-			final String v1prefix = leadingDigits(version1);
-			final String v2prefix = leadingDigits(version2);
-			if (v1prefix.length() == 0) {
-				if (v2prefix.length() == 0) {
-					return 0;
-				}
-				return -1;
-			} else if (v2prefix.length() == 0) {
-				return +1;
-			}
-			int diff;
-			try {
-				diff = Integer.parseInt(v1prefix) - Integer.parseInt(v2prefix);
-			} catch (final NumberFormatException nfe) {
-				diff = 0;
-			}
-			if (diff == 0) {
-				return compareVersions(version1.substring(v1prefix.length()), version2.substring(v2prefix.length()),
-						false);
-			}
-			return diff;
-		} else {
-			final String v1prefix = leadingNonDigits(version1);
-			final String v2prefix = leadingNonDigits(version2);
-			if (v1prefix.length() == 0) {
-				if (v2prefix.length() == 0) {
-					return 0;
-				}
-				return -1;
-			} else if (v2prefix.length() == 0) {
-				return +1;
-			}
-			final int diff = v1prefix.compareTo(v2prefix);
-			if (diff == 0) {
-				return compareVersions(version1.substring(v1prefix.length()), version2.substring(v2prefix.length()),
-						true);
-			}
-			return diff;
-		}
-	}
 
 	/**
 	 * Count chars.
@@ -119,26 +65,6 @@ public final class Strings {
 			}
 		}
 		return count;
-	}
-
-	/**
-	 * Count lines.
-	 *
-	 * @param text the text
-	 * @return the int
-	 */
-	public static int countLines(String text) {
-		int startIdx = 0;
-		int lineCount = 1;
-		while (true) {
-			final int lbIdx = text.indexOf('\n', startIdx);
-			if (lbIdx == -1) {
-				break;
-			}
-			lineCount++;
-			startIdx = lbIdx + 1;
-		}
-		return lineCount;
 	}
 
 	/**
@@ -287,19 +213,6 @@ public final class Strings {
 	}
 	
 	/**
-	 * <p>getTokensWithCollection.</p>
-	 *
-	 * @param str a {@link java.lang.String} object.
-	 * @param delimiters a {@link java.lang.String} object.
-	 * @return an list of {@link java.lang.String} objects.
-	 */
-	public static List<String> getTokensWithCollection(String str, String delimiters) {
-	    return Collections.list(new StringTokenizer(str, delimiters, true)).stream()
-	      .map(token -> (String) token)
-	      .collect(Collectors.toList());
-	}
-
-	/**
 	 * Strict html encode.
 	 *
 	 * @param rawText the raw text
@@ -352,23 +265,6 @@ public final class Strings {
 			return rawText.substring(0, index);
 		}
 		return rawText;
-	}
-
-	/**
-	 * Truncate.
-	 *
-	 * @param text      the text
-	 * @param maxLength the max length
-	 * @return the string
-	 */
-	public static String truncate(String text, int maxLength) {
-		if (text == null) {
-			return null;
-		}
-		if (text.length() <= maxLength) {
-			return text;
-		}
-		return text.substring(0, Math.max(maxLength - 3, 0)) + "...";
 	}
 
 	/**
@@ -452,5 +348,20 @@ public final class Strings {
 			builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
 		return builder.toString();
+	}
+
+	/**
+	 * <p>isValiString.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.lang.Boolean} object.
+	 */
+	public static boolean isValidString(String name) {
+		int len = name.length();
+		if (len == 0) {
+			return false;
+		}
+		final Pattern pattern = Pattern.compile("[a-z][a-z0-9-]*",Pattern.CASE_INSENSITIVE);
+		return pattern.matcher(name).matches();
 	}
 }

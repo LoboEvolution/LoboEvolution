@@ -22,6 +22,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
@@ -126,14 +127,16 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		this.ucontext = ucontext;
 		this.reader = reader;
 		try {
-			final URL docURL = new URL(documentURI);
-			final SecurityManager sm = System.getSecurityManager();
-			if (sm != null) {
-				sm.checkPermission(new SocketPermission(docURL.getHost(), "connect"));
+			if (Strings.isNotBlank(documentURI)) {
+				final URL docURL = new URL(documentURI);
+				final SecurityManager sm = System.getSecurityManager();
+				if (sm != null) {
+					sm.checkPermission(new SocketPermission(docURL.getHost(), "connect"));
+				}
+				this.documentURL = docURL;
+				setDomain(docURL.getHost());
+				this.setDocumentURI(documentURI);
 			}
-			this.documentURL = docURL;
-			setDomain(docURL.getHost());
-			this.setDocumentURI(documentURI);
 		} catch (final MalformedURLException mfu) {
 			logger.warning("HTMLDocumentImpl(): Document URI [" + documentURI + "] is malformed.");
 		}

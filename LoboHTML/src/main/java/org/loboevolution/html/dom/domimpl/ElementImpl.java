@@ -152,6 +152,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setAttribute(String name, String value) {
+
+		if (Strings.isBlank(name)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null name");
+		}
+
+		if (!Strings.isValidString(name)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
 		map.setNamedItem(new AttrImpl(name, value, true, this, "id".equalsIgnoreCase(name)));
 		assignAttributeField(name, value);
 	}
@@ -159,6 +168,11 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
+
+		if (Strings.isBlank(qualifiedName)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null name");
+		}
+
 		final AttrImpl attr = new AttrImpl(qualifiedName, value, true, this, "id".equalsIgnoreCase(qualifiedName));
 		attr.setNamespaceURI(namespaceURI);
 		map.setNamedItem(attr);
@@ -199,12 +213,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
 		return setAttributeNode(newAttr);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean hasAttributeNS(String namespaceURI, String localName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
 	}
 
 	/** {@inheritDoc} */
@@ -326,6 +334,18 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public boolean hasAttribute(String name) {
 		return map.getNamedItem(name) != null;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public boolean hasAttributeNS(String namespaceURI, String localName) throws DOMException {
+
+		if (Strings.isBlank(localName)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null localName");
+		}
+
+		Attr attr = map.getNamedItem(localName);
+		return attr != null && namespaceURI.equals(attr.getNamespaceURI());
 	}
 
 	/** {@inheritDoc} */
@@ -560,7 +580,18 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public boolean matches(String selectors) {
-		// TODO Auto-generated method stub
+		if (Strings.isBlank(selectors)) {
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "The provided selector is empty.");
+		}
+
+		SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+		if (selectorList != null) {
+			for (Selector select : selectorList) {
+				if (StyleSheetAggregator.selects(select, this, null)) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -761,7 +792,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public TypeInfo getSchemaTypeInfo() {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		return new AttributeTypeInfo(false);
 	}
 
 	/** {@inheritDoc} */

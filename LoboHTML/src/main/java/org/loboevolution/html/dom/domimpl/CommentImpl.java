@@ -22,15 +22,14 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.Comment;
 
+import org.loboevolution.html.node.Node;
 import org.loboevolution.type.NodeType;
 
 /**
  * <p>CommentImpl class.</p>
- *
- *
- *
  */
 public class CommentImpl extends CharacterDataImpl implements Comment {
 	/**
@@ -70,5 +69,16 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 	@Override
 	public void setNodeValue(String nodeValue) {
 		setTextContent(nodeValue);
+	}
+
+	@Override
+	public Node appendChild(Node newChild) {
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "This node type does not support this method.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object Comment]";
 	}
 }

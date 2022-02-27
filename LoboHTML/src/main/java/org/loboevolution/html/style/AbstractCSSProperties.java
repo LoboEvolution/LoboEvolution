@@ -23,16 +23,17 @@
 package org.loboevolution.html.style;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.util.CSSProperties;
 import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.style.setter.*;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import com.gargoylesoftware.css.dom.DOMException;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -72,7 +73,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		subSetters.put(FONT, new FontSetter());
 	}
 
-	private final CSSPropertiesContext context;
+	private final HTMLElementImpl context;
 
 	private AbstractCSSProperties localStyleProperties;
 
@@ -87,9 +88,9 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	/**
 	 * <p>Constructor for AbstractCSSProperties.</p>
 	 *
-	 * @param context a {@link org.loboevolution.html.style.CSSPropertiesContext} object.
+	 * @param context a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public AbstractCSSProperties(CSSPropertiesContext context) {
+	public AbstractCSSProperties(HTMLElementImpl context) {
 		this.context = context;
 	}
 
@@ -2035,6 +2036,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				final CSSStyleDeclarationImpl sd = parser.parseStyleDeclaration(cssText);
 				sds.addStyleDeclaration(sd);
 				setLocalStyleProperties(sds);
+				context.setAttribute("style", cssText);
 			} catch (final Exception err) {
 				logger.log(Level.WARNING, "Unable to parse style attribute value", err);
 			}
@@ -2047,7 +2049,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getCssText() throws DOMException {
-		return this.cssText;
+		return Strings.isNotBlank(this.cssText) ? this.cssText : context.getAttribute("style");
 	}
 	
 	/**

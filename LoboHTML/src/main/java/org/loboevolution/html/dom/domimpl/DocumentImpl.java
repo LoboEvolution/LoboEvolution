@@ -24,6 +24,7 @@ import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.*;
@@ -48,6 +49,7 @@ import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.type.DocumentReadyState;
+import org.loboevolution.type.NodeType;
 import org.loboevolution.type.VisibilityState;
 
 import java.io.IOException;
@@ -98,6 +100,11 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element createElement(String tagName) {
+
+		if (Strings.isBlank(tagName) || !Strings.isValidString(tagName)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
 		if ("rss".equalsIgnoreCase(tagName)) {isrss = true;}
 		return new ElementFactory(isrss).createElement((HTMLDocumentImpl) this, tagName);
 	}
@@ -105,7 +112,42 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName) {
-		ElementImpl elem = (ElementImpl) createElement(qualifiedName);
+
+		if (Strings.isBlank(qualifiedName)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
+		if (qualifiedName.contains(":")) {
+
+			String[] split = qualifiedName.split(":");
+			if (split.length != 2) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "he qualified name provided has an empty local name.");
+			}
+			if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name provided has an empty local name.");
+			}
+
+			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
+
+			if (Strings.isBlank(namespaceURI)) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespace URI provided is not valid");
+			}
+		} else{
+			namespaceURI = Strings.isBlank(namespaceURI) ? getNamespaceURI() : namespaceURI;
+
+			if (!Strings.isValidString(qualifiedName)) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
+
+			if ("xmlns".equals(qualifiedName)) {
+				if (!XMLNS_NAMESPACE_URI.equals(namespaceURI)) {
+					throw new DOMException(DOMException.NAMESPACE_ERR, "xmlns local name but not xmlns namespace");
+				}
+			}
+		}
+		ElementImpl elem = (ElementImpl) new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
 		elem.setNamespaceURI(namespaceURI);
 		return elem;
 	}
@@ -113,6 +155,16 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName, String options) {
+		if (Strings.isBlank(qualifiedName) || !Strings.isValidString(qualifiedName)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
+		if ("xmlns".equals(qualifiedName)) {
+			if (!XMLNS_NAMESPACE_URI.equals(namespaceURI)) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "xmlns local name but not xmlns namespace");
+			}
+		}
+
 		return createElementNS(namespaceURI, qualifiedName);
 	}
 
@@ -215,9 +267,18 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		return new NodeListImpl(al);
 	}
 
-	/** {@inheritDoc} */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public DocumentType getDoctype() {
+		if (doctype == null) {
+			for (Node node : nodeList) {
+				if (node.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+					return (DocumentType) node;
+				}
+			}
+		}
 		return this.doctype;
 	}
 
@@ -234,7 +295,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Element getDocumentElement() {
 		for (Node node : nodeList) {
-			if (node instanceof Element) {
+			if (node.getNodeType() == NodeType.ELEMENT_NODE) {
 				return (Element) node;
 			}
 		}
@@ -244,28 +305,74 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Text createTextNode(String data) {
+		if (data == null) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null data");
+		}
+
 		final TextImpl node = new TextImpl(data);
 		node.setOwnerDocument(this);
 		return node;
 	}
 
-	/** {@inheritDoc} */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Attr createAttribute(String name) {
-		return new AttrImpl(name);
+		if (Strings.isBlank(name)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+		final AttrImpl attr = new AttrImpl(name);
+		attr.setIsId("id".equalsIgnoreCase(name));
+		return attr;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
+
+		if (Strings.isBlank(qualifiedName)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
+		if (qualifiedName.contains(":")) {
+			String[] split = qualifiedName.split(":");
+			if (split.length != 2) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "he qualified name provided has an empty local name.");
+			}
+			if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "he qualified name provided has an empty local name.");
+			}
+
+			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
+		} else{
+			if (!Strings.isValidString(qualifiedName)) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
+		}
+
+		if (Strings.isBlank(namespaceURI)) {
+			throw new DOMException(DOMException.NAMESPACE_ERR, "The namespace URI provided is not valid");
+		}
+
+		if ("xmlns".equals(qualifiedName) && !XMLNS_NAMESPACE_URI.equals(namespaceURI)) {
+			throw new DOMException(DOMException.NAMESPACE_ERR, "xmlns local name but not xmlns namespace");
+		}
+
 		AttrImpl attr = new AttrImpl(qualifiedName);
 		attr.setNamespaceURI(namespaceURI);
+		attr.setIsId("id".equalsIgnoreCase(qualifiedName));
 		return attr;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public CDATASection createCDATASection(String data) {
+		if (data == null) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null data");
+		}
 		CDataSectionImpl node = new CDataSectionImpl(data);
 		node.setOwnerDocument(this.document);
 		return node;
@@ -274,6 +381,9 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Comment createComment(String data) {
+		if (data == null) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null data");
+		}
 		CommentImpl node = new CommentImpl(data);
 		node.setOwnerDocument(this.document);
 		return node;
@@ -290,6 +400,20 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public ProcessingInstruction createProcessingInstruction(String target, String data) {
+		if (target == null || target.length() == 0) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Void target");
+		}
+
+		if (target.equalsIgnoreCase("xml")) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR,
+					"An xml declaration is not a processing instruction");
+		}
+
+		if (data.contains("?>")) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR,
+					"A processing instruction data cannot contain a '?>'");
+		}
+
 		final HTMLProcessingInstruction node = new HTMLProcessingInstruction("");
 		node.setData(data);
 		node.setTarget(target);

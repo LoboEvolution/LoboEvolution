@@ -22,14 +22,11 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.CharacterData;
-import org.loboevolution.html.node.Node;
 
 /**
  * <p>Abstract CharacterDataImpl class.</p>
- *
- *
- *
  */
 public class CharacterDataImpl extends EventTargetImpl implements CharacterData {
 	
@@ -63,6 +60,11 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 	/** {@inheritDoc} */
 	@Override
 	public void deleteData(int offset, int count) {
+		int dl = text.length();
+		if (offset < 0 || count < 0 || offset >= dl) {
+			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
+		}
+
 		final StringBuilder buffer = new StringBuilder(this.text);
 		final StringBuilder result = buffer.delete(offset, offset + count);
 		this.text = result.toString();
@@ -101,6 +103,10 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 	/** {@inheritDoc} */
 	@Override
 	public void insertData(int offset, String arg) {
+		int dl = text.length();
+		if (offset < 0 || offset > dl) {
+			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
+		}
 		final StringBuilder buffer = new StringBuilder(this.text);
 		final StringBuilder result = buffer.insert(offset, arg);
 		this.text = result.toString();
@@ -112,6 +118,10 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 	/** {@inheritDoc} */
 	@Override
 	public void replaceData(int offset, int count, String arg) {
+		int dl = text.length();
+		if (offset < 0 || offset > dl) {
+			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
+		}
 		final StringBuilder buffer = new StringBuilder(this.text);
 		final StringBuilder result = buffer.replace(offset, offset + count, arg);
 		this.text = result.toString();

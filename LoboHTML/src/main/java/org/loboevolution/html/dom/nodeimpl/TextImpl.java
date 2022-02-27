@@ -48,55 +48,31 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		this.text = text;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getlocalName()
-	 */
+
 	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeName()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
 		return "#text";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeType()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public NodeType getNodeType() {
 		return NodeType.TEXT_NODE;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeValue()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeValue() {
 		return this.text;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.Text#getwholeText()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String getWholeText() {
@@ -107,11 +83,6 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		return parent.getTextContent();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.Text#isElementContentWhitespace()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean isElementContentWhitespace() {
@@ -119,14 +90,14 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		return t == null || t.trim().equals("");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.Text#replaceWholeText(java.lang.String)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Text replaceWholeText(String content) {
+		if (content == null) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null content (use empty string instead)");
+		}
+
+
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		if (parent == null) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
@@ -134,11 +105,6 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		return parent.replaceAdjacentTextNodes(this, content);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#setnodeValue(java.lang.String)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String nodeValue) {
@@ -151,18 +117,10 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		this.text = textContent;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.Text#splitText(int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Text splitText(int offset) {
 		final NodeImpl parent = (NodeImpl) getParentNode();
-		if (parent == null) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
-		}
 		final String t = this.text;
 		if (offset < 0 || offset > t.length()) {
 			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Bad offset: " + offset);
@@ -172,7 +130,12 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		this.text = content1;
 		final TextImpl newNode = new TextImpl(content2);
 		newNode.setOwnerDocument(this.document);
-		return (Text) parent.insertAfter(newNode, this);
+
+		if (parent != null) {
+			return (Text) parent.insertAfter(newNode, this);
+		}
+
+		return newNode;
 	}
 
 	/** {@inheritDoc} */

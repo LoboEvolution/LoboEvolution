@@ -90,19 +90,51 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public NodeImpl() {
 		super();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public Node appendChild(Node newChild) {
-		synchronized (this.treeLock) {
-			nodeList.add(newChild);
-			if (newChild instanceof NodeImpl) {
-				((NodeImpl) newChild).setParentImpl(this);
+
+		if (newChild.getNodeType() == NodeType.DOCUMENT_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a document.");
+		}
+
+		if (newChild.getNodeType() == NodeType.ATTRIBUTE_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
+		}
+
+		if (newChild.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+			NodeListImpl list = getNodeList();
+			list.forEach(n -> {
+				if (n.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one doctype on document allowed.");
+				}
+			});
+		}
+
+		if (newChild.getNodeType() == NodeType.ELEMENT_NODE) {
+
+			if (newChild.isSameNode(this)) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
+			}
+
+			if (getNodeType() == NodeType.DOCUMENT_NODE) {
+				NodeListImpl list = getNodeList();
+				list.forEach(node ->{
+					if(node.getNodeType() == NodeType.ELEMENT_NODE){
+						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
+					}
+				});
 			}
 		}
+
+		nodeList.add(newChild);
+		((NodeImpl) newChild).setParentImpl(this);
+
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}
+
 		return newChild;
 	}
 
@@ -915,10 +947,40 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				return newChild;
 			}
 
+			if (!getNodeList().contains(refChild)) {
+				throw new DOMException(DOMException.NOT_FOUND_ERR, "Not a child of this node.");
+			}
+
 			final int idx = this.nodeList.indexOf(refChild);
 			if (idx == -1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
 			}
+
+			if (newChild.getNodeType() == NodeType.DOCUMENT_NODE) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a document.");
+			}
+
+			if (newChild.getNodeType() == NodeType.ATTRIBUTE_NODE) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
+			}
+
+			if (newChild.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+				NodeListImpl list = getNodeList();
+				list.forEach(n -> {
+					if (n.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one doctype on document allowed.");
+					}
+				});
+			}
+
+			if (newChild.getNodeType() == NodeType.ELEMENT_NODE) {
+
+				if (newChild.isSameNode(this)) {
+					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
+				}
+
+			}
+
 			this.nodeList.add(idx, newChild);
 			if (newChild instanceof NodeImpl) {
 				((NodeImpl) newChild).setParentImpl(this);
@@ -1250,7 +1312,18 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	/** {@inheritDoc} */
 	@Override
-	public void setPrefix(String prefix) {
+	public void setPrefix(String prefix) throws DOMException {
+		if ("xmlns".equals(getLocalName())
+				|| ("xmlns".equals(prefix) && !Document.XMLNS_NAMESPACE_URI.equals(getNamespaceURI()))) {
+			throw new DOMException(DOMException.NAMESPACE_ERR, "Cannot set prefix to this node");
+		}
+
+		if ("xml".equals(prefix) && !Document.XML_NAMESPACE_URI.equals(getNamespaceURI())) {
+			throw new DOMException(DOMException.NAMESPACE_ERR, "Wrong namespace for prefix xml");
+		}
+		if (prefix != null && !Strings.isValidString(prefix)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Invalid prefix");
+		}
 		this.prefix = prefix;
 	}
 

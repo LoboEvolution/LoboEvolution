@@ -113,9 +113,9 @@ public class DOMElementTest extends LoboUnitTest {
 		assertEquals("bodyId", body.getAttributeNodeNS(Document.HTML_NAMESPACE_URI, "id").getValue());
 		assertTrue(body.hasAttributeNS(Document.HTML_NAMESPACE_URI, "id"));
 		assertFalse(body.hasAttributeNS(Document.HTML_NAMESPACE_URI, "foo"));
-		assertEquals("", body.getAttribute("foo"));
+		assertEquals(null, body.getAttribute("foo"));
 		assertNull(body.getAttributeNode("foo"));
-		assertEquals("", body.getAttributeNS(Document.NAMESPACE_SVG, "id"));
+		assertEquals(null, body.getAttributeNS(Document.NAMESPACE_SVG, "id"));
 		assertNull(body.getAttributeNodeNS(Document.NAMESPACE_SVG, "id"));
 		assertNotNull(idattr.getOwnerElement());
 		html.appendChild(body);

@@ -111,10 +111,10 @@ public final class CSSUtilities {
 	 * @return a {@link com.gargoylesoftware.css.dom.CSSStyleSheetImpl} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static CSSStyleSheetImpl parseCssExternal(String href, URL scriptURL, String baseURI) throws Exception {
+	public static CSSStyleSheetImpl parseCssExternal(String href, URL scriptURL, String baseURI, boolean test) throws Exception {
 		CSSOMParser parser = new CSSOMParser();
 		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
-		String source = ExternalResourcesStore.getSourceCache(scriptURI, "CSS");
+		String source = !test ? ExternalResourcesStore.getSourceCache(scriptURI, "CSS") : "";
 		InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
 		return parser.parseStyleSheet(is, null);
 	}

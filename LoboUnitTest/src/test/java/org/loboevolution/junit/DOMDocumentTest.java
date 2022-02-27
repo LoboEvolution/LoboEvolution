@@ -30,6 +30,7 @@ import org.loboevolution.html.dom.domimpl.HTMLStyleElementImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -66,7 +67,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
         Text c = document.createTextNode("A text node");
         assertEquals("A text node", c.getData());
-        assertEquals("[object Text]", c.toString());
+        assertEquals("A text node", c.getNodeValue());
         Text d = c.splitText(7);
         assertEquals("A text ", c.getData());
         assertEquals("node", d.getData());
@@ -95,22 +96,22 @@ public class DOMDocumentTest extends LoboUnitTest {
 
         c = document.createTextNode("A text node<");
         assertEquals("A text node<", c.getData());
-        assertEquals("A text node&lt;", c.toString());
+        assertEquals("A text node<", c.getNodeValue());
         c.appendData("foo>");
         assertEquals("A text node<foo>", c.getData());
-        assertEquals("A text node&lt;foo&gt;", c.toString());
+        assertEquals("A text node<foo>", c.getNodeValue());
 
         c.deleteData(11, 20);
         assertEquals("A text node", c.getData());
-        assertEquals("A text node", c.toString());
+        assertEquals("A text node", c.getNodeValue());
 
         c.replaceData(0, 1, "My");
         assertEquals("My text node", c.getData());
-        assertEquals("My text node", c.toString());
+        assertEquals("My text node", c.getNodeValue());
 
         c.deleteData(0, 3);
         assertEquals("text node", c.getData());
-        assertEquals("text node", c.toString());
+        assertEquals("text node", c.getNodeValue());
 
         try {
             document.createTextNode(null);
@@ -147,7 +148,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
         c.insertData(0, "The ");
         assertEquals("The text node", c.getData());
-        assertEquals("The text node", c.toString());
+        assertEquals("The text node", c.getNodeValue());
 
         c.insertData(13, " is now larger");
         assertEquals("The text node is now larger", c.getData());
@@ -185,12 +186,12 @@ public class DOMDocumentTest extends LoboUnitTest {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
         CDATASection c = document.createCDATASection("A CDATA section");
         assertEquals("A CDATA section", c.getData());
-        assertEquals("[object Text]", c.toString());
+        assertEquals("A CDATA section", c.getNodeValue());
 
         assertEquals(15, c.getLength());
         c = document.createCDATASection("A CDATA section<");
         assertEquals("A CDATA section<", c.getData());
-        assertEquals("[object Text]", c.toString());
+        assertEquals("A CDATA section<", c.getNodeValue());
 
         Node clone = c.cloneNode(false);
         assertNotNull(clone);
@@ -297,22 +298,6 @@ public class DOMDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    public void testCreateElementNSHighChar() {
-        Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
-        Element element = document.createElementNS(null, "\u208c");
-        assertEquals("\u208c", element.getLocalName());
-        assertEquals("\u208c", element.getTagName());
-    }
-
-    @Test
-    public void testCreateElementNSSurrogate() {
-        Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
-        Element element = document.createElementNS(null, "\ud83c\udf52");
-        assertEquals("\ud83c\udf52", element.getLocalName());
-        assertEquals("\ud83c\udf52", element.getTagName());
-    }
-
-    @Test
     public void testCreateElementError() {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
         try {
@@ -349,7 +334,7 @@ public class DOMDocumentTest extends LoboUnitTest {
             document.createElement(":");
             fail("Must throw exception");
         } catch (DOMException e) {
-            assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
+            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
     }
 
@@ -367,7 +352,6 @@ public class DOMDocumentTest extends LoboUnitTest {
     @Test
     public void testCreateElementNSError2() {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
-
         try {
             document.createElementNS(null, "foo:bar");
             fail("Must throw an exception");
@@ -420,7 +404,6 @@ public class DOMDocumentTest extends LoboUnitTest {
     @Test
     public void testCreateElementNSInjectionError() {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
-
         try {
             document.createElementNS(null, "\"");
             fail("Must throw an exception");
@@ -447,18 +430,18 @@ public class DOMDocumentTest extends LoboUnitTest {
         Comment comment = document.createComment("My comment");
         assertNotNull(comment);
         assertEquals("My comment", comment.getData());
-        assertEquals("<!--My comment-->", comment.toString());
+        assertEquals("[object Comment]", comment.toString());
 
         comment = document.createComment("<--");
         assertNotNull(comment);
         assertEquals("<--", comment.getData());
-        assertEquals("<!--<---->", comment.toString());
-        try {
-            document.createComment("-->");
-            fail("Must throw an exception");
-        } catch (DOMException e) {
-            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
-        }
+        assertEquals("[object Comment]", comment.toString());
+
+        comment = document.createComment("-->");
+        assertNotNull(comment);
+        assertEquals("-->", comment.getData());
+        assertEquals("[object Comment]", comment.toString());
+
         try {
             document.createComment(null);
             fail("Must throw an exception");
@@ -529,31 +512,26 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
-        try {
-            attr.insertBefore(attr, null);
-            fail("Must throw an exception");
-        } catch (DOMException e) {
-            assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
-        }
+
         Attr attr2 = document.createAttribute("foo");
         attr2.setValue("bar");
         try {
             attr.insertBefore(attr2, null);
             fail("Must throw an exception");
         } catch (DOMException e) {
-            assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
+            assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
         }
         try {
             attr.removeChild(attr2);
             fail("Must throw an exception");
         } catch (DOMException e) {
-            assertEquals(DOMException.NOT_FOUND_ERR, e.getCode());
+            assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
         }
         try {
             attr.replaceChild(attr2, attr);
             fail("Must throw an exception");
         } catch (DOMException e) {
-            assertEquals(DOMException.NOT_FOUND_ERR, e.getCode());
+            assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
         }
         docElm.setAttributeNodeNS(attr2);
         Attr attr3 = document.createAttribute("id");
@@ -585,19 +563,19 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertEquals("version", attr.getNodeName());
         assertEquals("1.1", attr.getValue());
         assertEquals("1.1", attr.getNodeValue());
-        assertEquals("version=\"1.1\"", attr.toString());
+        assertEquals("[object Attr]", attr.toString());
     }
 
     @Test
     public void testCreateAttributeNSError() {
-        Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        Document document = domImpl.createDocument("http://www.example.com/examplens", null, null);
         try {
-            document.createAttributeNS(Document.XML_NAMESPACE_URI, "xmlns");
+            document.createAttributeNS("http://www.example.com/examplens", "xmlns");
             fail("Must throw exception");
         } catch (DOMException e) {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
-        Attr attr = document.createAttributeNS(Document.XML_NAMESPACE_URI, "doc");
+        Attr attr = document.createAttributeNS("http://www.example.com/examplens", "doc");
         try {
             attr.setPrefix("xmlns");
             fail("Must throw exception");
@@ -632,25 +610,25 @@ public class DOMDocumentTest extends LoboUnitTest {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
         try {
-            document.createAttributeNS(Document.XML_NAMESPACE_URI, null);
+            document.createAttributeNS("http://www.example.com/examplens", null);
             fail("Must throw exception");
         } catch (DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
         try {
-            document.createAttributeNS(Document.XML_NAMESPACE_URI, "");
+            document.createAttributeNS("http://www.example.com/examplens", "");
             fail("Must throw exception");
         } catch (DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
         try {
-            document.createAttributeNS(Document.XML_NAMESPACE_URI, ":bar");
+            document.createAttributeNS("http://www.example.com/examplens", ":bar");
             fail("Must throw exception");
         } catch (DOMException e) {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
         try {
-            document.createAttributeNS(Document.XML_NAMESPACE_URI, "foo:");
+            document.createAttributeNS("http://www.example.com/examplens", "foo:");
             fail("Must throw exception");
         } catch (DOMException e) {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
@@ -1396,18 +1374,18 @@ public class DOMDocumentTest extends LoboUnitTest {
 
         Document doc2 = domImpl.createDocument(null, null, null);
         Node docElm2 = doc2.importNode(docElm, true);
-        assertFalse(docElm == docElm2);
+        assertNotSame(docElm, docElm2);
         assertEquals(2, docElm2.getChildNodes().getLength());
         Node head2 = docElm2.getFirstChild();
-        assertFalse(head == head2);
+        assertNotSame(head, head2);
         Element body2 = (Element) docElm2.getLastChild();
-        assertFalse(body == body2);
-        assertTrue(doc2 == head2.getOwnerDocument());
-        assertTrue(doc2 == body2.getOwnerDocument());
+        assertNotSame(body, body2);
+        assertSame(doc2, head2.getOwnerDocument());
+        assertSame(doc2, body2.getOwnerDocument());
         Node text2 = body2.getFirstChild();
-        assertTrue(doc2 == text2.getOwnerDocument());
-        Attr idAttr2 = (Attr) body2.getAttributes().getNamedItem("id");
-        assertTrue(doc2 == idAttr2.getOwnerDocument());
+        assertSame(doc2, text2.getOwnerDocument());
+        Attr idAttr2 = body2.getAttributes().getNamedItem("id");
+        assertSame(doc2, idAttr2.getOwnerDocument());
         assertTrue(idAttr2.isId());
         assertEquals(2, body2.getAttributes().getLength());
         assertEquals(1, body2.getChildNodes().getLength());
@@ -1428,10 +1406,10 @@ public class DOMDocumentTest extends LoboUnitTest {
         df.appendChild(p);
         df.appendChild(document.createComment(" Comment "));
         Node df2 = doc2.importNode(df, true);
-        assertFalse(df == df2);
+        assertNotSame(df, df2);
         assertEquals(4, df2.getChildNodes().getLength());
         Node textbd2 = df2.getFirstChild();
-        assertFalse(textbd == textbd2);
+        assertNotSame(textbd, textbd2);
     }
 
     @Test
@@ -1454,18 +1432,18 @@ public class DOMDocumentTest extends LoboUnitTest {
 
         Document doc2 = domImpl.createDocument(null, null, null);
         Node docElm2 = doc2.importNode(docElm, true);
-        assertFalse(docElm == docElm2);
+        assertNotSame(docElm, docElm2);
         assertEquals(2, docElm2.getChildNodes().getLength());
         Node head2 = docElm2.getFirstChild();
-        assertFalse(head == head2);
+        assertNotSame(head, head2);
         Element body2 = (Element) docElm2.getLastChild();
-        assertFalse(body == body2);
-        assertTrue(doc2 == head2.getOwnerDocument());
-        assertTrue(doc2 == body2.getOwnerDocument());
+        assertNotSame(body, body2);
+        assertSame(doc2, head2.getOwnerDocument());
+        assertSame(doc2, body2.getOwnerDocument());
         Node text2 = body2.getFirstChild();
-        assertTrue(doc2 == text2.getOwnerDocument());
-        Attr idAttr2 = (Attr) body2.getAttributes().getNamedItem("id");
-        assertTrue(doc2 == idAttr2.getOwnerDocument());
+        assertSame(doc2, text2.getOwnerDocument());
+        Attr idAttr2 = body2.getAttributes().getNamedItem("id");
+        assertSame(doc2, idAttr2.getOwnerDocument());
         assertTrue(idAttr2.isId());
         assertEquals(2, body2.getAttributes().getLength());
         assertEquals(1, body2.getChildNodes().getLength());
@@ -1487,32 +1465,33 @@ public class DOMDocumentTest extends LoboUnitTest {
         df.appendChild(p);
         df.appendChild(document.createComment(" Comment "));
         Node df2 = doc2.importNode(df, true);
-        assertFalse(df == df2);
+        assertNotSame(df, df2);
         assertEquals(4, df2.getChildNodes().getLength());
         Node textbd2 = df2.getFirstChild();
-        assertFalse(textbd == textbd2);
+        assertNotSame(textbd, textbd2);
     }
 
     @Test
     public void testAppendappendChild() {
-        Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        Document document = domImpl.createDocument("http://www.example.com/examplens", null, null);
         Element docelm = document.createElementNS(null, "doc");
         Element element = document.createElementNS(null, "element");
         document.appendChild(docelm);
+        assertSame(document, docelm.getParentNode());
         try {
             document.appendChild(element);
             fail("Must throw exception");
         } catch (DOMException e) {
             assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
         }
-        assertTrue(docelm == document.getDocumentElement());
+        assertSame(docelm, document.getDocumentElement());
         try {
             document.appendChild(element);
             fail("Must throw exception");
         } catch (DOMException e) {
             assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
         }
-        assertTrue(docelm == document.getDocumentElement());
+        assertSame(docelm, document.getDocumentElement());
         DocumentType dtd = domImpl.createDocumentType("doc", null, null);
         document.appendChild(dtd);
         DocumentType dtd2 = domImpl.createDocumentType("element", null, null);
@@ -1522,14 +1501,15 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (DOMException e) {
             assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
         }
-        assertTrue(dtd == document.getDoctype());
+
+        assertSame(dtd, document.getDoctype());
         try {
             document.appendChild(dtd2);
             fail("Must throw exception");
         } catch (DOMException e) {
             assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
         }
-        assertTrue(dtd == document.getDoctype());
+        assertSame(dtd, document.getDoctype());
     }
 
     @Test
@@ -1547,8 +1527,8 @@ public class DOMDocumentTest extends LoboUnitTest {
             assertEquals(DOMException.NOT_FOUND_ERR, e.getCode());
         }
         document.insertBefore(docelm, comment);
-        assertTrue(docelm == document.getDocumentElement());
-        assertTrue(comment == docelm.getNextSibling());
+        assertSame(docelm, document.getDocumentElement());
+        assertSame(comment, docelm.getNextSibling());
         assertNull(docelm.getPreviousSibling());
         try {
             document.insertBefore(element, docelm);
@@ -1567,10 +1547,10 @@ public class DOMDocumentTest extends LoboUnitTest {
             assertEquals(DOMException.NOT_FOUND_ERR, e.getCode());
         }
         document.insertBefore(dtd, docelm);
-        assertTrue(dtd == document.getDoctype());
-        assertTrue(docelm == dtd.getNextSibling());
+        assertSame(dtd, document.getDoctype());
+        assertSame(docelm, dtd.getNextSibling());
         assertNull(dtd.getPreviousSibling());
-        assertTrue(dtd == docelm.getPreviousSibling());
+        assertSame(dtd, docelm.getPreviousSibling());
         try {
             document.insertBefore(dtd2, dtd);
             fail("Must throw exception");
@@ -1592,17 +1572,17 @@ public class DOMDocumentTest extends LoboUnitTest {
 
         Comment comment1 = document.createComment(" First comment ");
         document.insertBefore(comment1, dtd);
-        assertTrue(comment1 == dtd.getPreviousSibling());
-        assertTrue(docelm == dtd.getNextSibling());
+        assertSame(comment1, dtd.getPreviousSibling());
+        assertSame(docelm, dtd.getNextSibling());
         assertNull(comment1.getPreviousSibling());
-        assertTrue(dtd == comment1.getNextSibling());
+        assertSame(dtd, comment1.getNextSibling());
 
         Element bar = document.createElementNS(null, "bar");
         docelm.appendChild(bar);
         Element foo = document.createElementNS(null, "foo");
-        assertTrue(foo == docelm.insertBefore(foo, bar));
-        assertTrue(bar == foo.getNextElementSibling());
-        assertTrue(foo == bar.getPreviousElementSibling());
+        assertSame(foo, docelm.insertBefore(foo, bar));
+        assertSame(bar, foo.getNextElementSibling());
+        assertSame(foo, bar.getPreviousElementSibling());
     }
 
     @Test
@@ -1617,11 +1597,11 @@ public class DOMDocumentTest extends LoboUnitTest {
             assertEquals(DOMException.NOT_FOUND_ERR, e.getCode());
         }
         document.appendChild(docelm);
-        assertTrue(docelm == document.getDocumentElement());
+        assertSame(docelm, document.getDocumentElement());
         document.replaceChild(element, docelm);
-        assertTrue(element == document.getDocumentElement());
+        assertSame(element, document.getDocumentElement());
         document.replaceChild(docelm, element);
-        assertTrue(docelm == document.getDocumentElement());
+        assertSame(docelm, document.getDocumentElement());
 
         DocumentType dtd = domImpl.createDocumentType("doc", null, null);
         DocumentType dtd2 = domImpl.createDocumentType("element", null, null);
@@ -1631,11 +1611,11 @@ public class DOMDocumentTest extends LoboUnitTest {
             assertEquals(DOMException.NOT_FOUND_ERR, e.getCode());
         }
         document.appendChild(dtd);
-        assertTrue(dtd == document.getDoctype());
+        assertSame(dtd, document.getDoctype());
         document.replaceChild(dtd2, dtd);
-        assertTrue(dtd2 == document.getDoctype());
+        assertSame(dtd2, document.getDoctype());
         document.replaceChild(dtd, dtd2);
-        assertTrue(dtd == document.getDoctype());
+        assertSame(dtd, document.getDoctype());
 
         try {
             document.replaceChild(element, dtd);
@@ -1676,10 +1656,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertNull(docelm.lookupNamespaceURI("z"));
         assertEquals(Document.XML_NAMESPACE_URI, document.lookupNamespaceURI("x"));
         assertNull(document.lookupNamespaceURI("z"));
-
         document = domImpl.createDocument("", null, null);
         assertNull(document.lookupNamespaceURI("x"));
     }
-
-
 }

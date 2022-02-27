@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.type.NodeType;
@@ -398,7 +399,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		Element html = document.getDocumentElement();
 		Element elm = document.createElement("body");
 		ProcessingInstruction pi = document.createProcessingInstruction("xml-foo", "bar");
-		DocumentType docType = document.getImplementation().createDocumentType("html", null, null);
+		DocumentType docType = impl.createDocumentType("html", null, null);
 		assertFalse(html.hasChildNodes());
 		Node appended = html.prependChild(elm);
 		assertTrue(html.hasChildNodes());
@@ -531,7 +532,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		Element html = document.getDocumentElement();
 		Element elm = document.createElement("body");
 		ProcessingInstruction pi = document.createProcessingInstruction("xml-foo", "bar");
-		DocumentType docType = document.getImplementation().createDocumentType("html", null, null);
+		DocumentType docType = impl.createDocumentType("html", null, null);
 		assertFalse(html.hasChildNodes());
 		Node appended = html.appendChild(elm);
 		assertTrue(html.hasChildNodes());
@@ -907,7 +908,7 @@ public class DOMNodeTest extends LoboUnitTest {
 	@Test
 	public void insertBeforeDF() throws DOMException {
 		Element html = document.getDocumentElement();
-		DocumentType docType = document.getImplementation().createDocumentType("html", null, null);
+		DocumentType docType = impl.createDocumentType("html", null, null);
 		document.insertBefore(docType, html);
 		Element body = document.createElement("body");
 		html.appendChild(body);
@@ -1233,7 +1234,7 @@ public class DOMNodeTest extends LoboUnitTest {
 	@Test
 	public void replaceChildDF() throws DOMException {
 		Element html = document.getDocumentElement();
-		DocumentType docType = document.getImplementation().createDocumentType("html", null, null);
+		DocumentType docType = impl.createDocumentType("html", null, null);
 		document.insertBefore(docType, html);
 		Element body = document.createElement("body");
 		html.appendChild(body);

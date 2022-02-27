@@ -1162,7 +1162,7 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <input id='id1'>\n"
                 + "  <input id='id2' disabled='disabled'>\n"
-                + "  <input id='id3' type'hidden'>\n"
+                + "  <input id='id3' type='hidden'>\n"
                 + "  <input type='checkbox' name='checkboxes' id='cb1' checked='checked' value='On' />\n"
                 + "  <input type='checkbox' name='checkboxes' id='cb2' value='Off' />\n"
                 + "  <input type='radio' name='radiobuttons' id='rd1' checked='checked' value='On' />\n"
@@ -1283,7 +1283,7 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <input id='id1'>\n"
                 + "  <input id='id2' disabled='disabled'>\n"
-                + "  <input id='id3' type'hidden'>\n"
+                + "  <input id='id3' type='hidden'>\n"
                 + "</body></html>";
         final String[] messages = {"2", "id1", "id3"};
         checkHtmlAlert(html, messages);
@@ -1303,7 +1303,7 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <input id='id1' >\n"
                 + "  <input id='id2' disabled='disabled'>\n"
-                + "  <input id='id3' type'hidden'>\n"
+                + "  <input id='id3' type='hidden'>\n"
                 + "</body></html>";
         final String[] messages = {"1", "id2"};
         checkHtmlAlert(html, messages);

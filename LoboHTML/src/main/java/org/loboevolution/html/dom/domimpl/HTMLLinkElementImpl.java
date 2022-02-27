@@ -21,25 +21,22 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
-import org.loboevolution.html.dom.HTMLBodyElement;
-import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.css.StyleSheet;
 import org.loboevolution.html.parser.HtmlParser;
-import org.loboevolution.html.renderstate.*;
+import org.loboevolution.html.renderstate.LinkRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.TimingInfo;
-import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.net.MimeType;
 import org.loboevolution.store.StyleStore;
 import org.w3c.dom.UserDataHandler;
 
-import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -47,6 +44,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -139,10 +137,6 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 				final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
 				final String currentUrl = rcontext.getCurrentURL();
 
-				StyleStore style = new StyleStore();
-				List<String> styles = style.getStyles(href, currentUrl);
-				String styleEnabled = "";
-
 				if ((isStyleSheet || isAltStyleSheet)) {
 					String title = getAttribute("title");
 					URL baseURL = new URL(baseURI);
@@ -156,10 +150,16 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 						}
 					}
 
-					if (styles.size() == 0) {
-						style.insertStyle(title, href, currentUrl, isStyleSheet ? 1 : 0);
-					} else {
-						styleEnabled = styles.get(0);
+					String styleEnabled = "";
+					List<String> styles = new ArrayList<>();
+					if (!rcontext.isTestEnabled()) {
+						StyleStore style = new StyleStore();
+						styles = style.getStyles(href, currentUrl);
+						if (styles.size() == 0) {
+							style.insertStyle(title, href, currentUrl, isStyleSheet ? 1 : 0);
+						} else {
+							styleEnabled = styles.get(0);
+						}
 					}
 
 					if (styleEnabled.equals(title) || styles.size() == 0) {
@@ -169,7 +169,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 							if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
 								Instant start = Instant.now();
 								TimingInfo info = new TimingInfo();
-								final com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI);
+								final com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI, rcontext.isTestEnabled());
 								sheet.setHref(baseURI);
 								sheet.setDisabled(this.disabled);
 								CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);

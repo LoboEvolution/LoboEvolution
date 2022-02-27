@@ -1,0 +1,11 @@
+body {
+	background-color: red;
+}
+@font-face {
+	font-family: 'OpenSans Regular'; src: url('/fonts/OpenSans-Regular.ttf');
+}
+@font-feature-values Foo Sans, Bar {
+ 	@styleset {
+		my-style: 2;
+	}
+}

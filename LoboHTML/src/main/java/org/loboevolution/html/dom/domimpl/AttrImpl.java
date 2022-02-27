@@ -24,6 +24,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.type.NodeType;
 import org.loboevolution.html.node.TypeInfo;
 
@@ -125,7 +126,7 @@ public class AttrImpl extends AttrAbstract {
 	/** {@inheritDoc} */
 	@Override
 	public TypeInfo getSchemaTypeInfo() {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
+		return new AttributeTypeInfo(isId());
 	}
 
 	/** {@inheritDoc} */
@@ -157,6 +158,24 @@ public class AttrImpl extends AttrAbstract {
 	@Override
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Node insertBefore(Node newChild, Node refChild) {
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'insertBefore' on 'Node': This node type does not support this method.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Node removeChild(Node oldChild) {
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'removeChild' on 'Node': This node type does not support this method.");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Node replaceChild(Node newChild, Node refChild) {
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'replaceChild' on 'Node': This node type does not support this method.");
 	}
 
 	@Override

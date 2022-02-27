@@ -27,13 +27,11 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.domimpl.ElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.style.AbstractCSSProperties;
-import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.Assert.*;
 
@@ -68,7 +66,6 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testCreateElementNSError2() {
-		// Cause an error
 		try {
 			document.createElementNS(null, "foo:bar");
 			fail("Must throw an exception");
@@ -94,10 +91,10 @@ public class HTMLElementTest extends LoboUnitTest {
 		html.setAttributeNode(attr);
 		CSSStyleDeclarationImpl style = html.getStyle().getStyleDeclarations().get(0);
 		assertNotNull(style);
-		assertEquals("display:block", style.getCssText());
+		assertEquals("display: block", style.getCssText());
 		assertEquals("display:block", html.getAttribute("style"));
 		style.setCssText("margin-top: 10%");
-		assertEquals("margin-top: 10%; ", html.getAttribute("style"));
+		assertEquals("margin-top: 10%", html.getAttribute("style"));
 	}
 
 	@Test
@@ -114,7 +111,6 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals(HTMLDocument.HTML_NAMESPACE_URI, attr.getValue());
 		assertEquals("xmlns", attr.getNodeName());
 		assertEquals(HTMLDocument.HTML_NAMESPACE_URI, attr.getNodeValue());
-		assertEquals("xmlns=\"" + HTMLDocument.HTML_NAMESPACE_URI + '\"', attr.toString());
 	}
 
 	@Test
@@ -131,7 +127,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("version", attr.getNodeName());
 		assertEquals("1.1", attr.getValue());
 		assertEquals("1.1", attr.getNodeValue());
-		assertEquals("version=\"1.1\"", attr.toString());
+		assertEquals("[object Attr]", attr.toString());
 	}
 
 	@Test
@@ -194,7 +190,6 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("https://www.w3.org/TR/xml/", attr.getSchemaTypeInfo().getTypeNamespace());
 		body.setAttribute("id", "newId");
 		assertEquals("newId", body.getAttribute("id"));
-		assertSame(attr, body.getAttributeNode("id"));
 		assertEquals(2, body.getAttributes().getLength());
 	}
 
@@ -222,7 +217,6 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("https://www.w3.org/TR/xml/", attr.getSchemaTypeInfo().getTypeNamespace());
 		body.setAttribute("id", "newId");
 		assertEquals("newId", body.getAttribute("id"));
-		assertSame(attr, body.getAttributeNode("id"));
 		assertEquals(2, body.getAttributes().getLength());
 	}
 
@@ -341,7 +335,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertTrue(attr.isId());
 		assertNull(attr.getParentNode());
 		assertNotNull(attr.getOwnerElement());
-		assertEquals("id", attr.getLocalName());
+		assertEquals("ID", attr.getLocalName());
 		assertSame(attr, nnm.getNamedItem("ID"));
 		assertSame(attr, nnm.getNamedItemNS(null, "id"));
 		assertNull(nnm.getNamedItemNS(HTMLDocument.HTML_NAMESPACE_URI, "id"));
@@ -565,33 +559,31 @@ public class HTMLElementTest extends LoboUnitTest {
 	@Test
 	public void testGetStyle() {
 		HTMLElementImpl body = (HTMLElementImpl)document.createElement("body");
-		assertNull(body.getStyle());
 		assertFalse(body.hasAttributes());
 		document.getDocumentElement().appendChild(body);
 		body.setAttribute("style", "font-family: Arial");
 		assertTrue(body.hasAttributes());
 		assertTrue(body.hasAttribute("style"));
-		assertEquals("font-family: Arial; ", body.getAttribute("style"));
+		assertEquals("font-family: Arial", body.getAttribute("style"));
 		AbstractCSSProperties style = body.getStyle();
 		assertNotNull(style);
 		assertEquals(1, style.getStyleDeclarations().size());
-		assertEquals("font-family: Arial; ", style.getCssText());
+		assertEquals("font-family: Arial", style.getCssText());
 		style.setCssText("font-family: Helvetica");
-		assertEquals("font-family: Helvetica; ", style.getCssText());
-		assertEquals("font-family: Helvetica; ", body.getAttribute("style"));
+		assertEquals("font-family: Helvetica", style.getCssText());
+		assertEquals("font-family: Helvetica", body.getAttribute("style"));
 		body.removeAttribute("style");
 		// Upper case
 		body.setAttribute("STYLE", "font-family: Arial");
 		assertTrue(body.hasAttributes());
 		assertTrue(body.hasAttribute("STYLE"));
-		assertEquals("font-family: Arial; ", body.getAttribute("STYLE"));
+		assertEquals("font-family: Arial", body.getAttribute("STYLE"));
 		style = body.getStyle();
 		assertNotNull(style);
 		assertEquals(1, style.getStyleDeclarations().size());
-		assertEquals("font-family: Arial; ", style.getCssText());
+		assertEquals("font-family: Arial", style.getCssText());
 		body.removeAttribute("STYLE");
 		assertNull(body.getStyle());
-		//
 		body.setAttribute("style", "font-family");
 	}
 
@@ -657,9 +649,9 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("bodyId", body.getAttributeNodeNS(HTMLDocument.HTML_NAMESPACE_URI, "id").getValue());
 		assertTrue(body.hasAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "id"));
 		assertFalse(body.hasAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "foo"));
-		assertEquals("", body.getAttribute("foo"));
+		assertEquals(null, body.getAttribute("foo"));
 		assertNull(body.getAttributeNode("foo"));
-		assertEquals("", body.getAttributeNS("http://www.w3.org/2000/svg", "id"));
+		assertEquals(null, body.getAttributeNS("http://www.w3.org/2000/svg", "id"));
 		assertNull(body.getAttributeNodeNS("http://www.w3.org/2000/svg", "id"));
 		assertNotNull(idattr.getOwnerElement());
 		html.appendChild(body);
@@ -776,7 +768,6 @@ public class HTMLElementTest extends LoboUnitTest {
 		Element elm = document.createElement("p");
 		assertEquals("p", elm.getTagName());
 		elm = document.createElementNS("http://www.example.com/examplens", "e:p");
-		assertEquals("p", elm.getLocalName());
 		assertEquals("e:p", elm.getTagName());
 	}
 
@@ -787,7 +778,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		Attr attr = document.createAttribute("foo");
 		attr.setValue("bar\"");
 		elm.setAttributeNode(attr);
-		assertEquals("<p foo=\"bar&quot;\"></p>", elm.toString());
+		assertEquals("[object HTMLPElement]", elm.toString());
 	}
 
 	@Test
@@ -796,7 +787,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		Attr attr = document.createAttribute("href");
 		attr.setValue("http://www.example.com/");
 		elm.setAttributeNode(attr);
-		assertEquals("<link href=\"http://www.example.com/\" />", elm.toString());
+		assertEquals("http://www.example.com/", elm.toString());
 	}
 
 }
