@@ -70,14 +70,14 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	/** {@inheritDoc} */
 	@Override
 	public String getAlt() {
-		return getAttribute("alit");
+		return getAttribute("alt");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean isChecked() {
 		final String checked = getAttribute("checked");
-		return checked != null;
+		return "checked".equals(checked) || "true".equals(checked);
 	}
 
 	/** {@inheritDoc} */

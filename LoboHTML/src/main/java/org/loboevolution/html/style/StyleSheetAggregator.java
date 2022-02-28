@@ -34,6 +34,7 @@ import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementBuilder;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
@@ -384,7 +385,8 @@ public class StyleSheetAggregator {
 			}
 
 		case "checked":
-			return (element instanceof HTMLInputElement && ((HTMLInputElement) element).isChecked());
+			return (element instanceof HTMLInputElement && ((HTMLInputElement) element).isChecked())
+					|| (element instanceof HTMLOptionElement && ((HTMLOptionElement) element).isSelected());
 
 		case "required":
 			return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement
@@ -401,6 +403,8 @@ public class StyleSheetAggregator {
 			if (element instanceof HTMLLinkElement) {
 				HTMLLinkElement elem = (HTMLLinkElement)element;
 				return LinkStore.isVisited(elem.getHref());
+			} else{
+				return false;
 			}
 
 		case "first-child":

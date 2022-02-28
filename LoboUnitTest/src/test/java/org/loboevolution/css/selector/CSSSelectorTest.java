@@ -211,7 +211,7 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"v"};
+        final String[] messages = {"exception"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1249,7 +1249,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  alert(sel.length + '-' + sel[0].id);\n"
                 + "  sel = document.querySelectorAll(':checked');\n"
                 + "  alert(sel.length + '-' + sel[0].id);\n"
-
                 + "  document.getElementById('iz').selected = 'selected';\n"
                 + "  alert(document.getElementById('s1').selectedIndex);\n"
                 + "  var sel = document.querySelectorAll('[selected]');\n"
@@ -1658,93 +1657,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  <div id='myDiv'></myDiv>\n"
                 + "</body></html>";
 
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void xmlTagName() {
-        final String html = "<html><head>\n"
-                + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
-                + "</head><body>\n"
-                + "<script>\n"
-                + "  var xmlString = [\n"
-                + "                 '<ResultSet>',\n"
-                + "                 '<Result>One</Result>',\n"
-                + "                 '<RESULT>Two</RESULT>',\n"
-                + "                 '<result><nested>Three</nested></result>',\n"
-                + "                 '<result>Four</result>',\n"
-                + "                 '</ResultSet>'\n"
-                + "                ].join('');\n"
-                + "  if (window.DOMParser) {\n"
-                + "    var parser = new DOMParser();\n"
-                + "    xml = parser.parseFromString(xmlString, 'text/xml');\n"
-                + "  } else { // IE\n"
-                + "    var parser = new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    parser.async = 'false';\n"
-                + "    parser.loadXML(xmlString);\n"
-                + "  }\n"
-                + "  var xmlDoc = parser.parseFromString(xmlString, 'text/xml');\n"
-                + "  var de = xmlDoc.documentElement;\n"
-                + "  try {\n"
-                + "    var res = de.querySelectorAll('result');\n"
-                + "    alert(res.length);\n"
-                + "    alert(res[0].innerHTML);\n"
-                + "    alert(res[1].innerHTML);\n"
-                + "    res = de.querySelectorAll('RESULT');\n"
-                + "    alert(res.length);\n"
-                + "    alert(res[0].innerHTML);\n"
-                + "    res = de.querySelectorAll('resulT');\n"
-                + "    alert(res.length);\n"
-                + "    res = de.querySelectorAll('rEsulT');\n"
-                + "    alert(res.length);\n"
-                + "  } catch(e) {alert('exception ' + e)}\n"
-                + "</script></body></html>";
-        final String[] messages = {"2", "<nested>Three</nested>", "Four", "1", "Two", "0", "0"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void xmlAttribute() {
-        final String html = "<html><head>\n"
-                + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
-                + "</head><body>\n"
-                + "<script>\n"
-                + "  var xmlString = [\n"
-                + "                 '<ResultSet>',\n"
-                + "                 '<RESULT thinger=\"blah\">ONE</RESULT>',\n"
-                + "                 '<RESULT thinger=\"gadzooks\"><CHILD>Two</CHILD></RESULT>',\n"
-                + "                 '</ResultSet>'\n"
-                + "                ].join('');\n"
-                + "  if (window.DOMParser) {\n"
-                + "    var parser = new DOMParser();\n"
-                + "    xml = parser.parseFromString(xmlString, 'text/xml');\n"
-                + "  } else { // IE\n"
-                + "    var parser = new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    parser.async = 'false';\n"
-                + "    parser.loadXML(xmlString);\n"
-                + "  }\n"
-                + "  var xmlDoc = parser.parseFromString(xmlString, 'text/xml');\n"
-                + "  var de = xmlDoc.documentElement;\n"
-                + "  try {\n"
-                + "    var res = de.querySelectorAll('RESULT');\n"
-                + "    alert(res.length);\n"
-                + "    alert(res[0].innerHTML);\n"
-                + "    alert(res[1].innerHTML);\n"
-                + "    res = de.querySelectorAll('RESULT[THINGER]');\n"
-                + "    alert(res.length);\n"
-                + "    res = de.querySelectorAll('RESULT[thinger]');\n"
-                + "    alert(res.length);\n"
-                + "    alert(res[0].innerHTML);\n"
-                + "    alert(res[1].innerHTML);\n"
-                + "    res = de.querySelectorAll('RESULT[thinger=blah]');\n"
-                + "    alert(res.length);\n"
-                + "    alert(res[0].innerHTML);\n"
-                + "    res = de.querySelectorAll('RESULT > CHILD');\n"
-                + "    alert(res.length);\n"
-                + "    alert(res[0].innerHTML);\n"
-                + "  } catch(e) {alert('exception ' + e)}\n"
-                + "</script></body></html>";
-        final String[] messages = {"2", "ONE", "<CHILD>Two</CHILD>", "0", "2", "ONE", "<CHILD>Two</CHILD>", "1", "ONE", "1", "Two"};
         checkHtmlAlert(html, messages);
     }
 }
