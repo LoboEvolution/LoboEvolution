@@ -49,7 +49,7 @@ class TableMatrix {
 	private final FrameContext frameContext;
 	private final UserAgentContext parserContext;
 	private final HtmlRendererContext rendererContext;
-	private HTMLTableCaptionElementImpl captionElement;
+	private HTMLElementImpl captionElement;
 	private final RElement relement;
 	private int tableWidth;
 	
@@ -108,7 +108,7 @@ class TableMatrix {
 		
 		HTMLCollectionImpl captionList = new HTMLCollectionImpl(tableElement, Arrays.asList(tableElement.getNodeList(new CaptionFilter()).toArray()));
 		if (captionList.getLength() > 0) {
-			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.item(0);
+			HTMLElementImpl capt = (HTMLElementImpl) captionList.item(0);
 			this.captionElement = capt;
 			this.caption = new RBlock(RBlockInfo.builder()
 					.modelNode(capt)
@@ -347,7 +347,8 @@ class TableMatrix {
 			AbstractCSSProperties props = captionElement.getCurrentStyle();
 			String captionSide = props == null ? null : props.getCaptionSide();
 			if (props == null) {
-				captionSide = this.captionElement.getCaptionSide();
+				if(captionElement instanceof HTMLTableCaptionElementImpl)
+					captionSide = ((HTMLTableCaptionElementImpl)captionElement).getCaptionSide();
 			}
 			if (captionSide == null) {
 				return false;

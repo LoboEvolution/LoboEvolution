@@ -23,10 +23,8 @@ package org.loboevolution.html.dom;
 
 
 /**
- * Special properties (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating table caption elements.
- *
- *
- *
+ * Special properties (beyond the regular HTMLElement interface it also has available to it by inheritance)
+ * for manipulating table caption elements.
  */
 public interface HTMLTableCaptionElement extends HTMLElement {
 
