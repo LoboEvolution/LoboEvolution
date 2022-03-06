@@ -121,7 +121,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			if (getNodeType() == NodeType.DOCUMENT_NODE) {
 				NodeListImpl list = getNodeList();
 				list.forEach(node ->{
-					if(node.getNodeType() == NodeType.ELEMENT_NODE){
+					if(Objects.equals(node, newChild)) {
 						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
 					}
 				});
