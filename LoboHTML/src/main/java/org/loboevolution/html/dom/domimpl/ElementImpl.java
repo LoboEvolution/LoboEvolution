@@ -236,7 +236,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getId() {
-		return getAttribute("id");
+		final String id = getAttribute("id");
+		return id == null ? "" : id;
 	}
 
 	/**

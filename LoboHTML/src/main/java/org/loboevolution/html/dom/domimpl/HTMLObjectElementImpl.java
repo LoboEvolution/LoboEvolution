@@ -130,7 +130,8 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	/** {@inheritDoc} */
 	@Override
 	public String getName() {
-		return getAttribute("name");
+		final String name = getAttribute("name");
+		return name == null ? "" : name;
 	}
 
 	/**

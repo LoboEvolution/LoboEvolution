@@ -21,10 +21,7 @@
 package org.loboevolution.html.node;
 
 import com.gargoylesoftware.css.dom.DOMException;
-import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLHeadElement;
-import org.loboevolution.html.dom.HTMLScriptElement;
+import org.loboevolution.html.dom.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
@@ -85,10 +82,10 @@ public interface Document extends Node, NonElementParentNode, ParentNode {
 	/**
 	 * Returns a reference to the collection of elements contained by the object.
 	 *
-	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+	 * @return a {@link org.loboevolution.html.dom.HTMLAllCollection} object.
 	 */
 	@Deprecated
-	HTMLCollection getAll();
+	HTMLAllCollection getAll();
 
 	/**
 	 * Retrieves a collection of all a objects that have a name and/or id property.

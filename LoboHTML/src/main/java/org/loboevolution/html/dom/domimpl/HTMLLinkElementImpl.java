@@ -378,6 +378,11 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	@Override
 	public StyleSheet getSheet() {
+		if ("stylesheet".equals(getRel())) {
+			com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = new com.gargoylesoftware.css.dom.CSSStyleSheetImpl();
+			styleSheet = new CSSStyleSheetImpl(sheet);
+		}
+
 		return styleSheet;
 	}
 

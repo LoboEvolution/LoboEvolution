@@ -20,13 +20,10 @@
 
 package org.loboevolution.html.dom;
 
-
+import org.loboevolution.html.node.Node;
 
 /**
  * The interface Html all collection.
- *
- *
- *
  */
 public interface HTMLAllCollection  {
 
@@ -40,17 +37,10 @@ public interface HTMLAllCollection  {
     /**
      * Returns the item with index index from the collection (determined by tree order).
      *
-     * @param nameOrIndex the name or index
-     * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+     * @param index the name or index
+     * @return a {@link org.loboevolution.html.node.Node} object.
      */
-    HTMLCollection item(String nameOrIndex);
-
-    /**
-     * Item unknown.
-     *
-     * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
-     */
-    HTMLCollection item();
+    Node item(Object index);
 
     /**
      * Returns the item with ID or name name from the collection.
@@ -58,8 +48,16 @@ public interface HTMLAllCollection  {
      * If there are multiple matching items, then an HTMLCollection object containing all those elements is returned.
      *
      * @param name the name
-     * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+     * @return a {@link java.lang.Object} object.
      */
-    HTMLCollection namedItem(String name);
+    Object namedItem(String name);
+
+    /**
+     * Returns all tags by name.
+     *
+     * @param tag the name of tag
+     * @return a {@link org.loboevolution.html.dom.HTMLAllCollection} object.
+     */
+    HTMLAllCollection tags(String tag);
 
 }

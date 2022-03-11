@@ -836,9 +836,9 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
     
 	/** {@inheritDoc} */
     @Override
-	public HTMLCollection getAll() {
+	public HTMLAllCollection getAll() {
 		final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
-		return new HTMLCollectionImpl(this, list);
+		return new HTMLAllCollectionImpl(this, list);
 	}
     
     /** {@inheritDoc} */

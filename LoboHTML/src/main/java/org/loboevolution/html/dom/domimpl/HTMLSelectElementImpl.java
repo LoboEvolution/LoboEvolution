@@ -83,7 +83,8 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public String getName() {
-		return getAttribute("name");
+		final String name = getAttribute("name");
+		return name == null ? "" : name;
 	}
 
 	/** {@inheritDoc} */

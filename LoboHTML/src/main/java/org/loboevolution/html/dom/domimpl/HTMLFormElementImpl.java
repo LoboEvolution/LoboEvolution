@@ -123,7 +123,8 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	/** {@inheritDoc} */
 	@Override
 	public String getName() {
-		return getAttribute("name");
+		final String name = getAttribute("name");
+		return name == null ? "" : name;
 	}
 	
 	

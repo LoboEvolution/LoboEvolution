@@ -442,7 +442,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 					sds.addStyleDeclaration(sd);
 				} catch (final Exception err) {
 					final String id = getId();
-					final String withId = id == null ? "" : " with ID '" + id + "'";
+					final String withId = Strings.isBlank(id) ? "" : " with ID '" + id + "'";
 					this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
 				}
 			}

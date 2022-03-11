@@ -36,7 +36,6 @@ public class HTMLCollectionImpl extends AbstractList<Node> implements HTMLCollec
 	
 	private final NodeImpl rootNode;
 
-
 	 /**
 	  * <p>Constructor for HTMLCollectionImpl.</p>
 	  *

@@ -68,7 +68,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 	/** {@inheritDoc} */
 	@Override
 	public String getName() {
-		return getAttribute("name");
+		final String name = getAttribute("name");
+		return name == null ? "" : name;
 	}
 
 	/** {@inheritDoc} */

@@ -20,10 +20,7 @@
 
 package org.loboevolution.html.js.xml;
 
-import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLHeadElement;
-import org.loboevolution.html.dom.HTMLScriptElement;
+import org.loboevolution.html.dom.*;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
@@ -41,6 +38,7 @@ import org.w3c.dom.events.EventException;
 import org.xml.sax.SAXException;
 
 import java.io.*;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
@@ -639,8 +637,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getAll() {
-
+	public HTMLAllCollection getAll() {
 		return doc.getAll();
 	}
 
