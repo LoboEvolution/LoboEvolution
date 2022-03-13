@@ -145,7 +145,7 @@ public class JavaClassWrapper {
 				!name.equals("getBoundingClientRect") &&
 				!name.equals("getClientRects")) {
 			return method.getParameterTypes().length == 0;
-		} else if (name.startsWith("set") && !name.equals("setTimeout")) {
+		} else if (name.startsWith("set") && !name.equals("setTimeout") && !name.equals("setNamedItem")) {
 			return method.getParameterTypes().length == 1;
 		} else {
 			return false;

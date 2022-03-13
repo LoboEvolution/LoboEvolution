@@ -136,18 +136,17 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
-		final Attr attr = getAttributeNode(localName);
-		if (attr != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attr.getNamespaceURI()))) {
-			removeAttribute(localName);
+		final Attr attr = getAttributeNodeNS(namespaceURI, localName);
+		if (attr != null) {
+			removeAttribute(attr.getName());
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Attr removeAttributeNode(Attr oldAttr) {
-		return map.removeNamedItem(name);
+		return map.removeNamedItem(oldAttr.getName());
 	}
-
 
 	/** {@inheritDoc} */
 	@Override
@@ -252,6 +251,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
+		if (getNodeName().contains(":")) {
+			return getNodeName().split(":")[1];
+		}
 		return getNodeName();
 	}
 
@@ -352,7 +354,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public boolean hasAttributes() {
-		return map.getLength() > 0;
+		return map.getAttributes().size() > 0;
 	}
 
 	/** {@inheritDoc} */

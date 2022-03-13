@@ -40,7 +40,7 @@ public class MediaListImpl implements MediaList {
     /** {@inheritDoc} */
     @Override
     public int getLength() {
-        return media.getLength();
+        return media == null ? 0 : media.getLength();
     }
 
     /** {@inheritDoc} */

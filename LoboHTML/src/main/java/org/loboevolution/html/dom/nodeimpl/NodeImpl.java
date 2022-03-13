@@ -541,7 +541,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public String getNamespaceURI() {
-		return Strings.isBlank(namespaceURI)  ? Document.HTML_NAMESPACE_URI : namespaceURI;
+		return namespaceURI;
 	}
 
 	/** {@inheritDoc} */

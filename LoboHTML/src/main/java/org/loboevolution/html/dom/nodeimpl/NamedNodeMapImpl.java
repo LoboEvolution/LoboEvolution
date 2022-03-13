@@ -22,23 +22,23 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import java.util.*;
-
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
-import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.html.dom.domimpl.AttrImpl;
 import org.loboevolution.html.node.Attr;
-
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.js.AbstractScriptableDelegate;
+
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p>NamedNodeMapImpl class.</p>
  */
 public class NamedNodeMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
-	
-	private final List<Attr> attributeList = new ArrayList<>();
+
 	private final Map<String, Attr> attributes = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
 	/**
@@ -53,14 +53,13 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			final String value = (String) entry.getValue();
 			final Attr attr = new AttrImpl(name, value, true, owner, "id".equalsIgnoreCase(name));
 			this.attributes.put(name, attr);
-			this.attributeList.add(attr);
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
-		return this.attributeList.size();
+		return this.attributes.size();
 	}
 
 	/** {@inheritDoc} */
@@ -75,18 +74,37 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Attr getNamedItemNS(String namespaceURI, String localName) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");
+		if (Strings.isNotBlank(localName)) {
+			for (Map.Entry entry : this.attributes.entrySet()) {
+				Attr attr = (Attr) entry.getValue();
+				if (namespaceURI == null || namespaceURI.equals(attr.getNamespaceURI())) {
+					if (attr.getName().equalsIgnoreCase(localName)) {
+						return attr;
+					}
+
+					if (attr.getName().contains(":")) {
+						String attribute = attr.getName().split(":")[1];
+						if (attribute.equalsIgnoreCase(localName)) {
+							return attr;
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Attr item(int index) {
-		int size = this.attributeList.size();
-        if (size > index && index > -1) {
-            return this.attributeList.get(index);
-        } else {
-            return null;
-        }
+		int size = this.attributes.size();
+		AtomicInteger atomIndex = new AtomicInteger(0);
+		for (Map.Entry<String, Attr> entry : attributes.entrySet()) {
+			if (size > atomIndex.getAndIncrement() && index > -1) {
+				return entry.getValue();
+			}
+		}
+		return null;
 	}
 
 	/** {@inheritDoc} */
@@ -98,24 +116,39 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Attr removeNamedItemNS(String namespaceURI, String localName) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");
-	}
+		for (Map.Entry entry : this.attributes.entrySet()) {
+			Attr attr = (Attr) entry.getValue();
+			if (namespaceURI == null || namespaceURI.equals(attr.getNamespaceURI())) {
+				if (attr.getName().equalsIgnoreCase(localName)) {
+					return this.attributes.remove(attr.getName());
+				}
 
-	/** {@inheritDoc} */
-	@Override
-	public Attr setNamedItem(Attr arg) {
-		final Object prevValue = this.attributes.put(arg.getNodeName(), arg);
-		if (prevValue != null) {
-			this.attributeList.remove(prevValue);
+				if (attr.getName().contains(":")) {
+					return this.attributes.remove(attr.getName());
+				}
+			}
 		}
-		this.attributeList.add(arg);
-		return arg;
+		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr setNamedItemNS(Attr arg) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");
+	public Attr setNamedItem(Attr attr) {
+		final Object prevValue = this.attributes.put(attr.getNodeName(), attr);
+		if (prevValue != null) {
+			return attr;
+		}
+		return null;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Attr setNamedItemNS(Attr attr) {
+		return setNamedItem(attr);
+	}
+
+	public Map<String, Attr> getAttributes() {
+		return this.attributes;
 	}
 
 	@Override

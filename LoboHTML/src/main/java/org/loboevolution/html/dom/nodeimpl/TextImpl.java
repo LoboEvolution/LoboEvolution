@@ -25,6 +25,7 @@ package org.loboevolution.html.dom.nodeimpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLSlotElement;
 import org.loboevolution.html.dom.domimpl.CharacterDataImpl;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.type.NodeType;
 import org.loboevolution.html.node.Text;
 
@@ -48,6 +49,10 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		this.text = text;
 	}
 
+	@Override
+	public Node appendChild(Node newChild) {
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "This node type does not support this method.");
+	}
 
 	/** {@inheritDoc} */
 	@Override

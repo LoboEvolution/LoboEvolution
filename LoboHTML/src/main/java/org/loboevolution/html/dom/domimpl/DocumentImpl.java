@@ -113,13 +113,15 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName) {
 
+		String prefix = null;
+
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
 		if (qualifiedName.contains(":")) {
-
 			String[] split = qualifiedName.split(":");
+			prefix = split[0];
 			if (split.length != 2) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "he qualified name provided has an empty local name.");
 			}
@@ -148,7 +150,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			}
 		}
 		ElementImpl elem = (ElementImpl) new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
-		elem.setNamespaceURI(namespaceURI);
+		elem.setNamespaceURI(Strings.isBlank(namespaceURI) ? HTMLDocument.HTML_NAMESPACE_URI : namespaceURI);
+		elem.setPrefix(prefix);
 		return elem;
 	}
 	
@@ -190,7 +193,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		HTMLCollectionImpl coll = (HTMLCollectionImpl) getElementsByTagName(localName);
 		HTMLCollectionImpl list = new HTMLCollectionImpl(this, new ArrayList<>());
 		for (Node node : coll) {
-			if ((namespaceURI == null || "*".equals(namespaceURI)) || node.getNamespaceURI().equals(namespaceURI)) {
+			if ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(node.getNamespaceURI())) {
 				list.add(node);
 			}
 		}
