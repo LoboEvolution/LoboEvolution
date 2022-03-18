@@ -267,9 +267,9 @@ public class StyleSheetRenderState implements RenderState {
 			final String backgroundRepeatText = props.getBackgroundRepeat();
 			final String backgroundPositionText = props.getBackgroundPosition();
 						
-			if (Strings.isNotBlank(backgroundColorText)  || 
-				Strings.isNotBlank(backgroundImageText)  || 
-				Strings.isNotBlank(backgroundRepeatText) || 
+			if (Strings.isNotBlank(backgroundColorText)  ||
+				Strings.isNotBlank(backgroundImageText)  ||
+				Strings.isNotBlank(backgroundRepeatText) ||
 				Strings.isNotBlank(backgroundPositionText)) {
 				binfo = BackgroundInfo.builder().build();
 			}
@@ -1451,7 +1451,7 @@ public class StyleSheetRenderState implements RenderState {
 			String[] items = {"http", "https", "file"};
 			if (Strings.containsWords(quotedUri, items)) {
 				try {
-					binfo.setBackgroundImage(linkUri(document, quotedUri));
+					binfo.setBackgroundImage(linkUri(document, quotedUri, backgroundImageText));
 				} catch (Exception e) {
 					binfo.setBackgroundImage(null);
 				}
@@ -1461,7 +1461,7 @@ public class StyleSheetRenderState implements RenderState {
 					final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
 					quotedUri = String.valueOf(decodedBytes);
 				}
-				binfo.setBackgroundImage(linkUri(document, quotedUri));
+				binfo.setBackgroundImage(linkUri(document, quotedUri, backgroundImageText));
 			}
 		} else if (HtmlValues.isGradient(backgroundImageText)) {
 			try {
@@ -1478,7 +1478,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
-	private URL linkUri(HTMLDocumentImpl document, String quotedUri) {
+	private URL linkUri(HTMLDocumentImpl document, String quotedUri, String backgroundImageText) {
 		if (element instanceof HTMLLinkElementImpl) {
 			HTMLLinkElementImpl elm = (HTMLLinkElementImpl) element;
 			final String rel = elm.getAttribute("rel");
@@ -1493,6 +1493,6 @@ public class StyleSheetRenderState implements RenderState {
 				}
 			}
 		}
-		return null;
+		return document.getFullURL(quotedUri, backgroundImageText);
 	}
 }
