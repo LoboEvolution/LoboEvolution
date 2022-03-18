@@ -26,6 +26,7 @@ import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
+import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.css.MediaQueryList;
 import org.loboevolution.html.node.js.Window;
@@ -37,16 +38,11 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>CSSUtilities class.</p>
  */
 public final class CSSUtilities {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CSSUtilities.class.getName());
 
 	/**
 	 * <p>getCssInputSourceForStyleSheet.</p>
@@ -125,15 +121,10 @@ public final class CSSUtilities {
 	 * @param selectors a {@link java.lang.String} object.
 	 * @return a {@link com.gargoylesoftware.css.parser.selector.SelectorList} object.
 	 */
-	public static SelectorList getSelectorList(final String selectors) {
+	public static SelectorList getSelectorList(final String selectors) throws Exception {
 		final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-		SelectorList selectorList = null;
-		try {
-			selectorList = parser.parseSelectors(selectors);
-		} catch (IOException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-		return selectorList;
+		parser.setErrorHandler(ThrowCssExceptionErrorHandler.INSTANCE);
+		return parser.parseSelectors(selectors);
 	}
 
 	/**

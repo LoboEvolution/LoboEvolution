@@ -730,7 +730,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
             document.querySelectorAll("svg|*");
             fail("Must throw exception");
         } catch (DOMException e) {
-            assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
+            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
     }
 

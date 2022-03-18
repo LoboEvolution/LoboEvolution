@@ -54,6 +54,7 @@ import org.loboevolution.type.NodeType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
@@ -587,15 +588,19 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "The provided selector is empty.");
 		}
 
-		SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
-		if (selectorList != null) {
-			for (Selector select : selectorList) {
-				if (StyleSheetAggregator.selects(select, this, null)) {
-					return true;
+		try {
+			SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+			if (selectorList != null) {
+				for (Selector select : selectorList) {
+					if (StyleSheetAggregator.selects(select, this, null)) {
+						return true;
+					}
 				}
 			}
+			return false;
+		} catch (Exception e) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
-		return false;
 	}
 
 	/** {@inheritDoc} */
@@ -850,19 +855,23 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Element querySelector(String selectors) {
-		SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
-		List<Element> elem = new ArrayList<>();
-		if (selectorList != null) {
-			NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
-			childNodes.forEach(child -> {
-				for (Selector selector : selectorList) {
-					if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
-						elem.add((Element)child);
+		try {
+			SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+			List<Element> elem = new ArrayList<>();
+			if (selectorList != null) {
+				NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+				childNodes.forEach(child -> {
+					for (Selector selector : selectorList) {
+						if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
+							elem.add((Element) child);
+						}
 					}
-				}
-			});
+				});
+			}
+			return elem.size() > 0 ? elem.get(0) : null;
+		} catch (Exception e) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
-		return elem.size() > 0  ? elem.get(0) : null;
 	}
 
 	/** {@inheritDoc} */
@@ -883,18 +892,22 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "is not a valid selector.");
 		}
 
-		SelectorList selectorList = CSSUtilities.getSelectorList(selector);
-		if (selectorList != null) {
-			NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
-			childNodes.forEach(child -> {
-				for (Selector select : selectorList) {
-					if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
-						al.add(child);
+		try {
+			SelectorList selectorList = CSSUtilities.getSelectorList(selector);
+			if (selectorList != null) {
+				NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+				childNodes.forEach(child -> {
+					for (Selector select : selectorList) {
+						if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
+							al.add(child);
+						}
 					}
-				}
-			});
+				});
+			}
+			return new NodeListImpl(al);
+		} catch (Exception e) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
-		return new NodeListImpl(al);
 	}
 
 	/** {@inheritDoc} */
