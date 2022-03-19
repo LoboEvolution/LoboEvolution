@@ -76,8 +76,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	private RenderState renderState = INVALID_RENDER_STATE;
 
-	protected volatile Object treeLock = this;
-
 	protected UINode uiNode;
 
 	private Map<String, Object> userData;
@@ -340,7 +338,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * <p>forgetRenderState.</p>
 	 */
 	protected void forgetRenderState() {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			if (this.renderState != INVALID_RENDER_STATE) {
 				this.renderState = INVALID_RENDER_STATE;
 				nodeList.forEach(child -> ((NodeImpl) child).forgetRenderState());
@@ -406,7 +404,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public NodeList getDescendents(NodeFilter filter, boolean nestIntoMatchingNodes) {
 		final ArrayList<Node> al = new ArrayList<>();
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
 		}
 		return new NodeListImpl(al);
@@ -521,7 +519,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public String getInnerText() {
 		final StringBuilder buffer = new StringBuilder();
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			appendInnerTextImpl(buffer);
 		}
 		return buffer.toString();
@@ -603,7 +601,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public NodeList getNodeList(NodeFilter filter) {
 		final List<Node> collection = new ArrayList<>();
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			appendChildrenToCollectionImpl(filter, collection);
 		}
 		return new NodeListImpl(collection);
@@ -717,7 +715,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		// Generally called from the GUI thread, except for
 		// offset properties.
 		RenderState rs;
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			rs = this.renderState;
 			if (rs != INVALID_RENDER_STATE) {
 				return rs;
@@ -943,7 +941,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node insertBefore(Node newChild, Node refChild) {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			if(refChild == null) {
 				appendChild(newChild);
 				if (!this.notificationsSuspended) {
@@ -1091,7 +1089,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node removeChild(Node oldChild) {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			if (!this.nodeList.remove(oldChild)) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
 			}
@@ -1129,7 +1127,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
 	 */
 	protected void removeTableChildren(NodeFilter filter) {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			removeChildrenImpl(filter);
 		}
 		if (!this.notificationsSuspended) {
@@ -1286,7 +1284,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public void setOwnerDocument(Document value) {
 		this.document = value;
-		this.treeLock = value == null ? this : value;
 	}
 
 	/**
@@ -1297,7 +1294,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public void setOwnerDocument(Document value, boolean deep) {
 		this.document = value;
-		this.treeLock = value == null ? this : value;
 		if (deep) {
 			nodeList.forEach(node -> {
 				final NodeImpl child = (NodeImpl) node;
@@ -1339,7 +1335,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public void setTextContent(String textContent) {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			removeChildrenImpl(new TextFilter());
 			if (Strings.isNotBlank(textContent)) {
 				final TextImpl t = new TextImpl(textContent);
@@ -1423,7 +1419,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param visitor a {@link org.loboevolution.html.dom.nodeimpl.NodeVisitor} object.
 	 */
 	public void visit(NodeVisitor visitor) {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			visitImpl(visitor);
 		}
 	}

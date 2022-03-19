@@ -959,7 +959,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public void close() {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			if (this.reader instanceof LocalWritableLineReader) {
 				try {
 					this.reader.close();
@@ -1109,7 +1109,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Document open() {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			if (this.reader != null) {
 				if (this.reader instanceof LocalWritableLineReader) {
 					try {
@@ -1180,7 +1180,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public void write(String text) {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			if (this.reader != null) {
 				try {
 					// This can end up in openBufferChanged
@@ -1195,7 +1195,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public void writeln(String text) {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			if (this.reader != null) {
 				try {
 					// This can end up in openBufferChanged

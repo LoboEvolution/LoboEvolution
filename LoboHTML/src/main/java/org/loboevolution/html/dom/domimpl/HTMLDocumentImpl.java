@@ -161,7 +161,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	}
 
 	final void addStyleSheet(CSSStyleSheetImpl ss) {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
 			// Need to invalidate all children up to
@@ -193,7 +193,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 */
 	public void allInvalidated(boolean forgetRenderStates) {
 		if (forgetRenderStates) {
-			synchronized (this.treeLock) {
+			synchronized (this) {
 				this.styleSheetAggregator = null;
 				forgetRenderState();
 				nodeList.forEach(node -> {
@@ -374,7 +374,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	}
 
 	final StyleSheetAggregator getStyleSheetAggregator() {
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
 			if (ssa == null) {
 				ssa = new StyleSheetAggregator();
@@ -451,7 +451,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 */
 	public void load(boolean closeReader) throws IOException, SAXException, UnsupportedEncodingException {
 		WritableLineReader reader;
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			removeAllChildrenImpl();
 			setTitle(null);
 			setBaseURI(null);
@@ -472,7 +472,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 					} catch (final Exception err) {
 						logger.log(Level.WARNING, "load(): Unable to close stream", err);
 					}
-					synchronized (this.treeLock) {
+					synchronized (this) {
 						this.reader = null;
 					}
 				}
@@ -524,7 +524,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	@Override
 	public void normalizeDocument() {
 		// TODO: Normalization options from domConfig
-		synchronized (this.treeLock) {
+		synchronized (this) {
 			visitImpl(Node::normalize);
 		}
 	}
