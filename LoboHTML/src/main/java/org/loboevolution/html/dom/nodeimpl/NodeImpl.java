@@ -141,8 +141,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node prependChild(Node newChild) {
-		//TODO
-		return null;
+		return prepend(newChild);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Node prepend(Node newChild) {
+		return insertBefore(newChild, this.getFirstChild());
 	}
 
 	private void appendChildrenToCollectionImpl(NodeFilter filter, Collection<Node> collection) {

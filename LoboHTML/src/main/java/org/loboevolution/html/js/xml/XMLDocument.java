@@ -139,6 +139,18 @@ public class XMLDocument implements Document {
 		return doc.prependChild(newChild);
 	}
 
+
+	/**
+	 * <p>prepend.</p>
+	 *
+	 * @param newChild a {@link Node} object.
+	 * @return a {@link Node} object.
+	 */
+	@Override
+	public Node prepend(Node newChild) {
+		return doc.prepend(newChild);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public Node cloneNode(boolean deep) {

@@ -193,14 +193,15 @@ public class XPathNamespaceImpl implements XPathNamespace {
 		return null;
 	}
 
-	/**
-	 * <p>prependChild.</p>
-	 *
-	 * @param newChild a {@link Node} object.
-	 * @return a {@link Node} object.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node prependChild(Node newChild) {
+		return null;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Node prepend(Node newChild) {
 		return null;
 	}
 
