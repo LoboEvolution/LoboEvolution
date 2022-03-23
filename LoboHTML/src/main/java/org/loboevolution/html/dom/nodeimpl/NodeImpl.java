@@ -40,7 +40,7 @@ import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.w3c.dom.UserDataHandler;
 
 import java.net.MalformedURLException;
@@ -613,7 +613,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	/** {@inheritDoc} */
 	@Override
-	public abstract NodeType getNodeType();
+	public abstract int getNodeType();
 
 	/** {@inheritDoc} */
 	@Override
@@ -743,11 +743,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public String getTextContent() {
 		final StringBuilder sb = new StringBuilder();
 		nodeList.forEach(child -> {
-			final NodeType type = child.getNodeType();
+			final int type = child.getNodeType();
 			switch (type) {
-			case CDATA_SECTION_NODE:
-			case TEXT_NODE:
-			case ELEMENT_NODE:
+			case NodeType.CDATA_SECTION_NODE:
+			case NodeType.TEXT_NODE:
+			case NodeType.ELEMENT_NODE:
 				final String textContent = child.getTextContent();
 				if (textContent != null) {
 					sb.append(textContent);

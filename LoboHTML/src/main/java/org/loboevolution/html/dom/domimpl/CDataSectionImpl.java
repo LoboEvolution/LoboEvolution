@@ -24,7 +24,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
 import org.loboevolution.html.node.CDATASection;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>CDataSectionImpl class.</p>
@@ -68,7 +68,7 @@ public class CDataSectionImpl extends TextImpl implements CDATASection {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public NodeType getNodeType() {
+	public int getNodeType() {
 		return NodeType.CDATA_SECTION_NODE;
 	}
 

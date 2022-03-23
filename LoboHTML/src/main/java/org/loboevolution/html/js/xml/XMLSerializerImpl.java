@@ -25,7 +25,7 @@ import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.js.xml.XMLSerializer;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
@@ -90,8 +90,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
 
                 if (childrenCount == 1) {
                     Node item = children.item(0);
-                    NodeType itemType = item.getNodeType();
-                    if (itemType == NodeType.TEXT_NODE) {
+                    if (item.getNodeType() == NodeType.TEXT_NODE) {
                         if (item.getNodeValue() == null) {
                             buff.append("/>");
                         } else {
@@ -108,7 +107,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
 				NodeListImpl child = (NodeListImpl) children;
 				AtomicBoolean tag = new AtomicBoolean(endTag);
 				child.forEach(item -> {
-					NodeType itemType = item.getNodeType();
+					final int itemType = item.getNodeType();
 					if (itemType == NodeType.DOCUMENT_NODE || itemType == NodeType.ELEMENT_NODE) {
 						getXMLString((Element) item, withoutNamespaces, buff, tag.get());
 					}

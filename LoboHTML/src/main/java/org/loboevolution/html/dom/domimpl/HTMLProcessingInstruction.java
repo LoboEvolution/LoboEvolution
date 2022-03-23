@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.ProcessingInstruction;
 
 /**
@@ -69,7 +69,7 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeType getNodeType() {
+	public int getNodeType() {
 		return NodeType.PROCESSING_INSTRUCTION_NODE;
 	}
 

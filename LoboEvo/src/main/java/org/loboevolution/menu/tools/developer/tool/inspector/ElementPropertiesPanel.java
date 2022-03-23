@@ -25,7 +25,7 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

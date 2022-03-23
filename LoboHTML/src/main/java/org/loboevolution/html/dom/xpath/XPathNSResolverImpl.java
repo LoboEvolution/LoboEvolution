@@ -29,9 +29,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.xpath.XPathNSResolver;
-import org.loboevolution.type.NodeType;
-
-import java.util.Locale;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>XPathNSResolverImpl class.</p>
@@ -59,7 +57,7 @@ public class XPathNSResolverImpl implements XPathNSResolver {
         if (prefix.equals("xml")) {
             namespace = Constants.S_XMLNAMESPACEURI;
         } else {
-            NodeType type;
+            int type;
             while ((null != parent) && (null == namespace)
                     && (((type = parent.getNodeType()) == NodeType.ELEMENT_NODE) ||
                        ((type = parent.getNodeType()) == NodeType.DOCUMENT_NODE)

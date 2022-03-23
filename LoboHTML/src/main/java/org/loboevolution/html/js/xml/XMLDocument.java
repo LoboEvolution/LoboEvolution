@@ -30,7 +30,7 @@ import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.type.DocumentReadyState;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.type.VisibilityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
@@ -213,7 +213,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeType getNodeType() {
+	public int getNodeType() {
 		return doc.getNodeType();
 	}
 

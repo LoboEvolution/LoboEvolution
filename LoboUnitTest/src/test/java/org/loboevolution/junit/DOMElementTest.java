@@ -25,15 +25,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.domimpl.ElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.style.AbstractCSSProperties;
-import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 import static org.junit.Assert.*;
 

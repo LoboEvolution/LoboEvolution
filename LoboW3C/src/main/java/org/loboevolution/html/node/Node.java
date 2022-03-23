@@ -22,7 +22,6 @@ package org.loboevolution.html.node;
 
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.node.events.EventTarget;
-import org.loboevolution.type.NodeType;
 import org.w3c.dom.UserDataHandler;
 
 /**
@@ -112,9 +111,9 @@ public interface Node extends EventTarget {
 	/**
 	 * Returns the type of node.
 	 *
-	 * @return a {@link NodeType} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
-	NodeType getNodeType();
+	int getNodeType();
 
 	/**
 	 * <p>getNodeValue.</p>

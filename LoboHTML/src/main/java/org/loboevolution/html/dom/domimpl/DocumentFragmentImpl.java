@@ -23,7 +23,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>DocumentFragmentImpl class. </p>
@@ -47,7 +47,7 @@ public class DocumentFragmentImpl extends EventTargetImpl implements DocumentFra
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeType getNodeType() {
+	public int getNodeType() {
 		return NodeType.DOCUMENT_FRAGMENT_NODE;
 	}
 }

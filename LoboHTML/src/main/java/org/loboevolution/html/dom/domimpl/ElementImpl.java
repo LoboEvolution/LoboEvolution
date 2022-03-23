@@ -50,11 +50,10 @@ import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
@@ -266,7 +265,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeType getNodeType() {
+	public int getNodeType() {
 		return NodeType.ELEMENT_NODE;
 	}
 

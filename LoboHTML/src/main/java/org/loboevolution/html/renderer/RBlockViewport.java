@@ -32,7 +32,7 @@ import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderer.info.RLayoutInfo;
@@ -1115,12 +1115,12 @@ public class RBlockViewport extends BaseRCollection {
 		if (nodeList != null) {
 			nodeList.forEach(nd -> {
 				final NodeImpl child = (NodeImpl) nd;
-				final NodeType nodeType = child.getNodeType();
+				final int nodeType = child.getNodeType();
 				switch (nodeType) {
-					case TEXT_NODE:
+					case NodeType.TEXT_NODE:
 						layoutText(child);
 						break;
-					case ELEMENT_NODE:
+					case NodeType.ELEMENT_NODE:
 						this.currentLine.addStyleChanger(new RStyleChanger(child));
 						final String nodeName = child.getNodeName().toUpperCase();
 						MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
@@ -1130,15 +1130,15 @@ public class RBlockViewport extends BaseRCollection {
 						ml.layoutMarkup(this, (HTMLElementImpl) child);
 						this.currentLine.addStyleChanger(new RStyleChanger(node));
 						break;
-					case DOCUMENT_FRAGMENT_NODE:
+					case NodeType.DOCUMENT_FRAGMENT_NODE:
 						final DocumentFragmentImpl fragment = (DocumentFragmentImpl) child;
 						fragment.getNodeList().forEach(fragNode -> {
 							final NodeImpl fragChild = (NodeImpl) fragNode;
 							layoutChildren(fragChild);
 						});
 						break;
-					case COMMENT_NODE:
-					case PROCESSING_INSTRUCTION_NODE:
+					case NodeType.COMMENT_NODE:
+					case NodeType.PROCESSING_INSTRUCTION_NODE:
 					default:
 						break;
 				}

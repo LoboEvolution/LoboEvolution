@@ -22,7 +22,7 @@ package org.loboevolution.html.dom.rss;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>RSSElement class.</p>

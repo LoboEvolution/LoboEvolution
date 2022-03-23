@@ -35,7 +35,7 @@ import org.loboevolution.html.xpath.XPathEvaluator;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>XPathEvaluatorImpl class.</p>

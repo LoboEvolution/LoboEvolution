@@ -49,7 +49,7 @@ import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.type.DocumentReadyState;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.type.VisibilityState;
 
 import java.io.IOException;
@@ -1039,11 +1039,11 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
 		switch (importedNode.getNodeType()) {
-			case ATTRIBUTE_NODE:
+			case NodeType.ATTRIBUTE_NODE:
 				Attr attr = createAttribute(importedNode.getNodeName());
 				attr.setValue(importedNode.getNodeValue());
 				return attr;
-			case ELEMENT_NODE:
+			case NodeType.ELEMENT_NODE:
 				Element foreignElm = (Element) importedNode;
 				Element elm = createElement(foreignElm.getNodeName());
 				NamedNodeMap attributes = foreignElm.getAttributes();
@@ -1059,13 +1059,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					}
 				}
 				return elm;
-			case TEXT_NODE:
+			case NodeType.TEXT_NODE:
 				return createTextNode(importedNode.getNodeValue());
-			case CDATA_SECTION_NODE:
+			case NodeType.CDATA_SECTION_NODE:
 				return createCDATASection(importedNode.getNodeValue());
-			case COMMENT_NODE:
+			case NodeType.COMMENT_NODE:
 				return createComment(importedNode.getNodeValue());
-			case DOCUMENT_FRAGMENT_NODE:
+			case NodeType.DOCUMENT_FRAGMENT_NODE:
 				DocumentFragment df = createDocumentFragment();
 				if (deep) {
 					Node node = importedNode.getFirstChild();
@@ -1075,7 +1075,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					}
 				}
 				return df;
-			case PROCESSING_INSTRUCTION_NODE:
+			case NodeType.PROCESSING_INSTRUCTION_NODE:
 				return createProcessingInstruction(importedNode.getNodeName(), importedNode.getNodeValue());
 			default:
 				throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Node Not supported.");

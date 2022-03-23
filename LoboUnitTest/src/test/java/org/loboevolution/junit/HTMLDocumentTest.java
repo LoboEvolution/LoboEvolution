@@ -33,7 +33,7 @@ import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSRuleList;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 
 import static org.junit.Assert.*;
 

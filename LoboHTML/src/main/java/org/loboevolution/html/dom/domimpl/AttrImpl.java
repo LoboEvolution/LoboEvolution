@@ -25,7 +25,7 @@ package org.loboevolution.html.dom.domimpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.TypeInfo;
 
 /**
@@ -89,7 +89,7 @@ public class AttrImpl extends AttrAbstract {
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeType getNodeType() {
+	public int getNodeType() {
 		return NodeType.ATTRIBUTE_NODE;
 	}
 

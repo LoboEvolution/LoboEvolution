@@ -33,11 +33,9 @@ import org.apache.xpath.res.XPATHErrorResources;
 import org.apache.xpath.res.XPATHMessages;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
-
-import javax.xml.transform.TransformerException;
 
 /**
  *
@@ -98,16 +96,16 @@ public class XPathExpressionImpl implements XPathExpression {
 			}
 
 			// Check that the context node is an acceptable node type
-			NodeType nodeType = contextNode.getNodeType();
+			int nodeType = contextNode.getNodeType();
 			
 			switch (nodeType) {
-			case DOCUMENT_NODE:
-			case ELEMENT_NODE:
-			case ATTRIBUTE_NODE:
-			case TEXT_NODE:
-			case CDATA_SECTION_NODE:
-			case COMMENT_NODE:
-			case PROCESSING_INSTRUCTION_NODE:
+			case NodeType.DOCUMENT_NODE:
+			case NodeType.ELEMENT_NODE:
+			case NodeType.ATTRIBUTE_NODE:
+			case NodeType.TEXT_NODE:
+			case NodeType.CDATA_SECTION_NODE:
+			case NodeType.COMMENT_NODE:
+			case NodeType.PROCESSING_INSTRUCTION_NODE:
 				break;
 			default:
 				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_NODETYPE, null);

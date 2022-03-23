@@ -26,7 +26,7 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.events.EventTarget;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.events.EventException;
 
@@ -116,7 +116,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeType getNodeType() {
+	public int getNodeType() {
 		return NodeType.DOCUMENT_NODE;
 	}
 

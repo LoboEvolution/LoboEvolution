@@ -29,7 +29,7 @@ import org.loboevolution.html.dom.HTMLTextAreaElement;
 import org.loboevolution.html.dom.input.TextArea;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.type.NodeType;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
