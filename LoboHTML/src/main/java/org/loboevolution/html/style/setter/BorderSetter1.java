@@ -26,22 +26,8 @@ import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 
 /**
  * <p>BorderSetter1 class.</p>
- *
- *
- *
  */
 public class BorderSetter1 implements SubPropertySetter {
-
-	/**
-	 * <p>changeValue.</p>
-	 *
-	 * @param properties a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 * @param newValue a {@link java.lang.String} object.
-	 * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
-	 */
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
-		this.changeValue(properties, newValue, declaration, true);
-	}
 
 	/** {@inheritDoc} */
 	@Override

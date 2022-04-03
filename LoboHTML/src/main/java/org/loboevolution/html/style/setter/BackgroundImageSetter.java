@@ -34,24 +34,10 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
 /**
  * <p>BackgroundImageSetter class.</p>
- *
- *
- *
  */
 public class BackgroundImageSetter implements SubPropertySetter {
 	
 	private static final Logger logger = Logger.getLogger(BackgroundImageSetter.class.getName());
-
-	/**
-	 * <p>changeValue.</p>
-	 *
-	 * @param properties a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 * @param newValue a {@link java.lang.String} object.
-	 * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
-	 */
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
-		this.changeValue(properties, newValue, declaration, true);
-	}
 
 	/** {@inheritDoc} */
 	@Override

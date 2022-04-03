@@ -28,11 +28,9 @@ import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 
 /**
  * <p>FourCornersSetter class.</p>
- *
- *
- *
  */
 public class FourCornersSetter implements SubPropertySetter {
+
 	private final String prefix;
 	private final String property;
 	private final String suffix;
@@ -48,17 +46,6 @@ public class FourCornersSetter implements SubPropertySetter {
 		this.prefix = prefix;
 		this.suffix = suffix;
 		this.property = property;
-	}
-
-	/**
-	 * <p>changeValue.</p>
-	 *
-	 * @param properties a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 * @param newValue a {@link java.lang.String} object.
-	 * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
-	 */
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
-		this.changeValue(properties, newValue, declaration, true);
 	}
 
 	/** {@inheritDoc} */

@@ -29,9 +29,6 @@ import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 
 /**
  * <p>BorderSetter2 class.</p>
- *
- *
- *
  */
 public class BorderSetter2 implements SubPropertySetter {
 
@@ -44,17 +41,6 @@ public class BorderSetter2 implements SubPropertySetter {
 	 */
 	public BorderSetter2(String baseName) {
 		this.name = baseName;
-	}
-
-	/**
-	 * <p>changeValue.</p>
-	 *
-	 * @param properties a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 * @param value a {@link java.lang.String} object.
-	 * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
-	 */
-	public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclarationImpl declaration) {
-		this.changeValue(properties, value, declaration, true);
 	}
 
 	/** {@inheritDoc} */

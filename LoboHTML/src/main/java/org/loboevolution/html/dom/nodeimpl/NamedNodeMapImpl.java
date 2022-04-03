@@ -22,7 +22,6 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.AttrImpl;
 import org.loboevolution.html.node.Attr;

@@ -27,11 +27,20 @@ import com.gargoylesoftware.css.util.CSSProperties;
 
 /**
  * <p>SubPropertySetter interface.</p>
- *
- *
- *
  */
 public interface SubPropertySetter extends CSSProperties {
+
+
+	/**
+	 * <p>changeValue.</p>
+	 *
+	 * @param properties a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @param newValue a {@link java.lang.String} object.
+	 * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
+	 */
+	default void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
+		this.changeValue(properties, newValue, declaration, true);
+	}
 	
 	/**
 	 * <p>changeValue.</p>

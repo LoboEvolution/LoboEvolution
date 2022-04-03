@@ -35,17 +35,6 @@ import java.util.Arrays;
 public class FontSetter implements SubPropertySetter {
 
     /**
-     * <p>changeValue.</p>
-     *
-     * @param properties  a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-     * @param newValue    a {@link java.lang.String} object.
-     * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
-     */
-    public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
-        this.changeValue(properties, newValue, declaration, true);
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -53,7 +42,7 @@ public class FontSetter implements SubPropertySetter {
         if (Strings.isNotBlank(newValue)) {
             final String fontSpecTL = newValue.toLowerCase();
             final String[] tokens = fontSpecTL.split(" ");
-            String token = null;
+            String token;
             boolean isSlash = false;
             final int length = tokens.length;
             int i;
