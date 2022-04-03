@@ -22,6 +22,7 @@ package org.loboevolution.html.js.css;
 
 import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.mozilla.javascript.annotations.JSFunction;
 
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
@@ -39,12 +40,14 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
+    @JSFunction
     public String getPropertyValue(String property) {
         return style.getPropertyValue(property);
     }
 
     /** {@inheritDoc} */
     @Override
+    @JSFunction
     public String getPropertyPriority(String property) {
         return style.getPropertyPriority(property);
     }

@@ -51,6 +51,7 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.html.node.NodeType;
+import org.mozilla.javascript.annotations.JSFunction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -95,6 +96,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
+	@JSFunction
 	public String getAttribute(String name) {
 		final Attr attr = getAttributeNode(name);
 		return attr == null ? null : attr.getValue();
@@ -102,6 +104,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
+	@JSFunction
 	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
 		final Attr attr = getAttributeNode(localName);
 		if (attr != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attr.getNamespaceURI()))) {
@@ -112,6 +115,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
+	@JSFunction
 	public Attr getAttributeNode(String name) {
 		Attr attribute = map.getNamedItem(name);
 		return attribute == null ? null : new AttrImpl(name, attribute.getValue(), true, this, "id".equalsIgnoreCase(name));
@@ -119,6 +123,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
+	@JSFunction
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
 		final Attr attribute = map.getNamedItem(localName);
 		if (attribute != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attribute.getNamespaceURI()))) {
