@@ -350,15 +350,19 @@ public class StyleSheetAggregator {
 		case "hover":
 			setMouseOver(true);
 			return mouseOver;
+
 		case "root":
 			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
 			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == NodeType.DOCUMENT_TYPE_NODE;
 
-		case "enabled":
-			return element.hasAttribute("enabled") || (!element.hasAttribute("enabled") && !element.hasAttribute("disabled"));
+			case "enabled":
+				return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
+						(element instanceof HTMLSelectElement) || (element instanceof HTMLTextAreaElement)) &&
+						(element.hasAttribute("enabled") ||  !element.hasAttribute("enabled") && !element.hasAttribute("disabled"));
 
 		case "disabled":
-			return element.hasAttribute("disabled");
+			return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
+					(element instanceof HTMLSelectElement) || (element instanceof HTMLTextAreaElement)) && element.hasAttribute("disabled");
 
 		case "placeholder":
 				return element.hasAttribute("placeholder");
@@ -575,7 +579,7 @@ public class StyleSheetAggregator {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
 		return isActive(document.getDefaultView(), mediaList);
     }
-	
+
 	private static boolean isActive(Window window, final MediaQuery mediaQuery) {
 		final String mediaType = mediaQuery.getMedia();
 		if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
@@ -584,87 +588,93 @@ public class StyleSheetAggregator {
 				final int val;
 				final String value;
 				switch (property.getName()) {
-				case "max-width":
-
+					case "max-width":
 					case "max-height":
+						if (property.getValue() == null) return false;
 						value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null,  window, -1);
-					if (val == -1 || val < window.getInnerWidth()) {
-						return false;
-					}
-					break;
-
-				case "min-width":
-				case "min-height":
-					value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, window, -1);
-					if (val == -1 || val > window.getInnerWidth()) {
-						return false;
-					}
-					break;
-
-				case "max-device-width":
-				case "max-device-height":
-					value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, window, -1);
-					if (val == -1 || val < window.getScreen().getWidth()) {
-						return false;
-					}
-					break;
-
-				case "min-device-width":
-				case "min-device-height":
-					value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, window, -1);
-					if (val == -1 || val > window.getScreen().getWidth()) {
-						return false;
-					}
-					break;
-				case "resolution":
-					final CSSValueImpl propValue = property.getValue();
-					val = HtmlValues.resolutionValue(propValue);
-					if (propValue == null) {
-						return true;
-					}
-					if (val == -1 || Math.round(val) != window.getScreen().getPixelDepth()) {
-						return false;
-					}
-					break;
-  			    case "max-resolution":
-					val = HtmlValues.resolutionValue(property.getValue());
-					if (val == -1 || val < window.getScreen().getPixelDepth()) {
-						return false;
-					}
-					break;
-
-				case "min-resolution":
-					val = HtmlValues.resolutionValue(property.getValue());
-					if (val == -1 || val > window.getScreen().getPixelDepth()) {
-						return false;
-					}
-					break;
-
-				case "orientation":
-					final CSSValueImpl cssValue = property.getValue();
-					if (cssValue == null) {
-						return true;
-					}
-
-					final String orient = cssValue.getCssText();
-					if ("portrait".equals(orient)) {
-						if (window.getInnerWidth() > window.getInnerHeight()) {
+						val = HtmlValues.getPixelSize(value, null, window, -1);
+						if (val == -1 || val < window.getInnerWidth()) {
 							return false;
 						}
-					} else if ("landscape".equals(orient)) {
-						if (window.getInnerWidth() < window.getInnerHeight()) {
+						break;
+
+					case "min-width":
+					case "min-height":
+						if (property.getValue() == null) return false;
+						value = String.valueOf(property.getValue().getDoubleValue());
+						val = HtmlValues.getPixelSize(value, null, window, -1);
+						if (val == -1 || val > window.getInnerWidth()) {
 							return false;
 						}
-					} else {
-						return false;
-					}
-					break;
+						break;
 
-				default:
+					case "max-device-width":
+					case "max-device-height":
+						if (property.getValue() == null) return false;
+						value = String.valueOf(property.getValue().getDoubleValue());
+						val = HtmlValues.getPixelSize(value, null, window, -1);
+						if (val == -1 || val < window.getScreen().getWidth()) {
+							return false;
+						}
+						break;
+
+					case "min-device-width":
+					case "min-device-height":
+						if (property.getValue() == null) return false;
+						value = String.valueOf(property.getValue().getDoubleValue());
+						val = HtmlValues.getPixelSize(value, null, window, -1);
+						if (val == -1 || val > window.getScreen().getWidth()) {
+							return false;
+						}
+						break;
+					case "resolution":
+						if (property.getValue() == null) return false;
+						final CSSValueImpl propValue = property.getValue();
+						val = HtmlValues.resolutionValue(propValue);
+						if (propValue == null) {
+							return true;
+						}
+						if (val == -1 || Math.round(val) != window.getScreen().getPixelDepth()) {
+							return false;
+						}
+						break;
+					case "max-resolution":
+						if (property.getValue() == null) return false;
+						val = HtmlValues.resolutionValue(property.getValue());
+						if (val == -1 || val < window.getScreen().getPixelDepth()) {
+							return false;
+						}
+						break;
+
+					case "min-resolution":
+						if (property.getValue() == null) return false;
+						val = HtmlValues.resolutionValue(property.getValue());
+						if (val == -1 || val > window.getScreen().getPixelDepth()) {
+							return false;
+						}
+						break;
+
+					case "orientation":
+						if (property.getValue() == null) return true;
+						final CSSValueImpl cssValue = property.getValue();
+						if (cssValue == null) {
+							return true;
+						}
+
+						final String orient = cssValue.getCssText();
+						if ("portrait".equals(orient)) {
+							if (window.getInnerWidth() > window.getInnerHeight()) {
+								return false;
+							}
+						} else if ("landscape".equals(orient)) {
+							if (window.getInnerWidth() < window.getInnerHeight()) {
+								return false;
+							}
+						} else {
+							return false;
+						}
+						break;
+					default:
 				}
 			}
 			return true;

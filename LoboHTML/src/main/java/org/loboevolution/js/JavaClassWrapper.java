@@ -143,9 +143,13 @@ public class JavaClassWrapper {
 	private boolean isPropertyMethod(String name, Method method) {
 		if ((name.startsWith("get") || name.startsWith("is")) &&
 				!name.equals("getBoundingClientRect") &&
-				!name.equals("getClientRects")) {
+				!name.equals("getClientRects") &&
+				!name.equals("getComputedStyle")) {
 			return method.getParameterTypes().length == 0;
-		} else if (name.startsWith("set") && !name.equals("setTimeout") && !name.equals("setNamedItem")) {
+		} else if (name.startsWith("set") &&
+				!name.equals("setTimeout") &&
+				!name.equals("setNamedItem") &&
+				!name.equals("setProperty")) {
 			return method.getParameterTypes().length == 1;
 		} else {
 			return false;

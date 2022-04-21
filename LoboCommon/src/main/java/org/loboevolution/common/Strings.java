@@ -19,6 +19,8 @@
  */
 package org.loboevolution.common;
 
+import org.loboevolution.html.CSSValues;
+
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
@@ -77,6 +79,10 @@ public final class Strings {
 		return text == null || "".equals(text);
 	}
 
+	public static boolean isCssBlank(String text) {
+		return isBlank(text) || CSSValues.NONE.equals(CSSValues.get(text));
+	}
+
 	/**
 	 * Linearize string.
 	 *
@@ -97,6 +103,10 @@ public final class Strings {
 		return !isBlank(text);
 	}
 
+	public static boolean isCssNotBlank(String text) {
+		return !isBlank(text) && !CSSValues.NONE.equals(CSSValues.get(text));
+	}
+
 	/**
 	 * <p>isNumeric.</p>
 	 *
@@ -113,50 +123,6 @@ public final class Strings {
 		} catch (final Exception ex) {
 			return false;
 		}
-	}
-
-	/**
-	 * Leading digits.
-	 *
-	 * @param text the text
-	 * @return the string
-	 */
-	private static String leadingDigits(String text) {
-		final char[] list = text.toCharArray();
-		StringBuilder buffer = null;
-		for (final char ch : list) {
-			if (!Character.isDigit(ch)) {
-				break;
-			}
-
-			if (buffer == null) {
-				buffer = new StringBuilder(3);
-			}
-
-			buffer.append(ch);
-		}
-		return buffer == null ? "" : buffer.toString();
-	}
-
-	/**
-	 * Leading non digits.
-	 *
-	 * @param text the text
-	 * @return the string
-	 */
-	private static String leadingNonDigits(String text) {
-		StringBuilder buffer = null;
-		final char[] list = text.toCharArray();
-		for (final char ch : list) {
-			if (Character.isDigit(ch)) {
-				break;
-			}
-			if (buffer == null) {
-				buffer = new StringBuilder(3);
-			}
-			buffer.append(ch);
-		}
-		return buffer == null ? "" : buffer.toString();
 	}
 
 	/**

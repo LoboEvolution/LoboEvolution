@@ -430,7 +430,7 @@ public class HtmlParser {
 	 * Reads text until the beginning of the next tag. Leaves the reader offset past
 	 * the opening angle bracket. Returns null only on EOF.
 	 */
-	private StringBuilder readUpToTagBegin(final LineNumberReader reader) throws IOException, SAXException {
+	private StringBuilder readUpToTagBegin(final LineNumberReader reader) throws IOException {
 		StringBuilder sb = null;
 		int intCh;
 		while ((intCh = reader.read()) != -1) {
@@ -985,8 +985,11 @@ public class HtmlParser {
 						element.setAttribute(attributeNameStr, "");
 					} else {
 						final StringBuilder actualAttributeValue = entityDecode(attributeValue);
+						if(attributeNameStr.contains(":")){
+							element.setAttributeNS("", attributeNameStr, actualAttributeValue.toString());
+						} else{
 						element.setAttribute(attributeNameStr, actualAttributeValue.toString());
-					}
+					}}
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = false;
@@ -1170,7 +1173,7 @@ public class HtmlParser {
 	}
 
 	private static int getEntityChar(final String spec) {
-		Character c = (Character) HTMLEntities.ENTITIES.get(Entities.get(spec));
+		Character c = HTMLEntities.ENTITIES.get(Entities.get(spec));
 		if (c == null) {
 			final String specTL = spec.toLowerCase();
 			c = HTMLEntities.ENTITIES.get(Entities.get(specTL));
