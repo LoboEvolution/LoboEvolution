@@ -119,7 +119,7 @@ public class FontSetter implements SubPropertySetter {
                 }
 
                 String fontFamily = properties.getPropertyValue(FONT_FAMILY);
-                if(fontFamily == null) {
+                if(Strings.isCssBlank(fontFamily)) {
                     properties.setPropertyValueLCAlt(FONT_FAMILY, token.trim(), important);
                 } else {
                     properties.setPropertyValueLCAlt(FONT_FAMILY, fontFamily + ", " + token.trim(), important);
