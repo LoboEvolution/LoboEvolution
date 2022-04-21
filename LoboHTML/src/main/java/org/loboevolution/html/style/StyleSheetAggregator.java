@@ -350,15 +350,19 @@ public class StyleSheetAggregator {
 		case "hover":
 			setMouseOver(true);
 			return mouseOver;
+
 		case "root":
 			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
 			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == NodeType.DOCUMENT_TYPE_NODE;
 
-		case "enabled":
-			return element.hasAttribute("enabled") || (!element.hasAttribute("enabled") && !element.hasAttribute("disabled"));
+			case "enabled":
+				return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
+						(element instanceof HTMLSelectElement) || (element instanceof HTMLTextAreaElement)) &&
+						(element.hasAttribute("enabled") ||  !element.hasAttribute("enabled") && !element.hasAttribute("disabled"));
 
 		case "disabled":
-			return element.hasAttribute("disabled");
+			return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
+					(element instanceof HTMLSelectElement) || (element instanceof HTMLTextAreaElement)) && element.hasAttribute("disabled");
 
 		case "placeholder":
 				return element.hasAttribute("placeholder");

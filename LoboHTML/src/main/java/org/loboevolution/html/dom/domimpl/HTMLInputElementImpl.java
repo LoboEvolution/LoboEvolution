@@ -77,7 +77,8 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	@Override
 	public boolean isChecked() {
 		final String checked = getAttribute("checked");
-		return "checked".equals(checked) || "true".equals(checked);
+		final String type = getType();
+		return ("radio".equals(type) || "checkbox".equals(type)) &&  ("checked".equals(checked) || "true".equals(checked));
 	}
 
 	/** {@inheritDoc} */
