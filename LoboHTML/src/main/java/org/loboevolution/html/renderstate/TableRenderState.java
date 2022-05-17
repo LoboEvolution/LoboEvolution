@@ -151,7 +151,7 @@ public class TableRenderState extends StyleSheetRenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	protected int getDefaultDisplay() {
+	public int getDefaultDisplay() {
 		return DISPLAY_TABLE;
 	}
 

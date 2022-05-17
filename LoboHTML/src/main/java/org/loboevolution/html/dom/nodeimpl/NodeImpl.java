@@ -49,19 +49,20 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * <p>Abstract NodeImpl class.</p>
  */
 public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode, Cloneable {
-		
+
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
-	
+
 	/** Constant logger */
 	protected static final Logger logger = Logger.getLogger(NodeImpl.class.getName());
-	
+
 	private HTMLCollection childrenCollection;
-	
+
 	protected volatile Document document;
 
 	protected final NodeListImpl nodeList = new NodeListImpl();
@@ -199,7 +200,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			}
 		});
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public Node cloneNode() {
@@ -299,7 +300,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * Extracts all descendents that match the filter, except those descendents of
 	 * nodes that match the filter.
-	 * 
+	 *
 	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
 	 * @param al a {@link java.util.ArrayList} object.
 	 */
@@ -378,7 +379,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		synchronized (this) {
 			HTMLCollection collection = this.childrenCollection;
 			if (collection == null) {
-				collection = new HTMLCollectionImpl(this);
+
+				collection = new HTMLCollectionImpl(this,
+						Arrays.asList(nodeList.
+								stream().
+								filter(node -> node instanceof Element).
+								collect(Collectors.toCollection(NodeListImpl::new)).
+								toArray()));
+
 				this.childrenCollection = collection;
 			}
 			return collection;
@@ -412,7 +420,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.loboevolution.html.rendered.RenderableContext#getDocumentItem(java.lang.String)
 	 */
@@ -440,13 +448,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node getFirstChild() {
-		int size = this.nodeList.getLength();
-		if (size > 0)
-			return this.nodeList.get(0);
-		return null;
+		return nodeList.
+				stream().
+				findFirst().
+				orElse(null);
 	}
-	
-	
+
+
 	/**
 	 * <p>getFirstChildByFilter.</p>
 	 *
@@ -465,11 +473,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 		return null;
 	}
-	
+
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.loboevolution.html.rendered.RenderableContext#getFullURL(java.lang.String)
 	 */
 	/** {@inheritDoc} */
@@ -553,7 +561,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		return parent == null ? null : parent.getNextTo(this);
 	}
-	
+
 	/**
 	 * <p>getNextElementSibling.</p>
 	 *
@@ -576,7 +584,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	private Node getNextTo(Node node) {
 		int idx = this.nodeList.indexOf(node);
 		if (idx == -1) {
-			throw new DOMException(DOMException.NOT_FOUND_ERR, "node not found");
+			return null;
 		}
 
 		int size = this.nodeList.getLength();
@@ -636,7 +644,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public Node getParentNode() {
 		return this.parentNode;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public HTMLElement getParentElement() {
@@ -673,7 +681,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		return parent == null ? null : parent.getPreviousTo(this);
 	}
-	
+
 	/**
 	 * <p>getPreviousElementSibling.</p>
 	 *
@@ -696,9 +704,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	private Node getPreviousTo(Node node) {
 		final int idx = this.nodeList.indexOf(node);
 		if (idx == -1) {
-			throw new DOMException(DOMException.NOT_FOUND_ERR, "node not found");
+			return null;
 		}
-		
+
 		int size = this.nodeList.getLength();
 		int index = idx - 1;
 		if (size > index && index > -1) {
@@ -707,7 +715,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			return null;
 		}
 	}
-	
+
 
 	/** {@inheritDoc} */
 	@Override
@@ -745,16 +753,16 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		nodeList.forEach(child -> {
 			final int type = child.getNodeType();
 			switch (type) {
-			case NodeType.CDATA_SECTION_NODE:
-			case NodeType.TEXT_NODE:
-			case NodeType.ELEMENT_NODE:
-				final String textContent = child.getTextContent();
-				if (textContent != null) {
-					sb.append(textContent);
-				}
-				break;
-			default:
-				break;
+				case NodeType.CDATA_SECTION_NODE:
+				case NodeType.TEXT_NODE:
+				case NodeType.ELEMENT_NODE:
+					final String textContent = child.getTextContent();
+					if (textContent != null) {
+						sb.append(textContent);
+					}
+					break;
+				default:
+					break;
 			}
 		});
 		return sb.toString();
@@ -885,7 +893,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			doc.structureInvalidated(this);
 		}
 	}
-	
+
 	/**
 	 * <p>getDocumentNode.</p>
 	 *
@@ -1024,7 +1032,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.loboevolution.html.rendered.RenderableContext#isEqualOrDescendentOf(org.loboevolution.html.rendered.RenderableContext)
 	 */
@@ -1162,35 +1170,35 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public Text replaceAdjacentTextNodes(Text node) {
 		try {
-				final int idx = nodeList.indexOf(node);
-				if (idx == -1) {
-					throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not a child");
+			final int idx = nodeList.indexOf(node);
+			if (idx == -1) {
+				throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not a child");
+			}
+			final StringBuilder textBuffer = new StringBuilder();
+			int firstIdx = idx;
+			final List<Node> toDelete = new LinkedList<>();
+			for (int adjIdx = idx; --adjIdx >= 0;) {
+				final Node child = this.nodeList.item(adjIdx);
+				if (child instanceof Text) {
+					firstIdx = adjIdx;
+					toDelete.add(child);
+					textBuffer.append(child.getNodeValue());
 				}
-				final StringBuilder textBuffer = new StringBuilder();
-				int firstIdx = idx;
-				final List<Node> toDelete = new LinkedList<>();
-				for (int adjIdx = idx; --adjIdx >= 0;) {
-					final Node child = this.nodeList.item(adjIdx);
-					if (child instanceof Text) {
-						firstIdx = adjIdx;
-						toDelete.add(child);
-						textBuffer.append(child.getNodeValue());
-					}
+			}
+			final int length = this.nodeList.getLength();
+			for (int adjIdx = idx; ++adjIdx < length;) {
+				final Node child = this.nodeList.item(adjIdx);
+				if (child instanceof Text) {
+					toDelete.add(child);
+					textBuffer.append(child.getNodeValue());
 				}
-				final int length = this.nodeList.getLength();
-				for (int adjIdx = idx; ++adjIdx < length;) {
-					final Node child = this.nodeList.item(adjIdx);
-					if (child instanceof Text) {
-						toDelete.add(child);
-						textBuffer.append(child.getNodeValue());
-					}
-				}
-				this.nodeList.removeAll(toDelete);
-				final TextImpl textNode = new TextImpl(textBuffer.toString());
-				textNode.setOwnerDocument(this.document);
-				textNode.setParentImpl(this);
-				this.nodeList.add(firstIdx, textNode);
-				return textNode;
+			}
+			this.nodeList.removeAll(toDelete);
+			final TextImpl textNode = new TextImpl(textBuffer.toString());
+			textNode.setOwnerDocument(this.document);
+			textNode.setParentImpl(this);
+			this.nodeList.add(firstIdx, textNode);
+			return textNode;
 		} finally {
 			if (!this.notificationsSuspended) {
 				informStructureInvalid();
@@ -1244,13 +1252,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node replaceChild(Node newChild, Node oldChild) {
-	
-			final int idx = this.nodeList.indexOf(oldChild);
-			if (idx == -1) {
-				throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
-			}
-			this.nodeList.set(idx, newChild);
-		
+
+		final int idx = this.nodeList.indexOf(oldChild);
+		if (idx == -1) {
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
+		}
+		this.nodeList.set(idx, newChild);
+
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}
@@ -1259,7 +1267,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.loboevolution.html.rendered.RenderableContext#setDocumentItem(java.lang.String,
 	 * java.lang.Object)
@@ -1393,7 +1401,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			}
 		}
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean isIsConnected() {
@@ -1406,7 +1414,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return this;
 	}
 
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

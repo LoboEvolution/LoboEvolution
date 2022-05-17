@@ -22,7 +22,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 
 /**
@@ -81,6 +83,11 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	@Override
 	public String getPublicId() {
 		return this.publicId;
+	}
+
+	@Override
+	public Node appendChild(Node newChild) {
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append node.");
 	}
 
 	/** {@inheritDoc} */

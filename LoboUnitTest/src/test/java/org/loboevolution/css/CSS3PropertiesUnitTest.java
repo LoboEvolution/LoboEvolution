@@ -729,7 +729,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "alert(cs2.backgroundColor);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"};
+        final String[] messages = {"rgb(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"};
         checkHtmlAlert(html, messages);
     }
 

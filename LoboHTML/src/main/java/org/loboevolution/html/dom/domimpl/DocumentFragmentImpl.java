@@ -22,7 +22,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.DocumentFragment;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 
 /**
@@ -30,11 +32,7 @@ import org.loboevolution.html.node.NodeType;
  */
 public class DocumentFragmentImpl extends EventTargetImpl implements DocumentFragment {
 
-	/**
-	 * <p>
-	 * Constructor for DocumentFragmentImpl.
-	 * </p>
-	 */
+	/** Constructor for DocumentFragmentImpl.*/
 	public DocumentFragmentImpl() {
 		super();
 	}
@@ -42,7 +40,22 @@ public class DocumentFragmentImpl extends EventTargetImpl implements DocumentFra
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
-		return "#document-fragment";
+		return "[object DocumentFragment]";
+	}
+
+	@Override
+	public Node appendChild(Node newChild) {
+		if (newChild.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a fragment.");
+		}
+		return super.appendChild(newChild);
+	}
+	@Override
+	public Node prependChild(Node newChild) {
+		if (newChild.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a fragment.");
+		}
+		return super.prependChild(newChild);
 	}
 
 	/** {@inheritDoc} */

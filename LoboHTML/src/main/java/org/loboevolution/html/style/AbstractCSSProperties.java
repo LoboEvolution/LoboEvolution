@@ -23,10 +23,10 @@
 package org.loboevolution.html.style;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
-import com.gargoylesoftware.css.util.CSSProperties;
 import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
@@ -39,13 +39,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * <p>AbstractCSSProperties class.</p>
  */
-public class AbstractCSSProperties extends AbstractScriptableDelegate implements CSSProperties, CSS3Properties {
+public class AbstractCSSProperties extends AbstractScriptableDelegate implements CSS3Properties {
 
 	/** Constant logger */
 	protected static final Logger logger = Logger.getLogger(AbstractCSSProperties.class.getName());
@@ -2028,7 +2029,6 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	 * @param cssText a {@link java.lang.String} object.
 	 */
 	public void setCssText(final String cssText) throws DOMException {
-		this.cssText = cssText;
 		AbstractCSSProperties sds = new AbstractCSSProperties(null);
 		if (Strings.isNotBlank(cssText)) {
 			final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
@@ -2036,7 +2036,10 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				final CSSStyleDeclarationImpl sd = parser.parseStyleDeclaration(cssText);
 				sds.addStyleDeclaration(sd);
 				setLocalStyleProperties(sds);
-				context.setAttribute("style", cssText);
+				if (Strings.isBlank(this.cssText)) {
+					this.cssText = cssText;
+					context.setAttribute("style", cssText);
+				}
 			} catch (final Exception err) {
 				logger.log(Level.WARNING, "Unable to parse style attribute value", err);
 			}
@@ -2225,6 +2228,34 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	public void setStyleDeclarations(List<CSSStyleDeclarationImpl> styleDeclarations) {
 		this.styleDeclarations = styleDeclarations;
 	}
+
+	/**
+	 * <p>getLength.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
+	public int getLength() {
+		return styleDeclarations.size();
+	}
+
+
+	/**
+	 * <p>getPropertyCSSValue.</p>
+	 * @param propertyName a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
+	public String getPropertyCSSValue(String propertyName) {
+		AtomicReference<String> props = new AtomicReference<>();
+		styleDeclarations.forEach(css ->{
+			CSSValueImpl prop = css.getPropertyCSSValue(propertyName);
+			if(prop != null){
+				props.set(prop.getStringValue());
+			}
+		});
+		return props.get();
+	}
+
+
 
 	/** {@inheritDoc} */
 	@Override

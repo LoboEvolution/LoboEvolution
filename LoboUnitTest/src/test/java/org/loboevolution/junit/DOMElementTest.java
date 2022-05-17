@@ -175,7 +175,7 @@ public class DOMElementTest extends LoboUnitTest {
 		assertTrue(body.hasAttributes());
 		assertEquals(2, body.getAttributes().getLength());
 		assertEquals("bodyId", body.getAttribute("id"));
-		attr = body.getAttributeNode("id");
+        attr = body.getAttributeNode("id");
 		assertTrue(attr.isId());
 		assertEquals("ID", attr.getSchemaTypeInfo().getTypeName());
 		assertEquals("https://www.w3.org/TR/xml/", attr.getSchemaTypeInfo().getTypeNamespace());
@@ -614,7 +614,6 @@ public class DOMElementTest extends LoboUnitTest {
 
 	@Test
 	public void matchesStringStringQuirks() {
-		document.removeChild(document.getDoctype());
 		Element body = document.createElement("body");
 		document.getDocumentElement().appendChild(body);
 		body.setAttribute("id", "bodyId");
@@ -673,19 +672,19 @@ public class DOMElementTest extends LoboUnitTest {
 	@Test
 	public void testGetStyle() {
 		HTMLElementImpl body = (HTMLElementImpl)document.createElement("body");
-		assertNull(body.getStyle());
+		assertNotNull(body.getStyle());
 		assertFalse(body.hasAttributes());
 		document.getDocumentElement().appendChild(body);
 		body.setAttribute("style", "font-family: Arial");
 		assertTrue(body.hasAttributes());
 		assertTrue(body.hasAttribute("style"));
-		assertEquals("font-family: Arial; ", body.getAttribute("style"));
+		assertEquals("font-family: Arial", body.getAttribute("style"));
 		AbstractCSSProperties style = body.getStyle();
 		assertNotNull(style);
-		assertEquals("font-family: Arial; ", style.getCssText());
+		assertEquals("font-family: Arial", style.getCssText());
 		style.setCssText("font-family: Helvetica");
-		assertEquals("font-family: Helvetica; ", style.getCssText());
-		assertEquals("font-family: Helvetica; ", body.getAttribute("style"));
+		assertEquals("font-family: Helvetica", style.getCssText());
+		assertEquals("font-family: Helvetica", body.getAttribute("style"));
 		body.removeAttribute("style");
 		body.setAttribute("style", "font-family");
 	}
@@ -802,29 +801,29 @@ public class DOMElementTest extends LoboUnitTest {
 		assertTrue(list.contains(div4));
 		assertFalse(list.contains(html));
 		assertFalse(list.isEmpty());
-		//
+
 		list = (NodeListImpl)document.getChildNodes();
 		assertNotNull(list);
+
 		assertEquals(2, list.getLength());
 		assertSame(html, list.item(1));
 		assertSame(document.getDoctype(), document.getFirstChild());
 		assertFalse(list.contains(div4));
 		assertTrue(list.contains(html));
 		assertFalse(list.isEmpty());
-		//
 		list = (NodeListImpl)html.getChildNodes();
 		assertNotNull(list);
-		assertEquals(1, list.getLength());
-		assertSame(body, list.item(0));
-		assertNull(list.item(1));
+		assertEquals(3, list.getLength());
+		assertSame(body, list.item(2));
+		assertNotNull(list.item(1));
 		assertNull(list.item(-1));
-		assertSame(body, html.getFirstChild());
+		assertSame(document.getHead(), html.getFirstChild());
 		assertSame(body, html.getLastChild());
 		assertSame(list, html.getChildNodes());
 		assertTrue(list.contains(body));
 		assertFalse(list.contains(div4));
 		assertFalse(list.isEmpty());
-		//
+
 		list = (NodeListImpl)div4.getChildNodes();
 		assertTrue(list.isEmpty());
 		div4.appendChild(document.createTextNode(" "));

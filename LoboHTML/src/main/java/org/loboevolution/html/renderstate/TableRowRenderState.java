@@ -24,9 +24,6 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * <p>TableRowRenderState class.</p>
- *
- *
- *
  */
 public class TableRowRenderState extends DisplayRenderState {
 

@@ -31,9 +31,6 @@ import org.loboevolution.html.node.DOMStringList;
 
 /**
  * <p>DOMConfigurationImpl class.</p>
- *
- *
- *
  */
 public class DOMConfigurationImpl implements DOMConfiguration {
 	private final Map<String, Object> parameters = new HashMap<>();
@@ -48,7 +45,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 	/** {@inheritDoc} */
 	@Override
 	public boolean canSetParameter(String name, Object value) {
-		// TODO
+		setParameter(name, value);
 		return true;
 	}
 

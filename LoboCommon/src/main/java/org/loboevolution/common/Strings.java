@@ -37,9 +37,7 @@ import javax.crypto.spec.PBEKeySpec;
  * The Class Strings.
  */
 public final class Strings {
-	
 	private static final int iterations = 20*1000;
-        
     private static final int desiredKeyLen = 256;
 
 	/** The Constant EMPTY_ARRAY. */
@@ -105,6 +103,10 @@ public final class Strings {
 
 	public static boolean isCssNotBlank(String text) {
 		return !isBlank(text) && !CSSValues.NONE.equals(CSSValues.get(text));
+	}
+
+	public static boolean isStringBuilderNotBlack(StringBuilder text) {
+		return (text != null) && (text.length() > 0);
 	}
 
 	/**

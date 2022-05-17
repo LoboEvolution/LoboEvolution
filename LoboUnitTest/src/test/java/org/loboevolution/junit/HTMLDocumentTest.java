@@ -32,6 +32,7 @@ import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSRuleList;
 import org.loboevolution.html.node.css.CSSStyleSheet;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.html.node.NodeType;
 
@@ -888,7 +889,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         HTMLElementImpl elm = (HTMLElementImpl) doc.getElementById("firstH3");
         assertNotNull(elm);
         assertEquals("font-family: 'Does Not Exist', Neither; color: navy", elm.getAttribute("style"));
-        CSSStyleDeclarationImpl style = elm.getStyle().getStyleDeclarations().get(0);
+        AbstractCSSProperties style = elm.getStyle();
         assertEquals("font-family: \"Does Not Exist\", Neither; color: navy", style.getCssText());
         assertEquals(2, style.getLength());
         assertEquals("\"Does Not Exist\", Neither", style.getPropertyValue("font-family"));

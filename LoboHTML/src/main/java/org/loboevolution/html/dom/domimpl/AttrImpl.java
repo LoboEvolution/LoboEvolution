@@ -32,7 +32,6 @@ import org.loboevolution.html.node.TypeInfo;
  * <p>AttrImpl class.</p>
  */
 public class AttrImpl extends AttrAbstract {
-	
 	private boolean isId;
 	private final String name;
 	private final Element ownerElement;
@@ -132,7 +131,7 @@ public class AttrImpl extends AttrAbstract {
 	/** {@inheritDoc} */
 	@Override
 	public boolean isId() {
-		return this.isId;
+        return this.isId || name.toLowerCase().contains("id");
 	}
 
 	public void setIsId(boolean isId){
@@ -163,19 +162,24 @@ public class AttrImpl extends AttrAbstract {
 	/** {@inheritDoc} */
 	@Override
 	public Node insertBefore(Node newChild, Node refChild) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'insertBefore' on 'Node': This node type does not support this method.");
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "'insertBefore' on 'Node': This node type does not support this method.");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Node removeChild(Node oldChild) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'removeChild' on 'Node': This node type does not support this method.");
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "'removeChild' on 'Node': This node type does not support this method.");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Node replaceChild(Node newChild, Node refChild) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'replaceChild' on 'Node': This node type does not support this method.");
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "'replaceChild' on 'Node': This node type does not support this method.");
+	}
+
+	@Override
+	public Node appendChild(Node newChild) {
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "'appendChild' on 'Node': This node type does not support this method.");
 	}
 
 	@Override

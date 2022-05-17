@@ -162,7 +162,12 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	}
 
 	@Override
-	public int getDisplay() {
+	public int getDefaultDisplay() {
 		return DISPLAY_INLINE;
+	}
+
+	@Override
+	public int getDisplay() {
+		return getDefaultDisplay();
 	}
 }

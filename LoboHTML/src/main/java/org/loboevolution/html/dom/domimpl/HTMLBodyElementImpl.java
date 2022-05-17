@@ -22,13 +22,14 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
+import org.loboevolution.html.dom.HTMLHtmlElement;
+import org.loboevolution.html.node.*;
 import org.loboevolution.html.renderstate.BodyRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Function;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 
 /**
  * <p>HTMLBodyElementImpl class.</p>
@@ -201,6 +202,22 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 		setAttribute("vlink", vLink);
 	}
 
+	@Override
+	public Node appendChild(Node newChild) {
+
+		if (newChild instanceof HTMLHtmlElement) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append html");
+		}
+
+		if (newChild instanceof DocumentType) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append doc type");
+		}
+
+		if (newChild instanceof Document) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append doc");
+		}
+		return super.appendChild(newChild);
+	}
 
 	/** {@inheritDoc} */
 	@Override

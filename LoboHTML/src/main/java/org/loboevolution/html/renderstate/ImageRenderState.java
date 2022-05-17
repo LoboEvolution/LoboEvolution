@@ -157,8 +157,9 @@ public class ImageRenderState extends StyleSheetRenderState {
 		return mi;
 	}
 
+	/** {@inheritDoc} */
 	@Override
-	protected int getDefaultDisplay() {
+	public int getDefaultDisplay() {
 		return DISPLAY_INLINE_BLOCK;
 	}
 }
