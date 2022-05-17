@@ -27,6 +27,7 @@ import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
@@ -45,10 +46,8 @@ import org.loboevolution.html.node.js.geom.DOMRectList;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSSProperties;
-import org.loboevolution.html.style.CSSUtilities;
-import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.html.style.StyleSheetAggregator;
+import org.loboevolution.html.style.*;
+import org.loboevolution.html.style.setter.FourCornersSetter;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.html.node.NodeType;
 import org.mozilla.javascript.annotations.JSFunction;
@@ -69,10 +68,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	private final NamedNodeMapImpl map;
 
 	private final String name;
-	
+
 	private String outer;
 
 	private double scrollTop;
+
+	private boolean isCssText;
 
 	/**
 	 * <p>Constructor for ElementImpl.</p>
@@ -163,6 +164,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		if (!Strings.isValidString(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
+		if("style".equalsIgnoreCase(name) && Strings.isNotBlank(value) && !isCssText){
+			isCssText = true;
+			AbstractCSSProperties style = ((HTMLElementImpl) this).getStyle();
+			style.setCssText(value);
 		}
 
 		map.setNamedItem(new AttrImpl(name, value, true, this, "id".equalsIgnoreCase(name)));
@@ -561,7 +568,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void setSlot(String slot) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -611,14 +618,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void releasePointerCapture(int pointerId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void requestPointerLock() {
 		// TODO Auto-generated method stub
-		
+
 	}
 	/** {@inheritDoc} */
 	@Override
@@ -637,14 +644,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void scrollIntoView(boolean arg) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void scrollIntoView() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -723,7 +730,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void setPointerCapture(int pointerId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -846,6 +853,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public Element getLastElementChild() {
 		long count = nodeList.stream().filter(n -> n instanceof Element).count();
+		if(count == 0) count = 1;
 		Stream<Node> stream = nodeList.stream();
 		return (Element) stream.filter(n -> n instanceof Element).skip(count - 1).findFirst().orElse(null);
 	}
@@ -960,7 +968,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			buffer.append('>');
 		}
 	}
-	
+
 	private String outerNewHtml(final String newHtml) {
 		if (newHtml != null) {
 			return newHtml.endsWith(">") || ! newHtml.startsWith("<") ? newHtml : newHtml + ">";
@@ -998,17 +1006,22 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		final AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getStyle();
 		String width = currentStyle.getWidth();
-		String paddingRight = currentStyle.getPaddingRight();
-		String paddingLeft = currentStyle.getPaddingLeft();
 		String borderLeftWidth = currentStyle.getBorderLeftWidth();
 		String borderRightWidth = currentStyle.getBorderRightWidth();
 		String boxSizing = currentStyle.getBoxSizing();
+		String position = currentStyle.getPosition();
+		String display = currentStyle.getDisplay();
+		String cssFloat = currentStyle.getFloat();
 		int sizeWidth = preferredSize.width;
 
 		if (this instanceof HTMLBodyElementImpl) {
 			width = String.valueOf(doc.getDefaultView().getInnerWidth());
+		}
+
+		if(Strings.isBlank(width)){
+			width = "-1px";
 		}
 
 		final Node nodeObj = getParentNode();
@@ -1019,8 +1032,22 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			}
 		}
 
-		if (Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
+		if ((CSSValues.RIGHT.isEqual(cssFloat) || CSSValues.LEFT.isEqual(cssFloat)) ||
+				(CSSValues.ABSOLUTE.isEqual(position))) {
+
+			if (Strings.isNotBlank(getTextContent())) {
+				width = String.valueOf(getTextContent().length() * 4);
+			} else {
+				width = "0px";
+			}
+		}
+
+		if (!CSSValues.INLINE.isEqual(display) && (Strings.isBlank(width) || "auto".equalsIgnoreCase(width) || "-1px".equals(width))) {
 			width = "100%";
+		}
+
+		if (CSSValues.INLINE.isEqual(display)) {
+			width = "0";
 		}
 
 		int widthSize = HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, sizeWidth);
@@ -1031,15 +1058,17 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		if (padding) {
+			String paddingRight = currentStyle.getPaddingRight();
+			String paddingLeft = currentStyle.getPaddingLeft();
 			widthSize += HtmlValues.getPixelSize(paddingRight, null, doc.getDefaultView(), 0);
 			widthSize += HtmlValues.getPixelSize(paddingLeft, null, doc.getDefaultView(), 0);
 		}
+
 
 		if (border) {
 			widthSize += HtmlValues.getPixelSize(borderRightWidth, null, doc.getDefaultView(), 0);
 			widthSize += HtmlValues.getPixelSize(borderLeftWidth, null, doc.getDefaultView(), 0);
 		}
-
 		return widthSize;
 	}
 
@@ -1048,14 +1077,21 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		final AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getStyle();
 		String height = currentStyle.getHeight();
-		String paddingTop = currentStyle.getPaddingTop();
-		String paddingBottom = currentStyle.getPaddingBottom();
 		String borderTopWidth = currentStyle.getBorderTopWidth();
 		String borderBottomWidth = currentStyle.getBorderBottomWidth();
 		String boxSizing = currentStyle.getBoxSizing();
+		String dispaly = currentStyle.getDisplay();
 		int sizeHeight = preferredSize.height;
+
+		if(CSSValues.NONE.isEqual(dispaly)){
+			return 0;
+		}
+
+		if(Strings.isBlank(height)){
+			height = "-1px";
+		}
 
 		if (this instanceof HTMLBodyElementImpl) {
 			height = String.valueOf(doc.getDefaultView().getInnerHeight());
@@ -1068,12 +1104,20 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				sizeHeight = elem.getClientHeight();
 			}
 		}
-		if ("auto".equalsIgnoreCase(height)) {
-			height = "100%";
-		}
 
-		if (Strings.isBlank(height)) {
-			height = "18";
+		switch (height) {
+			case "auto":
+				height = "100%";
+				break;
+			case "-1px":
+				if (Strings.isBlank(getTextContent())) {
+					height = "0px";
+				} else {
+					height = "18px";
+				}
+				break;
+			default:
+				break;
 		}
 
 		int heightSize = HtmlValues.getPixelSize(height, null, doc.getDefaultView(), -1, sizeHeight);
@@ -1084,6 +1128,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		if (padding) {
+			String paddingTop = currentStyle.getPaddingTop();
+			String paddingBottom = currentStyle.getPaddingBottom();
 			heightSize += HtmlValues.getPixelSize(paddingTop, null, doc.getDefaultView(), 0);
 			heightSize += HtmlValues.getPixelSize(paddingBottom, null, doc.getDefaultView(), 0);
 		}

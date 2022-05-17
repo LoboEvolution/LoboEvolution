@@ -22,7 +22,6 @@ package org.loboevolution.junit;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.DOMException;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -37,16 +36,12 @@ import static org.junit.Assert.*;
 
 public class HTMLElementTest extends LoboUnitTest {
 
-	private static Document document;
-
-	@BeforeClass
-	public static void setUpBeforeClass() {
-		document = sampleHtmlFile();
-	}
+	private Document document;
 
 	@Test
 	public void testCreateElementError() {
 		try {
+			document = sampleHtmlFile();
 			document.createElement("p'");
 			fail("Must throw exception");
 		} catch (DOMException e) {
@@ -57,6 +52,7 @@ public class HTMLElementTest extends LoboUnitTest {
 	@Test
 	public void testCreateElementNSError() {
 		try {
+			document = sampleHtmlFile();
 			document.createElementNS("http://www.example.com/examplens", "e:p'");
 			fail("Must throw exception");
 		} catch (DOMException e) {
@@ -67,6 +63,7 @@ public class HTMLElementTest extends LoboUnitTest {
 	@Test
 	public void testCreateElementNSError2() {
 		try {
+			document = sampleHtmlFile();
 			document.createElementNS(null, "foo:bar");
 			fail("Must throw an exception");
 		} catch (DOMException e) {
@@ -75,6 +72,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testCreateAttributeStyle() {
+		document = sampleHtmlFile();
 		Attr attr = document.createAttribute("style");
 		assertNotNull(attr);
 		attr.setValue("display:block");
@@ -98,6 +96,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testCreateAttributeNS() {
+		document = sampleHtmlFile();
 		Attr attr = document.createAttributeNS(Document.XMLNS_NAMESPACE_URI, "xmlns");
 		assertNotNull(attr);
 		attr.setValue(HTMLDocument.HTML_NAMESPACE_URI);
@@ -114,6 +113,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testCreateAttributeNS2() {
+		document = sampleHtmlFile();
 		Attr attr = document.createAttributeNS("http://www.w3.org/2000/svg", "version");
 		assertNotNull(attr);
 		attr.setValue("1.1");
@@ -131,6 +131,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testCreateAttributeNSError() {
+		document = sampleHtmlFile();
 		try {
 			document.createAttributeNS("http://www.example.com/examplens", "xmlns");
 			fail("Must throw exception");
@@ -168,6 +169,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void setAttribute() {
+		document = sampleHtmlFile();
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		Element body = document.createElement("body");
 		html.appendChild(body);
@@ -194,6 +196,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void setAttributeCI() {
+		document = sampleHtmlFile();
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		Element body = document.createElement("BODY");
 		html.appendChild(body);
@@ -221,6 +224,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testSetAttributeError() {
+		document = sampleHtmlFile();
 		Element p = document.createElement("p");
 		try {
 			p.setAttribute("foo=", "bar");
@@ -232,6 +236,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void setAttributeNode() {
+		document = sampleHtmlFile();
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		Element body = document.createElement("body");
 		html.appendChild(body);
@@ -271,6 +276,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void setAttributeNodeCI() {
+		document = sampleHtmlFile();
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		Element body = document.createElement("body");
 		html.appendChild(body);
@@ -312,6 +318,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void getAttributes() {
+		document = sampleHtmlFile();
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		Element body = document.createElement("body");
 		html.appendChild(body);
@@ -367,6 +374,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void setAttributeNodeClass() {
+		document = sampleHtmlFile();
 		HTMLCollectionImpl fooelms = (HTMLCollectionImpl) document.getElementsByClassName("foo");
 		assertEquals(0, fooelms.getLength());
 		Element body = document.createElement("body");
@@ -379,6 +387,9 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertTrue(body.hasAttribute("class"));
 		assertNull(attr.getParentNode());
 		assertEquals("foo bar", attr.getValue());
+
+		fooelms = (HTMLCollectionImpl) document.getElementsByClassName("foo");
+
 		assertEquals(1, fooelms.getLength());
 		assertEquals(fooelms.toString(), document.getElementsByClassName("foo").toString());
 		assertSame(body, fooelms.item(0));
@@ -400,6 +411,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testSetAttributeNodeClassCI() {
+		document = sampleHtmlFile();
 		HTMLCollectionImpl fooelms = (HTMLCollectionImpl) document.getElementsByClassName("foo");
 		assertEquals(0, fooelms.getLength());
 		Element body = document.createElement("body");
@@ -412,6 +424,8 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertTrue(body.hasAttribute("CLASS"));
 		assertNull(attr.getParentNode());
 		assertEquals("foo bar", attr.getValue());
+		fooelms = (HTMLCollectionImpl) document.getElementsByClassName("foo");
+
 		assertEquals(1, fooelms.getLength());
 		assertEquals(fooelms.toString(), document.getElementsByClassName("foo").toString());
 		assertSame(body, fooelms.item(0));
@@ -421,18 +435,30 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals(1, foobarelms.getLength());
 		assertSame(body, foobarelms.item(0));
 		body.getClassList().remove("bar");
+
+		foobarelms = (HTMLCollectionImpl) document.getElementsByClassName("bar foo");
+		barelms = (HTMLCollectionImpl)document.getElementsByClassName("bar");
+
 		assertEquals(0, barelms.getLength());
 		assertEquals(0, foobarelms.getLength());
 		body.getClassList().toggle("bar");
+
+		barelms = (HTMLCollectionImpl)document.getElementsByClassName("bar");
+
 		assertEquals(1, barelms.getLength());
 		body.removeAttribute("CLASS");
 		assertEquals("foo bar", attr.getValue());
+
+		foobarelms = (HTMLCollectionImpl) document.getElementsByClassName("foo");
+		barelms = (HTMLCollectionImpl)document.getElementsByClassName("bar");
+
 		assertEquals(0, fooelms.getLength());
 		assertEquals(0, barelms.getLength());
 	}
 
 	@Test
 	public void getClassList() {
+		document = sampleHtmlFile();
 		Element body = document.createElement("body");
 		DOMTokenList list = body.getClassList();
 		assertNotNull(list);
@@ -440,26 +466,31 @@ public class HTMLElementTest extends LoboUnitTest {
 		Attr attr = document.createAttribute("class");
 		attr.setValue("foo");
 		body.setAttributeNode(attr);
+		list = body.getClassList();
 		assertEquals(1, list.getLength());
 		assertEquals("foo", list.item(0));
 		assertEquals("foo", list.getValue());
 		attr.setValue("foo bar");
+		list = body.getClassList();
 		assertEquals(2, list.getLength());
 		assertEquals("foo", list.item(0));
 		assertEquals("foo bar", list.getValue());
 		list.add("000");
+		list = body.getClassList();
 		assertEquals(3, list.getLength());
 		assertEquals("foo", list.item(0));
 		assertEquals("000", list.item(2));
 		assertEquals("foo bar 000", list.getValue());
 		assertEquals("foo bar 000", attr.getValue());
 		body.removeAttribute("class");
+		list = body.getClassList();
 		assertEquals(0, list.getLength());
 		assertEquals("foo bar 000", attr.getValue());
 	}
 
 	@Test
 	public void testGetClassList2() {
+		document = sampleHtmlFile();
 		Element body = document.createElement("body");
 		DOMTokenList list = body.getClassList();
 		assertNotNull(list);
@@ -471,6 +502,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void matchesStringString() {
+		document = sampleHtmlFile();
 		Element body = document.createElement("body");
 		document.getDocumentElement().appendChild(body);
 		body.setAttribute("id", "bodyId");
@@ -500,6 +532,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void matchesStringString2() {
+		document = sampleHtmlFile();
 		Element body = document.createElement("body");
 		document.getDocumentElement().appendChild(body);
 		body.setAttribute("id", "bodyId");
@@ -525,6 +558,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void createElement() {
+		document = sampleHtmlFile();
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		HTMLElementImpl body = (HTMLElementImpl)document.createElement("body");
 		html.appendChild(body);
@@ -538,6 +572,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testGetStyle() {
+		document = sampleHtmlFile();
 		HTMLElementImpl body = (HTMLElementImpl)document.createElement("body");
 		assertFalse(body.hasAttributes());
 		document.getDocumentElement().appendChild(body);
@@ -566,6 +601,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void getChildren() {
+		document = sampleHtmlFile();
 		Element html = document.getDocumentElement();
 		Element body = document.createElement("body");
 		html.appendChild(body);
@@ -603,6 +639,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals(1, document.getChildElementCount());
 		list = html.getChildren();
 		assertNotNull(list);
+		list = body.getChildren();
 		assertEquals(1, list.getLength());
 		assertSame(body, list.item(0));
 		assertNull(list.item(1));
@@ -615,6 +652,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void getAttributeNS() {
+		document = sampleHtmlFile();
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		HTMLElementImpl body = (HTMLElementImpl)document.createElement("body");
 		Attr idattr = document.createAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "id");
@@ -663,6 +701,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testGetInnerText() {
+		document = sampleHtmlFile();
 		Element html = document.getDocumentElement();
 		ElementImpl body = (ElementImpl)document.createElement("body");
 		html.appendChild(body);
@@ -700,6 +739,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void cloneNode() {
+		document = sampleHtmlFile();
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		HTMLElementImpl body = (HTMLElementImpl)document.createElement("body");
 		html.appendChild(body);
@@ -723,6 +763,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testGetStartTag() {
+		document = sampleHtmlFile();
 		Element elm = document.createElement("p");
 		Attr attr = document.createAttribute("foo");
 		attr.setValue("bar\"");
@@ -731,6 +772,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testGetTagName() {
+		document = sampleHtmlFile();
 		Element elm = document.createElement("p");
 		assertEquals("p", elm.getTagName());
 		elm = document.createElementNS("http://www.example.com/examplens", "e:p");
@@ -739,6 +781,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testToString() {
+		document = sampleHtmlFile();
 		Element elm = document.createElement("p");
 		Attr attr = document.createAttribute("foo");
 		attr.setValue("bar\"");
@@ -748,11 +791,11 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void testToString2() {
+		document = sampleHtmlFile();
 		Element elm = document.createElement("link");
 		Attr attr = document.createAttribute("href");
 		attr.setValue("http://www.example.com/");
 		elm.setAttributeNode(attr);
 		assertEquals("http://www.example.com/", elm.toString());
 	}
-
 }

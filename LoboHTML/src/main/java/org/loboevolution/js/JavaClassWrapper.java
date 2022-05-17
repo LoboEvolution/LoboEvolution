@@ -144,7 +144,8 @@ public class JavaClassWrapper {
 		if ((name.startsWith("get") || name.startsWith("is")) &&
 				!name.equals("getBoundingClientRect") &&
 				!name.equals("getClientRects") &&
-				!name.equals("getComputedStyle")) {
+				!name.equals("getComputedStyle") &&
+				!name.equals("getPropertyCSSValue")) {
 			return method.getParameterTypes().length == 0;
 		} else if (name.startsWith("set") &&
 				!name.equals("setTimeout") &&

@@ -154,7 +154,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		elem.setPrefix(prefix);
 		return elem;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName, String options) {
@@ -275,7 +275,6 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			return new NodeListImpl(al);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
 	}
@@ -286,11 +285,11 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public DocumentType getDoctype() {
 		if (doctype == null) {
-			for (Node node : nodeList) {
-				if (node.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
-					return (DocumentType) node;
-				}
-			}
+			doctype = (DocumentType) nodeList.
+					stream().
+					filter(node -> node.getNodeType() == NodeType.DOCUMENT_TYPE_NODE).
+					findFirst().
+					orElse(null);
 		}
 		return this.doctype;
 	}
@@ -301,7 +300,9 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	 * @param doctype a {@link org.loboevolution.html.node.DocumentType} object.
 	 */
 	public void setDoctype(DocumentType doctype) {
-		this.doctype = doctype;
+		if (doctype != null) {
+			nodeList.add(doctype);
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -413,7 +414,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public ProcessingInstruction createProcessingInstruction(String target, String data) {
-		if (Strings.isCssBlank(target)) {
+		if (target == null || target.length() == 0) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Void target");
 		}
 
@@ -476,7 +477,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public String getXmlEncoding() {
 		return "UTF-8";
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public void normalizeDocument() {
@@ -549,7 +550,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
 		return (XPathResult) evaluator.evaluate(expression, contextNode, resolver, type, result);
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public XPathExpression createExpression() {
@@ -576,7 +577,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		final HTMLElement elem = getBody();
 		HTMLBodyElement body = (HTMLBodyElement) elem;
 		return body.getALink();
-}
+	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -640,7 +641,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public void setCookie(String cookie) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -675,7 +676,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public void setDesignMode(String designMode) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -689,7 +690,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public void setDir(String dir) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -782,80 +783,80 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getImages() {
-        synchronized (this) {
+		synchronized (this) {
 			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ImageFilter()).toArray()));
 			return  new HTMLCollectionImpl(this, list);
-        }
-    }
-	
+		}
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getLinks() {
-        synchronized (this) {
+		synchronized (this) {
 			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new LinkFilter()).toArray()));
 			return  new HTMLCollectionImpl(this, list);
 		}
-    }
-	
-    /** {@inheritDoc} */
-    @Override
-    public HTMLCollection getForms() {
-        synchronized (this) {
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getForms() {
+		synchronized (this) {
 			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new FormFilter()).toArray()));
 			return  new HTMLCollectionImpl(this, list);
-        }
-    }
-        
-    
-    /** {@inheritDoc} */
-    @Override
-    public HTMLCollection getEmbeds() {
-        synchronized (this) {
+		}
+	}
+
+
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getEmbeds() {
+		synchronized (this) {
 			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new EmbedFilter()).toArray()));
 			return  new HTMLCollectionImpl(this, list);
-        }
-    }
+		}
+	}
 
-    /** {@inheritDoc} */
-    @Override
-    public HTMLCollection getPlugins() {
-        return getEmbeds();
-    }
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getPlugins() {
+		return getEmbeds();
+	}
 
-    /** {@inheritDoc} */
-    @Override
-    public HTMLCollection getScripts() {
-        synchronized (this) {
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getScripts() {
+		synchronized (this) {
 			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ScriptFilter()).toArray()));
 			return  new HTMLCollectionImpl(this, list);
-        }
-    }
+		}
+	}
 
-    /** {@inheritDoc} */
-    @Override
-    public HTMLCollection getCommands() {
-        synchronized (this) {
+	/** {@inheritDoc} */
+	@Override
+	public HTMLCollection getCommands() {
+		synchronized (this) {
 			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new CommandFilter()).toArray()));
 			return  new HTMLCollectionImpl(this, list);
-        }
-    }
-    
+		}
+	}
+
 	/** {@inheritDoc} */
-    @Override
+	@Override
 	public HTMLCollection getAnchors() {
 		final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new AnchorFilter()).toArray()));
 		return new HTMLCollectionImpl(this, list);
 	}
-    
+
 	/** {@inheritDoc} */
-    @Override
+	@Override
 	public HTMLAllCollection getAll() {
 		final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		return new HTMLAllCollectionImpl(this, list);
 	}
-    
-    /** {@inheritDoc} */
-    @Override
+
+	/** {@inheritDoc} */
+	@Override
 	public HTMLCollection getElementsByName(String elementName) {
 		final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ElementNameFilter(elementName)).toArray()));
 		return new HTMLCollectionImpl(this, list);
@@ -866,7 +867,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public String getLastModified() {
 		// TODO Auto-generated method stub
 		return null;
-	}  
+	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -939,7 +940,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public void captureEvents() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -953,7 +954,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -1174,9 +1175,9 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public void releaseEvents() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public void write(String text) {

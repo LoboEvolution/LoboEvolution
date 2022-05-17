@@ -53,7 +53,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      **/
     public ComputedCSSStyleDeclaration(HTMLElementImpl element, AbstractCSSProperties style) {
-        super(style.getStyleDeclarations() == null ? new com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl() : style.getStyleDeclarations().get(0));
+        super(element, style.getStyleDeclarations() == null ? new com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl() : style.getStyleDeclarations().get(0));
         this.element = element;
         this.renderState = element.getRenderState();
         this.window = element.getDocumentNode().getDefaultView();
@@ -172,47 +172,62 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclarationImpl {
     }
 
     public String getDisplay() {
-        final String value = style.getDisplay();
-        if (Strings.isBlank(value)) {
+        final String cssDisplay = style.getDisplay();
+        if (Strings.isNotBlank(cssDisplay) && !"null".equals(cssDisplay)) {
+            return cssDisplay;
+        } else {
             final RenderState rs = element.getRenderState();
-            switch (rs.getDisplay()) {
-                case RenderState.DISPLAY_NONE:
-                    return CSSValues.NONE.getValue();
-                case RenderState.DISPLAY_BLOCK:
-                    return CSSValues.BLOCK.getValue();
-                case RenderState.DISPLAY_LIST_ITEM:
-                    return CSSValues.LIST_ITEM.getValue();
-                case RenderState.DISPLAY_TABLE_ROW:
-                    return CSSValues.TABLE_ROW.getValue();
-                case RenderState.DISPLAY_TABLE_CELL:
-                    return CSSValues.TABLE_CELL.getValue();
-                case RenderState.DISPLAY_TABLE:
-                    return CSSValues.TABLE.getValue();
-                case RenderState.DISPLAY_TABLE_CAPTION:
-                    return CSSValues.TABLE_CAPTION.getValue();
-                case RenderState.DISPLAY_TABLE_COLUMN:
-                    return CSSValues.TABLE_COLUMN.getValue();
-                case RenderState.DISPLAY_TABLE_COLUMN_GROUP:
-                    return CSSValues.TABLE_COLUMN_GROUP.getValue();
-                case RenderState.DISPLAY_TABLE_ROW_GROUP:
-                    return CSSValues.TABLE_ROW_GROUP.getValue();
-                case RenderState.DISPLAY_TABLE_HEADER_GROUP:
-                    return CSSValues.TABLE_HEADER_GROUP.getValue();
-                case RenderState.DISPLAY_TABLE_FOOTER_GROUP:
-                    return CSSValues.TABLE_FOOTER_GROUP.getValue();
-                case RenderState.DISPLAY_INLINE_BLOCK:
-                    return CSSValues.INLINE_BLOCK.getValue();
-                case RenderState.DISPLAY_INLINE_TABLE:
-                    return CSSValues.INLINE_TABLE.getValue();
-                case RenderState.DISPLAY_INLINE:
-                default:
-                    return CSSValues.INLINE.getValue();
+            CSSValues display;
+            if (rs == null) {
+                return null;
+            } else {
+                switch (rs.getDefaultDisplay()) {
+                    case RenderState.DISPLAY_BLOCK:
+                        display = CSSValues.BLOCK;
+                        break;
+                    case RenderState.DISPLAY_NONE:
+                        display = CSSValues.NONE;
+                        break;
+                    case RenderState.DISPLAY_LIST_ITEM:
+                        display = CSSValues.LIST_ITEM;
+                        break;
+                    case RenderState.DISPLAY_TABLE:
+                        display = CSSValues.TABLE;
+                        break;
+                    case RenderState.DISPLAY_TABLE_CELL:
+                        display = CSSValues.TABLE_CELL;
+                        break;
+                    case RenderState.DISPLAY_TABLE_ROW:
+                        display = CSSValues.TABLE_ROW;
+                        break;
+                    case RenderState.DISPLAY_TABLE_CAPTION:
+                        display = CSSValues.TABLE_CAPTION;
+                        break;
+                    case RenderState.DISPLAY_TABLE_COLUMN:
+                        display = CSSValues.TABLE_COLUMN;
+                        break;
+                    case RenderState.DISPLAY_TABLE_COLUMN_GROUP:
+                        display = CSSValues.TABLE_COLUMN_GROUP;
+                        break;
+                    case RenderState.DISPLAY_INLINE_BLOCK:
+                        display = CSSValues.INLINE_BLOCK;
+                        break;
+                    case RenderState.DISPLAY_INLINE_TABLE:
+                        display = CSSValues.INLINE_TABLE;
+                        break;
+                    case RenderState.DISPLAY_FLEX_BOX:
+                        display = CSSValues.FLEX;
+                        break;
+                    default:
+                        display = CSSValues.INLINE;
+                        break;
+                }
             }
+            return display.getValue();
         }
-        return value;
     }
 
-    public String getFont() {
+     public String getFont() {
         StringBuilder font = new StringBuilder();
         final String fontStyle = style.getFontStyle();
         final String lineHeight = getLineHeight();

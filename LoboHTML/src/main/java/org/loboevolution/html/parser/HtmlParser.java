@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.Entities;
 import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
@@ -221,15 +222,18 @@ public class HtmlParser {
 		if (textSb == null) {
 			return TOKEN_EOD;
 		}
-		if (textSb.length() != 0) {
+		if (textSb.length() > 0) {
 			// int textLine = reader.getLineNumber();
 			final StringBuilder decText = entityDecode(textSb);
-			final Node textNode = doc.createTextNode(decText.toString());
-			try {
-				safeAppendChild(parent, textNode);
-			} catch (final DOMException de) {
-				if ((parent.getNodeType() != NodeType.DOCUMENT_NODE) || (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
-					logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+			final String text = decText.toString();
+			if (text.trim().length() > 0) {
+				final Node textNode = doc.createTextNode(decText.toString());
+				try {
+					safeAppendChild(parent, textNode);
+				} catch (final DOMException de) {
+					if ((parent.getNodeType() != NodeType.DOCUMENT_NODE) || (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
+						logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+					}
 				}
 			}
 		}
@@ -492,7 +496,7 @@ public class HtmlParser {
 											sb = entityDecode(sb);
 										}
 										final String text = sb.toString();
-										if (text.length() != 0) {
+										if (text.trim().length() > 0) {
 											final Node textNode = doc.createTextNode(text);
 											safeAppendChild(parent, textNode);
 										}
@@ -536,7 +540,7 @@ public class HtmlParser {
 				sb = entityDecode(sb);
 			}
 			final String text = sb.toString();
-			if (text.length() != 0) {
+			if (text.trim().length() > 0) {
 				final Node textNode = doc.createTextNode(text);
 				safeAppendChild(parent, textNode);
 			}
@@ -880,7 +884,7 @@ public class HtmlParser {
 		for (;;) {
 			final int chInt = reader.read();
 			if (chInt == -1) {
-				if ((attributeName != null) && (attributeName.length() != 0)) {
+				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 					attributeName.setLength(0);
@@ -896,7 +900,7 @@ public class HtmlParser {
 				blankFound = false;
 				break;
 			} else if (ch == '>') {
-				if ((attributeName != null) && (attributeName.length() != 0)) {
+				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 				}
@@ -914,7 +918,7 @@ public class HtmlParser {
 				lastCharSlash = false;
 				if (blankFound) {
 					blankFound = false;
-					if ((attributeName != null) && (attributeName.length() != 0)) {
+					if (Strings.isStringBuilderNotBlack(attributeName)) {
 						final String attributeNameStr = attributeName.toString();
 						element.setAttribute(attributeNameStr, attributeNameStr);
 						attributeName.setLength(0);
@@ -936,7 +940,7 @@ public class HtmlParser {
 			}
 			final char ch = (char) chInt;
 			if (ch == '>') {
-				if ((attributeName != null) && (attributeName.length() != 0)) {
+				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 				}
@@ -1120,7 +1124,7 @@ public class HtmlParser {
 		return (einfo == null || einfo.isDecodeEntities());
 	}
 
-	private static StringBuilder entityDecode(final StringBuilder rawText) throws org.xml.sax.SAXException {
+	private static StringBuilder entityDecode(final StringBuilder rawText) {
 		int startIdx = 0;
 		StringBuilder sb = null;
 		for (;;) {

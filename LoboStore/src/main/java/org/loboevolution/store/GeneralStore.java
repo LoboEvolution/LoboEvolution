@@ -120,7 +120,7 @@ public class GeneralStore implements Serializable {
 					}
 				}
 			} catch (final Exception e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				//logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 			if (width > -1 && height > -1) {
 				bounds = new Rectangle(width, height);

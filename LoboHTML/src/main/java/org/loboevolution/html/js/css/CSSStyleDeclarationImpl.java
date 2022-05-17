@@ -20,15 +20,35 @@
 
 package org.loboevolution.html.js.css;
 
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.mozilla.javascript.annotations.JSFunction;
 
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
+    private final HTMLElementImpl element;
+
     private final com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl style;
 
+    /**
+     * <p>Constructor for CSSStyleDeclarationImpl.</p>
+     *
+     * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl;} object.
+     * @param style a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
+     */
+    public CSSStyleDeclarationImpl(HTMLElementImpl element, com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl style) {
+        this.element = element;
+        this.style = style;
+    }
+
+    /**
+     * <p>Constructor for CSSStyleDeclarationImpl.</p>
+     *
+     * @param style a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
+     */
     public CSSStyleDeclarationImpl(com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl style) {
+        this.element = new HTMLElementImpl("");
         this.style = style;
     }
 
@@ -82,10 +102,21 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         return new CSSRuleImpl(style.getParentRule());
     }
 
+    public void setCssText(String text) {
+        element.setAttribute("style", text);
+        style.setCssText(text);
+    }
+
     /** {@inheritDoc} */
     @Override
     public void setProperty(String propertyName, String value, String priority) {
         style.setProperty(propertyName, value, priority);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setProperty(String propertyName, String value) {
+        setProperty(propertyName, value, "");
     }
 
     @Override

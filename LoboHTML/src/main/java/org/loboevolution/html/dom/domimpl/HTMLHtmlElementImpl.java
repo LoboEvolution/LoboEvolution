@@ -26,9 +26,6 @@ import org.loboevolution.html.dom.HTMLHtmlElement;
 
 /**
  * <p>HTMLHtmlElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElement {
 	/**

@@ -25,18 +25,17 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.ProcessingInstruction;
 
 /**
  * HTML DOM object representing processing instruction as per HTML 4.0
  * specification.
- *
- * Author vitek
- *
  */
 public class HTMLProcessingInstruction extends HTMLElementImpl implements ProcessingInstruction {
-	
+
 	private String data;
 	private String target;
 
@@ -48,7 +47,7 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 	public HTMLProcessingInstruction(String name) {
 		super(name);
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String getData() {
@@ -96,7 +95,7 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 	public void setNodeValue(String nodeValue) {
 		this.data = nodeValue;
 	}
-	
+
 	/**
 	 * <p>Setter for the field <code>target</code>.</p>
 	 *
@@ -146,6 +145,11 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 	public String substringData(int offset, int count) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Node appendChild(Node newChild) {
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append node.");
 	}
 
 	/** {@inheritDoc} */

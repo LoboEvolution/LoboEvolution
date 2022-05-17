@@ -22,13 +22,15 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLHeadElement;
+import org.loboevolution.html.dom.HTMLHtmlElement;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>HTMLHeadElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLHeadElementImpl extends HTMLElementImpl implements HTMLHeadElement {
 
@@ -51,8 +53,25 @@ public class HTMLHeadElementImpl extends HTMLElementImpl implements HTMLHeadElem
 	@Override
 	public void setProfile(String profile) {
 		this.setAttribute("profile", profile);
-	}	
-	
+	}
+
+	@Override
+	public Node appendChild(Node newChild) {
+
+		if (newChild instanceof HTMLHtmlElement) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append html");
+		}
+
+		if (newChild instanceof DocumentType) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append doc type");
+		}
+
+		if (newChild instanceof Document) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append doc");
+		}
+		return super.appendChild(newChild);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

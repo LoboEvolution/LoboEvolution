@@ -22,9 +22,6 @@ package org.loboevolution.html.renderstate;
 
 /**
  * <p>TextDecorationRenderState class.</p>
- *
- *
- *
  */
 public class TextDecorationRenderState extends RenderStateDelegator {
 
@@ -51,5 +48,10 @@ public class TextDecorationRenderState extends RenderStateDelegator {
 		RenderState prs = this.delegate;
 		int parentMask = prs == null ? 0 : prs.getTextDecorationMask();
 		return parentMask | this.textDecorationMask;
+	}
+
+	@Override
+	public int getDefaultDisplay() {
+		return 0;
 	}
 }

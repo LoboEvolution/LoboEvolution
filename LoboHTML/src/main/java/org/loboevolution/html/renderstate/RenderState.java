@@ -514,4 +514,11 @@ public interface RenderState {
      * @param cursor a {@link java.util.Optional} object.
      */
     void setCursor(Optional<Cursor> cursor);
+
+	/**
+	 * <p>getDefaultDisplay.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
+	int getDefaultDisplay();
 }

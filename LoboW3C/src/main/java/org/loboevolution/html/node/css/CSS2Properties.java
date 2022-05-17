@@ -20,10 +20,12 @@
 
 package org.loboevolution.html.node.css;
 
+import com.gargoylesoftware.css.util.CSSProperties;
+
 /**
  * <p>CSS2Properties interface.</p>
  */
-public interface CSS2Properties {
+public interface CSS2Properties extends CSSProperties {
 
 	/**
 	 * <p>getAzimuth.</p>

@@ -5,9 +5,6 @@ package com.gargoylesoftware.css.util;
 
 /**
  * <p>CSSProperties interface.</p>
- *
- *
- *
  */
 public interface CSSProperties {
 	

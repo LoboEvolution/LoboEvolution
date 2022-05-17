@@ -476,7 +476,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         span.appendChild(document.createTextNode("foo"));
         p.appendChild(span);
         df.isEqualNode(df.cloneNode(true));
-        assertEquals("#document-fragment", df.toString());
+        assertEquals("[object DocumentFragment]", df.toString());
     }
 
     @Test

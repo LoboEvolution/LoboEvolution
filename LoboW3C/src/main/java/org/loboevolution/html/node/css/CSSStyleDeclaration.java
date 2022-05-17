@@ -31,58 +31,73 @@ public interface CSSStyleDeclaration {
      */
     String getCssText();
 
+
     /**
-     * <p> getCssText. </p>
+     * <p> getPropertyValue. </p>
      * @param property a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     String getPropertyValue(String property);
 
     /**
-     * <p> getCssText. </p>
+     * <p> getPropertyPriority. </p>
      * @param property a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     String getPropertyPriority(String property);
 
     /**
-     * <p> getCssText. </p>
+     * <p> getCssFloat. </p>
      * @return a {@link java.lang.String} object.
      */
     String getCssFloat();
 
     /**
-     * <p> getCssText. </p>
+     * <p> item. </p>
      * @param index a {@link java.lang.Integer} object.
      * @return a {@link java.lang.String} object.
      */
     String item(int index);
 
     /**
-     * <p> getCssText. </p>
+     * <p> removeProperty. </p>
      * @param property a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     String removeProperty(String property);
 
     /**
-     * <p> getCssText. </p>
+     * <p> getLength. </p>
      * @return a {@link java.lang.Integer} object.
      */
     int getLength();
 
     /**
-     * <p> getCssText. </p>
+     * <p> getParentRule. </p>
      * @return a {@link org.loboevolution.html.node.css.CSSRule} object.
      */
     CSSRule getParentRule();
 
     /**
-     * <p> getCssText. </p>
+     * <p> setProperty. </p>
      * @param propertyName a {@link java.lang.String} object.
      * @param value a {@link java.lang.String} object.
      * @param priority a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
      */
     void setProperty(String propertyName, String value, String priority);
+
+    /**
+     * <p> setProperty. </p>
+     * @param propertyName a {@link java.lang.String} object.
+     * @param value a {@link java.lang.String} object.
+     */
+    void setProperty(String propertyName, String value);
+
+
+    /**
+     * <p> setCssText. </p>
+     * @param text a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
+    void setCssText(String text);
 }

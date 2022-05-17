@@ -54,7 +54,7 @@ public class BackgroundImageSetter implements SubPropertySetter {
 			}
 		}
 		if (baseHref == null) {
-			baseHref = properties.getContext().getDocumentBaseURI();
+			baseHref = properties.getContext() != null ? properties.getContext().getDocumentBaseURI() : null;
 		}
 		final String start = "url(";
 		if (newValue == null || !newValue.toLowerCase().startsWith(start)) {

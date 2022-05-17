@@ -399,12 +399,9 @@ public class StyleSheetRenderState implements RenderState {
 		return element == null ? null : element.getCurrentStyle();
 	}
 
-	/**
-	 * <p>getDefaultDisplay.</p>
-	 *
-	 * @return a int.
-	 */
-	protected int getDefaultDisplay() {
+	/** {@inheritDoc} */
+	@Override
+	public int getDefaultDisplay() {
 		return DISPLAY_INLINE;
 	}
 
