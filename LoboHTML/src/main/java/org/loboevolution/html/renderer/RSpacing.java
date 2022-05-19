@@ -40,9 +40,8 @@ final class RSpacing extends BaseBoundableRenderable {
 	 */
 	public RSpacing(ModelNode me, RenderableContainer container, int width, int height) {
 		super(container, me);
-		// Dimensions set when constructed.
-		this.width = width;
-		this.height = height;
+		this.setWidth(width);
+		this.setHeight(height);
 	}
 
 	/** {@inheritDoc} */
@@ -54,11 +53,6 @@ final class RSpacing extends BaseBoundableRenderable {
 		} else return inSelection;
     }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderable(int, int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
@@ -76,24 +70,12 @@ final class RSpacing extends BaseBoundableRenderable {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
 		// Nothing to paint in spacing.
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.BoundableRenderable#paintSelection(java.awt.
-	 * Graphics, boolean, org.loboevolution.html.rendered.RenderablePoint,
-	 * org.loboevolution.html.rendered.RenderablePoint)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
@@ -106,7 +88,7 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 		g.setColor(SELECTION_COLOR);
 		g.setXORMode(SELECTION_XOR);
-		g.fillRect(0, 0, this.width, this.height);
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.setPaintMode();
 		return true;
 	}

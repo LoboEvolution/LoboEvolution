@@ -382,19 +382,19 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		SVGFontFaceElementImpl fontFace = getFontFace();
 		if (fontFace != null) {
 			String fontEmString = fontFace.getAttribute("units-per-em");
-			if (fontEmString.length() == 0) {
+			if (Strings.isCssBlank(fontEmString)) {
 				fontEmString = fontFace.getAttribute("ascent");
 			}
-			if (fontEmString.length() == 0) {
+			if (Strings.isCssBlank(fontEmString)) {
 				fontEmString = fontFace.getAttribute("x-height");
 			}
-			if (fontEmString.length() == 0) {
+			if (Strings.isCssBlank(fontEmString)) {
 				fontEmString = fontFace.getAttribute("cap-height");
 			}
-			if (fontEmString.length() == 0) {
+			if (Strings.isCssBlank(fontEmString)) {
 				fontEmString = fontFace.getAttribute("top-line");
 			}
-			if (fontEmString.length() > 0) {
+			if (Strings.isCssNotBlank(fontEmString)) {
 				return Float.parseFloat(fontEmString);
 			}
 		}
@@ -417,16 +417,16 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		SVGFontFaceElementImpl fontFace = getFontFace();
 		if (fontFace != null) {
 			String fontAscentString = fontFace.getAttribute("ascent");
-			if (fontAscentString.length() == 0) {
+			if (Strings.isCssBlank(fontAscentString)) {
 				fontAscentString = fontFace.getAttribute("x-height");
 			}
-			if (fontAscentString.length() == 0) {
+			if (Strings.isCssBlank(fontAscentString)) {
 				fontAscentString = fontFace.getAttribute("cap-height");
 			}
-			if (fontAscentString.length() == 0) {
+			if (Strings.isCssBlank(fontAscentString)) {
 				fontAscentString = fontFace.getAttribute("top-line");
 			}
-			if (fontAscentString.length() > 0) {
+			if (Strings.isCssNotBlank(fontAscentString)) {
 				return Float.parseFloat(fontAscentString);
 			}
 		}

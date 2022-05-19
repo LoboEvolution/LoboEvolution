@@ -428,4 +428,6 @@ public interface BoundableRenderable extends Renderable {
 	 */
 	void setDelegator(final BoundableRenderable pDelegator);
 
+	RRectangle getRectangle();
+
 }

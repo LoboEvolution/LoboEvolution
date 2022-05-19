@@ -56,10 +56,8 @@ final class RWord extends BaseBoundableRenderable {
 		this.fontMetrics = fontMetrics;
 		this.descent = descent;
 		this.ascentPlusLeading = ascentPlusLeading;
-		this.height = height;
-		// TODO: In anti-aliasing, stringWidth is said not to be reliable.
-		// Dimensions set when constructed.
-		this.width = fontMetrics.stringWidth(renderedWord);
+		this.setHeight(height);
+		this.setWidth(fontMetrics.stringWidth(renderedWord));
 	}
 
 	/** {@inheritDoc} */
@@ -156,9 +154,9 @@ final class RWord extends BaseBoundableRenderable {
 		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
 
 			final String word = this.shownWord;
-			final int width = this.width;
+			final int width = this.getWidth();
 			final int ascentPlusLeading = this.ascentPlusLeading;
-			final int height = this.height;
+			final int height = this.getHeight();
 			final int textDecoration = rs.getTextDecorationMask();
 			final Color bkg = rs.getTextBackgroundColor();
 			if (bkg != null) {
@@ -258,17 +256,17 @@ final class RWord extends BaseBoundableRenderable {
 		}
 		if (width1 != -1 || width2 != -1) {
 			final int startPaint = width1 == -1 ? 0 : width1;
-			final int endPaint = width2 == -1 ? this.width : width2;
+			final int endPaint = width2 == -1 ? this.getWidth() : width2;
 			g.setColor(SELECTION_COLOR);
 			g.setXORMode(SELECTION_XOR);
-			g.fillRect(startPaint, 0, endPaint - startPaint, this.height);
+			g.fillRect(startPaint, 0, endPaint - startPaint, this.getHeight());
 			g.setPaintMode();
 			return width2 == -1;
 		} else {
 			if (inSelection) {
 				g.setColor(SELECTION_COLOR);
 				g.setXORMode(SELECTION_XOR);
-				g.fillRect(0, 0, this.width, this.height);
+				g.fillRect(0, 0, this.getWidth(), this.getHeight());
 				g.setPaintMode();
 			}
 			return inSelection;

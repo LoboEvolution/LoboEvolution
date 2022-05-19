@@ -879,7 +879,7 @@ public class StyleSheetRenderState implements RenderState {
 	public int getTextIndent(int availSize) {
 		// No caching for this one.
 		final String tiText = getTextIndentText();
-		if (tiText.length() == 0) {
+		if (Strings.isCssBlank(tiText)) {
 			return 0;
 		} else {
 			return HtmlValues.getPixelSize(tiText, this, document.getDefaultView(), 0, availSize);

@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
@@ -1312,7 +1313,7 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 			if (uac.isScriptingEnabled() && this instanceof ElementImpl) {								
 				ElementImpl elem = (ElementImpl)this;
 				final String attributeValue = elem.getAttribute(normalAttributeName);
-				if (attributeValue == null || attributeValue.length() == 0) {
+				if (Strings.isCssBlank(attributeValue)) {
 					f = null;
 				} else {
 					final String functionCode = "function " + normalAttributeName + "_" + System.identityHashCode(this) + "() { " + attributeValue + " }";

@@ -118,8 +118,8 @@ public class RBlock extends BaseElementRenderable {
 
 		final RenderState renderState = this.modelNode.getRenderState();
         RBlockLayoutInfo value = forceLayout(renderState, info);
-		this.width = value.getWidth();
-		this.height = value.getHeight();
+		this.setWidth(value.getWidth());
+		this.setHeight(value.getHeight());
 		this.hasHScrollBar = value.isHasHScrollBar();
 		this.hasVScrollBar = value.isHasVScrollBar();
 
@@ -218,9 +218,9 @@ public class RBlock extends BaseElementRenderable {
 				state.overrideNoWrap = true;
 				try {
 					bodyLayout.layout(paddingTotalWidth, paddingTotalHeight, paddingInsets, -1, null, true);
-					if (bodyLayout.width + insetsTotalWidth < tentativeWidth) {
-						tentativeWidth = bodyLayout.width + insetsTotalWidth;
-						tentativeHeight = bodyLayout.height + insetsTotalHeight;
+					if (bodyLayout.getWidth() + insetsTotalWidth < tentativeWidth) {
+						tentativeWidth = bodyLayout.getWidth() + insetsTotalWidth;
+						tentativeHeight = bodyLayout.getHeight() + insetsTotalHeight;
 					}
 				} finally {
 					state.overrideNoWrap = false;
@@ -253,8 +253,8 @@ public class RBlock extends BaseElementRenderable {
 			bodyLayout.layout(desiredViewportWidth, desiredViewportHeight, paddingInsets, -1, viewportFloatBounds, sizeOnly);
 		}
 
-		final int bodyWidth = bodyLayout.width;
-		final int bodyHeight = bodyLayout.height;
+		final int bodyWidth = bodyLayout.getWidth();
+		final int bodyHeight = bodyLayout.getHeight();
 		final int prelimBlockWidth = bodyWidth + insetsTotalWidth;
 		int prelimBlockHeight = bodyHeight + insetsTotalHeight;
 
@@ -314,12 +314,12 @@ public class RBlock extends BaseElementRenderable {
 			final int alignmentXPercent = rs.getAlignXPercent();
 
 			if (alignmentXPercent > 0) {
-				final int canvasWidth = Math.max(bodyLayout.width, resultingWidth - insets.left - insets.right);
+				final int canvasWidth = Math.max(bodyLayout.getWidth(), resultingWidth - insets.left - insets.right);
 				bodyLayout.alignX(alignmentXPercent, canvasWidth, paddingInsets);
 			}
 
 			if (alignmentYPercent > 0) {
-				final int canvasHeight = Math.max(bodyLayout.height, resultingHeight - insets.top - insets.bottom);
+				final int canvasHeight = Math.max(bodyLayout.getHeight(), resultingHeight - insets.top - insets.bottom);
 				bodyLayout.alignY(alignmentYPercent, canvasHeight, paddingInsets);
 			}
 		}
@@ -335,12 +335,12 @@ public class RBlock extends BaseElementRenderable {
 
 
 			correctViewportOrigin(insets, resultingWidth, resultingHeight);
-			this.width = resultingWidth;
-			this.height = resultingHeight;
+			this.setWidth(resultingWidth);
+			this.setHeight(resultingHeight);
 			scroll.resetScrollBars(rs);
 		} else {
-			bodyLayout.x = insets.left;
-			bodyLayout.y = insets.top;
+			bodyLayout.setX(insets.left);
+			bodyLayout.setY(insets.top);
 		}
 		return RBlockLayoutInfo.builder().
                 width(resultingWidth).
@@ -360,27 +360,27 @@ public class RBlock extends BaseElementRenderable {
 		if (bodyLayout != null) {
 			final boolean hscroll = this.hasHScrollBar;
 			final boolean vscroll = this.hasVScrollBar;
-			final int origX = bodyLayout.x;
-			final int origY = bodyLayout.y;
+			final int origX = bodyLayout.getX();
+			final int origY = bodyLayout.getY();
 			final Insets insets = getInsetsMarginBorder(hscroll, vscroll);
 
 			if (hscroll) {
 				if (point.x < insets.left) {
-					bodyLayout.x += insets.left - point.x;
-				} else if (point.x > this.width - insets.right) {
-					bodyLayout.x -= point.x - this.width + insets.right;
+					bodyLayout.setX(bodyLayout.getX() + insets.left - point.x);
+				} else if (point.x > this.getWidth() - insets.right) {
+					bodyLayout.setX(bodyLayout.getX() + point.x - this.getWidth() + insets.right);
 				}
 			}
 			if (vscroll) {
 				if (point.y < insets.top) {
-					bodyLayout.y += insets.top - point.y;
-				} else if (point.y > this.height - insets.bottom) {
-					bodyLayout.y -= point.y - this.height + insets.bottom;
+					bodyLayout.setY(bodyLayout.getY() + insets.top - point.y);
+				} else if (point.y > this.getHeight() - insets.bottom) {
+					bodyLayout.setY(bodyLayout.getY() - point.y - this.getHeight() + insets.bottom);
 				}
 			}
 			if (hscroll || vscroll) {
-				correctViewportOrigin(insets, this.width, this.height);
-				if (origX != bodyLayout.x || origY != bodyLayout.y) {
+				correctViewportOrigin(insets, this.getWidth(), this.getHeight());
+				if (origX != bodyLayout.getX() || origY != bodyLayout.getY()) {
 					scroll.resetScrollBars(null);
 					this.repaint();
 				}
@@ -452,10 +452,10 @@ public class RBlock extends BaseElementRenderable {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-			if ((x - relativeOffsetX > insets.left) && (x - relativeOffsetX < (this.width - insets.right))
-					&& (y - relativeOffsetY > insets.top) && (y - relativeOffsetY < (this.height - insets.bottom))) {
-				return bodyLayout.getLowestRenderableSpot(x - relativeOffsetX - bodyLayout.x,
-						y - relativeOffsetY - bodyLayout.y);
+			if ((x - relativeOffsetX > insets.left) && (x - relativeOffsetX < (this.getWidth() - insets.right))
+					&& (y - relativeOffsetY > insets.top) && (y - relativeOffsetY < (this.getHeight() - insets.bottom))) {
+				return bodyLayout.getLowestRenderableSpot(x - relativeOffsetX - bodyLayout.getX(),
+						y - relativeOffsetY - bodyLayout.getY());
 			} else {
 				return new RenderableSpot(this, x - relativeOffsetX, y - relativeOffsetY);
 			}
@@ -479,11 +479,6 @@ public class RBlock extends BaseElementRenderable {
 		return this.bodyLayout;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.RCollection#getRenderables()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Iterator getRenderables() {
@@ -597,7 +592,7 @@ public class RBlock extends BaseElementRenderable {
 	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
-			if (!bodyLayout.onDoubleClick(event, x - bodyLayout.x, y - bodyLayout.y)) {
+			if (!bodyLayout.onDoubleClick(event, x - bodyLayout.getX(), y - bodyLayout.getY())) {
 				return false;
 			}
 		}
@@ -609,7 +604,7 @@ public class RBlock extends BaseElementRenderable {
 	public boolean onMouseClick(final MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
-			if (!bodyLayout.onMouseClick(event, x - bodyLayout.x, y - bodyLayout.y)) {
+			if (!bodyLayout.onMouseClick(event, x - bodyLayout.getX(), y - bodyLayout.getY())) {
 				return false;
 			}
 		}
@@ -640,8 +635,8 @@ public class RBlock extends BaseElementRenderable {
 	public boolean onMousePressed(final MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
-			final int newX = x - bodyLayout.x;
-			final int newY = y - bodyLayout.y;
+			final int newX = x - bodyLayout.getX();
+			final int newY = y - bodyLayout.getY();
 			if (bodyLayout.contains(newX, newY)) {
 				this.armedRenderable = bodyLayout;
 				if (!bodyLayout.onMousePressed(event, newX, newY)) {
@@ -664,8 +659,8 @@ public class RBlock extends BaseElementRenderable {
 	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
-			final int newX = x - bodyLayout.x;
-			final int newY = y - bodyLayout.y;
+			final int newX = x - bodyLayout.getX();
+			final int newY = y - bodyLayout.getY();
 			if (bodyLayout.contains(newX, newY)) {
 				this.armedRenderable = null;
 				if (!bodyLayout.onMouseReleased(event, newX, newY)) {
@@ -713,8 +708,8 @@ public class RBlock extends BaseElementRenderable {
 					} else {
 						// Clip when there potential scrolling or hidden overflow
 						// was requested.
-						final Graphics newG = g.create(insets.left, insets.top, this.width - insets.left - insets.right,
-								this.height - insets.top - insets.bottom);
+						final Graphics newG = g.create(insets.left, insets.top, this.getWidth() - insets.left - insets.right,
+								this.getHeight() - insets.top - insets.bottom);
 						try {
 							// Second, translate
 							newG.translate(-insets.left, -insets.top);
@@ -751,9 +746,9 @@ public class RBlock extends BaseElementRenderable {
 		final Graphics newG = g.create();
 		try {
 			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-			// Just clip, don't translate.
-			newG.clipRect(insets.left, insets.top, this.width - insets.left - insets.right,
-					this.height - insets.top - insets.bottom);
+			final int widht = this.getWidth() - insets.left - insets.right;
+			final int height = this.getHeight() - insets.top - insets.bottom;
+			newG.clipRect(insets.left, insets.top, widht, height);
 			return super.paintSelection(newG, inSelection, startPoint, endPoint);
 		} finally {
 			newG.dispose();
@@ -799,21 +794,21 @@ public class RBlock extends BaseElementRenderable {
 		if (hscroll || vscroll) {
 			final RBlockViewport bv = this.bodyLayout;
 			final Insets insets = getInsetsMarginBorder(hscroll, vscroll);
-			final int vpheight = this.height - insets.top - insets.bottom;
-			final int vpwidth = this.width - insets.left - insets.right;
+			final int vpheight = this.getHeight() - insets.top - insets.bottom;
+			final int vpwidth = this.getWidth() - insets.left - insets.right;
 			final int tentativeX = insets.left - bounds.x;
 			final int tentativeY = insets.top - bounds.y;
 			boolean needCorrection = false;
-			if (!(xIfNeeded && tentativeX <= bv.x && -tentativeX + bv.x + bounds.width <= vpwidth)) {
+			if (!(xIfNeeded && tentativeX <= bv.getX() && -tentativeX + bv.getX() + bounds.width <= vpwidth)) {
 				bv.setX(tentativeX);
 				needCorrection = true;
 			}
-			if (!(yIfNeeded && tentativeY <= bv.y && -tentativeY + bv.y + bounds.height <= vpheight)) {
+			if (!(yIfNeeded && tentativeY <= bv.getY() && -tentativeY + bv.getY() + bounds.height <= vpheight)) {
 				bv.setY(tentativeY);
 				needCorrection = true;
 			}
 			if (needCorrection) {
-				correctViewportOrigin(insets, this.width, this.height);
+				correctViewportOrigin(insets, this.getWidth(), this.getHeight());
 				scroll.resetScrollBars(null);
 			}
 		}
@@ -828,7 +823,7 @@ public class RBlock extends BaseElementRenderable {
 		if (!(this.hasHScrollBar || this.hasVScrollBar)) {
 			return null;
 		} else {
-			return new Rectangle(-relativeOffsetX, -relativeOffsetY, this.width - hInset, this.height - vInset);
+			return new Rectangle(-relativeOffsetX, -relativeOffsetY, this.getWidth() - hInset, this.getHeight() - vInset);
 		}
 	}
 
@@ -887,18 +882,18 @@ public class RBlock extends BaseElementRenderable {
 
 	private void correctViewportOrigin(Insets insets, int blockWidth, int blockHeight) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
-		final int viewPortX = bodyLayout.x;
-		final int viewPortY = bodyLayout.y;
+		final int viewPortX = bodyLayout.getX();
+		final int viewPortY = bodyLayout.getY();
 
 		if (viewPortX > insets.left) {
-			bodyLayout.x = insets.left;
-		} else if (viewPortX < blockWidth - insets.right - bodyLayout.width) {
-			bodyLayout.x = Math.min(insets.left, blockWidth - insets.right - bodyLayout.width);
+			bodyLayout.setX(insets.left);
+		} else if (viewPortX < blockWidth - insets.right - bodyLayout.getWidth()) {
+			bodyLayout.setX(Math.min(insets.left, blockWidth - insets.right - bodyLayout.getWidth()));
 		}
 		if (viewPortY > insets.top) {
-			bodyLayout.y = insets.top;
-		} else if (viewPortY < blockHeight - insets.bottom - bodyLayout.height) {
-			bodyLayout.y = Math.min(insets.top, blockHeight - insets.bottom - bodyLayout.height);
+			bodyLayout.setY(insets.top);
+		} else if (viewPortY < blockHeight - insets.bottom - bodyLayout.getHeight()) {
+			bodyLayout.setY(Math.min(insets.top, blockHeight - insets.bottom - bodyLayout.getHeight()));
 		}
 	}
 }

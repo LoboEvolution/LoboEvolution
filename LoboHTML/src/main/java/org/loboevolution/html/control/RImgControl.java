@@ -63,12 +63,12 @@ public class RImgControl extends RUIControl {
 		if (!widthConstrained && heightConstrained) {
 			final Dimension prefSize = widget.getPreferredSize();
 			if (prefSize.height != 0) {
-				this.width = (prefSize.width * this.height) / prefSize.height;
+				this.setWidth((prefSize.width * this.getHeight()) / prefSize.height);
 			}
 		} else if (!heightConstrained && widthConstrained) {
 			final Dimension prefSize = widget.getPreferredSize();
 			if (prefSize.width != 0) {
-				this.height = (prefSize.height * this.width) / prefSize.width;
+				this.setHeight((prefSize.height * this.getWidth()) / prefSize.width);
 			}
 		}
 	}

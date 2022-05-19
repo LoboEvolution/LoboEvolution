@@ -50,8 +50,8 @@ final class RBlank extends BaseBoundableRenderable {
 		this.fontMetrics = fm;
 		this.ascentPlusLeading = ascentPlusLeading;
 		// Dimensions set when constructed.
-		this.width = width;
-		this.height = height;
+		this.setWidth(width);
+		this.setHeight(height);
 	}
 
 	/** {@inheritDoc} */
@@ -105,7 +105,7 @@ final class RBlank extends BaseBoundableRenderable {
 			final Color oldColor = g.getColor();
 			try {
 				g.setColor(bkg);
-				g.fillRect(0, 0, this.width, this.height);
+				g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			} finally {
 				g.setColor(oldColor);
 			}
@@ -114,16 +114,16 @@ final class RBlank extends BaseBoundableRenderable {
 		if (td != 0) {
 			if ((td & RenderState.MASK_TEXTDECORATION_UNDERLINE) != 0) {
 				final int lineOffset = this.ascentPlusLeading + 2;
-				g.drawLine(0, lineOffset, this.width, lineOffset);
+				g.drawLine(0, lineOffset, this.getWidth(), lineOffset);
 			}
 			if ((td & RenderState.MASK_TEXTDECORATION_LINE_THROUGH) != 0) {
 				final FontMetrics fm = this.fontMetrics;
 				final int lineOffset = fm.getLeading() + (fm.getAscent() + fm.getDescent()) / 2;
-				g.drawLine(0, lineOffset, this.width, lineOffset);
+				g.drawLine(0, lineOffset, this.getWidth(), lineOffset);
 			}
 			if ((td & RenderState.MASK_TEXTDECORATION_OVERLINE) != 0) {
 				final int lineOffset = this.fontMetrics.getLeading();
-				g.drawLine(0, lineOffset, this.width, lineOffset);
+				g.drawLine(0, lineOffset, this.getWidth(), lineOffset);
 			}
 			if ((td & RenderState.MASK_TEXTDECORATION_BLINK) != 0) {
 				// TODO
@@ -134,7 +134,7 @@ final class RBlank extends BaseBoundableRenderable {
 			final Color oldColor = g.getColor();
 			try {
 				g.setColor(over);
-				g.fillRect(0, 0, this.width, this.height);
+				g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			} finally {
 				g.setColor(oldColor);
 			}
@@ -160,7 +160,7 @@ final class RBlank extends BaseBoundableRenderable {
 		}
 		g.setColor(SELECTION_COLOR);
 		g.setXORMode(SELECTION_XOR);
-		g.fillRect(0, 0, this.width, this.height);
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.setPaintMode();
 		return true;
 	}

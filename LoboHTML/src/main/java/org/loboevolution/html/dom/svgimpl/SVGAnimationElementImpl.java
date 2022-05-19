@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.svg.SVGAnimationElement;
 import org.loboevolution.html.dom.svg.SVGElement;
 import com.gargoylesoftware.css.dom.DOMException;
@@ -254,7 +255,7 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 		vals = new Vector();
 		String keyTimes = getAttribute("keyTimes");
 
-		if (keyTimes.length() == 0) {
+		if (Strings.isCssBlank(keyTimes)) {
 
 			if (calcMode.equalsIgnoreCase("paced")) {
 				StringTokenizer stVals = new StringTokenizer(values, ";");

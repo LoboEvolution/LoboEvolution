@@ -56,8 +56,8 @@ public class RInlineBlock extends BaseElementRenderable {
 	 * <p>assignDimension.</p>
 	 */
 	public void assignDimension() {
-		this.width = child.getWidth();
-		this.height = child.getHeight();
+		this.setWidth(child.getWidth());
+		this.setHeight(child.getHeight());
 	}
 
 	/**

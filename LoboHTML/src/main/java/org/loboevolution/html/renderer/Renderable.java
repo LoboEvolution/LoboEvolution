@@ -30,9 +30,6 @@ import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 /**
  * Represents a renderer (view) node.
- *
- *
- *
  */
 public interface Renderable {
 	/** Constant EMPTY_ARRAY */

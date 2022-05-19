@@ -121,8 +121,8 @@ public class RTable extends BaseElementRenderable {
 			}
 		}
 
-		this.width = tm.getTableWidth();
-		this.height = tm.getTableHeight();
+		this.setWidth(tm.getTableWidth());
+		this.setHeight(tm.getTableHeight());
 		sendGUIComponentsToParent();
 		sendDelayedPairsToParent();
 	}

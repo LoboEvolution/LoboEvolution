@@ -30,7 +30,6 @@ import java.util.Objects;
 
 import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderer.BaseElementRenderable;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RBlockViewport;
@@ -196,8 +195,8 @@ public class RUIControl extends BaseElementRenderable {
 				this.lastLayoutValue = layoutValue;
 			}
 		}
-		this.width = layoutValue.width;
-		this.height = layoutValue.height;
+		this.setWidth(layoutValue.width);
+		this.setHeight(layoutValue.height);
 	}
 
 	/** {@inheritDoc} */
@@ -308,27 +307,12 @@ public class RUIControl extends BaseElementRenderable {
 			final Color oldColor = g.getColor();
 			try {
 				g.setColor(over);
-				g.fillRect(0, 0, this.width, this.height);
+				g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			} finally {
 				g.setColor(oldColor);
 			}
 		}
 		return inSelection;
-	}
-
-	/**
-	 * May be called by controls when they wish to modifiy their preferred size
-	 * (e.g. an image after it's loaded). This method must be called in the GUI
-	 * thread.
-	 */
-	public final void preferredSizeInvalidated() {
-		final int dw = RUIControl.this.declaredWidth;
-		final int dh = RUIControl.this.declaredHeight;
-		if (dw == -1 || dh == -1) {
-			this.frameContext.delayedRelayout((NodeImpl) this.modelNode);
-		} else {
-			RUIControl.this.repaint();
-		}
 	}
 
 	/** {@inheritDoc} */
@@ -345,10 +329,10 @@ public class RUIControl extends BaseElementRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public void updateWidgetBounds(int guiX, int guiY) {
-		// Overrides
 		super.updateWidgetBounds(guiX, guiY);
         final Insets insets = this.getBorderInsets();
-		this.widget.setBounds(guiX + insets.left, guiY + insets.top, this.width - insets.left - insets.right,
-				this.height - insets.top - insets.bottom);
+		final int width = this.getWidth() - insets.left - insets.right;
+		final int height = this.getHeight() - insets.top - insets.bottom;
+		this.widget.setBounds(guiX + insets.left, guiY + insets.top, width, height);
 	}
 }

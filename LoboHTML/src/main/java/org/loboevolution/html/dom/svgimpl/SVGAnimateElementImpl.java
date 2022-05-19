@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.svg.*;
 
 import java.util.StringTokenizer;
@@ -96,7 +97,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
-			if (calcMode.length() == 0) {
+			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
 			}
 
@@ -153,7 +154,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				|| getAttribute("by").length() > 0) {
 
 			String from = getAttribute("from");
-			if (from.length() == 0) {
+			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
 			String to = getAttribute("to");
@@ -204,7 +205,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
-			if (calcMode.length() == 0) {
+			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear";
 			}
 
@@ -269,7 +270,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				|| getAttribute("by").length() > 0) {
 
 			String from = getAttribute("from");
-			if (from.length() == 0) {
+			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
 			String to = getAttribute("to");
@@ -348,7 +349,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
-			if (calcMode.length() == 0) {
+			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
 			}
 
@@ -404,7 +405,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 		if (getAttribute("from").length() > 0 && getAttribute("to").length() > 0) {
 			String from = getAttribute("from");
-			if (from.length() == 0) {
+			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
 			String to = getAttribute("to");
@@ -418,7 +419,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
-			if (calcMode.length() == 0) {
+			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
 			}
 
@@ -481,7 +482,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
-			if (calcMode.length() == 0) {
+			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
 			}
 
@@ -545,7 +546,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			// it is either a from-to, from-by, by or to animation
 
 			String from = getAttribute("from");
-			if (from.length() == 0) {
+			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
 			String to = getAttribute("to");
@@ -594,7 +595,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
-			if (calcMode.length() == 0) {
+			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
 			}
 
@@ -660,7 +661,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				|| getAttribute("by").length() > 0) {
 
 			String from = getAttribute("from");
-			if (from.length() == 0) {
+			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
 			String to = getAttribute("to");
@@ -730,7 +731,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
-			if (calcMode.length() == 0) {
+			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
 			}
 
@@ -792,7 +793,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			// it is either a from-to or a from-by animation
 
 			String from = getAttribute("from");
-			if (from.length() == 0) {
+			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
 			String to = getAttribute("to");

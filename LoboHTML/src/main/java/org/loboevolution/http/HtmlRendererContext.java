@@ -1034,7 +1034,7 @@ public class HtmlRendererContext {
 			// Remove query so it works.
 			try {
 				final String ref = action.getRef();
-				final String refText = ref == null || ref.length() == 0 ? "" : "#" + ref;
+				final String refText = Strings.isCssBlank(ref) ? "" : "#" + ref;
 				urlForLoading = new URL(resolvedURL.getProtocol(), action.getHost(), action.getPort(),
 						action.getPath() + refText);
 			} catch (final java.net.MalformedURLException throwable) {

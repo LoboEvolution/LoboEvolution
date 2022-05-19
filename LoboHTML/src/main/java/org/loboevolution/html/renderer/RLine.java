@@ -71,9 +71,9 @@ class RLine extends BaseRCollection {
 		// Note that in the case of RLine, modelNode is the context node
 		// at the beginning of the line, not a node that encloses the whole line.
 		super(container, modelNode);
-		this.x = x;
-		this.y = y;
-		this.height = height;
+		this.setX(x);
+		this.setY(y);
+		this.setHeight(height);
 		this.desiredMaxWidth = desiredMaxWidth;
 		// Layout here can always be "invalidated"
 		this.layoutUpTreeCanBeInvalidated = true;
@@ -113,7 +113,7 @@ class RLine extends BaseRCollection {
 	public final void addBlank(RBlank rblank) {
 		// NOTE: Blanks may be added without concern for wrapping (?)
 		final int x = this.xoffset;
-		final int width = rblank.width;
+		final int width = rblank.getWidth();
 		rblank.setOrigin(x, this.baseLineOffset - rblank.ascentPlusLeading);
 		this.renderables.add(rblank);
 		rblank.setParent(this);
@@ -136,7 +136,7 @@ class RLine extends BaseRCollection {
 		}
 		// Note: Renderable for widget doesn't paint the widget, but
 		// it's needed for height readjustment.
-		final int boundsh = this.height;
+		final int boundsh = this.getHeight();
 		final int ph = relement.getHeight();
 		int requiredHeight;
 		final int valign = relement.getVAlign();
@@ -162,7 +162,7 @@ class RLine extends BaseRCollection {
 		relement.setX(origXOffset);
 		setElementY(relement, ph, valign);
 		final int newX = origXOffset + pw;
-		this.width = this.xoffset = newX;
+		this.setWidth(this.xoffset = newX);
 	}
 
 	/**
@@ -171,13 +171,12 @@ class RLine extends BaseRCollection {
 	 * @param rblank a {@link org.loboevolution.html.renderer.RSpacing} object.
 	 */
 	public final void addSpacing(RSpacing rblank) {
-		// NOTE: Spacing may be added without concern for wrapping (?)
 		final int x = this.xoffset;
-		final int width = rblank.width;
-		rblank.setOrigin(x, (this.height - rblank.height) / 2);
+		final int width = rblank.getWidth();
+		rblank.setOrigin(x, (this.getHeight() - rblank.getHeight()) / 2);
 		this.renderables.add(rblank);
 		rblank.setParent(this);
-		this.width = this.xoffset = x + width;
+		this.setWidth(this.xoffset = x + width);
 	}
 
 	/**
@@ -198,7 +197,7 @@ class RLine extends BaseRCollection {
 	public final void addWord(RWord rword) throws OverflowException {
 		// Check if it fits horzizontally
 		int offset = this.xoffset;
-		final int wiwidth = rword.width;
+		final int wiwidth = rword.getWidth();
 		final boolean allowOverflow = this.allowOverflow;
 		final boolean firstAllowOverflowWord = this.firstAllowOverflowWord;
 		if (allowOverflow && firstAllowOverflowWord) {
@@ -249,7 +248,7 @@ class RLine extends BaseRCollection {
 				}
 			} else {
 				this.xoffset = newOffset;
-				this.width = newWidth;
+				this.setWidth(newWidth);
 				if (overflow == null) {
 					throw new OverflowException(Collections.singleton(rword));
 				} else {
@@ -268,14 +267,14 @@ class RLine extends BaseRCollection {
 	    }
 	    
 	    if (extraHeight > 0) {
-	      final int newHeight = (this.height + extraHeight);
+	      final int newHeight = (this.getHeight() + extraHeight);
 	      this.adjustHeight(newHeight, newHeight, AlignValues.BOTTOM.getValue());
 	    }
 	    this.renderables.add(rword);
 	    rword.setParent(this);
 	    final int x = offset;
 	    offset += wiwidth;
-	    this.width = this.xoffset = offset;
+	    this.setWidth(this.xoffset = offset);
 	    rword.setOrigin(x, this.baseLineOffset - rword.ascentPlusLeading);
 	}
 
@@ -290,7 +289,7 @@ class RLine extends BaseRCollection {
 	private void adjustHeight(int newHeight, int elementHeight, int valign) {
 		// Set new line height
 		// int oldHeight = this.height;
-		this.height = newHeight;
+		this.setHeight(newHeight);
 		final List<Renderable> renderables = this.renderables;
 		// Find max baseline
 		final FontMetrics firstFm = this.modelNode.getRenderState().getFontMetrics();
@@ -362,7 +361,7 @@ class RLine extends BaseRCollection {
 	 * @param desiredMaxWidth a int.
 	 */
 	public void changeLimits(int x, int desiredMaxWidth) {
-		this.x = x;
+		this.setX(x);
 		this.desiredMaxWidth = desiredMaxWidth;
 	}
 
@@ -599,10 +598,10 @@ class RLine extends BaseRCollection {
 		AlignValues key = AlignValues.get(valign);
 		switch (key) {
 			case BOTTOM:
-				yoffset = this.height - elementHeight;
+				yoffset = this.getHeight() - elementHeight;
 				break;
 			case MIDDLE:
-				yoffset = (this.height - elementHeight) / 2;
+				yoffset = (this.getHeight() - elementHeight) / 2;
 				break;
 			case TOP:
 				yoffset = 0;

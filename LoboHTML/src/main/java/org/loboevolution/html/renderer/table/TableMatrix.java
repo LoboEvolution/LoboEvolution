@@ -225,7 +225,7 @@ class TableMatrix {
 	public final void paint(Graphics g, Dimension size) {
 		final List<RTableCell> allCells = this.allCells;
 		for (RTableCell cell : allCells) {
-			final Graphics newG = g.create(cell.x, cell.y, cell.width, cell.height);
+			final Graphics newG = g.create(cell.getX(), cell.getY(), cell.getWidth(), cell.getHeight());
 			try {
 				cell.paint(newG);
 			} finally {
@@ -234,7 +234,7 @@ class TableMatrix {
 		}
 		
 		if (this.caption != null) {
-			Graphics newG = g.create(this.caption.x, this.caption.y, this.caption.width, this.caption.height);
+			Graphics newG = g.create(this.caption.getX(), this.caption.getY(), this.caption.getWidth(), this.caption.getHeight());
 			try {
 				this.caption.paint(newG);
 			} finally {

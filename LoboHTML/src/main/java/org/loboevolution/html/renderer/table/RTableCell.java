@@ -79,7 +79,7 @@ public class RTableCell extends RBlock {
 				.defaultOverflowY(defaultOverflowY)
 				.sizeOnly(sizeOnly)
 				.build());
-		return new Dimension(this.width, this.height);
+		return new Dimension(this.getWidth(), this.getHeight());
 	}
 
 	/** {@inheritDoc} */

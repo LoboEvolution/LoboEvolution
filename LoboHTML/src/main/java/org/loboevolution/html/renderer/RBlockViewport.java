@@ -180,15 +180,15 @@ public class RBlockViewport extends BaseRCollection {
 			if (informLineDone) {
 				lineDone(prevLine);
 			}
-			if (prevLine.x + prevLine.width > this.maxX) {
-				this.maxX = prevLine.x + prevLine.width;
+			if (prevLine.getX() + prevLine.getWidth() > this.maxX) {
+				this.maxX = prevLine.getX() + prevLine.getWidth();
 			}
 			// Check height only with floats.
 		} else {
 			initialAllowOverflow = false;
 		}
-		final int prevLineHeight = prevLine == null ? 0 : prevLine.height;
-		int newLineY = prevLine == null ? insets.top : prevLine.y + prevLineHeight;
+		final int prevLineHeight = prevLine == null ? 0 : prevLine.getHeight();
+		int newLineY = prevLine == null ? insets.top : prevLine.getY() + prevLineHeight;
 		int blockX;
 		int blockY = prevLineHeight == 0 ? getNewBlockY(block, newLineY) : newLineY;
 		final int blockWidth = block.getWidth();
@@ -344,8 +344,8 @@ public class RBlockViewport extends BaseRCollection {
 				this.currentCollapsibleMargin = 0;
 			}
 			initialAllowOverflow = prevLine.isAllowOverflow();
-			if (prevLine.x + prevLine.width > this.maxX) {
-				this.maxX = prevLine.x + prevLine.width;
+			if (prevLine.getX() + prevLine.getWidth() > this.maxX) {
+				this.maxX = prevLine.getX() + prevLine.getWidth();
 			}
 		}
 		rline = new RLine(startNode, this.container, newX, newLineY, newMaxWidth, 0, initialAllowOverflow);
@@ -373,8 +373,8 @@ public class RBlockViewport extends BaseRCollection {
 			if (informLineDone) {
 				lineDone(prevLine);
 			}
-			if (prevLine.x + prevLine.width > this.maxX) {
-				this.maxX = prevLine.x + prevLine.width;
+			if (prevLine.getX() + prevLine.getWidth() > this.maxX) {
+				this.maxX = prevLine.getX() + prevLine.getWidth();
 			}
 			// Check height only with floats.
 		} else {
@@ -413,9 +413,9 @@ public class RBlockViewport extends BaseRCollection {
 		int newLineY;
 		final FloatingBounds fb = this.floatBounds;
 		if (breakType == LineBreak.NONE || fb == null) {
-			newLineY = line.y + line.height;
+			newLineY = line.getY() + line.getHeight();
 		} else {
-			final int prevY = line.y + line.height;
+			final int prevY = line.getY() + line.getHeight();
 			switch (breakType) {
 				case LineBreak.BOTH:
 				case LineBreak.LEFT:
@@ -456,14 +456,14 @@ public class RBlockViewport extends BaseRCollection {
 	private void addRenderableToLine(Renderable renderable) {
 		renderable.getModelNode().getRenderState();
 		final RLine line = this.currentLine;
-		final int liney = line.y;
+		final int liney = line.getY();
 		final boolean emptyLine = line.isEmpty();
 		final FloatingBounds floatBounds = this.floatBounds;
 		int cleary;
 		if (floatBounds != null) {
 			cleary = floatBounds.getFirstClearY(liney);
 		} else {
-			cleary = liney + line.height;
+			cleary = liney + line.getHeight();
 		}
 		try {
 			line.add(renderable);
@@ -477,7 +477,7 @@ public class RBlockViewport extends BaseRCollection {
 				}
 			}
 		} catch (final OverflowException oe) {
-			final int nextY = emptyLine ? cleary : liney + line.height;
+			final int nextY = emptyLine ? cleary : liney + line.getHeight();
 			addLine(renderable.getModelNode(), line, nextY);
 			final Collection<Renderable> renderables = oe.getRenderables();
 			for (Renderable r : renderables) {
@@ -504,14 +504,14 @@ public class RBlockViewport extends BaseRCollection {
 
 	private void addWordToLine(RWord renderable) {
 		final RLine line = this.currentLine;
-		final int liney = line.y;
+		final int liney = line.getY();
 		final boolean emptyLine = line.isEmpty();
 		final FloatingBounds floatBounds = this.floatBounds;
 		int cleary;
 		if (floatBounds != null) {
 			cleary = floatBounds.getFirstClearY(liney);
 		} else {
-			cleary = liney + line.height;
+			cleary = liney + line.getHeight();
 		}
 		try {
 			line.addWord(renderable);
@@ -525,7 +525,7 @@ public class RBlockViewport extends BaseRCollection {
 				}
 			}
 		} catch (final OverflowException oe) {
-			final int nextY = emptyLine ? cleary : liney + line.height;
+			final int nextY = emptyLine ? cleary : liney + line.getHeight();
 			addLine(renderable.getModelNode(), line, nextY);
 			final Collection<Renderable> renderables = oe.getRenderables();
 			for (Renderable r : renderables) {
@@ -569,7 +569,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 		if (prevMaxY != this.maxY) {
-			this.height += this.maxY - prevMaxY;
+			this.setHeight(getHeight() + this.maxY - prevMaxY);
 		}
 	}
 
@@ -621,7 +621,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 		if (prevMaxY != this.maxY) {
-			this.height += this.maxY - prevMaxY;
+			this.setHeight(getHeight() + this.maxY - prevMaxY);
 		}
 	}
 
@@ -1106,8 +1106,8 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 
-		this.width = paddingInsets.right + this.maxX;
-		this.height = paddingInsets.bottom + maxY;
+		this.setWidth(paddingInsets.right + this.maxX);
+		this.setHeight(paddingInsets.bottom + maxY);
 	}
 
 	private void layoutChildren(NodeImpl node) {
@@ -1235,12 +1235,12 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		if (leftSpacing > 0) {
 			final RLine line = this.currentLine;
-			line.addSpacing(new RSpacing(node, this.container, leftSpacing, line.height));
+			line.addSpacing(new RSpacing(node, this.container, leftSpacing, line.getHeight()));
 		}
 		layoutChildren(node);
 		if (rightSpacing > 0) {
 			final RLine line = this.currentLine;
-			line.addSpacing(new RSpacing(node, this.container, rightSpacing, line.height));
+			line.addSpacing(new RSpacing(node, this.container, rightSpacing, line.getHeight()));
 		}
 	}
 
@@ -1395,7 +1395,7 @@ public class RBlockViewport extends BaseRCollection {
 							word.delete(0, wlen);
 						}
 						final RLine line = this.currentLine;
-						if (line.width > 0) {
+						if (line.getWidth() > 0) {
 							final RBlank rblank = new RBlank(textNode, fm, this.container, ascentPlusLeading,
 									blankWidth, wordHeight);
 							line.addBlank(rblank);
@@ -1435,7 +1435,7 @@ public class RBlockViewport extends BaseRCollection {
                     line.delete(0, line.length());
 					final RLine prevLine = this.currentLine;
 					prevLine.setLineBreak(new LineBreak(LineBreak.NONE, textNode));
-					addLine(textNode, prevLine, prevLine.y + prevLine.height);
+					addLine(textNode, prevLine, prevLine.getY() + prevLine.getHeight());
 					break;
 				default:
 					if (lastCharSlashR) {
@@ -1455,7 +1455,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private void lineDone(RLine line) {
-		final int yAfterLine = line == null ? this.paddingInsets.top : line.y + line.height;
+		final int yAfterLine = line == null ? this.paddingInsets.top : line.getY() + line.getHeight();
 		final Collection<RFloatInfo> pfs = this.pendingFloats;
 		if (pfs != null) {
 			this.pendingFloats = null;
@@ -1569,15 +1569,15 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private void paint(final Graphics gIn, Graphics gInUnClipped) {
-		final boolean translationRequired = (x | y) != 0;
+		final boolean translationRequired = (getX() | getY()) != 0;
 		final Graphics g = translationRequired ? gIn.create() : gIn;
 		if (translationRequired) {
-			g.translate(x, y);
+			g.translate(getX(), getY());
 		}
 
 		final Graphics gUnClipped = translationRequired ? gInUnClipped.create() : gInUnClipped;
 		if (translationRequired) {
-			gUnClipped.translate(x, y);
+			gUnClipped.translate(getX(), getY());
 		}
 
 		try {
@@ -1753,7 +1753,7 @@ public class RBlockViewport extends BaseRCollection {
 			// Inform line done before layout so floats are considered.
 			lineDone(line);
 			final Insets paddingInsets = this.paddingInsets;
-			final int newLineY = line == null ? paddingInsets.top : line.y + line.height;
+			final int newLineY = line == null ? paddingInsets.top : line.getY() + line.getHeight();
 			final int availContentWidth = this.availContentWidth;
 			final int expectedWidth = availContentWidth;
 			final int blockShiftRight = paddingInsets.right;
@@ -1804,7 +1804,7 @@ public class RBlockViewport extends BaseRCollection {
 			// Inform line done before layout so floats are considered.
 			lineDone(line);
 			if (obeysFloats) {
-				final int newLineY = line == null ? this.paddingInsets.top : line.y + line.height;
+				final int newLineY = line == null ? this.paddingInsets.top : line.getY() + line.getHeight();
 				final int leftOffset = fetchLeftOffset(newLineY);
 				final int rightOffset = fetchRightOffset(newLineY);
 				availContentWidth = this.desiredWidth - leftOffset - rightOffset;

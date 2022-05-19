@@ -43,7 +43,7 @@ import org.loboevolution.http.HtmlRendererContext;
 /**
  * Author J. H. S.
  */
-abstract class BaseBoundableRenderable extends BaseRenderable implements BoundableRenderable {
+abstract class BaseBoundableRenderable extends RRectangle implements BoundableRenderable {
 
 	/** Constant logger */
 	protected static final Logger logger = Logger.getLogger(BaseBoundableRenderable.class.getName());
@@ -66,10 +66,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 
 	protected RCollection parent;
 
-
-	public int x, y;
-
-	public int width, height;
+	private RRectangle rettangle;
 
 	/**
 	 * <p>Constructor for BaseBoundableRenderable.</p>
@@ -101,7 +98,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	/** {@inheritDoc} */
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(this.x, this.y, this.width, this.height);
+		return new Rectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 
 	/**
@@ -136,18 +133,12 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	public Point getGUIPoint(int clientX, int clientY) {
 		final Renderable parent = getParent();
 		if (parent instanceof BoundableRenderable) {
-			return ((BoundableRenderable) parent).getGUIPoint(clientX + this.x, clientY + this.y);
+			return ((BoundableRenderable) parent).getGUIPoint(clientX + this.getX(), clientY + this.getY());
 		} else if (parent == null) {
-			return this.container.getGUIPoint(clientX + this.x, clientY + this.y);
+			return this.container.getGUIPoint(clientX + this.getX(), clientY + this.getY());
 		} else {
 			throw new IllegalStateException("parent=" + parent);
 		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getHeight() {
-		return this.height;
 	}
 
 	/** {@inheritDoc} */
@@ -159,7 +150,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	/** {@inheritDoc} */
 	@Override
 	public Point getOrigin() {
-		return new Point(this.x, this.y);
+		return new Point(this.getX(), this.getY());
 	}
 
 	/** {@inheritDoc} */
@@ -185,8 +176,8 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	/** {@inheritDoc} */
 	@Override
 	public Point getOriginRelativeTo(RCollection ancestor) {
-		int x = this.x;
-		int y = this.y;
+		int x = this.getX();
+		int y = this.getY();
 		RCollection parent = this.parent;
 		for (;;) {
 			if (parent == null) {
@@ -269,9 +260,9 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	public Point getRenderablePoint(int guiX, int guiY) {
 		final Renderable parent = getParent();
 		if (parent instanceof BoundableRenderable) {
-			return ((BoundableRenderable) parent).getRenderablePoint(guiX - this.x, guiY - this.y);
+			return ((BoundableRenderable) parent).getRenderablePoint(guiX - this.getX(), guiY - this.getY());
 		} else if (parent == null) {
-			return new Point(guiX - this.x, guiY - this.y);
+			return new Point(guiX - this.getX(), guiY - this.getY());
 		} else {
 			throw new IllegalStateException("parent=" + parent);
 		}
@@ -280,25 +271,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	/** {@inheritDoc} */
 	@Override
 	public Dimension getSize() {
-		return new Dimension(this.width, this.height);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getWidth() {
-		return this.width;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getX() {
-		return this.x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getY() {
-		return this.y;
+		return new Dimension(this.getWidth(), this.getHeight());
 	}
 
 	/**
@@ -332,7 +305,6 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 			} else {
 				parent.invalidateLayoutUpTree();
 			}
-		} else {
 		}
 	}
 
@@ -473,8 +445,8 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	/** {@inheritDoc} */
 	@Override
 	public final void paintTranslated(Graphics g) {
-		final int x = this.x;
-		final int y = this.y;
+		final int x = this.getX();
+		final int y = this.getY();
 		g.translate(x, y);
 		try {
 			paint(g);
@@ -533,7 +505,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	/** {@inheritDoc} */
 	@Override
 	public void repaint() {
-		this.repaint(0, 0, this.width, this.height);
+		this.repaint(0, 0, this.getWidth(), this.getHeight());
 	}
 
 	/** {@inheritDoc} */
@@ -558,27 +530,6 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		}
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void setBounds(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setOrigin(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -592,24 +543,6 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		this.parent = parent;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void setWidth(final int width) {
-		this.width = width;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setY(int y) {
-		this.y = y;
-	}
-
 	public void setDelegator(final BoundableRenderable pDelegator) {
 		this.delegator = pDelegator;
 	}
@@ -618,4 +551,8 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		return delegator != null;
 	}
 
+	@Override
+	public RRectangle getRectangle() {
+		return rettangle;
 	}
+}

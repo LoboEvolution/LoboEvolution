@@ -750,8 +750,8 @@ class TableMatrixSizes {
 					.defaultOverflowY(0)
 					.sizeOnly(true)
 					.build());
-			matrix.captionSize.setHeight(matrix.caption.height);
-			matrix.captionSize.setWidth(matrix.caption.width);
+			matrix.captionSize.setHeight(matrix.caption.getHeight());
+			matrix.captionSize.setWidth(matrix.caption.getWidth());
 		}
 
 		for (RTableCell cell : allCells) {

@@ -380,8 +380,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 					}
 				}
 				// Adjust for permanent vertical scrollbar.
-				final int newPw = Math.max(block.width + block.getVScrollBarWidth(), pw);
-				return new Dimension(newPw, block.height);
+				final int newPw = Math.max(block.getWidth() + block.getVScrollBarWidth(), pw);
+				return new Dimension(newPw, block.getHeight());
 			}
 		}
 		return new Dimension(600, 400);

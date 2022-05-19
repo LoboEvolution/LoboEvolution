@@ -413,7 +413,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public ProcessingInstruction createProcessingInstruction(String target, String data) {
-		if (target == null || target.length() == 0) {
+		if (Strings.isCssBlank(target)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Void target");
 		}
 

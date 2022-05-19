@@ -972,7 +972,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	        && ((overflowY == RenderState.OVERFLOW_NONE) || (overflowY == RenderState.OVERFLOW_VISIBLE))) {
 			return null;
 	    } else {
-	      return new Rectangle(insets.left, insets.top, this.width - hInset, this.height - vInset);
+	      return new Rectangle(insets.left, insets.top, this.getWidth() - hInset, this.getHeight() - vInset);
 	    }
 	  }
 
@@ -1027,8 +1027,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * @param g a {@link java.awt.Graphics} object.
 	 */
 	protected void prePaint(Graphics g) {
-		final int startWidth = this.width;
-		final int startHeight = this.height;
+		final int startWidth = this.getWidth();
+		final int startHeight = this.getHeight();
 		int totalWidth = startWidth;
 		int totalHeight = startHeight;
 		int startX = 0;

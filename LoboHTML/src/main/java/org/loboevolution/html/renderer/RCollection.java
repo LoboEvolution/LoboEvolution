@@ -25,9 +25,6 @@ import java.util.Iterator;
 
 /**
  * A {@link org.loboevolution.html.renderer.Renderable} with children.
- *
- *
- *
  */
 public interface RCollection extends BoundableRenderable {
 	/**
