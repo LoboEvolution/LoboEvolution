@@ -32,9 +32,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
-import java.awt.*;
-import java.util.Map;
-
 /**
  * <p>HTMLInputElementImpl class.</p>
  */
@@ -211,9 +208,8 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	 * <p>draw.</p>
 	 *
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
-	 * @param map a {@link java.util.Map} object.
 	 */
-	public void draw(InputControl ic, Map<String, Image> map) {
+	public void draw(InputControl ic) {
 		String type = getType();
 		
 		if (Strings.isBlank(type)) {
@@ -248,7 +244,7 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 			checkbox = new InputCheckbox(this, ic);
 			break;
 		case "image":
-			new InputImage(this, ic, map);
+			new InputImage(this, ic);
 			break;
 		case "range":
 			new InputRange(this, ic);

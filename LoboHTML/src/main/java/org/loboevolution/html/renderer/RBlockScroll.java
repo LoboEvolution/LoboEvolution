@@ -140,7 +140,7 @@ public class RBlockScroll {
                     final int newMin = 0;
                     final int newMax = bodyLayout.height;
                     vsb.setValues(newValue, newExtent, newMin, newMax);
-                    vsb.setUnitIncrement(getVUnitIncrement(renderState));
+                    vsb.setUnitIncrement(getVUnitIncrement());
                     vsb.setBlockIncrement(newExtent);
                 }
                 final JScrollBar hsb = this.hScrollBar;
@@ -185,12 +185,8 @@ public class RBlockScroll {
     /**
      * <p>getVUnitIncrement.</p>
      */
-    protected int getVUnitIncrement(RenderState renderState) {
-        if (renderState != null) {
-            return renderState.getFontMetrics().getHeight();
-        } else {
-            return new BlockRenderState(null).getFontMetrics().getHeight();
-        }
+    protected int getVUnitIncrement() {
+        return 4;
     }
 
     /**
@@ -230,16 +226,23 @@ public class RBlockScroll {
         final RBlockViewport bodyLayout = rBlock.bodyLayout;
         if (bodyLayout != null) {
             final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
-            final int prevY = bodyLayout.y;
-            if (newY > insets.top) {
-                bodyLayout.y = insets.top;
-            } else if (newY < rBlock.height - insets.bottom - bodyLayout.height) {
-                bodyLayout.y = Math.min(insets.top, rBlock.height - insets.bottom - bodyLayout.height);
+            final int prevY = bodyLayout.getY();
+            final int prevHeight = rBlock.getHeight() - insets.bottom - bodyLayout.getHeight();
+            final int min = Math.min(insets.top, prevHeight);
+
+            if (newY > insets.top && bodyLayout.getY() <= 0) {
+                bodyLayout.setY(bodyLayout.getY() + (int) newY);
+            } else if (newY < prevHeight) {
+                bodyLayout.setY(min);
+            } else if (newY < insets.top && bodyLayout.getY() > 0) {
+                bodyLayout.setY(bodyLayout.getY() + (int) newY);
+
             } else {
-                if(bodyLayout.y < bodyLayout.height) {
-                    bodyLayout.y = bodyLayout.y + (int) newY;
+                if (bodyLayout.getY() <= 1 && min < bodyLayout.getY()) {
+                    bodyLayout.setY(bodyLayout.getY() + (int) newY);
                 }
             }
+
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
             rBlock.repaint();
@@ -252,16 +255,17 @@ public class RBlockScroll {
         final RBlockViewport bodyLayout = rBlock.bodyLayout;
         if (bodyLayout != null) {
             final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
-            final int prevX = bodyLayout.x;
-            if (newX > insets.left) {
-                bodyLayout.x = insets.left;
-            } else if (newX < rBlock.width - insets.right - bodyLayout.width) {
-                bodyLayout.x = Math.min(insets.left, rBlock.width - insets.right - bodyLayout.width);
-            } else {
-                if(bodyLayout.x < bodyLayout.width) {
-                    bodyLayout.x = bodyLayout.x + (int) newX;
-                }
+            final int prevX = bodyLayout.getX();
+            final int prevWidth = rBlock.getWidth() - insets.right - bodyLayout.getWidth();
+
+            if (newX == 0) {
+                bodyLayout.setX(0);
+            } else if (newX < 0 && newX > prevWidth) {
+                bodyLayout.setX((int) newX - 10);
+            } else if (newX > 0 && newX < prevWidth) {
+                bodyLayout.setX((int) newX + 10);
             }
+
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
             rBlock.repaint();

@@ -35,7 +35,6 @@ import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.laf.ColorFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -145,17 +144,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			}
 		});
 		addMouseWheelListener(this::onMouseWheelMoved);
-	}
-
-	/**
-	 * <p>Constructor for HtmlBlockPanel.</p>
-	 *
-	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
-	 */
-	public HtmlBlockPanel(UserAgentContext pcontext, HtmlRendererContext rcontext, FrameContext frameContext) {
-		this(ColorFactory.TRANSPARENT, false, pcontext, rcontext, frameContext);
 	}
 
 	/** {@inheritDoc} */
@@ -613,41 +601,17 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	private void onMouseWheelMoved(MouseWheelEvent mwe) {
-		RBlock block = this.rblock;
-		RBlockViewport viewport = this.rblock.getRBlockViewport();
-		RenderableSpot spot = viewport.getLowestRenderableSpot(mwe.getX(), mwe.getY());
-		for (BoundableRenderable r = spot.renderable; r != null; r = r.getParent()) {
-			if (r instanceof RBlock) {
-				block = (RBlock) r;
-				RBlockViewport blockViewport = block.getRBlockViewport();
-				if (mwe.getWheelRotation() < 0) {
-					if (blockViewport.getY() < 0)
-						break;
-				} else {
-					if (blockViewport.getY() + blockViewport.getHeight()
-							> block.getHeight())
-						break;
+		if (mwe.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
+			final int units = mwe.getWheelRotation() * mwe.getScrollAmount();
+			final Renderable innerMostRenderable = getInnerMostRenderable(mwe.getX(), mwe.getY());
+			boolean consumed = false;
+			RBlock innerBlock = getContainingBlock(innerMostRenderable);
+			do {
+				if (innerBlock != null) {
+					consumed = innerBlock.scrollByUnits(Adjustable.VERTICAL, units);
+					innerBlock = getContainingBlock(innerBlock.getParent());
 				}
-			}
-		}
-
-		if (block != null) {
-			switch (mwe.getScrollType()) {
-				case MouseWheelEvent.WHEEL_UNIT_SCROLL:
-					final int units = mwe.getWheelRotation() * mwe.getScrollAmount();
-					final Renderable innerMostRenderable = getInnerMostRenderable(mwe.getX(), mwe.getY());
-					boolean consumed = false;
-					RBlock innerBlock = getContainingBlock(innerMostRenderable);
-					do {
-						if (innerBlock != null) {
-							consumed = innerBlock.scrollByUnits(Adjustable.VERTICAL, units);
-							innerBlock = getContainingBlock(innerBlock.getParent());
-						}
-					} while ((!consumed) && (innerBlock != null));
-					break;
-				default:
-					break;
-			}
+			} while ((!consumed) && (innerBlock != null));
 		}
 	}
 

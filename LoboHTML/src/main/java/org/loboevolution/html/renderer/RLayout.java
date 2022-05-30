@@ -29,7 +29,6 @@ import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -293,7 +292,6 @@ public class RLayout {
 	}
 
 	protected static class ImgLayout extends CommonWidgetLayout {
-		private final Map<String, Image> map = new HashMap<>();
 
 		public ImgLayout() {
 			super(ADD_INLINE);
@@ -306,7 +304,7 @@ public class RLayout {
 			if (image.getSrc() != null && image.getSrc().endsWith(".svg")) {
 				control = new ImgSvgControl(image);
 			} else {
-				control = new ImgControl(image, map);
+				control = new ImgControl(image);
 			}
 
 			return new RImgControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext, bodyLayout.userAgentContext);
@@ -314,7 +312,6 @@ public class RLayout {
 	}
 
 	protected static class InputLayout extends CommonWidgetLayout {
-		private final Map<String, Image> map = new HashMap<>();
 
 		public InputLayout() {
 			super(ADD_INLINE);
@@ -322,7 +319,7 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new InputControl((HTMLInputElementImpl) markupElement, map);
+			UIControl control = new InputControl((HTMLInputElementImpl) markupElement);
 			return new RUIControl(markupElement,control, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}

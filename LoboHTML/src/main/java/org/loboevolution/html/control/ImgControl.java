@@ -40,7 +40,6 @@ import org.loboevolution.net.HttpNetwork;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -68,25 +67,17 @@ public class ImgControl extends BaseControl {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLImageElementImpl} object.
 	 */
-	public ImgControl(HTMLImageElementImpl modelNode, Map<String, Image> map) {
+	public ImgControl(HTMLImageElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		UserAgentContext bcontext = modelNode.getUserAgentContext();
 		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
-		TimingInfo info = null;
+		TimingInfo info = new TimingInfo();
 		if (bcontext.isImagesEnabled()) {
-			image = map.get(modelNode.getSrc());
-			if (image == null) {
-				info = new TimingInfo();
-				image = HttpNetwork.getImage(modelNode, info, true);
-				map.put(modelNode.getSrc(), image);
-			}
-
-			if(info != null) {
-				final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
-				final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-				htmlPanel.getBrowserPanel().getTimingList.add(info);
-			}
+			image = HttpNetwork.getImage(modelNode, info, true);
+			final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
+			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+			htmlPanel.getBrowserPanel().getTimingList.add(info);
 		}
 		addMouseListener(new MouseAdapter() {
 			@Override

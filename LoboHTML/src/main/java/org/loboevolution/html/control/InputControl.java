@@ -20,17 +20,12 @@
 package org.loboevolution.html.control;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
 /**
  * <p>InputControl class.</p>
- *
- *
- *
  */
 public class InputControl extends BaseControl {
 
@@ -38,25 +33,21 @@ public class InputControl extends BaseControl {
 	
 	private final HTMLInputElementImpl  modelNode;
 
-	private Map<String, Image> map;
-	
 	/**
 	 * <p>Constructor for InputControl.</p>
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
-	 * @param map a {@link java.util.Map} object.
 	 */
-	public InputControl(HTMLInputElementImpl modelNode,  Map<String, Image> map) {
+	public InputControl(HTMLInputElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;
-		this.map = map;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void reset(final int availWidth, final int availHeight) {
 		super.reset(availWidth, availHeight);
-		modelNode.draw(this, map);
+		modelNode.draw(this);
 	}
 	
 	/**

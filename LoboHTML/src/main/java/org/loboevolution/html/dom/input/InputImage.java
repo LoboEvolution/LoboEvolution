@@ -30,7 +30,6 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.PixelGrabber;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,27 +61,13 @@ public class InputImage {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputImage(HTMLInputElementImpl modelNode, InputControl ic, Map<String, Image> map) {
+	public InputImage(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
-		final Image img = map.get(modelNode.getSrc());
-
-		BufferedImage image;
-		TimingInfo info = null;
-
-		if (img == null) {
-			info = new TimingInfo();
-			image = toBufferedImage(HttpNetwork.getImage(modelNode, info, true));
-			map.put(modelNode.getSrc(), image);
-		} else{
-			image = toBufferedImage(img);
-		}
-
-		if(info != null) {
-			final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
-			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-			htmlPanel.getBrowserPanel().getTimingList.add(info);
-		}
-
+		TimingInfo info = new TimingInfo();
+		BufferedImage image = toBufferedImage(HttpNetwork.getImage(modelNode, info, true));
+		final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
+		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+		htmlPanel.getBrowserPanel().getTimingList.add(info);
 		JLabel wIcon = new JLabel(new ImageIcon(image));
 		ic.add(wIcon);
 	}

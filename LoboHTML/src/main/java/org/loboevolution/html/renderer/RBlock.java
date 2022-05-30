@@ -774,7 +774,7 @@ public class RBlock extends BaseElementRenderable {
 	 * @return a boolean.
 	 */
 	public boolean scrollByUnits(int orientation, int units) {
-		final int offset = orientation == JScrollBar.VERTICAL ? scroll.getVUnitIncrement(null) * units : units;
+		final int offset = orientation == JScrollBar.VERTICAL ? scroll.getVUnitIncrement() * units : units;
 		return scroll.scrollBy(orientation, offset);
 	}
 
