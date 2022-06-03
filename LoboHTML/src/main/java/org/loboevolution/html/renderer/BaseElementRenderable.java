@@ -264,12 +264,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		if (declaredWidth != null) {
 			final int borderx = borderInsets.left - borderInsets.right;
 			final int paddingx = paddingInsets.left - paddingInsets.right;
-			autoMarginX = (availWidth - declaredWidth - borderx  - paddingx) / 2;
+			autoMarginX = (availWidth - declaredWidth - borderx  - paddingx);
 		}
+
 		if (declaredHeight != null) {
 			final int bordery = borderInsets.top - borderInsets.bottom;
 			final int paddingy = paddingInsets.top - paddingInsets.bottom;
-			autoMarginY = (availHeight - declaredHeight - bordery - paddingy) / 2;
+			autoMarginY = (availHeight - declaredHeight - bordery - paddingy);
 		}
 
 		HtmlInsets minsets = rs.getMarginInsets();
