@@ -86,9 +86,18 @@ public class HtmlInsets {
 	 */
 	public Insets getAWTInsets(int availWidth, int availHeight, int autoX, int autoY) {
 		final int top = getInsetPixels(this.top, this.topType, availHeight, autoY);
-		final int left = getInsetPixels(this.left, this.leftType, availWidth, autoX);
 		final int bottom = getInsetPixels(this.bottom, this.bottomType, availHeight, autoY);
-		final int right = getInsetPixels(this.right, this.rightType, availWidth, autoX);
+
+		int autoLeft = autoX;
+		int autoRight = autoX;
+
+		if (leftType == TYPE_AUTO && rightType == TYPE_AUTO) {
+			autoLeft = autoLeft / 2;
+			autoRight = 0;
+		}
+
+		final int left = getInsetPixels(this.left, this.leftType, availWidth, autoLeft);
+		final int right = getInsetPixels(this.right, this.rightType, availWidth, autoRight);
 		return new Insets(top, left, bottom, right);
 	}
 
