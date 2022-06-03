@@ -48,14 +48,14 @@ public class QuoteRenderState  extends AbstractMarginRenderState {
         final HtmlInsets insets = new HtmlInsets();
         final int topBottom = HtmlValues.getPixelSize("1rem", null, element.getDocumentNode().getDefaultView(), -1);
         final int leftRight = HtmlValues.getPixelSize("40px", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.top = topBottom;
-        insets.bottom = topBottom;
-        insets.left = leftRight;
-        insets.right = leftRight;
-        insets.topType = HtmlInsets.TYPE_PIXELS;
-        insets.bottomType = HtmlInsets.TYPE_PIXELS;
-        insets.leftType = HtmlInsets.TYPE_PIXELS;
-        insets.rightType = HtmlInsets.TYPE_PIXELS;
+        insets.setTop(topBottom);
+        insets.setBottom(topBottom);
+        insets.setLeft(leftRight);
+        insets.setRight(leftRight);
+        insets.setTopType(HtmlInsets.TYPE_PIXELS);
+        insets.setBottomType(HtmlInsets.TYPE_PIXELS);
+        insets.setLeftType(HtmlInsets.TYPE_PIXELS);
+        insets.setRightType(HtmlInsets.TYPE_PIXELS);
         return insets;
     }
 

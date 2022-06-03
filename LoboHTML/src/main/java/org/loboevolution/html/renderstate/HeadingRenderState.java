@@ -60,45 +60,45 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 		switch (lastCharValue) {
 			case 1:
 				final int topBottom1 = HtmlValues.getPixelSize("0.67rem", null, element.getDocumentNode().getDefaultView(), -1);
-				insets.top = topBottom1;
-				insets.bottom = topBottom1;
-				insets.topType = HtmlInsets.TYPE_PIXELS;
-				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				insets.setTop(topBottom1);
+				insets.setBottom(topBottom1);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
+				insets.setBottomType(HtmlInsets.TYPE_PIXELS);
 				break;
 			case 2:
 				final int topBottom2 = HtmlValues.getPixelSize("0.83rem", null, element.getDocumentNode().getDefaultView(), -1);
-				insets.top = topBottom2;
-				insets.bottom = topBottom2;
-				insets.topType = HtmlInsets.TYPE_PIXELS;
-				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				insets.setTop(topBottom2);
+				insets.setBottom(topBottom2);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
+				insets.setBottomType(HtmlInsets.TYPE_PIXELS);
 				break;
 			case 3:
 				final int topBottom3 = HtmlValues.getPixelSize("1rem", null, element.getDocumentNode().getDefaultView(), -1);
-				insets.top = topBottom3;
-				insets.bottom = topBottom3;
-				insets.topType = HtmlInsets.TYPE_PIXELS;
-				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				insets.setTop(topBottom3);
+				insets.setBottom(topBottom3);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
 				break;
 			case 4:
 				final int topBottom4 = HtmlValues.getPixelSize("1.33rem", null, element.getDocumentNode().getDefaultView(), -1);
-				insets.top = topBottom4;
-				insets.bottom = topBottom4;
-				insets.topType = HtmlInsets.TYPE_PIXELS;
-				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				insets.setTop(topBottom4);
+				insets.setBottom(topBottom4);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
 				break;
 			case 5:
 				final int topBottom5 = HtmlValues.getPixelSize("1.67rem", null, element.getDocumentNode().getDefaultView(), -1);
-				insets.top = topBottom5;
-				insets.bottom = topBottom5;
-				insets.topType = HtmlInsets.TYPE_PIXELS;
-				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				insets.setTop(topBottom5);
+				insets.setBottom(topBottom5);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
 				break;
 			case 6:
 				final int topBottom6 = HtmlValues.getPixelSize("2.33rem", null, element.getDocumentNode().getDefaultView(), -1);
-				insets.top = topBottom6;
-				insets.bottom = topBottom6;
-				insets.topType = HtmlInsets.TYPE_PIXELS;
-				insets.bottomType = HtmlInsets.TYPE_PIXELS;
+				insets.setTop(topBottom6);
+				insets.setBottom(topBottom6);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
+				insets.setTopType(HtmlInsets.TYPE_PIXELS);
 				break;
 			default:
 				break;

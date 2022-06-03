@@ -31,9 +31,6 @@ import java.util.NoSuchElementException;
 
 /**
  * <p>ArrayUtilities class.</p>
- *
- *
- *
  */
 public class ArrayUtilities {
 

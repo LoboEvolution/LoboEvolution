@@ -61,7 +61,7 @@ public class RBlockScroll {
         final JScrollBar hsb = this.hScrollBar;
         final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
         if (hsb != null) {
-            final Graphics sbg = g.create(insets.left, rBlock.height - insets.bottom, rBlock.width - insets.left - insets.right, 16);
+            final Graphics sbg = g.create(insets.left, rBlock.getHeight() - insets.bottom, rBlock.getWidth() - insets.left - insets.right, 16);
             try {
                 hsb.paint(sbg);
             } finally {
@@ -70,7 +70,7 @@ public class RBlockScroll {
         }
         final JScrollBar vsb = this.vScrollBar;
         if (vsb != null) {
-            final Graphics sbg = g.create(rBlock.width - insets.right, insets.top, 16, rBlock.height - insets.top - insets.bottom);
+            final Graphics sbg = g.create(rBlock.getWidth() - insets.right, insets.top, 16, rBlock.getHeight() - insets.top - insets.bottom);
             try {
                 vsb.paint(sbg);
             } finally {
@@ -135,20 +135,20 @@ public class RBlockScroll {
                 final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
                 final JScrollBar vsb = this.vScrollBar;
                 if (vsb != null) {
-                    final int newValue = insets.top - bodyLayout.y;
-                    final int newExtent = rBlock.height - insets.top - insets.bottom;
+                    final int newValue = insets.top - bodyLayout.getY();
+                    final int newExtent = rBlock.getHeight() - insets.top - insets.bottom;
                     final int newMin = 0;
-                    final int newMax = bodyLayout.height;
+                    final int newMax = bodyLayout.getHeight();
                     vsb.setValues(newValue, newExtent, newMin, newMax);
                     vsb.setUnitIncrement(getVUnitIncrement());
                     vsb.setBlockIncrement(newExtent);
                 }
                 final JScrollBar hsb = this.hScrollBar;
                 if (hsb != null) {
-                    final int newValue = insets.left - bodyLayout.x;
-                    final int newExtent = rBlock.width - insets.left - insets.right;
+                    final int newValue = insets.left - bodyLayout.getX();
+                    final int newExtent = rBlock.getWidth() - insets.left - insets.right;
                     final int newMin = 0;
-                    final int newMax = bodyLayout.width;
+                    final int newMax = bodyLayout.getWidth();
                     hsb.setValues(newValue, newExtent, newMin, newMax);
                 }
             }
@@ -168,15 +168,15 @@ public class RBlockScroll {
             if (hscroll) {
                 final JScrollBar hsb = this.hScrollBar;
                 if (hsb != null) {
-                    hsb.setBounds(guiX + insets.left, guiY + rBlock.height - insets.bottom,
-                            rBlock.width - insets.left - insets.right, 16);
+                    hsb.setBounds(guiX + insets.left, guiY + rBlock.getHeight() - insets.bottom,
+                            rBlock.getWidth() - insets.left - insets.right, 16);
                 }
             }
             if (vscroll) {
                 final JScrollBar vsb = this.vScrollBar;
                 if (vsb != null) {
-                    vsb.setBounds(guiX + rBlock.width - insets.right, guiY + insets.top, 16,
-                            rBlock.height - insets.top - insets.bottom);
+                    vsb.setBounds(guiX + rBlock.getWidth() - insets.right, guiY + insets.top, 16,
+                            rBlock.getHeight() - insets.top - insets.bottom);
                 }
             }
         }
@@ -246,7 +246,7 @@ public class RBlockScroll {
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
             rBlock.repaint();
-            return bodyLayout.y != prevY;
+            return bodyLayout.getY() != prevY;
         }
         return false;
     }
@@ -269,7 +269,7 @@ public class RBlockScroll {
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
             rBlock.repaint();
-            return bodyLayout.x != prevX;
+            return bodyLayout.getX() != prevX;
         }
         return false;
     }

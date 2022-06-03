@@ -52,13 +52,13 @@ public class ListRenderState extends AbstractMarginRenderState {
 		final HtmlInsets insets = new HtmlInsets();
 		final RenderState prevRS = getPreviousRenderState();
 		final FontMetrics fm = prevRS == null ? getFontMetrics() : prevRS.getFontMetrics();
-		insets.top = fm.getHeight();
-		insets.bottom = fm.getHeight();
-		insets.topType = HtmlInsets.TYPE_PIXELS;
-		insets.bottomType = HtmlInsets.TYPE_PIXELS;
+		insets.setTop(fm.getHeight());
+		insets.setBottom(fm.getHeight());
+		insets.setTopType(HtmlInsets.TYPE_PIXELS);
+		insets.setBottomType(HtmlInsets.TYPE_PIXELS);
 		final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
-		insets.left = (int) Math.round(dpi * 30.0 / 72.0);
-		insets.leftType = HtmlInsets.TYPE_PIXELS;
+		insets.setLeft((int) Math.round(dpi * 30.0 / 72.0));
+		insets.setLeftType(HtmlInsets.TYPE_PIXELS);
 		return insets;
 	}
 }

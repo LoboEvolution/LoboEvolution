@@ -52,9 +52,7 @@ public abstract class AbstractMarginRenderState extends BlockRenderState {
 		}
 		insets = super.getMarginInsets();
 
-		if (insets == null ||
-				(insets.top == 0 && insets.bottom == 0 &&
-						insets.left == 0 && insets.right == 0)) {
+		if (insets == null || insets.htmlInsetsIsVoid()) {
 			insets = getDefaultMarginInsets();
 		}
 		this.marginInsets = insets;

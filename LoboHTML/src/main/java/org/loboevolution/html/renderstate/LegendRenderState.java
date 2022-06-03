@@ -46,9 +46,7 @@ public class LegendRenderState extends BlockRenderState {
             return insets;
         }
         insets = super.getPaddingInsets();
-        if (insets == null ||
-                (insets.top == 0 && insets.bottom == 0 &&
-                        insets.left == 0 && insets.right == 0)) {
+        if (insets == null || insets.htmlInsetsIsVoid()) {
             insets = getDefaultPaddingInsets();
         }
         this.marginInsets = insets;
@@ -58,10 +56,10 @@ public class LegendRenderState extends BlockRenderState {
     private HtmlInsets getDefaultPaddingInsets() {
         HtmlInsets insets = new HtmlInsets();
         final int leftRight = HtmlValues.getPixelSize("2px", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.left = leftRight;
-        insets.right = leftRight;
-        insets.leftType = HtmlInsets.TYPE_PIXELS;
-        insets.rightType = HtmlInsets.TYPE_PIXELS;
+        insets.setLeft(leftRight);
+        insets.setRight(leftRight);
+        insets.setLeftType(HtmlInsets.TYPE_PIXELS);
+        insets.setRightType(HtmlInsets.TYPE_PIXELS);
         return insets;
     }
 }

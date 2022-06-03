@@ -42,10 +42,10 @@ public class ParagraphRenderState extends AbstractMarginRenderState {
 	protected HtmlInsets getDefaultMarginInsets() {
 		final HtmlInsets insets = new HtmlInsets();
 		final int topBottom = HtmlValues.getPixelSize("1rem", null, element.getDocumentNode().getDefaultView(), -1);
-		insets.top = topBottom;
-		insets.bottom = topBottom;
-		insets.topType = HtmlInsets.TYPE_PIXELS;
-		insets.bottomType = HtmlInsets.TYPE_PIXELS;
+		insets.setTop(topBottom);
+		insets.setBottom(topBottom);
+		insets.setTopType(HtmlInsets.TYPE_PIXELS);
+		insets.setBottomType(HtmlInsets.TYPE_PIXELS);
 		return insets;
 	}
 

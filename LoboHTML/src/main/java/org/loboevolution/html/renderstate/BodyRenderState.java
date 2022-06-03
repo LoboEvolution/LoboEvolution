@@ -105,19 +105,9 @@ public class BodyRenderState extends StyleSheetRenderState {
             return insets;
         }
         insets = super.getMarginInsets();
-		if (insets == null ||
-				(insets.top == 0 && insets.bottom == 0 &&
-                insets.left == 0 && insets.right == 0)) {
-
-            insets = new HtmlInsets();
+		if (insets == null || insets.htmlInsetsIsVoid()) {
             final int margin = HtmlValues.getPixelSize("8px", null, this.document.getDefaultView(), 0);
-            insets.top = margin;
-            insets.bottom = margin;
-            insets.right = margin;
-            insets.left = margin;
-            insets.leftType = HtmlInsets.TYPE_PIXELS;
-            insets.rightType = HtmlInsets.TYPE_PIXELS;
-            insets.bottomType = HtmlInsets.TYPE_PIXELS;
+            insets = new HtmlInsets(margin, HtmlInsets.TYPE_PIXELS);
         }
 
         this.marginInsets = insets;

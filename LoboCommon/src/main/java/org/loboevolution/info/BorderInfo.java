@@ -61,4 +61,12 @@ public class BorderInfo {
 
 	/** The topStyle. */
 	private int topStyle;
+
+	/**
+	 * <p>htmlInsetsIsVoid.</p>
+	 * @return a {@link java.lang.Boolean} object.
+	 */
+	public boolean borderInfoIsVoid() {
+		return topStyle == 0 && bottomStyle == 0 && leftStyle == 0 && rightStyle == 0;
+	}
 }

@@ -23,6 +23,8 @@
 
 package com.jtattoo.plaf;
 
+import org.loboevolution.common.ArrayUtilities;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -116,7 +118,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 			if (table != null && UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
 				RowSorter rowSorter = table.getRowSorter();
 				List keyList = rowSorter == null ? null : rowSorter.getSortKeys();
-				if (keyList != null && keyList.size() > 0) {
+				if (ArrayUtilities.isNotBlank(keyList)) {
 					RowSorter.SortKey sortKey = (RowSorter.SortKey) keyList.get(0);
 					if (sortKey.getColumn() == table.convertColumnIndexToModel(col)) {
 						AbstractIconFactory iconFactory = ((AbstractLookAndFeel) UIManager.getLookAndFeel())

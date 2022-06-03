@@ -51,16 +51,14 @@ public class HRRenderState extends BlockRenderState {
             return insets;
         }
         insets = super.getMarginInsets();
-        if (insets == null ||
-                (insets.top == 0 && insets.bottom == 0 &&
-                        insets.left == 0 && insets.right == 0)) {
+        if (insets == null || insets.htmlInsetsIsVoid()) {
 
             insets = new HtmlInsets();
             final int topBottom = HtmlValues.getPixelSize("0.5em", null, this.document.getDefaultView(), 0);
-            insets.top = topBottom;
-            insets.bottom = topBottom;
-            insets.topType = HtmlInsets.TYPE_PIXELS;
-            insets.bottomType = HtmlInsets.TYPE_PIXELS;
+            insets.setTop(topBottom);
+            insets.setBottom(topBottom);
+            insets.setTopType(HtmlInsets.TYPE_PIXELS);
+            insets.setBottomType(HtmlInsets.TYPE_PIXELS);
         }
 
         this.marginInsets = insets;
@@ -75,10 +73,7 @@ public class HRRenderState extends BlockRenderState {
             return binfo;
         }
         binfo = super.getBorderInfo();
-        if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
-                && binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE
-                && binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE
-                && binfo.getRightStyle() == BorderInsets.BORDER_STYLE_NONE) {
+        if (binfo == null || binfo.borderInfoIsVoid()) {
 
             if (binfo == null) {
                 binfo = new BorderInfo();
@@ -112,16 +107,7 @@ public class HRRenderState extends BlockRenderState {
     }
 
     private HtmlInsets getDefaultBordernsets() {
-        HtmlInsets insets = new HtmlInsets();
         final int border = HtmlValues.getPixelSize("1px", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.top = border;
-        insets.bottom = border;
-        insets.left = border;
-        insets.right = border;
-        insets.topType = HtmlInsets.TYPE_PIXELS;
-        insets.bottomType = HtmlInsets.TYPE_PIXELS;
-        insets.leftType = HtmlInsets.TYPE_PIXELS;
-        insets.rightType = HtmlInsets.TYPE_PIXELS;
-        return insets;
+        return new HtmlInsets(border, HtmlInsets.TYPE_PIXELS);
     }
 }

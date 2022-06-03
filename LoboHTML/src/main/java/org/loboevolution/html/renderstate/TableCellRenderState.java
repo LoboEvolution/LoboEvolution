@@ -233,9 +233,7 @@ public class TableCellRenderState extends DisplayRenderState {
 				if (cellPaddingText.endsWith("%")) {
 					cellPaddingType = HtmlInsets.TYPE_PERCENT;
 				}
-				insets = new HtmlInsets();
-				insets.top = insets.left = insets.right = insets.bottom = cellPadding;
-				insets.topType = insets.leftType = insets.rightType = insets.bottomType = cellPaddingType;
+				insets = new HtmlInsets(cellPadding, cellPaddingType);
 			} else {
 				insets = super.getPaddingInsets();
 			}

@@ -53,9 +53,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE && binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.getRightStyle() == BorderInsets.BORDER_STYLE_NONE) {
+		if (binfo == null || binfo.borderInfoIsVoid()) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -81,10 +79,8 @@ public class ImageRenderState extends StyleSheetRenderState {
 							value = 0;
 						}
 					}
-					final HtmlInsets borderInsets = new HtmlInsets();
-					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
-					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
-					binfo.setInsets(borderInsets);
+
+					binfo.setInsets(new HtmlInsets(value, valueType));
 					if (binfo.getTopColor() == null) {
 						binfo.setTopColor(Color.BLACK);
 					}
@@ -147,14 +143,14 @@ public class ImageRenderState extends StyleSheetRenderState {
 			}
 			if (createNew) {
 				mi = new HtmlInsets();
-				mi.top = vspace;
-				mi.topType = HtmlInsets.TYPE_PIXELS;
-				mi.bottom = vspace;
-				mi.bottomType = HtmlInsets.TYPE_PIXELS;
-				mi.left = hspace;
-				mi.leftType = HtmlInsets.TYPE_PIXELS;
-				mi.right = hspace;
-				mi.rightType = HtmlInsets.TYPE_PIXELS;
+				mi.setTop(vspace);
+				mi.setBottom(vspace);
+				mi.setLeft(hspace);
+				mi.setRight(hspace);
+				mi.setTopType(HtmlInsets.TYPE_PIXELS);
+				mi.setBottomType(HtmlInsets.TYPE_PIXELS);
+				mi.setLeftType(HtmlInsets.TYPE_PIXELS);
+				mi.setRightType(HtmlInsets.TYPE_PIXELS);
 			}
 		}
 		this.marginInsets = mi;

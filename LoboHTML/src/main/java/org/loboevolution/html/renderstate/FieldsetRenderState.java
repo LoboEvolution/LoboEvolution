@@ -54,9 +54,7 @@ public class FieldsetRenderState extends BlockRenderState {
             return insets;
         }
         insets = super.getMarginInsets();
-        if (insets == null ||
-                (insets.top == 0 && insets.bottom == 0 &&
-                        insets.left == 0 && insets.right == 0)) {
+        if (insets == null || insets.htmlInsetsIsVoid()) {
             insets = getDefaultMarginInsets();
         }
         this.marginInsets = insets;
@@ -70,9 +68,7 @@ public class FieldsetRenderState extends BlockRenderState {
             return insets;
         }
         insets = super.getPaddingInsets();
-        if (insets == null ||
-                (insets.top == 0 && insets.bottom == 0 &&
-                        insets.left == 0 && insets.right == 0)) {
+        if (insets == null || insets.htmlInsetsIsVoid()) {
             insets = getDefaultPaddingInsets();
         }
         this.marginInsets = insets;
@@ -87,10 +83,7 @@ public class FieldsetRenderState extends BlockRenderState {
             return binfo;
         }
         binfo = super.getBorderInfo();
-        if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
-                && binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE
-                && binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE
-                && binfo.getRightStyle() == BorderInsets.BORDER_STYLE_NONE) {
+        if (binfo == null || binfo.borderInfoIsVoid()) {
 
             if (binfo == null) {
                 binfo = new BorderInfo();
@@ -115,10 +108,10 @@ public class FieldsetRenderState extends BlockRenderState {
     private HtmlInsets getDefaultMarginInsets() {
         HtmlInsets insets = new HtmlInsets();
         final int leftRight = HtmlValues.getPixelSize("2px", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.left = leftRight;
-        insets.right = leftRight;
-        insets.leftType = HtmlInsets.TYPE_PIXELS;
-        insets.rightType = HtmlInsets.TYPE_PIXELS;
+        insets.setLeft(leftRight);
+        insets.setRight(leftRight);
+        insets.setLeftType(HtmlInsets.TYPE_PIXELS);
+        insets.setRightType(HtmlInsets.TYPE_PIXELS);
         return insets;
     }
 
@@ -127,29 +120,20 @@ public class FieldsetRenderState extends BlockRenderState {
         final int top = HtmlValues.getPixelSize("0.35rem", null, element.getDocumentNode().getDefaultView(), -1);
         final int bottom = HtmlValues.getPixelSize("0.625rem", null, element.getDocumentNode().getDefaultView(), -1);
         final int leftRight = HtmlValues.getPixelSize("0.65rem", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.top = top;
-        insets.bottom = bottom;
-        insets.left = leftRight;
-        insets.right = leftRight;
-        insets.topType = HtmlInsets.TYPE_PIXELS;
-        insets.bottomType = HtmlInsets.TYPE_PIXELS;
-        insets.leftType = HtmlInsets.TYPE_PIXELS;
-        insets.rightType = HtmlInsets.TYPE_PIXELS;
+        insets.setTop(top);
+        insets.setBottom(bottom);
+        insets.setLeft(leftRight);
+        insets.setRight(leftRight);
+        insets.setTopType(HtmlInsets.TYPE_PIXELS);
+        insets.setBottomType(HtmlInsets.TYPE_PIXELS);
+        insets.setLeftType(HtmlInsets.TYPE_PIXELS);
+        insets.setRightType(HtmlInsets.TYPE_PIXELS);
         return insets;
     }
 
 
     private HtmlInsets getDefaultBordernsets() {
-        HtmlInsets insets = new HtmlInsets();
         final int border = HtmlValues.getPixelSize("2px", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.top = border;
-        insets.bottom = border;
-        insets.left = border;
-        insets.right = border;
-        insets.topType = HtmlInsets.TYPE_PIXELS;
-        insets.bottomType = HtmlInsets.TYPE_PIXELS;
-        insets.leftType = HtmlInsets.TYPE_PIXELS;
-        insets.rightType = HtmlInsets.TYPE_PIXELS;
-        return insets;
+        return new HtmlInsets(border, HtmlInsets.TYPE_PIXELS);
     }
 }

@@ -684,13 +684,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				int left = 0;
 
 				if (paddingInsets != null) {
-					right = right + paddingInsets.right;
-					left = left + paddingInsets.left;
+					right = right + paddingInsets.getRight();
+					left = left + paddingInsets.getLeft();
 				}
 
 				if (marginInsets != null) {
-					right = right + marginInsets.right;
-					left =  left + marginInsets.left;
+					right = right + marginInsets.getRight();
+					left =  left + marginInsets.getLeft();
 				}
 
 				final int multi = (right == 0 && left == 0) ? 12 : 4;

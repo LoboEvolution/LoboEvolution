@@ -51,9 +51,7 @@ public class UListRenderState extends BlockRenderState {
             return insets;
         }
         insets = super.getMarginInsets();
-        if (insets == null ||
-                (insets.top == 0 && insets.bottom == 0 &&
-                        insets.left == 0 && insets.right == 0)) {
+        if (insets == null || insets.htmlInsetsIsVoid()) {
             insets = getDefaultMarginInsets();
         }
         this.marginInsets = insets;
@@ -67,9 +65,7 @@ public class UListRenderState extends BlockRenderState {
             return insets;
         }
         insets = super.getPaddingInsets();
-        if (insets == null ||
-                (insets.top == 0 && insets.bottom == 0 &&
-                        insets.left == 0 && insets.right == 0)) {
+        if (insets == null || insets.htmlInsetsIsVoid()) {
             insets = getDefaultPaddingInsets();
         }
         this.marginInsets = insets;
@@ -80,17 +76,17 @@ public class UListRenderState extends BlockRenderState {
     private HtmlInsets getDefaultMarginInsets() {
         HtmlInsets insets = new HtmlInsets();
         final int topBottom = HtmlValues.getPixelSize("1rem", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.top = topBottom;
-        insets.bottom = topBottom;
-        insets.topType = HtmlInsets.TYPE_PIXELS;
-        insets.bottomType = HtmlInsets.TYPE_PIXELS;
+        insets.setTop(topBottom);
+        insets.setBottom(topBottom);
+        insets.setTopType(HtmlInsets.TYPE_PIXELS);
+        insets.setBottomType(HtmlInsets.TYPE_PIXELS);
         return insets;
     }
 
     private HtmlInsets getDefaultPaddingInsets() {
         HtmlInsets insets = new HtmlInsets();
-        insets.left = HtmlValues.getPixelSize("40px", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.leftType = HtmlInsets.TYPE_PIXELS;
+        insets.setLeft(HtmlValues.getPixelSize("40px", null, element.getDocumentNode().getDefaultView(), -1));
+        insets.setLeftType(HtmlInsets.TYPE_PIXELS);
         return insets;
     }
 }

@@ -19,6 +19,7 @@
  */
 package org.loboevolution.html.style;
 
+import lombok.Data;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -29,6 +30,7 @@ import java.awt.*;
 /**
  * <p>HtmlInsets class.</p>
  */
+@Data
 public class HtmlInsets {
 	
 	/** Constant TYPE_UNDEFINED=0 */
@@ -43,15 +45,34 @@ public class HtmlInsets {
 	/** Constant TYPE_PERCENT=3 */
 	public static final int TYPE_PERCENT = 3;
 	
-	public int top, bottom, left, right;
+	private int top;
 
-	/* Types assumed to be initialized as UNDEFINED */
-	public int topType, bottomType, leftType, rightType;
+	private int bottom;
+
+	private int left;
+
+	private int right;
+
+	private int topType;
+
+	private int bottomType;
+
+	private int leftType;
+
+	private int rightType;
 
 	/**
 	 * <p>Constructor for HtmlInsets.</p>
 	 */
 	public HtmlInsets() {
+	}
+
+	/**
+	 * <p>Constructor for HtmlInsets.</p>
+	 */
+	public HtmlInsets(int value, int valueType) {
+		top = left = right = bottom = value;
+		topType = leftType = rightType = bottomType = valueType;
 	}
 
 	/**
@@ -69,6 +90,14 @@ public class HtmlInsets {
 		final int bottom = getInsetPixels(this.bottom, this.bottomType, availHeight, autoY);
 		final int right = getInsetPixels(this.right, this.rightType, availWidth, autoX);
 		return new Insets(top, left, bottom, right);
+	}
+
+	/**
+	 * <p>htmlInsetsIsVoid.</p>
+	 * @return a {@link java.lang.Boolean} object.
+	 */
+	public boolean htmlInsetsIsVoid() {
+		return top == 0 && bottom == 0 && left == 0 && right == 0;
 	}
 
 	protected static HtmlInsets getInsets(String topText, String leftText, String bottomText, String rightText, HTMLElementImpl element, RenderState renderState) {
@@ -129,150 +158,6 @@ public class HtmlInsets {
 			default:
 				throw new IllegalStateException();
 		}
-	}
-
-	/**
-	 * <p>Getter for the field bottom.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getBottom() {
-		return this.bottom;
-	}
-
-	/**
-	 * <p>Getter for the field bottomType.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getBottomType() {
-		return this.bottomType;
-	}
-
-	/**
-	 * <p>Getter for the field left.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getLeft() {
-		return this.left;
-	}
-
-	/**
-	 * <p>Getter for the field leftType.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getLeftType() {
-		return this.leftType;
-	}
-
-	/**
-	 * <p>Getter for the field right.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getRight() {
-		return this.right;
-	}
-
-	/**
-	 * <p>Getter for the field rightType.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getRightType() {
-		return this.rightType;
-	}
-
-	/**
-	 * <p>Getter for the field top.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getTop() {
-		return this.top;
-	}
-
-	/**
-	 * <p>Getter for the field topType.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getTopType() {
-		return this.topType;
-	}
-
-	/**
-	 * <p>Setter for the field bottom.</p>
-	 *
-	 * @param bottom a int.
-	 */
-	public void setBottom(int bottom) {
-		this.bottom = bottom;
-	}
-
-	/**
-	 * <p>Setter for the field bottomType.</p>
-	 *
-	 * @param bottomType a int.
-	 */
-	public void setBottomType(int bottomType) {
-		this.bottomType = bottomType;
-	}
-
-	/**
-	 * <p>Setter for the field left.</p>
-	 *
-	 * @param left a int.
-	 */
-	public void setLeft(int left) {
-		this.left = left;
-	}
-
-	/**
-	 * <p>Setter for the field leftType.</p>
-	 *
-	 * @param leftType a int.
-	 */
-	public void setLeftType(int leftType) {
-		this.leftType = leftType;
-	}
-
-	/**
-	 * <p>Setter for the field right.</p>
-	 *
-	 * @param right a int.
-	 */
-	public void setRight(int right) {
-		this.right = right;
-	}
-
-	/**
-	 * <p>Setter for the field rightType.</p>
-	 *
-	 * @param rightType a int.
-	 */
-	public void setRightType(int rightType) {
-		this.rightType = rightType;
-	}
-
-	/**
-	 * <p>Setter for the field top.</p>
-	 *
-	 * @param top a int.
-	 */
-	public void setTop(int top) {
-		this.top = top;
-	}
-
-	/**
-	 * <p>Setter for the field topType.</p>
-	 *
-	 * @param topType a int.
-	 */
-	public void setTopType(int topType) {
-		this.topType = topType;
 	}
 
 	/** {@inheritDoc} */

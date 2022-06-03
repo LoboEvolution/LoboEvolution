@@ -52,9 +52,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE && binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.getRightStyle() == BorderInsets.BORDER_STYLE_NONE) {
+		if (binfo == null || binfo.borderInfoIsVoid()) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -74,10 +72,8 @@ public class IFrameRenderState extends StyleSheetRenderState {
 				} else {
 					value = 1;
 				}
-				final HtmlInsets borderInsets = new HtmlInsets();
-				borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value != 0 ? 1 : 0;
-				borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = HtmlInsets.TYPE_PIXELS;
-				binfo.setInsets(borderInsets);
+
+				binfo.setInsets(new HtmlInsets(value != 0 ? 1 : 0, HtmlInsets.TYPE_PIXELS));
 				if (binfo.getTopColor() == null) {
 					binfo.setTopColor(Color.DARK_GRAY);
 				}

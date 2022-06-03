@@ -97,10 +97,7 @@ public class TableRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.getRightStyle() == BorderInsets.BORDER_STYLE_NONE) {
+		if (binfo == null || binfo.borderInfoIsVoid()) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -126,10 +123,7 @@ public class TableRenderState extends StyleSheetRenderState {
 							value = 0;
 						}
 					}
-					final HtmlInsets borderInsets = new HtmlInsets();
-					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
-					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
-					binfo.setInsets(borderInsets);
+					binfo.setInsets(new HtmlInsets(value, valueType));
 					if (binfo.getTopColor() == null) {
 						binfo.setTopColor(Color.DARK_GRAY);
 					}
