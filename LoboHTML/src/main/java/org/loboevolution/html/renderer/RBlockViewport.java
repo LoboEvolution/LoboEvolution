@@ -285,6 +285,7 @@ public class RBlockViewport extends BaseRCollection {
 		if (absolute || fixed) {
 			if (renderable instanceof RBlock) {
 				final RBlock block = (RBlock) renderable;
+
 				block.layout(RLayoutInfo.builder()
 						.availWidth(this.availContentWidth)
 						.availHeight(this.availContentHeight)
@@ -300,7 +301,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 
 			final RenderState rs = element.getRenderState();
-			this.scheduleAbsDelayedPair(renderable, style, rs, absolute, fixed);
+			this.scheduleAbsDelayedPair(renderable, availContentWidth, availContentHeight, style, rs, absolute, fixed);
 			return true;
 		} else {
 			return addElsewhereIfFloat(renderable, element, usesAlignAttribute, style);
@@ -1052,14 +1053,7 @@ public class RBlockViewport extends BaseRCollection {
 		// New floating algorithm.
 		layoutPass((NodeImpl) this.modelNode);
 
-		final Collection<DelayedPair> delayedPairs = container.getDelayedPairs();
-		if (delayedPairs != null && delayedPairs.size() > 0) {
-			delayedPairs.forEach(pair -> {
-				if (pair.getContainingBlock() == container) {
-					importDelayedPair(pair);
-				}
-			});
-		}
+		positionDelayed();
 
 		// Compute maxY according to last block.
 		int maxY = this.maxY;
@@ -1822,14 +1816,17 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * @param absolute if true, then position is absolute, else fixed
 	 */
-	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final AbstractCSSProperties style,
-										final RenderState rs, final boolean absolute, final boolean fixed) {
+	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final int availContentWidth, final int availContentHeight,
+										final AbstractCSSProperties style, final RenderState rs, final boolean absolute,
+										final boolean fixed) {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
 		this.container.addDelayedPair(DelayedPair.builder().
 				modelNode(getModelNode()).
 				immediateContainingBlock(container).
 				containingBlock(containingBlock).
 				child(renderable).
+				availContentHeight(availContentHeight).
+				availContentWidth(availContentWidth).
 				left(style.getLeft()).
 				right(style.getRight()).
 				top(style.getTop()).
@@ -2003,13 +2000,8 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	public void positionDelayed() {
 		final Collection<DelayedPair> delayedPairs = container.getDelayedPairs();
-		if ((delayedPairs != null) && (delayedPairs.size() > 0)) {
-			// Add positioned renderables that belong here
-			for (DelayedPair pair : delayedPairs) {
-				if (pair.getContainingBlock() == container) {
-					this.importDelayedPair(pair);
-				}
-			}
+		if (ArrayUtilities.isNotBlank(delayedPairs)) {
+			delayedPairs.stream().filter(pair -> pair.getContainingBlock() == container).forEach(this::importDelayedPair);
 		}
 	}
 }

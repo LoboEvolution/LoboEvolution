@@ -123,8 +123,6 @@ public class RBlock extends BaseElementRenderable {
 		this.hasHScrollBar = value.isHasHScrollBar();
 		this.hasVScrollBar = value.isHasVScrollBar();
 
-		bodyLayout.positionDelayed();
-
 		sendGUIComponentsToParent();
 
 		sendDelayedPairsToParent();

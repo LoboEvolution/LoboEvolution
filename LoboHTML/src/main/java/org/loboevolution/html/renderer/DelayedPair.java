@@ -67,6 +67,10 @@ public class DelayedPair {
 
 	private String height;
 
+	private int availContentWidth;
+
+	private int availContentHeight;
+
 	private boolean isFixed;
 
 	private boolean isRelative;
@@ -102,6 +106,7 @@ public class DelayedPair {
 		final Integer height = getHeight();
 		final Integer right = this.getRight();
 		final Integer bottom = this.getBottom();
+
 		if (right != null) {
 			if (x != null) {
 				child.setWidth(parent.getInnerWidth() - (x + right));
@@ -110,7 +115,7 @@ public class DelayedPair {
 					child.setWidth(width);
 				}
 				final int childWidth = child.getWidth();
-				x = parent.getInnerWidth() - (childWidth + right);
+				x = availContentWidth - (childWidth + right);
 			}
 		} else {
 			if (width != null) {
@@ -126,7 +131,7 @@ public class DelayedPair {
 					child.setHeight(height);
 				}
 				final int childHeight = child.getHeight();
-				y = parent.getInnerHeight() - (childHeight + bottom);
+				y = availContentHeight - (childHeight + bottom);
 			}
 		} else {
 			if (height != null) {

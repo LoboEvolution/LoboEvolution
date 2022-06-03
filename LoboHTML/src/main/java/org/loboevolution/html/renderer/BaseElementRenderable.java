@@ -729,15 +729,33 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	/** {@inheritDoc} */
 	@Override
 	public int getInnerWidth() {
-		final Insets insets = getInsetsMarginBorder(false, false);
-		return getWidth() - (insets.left + insets.right);
+		final Object rootNode = this.modelNode;
+		if (rootNode instanceof HTMLElementImpl) {
+			HTMLElementImpl element = (HTMLElementImpl) rootNode;
+			return element.getHtmlRendererContext().getInnerWidth();
+		} else if (rootNode instanceof HTMLDocumentImpl) {
+			HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
+			return doc.getHtmlRendererContext().getInnerWidth();
+		} else {
+			final Insets insets = getInsetsMarginBorder(false, false);
+			return getWidth() - (insets.left + insets.right);
+		}
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public int getInnerHeight() {
-		final Insets insets = getInsetsMarginBorder(false, false);
-		return getHeight() - (insets.top + insets.bottom);
+		final Object rootNode = this.modelNode;
+		if (rootNode instanceof HTMLElementImpl) {
+			HTMLElementImpl element = (HTMLElementImpl) rootNode;
+			return element.getHtmlRendererContext().getInnerHeight();
+		} else if (rootNode instanceof HTMLDocumentImpl) {
+			HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
+			return doc.getHtmlRendererContext().getInnerHeight();
+		} else {
+			final Insets insets = getInsetsMarginBorder(false, false);
+			return getHeight() - (insets.top + insets.bottom);
+		}
 	}
 	
     /** {@inheritDoc} */
