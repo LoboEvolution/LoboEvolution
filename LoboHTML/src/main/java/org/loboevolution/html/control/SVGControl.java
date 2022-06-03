@@ -58,9 +58,9 @@ public class SVGControl extends BaseControl {
 	@Override
 	public void paint(final Graphics g) {
 		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
+		/*Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		modelNode.draw(g2d);
-		modelNode.setPainted(true);
+		modelNode.setPainted(true);*/
 	}
 }
