@@ -111,7 +111,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
-		return "#document";
+		return "[object HTMLDocument]";
 	}
 
 	/** {@inheritDoc} */

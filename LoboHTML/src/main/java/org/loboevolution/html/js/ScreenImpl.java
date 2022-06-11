@@ -28,18 +28,15 @@ import org.loboevolution.js.AbstractScriptableDelegate;
 
 /**
  * <p>ScreenImpl class.</p>
- *
- *
- *
  */
 public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	private final GraphicsDevice graphicsDevice;
 	private final GraphicsEnvironment graphicsEnvironment;
 
 	/**
+	 * Instantiates a new java ScreenImpl.
 	 */
 	ScreenImpl() {
-		super();
 		if (GraphicsEnvironment.isHeadless()) {
 			this.graphicsEnvironment = null;
 			this.graphicsDevice = null;
@@ -81,11 +78,7 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	 * @return a int.
 	 */
 	public int getColorDepth() {
-		final GraphicsDevice gd = this.graphicsDevice;
-		if (gd == null) {
-			return 0;
-		}
-		return gd.getDisplayMode().getBitDepth();
+		return 24;
 	}
 
 	/**

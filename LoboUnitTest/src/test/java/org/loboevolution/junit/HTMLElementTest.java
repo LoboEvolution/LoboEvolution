@@ -86,9 +86,9 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("display:block", attr.getNodeValue());
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		html.setAttributeNode(attr);
-		CSSStyleDeclarationImpl style = html.getStyle().getStyleDeclarations().get(0);
+		AbstractCSSProperties style = html.getStyle();
 		assertNotNull(style);
-		assertEquals("display: block", style.getCssText());
+		assertEquals("display:block", style.getCssText());
 		assertEquals("display:block", html.getAttribute("style"));
 		style.setCssText("margin-top: 10%");
 		assertEquals("margin-top: 10%", html.getAttribute("style"));

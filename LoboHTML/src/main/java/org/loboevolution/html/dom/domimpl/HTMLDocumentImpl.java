@@ -22,6 +22,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -36,6 +37,7 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
+import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.StyleSheetList;
@@ -414,6 +416,16 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	@Override
 	public UserAgentContext getUserAgentContext() {
 		return this.getUcontext();
+	}
+
+
+	@Override
+	public Node appendChild(Node newChild) {
+		if (!(newChild instanceof DocumentType) && getChildElementCount() > 0) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Only one element on document allowed.");
+		}
+
+		return super.appendChild(newChild);
 	}
 
 	/**

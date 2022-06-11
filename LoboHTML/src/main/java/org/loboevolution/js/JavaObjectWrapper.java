@@ -31,9 +31,6 @@ import org.mozilla.javascript.ScriptableObject;
 
 /**
  * <p>JavaObjectWrapper class.</p>
- *
- *
- *
  */
 public class JavaObjectWrapper extends ScriptableObject {
 
@@ -49,21 +46,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 	/** The class wrapper. */
 	private final JavaClassWrapper classWrapper;
 
-	/**
-	 * Instantiates a new java object wrapper.
-	 *
-	 * @param classWrapper the class wrapper
-	 * @throws java.lang.InstantiationException if any.
-	 * @throws java.lang.IllegalAccessException if any.
-	 */
-	public JavaObjectWrapper(JavaClassWrapper classWrapper) throws InstantiationException, IllegalAccessException {
-		this.classWrapper = classWrapper;
-		// Retaining a strong reference, but note
-		// that the object wrapper map uses weak keys
-		// and weak values.
-		Object delegate = this.classWrapper.newInstance();
-		this.delegate = delegate;
-	}
 
 	/**
 	 * Instantiates a new java object wrapper.
@@ -76,9 +58,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 			throw new IllegalArgumentException("Argument delegate cannot be null.");
 		}
 		this.classWrapper = classWrapper;
-		// Retaining a strong reference, but note
-		// that the object wrapper map uses weak keys
-		// and weak values.
 		this.delegate = delegate;
 	}
 
@@ -92,23 +71,13 @@ public class JavaObjectWrapper extends ScriptableObject {
 		return this.delegate;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mozilla.javascript.ScriptableObject#getClassName()
-	 */
+
 	/** {@inheritDoc} */
 	@Override
 	public String getClassName() {
 		return this.classWrapper.getClassName();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mozilla.javascript.ScriptableObject#get(int,
-	 * org.mozilla.javascript.Scriptable)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Object get(int index, Scriptable start) {
@@ -137,12 +106,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 		return Scriptable.NOT_FOUND;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mozilla.javascript.ScriptableObject#get(java.lang.String,
-	 * org.mozilla.javascript.Scriptable)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Object get(String name, Scriptable start) {
@@ -203,12 +166,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mozilla.javascript.ScriptableObject#put(int,
-	 * org.mozilla.javascript.Scriptable, java.lang.Object)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void put(int index, Scriptable start, Object value) {
@@ -230,12 +187,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mozilla.javascript.ScriptableObject#put(java.lang.String,
-	 * org.mozilla.javascript.Scriptable, java.lang.Object)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void put(String name, Scriptable start, Object value) {
@@ -245,16 +196,14 @@ public class JavaObjectWrapper extends ScriptableObject {
 			PropertyInfo pinfo = this.classWrapper.getProperty(name);
 			if (pinfo != null) {
 				Method setter = pinfo.getSetter();
-				if (setter == null) {
-					throw new EvaluatorException(
-							"Property '" + name + "' is not settable in " + this.classWrapper.getClassName() + ".");
-				}
-				try {
-					Object actualValue;
-					actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
-					setter.invoke(this.getJavaObject(), actualValue);
-				} catch (Exception err) {
-					logger.log(Level.SEVERE, err.getMessage(), err);
+				if (setter != null) {
+					try {
+						Object actualValue;
+						actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
+						setter.invoke(this.getJavaObject(), actualValue);
+					} catch (Exception err) {
+						logger.log(Level.SEVERE, err.getMessage(), err);
+					}
 				}
 			} else {
 				PropertyInfo ni = this.classWrapper.getNameIndexer();
@@ -302,11 +251,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

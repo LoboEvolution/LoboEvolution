@@ -304,6 +304,8 @@ public class WindowUnitTest extends LoboUnitTest {
                 + "function test() {\n"
                 + "  alert(window.innerHeight > 0);\n"
                 + "  alert(window.innerHeight == document.body.clientHeight);\n"
+                + "  alert(window.outerHeight );\n"
+                + "  alert(window.innerHeight);\n"
                 + "  alert(window.outerHeight - window.innerHeight);\n"
                 + "  alert(window.innerWidth > 0);\n"
                 + "  alert(window.innerWidth == document.body.clientWidth);\n"
@@ -383,12 +385,12 @@ public class WindowUnitTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var oldHeight = document.body.clientHeight;\n"
                 + "    var oldWidth = document.body.clientWidth;\n"
-                + "    alert(document.body.clientHeight);\n"
-                + "    alert(document.body.clientWidth);\n"
+                + "    alert(oldHeight);\n"
+                + "    alert(oldWidth);\n"
                 + "    newDiv = document.createElement('div');\n"
                 + "    document.body.appendChild(newDiv);\n"
-                + "    newDiv.style['height'] = oldHeight + 100 + 'px';\n"
-                + "    newDiv.style['width'] = oldWidth + 100 + 'px';\n"
+                + "    newDiv.style.height = oldHeight + 100 + 'px';\n"
+                + "    newDiv.style.width = oldWidth + 100 + 'px';\n"
                 + "    alert(document.body.clientHeight);\n"
                 + "    alert(document.body.clientWidth);\n"
                 + "  }\n"
@@ -396,7 +398,7 @@ public class WindowUnitTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='test()'></body>\n"
                 + "</html>";
-        final String[] messages = {"636", "1256", "619", "1239"};
+        final String[] messages = {"636", "1600", "619", "1239"};
         checkHtmlAlert(html, messages);
     }
 
@@ -576,7 +578,7 @@ public class WindowUnitTest extends LoboUnitTest {
                         + "</script>\n"
                         + "</body>\n"
                         + "</html>";
-        final String[] messages = {"true", "0", "2", "2", null};
+        final String[] messages = {"true", "0", "2", "2", "null"};
         checkHtmlAlert(html, messages);
     }
 
