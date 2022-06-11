@@ -534,7 +534,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</body>\n"
                 + "</html>";
 
-        final String[] messages = {"Old = <b>Old innerHTML</b>", "New = New  cell value"};
+        final String[] messages = {"Old = <B>Old innerHTML</B>", "New = New  cell value"};
         checkHtmlAlert(html, messages);
     }
 
@@ -585,7 +585,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</body>\n"
                 + "</html>";
 
-        final String[] messages = {"Old = <b>Old innerHTML</b>",
+        final String[] messages = {"Old = <B>Old innerHTML</B>",
                 "New = New  cell value &amp; \u0110 \u0110"};
         checkHtmlAlert(html, messages);
     }
@@ -651,7 +651,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<div id='div'><ul/></div>"
                 + "</body></html>";
 
-        final String[] messages = {"<div id=\"div\"><ul></ul></div>", "<ul></ul>", ""};
+        final String[] messages = {"<DIV id=\"div\"><UL></DIV>", "<UL/>", ""};
         checkHtmlAlert(html, messages);
     }
 
@@ -671,7 +671,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<div id='div'><span class='a b'></span></div>\n"
                 + "</body></html>";
 
-        final String[] messages = {"<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", ""};
+        final String[] messages = {"<DIV id=\"div\"><SPAN class=\"a b\"/></DIV>", "<SPAN class=\"a b\"/>", ""};
         checkHtmlAlert(html, messages);
     }
 
@@ -754,7 +754,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void getOuterHTMLFromEmpty() {
         final String html = createPageForGetOuterHTML("br", "", true);
-        final String[] messages = {"Outer = <BR id=\"myNode\">"};
+        final String[] messages = {"Outer = <BR id=\"myNode\"/>"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1884,6 +1884,52 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     /**
+     * <p>getBoundingClientRectSize</p>
+     */
+    @Test
+    public void getBoundingClientRectSize() {
+        final String html = "<html><head><title>foo</title><script>\n"
+                + "  function test() {\n"
+                + "    var d1 = document.getElementById('div1');\n"
+                + "    var pos = d1.getBoundingClientRect();\n"
+                + "    alert(pos.top);\n"
+                + "    alert(pos.bottom);\n"
+                + "    alert(pos.left);\n"
+                + "    alert(pos.right);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "<div id='outer' style='position: absolute; top: 100px; width: 50px; height: 80px;'>"
+                + "<div id='div1'></div></div>"
+                + "</body></html>";
+
+        final String[] messages = {"100", "100", "8", "58"};
+        checkHtmlAlert(html, messages);
+    }
+
+    /**
+     * <p>getBoundingClientRectSize</p>
+     */
+    @Test
+    public void getBoundingClientRectSize2() {
+        final String html = "<html><head><title>foo</title><script>\n"
+                + "  function test() {\n"
+                + "    var d1 = document.getElementById('div1');\n"
+                + "    var pos = d1.getBoundingClientRect();\n"
+                + "    alert(pos.top);\n"
+                + "    alert(pos.bottom);\n"
+                + "    alert(pos.left);\n"
+                + "    alert(pos.right);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "<div id='outer' style='top: 100px; width: 50px; height: 80px;'>"
+                + "<div id='div1'></div></div>"
+                + "</body></html>";
+
+        final String[] messages = {"8", "8", "8", "58"};
+        checkHtmlAlert(html, messages);
+    }
+
+    /**
      * <p>getBoundingClientRect_Scroll.</p>
      */
     @Test
@@ -2788,7 +2834,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "  <div id='foo'><span onclick=\"var f = &quot;hello&quot; + 'world'\">test span</span></div>\n"
                 + "</body></html>";
 
-        final String[] messages = {"<span onclick=\"var f = &quot;hello&quot; + 'world'\">test span</span>"};
+        final String[] messages = {"<SPAN onclick=\"var f = &quot;hello&quot; + 'world'\">test span</SPAN>"};
         checkHtmlAlert(html, messages);
     }
 
@@ -2993,12 +3039,9 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
 
-        final String[] messages = {"DIV", "SECTION", "<div></div>", "<section></section>"};
+        final String[] messages = {"DIV", "SECTION", "<DIV/>", "<SECTION/>"};
         checkHtmlAlert(html, messages);
     }
-
-
-
 
     /**
      * <p>getSetAttribute_in_xml.</p>
@@ -3073,7 +3116,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
 
-        final String[] messages = {"<svg id=\"svgElem2\"></svg>"};
+        final String[] messages = {"<SVG id=\"svgElem2\"/>"};
         checkHtmlAlert(html, messages);
     }
 
@@ -3746,7 +3789,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</body>\n"
                 + "</html>";
 
-        final String[] messages = {"<select id=\"myId\"><option>Two</option></select>"};
+        final String[] messages = {"<SELECT id=\"myId\"><OPTION>Two</OPTION></SELECT>"};
         checkHtmlAlert(html, messages);
     }
 

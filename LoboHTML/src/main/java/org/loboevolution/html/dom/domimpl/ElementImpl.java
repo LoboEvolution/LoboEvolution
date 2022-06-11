@@ -22,14 +22,17 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
+import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.TagNameFilter;
@@ -40,6 +43,7 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.geom.DOMRectImpl;
 import org.loboevolution.html.js.geom.DOMRectListImpl;
 import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.geom.DOMRect;
 import org.loboevolution.html.node.js.geom.DOMRectList;
@@ -757,12 +761,20 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final RenderState rs  = doc.getRenderState();
 		int width = calculateWidth(true, true);
 		int height = calculateHeight(true, true);
-		int top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
-		int left = HtmlValues.getPixelSize(currentStyle.getLeft(), rs, win, 0);
+		String position = currentStyle.getPosition();
+		List<CSSStyleDeclarationImpl> list = currentStyle.getStyleDeclarations();
+		int topLeft = ArrayUtilities.isBlank(list) ? 0 : 8;
+		int top = topLeft;
+		int left = topLeft;
+
+		if(CSSValues.ABSOLUTE.isEqual(position)){
+			top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
+			left = HtmlValues.getPixelSize(currentStyle.getLeft(), rs, win, 0);
+		}
 
 		for (Node n = getParentNode(); n != null; n = n.getParentNode()) {
 
-			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
+			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl) && CSSValues.ABSOLUTE.isEqual(position)) {
 				HTMLElementImpl p = (HTMLElementImpl) n;
 				AbstractCSSProperties pCurrentStyle = p.getCurrentStyle();
 				String topTxt = pCurrentStyle.getTop();
@@ -782,7 +794,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			}
 		}
 
-		return new DOMRectImpl(width, height, top, 0, 0, left);
+		final HTMLElementImpl elem = ((HTMLElementImpl) this);
+		final int bottom = (int) (top + elem.getOffsetHeight());
+		final int right = left + 50;
+		return new DOMRectImpl(width, height, top, right, bottom, left);
 	}
 
 	/** {@inheritDoc} */

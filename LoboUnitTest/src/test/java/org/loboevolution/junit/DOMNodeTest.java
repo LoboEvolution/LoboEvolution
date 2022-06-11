@@ -265,7 +265,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		DocumentFragment fragment = document.createDocumentFragment();
 		assertEquals("[object DocumentFragment]", fragment.getNodeName());
 		assertNull(fragment.getNodeValue());
-		assertEquals("#document", document.getNodeName());
+		assertEquals("[object HTMLDocument]", document.getNodeName());
 		assertNull(document.getNodeValue());
 		ProcessingInstruction pi = document.createProcessingInstruction("xml-stylesheet",
 				"type=\"text/css\" href=\"sheet.css\"");

@@ -27,25 +27,13 @@ public class ScreenUnitTest extends LoboUnitTest {
 
     @Test
     public void availHeight() {
-        final String[] messages = {"1040", "1040"};
+        final String[] messages = {"870", "870"};
         testNumericProperty("availHeight", messages);
     }
 
     @Test
-    public void availLeft() {
-        final String[] messages = {"0", "0"};
-        testNumericProperty("availLeft", messages);
-    }
-
-    @Test
-    public void availTop() {
-        final String[] messages = {"0", "0"};
-        testNumericProperty("availTop", messages);
-    }
-
-    @Test
     public void availWidth() {
-        final String[] messages = {"1920", "1920"};
+        final String[] messages = {"1600", "1600"};
         testNumericProperty("availWidth", messages);
     }
 
@@ -82,7 +70,7 @@ public class ScreenUnitTest extends LoboUnitTest {
 
     @Test
     public void height() {
-        final String[] messages = {"1080", "1080"};
+        final String[] messages = {"900", "900"};
         testNumericProperty("height", messages);
     }
 
@@ -99,17 +87,6 @@ public class ScreenUnitTest extends LoboUnitTest {
         testNumericProperty("top", messages);
     }
 
-    @Test
-    public void logicalXDPI() {
-        final String[] messages = {"undefined", "1234"};
-        testNumericProperty("logicalXDPI", messages);
-    }
-
-    @Test
-    public void logicalYDPI() {
-        final String[] messages = {"undefined", "1234"};
-        testNumericProperty("logicalYDPI", messages);
-    }
 
     @Test
     public void pixelDepth() {
@@ -118,27 +95,8 @@ public class ScreenUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void systemXDPI() {
-        final String[] messages = {"24", "24"};
-        testNumericProperty("systemXDPI", messages);
-    }
-
-
-    @Test
-    public void systemYDPI() {
-        final String[] messages = {"undefined", "1234"};
-        testNumericProperty("systemYDPI", messages);
-    }
-
-    @Test
-    public void updateInterval() {
-        final String[] messages = {"undefined", "1234"};
-        testNumericProperty("updateInterval", messages);
-    }
-
-    @Test
     public void width() {
-        final String[] messages = {"1920", "1920"};
+        final String[] messages = {"1600", "1600"};
         testNumericProperty("width", messages);
     }
 
@@ -174,7 +132,7 @@ public class ScreenUnitTest extends LoboUnitTest {
                 + "      try {\n"
                 + "        window.screen." + prop + " = 1234;\n"
                 + "        alert(window.screen." + prop + ");\n"
-                + "      } catch(e) { alert('set exception') }\n"
+                + "      } catch(e) { alert(e) }\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
