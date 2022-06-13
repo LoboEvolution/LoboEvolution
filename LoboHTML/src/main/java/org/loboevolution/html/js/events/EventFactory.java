@@ -20,7 +20,6 @@
 package org.loboevolution.html.js.events;
 
 import org.loboevolution.common.Strings;
-
 import org.loboevolution.html.node.events.Event;
 
 /**

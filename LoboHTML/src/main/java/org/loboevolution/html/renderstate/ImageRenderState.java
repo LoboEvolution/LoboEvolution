@@ -19,14 +19,14 @@
  */
 package org.loboevolution.html.renderstate;
 
-import java.awt.Color;
-
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.MarginInsets;
 import org.loboevolution.info.BorderInfo;
+
+import java.awt.*;
 
 /**
  * <p>ImageRenderState class.</p>
@@ -113,7 +113,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 		if (mi != INVALID_INSETS) {
 			return mi;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {

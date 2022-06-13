@@ -19,20 +19,20 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import javax.swing.JButton;
-
 import org.loboevolution.html.control.ButtonControl;
 import org.loboevolution.html.dom.HTMLButtonElement;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.ValidityState;
+import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+
+import javax.swing.*;
 
 /**
  * <p>HTMLButtonElementImpl class.</p>

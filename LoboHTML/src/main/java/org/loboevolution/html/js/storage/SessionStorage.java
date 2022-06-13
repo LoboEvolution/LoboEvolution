@@ -20,11 +20,11 @@
 
 package org.loboevolution.html.js.storage;
 
-import java.util.Map;
-
 import org.loboevolution.html.node.js.webstorage.Storage;
 import org.loboevolution.store.TabStore;
 import org.loboevolution.store.WebStore;
+
+import java.util.Map;
 
 /**
  * <p>SessionStorage class.</p>

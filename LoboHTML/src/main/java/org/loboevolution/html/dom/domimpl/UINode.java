@@ -22,9 +22,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.Rectangle;
-
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+
+import java.awt.*;
 
 /**
  * A UI node abstraction that is used to send notifications back to the UI and

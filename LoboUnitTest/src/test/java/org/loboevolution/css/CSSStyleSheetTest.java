@@ -235,7 +235,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "</style>\n"
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
-        final String[] messages = {"2", "1", "p", "vertical-align: top;"};
+        final String[] messages = {"2", "1", "p", "vertical-align: top"};
         checkHtmlAlert(html, messages);
     }
 

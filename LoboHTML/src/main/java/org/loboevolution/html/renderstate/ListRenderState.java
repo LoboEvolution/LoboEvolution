@@ -19,12 +19,10 @@
  */
 package org.loboevolution.html.renderstate;
 
-import java.awt.FontMetrics;
-import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
-
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
+
+import java.awt.*;
 
 /**
  * <p>ListRenderState class.</p>s

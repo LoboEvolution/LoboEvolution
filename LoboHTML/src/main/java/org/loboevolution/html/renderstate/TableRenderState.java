@@ -19,9 +19,6 @@
  */
 package org.loboevolution.html.renderstate;
 
-import java.awt.Color;
-import java.util.Base64;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
@@ -30,6 +27,9 @@ import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
+
+import java.awt.*;
+import java.util.Base64;
 
 /**
  * <p>TableRenderState class.</p>

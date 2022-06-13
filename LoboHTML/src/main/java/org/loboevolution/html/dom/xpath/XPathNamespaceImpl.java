@@ -24,13 +24,8 @@
 package org.loboevolution.html.dom.xpath;
 
 import com.gargoylesoftware.css.dom.DOMException;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.xpath.XPathNamespace;
 import org.mozilla.javascript.Function;

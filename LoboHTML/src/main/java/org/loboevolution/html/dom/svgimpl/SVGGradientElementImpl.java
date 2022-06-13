@@ -20,23 +20,18 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.Color;
-import java.awt.LinearGradientPaint;
-import java.awt.MultipleGradientPaint;
-import java.awt.Paint;
-import java.awt.RadialGradientPaint;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.SVGAnimatedEnumeration;
 import org.loboevolution.html.dom.svg.SVGAnimatedString;
 import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
 import org.loboevolution.html.dom.svg.SVGGradientElement;
 import org.loboevolution.html.node.Element;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * <p>SVGGradientElementImpl class.</p>

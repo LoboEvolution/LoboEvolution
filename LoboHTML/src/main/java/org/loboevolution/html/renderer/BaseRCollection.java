@@ -20,13 +20,11 @@
 
 package org.loboevolution.html.renderer;
 
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
+
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
-
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
 

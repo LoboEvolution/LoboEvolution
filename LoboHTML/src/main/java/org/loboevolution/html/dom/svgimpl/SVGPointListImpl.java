@@ -20,13 +20,13 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGPointList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**

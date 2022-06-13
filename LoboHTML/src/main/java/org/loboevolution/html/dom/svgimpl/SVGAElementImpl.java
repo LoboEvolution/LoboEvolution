@@ -20,23 +20,14 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.Graphics2D;
-import java.awt.Shape;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.dom.svg.*;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Rectangle2D;
-
-import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.dom.svg.SVGAElement;
-import org.loboevolution.html.dom.svg.SVGAnimatedString;
-import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
-import org.loboevolution.html.dom.svg.SVGImageElement;
-import org.loboevolution.html.dom.svg.SVGMatrix;
-import org.loboevolution.html.dom.svg.SVGRect;
-import org.loboevolution.html.dom.svg.SVGSVGElement;
-import org.loboevolution.html.dom.svg.SVGTransformable;
-import org.loboevolution.html.dom.svg.SVGUseElement;
 
 /**
  * <p>SVGAElementImpl class.</p>

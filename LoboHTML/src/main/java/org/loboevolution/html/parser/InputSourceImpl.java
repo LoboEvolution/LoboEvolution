@@ -22,11 +22,11 @@
  */
 package org.loboevolution.html.parser;
 
+import org.xml.sax.InputSource;
+
 import java.io.InputStream;
 import java.io.Reader;
 import java.nio.charset.Charset;
-
-import org.xml.sax.InputSource;
 
 /**
  * The InputSourceImpl class implements the

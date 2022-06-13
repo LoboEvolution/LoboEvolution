@@ -24,10 +24,10 @@ import org.loboevolution.html.dom.filter.CaptionFilter;
 import org.loboevolution.html.dom.filter.ColumnsFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.*;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
@@ -344,7 +344,7 @@ class TableMatrix {
 	
 	private boolean isCaptionBotton() {
 		if (this.captionElement != null) {
-			AbstractCSSProperties props = captionElement.getCurrentStyle();
+			CSSStyleDeclaration props = captionElement.getCurrentStyle();
 			String captionSide = props == null ? null : props.getCaptionSide();
 			if (props == null) {
 				if(captionElement instanceof HTMLTableCaptionElementImpl)

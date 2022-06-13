@@ -20,13 +20,13 @@
 
 package org.loboevolution.html.js;
 
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.mozilla.javascript.Function;
+
 import java.awt.event.ActionEvent;
 import java.lang.ref.WeakReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.mozilla.javascript.Function;
 
 class FunctionTimerTask extends WeakWindowTask {
 	

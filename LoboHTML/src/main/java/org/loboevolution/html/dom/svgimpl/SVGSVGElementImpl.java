@@ -20,11 +20,16 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Shape;
+import org.loboevolution.html.dom.filter.IdFilter;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.dom.svg.*;
+import org.loboevolution.html.js.events.EventFactory;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.events.Event;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.NoninvertibleTransformException;
@@ -32,16 +37,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.loboevolution.html.dom.filter.IdFilter;
-import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.dom.svg.*;
-import org.loboevolution.html.js.events.EventFactory;
-
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.events.Event;
 
 /**
  * <p>SVGSVGElementImpl class.</p>

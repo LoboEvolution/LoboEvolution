@@ -20,14 +20,14 @@
 
 package org.loboevolution.html.io;
 
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.parser.HtmlParser;
+import org.xml.sax.ErrorHandler;
+
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.Reader;
 import java.io.StringReader;
-
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.parser.HtmlParser;
-import org.xml.sax.ErrorHandler;
 
 /**
  * <p>LocalWritableLineReader class.</p>

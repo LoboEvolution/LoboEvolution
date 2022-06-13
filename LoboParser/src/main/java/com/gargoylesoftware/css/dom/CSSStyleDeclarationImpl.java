@@ -117,7 +117,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
     public String getPropertyValue(final String propertyName) {
         final Property p = getPropertyDeclaration(propertyName);
         if (p == null || p.getValue() == null) {
-            return "";
+            return null;
         }
         return p.getValue().toString();
     }
@@ -184,6 +184,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
             final String value,
             final String priority) throws DOMException {
         try {
+
             CSSValueImpl expr = null;
             if (!value.isEmpty()) {
                 final CSSOMParser parser = new CSSOMParser();
@@ -248,6 +249,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
         if (null == propertyName) {
             return null;
         }
+
         for (int i = properties_.size() - 1; i > -1; i--) {
             final Property p = properties_.get(i);
             if (p != null && propertyName.equalsIgnoreCase(p.getName())) {

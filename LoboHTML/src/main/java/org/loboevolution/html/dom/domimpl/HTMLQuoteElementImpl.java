@@ -20,7 +20,6 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLQuoteElement;
-import org.loboevolution.html.renderstate.HeadingRenderState;
 import org.loboevolution.html.renderstate.QuoteRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 

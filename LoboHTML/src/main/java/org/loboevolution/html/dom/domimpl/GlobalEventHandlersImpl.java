@@ -20,20 +20,20 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.events.GlobalEventHandlers;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.events.GlobalEventHandlers;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
 
 /**
  * Implements common functionality of most elements.

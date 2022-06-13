@@ -19,12 +19,12 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.HTMLTag;
+import org.loboevolution.html.dom.HTMLElement;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import org.loboevolution.html.HTMLTag;
-import org.loboevolution.html.dom.HTMLElement;
 
 
 class ElementFactory {

@@ -20,10 +20,7 @@
 
 package org.loboevolution.html.renderer;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 
 /**
  * <p>BrokenComponent class.</p>

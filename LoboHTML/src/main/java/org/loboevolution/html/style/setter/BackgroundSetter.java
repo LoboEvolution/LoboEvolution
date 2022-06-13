@@ -20,12 +20,12 @@
 
 package org.loboevolution.html.style.setter;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.laf.ColorFactory;
-
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 
 /**
  * <p>BackgroundSetter class.</p>
@@ -34,10 +34,10 @@ public class BackgroundSetter implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
-			boolean important) {
-		properties.setPropertyValueLCAlt(BACKGROUND, newValue, important);
-		if (newValue != null && newValue.length() > 0) {
+	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
+		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+		properties.setProperty(BACKGROUND, newValue);
+		if (Strings.isNotBlank(newValue)) {
 			final String[] tokens = HtmlValues.splitCssValue(newValue);
 			boolean hasXPosition = false;
 			boolean hasYPosition = false;
@@ -66,18 +66,17 @@ public class BackgroundSetter implements SubPropertySetter {
 				if (CSSValues.INITIAL.equals(CSSValues.get(color))) {
 					color = "white";
 				}
-				properties.setPropertyValueLCAlt(BACKGROUND_COLOR, color, important);
+				properties.setProperty(BACKGROUND_COLOR, color);
 			}
 			if (image != null) {
-				properties.setPropertyValueProcessed(BACKGROUND_IMAGE, image, declaration, important);
+				properties.setPropertyValueProcessed(BACKGROUND_IMAGE, image);
 			}
 			if (backgroundRepeat != null) {
-				properties.setPropertyValueLCAlt(BACKGROUND_REPEAT, backgroundRepeat, important);
+				properties.setProperty(BACKGROUND_REPEAT, backgroundRepeat);
 			}
 			if (position != null) {
-				properties.setPropertyValueLCAlt(BACKGROUND_POSITION, position, important);
+				properties.setProperty(BACKGROUND_POSITION, position);
 			}
 		}
 	}
-
 }

@@ -30,7 +30,7 @@ import org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.CSS3Properties;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
@@ -261,7 +261,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (ws != null) {
 			return ws;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
 		int wsValue;
 		if (whiteSpaceText == null) {

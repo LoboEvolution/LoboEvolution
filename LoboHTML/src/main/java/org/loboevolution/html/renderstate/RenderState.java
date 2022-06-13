@@ -22,16 +22,13 @@
  */
 package org.loboevolution.html.renderstate;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.util.Optional;
-
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.info.WordInfo;
+
+import java.awt.*;
+import java.util.Optional;
 
 /**
  * <p>RenderState interface.</p>

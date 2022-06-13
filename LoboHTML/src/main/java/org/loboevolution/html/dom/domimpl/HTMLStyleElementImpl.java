@@ -22,6 +22,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLStyleElement;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
@@ -29,10 +32,6 @@ import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.style.CSSUtilities;
 import org.w3c.dom.UserDataHandler;
-
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
 /**
  * <p>HTMLStyleElementImpl class.</p>

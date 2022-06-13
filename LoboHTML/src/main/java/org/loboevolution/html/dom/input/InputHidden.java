@@ -20,10 +20,10 @@
 
 package org.loboevolution.html.dom.input;
 
-import javax.swing.JTextField;
-
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+
+import javax.swing.*;
 
 /**
  * <p>InputHidden class.</p>

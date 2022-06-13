@@ -30,7 +30,7 @@ import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.NodeType;
 
 import static org.junit.Assert.*;
@@ -679,7 +679,7 @@ public class DOMElementTest extends LoboUnitTest {
 		assertTrue(body.hasAttributes());
 		assertTrue(body.hasAttribute("style"));
 		assertEquals("font-family: Arial", body.getAttribute("style"));
-		AbstractCSSProperties style = body.getStyle();
+		CSSStyleDeclaration style = body.getStyle();
 		assertNotNull(style);
 		assertEquals("font-family: Arial", style.getCssText());
 		style.setCssText("font-family: Helvetica");

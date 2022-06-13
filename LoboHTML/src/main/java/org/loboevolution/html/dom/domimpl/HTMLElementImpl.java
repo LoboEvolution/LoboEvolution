@@ -22,7 +22,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
@@ -31,17 +30,20 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
-import org.loboevolution.html.style.*;
+import org.loboevolution.html.style.CSSPropertiesContext;
+import org.loboevolution.html.style.ComputedCSSStyleDeclarationImpl;
+import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.html.style.StyleSheetAggregator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -49,11 +51,11 @@ import java.util.logging.Level;
  */
 public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSPropertiesContext {
 
-	private Map<String, AbstractCSSProperties> computedStyles;
+	private ComputedCSSStyleDeclaration computedStyles;
 
-	private volatile AbstractCSSProperties currentStyleDeclarationState;
+	private volatile CSSStyleDeclaration currentStyleDeclarationState;
 
-	private volatile AbstractCSSProperties localStyleDeclarationState;
+	private CSSStyleDeclarationImpl localStyleDeclarationState = null;
 
 	private boolean hasMouseOver;
 	
@@ -64,33 +66,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 */
 	public HTMLElementImpl(final String name) {
 		super(name);
-	}
-
-	/**
-	 * Adds style sheet declarations applicable to this element. A properties object
-	 * is created if necessary when the one passed is null.
-	 *
-	 * @param style a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 * @param mouseOver a {@link java.lang.Boolean } object.
-	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 */
-	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style, boolean mouseOver) {
-		final Node pn = this.parentNode;
-		if (pn == null) {
-			return style;
-		}
-		final String classNames = getClassName();
-		final String elementName = getTagName();
-		final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
-		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray, mouseOver);
-		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
-			final CSSStyleDeclarationImpl cssStyleDeclarationImpl = entry.getRule().getStyle();
-			if (style == null) {
-				style = new AbstractCSSProperties(this);
-			}
-			style.addStyleDeclaration(cssStyleDeclarationImpl);
-		}
-		return style;
 	}
 
 	/** {@inheritDoc} */
@@ -105,41 +80,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 		super.assignAttributeField(normalName, value);
 	}
-	/**
-	 * <p>createDefaultStyleSheet.</p>
-	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 */
-	protected AbstractCSSProperties createDefaultStyleSheet() {
-		// Override to provide element defaults.
-		return null;
-	}
+
 
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		// Overrides NodeImpl method
-		// Called in synchronized block already
 		return new StyleSheetRenderState(prevRenderState, this);
-	}
-
-	/**
-	 * <p>findStyleDeclarations.</p>
-	 *
-	 * @param elementName a {@link java.lang.String} object.
-	 * @param classes an array of {@link java.lang.String} objects.
-	 * @param mouseOver a {@link java.lang.Boolean } object.
-	 * @return a {@link java.util.List} object.
-	 */
-	public final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes, boolean mouseOver) {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-
-		if (doc == null) {
-			return new ArrayList<>();
-		}
-		final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
-		final List<CSSStyleSheetImpl.SelectorEntry> list = ssa.getActiveStyleDeclarations(this, elementName, classes, mouseOver);
-		hasMouseOver = ssa.isMouseOver();
-		return list;
 	}
 
 	/**
@@ -169,29 +115,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 					}
 				});
 			}
-		}
-	}
-
-	/**
-	 * <p>getAncestor.</p>
-	 *
-	 * @param elementTL a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getAncestor(String elementTL) {
-		final Object nodeObj = getParentNode();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final HTMLElementImpl parentElement = (HTMLElementImpl) nodeObj;
-			if ("*".equals(elementTL)) {
-				return parentElement;
-			}
-			final String pelementTL = parentElement.getTagName().toLowerCase();
-			if (elementTL.equals(pelementTL)) {
-				return parentElement;
-			}
-			return parentElement.getAncestor(elementTL);
-		} else {
-			return null;
 		}
 	}
 
@@ -244,11 +167,16 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return getAttribute("charset");
 	}
 
+
+	public ComputedCSSStyleDeclaration getComputedStyle() {
+		return getComputedStyle(getTagName());
+	}
+
 	/**
 	 * <p>getComputedStyle.</p>
 	 *
 	 * @param pseudoElement a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.style.ComputedCSSStyleDeclaration} object.
+	 * @return a {@link org.loboevolution.html.node.css.ComputedCSSStyleDeclaration} object.
 	 */
 	public ComputedCSSStyleDeclaration getComputedStyle(String pseudoElement) {
 
@@ -256,74 +184,36 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			pseudoElement = "";
 		}
 
-		synchronized (this) {
-			final Map<String, AbstractCSSProperties> cs = this.computedStyles;
-			if (cs != null) {
-				final AbstractCSSProperties sds = cs.get(pseudoElement);
-				if (sds != null) {
-					return new ComputedCSSStyleDeclaration(this, sds);
-				}
-			}
+		final ComputedCSSStyleDeclaration computedStyles = this.computedStyles;
+		if (computedStyles != null) {
+			return computedStyles;
 		}
 
-		AbstractCSSProperties sds = createDefaultStyleSheet();
-		sds = addStyleSheetDeclarations(sds, false);
-
-		final AbstractCSSProperties localStyle = getStyle();
-
-		if (sds == null) {
-			sds = new AbstractCSSProperties(this);
-			sds.setStyleDeclarations(localStyle.getStyleDeclarations());
-		}
-
-		sds.setLocalStyleProperties(localStyle);
-
-		synchronized (this) {
-			Map<String, AbstractCSSProperties> cs = this.computedStyles;
-			if (cs == null) {
-				cs = new HashMap<>(2);
-				this.computedStyles = cs;
-			} else {
-				final AbstractCSSProperties sds2 = cs.get(pseudoElement);
-				if (sds2 != null) {
-					return new ComputedCSSStyleDeclaration(this, sds2);
-				}
-			}
-			cs.put(pseudoElement, sds);
-		}
-		return new ComputedCSSStyleDeclaration(this, sds);
+		final CSSStyleDeclaration sds = addStyleSheetDeclarations(false, pseudoElement);
+		this.computedStyles = new ComputedCSSStyleDeclarationImpl(this, sds);
+		return this.computedStyles;
 	}
 
 	/**
-	 * Gets the style object associated with the element. It may return null only if
-	 * the type of element does not handle stylesheets.
+	 * Gets the style object associated with the element.
+	 * It may return null only if the type of element does not handle stylesheets.
 	 *
-	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 */
-	public AbstractCSSProperties getCurrentStyle() {
-		AbstractCSSProperties sds;
+	public CSSStyleDeclaration getCurrentStyle() {
+		CSSStyleDeclaration sds;
 		synchronized (this) {
 			sds = this.currentStyleDeclarationState;
 			if (sds != null) {
 				return sds;
 			}
 		}
-		sds = createDefaultStyleSheet();
-		sds = addStyleSheetDeclarations(sds, false);
-		final AbstractCSSProperties localStyle = getStyle();
-		if (sds == null) {
-			sds = new AbstractCSSProperties(this);
-		}
-		sds.setLocalStyleProperties(localStyle);
-		synchronized (this) {
-			final AbstractCSSProperties setProps = this.currentStyleDeclarationState;
-			if (setProps != null) {
-				return setProps;
-			}
-			this.currentStyleDeclarationState = sds;
-			return sds;
-		}
+
+		sds = addStyleSheetDeclarations(false, getTagName());
+		this.currentStyleDeclarationState = sds;
+		return sds;
 	}
+
 
 	/** {@inheritDoc} */
 	@Override
@@ -410,7 +300,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	/** {@inheritDoc} */
 	@Override
-	public AbstractCSSProperties getParentStyle() {
+	public CSSStyleDeclaration getParentStyle() {
 		final Object parent = this.parentNode;
 		if (parent instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) parent).getCurrentStyle();
@@ -418,38 +308,30 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
-	/**
-	 * Gets the local style object associated with the element. The properties
-	 * object returned only includes properties from the local style attribute. It
-	 * may return null only if the type of element does not handle stylesheets.
-	 *
-	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 */
-	public AbstractCSSProperties getStyle() {
-		AbstractCSSProperties sds;
-		synchronized (this) {
-			sds = this.localStyleDeclarationState;
-			if (sds != null) {
-				return sds;
-			}
-			sds = new AbstractCSSProperties(this);
-			// Add any declarations in style attribute (last takes precedence).
-			final String style = getAttribute("style");
-			if (Strings.isNotBlank(style)) {
-                final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-				try {
-					final CSSStyleDeclarationImpl sd = parser.parseStyleDeclaration(style);
-					sds.addStyleDeclaration(sd);
-				} catch (final Exception err) {
-					final String id = getId();
-					final String withId = Strings.isBlank(id) ? "" : " with ID '" + id + "'";
-					this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
+	public CSSStyleDeclaration getStyle() {
+
+		if (localStyleDeclarationState == null) {
+
+			CSSStyleDeclarationImpl styleDeclaration = new CSSStyleDeclarationImpl(this);
+			synchronized (this) {
+				final String style = getAttribute("style");
+				if (Strings.isNotBlank(style)) {
+					final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+					try {
+						styleDeclaration = new CSSStyleDeclarationImpl(this, parser.parseStyleDeclaration(style));
+					} catch (final Exception err) {
+						final String id = getId();
+						final String withId = Strings.isBlank(id) ? "" : " with ID '" + id + "'";
+						this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
+					}
 				}
 			}
-			this.localStyleDeclarationState = sds;
+			this.localStyleDeclarationState = styleDeclaration;
+			return styleDeclaration;
+
+		} else {
+			return localStyleDeclarationState;
 		}
-		// Synchronization note: Make sure getStyle() does not return multiple values.
-		return sds;
 	}
 
 	/** {@inheritDoc} */
@@ -513,8 +395,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	public void setMouseOver(boolean mouseOver) {
 		if (hasMouseOver) {
 			if (mouseOver) {
-				AbstractCSSProperties sds = createDefaultStyleSheet();
-				currentStyleDeclarationState = addStyleSheetDeclarations(sds, mouseOver);
+				currentStyleDeclarationState = addStyleSheetDeclarations(true, getTagName());
 				if (currentStyleDeclarationState != null) {
 					informInvalidRecursive();
 				}
@@ -660,6 +541,45 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	@Override
 	public void click() {
 		HtmlController.getInstance().onMouseClick(this, null, 0, 0);
+	}
+
+	/**
+	 * <p>findStyleDeclarations.</p>
+	 *
+	 * @param elementName a {@link java.lang.String} object.
+	 * @param classes an array of {@link java.lang.String} objects.
+	 * @param mouseOver a {@link java.lang.Boolean } object.
+	 * @return a {@link java.util.List} object.
+	 */
+	public final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes, boolean mouseOver) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+
+		if (doc == null) {
+			return new ArrayList<>();
+		}
+		final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
+		final List<CSSStyleSheetImpl.SelectorEntry> list = ssa.getActiveStyleDeclarations(this, elementName, classes, mouseOver);
+		hasMouseOver = ssa.isMouseOver();
+		return list;
+	}
+
+	/**
+	 * Adds style sheet declarations applicable to this element. A properties object
+	 * is created if necessary when the one passed is null.
+	 * @param mouseOver a {@link java.lang.Boolean } object.
+	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 */
+	private CSSStyleDeclaration addStyleSheetDeclarations(boolean mouseOver, String elementName) {
+
+		localStyleDeclarationState = new CSSStyleDeclarationImpl(this);
+		final String classNames = getClassName();
+		final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
+		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray, mouseOver);
+		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
+			localStyleDeclarationState.getProperties().addAll(entry.getRule().getStyle().getProperties());
+		}
+
+		return localStyleDeclarationState;
 	}
 	
 	/** {@inheritDoc} */

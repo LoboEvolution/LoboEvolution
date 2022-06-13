@@ -24,6 +24,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
@@ -113,7 +114,7 @@ public class BorderInsets {
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */
 	private static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
-		final AbstractCSSProperties props = element.getParentStyle();
+		final CSSStyleDeclaration props = element.getParentStyle();
 		if (props == null) {
 			final HtmlInsets insets = HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
 			binfo.setInsets(insets);

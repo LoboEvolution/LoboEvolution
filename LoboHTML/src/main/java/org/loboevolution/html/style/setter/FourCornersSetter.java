@@ -21,16 +21,15 @@
 package org.loboevolution.html.style.setter;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
-
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 
 /**
  * <p>FourCornersSetter class.</p>
  */
 public class FourCornersSetter implements SubPropertySetter {
-
+	
 	private final String prefix;
 	private final String property;
 	private final String suffix;
@@ -50,37 +49,38 @@ public class FourCornersSetter implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration, boolean important) {
+	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
+		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 		
 		if (Strings.isNotBlank(newValue)) {
-			properties.setPropertyValueLCAlt(this.property, newValue, important);
+			properties.setProperty(this.property, newValue);
 			
 			final String[] array = HtmlValues.splitCssValue(newValue);
 			switch (array.length) {
 			case 1:
 				final String value = array[0];
-				properties.setPropertyValueLCAlt(prefix + "top" + suffix, value, important);
-				properties.setPropertyValueLCAlt(prefix + "right" + suffix, value, important);
-				properties.setPropertyValueLCAlt(prefix + "bottom" + suffix, value, important);
-				properties.setPropertyValueLCAlt(prefix + "left" + suffix, value, important);
+				properties.setProperty(prefix + "top" + suffix, value);
+				properties.setProperty(prefix + "right" + suffix, value);
+				properties.setProperty(prefix + "bottom" + suffix, value);
+				properties.setProperty(prefix + "left" + suffix, value);
 				break;
 			case 2:
-				properties.setPropertyValueLCAlt(prefix + "top" + suffix,  array[0], important);
-				properties.setPropertyValueLCAlt(prefix + "right" + suffix,  array[1], important);
-				properties.setPropertyValueLCAlt(prefix + "bottom" + suffix,  array[0], important);
-				properties.setPropertyValueLCAlt(prefix + "left" + suffix, array[1], important);
+				properties.setProperty(prefix + "top" + suffix,  array[0]);
+				properties.setProperty(prefix + "right" + suffix,  array[1]);
+				properties.setProperty(prefix + "bottom" + suffix,  array[0]);
+				properties.setProperty(prefix + "left" + suffix, array[1]);
 				break;
 			case 3:
-				properties.setPropertyValueLCAlt(prefix + "top" + suffix,  array[0], important);
-				properties.setPropertyValueLCAlt(prefix + "right" + suffix,  array[1], important);
-				properties.setPropertyValueLCAlt(prefix + "bottom" + suffix, array[2], important);
-				properties.setPropertyValueLCAlt(prefix + "left" + suffix, array[1], important);
+				properties.setProperty(prefix + "top" + suffix,  array[0]);
+				properties.setProperty(prefix + "right" + suffix,  array[1]);
+				properties.setProperty(prefix + "bottom" + suffix, array[2]);
+				properties.setProperty(prefix + "left" + suffix, array[1]);
 				break;
 			case 4:
-				properties.setPropertyValueLCAlt(prefix + "top" + suffix,  array[0], important);
-				properties.setPropertyValueLCAlt(prefix + "right" + suffix,  array[1], important);
-				properties.setPropertyValueLCAlt(prefix + "bottom" + suffix, array[2], important);
-				properties.setPropertyValueLCAlt(prefix + "left" + suffix, array[3], important);
+				properties.setProperty(prefix + "top" + suffix,  array[0]);
+				properties.setProperty(prefix + "right" + suffix,  array[1]);
+				properties.setProperty(prefix + "bottom" + suffix, array[2]);
+				properties.setProperty(prefix + "left" + suffix, array[3]);
 			default:
 				break;
 			}

@@ -467,11 +467,9 @@ public class DOMTokenListUnitTest extends LoboUnitTest {
                 + "  #d1.hidden { display: none; }\n"
                 + "</style>\n"
                 + "<script>\n"
-
                 + "function test() {\n"
                 + "  var div1 = document.getElementById('d1');\n"
                 + "  var list = div1.classList;\n"
-
                 + "  alert(getComputedStyle(div1, null).display);\n"
                 + "  list.add('hidden');\n"
                 + "  alert(getComputedStyle(div1, null).display);\n"

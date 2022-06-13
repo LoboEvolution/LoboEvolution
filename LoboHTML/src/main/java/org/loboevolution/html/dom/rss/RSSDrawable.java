@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.rss;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 /**
  * <p>RSSDrawable interface.</p>

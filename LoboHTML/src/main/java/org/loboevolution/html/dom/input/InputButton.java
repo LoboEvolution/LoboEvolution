@@ -20,14 +20,13 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.Color;
-
-import javax.swing.JButton;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * <p>InputButton class.</p>

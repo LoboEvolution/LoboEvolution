@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.renderer;
 
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.Iterator;
 
 /**

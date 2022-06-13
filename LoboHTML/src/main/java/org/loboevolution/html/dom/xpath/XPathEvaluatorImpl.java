@@ -23,19 +23,19 @@
 
 package org.loboevolution.html.dom.xpath;
 
-import javax.xml.transform.TransformerException;
-
 import com.gargoylesoftware.css.dom.DOMException;
 import org.apache.xml.utils.PrefixResolver;
 import org.apache.xpath.XPath;
 import org.apache.xpath.domapi.XPathStylesheetDOM3Exception;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.xpath.XPathEvaluator;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
-import org.loboevolution.html.node.NodeType;
+
+import javax.xml.transform.TransformerException;
 
 /**
  * <p>XPathEvaluatorImpl class.</p>

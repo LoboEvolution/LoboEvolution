@@ -20,11 +20,9 @@
 
 package org.loboevolution.html.control;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-
 import org.loboevolution.html.dom.rss.RSSElementImpl;
+
+import java.awt.*;
 
 /**
  * <p>RSSControl class.</p>

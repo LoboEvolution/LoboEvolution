@@ -47,6 +47,7 @@ public class FontValues extends HtmlValues {
 	public static FontKey getDefaultFontKey() {
 		return FontKey.builder().
 				font(laf.getFont()).
+				fontSize(16).
 				build();
 	}
 

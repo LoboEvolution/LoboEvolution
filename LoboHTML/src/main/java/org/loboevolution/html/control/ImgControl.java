@@ -29,8 +29,8 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.HtmlController;
-import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
@@ -145,7 +145,7 @@ public class ImgControl extends BaseControl {
 	public void reset(final int availWidth, final int availHeight) {
 		super.reset(availWidth, availHeight);
 		final HTMLElementImpl element = this.controlElement;
-		AbstractCSSProperties currentStyle = element.getCurrentStyle();
+		CSSStyleDeclaration currentStyle = element.getCurrentStyle();
 		final int dw = getValueSize(element.getAttribute("width"), currentStyle.getWidth(), availWidth);
 		final int dh = getValueSize(element.getAttribute("height"), currentStyle.getHeight(), availHeight);
 		this.preferredSize = createPreferredSize(dw, dh);
@@ -199,7 +199,7 @@ public class ImgControl extends BaseControl {
 		if (Strings.isNotBlank(alignText)) {
 			alignText = alignText.toLowerCase().trim();
 		} else{
-			AbstractCSSProperties style = element.getCurrentStyle();
+			CSSStyleDeclaration style = element.getCurrentStyle();
 			alignText = Strings.isNotBlank(style.getVerticalAlign()) ? style.getVerticalAlign() : "";
 		}
 

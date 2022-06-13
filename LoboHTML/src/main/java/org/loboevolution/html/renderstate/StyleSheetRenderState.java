@@ -29,6 +29,7 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.renderer.RFlex;
 import org.loboevolution.html.style.*;
@@ -166,12 +167,12 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		final CSS3Properties props = getCssProperties();
 		String textAlign = props == null ? null : props.getTextAlign();
-		if (textAlign == null || textAlign.length() == 0) {
+		if (Strings.isNotBlank(textAlign)) {
 			// Fall back to align attribute.
 			final HTMLElement element = this.element;
 			if (element != null) {
 				textAlign = element.getAttribute("align");
-				if (textAlign == null || textAlign.length() == 0) {
+				if (Strings.isNotBlank(textAlign)) {
 					final RenderState prs = this.prevRenderState;
 					if (prs != null) {
 						return prs.getAlignXPercent();
@@ -212,14 +213,14 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public String getAlignItems() {
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getAlignItems();
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public String getAlignContent() {
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getAlignContent();
 	}
 	
@@ -252,7 +253,8 @@ public class StyleSheetRenderState implements RenderState {
 	public BackgroundInfo getBackgroundInfo() {
 
 		BackgroundInfo binfo = this.iBackgroundInfo;
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
+
 		if (binfo != INVALID_BACKGROUND_INFO) {
 			return binfo;
 		}
@@ -317,7 +319,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (binfo != INVALID_BORDER_INFO) {
 			return binfo;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		if (props != null) {
 			binfo = BorderInsets.getBorderInfo(props, element, this);
 		} else {
@@ -337,7 +339,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (c != null) {
 			return c;
 		}
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		String colorValue = props == null ? null : props.getColor();
 		CSSValues color = CSSValues.get(colorValue);
 		switch (color) {
@@ -392,9 +394,9 @@ public class StyleSheetRenderState implements RenderState {
 	/**
 	 * <p>getCssProperties.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 */
-	protected final AbstractCSSProperties getCssProperties() {
+	protected final CSSStyleDeclaration getCssProperties() {
 		final HTMLElementImpl element = this.element;
 		return element == null ? null : element.getCurrentStyle();
 	}
@@ -486,7 +488,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (p != null) {
 			return p;
 		}
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		int floatValue = 0;
 		String floatText = props == null ? null : props.getFloat();
 		final String floatTextTL = Strings.isBlank(floatText) ? "" : floatText;
@@ -514,7 +516,7 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public String getFlexDirection() {
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		String flexDir = props == null ? null : props.getFlexDirection();
 		final String flexDirText = Strings.isBlank(flexDir) ? "" : flexDir;
 		CSSValues flt = CSSValues.get(flexDirText);
@@ -532,28 +534,28 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public String getFlexWrap() {
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getFlexWrap();
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public String getFlexFlow() {
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getFlexFlow();
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public String getJustifyContent() {
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getJustifyContent();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
-		AbstractCSSProperties style = this.getCssProperties();
+		CSSStyleDeclaration style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
 		FontKey key = FontValues.getDefaultFontKey();
 
@@ -601,7 +603,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (mi != INVALID_INSETS) {
 			return mi;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {
@@ -618,7 +620,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (overflow != -1) {
 			return overflow;
 		}
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		if (props == null) {
 			overflow = OVERFLOW_NONE;
 		} else {
@@ -669,7 +671,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (overflow != -1) {
 			return overflow;
 		}
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		if (props == null) {
 			overflow = OVERFLOW_NONE;
 		} else {
@@ -715,9 +717,9 @@ public class StyleSheetRenderState implements RenderState {
 		if (c != INVALID_COLOR) {
 			return c;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		String colorValue = props == null ? null : props.getOverlayColor();
-		if (colorValue == null || colorValue.length() == 0) {
+		if (Strings.isNotBlank(colorValue)) {
 			final RenderState prs = this.prevRenderState;
 			if (prs != null) {
 				c = prs.getOverlayColor();
@@ -739,7 +741,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (mi != INVALID_INSETS) {
 			return mi;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {
@@ -756,7 +758,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (p != null) {
 			return p;
 		}
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		int position = 0;
 		String positionText = props == null ? null : props.getPosition();
 		final String positionTextTL = Strings.isBlank(positionText) ? "" : positionText;
@@ -827,7 +829,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (td != -1) {
 			return td;
 		}
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		String tdText = props == null ? null : props.getTextDecoration();
 		if (tdText == null) {
 			RenderState prs = this.prevRenderState;
@@ -890,7 +892,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (tiText != null) {
 			return tiText;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		tiText = props == null ? null : props.getTextIndent();
 		if (tiText == null) {
 			final RenderState prs = this.prevRenderState;
@@ -912,7 +914,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (tt != -1) {
 			return tt;
 		}
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		String tdText = props == null ? null : props.getTextTransform();
 		if (tdText == null) {
 			RenderState prs = this.prevRenderState;
@@ -954,7 +956,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (v != null) {
 			return v;
 		}
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		int visibility;
 		String visibText = props == null ? null : props.getVisibility();
 		final String visibTextTL = Strings.isBlank(visibText) ? "" : visibText;
@@ -989,7 +991,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (ws != null) {
 			return ws;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
 		int wsValue;
 		final String whiteSpaceTextTL = Strings.isBlank(whiteSpaceText) ? "" : whiteSpaceText;
@@ -1149,7 +1151,7 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
 	public int getClear() {
 		if (cachedClear == null) {
-			final AbstractCSSProperties props = this.getCssProperties();
+			final CSSStyleDeclaration props = this.getCssProperties();
 			final String clearStr = props != null ? props.getClear() : "";
 			CSSValues clear = CSSValues.get(clearStr);
 			switch (clear) {
@@ -1170,7 +1172,7 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public String getBoxSizing() {
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 		String boxSizing = props != null ? props.getBoxSizing() : "";
 		final String visibTextTL = Strings.isBlank(boxSizing) ? "" : boxSizing;
 		CSSValues box = CSSValues.get(visibTextTL);
@@ -1189,28 +1191,28 @@ public class StyleSheetRenderState implements RenderState {
     /** {@inheritDoc} */
     @Override
     public String getLeft() {
-        final AbstractCSSProperties props = this.getCssProperties();
+        final CSSStyleDeclaration props = this.getCssProperties();
         return props == null ? null : props.getLeft();
     }
 
     /** {@inheritDoc} */
     @Override
     public String getTop() {
-        final AbstractCSSProperties props = this.getCssProperties();
+        final CSSStyleDeclaration props = this.getCssProperties();
         return props == null ? null : props.getTop();
     }
 
     /** {@inheritDoc} */
     @Override
     public String getRight() {
-        final AbstractCSSProperties props = this.getCssProperties();
+        final CSSStyleDeclaration props = this.getCssProperties();
         return props == null ? null : props.getRight();
     }
 
     /** {@inheritDoc} */
     @Override
     public String getBottom() {
-        final AbstractCSSProperties props = this.getCssProperties();
+        final CSSStyleDeclaration props = this.getCssProperties();
         return props == null ? null : props.getBottom();
     }
     
@@ -1227,7 +1229,7 @@ public class StyleSheetRenderState implements RenderState {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		final ClassLoader classLoader = getClass().getClassLoader();
 		Optional<Cursor> prevCursorOpt = Optional.empty();
-		AbstractCSSProperties props = this.getCssProperties();
+		CSSStyleDeclaration props = this.getCssProperties();
 
 		if (this.cursor != null) {
 			prevCursorOpt = this.cursor;
@@ -1305,7 +1307,7 @@ public class StyleSheetRenderState implements RenderState {
    /** {@inheritDoc} */
    @Override
    public String getVerticalAlign() {
-	   final AbstractCSSProperties props = this.getCssProperties();
+	   final CSSStyleDeclaration props = this.getCssProperties();
        return props == null ? null : props.getVerticalAlign();
    }
    
@@ -1439,7 +1441,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
-	private void applyBackgroundImage(BackgroundInfo binfo, String backgroundImageText, HTMLDocumentImpl document, AbstractCSSProperties props) {
+	private void applyBackgroundImage(BackgroundInfo binfo, String backgroundImageText, HTMLDocumentImpl document, CSSStyleDeclaration props) {
 		if (HtmlValues.isUrl(backgroundImageText)) {
 			String start = "url(";
 			int startIdx = start.length() + 1;

@@ -20,16 +20,14 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.Color;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.event.MouseInputAdapter;
-
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
+
+import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * <p>InputColorPicker class.</p>

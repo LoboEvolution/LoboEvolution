@@ -25,6 +25,7 @@ import org.loboevolution.html.node.BarProp;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Selection;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.css.MediaQueryList;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.node.events.GlobalEventHandlers;
@@ -401,17 +402,17 @@ public interface Window
      *
      * @param elt       a {@link org.loboevolution.html.node.Element} object.
      * @param pseudoElt a {@link java.lang.String} object.
-     * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+     * @return a {@link org.loboevolution.html.node.css.ComputedCSSStyleDeclaration} object.
      */
-    CSSStyleDeclaration getComputedStyle(Element elt, String pseudoElt);
+    ComputedCSSStyleDeclaration getComputedStyle(Element elt, String pseudoElt);
 
     /**
      * <p>getComputedStyle.</p>
      *
      * @param elt a {@link org.loboevolution.html.node.Element} object.
-     * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+     * @return a {@link org.loboevolution.html.node.css.ComputedCSSStyleDeclaration} object.
      */
-    CSSStyleDeclaration getComputedStyle(Element elt);
+    ComputedCSSStyleDeclaration getComputedStyle(Element elt);
 
     /**
      * <p>getMatchedCSSRules.</p>

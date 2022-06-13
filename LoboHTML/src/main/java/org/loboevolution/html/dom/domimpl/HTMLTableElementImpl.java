@@ -22,10 +22,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
@@ -34,6 +30,10 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableRenderState;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**

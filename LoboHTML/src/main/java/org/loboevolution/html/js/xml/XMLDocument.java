@@ -30,15 +30,14 @@ import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.type.DocumentReadyState;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.type.VisibilityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
 import org.xml.sax.SAXException;
 
-import java.io.*;
 import java.io.File;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 

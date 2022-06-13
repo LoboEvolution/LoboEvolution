@@ -19,12 +19,12 @@
  */
 package org.loboevolution.js;
 
+import org.loboevolution.info.PropertyInfo;
+import org.mozilla.javascript.Function;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.loboevolution.info.PropertyInfo;
-import org.mozilla.javascript.Function;
 
 /**
  * <p>JavaClassWrapper class.</p>

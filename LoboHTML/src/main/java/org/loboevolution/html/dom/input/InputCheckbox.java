@@ -20,15 +20,14 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.event.MouseEvent;
-
-import javax.swing.JCheckBox;
-import javax.swing.event.MouseInputAdapter;
-
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderer.HtmlController;
+
+import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * <p>InputCheckbox class.</p>

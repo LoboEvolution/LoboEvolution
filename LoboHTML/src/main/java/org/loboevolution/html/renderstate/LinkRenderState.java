@@ -24,7 +24,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.laf.ColorFactory;
 
@@ -64,7 +64,7 @@ public class LinkRenderState extends StyleSheetRenderState {
      */
     @Override
     public int getTextDecorationMask() {
-        AbstractCSSProperties props = this.getCssProperties();
+        CSSStyleDeclaration props = this.getCssProperties();
         String tdText = props == null ? null : props.getTextDecoration();
         if (Strings.isNotBlank(tdText)) {
             return super.getTextDecorationMask();
@@ -100,7 +100,7 @@ public class LinkRenderState extends StyleSheetRenderState {
             link = (link == null) ? DEFAULT_COLOR : link;
             String colorText = visited ? vlink : link;
 
-            AbstractCSSProperties props = this.getCssProperties();
+            CSSStyleDeclaration props = this.getCssProperties();
             String color = props == null ? null : props.getColor();
             return ColorFactory.getInstance().getColor(color == null ? colorText : color);
         }

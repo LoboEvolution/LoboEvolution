@@ -23,6 +23,7 @@ package org.loboevolution.html.style;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
@@ -39,7 +40,7 @@ public class MarginInsets {
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
 	public static HtmlInsets getMarginInsets(CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
-		final AbstractCSSProperties props = element.getParentStyle();
+		final CSSStyleDeclaration props = element.getParentStyle();
 		if (props == null) {
 			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
 		}
@@ -59,7 +60,7 @@ public class MarginInsets {
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
 	public static HtmlInsets getPaddingInsets(CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
-		final AbstractCSSProperties props = element.getParentStyle();
+		final CSSStyleDeclaration props = element.getParentStyle();
 		if (props == null) {
 			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
 		}

@@ -31,7 +31,6 @@ import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Undefined;
 
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;

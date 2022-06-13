@@ -20,14 +20,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import org.loboevolution.html.dom.svg.SVGElement;
-import org.loboevolution.html.dom.svg.SVGException;
-import org.loboevolution.html.dom.svg.SVGLocatable;
-import org.loboevolution.html.dom.svg.SVGMatrix;
-import org.loboevolution.html.dom.svg.SVGRect;
-import org.loboevolution.html.dom.svg.SVGTransform;
-import org.loboevolution.html.dom.svg.SVGTransformList;
-import org.loboevolution.html.dom.svg.SVGTransformable;
+import org.loboevolution.html.dom.svg.*;
 import org.loboevolution.html.node.Node;
 
 import java.awt.geom.AffineTransform;

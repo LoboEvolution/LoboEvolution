@@ -19,14 +19,12 @@
  */
 package org.loboevolution.html.renderstate;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 
 /**
  * <p>PreRenderState class.</p>
- *
- *
- *
  */
 public class PreRenderState extends BlockRenderState {
 	/**
@@ -46,10 +44,10 @@ public class PreRenderState extends BlockRenderState {
 		if (ws != null) {
 			return ws;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
 		int wsValue;
-		if (whiteSpaceText == null) {
+		if (Strings.isBlank(whiteSpaceText)) {
 			wsValue = WS_PRE;
 		} else {
 			final String whiteSpaceTextTL = whiteSpaceText.toLowerCase();

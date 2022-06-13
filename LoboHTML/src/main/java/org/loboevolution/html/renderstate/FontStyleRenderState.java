@@ -21,7 +21,6 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.style.FontValues;

@@ -23,7 +23,7 @@ package org.loboevolution.html.node.css;
 /**
  * CSS style declaration interface
  */
-public interface CSSStyleDeclaration {
+public interface CSSStyleDeclaration extends CSS3Properties {
 
     /**
      * <p> getCssText. </p>
@@ -97,7 +97,20 @@ public interface CSSStyleDeclaration {
     /**
      * <p> setCssText. </p>
      * @param text a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
      */
     void setCssText(String text);
+
+    /**
+     * <p>Setter for the field overlayColor.</p>
+     *
+     * @param value a {@link java.lang.String} object.
+     */
+    void setOverlayColor(String value);
+
+    /**
+     * <p>Getter for the field overlayColor.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    String getOverlayColor();
 }

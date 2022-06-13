@@ -20,14 +20,14 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.util.ArrayList;
-
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.dom.smil.ElementTargetAttributes;
 import org.loboevolution.html.dom.smil.SMILAnimation;
 import org.loboevolution.html.dom.smil.Time;
 import org.loboevolution.html.dom.smil.TimeList;
 import org.loboevolution.html.dom.svg.SVGTransform;
+
+import java.util.ArrayList;
 
 
 /**

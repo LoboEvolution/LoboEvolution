@@ -20,14 +20,11 @@
 
 package org.loboevolution.html.control;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-
 import org.loboevolution.html.HtmlObject;
 import org.loboevolution.html.renderer.BrokenComponent;
 import org.loboevolution.html.renderer.RenderableSpot;
+
+import java.awt.*;
 
 /**
  * <p>UIControlWrapper class.</p>

@@ -20,11 +20,11 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
-
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.svg.SVGLength;
+
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 
 
 /**

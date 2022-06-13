@@ -19,9 +19,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.parser.HtmlParser;
 import org.w3c.dom.UserDataHandler;
-import org.loboevolution.html.node.Document;
 
 /**
  * <p>HTMLTitleElementImpl class.</p>

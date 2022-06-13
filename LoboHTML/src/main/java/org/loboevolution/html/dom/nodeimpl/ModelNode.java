@@ -22,10 +22,10 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import org.loboevolution.html.renderstate.RenderState;
+
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * A generic node interface. The idea is that implementors could be W3C nodes or

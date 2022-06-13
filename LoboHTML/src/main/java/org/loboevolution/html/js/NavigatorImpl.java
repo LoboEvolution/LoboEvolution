@@ -23,7 +23,6 @@ package org.loboevolution.html.js;
 import org.loboevolution.html.js.geolocation.Geolocation;
 import org.loboevolution.html.node.js.Navigator;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.UserAgent;
 
 /**

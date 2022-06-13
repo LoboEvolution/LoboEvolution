@@ -20,35 +20,21 @@
 
 package org.loboevolution.html.style.setter;
 
-import org.loboevolution.html.style.AbstractCSSProperties;
-
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.util.CSSProperties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 
 /**
  * <p>SubPropertySetter interface.</p>
  */
 public interface SubPropertySetter extends CSSProperties {
 
-
 	/**
 	 * <p>changeValue.</p>
 	 *
-	 * @param properties a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @param declaration a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 * @param newValue a {@link java.lang.String} object.
-	 * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
 	 */
-	default void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
-		this.changeValue(properties, newValue, declaration, true);
+	default void changeValue(CSSStyleDeclaration declaration, String newValue) {
+		this.changeValue(declaration, newValue);
 	}
-	
-	/**
-	 * <p>changeValue.</p>
-	 *
-	 * @param properties a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
-	 * @param newValue a {@link java.lang.String} object.
-	 * @param declaration a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
-	 * @param important a boolean.
-	 */
-	void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration, boolean important);
 }

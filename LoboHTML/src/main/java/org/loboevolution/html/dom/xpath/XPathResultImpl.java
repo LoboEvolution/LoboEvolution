@@ -23,8 +23,6 @@
 
 package org.loboevolution.html.dom.xpath;
 
-import javax.xml.transform.TransformerException;
-
 import com.gargoylesoftware.css.dom.DOMException;
 import org.apache.xpath.XPath;
 import org.apache.xpath.objects.XObject;
@@ -38,6 +36,8 @@ import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathResult;
+
+import javax.xml.transform.TransformerException;
 
 /**
  *

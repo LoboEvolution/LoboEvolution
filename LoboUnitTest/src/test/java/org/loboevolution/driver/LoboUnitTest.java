@@ -20,14 +20,13 @@
 
 package org.loboevolution.driver;
 
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
-import org.loboevolution.html.style.ComputedCSSStyleDeclaration;
 import org.loboevolution.junit.HTMLDocumentTest;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,11 +48,10 @@ public class LoboUnitTest extends LoboWebDriver {
      */
     public void checkSelectorsTest(final String html, final String result1, final String result2) {
         HTMLDocumentImpl doc = loadHtml(html);
-        Window window = doc.getDefaultView();
-        HTMLElement div = (HTMLElement)doc.getElementById("myId");
-        HTMLElement div2 = (HTMLElement)doc.getElementById("myId2");
-        ComputedCSSStyleDeclaration computedStyle = (ComputedCSSStyleDeclaration) window.getComputedStyle(div);
-        ComputedCSSStyleDeclaration computedStyle2 = (ComputedCSSStyleDeclaration) window.getComputedStyle(div2);
+        HTMLElementImpl div = (HTMLElementImpl)doc.getElementById("myId");
+        HTMLElementImpl div2 = (HTMLElementImpl)doc.getElementById("myId2");
+        ComputedCSSStyleDeclaration computedStyle = div.getComputedStyle();
+        ComputedCSSStyleDeclaration computedStyle2 = div2.getComputedStyle();
         assertEquals(result1, computedStyle.getColor());
         assertEquals(result2, computedStyle2.getColor());
     }

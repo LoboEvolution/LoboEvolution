@@ -23,7 +23,6 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLOListElement;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.renderstate.ListRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;

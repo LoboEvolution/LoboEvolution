@@ -49,7 +49,6 @@ import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.type.DocumentReadyState;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.type.VisibilityState;
 
 import java.io.IOException;

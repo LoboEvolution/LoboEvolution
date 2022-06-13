@@ -21,11 +21,10 @@
 package org.loboevolution.html.style.setter;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.laf.ColorFactory;
-
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 
 /**
  * <p>BorderSetter2 class.</p>
@@ -45,8 +44,9 @@ public class BorderSetter2 implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclarationImpl declaration, boolean important) {
-		properties.setPropertyValueLCAlt(this.name, value, important);
+	public void changeValue(CSSStyleDeclaration declaration, String value) {
+		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+		properties.setProperty(this.name, value);
 		if (Strings.isNotBlank(value)) {
 			final String[] array = HtmlValues.splitCssValue(value);
 			String color = null;
@@ -63,7 +63,7 @@ public class BorderSetter2 implements SubPropertySetter {
 			}
 			final String name = this.name;
 			if (style != null) {
-				properties.setPropertyValueLCAlt(name + "-style", style, important);
+				properties.setProperty(name + "-style", style);
 				if (color == null) {
 					color = "black";
 				}
@@ -74,10 +74,10 @@ public class BorderSetter2 implements SubPropertySetter {
 			}
 			
 			if (color != null) {
-				properties.setPropertyValueLCAlt(name + "-color", color, important);
+				properties.setProperty(name + "-color", color);
 			}
 			if (width != null) {
-				properties.setPropertyValueLCAlt(name + "-width", width, important);
+				properties.setProperty(name + "-width", width);
 			}				
 		}
 	}

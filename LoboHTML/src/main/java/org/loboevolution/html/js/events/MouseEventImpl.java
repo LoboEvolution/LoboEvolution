@@ -19,10 +19,11 @@
  */
 package org.loboevolution.html.js.events;
 
-import java.awt.event.InputEvent;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.node.events.MouseEvent;
 import org.loboevolution.html.node.js.Window;
+
+import java.awt.event.InputEvent;
 
 /**
  * <p>

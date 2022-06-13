@@ -22,10 +22,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.Dimension;
-import java.net.URL;
-import java.util.logging.Level;
-
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.control.ImgSvgControl;
 import org.loboevolution.html.dom.HTMLImageElement;
@@ -34,6 +30,10 @@ import org.loboevolution.html.renderstate.ImageRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.type.Decoding;
 import org.mozilla.javascript.Function;
+
+import java.awt.*;
+import java.net.URL;
+import java.util.logging.Level;
 
 /**
  * <p>HTMLImageElementImpl class.</p>

@@ -20,10 +20,10 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.util.List;
-
 import org.loboevolution.html.dom.smil.Time;
 import org.loboevolution.html.dom.smil.TimeList;
+
+import java.util.List;
 
 /**
  * <p>TimeListImpl class.</p>

@@ -19,19 +19,17 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Insets;
-import java.awt.Point;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
+
+import java.awt.*;
 
 /**
  * <p>DelayedPair class.</p>

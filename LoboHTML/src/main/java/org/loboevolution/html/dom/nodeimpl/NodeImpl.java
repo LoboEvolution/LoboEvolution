@@ -40,7 +40,6 @@ import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.html.node.NodeType;
 import org.w3c.dom.UserDataHandler;
 
 import java.net.MalformedURLException;

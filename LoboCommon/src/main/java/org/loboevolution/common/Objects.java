@@ -20,6 +20,10 @@
 
 package org.loboevolution.common;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+
 /**
  * <p>Objects class.</p>
  *
@@ -37,6 +41,32 @@ public class Objects {
 	 */
 	public static boolean equals(Object obj1, Object obj2) {
 		return obj1 == obj2;
+	}
+
+	public static <M> void merge(M target, M destination) {
+		try {
+			BeanInfo beanInfo = Introspector.getBeanInfo(target.getClass());
+
+			// Iterate over all the attributes
+			for (PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors()) {
+
+				// Only copy writable attributes
+				if (descriptor.getWriteMethod() != null) {
+					Object originalValue = descriptor.getReadMethod().invoke(target);
+					Object defaultValue = descriptor.getReadMethod().invoke(destination);
+					if (originalValue == null || "".equals(originalValue)) {
+						descriptor.getWriteMethod().invoke(target, defaultValue);
+					} else {
+						if (defaultValue != null && !"".equals(defaultValue)) {
+							descriptor.getWriteMethod().invoke(target, defaultValue);
+						}
+					}
+
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -20,9 +20,9 @@
 
 package org.loboevolution.html.dom.rss;
 
-import java.awt.Graphics2D;
-
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+
+import java.awt.*;
 
 /**
  * <p>RSSElementImpl class.</p>

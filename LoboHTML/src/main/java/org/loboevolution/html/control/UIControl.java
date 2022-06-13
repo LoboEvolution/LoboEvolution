@@ -22,12 +22,9 @@
  */
 package org.loboevolution.html.control;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-
 import org.loboevolution.html.AlignValues;
+
+import java.awt.*;
 
 /**
  * <p>Abstract UIControl interface.</p>
