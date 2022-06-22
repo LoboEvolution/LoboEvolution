@@ -131,6 +131,5 @@ public class FontSetter implements SubPropertySetter {
     private void setDefaultFontValus(CSSStyleDeclarationImpl properties) {
         properties.setProperty(FONT_STYLE, CSSValues.NORMAL.getValue());
         properties.setProperty(FONT_VARIANT, CSSValues.NORMAL.getValue());
-        properties.setProperty(FONT_WEIGHT, CSSValues.BOLD400.getValue());
     }
 }

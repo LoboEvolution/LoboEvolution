@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.style;
 
+import com.gargoylesoftware.css.util.CSSProperties;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLHtmlElement;
@@ -46,7 +47,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
     private final Window window;
 
-    private final CSSStyleDeclaration style;
+    private CSSStyleDeclaration style;
 
 
     /**
@@ -482,8 +483,10 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getFontSize() {
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
+        final CSSStyleDeclaration style = element.getStyle();
         int fontSize;
-        if (Strings.isCssBlank(style.getFontSize()) && parent != null) {
+
+        if (Strings.isCssBlank(style.getFontSize()) && parent != null && parent.getStyle().getLength() > 0) {
             final CSSStyleDeclaration currentStyle = parent.getStyle();
             fontSize = FontValues.getPixelSize(currentStyle.getFontSize(), null, doc.getDefaultView(), -1);
         } else {
@@ -524,12 +527,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getFontWeight() {
-        return FontValues.getFontWeight(style.getFontWeight(), null);
+        final String font = FontValues.getFontWeight(style.getFontWeight(), null);
+        return Strings.isBlank(font) ?CSSValues.BOLD400.getValue()  : font;
     }
 
      /** {@inheritDoc} */
     @Override
     public String getFontFamily() {
+        final CSSStyleDeclaration style = element.getStyle();
         return FontValues.getFontFamily(style.getFontFamily(), null);
     }
 
@@ -554,6 +559,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getLineHeight() {
+        final CSSStyleDeclaration style = element.getStyle();
         final String lineHeight = style.getLineHeight();
         return Strings.isCssBlank(lineHeight) ? CSSValues.NORMAL.getValue() : lineHeight;
     }
@@ -1459,8 +1465,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
      /** {@inheritDoc} */
     @Override
-    public String getZIndex() {
-        return style.getZIndex();
+    public String getzIndex() {
+        return style.getzIndex();
     }
 
      /** {@inheritDoc} */

@@ -85,7 +85,7 @@ public class ComputedColorTest extends LoboUnitTest {
                 + "  }\n"
                 + "</script>\n"
                 + "<style type=\"text/css\">\n"
-                + "      #p1 { background-color: hsl(120, 75%, 50%, 0.2);} \n"
+                + "        #p1 { background-color: hsl(120, 75%, 50%, 0.2);} \n"
                 + "        #p2 { background-color: hsl(120, 75%, 50%, 40%);} \n"
                 + "        #p3 { background-color: hsl(120 75% 50% / 0.6);} \n"
                 + "        #p4 { background-color: hsl(120 75% 50% / 80%);} \n"

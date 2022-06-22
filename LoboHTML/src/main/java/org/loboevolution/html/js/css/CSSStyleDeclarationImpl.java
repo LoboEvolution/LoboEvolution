@@ -28,17 +28,29 @@ import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.setter.*;
+import org.loboevolution.laf.ColorFactory;
 import org.mozilla.javascript.annotations.JSFunction;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
+
+    private static final Pattern DOUBLE_PATTERN = Pattern.compile(
+            "[\\x00-\\x20]*[+-]?(NaN|Infinity|((((\\p{Digit}+)(\\.)?((\\p{Digit}+)?)" +
+                    "([eE][+-]?(\\p{Digit}+))?)|(\\.((\\p{Digit}+))([eE][+-]?(\\p{Digit}+))?)|" +
+                    "(((0[xX](\\p{XDigit}+)(\\.)?)|(0[xX](\\p{XDigit}+)?(\\.)(\\p{XDigit}+)))" +
+                    "[pP][+-]?(\\p{Digit}+)))[fFdD]?))[\\x00-\\x20]*");
+
+    private Pattern NUMERIC_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     private String overlayColor;
     private final HTMLElementImpl element;
     private final com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl style;
+
+    private static Map<String, Boolean> propertyLenght = new HashMap<>();
 
     private static final Map<String, SubPropertySetter> SUB_SETTERS = new HashMap<>();
 
@@ -61,6 +73,35 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         subSetters.put(BACKGROUND, new BackgroundSetter());
         subSetters.put(BACKGROUND_IMAGE, new BackgroundImageSetter());
         subSetters.put(FONT, new FontSetter());
+
+        propertyLenght.put("width", true);
+        propertyLenght.put("height", true);
+        propertyLenght.put("top", true);
+        propertyLenght.put("left", true);
+        propertyLenght.put("bottom", true);
+        propertyLenght.put("right", true);
+        propertyLenght.put("margin-top", true);
+        propertyLenght.put("margin-left", true);
+        propertyLenght.put("margin-right", true);
+        propertyLenght.put("margin-bottom", true);
+        propertyLenght.put("padding-top", true);
+        propertyLenght.put("padding-left", true);
+        propertyLenght.put("padding-right", true);
+        propertyLenght.put("padding-bottom", true);
+        propertyLenght.put("border-top-width", true);
+        propertyLenght.put("border-left-width", true);
+        propertyLenght.put("border-right-width", true);
+        propertyLenght.put("border-bottom-width", true);
+        propertyLenght.put("max-width", true);
+        propertyLenght.put("min-width", true);
+        propertyLenght.put("max-height", true);
+        propertyLenght.put("min-height", true);
+        propertyLenght.put("text-indent", true);
+        propertyLenght.put("font-size", true);
+        propertyLenght.put("word-spacing", true);
+        propertyLenght.put("letter-spacing", true);
+        propertyLenght.put("vertical-align", true);
+        propertyLenght.put("outline-width", true);
     }
 
     /**
@@ -117,36 +158,40 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @JSFunction
     public void setProperty(final String propertyName, final String value) {
-       this.setProperty(propertyName, value, "important");
+       this.setProperty(propertyName, value, "");
     }
 
     @Override
     public void setProperty(String propertyName, String value, String priority) {
 
-        if ("".equals(value) || "null".equals(value)) {
+        if (Strings.isBlank(value) || "null".equals(value)) {
+            if (Strings.isBlank(value)) value = "";
             style.setProperty(propertyName, value, priority);
-        } else if (!HtmlValues.isUnits(value) &&
-                !CSSValues.AUTO.getValue().equals(value) &&
-                !CSSValues.INHERIT.getValue().equals(value) &&
-                !CSSValues.INITIAL.getValue().equals(value) &&
-                !value.endsWith("%")) {
-            try {
+        } else if (HtmlValues.isUnits(value)) {
+            final int val = HtmlValues.getPixelSize(value, null, null, -1);
+            if (val > -1) {
+                style.setProperty(propertyName, value, priority);
+            }
+        } else if (propertyLenght.get(propertyName) != null && propertyLenght.get(propertyName)) {
+
+            if (DOUBLE_PATTERN.matcher(value).matches()) {
                 final Double d = Double.parseDouble(value);
                 if (!Double.isNaN(d) && !Double.isInfinite(d)) {
                     value += "px";
                     style.setProperty(propertyName, value, priority);
                 }
-            } catch (final Exception nfe) {}
-
-        } else {
-            if (HtmlValues.isUnits(value)) {
-                final int val = HtmlValues.getPixelSize(value, null, null, -1);
-                if (val > -1) {
-                    style.setProperty(propertyName, value, priority);
-                }
-            } else {
+            } else if (NUMERIC_PATTERN.matcher(value).matches()) {
+                value += "px";
+                style.setProperty(propertyName, value, priority);
+            } else if (CSSValues.AUTO.getValue().equals(value) ||
+                    CSSValues.INHERIT.getValue().equals(value) ||
+                    CSSValues.INITIAL.getValue().equals(value) ||
+                    value.endsWith("%")) {
                 style.setProperty(propertyName, value, priority);
             }
+
+        } else {
+            style.setProperty(propertyName, value, priority);
         }
     }
 
@@ -157,6 +202,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
      * @param value a {@link java.lang.String} object.
      */
     public final void setPropertyValueProcessed(String lowerCaseName, String value) {
+
         final SubPropertySetter setter = SUB_SETTERS.get(lowerCaseName);
         if (setter != null) {
             setter.changeValue(this, value);
@@ -190,8 +236,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     @Override
     public void setCssText(String text) {
-        this.element.setStyle(text);
         style.setCssText(text);
+        //this.element.setStyle(text);
     }
 
     @Override
@@ -1005,7 +1051,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public String getZIndex() {
+    public String getzIndex() {
         return this.getPropertyValue(Z_INDEX);
     }
 

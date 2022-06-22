@@ -366,7 +366,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     private void doTest(final String cssSelector, final String htmlSnippet, final String[] messages) {
         final String html = "<html id='elt0'><head>\n"
                 + "<style>\n"
-                + cssSelector + " { z-index: 10 }\n"
+                + cssSelector + " { z-index: 10px }\n"
                 + "</style>\n"
                 + "<script>\n"
                 + "  function test() {\n"
@@ -377,7 +377,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "    while (true) {\n"
                 + "      var elt = document.getElementById('elt' + i++);\n"
                 + "      if (!elt) return;\n"
-                + "      alert(getStyle(elt).zIndex == 10);\n"
+                + "      alert(getStyle(elt).zIndex == '10px');\n"
                 + "    }\n"
                 + "  }\n"
                 + "</script>\n"

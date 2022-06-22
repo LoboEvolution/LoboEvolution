@@ -353,10 +353,12 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	}
 
 	private void zIndexApplyStyle(CSSStyleDeclaration props) {
-		final String zIndex = props.getZIndex();
+		final String zIndex = props.getzIndex();
 		if (Strings.isNotBlank(zIndex)) {
+			HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
+			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
 			try {
-				this.zIndex = Integer.parseInt(zIndex);
+				this.zIndex =  HtmlValues.getPixelSize(zIndex, null, doc.getDefaultView(), 0);
 			} catch (final NumberFormatException err) {
 				logger.log(Level.WARNING,
 						"Unable to parse z-index [" + zIndex + "] in element " + this.modelNode + ".", err);

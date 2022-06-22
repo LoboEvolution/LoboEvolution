@@ -23,9 +23,14 @@
 package org.loboevolution.html.dom.domimpl;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.dom.DOMException;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.LexicalUnitImpl;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
@@ -41,6 +46,7 @@ import org.loboevolution.html.style.CSSPropertiesContext;
 import org.loboevolution.html.style.ComputedCSSStyleDeclarationImpl;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
+import org.loboevolution.info.PropertyCssInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -189,8 +195,10 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			return computedStyles;
 		}
 
-		final CSSStyleDeclaration sds = addStyleSheetDeclarations(false, pseudoElement);
-		this.computedStyles = new ComputedCSSStyleDeclarationImpl(this, sds);
+		final CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, pseudoElement);
+		final CSSStyleDeclarationImpl localStyle = (CSSStyleDeclarationImpl) getStyle();
+		style.getProperties().addAll(localStyle.getProperties());
+		this.computedStyles = new ComputedCSSStyleDeclarationImpl(this, style);
 		return this.computedStyles;
 	}
 
@@ -309,29 +317,24 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	}
 
 	public CSSStyleDeclaration getStyle() {
-
-		if (localStyleDeclarationState == null) {
-
-			CSSStyleDeclarationImpl styleDeclaration = new CSSStyleDeclarationImpl(this);
-			synchronized (this) {
-				final String style = getAttribute("style");
-				if (Strings.isNotBlank(style)) {
-					final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-					try {
-						styleDeclaration = new CSSStyleDeclarationImpl(this, parser.parseStyleDeclaration(style));
-					} catch (final Exception err) {
-						final String id = getId();
-						final String withId = Strings.isBlank(id) ? "" : " with ID '" + id + "'";
-						this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
-					}
+		CSSStyleDeclarationImpl styleDeclaration = new CSSStyleDeclarationImpl(this);
+		if (localStyleDeclarationState == null || localStyleDeclarationState.getLength() == 0) {
+			final String style = getAttribute("style");
+			if (Strings.isNotBlank(style)) {
+				final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+				try {
+					styleDeclaration = new CSSStyleDeclarationImpl(this, parser.parseStyleDeclaration(style));
+				} catch (final Exception err) {
+					final String id = getId();
+					final String withId = Strings.isBlank(id) ? "" : " with ID '" + id + "'";
+					this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
 				}
 			}
-			this.localStyleDeclarationState = styleDeclaration;
-			return styleDeclaration;
 
-		} else {
-			return localStyleDeclarationState;
+			this.localStyleDeclarationState = propertyValueProcessed(styleDeclaration);
 		}
+
+		return this.localStyleDeclarationState;
 	}
 
 	/** {@inheritDoc} */
@@ -571,13 +574,27 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 */
 	private CSSStyleDeclaration addStyleSheetDeclarations(boolean mouseOver, String elementName) {
 
-		localStyleDeclarationState = new CSSStyleDeclarationImpl(this);
+		CSSStyleDeclarationImpl localStyleDeclarationState = new CSSStyleDeclarationImpl(this);
 		final String classNames = getClassName();
 		final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
 		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray, mouseOver);
 		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
 			localStyleDeclarationState.getProperties().addAll(entry.getRule().getStyle().getProperties());
 		}
+		return propertyValueProcessed(localStyleDeclarationState);
+	}
+
+	private CSSStyleDeclarationImpl propertyValueProcessed(CSSStyleDeclarationImpl localStyleDeclarationState) {
+		final List<PropertyCssInfo> properties3 = new ArrayList<>();
+		List<Property> properties = localStyleDeclarationState.getProperties();
+		properties.forEach(prop -> {
+			CSSValueImpl propertyValue = prop.getValue();
+			properties3.add(new PropertyCssInfo(prop.getName(), propertyValue.getCssText()));
+		});
+
+		properties3.forEach(prop -> {
+			localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue());
+		});
 
 		return localStyleDeclarationState;
 	}

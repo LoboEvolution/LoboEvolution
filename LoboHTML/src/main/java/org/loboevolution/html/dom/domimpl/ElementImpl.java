@@ -22,7 +22,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
@@ -74,8 +73,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	private String outer;
 
 	private double scrollTop;
-
-	private boolean isCssText;
 
 	/**
 	 * <p>Constructor for ElementImpl.</p>
@@ -166,12 +163,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		if (!Strings.isValidString(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
-		}
-
-		if("style".equalsIgnoreCase(name) && Strings.isNotBlank(value) && !isCssText){
-			isCssText = true;
-			CSSStyleDeclaration style = ((HTMLElementImpl) this).getStyle();
-			style.setCssText(value);
 		}
 
 		map.setNamedItem(new AttrImpl(name, value, true, this, "id".equalsIgnoreCase(name)));
@@ -760,7 +751,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		int width = calculateWidth(true, true);
 		int height = calculateHeight(true, true);
 		String position = currentStyle.getPosition();
-		int topLeft = ((CSSStyleDeclarationImpl)currentStyle).getLength() > 0 ? 8 : 0;
+		int topLeft = currentStyle.getLength() > 0 ? 8 : 0;
 		int top = topLeft;
 		int left = topLeft;
 
