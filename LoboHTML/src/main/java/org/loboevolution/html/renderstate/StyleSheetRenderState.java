@@ -1229,7 +1229,8 @@ public class StyleSheetRenderState implements RenderState {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		final ClassLoader classLoader = getClass().getClassLoader();
 		Optional<Cursor> prevCursorOpt = Optional.empty();
-		CSSStyleDeclaration props = this.getCssProperties();
+		if(element == null) return prevCursorOpt;
+		CSSStyleDeclaration props = element.getStyle();
 
 		if (this.cursor != null) {
 			prevCursorOpt = this.cursor;

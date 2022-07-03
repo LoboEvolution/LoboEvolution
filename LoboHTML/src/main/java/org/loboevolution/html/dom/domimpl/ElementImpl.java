@@ -72,8 +72,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	private String outer;
 
-	private double scrollTop;
-
 	/**
 	 * <p>Constructor for ElementImpl.</p>
 	 *
@@ -688,7 +686,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
      */
     @Override
     public double getScrollTop() {
-		if (scrollTop > 0) return scrollTop;
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
         HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		return isVScrollable() ? htmlRendererContext.getScrolly() : 0;
@@ -699,7 +696,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
      */
     @Override
     public void setScrollTop(double scrollTop) {
-		this.scrollTop = scrollTop;
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
         HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 
@@ -744,7 +740,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public DOMRect getBoundingClientRect() {
 
-		CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+		CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final Window win = doc.getDefaultView();
 		final RenderState rs  = doc.getRenderState();
@@ -764,7 +760,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl) && CSSValues.ABSOLUTE.isEqual(position)) {
 				HTMLElementImpl p = (HTMLElementImpl) n;
-				CSSStyleDeclaration pCurrentStyle = p.getCurrentStyle();
+				CSSStyleDeclaration pCurrentStyle = p.getStyle();
 				String topTxt = pCurrentStyle.getTop();
 				String leftTxt = pCurrentStyle.getLeft();
 				int scrollTop = (int) p.getScrollTop();
@@ -981,7 +977,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
     private boolean isHScrollable() {
         String overflow;
-        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
         overflow = currentStyle.getOverflow();
         int widthChild = 0;
 
@@ -994,13 +990,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
     private boolean isVScrollable() {
         String overflow;
-        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
         overflow = currentStyle.getOverflow();
         int heightChild = 0;
 
         for (final Node child : (NodeListImpl) this.getChildNodes()) {
             if (child instanceof HTMLElementImpl) heightChild += ((HTMLElementImpl) child).getClientHeight();
         }
+
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
     }
 

@@ -150,7 +150,8 @@ public class JavaClassWrapper {
 		} else if (name.startsWith("set") &&
 				!name.equals("setTimeout") &&
 				!name.equals("setNamedItem") &&
-				!name.equals("setProperty")) {
+				!name.equals("setProperty") &&
+				!name.equals("setAttributeNode")) {
 			return method.getParameterTypes().length == 1;
 		} else {
 			return false;

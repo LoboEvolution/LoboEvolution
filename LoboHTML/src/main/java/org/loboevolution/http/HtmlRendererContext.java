@@ -849,19 +849,15 @@ public class HtmlRendererContext {
 		this.htmlPanel.scrollBy(x, y);
 	}
 
-
 	public double getScrollx() {
 		return scrollx;
 	}
-
 	public void setScrollx(double scrollx) {
 		this.scrollx = scrollx;
 	}
-
 	public double getScrolly() {
 		return scrolly;
 	}
-
 	public void setScrolly(double scrolly) {
 		this.scrolly = scrolly;
 	}

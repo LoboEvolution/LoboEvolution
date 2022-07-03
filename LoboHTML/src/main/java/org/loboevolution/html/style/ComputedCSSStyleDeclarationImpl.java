@@ -99,12 +99,13 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         if (Strings.isBlank(style.getBackgroundColor())) {
             return "rgb(0, 0, 0)";
         }
+
         final Color c = ColorFactory.getInstance().getColor(style.getBackgroundColor());
         if (c != null) {
             final float alpha = (float) (c.getAlpha()) / 255.0f;
 
             if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return "rgb(1, 1, 1)";
+                return "rgb(0, 0, 0)";
             }
 
             if (alpha > 0 && alpha < 1) {
@@ -299,7 +300,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         final Color c = ColorFactory.getInstance().getColor(col);
         if (c != null) {
             if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return "rgb(1, 1, 1)";
+                return "rgb(0, 0, 0)";
             }
             final float alpha = (float) (c.getAlpha()) / 255.0f;
             if (alpha > 0 && alpha < 1) {
@@ -1496,7 +1497,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         final Color c = ColorFactory.getInstance().getColor(style.getFill());
         if (c != null) {
             if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return "rgb(1, 1, 1)";
+                return "rgb(0, 0, 0)";
             }
             final float alpha = (float) (c.getAlpha()) / 255.0f;
             if (alpha > 0 && alpha < 1) {

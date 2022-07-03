@@ -31,9 +31,6 @@ import java.util.Map;
  */
 public final class ColorFactory {
 
-	/** Constant TRANSPARENT */
-	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
-
 	/** The instance. */
 	private static ColorFactory instance;
 	
@@ -136,7 +133,7 @@ public final class ColorFactory {
 			final float h = parseValue(splitComma[0].trim(), 360);
 			final float s = parsePercent(splitComma[1].trim());
 			final float l = parsePercent(splitComma[2].trim());
-			int alpha = 1;
+			float alpha = 1;
 			if(splitComma.length > 3) {
 				alpha = parseAlpha(splitComma[splitComma.length -1].trim());
 			}
@@ -164,7 +161,7 @@ public final class ColorFactory {
 			final int green =  (int) parseValue(splitComma[1].trim(), 255);
 			final int blue =  (int) parseValue(splitComma[2].trim(), 255);
 			if (splitComma.length > 3) {
-				int alpha = parseAlpha(splitComma[splitComma.length - 1].trim());
+				float alpha = parseAlpha(splitComma[splitComma.length - 1].trim());
 				color = new Color(normalize(red), normalize(green), normalize(blue), alpha);
 			} else {
 				color = new Color(normalize(red), normalize(green), normalize(blue));
@@ -239,11 +236,11 @@ public final class ColorFactory {
 		return new Color((int) (c.getRed() * f + inc), (int) (c.getGreen() * f + inc), (int) (c.getBlue() * f + inc));
 	}
 
-	private int parseAlpha(String alpha) {
+	private float parseAlpha(String alpha) {
 		if (alpha.endsWith("%")) {
-			return (int)parsePercent(alpha) / 100;
+			return parsePercent(alpha) / 100;
 		}
-		return (int)Float.parseFloat(alpha);
+		return Float.parseFloat(alpha);
 	}
 
 	private float parsePercent(String perc) {
