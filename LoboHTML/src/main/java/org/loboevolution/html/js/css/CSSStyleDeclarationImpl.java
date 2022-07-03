@@ -207,7 +207,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         if (setter != null) {
             setter.changeValue(this, value);
         } else {
-            setProperty(lowerCaseName, value, "important");
+            setProperty(lowerCaseName, value, "");
         }
     }
 
@@ -237,7 +237,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public void setCssText(String text) {
         style.setCssText(text);
-        //this.element.setStyle(text);
+        this.element.setStyle(text);
     }
 
     @Override
