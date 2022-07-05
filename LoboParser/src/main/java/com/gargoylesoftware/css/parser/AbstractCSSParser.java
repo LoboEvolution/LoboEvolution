@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.Locale;
 
 import org.w3c.dom.DOMException;
 
@@ -76,6 +77,9 @@ public abstract class AbstractCSSParser {
         parserMessages_.put("invalidExpr", "Error in expression.");
         parserMessages_.put("invalidExprColon", "Error in expression; '':'' found after identifier \"{0}\".");
         parserMessages_.put("invalidPrio", "Error in priority.");
+
+        parserMessages_.put("invalidPagePseudoClass",
+                "Invalid page pseudo class \"{0}\"; valid values are \"blank\", \"first\", \"left\", and \"right\".");
 
         parserMessages_.put("ignoringRule", "Ignoring the whole rule.");
         parserMessages_.put("ignoringFollowingDeclarations", "Ignoring the following declarations in this rule.");
@@ -271,10 +275,10 @@ public abstract class AbstractCSSParser {
         final StringBuilder message = new StringBuilder(getParserMessage(key));
         message.append(" (");
         if (e.expectedTokenSequences.length == 1) {
-            message.append(MessageFormat.format(messagePattern1, new Object[] {invalid, expected}));
+            message.append(MessageFormat.format(messagePattern1, invalid, expected));
         }
         else {
-            message.append(MessageFormat.format(messagePattern2, new Object[] {invalid, expected}));
+            message.append(MessageFormat.format(messagePattern2, invalid, expected));
         }
         message.append(")");
         return new CSSParseException(message.toString(),
@@ -1096,5 +1100,20 @@ public abstract class AbstractCSSParser {
             default :
                 return -1;
         }
+    }
+
+    protected String normalizeAndValidatePagePseudoClass(final Token t) {
+        final String pseudo = unescape(t.image, false);
+        final String pseudoLC = pseudo.toLowerCase(Locale.ROOT);
+        if ("blank".equals(pseudoLC)
+                || "left".equals(pseudoLC)
+                || "first".equals(pseudoLC)
+                || "right".equals(pseudoLC)) {
+            return pseudoLC;
+        }
+
+        final String pattern = getParserMessage("invalidPagePseudoClass");
+        throw new CSSParseException(MessageFormat.format(pattern, pseudo),
+            getInputSource().getURI(), t.beginLine, t.beginColumn);
     }
 }

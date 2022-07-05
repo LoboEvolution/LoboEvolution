@@ -25,7 +25,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.FontKey;
@@ -51,7 +51,7 @@ public class FontValues extends HtmlValues {
 				build();
 	}
 
-	public static FontKey getFontKey(FontKey key, HTMLElementImpl element, CSS3Properties style, RenderState prevRenderState) {
+	public static FontKey getFontKey(FontKey key, HTMLElementImpl element, CSSStyleDeclaration style, RenderState prevRenderState) {
 		HTMLDocumentImpl document = (HTMLDocumentImpl) element.getDocumentNode();
 
 		String fontSize = style.getFontSize();

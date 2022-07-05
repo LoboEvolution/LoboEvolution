@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.css.util;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSParseException;
-
-import java.io.Serializable;
 
 /**
  * Helper implementation of {@link CSSErrorHandler}, which throws CssException in case of problems.

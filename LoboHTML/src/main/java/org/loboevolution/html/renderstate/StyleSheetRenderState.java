@@ -28,7 +28,6 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
-import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.renderer.RFlex;
@@ -165,7 +164,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (axp != -1) {
 			return axp;
 		}
-		final CSS3Properties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		String textAlign = props == null ? null : props.getTextAlign();
 		if (Strings.isNotBlank(textAlign)) {
 			// Fall back to align attribute.
@@ -423,7 +422,7 @@ public class StyleSheetRenderState implements RenderState {
 			this.iDisplay = displayInt;
 			return displayInt;
 		} else {
-			final CSS3Properties props = this.getCssProperties();
+			final CSSStyleDeclaration props = this.getCssProperties();
 			final String displayText = props == null ? null : props.getDisplay();
 			final String displayTextTL = Strings.isNotBlank(displayText) ? displayText : "";
 			display = CSSValues.get(displayTextTL);

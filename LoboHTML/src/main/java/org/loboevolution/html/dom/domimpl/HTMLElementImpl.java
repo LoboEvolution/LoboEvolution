@@ -206,17 +206,19 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 */
 	public CSSStyleDeclaration getCurrentStyle() {
-		CSSStyleDeclaration sds;
+		CSSStyleDeclarationImpl style;
 		synchronized (this) {
-			sds = this.currentStyleDeclarationState;
-			if (sds != null) {
-				return sds;
+			style = (CSSStyleDeclarationImpl) this.currentStyleDeclarationState;
+			if (style != null) {
+				return style;
 			}
 		}
 
-		sds = addStyleSheetDeclarations(false, getTagName());
-		this.currentStyleDeclarationState = sds;
-		return sds;
+		style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, getTagName());
+		final CSSStyleDeclarationImpl localStyle = (CSSStyleDeclarationImpl) getStyle();
+		style.getProperties().addAll(localStyle.getProperties());
+		this.currentStyleDeclarationState = style;
+		return style;
 	}
 
 
@@ -376,15 +378,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 */
 	public void setCharset(String charset) {
 		setAttribute("charset", charset);
-	}
-
-	/**
-	 * <p>setCurrentStyle.</p>
-	 *
-	 * @param value a {@link java.lang.Object} object.
-	 */
-	public void setCurrentStyle(Object value) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Cannot set currentStyle property");
 	}
 	
 	/**

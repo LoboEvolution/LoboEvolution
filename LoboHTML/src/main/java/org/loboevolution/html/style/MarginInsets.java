@@ -22,7 +22,6 @@ package org.loboevolution.html.style;
 
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -34,12 +33,12 @@ public class MarginInsets {
 	/**
 	 * <p>getMarginInsets.</p>
 	 *
-	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
-	public static HtmlInsets getMarginInsets(CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
+	public static HtmlInsets getMarginInsets(CSSStyleDeclaration cssProperties, HTMLElementImpl element, RenderState renderState) {
 		final CSSStyleDeclaration props = element.getParentStyle();
 		if (props == null) {
 			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
@@ -54,12 +53,12 @@ public class MarginInsets {
 	/**
 	 * <p>getPaddingInsets.</p>
 	 *
-	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
-	public static HtmlInsets getPaddingInsets(CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
+	public static HtmlInsets getPaddingInsets(CSSStyleDeclaration cssProperties, HTMLElementImpl element, RenderState renderState) {
 		final CSSStyleDeclaration props = element.getParentStyle();
 		if (props == null) {
 			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);

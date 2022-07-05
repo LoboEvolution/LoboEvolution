@@ -19,6 +19,7 @@ import java.io.IOException;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.util.LangUtils;
+import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
 
 /**
  * Implementation of CSSPageRule.
@@ -75,6 +76,7 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
     public void setCssText(final String cssText) throws DOMException {
         try {
             final CSSOMParser parser = new CSSOMParser();
+            parser.setErrorHandler(ThrowCssExceptionErrorHandler.INSTANCE);
             final AbstractCSSRuleImpl r = parser.parseRule(cssText);
 
             // The rule must be a page rule
@@ -88,13 +90,7 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
                     DOMException.EXPECTING_PAGE_RULE);
             }
         }
-        catch (final CSSException e) {
-            throw new DOMException(
-                DOMException.SYNTAX_ERR,
-                DOMException.SYNTAX_ERROR,
-                e.getMessage());
-        }
-        catch (final IOException e) {
+        catch (final CSSException | IOException e) {
             throw new DOMException(
                 DOMException.SYNTAX_ERR,
                 DOMException.SYNTAX_ERROR,
@@ -114,9 +110,31 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
         return pseudoPage_;
     }
 
+    public void setSelectorText(final String selectorText) throws DOMException {
+        try {
+            final CSSOMParser parser = new CSSOMParser();
+            parser.setErrorHandler(ThrowCssExceptionErrorHandler.INSTANCE);
+            final AbstractCSSRuleImpl r = parser.parseRule("@page " + selectorText + " {}");
+
+            // The rule must be a page rule
+            if (r instanceof CSSPageRuleImpl) {
+                pseudoPage_ = ((CSSPageRuleImpl) r).pseudoPage_;
+            }
+            else {
+                throw new DOMException(
+                    DOMException.INVALID_MODIFICATION_ERR,
+                        DOMException.EXPECTING_PAGE_RULE);
+            }
+        }
+        catch (final CSSException | IOException e) {
+            throw new DOMException(
+                DOMException.SYNTAX_ERR,
+                DOMException.SYNTAX_ERROR,
+                e.getMessage());
+        }
+    }
+
     /**
-     * <p>getStyle.</p>
-     *
      * @return the style
      */
     public CSSStyleDeclarationImpl getStyle() {

@@ -27,7 +27,6 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.gui.HtmlPanel;
-import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.BorderInsets;
@@ -597,7 +596,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			CSS3Properties props = element.getCurrentStyle();
+			CSSStyleDeclaration props = element.getCurrentStyle();
 			if (props == null) {
 				return -1;
 			}
@@ -661,7 +660,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		if (rootNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) rootNode;
 			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
-			CSS3Properties props = element.getCurrentStyle();
+			CSSStyleDeclaration props = element.getCurrentStyle();
 			if (props == null) {
 				return -1;
 			}
@@ -876,7 +875,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			final Object rootNode = this.modelNode;
 			if (rootNode instanceof HTMLElementImpl) {
 				final HTMLElementImpl element = (HTMLElementImpl) rootNode;
-				final CSS3Properties props = element.getCurrentStyle();
+				final CSSStyleDeclaration props = element.getCurrentStyle();
 				if (props == null) {
 					return false;
 				}

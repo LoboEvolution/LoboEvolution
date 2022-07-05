@@ -24,15 +24,12 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of CSSRuleList.
  *
  * @author Ronald Brill
- *
  */
 public class CSSRuleListImpl implements Serializable {
 
     private final List<AbstractCSSRuleImpl> rules_ = new ArrayList<>();
 
     /**
-     * <p>getRules.</p>
-     *
      * @return the rules
      */
     public List<AbstractCSSRuleImpl> getRules() {
@@ -47,8 +44,6 @@ public class CSSRuleListImpl implements Serializable {
     }
 
     /**
-     * <p>getLength.</p>
-     *
      * @return the number of rules
      */
     public int getLength() {
@@ -57,7 +52,6 @@ public class CSSRuleListImpl implements Serializable {
 
     /**
      * Add a rule.
-     *
      * @param rule the rule to be added
      */
     public void add(final AbstractCSSRuleImpl rule) {
@@ -66,7 +60,6 @@ public class CSSRuleListImpl implements Serializable {
 
     /**
      * Insert a rule at the given pos.
-     *
      * @param rule the rule to be inserted
      * @param index the insert pos
      */
@@ -76,14 +69,12 @@ public class CSSRuleListImpl implements Serializable {
 
     /**
      * Delete the rule at the given pos.
-     *
      * @param index the delete pos
      */
     public void delete(final int index) {
         getRules().remove(index);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -96,7 +87,6 @@ public class CSSRuleListImpl implements Serializable {
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -124,7 +114,6 @@ public class CSSRuleListImpl implements Serializable {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;
@@ -132,3 +121,137 @@ public class CSSRuleListImpl implements Serializable {
         return hash;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -29,7 +29,6 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
@@ -69,7 +68,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (axp != -1) {
 			return axp;
 		}
-		final CSS3Properties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		if (props != null) {
 			final String textAlign = props.getTextAlign();
 			if (textAlign != null && textAlign.length() != 0) {
@@ -121,7 +120,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (ayp != -1) {
 			return ayp;
 		}
-		final CSS3Properties props = getCssProperties();
+		final CSSStyleDeclaration props = getCssProperties();
 		if (props != null) {
 			final String textAlign = props.getVerticalAlign();
 			if (textAlign != null && textAlign.length() != 0) {
@@ -310,7 +309,7 @@ public class TableCellRenderState extends DisplayRenderState {
 	public Font getFont() {
 
 		if ("TH".equals(element.getNodeName())) {
-			final CSS3Properties props = element.getCurrentStyle();
+			final CSSStyleDeclaration props = element.getCurrentStyle();
 			final String fontSize = props == null ? null : props.getFontSize();
 			final String fSize = Strings.isNotBlank(fontSize) ? fontSize : "1.2rem";
 			FontKey key = FontValues.getDefaultFontKey();

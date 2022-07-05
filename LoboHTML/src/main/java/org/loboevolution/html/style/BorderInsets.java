@@ -23,7 +23,6 @@ package org.loboevolution.html.style;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSS3Properties;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.BorderInfo;
@@ -72,12 +71,12 @@ public class BorderInsets {
 	/**
 	 * <p>getBorderInfo.</p>
 	 *
-	 * @param properties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+	 * @param properties a {@linkimport org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.info.BorderInfo} object.
 	 */
-	public static BorderInfo getBorderInfo(CSS3Properties properties, HTMLElementImpl element, RenderState renderState) {
+	public static BorderInfo getBorderInfo(CSSStyleDeclaration properties, HTMLElementImpl element, RenderState renderState) {
 		final BorderInfo binfo = new BorderInfo();
 		
 		final int topStyle = getBorderStyle(element, properties.getBorderTopStyle());
@@ -109,11 +108,11 @@ public class BorderInsets {
 	 * <p>populateBorderInsets.</p>
 	 *
 	 * @param binfo a {@link org.loboevolution.info.BorderInfo} object.
-	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSS3Properties} object.
+	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */
-	private static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, HTMLElementImpl element, RenderState renderState) {
+	private static void populateBorderInsets(BorderInfo binfo, CSSStyleDeclaration cssProperties, HTMLElementImpl element, RenderState renderState) {
 		final CSSStyleDeclaration props = element.getParentStyle();
 		if (props == null) {
 			final HtmlInsets insets = HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
