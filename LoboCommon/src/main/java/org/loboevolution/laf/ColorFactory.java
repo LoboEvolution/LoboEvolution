@@ -205,8 +205,10 @@ public final class ColorFactory {
 	 */
 	public boolean isColor(String colorSpec) {
 		final String normalSpec = colorSpec.toLowerCase();
-		final String[] list = {"#", RGBA_START, RGB_START, HSLA_START, HSL_START};
-		return Arrays.asList(list).contains(normalSpec) || this.colorMap.containsKey(normalSpec);
+		final boolean starts = normalSpec.startsWith("#") ||
+				normalSpec.startsWith(RGBA_START) || normalSpec.startsWith(RGB_START) ||
+				normalSpec.startsWith(HSLA_START) || normalSpec.startsWith(HSL_START);
+		return starts || this.colorMap.containsKey(normalSpec);
 	}
 	
 	/**
