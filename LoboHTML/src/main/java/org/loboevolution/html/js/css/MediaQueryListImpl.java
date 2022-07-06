@@ -21,7 +21,6 @@
 package org.loboevolution.html.js.css;
 
 import com.gargoylesoftware.css.dom.MediaListImpl;
-
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.node.css.MediaQueryList;
 import org.loboevolution.html.style.CSSUtilities;

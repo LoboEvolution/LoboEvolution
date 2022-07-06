@@ -1037,16 +1037,16 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  try {\n"
                 + "    var d = document.getElementById('div1');\n"
                 + "    var s = window.getComputedStyle(d, null);\n"
-                + "    alert(s.getPropertyValue('test'));\n"
+                + "    alert(s.getPropertyValue('background-color'));\n"
                 + "    alert(s.getPropertyValue('color'));\n"
-                + "  } catch (e) { alert('exception'); }\n"
+                + "  } catch (e) { alert(e); }\n"
                 + "}\n"
                 + "</script>\n"
-                + "<style>#div1 { test: red }</style>\n"
+                + "<style>#div1 { background-color: red }</style>\n"
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<div id='div1' style='color: blue'>foo</div></body></html>";
-        final String[] messages = {"", "rgb(0, 0, 255)"};
+        final String[] messages = {"red", "blue"};
         checkHtmlAlert(html, messages);
     }
 

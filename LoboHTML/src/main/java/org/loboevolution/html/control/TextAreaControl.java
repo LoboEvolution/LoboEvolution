@@ -19,10 +19,10 @@
  */
 package org.loboevolution.html.control;
 
-import java.awt.ComponentOrientation;
-
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
+
+import java.awt.*;
 
 /**
  * <p>TextAreaControl class.</p>

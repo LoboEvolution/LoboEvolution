@@ -18,14 +18,10 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 package org.loboevolution.html.dom.domimpl;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
+
+import java.util.*;
 
 /**
  * <p>AbstractList class.</p>

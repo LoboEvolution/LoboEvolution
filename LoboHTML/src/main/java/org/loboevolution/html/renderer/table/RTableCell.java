@@ -24,10 +24,10 @@ package org.loboevolution.html.renderer.table;
 
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderer.info.RLayoutInfo;
-import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.SizeInfo;
 
@@ -108,7 +108,7 @@ public class RTableCell extends RBlock {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getHeightText() {
-        AbstractCSSProperties props = this.cellElement.getCurrentStyle();
+        CSSStyleDeclaration props = this.cellElement.getCurrentStyle();
         String heightText = props == null ? null : props.getHeight();
         if (heightText == null) {
             return this.cellElement.getCurrentStyle().getHeight();
@@ -168,7 +168,7 @@ public class RTableCell extends RBlock {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getWidthText() {
-		AbstractCSSProperties props = this.cellElement.getCurrentStyle();
+		CSSStyleDeclaration props = this.cellElement.getCurrentStyle();
 		String widthText = props == null ? null : props.getWidth();
 		if (widthText == null) {
         	return this.cellElement.getCurrentStyle().getWidth();

@@ -20,22 +20,6 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.Graphics;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.HeadlessException;
-import java.awt.Image;
-import java.awt.Transparency;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.PixelGrabber;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
@@ -44,6 +28,14 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.PixelGrabber;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>InputImage class.</p>

@@ -20,7 +20,6 @@
 
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
 import javax.swing.*;

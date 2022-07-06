@@ -20,17 +20,16 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.NoninvertibleTransformException;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
-
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGRectElement;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 
 /**
  * <p>SVGRectElementImpl class.</p>

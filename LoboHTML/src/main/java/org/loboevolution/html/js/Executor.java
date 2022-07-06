@@ -19,19 +19,19 @@
  */
 package org.loboevolution.html.js;
 
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.events.Event;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.events.Event;
+
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>Executor class.</p>

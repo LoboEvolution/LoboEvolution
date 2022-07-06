@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.js;
 
-import javax.swing.Timer;
+import javax.swing.*;
 
 class TaskWrapper {
 	public final Timer timer;

@@ -20,17 +20,16 @@
 
 package org.loboevolution.html.style.setter;
 
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import org.loboevolution.common.Urls;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.html.style.HtmlValues;
+
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.loboevolution.common.Urls;
-import org.loboevolution.html.style.AbstractCSSProperties;
-import org.loboevolution.html.style.HtmlValues;
-
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
 /**
  * <p>BackgroundImageSetter class.</p>
@@ -41,20 +40,20 @@ public class BackgroundImageSetter implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
-			boolean important) {
+	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
 		String baseHref = null;
 		String finalValue;
-		if (declaration != null) {
-			final AbstractCSSRuleImpl rule = declaration.getParentRule();
-			if (rule != null) {
-				final CSSStyleSheetImpl sheet = rule.getParentStyleSheet();
-				final CSSStyleSheetImpl ssheet = sheet;
-				baseHref = ssheet.getHref();
-			}
+		CSSStyleDeclarationImpl props = (CSSStyleDeclarationImpl) declaration;
+
+		final AbstractCSSRuleImpl rule = (AbstractCSSRuleImpl) props.getParentRule();
+		if (rule != null) {
+			final CSSStyleSheetImpl sheet = rule.getParentStyleSheet();
+			final CSSStyleSheetImpl ssheet = sheet;
+			baseHref = ssheet.getHref();
 		}
+
 		if (baseHref == null) {
-			baseHref = properties.getContext() != null ? properties.getContext().getDocumentBaseURI() : null;
+			baseHref = props.getContext() != null ? props.getContext().getDocumentBaseURI() : null;
 		}
 		final String start = "url(";
 		if (newValue == null || !newValue.toLowerCase().startsWith(start)) {
@@ -89,6 +88,6 @@ public class BackgroundImageSetter implements SubPropertySetter {
 				}
 			}
 		}
-		properties.setPropertyValueLCAlt(BACKGROUND_IMAGE, finalValue, important);
+		declaration.setProperty(BACKGROUND_IMAGE, finalValue);
 	}
 }

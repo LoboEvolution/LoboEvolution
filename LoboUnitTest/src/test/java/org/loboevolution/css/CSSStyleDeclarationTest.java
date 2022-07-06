@@ -189,7 +189,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "</script>\n"
                         + "<span id='span'>x</span>\n"
                         + "</body></html>";
-        final String[] messages = {"30px", "", "30px", "arial", "", "arial"};
+        final String[] messages = {"30px", null, "30px", "arial", null, "arial"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1103,7 +1103,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 "<html><body onload='test()'>\n"
                         + "<a id='a' href='#' style='background-color:green'>go</a>\n"
                         + "<script>\n"
-
                         + "  function test() {\n"
                         + "    var node = document.getElementById('a');\n"
                         + "    try {\n"
@@ -1508,7 +1507,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "  }\n"
                         + "</script>\n"
                         + "</body></html>";
-        final String[] messages = {null, "important", null, "important"};
+        final String[] messages = {"", "important", "", "important"};
         checkHtmlAlert(html, messages);
     }
 

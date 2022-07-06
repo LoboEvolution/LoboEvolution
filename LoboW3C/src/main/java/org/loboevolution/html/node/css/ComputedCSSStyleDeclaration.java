@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -18,24 +18,14 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.style.setter;
+package org.loboevolution.html.node.css;
 
-/**
- * <p>PropertyCSS class.</p>
- */
-public class PropertyCSS {
+public interface ComputedCSSStyleDeclaration extends CSS3Properties {
 
-	public final boolean important;
-	public final String value;
-
-	/**
-	 * <p>Constructor for PropertyCSS.</p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 * @param important a boolean.
-	 */
-	public PropertyCSS(final String value, final boolean important) {
-		this.value = value;
-		this.important = important;
-	}
+    /**
+     * <p> getPropertyValue. </p>
+     * @param property a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
+    String getPropertyValue(String property);
 }

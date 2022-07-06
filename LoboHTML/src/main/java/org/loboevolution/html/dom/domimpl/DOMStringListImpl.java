@@ -22,11 +22,11 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.node.DOMStringList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import org.loboevolution.html.node.DOMStringList;
 
 /**
  * <p>DOMStringListImpl class.</p>

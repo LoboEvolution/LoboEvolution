@@ -23,7 +23,7 @@ package org.loboevolution.html.renderstate;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
@@ -54,7 +54,7 @@ public class SmallRenderState extends RenderStateDelegator {
 
     @Override
     public Font getFont() {
-        final AbstractCSSProperties props = element.getCurrentStyle();
+        final CSSStyleDeclaration props = element.getCurrentStyle();
         final String fontSize = props == null ? null : props.getFontSize();
         FontKey key = FontValues.getDefaultFontKey();
         final String fSize = Strings.isNotBlank(fontSize) ? fontSize : CSSValues.SMALLER.getValue();

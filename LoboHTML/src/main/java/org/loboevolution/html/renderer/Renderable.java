@@ -22,11 +22,11 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Graphics;
-import java.util.Iterator;
-
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+
+import java.awt.*;
+import java.util.Iterator;
 
 /**
  * Represents a renderer (view) node.

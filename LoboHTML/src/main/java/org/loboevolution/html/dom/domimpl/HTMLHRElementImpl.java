@@ -21,7 +21,6 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLHRElement;
-import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.HRRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 

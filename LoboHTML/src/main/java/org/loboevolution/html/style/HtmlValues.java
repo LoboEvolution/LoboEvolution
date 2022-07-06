@@ -508,7 +508,7 @@ public class HtmlValues {
 				token.endsWith("mm") ||
 				token.endsWith("ex") ||
 				token.endsWith("em") ||
-				token.endsWith("in") ||
+				(token.endsWith("in")  && !token.startsWith("zoom")) ||
 				token.endsWith("q") ||
 				token.endsWith("vh") ||
 				token.endsWith("vw") ||

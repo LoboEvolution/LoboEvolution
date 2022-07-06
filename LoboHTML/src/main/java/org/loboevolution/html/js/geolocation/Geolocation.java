@@ -20,16 +20,16 @@
 
 package org.loboevolution.html.js.geolocation;
 
-import java.net.UnknownHostException;
-import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.mozilla.javascript.Function;
+
+import java.net.UnknownHostException;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>

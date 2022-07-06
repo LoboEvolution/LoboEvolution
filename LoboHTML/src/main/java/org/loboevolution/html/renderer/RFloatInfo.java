@@ -19,9 +19,9 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Graphics;
-
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+
+import java.awt.*;
 
 final class RFloatInfo implements Renderable {
 	private final BoundableRenderable element;

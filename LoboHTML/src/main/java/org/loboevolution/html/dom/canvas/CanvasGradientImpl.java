@@ -19,16 +19,13 @@
  */
 package org.loboevolution.html.dom.canvas;
 
-import java.awt.Color;
-import java.awt.LinearGradientPaint;
-import java.awt.Paint;
-import java.awt.RadialGradientPaint;
+import org.loboevolution.html.dom.CanvasGradient;
+import org.loboevolution.laf.ColorFactory;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.loboevolution.html.dom.CanvasGradient;
-import org.loboevolution.laf.ColorFactory;
 
 
 /**

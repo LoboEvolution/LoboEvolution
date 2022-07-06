@@ -20,10 +20,10 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.svg.SVGAnimationElement;
 import org.loboevolution.html.dom.svg.SVGElement;
-import com.gargoylesoftware.css.dom.DOMException;
 
 import java.util.StringTokenizer;
 import java.util.Vector;

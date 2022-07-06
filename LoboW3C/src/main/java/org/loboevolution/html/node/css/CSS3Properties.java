@@ -108,4 +108,50 @@ public interface CSS3Properties extends CSS2Properties {
 	 * @param flt a {@link java.lang.String} object.
 	 */
 	void setFloat(String flt);
+
+	void setFill(String value);
+
+	void setFillOpacity(String value);
+
+	void setOpacity(String value);
+
+	void setTransform(String value);
+
+	void setStrokeWidth(String value);
+
+	void setStrokeOpacity(String value);
+
+	void setStrokeMiterLimit(String value);
+
+	void setStrokeLineJoin(String value);
+
+	void setStrokeDashArray(String value);
+
+	void setStroke(String value);
+
+	void setStrokeLineCap(String value);
+
+	String getStroke();
+
+	String getStopColor();
+
+	String getStopOpacity();
+
+	String getStrokeOpacity();
+
+	String getStrokeLineJoin();
+
+	String getStrokeMiterLimit();
+
+	String getStrokeDashArray();
+
+	String getOpacity();
+
+	String getFillOpacity();
+
+	String getStrokeLineCap();
+
+	String getStrokeWidth();
+
+	String getTransform();
 }

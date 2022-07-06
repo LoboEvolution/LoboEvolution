@@ -20,12 +20,12 @@
 
 package org.loboevolution.html.dom.rss;
 
-import java.awt.Graphics2D;
-import java.util.Iterator;
-
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
+
+import java.awt.*;
+import java.util.Iterator;
 
 /**
  * <p>RSSItemElementImpl class.</p>

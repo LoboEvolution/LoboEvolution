@@ -22,24 +22,11 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLScriptElement;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
@@ -52,7 +39,19 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.UserDataHandler;
-import org.loboevolution.html.node.Document;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.MissingResourceException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>HTMLScriptElementImpl class.</p>

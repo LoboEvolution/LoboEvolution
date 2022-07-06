@@ -24,9 +24,9 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.events.EventTarget;
-import org.loboevolution.html.node.NodeType;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.events.EventException;
 

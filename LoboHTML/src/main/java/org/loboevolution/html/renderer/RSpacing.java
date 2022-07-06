@@ -22,9 +22,9 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Graphics;
-
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+
+import java.awt.*;
 
 /**
  * This is used when there's padding or margins in inline elements.

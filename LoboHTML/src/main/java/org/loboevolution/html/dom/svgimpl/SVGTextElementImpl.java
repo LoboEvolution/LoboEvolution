@@ -20,25 +20,19 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.font.FontRenderContext;
-import java.awt.font.TextLayout;
-import java.awt.geom.*;
-import java.util.StringTokenizer;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.dom.svg.SVGAnimatedEnumeration;
-import org.loboevolution.html.dom.svg.SVGAnimatedLength;
-import org.loboevolution.html.dom.svg.SVGAnimatedNumberList;
-import org.loboevolution.html.dom.svg.SVGMatrix;
-import org.loboevolution.html.dom.svg.SVGPoint;
-import org.loboevolution.html.dom.svg.SVGRect;
-import org.loboevolution.html.dom.svg.SVGTextElement;
-
+import org.loboevolution.html.dom.svg.*;
 import org.loboevolution.html.node.NodeType;
+
+import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Path2D;
+import java.util.StringTokenizer;
 
 /**
  * <p>SVGTextElementImpl class.</p>

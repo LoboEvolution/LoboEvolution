@@ -20,12 +20,12 @@
 
 package org.loboevolution.html.js;
 
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.mozilla.javascript.Context;
+
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.mozilla.javascript.Context;
 
 class ExpressionTimerTask extends WeakWindowTask {
 	

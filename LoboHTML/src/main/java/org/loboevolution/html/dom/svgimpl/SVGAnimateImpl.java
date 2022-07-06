@@ -20,18 +20,16 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.StringTokenizer;
-
-import javax.swing.JComponent;
-import javax.swing.Timer;
-
 import org.loboevolution.html.dom.smil.ElementTargetAttributes;
 import org.loboevolution.html.dom.smil.TimeList;
 import org.loboevolution.html.dom.svg.SVGTransform;
 import org.loboevolution.laf.ColorFactory;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.StringTokenizer;
 
 /**
  * <p>SVGAnimateImpl class.</p>

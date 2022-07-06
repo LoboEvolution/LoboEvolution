@@ -20,14 +20,12 @@
 
 package org.loboevolution.html.style.setter;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
-
-import java.util.Arrays;
 
 /**
  * <p>FontSetter class.</p>
@@ -38,7 +36,8 @@ public class FontSetter implements SubPropertySetter {
      * {@inheritDoc}
      */
     @Override
-    public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration, boolean important) {
+    public void changeValue(CSSStyleDeclaration declaration, String newValue) {
+        CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
         if (Strings.isNotBlank(newValue)) {
             final String fontSpecTL = newValue.toLowerCase();
             final String[] tokens = fontSpecTL.split(" ");
@@ -48,8 +47,8 @@ public class FontSetter implements SubPropertySetter {
             int i;
 
             if (length > 0) {
-                properties.setPropertyValueLCAlt(FONT, newValue, important);
-                setDfaultFontValus(properties, important);
+                properties.setProperty(FONT, newValue);
+                setDefaultFontValus(properties);
             }
 
             for (i = 0; i < length; i++) {
@@ -60,17 +59,17 @@ public class FontSetter implements SubPropertySetter {
                 }
 
                 if (FontValues.isFontStyle(token)) {
-                    properties.setPropertyValueLCAlt(FONT_STYLE, token, important);
+                    properties.setProperty(FONT_STYLE, token);
                     continue;
                 }
 
                 if (FontValues.isFontVariant(token)) {
-                    properties.setPropertyValueLCAlt(FONT_VARIANT, token, important);
+                    properties.setProperty(FONT_VARIANT, token);
                     continue;
                 }
 
                 if (FontValues.isFontWeight(token)) {
-                    properties.setPropertyValueLCAlt(FONT_WEIGHT, token, important);
+                    properties.setProperty(FONT_WEIGHT, token);
                     continue;
                 }
 
@@ -85,9 +84,9 @@ public class FontSetter implements SubPropertySetter {
 
 
                     if(lineHeightText == null) {
-                        properties.setPropertyValueLCAlt(LINE_HEIGHT, token, important);
+                        properties.setProperty(LINE_HEIGHT, token);
                     } else{
-                        properties.setPropertyValueLCAlt(LINE_HEIGHT, lineHeightText, important);
+                        properties.setProperty(LINE_HEIGHT, lineHeightText);
                     }
 
                     isSlash = false;
@@ -101,11 +100,11 @@ public class FontSetter implements SubPropertySetter {
                     final String lineHeightText = slashIdx == -1 ? null : token.substring(slashIdx + 1);
 
                     if (HtmlValues.isUnits(fontSizeText)) {
-                        properties.setPropertyValueLCAlt(FONT_SIZE, fontSizeText, important);
+                        properties.setProperty(FONT_SIZE, fontSizeText);
                     }
 
                   if (lineHeightText != null && HtmlValues.isUnits(lineHeightText)) {
-                        properties.setPropertyValueLCAlt(LINE_HEIGHT, lineHeightText, important);
+                        properties.setProperty(LINE_HEIGHT, lineHeightText);
                     } else {
                         isSlash = true;
                     }
@@ -114,24 +113,23 @@ public class FontSetter implements SubPropertySetter {
                 }
 
                 if (HtmlValues.isUnits(token)) {
-                    properties.setPropertyValueLCAlt(FONT_SIZE, token, important);
+                    properties.setProperty(FONT_SIZE, token);
                     continue;
                 }
 
                 String fontFamily = properties.getPropertyValue(FONT_FAMILY);
                 if(Strings.isCssBlank(fontFamily)) {
-                    properties.setPropertyValueLCAlt(FONT_FAMILY, token.trim(), important);
+                    properties.setProperty(FONT_FAMILY, token.trim());
                 } else {
-                    properties.setPropertyValueLCAlt(FONT_FAMILY, fontFamily + ", " + token.trim(), important);
+                    properties.setProperty(FONT_FAMILY, fontFamily + ", " + token.trim());
                 }
                 continue;
             }
         }
     }
 
-    private void setDfaultFontValus(AbstractCSSProperties properties, boolean important) {
-        properties.setPropertyValueLCAlt(FONT_STYLE, CSSValues.NORMAL.getValue(), important);
-        properties.setPropertyValueLCAlt(FONT_VARIANT, CSSValues.NORMAL.getValue(), important);
-        properties.setPropertyValueLCAlt(FONT_WEIGHT, CSSValues.BOLD400.getValue(), important);
+    private void setDefaultFontValus(CSSStyleDeclarationImpl properties) {
+        properties.setProperty(FONT_STYLE, CSSValues.NORMAL.getValue());
+        properties.setProperty(FONT_VARIANT, CSSValues.NORMAL.getValue());
     }
 }

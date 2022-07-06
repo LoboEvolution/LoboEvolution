@@ -23,8 +23,6 @@
 
 package org.loboevolution.html.dom.xpath;
 
-import java.util.Objects;
-
 import com.gargoylesoftware.css.dom.DOMException;
 import org.apache.xpath.XPath;
 import org.apache.xpath.XPathContext;
@@ -36,6 +34,8 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
+
+import java.util.Objects;
 
 /**
  *

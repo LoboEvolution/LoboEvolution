@@ -22,23 +22,17 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.SwingUtilities;
-
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Author J. H. S.

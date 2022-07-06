@@ -24,12 +24,8 @@
 package org.loboevolution.html.dom.xpath;
 
 import org.apache.xml.utils.Constants;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.*;
 import org.loboevolution.html.xpath.XPathNSResolver;
-import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>XPathNSResolverImpl class.</p>

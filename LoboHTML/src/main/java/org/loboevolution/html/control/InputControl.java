@@ -19,10 +19,10 @@
  */
 package org.loboevolution.html.control;
 
-import java.awt.*;
-
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+
+import java.awt.*;
 
 /**
  * <p>InputControl class.</p>

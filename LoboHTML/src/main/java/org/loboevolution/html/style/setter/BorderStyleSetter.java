@@ -21,10 +21,9 @@
 package org.loboevolution.html.style.setter;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
-
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 
 /**
  * <p>BorderStyleSetter class.</p>
@@ -50,16 +49,17 @@ public class BorderStyleSetter implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration, boolean important) {
+	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
+		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 
 		if (Strings.isNotBlank(newValue)) {
-			properties.setPropertyValueLCAlt(this.property, newValue, important);
+			properties.setProperty(this.property, newValue);
 
 			if (BORDER_STYLE.equals(property)) {
-				properties.setPropertyValueLCAlt(BORDER_TOP_WIDTH, "2px", important);
-				properties.setPropertyValueLCAlt(BORDER_BOTTOM_WIDTH, "2px", important);
-				properties.setPropertyValueLCAlt(BORDER_LEFT_WIDTH, "2px", important);
-				properties.setPropertyValueLCAlt(BORDER_RIGHT_WIDTH, "2px", important);
+				properties.setProperty(BORDER_TOP_WIDTH, "2px");
+				properties.setProperty(BORDER_BOTTOM_WIDTH, "2px");
+				properties.setProperty(BORDER_LEFT_WIDTH, "2px");
+				properties.setProperty(BORDER_RIGHT_WIDTH, "2px");
 			}
 			
 			final String[] array = HtmlValues.splitCssValue(newValue);
@@ -69,28 +69,28 @@ public class BorderStyleSetter implements SubPropertySetter {
 			switch (array.length) {
 			case 1:
 				final String value = array[0];
-				properties.setPropertyValueLCAlt(prefix + "top" + suffix, "outset".equals(value) ? "solid" : value, important);
-				properties.setPropertyValueLCAlt(prefix + "right" + suffix, "inset".equals(value) ? "solid" : value, important);
-				properties.setPropertyValueLCAlt(prefix + "bottom" + suffix, "inset".equals(value) ? "solid" : value, important);
-				properties.setPropertyValueLCAlt(prefix + "left" + suffix, "outset".equals(value) ? "solid" : value, important);
+				properties.setProperty(prefix + "top" + suffix, "outset".equals(value) ? "solid" : value);
+				properties.setProperty(prefix + "right" + suffix, "inset".equals(value) ? "solid" : value);
+				properties.setProperty(prefix + "bottom" + suffix, "inset".equals(value) ? "solid" : value);
+				properties.setProperty(prefix + "left" + suffix, "outset".equals(value) ? "solid" : value);
 				break;
 			case 2:
-				properties.setPropertyValueLCAlt(prefix + "top" + suffix, "outset".equals(array[0]) ? "solid" : array[0], important);
-				properties.setPropertyValueLCAlt(prefix + "right" + suffix, "inset".equals(array[1]) ? "solid" : array[1], important);
-				properties.setPropertyValueLCAlt(prefix + "bottom" + suffix, "inset".equals(array[0]) ? "solid" : array[0], important);
-				properties.setPropertyValueLCAlt(prefix + "left" + suffix, "outset".equals(array[1]) ? "solid" : array[1], important);
+				properties.setProperty(prefix + "top" + suffix, "outset".equals(array[0]) ? "solid" : array[0]);
+				properties.setProperty(prefix + "right" + suffix, "inset".equals(array[1]) ? "solid" : array[1]);
+				properties.setProperty(prefix + "bottom" + suffix, "inset".equals(array[0]) ? "solid" : array[0]);
+				properties.setProperty(prefix + "left" + suffix, "outset".equals(array[1]) ? "solid" : array[1]);
 				break;
 			case 3:
-				properties.setPropertyValueLCAlt(prefix + "top" + suffix, "outset".equals(array[0]) ? "solid" : array[0], important);
-				properties.setPropertyValueLCAlt(prefix + "right" + suffix, "inset".equals(array[1]) ? "solid" : array[1], important);
-				properties.setPropertyValueLCAlt(prefix + "bottom" + suffix, "inset".equals(array[2]) ? "solid" : array[2], important);
-				properties.setPropertyValueLCAlt(prefix + "left" + suffix, "outset".equals(array[1]) ? "solid" : array[1], important);
+				properties.setProperty(prefix + "top" + suffix, "outset".equals(array[0]) ? "solid" : array[0]);
+				properties.setProperty(prefix + "right" + suffix, "inset".equals(array[1]) ? "solid" : array[1]);
+				properties.setProperty(prefix + "bottom" + suffix, "inset".equals(array[2]) ? "solid" : array[2]);
+				properties.setProperty(prefix + "left" + suffix, "outset".equals(array[1]) ? "solid" : array[1]);
 				break;
 			case 4:
-				properties.setPropertyValueLCAlt(prefix + "top" + suffix, "outset".equals(array[0]) ? "solid" : array[0], important);
-				properties.setPropertyValueLCAlt(prefix + "right" + suffix, "inset".equals(array[1]) ? "solid" : array[1], important);
-				properties.setPropertyValueLCAlt(prefix + "bottom" + suffix, "inset".equals(array[2]) ? "solid" : array[2], important);
-				properties.setPropertyValueLCAlt(prefix + "left" + suffix, "outset".equals(array[3]) ? "solid" : array[3], important);
+				properties.setProperty(prefix + "top" + suffix, "outset".equals(array[0]) ? "solid" : array[0]);
+				properties.setProperty(prefix + "right" + suffix, "inset".equals(array[1]) ? "solid" : array[1]);
+				properties.setProperty(prefix + "bottom" + suffix, "inset".equals(array[2]) ? "solid" : array[2]);
+				properties.setProperty(prefix + "left" + suffix, "outset".equals(array[3]) ? "solid" : array[3]);
 			default:
 				break;
 			}

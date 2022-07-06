@@ -20,12 +20,10 @@
 
 package org.loboevolution.html.control;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.util.logging.Logger;
-
 import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
+
+import java.awt.*;
+import java.util.logging.Logger;
 
 /**
  * <p>SVGControl class.</p>

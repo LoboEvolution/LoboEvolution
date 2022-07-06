@@ -875,11 +875,11 @@ public interface CSS2Properties extends CSSProperties {
 	String getWordSpacing();
 
 	/**
-	 * <p>getZIndex.</p>
+	 * <p>getzIndex.</p>
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	String getZIndex();
+	String getzIndex();
 
 	/**
 	 * <p>setAzimuth.</p>

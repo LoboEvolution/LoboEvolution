@@ -287,7 +287,8 @@ public class HTMLElementTest extends LoboUnitTest {
         final String[] messages = {null, "expando=undefined", "firstChild=null", "lastChild=null", "name=custom_attribute",
                 "nextSibling=null", "nodeName=custom_attribute", "nodeType=2", "nodeValue=bleh",
                 "(ownerDocument == document) = true", "parentNode=null", "previousSibling=null",
-                "specified=true", "value=bleh"};   checkHtmlAlert(html, messages);
+                "specified=true", "value=bleh"};
+        checkHtmlAlert(html, messages);
     }
 
     /**
@@ -2990,7 +2991,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</body>\n"
                 + "</html>";
 
-        final String[] messages = {null, "", null, "undefined"};
+        final String[] messages = {null, null, null, "undefined"};
         checkHtmlAlert(html, messages);
     }
 
@@ -3017,7 +3018,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "</body>\n"
                 + "</html>";
 
-        final String[] messages = {null, "", null, "undefined"};
+        final String[] messages = {null, null, null, "undefined"};
         checkHtmlAlert(html, messages);
     }
 

@@ -19,12 +19,12 @@
  */
 package org.loboevolution.html.dom.filter;
 
-import java.util.regex.Pattern;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+
+import java.util.regex.Pattern;
 
 /**
  * <p>ClassNameFilter class.</p>

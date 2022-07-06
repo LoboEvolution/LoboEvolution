@@ -22,15 +22,14 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLTableCellElement;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableCellRenderState;
 import org.loboevolution.html.style.HtmlValues;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p>HTMLTableCellElementImpl class.</p>

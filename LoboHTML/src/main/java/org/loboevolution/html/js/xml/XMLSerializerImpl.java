@@ -25,7 +25,6 @@ import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.js.xml.XMLSerializer;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.html.node.NodeType;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;

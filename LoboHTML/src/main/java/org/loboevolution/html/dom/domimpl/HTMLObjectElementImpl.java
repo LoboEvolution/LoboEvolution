@@ -22,10 +22,9 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLObjectElement;
-import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.ValidityState;
+import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>HTMLObjectElementImpl class.</p>

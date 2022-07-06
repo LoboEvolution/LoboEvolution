@@ -23,6 +23,7 @@ package org.loboevolution.html.style;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.GradientInfo;
 import org.loboevolution.laf.ColorFactory;
@@ -46,12 +47,12 @@ public class GradientStyle {
 	/**
 	 * <p>gradientToImg.</p>
 	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
-	 * @param props a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @param props a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param backgroundImage a {@link java.lang.String} object.
 	 * @return a {@link java.awt.image.BufferedImage} object.
 	 */
-	public BufferedImage gradientToImg(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState, String backgroundImage) {
+	public BufferedImage gradientToImg(HTMLDocumentImpl document, CSSStyleDeclaration props, RenderState renderState, String backgroundImage) {
 		BufferedImage image = null;
 		final int idx = backgroundImage.indexOf("(");
 		final String quote = backgroundImage.substring(0, idx);
@@ -74,7 +75,7 @@ public class GradientStyle {
 		return image;
 	}
 
-	private BufferedImage linearGadient(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
+	private BufferedImage linearGadient(HTMLDocumentImpl document, CSSStyleDeclaration props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
 		start = start + "(";
 		final int startIdx = start.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');
@@ -129,7 +130,7 @@ public class GradientStyle {
 		return image;
 	}
 
-	private BufferedImage radialGadient(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
+	private BufferedImage radialGadient(HTMLDocumentImpl document, CSSStyleDeclaration props, RenderState renderState, String backgroundImage, String start, CycleMethod cMethod) {
 		start = start + "(";
 		final int startIdx = start.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');
@@ -241,24 +242,6 @@ public class GradientStyle {
 				build();
 	}
 
-	public static void main(String[] args) {
-		GradientStyle s = new GradientStyle();
-		String quote = "circle farthest-side, rgb(153, 153, 153, 0.4), rgb(153, 153, 153, 0.4) 80%, rgb(153, 153, 153, 0) 100%";
-		final String values = s.gradientValues(quote);
-		System.out.println(values);
-		GradientInfo info = s.parseGradint(quote);
-		for (float fraction : info.getFractions()) {
-			System.out.println("fraction " + fraction);
-		}
-		for (Color color : info.getColors()) {
-			System.out.println("color " + color);
-		}
-
-
-		System.out.println("getShape " + info.getShape());
-		System.out.println("getSizeAtPosition " + info.getSizeAtPosition());
-	}
-
 	private static void setFractions(ArrayList<Float> listFractions, char[] charArray, int index, String color) {
 		final boolean isPercent = color.contains("%");
 		final float numberOnly = isPercent ? Float.parseFloat(color.replaceAll("[^0-9]", "")) /100 : 0f;
@@ -272,7 +255,7 @@ public class GradientStyle {
 		}
 	}
 
-	private int getHeight(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState) {
+	private int getHeight(HTMLDocumentImpl document, CSSStyleDeclaration props, RenderState renderState) {
 		int heightSize = HtmlValues.getPixelSize(props.getHeight(), renderState, document.getDefaultView(), -1);
 		if (heightSize < 0) {
 			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
@@ -281,7 +264,7 @@ public class GradientStyle {
 		return heightSize;
 	}
 	
-	private int getWidth(HTMLDocumentImpl document, AbstractCSSProperties props, RenderState renderState) {
+	private int getWidth(HTMLDocumentImpl document, CSSStyleDeclaration props, RenderState renderState) {
 		int widthSize = HtmlValues.getPixelSize(props.getWidth(), renderState, document.getDefaultView(),-1);
 		if (widthSize < 0) {
 			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();

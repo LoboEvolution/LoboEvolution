@@ -20,14 +20,13 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.Shape;
-import java.awt.geom.*;
-import java.util.Iterator;
-
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.*;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+
+import java.awt.*;
+import java.awt.geom.*;
 
 /**
  * <p>SVGClipPathElementImpl class.</p>

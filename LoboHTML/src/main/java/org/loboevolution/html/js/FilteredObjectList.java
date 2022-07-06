@@ -22,10 +22,10 @@
  */
 package org.loboevolution.html.js;
 
-import java.util.Collection;
-
-import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.js.AbstractScriptableDelegate;
+
+import java.util.Collection;
 
 /**
  * <p>FilteredObjectList class.</p>

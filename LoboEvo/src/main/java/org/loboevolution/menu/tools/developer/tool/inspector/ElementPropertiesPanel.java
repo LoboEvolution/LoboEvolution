@@ -94,16 +94,6 @@ public class ElementPropertiesPanel extends JPanel {
                 cssProperties.put(propertyName.toLowerCase(), propertyValue);
             });
         }
-
-        List<CSSStyleDeclarationImpl> styleDeclaration = elm.getStyle().getStyleDeclarations();
-        if(styleDeclaration != null) {
-            styleDeclaration.forEach(decl -> decl.getProperties().forEach(prop -> {
-                final String propertyName = prop.getName();
-                final String propertyValue = decl.getPropertyValue(propertyName);
-                cssProperties.put(propertyName.toLowerCase(), propertyValue);
-            }));
-        }
-
         return new PropertiesTableModel(cssProperties);
     }
 }

@@ -20,26 +20,11 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-
-import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.dom.svg.SVGAnimateElement;
-import org.loboevolution.html.dom.svg.SVGAnimateTransformElement;
-import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
-import org.loboevolution.html.dom.svg.SVGExternalResourcesRequired;
-import org.loboevolution.html.dom.svg.SVGLangSpace;
-import org.loboevolution.html.dom.svg.SVGTests;
-import org.loboevolution.html.dom.svg.SVGTransform;
-import org.loboevolution.html.dom.svg.SVGTransformList;
+import org.loboevolution.html.dom.svg.*;
 
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 /**
  * <p>SVGGraphic class.</p>

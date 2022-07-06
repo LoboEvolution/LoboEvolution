@@ -20,13 +20,13 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLTableRowElement;
 import org.loboevolution.html.dom.HTMLTableSectionElement;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import com.gargoylesoftware.css.dom.DOMException;
 
 import java.util.Arrays;
 

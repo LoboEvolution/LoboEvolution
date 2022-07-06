@@ -27,9 +27,8 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.gui.HtmlPanel;
-import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
@@ -196,7 +195,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 		backgroundApplyStyle(rs);
 
-		final AbstractCSSProperties props = rootElement.getCurrentStyle();
+		final CSSStyleDeclaration props = rootElement.getCurrentStyle();
 		if (props == null) {
 			clearStyle(isRootBlock);
 		} else {
@@ -352,11 +351,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		return ins;
 	}
 
-	private void zIndexApplyStyle(AbstractCSSProperties props) {
-		final String zIndex = props.getZIndex();
-		if (zIndex != null) {
+	private void zIndexApplyStyle(CSSStyleDeclaration props) {
+		final String zIndex = props.getzIndex();
+		if (Strings.isNotBlank(zIndex)) {
+			HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
+			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
 			try {
-				this.zIndex = Integer.parseInt(zIndex);
+				this.zIndex =  HtmlValues.getPixelSize(zIndex, null, doc.getDefaultView(), 0);
 			} catch (final NumberFormatException err) {
 				logger.log(Level.WARNING,
 						"Unable to parse z-index [" + zIndex + "] in element " + this.modelNode + ".", err);
@@ -595,7 +596,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			CSS3Properties props = element.getCurrentStyle();
+			CSSStyleDeclaration props = element.getCurrentStyle();
 			if (props == null) {
 				return -1;
 			}
@@ -659,7 +660,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		if (rootNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) rootNode;
 			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
-			CSS3Properties props = element.getCurrentStyle();
+			CSSStyleDeclaration props = element.getCurrentStyle();
 			if (props == null) {
 				return -1;
 			}
@@ -674,7 +675,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 			int width = -1;
 
-			if (widthText != null) {
+			if (Strings.isNotBlank(widthText)) {
 				width = HtmlValues.getPixelSize(widthText, renderState, doc.getDefaultView(), -1, availWidth);
 			}
 
@@ -699,7 +700,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				width = (textContent.length() + right + left) * multi;
 			}
 
-			if (props.getMaxWidth() != null) {
+			if (Strings.isNotBlank(props.getMaxWidth())) {
 				int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), renderState, doc.getDefaultView(), -1, availWidth);
 
 				if (width == -1 || width > maxWidth) {
@@ -707,14 +708,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				}
 			}
 
-			if (props.getMinWidth() != null) {
+			if (Strings.isNotBlank(props.getMinWidth())) {
 				int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
 
 				if (width == 0 || width < minWidth) {
 					width = minWidth;
 				}
 			}
-
 			return width;
 		} else {
 			return -1;
@@ -875,7 +875,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			final Object rootNode = this.modelNode;
 			if (rootNode instanceof HTMLElementImpl) {
 				final HTMLElementImpl element = (HTMLElementImpl) rootNode;
-				final CSS3Properties props = element.getCurrentStyle();
+				final CSSStyleDeclaration props = element.getCurrentStyle();
 				if (props == null) {
 					return false;
 				}

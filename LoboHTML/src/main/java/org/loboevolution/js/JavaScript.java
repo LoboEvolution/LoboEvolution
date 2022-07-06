@@ -19,14 +19,14 @@
  */
 package org.loboevolution.js;
 
-import java.lang.ref.WeakReference;
-import java.util.WeakHashMap;
-
 import org.loboevolution.html.node.Document;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.Undefined;
+
+import java.lang.ref.WeakReference;
+import java.util.WeakHashMap;
 
 /**
  * <p>JavaScript class.</p>

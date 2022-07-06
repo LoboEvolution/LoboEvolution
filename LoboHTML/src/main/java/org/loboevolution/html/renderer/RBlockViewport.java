@@ -33,12 +33,12 @@ import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
@@ -245,7 +245,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private boolean addElsewhereIfFloat(BoundableRenderable renderable, HTMLElementImpl element,
-			boolean usesAlignAttribute, AbstractCSSProperties style) {
+			boolean usesAlignAttribute, CSSStyleDeclaration style) {
 
 		String align = null;
 		if (style != null) {
@@ -278,7 +278,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return True if it was added elsewhere.
 	 */
 	private boolean addElsewhereIfPositioned(RElement renderable, HTMLElementImpl element, boolean usesAlignAttribute) {
-		final AbstractCSSProperties style = element.getCurrentStyle();
+		final CSSStyleDeclaration style = element.getCurrentStyle();
 		final int position = getPosition(element);
 		final boolean absolute = position == RenderState.POSITION_ABSOLUTE;
 		final boolean fixed = position == RenderState.POSITION_FIXED;
@@ -1817,7 +1817,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param absolute if true, then position is absolute, else fixed
 	 */
 	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final int availContentWidth, final int availContentHeight,
-										final AbstractCSSProperties style, final RenderState rs, final boolean absolute,
+										final CSSStyleDeclaration style, final RenderState rs, final boolean absolute,
 										final boolean fixed) {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
 		this.container.addDelayedPair(DelayedPair.builder().

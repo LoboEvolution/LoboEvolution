@@ -22,12 +22,10 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Color;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
+
+import java.awt.*;
 
 final class RBlank extends BaseBoundableRenderable {
 	// TODO: Is there a need for RBlank's at all?

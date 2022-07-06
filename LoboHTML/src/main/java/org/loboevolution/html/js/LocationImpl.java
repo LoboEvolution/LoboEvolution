@@ -20,16 +20,16 @@
 
 package org.loboevolution.html.js;
 
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.html.node.DOMStringList;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.js.Location;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.js.AbstractScriptableDelegate;
+
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>

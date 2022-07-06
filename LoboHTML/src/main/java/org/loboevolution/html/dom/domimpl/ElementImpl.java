@@ -22,17 +22,14 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
-import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.TagNameFilter;
@@ -50,10 +47,10 @@ import org.loboevolution.html.node.js.geom.DOMRectList;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.*;
-import org.loboevolution.html.style.setter.FourCornersSetter;
+import org.loboevolution.html.style.CSSUtilities;
+import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.html.node.NodeType;
 import org.mozilla.javascript.annotations.JSFunction;
 
 import javax.swing.*;
@@ -74,10 +71,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	private final String name;
 
 	private String outer;
-
-	private double scrollTop;
-
-	private boolean isCssText;
 
 	/**
 	 * <p>Constructor for ElementImpl.</p>
@@ -168,12 +161,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		if (!Strings.isValidString(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
-		}
-
-		if("style".equalsIgnoreCase(name) && Strings.isNotBlank(value) && !isCssText){
-			isCssText = true;
-			AbstractCSSProperties style = ((HTMLElementImpl) this).getStyle();
-			style.setCssText(value);
 		}
 
 		map.setNamedItem(new AttrImpl(name, value, true, this, "id".equalsIgnoreCase(name)));
@@ -511,7 +498,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public int getClientLeft() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		return HtmlValues.getPixelSize(currentStyle.getBorderLeftWidth(), null, doc.getDefaultView(), 0);
 	}
 
@@ -519,7 +506,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public int getClientTop() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		return HtmlValues.getPixelSize(currentStyle.getBorderTopWidth(), null, doc.getDefaultView(), 0);
 	}
 
@@ -699,7 +686,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
      */
     @Override
     public double getScrollTop() {
-		if (scrollTop > 0) return scrollTop;
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
         HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		return isVScrollable() ? htmlRendererContext.getScrolly() : 0;
@@ -710,7 +696,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
      */
     @Override
     public void setScrollTop(double scrollTop) {
-		this.scrollTop = scrollTop;
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
         HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 
@@ -755,15 +740,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public DOMRect getBoundingClientRect() {
 
-		AbstractCSSProperties currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+		CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final Window win = doc.getDefaultView();
 		final RenderState rs  = doc.getRenderState();
 		int width = calculateWidth(true, true);
 		int height = calculateHeight(true, true);
 		String position = currentStyle.getPosition();
-		List<CSSStyleDeclarationImpl> list = currentStyle.getStyleDeclarations();
-		int topLeft = ArrayUtilities.isBlank(list) ? 0 : 8;
+		int topLeft = currentStyle.getLength() > 0 ? 8 : 0;
 		int top = topLeft;
 		int left = topLeft;
 
@@ -776,7 +760,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl) && CSSValues.ABSOLUTE.isEqual(position)) {
 				HTMLElementImpl p = (HTMLElementImpl) n;
-				AbstractCSSProperties pCurrentStyle = p.getCurrentStyle();
+				CSSStyleDeclaration pCurrentStyle = p.getStyle();
 				String topTxt = pCurrentStyle.getTop();
 				String leftTxt = pCurrentStyle.getLeft();
 				int scrollTop = (int) p.getScrollTop();
@@ -804,13 +788,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public DOMRectList getClientRects() {
 		DOMRectListImpl list = new DOMRectListImpl();
-		AbstractCSSProperties style = ((HTMLElementImpl) this).getCurrentStyle();
+		CSSStyleDeclaration style = ((HTMLElementImpl) this).getCurrentStyle();
 		String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
 		if (!"none".equals(display)) {
 			for (Node n = getParentNode(); n != null; n = n.getPreviousSibling()) {
 				if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
 					HTMLElementImpl p = (HTMLElementImpl) n;
-					AbstractCSSProperties st = p.getStyle();
+					CSSStyleDeclaration st = p.getStyle();
 					display = st.getDisplay();
 				}
 			}
@@ -993,7 +977,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
     private boolean isHScrollable() {
         String overflow;
-        AbstractCSSProperties currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
         overflow = currentStyle.getOverflow();
         int widthChild = 0;
 
@@ -1006,13 +990,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
     private boolean isVScrollable() {
         String overflow;
-        AbstractCSSProperties currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
         overflow = currentStyle.getOverflow();
         int heightChild = 0;
 
         for (final Node child : (NodeListImpl) this.getChildNodes()) {
             if (child instanceof HTMLElementImpl) heightChild += ((HTMLElementImpl) child).getClientHeight();
         }
+
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
     }
 
@@ -1021,7 +1006,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getStyle();
 		String width = currentStyle.getWidth();
 		String borderLeftWidth = currentStyle.getBorderLeftWidth();
 		String borderRightWidth = currentStyle.getBorderRightWidth();
@@ -1092,7 +1077,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final AbstractCSSProperties currentStyle = ((HTMLElementImpl)this).getStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getStyle();
 		String height = currentStyle.getHeight();
 		String borderTopWidth = currentStyle.getBorderTopWidth();
 		String borderBottomWidth = currentStyle.getBorderBottomWidth();

@@ -20,11 +20,7 @@
 
 package org.loboevolution.html.renderer;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.Collection;
 
 /**

@@ -22,12 +22,11 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.node.DOMConfiguration;
+import org.loboevolution.html.node.DOMStringList;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.loboevolution.html.node.DOMConfiguration;
-
-import org.loboevolution.html.node.DOMStringList;
 
 /**
  * <p>DOMConfigurationImpl class.</p>

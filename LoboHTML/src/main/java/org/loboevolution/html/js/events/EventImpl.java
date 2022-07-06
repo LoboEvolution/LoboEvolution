@@ -19,13 +19,12 @@
  */
 package org.loboevolution.html.js.events;
 
+import org.loboevolution.html.node.events.Event;
+import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.type.EventPhase;
 
 import java.util.List;
-
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventTarget;
 
 /**
  * <p>EventImpl class.</p>

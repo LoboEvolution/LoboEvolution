@@ -20,9 +20,8 @@
 
 package org.loboevolution.html.style.setter;
 
-import org.loboevolution.html.style.AbstractCSSProperties;
-
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 
 /**
  * <p>BorderSetter1 class.</p>
@@ -31,11 +30,12 @@ public class BorderSetter1 implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration, boolean important) {
-		properties.setPropertyValueLCAlt(BORDER, newValue, important);
-		properties.setPropertyValueProcessed(BORDER_TOP, newValue, declaration, important);
-		properties.setPropertyValueProcessed(BORDER_LEFT, newValue, declaration, important);
-		properties.setPropertyValueProcessed(BORDER_BOTTOM, newValue, declaration, important);
-		properties.setPropertyValueProcessed(BORDER_RIGHT, newValue, declaration, important);
+	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
+		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+		properties.setProperty(BORDER, newValue);
+		properties.setPropertyValueProcessed(BORDER_TOP, newValue);
+		properties.setPropertyValueProcessed(BORDER_LEFT, newValue);
+		properties.setPropertyValueProcessed(BORDER_BOTTOM, newValue);
+		properties.setPropertyValueProcessed(BORDER_RIGHT, newValue);
 	}
 }

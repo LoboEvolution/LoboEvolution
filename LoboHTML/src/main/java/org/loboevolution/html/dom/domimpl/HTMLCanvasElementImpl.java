@@ -20,13 +20,13 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.image.BufferedImage;
-
 import org.loboevolution.html.dom.CanvasRenderingContext2D;
 import org.loboevolution.html.dom.FileCallback;
 import org.loboevolution.html.dom.HTMLCanvasElement;
 import org.loboevolution.html.dom.canvas.CanvasRenderingImpl;
 import org.loboevolution.html.style.HtmlValues;
+
+import java.awt.image.BufferedImage;
 
 
 /**

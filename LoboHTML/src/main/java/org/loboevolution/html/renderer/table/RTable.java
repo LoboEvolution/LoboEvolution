@@ -19,34 +19,15 @@
  */
 package org.loboevolution.html.renderer.table;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import org.loboevolution.html.control.RUIControl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
-import org.loboevolution.html.renderer.BaseElementRenderable;
-import org.loboevolution.html.renderer.BoundableRenderable;
-import org.loboevolution.html.renderer.DelayedPair;
-import org.loboevolution.html.renderer.FrameContext;
-import org.loboevolution.html.renderer.PositionedRenderable;
-import org.loboevolution.html.renderer.RenderableContainer;
-import org.loboevolution.html.renderer.RenderableSpot;
-import org.loboevolution.html.renderer.ZIndexComparator;
-
+import org.loboevolution.html.renderer.*;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.http.UserAgentContext;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.util.*;
 
 /**
  * <p>RTable class.</p>

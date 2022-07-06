@@ -19,12 +19,12 @@
  */
 package org.loboevolution.js;
 
+import org.loboevolution.info.PropertyInfo;
+import org.mozilla.javascript.Function;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.loboevolution.info.PropertyInfo;
-import org.mozilla.javascript.Function;
 
 /**
  * <p>JavaClassWrapper class.</p>
@@ -150,7 +150,8 @@ public class JavaClassWrapper {
 		} else if (name.startsWith("set") &&
 				!name.equals("setTimeout") &&
 				!name.equals("setNamedItem") &&
-				!name.equals("setProperty")) {
+				!name.equals("setProperty") &&
+				!name.equals("setAttributeNode")) {
 			return method.getParameterTypes().length == 1;
 		} else {
 			return false;

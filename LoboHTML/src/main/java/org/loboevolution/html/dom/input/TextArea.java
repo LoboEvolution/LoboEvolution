@@ -20,31 +20,24 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Insets;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseEvent;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.BorderFactory;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.event.MouseInputAdapter;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
-
 import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.TextAreaControl;
 import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
 import org.loboevolution.html.js.Executor;
+
+import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>TextArea class.</p>

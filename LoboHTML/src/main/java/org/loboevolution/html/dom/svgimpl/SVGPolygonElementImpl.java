@@ -20,18 +20,13 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.Graphics2D;
-import java.awt.Shape;
+import org.loboevolution.html.dom.svg.*;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
-
-import org.loboevolution.html.dom.svg.SVGRect;
-import org.loboevolution.html.dom.svg.SVGMatrix;
-import org.loboevolution.html.dom.svg.SVGPoint;
-import org.loboevolution.html.dom.svg.SVGPointList;
-import org.loboevolution.html.dom.svg.SVGPolygonElement;
 
 /**
  * <p>SVGPolygonElementImpl class.</p>

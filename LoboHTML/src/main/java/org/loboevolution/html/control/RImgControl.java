@@ -19,13 +19,12 @@
  */
 package org.loboevolution.html.control;
 
-import java.awt.Dimension;
-import java.awt.Insets;
-
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.http.UserAgentContext;
+
+import java.awt.*;
 
 /**
  * <p>RImgControl class.</p>

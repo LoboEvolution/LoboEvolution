@@ -20,17 +20,15 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.NoninvertibleTransformException;
-
 import org.loboevolution.html.dom.svg.*;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 
 /**
  * <p>SVGImageElementImpl class.</p>

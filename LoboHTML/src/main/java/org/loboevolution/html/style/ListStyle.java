@@ -19,7 +19,7 @@
  */
 package org.loboevolution.html.style;
 
-import java.awt.Image;
+import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

@@ -19,9 +19,9 @@
  */
 package org.loboevolution.html.dom.canvas;
 
-import java.awt.image.BufferedImage;
-
 import org.loboevolution.html.dom.ImageData;
+
+import java.awt.image.BufferedImage;
 
 /**
  * <p>ImageDataImpl class.</p>

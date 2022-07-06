@@ -21,9 +21,8 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSS3Properties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.FontFactory;
@@ -104,7 +103,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 			fontkey.setFontFamily(LAFType.MONOSPACED.getValue());
 		}
 
-		final CSS3Properties props = element.getCurrentStyle();
+		final CSSStyleDeclaration props = element.getCurrentStyle();
 		final String fontSize = props == null ? null : props.getFontSize();
 		final String fSize = Strings.isNotBlank(fontSize) ? fontSize : "1.2rem";
 		fontkey.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), prevRenderState));

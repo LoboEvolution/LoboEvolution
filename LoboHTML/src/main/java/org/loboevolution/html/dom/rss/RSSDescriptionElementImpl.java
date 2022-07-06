@@ -20,13 +20,12 @@
 
 package org.loboevolution.html.dom.rss;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
-
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
+
+import java.awt.*;
 
 /**
  * <p>RSSDescriptionElementImpl class.</p>

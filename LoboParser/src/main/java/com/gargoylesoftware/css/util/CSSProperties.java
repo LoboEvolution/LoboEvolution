@@ -441,7 +441,7 @@ public interface CSSProperties {
 	String WIDTH = "width";
 
 	/** The Constant WORD_SPACING. */
-	String WORD_SPACING = "word_spacing";
+	String WORD_SPACING = "word-spacing";
 
 	/** The Constant Z_INDEX. */
 	String Z_INDEX = "z-index";

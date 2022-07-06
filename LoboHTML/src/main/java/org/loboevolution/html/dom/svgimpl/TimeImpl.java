@@ -20,14 +20,14 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import org.loboevolution.html.dom.smil.Time;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.util.DateUtil;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
-
-import org.loboevolution.html.dom.smil.Time;
-import org.loboevolution.util.DateUtil;
-import org.loboevolution.html.node.Element;
 
 /**
  * <p>TimeImpl class.</p>

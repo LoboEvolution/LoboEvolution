@@ -20,17 +20,16 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.Dimension;
+import org.loboevolution.html.control.InputControl;
+import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+
+import javax.swing.*;
+import javax.swing.text.MaskFormatter;
+import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.swing.JFormattedTextField;
-import javax.swing.text.MaskFormatter;
-
-import org.loboevolution.html.control.InputControl;
-import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
 /**
  * <p>InputDataTime class.</p>

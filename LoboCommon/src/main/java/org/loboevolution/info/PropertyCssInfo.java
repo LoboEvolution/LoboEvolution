@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2021 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -18,23 +18,23 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.dom.rss;
+package org.loboevolution.info;
 
-import java.awt.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
- * <p>RSSDrawable interface.</p>
- *
- *
- *
+ * <p>PropertyCssInfo class.</p>
  */
-public interface RSSDrawable {
-	
-	/**
-	 * <p>draw.</p>
-	 *
-	 * @param graphics a {@link java.awt.Graphics2D} object.
-	 * @param yy a int.
-	 */
-	void draw(Graphics2D graphics, int yy);
+@Data
+@AllArgsConstructor
+public class PropertyCssInfo implements Serializable {
+
+    /** The name. */
+    private String name;
+
+    /** The value. */
+    private String value;
 }

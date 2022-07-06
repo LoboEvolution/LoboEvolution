@@ -34,9 +34,9 @@ public class ComputedCursorTest  extends LoboUnitTest {
                 " <script>\n" +
                 " function test_computed_value(property, specified) {\n" +
                 "   const target = document.getElementById('target');\n" +
-                "   target.style[property] = '';\n" +
-                "   target.style[property] = specified;\n" +
-                "   let readValue = getComputedStyle(target)[property];\n" +
+                "   target.style.cursor = '';\n" +
+                "   target.style.cursor = specified;\n" +
+                "   let readValue = getComputedStyle(target).cursor;\n" +
                 "   alert(readValue == specified);\n" +
                 " } \n" +
                 "  function test() {\n" +

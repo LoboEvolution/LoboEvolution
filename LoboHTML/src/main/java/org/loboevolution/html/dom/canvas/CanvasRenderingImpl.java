@@ -20,35 +20,10 @@
 
 package org.loboevolution.html.dom.canvas;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Paint;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.font.FontRenderContext;
-import java.awt.font.TextLayout;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Arc2D;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-
 import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.dom.CanvasGradient;
-import org.loboevolution.html.dom.CanvasPattern;
-import org.loboevolution.html.dom.CanvasRenderingContext2D;
-import org.loboevolution.html.dom.HTMLCanvasElement;
-import org.loboevolution.html.dom.HTMLImageElement;
-import org.loboevolution.html.dom.ImageData;
-import org.loboevolution.html.dom.TextMetrics;
+import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
@@ -62,6 +37,12 @@ import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 import org.loboevolution.laf.LAFType;
 import org.loboevolution.net.HttpNetwork;
+
+import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.*;
+import java.awt.image.BufferedImage;
 
 /**
  * <p>CanvasRenderingImpl class.</p>

@@ -22,7 +22,6 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.dom.HTMLHeadingElement;
 import org.loboevolution.html.renderstate.HeadingRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSSProperties;
 
 /**
  * <p>HTMLHeadingElementImpl class.</p>

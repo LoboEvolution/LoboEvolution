@@ -20,15 +20,15 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-
 import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.loboevolution.html.dom.svg.SVGTransform;
 import org.loboevolution.html.dom.svg.SVGTransformList;
+
+import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * <p>SVGTransformListImpl class.</p>

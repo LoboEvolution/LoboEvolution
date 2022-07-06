@@ -22,10 +22,10 @@ package org.loboevolution.html.renderer.table;
 
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
-import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.CaptionSizeInfo;
@@ -51,19 +51,15 @@ class TableMatrixSizes {
 	}
 
 	/**
-	 * <p>
-	 * getWidthLength.
-	 * </p>
+	 * <p> getWidthLength. </p>
 	 *
-	 * @param element    a
-	 *                   {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl}
-	 *                   object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param availWidth a int.
 	 * @return a {@link org.loboevolution.html.style.HtmlLength} object.
 	 */
 	static HtmlLength getWidthLength(HTMLElementImpl element, int availWidth) {
 		try {
-			AbstractCSSProperties props = element.getCurrentStyle();
+			CSSStyleDeclaration props = element.getCurrentStyle();
 			String widthText = props == null ? null : props.getWidth();
 			if (widthText == null) {
 				String widthAttr = element.getAttribute("width");
@@ -118,7 +114,7 @@ class TableMatrixSizes {
 	 */
 	static HtmlLength getHeightLength(HTMLElementImpl element, int availHeight) {
 		try {
-			AbstractCSSProperties props = element.getCurrentStyle();
+			CSSStyleDeclaration props = element.getCurrentStyle();
 			String heightText = props == null ? null : props.getHeight();
 			if (heightText == null) {
 				String ha = element.getAttribute("height");

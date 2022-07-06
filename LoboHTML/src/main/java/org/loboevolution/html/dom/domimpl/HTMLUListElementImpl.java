@@ -23,7 +23,6 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLUListElement;
-import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.UListRenderState;
 

@@ -19,13 +19,10 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * A renderer node with well-defined bounds. Most renderer nodes implement this

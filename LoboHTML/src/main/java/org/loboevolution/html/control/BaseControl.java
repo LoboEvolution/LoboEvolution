@@ -22,13 +22,11 @@
  */
 package org.loboevolution.html.control;
 
-import java.awt.Color;
-import java.awt.Component;
-
-import javax.swing.JComponent;
-
 import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * <p>Abstract BaseControl class.</p>

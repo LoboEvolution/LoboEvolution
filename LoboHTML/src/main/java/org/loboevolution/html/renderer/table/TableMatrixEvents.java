@@ -20,11 +20,11 @@
 
 package org.loboevolution.html.renderer.table;
 
-import java.awt.Rectangle;
+import org.loboevolution.html.renderer.BoundableRenderable;
+
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.List;
-
-import org.loboevolution.html.renderer.BoundableRenderable;
 
 class TableMatrixEvents {
 	

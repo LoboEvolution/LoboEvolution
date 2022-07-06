@@ -20,19 +20,6 @@
 
 package org.loboevolution.html.parser;
 
-import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.Reader;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.Entities;
@@ -40,15 +27,23 @@ import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.domimpl.DocumentTypeImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.info.ElementInfo;
-
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
+import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.info.ElementInfo;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.Reader;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The HtmlParser class is an HTML DOM parser. This parser provides

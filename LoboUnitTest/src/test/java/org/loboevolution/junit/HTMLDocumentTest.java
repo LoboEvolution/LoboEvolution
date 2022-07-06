@@ -20,7 +20,6 @@
 
 package org.loboevolution.junit;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,8 +30,8 @@ import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSRuleList;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.CSSStyleSheet;
-import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.html.node.NodeType;
 
@@ -889,7 +888,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         HTMLElementImpl elm = (HTMLElementImpl) doc.getElementById("firstH3");
         assertNotNull(elm);
         assertEquals("font-family: 'Does Not Exist', Neither; color: navy", elm.getAttribute("style"));
-        AbstractCSSProperties style = elm.getStyle();
+        CSSStyleDeclaration style = elm.getStyle();
         assertEquals("font-family: \"Does Not Exist\", Neither; color: navy", style.getCssText());
         assertEquals(2, style.getLength());
         assertEquals("\"Does Not Exist\", Neither", style.getPropertyValue("font-family"));
@@ -914,12 +913,12 @@ public class HTMLDocumentTest extends LoboUnitTest {
         HTMLElementImpl elm = (HTMLElementImpl) document.getElementById("cell12");
         assertNotNull(elm);
         assertNotNull(elm.getCurrentStyle());
-        assertNotNull(elm.getCurrentStyle().getStyleDeclarations());
-        CSSStyleDeclarationImpl styledecl = elm.getCurrentStyle().getStyleDeclarations().get(0);
+        assertNotNull(elm.getCurrentStyle());
+        CSSStyleDeclaration styledecl = elm.getCurrentStyle();
         assertEquals("padding: 4pt 6pt; margin-left: 5pt", styledecl.toString());
         assertEquals(2, styledecl.getLength());
         assertEquals("5pt", styledecl.getPropertyValue("margin-left"));
-        assertNull(styledecl.getPropertyCSSValue("does-not-exist"));
+        assertNull(styledecl.getPropertyValue("does-not-exist"));
         assertEquals("", styledecl.getPropertyValue("does-not-exist"));
     }
 

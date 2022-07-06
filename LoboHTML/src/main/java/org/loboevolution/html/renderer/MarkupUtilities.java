@@ -21,7 +21,8 @@
  * Created on Apr 16, 2005
  */
 package org.loboevolution.html.renderer;
-import java.awt.Rectangle;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

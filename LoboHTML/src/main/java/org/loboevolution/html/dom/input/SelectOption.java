@@ -20,23 +20,18 @@
 
 package org.loboevolution.html.dom.input;
 
-import java.awt.ComponentOrientation;
-import java.awt.event.ItemEvent;
-import java.util.Collection;
-import java.util.LinkedList;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.control.SelectControl;
 import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * <p>SelectOption class.</p>

@@ -20,7 +20,6 @@
 
 package org.loboevolution.junit;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
@@ -30,14 +29,12 @@ import org.loboevolution.html.dom.domimpl.ElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 
 import static org.junit.Assert.*;
 
 public class HTMLElementTest extends LoboUnitTest {
-
 	private Document document;
-
 	@Test
 	public void testCreateElementError() {
 		try {
@@ -86,7 +83,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("display:block", attr.getNodeValue());
 		HTMLElementImpl html = (HTMLElementImpl)document.getDocumentElement();
 		html.setAttributeNode(attr);
-		AbstractCSSProperties style = html.getStyle();
+		CSSStyleDeclaration style = html.getStyle();
 		assertNotNull(style);
 		assertEquals("display:block", style.getCssText());
 		assertEquals("display:block", html.getAttribute("style"));
@@ -580,9 +577,9 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertTrue(body.hasAttributes());
 		assertTrue(body.hasAttribute("style"));
 		assertEquals("font-family: Arial", body.getAttribute("style"));
-		AbstractCSSProperties style = body.getStyle();
+		CSSStyleDeclaration style = body.getStyle();
 		assertNotNull(style);
-		assertEquals(1, style.getStyleDeclarations().size());
+		assertEquals(1, style.getLength());
 		assertEquals("font-family: Arial", style.getCssText());
 		style.setCssText("font-family: Helvetica");
 		assertEquals("font-family: Helvetica", style.getCssText());
@@ -595,7 +592,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("font-family: Arial", body.getAttribute("STYLE"));
 		style = body.getStyle();
 		assertNotNull(style);
-		assertEquals(1, style.getStyleDeclarations().size());
+		assertEquals(1, style.getLength());
 		assertEquals("font-family: Arial", style.getCssText());
 	}
 

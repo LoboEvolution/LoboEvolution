@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.renderer;
 
-import java.awt.Point;
+import java.awt.*;
 
 /**
  * Contains a renderer node and a position in that node.

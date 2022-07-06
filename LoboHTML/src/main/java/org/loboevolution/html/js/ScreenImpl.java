@@ -20,11 +20,10 @@
 
 package org.loboevolution.html.js;
 
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-
 import org.loboevolution.html.node.js.Screen;
 import org.loboevolution.js.AbstractScriptableDelegate;
+
+import java.awt.*;
 
 /**
  * <p>ScreenImpl class.</p>

@@ -20,11 +20,11 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
-
 import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.loboevolution.html.dom.svg.SVGPoint;
+
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 
 /**
  * <p>SVGPointImpl class.</p>

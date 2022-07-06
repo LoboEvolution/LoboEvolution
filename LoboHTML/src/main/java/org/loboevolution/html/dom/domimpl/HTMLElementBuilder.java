@@ -24,31 +24,8 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.rss.RSSChanelElementImpl;
-import org.loboevolution.html.dom.rss.RSSDescriptionElementImpl;
-import org.loboevolution.html.dom.rss.RSSElementImpl;
-import org.loboevolution.html.dom.rss.RSSItemElementImpl;
-import org.loboevolution.html.dom.rss.RSSTitleElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGAnimateElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGAnimateTransformElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGCircleElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGClipPathElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGDefsElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGEllipseElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGGElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGImageElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGLineElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGLinearGradientElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGPathElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGPolygonElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGPolylineElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGRadialGradientElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGRectElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGStopElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGSymbolElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGTextElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGUseElementImpl;
+import org.loboevolution.html.dom.rss.*;
+import org.loboevolution.html.dom.svgimpl.*;
 
 import java.awt.font.TextAttribute;
 

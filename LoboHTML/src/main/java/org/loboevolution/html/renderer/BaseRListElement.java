@@ -21,8 +21,8 @@ package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.info.RBlockInfo;
-import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.ListStyle;
 
@@ -53,7 +53,7 @@ class BaseRListElement extends RBlock {
 		if (rootNode instanceof HTMLElementImpl) {
 
 			final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-			final AbstractCSSProperties props = rootElement.getCurrentStyle();
+			final CSSStyleDeclaration props = rootElement.getCurrentStyle();
 			if (props != null) {
 				ListStyle listStyle = null;
 				final String listStyleText = props.getListStyle();

@@ -27,7 +27,6 @@ import org.loboevolution.html.dom.HTMLIFrameElement;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.js.WindowProxy;
 import org.loboevolution.html.renderstate.IFrameRenderState;
 import org.loboevolution.html.renderstate.RenderState;
