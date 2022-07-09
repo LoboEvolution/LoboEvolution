@@ -35,9 +35,6 @@ import javax.swing.JTextArea;
 
 /**
  * <p>ProgressBarUI class.</p>
- *
- *
- *
  */
 public class ProgressBarUI extends JPanel implements PropertyChangeListener {
 

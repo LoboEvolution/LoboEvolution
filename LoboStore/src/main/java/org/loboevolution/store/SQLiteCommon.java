@@ -57,6 +57,9 @@ public class SQLiteCommon {
 	
     /** Constant DELETE_SOURCE_CACHE="DELETE FROM cache WHERE baseUrl = ? AND"{trunked} */
     public static final String DELETE_SOURCE_CACHE = "DELETE FROM cache WHERE baseUrl = ? AND type = ? AND strftime('%Y-%m-%d %H:%M:%S', lastModified) < strftime('%Y-%m-%d %H:%M:%S', 'now', 'localtime')";
+
+    /** Constant DELETE_ALL_CACHE="DELETE FROM cache */
+    public static final String DELETE_ALL_CACHE = "DELETE FROM cache";
 	
     /** Constant DELETE_LINK="DELETE FROM LINK_VISITED" */
     public static final String DELETE_LINK = "DELETE FROM LINK_VISITED";

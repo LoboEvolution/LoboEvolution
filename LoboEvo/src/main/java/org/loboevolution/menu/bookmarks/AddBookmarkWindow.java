@@ -41,6 +41,7 @@ import com.jtattoo.plaf.lobo.LoboLabel;
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import com.jtattoo.plaf.lobo.LoboPanel;
 import com.jtattoo.plaf.lobo.LoboTextField;
+import org.loboevolution.store.DesktopStore;
 
 /**
  * <p>AddBookmarkWindow class.</p>
@@ -82,7 +83,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 370, 440);
-		final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/bookmark.png"));
+		final ImageIcon ico = new ImageIcon(DesktopStore.getResourceFile("bookmark.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
 		LoboPanel panel = new LoboPanel();

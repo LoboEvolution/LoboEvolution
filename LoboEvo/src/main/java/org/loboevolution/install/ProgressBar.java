@@ -24,9 +24,6 @@ import javax.swing.*;
 
 /**
  * <p>ProgressBar class.</p>
- *
- *
- *
  */
 public class ProgressBar extends JFrame {
 

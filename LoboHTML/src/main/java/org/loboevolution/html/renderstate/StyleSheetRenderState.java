@@ -38,6 +38,7 @@ import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
+import org.loboevolution.store.DesktopStore;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -1226,7 +1227,6 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
 	public Optional<Cursor> getCursor() {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		final ClassLoader classLoader = getClass().getClassLoader();
 		Optional<Cursor> prevCursorOpt = Optional.empty();
 		if(element == null) return prevCursorOpt;
 		CSSStyleDeclaration props = element.getStyle();
@@ -1286,10 +1286,10 @@ public class StyleSheetRenderState implements RenderState {
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 					break;
 				case ZOOM_IN:
-					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(classLoader.getResource("org/lobo/image/zoomin.png")).getImage(), new Point(5,5), "zoomin"));
+					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(DesktopStore.getResourceFile("zoomin.png")).getImage(), new Point(5,5), "zoomin"));
 					break;
 				case ZOOM_OUT:
-					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(classLoader.getResource("org/lobo/image/zoomout.png")).getImage(), new Point(5,5), "zoomout"));
+					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(DesktopStore.getResourceFile("zoomout.png")).getImage(), new Point(5,5), "zoomout"));
 					break;
 				case INHERIT:
 					prevCursorOpt = this.getPreviousRenderState().getCursor();

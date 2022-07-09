@@ -34,6 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.info.BookmarkInfo;
+import org.loboevolution.store.DesktopStore;
 import org.loboevolution.store.InputStore;
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLabel;
@@ -85,7 +86,7 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 410);
-		final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/bookmark.png"));
+		final ImageIcon ico = new ImageIcon(DesktopStore.getResourceFile("bookmark.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
 		LoboLabel label_6 = new LoboLabel("");

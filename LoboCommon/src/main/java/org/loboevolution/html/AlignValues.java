@@ -25,9 +25,6 @@ import java.util.Map;
 
 /**
  * <p>AlignValues class.</p>
- *
- *
- *
  */
 public enum AlignValues {
 	

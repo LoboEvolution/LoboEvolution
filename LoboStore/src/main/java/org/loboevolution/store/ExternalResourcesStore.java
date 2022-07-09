@@ -178,6 +178,15 @@ public class ExternalResourcesStore {
 		}
 	}
 
+	public static void deleteAllCache() {
+		try (Connection conn = DriverManager.getConnection(DB_PATH);
+			 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_ALL_CACHE)) {
+			pstmt.executeUpdate();
+		} catch (Exception err) {
+			logger.log(Level.SEVERE, err.getMessage(), err);
+		}
+	}
+
 	private static void deleteCache(String baseUrl, String type) {
 		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_SOURCE_CACHE)) {

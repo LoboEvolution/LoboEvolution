@@ -28,14 +28,13 @@ import java.util.logging.Logger;
 
 /**
  * <p>Files class.</p>
- *
- *
- *
  */
 public class Files {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(Files.class.getName());
+
+	public static final int DEFAULT_BUFFER_SIZE = 819;
 
 	/**
 	 * <p>getResourceAsFile.</p>
@@ -65,6 +64,20 @@ public class Files {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}
+	}
+
+	public static void copyInputStreamToFile(InputStream inputStream, File file)
+			throws IOException {
+
+		// append = false
+		try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
+			int read;
+			byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
+			while ((read = inputStream.read(bytes)) != -1) {
+				outputStream.write(bytes, 0, read);
+			}
+		}
+
 	}
 
 }

@@ -44,16 +44,6 @@ public class DatabseSQLite {
     }
 
     /**
-     * <p>getCacheStore.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getCacheStore() {
-        final Path path = Paths.get(System.getProperty("user.home"), ".lobo", "cache");
-        return path.toString();
-    }
-
-    /**
      * <p>getDatabaseDirectory.</p>
      *
      * @return a {@link java.lang.String} object.

@@ -41,6 +41,7 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.BookmarksStore;
+import org.loboevolution.store.DesktopStore;
 import org.loboevolution.store.TabStore;
 
 import com.jtattoo.plaf.lobo.LoboButton;
@@ -87,7 +88,7 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 950, 410);
-		final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/bookmark.png"));
+		final ImageIcon ico = new ImageIcon(DesktopStore.getResourceFile("bookmark.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
 		LoboLabel label_6 = new LoboLabel("");

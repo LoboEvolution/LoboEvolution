@@ -23,16 +23,16 @@ package org.loboevolution.welcome;
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IWelcomePanel;
+import org.loboevolution.store.DesktopStore;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -77,10 +77,10 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
     protected void paintComponent(Graphics g) {
         setOpaque(false);
         if (img == null) {
-            File[] files = getResourceFolderFiles(getClass().getResource("/org/lobo/image/welcome/"));
+            File[] files = DesktopStore.getResourceFolderFiles();
             Random rand = new Random();
             File file = files[rand.nextInt(files.length)];
-            try (InputStream is = new FileInputStream(file)) {
+            try (InputStream is = Files.newInputStream(file.toPath())) {
                 img = resize(null, is, (int) getSize().getWidth(), (int) getSize().getHeight());
                 g.drawImage(img, 0, 0, null);
             } catch (IOException e) {
@@ -117,11 +117,6 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
         return this;
     }
 
-
-    private static File[] getResourceFolderFiles(URL url) {
-        String path = url.getPath();
-        return new File(path).listFiles();
-    }
 
     private BufferedImage resize(Image image, InputStream input, int width, int height) {
         try {

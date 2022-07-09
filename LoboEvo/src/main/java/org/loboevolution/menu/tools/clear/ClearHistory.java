@@ -20,10 +20,11 @@
 
 package org.loboevolution.menu.tools.clear;
 
-import java.io.File;
-
 import org.loboevolution.http.CookieManager;
-import org.loboevolution.store.*;
+import org.loboevolution.store.BookmarksStore;
+import org.loboevolution.store.ExternalResourcesStore;
+import org.loboevolution.store.NavigationStore;
+import org.loboevolution.store.ToolsStore;
 
 /**
  * <p>ClearHistory class.</p>
@@ -42,9 +43,7 @@ public class ClearHistory {
 	 * Clear Cache.
 	 */
 	protected void clearCache() {
-		final File cacheHome = new File(DatabseSQLite.getCacheStore());
-		deleteRecursive(cacheHome);
-		cacheHome.mkdir();
+		ExternalResourcesStore.deleteAllCache();
 	}
 
 	/**
@@ -63,21 +62,5 @@ public class ClearHistory {
 		final NavigationStore hist = new NavigationStore();
 		hist.deleteHost();
 
-	}
-
-	/**
-	 * Delete recursive.
-	 *
-	 * @param rootDir the root dir
-	 */
-	private void deleteRecursive(File rootDir) {
-
-		final File[] c = rootDir.listFiles();
-		for (final File file : c) {
-			if (file.isDirectory()) {
-				deleteRecursive(file);
-			}
-			file.delete();
-		}
 	}
 }

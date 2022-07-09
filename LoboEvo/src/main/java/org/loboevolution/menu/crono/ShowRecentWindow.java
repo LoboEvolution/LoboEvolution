@@ -41,6 +41,7 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.info.BookmarkInfo;
+import org.loboevolution.store.DesktopStore;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
 
@@ -84,7 +85,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 500);
-		final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/host.png"));
+		final ImageIcon ico = new ImageIcon(DesktopStore.getResourceFile("host.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
 		LoboLabel label_6 = new LoboLabel("");

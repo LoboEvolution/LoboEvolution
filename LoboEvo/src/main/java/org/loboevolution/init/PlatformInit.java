@@ -27,9 +27,6 @@ import javax.swing.SwingUtilities;
 
 /**
  * <p>PlatformInit class.</p>
- *
- *
- *
  */
 public class PlatformInit {
 	
