@@ -7,39 +7,56 @@
 	</a>
 	<a href="https://codebeat.co/projects/github-com-loboevolution-loboevolution-master"><img alt="codebeat badge" src="https://codebeat.co/badges/74e4393e-77b9-44a9-ad98-0b33fb839754" /></a>
 	<a href="https://codeclimate.com/github/LoboEvolution/LoboEvolution/maintainability"><img src="https://api.codeclimate.com/v1/badges/eaeed65cfc69b72b4701/maintainability" /></a>
-	<a href="" alt="PRs">
-		<img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" />
-	</a>
-</p>
-<p align="center">
 	<a href="https://loboevolution.github.io/LoboEvolution-maven-release/index.html">
 		<img src="https://inch-ci.org/github/oswetto/LoboEvolution.svg" alt="Docs">
 	</a>
+</p>
+<p align="center">
 	<a href="http://sourceforge.net/projects/loboevolution/">
 		<img src="https://img.shields.io/website-up-down-green-red/http/shields.io.svg" alt="Website">
 	</a>
-	<a href="https://github.com/oswetto/LoboEvolution/blob/master/LICENSE/">
-		<img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GPLv3 license">
+	<a href="" alt="PRs">
+		<img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" />
 	</a>
 	<a href="https://github.com/oswetto/LoboEvolution/commits/master">
 		<img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance">
 	</a>
+	<a href="https://github.com/oswetto">
+		<img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" alt="Ask Me">
+	</a>
 </p>
-
-<p align="center">
-	<a href="https://github.com/oswetto/LoboEvolution/actions?query=workflow%3A%22Java+CI%22">
-		<img src="https://github.com/oswetto/LoboEvolution/workflows/Java%20CI/badge.svg" alt="CI">
+<p align="center">	
+	<a href="https://github.com/LoboEvolution/LoboEvolution/blob/master/LICENSE">
+		<img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GPLv3 license">
+	</a>	
+	<a href="https://search.maven.org/search?q=g:%22com.github.oswetto%22%20AND%20a:%22loboevolution%22">
+		<img src="https://img.shields.io/maven-central/v/com.github.oswetto/loboevolution.svg?label=Maven%20Central" alt="Maven Central">
+	</a>
+	<a href="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/publish-github.yml">
+		<img src="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/publish-github.yml/badge.svg" alt="Github Package">
 	</a>
 </p>
 
 Lobo Evolution began as a fork of the now-defunct project called the LoboBrowser [credits](https://sourceforge.net/projects/xamj/).
-Lobo Evolution is an extensible all-Java web browser and RIA platform. It supports HTML 4, HTML 5, Javascript, CSS2/CSS3 and Java (Swing/AWT) rendering.
 
-### ATTENTION
-LoboEvolution has been rewritten from scratch and is not compatible with [old version](https://github.com/oswetto/LoboEvolutionPreHistory)
 
-### Building
-Create a local clone of the repository and you are ready to start.
+### Supports
+Lobo Evolution is an extensible all-Java web browser and RIA platform. <br/>
+[![ForTheBadge uses-js](http://ForTheBadge.com/images/badges/uses-js.svg)](http://ForTheBadge.com)
+[![ForTheBadge uses-html](http://ForTheBadge.com/images/badges/uses-html.svg)](http://ForTheBadge.com)
+[![ForTheBadge uses-css](http://ForTheBadge.com/images/badges/uses-css.svg)](http://ForTheBadge.com) 
+
+### Download
+ 
+Last release click badge <br/> 
+<a href="https://github-registry-files.githubusercontent.com/25392674/a70d7f80-087c-11ed-8494-9386c96b6f83?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220720T231358Z&X-Amz-Expires=300&X-Amz-Signature=fd67a8f94d3c950aef7b0c4b9fcd03eb122b45ec11a5f2dd456e3d119f723d80&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=25392674&response-content-disposition=filename%3Dloboevolution-3.0.jar&response-content-type=application%2Foctet-stream">
+	<img src="https://img.shields.io/github/downloads/LoboEvolution/LoboEvolution/total.svg" alt="Download">
+</a> <br/>
+
+After download to run
+```
+java -jar loboevolution-3.0.jar
+```
 
 ### Local Building
 Run 
@@ -62,17 +79,8 @@ mvn surefire-report:report
 ### How To Do
 [TODO](https://github.com/oswetto/LoboEvolution/wiki/How-TODO)
 
-### Status build
-[Build](https://github.com/oswetto/LoboEvolution/actions)
-
-### Maven Dependency(add in your pom)
-```
-<dependency>
-  <groupId>com.github.oswetto</groupId>
-  <artifactId>loboevolution</artifactId>
-  <version>2.0</version>
-</dependency>
-```
-
 ### Pre-History
 The history of all commits that transform LoboBrowser in LoboEvoluiton is available in [a separate repository](https://github.com/oswetto/LoboEvolutionPreHistory).
+
+### Contributors
+![Your Repository's Stats](https://contrib.rocks/image?repo=LoboEvolution/LoboEvolution)
