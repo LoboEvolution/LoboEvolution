@@ -3,7 +3,7 @@ name: Publish to GitHub Packages
 on:
   push:
     branches:
-      - master-action
+      - master
   workflow_dispatch:
 jobs:
   build:
