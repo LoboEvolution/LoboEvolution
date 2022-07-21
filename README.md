@@ -48,8 +48,8 @@ Lobo Evolution is an extensible all-Java web browser and RIA platform. <br/>
 
 ### Download
  
-Last release click badge <br/> 
-<a href="https://github-registry-files.githubusercontent.com/25392674/a70d7f80-087c-11ed-8494-9386c96b6f83?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220720T231358Z&X-Amz-Expires=300&X-Amz-Signature=fd67a8f94d3c950aef7b0c4b9fcd03eb122b45ec11a5f2dd456e3d119f723d80&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=25392674&response-content-disposition=filename%3Dloboevolution-3.0.jar&response-content-type=application%2Foctet-stream">
+Last release click Download Badge <br/> 
+<a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/3.0/loboevolution-3.0.jar">
 	<img src="https://img.shields.io/github/downloads/LoboEvolution/LoboEvolution/total.svg" alt="Download">
 </a> <br/>
 

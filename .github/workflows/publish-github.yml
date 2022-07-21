@@ -1,9 +1,6 @@
 name: Publish to GitHub Packages
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
 jobs:
   build:
