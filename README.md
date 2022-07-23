@@ -7,8 +7,8 @@
 	</a>
 	<a href="https://codebeat.co/projects/github-com-loboevolution-loboevolution-master"><img alt="codebeat badge" src="https://codebeat.co/badges/74e4393e-77b9-44a9-ad98-0b33fb839754" /></a>
 	<a href="https://codeclimate.com/github/LoboEvolution/LoboEvolution/maintainability"><img src="https://api.codeclimate.com/v1/badges/eaeed65cfc69b72b4701/maintainability" /></a>
-	<a href="https://loboevolution.github.io/LoboEvolution-maven-release/index.html">
-		<img src="https://inch-ci.org/github/oswetto/LoboEvolution.svg" alt="Docs">
+	<a href="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/codeql.yml">
+		<img src="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/codeql.yml/badge.svg?branch=master" alt="Docs">
 	</a>
 </p>
 <p align="center">
@@ -21,11 +21,14 @@
 	<a href="https://github.com/oswetto/LoboEvolution/commits/master">
 		<img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance">
 	</a>
-	<a href="https://github.com/oswetto">
-		<img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" alt="Ask Me">
+	<a href="https://loboevolution.github.io/LoboEvolution/">
+		<img src="https://inch-ci.org/github/oswetto/LoboEvolution.svg" alt="Docs">
 	</a>
 </p>
 <p align="center">	
+	<a href="https://github.com/oswetto">
+		<img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" alt="Ask Me">
+	</a>
 	<a href="https://github.com/LoboEvolution/LoboEvolution/blob/master/LICENSE">
 		<img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GPLv3 license">
 	</a>	
