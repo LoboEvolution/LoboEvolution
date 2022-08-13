@@ -255,6 +255,11 @@ public class XPathNamespaceImpl implements XPathNamespace {
 		return 0;
 	}
 
+	@Override
+	public boolean isSupported(String xml, String s) {
+		return false;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String getTextContent() {

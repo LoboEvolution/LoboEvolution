@@ -24,13 +24,13 @@ package org.loboevolution.html.dom.domimpl;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.CSSValueImpl;
-import com.gargoylesoftware.css.dom.DOMException;
 import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
+import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.html.node.Element;
@@ -73,7 +73,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	/** {@inheritDoc} */
 	@Override
-	protected void assignAttributeField(String normalName, String value) {
+	public void assignAttributeField(String normalName, String value) {
 		if (!this.notificationsSuspended) {
 			informInvalidAttibute(normalName);
 		} else {
@@ -582,9 +582,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			properties3.add(new PropertyCssInfo(prop.getName(), propertyValue.getCssText()));
 		});
 
-		properties3.forEach(prop -> {
-			localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue());
-		});
+		properties3.forEach(prop -> localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue()));
 
 		return localStyleDeclarationState;
 	}

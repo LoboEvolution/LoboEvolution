@@ -22,9 +22,6 @@ package org.loboevolution.html.dom;
 
 /**
  * The Interface File.
- *
- *
- *
  */
 public interface File extends Blob {
 

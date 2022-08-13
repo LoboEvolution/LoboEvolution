@@ -30,7 +30,9 @@ import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.filter.HeadFilter;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.event.DocumentNotificationListener;
 import org.loboevolution.html.io.LocalErrorHandler;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.html.js.Executor;
@@ -153,7 +155,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * Adds a document notification listener, which is informed about changes to the
 	 * document.
 	 *
-	 * @param listener An instance of {@link org.loboevolution.html.dom.domimpl.DocumentNotificationListener}.
+	 * @param listener An instance of {@link DocumentNotificationListener}.
 	 */
 	public void addDocumentNotificationListener(DocumentNotificationListener listener) {
 		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -556,7 +558,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * <p>removeDocumentNotificationListener.</p>
 	 *
-	 * @param listener a {@link org.loboevolution.html.dom.domimpl.DocumentNotificationListener} object.
+	 * @param listener a {@link DocumentNotificationListener} object.
 	 */
 	public void removeDocumentNotificationListener(DocumentNotificationListener listener) {
 		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -565,7 +567,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	void removeNamedItem(String name) {
+	public void removeNamedItem(String name) {
 		synchronized (this) {
 			this.elementsByName.remove(name);
 		}
@@ -614,7 +616,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * Caller should synchronize on document.
 	 */
-	void setElementById(String id, Element element) {
+	public void setElementById(String id, Element element) {
 		synchronized (this) {
 			this.elementsById.put(id, element);
 		}
@@ -632,7 +634,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	}
 
 
-	void setNamedItem(String name, Element element) {
+	public void setNamedItem(String name, Element element) {
 		synchronized (this) {
 			this.elementsByName.put(name, element);
 		}

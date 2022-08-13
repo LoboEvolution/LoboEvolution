@@ -27,7 +27,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-class ElementFactory {
+public class ElementFactory {
 	
 	private final Map<HTMLTag, HTMLElementBuilder> builders = new HashMap<>();
 

@@ -25,7 +25,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.Entities;
 import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
-import org.loboevolution.html.dom.domimpl.DocumentTypeImpl;
+import org.loboevolution.html.dom.nodeimpl.DocumentTypeImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
@@ -276,8 +276,12 @@ public class HtmlParser {
 				} else if (tag.startsWith("?")) {
 					tag = tag.substring(1);
 					final StringBuilder data = readProcessingInstruction(reader);
-					safeAppendChild(parent, doc.createProcessingInstruction(tag, data.toString()));
-					return TOKEN_FULL_ELEMENT;
+					if(!tag.equals("xml")) {
+						safeAppendChild(parent, doc.createProcessingInstruction(tag, data.toString()));
+						return TOKEN_FULL_ELEMENT;
+					} else {
+						return TOKEN_TEXT;
+					}
 				} else {
 					final int localIndex = normalTag.indexOf(':');
 					final boolean tagHasPrefix = localIndex > 0;

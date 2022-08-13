@@ -21,7 +21,7 @@
 package org.loboevolution.html.js.xml;
 
 import com.gargoylesoftware.css.dom.DOMException;
-import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
+import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
 import org.xml.sax.*;

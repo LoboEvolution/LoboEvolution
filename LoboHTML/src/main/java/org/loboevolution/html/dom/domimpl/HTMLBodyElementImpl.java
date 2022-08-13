@@ -48,7 +48,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	/** {@inheritDoc} */
 	@Override
-	protected void assignAttributeField(String normalName, String value) {
+	public void assignAttributeField(String normalName, String value) {
 		if ("onload".equals(normalName)) {
 			final Function onload = getEventFunction(null, normalName);
 			if (onload != null) {

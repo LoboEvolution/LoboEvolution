@@ -25,9 +25,6 @@ package org.loboevolution.html.node;
  * characters. This is an abstract interface, meaning there aren't any object of
  * type it is implemented by other interfaces CharacterData, like Text, Comment,
  * or ProcessingInstruction which aren't abstract.
- *
- *
- *
  */
 public interface CharacterData extends Node, NonDocumentTypeChildNode {
 

@@ -20,7 +20,7 @@
 
 package org.loboevolution.menu.tools.developer.tool.inspector;
 
-import org.loboevolution.html.dom.domimpl.ElementImpl;
+import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 

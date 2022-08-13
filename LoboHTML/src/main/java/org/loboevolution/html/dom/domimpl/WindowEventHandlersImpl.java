@@ -19,6 +19,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.dom.nodeimpl.event.GlobalEventHandlersImpl;
 import org.loboevolution.html.node.js.WindowEventHandlers;
 import org.mozilla.javascript.Function;
 

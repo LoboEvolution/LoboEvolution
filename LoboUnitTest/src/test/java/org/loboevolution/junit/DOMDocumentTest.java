@@ -24,7 +24,7 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
+import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLStyleElementImpl;
 import org.loboevolution.html.node.*;

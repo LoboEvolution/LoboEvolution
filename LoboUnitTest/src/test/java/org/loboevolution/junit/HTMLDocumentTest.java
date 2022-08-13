@@ -26,6 +26,8 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.*;
+import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.*;

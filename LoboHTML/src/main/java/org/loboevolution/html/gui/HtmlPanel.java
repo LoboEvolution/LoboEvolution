@@ -25,7 +25,7 @@ package org.loboevolution.html.gui;
 import org.loboevolution.common.EventDispatch2;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.component.IBrowserPanel;
-import org.loboevolution.html.dom.domimpl.DocumentNotificationListener;
+import org.loboevolution.html.dom.nodeimpl.event.DocumentNotificationListener;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Document;

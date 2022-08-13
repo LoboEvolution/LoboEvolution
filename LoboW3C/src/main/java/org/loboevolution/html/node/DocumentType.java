@@ -22,9 +22,6 @@ package org.loboevolution.html.node;
 
 /**
  * A Node containing a doctype.
- *
- *
- *
  */
 public interface DocumentType extends Node {
 
@@ -49,4 +46,9 @@ public interface DocumentType extends Node {
 	 */
 	String getSystemId();
 
+    NamedNodeMap getNotations();
+
+    NamedNodeMap getEntities();
+
+    String getInternalSubset();
 }

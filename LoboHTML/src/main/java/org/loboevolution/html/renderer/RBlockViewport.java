@@ -25,7 +25,7 @@ import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.UIControl;
 import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.DocumentFragmentImpl;
+import org.loboevolution.html.dom.nodeimpl.DocumentFragmentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.dom.domimpl.UINode;

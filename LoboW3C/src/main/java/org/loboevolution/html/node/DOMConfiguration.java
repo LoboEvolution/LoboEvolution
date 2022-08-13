@@ -22,9 +22,6 @@ package org.loboevolution.html.node;
 
 /**
  * <p>DOMConfiguration interface.</p>
- *
- *
- *
  */
 public interface DOMConfiguration {
 

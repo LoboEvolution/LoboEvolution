@@ -23,7 +23,6 @@
 package org.loboevolution.html.dom.nodeimpl;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.domimpl.AttrImpl;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;

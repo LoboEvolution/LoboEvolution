@@ -22,10 +22,7 @@ package org.loboevolution.html.node;
 
 /**
  * An object providing methods which are not dependent on any particular
- * document. Such an object is returned by the Document.implementation property.
- *
- *
- *
+ * document. Such an object is returned by the Document implementation property.
  */
 public interface DOMImplementation {
 
@@ -63,4 +60,6 @@ public interface DOMImplementation {
 	 * @return a {@link org.loboevolution.html.node.Document} object.
 	 */
 	Document createHTMLDocument();
+
+    boolean hasFeature(String xml, String s);
 }

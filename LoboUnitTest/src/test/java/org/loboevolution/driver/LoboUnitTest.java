@@ -25,7 +25,6 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
-import org.loboevolution.junit.HTMLDocumentTest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,7 +59,14 @@ public class LoboUnitTest extends LoboWebDriver {
      * <p>sampleHtmlFile.</p>.
      */
     public static Document sampleHtmlFile() {
-        return loadHtml(HTMLDocumentTest.class.getResourceAsStream("/org/lobo/html/htmlsample.html"));
+        return loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/html/htmlsample.html"));
+    }
+
+    /**
+     * <p>sampleHtmlFile.</p>.
+     */
+    public static Document sampleXmlFile(String fileName) {
+        return loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/xml/" + fileName));
     }
 
     /**

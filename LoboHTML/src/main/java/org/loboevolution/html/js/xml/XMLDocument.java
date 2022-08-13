@@ -162,6 +162,11 @@ public class XMLDocument implements Document {
 		return doc.compareDocumentPosition(other);
 	}
 
+	@Override
+	public boolean isSupported(String xml, String s) {
+		return false;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String getBaseURI() {
@@ -346,6 +351,11 @@ public class XMLDocument implements Document {
 	@Override
 	public Node adoptNode(Node source) {
 		return doc.adoptNode(source);
+	}
+
+	@Override
+	public EntityReference createEntityReference(String ent1) {
+		return doc.createEntityReference(ent1);
 	}
 
 	/** {@inheritDoc} */

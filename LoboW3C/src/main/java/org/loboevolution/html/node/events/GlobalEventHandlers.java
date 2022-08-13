@@ -24,9 +24,6 @@ import org.mozilla.javascript.Function;
 
 /**
  * The interface Global event handlers.
- *
- *
- *
  */
 public interface GlobalEventHandlers extends EventTarget {
 	/**

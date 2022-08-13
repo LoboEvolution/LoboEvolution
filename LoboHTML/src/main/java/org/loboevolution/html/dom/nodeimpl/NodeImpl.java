@@ -243,6 +243,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return false;
 	}
 
+	@Override
+	public boolean isSupported(String xml, String s) {
+		return false;
+	}
 
 	/** {@inheritDoc} */
 	@Override

@@ -27,9 +27,6 @@ package org.loboevolution.html.node;
  * the document fragment isn't part of the active document tree structure,
  * changes made to the fragment don't affect the document, cause reflow, or
  * incur any performance impact that can occur when changes are made.
- *
- *
- *
  */
 public interface DocumentFragment extends Node {
 

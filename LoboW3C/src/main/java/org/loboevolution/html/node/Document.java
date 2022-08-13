@@ -967,4 +967,5 @@ public interface Document extends Node, NonElementParentNode, ParentNode {
 	 */
 	XPathResult evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result);
 
+    EntityReference createEntityReference(String ent1);
 }

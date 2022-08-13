@@ -345,4 +345,6 @@ public interface Node extends EventTarget {
 	 * @return a short.
 	 */
 	short compareDocumentPosition(Node other);
+
+    boolean isSupported(String xml, String s);
 }
