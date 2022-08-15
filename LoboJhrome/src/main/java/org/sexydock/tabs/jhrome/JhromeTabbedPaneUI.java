@@ -24,9 +24,6 @@ import org.sexydock.InternalTransferableStore;
 import org.sexydock.SwingUtils;
 import org.sexydock.tabs.*;
 import org.sexydock.tabs.event.*;
-import sun.swing.DefaultLookup;
-import sun.swing.SwingUtilities2;
-import sun.swing.UIAction;
 
 import javax.swing.Timer;
 import javax.swing.*;
@@ -1093,9 +1090,9 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
     InputMap getInputMap(int condition) {
         if (condition == JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT) {
-            return (InputMap) DefaultLookup.get(tabbedPane, this, "TabbedPane.ancestorInputMap");
+            return (InputMap) UIManager.get("TabbedPane.ancestorInputMap", tabbedPane.getLocale());
         } else if (condition == JComponent.WHEN_FOCUSED) {
-            return (InputMap) DefaultLookup.get(tabbedPane, this, "TabbedPane.focusInputMap");
+            return (InputMap) UIManager.get("TabbedPane.focusInputMap", tabbedPane.getLocale());
         }
         return null;
     }
@@ -1177,28 +1174,46 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     // protected in the next release where
     // API changes are allowed
     boolean requestFocusForVisibleComponent() {
-        return SwingUtilities2.tabbedPaneChangeFocusTo(currentContent);
+        if (currentContent != null) {
+            if (currentContent.isFocusable()) {
+                compositeRequestFocus(currentContent);
+                return true;
+            } else if (currentContent instanceof JComponent
+                    && ((JComponent) currentContent).requestDefaultFocus()) {
+
+                return true;
+            }
+        }
+        return false;
     }
 
-    private void navigateSelectedTab(int next) {
-        int currentIndex = tabbedPane.getSelectedIndex();
+    private Component compositeRequestFocus(Component component) {
+        if (component instanceof Container) {
+            Container container = (Container)component;
+            if (container.isFocusCycleRoot()) {
+                FocusTraversalPolicy policy = container.getFocusTraversalPolicy();
+                Component comp = policy.getDefaultComponent(container);
+                if (comp!=null) {
+                    comp.requestFocus();
+                    return comp;
+                }
+            }
+            Container rootAncestor = container.getFocusCycleRootAncestor();
+            if (rootAncestor!=null) {
+                FocusTraversalPolicy policy = rootAncestor.getFocusTraversalPolicy();
+                Component comp = policy.getComponentAfter(rootAncestor, container);
 
-        switch (next) {
-            case SwingConstants.NEXT:
-            case SwingConstants.EAST:
-            case SwingConstants.SOUTH:
-                if (currentIndex < tabbedPane.getTabCount() - 1) {
-                    tabbedPane.setSelectedIndex(currentIndex + 1);
+                if (comp!=null && SwingUtilities.isDescendingFrom(comp, container)) {
+                    comp.requestFocus();
+                    return comp;
                 }
-                break;
-            case SwingConstants.PREVIOUS:
-            case SwingConstants.WEST:
-            case SwingConstants.NORTH:
-                if (currentIndex > 0) {
-                    tabbedPane.setSelectedIndex(currentIndex - 1);
-                }
-                break;
+            }
         }
+        if (component.isFocusable()) {
+            component.requestFocus();
+            return component;
+        }
+        return null;
     }
 
     private static class TabInfo {
@@ -1888,7 +1903,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private class Actions extends UIAction {
+    private class Actions extends AbstractAction {
         final static String NEXT = "navigateNext";
         final static String PREVIOUS = "navigatePrevious";
         final static String RIGHT = "navigateRight";
@@ -1904,12 +1919,14 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         final static String SCROLL_FORWARD = "scrollTabsForwardAction";
         final static String SCROLL_BACKWARD = "scrollTabsBackwardAction";
 
-        Actions(String key) {
-            super(key);
+        private String key;
+
+        Actions(String key){
+            this.key = key;
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
-            String key = getName();
             JTabbedPane pane = (JTabbedPane) e.getSource();
 
             switch (key) {

@@ -18,8 +18,6 @@ along with Jhrome.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.sexydock.tabs;
-
-import com.sun.awt.AWTUtilities;
 import org.sexydock.SwingUtils;
 import org.sexydock.tabs.jhrome.JhromeTabbedPaneUI;
 
@@ -61,7 +59,6 @@ public class DefaultFloatingTabHandler implements IFloatingTabHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     @Override
     public void onFloatingBegin(Tab draggedTab, Point grabPoint) {
         initialize(draggedTab, grabPoint);
@@ -79,7 +76,7 @@ public class DefaultFloatingTabHandler implements IFloatingTabHandler {
                     }
                 };
 
-                AWTUtilities.setWindowOpaque(dragImageWindow, false);
+                dragImageWindow.setBackground(new Color(0, 0, 0, 0));
             }
 
             dragImageWindow.setSize(dragImage.getWidth(null), dragImage.getHeight(null));
