@@ -33,15 +33,13 @@ import org.loboevolution.pdfview.PDFPaint;
 import org.loboevolution.pdfview.PDFParseException;
 import org.loboevolution.pdfview.function.PDFFunction;
 
-
 /**
  * A color space that can convert a set of color components into
  * PDFPaint.
- *
  * Author Mike Wessler
-  *
  */
 public class PDFColorSpace {
+
     /** the name of the device-dependent gray color space */
     public static final int COLORSPACE_GRAY = 0;
 
@@ -54,11 +52,7 @@ public class PDFColorSpace {
     /** the name of the pattern color space */
     public static final int COLORSPACE_PATTERN = 3;
 
-    /** the device-dependent color spaces */
-    //    private static PDFColorSpace graySpace =
-    //            new PDFColorSpace(ColorSpace.getInstance(ColorSpace.CS_GRAY));
-    private static final PDFColorSpace rgbSpace = new PDFColorSpace(ColorSpace.getInstance(
-                ColorSpace.CS_sRGB));
+    private static final PDFColorSpace rgbSpace = new PDFColorSpace(ColorSpace.getInstance(ColorSpace.CS_sRGB));
     private static final PDFColorSpace cmykSpace = new PDFColorSpace(new CMYKColorSpace());
 
     /** the pattern space */

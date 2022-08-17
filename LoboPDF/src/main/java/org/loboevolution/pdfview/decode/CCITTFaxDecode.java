@@ -3,18 +3,17 @@ package org.loboevolution.pdfview.decode;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+import org.jpedal.io.filter.ccitt.CCITT1D;
+import org.jpedal.io.filter.ccitt.CCITT2D;
+import org.jpedal.io.filter.ccitt.CCITTDecoder;
+import org.jpedal.io.filter.ccitt.CCITTMix;
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFObject;
 
 /**
  * <p>CCITTFaxDecode class.</p>
- *
-  *
-  *
  */
 public class CCITTFaxDecode {
-
-
 
 	/**
 	 * <p>decode.</p>
@@ -60,46 +59,38 @@ public class CCITTFaxDecode {
 			height = heightDef.getIntValue();
 		}
 
-		//
 		int columns = getOptionFieldInt(dict, "Columns", width);
 		int rows = getOptionFieldInt(dict, "Rows", height);
 		int k = getOptionFieldInt(dict, "K", 0);
-		int size = rows * ((columns + 7) >> 3);
-		byte[] destination = new byte[size];
-
 		boolean align = getOptionFieldBoolean(dict, "EncodedByteAlign", false);
+		boolean blackIsOne = getOptionFieldBoolean(dict, "BlackIs1", false);
 
-		CCITTFaxDecoder decoder = new CCITTFaxDecoder(1, columns, rows);
-		decoder.setAlign(align);
+		CCITTDecoder decoder;
+		if (k == 0){
+			// Pure 1D decoding, group3
+			decoder = new CCITT1D(source, columns, rows, blackIsOne, align);
+		} else if (k < 0) {
+			// Pure 2D, group 4
+			decoder = new CCITT2D(source, columns, rows, blackIsOne, align);
+		} else /*if (k > 0)*/ {
+			// Mixed 1/2 D encoding we can use either for maximum compression
+			// A 1D line can be followed by up to K-1 2D lines
+			decoder = new CCITTMix(source, columns, rows, blackIsOne, align);
+		}
+
+		byte[] result;
 		try {
-			if (k == 0) {
-				decoder.decodeT41D(destination, source, 0, rows);
-			} else if (k > 0) {
-				decoder.decodeT42D(destination, source, 0, rows);
-			} else if (k < 0) {
-				decoder.decodeT6(destination, source, 0, rows);
-			}
-		}catch (Exception e) {
-		    PDFDebugger.debug("Error decoding CCITTFax image k: "+ k);
-			// some PDf producer don't correctly assign a k value for the deocde,
-			// as  result we can try one more time using the T6.
-			//first, reset buffer
-			destination = new byte[size];
-			try {
-				decoder.decodeT6(destination, source, 0, rows);
-			}catch (Exception e1) {
-				// do nothing
-			    PDFDebugger.debug("Error decoding CCITTFax image");
-			}
-		}
-		if (!getOptionFieldBoolean(dict, "BlackIs1", false)) {
-			for (int i = 0; i < destination.length; i++) {
-				// bitwise not
-				destination[i] = (byte) ~destination[i];
+			result = decoder.decode();
+		} catch (RuntimeException e) {
+			System.out.println("Error decoding CCITTFax image k: "+ k);
+			if (k >= 0) {
+				result = new CCITT2D(source, columns, rows, blackIsOne, align).decode();
+			} else {
+				throw e;
 			}
 		}
 
-		return destination;
+		return result;
 	}
 
 	/**

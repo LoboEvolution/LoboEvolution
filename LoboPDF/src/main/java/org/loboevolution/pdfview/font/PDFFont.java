@@ -38,7 +38,6 @@ import org.loboevolution.pdfview.font.ttf.TrueTypeFont;
 
 /**
  * a Font definition for PDF files
- *
  * Author Mike Wessler
   *
  */
@@ -92,37 +91,6 @@ public abstract class PDFFont {
     public synchronized static PDFFont getFont(PDFObject obj,
             HashMap<String,PDFObject> resources)
             throws IOException {
-        // the obj is actually a dictionary containing:
-        //    Type (=Font)
-        //    Subtype (Type1, TrueType, Type3, Type0, MMType1, CIDFontType0,2)
-        //    FirstChar (int)
-        //    LastChar (int)
-        //    Widths (array)
-        //    Encoding (name or dict) : assumes StandardEncoding
-        // and........
-        // Type1 and TrueType fonts:
-        //    BaseFont (name)  // may be XXXXXX+Fontname as a subset.
-        //    FontDescriptor (dict)
-        // Type3 fonts:
-        //    FontBBox (rectangle)
-        //    FontMatrix (array) // e.g. [0.001 0 0 0.001 0 0]
-        //    CharProcs (dict)
-        //    Resources (dict)
-        //
-        // Font descriptor (Type1 and TrueType fonts):
-        //    FontName (name)
-        //    Flags (1=monospace, 2=serif, 4=script, 7=italic, 19=bold)
-        //    FontBBox (rectangle)
-        //    ItalicAngle (float)
-        //    Ascent (float)
-        //    Descent (float)
-        //    CapHeight (float)
-        //    StemV (float)
-        //    FontFile (stream for Type1 fonts)
-        //    FontFile2 (stream for TrueType fonts)
-        //    FontFile3 (stream for CFF/Type1C fonts)
-        //
-        // Font data can be Type1, TrueType(native), or Type1C
         PDFFont font = (PDFFont) obj.getCache();
         if (font != null) {
             return font;

@@ -47,9 +47,9 @@ public class CMYKColorSpace extends ColorSpace {
 	public CMYKColorSpace() {
 		super(ColorSpace.TYPE_CMYK, 4);
 		try {
-			URL resource = ICC_Profile.class.getResource("/org/monte/media/jpeg/Generic_CMYK_Profile.icc");
+			URL resource = CMYKColorSpace.class.getResource("/org/monte/media/jpeg/Generic_CMYK_Profile.icc");
 			try (InputStream stream = resource.openStream()) {
-				icc = ICC_Profile.getInstance(resource.openStream());
+				icc = ICC_Profile.getInstance(stream);
 				icc_cs = new ICC_ColorSpace(icc);
 			}			
 		} catch (IOException e) {

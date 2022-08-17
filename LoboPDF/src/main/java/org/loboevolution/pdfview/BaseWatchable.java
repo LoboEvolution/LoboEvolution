@@ -21,9 +21,6 @@ package org.loboevolution.pdfview;
 /**
  * An abstract implementation of the watchable interface, that is extended
  * by the parser and renderer to do their thing.
- *
-  *
-  *
  */
 public abstract class BaseWatchable implements Watchable, Runnable {
 

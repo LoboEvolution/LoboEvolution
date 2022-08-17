@@ -18,27 +18,15 @@
  */
 package org.loboevolution.pdfview;
 
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
-
 import org.loboevolution.pdfview.action.GoToAction;
 import org.loboevolution.pdfview.action.PDFAction;
 import org.loboevolution.pdfview.annotation.PDFAnnotation;
-import org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByPlatformException;
-import org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByProductException;
-import org.loboevolution.pdfview.decrypt.IdentityDecrypter;
-import org.loboevolution.pdfview.decrypt.PDFDecrypter;
-import org.loboevolution.pdfview.decrypt.PDFDecrypterFactory;
-import org.loboevolution.pdfview.decrypt.PDFPassword;
-import org.loboevolution.pdfview.decrypt.UnsupportedEncryptionException;
+import org.loboevolution.pdfview.decrypt.*;
+
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.*;
 
 /**
  * An encapsulation of a .pdf file.  The methods of this class
@@ -47,7 +35,6 @@ import org.loboevolution.pdfview.decrypt.UnsupportedEncryptionException;
  * access to the pages in the PDF file.  Typically, you create
  * a new PDFFile, ask it for the number of pages, and then
  * request one or more PDFPages.
- *
  * Author Mike Wessler
   *
  */
@@ -183,41 +170,6 @@ public class PDFFile {
             return 0;
         }
     }
-
-    /**
-     * Get metadata (e.g., Author, Title, Creator) from the Info dictionary
-     * as a string.
-     *
-     * @param name the name of the metadata key (e.g., Author)
-     * @return the info
-     * @throws java.io.IOException if any.
-     */
-    public String getStringMetadata(String name)
-            throws IOException {
-        if (this.info != null) {
-            final PDFObject meta = this.info.getDictRef(name);
-            return meta != null ? meta.getTextStringValue() : null;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Get the keys into the Info metadata, for use with
-     * {@link #getStringMetadata(String)}
-     *
-     * @return the keys present into the Info dictionary
-     * @throws java.io.IOException if any.
-     */
-    public Iterator<String> getMetadataKeys()
-            throws IOException {
-        if (this.info != null) {
-            return this.info.getDictKeys();
-        } else {
-            return Collections.emptyIterator();
-        }
-    }
-
 
     /**
      * Used internally to track down PDFObject references.  You should never
@@ -533,33 +485,6 @@ public class PDFFile {
         } catch (Exception e) {
             // ignore
         }
-    }
-
-    /**
-     * return the major version of the PDF header.
-     *
-     * @return int
-     */
-    public int getMajorVersion() {
-        return this.majorVersion;
-    }
-
-    /**
-     * return the minor version of the PDF header.
-     *
-     * @return int
-     */
-    public int getMinorVersion() {
-        return this.minorVersion;
-    }
-
-    /**
-     * return the version string from the PDF header.
-     *
-     * @return String
-     */
-    public String getVersionString() {
-        return this.versionString;
     }
 
     /**
@@ -1349,14 +1274,12 @@ public class PDFFile {
         }
 
         // check what permissions are relevant
-        if (this.encrypt != null && newDefaultDecrypter!=null) {
+        if (this.encrypt != null && newDefaultDecrypter != null) {
             PDFObject permissions = this.encrypt.getDictRef("P");
-            if (permissions!=null && !newDefaultDecrypter.isOwnerAuthorised()) {
-                int perms= permissions != null ? permissions.getIntValue() : 0;
-                if (permissions!=null) {
+            if (permissions != null && !newDefaultDecrypter.isOwnerAuthorised()) {
+                int perms = permissions.getIntValue();
                     this.printable = (perms & 4) != 0;
                     this.saveable = (perms & 16) != 0;
-                }
             }
             // Install the new default decrypter only after the trailer has
             // been read, as nothing we're reading passing through is encrypted
@@ -1378,7 +1301,6 @@ public class PDFFile {
      * build the PDFFile reference table.  Nothing in the PDFFile actually
      * gets parsed, despite the name of this function.  Things only get
      * read and parsed when they're needed.
-     * @param password
      */
     private void parseFile(PDFPassword password) throws IOException {
         // start at the begining of the file
@@ -1456,7 +1378,7 @@ public class PDFFile {
     public OutlineNode getOutline() throws IOException {
         // find the outlines entry in the root object
         PDFObject oroot = this.root.getDictRef("Outlines");
-        OutlineNode work = null;
+        OutlineNode work;
         OutlineNode outline = null;
         if (oroot != null) {
             // find the first child of the outline root
@@ -1589,8 +1511,8 @@ public class PDFFile {
      */
     public PDFPage getPage(int pagenum, boolean wait) {
         Integer key = pagenum;
-        HashMap<String,PDFObject> resources = null;
-        PDFObject pageObj = null;
+        HashMap<String,PDFObject> resources;
+        PDFObject pageObj;
 
         PDFPage page = this.cache.getPage(key);
         PDFParser parser = this.cache.getPageParser(key);
@@ -1722,7 +1644,7 @@ public class PDFFile {
         List<PDFAnnotation> annotationList = new ArrayList<>();
         if (annots != null) {
             if (annots.getType() != PDFObject.ARRAY) {
-                throw new PDFParseException("Can't parse annotations: " + annots.toString());
+                throw new PDFParseException("Can't parse annotations: " + annots);
             }
         	PDFObject[] array = annots.getArray();
         	for (PDFObject object : array) {
