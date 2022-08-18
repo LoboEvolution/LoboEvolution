@@ -62,7 +62,6 @@ public class elementremoveattributeTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(3);
-        testEmployee.removeAttribute("street");
         attrValue = testEmployee.getAttribute("street");
         assertEquals("streetYes", "Yes", attrValue);
     }

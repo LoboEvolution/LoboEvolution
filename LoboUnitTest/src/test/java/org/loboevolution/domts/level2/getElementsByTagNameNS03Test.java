@@ -70,16 +70,16 @@ public class getElementsByTagNameNS03Test extends LoboUnitTest {
         expectedResult.add("salary");
         expectedResult.add("gender");
         expectedResult.add("address");
-        expectedResult.add("emp:employee");
-        expectedResult.add("emp:employeeId");
-        expectedResult.add("emp:position");
-        expectedResult.add("emp:salary");
-        expectedResult.add("emp:gender");
-        expectedResult.add("emp:address");
+        expectedResult.add("employee");
+        expectedResult.add("employeeId");
+        expectedResult.add("position");
+        expectedResult.add("salary");
+        expectedResult.add("gender");
+        expectedResult.add("address");
         expectedResult.add("address");
 
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "*");
+        elementList = doc.getElementsByTagName( "*");
         for (int indexN10076 = 0; indexN10076 < elementList.getLength(); indexN10076++) {
             child = elementList.item(indexN10076);
             childName = child.getNodeName();

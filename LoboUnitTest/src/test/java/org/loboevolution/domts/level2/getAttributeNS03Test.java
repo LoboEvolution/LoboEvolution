@@ -35,8 +35,8 @@ import static org.junit.Assert.assertNotNull;
  * The "getAttributeNS(namespaceURI,localName)" method retrieves an
  * attribute value by local name and NamespaceURI.
  * <p>
- * Retrieve the first "emp:address" element.
- * The value returned by the "getAttributeNS()" method for the emp:domestic attribute
+ * Retrieve the first "address" element.
+ * The value returned by the "getAttributeNS()" method for the domestic attribute
  * should be the empty string since the attribute does not have a specified value
  * because it was removed by the "removeAttributeNS()" method.
  *
@@ -59,7 +59,7 @@ public class getAttributeNS03Test extends LoboUnitTest {
         Element testAddr;
         String attrValue;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
         testAddr.removeAttributeNS(namespaceURI, localName);

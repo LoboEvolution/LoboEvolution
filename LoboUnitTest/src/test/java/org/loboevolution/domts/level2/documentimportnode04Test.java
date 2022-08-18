@@ -69,7 +69,7 @@ public class documentimportnode04Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "l2:root", docType);
-        childList = doc.getElementsByTagNameNS("http://www.nist.gov", "employee");
+        childList = doc.getElementsByTagName( "employee");
         element = (Element) childList.item(1);
         attr = element.getAttributeNode("defaultAttr");
         importedAttr = newDoc.importNode(attr, true);

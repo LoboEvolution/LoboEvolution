@@ -71,7 +71,7 @@ public class setAttributeNodeNS02Test extends LoboUnitTest {
         gList = gen.getChildNodes();
         genElement = (Element) gList.item(0);
         assertNotNull("notnull", genElement);
-        newAttr = doc.createAttributeNS("www.xyz.com", "emp:local1");
+        newAttr = doc.createAttributeNS("www.xyz.com", "local1");
 
         {
             boolean success = false;

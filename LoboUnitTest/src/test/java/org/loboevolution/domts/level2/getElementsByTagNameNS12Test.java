@@ -57,7 +57,7 @@ public class getElementsByTagNameNS12Test extends LoboUnitTest {
         HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
-        elementList = docElem.getElementsByTagNameNS("http://www.nist.gov", "nomatch");
+        elementList = docElem.getElementsByTagName( "nomatch");
         assertEquals( "size", 0, elementList.getLength());
     }
 

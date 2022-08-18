@@ -72,7 +72,7 @@ public class noderemovechildnodeTest extends LoboUnitTest {
 
         if (length == 5) {
             assertEquals("removedNameNoWhitespace", "EMPLOYEEID",removedName);
-            assertEquals("childNameNoWhitespace", "name", childName);
+            assertEquals("childNameNoWhitespace", "NAME", childName);
         } else {
             assertEquals("removedName", "#text", removedName);
             assertEquals("childName", "EMPLOYEEID",childName);

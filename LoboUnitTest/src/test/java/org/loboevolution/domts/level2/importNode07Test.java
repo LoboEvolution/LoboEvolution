@@ -38,9 +38,9 @@ import static org.junit.Assert.assertEquals;
  * If this document defines default attributes for this element name (importedNode),
  * those default attributes are assigned.
  * <p>
- * Create an element whose name is "emp:employee" in a different document.
+ * Create an element whose name is "employee" in a different document.
  * Invoke method importNode(importedNode,deep) on this document which
- * defines default attribute for the element name "emp:employee".
+ * defines default attribute for the element name "employee".
  * Method should return an the imported element with an assigned default attribute.
  *
  * @author NIST
@@ -65,7 +65,7 @@ public class importNode07Test extends LoboUnitTest {
         Node attr;
         String lname;
         String namespaceURI = "http://www.nist.gov";
-        String qualifiedName = "emp:employee";
+        String qualifiedName = "employee";
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staff.xml");
         element = aNewDoc.createElementNS(namespaceURI, qualifiedName);
@@ -73,7 +73,7 @@ public class importNode07Test extends LoboUnitTest {
         attributes = aNode.getAttributes();
         assertEquals("throw_Size", 1, attributes.getLength());
         name = aNode.getNodeName();
-        assertEquals("nodeName", "emp:employee", name);
+        assertEquals("nodeName", "employee", name);
         attr = attributes.item(0);
         lname = attr.getLocalName();
         assertEquals("lname", "defaultAttr", lname);

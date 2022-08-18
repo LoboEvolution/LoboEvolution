@@ -63,7 +63,7 @@ public class prefix07Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                employeeNode.setPrefix("emp::");
+                employeeNode.setPrefix(":");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }

@@ -56,7 +56,7 @@ public class nodedocumentfragmentnodenameTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         docFragment = doc.createDocumentFragment();
         documentFragmentName = docFragment.getNodeName();
-        assertEquals("nodeDocumentFragmentNodeNameAssert1", "#document-fragment", documentFragmentName);
+        assertEquals("nodeDocumentFragmentNodeNameAssert1", "[object DocumentFragment]", documentFragmentName);
     }
 }
 

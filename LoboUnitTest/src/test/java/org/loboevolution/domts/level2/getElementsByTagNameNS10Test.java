@@ -28,6 +28,9 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -60,9 +63,9 @@ public class getElementsByTagNameNS10Test extends LoboUnitTest {
         HTMLCollection elementList;
         Node child;
         String childName;
-        java.util.List result = new java.util.ArrayList();
+        List<String> result = new ArrayList<>();
 
-        java.util.List expectedResult = new java.util.ArrayList();
+        List<String> expectedResult = new ArrayList<>();
         expectedResult.add("employee");
         expectedResult.add("employeeId");
         expectedResult.add("name");
@@ -70,17 +73,16 @@ public class getElementsByTagNameNS10Test extends LoboUnitTest {
         expectedResult.add("salary");
         expectedResult.add("gender");
         expectedResult.add("address");
-        expectedResult.add("emp:employee");
-        expectedResult.add("emp:employeeId");
-        expectedResult.add("emp:position");
-        expectedResult.add("emp:salary");
-        expectedResult.add("emp:gender");
-        expectedResult.add("emp:address");
+        expectedResult.add("employee");
+        expectedResult.add("employeeId");
+        expectedResult.add("position");
+        expectedResult.add("salary");
+        expectedResult.add("gender");
         expectedResult.add("address");
 
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
-        elementList = docElem.getElementsByTagNameNS("http://www.nist.gov", "*");
+        elementList = docElem.getElementsByTagName( "*");
         for (int indexN1007E = 0; indexN1007E < elementList.getLength(); indexN1007E++) {
             child = elementList.item(indexN1007E);
             childName = child.getNodeName();

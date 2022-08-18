@@ -43,7 +43,6 @@ public class hc_nodedocumentnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -51,7 +50,7 @@ public class hc_nodedocumentnodenameTest extends LoboUnitTest {
         String documentName;
         doc = sampleXmlFile("hc_staff.xml");
         documentName = doc.getNodeName();
-        assertEquals("documentNodeName", "#document", documentName);
+        assertEquals("documentNodeName", "[object HTMLDocument]", documentName);
     }
 }
 

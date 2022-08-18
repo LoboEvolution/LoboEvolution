@@ -25,7 +25,7 @@
    <!ENTITY ent1 "es">
    <!ENTITY ent2 "1900 Dallas Road">
    <!ENTITY ent3 "Texas">
-   <!ENTITY ent4 "<entElement1 xmlns:local1='www.xyz.com'>Element data</entElement1>
+   <!ENTITY ent4 "Element data">
    <!ENTITY ent5 PUBLIC "entityURI" "entityFile" NDATA notation1>
    <!ENTITY ent6 PUBLIC "uri" "file" NDATA notation2>
    <!ENTITY ent1 "This entity should be discarded">
@@ -49,11 +49,11 @@
 <![CDATA[This is an adjacent CDATASection with a reference to a tab &tab;]]></name>
   <position>Secretary</position>
   <salary>35,000</salary>
-  <gender>Female</gender>
-  <address dmstc:domestic="Yes" street="Yes">&ent2; Dallas, &ent3;
+  <gender>Female2</gender>
+  <address dmstc:domestic="Yes" street="Yes" zone="CANADA">&ent2; Dallas, &ent3;
  98554</address>
  </employee>
- <employee xmlns:dmstc="http://www.netzero.com">
+ <employee xmlns:dmstc="http://www.netzero.com22">
   <employeeId>EMP0003</employeeId>
   <name>Roger
  Jones</name>

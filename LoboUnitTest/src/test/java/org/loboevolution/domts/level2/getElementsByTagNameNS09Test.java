@@ -39,7 +39,7 @@ import static org.junit.Assert.assertEquals;
  * Invoke method getElementsByTagNameNS(namespaceURI,localName) on the document
  * element with namespaceURI being "*" and localName is "employee".
  * Method should return a new NodeList containing five Elements.
- * Retrieve the FOURTH element whose name should be "emp:employee".
+ * Retrieve the FOURTH element whose name should be "employee".
  * Derived from getElementsByTagNameNS02 and reflects its interpretation
  * that namespace="*" matches namespace unqualified tagnames.
  *

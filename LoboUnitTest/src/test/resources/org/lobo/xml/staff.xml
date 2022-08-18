@@ -24,7 +24,7 @@
    <!ENTITY ent1 "es">
    <!ENTITY ent2 "1900 Dallas Road">
    <!ENTITY ent3 "Texas">
-   <!ENTITY ent4 "<entElement domestic='Yes'>Element data</entElement>
+   <!ENTITY ent4 "Element data">
    <!ENTITY ent5 PUBLIC "entityURI" "entityFile" NDATA notation1>
    <!ENTITY ent1 "This entity should be discarded">
    <!NOTATION notation1 PUBLIC "notation1File">
@@ -35,7 +35,7 @@
  <employee>
   <employeeId>EMP0001</employeeId>
   <name>Margaret Martin</name>
-  <position>Accountant</position>           
+  <position>Accountant</position>
   <salary>56,000</salary>
   <gender>Female</gender>
   <address domestic="Yes">1230 North Ave. Dallas, Texas 98551</address>
@@ -65,7 +65,7 @@
   <position>Personnel Director</position>
   <salary>95,000</salary>
   <gender>Female</gender>
-  <address domestic="Yes" street="Y&ent1;">27 South Road. Dallas, Texas 98556</address>
+  <address domestic="Yes" street="Yes">27 South Road. Dallas, Texas 98556</address>
  </employee>
  <employee>
   <employeeId>EMP0005</employeeId>

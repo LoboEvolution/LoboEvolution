@@ -39,7 +39,7 @@ import static org.junit.Assert.assertTrue;
  * "INUSE_ATTRIBUTE_ERR DOMException if the "newAttr"
  * is already an attribute of another element.
  * <p>
- * Retrieve the first emp:address and append
+ * Retrieve the first address and append
  * a newly created element.  The "createAttributeNS(namespaceURI,qualifiedName)"
  * and "setAttributeNodeNS(newAttr)" methods are invoked
  * to create and add a new attribute to the newly created
@@ -63,7 +63,7 @@ public class setAttributeNodeNS01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         String namespaceURI = "http://www.newattr.com";
-        String qualifiedName = "emp:newAttr";
+        String qualifiedName = "newAttr";
         Document doc;
         Element newElement;
         Attr newAttr;
@@ -73,7 +73,7 @@ public class setAttributeNodeNS01Test extends LoboUnitTest {
         Attr setAttr1;
         Attr setAttr2;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
         newElement = doc.createElement("newElement");

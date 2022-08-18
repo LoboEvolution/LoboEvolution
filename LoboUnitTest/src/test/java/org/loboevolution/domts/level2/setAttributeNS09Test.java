@@ -41,7 +41,7 @@ import static org.junit.Assert.assertNotNull;
  * null value if no previously existing Attr node with the
  * same name was replaced.
  * <p>
- * Add a new attribute to the "emp:address" element.
+ * Add a new attribute to the "address" element.
  * Check to see if the new attribute has been successfully added to the document
  * by getting the attributes value, namespace URI, local Name and prefix.
  *
@@ -59,7 +59,7 @@ public class setAttributeNS09Test extends LoboUnitTest {
     public void runTest() {
         String localName = "newAttr";
         String namespaceURI = "http://www.newattr.com";
-        String qualifiedName = "emp:newAttr";
+        String qualifiedName = "newAttr";
         Document doc;
         HTMLCollection elementList;
         Node testAddr;
@@ -69,7 +69,7 @@ public class setAttributeNS09Test extends LoboUnitTest {
         String resultLocalName;
         String resultPrefix;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
         ((Element) /*Node */testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");

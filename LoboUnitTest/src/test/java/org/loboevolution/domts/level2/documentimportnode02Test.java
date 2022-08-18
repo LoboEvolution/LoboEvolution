@@ -39,7 +39,7 @@ import static org.junit.Assert.assertNull;
  * altered or removed from the original document but a new copy of the source node
  * is created.
  * <p>
- * Using the method importNode with deep=false, import the attribute, "emp:zone" of the
+ * Using the method importNode with deep=false, import the attribute, "zone" of the
  * element node which is retreived by its elementId="CANADA", into the another document.
  * Check the parentNode, nodeName, nodeType and nodeValue of the imported node to
  * verify if it has been imported correctly.
@@ -69,16 +69,16 @@ public class documentimportnode02Test extends LoboUnitTest {
         Node attrsParent;
         doc = sampleXmlFile("staffNS.xml");
         docImported = sampleXmlFile("staff.xml");
-        addresses = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
+        addresses = doc.getElementsByTagName( "address");
         element = (Element) addresses.item(1);
-        attr = element.getAttributeNodeNS("http://www.nist.gov", "zone");
+        attr = element.getAttributeNode( "zone");
         importedAttr = docImported.importNode(attr, false);
         nodeName = importedAttr.getNodeName();
         nodeType = importedAttr.getNodeType();
         nodeValue = importedAttr.getNodeValue();
         attrsParent = importedAttr.getParentNode();
         assertNull("documentimportnode02_parentNull", attrsParent);
-        assertEquals("documentimportnode02_nodeName", "emp:zone", nodeName);
+        assertEquals("documentimportnode02_nodeName", "zone", nodeName);
         assertEquals("documentimportnode02_nodeType", 2, nodeType);
         assertEquals("documentimportnode02_nodeValue", "CANADA", nodeValue);
     }

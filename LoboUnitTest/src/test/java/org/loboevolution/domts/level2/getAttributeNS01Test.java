@@ -34,7 +34,7 @@ import static org.junit.Assert.assertEquals;
  * The "getAttributeNS(namespaceURI,localName)" method retrieves an
  * attribute value by local name and NamespaceURI.
  * <p>
- * Retrieve the first "emp:address" element.
+ * Retrieve the first "address" element.
  * The value returned by the "getAttributeNS()" method should be the
  * value "DISTRICT" since the attribute has a default value.
  *
@@ -53,13 +53,13 @@ public class getAttributeNS01Test extends LoboUnitTest {
     public void runTest() {
         String namespaceURI = "http://www.nist.gov";
         String localName = "district";
-        String qualifiedName = "emp:district";
+        String qualifiedName = "district";
         Document doc;
         HTMLCollection elementList;
         Element testAddr;
         String attrValue;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         attrValue = testAddr.getAttributeNS(namespaceURI, localName);
         assertEquals("attrValue", "DISTRICT", attrValue);

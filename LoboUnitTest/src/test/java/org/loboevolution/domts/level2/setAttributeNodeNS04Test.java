@@ -38,7 +38,7 @@ import static org.junit.Assert.assertNotNull;
  * If an attribute with that local name and that namespaceURI is already
  * present in the element, it is replaced by the new one.
  * <p>
- * Retrieve the first emp:address element and add a new attribute
+ * Retrieve the first address element and add a new attribute
  * to the element.  Since an attribute with the same local name
  * and namespaceURI already exists, it is replaced by the new one and
  * returns the replaced "Attr" node.
@@ -64,13 +64,13 @@ public class setAttributeNodeNS04Test extends LoboUnitTest {
         Attr newAddrAttr;
         String newName;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        newAttr = doc.createAttributeNS("http://www.nist.gov", "xxx:domestic");
+        newAttr = doc.createAttribute( "xxx:domestic");
         newAddrAttr = ((Element) /*Node */testAddr).setAttributeNodeNS(newAttr);
         newName = newAddrAttr.getNodeName();
-        assertEquals("nodeName", "emp:domestic", newName);
+        assertEquals("nodeName", "domestic", newName);
     }
 }
 

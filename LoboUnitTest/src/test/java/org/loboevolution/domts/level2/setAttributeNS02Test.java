@@ -55,12 +55,12 @@ public class setAttributeNS02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         String namespaceURI = "http://www.nist.gov";
-        String qualifiedName = "emp:";
+        String qualifiedName = "";
         Document doc;
         HTMLCollection elementList;
         Node testAddr;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:employee");
+        elementList = doc.getElementsByTagName("employee");
         testAddr = elementList.item(0);
 
         {

@@ -36,7 +36,7 @@ import static org.junit.Assert.assertNotNull;
  * The "getNamespaceURI()" method for an Attribute
  * returns the namespace URI of this node, or null if unspecified.
  * <p>
- * Retrieve the first emp:address node and get the emp:domestic attribute.
+ * Retrieve the first address node and get the domestic attribute.
  * Invoke the "getNamespaceURI()" method on the attribute.
  * The method should return "http://www.nist.gov".
  *
@@ -58,10 +58,10 @@ public class namespaceURI02Test extends LoboUnitTest {
         Attr addrAttr;
         String attrNamespaceURI;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         assertNotNull("empAddressNotNull", testAddr);
-        addrAttr = testAddr.getAttributeNodeNS("http://www.nist.gov", "domestic");
+        addrAttr = testAddr.getAttributeNode( "domestic");
         attrNamespaceURI = addrAttr.getNamespaceURI();
         assertEquals("namespaceURI", "http://www.nist.gov", attrNamespaceURI);
     }

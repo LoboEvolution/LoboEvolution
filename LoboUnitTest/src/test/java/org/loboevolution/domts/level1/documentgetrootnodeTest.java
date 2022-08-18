@@ -55,7 +55,7 @@ public class documentgetrootnodeTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         root = doc.getDocumentElement();
         rootName = root.getNodeName();
-        assertEquals("documentGetRootNodeAssert", "staff", rootName);
+        assertEquals("documentGetRootNodeAssert", "STAFF", rootName);
     }
 }
 

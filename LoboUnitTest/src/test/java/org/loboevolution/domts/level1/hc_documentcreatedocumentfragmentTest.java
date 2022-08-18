@@ -62,7 +62,7 @@ public class hc_documentcreatedocumentfragmentTest extends LoboUnitTest {
         length = children.getLength();
         assertEquals("length", 0, length);
         newDocFragmentName = newDocFragment.getNodeName();
-        assertEquals("strong", "#document-fragment", newDocFragmentName);
+        assertEquals("strong", "[object DocumentFragment]", newDocFragmentName);
         newDocFragmentType = newDocFragment.getNodeType();
         assertEquals("type", 11, newDocFragmentType);
         newDocFragmentValue = newDocFragment.getNodeValue();

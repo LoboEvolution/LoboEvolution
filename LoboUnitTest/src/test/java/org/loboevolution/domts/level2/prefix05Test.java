@@ -39,8 +39,8 @@ import static org.junit.Assert.assertTrue;
  * and the specified prefix is xmlns and the namespaceURI is different from
  * http://www.w3.org/2000/xmlns.
  * <p>
- * Attempt to insert "xmlns" as the new namespace prefix on the emp:domestic
- * attribute within the emp:address node.
+ * Attempt to insert "xmlns" as the new namespace prefix on the domestic
+ * attribute within the address node.
  * An exception should be raised since the namespaceURI of this node is not
  * http://www.w3.org/2000/xmlns.
  *
@@ -62,10 +62,10 @@ public class prefix05Test extends LoboUnitTest {
         Element addrNode;
         Attr addrAttr;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         addrNode = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", addrNode);
-        addrAttr = addrNode.getAttributeNode("emp:domestic");
+        addrAttr = addrNode.getAttributeNode("domestic");
 
         {
             boolean success = false;

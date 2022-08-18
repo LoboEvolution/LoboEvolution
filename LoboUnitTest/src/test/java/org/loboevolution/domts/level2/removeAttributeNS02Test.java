@@ -38,10 +38,10 @@ import static org.junit.Assert.assertEquals;
  * default value it is immediately replaced.  The replacing attribute has the same
  * namespace URI and local name, as well as the original prefix.
  * <p>
- * Retrieve the attribute named "emp:local" from emp:address
- * node, then remove the "emp:local"
+ * Retrieve the attribute named "local" from address
+ * node, then remove the "local"
  * attribute by invoking the "removeAttributeNS(namespaceURI,localName)" method.
- * The "emp:local" attribute has a default value defined in the
+ * The "local" attribute has a default value defined in the
  * DTD file, that value should immediately replace the old
  * value.
  *
@@ -67,13 +67,13 @@ public class removeAttributeNS02Test extends LoboUnitTest {
         String localName;
         String prefix;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
-        ((Element) /*Node */testAddr).removeAttributeNS("http://www.nist.gov", "local1");
-        elementList = doc.getElementsByTagName("emp:address");
+        ((Element) /*Node */testAddr).removeAttribute( "local1");
+        elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
-        addrAttr = ((Element) /*Node */testAddr).getAttributeNodeNS("http://www.nist.gov", "local1");
-        attr = ((Element) /*Node */testAddr).getAttributeNS("http://www.nist.gov", "local1");
+        addrAttr = ((Element) /*Node */testAddr).getAttributeNode( "local1");
+        attr = ((Element) /*Node */testAddr).getAttribute( "local1");
         namespaceURI = addrAttr.getNamespaceURI();
         localName = addrAttr.getLocalName();
         prefix = testAddr.getPrefix();

@@ -60,7 +60,7 @@ public class setAttributeNS03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         String namespaceURI = "www.xyz.com";
-        String qualifiedName = "emp:local1";
+        String qualifiedName = "local1";
         Document doc;
         HTMLCollection genderList;
         Node gender;

@@ -37,7 +37,7 @@ import static org.junit.Assert.assertEquals;
  * null if this attribute is not in use.
  * <p>
  * Retreive the default attribute defaultAttr and check its owner element.  Verify if the name
- * the nodeName of the returned ownerElement is emp:employee.
+ * the nodeName of the returned ownerElement is employee.
  *
  * @author IBM
  * @author Neil Delima
@@ -61,13 +61,13 @@ public class attrgetownerelement01Test extends LoboUnitTest {
         NamedNodeMap attributes;
         String nullNS = null;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "employee");
+        elementList = doc.getElementsByTagName( "employee");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
         attr = attributes.getNamedItemNS(nullNS, "defaultAttr");
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
-        assertEquals("attrgetownerelement01", "emp:employee", ownerElementName);
+        assertEquals("attrgetownerelement01", "employee", ownerElementName);
     }
 }
 

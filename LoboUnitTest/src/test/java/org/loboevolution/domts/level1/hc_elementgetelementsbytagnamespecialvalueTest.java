@@ -63,12 +63,12 @@ public class hc_elementgetelementsbytagnamespecialvalueTest extends LoboUnitTest
         List<String> result = new ArrayList<>();
 
         List<String> expectedResult = new ArrayList<>();
-        expectedResult.add("em");
-        expectedResult.add("strong");
-        expectedResult.add("code");
-        expectedResult.add("sup");
-        expectedResult.add("var");
-        expectedResult.add("acronym");
+        expectedResult.add("EM");
+        expectedResult.add("STRONG");
+        expectedResult.add("CODE");
+        expectedResult.add("SUP");
+        expectedResult.add("VAR");
+        expectedResult.add("ACRONYM");
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");

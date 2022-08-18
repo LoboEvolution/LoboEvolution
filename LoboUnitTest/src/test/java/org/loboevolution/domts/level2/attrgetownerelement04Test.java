@@ -61,10 +61,10 @@ public class attrgetownerelement04Test extends LoboUnitTest {
         HTMLCollection addresses;
         doc = sampleXmlFile("staffNS.xml");
         docImp = sampleXmlFile("staff.xml");
-        addresses = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
+        addresses = doc.getElementsByTagName( "address");
         element = (Element) addresses.item(1);
         assertNotNull("empAddressNotNull", element);
-        attr = element.getAttributeNodeNS("http://www.nist.gov", "zone");
+        attr = element.getAttributeNode( "zone");
         attrImp = (Attr) docImp.importNode(attr, true);
         ownerElement = attrImp.getOwnerElement();
         assertNull("attrgetownerelement04", ownerElement);

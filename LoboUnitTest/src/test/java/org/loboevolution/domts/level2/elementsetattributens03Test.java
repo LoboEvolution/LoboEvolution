@@ -59,7 +59,7 @@ public class elementsetattributens03Test extends LoboUnitTest {
         String attrName;
         String attrValue;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:employee");
+        elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(0);
         assertNotNull("empEmployeeNotNull", element);
         element.setAttributeNS("http://www.w3.org/DOM/Test/1", "defaultAttr", "default1");

@@ -65,12 +65,12 @@ public class elementgetelementsbytagnamespecialvalueTest extends LoboUnitTest {
         List<String> result = new ArrayList<>();
 
         List<String> expectedResult = new ArrayList<>();
-        expectedResult.add("employeeId");
-        expectedResult.add("name");
-        expectedResult.add("position");
-        expectedResult.add("salary");
-        expectedResult.add("gender");
-        expectedResult.add("address");
+        expectedResult.add("EMPLOYEEID");
+        expectedResult.add("NAME");
+        expectedResult.add("POSITION");
+        expectedResult.add("SALARY");
+        expectedResult.add("GENDER");
+        expectedResult.add("ADDRESS");
 
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");

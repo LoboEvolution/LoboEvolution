@@ -67,7 +67,7 @@ public class documentimportnode03Test extends LoboUnitTest {
         int nodeType;
         String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
-        childList = doc.getElementsByTagNameNS("http://www.nist.gov", "employee");
+        childList = doc.getElementsByTagName( "employee");
         element = (Element) childList.item(1);
         attr = element.getAttributeNode("defaultAttr");
         importedAttr = doc.importNode(attr, false);

@@ -36,7 +36,7 @@ import static org.junit.Assert.assertNotNull;
  * The "getAttributeNodeNS(namespaceURI,localName)" method retrieves an
  * attribute node by local name and NamespaceURI.
  * <p>
- * Retrieve the first emp:address element node.
+ * Retrieve the first address element node.
  * The getAttributeNodeNS method returns an
  * Attr node, the "value" can be examined to ensure the
  * proper attribute node was retrieved.
@@ -59,12 +59,12 @@ public class getAttributeNodeNS02Test extends LoboUnitTest {
         Attr attribute;
         String attrName;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        attribute = testAddr.getAttributeNodeNS("http://www.nist.gov", "domestic");
+        attribute = testAddr.getAttributeNode( "domestic");
         attrName = attribute.getNodeName();
-        assertEquals("attrName", "emp:domestic", attrName);
+        assertEquals("attrName", "domestic", attrName);
     }
 }
 

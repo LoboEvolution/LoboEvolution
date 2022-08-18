@@ -58,7 +58,7 @@ public class nodesetprefix04Test extends LoboUnitTest {
         String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:employee");
+        elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(0);
         assertNotNull("empEmployeeNotNull", element);
         attribute = element.getAttributeNodeNS(nullNS, "defaultAttr");

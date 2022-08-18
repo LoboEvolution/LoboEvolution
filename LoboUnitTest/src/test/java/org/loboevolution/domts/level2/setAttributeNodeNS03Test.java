@@ -38,7 +38,7 @@ import static org.junit.Assert.assertNull;
  * If an attribute with that local name and that namespaceURI is already
  * present in the element, it is replaced by the new one.
  * <p>
- * Retrieve the first emp:address element and add a new attribute
+ * Retrieve the first address element and add a new attribute
  * to the element.  Since an attribute with the same local name
  * and namespaceURI as the newly created attribute does not exist
  * the value "null" is returned.
@@ -58,14 +58,14 @@ public class setAttributeNodeNS03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         String namespaceURI = "http://www.newattr.com";
-        String qualifiedName = "emp:newAttr";
+        String qualifiedName = "newAttr";
         Document doc;
         HTMLCollection elementList;
         Node testAddr;
         Attr newAttr;
         Attr newAddrAttr;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
         newAttr = doc.createAttributeNS(namespaceURI, qualifiedName);

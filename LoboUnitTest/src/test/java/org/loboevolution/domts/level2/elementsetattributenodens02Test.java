@@ -62,7 +62,7 @@ public class elementsetattributenodens02Test extends LoboUnitTest {
         String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
+        elementList = doc.getElementsByTagName( "address");
         element = (Element) elementList.item(1);
         attribute = element.getAttributeNodeNS(nullNS, "street");
         attributeCloned = (Attr) attribute.cloneNode(true);

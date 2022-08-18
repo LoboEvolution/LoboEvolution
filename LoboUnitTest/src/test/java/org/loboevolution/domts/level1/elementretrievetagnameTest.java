@@ -59,10 +59,9 @@ public class elementretrievetagnameTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("position");
         testEmployee = (Element)elementList.item(1);
         name = testEmployee.getNodeName();
-        assertEquals("nodename", "position", name);
-        /*Node */
+        assertEquals("nodename", "POSITION", name);
         name = testEmployee.getTagName();
-        assertEquals("tagname", "position", name);
+        assertEquals("tagname", "POSITION", name);
     }
 }
 

@@ -66,7 +66,7 @@ public class getElementsByTagNameNS04Test extends LoboUnitTest {
         expectedResult.add("address");
         expectedResult.add("address");
         expectedResult.add("address");
-        expectedResult.add("emp:address");
+        expectedResult.add("address");
         expectedResult.add("address");
 
         doc = sampleXmlFile("staffNS.xml");

@@ -65,7 +65,7 @@ public class namednodemapremovenameditemns02Test extends LoboUnitTest {
         String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "employee");
+        elementList = doc.getElementsByTagName( "employee");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
         attribute = attributes.removeNamedItemNS(nullNS, "defaultAttr");

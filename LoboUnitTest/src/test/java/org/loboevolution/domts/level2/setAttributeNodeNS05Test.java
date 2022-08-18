@@ -39,7 +39,7 @@ import static org.junit.Assert.assertTrue;
  * was created from a different document than the one that
  * created this document.
  * <p>
- * Retrieve the first emp:address and attempt to set a new
+ * Retrieve the first address and attempt to set a new
  * attribute node.  The new
  * attribute was created from a document other than the
  * one that created this element, therefore a
@@ -62,7 +62,7 @@ public class setAttributeNodeNS05Test extends LoboUnitTest {
     @Test
     public void runTest() {
         String namespaceURI = "http://www.newattr.com";
-        String qualifiedName = "emp:newAttr";
+        String qualifiedName = "newAttr";
         Document doc1;
         Document doc2;
         Attr newAttr;
@@ -72,7 +72,7 @@ public class setAttributeNodeNS05Test extends LoboUnitTest {
         doc1 = sampleXmlFile("staffNS.xml");
         doc2 = sampleXmlFile("staffNS.xml");
         newAttr = doc2.createAttributeNS(namespaceURI, qualifiedName);
-        elementList = doc1.getElementsByTagName("emp:address");
+        elementList = doc1.getElementsByTagName("address");
         testAddr = elementList.item(0);
 
         {

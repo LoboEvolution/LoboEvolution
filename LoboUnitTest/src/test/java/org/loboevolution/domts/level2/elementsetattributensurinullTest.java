@@ -56,7 +56,7 @@ public class elementsetattributensurinullTest extends LoboUnitTest {
     public void runTest() {
         String namespaceURI = null;
 
-        String qualifiedName = "emp:qualifiedName";
+        String qualifiedName = "qualifiedName";
         Document doc;
         HTMLCollection elementList;
         Node testAddr;

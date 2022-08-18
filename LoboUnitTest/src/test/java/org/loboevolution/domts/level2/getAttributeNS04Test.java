@@ -36,7 +36,7 @@ import static org.junit.Assert.assertNotNull;
  * The "getAttributeNS(namespaceURI,localName)" method retrieves an
  * attribute value by local name and NamespaceURI.
  * <p>
- * Retrieve the first "emp:address" element.
+ * Retrieve the first "address" element.
  * Create a new attribute with the "createAttributeNS()" method.
  * Add the new attribute and value with the "setAttributeNS()" method.
  * The value returned by the "getAttributeNS()" method should be
@@ -56,14 +56,14 @@ public class getAttributeNS04Test extends LoboUnitTest {
     public void runTest() {
         String namespaceURI = "http://www.nist.gov";
         String localName = "blank";
-        String qualifiedName = "emp:blank";
+        String qualifiedName = "blank";
         Document doc;
         HTMLCollection elementList;
         Element testAddr;
         String attrValue;
         doc = sampleXmlFile("staffNS.xml");
         doc.createAttributeNS(namespaceURI, qualifiedName);
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
         testAddr.setAttributeNS(namespaceURI, qualifiedName, "NewValue");

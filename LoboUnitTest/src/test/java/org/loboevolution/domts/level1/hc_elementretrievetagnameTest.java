@@ -58,10 +58,10 @@ public class hc_elementretrievetagnameTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("code");
         testEmployee = (Element)elementList.item(1);
         strong = testEmployee.getNodeName();
-        assertEquals("element", "code", strong);
+        assertEquals("element", "CODE", strong);
         /*Node */
         strong = testEmployee.getTagName();
-        assertEquals("tagname", "code", strong);
+        assertEquals("tagname", "CODE", strong);
     }
 }
 

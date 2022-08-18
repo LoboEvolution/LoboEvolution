@@ -35,7 +35,7 @@ import static org.junit.Assert.assertNotNull;
  * The "getPrefix()" method for a node
  * returns the namespace prefix of this node, or null if it is unspecified.
  * <p>
- * Retrieve the first emp:employee node and invoke the getPrefix() method."
+ * Retrieve the first employee node and invoke the getPrefix() method."
  * The method should return "emp".
  *
  * @author NIST
@@ -56,7 +56,7 @@ public class prefix03Test extends LoboUnitTest {
         Element testEmployee;
         String prefix;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:employee");
+        elementList = doc.getElementsByTagName("employee");
         testEmployee = (Element)elementList.item(0);
         assertNotNull("empEmployeeNotNull", testEmployee);
         prefix = testEmployee.getPrefix();

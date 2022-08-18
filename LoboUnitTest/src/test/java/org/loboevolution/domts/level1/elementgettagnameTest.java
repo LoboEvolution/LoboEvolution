@@ -45,7 +45,6 @@ public class elementgettagnameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -55,7 +54,7 @@ public class elementgettagnameTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         root = doc.getDocumentElement();
         tagname = root.getTagName();
-        assertEquals("elementGetTagNameAssert", "staff", tagname);
+        assertEquals("elementGetTagNameAssert", "STAFF", tagname);
     }
 }
 

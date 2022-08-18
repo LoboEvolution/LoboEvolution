@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
  * <p>
  * Invoke method getElementById(elementId) on this document
  * with elementId equals "CANADA".  Method should return an element
- * whose tag name is "emp:address".
+ * whose tag name is "address".
  *
  * @author NIST
  * @author Mary Brady
@@ -56,7 +56,7 @@ public class getElementById01Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getElementById("CANADA");
         tagname = element.getTagName();
-        assertEquals("throw_Equals", "emp:address", tagname);
+        assertEquals("throw_Equals", "address", tagname);
     }
 }
 

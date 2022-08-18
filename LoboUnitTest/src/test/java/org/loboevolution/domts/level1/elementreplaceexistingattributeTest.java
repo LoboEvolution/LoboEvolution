@@ -61,12 +61,11 @@ public class elementreplaceexistingattributeTest extends LoboUnitTest {
         Element testEmployee;
         Attr newAttribute;
         String name;
-        Attr setAttr;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(2);
         newAttribute = doc.createAttribute("street");
-        setAttr = testEmployee.setAttributeNode(newAttribute);
+        testEmployee.setAttributeNode(newAttribute);
         name = testEmployee.getAttribute("street");
         assertEquals("elementReplaceExistingAttributeAssert", "", name);
     }

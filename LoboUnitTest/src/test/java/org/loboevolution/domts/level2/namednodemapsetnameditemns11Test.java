@@ -67,7 +67,7 @@ public class namednodemapsetnameditemns11Test extends LoboUnitTest {
         notations = docType.getNotations();
         assertNotNull("notationsNotNull", notations);
         notation = (Notation) notations.getNamedItem("notation1");
-        elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
+        elementList = doc.getElementsByTagName( "address");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
 

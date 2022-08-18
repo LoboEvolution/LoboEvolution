@@ -40,7 +40,7 @@ import static org.junit.Assert.assertEquals;
  * <p>
  * Using the method importNode with deep=true, import the attribute, "street" of the second
  * element node, from a list of nodes whose local names are "address" and namespaceURI
- * "http://www.nist.gov" into the same document.  Check the parentNode, nodeName,
+ * "<a href="http://www.nist.gov">...</a>" into the same document.  Check the parentNode, nodeName,
  * nodeType and nodeValue of the imported node to verify if it has been imported correctly.
  *
  * @author IBM
@@ -52,16 +52,12 @@ public class documentimportnode01Test extends LoboUnitTest {
 
     /**
      * Constructor.
-     *
-     
-     
      */
-    public documentimportnode01Test(){
+    public documentimportnode01Test() {
     }
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,7 +70,7 @@ public class documentimportnode01Test extends LoboUnitTest {
         int nodeType;
         String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
-        childList = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
+        childList = doc.getElementsByTagName("address");
         element = (Element) childList.item(1);
         attr = element.getAttributeNode("street");
         importedAttr = doc.importNode(attr, false);

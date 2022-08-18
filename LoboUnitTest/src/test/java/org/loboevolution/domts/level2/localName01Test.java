@@ -38,8 +38,8 @@ import static org.junit.Assert.assertNotNull;
  * and for nodes of any type other than ELEMENT_NODE and ATTRIBUTE_NODE
  * and nodes created with a DOM Level 1 method, this is null.
  * <p>
- * Retrieve the first emp:address node and get the attributes of this node."
- * Then apply the getLocalName() method to the emp:domestic attribute.
+ * Retrieve the first address node and get the attributes of this node."
+ * Then apply the getLocalName() method to the domestic attribute.
  * The method should return "domestic".
  *
  * @author NIST
@@ -60,10 +60,10 @@ public class localName01Test extends LoboUnitTest {
         Attr addrAttr;
         String localName;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        addrAttr = testAddr.getAttributeNode("emp:domestic");
+        addrAttr = testAddr.getAttributeNode("domestic");
         localName = addrAttr.getLocalName();
         assertEquals("localName", "domestic", localName);
     }

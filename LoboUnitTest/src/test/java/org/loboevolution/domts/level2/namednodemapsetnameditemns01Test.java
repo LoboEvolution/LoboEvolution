@@ -59,7 +59,7 @@ public class namednodemapsetnameditemns01Test extends LoboUnitTest {
         HTMLCollection elementList;
         String attrName;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
+        elementList = doc.getElementsByTagName( "address");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
         newAttr1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "streets");

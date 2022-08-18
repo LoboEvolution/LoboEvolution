@@ -38,7 +38,7 @@ import static org.junit.Assert.assertNull;
  * For nodes of any type other than ELEMENT_NODE and ATTRIBUTE_NODE,
  * this is always null.
  * <p>
- * Retrieve the first emp:employeeId node and get the first child of this node.
+ * Retrieve the first employeeId node and get the first child of this node.
  * Since the first child is Text node invoking the "getPrefix()"
  * method will cause "null" to be returned.
  *
@@ -60,7 +60,7 @@ public class prefix02Test extends LoboUnitTest {
         Node textNode;
         String prefix;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:employeeId");
+        elementList = doc.getElementsByTagName("employeeId");
         testEmployee = (Element)elementList.item(0);
         assertNotNull("empEmployeeNotNull", testEmployee);
         textNode = testEmployee.getFirstChild();

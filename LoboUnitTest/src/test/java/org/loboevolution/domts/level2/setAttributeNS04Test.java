@@ -41,7 +41,7 @@ import static org.junit.Assert.assertNotNull;
  * null value if no previously existing Attr node with the
  * same name was replaced.
  * <p>
- * Add a new attribute to the "emp:address" element.
+ * Add a new attribute to the "address" element.
  * Check to see if the new attribute has been successfully added to the document
  * by getting the attributes value, namespace URI, local Name and prefix.
  * The prefix will be changed to the prefix part of the "qualifiedName"
@@ -68,12 +68,12 @@ public class setAttributeNS04Test extends LoboUnitTest {
         String resultLocalName;
         String resultPrefix;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        ((Element) /*Node */testAddr).setAttributeNS("http://www.nist.gov", "newprefix:zone", "newValue");
-        addrAttr = ((Element) /*Node */testAddr).getAttributeNodeNS("http://www.nist.gov", "zone");
-        resultAttr = ((Element) /*Node */testAddr).getAttributeNS("http://www.nist.gov", "zone");
+        ((Element) /*Node */testAddr).setAttribute( "newprefix:zone", "newValue");
+        addrAttr = ((Element) /*Node */testAddr).getAttributeNode( "zone");
+        resultAttr = ((Element) /*Node */testAddr).getAttribute( "zone");
         assertEquals("attrValue", "newValue", resultAttr);
         resultNamespaceURI = addrAttr.getNamespaceURI();
         assertEquals("nsuri", "http://www.nist.gov", resultNamespaceURI);

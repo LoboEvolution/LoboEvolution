@@ -56,7 +56,7 @@ public class setAttributeNS01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         String namespaceURI = "http://www.nist.gov";
-        String qualifiedName = "emp:qual?name";
+        String qualifiedName = "qual?name";
         Document doc;
         HTMLCollection elementList;
         Node testAddr;

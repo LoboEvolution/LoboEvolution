@@ -35,7 +35,7 @@ import static org.junit.Assert.assertNotNull;
  * The "hasAttributeNS()" method for an Element should
  * return false if the element does not have an attribute with the given local name
  * and/or namespace URI specified on this element or does not have a default value.
- * Retrieve the first "emp:address" element.
+ * Retrieve the first "address" element.
  * The boolean value returned by the "hasAttributeNS()" should be false
  * since the attribute does not have a default value.
  *
@@ -58,7 +58,7 @@ public class hasAttributeNS03Test extends LoboUnitTest {
         Element testNode;
         boolean state;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("emp:address");
+        elementList = doc.getElementsByTagName("address");
         testNode = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", testNode);
         state = testNode.hasAttributeNS(namespaceURI, localName);

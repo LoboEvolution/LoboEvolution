@@ -34,10 +34,10 @@ import static org.junit.Assert.*;
  * Document should import the given importedNode into that Document.
  * The importedNode is of type Element.
  * <p>
- * Retrieve element "emp:address" from staffNS.xml document.
+ * Retrieve element "address" from staffNS.xml document.
  * Invoke method importNode(importedNode,deep) on this document
  * with importedNode being the element from above and deep is false.
- * Method should return an element node whose name matches "emp:address"
+ * Method should return an element node whose name matches "address"
  * and whose children are not imported. The returned node should
  * belong to this document whose systemId is "staff.dtd"
  *
@@ -65,7 +65,7 @@ public class importNode05Test extends LoboUnitTest {
         HTMLCollection addresses;
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
-        addresses = aNewDoc.getElementsByTagName("emp:address");
+        addresses = aNewDoc.getElementsByTagName("address");
         element = (Element) addresses.item(0);
         assertNotNull("empAddressNotNull", element);
         aNode = doc.importNode(element, false);
@@ -76,7 +76,7 @@ public class importNode05Test extends LoboUnitTest {
         system = docType.getSystemId();
         assertEquals("dtdSystemId", "staffNS.dtd", system);
         name = aNode.getNodeName();
-        assertEquals("nodeName", "emp:address", name);
+        assertEquals("nodeName", "address", name);
     }
 }
 

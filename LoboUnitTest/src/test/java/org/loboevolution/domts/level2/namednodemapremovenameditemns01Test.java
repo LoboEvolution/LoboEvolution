@@ -54,11 +54,11 @@ public class namednodemapremovenameditemns01Test extends LoboUnitTest {
         Attr attribute;
         HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
+        elementList = doc.getElementsByTagName( "address");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-        attribute = attributes.removeNamedItemNS("http://www.nist.gov", "domestic");
-        attribute = attributes.getNamedItemNS("http://www.nist.gov", "domestic");
+        attribute = attributes.removeNamedItem( "domestic");
+        attribute = attributes.getNamedItem( "domestic");
         assertNull("namednodemapremovenameditemns01", attribute);
     }
 
