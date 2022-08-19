@@ -34,6 +34,7 @@ import org.loboevolution.common.Objects;
 public class FontKey {
 
 	/** The cached hash. */
+	@Builder.Default
 	private int cachedHash = -1;
 
 	/** The font family. */

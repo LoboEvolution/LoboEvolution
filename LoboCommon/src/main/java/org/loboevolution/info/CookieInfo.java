@@ -60,6 +60,7 @@ public class CookieInfo implements Serializable {
 	private boolean httpOnly;
 
 	/** The maxAge. */
+	@Builder.Default
 	private int maxAge = -1;
 
 	/** The version. */

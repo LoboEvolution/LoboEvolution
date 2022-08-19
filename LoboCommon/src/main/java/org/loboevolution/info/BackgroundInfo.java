@@ -55,6 +55,7 @@ public class BackgroundInfo {
 	private URL backgroundImage;
 
 	/** The backgroundColor*/
+	@Builder.Default
 	private int backgroundRepeat = BR_REPEAT;
 
 	/** The backgroundColor*/

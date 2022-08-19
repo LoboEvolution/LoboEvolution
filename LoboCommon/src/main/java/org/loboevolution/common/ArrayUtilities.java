@@ -1,4 +1,3 @@
-
 /*
  * GNU GENERAL LICENSE
  * Copyright (C) 2014 - 2022 Lobo Evolution
@@ -65,7 +64,7 @@ public class ArrayUtilities {
 	public static Iterator iterator(Object[] array, int offset, int length) {
 		return new ArrayIterator(array, offset, length);
 	}
-	
+
 	/**
 	 * <p>moveItem.</p>
 	 *
@@ -140,7 +139,7 @@ public class ArrayUtilities {
 	 *
 	 * @param arr an array of {@link java.lang.Float} objects.
 	 * @param index a {@link java.lang.Integer} object
-	 * @return an array of {@link java.awt.Float} objects.
+	 * @return an array of {@link java.lang.Float} objects.
 	 */
 	public static float[] removeFloat(float[] arr, int index) {
 		if (arr == null || index < 0 || index >= arr.length) {
@@ -180,29 +179,14 @@ public class ArrayUtilities {
 			this.top = offset + length;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see java.util.Iterator#hasNext()
-		 */
 		public boolean hasNext() {
 			return this.offset < this.top;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see java.util.Iterator#next()
-		 */
 		public T next() {
 			return this.array[this.offset++];
 		}
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see java.util.Iterator#remove()
-		 */
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
