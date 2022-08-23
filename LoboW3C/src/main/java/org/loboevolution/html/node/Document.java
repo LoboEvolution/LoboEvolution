@@ -25,6 +25,7 @@ import org.loboevolution.html.dom.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.node.traversal.NodeIterator;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
@@ -589,7 +590,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode {
 	 * nodes or elements in a document.
 	 *
 	 * @param root The root element or node to start traversing on.
-	 * @return a {@link org.loboevolution.html.node.NodeIterator} object.
+	 * @return a {@link NodeIterator} object.
 	 */
 	NodeIterator createNodeIterator(Node root);
 

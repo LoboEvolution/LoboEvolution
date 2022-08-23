@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.js.css;
 
-import org.loboevolution.html.dom.domimpl.AbstractList;
+import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.node.css.StyleSheetList;
 

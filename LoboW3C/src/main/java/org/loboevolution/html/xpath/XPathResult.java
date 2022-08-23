@@ -32,7 +32,6 @@ import org.loboevolution.html.node.Node;
  * <p>See also the <a href='http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820'>Document Object Model (DOM) Level 3 XPath Specification</a>.
  */
 public interface XPathResult {
-    // XPathResultType
     /**
      * This code does not represent a specific type. An evaluation of an XPath
      * expression will never produce this type. If this type is requested,

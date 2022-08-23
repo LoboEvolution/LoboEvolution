@@ -23,10 +23,7 @@ package org.loboevolution.html.xpath;
 /**
  * A new exception has been created for exceptions specific to these XPath
  * interfaces.
- * <p>See also the <a href='http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820'>Document Object Model (DOM) Level 3 XPath Specification</a>.
- *
- *
- *
+ * <p>See also the <a href=http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820>Document Object Model (DOM) Level 3 XPath Specification</a>.
  */
 public class XPathException extends RuntimeException {
     
@@ -43,7 +40,6 @@ public class XPathException extends RuntimeException {
        this.code = code;
     }
     public final short   code;
-    // XPathExceptionCode
     /**
      * If the expression has a syntax error or otherwise is not a legal
      * expression according to the rules of the specific

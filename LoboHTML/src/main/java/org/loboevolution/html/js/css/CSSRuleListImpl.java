@@ -21,7 +21,7 @@
 package org.loboevolution.html.js.css;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import org.loboevolution.html.dom.domimpl.AbstractList;
+import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.node.css.CSSRuleList;
 import org.loboevolution.html.node.css.CSSStyleRule;
 

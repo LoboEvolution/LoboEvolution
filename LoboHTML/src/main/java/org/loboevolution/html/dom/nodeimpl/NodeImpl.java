@@ -28,7 +28,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.NodeFilter;
+import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.TextFilter;
 import org.loboevolution.html.dom.xpath.XPathNSResolverImpl;
@@ -304,7 +304,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * Extracts all descendents that match the filter, except those descendents of
 	 * nodes that match the filter.
 	 *
-	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param filter a {@link NodeFilter} object.
 	 * @param al a {@link java.util.ArrayList} object.
 	 */
 	private void extractDescendentsArrayImpl(NodeFilter filter, ArrayList<Node> al, boolean nestIntoMatchingNodes) {
@@ -409,7 +409,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * Creates an NodeList of descendent nodes that the given filter
 	 * condition.
 	 *
-	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param filter a {@link NodeFilter} object.
 	 * @param nestIntoMatchingNodes a boolean.
 	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
@@ -461,7 +461,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>getFirstChildByFilter.</p>
 	 *
-	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param filter a {@link NodeFilter} object.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
 	public Node getFirstChildByFilter(NodeFilter filter) {
@@ -607,7 +607,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>Getter for the field nodeList.</p>
 	 *
-	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param filter a {@link NodeFilter} object.
 	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
 	public NodeList getNodeList(NodeFilter filter) {
@@ -1135,7 +1135,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>removeChildren.</p>
 	 *
-	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param filter a {@link NodeFilter} object.
 	 */
 	protected void removeTableChildren(NodeFilter filter) {
 		synchronized (this) {
@@ -1149,7 +1149,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>removeChildrenImpl.</p>
 	 *
-	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param filter a {@link NodeFilter} object.
 	 */
 	protected void removeChildrenImpl(NodeFilter filter) {
 		AtomicInteger count = new AtomicInteger();

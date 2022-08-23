@@ -22,7 +22,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import org.loboevolution.html.dom.domimpl.AbstractList;
+import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;

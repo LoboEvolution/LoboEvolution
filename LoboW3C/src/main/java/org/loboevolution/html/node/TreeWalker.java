@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.node;
 
-import org.loboevolution.html.dom.NodeFilter;
+import org.loboevolution.html.node.traversal.NodeFilter;
 
 /**
  * The nodes of a document subtree and a position within them.
@@ -47,7 +47,7 @@ public interface TreeWalker {
 	/**
 	 * <p>getFilter.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @return a {@link NodeFilter} object.
 	 */
 	NodeFilter getFilter();
 

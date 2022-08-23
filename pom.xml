@@ -122,6 +122,7 @@
 		<module>LoboCommon</module>
 		<module>LoboStore</module>
 		<module>LoboApi</module>
+		<module>LoboXalan</module>
 		<module>LoboParser</module>
 		<module>LoboPDF</module>
 		<module>LoboIViewer</module>
@@ -146,6 +147,11 @@
 		<dependency>
 			<groupId>org.loboevolution</groupId>
 			<artifactId>LoboApi</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.loboevolution</groupId>
+			<artifactId>LoboXalan</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
@@ -193,11 +199,6 @@
 			<groupId>com.fifesoft</groupId>
 			<artifactId>rsyntaxtextarea</artifactId>
 			<version>3.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-			<version>2.7.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.corba</groupId>

@@ -24,12 +24,12 @@
 package org.loboevolution.html.dom.xpath;
 
 import com.gargoylesoftware.css.dom.DOMException;
-import org.apache.xpath.XPath;
-import org.apache.xpath.objects.XObject;
-import org.apache.xpath.res.XPATHErrorResources;
-import org.apache.xpath.res.XPATHMessages;
+import org.loboevolution.apache.xpath.XPath;
+import org.loboevolution.apache.xpath.objects.XObject;
+import org.loboevolution.apache.xpath.res.XPATHErrorResources;
+import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeIterator;
+import org.loboevolution.html.node.traversal.NodeIterator;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.events.Event;
@@ -37,7 +37,7 @@ import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathResult;
 
-import javax.xml.transform.TransformerException;
+import org.loboevolution.javax.xml.transform.TransformerException;
 
 /**
  *
@@ -61,7 +61,7 @@ import javax.xml.transform.TransformerException;
  * <p>
  * This implementation wraps an XObject.
  *
- * @see org.apache.xpath.objects.XObject
+ * @see org.loboevolution.apache.xpath.objects.XObject
  * @see org.loboevolution.html.xpath.XPathResult
  *
  *
@@ -108,7 +108,7 @@ public class XPathResultImpl implements XPathResult {
 
 	/**
 	 * This the type specified by the user during construction. Typically the
-	 * constructor will be called by org.apache.xpath.XPath.evaluate().
+	 * constructor will be called by org.loboevolution.apache.xpath.XPath.evaluate().
 	 */
 	private final short m_resultType;
 

@@ -63,7 +63,7 @@ import org.loboevolution.pdfview.colorspace.YCCKColorSpace;
 import org.loboevolution.pdfview.decode.PDFDecoder;
 import org.loboevolution.pdfview.function.FunctionType0;
 import org.w3c.dom.Attr;
-import org.w3c.dom.Node;
+import org.loboevolution.html.node.Node;
 
 /**
  * Encapsulates a PDF Image

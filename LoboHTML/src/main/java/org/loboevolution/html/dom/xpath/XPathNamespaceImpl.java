@@ -73,7 +73,6 @@ import org.w3c.dom.events.EventException;
  * See also the
  * <a href='http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>Document
  * Object Model (DOM) Level 3 XPath Specification</a>.
- *
  * This implementation wraps the DOM attribute node that contained the namespace
  * declaration.
  */
@@ -258,6 +257,16 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	@Override
 	public boolean isSupported(String xml, String s) {
 		return false;
+	}
+
+	@Override
+	public boolean hasAttributes() {
+		return false;
+	}
+
+	@Override
+	public NamedNodeMap getAttributes() {
+		return null;
 	}
 
 	/** {@inheritDoc} */

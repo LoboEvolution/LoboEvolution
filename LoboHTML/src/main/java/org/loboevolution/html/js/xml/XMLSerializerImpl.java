@@ -48,9 +48,9 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
             StringBuffer buff = new StringBuffer();
 			if (node instanceof Document) {
 				NodeListImpl children = (NodeListImpl)node.getChildNodes();
-				children.forEach(elem -> getXMLString((Element) elem, true, buff, true));
+				children.forEach(elem -> getXString((Element) elem, true, buff, true));
 			} else{
-				getXMLString((Element) node, true, buff, true);
+				getXString((Element) node, true, buff, true);
 			}
             return buff.toString();
         } catch (Exception e) {
@@ -59,7 +59,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
         return "";
     }
 
-    public static void getXMLString(Element node, boolean withoutNamespaces, StringBuffer buff, boolean endTag) {
+    public static void getXString(Element node, boolean withoutNamespaces, StringBuffer buff, boolean endTag) {
         try {
 
             buff.append("<")
@@ -108,7 +108,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
 				child.forEach(item -> {
 					final int itemType = item.getNodeType();
 					if (itemType == NodeType.DOCUMENT_NODE || itemType == NodeType.ELEMENT_NODE) {
-						getXMLString((Element) item, withoutNamespaces, buff, tag.get());
+						getXString((Element) item, withoutNamespaces, buff, tag.get());
 					}
 				});
 

@@ -24,9 +24,8 @@
 package org.loboevolution.html.dom.xpath;
 
 import com.gargoylesoftware.css.dom.DOMException;
-import org.apache.xml.utils.PrefixResolver;
-import org.apache.xpath.XPath;
-import org.apache.xpath.domapi.XPathStylesheetDOM3Exception;
+import org.loboevolution.apache.xml.utils.PrefixResolver;
+import org.loboevolution.apache.xpath.XPath;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
@@ -35,7 +34,7 @@ import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 
-import javax.xml.transform.TransformerException;
+import org.loboevolution.javax.xml.transform.TransformerException;
 
 /**
  * <p>XPathEvaluatorImpl class.</p>
@@ -64,15 +63,11 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 	public XPathExpression createExpression(String expression, XPathNSResolver resolver)
 			throws XPathException, DOMException {
 		try {
-			XPath xpath = new XPath(expression, null,
-					null == resolver ? new DummyPrefixResolver() : (PrefixResolver) resolver, XPath.SELECT);
+			XPath xpath = new XPath(expression,
+					null == resolver ? new PrefixResolverImpl() : (PrefixResolver) resolver, XPath.SELECT);
 			return new XPathExpressionImpl(xpath, m_doc);
 		} catch (TransformerException e) {
-			if (e instanceof XPathStylesheetDOM3Exception) {
-				throw new DOMException(DOMException.NAMESPACE_ERR, e.getMessageAndLocation());
-			} else {
-				throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, e.getMessageAndLocation());
-			}
+			throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, e.getMessageAndLocation());
 		}
 	}
 

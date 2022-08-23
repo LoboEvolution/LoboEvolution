@@ -19,7 +19,7 @@
  */
 package org.loboevolution.html.dom.filter;
 
-import org.loboevolution.html.dom.NodeFilter;
+import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 

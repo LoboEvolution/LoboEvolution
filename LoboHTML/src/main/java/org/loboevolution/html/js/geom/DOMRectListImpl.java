@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.js.geom;
 
-import org.loboevolution.html.dom.domimpl.AbstractList;
+import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.node.js.geom.DOMRect;
 import org.loboevolution.html.node.js.geom.DOMRectList;
 
