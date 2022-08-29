@@ -917,7 +917,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(elm.getCurrentStyle());
         assertNotNull(elm.getCurrentStyle());
         CSSStyleDeclaration styledecl = elm.getCurrentStyle();
-        assertEquals("padding: 4pt 6pt; margin-left: 5pt", styledecl.toString());
+        assertEquals("padding: 4pt 6pt; margin-left: 5pt", styledecl.getCssText());
         assertEquals(2, styledecl.getLength());
         assertEquals("5pt", styledecl.getPropertyValue("margin-left"));
         assertNull(styledecl.getPropertyValue("does-not-exist"));

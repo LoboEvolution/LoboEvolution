@@ -83,7 +83,7 @@ public class characterdataappenddatanomodificationallowederrTest extends LoboUni
         {
             boolean success = false;
             try {
-                ((CharacterData) /*Node */entElementContent).appendData("newString");
+                ((CharacterData) entElementContent).appendData("newString");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

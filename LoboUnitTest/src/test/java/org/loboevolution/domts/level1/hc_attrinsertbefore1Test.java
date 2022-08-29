@@ -21,12 +21,14 @@
 
 package org.loboevolution.domts.level1;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -50,11 +52,7 @@ public class hc_attrinsertbefore1Test extends LoboUnitTest {
         Element testNode;
         NamedNodeMap attributes;
         Attr titleAttr;
-        String value;
         Text textNode;
-        Node retval;
-        Node firstChild;
-        Node lastChild;
         Node refChild = null;
 
         doc = sampleXmlFile("hc_staff.xml");
@@ -63,19 +61,14 @@ public class hc_attrinsertbefore1Test extends LoboUnitTest {
         attributes = testNode.getAttributes();
         titleAttr = attributes.getNamedItem("title");
         textNode = doc.createTextNode("terday");
-        retval = titleAttr.insertBefore(textNode, refChild);
-        value = titleAttr.getValue();
-        assertEquals("attrValue", "Yesterday", value);
-        value = titleAttr.getNodeValue();
-        assertEquals("attrNodeValue", "Yesterday", value);
-        value = retval.getNodeValue();
-        assertEquals("retvalValue", "terday", value);
-        firstChild = titleAttr.getFirstChild();
-        value = firstChild.getNodeValue();
-        assertEquals("firstChildValue", "Yes", value);
-        lastChild = titleAttr.getLastChild();
-        value = lastChild.getNodeValue();
-        assertEquals("lastChildValue", "terday", value);
+
+        boolean success = false;
+        try {
+            titleAttr.insertBefore(textNode, refChild);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+        }
+        assertTrue("throw_NOT_SUPPORTED_ERR", success);
     }
 }
 

@@ -84,7 +84,7 @@ public class setAttributeNodeNS01Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                setAttr2 = ((Element) /*Node */testAddr).setAttributeNodeNS(newAttr);
+                setAttr2 = ((Element) testAddr).setAttributeNodeNS(newAttr);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }

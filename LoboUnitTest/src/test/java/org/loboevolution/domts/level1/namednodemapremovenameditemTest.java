@@ -39,7 +39,7 @@ import static org.junit.Assert.assertNotNull;
  * list is created invoke the "removeNamedItem(name)"
  * method with name="street".  This should result
  * in the removal of the specified attribute and
- * the "getSpecified()" method should return false.
+ * the "isSpecified()" method should return false.
  *
  * @author NIST
  * @author Mary Brady
@@ -71,7 +71,7 @@ public class namednodemapremovenameditemTest extends LoboUnitTest {
         removedNode = attributes.removeNamedItem("street");
         streetAttr = attributes.getNamedItem("street");
         assertNotNull("streetAttrNotNull", streetAttr);
-        specified = streetAttr.getSpecified();
+        specified = streetAttr.isSpecified();
         assertFalse("attrNotSpecified", specified);
     }
 }

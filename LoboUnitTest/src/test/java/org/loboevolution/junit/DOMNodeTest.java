@@ -589,28 +589,28 @@ public class DOMNodeTest extends LoboUnitTest {
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(text.getParentNode());
-			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
+			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
 		}
 		try {
 			attr.appendChild(pi);
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(pi.getParentNode());
-			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
+			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
 		}
 		try {
 			attr.appendChild(docType);
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(docType.getParentNode());
-			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
+			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
 		}
 		try {
 			attr.appendChild(fragment);
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(fragment.getParentNode());
-			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
+			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
 		}
 		//
 		try {
@@ -618,7 +618,7 @@ public class DOMNodeTest extends LoboUnitTest {
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(fragment.getParentNode());
-			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
+			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
 		}
 		//
 		try {
@@ -626,14 +626,14 @@ public class DOMNodeTest extends LoboUnitTest {
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(docType.getParentNode());
-			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
+			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
 		}
 		try {
 			fragment.appendChild(docType);
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(docType.getParentNode());
-			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
+			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
 		}
 		elm.appendChild(pi);
 		assertTrue(elm.hasChildNodes());

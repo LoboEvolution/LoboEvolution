@@ -51,7 +51,6 @@ public class hc_attrappendchild2Test extends LoboUnitTest {
         NamedNodeMap attributes;
         Attr titleAttr;
         Node newChild;
-        Node retval;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
@@ -62,9 +61,9 @@ public class hc_attrappendchild2Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                retval = titleAttr.appendChild(newChild);
+                titleAttr.appendChild(newChild);
             } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
+                success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
         }

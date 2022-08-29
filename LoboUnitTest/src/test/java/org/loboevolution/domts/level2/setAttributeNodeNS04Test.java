@@ -68,7 +68,7 @@ public class setAttributeNodeNS04Test extends LoboUnitTest {
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
         newAttr = doc.createAttribute( "xxx:domestic");
-        newAddrAttr = ((Element) /*Node */testAddr).setAttributeNodeNS(newAttr);
+        newAddrAttr = ((Element) testAddr).setAttributeNodeNS(newAttr);
         newName = newAddrAttr.getNodeName();
         assertEquals("nodeName", "domestic", newName);
     }

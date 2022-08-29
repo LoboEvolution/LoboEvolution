@@ -34,7 +34,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Retrieve the first attribute from the last child of
- * the first employee and invoke the "getSpecified()"
+ * the first employee and invoke the "isSpecified()"
  * method.  This test is only intended to show that
  * Elements can actually have attributes.  This test uses
  * the "getNamedItem(name)" method from the NamedNodeMap
@@ -62,7 +62,7 @@ public class hc_elementassociatedattributeTest extends LoboUnitTest {
         testEmployee = (Element)elementList.item(0);
         attributes = testEmployee.getAttributes();
         domesticAttr = attributes.getNamedItem("title");
-        specified = domesticAttr.getSpecified();
+        specified = domesticAttr.isSpecified();
         assertTrue("acronymTitleSpecified", specified);
     }
 }

@@ -70,8 +70,8 @@ public class setAttributeNS05Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        ((Element) /*Node */testAddr).setAttributeNS(namespaceURI, qualifiedName, "<newValue>");
-        resultAttr = ((Element) /*Node */testAddr).getAttributeNS(namespaceURI, localName);
+        ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "<newValue>");
+        resultAttr = ((Element) testAddr).getAttributeNS(namespaceURI, localName);
         assertEquals("throw_Equals", "<newValue>", resultAttr);
     }
 }

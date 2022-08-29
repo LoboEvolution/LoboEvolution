@@ -126,6 +126,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			}
 		}
 
+
 		nodeList.add(newChild);
 		((NodeImpl) newChild).setParentImpl(this);
 
@@ -296,9 +297,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param arg a {@link org.loboevolution.html.node.Node} object.
 	 * @return a boolean.
 	 */
-	public boolean equalAttributes(Node arg) {
-		return false;
-	}
+	public abstract boolean equalAttributes(Node arg);
+
+
+	@Override
+	public NamedNodeMap getAttributes() {return null;};
+
 
 	/**
 	 * Extracts all descendents that match the filter, except those descendents of
@@ -1026,11 +1030,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public boolean isEqualNode(Node arg) {
+
 		return arg instanceof NodeImpl && getNodeType() == arg.getNodeType()
-				&& Objects.equals(getNodeName(), arg.getNodeName())
+				&& Objects.equals(getNodeName().toUpperCase(), arg.getNodeName().toUpperCase())
 				&& Objects.equals(getNodeValue(), arg.getNodeValue())
-				&& Objects.equals(getLocalName(), arg.getLocalName())
-				&& Objects.equals(this.nodeList, ((NodeImpl) arg).nodeList) && equalAttributes(arg);
+				&& ((getLocalName() == null && getLocalName() == null) ||
+				   Objects.equals(getLocalName().toUpperCase(), arg.getLocalName().toUpperCase()));
 	}
 
 	/*

@@ -24,9 +24,11 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.Assert.assertTrue;
 
@@ -42,27 +44,21 @@ public class createDocument08Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
         String namespaceURI = "http://www.example.org/schema";
         DocumentType docType = null;
-
         DOMImplementation domImpl;
-        Document aNewDoc;
-        String charact;
-        domImpl = null; //TODO getImplementation();
-
-        {
-            boolean success = false;
-            try {
-                aNewDoc = domImpl.createDocument(namespaceURI, "", docType);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-            }
-            assertTrue("throw_INVALID_CHARACTER_ERR", success);
+        domImpl = new DOMImplementationImpl(new UserAgentContext(true));
+        boolean success = false;
+        try {
+            domImpl.createDocument(namespaceURI, "", docType);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
+        assertTrue("throw_INVALID_CHARACTER_ERR", success);
+
     }
 }
 

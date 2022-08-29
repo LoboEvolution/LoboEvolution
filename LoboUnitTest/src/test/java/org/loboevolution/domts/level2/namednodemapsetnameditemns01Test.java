@@ -63,7 +63,7 @@ public class namednodemapsetnameditemns01Test extends LoboUnitTest {
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
         newAttr1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "streets");
-        /*Node */
+        
         newAttribute = element.setAttributeNodeNS(newAttr1);
         attribute = attributes.getNamedItemNS("http://www.w3.org/DOM/L1", "streets");
         attrName = attribute.getNodeName();

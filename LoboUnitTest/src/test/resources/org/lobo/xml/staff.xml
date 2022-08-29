@@ -19,8 +19,7 @@
   ~ Contact info: ivan.difrancesco@yahoo.it
   -->
 
-<!DOCTYPE staff SYSTEM
-        "C:\Users\utente\workspace\LoboEvolution\LoboUnitTest\src\test\resources\org\lobo\xml\staff.dtd" [
+<!DOCTYPE staff SYSTEM "staff.dtd" [
    <!ENTITY ent1 "es">
    <!ENTITY ent2 "1900 Dallas Road">
    <!ENTITY ent3 "Texas">

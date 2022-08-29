@@ -50,7 +50,6 @@ public class createElementNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -59,16 +58,14 @@ public class createElementNS01Test extends LoboUnitTest {
         Document doc;
         Element newElement;
         doc = sampleXmlFile("staffNS.xml");
-
-        {
-            boolean success = false;
-            try {
-                newElement = doc.createElementNS(namespaceURI, malformedName);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("throw_NAMESPACE_ERR", success);
+        boolean success = false;
+        try {
+            newElement = doc.createElementNS(namespaceURI, malformedName);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("throw_NAMESPACE_ERR", success);
+
     }
 }
 

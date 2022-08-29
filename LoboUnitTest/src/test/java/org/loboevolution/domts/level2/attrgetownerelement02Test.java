@@ -53,12 +53,10 @@ public class attrgetownerelement02Test extends LoboUnitTest {
         Element element;
         Element ownerElement;
         String ownerElementName;
-        Attr attr;
-        Attr newAttr;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElement("root");
-        attr = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");
-        newAttr = element.setAttributeNodeNS(attr);
+        Attr attr = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");
+        element.setAttributeNodeNS(attr);
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
         assertEquals("attrgetownerelement02", "root", ownerElementName);

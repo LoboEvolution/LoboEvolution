@@ -114,7 +114,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@JSFunction
 	public Attr getAttributeNode(String name) {
 		Attr attribute = map.getNamedItem(name);
-		return attribute == null ? null : new AttrImpl(name, attribute.getValue(), true, this, "id".equalsIgnoreCase(name));
+		return attribute == null ? null : new AttrImpl(name, attribute.getValue(), "id".equalsIgnoreCase(name), this, true);
 	}
 
 	/** {@inheritDoc} */
@@ -123,7 +123,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
 		final Attr attribute = map.getNamedItem(localName);
 		if (attribute != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attribute.getNamespaceURI()))) {
-			return new AttrImpl(localName, attribute.getValue(), true, this, "id".equalsIgnoreCase(localName));
+			return new AttrImpl(localName, attribute.getValue(), "id".equalsIgnoreCase(name), this, true);
 		}
 		return null;
 	}
@@ -161,7 +161,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
-		map.setNamedItem(new AttrImpl(name, value, true, this, "id".equalsIgnoreCase(name)));
+		map.setNamedItem(new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true));
 		assignAttributeField(name, value);
 	}
 
@@ -173,7 +173,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null name");
 		}
 
-		final AttrImpl attr = new AttrImpl(qualifiedName, value, true, this, "id".equalsIgnoreCase(qualifiedName));
+		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
 		attr.setNamespaceURI(namespaceURI);
 		map.setNamedItem(attr);
 		assignAttributeField(qualifiedName, value);
@@ -183,7 +183,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void setIdAttribute(String localName, boolean isId) throws DOMException {
 		final AttrImpl attr = (AttrImpl)getAttributeNode(name);
-		if(attr != null) attr.setIsId(isId);
+		if(attr != null) attr.setNameId(isId);
 	}
 
 		/** {@inheritDoc} */
@@ -191,14 +191,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
 		final AttrImpl attr = (AttrImpl)getAttributeNode(localName);
 		if (attr != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attr.getNamespaceURI()))) {
-			attr.setIsId(isId);
+			attr.setNameId(isId);
 		}
 	}
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttributeNode(Attr idAttr, boolean isId) {
 		final AttrImpl attr = (AttrImpl)idAttr;
-		attr.setIsId(isId);
+		attr.setNameId(isId);
 	}
 
 	/** {@inheritDoc} */

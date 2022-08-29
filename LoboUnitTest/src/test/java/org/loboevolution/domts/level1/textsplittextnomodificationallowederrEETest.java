@@ -64,7 +64,7 @@ public class textsplittextnomodificationallowederrEETest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                splitNode = ((Text) /*Node */entText).splitText(2);
+                splitNode = ((Text) entText).splitText(2);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

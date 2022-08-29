@@ -71,7 +71,7 @@ public class characterdatadeletedatanomodificationallowederrEETest extends LoboU
         {
             boolean success = false;
             try {
-                ((CharacterData) /*Node */entText).deleteData(1, 3);
+                ((CharacterData) entText).deleteData(1, 3);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

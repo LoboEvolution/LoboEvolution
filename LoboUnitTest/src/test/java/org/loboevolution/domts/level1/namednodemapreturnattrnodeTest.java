@@ -69,7 +69,7 @@ public class namednodemapreturnattrnodeTest extends LoboUnitTest {
         assertNotNull("typeAssert", streetAttr);
         attrName = streetAttr.getNodeName();
         assertEquals("nodeName", "street", attrName);
-        /*Node */
+        
         attrName = streetAttr.getName();
         assertEquals("attrName", "street", attrName);
     }

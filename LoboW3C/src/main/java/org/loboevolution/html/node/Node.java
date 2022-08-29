@@ -339,6 +339,13 @@ public interface Node extends EventTarget {
 	Node replaceChild(Node newChild, Node oldChild);
 
 	/**
+	 * <p>getAttributes.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.node.NamedNodeMap} object.
+	 */
+	NamedNodeMap getAttributes();
+
+	/**
 	 * <p>compareDocumentPosition.</p>
 	 *
 	 * @param other a {@link org.loboevolution.html.node.Node} object.

@@ -68,7 +68,7 @@ public class setAttributeNS06Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                ((Element) /*Node */testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
+                ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }

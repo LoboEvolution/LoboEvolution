@@ -33,12 +33,12 @@ import static org.junit.Assert.assertFalse;
 
 
 /**
- * The "getSpecified()" method for an Attr node should
+ * The "isSpecified()" method for an Attr node should
  * be set to false if the attribute was not explicitly given
  * a value.
  * Retrieve the attribute named "street" from the last
  * child of the first employee and examine the value
- * returned by the "getSpecified()" method.  This test uses
+ * returned by the "isSpecified()" method.  This test uses
  * the "getNamedItem(name)" method from the NamedNodeMap
  * interface.
  *
@@ -56,19 +56,12 @@ public class AttrNotSpecifiedValueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection addressList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr streetAttr;
-        boolean state;
-        doc = sampleXmlFile("staff.xml");
-        addressList = doc.getElementsByTagName("address");
-        testNode = (Element) addressList.item(0);
-        attributes = testNode.getAttributes();
-        streetAttr = attributes.getNamedItem("street");
-        state = streetAttr.getSpecified();
-        assertFalse("streetNotSpecified", state);
+        Document doc = sampleXmlFile("staff.xml");
+        HTMLCollection addressList = doc.getElementsByTagName("address");
+        Element testNode = (Element) addressList.item(1);
+        NamedNodeMap attributes = testNode.getAttributes();
+        Attr streetAttr = attributes.getNamedItem("street");
+        assertFalse("streetNotSpecified", streetAttr.isSpecified());
     }
 }
 

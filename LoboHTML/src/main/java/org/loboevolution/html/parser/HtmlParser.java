@@ -50,9 +50,6 @@ import java.util.regex.Pattern;
  * the functionality for the standard DOM parser implementation
  * {@link org.loboevolution.html.parser.DocumentBuilderImpl}. This parser class
  * may be used directly when a different DOM implementation is preferred.
- *
- *
- *
  */
 public class HtmlParser {
 	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());

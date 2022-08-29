@@ -97,6 +97,4 @@ public interface Attr extends Node {
 	 * @return a boolean.
 	 */
 	boolean isId();
-
-    boolean getSpecified();
 }

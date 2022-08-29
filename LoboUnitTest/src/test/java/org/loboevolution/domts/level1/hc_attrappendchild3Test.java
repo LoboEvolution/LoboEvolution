@@ -21,13 +21,13 @@
 
 package org.loboevolution.domts.level1;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 
 /**
@@ -42,7 +42,6 @@ public class hc_attrappendchild3Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -51,11 +50,8 @@ public class hc_attrappendchild3Test extends LoboUnitTest {
         Element testNode;
         NamedNodeMap attributes;
         Attr titleAttr;
-        String value;
         Text terNode;
         Text dayNode;
-        Node retval;
-        Node lastChild;
         DocumentFragment docFrag;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
@@ -65,18 +61,15 @@ public class hc_attrappendchild3Test extends LoboUnitTest {
         terNode = doc.createTextNode("ter");
         dayNode = doc.createTextNode("day");
         docFrag = doc.createDocumentFragment();
-        retval = docFrag.appendChild(terNode);
-        retval = docFrag.appendChild(dayNode);
-        retval = titleAttr.appendChild(docFrag);
-        value = titleAttr.getValue();
-        assertEquals("attrValue", "Yesterday", value);
-        value = titleAttr.getNodeValue();
-        assertEquals("attrNodeValue", "Yesterday", value);
-        value = retval.getNodeValue();
-        assertNull("retvalValue", value);
-        lastChild = titleAttr.getLastChild();
-        value = lastChild.getNodeValue();
-        assertEquals("lastChildValue", "day", value);
+        docFrag.appendChild(terNode);
+        docFrag.appendChild(dayNode);
+        boolean success = false;
+        try {
+            titleAttr.appendChild(docFrag);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+        }
+        assertTrue("throw_NOT_SUPPORTED_ERR", success);
     }
 }
 

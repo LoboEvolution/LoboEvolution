@@ -176,6 +176,11 @@ public class XPathNamespaceImpl implements XPathNamespace {
 		return null;
 	}
 
+	@Override
+	public NamedNodeMap getAttributes() {
+		return null;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public Node removeChild(Node arg0) {

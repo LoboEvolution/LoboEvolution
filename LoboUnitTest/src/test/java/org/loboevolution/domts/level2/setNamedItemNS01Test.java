@@ -62,7 +62,6 @@ public class setNamedItemNS01Test extends LoboUnitTest {
         Node arg;
         Element testAddress;
         NamedNodeMap map;
-        Node setNode;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         anotherElement = (Element) elementList.item(2);
@@ -74,7 +73,7 @@ public class setNamedItemNS01Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                setNode = map.setNamedItemNS((Attr)arg);
+                map.setNamedItemNS((Attr)arg);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }

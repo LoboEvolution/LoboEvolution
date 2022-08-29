@@ -63,7 +63,7 @@ public class CDataSectionGetDataTest extends LoboUnitTest {
         lastChild = child.getLastChild();
         nodeType = lastChild.getNodeType();
         assertEquals("isCDATA", 4, nodeType);
-        data = ((CharacterData) /*Node */lastChild).getData();
+        data = ((CharacterData) lastChild).getData();
         assertEquals("data", "This is an adjacent CDATASection with a reference to a tab &tab;", data);
     }
 }

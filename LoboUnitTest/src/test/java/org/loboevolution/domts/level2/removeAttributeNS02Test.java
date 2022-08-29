@@ -69,11 +69,11 @@ public class removeAttributeNS02Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
-        ((Element) /*Node */testAddr).removeAttribute( "local1");
+        ((Element) testAddr).removeAttribute( "local1");
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
-        addrAttr = ((Element) /*Node */testAddr).getAttributeNode( "local1");
-        attr = ((Element) /*Node */testAddr).getAttribute( "local1");
+        addrAttr = ((Element) testAddr).getAttributeNode( "local1");
+        attr = ((Element) testAddr).getAttribute( "local1");
         namespaceURI = addrAttr.getNamespaceURI();
         localName = addrAttr.getLocalName();
         prefix = testAddr.getPrefix();

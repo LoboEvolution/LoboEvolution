@@ -21,12 +21,14 @@
 
 package org.loboevolution.domts.level1;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -46,23 +48,17 @@ public class hc_attrappendchild6Test extends LoboUnitTest {
     public void runTest() {
         Document doc;
         Attr titleAttr;
-        String value;
         Text textNode;
-        Node retval;
-        Node lastChild;
         doc = sampleXmlFile("hc_staff.xml");
         titleAttr = doc.createAttribute("title");
         textNode = doc.createTextNode("Yesterday");
-        retval = titleAttr.appendChild(textNode);
-        value = titleAttr.getValue();
-        assertEquals("attrValue", "Yesterday", value);
-        value = titleAttr.getNodeValue();
-        assertEquals("attrNodeValue", "Yesterday", value);
-        value = retval.getNodeValue();
-        assertEquals("retvalValue", "Yesterday", value);
-        lastChild = titleAttr.getLastChild();
-        value = lastChild.getNodeValue();
-        assertEquals("lastChildValue", "Yesterday", value);
+        boolean success = false;
+        try {
+            titleAttr.appendChild(textNode);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+        }
+        assertTrue("throw_NOT_SUPPORTED_ERR", success);
     }
 }
 

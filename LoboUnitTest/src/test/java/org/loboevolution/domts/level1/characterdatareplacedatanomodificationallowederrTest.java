@@ -83,7 +83,7 @@ public class characterdatareplacedatanomodificationallowederrTest extends LoboUn
         {
             boolean success = false;
             try {
-                ((CharacterData) /*Node */entElementContent).replaceData(1, 3, "newArg");
+                ((CharacterData) entElementContent).replaceData(1, 3, "newArg");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

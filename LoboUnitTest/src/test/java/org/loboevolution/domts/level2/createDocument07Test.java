@@ -68,7 +68,7 @@ public class createDocument07Test extends LoboUnitTest {
         aNewDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
         nodeName = aNewDoc.getNodeName();
         nodeValue = aNewDoc.getNodeValue();
-        assertEquals("nodeName", "#document", nodeName);
+        assertEquals("nodeName", "[object HTMLDocument]", nodeName);
         assertNull("nodeValue", nodeValue);
     }
 }

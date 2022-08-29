@@ -82,7 +82,7 @@ public class characterdatadeletedatanomodificationallowederrTest extends LoboUni
         {
             boolean success = false;
             try {
-                ((CharacterData) /*Node */entElementContent).deleteData(1, 3);
+                ((CharacterData) entElementContent).deleteData(1, 3);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

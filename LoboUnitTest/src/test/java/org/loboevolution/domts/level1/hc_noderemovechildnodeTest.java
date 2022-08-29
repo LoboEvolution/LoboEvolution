@@ -80,7 +80,7 @@ public class hc_noderemovechildnodeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);
         childList = employeeNode.getChildNodes();
-        emList = ((Element) /*Node */employeeNode).getElementsByTagName("em");
+        emList = ((Element) employeeNode).getElementsByTagName("em");
         oldChild = emList.item(0);
         removedChild = employeeNode.removeChild(oldChild);
         removedName = removedChild.getNodeName();

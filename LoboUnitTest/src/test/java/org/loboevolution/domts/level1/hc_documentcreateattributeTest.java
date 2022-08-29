@@ -58,7 +58,7 @@ public class hc_documentcreateattributeTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         newAttrNode = doc.createAttribute("title");
         attrValue = newAttrNode.getNodeValue();
-        assertEquals("value", "", attrValue);
+        assertEquals("value", null, attrValue);
         attrName = newAttrNode.getNodeName();
         assertEquals( "name", "title", attrName);
         attrType = newAttrNode.getNodeType();

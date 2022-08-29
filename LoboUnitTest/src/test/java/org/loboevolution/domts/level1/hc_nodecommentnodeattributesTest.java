@@ -23,10 +23,7 @@ package org.loboevolution.domts.level1;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertNull;
 
@@ -49,28 +46,27 @@ public class hc_nodecommentnodeattributesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
         Document doc;
-        Element commentNode;
+        Comment commentNode;
         NodeList nodeList;
-        NamedNodeMap attrList;
+        NodeList attrList;
         int nodeType;
         doc = sampleXmlFile("hc_staff.xml");
         nodeList = doc.getChildNodes();
         for (int indexN10043 = 0; indexN10043 < nodeList.getLength(); indexN10043++) {
-            commentNode = (Element) nodeList.item(indexN10043);
+            commentNode = (Comment) nodeList.item(indexN10043);
             nodeType = commentNode.getNodeType();
 
             if (nodeType == 8) {
-                attrList = commentNode.getAttributes();
+                attrList = commentNode.getChildNodes();
                 assertNull("existingCommentAttributesNull", attrList);
             }
         }
-        commentNode = (Element) doc.createComment("This is a comment");
-        attrList = commentNode.getAttributes();
+        commentNode = doc.createComment("This is a comment");
+        attrList = commentNode.getChildNodes();
         assertNull("createdCommentAttributesNull", attrList);
     }
 }

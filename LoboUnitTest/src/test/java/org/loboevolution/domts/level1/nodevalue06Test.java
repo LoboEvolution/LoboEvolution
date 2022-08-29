@@ -21,11 +21,13 @@
 
 package org.loboevolution.domts.level1;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -49,7 +51,13 @@ public class nodevalue06Test extends LoboUnitTest {
         newNode = sampleXmlFile("staff.xml");
         newValue = newNode.getNodeValue();
         assertNull("initiallyNull", newValue);
-        newNode.setNodeValue("This should have no effect");
+        boolean success = false;
+        try {
+            newNode.setNodeValue("This should have no effect");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
+        }
+        assertTrue("throw_INVALID_MODIFICATION_ERR", success);
         newValue = newNode.getNodeValue();
         assertNull("nullAfterAttemptedChange", newValue);
     }

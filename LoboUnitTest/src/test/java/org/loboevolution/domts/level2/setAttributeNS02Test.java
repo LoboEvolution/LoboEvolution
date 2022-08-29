@@ -67,7 +67,7 @@ public class setAttributeNS02Test extends LoboUnitTest {
             // BEGIN Android-changed
             //     Our exception priorities differ from the spec
             try {
-                ((Element) /*Node */testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
+                ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
                 fail("throw_NAMESPACE_ERR");
             } catch (DOMException ex) {
             }

@@ -80,7 +80,7 @@ public class AttrSetValueNoModificationalLowederrEETest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                /*Node */
+                
                 attrNode.setValue("newvalue");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);

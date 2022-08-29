@@ -17,12 +17,12 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Sep 10, 2005
- */
 package org.loboevolution.html.dom.nodeimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import org.loboevolution.html.dom.domimpl.AttributeTypeInfo;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.*;
@@ -30,164 +30,116 @@ import org.loboevolution.html.node.*;
 /**
  * <p>AttrImpl class.</p>
  */
+@Data
+@AllArgsConstructor
 public class AttrImpl extends EventTargetImpl implements Attr {
-	private boolean isId;
-	private final String name;
-	private final Element ownerElement;
-	private final boolean specified;
-	private String value;
 
-	/**
-	 * <p>Constructor for AttrImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public AttrImpl(final String name) {
-		this.name = name;
-		this.value = "";
-		this.specified = false;
-		this.ownerElement = null;
-		this.isId = false;
-	}
+    private final String name;
 
-	/**
-	 * <p>Constructor for AttrImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @param value a {@link java.lang.String} object.
-	 * @param specified a boolean.
-	 * @param owner a {@link org.loboevolution.html.node.Element} object.
-	 * @param isId a boolean.
-	 */
-	public AttrImpl(String name, String value, boolean specified, Element owner, boolean isId) {
-		this.name = name;
-		this.value = value;
-		this.specified = specified;
-		this.ownerElement = owner;
-		this.isId = isId;
-	}
+    private String value;
 
-	/** {@inheritDoc} */
-	@Override
-	public String getLocalName() {
-		return this.name;
-	}
+    private boolean nameId;
 
-	/** {@inheritDoc} */
-	@Override
-	public String getName() {
-		return this.name;
-	}
+    private Element ownerElement;
 
-	/** {@inheritDoc} */
-	@Override
-	public String getNodeName() {
-		return this.name;
-	}
+    @Builder.Default
+    private boolean specified = true;
 
-	/** {@inheritDoc} */
-	@Override
-	public int getNodeType() {
-		return NodeType.ATTRIBUTE_NODE;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLocalName() {
+        return this.name;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public String getNodeValue() {
-		return this.value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNodeName() {
+        return this.name;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public Element getOwnerElement() {
-		return this.ownerElement;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getNodeType() {
+        return NodeType.ATTRIBUTE_NODE;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public boolean isSpecified() {
-		return this.specified;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNodeValue() {
+        return this.value;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public String getValue() {
-		return this.value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextContent() {
+        return getValue();
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public String getTextContent() {
-		return getValue();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TypeInfo getSchemaTypeInfo() {
+        return new AttributeTypeInfo(isId());
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public TypeInfo getSchemaTypeInfo() {
-		return new AttributeTypeInfo(isId());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isId() {
+        return this.nameId || name.toLowerCase().contains("id");
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public boolean isId() {
-        return this.isId || name.toLowerCase().contains("id");
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(String nodeValue) {
+        this.value = nodeValue;
+    }
 
-	@Override
-	public boolean getSpecified() {
-		return specified;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Node insertBefore(Node newChild, Node refChild) {
+        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'insertBefore' on 'Node': This node type does not support this method.");
+    }
 
-	public void setIsId(boolean isId){
-		this.isId = isId;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Node removeChild(Node oldChild) {
+        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'removeChild' on 'Node': This node type does not support this method.");
+    }
 
-	/**
-	 * <p>setId.</p>
-	 *
-	 * @param value a boolean.
-	 */
-	public void setId(boolean value) {
-		this.isId = value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Node replaceChild(Node newChild, Node refChild) {
+        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'replaceChild' on 'Node': This node type does not support this method.");
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void setNodeValue(String nodeValue) {
-		this.value = nodeValue;
-	}
+    @Override
+    public Node appendChild(Node newChild) {
+        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'appendChild' on 'Node': This node type does not support this method.");
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Node insertBefore(Node newChild, Node refChild) {
-		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "'insertBefore' on 'Node': This node type does not support this method.");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Node removeChild(Node oldChild) {
-		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "'removeChild' on 'Node': This node type does not support this method.");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Node replaceChild(Node newChild, Node refChild) {
-		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "'replaceChild' on 'Node': This node type does not support this method.");
-	}
-
-	@Override
-	public Node appendChild(Node newChild) {
-		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "'appendChild' on 'Node': This node type does not support this method.");
-	}
-
-	@Override
-	public String toString() {
-		return "[object Attr]";
-	}
+    @Override
+    public String toString() {
+        return "[object Attr]";
+    }
 }

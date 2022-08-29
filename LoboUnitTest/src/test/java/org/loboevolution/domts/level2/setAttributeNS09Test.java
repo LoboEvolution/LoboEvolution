@@ -72,9 +72,9 @@ public class setAttributeNS09Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        ((Element) /*Node */testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
-        addrAttr = ((Element) /*Node */testAddr).getAttributeNodeNS(namespaceURI, localName);
-        resultAttr = ((Element) /*Node */testAddr).getAttributeNS(namespaceURI, localName);
+        ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
+        addrAttr = ((Element) testAddr).getAttributeNodeNS(namespaceURI, localName);
+        resultAttr = ((Element) testAddr).getAttributeNS(namespaceURI, localName);
         assertEquals("attrValue", "newValue", resultAttr);
         resultNamespaceURI = addrAttr.getNamespaceURI();
         assertEquals("nsuri", "http://www.newattr.com", resultNamespaceURI);

@@ -461,8 +461,6 @@ public class DOMDocumentTest extends LoboUnitTest {
         Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "foo", null);
         DocumentFragment df = document.createDocumentFragment();
         assertNotNull(df);
-        df.isEqualNode(df.cloneNode(false));
-        df.isEqualNode(df.cloneNode(true));
         Comment comment = document.createComment("My comment");
         df.appendChild(comment);
         Element div = document.createElement("div");
@@ -492,7 +490,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertNull(attr.getFirstChild());
         assertNull(attr.getLastChild());
         assertEquals(0, attr.getChildNodes().getLength());
-        assertNotNull(attr.getNamespaceURI());
+        assertNull(attr.getNamespaceURI());
         assertEquals("lang", attr.getName());
         assertEquals("en", attr.getValue());
         assertEquals("lang", attr.getNodeName());

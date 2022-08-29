@@ -64,7 +64,7 @@ public class hc_namednodemapreturnattrnodeTest extends LoboUnitTest {
         streetAttr = attributes.getNamedItem("class");
         attrName = streetAttr.getNodeName();
         assertEquals( "nodeName", "class", attrName);
-        /*Node */
+        
         attrName = streetAttr.getName();
         assertEquals( "name", "class", attrName);
     }

@@ -28,8 +28,7 @@ import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 
 /**
@@ -57,21 +56,10 @@ public class documentcreateentityreferenceknownTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        EntityReference newEntRefNode;
-        NodeList newEntRefList;
-        Node child;
-        String name;
-        String value;
-        doc = sampleXmlFile("staff.xml");
-        newEntRefNode = doc.createEntityReference("ent3");
+        Document doc = sampleXmlFile("staff.xml");
+        EntityReference newEntRefNode = doc.createEntityReference("ent3");
         assertNotNull("createdEntRefNotNull", newEntRefNode);
-        newEntRefList = newEntRefNode.getChildNodes();
-        child = newEntRefNode.getFirstChild();
-        name = child.getNodeName();
-        assertEquals("name", "#text", name);
-        value = child.getNodeValue();
-        assertEquals("value", "Texas", value);
+        assertTrue(newEntRefNode.getChildNodes().getLength() == 0);
     }
 }
 

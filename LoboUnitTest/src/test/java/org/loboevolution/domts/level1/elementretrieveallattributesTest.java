@@ -61,7 +61,7 @@ public class elementretrieveallattributesTest extends LoboUnitTest {
         NamedNodeMap attributes;
         doc = sampleXmlFile("staff.xml");
         addressList = doc.getElementsByTagName("address");
-        testAddress = (Element) addressList.item(0);
+        testAddress = (Element) addressList.item(1);
         attributes = testAddress.getAttributes();
         assertEquals("elementRetrieveAllAttributesAssert", 2, attributes.getLength());
     }

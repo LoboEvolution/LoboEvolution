@@ -33,12 +33,12 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * The "getSpecified()" method for an Attr node should
+ * The "isSpecified()" method for an Attr node should
  * be set to true if the attribute was explicitly given
  * a value.
  * Retrieve the attribute named "domestic" from the last
  * child of the first employee and examine the value
- * returned by the "getSpecified()" method.  This test uses
+ * returned by the "isSpecified()" method.  This test uses
  * the "getNamedItem(name)" method from the NamedNodeMap
  * interface.
  *
@@ -64,7 +64,7 @@ public class hc_attrspecifiedvalueTest extends LoboUnitTest {
         testNode = (Element) addressList.item(0);
         attributes = testNode.getAttributes();
         domesticAttr = attributes.getNamedItem("title");
-        state = domesticAttr.getSpecified();
+        state = domesticAttr.isSpecified();
         assertTrue("acronymTitleSpecified", state);
     }
 }

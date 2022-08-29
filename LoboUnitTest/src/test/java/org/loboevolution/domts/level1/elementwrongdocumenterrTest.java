@@ -57,7 +57,6 @@ public class elementwrongdocumenterrTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -66,22 +65,20 @@ public class elementwrongdocumenterrTest extends LoboUnitTest {
         Attr newAttribute;
         HTMLCollection addressElementList;
         Element testAddress;
-        Attr attrAddress;
         doc1 = sampleXmlFile("staff.xml");
         doc2 = sampleXmlFile("staff.xml");
         newAttribute = doc2.createAttribute("newAttribute");
         addressElementList = doc1.getElementsByTagName("address");
         testAddress = (Element) addressElementList.item(4);
 
-        {
-            boolean success = false;
-            try {
-                attrAddress = testAddress.setAttributeNode(newAttribute);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            testAddress.setAttributeNode(newAttribute);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+
     }
 }
 

@@ -71,9 +71,9 @@ public class setAttributeNS04Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        ((Element) /*Node */testAddr).setAttribute( "newprefix:zone", "newValue");
-        addrAttr = ((Element) /*Node */testAddr).getAttributeNode( "zone");
-        resultAttr = ((Element) /*Node */testAddr).getAttribute( "zone");
+        ((Element) testAddr).setAttribute( "newprefix:zone", "newValue");
+        addrAttr = ((Element) testAddr).getAttributeNode( "zone");
+        resultAttr = ((Element) testAddr).getAttribute( "zone");
         assertEquals("attrValue", "newValue", resultAttr);
         resultNamespaceURI = addrAttr.getNamespaceURI();
         assertEquals("nsuri", "http://www.nist.gov", resultNamespaceURI);

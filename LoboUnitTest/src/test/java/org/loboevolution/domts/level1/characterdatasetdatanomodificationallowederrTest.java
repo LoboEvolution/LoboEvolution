@@ -82,7 +82,7 @@ public class characterdatasetdatanomodificationallowederrTest extends LoboUnitTe
         {
             boolean success = false;
             try {
-                ((CharacterData) /*Node */entElementContent).setData("newData");
+                ((CharacterData) entElementContent).setData("newData");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

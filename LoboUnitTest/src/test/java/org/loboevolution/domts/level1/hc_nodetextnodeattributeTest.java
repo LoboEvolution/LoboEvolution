@@ -24,10 +24,8 @@ package org.loboevolution.domts.level1;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.dom.nodeimpl.TextImpl;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertNull;
 
@@ -54,13 +52,13 @@ public class hc_nodetextnodeattributeTest extends LoboUnitTest {
         Document doc;
         HTMLCollection elementList;
         Node testAddr;
-        Element textNode;
-        NamedNodeMap attrList;
+        Text textNode;
+        NodeList attrList;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddr = elementList.item(0);
-        textNode = (Element) testAddr.getFirstChild();
-        attrList = textNode.getAttributes();
+        textNode = (Text) testAddr.getFirstChild();
+        attrList = textNode.getChildNodes();
         assertNull("text_attributes_is_null", attrList);
     }
 }

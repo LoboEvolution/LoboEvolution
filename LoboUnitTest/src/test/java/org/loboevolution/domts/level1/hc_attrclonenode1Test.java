@@ -21,12 +21,14 @@
 
 package org.loboevolution.domts.level1;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -49,27 +51,21 @@ public class hc_attrclonenode1Test extends LoboUnitTest {
         Element testNode;
         NamedNodeMap attributes;
         Attr titleAttr;
-        String value;
         Text textNode;
-        Node retval;
-        Node lastChild;
-        Attr clonedTitle;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
         titleAttr = attributes.getNamedItem("title");
         textNode = doc.createTextNode("terday");
-        retval = titleAttr.appendChild(textNode);
-        clonedTitle = (Attr) titleAttr.cloneNode(false);
-        textNode.setNodeValue("text_node_not_cloned");
-        value = clonedTitle.getValue();
-        assertEquals("attrValue", "Yesterday", value);
-        value = clonedTitle.getNodeValue();
-        assertEquals("attrNodeValue", "Yesterday", value);
-        lastChild = clonedTitle.getLastChild();
-        value = lastChild.getNodeValue();
-        assertEquals("lastChildValue", "terday", value);
+
+        boolean success = false;
+        try {
+            titleAttr.appendChild(textNode);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+        }
+        assertTrue("throw_NOT_SUPPORTED_ERR", success);
     }
 }
 

@@ -25,6 +25,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -32,6 +33,7 @@ import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.NodeType;
+import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.Assert.*;
 
@@ -39,13 +41,19 @@ public class DOMElementTest extends LoboUnitTest {
 
 	private static  Document document;
 
+	private static DOMImplementationImpl domImpl;
+
 	@BeforeClass
 	public static void setUpBeforeClass() {
+		UserAgentContext context = new UserAgentContext(true);
+		context.setUserAgentEnabled(false);
+		domImpl = new DOMImplementationImpl(context);
 		document = sampleHtmlFile();
 	}
 
 	@Test
 	public void testGetAttributes() {
+		Document document = domImpl.createDocument(null, null, null);
 		Element html = document.getDocumentElement();
 		Element body = document.createElement("body");
 		html.appendChild(body);
@@ -963,20 +971,20 @@ public class DOMElementTest extends LoboUnitTest {
 		docElm.appendChild(elem4);
 		HTMLCollectionImpl list = (HTMLCollectionImpl)docElm.getElementsByTagName("div");
 		assertNotNull(list);
-		assertEquals(4, list.getLength());
+		assertEquals(5, list.getLength());
 		assertNull(list.item(-1));
-		assertSame(elem1, list.item(0));
-		assertSame(elem2, list.item(1));
-		assertSame(elem3, list.item(2));
-		assertSame(elem4, list.item(3));
-		assertNull(list.item(4));
-		//
+		assertTrue(elem1.isEqualNode(list.item(0)));
+		assertTrue(elem2.isEqualNode(list.item(1)));
+		assertTrue(elem3.isEqualNode(list.item(2)));
+		assertTrue(elem4.isEqualNode(list.item(3)));
+		assertNotNull(list.item(4));
+
 		list = (HTMLCollectionImpl)elem1.getElementsByTagName("div");
 		assertNotNull(list);
 		assertEquals(2, list.getLength());
 		assertNull(list.item(-1));
-		assertSame(elem2, list.item(0));
-		assertSame(elem3, list.item(1));
+		assertTrue(elem2.isEqualNode(list.item(0)));
+		assertTrue(elem3.isEqualNode(list.item(1)));
 		assertNull(list.item(2));
 		//
 		list = (HTMLCollectionImpl)elem2.getElementsByTagName("div");

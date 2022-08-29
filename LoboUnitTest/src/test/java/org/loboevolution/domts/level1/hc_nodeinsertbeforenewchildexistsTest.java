@@ -80,7 +80,7 @@ public class hc_nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);
-        childList = ((Element) /*Node */employeeNode).getElementsByTagName("*");
+        childList = ((Element) employeeNode).getElementsByTagName("*");
         refChild = childList.item(5);
         newChild = childList.item(0);
         insertedNode = employeeNode.insertBefore(newChild, refChild);

@@ -41,7 +41,6 @@ import static org.junit.Assert.assertTrue;
 public class hc_attrappendchild5Test extends LoboUnitTest {
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -60,16 +59,14 @@ public class hc_attrappendchild5Test extends LoboUnitTest {
         attributes = testNode.getAttributes();
         titleAttr = attributes.getNamedItem("title");
         textNode = otherDoc.createTextNode("terday");
-
-        {
-            boolean success = false;
-            try {
-                retval = titleAttr.appendChild(textNode);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            retval = titleAttr.appendChild(textNode);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+
     }
 }
 

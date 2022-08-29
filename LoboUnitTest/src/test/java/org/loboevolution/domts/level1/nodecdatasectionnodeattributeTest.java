@@ -24,9 +24,7 @@ package org.loboevolution.domts.level1;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertNull;
 
@@ -48,26 +46,25 @@ public class nodecdatasectionnodeattributeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
         Document doc;
         HTMLCollection elementList;
         Element cdataName;
-        Element cdataNode;
-        NamedNodeMap attrList;
+        Node cdataNode;
+        NodeList attrList;
         int nodeType;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("name");
         cdataName = (Element) elementList.item(1);
-        cdataNode = (Element) cdataName.getLastChild();
+        cdataNode = cdataName.getLastChild();
         nodeType = cdataNode.getNodeType();
 
         if (nodeType != 4) {
-            cdataNode = (Element) doc.createCDATASection("");
+            cdataNode = doc.createCDATASection("");
         }
-        attrList = cdataNode.getAttributes();
+        attrList = cdataNode.getChildNodes();
         assertNull("cdataSection", attrList);
     }
 }

@@ -33,12 +33,12 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * The "getSpecified()" method for an Attr node should return true if the
+ * The "isSpecified()" method for an Attr node should return true if the
  * value of the attribute is changed.
  * Retrieve the attribute named "class" from the last
  * child of the THIRD employee and change its
  * value to "Yes"(which is the default DTD value).  This
- * should cause the "getSpecified()" method to be true.
+ * should cause the "isSpecified()" method to be true.
  * This test uses the "setAttribute(name,value)" method
  * from the Element interface and the "getNamedItem(name)"
  * method from the NamedNodeMap interface.
@@ -63,11 +63,11 @@ public class hc_attrspecifiedvaluechangedTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         addressList = doc.getElementsByTagName("acronym");
         testNode = (Element) addressList.item(2);
-        /*Node */
+        
         testNode.setAttribute("class", "Y\u03b1"); // Android-changed: GREEK LOWER CASE ALPHA
         attributes = testNode.getAttributes();
         streetAttr = attributes.getNamedItem("class");
-        state = streetAttr.getSpecified();
+        state = streetAttr.isSpecified();
         assertTrue("acronymClassSpecified", state);
     }
 }

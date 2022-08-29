@@ -68,7 +68,7 @@ public class characterdatasetdatanomodificationallowederrEETest extends LoboUnit
         {
             boolean success = false;
             try {
-                ((CharacterData) /*Node */entText).setData("newData");
+                ((CharacterData) entText).setData("newData");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

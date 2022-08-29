@@ -27,6 +27,9 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -50,14 +53,11 @@ public class hc_documentgetelementsbytagnametotallengthTest extends LoboUnitTest
     public void runTest() {
         Document doc;
         HTMLCollection nameList;
-        java.util.List expectedNames = new java.util.ArrayList();
+        List<String> expectedNames = new ArrayList<>();
         expectedNames.add("HTML");
         expectedNames.add("HEAD");
         expectedNames.add("META");
         expectedNames.add("TITLE");
-        expectedNames.add("SCRIPT");
-        expectedNames.add("SCRIPT");
-        expectedNames.add("SCRIPT");
         expectedNames.add("BODY");
         expectedNames.add("P");
         expectedNames.add("EM");
@@ -95,7 +95,7 @@ public class hc_documentgetelementsbytagnametotallengthTest extends LoboUnitTest
         expectedNames.add("VAR");
         expectedNames.add("ACRONYM");
 
-        java.util.List svgExpectedNames = new java.util.ArrayList();
+        List<String> svgExpectedNames = new ArrayList<>();
         svgExpectedNames.add("SVG");
         svgExpectedNames.add("RECT");
         svgExpectedNames.add("SCRIPT");
@@ -139,7 +139,7 @@ public class hc_documentgetelementsbytagnametotallengthTest extends LoboUnitTest
         svgExpectedNames.add("VAR");
         svgExpectedNames.add("ACRONYM");
 
-        java.util.List actualNames = new java.util.ArrayList();
+        java.util.List<String> actualNames = new java.util.ArrayList<String>();
 
         Element thisElement;
         String thisTag;

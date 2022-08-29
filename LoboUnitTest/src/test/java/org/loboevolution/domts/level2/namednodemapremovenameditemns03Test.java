@@ -61,10 +61,10 @@ public class namednodemapremovenameditemns03Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "root");
         attribute1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");
-        /*Node */
+        
         newAttribute = element.setAttributeNodeNS(attribute1);
         attribute2 = doc.createAttributeNS("http://www.w3.org/DOM/L2", "L2:att");
-        /*Node */
+        
         newAttribute = element.setAttributeNodeNS(attribute2);
         attributes = element.getAttributes();
         attribute = attributes.removeNamedItemNS("http://www.w3.org/DOM/L1", "att");

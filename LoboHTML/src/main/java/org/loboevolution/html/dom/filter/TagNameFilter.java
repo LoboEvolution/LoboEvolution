@@ -48,6 +48,6 @@ public class TagNameFilter implements NodeFilter {
 			return false;
 		}
 		final String n = this.name;
-		return n.equalsIgnoreCase(((Element) node).getTagName());
+		return n.equalsIgnoreCase(node.getNodeName());
 	}
 }

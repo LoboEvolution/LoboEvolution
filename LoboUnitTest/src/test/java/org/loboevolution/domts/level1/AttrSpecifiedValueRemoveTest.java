@@ -36,12 +36,12 @@ import static org.junit.Assert.assertNotNull;
 /**
  * To respecify the attribute to its default value from
  * the DTD, the attribute must be deleted.  This will then
- * make a new attribute available with the "getSpecified()"
+ * make a new attribute available with the "isSpecified()"
  * method value set to false.
  * Retrieve the attribute named "street" from the last
  * child of the THIRD employee and delete it.  This
  * should then create a new attribute with its default
- * value and also cause the "getSpecified()" method to
+ * value and also cause the "isSpecified()" method to
  * return false.
  * This test uses the "removeAttribute(name)" method
  * from the Element interface and the "getNamedItem(name)"
@@ -74,7 +74,7 @@ public class AttrSpecifiedValueRemoveTest extends LoboUnitTest {
         attributes = testNode.getAttributes();
         streetAttr = attributes.getNamedItem("street");
         assertNotNull("streetAttrNotNull", streetAttr);
-        state = streetAttr.getSpecified();
+        state = streetAttr.isSpecified();
         assertFalse("attrSpecifiedValueRemoveAssert", state);
     }
 }

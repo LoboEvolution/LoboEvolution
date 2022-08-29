@@ -66,12 +66,12 @@ public class documentimportnode14Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         childList = doc.getElementsByTagNameNS("*", "employee");
         employeeElem = childList.item(3);
-        domImpl = null; //TODO getImplementation();
+        domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(nullNS, "staff", nullDocType);
         imported = newDoc.importNode(employeeElem, true);
-        attrNode = ((Element) /*Node */imported).getAttributeNodeNS(nullNS, "defaultAttr");
+        attrNode = ((Element) imported).getAttributeNodeNS(nullNS, "defaultAttr");
         assertNull("defaultAttrNotImported", attrNode);
-        attrValue = ((Element) /*Node */imported).getAttributeNS("http://www.w3.org/2000/xmlns/", "emp");
+        attrValue = ((Element) imported).getAttributeNS("http://www.w3.org/2000/xmlns/", "emp");
         assertEquals("explicitAttrImported", "http://www.nist.gov", attrValue);
     }
 }

@@ -59,7 +59,7 @@ public class nodeprocessinginstructionsetnodevalueTest extends LoboUnitTest {
         piNode.setNodeValue("Something different");
         piValue = piNode.getNodeValue();
         assertEquals("nodeValue", "Something different", piValue);
-        piValue = ((ProcessingInstruction) /*Node */piNode).getData();
+        piValue = ((ProcessingInstruction) piNode).getData();
         assertEquals("data", "Something different", piValue);
     }
 

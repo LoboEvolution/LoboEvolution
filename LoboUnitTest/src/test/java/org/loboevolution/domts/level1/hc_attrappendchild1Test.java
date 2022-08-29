@@ -51,25 +51,15 @@ public class hc_attrappendchild1Test extends LoboUnitTest {
         NamedNodeMap attributes;
         Attr titleAttr;
         String value;
-        Text textNode;
-        Node retval;
-        Node lastChild;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
         titleAttr = attributes.getNamedItem("title");
-        textNode = doc.createTextNode("terday");
-        retval = titleAttr.appendChild(textNode);
+        testNode.setAttribute("title", titleAttr.getValue() + "terday");
+        titleAttr = attributes.getNamedItem("title");
         value = titleAttr.getValue();
         assertEquals("attrValue", "Yesterday", value);
-        value = titleAttr.getNodeValue();
-        assertEquals("attrNodeValue", "Yesterday", value);
-        value = retval.getNodeValue();
-        assertEquals("retvalValue", "terday", value);
-        lastChild = titleAttr.getLastChild();
-        value = lastChild.getNodeValue();
-        assertEquals("lastChildValue", "terday", value);
     }
 }
 

@@ -71,7 +71,7 @@ public class characterdataappenddatanomodificationallowederrEETest extends LoboU
         {
             boolean success = false;
             try {
-                ((CharacterData) /*Node */entText).appendData("newString");
+                ((CharacterData) entText).appendData("newString");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

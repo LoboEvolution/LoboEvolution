@@ -86,9 +86,9 @@ public class importNode01Test extends LoboUnitTest {
         system = docType.getSystemId();
         assertNotNull("aNode", aNode);
         assertEquals("systemId", "staffNS.dtd", system);
-        attrOwnerElement = ((Attr) /*Node */aNode).getOwnerElement();
+        attrOwnerElement = ((Attr) aNode).getOwnerElement();
         assertNull("ownerElement", attrOwnerElement);
-        specified = ((Attr) /*Node */aNode).getSpecified();
+        specified = ((Attr) aNode).isSpecified();
         assertTrue("specified", specified);
         childList = aNode.getChildNodes();
         assertEquals( "childList", 1, childList);

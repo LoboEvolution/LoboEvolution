@@ -120,10 +120,15 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 		return NodeType.DOCUMENT_NODE;
 	}
 
+	@Override
+	public boolean equalAttributes(Node arg) {
+		return false;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
-		return null;
+		return getNodeName();
 	}
 
 	/** {@inheritDoc} */

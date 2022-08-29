@@ -22,6 +22,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -95,6 +96,11 @@ public class DOMImplementationImpl implements DOMImplementation {
 	/** {@inheritDoc} */
 	@Override
 	public DocumentType createDocumentType(String qualifiedName, String publicId, String systemId) {
+
+		if (Strings.isBlank(qualifiedName)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
 		return new DocumentTypeImpl(qualifiedName, publicId, systemId);
 	}
 

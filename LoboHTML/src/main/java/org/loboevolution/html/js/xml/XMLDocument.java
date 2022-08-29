@@ -20,7 +20,9 @@
 
 package org.loboevolution.html.js.xml;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.*;
+import org.loboevolution.html.dom.nodeimpl.CDataSectionImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
@@ -321,6 +323,11 @@ public class XMLDocument implements Document {
 	@Override
 	public Node replaceChild(Node newChild, Node oldChild) {
 		return doc.replaceChild(newChild, oldChild);
+	}
+
+	@Override
+	public NamedNodeMap getAttributes() {
+		return null;
 	}
 
 	/** {@inheritDoc} */

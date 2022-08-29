@@ -24,11 +24,12 @@ package org.loboevolution.domts.level1;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -54,15 +55,13 @@ public class hc_nodeattributenodeattributeTest extends LoboUnitTest {
         HTMLCollection elementList;
         Element testAddr;
         NamedNodeMap addrAttr;
-        Element attrNode;
-        NamedNodeMap attrList;
+        Attr attrNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddr = (Element) elementList.item(0);
         addrAttr = testAddr.getAttributes();
-        attrNode = (Element) addrAttr.item(0);
-        attrList = attrNode.getAttributes();
-        assertNull("nodeAttributeNodeAttributeAssert1", attrList);
+        attrNode = addrAttr.item(0);
+        assertNotNull("nodeAttributeNodeAttributeAssert1", attrNode);
     }
 }
 
