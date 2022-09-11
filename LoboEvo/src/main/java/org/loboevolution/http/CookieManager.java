@@ -212,7 +212,7 @@ public class CookieManager {
 		Date expiresDate = null;
 		if (maxAge != null) {
 			try {
-				expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
+				expiresDate = new Date(System.currentTimeMillis() + Long.parseLong(maxAge) * 1000);
 			} catch (final NumberFormatException e) {
 				logger.log(Level.SEVERE, e.getMessage(), e);
 			}

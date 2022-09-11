@@ -571,7 +571,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			return createPanel(browserPanel, connection, uri);
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
-			return new HtmlPanel();
+			HtmlErrorPanel errorPanel = new HtmlErrorPanel();
+			return errorPanel.getErrorComponent(browserPanel, connection, uri, e);
 		}
 	}
 	
@@ -583,15 +584,17 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
 	 */
 	public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri) {
+		URLConnection connection = null;
 		try {
 			final URL url = new URL(uri);
-			final URLConnection connection = url.openConnection();
+			connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			return createPanel(browserPanel, connection, uri);
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
+			HtmlErrorPanel errorPanel = new HtmlErrorPanel();
+			return errorPanel.getErrorComponent(browserPanel, connection, uri, e);
 		}
-		return new HtmlPanel();
 	}
 
 	private static HtmlPanel createPanel(IBrowserPanel browserPanel, URLConnection connection, String uri) throws Exception {

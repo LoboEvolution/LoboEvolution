@@ -135,7 +135,8 @@ public class GoAction extends AbstractAction {
 		}
 
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
-		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+		final String title = Strings.isNotBlank(htmlPanel.getName()) ? htmlPanel.getName() :
+							 Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.remove(indexPanel);
 		tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
 		this.addressBar.setText(text);
