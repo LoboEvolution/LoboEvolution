@@ -1052,7 +1052,7 @@ public class HtmlRendererContext {
 		this.currentConnection = connection;
 		try {
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-			connection.setRequestProperty("Cookie", "");
+			connection.getHeaderField("Set-Cookie");
 			if (connection instanceof HttpURLConnection) {
 				final HttpURLConnection hc = (HttpURLConnection) connection;
 				hc.setRequestMethod(actualMethod);

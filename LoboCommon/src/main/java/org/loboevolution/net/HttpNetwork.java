@@ -151,6 +151,7 @@ public class HttpNetwork {
 				if (connection instanceof HttpURLConnection) {
 					final HttpURLConnection conn =(HttpURLConnection)u.openConnection();
 					conn.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+					conn.getHeaderField("Set-Cookie");
 					info.setHttpResponse(conn.getResponseCode());
 					connection = conn;
 				}
@@ -220,6 +221,7 @@ public class HttpNetwork {
 		final URL url = new URL(uri);
 		final URLConnection connection = url.openConnection();
 		connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+		connection.getHeaderField("Set-Cookie");
 		try (InputStream in = openConnectionCheckRedirects(connection)) {
 			return toString(in);
 		} catch (SocketTimeoutException e) {

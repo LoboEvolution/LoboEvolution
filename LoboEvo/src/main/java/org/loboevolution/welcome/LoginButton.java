@@ -32,9 +32,11 @@ import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
+import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.TabStore;
 
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import org.loboevolution.store.ToolsStore;
 
 /**
  * <p>LoginButton class.</p>
@@ -100,8 +102,10 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 				final IBrowserPanel bpanel = hpanel.getBrowserPanel();
 				bpanel.getScroll().getViewport().add((Component)tabbedPane);
 				TabStore.deleteTab(indexPanel);
-				TabStore.insertTab(indexPanel, text.getText(), title);
-				NavigationManager.insertHistory(text.getText(), title, indexPanel);
+				SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
+				String url = searchEngine.getBaseUrl() + text.getText();
+				TabStore.insertTab(indexPanel, url, title);
+				NavigationManager.insertHistory(url, title, indexPanel);
 			}
 		});
 	}

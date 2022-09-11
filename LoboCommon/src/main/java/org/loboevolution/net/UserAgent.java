@@ -20,36 +20,9 @@
 
 package org.loboevolution.net;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 public class UserAgent {
 
-    private static final List<String> stringAgent = new ArrayList<>();
-
-    static {
-
-        stringAgent.add("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36");
-        stringAgent.add("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36");
-        stringAgent.add("Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36");
-
-        stringAgent.add("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0");
-        stringAgent.add("Mozilla/5.0 (Macintosh; Intel Mac OS X 12.0; rv:94.0) Gecko/20100101 Firefox/94.0");
-        stringAgent.add("Mozilla/5.0 (X11; Linux i686; rv:94.0) Gecko/20100101 Firefox/94.0");
-        stringAgent.add("Mozilla/5.0 (Linux x86_64; rv:94.0) Gecko/20100101 Firefox/94.0");
-        stringAgent.add("Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:94.0) Gecko/20100101 Firefox/94.0");
-        stringAgent.add("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:94.0) Gecko/20100101 Firefox/94.0");
-        stringAgent.add("Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:94.0) Gecko/20100101 Firefox/94.0");
-
-    }
-
     public static String getUserAgent() {
-        Collections.shuffle(stringAgent);
-        final Random rand = new Random();
-        final int i = rand.nextInt(stringAgent.size());
-        final String ret = stringAgent.get(i);
-        return ret;
+        return "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11";
     }
 }

@@ -32,7 +32,9 @@ import org.loboevolution.img.ImageViewer;
 import org.loboevolution.net.MimeType;
 import org.loboevolution.net.UserAgent;
 import org.loboevolution.pdf.PDFViewer;
+import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.TabStore;
+import org.loboevolution.store.ToolsStore;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -70,13 +72,14 @@ public class GoAction extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		final String strUrl = this.addressBar.getText();
+		String strUrl = this.addressBar.getText();
 		try {
 
 			final URL url = new URL(strUrl);
 			final String filename = url.getFile();
 			HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
 			httpcon.addRequestProperty("User-Agent", UserAgent.getUserAgent());
+			httpcon.getHeaderField("Set-Cookie");
 			final String mimeType = httpcon.getContentType();
 			switch (MimeType.get(mimeType)) {
 				case PDF:
@@ -119,6 +122,10 @@ public class GoAction extends AbstractAction {
 					break;
 			}
 		} catch (Exception e) {
+			if (!strUrl.matches("^\\w+?://.*")) {
+				SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
+				strUrl = searchEngine.getBaseUrl() + strUrl;
+			}
 			goURL(strUrl, null);
 		}
 	}

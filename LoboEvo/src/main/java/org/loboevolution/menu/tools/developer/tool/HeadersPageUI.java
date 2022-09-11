@@ -58,6 +58,7 @@ public class HeadersPageUI extends AbstractToolsUI {
             final URL url = new URL(toolbar.getAddressBar().getText());
             HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
             httpcon.addRequestProperty("User-Agent", UserAgent.getUserAgent());
+            httpcon.getHeaderField("Set-Cookie");
             add(infoContent(httpcon));
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);

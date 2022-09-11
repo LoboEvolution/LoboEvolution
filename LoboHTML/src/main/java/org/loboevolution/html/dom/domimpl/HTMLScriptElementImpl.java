@@ -182,6 +182,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					info.setName(u.getFile());
 					final HttpURLConnection connection =(HttpURLConnection)u.openConnection();
 					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+					connection.getHeaderField("Set-Cookie");
 					try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 							Reader reader = new InputStreamReader(in, "utf-8")) {
 						BufferedReader br = new BufferedReader(reader);						

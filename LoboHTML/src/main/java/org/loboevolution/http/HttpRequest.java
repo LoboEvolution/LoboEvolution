@@ -351,6 +351,7 @@ public class HttpRequest {
 				c = this.connection;
 			}
 			c.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+			c.getHeaderField("Set-Cookie");
 
 			if (Strings.isNotBlank(requestUserName) && Strings.isNotBlank(requestPassword)) {
 				String userpass = requestUserName + ":" + requestPassword;

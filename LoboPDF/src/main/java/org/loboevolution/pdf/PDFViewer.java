@@ -312,6 +312,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
     public void openFile(URL url) throws IOException {
         final URLConnection connection = url.openConnection();
         connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+		connection.getHeaderField("Set-Cookie");
         try (InputStream inputStream = HttpNetwork.openConnectionCheckRedirects(connection)) {
             ByteBuffer byteBuffer = BytesUtilities.readStream(inputStream);
             openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());

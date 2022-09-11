@@ -62,6 +62,7 @@ public class NavigationManager {
 			final URL url = new URL(uri);
 			final URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+			connection.getHeaderField("Set-Cookie");
 			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 					Reader reader = new InputStreamReader(in, "utf-8")) {
 
@@ -111,7 +112,8 @@ public class NavigationManager {
 			}
 		}
 
-		final String uri = "https://www.google.com/search?q=" + search.replace(" ", "%20");
+		SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
+		final String uri = searchEngine + search.replace(" ", "%20");
 		return HtmlPanel.createHtmlPanel(browserPanel, uri);
 	}
 }

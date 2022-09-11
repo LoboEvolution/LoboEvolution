@@ -589,6 +589,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			final URL url = new URL(uri);
 			connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+			connection.getHeaderField("Set-Cookie");
+			connection.connect();
 			return createPanel(browserPanel, connection, uri);
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

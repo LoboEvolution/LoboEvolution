@@ -579,7 +579,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		List<Property> properties = localStyleDeclarationState.getProperties();
 		properties.forEach(prop -> {
 			CSSValueImpl propertyValue = prop.getValue();
-			properties3.add(new PropertyCssInfo(prop.getName(), propertyValue.getCssText()));
+			properties3.add(new PropertyCssInfo(prop.getName(), propertyValue != null ? propertyValue.getCssText() : null));
 		});
 
 		properties3.forEach(prop -> localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue()));
