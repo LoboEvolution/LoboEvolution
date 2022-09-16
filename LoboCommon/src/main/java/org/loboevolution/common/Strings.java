@@ -21,6 +21,7 @@ package org.loboevolution.common;
 
 import org.loboevolution.html.CSSValues;
 
+import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
@@ -37,8 +38,6 @@ import javax.crypto.spec.PBEKeySpec;
  * The Class Strings.
  */
 public final class Strings {
-	private static final int iterations = 20*1000;
-    private static final int desiredKeyLen = 256;
 
 	/** The Constant EMPTY_ARRAY. */
 	public static final String[] EMPTY_ARRAY = new String[0];
@@ -296,10 +295,10 @@ public final class Strings {
 	public static String hash(String password, byte[] salt) throws Exception {
         if (password == null || password.length() == 0)
             throw new IllegalArgumentException("Empty passwords are not supported.");
-        SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        SecretKey key = f.generateSecret(new PBEKeySpec(
-            password.toCharArray(), salt, iterations, desiredKeyLen));
-        return Base64.getEncoder().encodeToString(key.getEncoded());
+
+		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 4096, 256 * 8);
+		SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        return Base64.getEncoder().encodeToString(f.generateSecret(spec).getEncoded());
     }
     
 	/**
