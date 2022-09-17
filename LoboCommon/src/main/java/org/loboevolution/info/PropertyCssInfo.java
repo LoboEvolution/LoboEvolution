@@ -37,4 +37,6 @@ public class PropertyCssInfo implements Serializable {
 
     /** The value. */
     private String value;
+
+    private boolean important;
 }

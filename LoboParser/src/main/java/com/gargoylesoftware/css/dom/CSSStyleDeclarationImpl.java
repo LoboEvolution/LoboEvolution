@@ -164,11 +164,12 @@ public class CSSStyleDeclarationImpl implements Serializable {
      * @return the priority
      */
     public String getPropertyPriority(final String propertyName) {
+        return isPropertyPriority(propertyName) ? PRIORITY_IMPORTANT : "";
+    }
+
+    public boolean isPropertyPriority(final String propertyName) {
         final Property p = getPropertyDeclaration(propertyName);
-        if (p == null) {
-            return "";
-        }
-        return p.isImportant() ? PRIORITY_IMPORTANT : "";
+        return p != null && p.isImportant();
     }
 
     /**

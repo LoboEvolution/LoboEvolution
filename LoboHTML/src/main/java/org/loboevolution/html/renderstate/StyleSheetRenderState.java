@@ -24,7 +24,10 @@ package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.HTMLHRElement;
+import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
@@ -417,6 +420,7 @@ public class StyleSheetRenderState implements RenderState {
 		CSSValues display = null;
 		int displayInt = -1;
 		final RenderState previous = this.getPreviousRenderState();
+
 		if (previous != null && previous.getDisplay() == DISPLAY_FLEX_BOX) {
 			final RFlex flex = new RFlex(previous);
 			displayInt = flex.isFlexTable() ? DISPLAY_TABLE_CELL : DISPLAY_FLEX_CHILD;
@@ -428,7 +432,7 @@ public class StyleSheetRenderState implements RenderState {
 			final String displayTextTL = Strings.isNotBlank(displayText) ? displayText : "";
 			display = CSSValues.get(displayTextTL);
 		}
-		
+
 		switch (display) {
 		case BLOCK:
 			displayInt = DISPLAY_BLOCK;
@@ -473,8 +477,16 @@ public class StyleSheetRenderState implements RenderState {
 			displayInt = this.getPreviousRenderState().getDisplay();
 			break;
 		case INITIAL:
-		default:
 			displayInt = this.getDefaultDisplay();
+			break;
+		default:
+			if (element != null && element.getParentElement() != null &&
+					!(element.getParentElement() instanceof HTMLHtmlElement) &&
+					!(element.getParentElement() instanceof HTMLBodyElement)) {
+				displayInt = previous.getDisplay();
+			} else {
+				displayInt = this.getDefaultDisplay();
+			}
 			break;
 		}
 		this.iDisplay = displayInt;

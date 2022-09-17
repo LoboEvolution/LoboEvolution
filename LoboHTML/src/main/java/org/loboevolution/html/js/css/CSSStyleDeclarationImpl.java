@@ -28,9 +28,9 @@ import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.setter.*;
-import org.loboevolution.laf.ColorFactory;
 import org.mozilla.javascript.annotations.JSFunction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +40,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     private static final Pattern DOUBLE_PATTERN = Pattern.compile(
             "[\\x00-\\x20]*[+-]?(NaN|Infinity|((((\\p{Digit}+)(\\.)?((\\p{Digit}+)?)" +
-                    "([eE][+-]?(\\p{Digit}+))?)|(\\.((\\p{Digit}+))([eE][+-]?(\\p{Digit}+))?)|" +
+                    "([eE][+-]?(\\p{Digit}+))?)|(\\.((\\d+))([eE][+-]?(\\p{Digit}+))?)|" +
                     "(((0[xX](\\p{XDigit}+)(\\.)?)|(0[xX](\\p{XDigit}+)?(\\.)(\\p{XDigit}+)))" +
                     "[pP][+-]?(\\p{Digit}+)))[fFdD]?))[\\x00-\\x20]*");
 
@@ -155,6 +155,14 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         return style.getPropertyPriority(property);
     }
 
+    public Property getPropertyDeclaration(String property) {
+        return style.getPropertyDeclaration(property);
+    }
+
+    public boolean isPropertyPriority(String property) {
+        return style.isPropertyPriority(property);
+    }
+
     /** {@inheritDoc} */
     @JSFunction
     public void setProperty(final String propertyName, final String value) {
@@ -163,6 +171,10 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     @Override
     public void setProperty(String propertyName, String value, String priority) {
+
+        final String propertyPriority1 = getPropertyPriority(propertyName);
+
+        if(Strings.isNotBlank(propertyPriority1)) return;
 
         if (Strings.isBlank(value) || "null".equals(value)) {
             if (Strings.isBlank(value)) value = "";
@@ -200,16 +212,51 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
      *
      * @param lowerCaseName a {@link java.lang.String} object.
      * @param value a {@link java.lang.String} object.
+     * @param important a {@link java.lang.Boolean} object.
+     * @param set a {@link java.lang.Boolean} object.
      */
-    public final void setPropertyValueProcessed(String lowerCaseName, String value) {
-
+    public final void setPropertyValueProcessed(String lowerCaseName, String value, boolean important, boolean set) {
         final SubPropertySetter setter = SUB_SETTERS.get(lowerCaseName);
         if (setter != null) {
             setter.changeValue(this, value);
         } else {
-            setProperty(lowerCaseName, value, "");
+            if(set) setProperty(lowerCaseName, value, important ? "important" : "");
         }
     }
+
+    public void merge(CSSStyleDeclarationImpl style) {
+        List<Property> tmp = new ArrayList<>();
+        List<Property> locals = getProperties();
+        List<Property> styles = style.getProperties();
+
+        if (locals.size() == 0 && styles.size() > 0) {
+            locals.addAll(styles);
+        } else if (locals.size() > 0 && styles.size() > 0) {
+            locals.forEach(prop -> {
+                final String propertyValue2 = style.getPropertyValue(prop.getName());
+                if (Strings.isBlank(propertyValue2)) {
+                    tmp.add(prop);
+                }
+
+                if (Strings.isNotBlank(propertyValue2)) {
+                    final boolean isImportant1 = prop.isImportant();
+                    final boolean isImportant2 = style.isPropertyPriority(prop.getName());
+                    if ((isImportant1 && isImportant2) || (!isImportant1 && !isImportant2)) {
+                        tmp.add(prop);
+                        styles.removeIf(p -> p.getName().equals(prop.getName()));
+                    } else {
+                        tmp.add(isImportant1 ? prop : style.getPropertyDeclaration(prop.getName()));
+
+                    }
+                }
+            });
+
+            tmp.addAll(styles);
+            locals.clear();
+            locals.addAll(tmp);
+        }
+    }
+
 
     @Override
     public String item(int index) {
@@ -2065,6 +2112,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
        this.setProperty(Z_INDEX, zIndex);
         this.element.informPositionInvalid();
     }
+
 
     @Override
     public String toString() {

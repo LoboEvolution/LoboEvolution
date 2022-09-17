@@ -194,8 +194,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 		final CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, pseudoElement);
 		final CSSStyleDeclarationImpl localStyle = (CSSStyleDeclarationImpl) getStyle();
-		style.getProperties().addAll(localStyle.getProperties());
-		this.computedStyles = new ComputedCSSStyleDeclarationImpl(this, style);
+		localStyle.merge(style);
+		this.computedStyles = new ComputedCSSStyleDeclarationImpl(this, localStyle);
 		return this.computedStyles;
 	}
 
@@ -216,9 +216,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 		style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, getTagName());
 		final CSSStyleDeclarationImpl localStyle = (CSSStyleDeclarationImpl) getStyle();
-		style.getProperties().addAll(localStyle.getProperties());
-		this.currentStyleDeclarationState = style;
-		return style;
+		localStyle.merge(style);
+		this.currentStyleDeclarationState = localStyle;
+		return this.currentStyleDeclarationState;
 	}
 
 
@@ -329,6 +329,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 					this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
 				}
 			}
+
 
 			this.localStyleDeclarationState = propertyValueProcessed(styleDeclaration);
 		}
@@ -574,19 +575,19 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return propertyValueProcessed(localStyleDeclarationState);
 	}
 
-	private CSSStyleDeclarationImpl propertyValueProcessed(CSSStyleDeclarationImpl localStyleDeclarationState) {
+	private CSSStyleDeclarationImpl propertyValueProcessed(final CSSStyleDeclarationImpl localStyleDeclarationState) {
 		final List<PropertyCssInfo> properties3 = new ArrayList<>();
-		List<Property> properties = localStyleDeclarationState.getProperties();
+		final List<Property> properties = localStyleDeclarationState.getProperties();
 		properties.forEach(prop -> {
 			CSSValueImpl propertyValue = prop.getValue();
-			properties3.add(new PropertyCssInfo(prop.getName(), propertyValue != null ? propertyValue.getCssText() : null));
+			properties3.add(new PropertyCssInfo(prop.getName(), propertyValue != null ? propertyValue.getCssText() : null, prop.isImportant()));
 		});
 
-		properties3.forEach(prop -> localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue()));
+		properties3.forEach(prop -> localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue(), prop.isImportant(), false));
 
 		return localStyleDeclarationState;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
