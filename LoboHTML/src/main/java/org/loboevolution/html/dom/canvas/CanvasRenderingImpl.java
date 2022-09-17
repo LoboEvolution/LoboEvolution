@@ -914,27 +914,27 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		double twopi = 2 * Math.PI;
 
 		while (startAngle < 0) {
-			startAngle += twopi;
+			startAngle = (int) (startAngle + twopi);
 		}
 		while (startAngle > twopi) {
-			startAngle -= twopi;
+			startAngle = (int) (startAngle - twopi);
 		}
 
 		while (endAngle < 0) {
-			endAngle += twopi;
+			endAngle = (int) (endAngle + twopi);
 		}
 		while (endAngle > twopi) {
-			endAngle -= twopi;
+			endAngle = (int) (endAngle - twopi);
 		}
 
 		if (clockwise) {
 			if (startAngle > endAngle) {
-				endAngle += twopi;
+				endAngle = (int) (endAngle + twopi);
 			}
 
 		} else {
 			if (startAngle < endAngle) {
-				endAngle -= twopi;
+				endAngle = (int) (endAngle - twopi);
 			}
 		}
 

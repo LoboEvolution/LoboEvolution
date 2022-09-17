@@ -108,7 +108,7 @@ public class CMapFormat4 extends CMap {
         short size = 16;
         
         // add the size of each segment header
-        size += this.segments.size() * 8;
+        size = (short) (size + this.segments.size() * 8);
         
         // add the total number of mappings times the size of a mapping
         for (Segment s : this.segments.keySet()) {
@@ -116,7 +116,7 @@ public class CMapFormat4 extends CMap {
             if (s.hasMap) {
                 // if there is, add its size
                 char[] map = (char[]) this.segments.get(s);
-                size += map.length * 2;
+                size = (short) (size + map.length * 2);
             }
         }
         

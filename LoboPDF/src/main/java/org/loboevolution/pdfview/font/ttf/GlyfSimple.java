@@ -112,7 +112,7 @@ public class GlyfSimple extends Glyf {
                     // the xIsSame bit controls the sign
                     val = -val;
                 }
-                xCoords[i] += val;
+                xCoords[i] += (short)val;
             } else if (!xIsSame(i)) {
                 xCoords[i] += data.getShort();
             }
@@ -132,7 +132,7 @@ public class GlyfSimple extends Glyf {
                     // the xIsSame bit controls the sign
                     val = -val;
                 }
-                yCoords[i] += val;
+                yCoords[i] += (short)val;
             } else if (!yIsSame(i)) {
                 yCoords[i] += data.getShort();
             }
@@ -211,10 +211,10 @@ public class GlyfSimple extends Glyf {
         short length = super.getLength();
         
         // add the length of the end points
-        length += getNumContours() * 2;
+        length =  (short)(length + (getNumContours() * 2));
         
         // add the length of the instructions
-        length += 2 + getNumInstructions();
+        length =  (short)(length + (2 + getNumInstructions()));
         
         // add the length of the flags, avoiding repeats
         for (int i = 0; i < getNumPoints(); i++) {
@@ -228,13 +228,13 @@ public class GlyfSimple extends Glyf {
             if (xIsByte(i)) {
                 length++;
             } else if (!xIsSame(i)) {
-                length += 2;
+                length  = (short)(length +2);
             }
             
             if (yIsByte(i)) {
                 length++;
             } else if (!yIsSame(i)) {
-                length += 2;
+                length  = (short)(length +2);
             }
         }
          

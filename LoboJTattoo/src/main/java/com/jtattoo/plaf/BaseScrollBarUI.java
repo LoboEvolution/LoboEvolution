@@ -200,19 +200,19 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		String scaleKey = (String) scrollbar.getClientProperty("JComponent.sizeVariant");
 		switch (scaleKey != null ? scaleKey : "") {
 			case "large":
-				scrollBarWidth *= 1.15;
-				incrGap *= 1.15;
-				decrGap *= 1.15;
+				scrollBarWidth = (int) (scrollBarWidth * 1.15);
+				incrGap = (int) (incrGap * 1.15);
+				decrGap = (int) (decrGap * 1.15);
 				break;
 			case "small":
-				scrollBarWidth *= 0.857;
-				incrGap *= 0.857;
-				decrGap *= 0.857;
+				scrollBarWidth = (int) (scrollBarWidth * 0.857);
+				incrGap = (int) (incrGap * 0.857);
+				decrGap = (int) (decrGap * 0.857);
 				break;
 			case "mini":
-				scrollBarWidth *= 0.714;
-				incrGap *= 0.714;
-				decrGap *= 0.714;
+				scrollBarWidth = (int) (scrollBarWidth * 0.714);
+				incrGap = (int) (incrGap * 0.714);
+				decrGap = (int) (decrGap * 0.714);
 				break;
 			default:
 				break;

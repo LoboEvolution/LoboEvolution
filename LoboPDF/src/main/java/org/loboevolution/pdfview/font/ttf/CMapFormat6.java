@@ -59,7 +59,7 @@ public class CMapFormat6 extends CMap {
         short size = 5 * 2;
 
         // add the size of each segment header
-        size += this.entryCount * 2;
+        size = (short) (size + (this.entryCount * 2));
         return size;
     }
 

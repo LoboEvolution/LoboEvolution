@@ -807,7 +807,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
     private int animate(int value, int target, double animFactor) {
         int d = value - target;
-        d *= animFactor;
+        d = (int) (d * animFactor);
         return d == 0 ? target : target + d;
     }
 
@@ -1357,7 +1357,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             checkEDT();
 
             int targetWidth = useUniformWidth ? maxUniformWidth : tab.getPreferredSize().width;
-            targetWidth *= widthScale;
+            targetWidth = (int) (targetWidth * widthScale);
             int vX = dragX - (int) (grabX * targetWidth);
             vX = (int) ((vX - tabZone.x) / widthScale);
 
