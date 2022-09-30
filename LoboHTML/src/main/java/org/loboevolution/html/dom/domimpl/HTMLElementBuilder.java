@@ -125,6 +125,14 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
+	public static class Details extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLDetailsElementImpl(name);
+		}
+	}
+
+
 	public static class Em extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {

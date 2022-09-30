@@ -20,19 +20,10 @@
 
 package org.loboevolution.html.dom;
 
-
-
-
-
 /**
  * <p>HTMLDetailsElement interface.</p>
- *
- *
- *
  */
 public interface HTMLDetailsElement extends HTMLElement {
-
-
     
     /**
      * <p>isOpen.</p>

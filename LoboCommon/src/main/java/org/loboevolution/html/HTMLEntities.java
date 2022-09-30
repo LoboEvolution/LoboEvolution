@@ -29,9 +29,6 @@ import java.util.Set;
 
 /**
  * <p>HTMLEntities class.</p>
- *
- *
- *
  */
 public class HTMLEntities {
 	
@@ -152,8 +149,6 @@ public class HTMLEntities {
 		entities.put(Entities.yacute, (char) 253);
 		entities.put(Entities.thorn, (char) 254);
 		entities.put(Entities.yuml, (char) 255);
-
-		// symbols from http://de.selfhtml.org/html/referenz/zeichen.htm
 
 		// greek letters
 		entities.put(Entities.Alpha, (char) 913);
@@ -430,6 +425,8 @@ public class HTMLEntities {
 		elementInfos.put(HTMLTag.DT, optionalEndElement);
 		elementInfos.put(HTMLTag.DD, optionalEndElement);
 		elementInfos.put(HTMLTag.TR, optionalEndElement);
+		elementInfos.put(HTMLTag.DETAILS, optionalEndElement);
+
 		elementInfos.put(HTMLTag.TH, tableCellElement);
 		elementInfos.put(HTMLTag.TD, tableCellElement);
 		elementInfos.put(HTMLTag.HEAD, headElement);

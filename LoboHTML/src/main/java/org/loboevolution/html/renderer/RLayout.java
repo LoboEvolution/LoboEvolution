@@ -79,6 +79,7 @@ public class RLayout {
 		el.put(HTMLTag.HTML, block);
 		el.put(HTMLTag.MAIN, block);
 		el.put(HTMLTag.PRE, block);
+		el.put(HTMLTag.DETAILS, block);
 
 		el.put(HTMLTag.BR,new BrLayout());
 		el.put(HTMLTag.P,new PLayout());
