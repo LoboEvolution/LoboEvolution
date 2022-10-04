@@ -90,6 +90,12 @@ public interface Attr extends Node {
 	 * @param value a {@link java.lang.String} object.
 	 */
 	void setValue(String value);
+
+	/**
+	 * <p>setOwnerElement.</p>
+	 * @param element a {@link org.loboevolution.html.node.Element} object.
+	 */
+	void setOwnerElement(Element element);
 	
 	/**
 	 * <p>isId.</p>

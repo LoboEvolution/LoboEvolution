@@ -72,7 +72,7 @@ public class characterdataappenddatanomodificationallowederrTest extends LoboUni
         nodeType = entReference.getNodeType();
 
         if (nodeType == 1) {
-            entReference = null; //TODO doc.createEntityReference("ent4");
+            entReference = doc.createEntityReference("ent4");
             assertNotNull("createdEntRefNotNull", entReference);
         }
         entElement = entReference.getFirstChild();

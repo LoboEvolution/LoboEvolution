@@ -82,7 +82,7 @@ public class hc_nodeinsertbeforeTest extends LoboUnitTest {
         refChild = elementList.item(2);
         employeeNode = refChild.getParentNode();
         childList = employeeNode.getChildNodes();
-        newChild = doc.createElement("br");
+        newChild = doc.createElement("BR");
         insertedNode = employeeNode.insertBefore(newChild, refChild);
         for (int indexN10091 = 0; indexN10091 < childList.getLength(); indexN10091++) {
             child = childList.item(indexN10091);

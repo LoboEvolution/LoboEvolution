@@ -25,7 +25,6 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.ProcessingInstruction;
 
 import static org.junit.Assert.assertTrue;
 
@@ -48,14 +47,13 @@ public class documentinvalidcharacterexceptioncreatepi1Test extends LoboUnitTest
     @Test
     public void runTest() {
         Document doc;
-        ProcessingInstruction badPI;
         doc = sampleXmlFile("hc_staff.xml");
 
         boolean success = false;
         try {
-            badPI = doc.createProcessingInstruction("foo", "data");
+            doc.createProcessingInstruction("", "data");
         } catch (DOMException ex) {
-            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+            success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
         assertTrue("throw_NOT_SUPPORTED_ERR", success);
 

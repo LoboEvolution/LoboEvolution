@@ -23,6 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -56,13 +57,14 @@ public class createDocumentType03Test extends LoboUnitTest {
         String qualifiedName = "prefix:myDoc";
         String publicId = "http://www.localhost.com";
         String systemId = "myDoc.dtd";
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation domImpl;
         DocumentType newType = null;
 
         String nodeName;
         String nodeValue;
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         newType = domImpl.createDocumentType(qualifiedName, publicId, systemId);
         nodeName = newType.getNodeName();

@@ -68,7 +68,7 @@ public class hc_elementgetelementemptyTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(3);
         domesticAttr = testEmployee.setAttributeNode(newAttribute);
         attrValue = testEmployee.getAttribute("lang");
-        assertEquals("elementGetElementEmptyAssert", "", attrValue);
+        assertEquals("elementGetElementEmptyAssert", null, attrValue);
     }
 }
 

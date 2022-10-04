@@ -27,7 +27,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.assertTrue;
 
@@ -51,7 +50,6 @@ public class setAttributeNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -59,20 +57,17 @@ public class setAttributeNS01Test extends LoboUnitTest {
         String qualifiedName = "qual?name";
         Document doc;
         HTMLCollection elementList;
-        Node testAddr;
+        Element testAddr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        testAddr = elementList.item(0);
-
-        {
-            boolean success = false;
-            try {
-                ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-            }
-            assertTrue("throw_INVALID_CHARACTER_ERR", success);
+        testAddr = (Element) elementList.item(0);
+        boolean success = false;
+        try {
+            testAddr.setAttributeNS(namespaceURI, qualifiedName, "newValue");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
+        assertTrue("throw_INVALID_CHARACTER_ERR", success);
     }
 }
 

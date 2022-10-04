@@ -59,14 +59,5 @@ public class prefix01Test extends LoboUnitTest {
         prefix = createdNode.getPrefix();
         assertNull("throw_Null", prefix);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/prefix01";
-    }
 }
 

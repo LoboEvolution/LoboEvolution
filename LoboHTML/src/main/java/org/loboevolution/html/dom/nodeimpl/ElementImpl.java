@@ -84,7 +84,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public boolean equalAttributes(Node arg) {
 		if (arg instanceof ElementImpl) {
-			return Objects.equals(map, ((ElementImpl) arg).getAttributes());
+			return Objects.equals(map, arg.getAttributes());
 		} else {
 			return false;
 		}
@@ -113,8 +113,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	@JSFunction
 	public Attr getAttributeNode(String name) {
-		Attr attribute = map.getNamedItem(name);
-		return attribute == null ? null : new AttrImpl(name, attribute.getValue(), "id".equalsIgnoreCase(name), this, true);
+		AttrImpl attribute = (AttrImpl) map.getNamedItem(name);
+		if (attribute != null) {
+			attribute.setSpecified(true);
+			attribute.setOwnerElement(this);
+			return attribute;
+		}
+		return null;
 	}
 
 	/** {@inheritDoc} */
@@ -146,6 +151,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Attr removeAttributeNode(Attr oldAttr) {
+		oldAttr.setOwnerElement(null);
 		return map.removeNamedItem(oldAttr.getName());
 	}
 
@@ -154,11 +160,25 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public void setAttribute(String name, String value) {
 
 		if (Strings.isBlank(name)) {
-			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null name");
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
 		}
 
-		if (!Strings.isValidString(name)) {
-			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		if (name.contains(":")) {
+			String[] split = name.split(":");
+			if (split.length != 2) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
+			}
+			if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
+			}
+
+			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
+		} else {
+			if (!Strings.isValidString(name)) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
 		}
 
 		map.setNamedItem(new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true));
@@ -170,13 +190,39 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
 
 		if (Strings.isBlank(qualifiedName)) {
-			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null name");
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
+		}
+
+		if (qualifiedName.contains(":")) {
+			String[] split = qualifiedName.split(":");
+			if (split.length != 2) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
+			}
+
+			if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
+			}
+
+			if (split[0].equals("xml") && !"http://www.w3.org/XML/1998/namespace".equals(namespaceURI)) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI is not http://www.w3.org/XML/1998/namespace.");
+			}
+
+			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
+
+		} else {
+			if (!Strings.isValidString(qualifiedName)) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
 		}
 
 		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
 		attr.setNamespaceURI(namespaceURI);
-		map.setNamedItem(attr);
-		assignAttributeField(qualifiedName, value);
+		if (map.getNamedItem(qualifiedName) == null) {
+			map.setNamedItem(attr);
+			assignAttributeField(qualifiedName, value);
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -205,6 +251,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public Attr setAttributeNode(Attr newAttr) {
 		final String value = newAttr.getValue();
+		final Attr checkAttr = getAttributeNode(newAttr.getName());
+		if (checkAttr == null && newAttr.getOwnerElement() != null) {
+			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
+					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
+		}
+
+		newAttr.setOwnerElement(this);
 		assignAttributeField(newAttr.getName(), value);
 		return map.setNamedItem(newAttr);
 	}
@@ -830,13 +883,18 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
+
+		if("*".equals(namespaceURI) && "*".equals(localName)) {
+			return new HTMLCollectionImpl(null, new ArrayList<>());
+		}
+
 		HTMLCollectionImpl coll = (HTMLCollectionImpl) getElementsByTagName(localName);
 		HTMLCollectionImpl list = new HTMLCollectionImpl(this, new ArrayList<>());
-		for (Node node : coll) {
-			if ((namespaceURI == null || "*".equals(namespaceURI)) || node.getNamespaceURI().equals(namespaceURI)) {
+		coll.forEach(node -> {
+			if ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(node.getNamespaceURI())) {
 				list.add(node);
 			}
-		}
+		});
 		return list;
 	}
 

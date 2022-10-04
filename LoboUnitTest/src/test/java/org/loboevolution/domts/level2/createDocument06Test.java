@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -60,23 +61,22 @@ public class createDocument06Test extends LoboUnitTest {
     public void runTest() {
         String namespaceURI = "http://ecommerce.org/schema";
         String qualifiedName = "xml:local";
-        Document doc;
+        DocumentImpl doc;
         DocumentType docType = null;
 
         DOMImplementation domImpl;
-        Document aNewDoc;
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
 
-        {
-            boolean success = false;
-            try {
-                aNewDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("throw_NAMESPACE_ERR", success);
+        boolean success = false;
+        try {
+            domImpl.createDocument(namespaceURI, qualifiedName, docType);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("throw_NAMESPACE_ERR", success);
+
     }
 }
 

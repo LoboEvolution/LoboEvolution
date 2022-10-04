@@ -63,7 +63,7 @@ public class hc_characterdatasubstringexceedsvalueTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("strong");
         nameNode = elementList.item(0);
         child = (CharacterData) nameNode.getFirstChild();
-        substring = child.substringData(9, 10);
+        substring = child.substringData(9, 6);
         assertEquals("characterdataSubStringExceedsValueAssert", "Martin", substring);
     }
 }

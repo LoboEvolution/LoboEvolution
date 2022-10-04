@@ -69,6 +69,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	private boolean isrss = false;
 
+	private boolean test = false;
+
 	private String xmlVersion = null;
 
 	private String documentURI;
@@ -99,11 +101,20 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Element createElement(String tagName) {
 
+		if (Strings.isNotBlank(tagName) && tagName.contains(":")) {
+			tagName = tagName.split("")[1];
+			if (!Strings.isValidString(tagName)) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
+		}
+
 		if (Strings.isBlank(tagName) || !Strings.isValidString(tagName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
-		if ("rss".equalsIgnoreCase(tagName)) {isrss = true;}
+		if ("rss".equalsIgnoreCase(tagName)) {
+			isrss = true;
+		}
 		return new ElementFactory(isrss).createElement((HTMLDocumentImpl) this, tagName);
 	}
 
@@ -124,10 +135,10 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 		if (qualifiedName.contains(":")) {
 			String[] split = qualifiedName.split(":");
-			prefix = split[0];
 			if (split.length != 2) {
-				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "he qualified name provided has an empty local name.");
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name provided has an empty local name.");
 			}
+
 			if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name provided has an empty local name.");
 			}
@@ -139,6 +150,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			if (Strings.isBlank(namespaceURI)) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespace URI provided is not valid");
 			}
+
+			prefix = split[0];
 		} else{
 			namespaceURI = Strings.isBlank(namespaceURI) ? getNamespaceURI() : namespaceURI;
 
@@ -153,7 +166,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			}
 		}
 		ElementImpl elem = (ElementImpl) new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
-		elem.setNamespaceURI(Strings.isBlank(namespaceURI) ? HTMLDocument.HTML_NAMESPACE_URI : namespaceURI);
+		elem.setNamespaceURI(namespaceURI);
 		elem.setPrefix(prefix);
 		return elem;
 	}
@@ -339,7 +352,9 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		if (Strings.isBlank(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
-		return new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, true);
+		AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, true);
+		attr.setOwnerDocument(this);
+		return attr;
 	}
 
 	/** {@inheritDoc} */
@@ -353,10 +368,10 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		if (qualifiedName.contains(":")) {
 			String[] split = qualifiedName.split(":");
 			if (split.length != 2) {
-				throw new DOMException(DOMException.NAMESPACE_ERR, "he qualified name provided has an empty local name.");
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
 			if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
-				throw new DOMException(DOMException.NAMESPACE_ERR, "he qualified name provided has an empty local name.");
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
 
 			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
@@ -414,7 +429,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public ProcessingInstruction createProcessingInstruction(String target, String data) {
-		if (target == null || target.length() == 0) {
+
+		if (Strings.isBlank(target)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Void target");
 		}
 
@@ -451,7 +467,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public DOMImplementation getImplementation() {
-		return new DOMImplementationImpl(new UserAgentContext());
+		return new DOMImplementationImpl(new UserAgentContext(isTest()));
 	}
 
 	/** {@inheritDoc} */
@@ -1206,5 +1222,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				}
 			}
 		}
+	}
+
+	public boolean isTest() {
+		return test;
+	}
+
+	public void setTest(boolean test) {
+		this.test = test;
 	}
 }

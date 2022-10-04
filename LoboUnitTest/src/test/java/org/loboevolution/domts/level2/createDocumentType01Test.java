@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -59,21 +60,20 @@ public class createDocumentType01Test extends LoboUnitTest {
         String publicId = "STAFF";
         String systemId = "staff.xml";
         String malformedName = "prefix::local";
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation domImpl;
-        DocumentType newType;
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
 
-        {
-            boolean success = false;
-            try {
-                newType = domImpl.createDocumentType(malformedName, publicId, systemId);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("throw_NAMESPACE_ERR", success);
+        boolean success = false;
+        try {
+            domImpl.createDocumentType(malformedName, publicId, systemId);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("throw_NAMESPACE_ERR", success);
+
     }
 
     /**

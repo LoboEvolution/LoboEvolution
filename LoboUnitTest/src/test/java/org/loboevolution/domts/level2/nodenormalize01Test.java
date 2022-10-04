@@ -23,6 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
@@ -51,10 +52,9 @@ public class nodenormalize01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         Document newDoc;
         DOMImplementation domImpl;
-        DocumentType docType;
         DocumentType docTypeNull = null;
 
         Element documentElement;
@@ -73,8 +73,8 @@ public class nodenormalize01Test extends LoboUnitTest {
         Comment comment;
         EntityReference entRef;
         NodeList elementList;
-        Node appendedChild;
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl)sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:root", docTypeNull);
         element1 = newDoc.createElement("element1");
@@ -93,44 +93,44 @@ public class nodenormalize01Test extends LoboUnitTest {
         entRef = newDoc.createEntityReference("EntRef");
         assertNotNull("createdEntRefNotNull", entRef);
         documentElement = newDoc.getDocumentElement();
-        appendedChild = documentElement.appendChild(element1);
-        appendedChild = element2.appendChild(text1);
-        appendedChild = element2.appendChild(text2);
-        appendedChild = element2.appendChild(text3);
-        appendedChild = element1.appendChild(element2);
+        documentElement.appendChild(element1);
+        element2.appendChild(text1);
+        element2.appendChild(text2);
+        element2.appendChild(text3);
+        element1.appendChild(element2);
         text1 = (Text) text1.cloneNode(false);
         text2 = (Text) text2.cloneNode(false);
-        appendedChild = element3.appendChild(entRef);
-        appendedChild = element3.appendChild(text1);
-        appendedChild = element3.appendChild(text2);
-        appendedChild = element1.appendChild(element3);
+        element3.appendChild(entRef);
+        element3.appendChild(text1);
+        element3.appendChild(text2);
+        element1.appendChild(element3);
         text1 = (Text) text1.cloneNode(false);
         text2 = (Text) text2.cloneNode(false);
-        appendedChild = element4.appendChild(cData);
-        appendedChild = element4.appendChild(text1);
-        appendedChild = element4.appendChild(text2);
-        appendedChild = element1.appendChild(element4);
+        element4.appendChild(cData);
+        element4.appendChild(text1);
+        element4.appendChild(text2);
+        element1.appendChild(element4);
         text2 = (Text) text2.cloneNode(false);
         text3 = (Text) text3.cloneNode(false);
-        appendedChild = element5.appendChild(comment);
-        appendedChild = element5.appendChild(text2);
-        appendedChild = element5.appendChild(text3);
-        appendedChild = element1.appendChild(element5);
+        element5.appendChild(comment);
+        element5.appendChild(text2);
+        element5.appendChild(text3);
+        element1.appendChild(element5);
         text2 = (Text) text2.cloneNode(false);
         text3 = (Text) text3.cloneNode(false);
-        appendedChild = element6.appendChild(pi);
-        appendedChild = element6.appendChild(text2);
-        appendedChild = element6.appendChild(text3);
-        appendedChild = element1.appendChild(element6);
+        element6.appendChild(pi);
+        element6.appendChild(text2);
+        element6.appendChild(text3);
+        element1.appendChild(element6);
         entRef = (EntityReference) entRef.cloneNode(false);
         text1 = (Text) text1.cloneNode(false);
         text2 = (Text) text2.cloneNode(false);
         text3 = (Text) text3.cloneNode(false);
-        appendedChild = element7.appendChild(entRef);
-        appendedChild = element7.appendChild(text1);
-        appendedChild = element7.appendChild(text2);
-        appendedChild = element7.appendChild(text3);
-        appendedChild = element1.appendChild(element7);
+        element7.appendChild(entRef);
+        element7.appendChild(text1);
+        element7.appendChild(text2);
+        element7.appendChild(text3);
+        element1.appendChild(element7);
         elementList = element1.getChildNodes();
         assertEquals( "nodeNormalize01_1Bef", 6, elementList.getLength());
         elementList = element2.getChildNodes();
@@ -160,15 +160,6 @@ public class nodenormalize01Test extends LoboUnitTest {
         assertEquals( "nodeNormalize01_6Aft", 2, elementList.getLength());
         elementList = element7.getChildNodes();
         assertEquals( "nodeNormalize01_7Aft", 2, elementList.getLength());
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/nodenormalize01";
     }
 }
 

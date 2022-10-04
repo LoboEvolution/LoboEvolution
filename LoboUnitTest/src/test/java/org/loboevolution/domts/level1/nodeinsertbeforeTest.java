@@ -78,7 +78,7 @@ public class nodeinsertbeforeTest extends LoboUnitTest {
         expectedWithWhitespace.add("#text");
         expectedWithWhitespace.add("gender");
         expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("address");
+        expectedWithWhitespace.add("ADDRESS");
         expectedWithWhitespace.add("#text");
 
         List<String> expectedWithoutWhitespace = new ArrayList<>();

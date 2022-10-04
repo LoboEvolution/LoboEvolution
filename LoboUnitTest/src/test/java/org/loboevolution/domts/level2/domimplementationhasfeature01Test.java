@@ -23,6 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 
@@ -50,7 +51,7 @@ public class domimplementationhasfeature01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation domImpl;
         String version = "";
         String version1 = "1.0";
@@ -66,17 +67,18 @@ public class domimplementationhasfeature01Test extends LoboUnitTest {
         featuresCore.add("Core");
         featuresCore.add("CORE");
 
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
-        for (int indexN10063 = 0; indexN10063 < featuresXML.size(); indexN10063++) {
-            featureXML = (String) featuresXML.get(indexN10063);
+        for (Object o : featuresXML) {
+            featureXML = (String) o;
             success = domImpl.hasFeature(featureXML, version);
             assertTrue("domimplementationhasfeature01_XML_1", success);
             success = domImpl.hasFeature(featureXML, version1);
             assertTrue("domimplementationhasfeature01_XML_2", success);
         }
-        for (int indexN1007C = 0; indexN1007C < featuresCore.size(); indexN1007C++) {
-            featureCore = (String) featuresCore.get(indexN1007C);
+        for (Object o : featuresCore) {
+            featureCore = (String) o;
             success = domImpl.hasFeature(featureCore, version);
             assertTrue("domimplementationhasfeature01_Core_1", success);
             success = domImpl.hasFeature(featureCore, version1);

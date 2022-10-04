@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
@@ -52,28 +53,26 @@ public class documentcreateattributeNS05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         Document newDoc;
         DocumentType docType = null;
 
         DOMImplementation domImpl;
-        Attr attribute;
         String namespaceURI = null;
 
         String qualifiedName = "abc:def";
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:doc", docType);
 
-        {
-            boolean success = false;
-            try {
-                attribute = newDoc.createAttributeNS(namespaceURI, qualifiedName);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("documentcreateattributeNS05", success);
+        boolean success = false;
+        try {
+            newDoc.createAttributeNS(namespaceURI, qualifiedName);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("documentcreateattributeNS05", success);
     }
 }
 

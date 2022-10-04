@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -59,9 +60,7 @@ public class createDocumentType02Test extends LoboUnitTest {
     public void runTest() {
         String publicId = "http://www.localhost.com/";
         String systemId = "myDoc.dtd";
-        String qualifiedName;
-        Document doc;
-        DocumentType docType = null;
+        DocumentImpl doc;
 
         DOMImplementation domImpl;
         List<String> illegalQNames = new ArrayList<String>();
@@ -93,20 +92,18 @@ public class createDocumentType02Test extends LoboUnitTest {
         illegalQNames.add("edi:a ");
         illegalQNames.add("edi:\"");
 
-        doc = sampleXmlFile("staffNS.xml");
-        for (int indexN1009A = 0; indexN1009A < illegalQNames.size(); indexN1009A++) {
-            qualifiedName = illegalQNames.get(indexN1009A);
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
+        for (String qualifiedName : illegalQNames) {
             domImpl = doc.getImplementation();
-
-            {
-                boolean success = false;
-                try {
-                    docType = domImpl.createDocumentType(qualifiedName, publicId, systemId);
-                } catch (DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue("throw_INVALID_CHARACTER_ERR", success);
+            boolean success = false;
+            try {
+                domImpl.createDocumentType(qualifiedName, publicId, systemId);
+            } catch (DOMException ex) {
+                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
+            assertTrue("throw_INVALID_CHARACTER_ERR", success);
+
         }
     }
 

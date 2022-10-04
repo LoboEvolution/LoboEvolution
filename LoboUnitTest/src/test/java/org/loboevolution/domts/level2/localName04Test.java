@@ -59,16 +59,7 @@ public class localName04Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("employee");
         testEmployee = (Element)elementList.item(0);
         employeeLocalName = testEmployee.getLocalName();
-        assertEquals("lname", "employee", employeeLocalName);
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/localName04";
+        assertEquals("lname", "EMPLOYEE", employeeLocalName);
     }
 }
 

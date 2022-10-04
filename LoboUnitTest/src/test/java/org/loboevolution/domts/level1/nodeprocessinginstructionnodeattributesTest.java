@@ -23,10 +23,7 @@ package org.loboevolution.domts.level1;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertNull;
 
@@ -52,11 +49,11 @@ public class nodeprocessinginstructionnodeattributesTest extends LoboUnitTest {
     public void runTest() {
         Document doc;
         NodeList testList;
-        Element piNode;
+        Comment piNode;
         NamedNodeMap attrList;
         doc = sampleXmlFile("staff.xml");
         testList = doc.getChildNodes();
-        piNode = (Element) testList.item(0);
+        piNode = (Comment) testList.item(0);
         attrList = piNode.getAttributes();
         assertNull("nodeProcessingInstructionNodeAttrAssert1", attrList);
     }

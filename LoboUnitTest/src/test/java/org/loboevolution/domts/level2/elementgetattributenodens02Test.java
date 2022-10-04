@@ -56,8 +56,7 @@ public class elementgetattributenodens02Test extends LoboUnitTest {
         attribute = doc.createAttributeNS("http://www.w3.org/DOM/Level2", "l2:att");
         element.setAttributeNodeNS(attribute);
         attribute = element.getAttributeNodeNS("http://www.w3.org/DOM/Level2", "att");
-        attrValue = attribute.getNodeValue();
-        assertEquals("elementgetattributenodens02", "", attrValue);
+        assertEquals("elementgetattributenodens02", null, attribute);
     }
 }
 

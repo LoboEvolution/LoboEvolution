@@ -50,7 +50,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
      */
     @Override
     public String getLocalName() {
-        return this.name;
+        return this.name.contains(":") ? this.name.split(":")[1] : this.name;
     }
 
     /**

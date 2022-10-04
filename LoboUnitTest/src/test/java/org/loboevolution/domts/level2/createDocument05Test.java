@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -59,7 +60,7 @@ public class createDocument05Test extends LoboUnitTest {
     public void runTest() {
         String namespaceURI = "http://www.ecommerce.org/schema";
         String qualifiedName;
-        Document doc;
+        DocumentImpl doc;
         DocumentType docType = null;
 
         DOMImplementation domImpl;
@@ -92,7 +93,8 @@ public class createDocument05Test extends LoboUnitTest {
         illegalQNames.add("namespaceURI:a ");
         illegalQNames.add("namespaceURI:\"");
 
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         for (int indexN1009A = 0; indexN1009A < illegalQNames.size(); indexN1009A++) {
             qualifiedName = illegalQNames.get(indexN1009A);
             domImpl = doc.getImplementation();

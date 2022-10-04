@@ -65,7 +65,7 @@ public class ownerElement01Test extends LoboUnitTest {
         domesticAttr = attributes.getNamedItem("domestic");
         elementNode = domesticAttr.getOwnerElement();
         name = elementNode.getNodeName();
-        assertEquals("throw_Equals", "address", name);
+        assertEquals("throw_Equals", "ADDRESS", name);
     }
 }
 

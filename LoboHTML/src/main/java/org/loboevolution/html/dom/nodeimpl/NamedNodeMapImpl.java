@@ -22,10 +22,12 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.dom.filter.ElementFilter;
+import org.loboevolution.html.node.*;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 import java.util.Map;
@@ -39,6 +41,8 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	private final Map<String, Attr> attributes = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
+	private Element owner;
+
 	/**
 	 * <p>Constructor for NamedNodeMapImpl.</p>
 	 *
@@ -46,6 +50,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	 * @param attribs a {@link java.util.Map} object.
 	 */
 	public NamedNodeMapImpl(Element owner, Map<?, ?> attribs) {
+		this.owner = owner;
 		for (Map.Entry entry : attribs.entrySet()) {
 			final String name = (String) entry.getKey();
 			final String value = (String) entry.getValue();
@@ -63,8 +68,21 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Attr getNamedItem(String name) {
-		if(Strings.isNotBlank(name)){
-			return this.attributes.get(name);
+		if (Strings.isNotBlank(name)) {
+			for (Map.Entry<String, Attr> entry : attributes.entrySet()) {
+				String key = entry.getKey();
+
+				if (key.contains(":")) {
+					if (key.split(":")[1].equalsIgnoreCase(name)) {
+						return entry.getValue();
+					}
+				} else {
+					if (key.equalsIgnoreCase(name)){
+						return entry.getValue();
+					}
+				}
+			}
+			return null;
 		}
 		return null;
 	}
@@ -75,7 +93,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 		if (Strings.isNotBlank(localName)) {
 			for (Map.Entry entry : this.attributes.entrySet()) {
 				Attr attr = (Attr) entry.getValue();
-				if (namespaceURI == null || namespaceURI.equals(attr.getNamespaceURI())) {
+				if (Strings.isBlank(namespaceURI) || namespaceURI.equals(attr.getNamespaceURI())) {
 					if (attr.getName().equalsIgnoreCase(localName)) {
 						return attr;
 					}
@@ -131,12 +149,17 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr setNamedItem(Attr attr) {
-		final Object prevValue = this.attributes.put(attr.getNodeName(), attr);
-		if (prevValue != null) {
-			return attr;
+	public Attr setNamedItem(Node attr) {
+
+		if(attr == null) {
+			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "The Attr is null");
 		}
-		return null;
+		if(!(attr instanceof Attr)) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot set node.");
+		}
+		Attr attribute = (Attr) attr;
+		this.attributes.put(attr.getNodeName(), attribute);
+		return attribute;
 	}
 
 	/** {@inheritDoc} */

@@ -54,7 +54,7 @@ public class DOMElementTest extends LoboUnitTest {
 	@Test
 	public void testGetAttributes() {
 		Document document = domImpl.createDocument(null, null, null);
-		Element html = document.getDocumentElement();
+		Element html = document.createElement("html");
 		Element body = document.createElement("body");
 		html.appendChild(body);
 		NamedNodeMap attrs = body.getAttributes();

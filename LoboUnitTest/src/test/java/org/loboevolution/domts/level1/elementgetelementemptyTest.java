@@ -60,15 +60,14 @@ public class elementgetelementemptyTest extends LoboUnitTest {
         Attr newAttribute;
         HTMLCollection elementList;
         Element testEmployee;
-        Attr domesticAttr;
         String attrValue;
         doc = sampleXmlFile("staff.xml");
         newAttribute = doc.createAttribute("district");
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(3);
-        domesticAttr = testEmployee.setAttributeNode(newAttribute);
+        testEmployee.setAttributeNode(newAttribute);
         attrValue = testEmployee.getAttribute("district");
-        assertEquals("elementGetElementEmptyAssert", "", attrValue);
+        assertEquals("elementGetElementEmptyAssert", null, attrValue);
     }
 }
 

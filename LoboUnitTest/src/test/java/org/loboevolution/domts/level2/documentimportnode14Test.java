@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
@@ -51,7 +52,7 @@ public class documentimportnode14Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         Document newDoc;
         DOMImplementation domImpl;
         DocumentType nullDocType = null;
@@ -63,7 +64,8 @@ public class documentimportnode14Test extends LoboUnitTest {
         String attrValue;
         String nullNS = null;
 
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         childList = doc.getElementsByTagNameNS("*", "employee");
         employeeElem = childList.item(3);
         domImpl = doc.getImplementation();

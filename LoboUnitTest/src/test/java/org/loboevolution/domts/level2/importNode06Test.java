@@ -73,7 +73,7 @@ public class importNode06Test extends LoboUnitTest {
         hasChild = aNode.hasChildNodes();
         assertTrue("throw_True", hasChild);
         name = aNode.getNodeName();
-        assertEquals("nodeName", "address", name);
+        assertEquals("nodeName", "ADDRESS", name);
         child = aNode.getFirstChild();
         value = child.getNodeValue();
         assertEquals("nodeValue", "27 South Road. Dallas, texas 98556", value);

@@ -63,20 +63,20 @@ public class getElementsByTagNameNS03Test extends LoboUnitTest {
         List<String> result = new ArrayList<>();
 
         List<String> expectedResult = new ArrayList<>();
-        expectedResult.add("employee");
-        expectedResult.add("employeeId");
-        expectedResult.add("name");
-        expectedResult.add("position");
-        expectedResult.add("salary");
-        expectedResult.add("gender");
-        expectedResult.add("address");
-        expectedResult.add("employee");
-        expectedResult.add("employeeId");
-        expectedResult.add("position");
-        expectedResult.add("salary");
-        expectedResult.add("gender");
-        expectedResult.add("address");
-        expectedResult.add("address");
+        expectedResult.add("EMPLOYEE");
+        expectedResult.add("EMPLOYEEID");
+        expectedResult.add("NAME");
+        expectedResult.add("POSITION");
+        expectedResult.add("SALARY");
+        expectedResult.add("GENDER");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("EMPLOYEE");
+        expectedResult.add("EMPLOYEEID");
+        expectedResult.add("POSITION");
+        expectedResult.add("SALARY");
+        expectedResult.add("GENDER");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
 
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName( "*");

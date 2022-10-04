@@ -71,4 +71,3 @@ public class elementsetattributens03Test extends LoboUnitTest {
         assertEquals("elementsetattributens03_attrValue", "default1", attrValue);
     }
 }
-

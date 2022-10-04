@@ -56,7 +56,7 @@ public class getElementsByTagNameNS01Test extends LoboUnitTest {
         HTMLCollection newList;
         doc = sampleXmlFile("staffNS.xml");
         newList = doc.getElementsByTagNameNS(namespaceURI, localName);
-        assertEquals( "throw_Size", 37, newList);
+        assertEquals( "throw_Size", 37, newList.getLength());
     }
 }
 

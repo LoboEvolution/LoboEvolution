@@ -27,7 +27,6 @@ import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertNull;
 
-
 /**
  * The "getAttributes()" method invoked on a Comment
  * Node returns null.
@@ -52,21 +51,24 @@ public class hc_nodecommentnodeattributesTest extends LoboUnitTest {
         Document doc;
         Comment commentNode;
         NodeList nodeList;
-        NodeList attrList;
+        NamedNodeMap attrList;
         int nodeType;
         doc = sampleXmlFile("hc_staff.xml");
         nodeList = doc.getChildNodes();
         for (int indexN10043 = 0; indexN10043 < nodeList.getLength(); indexN10043++) {
-            commentNode = (Comment) nodeList.item(indexN10043);
-            nodeType = commentNode.getNodeType();
+            Node n = nodeList.item(indexN10043);
+            if (n instanceof Comment) {
+                commentNode = (Comment) n;
+                nodeType = commentNode.getNodeType();
 
-            if (nodeType == 8) {
-                attrList = commentNode.getChildNodes();
-                assertNull("existingCommentAttributesNull", attrList);
+                if (nodeType == 8) {
+                    attrList = commentNode.getAttributes();
+                    assertNull("existingCommentAttributesNull", attrList);
+                }
             }
         }
         commentNode = doc.createComment("This is a comment");
-        attrList = commentNode.getChildNodes();
+        attrList = commentNode.getAttributes();
         assertNull("createdCommentAttributesNull", attrList);
     }
 }

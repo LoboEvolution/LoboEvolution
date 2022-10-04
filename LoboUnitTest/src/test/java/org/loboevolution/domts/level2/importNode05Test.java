@@ -76,7 +76,7 @@ public class importNode05Test extends LoboUnitTest {
         system = docType.getSystemId();
         assertEquals("dtdSystemId", "staffNS.dtd", system);
         name = aNode.getNodeName();
-        assertEquals("nodeName", "address", name);
+        assertEquals("nodeName", "ADDRESS", name);
     }
 }
 

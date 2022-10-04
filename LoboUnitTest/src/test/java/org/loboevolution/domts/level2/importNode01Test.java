@@ -25,6 +25,9 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 
@@ -58,7 +61,6 @@ public class importNode01Test extends LoboUnitTest {
         Document doc;
         Document aNewDoc;
         Attr newAttr;
-        Text importedChild;
         Node aNode;
         Document ownerDocument;
         Element attrOwnerElement;
@@ -69,17 +71,14 @@ public class importNode01Test extends LoboUnitTest {
         String nodeName;
         Node child;
         String childValue;
-        java.util.List result = new java.util.ArrayList();
 
-        java.util.List expectedResult = new java.util.ArrayList();
+        List<String> expectedResult = new ArrayList<>();
         expectedResult.add("elem:attr1");
         expectedResult.add("importedText");
 
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
         newAttr = aNewDoc.createAttribute("elem:attr1");
-        importedChild = aNewDoc.createTextNode("importedText");
-        aNode = newAttr.appendChild(importedChild);
         aNode = doc.importNode(newAttr, false);
         ownerDocument = aNode.getOwnerDocument();
         docType = ownerDocument.getDoctype();

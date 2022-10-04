@@ -67,7 +67,7 @@ public class attrgetownerelement01Test extends LoboUnitTest {
         attr = attributes.getNamedItemNS(nullNS, "defaultAttr");
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
-        assertEquals("attrgetownerelement01", "employee", ownerElementName);
+        assertEquals("attrgetownerelement01", "EMPLOYEE", ownerElementName);
     }
 }
 

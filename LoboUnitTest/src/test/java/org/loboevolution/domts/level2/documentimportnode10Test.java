@@ -59,13 +59,12 @@ public class documentimportnode10Test extends LoboUnitTest {
         HTMLCollection childList;
         boolean success;
         Node addressNode;
-        Node appendedChild;
         Node importedDocFrag;
         doc = sampleXmlFile("staffNS.xml");
         docFragment = doc.createDocumentFragment();
         childList = doc.getElementsByTagNameNS("*", "address");
         addressNode = childList.item(0);
-        appendedChild = docFragment.appendChild(addressNode);
+        docFragment.appendChild(addressNode);
         importedDocFrag = doc.importNode(docFragment, true);
         success = importedDocFrag.hasChildNodes();
         assertTrue("documentimportnode10", success);

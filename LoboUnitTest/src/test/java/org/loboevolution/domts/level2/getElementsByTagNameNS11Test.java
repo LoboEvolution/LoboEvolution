@@ -28,6 +28,9 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -59,14 +62,14 @@ public class getElementsByTagNameNS11Test extends LoboUnitTest {
         HTMLCollection elementList;
         Node child;
         String childName;
-        java.util.List result = new java.util.ArrayList();
+        List<String> result = new ArrayList<>();
 
-        java.util.List expectedResult = new java.util.ArrayList();
-        expectedResult.add("address");
-        expectedResult.add("address");
-        expectedResult.add("address");
-        expectedResult.add("address");
-        expectedResult.add("address");
+        List<String> expectedResult = new ArrayList<>();
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
 
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();

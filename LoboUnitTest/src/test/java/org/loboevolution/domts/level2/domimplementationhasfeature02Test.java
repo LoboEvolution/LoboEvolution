@@ -23,6 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 
@@ -48,10 +49,11 @@ public class domimplementationhasfeature02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation domImpl;
         boolean success;
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         success = domImpl.hasFeature("Blah Blah", "");
         assertFalse("domimplementationhasfeature02", success);

@@ -23,10 +23,7 @@ package org.loboevolution.domts.level1;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertNull;
 
@@ -55,13 +52,13 @@ public class nodecommentnodeattributesTest extends LoboUnitTest {
     public void runTest() {
         Document doc;
         NodeList childList;
-        Element childNode;
+        Node childNode;
         NamedNodeMap attrList;
         int nodeType;
         doc = sampleXmlFile("staff.xml");
         childList = doc.getChildNodes();
         for (int indexN10043 = 0; indexN10043 < childList.getLength(); indexN10043++) {
-            childNode = (Element) childList.item(indexN10043);
+            childNode = childList.item(indexN10043);
             nodeType = childNode.getNodeType();
 
             if (nodeType == 8) {
@@ -69,7 +66,7 @@ public class nodecommentnodeattributesTest extends LoboUnitTest {
                 assertNull("attributesNull", attrList);
             }
         }
-        childNode = (Element) doc.createComment("This is a comment");
+        childNode = doc.createComment("This is a comment");
         attrList = childNode.getAttributes();
         assertNull("createdAttributesNull", attrList);
     }

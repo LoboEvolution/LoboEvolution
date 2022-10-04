@@ -618,7 +618,7 @@ public class DOMNodeTest extends LoboUnitTest {
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(fragment.getParentNode());
-			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
+			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
 		}
 		//
 		try {
@@ -626,14 +626,14 @@ public class DOMNodeTest extends LoboUnitTest {
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(docType.getParentNode());
-			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
+			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
 		}
 		try {
 			fragment.appendChild(docType);
 			fail("Must throw exception.");
 		} catch (DOMException e) {
 			assertNull(docType.getParentNode());
-			assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
+			assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
 		}
 		elm.appendChild(pi);
 		assertTrue(elm.hasChildNodes());

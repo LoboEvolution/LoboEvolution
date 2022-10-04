@@ -65,8 +65,8 @@ public class hc_nodecloneattributescopiedTest extends LoboUnitTest {
         htmlExpected.add("title");
 
         java.util.Collection expected = new java.util.ArrayList();
-        expected.add("class");
         expected.add("title");
+        expected.add("class");
         expected.add("dir");
 
         doc = sampleXmlFile("hc_staff.xml");

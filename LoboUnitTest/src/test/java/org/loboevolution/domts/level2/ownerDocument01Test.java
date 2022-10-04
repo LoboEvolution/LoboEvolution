@@ -24,10 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-
 import static org.junit.Assert.assertNull;
-
 
 /**
  * The "getOwnerDocument()" method returns null if the target
@@ -49,9 +46,9 @@ public class ownerDocument01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         Document doc;
-        DocumentType ownerDocument;
+        Document ownerDocument;
         doc = sampleXmlFile("staff.xml");
-        ownerDocument = (DocumentType) doc.getOwnerDocument();
+        ownerDocument =  doc.getOwnerDocument();
         assertNull("throw_Null", ownerDocument);
     }
 

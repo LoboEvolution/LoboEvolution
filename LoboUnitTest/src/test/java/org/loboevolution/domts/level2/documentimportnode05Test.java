@@ -64,15 +64,15 @@ public class documentimportnode05Test extends LoboUnitTest {
         String namespaceURI;
         doc = sampleXmlFile("staffNS.xml");
         docImported = sampleXmlFile("staff.xml");
-        attr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "a_:b0");
+        attr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "a:b0");
         importedAttr = docImported.importNode(attr, false);
         nodeName = importedAttr.getNodeName();
         nodeValue = importedAttr.getNodeValue();
         nodeType = importedAttr.getNodeType();
         namespaceURI = importedAttr.getNamespaceURI();
-        assertEquals("documentimportnode05_nodeName", "a_:b0", nodeName);
+        assertEquals("documentimportnode05_nodeName", "a:b0", nodeName);
         assertEquals("documentimportnode05_nodeType", 2, nodeType);
-        assertEquals("documentimportnode05_nodeValue", "", nodeValue);
+        assertEquals("documentimportnode05_nodeValue", null, nodeValue);
         assertEquals("documentimportnode05_namespaceURI", "http://www.w3.org/DOM/Test", namespaceURI);
     }
 

@@ -67,7 +67,7 @@ public class elementreplaceexistingattributeTest extends LoboUnitTest {
         newAttribute = doc.createAttribute("street");
         testEmployee.setAttributeNode(newAttribute);
         name = testEmployee.getAttribute("street");
-        assertEquals("elementReplaceExistingAttributeAssert", "", name);
+        assertEquals("elementReplaceExistingAttributeAssert", null, name);
     }
 }
 

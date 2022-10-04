@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -53,7 +54,7 @@ public class documentgetelementsbytagnameNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         Document newDoc;
         DocumentType docType = null;
 
@@ -61,7 +62,8 @@ public class documentgetelementsbytagnameNS01Test extends LoboUnitTest {
         HTMLCollection childList;
         String nullNS = null;
 
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(nullNS, "root", docType);
         childList = newDoc.getElementsByTagNameNS("*", "*");

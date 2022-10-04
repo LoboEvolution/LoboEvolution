@@ -65,13 +65,12 @@ public class hc_nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         Node newChild;
         Node child;
         String childName;
-        Node insertedNode;
         List<String> expected = new ArrayList<>();
+        expected.add("EM");
         expected.add("STRONG");
         expected.add("CODE");
         expected.add("SUP");
         expected.add("VAR");
-        expected.add("EM");
         expected.add("ACRONYM");
 
         List<String> result = new ArrayList<>();
@@ -83,7 +82,7 @@ public class hc_nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         childList = ((Element) employeeNode).getElementsByTagName("*");
         refChild = childList.item(5);
         newChild = childList.item(0);
-        insertedNode = employeeNode.insertBefore(newChild, refChild);
+        employeeNode.insertBefore(newChild, refChild);
         for (int indexN1008C = 0; indexN1008C < childList.getLength(); indexN1008C++) {
             child = childList.item(indexN1008C);
             nodeType = child.getNodeType();

@@ -25,6 +25,7 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertTrue;
@@ -53,7 +54,7 @@ public class namednodemapsetnameditemns04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation domImpl;
         Document docAlt;
         DocumentType docType = null;
@@ -62,10 +63,10 @@ public class namednodemapsetnameditemns04Test extends LoboUnitTest {
         HTMLCollection elementList;
         Element element;
         Attr attrAlt;
-        Node newNode;
         String nullNS = null;
 
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
@@ -73,15 +74,14 @@ public class namednodemapsetnameditemns04Test extends LoboUnitTest {
         docAlt = domImpl.createDocument(nullNS, "newDoc", docType);
         attrAlt = docAlt.createAttributeNS(nullNS, "street");
 
-        {
-            boolean success = false;
-            try {
-                newNode = attributes.setNamedItemNS(attrAlt);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            attributes.setNamedItemNS(attrAlt);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+
     }
 
     /**

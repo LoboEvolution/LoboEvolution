@@ -82,8 +82,8 @@ public class hc_nodechildnodesappendchildTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);
         childList = employeeNode.getChildNodes();
-        createdNode = doc.createElement("br");
-        employeeNode = employeeNode.appendChild(createdNode);
+        createdNode = doc.createElement("BR");
+        employeeNode.appendChild(createdNode);
         for (int indexN10087 = 0; indexN10087 < childList.getLength(); indexN10087++) {
             childNode = childList.item(indexN10087);
             childName = childNode.getNodeName();

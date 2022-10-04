@@ -23,6 +23,7 @@ package org.loboevolution.domts.level1;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 
@@ -48,10 +49,11 @@ public class hc_documentgetimplementationTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation docImpl;
         boolean xmlstate;
-        doc = sampleXmlFile("hc_staff.xml");
+        doc = (DocumentImpl) sampleXmlFile("hc_staff.xml");
+        doc.setTest(true);
         docImpl = doc.getImplementation();
         xmlstate = docImpl.hasFeature("XML", "1.0");
         assertTrue("supports_XML_1.0", xmlstate);

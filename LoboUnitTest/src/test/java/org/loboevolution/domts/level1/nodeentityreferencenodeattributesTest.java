@@ -25,8 +25,8 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -50,18 +50,18 @@ public class nodeentityreferencenodeattributesTest extends LoboUnitTest {
     public void runTest() {
         Document doc;
         HTMLCollection elementList;
-        Element entRefAddr;
-        Element entRefNode;
+        Node entRefAddr;
+        Node entRefNode;
         NamedNodeMap attrList;
         int nodeType;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
-        entRefAddr = (Element) elementList.item(1);
-        entRefNode = (Element) entRefAddr.getFirstChild();
+        entRefAddr = elementList.item(1);
+        entRefNode = entRefAddr.getFirstChild();
         nodeType = entRefNode.getNodeType();
 
         if (nodeType != 5) {
-            entRefNode = (Element) doc.createEntityReference("ent2");
+            entRefNode = doc.createEntityReference("ent2");
             assertNotNull("createdEntRefNotNull", entRefNode);
         }
         attrList = entRefNode.getAttributes();

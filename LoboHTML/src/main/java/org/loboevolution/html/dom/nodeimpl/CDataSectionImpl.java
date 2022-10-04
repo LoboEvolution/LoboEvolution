@@ -22,7 +22,6 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import org.loboevolution.html.dom.nodeimpl.TextImpl;
 import org.loboevolution.html.node.CDATASection;
 import org.loboevolution.html.node.NodeType;
 

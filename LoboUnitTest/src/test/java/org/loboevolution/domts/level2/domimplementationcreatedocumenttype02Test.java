@@ -23,6 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -51,7 +52,7 @@ public class domimplementationcreatedocumenttype02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation domImpl;
         DocumentType newDocType;
         Document ownerDocument;
@@ -74,7 +75,8 @@ public class domimplementationcreatedocumenttype02Test extends LoboUnitTest {
         qualifiedNames.add("a-b:c.j");
         qualifiedNames.add("a-b:c");
 
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         for (int indexN10077 = 0; indexN10077 < qualifiedNames.size(); indexN10077++) {
             qualifiedName = (String) qualifiedNames.get(indexN10077);

@@ -68,7 +68,7 @@ public class attrgetownerelement05Test extends LoboUnitTest {
         attr = nodeMap.getNamedItemNS(nullNS, "street");
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
-        assertEquals("attrgetownerelement05", "address", ownerElementName);
+        assertEquals("attrgetownerelement05", "ADDRESS", ownerElementName);
     }
 }
 

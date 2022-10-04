@@ -60,7 +60,7 @@ public class getElementsByTagNameNS02Test extends LoboUnitTest {
         String lname;
         doc = sampleXmlFile("staffNS.xml");
         newList = doc.getElementsByTagNameNS("*", "employee");
-        assertEquals( "employeeCount", 5, newList);
+        assertEquals( "employeeCount", 5, newList.getLength());
         newElement = (Element) newList.item(3);
         prefix = newElement.getPrefix();
         assertEquals("prefix", "emp", prefix);

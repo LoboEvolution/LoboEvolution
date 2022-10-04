@@ -75,7 +75,7 @@ public class nodelisttraverselistTest extends LoboUnitTest {
         expectedWhitespace.add("#text");
         expectedWhitespace.add("gender");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("address");
+        expectedWhitespace.add("ADDRESS");
         expectedWhitespace.add("#text");
 
         List<String> expectedNoWhitespace = new ArrayList<>();

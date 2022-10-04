@@ -54,7 +54,7 @@ public class elementgetelementsbytagnamens02Test extends LoboUnitTest {
         HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getDocumentElement();
-        elementList = element.getElementsByTagNameNS("**", "*");
+        elementList = element.getElementsByTagNameNS("*", "*");
         assertEquals( "elementgetelementsbytagnamens02", 0, elementList.getLength());
     }
 }

@@ -78,7 +78,7 @@ public class nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         expectedWhitespace.add("gender");
         expectedWhitespace.add("#text");
         expectedWhitespace.add("employeeId");
-        expectedWhitespace.add("address");
+        expectedWhitespace.add("ADDRESS");
         expectedWhitespace.add("#text");
 
         List<String> expectedNoWhitespace = new ArrayList<String>();

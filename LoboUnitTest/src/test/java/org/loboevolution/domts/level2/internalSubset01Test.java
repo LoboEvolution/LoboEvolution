@@ -53,7 +53,7 @@ public class internalSubset01Test extends LoboUnitTest {
         Document doc;
         DocumentType docType;
         String internal;
-        doc = sampleXmlFile("staff2.xml");
+        doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         internal = docType.getInternalSubset();
         assertNull("internalSubsetNull", internal);

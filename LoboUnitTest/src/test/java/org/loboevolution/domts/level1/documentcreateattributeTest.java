@@ -59,7 +59,7 @@ public class documentcreateattributeTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newAttrNode = doc.createAttribute("district");
         attrValue = newAttrNode.getNodeValue();
-        assertEquals("value", "", attrValue);
+        assertEquals("value", null, attrValue);
         attrName = newAttrNode.getNodeName();
         assertEquals("name", "district", attrName);
         attrType = newAttrNode.getNodeType();

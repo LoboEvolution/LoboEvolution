@@ -21,16 +21,16 @@
 package org.loboevolution.html.parser;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.Entities;
 import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.dom.nodeimpl.DocumentTypeImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.dom.nodeimpl.ElementImpl;
+import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.ElementInfo;
 import org.xml.sax.ErrorHandler;
@@ -283,7 +283,7 @@ public class HtmlParser {
 					final int localIndex = normalTag.indexOf(':');
 					final boolean tagHasPrefix = localIndex > 0;
 					final String localName = tagHasPrefix ? normalTag.substring(localIndex + 1) : normalTag;
-					Element element = doc.createElement(localName);
+					ElementImpl element = (ElementImpl) doc.createElement(localName);
 					element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 					try {
 						if (!this.justReadTagEnd) {
@@ -396,7 +396,7 @@ public class HtmlParser {
 											// Switch element
 											element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
 											// newElement should have been suspended.
-											element = newElement;
+											element = (ElementImpl) newElement;
 											// Add to parent
 											safeAppendChild(parent, element);
 											if (this.justReadEmptyElement) {
@@ -865,7 +865,7 @@ public class HtmlParser {
 		return pidata;
 	}
 
-	private boolean readAttribute(final LineNumberReader reader, final Element element)
+	private boolean readAttribute(final LineNumberReader reader, final ElementImpl element)
 			throws IOException, SAXException {
 		if (this.justReadTagEnd) {
 			return false;
@@ -985,11 +985,23 @@ public class HtmlParser {
 						element.setAttribute(attributeNameStr, "");
 					} else {
 						final StringBuilder actualAttributeValue = entityDecode(attributeValue);
-						if(attributeNameStr.contains(":")){
-							element.setAttributeNS("", attributeNameStr, actualAttributeValue.toString());
-						} else{
-						element.setAttribute(attributeNameStr, actualAttributeValue.toString());
-					}}
+						if (attributeNameStr.contains(":")) {
+							element.setAttributeNS(element.getNamespaceURI(), attributeNameStr, actualAttributeValue.toString());
+						} else {
+							if ("xmlns".equals(attributeNameStr)) {
+								element.setNamespaceURI(attributeValue.toString());
+								final NamedNodeMap nnmap = element.getAttributes();
+								if (nnmap != null) {
+									for (Attr attr : Nodes.iterable(nnmap)) {
+										AttrImpl att = (AttrImpl) attr;
+										att.setNamespaceURI(attributeValue.toString());
+									}
+								}
+							} else {
+								element.setAttribute(attributeNameStr, actualAttributeValue.toString());
+							}
+						}
+					}
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = false;

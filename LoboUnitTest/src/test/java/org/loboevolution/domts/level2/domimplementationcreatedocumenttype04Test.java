@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -50,7 +51,7 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation domImpl;
         DocumentType newDocType;
         String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
@@ -72,7 +73,8 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
         qualifiedNames.add("(");
         qualifiedNames.add(")");
 
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         for (int indexN10073 = 0; indexN10073 < qualifiedNames.size(); indexN10073++) {
             qualifiedName = (String) qualifiedNames.get(indexN10073);

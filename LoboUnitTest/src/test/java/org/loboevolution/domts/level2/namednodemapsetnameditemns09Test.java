@@ -44,7 +44,6 @@ public class namednodemapsetnameditemns09Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -53,41 +52,27 @@ public class namednodemapsetnameditemns09Test extends LoboUnitTest {
         NamedNodeMap entities;
         NamedNodeMap notations;
         Attr attr;
-        Node newNode;
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
         notations = docType.getNotations();
         attr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "test");
 
-        {
-            boolean success = false;
-            try {
-                newNode = entities.setNamedItemNS(attr);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_entities", success);
+        boolean success = false;
+        try {
+            entities.setNamedItemNS(attr);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_entities", success);
 
-        {
-            boolean success = false;
-            try {
-                newNode = notations.setNamedItemNS(attr);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_notations", success);
+        success = false;
+        try {
+            notations.setNamedItemNS(attr);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapsetnameditemns09";
+        assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_notations", success);
     }
 }
 

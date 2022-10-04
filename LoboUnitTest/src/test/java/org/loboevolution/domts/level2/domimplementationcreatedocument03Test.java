@@ -23,9 +23,13 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -50,14 +54,14 @@ public class domimplementationcreatedocument03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         DOMImplementation domImpl;
         Document newDoc;
         DocumentType docType = null;
 
         String namespaceURI = "http://www.w3.org/DOMTest/L2";
         String qualifiedName;
-        java.util.List qualifiedNames = new java.util.ArrayList();
+        List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("_:_");
         qualifiedNames.add("_:h0");
         qualifiedNames.add("_:test");
@@ -69,10 +73,11 @@ public class domimplementationcreatedocument03Test extends LoboUnitTest {
         qualifiedNames.add("a-b:c");
         qualifiedNames.add("a-b:c");
 
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl)  sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
-        for (int indexN1006B = 0; indexN1006B < qualifiedNames.size(); indexN1006B++) {
-            qualifiedName = (String) qualifiedNames.get(indexN1006B);
+        for (Object name : qualifiedNames) {
+            qualifiedName = (String) name;
             newDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
             assertNotNull("domimplementationcreatedocument03", newDoc);
         }

@@ -63,11 +63,11 @@ public class getElementsByTagNameNS04Test extends LoboUnitTest {
         List<String> result = new ArrayList<>();
 
         List<String> expectedResult = new ArrayList<>();
-        expectedResult.add("address");
-        expectedResult.add("address");
-        expectedResult.add("address");
-        expectedResult.add("address");
-        expectedResult.add("address");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
+        expectedResult.add("ADDRESS");
 
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "address");

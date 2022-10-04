@@ -76,11 +76,8 @@ public class removeAttributeNS02Test extends LoboUnitTest {
         attr = ((Element) testAddr).getAttribute( "local1");
         namespaceURI = addrAttr.getNamespaceURI();
         localName = addrAttr.getLocalName();
-        prefix = testAddr.getPrefix();
         assertEquals("attr", "FALSE", attr);
         assertEquals("uri", "http://www.nist.gov", namespaceURI);
         assertEquals("lname", "local1", localName);
-        assertEquals("prefix", "emp", prefix);
     }
 }
-

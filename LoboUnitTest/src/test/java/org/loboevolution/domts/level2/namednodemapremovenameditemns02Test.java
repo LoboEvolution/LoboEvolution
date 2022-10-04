@@ -68,11 +68,11 @@ public class namednodemapremovenameditemns02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName( "employee");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-        attribute = attributes.removeNamedItemNS(nullNS, "defaultAttr");
         attribute = attributes.getNamedItemNS(nullNS, "defaultAttr");
         attrValue = attribute.getNodeValue();
-        assertNotNull("namednodemapremovenameditemns02", attribute);
         assertEquals("namednodemapremovenameditemns02_attrValue", "defaultVal", attrValue);
+        attribute = attributes.removeNamedItemNS(nullNS, "defaultAttr");
+        assertNotNull("namednodemapremovenameditemns02", attribute);
     }
 }
 

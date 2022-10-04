@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -55,7 +56,7 @@ public class documentimportnode22Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         DocumentType docTypeNull = null;
 
         Document docImp;
@@ -64,21 +65,17 @@ public class documentimportnode22Test extends LoboUnitTest {
         NamedNodeMap nodeMap;
         Notation notation1;
         Notation notation2;
-        Notation notationImp1;
-        Notation notationImp2;
-        Notation notationImpNew1;
-        Notation notationImpNew2;
         String publicId1;
         String publicId1Imp;
         String publicId1NewImp;
         String publicId2Imp;
-        String publicId2NewImp;
         String systemId1Imp;
         String systemId1NewImp;
         String systemId2;
         String systemId2Imp;
         String systemId2NewImp;
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         docType = doc.getDoctype();
         docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", docTypeNull);
@@ -86,17 +83,16 @@ public class documentimportnode22Test extends LoboUnitTest {
         assertNotNull("notationsNotNull", nodeMap);
         notation1 = (Notation) nodeMap.getNamedItem("notation1");
         notation2 = (Notation) nodeMap.getNamedItem("notation2");
-        notationImp1 = (Notation) doc.importNode(notation1, true);
-        notationImp2 = (Notation) doc.importNode(notation2, false);
-        notationImpNew1 = (Notation) docImp.importNode(notation1, false);
-        notationImpNew2 = (Notation) docImp.importNode(notation2, true);
+        doc.importNode(notation1, true);
+        doc.importNode(notation2, false);
+        docImp.importNode(notation1, false);
+        docImp.importNode(notation2, true);
         publicId1 = notation1.getPublicId();
         publicId1Imp = notation1.getPublicId();
         publicId1NewImp = notation1.getPublicId();
         systemId1Imp = notation1.getSystemId();
         systemId1NewImp = notation1.getSystemId();
         publicId2Imp = notation2.getPublicId();
-        publicId2NewImp = notation2.getPublicId();
         systemId2 = notation2.getSystemId();
         systemId2Imp = notation2.getSystemId();
         systemId2NewImp = notation2.getSystemId();

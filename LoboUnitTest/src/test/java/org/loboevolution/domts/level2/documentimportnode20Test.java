@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Entity;
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.*;
 
@@ -55,7 +56,7 @@ public class documentimportnode20Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        DocumentImpl doc;
         Document docImp;
         DOMImplementation domImpl;
         DocumentType docType;
@@ -74,7 +75,8 @@ public class documentimportnode20Test extends LoboUnitTest {
         String cdataVal;
         String piTargetVal;
         String piDataVal;
-        doc = sampleXmlFile("staffNS.xml");
+        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        doc.setTest(true);
         domImpl = doc.getImplementation();
         docType = doc.getDoctype();
         docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", docTypeNull);

@@ -52,7 +52,6 @@ public class setAttributeNS06Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -60,20 +59,19 @@ public class setAttributeNS06Test extends LoboUnitTest {
         String qualifiedName = "xml:qualifiedName";
         Document doc;
         HTMLCollection elementList;
-        Node testAddr;
+        Element testAddr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        testAddr = elementList.item(0);
+        testAddr = (Element) elementList.item(0);
 
-        {
-            boolean success = false;
-            try {
-                ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("throw_NAMESPACE_ERR", success);
+        boolean success = false;
+        try {
+            testAddr.setAttributeNS(namespaceURI, qualifiedName, "newValue");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("throw_NAMESPACE_ERR", success);
+
     }
 }
 

@@ -56,7 +56,7 @@ public class getElementById01Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getElementById("CANADA");
         tagname = element.getTagName();
-        assertEquals("throw_Equals", "address", tagname);
+        assertEquals("throw_Equals", "ADDRESS", tagname);
     }
 }
 

@@ -51,7 +51,6 @@ public class setNamedItemNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -66,19 +65,15 @@ public class setNamedItemNS01Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         anotherElement = (Element) elementList.item(2);
         anotherMap = anotherElement.getAttributes();
-        arg = anotherMap.getNamedItemNS("http://www.netzero.com", "domestic");
+        arg = anotherMap.getNamedItemNS("", "domestic");
         testAddress = (Element) elementList.item(0);
         map = testAddress.getAttributes();
-
-        {
-            boolean success = false;
-            try {
-                map.setNamedItemNS((Attr)arg);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
-            }
-            assertTrue("throw_INUSE_ATTRIBUTE_ERR", success);
+        boolean success = false;
+        try {
+            map.setNamedItemNS((Attr) arg);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
         }
+        assertTrue("throw_INUSE_ATTRIBUTE_ERR", success);
     }
 }
-

@@ -52,7 +52,6 @@ public class prefix09Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -62,28 +61,15 @@ public class prefix09Test extends LoboUnitTest {
         Attr addrAttr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
-        addrNode = (Element) elementList.item(3);
-
+        addrNode = (Element) elementList.item(5);
         addrAttr = addrNode.getAttributeNode("xmlns");
-
-        {
-            boolean success = false;
-            try {
-                addrAttr.setPrefix("xxx");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("throw_NAMESPACE_ERR", success);
+        boolean success = false;
+        try {
+            addrAttr.setPrefix("xxx");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/prefix09";
+        assertTrue("throw_NAMESPACE_ERR", success);
     }
 }
 
