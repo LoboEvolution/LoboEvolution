@@ -36,12 +36,6 @@ public class UListRenderState extends BlockRenderState {
         super(prevRenderState, element);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public int getDefaultDisplay() {
-        return DISPLAY_LIST_ITEM;
-    }
-
     /**
      * {@inheritDoc}
      */

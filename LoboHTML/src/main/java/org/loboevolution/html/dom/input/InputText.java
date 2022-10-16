@@ -36,8 +36,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -93,6 +92,13 @@ public class InputText extends BasicInput {
 
 		iText.addFocusListener(this);
 		iText.addKeyListener(this);
+		iText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				modelNode.setValue(modelNode.getValue().concat(String.valueOf(e.getKeyChar())));
+			}
+		});
+
 		iText.addCaretListener(this);
 		iText.addMouseListener(this);
 		iText.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode));
@@ -229,7 +235,7 @@ public class InputText extends BasicInput {
 
 		@Override
 		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-			int max = (int)modelNode.getMaxLength();
+			int max = modelNode.getMaxLength();
 
 			final int docLength = getLength();
 			if (docLength >= max) {

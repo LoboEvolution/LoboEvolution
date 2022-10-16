@@ -62,7 +62,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  <div id='myDiv1'/>\n"
                 + "  <div id='myDiv2'/>\n"
                 + "</body></html>";
-        final String[] messages = {"", "", "auto", "pointer"};
+        final String[] messages = {null, null, "auto", "pointer"};
         checkHtmlAlert(html, messages);
     }
 
@@ -729,7 +729,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "alert(cs2.backgroundColor);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"rgb(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"};
+        final String[] messages = {"rgb(0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1462,7 +1462,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='div1'></div>\n"
                 + "</body></html>\n";
-        final String[] messages = {"", "0px", "20%", "80px", "25%", "100px"};
+        final String[] messages = {null, "0px", "20%", "80px", "25%", "100px"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1493,7 +1493,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='div1'></div>\n"
                 + "</body></html>\n";
-        final String[] messages = {"", "0px", "", "0px", "50%", "100px", "50%", "100px"};
+        final String[] messages = {null, "0px",null, "0px", "50%", "100px", "50%", "100px"};
         checkHtmlAlert(html, messages);
     }
 

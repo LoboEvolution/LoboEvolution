@@ -936,7 +936,17 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public String getPosition() {
-        return this.getPropertyValue(POSITION);
+        final String position = this.getPropertyValue(POSITION);
+
+        if(Strings.isNotBlank(position)) {
+            CSSValues pos = CSSValues.get(position);
+            if(CSSValues.DEFAULT == pos){
+                return null;
+            } else{
+                return position.toLowerCase();
+            }
+        }
+        return null;
     }
 
     /** {@inheritDoc} */

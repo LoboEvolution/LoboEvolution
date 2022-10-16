@@ -582,7 +582,7 @@ public class StyleSheetAggregator {
 
 	private static boolean isActive(Window window, final MediaQuery mediaQuery) {
 		final String mediaType = mediaQuery.getMedia();
-		if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
+		if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType) || "print".equalsIgnoreCase(mediaType)) {
 
 			for (final Property property : mediaQuery.getProperties()) {
 				final int val;

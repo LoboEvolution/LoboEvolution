@@ -20,7 +20,6 @@
 
 package org.loboevolution.html.style;
 
-import com.gargoylesoftware.css.util.CSSProperties;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLHtmlElement;
@@ -49,6 +48,10 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
     private CSSStyleDeclaration style;
 
+    private int availHeight = -1;
+
+    private int availWidth = -1;
+
 
     /**
      * <p>Constructor for AbstractCSSProperties.</p>
@@ -58,9 +61,24 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
     public ComputedCSSStyleDeclarationImpl(HTMLElementImpl element, CSSStyleDeclaration style) {
         this.element = element;
-        this.renderState = element.getRenderState();
-        this.window = element.getDocumentNode().getDefaultView();
+        this.renderState = element.getRenderState();        
         this.style = style;
+
+        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
+        this.window = doc.getDefaultView();
+        
+        final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+        final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+        final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
+
+        if (parent != null) {
+            final CSSStyleDeclaration currentStyle = parent.getStyle();
+            availHeight = HtmlValues.getPixelSize(currentStyle.getHeight(), renderState, window, -1);
+            availWidth = HtmlValues.getPixelSize(currentStyle.getWidth(), renderState, window, -1);
+        }
+
+        availHeight = availHeight == -1 ? htmlPanel.getHeight() : availHeight;
+        availWidth = availWidth == -1 ? htmlPanel.getWidth() : availWidth;
     }
 
      /** {@inheritDoc} */
@@ -151,9 +169,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getBorderWidth() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String ccsBorderWidth = style.getBorderWidth();
-        final int borderWidth = HtmlValues.getPixelSize(ccsBorderWidth, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int borderWidth = HtmlValues.getPixelSize(ccsBorderWidth, renderState, window.getWindow(), -1, 0);
         return borderWidth + "px";
     }
 
@@ -172,9 +189,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getBorderBottomWidth() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String cssBorderBottomWidth = style.getBorderBottomWidth();
-        final int borderBottomWidth = HtmlValues.getPixelSize(cssBorderBottomWidth, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int borderBottomWidth = HtmlValues.getPixelSize(cssBorderBottomWidth, renderState, window.getWindow(), -1, availHeight);
         return borderBottomWidth + "px";
     }
 
@@ -199,9 +215,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getBorderLeftWidth() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String cssBorderBottomLeft = style.getBorderLeftWidth();
-        final int borderBottomLeft = HtmlValues.getPixelSize(cssBorderBottomLeft, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int borderBottomLeft = HtmlValues.getPixelSize(cssBorderBottomLeft, renderState, window.getWindow(), -1, availWidth);
         return borderBottomLeft + "px";
     }
 
@@ -226,9 +241,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getBorderRightWidth() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String getBorderRightWidth = style.getBorderRightWidth();
-        final int borderRightWidth = HtmlValues.getPixelSize(getBorderRightWidth, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int borderRightWidth = HtmlValues.getPixelSize(getBorderRightWidth, renderState, window.getWindow(), -1, availWidth);
         return borderRightWidth + "px";
     }
 
@@ -277,9 +291,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getBorderTopWidth() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String cssBorderToptWidth = style.getBorderTopWidth();
-        final int borderTopWidth = HtmlValues.getPixelSize(cssBorderToptWidth, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int borderTopWidth = HtmlValues.getPixelSize(cssBorderToptWidth, renderState, window.getWindow(), -1, availHeight);
         return borderTopWidth + "px";
     }
 
@@ -348,7 +361,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getCssFloat() {
         final String ccFloat = style.getCssFloat();
         return Strings.isCssBlank(ccFloat) ? CSSValues.NONE.getValue() :
-                HtmlValues.getPixelSize(ccFloat, renderState, window, 0) + "px";
+                HtmlValues.getPixelSize(ccFloat, renderState, window, 0, availWidth) + "px";
     }
 
      /** {@inheritDoc} */
@@ -482,16 +495,15 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getFontSize() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
         final CSSStyleDeclaration style = element.getStyle();
         int fontSize;
 
         if (Strings.isCssBlank(style.getFontSize()) && parent != null && parent.getStyle().getLength() > 0) {
             final CSSStyleDeclaration currentStyle = parent.getStyle();
-            fontSize = FontValues.getPixelSize(currentStyle.getFontSize(), null, doc.getDefaultView(), -1);
+            fontSize = FontValues.getPixelSize(currentStyle.getFontSize(), null, window, -1);
         } else {
-            fontSize = Float.valueOf(FontValues.getFontSize(style.getFontSize(), doc.getDefaultView(), null)).intValue();
+            fontSize = Float.valueOf(FontValues.getFontSize(style.getFontSize(), window, null)).intValue();
         }
         return fontSize + "px";
     }
@@ -569,20 +581,6 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getHeight() {
         final String cssheight = style.getHeight();
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
-        HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        int availSize = -1;
-
-        if (parent != null) {
-            final CSSStyleDeclaration currentStyle = parent.getStyle();
-            availSize = HtmlValues.getPixelSize(currentStyle.getHeight(), renderState, doc.getDefaultView(), -1);
-        }
-
-        if (availSize == -1) {
-            HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-            HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-            availSize = htmlPanel.getHeight();
-        }
 
         if (Strings.isCssBlank(element.getTextContent()) && (Strings.isCssBlank(cssheight) || CSSValues.AUTO.isEqual(cssheight))) {
             return CSSValues.AUTO.getValue();
@@ -592,7 +590,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             return "-1px";
         }
 
-        final int height = HtmlValues.getPixelSize(cssheight, renderState, doc.getDefaultView(), -1, availSize);
+        final int height = HtmlValues.getPixelSize(cssheight, renderState, window, -1, availHeight);
         return height + "px";
     }
 
@@ -690,7 +688,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getLeft() {
-        return HtmlValues.getPixelSize(Strings.isCssBlank(style.getLeft()) ? "" : style.getLeft(), renderState, window, 0) + "px";
+        return HtmlValues.getPixelSize(Strings.isCssBlank(style.getLeft()) ? "" : style.getLeft(), renderState, window, 0, availWidth) + "px";
     }
 
      /** {@inheritDoc} */
@@ -710,22 +708,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getMarginBottom() {
         final String cssMarginBottom = style.getMarginBottom();
         if (Strings.isCssBlank(cssMarginBottom)) return CSSValues.NONE.getValue();
-
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
-        HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        int availSize = -1;
-        if (parent != null && !(parent instanceof HTMLHtmlElement)) {
-            final CSSStyleDeclaration currentStyle = parent.getStyle();
-            availSize = HtmlValues.getPixelSize(currentStyle.getWidth(), renderState, doc.getDefaultView(), -1);
-        }
-
-        if (availSize == -1) {
-            HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-            HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-            availSize = htmlPanel.getHeight();
-        }
-
-        final int marginBottom = HtmlValues.getPixelSize(cssMarginBottom, renderState, doc.getDefaultView().getWindow(), -1, availSize);
+        final int marginBottom = HtmlValues.getPixelSize(cssMarginBottom, renderState, window.getWindow(), -1, availHeight);
         return marginBottom + "px";
     }
 
@@ -734,22 +717,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getMarginLeft() {
         final String cssMarginLeft = style.getMarginLeft();
         if (Strings.isCssBlank(cssMarginLeft)) return CSSValues.NONE.getValue();
-
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
-        HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        int availSize = -1;
-        if (parent != null && !(parent instanceof HTMLHtmlElement)) {
-            final CSSStyleDeclaration currentStyle = parent.getStyle();
-            availSize = HtmlValues.getPixelSize(currentStyle.getWidth(), renderState, doc.getDefaultView(), -1);
-        }
-
-        if (availSize == -1) {
-            HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-            HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-            availSize = htmlPanel.getWidth();
-        }
-
-        final int marginLeft = HtmlValues.getPixelSize(cssMarginLeft, renderState, doc.getDefaultView().getWindow(), -1, availSize);
+        final int marginLeft = HtmlValues.getPixelSize(cssMarginLeft, renderState, window.getWindow(), -1, availWidth);
         return marginLeft + "px";
     }
 
@@ -758,22 +726,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getMarginRight() {
         final String cssMarginRight = style.getMarginRight();
         if (Strings.isCssBlank(cssMarginRight)) return "0px";
-
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
-        HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        int availSize = -1;
-        if (parent != null && !(parent instanceof HTMLHtmlElement)) {
-            final CSSStyleDeclaration currentStyle = parent.getStyle();
-            availSize = HtmlValues.getPixelSize(currentStyle.getWidth(), renderState, doc.getDefaultView(), -1);
-        }
-
-        if (availSize == -1) {
-            HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-            HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-            availSize = htmlPanel.getWidth();
-        }
-
-        final int marginRight = HtmlValues.getPixelSize(cssMarginRight, renderState, doc.getDefaultView().getWindow(), -1, availSize);
+        final int marginRight = HtmlValues.getPixelSize(cssMarginRight, renderState, window.getWindow(), -1, availWidth);
         return marginRight + "px";
     }
 
@@ -782,22 +735,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getMarginTop() {
         final String cssMarginTop = style.getMarginTop();
         if (Strings.isCssBlank(cssMarginTop)) return CSSValues.NONE.getValue();
-
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
-        HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        int availSize = -1;
-        if (parent != null && !(parent instanceof HTMLHtmlElement)) {
-            final CSSStyleDeclaration currentStyle = parent.getStyle();
-            availSize = HtmlValues.getPixelSize(currentStyle.getWidth(), renderState, doc.getDefaultView(), -1);
-        }
-
-        if (availSize == -1) {
-            HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-            HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-            availSize = htmlPanel.getHeight();
-        }
-
-        final int marginTop = HtmlValues.getPixelSize(cssMarginTop, renderState, doc.getDefaultView().getWindow(), -1, availSize);
+        final int marginTop = HtmlValues.getPixelSize(cssMarginTop, renderState, window.getWindow(), -1, availHeight);
         return marginTop + "px";
     }
 
@@ -858,36 +796,32 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getPaddingBottom() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String cssPaddingBottom = style.getPaddingBottom();
-        final int paddingBottom = HtmlValues.getPixelSize(cssPaddingBottom, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int paddingBottom = HtmlValues.getPixelSize(cssPaddingBottom, renderState, window.getWindow(), -1, availHeight);
         return paddingBottom + "px";
     }
 
      /** {@inheritDoc} */
     @Override
     public String getPaddingLeft() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String cssPaddingLeft = style.getPaddingLeft();
-        final int paddingLeft = HtmlValues.getPixelSize(cssPaddingLeft, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int paddingLeft = HtmlValues.getPixelSize(cssPaddingLeft, renderState, window.getWindow(), -1, availWidth);
         return paddingLeft + "px";
     }
 
      /** {@inheritDoc} */
     @Override
     public String getPaddingRight() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String cssPaddingRight = style.getPaddingRight();
-        final int paddingRight = HtmlValues.getPixelSize(cssPaddingRight, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int paddingRight = HtmlValues.getPixelSize(cssPaddingRight, renderState, window.getWindow(), -1, availWidth);
         return paddingRight + "px";
     }
 
      /** {@inheritDoc} */
     @Override
     public String getPaddingTop() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         final String cssPaddingTop = style.getPaddingTop();
-        final int paddingTop = HtmlValues.getPixelSize(cssPaddingTop, renderState, doc.getDefaultView().getWindow(), -1, 0);
+        final int paddingTop = HtmlValues.getPixelSize(cssPaddingTop, renderState, window.getWindow(), -1, availHeight);
         return paddingTop + "px";
     }
 
@@ -1032,7 +966,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getTop() {
-        return HtmlValues.getPixelSize(Strings.isCssBlank(style.getTop()) ? "" : style.getTop(), renderState, window, 0) + "px";
+        System.out.println(style.getTop());
+        return HtmlValues.getPixelSize(Strings.isCssBlank(style.getTop()) ? "" : style.getTop(), renderState, window, 0, availHeight) + "px";
     }
 
      /** {@inheritDoc} */
@@ -1087,7 +1022,9 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getPosition() {
-        return style.getPosition();
+        final String position = this.getPropertyValue(POSITION);
+        CSSValues pos = CSSValues.get(position);
+        return pos != null && pos != CSSValues.DEFAULT ? pos.getValue() : "static";
     }
 
      /** {@inheritDoc} */
@@ -1106,25 +1043,11 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getWidth() {
         final String csswidth = style.getWidth();
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
-        HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        int availSize = -1;
-        if (parent != null && !(parent instanceof HTMLHtmlElement)) {
-            final CSSStyleDeclaration currentStyle = parent.getStyle();
-            availSize = HtmlValues.getPixelSize(currentStyle.getWidth(), renderState, doc.getDefaultView(), -1);
-        }
-
-        if (availSize == -1) {
-            HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-            HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-            availSize = htmlPanel.getWidth();
-        }
-
         if (Strings.isCssBlank(csswidth) || CSSValues.AUTO.isEqual(csswidth)) {
             return CSSValues.AUTO.getValue();
         }
 
-        final int width = HtmlValues.getPixelSize(csswidth, renderState, doc.getDefaultView(), -1, availSize);
+        final int width = HtmlValues.getPixelSize(csswidth, renderState, window, -1, availWidth);
         return width + "px";
     }
 

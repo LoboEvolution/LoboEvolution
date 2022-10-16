@@ -418,9 +418,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		if (rs.getPosition() == RenderState.POSITION_RELATIVE) {
 			HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
 			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
-
 			final String leftText = rs.getLeft();
-			final String topText = rs.getTop();
 			int left = 0;
 			if (leftText != null) {
 				left = HtmlValues.getPixelSize(leftText, rs, doc.getDefaultView(), 0, availWidth);
@@ -433,6 +431,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			}
 
 			int top = 0;
+			final String topText = rs.getTop();
 			if (topText != null) {
 				top = HtmlValues.getPixelSize(topText, rs, doc.getDefaultView(), top, availHeight);
 			} else {

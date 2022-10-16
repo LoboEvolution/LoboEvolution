@@ -39,9 +39,6 @@ import java.util.logging.Logger;
 
 /**
  * <p>HtmlController class.</p>
- *
- *
- *
  */
 public class HtmlController {
 	private static final HtmlController instance = new HtmlController();

@@ -343,7 +343,7 @@ public enum CSSValues {
 	 * @return a {@link org.loboevolution.html.CSSValues} object.
 	 */
 	public static CSSValues get(String actionName) {
-		CSSValues value = ENUM_MAP.get(actionName);
+		CSSValues value = ENUM_MAP.get(actionName != null ? actionName.toLowerCase() : "");
 		return value == null ? CSSValues.DEFAULT : value;
 	}
 }
