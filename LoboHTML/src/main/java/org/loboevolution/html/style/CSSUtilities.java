@@ -86,7 +86,6 @@ public final class CSSUtilities {
 			final String token = tok.nextToken().trim();
 			String mediaName = Strings.trimForAlphaNumDash(token);
 			mediaName = mediaName.trim();
-			System.out.println("mediaName " + mediaName);
 			if ("screen".equals(mediaName) || "all".equals(mediaName) || "only".equals(mediaName) || "print".equals(mediaName)) {
 				try {
 					MediaQueryList media = window.matchMedia(mediaValues);

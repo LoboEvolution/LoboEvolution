@@ -585,25 +585,42 @@ public class StyleSheetAggregator {
 		if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType) || "print".equalsIgnoreCase(mediaType)) {
 
 			for (final Property property : mediaQuery.getProperties()) {
-				final int val;
-				final String value;
+				int val = -1;
+				System.out.println(property.getName() + " " + property.getValue());
+				if(property.getValue() == null) return "resolution".equals(property.getName()) || "orientation".equals(property.getName());
+				String value = property.getValue().getCssText();
 				switch (property.getName()) {
 					case "max-width":
-					case "max-height":
-						if (property.getValue() == null) return false;
-						value = String.valueOf(property.getValue().getDoubleValue());
-						val = HtmlValues.getPixelSize(value, null, window, -1);
+						if (HtmlValues.isUnits(value)) {
+							val = HtmlValues.getPixelSize(value, null, window, -1);
+						}
 						if (val == -1 || val < window.getInnerWidth()) {
+							return false;
+						}
+						break;
+					case "max-height":
+						if (HtmlValues.isUnits(value)) {
+							val = HtmlValues.getPixelSize(value, null, window, -1);
+						}
+						if (val == -1 || val < window.getInnerHeight()) {
 							return false;
 						}
 						break;
 
 					case "min-width":
-					case "min-height":
 						if (HtmlValues.isUnits(value)) {
 							val = HtmlValues.getPixelSize(value, null, window, -1);
 						}
 						if (val == -1 || val > window.getInnerWidth()) {
+							return false;
+						}
+						break;
+
+					case "min-height":
+						if (HtmlValues.isUnits(value)) {
+							val = HtmlValues.getPixelSize(value, null, window, -1);
+						}
+						if (val == -1 || val > window.getInnerHeight()) {
 							return false;
 						}
 						break;
@@ -643,7 +660,6 @@ public class StyleSheetAggregator {
 						break;
 					case "resolution":
 						val = HtmlValues.resolutionValue(property.getValue());
-						System.out.println(val + " " + window.getScreen().getPixelDepth());
 						if (val == -1 || Math.round(val) != window.getScreen().getPixelDepth()) {
 							return false;
 						}
@@ -680,11 +696,7 @@ public class StyleSheetAggregator {
 			}
 		}
 
-		if(mediaQuery.getProperties().size() == 0 && "print".equalsIgnoreCase(mediaType)){
-			return false;
-		}
-
-		return true;
+		return mediaQuery.getProperties().size() != 0 || !"print".equalsIgnoreCase(mediaType);
 	}
 	
 	private boolean isEmpty(final HTMLElement element) {
