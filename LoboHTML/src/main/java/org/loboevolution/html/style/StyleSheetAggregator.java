@@ -586,7 +586,6 @@ public class StyleSheetAggregator {
 
 			for (final Property property : mediaQuery.getProperties()) {
 				int val = -1;
-				System.out.println(property.getName() + " " + property.getValue());
 				if(property.getValue() == null) return "resolution".equals(property.getName()) || "orientation".equals(property.getName());
 				String value = property.getValue().getCssText();
 				switch (property.getName()) {
