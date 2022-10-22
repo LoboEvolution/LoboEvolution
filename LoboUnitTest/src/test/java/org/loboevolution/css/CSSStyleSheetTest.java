@@ -601,7 +601,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     private void mediaOnLinkTag(final String media, final String[] messages) {
         final String html
                 = "<html><head>\n"
-                + "<link rel='stylesheet' media='" + media + "' href='" + URL_SECOND + "'></link>\n"
+                + "<link rel='stylesheet' media='" + media + "' href='../css/default1.css'></link>\n"
                 + "</head><body>\n"
                 + "<div id='d'>hello</div>\n"
                 + "<script>\n"
@@ -984,7 +984,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     public void mediaRuleminresolutionwithoutunit() {
-        final String[] messages = {"none", "1"};
+        final String[] messages = {"block", "1"};
         mediaRule("screen and (min-resolution: 10)", messages);
     }
 
@@ -998,7 +998,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     public void mediaRuleportrait() {
-        final String[] messages = {"none", "1"};
+        final String[] messages = {"block", "1"};
         mediaRule("screen and (orientation: portrait)", messages);
     }
 

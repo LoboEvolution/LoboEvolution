@@ -86,7 +86,8 @@ public final class CSSUtilities {
 			final String token = tok.nextToken().trim();
 			String mediaName = Strings.trimForAlphaNumDash(token);
 			mediaName = mediaName.trim();
-			if ("screen".equals(mediaName) || "all".equals(mediaName) || "only".equals(mediaName)) {
+			System.out.println("mediaName " + mediaName);
+			if ("screen".equals(mediaName) || "all".equals(mediaName) || "only".equals(mediaName) || "print".equals(mediaName)) {
 				try {
 					MediaQueryList media = window.matchMedia(mediaValues);
 					return media.isMatches();
@@ -95,7 +96,7 @@ public final class CSSUtilities {
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	/**
@@ -110,7 +111,7 @@ public final class CSSUtilities {
 	public static CSSStyleSheetImpl parseCssExternal(String href, URL scriptURL, String baseURI, boolean test) throws Exception {
 		CSSOMParser parser = new CSSOMParser();
 		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
-		String source = !test ? ExternalResourcesStore.getSourceCache(scriptURI, "CSS") : "";
+		String source = !test ? ExternalResourcesStore.getSourceCache(scriptURI, "CSS", test) : ExternalResourcesStore.sourceResponse(scriptURI, "CSS", test);
 		InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
 		return parser.parseStyleSheet(is, null);
 	}

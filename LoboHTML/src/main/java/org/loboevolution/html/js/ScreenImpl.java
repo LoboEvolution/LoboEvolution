@@ -96,7 +96,7 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	 * @return a int.
 	 */
 	public int getPixelDepth() {
-		return getColorDepth();
+		return 96;
 	}
 
 	/**

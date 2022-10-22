@@ -280,7 +280,7 @@ public class HtmlValues {
         }
         
         if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
-        	String units = cssValue.getCssText().substring(cssValue.getCssText().length() - 2);
+        	String units = cssValue.getCssText().substring(cssValue.getCssText().length() - 3);
         	switch (units) {
         	case "dpi":
         		return (int)cssValue.getDoubleValue();
@@ -289,7 +289,10 @@ public class HtmlValues {
         	case "dppx":
         		return (int)( 96 * cssValue.getDoubleValue());
         	default:
-        		return (int)cssValue.getDoubleValue();
+				if (HtmlValues.isUnits(cssValue.getCssText())) {
+					return HtmlValues.getPixelSize(cssValue.getCssText(), null, null, -1);
+				}
+				return -1;
         	}
        }
         return -1;

@@ -600,46 +600,55 @@ public class StyleSheetAggregator {
 
 					case "min-width":
 					case "min-height":
-						if (property.getValue() == null) return false;
-						value = String.valueOf(property.getValue().getDoubleValue());
-						val = HtmlValues.getPixelSize(value, null, window, -1);
+						if (HtmlValues.isUnits(value)) {
+							val = HtmlValues.getPixelSize(value, null, window, -1);
+						}
 						if (val == -1 || val > window.getInnerWidth()) {
 							return false;
 						}
 						break;
 
 					case "max-device-width":
-					case "max-device-height":
-						if (property.getValue() == null) return false;
-						value = String.valueOf(property.getValue().getDoubleValue());
-						val = HtmlValues.getPixelSize(value, null, window, -1);
+						if (HtmlValues.isUnits(value)) {
+							val = HtmlValues.getPixelSize(value, null, window, -1);
+						}
 						if (val == -1 || val < window.getScreen().getWidth()) {
+							return false;
+						}
+						break;
+					case "max-device-height":
+						if (HtmlValues.isUnits(value)) {
+							val = HtmlValues.getPixelSize(value, null, window, -1);
+						}
+						if (val == -1 || val < window.getScreen().getHeight()) {
 							return false;
 						}
 						break;
 
 					case "min-device-width":
-					case "min-device-height":
-						if (property.getValue() == null) return false;
-						value = String.valueOf(property.getValue().getDoubleValue());
-						val = HtmlValues.getPixelSize(value, null, window, -1);
+						if (HtmlValues.isUnits(value)) {
+							val = HtmlValues.getPixelSize(value, null, window, -1);
+						}
 						if (val == -1 || val > window.getScreen().getWidth()) {
 							return false;
 						}
 						break;
-					case "resolution":
-						if (property.getValue() == null) return false;
-						final CSSValueImpl propValue = property.getValue();
-						val = HtmlValues.resolutionValue(propValue);
-						if (propValue == null) {
-							return true;
+					case "min-device-height":
+						if (HtmlValues.isUnits(value)) {
+							val = HtmlValues.getPixelSize(value, null, window, -1);
 						}
+						if (val == -1 || val > window.getScreen().getHeight()) {
+							return false;
+						}
+						break;
+					case "resolution":
+						val = HtmlValues.resolutionValue(property.getValue());
+						System.out.println(val + " " + window.getScreen().getPixelDepth());
 						if (val == -1 || Math.round(val) != window.getScreen().getPixelDepth()) {
 							return false;
 						}
 						break;
 					case "max-resolution":
-						if (property.getValue() == null) return false;
 						val = HtmlValues.resolutionValue(property.getValue());
 						if (val == -1 || val < window.getScreen().getPixelDepth()) {
 							return false;
@@ -647,7 +656,6 @@ public class StyleSheetAggregator {
 						break;
 
 					case "min-resolution":
-						if (property.getValue() == null) return false;
 						val = HtmlValues.resolutionValue(property.getValue());
 						if (val == -1 || val > window.getScreen().getPixelDepth()) {
 							return false;
@@ -655,18 +663,11 @@ public class StyleSheetAggregator {
 						break;
 
 					case "orientation":
-						if (property.getValue() == null) return true;
-						final CSSValueImpl cssValue = property.getValue();
-						if (cssValue == null) {
-							return true;
-						}
-
-						final String orient = cssValue.getCssText();
-						if ("portrait".equals(orient)) {
+						if ("portrait".equals(value)) {
 							if (window.getInnerWidth() > window.getInnerHeight()) {
 								return false;
 							}
-						} else if ("landscape".equals(orient)) {
+						} else if ("landscape".equals(value)) {
 							if (window.getInnerWidth() < window.getInnerHeight()) {
 								return false;
 							}
@@ -677,9 +678,13 @@ public class StyleSheetAggregator {
 					default:
 				}
 			}
-			return true;
 		}
-		return false;
+
+		if(mediaQuery.getProperties().size() == 0 && "print".equalsIgnoreCase(mediaType)){
+			return false;
+		}
+
+		return true;
 	}
 	
 	private boolean isEmpty(final HTMLElement element) {

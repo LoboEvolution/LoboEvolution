@@ -59,7 +59,7 @@ public class ExternalResourcesStore {
 	 * @param type a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getSourceCache(String baseUrl, String type) {
+	public static String getSourceCache(String baseUrl, String type, boolean test) {
 		String source = "";
 		try (Connection conn = DriverManager.getConnection(DB_PATH);
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SOURCE_CACHE)) {
@@ -72,8 +72,8 @@ public class ExternalResourcesStore {
 			}
 
 			if (Strings.isBlank(source)) {
-				deleteCache(baseUrl, type);
-				source = sourceResponse(baseUrl, type);
+				if(!test) deleteCache(baseUrl, type);
+				source = sourceResponse(baseUrl, type, test);
 			}
 
 		} catch (Exception err) {
@@ -106,7 +106,7 @@ public class ExternalResourcesStore {
 		}
 	}
 
-	private static String sourceResponse(String scriptURI, String type) {
+	public static String sourceResponse(String scriptURI, String type, boolean test) {
 		String response = "";
 		URL url = null;
 		try {
@@ -134,7 +134,7 @@ public class ExternalResourcesStore {
 			}
 
 			response = HttpNetwork.getSource(url.toString());
-			saveCache(scriptURI, response, type);
+			if(!test) saveCache(scriptURI, response, type);
 			return response;
 		} catch (Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);

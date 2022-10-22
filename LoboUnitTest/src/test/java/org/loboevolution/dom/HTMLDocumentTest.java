@@ -296,7 +296,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
                         + "    alert(document.all);\n"
                         + "  }\n"
                         + "</script></head><body onload='test()'>\n"
-                        + "</body></html>";   final String[] messages = {"[object HTMLCollection]"};
+                        + "</body></html>";
+        final String[] messages = {"[object HTMLAllCollection]"};
         checkHtmlAlert(html, messages);
     }
 
@@ -661,7 +662,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 + "  <div id='tester'></div>\n"
                 + "</body></html>";
 
-        final String[] messages = {"myAttr", ""};
+        final String[] messages = {"myAttr", null};
         checkHtmlAlert(html, messages);
     }
 

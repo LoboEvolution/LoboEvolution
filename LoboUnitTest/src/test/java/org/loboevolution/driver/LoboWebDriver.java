@@ -42,6 +42,8 @@ public class LoboWebDriver {
 	/** The Constant logger. */
 	protected static final Logger logger = Logger.getLogger(LoboWebDriver.class.getName());
 
+	private static String url = LoboUnitTest.class.getResource("/org/lobo/html/htmlsample.html").toString();
+
 	/**
 	 * <p>loadHtml.</p>
 	 *
@@ -58,7 +60,9 @@ public class LoboWebDriver {
 			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
 			rendererContext.setTest(true);
 			ucontext.setUserAgentEnabled(true);
-			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, "http://www.example.com/xhtml/htmlsample.html");
+
+
+			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, url);
 			doc.load();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +86,7 @@ public class LoboWebDriver {
 			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
 			rendererContext.setTest(true);
 			ucontext.setUserAgentEnabled(true);
-			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, "http://www.example.com/xhtml/htmlsample.html");
+			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, url);
 			doc.load();
 		} catch (Exception e) {
 			e.printStackTrace();
