@@ -17,13 +17,9 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * $Id: XPathNSResolverImpl.java 1225426 2011-12-29 04:13:08Z mrglavas $
- */
 
 package org.loboevolution.html.dom.xpath;
 
-import org.apache.xml.utils.Constants;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.xpath.XPathNSResolver;
 
@@ -31,6 +27,11 @@ import org.loboevolution.html.xpath.XPathNSResolver;
  * <p>XPathNSResolverImpl class.</p>
  */
 public class XPathNSResolverImpl implements XPathNSResolver {
+
+    private String
+            S_XMLNAMESPACEURI = "http://www.w3.org/XML/1998/namespace",
+            S_XSLNAMESPACEURL = "http://www.w3.org/1999/XSL/Transform",
+            S_OLDXSLNAMESPACEURL = "http://www.w3.org/XSL/Transform/1.0";
 
     private Node parent;
 
@@ -51,7 +52,7 @@ public class XPathNSResolverImpl implements XPathNSResolver {
         String namespace = null;
 
         if (prefix.equals("xml")) {
-            namespace = Constants.S_XMLNAMESPACEURI;
+            namespace = S_XMLNAMESPACEURI;
         } else {
             int type;
             while ((null != parent) && (null == namespace)
@@ -70,7 +71,7 @@ public class XPathNSResolverImpl implements XPathNSResolver {
                     if (parent.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
                         return parent.getNamespaceURI();
                     }
-                    NamedNodeMap nnm = ((Element) parent).getAttributes();
+                    NamedNodeMap nnm = parent.getAttributes();
                     for (int i = 0; i < nnm.getLength(); i++) {
                         Node attr = nnm.item(i);
                         String aname = attr.getNodeName();

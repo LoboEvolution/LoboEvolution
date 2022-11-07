@@ -32,7 +32,7 @@ import org.loboevolution.html.node.js.geom.DOMRect;
  */
 public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, ParentNode {
 
-    /**
+     /**
      * Allows for manipulation of element's class content attribute as a set of whitespace-separated tokens through a DOMTokenList object.
      *
      * @return a {@link org.loboevolution.html.node.DOMTokenList} object.
@@ -330,13 +330,6 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * @return a boolean.
      */
     boolean hasAttributeNS(String namespace, String localName);
-
-    /**
-     * Returns true if element has attributes, and false otherwise.
-     *
-     * @return a boolean.
-     */
-    boolean hasAttributes();
 
     /**
      * <p>hasPointerCapture.</p>

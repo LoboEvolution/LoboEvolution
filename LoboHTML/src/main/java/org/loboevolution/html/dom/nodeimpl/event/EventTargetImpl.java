@@ -142,4 +142,9 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	public void setNodeValue(String nodeValue) throws DOMException {
 		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "Cannot set node value of document");
 	}
+
+	@Override
+	public boolean hasAttributes() {
+		return false;
+	}
 }

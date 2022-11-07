@@ -23,10 +23,10 @@ package org.loboevolution.html.js.xml;
 import org.loboevolution.html.node.Document;
 import org.xml.sax.*;
 
-import javax.xml.XMLConstants;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import org.loboevolution.javax.xml.XMLConstants;
+import org.loboevolution.javax.xml.parsers.ParserConfigurationException;
+import org.loboevolution.javax.xml.parsers.SAXParser;
+import org.loboevolution.javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.util.logging.Logger;
 

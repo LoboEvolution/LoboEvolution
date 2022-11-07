@@ -19,8 +19,6 @@
  */
 package org.loboevolution.html.dom.svg;
 
-import org.w3c.dom.css.RGBColor;
-
 /**
  * <p>SVGColor interface.</p>
  *
@@ -44,13 +42,6 @@ public interface SVGColor {
 	 * @return a short.
 	 */
 	short getColorType();
-
-    /**
-     * <p>getRGBColor.</p>
-     *
-     * @return a {@link org.w3c.dom.css.RGBColor} object.
-     */
-    RGBColor getRGBColor();
 
 	/**
 	 * <p>getICCColor.</p>

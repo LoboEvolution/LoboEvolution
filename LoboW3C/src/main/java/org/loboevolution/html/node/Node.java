@@ -354,4 +354,11 @@ public interface Node extends EventTarget {
 	short compareDocumentPosition(Node other);
 
     boolean isSupported(String xml, String s);
+
+	/**
+	 * Returns true if element has attributes, and false otherwise.
+	 *
+	 * @return a boolean.
+	 */
+	boolean hasAttributes();
 }

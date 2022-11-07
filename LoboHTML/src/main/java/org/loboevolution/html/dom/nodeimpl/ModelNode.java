@@ -28,11 +28,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * A generic node interface. The idea is that implementors could be W3C nodes or
- * not.
- *
- *
- *
+ * A generic node interface. The idea is that implementors could be W3C nodes or not.
  */
 public interface ModelNode {
 

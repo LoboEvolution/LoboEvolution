@@ -52,17 +52,14 @@ import org.loboevolution.html.node.Node;
  * future versions of the XPath specification, the definition of a namespace
  * node may be changed incomatibly, in which case incompatible changes to
  * field values may be required to implement versions beyond XPath 1.0.
- * <p>See also the <a href='http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820'>Document Object Model (DOM) Level 3 XPath Specification</a>.
- *
- *
- *
+ * <p>See also the <a href=http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820>Document Object Model (DOM) Level 3 XPath Specification</a>.
  */
 public interface XPathNamespace extends Node {
-    // XPathNodeType
+
     /**
      * The node is a Namespace.
      */
-    public static final short XPATH_NAMESPACE_NODE      = 13;
+    public static final short XPATH_NAMESPACE_NODE = 13;
 
     /**
      * The Element on which the namespace was in scope when it
@@ -72,6 +69,6 @@ public interface XPathNamespace extends Node {
      *
      * @return a {@link org.loboevolution.html.node.Element} object.
      */
-    public Element getOwnerElement();
+    Element getOwnerElement();
 
 }

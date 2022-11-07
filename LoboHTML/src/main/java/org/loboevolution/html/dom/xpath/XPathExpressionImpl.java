@@ -24,17 +24,18 @@
 package org.loboevolution.html.dom.xpath;
 
 import com.gargoylesoftware.css.dom.DOMException;
-import org.apache.xpath.XPath;
-import org.apache.xpath.XPathContext;
-import org.apache.xpath.objects.XObject;
-import org.apache.xpath.res.XPATHErrorResources;
-import org.apache.xpath.res.XPATHMessages;
+import org.loboevolution.apache.xpath.XPath;
+import org.loboevolution.apache.xpath.XPathContext;
+import org.loboevolution.apache.xpath.objects.XObject;
+import org.loboevolution.apache.xpath.res.XPATHErrorResources;
+import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 
+import org.loboevolution.javax.xml.transform.TransformerException;
 import java.util.Objects;
 
 /**
@@ -54,8 +55,6 @@ import java.util.Objects;
  * </p>
  *
  * @see org.loboevolution.html.xpath.XPathExpression
- *
- *
  */
 public class XPathExpressionImpl implements XPathExpression {
 
@@ -122,19 +121,16 @@ public class XPathExpressionImpl implements XPathExpression {
 		XPathContext xpathSupport = new XPathContext(false);
 		XObject xobj = null;
 
-		/*if (null != m_doc) {
-			//xpathSupport.getDTMHandleFromNode(m_doc);
+		if (null != m_doc) {
+			xpathSupport.getDTMHandleFromNode(m_doc);
 		}
 
 		try {
 			xobj = m_xpath.execute(xpathSupport, contextNode, null);
 		} catch (TransformerException te) {
-			// What should we do here?
 			throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, te.getMessageAndLocation());
 		}
-		*/
 
 		return new XPathResultImpl(type, xobj, contextNode, m_xpath);
 	}
-
 }
