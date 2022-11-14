@@ -35,7 +35,7 @@ public class AboutAction extends AbstractAction {
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
-		final String text = "This is Lobo Evolution 3.0, a pure Java web browser.\r\n"
+		final String text = "This is Lobo Evolution 3.1, a pure Java web browser.\r\n"
 				+ "Copyright (c) 2022 The Lobo Evolution.\r\n https://github.com/LoboEvolution/LoboEvolution/";
 		JOptionPane.showMessageDialog(null, text, "About", JOptionPane.INFORMATION_MESSAGE);
 
