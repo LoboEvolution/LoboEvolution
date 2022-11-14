@@ -179,31 +179,35 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         if (Strings.isBlank(value) || "null".equals(value)) {
             if (Strings.isBlank(value)) value = "";
             style.setProperty(propertyName, value, priority);
-        } else if (HtmlValues.isUnits(value)) {
-            final int val = HtmlValues.getPixelSize(value, null, null, -1);
-            if (val > -1) {
-                style.setProperty(propertyName, value, priority);
-            }
-        } else if (propertyLenght.get(propertyName) != null && propertyLenght.get(propertyName)) {
+        } else {
+            value = value.toLowerCase().trim();
 
-            if (DOUBLE_PATTERN.matcher(value).matches()) {
-                final Double d = Double.parseDouble(value);
-                if (!Double.isNaN(d) && !Double.isInfinite(d)) {
-                    value += "px";
+            if (HtmlValues.isUnits(value)) {
+                final int val = HtmlValues.getPixelSize(value, null, null, -1);
+                if (val > -1) {
                     style.setProperty(propertyName, value, priority);
                 }
-            } else if (NUMERIC_PATTERN.matcher(value).matches()) {
-                value += "px";
-                style.setProperty(propertyName, value, priority);
-            } else if (CSSValues.AUTO.getValue().equals(value) ||
-                    CSSValues.INHERIT.getValue().equals(value) ||
-                    CSSValues.INITIAL.getValue().equals(value) ||
-                    value.endsWith("%")) {
+            } else if (propertyLenght.get(propertyName) != null && propertyLenght.get(propertyName)) {
+
+                if (DOUBLE_PATTERN.matcher(value).matches()) {
+                    final Double d = Double.parseDouble(value);
+                    if (!Double.isNaN(d) && !Double.isInfinite(d)) {
+                        value += "px";
+                        style.setProperty(propertyName, value, priority);
+                    }
+                } else if (NUMERIC_PATTERN.matcher(value).matches()) {
+                    value += "px";
+                    style.setProperty(propertyName, value, priority);
+                } else if (CSSValues.AUTO.getValue().equals(value) ||
+                        CSSValues.INHERIT.getValue().equals(value) ||
+                        CSSValues.INITIAL.getValue().equals(value) ||
+                        value.endsWith("%")) {
+                    style.setProperty(propertyName, value, priority);
+                }
+
+            } else {
                 style.setProperty(propertyName, value, priority);
             }
-
-        } else {
-            style.setProperty(propertyName, value, priority);
         }
     }
 

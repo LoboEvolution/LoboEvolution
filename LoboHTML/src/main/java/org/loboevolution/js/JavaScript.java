@@ -19,6 +19,7 @@
  */
 package org.loboevolution.js;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.Document;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -97,9 +98,9 @@ public class JavaScript {
 			} else if (javascriptObject instanceof Integer) {
 				return javascriptObject;
 			} else if (javascriptObject instanceof String) {
-				return Integer.valueOf((String) javascriptObject);
+				return Strings.isNumeric((String) javascriptObject) ? Integer.valueOf((String) javascriptObject) : null;
 			} else if (javascriptObject instanceof Short) {
-				return (int) ((Short) javascriptObject).shortValue();
+				return (int) (Short) javascriptObject;
 			} else if (javascriptObject instanceof Long) {
 				return ((Long) javascriptObject).intValue();
 			} else if (javascriptObject instanceof Float) {

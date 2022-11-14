@@ -117,7 +117,7 @@ public final class Strings {
 	public static boolean isNumeric(String keyCode) {
 		try {
 			if (Strings.isBlank(keyCode)) {
-				return true;
+				return false;
 			}
 			Float.parseFloat(keyCode);
 			return true;

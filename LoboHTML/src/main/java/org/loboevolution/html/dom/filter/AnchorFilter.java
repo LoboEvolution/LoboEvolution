@@ -19,14 +19,15 @@
  */
 package org.loboevolution.html.dom.filter;
 
+import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Node;
 
 /**
  * The Class AnchorFilter.
- *
- *
- *
  */
 public class AnchorFilter implements NodeFilter {
 
@@ -34,6 +35,14 @@ public class AnchorFilter implements NodeFilter {
 	@Override
 	public boolean acceptNode(Node node) {
 		String nodeName = node.getNodeName();
-		return "a".equalsIgnoreCase(nodeName);
+		if ("a".equalsIgnoreCase(nodeName)) {
+			NamedNodeMap attributes = node.getAttributes();
+			for (Attr attribute : Nodes.iterable(attributes)) {
+				if ("name".equals(attribute.getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

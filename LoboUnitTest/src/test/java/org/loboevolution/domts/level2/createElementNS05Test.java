@@ -51,7 +51,7 @@ public class createElementNS05Test extends LoboUnitTest {
     @Test
     public void runTest() {
         String namespaceURI = "http://www.nist.gov";
-        String qualifiedName = "gov:faculty";
+        String qualifiedName = "GOV:FACULTY";
         Document doc;
         Element newElement;
         String elementName;

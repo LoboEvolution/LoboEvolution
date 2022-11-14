@@ -53,31 +53,18 @@ public class namednodemapremovenameditemns06Test extends LoboUnitTest {
         Document doc;
         NamedNodeMap attributes;
         Element element;
-        Attr attribute;
         HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName( "employee");
+        elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-
-        {
-            boolean success = false;
-            try {
-                attribute = attributes.removeNamedItemNS("http://www.Nist.gov", "domestic");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue("throw_NOT_FOUND_ERR", success);
+        boolean success = false;
+        try {
+            attributes.removeNamedItemNS("http://www.Nist.gov", "domestic");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapremovenameditemns06";
+        assertTrue("throw_NOT_FOUND_ERR", success);
     }
 }
 

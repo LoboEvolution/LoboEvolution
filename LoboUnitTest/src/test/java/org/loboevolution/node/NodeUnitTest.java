@@ -497,7 +497,7 @@ public class NodeUnitTest extends LoboUnitTest {
 
     @Test
     public void insertBeforenullRef() {
-        final String[] messages = {"3", "span"};
+        final String[] messages = {"3", "SPAN"};
         insertBefore("aNode.insertBefore(newNode, null);", messages);
     }
 

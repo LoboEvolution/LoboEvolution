@@ -59,7 +59,11 @@ public class CSSRuleListImpl extends AbstractList<CSSStyleRule>  implements CSSR
         } else {
             ruls = cssRuleList.getRules();
         }
-        ruls.forEach(abstractCSSRule -> add(new CSSStyleRuleImpl(abstractCSSRule)));
+
+        ruls.forEach(abstractCSSRule -> {
+            if (!(abstractCSSRule instanceof com.gargoylesoftware.css.dom.CSSUnknownRuleImpl))
+                add(new CSSStyleRuleImpl(abstractCSSRule));
+        });
     }
 
     @Override

@@ -409,7 +409,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         Attr classattr = elm.getAttributeNode("class");
         assertNotNull(classattr);
         assertEquals("ent\"ity", classattr.getValue());
-        assertEquals("class=\"ent&quot;ity\"", classattr.toString());
+        assertEquals("[object Attr]", classattr.toString());
     }
 
     @Test
@@ -448,7 +448,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         p.setAttributeNode(attr);
         assertEquals("para>Id", p.getAttribute("id"));
         assertEquals("para>Id", attr.getValue());
-        assertEquals("id=\"para&gt;Id\"", attr.toString());
+        assertEquals("[object Attr]", attr.toString());
         attr.setValue("para<Id");
         assertEquals("para<Id", attr.getValue());
         assertEquals("[object Attr]", attr.toString());
@@ -651,7 +651,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         Element li = document.createElement("li");
         li.setAttribute("class", "liclass");
         list.item(0).getParentNode().appendChild(li);
-        assertEquals(7, list.getLength());
+        assertEquals(6, list.getLength());
         list = document.getElementsByClassName("xxxxxx");
         assertNotNull(list);
         assertEquals(0, list.getLength());
@@ -841,7 +841,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         Text text = document.createTextNode("p three");
         p.appendChild(text);
         p.appendChild(document.createTextNode("p four"));
-        assertEquals(4, p.getChildNodes().getLength());
+        assertEquals(3, p.getChildNodes().getLength());
         assertEquals("foo", text.replaceWholeText("foo").getData());
         assertEquals(1, p.getChildNodes().getLength());
     }
@@ -853,7 +853,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         Text text = document.createTextNode("p three");
         p.appendChild(text);
         p.appendChild(document.createTextNode("p four"));
-        assertEquals(4, p.getChildNodes().getLength());
+        assertEquals(3, p.getChildNodes().getLength());
         assertNull(text.replaceWholeText(""));
         assertFalse(p.hasChildNodes());
     }
@@ -866,7 +866,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         Text text = document.createTextNode("p four");
         p.appendChild(text);
         p.appendChild(document.createTextNode("p five"));
-        assertEquals(5, p.getChildNodes().getLength());
+        assertEquals(4, p.getChildNodes().getLength());
         text.replaceWholeText("foo");
         assertEquals(4, p.getChildNodes().getLength());
     }
@@ -1071,11 +1071,11 @@ public class HTMLDocumentTest extends LoboUnitTest {
         Text text = document.createTextNode("data");
         assertEquals("[object Text]", text.toString());
         text.setData("hello</style>");
-        assertEquals("hello&lt;/style&gt;", text.toString());
+        assertEquals("[object Text]", text.toString());
         style.appendChild(text);
-        assertEquals("hello&lt;/style>", text.toString());
+        assertEquals("[object Text]>", text.toString());
         text.setData("hello</foo>");
-        assertEquals("hello</foo>", text.toString());
+        assertEquals("[object Text]", text.toString());
         Element cloned = (Element) style.cloneNode(true);
         assertTrue(style.isEqualNode(cloned));
         CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) ((HTMLLinkElement) style).getSheet();

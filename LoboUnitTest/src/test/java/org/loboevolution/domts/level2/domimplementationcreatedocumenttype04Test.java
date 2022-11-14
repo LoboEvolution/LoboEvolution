@@ -26,8 +26,9 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -53,11 +54,10 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
     public void runTest() {
         DocumentImpl doc;
         DOMImplementation domImpl;
-        DocumentType newDocType;
         String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
         String systemId = "dom2.dtd";
         String qualifiedName;
-        java.util.List qualifiedNames = new java.util.ArrayList();
+        List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("{");
         qualifiedNames.add("}");
         qualifiedNames.add("'");
@@ -77,12 +77,12 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
         doc.setTest(true);
         domImpl = doc.getImplementation();
         for (int indexN10073 = 0; indexN10073 < qualifiedNames.size(); indexN10073++) {
-            qualifiedName = (String) qualifiedNames.get(indexN10073);
+            qualifiedName = qualifiedNames.get(indexN10073);
 
             {
                 boolean success = false;
                 try {
-                    newDocType = domImpl.createDocumentType(qualifiedName, publicId, systemId);
+                    domImpl.createDocumentType(qualifiedName, publicId, systemId);
                 } catch (DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }

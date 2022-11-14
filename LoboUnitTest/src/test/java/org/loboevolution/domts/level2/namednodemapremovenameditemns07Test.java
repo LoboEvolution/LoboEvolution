@@ -49,29 +49,24 @@ public class namednodemapremovenameditemns07Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
         Document doc;
         NamedNodeMap attributes;
         Element element;
-        Attr attribute;
         HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName( "employee");
+        elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-
-        {
-            boolean success = false;
-            try {
-                attribute = attributes.removeNamedItem( "domestic");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue("throw_NOT_FOUND_ERR", success);
+        boolean success = false;
+        try {
+            attributes.removeNamedItemNS("http://www.nist.gov", "domestic");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue("throw_NOT_FOUND_ERR", success);
     }
 
     /**

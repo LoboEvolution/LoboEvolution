@@ -52,7 +52,7 @@ public class nodehasattributes02Test extends LoboUnitTest {
         boolean hasAttributes;
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
-        hasAttributes = ((Element)docType).hasAttributes();
+        hasAttributes = docType.hasAttributes();
         assertFalse("nodehasattributes02", hasAttributes);
     }
 

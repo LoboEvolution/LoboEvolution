@@ -102,6 +102,10 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Element createElement(String tagName) {
 
+		if (Strings.isNotBlank(tagName) && tagName.equals(":")) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
 		if (Strings.isNotBlank(tagName) && tagName.contains(":")) {
 			tagName = tagName.split("")[1];
 			if (!Strings.isValidString(tagName)) {
@@ -382,10 +386,6 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			if (!Strings.isValidString(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
-		}
-
-		if (Strings.isBlank(namespaceURI)) {
-			throw new DOMException(DOMException.NAMESPACE_ERR, "The namespace URI provided is not valid");
 		}
 
 		if ("xmlns".equals(qualifiedName) && !XMLNS_NAMESPACE_URI.equals(namespaceURI)) {
@@ -791,10 +791,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getApplets() {
-		synchronized (this) {
-			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ElementFilter("APPLET")).toArray()));
-			return new HTMLCollectionImpl(this, list);
-		}
+		return new HTMLCollectionImpl(this, new ArrayList<>());
 	}
 
 	/** {@inheritDoc} */
@@ -1095,6 +1092,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				return df;
 			case NodeType.PROCESSING_INSTRUCTION_NODE:
 				return createProcessingInstruction(importedNode.getNodeName(), importedNode.getNodeValue());
+			case NodeType.ENTITY_REFERENCE_NODE:
+				return createEntityReference(importedNode.getNodeName());
 			default:
 				throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Node Not supported.");
 		}

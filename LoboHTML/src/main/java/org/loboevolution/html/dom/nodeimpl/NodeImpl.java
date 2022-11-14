@@ -246,7 +246,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	@Override
 	public boolean isSupported(String xml, String s) {
-		return false;
+		return "xml".equalsIgnoreCase(xml) || "core".equalsIgnoreCase(xml);
 	}
 
 	/** {@inheritDoc} */

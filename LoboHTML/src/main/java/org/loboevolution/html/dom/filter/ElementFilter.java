@@ -29,9 +29,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>ElementFilter class.</p>
- *
- *
- *
  */
 public final class ElementFilter implements NodeFilter {
 	private final String elementName;

@@ -24,10 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -58,21 +55,21 @@ public class namednodemapremovenameditemns02Test extends LoboUnitTest {
     public void runTest() {
         Document doc;
         NamedNodeMap attributes;
-        Element element;
+        Node element;
         Attr attribute;
         HTMLCollection elementList;
         String attrValue;
         String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName( "employee");
-        element = (Element) elementList.item(1);
+        elementList = doc.getElementsByTagNameNS("http://www.usa.com", "employee");
+        System.out.println(elementList.getLength());
+        element = elementList.item(1);
         attributes = element.getAttributes();
+        attribute = attributes.removeNamedItemNS(nullNS, "defaultAttr");
         attribute = attributes.getNamedItemNS(nullNS, "defaultAttr");
         attrValue = attribute.getNodeValue();
-        assertEquals("namednodemapremovenameditemns02_attrValue", "defaultVal", attrValue);
-        attribute = attributes.removeNamedItemNS(nullNS, "defaultAttr");
         assertNotNull("namednodemapremovenameditemns02", attribute);
+        assertEquals("namednodemapremovenameditemns02_attrValue", "defaultVal", attrValue);
     }
 }
-

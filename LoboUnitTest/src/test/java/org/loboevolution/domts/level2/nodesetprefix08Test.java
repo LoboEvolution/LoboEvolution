@@ -34,7 +34,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * The method setPrefix raises a NAMESPACE_ERR if this node is an attribute and the qualifiedName
- * of this node is "xmlns
+ * of this node is "xmlns"
  * Retreive an attribute node whose qualifiedName is xmlns.  Try setting a prefix on this node.
  * Check if the NAMESPACE_ERR was thrown.
  *

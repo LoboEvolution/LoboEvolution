@@ -53,13 +53,12 @@ public class createDocumentType03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://ecommerce.org/schema";
         String qualifiedName = "prefix:myDoc";
         String publicId = "http://www.localhost.com";
         String systemId = "myDoc.dtd";
         DocumentImpl doc;
         DOMImplementation domImpl;
-        DocumentType newType = null;
+        DocumentType newType;
 
         String nodeName;
         String nodeValue;

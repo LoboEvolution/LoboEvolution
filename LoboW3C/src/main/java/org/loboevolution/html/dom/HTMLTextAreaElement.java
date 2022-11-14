@@ -70,9 +70,9 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * <p>setCols.</p>
      *
-     * @param cols a int.
+     * @param cols a {@link java.lang.Integer} object.
      */
-    void setCols(int cols);
+    void setCols(Integer cols);
 
     /**
      * Sets or retrieves the initial contents of the object.
@@ -238,9 +238,9 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * <p>setRows.</p>
      *
-     * @param rows a int.
+     * @param rows a {@link java.lang.Integer} object.
      */
-    void setRows(int rows);
+    void setRows(Integer rows);
 
 
     /**

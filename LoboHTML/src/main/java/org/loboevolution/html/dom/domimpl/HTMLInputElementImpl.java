@@ -116,7 +116,7 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	@Override
 	public String getType() {
 		final String type = getAttribute("type");
-		return type == null ? null : type.toLowerCase();
+		return type == null ? "text" : type.toLowerCase();
 	}
 
 	/** {@inheritDoc} */

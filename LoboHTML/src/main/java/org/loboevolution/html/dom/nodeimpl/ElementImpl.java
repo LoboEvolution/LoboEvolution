@@ -1072,6 +1072,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		String cssFloat = currentStyle.getFloat();
 		int sizeWidth = preferredSize.width;
 
+		if (getParentNode() == null || CSSValues.INLINE.isEqual(display) || CSSValues.NONE.isEqual(display)) {
+			return 0;
+		}
+
 		if (this instanceof HTMLBodyElementImpl) {
 			width = String.valueOf(doc.getDefaultView().getInnerWidth());
 		}
@@ -1098,12 +1102,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			}
 		}
 
-		if (!CSSValues.INLINE.isEqual(display) && (Strings.isBlank(width) || "auto".equalsIgnoreCase(width) || "-1px".equals(width))) {
+		if (Strings.isNotBlank(display) && !CSSValues.INLINE.isEqual(display) && (Strings.isBlank(width) || "auto".equalsIgnoreCase(width) || "-1px".equals(width))) {
 			width = "100%";
-		}
-
-		if (CSSValues.INLINE.isEqual(display)) {
-			width = "0";
 		}
 
 		int widthSize = HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, sizeWidth);
@@ -1141,7 +1141,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		String dispaly = currentStyle.getDisplay();
 		int sizeHeight = preferredSize.height;
 
-		if(CSSValues.NONE.isEqual(dispaly)){
+		if (getParentNode() == null || CSSValues.NONE.isEqual(dispaly)) {
 			return 0;
 		}
 

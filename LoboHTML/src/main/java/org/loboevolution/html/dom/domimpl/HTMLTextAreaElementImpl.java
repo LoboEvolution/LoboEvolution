@@ -115,7 +115,7 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCols(int cols) {
+	public void setCols(Integer cols) {
 		setAttribute("cols", String.valueOf(cols));
 		
 	}
@@ -129,7 +129,7 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRows(int rows) {
+	public void setRows(Integer rows) {
 		setAttribute("rows", String.valueOf(rows));
 	}
 
