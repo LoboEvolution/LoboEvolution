@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.oswetto</groupId>
 	<artifactId>loboevolution</artifactId>
-	<version>3.0</version>
+	<version>3.1</version>
 	<packaging>pom</packaging>
 	<name>Lobo Evolution</name>
     <description>Lobo Evolution Java Web Browser</description>
@@ -216,7 +216,7 @@
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
-					<finalName>loboevolution-3.0</finalName>
+					<finalName>loboevolution-3.1</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>

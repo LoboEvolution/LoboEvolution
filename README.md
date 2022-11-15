@@ -50,15 +50,15 @@ Lobo Evolution is an extensible all-Java web browser and RIA platform. <br/>
 [![ForTheBadge uses-css](http://ForTheBadge.com/images/badges/uses-css.svg)](http://ForTheBadge.com) 
 
 ### Download
- 
-Last release click Download Badge <br/> 
-<a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/3.0/loboevolution-3.0.jar">
-	<img src="https://img.shields.io/github/downloads/LoboEvolution/LoboEvolution/total.svg" alt="Download">
+
+Last release click Download Badge <br/>
+<a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/3.1/loboevolution-3.1.jar">
+<img src="https://img.shields.io/github/downloads/LoboEvolution/LoboEvolution/total.svg" alt="Download">
 </a> <br/>
 
 After download to run
 ```
-java -jar loboevolution-3.0.jar
+java -jar loboevolution-3.1.jar
 ```
 
 ### Local Building
