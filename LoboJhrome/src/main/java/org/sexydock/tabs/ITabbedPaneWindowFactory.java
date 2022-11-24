@@ -19,8 +19,10 @@ along with Jhrome.  If not, see <http://www.gnu.org/licenses/>.
 
 package org.sexydock.tabs;
 
+import javax.swing.*;
+
 /**
- * The interface for creating {@link ITabbedPaneWindow}s. {@link TabbedPane} uses this interface to create a new {@code IJhromeWindow} whenever a jhromeTab is
+ * The interface for creating {@link ITabbedPaneWindow}s. {@link JTabbedPane} uses this interface to create a new {@code IJhromeWindow} whenever a jhromeTab is
  * torn away and needs to be displayed in a new window. This way you can control what window is created.
  *
  * @author andy.edwards

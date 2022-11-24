@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/DECORATION/1.7.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd"
+	name="Lobo Evolution">
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.11.1</version>
+	</skin>
+	<body>
+		<links>
+			<item name="${project.name}" href="${project.url}" />
+		</links>
+		<menu name="Project Documentation">
+			<item name="Project Information" href="project-info.html">
+				<item name="About" href="index.html" />
+				<item name="Source Repository" href="scm.html" />
+				<item name="Issue Tracking" href="issue-management.html" />
+				<item name="Continuous Integration" href="ci-management.html" />
+				<item name="Project License" href="licenses.html" />
+				<item name="Project Team" href="team.html" />
+				<item name="Dependencies" href="dependencies.html" />
+			</item>
+			<item name="Project Reports" href="project-reports.html">
+				<item name="Surefire Report" href="surefire-report.html" />
+				<item name="JavaDoc" href="api/index.html" />
+			</item>
+			<item name="Project Sponsors" href="project-sponsors.html">
+				<item name="Github Sponsor" href="github.html" />
+			</item>
+		</menu>
+		<menu ref="parent" />
+	</body>
+	<custom>
+		<fluidoSkin>
+			<profile>production</profile>
+		</fluidoSkin>
+	</custom>
+</project>

@@ -134,8 +134,6 @@ public interface XPathResult {
      * @throws XPathException                              TYPE_ERR: raised if resultType is not
      *                                                     NUMBER_TYPE.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
      */
     double getNumberValue()
             throws XPathException;
@@ -146,8 +144,6 @@ public interface XPathResult {
      * @return a {@link java.lang.String} object.
      * @throws XPathException                              TYPE_ERR: raised if resultType is not
      *                                                     STRING_TYPE.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
      * @throws org.loboevolution.html.xpath.XPathException if any.
      */
     String getStringValue()
@@ -160,8 +156,6 @@ public interface XPathResult {
      * @throws XPathException                              TYPE_ERR: raised if resultType is not
      *                                                     BOOLEAN_TYPE.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
      */
     boolean getBooleanValue()
             throws XPathException;
@@ -173,8 +167,6 @@ public interface XPathResult {
      * @throws XPathException                              TYPE_ERR: raised if resultType is not
      *                                                     ANY_UNORDERED_NODE_TYPE or
      *                                                     FIRST_ORDERED_NODE_TYPE.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
      * @throws org.loboevolution.html.xpath.XPathException if any.
      */
     Node getSingleNodeValue()
@@ -200,8 +192,6 @@ public interface XPathResult {
      *                                                     UNORDERED_NODE_SNAPSHOT_TYPE or
      *                                                     ORDERED_NODE_SNAPSHOT_TYPE.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
      */
     int getSnapshotLength()
             throws XPathException;
@@ -217,13 +207,7 @@ public interface XPathResult {
      * @throws DOMException                                INVALID_STATE_ERR: The document has been mutated since the result was
      *                                                     returned.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws com.gargoylesoftware.css.dom                if any.
-     * @throws com.gargoylesoftware.css.dom                if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws com.gargoylesoftware.css.dom                if any.
-     * @throws com.gargoylesoftware.css.dom                if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws com.gargoylesoftware.css.dom                if any.
+     * @throws com.gargoylesoftware.css.dom.DOMException   if any.
      */
     Node iterateNext()
             throws XPathException, DOMException;
@@ -242,8 +226,6 @@ public interface XPathResult {
      * @throws XPathException                              TYPE_ERR: raised if resultType is not
      *                                                     UNORDERED_NODE_SNAPSHOT_TYPE or
      *                                                     ORDERED_NODE_SNAPSHOT_TYPE.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws org.loboevolution.html.xpath.XPathException if any.
      * @throws org.loboevolution.html.xpath.XPathException if any.
      */
     Node snapshotItem(int index)

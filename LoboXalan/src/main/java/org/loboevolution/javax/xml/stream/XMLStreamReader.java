@@ -67,8 +67,8 @@ import java.util.NoSuchElementException;
  * <p>The following table describes which methods are valid in what state.
  * If a method is called in an invalid state the method will throw a
  * java.lang.IllegalStateException.
- *
  * <table border="2" rules="all" cellpadding="4">
+ *   <caption>XMLStreamReader</caption>
  *   <thead>
  *     <tr>
  *       <th align="center" colspan="2">
@@ -98,12 +98,13 @@ import java.util.NoSuchElementException;
  *            getElementText(), nextTag()
  *       </td>
  *     </tr>
+ *     <tr>
  *       <td> ATTRIBUTE  </td>
  *       <td> next(), nextTag()
  *            getAttributeXXX(), isAttributeSpecified(),
  *       </td>
  *     </tr>
- *     </tr>
+ *     <tr>
  *       <td> NAMESPACE  </td>
  *       <td> next(), nextTag()
  *            getNamespaceXXX()
@@ -185,7 +186,7 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * If element content is empty (i.e. content is "") then no CHARACTERS event will be reported.
    *
    * <p>Given the following XML:<br>
-   * &lt;foo>&lt;!--description-->content text&lt;![CDATA[&lt;greeting>Hello&lt;/greeting>]]>other content&lt;/foo><br>
+   * &lt;foo&#62;&lt;!--description--&#62;content text&lt;![CDATA[&lt;greeting&#62;Hello&lt;/greeting&#62;]]&#62;other content&lt;/foo&#62;
    * The behavior of calling next() when being on foo will be:<br>
    * 1- the comment (COMMENT)<br>
    * 2- then the characters section (CHARACTERS)<br>
@@ -193,9 +194,9 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * 4- then the next characters section (another CHARACTERS)<br>
    * 5- then the END_ELEMENT<br>
    *
-   * <p><b>NOTE:</b> empty element (such as &lt;tag/>) will be reported
+   * <p><b>NOTE:</b> empty element (such as &lt;tag/&#62;) will be reported
    *  with  two separate events: START_ELEMENT, END_ELEMENT - This preserves
-   *   parsing equivalency of empty element to &lt;tag>&lt;/tag>.
+   *   parsing equivalency of empty element to &lt;tag&#62;&lt;/tag&#62;.
    *
    * This method will throw an IllegalStateException if it is called after hasNext() returns false.
    * @see org.loboevolution.javax.xml.stream.events.XMLEvent
@@ -220,10 +221,9 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * Reads the content of a text-only element, an exception is thrown if this is
    * not a text-only element.
    * Regardless of value of org.loboevolution.javax.xml.stream.isCoalescing this method always returns coalesced content.
-   * <br /> Precondition: the current event is START_ELEMENT.
-   * <br /> Postcondition: the current event is the corresponding END_ELEMENT.
-   *
-   * <br />The method does the following (implementations are free to optimized
+   * <p> Precondition: the current event is START_ELEMENT.</p>
+   * <p> Postcondition: the current event is the corresponding END_ELEMENT.</p>
+   * <p>The method does the following (implementations are free to optimized</p>
    * but must do equivalent processing):
    * <pre>
    * if(getEventType() != XMLStreamConstants.START_ELEMENT) {
@@ -269,12 +269,11 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * are encountered, an exception is thrown. This method should
    * be used when processing element-only content seperated by white space.
    *
-   * <br /> Precondition: none
-   * <br /> Postcondition: the current event is START_ELEMENT or END_ELEMENT
-   * and cursor may have moved over any whitespace event.
-   *
-   * <br />Essentially it does the following (implementations are free to optimized
-   * but must do equivalent processing):
+   * <p> Precondition: none.</p>
+   * <p> Postcondition: the current event is START_ELEMENT or END_ELEMENT.
+   * and cursor may have moved over any whitespace event.</p>
+   * <p>Essentially it does the following (implementations are free to optimized.
+   * but must do equivalent processing):</p>
    * <pre>
    * int eventType = next();
    * while((eventType == XMLStreamConstants.CHARACTERS &amp;&amp; isWhiteSpace()) // skip whitespace
@@ -551,7 +550,7 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * {
    *    int nCopied = stream.getTextCharacters( sourceStart, myBuffer, 0, length );
    *
-   *   if (nCopied < length)
+   *   if (nCopied 	&#60; length)
    *       break;
    * }
    * </code>
@@ -565,8 +564,8 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * @param length the number of characters to copy
    * @return the number of characters actually copied
    * @throws XMLStreamException if the underlying XML source is not well-formed
-   * @throws IndexOutOfBoundsException if targetStart < 0 or > than the length of target
-   * @throws IndexOutOfBoundsException if length < 0 or targetStart + length > length of target
+   * @throws IndexOutOfBoundsException if targetStart &#60; 0 or &#62; than the length of target
+   * @throws IndexOutOfBoundsException if length &#60; 0 or targetStart + length &#62; length of target
    * @throws UnsupportedOperationException if this method is not supported
    * @throws NullPointerException is if target is null
    */

@@ -34,7 +34,7 @@ import static org.junit.Assert.assertEquals;
  * The "getData()" method returns the content of the
  * processing instruction.  It starts at the first non
  * white character following the target and ends at the
- * character immediately preceding the "?>".
+ * character immediately preceding the "?&#62;".
  * <p>
  * Retrieve the ProcessingInstruction node located
  * immediately after the prolog.  Create a nodelist of the

@@ -49,7 +49,7 @@ public interface XMLEventReader extends Iterator {
    * Get the next XMLEvent
    * @see XMLEvent
    * @throws XMLStreamException if there is an error with the underlying XML.
-   * @throws NoSuchElementException iteration has no more elements.
+   * @return XMLEvent
    */
   public XMLEvent nextEvent() throws XMLStreamException;
 
@@ -66,6 +66,7 @@ public interface XMLEventReader extends Iterator {
    * A call to peek() will be equal to the next return of next().
    * @see XMLEvent
    * @throws XMLStreamException
+   * @return XMLEvent
    */
   public XMLEvent peek() throws XMLStreamException;
 

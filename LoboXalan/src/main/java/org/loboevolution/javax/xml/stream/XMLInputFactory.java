@@ -39,6 +39,7 @@ import org.loboevolution.javax.xml.transform.Source;
  * The level of support required is described in the 'Required' column.
  *
  *   <table border="2" rules="all" cellpadding="4">
+ *    <caption>XMLInputFactory</caption>
  *    <thead>
  *      <tr>
  *        <th align="center" colspan="5">
@@ -156,11 +157,9 @@ public abstract class XMLInputFactory {
 
   /**
    * Create a new instance of the factory.
-   * <p>
    * This static method creates a new factory instance.
    * This method uses the following ordered lookup procedure to determine
    * the XMLInputFactory implementation class to load:
-   * </p>
    * <ul>
    * <li>
    *   Use the org.loboevolution.javax.xml.stream.XMLInputFactory system property.
@@ -186,15 +185,11 @@ public abstract class XMLInputFactory {
    * Otherwise, the system-default implementation is returned.
    * </li>
    * </ul>
-   * <p>
    *   Once an application has obtained a reference to a XMLInputFactory it
    *   can use the factory to configure and obtain stream instances.
-   * </p>
-   * <p>
    *   Note that this is a new method that replaces the deprecated newInstance() method.
-   *     No changes in behavior are defined by this replacement method relative to
-   *     the deprecated method.
-   * </p>
+   *   No changes in behavior are defined by this replacement method relative to
+   *   the deprecated method.
    * @throws FactoryConfigurationError in case of {@linkplain
    *   java.util.ServiceConfigurationError service configuration error} or if
    *   the implementation is not available or cannot be instantiated.
@@ -271,7 +266,7 @@ public abstract class XMLInputFactory {
    * to the deprecated method.
    * </p>
    *
-   * @apiNote The parameter factoryId defined here is inconsistent with that
+   * apiNote The parameter factoryId defined here is inconsistent with that
    * of other JAXP factories where the first parameter is fully qualified
    * factory class name that provides implementation of the factory.
    *

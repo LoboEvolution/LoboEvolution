@@ -68,6 +68,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * Adding a START_ELEMENT will open a new namespace scope that
    * will be closed when the corresponding END_ELEMENT is written.
    * <table border="2" rules="all" cellpadding="4">
+   *  <caption>add</caption>
    *   <thead>
    *     <tr>
    *       <th align="center" colspan="2">

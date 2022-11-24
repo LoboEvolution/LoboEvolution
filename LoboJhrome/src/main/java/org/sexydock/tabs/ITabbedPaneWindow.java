@@ -23,7 +23,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The interface for a window containing a {@link TabbedPane}. {@code JhromeTabbedPane} uses this interface to move a jhromeTab that has been torn away into a
+ * The interface for a window containing a {@link JTabbedPane}. {@code JhromeTabbedPane} uses this interface to move a jhromeTab that has been torn away into a
  * new window. This allows you to control the layout and attributes of the window besides its tabbed pane.
  *
  * @author andy.edwards

@@ -107,7 +107,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /**
      * <p>Constructor for CSSStyleDeclarationImpl.</p>
      *
-     * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl;} object.
+     * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      * @param style a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
      */
     public CSSStyleDeclarationImpl(HTMLElementImpl element, com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl style) {
@@ -117,8 +117,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /**
      * <p>Constructor for CSSStyleDeclarationImpl.</p>
-     *
-     * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl;} object.
+
+     * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      */
     public CSSStyleDeclarationImpl(HTMLElementImpl element) {
         this.element = element;

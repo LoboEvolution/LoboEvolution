@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/DECORATION/1.7.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd"
+	name="Lobo W3C">
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.11.1</version>
+	</skin>
+	<body>
+		<links>
+			<item name="${project.name}" href="${project.url}" />
+		</links>
+		<menu name="Project Documentation">
+			<item name="Project Information" href="project-info.html">
+				<item name="About" href="index.html" />
+				<item name="Dependencies" href="dependencies.html" />
+			</item>
+		</menu>
+	</body>
+	<custom>
+		<fluidoSkin>
+			<profile>production</profile>
+		</fluidoSkin>
+	</custom>
+</project>

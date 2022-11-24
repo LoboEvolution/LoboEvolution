@@ -180,6 +180,7 @@ public class OpMap {
    *
    * @param opPos position of FROM_stepType op.
    * @return position of predicate in FROM_stepType structure.
+   * @throws TransformerException if a error occurs creating the Expression.
    */
   public int getFirstPredicateOpPos(int opPos) throws TransformerException {
 

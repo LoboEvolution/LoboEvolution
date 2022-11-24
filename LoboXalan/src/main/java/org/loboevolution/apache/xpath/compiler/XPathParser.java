@@ -510,8 +510,8 @@ public class XPathParser {
   }
 
   /**
-   * RelationalExpr ::= AdditiveExpr | RelationalExpr '<' AdditiveExpr | RelationalExpr '>'
-   * AdditiveExpr | RelationalExpr '<=' AdditiveExpr | RelationalExpr '>=' AdditiveExpr
+   * RelationalExpr ::= AdditiveExpr | RelationalExpr '&#60;' AdditiveExpr | RelationalExpr '&#62;'
+   * AdditiveExpr | RelationalExpr '&#60;=' AdditiveExpr | RelationalExpr '&#60;=' AdditiveExpr
    *
    * @param addPos Position where expression is to be added, or -1 for append.
    * @return the position at the end of the relational expression.

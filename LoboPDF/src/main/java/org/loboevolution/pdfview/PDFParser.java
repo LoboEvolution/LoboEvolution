@@ -368,8 +368,8 @@ public class PDFParser extends BaseWatchable {
     }
 
     /**
-    * read a byte array from the stream. Byte arrays begin with a '<'
-    * character, which has already been read, and end with a '>'
+    * read a byte array from the stream. Byte arrays begin with a '&#60;'
+    * character, which has already been read, and end with a '	&#62;'
     * character. Each byte in the array is made up of two hex characters,
     * the first being the high-order bit.
     *

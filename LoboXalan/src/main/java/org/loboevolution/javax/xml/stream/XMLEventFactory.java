@@ -181,7 +181,7 @@ public abstract class XMLEventFactory {
    * to the deprecated method.
    * </p>
    *
-   * @apiNote The parameter factoryId defined here is inconsistent with that
+   *  The parameter factoryId defined here is inconsistent with that
    * of other JAXP factories where the first parameter is fully qualified
    * factory class name that provides implementation of the factory.
    *

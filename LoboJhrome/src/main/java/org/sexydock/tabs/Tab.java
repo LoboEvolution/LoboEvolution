@@ -167,7 +167,8 @@ public class Tab extends JComponent {
     }
 
     /**
-     * Specifies where the jhromeTab is "hoverable." If the user moves the mouse over the hoverable areas of this jhromeTab, {@link TabbedPane} will set it to
+     * Specifies where the jhromeTab is "hoverable." If the user moves the mouse over the hoverable areas of this jhromeTab,
+     * {@link JTabbedPane} will set it to
      * the rollover state.
      *
      * @param p the point the user moved the mouse over, in the renderer's coordinate system.

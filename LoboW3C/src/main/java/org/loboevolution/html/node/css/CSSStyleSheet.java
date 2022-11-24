@@ -43,7 +43,7 @@ public interface CSSStyleSheet extends StyleSheet {
 
     /**
      * <p> getCssRules. </p>
-     * @param rule a {@link java.lang.String object.
+     * @param rule a {@link java.lang.String} object.
      * @param index a {@link java.lang.Integer} object.
      * @return a {@link java.lang.Long} object.
      */
@@ -52,7 +52,6 @@ public interface CSSStyleSheet extends StyleSheet {
     /**
      * <p> getCssRules. </p>
      * @param index a {@link java.lang.Integer} object.
-     * @return a {@link org.loboevolution.html.node.css.CSSRuleList} object.
      */
     void deleteRule(int index);
 

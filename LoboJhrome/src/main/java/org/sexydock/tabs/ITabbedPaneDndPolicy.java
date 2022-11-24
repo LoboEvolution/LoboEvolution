@@ -22,7 +22,7 @@ package org.sexydock.tabs;
 import javax.swing.*;
 
 /**
- * Controls the drag and drop policy of a {@link TabbedPane}. This includes whether tabs may be torn away from the tabbed pane or snapped in.
+ * Controls the drag and drop policy of a {@link JTabbedPane}. This includes whether tabs may be torn away from the tabbed pane or snapped in.
  *
  * @author andy.edwards
  */

@@ -40,8 +40,8 @@ import static org.junit.Assert.assertEquals;
  * of the first employee and access part of the data
  * by using the substringData(offset,count) method
  * with offset=9 and count=10.  The method should return
- * the substring "Martin" since offset+count > length
- * (19 > 15).
+ * the substring "Martin" since offset+count &#62;length
+ * (19 &#62;15).
  *
  * @author NIST
  * @author Mary Brady

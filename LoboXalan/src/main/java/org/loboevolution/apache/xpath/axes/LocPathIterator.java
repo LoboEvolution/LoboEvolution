@@ -31,9 +31,7 @@ import org.loboevolution.apache.xml.utils.PrefixResolver;
 
 /**
  * This class extends NodeSetDTM, which implements NodeIterator, and fetches nodes one at a time in
- * document order based on a XPath <a
- * href="http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath</a>.
- *
+ * document order based on a XPath <a href="http://www.w3.org/TR/xpath#NT-LocationPath">LocationPath</a>.
  * <p>If setShouldCacheNodes(true) is called, as each node is iterated via nextNode(), the node is
  * also stored in the NodeVector, so that previousNode() can easily be done, except in the case
  * where the LocPathIterator is "owned" by a UnionPathIterator, in which case the UnionPathIterator

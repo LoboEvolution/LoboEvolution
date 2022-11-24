@@ -43,7 +43,7 @@ import static org.junit.Assert.assertNotNull;
  * <p>
  * Add a new attribute to the "address" element.
  * Check to see if the new attribute has been successfully added to the document.
- * The new attribute "<newValue>" contains markup and therefore is escaped
+ * The new attribute "newValue" contains markup and therefore is escaped
  * by the implementation.
  *
  * @author NIST

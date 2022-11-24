@@ -83,15 +83,13 @@ public interface DTMIterator {
    * @param nodeHandle int Handle of the context node.
    * @param environment The environment object. The environment in which this iterator operates,
    *     which should provide:
-   *     <ul>
-   *       <li>a node (the context node... same value as "root" defined below)
-   *       <li>a pair of non-zero positive integers (the context position and the context size)
-   *       <li>a set of variable bindings
-   *       <li>a function library
-   *       <li>the set of namespace declarations in scope for the expression.
-   *           <ul>
-   *             <p>At this time the exact implementation of this environment is application
-   *             dependent. Probably a proper interface will be created fairly soon.
+   *       <p>a node (the context node... same value as "root" defined below)</p>
+   *       <p>a pair of non-zero positive integers (the context position and the context size)</p>
+   *       <p>a set of variable bindings</p>
+   *       <p>a function library</p>
+   *       <p>the set of namespace declarations in scope for the expression.</p>
+   *       <p>At this time the exact implementation of this environment is application
+   *             dependent. Probably a proper interface will be created fairly soon.</p>
    */
   void setRoot(int nodeHandle, Object environment);
 

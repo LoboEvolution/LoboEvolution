@@ -266,7 +266,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Compile a '<=' operation.
+   * Compile a '&#60;=' operation.
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link Lte} instance.
@@ -277,7 +277,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Compile a '<' operation.
+   * Compile a '&#60;' operation.
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link Lt} instance.
@@ -288,7 +288,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Compile a '>=' operation.
+   * Compile a '&#62;' operation.
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link Gte} instance.
@@ -299,7 +299,7 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Compile a '>' operation.
+   * Compile a '&#62;' operation.
    *
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link Gt} instance.

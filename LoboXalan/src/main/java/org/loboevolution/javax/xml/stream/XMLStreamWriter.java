@@ -37,152 +37,94 @@ import org.loboevolution.javax.xml.namespace.NamespaceContext;
  * For attribute values the writeAttribute method will escape the
  * above characters plus &quot; to ensure that all character content
  * and attribute values are well formed.
- *
  * Each NAMESPACE
  * and ATTRIBUTE must be individually written.
- *
  * <table border="1" cellpadding="2" cellspacing="0">
- *     <thead>
- *         <tr>
- *             <th colspan="5">XML Namespaces, <code>org.loboevolution.javax.xml.stream.isRepairingNamespaces</code> and write method behaviour</th>
- *         </tr>
- *         <tr>
- *             <th>Method</th> <!-- method -->
- *             <th colspan="2"><code>isRepairingNamespaces</code> == true</th>
- *             <th colspan="2"><code>isRepairingNamespaces</code> == false</th>
- *         </tr>
- *         <tr>
- *             <th></th> <!-- method -->
- *             <th>namespaceURI bound</th>
- *             <th>namespaceURI unbound</th>
- *             <th>namespaceURI bound</th>
- *             <th>namespaceURI unbound</th>
- *         </tr>
- *     </thead>
- *
- *     <tbody>
- *         <tr>
- *             <th><code>writeAttribute(namespaceURI, localName, value)</code></th>
- *             <!-- isRepairingNamespaces == true -->
- *             <td>
- *                 <!-- namespaceURI bound -->
- *                 prefix:localName="value"&nbsp;<sup>[1]</sup>
- *             </td>
- *             <td>
- *                 <!-- namespaceURI unbound -->
- *                 xmlns:{generated}="namespaceURI" {generated}:localName="value"
- *             </td>
- *             <!-- isRepairingNamespaces == false -->
- *             <td>
- *                 <!-- namespaceURI bound -->
- *                 prefix:localName="value"&nbsp;<sup>[1]</sup>
- *             </td>
- *             <td>
- *                 <!-- namespaceURI unbound -->
- *                 <code>XMLStreamException</code>
- *             </td>
- *         </tr>
- *
- *         <tr>
- *             <th><code>writeAttribute(prefix, namespaceURI, localName, value)</code></th>
- *             <!-- isRepairingNamespaces == true -->
- *             <td>
- *                 <!-- namespaceURI bound -->
- *                 bound to same prefix:<br />
- *                 prefix:localName="value"&nbsp;<sup>[1]</sup><br />
- *                 <br />
- *                 bound to different prefix:<br />
- *                 xmlns:{generated}="namespaceURI" {generated}:localName="value"
- *             </td>
- *             <td>
- *                 <!-- namespaceURI unbound -->
- *                 xmlns:prefix="namespaceURI" prefix:localName="value"&nbsp;<sup>[3]</sup>
- *             </td>
- *             <!-- isRepairingNamespaces == false -->
- *             <td>
- *                 <!-- namespaceURI bound -->
- *                 bound to same prefix:<br />
- *                 prefix:localName="value"&nbsp;<sup>[1][2]</sup><br />
- *                 <br />
- *                 bound to different prefix:<br />
- *                 <code>XMLStreamException</code><sup>[2]</sup>
- *             </td>
- *             <td>
- *                 <!-- namespaceURI unbound -->
- *                 xmlns:prefix="namespaceURI" prefix:localName="value"&nbsp;<sup>[2][5]</sup>
- *             </td>
- *         </tr>
- *
- *         <tr>
- *             <th><code>writeStartElement(namespaceURI, localName)</code><br />
- *                 <br />
- *                 <code>writeEmptyElement(namespaceURI, localName)</code></th>
- *             <!-- isRepairingNamespaces == true -->
- *             <td >
- *                 <!-- namespaceURI bound -->
- *                 &lt;prefix:localName&gt;&nbsp;<sup>[1]</sup>
- *             </td>
- *             <td>
- *                 <!-- namespaceURI unbound -->
- *                 &lt;{generated}:localName xmlns:{generated}="namespaceURI"&gt;
- *             </td>
- *             <!-- isRepairingNamespaces == false -->
- *             <td>
- *                 <!-- namespaceURI bound -->
- *                 &lt;prefix:localName&gt;&nbsp;<sup>[1]</sup>
- *             </td>
- *             <td>
- *                 <!-- namespaceURI unbound -->
- *                 <code>XMLStreamException</code>
- *             </td>
- *         </tr>
- *
- *         <tr>
- *             <th><code>writeStartElement(prefix, localName, namespaceURI)</code><br />
- *                 <br />
- *                 <code>writeEmptyElement(prefix, localName, namespaceURI)</code></th>
- *             <!-- isRepairingNamespaces == true -->
- *             <td>
- *                 <!-- namespaceURI bound -->
- *                 bound to same prefix:<br />
- *                 &lt;prefix:localName&gt;&nbsp;<sup>[1]</sup><br />
- *                 <br />
- *                 bound to different prefix:<br />
- *                 &lt;{generated}:localName xmlns:{generated}="namespaceURI"&gt;
- *             </td>
- *             <td>
- *                 <!-- namespaceURI unbound -->
- *                 &lt;prefix:localName xmlns:prefix="namespaceURI"&gt;&nbsp;<sup>[4]</sup>
- *             </td>
- *             <!-- isRepairingNamespaces == false -->
- *             <td>
- *                 <!-- namespaceURI bound -->
- *                 bound to same prefix:<br />
- *                 &lt;prefix:localName&gt;&nbsp;<sup>[1]</sup><br />
- *                 <br />
- *                 bound to different prefix:<br />
- *                 <code>XMLStreamException</code>
- *             </td>
- *             <td>
- *                 <!-- namespaceURI unbound -->
- *                 &lt;prefix:localName&gt;&nbsp;
- *             </td>
- *         </tr>
- *     </tbody>
- *     <tfoot>
- *         <tr>
- *             <td colspan="5">
- *                 Notes:
- *                 <ul>
- *                     <li>[1] if namespaceURI == default Namespace URI, then no prefix is written</li>
- *                     <li>[2] if prefix == "" || null && namespaceURI == "", then no prefix or Namespace declaration is generated or written</li>
- *                     <li>[3] if prefix == "" || null, then a prefix is randomly generated</li>
- *                     <li>[4] if prefix == "" || null, then it is treated as the default Namespace and no prefix is generated or written, an xmlns declaration is generated and written if the namespaceURI is unbound</li>
- *                     <li>[5] if prefix == "" || null, then it is treated as an invalid attempt to define the default Namespace and an XMLStreamException is thrown</li>
- *                 </ul>
- *             </td>
- *         </tr>
- *     </tfoot>
+ * 	<caption>XMLStreamWriter</caption>
+ * 	<thead>
+ * 		<tr>
+ * 			<td colspan="5">XML Namespaces, <code>org.loboevolution.javax.xml.stream.isRepairingNamespaces</code> and write method behaviour</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td>Method</td>
+ * 			<td colspan="2">
+ * 				<code>isRepairingNamespaces</code> == true</td>
+ * 			<td colspan="2">
+ * 				<code>isRepairingNamespaces</code> == false</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td>namespaceURI bound</td>
+ * 			<td>namespaceURI unbound</td>
+ * 			<td>namespaceURI bound</td>
+ * 			<td>namespaceURI unbound</td>
+ * 		</tr>
+ * 	</thead>
+ * 	<tbody>
+ * 		<tr>
+ * 			<td>
+ * 				<code>writeAttribute(namespaceURI, localName, value)</code>
+ * 			</td>
+ * 			<td>prefix:localName="value"<sup>[1]</sup>
+ * 			</td>
+ * 			<td>xmlns:{generated}="namespaceURI" {generated}:localName="value"</td>
+ * 			<td>prefix:localName="value"<sup>[1]</sup>
+ * 			</td>
+ * 			<td>
+ * 				<code>XMLStreamException</code>
+ * 			</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td>
+ * 				<code>writeAttribute(prefix, namespaceURI, localName, value)</code>
+ * 			</td>
+ * 			<td>bound to same prefix: prefix:localName="value"<sup>[1]</sup>bound to different prefix: xmlns:{generated}="namespaceURI" {generated}:localName="value"</td>
+ * 			<td>xmlns:prefix="namespaceURI" prefix:localName="value"<sup>[3]</sup>
+ * 			</td>
+ * 			<td>bound to same prefix: prefix:localName="value"<sup>[1][2]</sup>bound to different prefix:<code>XMLStreamException</code>
+ * 				<sup>[2]</sup>
+ * 			</td>
+ * 			<td>&lt;xmlns:prefix="namespaceURI" prefix:localName="value"&gt;<sup>[2][5]</sup>
+ * 			</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td>
+ * 				<code>writeStartElement(namespaceURI, localName)</code>
+ * 				<code>writeEmptyElement(namespaceURI, localName)</code>
+ * 			</td>
+ * 			<td >&lt;prefix:localName&gt;<sup>[1]</sup>
+ * 			</td>
+ * 			<td>&lt;{generated}:localName xmlns:{generated}="namespaceURI"&gt;</td>
+ * 			<td>&lt;prefix:localName&gt;<sup>[1]</sup>
+ * 			</td>
+ * 			<td>
+ * 				<code>XMLStreamException</code>
+ * 			</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td>
+ * 				<code>writeStartElement(prefix, localName, namespaceURI)</code>
+ * 				<code>writeEmptyElement(prefix, localName, namespaceURI)</code>
+ * 			</td>
+ * 			<td>bound to same prefix: &lt;prefix:localName&gt;<sup>[1]</sup>bound to different prefix: &lt;{generated}:localName xmlns:{generated}="namespaceURI"&gt;</td>
+ * 			<td>&lt;prefix:localName xmlns:prefix="namespaceURI"&gt;<sup>[4]</sup>
+ * 			</td>
+ * 			<td>bound to same prefix: &lt;prefix:localName&gt;<sup>[1]</sup>bound to different prefix:<code>XMLStreamException</code>
+ * 			</td>
+ * 			<td>&lt;prefix:localName&gt;</td>
+ * 		</tr>
+ * 	</tbody>
+ * 	<tfoot>
+ * 		<tr>
+ * 			<td colspan="5">Notes:<ul>
+ * 					<li>[1] if namespaceURI == default Namespace URI, then no prefix is written</li>
+ * 					<li>[2] if prefix == "" || null 	&#38;&#38; namespaceURI == "", then no prefix or Namespace declaration is generated or written</li>
+ * 					<li>[3] if prefix == "" || null, then a prefix is randomly generated</li>
+ * 					<li>[4] if prefix == "" || null, then it is treated as the default Namespace and no prefix is generated or written, an xmlns declaration is generated and written if the namespaceURI is unbound</li>
+ * 					<li>[5] if prefix == "" || null, then it is treated as an invalid attempt to define the default Namespace and an XMLStreamException is thrown</li>
+ * 				</ul>
+ * 			</td>
+ * 		</tr>
+ * 	</tfoot>
  * </table>
  *
  * @version 1.0

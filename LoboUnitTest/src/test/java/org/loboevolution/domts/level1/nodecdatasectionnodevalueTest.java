@@ -40,7 +40,6 @@ import static org.junit.Assert.assertEquals;
  * of the second employee and check the string returned
  * by the "getNodeValue()" method.   It should be equal to
  * "This is a CDATA Section with EntityReference number 2
- * &ent2;".
  *
  * @author NIST
  * @author Mary Brady

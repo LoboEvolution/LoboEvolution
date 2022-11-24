@@ -71,7 +71,7 @@ public class BorderInsets {
 	/**
 	 * <p>getBorderInfo.</p>
 	 *
-	 * @param properties a {@linkimport org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @param properties a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.info.BorderInfo} object.

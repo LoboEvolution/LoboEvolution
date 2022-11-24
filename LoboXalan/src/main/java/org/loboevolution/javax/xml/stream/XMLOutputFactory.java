@@ -33,30 +33,35 @@ import org.loboevolution.javax.xml.transform.Result;
 /**
  * Defines an abstract implementation of a factory for
  * getting XMLEventWriters and XMLStreamWriters.
- *
  * The following table defines the standard properties of this specification.
  * Each property varies in the level of support required by each implementation.
  * The level of support required is described in the 'Required' column.
  *
- *     <table border="2" rules="all" cellpadding="4">
- *     <thead>
- *      <tr>
- *        <th align="center" colspan="2">
- *          Configuration parameters
- *        </th>
- *      </tr>
- *    </thead>
- *    <tbody>
- *      <tr>
- *        <th>Property Name</th>
- *        <th>Behavior</th>
- *        <th>Return type</th>
- *        <th>Default Value</th>
- *        <th>Required</th>
- *              </tr>
- *         <tr><td>org.loboevolution.javax.xml.stream.isRepairingNamespaces</td><td>defaults prefixes on the output side</td><td>Boolean</td><td>False</td><td>Yes</td></tr>
- *      </tbody>
- *   </table>
+ * <table border="2" rules="all" cellpadding="4">
+ * 	<caption>XMLOutputFactory</caption>
+ * 	<thead>
+ * 	    <tr>
+ * 		<td align="center" colspan="2">  Configuration parameters </td>
+ * 	    <td align="center" colspan="2"> </td>
+ * 	</tr>
+ * 	</thead>
+ * 	<tbody>
+ * 		<tr>
+ * 			<td>Property Name</td>
+ * 			<td>Behavior</td>
+ * 			<td>Return type</td>
+ * 			<td>Default Value</td>
+ * 			<td>Required</td>
+ * 		</tr>
+ * 		<tr>
+ * 			<td>org.loboevolution.javax.xml.stream.isRepairingNamespaces</td>
+ * 			<td>defaults prefixes on the output side</td>
+ * 			<td>Boolean</td>
+ * 			<td>False</td>
+ * 			<td>Yes</td>
+ * 		</tr>
+ * 	</tbody>
+ * </table>
  *
  * <p>The following paragraphs describe the namespace and prefix repair algorithm:</p>
  *
@@ -132,11 +137,9 @@ public abstract class XMLOutputFactory {
 
   /**
    * Create a new instance of the factory.
-   * <p>
    * This static method creates a new factory instance. This method uses the
    * following ordered lookup procedure to determine the XMLOutputFactory
    * implementation class to load:
-   * </p>
    * <ul>
    * <li>
    *   Use the org.loboevolution.javax.xml.stream.XMLOutputFactory system property.
@@ -161,15 +164,12 @@ public abstract class XMLOutputFactory {
    * <li>
    *   Otherwise, the system-default implementation is returned.
    * </li>
-   * <p>
+   * </ul>
    * Once an application has obtained a reference to a XMLOutputFactory it
    * can use the factory to configure and obtain stream instances.
-   * </p>
-   * <p>
    * Note that this is a new method that replaces the deprecated newInstance() method.
-   *   No changes in behavior are defined by this replacement method relative to the
-   *   deprecated method.
-   * </p>
+   * No changes in behavior are defined by this replacement method relative to the
+   * deprecated method.
    * @throws FactoryConfigurationError in case of {@linkplain
    *   java.util.ServiceConfigurationError service configuration error} or if
    *   the implementation is not available or cannot be instantiated.
@@ -237,7 +237,7 @@ public abstract class XMLOutputFactory {
    * </li>
    * </ul>
    *
-   * @apiNote The parameter factoryId defined here is inconsistent with that
+   *  The parameter factoryId defined here is inconsistent with that
    * of other JAXP factories where the first parameter is fully qualified
    * factory class name that provides implementation of the factory.
    *

@@ -36,7 +36,7 @@ import static org.junit.Assert.assertEquals;
  * The "setNodeValue()" method for an attribute creates a
  * Text node with the unparsed content of the string.
  * Retrieve the attribute named "class" from the last
- * child of the fourth employee and assign the "Y&ent1;"
+ * child of the fourth employee and assign the "Y&#38;ent1;"
  * string to its value attribute.  This value is not yet
  * parsed and therefore should still be the same upon
  * retrieval. This test uses the "getNamedItem(name)" method
