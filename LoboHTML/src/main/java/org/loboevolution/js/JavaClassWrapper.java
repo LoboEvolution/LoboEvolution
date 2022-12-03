@@ -171,9 +171,8 @@ public class JavaClassWrapper {
 
 	private String propertyUncapitalize(String text) {
 		try {
-			if (text.length() > 1 && Character.isUpperCase(text.charAt(1))) {
-				// If second letter is capitalized, don't uncapitalize,
-				// e.g. getURL.
+			if ("NodeFilter".equals(text) || "Node".equals(text) ||
+					(text.length() > 1 && Character.isUpperCase(text.charAt(1)))) {
 				return text;
 			}
 			return Character.toLowerCase(text.charAt(0)) + text.substring(1);

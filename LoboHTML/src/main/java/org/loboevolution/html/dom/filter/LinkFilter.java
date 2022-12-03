@@ -25,15 +25,13 @@ import org.loboevolution.html.node.Node;
 
 /**
  * The Class LinkFilter.
- *
- *
- *
  */
 public class LinkFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
-		return node instanceof HTMLLinkElement;
+	public short acceptNode(Node node) {
+		return node instanceof HTMLLinkElement ?
+				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

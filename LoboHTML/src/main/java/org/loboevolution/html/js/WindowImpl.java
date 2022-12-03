@@ -28,7 +28,9 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.nodeimpl.CommentImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
+import org.loboevolution.html.dom.nodeimpl.traversal.NodeFilterImpl;
 import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.js.css.MediaQueryListImpl;
 import org.loboevolution.html.js.events.EventImpl;
@@ -48,6 +50,7 @@ import org.loboevolution.html.node.js.Screen;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.console.Console;
 import org.loboevolution.html.node.js.webstorage.Storage;
+import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.views.DocumentView;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
@@ -226,14 +229,12 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			if (windowScope != null) {
 				return windowScope;
 			}
-			final Context ctx = Context.enter();
-			try {
+
+			try(Context ctx = Context.enter()) {
 				windowScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this, null);
 				windowScope = ctx.initSafeStandardObjects((ScriptableObject)windowScope);
 				this.windowScope = windowScope;
 				return windowScope;
-			} finally {
-				Context.exit();
 			}
 		}
 	}
@@ -1194,6 +1195,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineJsObject(ws, "Text", TextImpl.class, TextImpl::new);
 		js.defineJsObject(ws, "Storage", LocalStorage.class, LocalStorage::new);
 
+
 		js.defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
 		js.defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
 		js.defineElementClass(ws, doc, "Script", "script", HTMLScriptElementImpl.class);
@@ -1204,6 +1206,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineElementClass(ws, doc, "HTMLDivElement", "div", HTMLDivElementImpl.class);
 		js.defineElementClass(ws, doc, "HTMLElement", "html", HTMLElementImpl.class);
 		js.defineElementClass(ws, doc, "HTMLDocument", "document", HTMLDocumentImpl.class);
+
+		js.defineElementClass(ws, doc, "NodeFilter", "NodeFilter", NodeFilterImpl.class);
+		js.defineElementClass(ws, doc, "Node", "Node", NodeImpl.class);
 
 	}
 
@@ -1224,8 +1229,8 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	private void clearState() {
-		Context.enter();
-		try {
+
+		try(Context cx = Context.enter()) {
 			Scriptable s = this.getWindowScope();
 			if (s != null) {
 				Object[] ids = s.getIds();
@@ -1237,8 +1242,6 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 					}
 				}
 			}
-		} finally {
-			Context.exit();
 		}
 	}
 
@@ -1273,6 +1276,15 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			oldTimer.timer.stop();
 		}
 	}
+
+	public NodeFilter getNodeFilter() {
+		return new NodeFilterImpl();
+	}
+
+	public Node getNode() {
+		return this;
+	}
+
 
 	@Override
 	public String toString() {

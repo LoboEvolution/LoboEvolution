@@ -45,19 +45,19 @@ public class ClassNameFilter implements NodeFilter {
 	}
 
 	/** {@inheritDoc} */
-	public boolean acceptNode(Node node) {
+	public short acceptNode(Node node) {
 		if (node instanceof Element) {
 			String classAttribute = ((Element) node).getAttribute("class");
 			if (Strings.isNotBlank(classAttribute) && Strings.isNotBlank(className)) {
 				final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
 				for (String aClassName : classNames) {
 					if (!classAttribute.contains(aClassName)) {
-						return false;
+						return NodeFilter.FILTER_REJECT;
 					}
 				}
-				return true;
+				return NodeFilter.FILTER_ACCEPT;
 			}
 		}
-		return false; 
+		return NodeFilter.FILTER_REJECT;
 	}
 }

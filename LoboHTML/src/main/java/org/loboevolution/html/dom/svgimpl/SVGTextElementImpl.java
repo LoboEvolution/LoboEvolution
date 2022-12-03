@@ -23,7 +23,7 @@ package org.loboevolution.html.dom.svgimpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.*;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.Node;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -237,7 +237,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 		if (hasChildNodes()) {
 			NodeListImpl children = (NodeListImpl)getChildNodes();
 			children.forEach(child -> {
-				if (child.getNodeType() == NodeType.TEXT_NODE) {
+				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
 					StringBuilder childText = new StringBuilder();
 					if ("default".equals(getXMLspace())) {

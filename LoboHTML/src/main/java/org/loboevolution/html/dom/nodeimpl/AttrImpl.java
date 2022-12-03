@@ -66,7 +66,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
      */
     @Override
     public int getNodeType() {
-        return NodeType.ATTRIBUTE_NODE;
+        return Node.ATTRIBUTE_NODE;
     }
 
     /**

@@ -25,6 +25,7 @@ import org.loboevolution.html.dom.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.node.traversal.DocumentTraversal;
 import org.loboevolution.html.node.traversal.NodeIterator;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
@@ -36,7 +37,7 @@ import org.loboevolution.type.VisibilityState;
  * Any web page loaded in the browser and serves as an entry point into the web
  * page's content, which is the DOM tree.
  */
-public interface Document extends Node, NonElementParentNode, ParentNode {
+public interface Document extends Node, NonElementParentNode, ParentNode, DocumentTraversal {
 
 	/** Constant <code>XMLNS_NAMESPACE_URI="http://www.w3.org/2000/xmlns/"</code> */
 	String XMLNS_NAMESPACE_URI = "http://www.w3.org/2000/xmlns/";
@@ -586,15 +587,6 @@ public interface Document extends Node, NonElementParentNode, ParentNode {
 	Event createEvent(String eventInterface);
 
 	/**
-	 * Creates a NodeIterator object that you can use to traverse filtered lists of
-	 * nodes or elements in a document.
-	 *
-	 * @param root The root element or node to start traversing on.
-	 * @return a {@link NodeIterator} object.
-	 */
-	NodeIterator createNodeIterator(Node root);
-
-	/**
 	 * Returns a ProcessingInstruction node whose target is target and data is data.
 	 * If target does not match the Name production an "InvalidCharacterError"
 	 * DOMException will be thrown. If data contains "?&gt;" an
@@ -621,15 +613,6 @@ public interface Document extends Node, NonElementParentNode, ParentNode {
 	 * @return a {@link org.loboevolution.html.node.Text} object.
 	 */
 	Text createTextNode(String data) throws DOMException;
-
-	/**
-	 * Creates a TreeWalker object that you can use to traverse filtered lists of
-	 * nodes or elements in a document.
-	 *
-	 * @param root       The root element or node to start traversing on.
-	 * @return a {@link org.loboevolution.html.node.TreeWalker} object.
-	 */
-	TreeWalker createTreeWalker(Node root);
 
 	/**
 	 * Returns the element for the specified x coordinate and the specified y

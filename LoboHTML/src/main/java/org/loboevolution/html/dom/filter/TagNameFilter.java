@@ -25,9 +25,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>TagNameFilter class.</p>
- *
- *
- *
  */
 public class TagNameFilter implements NodeFilter {
 	private final String name;
@@ -43,11 +40,11 @@ public class TagNameFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
+	public short acceptNode(Node node) {
 		if (!(node instanceof Element)) {
-			return false;
+			return NodeFilter.FILTER_REJECT;
 		}
-		final String n = this.name;
-		return n.equalsIgnoreCase(node.getNodeName());
+		return this.name.equalsIgnoreCase(node.getNodeName()) ?
+		NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

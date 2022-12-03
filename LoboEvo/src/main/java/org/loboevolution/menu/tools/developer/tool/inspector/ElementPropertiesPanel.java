@@ -25,7 +25,6 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -74,7 +73,7 @@ public class ElementPropertiesPanel extends JPanel {
     }
 
      private TableModel tableModel(Node node) {
-        if (node.getNodeType() != NodeType.ELEMENT_NODE) {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
             Toolkit.getDefaultToolkit().beep();
             return _defaultTableModel;
         }

@@ -24,16 +24,13 @@ import org.loboevolution.html.node.Node;
 
 /**
  * The Class ScriptFilter.
- *
- *
- *
  */
 public class ScriptFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
-		return "script".equalsIgnoreCase(node.getNodeName());
+	public short acceptNode(Node node) {
+		return "script".equalsIgnoreCase(node.getNodeName()) ?
+				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
-
 }

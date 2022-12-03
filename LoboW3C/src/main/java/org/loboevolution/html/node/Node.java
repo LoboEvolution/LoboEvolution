@@ -31,17 +31,24 @@ import org.w3c.dom.UserDataHandler;
  */
 public interface Node extends EventTarget {
 
-	/** Constant <code>DOCUMENT_POSITION_DISCONNECTED=1</code> */
+	short NONE = -1;
+	short ELEMENT_NODE = 1;
+	short ATTRIBUTE_NODE = 2;
+	short TEXT_NODE = 3;
+	short CDATA_SECTION_NODE = 4;
+	short ENTITY_REFERENCE_NODE = 5;
+	short ENTITY_NODE  = 6;
+	short PROCESSING_INSTRUCTION_NODE = 7;
+	short COMMENT_NODE = 8;
+	short DOCUMENT_NODE  = 9;
+	short DOCUMENT_TYPE_NODE = 10;
+	short DOCUMENT_FRAGMENT_NODE = 11;
+	short NOTATION_NODE  = 12;
 	short DOCUMENT_POSITION_DISCONNECTED = 1;
-	/** Constant <code>DOCUMENT_POSITION_PRECEDING=2</code> */
 	short DOCUMENT_POSITION_PRECEDING = 2;
-	/** Constant <code>DOCUMENT_POSITION_FOLLOWING=4</code> */
 	short DOCUMENT_POSITION_FOLLOWING = 4;
-	/** Constant <code>DOCUMENT_POSITION_CONTAINS=8</code> */
 	short DOCUMENT_POSITION_CONTAINS = 8;
-	/** Constant <code>DOCUMENT_POSITION_CONTAINED_BY=10</code> */
 	short DOCUMENT_POSITION_CONTAINED_BY = 10;
-	/** Constant <code>DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC=20</code> */
 	short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC =20;
 
 	/**

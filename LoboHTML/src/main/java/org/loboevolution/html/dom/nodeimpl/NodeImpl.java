@@ -93,30 +93,30 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public Node appendChild(Node newChild) {
 
-		if (newChild.getNodeType() == NodeType.DOCUMENT_NODE) {
+		if (newChild.getNodeType() == Node.DOCUMENT_NODE) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a document.");
 		}
 
-		if (newChild.getNodeType() == NodeType.ATTRIBUTE_NODE) {
+		if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
 		}
 
-		if (newChild.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+		if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			NodeListImpl list = getNodeList();
 			list.forEach(n -> {
-				if (n.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+				if (n.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one doctype on document allowed.");
 				}
 			});
 		}
 
-		if (newChild.getNodeType() == NodeType.ELEMENT_NODE) {
+		if (newChild.getNodeType() == Node.ELEMENT_NODE) {
 
 			if (newChild.isSameNode(this)) {
 				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
 			}
 
-			if (getNodeType() == NodeType.DOCUMENT_NODE) {
+			if (getNodeType() == Node.DOCUMENT_NODE) {
 				NodeListImpl list = getNodeList();
 				list.forEach(node ->{
 					if(Objects.equals(node, newChild)) {
@@ -152,7 +152,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	private void appendChildrenToCollectionImpl(NodeFilter filter, Collection<Node> collection) {
 		nodeList.forEach(child -> {
 			NodeImpl node = (NodeImpl) child;
-			if (filter.acceptNode(node)) {
+			if (filter.acceptNode(node) == NodeFilter.FILTER_ACCEPT) {
 				collection.add(node);
 			}
 			node.appendChildrenToCollectionImpl(filter, collection);
@@ -301,7 +301,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 
 	@Override
-	public NamedNodeMap getAttributes() {return null;};
+	public NamedNodeMap getAttributes() {return null;}
 
 
 	/**
@@ -314,12 +314,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	private void extractDescendentsArrayImpl(NodeFilter filter, ArrayList<Node> al, boolean nestIntoMatchingNodes) {
 		nodeList.forEach(child -> {
 			NodeImpl n = (NodeImpl) child;
-			if (filter.acceptNode(n)) {
+			if (filter.acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
 				al.add(n);
 				if (nestIntoMatchingNodes) {
 					n.extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
 				}
-			} else if (n.getNodeType() == NodeType.ELEMENT_NODE) {
+			} else if (n.getNodeType() == Node.ELEMENT_NODE) {
 				n.extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
 			}
 		});
@@ -760,9 +760,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		nodeList.forEach(child -> {
 			final int type = child.getNodeType();
 			switch (type) {
-				case NodeType.CDATA_SECTION_NODE:
-				case NodeType.TEXT_NODE:
-				case NodeType.ELEMENT_NODE:
+				case Node.CDATA_SECTION_NODE:
+				case Node.TEXT_NODE:
+				case Node.ELEMENT_NODE:
 					final String textContent = child.getTextContent();
 					if (textContent != null) {
 						sb.append(textContent);
@@ -974,24 +974,24 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
 			}
 
-			if (newChild.getNodeType() == NodeType.DOCUMENT_NODE) {
+			if (newChild.getNodeType() == Node.DOCUMENT_NODE) {
 				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a document.");
 			}
 
-			if (newChild.getNodeType() == NodeType.ATTRIBUTE_NODE) {
+			if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
 				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
 			}
 
-			if (newChild.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+			if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 				NodeListImpl list = getNodeList();
 				list.forEach(n -> {
-					if (n.getNodeType() == NodeType.DOCUMENT_TYPE_NODE) {
+					if (n.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one doctype on document allowed.");
 					}
 				});
 			}
 
-			if (newChild.getNodeType() == NodeType.ELEMENT_NODE) {
+			if (newChild.getNodeType() == Node.ELEMENT_NODE) {
 
 				if (newChild.isSameNode(this)) {
 					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
@@ -1083,7 +1083,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		final List<Node> textNodes = new LinkedList<>();
 		boolean prevText = false;
 		for (Node child : nodeList) {
-			if (child.getNodeType() == NodeType.TEXT_NODE) {
+			if (child.getNodeType() == Node.TEXT_NODE) {
 				if (!prevText) {
 					prevText = true;
 					textNodes.add(child);
@@ -1161,7 +1161,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		AtomicInteger index = new AtomicInteger(-1);
 		nodeList.forEach(node -> {
 			if (node instanceof Element) {
-				if (filter.acceptNode(node) && count.get() == 0) {
+				if (filter.acceptNode(node) == NodeFilter.FILTER_ACCEPT && count.get() == 0) {
 					index.set(nodeList.indexOf(node));
 					count.incrementAndGet();
 				}
@@ -1484,5 +1484,81 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		} catch (final CloneNotSupportedException e) {
 			throw new IllegalStateException(e);
 		}
+	}
+
+	public short getNONE() {
+		return NONE;
+	}
+
+	public short getELEMENT_NODE() {
+		return ELEMENT_NODE;
+	}
+
+	public short getATTRIBUTE_NODE() {
+		return ATTRIBUTE_NODE;
+	}
+
+	public short getTEXT_NODE() {
+		return TEXT_NODE;
+	}
+
+	public short getCDATA_SECTION_NODE() {
+		return CDATA_SECTION_NODE;
+	}
+
+	public short getENTITY_REFERENCE_NODE() {
+		return ENTITY_REFERENCE_NODE;
+	}
+
+	public short getENTITY_NODE() {
+		return ENTITY_NODE;
+	}
+
+	public short getPROCESSING_INSTRUCTION_NODE() {
+		return PROCESSING_INSTRUCTION_NODE;
+	}
+
+	public short getCOMMENT_NODE() {
+		return COMMENT_NODE;
+	}
+
+	public short getDOCUMENT_NODE() {
+		return DOCUMENT_NODE;
+	}
+
+	public short getDOCUMENT_TYPE_NODE() {
+		return DOCUMENT_TYPE_NODE;
+	}
+
+	public short getDOCUMENT_FRAGMENT_NODE() {
+		return DOCUMENT_FRAGMENT_NODE;
+	}
+
+	public short getNOTATION_NODE() {
+		return NOTATION_NODE;
+	}
+
+	public short getDOCUMENT_POSITION_DISCONNECTED() {
+		return DOCUMENT_POSITION_DISCONNECTED;
+	}
+
+	public short getDOCUMENT_POSITION_PRECEDING() {
+		return DOCUMENT_POSITION_PRECEDING;
+	}
+
+	public short getDOCUMENT_POSITION_FOLLOWING() {
+		return DOCUMENT_POSITION_FOLLOWING;
+	}
+
+	public short getDOCUMENT_POSITION_CONTAINS() {
+		return DOCUMENT_POSITION_CONTAINS;
+	}
+
+	public short getDOCUMENT_POSITION_CONTAINED_BY() {
+		return DOCUMENT_POSITION_CONTAINED_BY;
+	}
+
+	public short getDOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC() {
+		return DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
 	}
 }

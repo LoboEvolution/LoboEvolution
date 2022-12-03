@@ -32,7 +32,7 @@ import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
 import org.loboevolution.html.renderer.info.RBlockInfo;
@@ -1111,10 +1111,10 @@ public class RBlockViewport extends BaseRCollection {
 				final NodeImpl child = (NodeImpl) nd;
 				final int nodeType = child.getNodeType();
 				switch (nodeType) {
-					case NodeType.TEXT_NODE:
+					case Node.TEXT_NODE:
 						layoutText(child);
 						break;
-					case NodeType.ELEMENT_NODE:
+					case Node.ELEMENT_NODE:
 						this.currentLine.addStyleChanger(new RStyleChanger(child));
 						final String nodeName = child.getNodeName().toUpperCase();
 						MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
@@ -1124,15 +1124,15 @@ public class RBlockViewport extends BaseRCollection {
 						ml.layoutMarkup(this, (HTMLElementImpl) child);
 						this.currentLine.addStyleChanger(new RStyleChanger(node));
 						break;
-					case NodeType.DOCUMENT_FRAGMENT_NODE:
+					case Node.DOCUMENT_FRAGMENT_NODE:
 						final DocumentFragmentImpl fragment = (DocumentFragmentImpl) child;
 						fragment.getNodeList().forEach(fragNode -> {
 							final NodeImpl fragChild = (NodeImpl) fragNode;
 							layoutChildren(fragChild);
 						});
 						break;
-					case NodeType.COMMENT_NODE:
-					case NodeType.PROCESSING_INSTRUCTION_NODE:
+					case Node.COMMENT_NODE:
+					case Node.PROCESSING_INSTRUCTION_NODE:
 					default:
 						break;
 				}
@@ -1355,10 +1355,9 @@ public class RBlockViewport extends BaseRCollection {
 
 	private void layoutText(NodeImpl textNode) {
 		final RenderState renderState = textNode.getRenderState();
-		if (renderState == null) {
-			throw new IllegalStateException(
-					"RenderState is null for node " + textNode + " with parent " + textNode.getParentNode());
-		}
+		if (renderState != null) {
+
+
 		final FontMetrics fm = renderState.getFontMetrics();
 		final int descent = fm.getDescent();
 		final int ascentPlusLeading = fm.getAscent() + fm.getLeading();
@@ -1445,6 +1444,9 @@ public class RBlockViewport extends BaseRCollection {
 						wordHeight, textTransform);
 				addWordToLine(rword);
 			}
+		}} else{
+			logger.severe("RenderState is null for node " + textNode + " with parent " + textNode.getParentNode());
+
 		}
 	}
 

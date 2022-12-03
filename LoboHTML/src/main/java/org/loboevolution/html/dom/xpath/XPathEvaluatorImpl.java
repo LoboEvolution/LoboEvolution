@@ -28,7 +28,6 @@ import org.loboevolution.apache.xml.utils.PrefixResolver;
 import org.loboevolution.apache.xpath.XPath;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.xpath.XPathEvaluator;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
@@ -74,7 +73,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public XPathNSResolver createNSResolver(Node nodeResolver) {
-		return new XPathNSResolverImpl(nodeResolver.getNodeType() == NodeType.DOCUMENT_NODE
+		return new XPathNSResolverImpl(nodeResolver.getNodeType() == Node.DOCUMENT_NODE
 				? ((Document) nodeResolver).getDocumentElement() : nodeResolver);
 	}
 

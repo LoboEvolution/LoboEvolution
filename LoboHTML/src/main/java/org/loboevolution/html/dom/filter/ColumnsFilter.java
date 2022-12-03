@@ -26,19 +26,17 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>ColumnsFilter class.</p>
- *
- *
- *
  */
 public class ColumnsFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public final boolean acceptNode(Node node) {
+	public final short acceptNode(Node node) {
         if (node instanceof HTMLElementImpl) {
             final HTMLElementImpl elem = (HTMLElementImpl) node;
-            return elem.getRenderState().getDisplay() == RenderState.DISPLAY_TABLE_CELL;
+            return elem.getRenderState().getDisplay() == RenderState.DISPLAY_TABLE_CELL ?
+                    NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
         }
-        return false;
+        return NodeFilter.FILTER_REJECT;
 	}
 }

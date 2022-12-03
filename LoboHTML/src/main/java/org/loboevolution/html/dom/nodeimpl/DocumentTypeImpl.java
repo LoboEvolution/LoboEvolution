@@ -27,7 +27,6 @@ import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>DocumentTypeImpl class.</p>
@@ -71,7 +70,7 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	/** {@inheritDoc} */
 	@Override
 	public int getNodeType() {
-		return NodeType.DOCUMENT_TYPE_NODE;
+		return Node.DOCUMENT_TYPE_NODE;
 	}
 
 	/** {@inheritDoc} */

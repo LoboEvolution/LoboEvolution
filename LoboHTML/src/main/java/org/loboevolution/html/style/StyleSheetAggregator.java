@@ -39,7 +39,6 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.Text;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.node.js.Window;
@@ -353,7 +352,7 @@ public class StyleSheetAggregator {
 
 		case "root":
 			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
-			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == NodeType.DOCUMENT_TYPE_NODE;
+			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_TYPE_NODE;
 
 			case "enabled":
 				return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||

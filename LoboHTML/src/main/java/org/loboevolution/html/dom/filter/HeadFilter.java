@@ -27,9 +27,12 @@ import org.loboevolution.html.node.Node;
  */
 public class HeadFilter implements NodeFilter {
 
-	/** {@inheritDoc} */
-	@Override
-	public final boolean acceptNode(Node node) {
-		return node != null && "HEAD".equalsIgnoreCase(node.getNodeName());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final short acceptNode(Node node) {
+        return node != null && "HEAD".equalsIgnoreCase(node.getNodeName()) ?
+                NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
 }

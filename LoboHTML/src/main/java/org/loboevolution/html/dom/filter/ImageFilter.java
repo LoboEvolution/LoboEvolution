@@ -25,15 +25,13 @@ import org.loboevolution.html.node.Node;
 
 /**
  * The Class ImageFilter.
- *
- *
- *
  */
 public class ImageFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
-		return node instanceof HTMLImageElement;
+	public short acceptNode(Node node) {
+		return node instanceof HTMLImageElement ?
+				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

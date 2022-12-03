@@ -23,17 +23,15 @@ import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Node;
 
 /**
- * The Class FormFilter.
- *
- *
- *
+ * The Class FormFilter. *
  */
 public class FormFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
+	public short acceptNode(Node node) {
 		String nodeName = node.getNodeName();
-		return "form".equalsIgnoreCase(nodeName);
+		return "form".equalsIgnoreCase(nodeName) ?
+				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

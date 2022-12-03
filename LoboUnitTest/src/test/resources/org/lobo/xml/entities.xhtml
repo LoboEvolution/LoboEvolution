@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Example XHTML file</title>
+<style type="text/css">
+body {
+font-family: Arial, Helvetica;
+font-size: 12pt;
+margin-left: 5%;
+margin-right: 5%;
+margin-top: 3em;
+margin-bottom: 4em;
+background-color: white;
+width: 900px;
+}
+</style>
+<script>
+//<![CDATA[
+function foo {
+	console.log('foo');
+}
+window.addEventListener("load", foo);
+//]]>
+</script>
+<base href="http://www.example.com/" />
+</head>
+<body>
+<h1 id="h1" style="background: url(headerbg.png);">Header 1</h1>
+<p id="para1" class="boldmargin" donotexist="nothing">Paragraph <span id="entity" class="ent&quot;ity">&lt;&gt;</span></p>
+<p id="para2">Paragraph 2 with a <span id="entiamp">&amp;</span>.</p>
+<h2 id="h2">Header 2</h2>
+<p id="smip" class="smallitalic">Paragraph with &infin;</p>
+<div id="div1" class="test1">
+<p id="listpara" style="font-family: 'Does Not Exist', Neither, Helvetica; padding-left: inherit">Now, a <nonexistenttag id="doesnotexist">list</nonexistenttag>:</p>
+<ul id="ul1">
+<li id="ul1li1" class="liclass" style="color: blue">List item 1</li>
+<li class="liclass">List item 2</li>
+<li class="liclass">List item 3</li>
+<li class="liclass">List item 4</li>
+<li class="liclass">List <span id="entiacute">&iacute;tem</span> 5</li>
+<li class="liclass"><a href="li6dir">List item 6</a></li>
+</ul>
+<!-- An xml-friendly svg element -->
+<s:svg xmlns:s="http://www.w3.org/2000/svg" s:version="1.1" s:viewBox="0 0 100 100" id="svg1" style="width:100%; height:100%;">
+  <s:rect x="0" y="0" width="100" height="100" fill="yellow" />
+</s:svg>
+</div>
+</body>
+</html>

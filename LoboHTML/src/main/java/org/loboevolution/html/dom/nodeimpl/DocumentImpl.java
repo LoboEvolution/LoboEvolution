@@ -30,6 +30,8 @@ import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.*;
 import org.loboevolution.html.dom.nodeimpl.event.GlobalEventHandlersImpl;
+import org.loboevolution.html.dom.nodeimpl.traversal.NodeIteratorImpl;
+import org.loboevolution.html.dom.nodeimpl.traversal.TreeWalkerImpl;
 import org.loboevolution.html.dom.xpath.XPathEvaluatorImpl;
 import org.loboevolution.html.io.LocalWritableLineReader;
 import org.loboevolution.html.io.WritableLineReader;
@@ -39,7 +41,9 @@ import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.html.node.traversal.TreeWalker;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.html.xpath.XPathEvaluator;
@@ -308,7 +312,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		if (doctype == null) {
 			doctype = (DocumentType) nodeList.
 					stream().
-					filter(node -> node.getNodeType() == NodeType.DOCUMENT_TYPE_NODE).
+					filter(node -> node.getNodeType() == Node.DOCUMENT_TYPE_NODE).
 					findFirst().
 					orElse(null);
 		}
@@ -330,7 +334,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Element getDocumentElement() {
 		for (Node node : nodeList) {
-			if (node.getNodeType() == NodeType.ELEMENT_NODE) {
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				return (Element) node;
 			}
 		}
@@ -987,11 +991,24 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	}
 
 
-	/** {@inheritDoc} */
 	@Override
-	public NodeIterator createNodeIterator(Node root) {
-		// TODO Auto-generated method stub
-		return null;
+	public NodeIterator createNodeIterator(Node root) throws DOMException {
+		return new NodeIteratorImpl(root, 0,  null);
+	}
+
+	@Override
+	public NodeIterator createNodeIterator(Node root, int whatToShow) throws DOMException {
+		return new NodeIteratorImpl(root, whatToShow, null);
+	}
+
+	@Override
+	public NodeIterator createNodeIterator(Node root, NodeFilter filter) throws DOMException {
+		return new NodeIteratorImpl(root, 0, filter);
+	}
+
+	@Override
+	public NodeIterator createNodeIterator(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+		return new NodeIteratorImpl(root, whatToShow, filter);
 	}
 
 	/** {@inheritDoc} */
@@ -1001,11 +1018,24 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		return null;
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public TreeWalker createTreeWalker(Node root) {
-		// TODO Auto-generated method stub
-		return null;
+	public TreeWalker createTreeWalker(Node root) throws DOMException {
+		return new TreeWalkerImpl(root, 0, null);
+	}
+
+	@Override
+	public TreeWalker createTreeWalker(Node root, int whatToShow) throws DOMException {
+		return new TreeWalkerImpl(root, whatToShow, null);
+	}
+
+	@Override
+	public TreeWalker createTreeWalker(Node root, NodeFilter filter) throws DOMException {
+		return new TreeWalkerImpl(root, 0, filter);
+	}
+
+	@Override
+	public TreeWalker createTreeWalker(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+		return new TreeWalkerImpl(root, whatToShow, filter);
 	}
 
 	/** {@inheritDoc} */
@@ -1054,11 +1084,11 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
 		switch (importedNode.getNodeType()) {
-			case NodeType.ATTRIBUTE_NODE:
+			case Node.ATTRIBUTE_NODE:
 				Attr attr = createAttribute(importedNode.getNodeName());
 				attr.setValue(importedNode.getNodeValue());
 				return attr;
-			case NodeType.ELEMENT_NODE:
+			case Node.ELEMENT_NODE:
 				Element foreignElm = (Element) importedNode;
 				Element elm = createElement(foreignElm.getNodeName());
 				NamedNodeMap attributes = foreignElm.getAttributes();
@@ -1074,13 +1104,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					}
 				}
 				return elm;
-			case NodeType.TEXT_NODE:
+			case Node.TEXT_NODE:
 				return createTextNode(importedNode.getNodeValue());
-			case NodeType.CDATA_SECTION_NODE:
+			case Node.CDATA_SECTION_NODE:
 				return createCDATASection(importedNode.getNodeValue());
-			case NodeType.COMMENT_NODE:
+			case Node.COMMENT_NODE:
 				return createComment(importedNode.getNodeValue());
-			case NodeType.DOCUMENT_FRAGMENT_NODE:
+			case Node.DOCUMENT_FRAGMENT_NODE:
 				DocumentFragment df = createDocumentFragment();
 				if (deep) {
 					Node node = importedNode.getFirstChild();
@@ -1090,9 +1120,9 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					}
 				}
 				return df;
-			case NodeType.PROCESSING_INSTRUCTION_NODE:
+			case Node.PROCESSING_INSTRUCTION_NODE:
 				return createProcessingInstruction(importedNode.getNodeName(), importedNode.getNodeValue());
-			case NodeType.ENTITY_REFERENCE_NODE:
+			case Node.ENTITY_REFERENCE_NODE:
 				return createEntityReference(importedNode.getNodeName());
 			default:
 				throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Node Not supported.");

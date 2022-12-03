@@ -28,7 +28,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.html.node.NodeType;
 
 import static org.junit.Assert.*;
 
@@ -152,8 +151,8 @@ public class DOMNodeTest extends LoboUnitTest {
 		assertEquals(6, html.getChildNodes().getLength());
 		assertEquals(4, elm.getChildNodes().getLength());
 		assertEquals(" ", html.getChildNodes().item(3).getNodeValue());
-		assertEquals(NodeType.COMMENT_NODE, html.getChildNodes().item(4).getNodeType());
-		assertEquals(NodeType.COMMENT_NODE, html.getChildNodes().item(5).getNodeType());
+		assertEquals(Node.COMMENT_NODE, html.getChildNodes().item(4).getNodeType());
+		assertEquals(Node.COMMENT_NODE, html.getChildNodes().item(5).getNodeType());
 		// Use computed styles (same result, just slower)
 		assertTrue(config.canSetParameter("use-computed-styles", false));
 		assertTrue(config.canSetParameter("use-computed-styles", true));

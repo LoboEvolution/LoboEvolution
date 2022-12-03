@@ -25,7 +25,6 @@ package org.loboevolution.html.dom.nodeimpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 
 /**
  * <p>CommentImpl class.</p>
@@ -55,7 +54,7 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 	/** {@inheritDoc} */
 	@Override
 	public int getNodeType() {
-		return NodeType.COMMENT_NODE;
+		return Node.COMMENT_NODE;
 	}
 
 	/** {@inheritDoc} */

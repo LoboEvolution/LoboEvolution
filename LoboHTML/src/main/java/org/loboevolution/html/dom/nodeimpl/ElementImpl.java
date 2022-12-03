@@ -320,7 +320,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public int getNodeType() {
-		return NodeType.ELEMENT_NODE;
+		return Node.ELEMENT_NODE;
 	}
 
 	/** {@inheritDoc} */

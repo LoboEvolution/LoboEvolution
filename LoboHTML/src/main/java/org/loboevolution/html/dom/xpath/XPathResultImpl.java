@@ -31,7 +31,6 @@ import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.traversal.NodeIterator;
 import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.xpath.XPathException;
@@ -496,7 +495,7 @@ public class XPathResultImpl implements XPathResult {
 	 *         false.
 	 */
 	private boolean isNamespaceNode(Node node) {
-		return (null != node && node.getNodeType() == NodeType.ATTRIBUTE_NODE
+		return (null != node && node.getNodeType() == Node.ATTRIBUTE_NODE
 				&& (node.getNodeName().startsWith("xmlns:") || node.getNodeName().equals("xmlns")));
 	}
 

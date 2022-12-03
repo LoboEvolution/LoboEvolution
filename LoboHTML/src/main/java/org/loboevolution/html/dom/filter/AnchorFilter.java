@@ -33,16 +33,16 @@ public class AnchorFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
+	public short acceptNode(Node node) {
 		String nodeName = node.getNodeName();
 		if ("a".equalsIgnoreCase(nodeName)) {
 			NamedNodeMap attributes = node.getAttributes();
 			for (Attr attribute : Nodes.iterable(attributes)) {
 				if ("name".equals(attribute.getName())) {
-					return true;
+					return NodeFilter.FILTER_ACCEPT;
 				}
 			}
 		}
-		return false;
+		return NodeFilter.FILTER_REJECT;
 	}
 }

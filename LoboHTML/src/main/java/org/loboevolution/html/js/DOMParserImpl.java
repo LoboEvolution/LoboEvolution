@@ -39,6 +39,7 @@ public class DOMParserImpl extends AbstractScriptableDelegate implements DOMPars
 		this.document = document;
 	}
 
+
 	/** {@inheritDoc} */
 	@Override
 	public Document parseFromString(String html, String type) {

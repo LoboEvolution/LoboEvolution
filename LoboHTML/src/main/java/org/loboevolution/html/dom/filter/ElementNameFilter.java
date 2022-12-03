@@ -26,9 +26,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * The Class ElementNameFilter.
- *
- *
- *
  */
 public class ElementNameFilter implements NodeFilter {
 
@@ -45,20 +42,17 @@ public class ElementNameFilter implements NodeFilter {
 		this.name = name;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.domfilter.NodeFilter#accept(org.loboevolution.html.node.Node)
-	 */
+
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
+	public short acceptNode(Node node) {
 		if (node instanceof Element) {
 			Element elm = (Element)node;
 			if (elm != null && this.name != null) {
-				return this.name.equals(elm.getAttribute("name"));
+				return this.name.equals(elm.getAttribute("name")) ?
+						NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 			}
 		}		
-		return  false;
+		return  NodeFilter.FILTER_REJECT;
 	}
 }

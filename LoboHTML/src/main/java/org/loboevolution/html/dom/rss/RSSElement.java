@@ -22,7 +22,7 @@ package org.loboevolution.html.dom.rss;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>RSSElement class.</p>
@@ -52,7 +52,7 @@ public class RSSElement extends HTMLElementImpl {
 		if (hasChildNodes()) {
 			NodeListImpl childNodes = (NodeListImpl) getChildNodes();
 			childNodes.forEach(child -> {
-				if (child.getNodeType() == NodeType.TEXT_NODE) {
+				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
 					String childText = "";
 					nodeValue = nodeValue.replace('\n', ' ');

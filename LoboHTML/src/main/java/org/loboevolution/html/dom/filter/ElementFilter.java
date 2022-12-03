@@ -44,7 +44,14 @@ public final class ElementFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
-		return Strings.isNotBlank(elementName) ? (this.elementName.equalsIgnoreCase(node.getNodeName())) : (node instanceof Element);
+	public short acceptNode(Node node) {
+		if (Strings.isNotBlank(elementName)) {
+			if (this.elementName.equalsIgnoreCase(node.getNodeName())) {
+				return NodeFilter.FILTER_ACCEPT;
+			}
+		} else if (node instanceof Element) {
+			return NodeFilter.FILTER_ACCEPT;
+		}
+		return NodeFilter.FILTER_REJECT;
 	}
 }

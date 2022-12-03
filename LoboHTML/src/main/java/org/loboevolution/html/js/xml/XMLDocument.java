@@ -22,12 +22,14 @@ package org.loboevolution.html.js.xml;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.*;
-import org.loboevolution.html.dom.nodeimpl.CDataSectionImpl;
+import org.loboevolution.html.dom.nodeimpl.traversal.TreeWalkerImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
+import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.html.node.traversal.TreeWalker;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
@@ -1009,148 +1011,162 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeIterator createNodeIterator(Node root) {
-
+	public NodeIterator createNodeIterator(Node root) throws DOMException {
 		return doc.createNodeIterator(root);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Range createRange() {
+	public NodeIterator createNodeIterator(Node root, int whatToShow) throws DOMException {
+		return doc.createNodeIterator(root, whatToShow);
+	}
 
+	/** {@inheritDoc} */
+	@Override
+	public NodeIterator createNodeIterator(Node root, NodeFilter filter) throws DOMException {
+		return doc.createNodeIterator(root, filter);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public NodeIterator createNodeIterator(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+		return doc.createNodeIterator(root, whatToShow, filter);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Range createRange() {
 		return doc.createRange();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public TreeWalker createTreeWalker(Node root) {
-
+	public TreeWalker createTreeWalker(Node root) throws DOMException {
 		return doc.createTreeWalker(root);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Element elementFromPoint(double x, double y) {
+	public TreeWalker createTreeWalker(Node root, int whatToShow) throws DOMException {
+		return doc.createTreeWalker(root, whatToShow);
+	}
 
+	/** {@inheritDoc} */
+	@Override
+	public TreeWalker createTreeWalker(Node root, NodeFilter filter) throws DOMException {
+		return doc.createTreeWalker(root, filter);
+	}
+
+	@Override
+	public TreeWalker createTreeWalker(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+		return new TreeWalkerImpl(root, whatToShow, filter);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element elementFromPoint(double x, double y) {
 		return doc.elementFromPoint(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId, boolean showUI, String value) {
-
 		return doc.execCommand(commandId, showUI, value);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId, boolean showUI) {
-
 		return doc.execCommand(commandId, showUI);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean execCommand(String commandId) {
-
 		return doc.execCommand(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElementsByClassName(String classNames) {
-
 		return doc.getElementsByClassName(classNames);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElementsByName(String elementName) {
-
 		return doc.getElementsByName(elementName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Selection getSelection() {
-
 		return doc.getSelection();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean hasFocus() {
-
 		return doc.hasFocus();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name, String features, boolean replace) {
-
 		return doc.open(url, name, features, replace);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name, String features) {
-
 		return doc.open(url, name, features);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Document open(String url, String name) {
-
 		return doc.open(url, name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Document open(String url) {
-
 		return doc.open(url);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Document open() {
-
 		return doc.open();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandEnabled(String commandId) {
-
 		return doc.queryCommandEnabled(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandIndeterm(String commandId) {
-
 		return doc.queryCommandIndeterm(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandState(String commandId) {
-
 		return doc.queryCommandState(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean queryCommandSupported(String commandId) {
-
 		return doc.queryCommandSupported(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String queryCommandValue(String commandId) {
-
 		return doc.queryCommandValue(commandId);
 	}
 

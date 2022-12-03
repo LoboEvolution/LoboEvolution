@@ -22,7 +22,7 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>Abstract EntityReferenceImpl class.</p>
@@ -34,6 +34,6 @@ public class EntityReferenceImpl extends EventTargetImpl implements EntityRefere
 
     @Override
     public int getNodeType() {
-        return NodeType.ENTITY_REFERENCE_NODE;
+        return Node.ENTITY_REFERENCE_NODE;
     }
 }

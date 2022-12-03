@@ -24,16 +24,15 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>CommandFilter class.</p>
- *
- *
- *
  */
 public class CommandFilter implements NodeFilter {
 
-	/** {@inheritDoc} */
-	@Override
-	public boolean acceptNode(Node node) {
-		return "command".equalsIgnoreCase(node.getNodeName());
-	}
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public short acceptNode(Node node) {
+        return "command".equalsIgnoreCase(node.getNodeName()) ?
+                NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
 }

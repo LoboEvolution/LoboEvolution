@@ -25,7 +25,6 @@ package org.loboevolution.html.dom.nodeimpl;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLSlotElement;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.Text;
 
 /**
@@ -68,7 +67,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/** {@inheritDoc} */
 	@Override
 	public int getNodeType() {
-		return NodeType.TEXT_NODE;
+		return Node.TEXT_NODE;
 	}
 
 	/** {@inheritDoc} */

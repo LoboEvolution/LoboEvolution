@@ -118,7 +118,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	/** {@inheritDoc} */
 	@Override
 	public int getNodeType() {
-		return NodeType.ATTRIBUTE_NODE;
+		return Node.ATTRIBUTE_NODE;
 	}
 
 	/** {@inheritDoc} */

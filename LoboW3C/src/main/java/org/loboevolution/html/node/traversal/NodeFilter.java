@@ -134,9 +134,9 @@ public interface NodeFilter  {
 	 * <p>acceptNode.</p>
 	 *
 	 * @param node a {@link org.loboevolution.html.node.Node} object.
-	 * @return a boolean.
+	 * @return a short.
 	 */
-	boolean acceptNode(Node node);
+	short acceptNode(Node node);
 
     
 }

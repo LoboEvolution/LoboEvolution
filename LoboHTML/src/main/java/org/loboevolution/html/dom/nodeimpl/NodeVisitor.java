@@ -26,9 +26,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>NodeVisitor interface.</p>
- *
- *
- *
  */
 public interface NodeVisitor {
 	/**

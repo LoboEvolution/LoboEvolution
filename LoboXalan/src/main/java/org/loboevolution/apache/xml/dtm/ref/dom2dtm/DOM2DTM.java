@@ -22,7 +22,6 @@ package org.loboevolution.apache.xml.dtm.ref.dom2dtm;
 import java.util.Vector;
 
 import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.javax.xml.transform.dom.DOMSource;
 import org.loboevolution.apache.xpath.objects.XString;
 import org.loboevolution.apache.xpath.res.XPATHErrorResources;
@@ -193,7 +192,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // so if it's read-only). The best available answer might be to
     // synthesize additional DTM Namespace Nodes that don't correspond
     // to DOM Attr Nodes.
-    if (NodeType.ATTRIBUTE_NODE == type) {
+    if (Node.ATTRIBUTE_NODE == type) {
       String name = node.getNodeName();
 
       if (name.startsWith("xmlns:") || name.equals("xmlns")) {
@@ -220,10 +219,10 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // definitions of local name. (The former says PIs don't have
     // localnames; the latter says they do.)
     String localName =
-        (type == NodeType.PROCESSING_INSTRUCTION_NODE) ? node.getNodeName() : node.getLocalName();
+        (type == Node.PROCESSING_INSTRUCTION_NODE) ? node.getNodeName() : node.getLocalName();
 
     // Hack to make DOM1 sort of work...
-    if (((type == NodeType.ELEMENT_NODE) || (type == NodeType.ATTRIBUTE_NODE)) && null == localName)
+    if (((type == Node.ELEMENT_NODE) || (type == Node.ATTRIBUTE_NODE)) && null == localName)
       localName = node.getNodeName(); // -sb
 
     ExpandedNameTable exnt = m_expandedNameTable;
@@ -236,7 +235,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
     // those will participate in namespace processing, this is
     // officially accepted as Not Our Fault. But it might be nice to
     // issue a diagnostic message!
-    if (node.getLocalName() == null && (type == NodeType.ELEMENT_NODE || type == NodeType.ATTRIBUTE_NODE)) {
+    if (node.getLocalName() == null && (type == Node.ELEMENT_NODE || type == Node.ATTRIBUTE_NODE)) {
       // warning("DOM 'level 1' node "+node.getNodeName()+" won't be mapped properly
       // in
       // DOM2DTM.");
@@ -516,7 +515,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   }
 
   /**
-   * Get the handle from a NodeType.
+   * Get the handle from a Node.
    *
    * <p>%OPT% This will be pretty slow.
    *
@@ -552,7 +551,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   }
 
   /**
-   * Get the handle from a NodeType. This is a more robust version of getHandleFromNode, intended to be
+   * Get the handle from a Node. This is a more robust version of getHandleFromNode, intended to be
    * usable by the public.
    *
    * <p>%OPT% This will be pretty slow. %REVIEW% This relies on being able to test node-identity via
@@ -692,21 +691,21 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   protected static void getNodeData(Node node, StringBuilder buf) {
 
     switch (node.getNodeType()) {
-      case NodeType.DOCUMENT_FRAGMENT_NODE:
-      case NodeType.DOCUMENT_NODE:
-      case NodeType.ELEMENT_NODE:
+      case Node.DOCUMENT_FRAGMENT_NODE:
+      case Node.DOCUMENT_NODE:
+      case Node.ELEMENT_NODE:
         {
           for (Node child = node.getFirstChild(); null != child; child = child.getNextSibling()) {
             getNodeData(child, buf);
           }
         }
         break;
-      case NodeType.TEXT_NODE:
-      case NodeType.CDATA_SECTION_NODE:
-      case NodeType.ATTRIBUTE_NODE: // Never a child but might be our starting node
+      case Node.TEXT_NODE:
+      case Node.CDATA_SECTION_NODE:
+      case Node.ATTRIBUTE_NODE: // Never a child but might be our starting node
         buf.append(node.getNodeValue());
         break;
-      case NodeType.PROCESSING_INSTRUCTION_NODE:
+      case Node.PROCESSING_INSTRUCTION_NODE:
         // warning(XPATHErrorResources.WG_PARSING_AND_PREPARING);
         break;
       default:
@@ -968,7 +967,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
   public int getElementById(String elementId) {
 
     Document doc =
-        (m_root.getNodeType() == NodeType.DOCUMENT_NODE)
+        (m_root.getNodeType() == Node.DOCUMENT_NODE)
             ? (Document) m_root
             : m_root.getOwnerDocument();
 

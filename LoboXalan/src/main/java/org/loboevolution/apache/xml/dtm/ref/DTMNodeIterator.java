@@ -84,16 +84,6 @@ public class DTMNodeIterator implements NodeIterator {
     throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
   }
 
-  @Override
-  public boolean isPointerBeforeReferenceNode() {
-    return false;
-  }
-
-  @Override
-  public Node getReferenceNode() {
-    return null;
-  }
-
   /** {@inheritDoc} */
   @Override
   public Node getRoot() {

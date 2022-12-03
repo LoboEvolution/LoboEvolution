@@ -35,7 +35,6 @@ import org.loboevolution.html.node.css.CSSRuleList;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.html.node.NodeType;
 
 import static org.junit.Assert.*;
 
@@ -404,7 +403,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(nl);
         assertEquals(1, nl.getLength());
         Node node0 = nl.item(0);
-        assertEquals(NodeType.TEXT_NODE, node0.getNodeType());
+        assertEquals(Node.TEXT_NODE, node0.getNodeType());
         assertEquals("<>", node0.getNodeValue());
         Attr classattr = elm.getAttributeNode("class");
         assertNotNull(classattr);
@@ -422,7 +421,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(nl);
         assertEquals(1, nl.getLength());
         Node ent0 = nl.item(0);
-        assertEquals(NodeType.TEXT_NODE, ent0.getNodeType());
+        assertEquals(Node.TEXT_NODE, ent0.getNodeType());
         assertEquals("ítem", ent0.getNodeValue());
     }
 
@@ -436,7 +435,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(nl);
         assertEquals(1, nl.getLength());
         Node ent0 = nl.item(0);
-        assertEquals(NodeType.TEXT_NODE, ent0.getNodeType());
+        assertEquals(Node.TEXT_NODE, ent0.getNodeType());
         assertEquals("List item \u221e", ent0.getNodeValue());
     }
 

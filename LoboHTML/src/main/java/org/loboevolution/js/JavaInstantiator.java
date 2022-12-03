@@ -22,9 +22,6 @@ package org.loboevolution.js;
 
 /**
  * <p>JavaInstantiator interface.</p>
- *
- *
- *
  */
 public interface JavaInstantiator {
 	/**

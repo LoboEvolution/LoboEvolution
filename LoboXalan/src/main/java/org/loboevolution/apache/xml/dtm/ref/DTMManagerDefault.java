@@ -20,7 +20,6 @@
 package org.loboevolution.apache.xml.dtm.ref;
 
 import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.javax.xml.transform.Source;
 import org.loboevolution.javax.xml.transform.dom.DOMSource;
 
@@ -229,7 +228,7 @@ public class DTMManagerDefault extends DTMManager {
       // DOM2DTM#getHandleOfNode will be very unhappy.
       Node root = node;
       Node p =
-          (root.getNodeType() == NodeType.ATTRIBUTE_NODE)
+          (root.getNodeType() == Node.ATTRIBUTE_NODE)
               ? ((Attr) root).getOwnerElement()
               : root.getParentNode();
       for (; p != null; p = p.getParentNode()) {

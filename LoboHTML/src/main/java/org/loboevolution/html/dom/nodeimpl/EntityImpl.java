@@ -22,7 +22,7 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import org.loboevolution.html.dom.Entity;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
-import org.loboevolution.html.node.NodeType;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p> EntityImpl class.</p>
@@ -46,6 +46,6 @@ public class EntityImpl extends EventTargetImpl implements Entity {
 
     @Override
     public int getNodeType() {
-        return NodeType.ENTITY_NODE;
+        return Node.ENTITY_NODE;
     }
 }

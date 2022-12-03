@@ -32,7 +32,6 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.Assert.*;
@@ -65,7 +64,7 @@ public class DOMElementTest extends LoboUnitTest {
         body.setAttributeNode(idattr);
         Node node = attrs.getNamedItem("id");
         assertNotNull(node);
-        assertEquals(NodeType.ATTRIBUTE_NODE, node.getNodeType());
+        assertEquals(Node.ATTRIBUTE_NODE, node.getNodeType());
         assertEquals("id", node.getNodeName());
         assertEquals("bodyId", node.getNodeValue());
         assertNull(node.getNextSibling());

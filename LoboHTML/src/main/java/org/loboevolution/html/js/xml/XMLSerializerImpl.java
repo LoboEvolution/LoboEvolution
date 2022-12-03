@@ -89,7 +89,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
 
                 if (childrenCount == 1) {
                     Node item = children.item(0);
-                    if (item.getNodeType() == NodeType.TEXT_NODE) {
+                    if (item.getNodeType() == Node.TEXT_NODE) {
                         if (item.getNodeValue() == null) {
                             buff.append("/>");
                         } else {
@@ -107,7 +107,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
 				AtomicBoolean tag = new AtomicBoolean(endTag);
 				child.forEach(item -> {
 					final int itemType = item.getNodeType();
-					if (itemType == NodeType.DOCUMENT_NODE || itemType == NodeType.ELEMENT_NODE) {
+					if (itemType == Node.DOCUMENT_NODE || itemType == Node.ELEMENT_NODE) {
 						getXString((Element) item, withoutNamespaces, buff, tag.get());
 					}
 				});

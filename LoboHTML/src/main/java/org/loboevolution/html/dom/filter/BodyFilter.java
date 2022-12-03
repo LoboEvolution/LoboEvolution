@@ -24,16 +24,13 @@ import org.loboevolution.html.node.Node;
 
 /**
  * The Class BodyFilter.
- *
- *
- *
  */
 public class BodyFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
+	public short acceptNode(Node node) {
 		String nodeName = node.getNodeName();
-		return "body".equalsIgnoreCase(nodeName);
+		return "body".equalsIgnoreCase(nodeName) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

@@ -37,20 +37,6 @@ public interface NodeIterator {
 	NodeFilter getFilter();
 
 	/**
-	 * <p>isPointerBeforeReferenceNode.</p>
-	 *
-	 * @return a boolean.
-	 */
-	boolean isPointerBeforeReferenceNode();
-
-	/**
-	 * <p>getReferenceNode.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 */
-	Node getReferenceNode();
-
-	/**
 	 * <p>getRoot.</p>
 	 *
 	 * @return a {@link org.loboevolution.html.node.Node} object.

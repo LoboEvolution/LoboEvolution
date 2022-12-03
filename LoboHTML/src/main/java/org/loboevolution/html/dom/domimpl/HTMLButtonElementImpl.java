@@ -26,7 +26,6 @@ import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.node.ValidityState;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderstate.DisplayRenderState;
@@ -168,7 +167,7 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 		if (hasChildNodes()) {
 			NodeListImpl childNodes = (NodeListImpl) getChildNodes();
 			childNodes.forEach(child -> {
-				if (child.getNodeType() == NodeType.TEXT_NODE) {
+				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
 					String childText;
 					nodeValue = nodeValue.replace('\n', ' ');

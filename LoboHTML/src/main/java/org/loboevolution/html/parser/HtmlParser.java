@@ -223,7 +223,7 @@ public class HtmlParser {
 				try {
 					safeAppendChild(parent, textNode);
 				} catch (final DOMException de) {
-					if ((parent.getNodeType() != NodeType.DOCUMENT_NODE) || (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
+					if ((parent.getNodeType() != Node.DOCUMENT_NODE) || (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
 						logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 					}
 				}
@@ -654,7 +654,7 @@ public class HtmlParser {
 					try {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
-						if ((parent.getNodeType() != NodeType.DOCUMENT_NODE)
+						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
 								|| (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
 							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 						}
@@ -681,7 +681,7 @@ public class HtmlParser {
 					try {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
-						if ((parent.getNodeType() != NodeType.DOCUMENT_NODE)
+						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
 								|| (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
 							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
 						}

@@ -30,6 +30,7 @@ import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.loboevolution.apache.xml.dtm.DTMManager;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.javax.xml.transform.TransformerException;
 
 /**
  * This class represents an XPath nodeset object, and is capable of converting the nodeset to other
@@ -173,13 +174,13 @@ public class XNodeSet extends NodeSequence {
 
   /** {@inheritDoc} */
   @Override
-  public NodeIterator nodeset() throws org.loboevolution.javax.xml.transform.TransformerException {
+  public NodeIterator nodeset() throws TransformerException {
     return new DTMNodeIterator(iter());
   }
 
   /** {@inheritDoc} */
   @Override
-  public NodeList nodelist() throws org.loboevolution.javax.xml.transform.TransformerException {
+  public NodeList nodelist() throws TransformerException {
     DTMNodeList nodelist =
         new DTMNodeList(this);
     // Creating a DTMNodeList has the side-effect that it will create a clone
@@ -249,10 +250,10 @@ public class XNodeSet extends NodeSequence {
    * @param obj2 Object to compare this nodeset to
    * @param comparator Comparator to use
    * @return See the comments below for each object type comparison
-   * @throws org.loboevolution.javax.xml.transform.TransformerException in case of error
+   * @throws TransformerException in case of error
    */
   public boolean compare(XObject obj2, Comparator comparator)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws TransformerException {
 
     boolean result = false;
     int type = obj2.getType();
@@ -387,25 +388,25 @@ public class XNodeSet extends NodeSequence {
 
   /** {@inheritDoc} */
   @Override
-  public boolean lessThan(XObject obj2) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public boolean lessThan(XObject obj2) throws TransformerException {
     return compare(obj2, S_LT);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean lessThanOrEqual(XObject obj2) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public boolean lessThanOrEqual(XObject obj2) throws TransformerException {
     return compare(obj2, S_LTE);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean greaterThan(XObject obj2) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public boolean greaterThan(XObject obj2) throws TransformerException {
     return compare(obj2, S_GT);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean greaterThanOrEqual(XObject obj2) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public boolean greaterThanOrEqual(XObject obj2) throws TransformerException {
     return compare(obj2, S_GTE);
   }
 
@@ -421,7 +422,7 @@ public class XNodeSet extends NodeSequence {
 
   /** {@inheritDoc} */
   @Override
-  public boolean notEquals(XObject obj2) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public boolean notEquals(XObject obj2) throws TransformerException {
     return compare(obj2, S_NEQ);
   }
 }

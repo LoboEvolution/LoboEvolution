@@ -24,16 +24,14 @@ import org.loboevolution.html.node.Node;
 
 /**
  * The Class EmbedFilter.
- *
- *
- *
  */
 public class EmbedFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
+	public short acceptNode(Node node) {
 		String nodeName = node.getNodeName();
-		return "EMBED".equalsIgnoreCase(nodeName);
+		return "EMBED".equalsIgnoreCase(nodeName) ?
+				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

@@ -20,14 +20,12 @@
 
 package org.loboevolution.html.dom.filter;
 
+import org.loboevolution.html.node.Text;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Node;
 
 /**
  * <p>TextFilter class.</p>
- *
- *
- *
  */
 public class TextFilter implements NodeFilter {
 	/**
@@ -39,7 +37,8 @@ public class TextFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
-		return node instanceof org.loboevolution.html.node.Text;
+	public short acceptNode(Node node) {
+		return node instanceof Text ?
+				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

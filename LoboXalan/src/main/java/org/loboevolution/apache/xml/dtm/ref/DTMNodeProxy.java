@@ -33,7 +33,9 @@ import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.geom.DOMRect;
 import org.loboevolution.html.node.js.geom.DOMRectList;
+import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.html.node.traversal.TreeWalker;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
@@ -333,7 +335,7 @@ public class DTMNodeProxy
     @Override
     public final Node getParentNode() {
 
-        if (getNodeType() == NodeType.ATTRIBUTE_NODE) return null;
+        if (getNodeType() == Node.ATTRIBUTE_NODE) return null;
 
         int newnode = dtm.getParent(node);
 
@@ -402,7 +404,7 @@ public class DTMNodeProxy
     public final Node getNextSibling() {
 
         // Attr's Next is defined at DTM level, but not at DOM level.
-        if (dtm.getNodeType(node) == NodeType.ATTRIBUTE_NODE) return null;
+        if (dtm.getNodeType(node) == Node.ATTRIBUTE_NODE) return null;
 
         int newnode = dtm.getNextSibling(node);
 
@@ -675,7 +677,7 @@ public class DTMNodeProxy
              kidhandle != DTM.NULL;
              kidhandle = dtm.getNextSibling(kidhandle)) {
             switch (dtm.getNodeType(kidhandle)) {
-                case NodeType.ELEMENT_NODE:
+                case Node.ELEMENT_NODE:
                     if (elementhandle != DTM.NULL) {
                         elementhandle = DTM.NULL; // More than one; ill-formed.
                         kidhandle = dtm.getLastChild(dochandle); // End loop
@@ -683,9 +685,9 @@ public class DTMNodeProxy
                     break;
 
                 // These are harmless; document is still wellformed
-                case NodeType.COMMENT_NODE:
-                case NodeType.PROCESSING_INSTRUCTION_NODE:
-                case NodeType.DOCUMENT_TYPE_NODE:
+                case Node.COMMENT_NODE:
+                case Node.PROCESSING_INSTRUCTION_NODE:
+                case Node.DOCUMENT_TYPE_NODE:
                     break;
 
                 default:
@@ -725,11 +727,6 @@ public class DTMNodeProxy
     @Override
     public final Text createTextNode(String data) {
         throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
-    }
-
-    @Override
-    public TreeWalker createTreeWalker(Node root) {
-        return null;
     }
 
     @Override
@@ -919,11 +916,6 @@ public class DTMNodeProxy
 
     @Override
     public Event createEvent(String eventInterface) {
-        return null;
-    }
-
-    @Override
-    public NodeIterator createNodeIterator(Node root) {
         return null;
     }
 
@@ -1306,7 +1298,7 @@ public class DTMNodeProxy
      */
     @Override
     public final Element getOwnerElement() {
-        if (getNodeType() != NodeType.ATTRIBUTE_NODE) return null;
+        if (getNodeType() != Node.ATTRIBUTE_NODE) return null;
         // In XPath and DTM data models, unlike DOM, an Attr's parent is its
         // owner element.
         int newnode = dtm.getParent(node);
@@ -1513,6 +1505,46 @@ public class DTMNodeProxy
         return false;
     }
 
+    @Override
+    public NodeIterator createNodeIterator(Node root) throws DOMException {
+        return null;
+    }
+
+    @Override
+    public NodeIterator createNodeIterator(Node root, int whatToShow) throws DOMException {
+        return null;
+    }
+
+    @Override
+    public NodeIterator createNodeIterator(Node root, NodeFilter filter) throws DOMException {
+        return null;
+    }
+
+    @Override
+    public NodeIterator createNodeIterator(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+        return null;
+    }
+
+    @Override
+    public TreeWalker createTreeWalker(Node root) throws DOMException {
+        return null;
+    }
+
+    @Override
+    public TreeWalker createTreeWalker(Node root, int whatToShow) throws DOMException {
+        return null;
+    }
+
+    @Override
+    public TreeWalker createTreeWalker(Node root, NodeFilter filter) throws DOMException {
+        return null;
+    }
+
+    @Override
+    public TreeWalker createTreeWalker(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+        return null;
+    }
+
     /**
      * Inner class to support getDOMImplementation.
      */
@@ -1632,7 +1664,7 @@ public class DTMNodeProxy
     public String lookupNamespaceURI(String specifiedPrefix) {
         int type = this.getNodeType();
         switch (type) {
-            case NodeType.ELEMENT_NODE: {
+            case Node.ELEMENT_NODE: {
                 String namespace = this.getNamespaceURI();
                 String prefix = this.getPrefix();
                 if (namespace != null) {
@@ -1669,14 +1701,14 @@ public class DTMNodeProxy
                 }
                 return null;
             }
-            case NodeType.ENTITY_NODE:
-            case NodeType.NOTATION_NODE:
-            case NodeType.DOCUMENT_FRAGMENT_NODE:
-            case NodeType.DOCUMENT_TYPE_NODE:
+            case Node.ENTITY_NODE:
+            case Node.NOTATION_NODE:
+            case Node.DOCUMENT_FRAGMENT_NODE:
+            case Node.DOCUMENT_TYPE_NODE:
                 // type is unknown
                 return null;
-            case NodeType.ATTRIBUTE_NODE: {
-                if (this.getOwnerElement().getNodeType() == NodeType.ELEMENT_NODE) {
+            case Node.ATTRIBUTE_NODE: {
+                if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
                     return getOwnerElement().lookupNamespaceURI(specifiedPrefix);
                 }
                 return null;
@@ -1710,14 +1742,14 @@ public class DTMNodeProxy
         int type = this.getNodeType();
 
         switch (type) {
-            case NodeType.ENTITY_NODE:
-            case NodeType.NOTATION_NODE:
-            case NodeType.DOCUMENT_FRAGMENT_NODE:
-            case NodeType.DOCUMENT_TYPE_NODE:
+            case Node.ENTITY_NODE:
+            case Node.NOTATION_NODE:
+            case Node.DOCUMENT_FRAGMENT_NODE:
+            case Node.DOCUMENT_TYPE_NODE:
                 // type is unknown
                 return null;
-            case NodeType.ATTRIBUTE_NODE: {
-                if (this.getOwnerElement().getNodeType() == NodeType.ELEMENT_NODE) {
+            case Node.ATTRIBUTE_NODE: {
+                if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
                     return getOwnerElement().lookupPrefix(namespaceURI);
                 }
                 return null;

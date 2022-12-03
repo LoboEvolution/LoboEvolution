@@ -185,7 +185,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   /** {@inheritDoc} */
   @Override
   public int getNodeType() {
-    return NodeType.ATTRIBUTE_NODE;
+    return Node.ATTRIBUTE_NODE;
   }
 
   /** {@inheritDoc} */
@@ -372,7 +372,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   public String lookupNamespaceURI(String specifiedPrefix) {
     int type = this.getNodeType();
     switch (type) {
-      case NodeType.ELEMENT_NODE:
+      case Node.ELEMENT_NODE:
         {
           String namespace = this.getNamespaceURI();
           String prefix = this.getPrefix();
@@ -410,15 +410,15 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
           }
           return null;
         }
-      case NodeType.ENTITY_NODE:
-      case NodeType.NOTATION_NODE:
-      case NodeType.DOCUMENT_FRAGMENT_NODE:
-      case NodeType.DOCUMENT_TYPE_NODE:
+      case Node.ENTITY_NODE:
+      case Node.NOTATION_NODE:
+      case Node.DOCUMENT_FRAGMENT_NODE:
+      case Node.DOCUMENT_TYPE_NODE:
         // type is unknown
         return null;
-      case NodeType.ATTRIBUTE_NODE:
+      case Node.ATTRIBUTE_NODE:
         {
-          if (this.getOwnerElement().getNodeType() == NodeType.ELEMENT_NODE) {
+          if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
             return getOwnerElement().lookupNamespaceURI(specifiedPrefix);
           }
           return null;
@@ -448,15 +448,15 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
     int type = this.getNodeType();
     switch (type) {
-      case NodeType.ENTITY_NODE:
-      case NodeType.NOTATION_NODE:
-      case NodeType.DOCUMENT_FRAGMENT_NODE:
-      case NodeType.DOCUMENT_TYPE_NODE:
+      case Node.ENTITY_NODE:
+      case Node.NOTATION_NODE:
+      case Node.DOCUMENT_FRAGMENT_NODE:
+      case Node.DOCUMENT_TYPE_NODE:
         // type is unknown
         return null;
-      case NodeType.ATTRIBUTE_NODE:
+      case Node.ATTRIBUTE_NODE:
         {
-          if (this.getOwnerElement().getNodeType() == NodeType.ELEMENT_NODE) {
+          if (this.getOwnerElement().getNodeType() == Node.ELEMENT_NODE) {
             return getOwnerElement().lookupPrefix(namespaceURI);
           }
           return null;

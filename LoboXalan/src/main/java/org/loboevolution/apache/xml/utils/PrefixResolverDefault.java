@@ -21,7 +21,6 @@ package org.loboevolution.apache.xml.utils;
 
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 
 /**
  * This class implements a generic PrefixResolver that can be used to perform prefix-to-namespace
@@ -63,9 +62,9 @@ public class PrefixResolverDefault implements PrefixResolver {
 
       while ((null != parent)
           && (null == namespace)
-          && (((type = parent.getNodeType()) == NodeType.ELEMENT_NODE)
-              || (type == NodeType.ENTITY_REFERENCE_NODE))) {
-        if (type == NodeType.ELEMENT_NODE) {
+          && (((type = parent.getNodeType()) == Node.ELEMENT_NODE)
+              || (type == Node.ENTITY_REFERENCE_NODE))) {
+        if (type == Node.ELEMENT_NODE) {
           if (parent.getNodeName().indexOf(prefix + ":") == 0) return parent.getNamespaceURI();
           NamedNodeMap nnm = parent.getAttributes();
 

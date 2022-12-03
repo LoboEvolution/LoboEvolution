@@ -56,18 +56,18 @@ public class XPathNSResolverImpl implements XPathNSResolver {
         } else {
             int type;
             while ((null != parent) && (null == namespace)
-                    && (((type = parent.getNodeType()) == NodeType.ELEMENT_NODE) ||
-                       ((type = parent.getNodeType()) == NodeType.DOCUMENT_NODE)
-                    || (type == NodeType.ENTITY_REFERENCE_NODE))) {
+                    && (((type = parent.getNodeType()) == Node.ELEMENT_NODE) ||
+                       ((type = parent.getNodeType()) == Node.DOCUMENT_NODE)
+                    || (type == Node.ENTITY_REFERENCE_NODE))) {
 
-                if (type == NodeType.DOCUMENT_NODE) {
+                if (type == Node.DOCUMENT_NODE) {
                     Document document = (Document) parent;
                     Element docelm = document.getDocumentElement();
                     if (docelm != null && docelm.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
                         return docelm.getNamespaceURI();
                     }
                 }
-                if (type == NodeType.ELEMENT_NODE) {
+                if (type == Node.ELEMENT_NODE) {
                     if (parent.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
                         return parent.getNamespaceURI();
                     }

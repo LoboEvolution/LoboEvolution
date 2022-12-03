@@ -22,7 +22,6 @@ package org.loboevolution.menu.tools.developer.tool.inspector;
 
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -53,7 +52,7 @@ public class DOMTreeCellRenderer extends DefaultTreeCellRenderer {
 
         Node node = (Node) value;
 
-        if (node.getNodeType() == NodeType.ELEMENT_NODE) {
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
 
             String cls = "";
             ElementImpl element = (ElementImpl) node;
@@ -67,14 +66,14 @@ public class DOMTreeCellRenderer extends DefaultTreeCellRenderer {
 
         }
 
-        if (node.getNodeType() == NodeType.TEXT_NODE) {
+        if (node.getNodeType() == Node.TEXT_NODE) {
 
             if (node.getNodeValue().trim().length() > 0) {
                 value = "\"" + node.getNodeValue() + "\"";
             }
         }
 
-        if (node.getNodeType() == NodeType.COMMENT_NODE) {
+        if (node.getNodeType() == Node.COMMENT_NODE) {
             value = "<!-- " + node.getNodeValue() + " -->";
         }
 

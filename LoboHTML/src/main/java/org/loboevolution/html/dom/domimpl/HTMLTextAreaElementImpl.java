@@ -29,7 +29,6 @@ import org.loboevolution.html.dom.HTMLTextAreaElement;
 import org.loboevolution.html.dom.input.TextArea;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeType;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -171,7 +170,7 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 		if (hasChildNodes()) {
 			NodeListImpl children = (NodeListImpl)getChildNodes();
 			children.forEach(child -> {
-				if (child.getNodeType() == NodeType.TEXT_NODE) {
+				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
 					String childText;
 					nodeValue = nodeValue.replace('\n', ' ');

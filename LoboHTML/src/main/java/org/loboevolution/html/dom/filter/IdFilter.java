@@ -25,9 +25,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>IdFilter class.</p>
- *
- *
- *
  */
 public class IdFilter implements NodeFilter {
 	private final String _id;
@@ -43,8 +40,9 @@ public class IdFilter implements NodeFilter {
 	
 	/** {@inheritDoc} */
 	@Override
-	public boolean acceptNode(Node node) {
+	public short acceptNode(Node node) {
 		return (node instanceof Element) && this._id != null && 
-				this._id.equals(((Element) node).getAttribute("id"));
+				this._id.equals(((Element) node).getAttribute("id"))  ?
+				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

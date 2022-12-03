@@ -26,19 +26,17 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * The Class CaptionFilter.
- *
- *
- *
  */
 public class CaptionFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public final boolean acceptNode(Node node) {
+	public final short acceptNode(Node node) {
 		if (node instanceof HTMLElementImpl) {
 			final HTMLElementImpl elem = (HTMLElementImpl) node;
-			return elem.getRenderState().getDisplay() == RenderState.DISPLAY_TABLE_CAPTION;
+			return elem.getRenderState().getDisplay() == RenderState.DISPLAY_TABLE_CAPTION ?
+					NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 		}
-		return false;
+		return NodeFilter.FILTER_REJECT;
 	}
 }
