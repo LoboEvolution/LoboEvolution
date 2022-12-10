@@ -45,22 +45,12 @@ public class WrapperLayout implements LayoutManager {
 		return instance;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String,
-	 * java.awt.Component)
-	 */
+
 	/** {@inheritDoc} */
 	@Override
 	public void addLayoutComponent(String arg0, Component arg1) {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void layoutContainer(Container arg0) {
@@ -73,11 +63,6 @@ public class WrapperLayout implements LayoutManager {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Dimension minimumLayoutSize(Container arg0) {
@@ -91,11 +76,6 @@ public class WrapperLayout implements LayoutManager {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Dimension preferredLayoutSize(Container arg0) {
@@ -109,11 +89,6 @@ public class WrapperLayout implements LayoutManager {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void removeLayoutComponent(Component arg0) {

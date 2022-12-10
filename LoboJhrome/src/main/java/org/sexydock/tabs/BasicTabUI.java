@@ -166,31 +166,16 @@ public class BasicTabUI extends TabUI {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.jhrome.IJhromeTab#isDraggableAt(java.awt.Point)
-     */
     @Override
     public boolean isDraggableAt(Tab tab, Point p) {
         return isHoverableAt(tab, p) && !closeButton.contains(SwingUtilities.convertPoint(tab, p, closeButton));
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.jhrome.IJhromeTab#isSelectableAt(java.awt.Point)
-     */
     @Override
     public boolean isSelectableAt(Tab tab, Point p) {
         return isDraggableAt(tab, p);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.jhrome.IJhromeTab#isHoverableAt(java.awt.Point)
-     */
     @Override
     public boolean isHoverableAt(Tab tab, Point p) {
         Insets insets = tab.getInsets();

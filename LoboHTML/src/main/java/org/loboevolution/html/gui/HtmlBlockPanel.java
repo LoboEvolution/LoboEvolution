@@ -470,13 +470,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		return start != null && end != null && !start.equals(end);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * java.awt.datatransfer.ClipboardOwner#lostOwnership(java.awt.datatransfer.
-	 * Clipboard, java.awt.datatransfer.Transferable)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void lostOwnership(Clipboard arg0, Transferable arg1) {
@@ -615,19 +608,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	// protected void paintComponent(Graphics g) {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		// We go against Sun's advice and override
-		// paint() instead of paintComponent(). Scrollbars
-		// do not repaint correctly if we use
-		// paintComponent.
 		if (isOpaque()) {
 			// Background not painted by default in JComponent.
 			final Rectangle clipBounds = g.getClipBounds();

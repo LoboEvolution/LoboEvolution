@@ -28,9 +28,6 @@ import org.loboevolution.init.GuiInit;
 
 /**
  * The Class OkAction.
- *
- *
- *
  */
 public class OkCancelAction extends AbstractAction {
 
@@ -48,12 +45,6 @@ public class OkCancelAction extends AbstractAction {
 		this.prefer = prefer;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-	 * ActionEvent)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {

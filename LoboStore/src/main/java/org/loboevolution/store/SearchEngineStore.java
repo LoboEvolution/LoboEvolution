@@ -178,11 +178,7 @@ public class SearchEngineStore implements Serializable {
 		this.type = type;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

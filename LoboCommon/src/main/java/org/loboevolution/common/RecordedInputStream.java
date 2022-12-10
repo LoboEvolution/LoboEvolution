@@ -57,22 +57,12 @@ public class RecordedInputStream extends InputStream {
 		this.maxBufferSize = maxBufferSize;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.io.InputStream#available()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public int available() throws IOException {
 		return this.delegate.available();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.io.InputStream#close()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void close() throws IOException {
@@ -103,22 +93,13 @@ public class RecordedInputStream extends InputStream {
 		this.markPosition = this.store.size();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.io.InputStream#markSupported()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean markSupported() {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.io.InputStream#read()
-	 */
+
 	/** {@inheritDoc} */
 	@Override
 	public int read() throws IOException {
@@ -140,11 +121,6 @@ public class RecordedInputStream extends InputStream {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.io.InputStream#read(byte[], int, int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public int read(byte[] buffer, int offset, int length) throws IOException {

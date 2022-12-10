@@ -54,11 +54,6 @@ public class WritableLineReader extends LineNumberReader {
 		super(reader, bufferSize);
 	}
 
-	/*
-	 * (non-Javadoc) Note: Not implicitly thread safe.
-	 * 
-	 * @see java.io.Reader#close()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void close() throws IOException {
@@ -84,11 +79,6 @@ public class WritableLineReader extends LineNumberReader {
 		return super.read();
 	}
 
-	/*
-	 * (non-Javadoc) Note: Not implicitly thread safe.
-	 * 
-	 * @see java.io.Reader#read(byte[], int, int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public int read(char[] b, int off, int len) throws IOException {

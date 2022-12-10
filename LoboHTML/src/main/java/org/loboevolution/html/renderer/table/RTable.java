@@ -136,22 +136,12 @@ public class RTable extends BaseElementRenderable {
 		return new RenderableSpot(this, x, y);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.RenderableContainer#getBackground()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Color getPaintedBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.RCollection#getRenderables()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Iterator getRenderables() {
@@ -205,13 +195,6 @@ public class RTable extends BaseElementRenderable {
 		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onDoubleClick(event, x, y);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseClick(final MouseEvent event, int x, int y) {
@@ -232,26 +215,12 @@ public class RTable extends BaseElementRenderable {
 		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onMouseClick(event, x, y);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
-	 * MouseEvent)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseDisarmed(final MouseEvent event) {
 		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onMouseDisarmed(event);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMousePressed(final MouseEvent event, int x, int y) {
@@ -272,13 +241,6 @@ public class RTable extends BaseElementRenderable {
 		return new TableMatrixEvents(this.tableMatrix.getAllCells()).onMousePressed(event, x, y);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseReleased(final MouseEvent event, int x, int y) {

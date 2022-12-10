@@ -87,11 +87,6 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 		return value;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

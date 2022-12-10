@@ -34,9 +34,6 @@ import javax.swing.SwingConstants;
 
 /**
  * The Class FormPanel.
- *
- *
- *
  */
 public class FormPanel extends JComponent {
 
@@ -74,11 +71,6 @@ public class FormPanel extends JComponent {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.Container#doLayout()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void doLayout() {
@@ -88,11 +80,6 @@ public class FormPanel extends JComponent {
 		super.doLayout();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JComponent#getMaximumSize()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Dimension getMaximumSize() {
@@ -102,11 +89,6 @@ public class FormPanel extends JComponent {
 		return super.getMaximumSize();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JComponent#getMinimumSize()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Dimension getMinimumSize() {
@@ -125,11 +107,6 @@ public class FormPanel extends JComponent {
 		return this.minLabelWidth;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JComponent#getPreferredSize()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize() {
@@ -191,11 +168,6 @@ public class FormPanel extends JComponent {
 		this.fieldsInvalid = false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JComponent#revalidate()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void revalidate() {

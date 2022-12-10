@@ -53,12 +53,6 @@ public class TextEditOkAction extends AbstractAction {
 		this.search = search;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {

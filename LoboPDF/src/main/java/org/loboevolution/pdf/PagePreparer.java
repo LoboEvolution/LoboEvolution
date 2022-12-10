@@ -59,11 +59,6 @@ class PagePreparer extends Thread {
 		waitforPage = -1;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Thread#run()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void run() {

@@ -62,13 +62,6 @@ class TableMatrixEvents {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
 	/**
 	 * <p>onMouseClick.</p>
 	 *
@@ -90,13 +83,6 @@ class TableMatrixEvents {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
-	 * MouseEvent)
-	 */
 	/**
 	 * <p>onMouseDisarmed.</p>
 	 *
@@ -113,13 +99,6 @@ class TableMatrixEvents {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
 	/**
 	 * <p>onMousePressed.</p>
 	 *
@@ -142,13 +121,6 @@ class TableMatrixEvents {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
 	/**
 	 * <p>onMouseReleased.</p>
 	 *

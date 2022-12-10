@@ -671,11 +671,6 @@ public class StyleSheetRenderState implements RenderState {
 		return overflow;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.renderstate.RenderState#getOverflowY()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public int getOverflowY() {

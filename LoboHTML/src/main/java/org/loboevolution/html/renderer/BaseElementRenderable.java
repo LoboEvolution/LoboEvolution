@@ -123,11 +123,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		this.userAgentContext = ucontext;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.RenderableContainer#add(java.awt.Component)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Component addComponent(Component component) {
@@ -149,11 +144,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
         return this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;
     }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.RenderableContainer#add(java.awt.Component)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void addDelayedPair(DelayedPair pair) {

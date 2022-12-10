@@ -158,11 +158,6 @@ public class JhromeTabUI extends BasicTabUI {
         return current;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.jhrome.IJhromeTab#isHoverableAt(java.awt.Point)
-     */
     @Override
     public boolean isHoverableAt(Tab tab, Point p) {
         return outerBorder.contains(p);

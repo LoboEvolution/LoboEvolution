@@ -55,11 +55,6 @@ public class PrintThread extends Thread {
 		this.dialog = dialog;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Thread#run()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void run() {

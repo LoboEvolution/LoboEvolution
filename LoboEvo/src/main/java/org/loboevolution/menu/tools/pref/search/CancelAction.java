@@ -28,8 +28,6 @@ import javax.swing.AbstractAction;
  * The Class CancelAction.
  *
  * @param <T> a T object.
- *
- *
  */
 public class CancelAction<T> extends AbstractAction {
 
@@ -47,12 +45,6 @@ public class CancelAction<T> extends AbstractAction {
 		this.item = item;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-	 * ActionEvent)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {

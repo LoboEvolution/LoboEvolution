@@ -425,12 +425,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return new NodeListImpl(al);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * org.loboevolution.html.rendered.RenderableContext#getDocumentItem(java.lang.String)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public Object getDocumentItem(String name) {
@@ -481,12 +475,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return null;
 	}
 
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.loboevolution.html.rendered.RenderableContext#getFullURL(java.lang.String)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public URL getFullURL(String spec) throws MalformedURLException {
@@ -1038,12 +1026,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				   Objects.equals(getLocalName().toUpperCase(), arg.getLocalName().toUpperCase()));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * org.loboevolution.html.rendered.RenderableContext#isEqualOrDescendentOf(org.loboevolution.html.rendered.RenderableContext)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public final boolean isEqualOrDescendentOf(ModelNode otherContext) {
@@ -1273,13 +1255,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return newChild;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * org.loboevolution.html.rendered.RenderableContext#setDocumentItem(java.lang.String,
-	 * java.lang.Object)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void setDocumentItem(String name, Object value) {

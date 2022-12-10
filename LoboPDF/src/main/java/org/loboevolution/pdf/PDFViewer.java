@@ -613,11 +613,6 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void keyReleased(KeyEvent evt) {

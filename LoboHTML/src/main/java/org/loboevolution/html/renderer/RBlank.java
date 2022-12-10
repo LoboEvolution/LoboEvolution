@@ -67,11 +67,6 @@ final class RBlank extends BaseBoundableRenderable {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderable(int, int)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
@@ -89,11 +84,6 @@ final class RBlank extends BaseBoundableRenderable {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
@@ -139,13 +129,6 @@ final class RBlank extends BaseBoundableRenderable {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.rendered.BoundableRenderable#paintSelection(java.awt.
-	 * Graphics, boolean, org.loboevolution.html.rendered.RenderablePoint,
-	 * org.loboevolution.html.rendered.RenderablePoint)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {

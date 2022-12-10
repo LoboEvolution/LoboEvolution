@@ -49,12 +49,6 @@ public class SetAsDefaultAction<T> extends AbstractAction {
 		this.item = item;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-	 * ActionEvent)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {

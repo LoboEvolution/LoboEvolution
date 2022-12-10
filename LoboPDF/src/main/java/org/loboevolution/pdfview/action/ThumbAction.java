@@ -34,12 +34,6 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 		this.dialog = dialog;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
-	 * PropertyChangeEvent )
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -55,12 +49,6 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-	 * ActionEvent)
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent evt) {

@@ -253,11 +253,6 @@ public class Cookie extends NameValuePair {
 		firePropertyChange("httpOnly", old, isHttpOnly());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.util.NameValuePair#toString()
-	 */
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

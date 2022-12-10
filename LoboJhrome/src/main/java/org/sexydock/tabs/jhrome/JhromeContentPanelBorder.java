@@ -29,11 +29,6 @@ public class JhromeContentPanelBorder implements Border {
     final Color outlineColor = JhromeTabBorderAttributes.SELECTED_BORDER.outlineColor;
     final Color backgroundColor = JhromeTabBorderAttributes.SELECTED_BORDER.bottomColor;
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javax.swing.border.Border#paintBorder(java.awt.Component, java.awt.Graphics, int, int, int, int)
-     */
     @Override
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         Graphics2D g2 = (Graphics2D) g;
