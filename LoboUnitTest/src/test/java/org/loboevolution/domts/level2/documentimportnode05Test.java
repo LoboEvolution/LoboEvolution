@@ -75,14 +75,5 @@ public class documentimportnode05Test extends LoboUnitTest {
         assertEquals("documentimportnode05_nodeValue", null, nodeValue);
         assertEquals("documentimportnode05_namespaceURI", "http://www.w3.org/DOM/Test", namespaceURI);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/documentimportnode05";
-    }
 }
 

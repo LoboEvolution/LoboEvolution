@@ -65,14 +65,5 @@ public class documentimportnode17Test extends LoboUnitTest {
         nodeValue = commentImport.getNodeValue();
         assertEquals("documentimportnode17", "Document.importNode test for a COMMENT_NODE", nodeValue);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/documentimportnode17";
-    }
 }
 

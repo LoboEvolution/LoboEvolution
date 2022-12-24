@@ -23,10 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -62,7 +59,7 @@ public class importNode07Test extends LoboUnitTest {
         Element aNode;
         NamedNodeMap attributes;
         String name;
-        Node attr;
+        Attr attr;
         String lname;
         String namespaceURI = "http://www.nist.gov";
         String qualifiedName = "employee";
@@ -74,7 +71,7 @@ public class importNode07Test extends LoboUnitTest {
         assertEquals("throw_Size", 1, attributes.getLength());
         name = aNode.getNodeName();
         assertEquals("nodeName", "employee", name);
-        attr = attributes.item(0);
+        attr = (Attr) attributes.item(0);
         lname = attr.getLocalName();
         assertEquals("lname", "defaultAttr", lname);
     }

@@ -62,19 +62,10 @@ public class namednodemapremovenameditemns09Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName( "address");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-        attribute = attributes.removeNamedItem( "domestic");
+        attributes.removeNamedItem( "domestic");
         newAttributes = element.getAttributes();
-        attribute = newAttributes.getNamedItem( "domestic");
+        attribute = (Attr) newAttributes.getNamedItem( "domestic");
         assertNull("namednodemapremovenameditemns09", attribute);
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapremovenameditemns09";
     }
 }
 

@@ -37,8 +37,8 @@ public class AnchorFilter implements NodeFilter {
 		String nodeName = node.getNodeName();
 		if ("a".equalsIgnoreCase(nodeName)) {
 			NamedNodeMap attributes = node.getAttributes();
-			for (Attr attribute : Nodes.iterable(attributes)) {
-				if ("name".equals(attribute.getName())) {
+			for (Node attribute : Nodes.iterable(attributes)) {
+				if ("name".equals(((Attr)attribute).getName())) {
 					return NodeFilter.FILTER_ACCEPT;
 				}
 			}

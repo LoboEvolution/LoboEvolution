@@ -126,7 +126,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Attr setNamedItemNS(Attr arg) throws DOMException {
+  public Node setNamedItemNS(Node arg) throws DOMException {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 

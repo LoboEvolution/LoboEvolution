@@ -33,7 +33,6 @@ import org.loboevolution.html.dom.filter.HeadFilter;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.event.DocumentNotificationListener;
-import org.loboevolution.html.io.LocalErrorHandler;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
@@ -44,7 +43,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.StyleSheetList;
 import org.loboevolution.html.node.views.DocumentView;
-import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.style.StyleSheetAggregator;
@@ -52,7 +51,6 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.UserDataHandler;
-import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
@@ -476,8 +474,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 		if (reader != null) {
 			try {
-				final ErrorHandler errorHandler = new LocalErrorHandler();
-				final HtmlParser parser = new HtmlParser(getUcontext(), document, errorHandler, true);
+				final XHtmlParser parser = new XHtmlParser(getUcontext(), document, true);
 				parser.parse(reader);
 			} finally {
 				if (closeReader) {
@@ -660,7 +657,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		final Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
-			if (HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
+			if (XHtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
 				Executor.executeFunction(this, onloadHandler, null, new Object[0]);
 			}
 		}

@@ -63,7 +63,7 @@ public class importNode01Test extends LoboUnitTest {
         Attr newAttr;
         Node aNode;
         Document ownerDocument;
-        Element attrOwnerElement;
+        Node attrOwnerElement;
         DocumentType docType;
         String system;
         boolean specified;
@@ -90,7 +90,7 @@ public class importNode01Test extends LoboUnitTest {
         specified = ((Attr) aNode).isSpecified();
         assertTrue("specified", specified);
         childList = aNode.getChildNodes();
-        assertEquals( "childList", 1, childList);
+        assertEquals( "childList", 1, childList.getLength());
         nodeName = aNode.getNodeName();
         assertEquals("nodeName", "elem:attr1", nodeName);
         child = aNode.getFirstChild();

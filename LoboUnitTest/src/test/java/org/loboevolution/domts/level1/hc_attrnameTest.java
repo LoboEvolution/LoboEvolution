@@ -62,7 +62,7 @@ public class hc_attrnameTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("acronym");
         testNode = (Element) addressList.item(1);
         attributes = testNode.getAttributes();
-        streetAttr = attributes.getNamedItem("class");
+        streetAttr = (Attr) attributes.getNamedItem("class");
         strong1 = streetAttr.getNodeName();
         strong2 = streetAttr.getName();
         assertEquals("nodeName", "class", strong1);

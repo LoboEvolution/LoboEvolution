@@ -24,10 +24,7 @@ package org.loboevolution.domts.level1;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -61,7 +58,7 @@ public class hc_elementassociatedattributeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element)elementList.item(0);
         attributes = testEmployee.getAttributes();
-        domesticAttr = attributes.getNamedItem("title");
+        domesticAttr = (Attr) attributes.getNamedItem("title");
         specified = domesticAttr.isSpecified();
         assertTrue("acronymTitleSpecified", specified);
     }

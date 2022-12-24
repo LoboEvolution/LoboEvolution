@@ -64,7 +64,7 @@ public class AttrCreateTextNodeTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("address");
         testNode = (Element) addressList.item(3);
         attributes = testNode.getAttributes();
-        streetAttr = attributes.getNamedItem("street");
+        streetAttr = (Attr) attributes.getNamedItem("street");
         streetAttr.setValue("Y&ent1;");
         value = streetAttr.getValue();
         assertEquals("value", "Y&ent1;", value);

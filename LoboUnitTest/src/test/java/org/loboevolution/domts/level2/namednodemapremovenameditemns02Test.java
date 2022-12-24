@@ -59,15 +59,12 @@ public class namednodemapremovenameditemns02Test extends LoboUnitTest {
         Attr attribute;
         HTMLCollection elementList;
         String attrValue;
-        String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("http://www.usa.com", "employee");
-        System.out.println(elementList.getLength());
         element = elementList.item(1);
         attributes = element.getAttributes();
-        attribute = attributes.removeNamedItemNS(nullNS, "defaultAttr");
-        attribute = attributes.getNamedItemNS(nullNS, "defaultAttr");
+        attributes.removeNamedItemNS(null, "defaultAttr");
+        attribute = (Attr) attributes.getNamedItemNS(null, "defaultAttr");
         attrValue = attribute.getNodeValue();
         assertNotNull("namednodemapremovenameditemns02", attribute);
         assertEquals("namednodemapremovenameditemns02_attrValue", "defaultVal", attrValue);

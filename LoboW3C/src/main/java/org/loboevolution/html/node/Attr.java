@@ -52,9 +52,9 @@ public interface Attr extends Node {
 	/**
 	 * <p>getOwnerElement.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.Element} object.
+	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
-	Element getOwnerElement();
+	Node getOwnerElement();
 
 	/**
 	 * <p>getPrefix.</p>
@@ -93,9 +93,9 @@ public interface Attr extends Node {
 
 	/**
 	 * <p>setOwnerElement.</p>
-	 * @param element a {@link org.loboevolution.html.node.Element} object.
+	 * @param element a {@link org.loboevolution.html.node.Node} object.
 	 */
-	void setOwnerElement(Element element);
+	void setOwnerElement(Node element);
 	
 	/**
 	 * <p>isId.</p>

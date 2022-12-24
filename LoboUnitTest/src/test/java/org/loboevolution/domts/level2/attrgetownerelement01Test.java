@@ -24,10 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -55,7 +52,7 @@ public class attrgetownerelement01Test extends LoboUnitTest {
         Document doc;
         Attr attr;
         Element element;
-        Element ownerElement;
+        Node ownerElement;
         String ownerElementName;
         HTMLCollection elementList;
         NamedNodeMap attributes;
@@ -64,7 +61,7 @@ public class attrgetownerelement01Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName( "employee");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-        attr = attributes.getNamedItemNS(nullNS, "defaultAttr");
+        attr = (Attr) attributes.getNamedItemNS(nullNS, "defaultAttr");
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
         assertEquals("attrgetownerelement01", "EMPLOYEE", ownerElementName);

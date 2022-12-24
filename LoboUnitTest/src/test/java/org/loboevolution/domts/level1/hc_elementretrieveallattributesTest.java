@@ -70,7 +70,7 @@ public class hc_elementretrieveallattributesTest extends LoboUnitTest {
         testAddress = (Element) addressList.item(0);
         attributes = testAddress.getAttributes();
         for (int indexN1006B = 0; indexN1006B < attributes.getLength(); indexN1006B++) {
-            attribute = attributes.item(indexN1006B);
+            attribute = (Attr)attributes.item(indexN1006B);
             attributeName = attribute.getNodeName();
             actual.add(attributeName);
         }

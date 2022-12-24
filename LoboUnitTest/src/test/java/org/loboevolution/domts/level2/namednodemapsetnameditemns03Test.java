@@ -50,7 +50,6 @@ public class namednodemapsetnameditemns03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,27 +73,17 @@ public class namednodemapsetnameditemns03Test extends LoboUnitTest {
         elementListAlt = docAlt.getElementsByTagNameNS("*", "address");
         elementAlt = (Element) elementListAlt.item(1);
         attributesAlt = elementAlt.getAttributes();
-        attr = attributesAlt.getNamedItemNS(nullNS, "street");
+        attr = (Attr) attributesAlt.getNamedItemNS(nullNS, "street");
         newNode = attributesAlt.removeNamedItemNS(nullNS, "street");
 
-        {
-            boolean success = false;
-            try {
-                newNode = attributes.setNamedItemNS(attr);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            newNode = attributes.setNamedItemNS(attr);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
-    }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
 
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapsetnameditemns03";
     }
 }
 

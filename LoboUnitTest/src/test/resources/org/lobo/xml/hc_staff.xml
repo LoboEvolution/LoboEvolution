@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE html
-   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "C:\Users\utente\workspace\LoboEvolution\LoboUnitTest\src\test\resources\org\lobo\xml\xhtml1-strict.dtd" [
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "xhtml1-strict.dtd" [
    <!ENTITY alpha "&#945;">
    <!ENTITY beta "&#946;">
    <!ENTITY gamma "&#947;">

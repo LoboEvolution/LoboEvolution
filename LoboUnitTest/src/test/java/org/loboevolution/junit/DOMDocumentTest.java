@@ -1382,7 +1382,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertSame(doc2, body2.getOwnerDocument());
         Node text2 = body2.getFirstChild();
         assertSame(doc2, text2.getOwnerDocument());
-        Attr idAttr2 = body2.getAttributes().getNamedItem("id");
+        Attr idAttr2 = (Attr) body2.getAttributes().getNamedItem("id");
         assertSame(doc2, idAttr2.getOwnerDocument());
         assertTrue(idAttr2.isId());
         assertEquals(2, body2.getAttributes().getLength());
@@ -1440,7 +1440,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         assertSame(doc2, body2.getOwnerDocument());
         Node text2 = body2.getFirstChild();
         assertSame(doc2, text2.getOwnerDocument());
-        Attr idAttr2 = body2.getAttributes().getNamedItem("id");
+        Attr idAttr2 = (Attr) body2.getAttributes().getNamedItem("id");
         assertSame(doc2, idAttr2.getOwnerDocument());
         assertTrue(idAttr2.isId());
         assertEquals(2, body2.getAttributes().getLength());

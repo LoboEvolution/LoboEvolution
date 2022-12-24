@@ -23,7 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.Entity;
+import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -57,10 +57,8 @@ public class namednodemapgetnameditemns01Test extends LoboUnitTest {
         DocumentType docType;
         NamedNodeMap entities;
         NamedNodeMap notations;
-        Entity entity;
+        EntityReference entity;
         Notation notation;
-        String entityName;
-        String notationName;
         String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
@@ -69,19 +67,10 @@ public class namednodemapgetnameditemns01Test extends LoboUnitTest {
         assertNotNull("entitiesNotNull", entities);
         notations = docType.getNotations();
         assertNotNull("notationsNotNull", notations);
-        entity = (Entity) entities.getNamedItemNS(nullNS, "ent1");
+        entity = (EntityReference) entities.getNamedItemNS(nullNS, "ent1");
         assertNull("entityNull", entity);
         notation = (Notation) notations.getNamedItemNS(nullNS, "notation1");
         assertNull("notationNull", notation);
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapgetnameditemns01";
     }
 }
 

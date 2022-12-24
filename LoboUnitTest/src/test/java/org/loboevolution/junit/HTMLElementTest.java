@@ -323,7 +323,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		NamedNodeMap nnm = body.getAttributes();
 		assertNotNull(nnm);
 		assertEquals(1, nnm.getLength());
-		Attr attr = nnm.item(0);
+		Attr attr = (Attr) nnm.item(0);
 		assertTrue(attr.isId());
 		assertNull(attr.getParentNode());
 		assertEquals("ID", attr.getLocalName());
@@ -334,7 +334,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertNotNull(nnm.setNamedItem(attr));
 		assertEquals(1, nnm.getLength());
 		// Remove
-		Attr rmattr = nnm.removeNamedItem(attr.getName());
+		Attr rmattr = (Attr) nnm.removeNamedItem(attr.getName());
 		assertSame(rmattr, attr);
 		assertFalse(body.hasAttributes());
 		assertEquals(0, nnm.getLength());
@@ -360,11 +360,11 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("CLASS", attr.getName());
 		nnm.setNamedItem(attr);
 		assertEquals("barclass", body.getAttribute("CLASS"));
-		Attr attr2 = nnm.getNamedItem("CLASS");
+		Attr attr2 = (Attr) nnm.getNamedItem("CLASS");
 		assertSame(attr, attr2);
 		assertEquals(2, nnm.getLength());
 		//
-		rmattr = nnm.removeNamedItem(attr.getName());
+		rmattr = (Attr) nnm.removeNamedItem(attr.getName());
 		assertSame(rmattr, attr);
 		assertEquals(1, nnm.getLength());
 	}

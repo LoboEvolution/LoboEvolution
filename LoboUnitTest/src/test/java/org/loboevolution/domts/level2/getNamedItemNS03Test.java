@@ -23,7 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.Entity;
+import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
@@ -52,14 +52,13 @@ public class getNamedItemNS03Test extends LoboUnitTest {
         Document doc;
         DocumentType docType;
         NamedNodeMap entities;
-        Entity entity;
-        String nullNS = null;
+        EntityReference entity;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
         assertNotNull("entitiesNotNull", entities);
-        entity = (Entity) entities.getNamedItemNS(nullNS, "ent1");
+        entity = (EntityReference) entities.getNamedItemNS(null, "ent1");
         assertNull("entityNull", entity);
     }
 }

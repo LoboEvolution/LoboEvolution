@@ -68,7 +68,7 @@ public class elementremoveattributeaftercreateTest extends LoboUnitTest {
         districtAttr = testEmployee.setAttributeNode(newAttribute);
         districtAttr = testEmployee.removeAttributeNode(newAttribute);
         attributes = testEmployee.getAttributes();
-        districtAttr = attributes.getNamedItem("district");
+        districtAttr = (Attr) attributes.getNamedItem("district");
         assertNull("elementRemoveAttributeAfterCreateAssert", districtAttr);
     }
 }

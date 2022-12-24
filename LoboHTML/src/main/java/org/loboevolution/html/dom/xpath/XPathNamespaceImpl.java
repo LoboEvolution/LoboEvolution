@@ -33,8 +33,6 @@ import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
 
 /**
- *
- *
  * The XPathNamespace interface is returned by
  * XPathResult interfaces to represent the XPath namespace node
  * type that DOM lacks. There is no public constructor for this node type.
@@ -93,7 +91,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** {@inheritDoc} */
 	@Override
-	public Element getOwnerElement() {
+	public Node getOwnerElement() {
 		return ((Attr) m_attributeNode).getOwnerElement();
 	}
 

@@ -90,14 +90,5 @@ public class removeAttributeNS01Test extends LoboUnitTest {
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
         }
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/removeAttributeNS01";
-    }
 }
 

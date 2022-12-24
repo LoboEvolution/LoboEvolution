@@ -69,14 +69,5 @@ public class attrgetownerelement04Test extends LoboUnitTest {
         ownerElement = attrImp.getOwnerElement();
         assertNull("attrgetownerelement04", ownerElement);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/attrgetownerelement04";
-    }
 }
 

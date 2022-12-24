@@ -787,6 +787,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	 */
 	boolean hasFocus();
 
+
 	/**
 	 * Returns a copy of node. If deep is true, the copy also includes the node's
 	 * descendants.
@@ -952,4 +953,10 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	XPathResult evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result);
 
     EntityReference createEntityReference(String ent1);
+
+	boolean isXml();
+
+	void setXml(boolean xml);
+
+
 }

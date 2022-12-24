@@ -71,14 +71,5 @@ public class normalize01Test extends LoboUnitTest {
         data = textNode.getData();
         assertEquals("data", "Roger\n Jones", data);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/normalize01";
-    }
 }
 

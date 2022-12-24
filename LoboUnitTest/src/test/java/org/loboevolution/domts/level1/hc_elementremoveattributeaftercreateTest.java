@@ -68,7 +68,7 @@ public class hc_elementremoveattributeaftercreateTest extends LoboUnitTest {
         districtAttr = testEmployee.setAttributeNode(newAttribute);
         districtAttr = testEmployee.removeAttributeNode(newAttribute);
         attributes = testEmployee.getAttributes();
-        districtAttr = attributes.getNamedItem("lang");
+        districtAttr = (Attr) attributes.getNamedItem("lang");
         assertNull("removed_item_null", districtAttr);
     }
 }

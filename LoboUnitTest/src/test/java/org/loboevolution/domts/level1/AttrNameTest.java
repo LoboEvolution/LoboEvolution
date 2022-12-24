@@ -62,7 +62,7 @@ public class AttrNameTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("address");
         testNode = (Element) addressList.item(1);
         attributes = testNode.getAttributes();
-        streetAttr = attributes.getNamedItem("street");
+        streetAttr = (Attr) attributes.getNamedItem("street");
         name = streetAttr.getNodeName();
         assertEquals("nodeName", "street", name);
         name = streetAttr.getName();

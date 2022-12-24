@@ -29,9 +29,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>Nodes class.</p>
- *
- *
- *
  */
 public class Nodes {
 	/**
@@ -79,8 +76,8 @@ public class Nodes {
 	 * @param attrList a {@link org.loboevolution.html.node.NamedNodeMap} object.
 	 * @return a {@link java.lang.Iterable} object.
 	 */
-	public static Iterable<Attr> iterable(final NamedNodeMap attrList) {
-	    return () -> new Iterator<Attr>() {
+	public static Iterable<Node> iterable(final NamedNodeMap attrList) {
+	    return () -> new Iterator<Node>() {
 
             private int index = 0;
 
@@ -90,7 +87,7 @@ public class Nodes {
             }
 
             @Override
-            public Attr next() {
+            public Node next() {
                 if (!hasNext())
                     throw new NoSuchElementException();
                 return attrList.item(index++);

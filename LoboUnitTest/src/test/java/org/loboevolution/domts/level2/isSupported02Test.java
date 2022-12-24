@@ -62,14 +62,5 @@ public class isSupported02Test extends LoboUnitTest {
         state = rootNode.isSupported("XML", "9.0");
         assertFalse("throw_False", state);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/isSupported02";
-    }
 }
 

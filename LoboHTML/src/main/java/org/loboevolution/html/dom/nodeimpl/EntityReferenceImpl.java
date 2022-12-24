@@ -20,6 +20,9 @@
 
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
@@ -27,10 +30,18 @@ import org.loboevolution.html.node.Node;
 /**
  * <p>Abstract EntityReferenceImpl class.</p>
  */
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EntityReferenceImpl extends EventTargetImpl implements EntityReference {
-    public EntityReferenceImpl(String entity) {
-        super();
-    }
+
+    private String publicId;
+    private String systemId;
+    private String nodeName;
+    private String nodeValue;
+    private String notationName;
+
 
     @Override
     public int getNodeType() {

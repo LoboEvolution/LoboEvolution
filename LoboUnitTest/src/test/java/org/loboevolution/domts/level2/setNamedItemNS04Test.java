@@ -84,7 +84,7 @@ public class setNamedItemNS04Test extends LoboUnitTest {
         child2 = (Element) n2List.item(0);
         assertNotNull("notnull", child2);
         attributes = child2.getAttributes();
-        arg = attributes.getNamedItemNS(namespaceURI, localName);
+        arg = (Attr) attributes.getNamedItemNS(namespaceURI, localName);
 
         {
             boolean success = false;

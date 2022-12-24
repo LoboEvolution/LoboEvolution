@@ -65,7 +65,7 @@ public class namednodemapreturnattrnodeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
-        streetAttr = attributes.getNamedItem("street");
+        streetAttr = (Attr) attributes.getNamedItem("street");
         assertNotNull("typeAssert", streetAttr);
         attrName = streetAttr.getNodeName();
         assertEquals("nodeName", "street", attrName);

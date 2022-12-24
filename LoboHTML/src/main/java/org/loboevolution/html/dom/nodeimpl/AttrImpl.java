@@ -23,6 +23,7 @@ import com.gargoylesoftware.css.dom.DOMException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.AttributeTypeInfo;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.*;
@@ -31,6 +32,7 @@ import org.loboevolution.html.node.*;
  * <p>AttrImpl class.</p>
  */
 @Data
+@Builder
 @AllArgsConstructor
 public class AttrImpl extends EventTargetImpl implements Attr {
 
@@ -40,7 +42,9 @@ public class AttrImpl extends EventTargetImpl implements Attr {
 
     private boolean nameId;
 
-    private Element ownerElement;
+    private Node ownerElement;
+
+    private String prefix;
 
     @Builder.Default
     private boolean specified = true;
@@ -50,7 +54,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
      */
     @Override
     public String getLocalName() {
-        return this.name.contains(":") ? this.name.split(":")[1] : this.name;
+        return this.name;
     }
 
     /**
@@ -58,7 +62,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
      */
     @Override
     public String getNodeName() {
-        return this.name;
+        return Strings.isNotBlank(getPrefix()) ? getPrefix() + ":" + this.name : this.name;
     }
 
     /**

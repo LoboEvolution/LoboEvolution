@@ -42,7 +42,6 @@ public class hc_namednodemapinvalidtype1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -54,16 +53,14 @@ public class hc_namednodemapinvalidtype1Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         attributes = docElem.getAttributes();
         newElem = doc.createElement("html");
-
-        {
-            boolean success = false;
-            try {
-                attributes.setNamedItem(newElem);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
+        boolean success = false;
+        try {
+            attributes.setNamedItem(newElem);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
+
     }
 }
 

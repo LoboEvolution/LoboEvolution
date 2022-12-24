@@ -58,7 +58,7 @@ public class namednodemapremovenameditemns01Test extends LoboUnitTest {
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
         attributes.removeNamedItemNS("http://www.nist.gov", "domestic");
-        attribute = attributes.getNamedItemNS("http://www.nist.gov", "domestic");
+        attribute = (Attr) attributes.getNamedItemNS("http://www.nist.gov", "domestic");
         assertNull("namednodemapremovenameditemns01", attribute);
     }
 }

@@ -20,7 +20,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.parser.XHtmlParser;
 import org.w3c.dom.UserDataHandler;
 
 /**
@@ -42,7 +42,7 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
+		if (XHtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
 			final Document document = this.document;
 			if (document instanceof HTMLDocumentImpl) {
 				final String textContent = getTextContent();

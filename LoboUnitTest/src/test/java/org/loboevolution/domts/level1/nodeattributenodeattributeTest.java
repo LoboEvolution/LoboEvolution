@@ -59,7 +59,7 @@ public class nodeattributenodeattributeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         addrAttr = testAddr.getAttributes();
-        attrNode = addrAttr.item(0);
+        attrNode = (Attr) addrAttr.item(0);
         attrList = attrNode.getAttributes();
         assertNull("nodeAttributeNodeAttributeAssert1", attrList);
     }

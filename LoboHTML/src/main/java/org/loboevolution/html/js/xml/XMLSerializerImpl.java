@@ -69,7 +69,8 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
                 buff.append(" ");
 
 				NamedNodeMap attributes = node.getAttributes();
-				for (Attr attrItem : Nodes.iterable(attributes)) {
+                for (Node nodeAttr : Nodes.iterable(attributes)) {
+                    Attr attrItem = (Attr) nodeAttr;
                     String name = namespace(attrItem.getNodeName(), withoutNamespaces);
                     String value = attrItem.getNodeValue();
 

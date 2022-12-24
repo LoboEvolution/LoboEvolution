@@ -56,7 +56,7 @@ public class hc_attrappendchild4Test extends LoboUnitTest {
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = attributes.getNamedItem("title");
+        titleAttr = (Attr) attributes.getNamedItem("title");
         boolean success = false;
         try {
             textNode = doc.createCDATASection("terday");

@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 
-<!DOCTYPE staff PUBLIC "STAFF"
-        "staffNS.dtd"
-[
+<!DOCTYPE staff PUBLIC "STAFF" "staffNS.dtd" [
    <!ENTITY ent1 "es">
    <!ENTITY ent2 "1900 Dallas Road">
    <!ENTITY ent3 "Texas">

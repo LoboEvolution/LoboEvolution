@@ -50,18 +50,15 @@ public class namednodemapremovenameditemns04Test extends LoboUnitTest {
         Document doc;
         NamedNodeMap attributes;
         Element element;
-        Attr attribute;
-        Attr attributeRemoved;
+        Node attribute;
         HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "employee");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
-        attributeRemoved = attributes.removeNamedItemNS("http://www.w3.org/2000/xmlns/", "xmlns");
-        attribute = attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "xmlns");
+        attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "xmlns");
         assertNull("namednodemapremovenameditemns04_1", attribute);
-        attributeRemoved = attributes.removeNamedItemNS("http://www.w3.org/2000/xmlns/", "dmstc");
-        attribute = attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "dmstc");
+        attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "dmstc");
         assertNull("namednodemapremovenameditemns04_2", attribute);
     }
 }

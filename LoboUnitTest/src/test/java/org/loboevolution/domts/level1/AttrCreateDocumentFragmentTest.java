@@ -61,7 +61,7 @@ public class AttrCreateDocumentFragmentTest extends LoboUnitTest {
         docFragment.appendChild(newOne);
         domesticNode = (Element) docFragment.getFirstChild();
         domesticAttr = domesticNode.getAttributes();
-        attrs = domesticAttr.item(0);
+        attrs = (Attr) domesticAttr.item(0);
         attrName = attrs.getName();
         assertEquals("attrCreateDocumentFragmentAssert", "newdomestic", attrName);
     }

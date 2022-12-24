@@ -72,6 +72,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	private boolean xmlStandalone;
 
+	private boolean xml = false;
+
 	private boolean isrss = false;
 
 	private boolean test = false;
@@ -129,13 +131,15 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	@Override
 	public EntityReference createEntityReference(String entity) {
-		return new EntityReferenceImpl(entity);
+		EntityReferenceImpl entityReference = new EntityReferenceImpl();
+		entityReference.setNodeName(entity);
+		entityReference.setOwnerDocument(this);
+		return entityReference;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName) {
-
 		String prefix = null;
 
 		if (Strings.isBlank(qualifiedName)) {
@@ -314,7 +318,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					stream().
 					filter(node -> node.getNodeType() == Node.DOCUMENT_TYPE_NODE).
 					findFirst().
-					orElse(null);
+					orElse(new DocumentTypeImpl());
 		}
 		return this.doctype;
 	}
@@ -361,7 +365,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		if (Strings.isBlank(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
-		AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, true);
+		AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, null, true);
 		attr.setOwnerDocument(this);
 		return attr;
 	}
@@ -369,7 +373,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
-
+		String prefix = null;
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
@@ -386,6 +390,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
+			prefix = split[0];
+			qualifiedName = split[1];
 		} else{
 			if (!Strings.isValidString(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
@@ -396,7 +402,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			throw new DOMException(DOMException.NAMESPACE_ERR, "xmlns local name but not xmlns namespace");
 		}
 
-		AttrImpl attr = new AttrImpl(qualifiedName, null, "id".equalsIgnoreCase(qualifiedName), null, true);
+		AttrImpl attr = new AttrImpl(qualifiedName, null, "id".equalsIgnoreCase(qualifiedName), null, prefix, true);
 		attr.setNamespaceURI(namespaceURI);
 		return attr;
 	}
@@ -1084,15 +1090,15 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
 		switch (importedNode.getNodeType()) {
-			case Node.ATTRIBUTE_NODE:
+			case ATTRIBUTE_NODE:
 				Attr attr = createAttribute(importedNode.getNodeName());
 				attr.setValue(importedNode.getNodeValue());
 				return attr;
-			case Node.ELEMENT_NODE:
+			case ELEMENT_NODE:
 				Element foreignElm = (Element) importedNode;
 				Element elm = createElement(foreignElm.getNodeName());
 				NamedNodeMap attributes = foreignElm.getAttributes();
-				for (Attr attribute : Nodes.iterable(attributes)) {
+				for (Node attribute : Nodes.iterable(attributes)) {
 					Attr attrNode = (Attr) importNode(attribute, true);
 					elm.setAttributeNode(attrNode);
 				}
@@ -1104,13 +1110,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					}
 				}
 				return elm;
-			case Node.TEXT_NODE:
+			case TEXT_NODE:
 				return createTextNode(importedNode.getNodeValue());
-			case Node.CDATA_SECTION_NODE:
+			case CDATA_SECTION_NODE:
 				return createCDATASection(importedNode.getNodeValue());
-			case Node.COMMENT_NODE:
+			case COMMENT_NODE:
 				return createComment(importedNode.getNodeValue());
-			case Node.DOCUMENT_FRAGMENT_NODE:
+			case DOCUMENT_FRAGMENT_NODE:
 				DocumentFragment df = createDocumentFragment();
 				if (deep) {
 					Node node = importedNode.getFirstChild();
@@ -1120,10 +1126,18 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					}
 				}
 				return df;
-			case Node.PROCESSING_INSTRUCTION_NODE:
+			case PROCESSING_INSTRUCTION_NODE:
 				return createProcessingInstruction(importedNode.getNodeName(), importedNode.getNodeValue());
-			case Node.ENTITY_REFERENCE_NODE:
-				return createEntityReference(importedNode.getNodeName());
+			case ENTITY_REFERENCE_NODE:
+				getDoctype().getEntities().setNamedItem(importedNode);
+				EntityReferenceImpl reference = (EntityReferenceImpl) importedNode;
+				reference.setOwnerDocument(this);
+				return reference;
+			case NOTATION_NODE:
+				getDoctype().getNotations().setNamedItem(importedNode);
+				NotationImpl notation = (NotationImpl) importedNode;
+				notation.setOwnerDocument(this);
+				return notation;
 			default:
 				throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Node Not supported.");
 		}
@@ -1257,6 +1271,18 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public boolean hasAttributes() {
 		return false;
+	}
+
+
+
+	@Override
+	public boolean isXml() {
+		return xml;
+	}
+
+	@Override
+	public void setXml(boolean xml) {
+		this.xml = xml;
 	}
 
 	public boolean isTest() {

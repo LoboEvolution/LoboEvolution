@@ -59,7 +59,7 @@ public interface XPathNamespace extends Node {
     /**
      * The node is a Namespace.
      */
-    public static final short XPATH_NAMESPACE_NODE = 13;
+     short XPATH_NAMESPACE_NODE = 13;
 
     /**
      * The Element on which the namespace was in scope when it
@@ -67,8 +67,8 @@ public interface XPathNamespace extends Node {
      * if the document changes such that the namespace goes out of scope on
      * that element and this node is no longer found there by XPath.
      *
-     * @return a {@link org.loboevolution.html.node.Element} object.
+     * @return a {@link org.loboevolution.html.node.Node} object.
      */
-    Element getOwnerElement();
+    Node getOwnerElement();
 
 }

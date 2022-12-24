@@ -65,7 +65,7 @@ public class AttrSpecifiedValueChangedTest extends LoboUnitTest {
         testNode = (Element) addressList.item(2);
         testNode.setAttribute("street", "Yes");
         attributes = testNode.getAttributes();
-        streetAttr = attributes.getNamedItem("street");
+        streetAttr = (Attr) attributes.getNamedItem("street");
         state = streetAttr.isSpecified();
         assertTrue("streetSpecified", state);
     }

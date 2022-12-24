@@ -69,7 +69,7 @@ public class setNamedItemNS03Test extends LoboUnitTest {
         testAddress = (Element) elementList.item(0);
         attributes = testAddress.getAttributes();
         setNode = attributes.setNamedItemNS((Attr)arg);
-        retnode = attributes.getNamedItemNS(namespaceURI, "newAttr");
+        retnode = (Attr) attributes.getNamedItemNS(namespaceURI, "newAttr");
         value = retnode.getNodeValue();
         assertEquals("throw_Equals", "newValue", value);
     }

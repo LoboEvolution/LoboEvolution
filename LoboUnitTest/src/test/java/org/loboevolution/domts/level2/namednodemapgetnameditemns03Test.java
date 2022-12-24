@@ -64,18 +64,9 @@ public class namednodemapgetnameditemns03Test extends LoboUnitTest {
         
         newAttribute = element.setAttributeNodeNS(newAttr2);
         attributes = element.getAttributes();
-        attribute = attributes.getNamedItemNS("http://www.w3.org/DOM/L2", "att");
+        attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/DOM/L2", "att");
         attrName = attribute.getNodeName();
         assertEquals("namednodemapgetnameditemns03", "L2:att", attrName);
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapgetnameditemns03";
     }
 }
 

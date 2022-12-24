@@ -70,7 +70,7 @@ public class hc_namednodemapsetnameditemTest extends LoboUnitTest {
         newAttribute = doc.createAttribute("lang");
         attributes = testAddress.getAttributes();
         setNode = attributes.setNamedItem(newAttribute);
-        districtNode = attributes.getNamedItem("lang");
+        districtNode = (Attr) attributes.getNamedItem("lang");
         attrName = districtNode.getNodeName();
         assertEquals( "nodeName", "lang", attrName);
     }

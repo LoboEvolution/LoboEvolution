@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.TextFilter;
 import org.loboevolution.html.dom.xpath.XPathNSResolverImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.xpath.XPathNSResolver;
@@ -126,9 +126,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			}
 		}
 
-
-		nodeList.add(newChild);
 		((NodeImpl) newChild).setParentImpl(this);
+		nodeList.add(newChild);
 
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
@@ -221,7 +220,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 					final Element elem = (Element) newNode;
 					final NamedNodeMap nnmap = elem.getAttributes();
 					if (nnmap != null) {
-						for (Attr attr : Nodes.iterable(nnmap)) {
+						for (Node attr : Nodes.iterable(nnmap)) {
 							elem.setAttributeNode((Attr) attr.cloneNode(true));
 						}
 					}
@@ -910,10 +909,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		if (idx == -1) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
 		}
-		this.nodeList.add(idx + 1, newChild);
+
 		if (newChild instanceof NodeImpl) {
 			((NodeImpl) newChild).setParentImpl(this);
 		}
+		this.nodeList.add(idx + 1, newChild);
 
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
@@ -930,10 +930,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	protected Node insertAt(Node newChild, int idx) {
-		this.nodeList.add(idx, newChild);
+
 		if (newChild instanceof NodeImpl) {
 			((NodeImpl) newChild).setParentImpl(this);
 		}
+		this.nodeList.add(idx, newChild);
 
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
@@ -987,10 +988,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 			}
 
-			this.nodeList.add(idx, newChild);
+
 			if (newChild instanceof NodeImpl) {
 				((NodeImpl) newChild).setParentImpl(this);
 			}
+			this.nodeList.add(idx, newChild);
 		}
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
@@ -1353,7 +1355,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
-		if (HtmlParser.MODIFYING_KEY.equals(key)) {
+		if (XHtmlParser.MODIFYING_KEY.equals(key)) {
 			final boolean ns = Boolean.TRUE == data;
 			this.notificationsSuspended = ns;
 			if (!ns) {

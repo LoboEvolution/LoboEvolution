@@ -67,7 +67,7 @@ public class importNode04Test extends LoboUnitTest {
         aNode = docFrag.appendChild(comment);
         aNode = doc.importNode(docFrag, true);
         children = aNode.getChildNodes();
-        assertEquals( "throw_Size", 1, children);
+        assertEquals( "throw_Size", 1, children.getLength());
         child = aNode.getFirstChild();
         childValue = child.getNodeValue();
         assertEquals("descendant1", "descendant1", childValue);

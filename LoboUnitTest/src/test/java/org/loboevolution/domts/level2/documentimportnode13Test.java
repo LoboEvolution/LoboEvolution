@@ -68,14 +68,5 @@ public class documentimportnode13Test extends LoboUnitTest {
         importedLen = importedList.getLength();
         assertEquals("documentimportnode13", 0, importedLen);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/documentimportnode13";
-    }
 }
 

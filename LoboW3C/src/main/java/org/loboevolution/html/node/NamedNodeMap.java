@@ -33,7 +33,7 @@ public interface NamedNodeMap {
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
 	 */
-	Attr getNamedItem(String qualifiedName);
+	Node getNamedItem(String qualifiedName);
 
 	/**
 	 * <p>getNamedItemNS.</p>
@@ -42,7 +42,7 @@ public interface NamedNodeMap {
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
 	 */
-	Attr getNamedItemNS(String namespace, String localName);
+	Node getNamedItemNS(String namespace, String localName);
 
 	/**
 	 * <p>removeNamedItem.</p>
@@ -50,7 +50,7 @@ public interface NamedNodeMap {
 	 * @param qualifiedName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
 	 */
-	Attr removeNamedItem(String qualifiedName);
+	Node removeNamedItem(String qualifiedName);
 
 	/**
 	 * <p>removeNamedItemNS.</p>
@@ -59,7 +59,7 @@ public interface NamedNodeMap {
 	 * @param localName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
 	 */
-	Attr removeNamedItemNS(String namespace, String localName);
+	Node removeNamedItemNS(String namespace, String localName);
 
 	/**
 	 * <p>setNamedItem.</p>
@@ -67,7 +67,7 @@ public interface NamedNodeMap {
 	 * @param attr a {@link org.loboevolution.html.node.Attr} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
 	 */
-	Attr setNamedItem(Node attr);
+	Node setNamedItem(Node attr);
 
 	/**
 	 * <p>setNamedItemNS.</p>
@@ -75,7 +75,7 @@ public interface NamedNodeMap {
 	 * @param attr a {@link org.loboevolution.html.node.Attr} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
 	 */
-	Attr setNamedItemNS(Attr attr);
+	Node setNamedItemNS(Node attr);
 	
 	/**
 	 * <p>item.</p>
@@ -83,7 +83,7 @@ public interface NamedNodeMap {
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
 	 */
-	Attr item(int index);
+	Node item(int index);
 	
 	/**
 	 * <p>getLength.</p>
@@ -91,7 +91,4 @@ public interface NamedNodeMap {
 	 * @return a int.
 	 */
 	int getLength();
-	
-	
-
 }

@@ -57,13 +57,12 @@ public class hc_namednodemapremovenameditemTest extends LoboUnitTest {
         Element testAddress;
         NamedNodeMap attributes;
         Attr streetAttr;
-        Node removedNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddress = (Element) elementList.item(2);
         attributes = testAddress.getAttributes();
-        removedNode = attributes.removeNamedItem("class");
-        streetAttr = attributes.getNamedItem("class");
+        attributes.removeNamedItem("class");
+        streetAttr = (Attr) attributes.getNamedItem("class");
         assertNull("isnull", streetAttr);
     }
 

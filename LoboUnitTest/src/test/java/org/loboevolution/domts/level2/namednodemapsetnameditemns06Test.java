@@ -59,7 +59,7 @@ public class namednodemapsetnameditemns06Test extends LoboUnitTest {
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
-        attr = attributes.getNamedItemNS("http://www.usa.com", "domestic");
+        attr = (Attr) attributes.getNamedItemNS("http://www.usa.com", "domestic");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
 

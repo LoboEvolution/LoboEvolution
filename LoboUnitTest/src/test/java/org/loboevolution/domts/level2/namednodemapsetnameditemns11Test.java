@@ -48,7 +48,6 @@ import static org.junit.Assert.assertTrue;
 public class namednodemapsetnameditemns11Test extends LoboUnitTest {
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -59,27 +58,23 @@ public class namednodemapsetnameditemns11Test extends LoboUnitTest {
         Notation notation;
         Element element;
         HTMLCollection elementList;
-        Node newNode;
-        String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         notations = docType.getNotations();
         assertNotNull("notationsNotNull", notations);
         notation = (Notation) notations.getNamedItem("notation1");
-        elementList = doc.getElementsByTagName( "address");
+        elementList = doc.getElementsByTagName("address");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
-
-        {
-            boolean success = false;
-            try {
-                newNode = attributes.setNamedItemNS((Attr)notation);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
+        boolean success = false;
+        try {
+            attributes.setNamedItemNS(notation);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
+
     }
 }
 

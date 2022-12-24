@@ -23,6 +23,7 @@ package org.loboevolution.domts.level1;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
@@ -54,14 +55,14 @@ public class nodenotationnodeattributesTest extends LoboUnitTest {
         Document doc;
         DocumentType docType;
         NamedNodeMap notations;
-        Element notationNode;
+        Notation notationNode;
         NamedNodeMap attrList;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);
         notations = docType.getNotations();
         assertNotNull("notationsNotNull", notations);
-        notationNode = (Element) notations.getNamedItem("notation1");
+        notationNode = (Notation) notations.getNamedItem("notation1");
         assertNotNull("notationNotNull", notationNode);
         attrList = notationNode.getAttributes();
         assertNull("nodeNotationNodeAttributesAssert1", attrList);

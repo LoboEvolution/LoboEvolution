@@ -24,10 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -55,9 +52,8 @@ public class namednodemapgetnameditemns06Test extends LoboUnitTest {
         NamedNodeMap attributesMap1;
         NamedNodeMap attributesMap2;
         Element element;
-        Attr attribute;
+        Node attribute;
         Attr newAttr1;
-        Attr newAttribute;
         HTMLCollection elementList;
         String attrName;
         doc = sampleXmlFile("staffNS.xml");
@@ -66,22 +62,13 @@ public class namednodemapgetnameditemns06Test extends LoboUnitTest {
         attributesMap1 = element.getAttributes();
         attributesMap2 = element.getAttributes();
         newAttr1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "street");
-        newAttribute = element.setAttributeNodeNS(newAttr1);
+        element.setAttributeNodeNS(newAttr1);
         attribute = attributesMap1.getNamedItemNS("http://www.w3.org/DOM/L1", "street");
         attrName = attribute.getNodeName();
         assertEquals("namednodemapgetnameditemnsMap106", "street", attrName);
         attribute = attributesMap2.getNamedItemNS("http://www.w3.org/DOM/L1", "street");
         attrName = attribute.getNodeName();
         assertEquals("namednodemapgetnameditemnsMap206", "street", attrName);
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapgetnameditemns06";
     }
 }
 

@@ -24,10 +24,7 @@ package org.loboevolution.domts.level1;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -61,7 +58,7 @@ public class AttrEffectiveValueTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("address");
         testNode = (Element) addressList.item(0);
         attributes = testNode.getAttributes();
-        domesticAttr = attributes.getNamedItem("domestic");
+        domesticAttr = (Attr) attributes.getNamedItem("domestic");
         value = domesticAttr.getNodeValue();
         assertEquals("attrEffectiveValueAssert", "Yes", value);
     }

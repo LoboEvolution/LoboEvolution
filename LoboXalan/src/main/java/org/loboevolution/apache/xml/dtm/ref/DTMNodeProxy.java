@@ -795,6 +795,16 @@ public class DTMNodeProxy
         throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
     }
 
+    @Override
+    public boolean isXml() {
+        return false;
+    }
+
+    @Override
+    public void setXml(boolean xml) {
+
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -1289,7 +1299,7 @@ public class DTMNodeProxy
     }
 
     @Override
-    public void setOwnerElement(Element element) {
+    public void setOwnerElement(Node element) {
 
     }
 
@@ -1297,7 +1307,7 @@ public class DTMNodeProxy
      * {@inheritDoc}
      */
     @Override
-    public final Element getOwnerElement() {
+    public final Node getOwnerElement() {
         if (getNodeType() != Node.ATTRIBUTE_NODE) return null;
         // In XPath and DTM data models, unlike DOM, an Attr's parent is its
         // owner element.

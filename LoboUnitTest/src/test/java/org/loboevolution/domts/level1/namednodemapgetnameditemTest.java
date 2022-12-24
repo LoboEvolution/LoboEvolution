@@ -65,7 +65,7 @@ public class namednodemapgetnameditemTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
-        domesticAttr = attributes.getNamedItem("domestic");
+        domesticAttr = (Attr) attributes.getNamedItem("domestic");
         attrName = domesticAttr.getNodeName();
         assertEquals("namednodemapGetNamedItemAssert", "domestic", attrName);
     }

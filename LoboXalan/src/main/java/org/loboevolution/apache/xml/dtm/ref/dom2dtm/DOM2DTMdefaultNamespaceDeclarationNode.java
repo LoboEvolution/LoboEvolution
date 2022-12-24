@@ -201,7 +201,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   }
 
   @Override
-  public void setOwnerElement(Element element)  {
+  public void setOwnerElement(Node element)  {
     throw new DTMException(NOT_SUPPORTED_ERR);
   }
 

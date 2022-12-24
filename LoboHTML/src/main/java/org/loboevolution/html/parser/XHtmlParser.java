@@ -21,38 +21,35 @@
 package org.loboevolution.html.parser;
 
 import com.gargoylesoftware.css.dom.DOMException;
-import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.Entities;
 import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
-import org.loboevolution.html.dom.nodeimpl.AttrImpl;
-import org.loboevolution.html.dom.nodeimpl.DocumentTypeImpl;
+import org.loboevolution.html.dom.nodeimpl.*;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.ElementInfo;
-import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.Reader;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
- * The HtmlParser class is an HTML DOM parser. This parser provides
+ * The XHtmlParser class is an HTML DOM parser. This parser provides
  * the functionality for the standard DOM parser implementation
  * {@link org.loboevolution.html.parser.DocumentBuilderImpl}. This parser class
  * may be used directly when a different DOM implementation is preferred.
  */
-public class HtmlParser {
-	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());
+public class XHtmlParser {
+	private static final Logger logger = Logger.getLogger(XHtmlParser.class.getName());
 
 	/** Constant MODIFYING_KEY="cobra.suspend" */
 	public static final String MODIFYING_KEY = "cobra.suspend";
@@ -89,28 +86,25 @@ public class HtmlParser {
 
 	private boolean needRoot = false;
 
-	private static final  Pattern doctypePattern = Pattern.compile("(\\S+)\\s+PUBLIC\\s+\"([^\"]*)\"\\s+\"([^\"]*)\".*>");
-
 	/**
-	 * Constructs a HtmlParser.
+	 * Constructs a XHtmlParser.
 	 *
 	 * @param ucontext The user agent context.
 	 * @param document A W3C Document instance.
 	 */
-	public HtmlParser(UserAgentContext ucontext, Document document) {
+	public XHtmlParser(UserAgentContext ucontext, Document document) {
 		this.ucontext = ucontext;
 		this.document = document;
 	}
 
 	/**
-	 * Constructs a HtmlParser.
+	 * Constructs a XHtmlParser.
 	 *
 	 * @param ucontext     The user agent context.
 	 * @param document     An W3C Document instance.
-	 * @param errorHandler The error handler.
 	 * @param needRoot a boolean.
 	 */
-	public HtmlParser(UserAgentContext ucontext, Document document, ErrorHandler errorHandler, final boolean needRoot) {
+	public XHtmlParser(UserAgentContext ucontext, Document document, final boolean needRoot) {
 		this.ucontext = ucontext;
 		this.document = document;
 		this.needRoot = needRoot;
@@ -190,24 +184,21 @@ public class HtmlParser {
 	 * @throws org.xml.sax.SAXException if any.
 	 */
 	public void parse(final LineNumberReader reader) throws IOException, SAXException {
-		final Document doc = this.document;
-		this.parse(reader, doc);
+		this.parse(reader, this.document);
 	}
 
 	/**
 	 * Parses text followed by one element.
+	 * If tags in this set are encountered, the method throws StopException.
 	 *
-	 * @param parent
-	 * @param reader
-	 * @param stopTags    If tags in this set are encountered, the method throws
-	 *                    StopException.
-	 * @return
-	 * @throws IOException
-	 * @throws StopException
-	 * @throws SAXException
+	 * @param parent  a {@link org.loboevolution.html.node.Node} object.
+	 * @param reader  a {@link java.io.LineNumberReader} object.
+	 * @param stopTags  a {@link java.util.Set} object
+	 * @param ancestors  a {@link java.util.LinkedList} object
+	 * @return {@link java.lang.Number} object.
 	 */
 	private int parseToken(final Node parent, final LineNumberReader reader, final Set<HTMLTag> stopTags,
-						   final LinkedList<String> ancestors) throws IOException, StopException, SAXException {
+						   final LinkedList<String> ancestors) throws IOException, StopException {
 		final Document doc = this.document;
 		final HTMLDocumentImpl htmlDoc = (HTMLDocumentImpl) doc;
 		final StringBuilder textSb = this.readUpToTagBegin(reader);
@@ -231,59 +222,163 @@ public class HtmlParser {
 		}
 		if (this.justReadTagBegin) {
 			String tag = this.readTag(parent, reader);
-			if (tag == null) {
+			if (Strings.isBlank(tag)) {
 				return TOKEN_EOD;
 			}
 			String normalTag = tag.toUpperCase();
 			try {
 				if (tag.startsWith("!")) {
-					if ("!--".equals(tag)) {
-						final StringBuilder comment = this.passEndOfComment(reader);
-						final StringBuilder decText = entityDecode(comment);
-						safeAppendChild(parent, doc.createComment(decText.toString()));
-						return TOKEN_COMMENT;
-					} else if ("!DOCTYPE".equals(tag)) {
-						final String doctypeStr = this.parseEndOfTag(reader);
-						String qName = null;
-						String publicId = null;
-						String systemId = null;
-						if(doctypeStr.contains("PUBLIC")){
-							final Matcher doctypeMatcher = doctypePattern.matcher(doctypeStr);
-							if (doctypeMatcher.matches()) {
-							qName = doctypeMatcher.group(1);
-							publicId = doctypeMatcher.group(2);
-							systemId = doctypeMatcher.group(3);}
-						} else{
-							qName = doctypeStr.replace(">", "");
-						}
+					switch (tag) {
+						case "!--":
+							final StringBuilder comment = this.passEndOfComment(reader);
+							final StringBuilder decText = entityDecode(comment);
+							safeAppendChild(parent, doc.createComment(decText.toString()));
+							return TOKEN_COMMENT;
+						case "!DOCTYPE":
+							final String doctypeStr = this.parseEndOfTag(reader);
+							String qName = null;
+							String publicId = null;
+							String systemId = null;
+							if (doctypeStr.contains("PUBLIC")) {
+								qName = doctypeStr.split("PUBLIC")[0];
 
-						final DocumentTypeImpl doctype = new DocumentTypeImpl(qName, publicId, systemId);
-						htmlDoc.setDoctype(doctype);
-						needRoot = false;
-						return TOKEN_BAD;
-					} else {
-						passEndOfTag(reader);
-						return TOKEN_BAD;
+								String[] result = doctypeStr.split("PUBLIC")[1].split("\"");
+								List<String> list = Arrays.stream(result)
+										.filter(s -> Strings.isNotBlank(s) && s.length() > 1)
+										.collect(Collectors.toList());
+
+								publicId = list.get(0);
+								systemId = list.get(1);
+
+							} else {
+								qName = doctypeStr.replace(">", "");
+							}
+							htmlDoc.setDoctype(new DocumentTypeImpl(qName, publicId, systemId));
+
+							needRoot = false;
+							return TOKEN_BAD;
+						case "!ENTITY":
+							String doctypeStr2 = this.parseEndOfTag(reader);
+							doctypeStr2 = doctypeStr2.substring(0, doctypeStr2.length() - 1);
+							String[] sp = doctypeStr2.split("\"");
+							EntityReferenceImpl reference = new EntityReferenceImpl();
+
+							if (sp.length == 2) {
+								reference.setNodeName(sp[0].trim());
+								reference.setNodeValue(sp[1]);
+								htmlDoc.getDoctype().getEntities().setNamedItem(reference);
+							}
+
+							if (sp.length > 2) {
+								sp = doctypeStr2.split("[\"\\s+]");
+
+								AtomicInteger ai = new AtomicInteger(0);
+								AtomicBoolean isPublic = new AtomicBoolean(false);
+								AtomicBoolean isNotation = new AtomicBoolean(false);
+
+								Arrays.stream(sp).forEach(s -> {
+
+									if (Strings.isNotBlank(s)) {
+										if (ai.get() == 0) {
+											reference.setNodeName(s.trim());
+										} else {
+											if (isPublic.get()) {
+												reference.setPublicId(s);
+												isPublic.set(false);
+											} else if (isNotation.get()) {
+												reference.setNotationName(s);
+												isNotation.set(false);
+											} else if (s.equals("PUBLIC")) {
+												isPublic.set(true);
+											} else if (s.equals("NDATA")) {
+												isNotation.set(true);
+											} else {
+												reference.setSystemId(s);
+											}
+										}
+										ai.incrementAndGet();
+									}
+								});
+
+								htmlDoc.getDoctype().getEntities().setNamedItem(reference);
+							}
+							needRoot = false;
+							return TOKEN_BAD;
+						case "!NOTATION":
+							final String notationStr = this.parseEndOfTag(reader);
+							NotationImpl not = new NotationImpl();
+
+							if (notationStr.contains("PUBLIC")) {
+								String[] split = notationStr.split("PUBLIC");
+								AtomicInteger ai = new AtomicInteger(0);
+								Arrays.stream(split).forEach(s -> {
+									if(ai.get() == 0) {
+										not.setNodeName(s.trim());
+									}
+
+									if(ai.get() == 1) {
+										not.setPublicId(s.split("\"")[1].trim());
+									}
+
+									ai.incrementAndGet();
+
+								});
+								ai.set(0);
+							}
+
+							if (notationStr.contains("SYSTEM")) {
+								String[] split = notationStr.split("SYSTEM");
+								AtomicInteger ai = new AtomicInteger(0);
+								Arrays.stream(split).forEach(s -> {
+									if(ai.get() == 0) {
+										not.setNodeName(s.trim());
+									}
+
+									if(ai.get() == 1) {
+										not.setPublicId(s.split("\"")[1].trim());
+									}
+
+									ai.incrementAndGet();
+
+								});
+							}
+
+							htmlDoc.getDoctype().getNotations().setNamedItem(not);
+							needRoot = false;
+							return TOKEN_BAD;
+						default:
+							passEndOfTag(reader);
+							return TOKEN_BAD;
 					}
 				} else if (tag.startsWith("/")) {
-					tag = tag.substring(1);
 					normalTag = normalTag.substring(1);
 					this.passEndOfTag(reader);
 					return TOKEN_END_ELEMENT;
 				} else if (tag.startsWith("?")) {
 					tag = tag.substring(1);
 					final StringBuilder data = readProcessingInstruction(reader);
-					if(!tag.equals("xml")) {
+					if (!tag.equals("xml")) {
 						safeAppendChild(parent, doc.createProcessingInstruction(tag, data.toString()));
 						return TOKEN_FULL_ELEMENT;
 					} else {
+						this.document.setXml(true);
 						return TOKEN_TEXT;
 					}
 				} else {
-					final int localIndex = normalTag.indexOf(':');
-					final boolean tagHasPrefix = localIndex > 0;
-					final String localName = tagHasPrefix ? normalTag.substring(localIndex + 1) : normalTag;
-					ElementImpl element = (ElementImpl) doc.createElement(localName);
+					ElementImpl element;
+					if (this.document.isXml()) {
+						final int localIndex = normalTag.indexOf(':');
+						if (localIndex > -1) {
+							normalTag = normalTag.substring(localIndex + 1);
+							final String prefix = normalTag.substring(0, localIndex);
+							element = (ElementImpl) doc.createElementNS(prefix, normalTag);
+						} else {
+							element = (ElementImpl) doc.createElementNS("", normalTag);
+						}
+					} else {
+						element = (ElementImpl) doc.createElement(normalTag);
+					}
+
 					element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 					try {
 						if (!this.justReadTagEnd) {
@@ -301,7 +396,7 @@ public class HtmlParser {
 						// This is necessary for incremental rendering.
 						safeAppendChild(parent, element);
 						if (!this.justReadEmptyElement) {
-							ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(localName.toUpperCase()));
+							ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(normalTag.toUpperCase()));
 							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.getEndElementType();
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 								boolean childrenOk = einfo == null || einfo.isChildElementOk();
@@ -458,15 +553,9 @@ public class HtmlParser {
 	/**
 	 * Assumes that the content is completely made up of text, and parses until an
 	 * ending tag is found.
-	 *
-	 * @param parent
-	 * @param reader
-	 * @param tagName
-	 * @return
-	 * @throws IOException
 	 */
 	private int parseForEndTag(Node parent, final LineNumberReader reader, final String tagName,
-							   final boolean addTextNode, final boolean decodeEntities) throws IOException, SAXException {
+							   final boolean addTextNode, final boolean decodeEntities) throws IOException {
 		final Document doc = this.document;
 		int intCh;
 		StringBuilder sb = new StringBuilder();
@@ -478,7 +567,7 @@ public class HtmlParser {
 					ch = (char) intCh;
 					if (ch == '/') {
 						final StringBuilder tempBuffer = new StringBuilder();
-						INNER: while ((intCh = reader.read()) != -1) {
+						while ((intCh = reader.read()) != -1) {
 							ch = (char) intCh;
 							if (ch == '>') {
 								final String thisTag = tempBuffer.toString().trim();
@@ -499,7 +588,7 @@ public class HtmlParser {
 									}
 									return TOKEN_END_ELEMENT;
 								} else {
-									break INNER;
+									break;
 								}
 							} else {
 								tempBuffer.append(ch);
@@ -541,7 +630,7 @@ public class HtmlParser {
 				safeAppendChild(parent, textNode);
 			}
 		}
-		return HtmlParser.TOKEN_EOD;
+		return XHtmlParser.TOKEN_EOD;
 	}
 
 	private static void readCData(LineNumberReader reader, StringBuilder sb) throws IOException {
@@ -575,7 +664,7 @@ public class HtmlParser {
 		char[] chars = new char[n];
 		int i = 0;
 		while (i < n) {
-			int ich = -1;
+			int ich;
 			try {
 				ich = reader.read();
 			} catch (IOException e) {
@@ -598,9 +687,6 @@ public class HtmlParser {
 
 	/**
 	 * The reader offset should be
-	 *
-	 * @param reader
-	 * @return
 	 */
 	private String readTag(final Node parent, final LineNumberReader reader) throws IOException {
 		final StringBuilder sb = new StringBuilder();
@@ -609,11 +695,11 @@ public class HtmlParser {
 		if (chInt != -1) {
 			boolean cont = true;
 			char ch;
-			LOOP: for (;;) {
+			for (; ; ) {
 				ch = (char) chInt;
 				if (Character.isLetter(ch)) {
 					// Speed up normal case
-					break LOOP;
+					break;
 				} else if (ch == '!') {
 					sb.append('!');
 					chInt = reader.read();
@@ -649,8 +735,7 @@ public class HtmlParser {
 					while ((chInt = reader.read()) == '<') {
 						ltText.append('<');
 					}
-					final Document doc = this.document;
-					final Node textNode = doc.createTextNode(ltText.toString());
+					final Node textNode = this.document.createTextNode(ltText.toString());
 					try {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
@@ -676,8 +761,7 @@ public class HtmlParser {
 						}
 						ltText.append(ch);
 					}
-					final Document doc = this.document;
-					final Node textNode = doc.createTextNode(ltText.toString());
+					final Node textNode = this.document.createTextNode(ltText.toString());
 					try {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
@@ -692,7 +776,7 @@ public class HtmlParser {
 						continue;
 					}
 				}
-				break LOOP;
+				break;
 			}
 			if (cont) {
 				boolean lastCharSlash = false;
@@ -703,8 +787,7 @@ public class HtmlParser {
 						this.justReadTagEnd = true;
 						this.justReadTagBegin = false;
 						this.justReadEmptyElement = lastCharSlash;
-						final String tag = sb.toString();
-						return tag;
+						return sb.toString();
 					} else if (ch == '/') {
 						lastCharSlash = true;
 					} else {
@@ -727,8 +810,7 @@ public class HtmlParser {
 			this.justReadTagBegin = false;
 			this.justReadEmptyElement = false;
 		}
-		final String tag = sb.toString();
-		return tag;
+		return sb.toString();
 	}
 
 	private StringBuilder passEndOfComment(final LineNumberReader reader) throws IOException {
@@ -739,23 +821,23 @@ public class HtmlParser {
 		OUTER: for (;;) {
 			int chInt = reader.read();
 			if (chInt == -1) {
-				break OUTER;
+				break;
 			}
 			char ch = (char) chInt;
 			if (ch == '-') {
 				chInt = reader.read();
 				if (chInt == -1) {
 					sb.append(ch);
-					break OUTER;
+					break;
 				}
 				ch = (char) chInt;
 				if (ch == '-') {
 					StringBuilder extra = null;
-					INNER: for (;;) {
+					for (; ; ) {
 						chInt = reader.read();
 						if (chInt == -1) {
 							if (extra != null) {
-								sb.append(extra.toString());
+								sb.append(extra);
 							}
 							break OUTER;
 						}
@@ -779,10 +861,10 @@ public class HtmlParser {
 							extra.append(ch);
 						} else {
 							if (extra != null) {
-								sb.append(extra.toString());
+								sb.append(extra);
 							}
 							sb.append(ch);
-							break INNER;
+							break;
 						}
 					}
 				} else {
@@ -814,7 +896,7 @@ public class HtmlParser {
 			result.append((char) chInt);
 			readSomething = true;
 			final char ch = (char) chInt;
-			if (ch == '>') {
+			if (ch == '>' || ch == '[') {
 				this.justReadTagEnd = true;
 				this.justReadTagBegin = false;
 				return result.toString();
@@ -866,7 +948,7 @@ public class HtmlParser {
 	}
 
 	private boolean readAttribute(final LineNumberReader reader, final ElementImpl element)
-			throws IOException, SAXException {
+			throws IOException {
 		if (this.justReadTagEnd) {
 			return false;
 		}
@@ -882,7 +964,7 @@ public class HtmlParser {
 			if (chInt == -1) {
 				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
-					element.setAttribute(attributeNameStr, attributeNameStr);
+					setAttributeNode(element, attributeNameStr, attributeNameStr);
 					attributeName.setLength(0);
 				}
 				this.justReadTagBegin = false;
@@ -898,7 +980,7 @@ public class HtmlParser {
 			} else if (ch == '>') {
 				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
-					element.setAttribute(attributeNameStr, attributeNameStr);
+					setAttributeNode(element, attributeNameStr, attributeNameStr);
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = true;
@@ -916,7 +998,7 @@ public class HtmlParser {
 					blankFound = false;
 					if (Strings.isStringBuilderNotBlack(attributeName)) {
 						final String attributeNameStr = attributeName.toString();
-						element.setAttribute(attributeNameStr, attributeNameStr);
+						setAttributeNode(element, attributeNameStr, attributeNameStr);
 						attributeName.setLength(0);
 					}
 				}
@@ -938,7 +1020,7 @@ public class HtmlParser {
 			if (ch == '>') {
 				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
-					element.setAttribute(attributeNameStr, attributeNameStr);
+					setAttributeNode(element, attributeNameStr, attributeNameStr);
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = true;
@@ -974,62 +1056,29 @@ public class HtmlParser {
 				break;
 			}
 			final char ch = (char) chInt;
-			if ((openQuote != -1) && (ch == openQuote)) {
+			if (ch == openQuote) {
 				lastCharSlash = false;
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
-					if (attributeValue == null) {
-						// Quotes are closed. There's a distinction
-						// between blank values and null in HTML, as
-						// processed by major browsers.
-						element.setAttribute(attributeNameStr, "");
-					} else {
-						final StringBuilder actualAttributeValue = entityDecode(attributeValue);
-						if (attributeNameStr.contains(":")) {
-							element.setAttributeNS(element.getNamespaceURI(), attributeNameStr, actualAttributeValue.toString());
-						} else {
-							if ("xmlns".equals(attributeNameStr)) {
-								element.setNamespaceURI(attributeValue.toString());
-								final NamedNodeMap nnmap = element.getAttributes();
-								if (nnmap != null) {
-									for (Attr attr : Nodes.iterable(nnmap)) {
-										AttrImpl att = (AttrImpl) attr;
-										att.setNamespaceURI(attributeValue.toString());
-									}
-								}
-							} else {
-								element.setAttribute(attributeNameStr, actualAttributeValue.toString());
-							}
-						}
-					}
+					setAttributeNode(element, attributeNameStr, attributeValue == null ? "" : entityDecode(attributeValue).toString());
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = false;
 				return true;
-			} else if ((openQuote == -1) && (ch == '>')) {
+			} else if (openQuote == -1 && ch == '>') {
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
-					if (attributeValue == null) {
-						element.setAttribute(attributeNameStr, null);
-					} else {
-						final StringBuilder actualAttributeValue = entityDecode(attributeValue);
-						element.setAttribute(attributeNameStr, actualAttributeValue.toString());
-					}
+					setAttributeNode(element, attributeNameStr, attributeValue == null ? null : entityDecode(attributeValue).toString());
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = true;
 				this.justReadEmptyElement = lastCharSlash;
 				return false;
-			} else if ((openQuote == -1) && Character.isWhitespace(ch)) {
+			} else if (openQuote == -1 && Character.isWhitespace(ch)) {
 				lastCharSlash = false;
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
-					if (attributeValue == null) {
-						element.setAttribute(attributeNameStr, null);
-					} else {
-						final StringBuilder actualAttributeValue = entityDecode(attributeValue);
-						element.setAttribute(attributeNameStr, actualAttributeValue.toString());
-					}
+					setAttributeNode(element, attributeNameStr, attributeValue == null ? null : entityDecode(attributeValue).toString());
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = false;
@@ -1049,12 +1098,7 @@ public class HtmlParser {
 		this.justReadTagEnd = false;
 		if (attributeName != null) {
 			final String attributeNameStr = attributeName.toString();
-			if (attributeValue == null) {
-				element.setAttribute(attributeNameStr, null);
-			} else {
-				final StringBuilder actualAttributeValue = entityDecode(attributeValue);
-				element.setAttribute(attributeNameStr, actualAttributeValue.toString());
-			}
+			setAttributeNode(element, attributeNameStr, attributeValue == null ? null : entityDecode(attributeValue).toString());
 		}
 		return false;
 	}
@@ -1194,5 +1238,17 @@ public class HtmlParser {
 			}
 		}
 		return c;
+	}
+
+	private void setAttributeNode(ElementImpl element, String attributeName, String attributeValue) {
+		if (attributeName.contains("xmlns")) {
+			element.setNamespaceURI(attributeValue);
+		}
+
+		if (this.document.isXml()) {
+			element.setAttributeNS(element.getNamespaceURI(), attributeName, attributeValue);
+		} else {
+			element.setAttribute(attributeName, attributeValue);
+		}
 	}
 }

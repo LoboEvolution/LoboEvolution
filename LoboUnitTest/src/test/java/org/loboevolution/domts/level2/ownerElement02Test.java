@@ -26,6 +26,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.assertNull;
 
@@ -52,20 +53,11 @@ public class ownerElement02Test extends LoboUnitTest {
     public void runTest() {
         Document doc;
         Attr newAttr;
-        Element elementNode;
+        Node elementNode;
         doc = sampleXmlFile("staff.xml");
         newAttr = doc.createAttribute("newAttribute");
         elementNode = newAttr.getOwnerElement();
         assertNull("throw_Null", elementNode);
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/ownerElement02";
     }
 }
 

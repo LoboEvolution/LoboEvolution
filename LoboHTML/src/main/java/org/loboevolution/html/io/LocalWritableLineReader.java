@@ -21,8 +21,7 @@
 package org.loboevolution.html.io;
 
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.parser.HtmlParser;
-import org.xml.sax.ErrorHandler;
+import org.loboevolution.html.parser.XHtmlParser;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
@@ -31,9 +30,6 @@ import java.io.StringReader;
 
 /**
  * <p>LocalWritableLineReader class.</p>
- *
- *
- *
  */
 public class LocalWritableLineReader extends WritableLineReader {
 	
@@ -69,10 +65,7 @@ public class LocalWritableLineReader extends WritableLineReader {
 	}
 	
 	private void openBufferChanged(String text) {
-		// Assumed to execute in a lock
-		// Assumed that text is not broken up HTML.
-		final ErrorHandler errorHandler = new LocalErrorHandler();
-		final HtmlParser parser = new HtmlParser(doc.getUcontext(), doc, errorHandler, true);
+		final XHtmlParser parser = new XHtmlParser(doc.getUcontext(), doc, true);
 		final StringReader strReader = new StringReader(text);
 		try {
 			// This sets up another Javascript scope WindowImpl. Does it matter?

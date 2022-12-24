@@ -61,7 +61,7 @@ public class hc_attrinsertbefore6Test extends LoboUnitTest {
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = attributes.getNamedItem("title");
+        titleAttr = (Attr) attributes.getNamedItem("title");
         textNode = otherDoc.createTextNode("terday");
 
         {

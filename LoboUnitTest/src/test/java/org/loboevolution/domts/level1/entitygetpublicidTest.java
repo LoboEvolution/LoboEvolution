@@ -23,7 +23,7 @@ package org.loboevolution.domts.level1;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.Entity;
+import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
@@ -58,19 +58,18 @@ public class entitygetpublicidTest extends LoboUnitTest {
         Document doc;
         DocumentType docType;
         NamedNodeMap entityList;
-        Entity entityNode;
+        EntityReference entityNode;
         String publicId;
-        String systemId;
         String notation;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);
         entityList = docType.getEntities();
         assertNotNull("entitiesNotNull", entityList);
-        entityNode = (Entity) entityList.getNamedItem("ent5");
+        entityNode = (EntityReference) entityList.getNamedItem("ent5");
         publicId = entityNode.getPublicId();
         assertEquals("publicId", "entityURI", publicId);
-        systemId = entityNode.getSystemId();
+        entityNode.getSystemId();
         notation = entityNode.getNotationName();
         assertEquals("notation", "notation1", notation);
     }

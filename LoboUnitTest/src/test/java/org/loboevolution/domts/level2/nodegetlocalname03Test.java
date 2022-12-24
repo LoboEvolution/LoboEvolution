@@ -72,14 +72,5 @@ public class nodegetlocalname03Test extends LoboUnitTest {
         assertEquals("nodegetlocalname03_localAttrName", "attr", localAttrName);
         assertEquals("nodegetlocalname03_localQAttrName", "qattr", localQAttrName);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/nodegetlocalname03";
-    }
 }
 

@@ -73,7 +73,7 @@ public class namednodemapsetnameditemTest extends LoboUnitTest {
         newAttribute = doc.createAttribute("district");
         attributes = testAddress.getAttributes();
         setNode = attributes.setNamedItem(newAttribute);
-        districtNode = attributes.getNamedItem("district");
+        districtNode = (Attr) attributes.getNamedItem("district");
         attrName = districtNode.getNodeName();
         assertEquals("namednodemapSetNamedItemAssert", "district", attrName);
     }

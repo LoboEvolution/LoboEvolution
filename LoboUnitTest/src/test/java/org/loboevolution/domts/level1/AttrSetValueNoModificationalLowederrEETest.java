@@ -75,7 +75,7 @@ public class AttrSetValueNoModificationalLowederrEETest extends LoboUnitTest {
         entElement = (Element) entRef.getFirstChild();
         assertNotNull("entElementNotNull", entElement);
         attrList = entElement.getAttributes();
-        attrNode = attrList.getNamedItem("domestic");
+        attrNode = (Attr)attrList.getNamedItem("domestic");
 
         {
             boolean success = false;

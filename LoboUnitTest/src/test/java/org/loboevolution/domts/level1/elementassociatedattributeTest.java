@@ -64,7 +64,7 @@ public class elementassociatedattributeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(0);
         attributes = testEmployee.getAttributes();
-        domesticAttr = attributes.getNamedItem("domestic");
+        domesticAttr = (Attr) attributes.getNamedItem("domestic");
         specified = domesticAttr.isSpecified();
         assertTrue("domesticSpecified", specified);
     }

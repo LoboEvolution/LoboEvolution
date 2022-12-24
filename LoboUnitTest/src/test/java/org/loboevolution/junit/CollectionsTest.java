@@ -182,7 +182,7 @@ public class CollectionsTest extends LoboUnitTest {
         assertNotNull(nnm);
         int nnmlen = nnm.getLength();
         for (int i = 0; i < nnmlen; i++) {
-            Attr refitem = refnnm.item(i);
+            Attr refitem = (Attr) refnnm.item(i);
             Node named = nnm.getNamedItemNS(refitem.getNamespaceURI(), refitem.getLocalName());
             if (refitem.isSpecified() || named != null) {
                 assertNotNull(named);

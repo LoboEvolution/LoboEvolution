@@ -27,7 +27,7 @@ import org.loboevolution.html.dom.HTMLScriptElement;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
@@ -264,7 +264,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+		if (XHtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			processScript();
 		}
 		return super.setUserData(key, data, handler);

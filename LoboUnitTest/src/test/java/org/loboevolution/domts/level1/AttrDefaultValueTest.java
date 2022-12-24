@@ -24,10 +24,7 @@ package org.loboevolution.domts.level1;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -62,13 +59,13 @@ public class AttrDefaultValueTest extends LoboUnitTest {
         HTMLCollection addressList;
         Element testNode;
         NamedNodeMap attributes;
-        Attr streetAttr;
+        Node streetAttr;
         String value;
         doc = sampleXmlFile("staff.xml");
         addressList = doc.getElementsByTagName("address");
         testNode = (Element) addressList.item(4);
         attributes = testNode.getAttributes();
-        streetAttr = attributes.getNamedItem("street");
+        streetAttr = (Attr) attributes.getNamedItem("street");
         value = streetAttr.getNodeValue();
         assertEquals("attrDefaultValueAssert", "Yes", value);
     }

@@ -49,7 +49,6 @@ public class hc_notationssetnameditem1Test extends LoboUnitTest {
         Document doc;
         NamedNodeMap notations;
         DocumentType docType;
-        Node retval;
         Element elem;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
@@ -60,7 +59,7 @@ public class hc_notationssetnameditem1Test extends LoboUnitTest {
         elem = doc.createElement("br");
 
         try {
-            retval = notations.setNamedItem((Attr) elem);
+            notations.setNamedItem(elem);
             fail("throw_HIER_OR_NO_MOD_ERR");
 
         } catch (DOMException ex) {

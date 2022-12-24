@@ -60,7 +60,7 @@ public class hc_attreffectivevalueTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("acronym");
         testNode = (Element) addressList.item(0);
         attributes = testNode.getAttributes();
-        domesticAttr = attributes.getNamedItem("title");
+        domesticAttr = (Attr) attributes.getNamedItem("title");
         value = domesticAttr.getNodeValue();
         assertEquals("attrEffectiveValueAssert", "Yes", value);
     }

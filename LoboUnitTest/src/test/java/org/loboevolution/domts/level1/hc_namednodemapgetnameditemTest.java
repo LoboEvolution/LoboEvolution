@@ -63,7 +63,7 @@ public class hc_namednodemapgetnameditemTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element)elementList.item(1);
         attributes = testEmployee.getAttributes();
-        domesticAttr = attributes.getNamedItem("title");
+        domesticAttr = (Attr) attributes.getNamedItem("title");
         attrName = domesticAttr.getNodeName();
         assertEquals( "nodeName", "title", attrName);
     }

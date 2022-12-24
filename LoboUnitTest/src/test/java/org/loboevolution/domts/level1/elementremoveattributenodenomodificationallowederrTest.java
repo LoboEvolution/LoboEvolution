@@ -83,7 +83,7 @@ public class elementremoveattributenodenomodificationallowederrTest extends Lobo
         genElement = (Element) gList.item(0);
         assertNotNull("genElementNotNull", genElement);
         attrList = genElement.getAttributes();
-        attrNode = attrList.getNamedItem("domestic");
+        attrNode = (Attr)attrList.getNamedItem("domestic");
 
         {
             boolean success = false;

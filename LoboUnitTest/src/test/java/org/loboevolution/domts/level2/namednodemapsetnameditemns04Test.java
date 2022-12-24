@@ -83,14 +83,5 @@ public class namednodemapsetnameditemns04Test extends LoboUnitTest {
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);
 
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapsetnameditemns04";
-    }
 }
 

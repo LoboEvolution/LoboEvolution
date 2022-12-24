@@ -24,10 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -56,13 +53,13 @@ public class ownerElement01Test extends LoboUnitTest {
         Element testNode;
         NamedNodeMap attributes;
         Attr domesticAttr;
-        Element elementNode;
+        Node elementNode;
         String name;
         doc = sampleXmlFile("staff.xml");
         addressList = doc.getElementsByTagName("address");
         testNode = (Element) addressList.item(0);
         attributes = testNode.getAttributes();
-        domesticAttr = attributes.getNamedItem("domestic");
+        domesticAttr = (Attr) attributes.getNamedItem("domestic");
         elementNode = domesticAttr.getOwnerElement();
         name = elementNode.getNodeName();
         assertEquals("throw_Equals", "ADDRESS", name);

@@ -73,7 +73,7 @@ public class hc_namednodemapsetnameditemthatexistsTest extends LoboUnitTest {
         newAttribute = doc.createAttribute("class");
         attributes = testAddress.getAttributes();
         setNode = attributes.setNamedItem(newAttribute);
-        districtNode = attributes.getNamedItem("class");
+        districtNode = (Attr) attributes.getNamedItem("class");
         attrValue = districtNode.getNodeValue();
         assertEquals("namednodemapSetNamedItemThatExistsAssert", null, attrValue);
     }

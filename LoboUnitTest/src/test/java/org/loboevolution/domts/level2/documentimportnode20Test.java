@@ -23,7 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.Entity;
+import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.*;
@@ -63,8 +63,8 @@ public class documentimportnode20Test extends LoboUnitTest {
         DocumentType docTypeNull = null;
 
         NamedNodeMap nodeMap;
-        Entity entity4;
-        Entity entityImp4;
+        EntityReference entity4;
+        EntityReference entityImp4;
         Element element;
         CharacterData cdata;
         ProcessingInstruction pi;
@@ -81,8 +81,8 @@ public class documentimportnode20Test extends LoboUnitTest {
         docType = doc.getDoctype();
         docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", docTypeNull);
         nodeMap = docType.getEntities();
-        entity4 = (Entity) nodeMap.getNamedItem("ent4");
-        entityImp4 = (Entity) docImp.importNode(entity4, true);
+        entity4 = (EntityReference) nodeMap.getNamedItem("ent4");
+        entityImp4 = (EntityReference) docImp.importNode(entity4, true);
         childList = entityImp4.getChildNodes();
         element = (Element) childList.item(0);
         elemchildList = element.getChildNodes();

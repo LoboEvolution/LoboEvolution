@@ -68,14 +68,5 @@ public class documentimportnode18Test extends LoboUnitTest {
         assertEquals("documentimportnode18_Target", "Target", piTarget);
         assertEquals("documentimportnode18_Data", "Data", piData);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/documentimportnode18";
-    }
 }
 

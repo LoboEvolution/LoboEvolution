@@ -1210,4 +1210,14 @@ public class XMLDocument implements Document {
 			Object result) {
 		return doc.evaluate(expression, contextNode, resolver, type, result);
 	}
+
+	@Override
+	public boolean isXml() {
+		return doc.isXml();
+	}
+
+	@Override
+	public void setXml(boolean xml) {
+		doc.setXml(xml);
+	}
 }

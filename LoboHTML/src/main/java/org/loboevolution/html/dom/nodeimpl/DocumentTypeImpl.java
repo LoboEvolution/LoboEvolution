@@ -23,18 +23,25 @@
 package org.loboevolution.html.dom.nodeimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import lombok.NoArgsConstructor;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
+
+import java.util.HashMap;
 
 /**
  * <p>DocumentTypeImpl class.</p>
  */
+@NoArgsConstructor
 public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
-	private final String publicId;
-	private final String qualifiedName;
-	private final String systemId;
+	private String publicId;
+	private String qualifiedName;
+	private String systemId;
+	private NamedNodeMap notation;
+	private NamedNodeMap entities;
 
 	/**
 	 * <p>Constructor for DocumentTypeImpl.</p>
@@ -98,12 +105,14 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 
 	@Override
 	public NamedNodeMap getNotations() {
-		return null;
+		if(this.notation == null) this.notation = new NamedNodeMapImpl(this, new HashMap<>());
+		return this.notation;
 	}
 
 	@Override
 	public NamedNodeMap getEntities() {
-		return null;
+		if(this.entities == null) this.entities = new NamedNodeMapImpl(this, new HashMap<>());
+		return this.entities;
 	}
 
 	@Override

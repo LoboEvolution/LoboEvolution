@@ -60,14 +60,12 @@ public class namednodemapinuseattributeerrTest extends LoboUnitTest {
         Element testNode;
         NamedNodeMap attributes;
         Attr domesticAttr;
-        Attr setAttr;
-        Node setNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         firstNode = (Element) elementList.item(0);
         domesticAttr = doc.createAttribute("domestic");
         domesticAttr.setValue("Yes");
-        setAttr = firstNode.setAttributeNode(domesticAttr);
+        firstNode.setAttributeNode(domesticAttr);
         elementList = doc.getElementsByTagName("address");
         testNode = (Element) elementList.item(2);
         attributes = testNode.getAttributes();
@@ -75,7 +73,7 @@ public class namednodemapinuseattributeerrTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                setNode = attributes.setNamedItem(domesticAttr);
+                attributes.setNamedItem(domesticAttr);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }

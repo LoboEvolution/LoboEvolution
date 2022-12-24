@@ -60,14 +60,5 @@ public class getElementsByTagNameNS12Test extends LoboUnitTest {
         elementList = docElem.getElementsByTagName( "nomatch");
         assertEquals( "size", 0, elementList.getLength());
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/getElementsByTagNameNS12";
-    }
 }
 

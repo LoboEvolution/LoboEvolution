@@ -66,7 +66,7 @@ public class hc_attrcreatedocumentfragmentTest extends LoboUnitTest {
         domesticNode = (Element) docFragment.getFirstChild();
         attributes = domesticNode.getAttributes();
         for (int indexN10078 = 0; indexN10078 < attributes.getLength(); indexN10078++) {
-            attribute = attributes.item(indexN10078);
+            attribute = (Attr)attributes.item(indexN10078);
             attrName = attribute.getNodeName();
 
             if ("lang".equals(attrName)) {

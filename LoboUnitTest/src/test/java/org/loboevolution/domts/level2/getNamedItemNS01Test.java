@@ -64,7 +64,7 @@ public class getNamedItemNS01Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element)elementList.item(1);
         attributes = testEmployee.getAttributes();
-        domesticAttr = attributes.getNamedItemNS("http://www.usa.com", "domestic");
+        domesticAttr = (Attr) attributes.getNamedItemNS("http://www.usa.com", "domestic");
         attrName = domesticAttr.getNodeName();
         assertEquals("attrName", "dmstc:domestic", attrName);
     }

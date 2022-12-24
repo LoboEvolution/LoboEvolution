@@ -57,7 +57,6 @@ public class nodesetprefix02Test extends LoboUnitTest {
         Element element;
         Attr attribute;
         Attr newAttribute;
-        Node setNode;
         HTMLCollection elementList;
         String attrName;
         String newAttrName;
@@ -65,22 +64,13 @@ public class nodesetprefix02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         element = (Element) elementList.item(1);
         newAttribute = doc.createAttributeNS("http://www.w3.org/DOM/Test", "test:address");
-        setNode = element.setAttributeNodeNS(newAttribute);
+        element.setAttributeNodeNS(newAttribute);
         newAttribute.setPrefix("dom");
         attribute = element.getAttributeNodeNS("http://www.usa.com", "domestic");
         attrName = attribute.getNodeName();
         newAttrName = newAttribute.getNodeName();
         assertEquals("nodesetprefix02_attrName", "dmstc:domestic", attrName);
         assertEquals("nodesetprefix02_newAttrName", "dom:address", newAttrName);
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/nodesetprefix02";
     }
 }
 

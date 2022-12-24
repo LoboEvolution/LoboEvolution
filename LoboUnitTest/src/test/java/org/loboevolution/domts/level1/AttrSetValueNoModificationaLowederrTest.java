@@ -77,7 +77,7 @@ public class AttrSetValueNoModificationaLowederrTest extends LoboUnitTest {
         assertNotNull("genderFirstGrandchildNotNull", g);
         attrList = g.getAttributes();
         assertNotNull("attributesNotNull", attrList);
-        attrNode = attrList.getNamedItem("domestic");
+        attrNode = (Attr)attrList.getNamedItem("domestic");
         assertNotNull("attrNotNull", attrNode);
 
         {

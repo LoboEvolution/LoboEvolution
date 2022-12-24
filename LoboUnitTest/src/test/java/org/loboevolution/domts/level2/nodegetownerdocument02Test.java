@@ -73,14 +73,5 @@ public class nodegetownerdocument02Test extends LoboUnitTest {
         ownerDocElem = newElem.getOwnerDocument();
         assertNotNull("nodegetownerdocument02_2", ownerDocElem);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/nodegetownerdocument02";
-    }
 }
 

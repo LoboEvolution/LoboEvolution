@@ -65,7 +65,7 @@ public class hc_namednodemapreturnnullTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
-        districtNode = attributes.getNamedItem("lang");
+        districtNode = (Attr) attributes.getNamedItem("lang");
         assertNull("langAttrNull", districtNode);
     }
 }

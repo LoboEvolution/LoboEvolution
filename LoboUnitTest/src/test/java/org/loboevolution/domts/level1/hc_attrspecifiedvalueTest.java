@@ -63,7 +63,7 @@ public class hc_attrspecifiedvalueTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("acronym");
         testNode = (Element) addressList.item(0);
         attributes = testNode.getAttributes();
-        domesticAttr = attributes.getNamedItem("title");
+        domesticAttr = (Attr) attributes.getNamedItem("title");
         state = domesticAttr.isSpecified();
         assertTrue("acronymTitleSpecified", state);
     }

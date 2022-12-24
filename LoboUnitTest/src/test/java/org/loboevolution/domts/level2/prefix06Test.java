@@ -71,14 +71,5 @@ public class prefix06Test extends LoboUnitTest {
             assertTrue("throw_INVALID_CHARACTER_ERR", success);
         }
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/prefix06";
-    }
 }
 

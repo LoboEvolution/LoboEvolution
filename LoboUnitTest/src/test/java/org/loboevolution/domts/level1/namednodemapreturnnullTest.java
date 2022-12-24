@@ -65,7 +65,7 @@ public class namednodemapreturnnullTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
-        districtNode = attributes.getNamedItem("district");
+        districtNode = (Attr) attributes.getNamedItem("district");
         assertNull("namednodemapReturnNullAssert", districtNode);
     }
 }

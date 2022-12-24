@@ -67,7 +67,7 @@ public class getNamedItemNS02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element)elementList.item(1);
         attributes = testEmployee.getAttributes();
-        newAttr = attributes.getNamedItemNS(namespaceURI, localName);
+        newAttr = (Attr) attributes.getNamedItemNS(namespaceURI, localName);
         assertNull("throw_Null", newAttr);
     }
 }

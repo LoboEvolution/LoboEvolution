@@ -59,7 +59,7 @@ public class hc_entitiessetnameditemns1Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
 
         try {
-            entities.setNamedItemNS((Attr)elem);
+            entities.setNamedItemNS(elem);
             fail("throw_HIER_OR_NO_MOD_ERR");
 
         } catch (DOMException ex) {

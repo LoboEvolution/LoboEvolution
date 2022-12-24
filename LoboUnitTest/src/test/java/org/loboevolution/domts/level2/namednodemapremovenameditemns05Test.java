@@ -89,22 +89,12 @@ public class namednodemapremovenameditemns05Test extends LoboUnitTest {
         } catch (DOMException ex) {
             switch (ex.getCode()) {
                 case 8:
-                    break;
                 case 7:
                     break;
                 default:
                     throw ex;
             }
         }
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapremovenameditemns05";
     }
 }
 

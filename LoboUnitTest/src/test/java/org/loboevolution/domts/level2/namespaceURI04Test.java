@@ -59,14 +59,5 @@ public class namespaceURI04Test extends LoboUnitTest {
         employeeNamespace = testEmployee.getNamespaceURI();
         assertNull("throw_Null", employeeNamespace);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namespaceURI04";
-    }
 }
 

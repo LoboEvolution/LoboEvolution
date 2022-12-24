@@ -62,14 +62,5 @@ public class nodehasattributes01Test extends LoboUnitTest {
         hasAttributes = element.hasAttributes();
         assertTrue("nodehasattributes01_2", hasAttributes);
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/nodehasattributes01";
-    }
 }
 

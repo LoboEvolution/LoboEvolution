@@ -57,7 +57,7 @@ public class hc_attrlastchildTest extends LoboUnitTest {
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = attributes.getNamedItem("title");
+        titleAttr = (Attr) attributes.getNamedItem("title");
         textNode = (Text) titleAttr.getFirstChild();
         assertNotNull("textNodeNotNull", textNode);
         value = textNode.getNodeValue();

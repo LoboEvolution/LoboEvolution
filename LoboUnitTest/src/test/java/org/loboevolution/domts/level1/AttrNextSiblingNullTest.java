@@ -58,7 +58,7 @@ public class AttrNextSiblingNullTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("address");
         testNode = (Element) addressList.item(0);
         attributes = testNode.getAttributes();
-        domesticAttr = attributes.getNamedItem("domestic");
+        domesticAttr = (Attr) attributes.getNamedItem("domestic");
         s = domesticAttr.getNextSibling();
         assertNull("attrNextSiblingNullAssert", s);
     }

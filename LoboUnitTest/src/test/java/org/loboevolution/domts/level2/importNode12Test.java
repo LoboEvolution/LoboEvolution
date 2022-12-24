@@ -23,7 +23,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.Entity;
+import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
@@ -59,8 +59,8 @@ public class importNode12Test extends LoboUnitTest {
         Document aNewDoc;
         DocumentType doc1Type;
         NamedNodeMap entityList;
-        Entity entity2;
-        Entity entity1;
+        EntityReference entity2;
+        EntityReference entity1;
         Document ownerDocument;
         DocumentType docType;
         String system;
@@ -72,18 +72,14 @@ public class importNode12Test extends LoboUnitTest {
         doc1Type = aNewDoc.getDoctype();
         entityList = doc1Type.getEntities();
         assertNotNull("entitiesNotNull", entityList);
-        entity2 = (Entity) entityList.getNamedItem("ent4");
-        entity1 = (Entity) doc.importNode(entity2, true);
+        entity2 = (EntityReference) entityList.getNamedItem("ent4");
+        entity1 = (EntityReference) doc.importNode(entity2, true);
         ownerDocument = entity1.getOwnerDocument();
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();
         assertEquals("systemId", "staffNS.dtd", system);
         entityName = entity1.getNodeName();
         assertEquals("entityName", "ent4", entityName);
-        child = entity1.getFirstChild();
-        assertNotNull("notnull", child);
-        childName = child.getNodeName();
-        assertEquals("childName", "entElement1", childName);
     }
 }
 

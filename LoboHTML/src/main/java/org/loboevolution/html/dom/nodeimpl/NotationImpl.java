@@ -20,18 +20,19 @@
 
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.Data;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 
+@Data
 public class NotationImpl extends EventTargetImpl implements Notation {
 
-    @Override
-    public String getPublicId() {
-        return null;
-    }
+    private String publicId;
+    private String systemId;
+    private String nodeName;
 
     @Override
-    public String getSystemId() {
-        return null;
+    public int getNodeType() {
+        return NOTATION_NODE;
     }
 }

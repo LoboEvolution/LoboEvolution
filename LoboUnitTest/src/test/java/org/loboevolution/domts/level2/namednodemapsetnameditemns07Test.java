@@ -65,7 +65,7 @@ public class namednodemapsetnameditemns07Test extends LoboUnitTest {
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
-        attr = attributes.getNamedItemNS("http://www.usa.com", "domestic");
+        attr = (Attr) attributes.getNamedItemNS("http://www.usa.com", "domestic");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
 
@@ -78,15 +78,6 @@ public class namednodemapsetnameditemns07Test extends LoboUnitTest {
             }
             assertTrue("namednodemapsetnameditemns07", success);
         }
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapsetnameditemns07";
     }
 }
 

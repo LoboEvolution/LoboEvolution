@@ -26,7 +26,7 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.css.StyleSheet;
-import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.LinkRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
@@ -389,7 +389,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+		if (XHtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			processLink();
 		}
 		return super.setUserData(key, data, handler);

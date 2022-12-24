@@ -60,7 +60,7 @@ public class hc_nodeattributenodeattributeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("acronym");
         testAddr = (Element) elementList.item(0);
         addrAttr = testAddr.getAttributes();
-        attrNode = addrAttr.item(0);
+        attrNode = (Attr) addrAttr.item(0);
         assertNotNull("nodeAttributeNodeAttributeAssert1", attrNode);
     }
 }

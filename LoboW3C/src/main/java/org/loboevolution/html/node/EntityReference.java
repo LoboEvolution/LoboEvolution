@@ -21,4 +21,10 @@
 package org.loboevolution.html.node;
 
 public interface EntityReference extends Node {
+
+    String getPublicId();
+
+    String getSystemId();
+
+    String getNotationName();
 }

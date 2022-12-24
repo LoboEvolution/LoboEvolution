@@ -490,7 +490,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 					final Element elem1 = (Element) child1;
 					NamedNodeMap attributes2 = elem1.getAttributes();
 					if (attributes2 != null) {
-						for (Attr attr : Nodes.iterable(attributes2)) {
+						for (Node nodeAttr : Nodes.iterable(attributes2)) {
+							Attr attr = (Attr) nodeAttr;
 							if ("id".equals(attr.getNodeName()) && elementId.equals(attr.getNodeValue())) {
 								return child1;
 							}
@@ -503,7 +504,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 				final Element elem = (Element) child;
 				NamedNodeMap attributes2 = elem.getAttributes();
 				if (attributes2 != null) {
-					for (Attr attr : Nodes.iterable(attributes2)) {
+					for (Node nodeAttr : Nodes.iterable(attributes2)) {
+						Attr attr = (Attr) nodeAttr;
 						if ("id".equals(attr.getNodeName()) && elementId.equals(attr.getNodeValue())) {
 							return child;
 						}

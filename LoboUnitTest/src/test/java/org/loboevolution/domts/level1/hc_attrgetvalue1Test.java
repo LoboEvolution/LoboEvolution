@@ -53,7 +53,7 @@ public class hc_attrgetvalue1Test extends LoboUnitTest {
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = attributes.getNamedItem("class");
+        titleAttr = (Attr) attributes.getNamedItem("class");
         value = titleAttr.getValue();
         assertEquals("attrValue1", "Y\u03b1", value); // Android-changed: GREEK LOWER CASE ALPHA
     }

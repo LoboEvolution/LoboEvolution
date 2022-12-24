@@ -84,14 +84,5 @@ public class nodeissupported02Test extends LoboUnitTest {
             assertTrue("nodeissupported02_Core3", success);
         }
     }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/nodeissupported02";
-    }
 }
 

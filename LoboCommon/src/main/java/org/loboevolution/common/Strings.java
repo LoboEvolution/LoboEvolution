@@ -21,18 +21,13 @@ package org.loboevolution.common;
 
 import org.loboevolution.html.CSSValues;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Collections;
-import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 
 /**
  * The Class Strings.

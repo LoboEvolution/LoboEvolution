@@ -42,7 +42,7 @@ import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.geom.DOMRect;
 import org.loboevolution.html.node.js.geom.DOMRectList;
-import org.loboevolution.html.parser.HtmlParser;
+import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
@@ -126,9 +126,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	@JSFunction
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
-		final Attr attribute = map.getNamedItem(localName);
-		if (attribute != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attribute.getNamespaceURI()))) {
-			return new AttrImpl(localName, attribute.getValue(), "id".equalsIgnoreCase(name), this, true);
+		final Attr attribute = (Attr) map.getNamedItem(localName);
+		if (attribute != null &&
+				((namespaceURI == null || "*".equals(namespaceURI)) ||
+						namespaceURI.equals(attribute.getNamespaceURI()) ||
+						namespaceURI.equals(getParentElement().getNamespaceURI()))) {
+			return attribute;
 		}
 		return null;
 	}
@@ -136,7 +139,11 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void removeAttribute(String name) {
-		map.removeNamedItem(name);
+		try {
+			map.removeNamedItem(name);
+		} catch (DOMException ex) {
+			logger.severe(ex.getMessage());
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -152,13 +159,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public Attr removeAttributeNode(Attr oldAttr) {
 		oldAttr.setOwnerElement(null);
-		return map.removeNamedItem(oldAttr.getName());
+		return (Attr) map.removeNamedItem(oldAttr.getName());
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setAttribute(String name, String value) {
-
+		String prefix = null;
 		if (Strings.isBlank(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
 		}
@@ -175,20 +182,23 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
+
+			prefix = split[0];
+			name = split[1];
 		} else {
 			if (!Strings.isValidString(name)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
 
-		map.setNamedItem(new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true));
+		map.setNamedItem(new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, prefix, true));
 		assignAttributeField(name, value);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
-
+		String prefix = null;
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
 		}
@@ -211,14 +221,16 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
+			prefix = split[0];
+			qualifiedName = split[1];
+
 		} else {
 			if (!Strings.isValidString(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
-
-		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
-		attr.setNamespaceURI(namespaceURI);
+		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, prefix, true);
+		attr.setNamespaceURI(Strings.isNotBlank(namespaceURI) ? namespaceURI : getNamespaceURI());
 		if (map.getNamedItem(qualifiedName) == null) {
 			map.setNamedItem(attr);
 			assignAttributeField(qualifiedName, value);
@@ -259,7 +271,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		newAttr.setOwnerElement(this);
 		assignAttributeField(newAttr.getName(), value);
-		return map.setNamedItem(newAttr);
+		return (Attr) map.setNamedItem(newAttr);
 	}
 
 	/** {@inheritDoc} */
@@ -401,7 +413,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null localName");
 		}
 
-		Attr attr = map.getNamedItem(localName);
+		Node attr = map.getNamedItem(localName);
 		return attr != null && namespaceURI.equals(attr.getNamespaceURI());
 	}
 
@@ -414,7 +426,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	protected String htmlEncodeChildText(String text) {
-		if (HtmlParser.isDecodeEntities(this.name)) {
+		if (XHtmlParser.isDecodeEntities(this.name)) {
 			return Strings.strictHtmlEncode(text, false);
 		} else {
 			return text;
@@ -481,7 +493,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public void setInnerHTML(String newHtml) {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 		if (document != null) {
-			final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
+			final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
 			this.nodeList.clear();
 			try {
 				try (Reader reader = new StringReader(newHtml)) {
@@ -584,7 +596,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		if (this.outer != null) {
 			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 			if (document != null) {
-				final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
+				final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
 				this.nodeList.clear();
 				try {
 					try (Reader reader = new StringReader(newHtml)) {
@@ -1005,7 +1017,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final String tagName = getTagName().toUpperCase();
 		buffer.append('<');
 		buffer.append(tagName);
-		for (Attr attr : Nodes.iterable(map)) {
+		for (Node attrNode : Nodes.iterable(map)) {
+			Attr attr = (Attr) attrNode;
 			buffer.append(' ');
 			buffer.append(attr.getName());
 			buffer.append("=\"");

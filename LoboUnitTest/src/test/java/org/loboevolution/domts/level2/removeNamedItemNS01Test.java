@@ -65,7 +65,7 @@ public class removeNamedItemNS01Test extends LoboUnitTest {
         attributes = testAddress.getAttributes();
         removedNode = attributes.removeNamedItemNS("http://www.usa.com", "domestic");
         assertNotNull("retval", removedNode);
-        newAttr = attributes.getNamedItem("dmstc:domestic");
+        newAttr = (Attr) attributes.getNamedItem("dmstc:domestic");
         assertNull("nodeRemoved", newAttr);
     }
 }

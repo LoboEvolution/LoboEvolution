@@ -74,7 +74,7 @@ public class namednodemapsetnameditemthatexistsTest extends LoboUnitTest {
         newAttribute = doc.createAttribute("street");
         attributes = testAddress.getAttributes();
         setNode = attributes.setNamedItem(newAttribute);
-        districtNode = attributes.getNamedItem("street");
+        districtNode = (Attr) attributes.getNamedItem("street");
         attrValue = districtNode.getNodeValue();
         assertEquals("streetValue", "", attrValue);
     }

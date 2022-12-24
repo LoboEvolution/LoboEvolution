@@ -23,12 +23,9 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.Entity;
+import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
-import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -64,10 +61,10 @@ public class documentimportnode19Test extends LoboUnitTest {
         DOMImplementation domImpl;
         DocumentType docType;
         NamedNodeMap nodeMap;
-        Entity entity2;
-        Entity entity6;
-        Entity entityImp2;
-        Entity entityImp6;
+        EntityReference entity2;
+        EntityReference entity6;
+        EntityReference entityImp2;
+        EntityReference entityImp6;
         String nodeName;
         String systemId;
         String notationName;
@@ -81,10 +78,10 @@ public class documentimportnode19Test extends LoboUnitTest {
         docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", docTypeNull);
         nodeMap = docType.getEntities();
         assertNotNull("entitiesNotNull", nodeMap);
-        entity2 = (Entity) nodeMap.getNamedItem("ent2");
-        entity6 = (Entity) nodeMap.getNamedItem("ent6");
-        entityImp2 = (Entity) docImp.importNode(entity2, false);
-        entityImp6 = (Entity) docImp.importNode(entity6, true);
+        entity2 = (EntityReference) nodeMap.getNamedItem("ent2");
+        entity6 = (EntityReference) nodeMap.getNamedItem("ent6");
+        entityImp2 = (EntityReference) docImp.importNode(entity2, false);
+        entityImp6 = (EntityReference) docImp.importNode(entity6, true);
         nodeName = entity2.getNodeName();
         nodeNameImp = entityImp2.getNodeName();
         assertEquals("documentimportnode19_Ent2NodeName", nodeName, nodeNameImp);

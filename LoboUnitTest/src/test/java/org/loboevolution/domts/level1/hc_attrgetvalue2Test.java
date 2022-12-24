@@ -54,7 +54,7 @@ public class hc_attrgetvalue2Test extends LoboUnitTest {
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = attributes.getNamedItem("class");
+        titleAttr = (Attr) attributes.getNamedItem("class");
 
         boolean success = false;
         try {

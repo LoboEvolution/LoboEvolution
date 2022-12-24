@@ -24,7 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.Entity;
+import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.*;
 
@@ -48,7 +48,6 @@ public class namednodemapsetnameditemns05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -56,10 +55,8 @@ public class namednodemapsetnameditemns05Test extends LoboUnitTest {
         DocumentType docType;
         NamedNodeMap entities;
         NamedNodeMap notations;
-        Entity entity;
+        EntityReference entity;
         Notation notation;
-        Node newNode;
-        String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
@@ -67,37 +64,24 @@ public class namednodemapsetnameditemns05Test extends LoboUnitTest {
         assertNotNull("entitiesNotNull", entities);
         notations = docType.getNotations();
         assertNotNull("notationsNotNull", notations);
-        entity = (Entity) entities.getNamedItem("ent1");
+        entity = (EntityReference) entities.getNamedItem("ent1");
         notation = (Notation) notations.getNamedItem("notation1");
 
-        {
-            boolean success = false;
-            try {
-                newNode = entities.setNamedItemNS((Attr)entity);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_entities", success);
+        boolean success = false;
+        try {
+            entities.setNamedItemNS(entity);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_entities", success);
 
-        {
-            boolean success = false;
-            try {
-                newNode = notations.setNamedItemNS((Attr)notation);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_notations", success);
+        try {
+            notations.setNamedItemNS(notation);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
-    }
+        assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_notations", success);
 
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapsetnameditemns05";
     }
 }
 

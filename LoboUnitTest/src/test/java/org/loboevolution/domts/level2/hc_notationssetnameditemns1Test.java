@@ -49,7 +49,6 @@ public class hc_notationssetnameditemns1Test extends LoboUnitTest {
         Document doc;
         NamedNodeMap notations;
         DocumentType docType;
-        Node retval;
         Element elem;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
@@ -60,7 +59,7 @@ public class hc_notationssetnameditemns1Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
 
         try {
-            retval = notations.setNamedItemNS((Attr) elem);
+            notations.setNamedItemNS(elem);
             fail("throw_HIER_OR_NO_MOD_ERR");
 
         } catch (DOMException ex) {

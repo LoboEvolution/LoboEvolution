@@ -66,7 +66,7 @@ public class hc_attrspecifiedvaluechangedTest extends LoboUnitTest {
         
         testNode.setAttribute("class", "Y\u03b1"); // Android-changed: GREEK LOWER CASE ALPHA
         attributes = testNode.getAttributes();
-        streetAttr = attributes.getNamedItem("class");
+        streetAttr = (Attr) attributes.getNamedItem("class");
         state = streetAttr.isSpecified();
         assertTrue("acronymClassSpecified", state);
     }

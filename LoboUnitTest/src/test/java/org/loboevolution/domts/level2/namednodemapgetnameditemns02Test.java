@@ -59,18 +59,9 @@ public class namednodemapgetnameditemns02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName( "address");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-        attribute = attributes.getNamedItem( "domestic");
+        attribute = (Attr) attributes.getNamedItem( "domestic");
         attrName = attribute.getNodeName();
         assertEquals("namednodemapgetnameditemns02", "domestic", attrName);
-    }
-
-    /**
-     * Gets URI that identifies the test.
-     *
-     * @return uri identifier of test
-     */
-    public String getTargetURI() {
-        return "http://www.w3.org/2001/DOM-Test-Suite/level2/core/namednodemapgetnameditemns02";
     }
 }
 

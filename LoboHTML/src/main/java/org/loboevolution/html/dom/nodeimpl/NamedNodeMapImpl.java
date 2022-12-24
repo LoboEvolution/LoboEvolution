@@ -39,22 +39,22 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class NamedNodeMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
 
-	private final Map<String, Attr> attributes = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+	private final Map<String, Node> attributes = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-	private Element owner;
+	private Node owner;
 
 	/**
 	 * <p>Constructor for NamedNodeMapImpl.</p>
 	 *
-	 * @param owner a {@link org.loboevolution.html.node.Element} object.
+	 * @param owner a {@link org.loboevolution.html.node.Node} object.
 	 * @param attribs a {@link java.util.Map} object.
 	 */
-	public NamedNodeMapImpl(Element owner, Map<?, ?> attribs) {
+	public NamedNodeMapImpl(Node owner, Map<?, ?> attribs) {
 		this.owner = owner;
 		for (Map.Entry entry : attribs.entrySet()) {
 			final String name = (String) entry.getKey();
 			final String value = (String) entry.getValue();
-			final Attr attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), null, true);
+			final Node attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this.owner, null, true);
 			this.attributes.put(name, attr);
 		}
 	}
@@ -67,9 +67,9 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr getNamedItem(String name) {
+	public Node getNamedItem(String name) {
 		if (Strings.isNotBlank(name)) {
-			for (Map.Entry<String, Attr> entry : attributes.entrySet()) {
+			for (Map.Entry<String, Node> entry : attributes.entrySet()) {
 				String key = entry.getKey();
 
 				if (key.contains(":")) {
@@ -89,17 +89,17 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr getNamedItemNS(String namespaceURI, String localName) {
+	public Node getNamedItemNS(String namespaceURI, String localName) {
 		if (Strings.isNotBlank(localName)) {
 			for (Map.Entry entry : this.attributes.entrySet()) {
-				Attr attr = (Attr) entry.getValue();
+				Node attr = (Node) entry.getValue();
 				if (Strings.isBlank(namespaceURI) || namespaceURI.equals(attr.getNamespaceURI())) {
-					if (attr.getName().equalsIgnoreCase(localName)) {
+					if (attr.getNodeName().equalsIgnoreCase(localName)) {
 						return attr;
 					}
 
-					if (attr.getName().contains(":")) {
-						String attribute = attr.getName().split(":")[1];
+					if (attr.getNodeName().contains(":")) {
+						String attribute = attr.getNodeName().split(":")[1];
 						if (attribute.equalsIgnoreCase(localName)) {
 							return attr;
 						}
@@ -112,10 +112,10 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr item(int index) {
+	public Node item(int index) {
 		int size = this.attributes.size();
 		AtomicInteger atomIndex = new AtomicInteger(0);
-		for (Map.Entry<String, Attr> entry : attributes.entrySet()) {
+		for (Map.Entry<String, Node> entry : attributes.entrySet()) {
 			if (size > atomIndex.getAndIncrement() && index > -1) {
 				return entry.getValue();
 			}
@@ -125,50 +125,59 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr removeNamedItem(String name) {
-		return this.attributes.remove(name);
+	public Node removeNamedItem(String name) throws DOMException {
+		Node node = this.attributes.remove(name);
+		if (node == null) {
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not found.");
+		}
+		return node;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr removeNamedItemNS(String namespaceURI, String localName) {
+	public Node removeNamedItemNS(String namespaceURI, String localName) throws DOMException {
 		for (Map.Entry entry : this.attributes.entrySet()) {
-			Attr attr = (Attr) entry.getValue();
-			if (namespaceURI == null || namespaceURI.equals(attr.getNamespaceURI())) {
-				if (attr.getName().equalsIgnoreCase(localName)) {
-					return this.attributes.remove(attr.getName());
+			Node attr = (Node) entry.getValue();
+			if (Strings.isNotBlank(namespaceURI) && namespaceURI.equals(attr.getNamespaceURI())) {
+				if (attr.getNodeName().equalsIgnoreCase(localName)) {
+					return this.attributes.remove(attr.getNodeName());
 				}
 
-				if (attr.getName().contains(":")) {
-					return this.attributes.remove(attr.getName());
+				if (attr.getNodeName().contains(":")) {
+					return this.attributes.remove(attr.getNodeName());
 				}
 			}
 		}
-		return null;
+		throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not found.");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr setNamedItem(Node attr) {
+	public Node setNamedItem(Node node) {
 
-		if(attr == null) {
-			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "The Attr is null");
+		if (node == null) {
+			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "The Node is null");
 		}
-		if(!(attr instanceof Attr)) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot set node.");
+
+		if (node instanceof Element) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "An attempt is made to modify an object where modifications are not allowed.");
 		}
-		Attr attribute = (Attr) attr;
-		this.attributes.put(attr.getNodeName(), attribute);
-		return attribute;
+
+		this.attributes.put(node.getNodeName(), node);
+		return node;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr setNamedItemNS(Attr attr) {
+	public Node setNamedItemNS(Node attr) throws DOMException {
+
+		if(owner.getNodeType() == Node.DOCUMENT_TYPE_NODE)
+			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+
 		return setNamedItem(attr);
 	}
 
-	public Map<String, Attr> getAttributes() {
+	public Map<String, Node> getAttributes() {
 		return this.attributes;
 	}
 
