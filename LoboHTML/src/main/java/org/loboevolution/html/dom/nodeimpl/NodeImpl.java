@@ -101,6 +101,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
 		}
 
+		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
+		}
+
 		if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			NodeListImpl list = getNodeList();
 			list.forEach(n -> {
@@ -109,6 +113,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				}
 			});
 		}
+
+		if(!org.loboevolution.common.Objects.equals(newChild.getOwnerDocument(), getOwnerDocument()))
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 
 		if (newChild.getNodeType() == Node.ELEMENT_NODE) {
 
@@ -958,6 +965,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "Not a child of this node.");
 			}
 
+			if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
+				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
+			}
+
 			final int idx = this.nodeList.indexOf(refChild);
 			if (idx == -1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
@@ -1249,6 +1260,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		if (idx == -1) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
 		}
+
+		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument()))
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
+
 		this.nodeList.set(idx, newChild);
 
 		if (!this.notificationsSuspended) {
@@ -1307,10 +1322,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public void setPrefix(String prefix) throws DOMException {
-		if ("xmlns".equals(getLocalName())
-				|| ("xmlns".equals(prefix) && !Document.XMLNS_NAMESPACE_URI.equals(getNamespaceURI()))) {
-			throw new DOMException(DOMException.NAMESPACE_ERR, "Cannot set prefix to this node");
-		}
 
 		if ("xml".equals(prefix) && !Document.XML_NAMESPACE_URI.equals(getNamespaceURI())) {
 			throw new DOMException(DOMException.NAMESPACE_ERR, "Wrong namespace for prefix xml");

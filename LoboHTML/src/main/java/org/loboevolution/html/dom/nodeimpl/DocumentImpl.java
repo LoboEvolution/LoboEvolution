@@ -113,7 +113,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		}
 
 		if (Strings.isNotBlank(tagName) && tagName.contains(":")) {
-			tagName = tagName.split("")[1];
+			tagName = tagName.split(":")[1];
 			if (!Strings.isValidString(tagName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
@@ -180,7 +180,9 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		}
 		ElementImpl elem = (ElementImpl) new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
 		elem.setNamespaceURI(namespaceURI);
-		elem.setPrefix(prefix);
+		if (Strings.isNotBlank(prefix)) {
+			elem.setPrefix(prefix);
+		}
 		return elem;
 	}
 
@@ -246,7 +248,10 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public int getChildElementCount() {
-		return (int) nodeList.stream().filter(n -> n instanceof Element && !"xml".equals(n.getNodeName())).count();
+		return (int) nodeList.stream().
+				filter(n -> n instanceof Element &&
+						n.getNodeType() != 7 &&
+						!"xml".equals(n.getNodeName())).count();
 	}
 
 	/** {@inheritDoc} */
@@ -351,7 +356,6 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		if (data == null) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null data");
 		}
-
 		final TextImpl node = new TextImpl(data);
 		node.setOwnerDocument(this);
 		return node;
@@ -365,7 +369,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		if (Strings.isBlank(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
-		AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, null, true);
+		AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, true);
 		attr.setOwnerDocument(this);
 		return attr;
 	}
@@ -402,8 +406,12 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			throw new DOMException(DOMException.NAMESPACE_ERR, "xmlns local name but not xmlns namespace");
 		}
 
-		AttrImpl attr = new AttrImpl(qualifiedName, null, "id".equalsIgnoreCase(qualifiedName), null, prefix, true);
+		AttrImpl attr = new AttrImpl(qualifiedName, null, "id".equalsIgnoreCase(qualifiedName), null, true);
 		attr.setNamespaceURI(namespaceURI);
+		attr.setOwnerDocument(this);
+		if (Strings.isNotBlank(prefix)) {
+			attr.setPrefix(prefix);
+		}
 		return attr;
 	}
 

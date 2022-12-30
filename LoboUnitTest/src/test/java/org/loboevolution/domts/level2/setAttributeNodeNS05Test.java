@@ -57,7 +57,6 @@ public class setAttributeNodeNS05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -68,22 +67,18 @@ public class setAttributeNodeNS05Test extends LoboUnitTest {
         Attr newAttr;
         HTMLCollection elementList;
         Node testAddr;
-        Attr setAttr1;
         doc1 = sampleXmlFile("staffNS.xml");
         doc2 = sampleXmlFile("staffNS.xml");
         newAttr = doc2.createAttributeNS(namespaceURI, qualifiedName);
         elementList = doc1.getElementsByTagName("address");
         testAddr = elementList.item(0);
-
-        {
-            boolean success = false;
-            try {
-                setAttr1 = ((Element) testAddr).setAttributeNodeNS(newAttr);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            ((Element) testAddr).setAttributeNodeNS(newAttr);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
     }
 }
 

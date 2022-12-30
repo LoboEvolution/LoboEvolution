@@ -56,11 +56,10 @@ public class nodesetprefix01Test extends LoboUnitTest {
         Element element;
         String elementTagName;
         String elementNodeName;
-        Node appendedChild;
         doc = sampleXmlFile("staff.xml");
         docFragment = doc.createDocumentFragment();
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "address");
-        appendedChild = docFragment.appendChild(element);
+        docFragment.appendChild(element);
         element.setPrefix("dmstc");
         elementTagName = element.getTagName();
         elementNodeName = element.getNodeName();

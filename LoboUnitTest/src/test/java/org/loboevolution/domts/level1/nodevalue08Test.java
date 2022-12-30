@@ -21,6 +21,7 @@
 
 package org.loboevolution.domts.level1;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
@@ -28,8 +29,7 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 
 /**
@@ -62,8 +62,16 @@ public class nodevalue08Test extends LoboUnitTest {
         assertNotNull("notationNotNull", newNode);
         newValue = newNode.getNodeValue();
         assertNull("initiallyNull", newValue);
-        newNode.setNodeValue("This should have no effect");
+
+        boolean success = false;
+        try {
+            newNode.setNodeValue("This should have no effect");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
+        }
+
         newValue = newNode.getNodeValue();
+        assertTrue("throw_INVALID_MODIFICATION_ERR", success);
         assertNull("nullAfterAttemptedChange", newValue);
     }
 }

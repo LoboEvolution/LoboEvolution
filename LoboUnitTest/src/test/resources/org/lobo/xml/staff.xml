@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<?TEST-STYLE PIDATA?>
 <!DOCTYPE staff SYSTEM "staff.dtd" [
    <!ENTITY ent1 "es">
    <!ENTITY ent2 "1900 Dallas Road">

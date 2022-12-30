@@ -127,6 +127,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@JSFunction
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
 		final Attr attribute = (Attr) map.getNamedItem(localName);
+
 		if (attribute != null &&
 				((namespaceURI == null || "*".equals(namespaceURI)) ||
 						namespaceURI.equals(attribute.getNamespaceURI()) ||
@@ -191,7 +192,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			}
 		}
 
-		map.setNamedItem(new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, prefix, true));
+		AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
+		Document doc = getOwnerDocument();
+		attr.setOwnerDocument(doc);
+		attr.setNamespaceURI(doc != null ? doc.getNamespaceURI() : getParentNode() != null ? getParentNode().getNamespaceURI() : null);
+		if (Strings.isNotBlank(prefix)) {
+			attr.setPrefix(prefix);
+		}
+		map.setNamedItem(attr);
 		assignAttributeField(name, value);
 	}
 
@@ -199,6 +207,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
 		String prefix = null;
+
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
 		}
@@ -229,9 +238,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
-		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, prefix, true);
-		attr.setNamespaceURI(Strings.isNotBlank(namespaceURI) ? namespaceURI : getNamespaceURI());
+
 		if (map.getNamedItem(qualifiedName) == null) {
+			final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
+
+			if(Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
+			attr.setNamespaceURI(namespaceURI);
+			attr.setOwnerDocument(getOwnerDocument());
 			map.setNamedItem(attr);
 			assignAttributeField(qualifiedName, value);
 		}
@@ -267,6 +280,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		if (checkAttr == null && newAttr.getOwnerElement() != null) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
 					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
+		}
+
+		if(!Objects.equals(newAttr.getOwnerDocument(), getOwnerDocument())) {
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
 		newAttr.setOwnerElement(this);
@@ -414,7 +431,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		Node attr = map.getNamedItem(localName);
-		return attr != null && namespaceURI.equals(attr.getNamespaceURI());
+		return namespaceURI == null ? attr != null : attr != null && namespaceURI.equals(attr.getNamespaceURI());
 	}
 
 	/** {@inheritDoc} */

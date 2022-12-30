@@ -463,6 +463,11 @@ public class DTMNodeProxy
     }
 
     @Override
+    public void setOwnerDocument(Document document) {
+
+    }
+
+    @Override
     public HTMLElement getParentElement() {
         return null;
     }
@@ -529,6 +534,8 @@ public class DTMNodeProxy
     public Node cloneNode() {
         return null;
     }
+
+
 
     @Override
     public String getURL() {

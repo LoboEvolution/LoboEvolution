@@ -355,10 +355,14 @@ public class XHtmlParser {
 					this.passEndOfTag(reader);
 					return TOKEN_END_ELEMENT;
 				} else if (tag.startsWith("?")) {
+
 					tag = tag.substring(1);
 					final StringBuilder data = readProcessingInstruction(reader);
 					if (!tag.equals("xml")) {
-						safeAppendChild(parent, doc.createProcessingInstruction(tag, data.toString()));
+						String processData = data.toString();
+						processData = processData.substring(0, processData.length() - 1);
+						ProcessingInstruction pi = doc.createProcessingInstruction(tag, processData);
+						parent.appendChild(pi);
 						return TOKEN_FULL_ELEMENT;
 					} else {
 						this.document.setXml(true);

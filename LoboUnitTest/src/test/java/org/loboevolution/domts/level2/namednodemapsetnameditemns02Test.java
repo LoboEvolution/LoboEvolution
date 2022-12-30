@@ -54,13 +54,12 @@ public class namednodemapsetnameditemns02Test extends LoboUnitTest {
         Element element;
         Attr attribute;
         Attr attribute1;
-        Node newNode;
         String attrName;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "root");
         attribute1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");
         attributes = element.getAttributes();
-        newNode = attributes.setNamedItemNS(attribute1);
+        attributes.setNamedItemNS(attribute1);
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/DOM/L1", "att");
         attrName = attribute.getNodeName();
         assertEquals("namednodemapsetnameditemns02", "L1:att", attrName);

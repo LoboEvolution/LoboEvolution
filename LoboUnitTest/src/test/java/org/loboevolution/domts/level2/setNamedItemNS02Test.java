@@ -51,7 +51,6 @@ public class setNamedItemNS02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -59,11 +58,10 @@ public class setNamedItemNS02Test extends LoboUnitTest {
         String qualifiedName = "dmstc:domestic";
         Document doc;
         Document anotherDoc;
-        Node arg;
+        Attr arg;
         HTMLCollection elementList;
         Element testAddress;
         NamedNodeMap attributes;
-        Node setNode;
         doc = sampleXmlFile("staffNS.xml");
         anotherDoc = sampleXmlFile("staffNS.xml");
         arg = anotherDoc.createAttributeNS(namespaceURI, qualifiedName);
@@ -71,16 +69,14 @@ public class setNamedItemNS02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(0);
         attributes = testAddress.getAttributes();
-
-        {
-            boolean success = false;
-            try {
-                setNode = attributes.setNamedItemNS((Attr) arg);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            attributes.setNamedItemNS(arg);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+
     }
 }
 

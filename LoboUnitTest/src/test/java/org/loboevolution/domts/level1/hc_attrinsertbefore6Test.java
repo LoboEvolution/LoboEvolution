@@ -42,7 +42,6 @@ public class hc_attrinsertbefore6Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -52,7 +51,6 @@ public class hc_attrinsertbefore6Test extends LoboUnitTest {
         NamedNodeMap attributes;
         Attr titleAttr;
         Node textNode;
-        Node retval;
         Node refChild = null;
 
         Document otherDoc;
@@ -63,16 +61,13 @@ public class hc_attrinsertbefore6Test extends LoboUnitTest {
         attributes = testNode.getAttributes();
         titleAttr = (Attr) attributes.getNamedItem("title");
         textNode = otherDoc.createTextNode("terday");
-
-        {
-            boolean success = false;
-            try {
-                retval = titleAttr.insertBefore(textNode, refChild);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            titleAttr.insertBefore(textNode, refChild);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
     }
 }
 

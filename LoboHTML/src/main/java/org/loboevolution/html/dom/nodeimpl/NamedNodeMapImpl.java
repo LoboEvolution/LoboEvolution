@@ -54,7 +54,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 		for (Map.Entry entry : attribs.entrySet()) {
 			final String name = (String) entry.getKey();
 			final String value = (String) entry.getValue();
-			final Node attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this.owner, null, true);
+			final Node attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this.owner,  true);
 			this.attributes.put(name, attr);
 		}
 	}
@@ -93,7 +93,10 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 		if (Strings.isNotBlank(localName)) {
 			for (Map.Entry entry : this.attributes.entrySet()) {
 				Node attr = (Node) entry.getValue();
-				if (Strings.isBlank(namespaceURI) || namespaceURI.equals(attr.getNamespaceURI())) {
+				String namespace = attr.getNamespaceURI();
+				String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
+
+				if (Strings.isBlank(namespaceURI) || namespaceURI.equals(namespace) ||  namespaceURI.equals(parentNamespace)) {
 					if (attr.getNodeName().equalsIgnoreCase(localName)) {
 						return attr;
 					}
@@ -126,6 +129,16 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Node removeNamedItem(String name) throws DOMException {
+
+		for (Map.Entry<String, Node> entry : attributes.entrySet()) {
+			String key = entry.getKey();
+			if (key.contains(":")) {
+				if (key.split(":")[1].equalsIgnoreCase(name)) {
+					name = key;
+				}
+			}
+		}
+
 		Node node = this.attributes.remove(name);
 		if (node == null) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not found.");
@@ -138,7 +151,10 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	public Node removeNamedItemNS(String namespaceURI, String localName) throws DOMException {
 		for (Map.Entry entry : this.attributes.entrySet()) {
 			Node attr = (Node) entry.getValue();
-			if (Strings.isNotBlank(namespaceURI) && namespaceURI.equals(attr.getNamespaceURI())) {
+			String namespace = attr.getNamespaceURI();
+			String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
+
+			if (Strings.isBlank(namespaceURI) || namespaceURI.equals(namespace) ||  namespaceURI.equals(parentNamespace)) {
 				if (attr.getNodeName().equalsIgnoreCase(localName)) {
 					return this.attributes.remove(attr.getNodeName());
 				}
@@ -154,13 +170,23 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Node setNamedItem(Node node) {
+		Node element = node instanceof Attr ? ((Attr) node).getOwnerElement() : null;
 
 		if (node == null) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "The Node is null");
 		}
 
+		if (element!= null  && !Objects.equals(((Attr) node).getOwnerElement(), owner)) {
+			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "Different Element");
+		}
+
 		if (node instanceof Element) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "An attempt is made to modify an object where modifications are not allowed.");
+		}
+
+		if(owner.getNodeType() == Node.DOCUMENT_NODE &&
+				!Objects.equals(node.getOwnerDocument(), owner.getOwnerDocument())) {
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
 		this.attributes.put(node.getNodeName(), node);
@@ -169,12 +195,23 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Node setNamedItemNS(Node attr) throws DOMException {
+	public Node setNamedItemNS(Node node) throws DOMException {
+		Node element = node instanceof Attr ? ((Attr) node).getOwnerElement() : null;
 
-		if(owner.getNodeType() == Node.DOCUMENT_TYPE_NODE)
+		if(owner.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+		}
 
-		return setNamedItem(attr);
+		if(!Objects.equals(node.getOwnerDocument(), owner.getOwnerDocument())) {
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
+		}
+
+		if (element != null && !Objects.equals(element, owner)) {
+			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "Different Element");
+		}
+
+		this.attributes.put(node.getNodeName(), node);
+		return node;
 	}
 
 	public Map<String, Node> getAttributes() {

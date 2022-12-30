@@ -21,13 +21,13 @@
 
 package org.loboevolution.domts.level2;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 
 /**
@@ -63,9 +63,18 @@ public class namednodemapremovenameditemns02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagNameNS("http://www.usa.com", "employee");
         element = elementList.item(1);
         attributes = element.getAttributes();
-        attributes.removeNamedItemNS(null, "defaultAttr");
+
+        boolean success = false;
+        try {
+            attributes.removeNamedItemNS(null, "defaultAttr");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
+        }
+
         attribute = (Attr) attributes.getNamedItemNS(null, "defaultAttr");
         attrValue = attribute.getNodeValue();
+
+        assertTrue("throw_NOT_FOUND_ERR", success);
         assertNotNull("namednodemapremovenameditemns02", attribute);
         assertEquals("namednodemapremovenameditemns02_attrValue", "defaultVal", attrValue);
     }

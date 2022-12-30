@@ -202,6 +202,15 @@ public interface Node extends EventTarget {
 	 */
 	Node cloneNode();
 
+
+	/**
+	 ** <p>setOwnerDocument.</p>
+	 *
+	 * @param document a  {@link org.loboevolution.html.node.Document} object.
+	 */
+
+	void setOwnerDocument(Document document);
+
 	/**
 	 * <p>setNodeValue.</p>
 	 *

@@ -345,6 +345,11 @@ public class XPathNamespaceImpl implements XPathNamespace {
 		return  m_attributeNode.cloneNode();
 	}
 
+	@Override
+	public void setOwnerDocument(Document document) {
+		m_attributeNode.setOwnerDocument(document);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean contains(Node other) {

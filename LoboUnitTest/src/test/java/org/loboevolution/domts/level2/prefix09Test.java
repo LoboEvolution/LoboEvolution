@@ -61,7 +61,7 @@ public class prefix09Test extends LoboUnitTest {
         Attr addrAttr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
-        addrNode = (Element) elementList.item(5);
+        addrNode = (Element) elementList.item(0);
         addrAttr = addrNode.getAttributeNode("xmlns");
         boolean success = false;
         try {

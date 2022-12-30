@@ -41,6 +41,7 @@ import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.ProcessingInstruction;
 import org.loboevolution.html.node.css.StyleSheetList;
 import org.loboevolution.html.node.views.DocumentView;
 import org.loboevolution.html.parser.XHtmlParser;
@@ -421,7 +422,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	@Override
 	public Node appendChild(Node newChild) {
-		if (!(newChild instanceof DocumentType) && getChildElementCount() > 0) {
+		if (getChildElementCount() > 0) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Only one element on document allowed.");
 		}
 

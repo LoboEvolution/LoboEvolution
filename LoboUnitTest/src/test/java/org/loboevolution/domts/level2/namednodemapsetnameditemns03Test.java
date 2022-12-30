@@ -62,7 +62,6 @@ public class namednodemapsetnameditemns03Test extends LoboUnitTest {
         Element element;
         Element elementAlt;
         Attr attr;
-        Node newNode;
         String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
@@ -74,11 +73,16 @@ public class namednodemapsetnameditemns03Test extends LoboUnitTest {
         elementAlt = (Element) elementListAlt.item(1);
         attributesAlt = elementAlt.getAttributes();
         attr = (Attr) attributesAlt.getNamedItemNS(nullNS, "street");
-        newNode = attributesAlt.removeNamedItemNS(nullNS, "street");
-
         boolean success = false;
+
         try {
-            newNode = attributes.setNamedItemNS(attr);
+            attributesAlt.removeNamedItemNS(nullNS, "street");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND);
+        }
+
+        try {
+            attributes.setNamedItemNS(attr);
         } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }

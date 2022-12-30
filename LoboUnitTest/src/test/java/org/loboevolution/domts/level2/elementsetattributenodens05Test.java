@@ -47,7 +47,6 @@ public class elementsetattributenodens05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -59,16 +58,13 @@ public class elementsetattributenodens05Test extends LoboUnitTest {
         docAlt = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "elem1");
         attribute = docAlt.createAttributeNS("http://www.w3.org/DOM/Test", "attr");
-
-        {
-            boolean success = false;
-            try {
-                element.setAttributeNodeNS(attribute);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            element.setAttributeNodeNS(attribute);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
     }
 }
 

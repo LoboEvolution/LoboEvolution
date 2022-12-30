@@ -26,9 +26,6 @@ import java.beans.PropertyDescriptor;
 
 /**
  * <p>Objects class.</p>
- *
- *
- *
  */
 public class Objects {
 

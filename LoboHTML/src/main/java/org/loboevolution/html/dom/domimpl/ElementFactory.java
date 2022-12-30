@@ -173,17 +173,12 @@ public class ElementFactory {
 	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 * @param name a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.dom.HTMLElement} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
 	 */
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) {
 	    final String normalName = name.toUpperCase(Locale.ENGLISH);
 		final HTMLElementBuilder builder = this.builders.get(HTMLTag.get(normalName));
-		if (builder == null) {
-			final HTMLElementImpl element = new HTMLElementImpl(name);
-			element.setOwnerDocument(document);
-			return element;
-		} else {
-			return builder.create(document, name);
-		}
+		HTMLElement element = builder == null ? new HTMLElementImpl(name) : builder.build(name);
+		element.setOwnerDocument(document);
+		return element;
 	}
 }

@@ -54,7 +54,6 @@ public class nodeappendchildnewchilddiffdocumentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,22 +62,18 @@ public class nodeappendchildnewchilddiffdocumentTest extends LoboUnitTest {
         Node newChild;
         HTMLCollection elementList;
         Node elementNode;
-        Node appendedChild;
         doc1 = sampleXmlFile("staff.xml");
         doc2 = sampleXmlFile("staff.xml");
         newChild = doc1.createElement("newChild");
         elementList = doc2.getElementsByTagName("employee");
         elementNode = elementList.item(1);
-
-        {
-            boolean success = false;
-            try {
-                appendedChild = elementNode.appendChild(newChild);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            elementNode.appendChild(newChild);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
     }
 
 }

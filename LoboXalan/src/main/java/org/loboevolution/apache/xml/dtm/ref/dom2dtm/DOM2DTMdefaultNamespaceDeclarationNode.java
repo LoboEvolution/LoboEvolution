@@ -267,6 +267,11 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
     return null;
   }
 
+  @Override
+  public void setOwnerDocument(Document document) {
+
+  }
+
   /** {@inheritDoc} */
   @Override
   public String getTypeName() {

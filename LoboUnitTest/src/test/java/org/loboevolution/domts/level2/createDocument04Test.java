@@ -52,7 +52,6 @@ public class createDocument04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,16 +66,13 @@ public class createDocument04Test extends LoboUnitTest {
         docType = doc.getDoctype();
         aNewDoc.setTest(true);
         domImpl = aNewDoc.getImplementation();
-
-        {
-            boolean success = false;
-            try {
-                domImpl.createDocument(namespaceURI, qualifiedName, docType);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            domImpl.createDocument(namespaceURI, qualifiedName, docType);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
     }
 }
 

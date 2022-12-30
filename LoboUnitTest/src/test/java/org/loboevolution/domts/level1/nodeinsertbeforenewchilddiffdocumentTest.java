@@ -53,7 +53,6 @@ public class nodeinsertbeforenewchilddiffdocumentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,24 +62,19 @@ public class nodeinsertbeforenewchilddiffdocumentTest extends LoboUnitTest {
         Node newChild;
         HTMLCollection elementList;
         Node elementNode;
-        Node insertedNode;
         doc1 = sampleXmlFile("staff.xml");
         doc2 = sampleXmlFile("staff.xml");
         newChild = doc1.createElement("newChild");
         elementList = doc2.getElementsByTagName("employee");
         elementNode = elementList.item(1);
         refChild = elementNode.getFirstChild();
-
-        {
-            boolean success = false;
-            try {
-                insertedNode = elementNode.insertBefore(newChild, refChild);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            elementNode.insertBefore(newChild, refChild);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
     }
-
 }
 

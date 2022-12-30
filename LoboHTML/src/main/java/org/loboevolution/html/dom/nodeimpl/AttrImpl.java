@@ -44,8 +44,6 @@ public class AttrImpl extends EventTargetImpl implements Attr {
 
     private Node ownerElement;
 
-    private String prefix;
-
     @Builder.Default
     private boolean specified = true;
 

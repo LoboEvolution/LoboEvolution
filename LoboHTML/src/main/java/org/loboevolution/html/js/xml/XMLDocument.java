@@ -559,6 +559,11 @@ public class XMLDocument implements Document {
 		return doc.cloneNode();
 	}
 
+	@Override
+	public void setOwnerDocument(Document document) {
+		doc.setOwnerDocument(document);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean contains(Node other) {

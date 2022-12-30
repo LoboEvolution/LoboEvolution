@@ -70,7 +70,7 @@ public class setNamedItemNS01Test extends LoboUnitTest {
         map = testAddress.getAttributes();
         boolean success = false;
         try {
-            map.setNamedItemNS((Attr) arg);
+            map.setNamedItemNS(arg);
         } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
         }

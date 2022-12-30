@@ -54,7 +54,6 @@ public class namednodemapwrongdocumenterrTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,23 +63,19 @@ public class namednodemapwrongdocumenterrTest extends LoboUnitTest {
         Element testAddress;
         NamedNodeMap attributes;
         Attr newAttribute;
-        Node setNode;
         doc1 = sampleXmlFile("staff.xml");
         doc2 = sampleXmlFile("staff.xml");
         elementList = doc1.getElementsByTagName("address");
-        testAddress = (Element)elementList.item(2);
+        testAddress = (Element) elementList.item(2);
         newAttribute = doc2.createAttribute("newAttribute");
         attributes = testAddress.getAttributes();
-
-        {
-            boolean success = false;
-            try {
-                setNode = attributes.setNamedItem(newAttribute);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            attributes.setNamedItem(newAttribute);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
     }
 }
 

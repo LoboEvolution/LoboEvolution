@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<?TEST-STYLE PIDATA?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "xhtml1-strict.dtd" [
    <!ENTITY alpha "&#945;">
    <!ENTITY beta "&#946;">

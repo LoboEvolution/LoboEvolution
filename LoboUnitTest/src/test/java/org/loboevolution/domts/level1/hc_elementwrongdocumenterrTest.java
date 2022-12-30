@@ -63,7 +63,6 @@ public class hc_elementwrongdocumenterrTest extends LoboUnitTest {
         Attr newAttribute;
         HTMLCollection addressElementList;
         Element testAddress;
-        Attr attrAddress;
         doc1 = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         newAttribute = doc2.createAttribute("newAttribute");
@@ -72,7 +71,7 @@ public class hc_elementwrongdocumenterrTest extends LoboUnitTest {
 
         boolean success = false;
         try {
-            attrAddress = testAddress.setAttributeNode(newAttribute);
+            testAddress.setAttributeNode(newAttribute);
         } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }

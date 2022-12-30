@@ -55,21 +55,20 @@ public class setNamedItemNS03Test extends LoboUnitTest {
         String namespaceURI = "http://www.nist.gov";
         String qualifiedName = "prefix:newAttr";
         Document doc;
-        Node arg;
+        Attr arg;
         HTMLCollection elementList;
         Element testAddress;
         NamedNodeMap attributes;
         Node retnode;
         String value;
-        Node setNode;
         doc = sampleXmlFile("staffNS.xml");
         arg = doc.createAttributeNS(namespaceURI, qualifiedName);
         arg.setNodeValue("newValue");
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(0);
         attributes = testAddress.getAttributes();
-        setNode = attributes.setNamedItemNS((Attr)arg);
-        retnode = (Attr) attributes.getNamedItemNS(namespaceURI, "newAttr");
+        attributes.setNamedItemNS(arg);
+        retnode = attributes.getNamedItemNS(namespaceURI, "newAttr");
         value = retnode.getNodeValue();
         assertEquals("throw_Equals", "newValue", value);
     }

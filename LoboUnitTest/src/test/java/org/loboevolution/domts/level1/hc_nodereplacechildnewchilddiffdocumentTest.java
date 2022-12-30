@@ -53,7 +53,6 @@ public class hc_nodereplacechildnewchilddiffdocumentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,23 +62,19 @@ public class hc_nodereplacechildnewchilddiffdocumentTest extends LoboUnitTest {
         Node newChild;
         HTMLCollection elementList;
         Node elementNode;
-        Node replacedChild;
         doc1 = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         newChild = doc1.createElement("br");
         elementList = doc2.getElementsByTagName("p");
         elementNode = elementList.item(1);
         oldChild = elementNode.getFirstChild();
-
-        {
-            boolean success = false;
-            try {
-                replacedChild = elementNode.replaceChild(newChild, oldChild);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
-            }
-            assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+        boolean success = false;
+        try {
+            elementNode.replaceChild(newChild, oldChild);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
     }
 }
 

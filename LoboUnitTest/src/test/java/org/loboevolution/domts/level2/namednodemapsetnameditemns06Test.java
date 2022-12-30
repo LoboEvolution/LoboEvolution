@@ -45,7 +45,6 @@ public class namednodemapsetnameditemns06Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -54,7 +53,6 @@ public class namednodemapsetnameditemns06Test extends LoboUnitTest {
         HTMLCollection elementList;
         Element element;
         Attr attr;
-        Node newNode;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(0);
@@ -62,16 +60,13 @@ public class namednodemapsetnameditemns06Test extends LoboUnitTest {
         attr = (Attr) attributes.getNamedItemNS("http://www.usa.com", "domestic");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-
-        {
-            boolean success = false;
-            try {
-                newNode = attributes.setNamedItemNS(attr);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
-            }
-            assertTrue("namednodemapsetnameditemns06", success);
+        boolean success = false;
+        try {
+            attributes.setNamedItemNS(attr);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
         }
+        assertTrue("namednodemapsetnameditemns06", success);
     }
 }
 
