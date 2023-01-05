@@ -64,7 +64,7 @@ public class getAttributeNS03Test extends LoboUnitTest {
         assertNotNull("empAddrNotNull", testAddr);
         testAddr.removeAttributeNS(namespaceURI, localName);
         attrValue = testAddr.getAttributeNS(namespaceURI, localName);
-        assertEquals("throw_Equals", "", attrValue);
+        assertEquals("throw_Equals", null, attrValue);
     }
 }
 

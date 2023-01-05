@@ -19,6 +19,8 @@
  */
 package org.loboevolution.html.dom.filter;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
@@ -26,25 +28,24 @@ import org.loboevolution.html.node.Node;
 /**
  * <p>TagNameFilter class.</p>
  */
+@Data
+@AllArgsConstructor
 public class TagNameFilter implements NodeFilter {
-	private final String name;
+    private final String name;
 
-	/**
-	 * <p>Constructor for TagNameFilter.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public TagNameFilter(String name) {
-		this.name = name;
-	}
+    private final boolean xml;
 
-	/** {@inheritDoc} */
-	@Override
-	public short acceptNode(Node node) {
-		if (!(node instanceof Element)) {
-			return NodeFilter.FILTER_REJECT;
-		}
-		return this.name.equalsIgnoreCase(node.getNodeName()) ?
-		NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public short acceptNode(Node node) {
+        if (!(node instanceof Element)) {
+            return NodeFilter.FILTER_REJECT;
+        }
+		String[] prefix = node.getNodeName().split(":");
+        return (!isXml() && name.equalsIgnoreCase(node.getNodeName()) && node.getPrefix() == null) ||
+                (isXml() && (name.equalsIgnoreCase(node.getNodeName()) || prefix.length > 1 && name.equalsIgnoreCase(prefix[1].trim()))) ?
+				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
 }

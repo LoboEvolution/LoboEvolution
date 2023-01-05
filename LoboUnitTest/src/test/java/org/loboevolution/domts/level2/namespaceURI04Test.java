@@ -34,8 +34,8 @@ import static org.junit.Assert.assertNull;
  * The "getNamespaceURI()" method for a Node
  * returns the namespace URI of this node, or null if unspecified.
  * <p>
- * Retrieve the second employee node and invoke the "getNamespaceURI()"
- * method.   The method should return "null".
+ * Retrieve the third employee node and invoke the "getNamespaceURI()"
+ * method. The method should return "null".
  *
  * @author NIST
  * @author Mary Brady
@@ -55,7 +55,8 @@ public class namespaceURI04Test extends LoboUnitTest {
         String employeeNamespace;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        testEmployee = (Element)elementList.item(1);
+        System.out.println("elementList " + elementList.getLength());
+        testEmployee = (Element)elementList.item(3);
         employeeNamespace = testEmployee.getNamespaceURI();
         assertNull("throw_Null", employeeNamespace);
     }

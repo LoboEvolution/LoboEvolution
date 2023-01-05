@@ -50,12 +50,9 @@ public class elementsetattributensurinullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
-        String namespaceURI = null;
-
         String qualifiedName = "qualifiedName";
         Document doc;
         HTMLCollection elementList;
@@ -63,16 +60,13 @@ public class elementsetattributensurinullTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         testAddr = elementList.item(0);
-
-        {
-            boolean success = false;
-            try {
-                ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("throw_NAMESPACE_ERR", success);
+        boolean success = false;
+        try {
+            ((Element) testAddr).setAttributeNS(null, qualifiedName, "newValue");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("throw_NAMESPACE_ERR", success);
     }
 }
 

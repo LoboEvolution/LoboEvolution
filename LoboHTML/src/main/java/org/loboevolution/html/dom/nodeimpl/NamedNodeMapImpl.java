@@ -73,6 +73,11 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 				String key = entry.getKey();
 
 				if (key.contains(":")) {
+
+					if(name.contains(":") && key.equalsIgnoreCase(name)){
+						return entry.getValue();
+					}
+
 					if (key.split(":")[1].equalsIgnoreCase(name)) {
 						return entry.getValue();
 					}
@@ -116,10 +121,9 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Node item(int index) {
-		int size = this.attributes.size();
 		AtomicInteger atomIndex = new AtomicInteger(0);
 		for (Map.Entry<String, Node> entry : attributes.entrySet()) {
-			if (size > atomIndex.getAndIncrement() && index > -1) {
+			if (atomIndex.getAndIncrement() == index && index > -1) {
 				return entry.getValue();
 			}
 		}

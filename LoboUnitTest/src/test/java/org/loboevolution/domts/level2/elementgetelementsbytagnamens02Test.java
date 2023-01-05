@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
  * name and namespace URI in the order in which they are encountered in a preorder traversal
  * of the Document tree.
  * Invoke getElementsByTagNameNS on the documentElement with values for namespaceURI '*' and
- * localName '*'.  Verify if this returns a nodeList of 0 elements.
+ * localName '*'. Verify if this returns a nodeList of 35 elements.
  *
  * @author IBM
  * @author Neil Delima
@@ -55,7 +55,7 @@ public class elementgetelementsbytagnamens02Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getDocumentElement();
         elementList = element.getElementsByTagNameNS("*", "*");
-        assertEquals( "elementgetelementsbytagnamens02", 0, elementList.getLength());
+        assertEquals( "elementgetelementsbytagnamens02", 35, elementList.getLength());
     }
 }
 

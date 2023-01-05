@@ -60,8 +60,6 @@ public class LoboWebDriver {
 			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
 			rendererContext.setTest(true);
 			ucontext.setUserAgentEnabled(true);
-
-
 			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, url);
 			doc.load();
 		} catch (Exception e) {

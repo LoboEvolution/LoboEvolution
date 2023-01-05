@@ -37,7 +37,7 @@ import static org.junit.Assert.assertNull;
  * systemId should create an empty DocumentType node.
  * <p>
  * Invoke createDocument on this DOMImplementation with a valid qualifiedName and different
- * publicIds and systemIds.  Check if the the DocumentType node was created with its
+ * publicIds and systemIds. Check if the DocumentType node was created with its
  * ownerDocument attribute set to null.
  *
  * @author IBM

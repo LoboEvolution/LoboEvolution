@@ -41,14 +41,15 @@
   <gender>&ent4;</gender>
   <address dmstc:domestic="Yes" street="No">PO Box 27 Irving, texas 98553</address>
  </employee>
- <emp:employee xmlns:emp="http://www.nist.gov" xmlns:nm="http://www.altavista.com" >    <emp:employeeId>EMP0004</emp:employeeId>
+ <emp:employee xmlns:emp="http://www.nist.gov" xmlns:nm="http://www.altavista.com" >
+  <emp:employeeId>EMP0004</emp:employeeId>
   <nm:name>Jeny Oconnor</nm:name>
   <emp:position>Personnel Director</emp:position>
   <emp:salary>95,000</emp:salary>
   <emp:gender>Female</emp:gender>
   <emp:address emp:domestic="Yes" street="Y&ent1;" emp:zone="CANADA" emp:local1="TRUE">27 South Road. Dallas, texas 98556</emp:address>
  </emp:employee>
- <employee xmlns:emp2="http://www.nist.gov">
+ <employee>
   <employeeId>EMP0005</employeeId>
   <name>Robert Myers</name>
   <position>Computer Specialist</position>

@@ -59,6 +59,14 @@ public class AttrImpl extends EventTargetImpl implements Attr {
      * {@inheritDoc}
      */
     @Override
+    public String getName() {
+        return Strings.isNotBlank(getPrefix()) ? getPrefix() + ":" + this.name : this.name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getNodeName() {
         return Strings.isNotBlank(getPrefix()) ? getPrefix() + ":" + this.name : this.name;
     }

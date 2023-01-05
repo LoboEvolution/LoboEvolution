@@ -56,11 +56,10 @@ public class createElementNS01Test extends LoboUnitTest {
         String namespaceURI = "http://www.ecommerce.org/";
         String malformedName = "prefix::local";
         Document doc;
-        Element newElement;
         doc = sampleXmlFile("staffNS.xml");
         boolean success = false;
         try {
-            newElement = doc.createElementNS(namespaceURI, malformedName);
+             doc.createElementNS(namespaceURI, malformedName);
         } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }

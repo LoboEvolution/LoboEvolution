@@ -328,7 +328,6 @@ public class DOMNodeTest extends LoboUnitTest {
 	}
 
 	private DocumentFragment createDocumentFragment() {
-		document = sampleHtmlFile();
 		DocumentFragment fragment = document.createDocumentFragment();
 		Element div = document.createElement("div");
 		div.appendChild(document.createElement("span"));

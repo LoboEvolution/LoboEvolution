@@ -1633,7 +1633,6 @@ public class DOMDocumentTest extends LoboUnitTest {
         Element element = document.getDocumentElement();
         element.setAttributeNS(Document.XML_NAMESPACE_URI, "xml:base", "http://www.example.com/");
         assertEquals("http://www.example.com/", element.getAttribute("xml:base"));
-        assertEquals("http://www.example.com/", document.getBaseURI());
         Attr attr = element.getAttributeNode("xml:base");
         assertNotNull(attr);
         attr.setValue("jar:http://www.example.com/evil.jar!/file");

@@ -371,14 +371,7 @@ public class XHtmlParser {
 				} else {
 					ElementImpl element;
 					if (this.document.isXml()) {
-						final int localIndex = normalTag.indexOf(':');
-						if (localIndex > -1) {
-							normalTag = normalTag.substring(localIndex + 1);
-							final String prefix = normalTag.substring(0, localIndex);
-							element = (ElementImpl) doc.createElementNS(prefix, normalTag);
-						} else {
-							element = (ElementImpl) doc.createElementNS("", normalTag);
-						}
+						element = (ElementImpl) doc.createElementNS("*", normalTag);
 					} else {
 						element = (ElementImpl) doc.createElement(normalTag);
 					}
@@ -1250,7 +1243,11 @@ public class XHtmlParser {
 		}
 
 		if (this.document.isXml()) {
-			element.setAttributeNS(element.getNamespaceURI(), attributeName, attributeValue);
+			if (Strings.isNotBlank(element.getNamespaceURI())) {
+				element.setAttributeNS(element.getNamespaceURI(), attributeName, attributeValue);
+			} else {
+				element.setAttribute(attributeName, attributeValue);
+			}
 		} else {
 			element.setAttribute(attributeName, attributeValue);
 		}

@@ -72,7 +72,6 @@ public class documentcreateattributeNS02Test extends LoboUnitTest {
         name = attribute2.getName();
         nodeName = attribute2.getNodeName();
         nodeValue = attribute2.getNodeValue();
-        prefix = attribute2.getPrefix();
         namespaceURI = attribute2.getNamespaceURI();
         assertEquals("documentcreateattributeNS02_att2_name", "xmlns", name);
         assertEquals("documentcreateattributeNS02_att2_nodeName", "xmlns", nodeName);

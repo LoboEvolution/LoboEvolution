@@ -24,6 +24,7 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -101,10 +102,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
 		}
 
-		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
-			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
-		}
-
 		if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			NodeListImpl list = getNodeList();
 			list.forEach(n -> {
@@ -114,8 +111,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			});
 		}
 
-		if(!org.loboevolution.common.Objects.equals(newChild.getOwnerDocument(), getOwnerDocument()))
+		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
+		}
 
 		if (newChild.getNodeType() == Node.ELEMENT_NODE) {
 
@@ -553,7 +551,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public String getNamespaceURI() {
-		return namespaceURI;
+		return "*".equals(namespaceURI) ? null : namespaceURI;
 	}
 
 	/** {@inheritDoc} */

@@ -67,9 +67,9 @@ public class getElementsByTagNameNS09Test extends LoboUnitTest {
         assertEquals( "employeeCount", 5, newList.getLength());
         newElement = (Element) newList.item(3);
         prefix = newElement.getPrefix();
-        assertEquals("prefix", "emp", prefix);
+        assertEquals("prefix", "EMP", prefix);
         lname = newElement.getLocalName();
-        assertEquals("lname", "employee", lname);
+        assertEquals("lname", "EMPLOYEE", lname);
     }
 }
 

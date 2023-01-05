@@ -71,7 +71,7 @@ public class elementgetattributenodens01Test extends LoboUnitTest {
         attNodeName = attribute.getNodeName();
         attrLocalName = attribute.getLocalName();
         attrNS = attribute.getNamespaceURI();
-        assertEquals("elementgetattributenodens01_attrValue", "", attrValue);
+        assertEquals("elementgetattributenodens01_attrValue", null, attrValue);
         assertEquals("elementgetattributenodens01_attrName", "l2:att", attrName);
         assertEquals("elementgetattributenodens01_attrNodeName", "l2:att", attNodeName);
         assertEquals("elementgetattributenodens01_attrLocalName", "att", attrLocalName);

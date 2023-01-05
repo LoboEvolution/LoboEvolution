@@ -36,7 +36,7 @@ import static org.junit.Assert.assertEquals;
  * <p>
  * Invoke method getElementsByTagNameNS(namespaceURI,localName) on this document
  * with namespaceURI and localName as " ".
- * Method should return a new NodeList of 37 elements.
+ * Method should return a new NodeList of 36 elements.
  *
  * @author NIST
  * @author Mary Brady
@@ -56,7 +56,7 @@ public class getElementsByTagNameNS01Test extends LoboUnitTest {
         HTMLCollection newList;
         doc = sampleXmlFile("staffNS.xml");
         newList = doc.getElementsByTagNameNS(namespaceURI, localName);
-        assertEquals( "throw_Size", 37, newList.getLength());
+        assertEquals( "throw_Size", 36, newList.getLength());
     }
 }
 

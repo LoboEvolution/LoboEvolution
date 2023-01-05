@@ -147,6 +147,11 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		}
 
 		if (qualifiedName.contains(":")) {
+
+			if (qualifiedName.chars().filter(ch -> ch == ':').count() != 1) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has error.");
+			}
+
 			String[] split = qualifiedName.split(":");
 			if (split.length != 2) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name provided has an empty local name.");
@@ -214,20 +219,34 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		if ("*".equals(tagname)) {
 			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		} else {
-			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname)).toArray()));
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname, false)).toArray()));
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
-		HTMLCollectionImpl coll = (HTMLCollectionImpl) getElementsByTagName(localName);
+
+		if("*".equals(namespaceURI) && "*".equals(localName)) {
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
+		}
+
+		HTMLCollectionImpl coll = new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(localName, true)).toArray()));
 		HTMLCollectionImpl list = new HTMLCollectionImpl(this, new ArrayList<>());
-		for (Node node : coll) {
-			if ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(node.getNamespaceURI())) {
+		coll.forEach(node -> {
+
+			if (namespaceURI == null && node.getNamespaceURI() == null) {
 				list.add(node);
 			}
-		}
+
+			if (namespaceURI != null && namespaceURI.equals(node.getNamespaceURI())) {
+				list.add(node);
+			}
+
+			if ("*".equals(namespaceURI)) {
+				list.add(node);
+			}
+		});
 		return list;
 	}
 
@@ -250,7 +269,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public int getChildElementCount() {
 		return (int) nodeList.stream().
 				filter(n -> n instanceof Element &&
-						n.getNodeType() != 7 &&
+						n.getNodeType() != PROCESSING_INSTRUCTION_NODE &&
+						n.getNodeType() != DOCUMENT_TYPE_NODE &&
 						!"xml".equals(n.getNodeName())).count();
 	}
 

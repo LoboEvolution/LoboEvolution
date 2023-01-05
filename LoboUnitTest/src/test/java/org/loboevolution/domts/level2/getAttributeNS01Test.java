@@ -52,8 +52,7 @@ public class getAttributeNS01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         String namespaceURI = "http://www.nist.gov";
-        String localName = "district";
-        String qualifiedName = "district";
+        String localName = "domestic";
         Document doc;
         HTMLCollection elementList;
         Element testAddr;
@@ -62,7 +61,7 @@ public class getAttributeNS01Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         attrValue = testAddr.getAttributeNS(namespaceURI, localName);
-        assertEquals("attrValue", "DISTRICT", attrValue);
+        assertEquals("attrValue", "Yes", attrValue);
     }
 }
 

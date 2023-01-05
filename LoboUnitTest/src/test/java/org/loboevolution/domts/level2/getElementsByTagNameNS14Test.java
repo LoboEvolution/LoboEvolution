@@ -58,7 +58,7 @@ public class getElementsByTagNameNS14Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
         elementList = docElem.getElementsByTagName( "address");
-        assertEquals( "addresses", 3, elementList.getLength());
+        assertEquals( "addresses", 4, elementList.getLength());
     }
 }
 

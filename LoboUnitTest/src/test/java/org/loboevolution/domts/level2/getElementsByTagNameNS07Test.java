@@ -38,7 +38,7 @@ import static org.junit.Assert.assertEquals;
  * using the string "http://www.nist.gov" as the namespaceURI and "address" as the
  * localName.
  * The method should return a NodeList whose length is
- * "3".
+ * "4".
  *
  * @author NIST
  * @author Mary Brady
@@ -56,7 +56,7 @@ public class getElementsByTagNameNS07Test extends LoboUnitTest {
         HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName( "address");
-        assertEquals( "addresses", 3, elementList.getLength());
+        assertEquals( "addresses", 4, elementList.getLength());
     }
 }
 

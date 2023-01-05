@@ -55,7 +55,7 @@ public class elementhasattribute02Test extends LoboUnitTest {
         HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        element = (Element) elementList.item(0);
+        element = (Element) elementList.item(1);
         assertNotNull("empEmployeeNotNull", element);
         state = element.hasAttribute("defaultAttr");
         assertTrue("elementhasattribute02", state);

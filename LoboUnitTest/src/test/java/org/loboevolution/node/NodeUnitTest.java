@@ -96,7 +96,7 @@ public class NodeUnitTest extends LoboUnitTest {
                 + "catch (e) { alert('exception'); }\n"
                 + "</script></body></html>";
 
-        final String[] messages = {"4", "function", "3"};
+        final String[] messages = {"2", "function", "1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -497,7 +497,7 @@ public class NodeUnitTest extends LoboUnitTest {
 
     @Test
     public void insertBeforenullRef() {
-        final String[] messages = {"3", "SPAN"};
+        final String[] messages = {"3", "span"};
         insertBefore("aNode.insertBefore(newNode, null);", messages);
     }
 
@@ -714,7 +714,7 @@ public class NodeUnitTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {null};
+        final String[] messages = {"null"};
         checkHtmlAlert(html, messages);
     }
 

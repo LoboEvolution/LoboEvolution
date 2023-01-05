@@ -57,7 +57,7 @@ public class elementhasattributens01Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "employee");
         element = (Element) elementList.item(0);
-        state = element.hasAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns");
+        state = element.hasAttributeNS("http://www.nist.gov", "xmlns");
         assertTrue("elementhasattributens01", state);
     }
 }

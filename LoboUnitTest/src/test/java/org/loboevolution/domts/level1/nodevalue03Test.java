@@ -25,6 +25,7 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
@@ -47,7 +48,7 @@ public class nodevalue03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         Document doc;
-        Node newNode;
+        EntityReference newNode;
         String newValue;
         doc = sampleXmlFile("staff.xml");
         newNode = doc.createEntityReference("ent1");

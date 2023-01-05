@@ -55,6 +55,6 @@ public class getElementsByTagNameNS08Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
         newList = docElem.getElementsByTagNameNS("*", "*");
-        assertEquals( "listSize", 35, newList.getLength()); // 36 on the RI, which supports entity references
+        assertEquals( "listSize", 35, newList.getLength());
     }
 }

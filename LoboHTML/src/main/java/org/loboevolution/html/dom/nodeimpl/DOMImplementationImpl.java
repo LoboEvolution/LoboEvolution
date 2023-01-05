@@ -78,8 +78,9 @@ public class DOMImplementationImpl implements DOMImplementation {
 	}
 
 	@Override
-	public boolean hasFeature(String xml, String s) {
-		return false;
+	public boolean hasFeature(String feature, String version) {
+		return ("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
+				|| ("1.0".equals(version) || "2.0".equals(version));
 	}
 
 	/**

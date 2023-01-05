@@ -55,7 +55,7 @@ public class hasAttribute02Test extends LoboUnitTest {
         boolean state;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
-        testNode = (Element) elementList.item(0);
+        testNode = (Element) elementList.item(1);
         state = testNode.hasAttribute("street");
         assertTrue("throw_True", state);
     }

@@ -27,6 +27,9 @@ import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -59,11 +62,11 @@ public class domimplementationhasfeature01Test extends LoboUnitTest {
         String featureCore;
         String featureXML;
         boolean success;
-        java.util.List featuresXML = new java.util.ArrayList();
+        List<String> featuresXML = new ArrayList<>();
         featuresXML.add("XML");
         featuresXML.add("xmL");
 
-        java.util.List featuresCore = new java.util.ArrayList();
+        List<String> featuresCore = new ArrayList<>();
         featuresCore.add("Core");
         featuresCore.add("CORE");
 
@@ -81,7 +84,6 @@ public class domimplementationhasfeature01Test extends LoboUnitTest {
             featureCore = (String) o;
             success = domImpl.hasFeature(featureCore, version);
             assertTrue("domimplementationhasfeature01_Core_1", success);
-            success = domImpl.hasFeature(featureCore, version1);
             success = domImpl.hasFeature(featureCore, version2);
             assertTrue("domimplementationhasfeature01_Core_3", success);
         }

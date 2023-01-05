@@ -24,10 +24,14 @@ package org.loboevolution.domts.level1;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.NamedNodeMapImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
@@ -55,25 +59,25 @@ public class hc_nodecloneattributescopiedTest extends LoboUnitTest {
         HTMLCollection elementList;
         Node addressNode;
         Element clonedNode;
-        NamedNodeMap attributes;
+        NamedNodeMapImpl attributes;
         Node attributeNode;
         String attributeName;
-        java.util.Collection result = new java.util.ArrayList();
+        Collection<String> result = new ArrayList<>();
 
-        java.util.Collection htmlExpected = new java.util.ArrayList();
+        Collection<String> htmlExpected = new ArrayList<>();
         htmlExpected.add("class");
         htmlExpected.add("title");
 
-        java.util.Collection expected = new java.util.ArrayList();
+        Collection<String> expected = new ArrayList<>();
         expected.add("title");
         expected.add("class");
         expected.add("dir");
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
-        addressNode = elementList.item(1);
+        addressNode = elementList.item(0);
         clonedNode = (Element) addressNode.cloneNode(false);
-        attributes = clonedNode.getAttributes();
+        attributes = (NamedNodeMapImpl) clonedNode.getAttributes();
         for (int indexN10076 = 0; indexN10076 < attributes.getLength(); indexN10076++) {
             attributeNode = attributes.item(indexN10076);
             attributeName = attributeNode.getNodeName();

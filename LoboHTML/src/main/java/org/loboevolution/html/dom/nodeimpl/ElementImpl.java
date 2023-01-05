@@ -113,11 +113,27 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	@JSFunction
 	public Attr getAttributeNode(String name) {
-		AttrImpl attribute = (AttrImpl) map.getNamedItem(name);
-		if (attribute != null) {
-			attribute.setSpecified(true);
-			attribute.setOwnerElement(this);
+		AttrImpl attribute;
+		if (name.contains(":")) {
+			attribute = (AttrImpl) map.getNamedItem(name);
+			if (attribute == null) {
+				String[] n = name.split(":");
+				name = n[1];
+				attribute = (AttrImpl) map.getNamedItem(name);
+				if (attribute != null && attribute.getPrefix() != null && attribute.getPrefix().equals(n[0])) {
+					attribute.setSpecified(true);
+					attribute.setOwnerElement(this);
+					return attribute;
+				}
+			}
 			return attribute;
+		} else {
+			attribute = (AttrImpl) map.getNamedItem(name);
+			if (attribute != null) {
+				attribute.setSpecified(true);
+				attribute.setOwnerElement(this);
+				return attribute;
+			}
 		}
 		return null;
 	}
@@ -126,12 +142,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	@JSFunction
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
-		final Attr attribute = (Attr) map.getNamedItem(localName);
+		final Attr attribute = getAttributeNode(localName);
 
 		if (attribute != null &&
 				((namespaceURI == null || "*".equals(namespaceURI)) ||
 						namespaceURI.equals(attribute.getNamespaceURI()) ||
-						namespaceURI.equals(getParentElement().getNamespaceURI()))) {
+						(getParentElement() != null && namespaceURI.equals(getParentElement().getNamespaceURI())))) {
 			return attribute;
 		}
 		return null;
@@ -208,6 +224,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
 		String prefix = null;
 
+		if (Strings.isBlank(namespaceURI)) {
+			throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI name contains null value");
+		}
+
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
 		}
@@ -241,10 +261,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		if (map.getNamedItem(qualifiedName) == null) {
 			final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
-
-			if(Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
 			attr.setNamespaceURI(namespaceURI);
 			attr.setOwnerDocument(getOwnerDocument());
+			if(Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
 			map.setNamedItem(attr);
 			assignAttributeField(qualifiedName, value);
 		}
@@ -334,16 +353,16 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
-		if (getNodeName().contains(":")) {
-			return getNodeName().split(":")[1];
+		if (this.name.contains(":")) {
+			return this.name.split(":")[1];
 		}
-		return getNodeName();
+		return this.name;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
-		return this.name;
+		return getLocalName();
 	}
 
 	/** {@inheritDoc} */
@@ -905,7 +924,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		if ("*".equals(tagname)) {
 			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		} else {
-			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname)).toArray()));
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname, false)).toArray()));
 		}
 	}
 
@@ -914,13 +933,22 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
 
 		if("*".equals(namespaceURI) && "*".equals(localName)) {
-			return new HTMLCollectionImpl(null, new ArrayList<>());
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		}
 
-		HTMLCollectionImpl coll = (HTMLCollectionImpl) getElementsByTagName(localName);
+		HTMLCollectionImpl coll = new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(localName, true)).toArray()));
 		HTMLCollectionImpl list = new HTMLCollectionImpl(this, new ArrayList<>());
 		coll.forEach(node -> {
-			if ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(node.getNamespaceURI())) {
+
+			if (namespaceURI == null && node.getNamespaceURI() == null) {
+				list.add(node);
+			}
+
+			if (namespaceURI != null && namespaceURI.equals(node.getNamespaceURI())) {
+				list.add(node);
+			}
+
+			if ("*".equals(namespaceURI)) {
 				list.add(node);
 			}
 		});

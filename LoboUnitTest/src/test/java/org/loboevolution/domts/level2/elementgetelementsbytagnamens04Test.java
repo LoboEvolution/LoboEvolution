@@ -59,17 +59,16 @@ public class elementgetelementsbytagnamens04Test extends LoboUnitTest {
         Element child2;
         Element child3;
         HTMLCollection elementList;
-        String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM", "root");
         child1 = doc.createElementNS("http://www.w3.org/DOM/Level1", "dom:child");
-        child2 = doc.createElementNS(nullNS, "child");
+        child2 = doc.createElementNS(null, "child");
         child3 = doc.createElementNS("http://www.w3.org/DOM/Level2", "dom:child");
         element.appendChild(child1);
         element.appendChild(child2);
         element.appendChild(child3);
-        elementList = element.getElementsByTagNameNS(nullNS, "child");
+        elementList = element.getElementsByTagNameNS(null, "child");
         assertEquals( "elementgetelementsbytagnamens04_1", 1, elementList.getLength());
         elementList = element.getElementsByTagNameNS("*", "child");
         assertEquals( "elementgetelementsbytagnamens04_2", 3, elementList.getLength());

@@ -1233,7 +1233,7 @@ public class DocumentUnitTest extends LoboUnitTest {
                 + "  alert(document.getElementById('findMe2').name);\n"
                 + "</script></body></html>";
 
-        final String[] messages = {null, "byId"};
+        final String[] messages = {"null", "byId"};
         checkHtmlAlert(html, messages);
     }
 
