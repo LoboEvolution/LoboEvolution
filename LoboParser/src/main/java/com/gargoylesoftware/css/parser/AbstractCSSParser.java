@@ -81,6 +81,9 @@ public abstract class AbstractCSSParser {
         parserMessages_.put("invalidPagePseudoClass",
                 "Invalid page pseudo class \"{0}\"; valid values are \"blank\", \"first\", \"left\", and \"right\".");
 
+        parserMessages_.put("invalidCaseInSensitivelyIdentifier",
+                "Invalid case-insensitively identifier \"{0}\" found; valid values are \"i\", and \"s\".");
+
         parserMessages_.put("ignoringRule", "Ignoring the whole rule.");
         parserMessages_.put("ignoringFollowingDeclarations", "Ignoring the following declarations in this rule.");
 

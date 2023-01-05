@@ -14,30 +14,22 @@
  */
 package com.gargoylesoftware.css.parser.condition;
 
-import java.io.Serializable;
-
-import com.gargoylesoftware.css.parser.AbstractLocatable;
-
 /**
  * <p>OneOfAttributeCondition class.</p>
  *
  * @author Ronald Brill
  *
  */
-public class OneOfAttributeCondition extends AbstractLocatable implements Condition, Serializable {
-
-    private final String localName_;
-    private final String value_;
+public class OneOfAttributeCondition extends AttributeCondition {
 
     /**
      * Ctor.
-     *
      * @param localName the local name
      * @param value the value
+     * @param caseInSensitive null if not set, true/false for i/s
      */
-    public OneOfAttributeCondition(final String localName, final String value) {
-        localName_ = localName;
-        value_ = value;
+    public OneOfAttributeCondition(final String localName, final String value, final Boolean caseInSensitive) {
+        super(localName, value, caseInSensitive);
     }
 
     /** {@inheritDoc} */
@@ -48,23 +40,7 @@ public class OneOfAttributeCondition extends AbstractLocatable implements Condit
 
     /** {@inheritDoc} */
     @Override
-    public String getLocalName() {
-        return localName_;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getValue() {
-        return value_;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        final String value = getValue();
-        if (value != null) {
-            return "[" + getLocalName() + "~=\"" + value + "\"]";
-        }
-        return "[" + getLocalName() + "]";
+    public String getOperator() {
+        return "~=";
     }
 }

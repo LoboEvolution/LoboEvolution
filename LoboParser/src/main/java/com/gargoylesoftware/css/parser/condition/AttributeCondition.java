@@ -19,52 +19,74 @@ import java.io.Serializable;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * <p>AttributeCondition class.</p>
- *
  * @author Ronald Brill
- *
  */
 public class AttributeCondition extends AbstractLocatable implements Condition, Serializable {
 
     private final String localName_;
     private final String value_;
+    private final Boolean caseInSensitive_;
 
     /**
      * Ctor.
-     *
      * @param localName the local value
      * @param value the value
+     * @param caseInSensitive null if not set, true/false for i/s
      */
-    public AttributeCondition(final String localName, final String value) {
+    public AttributeCondition(final String localName, final String value, final Boolean caseInSensitive) {
         localName_ = localName;
         value_ = value;
+        caseInSensitive_ = caseInSensitive;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.ATTRIBUTE_CONDITION;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getLocalName() {
         return localName_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getValue() {
         return value_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * @return true if the caseInsensitive option was set
+     */
+    public boolean isCaseInSensitive() {
+        return caseInSensitive_ != null && caseInSensitive_.booleanValue();
+    }
+
+    public String getOperator() {
+        return "=";
+    }
+
     @Override
     public String toString() {
+        String insensitive = "";
+        if (caseInSensitive_ != null) {
+            if (caseInSensitive_.booleanValue()) {
+                insensitive = " i";
+            }
+            else {
+                insensitive = " s";
+            }
+        }
+
         final String value = getValue();
         if (value != null) {
-            return "[" + getLocalName() + "=\"" + value + "\"]";
+            return "[" + getLocalName() + getOperator() + "\"" + value + "\"" + insensitive + "]";
         }
-        return "[" + getLocalName() + "]";
+        return "[" + getLocalName() + "" + insensitive + "]";
     }
 }

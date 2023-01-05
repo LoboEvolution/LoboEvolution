@@ -14,26 +14,19 @@
  */
 package com.gargoylesoftware.css.parser.condition;
 
-import java.io.Serializable;
-
-import com.gargoylesoftware.css.parser.AbstractLocatable;
-
 /**
  * @author Ronlad Brill
  */
-public class PrefixAttributeCondition extends AbstractLocatable implements Condition, Serializable {
-
-    private final String localName_;
-    private final String value_;
+public class PrefixAttributeCondition extends AttributeCondition {
 
     /**
      * Ctor.
-     * @param localName the loacl value
+     * @param localName the loacl name
      * @param value the value
+     * @param caseInSensitive null if not set, true/false for i/s
      */
-    public PrefixAttributeCondition(final String localName, final String value) {
-        localName_ = localName;
-        value_ = value;
+    public PrefixAttributeCondition(final String localName, final String value, final Boolean caseInSensitive) {
+        super(localName, value, caseInSensitive);
     }
 
     @Override
@@ -41,28 +34,8 @@ public class PrefixAttributeCondition extends AbstractLocatable implements Condi
         return ConditionType.PREFIX_ATTRIBUTE_CONDITION; //for now
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public String getLocalName() {
-        return localName_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue() {
-        return value_;
-    }
-
-    @Override
-    public String toString() {
-        final String value = getValue();
-        if (value != null) {
-            return "[" + getLocalName() + "^=\"" + value + "\"]";
-        }
-        return "[" + getLocalName() + "]";
+    public String getOperator() {
+        return "^=";
     }
 }

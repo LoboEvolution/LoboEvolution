@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.css.parser.condition;
 
-import java.io.Serializable;
-
-import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
  * <p>SuffixAttributeCondition class.</p>
@@ -24,20 +21,16 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
  * @author Ronald Brill
  *
  */
-public class SuffixAttributeCondition extends AbstractLocatable implements Condition, Serializable {
-
-    private final String localName_;
-    private final String value_;
+public class SuffixAttributeCondition extends AttributeCondition {
 
     /**
      * Ctor.
-     *
-     * @param localName the loacl value
+     * @param localName the local value
      * @param value the value
+     * @param caseInSensitive null if not set, true/false for i/s
      */
-    public SuffixAttributeCondition(final String localName, final String value) {
-        localName_ = localName;
-        value_ = value;
+    public SuffixAttributeCondition(final String localName, final String value, final Boolean caseInSensitive) {
+        super(localName, value, caseInSensitive);
     }
 
     /** {@inheritDoc} */
@@ -48,23 +41,7 @@ public class SuffixAttributeCondition extends AbstractLocatable implements Condi
 
     /** {@inheritDoc} */
     @Override
-    public String getLocalName() {
-        return localName_;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getValue() {
-        return value_;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        final String value = getValue();
-        if (value != null) {
-            return "[" + getLocalName() + "$=\"" + value + "\"]";
-        }
-        return "[" + getLocalName() + "]";
+    public String getOperator() {
+        return "$=";
     }
 }

@@ -27,20 +27,20 @@ interface CharStream {
    */
   char readChar() throws java.io.IOException;
 
-  @Deprecated
   /**
    * Returns the column position of the character last read.
    * @deprecated
    * @see #getEndColumn
    */
+  @Deprecated
   int getColumn();
 
-  @Deprecated
   /**
    * Returns the line number of the character last read.
    * @deprecated
    * @see #getEndLine
    */
+  @Deprecated
   int getLine();
 
   /**
@@ -117,4 +117,4 @@ interface CharStream {
   boolean getTrackLineColumn();
   void setTrackLineColumn(boolean trackLineColumn);
 }
-/* JavaCC - OriginalChecksum=3301b49863a24286e18dc523abb5cd19 (do not edit this line) */
+/* JavaCC - OriginalChecksum=1c23ae3d048f148e0e081deeeb480393 (do not edit this line) */
