@@ -1729,9 +1729,9 @@ public interface CSS2Properties extends CSSProperties {
 	void setWordSpacing(String wordSpacing);
 
 	/**
-	 * <p>setZIndex.</p>
+	 * <p>setzIndex.</p>
 	 *
 	 * @param zIndex a {@link java.lang.String} object.
 	 */
-	void setZIndex(String zIndex);
+	void setzIndex(String zIndex);
 }

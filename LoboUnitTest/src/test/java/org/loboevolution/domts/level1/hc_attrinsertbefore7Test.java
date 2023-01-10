@@ -40,7 +40,6 @@ public class hc_attrinsertbefore7Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -59,15 +58,18 @@ public class hc_attrinsertbefore7Test extends LoboUnitTest {
         titleAttr = (Attr) attributes.getNamedItem("title");
         terNode = doc.createTextNode("ter");
 
+        dayNode = doc.createCDATASection("day");
+        DocumentFragment docFrag = doc.createDocumentFragment();
+        docFrag.appendChild(terNode);
+        docFrag.appendChild(dayNode);
+
         boolean success = false;
         try {
-            dayNode = doc.createCDATASection("day");
+            titleAttr.insertBefore(docFrag, null);
         } catch (DOMException ex) {
-            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
-        assertTrue("throw_NOT_SUPPORTED_ERR", success);
-
+        assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
     }
 
 }
-

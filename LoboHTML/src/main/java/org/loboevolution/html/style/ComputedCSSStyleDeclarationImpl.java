@@ -1454,7 +1454,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getzIndex() {
-        return style.getzIndex();
+        return Strings.isBlank(style.getzIndex()) ? CSSValues.AUTO.getValue() : style.getzIndex() + "px";
     }
 
      /** {@inheritDoc} */
@@ -1728,8 +1728,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
      /** {@inheritDoc} */
     @Override
-    public void setZIndex(String zIndex) {
-
+    public void setzIndex(String zIndex) {
+        style.setzIndex(zIndex);
     }
 
      /** {@inheritDoc} */

@@ -42,7 +42,6 @@ public class hc_attrappendchild4Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -57,14 +56,13 @@ public class hc_attrappendchild4Test extends LoboUnitTest {
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
         titleAttr = (Attr) attributes.getNamedItem("title");
+        textNode = doc.createCDATASection("terday");
         boolean success = false;
         try {
-            textNode = doc.createCDATASection("terday");
+            titleAttr.appendChild(textNode);
         } catch (DOMException ex) {
-            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
-        assertTrue("throw_NOT_SUPPORTED_ERR", success);
-
+        assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
     }
 }
-

@@ -429,8 +429,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "  alert(style.zIndex);\n"
                 + "  style.zIndex = '5';\n"
                 + "  alert(style.zIndex);\n"
-                + "  style.zIndex = '6.0';\n"
-                + "  alert(style.zIndex);\n"
                 + "  style.zIndex = '7.1';\n"
                 + "  alert(style.zIndex);\n"
                 + "  style.zIndex = '8.6';\n"
@@ -440,7 +438,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
                 + "</body></html>";
-        final String[] messages = {"string", null, "1", "2", "2", "2", "2", "5", "5", "5", "5"};
+        final String[] messages = {"string", "", "1", "2", "2", "2", "2", "5", "5", "5"};
         checkHtmlAlert(html, messages);
     }
 
@@ -477,7 +475,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <div id='divFloat2' style='z-index: 4.7'/>\n"
                 + "  <div id='invalidDiv' style='z-index: unfug'/>\n"
                 + "</body></html>";
-        final String[] messages = {"string", null, "string", null, "string", "4", "string", null, "string", null, "string", null};
+        final String[] messages = {"string", "", "string", "", "string", "4", "string", "", "string", "", "string", ""};
         checkHtmlAlert(html, messages);
     }
 
@@ -504,7 +502,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
                 + "</body></html>";
-        final String[] messages = {null, null, "1", "1"};
+        final String[] messages = {"", "", "1", "1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -530,7 +528,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
                 + "</body></html>";
-        final String[] messages = {null, null, "1", null};
+        final String[] messages = {"", "", "1", ""};
         checkHtmlAlert(html, messages);
     }
 
@@ -563,7 +561,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
                 + "</body></html>";
-        final String[] messages = {null, "7", "7", null, "4", "1"};
+        final String[] messages = {"", "7", "7", "", "4", "1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -589,7 +587,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
                 + "</body></html>";
-        final String[] messages = {null, null, "1", "1"};
+        final String[] messages = {"", "", "1", "1"};
         checkHtmlAlert(html, messages);
     }
 

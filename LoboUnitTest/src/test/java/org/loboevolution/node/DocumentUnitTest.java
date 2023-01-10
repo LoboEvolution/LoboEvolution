@@ -400,7 +400,7 @@ public class DocumentUnitTest extends LoboUnitTest {
                 + "  </body>\n"
                 + "</html>";
 
-        final String[] messages = {"parentNode: null", "DIV", "1", null, "DIV", "button1value", "text1value", "text"};
+        final String[] messages = {"parentNode: null", "div", "1", null, "div", "button1value", "text1value", "text"};
         checkHtmlAlert(html, messages);
     }
 

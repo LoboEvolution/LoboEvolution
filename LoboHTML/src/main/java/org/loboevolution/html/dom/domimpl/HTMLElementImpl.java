@@ -329,8 +329,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 					this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
 				}
 			}
-
-
 			this.localStyleDeclarationState = propertyValueProcessed(styleDeclaration);
 		}
 
@@ -568,6 +566,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		CSSStyleDeclarationImpl localStyleDeclarationState = new CSSStyleDeclarationImpl(this);
 		final String classNames = getClassName();
 		final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
+
 		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray, mouseOver);
 		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
 			localStyleDeclarationState.getProperties().addAll(entry.getRule().getStyle().getProperties());

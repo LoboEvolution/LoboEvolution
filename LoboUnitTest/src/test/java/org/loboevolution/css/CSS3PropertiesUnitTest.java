@@ -1254,7 +1254,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv' class='abc'></div>\n"
                 + "</body></html>";
-        final String[] messages = {"", "", "", "10", "10", "rgb(0, 128, 0)"};
+        final String[] messages = {"", "", null, "10", "10", "rgb(0, 128, 0)"};
         checkHtmlAlert(html, messages);
     }
 

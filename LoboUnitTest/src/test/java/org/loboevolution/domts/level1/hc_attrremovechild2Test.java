@@ -41,7 +41,6 @@ public class hc_attrremovechild2Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -51,23 +50,19 @@ public class hc_attrremovechild2Test extends LoboUnitTest {
         NamedNodeMap attributes;
         Attr titleAttr;
         Text textNode;
-        Node retval;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
         titleAttr = (Attr) attributes.getNamedItem("title");
         textNode = doc.createTextNode("Yesterday");
-
-        {
-            boolean success = false;
-            try {
-                retval = titleAttr.removeChild(textNode);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue("throw_NOT_FOUND_ERR", success);
+        boolean success = false;
+        try {
+            titleAttr.removeChild(textNode);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue("throw_NOT_FOUND_ERR", success);
     }
 }
 

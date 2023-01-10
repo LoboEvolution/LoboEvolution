@@ -74,34 +74,35 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         subSetters.put(BACKGROUND_IMAGE, new BackgroundImageSetter());
         subSetters.put(FONT, new FontSetter());
 
-        propertyLenght.put("width", true);
-        propertyLenght.put("height", true);
-        propertyLenght.put("top", true);
-        propertyLenght.put("left", true);
-        propertyLenght.put("bottom", true);
-        propertyLenght.put("right", true);
-        propertyLenght.put("margin-top", true);
-        propertyLenght.put("margin-left", true);
-        propertyLenght.put("margin-right", true);
-        propertyLenght.put("margin-bottom", true);
-        propertyLenght.put("padding-top", true);
-        propertyLenght.put("padding-left", true);
-        propertyLenght.put("padding-right", true);
-        propertyLenght.put("padding-bottom", true);
-        propertyLenght.put("border-top-width", true);
-        propertyLenght.put("border-left-width", true);
-        propertyLenght.put("border-right-width", true);
-        propertyLenght.put("border-bottom-width", true);
-        propertyLenght.put("max-width", true);
-        propertyLenght.put("min-width", true);
-        propertyLenght.put("max-height", true);
-        propertyLenght.put("min-height", true);
-        propertyLenght.put("text-indent", true);
-        propertyLenght.put("font-size", true);
-        propertyLenght.put("word-spacing", true);
-        propertyLenght.put("letter-spacing", true);
-        propertyLenght.put("vertical-align", true);
-        propertyLenght.put("outline-width", true);
+        propertyLenght.put(WIDTH, true);
+        propertyLenght.put(HEIGHT, true);
+        propertyLenght.put(TOP, true);
+        propertyLenght.put(LEFT, true);
+        propertyLenght.put(BOTTOM, true);
+        propertyLenght.put(RIGHT, true);
+        propertyLenght.put(MARGIN_TOP, true);
+        propertyLenght.put(MARGIN_LEFT, true);
+        propertyLenght.put(MARGIN_RIGHT, true);
+        propertyLenght.put(MARGIN_BOTTOM, true);
+        propertyLenght.put(PADDING_TOP, true);
+        propertyLenght.put(PADDING_LEFT, true);
+        propertyLenght.put(PADDING_RIGHT, true);
+        propertyLenght.put(PADDING_BOTTOM, true);
+        propertyLenght.put(BORDER_TOP_WIDTH, true);
+        propertyLenght.put(BORDER_LEFT_WIDTH, true);
+        propertyLenght.put(BORDER_RIGHT_WIDTH, true);
+        propertyLenght.put(BORDER_BOTTOM_WIDTH, true);
+        propertyLenght.put(MAX_WIDTH, true);
+        propertyLenght.put(MIN_WIDTH, true);
+        propertyLenght.put(MAX_HEIGHT, true);
+        propertyLenght.put(MIN_HEIGHT, true);
+        propertyLenght.put(TEXT_INDENT, true);
+        propertyLenght.put(FONT_SIZE, true);
+        propertyLenght.put(WORD_SPACING, true);
+        propertyLenght.put(LETTER_SPACING, true);
+        propertyLenght.put(VERTICAL_ALIGN, true);
+        propertyLenght.put(OUTLINE_WIDTH, true);
+        propertyLenght.put(Z_INDEX, true);
     }
 
     /**
@@ -171,7 +172,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     @Override
     public void setProperty(String propertyName, String value, String priority) {
-
         final String propertyPriority1 = getPropertyPriority(propertyName);
 
         if(Strings.isNotBlank(propertyPriority1)) return;
@@ -1113,7 +1113,20 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public String getzIndex() {
-        return this.getPropertyValue(Z_INDEX);
+        int val = -1;
+        String zIndex = this.getPropertyValue(Z_INDEX);
+
+        if (Strings.isNotBlank(zIndex)) {
+            if (zIndex.contains(".")) {
+                int i = Integer.parseInt(zIndex.split("\\.")[1]);
+                if (i == 0) {
+                    val = HtmlValues.getPixelSize(zIndex, null, null, -1);
+                }
+            } else {
+                val = HtmlValues.getPixelSize(zIndex, null, null, -1);
+            }
+        }
+        return val == -1 ? "" : String.valueOf(val);
     }
 
     /** {@inheritDoc} */
@@ -2122,11 +2135,23 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setZIndex(String zIndex) {
-       this.setProperty(Z_INDEX, zIndex);
-        this.element.informPositionInvalid();
+    public void setzIndex(String zIndex) {
+        if (Strings.isNotBlank(zIndex)) {
+            if (zIndex.contains(".")) {
+                int i = Integer.parseInt(zIndex.split("\\.")[1]);
+                if (i == 0) {
+                    this.setProperty(Z_INDEX, zIndex);
+                    this.element.informPositionInvalid();
+                }
+            } else {
+                this.setProperty(Z_INDEX, zIndex);
+                this.element.informPositionInvalid();
+            }
+        } else {
+            this.setProperty(Z_INDEX, zIndex);
+            this.element.informPositionInvalid();
+        }
     }
-
 
     @Override
     public String toString() {

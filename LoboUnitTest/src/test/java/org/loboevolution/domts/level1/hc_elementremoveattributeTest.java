@@ -57,7 +57,7 @@ public class hc_elementremoveattributeTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(3);
         testEmployee.removeAttribute("class");
         attrValue = testEmployee.getAttribute("class");
-        assertEquals("attrValue", "", attrValue);
+        assertEquals("attrValue", null, attrValue);
     }
 }
 

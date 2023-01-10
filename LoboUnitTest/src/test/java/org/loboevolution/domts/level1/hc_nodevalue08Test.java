@@ -21,19 +21,20 @@
 
 package org.loboevolution.domts.level1;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 
 /**
- * An notation is accessed, setNodeValue is called with a non-null argument, but getNodeValue
+ * A notation is accessed, setNodeValue is called with a non-null argument, but getNodeValue
  * should still return null.
  *
  * @author Curt Arnold
@@ -50,7 +51,7 @@ public class hc_nodevalue08Test extends LoboUnitTest {
     public void runTest() {
         Document doc;
         DocumentType docType;
-        Node newNode;
+        Notation newNode;
         String newValue;
         NamedNodeMap nodeMap;
         doc = sampleXmlFile("hc_staff.xml");
@@ -58,14 +59,21 @@ public class hc_nodevalue08Test extends LoboUnitTest {
         assertNotNull("docTypeNotNull", docType);
         nodeMap = docType.getNotations();
         assertNotNull("notationsNotNull", nodeMap);
-        newNode = nodeMap.getNamedItem("notation1");
+        newNode = (Notation) nodeMap.getNamedItem("notation1");
         assertNotNull("notationNotNull", newNode);
         newValue = newNode.getNodeValue();
         assertNull("initiallyNull", newValue);
-        newNode.setNodeValue("This should have no effect");
+
+        boolean success = false;
+        try {
+            newNode.setNodeValue("This should have no effect");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
+        }
+        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
+
         newValue = newNode.getNodeValue();
         assertNull("nullAfterAttemptedChange", newValue);
 
     }
 }
-
