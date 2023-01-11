@@ -447,7 +447,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  alert(getStyle(document.getElementById('it')).zIndex);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"60"};
+        final String[] messages = {"60px"};
         checkHtmlAlert(html, messages);
     }
 
@@ -494,7 +494,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  alert(getStyle(document.getElementById('it2')).zIndex);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"10", "10"};
+        final String[] messages = {"10px", "10px"};
         checkHtmlAlert(html, messages);
     }
 

@@ -17,6 +17,7 @@ package com.gargoylesoftware.css.parser.selector;
 import java.io.Serializable;
 
 import com.gargoylesoftware.css.parser.condition.Condition;
+import com.gargoylesoftware.css.parser.condition.NotPseudoClassCondition;
 
 /**
  * Calculates a selector's specificity.
@@ -30,16 +31,16 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
     /**
      * The specificity for declarations made in the style attributes of an element.
      */
-    public static final SelectorSpecificity FROM_STYLE_ATTRIBUTE = new SelectorSpecificity(1, 0, 0, 0);
+    public static final SelectorSpecificity FROM_STYLE_ATTRIBUTE = new SelectorSpecificity(true, 0, 0, 0);
     /**
      * The specificity for browser defaults.
      */
-    public static final SelectorSpecificity DEFAULT_STYLE_ATTRIBUTE = new SelectorSpecificity(0, 0, 0, 0);
+    public static final SelectorSpecificity DEFAULT_STYLE_ATTRIBUTE = new SelectorSpecificity(false, 0, 0, 0);
 
-    private int fieldA_;
-    private int fieldB_;
-    private int fieldC_;
-    private int fieldD_;
+    private int fromStyle_;
+    private int idCount_;
+    private int classCount_;
+    private int typeCount_;
 
     /**
      * Ctor.
@@ -49,11 +50,11 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         readSelectorSpecificity(selector);
     }
 
-    private SelectorSpecificity(final int a, final int b, final int c, final int d) {
-        fieldA_ = a;
-        fieldB_ = b;
-        fieldC_ = c;
-        fieldD_ = d;
+    private SelectorSpecificity(final boolean fromStyle, final int idCount, final int classCount, final int typeCount) {
+        fromStyle_ = fromStyle ? 1 : 0;
+        idCount_ = idCount;
+        classCount_ = classCount;
+        typeCount_ = typeCount;
     }
 
     private void readSelectorSpecificity(final Selector selector) {
@@ -71,7 +72,7 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 if (es.getLocalName() != null) {
-                    fieldD_++;
+                    typeCount_++;
                 }
                 if (es.getConditions() != null) {
                     for (final Condition condition : es.getConditions()) {
@@ -83,7 +84,7 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                 final PseudoElementSelector pes = (PseudoElementSelector) selector;
                 final String pesName = pes.getLocalName();
                 if (pesName != null) {
-                    fieldD_++;
+                    typeCount_++;
                 }
                 return;
             case DIRECT_ADJACENT_SELECTOR:
@@ -105,34 +106,41 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
     private void readSelectorSpecificity(final Condition condition) {
         switch (condition.getConditionType()) {
             case ID_CONDITION:
-                fieldB_++;
+                idCount_++;
                 return;
             case CLASS_CONDITION:
-                fieldC_++;
+                classCount_++;
                 return;
             case ATTRIBUTE_CONDITION:
-                fieldC_++;
+                classCount_++;
                 return;
             case SUBSTRING_ATTRIBUTE_CONDITION:
-                fieldC_++;
+                classCount_++;
                 return;
             case SUFFIX_ATTRIBUTE_CONDITION:
-                fieldC_++;
+                classCount_++;
                 return;
             case PREFIX_ATTRIBUTE_CONDITION:
-                fieldC_++;
+                classCount_++;
                 return;
             case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-                fieldC_++;
+                classCount_++;
                 return;
             case ONE_OF_ATTRIBUTE_CONDITION:
-                fieldC_++;
+                classCount_++;
+                return;
+            case NOT_PSEUDO_CLASS_CONDITION:
+                final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
+                final SelectorList selectorList = notPseudoCondition.getSelectors();
+                for (final Selector selector : selectorList) {
+                    readSelectorSpecificity(selector);
+                }
                 return;
             case PSEUDO_CLASS_CONDITION:
-                fieldC_++;
+                classCount_++;
                 return;
             case LANG_CONDITION:
-                fieldC_++;
+                classCount_++;
                 return;
             default:
                 throw new RuntimeException("Unhandled CSS condition type for specifity computation: '"
@@ -140,43 +148,46 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return fieldA_ + "," + fieldB_ + "," + fieldC_ + "," + fieldD_;
+        // return (fromStyle_ > 0 ? "!" : "") + idCount_ + "," + classCount_ + "," + typeCount_;
+        return fromStyle_ + "," + idCount_ + "," + classCount_ + "," + typeCount_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(final SelectorSpecificity other) {
-        if (fieldA_ != other.fieldA_) {
-            return fieldA_ - other.fieldA_;
+        if (fromStyle_ != other.fromStyle_) {
+            return fromStyle_ - other.fromStyle_;
         }
-        else if (fieldB_ != other.fieldB_) {
-            return fieldB_ - other.fieldB_;
+        else if (idCount_ != other.idCount_) {
+            return idCount_ - other.idCount_;
         }
-        else if (fieldC_ != other.fieldC_) {
-            return fieldC_ - other.fieldC_;
+        else if (classCount_ != other.classCount_) {
+            return classCount_ - other.classCount_;
         }
-        else if (fieldD_ != other.fieldD_) {
-            return fieldD_ - other.fieldD_;
+        else if (typeCount_ != other.typeCount_) {
+            return typeCount_ - other.typeCount_;
         }
         return 0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + fieldA_;
-        result = prime * result + fieldB_;
-        result = prime * result + fieldC_;
-        result = prime * result + fieldD_;
+        result = prime * result + fromStyle_;
+        result = prime * result + idCount_;
+        result = prime * result + classCount_;
+        result = prime * result + typeCount_;
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -189,16 +200,16 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
             return false;
         }
         final SelectorSpecificity other = (SelectorSpecificity) obj;
-        if (fieldA_ != other.fieldA_) {
+        if (fromStyle_ != other.fromStyle_) {
             return false;
         }
-        if (fieldB_ != other.fieldB_) {
+        if (idCount_ != other.idCount_) {
             return false;
         }
-        if (fieldC_ != other.fieldC_) {
+        if (classCount_ != other.classCount_) {
             return false;
         }
-        if (fieldD_ != other.fieldD_) {
+        if (typeCount_ != other.typeCount_) {
             return false;
         }
         return true;

@@ -19,6 +19,7 @@ import com.gargoylesoftware.css.parser.condition.ClassCondition;
 import com.gargoylesoftware.css.parser.condition.Condition;
 import com.gargoylesoftware.css.parser.condition.IdCondition;
 import com.gargoylesoftware.css.parser.condition.LangCondition;
+import com.gargoylesoftware.css.parser.condition.NotPseudoClassCondition;
 import com.gargoylesoftware.css.parser.condition.OneOfAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.PrefixAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.PseudoClassCondition;

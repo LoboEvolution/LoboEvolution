@@ -27,6 +27,7 @@ import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.condition.Condition;
 import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
+import com.gargoylesoftware.css.parser.condition.NotPseudoClassCondition;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.selector.*;
@@ -280,6 +281,16 @@ public class StyleSheetAggregator {
 				}
 			}
 			return false;
+
+		case NOT_PSEUDO_CLASS_CONDITION:
+			final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
+			final SelectorList selectorList = notPseudoCondition.getSelectors();
+			for (final Selector selector : selectorList) {
+				if (selects(selector, element, null)) {
+					return false;
+				}
+			}
+			return true;
 
 		case PSEUDO_CLASS_CONDITION:
 			return selectsPseudoClass(condition, element, mouseOver);
