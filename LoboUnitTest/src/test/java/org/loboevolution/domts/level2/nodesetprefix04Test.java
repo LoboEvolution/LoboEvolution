@@ -35,7 +35,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * The method setPrefix raises a NAMESPACE_ERR if the namespaceURI of this node is null.
- * Retreive the a default Attribute node which does not have a namespace prefix. Call the setPrefix
+ * Retreive the default Attribute node which does not have a namespace prefix. Call the setPrefix
  * method on it.  Check if a NAMESPACE_ERR is thrown.
  *
  * @author IBM
@@ -47,7 +47,6 @@ public class nodesetprefix04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -55,23 +54,19 @@ public class nodesetprefix04Test extends LoboUnitTest {
         Element element;
         Attr attribute;
         HTMLCollection elementList;
-        String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        element = (Element) elementList.item(0);
+        element = (Element) elementList.item(1);
         assertNotNull("empEmployeeNotNull", element);
-        attribute = element.getAttributeNodeNS(nullNS, "defaultAttr");
-
-        {
-            boolean success = false;
-            try {
-                attribute.setPrefix("test");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("nodesetprefix04", success);
+        attribute = element.getAttributeNodeNS(null, "defaultAttr");
+        boolean success = false;
+        try {
+            attribute.setPrefix("test");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("nodesetprefix04", success);
     }
 }
 

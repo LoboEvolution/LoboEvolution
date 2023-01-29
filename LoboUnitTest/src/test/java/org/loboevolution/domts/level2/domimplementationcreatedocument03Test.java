@@ -40,7 +40,7 @@ import static org.junit.Assert.assertNotNull;
  * <p>
  * Call the createDocument on this DOMImplementation with
  * createDocument ("http://www.w3.org/DOMTest/L2",see the array below for valid QNames,null).
- * Check if the returned Document object is is empty with no Document Element.
+ * Check if the returned Document object is empty with no Document Element.
  *
  * @author IBM
  * @author Neil Delima

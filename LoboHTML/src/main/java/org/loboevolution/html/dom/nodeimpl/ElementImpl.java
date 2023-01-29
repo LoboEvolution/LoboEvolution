@@ -212,7 +212,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		Document doc = getOwnerDocument();
 		attr.setOwnerDocument(doc);
 		attr.setNamespaceURI(doc != null ? doc.getNamespaceURI() : getParentNode() != null ? getParentNode().getNamespaceURI() : null);
-		if (Strings.isNotBlank(prefix)) {
+		if (Strings.isNotBlank(prefix) && Strings.isNotBlank(attr.getNamespaceURI())) {
 			attr.setPrefix(prefix);
 		}
 		map.setNamedItem(attr);
@@ -223,10 +223,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
 		String prefix = null;
-
-		if (Strings.isBlank(namespaceURI)) {
-			throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI name contains null value");
-		}
 
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
@@ -263,9 +259,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
 			attr.setNamespaceURI(namespaceURI);
 			attr.setOwnerDocument(getOwnerDocument());
-			if(Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
+			if (Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
 			map.setNamedItem(attr);
 			assignAttributeField(qualifiedName, value);
+		} else {
+			AttrImpl attr = (AttrImpl) map.getNamedItem(qualifiedName);
+			attr.setNamespaceURI(namespaceURI);
+			attr.setValue(value);
+			map.removeNamedItem(qualifiedName);
+			map.setNamedItem(attr);
 		}
 	}
 
@@ -362,7 +364,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
-		return getLocalName();
+		StringBuilder builder = new StringBuilder();
+		if (Strings.isNotBlank(getPrefix())) {
+			builder.append(getPrefix()).append(":");
+		}
+
+		return builder.append(getLocalName()).toString();
 	}
 
 	/** {@inheritDoc} */

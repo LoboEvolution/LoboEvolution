@@ -24,6 +24,7 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import lombok.NoArgsConstructor;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
@@ -118,5 +119,36 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	@Override
 	public String getInternalSubset() {
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("<!DOCTYPE");
+		if (Strings.isNotBlank(getName())) {
+			builder.append(" ");
+			builder.append(getName());
+		}
+
+		if (Strings.isNotBlank(getPublicId())) {
+			builder.append(" PUBLIC \"");
+			builder.append(getPublicId());
+			builder.append("\"");
+			if (Strings.isNotBlank(getSystemId())) {
+				builder.append(" \"");
+				builder.append(getSystemId());
+				builder.append("\"");
+			}
+		} else {
+			if (Strings.isNotBlank(getSystemId())) {
+				builder.append(" SYSTEM \"");
+				builder.append(getSystemId());
+				builder.append("\"");
+			}
+		}
+
+		builder.append(">");
+
+		return builder.toString();
 	}
 }

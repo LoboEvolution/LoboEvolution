@@ -23,6 +23,7 @@
 package org.loboevolution.html.dom.nodeimpl;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -50,17 +51,44 @@ public class DOMImplementationImpl implements DOMImplementation {
 
 	/** {@inheritDoc} */
 	@Override
-	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) {
+	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException{
 		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
 		doc.setDoctype(doctype);
 		doc.setNamespaceURI(namespaceURI);
+		if (doctype != null && doctype.getOwnerDocument() == null) {
+			doctype.setOwnerDocument(doc);
+		}
+
+		if(doctype != null && !Objects.equals(doctype.getOwnerDocument(), doc)) {
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
+		}
 
 		if (Strings.isNotBlank(qualifiedName)) {
+
+			if (qualifiedName.contains(":")) {
+				String[] split = qualifiedName.split(":");
+				if (split.length != 2) {
+					throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
+				}
+				if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
+					throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
+				}
+
+				if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+					throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+				}
+
+				if (Strings.isBlank(namespaceURI)) {
+					throw new DOMException(DOMException.NAMESPACE_ERR, "The namespace URI provided is not valid");
+				}
+			}
+
+
 			ElementImpl elem;
-			if(Strings.isNotBlank(namespaceURI)){
-				elem = (ElementImpl)doc.createElementNS(namespaceURI, qualifiedName);
+			if (Strings.isNotBlank(namespaceURI)) {
+				elem = (ElementImpl) doc.createElementNS(namespaceURI, qualifiedName);
 			} else {
-				elem = (ElementImpl)doc.createElement(qualifiedName);
+				elem = (ElementImpl) doc.createElement(qualifiedName);
 			}
 			doc.appendChild(elem);
 		}

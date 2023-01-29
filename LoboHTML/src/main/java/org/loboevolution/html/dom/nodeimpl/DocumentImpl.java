@@ -185,7 +185,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		}
 		ElementImpl elem = (ElementImpl) new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
 		elem.setNamespaceURI(namespaceURI);
-		if (Strings.isNotBlank(prefix)) {
+		if (Strings.isNotBlank(prefix) && Strings.isNotBlank(namespaceURI)) {
 			elem.setPrefix(prefix);
 		}
 		return elem;
@@ -338,13 +338,12 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	 */
 	@Override
 	public DocumentType getDoctype() {
-		if (doctype == null) {
-			doctype = (DocumentType) nodeList.
-					stream().
-					filter(node -> node.getNodeType() == Node.DOCUMENT_TYPE_NODE).
-					findFirst().
-					orElse(new DocumentTypeImpl());
-		}
+		doctype = (DocumentType) nodeList.
+				stream().
+				filter(node -> node.getNodeType() == Node.DOCUMENT_TYPE_NODE).
+				findFirst().
+				orElse(new DocumentTypeImpl());
+
 		return this.doctype;
 	}
 

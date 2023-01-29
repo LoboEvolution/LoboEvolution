@@ -29,6 +29,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.BodyFilter;
+import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.HeadFilter;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
@@ -38,10 +39,8 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
-import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.ProcessingInstruction;
 import org.loboevolution.html.node.css.StyleSheetList;
 import org.loboevolution.html.node.views.DocumentView;
 import org.loboevolution.html.parser.XHtmlParser;
@@ -417,16 +416,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	@Override
 	public UserAgentContext getUserAgentContext() {
 		return this.getUcontext();
-	}
-
-
-	@Override
-	public Node appendChild(Node newChild) {
-		if (getChildElementCount() > 0) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Only one element on document allowed.");
-		}
-
-		return super.appendChild(newChild);
 	}
 
 	/**

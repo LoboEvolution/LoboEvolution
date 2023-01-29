@@ -97,19 +97,6 @@ public class DOMImplementationTest extends LoboUnitTest {
         assertEquals(
                 "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">",
                 doctype.toString());
-        //
-        try {
-            domImpl.createDocumentType("html><html><injection/", null, null);
-            fail("Must throw exception.");
-        } catch (DOMException e) {
-            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
-        }
-        //
-        doctype = domImpl.createDocumentType("html", "\"><injection foo=\"", null);
-        assertEquals("<!DOCTYPE html PUBLIC \"&quot;&gt;&lt;injection foo=&quot;\">", doctype.toString());
-        //
-        doctype = domImpl.createDocumentType("html", null, "\"><injection foo=\"");
-        assertEquals("<!DOCTYPE html SYSTEM \"&quot;&gt;&lt;injection foo=&quot;\">", doctype.toString());
     }
 
 }

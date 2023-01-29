@@ -111,7 +111,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			});
 		}
 
-		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
+		if(newChild.getOwnerDocument() != null && !Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
@@ -126,6 +126,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				list.forEach(node ->{
 					if(Objects.equals(node, newChild)) {
 						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
+					}
+
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one element on document allowed.");
 					}
 				});
 			}
@@ -629,7 +633,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Document getOwnerDocument() {
-		return this.document;
+		return this.document != null ? this.document : this instanceof Document ? (Document) this : null;
 	}
 
 	/** {@inheritDoc} */
@@ -1259,6 +1263,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
 		}
 
+		if (newChild.getOwnerDocument() == null) {
+			newChild.setOwnerDocument(getOwnerDocument());
+		}
+
 		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument()))
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 
@@ -1321,7 +1329,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public void setPrefix(String prefix) throws DOMException {
 
-		if ("xml".equals(prefix) && !Document.XML_NAMESPACE_URI.equals(getNamespaceURI())) {
+		if (namespaceURI == null ||
+				("xml".equals(prefix) && !Document.XML_NAMESPACE_URI.equals(getNamespaceURI()))) {
 			throw new DOMException(DOMException.NAMESPACE_ERR, "Wrong namespace for prefix xml");
 		}
 		if (prefix != null && !Strings.isValidString(prefix)) {

@@ -29,6 +29,7 @@ import org.loboevolution.html.dom.nodeimpl.*;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.info.AttributeInfo;
 import org.loboevolution.info.ElementInfo;
 import org.xml.sax.SAXException;
 
@@ -38,6 +39,7 @@ import java.io.Reader;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -369,20 +371,44 @@ public class XHtmlParser {
 						return TOKEN_TEXT;
 					}
 				} else {
-					ElementImpl element;
-					if (this.document.isXml()) {
-						element = (ElementImpl) doc.createElementNS("*", normalTag);
-					} else {
-						element = (ElementImpl) doc.createElement(normalTag);
-					}
-
-					element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
+					List<AttributeInfo> attributeInfo = new ArrayList<>();
+					ElementImpl element = null;
 					try {
 						if (!this.justReadTagEnd) {
-							while (this.readAttribute(reader, element)) {
+							while (this.readAttribute(reader, attributeInfo)) {
 								// EMPTY LOOP
 							}
 						}
+
+						if (this.document.isXml()) {
+							if (normalTag.contains(":")) {
+								AtomicReference<String> atomicReference = new AtomicReference<>(normalTag);
+								AtomicReference<AttributeInfo> reference = new AtomicReference<>();
+								attributeInfo.forEach(info -> {
+									if (info.getAttributeName().contains(atomicReference.get().split(":")[0].toLowerCase())) {
+										reference.set(info);
+									}
+								});
+
+								if (reference.get() != null || parent.getNamespaceURI() != null) {
+									element = (ElementImpl) doc.createElementNS(reference.get() != null ? reference.get().getAttributeValue() : parent.getNamespaceURI(), normalTag);
+								} else {
+									element = (ElementImpl) doc.createElementNS(null, normalTag);
+								}
+							} else {
+								element = (ElementImpl) doc.createElementNS(null, normalTag);
+							}
+						} else {
+							element = (ElementImpl) doc.createElement(normalTag);
+						}
+
+						element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
+						AtomicReference<ElementImpl> atomicReference = new AtomicReference<>(element);
+
+						attributeInfo.forEach(info->{
+							setAttributeNode(atomicReference.get(), info.getAttributeName(), info.getAttributeValue());
+						});
+
 						if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
 							// Throw before appending to parent.
 							// After attributes are set.
@@ -503,10 +529,8 @@ public class XHtmlParser {
 						}
 						return TOKEN_BEGIN_ELEMENT;
 					} finally {
-						// This can inform elements to continue with notifications.
-						// It can also cause Javascript to be loaded / processed.
-						// Update: Elements now use Document.addJob() to delay processing
-						element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
+						if(element != null)
+							element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
 					}
 				}
 			} finally {
@@ -944,7 +968,7 @@ public class XHtmlParser {
 		return pidata;
 	}
 
-	private boolean readAttribute(final LineNumberReader reader, final ElementImpl element)
+	private boolean readAttribute(final LineNumberReader reader, List<AttributeInfo> attributes)
 			throws IOException {
 		if (this.justReadTagEnd) {
 			return false;
@@ -961,7 +985,7 @@ public class XHtmlParser {
 			if (chInt == -1) {
 				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
-					setAttributeNode(element, attributeNameStr, attributeNameStr);
+					attributes.add(new AttributeInfo(attributeNameStr, attributeNameStr));
 					attributeName.setLength(0);
 				}
 				this.justReadTagBegin = false;
@@ -977,7 +1001,7 @@ public class XHtmlParser {
 			} else if (ch == '>') {
 				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
-					setAttributeNode(element, attributeNameStr, attributeNameStr);
+					attributes.add(new AttributeInfo(attributeNameStr, attributeNameStr));
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = true;
@@ -995,7 +1019,7 @@ public class XHtmlParser {
 					blankFound = false;
 					if (Strings.isStringBuilderNotBlack(attributeName)) {
 						final String attributeNameStr = attributeName.toString();
-						setAttributeNode(element, attributeNameStr, attributeNameStr);
+						attributes.add(new AttributeInfo(attributeNameStr, attributeNameStr));
 						attributeName.setLength(0);
 					}
 				}
@@ -1017,7 +1041,7 @@ public class XHtmlParser {
 			if (ch == '>') {
 				if (Strings.isStringBuilderNotBlack(attributeName)) {
 					final String attributeNameStr = attributeName.toString();
-					setAttributeNode(element, attributeNameStr, attributeNameStr);
+					attributes.add(new AttributeInfo(attributeNameStr, attributeNameStr));
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = true;
@@ -1057,7 +1081,8 @@ public class XHtmlParser {
 				lastCharSlash = false;
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
-					setAttributeNode(element, attributeNameStr, attributeValue == null ? "" : entityDecode(attributeValue).toString());
+					attributes.add(new AttributeInfo(attributeNameStr, attributeValue == null ? "" : entityDecode(attributeValue).toString()));
+
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = false;
@@ -1065,7 +1090,7 @@ public class XHtmlParser {
 			} else if (openQuote == -1 && ch == '>') {
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
-					setAttributeNode(element, attributeNameStr, attributeValue == null ? null : entityDecode(attributeValue).toString());
+					attributes.add(new AttributeInfo(attributeNameStr, attributeValue == null ? "" : entityDecode(attributeValue).toString()));
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = true;
@@ -1075,7 +1100,7 @@ public class XHtmlParser {
 				lastCharSlash = false;
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
-					setAttributeNode(element, attributeNameStr, attributeValue == null ? null : entityDecode(attributeValue).toString());
+					attributes.add(new AttributeInfo(attributeNameStr, attributeValue == null ? "" : entityDecode(attributeValue).toString()));
 				}
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = false;
@@ -1095,7 +1120,7 @@ public class XHtmlParser {
 		this.justReadTagEnd = false;
 		if (attributeName != null) {
 			final String attributeNameStr = attributeName.toString();
-			setAttributeNode(element, attributeNameStr, attributeValue == null ? null : entityDecode(attributeValue).toString());
+			attributes.add(new AttributeInfo(attributeNameStr, attributeValue == null ? "" : entityDecode(attributeValue).toString()));
 		}
 		return false;
 	}
@@ -1243,7 +1268,7 @@ public class XHtmlParser {
 		}
 
 		if (this.document.isXml()) {
-			if (Strings.isNotBlank(element.getNamespaceURI())) {
+			if (Strings.isNotBlank(element.getNamespaceURI()) && attributeName.contains(":")) {
 				element.setAttributeNS(element.getNamespaceURI(), attributeName, attributeValue);
 			} else {
 				element.setAttribute(attributeName, attributeValue);

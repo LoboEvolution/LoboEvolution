@@ -65,7 +65,7 @@ public class documentcreateattributeNS02Test extends LoboUnitTest {
         namespaceURI = attribute1.getNamespaceURI();
         assertEquals("documentcreateattributeNS02_att1_name", "xml:xml", name);
         assertEquals("documentcreateattributeNS02_att1_nodeName", "xml:xml", nodeName);
-        assertEquals("documentcreateattributeNS02_att1_nodeValue", "", nodeValue);
+        assertEquals("documentcreateattributeNS02_att1_nodeValue", null, nodeValue);
         assertEquals("documentcreateattributeNS02_att1_prefix", "xml", prefix);
         assertEquals("documentcreateattributeNS02_att1_namespaceURI", "http://www.w3.org/XML/1998/namespace", namespaceURI);
         attribute2 = doc.createAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns");
