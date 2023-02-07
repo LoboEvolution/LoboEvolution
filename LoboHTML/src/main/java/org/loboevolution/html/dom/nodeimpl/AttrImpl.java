@@ -108,7 +108,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
      */
     @Override
     public boolean isId() {
-        return this.nameId || name.toLowerCase().contains("id");
+        return ownerElement != null && (this.nameId || name.toLowerCase().contains("id"));
     }
 
     /**
@@ -145,6 +145,11 @@ public class AttrImpl extends EventTargetImpl implements Attr {
 
     @Override
     public Node appendChild(Node newChild) {
+
+        if (newChild.getNodeType() == Node.CDATA_SECTION_NODE) {
+            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a Cdata.");
+        }
+
         throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'appendChild' on 'Node': This node type does not support this method.");
     }
 

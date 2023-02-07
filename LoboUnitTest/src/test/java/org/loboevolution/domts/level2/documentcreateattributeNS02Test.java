@@ -75,7 +75,7 @@ public class documentcreateattributeNS02Test extends LoboUnitTest {
         namespaceURI = attribute2.getNamespaceURI();
         assertEquals("documentcreateattributeNS02_att2_name", "xmlns", name);
         assertEquals("documentcreateattributeNS02_att2_nodeName", "xmlns", nodeName);
-        assertEquals("documentcreateattributeNS02_att2_nodeValue", "", nodeValue);
+        assertEquals("documentcreateattributeNS02_att2_nodeValue", null, nodeValue);
         assertEquals("documentcreateattributeNS02_att2_namespaceURI", "http://www.w3.org/2000/xmlns/", namespaceURI);
     }
 

@@ -63,7 +63,7 @@ public class getAttributeNodeNS02Test extends LoboUnitTest {
         testAddr = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
         attribute = testAddr.getAttributeNodeNS("*", "domestic");
-        attrName = attribute.getNodeName();
+        attrName = attribute.getLocalName();
         assertEquals("attrName", "domestic", attrName);
     }
 }

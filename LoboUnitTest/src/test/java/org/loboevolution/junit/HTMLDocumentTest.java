@@ -52,7 +52,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         DocumentType docType = document.getDoctype();
         assertNotNull(docType);
         assertEquals("html", docType.getName());
-        assertEquals("html", docType.toString());
+        assertEquals("<!DOCTYPE html>", docType.toString());
     }
 
     @Test

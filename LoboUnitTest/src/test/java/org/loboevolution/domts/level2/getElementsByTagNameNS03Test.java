@@ -103,7 +103,7 @@ public class getElementsByTagNameNS03Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName( "*");
         for (int indexN10076 = 0; indexN10076 < elementList.getLength(); indexN10076++) {
             child = elementList.item(indexN10076);
-            childName = child.getNodeName();
+            childName = child.getLocalName();
             result.add(childName);
         }
         assertEquals("nodeNames", expectedResult, result);

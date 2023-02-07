@@ -323,7 +323,16 @@ public final class Strings {
 		if (len == 0) {
 			return false;
 		}
-		final Pattern pattern = Pattern.compile("[a-z][a-z0-9-]*",Pattern.CASE_INSENSITIVE);
+		final Pattern pattern = Pattern.compile("[A-Za-z0-9-_.]*",Pattern.CASE_INSENSITIVE);
+		return pattern.matcher(name).matches();
+	}
+
+	public static boolean isValidTag(String name) {
+		int len = name.length();
+		if (len == 0) {
+			return false;
+		}
+		final Pattern pattern = Pattern.compile("[A-Za-z0-9]*",Pattern.CASE_INSENSITIVE);
 		return pattern.matcher(name).matches();
 	}
 }

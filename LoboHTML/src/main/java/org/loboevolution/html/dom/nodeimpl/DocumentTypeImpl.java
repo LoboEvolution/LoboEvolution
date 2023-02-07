@@ -106,13 +106,13 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 
 	@Override
 	public NamedNodeMap getNotations() {
-		if(this.notation == null) this.notation = new NamedNodeMapImpl(this, new HashMap<>());
+		if(this.notation == null) this.notation = new NamedNodeMapImpl(this, new NodeListImpl());
 		return this.notation;
 	}
 
 	@Override
 	public NamedNodeMap getEntities() {
-		if(this.entities == null) this.entities = new NamedNodeMapImpl(this, new HashMap<>());
+		if(this.entities == null) this.entities = new NamedNodeMapImpl(this, new NodeListImpl());
 		return this.entities;
 	}
 

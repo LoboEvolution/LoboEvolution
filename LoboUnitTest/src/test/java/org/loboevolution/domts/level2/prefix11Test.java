@@ -36,7 +36,7 @@ import static org.junit.Assert.assertTrue;
  * NAMESPACE_ERR DOMException if the specified
  * prefix is set on a node with a namespaceURI that is null.
  * <p>
- * Attempt to insert a new namespace prefix on the second employee node.
+ * Attempt to insert a new namespace prefix on the fourth employee node.
  * An exception should be raised since the namespace prefix is set
  * on a node whose namespaceURI is null.
  *
@@ -50,28 +50,23 @@ public class prefix11Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
         Document doc;
         HTMLCollection elementList;
         Node employeeNode;
-        String namespaceURI;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        employeeNode = elementList.item(1);
-        namespaceURI = employeeNode.getNamespaceURI();
-
-        {
-            boolean success = false;
-            try {
-                employeeNode.setPrefix("employee1");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("throw_NAMESPACE_ERR", success);
+        employeeNode = elementList.item(3);
+        boolean success = false;
+        try {
+            employeeNode.setPrefix("employee1");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("throw_NAMESPACE_ERR", success);
+
     }
 }
 

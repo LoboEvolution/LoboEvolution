@@ -76,7 +76,7 @@ public class getElementsByTagNameNS11Test extends LoboUnitTest {
         elementList = docElem.getElementsByTagNameNS("*", "address");
         for (int indexN1005E = 0; indexN1005E < elementList.getLength(); indexN1005E++) {
             child = elementList.item(indexN1005E);
-            childName = child.getNodeName();
+            childName = child.getLocalName();
             result.add(childName);
         }
         assertEquals("nodeNames", expectedResult, result);

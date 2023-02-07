@@ -119,7 +119,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			}
 		}
 
-		if (Strings.isBlank(tagName) || !Strings.isValidString(tagName)) {
+		if (Strings.isBlank(tagName) || !Strings.isValidTag(tagName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 

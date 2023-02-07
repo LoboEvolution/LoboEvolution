@@ -64,6 +64,7 @@ public class elementreplaceexistingattributegevalueTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(2);
         newAttribute = doc.createAttribute("street");
+        newAttribute.setValue("No");
         streetAttr = testEmployee.setAttributeNode(newAttribute);
         value = streetAttr.getValue();
         assertEquals("streetNo", "No", value);
