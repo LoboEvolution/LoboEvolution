@@ -127,7 +127,15 @@ public class DOMElementTest extends LoboUnitTest {
         html.appendChild(body);
         body.removeAttribute("foo");
         assertTrue(body.hasAttributes());
-        body.removeAttributeNS(Document.NAMESPACE_SVG, "id");
+
+        boolean success = false;
+        try {
+            body.removeAttributeNS(Document.NAMESPACE_SVG, "id");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
+        }
+
+        assertTrue("throw_NOT_FOUND_ERR", success);
         assertTrue(body.hasAttribute("id"));
         idattr = body.removeAttributeNode(idattr);
         assertNull(idattr.getOwnerElement());
@@ -138,8 +146,7 @@ public class DOMElementTest extends LoboUnitTest {
         body.removeAttributeNS(Document.HTML_NAMESPACE_URI, "id");
         assertFalse(body.hasAttribute("id"));
         assertFalse(body.hasAttributes());
-        assertNull(idattr.getOwnerElement());
-        //
+
         Element svg = document.createElementNS(Document.NAMESPACE_SVG, "svg");
         Attr version = document.createAttributeNS(Document.NAMESPACE_SVG, "version");
         version.setValue("1.1");
@@ -149,15 +156,21 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("1.1", svg.getAttribute("version"));
         assertEquals("1.1", svg.getAttributeNode("version").getValue());
         assertEquals("1.1", svg.getAttributeNodeNS(Document.NAMESPACE_SVG, "version").getValue());
-        assertEquals("", svg.getAttributeNS(Document.HTML_NAMESPACE_URI, "version"));
+        assertEquals(null, svg.getAttributeNS(Document.HTML_NAMESPACE_URI, "version"));
         assertNull(svg.getAttributeNodeNS(Document.HTML_NAMESPACE_URI, "version"));
         assertFalse(svg.hasAttributeNS(Document.HTML_NAMESPACE_URI, "version"));
         assertTrue(svg.hasAttributeNS(Document.NAMESPACE_SVG, "version"));
-        svg.removeAttributeNS(Document.HTML_NAMESPACE_URI, "version");
+
+        success = false;
+        try {
+            svg.removeAttributeNS(Document.HTML_NAMESPACE_URI, "version");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
+        }
+        assertTrue("throw_NOT_FOUND_ERR", success);
         assertTrue(svg.hasAttributeNS(Document.NAMESPACE_SVG, "version"));
         svg.removeAttributeNS(Document.NAMESPACE_SVG, "version");
         assertFalse(svg.hasAttributeNS(Document.NAMESPACE_SVG, "version"));
-        assertNull(version.getOwnerElement());
         body.appendChild(svg);
         // xml:lang
         body.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "en_UK");

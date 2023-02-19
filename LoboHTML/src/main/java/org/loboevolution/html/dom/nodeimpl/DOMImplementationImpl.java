@@ -74,7 +74,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 					throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 				}
 
-				if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+				if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
 					throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 				}
 
@@ -133,8 +133,24 @@ public class DOMImplementationImpl implements DOMImplementation {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
+		int prefixSeparator = qualifiedName.lastIndexOf(":");
+		if (prefixSeparator != -1) {
+			String prefix = qualifiedName.substring(0, prefixSeparator);
+			String localName = qualifiedName.substring(prefixSeparator + 1);
+
+			if (!Strings.isXMLIdentifier(prefix)) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, qualifiedName);
+			}
+
+			if (!Strings.isXMLIdentifier(localName)) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, qualifiedName);
+			}
+		} else {
+			if (!Strings.isXMLIdentifier(qualifiedName)) {
+				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, qualifiedName);
+			}
+		}
+
 		return new DocumentTypeImpl(qualifiedName, publicId, systemId);
 	}
-
-	
 }

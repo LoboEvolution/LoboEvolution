@@ -62,20 +62,17 @@ public class prefix05Test extends LoboUnitTest {
         Element addrNode;
         Attr addrAttr;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("address");
+        elementList = doc.getElementsByTagName("emp:address");
         addrNode = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", addrNode);
-        addrAttr = addrNode.getAttributeNode("domestic");
-
-        {
-            boolean success = false;
-            try {
-                addrAttr.setPrefix("xmlns");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue("throw_NAMESPACE_ERR", success);
+        addrAttr = addrNode.getAttributeNode("emp:domestic");
+        boolean success = false;
+        try {
+            addrAttr.setPrefix("xmlns");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue("throw_NAMESPACE_ERR", success);
     }
 }
 

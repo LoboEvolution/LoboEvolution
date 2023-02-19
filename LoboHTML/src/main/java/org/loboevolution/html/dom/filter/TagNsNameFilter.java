@@ -21,18 +21,18 @@ package org.loboevolution.html.dom.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.util.Objects;
-import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.traversal.NodeFilter;
 
 /**
  * <p>TagNameFilter class.</p>
  */
 @Data
 @AllArgsConstructor
-public class TagNameFilter implements NodeFilter {
+public class TagNsNameFilter implements NodeFilter {
     private final String name;
+    private final String namespaceURI;
 
     /**
      * {@inheritDoc}
@@ -43,7 +43,21 @@ public class TagNameFilter implements NodeFilter {
             return NodeFilter.FILTER_REJECT;
         }
 
-        return node.getNodeName().equals(name.toUpperCase().trim()) ?
-				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        String localName = name.contains(":") ? name.split(":")[1] : name;
+        boolean tag = node.getLocalName().equalsIgnoreCase(localName.toUpperCase().trim());
+
+        if (tag && namespaceURI == null && node.getNamespaceURI() == null) {
+            return NodeFilter.FILTER_ACCEPT;
+        }
+
+        if (tag && namespaceURI != null && namespaceURI.equals(node.getNamespaceURI())) {
+            return NodeFilter.FILTER_ACCEPT;
+        }
+
+        if (tag && "*".equals(namespaceURI)) {
+            return NodeFilter.FILTER_ACCEPT;
+        }
+
+        return NodeFilter.FILTER_REJECT;
     }
 }

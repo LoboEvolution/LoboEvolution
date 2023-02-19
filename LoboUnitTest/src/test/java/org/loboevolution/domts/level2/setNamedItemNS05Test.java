@@ -55,7 +55,7 @@ public class setNamedItemNS05Test extends LoboUnitTest {
         String namespaceURI = "http://www.usa.com";
         String qualifiedName = "dmstc:domestic";
         Document doc;
-        Node arg;
+        Attr arg;
         HTMLCollection elementList;
         Element testAddress;
         NamedNodeMap attributes;
@@ -67,7 +67,7 @@ public class setNamedItemNS05Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(0);
         attributes = testAddress.getAttributes();
-        retnode = attributes.setNamedItemNS((Attr)arg);
+        retnode = attributes.setNamedItemNS(arg);
         value = retnode.getNodeValue();
         assertEquals("throw_Equals", "Yes", value);
     }

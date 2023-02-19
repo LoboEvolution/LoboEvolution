@@ -119,40 +119,6 @@ public class AttrImpl extends EventTargetImpl implements Attr {
         this.value = nodeValue;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Node insertBefore(Node newChild, Node refChild) {
-        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'insertBefore' on 'Node': This node type does not support this method.");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Node removeChild(Node oldChild) {
-        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'removeChild' on 'Node': This node type does not support this method.");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Node replaceChild(Node newChild, Node refChild) {
-        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'replaceChild' on 'Node': This node type does not support this method.");
-    }
-
-    @Override
-    public Node appendChild(Node newChild) {
-
-        if (newChild.getNodeType() == Node.CDATA_SECTION_NODE) {
-            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a Cdata.");
-        }
-
-        throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "'appendChild' on 'Node': This node type does not support this method.");
-    }
-
     @Override
     public String toString() {
         return "[object Attr]";

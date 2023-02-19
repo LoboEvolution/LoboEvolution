@@ -312,21 +312,6 @@ public final class Strings {
 		return builder.toString();
 	}
 
-	/**
-	 * <p>isValiString.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link java.lang.Boolean} object.
-	 */
-	public static boolean isValidString(String name) {
-		int len = name.length();
-		if (len == 0) {
-			return false;
-		}
-		final Pattern pattern = Pattern.compile("[A-Za-z0-9-_.]*",Pattern.CASE_INSENSITIVE);
-		return pattern.matcher(name).matches();
-	}
-
 	public static boolean isValidTag(String name) {
 		int len = name.length();
 		if (len == 0) {
@@ -334,5 +319,33 @@ public final class Strings {
 		}
 		final Pattern pattern = Pattern.compile("[A-Za-z0-9]*",Pattern.CASE_INSENSITIVE);
 		return pattern.matcher(name).matches();
+	}
+
+
+	public static boolean isXMLIdentifier(String s) {
+		if (isBlank(s)) {
+			return false;
+		}
+
+		if (!isXMLIdentifierStart(s.charAt(0))) {
+			return false;
+		}
+
+		for (int i = 1; i < s.length(); i++) {
+			if (!isXMLIdentifierPart(s.charAt(i))) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+
+	private static boolean isXMLIdentifierStart(char c) {
+		return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c == '_');
+	}
+
+	private static boolean isXMLIdentifierPart(char c) {
+		return isXMLIdentifierStart(c) || (c >= '0' && c <= '9') || (c == '-') || (c == '.');
 	}
 }

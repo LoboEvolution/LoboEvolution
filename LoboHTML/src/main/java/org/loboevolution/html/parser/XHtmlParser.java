@@ -88,6 +88,8 @@ public class XHtmlParser {
 
 	private boolean needRoot = false;
 
+	private Map<String, String> namespaces = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
 	/**
 	 * Constructs a XHtmlParser.
 	 *
@@ -212,7 +214,7 @@ public class XHtmlParser {
 			final StringBuilder decText = entityDecode(textSb);
 			final String text = decText.toString();
 			if (text.trim().length() > 0) {
-				final Node textNode = doc.createTextNode(decText.toString());
+				final Node textNode = text.trim().startsWith("&") ? doc.createEntityReference(text) : doc.createTextNode(text);
 				try {
 					safeAppendChild(parent, textNode);
 				} catch (final DOMException de) {
@@ -379,33 +381,43 @@ public class XHtmlParser {
 								// EMPTY LOOP
 							}
 						}
-
 						if (this.document.isXml()) {
-							if (normalTag.contains(":")) {
-								AtomicReference<String> atomicReference = new AtomicReference<>(normalTag);
-								AtomicReference<AttributeInfo> reference = new AtomicReference<>();
-								attributeInfo.forEach(info -> {
-									if (info.getAttributeName().contains(atomicReference.get().split(":")[0].toLowerCase())) {
-										reference.set(info);
-									}
-								});
+							AtomicReference<String> atomicReference = new AtomicReference<>(normalTag);
+							AtomicReference<String> reference = new AtomicReference<>();
+							String elm = atomicReference.get();
 
-								if (reference.get() != null || parent.getNamespaceURI() != null) {
-									element = (ElementImpl) doc.createElementNS(reference.get() != null ? reference.get().getAttributeValue() : parent.getNamespaceURI(), normalTag);
-								} else {
-									element = (ElementImpl) doc.createElementNS(null, normalTag);
-								}
-							} else {
-								element = (ElementImpl) doc.createElementNS(null, normalTag);
+							if (attributeInfo.size() == 0) {
+								reference.set(getNamespaces().get(elm.contains(":") ? elm.split(":")[0] : ""));
 							}
+
+							attributeInfo.forEach(info -> {
+								String attribute = info.getAttributeName();
+								int index = attribute.contains("xmlns") ? 1 : 0;
+								String attributeSplit = attribute.contains(":") ? attribute.split(":")[index] : attribute;
+
+								if (attribute.equals("xmlns") ||
+										(attributeSplit.equalsIgnoreCase((elm.contains(":") ? elm.split(":")[0] : elm).toLowerCase()))) {
+
+									if (getNamespaces().get(attributeSplit) == null) {
+										getNamespaces().put(attributeSplit, info.getAttributeValue());
+										reference.set(info.getAttributeValue());
+									} else {
+										reference.set(getNamespaces().get(attributeSplit));
+									}
+								}
+							});
+							element = (ElementImpl) doc.createElementNS(reference.get(), normalTag);
+
 						} else {
 							element = (ElementImpl) doc.createElement(normalTag);
 						}
 
 						element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
+
+						safeAppendChild(parent, element);
 						AtomicReference<ElementImpl> atomicReference = new AtomicReference<>(element);
 
-						attributeInfo.forEach(info->{
+						attributeInfo.forEach(info -> {
 							setAttributeNode(atomicReference.get(), info.getAttributeName(), info.getAttributeValue());
 						});
 
@@ -415,9 +427,7 @@ public class XHtmlParser {
 							// After MODIFYING_KEY is set.
 							throw new StopException(element);
 						}
-						// Add element to parent before children are added.
-						// This is necessary for incremental rendering.
-						safeAppendChild(parent, element);
+
 						if (!this.justReadEmptyElement) {
 							ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(normalTag.toUpperCase()));
 							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.getEndElementType();
@@ -483,6 +493,7 @@ public class XHtmlParser {
 													// TODO: Working here
 												}
 											} else if (token == TOKEN_EOD) {
+												getNamespaces().clear();
 												return TOKEN_EOD;
 											}
 										} catch (final StopException se) {
@@ -603,7 +614,7 @@ public class XHtmlParser {
 										}
 										final String text = sb.toString();
 										if (text.trim().length() > 0) {
-											final Node textNode = doc.createTextNode(text);
+											final Node textNode = text.trim().startsWith("&") ? doc.createEntityReference(text) : doc.createTextNode(text);
 											safeAppendChild(parent, textNode);
 										}
 									}
@@ -647,7 +658,7 @@ public class XHtmlParser {
 			}
 			final String text = sb.toString();
 			if (text.trim().length() > 0) {
-				final Node textNode = doc.createTextNode(text);
+				final Node textNode = text.trim().startsWith("&") ? doc.createEntityReference(text) : doc.createTextNode(text);
 				safeAppendChild(parent, textNode);
 			}
 		}
@@ -756,7 +767,8 @@ public class XHtmlParser {
 					while ((chInt = reader.read()) == '<') {
 						ltText.append('<');
 					}
-					final Node textNode = this.document.createTextNode(ltText.toString());
+					String text = ltText.toString();
+					final Node textNode = text.trim().startsWith("&") ? this.document.createEntityReference(text) : this.document.createTextNode(text);
 					try {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
@@ -782,7 +794,8 @@ public class XHtmlParser {
 						}
 						ltText.append(ch);
 					}
-					final Node textNode = this.document.createTextNode(ltText.toString());
+					String text = ltText.toString();
+					final Node textNode = text.trim().startsWith("&") ? this.document.createEntityReference(text) : this.document.createTextNode(text);
 					try {
 						parent.appendChild(textNode);
 					} catch (final DOMException de) {
@@ -1263,18 +1276,32 @@ public class XHtmlParser {
 	}
 
 	private void setAttributeNode(ElementImpl element, String attributeName, String attributeValue) {
-		if (attributeName.contains("xmlns")) {
-			element.setNamespaceURI(attributeValue);
-		}
 
 		if (this.document.isXml()) {
-			if (Strings.isNotBlank(element.getNamespaceURI()) && attributeName.contains(":")) {
-				element.setAttributeNS(element.getNamespaceURI(), attributeName, attributeValue);
+			String namespaceURI = null;
+
+			String key = attributeName.contains(":") ?
+					attributeName.split(":")[attributeName.contains("xmlns") ? 1 : 0] :
+					attributeName;
+
+			if (getNamespaces().get(key) == null) {
+				getNamespaces().put(key, attributeValue);
+				namespaceURI = attributeValue;
+			} else {
+				namespaceURI = getNamespaces().get(key);
+			}
+
+			if (Strings.isNotBlank(namespaceURI)) {
+				element.setAttributeNS(namespaceURI, attributeName, attributeName.contains("xmlns") ? null : attributeValue);
 			} else {
 				element.setAttribute(attributeName, attributeValue);
 			}
 		} else {
 			element.setAttribute(attributeName, attributeValue);
 		}
+	}
+
+	public Map<String, String> getNamespaces() {
+		return namespaces;
 	}
 }

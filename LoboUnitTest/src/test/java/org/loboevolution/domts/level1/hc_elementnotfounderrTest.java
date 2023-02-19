@@ -38,7 +38,7 @@ import static org.junit.Assert.assertTrue;
  * is not an attribute of the element.
  * <p>
  * Retrieve the last employee and attempt to remove
- * a non existing attribute node.  This should cause the
+ * a non-existing attribute node.  This should cause the
  * intended exception to be raised.  This test makes use
  * of the "createAttribute(name)" method from the Document
  * interface.
@@ -61,21 +61,17 @@ public class hc_elementnotfounderrTest extends LoboUnitTest {
         Attr oldAttribute;
         HTMLCollection addressElementList;
         Element testAddress;
-        Attr attrAddress;
         doc = sampleXmlFile("hc_staff.xml");
         addressElementList = doc.getElementsByTagName("acronym");
         testAddress = (Element) addressElementList.item(4);
         oldAttribute = doc.createAttribute("title");
-
-        {
-            boolean success = false;
-            try {
-                attrAddress = testAddress.removeAttributeNode(oldAttribute);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue("throw_NOT_FOUND_ERR", success);
+        boolean success = false;
+        try {
+            testAddress.removeAttributeNode(oldAttribute);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue("throw_NOT_FOUND_ERR", success);
     }
 }
 

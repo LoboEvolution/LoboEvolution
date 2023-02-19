@@ -55,7 +55,6 @@ public class hc_notationsremovenameditem1Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
-
         assertNotNull("docTypeNotNull", docType);
         notations = docType.getNotations();
         assertNotNull("notationsNotNull", notations);

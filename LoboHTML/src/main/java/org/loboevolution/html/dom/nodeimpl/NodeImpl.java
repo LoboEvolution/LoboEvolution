@@ -136,6 +136,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 
 		((NodeImpl) newChild).setParentImpl(this);
+
+		if (Strings.isNotBlank(getNamespaceURI()) && Strings.isBlank(newChild.getNamespaceURI())) {
+			((NodeImpl) newChild).setNamespaceURI(getNamespaceURI());
+		}
+
 		nodeList.add(newChild);
 
 		if (!this.notificationsSuspended) {
@@ -1333,8 +1338,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				("xml".equals(prefix) && !Document.XML_NAMESPACE_URI.equals(getNamespaceURI()))) {
 			throw new DOMException(DOMException.NAMESPACE_ERR, "Wrong namespace for prefix xml");
 		}
-		if (prefix != null && !Strings.isValidString(prefix)) {
-			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Invalid prefix");
+
+		if (prefix != null && !Strings.isXMLIdentifier(prefix)) {
+			throw new DOMException(DOMException.NAMESPACE_ERR, "Invalid prefix");
 		}
 		this.prefix = prefix;
 	}

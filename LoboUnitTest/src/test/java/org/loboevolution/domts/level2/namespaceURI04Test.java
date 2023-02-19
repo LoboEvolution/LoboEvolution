@@ -55,7 +55,6 @@ public class namespaceURI04Test extends LoboUnitTest {
         String employeeNamespace;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        System.out.println("elementList " + elementList.getLength());
         testEmployee = (Element)elementList.item(3);
         employeeNamespace = testEmployee.getNamespaceURI();
         assertNull("throw_Null", employeeNamespace);

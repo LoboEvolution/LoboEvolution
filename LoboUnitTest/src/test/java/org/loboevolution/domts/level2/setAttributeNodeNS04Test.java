@@ -57,20 +57,20 @@ public class setAttributeNodeNS04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
         HTMLCollection elementList;
+        Document doc;
         Node testAddr;
         Attr newAttr;
         Attr newAddrAttr;
         String newName;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("address");
+        elementList = doc.getElementsByTagName("emp:address");
         testAddr = elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        newAttr = doc.createAttribute( "xxx:domestic");
+        newAttr = doc.createAttributeNS("http://www.nist.gov", "xxx:domestic");
         newAddrAttr = ((Element) testAddr).setAttributeNodeNS(newAttr);
-        newName = newAddrAttr.getLocalName();
-        assertEquals("nodeName", "domestic", newName);
+        newName = newAddrAttr.getNodeName();
+        assertEquals("nodeName", "xxx:domestic", newName);
     }
 }
 

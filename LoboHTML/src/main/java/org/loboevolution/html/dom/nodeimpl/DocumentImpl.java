@@ -114,7 +114,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 		if (Strings.isNotBlank(tagName) && tagName.contains(":")) {
 			tagName = tagName.split(":")[1];
-			if (!Strings.isValidString(tagName)) {
+			if (!Strings.isXMLIdentifier(tagName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
@@ -161,7 +161,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name provided has an empty local name.");
 			}
 
-			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+			if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
@@ -173,7 +173,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		} else{
 			namespaceURI = Strings.isBlank(namespaceURI) ? getNamespaceURI() : namespaceURI;
 
-			if (!Strings.isValidString(qualifiedName)) {
+			if (!Strings.isXMLIdentifier(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
@@ -194,7 +194,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(String namespaceURI, String qualifiedName, String options) {
-		if (Strings.isBlank(qualifiedName) || !Strings.isValidString(qualifiedName)) {
+		if (Strings.isBlank(qualifiedName) || !Strings.isXMLIdentifier(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
@@ -219,7 +219,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		if ("*".equals(tagname)) {
 			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		} else {
-			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname, false)).toArray()));
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname)).toArray()));
 		}
 	}
 
@@ -231,23 +231,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		}
 
-		HTMLCollectionImpl coll = new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(localName, true)).toArray()));
-		HTMLCollectionImpl list = new HTMLCollectionImpl(this, new ArrayList<>());
-		coll.forEach(node -> {
-
-			if (namespaceURI == null && node.getNamespaceURI() == null) {
-				list.add(node);
-			}
-
-			if (namespaceURI != null && namespaceURI.equals(node.getNamespaceURI())) {
-				list.add(node);
-			}
-
-			if ("*".equals(namespaceURI)) {
-				list.add(node);
-			}
-		});
-		return list;
+		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNsNameFilter(localName, namespaceURI)).toArray()));
 	}
 
 	/** {@inheritDoc} */
@@ -385,7 +369,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	 */
 	@Override
 	public Attr createAttribute(String name) {
-		if (Strings.isBlank(name)) {
+		if (!Strings.isXMLIdentifier(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 		AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, true);
@@ -410,13 +394,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
 
-			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+			if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 			prefix = split[0];
 			qualifiedName = split[1];
 		} else{
-			if (!Strings.isValidString(qualifiedName)) {
+			if (!Strings.isXMLIdentifier(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
@@ -468,8 +452,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public ProcessingInstruction createProcessingInstruction(String target, String data) {
 
-		if (Strings.isBlank(target)) {
-			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Void target");
+		if (!Strings.isXMLIdentifier(target)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The target contains the invalid character");
 		}
 
 		if (target.equalsIgnoreCase("xml")) {
@@ -1118,16 +1102,30 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
 		switch (importedNode.getNodeType()) {
 			case ATTRIBUTE_NODE:
-				Attr attr = createAttribute(importedNode.getNodeName());
+				Attr attr;
+				if (Strings.isNotBlank(importedNode.getNamespaceURI())) {
+					attr = createAttributeNS(importedNode.getNamespaceURI(), importedNode.getNodeName());
+				} else {
+					attr = createAttribute(importedNode.getNodeName());
+				}
 				attr.setValue(importedNode.getNodeValue());
 				return attr;
 			case ELEMENT_NODE:
 				Element foreignElm = (Element) importedNode;
-				Element elm = createElement(foreignElm.getNodeName());
+				Element elm;
+
+				if (Strings.isNotBlank(foreignElm.getNamespaceURI())) {
+					elm = createElementNS(foreignElm.getNamespaceURI(), foreignElm.getNodeName());
+				} else {
+					elm = createElement(foreignElm.getNodeName());
+				}
+
 				NamedNodeMap attributes = foreignElm.getAttributes();
 				for (Node attribute : Nodes.iterable(attributes)) {
-					Attr attrNode = (Attr) importNode(attribute, true);
-					elm.setAttributeNode(attrNode);
+					if (!"xmlns".equals(attribute.getNodeName())) {
+						Attr attrNode = (Attr) importNode(attribute, true);
+						elm.setAttributeNode(attrNode);
+					}
 				}
 				if (deep) {
 					Node node = importedNode.getFirstChild();

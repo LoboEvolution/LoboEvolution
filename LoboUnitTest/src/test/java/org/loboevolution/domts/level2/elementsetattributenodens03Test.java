@@ -37,8 +37,7 @@ import static org.junit.Assert.assertTrue;
  * INUSE_ATTRIBUTE_ERR exception if the newAttr is already an attribute of
  * another Element object.
  * <p>
- * Retreive an attribute node of an existing element node.  Attempt to add it to an another
- * element node.  Check if the INUSE_ATTRIBUTE_ERR exception is thrown.
+ * Retreive an attribute node of an existing element node.  Attempt to add it to an  * element node.  Check if the INUSE_ATTRIBUTE_ERR exception is thrown.
  *
  * @author IBM
  * @author Neil Delima

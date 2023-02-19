@@ -668,7 +668,14 @@ public class HTMLElementTest extends LoboUnitTest {
 		html.appendChild(body);
 		body.removeAttribute("foo");
 		assertTrue(body.hasAttributes());
-		body.removeAttributeNS("http://www.w3.org/2000/svg", "id");
+		boolean success = false;
+
+		try {
+			body.removeAttributeNS("http://www.w3.org/2000/svg", "id");
+		} catch (DOMException ex) {
+			success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
+		}
+		assertTrue("throw_NOT_FOUND_ERR", success);
 		assertTrue(body.hasAttribute("id"));
 		idattr = body.removeAttributeNode(idattr);
 		assertFalse(body.hasAttributes());
@@ -689,11 +696,17 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertNull(svg.getAttributeNodeNS(HTMLDocument.HTML_NAMESPACE_URI, "version"));
 		assertFalse(svg.hasAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "version"));
 		assertTrue(svg.hasAttributeNS("http://www.w3.org/2000/svg", "version"));
-		svg.removeAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "version");
+
+		try {
+			svg.removeAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "version");
+		} catch (DOMException ex) {
+			success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
+		}
+		assertTrue("throw_NOT_FOUND_ERR", success);
+
 		assertTrue(svg.hasAttributeNS("http://www.w3.org/2000/svg", "version"));
 		svg.removeAttributeNS("http://www.w3.org/2000/svg", "version");
 		assertFalse(svg.hasAttributeNS("http://www.w3.org/2000/svg", "version"));
-		body.appendChild(svg);
 	}
 
 	@Test

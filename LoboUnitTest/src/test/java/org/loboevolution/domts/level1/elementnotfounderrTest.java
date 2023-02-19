@@ -62,21 +62,18 @@ public class elementnotfounderrTest extends LoboUnitTest {
         Attr oldAttribute;
         HTMLCollection addressElementList;
         Element testAddress;
-        Attr attrAddress;
         doc = sampleXmlFile("staff.xml");
         addressElementList = doc.getElementsByTagName("address");
         testAddress = (Element) addressElementList.item(4);
         oldAttribute = doc.createAttribute("oldAttribute");
 
-        {
-            boolean success = false;
-            try {
-                attrAddress = testAddress.removeAttributeNode(oldAttribute);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue("throw_NOT_FOUND_ERR", success);
+        boolean success = false;
+        try {
+            testAddress.removeAttributeNode(oldAttribute);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue("throw_NOT_FOUND_ERR", success);
     }
 }
 

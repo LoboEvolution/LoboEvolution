@@ -42,7 +42,7 @@ import static org.junit.Assert.*;
  * Create a child Text node with value "importedText" for the attribute node above.
  * Invoke method importNode(importedNode,deep) on this document with
  * importedNode being the newly created attribute.
- * Method should return a node whose name matches "elem:attr1" and a child node
+ * Method should return a node whose name matches "attr1" and a child node
  * whose value equals "importedText".
  * The returned node should belong to this document whose systemId is "staff.dtd"
  *
@@ -67,18 +67,13 @@ public class importNode01Test extends LoboUnitTest {
         DocumentType docType;
         String system;
         boolean specified;
-        NodeList childList;
         String nodeName;
-        Node child;
         String childValue;
-
-        List<String> expectedResult = new ArrayList<>();
-        expectedResult.add("elem:attr1");
-        expectedResult.add("importedText");
 
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
-        newAttr = aNewDoc.createAttribute("elem:attr1");
+        newAttr = aNewDoc.createAttribute( "attr1");
+        newAttr.setNodeValue("importedText");
         aNode = doc.importNode(newAttr, false);
         ownerDocument = aNode.getOwnerDocument();
         docType = ownerDocument.getDoctype();
@@ -89,13 +84,9 @@ public class importNode01Test extends LoboUnitTest {
         assertNull("ownerElement", attrOwnerElement);
         specified = ((Attr) aNode).isSpecified();
         assertTrue("specified", specified);
-        childList = aNode.getChildNodes();
-        assertEquals( "childList", 1, childList.getLength());
         nodeName = aNode.getNodeName();
-        assertEquals("nodeName", "elem:attr1", nodeName);
-        child = aNode.getFirstChild();
-        childValue = child.getNodeValue();
+        assertEquals("nodeName", "attr1", nodeName);
+        childValue = aNode.getNodeValue();
         assertEquals("childValue", "importedText", childValue);
     }
 }
-

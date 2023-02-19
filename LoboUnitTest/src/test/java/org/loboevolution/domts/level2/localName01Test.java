@@ -60,10 +60,10 @@ public class localName01Test extends LoboUnitTest {
         Attr addrAttr;
         String localName;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("address");
+        elementList = doc.getElementsByTagName("emp:address");
         testAddr = (Element) elementList.item(0);
         assertNotNull("empAddrNotNull", testAddr);
-        addrAttr = testAddr.getAttributeNode("domestic");
+        addrAttr = testAddr.getAttributeNode("emp:domestic");
         localName = addrAttr.getLocalName();
         assertEquals("localName", "domestic", localName);
     }

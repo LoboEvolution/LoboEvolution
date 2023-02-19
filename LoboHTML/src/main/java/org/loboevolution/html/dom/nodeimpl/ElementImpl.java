@@ -34,6 +34,7 @@ import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.TagNameFilter;
+import org.loboevolution.html.dom.filter.TagNsNameFilter;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.js.geom.DOMRectImpl;
 import org.loboevolution.html.js.geom.DOMRectListImpl;
@@ -102,8 +103,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	@JSFunction
 	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
-		final Attr attr = getAttributeNode(localName);
-		if (attr != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attr.getNamespaceURI()))) {
+		final Attr attr = getAttributeNodeNS(namespaceURI, localName);
+		if (attr != null) {
 			return attr.getValue();
 		}
 		return null;
@@ -113,28 +114,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	@JSFunction
 	public Attr getAttributeNode(String name) {
-
-		AttrImpl attribute;
-		if (name.contains(":")) {
-			attribute = (AttrImpl) map.getNamedItem(name);
-			if (attribute == null) {
-				String[] n = name.split(":");
-				name = n[1];
-				attribute = (AttrImpl) map.getNamedItem(name);
-				if (attribute != null && attribute.getPrefix() != null && attribute.getPrefix().equals(n[0])) {
-					attribute.setSpecified(true);
-					attribute.setOwnerElement(this);
-					return attribute;
-				}
-			}
+		AttrImpl attribute = (AttrImpl) map.getNamedItem(name);
+		if (attribute != null) {
+			attribute.setSpecified(true);
 			return attribute;
-		} else {
-			attribute = (AttrImpl) map.getNamedItem(name);
-			if (attribute != null) {
-				attribute.setSpecified(true);
-				attribute.setOwnerElement(this);
-				return attribute;
-			}
 		}
 		return null;
 	}
@@ -143,28 +126,18 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	@JSFunction
 	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
-		AttrImpl attribute;
-		if (localName.contains(":")) {
-			attribute = (AttrImpl) map.getNamedItemNS(namespaceURI, localName);
-			if (attribute == null) {
-				String[] n = localName.split(":");
-				localName = n[1];
-				attribute = (AttrImpl) map.getNamedItemNS(namespaceURI, localName);
-				if (attribute != null && attribute.getPrefix() != null && attribute.getPrefix().equals(n[0])) {
-					attribute.setSpecified(true);
-					attribute.setOwnerElement(this);
-					return attribute;
-				}
-			}
-			return attribute;
-		} else {
-			attribute = (AttrImpl) map.getNamedItemNS(namespaceURI, localName);
-			if (attribute != null) {
-				attribute.setSpecified(true);
-				attribute.setOwnerElement(this);
-				return attribute;
-			}
+
+		if (Strings.isBlank(namespaceURI)) {
+			return getAttributeNode(localName);
 		}
+
+		String local = localName.contains(":") ? localName.split(":")[1] : localName;
+		AttrImpl attribute = (AttrImpl) map.getNamedItemNS(namespaceURI, local);
+		if (attribute != null) {
+			attribute.setSpecified(true);
+			return attribute;
+		}
+
 		return null;
 	}
 
@@ -181,17 +154,27 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
-		final Attr attr = getAttributeNodeNS(namespaceURI, localName);
-		if (attr != null) {
-			removeAttribute(attr.getName());
-		}
+		map.removeNamedItemNS(namespaceURI, localName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Attr removeAttributeNode(Attr oldAttr) {
+
+		if (oldAttr.getOwnerElement() == null) {
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
+		}
+
 		oldAttr.setOwnerElement(null);
-		return (Attr) map.removeNamedItem(oldAttr.getName());
+		try {
+			return (Attr) map.removeNamedItem(oldAttr.getLocalName());
+		} catch (DOMException ex) {
+			try {
+				return (Attr) map.removeNamedItemNS("*", oldAttr.getLocalName());
+			} catch (DOMException ex1) {
+				throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
+			}
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -211,44 +194,31 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
 
-			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+			if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
 			prefix = split[0];
 			name = split[1];
 		} else {
-			if (!Strings.isValidString(name)) {
+			if (!Strings.isXMLIdentifier(name)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
 
 		Node node = map.getNamedItem(name);
-
-		if (node == null) {
-			final AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
-			Document doc = getOwnerDocument();
-			attr.setOwnerDocument(doc);
-			attr.setNamespaceURI(doc != null ? doc.getNamespaceURI() : getParentNode() != null ? getParentNode().getNamespaceURI() : null);
-			if (Strings.isNotBlank(prefix) && Strings.isNotBlank(attr.getNamespaceURI())) {
-				attr.setPrefix(prefix);
-			}
-			map.setNamedItem(attr);
-			assignAttributeField(name, value);
-		} else {
-
+		if (node != null) {
 			removeAttributeNode((AttrImpl) node);
-			final AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
-			Document doc = getOwnerDocument();
-			attr.setOwnerDocument(doc);
-			attr.setNamespaceURI(doc != null ? doc.getNamespaceURI() : getParentNode() != null ? getParentNode().getNamespaceURI() : null);
-			if (Strings.isNotBlank(prefix) && Strings.isNotBlank(attr.getNamespaceURI())) {
-				attr.setPrefix(prefix);
-			}
-			map.setNamedItem(attr);
-			assignAttributeField(name, value);
 		}
 
+		final AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
+		Document doc = getOwnerDocument();
+		attr.setOwnerDocument(doc);
+		attr.setNamespaceURI(getNamespaceURI() != null ? getNamespaceURI() : doc != null ? doc.getNamespaceURI() : getParentNode() != null ? getParentNode().getNamespaceURI() : null);
+		if (Strings.isNotBlank(prefix) && Strings.isNotBlank(attr.getNamespaceURI())) {
+			attr.setPrefix(prefix);
+		}
+		map.setNamedItem(attr);
 		assignAttributeField(name, value);
 	}
 
@@ -275,7 +245,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI is not http://www.w3.org/XML/1998/namespace.");
 			}
 
-			if (!Strings.isValidString(split[0]) || !Strings.isValidString(split[1])) {
+			if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
@@ -283,34 +253,23 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			qualifiedName = split[1];
 
 		} else {
-			if (!Strings.isValidString(qualifiedName)) {
+			if (!Strings.isXMLIdentifier(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
 
-		Node node = map.getNamedItem(qualifiedName);
+		Node node = map.getNamedItemNS(namespaceURI, qualifiedName);
 
-		if (node == null) {
-			final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
-			attr.setNamespaceURI(namespaceURI);
-			attr.setOwnerDocument(getOwnerDocument());
-			if (Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
-			map.setNamedItem(attr);
-			assignAttributeField(qualifiedName, value);
-		} else {
-
-			if (Strings.isNotBlank(namespaceURI) && namespaceURI.equals(node.getNamespaceURI())) {
-				removeAttributeNode((AttrImpl) node);
-			}
-
-			final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
-			attr.setNamespaceURI(namespaceURI);
-			attr.setOwnerDocument(getOwnerDocument());
-			if (Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
-			map.setNamedItem(attr);
-			assignAttributeField(qualifiedName, value);
+		if (node != null && Strings.isNotBlank(namespaceURI) && namespaceURI.equals(node.getNamespaceURI())) {
+			removeAttributeNode((AttrImpl) node);
 		}
 
+		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
+		attr.setNamespaceURI(namespaceURI);
+		attr.setOwnerDocument(getOwnerDocument());
+		if (Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
+		map.setNamedItemNS(attr);
+		assignAttributeField(qualifiedName, value);
 	}
 
 	/** {@inheritDoc} */
@@ -323,8 +282,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		/** {@inheritDoc} */
 	@Override
 	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
-		final AttrImpl attr = (AttrImpl)getAttributeNode(localName);
-		if (attr != null && ((namespaceURI == null || "*".equals(namespaceURI)) || namespaceURI.equals(attr.getNamespaceURI()))) {
+		final AttrImpl attr = (AttrImpl) getAttributeNodeNS(namespaceURI, localName);
+		if (attr != null) {
 			attr.setNameId(isId);
 		}
 	}
@@ -339,7 +298,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public Attr setAttributeNode(Attr newAttr) {
 		Attr checkAttr = getAttributeNode(newAttr.getName());
-		if (checkAttr == null && newAttr.getOwnerElement() != null) {
+
+		if (checkAttr == null && Objects.equals(newAttr.getOwnerElement(), this)) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
 					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
 		}
@@ -348,7 +308,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
-		if (checkAttr != null) {
+		if (checkAttr != null && Strings.isBlank(checkAttr.getNamespaceURI())) {
 			removeAttributeNode(checkAttr);
 		}
 
@@ -360,9 +320,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
-
-		Attr checkAttr = getAttributeNode(newAttr.getName());
-		if (checkAttr == null && newAttr.getOwnerElement() != null) {
+		Attr checkAttr = getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
+		if (checkAttr == null && Objects.equals(newAttr.getOwnerElement(), this)) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
 					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
 		}
@@ -372,12 +331,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		if (checkAttr != null && Objects.equals(checkAttr.getNamespaceURI(), newAttr.getNamespaceURI())) {
-			removeAttributeNode(checkAttr);
+			removeAttributeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
 		}
 
 		newAttr.setOwnerElement(this);
 		assignAttributeField(newAttr.getName(), newAttr.getValue());
-		return (Attr) map.setNamedItem(newAttr);
+		return (Attr) map.setNamedItemNS(newAttr);
 	}
 
 	/** {@inheritDoc} */
@@ -401,7 +360,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getId() {
-		final String id = getAttribute("id");
+		String id = getAttribute("id");
+		id = Strings.isBlank(id) ? getAttributeNS("*", "id") : id;
 		return id == null ? "" : id;
 	}
 
@@ -518,8 +478,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null localName");
 		}
 
-		Node attr = map.getNamedItem(localName);
-		return namespaceURI == null ? attr != null : attr != null && namespaceURI.equals(attr.getNamespaceURI());
+		return map.getNamedItemNS(namespaceURI, localName) != null;
 	}
 
 	/** {@inheritDoc} */
@@ -993,7 +952,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		if ("*".equals(tagname)) {
 			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		} else {
-			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname, false)).toArray()));
+			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname)).toArray()));
 		}
 	}
 
@@ -1005,23 +964,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		}
 
-		HTMLCollectionImpl coll = new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(localName, true)).toArray()));
-		HTMLCollectionImpl list = new HTMLCollectionImpl(this, new ArrayList<>());
-		coll.forEach(node -> {
-
-			if (namespaceURI == null && node.getNamespaceURI() == null) {
-				list.add(node);
-			}
-
-			if (namespaceURI != null && namespaceURI.equals(node.getNamespaceURI())) {
-				list.add(node);
-			}
-
-			if ("*".equals(namespaceURI)) {
-				list.add(node);
-			}
-		});
-		return list;
+		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNsNameFilter(localName, namespaceURI)).toArray()));
 	}
 
 	/** {@inheritDoc} */

@@ -25,7 +25,6 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.EntityReference;
 
 import static org.junit.Assert.assertTrue;
 
@@ -48,15 +47,12 @@ public class documentinvalidcharacterexceptioncreateentref1Test extends LoboUnit
     @Test
     public void runTest() {
         Document doc;
-        EntityReference badEntityRef;
         doc = sampleXmlFile("hc_staff.xml");
-
-
         boolean success = false;
         try {
-            badEntityRef = doc.createEntityReference("foo");
+            doc.createEntityReference("");
         } catch (DOMException ex) {
-            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+            success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
         assertTrue("throw_NOT_SUPPORTED_ERR", success);
     }

@@ -61,7 +61,7 @@ public class namespaceURI02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         assertNotNull("empAddressNotNull", testAddr);
-        addrAttr = testAddr.getAttributeNode( "domestic");
+        addrAttr = testAddr.getAttributeNodeNS("http://www.nist.gov", "domestic");
         attrNamespaceURI = addrAttr.getNamespaceURI();
         assertEquals("namespaceURI", "http://www.nist.gov", attrNamespaceURI);
     }

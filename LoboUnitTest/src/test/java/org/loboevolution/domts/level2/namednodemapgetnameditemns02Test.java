@@ -56,12 +56,12 @@ public class namednodemapgetnameditemns02Test extends LoboUnitTest {
         HTMLCollection elementList;
         String attrName;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName( "address");
+        elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-        attribute = (Attr) attributes.getNamedItem( "domestic");
-        attrName = attribute.getLocalName();
-        assertEquals("namednodemapgetnameditemns02", "domestic", attrName);
+        attribute = (Attr) attributes.getNamedItemNS("http://www.nist.gov", "domestic");
+        attrName = attribute.getNodeName();
+        assertEquals("namednodemapgetnameditemns02", "emp:domestic", attrName);
     }
 }
 

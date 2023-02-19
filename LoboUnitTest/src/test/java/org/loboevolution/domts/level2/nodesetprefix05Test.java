@@ -27,6 +27,9 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -50,7 +53,7 @@ public class nodesetprefix05Test extends LoboUnitTest {
         Document doc;
         Element element;
         String prefixValue;
-        java.util.List prefixValues = new java.util.ArrayList();
+        List<String> prefixValues = new ArrayList<>();
         prefixValues.add("_:");
         prefixValues.add(":0");
         prefixValues.add(":");
@@ -59,19 +62,17 @@ public class nodesetprefix05Test extends LoboUnitTest {
 
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test/L2", "dom:elem");
-        for (int indexN10050 = 0; indexN10050 < prefixValues.size(); indexN10050++) {
-            prefixValue = (String) prefixValues.get(indexN10050);
+        for (String value : prefixValues) {
+            prefixValue = value;
 
-            {
-                boolean success = false;
-                try {
-                    element.setPrefix(prefixValue);
-                } catch (DOMException ex) {
-                    success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-                }
-                assertTrue("throw_NAMESPACE_ERR", success);
+            boolean success = false;
+            try {
+                element.setPrefix(prefixValue);
+            } catch (DOMException ex) {
+                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
+            assertTrue("throw_NAMESPACE_ERR", success);
+
         }
     }
 }
-
