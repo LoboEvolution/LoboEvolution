@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -24,7 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -56,7 +56,7 @@ public class documentimportnode22Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        DocumentImpl doc;
+        Document doc;
         DocumentType docTypeNull = null;
 
         Document docImp;
@@ -74,8 +74,8 @@ public class documentimportnode22Test extends LoboUnitTest {
         String systemId2;
         String systemId2Imp;
         String systemId2NewImp;
-        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staffNS.xml");
+        
         domImpl = doc.getImplementation();
         docType = doc.getDoctype();
         docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", docTypeNull);

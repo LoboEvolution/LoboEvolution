@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -24,21 +24,35 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMStringList;
+import org.loboevolution.html.node.Node;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * <p>DOMConfigurationImpl class.</p>
  */
 public class DOMConfigurationImpl implements DOMConfiguration {
-	private final Map<String, Object> parameters = new HashMap<>();
+	private static Map<String, Object> parameters = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
+
+	static {
+
+		parameters.put("namespace-declarations", true);
+		parameters.put("element-content-whitespace", true);
+		parameters.put("normalize-characters", false);
+		parameters.put("canonical-form", false);
+		parameters.put("check-character-normalization", false);
+		parameters.put("validate-if-schema", false);
+
+	}
+
 
 	/**
 	 * <p>Constructor for DOMConfigurationImpl.</p>
 	 */
 	public DOMConfigurationImpl() {
-		super();
+
 	}
 
 	/** {@inheritDoc} */
@@ -52,7 +66,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 	@Override
 	public Object getParameter(String name) {
 		synchronized (this) {
-			return this.parameters.get(name);
+			return parameters.get(name);
 		}
 	}
 
@@ -60,7 +74,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 	@Override
 	public DOMStringList getParameterNames() {
 		synchronized (this) {
-			return new DOMStringListImpl(this.parameters.keySet());
+			return new DOMStringListImpl(parameters.keySet());
 		}
 	}
 
@@ -68,7 +82,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 	@Override
 	public void setParameter(String name, Object value) {
 		synchronized (this) {
-			this.parameters.put(name, value);
+			parameters.put(name, value);
 		}
 	}
 }

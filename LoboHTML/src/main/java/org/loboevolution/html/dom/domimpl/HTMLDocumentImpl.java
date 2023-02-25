@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -50,7 +50,7 @@ import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.UserDataHandler;
+import org.loboevolution.html.dom.UserDataHandler;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;

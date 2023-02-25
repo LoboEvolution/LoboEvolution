@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -29,6 +29,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.TextFilter;
@@ -41,7 +42,6 @@ import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.w3c.dom.UserDataHandler;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -1423,6 +1423,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return this;
 	}
 
+	@Override
+	public Node getFeature(String name, String version) {
+		return null;
+	}
 
 	/** {@inheritDoc} */
 	@Override

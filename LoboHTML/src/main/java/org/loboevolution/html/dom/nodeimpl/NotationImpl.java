@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -21,9 +21,11 @@
 package org.loboevolution.html.dom.nodeimpl;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class NotationImpl extends EventTargetImpl implements Notation {
 

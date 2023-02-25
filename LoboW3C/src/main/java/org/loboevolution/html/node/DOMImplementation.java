@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -62,4 +62,6 @@ public interface DOMImplementation {
 	Document createHTMLDocument();
 
     boolean hasFeature(String xml, String s);
+
+    Object getFeature(String core, String s);
 }

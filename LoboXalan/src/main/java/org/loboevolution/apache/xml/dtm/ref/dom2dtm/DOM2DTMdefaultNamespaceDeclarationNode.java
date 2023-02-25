@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -22,10 +22,10 @@ package org.loboevolution.apache.xml.dtm.ref.dom2dtm;
 import org.loboevolution.apache.xml.dtm.DTMException;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
 
 import java.util.Objects;
@@ -124,6 +124,11 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   @Override
   public boolean hasAttributes() {
     return false;
+  }
+
+  @Override
+  public Node getFeature(String name, String version) {
+    return null;
   }
 
   /** {@inheritDoc} */

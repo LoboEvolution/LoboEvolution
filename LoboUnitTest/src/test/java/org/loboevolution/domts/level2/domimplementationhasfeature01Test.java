@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -23,9 +23,8 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
-import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DOMImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,7 @@ public class domimplementationhasfeature01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        DocumentImpl doc;
+        Document doc;
         DOMImplementation domImpl;
         String version = "";
         String version1 = "1.0";
@@ -70,8 +69,8 @@ public class domimplementationhasfeature01Test extends LoboUnitTest {
         featuresCore.add("Core");
         featuresCore.add("CORE");
 
-        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staffNS.xml");
+        
         domImpl = doc.getImplementation();
         for (Object o : featuresXML) {
             featureXML = (String) o;

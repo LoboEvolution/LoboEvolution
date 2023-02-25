@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -23,7 +23,6 @@ package org.loboevolution.domts.level1;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 
@@ -49,11 +48,10 @@ public class documentgetimplementationTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        DocumentImpl doc;
+        Document doc;
         DOMImplementation docImpl;
         boolean state;
-        doc = (DocumentImpl) sampleXmlFile("staff.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staff.xml");
         docImpl = doc.getImplementation();
         state = docImpl.hasFeature("XML", "1.0");
         assertTrue("documentGetImplementationAssert", state);

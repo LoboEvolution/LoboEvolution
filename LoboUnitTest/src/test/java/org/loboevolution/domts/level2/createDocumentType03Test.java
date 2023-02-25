@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -23,12 +23,11 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
-import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNull;
 
 
@@ -56,14 +55,14 @@ public class createDocumentType03Test extends LoboUnitTest {
         String qualifiedName = "prefix:myDoc";
         String publicId = "http://www.localhost.com";
         String systemId = "myDoc.dtd";
-        DocumentImpl doc;
+        Document doc;
         DOMImplementation domImpl;
         DocumentType newType;
 
         String nodeName;
         String nodeValue;
-        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staffNS.xml");
+        
         domImpl = doc.getImplementation();
         newType = domImpl.createDocumentType(qualifiedName, publicId, systemId);
         nodeName = newType.getNodeName();

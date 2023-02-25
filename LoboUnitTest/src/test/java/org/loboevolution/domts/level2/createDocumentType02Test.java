@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -24,10 +24,8 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
-import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.DOMImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +58,7 @@ public class createDocumentType02Test extends LoboUnitTest {
     public void runTest() {
         String publicId = "http://www.localhost.com/";
         String systemId = "myDoc.dtd";
-        DocumentImpl doc;
+        Document doc;
 
         DOMImplementation domImpl;
         List<String> illegalQNames = new ArrayList<String>();
@@ -92,8 +90,8 @@ public class createDocumentType02Test extends LoboUnitTest {
         illegalQNames.add("edi:a ");
         illegalQNames.add("edi:\"");
 
-        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staffNS.xml");
+        
         for (String qualifiedName : illegalQNames) {
             domImpl = doc.getImplementation();
             boolean success = false;

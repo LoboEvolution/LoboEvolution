@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -19,18 +19,20 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.domimpl.AttributeTypeInfo;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
-import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.TypeInfo;
 
 /**
  * <p>AttrImpl class.</p>
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @AllArgsConstructor

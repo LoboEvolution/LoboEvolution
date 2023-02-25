@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -42,7 +42,6 @@ import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.type.DocumentReadyState;
 import org.loboevolution.type.VisibilityState;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
 
 /**
@@ -803,6 +802,11 @@ public class DTMNodeProxy
     }
 
     @Override
+    public Node renameNode(Node node, String namespaceURI, String qualifiedName) {
+        throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
+    }
+
+    @Override
     public boolean isXml() {
         return false;
     }
@@ -1221,6 +1225,11 @@ public class DTMNodeProxy
         return DTM.NULL != dtm.getFirstAttribute(node);
     }
 
+    @Override
+    public Node getFeature(String name, String version) {
+        return null;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -1600,6 +1609,11 @@ public class DTMNodeProxy
         public boolean hasFeature(String feature, String version) {
             return ("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
                     && ("1.0".equals(version) || "2.0".equals(version));
+        }
+
+        @Override
+        public Object getFeature(String core, String s) {
+            throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
         }
     }
 

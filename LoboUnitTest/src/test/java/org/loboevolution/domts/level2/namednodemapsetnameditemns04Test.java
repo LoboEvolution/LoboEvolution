@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -25,7 +25,7 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertTrue;
@@ -54,7 +54,7 @@ public class namednodemapsetnameditemns04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        DocumentImpl doc;
+        Document doc;
         DOMImplementation domImpl;
         Document docAlt;
         DocumentType docType = null;
@@ -65,8 +65,8 @@ public class namednodemapsetnameditemns04Test extends LoboUnitTest {
         Attr attrAlt;
         String nullNS = null;
 
-        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staffNS.xml");
+        
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();

@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -24,7 +24,7 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertTrue;
@@ -48,7 +48,7 @@ public class nodehasattributes04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        DocumentImpl doc;
+        Document doc;
         Document newDoc;
         DocumentType docType = null;
 
@@ -61,8 +61,8 @@ public class nodehasattributes04Test extends LoboUnitTest {
         Node appendedChild;
         HTMLCollection elementList;
         boolean hasAttributes;
-        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staffNS.xml");
+        
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "test", docType);
         element = newDoc.createElementNS("http://www.w3.org/DOM/Test", "dom:elem");

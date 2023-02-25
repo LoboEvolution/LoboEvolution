@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -29,7 +29,7 @@ import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.xpath.XPathNamespace;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.UserDataHandler;
+import org.loboevolution.html.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
 
 /**
@@ -260,6 +260,11 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	@Override
 	public boolean hasAttributes() {
 		return false;
+	}
+
+	@Override
+	public Node getFeature(String name, String version) {
+		return null;
 	}
 
 	@Override

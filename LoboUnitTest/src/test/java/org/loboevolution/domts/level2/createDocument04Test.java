@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -24,7 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -60,11 +60,10 @@ public class createDocument04Test extends LoboUnitTest {
         Document doc;
         DocumentType docType;
         DOMImplementation domImpl;
-        DocumentImpl aNewDoc;
+        Document aNewDoc;
         doc = sampleXmlFile("staffNS.xml");
-        aNewDoc = (DocumentImpl) sampleXmlFile("staffNS.xml");
+        aNewDoc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
-        aNewDoc.setTest(true);
         domImpl = aNewDoc.getImplementation();
         boolean success = false;
         try {

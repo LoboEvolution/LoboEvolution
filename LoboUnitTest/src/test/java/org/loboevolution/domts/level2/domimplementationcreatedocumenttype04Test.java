@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -24,7 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        DocumentImpl doc;
+        Document doc;
         DOMImplementation domImpl;
         String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
         String systemId = "dom2.dtd";
@@ -73,8 +73,8 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
         qualifiedNames.add("(");
         qualifiedNames.add(")");
 
-        doc = (DocumentImpl) sampleXmlFile("staffNS.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staffNS.xml");
+        
         domImpl = doc.getImplementation();
         for (int indexN10073 = 0; indexN10073 < qualifiedNames.size(); indexN10073++) {
             qualifiedName = qualifiedNames.get(indexN10073);

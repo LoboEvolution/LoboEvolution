@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -101,6 +101,19 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public Node adoptNode(Node source) {
 		NodeImpl node = (NodeImpl) source;
 		node.setOwnerDocument(this.document, true);
+		return node;
+	}
+
+	@Override
+	public Node renameNode(Node node, String namespaceURI, String qualifiedName) {
+		if (node instanceof Attr) {
+			return createAttributeNS(namespaceURI, qualifiedName);
+		}
+
+		if (node instanceof Element) {
+			return createElementNS(namespaceURI, qualifiedName);
+		}
+
 		return node;
 	}
 

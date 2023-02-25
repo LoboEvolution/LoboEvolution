@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -290,6 +290,11 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttributeNode(Attr idAttr, boolean isId) {
+		Attr checkAttr = getAttributeNode(idAttr.getName());
+		if(checkAttr == null) {
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
+		}
+
 		final AttrImpl attr = (AttrImpl)idAttr;
 		attr.setNameId(isId);
 	}

@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -49,7 +49,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 		this.context = context;
 	}
 
-	/** {@inheritDoc} */
+    /** {@inheritDoc} */
 	@Override
 	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException{
 		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
@@ -112,6 +112,11 @@ public class DOMImplementationImpl implements DOMImplementation {
 	public boolean hasFeature(String feature, String version) {
 		return ("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
 				|| ("1.0".equals(version) || "2.0".equals(version));
+	}
+
+	@Override
+	public Object getFeature(String core, String s) {
+		return null;
 	}
 
 	/**

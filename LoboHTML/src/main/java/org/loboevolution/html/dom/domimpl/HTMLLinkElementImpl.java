@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -35,7 +35,7 @@ import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.MimeType;
 import org.loboevolution.store.StyleStore;
-import org.w3c.dom.UserDataHandler;
+import org.loboevolution.html.dom.UserDataHandler;
 
 import java.io.File;
 import java.net.MalformedURLException;

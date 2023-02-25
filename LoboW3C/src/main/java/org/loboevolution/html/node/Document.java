@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -953,6 +953,8 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	XPathResult evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result);
 
     EntityReference createEntityReference(String ent1);
+
+	Node renameNode(Node node, String namespaceURI, String qualifiedName);
 
 	boolean isXml();
 

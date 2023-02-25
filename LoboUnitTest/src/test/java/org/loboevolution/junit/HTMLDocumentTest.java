@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -25,9 +25,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.*;
-import org.loboevolution.html.dom.domimpl.*;
+import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.*;
@@ -135,13 +137,13 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testCloneNode() {
         DOMImplementation domImpl = document.getImplementation();
         Document document = domImpl.createDocument(null, null, null);
-        DocumentImpl cloned = (DocumentImpl) document.cloneNode(false);
+        Document cloned = (Document) document.cloneNode(false);
         assertTrue(document.isEqualNode(cloned));
         assertSame(document.getClass(), cloned.getClass());
         DocumentType docType = domImpl.createDocumentType("html", null, null);
         document = domImpl.createDocument(null, null, docType);
         assertTrue(document.isEqualNode(document.cloneNode(true)));
-        cloned = (DocumentImpl) document.cloneNode(false);
+        cloned = (Document) document.cloneNode(false);
         assertNull(cloned.getDoctype());
         assertNull(cloned.getDocumentElement());
         assertSame(document.getClass(), cloned.getClass());

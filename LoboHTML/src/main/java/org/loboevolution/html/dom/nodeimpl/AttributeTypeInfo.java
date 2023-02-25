@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -18,7 +18,7 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.dom.domimpl;
+package org.loboevolution.html.dom.nodeimpl;
 
 import org.loboevolution.html.node.TypeInfo;
 
@@ -36,13 +36,13 @@ public class AttributeTypeInfo implements TypeInfo {
         if (isId) {
             return "ID";
         }
-        return null;
+        return "CDATA";
     }
 
     /** {@inheritDoc} */
     @Override
     public String getTypeNamespace() {
-        return "https://www.w3.org/TR/xml/";
+        return "http://www.w3.org/TR/REC-xml";
     }
 
     /** {@inheritDoc} */

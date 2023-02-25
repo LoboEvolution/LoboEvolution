@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -31,7 +31,7 @@ import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.style.CSSUtilities;
-import org.w3c.dom.UserDataHandler;
+import org.loboevolution.html.dom.UserDataHandler;
 
 /**
  * <p>HTMLStyleElementImpl class.</p>

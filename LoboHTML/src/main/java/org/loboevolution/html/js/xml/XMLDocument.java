@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -37,7 +37,7 @@ import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.type.DocumentReadyState;
 import org.loboevolution.type.VisibilityState;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.UserDataHandler;
+import org.loboevolution.html.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
 import org.xml.sax.SAXException;
 
@@ -175,6 +175,11 @@ public class XMLDocument implements Document {
 	@Override
 	public boolean hasAttributes() {
 		return doc.hasAttributes();
+	}
+
+	@Override
+	public Node getFeature(String name, String version) {
+		return doc.getFeature(name, version);
 	}
 
 	/** {@inheritDoc} */
@@ -371,6 +376,11 @@ public class XMLDocument implements Document {
 	@Override
 	public EntityReference createEntityReference(String ent1) {
 		return doc.createEntityReference(ent1);
+	}
+
+	@Override
+	public Node renameNode(Node node, String namespaceURI, String qualifiedName) {
+		return doc.renameNode(node, namespaceURI, qualifiedName);
 	}
 
 	/** {@inheritDoc} */

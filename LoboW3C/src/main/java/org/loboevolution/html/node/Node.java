@@ -1,6 +1,6 @@
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2022 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -21,8 +21,8 @@
 package org.loboevolution.html.node;
 
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.html.node.events.EventTarget;
-import org.w3c.dom.UserDataHandler;
 
 /**
  * Node is an interface from which a number of DOM API object types inherit. It
@@ -237,7 +237,7 @@ public interface Node extends EventTarget {
 	 *
 	 * @param key a {@link java.lang.String} object.
 	 * @param data a {@link java.lang.Object} object.
-	 * @param handler a {@link org.w3c.dom.UserDataHandler} object.
+	 * @param handler a {@link org.loboevolution.html.dom.UserDataHandler} object.
 	 * @return a {@link java.lang.Object} object.
 	 */
 	Object setUserData(final String key, final Object data, final UserDataHandler handler);
@@ -377,4 +377,6 @@ public interface Node extends EventTarget {
 	 * @return a boolean.
 	 */
 	boolean hasAttributes();
+
+    Node getFeature(String name, String version);
 }

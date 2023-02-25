@@ -1,7 +1,7 @@
 
 /*
  * GNU GENERAL LICENSE
- * Copyright (C) 2014 - 2021 Lobo Evolution
+ * Copyright (C) 2014 - 2023 Lobo Evolution
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -23,9 +23,8 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
-import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DOMImplementation;
 
 import static org.junit.Assert.assertTrue;
 
@@ -54,11 +53,11 @@ public class domimplementationfeaturexmlversion2Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        DocumentImpl doc;
+        Document doc;
         DOMImplementation domImpl;
         boolean state;
-        doc = (DocumentImpl) sampleXmlFile("staff.xml");
-        doc.setTest(true);
+        doc = sampleXmlFile("staff.xml");
+        
         domImpl = doc.getImplementation();
         state = domImpl.hasFeature("xml", "2.0");
         assertTrue("domimplementationFeaturexmlVersion2Assert", state);
