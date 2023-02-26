@@ -232,8 +232,8 @@ public class RBlock extends BaseElementRenderable {
 			blockFloatBounds = blockFloatBoundsSource.getChildBlockFloatingBounds(tentativeWidth);
 			viewportFloatBounds = new ShiftedFloatingBounds(blockFloatBounds, -insets.left, -insets.right, -insets.top);
 		}
-		int desiredViewportWidth = tentativeWidth - insetsTotalWidth;
-		final int desiredViewportHeight = tentativeHeight - insets.top - insets.bottom;
+		int desiredViewportWidth = "border-box".equals(rs.getBoxSizing()) ? tentativeWidth : tentativeWidth - insetsTotalWidth;
+		final int desiredViewportHeight = "border-box".equals(rs.getBoxSizing()) ? tentativeHeight : tentativeHeight - insets.top - insets.bottom;
 		final int maxY = vauto ? (declaredHeight == -1 ? availHeight : declaredHeight + paddingInsets.top) : -1;
 		try {
 			bodyLayout.layout(desiredViewportWidth, desiredViewportHeight, paddingInsets, maxY, viewportFloatBounds, sizeOnly);
