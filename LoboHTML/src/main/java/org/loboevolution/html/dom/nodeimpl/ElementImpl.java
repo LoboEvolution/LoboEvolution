@@ -1137,7 +1137,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		String width = currentStyle.getWidth();
 		String borderLeftWidth = currentStyle.getBorderLeftWidth();
 		String borderRightWidth = currentStyle.getBorderRightWidth();
@@ -1208,7 +1208,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		String height = currentStyle.getHeight();
 		String borderTopWidth = currentStyle.getBorderTopWidth();
 		String borderBottomWidth = currentStyle.getBorderBottomWidth();
