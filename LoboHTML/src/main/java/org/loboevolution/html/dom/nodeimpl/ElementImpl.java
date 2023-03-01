@@ -872,48 +872,75 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public DOMRect getBoundingClientRect() {
 
-		CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
+
+		CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final Window win = doc.getDefaultView();
 		final RenderState rs  = doc.getRenderState();
 		int width = calculateWidth(true, true);
 		int height = calculateHeight(true, true);
 		String position = currentStyle.getPosition();
-		int topLeft = currentStyle.getLength() > 0 ? 8 : 0;
-		int top = topLeft;
-		int left = topLeft;
+		int marginLeft =  HtmlValues.getPixelSize(currentStyle.getMarginLeft(), rs, win, 0);
+		int marginTop =  HtmlValues.getPixelSize(currentStyle.getMarginTop(), rs, win, 0);
 
-		if(CSSValues.ABSOLUTE.isEqual(position)){
-			top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
-			left = HtmlValues.getPixelSize(currentStyle.getLeft(), rs, win, 0);
+		int top = 8;
+		int left = 8;
+
+		if (getParentNode() == null && getChildElementCount() == 0) {
+			top = 0;
+			left = 0;
 		}
 
-		for (Node n = getParentNode(); n != null; n = n.getParentNode()) {
+		if(CSSValues.ABSOLUTE.isEqual(position)){
+			int topLeft = HtmlValues.getPixelSize(currentStyle.getWidth(), rs, win, 0);
+			top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
+			String leftTxt = currentStyle.getLeft();
 
-			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl) && CSSValues.ABSOLUTE.isEqual(position)) {
-				HTMLElementImpl p = (HTMLElementImpl) n;
-				CSSStyleDeclaration pCurrentStyle = p.getStyle();
-				String topTxt = pCurrentStyle.getTop();
-				String leftTxt = pCurrentStyle.getLeft();
-				int scrollTop = (int) p.getScrollTop();
-				int scrollLeft = (int) p.getScrollLeft();
-				if (Strings.isNotBlank(topTxt)) {
-					top += HtmlValues.getPixelSize(topTxt, rs, win, 0);
-				}
-
-				if (Strings.isNotBlank(leftTxt)) {
-					left += HtmlValues.getPixelSize(leftTxt, rs, win, 0);
-				}
-
-				top -= scrollTop;
-				left -= scrollLeft;
+			if (Strings.isBlank(leftTxt)) {
+				left = topLeft > 0 ? topLeft / 2 : topLeft;
+			} else {
+				left = HtmlValues.getPixelSize(leftTxt, rs, win, 0);
 			}
 		}
 
-		final HTMLElementImpl elem = ((HTMLElementImpl) this);
-		final int bottom = (int) (top + elem.getOffsetHeight());
-		final int right = left + 50;
-		return new DOMRectImpl(width, height, top, right, bottom, left);
+
+		for (Node n = getParentNode(); n != null; n = n.getParentNode()) {
+
+			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
+
+				HTMLElementImpl p = (HTMLElementImpl) n;
+				CSSStyleDeclaration pCurrentStyle = p.getCurrentStyle();
+				String positionTxt = pCurrentStyle.getPosition();
+				if (CSSValues.ABSOLUTE.isEqual(positionTxt)) {
+
+					String topTxt = pCurrentStyle.getTop();
+					String leftTxt = pCurrentStyle.getLeft();
+					int scrollTop = (int) p.getScrollTop();
+					int scrollLeft = (int) p.getScrollLeft();
+
+					if (Strings.isNotBlank(topTxt)) {
+						top = HtmlValues.getPixelSize(topTxt, rs, win, 0);
+					}
+
+					if (Strings.isNotBlank(leftTxt) && left == 0) {
+						left = HtmlValues.getPixelSize(leftTxt, rs, win, 0);
+					}
+
+					if (Strings.isNotBlank(pCurrentStyle.getWidth()) && !pCurrentStyle.getWidth().equals("0")) {
+						width = HtmlValues.getPixelSize(pCurrentStyle.getWidth(), rs, win, 0);
+					}
+
+					top = scrollTop > top ? scrollTop - top : top;
+					left = scrollLeft > left ? scrollLeft - left : left;
+					left = left == 0 ? 8 : left;
+				}
+			}
+		}
+
+		top = top + marginTop;
+		left = left + marginLeft;
+		final int bottom = top + height;
+		return new DOMRectImpl(width, height, top, bottom, left);
 	}
 
 	/** {@inheritDoc} */
@@ -926,7 +953,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			for (Node n = getParentNode(); n != null; n = n.getPreviousSibling()) {
 				if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
 					HTMLElementImpl p = (HTMLElementImpl) n;
-					CSSStyleDeclaration st = p.getStyle();
+					CSSStyleDeclaration st = p.getCurrentStyle();
 					display = st.getDisplay();
 				}
 			}
@@ -1108,26 +1135,34 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
     private boolean isHScrollable() {
         String overflow;
-        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
+        CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
         overflow = currentStyle.getOverflow();
         int widthChild = 0;
 
         for (final Node child : (NodeListImpl) this.getChildNodes()) {
-            if (child instanceof HTMLElementImpl) widthChild += ((HTMLElementImpl) child).getClientWidth();
-        }
-
+			if (child instanceof HTMLElementImpl) {
+				CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+				widthChild += ((HTMLElementImpl) child).getClientWidth();
+				widthChild += HtmlValues.getPixelSize(pCurrentStyle.getLeft(), null, document.getDefaultView(), 0);
+				widthChild += HtmlValues.getPixelSize(pCurrentStyle.getRight(), null, document.getDefaultView(), 0);
+			}
+		}
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (widthChild > this.getClientWidth());
     }
 
     private boolean isVScrollable() {
         String overflow;
-        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
+        CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
         overflow = currentStyle.getOverflow();
         int heightChild = 0;
 
-        for (final Node child : (NodeListImpl) this.getChildNodes()) {
-            if (child instanceof HTMLElementImpl) heightChild += ((HTMLElementImpl) child).getClientHeight();
-        }
+		for (final Node child : (NodeListImpl) this.getChildNodes()) {
+			if (child instanceof HTMLElementImpl) {
+				heightChild += ((HTMLElementImpl) child).getClientHeight();
+				CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+				heightChild += HtmlValues.getPixelSize(pCurrentStyle.getTop(), null, document.getDefaultView(), 0);
+			}
+		}
 
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
     }
@@ -1181,7 +1216,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			width = "100%";
 		}
 
-		int widthSize = HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, sizeWidth);
+		int widthSize = "-1px".equals(width) ? sizeWidth : HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, sizeWidth);
 
 		if ("border-box".equals(boxSizing)) {
 			padding = false;
