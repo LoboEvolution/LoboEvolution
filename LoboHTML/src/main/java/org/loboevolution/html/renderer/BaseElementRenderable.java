@@ -49,9 +49,6 @@ import java.util.logging.Level;
 
 /**
  * <p>Abstract BaseElementRenderable class.</p>
- *
- *
- *
  */
 public abstract class BaseElementRenderable extends BaseRCollection implements RElement, RenderableContainer, ImageObserver {
 
@@ -244,8 +241,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 		final int actualAvailWidth = availWidth - paddingWidth - borderWidth - marginWidth;
 		final int actualAvailHeight = availHeight - paddingHeight - borderHeight - marginHeight;
-		final Integer declaredWidth = getDeclaredWidth(rs, actualAvailWidth);
-		final Integer declaredHeight = getDeclaredHeight(rs, actualAvailHeight);
+		final Integer declaredWidth = getDeclaredWidth(actualAvailWidth);
+		final Integer declaredHeight = getDeclaredHeight(actualAvailHeight);
 
 		int autoMarginX = 0;
 		int autoMarginY = 0;
@@ -559,155 +556,43 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	/**
 	 * <p>Getter for the field declaredHeight.</p>
 	 *
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param actualAvailHeight a int.
+	 * @param actualAvailHeight a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	protected Integer getDeclaredHeight(RenderState renderState, int actualAvailHeight) {
+	public Integer getDeclaredHeight(int actualAvailHeight) {
 		Integer dh = this.declaredHeight;
 		if (INVALID_SIZE.equals(dh) || actualAvailHeight != this.lastAvailHeightForDeclared) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
-			final int dhInt = getDeclaredHeightImpl(renderState, actualAvailHeight);
-			dh = dhInt == -1 ? null : dhInt;
+			if (modelNode instanceof HTMLElementImpl) {
+				final int dhInt = getDeclaredHeightImpl((HTMLElementImpl) modelNode, actualAvailHeight);
+				dh = dhInt == -1 ? null : dhInt;
+			} else {
+				dh= -1;
+			}
 			this.declaredHeight = dh;
 		}
 		return dh;
 	}
 
 	/**
-	 * <p>getDeclaredHeightImpl.</p>
-	 *
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param availHeight a int.
-	 * @return a int.
-	 */
-	private int getDeclaredHeightImpl(RenderState renderState, int availHeight) {
-		Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLElementImpl) {
-			HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			CSSStyleDeclaration props = element.getCurrentStyle();
-			if (props == null) {
-				return -1;
-			}
-			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
-			String heightText = props.getHeight();
-
-			if ("inherit".equalsIgnoreCase(heightText)) {
-				heightText = element.getParentStyle().getHeight();
-			} else if ("initial".equalsIgnoreCase(heightText)) {
-				heightText = "100%";
-			}
-
-			int height = -1;
-
-			if (heightText != null) {
-				height = HtmlValues.getPixelSize(heightText, renderState, doc.getDefaultView(), -1, availHeight);
-			}
-
-			if (props.getMaxHeight() != null) {
-				int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getDefaultView(),-1, availHeight);
-
-				if (height == 0 || height > maxHeight) {
-					height = maxHeight;
-				}
-			}
-
-			if (props.getMinHeight() != null) {
-				int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(),-1, availHeight);
-
-				if (height == 0 || height < minHeight) {
-					height = minHeight;
-				}
-			}
-
-			return height;
-		} else {
-			return -1;
-		}
-	}
-
-	/**
 	 * <p>Getter for the field declaredWidth.</p>
 	 *
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param actualAvailWidth a int.
+	 * @param actualAvailWidth a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	protected Integer getDeclaredWidth(RenderState renderState, int actualAvailWidth) {
+	protected Integer getDeclaredWidth(int actualAvailWidth) {
 		Integer dw = this.declaredWidth;
 		if (INVALID_SIZE.equals(dw) || actualAvailWidth != this.lastAvailWidthForDeclared) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
-			final int dwInt = getDeclaredWidthImpl(renderState, actualAvailWidth);
-			dw = dwInt == -1 ? null : dwInt;
+			if (modelNode instanceof HTMLElementImpl) {
+				final int dwInt = getDeclaredWidthImpl((HTMLElementImpl) modelNode, actualAvailWidth);
+				dw = dwInt == -1 ? null : dwInt;
+			} else {
+				dw = -1;
+			}
 			this.declaredWidth = dw;
 		}
 		return dw;
-	}
-
-	private int getDeclaredWidthImpl(RenderState renderState, int availWidth) {
-		Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLElementImpl) {
-			HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
-			CSSStyleDeclaration props = element.getCurrentStyle();
-			if (props == null) {
-				return -1;
-			}
-			String widthText = props.getWidth();
-			final String textContent = element.getTextContent();
-
-			if ("inherit".equalsIgnoreCase(widthText)) {
-				widthText = element.getParentStyle().getWidth();
-			} else if ("initial".equalsIgnoreCase(widthText)) {
-				widthText = "100%";
-			}
-
-			int width = -1;
-
-			if (Strings.isNotBlank(widthText)) {
-				width = HtmlValues.getPixelSize(widthText, renderState, doc.getDefaultView(), -1, availWidth);
-			}
-
-			if (width == -1 && Strings.isNotBlank(textContent) && renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK) {
-				HtmlInsets paddingInsets = renderState.getPaddingInsets();
-				HtmlInsets marginInsets = renderState.getMarginInsets();
-				int right = 0;
-				int left = 0;
-
-				if (paddingInsets != null) {
-					right = right + paddingInsets.getRight();
-					left = left + paddingInsets.getLeft();
-				}
-
-				if (marginInsets != null) {
-					right = right + marginInsets.getRight();
-					left =  left + marginInsets.getLeft();
-				}
-
-				final int multi = (right == 0 && left == 0) ? 12 : 4;
-
-				width = (textContent.length() + right + left) * multi;
-			}
-
-			if (Strings.isNotBlank(props.getMaxWidth())) {
-				int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), renderState, doc.getDefaultView(), -1, availWidth);
-
-				if (width == -1 || width > maxWidth) {
-					width = maxWidth;
-				}
-			}
-
-			if (Strings.isNotBlank(props.getMinWidth())) {
-				int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
-
-				if (width == 0 || width < minWidth) {
-					width = minWidth;
-				}
-			}
-			return width;
-		} else {
-			return -1;
-		}
 	}
 
 	/** {@inheritDoc} */

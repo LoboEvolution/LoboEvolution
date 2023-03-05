@@ -191,8 +191,8 @@ public class RBlock extends BaseElementRenderable {
 		int insetsTotalHeight = insets.top + insets.bottom;
 		int actualAvailWidth = availWidth - paddingTotalWidth - insetsTotalWidth;
 		final int actualAvailHeight = availHeight - paddingTotalHeight - insetsTotalHeight;
-		final Integer dw = getDeclaredWidth(renderState, actualAvailWidth);
-		final Integer dh = getDeclaredHeight(renderState, actualAvailHeight);
+		final Integer dw = getDeclaredWidth(actualAvailWidth);
+		final Integer dh = getDeclaredHeight(actualAvailHeight);
 		int declaredWidth = dw != null ? dw : -1;
 		int declaredHeight = dh != null ? dh : -1;
 
@@ -242,7 +242,7 @@ public class RBlock extends BaseElementRenderable {
 			insets = getInsetsMarginBorder(hscroll, vscroll);
 			insetsTotalWidth = insets.left + insets.right;
 			actualAvailWidth = availWidth - paddingTotalWidth - insetsTotalWidth;
-			Integer newdw = getDeclaredWidth(renderState, actualAvailWidth);
+			Integer newdw = getDeclaredWidth(actualAvailWidth);
 			declaredWidth = newdw == null ? -1 : newdw;
 			desiredViewportWidth = tentativeWidth - insetsTotalWidth;
 			if (blockFloatBounds != null) {

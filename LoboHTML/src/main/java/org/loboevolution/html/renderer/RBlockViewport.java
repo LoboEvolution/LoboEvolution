@@ -296,12 +296,13 @@ public class RBlockViewport extends BaseRCollection {
 						.defaultOverflowY(block.defaultOverflowY)
 						.sizeOnly(this.sizeOnly)
 						.build());
+
 			} else {
 				renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 			}
 
-			final RenderState rs = element.getRenderState();
-			this.scheduleAbsDelayedPair(renderable, availContentWidth, availContentHeight, style, rs, absolute, fixed);
+			this.scheduleAbsDelayedPair(renderable, availContentWidth, availContentHeight, element, absolute, fixed);
+			if (renderable instanceof RBlock) {addLineAfterBlock((RBlock) renderable, false);}
 			return true;
 		} else {
 			return addElsewhereIfFloat(renderable, element, usesAlignAttribute, style);
@@ -1819,9 +1820,14 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param absolute if true, then position is absolute, else fixed
 	 */
 	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final int availContentWidth, final int availContentHeight,
-										final CSSStyleDeclaration style, final RenderState rs, final boolean absolute,
-										final boolean fixed) {
+										final HTMLElementImpl element, final boolean absolute, final boolean fixed) {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
+
+		final CSSStyleDeclaration style = element.getCurrentStyle();
+		final RenderState rs = element.getRenderState();
+		final int dhInt = getDeclaredHeightImpl(element, container.getInnerHeight());
+		final int dwInt = getDeclaredWidthImpl(element, container.getInnerWidth());
+
 		this.container.addDelayedPair(DelayedPair.builder().
 				modelNode(getModelNode()).
 				immediateContainingBlock(container).
@@ -1833,8 +1839,8 @@ public class RBlockViewport extends BaseRCollection {
 				right(style.getRight()).
 				top(style.getTop()).
 				bottom(style.getBottom()).
-				width(style.getWidth()).
-				height(style.getHeight()).
+				width(dwInt).
+				height(dhInt).
 				rs(rs).
 				initY(currentLine.getY() + currentLine.getHeight()).
 				initX(currentLine.getX()).
