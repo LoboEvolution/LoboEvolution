@@ -302,7 +302,11 @@ public class RBlockViewport extends BaseRCollection {
 			}
 
 			this.scheduleAbsDelayedPair(renderable, availContentWidth, availContentHeight, element, absolute, fixed);
-			if (renderable instanceof RBlock) {addLineAfterBlock((RBlock) renderable, false);}
+
+			if (renderable instanceof RBlock) {
+				addLineAfterBlock((RBlock) renderable, false);
+			}
+
 			return true;
 		} else {
 			return addElsewhereIfFloat(renderable, element, usesAlignAttribute, style);
@@ -1824,9 +1828,23 @@ public class RBlockViewport extends BaseRCollection {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
 
 		final CSSStyleDeclaration style = element.getCurrentStyle();
-		final RenderState rs = element.getRenderState();
-		final int dhInt = getDeclaredHeightImpl(element, container.getInnerHeight());
-		final int dwInt = getDeclaredWidthImpl(element, container.getInnerWidth());
+		int dhInt = getDeclaredHeightImpl(element, container.getInnerHeight());
+		int dwInt = getDeclaredWidthImpl(element, container.getInnerWidth());
+
+		Node nodeObj = element.getFirstChild();
+		if (nodeObj instanceof HTMLElementImpl) {
+			HTMLElementImpl elem = (HTMLElementImpl) nodeObj;
+			final int wclient = elem.getBoundingClientRect().getWidth();
+			final int hclient = elem.getBoundingClientRect().getHeight();
+			dwInt = wclient != -1 ? wclient : dwInt;
+			dhInt = hclient != -1 ? hclient : dhInt;
+			final RenderState rs = elem.getRenderState();
+			HtmlInsets marginInsets = rs.getMarginInsets();
+			if (marginInsets != null) {
+				dwInt += marginInsets.getLeft() + marginInsets.getRight();
+				dhInt += marginInsets.getTop() + marginInsets.getBottom();
+			}
+		}
 
 		this.container.addDelayedPair(DelayedPair.builder().
 				modelNode(getModelNode()).
@@ -1841,7 +1859,7 @@ public class RBlockViewport extends BaseRCollection {
 				bottom(style.getBottom()).
 				width(dwInt).
 				height(dhInt).
-				rs(rs).
+				rs(element.getRenderState()).
 				initY(currentLine.getY() + currentLine.getHeight()).
 				initX(currentLine.getX()).
 				isFixed(fixed).
@@ -1960,7 +1978,6 @@ public class RBlockViewport extends BaseRCollection {
 						maxY = rcMaxY;
 					}
 				} else {
-					System.err.println("Unhandled renderable: " + r);
 					Thread.dumpStack();
 				}
 			}
@@ -1995,7 +2012,6 @@ public class RBlockViewport extends BaseRCollection {
 						maxX = rcMaxX;
 					}
 				} else {
-					System.err.println("Unhandled renderable: " + r);
 					Thread.dumpStack();
 				}
 			}

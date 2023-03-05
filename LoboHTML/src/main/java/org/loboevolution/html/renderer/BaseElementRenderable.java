@@ -260,7 +260,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		}
 
 		HtmlInsets minsets = rs.getMarginInsets();
-
 		if (isRootBlock) {
 			Insets regularMarginInsets = RBlockViewport.ZERO_INSETS;
 
@@ -929,8 +928,18 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 		final Insets marginInsets = this.marginInsets;
 		if (marginInsets != null) {
-			totalWidth -= marginInsets.left + marginInsets.right;
-			totalHeight -= marginInsets.top + marginInsets.bottom;
+			final Object rootNode = this.modelNode;
+			RenderState rs = null;
+			if (rootNode instanceof HTMLElementImpl) {
+				HTMLElementImpl element = (HTMLElementImpl) rootNode;
+				rs = element.getRenderState();
+			}
+
+			if (rs == null || (RenderState.POSITION_ABSOLUTE != rs.getPosition() && RenderState.POSITION_FIXED != rs.getPosition())) {
+				totalWidth -= marginInsets.left + marginInsets.right;
+				totalHeight -= marginInsets.top + marginInsets.bottom;
+			}
+
 			startX += marginInsets.left;
 			startY += marginInsets.top;
 		}
@@ -1039,9 +1048,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			final int newStartX = startX + bleft;
 			final int newStartY = startY + btop;
 			final Rectangle clientRegion = new Rectangle(newStartX, newStartY, newTotalWidth, newTotalHeight);
-
-			// Paint borders if the clip bounds are not contained
-			// by the content area.
 			final Rectangle clipBounds = g.getClipBounds();
 			if (!clientRegion.contains(clipBounds)) {
 				final BorderInfo borderInfo = this.borderInfo;

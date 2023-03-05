@@ -872,7 +872,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public DOMRect getBoundingClientRect() {
 
-
 		CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final Window win = doc.getDefaultView();
@@ -1177,9 +1176,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		String borderLeftWidth = currentStyle.getBorderLeftWidth();
 		String borderRightWidth = currentStyle.getBorderRightWidth();
 		String boxSizing = currentStyle.getBoxSizing();
-		String position = currentStyle.getPosition();
 		String display = currentStyle.getDisplay();
-		String cssFloat = currentStyle.getFloat();
 		int sizeWidth = preferredSize.width;
 
 		if (getParentNode() == null || CSSValues.INLINE.isEqual(display) || CSSValues.NONE.isEqual(display)) {
@@ -1194,21 +1191,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			width = "-1px";
 		}
 
-		final Node nodeObj = getParentNode();
+		Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
 			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
-			if(elem.getClientHeight() != -1) {
-				sizeWidth = elem.getClientWidth();
-			}
-		}
-
-		if ((CSSValues.RIGHT.isEqual(cssFloat) || CSSValues.LEFT.isEqual(cssFloat)) ||
-				(CSSValues.ABSOLUTE.isEqual(position))) {
-
-			if (Strings.isNotBlank(getTextContent())) {
-				width = String.valueOf(getTextContent().length() * 4);
-			} else {
-				width = "0px";
+			final int client = elem.getClientWidth();
+			if(client != -1) {
+				sizeWidth = client;
 			}
 		}
 
@@ -1266,8 +1254,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
 			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
-			if(elem.getClientHeight() != -1) {
-				sizeHeight = elem.getClientHeight();
+			final int client = elem.getClientHeight();
+			if(client!= -1) {
+				sizeHeight = client;
 			}
 		}
 
