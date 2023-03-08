@@ -58,6 +58,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 /**
@@ -1226,7 +1227,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return widthSize;
 	}
 
-	protected int calculateHeight(boolean border, boolean padding) {
+	public int calculateHeight(boolean border, boolean padding) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
@@ -1268,7 +1269,20 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				if (Strings.isBlank(getTextContent())) {
 					height = "0px";
 				} else {
-					height = "18px";
+					AtomicInteger h = new AtomicInteger();
+
+					nodeList.forEach(child -> {
+						final int type = child.getNodeType();
+						switch (type) {
+							case Node.CDATA_SECTION_NODE:
+							case Node.TEXT_NODE:
+								h.addAndGet(18);
+								break;
+							default:
+								break;
+						}
+					});
+					height = h.get() + "px";
 				}
 				break;
 			default:

@@ -632,12 +632,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             return CSSValues.AUTO.getValue();
         }
 
-        if (Strings.isCssNotBlank(element.getTextContent()) && Strings.isCssBlank(cssheight)) {
-            return "-1px";
-        }
 
-        final int height = HtmlValues.getPixelSize(cssheight, renderState, window, -1, availHeight);
-        return height + "px";
+        return element.calculateHeight(false, false) + "px";
     }
 
      /** {@inheritDoc} */
