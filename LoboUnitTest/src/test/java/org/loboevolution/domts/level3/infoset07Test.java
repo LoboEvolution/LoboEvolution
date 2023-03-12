@@ -88,8 +88,8 @@ public class infoset07Test extends LoboUnitTest {
             }
             throw ex;
         }
-        docElem.setAttribute("LegalNameࢎ", "foo");
-        attr = docElem.getAttributeNode("LegalNameࢎ");
+        docElem.setAttribute("LegalName", "foo");
+        attr = docElem.getAttributeNode("LegalNamࢎ");
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);

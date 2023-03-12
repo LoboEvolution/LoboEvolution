@@ -81,7 +81,7 @@ public class wellformed04Test extends LoboUnitTest {
             }
             throw ex;
         }
-        docElem.setAttributeNS(nullNS, "LegalNameࢎ", "foo");
+        docElem.setAttributeNS(nullNS, "LegalName", "foo");
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("well-formed", Boolean.FALSE);

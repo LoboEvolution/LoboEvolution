@@ -304,7 +304,7 @@ public class RBlockViewport extends BaseRCollection {
 			this.scheduleAbsDelayedPair(renderable, availContentWidth, availContentHeight, element, absolute, fixed);
 
 			if (renderable instanceof RBlock) {
-				addLineAfterBlock((RBlock) renderable, false);
+				//addLineAfterBlock((RBlock) renderable, false);
 			}
 
 			return true;
