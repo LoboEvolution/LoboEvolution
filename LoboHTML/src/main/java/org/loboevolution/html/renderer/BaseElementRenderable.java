@@ -442,24 +442,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 */
 	protected abstract void doLayout(int availWidth, int availHeight, boolean sizeOnly);
 
-	/**
-	 * <p>getAlignmentX.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getAlignmentX() {
-		return 0.0f;
-	}
-
-	/**
-	 * <p>getAlignmentY.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getAlignmentY() {
-		return 0.0f;
-	}
-
 	private Color getBorderBottomColor() {
 		final Color c = this.borderBottomColor;
 		return c == null ? Color.black : c;

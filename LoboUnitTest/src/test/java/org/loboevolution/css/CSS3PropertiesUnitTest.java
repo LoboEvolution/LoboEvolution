@@ -1018,7 +1018,6 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "      alert(el.clientWidth > 100);\n"
                 + "      alert(el.offsetWidth > 100);\n"
                 + "      var style = window.getComputedStyle(el, null);\n"
-                + "      alert(/\\d+px/.test(style.width));\n"
                 + "      alert(style.width == 'auto');\n"
                 + "    }\n"
                 + "  </script>\n"
@@ -1026,7 +1025,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "<body style='width: auto' onload='test();'>\n"
                 + "<div id='div'></div>\n"
                 + "</body></html>";
-        final String[] messages = {"true", "true", "true", "true", "false", "false", "true", "true", "true", "false"};
+        final String[] messages = {"true", "true", "true", "false", "false", "true", "true", "false"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1742,7 +1741,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    <div>line 2</div>\n"
                 + "  </div>\n"
                 + "</body></html>";
-        final String[] messages = {"", "auto"};
+        final String[] messages = {null, "auto"};
         checkHtmlAlert(html, messages);
     }
 

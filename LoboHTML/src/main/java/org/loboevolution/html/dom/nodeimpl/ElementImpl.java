@@ -80,6 +80,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public ElementImpl(final String name) {
 		this.name = name;
 		this.map = new NamedNodeMapImpl(this, new NodeListImpl());
+
 	}
 
 	/** {@inheritDoc} */
@@ -906,7 +907,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		for (Node n = getParentNode(); n != null; n = n.getParentNode()) {
 
-			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
+			if (!(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
 
 				HTMLElementImpl p = (HTMLElementImpl) n;
 				CSSStyleDeclaration pCurrentStyle = p.getCurrentStyle();
@@ -933,6 +934,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 					top = scrollTop > top ? scrollTop - top : top;
 					left = scrollLeft > left ? scrollLeft - left : left;
 					left = left == 0 ? 8 : left;
+				} else {
+					if (Strings.isNotBlank(pCurrentStyle.getMarginTop())) {
+						top = 0;
+						marginTop += HtmlValues.getPixelSize(pCurrentStyle.getMarginTop(), rs, win, 0);
+					}
+					if (Strings.isNotBlank(pCurrentStyle.getMarginLeft())) {
+						left = 0;
+						marginLeft += HtmlValues.getPixelSize(pCurrentStyle.getMarginLeft(), rs, win, 0);
+					}
 				}
 			}
 		}
@@ -1167,7 +1177,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
     }
 
-	protected int calculateWidth(boolean border, boolean padding) {
+	public int calculateWidth(boolean border, boolean padding) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
@@ -1261,34 +1271,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			}
 		}
 
-		switch (height) {
-			case "auto":
-				height = "100%";
-				break;
-			case "-1px":
-				if (Strings.isBlank(getTextContent())) {
-					height = "0px";
-				} else {
-					AtomicInteger h = new AtomicInteger();
-
-					nodeList.forEach(child -> {
-						final int type = child.getNodeType();
-						switch (type) {
-							case Node.CDATA_SECTION_NODE:
-							case Node.TEXT_NODE:
-								h.addAndGet(18);
-								break;
-							default:
-								break;
-						}
-					});
-					height = h.get() + "px";
-				}
-				break;
-			default:
-				break;
-		}
-
+		height = "auto".equals(height) ? "100%" : "-1px".equals(height) ? textHeight(this) + "px" : height;
 		int heightSize = HtmlValues.getPixelSize(height, null, doc.getDefaultView(), -1, sizeHeight);
 
 		if ("border-box".equals(boxSizing)) {
@@ -1309,5 +1292,26 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		return heightSize;
+	}
+
+
+
+	private int textHeight(ElementImpl elm) {
+		AtomicInteger h = new AtomicInteger(0);
+
+		elm.getNodeList().forEach(child -> {
+			final int type = child.getNodeType();
+			switch (type) {
+				case Node.CDATA_SECTION_NODE:
+				case Node.TEXT_NODE:
+					h.addAndGet(18);
+					break;
+				case Node.ELEMENT_NODE:
+					h.addAndGet(textHeight((ElementImpl) child));
+				default:
+					break;
+			}
+		});
+		return h.get();
 	}
 }
