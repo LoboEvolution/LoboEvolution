@@ -38,6 +38,7 @@ import org.loboevolution.store.StyleStore;
 import org.loboevolution.html.dom.UserDataHandler;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -191,7 +192,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 					}
 				}
 
-			} catch (final MalformedURLException mfe) {
+			} catch (final MalformedURLException | FileNotFoundException mfe) {
 				this.warn("Will not parse CSS. URI=[" + getHref() + "] with BaseURI=[" + baseURI + "] does not appear to be a valid URI.");
 			} catch (final Throwable err) {
 				this.warn("Unable to parse CSS. URI=[" + getHref() + "].", err);
