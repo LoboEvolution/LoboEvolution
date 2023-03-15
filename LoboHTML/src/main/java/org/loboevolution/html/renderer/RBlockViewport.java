@@ -302,13 +302,9 @@ public class RBlockViewport extends BaseRCollection {
 			}
 
 			this.scheduleAbsDelayedPair(renderable, availContentWidth, availContentHeight, element, absolute, fixed);
-
-			if (renderable instanceof RBlock) {
-				//addLineAfterBlock((RBlock) renderable, false);
-			}
-
 			return true;
 		} else {
+			renderable.setupRelativePosition(container);
 			return addElsewhereIfFloat(renderable, element, usesAlignAttribute, style);
 		}
 	}
