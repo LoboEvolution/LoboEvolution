@@ -20,12 +20,12 @@
 
 package org.loboevolution.html.dom.input;
 
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;
 

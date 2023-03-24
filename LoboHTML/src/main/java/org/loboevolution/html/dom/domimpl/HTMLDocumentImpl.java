@@ -22,14 +22,14 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.BodyFilter;
-import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.HeadFilter;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
@@ -47,7 +47,6 @@ import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.style.StyleSheetAggregator;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Function;
 import org.loboevolution.html.dom.UserDataHandler;
@@ -97,13 +96,15 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private final UserAgentContext ucontext;
 
+	private final HtmlRendererConfig config;
+
 	/**
 	 * <p>Constructor for HTMLDocumentImpl.</p>
 	 *
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param rcontext a {@link HtmlRendererContext} object.
 	 */
 	public HTMLDocumentImpl(HtmlRendererContext rcontext) {
-		this(rcontext.getUserAgentContext(), rcontext, null, null);
+		this(rcontext.getUserAgentContext(), rcontext, null, null, null);
 	}
 
 	/**
@@ -112,22 +113,24 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
 	public HTMLDocumentImpl(UserAgentContext ucontext) {
-		this(ucontext, null, null, null);
+		this(ucontext, null, null, null, null);
 	}
 
 	/**
 	 * <p>Constructor for HTMLDocumentImpl.</p>
 	 *
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param rcontext a {@link HtmlRendererContext} object.
+	 * @param config a {@link HtmlRendererConfig} object.
 	 * @param reader a {@link org.loboevolution.html.io.WritableLineReader} object.
 	 * @param documentURI a {@link java.lang.String} object.
 	 */
-	public HTMLDocumentImpl(final UserAgentContext ucontext, final HtmlRendererContext rcontext,
+	public HTMLDocumentImpl(final UserAgentContext ucontext, final HtmlRendererContext rcontext, final HtmlRendererConfig config,
 			WritableLineReader reader, String documentURI) {
 		this.rcontext = rcontext;
 		this.ucontext = ucontext;
 		this.reader = reader;
+		this.config = config;
 		try {
 			if (Strings.isNotBlank(documentURI)) {
 				final URL docURL = new URL(documentURI);
@@ -144,7 +147,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 		this.document = this;
 		// Get WindowImpl object
-		setWindow(rcontext, ucontext);
+		setWindow(rcontext, ucontext, config);
 		WindowImpl window = (WindowImpl)getDefaultView();
 		window.setDocument(this);
 	}
@@ -685,5 +688,14 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 */
 	public UserAgentContext getUcontext() {
 		return ucontext;
+	}
+
+	/**
+	 * <p>Getter for the field <code>HtmlRendererConfig</code>.</p>
+	 *
+	 * @return a {@link HtmlRendererConfig} object.
+	 */
+	public HtmlRendererConfig getConfig() {
+		return config;
 	}
 }

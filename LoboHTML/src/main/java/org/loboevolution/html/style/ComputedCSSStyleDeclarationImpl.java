@@ -21,15 +21,15 @@
 package org.loboevolution.html.style;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;
@@ -582,7 +582,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getFontWeight() {
-        final String font = FontValues.getFontWeight(style.getFontWeight(), null);
+        final String font = FontValues.getFontWeight(style.getFontWeight(), null, false);
         return Strings.isBlank(font) ?CSSValues.BOLD400.getValue()  : font;
     }
 

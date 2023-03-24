@@ -22,7 +22,7 @@ package org.loboevolution.menu.tools.pref;
 
 import com.jtattoo.plaf.lobo.LoboCheckBox;
 import com.jtattoo.plaf.lobo.LoboPanel;
-import com.loboevolution.store.laf.LAFSettings;
+import org.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.gui.ColorComboBox;
 import org.loboevolution.gui.FontLabel;
 import org.loboevolution.gui.SwingTasks;

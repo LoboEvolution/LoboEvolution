@@ -660,4 +660,6 @@ public interface Window
      * @return a {@link java.util.List} object.
      */
     List<String> getMsg();
+
+    Object getConfig();
 }

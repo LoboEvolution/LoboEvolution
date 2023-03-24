@@ -27,6 +27,8 @@ import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.UserDataHandler;
@@ -39,7 +41,6 @@ import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.xpath.XPathNSResolver;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
@@ -503,12 +504,26 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>getHtmlRendererContext.</p>
 	 *
-	 * @return a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @return a {@link HtmlRendererContext} object.
 	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		final Object doc = this.document;
 		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getHtmlRendererContext();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * <p>getHtmlRendererContext.</p>
+	 *
+	 * @return a {@link HtmlRendererConfig} object.
+	 */
+	public HtmlRendererConfig getHtmlRendererConfig() {
+		final Object doc = this.document;
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getConfig();
 		} else {
 			return null;
 		}

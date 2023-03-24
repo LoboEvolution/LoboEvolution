@@ -21,11 +21,11 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;

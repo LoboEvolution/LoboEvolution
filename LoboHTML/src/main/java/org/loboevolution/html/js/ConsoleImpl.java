@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.js;
 
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.js.storage.SessionStorage;
 import org.loboevolution.html.node.js.console.Console;
 
@@ -42,8 +43,8 @@ public class ConsoleImpl implements Console {
 
     private final SessionStorage sessionStorage;
 
-    public ConsoleImpl() {
-        this.sessionStorage = new SessionStorage();
+    public ConsoleImpl(HtmlRendererConfig config) {
+        this.sessionStorage = new SessionStorage(config);
     }
 
 	/** {@inheritDoc}*/

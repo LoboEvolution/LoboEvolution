@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.renderer;
 
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
@@ -27,7 +28,6 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
 
 import java.awt.*;
@@ -137,12 +137,6 @@ public class HtmlController {
 					return false;
 				}
 			}
-			final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-			if (rcontext != null) {
-				if (!rcontext.onDoubleClick(uiElement, event)) {
-					return false;
-				}
-			}
 		}
 		final ModelNode parent = node.getParentModelNode();
 		if (parent == null) {
@@ -186,12 +180,6 @@ public class HtmlController {
 			uiElement.dispatchEvent(uiElement, evt);
 			if (f != null) {
 				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
-					return false;
-				}
-			}
-			final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-			if (rcontext != null) {
-				if (!rcontext.onMouseClick(uiElement, event)) {
 					return false;
 				}
 			}
@@ -304,10 +292,6 @@ public class HtmlController {
 					evt.setIe(event);
 					Executor.executeFunction(uiElement, f, evt, new Object[0]);
 				}
-				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-				if (rcontext != null) {
-					rcontext.onMouseOut(uiElement, event);
-				}
 			}
 			node = node.getParentModelNode();
 		}
@@ -336,10 +320,6 @@ public class HtmlController {
 					evt.initMouseEvent("mouseover", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 					evt.setIe(event);
 					Executor.executeFunction(uiElement, f, evt, new Object[0]);
-				}
-				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-				if (rcontext != null) {
-					rcontext.onMouseOver(uiElement, event);
 				}
 			}
 			node = node.getParentModelNode();
@@ -372,10 +352,6 @@ public class HtmlController {
 					evt.initMouseEvent("mouseover", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 					evt.setIe(event);
 					Executor.executeFunction(uiElement, f, evt, new Object[0]);
-				}
-				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-				if (rcontext != null) {
-					rcontext.onMouseOver(uiElement, event);
 				}
 			}
 			node = node.getParentModelNode();

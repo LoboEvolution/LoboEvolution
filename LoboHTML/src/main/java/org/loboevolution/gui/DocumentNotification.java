@@ -18,7 +18,7 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.gui;
+package org.loboevolution.gui;
 
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 

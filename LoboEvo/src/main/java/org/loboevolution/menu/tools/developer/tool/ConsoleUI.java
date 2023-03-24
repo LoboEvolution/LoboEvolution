@@ -23,6 +23,7 @@ package org.loboevolution.menu.tools.developer.tool;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.loboevolution.config.HtmlRendererConfigImpl;
 import org.loboevolution.html.js.storage.SessionStorage;
 import org.loboevolution.menu.tools.AbstractToolsUI;
 
@@ -46,7 +47,7 @@ public class ConsoleUI extends AbstractToolsUI {
     private RTextScrollPane addTextArea() {
         final RSyntaxTextArea textArea = new RSyntaxTextArea();
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL);
-        SessionStorage storage = new SessionStorage();
+        SessionStorage storage = new SessionStorage(new HtmlRendererConfigImpl());
         textArea.setText(String.valueOf(storage.getItem("log")));
 
         final RTextScrollPane scrollBar = new RTextScrollPane(textArea);

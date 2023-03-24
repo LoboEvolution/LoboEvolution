@@ -22,6 +22,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMImplementation;
@@ -41,7 +42,7 @@ public class hasFeature02Test extends LoboUnitTest {
     public void runTest() {
         DOMImplementation impl;
         boolean state;
-        impl = new DOMImplementationImpl(new UserAgentContext(true));
+        impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         state = impl.hasFeature("cOrE", "3.0");
         assertTrue("hasCore30", state);
     }

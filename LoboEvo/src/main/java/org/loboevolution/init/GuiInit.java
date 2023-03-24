@@ -20,17 +20,15 @@
 
 package org.loboevolution.init;
 
-import java.io.File;
 import java.util.Properties;
 
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-import com.loboevolution.store.laf.LAFSettings;
+import org.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.install.ProgressBar;
 import org.loboevolution.store.DatabseSQLite;
-import org.loboevolution.store.SQLiteCommon;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.jtattoo.plaf.aero.AeroLookAndFeel;

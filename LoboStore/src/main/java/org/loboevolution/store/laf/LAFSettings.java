@@ -18,14 +18,13 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package com.loboevolution.store.laf;
+package org.loboevolution.store.laf;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.loboevolution.store.DatabseSQLite;
-import org.loboevolution.store.SQLiteCommon;
 
 import java.awt.*;
 import java.io.Serializable;

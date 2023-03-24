@@ -30,8 +30,9 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.BrowserPanel;
 import org.loboevolution.component.ITabbedPane;
+import org.loboevolution.component.NavigatorFrame;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.store.TabStore;
 
@@ -66,7 +67,7 @@ public class OpenFileAction extends AbstractAction {
 			final int indexPanel = panel.getTabbedPane().getIndex() +1;
 			final ITabbedPane tabbedPane = panel.getTabbedPane();
 			tabbedPane.setComponentPopupMenu(panel);
-			HtmlPanel hpanel = HtmlPanel.createHtmlPanel(panel, url);
+			HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 			tabbedPane.insertTab(title, null, hpanel, title, indexPanel);

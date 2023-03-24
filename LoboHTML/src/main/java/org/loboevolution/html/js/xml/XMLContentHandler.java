@@ -21,6 +21,7 @@
 package org.loboevolution.html.js.xml;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
@@ -175,7 +176,7 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
     }
 
     private Document createDocument(String uri, String qName) {
-        UserAgentContext context = new UserAgentContext();
+        UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig());
         context.setUserAgentEnabled(false);
         DOMImplementationImpl domImpl = new DOMImplementationImpl(context);
         DocumentType doctype = domImpl.createDocumentType("HTML", null, null);

@@ -22,12 +22,12 @@ package org.loboevolution.html.style;
 
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.GradientInfo;
 import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.store.GeneralStore;
 
 import java.awt.*;
 import java.awt.MultipleGradientPaint.CycleMethod;
@@ -258,7 +258,8 @@ public class GradientStyle {
 	private int getHeight(HTMLDocumentImpl document, CSSStyleDeclaration props, RenderState renderState) {
 		int heightSize = HtmlValues.getPixelSize(props.getHeight(), renderState, document.getDefaultView(), -1);
 		if (heightSize < 0) {
-			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
+			final HtmlRendererConfig config = document.getConfig();
+			final Rectangle initialWindowBounds = config.getInitialWindowBounds();
 			heightSize = (int)initialWindowBounds.getHeight() * 2;
 		}	
 		return heightSize;
@@ -267,7 +268,8 @@ public class GradientStyle {
 	private int getWidth(HTMLDocumentImpl document, CSSStyleDeclaration props, RenderState renderState) {
 		int widthSize = HtmlValues.getPixelSize(props.getWidth(), renderState, document.getDefaultView(),-1);
 		if (widthSize < 0) {
-			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
+			final HtmlRendererConfig config = document.getConfig();
+			final Rectangle initialWindowBounds = config.getInitialWindowBounds();
 			widthSize = (int)initialWindowBounds.getWidth() * 2;
 		}	
 		return widthSize;

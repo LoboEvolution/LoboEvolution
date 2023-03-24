@@ -26,7 +26,7 @@ import org.loboevolution.common.IORoutines;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.input.Autocomplete;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.img.ImageViewer;
 import org.loboevolution.net.MimeType;
@@ -136,9 +136,9 @@ public class GoAction extends AbstractAction {
 		final int indexPanel = tabbedPane.getSelectedIndex();
 		HtmlPanel htmlPanel;
 		if (httpcon == null) {
-			htmlPanel = HtmlPanel.createHtmlPanel(panel, text);
+			htmlPanel = NavigatorFrame.createHtmlPanel(panel, text);
 		} else {
-			htmlPanel = HtmlPanel.createHtmlPanel(panel, text, httpcon);
+			htmlPanel = NavigatorFrame.createHtmlPanel(panel, text, httpcon);
 		}
 
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();

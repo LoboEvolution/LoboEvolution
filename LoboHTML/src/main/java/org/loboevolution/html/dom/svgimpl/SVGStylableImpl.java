@@ -356,7 +356,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 */
 	public Font getFont() {
 		CSSStyleDeclaration style = getStyle();
-		FontKey key = FontValues.getDefaultFontKey();
+		FontKey key = FontValues.getDefaultFontKey(getHtmlRendererConfig());
 		key.setFontStyle(CSSValues.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		key.setFontWeight(CSSValues.BOLD.getValue());

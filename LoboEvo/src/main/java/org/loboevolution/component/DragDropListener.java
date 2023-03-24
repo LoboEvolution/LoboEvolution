@@ -22,7 +22,7 @@ package org.loboevolution.component;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.store.TabStore;
 
 import java.awt.*;
@@ -81,7 +81,7 @@ public class DragDropListener implements DropTargetListener {
 		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(bpanel);
 		int index = TabStore.getTabs().size();
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, fullURL);
+		final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(bpanel, fullURL);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.insertTab(title, null, hpanel, title, index+1);

@@ -22,6 +22,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMErrorHandler;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -57,7 +58,7 @@ public class domconfigerrorhandler2Test extends LoboUnitTest {
 
         String parameter = "error-handler";
         DOMErrorHandler state;
-        domImpl = new DOMImplementationImpl(new UserAgentContext(true));
+        domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         /*DOMErrorHandler */

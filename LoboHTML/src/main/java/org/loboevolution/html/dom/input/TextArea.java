@@ -20,7 +20,6 @@
 
 package org.loboevolution.html.dom.input;
 
-import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.TextAreaControl;
@@ -60,7 +59,7 @@ public class TextArea extends BasicInput {
 		setjComponent(jtArea);
 		
 		final Font font = jtArea.getFont();
-		jtArea.setFont(font.deriveFont(new LAFSettings().getInstance().getFontSize()));
+		jtArea.setFont(font.deriveFont(modelNode.getHtmlRendererConfig().getFontSize()));
 		jtArea.setDocument(new LimitedDocument());
 		jtArea.setText(modelNode.getValue());
 		jtArea.setSelectionColor(Color.BLUE);

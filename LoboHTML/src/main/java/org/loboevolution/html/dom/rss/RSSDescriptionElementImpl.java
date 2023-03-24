@@ -45,7 +45,7 @@ public class RSSDescriptionElementImpl extends RSSElement implements RSSDrawable
 	@Override
 	public void draw(Graphics2D graphics, int y) {
 		String text = getText();
-		FontKey key = FontValues.getDefaultFontKey();
+		FontKey key = FontValues.getDefaultFontKey(getHtmlRendererConfig());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		Font font = FontFactory.getInstance().getFont(key);
 		graphics.setFont(font);

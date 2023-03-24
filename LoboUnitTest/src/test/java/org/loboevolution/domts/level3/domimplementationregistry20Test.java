@@ -24,6 +24,7 @@ package org.loboevolution.domts.level3;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
 import org.loboevolution.html.node.DOMImplementation;
@@ -61,7 +62,7 @@ public class domimplementationregistry20Test extends LoboUnitTest {
         length = (int) domImplList.getLength();
 
         if (length == 0) {
-            baseImpl = new DOMImplementationImpl(new UserAgentContext(true));
+            baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasFeature = baseImpl.hasFeature("HTML", nullVersion);
             assertFalse("baseImplSupportsHTML", hasFeature);
         } else {

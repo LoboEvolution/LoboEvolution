@@ -22,15 +22,15 @@ package org.loboevolution.html.style;
 
 import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
-import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.net.HttpNetwork;
@@ -200,14 +200,16 @@ public class HtmlValues {
                 return (int) Math.round(dpi * inches);
 			case "em":
 				final FontFactory FONT_FACTORY = FontFactory.getInstance();
-				final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey());
+				final WindowImpl win = (WindowImpl) window;
+				final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey(win.getConfig()));
 				final Font f = (renderState == null) ? DEFAULT_FONT : renderState.getFont();
 				final int fontSize = f.getSize();
 				final double pixelSize = fontSize * dpi / 96;
 				return (int) Math.round(pixelSize * Double.parseDouble(text));
 			case "rem":
-					final float fs = new LAFSettings().getInstance().getFontSize();
-					return (int) Math.round(fs * Double.parseDouble(text));
+				final WindowImpl win2 = (WindowImpl) window;
+				final float fs = win2.getConfig() != null ? win2.getConfig().getFontSize() : 16.0f;
+				return (int) Math.round(fs * Double.parseDouble(text));
 			case "pt":
 				return inches(72, dpi, text);
 			case "pc":

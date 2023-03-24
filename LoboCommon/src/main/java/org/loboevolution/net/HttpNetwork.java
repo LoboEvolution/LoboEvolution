@@ -33,10 +33,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
@@ -228,6 +225,36 @@ public class HttpNetwork {
 			logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
 	    }
 		return "";
+	}
+
+	public static String sourceResponse(String scriptURI, String type) {
+		URL url;
+		try {
+			if ("CSS".equals(type)) {
+				try {
+					if (scriptURI.startsWith("//")) {
+						scriptURI = "http:" + scriptURI;
+					}
+					url = new URL(scriptURI);
+				} catch (MalformedURLException mfu) {
+					int idx = scriptURI.indexOf(':');
+					if (idx == -1 || idx == 1) {
+						url = new URL("file:" + scriptURI);
+					} else {
+						throw mfu;
+					}
+				}
+			} else {
+				url = new URL(scriptURI);
+				URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
+				url = uri.toURL();
+			}
+
+			return getSource(url.toString());
+		} catch (Exception err) {
+			logger.log(Level.SEVERE, err.getMessage(), err);
+			return "";
+		}
 	}
 
 	/**

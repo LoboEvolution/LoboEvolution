@@ -20,10 +20,9 @@
 
 package org.loboevolution.http;
 
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.net.Cookie;
-import org.loboevolution.store.CookieStore;
-import org.loboevolution.store.GeneralStore;
 
 import java.net.Proxy;
 import java.net.URL;
@@ -36,14 +35,19 @@ public class UserAgentContext {
 
 	private GeneralInfo settings;
 
+	private final HtmlRendererConfig config;
+
 	private boolean userAgentEnabled = false;
 
-	public UserAgentContext(){
-		settings = GeneralStore.getGeneralInfo();
+	public UserAgentContext(HtmlRendererConfig config){
+		this.config = config;
+		settings = config.getGeneralInfo();
 	}
 
-	public UserAgentContext(boolean test){
-		settings = !test ? GeneralStore.getGeneralInfo() : GeneralInfo.builder().build();
+	public UserAgentContext(HtmlRendererConfig config, boolean test) {
+		this.config = config;
+		settings = !test ? config.getGeneralInfo() : new GeneralInfo();
+		if (settings == null) settings = new GeneralInfo();
 	}
 
 	/**
@@ -103,7 +107,7 @@ public class UserAgentContext {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getCookie(URL url) {
-		List<Cookie> cookies = CookieStore.getCookies(url.getHost(), url.getPath());
+		List<Cookie> cookies = config.getCookies(url.getHost(), url.getPath());
 		StringBuilder cookieText = new StringBuilder();
 		for (Cookie cookie : cookies) {
 			cookieText.append(cookie.getName());
@@ -121,6 +125,6 @@ public class UserAgentContext {
 	 * @param cookieSpec a {@link java.lang.String} object.
 	 */
 	public void setCookie(URL url, String cookieSpec) {
-		CookieStore.saveCookie(url.toString(), cookieSpec);
+		config.saveCookie(url.toString(), cookieSpec);
 	}
 }

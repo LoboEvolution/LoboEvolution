@@ -33,17 +33,18 @@ import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.selector.*;
 import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.node.js.Window;
-import org.loboevolution.store.LinkStore;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -414,8 +415,9 @@ public class StyleSheetAggregator {
 
 		case "visited":
 			if (element instanceof HTMLLinkElement) {
-				HTMLLinkElement elem = (HTMLLinkElement)element;
-				return LinkStore.isVisited(elem.getHref());
+				HTMLLinkElementImpl elem = (HTMLLinkElementImpl)element;
+				final HtmlRendererConfig config = elem.getHtmlRendererConfig();
+				return config.isVisited(elem.getHref());
 			} else{
 				return false;
 			}

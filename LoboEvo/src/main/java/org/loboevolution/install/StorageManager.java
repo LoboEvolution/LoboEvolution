@@ -22,9 +22,9 @@ package org.loboevolution.install;
 
 import org.loboevolution.common.Files;
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.init.GuiInit;
 import org.loboevolution.store.DatabseSQLite;
-import org.loboevolution.store.DesktopStore;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,18 +67,18 @@ public class StorageManager extends SwingWorker<Void, Void> {
 
 		try {
 			DatabseSQLite.createDatabaseDirectory();
-			DesktopStore.createWallpapersDirectory(DesktopStore.PATH_IMAGE);
-			DesktopStore.createWallpapersDirectory(DesktopStore.PATH_WELCOME);
+			DesktopConfig.createWallpapersDirectory(DesktopConfig.PATH_IMAGE);
+			DesktopConfig.createWallpapersDirectory(DesktopConfig.PATH_WELCOME);
 			ClassLoader.getSystemClassLoader();
 			int count = 1;
 			for (final String name : getList()) {
 				try (InputStream input = ClassLoader.getSystemResourceAsStream(name)) {
 					if (name.contains("storage")) {
 						populateDatabase(Files.getResourceAsFile(input));
-					} else if (name.contains(DesktopStore.PATH_WELCOME)) {
-						DesktopStore.createWallpapersFile(input, DesktopStore.PATH_WELCOME, name);
+					} else if (name.contains(DesktopConfig.PATH_WELCOME)) {
+						DesktopConfig.createWallpapersFile(input, DesktopConfig.PATH_WELCOME, name);
 					} else {
-						DesktopStore.createWallpapersFile(input, DesktopStore.PATH_IMAGE, name);
+						DesktopConfig.createWallpapersFile(input, DesktopConfig.PATH_IMAGE, name);
 					}
 				}
 

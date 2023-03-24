@@ -30,7 +30,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.ITabbedPane;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.TabStore;

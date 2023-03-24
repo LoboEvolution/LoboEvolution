@@ -23,14 +23,14 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLScriptElement;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;

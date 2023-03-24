@@ -22,6 +22,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMConfiguration;
@@ -53,7 +54,7 @@ public class domconfignamespacedeclarations1Test extends LoboUnitTest {
         boolean canSet;
         boolean state;
         String parameter = "nAmEspace-declarations";
-        domImpl = new DOMImplementationImpl(new UserAgentContext(true));
+        domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         state = (Boolean) domConfig.getParameter(parameter);

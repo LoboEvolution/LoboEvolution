@@ -20,16 +20,15 @@
 
 package org.loboevolution.html.dom.input;
 
-import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.input.Autocomplete;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderer.HtmlController;
-import org.loboevolution.store.InputStore;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
@@ -66,7 +65,7 @@ public class InputText extends BasicInput {
 		setjComponent(iText);
 		final String type = modelNode.getType();
 		final Font font = iText.getFont();
-		iText.setFont(font.deriveFont(new LAFSettings().getInstance().getFontSize()));
+		iText.setFont(font.deriveFont(modelNode.getHtmlRendererConfig().getFontSize()));
 		iText.setDocument(new LimitedDocument());
 		iText.setText(modelNode.getValue());
 		iText.setSelectionColor(Color.BLUE);
@@ -223,7 +222,8 @@ public class InputText extends BasicInput {
 	}
 
 	private List<String> suggestionList(String type, String text, String baseUrl) {
-		List<String> list = InputStore.autocomplete(type, text, baseUrl);
+		final HtmlRendererConfig config = modelNode.getHtmlRendererConfig();
+		List<String> list = config.autocomplete(type, text, baseUrl);
 		if (ArrayUtilities.isNotBlank(list))
 			return list;
 		return new ArrayList<>();

@@ -17,15 +17,21 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
+/*
+ * Created on Oct 22, 2005
+ */
+package org.loboevolution.component;
 
-package org.loboevolution.html.gui;
-
-import org.loboevolution.component.IBrowserPanel;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.config.HtmlRendererConfigImpl;
+import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.UserAgent;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -35,11 +41,72 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- * <p>HtmlErrorPanel class.</p>
- */
-public class HtmlErrorPanel {
+public class NavigatorFrame {
+
+    /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(NavigatorFrame.class.getName());
+
+    /**
+     * <p>createHtmlPanel.</p>
+     *
+     * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
+     * @param uri a {@link java.lang.String} object.
+     * @param connection a {@link java.net.URLConnection} object.
+     * @return a {@link HtmlPanel} object.
+     */
+    public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri, URLConnection connection) {
+        try {
+            return createPanel(browserPanel, connection, uri);
+        } catch (final Exception e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+            return getErrorComponent(browserPanel, connection, uri, e);
+        }
+    }
+
+    /**
+     * <p>createHtmlPanel.</p>
+     *
+     * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
+     * @param uri a {@link java.lang.String} object.
+     * @return a {@link HtmlPanel} object.
+     */
+    public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri) {
+        URLConnection connection = null;
+        try {
+            final URL url = new URL(uri);
+            connection = url.openConnection();
+            connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+            connection.getHeaderField("Set-Cookie");
+            connection.connect();
+            return createPanel(browserPanel, connection, uri);
+        } catch (final Exception e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+            return getErrorComponent(browserPanel, connection, uri, e);
+        }
+    }
+
+    private static HtmlPanel createPanel(IBrowserPanel browserPanel, URLConnection connection, String uri) throws Exception {
+        final HtmlPanel panel = new HtmlPanel();
+        panel.setBrowserPanel(browserPanel);
+        try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+             Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+
+            final InputSource is = new InputSourceImpl(reader, uri);
+            final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
+            final HtmlRendererConfig config = new HtmlRendererConfigImpl();
+            final HtmlRendererContext rendererContext = new HtmlRendererContextImpl(panel, ucontext, config);
+            panel.setPreferredSize(new Dimension(800, 400));
+            final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext, config);
+            final Document document = builder.parse(is);
+            panel.setDocument(document, rendererContext);
+        } catch (SocketTimeoutException e) {
+            logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+        }
+        return panel;
+    }
 
     /**
      * <p>createHtmlPanel.</p>
@@ -48,9 +115,9 @@ public class HtmlErrorPanel {
      * @param connection   a {@link java.net.URLConnection} object.
      * @param uri          a {@link java.lang.String} object.
      * @param exception    a {@link java.lang.Exception} object.
-     * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
+     * @return a {@link HtmlPanel} object.
      */
-    public HtmlPanel getErrorComponent(IBrowserPanel browserPanel, URLConnection connection, String uri, Exception exception) {
+    public static HtmlPanel getErrorComponent(IBrowserPanel browserPanel, URLConnection connection, String uri, Exception exception) {
         final HtmlPanel panel = new HtmlPanel();
         panel.setBrowserPanel(browserPanel);
         panel.setName("Blu Screen Error");
@@ -58,10 +125,11 @@ public class HtmlErrorPanel {
              Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
 
             final InputSource is = new InputSourceImpl(reader, uri);
-            final UserAgentContext ucontext = new UserAgentContext();
-            final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
+            final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
+            final HtmlRendererConfig config = new HtmlRendererConfigImpl();
+            final HtmlRendererContext rendererContext = new HtmlRendererContextImpl(panel, ucontext, config);
             panel.setPreferredSize(new Dimension(800, 400));
-            final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext);
+            final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext, config);
             final Document document = builder.parse(is);
             panel.setDocument(document, rendererContext);
         } catch (IOException | SAXException ex) {
@@ -70,7 +138,7 @@ public class HtmlErrorPanel {
         return panel;
     }
 
-    private String getErrorHtml(final URLConnection connection, final Exception exception) throws IOException {
+    private static String getErrorHtml(final URLConnection connection, final Exception exception) throws IOException {
         final URL url = connection.getURL();
         final Writer swriter = new StringWriter();
         final PrintWriter writer = new PrintWriter(swriter);

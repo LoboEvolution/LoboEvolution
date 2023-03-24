@@ -73,7 +73,8 @@ public class ExternalResourcesStore {
 
 			if (Strings.isBlank(source)) {
 				if(!test) deleteCache(baseUrl, type);
-				source = sourceResponse(baseUrl, type, test);
+				source = HttpNetwork.sourceResponse(baseUrl, type);
+				if(!test) saveCache(baseUrl, source, type);
 			}
 
 		} catch (Exception err) {
@@ -103,42 +104,6 @@ public class ExternalResourcesStore {
 		int check = checkCache(baseUrl, contentLenght, eTag, type);
 		if (!isNoStore && check == 0) {
 			insertCache(baseUrl, source, contentLenght, eTag, new Date(lastModified), type);
-		}
-	}
-
-	public static String sourceResponse(String scriptURI, String type, boolean test) {
-		String response = "";
-		URL url = null;
-		try {
-			switch (type) {
-			case "CSS":
-				try {
-					if (scriptURI.startsWith("//")) {
-						scriptURI = "http:" + scriptURI;
-					}
-					url = new URL(scriptURI);
-				} catch (MalformedURLException mfu) {
-					int idx = scriptURI.indexOf(':');
-					if (idx == -1 || idx == 1) {
-						url = new URL("file:" + scriptURI);
-					} else {
-						throw mfu;
-					}
-				}
-				break;
-			default:
-				url = new URL(scriptURI);
-				URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
-				url = uri.toURL();
-				break;
-			}
-
-			response = HttpNetwork.getSource(url.toString());
-			if(!test) saveCache(scriptURI, response, type);
-			return response;
-		} catch (Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
-			return "";
 		}
 	}
 

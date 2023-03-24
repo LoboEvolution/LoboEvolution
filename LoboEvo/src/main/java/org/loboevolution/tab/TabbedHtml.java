@@ -24,8 +24,9 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserPanel;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.ITabbedPane;
+import org.loboevolution.component.NavigatorFrame;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.store.TabStore;
 
@@ -45,7 +46,7 @@ public class TabbedHtml {
 	 */
 	public void tab(BrowserPanel panel, String url, int index) {
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(panel, url);
+		final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 		tabbedPane.remove(index);

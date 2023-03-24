@@ -20,9 +20,9 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.svg.*;
-import org.loboevolution.html.gui.HtmlPanel;
-import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;
 

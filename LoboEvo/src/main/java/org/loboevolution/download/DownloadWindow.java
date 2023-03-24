@@ -23,10 +23,10 @@ package org.loboevolution.download;
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import org.loboevolution.component.IDownload;
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
-import org.loboevolution.store.DesktopStore;
 
 import javax.swing.*;
 import java.awt.*;
@@ -86,7 +86,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         contentPane.setBackground(background());
         setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        final ImageIcon ico = new ImageIcon(DesktopStore.getResourceFile("download.png"));
+        final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("download.png"));
         setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         setBounds(100, 100, 450, 300);
 

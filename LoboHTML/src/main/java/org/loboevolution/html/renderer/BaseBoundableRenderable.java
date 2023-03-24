@@ -22,10 +22,10 @@
  */
 package org.loboevolution.html.renderer;
 
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
 
 import javax.swing.*;
 import java.awt.*;

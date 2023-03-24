@@ -37,11 +37,12 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.BrowserPanel;
 import org.loboevolution.component.ITabbedPane;
+import org.loboevolution.component.NavigatorFrame;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.info.BookmarkInfo;
-import org.loboevolution.store.DesktopStore;
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
 
@@ -85,7 +86,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 500);
-		final ImageIcon ico = new ImageIcon(DesktopStore.getResourceFile("host.png"));
+		final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("host.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
 		LoboLabel label_6 = new LoboLabel("");
@@ -271,7 +272,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 					final BrowserPanel panel = frame.getPanel();
 					final int indexPanel = panel.getTabbedPane().getIndex() + 1;
 					final ITabbedPane tabbedPane = panel.getTabbedPane();
-					HtmlPanel hpanel = HtmlPanel.createHtmlPanel(panel, url);
+					HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
 					final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 					String htmlTitle = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 					tabbedPane.setComponentPopupMenu(panel);

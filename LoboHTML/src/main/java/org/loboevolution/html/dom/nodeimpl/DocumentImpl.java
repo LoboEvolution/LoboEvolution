@@ -25,6 +25,8 @@ import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.*;
@@ -50,7 +52,6 @@ import org.loboevolution.html.xpath.XPathEvaluator;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.type.DocumentReadyState;
 import org.loboevolution.type.VisibilityState;
@@ -502,7 +503,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public DOMImplementation getImplementation() {
-		return new DOMImplementationImpl(new UserAgentContext(isTest()));
+		return new DOMImplementationImpl(new UserAgentContext(getHtmlRendererConfig(), isTest()));
 	}
 
 	/** {@inheritDoc} */
@@ -707,12 +708,11 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public Window getDefaultView() {
 		return this.window;
 	}
-	public void setWindow(final HtmlRendererContext rcontext, final UserAgentContext ucontext){
+	public void setWindow(final HtmlRendererContext rcontext, final UserAgentContext ucontext, HtmlRendererConfig config){
 		if (rcontext != null) {
-			window = WindowImpl.getWindow(rcontext);
+			window = WindowImpl.getWindow(rcontext, config);
 		} else {
-			// Plain parsers may use Javascript too.
-			window = new WindowImpl(null, ucontext);
+			window = new WindowImpl(null, ucontext, config);
 		}
 	}
 

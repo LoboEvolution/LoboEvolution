@@ -21,6 +21,7 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.FontValues;
@@ -84,7 +85,8 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
-		FontKey fontkey = FontValues.getDefaultFontKey();
+		final HtmlRendererConfig config = element.getHtmlRendererConfig();
+		FontKey fontkey = FontValues.getDefaultFontKey(config);
 
 		if (iFont != null) {
 			fontkey.setSuperscript(this.superscript);

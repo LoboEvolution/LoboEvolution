@@ -40,7 +40,7 @@ import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlInsets;
-import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.FloatingInfo;
 

@@ -20,10 +20,13 @@
 
 package org.loboevolution.driver;
 
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
+import org.loboevolution.gui.LocalHtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.io.WritableLineReader;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 
 import java.awt.*;
@@ -41,7 +44,7 @@ public class LoboWebDriver {
 	/** The Constant logger. */
 	protected static final Logger logger = Logger.getLogger(LoboWebDriver.class.getName());
 
-	private static String url = LoboUnitTest.class.getResource("/org/lobo/html/htmlsample.html").toString();
+	private static final String url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html").toString();
 
 	/**
 	 * <p>loadHtml.</p>
@@ -53,13 +56,13 @@ public class LoboWebDriver {
 		HTMLDocumentImpl doc = null;
 		try {
 			WritableLineReader wis = new WritableLineReader(new StringReader(html));
-			final UserAgentContext ucontext = new UserAgentContext(true);
+			final HtmlRendererConfig config = new LocalHtmlRendererConfig();
+			final UserAgentContext ucontext = new UserAgentContext(config, true);
 			HtmlPanel panel = new HtmlPanel();
 			panel.setPreferredSize(new Dimension(800, 400));
-			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
-			rendererContext.setTest(true);
+			final HtmlRendererContext rendererContext = new LocalHtmlRendererContext(panel, ucontext);
 			ucontext.setUserAgentEnabled(true);
-			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, url);
+			doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, url);
 			doc.load();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,13 +80,13 @@ public class LoboWebDriver {
 		HTMLDocumentImpl doc = null;
 		try {
 			WritableLineReader wis = new WritableLineReader(new InputStreamReader(in, StandardCharsets.UTF_8));
-			final UserAgentContext ucontext = new UserAgentContext(true);
+			final HtmlRendererConfig config = new LocalHtmlRendererConfig();
+			final UserAgentContext ucontext = new UserAgentContext(config, true);
 			HtmlPanel panel = new HtmlPanel();
 			panel.setPreferredSize(new Dimension(800, 400));
-			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
-			rendererContext.setTest(true);
+			final HtmlRendererContext rendererContext = new LocalHtmlRendererContext(panel, ucontext);
 			ucontext.setUserAgentEnabled(true);
-			doc = new HTMLDocumentImpl(ucontext, rendererContext, wis, url);
+			doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, url);
 			doc.load();
 		} catch (Exception e) {
 			e.printStackTrace();

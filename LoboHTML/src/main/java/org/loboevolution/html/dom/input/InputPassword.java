@@ -23,10 +23,10 @@ package org.loboevolution.html.dom.input;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.input.Autocomplete;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
-import org.loboevolution.store.InputStore;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
@@ -87,7 +87,8 @@ public class InputPassword extends BasicInput {
 	
 	
 	private List<String> suggestionList(String type, String text, String baseUrl) {
-		List<String> list = InputStore.autocomplete(type, text, baseUrl);
+		final HtmlRendererConfig config = modelNode.getHtmlRendererConfig();
+		List<String> list =  config.autocomplete(type, text, baseUrl);
 		if (ArrayUtilities.isNotBlank(list)) {
 			return list;
 		}

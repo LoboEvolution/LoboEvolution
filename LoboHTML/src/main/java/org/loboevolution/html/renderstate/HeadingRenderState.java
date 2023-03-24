@@ -19,6 +19,7 @@
  */
 package org.loboevolution.html.renderstate;
 
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.FontValues;
@@ -109,7 +110,8 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 
 	@Override
 	public Font getFont() {
-		FontKey key = FontValues.getDefaultFontKey();
+		final HtmlRendererConfig config = element.getHtmlRendererConfig();
+		FontKey key = FontValues.getDefaultFontKey(config);
 		key.setFontWeight(CSSValues.BOLD.getValue());
 		key.setFontSize(FontValues.getFontSize(getHeadingFontSize(), element.getDocumentNode().getDefaultView(), prevRenderState));
 		return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, this.getCssProperties(), prevRenderState));

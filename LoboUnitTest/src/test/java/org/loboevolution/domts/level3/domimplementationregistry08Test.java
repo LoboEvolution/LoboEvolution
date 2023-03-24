@@ -23,6 +23,7 @@ package org.loboevolution.domts.level3;
 
 import lombok.SneakyThrows;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
@@ -54,7 +55,7 @@ public class domimplementationregistry08Test extends LoboUnitTest {
         domImpl = domImplRegistry.getDOMImplementation("SVG");
 
         if ((domImpl == null)) {
-            DOMImplementationImpl baseImpl = new DOMImplementationImpl(new UserAgentContext(true));
+            DOMImplementationImpl baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasFeature = baseImpl.hasFeature("SVG", null);
             assertFalse("baseImplSupportsSVG", hasFeature);
         } else {

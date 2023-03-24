@@ -18,7 +18,7 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.gui;
+package org.loboevolution.gui;
 
 import java.util.EventListener;
 
@@ -26,7 +26,7 @@ import java.util.EventListener;
  * Receives selection change events.
  *
  * Author J. H. S.
- * @see org.loboevolution.html.gui.HtmlPanel#addSelectionChangeListener(SelectionChangeListener)
+ * @see HtmlPanel#addSelectionChangeListener(SelectionChangeListener)
  *
  */
 public interface SelectionChangeListener extends EventListener {
@@ -34,7 +34,7 @@ public interface SelectionChangeListener extends EventListener {
 	 * Receives a selection change event. This method may be assumed to execute in
 	 * the GUI thread.
 	 *
-	 * @param event A {@link org.loboevolution.html.gui.SelectionChangeEvent} instance.
+	 * @param event A {@link SelectionChangeEvent} instance.
 	 */
 	void selectionChanged(SelectionChangeEvent event);
 }

@@ -21,6 +21,7 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLTableElement;
@@ -310,9 +311,10 @@ public class TableCellRenderState extends DisplayRenderState {
 
 		if ("TH".equals(element.getNodeName())) {
 			final CSSStyleDeclaration props = element.getCurrentStyle();
+			final HtmlRendererConfig config = element.getHtmlRendererConfig();
 			final String fontSize = props == null ? null : props.getFontSize();
 			final String fSize = Strings.isNotBlank(fontSize) ? fontSize : "1.2rem";
-			FontKey key = FontValues.getDefaultFontKey();
+			FontKey key = FontValues.getDefaultFontKey(config);
 			key.setFontWeight(CSSValues.BOLD.getValue());
 			key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), prevRenderState));
 			return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, props, prevRenderState));

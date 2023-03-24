@@ -23,10 +23,11 @@
 package org.loboevolution.html.parser;
 
 import org.loboevolution.common.Urls;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -42,28 +43,25 @@ import java.util.logging.Logger;
 /**
  * The DocumentBuilderImpl class is an HTML DOM parser that
  * implements the standard W3C DocumentBuilder interface.
- *
- * Author J. H. S.
- *
  */
 public class DocumentBuilderImpl {
 	private static final Logger logger = Logger.getLogger(DocumentBuilderImpl.class.getName());
 	private final UserAgentContext bcontext;
 	private final HtmlRendererContext rcontext;
+	private final HtmlRendererConfig config;
 
 	/**
 	 * Constructs a DocumentBuilderImpl. This constructor should be
 	 * used when rendering is expected.
 	 *
-	 * @param ucontext An instance of {@link org.loboevolution.http.UserAgentContext},
-	 *                 which may be an instance of
-	 *                 {@link org.loboevolution.http.UserAgentContext}.
-	 * @param rcontext An instance of
-	 *                 {@link org.loboevolution.http.HtmlRendererContext}
+	 * @param ucontext An instance of {@link org.loboevolution.http.UserAgentContext}
+	 * @param rcontext An instance of {@link HtmlRendererContext}
+	 * @param config a {@link HtmlRendererConfig} object.
 	 */
-	public DocumentBuilderImpl(UserAgentContext ucontext, HtmlRendererContext rcontext) {
+	public DocumentBuilderImpl(UserAgentContext ucontext, HtmlRendererContext rcontext, HtmlRendererConfig config) {
 		this.rcontext = rcontext;
 		this.bcontext = ucontext;
+		this.config = config;
 	}
 
 	/**
@@ -108,7 +106,7 @@ public class DocumentBuilderImpl {
 						"The InputSource must have either a reader, an input stream or a URI.");
 			}
 		}
-		return new HTMLDocumentImpl(this.bcontext, this.rcontext, wis, uri);
+		return new HTMLDocumentImpl(this.bcontext, this.rcontext, this.config,  wis, uri);
 	}
 
 	/**

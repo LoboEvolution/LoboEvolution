@@ -23,7 +23,7 @@ package org.loboevolution.menu.crono;
 import com.jtattoo.plaf.lobo.*;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.download.DownloadWindow;
-import org.loboevolution.store.DesktopStore;
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.store.DownloadStore;
 
 import javax.swing.*;
@@ -57,7 +57,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
         setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 600, 500);
-        final ImageIcon ico = new ImageIcon(DesktopStore.getResourceFile("download.png"));
+        final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("download.png"));
         setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
         LoboLabel label_6 = new LoboLabel("");

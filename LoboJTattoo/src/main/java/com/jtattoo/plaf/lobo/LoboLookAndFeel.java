@@ -2,7 +2,7 @@ package com.jtattoo.plaf.lobo;
 
 import java.awt.Color;
 
-import com.loboevolution.store.laf.LAFSettings;
+import org.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.LAFColorType;
 

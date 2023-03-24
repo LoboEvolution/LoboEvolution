@@ -17,7 +17,7 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.gui;
+package org.loboevolution.gui;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
@@ -26,7 +26,6 @@ import org.loboevolution.component.IDownload;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.laf.IconFactory;
 
 import javax.swing.*;

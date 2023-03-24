@@ -20,7 +20,7 @@
 
 package org.loboevolution.store;
 
-import com.loboevolution.store.laf.LAFSettings;
+import org.loboevolution.store.laf.LAFSettings;
 
 import java.awt.*;
 import java.sql.Connection;

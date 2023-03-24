@@ -28,7 +28,7 @@ import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
-import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.info.FloatingInfo;
 
 import javax.swing.*;

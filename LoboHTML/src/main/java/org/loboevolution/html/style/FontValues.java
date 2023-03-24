@@ -20,11 +20,12 @@
 
 package org.loboevolution.html.style;
 
-import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
@@ -37,22 +38,31 @@ import java.awt.font.TextAttribute;
  * <p>FontValues class.</p>
  */
 public class FontValues extends HtmlValues {
-	
-	private static final LAFSettings laf = new LAFSettings().getInstance();
 
 	/**
-	 *  <p>getDefaultFontKey.</p>
+	 * <p>getDefaultFontKey.</p>
+	 * @param config a {@link HtmlRendererConfig} object.
 	 * @return a {@link org.loboevolution.laf.FontKey} object.
 	 */
-	public static FontKey getDefaultFontKey() {
+	public static FontKey getDefaultFontKey(HtmlRendererConfig config) {
 		return FontKey.builder().
-				font(laf.getFont()).
+				font(config.getFont()).
 				fontSize(16).
 				build();
 	}
 
+	/**
+	 * Gets the font key.
+	 *
+	 * @param key a {@link FontKey} object.
+	 * @param element a {@link HTMLElementImpl} object.
+	 * @param style a {@link CSSStyleDeclaration} object.
+	 * @param prevRenderState a {@link RenderState} object.
+	 * @return a {@link org.loboevolution.laf.FontKey} object.
+	 */
 	public static FontKey getFontKey(FontKey key, HTMLElementImpl element, CSSStyleDeclaration style, RenderState prevRenderState) {
 		HTMLDocumentImpl document = (HTMLDocumentImpl) element.getDocumentNode();
+		HtmlRendererConfig config = document.getConfig();
 
 		String fontSize = style.getFontSize();
 		final String fontFamiy = style.getFontFamily();
@@ -75,14 +85,14 @@ public class FontValues extends HtmlValues {
 			if (Strings.isBlank(fontSize) && key.getFontSize() == 0) fontSize = null;
 
 			key.setFontFamily(FontValues.getFontFamily(fontFamiy, prevRenderState));
-			key.setFontStyle(FontValues.getFontStyle(fontStyle, prevRenderState));
+			key.setFontStyle(FontValues.getFontStyle(fontStyle, prevRenderState, config.isItalic()));
 			key.setFontVariant(FontValues.getFontVariant(fontVariant));
 			key.setLocales(document.getLocales());
-			key.setSuperscript(FontValues.getFontSuperScript(verticalAlign, prevRenderState));
+			key.setSuperscript(getFontSuperScript(verticalAlign, prevRenderState, config.isSuperscript(), config.isSubscript()));
 			key.setLetterSpacing(HtmlValues.getPixelSize(letterSpacing, prevRenderState, document.getDefaultView(), 0));
-			key.setStrikethrough(FontValues.getFontStrikeThrough(textDecoration, prevRenderState));
-			key.setUnderline(FontValues.getFontUnderline(textDecoration, prevRenderState));
-			key.setFontWeight(FontValues.getFontWeight(fontWeight, prevRenderState));
+			key.setStrikethrough(getFontStrikeThrough(textDecoration, prevRenderState, config.isStrikethrough()));
+			key.setUnderline(FontValues.getFontUnderline(textDecoration, prevRenderState, config.isStrikethrough()));
+			key.setFontWeight(FontValues.getFontWeight(fontWeight, prevRenderState, config.isBold()));
 
 			if(key.getFontSize() == 0)
 				key.setFontSize(FontValues.getFontSize(fontSize, element.getDocumentNode().getDefaultView(), prevRenderState));
@@ -90,14 +100,14 @@ public class FontValues extends HtmlValues {
 		} else {
 
 			key.setFontFamily(FontValues.getFontFamily(null, prevRenderState));
-			key.setFontStyle(FontValues.getFontStyle(null, prevRenderState));
+			key.setFontStyle(getFontStyle(null, prevRenderState, config.isItalic()));
 			key.setFontVariant(FontValues.getFontVariant(null));
 			key.setLocales(document.getLocales());
-			key.setSuperscript(FontValues.getFontSuperScript(null, prevRenderState));
+			key.setSuperscript(getFontSuperScript(null, prevRenderState, config.isSuperscript(), config.isSubscript()));
 			key.setLetterSpacing(HtmlValues.getPixelSize(null, prevRenderState, document.getDefaultView(), 0));
-			key.setStrikethrough(FontValues.getFontStrikeThrough(null, prevRenderState));
-			key.setUnderline(FontValues.getFontUnderline(null, prevRenderState));
-			key.setFontWeight(FontValues.getFontWeight(null, prevRenderState));
+			key.setStrikethrough(getFontStrikeThrough(null, prevRenderState, config.isStrikethrough()));
+			key.setUnderline(FontValues.getFontUnderline(null, prevRenderState, config.isStrikethrough()));
+			key.setFontWeight(FontValues.getFontWeight(null, prevRenderState, config.isBold()));
 			key.setFontSize(FontValues.getFontSize(null, element.getDocumentNode().getDefaultView(), prevRenderState));
 		}
 
@@ -114,7 +124,8 @@ public class FontValues extends HtmlValues {
 	 */
 	public static float getFontSize(String spec, Window window, RenderState parentRenderState) {
 
-		final float defaultSize = laf.getFontSize();
+		final WindowImpl win = (WindowImpl) window;
+		final float defaultSize = win.getConfig() != null ? win.getConfig().getFontSize() : 16.0f;
 
 		if (Strings.isBlank(spec)) {
 			float parentFontSize = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
@@ -232,15 +243,16 @@ public class FontValues extends HtmlValues {
 	 *
 	 * @param strikethrough a {@link java.lang.String} object.
 	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param isStrikethrough a {@link Boolean} object.
 	 * @return a boolean.
 	 */
-	public static boolean getFontStrikeThrough(String strikethrough, RenderState parentRenderState) {
+	private static boolean getFontStrikeThrough(String strikethrough, RenderState parentRenderState, boolean isStrikethrough) {
 		if (strikethrough == null) {
 			if (parentRenderState != null && parentRenderState.getFont() != null) {
 				Boolean strikethroughon = (Boolean) parentRenderState.getFont().getAttributes().get(TextAttribute.STRIKETHROUGH_ON);
 				return strikethroughon != null && strikethroughon;
 			} else {
-				if (laf.isStrikethrough())
+				if (isStrikethrough)
 					return TextAttribute.STRIKETHROUGH_ON;
 			}
 		}
@@ -257,17 +269,18 @@ public class FontValues extends HtmlValues {
 	 *
 	 * @param fontStyle a {@link java.lang.String} object.
 	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param isItalic a {@link Boolean} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getFontStyle(String fontStyle, RenderState parentRenderState) {
+	private static String getFontStyle(String fontStyle, RenderState parentRenderState, boolean isItalic) {
 		if (fontStyle == null) {
 			if (parentRenderState != null) {
-				if (parentRenderState.getFont().getStyle() == 1)
+				if (parentRenderState.getFont().getStyle() == Font.BOLD)
 					return CSSValues.ITALIC.getValue();
 				else
 					return null;
 			} else {
-				if (laf.isItalic())
+				if (isItalic)
 					return CSSValues.ITALIC.getValue();
 			}
 		}
@@ -292,17 +305,19 @@ public class FontValues extends HtmlValues {
 	 *
 	 * @param verticalAlign a {@link java.lang.String} object.
 	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param isSuperscript a {@link Boolean} object.
+	 * @param isSubscript a {@link Boolean} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	public static Integer getFontSuperScript(String verticalAlign, RenderState parentRenderState) {
+	public static Integer getFontSuperScript(String verticalAlign, RenderState parentRenderState, boolean isSuperscript, boolean isSubscript) {
 		Integer superscript = null;
 
 		final boolean isSuper = "super".equalsIgnoreCase(verticalAlign);
 		final boolean isSub = "sub".equalsIgnoreCase(verticalAlign);
 
-		if (isSuper || laf.isSuperscript()) {
+		if (isSuper || isSuperscript) {
 			superscript = TextAttribute.SUPERSCRIPT_SUPER;
-		} else if (isSub || laf.isSubscript()) {
+		} else if (isSub || isSubscript) {
 			superscript = TextAttribute.SUPERSCRIPT_SUB;
 		}
 
@@ -317,15 +332,16 @@ public class FontValues extends HtmlValues {
 	 *
 	 * @param underline a {@link java.lang.String} object.
 	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param isStrikethrough a {@link Boolean} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	public static Integer getFontUnderline(String underline, RenderState parentRenderState) {
+	private static Integer getFontUnderline(String underline, RenderState parentRenderState, boolean isStrikethrough) {
 
 		if (underline == null) {
 			if (parentRenderState != null) {
 				return (Integer) parentRenderState.getFont().getAttributes().get(TextAttribute.UNDERLINE_LOW_ONE_PIXEL);
 			} else {
-				if (laf.isStrikethrough())
+				if (isStrikethrough)
 					return TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
 			}
 		}
@@ -342,9 +358,10 @@ public class FontValues extends HtmlValues {
 	 *
 	 * @param fontWeight a {@link java.lang.String} object.
 	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param isBold a {@link Boolean} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getFontWeight(String fontWeight, RenderState parentRenderState) {
+	public static String getFontWeight(String fontWeight, RenderState parentRenderState, boolean isBold) {
 		if (fontWeight == null) {
 			if (parentRenderState != null) {
 				if(parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT) == null){
@@ -353,7 +370,7 @@ public class FontValues extends HtmlValues {
 
 				return parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT).toString();
 			} else {
-				if (laf.isBold())
+				if (isBold)
 					return CSSValues.BOLD400.getValue();
 			}
 		}

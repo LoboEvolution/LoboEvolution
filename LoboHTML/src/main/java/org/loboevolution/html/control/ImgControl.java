@@ -24,15 +24,15 @@ package org.loboevolution.html.control;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.WrapperLayout;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.HttpNetwork;

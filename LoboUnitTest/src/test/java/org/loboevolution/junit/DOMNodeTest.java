@@ -23,6 +23,7 @@ package org.loboevolution.junit;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -38,7 +39,7 @@ public class DOMNodeTest extends LoboUnitTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		UserAgentContext context = new UserAgentContext(true);
+		UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
 		context.setUserAgentEnabled(false);
 		impl = new DOMImplementationImpl(context);
 	}

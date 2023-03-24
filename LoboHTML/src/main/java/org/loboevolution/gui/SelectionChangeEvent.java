@@ -18,12 +18,12 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.gui;
+package org.loboevolution.gui;
 
 import java.util.EventObject;
 
 /**
- * Event associated with {@link org.loboevolution.html.gui.SelectionChangeListener}.
+ * Event associated with {@link SelectionChangeListener}.
  *
  *
  *

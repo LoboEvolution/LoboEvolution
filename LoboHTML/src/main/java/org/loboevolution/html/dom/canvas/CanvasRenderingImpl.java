@@ -20,17 +20,17 @@
 
 package org.loboevolution.html.dom.canvas;
 
-import com.loboevolution.store.laf.LAFSettings;
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
@@ -178,8 +178,9 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	@Override
 	public Font getFont() {
 		if (this.font == null) {
+			final HtmlRendererConfig config = canvas.getHtmlRendererConfig();
 			final FontFactory fontFactory = FontFactory.getInstance();
-			final Font font = fontFactory.getFont(FontValues.getDefaultFontKey());
+			final Font font = fontFactory.getFont(FontValues.getDefaultFontKey(config));
 			this.font = font;
 		}
 		return this.font;
@@ -188,7 +189,8 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public void setFont(String fontSpec) {
-		FontKey key = FontValues.getDefaultFontKey();
+		final HtmlRendererConfig config = canvas.getHtmlRendererConfig();
+		FontKey key = FontValues.getDefaultFontKey(config);
 		key.setFontStyle(LAFType.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		key.setFontWeight(LAFType.BOLD.getValue());
@@ -216,8 +218,8 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		if (token != null) {
 			final int slashIdx = token.indexOf('/');
 			final String fontSizeText = slashIdx == -1 ? token : token.substring(0, slashIdx);
-			int errorValue = Float.valueOf(new LAFSettings().getInstance().getFontSize()).intValue();
 			HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.canvas.getDocumentNode();
+			int errorValue = Float.valueOf(doc.getConfig().getFontSize()).intValue();
 			key.setFontSize(HtmlValues.getPixelSize(fontSizeText, null, doc.getDefaultView(), errorValue));
 			if (++i < length) {
 				final StringBuilder fontFamilyBuff = new StringBuilder();

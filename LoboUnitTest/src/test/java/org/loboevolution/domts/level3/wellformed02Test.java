@@ -22,6 +22,7 @@ package org.loboevolution.domts.level3;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -59,7 +60,7 @@ public class wellformed02Test extends LoboUnitTest {
         List<DOMError> errors;
 
         boolean canSet;
-        domImpl = new DOMImplementationImpl(new UserAgentContext(true));
+        domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument(nullString, nullString, nullDoctype);
 
         {

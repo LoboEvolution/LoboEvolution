@@ -20,8 +20,9 @@
 
 package org.loboevolution.html.js.storage;
 
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.webstorage.Storage;
-import org.loboevolution.store.WebStore;
 
 import java.util.Map;
 
@@ -31,25 +32,28 @@ import java.util.Map;
 public class LocalStorage implements Storage {
 	
 	private final int index;
+
+	private HtmlRendererConfig config;
 	
 	/**
 	 * <p>Constructor for LocalStorage.</p>
 	 */
-	public LocalStorage() {
+	public LocalStorage(Window win) {
+		config = (HtmlRendererConfig) win.getConfig();
 		index = -1;
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
-		return WebStore.countStorage(index);
+		return config.countStorage(index);
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public Object key(int index) {
         int counter = 0;
-        Map<String, String> store = WebStore.getMapStorage(index, 0);
+        Map<String, String> store = config.getMapStorage(index, 0);
         for (final String key : store.keySet()) {
             if (counter++ == index) {
                 return key;
@@ -61,26 +65,26 @@ public class LocalStorage implements Storage {
 	/** {@inheritDoc} */
 	@Override
 	public Object getItem(String key) {
-		return WebStore.getValue(key, 0, index);
+		return config.getValue(key, 0, index);
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void setItem(String keyName, String keyValue) {
-		WebStore.deleteStorage(keyName, 0, index);
-		WebStore.insertStorage(keyName, keyValue, 0, index);
+		config.deleteStorage(keyName, 0, index);
+		config.insertStorage(keyName, keyValue, 0, index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void removeItem(String keyName) {
-		WebStore.deleteStorage(keyName, 0, index);
+		config.deleteStorage(keyName, 0, index);
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void clear() {
-		WebStore.deleteStorage(0, index);
+		config.deleteStorage(0, index);
 	}
 
 	@Override

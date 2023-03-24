@@ -23,16 +23,20 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Urls;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.control.ImgSvgControl;
 import org.loboevolution.html.dom.HTMLImageElement;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.ImageRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.net.UserAgent;
 import org.loboevolution.type.Decoding;
 import org.mozilla.javascript.Function;
 
 import java.awt.*;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Level;
 
 /**
@@ -55,7 +59,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	public HTMLImageElementImpl(final String name) {
 		super(name);
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public void assignAttributeField(String normalName, String value) {
@@ -270,7 +274,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	@Override
 	public void setCrossOrigin(String crossOrigin) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -291,7 +295,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	@Override
 	public void setDecoding(Decoding decoding) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -333,7 +337,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	@Override
 	public void setReferrerPolicy(String referrerPolicy) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -347,7 +351,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	@Override
 	public void setSizes(String sizes) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -361,7 +365,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	@Override
 	public void setSrcset(String srcset) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -377,38 +381,51 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	/**
 	 * <p>draw.</p>
 	 *
 	 * @param imgSvgControl a {@link org.loboevolution.html.control.ImgSvgControl} object.
 	 */
 	public void draw(ImgSvgControl imgSvgControl) {
-		final Object document = this.document;
-		String uri = null;
-		if (document instanceof HTMLDocumentImpl) {
-			try {
-			HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
-			URL baseURL = new URL(doc.getBaseURI());
-			String src = getSrc();
-			URL scriptURL = Urls.createURL(baseURL, src );
-			uri = scriptURL == null ? src : scriptURL.toExternalForm();
-			
-			} catch (Exception e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+		try {
+			final Object document = this.document;
+			String uri = null;
+			if (document instanceof HTMLDocumentImpl) {
+				try {
+					HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
+					URL baseURL = new URL(doc.getBaseURI());
+					String src = getSrc();
+					URL scriptURL = Urls.createURL(baseURL, src);
+					uri = scriptURL == null ? src : scriptURL.toExternalForm();
+
+				} catch (Exception e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			} else {
+				uri = getSrc();
 			}
-		} else {
-			uri = getSrc();
+
+			final URL url = new URL(uri);
+			URLConnection connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+			connection.getHeaderField("Set-Cookie");
+			connection.connect();
+
+			NodeImpl mode = (NodeImpl) document;
+			HtmlPanel panel = new HtmlPanel();
+			panel.setBrowserPanel(null);
+			HtmlRendererContext htmlRendererContext = mode.getHtmlRendererContext();
+			panel = HtmlPanel.createlocalPanel(connection, panel, mode.getHtmlRendererContext(), mode.getHtmlRendererConfig(), uri);
+			final double height = getHeight() == -1 ? htmlRendererContext.getInnerWidth() : getHeight();
+			final double width = getWidth() == -1 ? htmlRendererContext.getInnerWidth() : getWidth();
+			panel.setPreferredSize(new Dimension((int) width, (int) height));
+			imgSvgControl.add(panel);
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
-		
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, uri);
-		final Dimension dim = hpanel.getPreferredSize();
-		final double height = getHeight() == -1 ? dim.getHeight() : getHeight();
-		final double width = getWidth() == -1 ? dim.getWidth() : getWidth();
-		hpanel.setPreferredSize(new Dimension((int)width, (int)height));
-		imgSvgControl.add(hpanel);
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -30,8 +30,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.loboevolution.component.HtmlRendererContextImpl;
 import org.loboevolution.component.IBrowserPanel;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.component.NavigatorFrame;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.config.HtmlRendererConfigImpl;
+import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.net.HttpNetwork;
@@ -67,10 +72,10 @@ public class NavigationManager {
 					Reader reader = new InputStreamReader(in, "utf-8")) {
 
 				final InputSource is = new InputSourceImpl(reader, uri);
-				final UserAgentContext ucontext = new UserAgentContext();
-				final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
-
-				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext);
+				final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
+				final HtmlRendererConfig config = new HtmlRendererConfigImpl();
+				final HtmlRendererContext rendererContext = new HtmlRendererContextImpl(panel, ucontext, config);
+				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext, config);
 				return builder.parse(is);
 			} catch (SocketTimeoutException e) {
 				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
@@ -100,7 +105,7 @@ public class NavigationManager {
 	 *
 	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 * @param search a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
+	 * @return a {@link HtmlPanel} object.
 	 */
 	public static HtmlPanel getHtmlPanelSearch(IBrowserPanel browserPanel, String search) {
 		final ToolsStore tools = new ToolsStore();
@@ -108,12 +113,12 @@ public class NavigationManager {
 		for (final SearchEngineStore searchEngineStore : searchEngineStores) {
 			if (searchEngineStore.isSelected()) {
 				final String uri = searchEngineStore.getBaseUrl() + search.replace(" ", "%20");
-				return HtmlPanel.createHtmlPanel(browserPanel, uri);
+				return NavigatorFrame.createHtmlPanel(browserPanel, uri);
 			}
 		}
 
 		SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
 		final String uri = searchEngine + search.replace(" ", "%20");
-		return HtmlPanel.createHtmlPanel(browserPanel, uri);
+		return NavigatorFrame.createHtmlPanel(browserPanel, uri);
 	}
 }

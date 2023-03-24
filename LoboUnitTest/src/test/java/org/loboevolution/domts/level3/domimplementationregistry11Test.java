@@ -23,6 +23,7 @@ package org.loboevolution.domts.level3;
 
 import lombok.SneakyThrows;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
@@ -56,7 +57,7 @@ public class domimplementationregistry11Test extends LoboUnitTest {
         domImpl = domImplRegistry.getDOMImplementation("XPath");
 
         if ((domImpl == null)) {
-            baseImpl = new DOMImplementationImpl(new UserAgentContext(true));
+            baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasFeature = baseImpl.hasFeature("XPath", nullVersion);
             assertFalse("baseImplSupportsLS", hasFeature);
         } else {

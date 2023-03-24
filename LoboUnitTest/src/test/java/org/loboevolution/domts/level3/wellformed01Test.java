@@ -22,6 +22,7 @@ package org.loboevolution.domts.level3;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.DOMLocator;
@@ -63,7 +64,7 @@ public class wellformed01Test extends LoboUnitTest {
         String type;
         DOMLocator locator;
         Node relatedNode;
-        domImpl = new DOMImplementationImpl(new UserAgentContext(true));
+        domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument(nullString, nullString, nullDoctype);
 
         {

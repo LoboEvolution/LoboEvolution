@@ -29,8 +29,9 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.BrowserPanel;
 import org.loboevolution.component.ITabbedPane;
+import org.loboevolution.component.NavigatorFrame;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.store.TabStore;
 import org.loboevolution.welcome.WelcomePanel;
@@ -68,7 +69,7 @@ public class OpenInTabAction extends AbstractAction {
 		String title = "";
 		
 		if (this.address != null) {
-			comp = HtmlPanel.createHtmlPanel(panel, this.address);
+			comp = NavigatorFrame.createHtmlPanel(panel, this.address);
 			final HtmlPanel hpanel = (HtmlPanel)comp;
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 			title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	

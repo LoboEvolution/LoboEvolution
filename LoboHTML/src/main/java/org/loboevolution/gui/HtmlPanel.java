@@ -20,14 +20,15 @@
 /*
  * Created on Nov 19, 2005
  */
-package org.loboevolution.html.gui;
+package org.loboevolution.gui;
 
 import org.loboevolution.common.EventDispatch2;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.component.IBrowserPanel;
-import org.loboevolution.html.dom.nodeimpl.event.DocumentNotificationListener;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.event.DocumentNotificationListener;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
@@ -38,10 +39,8 @@ import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.NodeRenderer;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.net.UserAgent;
 import org.xml.sax.InputSource;
 
 import javax.swing.*;
@@ -51,7 +50,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.SocketTimeoutException;
-import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -63,7 +61,7 @@ import java.util.logging.Logger;
 
 /**
  * The HtmlPanel class is a Swing component that can render a HTML
- * DOM. It uses either {@link org.loboevolution.html.gui.HtmlBlockPanel}
+ * DOM. It uses either {@link HtmlBlockPanel}
  * internally, depending on whether the document is determined to be a FRAMESET
  * or not.
  * <p>
@@ -189,7 +187,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * Adds listener of selection changes. Note that it does not have any effect on
 	 * FRAMESETs.
 	 *
-	 * @param listener An instance of {@link org.loboevolution.html.gui.SelectionChangeListener}.
+	 * @param listener An instance of {@link SelectionChangeListener}.
 	 */
 	public void addSelectionChangeListener(SelectionChangeListener listener) {
 		this.selectionDispatch.addListener(listener);
@@ -211,12 +209,12 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 
 	/**
-	 * Method invoked internally to create a {@link org.loboevolution.html.gui.HtmlBlockPanel}. It is made
+	 * Method invoked internally to create a {@link HtmlBlockPanel}. It is made
 	 * available so it can be overridden.
 	 *
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @return a {@link org.loboevolution.html.gui.HtmlBlockPanel} object.
+	 * @param rcontext a {@link HtmlRendererContext} object.
+	 * @return a {@link HtmlBlockPanel} object.
 	 */
 	protected HtmlBlockPanel createHtmlBlockPanel(UserAgentContext ucontext, HtmlRendererContext rcontext) {
 		return new HtmlBlockPanel(java.awt.Color.WHITE, true, ucontext, rcontext, this);
@@ -348,7 +346,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	/**
 	 * Removes a listener of selection changes that was previously added.
 	 *
-	 * @param listener a {@link org.loboevolution.html.gui.SelectionChangeListener} object.
+	 * @param listener a {@link SelectionChangeListener} object.
 	 */
 	public void removeSelectionChangeListener(SelectionChangeListener listener) {
 		this.selectionDispatch.removeListener(listener);
@@ -508,6 +506,20 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		}
 	}
 
+	public static HtmlPanel createlocalPanel(URLConnection connection, HtmlPanel panel, HtmlRendererContext rendererContext,
+											 HtmlRendererConfig config, String uri) throws Exception {
+		try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+			 Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+			final InputSource is = new InputSourceImpl(reader, uri);
+			final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext, config);
+			final Document document = builder.parse(is);
+			panel.setDocument(document, rendererContext);
+		} catch (SocketTimeoutException e) {
+			logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+		}
+		return panel;
+	}
+
 	/**
 	 * Sets an HTML DOM node and invalidates the component so it is rendered as soon
 	 * as possible in the GUI thread.
@@ -556,66 +568,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			validate();
 			this.repaint();
 		}
-	}
-
-	/**
-	 * <p>createHtmlPanel.</p>
-	 *
-	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
-	 * @param uri a {@link java.lang.String} object.
-	 * @param connection a {@link java.net.URLConnection} object.
-	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
-	 */
-	public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri, URLConnection connection) {
-		try {
-			return createPanel(browserPanel, connection, uri);
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-			HtmlErrorPanel errorPanel = new HtmlErrorPanel();
-			return errorPanel.getErrorComponent(browserPanel, connection, uri, e);
-		}
-	}
-	
-	/**
-	 * <p>createHtmlPanel.</p>
-	 *
-	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
-	 * @param uri a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
-	 */
-	public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri) {
-		URLConnection connection = null;
-		try {
-			final URL url = new URL(uri);
-			connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-			connection.getHeaderField("Set-Cookie");
-			connection.connect();
-			return createPanel(browserPanel, connection, uri);
-		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-			HtmlErrorPanel errorPanel = new HtmlErrorPanel();
-			return errorPanel.getErrorComponent(browserPanel, connection, uri, e);
-		}
-	}
-
-	private static HtmlPanel createPanel(IBrowserPanel browserPanel, URLConnection connection, String uri) throws Exception {
-		final HtmlPanel panel = new HtmlPanel();
-		panel.setBrowserPanel(browserPanel);
-		try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-			 Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
-
-			final InputSource is = new InputSourceImpl(reader, uri);
-			final UserAgentContext ucontext = new UserAgentContext();
-			final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
-			panel.setPreferredSize(new Dimension(800, 400));
-			final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext);
-			final Document document = builder.parse(is);
-			panel.setDocument(document, rendererContext);
-		} catch (SocketTimeoutException e) {
-			logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
-		}
-		return panel;
 	}
 
 	/**

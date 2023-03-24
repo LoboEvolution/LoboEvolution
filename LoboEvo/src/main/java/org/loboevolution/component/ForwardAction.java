@@ -29,7 +29,7 @@ import javax.swing.JTextField;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
@@ -74,7 +74,7 @@ public class ForwardAction extends AbstractAction {
 
 		final ITabbedPane tabbedPane = this.panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(this.panel);
-		final HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, text);		
+		final HtmlPanel htmlPanel = NavigatorFrame.createHtmlPanel(panel, text);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.remove(indexPanel);

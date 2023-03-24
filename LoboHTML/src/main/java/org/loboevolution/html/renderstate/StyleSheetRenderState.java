@@ -23,10 +23,11 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLHRElement;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -41,7 +42,6 @@ import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.loboevolution.store.DesktopStore;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -569,7 +569,8 @@ public class StyleSheetRenderState implements RenderState {
 	public Font getFont() {
 		CSSStyleDeclaration style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
-		FontKey key = FontValues.getDefaultFontKey();
+		final HtmlRendererConfig config = element != null ? element.getHtmlRendererConfig() : new LocalHtmlRendererConfig();
+		FontKey key = FontValues.getDefaultFontKey(config);
 
 		if (this.iFont != null) {
 			return this.iFont;
@@ -1237,6 +1238,7 @@ public class StyleSheetRenderState implements RenderState {
 		Optional<Cursor> prevCursorOpt = Optional.empty();
 		if(element == null) return prevCursorOpt;
 		CSSStyleDeclaration props = element.getStyle();
+		final HtmlRendererConfig config = element.getHtmlRendererConfig();
 
 		if (this.cursor != null) {
 			prevCursorOpt = this.cursor;
@@ -1293,10 +1295,10 @@ public class StyleSheetRenderState implements RenderState {
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 					break;
 				case ZOOM_IN:
-					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(DesktopStore.getResourceFile("zoomin.png")).getImage(), new Point(5,5), "zoomin"));
+					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomin.png")).getImage(), new Point(5,5), "zoomin"));
 					break;
 				case ZOOM_OUT:
-					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(DesktopStore.getResourceFile("zoomout.png")).getImage(), new Point(5,5), "zoomout"));
+					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomout.png")).getImage(), new Point(5,5), "zoomout"));
 					break;
 				case INHERIT:
 					prevCursorOpt = this.getPreviousRenderState().getCursor();

@@ -393,13 +393,8 @@ public class RLayout {
 
 		@Override
 		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			final HtmlObject ho = bodyLayout.rendererContext.getHtmlObject(markupElement);
-			if (ho == null && this.tryToRenderContent) {
-				// Don't know what to do with it - render contents.
+			if (this.tryToRenderContent) {
 				bodyLayout.layoutMarkup(markupElement);
-			} else if (ho != null) {
-				this.htmlObject.set(ho);
-				super.layoutMarkup(bodyLayout, markupElement);
 			}
 		}
 	}

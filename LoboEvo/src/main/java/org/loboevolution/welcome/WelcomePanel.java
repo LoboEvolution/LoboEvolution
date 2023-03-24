@@ -23,7 +23,7 @@ package org.loboevolution.welcome;
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IWelcomePanel;
-import org.loboevolution.store.DesktopStore;
+import org.loboevolution.config.DesktopConfig;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -77,7 +77,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
     protected void paintComponent(Graphics g) {
         setOpaque(false);
         if (img == null) {
-            File[] files = DesktopStore.getResourceFolderFiles();
+            File[] files = DesktopConfig.getResourceFolderFiles();
             Random rand = new Random();
             File file = files[rand.nextInt(files.length)];
             try (InputStream is = Files.newInputStream(file.toPath())) {

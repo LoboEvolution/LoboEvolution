@@ -26,9 +26,6 @@ import org.loboevolution.html.node.Node;
 
 /**
  * <p>RSSElement class.</p>
- *
- *
- *
  */
 public class RSSElement extends HTMLElementImpl {
 

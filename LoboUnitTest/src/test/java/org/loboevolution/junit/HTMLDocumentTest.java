@@ -23,6 +23,7 @@ package org.loboevolution.junit;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
@@ -121,7 +122,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     public void testAppendChildTwoDoctypesError() throws DOMException {
-        UserAgentContext context = new UserAgentContext(true);
+        UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
         context.setUserAgentEnabled(false);
         Document document = new DOMImplementationImpl(context).createDocument(null, null, null);
         document.appendChild(document.getImplementation().createDocumentType("foo", null, null));

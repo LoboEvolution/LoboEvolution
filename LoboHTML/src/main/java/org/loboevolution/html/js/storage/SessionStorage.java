@@ -20,9 +20,9 @@
 
 package org.loboevolution.html.js.storage;
 
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.webstorage.Storage;
-import org.loboevolution.store.TabStore;
-import org.loboevolution.store.WebStore;
 
 import java.util.Map;
 
@@ -32,26 +32,29 @@ import java.util.Map;
 public class SessionStorage implements Storage {
 	
 	private int index;
+
+	private HtmlRendererConfig config;
 	
 	/**
 	 * <p>Constructor for SessionStorage.</p>
 	 */
-	public SessionStorage() {
-		this.index = TabStore.getTabs().size();
+	public SessionStorage(HtmlRendererConfig config) {
+		this.config = config;
+		this.index = config.getTabs().size();
 		if(this.index > 0) this.index = this.index -1;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
-		return WebStore.countStorage(index);
+		return config.countStorage(index);
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public Object key(int index) {
         int counter = 0;
-        Map<String, String> store = WebStore.getMapStorage(index, 1);
+        Map<String, String> store = config.getMapStorage(index, 1);
         for (final String key : store.keySet()) {
             if (counter++ == index) {
                 return key;
@@ -63,27 +66,27 @@ public class SessionStorage implements Storage {
 	/** {@inheritDoc} */
 	@Override
 	public Object getItem(String key) {
-		return WebStore.getValue(key, 1, index);
+		return config.getValue(key, 1, index);
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void setItem(String keyName, String keyValue) {
-		WebStore.deleteStorage(keyName, 1, index);
-		WebStore.insertStorage(keyName, keyValue, 1, index);
+		config.deleteStorage(keyName, 1, index);
+		config.insertStorage(keyName, keyValue, 1, index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void removeItem(String keyName) {
-		WebStore.deleteStorage(keyName, 1, index);
+		config.deleteStorage(keyName, 1, index);
 
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void clear() {
-		WebStore.deleteStorage(1, index);
+		config.deleteStorage(1, index);
 	}
 
 	@Override

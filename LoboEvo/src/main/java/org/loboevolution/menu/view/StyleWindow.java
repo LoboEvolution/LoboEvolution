@@ -26,8 +26,9 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.ITabbedPane;
+import org.loboevolution.component.NavigatorFrame;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.store.StyleStore;
 
@@ -84,7 +85,7 @@ public class StyleWindow extends JFrame {
 				final ITabbedPane tabbedPane = panel.getTabbedPane();
 				tabbedPane.setComponentPopupMenu(panel);
 				final int indexPanel = tabbedPane.getSelectedIndex();
-				HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, fullURL);
+				HtmlPanel htmlPanel = NavigatorFrame.createHtmlPanel(panel, fullURL);
 				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 				final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 				tabbedPane.remove(indexPanel);

@@ -21,10 +21,12 @@
 package org.loboevolution.html.dom.input;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.HTMLInputElement;
 import org.loboevolution.html.dom.domimpl.HTMLBasicInputElement;
+import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
-import org.loboevolution.store.InputStore;
+import org.loboevolution.html.js.WindowImpl;
 
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -70,10 +72,13 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         }
 
         if (autocomplete || "password".equals(type)) {
+            HTMLInputElementImpl im =  (HTMLInputElementImpl)element;
+            WindowImpl win = (WindowImpl) im.getDocumentNode().getDefaultView();
+            HtmlRendererConfig config = win.getConfig();
             final String text = jComponent.getText();
             final boolean isNavigation = element.getUserAgentContext().isNavigationEnabled();
-            InputStore.deleteInput(text, baseUrl);
-            InputStore.insertLogin(type, text, baseUrl, isNavigation);
+            config.deleteInput(text, baseUrl);
+            config.insertLogin(type, text, baseUrl, isNavigation);
         }
 
         if (element.getOnblur() != null) {

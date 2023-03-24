@@ -20,7 +20,7 @@
 /*
  * Created on Apr 16, 2005
  */
-package org.loboevolution.html.gui;
+package org.loboevolution.gui;
 
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -33,7 +33,6 @@ import org.loboevolution.html.renderer.*;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 
 import javax.swing.*;
@@ -51,7 +50,7 @@ import java.util.logging.Logger;
 /**
  * A Swing component that renders a HTML block, given by a DOM root or an
  * internal element, typically a DIV. This component <i>cannot</i> render
- * FRAMESETs. HtmlBlockPanel is used by {@link org.loboevolution.html.gui.HtmlPanel} whenever
+ * FRAMESETs. HtmlBlockPanel is used by {@link HtmlPanel} whenever
  * the DOM is determined <i>not</i> to be a FRAMESET.
  *
  * @see HtmlPanel
@@ -84,7 +83,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @param background a {@link java.awt.Color} object.
 	 * @param opaque a boolean.
 	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param rcontext a {@link HtmlRendererContext} object.
 	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
 	 */
 	public HtmlBlockPanel(Color background, boolean opaque, UserAgentContext pcontext, HtmlRendererContext rcontext,

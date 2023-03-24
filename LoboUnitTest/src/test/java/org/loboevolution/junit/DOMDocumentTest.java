@@ -24,6 +24,7 @@ import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLStyleElementImpl;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -42,7 +43,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-        UserAgentContext context = new UserAgentContext(true);
+        UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
         context.setUserAgentEnabled(false);
         domImpl = new DOMImplementationImpl(context);
     }

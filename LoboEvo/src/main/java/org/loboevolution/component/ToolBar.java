@@ -38,9 +38,9 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import org.loboevolution.component.input.Autocomplete;
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.BookmarksStore;
-import org.loboevolution.store.DesktopStore;
 
 /**
  * <p>ToolBar class.</p>
@@ -116,21 +116,21 @@ public class ToolBar extends JToolBar implements IToolBar {
 			}
 		});
 
-		ImageIcon icon = new ImageIcon(DesktopStore.getResourceFile("back.png"));
+		ImageIcon icon = new ImageIcon(DesktopConfig.getResourceFile("back.png"));
 		final JButton back = new JButton();
 		back.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		back.setToolTipText("Back");
 		back.setBorder(BorderFactory.createEmptyBorder());
 		back.addActionListener(new BackAction(panel, this.addressBar));
 
-		icon = new ImageIcon(DesktopStore.getResourceFile("forward.png"));
+		icon = new ImageIcon(DesktopConfig.getResourceFile("forward.png"));
 		final JButton forward = new JButton();
 		forward.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		forward.setToolTipText("Forward");
 		forward.setBorder(BorderFactory.createEmptyBorder());
 		forward.addActionListener(new ForwardAction(panel, this.addressBar));
 
-		icon = new ImageIcon(DesktopStore.getResourceFile("reload.png"));
+		icon = new ImageIcon(DesktopConfig.getResourceFile("reload.png"));
 		final JButton refresh = new JButton();
 		refresh.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		refresh.setToolTipText("Refresh");
@@ -140,14 +140,14 @@ public class ToolBar extends JToolBar implements IToolBar {
 		this.addressBar.setEditable(true);
 		this.addressBar.setBackground(Color.LIGHT_GRAY);
 
-		icon = new ImageIcon(DesktopStore.getResourceFile("go.png"));
+		icon = new ImageIcon(DesktopConfig.getResourceFile("go.png"));
 		final JButton go = new JButton();
 		go.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		go.setToolTipText("Go");
 		go.setBorder(BorderFactory.createEmptyBorder());
 		go.addActionListener(new GoAction(panel, this.addressBar));
 
-		icon = new ImageIcon(DesktopStore.getResourceFile("home.png"));
+		icon = new ImageIcon(DesktopConfig.getResourceFile("home.png"));
 		final JButton home = new JButton();
 		home.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		home.setToolTipText("Home");

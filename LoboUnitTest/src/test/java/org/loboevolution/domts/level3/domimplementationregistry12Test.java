@@ -23,6 +23,7 @@ package org.loboevolution.domts.level3;
 
 import lombok.SneakyThrows;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
@@ -59,7 +60,7 @@ public class domimplementationregistry12Test extends LoboUnitTest {
         domImpl = domImplRegistry.getDOMImplementation("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS");
 
         if ((domImpl == null)) {
-            baseImpl = new DOMImplementationImpl(new UserAgentContext(true));
+            baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasCore = baseImpl.hasFeature("Core", "3.0");
             hasXML = baseImpl.hasFeature("XML", "3.0");
             hasEvents = baseImpl.hasFeature("Events", "2.0");

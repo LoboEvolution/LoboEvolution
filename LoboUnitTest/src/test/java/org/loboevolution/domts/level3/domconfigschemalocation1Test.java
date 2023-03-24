@@ -23,6 +23,7 @@ package org.loboevolution.domts.level3;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMConfiguration;
@@ -56,7 +57,7 @@ public class domconfigschemalocation1Test extends LoboUnitTest {
         String nullSchemaLocation = null;
 
         String sampleSchemaLocation = "http://www.example.com/schemas/sampleschema.xsd";
-        domImpl = new DOMImplementationImpl(new UserAgentContext(true));
+        domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);

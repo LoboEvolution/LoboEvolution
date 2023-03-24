@@ -26,9 +26,6 @@ import org.loboevolution.html.node.js.Window;
  * Events that occur due to the user interacting with a pointing device (such as
  * a mouse). Common events using this interface include click, dblclick,
  * mouseup, mousedown.
- *
- *
- *
  */
 public interface MouseEvent extends UIEvent {
 

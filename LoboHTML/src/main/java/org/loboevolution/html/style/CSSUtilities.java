@@ -28,9 +28,9 @@ import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
 import org.loboevolution.common.Strings;
+import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.node.css.MediaQueryList;
 import org.loboevolution.html.node.js.Window;
-import org.loboevolution.store.ExternalResourcesStore;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -101,16 +101,17 @@ public final class CSSUtilities {
 	/**
 	 * <p>parseCssExternal.</p>
 	 *
-	 * @param href a {@link java.lang.String} object.
-	 * @param scriptURL a {@link java.net.URL} object.
-	 * @param baseURI a {@link java.lang.String} object.
-	 * @return a {@link com.gargoylesoftware.css.dom.CSSStyleSheetImpl} object.
+	 * @param config a {@link HtmlRendererConfig} object.
+	 * @param href                a {@link String} object.
+	 * @param scriptURL           a {@link URL} object.
+	 * @param baseURI             a {@link String} object.
+	 * @return a {@link CSSStyleSheetImpl} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static CSSStyleSheetImpl parseCssExternal(String href, URL scriptURL, String baseURI, boolean test) throws Exception {
+	public static CSSStyleSheetImpl parseCssExternal(HtmlRendererConfig config, String href, URL scriptURL, String baseURI, boolean test) throws Exception {
 		CSSOMParser parser = new CSSOMParser();
 		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
-		String source = !test ? ExternalResourcesStore.getSourceCache(scriptURI, "CSS", test) : ExternalResourcesStore.sourceResponse(scriptURI, "CSS", test);
+		String source = config.getSourceCache(scriptURI, "CSS", test);
 		InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
 		return parser.parseStyleSheet(is, null);
 	}

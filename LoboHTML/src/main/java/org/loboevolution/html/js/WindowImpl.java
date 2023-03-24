@@ -24,6 +24,8 @@ package org.loboevolution.html.js;
 
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
 import com.gargoylesoftware.css.dom.DOMException;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.BodyFilter;
@@ -52,7 +54,6 @@ import org.loboevolution.html.node.js.console.Console;
 import org.loboevolution.html.node.js.webstorage.Storage;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.views.DocumentView;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaInstantiator;
 import org.loboevolution.js.JavaScript;
@@ -117,25 +118,29 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	private final UserAgentContext uaContext;
 
+	private final HtmlRendererConfig config;
+
     
 	/**
 	 * <p>Constructor for WindowImpl.</p>
 	 *
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
-	 * @param uaContext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext  a {@link HtmlRendererContext} object.
+	 * @param uaContext a {@link UserAgentContext} object.
+	 * @param config a {@link HtmlRendererConfig} object.
 	 */
-	public WindowImpl(HtmlRendererContext rcontext, UserAgentContext uaContext) {
+	public WindowImpl(final HtmlRendererContext rcontext, final UserAgentContext uaContext, final HtmlRendererConfig config) {
 		this.rcontext = rcontext;
 		this.uaContext = uaContext;
+		this.config = config;
 	}
 
 	/**
 	 * <p>getWindow.</p>
 	 *
-	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param rcontext a {@link HtmlRendererContext} object.
 	 * @return a {@link org.loboevolution.html.js.WindowImpl} object.
 	 */
-	public static WindowImpl getWindow(HtmlRendererContext rcontext) {
+	public static WindowImpl getWindow(HtmlRendererContext rcontext, final HtmlRendererConfig config) {
 		if (rcontext == null) {
 			return null;
 		}
@@ -147,7 +152,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 					return windowImpl;
 				}
 			}
-			final WindowImpl windowImpl = new WindowImpl(rcontext, rcontext.getUserAgentContext());
+			final WindowImpl windowImpl = new WindowImpl(rcontext, rcontext.getUserAgentContext(), config);
 			CONTEXT_WINDOWS.put(rcontext, new WeakReference<>(windowImpl));
 			return windowImpl;
 		}
@@ -180,7 +185,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/**
 	 * <p>getHtmlRendererContext.</p>
 	 *
-	 * @return a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @return a {@link HtmlRendererContext} object.
 	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		return this.rcontext;
@@ -247,6 +252,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	public UserAgentContext getUaContext() {
 		return uaContext;
 	}
+
+	@Override
+	public HtmlRendererConfig getConfig() { return this.config; }
 
 	/**
 	 * <p>Getter for the field <code>msg</code>.</p>
@@ -388,13 +396,13 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
     public Storage getLocalStorage() {
-        return new LocalStorage();
+        return new LocalStorage(this);
     }
 
 	/** {@inheritDoc} */
 	@Override
     public Storage getSessionStorage() {
-    	 return new SessionStorage();
+    	 return new SessionStorage(this.getHtmlRendererConfig());
     }
 
 	/** {@inheritDoc} */
@@ -458,7 +466,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	public WindowImpl getOpener() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null && rcontext.getOpener() != null) {
-			return WindowImpl.getWindow(rcontext.getOpener());
+			return WindowImpl.getWindow(rcontext.getOpener(), this.config);
 		} else {
 			return null;
 		}
@@ -469,7 +477,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	public WindowImpl getParent() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null && rcontext.getParent() != null) {
-			return WindowImpl.getWindow(rcontext.getParent());
+			return WindowImpl.getWindow(rcontext.getParent(), this.config);
 		} else {
 			return this;
 		}
@@ -510,7 +518,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	public WindowImpl getTop() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null && rcontext.getTop() != null) {
-			return WindowImpl.getWindow(rcontext.getTop());
+			return WindowImpl.getWindow(rcontext.getTop(), this.config);
 		} else {
 			return null;
 		}
@@ -563,7 +571,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 		if (url != null && rcontext != null) {
 			final HtmlRendererContext newContext = rcontext.open(url, windowName, windowFeatures, replace);
-			return getWindow(newContext);
+			return getWindow(newContext, this.config);
 		} else {
 			return null;
 		}
@@ -922,7 +930,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public Console getConsole() {
-		return new ConsoleImpl();
+		return new ConsoleImpl(this.getHtmlRendererConfig());
 	}
 
 	/** {@inheritDoc} */
@@ -1182,6 +1190,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		};
 
 		JavaInstantiator jidomp = () -> new DOMParserImpl(document);
+		JavaInstantiator jiloc = () -> new LocalStorage(this);
 
 		js.defineJsObject(ws, "XMLHttpRequest", XMLHttpRequest.class, jiXhttp);
 		js.defineJsObject(ws, "DOMParser",  DOMParserImpl.class, jidomp);
@@ -1193,7 +1202,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineJsObject(ws, "Element", Element.class, MouseEventImpl::new);
 		js.defineJsObject(ws, "Event", EventImpl.class, EventImpl::new);
 		js.defineJsObject(ws, "Text", TextImpl.class, TextImpl::new);
-		js.defineJsObject(ws, "Storage", LocalStorage.class, LocalStorage::new);
+		js.defineJsObject(ws, "Storage", LocalStorage.class, jiloc);
 
 
 		js.defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);

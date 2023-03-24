@@ -22,6 +22,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DOMImplementationList;
 import org.loboevolution.html.node.DOMImplementationSource;
@@ -47,7 +48,7 @@ public class DOMImplementationSourceImpl implements DOMImplementationSource {
      * <code>null</code> if this source has none.
      */
     public DOMImplementation getDOMImplementation(String features) {
-        DOMImplementation impl = new DOMImplementationImpl(new UserAgentContext(false));
+        DOMImplementation impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), false));
         if (testImpl(impl, features)) {
             return impl;
         }
@@ -68,7 +69,7 @@ public class DOMImplementationSourceImpl implements DOMImplementationSource {
      * features.
      */
     public DOMImplementationList getDOMImplementationList(String features) {
-        DOMImplementation impl = new DOMImplementationImpl(new UserAgentContext(false));
+        DOMImplementation impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(),false));
         final List<DOMImplementation> implementations = new ArrayList<>();
         if (testImpl(impl, features)) {
             implementations.add(impl);

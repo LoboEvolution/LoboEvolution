@@ -22,6 +22,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.filter.InputFilter;
@@ -32,7 +33,6 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
 
 import java.net.MalformedURLException;

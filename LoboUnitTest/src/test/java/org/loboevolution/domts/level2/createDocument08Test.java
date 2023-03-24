@@ -24,6 +24,7 @@ package org.loboevolution.domts.level2;
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DocumentType;
@@ -49,7 +50,7 @@ public class createDocument08Test extends LoboUnitTest {
         String namespaceURI = "http://www.example.org/schema";
         DocumentType docType = null;
         DOMImplementation domImpl;
-        domImpl = new DOMImplementationImpl(new UserAgentContext(true));
+        domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         boolean success = false;
         try {
             domImpl.createDocument(namespaceURI, "", docType);

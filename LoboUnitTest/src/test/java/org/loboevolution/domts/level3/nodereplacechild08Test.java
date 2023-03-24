@@ -23,6 +23,7 @@ package org.loboevolution.domts.level3;
 
 import com.gargoylesoftware.css.dom.DOMException;
 import org.junit.Test;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.*;
@@ -58,7 +59,7 @@ public class nodereplacechild08Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
-        domImpl = new DOMImplementationImpl(new UserAgentContext(true));
+        domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc2 = domImpl.createDocument(rootNS, rootName, nullDocType);
         elem = doc2.createElementNS(rootNS, rootName);
 

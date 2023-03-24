@@ -21,8 +21,10 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
+import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLLinkElement;
-import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.css.StyleSheet;
@@ -30,11 +32,9 @@ import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.LinkRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
-import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.MimeType;
-import org.loboevolution.store.StyleStore;
 import org.loboevolution.html.dom.UserDataHandler;
 
 import java.io.File;
@@ -131,6 +131,8 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 			try {
 				final HtmlRendererContext rcontext = this.getHtmlRendererContext();
+				final HtmlRendererConfig config = this.getHtmlRendererConfig();
+
 				final String href = getHref();
 				final String cleanRel = rel.trim().toLowerCase();
 				final boolean isStyleSheet = cleanRel.equals("stylesheet");
@@ -153,10 +155,9 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 					String styleEnabled = "";
 					List<String> styles = new ArrayList<>();
 					if (!rcontext.isTestEnabled()) {
-						StyleStore style = new StyleStore();
-						styles = style.getStyles(href, currentUrl);
+						styles = config.getStyles(href, currentUrl);
 						if (styles.size() == 0) {
-							style.insertStyle(title, href, currentUrl, isStyleSheet ? 1 : 0);
+							config.insertStyle(title, href, currentUrl, isStyleSheet ? 1 : 0);
 						} else {
 							styleEnabled = styles.get(0);
 						}
@@ -169,7 +170,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 							if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
 								Instant start = Instant.now();
 								TimingInfo info = new TimingInfo();
-								final com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI, rcontext.isTestEnabled());
+								final com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHtmlRendererConfig(), href, scriptURL, baseURI, rcontext.isTestEnabled());
 								sheet.setHref(baseURI);
 								sheet.setDisabled(this.disabled);
 								CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
