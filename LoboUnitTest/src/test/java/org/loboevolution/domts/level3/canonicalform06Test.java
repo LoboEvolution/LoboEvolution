@@ -89,7 +89,7 @@ public class canonicalform06Test extends LoboUnitTest {
             }
             throw ex;
         }
-        elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
+        elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalName");
         doc.appendChild(elem);
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();

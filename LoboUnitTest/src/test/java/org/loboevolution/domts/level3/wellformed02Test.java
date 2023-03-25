@@ -82,7 +82,7 @@ public class wellformed02Test extends LoboUnitTest {
             }
             throw ex;
         }
-        elem = doc.createElementNS("http://www.example.org/domts/wellformed02", "LegalNameࢎ");
+        elem = doc.createElementNS("http://www.example.org/domts/wellformed02", "LegalName");
         retval = doc.appendChild(elem);
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();

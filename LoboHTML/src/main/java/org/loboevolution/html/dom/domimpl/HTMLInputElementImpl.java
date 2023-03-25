@@ -429,14 +429,13 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	/** {@inheritDoc} */
 	@Override
 	public double getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getAttributeAsInt("height", -1);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setHeight(double height) {
-		// TODO Auto-generated method stub
+		setAttribute("height", String.valueOf(height));
 		
 	}
 
@@ -562,14 +561,13 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	/** {@inheritDoc} */
 	@Override
 	public double getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getAttributeAsInt("width", -1);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setWidth(double width) {
-		// TODO Auto-generated method stub
+		setAttribute("width", String.valueOf(width));
 		
 	}
 

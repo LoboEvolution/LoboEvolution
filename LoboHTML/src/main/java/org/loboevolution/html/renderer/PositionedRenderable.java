@@ -54,11 +54,7 @@ public class PositionedRenderable implements Renderable {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics gIn) {
-		final RCollection originalParent = this.renderable.getOriginalParent();
-		final RCollection rparent = renderable.getParent();
-		final Point or = originalParent.getOriginRelativeTo(rparent);
 		final int pos = this.renderable.getModelNode().getRenderState().getPosition();
-
 		if (isFloat || pos == RenderState.POSITION_ABSOLUTE || pos == RenderState.POSITION_FIXED) {
 			final Graphics g2 = gIn.create();
 			final Point some = getSome();
@@ -69,6 +65,9 @@ public class PositionedRenderable implements Renderable {
 
 			this.renderable.paintTranslated(g2);
 		} else {
+			final RCollection originalParent = this.renderable.getOriginalParent();
+			final RCollection rparent = renderable.getParent();
+			final Point or = originalParent.getOriginRelativeTo(rparent);
 			final Point orNoScroll = originalParent.getOriginRelativeToNoScroll(rparent);
 			final Rectangle bounds = getRelativeBounds();
 			Graphics g2;

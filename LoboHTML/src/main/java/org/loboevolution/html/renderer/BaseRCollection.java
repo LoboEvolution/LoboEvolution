@@ -20,7 +20,14 @@
 
 package org.loboevolution.html.renderer;
 
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.style.HtmlInsets;
+import org.loboevolution.html.style.HtmlValues;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -320,6 +327,119 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				}
 			}
 		}
+	}
+
+
+	/**
+	 * <p>getDeclaredWidthImpl.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param availWidth a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
+	 */
+	public int getDeclaredWidthImpl(HTMLElementImpl element, int availWidth) {
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
+		CSSStyleDeclaration props = element.getCurrentStyle();
+		RenderState renderState = element.getRenderState();
+		if (props == null) {
+			return -1;
+		}
+		String widthText = props.getWidth();
+		final String textContent = element.getTextContent();
+
+		if ("inherit".equalsIgnoreCase(widthText)) {
+			widthText = element.getParentStyle().getWidth();
+		} else if ("initial".equalsIgnoreCase(widthText)) {
+			widthText = "100%";
+		}
+
+		int width = -1;
+
+		if (Strings.isNotBlank(widthText)) {
+			width = HtmlValues.getPixelSize(widthText, renderState, doc.getDefaultView(), -1, availWidth);
+		}
+
+		if (width == -1 && Strings.isNotBlank(textContent) && renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK) {
+			HtmlInsets paddingInsets = renderState.getPaddingInsets();
+			HtmlInsets marginInsets = renderState.getMarginInsets();
+			int right = 0;
+			int left = 0;
+
+			if (paddingInsets != null) {
+				right = right + paddingInsets.getRight();
+				left = left + paddingInsets.getLeft();
+			}
+
+			if (marginInsets != null) {
+				right = right + marginInsets.getRight();
+				left = left + marginInsets.getLeft();
+			}
+
+			final int multi = (right == 0 && left == 0) ? 12 : 4;
+
+			width = (textContent.length() + right + left) * multi;
+		}
+
+		if (Strings.isNotBlank(props.getMaxWidth())) {
+			int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), renderState, doc.getDefaultView(), -1, availWidth);
+
+			if (width == -1 || width > maxWidth) {
+				width = maxWidth;
+			}
+		}
+
+		if (Strings.isNotBlank(props.getMinWidth())) {
+			int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
+
+			if (width == 0 || width < minWidth) {
+				width = minWidth;
+			}
+		}
+		return width;
+	}
+
+	/**
+	 * <p>getDeclaredHeightImpl.</p>
+	 *
+	 @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param availHeight a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
+	 */
+	public int getDeclaredHeightImpl(HTMLElementImpl element, int availHeight) {
+			CSSStyleDeclaration props = element.getCurrentStyle();
+			RenderState renderState = element.getRenderState();
+			if (props == null) {
+				return -1;
+			}
+			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
+			String heightText = props.getHeight();
+
+			if ("inherit".equalsIgnoreCase(heightText)) {
+				heightText = element.getParentStyle().getHeight();
+			} else if ("initial".equalsIgnoreCase(heightText)) {
+				heightText = "100%";
+			}
+
+			int height = -1;
+
+			if (heightText != null) {
+				height = HtmlValues.getPixelSize(heightText, renderState, doc.getDefaultView(), -1, availHeight);
+			}
+
+			if (props.getMaxHeight() != null) {
+				int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getDefaultView(),-1, availHeight);
+				if (height == 0 || height > maxHeight) {
+					height = maxHeight;
+				}
+			}
+
+			if (props.getMinHeight() != null) {
+				int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(),-1, availHeight);
+				if (height == 0 || height < minHeight) {
+					height = minHeight;
+				}
+			}
+			return height;
 	}
 	
 	private boolean checkEndSelection(Rectangle bounds, Point selectionPoint) {
