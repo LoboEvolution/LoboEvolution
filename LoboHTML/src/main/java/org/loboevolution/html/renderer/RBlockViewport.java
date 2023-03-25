@@ -58,9 +58,6 @@ import java.util.logging.Logger;
  * node, usually on behalf of an RBlock. It creates a renderer subtree
  * consisting of RLine's or RBlock's. RLine's in turn contain RWord's and so on.
  * This class also happens to be used as an RBlock scrollable viewport.
- *
- * Author J. H. S.
- *
  */
 public class RBlockViewport extends BaseRCollection {
 	
@@ -135,33 +132,14 @@ public class RBlockViewport extends BaseRCollection {
 		this.rendererContext = info.getRcontext();
 		this.frameContext = info.getFrameContext();
 		this.container = container;
-		// Layout here can always be "invalidated"
 		this.layoutUpTreeCanBeInvalidated = true;
 		this.info = info;
 	}
 	
 	private static int getPosition(HTMLElementImpl element) {
+		if(element == null) return RenderState.POSITION_STATIC;
 		final RenderState rs = element.getRenderState();
 		return rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
-	}
-
-	private void addAlignableAsBlock(HTMLElementImpl markupElement, RElement renderable) {
-		boolean regularAdd = false;
-		final String align = markupElement.getAttribute("align");
-		if (align != null) {
-			if ("left".equalsIgnoreCase(align)) {
-				layoutFloat(renderable, false, true);
-			} else if ("right".equalsIgnoreCase(align)) {
-				layoutFloat(renderable, false, false);
-			} else {
-				regularAdd = true;
-			}
-		} else {
-			regularAdd = true;
-		}
-		if (regularAdd) {
-			this.addAsSeqBlock(renderable);
-		}
 	}
 
 	private void addAsSeqBlock(BoundableRenderable block, boolean obeysFloats, boolean informLineDone, boolean addLine,
@@ -296,14 +274,15 @@ public class RBlockViewport extends BaseRCollection {
 						.defaultOverflowY(block.defaultOverflowY)
 						.sizeOnly(this.sizeOnly)
 						.build());
+
 			} else {
 				renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 			}
 
-			final RenderState rs = element.getRenderState();
-			this.scheduleAbsDelayedPair(renderable, availContentWidth, availContentHeight, style, rs, absolute, fixed);
+			this.scheduleAbsDelayedPair(renderable, availContentWidth, availContentHeight, element, absolute, fixed);
 			return true;
 		} else {
+			renderable.setupRelativePosition(container);
 			return addElsewhereIfFloat(renderable, element, usesAlignAttribute, style);
 		}
 	}
@@ -1819,9 +1798,32 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param absolute if true, then position is absolute, else fixed
 	 */
 	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final int availContentWidth, final int availContentHeight,
-										final CSSStyleDeclaration style, final RenderState rs, final boolean absolute,
-										final boolean fixed) {
+										final HTMLElementImpl element, final boolean absolute, final boolean fixed) {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
+
+		final CSSStyleDeclaration style = element.getCurrentStyle();
+		int dhInt = getDeclaredHeightImpl(element, container.getInnerHeight());
+		int dwInt = getDeclaredWidthImpl(element, container.getInnerWidth());
+
+		Node nodeObj = element.getFirstChild();
+		if (nodeObj instanceof HTMLElementImpl) {
+			final int position = getPosition((HTMLElementImpl) nodeObj);
+
+			if (position != RenderState.POSITION_ABSOLUTE && position != RenderState.POSITION_FIXED) {
+				HTMLElementImpl elem = (HTMLElementImpl) nodeObj;
+				final int wclient = elem.getBoundingClientRect().getWidth();
+				final int hclient = elem.getBoundingClientRect().getHeight();
+				dwInt = wclient != -1 ? wclient : dwInt;
+				dhInt = hclient != -1 ? hclient : dhInt;
+				final RenderState rs = elem.getRenderState();
+				HtmlInsets marginInsets = rs.getMarginInsets();
+				if (marginInsets != null) {
+					dwInt += marginInsets.getLeft() + marginInsets.getRight();
+					dhInt += marginInsets.getTop() + marginInsets.getBottom();
+				}
+			}
+		}
+
 		this.container.addDelayedPair(DelayedPair.builder().
 				modelNode(getModelNode()).
 				immediateContainingBlock(container).
@@ -1833,9 +1835,9 @@ public class RBlockViewport extends BaseRCollection {
 				right(style.getRight()).
 				top(style.getTop()).
 				bottom(style.getBottom()).
-				width(style.getWidth()).
-				height(style.getHeight()).
-				rs(rs).
+				width(dwInt).
+				height(dhInt).
+				rs(element.getRenderState()).
 				initY(currentLine.getY() + currentLine.getHeight()).
 				initX(currentLine.getX()).
 				isFixed(fixed).
@@ -1954,7 +1956,6 @@ public class RBlockViewport extends BaseRCollection {
 						maxY = rcMaxY;
 					}
 				} else {
-					System.err.println("Unhandled renderable: " + r);
 					Thread.dumpStack();
 				}
 			}
@@ -1989,7 +1990,6 @@ public class RBlockViewport extends BaseRCollection {
 						maxX = rcMaxX;
 					}
 				} else {
-					System.err.println("Unhandled renderable: " + r);
 					Thread.dumpStack();
 				}
 			}

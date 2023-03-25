@@ -58,6 +58,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 /**
@@ -79,6 +80,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public ElementImpl(final String name) {
 		this.name = name;
 		this.map = new NamedNodeMapImpl(this, new NodeListImpl());
+
 	}
 
 	/** {@inheritDoc} */
@@ -872,48 +874,83 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public DOMRect getBoundingClientRect() {
 
-		CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
+		CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final Window win = doc.getDefaultView();
 		final RenderState rs  = doc.getRenderState();
 		int width = calculateWidth(true, true);
 		int height = calculateHeight(true, true);
 		String position = currentStyle.getPosition();
-		int topLeft = currentStyle.getLength() > 0 ? 8 : 0;
-		int top = topLeft;
-		int left = topLeft;
+		int marginLeft =  HtmlValues.getPixelSize(currentStyle.getMarginLeft(), rs, win, 0);
+		int marginTop =  HtmlValues.getPixelSize(currentStyle.getMarginTop(), rs, win, 0);
 
-		if(CSSValues.ABSOLUTE.isEqual(position)){
-			top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
-			left = HtmlValues.getPixelSize(currentStyle.getLeft(), rs, win, 0);
+		int top = 8;
+		int left = 8;
+
+		if (getParentNode() == null && getChildElementCount() == 0) {
+			top = 0;
+			left = 0;
 		}
 
-		for (Node n = getParentNode(); n != null; n = n.getParentNode()) {
+		if(CSSValues.ABSOLUTE.isEqual(position)){
+			int topLeft = HtmlValues.getPixelSize(currentStyle.getWidth(), rs, win, 0);
+			top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
+			String leftTxt = currentStyle.getLeft();
 
-			if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl) && CSSValues.ABSOLUTE.isEqual(position)) {
-				HTMLElementImpl p = (HTMLElementImpl) n;
-				CSSStyleDeclaration pCurrentStyle = p.getStyle();
-				String topTxt = pCurrentStyle.getTop();
-				String leftTxt = pCurrentStyle.getLeft();
-				int scrollTop = (int) p.getScrollTop();
-				int scrollLeft = (int) p.getScrollLeft();
-				if (Strings.isNotBlank(topTxt)) {
-					top += HtmlValues.getPixelSize(topTxt, rs, win, 0);
-				}
-
-				if (Strings.isNotBlank(leftTxt)) {
-					left += HtmlValues.getPixelSize(leftTxt, rs, win, 0);
-				}
-
-				top -= scrollTop;
-				left -= scrollLeft;
+			if (Strings.isBlank(leftTxt)) {
+				left = topLeft > 0 ? topLeft / 2 : topLeft;
+			} else {
+				left = HtmlValues.getPixelSize(leftTxt, rs, win, 0);
 			}
 		}
 
-		final HTMLElementImpl elem = ((HTMLElementImpl) this);
-		final int bottom = (int) (top + elem.getOffsetHeight());
-		final int right = left + 50;
-		return new DOMRectImpl(width, height, top, right, bottom, left);
+
+		for (Node n = getParentNode(); n != null; n = n.getParentNode()) {
+
+			if (!(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
+
+				HTMLElementImpl p = (HTMLElementImpl) n;
+				CSSStyleDeclaration pCurrentStyle = p.getCurrentStyle();
+				String positionTxt = pCurrentStyle.getPosition();
+				if (CSSValues.ABSOLUTE.isEqual(positionTxt)) {
+
+					String topTxt = pCurrentStyle.getTop();
+					String leftTxt = pCurrentStyle.getLeft();
+					int scrollTop = (int) p.getScrollTop();
+					int scrollLeft = (int) p.getScrollLeft();
+
+					if (Strings.isNotBlank(topTxt)) {
+						top = HtmlValues.getPixelSize(topTxt, rs, win, 0);
+					}
+
+					if (Strings.isNotBlank(leftTxt) && left == 0) {
+						left = HtmlValues.getPixelSize(leftTxt, rs, win, 0);
+					}
+
+					if (Strings.isNotBlank(pCurrentStyle.getWidth()) && !pCurrentStyle.getWidth().equals("0")) {
+						width = HtmlValues.getPixelSize(pCurrentStyle.getWidth(), rs, win, 0);
+					}
+
+					top = scrollTop > top ? scrollTop - top : top;
+					left = scrollLeft > left ? scrollLeft - left : left;
+					left = left == 0 ? 8 : left;
+				} else {
+					if (Strings.isNotBlank(pCurrentStyle.getMarginTop())) {
+						top = 0;
+						marginTop += HtmlValues.getPixelSize(pCurrentStyle.getMarginTop(), rs, win, 0);
+					}
+					if (Strings.isNotBlank(pCurrentStyle.getMarginLeft())) {
+						left = 0;
+						marginLeft += HtmlValues.getPixelSize(pCurrentStyle.getMarginLeft(), rs, win, 0);
+					}
+				}
+			}
+		}
+
+		top = top + marginTop;
+		left = left + marginLeft;
+		final int bottom = top + height;
+		return new DOMRectImpl(width, height, top, bottom, left);
 	}
 
 	/** {@inheritDoc} */
@@ -926,7 +963,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			for (Node n = getParentNode(); n != null; n = n.getPreviousSibling()) {
 				if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
 					HTMLElementImpl p = (HTMLElementImpl) n;
-					CSSStyleDeclaration st = p.getStyle();
+					CSSStyleDeclaration st = p.getCurrentStyle();
 					display = st.getDisplay();
 				}
 			}
@@ -1108,43 +1145,49 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
     private boolean isHScrollable() {
         String overflow;
-        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
+        CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
         overflow = currentStyle.getOverflow();
         int widthChild = 0;
 
         for (final Node child : (NodeListImpl) this.getChildNodes()) {
-            if (child instanceof HTMLElementImpl) widthChild += ((HTMLElementImpl) child).getClientWidth();
-        }
-
+			if (child instanceof HTMLElementImpl) {
+				CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+				widthChild += ((HTMLElementImpl) child).getClientWidth();
+				widthChild += HtmlValues.getPixelSize(pCurrentStyle.getLeft(), null, document.getDefaultView(), 0);
+				widthChild += HtmlValues.getPixelSize(pCurrentStyle.getRight(), null, document.getDefaultView(), 0);
+			}
+		}
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (widthChild > this.getClientWidth());
     }
 
     private boolean isVScrollable() {
         String overflow;
-        CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getStyle();
+        CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
         overflow = currentStyle.getOverflow();
         int heightChild = 0;
 
-        for (final Node child : (NodeListImpl) this.getChildNodes()) {
-            if (child instanceof HTMLElementImpl) heightChild += ((HTMLElementImpl) child).getClientHeight();
-        }
+		for (final Node child : (NodeListImpl) this.getChildNodes()) {
+			if (child instanceof HTMLElementImpl) {
+				heightChild += ((HTMLElementImpl) child).getClientHeight();
+				CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+				heightChild += HtmlValues.getPixelSize(pCurrentStyle.getTop(), null, document.getDefaultView(), 0);
+			}
+		}
 
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
     }
 
-	protected int calculateWidth(boolean border, boolean padding) {
+	public int calculateWidth(boolean border, boolean padding) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		String width = currentStyle.getWidth();
 		String borderLeftWidth = currentStyle.getBorderLeftWidth();
 		String borderRightWidth = currentStyle.getBorderRightWidth();
 		String boxSizing = currentStyle.getBoxSizing();
-		String position = currentStyle.getPosition();
 		String display = currentStyle.getDisplay();
-		String cssFloat = currentStyle.getFloat();
 		int sizeWidth = preferredSize.width;
 
 		if (getParentNode() == null || CSSValues.INLINE.isEqual(display) || CSSValues.NONE.isEqual(display)) {
@@ -1159,21 +1202,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			width = "-1px";
 		}
 
-		final Node nodeObj = getParentNode();
+		Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
 			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
-			if(elem.getClientHeight() != -1) {
-				sizeWidth = elem.getClientWidth();
-			}
-		}
-
-		if ((CSSValues.RIGHT.isEqual(cssFloat) || CSSValues.LEFT.isEqual(cssFloat)) ||
-				(CSSValues.ABSOLUTE.isEqual(position))) {
-
-			if (Strings.isNotBlank(getTextContent())) {
-				width = String.valueOf(getTextContent().length() * 4);
-			} else {
-				width = "0px";
+			final int client = elem.getClientWidth();
+			if(client != -1) {
+				sizeWidth = client;
 			}
 		}
 
@@ -1181,7 +1215,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			width = "100%";
 		}
 
-		int widthSize = HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, sizeWidth);
+		int widthSize = "-1px".equals(width) ? sizeWidth : HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, sizeWidth);
 
 		if ("border-box".equals(boxSizing)) {
 			padding = false;
@@ -1203,12 +1237,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return widthSize;
 	}
 
-	protected int calculateHeight(boolean border, boolean padding) {
+	public int calculateHeight(boolean border, boolean padding) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		String height = currentStyle.getHeight();
 		String borderTopWidth = currentStyle.getBorderTopWidth();
 		String borderBottomWidth = currentStyle.getBorderBottomWidth();
@@ -1231,26 +1265,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
 			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
-			if(elem.getClientHeight() != -1) {
-				sizeHeight = elem.getClientHeight();
+			final int client = elem.getClientHeight();
+			if(client!= -1) {
+				sizeHeight = client;
 			}
 		}
 
-		switch (height) {
-			case "auto":
-				height = "100%";
-				break;
-			case "-1px":
-				if (Strings.isBlank(getTextContent())) {
-					height = "0px";
-				} else {
-					height = "18px";
-				}
-				break;
-			default:
-				break;
-		}
-
+		height = "auto".equals(height) ? "100%" : "-1px".equals(height) ? textHeight(this) + "px" : height;
 		int heightSize = HtmlValues.getPixelSize(height, null, doc.getDefaultView(), -1, sizeHeight);
 
 		if ("border-box".equals(boxSizing)) {
@@ -1271,5 +1292,26 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		return heightSize;
+	}
+
+
+
+	private int textHeight(ElementImpl elm) {
+		AtomicInteger h = new AtomicInteger(0);
+
+		elm.getNodeList().forEach(child -> {
+			final int type = child.getNodeType();
+			switch (type) {
+				case Node.CDATA_SECTION_NODE:
+				case Node.TEXT_NODE:
+					h.addAndGet(18);
+					break;
+				case Node.ELEMENT_NODE:
+					h.addAndGet(textHeight((ElementImpl) child));
+				default:
+					break;
+			}
+		});
+		return h.get();
 	}
 }

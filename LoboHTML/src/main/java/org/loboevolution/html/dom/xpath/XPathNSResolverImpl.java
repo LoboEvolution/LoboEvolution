@@ -51,7 +51,7 @@ public class XPathNSResolverImpl implements XPathNSResolver {
 
         String namespace = null;
 
-        if (prefix.equals("xml")) {
+        if ("xml".equals(prefix)) {
             namespace = S_XMLNAMESPACEURI;
         } else {
             int type;

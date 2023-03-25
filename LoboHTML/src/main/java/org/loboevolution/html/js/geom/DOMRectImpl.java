@@ -58,17 +58,15 @@ public class DOMRectImpl implements DOMRect {
      * @param width  a {@link java.lang.Integer} object.
      * @param height a {@link java.lang.Integer} object.
      * @param top    a {@link java.lang.Integer} object.
-     * @param right  a {@link java.lang.Integer} object.
      * @param bottom a {@link java.lang.Integer} object.
      * @param left   a {@link java.lang.Integer} object.
      */
     public DOMRectImpl(final int width, final int height,
-                       final int top, final int right, final int bottom, final int left) {
+                       final int top, final int bottom, final int left) {
 
         this.width = width;
         this.height = height;
         this.top = top;
-        this.right = right;
         this.bottom = bottom;
         this.left = left;
     }
@@ -94,6 +92,7 @@ public class DOMRectImpl implements DOMRect {
      */
     @Override
     public int getX() {
+        if(x == 0) return getLeft();
         return x;
     }
 
@@ -110,7 +109,8 @@ public class DOMRectImpl implements DOMRect {
      */
     @Override
     public int getY() {
-        return y;
+        if(y == 0) return getTop();
+        return x;
     }
 
     /**

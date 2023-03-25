@@ -23,6 +23,7 @@ package org.loboevolution.html.style;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.gui.HtmlPanel;
@@ -622,22 +623,15 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getHeight() {
-        final String cssheight = style.getHeight();
-
         if (element.getParentNode() == null) {
             return "";
         }
 
-        if (Strings.isCssBlank(element.getTextContent()) && (Strings.isCssBlank(cssheight) || CSSValues.AUTO.isEqual(cssheight))) {
+        if (CSSValues.NONE.isEqual(style.getDisplay())) {
             return CSSValues.AUTO.getValue();
         }
 
-        if (Strings.isCssNotBlank(element.getTextContent()) && Strings.isCssBlank(cssheight)) {
-            return "-1px";
-        }
-
-        final int height = HtmlValues.getPixelSize(cssheight, renderState, window, -1, availHeight);
-        return height + "px";
+        return element.calculateHeight(false, false) + "px";
     }
 
      /** {@inheritDoc} */
@@ -734,7 +728,17 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getLeft() {
-        return Strings.isCssBlank(style.getLeft()) ? "" : HtmlValues.getPixelSize(style.getLeft(), renderState, window, 0, availWidth) + "px";
+        if (Strings.isCssBlank(style.getLeft())) {
+            if (element.getParentNode() != null && !(element.getParentNode() instanceof HTMLBodyElement)) {
+                return "0px";
+            } else if (element.getParentNode() != null && element.getParentNode() instanceof HTMLBodyElement) {
+                return CSSValues.AUTO.getValue();
+            } else {
+                return "";
+            }
+        } else {
+            return HtmlValues.getPixelSize(style.getLeft(), renderState, window, 0, availHeight) + "px";
+        }
     }
 
      /** {@inheritDoc} */
@@ -1017,7 +1021,9 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getTop() {
         if (Strings.isCssBlank(style.getTop())) {
-            if (element.getParentNode() != null) {
+            if (element.getParentNode() != null && !(element.getParentNode() instanceof HTMLBodyElement)) {
+                return "0px";
+            } else if (element.getParentNode() != null && element.getParentNode() instanceof HTMLBodyElement) {
                 return CSSValues.AUTO.getValue();
             } else {
                 return "";
@@ -1099,20 +1105,15 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getWidth() {
-        final String csswidth = style.getWidth();
-
         if (element.getParentNode() == null) {
             return "";
         }
 
-        if (Strings.isCssBlank(csswidth) || CSSValues.AUTO.isEqual(csswidth)) {
+        if (CSSValues.NONE.isEqual(style.getDisplay())) {
             return CSSValues.AUTO.getValue();
         }
 
-
-
-        final int width = HtmlValues.getPixelSize(csswidth, renderState, window, -1, availWidth);
-        return width + "px";
+        return element.calculateWidth(false, false) + "px";
     }
 
      /** {@inheritDoc} */

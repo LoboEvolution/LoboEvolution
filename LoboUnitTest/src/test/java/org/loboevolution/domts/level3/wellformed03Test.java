@@ -87,8 +87,8 @@ public class wellformed03Test extends LoboUnitTest {
             }
             throw ex;
         }
-        docElem.setAttribute("LegalNameࢎ", "foo");
-        attr = docElem.getAttributeNode("LegalNameࢎ");
+        docElem.setAttribute("LegalName", "foo");
+        attr = docElem.getAttributeNode("LegalName");
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("well-formed", Boolean.TRUE);
