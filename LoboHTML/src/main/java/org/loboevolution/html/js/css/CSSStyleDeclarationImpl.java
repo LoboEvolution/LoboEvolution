@@ -183,7 +183,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             value = value.toLowerCase().trim();
 
             if (HtmlValues.isUnits(value)) {
-                final int val = HtmlValues.getPixelSize(value, null, null, -1);
+                final int val = HtmlValues.getPixelSize(value, null, element.getOwnerDocument().getDefaultView(), -1);
                 if (val > -1) {
                     style.setProperty(propertyName, value, priority);
                 }

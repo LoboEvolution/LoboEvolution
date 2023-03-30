@@ -19,31 +19,18 @@
  */
 package org.loboevolution.html.dom.nodeimpl.bootstrap;
 
+import org.loboevolution.html.dom.nodeimpl.DOMImplementationSourceImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DOMImplementationList;
 import org.loboevolution.html.node.DOMImplementationSource;
 
-import java.util.StringTokenizer;
-import java.util.Vector;
-import java.io.InputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 public final class DOMImplementationRegistry {
-    /**
-     * The system property to specify the
-     * DOMImplementationSource class names.
-     */
-    public static final String PROPERTY =
-            "org.w3c.dom.DOMImplementationSourceList";
-
-    /**
-     * Default columns per line.
-     */
-    private static final int DEFAULT_LINE_LENGTH = 80;
 
     /**
      * The list of DOMImplementationSources.
@@ -54,9 +41,9 @@ public final class DOMImplementationRegistry {
      * Default class name.
      */
     private static final String FALLBACK_CLASS =
-            "com.sun.org.apache.xerces.internal.dom.DOMXSImplementationSourceImpl";
+            "org.loboevolution.html.dom.nodeimpl.DOMImplementationSourceImpl";
     private static final String DEFAULT_PACKAGE =
-            "com.sun.org.apache.xerces.internal.dom";
+            "org.loboevolution.html.dom.nodeimpl";
 
     /**
      * Private constructor.
@@ -98,23 +85,7 @@ public final class DOMImplementationRegistry {
         Vector sources = new Vector();
 
         ClassLoader classLoader = getClassLoader();
-        // fetch system property:
-        String p = getSystemProperty(PROPERTY);
-
-        //
-        // if property is not specified then use contents of
-        // META_INF/org.w3c.dom.DOMImplementationSourceList from classpath
-        if (p == null) {
-            p = getServiceValue(classLoader);
-        }
-        if (p == null) {
-            //
-            // DOM Implementations can modify here to add *additional* fallback
-            // mechanisms to access a list of default DOMImplementationSources.
-            //fall back to JAXP implementation class com.sun.org.apache.xerces.internal.dom.DOMXSImplementationSourceImpl
-            p = FALLBACK_CLASS;
-        }
-        StringTokenizer st = new StringTokenizer(p);
+        StringTokenizer st = new StringTokenizer(FALLBACK_CLASS);
         while (st.hasMoreTokens()) {
             String sourceName = st.nextToken();
             // make sure we have access to restricted packages
@@ -131,8 +102,8 @@ public final class DOMImplementationRegistry {
                 sourceClass = Class.forName(sourceName);
             }
             try {
-                DOMImplementationSource source =
-                        (DOMImplementationSource) sourceClass.getConstructor().newInstance();
+                DOMImplementationSourceImpl source =
+                        (DOMImplementationSourceImpl) sourceClass.getConstructor().newInstance();
                 sources.addElement(source);
             } catch (NoSuchMethodException | InvocationTargetException e) {
                 throw new InstantiationException(e.getMessage());
@@ -156,8 +127,8 @@ public final class DOMImplementationRegistry {
         int size = sources.size();
         String name = null;
         for (int i = 0; i < size; i++) {
-            DOMImplementationSource source =
-                    (DOMImplementationSource) sources.elementAt(i);
+            DOMImplementationSourceImpl source =
+                    (DOMImplementationSourceImpl) sources.elementAt(i);
             DOMImplementation impl = source.getDOMImplementation(features);
             if (impl != null) {
                 return impl;
@@ -242,43 +213,6 @@ public final class DOMImplementationRegistry {
     }
 
     /**
-     * This method attempts to return the first line of the resource
-     * META_INF/services/org.w3c.dom.DOMImplementationSourceList
-     * from the provided ClassLoader.
-     *
-     * @param classLoader classLoader, may not be <code>null</code>.
-     * @return first line of resource, or <code>null</code>
-     */
-    private static String getServiceValue(final ClassLoader classLoader) {
-        String serviceId = "META-INF/services/" + PROPERTY;
-        // try to find services in CLASSPATH
-        try {
-            InputStream is = getResourceAsStream(classLoader, serviceId);
-
-            if (is != null) {
-                BufferedReader rd;
-                try {
-                    rd =
-                            new BufferedReader(new InputStreamReader(is, "UTF-8"),
-                                    DEFAULT_LINE_LENGTH);
-                } catch (java.io.UnsupportedEncodingException e) {
-                    rd =
-                            new BufferedReader(new InputStreamReader(is),
-                                    DEFAULT_LINE_LENGTH);
-                }
-                String serviceValue = rd.readLine();
-                rd.close();
-                if (serviceValue != null && serviceValue.length() > 0) {
-                    return serviceValue;
-                }
-            }
-        } catch (Exception ex) {
-            return null;
-        }
-        return null;
-    }
-
-    /**
      * A simple JRE (Java Runtime Environment) 1.1 test
      *
      * @return <code>true</code> if JRE 1.1
@@ -306,70 +240,14 @@ public final class DOMImplementationRegistry {
         return isJRE11()
                 ? null
                 : (ClassLoader)
-                AccessController.doPrivileged(new PrivilegedAction() {
-                    public Object run() {
-                        ClassLoader classLoader = null;
-                        try {
-                            classLoader =
-                                    Thread.currentThread().getContextClassLoader();
-                        } catch (SecurityException ex) {
-                        }
-                        return classLoader;
+                AccessController.doPrivileged((PrivilegedAction) () -> {
+                    ClassLoader classLoader = null;
+                    try {
+                        classLoader =
+                                Thread.currentThread().getContextClassLoader();
+                    } catch (SecurityException ex) {
                     }
+                    return classLoader;
                 });
-    }
-
-    /**
-     * This method returns the system property indicated by the specified name
-     * after checking access control privileges. For a JRE 1.1, this check is
-     * not done.
-     *
-     * @param name the name of the system property
-     * @return the system property
-     */
-    private static String getSystemProperty(final String name) {
-        return isJRE11()
-                ? (String) System.getProperty(name)
-                : (String) AccessController.doPrivileged(new PrivilegedAction() {
-            public Object run() {
-                return System.getProperty(name);
-            }
-        });
-    }
-
-    /**
-     * This method returns an Inputstream for the reading resource
-     * META_INF/services/org.w3c.dom.DOMImplementationSourceList after checking
-     * access control privileges. For a JRE 1.1, this check is not done.
-     *
-     * @param classLoader classLoader
-     * @param name        the resource
-     * @return an Inputstream for the resource specified
-     */
-    private static InputStream getResourceAsStream(final ClassLoader classLoader,
-                                                   final String name) {
-        if (isJRE11()) {
-            InputStream ris;
-            if (classLoader == null) {
-                ris = ClassLoader.getSystemResourceAsStream(name);
-            } else {
-                ris = classLoader.getResourceAsStream(name);
-            }
-            return ris;
-        } else {
-            return (InputStream)
-                    AccessController.doPrivileged(new PrivilegedAction() {
-                        public Object run() {
-                            InputStream ris;
-                            if (classLoader == null) {
-                                ris =
-                                        ClassLoader.getSystemResourceAsStream(name);
-                            } else {
-                                ris = classLoader.getResourceAsStream(name);
-                            }
-                            return ris;
-                        }
-                    });
-        }
     }
 }
