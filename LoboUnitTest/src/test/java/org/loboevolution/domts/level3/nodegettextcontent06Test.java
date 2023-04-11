@@ -50,7 +50,7 @@ public class nodegettextcontent06Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(3);
-        attr = elem.getAttributeNode("dir");
+        attr = elem.getAttributeNodeNS("*", "dir");
         textContent = attr.getTextContent();
         assertEquals("nodegettextcontent06", "rtl", textContent);
     }

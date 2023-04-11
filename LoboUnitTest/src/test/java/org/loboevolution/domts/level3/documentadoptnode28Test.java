@@ -59,7 +59,7 @@ public class documentadoptnode28Test extends LoboUnitTest {
         adoptedNode = doc.adoptNode(employeeElem);
 
         if ((adoptedNode != null)) {
-            attrImp = ((Element) /*Node */adoptedNode).getAttributeNode("dir");
+            attrImp = ((Element) /*Node */adoptedNode).getAttributeNodeNS("*", "dir");
             nodeName = attrImp.getNodeName();
             assertEquals("documentadoptnode28", "dir", nodeName);
         }

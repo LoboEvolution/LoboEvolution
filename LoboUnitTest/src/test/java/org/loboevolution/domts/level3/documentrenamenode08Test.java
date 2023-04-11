@@ -56,7 +56,7 @@ public class documentrenamenode08Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("p");
         element = (Element) childList.item(3);
-        attr = element.getAttributeNode("dir");
+        attr = element.getAttributeNodeNS("*", "dir");
         domImpl = doc.getImplementation();
         docElem = doc.getDocumentElement();
         docElemNS = docElem.getNamespaceURI();

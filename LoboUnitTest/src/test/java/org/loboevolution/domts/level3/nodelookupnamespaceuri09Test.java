@@ -40,20 +40,19 @@ import static org.junit.Assert.assertNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class nodelookupnamespaceuri09Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         Document doc;
         Element elem;
         HTMLCollection elemList;
         String namespaceURI;
         String namespaceURIEmpty;
-        doc=sampleXmlFile("hc_staff.xml");
-        elemList=doc.getElementsByTagName("em");
-        elem=(Element)elemList.item(0);
-        namespaceURI=elem.lookupNamespaceURI("dmstc");
-        assertEquals("nodelookupnamespaceuri09","http://www.usa.com",namespaceURI);
-        namespaceURIEmpty=elem.lookupNamespaceURI("");
-        assertNull("nodelookupnamespaceprefixEmpty09",namespaceURIEmpty);
-        }
-        }
-
+        doc = sampleXmlFile("hc_staff.xml");
+        elemList = doc.getElementsByTagName("em");
+        elem = (Element) elemList.item(0);
+        namespaceURI = elem.lookupNamespaceURI("dmstc");
+        assertEquals("nodelookupnamespaceuri09", "http://www.usa.com", namespaceURI);
+        namespaceURIEmpty = elem.lookupNamespaceURI("");
+        assertNull("nodelookupnamespaceprefixEmpty09", namespaceURIEmpty);
+    }
+}

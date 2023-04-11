@@ -57,7 +57,7 @@ public class domconfignamespaces1Test extends LoboUnitTest {
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
-        state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+        state = ((Boolean) domConfig.getParameter(parameter));
         assertTrue("defaultFalse", state);
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
         assertTrue("canSetTrue", canSet);
@@ -65,7 +65,7 @@ public class domconfignamespaces1Test extends LoboUnitTest {
 
         if (canSet) {
             domConfig.setParameter(parameter, Boolean.FALSE);
-            state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+            state = ((Boolean) domConfig.getParameter(parameter));
             assertFalse("setFalseEffective", state);
         } else {
 
@@ -78,7 +78,7 @@ public class domconfignamespaces1Test extends LoboUnitTest {
                 }
                 assertTrue("throw_NOT_SUPPORTED_ERR", success);
             }
-            state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+            state = ((Boolean) domConfig.getParameter(parameter));
             assertTrue("setFalseNotEffective", state);
         }
 

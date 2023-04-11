@@ -750,7 +750,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      /** {@inheritDoc} */
     @Override
     public String getMargin() {
-        return Strings.isBlank(style.getMargin()) ? CSSValues.MARGIN.getValue() : style.getMargin();
+        return Strings.isBlank(style.getMargin()) ? "" : style.getMargin();
     }
 
      /** {@inheritDoc} */

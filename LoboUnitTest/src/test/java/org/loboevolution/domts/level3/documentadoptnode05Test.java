@@ -68,7 +68,7 @@ public class documentadoptnode05Test extends LoboUnitTest {
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         childList = doc.getElementsByTagName("p");
         elementEmp = (Element) childList.item(3);
-        dir = elementEmp.getAttributeNode("dir");
+        dir = elementEmp.getAttributeNodeNS("*", "dir");
         adoptedAttr = newDoc.adoptNode(dir);
 
         if ((adoptedAttr != null)) {

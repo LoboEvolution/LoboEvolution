@@ -50,7 +50,7 @@ public class nodesettextcontent05Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(3);
-        attr = elem.getAttributeNode("dir");
+        attr = elem.getAttributeNodeNS("*", "dir");
         attr.setTextContent("NA");
         textContent = attr.getTextContent();
         assertEquals("nodesettextcontent05", "NA", textContent);

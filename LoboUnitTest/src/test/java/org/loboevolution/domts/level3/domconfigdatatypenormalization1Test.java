@@ -57,7 +57,7 @@ public class domconfigdatatypenormalization1Test extends LoboUnitTest {
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
-        state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+        state = ((Boolean) domConfig.getParameter(parameter));
         assertFalse("defaultFalse", state);
         canSet = domConfig.canSetParameter(parameter, Boolean.FALSE);
         assertTrue("canSetFalse", canSet);
@@ -65,7 +65,7 @@ public class domconfigdatatypenormalization1Test extends LoboUnitTest {
 
         if (canSet) {
             domConfig.setParameter(parameter, Boolean.TRUE);
-            state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+            state = ((Boolean) domConfig.getParameter(parameter));
             assertTrue("setTrueEffective", state);
         } else {
 
@@ -78,7 +78,7 @@ public class domconfigdatatypenormalization1Test extends LoboUnitTest {
                 }
                 assertTrue("throw_NOT_SUPPORTED_ERR", success);
             }
-            state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+            state = ((Boolean) domConfig.getParameter(parameter));
             assertFalse("setTrueNotEffective", state);
         }
 

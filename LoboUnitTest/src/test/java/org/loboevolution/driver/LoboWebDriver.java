@@ -44,8 +44,6 @@ public class LoboWebDriver {
 	/** The Constant logger. */
 	protected static final Logger logger = Logger.getLogger(LoboWebDriver.class.getName());
 
-	private static final String url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html").toString();
-
 	/**
 	 * <p>loadHtml.</p>
 	 *
@@ -53,6 +51,7 @@ public class LoboWebDriver {
 	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
 	protected HTMLDocumentImpl loadHtml(String html) {
+		final String url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html").toString();
 		HTMLDocumentImpl doc = null;
 		try {
 			WritableLineReader wis = new WritableLineReader(new StringReader(html));
@@ -74,9 +73,10 @@ public class LoboWebDriver {
 	 * <p>loadHtml.</p>
 	 *
 	 * @param in a {@link java.io.InputStream} object.
+	 * @param url a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
-	protected static HTMLDocumentImpl loadHtml(InputStream in) {
+	protected static HTMLDocumentImpl loadHtml(InputStream in, String url) {
 		HTMLDocumentImpl doc = null;
 		try {
 			WritableLineReader wis = new WritableLineReader(new InputStreamReader(in, StandardCharsets.UTF_8));

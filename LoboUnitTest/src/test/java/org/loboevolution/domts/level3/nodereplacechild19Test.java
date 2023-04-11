@@ -46,7 +46,7 @@ public class nodereplacechild19Test extends LoboUnitTest {
         DocumentFragment docFrag;
         EntityReference entRef;
         Element elem;
-        Element replaced;
+        EntityReference replaced;
         String nodeName;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
@@ -54,7 +54,7 @@ public class nodereplacechild19Test extends LoboUnitTest {
         entRef = doc.createEntityReference("alpha");
         elem.appendChild(entRef);
         docFrag.appendChild(elem);
-        replaced = (Element) docFrag.replaceChild(entRef, elem);
+        replaced = (EntityReference) docFrag.replaceChild(entRef, elem);
         nodeName = replaced.getNodeName();
         assertEquals("nodereplacechild19", "dom3:p", nodeName);
     }

@@ -31,6 +31,7 @@ import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;
@@ -277,18 +278,21 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttribute(String localName, boolean isId) throws DOMException {
-		final AttrImpl attr = (AttrImpl)getAttributeNode(name);
+		final AttrImpl attr = (AttrImpl)getAttributeNode(localName);
 		if(attr != null) attr.setNameId(isId);
 	}
 
-		/** {@inheritDoc} */
+	/** {@inheritDoc} */
 	@Override
 	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
 		final AttrImpl attr = (AttrImpl) getAttributeNodeNS(namespaceURI, localName);
 		if (attr != null) {
 			attr.setNameId(isId);
+		} else {
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
 		}
 	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttributeNode(Attr idAttr, boolean isId) {
@@ -752,6 +756,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		// TODO Auto-generated method stub
 
 	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void scroll(int x, int y) {
@@ -1194,8 +1199,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			return 0;
 		}
 
-		if (this instanceof HTMLBodyElementImpl) {
+		if (this instanceof HTMLHtmlElementImpl) {
 			width = String.valueOf(doc.getDefaultView().getInnerWidth());
+		}
+
+		if (this instanceof HTMLBodyElementImpl) {
+			width = String.valueOf(doc.getDefaultView().getInnerWidth() - 16);
 		}
 
 		if(Strings.isBlank(width)){
@@ -1293,7 +1302,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		return heightSize;
 	}
-
 
 
 	private int textHeight(ElementImpl elm) {

@@ -53,4 +53,3 @@ public class nodegetbaseuri04Test extends LoboUnitTest {
         assertEquals("baseURIEqualsDocURI", documentURI, baseURI);
     }
 }
-

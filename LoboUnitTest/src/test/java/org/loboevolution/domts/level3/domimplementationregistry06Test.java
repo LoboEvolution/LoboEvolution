@@ -48,7 +48,7 @@ public class domimplementationregistry06Test extends LoboUnitTest {
 
         DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
-        //domImpl = domImplRegistry.getDOMImplementation("xMl 3.0 cOrE");
+        domImpl = domImplRegistry.getDOMImplementation("xMl 3.0 cOrE");
         assertNotNull("domImplNotNull", domImpl);
         hasFeature = domImpl.hasFeature("XML", "3.0");
         assertTrue("hasXML3", hasFeature);

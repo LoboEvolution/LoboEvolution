@@ -33,18 +33,18 @@ import java.util.TreeMap;
  * <p>DOMConfigurationImpl class.</p>
  */
 public class DOMConfigurationImpl implements DOMConfiguration {
-	private static Map<String, Object> parameters = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-
+	private static Map<String, Object> parameters = new TreeMap<>();
 
 	static {
-
 		parameters.put("namespace-declarations", true);
 		parameters.put("element-content-whitespace", true);
 		parameters.put("normalize-characters", false);
 		parameters.put("canonical-form", false);
 		parameters.put("check-character-normalization", false);
 		parameters.put("validate-if-schema", false);
-
+		parameters.put("cdata-sections", false);
+		parameters.put("schema-location", false);
+		parameters.put("error-handler", new DOMErrorMonitor());
 	}
 
 
@@ -66,7 +66,8 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 	@Override
 	public Object getParameter(String name) {
 		synchronized (this) {
-			return parameters.get(name);
+			Object param = parameters.get(name);
+			return param != null ? param : false;
 		}
 	}
 

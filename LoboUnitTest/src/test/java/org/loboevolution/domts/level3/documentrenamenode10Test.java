@@ -35,7 +35,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * The method renameNode renames an existing node and raises a  NAMESPACE_ERR
  * if the qualifiedName has a prefix and the namespaceURI is null but a
- * NOT_SUPPORTED_ERR should be raised since the the type of the specified node is
+ * NOT_SUPPORTED_ERR should be raised since the type of the specified node is
  * neither ELEMENT_NODE nor ATTRIBUTE_NODE.
  * <p>
  * Invoke the renameNode method on a new document node to rename a node to nodes

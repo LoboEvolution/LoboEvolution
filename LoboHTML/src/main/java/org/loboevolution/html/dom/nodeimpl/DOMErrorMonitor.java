@@ -19,10 +19,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.DOMErrorHandler;
 

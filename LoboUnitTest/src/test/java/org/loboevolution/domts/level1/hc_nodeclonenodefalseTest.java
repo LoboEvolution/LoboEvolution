@@ -65,7 +65,7 @@ public class hc_nodeclonenodefalseTest extends LoboUnitTest {
         employeeNode = elementList.item(1);
         clonedNode = employeeNode.cloneNode(false);
         cloneName = clonedNode.getNodeName();
-        assertEquals("strong", "P", cloneName);
+        assertEquals("STRONG", "P", cloneName);
         cloneChildren = clonedNode.getChildNodes();
         length = cloneChildren.getLength();
         assertEquals("length", 0, length);

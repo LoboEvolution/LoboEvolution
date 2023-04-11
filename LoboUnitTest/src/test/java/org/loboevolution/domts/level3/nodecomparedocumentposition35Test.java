@@ -51,7 +51,7 @@ public class nodecomparedocumentposition35Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(3);
-        attr = elem.getAttributeNode("dir");
+        attr = elem.getAttributeNodeNS("*", "dir");
         elementPosition = elem.compareDocumentPosition(attr);
         assertEquals("nodecomparedocumentpositionIsContainedFollowing35", 20, elementPosition);
         attrPosition = attr.compareDocumentPosition(elem);

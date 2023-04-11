@@ -58,7 +58,7 @@ public class hc_documentcreatetextnodeTest extends LoboUnitTest {
         newTextValue = newTextNode.getNodeValue();
         assertEquals("value", "This is a new Text node", newTextValue);
         newTextName = newTextNode.getNodeName();
-        assertEquals("strong", "#text", newTextName);
+        assertEquals("STRONG", "#text", newTextName);
         newTextType = newTextNode.getNodeType();
         assertEquals("type", 3, newTextType);
     }

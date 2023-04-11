@@ -59,24 +59,24 @@ public class domconfiginfoset1Test extends LoboUnitTest {
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
-        state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+        state = (Boolean) domConfig.getParameter(parameter);
         assertFalse("defaultFalse", state);
         canSet = domConfig.canSetParameter(parameter, Boolean.FALSE);
         assertTrue("canSetFalse", canSet);
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
         assertTrue("canSetTrue", canSet);
         domConfig.setParameter(parameter, Boolean.TRUE);
-        state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+        state = (Boolean) domConfig.getParameter(parameter);
         assertTrue("setTrueIsEffective", state);
-        state = ((Boolean) domConfig.getParameter("entities")).booleanValue();
+        state = ((Boolean) domConfig.getParameter("entities"));
         assertFalse("entitiesSetFalse", state);
-        state = ((Boolean) domConfig.getParameter("cdata-sections")).booleanValue();
+        state = ((Boolean) domConfig.getParameter("cdata-sections"));
         assertFalse("cdataSectionsSetFalse", state);
         domConfig.setParameter(parameter, Boolean.FALSE);
-        state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+        state = ((Boolean) domConfig.getParameter(parameter));
         assertTrue("setFalseIsNoOp", state);
         domConfig.setParameter("entities", Boolean.TRUE);
-        state = ((Boolean) domConfig.getParameter(parameter)).booleanValue();
+        state = ((Boolean) domConfig.getParameter(parameter));
         assertFalse("setEntitiesTrueInvalidatesInfoset", state);
     }
 }

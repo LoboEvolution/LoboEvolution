@@ -45,7 +45,7 @@ public class domconfignamespaces2Test extends LoboUnitTest {
         boolean state;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
-        state = ((Boolean) domConfig.getParameter("namespaces")).booleanValue();
+        state = ((Boolean) domConfig.getParameter("namespaces"));
         assertTrue("namespacesTrue", state);
     }
 }

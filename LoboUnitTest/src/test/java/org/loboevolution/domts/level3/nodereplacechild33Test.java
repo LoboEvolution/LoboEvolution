@@ -52,7 +52,7 @@ public class nodereplacechild33Test extends LoboUnitTest {
         newChild = doc.createEntityReference("delta");
         childList = doc.getElementsByTagName("p");
         elem = (Element) childList.item(3);
-        parent = elem.getAttributeNode("dir");
+        parent = elem.getAttributeNodeNS("*", "dir");
         oldChild = parent.getLastChild();
         replaced = parent.replaceChild(newChild, oldChild);
         nodeValue = replaced.getNodeValue();

@@ -58,7 +58,7 @@ public class hc_documentcreateelementTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         newElement = doc.createElement("acronym");
         newElementName = newElement.getNodeName();
-        assertEquals("strong", "acronym", newElementName);
+        assertEquals("STRONG", "ACRONYM", newElementName);
         newElementType = newElement.getNodeType();
         assertEquals("type", 1, newElementType);
         newElementValue = newElement.getNodeValue();

@@ -66,7 +66,7 @@ public class elementsetidattributens04Test extends LoboUnitTest {
         assertTrue("elementsetidattributensIsIdTrue04", id);
         elem = doc.getElementById("newValue");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributensGetElementById04", "strong", elemName);
+        assertEquals("elementsetidattributensGetElementById04", "STRONG", elemName);
         strongElem.setIdAttributeNS("http://www.netzero.com", "newAttr", false);
         id = attr.isId();
         assertFalse("elementsetidattributensIsIdFalse04", id);

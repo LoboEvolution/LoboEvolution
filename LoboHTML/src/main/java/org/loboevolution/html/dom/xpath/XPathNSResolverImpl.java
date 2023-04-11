@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.dom.xpath;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.xpath.XPathNSResolver;
 
@@ -45,47 +46,55 @@ public class XPathNSResolverImpl implements XPathNSResolver {
 
     }
 
-	/** {@inheritDoc} */
-	@Override
+    /** {@inheritDoc} */
+    @Override
     public String lookupNamespaceURI(String prefix) {
-
+        if (Strings.isBlank(prefix)) return null;
         String namespace = null;
 
         if ("xml".equals(prefix)) {
             namespace = S_XMLNAMESPACEURI;
         } else {
             int type;
-            while ((null != parent) && (null == namespace)
+            while (parent != null
                     && (((type = parent.getNodeType()) == Node.ELEMENT_NODE) ||
-                       ((type = parent.getNodeType()) == Node.DOCUMENT_NODE)
-                    || (type == Node.ENTITY_REFERENCE_NODE))) {
+                    ((type = parent.getNodeType()) == Node.DOCUMENT_NODE) ||
+                    ((type = parent.getNodeType()) == Node.ATTRIBUTE_NODE) ||
+                    (type == Node.ENTITY_REFERENCE_NODE))) {
 
-                if (type == Node.DOCUMENT_NODE) {
-                    Document document = (Document) parent;
-                    Element docelm = document.getDocumentElement();
-                    if (docelm != null && docelm.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
-                        return docelm.getNamespaceURI();
-                    }
-                }
-                if (type == Node.ELEMENT_NODE) {
-                    if (parent.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
-                        return parent.getNamespaceURI();
-                    }
-                    NamedNodeMap nnm = parent.getAttributes();
-                    for (int i = 0; i < nnm.getLength(); i++) {
-                        Node attr = nnm.item(i);
-                        String aname = attr.getNodeName();
-                        boolean isPrefix = aname.startsWith("xmlns:");
-                        if (isPrefix || aname.equals("xmlns")) {
-                            int index = aname.indexOf(':');
-                            String p = isPrefix ? aname.substring(index + 1) : "";
-                            if (p.equals(prefix)) {
-                                namespace = attr.getNodeValue();
-
-                                break;
+                switch (type) {
+                    case Node.DOCUMENT_NODE:
+                        Document document = (Document) parent;
+                        Element docelm = document.getDocumentElement();
+                        if (docelm != null && docelm.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
+                            return docelm.getNamespaceURI();
+                        }
+                    case Node.ELEMENT_NODE:
+                        if (parent.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
+                            return parent.getNamespaceURI();
+                        }
+                        NamedNodeMap nnm = parent.getAttributes();
+                        if (nnm != null) {
+                            for (int i = 0; i < nnm.getLength(); i++) {
+                                Node attr = nnm.item(i);
+                                String aname = attr.getNodeName();
+                                boolean isPrefix = aname.startsWith("xmlns:");
+                                if (isPrefix || aname.equals("xmlns")) {
+                                    int index = aname.indexOf(':');
+                                    String p = isPrefix ? aname.substring(index + 1) : "";
+                                    if (p.equals(prefix)) {
+                                        namespace = attr.getNodeValue();
+                                        break;
+                                    }
+                                }
                             }
                         }
-                    }
+                    case Node.ATTRIBUTE_NODE:
+                        if (prefix.equals(parent.getPrefix())) {
+                            return parent.getNamespaceURI();
+                        }
+                    default:
+                        break;
                 }
                 parent = parent.getParentNode();
             }

@@ -55,7 +55,7 @@ public class noderemovechild16Test extends LoboUnitTest {
         parent = (Element) child.getParentNode();
         removed = (Element) parent.removeChild(child);
         removedName = removed.getNodeName();
-        assertEquals("noderemovechild16", "em", removedName);
+        assertEquals("noderemovechild16", "EM", removedName);
 
         boolean success = false;
         try {

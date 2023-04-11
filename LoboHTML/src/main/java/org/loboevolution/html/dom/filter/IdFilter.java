@@ -19,6 +19,10 @@
  */
 package org.loboevolution.html.dom.filter;
 
+import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
@@ -37,12 +41,23 @@ public class IdFilter implements NodeFilter {
 	public IdFilter(String _id) {
 		this._id = _id;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public short acceptNode(Node node) {
-		return (node instanceof Element) && this._id != null && 
-				this._id.equals(((Element) node).getAttribute("id"))  ?
-				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+		if ((node instanceof Element) && this._id != null) {
+			NamedNodeMap attributes = node.getAttributes();
+			for (Node attribute : Nodes.iterable(attributes)) {
+				Attr attr = (Attr) attribute;
+				if (Strings.isNotBlank(attr.getNodeValue())) {
+					String name = attr.getNodeValue().contains(":") ? attr.getNodeValue().split(":")[1] : attr.getNodeValue();
+					if (this._id.equals(name) && attr.isId()) {
+						return NodeFilter.FILTER_ACCEPT;
+					}
+				}
+			}
+		}
+
+		return NodeFilter.FILTER_REJECT;
 	}
 }

@@ -64,7 +64,7 @@ public class elementsetidattributenode10Test extends LoboUnitTest {
         assertTrue("elementsetidattributenodeIsIdTrue10", id);
         elem = doc.getElementById("Yα");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributenodeGetElementById10", "acronym", elemName);
+        assertEquals("elementsetidattributenodeGetElementById10", "ACRONYM", elemName);
         acronymElem.setIdAttributeNode(attr, false);
         id = attr.isId();
         assertFalse("elementsetidattributenodeIsIdFalse10", id);

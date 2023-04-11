@@ -57,7 +57,7 @@ public class noderemovechild30Test extends LoboUnitTest {
         parentList = doc.getElementsByTagName("p");
         elem = (Element) parentList.item(3);
         attrsMap = elem.getAttributes();
-        parent = (Attr) attrsMap.getNamedItem("dir");
+        parent = (Attr) attrsMap.getNamedItemNS("*", "dir");
         child = (Text) parent.getFirstChild();
         removed = (Text) parent.removeChild(child);
         removedName = removed.getNodeValue();

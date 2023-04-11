@@ -42,23 +42,22 @@ import static org.junit.Assert.assertNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
 public class nodelookupprefix18Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         Document doc;
         Element elem;
         HTMLCollection elemList;
         NamedNodeMap attributesMap;
         Attr attr;
         String prefix;
-        doc=sampleXmlFile("hc_staff.xml");
-        elemList=doc.getElementsByTagName("p");
-        elem=(Element)elemList.item(3);
-        attributesMap=elem.getAttributes();
-        attr=(Attr)attributesMap.getNamedItem("dir");
-        prefix=attr.lookupPrefix("http://www.w3.org/1999/xhtml");
-        assertNull("xhtmlPrefixIsNull",prefix);
-        prefix=attr.lookupPrefix("http://www.altavista.com");
-        assertEquals("nodelookupprefixB18","nm",prefix);
-        }
-        }
-
+        doc = sampleXmlFile("hc_staff.xml");
+        elemList = doc.getElementsByTagName("p");
+        elem = (Element) elemList.item(3);
+        attributesMap = elem.getAttributes();
+        attr = (Attr) attributesMap.getNamedItemNS("*", "dir");
+        prefix = attr.lookupPrefix("http://www.w3.org/1999/xhtml");
+        assertNull("xhtmlPrefixIsNull", prefix);
+        prefix = attr.lookupPrefix("http://www.altavista.com");
+        assertEquals("nodelookupprefixB18", "nm", prefix);
+    }
+}

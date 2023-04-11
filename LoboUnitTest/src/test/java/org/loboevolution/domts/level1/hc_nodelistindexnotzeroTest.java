@@ -69,7 +69,7 @@ public class hc_nodelistindexnotzeroTest extends LoboUnitTest {
         if ("#text".equals(childName)) {
             assertEquals("childName_space", "#text", childName);
         } else {
-            assertEquals("childName_strong", "strong", childName);
+            assertEquals("childName_strong", "STRONG", childName);
         }
 
     }

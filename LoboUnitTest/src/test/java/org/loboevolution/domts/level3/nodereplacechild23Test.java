@@ -48,8 +48,6 @@ public class nodereplacechild23Test extends LoboUnitTest {
         Comment comment;
         ProcessingInstruction pi;
         CDATASection cdata;
-        Node replaced;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         entRef = doc.createEntityReference("delta");
@@ -57,16 +55,16 @@ public class nodereplacechild23Test extends LoboUnitTest {
         comment = doc.createComment("Comment");
         cdata = doc.createCDATASection("CDATASection");
         pi = doc.createProcessingInstruction("target", "data");
-        appendedChild = elem.appendChild(entRef);
-        appendedChild = elem.appendChild(txt);
-        appendedChild = elem.appendChild(comment);
-        appendedChild = elem.appendChild(pi);
-        appendedChild = elem.appendChild(cdata);
+        elem.appendChild(entRef);
+        elem.appendChild(txt);
+        elem.appendChild(comment);
+        elem.appendChild(pi);
+        elem.appendChild(cdata);
 
         {
             boolean success = false;
             try {
-                replaced = entRef.replaceChild(cdata, elem);
+                entRef.replaceChild(cdata, elem);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -76,7 +74,7 @@ public class nodereplacechild23Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replaced = entRef.replaceChild(pi, cdata);
+                entRef.replaceChild(pi, cdata);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -86,7 +84,7 @@ public class nodereplacechild23Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replaced = entRef.replaceChild(comment, pi);
+                entRef.replaceChild(comment, pi);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -96,7 +94,7 @@ public class nodereplacechild23Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replaced = entRef.replaceChild(txt, comment);
+                entRef.replaceChild(txt, comment);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -106,7 +104,7 @@ public class nodereplacechild23Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replaced = entRef.replaceChild(elem, txt);
+                entRef.replaceChild(elem, txt);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -114,4 +112,3 @@ public class nodereplacechild23Test extends LoboUnitTest {
         }
     }
 }
-

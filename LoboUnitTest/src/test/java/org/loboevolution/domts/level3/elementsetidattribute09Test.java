@@ -74,7 +74,7 @@ public class elementsetidattribute09Test extends LoboUnitTest {
         assertTrue("elementsetidattributeIsId2True09", id);
         elem = doc.getElementById("Antoine");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattribute1GetElementById09", "strong", elemName);
+        assertEquals("elementsetidattribute1GetElementById09", "STRONG", elemName);
         elem = doc.getElementById("2002");
         elemName = elem.getTagName();
         assertEquals("elementsetidattribute2GetElementById09", "sup", elemName);

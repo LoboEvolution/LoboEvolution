@@ -43,7 +43,7 @@ public class nodereplacechild16Test extends LoboUnitTest {
         DocumentFragment docFrag;
         Element elem;
         Text txt;
-        Element replaced;
+        Text replaced;
         String nodeName;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
@@ -52,7 +52,7 @@ public class nodereplacechild16Test extends LoboUnitTest {
         txt = doc.createTextNode("Comment");
         appendedChild = docFrag.appendChild(txt);
         appendedChild = docFrag.appendChild(elem);
-        replaced = (Element) docFrag.replaceChild(txt, elem);
+        replaced = (Text) docFrag.replaceChild(txt, elem);
         nodeName = replaced.getNodeName();
         assertEquals("nodereplacechild16", "dom3:p", nodeName);
     }

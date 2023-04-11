@@ -72,7 +72,7 @@ public class hc_documentcreateelementcasesensitiveTest extends LoboUnitTest {
         nodeName1 = newElement1.getNodeName();
         nodeName2 = newElement2.getNodeName();
         assertEquals("nodeName1", "ACRONYM", nodeName1);
-        assertEquals("nodeName2", "acronym", nodeName2);
+        assertEquals("nodeName2", "ACRONYM", nodeName2);
     }
 }
 

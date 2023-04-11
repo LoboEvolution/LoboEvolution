@@ -97,7 +97,6 @@ public class TextImpl extends CharacterDataImpl implements Text {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null content (use empty string instead)");
 		}
 
-
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		if (parent == null) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
@@ -140,14 +139,14 @@ public class TextImpl extends CharacterDataImpl implements Text {
 
 	/** {@inheritDoc} */
 	@Override
-	public String toString() {
-		return "[object Text]";
+	public HTMLSlotElement getAssignedSlot() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLSlotElement getAssignedSlot() {
-		// TODO Auto-generated method stub
-		return null;
+	public String toString() {
+		return "[object Text]";
 	}
 }

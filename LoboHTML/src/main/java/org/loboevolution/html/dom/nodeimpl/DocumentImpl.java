@@ -503,7 +503,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public DOMImplementation getImplementation() {
-		return new DOMImplementationImpl(new UserAgentContext(getHtmlRendererConfig(), isTest()));
+		return new DOMImplementationImpl(getUserAgentContext());
 	}
 
 	/** {@inheritDoc} */

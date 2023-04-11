@@ -50,7 +50,7 @@ public class nodelookupprefix19Test extends LoboUnitTest {
         Attr attr;
         String prefix;
         doc = sampleXmlFile("barfoo_nodefaultns.xml");
-        elemList = doc.getElementsByTagName("html:p");
+        elemList = doc.getElementsByTagNameNS("*", "html:p");
         elem = (Element) elemList.item(0);
         attributesMap = elem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("class");

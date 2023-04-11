@@ -72,7 +72,7 @@ public class normalizecharacters08Test extends LoboUnitTest {
             pElem = (Element) pList.item(0);
             text = (Text) pElem.getLastChild();
             textValue = text.getNodeValue();
-            assertEquals("noCharNormalization", "suçon", textValue);
+            assertEquals("noCharNormalization", "suçon", textValue);
         }
     }
 }

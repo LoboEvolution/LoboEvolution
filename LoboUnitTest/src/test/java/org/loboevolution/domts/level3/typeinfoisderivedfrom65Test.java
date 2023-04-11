@@ -24,6 +24,7 @@ package org.loboevolution.domts.level3;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.AttributeTypeInfo;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
@@ -45,15 +46,15 @@ public class typeinfoisderivedfrom65Test extends LoboUnitTest {
     @Test
     public void runTest() {
         Document doc;
-        Element elemTypeInfo;
+        AttributeTypeInfo elemTypeInfo;
         HTMLCollection elemList;
         Element strongElem;
         boolean retValue;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         strongElem = (Element) elemList.item(0);
-        elemTypeInfo = (Element) strongElem.getSchemaTypeInfo();
-        retValue = ((TypeInfo) /*Node */elemTypeInfo).isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 8);
+        elemTypeInfo = (AttributeTypeInfo) strongElem.getSchemaTypeInfo();
+        retValue = ((TypeInfo) elemTypeInfo).isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 8);
         assertTrue("lisrDerivedFromString", retValue);
     }
 }

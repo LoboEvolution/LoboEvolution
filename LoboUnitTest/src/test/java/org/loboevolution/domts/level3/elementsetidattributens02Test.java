@@ -62,7 +62,7 @@ public class elementsetidattributens02Test extends LoboUnitTest {
         elem = doc.getElementById("Yes");
         assertNotNull("getElementByIDNotNull", elem);
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributensGetElementById01", "acronym", elemName);
+        assertEquals("elementsetidattributensGetElementById01", "ACRONYM", elemName);
         addressElem.setIdAttributeNS(xsiNS, "noNamespaceSchemaLocation", false);
         id = attr.isId();
         assertFalse("elementsetidattributensIsIdFalse02", id);

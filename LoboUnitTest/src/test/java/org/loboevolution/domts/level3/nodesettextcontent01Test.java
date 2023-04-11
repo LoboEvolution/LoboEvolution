@@ -52,7 +52,7 @@ public class nodesettextcontent01Test extends LoboUnitTest {
         elem = (Element) elemList.item(3);
         assertNotNull("stillHasAcronyms", elem);
         nodeName = elem.getNodeName();
-        assertEquals("nodesettextcontent01", "acronym", nodeName);
+        assertEquals("nodesettextcontent01", "ACRONYM", nodeName);
     }
 }
 

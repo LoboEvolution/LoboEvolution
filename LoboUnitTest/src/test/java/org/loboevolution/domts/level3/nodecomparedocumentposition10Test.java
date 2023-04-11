@@ -49,7 +49,7 @@ public class nodecomparedocumentposition10Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(3);
-        dir = elem.getAttributeNode("dir");
+        dir = elem.getAttributeNodeNS("*", "dir");
         attrPosition = dir.compareDocumentPosition(doc);
         assertEquals("nodecomparedocumentpositionPRECEDINGContains10", 10, attrPosition);
     }

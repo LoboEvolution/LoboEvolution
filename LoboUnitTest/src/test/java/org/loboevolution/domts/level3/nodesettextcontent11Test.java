@@ -49,7 +49,6 @@ public class nodesettextcontent11Test extends LoboUnitTest {
         CDATASection cdata;
         ProcessingInstruction pi;
         String textContent;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
@@ -58,12 +57,12 @@ public class nodesettextcontent11Test extends LoboUnitTest {
         entRef = doc.createEntityReference("alpha");
         pi = doc.createProcessingInstruction("PIT", "PIData ");
         cdata = doc.createCDATASection("CData");
-        appendedChild = elem.appendChild(txt);
-        appendedChild = elem.appendChild(comment);
-        appendedChild = elem.appendChild(entRef);
-        appendedChild = elem.appendChild(pi);
-        appendedChild = elem.appendChild(cdata);
-        appendedChild = docFrag.appendChild(elem);
+        elem.appendChild(txt);
+        elem.appendChild(comment);
+        elem.appendChild(entRef);
+        elem.appendChild(pi);
+        elem.appendChild(cdata);
+        docFrag.appendChild(elem);
         elem.setTextContent("DOCUMENTFRAGMENT");
         elemChild = (Element) docFrag.getLastChild();
         textContent = elemChild.getTextContent();

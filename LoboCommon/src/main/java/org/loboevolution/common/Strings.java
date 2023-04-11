@@ -327,6 +327,8 @@ public final class Strings {
 			return false;
 		}
 
+		s = s.trim();
+
 		if (!isXMLIdentifierStart(s.charAt(0))) {
 			return false;
 		}

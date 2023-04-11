@@ -60,7 +60,7 @@ public class domconfigdatatypenormalization2Test extends LoboUnitTest {
 
         if (canSet) {
             domConfig.setParameter(parameter, Boolean.TRUE);
-            state = ((Boolean) domConfig.getParameter("validate")).booleanValue();
+            state = ((Boolean) domConfig.getParameter("validate"));
             assertTrue("validateSet", state);
         }
     }

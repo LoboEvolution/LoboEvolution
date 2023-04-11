@@ -62,7 +62,8 @@ public class LoboUnitTest extends LoboWebDriver {
      * <p>sampleHtmlFile.</p>.
      */
     public static Document sampleHtmlFile() {
-        DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/html/htmlsample.html"));
+        final String url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html").toString();
+        DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/html/htmlsample.html"), url);
         doc.setTest(true);
         return doc;
     }
@@ -71,7 +72,8 @@ public class LoboUnitTest extends LoboWebDriver {
      * <p>sampleHtmlFile.</p>.
      */
     public static Document sampleXmlFile(String fileName) {
-        DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/xml/" + fileName));
+        final String url = LoboWebDriver.class.getResource("/org/lobo/xml/" + fileName).toString();
+        DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/xml/" + fileName), url);
         doc.setTest(true);
         return doc;
     }

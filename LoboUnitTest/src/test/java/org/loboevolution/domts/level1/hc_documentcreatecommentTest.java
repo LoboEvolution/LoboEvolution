@@ -58,7 +58,7 @@ public class hc_documentcreatecommentTest extends LoboUnitTest {
         newCommentValue = newCommentNode.getNodeValue();
         assertEquals("value", "This is a new Comment node", newCommentValue);
         newCommentName = newCommentNode.getNodeName();
-        assertEquals("strong", "#comment", newCommentName);
+        assertEquals("STRONG", "#comment", newCommentName);
         newCommentType = newCommentNode.getNodeType();
         assertEquals("type", 8, newCommentType);
     }

@@ -55,7 +55,7 @@ public class documentrenamenode06Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("p");
         element = (Element) childList.item(3);
-        attr = element.getAttributeNode("dir");
+        attr = element.getAttributeNodeNS("*", "dir");
         renamedclass = doc.renameNode(attr, "http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation");
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();

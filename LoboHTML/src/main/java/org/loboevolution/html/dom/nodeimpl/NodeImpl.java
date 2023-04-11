@@ -562,7 +562,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		int size = this.nodeList.getLength();
 		int index = size - 1;
 		if (size > index && index > -1) {
-			return this.nodeList.get(this.nodeList.getLength() - 1);
+			return this.nodeList.get(index);
 		} else {
 			return null;
 		}
@@ -1058,7 +1058,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				&& Objects.equals(getNodeName().toUpperCase(), arg.getNodeName().toUpperCase())
 				&& Objects.equals(getNodeValue(), arg.getNodeValue())
 				&& ((getLocalName() == null && getLocalName() == null) ||
-				   Objects.equals(getLocalName().toUpperCase(), arg.getLocalName().toUpperCase()));
+				Objects.equals(getLocalName().toUpperCase(), arg.getLocalName().toUpperCase()));
 	}
 
 	/** {@inheritDoc} */
@@ -1091,27 +1091,59 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public String lookupPrefix(String namespaceURI) {
-		return null;
+		if (namespaceURI == null) {
+			return null;
+		}
+		switch (getNodeType()) {
+			case Node.ATTRIBUTE_NODE:
+				if (getParentNode() != null && getParentNode().getNodeType() == Node.ELEMENT_NODE) {
+					return getParentNode().lookupPrefix(namespaceURI);
+				}
+				return null;
+			case Node.ELEMENT_NODE:
+				if (namespaceURI.equals(getNamespaceURI())) {
+					return getPrefix();
+				}
+				return null;
+			default:
+				return null;
+		}
 	}
 
-	/** {@inheritDoc} */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void normalize() {
-		final List<Node> textNodes = new LinkedList<>();
-		boolean prevText = false;
-		for (Node child : nodeList) {
-			if (child.getNodeType() == Node.TEXT_NODE) {
-				if (!prevText) {
-					prevText = true;
-					textNodes.add(child);
+		for (Node child = getFirstChild(); child != null; child = child.getNextSibling()) {
+			{
+				switch (child.getNodeType()) {
+					case TEXT_NODE:
+					case CDATA_SECTION_NODE:
+						while (child.getNextSibling() != null &&
+								(child.getNextSibling().getNodeType() == TEXT_NODE ||
+										child.getNextSibling().getNodeType() == CDATA_SECTION_NODE)) {
+							Text text = (Text) child;
+							text.appendData(child.getNextSibling().getNodeValue());
+							removeChild(child.getNextSibling());
+						}
+						break;
+					case ELEMENT_NODE:
+						NamedNodeMap attrs = child.getAttributes();
+						int len = attrs.getLength();
+						for (int i = 0; i < len; i++) {
+							Node attr = attrs.item(i);
+							attr.normalize();
+						}
+						// Fall through
+					case DOCUMENT_NODE:
+					case DOCUMENT_FRAGMENT_NODE:
+					case ATTRIBUTE_NODE:
+					case ENTITY_REFERENCE_NODE:
+						child.normalize();
+						break;
 				}
-			} else {
-				prevText = false;
 			}
-		}
-		for (Node child : textNodes) {
-			final Text text = (Text) child;
-			this.replaceAdjacentTextNodes(text);
 		}
 
 		if (!this.notificationsSuspended) {
@@ -1191,50 +1223,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * <p>replaceAdjacentTextNodes.</p>
 	 *
 	 * @param node a {@link org.loboevolution.html.node.Text} object.
-	 * @return a {@link org.loboevolution.html.node.Text} object.
-	 */
-	public Text replaceAdjacentTextNodes(Text node) {
-		try {
-			final int idx = nodeList.indexOf(node);
-			if (idx == -1) {
-				throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not a child");
-			}
-			final StringBuilder textBuffer = new StringBuilder();
-			int firstIdx = idx;
-			final List<Node> toDelete = new LinkedList<>();
-			for (int adjIdx = idx; --adjIdx >= 0;) {
-				final Node child = this.nodeList.item(adjIdx);
-				if (child instanceof Text) {
-					firstIdx = adjIdx;
-					toDelete.add(child);
-					textBuffer.append(child.getNodeValue());
-				}
-			}
-			final int length = this.nodeList.getLength();
-			for (int adjIdx = idx; ++adjIdx < length;) {
-				final Node child = this.nodeList.item(adjIdx);
-				if (child instanceof Text) {
-					toDelete.add(child);
-					textBuffer.append(child.getNodeValue());
-				}
-			}
-			this.nodeList.removeAll(toDelete);
-			final TextImpl textNode = new TextImpl(textBuffer.toString());
-			textNode.setOwnerDocument(this.document);
-			textNode.setParentImpl(this);
-			this.nodeList.add(firstIdx, textNode);
-			return textNode;
-		} finally {
-			if (!this.notificationsSuspended) {
-				informStructureInvalid();
-			}
-		}
-	}
-
-	/**
-	 * <p>replaceAdjacentTextNodes.</p>
-	 *
-	 * @param node a {@link org.loboevolution.html.node.Text} object.
 	 * @param textContent a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Text} object.
 	 */
@@ -1281,6 +1269,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		final int idx = this.nodeList.indexOf(oldChild);
 		if (idx == -1) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
+		}
+
+		if (getNodeType() == Node.ENTITY_REFERENCE_NODE) {
+			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
 		}
 
 		if (newChild.getOwnerDocument() == null) {
