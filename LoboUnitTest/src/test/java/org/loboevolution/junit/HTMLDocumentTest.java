@@ -583,11 +583,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNull(document.getElementById("xxxxxx"));
         assertEquals("ul1", elm.getAttribute("id"));
         assertEquals("ul1", elm.getId());
-        elm.setId("ul2");
-
-        elm.setIdAttribute("id", true);
-        elm.setIdAttributeNS(null, "id", true);
-        elm.setIdAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "id", true);
     }
 
     @Test

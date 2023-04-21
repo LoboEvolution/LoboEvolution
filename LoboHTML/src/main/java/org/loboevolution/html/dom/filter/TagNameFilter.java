@@ -43,7 +43,7 @@ public class TagNameFilter implements NodeFilter {
             return NodeFilter.FILTER_REJECT;
         }
 
-        return node.getNodeName().equals(name.toUpperCase().trim()) ?
+        return node.getNodeName().equalsIgnoreCase(name.trim()) ?
 				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     }
 }

@@ -297,11 +297,11 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public void setIdAttributeNode(Attr idAttr, boolean isId) {
 		Attr checkAttr = getAttributeNode(idAttr.getName());
+
 		if(checkAttr == null) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
 		}
-
-		final AttrImpl attr = (AttrImpl)idAttr;
+		final AttrImpl attr = (AttrImpl) idAttr;
 		attr.setNameId(isId);
 	}
 
@@ -984,7 +984,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public TypeInfo getSchemaTypeInfo() {
-		return new AttributeTypeInfo(false);
+		return new AttributeTypeInfo(this);
 	}
 
 	/** {@inheritDoc} */

@@ -59,8 +59,8 @@ public class elementsetidattributens10Test extends LoboUnitTest {
         elemList = doc.getElementsByTagNameNS("*", "p");
         pElem1 = (Element) elemList.item(2);
         pElem2 = (Element) elemList.item(3);
-        pElem1.setIdAttributeNS("http://www.w3.org/2000/xmlns/", "dmstc", true);
-        pElem2.setIdAttributeNS("http://www.w3.org/2000/xmlns/", "nm", true);
+        pElem1.setIdAttributeNS("http://www.usa.com", "dmstc", true);
+        pElem2.setIdAttributeNS("http://www.altavista.com", "nm", true);
         attributesMap = pElem1.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         id = attr.isId();
@@ -71,10 +71,10 @@ public class elementsetidattributens10Test extends LoboUnitTest {
         assertTrue("elementsetidattributensIsId2True10", id);
         elem = doc.getElementById("http://www.netzero.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributens1GetElementById10", "p", elemName);
+        assertEquals("elementsetidattributens1GetElementById10", "P", elemName);
         elem = doc.getElementById("http://www.altavista.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributens2GetElementById10", "p", elemName);
+        assertEquals("elementsetidattributens2GetElementById10", "P", elemName);
     }
 }
 

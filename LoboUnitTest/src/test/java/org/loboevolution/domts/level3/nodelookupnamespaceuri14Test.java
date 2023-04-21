@@ -40,22 +40,22 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class nodelookupnamespaceuri14Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         Document doc;
         Element docElem;
         Element elem;
         CDATASection cdata;
         String lookupNamespaceURI;
         Node appendedChild;
-        doc=sampleXmlFile("hc_staff.xml");
-        docElem=doc.getDocumentElement();
-        elem=doc.createElementNS("http://www.w3.org/1999/xhtml","dom3:p");
-        cdata=doc.createCDATASection("Text");
-        appendedChild=elem.appendChild(cdata);
-        appendedChild=docElem.appendChild(elem);
-        lookupNamespaceURI=cdata.lookupNamespaceURI("dom3");
-        assertEquals("nodelookupnamespaceuri14","http://www.w3.org/1999/xhtml",lookupNamespaceURI);
-        }
-        }
+        doc = sampleXmlFile("hc_staff.xml");
+        docElem = doc.getDocumentElement();
+        elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
+        cdata = doc.createCDATASection("Text");
+        appendedChild = elem.appendChild(cdata);
+        appendedChild = docElem.appendChild(elem);
+        lookupNamespaceURI = cdata.lookupNamespaceURI("dom3");
+        assertEquals("nodelookupnamespaceuri14", "http://www.w3.org/1999/xhtml", lookupNamespaceURI);
+    }
+}
 

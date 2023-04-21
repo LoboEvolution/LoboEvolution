@@ -55,11 +55,11 @@ public class nodecomparedocumentposition28Test extends LoboUnitTest {
         int entRefChild2Position;
         doc = sampleXmlFile("hc_staff.xml");
 
-            varList = doc.getElementsByTagName("var");
-            varElem = (Element) varList.item(2);
-            assertNotNull("varElemNotNull", varElem);
-            entRef = (EntityReference) varElem.getFirstChild();
-            assertNotNull("entRefNotNull", entRef);
+        varList = doc.getElementsByTagName("var");
+        varElem = (Element) varList.item(2);
+        assertNotNull("varElemNotNull", varElem);
+        entRef = (EntityReference) varElem.getFirstChild();
+        assertNotNull("entRefNotNull", entRef);
 
         entRefChild1 = (Element) entRef.getFirstChild();
         assertNotNull("entRefChild1NotNull", entRefChild1);

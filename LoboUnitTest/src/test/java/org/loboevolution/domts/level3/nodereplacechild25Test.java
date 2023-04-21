@@ -47,22 +47,20 @@ public class nodereplacechild25Test extends LoboUnitTest {
         NamedNodeMap entities;
         Node entity;
         HTMLCollection childList;
-        Node entRef;
+        EntityReference entRef;
         Element elem;
-        Element replaced;
-        String nodeName;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
         entity = entities.getNamedItem("alpha");
         childList = doc.getElementsByTagName("acronym");
         elem = (Element) childList.item(1);
-        entRef = elem.getFirstChild();
+        entRef = (EntityReference) elem.getFirstChild();
 
         {
             boolean success = false;
             try {
-                replaced = (Element) elem.replaceChild(entity, entRef);
+                elem.replaceChild(entity, entRef);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
@@ -72,7 +70,7 @@ public class nodereplacechild25Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replaced = (Element) elem.replaceChild(elem, entRef);
+                elem.replaceChild(elem, entRef);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
@@ -80,4 +78,3 @@ public class nodereplacechild25Test extends LoboUnitTest {
         }
     }
 }
-

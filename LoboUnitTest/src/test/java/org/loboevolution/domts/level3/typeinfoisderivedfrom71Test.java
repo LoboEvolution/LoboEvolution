@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Checks that isDerivedFrom(...,0) returns true when target type is a list
- * of an union of the ancestor type.
+ * of a union of the ancestor type.
  *
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
@@ -42,7 +42,6 @@ public class typeinfoisderivedfrom71Test extends LoboUnitTest {
         Document doc;
         Element elem;
         TypeInfo elemTypeInfo;
-        String typeName;
         HTMLCollection elemList;
         boolean retValue;
         doc = sampleXmlFile("hc_staff.xml");

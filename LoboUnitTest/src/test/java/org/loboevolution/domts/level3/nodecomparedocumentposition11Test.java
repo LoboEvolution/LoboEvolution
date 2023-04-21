@@ -45,14 +45,12 @@ public class nodecomparedocumentposition11Test extends LoboUnitTest {
         Element elem;
         Attr newAttr;
         HTMLCollection elemList;
-        int documentPosition;
         int attrPosition;
-        Attr replacedAttr;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(3);
         newAttr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
-        replacedAttr = elem.setAttributeNodeNS(newAttr);
+        elem.setAttributeNodeNS(newAttr);
         attrPosition = newAttr.compareDocumentPosition(doc);
         assertEquals("nodecomparedocumentpositionPRECEDINGContains11", 10, attrPosition);
     }

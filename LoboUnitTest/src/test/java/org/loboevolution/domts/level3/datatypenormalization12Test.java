@@ -72,9 +72,9 @@ public class datatypenormalization12Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
-            elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "time");
+            elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:time");
             element = (Element) elemList.item(0);
-            str = element.getAttribute("default");
+            str = element.getAttribute("data:default");
             assertEquals("firstValue", "20:30:00Z", str);
         }
     }

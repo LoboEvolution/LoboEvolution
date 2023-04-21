@@ -54,15 +54,15 @@ public class elementsetidattributens01Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         employeeElem = (Element) elemList.item(2);
-        employeeElem.setIdAttributeNS("http://www.w3.org/2000/xmlns/", "dmstc", true);
+        employeeElem.setIdAttributeNS("http://www.usa.com", "dmstc", true);
         attributesMap = employeeElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         id = attr.isId();
         assertTrue("elementsetidattributensIsIdTrue01", id);
         elem = doc.getElementById("http://www.netzero.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributensGetElementById01", "p", elemName);
-        employeeElem.setIdAttributeNS("http://www.w3.org/2000/xmlns/", "dmstc", false);
+        assertEquals("elementsetidattributensGetElementById01", "P", elemName);
+        employeeElem.setIdAttributeNS("http://www.usa.com", "dmstc", false);
         id = attr.isId();
         assertFalse("elementsetidattributensIsIdFalse01", id);
     }

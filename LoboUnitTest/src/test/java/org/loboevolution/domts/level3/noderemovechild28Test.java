@@ -51,7 +51,6 @@ public class noderemovechild28Test extends LoboUnitTest {
         Element elem;
         Text removed;
         String removedName;
-        Node removedNode;
         doc = sampleXmlFile("hc_staff.xml");
         parentList = doc.getElementsByTagName("acronym");
         elem = (Element) parentList.item(0);
@@ -62,15 +61,13 @@ public class noderemovechild28Test extends LoboUnitTest {
         removedName = removed.getNodeValue();
         assertEquals("noderemovechild28", "Yes", removedName);
 
-        {
-            boolean success = false;
-            try {
-                removedNode = child.removeChild(parent);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue("NOT_FOUND_ERR_noderemovechild28", success);
+        boolean success = false;
+        try {
+            child.removeChild(parent);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue("NOT_FOUND_ERR_noderemovechild28", success);
+
     }
 }
-

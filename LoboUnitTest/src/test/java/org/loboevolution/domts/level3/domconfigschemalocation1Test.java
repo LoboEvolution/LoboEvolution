@@ -68,12 +68,10 @@ public class domconfigschemalocation1Test extends LoboUnitTest {
             assertNull("defaultSchemaLocation", state);
 
         } catch (DOMException ex) {
-            switch (ex.getCode()) {
-                case 8:
-                    return;
-                default:
-                    throw ex;
+            if (ex.getCode() == 8) {
+                return;
             }
+            throw ex;
         }
         /*DOMString */
         canSet = domConfig.canSetParameter(parameter, sampleSchemaLocation);

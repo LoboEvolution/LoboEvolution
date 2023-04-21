@@ -179,6 +179,10 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 		if (node instanceof Attr) {
 			Attr attr = (Attr) node;
+			final TextImpl t = new TextImpl(attr.getValue());
+			t.setOwnerDocument(attr.getOwnerDocument());
+			t.setParentImpl(attr.getParentNode());
+			attr.appendChild(t);
 			Node check = getNamedItem(attr.getNodeName());
 			if (check != null) {
 				this.attributes.remove(check);
@@ -210,6 +214,10 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 		if (node instanceof Attr) {
 			Attr attr = (Attr) node;
+			final TextImpl t = new TextImpl(attr.getValue());
+			t.setOwnerDocument(attr.getOwnerDocument());
+			t.setParentImpl(attr.getParentNode());
+			attr.appendChild(t);
 			Node check = getNamedItemNS(attr.getNamespaceURI(), attr.getLocalName());
 			if (check != null) {
 				this.attributes.remove(check);

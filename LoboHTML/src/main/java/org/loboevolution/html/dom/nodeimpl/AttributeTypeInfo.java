@@ -20,34 +20,102 @@
 
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.AllArgsConstructor;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.CDATASection;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.TypeInfo;
 
+@AllArgsConstructor
 public class AttributeTypeInfo implements TypeInfo {
 
-    private boolean isId;
+    private static final String URI_SCHEMAFORSCHEMA = "http://www.w3.org/2001/XMLSchema";
 
-    public AttributeTypeInfo(boolean isId){
-        this.isId = isId;
-    }
+    private static final String ATTVAL_ANYTYPE = "anyType";
 
-    /** {@inheritDoc} */
+    private static final int DERIVATION_ANY = 0;
+
+    private static final int DERIVATION_RESTRICTION = 1;
+    private static final int DERIVATION_EXTENSION = 2;
+    private static final int DERIVATION_UNION = 4;
+    private static final int DERIVATION_LIST = 8;
+
+
+    private Node node;
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTypeName() {
-        if (isId) {
+        if (node instanceof Attr && ((Attr) node).isId()) {
             return "ID";
         }
-        return "CDATA";
+
+        if (node instanceof Attr && node.getNodeValue() != null) {
+            return "string";
+        }
+
+        if (node instanceof CDATASection) {
+            return "CDATA";
+        }
+
+        return node.getNodeName().toLowerCase() + "Type";
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTypeNamespace() {
-        return "http://www.w3.org/TR/REC-xml";
+        return "http://www.w3.org/2001/XMLSchema";
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isDerivedFrom(String typeNamespaceArg, String typeNameArg, int derivationMethod) {
+
+        if (typeNameArg == null)
+            return false;
+
+        if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && ATTVAL_ANYTYPE.equals(typeNameArg)
+                && (((derivationMethod & DERIVATION_RESTRICTION) != 0)
+                || (derivationMethod == DERIVATION_ANY))) {
+            return true;
+        }
+
+        if ((derivationMethod & DERIVATION_RESTRICTION) != 0) {
+            return true;
+        }
+
+        // list
+        if ((derivationMethod & DERIVATION_LIST) != 0) {
+            return true;
+        }
+
+        // union
+        if ((derivationMethod & DERIVATION_UNION) != 0) {
+            return true;
+        }
+
+        // extension
+        if (((derivationMethod & DERIVATION_EXTENSION) != 0)
+                && (((derivationMethod & DERIVATION_RESTRICTION) == 0)
+                && ((derivationMethod & DERIVATION_LIST) == 0)
+                && ((derivationMethod & DERIVATION_UNION) == 0))) {
+            return false;
+        }
+
+        if (((derivationMethod & DERIVATION_EXTENSION) == 0)
+                && (((derivationMethod & DERIVATION_RESTRICTION) == 0)
+                && ((derivationMethod & DERIVATION_LIST) == 0)
+                && ((derivationMethod & DERIVATION_UNION) == 0))) {
+            return true;
+        }
+
         return false;
     }
 }

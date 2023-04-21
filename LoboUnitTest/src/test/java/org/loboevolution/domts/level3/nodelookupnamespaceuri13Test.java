@@ -39,22 +39,22 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class nodelookupnamespaceuri13Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         Document doc;
         Element docElem;
         Element elem;
         Text txt;
         String namespaceURI;
         Node appendedChild;
-        doc=sampleXmlFile("hc_staff.xml");
-        docElem=doc.getDocumentElement();
-        elem=doc.createElementNS("http://www.w3.org/1999/xhtml","dom3:p");
-        txt=doc.createTextNode("Text");
-        appendedChild=elem.appendChild(txt);
-        appendedChild=docElem.appendChild(elem);
-        namespaceURI=txt.lookupNamespaceURI("dom3");
-        assertEquals("nodelookupnamespaceuri13","http://www.w3.org/1999/xhtml",namespaceURI);
-        }
-        }
+        doc = sampleXmlFile("hc_staff.xml");
+        docElem = doc.getDocumentElement();
+        elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
+        txt = doc.createTextNode("Text");
+        appendedChild = elem.appendChild(txt);
+        appendedChild = docElem.appendChild(elem);
+        namespaceURI = txt.lookupNamespaceURI("dom3");
+        assertEquals("nodelookupnamespaceuri13", "http://www.w3.org/1999/xhtml", namespaceURI);
+    }
+}
 

@@ -1009,11 +1009,6 @@ public class DOMElementTest extends LoboUnitTest {
         docElm.appendChild(elem4);
         HTMLCollectionImpl list = (HTMLCollectionImpl) docElm.getElementsByTagName("div");
         assertNotNull(list);
-        list.forEach(el -> {
-            System.out.println(el.getNodeName());
-        });
-
-
         assertEquals(5, list.getLength());
         assertNull(list.item(-1));
         assertTrue(elem1.isEqualNode(list.item(0)));

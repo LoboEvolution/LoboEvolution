@@ -532,7 +532,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (DOMException e) {
             assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
         }
-        docElm.setAttributeNodeNS(attr2);
+        docElm.setAttributeNode(attr2);
         Attr attr3 = document.createAttribute("id");
         attr3.setValue("myId");
         docElm.setAttributeNodeNS(attr3);

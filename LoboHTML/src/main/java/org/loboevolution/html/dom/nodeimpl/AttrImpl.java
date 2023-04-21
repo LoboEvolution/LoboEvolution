@@ -19,13 +19,17 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.TypeInfo;
 
@@ -102,7 +106,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
      */
     @Override
     public TypeInfo getSchemaTypeInfo() {
-        return new AttributeTypeInfo(isId());
+        return new AttributeTypeInfo(this);
     }
 
     /**
@@ -119,6 +123,87 @@ public class AttrImpl extends EventTargetImpl implements Attr {
     @Override
     public void setNodeValue(String nodeValue) {
         this.value = nodeValue;
+    }
+
+    @Override
+    public Node insertBefore(Node newChild, Node refChild) {
+        if (newChild instanceof Attr) {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
+        } else {
+            return super.insertBefore(newChild, refChild);
+        }
+    }
+
+    @Override
+    public Node removeChild(Node oldChild) {
+        if (oldChild instanceof Attr) {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
+        } else {
+            return super.removeChild(oldChild);
+        }
+    }
+
+    @Override
+    public Node replaceChild(Node newChild, Node oldChild) {
+        if (newChild instanceof Attr) {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
+        } else {
+            return super.replaceChild(newChild, oldChild);
+        }
+    }
+
+    @Override
+    public Node getNextSibling() {
+        if (ownerElement != null) {
+            NamedNodeMap attributes = ownerElement.getAttributes();
+            boolean next = false;
+            for (Node nodeAttr : Nodes.iterable(attributes)) {
+                Attr attr = (Attr) nodeAttr;
+                if (next) {
+                    return attr;
+                }
+
+                if (Objects.equals(attr, this)) {
+                    next = true;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Node getPreviousSibling() {
+        if (ownerElement != null) {
+            NamedNodeMap attributes = ownerElement.getAttributes();
+            Attr previus = null;
+            for (Node nodeAttr : Nodes.iterable(attributes)) {
+                Attr attr = (Attr) nodeAttr;
+
+                if (Objects.equals(attr, this) && !Objects.equals(previus, this)) {
+                    return previus;
+                }
+
+                previus = attr;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public short compareDocumentPosition(Node other) {
+        short comparison = super.compareDocumentPosition(other);
+        if (other instanceof Attr) {
+            AttrImpl otherImpl = (AttrImpl) other;
+            if (otherImpl.getOwnerElement().isSameNode(this.ownerElement)) {
+                comparison += Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+            }
+        }
+        return comparison;
+    }
+
+    public void setOwnerElement(Node ownerElement) {
+        this.ownerElement = ownerElement;
+        setParentImpl(ownerElement);
     }
 
     @Override

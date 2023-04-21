@@ -259,40 +259,53 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 
 	@Override
-	public boolean isSupported(String xml, String s) {
-		return "xml".equalsIgnoreCase(xml) || "core".equalsIgnoreCase(xml);
+	public boolean isSupported(String feature, String version) {
+		if(Strings.isNotBlank(feature)) feature = feature.toLowerCase();
+		if(Strings.isNotBlank(feature) && feature.startsWith("+")) feature = feature.substring(1).toLowerCase();
+		return ("core".equals(feature) || "xml".equals(feature)
+				|| "1.0".equals(version) || "2.0".equals(version) || "3.0".equals(version));
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public short compareDocumentPosition(Node other) {
-		final Node parent = getParentNode();
-		if (!(other instanceof NodeImpl)) {
-			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
-		}
-
-		if (other == this) {
+		if (this.isSameNode(other)) {
 			return 0;
 		}
-
-		if (parent != null && parent == other.getParentNode()) {
-			final int thisIndex = getNodeIndex();
-			final int otherIndex = ((NodeImpl) other).getNodeIndex();
-			if (thisIndex == -1 || otherIndex == -1) {
-				return Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
-			}
-			if (thisIndex < otherIndex) {
-				return Node.DOCUMENT_POSITION_FOLLOWING;
-			} else {
-				return Node.DOCUMENT_POSITION_PRECEDING;
-			}
-		} else if (isAncestorOf(other)) {
-			return Node.DOCUMENT_POSITION_CONTAINED_BY;
-		} else if (((NodeImpl) other).isAncestorOf(this)) {
-			return Node.DOCUMENT_POSITION_CONTAINS;
-		} else {
+		if (!(other instanceof NodeImpl)) {
 			return Node.DOCUMENT_POSITION_DISCONNECTED;
 		}
+		NodeImpl otherImpl = (NodeImpl) other;
+		if (!(otherImpl.getDocumentNode() == this.getDocumentNode())) {
+			return Node.DOCUMENT_POSITION_DISCONNECTED;
+		}
+		short comparison = 0;
+		final int thisIndex = getNodeIndex();
+		final int otherIndex = ((NodeImpl) other).getNodeIndex();
+
+		if (thisIndex < otherIndex) {
+			comparison += Node.DOCUMENT_POSITION_FOLLOWING;
+			if (otherImpl.containedBy(this)) {
+				comparison += Node.DOCUMENT_POSITION_CONTAINED_BY;
+			}
+		} else {
+			comparison += Node.DOCUMENT_POSITION_PRECEDING;
+			if (this.containedBy(otherImpl)) {
+				comparison += Node.DOCUMENT_POSITION_CONTAINS;
+			}
+		}
+		return comparison;
+	}
+
+	private boolean containedBy(NodeImpl other) {
+		Node parent = getParentNode();
+		while (parent != null) {
+			if (other.isSameNode(parent)) {
+				return true;
+			}
+			parent = parent.getParentNode();
+		}
+		return false;
 	}
 
 	/**
@@ -1275,6 +1288,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
 		}
 
+		if (contains(newChild)) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Child node is already a parent.");
+		}
+
+		if (Objects.equals(newChild, this)) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Node is equals");
+		}
+
 		if (newChild.getOwnerDocument() == null) {
 			newChild.setOwnerDocument(getOwnerDocument());
 		}
@@ -1431,8 +1452,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 
 	@Override
-	public Node getFeature(String name, String version) {
-		return null;
+	public Node getFeature(String feature, String version) {
+		return isSupported(feature, version)  ? this : null;
 	}
 
 	/** {@inheritDoc} */

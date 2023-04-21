@@ -73,22 +73,21 @@ public class datatypenormalization03Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
-            elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "boolean");
+            elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:boolean");
             element = (Element) elemList.item(0);
-            str = element.getAttribute("value");
+            str = element.getAttribute("data:value");
             assertEquals("firstValue", "true", str);
-            str = element.getAttribute("union");
+            str = element.getAttribute("data:union");;
             assertEquals("firstUnion", "false", str);
             str = element.getTextContent();
             assertEquals("firstList", "false true false", str);
             element = (Element) elemList.item(1);
-            str = element.getAttribute("value");
+            str = element.getAttribute("data:value");
             assertEquals("secondValue", "1", str);
-            str = element.getAttribute("union");
+            str = element.getAttribute("data:union");;
             assertEquals("secondUnion", "0", str);
             str = element.getTextContent();
             assertEquals("secondList", "0 1 0", str);
         }
     }
 }
-

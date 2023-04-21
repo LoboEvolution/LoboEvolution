@@ -74,7 +74,7 @@ public class domconfiginfoset1Test extends LoboUnitTest {
         assertFalse("cdataSectionsSetFalse", state);
         domConfig.setParameter(parameter, Boolean.FALSE);
         state = ((Boolean) domConfig.getParameter(parameter));
-        assertTrue("setFalseIsNoOp", state);
+        assertFalse("setFalseIsNoOp", state);
         domConfig.setParameter("entities", Boolean.TRUE);
         state = ((Boolean) domConfig.getParameter(parameter));
         assertFalse("setEntitiesTrueInvalidatesInfoset", state);

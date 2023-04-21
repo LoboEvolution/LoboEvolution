@@ -49,7 +49,7 @@ public class elementsetidattributenode01Test extends LoboUnitTest {
         Element employeeElem;
         NamedNodeMap attributesMap;
         Attr attr;
-        boolean id = false;
+        boolean id;
         Element elem;
         String elemName;
         doc = sampleXmlFile("hc_staff.xml");
@@ -62,10 +62,9 @@ public class elementsetidattributenode01Test extends LoboUnitTest {
         assertTrue("elementsetidattributenodeIsIdTrue01", id);
         elem = doc.getElementById("http://www.netzero.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributenodeGetElementById01", "p", elemName);
+        assertEquals("elementsetidattributenodeGetElementById01", "P", elemName);
         elem.setIdAttributeNode(attr, false);
         id = attr.isId();
         assertFalse("elementsetidattributenodeIsIdFalse01", id);
     }
 }
-

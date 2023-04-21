@@ -43,7 +43,7 @@ public class documentgetxmlencoding01Test extends LoboUnitTest {
         String encodingName;
         doc = sampleXmlFile("barfoo_utf8.xml");
         encodingName = doc.getXmlEncoding();
-        assertEquals("documentgetxmlencoding01", "uTf-8", encodingName);
+        assertEquals("documentgetxmlencoding01", "UTF-8", encodingName);
     }
 }
 

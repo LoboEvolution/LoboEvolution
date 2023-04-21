@@ -110,8 +110,10 @@ public class DOMImplementationImpl implements DOMImplementation {
 
 	@Override
 	public boolean hasFeature(String feature, String version) {
-		return ("CORE".equalsIgnoreCase(feature) || "XML".equalsIgnoreCase(feature))
-				|| ("1.0".equals(version) || "2.0".equals(version));
+		if(Strings.isNotBlank(feature)) feature = feature.toLowerCase();
+		if(Strings.isNotBlank(feature) && feature.startsWith("+")) feature = feature.substring(1).toLowerCase();
+		return "core".equals(feature) || "xml".equals(feature)
+				||	"1.0".equals(version) || "2.0".equals(version) || "3.0".equals(version);
 	}
 
 	@Override

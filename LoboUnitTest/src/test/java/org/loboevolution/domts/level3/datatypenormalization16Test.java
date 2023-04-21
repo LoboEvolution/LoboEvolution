@@ -80,7 +80,7 @@ public class datatypenormalization16Test extends LoboUnitTest {
             element = (Element) elemList.item(0);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals("content1", "     EMP  0001 ", childValue);
+            assertEquals("content1", "EMP  0001", childValue);
             element = (Element) elemList.item(1);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();

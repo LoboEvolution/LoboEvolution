@@ -50,8 +50,7 @@ public class IdFilter implements NodeFilter {
 			for (Node attribute : Nodes.iterable(attributes)) {
 				Attr attr = (Attr) attribute;
 				if (Strings.isNotBlank(attr.getNodeValue())) {
-					String name = attr.getNodeValue().contains(":") ? attr.getNodeValue().split(":")[1] : attr.getNodeValue();
-					if (this._id.equals(name) && attr.isId()) {
+					if (this._id.equals(attr.getNodeValue()) && attr.isId()) {
 						return NodeFilter.FILTER_ACCEPT;
 					}
 				}

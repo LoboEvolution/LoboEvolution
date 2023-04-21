@@ -57,6 +57,7 @@ public class elementsetidattributenode09Test extends LoboUnitTest {
         elemList = doc.getElementsByTagNameNS("*", "var");
         varElem = (Element) elemList.item(2);
         entRef = (EntityReference) varElem.getFirstChild();
+        System.out.println(entRef.getNodeName());
         entElement = (Element) entRef.getFirstChild();
         attributesMap = entElement.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns");

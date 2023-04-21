@@ -21,6 +21,7 @@ package org.loboevolution.html.dom.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.traversal.NodeFilter;
@@ -31,20 +32,21 @@ import org.loboevolution.html.node.traversal.NodeFilter;
 @Data
 @AllArgsConstructor
 public class TagNsNameFilter implements NodeFilter {
-    private final String name;
+    
+    private final String localName;
     private final String namespaceURI;
-
     /**
      * {@inheritDoc}
      */
     @Override
     public short acceptNode(Node node) {
+
         if (!(node instanceof Element)) {
             return NodeFilter.FILTER_REJECT;
         }
 
-        String localName = name.contains(":") ? name.split(":")[1] : name;
-        boolean tag = node.getLocalName().equalsIgnoreCase(localName.toUpperCase().trim());
+        String lc = localName.contains(":") ? localName.split(":")[1] : localName;
+        boolean tag = node.getLocalName().equalsIgnoreCase(lc.toUpperCase().trim());
 
         if (tag && namespaceURI == null && node.getNamespaceURI() == null) {
             return NodeFilter.FILTER_ACCEPT;

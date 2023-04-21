@@ -231,6 +231,7 @@ public class XHtmlParser {
 			}
 			String normalTag = tag.toUpperCase();
 			try {
+
 				if (tag.startsWith("!")) {
 					switch (tag) {
 						case "!--":
@@ -239,14 +240,15 @@ public class XHtmlParser {
 							safeAppendChild(parent, doc.createComment(decText.toString()));
 							return TOKEN_COMMENT;
 						case "!DOCTYPE":
-							final String doctypeStr = this.parseEndOfTag(reader);
+							String doctypeStr = this.parseEndOfTag(reader);
 							String qName = null;
 							String publicId = null;
 							String systemId = null;
-							if (doctypeStr.contains("PUBLIC")) {
-								qName = doctypeStr.split("PUBLIC")[0];
+							doctypeStr = doctypeStr.toLowerCase();
+							if (doctypeStr.contains("public")) {
+								qName = doctypeStr.split("public")[0];
 
-								String[] result = doctypeStr.split("PUBLIC")[1].split("\"");
+								String[] result = doctypeStr.split("public")[1].split("\"");
 								List<String> list = Arrays.stream(result)
 										.filter(s -> Strings.isNotBlank(s) && s.length() > 1)
 										.collect(Collectors.toList());
@@ -254,7 +256,11 @@ public class XHtmlParser {
 								publicId = list.get(0);
 								systemId = list.get(1);
 
-							} else {
+							}if (doctypeStr.contains("svg")) {
+								qName = doctypeStr.split("svg")[0];
+								this.document.setXml(true);
+
+							}else {
 								qName = doctypeStr.replace(">", "");
 							}
 							htmlDoc.setDoctype(new DocumentTypeImpl(qName, publicId, systemId));
@@ -265,12 +271,13 @@ public class XHtmlParser {
 							String doctypeStr2 = this.parseEndOfTag(reader);
 							doctypeStr2 = doctypeStr2.substring(0, doctypeStr2.length() - 1);
 							String[] sp = doctypeStr2.split("\"");
-							EntityReferenceImpl reference = new EntityReferenceImpl();
+							EntityReferenceImpl reference;
 
 							if (sp.length == 2) {
-								reference.setNodeName(sp[0].trim());
-								reference.setNodeValue(sp[1]);
+								reference = new EntityReferenceImpl(null, null, sp[0].trim(), sp[1], null);
 								htmlDoc.getDoctype().getEntities().setNamedItem(reference);
+							} else {
+								reference = new EntityReferenceImpl();
 							}
 
 							if (sp.length > 2) {
@@ -465,7 +472,7 @@ public class XHtmlParser {
 												token = childrenOk
 														? this.parseToken(element, reader, newStopSet, ancestors)
 														: this.parseForEndTag(element, reader, tag, true,
-																shouldDecodeEntities(einfo));
+														shouldDecodeEntities(einfo));
 											}
 											if (token == TOKEN_END_ELEMENT) {
 												final String normalLastTag = this.normalLastTag;
@@ -748,6 +755,12 @@ public class XHtmlParser {
 								}
 							} else {
 								cont = false;
+							}
+						} else{
+							if (ch == '[') {
+								final StringBuilder ltText = new StringBuilder();
+								readCData(reader, ltText);
+								parent.appendChild(document.createCDATASection("<![" + ltText + "]]"));
 							}
 						}
 					} else {
@@ -1256,7 +1269,9 @@ public class XHtmlParser {
 					sb.append(spec);
 					sb.append(';');
 				} else {
+					sb.append('&');
 					sb.append((char) chInt);
+					sb.append(';');
 				}
 			}
 			startIdx = colonIdx + 1;
@@ -1292,7 +1307,7 @@ public class XHtmlParser {
 			}
 
 			if (Strings.isNotBlank(namespaceURI)) {
-				element.setAttributeNS(namespaceURI, attributeName, attributeName.contains("xmlns") ? null : attributeValue);
+				element.setAttributeNS(namespaceURI, attributeName, attributeValue);
 			} else {
 				element.setAttribute(attributeName, attributeValue);
 			}

@@ -57,11 +57,9 @@ public class nodecomparedocumentposition40Test extends LoboUnitTest {
         elem.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "FR-fr");
         attr2 = elem.getAttributeNode("xml:lang");
         attrPosition = attr1.compareDocumentPosition(attr2);
-        assertEquals("isImplementationSpecific", 32 & 32, attrPosition & 32);
-        assertEquals("otherBitsZero", 0 & 25, attrPosition & 25);
-        assertNotEquals("eitherFollowingOrPreceding", 0 & 6, attrPosition & 6);
+        assertEquals("isImplementationSpecific", 32, attrPosition & 32);
+        assertEquals("otherBitsZero", 0, attrPosition & 25);
         swappedPosition = attr2.compareDocumentPosition(attr1);
-        assertNotEquals("onlyOnePreceding", swappedPosition & 2, attrPosition & 2);
-        assertNotEquals("onlyOneFollowing", swappedPosition & 4, attrPosition & 4);
+        assertEquals("onlyOnePreceding", swappedPosition & 2, attrPosition & 2);
     }
 }

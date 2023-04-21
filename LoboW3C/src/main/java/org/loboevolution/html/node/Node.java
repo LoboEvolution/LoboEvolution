@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.node;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.html.node.events.EventTarget;
@@ -216,7 +217,7 @@ public interface Node extends EventTarget {
 	 *
 	 * @param nodeValue a {@link java.lang.String} object.
 	 */
-	void setNodeValue(String nodeValue);
+	void setNodeValue(String nodeValue) throws DOMException;
 
 	/**
 	 * <p>setTextContent.</p>
@@ -369,8 +370,6 @@ public interface Node extends EventTarget {
 	 */
 	short compareDocumentPosition(Node other);
 
-    boolean isSupported(String xml, String s);
-
 	/**
 	 * Returns true if element has attributes, and false otherwise.
 	 *
@@ -378,5 +377,6 @@ public interface Node extends EventTarget {
 	 */
 	boolean hasAttributes();
 
-    Node getFeature(String name, String version);
+	boolean isSupported(String feature, String version);
+	Node getFeature(String feature, String version);
 }

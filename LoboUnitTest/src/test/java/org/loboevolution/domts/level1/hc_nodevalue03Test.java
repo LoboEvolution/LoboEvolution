@@ -62,12 +62,10 @@ public class hc_nodevalue03Test extends LoboUnitTest {
         } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
-        assertTrue("throw_WRONG_DOCUMENT_ERR", success);
-
+        assertTrue("throw_INVALID_MODIFICATION_ERR", success);
 
         newValue = newNode.getNodeValue();
         assertNull("nullAfterAttemptedChange", newValue);
 
     }
 }
-

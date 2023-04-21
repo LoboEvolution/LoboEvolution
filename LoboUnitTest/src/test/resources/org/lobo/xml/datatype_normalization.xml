@@ -22,22 +22,22 @@
 		<!ATTLIST time  value CDATA #IMPLIED union CDATA #IMPLIED>]><svg xmlns="http://www.w3.org/2000/svg" 	 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 	xsi:schemaLocation="http://www.w3.org/2000/svg datatype_normalization.svg.xsd">
 	<rect x="0" y="0" width="100" height="100"/>
 	<script type="text/ecmascript">&svgtest;&svgunit;</script>
-	<data xmlns='http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization'>
-		<double value="   +0003.141592600E+0000 " union="  +0003.141592600E+0000    ">   -31415926.00E-7 2.718</double>
-		<double value=" NaN" union="NaN "> INF    -INF </double>
-		<double value=" 1 " union="1 "> -0</double>
-		<boolean value="   true" union="false   "> false true       false </boolean>
-		<boolean value="  1" union=" 0  ">0 1     0 </boolean>
-		<decimal value="  +0003.141592600  " union="  +0003.141592600  ">  +10 .1  </decimal>
-		<decimal value=" 01 " union=" 01 "> -.001 </decimal>
-		<float value=" +0003.141592600E+0000 " union=" +0003.141592600E+0000 "> -31415926.00E-7 2.718</float>
-		<float value=" NaN " union=" NaN "> INF    -INF </float>
-		<float value=" 1 " union="1 ">-0</float>
-		<dateTime value=" 2004-01-21T15:30:00-05:00" union="2004-01-21T20:30:00-05:00 ">2004-01-21T15:30:00 2004-01-21T15:30:00Z</dateTime>
-		<dateTime value=" 2004-01-21T15:30:00.0000-05:00" union="2004-01-21T15:30:00.0000-05:00 ">  2004-01-21T15:30:00.0000  </dateTime>
-		<dateTime value="2004-01-21T15:30:00.0001-05:00" union="2004-01-21T15:30:00.0001-05:00">2004-01-21T15:30:00.0001</dateTime>
-		<time value=" 15:30:00-05:00" union="15:30:00-05:00 "> 15:30:00 </time>
-		<time value="  15:30:00.0000-05:00" union=" 15:30:00.0000-05:00  ">15:30:00.0000</time>
-		<time value="  15:30:00.0001-05:00" union="15:30:00.0001-05:00  ">15:30:00.0001</time>
+	<data xmlns:data='http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization'>
+		<data:double data:value="+0003.141592600E+0000" data:union="+0003.141592600E+0000" data:default="3.1415926">-31415926.00E-7 2.718</data:double>
+		<data:double data:value="NaN" data:union="NaN">INF -INF</data:double>
+		<data:double data:value="1" data:union="1">-0</data:double>
+		<data:boolean data:value="true" data:union="false" data:default="true">false true false</data:boolean>
+		<data:boolean data:value="1" data:union="0">0 1 0</data:boolean>
+		<data:decimal data:value="+0003.141592600" data:union="+0003.141592600" data:default="3.1415926">+10 .1</data:decimal>
+		<data:decimal data:value="01" data:union="01">-.001</data:decimal>
+		<data:float data:value="+0003.141592600E+0000" data:union="+0003.141592600E+0000" data:default="3.1415926E0">-31415926.00E-7 2.718</data:float>
+		<data:float data:value="NaN" data:union="NaN">INF -INF</data:float>
+		<data:float data:value="1" data:union="1">-0</data:float>
+		<data:dateTime data:value="2004-01-21T15:30:00-05:00" data:union="2004-01-21T20:30:00-05:00" data:default="2004-01-21T20:30:00Z">2004-01-21T15:30:00 2004-01-21T15:30:00Z</data:dateTime>
+		<data:dateTime data:value="2004-01-21T15:30:00.0000-05:00" data:union="2004-01-21T15:30:00.0000-05:00">2004-01-21T15:30:00.0000</data:dateTime>
+		<data:dateTime data:value="2004-01-21T15:30:00.0001-05:00" data:union="2004-01-21T15:30:00.0001-05:00">2004-01-21T15:30:00.0001</data:dateTime>
+		<data:time data:value="15:30:00-05:00" data:union="15:30:00-05:00" data:default="20:30:00Z">15:30:00</data:time>
+		<data:time data:value="15:30:00.0000-05:00" data:union="15:30:00.0000-05:00">15:30:00.0000</data:time>
+		<data:time data:value="15:30:00.0001-05:00" data:union="15:30:00.0001-05:00">15:30:00.0001</data:time>
 	</data>
 </svg>

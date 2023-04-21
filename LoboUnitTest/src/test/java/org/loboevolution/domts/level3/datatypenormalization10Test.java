@@ -72,9 +72,9 @@ public class datatypenormalization10Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
-            elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "float");
+            elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:float");
             element = (Element) elemList.item(0);
-            str = element.getAttribute("default");
+            str = element.getAttribute("data:default");
             assertEquals("firstValue", "3.1415926E0", str);
         }
     }

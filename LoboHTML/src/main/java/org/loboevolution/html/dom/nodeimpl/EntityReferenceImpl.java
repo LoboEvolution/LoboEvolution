@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.dom.nodeimpl;
 
+import com.gargoylesoftware.css.dom.DOMException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -44,6 +45,10 @@ public class EntityReferenceImpl extends EventTargetImpl implements EntityRefere
     private String nodeValue;
     private String notationName;
 
+    @Override
+    public void setNodeValue(String nodeValue) throws DOMException {
+        super.setNodeValue(nodeValue);
+    }
 
     @Override
     public int getNodeType() {
