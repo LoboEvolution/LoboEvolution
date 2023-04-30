@@ -36,7 +36,7 @@ public final class Strings {
 
 	/** The Constant EMPTY_ARRAY. */
 	public static final String[] EMPTY_ARRAY = new String[0];
-	
+
 	/**
 	 * Instantiates a strings.
 	 */
@@ -103,6 +103,20 @@ public final class Strings {
 		return (text != null) && (text.length() > 0);
 	}
 
+
+	public static boolean containsIgnoreCase(String text, String text1) {
+		return text != null && text1 != null && (text.contains(text1.toLowerCase()) || text.contains(text1.toUpperCase()));
+	}
+
+	public static String[] splitIgnoreCase(String text, String text1) {
+		if (text != null && text1 != null) {
+			return text.split(text1.toLowerCase()).length > 1 ? text.split(text1.toLowerCase()) :
+					text.split(text1.toUpperCase()).length > 1 ? text.split(text1.toUpperCase()) : new String[]{};
+		}
+		return null;
+	}
+
+
 	/**
 	 * <p>isNumeric.</p>
 	 *
@@ -133,21 +147,21 @@ public final class Strings {
 		final char[] list = phrase.toCharArray();
 		for (final char ch : list) {
 			switch (ch) {
-			case ' ':
-			case '\t':
-			case '\r':
-			case '\n':
-				if (word != null) {
-					wordList.add(word.toString());
-					word = null;
-				}
-				break;
-			default:
-				if (word == null) {
-					word = new StringBuilder();
-				}
-				word.append(ch);
-				break;
+				case ' ':
+				case '\t':
+				case '\r':
+				case '\n':
+					if (word != null) {
+						wordList.add(word.toString());
+						word = null;
+					}
+					break;
+				default:
+					if (word == null) {
+						word = new StringBuilder();
+					}
+					word.append(ch);
+					break;
 			}
 		}
 		if (word != null) {
@@ -173,7 +187,7 @@ public final class Strings {
 
 		return arrLis.toArray(new String[0]);
 	}
-	
+
 	/**
 	 * Strict html encode.
 	 *
@@ -186,25 +200,25 @@ public final class Strings {
 		final char[] list = rawText.toCharArray();
 		for (final char ch : list) {
 			switch (ch) {
-			case '&':
-				output.append("&amp;");
-				break;
-			case '"':
-				if (quotes) {
-					output.append("&quot;");
-				} else {
+				case '&':
+					output.append("&amp;");
+					break;
+				case '"':
+					if (quotes) {
+						output.append("&quot;");
+					} else {
+						output.append(ch);
+					}
+					break;
+				case '<':
+					output.append("&lt;");
+					break;
+				case '>':
+					output.append("&gt;");
+					break;
+				default:
 					output.append(ch);
-				}
-				break;
-			case '<':
-				output.append("&lt;");
-				break;
-			case '>':
-				output.append("&gt;");
-				break;
-			default:
-				output.append(ch);
-				break;
+					break;
 			}
 		}
 		return output.toString();
@@ -278,7 +292,7 @@ public final class Strings {
 		}
 		return found;
 	}
-	
+
 	/**
 	 * <p>hash.</p>
 	 *
@@ -295,7 +309,7 @@ public final class Strings {
 		SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
         return Base64.getEncoder().encodeToString(f.generateSecret(spec).getEncoded());
     }
-    
+
 	/**
 	 * <p>randomAlphaNumeric.</p>
 	 *

@@ -54,7 +54,12 @@ public class DOMImplementationImpl implements DOMImplementation {
 	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException{
 		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
 		doc.setDoctype(doctype);
-		doc.setNamespaceURI(namespaceURI);
+
+		if (Strings.isNotBlank(namespaceURI)) {
+			doc.setNamespaceURI(namespaceURI);
+			doc.setXml(true);
+		}
+
 		if (doctype != null && doctype.getOwnerDocument() == null) {
 			doctype.setOwnerDocument(doc);
 		}
@@ -98,7 +103,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 
 		return doc;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public Document createHTMLDocument() {
@@ -113,7 +118,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 		if(Strings.isNotBlank(feature)) feature = feature.toLowerCase();
 		if(Strings.isNotBlank(feature) && feature.startsWith("+")) feature = feature.substring(1).toLowerCase();
 		return "core".equals(feature) || "xml".equals(feature)
-				||	"1.0".equals(version) || "2.0".equals(version) || "3.0".equals(version);
+				|| "1.0".equals(version) || "2.0".equals(version) || "3.0".equals(version);
 	}
 
 	@Override

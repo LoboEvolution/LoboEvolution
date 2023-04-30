@@ -241,14 +241,12 @@ public class XHtmlParser {
 							return TOKEN_COMMENT;
 						case "!DOCTYPE":
 							String doctypeStr = this.parseEndOfTag(reader);
-							String qName = null;
+							String qName;
 							String publicId = null;
 							String systemId = null;
-							doctypeStr = doctypeStr.toLowerCase();
-							if (doctypeStr.contains("public")) {
-								qName = doctypeStr.split("public")[0];
-
-								String[] result = doctypeStr.split("public")[1].split("\"");
+							if (Strings.containsIgnoreCase(doctypeStr, "public")) {
+								String[] publics = Strings.splitIgnoreCase(doctypeStr, "public");
+								String[] result = publics[1].split("\"");
 								List<String> list = Arrays.stream(result)
 										.filter(s -> Strings.isNotBlank(s) && s.length() > 1)
 										.collect(Collectors.toList());
@@ -256,15 +254,18 @@ public class XHtmlParser {
 								publicId = list.get(0);
 								systemId = list.get(1);
 
-							}if (doctypeStr.contains("svg")) {
-								qName = doctypeStr.split("svg")[0];
+							}
+
+							if (Strings.containsIgnoreCase(doctypeStr, "svg")) {
+								String[] publics = Strings.splitIgnoreCase(doctypeStr, "svg");
+								qName = publics[0];
 								this.document.setXml(true);
 
-							}else {
+							} else {
 								qName = doctypeStr.replace(">", "");
 							}
-							htmlDoc.setDoctype(new DocumentTypeImpl(qName, publicId, systemId));
 
+							htmlDoc.setDoctype(new DocumentTypeImpl(qName, publicId, systemId));
 							needRoot = false;
 							return TOKEN_BAD;
 						case "!ENTITY":

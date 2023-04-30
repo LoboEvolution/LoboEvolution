@@ -62,23 +62,20 @@ public class hc_nodereplacechildnodeancestorTest extends LoboUnitTest {
         Node employeeNode;
         NodeList childList;
         Node oldChild;
-        Node replacedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.getDocumentElement();
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);
         childList = employeeNode.getChildNodes();
         oldChild = childList.item(0);
-
-        {
-            boolean success = false;
-            try {
-                replacedNode = employeeNode.replaceChild(newChild, oldChild);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
+        boolean success = false;
+        try {
+            employeeNode.replaceChild(newChild, oldChild);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
+
     }
 }
 

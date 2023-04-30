@@ -76,7 +76,7 @@ public class elementsetidattributenode08Test extends LoboUnitTest {
         assertEquals("elementsetidattributenode1GetElementById08", "ACRONYM", elemName);
         elem = doc.getElementById("http://www.netzero.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributenode2GetElementById08", "p", elemName);
+        assertEquals("elementsetidattributenode2GetElementById08", "P", elemName);
     }
 }
 

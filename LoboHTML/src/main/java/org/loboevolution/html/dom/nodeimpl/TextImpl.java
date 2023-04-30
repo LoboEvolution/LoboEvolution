@@ -97,6 +97,10 @@ public class TextImpl extends CharacterDataImpl implements Text {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null content (use empty string instead)");
 		}
 
+		if ("".equals(content)) {
+			return null;
+		}
+
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		if (parent == null) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");

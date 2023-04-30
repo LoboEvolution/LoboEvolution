@@ -62,7 +62,6 @@ public class importNode14Test extends LoboUnitTest {
         String system;
         String target;
         String data;
-        java.util.List result = new java.util.ArrayList();
 
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");

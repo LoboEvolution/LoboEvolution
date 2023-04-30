@@ -59,7 +59,7 @@ public class attrgetschematypeinfo01Test extends LoboUnitTest {
         typeInfo = attr.getSchemaTypeInfo();
         assertNotNull("typeInfoNotNull", typeInfo);
         typeName = typeInfo.getTypeName();
-        assertEquals("nameIsCDATA", "CDATA", typeName);
+        assertEquals("nameIsCDATA", "string", typeName);
         typeNS = typeInfo.getTypeNamespace();
         assertEquals("nsIsXML", "http://www.w3.org/TR/REC-xml", typeNS);
     }

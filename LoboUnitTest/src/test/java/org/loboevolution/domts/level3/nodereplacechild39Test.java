@@ -48,17 +48,16 @@ public class nodereplacechild39Test extends LoboUnitTest {
         String rootNS;
         Comment newComment;
         Element newElement;
-        Node retNode;
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         newElement = doc.createElementNS(rootNS, rootName);
         newComment = doc.createComment("second element goes here");
-        retNode = doc.appendChild(newComment);
+        doc.appendChild(newComment);
 
         try {
-            retNode = doc.replaceChild(newElement, newComment);
+            doc.replaceChild(newElement, newComment);
             fail("throw_HIERARCHY_REQUEST_OR_NOT_SUPPORTED");
 
         } catch (DOMException ex) {

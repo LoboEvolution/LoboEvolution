@@ -1279,6 +1279,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public Node replaceChild(Node newChild, Node oldChild) {
 
+		if (Objects.equals(newChild, oldChild)) {
+			return oldChild;
+		}
+
 		final int idx = this.nodeList.indexOf(oldChild);
 		if (idx == -1) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
@@ -1292,6 +1296,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Child node is already a parent.");
 		}
 
+		if (newChild.contains(oldChild)) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Child node is already a parent.");
+		}
+
 		if (Objects.equals(newChild, this)) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Node is equals");
 		}
@@ -1302,13 +1310,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument()))
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
-
 		this.nodeList.set(idx, newChild);
 
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}
-		return newChild;
+		return oldChild;
 	}
 
 	/** {@inheritDoc} */

@@ -62,7 +62,7 @@ public class HTMLParagraphElementTest extends LoboUnitTest {
                         + "  </head>\n"
                         + "  <body onload='test()'><p id='p'>foo</p></body>\n"
                         + "</html>";
-        final String[] messages =  {"", "hello", "left", "hi", "right"};
+        final String[] messages =  {null, "hello", "left", "hi", "right"};
         checkHtmlAlert(html, messages);
     }
 

@@ -52,7 +52,7 @@ public class nodegetuserdata03Test extends LoboUnitTest {
         /*Node */
         doc.setUserData("something", elem, null);
         retUserData = doc.getUserData("something");
-        success = ((Node) /*DOMUserData */retUserData).isEqualNode(elem);
+        success = ((Node) retUserData).isEqualNode(elem);
         assertTrue("nodegetuserdata03", success);
     }
 }

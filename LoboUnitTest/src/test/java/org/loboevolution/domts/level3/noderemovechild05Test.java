@@ -46,14 +46,8 @@ public class noderemovechild05Test extends LoboUnitTest {
     @Test
     public void runTest() {
         Document doc;
-        DOMImplementation domImpl;
         DocumentType docType;
         DocumentType removedDocType;
-        String nullPubId = null;
-
-        String nullSysId = null;
-
-        Node appendedChild;
         Node removedChild;
         doc = sampleXmlFile("barfoo.xml");
         docType = doc.getDoctype();
@@ -62,12 +56,11 @@ public class noderemovechild05Test extends LoboUnitTest {
             removedChild = doc.removeChild(docType);
 
         } catch (DOMException ex) {
-            switch (ex.getCode()) {
-                case 9:
-                    return;
-                default:
-                    throw ex;
+            if (ex.getCode() == 9) {
+                ex.printStackTrace();
+                return;
             }
+            throw ex;
         }
         assertNotNull("removedChildNotNull", removedChild);
         removedDocType = doc.getDoctype();
@@ -76,7 +69,7 @@ public class noderemovechild05Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removedChild = docType.removeChild(doc);
+                docType.removeChild(doc);
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
