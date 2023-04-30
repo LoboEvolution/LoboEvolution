@@ -51,6 +51,7 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.annotations.JSFunction;
 
 import javax.swing.*;
@@ -177,6 +178,16 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			} catch (DOMException ex1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
 			}
+		}
+	}
+
+	/**
+	 * @param normalName a {@link java.lang.String} object.
+	 */
+	public void removeAttributeField(String normalName) {
+		final Map<String, Function> fba = this.getFunctionByAttribute();
+		if (fba != null) {
+			fba.remove("on"+normalName);
 		}
 	}
 

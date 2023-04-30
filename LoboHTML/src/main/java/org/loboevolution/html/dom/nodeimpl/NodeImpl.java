@@ -29,6 +29,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.UserDataHandler;
@@ -538,7 +539,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getConfig();
 		} else {
-			return null;
+			return new LocalHtmlRendererConfig();
 		}
 	}
 

@@ -389,6 +389,8 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 			if (isContainedByNode()) {
 				HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
 				resetCursorOnMouseOut(this.modelNode, limit);
+			} else {
+				HtmlController.getInstance().onMouseMoved(this.modelNode, event, x, y, limit);
 			}
 		}
 	}

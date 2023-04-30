@@ -21,8 +21,12 @@
 package org.loboevolution.html.dom.nodeimpl.event;
 
 import com.gargoylesoftware.css.dom.DOMException;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.events.EventTarget;
@@ -35,7 +39,7 @@ import java.util.*;
  * <p>EventTargetImpl class.</p>
  */
 public class EventTargetImpl extends NodeImpl implements EventTarget {
-	
+
 	private final Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<>();
 	
 	private final List<Node> clicked = new ArrayList<>();
@@ -77,7 +81,13 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 		for (NodeImpl htmlElementImpl : keySet) {
 			Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
 			if (map != null) {
-				map.get(type).remove(listener);
+				List<Function> list = map.get(type);
+				if (list != null) {
+					list.remove(listener);
+				}
+				if (htmlElementImpl instanceof Element) {
+					((ElementImpl) htmlElementImpl).removeAttributeField(type);
+				}
 			}
 		}
 	}
@@ -85,21 +95,29 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	/** {@inheritDoc} */
 	@Override
 	public boolean dispatchEvent(Node htmlElementImpl, Event evt) {
-		Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
-		if (map != null) {
-			List<Function> handlers = map.get(evt.getType());
-			if (handlers != null) {
-				for (final Function h : handlers) {
-					if (!clicked.contains(htmlElementImpl)) {
-						Executor.executeFunction(this, h, evt, new Object[0]);
-						clicked.add(htmlElementImpl);
-					} else {
-						clicked.clear();
-					}
-				}
+		Function f = getFunction(htmlElementImpl, evt);
+		if (f != null) {
+			if (!clicked.contains(htmlElementImpl)) {
+				Executor.executeFunction(this, f, evt, new Object[0]);
+				clicked.add(htmlElementImpl);
+			} else {
+				clicked.clear();
 			}
 		}
 		return false;
+	}
+
+	public Function getFunction(Node htmlElementImpl, Event evt) {
+		Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
+		if (map != null) {
+			String evType = evt.getType();
+			List<Function> handlers = map.get(evType.startsWith("on") ? evType.substring(2) : evType);
+			if (handlers != null && handlers.size() > 0) {
+				Optional<Function> optional = handlers.stream().findFirst();
+				return optional.get();
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -145,5 +163,9 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	@Override
 	public boolean hasAttributes() {
 		return false;
+	}
+
+	public Map<NodeImpl, Map<String, List<Function>>> getOnEventHandlers() {
+		return onEventHandlers;
 	}
 }

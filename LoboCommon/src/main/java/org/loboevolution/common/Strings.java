@@ -326,12 +326,11 @@ public final class Strings {
 		return builder.toString();
 	}
 
-	public static boolean isValidTag(String name) {
-		int len = name.length();
-		if (len == 0) {
+	public static boolean isValidTag(String name, boolean isXml) {
+		if (Strings.isBlank(name)) {
 			return false;
 		}
-		final Pattern pattern = Pattern.compile("[A-Za-z0-9]*",Pattern.CASE_INSENSITIVE);
+		final Pattern pattern = Pattern.compile(isXml ? "[A-Za-z0-9]*" : "(\\\"[^\\\"]*\\\"|'[^']*'|[^'\\\">])*", Pattern.CASE_INSENSITIVE);
 		return pattern.matcher(name).matches();
 	}
 

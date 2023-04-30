@@ -75,6 +75,7 @@ public class LoboUnitTest extends LoboWebDriver {
         final String url = LoboWebDriver.class.getResource("/org/lobo/xml/" + fileName).toString();
         DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/xml/" + fileName), url);
         doc.setTest(true);
+        doc.setXml(true);
         return doc;
     }
 

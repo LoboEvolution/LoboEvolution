@@ -22,8 +22,8 @@ package org.loboevolution.html.dom.nodeimpl.event;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
-import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.events.GlobalEventHandlers;
 import org.loboevolution.http.UserAgentContext;
@@ -41,7 +41,7 @@ import java.util.logging.Level;
  * Implements common functionality of most elements.
  */
 public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEventHandlers {
-	
+
 	private Map<String, Function> functionByAttribute = null;
 
 	private Function onfocus, onblur, onclick, ondblclick, onmousedown, onmouseup, onmouseover, onmousemove, onmouseout,
@@ -1288,7 +1288,8 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 			}
 		}
 	}
-	
+
+
 	/**
 	 * <p>
 	 * getEventFunction.
@@ -1312,19 +1313,18 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 			if (uac == null) {
 				throw new IllegalStateException("No user agent context.");
 			}
+
 			if (uac.isScriptingEnabled() && this instanceof ElementImpl) {								
 				ElementImpl elem = (ElementImpl)this;
 				final String attributeValue = elem.getAttribute(normalAttributeName);
-				if (Strings.isCssBlank(attributeValue)) {
-					f = null;
-				} else {
+				if (Strings.isCssNotBlank(attributeValue)) {
 					final String functionCode = "function " + normalAttributeName + "_" + System.identityHashCode(this) + "() { " + attributeValue + " }";
 					final Document doc = this.document;
 					if (doc == null) {
 						throw new IllegalStateException("Element does not belong to a document.");
 					}
-					final Context ctx = Executor.createContext(getDocumentURL(), uac);
-					try {
+
+					try (Context ctx = Executor.createContext(getDocumentURL(), uac)) {
 						final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
 						if (scope == null) {
 							throw new IllegalStateException("Scriptable (scope) instance was expected to be keyed as UserData to document using " + Executor.SCOPE_KEY);
@@ -1335,15 +1335,14 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 							f = ctx.compileFunction(thisScope, functionCode, elem.getTagName() + "[" + elem.getId() + "]." + normalAttributeName, 1, null);
 						} catch (final RhinoException ecmaError) {
 							logger.log(Level.WARNING, "Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage(), ecmaError.getMessage());
-							f = null;
 						} catch (final Throwable err) {
 							logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);
-							f = null;
 						}
-					} finally {
-						Context.exit();
 					}
+				} else {
+					f = elem.getFunction(this, new EventImpl(normalAttributeName, false, false));
 				}
+
 				if (fba == null) {
 					fba = new HashMap<>(1);
 					this.functionByAttribute = fba;
@@ -1352,5 +1351,9 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 			}
 			return f;
 		}
+	}
+
+	public Map<String, Function> getFunctionByAttribute() {
+		return functionByAttribute;
 	}
 }

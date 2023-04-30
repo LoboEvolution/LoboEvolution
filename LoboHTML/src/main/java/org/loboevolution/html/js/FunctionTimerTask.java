@@ -56,6 +56,7 @@ class FunctionTimerTask extends WeakWindowTask {
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
+
 		// This executes in the GUI thread and that's good.
 		try {
 			final WindowImpl window = this.getWindow();
@@ -73,10 +74,10 @@ class FunctionTimerTask extends WeakWindowTask {
 				throw new IllegalStateException("Cannot perform operation when document is unset.");
 			}
 			final Function function = this.functionRef.get();
-			if (function == null) {
-				throw new IllegalStateException("Cannot perform operation. Function is no longer available.");
+			if (function != null) {
+				Executor.executeFunction(window.getWindowScope(), function, doc.getDocumentURL(), window.getUserAgentContext());
 			}
-			Executor.executeFunction(window.getWindowScope(), function, doc.getDocumentURL(), window.getUserAgentContext());
+
 		} catch (final Throwable err) {
 			logger.log(Level.WARNING, "actionPerformed()", err);
 		}

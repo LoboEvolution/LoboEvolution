@@ -29,9 +29,6 @@ import java.util.Iterator;
 
 /**
  * <p>TranslatedRenderable class.</p>
- *
- *
- *
  */
 public class TranslatedRenderable extends BaseBoundableRenderable implements RCollection {
 
