@@ -21,7 +21,7 @@
 package org.loboevolution.html.dom.smil;
 
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.Element;
 
 /**
@@ -107,7 +107,7 @@ public interface Time {
      * <p>setOffset.</p>
      *
      * @param offset a double.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setOffset(double offset) throws DOMException;
 
@@ -125,7 +125,7 @@ public interface Time {
      * <p>setBaseElement.</p>
      *
      * @param baseElement a {@link org.loboevolution.html.node.Element} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setBaseElement(Element baseElement) throws DOMException;
 
@@ -145,7 +145,7 @@ public interface Time {
      * <p>setBaseBegin.</p>
      *
      * @param baseBegin a boolean.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setBaseBegin(boolean baseBegin) throws DOMException;
 
@@ -164,7 +164,7 @@ public interface Time {
      * <p>setEvent.</p>
      *
      * @param event a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setEvent(String event) throws DOMException;
 
@@ -183,7 +183,7 @@ public interface Time {
      * <p>setMarker.</p>
      *
      * @param marker a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setMarker(String marker) throws DOMException;
 

@@ -22,9 +22,9 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import org.htmlunit.cssparser.parser.CSSOMParser;
+import org.htmlunit.cssparser.parser.InputSource;
+import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLStyleElement;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
@@ -133,7 +133,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 				final String baseURI = doc.getBaseURI();
 				final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
 				try {
-					final com.gargoylesoftware.css.dom.CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
+					final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
 					sheet.setHref(baseURI);
 					sheet.setDisabled(this.disabled);
 					CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);

@@ -20,8 +20,8 @@
 
 package org.loboevolution.menu.tools.developer.tool.inspector;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Node;

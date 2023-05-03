@@ -20,18 +20,18 @@
 
 package org.loboevolution.html.js.css;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSRuleList;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 
 public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 
-    private final com.gargoylesoftware.css.dom.CSSStyleSheetImpl cssStyleSheet;
+    private final org.htmlunit.cssparser.dom.CSSStyleSheetImpl cssStyleSheet;
 
     private final CSSRuleListImpl cssRuleList;
 
-    public CSSStyleSheetImpl(com.gargoylesoftware.css.dom.CSSStyleSheetImpl cssStyleSheet) {
+    public CSSStyleSheetImpl(org.htmlunit.cssparser.dom.CSSStyleSheetImpl cssStyleSheet) {
         super(cssStyleSheet);
         this.cssStyleSheet = cssStyleSheet;
         this.cssRuleList = new CSSRuleListImpl(cssStyleSheet.getCssRules());
@@ -79,7 +79,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
         cssStyleSheet.setDisabled(disabled);
     }
 
-    public com.gargoylesoftware.css.dom.CSSStyleSheetImpl getCssStyleSheet() {
+    public org.htmlunit.cssparser.dom.CSSStyleSheetImpl getCssStyleSheet() {
         return this.cssStyleSheet;
     }
 

@@ -20,13 +20,13 @@
 
 package org.loboevolution.html.style;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.dom.MediaListImpl;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
-import com.gargoylesoftware.css.parser.selector.SelectorList;
-import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
+import org.htmlunit.cssparser.dom.MediaListImpl;
+import org.htmlunit.cssparser.parser.CSSOMParser;
+import org.htmlunit.cssparser.parser.InputSource;
+import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
+import org.htmlunit.cssparser.parser.selector.SelectorList;
+import org.htmlunit.cssparser.util.ThrowCssExceptionErrorHandler;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.node.css.MediaQueryList;
@@ -49,7 +49,7 @@ public final class CSSUtilities {
 	 *
 	 * @param text a {@link java.lang.String} object.
 	 * @param scriptURI a {@link java.lang.String} object.
-	 * @return a {@link com.gargoylesoftware.css.parser.InputSource} object.
+	 * @return a {@link InputSource} object.
 	 */
 	public static InputSource getCssInputSourceForStyleSheet(String text, String scriptURI) {
 		final Reader reader = new StringReader(text);
@@ -62,7 +62,7 @@ public final class CSSUtilities {
 	 * <p>parseMedia.</p>
 	 *
 	 * @param mediaString a {@link java.lang.String} object.
-	 * @return a {@link com.gargoylesoftware.css.dom.MediaListImpl} object.
+	 * @return a {@link MediaListImpl} object.
 	 * @throws java.lang.Exception if any.
 	 */
 	public static MediaListImpl parseMedia(String mediaString) throws Exception {
@@ -120,7 +120,7 @@ public final class CSSUtilities {
 	 * <p>getSelectorList.</p>
 	 *
 	 * @param selectors a {@link java.lang.String} object.
-	 * @return a {@link com.gargoylesoftware.css.parser.selector.SelectorList} object.
+	 * @return a {@link SelectorList} object.
 	 */
 	public static SelectorList getSelectorList(final String selectors) throws Exception {
 		final CSSOMParser parser = new CSSOMParser(new CSS3Parser());

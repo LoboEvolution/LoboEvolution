@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * This interface define the set of animation extensions for SMIL. The
@@ -160,7 +160,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 * <p>setValues.</p>
 	 *
 	 * @param values a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setValues(String values) throws DOMException;
 
@@ -178,7 +178,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 * <p>setFrom.</p>
 	 *
 	 * @param from a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setFrom(String from) throws DOMException;
 
@@ -196,7 +196,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 * <p>setTo.</p>
 	 *
 	 * @param to a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setTo(String to) throws DOMException;
 
@@ -214,7 +214,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 * <p>setBy.</p>
 	 *
 	 * @param by a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setBy(String by) throws DOMException;
 

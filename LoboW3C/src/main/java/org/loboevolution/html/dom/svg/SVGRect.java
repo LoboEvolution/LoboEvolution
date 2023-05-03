@@ -21,6 +21,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGRect interface.</p>
@@ -40,7 +41,7 @@ public interface SVGRect {
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX(float x);
 
@@ -55,7 +56,7 @@ public interface SVGRect {
 	 * <p>setY.</p>
 	 *
 	 * @param y a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setY(final float y);
 
@@ -70,7 +71,7 @@ public interface SVGRect {
 	 * <p>setWidth.</p>
 	 *
 	 * @param width a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setWidth(float width);
 
@@ -85,7 +86,7 @@ public interface SVGRect {
 	 * <p>setHeight.</p>
 	 *
 	 * @param height a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setHeight(float height);
 }

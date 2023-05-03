@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.xpath;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.Node;
 
 /**
@@ -207,7 +207,7 @@ public interface XPathResult {
      * @throws DOMException                                INVALID_STATE_ERR: The document has been mutated since the result was
      *                                                     returned.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws com.gargoylesoftware.css.dom.DOMException   if any.
+     * @throws DOMException   if any.
      */
     Node iterateNext()
             throws XPathException, DOMException;

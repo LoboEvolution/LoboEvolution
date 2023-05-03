@@ -1,6 +1,6 @@
 package org.loboevolution.html.dom.nodeimpl.traversal;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import lombok.Getter;
 import lombok.Setter;
 import org.loboevolution.html.node.AbstractList;

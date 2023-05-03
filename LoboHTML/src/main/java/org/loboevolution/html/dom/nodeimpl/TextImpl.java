@@ -19,7 +19,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLSlotElement;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;

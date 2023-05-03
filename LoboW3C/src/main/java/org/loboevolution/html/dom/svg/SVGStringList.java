@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGStringList interface.</p>
@@ -38,7 +39,7 @@ public interface SVGStringList {
 	/**
 	 * <p>clear.</p>
 	 *
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void clear();
 

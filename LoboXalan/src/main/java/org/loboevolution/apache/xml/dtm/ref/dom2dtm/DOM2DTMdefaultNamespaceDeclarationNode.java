@@ -20,7 +20,7 @@
 package org.loboevolution.apache.xml.dtm.ref.dom2dtm;
 
 import org.loboevolution.apache.xml.dtm.DTMException;
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.html.node.*;

@@ -11,7 +11,7 @@
 
 package org.loboevolution.junit;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.filter.ElementNameFilter;

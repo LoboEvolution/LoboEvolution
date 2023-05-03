@@ -20,11 +20,10 @@
 
 package org.loboevolution.html.node.js;
 
-import com.gargoylesoftware.css.dom.CSSRuleListImpl;
+import org.htmlunit.cssparser.dom.CSSRuleListImpl;
 import org.loboevolution.html.node.BarProp;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Selection;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.css.MediaQueryList;
 import org.loboevolution.html.node.events.EventTarget;
@@ -419,7 +418,7 @@ public interface Window
      *
      * @param elt       a {@link org.loboevolution.html.node.Element} object.
      * @param pseudoElt a {@link java.lang.String} object.
-     * @return a {@link com.gargoylesoftware.css.dom.CSSRuleListImpl} object.
+     * @return a {@link CSSRuleListImpl} object.
      */
     CSSRuleListImpl getMatchedCSSRules(Element elt, String pseudoElt);
 
@@ -427,7 +426,7 @@ public interface Window
      * <p>getMatchedCSSRules.</p>
      *
      * @param elt a {@link org.loboevolution.html.node.Element} object.
-     * @return a {@link com.gargoylesoftware.css.dom.CSSRuleListImpl} object.
+     * @return a {@link CSSRuleListImpl} object.
      */
     CSSRuleListImpl getMatchedCSSRules(Element elt);
 

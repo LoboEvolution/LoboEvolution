@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGPathSegLinetoHorizontalRel interface.</p>
@@ -40,7 +41,7 @@ public interface SVGPathSegLinetoHorizontalRel extends SVGPathSeg {
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX(float x);
 }

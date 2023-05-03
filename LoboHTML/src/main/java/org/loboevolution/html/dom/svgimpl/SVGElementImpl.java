@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.svg.SVGAnimatedBoolean;
 import org.loboevolution.html.dom.svg.SVGElement;
@@ -125,7 +126,7 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 	 * <p>setXMLlang.</p>
 	 *
 	 * @param xmllang a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	public void setXMLlang(String xmllang) {
 		setAttribute("xml:lang", xmllang);
@@ -144,7 +145,7 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 	 * <p>setXMLspace.</p>
 	 *
 	 * @param xmlspace a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	public void setXMLspace(String xmlspace) {
 		setAttribute("xml:space", xmlspace);

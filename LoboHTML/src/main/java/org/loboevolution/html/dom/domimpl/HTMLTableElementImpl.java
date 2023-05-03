@@ -22,7 +22,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;

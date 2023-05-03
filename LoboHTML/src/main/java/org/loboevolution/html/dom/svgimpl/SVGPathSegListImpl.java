@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGPathSeg;
 import org.loboevolution.html.dom.svg.SVGPathSegList;

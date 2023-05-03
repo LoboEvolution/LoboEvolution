@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * Defines the test attributes interface. See the Test attributes definition .
@@ -40,7 +40,7 @@ public interface ElementTest {
      * <p>setSystemBitrate.</p>
      *
      * @param systemBitrate a int.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setSystemBitrate(int systemBitrate) throws DOMException;
 
@@ -58,7 +58,7 @@ public interface ElementTest {
      * <p>setSystemCaptions.</p>
      *
      * @param systemCaptions a boolean.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setSystemCaptions(boolean systemCaptions) throws DOMException;
 
@@ -76,7 +76,7 @@ public interface ElementTest {
      * <p>setSystemLanguage.</p>
      *
      * @param systemLanguage a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setSystemLanguage(String systemLanguage) throws DOMException;
 
@@ -115,7 +115,7 @@ public interface ElementTest {
      * <p>setSystemOverdubOrSubtitle.</p>
      *
      * @param systemOverdubOrSubtitle a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setSystemOverdubOrSubtitle(String systemOverdubOrSubtitle) throws DOMException;
 
@@ -133,7 +133,7 @@ public interface ElementTest {
      * <p>setSystemAudioDesc.</p>
      *
      * @param systemAudioDesc a boolean.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setSystemAudioDesc(boolean systemAudioDesc) throws DOMException;
 

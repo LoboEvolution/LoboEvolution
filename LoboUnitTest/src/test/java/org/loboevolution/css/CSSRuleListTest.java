@@ -14,11 +14,12 @@
  */
 package org.loboevolution.css;
 
+import org.htmlunit.cssparser.dom.CSSRuleListImpl;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link com.gargoylesoftware.css.dom.CSSRuleListImpl}.
+ * Tests for {@link CSSRuleListImpl}.
  */
 
 public class CSSRuleListTest extends LoboUnitTest {

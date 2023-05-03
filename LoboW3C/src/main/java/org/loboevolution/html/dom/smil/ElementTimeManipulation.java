@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * This interface support use-cases commonly associated with animation.
@@ -45,7 +45,7 @@ public interface ElementTimeManipulation {
      * <p>setSpeed.</p>
      *
      * @param speed a float.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setSpeed(float speed) throws DOMException;
 
@@ -67,7 +67,7 @@ public interface ElementTimeManipulation {
      * <p>setAccelerate.</p>
      *
      * @param accelerate a float.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setAccelerate(float accelerate) throws DOMException;
 
@@ -89,7 +89,7 @@ public interface ElementTimeManipulation {
      * <p>setDecelerate.</p>
      *
      * @param decelerate a float.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setDecelerate(float decelerate) throws DOMException;
 
@@ -108,7 +108,7 @@ public interface ElementTimeManipulation {
      * <p>setAutoReverse.</p>
      *
      * @param autoReverse a boolean.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setAutoReverse(boolean autoReverse) throws DOMException;
 

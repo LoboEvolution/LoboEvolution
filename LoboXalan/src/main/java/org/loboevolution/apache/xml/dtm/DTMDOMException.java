@@ -19,7 +19,7 @@
  */
 package org.loboevolution.apache.xml.dtm;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * Simple implementation of DOMException.

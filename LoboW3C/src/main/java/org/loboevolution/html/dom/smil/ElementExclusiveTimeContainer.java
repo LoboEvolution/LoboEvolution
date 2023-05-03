@@ -21,7 +21,7 @@
 package org.loboevolution.html.dom.smil;
 
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.NodeList;
 
 /**
@@ -44,7 +44,7 @@ public interface ElementExclusiveTimeContainer extends ElementTimeContainer {
      * <p>setEndSync.</p>
      *
      * @param endSync a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setEndSync(String endSync) throws DOMException;
 

@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGPathSegCurvetoCubicAbs interface.</p>
@@ -40,7 +41,7 @@ public interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX(float x);
 
@@ -55,7 +56,7 @@ public interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 	 * <p>setY.</p>
 	 *
 	 * @param y a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setY(final float y);
 
@@ -70,7 +71,7 @@ public interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 	 * <p>setX1.</p>
 	 *
 	 * @param x1 a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX1(float x1);
 
@@ -85,7 +86,7 @@ public interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 	 * <p>setY1.</p>
 	 *
 	 * @param y1 a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setY1(float y1);
 
@@ -100,7 +101,7 @@ public interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 	 * <p>setX2.</p>
 	 *
 	 * @param x2 a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX2(float x2);;
 
@@ -115,7 +116,7 @@ public interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 	 * <p>setY2.</p>
 	 *
 	 * @param y2 a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setY2(float y2);;
 }

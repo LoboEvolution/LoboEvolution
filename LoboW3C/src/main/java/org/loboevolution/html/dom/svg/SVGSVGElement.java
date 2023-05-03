@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.events.Event;
@@ -106,7 +107,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * <p>setUseCurrentView.</p>
 	 *
 	 * @param useCurrentView a boolean.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setUseCurrentView(boolean useCurrentView);
 
@@ -128,7 +129,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * <p>setCurrentScale.</p>
 	 *
 	 * @param currentScale a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setCurrentScale(float currentScale);
 
@@ -151,7 +152,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * <p>unsuspendRedraw.</p>
 	 *
 	 * @param suspend_handle_id a int.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void unsuspendRedraw(int suspend_handle_id);
 

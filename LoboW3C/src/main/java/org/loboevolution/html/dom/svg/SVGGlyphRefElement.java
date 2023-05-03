@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGGlyphRefElement interface.</p>
@@ -39,7 +40,7 @@ public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStyl
 	 * <p>setGlyphRef.</p>
 	 *
 	 * @param glyphRef a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setGlyphRef(String glyphRef);
 
@@ -54,7 +55,7 @@ public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStyl
 	 * <p>setFormat.</p>
 	 *
 	 * @param format a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setFormat(String format);
 
@@ -69,7 +70,7 @@ public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStyl
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX(float x);
 
@@ -84,7 +85,7 @@ public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStyl
 	 * <p>setY.</p>
 	 *
 	 * @param y a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setY(final float y);
 
@@ -99,7 +100,7 @@ public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStyl
 	 * <p>setDx.</p>
 	 *
 	 * @param dx a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setDx(float dx);
 
@@ -114,7 +115,7 @@ public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStyl
 	 * <p>setDy.</p>
 	 *
 	 * @param dy a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setDy(float dy);
 }

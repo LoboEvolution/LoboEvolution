@@ -23,7 +23,7 @@
 
 package org.loboevolution.html.dom.xpath;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.events.Event;

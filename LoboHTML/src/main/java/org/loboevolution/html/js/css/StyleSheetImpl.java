@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.js.css;
 
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.CSSStyleSheet;
@@ -28,11 +29,11 @@ import org.loboevolution.html.node.css.StyleSheet;
 
 public class StyleSheetImpl implements StyleSheet {
 
-    private final com.gargoylesoftware.css.dom.CSSStyleSheetImpl cssStyleSheet;
+    private final CSSStyleSheetImpl cssStyleSheet;
 
     private Node ownerNode;
 
-    public StyleSheetImpl(com.gargoylesoftware.css.dom.CSSStyleSheetImpl cssStyleSheet) {
+    public StyleSheetImpl(CSSStyleSheetImpl cssStyleSheet) {
         this.cssStyleSheet = cssStyleSheet;
     }
 

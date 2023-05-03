@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.js.css;
 
-import com.gargoylesoftware.css.dom.Property;
+import org.htmlunit.cssparser.dom.Property;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -48,7 +48,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     private String overlayColor;
     private final HTMLElementImpl element;
-    private final com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl style;
+    private final org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style;
 
     private static Map<String, Boolean> propertyLenght = new HashMap<>();
 
@@ -109,9 +109,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
      * <p>Constructor for CSSStyleDeclarationImpl.</p>
      *
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-     * @param style a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
+     * @param style a {@link org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl} object.
      */
-    public CSSStyleDeclarationImpl(HTMLElementImpl element, com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl style) {
+    public CSSStyleDeclarationImpl(HTMLElementImpl element, org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style) {
         this.element = element;
         this.style = style;
     }
@@ -123,15 +123,15 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
      */
     public CSSStyleDeclarationImpl(HTMLElementImpl element) {
         this.element = element;
-        this.style = new com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl();
+        this.style = new org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl();
     }
 
     /**
      * <p>Constructor for CSSStyleDeclarationImpl.</p>
      *
-     * @param style a {@link com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl} object.
+     * @param style a {@link org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl} object.
      */
-    public CSSStyleDeclarationImpl(com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl style) {
+    public CSSStyleDeclarationImpl(org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style) {
         this.element = new HTMLElementImpl("");
         this.style = style;
     }
@@ -161,10 +161,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     }
 
     public boolean isPropertyPriority(String property) {
-        return style.isPropertyPriority(property);
+        return Strings.isNotBlank(style.getPropertyPriority(property));
     }
 
-    /** {@inheritDoc} */
     @JSFunction
     public void setProperty(final String propertyName, final String value) {
        this.setProperty(propertyName, value, "");

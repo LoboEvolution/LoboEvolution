@@ -20,7 +20,6 @@
 
 package org.loboevolution.html.dom;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.css.StyleSheet;
 

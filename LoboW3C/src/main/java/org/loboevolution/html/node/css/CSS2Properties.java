@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.node.css;
 
-import com.gargoylesoftware.css.util.CSSProperties;
+import org.htmlunit.cssparser.util.CSSProperties;
 
 /**
  * <p>CSS2Properties interface.</p>

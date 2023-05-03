@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.style.setter;
 
-import com.gargoylesoftware.css.util.CSSProperties;
+import org.htmlunit.cssparser.util.CSSProperties;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 
 /**

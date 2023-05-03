@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * This interface is used by SMIL elements root-layout, top-layout and region.
@@ -40,7 +40,7 @@ public interface ElementLayout {
      * <p>setTitle.</p>
      *
      * @param title a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setTitle(String title) throws DOMException;
 
@@ -58,7 +58,7 @@ public interface ElementLayout {
      * <p>setBackgroundColor.</p>
      *
      * @param backgroundColor a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setBackgroundColor(String backgroundColor) throws DOMException;
 
@@ -76,7 +76,7 @@ public interface ElementLayout {
      * <p>setHeight.</p>
      *
      * @param height a int.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setHeight(int height) throws DOMException;
 
@@ -94,7 +94,7 @@ public interface ElementLayout {
      * <p>setWidth.</p>
      *
      * @param width a int.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setWidth(final int width) throws DOMException;
 

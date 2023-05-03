@@ -20,8 +20,8 @@
 
 package org.loboevolution.html.style.setter;
 
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;

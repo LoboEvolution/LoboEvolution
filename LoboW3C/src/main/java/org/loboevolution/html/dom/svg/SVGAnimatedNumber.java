@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGAnimatedNumber interface.</p>
@@ -39,7 +40,7 @@ public interface SVGAnimatedNumber {
 	 * <p>setBaseVal.</p>
 	 *
 	 * @param baseVal a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setBaseVal(float baseVal);
 

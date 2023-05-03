@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGColorProfileElement interface.</p>
@@ -39,7 +40,7 @@ public interface SVGColorProfileElement extends SVGElement, SVGURIReference, SVG
 	 * <p>setLocal.</p>
 	 *
 	 * @param local a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setLocal(String local);
 
@@ -54,7 +55,7 @@ public interface SVGColorProfileElement extends SVGElement, SVGURIReference, SVG
 	 * <p>setName.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setName(String name);
 
@@ -69,7 +70,7 @@ public interface SVGColorProfileElement extends SVGElement, SVGURIReference, SVG
 	 * <p>setRenderingIntent.</p>
 	 *
 	 * @param renderingIntent a short.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setRenderingIntent(short renderingIntent);
 }

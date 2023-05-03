@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGAngle interface.</p>
@@ -58,7 +59,7 @@ public interface SVGAngle {
 	 * <p>setValue.</p>
 	 *
 	 * @param value a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setValue(float value);
 
@@ -73,7 +74,7 @@ public interface SVGAngle {
 	 * <p>setValueInSpecifiedUnits.</p>
 	 *
 	 * @param valueInSpecifiedUnits a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setValueInSpecifiedUnits(float valueInSpecifiedUnits);
 
@@ -88,7 +89,7 @@ public interface SVGAngle {
 	 * <p>setValueAsString.</p>
 	 *
 	 * @param valueAsString a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setValueAsString(String valueAsString);
 

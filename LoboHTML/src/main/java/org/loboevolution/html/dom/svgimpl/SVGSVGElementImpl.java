@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.filter.IdFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.*;
@@ -216,7 +217,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	 * <p>Setter for the field currentTranslate.</p>
 	 *
 	 * @param currentTranslate a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	public void setCurrentTranslate(SVGPoint currentTranslate) {
 		this.currentTranslate = currentTranslate;

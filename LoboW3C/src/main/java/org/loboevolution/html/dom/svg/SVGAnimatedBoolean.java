@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGAnimatedBoolean interface.</p>
@@ -39,7 +40,7 @@ public interface SVGAnimatedBoolean {
 	 * <p>setBaseVal.</p>
 	 *
 	 * @param baseVal a boolean.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setBaseVal(boolean baseVal);
 

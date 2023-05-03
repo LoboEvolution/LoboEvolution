@@ -19,6 +19,7 @@
  */
 package org.loboevolution.html.js.events;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.events.Event;
 
@@ -35,7 +36,7 @@ public class EventFactory {
 	 *
 	 * @param eventType a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.events.Event} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	public static Event createEvent(String eventType) {
 		Event theEvent = null;

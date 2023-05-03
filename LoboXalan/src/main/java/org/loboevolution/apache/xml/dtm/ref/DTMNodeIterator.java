@@ -23,7 +23,7 @@ import org.loboevolution.apache.xml.utils.WrappedRuntimeException;
 import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMDOMException;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.traversal.NodeIterator;

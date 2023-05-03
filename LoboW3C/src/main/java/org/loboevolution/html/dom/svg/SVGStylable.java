@@ -19,7 +19,7 @@
  */
 package org.loboevolution.html.dom.svg;
 
-import com.gargoylesoftware.css.util.CSSProperties;
+import org.htmlunit.cssparser.util.CSSProperties;
 
 /**
  * <p>SVGStylable interface.</p>
@@ -32,7 +32,7 @@ public interface SVGStylable {
 	/**
 	 * <p>getStyle.</p>
 	 *
-	 * @return a {@link com.gargoylesoftware.css.util.CSSProperties} object.
+	 * @return a {@link CSSProperties} object.
 	 */
 	CSSProperties getStyle();
 }

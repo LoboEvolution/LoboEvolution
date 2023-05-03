@@ -20,9 +20,7 @@
 
 package org.loboevolution.html.dom.nodeimpl.event;
 
-import com.gargoylesoftware.css.dom.DOMException;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;

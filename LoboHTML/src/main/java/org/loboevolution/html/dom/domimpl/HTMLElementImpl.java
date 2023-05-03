@@ -22,14 +22,13 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.dom.CSSValueImpl;
-import com.gargoylesoftware.css.dom.Property;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
+import org.htmlunit.cssparser.dom.CSSValueImpl;
+import org.htmlunit.cssparser.dom.Property;
+import org.htmlunit.cssparser.parser.CSSOMParser;
+import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;

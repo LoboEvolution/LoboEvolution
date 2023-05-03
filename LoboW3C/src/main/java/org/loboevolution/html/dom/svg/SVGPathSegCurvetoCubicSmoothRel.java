@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGPathSegCurvetoCubicSmoothRel interface.</p>
@@ -40,7 +41,7 @@ public interface SVGPathSegCurvetoCubicSmoothRel extends SVGPathSeg {
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX(float x);
 
@@ -55,7 +56,7 @@ public interface SVGPathSegCurvetoCubicSmoothRel extends SVGPathSeg {
 	 * <p>setY.</p>
 	 *
 	 * @param y a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setY(final float y);
 
@@ -70,7 +71,7 @@ public interface SVGPathSegCurvetoCubicSmoothRel extends SVGPathSeg {
 	 * <p>setX2.</p>
 	 *
 	 * @param x2 a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX2(float x2);
 
@@ -85,7 +86,7 @@ public interface SVGPathSegCurvetoCubicSmoothRel extends SVGPathSeg {
 	 * <p>setY2.</p>
 	 *
 	 * @param y2 a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setY2(float y2);
 }

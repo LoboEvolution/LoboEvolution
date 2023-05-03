@@ -22,8 +22,8 @@
  */
 package org.loboevolution.html.js;
 
-import com.gargoylesoftware.css.dom.CSSRuleListImpl;
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.CSSRuleListImpl;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;

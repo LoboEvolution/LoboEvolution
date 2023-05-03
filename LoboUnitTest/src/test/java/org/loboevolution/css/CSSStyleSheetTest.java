@@ -14,11 +14,12 @@
  */
 package org.loboevolution.css;
 
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Unit tests for {@link com.gargoylesoftware.css.dom.CSSStyleSheetImpl}.
+ * Unit tests for {@link CSSStyleSheetImpl}.
  */
 
 public class CSSStyleSheetTest extends LoboUnitTest {

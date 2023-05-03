@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>ElementTimeControl interface.</p>
@@ -44,7 +44,7 @@ public interface ElementTimeControl {
      *                SYNTAX_ERR: The element was not defined with the
      *                appropriate syntax to allow beginElement
      *                calls.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     boolean beginElement() throws DOMException;
 
@@ -73,7 +73,7 @@ public interface ElementTimeControl {
      *                SYNTAX_ERR: The element was not defined with the
      *                appropriate syntax to allow beginElementAt
      *                calls.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     boolean beginElementAt(float offset) throws DOMException;
 
@@ -90,7 +90,7 @@ public interface ElementTimeControl {
      * @exception DOMException
      *                SYNTAX_ERR: The element was not defined with the
      *                appropriate syntax to allow endElement calls.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     boolean endElement() throws DOMException;
 
@@ -112,7 +112,7 @@ public interface ElementTimeControl {
      *                SYNTAX_ERR: The element was not defined with the
      *                appropriate syntax to allow endElementAt
      *                calls.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     boolean endElementAt(float offset) throws DOMException;
 

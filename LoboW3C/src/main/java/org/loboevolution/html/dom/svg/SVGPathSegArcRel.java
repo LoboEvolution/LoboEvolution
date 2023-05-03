@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGPathSegArcRel interface.</p>
@@ -40,7 +41,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setX.</p>
 	 *
 	 * @param x a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setX(float x);
 
@@ -55,7 +56,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setY.</p>
 	 *
 	 * @param y a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setY(final float y);
 
@@ -70,7 +71,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setR1.</p>
 	 *
 	 * @param r1 a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setR1(float r1);
 
@@ -85,7 +86,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setR2.</p>
 	 *
 	 * @param r2 a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setR2(float r2);
 
@@ -100,7 +101,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setAngle.</p>
 	 *
 	 * @param angle a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setAngle(float angle);
 
@@ -115,7 +116,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setLargeArcFlag.</p>
 	 *
 	 * @param largeArcFlag a boolean.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setLargeArcFlag(boolean largeArcFlag);
 
@@ -130,7 +131,7 @@ public interface SVGPathSegArcRel extends SVGPathSeg {
 	 * <p>setSweepFlag.</p>
 	 *
 	 * @param sweepFlag a boolean.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setSweepFlag(boolean sweepFlag);
 }

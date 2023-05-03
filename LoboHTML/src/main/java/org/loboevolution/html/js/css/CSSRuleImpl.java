@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.js.css;
 
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 

@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGPointList interface.</p>
@@ -39,7 +40,7 @@ public interface SVGPointList {
 	/**
 	 * <p>clear.</p>
 	 *
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void clear();
 
@@ -48,7 +49,7 @@ public interface SVGPointList {
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -62,7 +63,7 @@ public interface SVGPointList {
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	SVGPoint getItem(int index);
 
@@ -72,7 +73,7 @@ public interface SVGPointList {
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -87,7 +88,7 @@ public interface SVGPointList {
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -101,7 +102,7 @@ public interface SVGPointList {
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	SVGPoint removeItem(int index);
 
@@ -110,7 +111,7 @@ public interface SVGPointList {
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.

@@ -20,13 +20,12 @@
 
 package org.loboevolution.html.node;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.traversal.DocumentTraversal;
-import org.loboevolution.html.node.traversal.NodeIterator;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;

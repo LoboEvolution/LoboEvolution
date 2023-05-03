@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * Declares media content.
@@ -40,7 +40,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setAbstractAttr.</p>
      *
      * @param abstractAttr a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setAbstractAttr(String abstractAttr) throws DOMException;
 
@@ -58,7 +58,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setAlt.</p>
      *
      * @param alt a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setAlt(String alt) throws DOMException;
 
@@ -76,7 +76,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setAuthor.</p>
      *
      * @param author a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setAuthor(String author) throws DOMException;
 
@@ -94,7 +94,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setClipBegin.</p>
      *
      * @param clipBegin a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setClipBegin(String clipBegin) throws DOMException;
 
@@ -112,7 +112,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setClipEnd.</p>
      *
      * @param clipEnd a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setClipEnd(String clipEnd) throws DOMException;
 
@@ -130,7 +130,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setCopyright.</p>
      *
      * @param copyright a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setCopyright(String copyright) throws DOMException;
 
@@ -148,7 +148,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setLongdesc.</p>
      *
      * @param longdesc a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setLongdesc(String longdesc) throws DOMException;
 
@@ -166,7 +166,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setPort.</p>
      *
      * @param port a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setPort(String port) throws DOMException;
 
@@ -184,7 +184,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setReadIndex.</p>
      *
      * @param readIndex a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setReadIndex(String readIndex) throws DOMException;
 
@@ -202,7 +202,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setRtpformat.</p>
      *
      * @param rtpformat a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setRtpformat(String rtpformat) throws DOMException;
 
@@ -220,7 +220,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setSrc.</p>
      *
      * @param src a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setSrc(String src) throws DOMException;
 
@@ -238,7 +238,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setStripRepeat.</p>
      *
      * @param stripRepeat a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setStripRepeat(String stripRepeat) throws DOMException;
 
@@ -256,7 +256,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setTitle.</p>
      *
      * @param title a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setTitle(String title) throws DOMException;
 
@@ -274,7 +274,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setTransport.</p>
      *
      * @param transport a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setTransport(String transport) throws DOMException;
 
@@ -292,7 +292,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
      * <p>setType.</p>
      *
      * @param type a {@link java.lang.String} object.
-     * @throws com.gargoylesoftware.css.dom.DOMException if any.
+     * @throws DOMException if any.
      */
     void setType(String type) throws DOMException;
 

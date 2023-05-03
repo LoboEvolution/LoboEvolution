@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.js.css;
 
-import com.gargoylesoftware.css.dom.MediaListImpl;
+import org.htmlunit.cssparser.dom.MediaListImpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.node.css.MediaQueryList;

@@ -20,14 +20,14 @@
 
 package org.loboevolution.html.js.css;
 
-import com.gargoylesoftware.css.parser.media.MediaQuery;
+import org.htmlunit.cssparser.parser.media.MediaQuery;
 import org.loboevolution.html.node.css.MediaList;
 
 public class MediaListImpl implements MediaList {
 
-    private final com.gargoylesoftware.css.dom.MediaListImpl media;
+    private final org.htmlunit.cssparser.dom.MediaListImpl media;
 
-    public MediaListImpl(com.gargoylesoftware.css.dom.MediaListImpl media) {
+    public MediaListImpl(org.htmlunit.cssparser.dom.MediaListImpl media) {
         this.media = media;
     }
 

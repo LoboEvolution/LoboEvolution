@@ -20,18 +20,18 @@
 
 package org.loboevolution.html.style;
 
-import com.gargoylesoftware.css.dom.*;
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
-import com.gargoylesoftware.css.parser.CSSException;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.CSSParseException;
-import com.gargoylesoftware.css.parser.condition.Condition;
-import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
-import com.gargoylesoftware.css.parser.condition.NotPseudoClassCondition;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
-import com.gargoylesoftware.css.parser.media.MediaQuery;
-import com.gargoylesoftware.css.parser.selector.*;
-import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
+import org.htmlunit.cssparser.parser.CSSErrorHandler;
+import org.htmlunit.cssparser.parser.CSSException;
+import org.htmlunit.cssparser.parser.CSSOMParser;
+import org.htmlunit.cssparser.parser.CSSParseException;
+import org.htmlunit.cssparser.parser.condition.Condition;
+import org.htmlunit.cssparser.parser.condition.Condition.ConditionType;
+import org.htmlunit.cssparser.parser.condition.NotPseudoClassCondition;
+import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
+import org.htmlunit.cssparser.parser.media.MediaQuery;
+import org.htmlunit.cssparser.parser.selector.*;
+import org.htmlunit.cssparser.parser.selector.Selector.SelectorType;
+import org.htmlunit.cssparser.dom.*;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.*;
@@ -110,7 +110,7 @@ public class StyleSheetAggregator {
 	/**
 	 * <p>selects.</p>
 	 *
-	 * @param selector a {@link com.gargoylesoftware.css.parser.selector.Selector} object.
+	 * @param selector a {@link org.htmlunit.cssparser.parser.selector.Selector} object.
 	 * @param node a {@link org.loboevolution.html.node.Node} object.
 	 * @param pseudoElement a {@link java.lang.String} object.
 	 * @return a boolean.
@@ -565,7 +565,7 @@ public class StyleSheetAggregator {
 	 * <p>isActive.</p>
 	 *
 	 * @param window a {@link org.loboevolution.html.node.js.Window} object.
-	 * @param mediaList a {@link com.gargoylesoftware.css.dom.MediaListImpl} object.
+	 * @param mediaList a {@link MediaListImpl} object.
 	 * @return a boolean.
 	 */
 	public static boolean isActive(Window window, final MediaListImpl mediaList) {

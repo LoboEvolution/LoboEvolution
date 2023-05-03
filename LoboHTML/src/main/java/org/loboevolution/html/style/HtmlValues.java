@@ -20,8 +20,8 @@
 
 package org.loboevolution.html.style;
 
-import com.gargoylesoftware.css.dom.CSSValueImpl;
-import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
+import org.htmlunit.cssparser.dom.CSSValueImpl;
+import org.htmlunit.cssparser.dom.CSSValueImpl.CSSPrimitiveValueType;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
@@ -273,7 +273,7 @@ public class HtmlValues {
 	/**
 	 * <p>resolutionValue.</p>
 	 *
-	 * @param cssValue a {@link com.gargoylesoftware.css.dom.CSSValueImpl} object.
+	 * @param cssValue a {@link CSSValueImpl} object.
 	 * @return a int.
 	 */
 	public static int resolutionValue(final CSSValueImpl cssValue) {

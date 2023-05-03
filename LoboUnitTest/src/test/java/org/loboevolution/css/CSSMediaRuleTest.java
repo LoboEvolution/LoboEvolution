@@ -14,11 +14,12 @@
  */
 package org.loboevolution.css;
 
+import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link com.gargoylesoftware.css.dom.CSSMediaRuleImpl}.
+ * Tests for {@link CSSMediaRuleImpl}.
  */
 
 public class CSSMediaRuleTest extends LoboUnitTest {

@@ -21,6 +21,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGPreserveAspectRatio interface.</p>
@@ -71,7 +72,7 @@ public interface SVGPreserveAspectRatio {
 	 * <p>setAlign.</p>
 	 *
 	 * @param align a short.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setAlign(short align);
 
@@ -86,7 +87,7 @@ public interface SVGPreserveAspectRatio {
 	 * <p>setMeetOrSlice.</p>
 	 *
 	 * @param meetOrSlice a short.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setMeetOrSlice(short meetOrSlice);
 }

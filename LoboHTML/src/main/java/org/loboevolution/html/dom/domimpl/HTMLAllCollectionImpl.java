@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLAllCollection;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.AbstractList;

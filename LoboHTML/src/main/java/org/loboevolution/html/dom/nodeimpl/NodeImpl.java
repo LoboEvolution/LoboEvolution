@@ -22,7 +22,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
@@ -970,7 +970,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param newChild a {@link org.loboevolution.html.node.Node} object.
 	 * @param idx a int.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	protected Node insertAt(Node newChild, int idx) {
 
@@ -1184,7 +1184,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 *
 	 * @param index a int.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	public Node removeChildAt(int index) {
 		try {

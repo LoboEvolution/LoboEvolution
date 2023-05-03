@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.dom.smil;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * This interface defines the set of timing attributes that are common to all
@@ -91,7 +91,7 @@ public interface ElementTime {
 	 * <p>setDur.</p>
 	 *
 	 * @param dur a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setDur(float dur) throws DOMException;
 
@@ -128,7 +128,7 @@ public interface ElementTime {
 	 * <p>setFill.</p>
 	 *
 	 * @param fill a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setFill(String fill) throws DOMException;
 
@@ -148,7 +148,7 @@ public interface ElementTime {
 	 * <p>setRepeatCount.</p>
 	 *
 	 * @param repeatCount a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setRepeatCount(float repeatCount) throws DOMException;
 
@@ -167,7 +167,7 @@ public interface ElementTime {
 	 * <p>setRepeatDur.</p>
 	 *
 	 * @param repeatDur a float.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setRepeatDur(float repeatDur) throws DOMException;
 

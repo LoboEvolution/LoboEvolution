@@ -22,16 +22,15 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
-import com.gargoylesoftware.css.dom.DOMException;
-import com.gargoylesoftware.css.parser.selector.Selector;
-import com.gargoylesoftware.css.parser.selector.SelectorList;
+import org.htmlunit.cssparser.dom.DOMException;
+import org.htmlunit.cssparser.parser.selector.Selector;
+import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;

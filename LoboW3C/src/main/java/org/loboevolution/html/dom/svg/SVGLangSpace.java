@@ -20,6 +20,7 @@
 package org.loboevolution.html.dom.svg;
 
 
+import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGLangSpace interface.</p>
@@ -39,7 +40,7 @@ public interface SVGLangSpace {
 	 * <p>setXMLlang.</p>
 	 *
 	 * @param xmllang a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setXMLlang(String xmllang);
 
@@ -54,7 +55,7 @@ public interface SVGLangSpace {
 	 * <p>setXMLspace.</p>
 	 *
 	 * @param xmlspace a {@link java.lang.String} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	void setXMLspace(String xmlspace);
 }

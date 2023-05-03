@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.js.css;
 
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.CSSStyleRule;
 
@@ -36,8 +36,8 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
     /** {@inheritDoc} */
     @Override
     public String getSelectorText() {
-        if (abstractCSSRule instanceof com.gargoylesoftware.css.dom.CSSStyleRuleImpl) {
-            final com.gargoylesoftware.css.dom.CSSStyleRuleImpl styleRule = (com.gargoylesoftware.css.dom.CSSStyleRuleImpl) abstractCSSRule;
+        if (abstractCSSRule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl) {
+            final org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule = (org.htmlunit.cssparser.dom.CSSStyleRuleImpl) abstractCSSRule;
             return styleRule.getSelectorText();
         }
         return null;
@@ -46,8 +46,8 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
     /** {@inheritDoc} */
     @Override
     public CSSStyleDeclaration getStyle() {
-        if (abstractCSSRule instanceof com.gargoylesoftware.css.dom.CSSStyleRuleImpl) {
-            final com.gargoylesoftware.css.dom.CSSStyleRuleImpl styleRule = (com.gargoylesoftware.css.dom.CSSStyleRuleImpl) abstractCSSRule;
+        if (abstractCSSRule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl) {
+            final org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule = (org.htmlunit.cssparser.dom.CSSStyleRuleImpl) abstractCSSRule;
             return new CSSStyleDeclarationImpl(styleRule.getStyle());
         }
         return null;

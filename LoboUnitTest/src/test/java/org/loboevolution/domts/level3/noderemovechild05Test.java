@@ -21,10 +21,9 @@
 package org.loboevolution.domts.level3;
 
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Node;

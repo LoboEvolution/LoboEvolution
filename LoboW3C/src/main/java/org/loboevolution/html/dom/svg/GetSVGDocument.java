@@ -19,6 +19,8 @@
  */
 package org.loboevolution.html.dom.svg;
 
+import org.htmlunit.cssparser.dom.DOMException;
+
 /**
  * <p>GetSVGDocument interface.</p>
  *
@@ -30,7 +32,7 @@ public interface GetSVGDocument {
 	 * <p>getSVGDocument.</p>
 	 *
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGDocument} object.
-	 * @throws com.gargoylesoftware.css.dom.DOMException if any.
+	 * @throws DOMException if any.
 	 */
 	SVGDocument getSVGDocument();
 }

@@ -14,11 +14,12 @@
  */
 package org.loboevolution.css;
 
+import org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link com.gargoylesoftware.css.dom.CSSFontFaceRuleImpl}.
+ * Tests for {@link CSSFontFaceRuleImpl}.
  */
 
 public class CSSFontFaceRuleTest extends LoboUnitTest {

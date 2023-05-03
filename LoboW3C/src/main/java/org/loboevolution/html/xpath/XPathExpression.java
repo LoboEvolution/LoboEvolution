@@ -20,7 +20,7 @@
 
 package org.loboevolution.html.xpath;
 
-import com.gargoylesoftware.css.dom.DOMException;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.Node;
 
 /**
@@ -64,13 +64,13 @@ public interface XPathExpression {
      *                                                     context node or the request type is not permitted by this
      *                                                     XPathExpression.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws com.gargoylesoftware.css.dom.DOMException   if any.
-     * @throws com.gargoylesoftware.css.dom.DOMException   if any.
+     * @throws DOMException   if any.
+     * @throws DOMException   if any.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws com.gargoylesoftware.css.dom.DOMException   if any.
-     * @throws com.gargoylesoftware.css.dom.DOMException   if any.
+     * @throws DOMException   if any.
+     * @throws DOMException   if any.
      * @throws org.loboevolution.html.xpath.XPathException if any.
-     * @throws com.gargoylesoftware.css.dom.DOMException   if any.
+     * @throws DOMException   if any.
      */
     Object evaluate(Node contextNode,
                     short type,
