@@ -9,31 +9,20 @@ package org.mozilla.javascript;
 /**
  * Implement this interface in order to allow external data to be attached to a ScriptableObject.
  */
-public interface ExternalArrayData
-{
+public interface ExternalArrayData {
     /**
-     * Return the element at the specified index. The result must be a type that is valid in JavaScript:
-     * Number, String, or Scriptable. This method will not be called unless "index" is in
-     * range.
-     *
-     * @param index a int.
-     * @return a {@link java.lang.Object} object.
+     * Return the element at the specified index. The result must be a type that is valid in
+     * JavaScript: Number, String, or Scriptable. This method will not be called unless "index" is
+     * in range.
      */
     Object getArrayElement(int index);
 
     /**
      * Set the element at the specified index. This method will not be called unless "index" is in
      * range. The method must check that "value" is a valid type, and convert it if necessary.
-     *
-     * @param index a int.
-     * @param value a {@link java.lang.Object} object.
      */
     void setArrayElement(int index, Object value);
 
-    /**
-     * Return the length of the array.
-     *
-     * @return a int.
-     */
+    /** Return the length of the array. */
     int getArrayLength();
 }

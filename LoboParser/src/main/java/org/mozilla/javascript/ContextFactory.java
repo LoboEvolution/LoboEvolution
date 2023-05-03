@@ -287,6 +287,9 @@ public class ContextFactory {
 
             case Context.FEATURE_ENABLE_JAVA_MAP_ACCESS:
                 return false;
+
+            case Context.FEATURE_INTL_402:
+                return false;
         }
         // It is a bug to call the method with unknown featureIndex
         throw new IllegalArgumentException(String.valueOf(featureIndex));
@@ -298,7 +301,7 @@ public class ContextFactory {
         // Check to see whether DOM3 is present; use a new method defined in
         // DOM3 that is vital to our implementation
         try {
-            nodeClass.getMethod("getUserData", new Class<?>[] {String.class});
+            nodeClass.getMethod("getUserData", String.class);
             return true;
         } catch (NoSuchMethodException e) {
             return false;

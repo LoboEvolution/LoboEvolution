@@ -7,49 +7,33 @@ package org.mozilla.javascript;
 /**
  * Load generated classes.
  *
- * Author Norris Boyd
- *
+ * @author Norris Boyd
  */
-public class DefiningClassLoader extends ClassLoader
-    implements GeneratedClassLoader
-{
-    /**
-     * <p>Constructor for DefiningClassLoader.</p>
-     */
+public class DefiningClassLoader extends ClassLoader implements GeneratedClassLoader {
     public DefiningClassLoader() {
         this.parentLoader = getClass().getClassLoader();
     }
 
-    /**
-     * <p>Constructor for DefiningClassLoader.</p>
-     *
-     * @param parentLoader a {@link java.lang.ClassLoader} object.
-     */
     public DefiningClassLoader(ClassLoader parentLoader) {
         this.parentLoader = parentLoader;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> defineClass(String name, byte[] data) {
         // Use our own protection domain for the generated classes.
         // TODO: we might want to use a separate protection domain for classes
         // compiled from scripts, based on where the script was loaded from.
-        return super.defineClass(name, data, 0, data.length,
-                SecurityUtilities.getProtectionDomain(getClass()));
+        return super.defineClass(
+                name, data, 0, data.length, SecurityUtilities.getProtectionDomain(getClass()));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void linkClass(Class<?> cl) {
         resolveClass(cl);
     }
 
-    /** {@inheritDoc} */
     @Override
-    public Class<?> loadClass(String name, boolean resolve)
-        throws ClassNotFoundException
-    {
+    public Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
         Class<?> cl = findLoadedClass(name);
         if (cl == null) {
             if (parentLoader != null) {

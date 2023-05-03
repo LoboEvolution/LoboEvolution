@@ -6,28 +6,12 @@
 
 package org.mozilla.javascript;
 
-/**
- * Master for id-based functions that knows their properties and how to
- * execute them.
- *
- *
- *
- */
-public interface IdFunctionCall
-{
+/** Master for id-based functions that knows their properties and how to execute them. */
+public interface IdFunctionCall {
     /**
-     * 'thisObj' will be null if invoked as constructor, in which case
-     * instance of Scriptable should be returned
-     *
-     * @param f a {@link org.mozilla.javascript.IdFunctionObject} object.
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
-     * @param args an array of {@link java.lang.Object} objects.
-     * @return a {@link java.lang.Object} object.
+     * 'thisObj' will be null if invoked as constructor, in which case instance of Scriptable should
+     * be returned
      */
-    public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
-                             Scriptable thisObj, Object[] args);
-
+    public Object execIdCall(
+            IdFunctionObject f, Context cx, Scriptable scope, Scriptable thisObj, Object[] args);
 }
-

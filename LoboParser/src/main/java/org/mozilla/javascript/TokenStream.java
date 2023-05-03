@@ -157,8 +157,7 @@ class TokenStream {
                 Id_volatile = Token.RESERVED; // ES3 only
 
         int id;
-        String s = name;
-        switch (s) {
+        switch (name) {
             case "break":
                 id = Id_break;
                 break;
@@ -414,8 +413,7 @@ class TokenStream {
                 Id_static = Token.RESERVED;
 
         int id = 0;
-        String s = name;
-        switch (s) {
+        switch (name) {
             case "break":
                 id = Id_break;
                 break;
@@ -1423,7 +1421,8 @@ class TokenStream {
         tokenEnd = start + stringBufferTop + 2; // include slashes
 
         if (isAlpha(peekChar())) {
-            parser.reportError("msg.invalid.re.flag");
+            parser.reportError(
+                    "msg.invalid.re.flag", String.valueOf(Character.toChars(peekChar())));
         }
 
         this.string = new String(stringBuffer, 0, reEnd);

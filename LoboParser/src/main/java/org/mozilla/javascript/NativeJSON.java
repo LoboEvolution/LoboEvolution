@@ -188,7 +188,7 @@ public final class NativeJSON extends IdScriptableObject {
     }
 
     private static String repeat(char c, int count) {
-        char chars[] = new char[count];
+        char[] chars = new char[count];
         Arrays.fill(chars, c);
         return new String(chars);
     }
@@ -210,7 +210,7 @@ public final class NativeJSON extends IdScriptableObject {
             this.propertyList = propertyList;
         }
 
-        Stack<Object> stack = new Stack<Object>();
+        Stack<Object> stack = new Stack<>();
         String indent;
         String gap;
         Callable replacer;
@@ -231,7 +231,7 @@ public final class NativeJSON extends IdScriptableObject {
         if (replacer instanceof Callable) {
             replacerFunction = (Callable) replacer;
         } else if (replacer instanceof NativeArray) {
-            LinkedHashSet<Object> propertySet = new LinkedHashSet<Object>();
+            LinkedHashSet<Object> propertySet = new LinkedHashSet<>();
             NativeArray replacerArray = (NativeArray) replacer;
             for (int i : replacerArray.getIndexIds()) {
                 Object v = replacerArray.get(i, replacerArray);
@@ -250,7 +250,7 @@ public final class NativeJSON extends IdScriptableObject {
             propertyList = new Object[propertySet.size()];
             int i = 0;
             for (Object prop : propertySet) {
-                ScriptRuntime.StringIdOrIndex idOrIndex = ScriptRuntime.toStringIdOrIndex(cx, prop);
+                ScriptRuntime.StringIdOrIndex idOrIndex = ScriptRuntime.toStringIdOrIndex(prop);
                 // This will always be a String or Integer
                 propertyList[i++] =
                         (idOrIndex.stringId == null) ? idOrIndex.index : idOrIndex.stringId;
@@ -288,23 +288,41 @@ public final class NativeJSON extends IdScriptableObject {
         Object value = null;
         Object unwrappedJavaValue = null;
 
+        String keyString = null;
+        int keyInt = 0;
         if (key instanceof String) {
-            value = getProperty(holder, (String) key);
+            keyString = (String) key;
+            value = getProperty(holder, keyString);
         } else {
-            value = getProperty(holder, ((Number) key).intValue());
+            keyInt = ((Number) key).intValue();
+            value = getProperty(holder, keyInt);
         }
 
         if (value instanceof Scriptable && hasProperty((Scriptable) value, "toJSON")) {
             Object toJSON = getProperty((Scriptable) value, "toJSON");
             if (toJSON instanceof Callable) {
-                value = callMethod(state.cx, (Scriptable) value, "toJSON", new Object[] {key});
+                value =
+                        callMethod(
+                                state.cx,
+                                (Scriptable) value,
+                                "toJSON",
+                                new Object[] {
+                                    keyString == null ? Integer.toString(keyInt) : keyString
+                                });
             }
         } else if (value instanceof BigInteger) {
             Scriptable bigInt = ScriptRuntime.toObject(state.cx, state.scope, value);
             if (hasProperty(bigInt, "toJSON")) {
                 Object toJSON = getProperty(bigInt, "toJSON");
                 if (toJSON instanceof Callable) {
-                    value = callMethod(state.cx, bigInt, "toJSON", new Object[] {key});
+                    value =
+                            callMethod(
+                                    state.cx,
+                                    bigInt,
+                                    "toJSON",
+                                    new Object[] {
+                                        keyString == null ? Integer.toString(keyInt) : keyString
+                                    });
                 }
             }
         }
@@ -312,6 +330,8 @@ public final class NativeJSON extends IdScriptableObject {
         if (state.replacer != null) {
             value = state.replacer.call(state.cx, state.scope, holder, new Object[] {key, value});
         }
+
+        if (ScriptRuntime.isSymbol(value)) return Undefined.instance;
 
         if (value instanceof NativeNumber) {
             value = Double.valueOf(ScriptRuntime.toNumber(value));
@@ -333,7 +353,7 @@ public final class NativeJSON extends IdScriptableObject {
                 unwrappedJavaValue = null;
             }
         } else if (value instanceof XMLObject) {
-            value = ((XMLObject) value).toString();
+            value = value.toString();
         }
 
         if (value == null) return "null";
@@ -432,7 +452,7 @@ public final class NativeJSON extends IdScriptableObject {
             k = value.getIds();
         }
 
-        Collection<Object> partial = new LinkedList<Object>();
+        Collection<Object> partial = new LinkedList<>();
 
         for (Object p : k) {
             Object strP = str(p, value, state);
@@ -477,7 +497,7 @@ public final class NativeJSON extends IdScriptableObject {
 
         String stepback = state.indent;
         state.indent = state.indent + state.gap;
-        Collection<Object> partial = new LinkedList<Object>();
+        Collection<Object> partial = new LinkedList<>();
 
         if (unwrapped != null) {
             Object[] elements = null;

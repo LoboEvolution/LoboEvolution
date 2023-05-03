@@ -8,9 +8,6 @@ package org.mozilla.javascript;
 
 import java.math.BigInteger;
 import java.util.List;
-import java.util.logging.Logger;
-
-import org.mozilla.classfile.ClassFileWriter;
 import org.mozilla.javascript.ast.AstNode;
 import org.mozilla.javascript.ast.AstRoot;
 import org.mozilla.javascript.ast.Block;
@@ -23,9 +20,6 @@ import org.mozilla.javascript.ast.VariableInitializer;
 
 /** Generates bytecode for the Interpreter. */
 class CodeGenerator extends Icode {
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(CodeGenerator.class.getName());
 
     private static final int MIN_LABEL_TABLE_SIZE = 32;
     private static final int MIN_FIXUP_TABLE_SIZE = 40;
@@ -67,15 +61,15 @@ class CodeGenerator extends Icode {
         this.compilerEnv = compilerEnv;
 
         if (Token.printTrees) {
-            logger.info("before transform:");
-            logger.info(tree.toStringTree(tree));
+            System.out.println("before transform:");
+            System.out.println(tree.toStringTree(tree));
         }
 
         new NodeTransformer().transform(tree, compilerEnv);
 
         if (Token.printTrees) {
-            logger.info("after transform:");
-            logger.info(tree.toStringTree(tree));
+            System.out.println("after transform:");
+            System.out.println(tree.toStringTree(tree));
         }
 
         if (returnFunction) {
@@ -479,7 +473,7 @@ class CodeGenerator extends Icode {
                 {
                     int localIndex = getLocalBlockRef(node);
                     int scopeIndex = node.getExistingIntProp(Node.CATCH_SCOPE_PROP);
-                    String name = child.getString();
+                    String name = child.getType() == Token.NAME ? child.getString() : "";
                     child = child.getNext();
                     visitExpression(child, 0); // load expression object
                     addStringPrefix(name);

@@ -60,7 +60,7 @@ public class ScriptRuntime {
                             return 0;
                         }
                     };
-            ScriptRuntime.setFunctionProtoAndParent(thrower, cx.topCallScope);
+            ScriptRuntime.setFunctionProtoAndParent(thrower, cx, cx.topCallScope, false);
             thrower.preventExtensions();
             cx.typeErrorThrower = thrower;
         }
@@ -146,7 +146,7 @@ public class ScriptRuntime {
         scope.associateValue(LIBRARY_SCOPE_KEY, scope);
         (new ClassCache()).associate(scope);
 
-        BaseFunction.init(scope, sealed);
+        BaseFunction.init(cx, scope, sealed);
         NativeObject.init(scope, sealed);
 
         Scriptable objectProto = ScriptableObject.getObjectPrototype(scope);
@@ -178,7 +178,7 @@ public class ScriptRuntime {
 
         NativeWith.init(scope, sealed);
         NativeCall.init(scope, sealed);
-        NativeScript.init(scope, sealed);
+        NativeScript.init(cx, scope, sealed);
 
         NativeIterator.init(cx, scope, sealed); // Also initializes NativeGenerator & ES6Generator
 
@@ -390,7 +390,7 @@ public class ScriptRuntime {
             if (val == null || Undefined.isUndefined(val)) return false;
             if (val instanceof CharSequence) return ((CharSequence) val).length() != 0;
             if (val instanceof BigInteger) {
-                return !((BigInteger) val).equals(BigInteger.ZERO);
+                return !BigInteger.ZERO.equals(val);
             }
             if (val instanceof Number) {
                 double d = ((Number) val).doubleValue();
@@ -1335,7 +1335,7 @@ public class ScriptRuntime {
 
     public static long toLength(Object[] args, int index) {
         double len = toInteger(args, index);
-        if (len <= +0.0) {
+        if (len <= 0.0) {
             return 0;
         }
         return (long) Math.min(len, NativeNumber.MAX_SAFE_INTEGER);
@@ -1574,11 +1574,10 @@ public class ScriptRuntime {
     }
 
     /**
-     * If toString(id) is a decimal presentation of int32 value, then id is index. In this case
-     * return null and make the index available as ScriptRuntime.lastIndexResult(cx). Otherwise
-     * return toString(id).
+     * If id is a number or a string presentation of an int32 value, then id the returning
+     * StringIdOrIndex has the index set, otherwise the stringId is set.
      */
-    static StringIdOrIndex toStringIdOrIndex(Context cx, Object id) {
+    static StringIdOrIndex toStringIdOrIndex(Object id) {
         if (id instanceof Number) {
             double d = ((Number) id).doubleValue();
             int index = (int) d;
@@ -1628,7 +1627,7 @@ public class ScriptRuntime {
         } else if (isSymbol(elem)) {
             result = ScriptableObject.getProperty(obj, (Symbol) elem);
         } else {
-            StringIdOrIndex s = toStringIdOrIndex(cx, elem);
+            StringIdOrIndex s = toStringIdOrIndex(elem);
             if (s.stringId == null) {
                 int index = s.index;
                 result = ScriptableObject.getProperty(obj, index);
@@ -1760,7 +1759,7 @@ public class ScriptRuntime {
         } else if (isSymbol(elem)) {
             ScriptableObject.putProperty(obj, (Symbol) elem, value);
         } else {
-            StringIdOrIndex s = toStringIdOrIndex(cx, elem);
+            StringIdOrIndex s = toStringIdOrIndex(elem);
             if (s.stringId == null) {
                 ScriptableObject.putProperty(obj, s.index, value);
             } else {
@@ -1841,7 +1840,7 @@ public class ScriptRuntime {
             so.delete(s);
             return !so.has(s, target);
         }
-        StringIdOrIndex s = toStringIdOrIndex(cx, elem);
+        StringIdOrIndex s = toStringIdOrIndex(elem);
         if (s.stringId == null) {
             target.delete(s.index);
             return !target.has(s.index, target);
@@ -1856,7 +1855,7 @@ public class ScriptRuntime {
         if (isSymbol(elem)) {
             result = ScriptableObject.hasProperty(target, (Symbol) elem);
         } else {
-            StringIdOrIndex s = toStringIdOrIndex(cx, elem);
+            StringIdOrIndex s = toStringIdOrIndex(elem);
             if (s.stringId == null) {
                 result = ScriptableObject.hasProperty(target, s.index);
             } else {
@@ -2290,16 +2289,21 @@ public class ScriptRuntime {
         ((IdEnumeration) enumObj).enumNumbers = enumNumbers;
     }
 
+    /** @deprecated since 1.7.15. Use {@link #enumNext(Context, Object)} instead */
+    @Deprecated
     public static Boolean enumNext(Object enumObj) {
+        return enumNext(enumObj, Context.getContext());
+    }
+
+    public static Boolean enumNext(Object enumObj, Context cx) {
         IdEnumeration x = (IdEnumeration) enumObj;
         if (x.iterator != null) {
             if (x.enumType == ENUMERATE_VALUES_IN_ORDER) {
-                return enumNextInOrder(x);
+                return enumNextInOrder(x, cx);
             }
             Object v = ScriptableObject.getProperty(x.iterator, "next");
             if (!(v instanceof Callable)) return Boolean.FALSE;
             Callable f = (Callable) v;
-            Context cx = Context.getContext();
             try {
                 x.currentId = f.call(cx, x.iterator.getParentScope(), x.iterator, emptyArgs);
                 return Boolean.TRUE;
@@ -2332,20 +2336,18 @@ public class ScriptRuntime {
             } else {
                 int intId = ((Number) id).intValue();
                 if (!x.obj.has(intId, x.obj)) continue; // must have been deleted
-                x.currentId =
-                        x.enumNumbers ? (Object) (Integer.valueOf(intId)) : String.valueOf(intId);
+                x.currentId = x.enumNumbers ? Integer.valueOf(intId) : String.valueOf(intId);
             }
             return Boolean.TRUE;
         }
     }
 
-    private static Boolean enumNextInOrder(IdEnumeration enumObj) {
+    private static Boolean enumNextInOrder(IdEnumeration enumObj, Context cx) {
         Object v = ScriptableObject.getProperty(enumObj.iterator, ES6Iterator.NEXT_METHOD);
         if (!(v instanceof Callable)) {
             throw notFunctionError(enumObj.iterator, ES6Iterator.NEXT_METHOD);
         }
         Callable f = (Callable) v;
-        Context cx = Context.getContext();
         Scriptable scope = enumObj.iterator.getParentScope();
         Object r = f.call(cx, scope, enumObj.iterator, emptyArgs);
         Scriptable iteratorResult = toObject(cx, scope, r);
@@ -2388,7 +2390,7 @@ public class ScriptRuntime {
             SymbolScriptable so = ScriptableObject.ensureSymbolScriptable(x.obj);
             result = so.get((Symbol) x.currentId, x.obj);
         } else {
-            StringIdOrIndex s = toStringIdOrIndex(cx, x.currentId);
+            StringIdOrIndex s = toStringIdOrIndex(x.currentId);
             if (s.stringId == null) {
                 result = x.obj.get(s.index, x.obj);
             } else {
@@ -2480,8 +2482,7 @@ public class ScriptRuntime {
                 throw notFunctionError(result, name);
             }
             // Top scope is not NativeWith or NativeCall => thisObj == scope
-            Scriptable thisObj = scope;
-            storeScriptable(cx, thisObj);
+            storeScriptable(cx, scope);
             return (Callable) result;
         }
 
@@ -2521,7 +2522,7 @@ public class ScriptRuntime {
             value = ScriptableObject.getProperty(thisObj, (Symbol) elem);
 
         } else {
-            StringIdOrIndex s = toStringIdOrIndex(cx, elem);
+            StringIdOrIndex s = toStringIdOrIndex(elem);
             if (s.stringId != null) {
                 return getPropFunctionAndThis(obj, s.stringId, cx, scope);
             }
@@ -4070,7 +4071,7 @@ public class ScriptRuntime {
                 sourceUri = "";
             }
             int line = re.lineNumber();
-            Object args[];
+            Object[] args;
             if (line > 0) {
                 args = new Object[] {errorMsg, sourceUri, Integer.valueOf(line)};
             } else {
@@ -4108,7 +4109,9 @@ public class ScriptRuntime {
 
         NativeObject catchScopeObject = new NativeObject();
         // See ECMA 12.4
-        catchScopeObject.defineProperty(exceptionName, obj, ScriptableObject.PERMANENT);
+        if (exceptionName != null) {
+            catchScopeObject.defineProperty(exceptionName, obj, ScriptableObject.PERMANENT);
+        }
 
         if (isVisible(cx, t)) {
             // Add special Rhino object __exception__ defined in the catch
@@ -4166,7 +4169,7 @@ public class ScriptRuntime {
             sourceUri = "";
         }
         int line = re.lineNumber();
-        Object args[];
+        Object[] args;
         if (line > 0) {
             args = new Object[] {errorMsg, sourceUri, Integer.valueOf(line)};
         } else {
@@ -4244,17 +4247,39 @@ public class ScriptRuntime {
         return nw.getParentScope();
     }
 
+    /**
+     * @deprecated Use {@link #setFunctionProtoAndParent(BaseFunction, Context, Scriptable)} instead
+     */
+    @Deprecated
     public static void setFunctionProtoAndParent(BaseFunction fn, Scriptable scope) {
-        setFunctionProtoAndParent(fn, scope, false);
+        setFunctionProtoAndParent(fn, Context.getCurrentContext(), scope, false);
+    }
+
+    public static void setFunctionProtoAndParent(BaseFunction fn, Context cx, Scriptable scope) {
+        setFunctionProtoAndParent(fn, cx, scope, false);
+    }
+
+    /**
+     * @deprecated Use {@link #setFunctionProtoAndParent(BaseFunction, Context, Scriptable,
+     *     boolean)} instead
+     */
+    @Deprecated
+    public static void setFunctionProtoAndParent(
+            BaseFunction fn, Scriptable scope, boolean es6GeneratorFunction) {
+        setFunctionProtoAndParent(fn, Context.getCurrentContext(), scope, es6GeneratorFunction);
     }
 
     public static void setFunctionProtoAndParent(
-            BaseFunction fn, Scriptable scope, boolean es6GeneratorFunction) {
+            BaseFunction fn, Context cx, Scriptable scope, boolean es6GeneratorFunction) {
         fn.setParentScope(scope);
         if (es6GeneratorFunction) {
             fn.setPrototype(ScriptableObject.getGeneratorFunctionPrototype(scope));
         } else {
             fn.setPrototype(ScriptableObject.getFunctionPrototype(scope));
+        }
+
+        if (cx != null && cx.getLanguageVersion() >= Context.VERSION_ES6) {
+            fn.setStandardPropertyAttributes(ScriptableObject.READONLY | ScriptableObject.DONTENUM);
         }
     }
 

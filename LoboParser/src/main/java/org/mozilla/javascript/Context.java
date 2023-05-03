@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.UnaryOperator;
 import org.mozilla.classfile.ClassFileWriter.ClassFileFormatException;
 import org.mozilla.javascript.ast.AstRoot;
@@ -339,6 +340,14 @@ public class Context implements Closeable {
      * @since 1.7 Release 14
      */
     public static final int FEATURE_ENABLE_JAVA_MAP_ACCESS = 21;
+
+    /**
+     * Internationalization API implementation (see https://tc39.github.io/ecma402) can be activated
+     * using this feature.
+     *
+     * @since 1.7 Release 15
+     */
+    public static final int FEATURE_INTL_402 = 22;
 
     public static final String languageVersionProperty = "language version";
     public static final String errorReporterProperty = "error reporter";
@@ -751,12 +760,36 @@ public class Context implements Closeable {
     /**
      * Set the current locale.
      *
+     * @return the old value of the locale
      * @see java.util.Locale
      */
     public final Locale setLocale(Locale loc) {
         if (sealed) onSealedMutation();
         Locale result = locale;
         locale = loc;
+        return result;
+    }
+
+    /**
+     * Get the current timezone. Returns the default timezone if none has been set.
+     *
+     * @return the old value of the timezone
+     * @see java.util.TimeZone
+     */
+    public final TimeZone getTimeZone() {
+        if (timezone == null) timezone = TimeZone.getDefault();
+        return timezone;
+    }
+
+    /**
+     * Set the current timezone.
+     *
+     * @see java.util.TimeZone
+     */
+    public final TimeZone setTimeZone(TimeZone tz) {
+        if (sealed) onSealedMutation();
+        TimeZone result = timezone;
+        timezone = tz;
         return result;
     }
 
@@ -1157,7 +1190,7 @@ public class Context implements Closeable {
     public final Object evaluateReader(
             Scriptable scope, Reader in, String sourceName, int lineno, Object securityDomain)
             throws IOException {
-        Script script = compileReader(scope, in, sourceName, lineno, securityDomain);
+        Script script = compileReader(in, sourceName, lineno, securityDomain);
         if (script != null) {
             return script.exec(this, scope);
         }
@@ -2062,7 +2095,7 @@ public class Context implements Closeable {
      */
     public final synchronized void putThreadLocal(Object key, Object value) {
         if (sealed) onSealedMutation();
-        if (threadLocalMap == null) threadLocalMap = new HashMap<Object, Object>();
+        if (threadLocalMap == null) threadLocalMap = new HashMap<>();
         threadLocalMap.put(key, value);
     }
 
@@ -2573,7 +2606,7 @@ public class Context implements Closeable {
      */
     public void addActivationName(String name) {
         if (sealed) onSealedMutation();
-        if (activationNames == null) activationNames = new HashSet<String>();
+        if (activationNames == null) activationNames = new HashSet<>();
         activationNames.add(name);
     }
 
@@ -2637,6 +2670,7 @@ public class Context implements Closeable {
     private ErrorReporter errorReporter;
     RegExpProxy regExpProxy;
     private Locale locale;
+    private TimeZone timezone;
     private boolean generatingDebug;
     private boolean generatingDebugChanged;
     private boolean generatingSource = true;

@@ -245,7 +245,8 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
         start = Math.max(0, start);
         end = Math.min(length, end);
         int len = Math.max(0, (end - start));
-        int byteOff = Math.min(start * getBytesPerElement(), arrayBuffer.getLength());
+        int byteOff =
+                Math.min(getByteOffset() + start * getBytesPerElement(), arrayBuffer.getLength());
 
         return cx.newObject(
                 scope,
@@ -616,13 +617,13 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
     @SuppressWarnings("unused")
     @Override
     public Iterator<T> iterator() {
-        return new NativeTypedArrayIterator<T>(this, 0);
+        return new NativeTypedArrayIterator<>(this, 0);
     }
 
     @SuppressWarnings("unused")
     @Override
     public ListIterator<T> listIterator() {
-        return new NativeTypedArrayIterator<T>(this, 0);
+        return new NativeTypedArrayIterator<>(this, 0);
     }
 
     @SuppressWarnings("unused")
@@ -631,7 +632,7 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
         if (checkIndex(start)) {
             throw new IndexOutOfBoundsException();
         }
-        return new NativeTypedArrayIterator<T>(this, start);
+        return new NativeTypedArrayIterator<>(this, start);
     }
 
     @SuppressWarnings("unused")

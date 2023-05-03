@@ -421,9 +421,17 @@ public class ObjToIntMap implements Serializable {
             }
         }
     }
+
+    // A == golden_ratio * (1 << 32) = ((sqrt(5) - 1) / 2) * (1 << 32)
+    // See Knuth etc.
     private static final int A = 0x9e3779b9;
 
     private static final Object DELETED = new Object();
+
+    // Structure of kyes and values arrays (N == 1 << power):
+    // keys[0 <= i < N]: key value or null or DELETED mark
+    // values[0 <= i < N]: value of key at keys[i]
+    // values[N <= i < 2*N]: hash code of key at keys[i-N]
 
     private transient Object[] keys;
     private transient int[] values;
@@ -434,5 +442,219 @@ public class ObjToIntMap implements Serializable {
 
     // If true, enables consitency checks
     private static final boolean check = false;
+
+    /* TEST START
+
+        public static void main(String[] args) {
+            if (!check) {
+                System.err.println("Set check to true and re-run");
+                throw new RuntimeException("Set check to true and re-run");
+            }
+
+            ObjToIntMap map;
+            map = new ObjToIntMap(0);
+            testHash(map, 3);
+            map = new ObjToIntMap(0);
+            testHash(map, 10 * 1000);
+            map = new ObjToIntMap();
+            testHash(map, 10 * 1000);
+            map = new ObjToIntMap(30 * 1000);
+            testHash(map, 10 * 100);
+            map.clear();
+            testHash(map, 4);
+            map = new ObjToIntMap(0);
+            testHash(map, 10 * 100);
+        }
+
+        private static void testHash(ObjToIntMap map, int N) {
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i);
+                check(-1 == map.get(key, -1));
+                map.put(key, i);
+                check(i == map.get(key, -1));
+            }
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i);
+                map.put(key, i);
+                check(i == map.get(key, -1));
+            }
+
+            check(map.size() == N);
+
+            System.out.print("."); System.out.flush();
+            Object[] keys = map.getKeys();
+            check(keys.length == N);
+            for (int i = 0; i != N; ++i) {
+                Object key = keys[i];
+                check(map.has(key));
+            }
+
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i);
+                check(i == map.get(key, -1));
+            }
+
+            int Nsqrt = -1;
+            for (int i = 0; ; ++i) {
+                if (i * i >= N) {
+                    Nsqrt = i;
+                    break;
+                }
+            }
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i * i);
+                map.put(key, i);
+                check(i == map.get(key, -1));
+            }
+
+            check(map.size() == 2 * N - Nsqrt);
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i * i);
+                check(i == map.get(key, -1));
+            }
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(-1 - i * i);
+                map.put(key, i);
+                check(i == map.get(key, -1));
+            }
+
+            check(map.size() == 3 * N - Nsqrt);
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(-1 - i * i);
+                map.remove(key);
+                check(!map.has(key));
+            }
+
+            check(map.size() == 2 * N - Nsqrt);
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i * i);
+                check(i == map.get(key, -1));
+            }
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i);
+                int j = intSqrt(i);
+                if (j * j == i) {
+                    check(j == map.get(key, -1));
+                }else {
+                    check(i == map.get(key, -1));
+                }
+            }
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i * i);
+                map.remove(key);
+                check(-2 == map.get(key, -2));
+            }
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i);
+                map.put(key, i);
+                check(i == map.get(key, -2));
+            }
+
+            check(map.size() == N);
+
+            System.out.print("."); System.out.flush();
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i);
+                check(i == map.get(key, -1));
+            }
+
+            System.out.print("."); System.out.flush();
+            ObjToIntMap copy = (ObjToIntMap)writeAndRead(map);
+            check(copy.size() == N);
+
+            for (int i = 0; i != N; ++i) {
+                Object key = testKey(i);
+                check(i == copy.get(key, -1));
+            }
+
+            System.out.print("."); System.out.flush();
+            checkSameMaps(copy, map);
+
+            System.out.println(); System.out.flush();
+        }
+
+        private static void checkSameMaps(ObjToIntMap map1, ObjToIntMap map2) {
+            check(map1.size() == map2.size());
+            Object[] keys = map1.getKeys();
+            check(keys.length == map1.size());
+            for (int i = 0; i != keys.length; ++i) {
+                check(map1.get(keys[i], -1) == map2.get(keys[i], -1));
+            }
+        }
+
+        private static void check(boolean condition) {
+            if (!condition) Kit.codeBug();
+        }
+
+        private static Object[] testPool;
+
+        private static Object testKey(int i) {
+            int MAX_POOL = 100;
+            if (0 <= i && i < MAX_POOL) {
+                if (testPool != null && testPool[i] != null) {
+                    return testPool[i];
+                }
+            }
+            Object x = Double.valueOf(i + 0.5);
+            if (0 <= i && i < MAX_POOL) {
+                if (testPool == null) {
+                    testPool = new Object[MAX_POOL];
+                }
+                testPool[i] = x;
+            }
+            return x;
+        }
+
+        private static int intSqrt(int i) {
+            int approx = (int)Math.sqrt(i) + 1;
+            while (approx * approx > i) {
+                --approx;
+            }
+            return approx;
+        }
+
+        private static Object writeAndRead(Object obj) {
+            try {
+                java.io.ByteArrayOutputStream
+                    bos = new java.io.ByteArrayOutputStream();
+                java.io.ObjectOutputStream
+                    out = new java.io.ObjectOutputStream(bos);
+                out.writeObject(obj);
+                out.close();
+                byte[] data = bos.toByteArray();
+                java.io.ByteArrayInputStream
+                    bis = new java.io.ByteArrayInputStream(data);
+                java.io.ObjectInputStream
+                    in = new java.io.ObjectInputStream(bis);
+                Object result = in.readObject();
+                in.close();
+                return result;
+            }catch (Exception ex) {
+                throw new RuntimeException("Unexpected");
+            }
+        }
+
+    // TEST END */
 
 }

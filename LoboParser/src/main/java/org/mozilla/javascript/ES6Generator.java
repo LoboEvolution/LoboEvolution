@@ -6,12 +6,6 @@
 
 package org.mozilla.javascript;
 
-/**
- * <p>ES6Generator class.</p>
- *
- *
- *
- */
 public final class ES6Generator extends IdScriptableObject {
     private static final long serialVersionUID = 1645892441041347273L;
 

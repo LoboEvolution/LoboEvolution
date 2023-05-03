@@ -8,9 +8,6 @@ package org.mozilla.javascript;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
-
-import org.mozilla.classfile.ClassFileWriter;
 import org.mozilla.javascript.ast.ArrayComprehension;
 import org.mozilla.javascript.ast.ArrayComprehensionLoop;
 import org.mozilla.javascript.ast.ArrayLiteral;
@@ -87,9 +84,6 @@ import org.mozilla.javascript.ast.Yield;
  * @author Norris Boyd
  */
 public final class IRFactory extends Parser {
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(IRFactory.class.getName());
-
     private static final int LOOP_DO_WHILE = 0;
     private static final int LOOP_WHILE = 1;
     private static final int LOOP_FOR = 2;
@@ -121,8 +115,8 @@ public final class IRFactory extends Parser {
         int sourceStartOffset = decompiler.getCurrentOffset();
 
         if (Token.printTrees) {
-            logger.info("IRFactory.transformTree");
-            logger.info(root.debugPrint());
+            System.out.println("IRFactory.transformTree");
+            System.out.println(root.debugPrint());
         }
         ScriptNode script = (ScriptNode) transform(root);
 
@@ -421,7 +415,7 @@ public final class IRFactory extends Parser {
                 array.addChildToBack(transform(elem));
             } else {
                 if (skipIndexes == null) {
-                    skipIndexes = new ArrayList<Integer>();
+                    skipIndexes = new ArrayList<>();
                 }
                 skipIndexes.add(Integer.valueOf(i));
             }
@@ -489,7 +483,7 @@ public final class IRFactory extends Parser {
             pushScope((Scope) node);
         }
         try {
-            List<Node> kids = new ArrayList<Node>();
+            List<Node> kids = new ArrayList<>();
             for (Node kid : node) {
                 kids.add(transform((AstNode) kid));
             }
@@ -578,7 +572,7 @@ public final class IRFactory extends Parser {
             int declType = -1;
             AstNode iter = loop.getIterator();
             if (iter instanceof VariableDeclaration) {
-                declType = ((VariableDeclaration) iter).getType();
+                declType = iter.getType();
             }
             Node lhs = transform(iter);
             if (loop.isForOf()) {
@@ -1063,8 +1057,7 @@ public final class IRFactory extends Parser {
         List<AstNode> elems = node.getElements();
         // start with an empty string to ensure ToString() for each substitution
         Node pn = Node.newString("");
-        for (int i = 0; i < elems.size(); ++i) {
-            AstNode elem = elems.get(i);
+        for (AstNode elem : elems) {
             if (elem.getType() != Token.TEMPLATE_CHARS) {
                 decompiler.addToken(Token.TEMPLATE_LITERAL_SUBST);
                 pn = createBinary(Token.ADD, pn, transform(elem));
@@ -1090,8 +1083,7 @@ public final class IRFactory extends Parser {
         TemplateLiteral templateLiteral = (TemplateLiteral) node.getTemplateLiteral();
         List<AstNode> elems = templateLiteral.getElements();
         call.addChildToBack(templateLiteral);
-        for (int i = 0; i < elems.size(); ++i) {
-            AstNode elem = elems.get(i);
+        for (AstNode elem : elems) {
             if (elem.getType() != Token.TEMPLATE_CHARS) {
                 decompiler.addToken(Token.TEMPLATE_LITERAL_SUBST);
                 call.addChildToBack(transform(elem));
@@ -1242,27 +1234,34 @@ public final class IRFactory extends Parser {
         Node catchBlocks = new Block();
         for (CatchClause cc : node.getCatchClauses()) {
             decompiler.addToken(Token.CATCH);
-            decompiler.addToken(Token.LP);
 
-            String varName = cc.getVarName().getIdentifier();
-            decompiler.addName(varName);
-
+            Name varName = cc.getVarName();
             Node catchCond = null;
-            AstNode ccc = cc.getCatchCondition();
-            if (ccc != null) {
-                decompiler.addName(" ");
-                decompiler.addToken(Token.IF);
-                catchCond = transform(ccc);
-            } else {
-                catchCond = new EmptyExpression();
+            Node varNameNode = null;
+
+            if (varName != null) {
+                decompiler.addToken(Token.LP);
+                decompiler.addName(varName.getIdentifier());
+
+                varNameNode = createName(varName.getIdentifier());
+
+                AstNode ccc = cc.getCatchCondition();
+                if (ccc != null) {
+                    decompiler.addName(" ");
+                    decompiler.addToken(Token.IF);
+                    catchCond = transform(ccc);
+                } else {
+                    catchCond = new EmptyExpression();
+                }
+
+                decompiler.addToken(Token.RP);
             }
-            decompiler.addToken(Token.RP);
             decompiler.addEOL(Token.LC);
 
             Node body = transform(cc.getBody());
             decompiler.addEOL(Token.RC);
 
-            catchBlocks.addChildToBack(createCatch(varName, catchCond, body, cc.getLineno()));
+            catchBlocks.addChildToBack(createCatch(varNameNode, catchCond, body, cc.getLineno()));
         }
         Node finallyBlock = null;
         if (node.getFinallyBlock() != null) {
@@ -1535,11 +1534,14 @@ public final class IRFactory extends Parser {
      * @param stmts the statements in the catch clause
      * @param lineno the starting line number of the catch clause
      */
-    private Node createCatch(String varName, Node catchCond, Node stmts, int lineno) {
+    private Node createCatch(Node varName, Node catchCond, Node stmts, int lineno) {
+        if (varName == null) {
+            varName = new Node(Token.EMPTY);
+        }
         if (catchCond == null) {
             catchCond = new Node(Token.EMPTY);
         }
-        return new Node(Token.CATCH, createName(varName), catchCond, stmts, lineno);
+        return new Node(Token.CATCH, varName, catchCond, stmts, lineno);
     }
 
     private static Node initFunction(
@@ -1986,9 +1988,8 @@ public final class IRFactory extends Parser {
                         // Transform Delete(Name "a")
                         //  to Delete(Bind("a"), String("a"))
                         child.setType(Token.BINDNAME);
-                        Node left = child;
                         Node right = Node.newString(child.getString());
-                        n = new Node(nodeType, left, right);
+                        n = new Node(nodeType, child, right);
                     } else if (childType == Token.GETPROP || childType == Token.GETELEM) {
                         Node left = child.getFirstChild();
                         Node right = child.getLastChild();
@@ -2487,7 +2488,7 @@ public final class IRFactory extends Parser {
                 decompiler.addNumber(((NumberLiteral) node).getNumber());
                 break;
             case Token.BIGINT:
-                decompiler.addBigInt(((BigIntLiteral) node).getBigInt());
+                decompiler.addBigInt(node.getBigInt());
                 break;
             case Token.GETPROP:
                 decompilePropertyGet((PropertyGet) node);
