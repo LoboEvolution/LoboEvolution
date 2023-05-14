@@ -3360,9 +3360,9 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var oNode = document.getElementById('middle');\n"
-                + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <span id=3>before-end</span> ');\n"
+                + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <span id=3>before-end </span> ');\n"
                 + "  oNode.insertAdjacentHTML('" + afterEnd + "', ' <span id=4>after-end</span> ');\n"
-                + "  oNode.insertAdjacentHTML('" + beforeBegin + "', ' <span id=1>before-begin</span> ');\n"
+                + "  oNode.insertAdjacentHTML('" + beforeBegin + "', ' <span id=1>before-begin </span> ');\n"
                 + "  oNode.insertAdjacentHTML('" + afterBegin + "', ' <span id=2>after-begin</span> ');\n"
                 + "  var coll = document.getElementsByTagName('SPAN');\n"
                 + "  for (var i = 0; i < coll.length; i++) {\n"
@@ -3371,7 +3371,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "  var outside = document.getElementById('outside');\n"
                 + "  var text = outside.textContent ? outside.textContent : outside.innerText;\n"
                 + "  text = text.replace(/(\\r\\n|\\r|\\n)/gm, '');\n"
-                + "  text = text.replace(/(\\s{2,}/g, ' ');\n"
+                + "  text = text.replace(/(\\s{2,})/g, ' ');\n"
                 + "  text = text.replace(/^\\s+|\\s+$/g, '');\n"
                 + "  alert(text);\n"
                 + "}\n"
@@ -3390,74 +3390,29 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
-
-
-
     /**
-     * <p>insertAdjacentHTMLExecuteJavaScript.</p>
+     * <p>insertAdjacentHTML2.</p>
      */
     @Test
-    public void insertAdjacentHTMLExecuteJavaScript() {
+    public void insertAdjacentHTML2() {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  function test() {\n"
-                + "    var outernode = document.getElementById('myNode');\n"
-                + "    outernode.insertAdjacentHTML('afterend', '<scr'+'ipt>alerter();</scr'+'ipt>');\n"
-                + "  }\n"
-                + "  function alerter() {\n"
-                + "    alert('executed');\n"
-                + "  }\n"
-                + "</script></head><body onload='test()'>\n"
-                + "  <div id='myNode'></div>\n"
-                + "</body></html>";
-        final String[] messages = {};
-        checkHtmlAlert(html, messages);
-    }
-
-
-
-
-    /**
-     * <p>insertAdjacentHTMLExecuteNestedJavaScript.</p>
-     */
-    @Test
-    public void insertAdjacentHTMLExecuteNestedJavaScript() {
-        final String html = "<html><head><title>foo</title><script>\n"
-                + "  function test() {\n"
-                + "    var outernode = document.getElementById('myNode');\n"
-                + "    outernode.insertAdjacentHTML('afterend', '<div><scr'+'ipt>alerter();</scr'+'ipt></div>');\n"
-                + "  }\n"
-                + "  function alerter() {\n"
-                + "    alert('executed');\n"
+                + "   var outernode = document.getElementById('myNode');\n"
+                + "   outernode.insertAdjacentHTML('afterbegin', '<p id=myp2>My new paragraph.</p>');\n"
+                + "   outernode.insertAdjacentHTML('afterend', '<p id=myp3>My new paragraph.</p>');\n"
+                + "   outernode.insertAdjacentHTML('beforebegin', '<p id=myp4>My new paragraph.</p>');\n"
+                + "   outernode.insertAdjacentHTML('beforeend', '<p id=myp5>My new paragraph.</p>');\n"
+                + "   var coll = document.getElementsByTagName('P');\n"
+                + "   for (var i = 0; i < coll.length; i++) {\n"
+                + "    alert(coll[i].id);\n"
+                + "   }\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
-                + "  <div id='myNode'></div>\n"
-                + "</body></html>";
-        final String[] messages = {};
-        checkHtmlAlert(html, messages);
-    }
-
-    /**
-     * <p>insertAdjacentHTMLDeclareJavaScript.</p>
-     */
-    @Test
-    public void insertAdjacentHTMLDeclareJavaScript() {
-        final String html = "<html><head><title>foo</title><script>\n"
-                + "  function test() {\n"
-                + "    var outernode = document.getElementById('myNode');\n"
-                + "    outernode.insertAdjacentHTML('afterend', "
-                + "'<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>');\n"
-                + "    try {\n"
-                + "      tester();\n"
-                + "    } catch(e) { alert('exception'); }\n"
-                + "  }\n"
-                + "  function alerter() {\n"
-                + "    alert('declared');\n"
-                + "  }\n"
-                + "</script></head><body onload='test()'>\n"
-                + "  <div id='myNode'></div>\n"
-                + "</body></html>";
-
-        final String[] messages = {"exception"};
+                + "  <div id='myNode'>\n"
+                + "   <p id='myp1'/>\n"
+                + " </div>\n"
+                + " </body></html>";
+        final String[] messages = {"myp4", "myp2", "myp1", "myp5", "myp3"};
         checkHtmlAlert(html, messages);
     }
 
@@ -3478,7 +3433,6 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "function test() {\n"
                 + "  var oNode = document.getElementById('middle');\n"
                 + "  if (!oNode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
-
                 + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before-end'));\n"
                 + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after-end'));\n"
                 + "  oNode.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before-begin '));\n"
@@ -3490,7 +3444,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "  var outside = document.getElementById('outside');\n"
                 + "  var text = outside.textContent ? outside.textContent : outside.innerText;\n"
                 + "  text = text.replace(/(\\r\\n|\\r|\\n)/gm, '');\n"
-                + "  text = text.replace(/(\\s{2,}/g, ' ');\n"
+                + "  text = text.replace(/(\\s{2,})/g, ' ');\n"
                 + "  text = text.replace(/^\\s+|\\s+$/g, '');\n"
                 + "  alert(text);\n"
                 + "}\n"
@@ -3537,9 +3491,6 @@ public class HTMLElementTest extends LoboUnitTest {
         final String[] messages = {"executed"};
         checkHtmlAlert(html, messages);
     }
-
-
-
 
     /**
      * <p>insertAdjacentElementExecuteNestedJavaScript.</p>

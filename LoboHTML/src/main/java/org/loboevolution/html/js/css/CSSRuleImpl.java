@@ -41,13 +41,23 @@ public class CSSRuleImpl implements CSSRule {
     /** {@inheritDoc} */
     @Override
     public CSSRule getParentRule() {
-        return new CSSRuleImpl(abstractCSSRule.getParentRule());
+        AbstractCSSRuleImpl parent = abstractCSSRule.getParentRule();
+        if (parent != null) {
+            return new CSSRuleImpl(parent);
+        }
+        return null;
     }
 
     /** {@inheritDoc} */
     @Override
-    public CSSStyleSheet parentStyleSheet() {
+    public CSSStyleSheet getParentStyleSheet() {
         return new CSSStyleSheetImpl(abstractCSSRule.getParentStyleSheet());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int getType() {
+        return 1;
     }
 
     @Override

@@ -42,7 +42,11 @@ public interface CSSRule {
      * <p> parentStyleSheet. </p>
      * @return a {@link org.loboevolution.html.node.css.CSSStyleSheet} object.
      */
-    CSSStyleSheet parentStyleSheet();
+    CSSStyleSheet getParentStyleSheet();
 
-
+    /**
+     * <p> getType. </p>
+     * @return a {@link java.lang.Integer} object.
+     */
+    int getType();
 }

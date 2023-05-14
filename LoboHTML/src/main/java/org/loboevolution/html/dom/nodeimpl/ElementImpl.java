@@ -55,11 +55,13 @@ import org.mozilla.javascript.annotations.JSFunction;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 /**
@@ -885,6 +887,83 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return false;
 	}
 
+	@Override
+	public Node insertAdjacentElement(String where, Node insertedElement) {
+		switch (where.toLowerCase()) {
+			case "afterbegin":
+				return prepend(insertedElement);
+			case "beforebegin":
+				if (this.parentNode != null) {
+					NodeListImpl list = ((NodeListImpl) this.parentNode.getChildNodes());
+					int idx = list.indexOf(this);
+					Node d = list.get(idx);
+					list.remove(idx);
+					list.add(idx, insertedElement);
+					list.add(idx + 1, d);
+					return insertedElement;
+				}
+			case "beforeend":
+				return appendChild(insertedElement);
+			case "afterend":
+				return insertBefore(insertedElement, getNextSibling());
+					default:
+				break;
+
+		}
+		return null;
+	}
+
+	@Override
+	public void insertAdjacentHTML(String position, String text) {
+		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
+		if (document != null) {
+			final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
+			try (Reader reader = new StringReader(text)) {
+				switch (position) {
+					case "afterbegin":
+						parser.parse(reader, this);
+						NodeListImpl list = ((NodeListImpl) this.getChildNodes());
+						Node last  = getChildNodes().item(getChildNodes().getLength()-1);
+						list.remove(last);
+						insertBefore(last, getFirstChild());
+						break;
+					case "beforebegin":
+						parser.parse(reader, this);
+						NodeListImpl nodeList = ((NodeListImpl) this.getChildNodes());
+						Node nodeLast = getChildNodes().item(getChildNodes().getLength() - 1);
+						nodeList.remove(nodeLast);
+						NodeListImpl parentList = ((NodeListImpl) this.parentNode.getChildNodes());
+						int idx = parentList.indexOf(this);
+						Node d = parentList.get(idx);
+						parentList.remove(idx);
+						parentList.add(idx, nodeLast);
+						parentList.add(idx + 1, d);
+						break;
+					case "beforeend":
+						NodeListImpl beforeEndList = ((NodeListImpl) this.getChildNodes());
+						Node beforeEndLast = getChildNodes().item(getChildNodes().getLength() - 1);
+						beforeEndList.remove(beforeEndLast);
+
+						parser.parse(reader, this);
+						appendChild(beforeEndLast);
+						break;
+					case "afterend":
+						parser.parse(reader, this);
+						NodeListImpl nodeList2 = ((NodeListImpl) this.getChildNodes());
+						Node nodeLast2 = getChildNodes().item(getChildNodes().getLength() - 1);
+						nodeList2.remove(nodeLast2);
+						appendChild(nodeLast2);
+						break;
+					default:
+						break;
+
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public DOMRect getBoundingClientRect() {
@@ -1203,10 +1282,19 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		String borderRightWidth = currentStyle.getBorderRightWidth();
 		String boxSizing = currentStyle.getBoxSizing();
 		String display = currentStyle.getDisplay();
+		int paddingRight = HtmlValues.getPixelSize(currentStyle.getPaddingRight(), null, doc.getDefaultView(), 0);
+		int paddingLeft = HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), null, doc.getDefaultView(), 0);
 		int sizeWidth = preferredSize.width;
 
-		if (getParentNode() == null || CSSValues.INLINE.isEqual(display) || CSSValues.NONE.isEqual(display)) {
+		if (getParentNode() == null || CSSValues.NONE.isEqual(display)) {
 			return 0;
+		}
+
+		if (CSSValues.INLINE.isEqual(display)) {
+			width = "0";
+			if (paddingRight == 0 && paddingLeft == 0) {
+				return 0;
+			}
 		}
 
 		if (this instanceof HTMLHtmlElementImpl) {
@@ -1242,10 +1330,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		if (padding) {
-			String paddingRight = currentStyle.getPaddingRight();
-			String paddingLeft = currentStyle.getPaddingLeft();
-			widthSize += HtmlValues.getPixelSize(paddingRight, null, doc.getDefaultView(), 0);
-			widthSize += HtmlValues.getPixelSize(paddingLeft, null, doc.getDefaultView(), 0);
+			widthSize += paddingRight;
+			widthSize += paddingLeft;
 		}
 
 

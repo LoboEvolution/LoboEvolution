@@ -2004,6 +2004,16 @@ public class DTMNodeProxy
         return false;
     }
 
+    @Override
+    public Node insertAdjacentElement(String where, Node insertedElement) {
+        return null;
+    }
+
+    @Override
+    public void insertAdjacentHTML(String position, String text) {
+
+    }
+
     /**
      * {@inheritDoc}
      */

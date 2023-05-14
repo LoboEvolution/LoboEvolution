@@ -461,8 +461,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			ComputedCSSStyleDeclaration style = element.getComputedStyle();
 			if (!CSSValues.STATIC.isEqual(style.getPosition())) {
 				return element;
-			} else{
-				return getOffsetParent();
 			}
 		}
 

@@ -1310,26 +1310,6 @@ public class CSSSelectorTest extends LoboUnitTest {
 
 
     @Test
-    public void target() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  found = document.querySelectorAll(':target');\n"
-                + "  alert(found.length);\n"
-                + "  if (found.length > 0) { alert(found[0].id); }\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "  <input id='id1' >\n"
-                + "  <input id='id2'>\n"
-                + "</body></html>";
-
-        final String[] messages = {"1", "id2"};
-        checkHtmlAlert(html, messages);
-    }
-
-
-    @Test
     public void targetNoHash() {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"

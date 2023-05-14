@@ -486,6 +486,12 @@ public class StyleSheetAggregator {
 		case "empty":
 			return isEmpty(element);
 
+		case "target":
+			HTMLElementImpl impl = (HTMLElementImpl) element;
+			final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
+			final String ref = document.getBaseURI();
+			return Strings.isNotBlank(ref) && ref.contains("#") && ref.split("#")[1].equals(element.getId());
+
 		default:
 			if (value.startsWith("nth-child(")) {
 				final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);

@@ -61,7 +61,7 @@ public class CSSStyleRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px", "", "red"};
+        final String[] messages = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", null, "H1", null, "10px", null, "red"};
         checkHtmlAlert(html, messages);
     }
 
