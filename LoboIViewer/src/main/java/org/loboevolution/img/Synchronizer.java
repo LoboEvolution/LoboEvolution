@@ -25,13 +25,12 @@ package org.loboevolution.img;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.WeakHashMap;
 
 import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import org.loboevolution.common.Objects;
 
 /**
  * Manages the synchronization of a collection of viewers.

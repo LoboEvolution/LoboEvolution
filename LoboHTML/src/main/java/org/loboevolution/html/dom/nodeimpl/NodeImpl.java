@@ -24,7 +24,6 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Nodes;
-import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
@@ -679,7 +678,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node getParentNode() {
-		return this.parentNode;
+		if (this instanceof Attr) {
+			return null;
+		} else {
+			return this.parentNode;
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -1067,7 +1070,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public boolean isEqualNode(Node arg) {
-
 		return arg instanceof NodeImpl && getNodeType() == arg.getNodeType()
 				&& Objects.equals(getNodeName().toUpperCase(), arg.getNodeName().toUpperCase())
 				&& Objects.equals(getNodeValue(), arg.getNodeValue())
@@ -1105,11 +1107,16 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public String lookupPrefix(String namespaceURI) {
+
 		if (namespaceURI == null) {
 			return null;
 		}
 		switch (getNodeType()) {
 			case Node.ATTRIBUTE_NODE:
+				if (namespaceURI.equals(getNamespaceURI())) {
+					return getPrefix();
+				}
+
 				if (getParentNode() != null && getParentNode().getNodeType() == Node.ELEMENT_NODE) {
 					return getParentNode().lookupPrefix(namespaceURI);
 				}

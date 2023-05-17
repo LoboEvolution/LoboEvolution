@@ -40,12 +40,6 @@ public class ListRenderState extends AbstractMarginRenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public int getDefaultDisplay() {
-		return DISPLAY_LIST_ITEM;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	protected HtmlInsets getDefaultMarginInsets() {
 		final HtmlInsets insets = new HtmlInsets();
 		final RenderState prevRS = getPreviousRenderState();

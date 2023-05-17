@@ -33,9 +33,9 @@ public class BorderSetter1 implements SubPropertySetter {
 	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
 		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 		properties.setProperty(BORDER, newValue);
-		properties.setPropertyValueProcessed(BORDER_TOP, newValue, false, true);
-		properties.setPropertyValueProcessed(BORDER_LEFT, newValue, false, true);
-		properties.setPropertyValueProcessed(BORDER_BOTTOM, newValue, false, true);
-		properties.setPropertyValueProcessed(BORDER_RIGHT, newValue, false, true);
+		properties.setPropertyValueProcessed(BORDER_TOP, newValue, false);
+		properties.setPropertyValueProcessed(BORDER_LEFT, newValue, false);
+		properties.setPropertyValueProcessed(BORDER_BOTTOM, newValue, false);
+		properties.setPropertyValueProcessed(BORDER_RIGHT, newValue, false);
 	}
 }

@@ -19,19 +19,10 @@
  */
 
 package org.loboevolution.html.dom;
-
-
-
-
-
 /**
  * <p>HTMLDirectoryElement interface.</p>
- *
- *
- *
  */
 public interface HTMLDirectoryElement extends HTMLElement {
-
 
     /**
      * <p>isCompact.</p>

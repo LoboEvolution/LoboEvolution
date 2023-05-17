@@ -475,8 +475,17 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
                     case RenderState.DISPLAY_TABLE_COLUMN:
                         display = CSSValues.TABLE_COLUMN;
                         break;
+                    case RenderState.DISPLAY_TABLE_FOOTER_GROUP:
+                        display = CSSValues.TABLE_FOOTER_GROUP;
+                        break;
+                    case RenderState.DISPLAY_TABLE_HEADER_GROUP:
+                        display = CSSValues.TABLE_HEADER_GROUP;
+                        break;
                     case RenderState.DISPLAY_TABLE_COLUMN_GROUP:
                         display = CSSValues.TABLE_COLUMN_GROUP;
+                        break;
+                    case RenderState.DISPLAY_TABLE_ROW_GROUP:
+                        display = CSSValues.TABLE_ROW_GROUP;
                         break;
                     case RenderState.DISPLAY_INLINE_BLOCK:
                         display = CSSValues.INLINE_BLOCK;

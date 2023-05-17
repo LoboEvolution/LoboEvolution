@@ -38,7 +38,7 @@ public class HTMLProgressElementImpl extends HTMLElementImpl {
 		super(name);
 	}
 
-		/** {@inheritDoc} */
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);

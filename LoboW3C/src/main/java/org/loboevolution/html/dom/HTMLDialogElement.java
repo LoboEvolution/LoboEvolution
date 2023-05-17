@@ -20,18 +20,10 @@
 
 package org.loboevolution.html.dom;
 
-
-
-
-
 /**
- * <p>HTMLDialogElement interface.</p>
- *
- *
- *
+ * <p>HTMLDialogElement interface.</p> *
  */
 public interface HTMLDialogElement extends HTMLElement {
-
 
     
     /**

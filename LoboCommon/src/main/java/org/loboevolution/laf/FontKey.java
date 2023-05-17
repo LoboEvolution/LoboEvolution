@@ -22,9 +22,9 @@ package org.loboevolution.laf;
 
 import java.util.Locale;
 import java.util.Set;
+import java.util.Objects;
 
 import lombok.*;
-import org.loboevolution.common.Objects;
 
 /**
  * The Class FontKey.
@@ -82,9 +82,6 @@ public class FontKey {
 	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object other) {
-		if (Objects.equals(other, this)) {
-			return true;
-		}
 		FontKey ors;
 		if (other instanceof FontKey) {
 			ors = (FontKey) other;

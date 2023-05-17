@@ -34,7 +34,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeListener;
 
-import org.loboevolution.common.Objects;
+import java.util.Objects;
 
 /**
  * A status bar implementation that display information based on a pixel of the

@@ -37,16 +37,14 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.CellRendererPane;
 import javax.swing.JComponent;
 
-import org.loboevolution.common.Objects;
-
 
 /**
  * The component that displays the image itself.
- * 
  * Author Kaz Csaba
  */
 class ImageComponent extends JComponent {

@@ -39,7 +39,11 @@ public class CSSRuleListImpl extends AbstractList<CSSStyleRule>  implements CSSR
     /** {@inheritDoc} */
     @Override
     public CSSStyleRule item(int index) {
-        return this.get(index);
+        try{
+            return this.get(index);
+        } catch (Exception e){
+            return null;
+        }
     }
 
     /** {@inheritDoc} */

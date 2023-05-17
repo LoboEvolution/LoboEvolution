@@ -30,9 +30,6 @@ import java.util.Set;
 
 /**
  * <p>DOMStringListImpl class.</p>
- *
- *
- *
  */
 public class DOMStringListImpl implements DOMStringList {
 	private final List<String> sourceList;

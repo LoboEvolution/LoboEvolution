@@ -29,17 +29,6 @@ import java.beans.PropertyDescriptor;
  */
 public class Objects {
 
-	/**
-	 * <p>equals.</p>
-	 *
-	 * @param obj1 a {@link java.lang.Object} object.
-	 * @param obj2 a {@link java.lang.Object} object.
-	 * @return a boolean.
-	 */
-	public static boolean equals(Object obj1, Object obj2) {
-		return obj1 == obj2;
-	}
-
 	public static <M> void merge(M target, M destination) {
 		try {
 			BeanInfo beanInfo = Introspector.getBeanInfo(target.getClass());

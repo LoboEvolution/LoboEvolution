@@ -69,7 +69,7 @@ public class BackgroundSetter implements SubPropertySetter {
 				properties.setProperty(BACKGROUND_COLOR, color);
 			}
 			if (image != null) {
-				properties.setPropertyValueProcessed(BACKGROUND_IMAGE, image, false, true);
+				properties.setPropertyValueProcessed(BACKGROUND_IMAGE, image, false);
 			}
 			if (backgroundRepeat != null) {
 				properties.setProperty(BACKGROUND_REPEAT, backgroundRepeat);

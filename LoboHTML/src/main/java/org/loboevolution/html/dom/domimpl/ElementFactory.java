@@ -57,7 +57,9 @@ public class ElementFactory {
 		builders.put(HTMLTag.HEADER, div);
 		builders.put(HTMLTag.FOOTER, div);
 
+		builders.put(HTMLTag.DIR, new HTMLElementBuilder.Dir());
 		builders.put(HTMLTag.DETAILS, new HTMLElementBuilder.Details());
+		builders.put(HTMLTag.DIALOG, new HTMLElementBuilder.Dialog());
 		builders.put(HTMLTag.DL, new HTMLElementBuilder.Dl());
 		builders.put(HTMLTag.BODY, new HTMLElementBuilder.Body());
 		builders.put(HTMLTag.CENTER, new HTMLElementBuilder.Center());
@@ -100,7 +102,10 @@ public class ElementFactory {
 		builders.put(HTMLTag.HR, new HTMLElementBuilder.Hr());
 		builders.put(HTMLTag.BR, new HTMLElementBuilder.Br());
 		builders.put(HTMLTag.OBJECT, new HTMLElementBuilder.HtmlObject());
-		builders.put(HTMLTag.EMBED, new HTMLElementBuilder.NonStandard());
+		builders.put(HTMLTag.EMBED,new HTMLElementBuilder.NonStandard());
+		builders.put(HTMLTag.NOSCRIPT, new HTMLElementBuilder.NoScript());
+		builders.put(HTMLTag.OPTGROUP, new HTMLElementBuilder.OptGroup());
+
 
 		builders.put(HTMLTag.TT, new HTMLElementBuilder.Tt());
 		builders.put(HTMLTag.SMALL, new HTMLElementBuilder.Small());

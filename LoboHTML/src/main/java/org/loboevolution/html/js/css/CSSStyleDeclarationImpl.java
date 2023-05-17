@@ -24,6 +24,7 @@ import org.htmlunit.cssparser.dom.Property;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
@@ -39,18 +40,18 @@ import java.util.regex.Pattern;
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     private static final Pattern DOUBLE_PATTERN = Pattern.compile(
-            "[\\x00-\\x20]*[+-]?(NaN|Infinity|((((\\p{Digit}+)(\\.)?((\\p{Digit}+)?)" +
-                    "([eE][+-]?(\\p{Digit}+))?)|(\\.((\\d+))([eE][+-]?(\\p{Digit}+))?)|" +
+            "[\\x00-\\x20]*[+-]?(NaN|Infinity|((((\\d+)(\\.)?((\\d+)?)" +
+                    "([eE][+-]?(\\d+))?)|(\\.((\\d+))([eE][+-]?(\\d+))?)|" +
                     "(((0[xX](\\p{XDigit}+)(\\.)?)|(0[xX](\\p{XDigit}+)?(\\.)(\\p{XDigit}+)))" +
-                    "[pP][+-]?(\\p{Digit}+)))[fFdD]?))[\\x00-\\x20]*");
+                    "[pP][+-]?(\\d+)))[fFdD]?))[\\x00-\\x20]*");
 
-    private Pattern NUMERIC_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private final Pattern NUMERIC_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     private String overlayColor;
     private final HTMLElementImpl element;
     private final org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style;
 
-    private static Map<String, Boolean> propertyLenght = new HashMap<>();
+    private static final Map<String, Boolean> propertyLenght = new HashMap<>();
 
     private static final Map<String, SubPropertySetter> SUB_SETTERS = new HashMap<>();
 
@@ -189,7 +190,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             } else if (propertyLenght.get(propertyName) != null && propertyLenght.get(propertyName)) {
 
                 if (DOUBLE_PATTERN.matcher(value).matches()) {
-                    final Double d = Double.parseDouble(value);
+                    final double d = Double.parseDouble(value);
                     if (!Double.isNaN(d) && !Double.isInfinite(d)) {
                         value += "px";
                         style.setProperty(propertyName, value, priority);
@@ -207,6 +208,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             } else {
                 style.setProperty(propertyName, value, priority);
             }
+
+            setStyleAttribute();
         }
     }
 
@@ -216,14 +219,13 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
      * @param lowerCaseName a {@link java.lang.String} object.
      * @param value a {@link java.lang.String} object.
      * @param important a {@link java.lang.Boolean} object.
-     * @param set a {@link java.lang.Boolean} object.
      */
-    public final void setPropertyValueProcessed(String lowerCaseName, String value, boolean important, boolean set) {
+    public final void setPropertyValueProcessed(String lowerCaseName, String value, boolean important) {
         final SubPropertySetter setter = SUB_SETTERS.get(lowerCaseName);
         if (setter != null) {
             setter.changeValue(this, value);
         } else {
-            if(set) setProperty(lowerCaseName, value, important ? "important" : "");
+            setProperty(lowerCaseName, value, important ? "important" : "");
         }
     }
 
@@ -260,14 +262,21 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         }
     }
 
-
     @Override
     public String item(int index) {
-        return null;
+        try {
+            Property property = style.getProperties().get(index);
+            return property.getName();
+        } catch (Exception e) {
+            return null;
+        }
     }
+
     @Override
     public String removeProperty(String property) {
-        return style.removeProperty(property);
+        String prop = style.removeProperty(property);
+        setStyleAttribute();
+        return prop;
     }
 
     @Override
@@ -615,11 +624,11 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
         StringBuilder font = new StringBuilder();
         if(Strings.isBlank(fontSize)) return "";
-        if (Strings.isNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) font.append(fontStyle + " ");
-        if (Strings.isNotBlank(fontVariant) && !fontVariant.equals(CSSValues.NORMAL.getValue())) font.append(fontVariant + " ");
-        if (Strings.isNotBlank(fontWeight) && !fontWeight.equals(CSSValues.BOLD400.getValue())) font.append(fontWeight + " ");
-        if (Strings.isNotBlank(fontLineHeight) && !fontLineHeight.equals(CSSValues.NORMAL.getValue())) font.append(fontSize + " / " + fontLineHeight + " "); else font.append(fontSize + " ");
-        if (Strings.isNotBlank(fontFamily)) font.append(fontFamily + " ");
+        if (Strings.isNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) font.append(fontStyle).append(" ");
+        if (Strings.isNotBlank(fontVariant) && !fontVariant.equals(CSSValues.NORMAL.getValue())) font.append(fontVariant).append(" ");
+        if (Strings.isNotBlank(fontWeight) && !fontWeight.equals(CSSValues.BOLD400.getValue())) font.append(fontWeight).append(" ");
+        if (Strings.isNotBlank(fontLineHeight) && !fontLineHeight.equals(CSSValues.NORMAL.getValue())) font.append(fontSize).append(" / ").append(fontLineHeight).append(" "); else font.append(fontSize).append(" ");
+        if (Strings.isNotBlank(fontFamily)) font.append(fontFamily).append(" ");
         return font.toString().trim();
     }
 
@@ -1371,7 +1380,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setColor(String color) {
-       this.setProperty(COLOR, color);
+        this.setProperty(COLOR, color);
         this.element.informLookInvalid();
     }
 
@@ -2150,6 +2159,22 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             this.setProperty(Z_INDEX, zIndex);
             this.element.informPositionInvalid();
         }
+    }
+
+    private void setStyleAttribute() {
+        /*  TODO review code
+         Attr attr = this.element.getAttributeNode("style");
+        if (attr == null) {
+            attr = this.element.getDocumentNode().createAttribute("style");
+            this.element.setAttributeNode(attr);
+        }
+
+        StringBuilder builder = new StringBuilder();
+        style.getProperties().forEach(property -> builder.append(property.getName().toLowerCase()).
+                append(": ").
+                append(property.getValue()).
+                append(";"));
+        this.element.getAttributeNode("style").setNodeValue(builder.toString());*/
     }
 
     @Override

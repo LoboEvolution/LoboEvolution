@@ -126,16 +126,22 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		final String name = getNodeName();
+		int state;
 		switch (name) {
 			case "TFOOT":
-				return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_FOOTER_GROUP);
+				state = RenderState.DISPLAY_TABLE_FOOTER_GROUP;
+				break;
 			case "TBODY":
-				return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_ROW_GROUP);
+				state = RenderState.DISPLAY_TABLE_ROW_GROUP;
+				break;
 			case "THEAD":
-				return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_HEADER_GROUP);
+				state = RenderState.DISPLAY_TABLE_HEADER_GROUP;
+				break;
 			default:
 				return null;
 		}
+
+		return new DisplayRenderState(prevRenderState, this, state);
 	}
 	
 	/** {@inheritDoc} */

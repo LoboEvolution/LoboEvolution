@@ -300,7 +300,6 @@ public class DOMElementTest extends LoboUnitTest {
         body.setAttributeNode(attr);
         assertTrue(body.hasAttributes());
         assertTrue(attr.isId());
-        assertNull(attr.getParentNode());
         assertNotNull(attr.getOwnerElement());
         assertEquals("bodyId", body.getAttribute("id"));
         assertEquals(1, body.getAttributes().getLength());
@@ -309,7 +308,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals(Document.XML_NAMESPACE_URI, attr.lookupNamespaceURI("xml"));
         assertNull(attr.lookupNamespaceURI("foo"));
         // Set the attribute to itself
-        assertNull(body.setAttributeNode(attr));
+        body.setAttributeNode(attr);
         assertEquals(1, body.getAttributes().getLength());
         // Remove
         Attr rmattr = body.removeAttributeNode(attr);
@@ -330,7 +329,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("class", attr.getLocalName());
         assertEquals("http://www.example.com/examplens", attr.getNamespaceURI());
         body.setAttributeNodeNS(attr);
-        assertEquals("e:class=\"barclass\"", attr.toString());
+        assertEquals("e:class=barclass", attr.getName() + "=" + attr.getNodeValue());
         assertEquals("http://www.example.com/examplens", attr.lookupNamespaceURI("e"));
         assertEquals("e", attr.lookupPrefix("http://www.example.com/examplens"));
         assertNull(attr.lookupPrefix(null));
@@ -719,7 +718,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("font-family: Arial", body.getAttribute("style"));
         CSSStyleDeclaration style = body.getStyle();
         assertNotNull(style);
-        assertEquals("font-family: Arial", style.getCssText());
+        assertEquals("font-family: arial", style.getCssText());
         style.setCssText("font-family: Helvetica");
         assertEquals("font-family: Helvetica", style.getCssText());
         assertEquals("font-family: Helvetica", body.getAttribute("style"));

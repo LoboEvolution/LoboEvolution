@@ -22,10 +22,8 @@ package org.loboevolution.html.dom;
 
 
 /**
- * Provides special properties and methods (beyond the regular HTMLElement object interface they also have available to them by inheritance) for manipulating the layout and presentation of &lt;optgroup&gt; elements.
- *
- *
- *
+ * Provides special properties and methods (beyond the regular HTMLElement object interface they also
+ * have available to them by inheritance) for manipulating the layout and presentation of &lt;optgroup&gt; elements.
  */
 public interface HTMLOptGroupElement extends HTMLElement {
 
