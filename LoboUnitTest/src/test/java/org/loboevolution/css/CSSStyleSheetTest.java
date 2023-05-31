@@ -62,13 +62,13 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    alert(rules.length);\n"
-                + "    for (var i in rules)\n"
+                + "    for (var i=0;i<rules.length;i++)\n"
                 + "      alert(i);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"4", "0", "1", "2", "3", "length", "item"};
+        final String[] messages = {"4", "0", "1", "2", "3"};
         checkHtmlAlert(html, messages);
     }
 

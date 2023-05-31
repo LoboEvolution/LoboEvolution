@@ -24,17 +24,13 @@ import org.htmlunit.cssparser.dom.Property;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.setter.*;
 import org.mozilla.javascript.annotations.JSFunction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
@@ -208,8 +204,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             } else {
                 style.setProperty(propertyName, value, priority);
             }
-
-            setStyleAttribute();
         }
     }
 
@@ -275,7 +269,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public String removeProperty(String property) {
         String prop = style.removeProperty(property);
-        setStyleAttribute();
         return prop;
     }
 
@@ -1121,19 +1114,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public String getzIndex() {
-        int val = -1;
         String zIndex = this.getPropertyValue(Z_INDEX);
-
-        if (Strings.isNotBlank(zIndex)) {
-            if (zIndex.contains(".")) {
-                int i = Integer.parseInt(zIndex.split("\\.")[1]);
-                if (i == 0) {
-                    val = HtmlValues.getPixelSize(zIndex, null, null, -1);
-                }
-            } else {
-                val = HtmlValues.getPixelSize(zIndex, null, null, -1);
-            }
-        }
+        int val = HtmlValues.getPixelSize(zIndex, null, null, -1);
         return val == -1 ? "" : String.valueOf(val);
     }
 
@@ -1661,14 +1643,17 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setOrphans(String orphans) {
-       this.setProperty(ORPHANS, orphans);
+        if (Strings.isNotBlank(orphans) && Integer.parseInt(orphans) > 0) {
+            this.setProperty(ORPHANS, orphans);
+            this.element.informInvalid();
+        }
     }
 
     /** {@inheritDoc} */
     @Override
     public void setOutline(String outline) {
        this.setProperty(OUTLINE, outline);
-        this.element.informInvalid();
+       this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
@@ -2159,22 +2144,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             this.setProperty(Z_INDEX, zIndex);
             this.element.informPositionInvalid();
         }
-    }
-
-    private void setStyleAttribute() {
-        /*  TODO review code
-         Attr attr = this.element.getAttributeNode("style");
-        if (attr == null) {
-            attr = this.element.getDocumentNode().createAttribute("style");
-            this.element.setAttributeNode(attr);
-        }
-
-        StringBuilder builder = new StringBuilder();
-        style.getProperties().forEach(property -> builder.append(property.getName().toLowerCase()).
-                append(": ").
-                append(property.getValue()).
-                append(";"));
-        this.element.getAttributeNode("style").setNodeValue(builder.toString());*/
     }
 
     @Override

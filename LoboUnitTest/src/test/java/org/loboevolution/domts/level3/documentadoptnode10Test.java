@@ -46,7 +46,6 @@ public class documentadoptnode10Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
-
         boolean success = false;
         try {
             doc.adoptNode(docType);

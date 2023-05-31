@@ -29,6 +29,7 @@ import org.loboevolution.html.node.Node;
  */
 public interface HTMLCollection {
 
+
     /**
      * Retrieves a select object or an object from an options collection.
      *
@@ -51,5 +52,16 @@ public interface HTMLCollection {
      * @return a {@link org.loboevolution.html.node.Node} object.
      */
     Node item(Object index);
+
+
+    /**
+     * <p>item.</p>
+     *
+     * @param index a int.
+     * @return a {@link org.loboevolution.html.node.Node} object.
+     */
+    void setItem(Integer index, Node node);
+
+
 
 }

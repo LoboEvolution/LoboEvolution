@@ -20,13 +20,12 @@
 
 package org.loboevolution.html.dom;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.Node;
 
 /**
- * HTMLOptionsCollection is an interface representing a collection of HTML option elements (in document order) and offers methods and properties for traversing the list as well as optionally altering its items. This type is returned solely by the "options" property of select.
- *
- *
- *
+ * HTMLOptionsCollection is an interface representing a collection of HTML option elements (in document order)
+ * and offers methods and properties for traversing the list as well as optionally altering its items. This type is returned solely by the "options" property of select.
  */
 public interface HTMLOptionsCollection extends HTMLCollection {
 
@@ -78,7 +77,7 @@ public interface HTMLOptionsCollection extends HTMLCollection {
      * @param element a {@link java.lang.Object} object.
      * @param before a {@link java.lang.Object} object.
      */
-    void add(Object element, Object before);
+    void add(Object element, Object before) throws DOMException;
 
     /**
      * <p>add.</p>

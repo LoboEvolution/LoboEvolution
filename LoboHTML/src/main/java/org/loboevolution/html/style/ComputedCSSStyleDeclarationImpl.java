@@ -61,12 +61,12 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
     public ComputedCSSStyleDeclarationImpl(HTMLElementImpl element, CSSStyleDeclaration style) {
         this.element = element;
-        this.renderState = element.getRenderState();        
+        this.renderState = element.getRenderState();
         this.style = style;
 
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
         this.window = doc.getDefaultView();
-        
+
         final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
         final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
@@ -81,41 +81,53 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         availWidth = availWidth == -1 ? htmlPanel.getWidth() : availWidth;
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getAlignItems() {
-        return Strings.isBlank(style.getAlignItems()) ? CSSValues.NONE.getValue() : style.getAlignItems();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getAlignItems()) ? CSSValues.NONE.getValue() : style.getAlignItems();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getAlignContent() {
-        return Strings.isBlank(style.getAlignContent()) ? CSSValues.NONE.getValue() : style.getAlignContent();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getAlignContent()) ? CSSValues.NONE.getValue() : style.getAlignContent();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getAzimuth() {
-        return style.getAzimuth();
+        return this.element.getParentNode() == null ? null : style.getAzimuth();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBackground() {
-        return style.getBackground();
+        return this.element.getParentNode() == null ? null : style.getBackground();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBackgroundAttachment() {
-        return style.getBackgroundAttachment();
+        return this.element.getParentNode() == null ? null : style.getBackgroundAttachment();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBackgroundColor() {
         if (Strings.isBlank(style.getBackgroundColor())) {
-            return "rgb(0, 0, 0)";
+            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
         }
 
         final Color c = ColorFactory.getInstance().getColor(style.getBackgroundColor());
@@ -123,332 +135,411 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             final float alpha = (float) (c.getAlpha()) / 255.0f;
 
             if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return "rgb(0, 0, 0)";
+                return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
             }
 
             if (alpha > 0 && alpha < 1) {
-                return "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
+                return this.element.getParentNode() == null ? null : "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
             } else {
-                return "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
+                return this.element.getParentNode() == null ? null : "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
             }
         } else {
-            return "rgb(0, 0, 0)";
+            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
         }
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBackgroundImage() {
-        return style.getBackgroundImage();
+        return this.element.getParentNode() == null ? null : style.getBackgroundImage();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBackgroundPosition() {
-        return style.getBackgroundPosition();
+        return this.element.getParentNode() == null ? null : style.getBackgroundPosition();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBackgroundRepeat() {
-        return style.getBackgroundRepeat();
+        return this.element.getParentNode() == null ? null : style.getBackgroundRepeat();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorder() {
-        return style.getBorder();
+        return this.element.getParentNode() == null ? null : style.getBorder();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderBottom() {
-        return style.getBorderBottom();
+        return this.element.getParentNode() == null ? null : style.getBorderBottom();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderWidth() {
         final String ccsBorderWidth = style.getBorderWidth();
         final int borderWidth = HtmlValues.getPixelSize(ccsBorderWidth, renderState, window.getWindow(), -1, 0);
-        if(borderWidth == -1) {
-            if(element.getParentNode() == null) {
-                return "";
-            } else{
-                return "0px";
+        if (borderWidth == -1) {
+            if (element.getParentNode() == null) {
+                return this.element.getParentNode() == null ? null : "";
+            } else {
+                return this.element.getParentNode() == null ? null : "0px";
             }
         }
-        return borderWidth + "px";
+        return this.element.getParentNode() == null ? null : borderWidth + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderBottomColor() {
-        return style.getBorderBottomColor();
+        return this.element.getParentNode() == null ? null : style.getBorderBottomColor();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderBottomStyle() {
-        return style.getBorderBottomStyle();
+        return this.element.getParentNode() == null ? null : style.getBorderBottomStyle();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderBottomWidth() {
         final String cssBorderBottomWidth = style.getBorderBottomWidth();
         final int borderBottomWidth = HtmlValues.getPixelSize(cssBorderBottomWidth, renderState, window.getWindow(), -1, availHeight);
-        if(borderBottomWidth == -1) {
-            if(element.getParentNode() == null) {
-                return "";
-            } else{
-                return "0px";
+        if (borderBottomWidth == -1) {
+            if (element.getParentNode() == null) {
+                return this.element.getParentNode() == null ? null : "";
+            } else {
+                return this.element.getParentNode() == null ? null : "0px";
             }
         }
-        return borderBottomWidth + "px";
+        return this.element.getParentNode() == null ? null : borderBottomWidth + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderCollapse() {
-        return style.getBorderCollapse();
+        return this.element.getParentNode() == null ? null : style.getBorderCollapse();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderLeftColor() {
-        return style.getBorderLeftColor();
+        return this.element.getParentNode() == null ? null : style.getBorderLeftColor();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderLeftStyle() {
-        return style.getBorderLeftStyle();
+        return this.element.getParentNode() == null ? null : style.getBorderLeftStyle();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderLeftWidth() {
         final String cssBorderBottomLeft = style.getBorderLeftWidth();
         final int borderBottomLeft = HtmlValues.getPixelSize(cssBorderBottomLeft, renderState, window.getWindow(), -1, availWidth);
-        if(borderBottomLeft == -1) {
-            if(element.getParentNode() == null) {
-                return "";
-            } else{
-                return "0px";
+        if (borderBottomLeft == -1) {
+            if (element.getParentNode() == null) {
+                return this.element.getParentNode() == null ? null : "";
+            } else {
+                return this.element.getParentNode() == null ? null : "0px";
             }
         }
-        return borderBottomLeft + "px";
+        return this.element.getParentNode() == null ? null : borderBottomLeft + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderRight() {
-        return style.getBorderRight();
+        return this.element.getParentNode() == null ? null : style.getBorderRight();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderRightColor() {
-        return Strings.isBlank(style.getBorderRightColor()) ? "rgb(0, 0, 0)" : style.getBorderRightColor();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderRightColor()) ? "rgb(0, 0, 0)" : style.getBorderRightColor();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderRightStyle() {
-        return Strings.isBlank(style.getBorderRightStyle()) ? CSSValues.NONE.getValue() : style.getBorderRightStyle();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderRightStyle()) ? CSSValues.NONE.getValue() : style.getBorderRightStyle();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderRightWidth() {
         final String getBorderRightWidth = style.getBorderRightWidth();
         final int borderRightWidth = HtmlValues.getPixelSize(getBorderRightWidth, renderState, window.getWindow(), -1, availWidth);
-        if(borderRightWidth == -1) {
-            if(element.getParentNode() == null) {
-                return "";
-            } else{
-                return "0px";
+        if (borderRightWidth == -1) {
+            if (element.getParentNode() == null) {
+                return this.element.getParentNode() == null ? null : "";
+            } else {
+                return this.element.getParentNode() == null ? null : "0px";
             }
         }
-        return borderRightWidth + "px";
+        return this.element.getParentNode() == null ? null : borderRightWidth + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderSpacing() {
-        return style.getBorderSpacing();
+        return this.element.getParentNode() == null ? null : style.getBorderSpacing();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderColor() {
-        return Strings.isBlank(style.getBorderColor()) ? "rgb(0, 0, 0)" : style.getBorderColor();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderColor()) ? "rgb(0, 0, 0)" : style.getBorderColor();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderLeft() {
-        return style.getBorderSpacing();
+        return this.element.getParentNode() == null ? null : style.getBorderSpacing();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderTopColor() {
-        return Strings.isBlank(style.getBorderTopColor()) ? "rgb(0, 0, 0)" : style.getBorderTopColor();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderTopColor()) ? "rgb(0, 0, 0)" : style.getBorderTopColor();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderStyle() {
-        return Strings.isBlank(style.getBorderStyle()) ? CSSValues.NONE.getValue() : style.getBorderStyle();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderStyle()) ? CSSValues.NONE.getValue() : style.getBorderStyle();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderTop() {
-        return style.getBorderTop();
+        return this.element.getParentNode() == null ? null : style.getBorderTop();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderTopStyle() {
-        return Strings.isBlank(style.getBorderTopStyle()) ? CSSValues.NONE.getValue() : style.getBorderTopStyle();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderTopStyle()) ? CSSValues.NONE.getValue() : style.getBorderTopStyle();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBorderTopWidth() {
         final String cssBorderToptWidth = style.getBorderTopWidth();
         final int borderTopWidth = HtmlValues.getPixelSize(cssBorderToptWidth, renderState, window.getWindow(), -1, availHeight);
-        if(borderTopWidth == -1) {
-            if(element.getParentNode() == null) {
-                return "";
-            } else{
-                return "0px";
+        if (borderTopWidth == -1) {
+            if (element.getParentNode() == null) {
+                return this.element.getParentNode() == null ? null : "";
+            } else {
+                return this.element.getParentNode() == null ? null : "0px";
             }
         }
-        return borderTopWidth + "px";
+        return this.element.getParentNode() == null ? null : borderTopWidth + "px";
     }
 
-     /** {@inheritDoc} */
-     @Override
-     public String getBottom() {
-         if (Strings.isCssBlank(style.getBottom())) {
-             if (element.getParentNode() != null) {
-                 return CSSValues.AUTO.getValue();
-             } else {
-                 return "";
-             }
-         } else {
-             return HtmlValues.getPixelSize(style.getBottom(), renderState, window, 0, availHeight) + "px";
-         }
-     }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBottom() {
+        if (Strings.isCssBlank(style.getBottom())) {
+            if (element.getParentNode() != null) {
+                return this.element.getParentNode() == null ? null : CSSValues.AUTO.getValue();
+            } else {
+                return this.element.getParentNode() == null ? null : "";
+            }
+        } else {
+            return this.element.getParentNode() == null ? null : HtmlValues.getPixelSize(style.getBottom(), renderState, window, 0, availHeight) + "px";
+        }
+    }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getColor() {
         final String col = style.getColor();
 
         if (Strings.isBlank(col)) {
-            return "rgb(0, 0, 0)";
+            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
         }
         final Color c = ColorFactory.getInstance().getColor(col);
         if (c != null) {
             if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return "rgb(0, 0, 0)";
+                return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
             }
             final float alpha = (float) (c.getAlpha()) / 255.0f;
             if (alpha > 0 && alpha < 1) {
-                return "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
+                return this.element.getParentNode() == null ? null : "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
             } else {
-                return "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
+                return this.element.getParentNode() == null ? null : "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
             }
         } else {
-            return "rgb(0, 0, 0)";
+            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
         }
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getContent() {
-        return style.getContent();
+        return this.element.getParentNode() == null ? null : style.getContent();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCounterIncrement() {
-        return style.getCounterIncrement();
+        return this.element.getParentNode() == null ? null : style.getCounterIncrement();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCounterReset() {
-        return style.getCounterReset();
+        return this.element.getParentNode() == null ? null : style.getCounterReset();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getClear() {
-        return Strings.isBlank(style.getClear()) ? CSSValues.NONE.getValue() : style.getClear();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getClear()) ? CSSValues.NONE.getValue() : style.getClear();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getClip() {
-        return style.getClip();
+        return this.element.getParentNode() == null ? null : style.getClip();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCssFloat() {
         final String ccFloat = style.getCssFloat();
-        return Strings.isCssBlank(ccFloat) ? CSSValues.NONE.getValue() :
+        return this.element.getParentNode() == null ? null : Strings.isCssBlank(ccFloat) ? CSSValues.NONE.getValue() :
                 HtmlValues.getPixelSize(ccFloat, renderState, window, 0, availWidth) + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCue() {
-        return style.getCue();
+        return this.element.getParentNode() == null ? null : style.getCue();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCueAfter() {
-        return style.getCueAfter();
+        return this.element.getParentNode() == null ? null : style.getCueAfter();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCueBefore() {
-        return style.getCueBefore();
+        return this.element.getParentNode() == null ? null : style.getCueBefore();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCursor() {
         final RenderState rs = element.getRenderState();
-        return rs.getCursor().get().getType() == Cursor.DEFAULT_CURSOR ? "auto" : style.getCursor();
+        return this.element.getParentNode() == null ? null : rs.getCursor().get().getType() == Cursor.DEFAULT_CURSOR ? "auto" : style.getCursor();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDirection() {
-        return style.getDirection();
+        return this.element.getParentNode() == null ? null : style.getDirection();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDisplay() {
+
         final String cssDisplay = style.getDisplay();
         if (Strings.isNotBlank(cssDisplay) && !"null".equals(cssDisplay)) {
-            return cssDisplay;
+            return this.element.getParentNode() == null ? null : cssDisplay;
         } else {
             final RenderState rs = element.getRenderState();
             CSSValues display;
             if (rs == null) {
-                return style.getDisplay() == null ? "" : style.getDisplay();
+                return this.element.getParentNode() == null ? null : style.getDisplay() == null ? "" : style.getDisplay();
             } else {
                 switch (rs.getDefaultDisplay()) {
                     case RenderState.DISPLAY_BLOCK:
@@ -501,23 +592,30 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
                         break;
                 }
             }
-            return display.getValue();
+            return this.element.getParentNode() == null ? null : display.getValue();
         }
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    /** {@inheritDoc} */
     public String getElevation() {
-        return style.getElevation();
+        return this.element.getParentNode() == null ? null : style.getElevation();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    /** {@inheritDoc} */
     public String getEmptyCells() {
-        return style.getEmptyCells();
+        return this.element.getParentNode() == null ? null : style.getEmptyCells();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFont() {
         StringBuilder font = new StringBuilder();
@@ -540,11 +638,13 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             font.append(" " + fontFamily);
         }
 
-        return font.toString().trim();
+        return this.element.getParentNode() == null ? null : font.toString().trim();
     }
 
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFontSize() {
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
@@ -557,1509 +657,1978 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         } else {
             fontSize = Float.valueOf(FontValues.getFontSize(style.getFontSize(), window, null)).intValue();
         }
-        return fontSize + "px";
+        return this.element.getParentNode() == null ? null : fontSize + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFontSizeAdjust() {
-        return style.getFontSizeAdjust();
+        return this.element.getParentNode() == null ? null : style.getFontSizeAdjust();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFontStretch() {
-        return style.getFontStretch();
+        return this.element.getParentNode() == null ? null : style.getFontStretch();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFontStyle() {
         final String fontStyle = style.getFontStyle();
         if (Strings.isCssNotBlank(fontStyle)) {
-            return !fontStyle.equals(CSSValues.NORMAL.getValue()) ? CSSValues.ITALIC.getValue() : fontStyle;
+            return this.element.getParentNode() == null ? null : !fontStyle.equals(CSSValues.NORMAL.getValue()) ? CSSValues.ITALIC.getValue() : fontStyle;
         } else {
-            return CSSValues.NORMAL.getValue();
+            return this.element.getParentNode() == null ? null : CSSValues.NORMAL.getValue();
         }
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFontVariant() {
-        return FontValues.getFontVariant(style.getFontVariant());
+        return this.element.getParentNode() == null ? null : FontValues.getFontVariant(style.getFontVariant());
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFontWeight() {
         final String font = FontValues.getFontWeight(style.getFontWeight(), null, false);
-        return Strings.isBlank(font) ?CSSValues.BOLD400.getValue()  : font;
+        return this.element.getParentNode() == null ? null : Strings.isBlank(font) ? CSSValues.BOLD400.getValue() : font;
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFontFamily() {
         final CSSStyleDeclaration style = element.getStyle();
-        return FontValues.getFontFamily(style.getFontFamily(), null);
+        return this.element.getParentNode() == null ? null : FontValues.getFontFamily(style.getFontFamily(), null);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFlexDirection() {
-        return Strings.isBlank(style.getFlexDirection()) ? CSSValues.NONE.getValue() : style.getFlexDirection();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getFlexDirection()) ? CSSValues.NONE.getValue() : style.getFlexDirection();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFlexWrap() {
-        return Strings.isBlank(style.getFlexWrap()) ? CSSValues.NONE.getValue() : style.getFlexWrap();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getFlexWrap()) ? CSSValues.NONE.getValue() : style.getFlexWrap();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFlexFlow() {
-        return Strings.isBlank(style.getFlexFlow()) ? CSSValues.NONE.getValue() : style.getFlexFlow();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getFlexFlow()) ? CSSValues.NONE.getValue() : style.getFlexFlow();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getLineHeight() {
         final CSSStyleDeclaration style = element.getStyle();
         final String lineHeight = style.getLineHeight();
-        return Strings.isCssBlank(lineHeight) ? CSSValues.NORMAL.getValue() : lineHeight;
+        return this.element.getParentNode() == null ? null : Strings.isCssBlank(lineHeight) ? CSSValues.NORMAL.getValue() : lineHeight;
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getHeight() {
         if (element.getParentNode() == null) {
-            return "";
+            return this.element.getParentNode() == null ? null : "";
         }
 
         if (CSSValues.NONE.isEqual(style.getDisplay())) {
-            return CSSValues.AUTO.getValue();
+            return this.element.getParentNode() == null ? null : CSSValues.AUTO.getValue();
         }
 
-        return element.calculateHeight(false, false) + "px";
+        return this.element.getParentNode() == null ? null : element.calculateHeight(false, false) + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getJustifyContent() {
-        return Strings.isBlank(style.getJustifyContent()) ? CSSValues.NONE.getValue() : style.getJustifyContent();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getJustifyContent()) ? CSSValues.NONE.getValue() : style.getJustifyContent();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setClipPath(String clip) {
         style.setClipPath(clip);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setClipRule(String clip) {
         style.setClipRule(clip);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFloat(String flt) {
         style.setFloat(flt);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFill(String value) {
         style.setFill(value);
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFillOpacity(String value) {
         style.setFillOpacity(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOpacity(String value) {
         style.setOpacity(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTransform(String value) {
         style.setTransform(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStrokeWidth(String value) {
         style.setStrokeWidth(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStrokeOpacity(String value) {
         style.setStrokeOpacity(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStrokeMiterLimit(String value) {
         style.setStrokeMiterLimit(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStrokeLineJoin(String value) {
         style.setStrokeLineJoin(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStrokeDashArray(String value) {
         style.setStrokeDashArray(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStroke(String value) {
         style.setStroke(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStrokeLineCap(String value) {
         style.setStrokeLineCap(value);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getLeft() {
         if (Strings.isCssBlank(style.getLeft())) {
             if (element.getParentNode() != null && !(element.getParentNode() instanceof HTMLBodyElement)) {
-                return "0px";
+                return this.element.getParentNode() == null ? null : "0px";
             } else if (element.getParentNode() != null && element.getParentNode() instanceof HTMLBodyElement) {
-                return CSSValues.AUTO.getValue();
+                return this.element.getParentNode() == null ? null : CSSValues.AUTO.getValue();
             } else {
-                return "";
+                return this.element.getParentNode() == null ? null : "";
             }
         } else {
-            return HtmlValues.getPixelSize(style.getLeft(), renderState, window, 0, availHeight) + "px";
+            return this.element.getParentNode() == null ? null : HtmlValues.getPixelSize(style.getLeft(), renderState, window, 0, availHeight) + "px";
         }
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getLetterSpacing() {
-        return Strings.isBlank(style.getLetterSpacing()) ? CSSValues.NORMAL.getValue() : style.getLetterSpacing();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getLetterSpacing()) ? CSSValues.NORMAL.getValue() : style.getLetterSpacing();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMargin() {
-        return Strings.isBlank(style.getMargin()) ? "" : style.getMargin();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getMargin()) ? "" : style.getMargin();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMarginBottom() {
         final String cssMarginBottom = style.getMarginBottom();
-        if (element.getParentNode() == null) return "";
-        if (Strings.isCssBlank(cssMarginBottom)) return CSSValues.NONE.getValue();
+        if (element.getParentNode() == null) return this.element.getParentNode() == null ? null : "";
+        if (Strings.isCssBlank(cssMarginBottom))
+            return this.element.getParentNode() == null ? null : CSSValues.NONE.getValue();
         final int marginBottom = HtmlValues.getPixelSize(cssMarginBottom, renderState, window.getWindow(), -1, availHeight);
-        return marginBottom + "px";
+        return this.element.getParentNode() == null ? null : marginBottom + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMarginLeft() {
         final String cssMarginLeft = style.getMarginLeft();
-        if (element.getParentNode() == null) return "";
-        if (Strings.isCssBlank(cssMarginLeft)) return CSSValues.NONE.getValue();
+        if (element.getParentNode() == null) return this.element.getParentNode() == null ? null : "";
+        if (Strings.isCssBlank(cssMarginLeft))
+            return this.element.getParentNode() == null ? null : CSSValues.NONE.getValue();
         final int marginLeft = HtmlValues.getPixelSize(cssMarginLeft, renderState, window.getWindow(), -1, availWidth);
-        return marginLeft + "px";
+        return this.element.getParentNode() == null ? null : marginLeft + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMarginRight() {
         final String cssMarginRight = style.getMarginRight();
-        if (element.getParentNode() == null) return "";
-        if (Strings.isCssBlank(cssMarginRight)) return "0px";
+        if (element.getParentNode() == null) return this.element.getParentNode() == null ? null : "";
+        if (Strings.isCssBlank(cssMarginRight)) return this.element.getParentNode() == null ? null : "0px";
         final int marginRight = HtmlValues.getPixelSize(cssMarginRight, renderState, window.getWindow(), -1, availWidth);
-        return marginRight + "px";
+        return this.element.getParentNode() == null ? null : marginRight + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMarginTop() {
         final String cssMarginTop = style.getMarginTop();
-        if (element.getParentNode() == null) return "";
-        if (Strings.isCssBlank(cssMarginTop)) return CSSValues.NONE.getValue();
+        if (element.getParentNode() == null) return this.element.getParentNode() == null ? null : "";
+        if (Strings.isCssBlank(cssMarginTop))
+            return this.element.getParentNode() == null ? null : CSSValues.NONE.getValue();
         final int marginTop = HtmlValues.getPixelSize(cssMarginTop, renderState, window.getWindow(), -1, availHeight);
-        return marginTop + "px";
+        return this.element.getParentNode() == null ? null : marginTop + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMarkerOffset() {
-        return style.getMarkerOffset();
+        return this.element.getParentNode() == null ? null : style.getMarkerOffset();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMarks() {
-        return style.getMarks();
+        return this.element.getParentNode() == null ? null : style.getMarks();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMaxHeight() {
-        return Strings.isBlank(style.getMaxHeight()) ? CSSValues.NONE.getValue() : style.getMaxHeight();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getMaxHeight()) ? CSSValues.NONE.getValue() : style.getMaxHeight();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMaxWidth() {
-        return Strings.isBlank(style.getMaxWidth()) ? CSSValues.NONE.getValue() : style.getMaxWidth();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getMaxWidth()) ? CSSValues.NONE.getValue() : style.getMaxWidth();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMinHeight() {
-        return Strings.isBlank(style.getMinHeight()) ? CSSValues.NONE.getValue() : style.getMinHeight();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getMinHeight()) ? CSSValues.NONE.getValue() : style.getMinHeight();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMinWidth() {
-        return Strings.isBlank(style.getMinWidth()) ? CSSValues.NONE.getValue() : style.getMinWidth();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getMinWidth()) ? CSSValues.NONE.getValue() : style.getMinWidth();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOpacity() {
-        return Strings.isBlank(style.getOpacity()) ? "1" : style.getOpacity();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getOpacity()) ? "1" : style.getOpacity();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOutlineWidth() {
-        return Strings.isBlank(style.getOutlineWidth()) ? CSSValues.NONE.getValue() : style.getOutlineWidth();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getOutlineWidth()) ? CSSValues.NONE.getValue() : style.getOutlineWidth();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPadding() {
-        return Strings.isBlank(style.getPadding()) ? CSSValues.NONE.getValue() : style.getPadding();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getPadding()) ? CSSValues.NONE.getValue() : style.getPadding();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPaddingBottom() {
         final String cssPaddingBottom = style.getPaddingBottom();
         final int paddingBottom = HtmlValues.getPixelSize(cssPaddingBottom, renderState, window.getWindow(), -1, availHeight);
-        return paddingBottom + "px";
+        return this.element.getParentNode() == null ? null : paddingBottom + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPaddingLeft() {
         final String cssPaddingLeft = style.getPaddingLeft();
         final int paddingLeft = HtmlValues.getPixelSize(cssPaddingLeft, renderState, window.getWindow(), -1, availWidth);
-        return paddingLeft + "px";
+        return this.element.getParentNode() == null ? null : paddingLeft + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPaddingRight() {
         final String cssPaddingRight = style.getPaddingRight();
         final int paddingRight = HtmlValues.getPixelSize(cssPaddingRight, renderState, window.getWindow(), -1, availWidth);
-        return paddingRight + "px";
+        return this.element.getParentNode() == null ? null : paddingRight + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPaddingTop() {
         final String cssPaddingTop = style.getPaddingTop();
         final int paddingTop = HtmlValues.getPixelSize(cssPaddingTop, renderState, window.getWindow(), -1, availHeight);
-        return paddingTop + "px";
+        return this.element.getParentNode() == null ? null : paddingTop + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPage() {
-        return style.getPage();
+        return this.element.getParentNode() == null ? null : style.getPage();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPageBreakAfter() {
-        return style.getPageBreakAfter();
+        return this.element.getParentNode() == null ? null : style.getPageBreakAfter();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPageBreakBefore() {
-        return style.getPageBreakBefore();
+        return this.element.getParentNode() == null ? null : style.getPageBreakBefore();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPageBreakInside() {
-        return style.getPageBreakInside();
+        return this.element.getParentNode() == null ? null : style.getPageBreakInside();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPause() {
-        return style.getPause();
+        return this.element.getParentNode() == null ? null : style.getPause();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPauseAfter() {
-        return style.getPauseAfter();
+        return this.element.getParentNode() == null ? null : style.getPauseAfter();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPauseBefore() {
-        return style.getPauseBefore();
+        return this.element.getParentNode() == null ? null : style.getPauseBefore();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPitch() {
-        return style.getPitch();
+        return this.element.getParentNode() == null ? null : style.getPitch();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPitchRange() {
-        return style.getPitchRange();
+        return this.element.getParentNode() == null ? null : style.getPitchRange();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPlayDuring() {
-        return style.getPlayDuring();
+        return this.element.getParentNode() == null ? null : style.getPlayDuring();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getRight() {
-        return Strings.isBlank(style.getRight()) ? CSSValues.AUTO.getValue() : style.getRight();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getRight()) ? CSSValues.AUTO.getValue() : style.getRight();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSize() {
-        return style.getSize();
+        return this.element.getParentNode() == null ? null : style.getSize();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSpeak() {
-        return style.getSpeak();
+        return this.element.getParentNode() == null ? null : style.getSpeak();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSpeakHeader() {
-        return style.getSpeakHeader();
+        return this.element.getParentNode() == null ? null : style.getSpeakHeader();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSpeakNumeral() {
-        return style.getSpeakNumeral();
+        return this.element.getParentNode() == null ? null : style.getSpeakNumeral();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSpeakPunctuation() {
-        return style.getSpeakPunctuation();
+        return this.element.getParentNode() == null ? null : style.getSpeakPunctuation();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSpeechRate() {
-        return style.getSpeechRate();
+        return this.element.getParentNode() == null ? null : style.getSpeechRate();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStress() {
-        return style.getStress();
+        return this.element.getParentNode() == null ? null : style.getStress();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTableLayout() {
-        return style.getTableLayout();
+        return this.element.getParentNode() == null ? null : style.getTableLayout();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTextAlign() {
-        return Strings.isBlank(style.getTextAlign()) ? CSSValues.NONE.getValue() : style.getTextAlign();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getTextAlign()) ? CSSValues.NONE.getValue() : style.getTextAlign();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTextIndent() {
-        return Strings.isBlank(style.getTextIndent()) ? CSSValues.NONE.getValue() : style.getTextIndent();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getTextIndent()) ? CSSValues.NONE.getValue() : style.getTextIndent();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTextShadow() {
-        return style.getTextShadow();
+        return this.element.getParentNode() == null ? null : style.getTextShadow();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTextTransform() {
-        return Strings.isBlank(style.getTextTransform()) ? CSSValues.NONE.getValue() : style.getTextTransform();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getTextTransform()) ? CSSValues.NONE.getValue() : style.getTextTransform();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTop() {
         if (Strings.isCssBlank(style.getTop())) {
             if (element.getParentNode() != null && !(element.getParentNode() instanceof HTMLBodyElement)) {
-                return "0px";
+                return this.element.getParentNode() == null ? null : "0px";
             } else if (element.getParentNode() != null && element.getParentNode() instanceof HTMLBodyElement) {
-                return CSSValues.AUTO.getValue();
+                return this.element.getParentNode() == null ? null : CSSValues.AUTO.getValue();
             } else {
-                return "";
+                return this.element.getParentNode() == null ? null : "";
             }
         } else {
-            return HtmlValues.getPixelSize(style.getTop(), renderState, window, 0, availHeight) + "px";
+            return this.element.getParentNode() == null ? null : HtmlValues.getPixelSize(style.getTop(), renderState, window, 0, availHeight) + "px";
         }
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getUnicodeBidi() {
-        return style.getUnicodeBidi();
+        return this.element.getParentNode() == null ? null : style.getUnicodeBidi();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTransform() {
-        return Strings.isBlank(style.getTransform()) ? CSSValues.NONE.getValue() : style.getTransform();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getTransform()) ? CSSValues.NONE.getValue() : style.getTransform();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVerticalAlign() {
-        return Strings.isBlank(style.getVerticalAlign()) ? CSSValues.BASELINE.getValue() : style.getVerticalAlign();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getVerticalAlign()) ? CSSValues.BASELINE.getValue() : style.getVerticalAlign();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getWidows() {
-        return style.getWidows();
+        return this.element.getParentNode() == null ? null : style.getWidows();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOrphans() {
-        return style.getOrphans();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getOrphans()) ? "2" : style.getOrphans();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOutline() {
-        return style.getOutline();
+        return this.element.getParentNode() == null ? null : style.getOutline();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOutlineColor() {
-        return style.getOutlineColor();
+        return this.element.getParentNode() == null ? null : style.getOutlineColor();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOutlineStyle() {
-        return style.getOutlineStyle();
+        return this.element.getParentNode() == null ? null : style.getOutlineStyle();
     }
 
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPosition() {
         final String position = style.getPosition();
         CSSValues pos = CSSValues.get(position);
-        return pos != null && pos != CSSValues.DEFAULT ? pos.getValue() : "static";
+        return this.element.getParentNode() == null ? null : pos != null && pos != CSSValues.DEFAULT ? pos.getValue() : "static";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getQuotes() {
-        return style.getQuotes();
+        return this.element.getParentNode() == null ? null : style.getQuotes();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getRichness() {
-        return style.getRichness();
+        return this.element.getParentNode() == null ? null : style.getRichness();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getWidth() {
         if (element.getParentNode() == null) {
-            return "";
+            return this.element.getParentNode() == null ? null : "";
         }
 
         if (CSSValues.NONE.isEqual(style.getDisplay())) {
-            return CSSValues.AUTO.getValue();
+            return this.element.getParentNode() == null ? null : CSSValues.AUTO.getValue();
         }
 
-        return element.calculateWidth(false, false) + "px";
+        return this.element.getParentNode() == null ? null : element.calculateWidth(false, false) + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getWordSpacing() {
-        return style.getWordSpacing();
+        return this.element.getParentNode() == null ? null : style.getWordSpacing();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setAzimuth(String azimuth) {
         style.setAzimuth(azimuth);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBackground(String background) {
         style.setBackground(background);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBackgroundAttachment(String backgroundAttachment) {
         style.setBackgroundAttachment(backgroundAttachment);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBackgroundColor(String backgroundColor) {
         style.setBackgroundColor(backgroundColor);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBackgroundImage(String backgroundImage) {
         style.setBackgroundImage(backgroundImage);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBackgroundPosition(String backgroundPosition) {
         style.setBackgroundPosition(backgroundPosition);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBackgroundRepeat(String backgroundRepeat) {
         style.setBackgroundRepeat(backgroundRepeat);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorder(String border) {
         style.setBorder(border);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderBottom(String borderBottom) {
         style.setBorderBottom(borderBottom);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderBottomColor(String borderBottomColor) {
         style.setBorderBottomColor(borderBottomColor);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderBottomStyle(String borderBottomStyle) {
         style.setBorderBottomStyle(borderBottomStyle);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderBottomWidth(String borderBottomWidth) {
         style.setBorderBottomWidth(borderBottomWidth);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderCollapse(String borderCollapse) {
         style.setBorderCollapse(borderCollapse);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderColor(String borderColor) {
         style.setBorderColor(borderColor);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderLeft(String borderLeft) {
         style.setBorderLeft(borderLeft);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderLeftColor(String borderLeftColor) {
         style.setBorderLeftColor(borderLeftColor);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderLeftStyle(String borderLeftStyle) {
         style.setBorderLeftStyle(borderLeftStyle);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderLeftWidth(String borderLeftWidth) {
         style.setBorderLeftWidth(borderLeftWidth);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderRight(String borderRight) {
         style.setBorderRight(borderRight);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderRightColor(String borderRightColor) {
         style.setBorderRightColor(borderRightColor);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderRightStyle(String borderRightStyle) {
         style.setBorderRightStyle(borderRightStyle);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderRightWidth(String borderRightWidth) {
         style.setBorderRightWidth(borderRightWidth);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderSpacing(String borderSpacing) {
         style.setBorderSpacing(borderSpacing);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderStyle(String borderStyle) {
         style.setBorderStyle(borderStyle);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderTop(String borderTop) {
         style.setBorderTop(borderTop);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderTopColor(String borderTopColor) {
         style.setBorderTopColor(borderTopColor);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderTopStyle(String borderTopStyle) {
         style.setBorderTopStyle(borderTopStyle);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderTopWidth(String borderTopWidth) {
         style.setBorderTopWidth(borderTopWidth);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBorderWidth(String borderWidth) {
         style.setBorderWidth(borderWidth);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBottom(String bottom) {
         style.setBottom(bottom);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCaptionSide(String captionSide) {
         style.setCaptionSide(captionSide);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setClear(String clear) {
         style.setClear(clear);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setClip(String clip) {
         style.setClip(clip);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setColor(String color) {
         style.setColor(color);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setContent(String content) {
         style.setContent(content);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCounterIncrement(String counterIncrement) {
         style.setCounterIncrement(counterIncrement);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCounterReset(String counterReset) {
         style.setCounterReset(counterReset);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssFloat(String cssFloat) {
         style.setCssFloat(cssFloat);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCue(String cue) {
         style.setCue(cue);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCueAfter(String cueAfter) {
         style.setCueAfter(cueAfter);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCueBefore(String cueBefore) {
         style.setCueBefore(cueBefore);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCursor(String cursor) {
         style.setCursor(cursor);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setDirection(String direction) {
         style.setDirection(direction);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setDisplay(String display) {
         style.setDisplay(display);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setElevation(String elevation) {
         style.setElevation(elevation);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setEmptyCells(String emptyCells) {
         style.setEmptyCells(emptyCells);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFont(String font) {
         style.setFont(font);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontFamily(String fontFamily) {
         style.setFontFamily(fontFamily);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontSize(String fontSize) {
         style.setFontSize(fontSize);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontSizeAdjust(String fontSizeAdjust) {
         style.setFontSizeAdjust(fontSizeAdjust);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontStretch(String fontStretch) {
         style.setFontStretch(fontStretch);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontStyle(String fontStyle) {
         style.setFontStyle(fontStyle);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontVariant(String fontVariant) {
         style.setFontVariant(fontVariant);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFontWeight(String fontWeight) {
         style.setFontWeight(fontWeight);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getWhiteSpace() {
-        return Strings.isBlank(style.getWhiteSpace()) ? CSSValues.NONE.getValue() : style.getWhiteSpace();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getWhiteSpace()) ? CSSValues.NONE.getValue() : style.getWhiteSpace();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getzIndex() {
-        return Strings.isBlank(style.getzIndex()) ? CSSValues.AUTO.getValue() : style.getzIndex() + "px";
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getzIndex()) ? CSSValues.AUTO.getValue() : style.getzIndex() + "px";
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOverflow() {
-        return style.getOverflow();
+        return this.element.getParentNode() == null ? null : style.getOverflow();
     }
 
-     /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBoxSizing() {
         if (style.getBoxSizing() == null) {
             if (element.getParentNode() == null) {
-                return "";
+                return this.element.getParentNode() == null ? null : "";
             } else {
-                return CSSValues.CONTENT_BOX.getValue();
+                return this.element.getParentNode() == null ? null : CSSValues.CONTENT_BOX.getValue();
             }
         }
-        return style.getBoxSizing();
+        return this.element.getParentNode() == null ? null : style.getBoxSizing();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFill() {
 
         if (Strings.isBlank(style.getFill())) {
-            return "rgb(0, 0, 0)";
+            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
         }
 
         if (style.getFill().toLowerCase().contains("url")) {
-            return style.getFill();
+            return this.element.getParentNode() == null ? null : style.getFill();
         }
 
         final Color c = ColorFactory.getInstance().getColor(style.getFill());
         if (c != null) {
             if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return "rgb(0, 0, 0)";
+                return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
             }
             final float alpha = (float) (c.getAlpha()) / 255.0f;
             if (alpha > 0 && alpha < 1) {
-                return "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
+                return this.element.getParentNode() == null ? null : "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
             } else {
-                return "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
+                return this.element.getParentNode() == null ? null : "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
             }
         } else {
-            return "rgb(0, 0, 0)";
+            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
         }
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFillOpacity() {
-        return Strings.isBlank(style.getFillOpacity()) ? CSSValues.NONE.getValue() : style.getFillOpacity();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getFillOpacity()) ? CSSValues.NONE.getValue() : style.getFillOpacity();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStroke() {
-        return Strings.isBlank(style.getStroke()) ? CSSValues.NONE.getValue() : style.getStroke();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStroke()) ? CSSValues.NONE.getValue() : style.getStroke();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStrokeOpacity() {
-        return Strings.isBlank(style.getStrokeOpacity()) ? CSSValues.NONE.getValue() : style.getStrokeOpacity();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStrokeOpacity()) ? CSSValues.NONE.getValue() : style.getStrokeOpacity();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStrokeLineCap() {
-        return Strings.isBlank(style.getStrokeLineCap()) ? CSSValues.NONE.getValue() : style.getStrokeLineCap();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStrokeLineCap()) ? CSSValues.NONE.getValue() : style.getStrokeLineCap();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStrokeWidth() {
-        return Strings.isBlank(style.getStrokeWidth()) ? CSSValues.NONE.getValue() : style.getStrokeWidth();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStrokeWidth()) ? CSSValues.NONE.getValue() : style.getStrokeWidth();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStrokeLineJoin() {
-        return Strings.isBlank(style.getStrokeLineJoin()) ? CSSValues.NONE.getValue() : style.getStrokeLineJoin();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStrokeLineJoin()) ? CSSValues.NONE.getValue() : style.getStrokeLineJoin();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStrokeMiterLimit() {
-        return Strings.isBlank(style.getStrokeMiterLimit()) ? CSSValues.NONE.getValue() : style.getStrokeMiterLimit();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStrokeMiterLimit()) ? CSSValues.NONE.getValue() : style.getStrokeMiterLimit();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getClipPath() {
-        return Strings.isBlank(style.getClipPath()) ? CSSValues.NONE.getValue() : style.getClipPath();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getClipPath()) ? CSSValues.NONE.getValue() : style.getClipPath();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVisibility() {
-        return Strings.isBlank(style.getVisibility()) ? CSSValues.NONE.getValue() : style.getVisibility();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getVisibility()) ? CSSValues.NONE.getValue() : style.getVisibility();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVoiceFamily() {
-        return style.getVoiceFamily();
+        return this.element.getParentNode() == null ? null : style.getVoiceFamily();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVolume() {
-        return style.getVolume();
+        return this.element.getParentNode() == null ? null : style.getVolume();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getClipRule() {
-        return Strings.isBlank(style.getClipRule()) ? CSSValues.NONE.getValue() : style.getClipRule();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getClipRule()) ? CSSValues.NONE.getValue() : style.getClipRule();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStopColor() {
-        return Strings.isBlank(style.getStopColor()) ? CSSValues.NONE.getValue() : style.getStopColor();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStopColor()) ? CSSValues.NONE.getValue() : style.getStopColor();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStopOpacity() {
-        return Strings.isBlank(style.getStopOpacity()) ? CSSValues.NONE.getValue() : style.getStopOpacity();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStopOpacity()) ? CSSValues.NONE.getValue() : style.getStopOpacity();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStrokeDashArray() {
-        return Strings.isBlank(style.getStrokeDashArray()) ? CSSValues.NONE.getValue() : style.getStrokeDashArray();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getStrokeDashArray()) ? CSSValues.NONE.getValue() : style.getStrokeDashArray();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getFloat() {
-        return style.getFloat();
+        return this.element.getParentNode() == null ? null : style.getFloat();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getListStyle() {
-        return style.getListStyle();
+        return this.element.getParentNode() == null ? null : style.getListStyle();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getListStyleType() {
-        return style.getListStyleType();
+        return this.element.getParentNode() == null ? null : style.getListStyleType();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getListStyleImage() {
-        return style.getListStyleImage();
+        return this.element.getParentNode() == null ? null : style.getListStyleImage();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getListStylePosition() {
-        return style.getListStylePosition();
+        return this.element.getParentNode() == null ? null : style.getListStylePosition();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCaptionSide() {
-        return style.getCaptionSide();
+        return this.element.getParentNode() == null ? null : style.getCaptionSide();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTextDecoration() {
-        return Strings.isBlank(style.getTextDecoration()) ? CSSValues.NONE.getValue() : style.getTextDecoration();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getTextDecoration()) ? CSSValues.NONE.getValue() : style.getTextDecoration();
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTextAlign(String textAlign) {
         style.setTextAlign(textAlign);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTextDecoration(String textDecoration) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTextIndent(String textIndent) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTextShadow(String textShadow) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTextTransform(String textTransform) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTop(String top) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setUnicodeBidi(String unicodeBidi) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setVerticalAlign(String verticalAlign) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setVisibility(String visibility) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setVoiceFamily(String voiceFamily) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setVolume(String volume) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setWhiteSpace(String whiteSpace) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setWidows(String widows) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setWidth(String width) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setWordSpacing(String wordSpacing) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setzIndex(String zIndex) {
         style.setzIndex(zIndex);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setHeight(String textAlign) {
         style.setHeight(textAlign);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setLeft(String left) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setLineHeight(String lineHeight) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setListStyle(String listStyle) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setListStyleImage(String listStyleImage) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setListStylePosition(String listStylePosition) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setListStyleType(String listStyleType) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMargin(String margin) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMarginBottom(String marginBottom) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMarginLeft(String marginLeft) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMarginRight(String marginRight) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMarginTop(String marginTop) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMarkerOffset(String markerOffset) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMarks(String marks) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMaxHeight(String maxHeight) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMaxWidth(String maxWidth) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMinHeight(String minHeight) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMinWidth(String minWidth) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setLetterSpacing(String letterSpacing) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOrphans(String orphans) {
-
+        style.setOrphans(orphans);
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOutline(String outline) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOutlineColor(String outlineColor) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOutlineStyle(String outlineStyle) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOutlineWidth(String outlineWidth) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOverflow(String overflow) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPadding(String padding) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPaddingBottom(String paddingBottom) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPaddingLeft(String paddingLeft) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPaddingRight(String paddingRight) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPaddingTop(String paddingTop) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPage(String page) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPageBreakAfter(String pageBreakAfter) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPageBreakBefore(String pageBreakBefore) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPageBreakInside(String pageBreakInside) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPause(String pause) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPauseAfter(String pauseAfter) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPauseBefore(String pauseBefore) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPitch(String pitch) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPitchRange(String pitchRange) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPlayDuring(String playDuring) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPosition(String position) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setQuotes(String quotes) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setRichness(String richness) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setRight(String right) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSize(String size) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSpeak(String speak) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSpeakHeader(String speakHeader) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSpeakNumeral(String speakNumeral) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSpeakPunctuation(String speakPunctuation) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setSpeechRate(String speechRate) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setStress(String stress) {
 
     }
 
-     /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTableLayout(String tableLayout) {
 
     }
+
     @Override
     public String getPropertyValue(String property) {
-        return style.getPropertyValue(property);
+        return this.element.getParentNode() == null ? null : style.getPropertyValue(property);
     }
 
     @Override
     public String toString() {
-        return "[object CSSStyleDeclaration]";
+        return this.element.getParentNode() == null ? null : "[object CSSStyleDeclaration]";
     }
 }

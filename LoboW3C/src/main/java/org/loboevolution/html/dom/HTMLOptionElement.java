@@ -20,17 +20,8 @@
 
 package org.loboevolution.html.dom;
 
-
-
-
-
-
-
 /**
  * &lt;option&gt; elements and inherits all classes and methods of the HTMLElement interface.
- *
- *
- *
  */
 public interface HTMLOptionElement extends HTMLElement {
 
@@ -41,7 +32,7 @@ public interface HTMLOptionElement extends HTMLElement {
      */
     boolean isDefaultSelected();
 
-    
+
     /**
      * <p>setDefaultSelected.</p>
      *
@@ -49,7 +40,7 @@ public interface HTMLOptionElement extends HTMLElement {
      */
     void setDefaultSelected(boolean defaultSelected);
 
-    
+
     /**
      * <p>isDisabled.</p>
      *
@@ -57,7 +48,7 @@ public interface HTMLOptionElement extends HTMLElement {
      */
     boolean isDisabled();
 
-    
+
     /**
      * <p>setDisabled.</p>
      *
@@ -86,7 +77,7 @@ public interface HTMLOptionElement extends HTMLElement {
      */
     String getLabel();
 
-    
+
     /**
      * <p>setLabel.</p>
      *
@@ -101,13 +92,13 @@ public interface HTMLOptionElement extends HTMLElement {
      */
     boolean isSelected();
 
-    
+
     /**
      * <p>setSelected.</p>
      *
      * @param selected a boolean.
      */
-    void setSelected(boolean selected);
+    void setSelected(Object selected);
 
     /**
      * Sets or retrieves the text string specified by the option tag.
@@ -116,7 +107,7 @@ public interface HTMLOptionElement extends HTMLElement {
      */
     String getText();
 
-    
+
     /**
      * <p>setText.</p>
      *
@@ -131,7 +122,7 @@ public interface HTMLOptionElement extends HTMLElement {
      */
     String getValue();
 
-    
+
     /**
      * <p>setValue.</p>
      *

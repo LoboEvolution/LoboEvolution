@@ -33,7 +33,7 @@ public class LocalStorage implements Storage {
 	
 	private final int index;
 
-	private HtmlRendererConfig config;
+	private final HtmlRendererConfig config;
 	
 	/**
 	 * <p>Constructor for LocalStorage.</p>

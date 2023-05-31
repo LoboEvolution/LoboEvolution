@@ -44,9 +44,7 @@ public class documentadoptnode12Test extends LoboUnitTest {
         Document newDoc;
         DOMImplementation domImpl;
         DocumentType docType;
-        Node adoptedDocType;
         String nullPubID = null;
-
         String nullSysID = null;
 
         Element docElem;
@@ -62,7 +60,7 @@ public class documentadoptnode12Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            adoptedDocType = newDoc.adoptNode(docType);
+            newDoc.adoptNode(docType);
         } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

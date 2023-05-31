@@ -71,7 +71,7 @@ public class nodereplacechildnodenameTest extends LoboUnitTest {
         childName = replacedNode.getNodeName();
 
         if (length == 6) {
-            assertEquals("nowhitespace", "name", childName);
+            assertEquals("nowhitespace", "NAME", childName);
         } else {
             assertEquals("whitespace", "EMPLOYEEID",childName);
         }

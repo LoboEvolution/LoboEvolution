@@ -56,9 +56,11 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
         try {
             this.cssStyleSheet.insertRule(rule, index);
             this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e){
             throw new DOMException(
                     DOMException.INDEX_SIZE_ERR, e.getMessage());
+        } catch (Exception e) {
+            return 0;
         }
         return index;
     }

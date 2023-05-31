@@ -33,7 +33,7 @@ import org.mozilla.javascript.Context;
  */
 public class DOMParserImpl extends AbstractScriptableDelegate implements DOMParser {
 
-	private HTMLDocumentImpl document;
+	private final HTMLDocumentImpl document;
 
 	public DOMParserImpl(HTMLDocumentImpl document){
 		this.document = document;

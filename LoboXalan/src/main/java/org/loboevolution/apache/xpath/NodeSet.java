@@ -17,16 +17,12 @@
  */
 package org.loboevolution.apache.xpath;
 
-import org.loboevolution.apache.xpath.res.XPATHErrorResources;
-import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.AbstractList;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The NodeSet class can act as either a NodeVector, NodeList, or NodeIterator. However, in order
@@ -69,5 +65,10 @@ public class NodeSet extends AbstractList<Node> implements HTMLCollection {
         } catch (NumberFormatException e) {
             return this.get(0);
         }
+    }
+
+    @Override
+    public void setItem(Integer index, Node node) {
+        set(index, node);
     }
 }

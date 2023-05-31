@@ -66,7 +66,7 @@ public class nodereplacechild06Test extends LoboUnitTest {
         }
         replaced = doc.getDocumentElement();
         nodeName = replaced.getNodeName();
-        assertEquals("nodereplacechild06", "p", nodeName);
+        assertEquals("nodereplacechild06", "P", nodeName);
     }
 }
 

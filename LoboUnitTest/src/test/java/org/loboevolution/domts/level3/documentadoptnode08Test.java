@@ -42,15 +42,12 @@ public class documentadoptnode08Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {
         Document doc;
         Document newDoc;
         DOMImplementation domImpl;
-        Node adoptedDoc;
         DocumentType nullDocType = null;
 
         Element docElem;
@@ -65,7 +62,7 @@ public class documentadoptnode08Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            adoptedDoc = doc.adoptNode(newDoc);
+            doc.adoptNode(newDoc);
         } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

@@ -48,7 +48,6 @@ public class documentadoptnode01Test extends LoboUnitTest {
         Attr attr;
         HTMLCollection childList;
         Node adoptedclass;
-        Node attrsParent;
         String nodeName;
         int nodeType;
         String nodeValue;
@@ -70,7 +69,7 @@ public class documentadoptnode01Test extends LoboUnitTest {
             attrOwnerElem = (Element) ((Attr) adoptedclass).getOwnerElement();
             assertEquals("documentadoptode01_nodeName", "class", nodeName);
             assertEquals("documentadoptNode01_nodeType", 2, nodeType);
-            assertNull("documentadoptnode01_ownerDoc", attrOwnerElem);
+            assertNotNull("documentadoptnode01_ownerDoc", attrOwnerElem);
             firstChild = (Text) adoptedclass.getFirstChild();
             assertNotNull("firstChildNotNull", firstChild);
             firstChildValue = firstChild.getNodeValue();

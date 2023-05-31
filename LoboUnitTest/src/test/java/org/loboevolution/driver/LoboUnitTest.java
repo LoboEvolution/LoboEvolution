@@ -92,11 +92,12 @@ public class LoboUnitTest extends LoboWebDriver {
         try {
             HTMLDocumentImpl doc = loadHtml(html);
             window = doc.getDefaultView();
-            alerts = Arrays.asList(messages);
+            alerts = messages != null ? Arrays.asList(messages) : null;
             assertEquals(alerts, window.getMsg());
         } catch (AssertionError e) {
             throw new AssertionError("Result expected: " +  alerts + " Result: " + window.getMsg());
         } catch (Exception ex) {
+            ex.printStackTrace();
             logger.severe(ex.getMessage());
         }
     }

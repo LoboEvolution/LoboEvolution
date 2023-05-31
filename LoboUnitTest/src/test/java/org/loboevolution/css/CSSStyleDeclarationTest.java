@@ -658,7 +658,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "    tt { display: none; color: green; }\n"
                 + "  </style>\n"
                 + "  <script>\n"
-
                 + "    function test() {\n"
                 + "      var e = document.createElement('tt');\n"
                 + "      var style = window.getComputedStyle(e, null);\n"

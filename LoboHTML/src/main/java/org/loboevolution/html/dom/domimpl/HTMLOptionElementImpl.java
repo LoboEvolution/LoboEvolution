@@ -23,6 +23,7 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
+import org.loboevolution.html.dom.HTMLSelectElement;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
@@ -32,7 +33,7 @@ import org.loboevolution.html.renderstate.RenderState;
  */
 public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOptionElement {
 
-	private Boolean selected = null;
+	private Object selected = null;
 	
 	private String text;
 
@@ -70,15 +71,13 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public int getIndex() {
-		/*final Object parent = getParentNode();
+		final Object parent = getParentNode();
 		if (parent instanceof HTMLSelectElement) {
 			final HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) ((HTMLSelectElement) parent).getOptions();
 			return options.indexOf(this);
 		} else {
 			return -1;
-		}*/
-		
-		return -1; //TODO
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -90,11 +89,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public boolean isSelected() {
-		if (this.selected == null) {
-			return isDefaultSelected();
-		} else {
-			return this.selected;
-		}
+		return this.selected != null || getAttributeAsBoolean("selected");
 	}
 
 	/** {@inheritDoc} */
@@ -129,8 +124,8 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSelected(boolean selected) {
-		this.selected = selected;
+	public void setSelected(Object selected) {
+		this.selected = selected != null;
 	}
 
 	/**

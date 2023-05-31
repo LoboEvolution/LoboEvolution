@@ -25,9 +25,6 @@ import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 
 /**
  * <p>SelectControl class.</p>
- *
- *
- *
  */
 public class SelectControl extends BaseControl implements UIControl {
 

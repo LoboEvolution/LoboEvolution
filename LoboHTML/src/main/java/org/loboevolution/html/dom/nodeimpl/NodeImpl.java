@@ -789,6 +789,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	@Override
 	public String getTextContent() {
+
+		if(this instanceof DocumentType) {
+			return null;
+		}
+
 		final StringBuilder sb = new StringBuilder();
 		nodeList.forEach(child -> {
 			final int type = child.getNodeType();
@@ -805,7 +810,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 					break;
 			}
 		});
-		return sb.toString();
+
+		return sb.length() == 0 ? null : sb.toString();
 	}
 
 	/**

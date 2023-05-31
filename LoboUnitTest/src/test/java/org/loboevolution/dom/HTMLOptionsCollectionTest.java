@@ -701,7 +701,16 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "  <script>\n"
                 + "    function doTest() {\n"
                 + "      try {\n"
-                + "          alert(oSelect.options[" + pos + "]);\n"
+                + "        var oSelect = document.forms.testForm.select1;\n"
+                + "        alert(oSelect.length);\n"
+                + "        var opt = document.createElement('option');\n"
+                + "        opt.text = \"foo\";\n"
+                + "        opt.value = '123';\n"
+                + "        oSelect.options[" + pos + "] = " + param + ";\n"
+                + "        alert(oSelect.options.length);\n"
+                + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
+                + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
+                + "        }\n"
                 + "      } catch (e) { alert('exception'); }\n"
                 + "    }\n"
                 + "  </script>\n"
@@ -709,13 +718,13 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "<body onload='doTest()'>\n"
                 + "  <form name='testForm'>\n"
                 + "    <select name='select1' " + (multi ? "multiple" : "") + ">\n";
-        if (!empty) {
-            html = html
+                if (!empty) {
+                    html = html
                     + "      <option name='option1' value='value1'>One</option>\n"
                     + "      <option name='option2' value='value2' selected>Two</option>\n"
                     + "      <option name='option3' value='value3'" + (multi ? "selected" : "") + ">Three</option>\n";
-        }
-        html = html
+                }
+                html = html
                 + "    </select>\n"
                 + "  </form>\n"
                 + "</body></html>";

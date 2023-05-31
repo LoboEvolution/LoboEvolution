@@ -21,6 +21,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.node.Document;
@@ -74,6 +75,17 @@ public class HTMLCollectionImpl extends AbstractList<Node> implements HTMLCollec
 			return this.get((int) idx);
 		} catch (NumberFormatException e) {
 			return this.get(0);
+		}
+	}
+
+	@Override
+	public void setItem(Integer index, Node node) {
+		if (index > -1) {
+			if (getLength() == 0 || getLength() == index || getLength() < index) {
+				add(index, node);
+			} else {
+				set(index, node);
+			}
 		}
 	}
 

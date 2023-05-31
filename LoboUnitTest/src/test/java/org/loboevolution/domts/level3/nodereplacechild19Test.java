@@ -23,10 +23,7 @@ package org.loboevolution.domts.level3;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.EntityReference;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -46,7 +43,7 @@ public class nodereplacechild19Test extends LoboUnitTest {
         DocumentFragment docFrag;
         EntityReference entRef;
         Element elem;
-        EntityReference replaced;
+        Node replaced;
         String nodeName;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
@@ -54,7 +51,7 @@ public class nodereplacechild19Test extends LoboUnitTest {
         entRef = doc.createEntityReference("alpha");
         elem.appendChild(entRef);
         docFrag.appendChild(elem);
-        replaced = (EntityReference) docFrag.replaceChild(entRef, elem);
+        replaced = docFrag.replaceChild(entRef, elem);
         nodeName = replaced.getNodeName();
         assertEquals("nodereplacechild19", "dom3:p", nodeName);
     }

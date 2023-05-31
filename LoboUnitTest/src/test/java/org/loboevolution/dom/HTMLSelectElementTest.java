@@ -40,7 +40,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    function doTest() {\n"
                         + "      alert(document.form1.select1.length);\n"
                         + "      alert(document.form1.select1.selectedIndex);\n"
-
                         + "      alert(document.form1.selectMulti.length);\n"
                         + "      alert(document.form1.selectMulti.selectedIndex);\n"
                         + "    }\n"
@@ -113,7 +112,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    function doTest() {\n"
                         + "      alert(document.form1.select1.length);\n"
                         + "      alert(document.form1.select1.selectedIndex);\n"
-
                         + "      alert(document.form1.selectMulti.length);\n"
                         + "      alert(document.form1.selectMulti.selectedIndex);\n"
                         + "    }\n"

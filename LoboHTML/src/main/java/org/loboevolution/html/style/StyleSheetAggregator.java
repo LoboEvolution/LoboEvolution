@@ -35,10 +35,7 @@ import org.htmlunit.cssparser.dom.*;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.*;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
+import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Node;
@@ -51,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 /**
@@ -364,7 +362,7 @@ public class StyleSheetAggregator {
 
 		case "root":
 			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
-			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_TYPE_NODE;
+			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_NODE;
 
 			case "enabled":
 				return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
@@ -399,9 +397,34 @@ public class StyleSheetAggregator {
 			}
 
 		case "checked":
-			return (element instanceof HTMLInputElement && ((HTMLInputElement) element).isChecked())
-					|| (element instanceof HTMLOptionElement && ((HTMLOptionElement) element).isSelected());
+			if (element instanceof HTMLInputElement) {
+				return ((HTMLInputElement) element).isChecked();
+			}
 
+			if (element instanceof HTMLOptionElement) {
+				AtomicInteger selected = new AtomicInteger(0);
+				AtomicInteger isSelected = new AtomicInteger(0);
+				HTMLSelectElement selectElement = (HTMLSelectElement) element.getParentNode();
+				HTMLOptionsCollectionImpl optionsCollection = (HTMLOptionsCollectionImpl) selectElement.getOptions();
+				optionsCollection.forEach(opt -> {
+					HTMLOptionElement optionElement = (HTMLOptionElement) opt;
+					if (optionElement.hasAttribute("selected")) {
+						selected.incrementAndGet();
+					}
+
+					if (optionElement.isSelected()) {
+						isSelected.incrementAndGet();
+					}
+				});
+
+				if (isSelected.get() > 0) {
+					return ((HTMLOptionElement) element).isSelected();
+				}
+
+				if (selected.get() > 0) {
+					return element.hasAttribute("selected");
+				}
+			}
 		case "required":
 			return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement
 					|| element instanceof HTMLTextAreaElement) && element.hasAttribute("required");

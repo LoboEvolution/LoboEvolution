@@ -25,7 +25,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.assertTrue;
 
@@ -45,14 +44,12 @@ public class documentrenamenode23Test extends LoboUnitTest {
     @Test
     public void runTest() {
         Document doc;
-        Node renamedNode;
-        Document docowner;
         doc = sampleXmlFile("hc_staff.xml");
 
         {
             boolean success = false;
             try {
-                renamedNode = doc.renameNode(doc, "http://www.w3.org/DOM/Test", "root");
+                doc.renameNode(doc, "http://www.w3.org/DOM/Test", "root");
             } catch (DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }

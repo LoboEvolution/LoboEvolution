@@ -65,8 +65,8 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 		int index = selctElement.isMultiple() ? -1 : 0;
 		for (int i = 0; i < this.getLength(); i++) {
 			Node n = item(i);
-			HTMLElementImpl element = (HTMLElementImpl) n;
-			if (element.getAttributeAsBoolean("selected")) {
+			HTMLOptionElement element = (HTMLOptionElement) n;
+			if (element.isSelected() || element.hasAttribute("selected")) {
 				index = i;
 				break;
 			}
@@ -78,7 +78,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 	@Override
 	public void setSelectedIndex(int selectedIndex) {
 		if (getLength() <= selectedIndex || selectedIndex < 0) {
-			this.selectedIndex = -1;
+			this.selectedIndex = null;
 		} else {
 			this.selectedIndex = selectedIndex;
 		}
@@ -86,54 +86,95 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 
 	/** {@inheritDoc} */
 	@Override
-	public void add(Object element, Object before) {
+	public void add(Object element, Object before) throws DOMException {
 
-		if (element instanceof HTMLOptionElementImpl && before instanceof HTMLElement) {
-			addElements((HTMLOptionElementImpl)element, (HTMLElement)before);
-		}
+		if (element instanceof HTMLOptionElementImpl){
+			if (before instanceof HTMLElement) {
+				addElements((HTMLOptionElementImpl)element, (HTMLElement)before);
+			}
 
-		if (element instanceof HTMLOptionElementImpl && before instanceof Double) {
-			double d = (double) before;
-			addElementIndex((HTMLOptionElementImpl)element, d);
+			if (before instanceof Double) {
+				HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
+				double d = (double) before;
+
+				if (d > -1 && d < getLength()) {
+					addElementIndex((HTMLOptionElementImpl) element, d);
+				} else if (d < getLength() && selctElement.isMultiple()) {
+					addElementIndex((HTMLOptionElementImpl) element, d);
+				} else if (d == getLength()) {
+					addElementIndex((HTMLOptionElementImpl) element, d);
+				} else if (d > getLength()) {
+					addElementIndex((HTMLOptionElementImpl) element, getLength());
+				} else if (d < getLength() && !selctElement.isMultiple()) {
+					addElementIndex((HTMLOptionElementImpl) element, getLength());
+				} else {
+					System.out.println("not found");
+				}
+			}
+
+			if (before == null) {
+				addElementIndex((HTMLOptionElementImpl)element, getLength());
+			}
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void add(HTMLOptionElement element) {
+		HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
 		List<Node> nodeList = getList();
-		if (nodeList.size() == 0) element.setSelected(true);
+		if (nodeList.size() == 0 && !selctElement.isMultiple()) element.setSelected(true);
 		nodeList.add(element);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean remove(Object element) {
-		try{
-		HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl)rootNode;
+		try {
+			HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
 
-		if (element instanceof HTMLOptionElementImpl) {
-			getList().remove(element);
-		}
-
-		if (element instanceof Double) {
-			double d = (Double) element;
-			if (d < getList().size())
-				getList().remove((int) d);
-		}
-
-		if (getList().size() == 1 && (selctElement == null || !selctElement.isMultiple())) {
-			List<Node> list = getList();
-			for (int i = 0; i < list.size(); i++) {
-				HTMLOptionElementImpl opt = (HTMLOptionElementImpl) list.get(i);
-				opt.setSelected(i == 0);
+			if (element instanceof HTMLOptionElementImpl) {
+				getList().remove(element);
 			}
+
+			if (element instanceof Double) {
+				double d = (Double) element;
+				if (d > -1 && d < getList().size())
+					getList().remove((int) d);
+			}
+
+			if (getList().size() == 1 && (selctElement == null || !selctElement.isMultiple())) {
+				List<Node> list = getList();
+				for (int i = 0; i < list.size(); i++) {
+					HTMLOptionElementImpl opt = (HTMLOptionElementImpl) list.get(i);
+					opt.setSelected(i == 0);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		}catch (Exception e) {e.printStackTrace();}
 
 		return false;
 	}
 
+    @Override
+	public void setItem(Integer index, Node node) {
+		if (node != null) {
+			HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
+			List<Node> nodeList = getList();
+			if (nodeList.size() == 0 && !selctElement.isMultiple()) {
+				HTMLOptionElement opt = (HTMLOptionElement) node;
+				opt.setSelected(true);
+			}
+			if (nodeList.size() < index) {
+				for (int i = nodeList.size(); i < index; i++) {
+					super.setItem(i, new HTMLOptionElementImpl(""));
+				}
+			}
+
+			super.setItem(index, node);
+		}
+	}
 
 
 	private void addElementIndex(HTMLOptionElement element, double before) {
@@ -141,7 +182,8 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 		if (before > nodeList.size() || before < 0) {
 			add(element);
 		} else {
-			if (nodeList.size() == 0) {
+			HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
+			if (nodeList.size() == 0 && !selctElement.isMultiple()) {
 				element.setSelected(true);
 				nodeList.add(element);
 			} else	{
@@ -150,7 +192,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 		}
 	}
 
-	private void addElements(HTMLOptionElement element, HTMLElement before) {
+	private void addElements(HTMLOptionElement element, HTMLElement before) throws DOMException {
 		List<Node> nodeList = getList();
 		if (nodeList.size() == 0) {
 			nodeList.add(0, element);

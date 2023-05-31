@@ -23,9 +23,6 @@ package org.loboevolution.html.dom;
 
 /**
  * Serves as the root node for a given HTML document. This object inherits the properties and methods described in the HTMLElement interface.
- *
- *
- *
  */
 public interface HTMLHtmlElement extends HTMLElement {
 

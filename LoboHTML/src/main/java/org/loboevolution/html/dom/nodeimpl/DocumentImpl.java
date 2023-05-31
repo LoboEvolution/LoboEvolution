@@ -100,6 +100,11 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Node adoptNode(Node source) {
+
+		if (source instanceof DocumentType) {
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
+		}
+
 		NodeImpl node = (NodeImpl) source;
 		node.setOwnerDocument(this.document, true);
 		return node;
@@ -115,7 +120,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			return createElementNS(namespaceURI, qualifiedName);
 		}
 
-		return node;
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
 	}
 
 	/** {@inheritDoc} */

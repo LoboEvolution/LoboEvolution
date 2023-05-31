@@ -145,7 +145,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 		if (getOptions().getLength() > 0) {
 			if (element instanceof Double) {
 				Double d = (Double) element;
-				if (d.intValue() < getOptions().getLength()) {
+				if (d > -1 && d.intValue() < getOptions().getLength()) {
 					getOptions().remove(d.intValue());
 				}
 			} else {
@@ -191,7 +191,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	@Override
 	public void setSelectedIndex(int selectedIndex) {
 		if (getOptions().getLength() <= selectedIndex || selectedIndex < 0) {
-			this.selectedIndex = -1;
+			this.selectedIndex = null;
 		} else {
 			this.selectedIndex = selectedIndex;
 		}
