@@ -423,12 +423,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return Node.ELEMENT_NODE;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getNodeValue() {
-		return null;
-	}
-
 	/**
 	 * Gets inner text of the element, possibly including text in comments. This can
 	 * be used to get Javascript code out of a SCRIPT element.

@@ -30,6 +30,8 @@ import org.loboevolution.html.style.HtmlValues;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>BackgroundImageSetter class.</p>
@@ -38,55 +40,57 @@ public class BackgroundImageSetter implements SubPropertySetter {
 	
 	private static final Logger logger = Logger.getLogger(BackgroundImageSetter.class.getName());
 
+	private static final Pattern URL_PATTERN = Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
+
 	/** {@inheritDoc} */
 	@Override
 	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
 		String baseHref = null;
 		String finalValue;
 		CSSStyleDeclarationImpl props = (CSSStyleDeclarationImpl) declaration;
-
 		final AbstractCSSRuleImpl rule = (AbstractCSSRuleImpl) props.getParentRule();
 		if (rule != null) {
-			final CSSStyleSheetImpl sheet = rule.getParentStyleSheet();
-			final CSSStyleSheetImpl ssheet = sheet;
+			final CSSStyleSheetImpl ssheet = rule.getParentStyleSheet();
 			baseHref = ssheet.getHref();
 		}
 
 		if (baseHref == null) {
 			baseHref = props.getContext() != null ? props.getContext().getDocumentBaseURI() : null;
 		}
-		final String start = "url(";
-		if (newValue == null || !newValue.toLowerCase().startsWith(start)) {
-			finalValue = newValue;
-		} else {
-			final int startIdx = start.length();
-			final int closingIdx = newValue.lastIndexOf(')');
-			if (closingIdx == -1) {
-				finalValue = newValue;
-			} else {
-				final String quotedUri = newValue.substring(startIdx, closingIdx);
-				final String tentativeUri = HtmlValues.unquoteAndUnescape(quotedUri);
-				if (baseHref == null) {
-					finalValue = newValue;
-				} else {
-					try {
-						final URL styleUrl = Urls.createURL(null, baseHref);
-						if (tentativeUri.contains("data:image")) {
-							finalValue = tentativeUri;
+
+		if (baseHref != null) {
+			final Matcher m = URL_PATTERN.matcher(newValue.toLowerCase());
+			if (m.find()) {
+				final String tentativeUri = HtmlValues.unquoteAndUnescape(m.group(1));
+				try {
+					if (tentativeUri.contains("data:image")) {
+						finalValue = tentativeUri;
+					} else {
+						final URL resourcesUrl = Urls.createURL(new URL(baseHref), "../resources");
+						if (resourcesUrl != null) {
+							finalValue = "url("
+									+ HtmlValues.quoteAndEscape(resourcesUrl.toExternalForm() + "/" + tentativeUri)
+									+ ")";
 						} else {
+							final URL styleUrl = Urls.createURL(null, baseHref);
 							finalValue = "url("
 									+ HtmlValues.quoteAndEscape(Urls.createURL(styleUrl, tentativeUri).toExternalForm())
 									+ ")";
 						}
-
-					} catch (final Exception mfu) {
-						logger.log(Level.WARNING,
-								"Unable to create URL for URI=[" + tentativeUri + "], with base=[" + baseHref + "].",
-								mfu);
-						finalValue = newValue;
 					}
+
+				} catch (final Exception mfu) {
+					logger.log(Level.WARNING,
+							"Unable to create URL for URI=[" + tentativeUri + "], with base=[" + baseHref + "].",
+							mfu);
+					finalValue = newValue;
 				}
+			} else {
+				finalValue = newValue;
 			}
+
+		} else {
+			finalValue = newValue;
 		}
 		declaration.setProperty(BACKGROUND_IMAGE, finalValue);
 	}

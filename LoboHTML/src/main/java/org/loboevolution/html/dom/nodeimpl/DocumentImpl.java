@@ -58,10 +58,7 @@ import org.loboevolution.type.VisibilityState;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -101,9 +98,15 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public Node adoptNode(Node source) {
 
-		if (source instanceof DocumentType) {
+		if (source instanceof DocumentType || Objects.equals(this, source)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
 		}
+
+
+		if (source instanceof EntityReference || source instanceof Notation) {
+			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+		}
+
 
 		NodeImpl node = (NodeImpl) source;
 		node.setOwnerDocument(this.document, true);

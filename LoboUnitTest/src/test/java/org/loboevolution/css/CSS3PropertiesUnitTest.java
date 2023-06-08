@@ -1000,7 +1000,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"", ""};
+        final String[] messages = {null, null};
         checkHtmlAlert(html, messages);
     }
 

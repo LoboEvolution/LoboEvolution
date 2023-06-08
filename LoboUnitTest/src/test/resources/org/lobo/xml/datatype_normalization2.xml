@@ -15,19 +15,14 @@
   <!--   explicit preserve  -->
   <acronym>    EMP  0001   </acronym>
    <!--   explicit collapse  -->
-  <code>
-    EMP  0001
-</code>
+  <code>EMP  0001</code>
   <code>EMP  0001</code>
   <code>EMP 0001</code>
   <!--    explicit replace   -->
-  <sup>
-    EMP  0001
-</sup>
+  <sup>EMP  0001</sup>
   <sup>EMP  0001</sup>
   <sup>EMP 0001</sup>
-  <sup>EMP
-0001</sup>
+  <sup>EMP 0001</sup>
   </p>
 </body>
 </html>

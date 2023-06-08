@@ -25,10 +25,7 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -48,11 +45,11 @@ public class documentadoptnode17Test extends LoboUnitTest {
         Document doc;
         DocumentType docType;
         NamedNodeMap entityMap;
-        Node ent;
+        EntityReference ent;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entityMap = docType.getEntities();
-        ent = entityMap.getNamedItem("alpha");
+        ent = (EntityReference) entityMap.getNamedItem("alpha");
 
         boolean success = false;
         try {

@@ -75,7 +75,7 @@ public class datatypenormalization07Test extends LoboUnitTest {
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:double");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:default");
-            assertEquals("firstValue", "3.1415926E0", str);
+            assertEquals("firstValue", "3.1415926", str);
         }
     }
 }

@@ -265,7 +265,9 @@ public class XHtmlParser {
 								qName = doctypeStr.replace(">", "");
 							}
 
-							htmlDoc.setDoctype(new DocumentTypeImpl(qName, publicId, systemId));
+							DocumentType docType = new DocumentTypeImpl(qName, publicId, systemId);
+							docType.setOwnerDocument(htmlDoc);
+							htmlDoc.setDoctype(docType);
 							needRoot = false;
 							return TOKEN_BAD;
 						case "!ENTITY":

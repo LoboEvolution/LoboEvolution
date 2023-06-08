@@ -23,6 +23,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.htmlunit.cssparser.dom.DOMException;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
@@ -38,9 +39,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p>HTMLTableElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableElement {
 
@@ -167,7 +165,12 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	/** {@inheritDoc} */
 	@Override
 	public String getBorder() {
-		return getAttribute("border");
+		boolean isBorder = hasAttribute("border");
+		if (isBorder) {
+			String border = getAttribute("border");
+			return "border".equals(border) ? "1" : border;
+		}
+		return null;
 	}
 
 	/** {@inheritDoc} */

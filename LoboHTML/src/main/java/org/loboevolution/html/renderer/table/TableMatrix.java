@@ -20,6 +20,7 @@
 package org.loboevolution.html.renderer.table;
 
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.dom.HTMLTableElement;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.CaptionFilter;
 import org.loboevolution.html.dom.filter.ColumnsFilter;
@@ -97,7 +98,8 @@ class TableMatrix {
 		this.allCells.clear();
 		this.rowElements.clear();
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.tableElement.getDocumentNode();
-		final String borderText = this.tableElement.getAttribute("border");
+		HTMLTableElement htmlTableElement = (HTMLTableElement) tableElement;
+		final String borderText = htmlTableElement.getBorder();
 		int border = HtmlValues.getPixelSize(borderText, null, doc.getDefaultView(), 0);
 		final String cellSpacingText = this.tableElement.getAttribute("cellspacing");
 		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, null, doc.getDefaultView(), 0);

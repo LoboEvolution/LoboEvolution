@@ -203,7 +203,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		if (backgroundImageUri == null) {
 			this.backgroundImage = null;
 			this.lastBackgroundImageUri = null;
-		} else if (!backgroundImageUri.equals(this.lastBackgroundImageUri)) {
+		} else if (!Objects.equals(backgroundImageUri, this.lastBackgroundImageUri)) {
 			this.lastBackgroundImageUri = backgroundImageUri;
 			HTMLImageElementImpl img = new HTMLImageElementImpl();
 			TimingInfo info = new TimingInfo();

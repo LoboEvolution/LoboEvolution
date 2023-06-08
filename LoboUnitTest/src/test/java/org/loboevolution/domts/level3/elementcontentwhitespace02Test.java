@@ -72,7 +72,7 @@ public class elementcontentwhitespace02Test extends LoboUnitTest {
             child = body.getFirstChild();
             assertNotNull("firstChildNotNull", child);
             childName = child.getNodeName();
-            assertEquals("firstChild", "p", childName);
+            assertEquals("firstChild", "P", childName);
             child = child.getNextSibling();
             assertNull("secondChild", child);
         }

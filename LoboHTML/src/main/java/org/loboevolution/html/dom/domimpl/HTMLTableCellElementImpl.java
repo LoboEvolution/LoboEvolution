@@ -33,9 +33,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p>HTMLTableCellElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTableCellElement {
 	

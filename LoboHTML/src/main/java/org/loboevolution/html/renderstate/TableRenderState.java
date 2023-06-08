@@ -20,6 +20,7 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.HTMLTableElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.style.BorderInsets;
@@ -103,7 +104,15 @@ public class TableRenderState extends StyleSheetRenderState {
 			}
 			final HTMLElementImpl element = this.element;
 			if (element != null) {
-				String border = element.getAttribute("border");
+
+				String border;
+				if (element instanceof HTMLTableElement) {
+					HTMLTableElement table = (HTMLTableElement) element;
+					border = table.getBorder();
+				} else {
+					border = element.getAttribute("border");
+				}
+
 				if (border != null) {
 					border = border.trim();
 					int value;

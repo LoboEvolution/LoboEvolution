@@ -80,12 +80,6 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 
 	/** {@inheritDoc} */
 	@Override
-	public String getNodeValue() {
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getPublicId() {
 		return this.publicId;
 	}

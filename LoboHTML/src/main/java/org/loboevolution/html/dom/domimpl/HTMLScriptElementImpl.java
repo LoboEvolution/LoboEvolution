@@ -39,6 +39,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.loboevolution.html.dom.UserDataHandler;
+import sun.net.www.protocol.file.FileURLConnection;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -47,6 +48,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.MissingResourceException;
@@ -180,15 +182,22 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
 					final URL u = new URL(scriptURI);
 					info.setName(u.getFile());
-					final HttpURLConnection connection =(HttpURLConnection)u.openConnection();
+
+					URLConnection connection = u.openConnection();
 					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 					connection.getHeaderField("Set-Cookie");
 					try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 							Reader reader = new InputStreamReader(in, "utf-8")) {
-						BufferedReader br = new BufferedReader(reader);						
+						BufferedReader br = new BufferedReader(reader);
 						ctx.evaluateReader(scope, br, scriptURI, 1, null);
 					} catch (SocketTimeoutException e) {
-						info.setHttpResponse(connection.getResponseCode());
+						if (connection instanceof HttpURLConnection) {
+							final HttpURLConnection urlConnection = (HttpURLConnection) u.openConnection();
+							info.setHttpResponse(urlConnection.getResponseCode());
+						} else {
+							info.setHttpResponse(400);
+						}
+
 						logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
 				    } catch (Exception e) {
 						if (e instanceof MissingResourceException) {
@@ -202,7 +211,14 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						info.setTimeElapsed(timeElapsed);
 						info.setPath(scriptURI);
 						info.setType(connection.getContentType());
-						info.setHttpResponse(connection.getResponseCode());
+
+						if (connection instanceof HttpURLConnection) {
+							final HttpURLConnection urlConnection = (HttpURLConnection) u.openConnection();
+							info.setHttpResponse(urlConnection.getResponseCode());
+						} else {
+							info.setHttpResponse(200);
+						}
+
 						final HtmlRendererContext htmlRendererContext = this.getHtmlRendererContext();
 						final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 						htmlPanel.getBrowserPanel().getTimingList.add(info);

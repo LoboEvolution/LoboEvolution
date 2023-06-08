@@ -48,7 +48,6 @@ public class documentadoptnode19Test extends LoboUnitTest {
         DocumentType docType;
         NamedNodeMap notationMap;
         Notation notation;
-        Node adoptedNotaion;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         notationMap = docType.getNotations();
@@ -57,7 +56,7 @@ public class documentadoptnode19Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            adoptedNotaion = doc.adoptNode(notation);
+            doc.adoptNode(notation);
         } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }

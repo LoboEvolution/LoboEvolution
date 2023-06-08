@@ -33,7 +33,7 @@ import static org.junit.Assert.assertNotNull;
 
 
 /**
- * The normalizeDocument method method acts as if the document was going through a save
+ * The normalizeDocument method acts as if the document was going through a save
  * and load cycle, putting the document in a "normal" form.
  * The feature namespace-declarations when set to false, discards all namespace declaration attributes,
  * although namespace prefixes are still retained.
