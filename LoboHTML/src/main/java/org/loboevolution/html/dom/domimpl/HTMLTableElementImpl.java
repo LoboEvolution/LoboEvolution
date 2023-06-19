@@ -195,7 +195,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getRows() {
-		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter("TR")).toArray()));
+		return new HTMLCollectionImpl(this, new ElementFilter("TR"));
 	}
 
 	/** {@inheritDoc} */
@@ -227,7 +227,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection gettBodies() {
-		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter("TBODY")).toArray()));
+		return new HTMLCollectionImpl(this, new ElementFilter("TBODY"));
 	}
 
 	/** {@inheritDoc} */

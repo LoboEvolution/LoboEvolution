@@ -241,7 +241,7 @@ public class XHtmlParser {
 							return TOKEN_COMMENT;
 						case "!DOCTYPE":
 							String doctypeStr = this.parseEndOfTag(reader);
-							String qName;
+							String qName = null;
 							String publicId = null;
 							String systemId = null;
 							if (Strings.containsIgnoreCase(doctypeStr, "public")) {
@@ -253,16 +253,18 @@ public class XHtmlParser {
 
 								publicId = list.get(0);
 								systemId = list.get(1);
+								qName  = publics[0];
 
 							}
 
-							if (Strings.containsIgnoreCase(doctypeStr, "svg")) {
+							if (qName == null && Strings.containsIgnoreCase(doctypeStr, "svg")) {
 								String[] publics = Strings.splitIgnoreCase(doctypeStr, "svg");
 								qName = publics[0];
 								this.document.setXml(true);
+							}
 
-							} else {
-								qName = doctypeStr.replace(">", "");
+							if (qName == null && Strings.containsIgnoreCase(doctypeStr, "html")) {
+								qName = "html";
 							}
 
 							DocumentType docType = new DocumentTypeImpl(qName, publicId, systemId);

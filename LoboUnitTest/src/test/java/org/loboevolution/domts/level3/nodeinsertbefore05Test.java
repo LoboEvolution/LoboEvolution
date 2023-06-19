@@ -48,9 +48,7 @@ public class nodeinsertbefore05Test extends LoboUnitTest {
         DocumentType docType;
         DOMImplementation domImpl;
         DocumentType newDocType;
-        Node inserted;
         String nullPubId = null;
-
         String nullSysId = null;
 
         String rootName;
@@ -61,7 +59,7 @@ public class nodeinsertbefore05Test extends LoboUnitTest {
         newDocType = domImpl.createDocumentType(rootName, nullPubId, nullSysId);
 
         try {
-            inserted = doc.insertBefore(newDocType, docType);
+            doc.insertBefore(newDocType, docType);
             fail("throw_DOMException");
 
         } catch (DOMException ex) {

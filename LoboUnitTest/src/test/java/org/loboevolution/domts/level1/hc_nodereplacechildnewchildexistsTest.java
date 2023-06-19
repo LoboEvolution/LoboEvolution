@@ -28,6 +28,9 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertSame;
 
@@ -54,18 +57,18 @@ public class hc_nodereplacechildnewchildexistsTest extends LoboUnitTest {
         HTMLCollection elementList;
         Node employeeNode;
         HTMLCollection childList;
-        Node oldChild = null;
-        Node newChild = null;
+        Node oldChild;
+        Node newChild;
         String childName;
         Node childNode;
-        java.util.List actual = new java.util.ArrayList();
+        List<String> actual = new ArrayList<String>();
 
-        java.util.List expected = new java.util.ArrayList();
-        expected.add("strong");
-        expected.add("code");
-        expected.add("sup");
-        expected.add("var");
-        expected.add("em");
+        List<String> expected = new ArrayList<>();
+        expected.add("STRONG");
+        expected.add("CODE");
+        expected.add("SUP");
+        expected.add("VAR");
+        expected.add("EM");
 
         Node replacedChild;
         int nodeType;
@@ -77,6 +80,7 @@ public class hc_nodereplacechildnewchildexistsTest extends LoboUnitTest {
         oldChild = childList.item(5);
         replacedChild = employeeNode.replaceChild(newChild, oldChild);
         assertSame("return_value_same", oldChild, replacedChild);
+        childList = ((Element) employeeNode).getElementsByTagName("*");
         for (int indexN10094 = 0; indexN10094 < childList.getLength(); indexN10094++) {
             childNode = childList.item(indexN10094);
             childName = childNode.getNodeName();

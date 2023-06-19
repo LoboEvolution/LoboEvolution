@@ -40,10 +40,22 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/**
 	 * <p>Constructor for HTMLOptionElementImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param text a {@link java.lang.String} object.
 	 */
-	public HTMLOptionElementImpl(final String name) {
-		super(name);
+	public HTMLOptionElementImpl(final String text) {
+		super(text);
+	}
+
+	/**
+	 * <p>Constructor for HTMLOptionElementImpl.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
+	public HTMLOptionElementImpl(final String text, final String value) {
+		super(text);
+		this.text = text;
+		setValue(value);
 	}
 	
 	/** {@inheritDoc} */
@@ -88,9 +100,27 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isSelected() {
-		return this.selected != null || getAttributeAsBoolean("selected");
+	public Boolean isSelected() {
+		final Object parent = getParentNode();
+		if (parent instanceof HTMLSelectElement) {
+			final HTMLSelectElement selectElement = (HTMLSelectElement) parent;
+			if (selectElement.isMultiple()) {
+				return this.selected != null || getAttributeAsBoolean("selected");
+			} else {
+				if (selected == null) {
+					return getAttributeAsBoolean("selected");
+				} else {
+					if (selected instanceof Boolean) {
+						return (Boolean) this.selected;
+					} else {
+						return getAttributeAsBoolean("selected");
+					}
+				}
+			}
+		}
+		return null;
 	}
+
 
 	/** {@inheritDoc} */
 	@Override
@@ -125,7 +155,13 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public void setSelected(Object selected) {
-		this.selected = selected != null;
+		if (selected instanceof Boolean) {
+			this.selected = selected;
+		} else{
+			if (selected == null)
+				this.selected = null;
+			else this.selected = true;
+		}
 	}
 
 	/**

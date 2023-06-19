@@ -884,7 +884,7 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
                 + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
                 + "        }\n"
-                + "      } catch (e) { alert(e); }\n"
+                + "      } catch (e) { alert('exception'); }\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1780,7 +1780,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void multiple() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
@@ -2016,7 +2015,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void valueByValue() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
@@ -2098,7 +2096,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
     @Test
     public void valueByTextTrim() {
         final String html =
-
                 "<html>\n"
                         + "<head>\n"
                         + "<script>\n"
@@ -2143,7 +2140,7 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    <option selected value='two'>Two</option>\n"
                         + "  </select>\n"
                         + "</body></html>";
-        final String[] messages = {"two", null};
+        final String[] messages = {"two", ""};
         checkHtmlAlert(html, messages);
     }
 

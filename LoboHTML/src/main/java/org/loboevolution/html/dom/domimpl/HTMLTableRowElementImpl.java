@@ -27,6 +27,9 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLTableCellElement;
 import org.loboevolution.html.dom.HTMLTableRowElement;
+import org.loboevolution.html.dom.filter.ElementFilter;
+import org.loboevolution.html.dom.filter.HeadFilter;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
@@ -104,18 +107,10 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getCells() {
-		NodeListImpl list = this.nodeList;	
-		if (getParentNode() != null && list.size() == 0) {
-			NodeListImpl childNodes = (NodeListImpl) getParentNode().getChildNodes();
-			childNodes.forEach(node -> {
-				if (node instanceof HTMLTableCellElementImpl) {
-					list.add(node);
-				}
-			});
-			return new HTMLCollectionImpl(this, list);
+		if (getParentNode() != null && this.nodeList.size() == 0) {
+			return new HTMLCollectionImpl((NodeImpl) getParentNode(), new ElementFilter("TD"));
 		}
-
-		return new HTMLCollectionImpl(this, list.stream().filter(node -> "TD".equalsIgnoreCase(node.getNodeName())).collect(Collectors.toList()));
+		return new HTMLCollectionImpl(this, new ElementFilter("TD"));
 	}
 
 	/** {@inheritDoc} */

@@ -72,7 +72,7 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getRows() {
-		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter("TR")).toArray()));
+		return new HTMLCollectionImpl(this, new ElementFilter("TR"));
 	}
 
 	/** {@inheritDoc} */

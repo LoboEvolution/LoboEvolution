@@ -333,8 +333,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
     @Override
 	public HTMLHeadElementImpl getHead() {
 		synchronized (this) {
-			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new HeadFilter()).toArray()));
-			HTMLCollection collection = new HTMLCollectionImpl(this, list);
+			HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
 			if (collection.getLength() > 0) {
 				return (HTMLHeadElementImpl) collection.item(0);
 			} else {
@@ -348,8 +347,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public HTMLElement getBody() {
 		synchronized (this) {
 			if (this.body == null) {
-				final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new BodyFilter()).toArray()));
-				HTMLCollection collection = new HTMLCollectionImpl(this, list);
+				HTMLCollection collection = new HTMLCollectionImpl(this, new BodyFilter());
 				if (collection.getLength() > 0) {
 					return (HTMLElement) collection.item(0);
 				} else {

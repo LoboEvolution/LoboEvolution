@@ -1073,16 +1073,16 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElementsByClassName(String classNames) {
-		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ClassNameFilter(classNames)).toArray()));
+		return new HTMLCollectionImpl(this, new ClassNameFilter(classNames));
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElementsByTagName(String tagname) {
 		if ("*".equals(tagname)) {
-			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
+			return new HTMLCollectionImpl(this, new ElementFilter(null));
 		} else {
-			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNameFilter(tagname)).toArray()));
+			return new HTMLCollectionImpl(this, new TagNameFilter(tagname));
 		}
 	}
 
@@ -1091,10 +1091,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
 
 		if("*".equals(namespaceURI) && "*".equals(localName)) {
-			return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
+			return new HTMLCollectionImpl(this, new ElementFilter(null));
 		}
 
-		return new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new TagNsNameFilter(localName, namespaceURI)).toArray()));
+		return new HTMLCollectionImpl(this, new TagNsNameFilter(localName, namespaceURI));
 	}
 
 	/** {@inheritDoc} */
@@ -1193,6 +1193,41 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean isEqualNode(Node arg) {
+		if (!super.isEqualNode(arg)) {
+			return false;
+		}
+
+		boolean hasAttrs = hasAttributes();
+		if (hasAttrs != arg.hasAttributes()) {
+			return false;
+		}
+		if (hasAttrs) {
+			NamedNodeMap map = getAttributes();
+			NamedNodeMap mapArg = arg.getAttributes();
+			if (map.getLength() != mapArg.getLength()) {
+				return false;
+			}
+
+			for (Node n1 : Nodes.iterable(map)) {
+				if (n1.getLocalName() == null) {
+					Node n2 = mapArg.getNamedItem(n1.getNodeName());
+					if (n2 == null || !n1.isEqualNode(n2)) {
+						return false;
+					}
+				} else {
+					Node n2 = mapArg.getNamedItemNS(n1.getNamespaceURI(), n1.getLocalName());
+					if (n2 == null || !n1.isEqualNode(n2)) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 
 	/**

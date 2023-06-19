@@ -750,7 +750,6 @@ public class NodeUnitTest extends LoboUnitTest {
         final String html =
                 "<html><head>\n"
                         + "  <script>\n"
-
                         + "    function test() {\n"
                         + "      var parent = document.createElement('div');\n"
                         + "      var child = document.createElement('p');\n"

@@ -54,8 +54,7 @@
         <p xmlns:dmstc="http://www.netzero.com">
             <em>EMP0003</em>
             <strong>Roger
-                Jones
-            </strong>
+ Jones</strong>
             <code>Department Manager</code>
             <sup>100,000</sup>
             <var>&ent4;</var>
@@ -79,7 +78,7 @@
             <code>Computer Specialist</code>
             <sup>90,000</sup>
             <var>male</var>
-            <acronym title="Yes" class="Yes" xsi:noNamespaceSchemaLocation="Yes">1821 Nordic. Road, Irving Texas 98558
+            <acronym id="Yα" title="Yes" class="Yes" xsi:noNamespaceSchemaLocation="Yes">1821 Nordic. Road, Irving Texas 98558
             </acronym>
         </p>
     </body>

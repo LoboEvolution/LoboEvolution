@@ -21,20 +21,33 @@
 package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.Assert.*;
 
 public class HTMLElementTest extends LoboUnitTest {
 	private Document document;
+
+	private static DOMImplementationImpl domImpl;
+
+	@BeforeClass
+	public static void setUpBeforeClass() {
+		UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
+		context.setUserAgentEnabled(false);
+		domImpl = new DOMImplementationImpl(context);
+	}
 	@Test
 	public void testCreateElementError() {
 		try {
@@ -86,7 +99,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		CSSStyleDeclaration style = html.getStyle();
 		assertNotNull(style);
 		assertEquals("display: block", style.getCssText());
-		assertEquals("display:block;", html.getAttribute("style"));
+		assertEquals("display:block", html.getAttribute("style"));
 		style.setCssText("margin-top: 10%");
 		assertEquals("margin-top: 10%", html.getAttribute("style"));
 	}
@@ -598,7 +611,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 	@Test
 	public void getChildren() {
-		document = sampleHtmlFile();
+		document = domImpl.createDocument(null, "HTML", null);
 		Element html = document.getDocumentElement();
 		Element body = document.createElement("body");
 		html.appendChild(body);
@@ -636,7 +649,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals(1, document.getChildElementCount());
 		list = html.getChildren();
 		assertNotNull(list);
-		list = body.getChildren();
+
 		assertEquals(1, list.getLength());
 		assertSame(body, list.item(0));
 		assertNull(list.item(1));
@@ -661,9 +674,9 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("bodyId", body.getAttributeNodeNS(HTMLDocument.HTML_NAMESPACE_URI, "id").getValue());
 		assertTrue(body.hasAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "id"));
 		assertFalse(body.hasAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "foo"));
-		assertEquals(null, body.getAttribute("foo"));
+		assertNull(body.getAttribute("foo"));
 		assertNull(body.getAttributeNode("foo"));
-		assertEquals(null, body.getAttributeNS("http://www.w3.org/2000/svg", "id"));
+		assertNull(body.getAttributeNS("http://www.w3.org/2000/svg", "id"));
 		assertNull(body.getAttributeNodeNS("http://www.w3.org/2000/svg", "id"));
 		html.appendChild(body);
 		body.removeAttribute("foo");
@@ -692,7 +705,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("1.1", svg.getAttribute("version"));
 		assertEquals("1.1", svg.getAttributeNode("version").getValue());
 		assertEquals("1.1", svg.getAttributeNodeNS("http://www.w3.org/2000/svg", "version").getValue());
-		assertEquals(null, svg.getAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "version"));
+		assertNull(svg.getAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "version"));
 		assertNull(svg.getAttributeNodeNS(HTMLDocument.HTML_NAMESPACE_URI, "version"));
 		assertFalse(svg.hasAttributeNS(HTMLDocument.HTML_NAMESPACE_URI, "version"));
 		assertTrue(svg.hasAttributeNS("http://www.w3.org/2000/svg", "version"));

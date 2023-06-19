@@ -412,8 +412,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			return this.length;
 		} else {
 			final HTMLDocumentImpl doc = this.document;
-			final List<Node> list = new LinkedList<>(Arrays.asList(doc.getNodeList(new BodyFilter()).toArray()));
-			HTMLCollection collection = new HTMLCollectionImpl(doc, list);
+			HTMLCollection collection = new HTMLCollectionImpl(doc, new BodyFilter());
 			return collection.getLength();
 		}
 	}

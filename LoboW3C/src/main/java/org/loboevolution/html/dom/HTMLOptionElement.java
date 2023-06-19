@@ -90,7 +90,7 @@ public interface HTMLOptionElement extends HTMLElement {
      *
      * @return a boolean.
      */
-    boolean isSelected();
+    Boolean isSelected();
 
 
     /**

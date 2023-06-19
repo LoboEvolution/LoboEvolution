@@ -28,6 +28,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 
@@ -43,7 +44,6 @@ public class nodeappendchild02Test extends LoboUnitTest {
     public void runTest() {
         Document doc;
         Element newElem;
-        Node appendedChild;
         String tagName;
         String rootNS;
         Element docElem;
@@ -53,20 +53,13 @@ public class nodeappendchild02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         newElem = doc.createElementNS(rootNS, tagName);
 
+        boolean success = false;
         try {
-            appendedChild = doc.appendChild(newElem);
-            fail("throw_HIERARCHY_REQUEST_OR_NOT_SUPPORTED");
-
+            doc.appendChild(newElem);
         } catch (DOMException ex) {
-            switch (ex.getCode()) {
-                case 3:
-                    break;
-                case 9:
-                    break;
-                default:
-                    throw ex;
-            }
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
     }
 }
 

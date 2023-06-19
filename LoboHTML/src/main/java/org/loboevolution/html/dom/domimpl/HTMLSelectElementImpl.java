@@ -31,9 +31,7 @@ import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Undefined;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -90,8 +88,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	@Override
 	public HTMLOptionsCollection getOptions() {
 		if (options == null ) {
-			final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new OptionFilter()).toArray()));
-			options = new HTMLOptionsCollectionImpl(this, list);
+			options = new HTMLOptionsCollectionImpl(this, new OptionFilter());
 		}
 		return options;
 	}
@@ -125,15 +122,17 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public String getValue() {
-		AtomicReference<String> x = new AtomicReference<>();
 		String value = getAttribute("value");
-		if (Strings.isNotBlank(value)) {
+		if (value != null) {
 			return value;
 		} else {
+			AtomicReference<String> x = new AtomicReference<>();
 			HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
 			options.forEach(node -> {
 				HTMLOptionElement op = (HTMLOptionElement) node;
-				if (Strings.isBlank(x.get())) x.set(op.getValue());
+				if (op.isSelected()) {
+					x.set(op.getValue());
+				}
 			});
 			return x.get();
 		}
@@ -200,7 +199,14 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public void setValue(String value) {
-		setAttribute("value", String.valueOf(value));
+		HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
+		Optional<Node> optional =
+		options.stream().
+				filter(op -> (op.getTextContent() != null &&  op.getTextContent().trim().equalsIgnoreCase(value)) ||
+						(op.getNodeValue() != null &&  op.getNodeValue().equalsIgnoreCase(value))).
+			    findFirst();
+
+		setAttribute("value", optional.isPresent() ? value : "");
 	}
 	
 	/**
@@ -241,30 +247,26 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public void add(Object element, Object before) {
-		try {
-			if (before == null || before instanceof Undefined) {
-				getOptions().add((HTMLOptionElement) element);
-			}
-
-			if (element instanceof HTMLOptionElementImpl && before instanceof Double) {
-				double d = (double) before;
-				getOptions().add(element, d);
-			}
-
-			if (element instanceof HTMLOptionElementImpl && before instanceof HTMLOptionElementImpl) {
-				HTMLOptionElementImpl d = (HTMLOptionElementImpl) before;
-				getOptions().add(element, d);
-			}
-
-			if (getOptions().getLength() == 1 && !isMultiple()) {
-				HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
-				options.stream().findFirst().ifPresent(option -> ((HTMLOptionElement) option).setSelected(true));
-			}
-
-			if (selectOption != null) selectOption.resetItemList(this);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (before == null || before instanceof Undefined) {
+			getOptions().add((HTMLOptionElement) element);
 		}
+
+		if (element instanceof HTMLOptionElementImpl && before instanceof Double) {
+			double d = (double) before;
+			getOptions().add(element, d);
+		}
+
+		if (element instanceof HTMLOptionElementImpl && before instanceof HTMLOptionElementImpl) {
+			HTMLOptionElementImpl d = (HTMLOptionElementImpl) before;
+			getOptions().add(element, d);
+		}
+
+		if (getOptions().getLength() == 1 && !isMultiple()) {
+			HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) getOptions();
+			options.stream().findFirst().ifPresent(option -> ((HTMLOptionElement) option).setSelected(true));
+		}
+
+		if (selectOption != null) selectOption.resetItemList(this);
 	}
 
 	/** {@inheritDoc} */
@@ -295,11 +297,9 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 		
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public void set(int name, Element value) {
-		// TODO Auto-generated method stub
-		
+	public void setItem(Integer index, Node node) {
+		getOptions().setItem(index, node);
 	}
 
 	/** {@inheritDoc} */

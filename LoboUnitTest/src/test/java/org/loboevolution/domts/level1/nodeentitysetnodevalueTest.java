@@ -21,6 +21,7 @@
 
 package org.loboevolution.domts.level1;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
@@ -28,8 +29,7 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 
 /**
@@ -60,7 +60,14 @@ public class nodeentitysetnodevalueTest extends LoboUnitTest {
         assertNotNull("entitiesNotNull", entities);
         entityNode = entities.getNamedItem("ent1");
         assertNotNull("ent1NotNull", entityNode);
-        entityNode.setNodeValue("This should have no effect");
+        boolean success = false;
+        try {
+            entityNode.setNodeValue("This should have no effect");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
+        }
+        assertTrue("throw_INVALID_MODIFICATION_ERR", success);
+
         entityValue = entityNode.getNodeValue();
         assertNull("nodeValueNull", entityValue);
     }

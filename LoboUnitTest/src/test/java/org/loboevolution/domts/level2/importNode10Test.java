@@ -21,6 +21,7 @@
 
 package org.loboevolution.domts.level2;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
@@ -69,7 +70,15 @@ public class importNode10Test extends LoboUnitTest {
         aNewDoc = sampleXmlFile("staffNS.xml");
         entRef = aNewDoc.createEntityReference("entRef1");
         assertNotNull("createdEntRefNotNull", entRef);
-        entRef.setNodeValue("entRef1Value");
+
+        boolean success = false;
+        try {
+            entRef.setNodeValue("entRef1Value");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
+        }
+        assertTrue("throw_INVALID_MODIFICATION_ERR", success);
+
         aNode = doc.importNode(entRef, false);
         ownerDocument = aNode.getOwnerDocument();
         docType = ownerDocument.getDoctype();

@@ -31,7 +31,9 @@ import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.UserDataHandler;
+import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.TextFilter;
@@ -96,7 +98,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public Node appendChild(Node newChild) {
 
 		if (newChild.getNodeType() == Node.DOCUMENT_NODE) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a document.");
+			NodeListImpl list = getNodeList();
+			list.forEach(n -> {
+				if (n.getNodeType() == Node.DOCUMENT_NODE) {
+					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a document.");
+				}
+			});
 		}
 
 		if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
@@ -107,7 +114,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			NodeListImpl list = getNodeList();
 			list.forEach(n -> {
 				if (n.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
-					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one doctype on document allowed.");
+					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Only one doctype on document allowed.");
 				}
 			});
 		}
@@ -413,15 +420,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		synchronized (this) {
 			HTMLCollection collection = this.childrenCollection;
 			if (collection == null) {
-
-				collection = new HTMLCollectionImpl(this,
-						Arrays.asList(nodeList.
-								stream().
-								filter(node -> node instanceof Element).
-								collect(Collectors.toCollection(NodeListImpl::new)).
-								toArray()));
-
-				this.childrenCollection = collection;
+				collection = new HTMLCollectionImpl(this, new ElementFilter(null));
 			}
 			return collection;
 		}
@@ -1006,6 +1005,15 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				return newChild;
 			}
 
+			if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
+				NodeListImpl list = getNodeList();
+				list.forEach(n -> {
+					if (n.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
+						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one doctype on document allowed.");
+					}
+				});
+			}
+
 			if (!getNodeList().contains(refChild)) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "Not a child of this node.");
 			}
@@ -1014,7 +1022,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 			}
 
-			final int idx = this.nodeList.indexOf(refChild);
+			int idx = this.nodeList.indexOf(refChild);
 			if (idx == -1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
 			}
@@ -1025,15 +1033,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 			if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
 				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
-			}
-
-			if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
-				NodeListImpl list = getNodeList();
-				list.forEach(n -> {
-					if (n.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
-						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one doctype on document allowed.");
-					}
-				});
 			}
 
 			if (newChild.getNodeType() == Node.ELEMENT_NODE) {
@@ -1048,7 +1047,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			if (newChild instanceof NodeImpl) {
 				((NodeImpl) newChild).setParentImpl(this);
 			}
-			this.nodeList.add(idx, newChild);
+			if (this.nodeList.contains(newChild)) {
+				this.nodeList.remove(newChild);
+				this.nodeList.add(idx > 0 ? idx-1 : idx, newChild);
+			} else {
+				this.nodeList.add(idx, newChild);
+			}
 		}
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
@@ -1076,11 +1080,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public boolean isEqualNode(Node arg) {
-		return arg instanceof NodeImpl && getNodeType() == arg.getNodeType()
+		return arg instanceof NodeImpl
+				&& getNodeType() == arg.getNodeType()
 				&& Objects.equals(getNodeName().toUpperCase(), arg.getNodeName().toUpperCase())
 				&& Objects.equals(getNodeValue(), arg.getNodeValue())
-				&& ((getLocalName() == null && getLocalName() == null) ||
-				Objects.equals(getLocalName().toUpperCase(), arg.getLocalName().toUpperCase()));
+				&& ((getLocalName() == null && getLocalName() == null) || Objects.equals(getLocalName().toUpperCase(), arg.getLocalName().toUpperCase()));
+
 	}
 
 	/** {@inheritDoc} */
@@ -1306,10 +1311,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
 		}
 
-		if (contains(newChild)) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Child node is already a parent.");
-		}
-
 		if (newChild.contains(oldChild)) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Child node is already a parent.");
 		}
@@ -1324,11 +1325,18 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument()))
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
+
+
+		final int idx2 = this.nodeList.indexOf(newChild);
 		this.nodeList.set(idx, newChild);
+		if (idx2 != -1) {
+			this.nodeList.remove(idx2);
+		}
 
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}
+
 		return oldChild;
 	}
 
@@ -1375,7 +1383,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 *
 	 * @param parent a {@link org.loboevolution.html.node.Node} object.
 	 */
-	protected final void setParentImpl(Node parent) {
+	public final void setParentImpl(Node parent) {
 		this.parentNode = parent;
 	}
 

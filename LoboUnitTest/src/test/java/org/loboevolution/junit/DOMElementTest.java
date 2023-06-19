@@ -120,9 +120,9 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("bodyId", body.getAttributeNodeNS(Document.HTML_NAMESPACE_URI, "id").getValue());
         assertTrue(body.hasAttributeNS(Document.HTML_NAMESPACE_URI, "id"));
         assertFalse(body.hasAttributeNS(Document.HTML_NAMESPACE_URI, "foo"));
-        assertEquals(null, body.getAttribute("foo"));
+        assertNull(body.getAttribute("foo"));
         assertNull(body.getAttributeNode("foo"));
-        assertEquals(null, body.getAttributeNS(Document.NAMESPACE_SVG, "id"));
+        assertNull(body.getAttributeNS(Document.NAMESPACE_SVG, "id"));
         assertNull(body.getAttributeNodeNS(Document.NAMESPACE_SVG, "id"));
         assertNotNull(idattr.getOwnerElement());
         html.appendChild(body);
@@ -157,7 +157,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("1.1", svg.getAttribute("version"));
         assertEquals("1.1", svg.getAttributeNode("version").getValue());
         assertEquals("1.1", svg.getAttributeNodeNS(Document.NAMESPACE_SVG, "version").getValue());
-        assertEquals(null, svg.getAttributeNS(Document.HTML_NAMESPACE_URI, "version"));
+        assertNull(svg.getAttributeNS(Document.HTML_NAMESPACE_URI, "version"));
         assertNull(svg.getAttributeNodeNS(Document.HTML_NAMESPACE_URI, "version"));
         assertFalse(svg.hasAttributeNS(Document.HTML_NAMESPACE_URI, "version"));
         assertTrue(svg.hasAttributeNS(Document.NAMESPACE_SVG, "version"));

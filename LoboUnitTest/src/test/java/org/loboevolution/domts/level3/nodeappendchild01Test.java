@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 
@@ -43,10 +44,7 @@ public class nodeappendchild01Test extends LoboUnitTest {
         DOMImplementation domImpl;
         DocumentType docType;
         String nullPubId = null;
-
         String nullSysId = null;
-
-        Node appendedChild;
         String tagName;
         Element docElem;
         doc = sampleXmlFile("barfoo.xml");
@@ -55,20 +53,13 @@ public class nodeappendchild01Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         docType = domImpl.createDocumentType(tagName, nullPubId, nullSysId);
 
+        boolean success = false;
         try {
-            appendedChild = doc.appendChild(docType);
-            fail("throw_HIERARCHY_REQUEST_OR_NOT_SUPPORTED");
-
+            doc.appendChild(docType);
         } catch (DOMException ex) {
-            switch (ex.getCode()) {
-                case 3:
-                    break;
-                case 9:
-                    break;
-                default:
-                    throw ex;
-            }
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
     }
 }
 

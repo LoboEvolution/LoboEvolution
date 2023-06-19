@@ -3033,14 +3033,14 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "    function test() {\n"
                 + "      alert(document.createElement('div').tagName);\n"
                 + "      alert(document.createElement('section').tagName);\n"
-                + "      alert(document.createElement('div').cloneNode( true ).outerHTML);\n"
-                + "      alert(document.createElement('section').cloneNode( true ).outerHTML);\n"
+                + "      alert(document.createElement('div').cloneNode(true).outerHTML);\n"
+                + "      alert(document.createElement('section').cloneNode(true).outerHTML);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
 
-        final String[] messages = {"DIV", "SECTION", "<DIV/>", "<SECTION/>"};
+        final String[] messages = {"div", "section", "<DIV/>", "<SECTION/>"};
         checkHtmlAlert(html, messages);
     }
 

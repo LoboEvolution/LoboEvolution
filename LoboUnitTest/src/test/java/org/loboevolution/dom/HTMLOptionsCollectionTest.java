@@ -572,7 +572,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
      */
     @Test
     public void putMinusOne() {
-        final String[] messages =  {"3", "3", "One", "Two*", "Three"};
+        final String[] messages =  {"3", "3", "One*", "Two", "Three"};
         put("-1", "opt", false, false, messages);
     }
 
@@ -755,7 +755,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
      */
     @Test
     public void removeMinusOne() {
-        final String[] messages = {"3", "One", "Two*", "Three"};
+        final String[] messages = {"3", "One*", "Two", "Three"};
         remove("-1", false, false, messages);
     }
 
@@ -809,7 +809,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
      */
     @Test
     public void removeTwo() {
-        final String[] messages = {"2", "One", "Two*"};
+        final String[] messages = {"2", "One*", "Two"};
         remove("2", false, false, messages);
     }
 
@@ -827,7 +827,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
      */
     @Test
     public void removeThree() {
-        final String[] messages = {"3", "One", "Two*", "Three"};
+        final String[] messages = {"3", "One*", "Two", "Three"};
         remove("3", false, false, messages);
     }
 
@@ -863,7 +863,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
      */
     @Test
     public void removeTen() {
-        final String[] messages = {"3", "One", "Two*", "Three"};
+        final String[] messages = {"3", "One*", "Two", "Three"};
         remove("10", false, false, messages);
     }
 

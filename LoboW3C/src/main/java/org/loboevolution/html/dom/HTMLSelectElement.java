@@ -21,6 +21,7 @@
 package org.loboevolution.html.dom;
 
 import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ValidityState;
 
@@ -292,12 +293,12 @@ public interface HTMLSelectElement extends HTMLElement {
     void setCustomValidity(String error);
 
     /**
-     * Set.
+     * Set Item.
      *
-     * @param name  the name
-     * @param value the value
+     * @param index  the name
+     * @param Node the value
      */
-    void set(int name, Element value);
+    void setItem(Integer index, Node Node);
 
 	/**
 	 * <p>getLength.</p>

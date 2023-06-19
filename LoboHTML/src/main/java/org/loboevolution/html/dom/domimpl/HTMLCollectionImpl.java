@@ -22,12 +22,16 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLOptionElement;
+import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.traversal.NodeFilter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,31 +42,25 @@ public class HTMLCollectionImpl extends AbstractList<Node> implements HTMLCollec
 	
 	private final NodeImpl rootNode;
 
-	 /**
-	  * <p>Constructor for HTMLCollectionImpl.</p>
-	  *
-	  * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	  */
-	 public HTMLCollectionImpl(NodeImpl rootNode) {
-		super(rootNode);
-		this.rootNode = rootNode;
-	}
+	private final NodeFilter filter;
 
-	/**
+	 /**
 	 * <p>
 	 * Constructor for HTMLCollectionImpl.
 	 * </p>
 	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param nodeList a {@link java.util.List} object.
+	 * @param filter a {@link org.loboevolution.html.node.traversal.NodeFilter} object.
 	 */
-	public HTMLCollectionImpl(NodeImpl rootNode, List<Node> nodeList) {
-		super(nodeList);
+	public HTMLCollectionImpl(NodeImpl rootNode, NodeFilter filter) {
+		setList((NodeListImpl) rootNode.getNodeList(filter));
 		this.rootNode = rootNode;
+		this.filter = filter;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
+		setList(Arrays.asList(rootNode.getNodeList(filter).toArray()));
 		return this.size();
 	}
 

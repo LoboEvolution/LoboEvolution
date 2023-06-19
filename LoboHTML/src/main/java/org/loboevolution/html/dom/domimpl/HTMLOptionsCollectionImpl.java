@@ -26,7 +26,9 @@ import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.traversal.NodeFilter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,10 +44,10 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 	 * <p>Constructor for HTMLOptionsCollectionImpl.</p>
 	 *
 	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param nodeList a {@link java.util.List} object.
+	 * @param filter a {@link org.loboevolution.html.node.traversal.NodeFilter} object.
 	 */
-	public HTMLOptionsCollectionImpl(NodeImpl rootNode, List<Node> nodeList) {
-		super(rootNode, nodeList);
+	public HTMLOptionsCollectionImpl(NodeImpl rootNode, NodeFilter filter) {
+		super(rootNode, filter);
 		this.rootNode = rootNode;
 	}
 
@@ -66,7 +68,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 		for (int i = 0; i < this.getLength(); i++) {
 			Node n = item(i);
 			HTMLOptionElement element = (HTMLOptionElement) n;
-			if (element.isSelected() || element.hasAttribute("selected")) {
+			if ((element.isSelected() != null && element.isSelected()) || element.hasAttribute("selected")) {
 				index = i;
 				break;
 			}
@@ -87,10 +89,9 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 	/** {@inheritDoc} */
 	@Override
 	public void add(Object element, Object before) throws DOMException {
-
-		if (element instanceof HTMLOptionElementImpl){
+		if (element instanceof HTMLOptionElement){
 			if (before instanceof HTMLElement) {
-				addElements((HTMLOptionElementImpl)element, (HTMLElement)before);
+				addElements((HTMLOptionElement)element, (HTMLOptionElement)before);
 			}
 
 			if (before instanceof Double) {
@@ -143,7 +144,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 					getList().remove((int) d);
 			}
 
-			if (getList().size() == 1 && (selctElement == null || !selctElement.isMultiple())) {
+			if (selctElement == null || !selctElement.isMultiple()) {
 				List<Node> list = getList();
 				for (int i = 0; i < list.size(); i++) {
 					HTMLOptionElementImpl opt = (HTMLOptionElementImpl) list.get(i);
@@ -159,23 +160,55 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 
     @Override
 	public void setItem(Integer index, Node node) {
-		if (node != null) {
-			HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
+		HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
+		if (node != null && index > -1) {
 			List<Node> nodeList = getList();
-			if (nodeList.size() == 0 && !selctElement.isMultiple()) {
-				HTMLOptionElement opt = (HTMLOptionElement) node;
-				opt.setSelected(true);
-			}
 			if (nodeList.size() < index) {
 				for (int i = nodeList.size(); i < index; i++) {
-					super.setItem(i, new HTMLOptionElementImpl(""));
+					HTMLOptionElementImpl opt = new HTMLOptionElementImpl("", "");
+					opt.setParentImpl(selctElement);
+					super.setItem(i, opt);
+				}
+				List<Node> list = new ArrayList<>(nodeList);
+				((NodeImpl) node).setParentImpl(selctElement);
+				list.add(node);
+				setList(list);
+			} else {
+				List<Node> list;
+				if (index == 0 && nodeList.size() == 0) {
+					list = new ArrayList<>();
+					((NodeImpl) node).setParentImpl(selctElement);
+					list.add(node);
+				} else if (nodeList.size() == index) {
+					list = new ArrayList<>(nodeList);
+					((NodeImpl) node).setParentImpl(selctElement);
+					list.add(node);
+				} else {
+					list = new ArrayList<>(nodeList);
+					((NodeImpl) node).setParentImpl(selctElement);
+					list.set(index, node);
+				}
+				setList(list);
+			}
+		}
+
+		if (node != null) {
+			if (!selctElement.isMultiple() && index < 2) {
+				List<Node> list = getList();
+				for (int i = 0; i < list.size(); i++) {
+					HTMLOptionElementImpl opt = (HTMLOptionElementImpl) list.get(i);
+					opt.setSelected(i == 0);
 				}
 			}
-
-			super.setItem(index, node);
+		} else{
+			remove(index.doubleValue());
 		}
 	}
 
+	@Override
+	public int getLength() {
+		return this.size();
+	}
 
 	private void addElementIndex(HTMLOptionElement element, double before) {
 		List<Node> nodeList = getList();
@@ -185,31 +218,31 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 			HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
 			if (nodeList.size() == 0 && !selctElement.isMultiple()) {
 				element.setSelected(true);
+				((NodeImpl)element).setParentImpl(selctElement);
 				nodeList.add(element);
 			} else	{
+				((NodeImpl)element).setParentImpl(selctElement);
 				nodeList.add(before < 0 ? 0 : (int) before, element);
 			}
 		}
 	}
 
-	private void addElements(HTMLOptionElement element, HTMLElement before) throws DOMException {
+	private void addElements(HTMLOptionElement element, HTMLOptionElement before) throws DOMException {
 		List<Node> nodeList = getList();
-		if (nodeList.size() == 0) {
-			nodeList.add(0, element);
-		} else {
-			boolean found = false;
-			HTMLOptionElement bef = (HTMLOptionElement) before;
-			for (int i = 0; i < nodeList.size(); i++) {
-				HTMLOptionElement elem = (HTMLOptionElement) nodeList.get(i);
-				if (elem.getText().equals(bef.getText())) {
-					nodeList.add(i, element);
-					found = true;
-					break;
-				}
+		HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
+		boolean found = false;
+		for (int i = 0; i < nodeList.size(); i++) {
+			HTMLOptionElement elem = (HTMLOptionElement) nodeList.get(i);
+			if (elem.getText().equals(before.getText())) {
+				((NodeImpl) element).setParentImpl(selctElement);
+				nodeList.add(i, element);
+				found = true;
+				break;
 			}
-			if (!found)
-				throw new DOMException(DOMException.NOT_FOUND_ERR, "Record not found");
 		}
+		if (!found)
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "Record not found");
+
 	}
 
 	/** {@inheritDoc} */

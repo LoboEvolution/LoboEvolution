@@ -27,7 +27,7 @@ import org.loboevolution.js.AbstractScriptableDelegate;
  */
 public class AbstractList<E> extends AbstractScriptableDelegate implements List<E> {
 
-    private List<E> list = Collections.synchronizedList(new ArrayList<>());
+	private List<E> list = Collections.synchronizedList(new ArrayList<>());
 	
 	/**
 	 * <p>Constructor for AbstractList.</p>
@@ -201,5 +201,9 @@ public class AbstractList<E> extends AbstractScriptableDelegate implements List<
 	 */
 	protected List<E> getList() {
 		return list;
+	}
+
+	public void setList(List<E> list) {
+		this.list = list;
 	}
 }

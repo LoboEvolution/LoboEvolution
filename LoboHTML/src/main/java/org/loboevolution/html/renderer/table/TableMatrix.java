@@ -108,7 +108,7 @@ class TableMatrix {
 
 		this.tableWidthLength = TableMatrixSizes.getWidthLength(this.tableElement, availWidth);
 		
-		HTMLCollectionImpl captionList = new HTMLCollectionImpl(tableElement, Arrays.asList(tableElement.getNodeList(new CaptionFilter()).toArray()));
+		HTMLCollectionImpl captionList = new HTMLCollectionImpl(tableElement, new CaptionFilter());
 		if (captionList.getLength() > 0) {
 			HTMLElementImpl capt = (HTMLElementImpl) captionList.item(0);
 			this.captionElement = capt;

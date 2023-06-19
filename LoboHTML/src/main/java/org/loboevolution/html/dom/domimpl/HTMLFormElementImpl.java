@@ -92,7 +92,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	public HTMLCollection getElements() {
 		HTMLCollection elements = this.elements;
 		if (elements == null) {
-			elements = new HTMLCollectionImpl(this, Arrays.asList(this.getNodeList(new InputFilter()).toArray()));
+			elements = new HTMLCollectionImpl(this, new InputFilter());
 			this.elements = elements;
 		}
 		return elements;

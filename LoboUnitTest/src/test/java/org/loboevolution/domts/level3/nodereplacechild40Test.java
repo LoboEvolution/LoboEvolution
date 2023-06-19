@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 
@@ -49,29 +50,21 @@ public class nodereplacechild40Test extends LoboUnitTest {
         Comment newComment;
         DocumentType newDocType;
         DOMImplementation domImpl;
-        Node retNode;
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
         newDocType = domImpl.createDocumentType(rootName, publicId, systemId);
         newComment = doc.createComment("second element goes here");
-        retNode = doc.insertBefore(newComment, docElem);
+        doc.insertBefore(newComment, docElem);
 
+        boolean success = false;
         try {
-            retNode = doc.replaceChild(newDocType, newComment);
-            fail("throw_HIERARCHY_REQUEST_OR_NOT_SUPPORTED");
-
+            doc.replaceChild(newDocType, newComment);
         } catch (DOMException ex) {
-            switch (ex.getCode()) {
-                case 3:
-                    break;
-                case 9:
-                    break;
-                default:
-                    throw ex;
-            }
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
     }
 }
 

@@ -66,11 +66,11 @@ public class hc_nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         Node child;
         String childName;
         List<String> expected = new ArrayList<>();
-        expected.add("EM");
         expected.add("STRONG");
         expected.add("CODE");
         expected.add("SUP");
         expected.add("VAR");
+        expected.add("EM");
         expected.add("ACRONYM");
 
         List<String> result = new ArrayList<>();
