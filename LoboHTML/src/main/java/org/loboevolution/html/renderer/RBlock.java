@@ -20,6 +20,8 @@
 package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.dom.HTMLHtmlElement;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderer.info.RBlockInfo;
@@ -29,6 +31,7 @@ import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.info.FloatingInfo;
 
 import javax.swing.*;
@@ -322,6 +325,16 @@ public class RBlock extends BaseElementRenderable {
 			}
 		}
 
+		if (renderState.getPosition() == RenderState.POSITION_STATIC || renderState.getPosition() == RenderState.POSITION_RELATIVE) {
+			final Dimension changes = this.applyAutoStyles(availWidth - resultingWidth);
+			if (changes != null) {
+				resultingWidth += changes.width;
+				resultingHeight += changes.height;
+			}
+		}
+
+		insets = getInsetsMarginBorder(hscroll, vscroll);
+
 		if (hscroll || vscroll) {
 
 			if (vscroll) {
@@ -346,6 +359,41 @@ public class RBlock extends BaseElementRenderable {
                 hasHScrollBar(hscroll).
                 hasVScrollBar(vscroll).
                 build();
+	}
+
+	private Dimension applyAutoStyles(final int availWidth) {
+		final Object rootNode = this.modelNode;
+		HTMLElementImpl rootElement;
+		if (rootNode instanceof HTMLDocumentImpl) {
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
+			rootElement = (HTMLElementImpl) doc.getBody();
+		} else {
+			if (rootNode instanceof HTMLElementImpl) {
+				rootElement = (HTMLElementImpl) rootNode;
+			} else {
+				rootElement = null;
+			}
+		}
+		if (rootElement == null) {
+			return null;
+		}
+		final RenderState rs = rootElement.getRenderState();
+		final Dimension changes = new Dimension();
+		final HtmlInsets minsets = rs.getMarginInsets();
+		if (minsets != null) {
+			if (availWidth > 1) {
+				final int autoMarginX = availWidth;
+				if (minsets.getLeftType() == HtmlInsets.TYPE_AUTO) {
+					this.marginInsets.left = autoMarginX;
+					changes.width += autoMarginX;
+				}
+				if (minsets.getRightType() == HtmlInsets.TYPE_AUTO) {
+					this.marginInsets.right = autoMarginX;
+					changes.width += autoMarginX;
+				}
+			}
+		}
+		return changes;
 	}
 
 	/**
@@ -695,7 +743,6 @@ public class RBlock extends BaseElementRenderable {
 
 			try {
 				this.prePaint(g);
-				final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
 				final RBlockViewport bodyLayout = this.bodyLayout;
 				if (bodyLayout != null) {
 					final int overflowX = this.overflowX;
@@ -704,8 +751,7 @@ public class RBlock extends BaseElementRenderable {
 							&& (overflowY == RenderState.OVERFLOW_NONE || overflowY == RenderState.OVERFLOW_VISIBLE)) {
 						bodyLayout.paint(g);
 					} else {
-						// Clip when there potential scrolling or hidden overflow
-						// was requested.
+						final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
 						final Graphics newG = g.create(insets.left, insets.top, this.getWidth() - insets.left - insets.right,
 								this.getHeight() - insets.top - insets.bottom);
 						try {

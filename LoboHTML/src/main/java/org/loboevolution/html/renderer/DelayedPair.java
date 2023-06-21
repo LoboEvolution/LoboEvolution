@@ -123,7 +123,7 @@ public class DelayedPair {
 
 		if (bottom != null) {
 			if (y != null) {
-				child.setHeight(parent.getInnerHeight() - (y + bottom));
+				child.setHeight(height);
 			} else {
 				if (height != null) {
 					child.setHeight(height);
@@ -139,7 +139,6 @@ public class DelayedPair {
 
 		child.setX((x == null ? tp.x : x));
 		child.setY((y == null ? tp.y : y));
-
 		return child;
 	}
 

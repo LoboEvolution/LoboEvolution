@@ -98,8 +98,13 @@ class TableMatrix {
 		this.allCells.clear();
 		this.rowElements.clear();
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.tableElement.getDocumentNode();
-		HTMLTableElement htmlTableElement = (HTMLTableElement) tableElement;
-		final String borderText = htmlTableElement.getBorder();
+		String borderText;
+		if(tableElement instanceof HTMLTableElement){
+			borderText = ((HTMLTableElement) tableElement).getBorder();
+		} else{
+			borderText = tableElement.getAttribute("border");
+		}
+
 		int border = HtmlValues.getPixelSize(borderText, null, doc.getDefaultView(), 0);
 		final String cellSpacingText = this.tableElement.getAttribute("cellspacing");
 		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, null, doc.getDefaultView(), 0);

@@ -101,8 +101,7 @@ public class PositionedRenderable implements Renderable {
 			if (htmlRenderable instanceof RBlock) {
 				final RBlock htmlBlock = ((RBlock) htmlRenderable);
 				final Point htmlOffset = htmlBlock.bodyLayout.getOrigin();
-				final Insets htmlInsets = htmlBlock.getInsetsMarginBorder(htmlBlock.hasHScrollBar,
-						htmlBlock.hasVScrollBar);
+				final Insets htmlInsets = htmlBlock.getInsetsMarginBorder(htmlBlock.hasHScrollBar, htmlBlock.hasVScrollBar);
 				return new Point((int) htmlOffset.getX() - htmlInsets.left, (int) htmlOffset.getY() - htmlInsets.top);
 			}
 		}

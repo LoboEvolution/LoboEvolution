@@ -139,7 +139,6 @@ public class RUIControl extends BaseElementRenderable {
 		}
 		if (layoutValue == null) {
 			this.applyStyle(availWidth, availHeight);
-			final RenderState renderState = this.modelNode.getRenderState();
 
 			Insets paddingInsets = this.paddingInsets == null ? RBlockViewport.ZERO_INSETS : this.paddingInsets;
 			Insets borderInsets = this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;

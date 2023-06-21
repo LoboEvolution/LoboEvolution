@@ -94,7 +94,8 @@ public class FontValues extends HtmlValues {
 			key.setUnderline(FontValues.getFontUnderline(textDecoration, prevRenderState, config.isStrikethrough()));
 			key.setFontWeight(FontValues.getFontWeight(fontWeight, prevRenderState, config.isBold()));
 
-			if(key.getFontSize() == 0)
+
+			if(key.getFontSize() == 0 || Strings.isNotBlank(fontSize))
 				key.setFontSize(FontValues.getFontSize(fontSize, element.getDocumentNode().getDefaultView(), prevRenderState));
 
 		} else {

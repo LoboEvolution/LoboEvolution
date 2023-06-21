@@ -86,18 +86,9 @@ public class HtmlInsets {
 	 */
 	public Insets getAWTInsets(int availWidth, int availHeight, int autoX, int autoY) {
 		final int top = getInsetPixels(this.top, this.topType, availHeight, autoY);
-		final int bottom = getInsetPixels(this.bottom, this.bottomType, availHeight, autoY);
-
-		int autoLeft = autoX;
-		int autoRight = autoX;
-
-		if (leftType == TYPE_AUTO && rightType == TYPE_AUTO) {
-			autoLeft = autoLeft / 2;
-			autoRight = 0;
-		}
-
-		final int left = getInsetPixels(this.left, this.leftType, availWidth, autoLeft);
-		final int right = getInsetPixels(this.right, this.rightType, availWidth, autoRight);
+		final int bottom = getInsetPixels(this.bottom, this.bottomType, availHeight, autoX);
+		final int left = getInsetPixels(this.left, this.leftType, availWidth, autoY);
+		final int right = getInsetPixels(this.right, this.rightType, availWidth, autoX);
 		return new Insets(top, left, bottom, right);
 	}
 
@@ -142,9 +133,7 @@ public class HtmlInsets {
 				type = HtmlInsets.TYPE_PERCENT;
 				try {
 					value = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-				} catch (final Exception nfe) {
-					value = 0;
-				}
+				} catch (final Exception nfe) {}
 			} else {
 				HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
 				type = HtmlInsets.TYPE_PIXELS;

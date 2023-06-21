@@ -85,7 +85,7 @@ mvn surefire-report:report
 
 | Unit Tests | Passed | Errors | Failures | Rate Success |                        Result                         |
 |:----------:|:------:|:------:|:--------:|:------------:|:-----------------------------------------------------:|
-|    3174    |  2287  |   15   |   872    |    72,05%    | [see](https://loboevolution.github.io/LoboEvolution/surefire-report.html) |
+|    3174    |  2289  |   14   |   871    |    72,10%    | [see](https://loboevolution.github.io/LoboEvolution/surefire-report.html) |
 
 ### How To Do
 [TODO](https://github.com/oswetto/LoboEvolution/wiki/How-TODO)
@@ -93,5 +93,5 @@ mvn surefire-report:report
 ### Pre-History
 The history of all commits that transform LoboBrowser in LoboEvoluiton is available in [a separate repository](https://github.com/oswetto/LoboEvolutionPreHistory).
 
-### Contributors
+## Contributors
 ![Your Repository's Stats](https://contrib.rocks/image?repo=LoboEvolution/LoboEvolution)

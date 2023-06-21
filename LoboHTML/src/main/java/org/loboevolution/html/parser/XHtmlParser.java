@@ -246,13 +246,20 @@ public class XHtmlParser {
 							String systemId = null;
 							if (Strings.containsIgnoreCase(doctypeStr, "public")) {
 								String[] publics = Strings.splitIgnoreCase(doctypeStr, "public");
-								String[] result = publics[1].split("\"");
+								String[] result = publics[1].replace("[", "").split("\"");
 								List<String> list = Arrays.stream(result)
 										.filter(s -> Strings.isNotBlank(s) && s.length() > 1)
 										.collect(Collectors.toList());
 
-								publicId = list.get(0);
-								systemId = list.get(1);
+								if(list.size() == 1) {
+									publicId = list.stream().findFirst().get();
+								}
+
+								if(list.size() == 2) {
+									publicId = list.get(0);
+									systemId = list.get(1);
+								}
+
 								qName  = publics[0];
 
 							}

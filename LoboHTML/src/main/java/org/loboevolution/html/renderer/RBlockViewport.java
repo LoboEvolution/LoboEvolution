@@ -1802,8 +1802,8 @@ public class RBlockViewport extends BaseRCollection {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
 
 		final CSSStyleDeclaration style = element.getCurrentStyle();
-		int dhInt = getDeclaredHeightImpl(element, container.getInnerHeight());
-		int dwInt = getDeclaredWidthImpl(element, container.getInnerWidth());
+		int dhInt = getDeclaredHeightImpl(element, availContentHeight);
+		int dwInt = getDeclaredWidthImpl(element, availContentWidth);
 
 		Node nodeObj = element.getFirstChild();
 		if (nodeObj instanceof HTMLElementImpl) {

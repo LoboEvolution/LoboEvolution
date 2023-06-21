@@ -226,69 +226,25 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	}
 
 	private void insetsApplyStyle(RenderState rs, int availWidth, int availHeight, boolean isRootBlock) {
+		borderInsets(rs, availWidth, availHeight);
+		Insets paddingInsets = paddingInsets(rs, availWidth, availHeight);
+		Insets tentativeMarginInsets = marginInsets(rs, availWidth, availHeight);
 
-		Insets borderInsets = borderInsets(rs,availWidth, availHeight);
-		Insets paddingInsets = paddingInsets(rs,availWidth, availHeight);
-		Insets tentativeMarginInsets = marginInsets(rs,availWidth, availHeight);
-
-		final int paddingWidth = paddingInsets.left - paddingInsets.right;
-		final int borderWidth = borderInsets.left - borderInsets.right;
-		final int marginWidth = tentativeMarginInsets.left - tentativeMarginInsets.right;
-
-		final int paddingHeight = paddingInsets.top - paddingInsets.bottom;
-		final int borderHeight = borderInsets.top - borderInsets.bottom;
-		final int marginHeight = tentativeMarginInsets.top - tentativeMarginInsets.bottom;
-
-		final int actualAvailWidth = availWidth - paddingWidth - borderWidth - marginWidth;
-		final int actualAvailHeight = availHeight - paddingHeight - borderHeight - marginHeight;
-		final Integer declaredWidth = getDeclaredWidth(actualAvailWidth);
-		final Integer declaredHeight = getDeclaredHeight(actualAvailHeight);
-
-		int autoMarginX = 0;
-		int autoMarginY = 0;
-
-		if (declaredWidth != null) {
-			final int borderx = borderInsets.left - borderInsets.right;
-			final int paddingx = paddingInsets.left - paddingInsets.right;
-			autoMarginX = (availWidth - declaredWidth - borderx  - paddingx);
-		}
-
-		if (declaredHeight != null) {
-			final int bordery = borderInsets.top - borderInsets.bottom;
-			final int paddingy = paddingInsets.top - paddingInsets.bottom;
-			autoMarginY = (availHeight - declaredHeight - bordery - paddingy);
-		}
-
-		HtmlInsets minsets = rs.getMarginInsets();
 		if (isRootBlock) {
-			Insets regularMarginInsets = RBlockViewport.ZERO_INSETS;
-
-			if (autoMarginX == 0 && autoMarginY == 0) {
-				regularMarginInsets = tentativeMarginInsets;
-			} else if (minsets != null) {
-				regularMarginInsets = minsets.getAWTInsets(availWidth, availHeight, autoMarginX, autoMarginY);
-			}
-
-			final int top = paddingInsets.top + regularMarginInsets.top;
-			final int left = paddingInsets.left + regularMarginInsets.left;
-			final int bottom = paddingInsets.top + regularMarginInsets.bottom;
-			final int right = paddingInsets.top + regularMarginInsets.right;
+			final int top = paddingInsets.top + tentativeMarginInsets.top;
+			final int left = paddingInsets.left + tentativeMarginInsets.left;
+			final int bottom = paddingInsets.top + tentativeMarginInsets.bottom;
+			final int right = paddingInsets.top + tentativeMarginInsets.right;
 
 			this.paddingInsets = new Insets(top, left, bottom, right);
 			this.marginInsets = null;
 		} else {
 			this.paddingInsets = paddingInsets;
-			this.marginInsets = RBlockViewport.ZERO_INSETS;
-
-			if (autoMarginX == 0 && autoMarginY == 0) {
-				this.marginInsets = tentativeMarginInsets;
-			} else if (minsets != null) {
-				this.marginInsets = minsets.getAWTInsets(availWidth, availHeight, autoMarginX, autoMarginY);
-			}
+			this.marginInsets = tentativeMarginInsets;
 		}
 	}
 
-	private Insets borderInsets(RenderState rs, int availWidth, int availHeight) {
+	private void borderInsets(RenderState rs, int availWidth, int availHeight) {
 		Insets ins = null;
 		final BorderInfo borderInfo = rs.getBorderInfo();
 		this.borderInfo = borderInfo;
@@ -312,7 +268,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			this.borderRightColor = null;
 		}
 		this.borderInsets = ins;
-		return ins;
 	}
 
 	private Insets marginInsets(RenderState rs, int availWidth, int availHeight) {
@@ -639,7 +594,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
     private Insets getInsets(final boolean hscroll, final boolean vscroll, final boolean includeMI,
             final boolean includeBI, final boolean includePI) {
-		this.modelNode.getRenderState();
 		final Insets mi = this.marginInsets;
 		final Insets bi = this.borderInsets;
         final Insets pi = this.paddingInsets;
@@ -920,10 +874,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			if (rs == null || (RenderState.POSITION_ABSOLUTE != rs.getPosition() && RenderState.POSITION_FIXED != rs.getPosition())) {
 				totalWidth -= marginInsets.left + marginInsets.right;
 				totalHeight -= marginInsets.top + marginInsets.bottom;
+				startX += marginInsets.left;
+				startY += marginInsets.top;
 			}
-
-			startX += marginInsets.left;
-			startY += marginInsets.top;
 		}
 
 		prePaintBackground(g, this.modelNode, totalWidth, totalHeight, startX, startY);
