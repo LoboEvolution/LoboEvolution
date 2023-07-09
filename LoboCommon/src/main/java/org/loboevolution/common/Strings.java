@@ -108,6 +108,14 @@ public final class Strings {
 		return text != null && text1 != null && (text.contains(text1.toLowerCase()) || text.contains(text1.toUpperCase()));
 	}
 
+	public static boolean startsWithIgnoreCase(String text, String text1) {
+		return text != null && text1 != null && (text.startsWith(text1.toLowerCase()) || text.startsWith(text1.toUpperCase()));
+	}
+
+	public static boolean endsWithIgnoreCase(String text, String text1) {
+		return text != null && text1 != null && (text.endsWith(text1.toLowerCase()) || text.endsWith(text1.toUpperCase()));
+	}
+
 	public static String[] splitIgnoreCase(String text, String text1) {
 		if (text != null && text1 != null) {
 			return text.split(text1.toLowerCase()).length > 1 ? text.split(text1.toLowerCase()) :

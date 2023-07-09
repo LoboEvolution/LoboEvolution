@@ -23,9 +23,11 @@ package org.loboevolution.html.renderer;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 
@@ -355,13 +357,20 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 		int width = -1;
 
+		if(element instanceof HTMLLinkElementImpl && Strings.isNotBlank(textContent)) {
+			int fontSize = renderState.getFont().getSize();
+			width = textContent.length() * fontSize;
+		}
+
 		if (Strings.isNotBlank(widthText)) {
 			width = HtmlValues.getPixelSize(widthText, renderState, doc.getDefaultView(), -1, availWidth);
 		}
 
-		if (width == -1 && Strings.isNotBlank(textContent) && renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK) {
+
+		if (width == -1 && Strings.isNotBlank(textContent) && (renderState.getPosition() == RenderState.POSITION_ABSOLUTE || renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK)) {
 			HtmlInsets paddingInsets = renderState.getPaddingInsets();
 			HtmlInsets marginInsets = renderState.getMarginInsets();
+			int fontSize = renderState.getFont().getSize();
 			int right = 0;
 			int left = 0;
 
@@ -375,9 +384,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				left = left + marginInsets.getLeft();
 			}
 
-			final int multi = (right == 0 && left == 0) ? 12 : 4;
-
-			width = (textContent.length() + right + left) * multi;
+			width = (textContent.length() + right + left) * fontSize;
 		}
 
 		if (Strings.isNotBlank(props.getMaxWidth())) {
@@ -424,6 +431,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 			if (heightText != null) {
 				height = HtmlValues.getPixelSize(heightText, renderState, doc.getDefaultView(), -1, availHeight);
+			}
+
+			final String textContent = element.getTextContent();
+			if (height == -1 && Strings.isNotBlank(textContent) && renderState.getPosition() == RenderState.POSITION_ABSOLUTE) {
+				height = renderState.getFont().getSize();
 			}
 
 			if (props.getMaxHeight() != null) {

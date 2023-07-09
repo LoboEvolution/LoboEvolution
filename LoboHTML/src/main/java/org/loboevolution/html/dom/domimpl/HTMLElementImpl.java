@@ -556,6 +556,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			return new ArrayList<>();
 		}
 		final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
+		ssa.setDoc(doc);
 		final List<CSSStyleSheetImpl.SelectorEntry> list = ssa.getActiveStyleDeclarations(this, elementName, classes, mouseOver);
 		hasMouseOver = ssa.isMouseOver();
 		return list;

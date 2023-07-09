@@ -294,7 +294,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	private void zIndexApplyStyle(CSSStyleDeclaration props) {
 		final String zIndex = props.getzIndex();
-		if (Strings.isNotBlank(zIndex)) {
+		if (Strings.isNotBlank(zIndex) && this.modelNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
 			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
 			try {

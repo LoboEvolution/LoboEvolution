@@ -24,6 +24,7 @@ import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.CSSParseException;
+import org.htmlunit.cssparser.parser.condition.AttributeCondition;
 import org.htmlunit.cssparser.parser.condition.Condition;
 import org.htmlunit.cssparser.parser.condition.Condition.ConditionType;
 import org.htmlunit.cssparser.parser.condition.NotPseudoClassCondition;
@@ -44,9 +45,7 @@ import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.node.js.Window;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
@@ -60,9 +59,29 @@ public class StyleSheetAggregator {
 
 	private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\]\\.:])");
 
+	private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
+			"link", "visited", "hover", "active",
+			"focus", "lang", "first-child"));
+
+	private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
+			"checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
+			"nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
+			"last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
+			"optional", "required", "valid", "invalid"));
+
+	private static final Set<String> CSS4_PSEUDO_CLASSES = new HashSet<>(Arrays.asList("focus-within", "focus-visible"));
+
 	private final List<CSSStyleSheetImpl> styleSheets;
 
 	private boolean mouseOver = false;
+
+	private HTMLDocumentImpl doc;
+
+
+	static {
+		CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
+		CSS4_PSEUDO_CLASSES.addAll(CSS3_PSEUDO_CLASSES);
+	}
 	
 	/**
 	 * <p>Constructor for StyleSheetAggregator.</p>
@@ -245,29 +264,73 @@ public class StyleSheetAggregator {
 			return element.hasAttribute(condition.getLocalName());
 
 		case PREFIX_ATTRIBUTE_CONDITION:
-			final String prefixValue = condition.getValue();
-			String attr = element.getAttribute(condition.getLocalName());
-			return !"".equals(prefixValue) && Strings.isNotBlank(attr) && attr.startsWith(prefixValue);
+			final AttributeCondition prefixAttributeCondition = (AttributeCondition) condition;
+			final String prefixValue = prefixAttributeCondition.getValue();
+			final String attribute = element.getAttribute(prefixAttributeCondition.getLocalName());
+			if (prefixAttributeCondition.isCaseInSensitive()) {
+				return Strings.isNotBlank(prefixValue)
+						&& Strings.isNotBlank(attribute)
+						&& Strings.startsWithIgnoreCase(attribute, prefixValue);
+			}
+			return Strings.isNotBlank(prefixValue)
+					&& Strings.isNotBlank(attribute)
+					&& attribute.startsWith(prefixValue);
 
 		case SUFFIX_ATTRIBUTE_CONDITION:
-			final String suffixValue = condition.getValue();
-			String attrib = element.getAttribute(condition.getLocalName());
-			return !"".equals(suffixValue) && Strings.isNotBlank(attrib) && attrib.endsWith(suffixValue);
+			final AttributeCondition suffixAttributeCondition = (AttributeCondition) condition;
+			final String suffixValue = suffixAttributeCondition.getValue();
+			final String attribute2 = element.getAttribute(suffixAttributeCondition.getLocalName());
+			if (suffixAttributeCondition.isCaseInSensitive()) {
+				return Strings.isNotBlank(suffixValue)
+						&& Strings.isNotBlank(attribute2)
+						&& Strings.endsWithIgnoreCase(attribute2, suffixValue);
+			}
+			return Strings.isNotBlank(suffixValue)
+					&& Strings.isNotBlank(attribute2)
+					&& attribute2.endsWith(suffixValue);
 
 		case SUBSTRING_ATTRIBUTE_CONDITION:
-			final String substringValue = condition.getValue();
-			String attribu = element.getAttribute(condition.getLocalName());
-			return !"".equals(substringValue) && Strings.isNotBlank(attribu) && attribu.contains(substringValue);
+			final AttributeCondition substringAttributeCondition = (AttributeCondition) condition;
+			final String substringValue = substringAttributeCondition.getValue();
+			final String attribute3 = element.getAttribute(substringAttributeCondition.getLocalName());
+			if (substringAttributeCondition.isCaseInSensitive()) {
+				return Strings.isNotBlank(substringValue)
+						&& Strings.isNotBlank(attribute3)
+						&& Strings.containsIgnoreCase(attribute3, substringValue);
+			}
+			return Strings.isNotBlank(substringValue)
+					&& Strings.isNotBlank(attribute3)
+					&& attribute3.contains(substringValue);
 
 		case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-			final String v = condition.getValue();
-			final String a = element.getAttribute(condition.getLocalName());
-			return selects(v, a, '-');
+			final AttributeCondition beginHyphenAttributeCondition = (AttributeCondition) condition;
+			final String v = beginHyphenAttributeCondition.getValue();
+			final String a = element.getAttribute(beginHyphenAttributeCondition.getLocalName());
+			if (beginHyphenAttributeCondition.isCaseInSensitive()) {
+				return  Strings.isNotBlank(v)
+						&& Strings.isNotBlank(a)
+						&& selectsHyphenSeparated(
+						v.toLowerCase(Locale.ROOT),
+						a.toLowerCase(Locale.ROOT));
+			}
+			return Strings.isNotBlank(v)
+					&& Strings.isNotBlank(a)
+					&& selectsHyphenSeparated(v, a);
 
 		case ONE_OF_ATTRIBUTE_CONDITION:
-			final String v2 = condition.getValue();
-			final String a2 = element.getAttribute(condition.getLocalName());
-			return selects(v2, a2, ' ');
+			final AttributeCondition oneOfAttributeCondition = (AttributeCondition) condition;
+			final String v2 = oneOfAttributeCondition.getValue();
+			final String a2 = element.getAttribute(oneOfAttributeCondition.getLocalName());
+			if (oneOfAttributeCondition.isCaseInSensitive()) {
+				return Strings.isNotBlank(v2)
+						&& Strings.isNotBlank(a2)
+						&& selectsOneOf(
+						v2.toLowerCase(Locale.ROOT),
+						a2.toLowerCase(Locale.ROOT));
+			}
+			return Strings.isNotBlank(v2)
+					&& Strings.isNotBlank(a2)
+					&& selectsOneOf(v2, a2);
 
 		case LANG_CONDITION:
 			final String lcLang = condition.getValue();
@@ -299,31 +362,247 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private boolean selects(final String condition, final String attribute, final char separator) {
-		final int conditionLength = condition.length();
-		if (conditionLength < 0 || attribute == null) {
-			return false;
-		}
+	private boolean selectsPseudoClass(final Condition condition, final HTMLElement element, final boolean mouseOver) {
+		final String value = condition.getValue();
+		switch (value) {
+			case "hover":
+				setMouseOver(true);
+				return mouseOver;
 
-		final int attribLength = attribute.length();
-		if (attribLength < conditionLength) {
-			return false;
-		}
-		if (attribLength > conditionLength) {
-			if (separator == attribute.charAt(conditionLength) && attribute.startsWith(condition)) {
+			case "root":
+				NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
+				return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_NODE;
+
+			case "enabled":
+				return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
+						(element instanceof HTMLSelectElement) || (element instanceof HTMLTextAreaElement)) &&
+						(element.hasAttribute("enabled") ||  !element.hasAttribute("enabled") && !element.hasAttribute("disabled"));
+
+			case "disabled":
+				return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
+						(element instanceof HTMLSelectElement) || (element instanceof HTMLTextAreaElement)) && element.hasAttribute("disabled");
+
+			case "placeholder":
+				return element.hasAttribute("placeholder");
+
+			case "read-only":
+				return element.hasAttribute("readonly");
+
+			case "read-write":
+				return !element.hasAttribute("readonly");
+
+			case "out-of-range":
+				if (element instanceof HTMLInputElement) {
+					HTMLInputElementImpl input = (HTMLInputElementImpl)element;
+					if ("number".equals(input.getType())) {
+						String minTxt = input.getAttribute("min");
+						String maxTxt = input.getAttribute("max");
+
+						int min = minTxt == null ? 0 : Integer.parseInt(input.getAttribute("min"));
+						int max = maxTxt == null ? Integer.MAX_VALUE : Integer.parseInt(input.getAttribute("max"));
+						int valueNumber = Integer.parseInt(input.getValue());
+						return (valueNumber < min || valueNumber > max);
+					}
+				}
+
+			case "checked":
+				if (element instanceof HTMLInputElement) {
+					return ((HTMLInputElement) element).isChecked();
+				}
+
+				if (element instanceof HTMLOptionElement) {
+					AtomicInteger selected = new AtomicInteger(0);
+					AtomicInteger isSelected = new AtomicInteger(0);
+					HTMLSelectElement selectElement = (HTMLSelectElement) element.getParentNode();
+					HTMLOptionsCollectionImpl optionsCollection = (HTMLOptionsCollectionImpl) selectElement.getOptions();
+					optionsCollection.forEach(opt -> {
+						HTMLOptionElement optionElement = (HTMLOptionElement) opt;
+						if (optionElement.hasAttribute("selected")) {
+							selected.incrementAndGet();
+						}
+
+						if (optionElement.isSelected()) {
+							isSelected.incrementAndGet();
+						}
+					});
+
+					if (isSelected.get() > 0) {
+						return ((HTMLOptionElement) element).isSelected();
+					}
+
+					if (selected.get() > 0) {
+						return element.hasAttribute("selected");
+					}
+				}
+			case "required":
+				return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement
+						|| element instanceof HTMLTextAreaElement) && element.hasAttribute("required");
+
+			case "optional":
+				return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement
+						|| element instanceof HTMLTextAreaElement) && !element.hasAttribute("required");
+
+			case "link":
+				return (element instanceof HTMLLinkElement);
+
+			case "visited":
+				if (element instanceof HTMLLinkElement) {
+					HTMLLinkElementImpl elem = (HTMLLinkElementImpl)element;
+					final HtmlRendererConfig config = elem.getHtmlRendererConfig();
+					return config.isVisited(elem.getHref());
+				} else{
+					return false;
+				}
+
+			case "first-child":
+				for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+					if (n instanceof HTMLElement) {
+						return false;
+					}
+				}
 				return true;
-			}
-			if (separator == attribute.charAt(attribLength - conditionLength - 1) && attribute.endsWith(condition)) {
+
+			case "last-child":
+				for (Node n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+					if (n instanceof HTMLElement) {
+						return false;
+					}
+				}
 				return true;
-			}
-			if (attribLength + 1 > conditionLength) {
-				final StringBuilder tmp = new StringBuilder(conditionLength + 2);
-				tmp.append(separator).append(condition).append(separator);
-				return attribute.contains(tmp);
-			}
-			return false;
+
+			case "first-of-type":
+				final String firstType = element.getNodeName();
+				for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+					if (n instanceof HTMLElement && n.getNodeName().equals(firstType)) {
+						return false;
+					}
+				}
+				return true;
+
+			case "last-of-type":
+				final String lastType = element.getNodeName();
+				for (Node n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+					if (n instanceof HTMLElement && n.getNodeName().equals(lastType)) {
+						return false;
+					}
+				}
+				return true;
+
+			case "only-child":
+				for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+					if (n instanceof HTMLElement) {
+						return false;
+					}
+				}
+				for (Node n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+					if (n instanceof HTMLElement) {
+						return false;
+					}
+				}
+				return true;
+
+			case "only-of-type":
+				final String type = element.getNodeName();
+				for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+					if (n instanceof HTMLElement && n.getNodeName().equals(type)) {
+						return false;
+					}
+				}
+				for (Node n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+					if (n instanceof HTMLElement && n.getNodeName().equals(type)) {
+						return false;
+					}
+				}
+				return true;
+
+			case "empty":
+				return isEmpty(element);
+
+			case "target":
+				HTMLElementImpl impl = (HTMLElementImpl) element;
+				final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
+				final String ref = document.getBaseURI();
+				return Strings.isNotBlank(ref) && ref.contains("#") && ref.split("#")[1].equals(element.getId());
+
+			default:
+				if (value.startsWith("nth-child(")) {
+					final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+					int index = 0;
+					for (Node n = element; n != null; n = n.getPreviousSibling()) {
+						if (n instanceof HTMLElement) {
+							index++;
+						}
+					}
+					return getNth(element, nth, index);
+				} else if (value.startsWith("nth-last-child(")) {
+					final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+					int index = 0;
+					for (Node n = element; n != null; n = n.getNextSibling()) {
+						if (n instanceof HTMLElement) {
+							index++;
+						}
+					}
+					return getNth(element, nth, index);
+				} else if (value.startsWith("nth-of-type(")) {
+					final String nthType = element.getNodeName();
+					final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+					int index = 0;
+					for (Node n = element; n != null; n = n.getPreviousSibling()) {
+						if (n instanceof HTMLElement && n.getNodeName().equals(nthType)) {
+							index++;
+						}
+					}
+					return getNth(element, nth, index);
+				} else if (value.startsWith("nth-last-of-type(")) {
+					final String nthLastType = element.getNodeName();
+					final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+					int index = 0;
+					for (Node n = element; n != null; n = n.getNextSibling()) {
+						if (n instanceof HTMLElement && n.getNodeName().equals(nthLastType)) {
+							index++;
+						}
+					}
+					return getNth(element, nth, index);
+				} else if (value.startsWith("not(")) {
+					final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
+					final AtomicBoolean errorOccured = new AtomicBoolean(false);
+					final CSSErrorHandler errorHandler = new CSSErrorHandler() {
+						@Override
+						public void warning(final CSSParseException exception) throws CSSException {
+							// ignore
+						}
+
+						@Override
+						public void fatalError(final CSSParseException exception) throws CSSException {
+							errorOccured.set(true);
+						}
+
+						@Override
+						public void error(final CSSParseException exception) throws CSSException {
+							errorOccured.set(true);
+						}
+					};
+					final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+					parser.setErrorHandler(errorHandler);
+					try {
+						final SelectorList selectorList = parser.parseSelectors(selectors);
+						if (errorOccured.get() || selectorList == null || selectorList.size() != 1) {
+							return false;
+						}
+
+						for (final Selector selector : selectorList) {
+							if (!isValidSelector(selector, 9, element)) {
+								return false;
+							}
+						}
+
+						return !selects(selectorList.get(0), element, null, mouseOver);
+					} catch (final IOException e) {
+						throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
+					}
+				}
+				return false;
 		}
-		return attribute.equals(condition);
 	}
 
 	private boolean selectsWhitespaceSeparated(final String condition, final String attribute) {
@@ -353,242 +632,118 @@ public class StyleSheetAggregator {
 		return false;
 	}
 
-	private boolean selectsPseudoClass(final Condition condition, final HTMLElement element, final boolean mouseOver) {
-		final String value = condition.getValue();
-		switch (value) {
-		case "hover":
-			setMouseOver(true);
-			return mouseOver;
-
-		case "root":
-			NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
-			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_NODE;
-
-			case "enabled":
-				return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
-						(element instanceof HTMLSelectElement) || (element instanceof HTMLTextAreaElement)) &&
-						(element.hasAttribute("enabled") ||  !element.hasAttribute("enabled") && !element.hasAttribute("disabled"));
-
-		case "disabled":
-			return ((element instanceof HTMLInputElement) || (element instanceof HTMLButtonElement) ||
-					(element instanceof HTMLSelectElement) || (element instanceof HTMLTextAreaElement)) && element.hasAttribute("disabled");
-
-		case "placeholder":
-				return element.hasAttribute("placeholder");
-
-		case "read-only":
-				return element.hasAttribute("readonly");
-
-		case "read-write":
-				return !element.hasAttribute("readonly");
-
-		case "out-of-range":
-			if (element instanceof HTMLInputElement) {
-				HTMLInputElementImpl input = (HTMLInputElementImpl)element;
-				if ("number".equals(input.getType())) {
-					String minTxt = input.getAttribute("min");
-					String maxTxt = input.getAttribute("max");
-
-					int min = minTxt == null ? 0 : Integer.parseInt(input.getAttribute("min"));
-					int max = maxTxt == null ? Integer.MAX_VALUE : Integer.parseInt(input.getAttribute("max"));
-					int valueNumber = Integer.parseInt(input.getValue());
-					return (valueNumber < min || valueNumber > max);
-				}
-			}
-
-		case "checked":
-			if (element instanceof HTMLInputElement) {
-				return ((HTMLInputElement) element).isChecked();
-			}
-
-			if (element instanceof HTMLOptionElement) {
-				AtomicInteger selected = new AtomicInteger(0);
-				AtomicInteger isSelected = new AtomicInteger(0);
-				HTMLSelectElement selectElement = (HTMLSelectElement) element.getParentNode();
-				HTMLOptionsCollectionImpl optionsCollection = (HTMLOptionsCollectionImpl) selectElement.getOptions();
-				optionsCollection.forEach(opt -> {
-					HTMLOptionElement optionElement = (HTMLOptionElement) opt;
-					if (optionElement.hasAttribute("selected")) {
-						selected.incrementAndGet();
-					}
-
-					if (optionElement.isSelected()) {
-						isSelected.incrementAndGet();
-					}
-				});
-
-				if (isSelected.get() > 0) {
-					return ((HTMLOptionElement) element).isSelected();
-				}
-
-				if (selected.get() > 0) {
-					return element.hasAttribute("selected");
-				}
-			}
-		case "required":
-			return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement
-					|| element instanceof HTMLTextAreaElement) && element.hasAttribute("required");
-
-		case "optional":
-			return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement
-					|| element instanceof HTMLTextAreaElement) && !element.hasAttribute("required");
-
-		case "link":
-			return (element instanceof HTMLLinkElement);
-
-		case "visited":
-			if (element instanceof HTMLLinkElement) {
-				HTMLLinkElementImpl elem = (HTMLLinkElementImpl)element;
-				final HtmlRendererConfig config = elem.getHtmlRendererConfig();
-				return config.isVisited(elem.getHref());
-			} else{
-				return false;
-			}
-
-		case "first-child":
-			for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-				if (n instanceof HTMLElement) {
-					return false;
-				}
-			}
-			return true;
-
-		case "last-child":
-			for (Node n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-				if (n instanceof HTMLElement) {
-					return false;
-				}
-			}
-			return true;
-
-		case "first-of-type":
-			final String firstType = element.getNodeName();
-			for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-				if (n instanceof HTMLElement && n.getNodeName().equals(firstType)) {
-					return false;
-				}
-			}
-			return true;
-
-		case "last-of-type":
-			final String lastType = element.getNodeName();
-			for (Node n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-				if (n instanceof HTMLElement && n.getNodeName().equals(lastType)) {
-					return false;
-				}
-			}
-			return true;
-
-		case "only-child":
-			for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-				if (n instanceof HTMLElement) {
-					return false;
-				}
-			}
-			for (Node n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-				if (n instanceof HTMLElement) {
-					return false;
-				}
-			}
-			return true;
-
-		case "only-of-type":
-			final String type = element.getNodeName();
-			for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-				if (n instanceof HTMLElement && n.getNodeName().equals(type)) {
-					return false;
-				}
-			}
-			for (Node n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-				if (n instanceof HTMLElement && n.getNodeName().equals(type)) {
-					return false;
-				}
-			}
-			return true;
-
-		case "empty":
-			return isEmpty(element);
-
-		case "target":
-			HTMLElementImpl impl = (HTMLElementImpl) element;
-			final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
-			final String ref = document.getBaseURI();
-			return Strings.isNotBlank(ref) && ref.contains("#") && ref.split("#")[1].equals(element.getId());
-
-		default:
-			if (value.startsWith("nth-child(")) {
-				final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-				int index = 0;
-				for (Node n = element; n != null; n = n.getPreviousSibling()) {
-					if (n instanceof HTMLElement) {
-						index++;
-					}
-				}
-				return getNth(element, nth, index);
-			} else if (value.startsWith("nth-last-child(")) {
-				final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-				int index = 0;
-				for (Node n = element; n != null; n = n.getNextSibling()) {
-					if (n instanceof HTMLElement) {
-						index++;
-					}
-				}
-				return getNth(element, nth, index);
-			} else if (value.startsWith("nth-of-type(")) {
-				final String nthType = element.getNodeName();
-				final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-				int index = 0;
-				for (Node n = element; n != null; n = n.getPreviousSibling()) {
-					if (n instanceof HTMLElement && n.getNodeName().equals(nthType)) {
-						index++;
-					}
-				}
-				return getNth(element, nth, index);
-			} else if (value.startsWith("nth-last-of-type(")) {
-				final String nthLastType = element.getNodeName();
-				final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-				int index = 0;
-				for (Node n = element; n != null; n = n.getNextSibling()) {
-					if (n instanceof HTMLElement && n.getNodeName().equals(nthLastType)) {
-						index++;
-					}
-				}
-				return getNth(element, nth, index);
-			} else if (value.startsWith("not(")) {
-				final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
-				final AtomicBoolean errorOccured = new AtomicBoolean(false);
-				final CSSErrorHandler errorHandler = new CSSErrorHandler() {
-					@Override
-					public void warning(final CSSParseException exception) throws CSSException {
-						// ignore
-					}
-
-					@Override
-					public void fatalError(final CSSParseException exception) throws CSSException {
-						errorOccured.set(true);
-					}
-
-					@Override
-					public void error(final CSSParseException exception) throws CSSException {
-						errorOccured.set(true);
-					}
-				};
-				final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-				parser.setErrorHandler(errorHandler);
-				try {
-					final SelectorList selectorList = parser.parseSelectors(selectors);
-					if (errorOccured.get() || selectorList == null || selectorList.size() != 1) {
-						throw new CSSException("Invalid selectors: " + selectors);
-					}
-					
-					return !selects(selectorList.get(0), element, null, mouseOver);
-				} catch (final IOException e) {
-					throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
-				}
+	private static boolean selectsHyphenSeparated(final String condition, final String attribute) {
+		final int conditionLength = condition.length();
+		if (conditionLength < 1) {
+			if (Strings.isNotBlank(attribute)) {
+				final int attribLength = attribute.length();
+				return attribLength == 0 || '-' == attribute.charAt(0);
 			}
 			return false;
 		}
+
+		final int attribLength = attribute.length();
+		if (attribLength < conditionLength) {
+			return false;
+		}
+		if (attribLength > conditionLength) {
+			return '-' == attribute.charAt(conditionLength)
+					&& attribute.startsWith(condition);
+		}
+		return attribute.equals(condition);
 	}
+
+	private static boolean selectsOneOf(final String condition, final String attribute) {
+
+		final int conditionLength = condition.length();
+		if (conditionLength < 1) {
+			return false;
+		}
+
+		final int attribLength = attribute.length();
+		if (attribLength < conditionLength) {
+			return false;
+		}
+		if (attribLength > conditionLength) {
+			if (' ' == attribute.charAt(conditionLength)
+					&& attribute.startsWith(condition)) {
+				return true;
+			}
+			if (' ' == attribute.charAt(attribLength - conditionLength - 1)
+					&& attribute.endsWith(condition)) {
+				return true;
+			}
+			if (attribLength + 1 > conditionLength) {
+				final StringBuilder tmp = new StringBuilder(conditionLength + 2);
+				tmp.append(' ').append(condition).append(' ');
+				return attribute.contains(tmp);
+			}
+			return false;
+		}
+		return attribute.equals(condition);
+	}
+
+	private static boolean isValidSelector(final Selector selector, final int documentMode, final Node domNode) {
+		switch (selector.getSelectorType()) {
+			case ELEMENT_NODE_SELECTOR:
+				final List<Condition> conditions = ((ElementSelector) selector).getConditions();
+				if (conditions != null) {
+					for (final Condition condition : conditions) {
+						if (!isValidCondition(condition, documentMode, domNode)) {
+							return false;
+						}
+					}
+				}
+				return true;
+			case DESCENDANT_SELECTOR:
+				final DescendantSelector ds = (DescendantSelector) selector;
+				return isValidSelector(ds.getAncestorSelector(), documentMode, domNode)
+						&& isValidSelector(ds.getSimpleSelector(), documentMode, domNode);
+			case CHILD_SELECTOR:
+				final ChildSelector cs = (ChildSelector) selector;
+				return isValidSelector(cs.getAncestorSelector(), documentMode, domNode)
+						&& isValidSelector(cs.getSimpleSelector(), documentMode, domNode);
+			case DIRECT_ADJACENT_SELECTOR:
+				final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
+				return isValidSelector(das.getSelector(), documentMode, domNode)
+						&& isValidSelector(das.getSimpleSelector(), documentMode, domNode);
+			case GENERAL_ADJACENT_SELECTOR:
+				final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
+				return isValidSelector(gas.getSelector(), documentMode, domNode)
+						&& isValidSelector(gas.getSimpleSelector(), documentMode, domNode);
+			default:
+				return true;
+		}
+	}
+
+	private static boolean isValidCondition(final Condition condition, final int documentMode, final Node domNode) {
+		if (Objects.requireNonNull(condition.getConditionType()) == ConditionType.PSEUDO_CLASS_CONDITION) {
+			String value = condition.getValue();
+			if (value.endsWith(")")) {
+				if (value.endsWith("()")) {
+					return false;
+				}
+				value = value.substring(0, value.indexOf('(') + 1) + ')';
+			}
+			if (documentMode < 9) {
+				return CSS2_PSEUDO_CLASSES.contains(value);
+			}
+
+			if (!CSS2_PSEUDO_CLASSES.contains(value)
+					&& !domNode.hasChildNodes()) {
+				throw new CSSException("Syntax Error");
+			}
+
+			if ("nth-child(".equals(value)) {
+				final String arg = value.substring(value.indexOf('(') + 1, value.length() - 1);
+				return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg);
+			}
+
+			return CSS4_PSEUDO_CLASSES.contains(value);
+		}
+		return true;
+	}
+
 
 	/**
 	 * <p>isActive.</p>
@@ -830,6 +985,24 @@ public class StyleSheetAggregator {
 				} else {
 					index(index.addMedia(mediaList), mediaRule.getCssRules());
 				}
+			} else if (rule instanceof CSSPageRuleImpl) {
+				final CSSPageRuleImpl pageRule = (CSSPageRuleImpl) rule;
+				index(index, pageRule.getParentStyleSheet().getCssRules());
+			} else if (rule instanceof CSSImportRuleImpl) {
+				try {
+					final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
+					final MediaListImpl mediaList = importRule.getMedia();
+					HTMLDocumentImpl doc = getDoc();
+					String uri = doc.getFullURL(importRule.getHref(), doc.getBaseURI()).toString();
+					final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getDoc().getHtmlRendererConfig(), uri, null, doc.getBaseURI(), false);
+					if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
+						index(index, sheet.getCssRules());
+					} else {
+						index(index.addMedia(mediaList), sheet.getCssRules());
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -840,5 +1013,13 @@ public class StyleSheetAggregator {
 
 	public void setMouseOver(boolean mouseOver) {
 		this.mouseOver = mouseOver;
+	}
+
+	public HTMLDocumentImpl getDoc() {
+		return doc;
+	}
+
+	public void setDoc(HTMLDocumentImpl doc) {
+		this.doc = doc;
 	}
 }

@@ -212,7 +212,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	/** {@inheritDoc} */
 	@Override
 	public void setColSpan(Object colSpan) {
-		if (Strings.isNumeric(colSpan.toString()) && Double.parseDouble(colSpan.toString()) > 0) {
+		if (colSpan!= null && Strings.isNumeric(colSpan.toString()) && Double.parseDouble(colSpan.toString()) > 0) {
 			setAttribute("colspan", String.valueOf(colSpan));
 		} else {
 			setAttribute("colspan", "1");
@@ -240,7 +240,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	/** {@inheritDoc} */
 	@Override
 	public void setRowSpan(Object rowSpan) {		
-		if (Strings.isNumeric(rowSpan.toString()) && Double.parseDouble(rowSpan.toString()) > 0) {
+		if (rowSpan != null && Strings.isNumeric(rowSpan.toString()) && Double.parseDouble(rowSpan.toString()) > 0) {
 			setAttribute("rowspan", String.valueOf(rowSpan));
 		} else {
 			setAttribute("rowspan", "1");

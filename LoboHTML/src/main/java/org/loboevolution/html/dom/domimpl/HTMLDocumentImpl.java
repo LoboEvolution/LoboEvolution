@@ -382,7 +382,9 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			if (ssa == null) {
 				ssa = new StyleSheetAggregator();
 				try {
+					ssa.setDoc(this);
                     ssa.addStyleSheets(this.styleSheets);
+
 				} catch (Exception mfu) {
 					logger.log(Level.WARNING, "getStyleSheetAggregator()", mfu);
 				}

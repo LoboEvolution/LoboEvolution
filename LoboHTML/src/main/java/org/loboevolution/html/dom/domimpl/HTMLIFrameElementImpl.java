@@ -30,6 +30,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.js.WindowProxy;
 import org.loboevolution.html.renderstate.IFrameRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.net.UserAgent;
 
 import java.awt.*;
@@ -260,7 +261,8 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 				panel.setBrowserPanel(null);
 				panel = HtmlPanel.createlocalPanel(connection, panel, doc.getHtmlRendererContext(), doc.getHtmlRendererConfig(), createURL.toString());
 				if (Strings.isNotBlank(getWidth()) && Strings.isNotBlank(getHeight())) {
-					panel.setPreferredSize(new Dimension(Integer.parseInt(getWidth()), Integer.parseInt(getHeight())));
+					panel.setPreferredSize(new Dimension(HtmlValues.getPixelSize(getWidth(), doc.getRenderState(), doc.getDefaultView(), -1),
+							HtmlValues.getPixelSize(getHeight(), doc.getRenderState(), doc.getDefaultView(), -1)));
 				}
 				frameControl.add(panel);
 			}
