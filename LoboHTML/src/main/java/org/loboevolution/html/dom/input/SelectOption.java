@@ -122,6 +122,7 @@ public class SelectOption {
 		comboBox.applyComponentOrientation(direction(modelNode.getDir()));
 		comboBox.setEditable(Boolean.parseBoolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		comboBox.setEnabled(!modelNode.isDisabled());
+		comboBox.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		this.list = list;
 		this.resetItemList(modelNode);
 		control.add(comboBox);

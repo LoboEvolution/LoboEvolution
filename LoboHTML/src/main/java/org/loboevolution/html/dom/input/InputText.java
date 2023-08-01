@@ -69,14 +69,11 @@ public class InputText extends BasicInput {
 		iText.setDocument(new LimitedDocument());
 		iText.setText(modelNode.getValue());
 		iText.setSelectionColor(Color.BLUE);
-		final Dimension ps = iText.getPreferredSize();
-		final int size = modelNode.getSize();
-		final int width = (128/15) * size;
-		iText.setPreferredSize(new Dimension(width, ps.height));
+		iText.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		final String baseUrl = modelNode.getBaseURI();
 
 		if (modelNode.isAutocomplete()) {
-			List<String> list = suggestionList(type, "", baseUrl);
+			List<String> list = suggestionList(type, baseUrl);
 			if (ArrayUtilities.isNotBlank(list)) {
 				Autocomplete.setupAutoComplete(iText, list);
 			}
@@ -221,9 +218,9 @@ public class InputText extends BasicInput {
 		setTextWrittenIn(false);
 	}
 
-	private List<String> suggestionList(String type, String text, String baseUrl) {
+	private List<String> suggestionList(String type, String baseUrl) {
 		final HtmlRendererConfig config = modelNode.getHtmlRendererConfig();
-		List<String> list = config.autocomplete(type, text, baseUrl);
+		List<String> list = config.autocomplete(type, "", baseUrl);
 		if (ArrayUtilities.isNotBlank(list))
 			return list;
 		return new ArrayList<>();

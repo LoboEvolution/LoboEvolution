@@ -68,6 +68,7 @@ public class RLayout {
 		el.put(HTMLTag.CENTER, block);
 		el.put(HTMLTag.DD, block);
 		el.put(HTMLTag.DIV, block);
+		el.put(HTMLTag.ADDRESS, block);
 		el.put(HTMLTag.DL, block);
 		el.put(HTMLTag.DT, block);
 		el.put(HTMLTag.H1, block);

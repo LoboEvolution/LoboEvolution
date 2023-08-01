@@ -29,18 +29,19 @@ import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.dom.HTMLBodyElement;
-import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.ClassNameFilter;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.TagNameFilter;
 import org.loboevolution.html.dom.filter.TagNsNameFilter;
 import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.js.geom.DOMRectImpl;
 import org.loboevolution.html.js.geom.DOMRectListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.geom.DOMRect;
 import org.loboevolution.html.node.js.geom.DOMRectList;
@@ -55,13 +56,11 @@ import org.mozilla.javascript.annotations.JSFunction;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 /**
@@ -656,7 +655,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public int getClientWidth() {
+	public Integer getClientWidth() {
 		return calculateWidth(false, true);
 	}
 
@@ -1306,22 +1305,40 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
 		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		final ComputedCSSStyleDeclaration computedStyle = ((HTMLElementImpl)this).getComputedStyle();
 		String width = currentStyle.getWidth();
 		String borderLeftWidth = currentStyle.getBorderLeftWidth();
 		String borderRightWidth = currentStyle.getBorderRightWidth();
 		String boxSizing = currentStyle.getBoxSizing();
-		String display = currentStyle.getDisplay();
+		String display = computedStyle.getDisplay();
 		int paddingRight = HtmlValues.getPixelSize(currentStyle.getPaddingRight(), null, doc.getDefaultView(), 0);
 		int paddingLeft = HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), null, doc.getDefaultView(), 0);
 		int sizeWidth = preferredSize.width;
 
-		if (getParentNode() == null || CSSValues.NONE.isEqual(display)) {
+		if (getParentNode() == null ||
+				CSSValues.NONE.isEqual(display) ||
+				(Strings.isBlank(width) &&
+						(this instanceof HTMLInputElement ||
+								this instanceof HTMLTextAreaElement ||
+								this instanceof HTMLDDElementImpl ||
+								this instanceof HTMLCanvasElement ||
+								this instanceof HTMLImageElement ||
+								this instanceof HTMLButtonElement ||
+								this instanceof HTMLFieldSetElement ||
+								this instanceof HTMLSelectElement ||
+								this instanceof HTMLTableCellElement ||
+								this instanceof HTMLTableCaptionElement ||
+								this instanceof HTMLTableRowElement ||
+								this instanceof HTMLTableColElement ||
+								this instanceof HTMLTableColGroupElementImpl ||
+								this instanceof HTMLTableSectionElement ||
+								this instanceof SVGSVGElement))) {
 			return 0;
 		}
 
 		if (CSSValues.INLINE.isEqual(display)) {
 			width = "0";
-			if (paddingRight == 0 && paddingLeft == 0) {
+			if (paddingRight <= 0 && paddingLeft <= 0) {
 				return 0;
 			}
 		}
@@ -1342,7 +1359,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		if (nodeObj instanceof HTMLElementImpl) {
 			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
 			final int client = elem.getClientWidth();
-			if(client != -1) {
+			if(client > 0) {
 				sizeWidth = client;
 			}
 		}
@@ -1360,14 +1377,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		if (padding) {
 			widthSize += paddingRight;
-			widthSize += paddingLeft;
+			widthSize += paddingRight;
 		}
-
 
 		if (border) {
 			widthSize += HtmlValues.getPixelSize(borderRightWidth, null, doc.getDefaultView(), 0);
 			widthSize += HtmlValues.getPixelSize(borderLeftWidth, null, doc.getDefaultView(), 0);
 		}
+
 		return widthSize;
 	}
 
@@ -1428,16 +1445,24 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return heightSize;
 	}
 
-
 	private int textHeight(ElementImpl elm) {
 		AtomicInteger h = new AtomicInteger(0);
+		if (elm instanceof HTMLTextAreaElement ||
+				elm instanceof HTMLBaseFontElement ||
+				elm instanceof HTMLScriptElement) return h.get();
 
 		elm.getNodeList().forEach(child -> {
 			final int type = child.getNodeType();
 			switch (type) {
 				case Node.CDATA_SECTION_NODE:
 				case Node.TEXT_NODE:
-					h.addAndGet(18);
+					if (elm instanceof HTMLFieldSetElement) {
+						h.addAndGet(35);
+					} else if (elm instanceof HTMLDDElementImpl) {
+						h.addAndGet(17);
+					} else {
+						h.addAndGet(18);
+					}
 					break;
 				case Node.ELEMENT_NODE:
 					h.addAndGet(textHeight((ElementImpl) child));

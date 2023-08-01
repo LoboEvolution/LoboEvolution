@@ -42,6 +42,12 @@ public class HTMLStrongElementImpl extends HTMLElementImpl {
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new FontStyleRenderState(prevRenderState, this, LAFType.BOLD);
 	}
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 17 : clientHeight;
+	}
 	
 	/** {@inheritDoc} */
 	@Override

@@ -20,6 +20,7 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.CanvasRenderingContext2D;
 import org.loboevolution.html.dom.FileCallback;
 import org.loboevolution.html.dom.HTMLCanvasElement;
@@ -49,7 +50,10 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	@Override
 	public int getWidth() {
 		String widthText = this.getAttribute("width");
-		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		if (Strings.isBlank(widthText)) {
+			return getClientWidth();
+		}
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		return HtmlValues.getPixelSize(widthText, null, doc.getDefaultView(), 1);
 	}
 
@@ -63,6 +67,9 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	@Override
 	public int getHeight() {
 		String heightText = this.getAttribute("height");
+		if (Strings.isBlank(heightText)) {
+			return getClientHeight();
+		}
 		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
 		return HtmlValues.getPixelSize(heightText, null, doc.getDefaultView(), 1);
 	}
@@ -108,7 +115,24 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 		image = canvas.getImage();
 		return canvas;
 	}
-	
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 150 : clientHeight;
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		int clientWidth = super.getClientWidth();
+		return clientWidth == 0 ? 300 : clientWidth;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		return getClientWidth();
+	}
+
 	/**
 	 * <p>Getter for the field image.</p>
 	 *

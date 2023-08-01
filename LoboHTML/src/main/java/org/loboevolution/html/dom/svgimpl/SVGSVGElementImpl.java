@@ -644,6 +644,23 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		}
 		return path;
 	}
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 150 : clientHeight;
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		int clientWidth = super.getClientWidth();
+		return clientWidth == 0 ? 300 : clientWidth;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		return getClientWidth();
+	}
 	
 	private void drawChildren(Graphics2D graphics) {
 		List<Node> drawableChildren = new ArrayList<>();

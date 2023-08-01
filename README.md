@@ -85,7 +85,7 @@ mvn surefire-report:report
 
 | Unit Tests | Passed | Errors | Failures | Rate Success |                        Result                         |
 |:----------:|:------:|:------:|:--------:|:------------:|:-----------------------------------------------------:|
-|    3219    |  2304  |   14   |   901    |    71,57%    | [see](https://loboevolution.github.io/LoboEvolution/surefire-report.html) |
+|    3653    |  2710  |   14   |    929     |    74,16%    | [see](https://loboevolution.github.io/LoboEvolution/surefire-report.html) |
 
 ### How To Do
 [TODO](https://github.com/oswetto/LoboEvolution/wiki/How-TODO)

@@ -56,6 +56,7 @@ public class InputNumber extends InputText {
         } else {
             numeric.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
+		numeric.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
         numeric.addKeyListener(addKeyListener());
 	}
 

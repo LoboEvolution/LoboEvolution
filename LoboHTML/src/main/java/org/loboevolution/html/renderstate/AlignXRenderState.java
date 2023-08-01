@@ -23,9 +23,6 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * <p>AlignXRenderState class.</p>
- *
- *
- *
  */
 public class AlignXRenderState extends BlockRenderState {
 	private final int alignXPercent;

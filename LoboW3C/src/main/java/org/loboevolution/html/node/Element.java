@@ -84,7 +84,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      *
      * @return a {@link java.lang.Integer} object.
      */
-    int getClientWidth();
+    Integer getClientWidth();
 
     /**
      * Returns the value of element's id content attribute. Can be set to change it.

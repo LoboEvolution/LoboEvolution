@@ -265,6 +265,15 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 		setAttribute("width", width);
 	}
 
+	@Override
+	public Integer getOffsetWidth() {
+		return null;
+	}
+
+	public Integer getClientWidth() {
+		return null;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

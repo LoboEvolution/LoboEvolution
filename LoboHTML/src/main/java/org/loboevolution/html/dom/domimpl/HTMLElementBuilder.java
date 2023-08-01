@@ -22,8 +22,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.rss.*;
 import org.loboevolution.html.dom.svgimpl.*;
 
@@ -62,6 +60,12 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
+	public static class Dd extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLDDElementImpl(name);
+		}
+	}
 	public static class Body extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
@@ -633,6 +637,18 @@ public abstract class HTMLElementBuilder {
 		protected HTMLElementImpl build(String name) {
 			return new RSSItemElementImpl(name);
 		}		
+	}
+
+	public static class Marquee extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) { return new HTMLMarqueeElementImpl(name); }
+	}
+
+	public static class Video extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLVideoElementImpl(name);
+		}
 	}
 	
 	/**

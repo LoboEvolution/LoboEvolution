@@ -76,7 +76,17 @@ public class HTMLTableCaptionElementImpl extends HTMLElementImpl implements HTML
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_CAPTION);
 	}
-	
+
+	@Override
+	public Integer getClientWidth() {
+		return null;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		return null;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

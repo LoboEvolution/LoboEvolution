@@ -84,7 +84,11 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	/** {@inheritDoc} */
 	@Override
 	public String getHeight() {
-		return getAttribute("height");
+		String heightText = this.getAttribute("height");
+		if (Strings.isBlank(heightText)) {
+			return String.valueOf(getClientHeight());
+		}
+		return heightText;
 	}
 
 	/** {@inheritDoc} */
@@ -127,7 +131,34 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	/** {@inheritDoc} */
 	@Override
 	public String getWidth() {
-		return getAttribute("width");
+		String widthText = this.getAttribute("width");
+		if (Strings.isBlank(widthText)) {
+			return String.valueOf(getClientWidth());
+		}
+
+		return widthText;
+	}
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 150 : clientHeight;
+	}
+
+	@Override
+	public double getOffsetHeight() {
+		return getClientHeight();
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		int clientWidth = super.getClientWidth();
+		return clientWidth == 0 ? 300 : clientWidth;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		return getClientWidth();
 	}
 
 	/** {@inheritDoc} */
@@ -259,12 +290,15 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 				connection.connect();
 				HtmlPanel panel = new HtmlPanel();
 				panel.setBrowserPanel(null);
-				panel = HtmlPanel.createlocalPanel(connection, panel, doc.getHtmlRendererContext(), doc.getHtmlRendererConfig(), createURL.toString());
-				if (Strings.isNotBlank(getWidth()) && Strings.isNotBlank(getHeight())) {
-					panel.setPreferredSize(new Dimension(HtmlValues.getPixelSize(getWidth(), doc.getRenderState(), doc.getDefaultView(), -1),
-							HtmlValues.getPixelSize(getHeight(), doc.getRenderState(), doc.getDefaultView(), -1)));
+				HtmlPanel newpanel = HtmlPanel.createlocalPanel(connection, panel, doc.getHtmlRendererContext(), doc.getHtmlRendererConfig(), createURL.toString());
+				String width = getWidth();
+				String height = getHeight();
+				if (Strings.isNotBlank(width) && Strings.isNotBlank(height)) {
+					int w = HtmlValues.getPixelSize(width, doc.getRenderState(), doc.getDefaultView(), -1);
+					int h = HtmlValues.getPixelSize(height, doc.getRenderState(), doc.getDefaultView(), -1);
+					newpanel.setPreferredSize(new Dimension(w, h));
 				}
-				frameControl.add(panel);
+				frameControl.add(newpanel);
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

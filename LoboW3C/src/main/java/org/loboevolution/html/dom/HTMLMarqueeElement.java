@@ -26,9 +26,6 @@ import org.loboevolution.html.node.events.EventListener;
 
 /**
  * Provides methods to manipulate &lt;marquee&gt; elements.
- *
- *
- *
  */
 public interface HTMLMarqueeElement extends HTMLElement {
    

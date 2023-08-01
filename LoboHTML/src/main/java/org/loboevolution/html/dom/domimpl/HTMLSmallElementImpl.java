@@ -43,6 +43,12 @@ public class HTMLSmallElementImpl extends HTMLElementImpl {
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new SmallRenderState(prevRenderState, this);
 	}
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 15 : clientHeight;
+	}
 	
 	/** {@inheritDoc} */
 	@Override

@@ -147,6 +147,12 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 	}
 
 	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 16 : clientHeight;
+	}
+
+	@Override
 	public Node appendChild(Node newChild) {
 		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append node.");
 	}

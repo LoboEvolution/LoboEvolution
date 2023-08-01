@@ -59,7 +59,14 @@ public class HTMLPreElementImpl extends HTMLElementImpl implements HTMLPreElemen
 	public void setWidth(double width) {
 		setAttribute("width", String.valueOf(width));
 	}
-	
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 15 : clientHeight;
+	}
+
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

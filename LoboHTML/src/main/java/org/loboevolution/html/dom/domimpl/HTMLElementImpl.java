@@ -246,39 +246,29 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
-	/**
-	 * <p>getOffsetHeight.</p>
-	 *
-	 * @return a double.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public double getOffsetHeight() {
 		return calculateHeight(true, true);
 	}
 
-	/**
-	 * <p>getOffsetLeft.</p>
-	 *
-	 * @return a int.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public double getOffsetLeft() {
 		return getBoundingClientRect().getX();
 	}
 
-	/**
-	 * <p>getOffsetTop.</p>
-	 *
-	 * @return a int.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getOffsetTop() {
 		return getBoundingClientRect().getY();
 	}
 
 	/**
-	 * <p>getOffsetWidth.</p>
-	 *
-	 * @return a int.
+	 * {@inheritDoc}
 	 */
-	public int getOffsetWidth() {
+	@Override
+	public Integer getOffsetWidth() {
 		return calculateWidth(true, true);
 	}
 

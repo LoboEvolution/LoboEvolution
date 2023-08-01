@@ -27,13 +27,11 @@ import org.loboevolution.html.renderer.HtmlController;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
  * <p>InputCheckbox class.</p>
- *
- *
- *
  */
 public class InputCheckbox {
 	
@@ -53,8 +51,8 @@ public class InputCheckbox {
 		checkBox.setSelected(modelNode.getAttributeAsBoolean("checked"));
 		checkBox.setEnabled(!modelNode.isDisabled());
 		checkBox.setSelected(modelNode.isChecked());
+		checkBox.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		checkBox.addActionListener(event -> HtmlController.getInstance().onPressed(modelNode, null, 0, 0));
-		
 		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
 
 			@Override
@@ -65,7 +63,6 @@ public class InputCheckbox {
 			}
 		};
 		checkBox.addMouseListener(mouseHandler);
-		
 		ic.add(checkBox);
 	}
 

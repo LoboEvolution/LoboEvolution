@@ -47,133 +47,101 @@ public class HTMLFieldsetElementImpl extends HTMLElementImpl implements HTMLFiel
         return new FieldsetRenderState(prevRenderState, this);
     }
 
-    /**
-     * <p>isDisabled.</p>
-     *
-     * @return a boolean.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isDisabled() {
         return false;
     }
 
-    /**
-     * <p>setDisabled.</p>
-     *
-     * @param disabled a boolean.
-     */
+    /** {@inheritDoc} */
     @Override
     public void setDisabled(boolean disabled) {
 
     }
 
-    /**
-     * <p>getElements.</p>
-     *
-     * @return a {@link HTMLCollection} object.
-     */
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getElements() {
         return null;
     }
 
-    /**
-     * Retrieves a reference to the form that the object is embedded in.
-     *
-     * @return a {@link HTMLFormElement} object.
-     */
+    /** {@inheritDoc} */
     @Override
     public HTMLFormElement getForm() {
         return null;
     }
 
-    /**
-     * <p>getName.</p>
-     *
-     * @return a {@link String} object.
-     */
+    /** {@inheritDoc} */
     @Override
     public String getName() {
         return null;
     }
 
-    /**
-     * <p>setName.</p>
-     *
-     * @param name a {@link String} object.
-     */
+    /** {@inheritDoc} */
     @Override
     public void setName(String name) {
 
     }
 
-    /**
-     * <p>getType.</p>
-     *
-     * @return a {@link String} object.
-     */
+    /** {@inheritDoc} */
     @Override
     public String getType() {
         return null;
     }
 
-    /**
-     * Returns the error message that would be displayed if the user submits the form, or an empty string if no error message. It also triggers the standard error message, such as "this is a required field". The result is that the user sees validation messages without actually submitting.
-     *
-     * @return a {@link String} object.
-     */
+    /** {@inheritDoc} */
     @Override
     public String getValidationMessage() {
         return null;
     }
 
-    /**
-     * Returns a  ValidityState object that represents the validity states of an element.
-     *
-     * @return a {@link ValidityState} object.
-     */
+    /** {@inheritDoc} */
     @Override
     public ValidityState getValidity() {
         return null;
     }
 
-    /**
-     * Returns whether an element will successfully validate based on forms validation rules and constraints.
-     *
-     * @return a boolean.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isWillValidate() {
         return false;
     }
 
-    /**
-     * Returns whether a form will validate when it is submitted, without having to submit it.
-     *
-     * @return a boolean.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean checkValidity() {
         return false;
     }
 
-    /**
-     * <p>reportValidity.</p>
-     *
-     * @return a boolean.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean reportValidity() {
         return false;
     }
 
-    /**
-     * Sets a custom error message that is displayed when a form is submitted.
-     *
-     * @param error Sets a custom error message that is displayed when a form is submitted.
-     */
+    /** {@inheritDoc} */
     @Override
     public void setCustomValidity(String error) {
 
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Integer getClientWidth() {
+        int clientWidth = super.getClientWidth();
+        clientWidth = clientWidth == 0 ? getDocumentNode().getDocumentElement().getClientWidth() : clientWidth;
+
+        if (getRenderState() != null && getRenderState().getPaddingInsets() != null) {
+            clientWidth -= getRenderState().getPaddingInsets().getRight();
+            clientWidth -= getRenderState().getPaddingInsets().getLeft();
+        }
+
+        return clientWidth;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Integer getOffsetWidth() {
+        return getClientWidth();
     }
 }

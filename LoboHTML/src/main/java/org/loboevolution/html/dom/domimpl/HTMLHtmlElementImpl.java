@@ -23,6 +23,8 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLHtmlElement;
+import org.loboevolution.html.renderstate.BlockRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLHtmlElementImpl class.</p>
@@ -42,6 +44,11 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 	 */
 	public HTMLHtmlElementImpl(final String name) {
 		super(name);
+	}
+
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new BlockRenderState(prevRenderState, this);
 	}
 
 	/** {@inheritDoc} */

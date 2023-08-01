@@ -27,7 +27,7 @@ import org.loboevolution.html.style.HtmlValues;
 /**
  * <p>QuoteRenderState class.</p>
  */
-public class QuoteRenderState  extends AbstractMarginRenderState {
+public class QuoteRenderState extends AbstractMarginRenderState {
 
     private final HTMLElementImpl element;
 
@@ -46,7 +46,7 @@ public class QuoteRenderState  extends AbstractMarginRenderState {
     @Override
     protected HtmlInsets getDefaultMarginInsets() {
         final HtmlInsets insets = new HtmlInsets();
-        final int topBottom = HtmlValues.getPixelSize("1rem", null, element.getDocumentNode().getDefaultView(), -1);
+        final int topBottom = HtmlValues.getPixelSize("1em", null, element.getDocumentNode().getDefaultView(), -1);
         final int leftRight = HtmlValues.getPixelSize("40px", null, element.getDocumentNode().getDefaultView(), -1);
         insets.setTop(topBottom);
         insets.setBottom(topBottom);

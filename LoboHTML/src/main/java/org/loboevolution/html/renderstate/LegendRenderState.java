@@ -49,7 +49,7 @@ public class LegendRenderState extends BlockRenderState {
         if (insets == null || insets.htmlInsetsIsVoid()) {
             insets = getDefaultPaddingInsets();
         }
-        this.marginInsets = insets;
+        this.paddingInsets = insets;
         return insets;
     }
 

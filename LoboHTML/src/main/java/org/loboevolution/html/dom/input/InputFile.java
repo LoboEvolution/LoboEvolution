@@ -50,8 +50,6 @@ public class InputFile extends BasicInput {
 		browseButton.setContentAreaFilled(false);
 		browseButton.setAction(new BrowseAction());
 		browseButton.setText("Browse");
-		final Dimension ps = this.textField.getPreferredSize();
-		this.textField.setPreferredSize(new Dimension(128, ps.height));
 		this.textField.setEditable(false);
 		if (modelNode.getTitle() != null)
 			this.textField.setToolTipText(modelNode.getTitle());
@@ -59,6 +57,7 @@ public class InputFile extends BasicInput {
 		textField.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		textField.setEditable(Boolean.parseBoolean(modelNode.getContentEditable()));
 		textField.setEnabled(!modelNode.isDisabled());
+		textField.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		textField.addFocusListener(this);
 		textField.addKeyListener(this);
 		textField.addCaretListener(this);

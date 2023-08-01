@@ -122,4 +122,8 @@ public class BodyRenderState extends StyleSheetRenderState {
         super.invalidate();
     }
 
+    @Override
+    public int getDefaultDisplay() {
+        return DISPLAY_BLOCK;
+    }
 }

@@ -27,9 +27,6 @@ import java.awt.geom.AffineTransform;
 
 /**
  * The Class CanvasControl.
- *
- *
- *
  */
 public class CanvasControl extends BaseControl {
 

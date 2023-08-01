@@ -57,7 +57,14 @@ public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteEl
 	public void setCite(String cite) {
 		setAttribute("cite", cite);
 	}
-	
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 17 : clientHeight;
+	}
+
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

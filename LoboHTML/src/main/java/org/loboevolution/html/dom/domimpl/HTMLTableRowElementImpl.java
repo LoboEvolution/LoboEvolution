@@ -277,6 +277,15 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 		setAttribute("valign", vAlign);
 	}
 
+	@Override
+	public Integer getOffsetWidth() {
+		return null;
+	}
+
+	public Integer getClientWidth() {
+		return null;
+	}
+
 	
 	/** {@inheritDoc} */
 	@Override

@@ -30,9 +30,6 @@ import java.awt.*;
 
 /**
  * <p>InputButton class.</p>
- *
- *
- *
  */
 public class InputButton {
 
@@ -54,6 +51,7 @@ public class InputButton {
 		button.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		button.setEnabled(!modelNode.isDisabled());
 		button.setText(getText(modelNode));
+		button.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		button.addActionListener(event -> HtmlController.getInstance().onPressed(modelNode, null, 0, 0));
 		
 		button.setContentAreaFilled(!ic.getRUIControl().hasBackground());

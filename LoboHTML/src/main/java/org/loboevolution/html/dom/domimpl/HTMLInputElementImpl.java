@@ -204,6 +204,8 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
         setSelectionEnd(Strings.isBlank(value) ? 0 : value.length());
 	}
 
+
+
 	/**
 	 * <p>draw.</p>
 	 *
@@ -261,7 +263,7 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 			break;
 		}
 	}
-	
+
 	/**
 	 * <p>submit.</p>
 	 */
@@ -596,7 +598,100 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
 	@Override
 	public void stepUp() {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		int clientWidth = getClientWidth();
+		String type = getType();
+		if ("button".equals(type) ||
+				"password".equals(type) ||
+				"reset".equals(type) ||
+				"submit".equals(type) ||
+				"text".equals(type)) {
+			clientWidth = clientWidth + 4;
+		}
+		return clientWidth;
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		int clientWidth = super.getClientWidth();
+		if (clientWidth == 0) {
+			String type = getType();
+			if (Strings.isBlank(type)) {
+				type = "text";
+			}
+
+			switch (type.toLowerCase()) {
+				case "file":
+					clientWidth = 253;
+					break;
+				case "number":
+				case "text":
+				case "image":
+				case "date":
+				case "datetime-local":
+				case "month":
+				case "time":
+				case "password":
+					clientWidth = 173;
+					break;
+				case "radio":
+				case "checkbox":
+					clientWidth = 13;
+					break;
+				case "button":
+					clientWidth = 12;
+					break;
+				case "reset":
+					clientWidth = 47;
+					break;
+				case "submit":
+					clientWidth = 54;
+					break;
+				default:
+					break;
+			}
+		}
+		return clientWidth;
+	}
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		if (clientHeight == 0) {
+			String type = getType();
+			if (Strings.isBlank(type)) {
+				type = "text";
+			}
+
+			switch (type.toLowerCase()) {
+				case "file":
+				case "number":
+				case "image":
+				case "date":
+				case "datetime-local":
+				case "month":
+				case "time":
+					clientHeight = 20;
+					break;
+				case "radio":
+				case "checkbox":
+					clientHeight = 13;
+					break;
+				case "text":
+				case "reset":
+				case "button":
+				case "submit":
+				case "password":
+					clientHeight = 17;
+					break;
+				default:
+					break;
+			}
+		}
+		return clientHeight;
 	}
 
 	/** {@inheritDoc} */

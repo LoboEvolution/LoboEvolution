@@ -21,10 +21,8 @@
 package org.loboevolution.html.dom;
 
 /**
- * Provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of table cells, either header or data cells, in an HTML document.
- *
- *
- *
+ * Provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance)
+ * for manipulating the layout and presentation of table cells, either header or data cells, in an HTML document.
  */
 public interface HTMLTableCellElement extends HTMLElement {
     

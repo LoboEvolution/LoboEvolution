@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link org.loboevolution.html.dom.HTMLDivElement}.
+ * Tests for {@link org.loboevolution.html.dom.HTMLMarqueeElement}.
  */
 public class HTMLMarqueeElementTest extends LoboUnitTest {
 

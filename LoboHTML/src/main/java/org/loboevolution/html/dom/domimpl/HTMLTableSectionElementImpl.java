@@ -28,8 +28,6 @@ import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
-import java.util.Arrays;
-
 /**
  * <p>HTMLTableSectionElementImpl class.</p>
  */
@@ -142,6 +140,16 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 		}
 
 		return new DisplayRenderState(prevRenderState, this, state);
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		return null;
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		return null;
 	}
 	
 	/** {@inheritDoc} */

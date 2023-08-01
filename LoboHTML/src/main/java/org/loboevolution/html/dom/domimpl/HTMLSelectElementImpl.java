@@ -302,6 +302,23 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
 		getOptions().setItem(index, node);
 	}
 
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 17 : clientHeight;
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		int clientWidth = super.getClientWidth();
+		return clientWidth == 0 ? 22 : clientWidth;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		return getClientWidth() + 2;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {

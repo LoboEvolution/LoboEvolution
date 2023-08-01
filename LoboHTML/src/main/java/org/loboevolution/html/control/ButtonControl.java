@@ -25,9 +25,6 @@ import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 
 /**
  * <p>ButtonControl class.</p>
- *
- *
- *
  */
 public class ButtonControl extends BaseControl implements UIControl {
 

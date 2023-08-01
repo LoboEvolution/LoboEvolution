@@ -42,4 +42,27 @@ public class HTMLFigureElementImpl extends HTMLElementImpl /*implements HTMLFigu
     protected RenderState createRenderState(RenderState prevRenderState) {
         return new QuoteRenderState(prevRenderState, this);
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public Integer getClientWidth() {
+        int clientWidth = super.getClientWidth();
+        clientWidth = clientWidth == 0 ? getParentElement().getClientWidth() : clientWidth;
+        if (getRenderState() != null && getRenderState().getPaddingInsets() != null) {
+            clientWidth -= getRenderState().getPaddingInsets().getRight();
+            clientWidth -= getRenderState().getPaddingInsets().getLeft();
+        }
+
+        if (getRenderState() != null && getRenderState().getMarginInsets() != null) {
+            clientWidth -= getRenderState().getMarginInsets().getRight();
+            clientWidth -= getRenderState().getMarginInsets().getLeft();
+        }
+        return clientWidth;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Integer getOffsetWidth() {
+        return getClientWidth();
+    }
 }

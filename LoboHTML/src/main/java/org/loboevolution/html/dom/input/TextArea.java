@@ -63,7 +63,7 @@ public class TextArea extends BasicInput {
 		jtArea.setDocument(new LimitedDocument());
 		jtArea.setText(modelNode.getValue());
 		jtArea.setSelectionColor(Color.BLUE);
-		jtArea.setPreferredSize(getPreferredSize());
+		jtArea.setPreferredSize(getPreferredSize(modelNode));
 		
 		jtArea.setEnabled(!modelNode.isDisabled());
 		jtArea.setEditable(!modelNode.isReadOnly());
@@ -147,11 +147,11 @@ public class TextArea extends BasicInput {
 	}
 	
 	
-	private Dimension getPreferredSize() {
+	private Dimension getPreferredSize(HTMLTextAreaElementImpl modelNode) {
 		int pw;
-		int cols =  modelNode.getCols();
+		int cols =  this.modelNode.getCols();
 		if (cols == -1) {
-			pw = 200;
+			pw = modelNode.getClientWidth();
 		} else {
 			Font f = this.jtArea.getFont();
 			FontMetrics fm = this.jtArea.getFontMetrics(f);
@@ -159,9 +159,9 @@ public class TextArea extends BasicInput {
 			pw = insets.left + insets.right + fm.charWidth('*') * cols;
 		}
 		int ph;
-		int rows = modelNode.getRows();
+		int rows = this.modelNode.getRows();
 		if (rows == -1) {
-			ph = 100;
+			ph = modelNode.getClientHeight();
 		} else {
 			Font f = this.jtArea.getFont();
 			FontMetrics fm = this.jtArea.getFontMetrics(f);

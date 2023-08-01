@@ -32,6 +32,7 @@ import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * <p>HTMLButtonElementImpl class.</p>
@@ -114,6 +115,7 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 		button.setContentAreaFilled(false);
 		button.setText(getText());
 		button.setEnabled(!isDisabled());
+		button.setPreferredSize(new Dimension(getClientWidth(), getClientHeight()));
 		button.addActionListener(event -> HtmlController.getInstance().onMouseClick(this, null, 0, 0));
 		buttonControl.add(button);
 	}
@@ -329,6 +331,24 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 	public void setCustomValidity(String error) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 2 : clientHeight;
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		int clientWidth = super.getClientWidth();
+		return clientWidth == 0 ? 12 : clientWidth;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		int offsetWidth = super.getOffsetWidth();
+		return offsetWidth == 0 ? 22 : offsetWidth;
 	}
 	
 	/** {@inheritDoc} */

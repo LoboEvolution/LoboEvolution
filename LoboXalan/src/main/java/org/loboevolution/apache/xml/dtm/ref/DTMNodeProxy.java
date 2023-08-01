@@ -189,7 +189,7 @@ public class DTMNodeProxy
     }
 
     @Override
-    public int getClientWidth() {
+    public Integer getClientWidth() {
         return 0;
     }
 

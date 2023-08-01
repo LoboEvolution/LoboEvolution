@@ -24,12 +24,10 @@ import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * <p>InputRadio class.</p>
- *
- *
- *
  */
 public class InputRadio {
 	
@@ -50,6 +48,7 @@ public class InputRadio {
 		radio.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		radio.setEnabled(!modelNode.isDisabled());
 		radio.setSelected(modelNode.isChecked());
+		radio.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		final String name = modelNode.getAttribute("name");
 		final ButtonGroup prevGroup = this.buttonGroup;
 		if (prevGroup != null) {

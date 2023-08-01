@@ -43,6 +43,15 @@ public class HTMLTableColGroupElementImpl extends HTMLElementImpl {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_COLUMN_GROUP);
 	}
 
+	@Override
+	public Integer getOffsetWidth() {
+		return null;
+	}
+
+	public Integer getClientWidth() {
+		return null;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

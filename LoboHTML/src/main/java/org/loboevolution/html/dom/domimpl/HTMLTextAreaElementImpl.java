@@ -202,6 +202,24 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 34 : clientHeight;
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		int clientWidth = super.getClientWidth();
+		return clientWidth == 0 ? 168 : clientWidth;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		int offsetWidth = super.getOffsetWidth();
+		return offsetWidth == 0 ? 183 : offsetWidth;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {

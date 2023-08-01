@@ -24,11 +24,9 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLCenterElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLCenterElementImpl extends HTMLElementImpl {
+
 	/**
 	 * <p>Constructor for HTMLCenterElementImpl.</p>
 	 *

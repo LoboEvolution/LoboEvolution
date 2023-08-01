@@ -146,6 +146,11 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 			}
 		}
 	}
+
+	@Override
+	public int getClientHeight() {
+		return 0;
+	}
 	
 	/** {@inheritDoc} */
 	@Override

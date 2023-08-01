@@ -69,10 +69,7 @@ public class InputPassword extends BasicInput {
 		pwd.setEditable(!modelNode.isReadOnly());
 		pwd.setDocument(new LimitedDocument());
 		pwd.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode));
-		final Dimension ps = pwd.getPreferredSize();
-		final int size = modelNode.getSize();
-		final int width = (128/15) * size;
-		pwd.setPreferredSize(new Dimension(width, ps.height));
+		pwd.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		final String baseUrl = modelNode.getBaseURI();
 
 		List<String> list = suggestionList(type, "", baseUrl);

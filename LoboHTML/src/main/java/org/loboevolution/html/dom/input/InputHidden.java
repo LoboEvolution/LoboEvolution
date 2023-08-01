@@ -27,9 +27,6 @@ import javax.swing.*;
 
 /**
  * <p>InputHidden class.</p>
- *
- *
- *
  */
 public class InputHidden {
 
