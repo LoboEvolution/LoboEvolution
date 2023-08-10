@@ -110,7 +110,7 @@ public class DOMRectImpl implements DOMRect {
     @Override
     public int getY() {
         if(y == 0) return getTop();
-        return x;
+        return y;
     }
 
     /**

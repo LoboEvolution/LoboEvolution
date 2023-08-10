@@ -1377,7 +1377,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		if (padding) {
 			widthSize += paddingRight;
-			widthSize += paddingRight;
+			widthSize += paddingLeft;
 		}
 
 		if (border) {

@@ -23,6 +23,7 @@ package org.loboevolution.html.renderer;
 import org.loboevolution.common.GUITasks;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
@@ -890,75 +891,73 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		final Graphics clientG = g.create(startX, startY, totalWidth, totalHeight);
 		try {
 			Rectangle bkgBounds = null;
-			if (node != null) {
-				final Color bkg = this.backgroundColor;
-				if (bkg != null && bkg.getAlpha() > 0) {
-					clientG.setColor(bkg);
+			final Color bkg = this.backgroundColor;
+			if (bkg != null && bkg.getAlpha() > 0) {
+				clientG.setColor(bkg);
+				bkgBounds = clientG.getClipBounds();
+				clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
+			}
+
+			if (binfo == null) {
+				binfo = rs == null ? null : rs.getBackgroundInfo();
+			}
+
+			final Image image = this.backgroundImage;
+			if (image != null) {
+				if (bkgBounds == null) {
 					bkgBounds = clientG.getClipBounds();
-					clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
 				}
+				final int w = image.getWidth(this);
+				final int h = image.getHeight(this);
+				if (w != -1 && h != -1) {
 
-				if (binfo == null) {
-					binfo = rs == null ? null : rs.getBackgroundInfo();
-				}
+					final int imageY = getImageY(totalHeight, binfo, h);
+					final int imageX = getImageX(totalWidth, binfo, w);
 
-				final Image image = this.backgroundImage;
-				if (image != null) {
-					if (bkgBounds == null) {
-						bkgBounds = clientG.getClipBounds();
-					}
-					final int w = image.getWidth(this);
-					final int h = image.getHeight(this);
-					if (w != -1 && h != -1) {
+					final int baseX = (bkgBounds.x / w) * w - (w - imageX);
+					final int baseY = (bkgBounds.y / h) * h - (h - imageY);
 
-						final int imageY = getImageY(totalHeight, binfo, h);
-						final int imageX = getImageX(totalWidth, binfo, w);
+					final int topX = bkgBounds.x + bkgBounds.width;
+					final int topY = bkgBounds.y + bkgBounds.height;
 
-						final int baseX = (bkgBounds.x / w) * w - (w - imageX);
-						final int baseY = (bkgBounds.y / h) * h - (h - imageY);
-
-						final int topX = bkgBounds.x + bkgBounds.width;
-						final int topY = bkgBounds.y + bkgBounds.height;
-
-						switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.getBackgroundRepeat()) {
-							case BackgroundInfo.BR_NO_REPEAT:
-								int _imageX;
-								if (binfo.isBackgroundXPositionAbsolute()) {
-									_imageX = binfo.getBackgroundXPosition();
-								} else {
-									_imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
-								}
-								int _imageY;
-								if (binfo.isBackgroundYPositionAbsolute()) {
-									_imageY = binfo.getBackgroundYPosition();
-								} else {
-									_imageY = binfo.getBackgroundYPosition() * (totalHeight - h) / 100;
-								}
-								g.drawImage(image, _imageX, _imageY, w, h, this);
-								break;
-
-							case BackgroundInfo.BR_REPEAT_X:
-
-								for (int x = baseX; x < topX; x += w) {
-									clientG.drawImage(image, x, imageY, w, h, this);
-								}
-								break;
-
-							case BackgroundInfo.BR_REPEAT_Y:
-
-								for (int y = baseY; y < topY; y += h) {
-									clientG.drawImage(image, imageX, y, w, h, this);
-								}
-								break;
-
-							default: {
-								for (int x = baseX; x < topX; x += w) {
-									for (int y = baseY; y < topY; y += h) {
-										clientG.drawImage(image, x, y, w, h, this);
-									}
-								}
-								break;
+					switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.getBackgroundRepeat()) {
+						case BackgroundInfo.BR_NO_REPEAT:
+							int _imageX;
+							if (binfo.isBackgroundXPositionAbsolute()) {
+								_imageX = binfo.getBackgroundXPosition();
+							} else {
+								_imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
 							}
+							int _imageY;
+							if (binfo.isBackgroundYPositionAbsolute()) {
+								_imageY = binfo.getBackgroundYPosition();
+							} else {
+								_imageY = binfo.getBackgroundYPosition() * (totalHeight - h) / 100;
+							}
+							g.drawImage(image, _imageX, _imageY, w, h, this);
+							break;
+
+						case BackgroundInfo.BR_REPEAT_X:
+
+							for (int x = baseX; x < topX; x += w) {
+								clientG.drawImage(image, x, imageY, w, h, this);
+							}
+							break;
+
+						case BackgroundInfo.BR_REPEAT_Y:
+
+							for (int y = baseY; y < topY; y += h) {
+								clientG.drawImage(image, imageX, y, w, h, this);
+							}
+							break;
+
+						default: {
+							for (int x = baseX; x < topX; x += w) {
+								for (int y = baseY; y < topY; y += h) {
+									clientG.drawImage(image, x, y, w, h, this);
+								}
+							}
+							break;
 						}
 					}
 				}
@@ -972,7 +971,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 		final Insets borderInsets = this.borderInsets;
 
-		if (borderInsets != null) {
+		if (borderInsets != null && !(this.modelNode instanceof HTMLDocument)) {
 			final int btop = borderInsets.top;
 			final int bleft = borderInsets.left;
 			final int bright = borderInsets.right;
