@@ -24,7 +24,9 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.UIControl;
+import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
+import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.nodeimpl.DocumentFragmentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
@@ -1799,6 +1801,7 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final int availContentWidth, final int availContentHeight,
 										final HTMLElementImpl element, final boolean absolute, final boolean fixed) {
+
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
 
 		final CSSStyleDeclaration style = element.getCurrentStyle();
@@ -1869,6 +1872,7 @@ public class RBlockViewport extends BaseRCollection {
 				final ModelNode node = ((Renderable) containingBlock).getModelNode();
 				if (node instanceof HTMLElementImpl) {
 					final HTMLElementImpl element = (HTMLElementImpl) node;
+					if(element instanceof HTMLHtmlElement || element instanceof HTMLBodyElement || element.hasChildNodes()) break;
 					final int position = getPosition(element);
 					if (position != RenderState.POSITION_STATIC) {
 						break;

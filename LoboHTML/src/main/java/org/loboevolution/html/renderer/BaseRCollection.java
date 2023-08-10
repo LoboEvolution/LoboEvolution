@@ -27,12 +27,15 @@ import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 import java.util.Iterator;
 
 abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
@@ -358,19 +361,16 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		int width = -1;
 
 		if(element instanceof HTMLLinkElementImpl && Strings.isNotBlank(textContent)) {
-			int fontSize = renderState.getFont().getSize();
-			width = textContent.length() * fontSize;
+			width = (int) (Strings.texMeasure(textContent,  renderState.getFont()).getWidth()) + 5;
 		}
 
 		if (Strings.isNotBlank(widthText)) {
 			width = HtmlValues.getPixelSize(widthText, renderState, doc.getDefaultView(), -1, availWidth);
 		}
 
-
 		if (width == -1 && Strings.isNotBlank(textContent) && (renderState.getPosition() == RenderState.POSITION_ABSOLUTE || renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK)) {
 			HtmlInsets paddingInsets = renderState.getPaddingInsets();
 			HtmlInsets marginInsets = renderState.getMarginInsets();
-			int fontSize = renderState.getFont().getSize();
 			int right = 0;
 			int left = 0;
 
@@ -383,8 +383,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				right = right + marginInsets.getRight();
 				left = left + marginInsets.getLeft();
 			}
-
-			width = (textContent.length() + right + left) * fontSize;
+			width = (int) (Strings.texMeasure(textContent,  renderState.getFont()).getWidth() + right + left);
 		}
 
 		if (Strings.isNotBlank(props.getMaxWidth())) {
@@ -413,45 +412,55 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getDeclaredHeightImpl(HTMLElementImpl element, int availHeight) {
-			CSSStyleDeclaration props = element.getCurrentStyle();
-			RenderState renderState = element.getRenderState();
-			if (props == null) {
-				return -1;
-			}
-			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
-			String heightText = props.getHeight();
+		CSSStyleDeclaration props = element.getCurrentStyle();
+		RenderState renderState = element.getRenderState();
+		if (props == null) {
+			return -1;
+		}
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
+		String heightText = props.getHeight() != null ? props.getHeight() : "";
 
-			if ("inherit".equalsIgnoreCase(heightText)) {
+		switch (heightText.trim()) {
+			case "inherit":
 				heightText = element.getParentStyle().getHeight();
-			} else if ("initial".equalsIgnoreCase(heightText)) {
+				break;
+			case "initial":
 				heightText = "100%";
-			}
-
-			int height = -1;
-
-			if (heightText != null) {
-				height = HtmlValues.getPixelSize(heightText, renderState, doc.getDefaultView(), -1, availHeight);
-			}
-
-			final String textContent = element.getTextContent();
-			if (height == -1 && Strings.isNotBlank(textContent) && renderState.getPosition() == RenderState.POSITION_ABSOLUTE) {
-				height = renderState.getFont().getSize();
-			}
-
-			if (props.getMaxHeight() != null) {
-				int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getDefaultView(),-1, availHeight);
-				if (height == 0 || height > maxHeight) {
-					height = maxHeight;
+				break;
+			case "auto":
+				if (renderState.getPosition() == RenderState.POSITION_ABSOLUTE) {
+					heightText = "100%";
 				}
-			}
+				break;
+			default:
+				break;
+		}
 
-			if (props.getMinHeight() != null) {
-				int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(),-1, availHeight);
-				if (height == 0 || height < minHeight) {
-					height = minHeight;
-				}
+		int height = -1;
+
+		if (Strings.isNotBlank(heightText)) {
+			height = HtmlValues.getPixelSize(heightText, renderState, doc.getDefaultView(), -1, availHeight);
+		}
+
+		final String textContent = element.getTextContent();
+		if (height == -1 && Strings.isNotBlank(textContent) && renderState.getPosition() == RenderState.POSITION_ABSOLUTE) {
+			height = (int) Strings.texMeasure(textContent, renderState.getFont()).getHeight();
+		}
+
+		if (props.getMaxHeight() != null) {
+			int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getDefaultView(), -1, availHeight);
+			if (height == 0 || height > maxHeight) {
+				height = maxHeight;
 			}
-			return height;
+		}
+
+		if (props.getMinHeight() != null) {
+			int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(), -1, availHeight);
+			if (height == 0 || height < minHeight) {
+				height = minHeight;
+			}
+		}
+		return height;
 	}
 	
 	private boolean checkEndSelection(Rectangle bounds, Point selectionPoint) {

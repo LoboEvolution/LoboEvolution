@@ -23,6 +23,10 @@ import org.loboevolution.html.CSSValues;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -59,6 +63,19 @@ public final class Strings {
 			}
 		}
 		return count;
+	}
+
+	/**
+	 * tex measure
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @param font a {@link java.awt.Font} object.
+	 * @return a {@link java.awt.geom.Rectangle2D} object.
+	 */
+	public static Rectangle2D texMeasure(String text, Font font) {
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+		return  font.getStringBounds(text, frc);
 	}
 
 	/**

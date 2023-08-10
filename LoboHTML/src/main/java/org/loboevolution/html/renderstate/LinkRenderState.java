@@ -36,15 +36,9 @@ import java.util.Optional;
  */
 public class LinkRenderState extends StyleSheetRenderState {
 
-    private final String COLOR_VISITED = "#551A8B";
+    private final HtmlRendererContext rcontext;
 
-    private final String DEFAULT_COLOR = "Blue";
-
-    private RenderState delegate;
-
-    private HtmlRendererContext rcontext;
-
-    private HTMLLinkElementImpl element;
+    private final HTMLLinkElementImpl element;
 
     /**
      * <p>Constructor for RenderStateDelegator.</p>
@@ -53,7 +47,6 @@ public class LinkRenderState extends StyleSheetRenderState {
      */
     public LinkRenderState(RenderState delegate, HtmlRendererContext rcontext, HTMLLinkElementImpl element) {
         super(delegate, element);
-        this.delegate = delegate;
         this.element = element;
         this.rcontext = rcontext;
 
@@ -96,7 +89,9 @@ public class LinkRenderState extends StyleSheetRenderState {
                     link = body.getLink();
                 }
             }
+            String COLOR_VISITED = "#551A8B";
             vlink = (vlink == null) ? COLOR_VISITED : vlink;
+            String DEFAULT_COLOR = "Blue";
             link = (link == null) ? DEFAULT_COLOR : link;
             String colorText = visited ? vlink : link;
 
