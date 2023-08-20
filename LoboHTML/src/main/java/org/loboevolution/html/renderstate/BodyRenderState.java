@@ -87,8 +87,6 @@ public class BodyRenderState extends StyleSheetRenderState {
 
         if (Strings.isNotBlank(tcolor)) {
             c = ColorFactory.getInstance().getColor(tcolor);
-        } else {
-            tcolor = "black";
         }
 
         return c;

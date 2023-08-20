@@ -359,29 +359,29 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	private void setupRelativePosition(final RenderState rs, final int availWidth, final int availHeight) {
 		if (rs.getPosition() == RenderState.POSITION_RELATIVE) {
 			HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
-			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
+			HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
 			final String leftText = rs.getLeft();
+			final String rightText = rs.getRight();
 			int left = 0;
 			if (leftText != null) {
 				left = HtmlValues.getPixelSize(leftText, rs, doc.getDefaultView(), 0, availWidth);
-			} else {
-				final String rightText = rs.getRight();
-				if (rightText != null) {
-					final int right = HtmlValues.getPixelSize(rightText, rs, doc.getDefaultView(),0, availWidth);
-					left = -right;
-				}
+			}
+
+			if (rightText != null) {
+				final int right = HtmlValues.getPixelSize(rightText, rs, doc.getDefaultView(), 0, availWidth);
+				left = -right;
 			}
 
 			int top = 0;
 			final String topText = rs.getTop();
+			final String bottomText = rs.getBottom();
 			if (topText != null) {
 				top = HtmlValues.getPixelSize(topText, rs, doc.getDefaultView(), top, availHeight);
-			} else {
-				final String bottomText = rs.getBottom();
-				if (bottomText != null) {
-					final int bottom = HtmlValues.getPixelSize(bottomText, rs, doc.getDefaultView(),0, availHeight);
-					top = -bottom;
-				}
+			}
+
+			if (bottomText != null) {
+				final int bottom = HtmlValues.getPixelSize(bottomText, rs, doc.getDefaultView(), 0, availHeight);
+				top = -bottom;
 			}
 
 			this.relativeOffsetX = left;
@@ -542,32 +542,34 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	@Override
 	public int getInnerWidth() {
 		final Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLElementImpl) {
-			HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			return element.getHtmlRendererContext().getInnerWidth();
-		} else if (rootNode instanceof HTMLDocumentImpl) {
+		if (rootNode instanceof HTMLDocumentImpl) {
 			HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
 			return doc.getHtmlRendererContext().getInnerWidth();
-		} else {
-			final Insets insets = getInsetsMarginBorder(false, false);
-			return getWidth() - (insets.left + insets.right);
 		}
+
+		if (rootNode instanceof HTMLElementImpl) {
+			HTMLElementImpl elem = (HTMLElementImpl) rootNode;
+			return elem.getHtmlRendererContext().getInnerWidth();
+		}
+
+		return getWidth();
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public int getInnerHeight() {
 		final Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLElementImpl) {
-			HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			return element.getHtmlRendererContext().getInnerHeight();
-		} else if (rootNode instanceof HTMLDocumentImpl) {
+		if (rootNode instanceof HTMLDocumentImpl) {
 			HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
 			return doc.getHtmlRendererContext().getInnerHeight();
-		} else {
-			final Insets insets = getInsetsMarginBorder(false, false);
-			return getHeight() - (insets.top + insets.bottom);
 		}
+
+		if (rootNode instanceof HTMLElementImpl) {
+			HTMLElementImpl elem = (HTMLElementImpl) rootNode;
+			return elem.getHtmlRendererContext().getInnerHeight();
+		}
+
+		return getHeight();
 	}
 	
     /** {@inheritDoc} */

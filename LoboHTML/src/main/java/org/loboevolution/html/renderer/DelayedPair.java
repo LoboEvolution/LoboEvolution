@@ -113,7 +113,8 @@ public class DelayedPair {
 					child.setWidth(width);
 				}
 				final int childWidth = child.getWidth();
-				x = availContentWidth - (childWidth + right);
+				x = parent.getInnerWidth() - (childWidth + right);
+
 			}
 		} else {
 			if (width != null) {
@@ -123,13 +124,13 @@ public class DelayedPair {
 
 		if (bottom != null) {
 			if (y != null) {
-				child.setHeight(height);
+				child.setHeight(parent.getInnerHeight() - (y + bottom));
 			} else {
 				if (height != null) {
 					child.setHeight(height);
 				}
 				final int childHeight = child.getHeight();
-				y = availContentHeight - (childHeight + bottom);
+				y = parent.getInnerHeight()  - ((childHeight * 2) + bottom);
 			}
 		} else {
 			if (height != null) {

@@ -27,9 +27,6 @@ import java.util.Collection;
  * A RenderableContainer is either usually a parent block or the root GUI
  * component. It's is a Renderable or GUI component whose layout may be
  * invalidated.
- *
- *
- *
  */
 public interface RenderableContainer {
 	/**

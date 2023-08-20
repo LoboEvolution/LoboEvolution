@@ -1274,7 +1274,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
         for (final Node child : (NodeListImpl) this.getChildNodes()) {
 			if (child instanceof HTMLElementImpl) {
 				CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
-				widthChild += ((HTMLElementImpl) child).getClientWidth();
+				Integer cliInteger =  ((HTMLElementImpl) child).getClientWidth();
+				if(cliInteger != null) widthChild += cliInteger;
 				widthChild += HtmlValues.getPixelSize(pCurrentStyle.getLeft(), null, document.getDefaultView(), 0);
 				widthChild += HtmlValues.getPixelSize(pCurrentStyle.getRight(), null, document.getDefaultView(), 0);
 			}
@@ -1314,6 +1315,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		int paddingRight = HtmlValues.getPixelSize(currentStyle.getPaddingRight(), null, doc.getDefaultView(), 0);
 		int paddingLeft = HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), null, doc.getDefaultView(), 0);
 		int sizeWidth = preferredSize.width;
+
+		if (this instanceof HTMLHeadElement) {
+			return  -1;
+		}
 
 		if (getParentNode() == null ||
 				CSSValues.NONE.isEqual(display) ||
@@ -1399,10 +1404,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		String borderBottomWidth = currentStyle.getBorderBottomWidth();
 		String boxSizing = currentStyle.getBoxSizing();
 		String dispaly = currentStyle.getDisplay();
+		String position = currentStyle.getPosition();
 		int sizeHeight = preferredSize.height;
 
 		if (getParentNode() == null || CSSValues.NONE.isEqual(dispaly)) {
 			return 0;
+		}
+
+		if (this instanceof HTMLHeadElement) {
+			return  -1;
 		}
 
 		if(Strings.isBlank(height)){
@@ -1422,7 +1432,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			}
 		}
 
-		height = "auto".equals(height) ? "100%" : "-1px".equals(height) ? textHeight(this) + "px" : height;
+		height = "auto".equals(height) ? "100%" : "-1px".equals(height) ? textHeight(this, position) + "px" : height;
 		int heightSize = HtmlValues.getPixelSize(height, null, doc.getDefaultView(), -1, sizeHeight);
 
 		if ("border-box".equals(boxSizing)) {
@@ -1445,8 +1455,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return heightSize;
 	}
 
-	private int textHeight(ElementImpl elm) {
-		AtomicInteger h = new AtomicInteger(0);
+	private int textHeight(ElementImpl elm, String position) {
+		AtomicInteger h = new AtomicInteger(CSSValues.ABSOLUTE.isEqual(position) ? -1 : 0);
 		if (elm instanceof HTMLTextAreaElement ||
 				elm instanceof HTMLBaseFontElement ||
 				elm instanceof HTMLScriptElement) return h.get();
@@ -1465,7 +1475,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 					}
 					break;
 				case Node.ELEMENT_NODE:
-					h.addAndGet(textHeight((ElementImpl) child));
+					final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+					h.addAndGet(textHeight((ElementImpl) child, currentStyle.getPosition()));
 				default:
 					break;
 			}
