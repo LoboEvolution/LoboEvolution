@@ -72,10 +72,10 @@ public class GoAction extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		String strUrl = this.addressBar.getText();
+		String addressBarText = this.addressBar.getText();
 		try {
 
-			final URL url = new URL(strUrl);
+			final URL url = new URL(addressBarText);
 			final String filename = url.getFile();
 			HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
 			httpcon.addRequestProperty("User-Agent", UserAgent.getUserAgent());
@@ -84,7 +84,7 @@ public class GoAction extends AbstractAction {
 			switch (MimeType.get(mimeType)) {
 				case PDF:
 					PDFViewer viewer = new PDFViewer(true);
-					viewer.doOpen(strUrl);
+					viewer.doOpen(addressBarText);
 					break;
 				case ICO:
 				case BMP:
@@ -95,38 +95,38 @@ public class GoAction extends AbstractAction {
 				case WEBP:
 					final BufferedImage image = ImageIO.read(url);
 					if (image != null) {
-						goUrlImage(image, strUrl);
+						goUrlImage(image, addressBarText);
 					}
 					break;
 				case TXT:
-					goUrlTxt(strUrl, httpcon, getSyntaxConstants(url), filename);
+					goUrlTxt(addressBarText, httpcon, getSyntaxConstants(url), filename);
 					break;
 				case JS:
-					goUrlTxt(strUrl, httpcon, SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT, filename);
+					goUrlTxt(addressBarText, httpcon, SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT, filename);
 					break;
 				case CSS:
-					goUrlTxt(strUrl, httpcon, SyntaxConstants.SYNTAX_STYLE_CSS, filename);
+					goUrlTxt(addressBarText, httpcon, SyntaxConstants.SYNTAX_STYLE_CSS, filename);
 					break;
 				case XML:
-					goUrlTxt(strUrl, httpcon, SyntaxConstants.SYNTAX_STYLE_XML, filename);
+					goUrlTxt(addressBarText, httpcon, SyntaxConstants.SYNTAX_STYLE_XML, filename);
 					break;
 				case JSON:
-					goUrlTxt(strUrl, httpcon, SyntaxConstants.SYNTAX_STYLE_JSON, filename);
+					goUrlTxt(addressBarText, httpcon, SyntaxConstants.SYNTAX_STYLE_JSON, filename);
 					break;
 				case HTML:
 				case XHTML:
 				case SVG:
-					goURL(strUrl, httpcon);
+					goURL(addressBarText, httpcon);
 					break;
 				default:
 					break;
 			}
 		} catch (Exception e) {
-			if (!strUrl.matches("^\\w+?://.*")) {
+			if (!addressBarText.matches("^\\w+?://.*")) {
 				SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
-				strUrl = searchEngine.getBaseUrl() + strUrl;
+				addressBarText = searchEngine.getBaseUrl() + addressBarText;
 			}
-			goURL(strUrl, null);
+			goURL(addressBarText, null);
 		}
 	}
 

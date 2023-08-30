@@ -27,15 +27,11 @@ import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.renderstate.StyleSheetRenderState;
-import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
 import java.util.Iterator;
 
 abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
@@ -395,8 +391,8 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 
 		if (Strings.isNotBlank(props.getMinWidth())) {
+			if (width == -1 && "100%".equals(props.getMinWidth())) {width = element.getClientHeight();}
 			int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
-
 			if (width == 0 || width < minWidth) {
 				width = minWidth;
 			}
@@ -455,6 +451,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 
 		if (props.getMinHeight() != null) {
+			if (height == -1 && "100%".equals(props.getMinHeight())) {height = element.getClientHeight();}
 			int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(), -1, availHeight);
 			if (height == 0 || height < minHeight) {
 				height = minHeight;
