@@ -289,11 +289,17 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setIdAttribute(String localName, boolean isId) throws DOMException {
-		final AttrImpl attr = (AttrImpl)getAttributeNode(localName);
-		if(attr != null) attr.setNameId(isId);
+		final AttrImpl attr = (AttrImpl) getAttributeNode(localName);
+		if (attr != null) {
+			attr.setNameId(isId);
+		} else {
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
+		}
 	}
 
-	/** {@inheritDoc} */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
 		final AttrImpl attr = (AttrImpl) getAttributeNodeNS(namespaceURI, localName);
@@ -1459,7 +1465,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		AtomicInteger h = new AtomicInteger(CSSValues.ABSOLUTE.isEqual(position) ? -1 : 0);
 		if (elm instanceof HTMLTextAreaElement ||
 				elm instanceof HTMLBaseFontElement ||
-				elm instanceof HTMLScriptElement) return h.get();
+				elm instanceof HTMLScriptElement ||
+				elm instanceof HTMLSuperscriptElementImpl) return h.get();
 
 		elm.getNodeList().forEach(child -> {
 			final int type = child.getNodeType();

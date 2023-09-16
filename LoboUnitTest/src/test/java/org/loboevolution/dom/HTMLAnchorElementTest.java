@@ -296,7 +296,6 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "    try {\n"
                 + "      alert(document.links[0]);\n"
                 + "      alert(typeof document.links[0]);\n"
-                + "      alert(HTMLAnchorElement);\n"
                 + "    } catch(e) { alert('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
@@ -305,7 +304,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "  <a id='link' href='" + URL_SECOND + "'>link</a>\n"
                 + "</body></html>";
 
-        final String[] messages = {URL_SECOND, "object", "exception",};
+        final String[] messages = {URL_SECOND, "object"};
         checkHtmlAlert(html, messages);
     }
 

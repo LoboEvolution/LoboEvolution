@@ -46,22 +46,17 @@ public class nodereplacechild24Test extends LoboUnitTest {
         HTMLCollection childList;
         EntityReference entRef;
         Element elem;
-        Element replaced;
-        String nodeName;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("acronym");
         elem = (Element) childList.item(1);
         entRef = (EntityReference) elem.getFirstChild();
-
-        {
-            boolean success = false;
-            try {
-                replaced = (Element) entRef.replaceChild(entRef, elem);
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
+        boolean success = false;
+        try {
+            entRef.replaceChild(entRef, elem);
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
     }
 }
 

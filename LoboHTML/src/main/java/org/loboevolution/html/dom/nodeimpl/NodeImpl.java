@@ -136,7 +136,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
 					}
 
-					if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+					if (node.getNodeType() == Node.ELEMENT_NODE && !(node instanceof HTMLHtmlElement)) {
 						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one element on document allowed.");
 					}
 				});

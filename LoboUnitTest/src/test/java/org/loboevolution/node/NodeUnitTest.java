@@ -215,9 +215,9 @@ public class NodeUnitTest extends LoboUnitTest {
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='doTest()'>\n"
-                + "<form name='testForm' id='testForm'>foo\n" // some text, because IE doesn't see "\n" as a text node here
-                + "<input type='hidden' name='input1' value='1'>\n"
-                + "<input type='hidden' name='input2' value='2'>\n"
+                + "<form name='testForm' id='testForm'>foo\n"
+                + "<input type='hidden' name='input1' value='1'>foo\n"
+                + "<input type='hidden' name='input2' value='2'>foo\n"
                 + "</form>\n"
                 + "</body></html>";
 
@@ -390,7 +390,6 @@ public class NodeUnitTest extends LoboUnitTest {
     @Test
     public void replaceChild_EmptyDocumentFragment() {
         final String html = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var element = document.getElementById('myDiv2');\n"
                 + "    try {\n"
@@ -724,7 +723,6 @@ public class NodeUnitTest extends LoboUnitTest {
         final String html =
                 "<html><head>\n"
                         + "  <script>\n"
-
                         + "    function test() {\n"
                         + "      var parent = document.createElement('div');\n"
                         + "      var child = document.createElement('p');\n"

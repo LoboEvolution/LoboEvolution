@@ -27,6 +27,7 @@ import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLStyleElement;
+import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.parser.XHtmlParser;
@@ -138,7 +139,10 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 					sheet.setDisabled(this.disabled);
 					CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
 					cssStyleSheet.setOwnerNode(this);
-					doc.addStyleSheet(cssStyleSheet);
+
+					if(! (this.getParentNode() instanceof SVGSVGElement))
+						doc.addStyleSheet(cssStyleSheet);
+
 					this.styleSheet = cssStyleSheet;
 				} catch (final Throwable err) {
 					this.warn("Unable to parse style sheet", err);

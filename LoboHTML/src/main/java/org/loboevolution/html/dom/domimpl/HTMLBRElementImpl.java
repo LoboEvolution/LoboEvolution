@@ -20,13 +20,12 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLBRElement;
+import org.loboevolution.html.node.Node;
 
 /**
  * <p>HTMLBRElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement {
 	/**
@@ -56,7 +55,12 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 	public void setClear(String clear) {
 		setAttribute("clear", clear);
 	}
-	
+
+	@Override
+	public Node appendChild(Node newChild) {
+		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "readonly node");
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -172,7 +172,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 								Instant start = Instant.now();
 								TimingInfo info = new TimingInfo();
 								final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHtmlRendererConfig(), href, scriptURL, baseURI, rcontext.isTestEnabled());
-								sheet.setHref(baseURI);
+								sheet.setHref(scriptURL == null ? href : scriptURL.toExternalForm());
 								sheet.setDisabled(this.disabled);
 								CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
 								cssStyleSheet.setOwnerNode(this);

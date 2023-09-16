@@ -44,14 +44,12 @@ public class hc_entitiesremovenameditem1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
         Document doc;
         NamedNodeMap entities;
         DocumentType docType;
-        Node retval;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
@@ -59,16 +57,14 @@ public class hc_entitiesremovenameditem1Test extends LoboUnitTest {
         entities = docType.getEntities();
         assertNotNull("entitiesNotNull", entities);
 
-        {
-            boolean success = false;
-            try {
-                retval = entities.removeNamedItem("alpha");
-            } catch (DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
+        boolean success = false;
+        try {
+            entities.removeNamedItem("alpha");
+        } catch (DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
-    }
+        assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
 
+    }
 }
 

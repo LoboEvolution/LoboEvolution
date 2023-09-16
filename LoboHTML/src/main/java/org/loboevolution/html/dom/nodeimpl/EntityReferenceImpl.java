@@ -51,6 +51,21 @@ public class EntityReferenceImpl extends EventTargetImpl implements EntityRefere
     }
 
     @Override
+    public Node replaceChild(Node newChild, Node oldChild) {
+        throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+    }
+
+    @Override
+    public Node appendChild(Node newChild) {
+        throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+    }
+
+    @Override
+    public Node insertBefore(Node newChild, Node refChild) {
+        throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+    }
+
+    @Override
     public int getNodeType() {
         return Node.ENTITY_REFERENCE_NODE;
     }

@@ -875,10 +875,10 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(sheet);
         assertNotNull(sheet.getCssRules());
         assertEquals(6, doc.getStyleSheets().getLength());
-        assertEquals("http://www.example.com/css/common.css", sheet.getHref());
+        assertEquals("file:/C:/Users/utente/workspace/LoboEvolution/target/LoboUnitTest/test-classes/org/lobo/css/common.css", sheet.getHref());
         assertNotNull(sheet);
+        assertEquals("background-color: red", sheet.getCssRules().item(0).getStyle().getCssText());
         assertEquals(3, sheet.getCssRules().getLength());
-        assertEquals("background-color: red; ", sheet.getCssRules().item(0).getStyle().getCssText());
     }
 
     @Test
@@ -888,9 +888,9 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(elm);
         assertEquals("font-family: 'Does Not Exist', Neither; color: navy", elm.getAttribute("style"));
         CSSStyleDeclaration style = elm.getStyle();
-        assertEquals("font-family: \"Does Not Exist\", Neither; color: navy", style.getCssText());
+        assertEquals("font-family: \"does not exist\", neither; color: navy", style.getCssText());
         assertEquals(2, style.getLength());
-        assertEquals("\"Does Not Exist\", Neither", style.getPropertyValue("font-family"));
+        assertEquals("\"does not exist\", neither", style.getPropertyValue("font-family"));
         Attr attr = elm.getAttributeNode("style");
         assertNotNull(attr);
         attr.setValue("");

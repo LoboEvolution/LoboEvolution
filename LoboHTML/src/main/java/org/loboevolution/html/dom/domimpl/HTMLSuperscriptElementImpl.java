@@ -46,6 +46,12 @@ public class HTMLSuperscriptElementImpl extends HTMLElementImpl {
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new FontStyleRenderState(prevRenderState, this, this.superscript);
 	}
+
+	@Override
+	public int getClientHeight() {
+		int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 15 : clientHeight;
+	}
 	
 	/** {@inheritDoc} */
 	@Override

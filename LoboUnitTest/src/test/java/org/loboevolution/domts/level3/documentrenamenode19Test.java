@@ -26,6 +26,9 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -45,14 +48,11 @@ public class documentrenamenode19Test extends LoboUnitTest {
     @Test
     public void runTest() {
         Document doc;
-        Document newDoc;
         DOMImplementation domImpl;
         Element element;
-        Node renamedNode;
-        String qualifiedName;
         DocumentType nullDocType = null;
 
-        java.util.List qualifiedNames = new java.util.ArrayList();
+        List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("a_:");
         qualifiedNames.add("_:");
         qualifiedNames.add(":");
@@ -61,20 +61,17 @@ public class documentrenamenode19Test extends LoboUnitTest {
 
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "newD", nullDocType);
+        domImpl.createDocument("http://www.w3.org/DOM/Test", "newD", nullDocType);
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "test");
-        for (int indexN1006C = 0; indexN1006C < qualifiedNames.size(); indexN1006C++) {
-            qualifiedName = (String) qualifiedNames.get(indexN1006C);
-
-            {
-                boolean success = false;
-                try {
-                    renamedNode = doc.renameNode(element, "http://www.w3.org/2000/XMLNS", qualifiedName);
-                } catch (DOMException ex) {
-                    success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-                }
-                assertTrue("documentrenamenode19_NAMESPACE_ERR", success);
+        for (String qualifiedName : qualifiedNames) {
+            boolean success = false;
+            try {
+                doc.renameNode(element, "http://www.w3.org/2000/XMLNS", qualifiedName);
+            } catch (DOMException ex) {
+                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
+            assertTrue("documentrenamenode19_NAMESPACE_ERR", success);
+
         }
     }
 }

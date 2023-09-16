@@ -51,13 +51,12 @@ public class documentnormalizedocument10Test extends LoboUnitTest {
         Text text;
         String nodeValue;
         boolean canSet;
-        Node appendedChild;
         DOMConfiguration domConfig;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElement("newElem");
         newText = doc.createTextNode("Text          Node");
-        appendedChild = elem.appendChild(newText);
-        appendedChild = doc.appendChild(elem);
+        elem.appendChild(newText);
+        doc.appendChild(elem);
         text = (Text) elem.getFirstChild();
         nodeValue = text.getNodeValue();
         assertEquals("documentnormalizedocument10", "Text          Node", nodeValue);
