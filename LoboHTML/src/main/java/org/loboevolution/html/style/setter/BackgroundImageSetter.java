@@ -58,7 +58,7 @@ public class BackgroundImageSetter implements SubPropertySetter {
 			baseHref = props.getContext() != null ? props.getContext().getDocumentBaseURI() : null;
 		}
 
-		if (baseHref != null) {
+		if (baseHref != null && newValue != null) {
 			final Matcher m = URL_PATTERN.matcher(newValue.toLowerCase());
 			if (m.find()) {
 				final String tentativeUri = HtmlValues.unquoteAndUnescape(m.group(1));
