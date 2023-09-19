@@ -17,19 +17,22 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Jan 14, 2006
- */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.common.Nodes;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.HTMLFormControlsCollection;
 import org.loboevolution.html.dom.HTMLFormElement;
+import org.loboevolution.html.dom.filter.FormFilter;
 import org.loboevolution.html.dom.filter.InputFilter;
 import org.loboevolution.html.dom.input.FormInput;
+import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeVisitor;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
@@ -40,11 +43,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <p>HTMLFormElementImpl class.</p>
  */
 public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElement {
+
+	private HTMLFormControlsCollection elements;
 
 	/**
 	 * <p>isInput.</p>
@@ -56,8 +63,6 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 		final String name = node.getNodeName().toLowerCase();
 		return name.equals("input") || name.equals("textarea") || name.equals("select");
 	}
-
-	private HTMLCollection elements;
 
 	/**
 	 * <p>Constructor for HTMLFormElementImpl.</p>
@@ -89,13 +94,49 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElements() {
-		HTMLCollection elements = this.elements;
-		if (elements == null) {
-			elements = new HTMLCollectionImpl(this, new InputFilter());
+	public HTMLFormControlsCollection getElements() {
+		if (this.elements == null) {
+			HTMLFormControlsCollectionImpl elements = new HTMLFormControlsCollectionImpl((NodeImpl) this.getDocumentNode().getRootNode(), new FormFilter());
+			List<Node> list = new ArrayList<>();
+			elements.forEach(node -> {
+				if (node.hasAttributes()) {
+					NamedNodeMap attributes = node.getAttributes();
+					for (Node attribute : Nodes.iterable(attributes)) {
+						if (getName().equals(attribute.getNodeValue())) {
+							System.out.println(getName());
+							list.add(node);
+						}
+					}
+				}
+
+				if (node.hasChildNodes()) {
+					findChild(node, list);
+				}
+			});
+			elements.clear();
+			elements.addAll(list);
 			this.elements = elements;
 		}
-		return elements;
+		return this.elements;
+	}
+
+	private void findChild(Node node, List<Node> list) {
+		NodeListImpl childNodes = (NodeListImpl) node.getChildNodes();
+		childNodes.forEach(nde -> {
+			if (nde.hasAttributes()) {
+				NamedNodeMap attributes = nde.getAttributes();
+				for (Node attribute : Nodes.iterable(attributes)) {
+					if (getName().equals(attribute.getNodeValue())) {
+						System.out.println(getName());
+						list.add(node);
+					}
+				}
+			}
+
+			if (nde.hasChildNodes()) {
+				findChild(nde, list);
+			}
+		});
 	}
 
 	/** {@inheritDoc} */
@@ -107,7 +148,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
-		return getElements().getLength();
+		return ((HTMLFormControlsCollectionImpl)getElements()).size();
 	}
 
 	/** {@inheritDoc} */

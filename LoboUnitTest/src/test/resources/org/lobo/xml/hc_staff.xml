@@ -30,7 +30,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>hc_staff</title>
     </head>
-    <body onload="parent.loadComplete()">
+    <body>
         <p xmlns:dmstc="http://www.usa.com">
             <em>EMP0001</em>
             <strong>Margaret Martin</strong>

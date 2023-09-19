@@ -8,7 +8,7 @@
 ]>
 <html xmlns='http://www.w3.org/1999/xhtml'
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.w3.org/1999/xhtml datatype_normalization2.xsd"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>datatype_normalization2</title></head><body onload="parent.loadComplete()">
+        xsi:schemaLocation="http://www.w3.org/1999/xhtml datatype_normalization2.xsd"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>datatype_normalization2</title></head><body>
  <p>
   <!--  preserve, string default  -->
   <em>    EMP  0001   </em>

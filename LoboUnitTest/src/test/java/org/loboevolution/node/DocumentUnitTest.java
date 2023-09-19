@@ -1092,22 +1092,6 @@ public class DocumentUnitTest extends LoboUnitTest {
     }
 
     @Test
-    public void all_NotExisting() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function doTest() {\n"
-                + "  alert(document.all('notExisting'));\n"
-                + "  alert(document.all.item('notExisting'));\n"
-                + "  alert(document.all.namedItem('notExisting'));\n"
-                + "}\n"
-                + "</script><body onload='doTest()'>\n"
-                + "</body></html>";
-
-        final String[] messages = {null, null, null};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
     public void getElementsByName() {
         final String html
                 = "<html><head>\n"

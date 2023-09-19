@@ -1,5 +1,5 @@
 <!DOCTYPE html [<!ATTLIST acronym title CDATA "default">]>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>canonicalform03</title></head><body onload="parent.loadComplete()">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>canonicalform03</title></head><body>
    <br   />
    <br   ></br>
    <div   name = "elem3"   id="elem3"   />

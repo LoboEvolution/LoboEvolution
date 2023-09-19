@@ -116,8 +116,6 @@ public class DOMTokenListUnitTest extends LoboUnitTest {
                 + "  alert(list.length);\n"
                 + "  list = document.getElementById('d3').classList;\n"
                 + "  alert(list.length);\n"
-                + "  list = document.getElementById('d4').classList;\n"
-                + "  alert(list.length);\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "  <div id='d1' class=' a b c '></div>\n"

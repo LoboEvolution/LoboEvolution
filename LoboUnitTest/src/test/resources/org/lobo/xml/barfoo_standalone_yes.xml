@@ -20,7 +20,7 @@
     <head>
         <title>getXmlStandalone test doc</title>
     </head>
-    <body onload="parent.loadComplete()">
+    <body>
         <p>bar</p>
     </body>
 </html>

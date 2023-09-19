@@ -9,7 +9,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml'
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.w3.org/1999/xhtml typeinfo.xsd"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>hc_staff</title></head>
-        <body onload="parent.loadComplete()">
+        <body>
                  <p id="foo1"><strong>foo1 foo2</strong></p>
                  <p id="foo2"><code>1</code><code>unbounded</code></p>
                  <p><em>127</em><em>48</em></p>

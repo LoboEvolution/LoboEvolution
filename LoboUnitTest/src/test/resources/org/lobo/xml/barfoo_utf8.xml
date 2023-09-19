@@ -22,7 +22,7 @@
 <head>
 <title>test file</title>
 </head>
-<body onload="parent.loadComplete()">
+<body>
 <p>bar</p>
 </body>
 </html>

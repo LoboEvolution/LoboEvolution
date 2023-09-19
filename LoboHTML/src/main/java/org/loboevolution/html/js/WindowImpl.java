@@ -24,6 +24,7 @@ package org.loboevolution.html.js;
 
 import org.htmlunit.cssparser.dom.CSSRuleListImpl;
 import org.htmlunit.cssparser.dom.DOMException;
+import org.loboevolution.common.Nodes;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -31,6 +32,7 @@ import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.nodeimpl.CommentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
 import org.loboevolution.html.dom.nodeimpl.traversal.NodeFilterImpl;
 import org.loboevolution.html.dom.xpath.XPathResultImpl;
@@ -71,6 +73,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
 /**
@@ -210,17 +213,50 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	/**
-	 * <p>namedItem.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.node.Node} object.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public Node namedItem(final String name) {
 		final HTMLDocumentImpl doc = this.document;
 		if (doc == null) {
 			return null;
 		}
-		return doc.getElementById(name);
+
+		HTMLAllCollectionImpl all = (HTMLAllCollectionImpl) doc.getAll();
+		AtomicReference<Node> find = new AtomicReference<>();
+		all.forEach(node -> {
+			if (node.hasAttributes()) {
+				NamedNodeMap attributes = node.getAttributes();
+				for (Node attribute : Nodes.iterable(attributes)) {
+					if (name.equals(attribute.getNodeValue())) {
+						find.set(node);
+					}
+				}
+			}
+
+			if (node.hasChildNodes()) {
+				findChild(node, find);
+			}
+		});
+		return find.get();
+	}
+
+	private void findChild(Node node, AtomicReference<Node> find) {
+		NodeListImpl childNodes = (NodeListImpl) node.getChildNodes();
+		childNodes.forEach(nde -> {
+			if (nde.hasAttributes()) {
+				NamedNodeMap attributes = nde.getAttributes();
+				for (Node attribute : Nodes.iterable(attributes)) {
+					if (name.equals(attribute.getNodeValue())) {
+						find.set(nde);
+					}
+				}
+			}
+
+			if (nde.hasChildNodes()) {
+				findChild(nde, find);
+			}
+		});
 	}
 
 	/**
@@ -1214,6 +1250,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineElementClass(ws, doc, "HTMLDivElement", "div", HTMLDivElementImpl.class);
 		js.defineElementClass(ws, doc, "HTMLElement", "html", HTMLElementImpl.class);
 		js.defineElementClass(ws, doc, "HTMLDocument", "document", HTMLDocumentImpl.class);
+		js.defineElementClass(ws, doc, "Window", "window", WindowImpl.class);
 
 		js.defineElementClass(ws, doc, "NodeFilter", "NodeFilter", NodeFilterImpl.class);
 		js.defineElementClass(ws, doc, "Node", "Node", NodeImpl.class);

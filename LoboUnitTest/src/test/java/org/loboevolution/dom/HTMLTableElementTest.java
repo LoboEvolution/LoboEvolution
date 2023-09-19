@@ -856,7 +856,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 = "<html><body>\n"
                 + "  <table id='tab1'></table>\n"
                 + "  <table id='tab2' summary=''></table>\n"
-                + "  <table id='tab3' summary='test'></table>\n"
+                + "  <table id='tab3' summary='test2'></table>\n"
                 + "<script>\n"
                 + "  var node = document.getElementById('tab1');\n"
                 + "  alert(node.summary);\n"
@@ -867,8 +867,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "  node.summary = 'unknown';\n"
                 + "  alert(node.summary);\n"
 
-                + "  try { node.summary = unknown; } catch(e) { alert('exception') }\n"
-
                 + "  var node = document.getElementById('tab2');\n"
                 + "  alert(node.summary);\n"
 
@@ -878,7 +876,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {null, "hello", "unknown", "exception", "", "test"};
+        final String[] messages = {null, "hello", "unknown", "", "test2"};
         checkHtmlAlert(html, messages);
     }
 

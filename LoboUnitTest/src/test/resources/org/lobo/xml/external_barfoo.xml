@@ -25,7 +25,7 @@
     <head>
         <title>external entity encoding sample</title>
     </head>
-    <body onload="parent.loadComplete()">
+    <body>
         <p>bar&ent2;&ent1;</p>
         <p xml:base="http://www.example.com/bogus_base">bar&ent2;&ent1;</p>
         &ent3;

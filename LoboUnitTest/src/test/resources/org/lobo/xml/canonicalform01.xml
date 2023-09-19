@@ -4,7 +4,7 @@
    type="text/xsl"   ?>
 
 <!DOCTYPE html SYSTEM "xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>canonicalform01</title></head><body onload="parent.loadComplete()">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>canonicalform01</title></head><body>
 <p>Hello, world!<!-- Comment 1 --></p></body></html>
 
 <?pi-without-data     ?>

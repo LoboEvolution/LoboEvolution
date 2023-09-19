@@ -23,6 +23,7 @@ package org.loboevolution.html.node.js;
 import org.htmlunit.cssparser.dom.CSSRuleListImpl;
 import org.loboevolution.html.node.BarProp;
 import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Selection;
 import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.css.MediaQueryList;
@@ -661,4 +662,12 @@ public interface Window
     List<String> getMsg();
 
     Object getConfig();
+
+    /**
+     * <p>namedItem.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link org.loboevolution.html.node.Node} object.
+     */
+    Node namedItem(final String name);
 }

@@ -21,15 +21,14 @@
 package org.loboevolution.html.dom;
 
 /**
- * A &lt;form&gt; element in the DOM; it allows access to and in some cases modification of aspects of the form, as well as access to its component elements.
- *
- *
- *
+ * A &lt;form&gt; element in the DOM; it allows access to and in some cases modification of aspects of the form,
+ * as well as access to its component elements.
  */
 public interface HTMLFormElement extends HTMLElement {
 
     /**
-     * Sets or retrieves a list of character encodings for input data that must be accepted by the server processing the form.
+     * Sets or retrieves a list of character encodings for input data that must be accepted by the server
+     * processing the form.
      *
      * @return a {@link java.lang.String} object.
      */
@@ -76,9 +75,9 @@ public interface HTMLFormElement extends HTMLElement {
     /**
      * Retrieves a collection, in source order, of all controls in a given form.
      *
-     * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+     * @return a {@link org.loboevolution.html.dom.HTMLFormControlsCollection} object.
      */
-    HTMLCollection getElements();
+    HTMLFormControlsCollection getElements();
 
     /**
      * Sets or retrieves the MIME encoding for the form.
