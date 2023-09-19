@@ -1,4 +1,30 @@
 /*
+ * MIT License
+ *
+ * Copyright (c) 2014 - 2023 LoboEvolution
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Contact info: ivan.difrancesco@yahoo.it
+ */
+
+/*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
  *
@@ -22,10 +48,6 @@
  *
  */
 
-/*
- * Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
- */
-
 package org.loboevolution.javax.xml.stream;
 
 import org.loboevolution.javax.xml.namespace.NamespaceContext;
@@ -33,136 +55,6 @@ import org.loboevolution.javax.xml.namespace.QName;
 
 import java.util.NoSuchElementException;
 
-/**
- *  The XMLStreamReader interface allows forward, read-only access to XML.
- *  It is designed to be the lowest level and most efficient way to
- *  read XML data.
- *
- * <p> The XMLStreamReader is designed to iterate over XML using
- * next() and hasNext().  The data can be accessed using methods such as getEventType(),
- * getNamespaceURI(), getLocalName() and getText();
- *
- * <p> The <a href="#next()">next()</a> method causes the reader to read the next parse event.
- * The next() method returns an integer which identifies the type of event just read.
- * <p> The event type can be determined using <a href="#getEventType()">getEventType()</a>.
- * <p> Parsing events are defined as the XML Declaration, a DTD,
- * start tag, character data, white space, end tag, comment,
- * or processing instruction.  An attribute or namespace event may be encountered
- * at the root level of a document as the result of a query operation.
- *
- * <p>For XML 1.0 compliance an XML processor must pass the
- * identifiers of declared unparsed entities, notation declarations and their
- * associated identifiers to the application.  This information is
- * provided through the property API on this interface.
- * The following two properties allow access to this information:
- * org.loboevolution.javax.xml.stream.notations and org.loboevolution.javax.xml.stream.entities.
- * When the current event is a DTD the following call will return a
- * list of Notations
- *  <code>List l = (List) getProperty("org.loboevolution.javax.xml.stream.notations");</code>
- * The following call will return a list of entity declarations:
- * <code>List l = (List) getProperty("org.loboevolution.javax.xml.stream.entities");</code>
- * These properties can only be accessed during a DTD event and
- * are defined to return null if the information is not available.
- *
- * <p>The following table describes which methods are valid in what state.
- * If a method is called in an invalid state the method will throw a
- * java.lang.IllegalStateException.
- * <table border="2" rules="all" cellpadding="4">
- *   <caption>XMLStreamReader</caption>
- *   <thead>
- *     <tr>
- *       <th align="center" colspan="2">
- *         Valid methods for each state
- *       </th>
- *     </tr>
- *   </thead>
- *   <tbody>
- *     <tr>
- *       <th>Event Type</th>
- *       <th>Valid Methods</th>
- *     </tr>
- *     <tr>
- *       <td> All States  </td>
- *       <td> getProperty(), hasNext(), require(), close(),
- *            getNamespaceURI(), isStartElement(),
- *            isEndElement(), isCharacters(), isWhiteSpace(),
- *            getNamespaceContext(), getEventType(),getLocation(),
- *            hasText(), hasName()
- *       </td>
- *     </tr>
- *     <tr>
- *       <td> START_ELEMENT  </td>
- *       <td> next(), getName(), getLocalName(), hasName(), getPrefix(),
- *            getAttributeXXX(), isAttributeSpecified(),
- *            getNamespaceXXX(),
- *            getElementText(), nextTag()
- *       </td>
- *     </tr>
- *     <tr>
- *       <td> ATTRIBUTE  </td>
- *       <td> next(), nextTag()
- *            getAttributeXXX(), isAttributeSpecified(),
- *       </td>
- *     </tr>
- *     <tr>
- *       <td> NAMESPACE  </td>
- *       <td> next(), nextTag()
- *            getNamespaceXXX()
- *       </td>
- *     </tr>
- *     <tr>
- *       <td> END_ELEMENT  </td>
- *       <td> next(), getName(), getLocalName(), hasName(), getPrefix(),
- *            getNamespaceXXX(), nextTag()
- *      </td>
- *     </tr>
- *     <tr>
- *       <td> CHARACTERS  </td>
- *       <td> next(), getTextXXX(), nextTag() </td>
- *     </tr>
- *     <tr>
- *       <td> CDATA  </td>
- *       <td> next(), getTextXXX(), nextTag() </td>
- *     </tr>
- *     <tr>
- *       <td> COMMENT  </td>
- *       <td> next(), getTextXXX(), nextTag() </td>
- *     </tr>
- *     <tr>
- *       <td> SPACE  </td>
- *       <td> next(), getTextXXX(), nextTag() </td>
- *     </tr>
- *     <tr>
- *       <td> START_DOCUMENT  </td>
- *       <td> next(), getEncoding(), getVersion(), isStandalone(), standaloneSet(),
- *            getCharacterEncodingScheme(), nextTag()</td>
- *     </tr>
- *     <tr>
- *       <td> END_DOCUMENT  </td>
- *       <td> close()</td>
- *     </tr>
- *     <tr>
- *       <td> PROCESSING_INSTRUCTION  </td>
- *       <td> next(), getPITarget(), getPIData(), nextTag() </td>
- *     </tr>
- *     <tr>
- *       <td> ENTITY_REFERENCE  </td>
- *       <td> next(), getLocalName(), getText(), nextTag() </td>
- *     </tr>
- *     <tr>
- *       <td> DTD  </td>
- *       <td> next(), getText(), nextTag() </td>
- *     </tr>
- *   </tbody>
- *  </table>
- *
- * @version 1.0
- * @author Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
- * @see org.loboevolution.javax.xml.stream.events.XMLEvent
- * @see XMLInputFactory
- * @see XMLStreamWriter
- * @since 1.6
- */
 public interface XMLStreamReader extends XMLStreamConstants {
   /**
    * Get the value of a feature/property from the underlying implementation

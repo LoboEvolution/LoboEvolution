@@ -1,4 +1,30 @@
 /*
+ * MIT License
+ *
+ * Copyright (c) 2014 - 2023 LoboEvolution
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Contact info: ivan.difrancesco@yahoo.it
+ */
+
+/*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
  *
@@ -22,63 +48,10 @@
  *
  */
 
-/*
- * Copyright (c) 2009, 2013, by Oracle Corporation. All Rights Reserved.
- */
-
 package org.loboevolution.javax.xml.stream;
 
 import org.loboevolution.javax.xml.stream.util.XMLEventAllocator;
 import org.loboevolution.javax.xml.transform.Source;
-
-/**
- * Defines an abstract implementation of a factory for getting streams.
- *
- * The following table defines the standard properties of this specification.
- * Each property varies in the level of support required by each implementation.
- * The level of support required is described in the 'Required' column.
- *
- *   <table border="2" rules="all" cellpadding="4">
- *    <caption>XMLInputFactory</caption>
- *    <thead>
- *      <tr>
- *        <th align="center" colspan="5">
- *          Configuration parameters
- *        </th>
- *      </tr>
- *    </thead>
- *    <tbody>
- *      <tr>
- *        <th>Property Name</th>
- *        <th>Behavior</th>
- *        <th>Return type</th>
- *        <th>Default Value</th>
- *        <th>Required</th>
- *      </tr>
- * <tr><td>org.loboevolution.javax.xml.stream.isValidating</td><td>Turns on/off implementation specific DTD validation</td><td>Boolean</td><td>False</td><td>No</td></tr>
- * <tr><td>org.loboevolution.javax.xml.stream.isNamespaceAware</td><td>Turns on/off namespace processing for XML 1.0 support</td><td>Boolean</td><td>True</td><td>True (required) / False (optional)</td></tr>
- * <tr><td>org.loboevolution.javax.xml.stream.isCoalescing</td><td>Requires the processor to coalesce adjacent character data</td><td>Boolean</td><td>False</td><td>Yes</td></tr>
- * <tr><td>org.loboevolution.javax.xml.stream.isReplacingEntityReferences</td><td>replace internal entity references with their replacement text and report them as characters</td><td>Boolean</td><td>True</td><td>Yes</td></tr>
- *<tr><td>org.loboevolution.javax.xml.stream.isSupportingExternalEntities</td><td>Resolve external parsed entities</td><td>Boolean</td><td>Unspecified</td><td>Yes</td></tr>
- *<tr><td>org.loboevolution.javax.xml.stream.supportDTD</td><td>Use this property to request processors that do not support DTDs</td><td>Boolean</td><td>True</td><td>Yes</td></tr>
- *<tr><td>org.loboevolution.javax.xml.stream.reporter</td><td>sets/gets the impl of the XMLReporter </td><td>org.loboevolution.javax.xml.stream.XMLReporter</td><td>Null</td><td>Yes</td></tr>
- *<tr><td>org.loboevolution.javax.xml.stream.resolver</td><td>sets/gets the impl of the XMLResolver interface</td><td>org.loboevolution.javax.xml.stream.XMLResolver</td><td>Null</td><td>Yes</td></tr>
- *<tr><td>org.loboevolution.javax.xml.stream.allocator</td><td>sets/gets the impl of the XMLEventAllocator interface</td><td>org.loboevolution.javax.xml.stream.util.XMLEventAllocator</td><td>Null</td><td>Yes</td></tr>
- *    </tbody>
- *  </table>
- *
- *
- * @version 1.2
- * @author Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
- * @see XMLOutputFactory
- * @see XMLEventReader
- * @see XMLStreamReader
- * @see EventFilter
- * @see XMLReporter
- * @see XMLResolver
- * @see org.loboevolution.javax.xml.stream.util.XMLEventAllocator
- * @since 1.6
- */
 
 public abstract class XMLInputFactory {
   /**

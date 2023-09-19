@@ -1,4 +1,30 @@
 /*
+ * MIT License
+ *
+ * Copyright (c) 2014 - 2023 LoboEvolution
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Contact info: ivan.difrancesco@yahoo.it
+ */
+
+/*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
  *
@@ -22,33 +48,12 @@
  *
  */
 
-/*
- * Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
- */
-
 package org.loboevolution.javax.xml.stream;
 
 import org.loboevolution.javax.xml.stream.events.*;
 import org.loboevolution.javax.xml.stream.util.XMLEventConsumer;
 import org.loboevolution.javax.xml.namespace.NamespaceContext;
 
-/**
- *
- * This is the top level interface for writing XML documents.
- *
- * Instances of this interface are not required to validate the
- * form of the XML.
- *
- * @version 1.0
- * @author Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
- * @see XMLEventReader
- * @see org.loboevolution.javax.xml.stream.events.XMLEvent
- * @see org.loboevolution.javax.xml.stream.events.Characters
- * @see org.loboevolution.javax.xml.stream.events.ProcessingInstruction
- * @see org.loboevolution.javax.xml.stream.events.StartElement
- * @see org.loboevolution.javax.xml.stream.events.EndElement
- * @since 1.6
- */
 public interface XMLEventWriter extends XMLEventConsumer {
 
   /**

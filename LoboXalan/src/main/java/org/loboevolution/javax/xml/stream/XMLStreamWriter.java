@@ -1,4 +1,30 @@
 /*
+ * MIT License
+ *
+ * Copyright (c) 2014 - 2023 LoboEvolution
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Contact info: ivan.difrancesco@yahoo.it
+ */
+
+/*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
  *
@@ -22,117 +48,10 @@
  *
  */
 
-/*
- * Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
- */
-
 package org.loboevolution.javax.xml.stream;
 
 import org.loboevolution.javax.xml.namespace.NamespaceContext;
 
-/**
- * The XMLStreamWriter interface specifies how to write XML.  The XMLStreamWriter  does
- * not perform well formedness checking on its input.  However
- * the writeCharacters method is required to escape &amp; , &lt; and &gt;
- * For attribute values the writeAttribute method will escape the
- * above characters plus &quot; to ensure that all character content
- * and attribute values are well formed.
- * Each NAMESPACE
- * and ATTRIBUTE must be individually written.
- * <table border="1" cellpadding="2" cellspacing="0">
- * 	<caption>XMLStreamWriter</caption>
- * 	<thead>
- * 		<tr>
- * 			<td colspan="5">XML Namespaces, <code>org.loboevolution.javax.xml.stream.isRepairingNamespaces</code> and write method behaviour</td>
- * 		</tr>
- * 		<tr>
- * 			<td>Method</td>
- * 			<td colspan="2">
- * 				<code>isRepairingNamespaces</code> == true</td>
- * 			<td colspan="2">
- * 				<code>isRepairingNamespaces</code> == false</td>
- * 		</tr>
- * 		<tr>
- * 			<td>namespaceURI bound</td>
- * 			<td>namespaceURI unbound</td>
- * 			<td>namespaceURI bound</td>
- * 			<td>namespaceURI unbound</td>
- * 		</tr>
- * 	</thead>
- * 	<tbody>
- * 		<tr>
- * 			<td>
- * 				<code>writeAttribute(namespaceURI, localName, value)</code>
- * 			</td>
- * 			<td>prefix:localName="value"<sup>[1]</sup>
- * 			</td>
- * 			<td>xmlns:{generated}="namespaceURI" {generated}:localName="value"</td>
- * 			<td>prefix:localName="value"<sup>[1]</sup>
- * 			</td>
- * 			<td>
- * 				<code>XMLStreamException</code>
- * 			</td>
- * 		</tr>
- * 		<tr>
- * 			<td>
- * 				<code>writeAttribute(prefix, namespaceURI, localName, value)</code>
- * 			</td>
- * 			<td>bound to same prefix: prefix:localName="value"<sup>[1]</sup>bound to different prefix: xmlns:{generated}="namespaceURI" {generated}:localName="value"</td>
- * 			<td>xmlns:prefix="namespaceURI" prefix:localName="value"<sup>[3]</sup>
- * 			</td>
- * 			<td>bound to same prefix: prefix:localName="value"<sup>[1][2]</sup>bound to different prefix:<code>XMLStreamException</code>
- * 				<sup>[2]</sup>
- * 			</td>
- * 			<td>&lt;xmlns:prefix="namespaceURI" prefix:localName="value"&gt;<sup>[2][5]</sup>
- * 			</td>
- * 		</tr>
- * 		<tr>
- * 			<td>
- * 				<code>writeStartElement(namespaceURI, localName)</code>
- * 				<code>writeEmptyElement(namespaceURI, localName)</code>
- * 			</td>
- * 			<td >&lt;prefix:localName&gt;<sup>[1]</sup>
- * 			</td>
- * 			<td>&lt;{generated}:localName xmlns:{generated}="namespaceURI"&gt;</td>
- * 			<td>&lt;prefix:localName&gt;<sup>[1]</sup>
- * 			</td>
- * 			<td>
- * 				<code>XMLStreamException</code>
- * 			</td>
- * 		</tr>
- * 		<tr>
- * 			<td>
- * 				<code>writeStartElement(prefix, localName, namespaceURI)</code>
- * 				<code>writeEmptyElement(prefix, localName, namespaceURI)</code>
- * 			</td>
- * 			<td>bound to same prefix: &lt;prefix:localName&gt;<sup>[1]</sup>bound to different prefix: &lt;{generated}:localName xmlns:{generated}="namespaceURI"&gt;</td>
- * 			<td>&lt;prefix:localName xmlns:prefix="namespaceURI"&gt;<sup>[4]</sup>
- * 			</td>
- * 			<td>bound to same prefix: &lt;prefix:localName&gt;<sup>[1]</sup>bound to different prefix:<code>XMLStreamException</code>
- * 			</td>
- * 			<td>&lt;prefix:localName&gt;</td>
- * 		</tr>
- * 	</tbody>
- * 	<tfoot>
- * 		<tr>
- * 			<td colspan="5">Notes:<ul>
- * 					<li>[1] if namespaceURI == default Namespace URI, then no prefix is written</li>
- * 					<li>[2] if prefix == "" || null 	&#38;&#38; namespaceURI == "", then no prefix or Namespace declaration is generated or written</li>
- * 					<li>[3] if prefix == "" || null, then a prefix is randomly generated</li>
- * 					<li>[4] if prefix == "" || null, then it is treated as the default Namespace and no prefix is generated or written, an xmlns declaration is generated and written if the namespaceURI is unbound</li>
- * 					<li>[5] if prefix == "" || null, then it is treated as an invalid attempt to define the default Namespace and an XMLStreamException is thrown</li>
- * 				</ul>
- * 			</td>
- * 		</tr>
- * 	</tfoot>
- * </table>
- *
- * @version 1.0
- * @author Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
- * @see XMLOutputFactory
- * @see XMLStreamReader
- * @since 1.6
- */
 public interface XMLStreamWriter {
 
   /**

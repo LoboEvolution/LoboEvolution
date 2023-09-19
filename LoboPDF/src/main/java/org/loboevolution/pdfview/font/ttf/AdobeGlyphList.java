@@ -1,3 +1,29 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2014 - 2023 LoboEvolution
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Contact info: ivan.difrancesco@yahoo.it
+ */
+
 package org.loboevolution.pdfview.font.ttf;
 
 import java.io.BufferedReader;
@@ -12,55 +38,6 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Build an object which provides access to all the Adobe glyph names, using
- * a unicode value, and which can translate a glyph name to one or more
- * unicode values.
- *
- *# ###################################################################################
- *# Copyright (c) 1997,1998,2002,2007 Adobe Systems Incorporated
- *#
- *# Permission is hereby granted, free of charge, to any person obtaining a
- *# copy of this documentation file to use, copy, publish, distribute,
- *# sublicense, and/or sell copies of the documentation, and to permit
- *# others to do the same, provided that:
- *# - No modification, editing or other alteration of this document is
- *# allowed; and
- *# - The above copyright notice and this permission notice shall be
- *# included in all copies of the documentation.
- *#
- *# Permission is hereby granted, free of charge, to any person obtaining a
- *# copy of this documentation file, to create their own derivative works
- *# from the content of this document to use, copy, publish, distribute,
- *# sublicense, and/or sell the derivative works, and to permit others to do
- *# the same, provided that the derived work is not represented as being a
- *# copy or version of this document.
- *#
- *# Adobe shall not be liable to any party for any loss of revenue or profit
- *# or for indirect, incidental, special, consequential, or other similar
- *# damages, whether based on tort (including without limitation negligence
- *# or strict liability), contract or other legal or equitable grounds even
- *# if Adobe has been advised or had reason to know of the possibility of
- *# such damages. The Adobe materials are provided on an "AS IS" basis.
- *# Adobe specifically disclaims all express, statutory, or implied
- *# warranties relating to the Adobe materials, including but not limited to
- *# those concerning merchantability or fitness for a particular purpose or
- *# non-infringement of any third party rights regarding the Adobe
- *# materials.
- *# ###################################################################################
- *# Name:          Adobe Glyph List
- *# Table version: 2.0
- *# Date:          September 20, 2002
- *#
- *# See http://partners.adobe.com/asn/developer/typeforum/unicodegn.html
- *#
- *# Format: Semicolon-delimited fields:
- *#            (1) glyph name
- *#            (2) Unicode scalar value
- *
- * Author tomoke
-  *
- */
 public class AdobeGlyphList {
 	
 	/** The Constant logger. */
