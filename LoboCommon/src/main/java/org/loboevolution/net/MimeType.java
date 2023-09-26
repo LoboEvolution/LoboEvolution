@@ -117,13 +117,13 @@ public enum MimeType {
     private final String value;
     private static final Map<String, MimeType> ENUM_MAP;
 
-    MimeType(String value) {
+    MimeType(final String value) {
         this.value = value;
     }
 
     static {
-        Map<String, MimeType> map = new HashMap<>();
-        for (MimeType instance : MimeType.values()) {
+        final Map<String, MimeType> map = new HashMap<>();
+        for (final MimeType instance : MimeType.values()) {
             map.put(instance.getValue(), instance);
         }
         ENUM_MAP = Collections.unmodifiableMap(map);
@@ -140,10 +140,11 @@ public enum MimeType {
 
     /**
      * <p>get.</p>*
-     * @param actionName a {@link java.lang.String} object.
+     * @param action a {@link java.lang.String} object.
      * @return a {@link org.loboevolution.net.MimeType} object.
      */
-    public static MimeType get(String actionName) {
+    public static MimeType get(final String action) {
+        String actionName = action;
         if(Strings.isNotBlank(actionName) && actionName.contains(";")){
             actionName = actionName.split(";")[0];
         }

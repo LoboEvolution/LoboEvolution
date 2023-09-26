@@ -42,7 +42,7 @@ public class DOMTreeModel implements TreeModel {
     /**
      * Description of the Field
      */
-    private Document doc;
+    private final Document doc;
 
     /**
      * Our root for display
@@ -52,27 +52,27 @@ public class DOMTreeModel implements TreeModel {
     /**
      * Description of the Field
      */
-    private HashMap<Node, List<Node>> displayableNodes;
+    private final HashMap<Node, List<Node>> displayableNodes;
 
     /**
      * Description of the Field
      */
-    private List listeners = new ArrayList<>();
+    private final List listeners = new ArrayList<>();
 
     /**
      * Constructor for the DOMTreeModel object
      *
      * @param doc PARAM
      */
-    public DOMTreeModel(Document doc) {
+    public DOMTreeModel(final Document doc) {
         this.displayableNodes = new HashMap<>();
         this.doc = doc;
         setRoot("body");
     }
 
-    private void setRoot(String rootNodeName) {
-        Node tempRoot = doc.getDocumentElement();
-        NodeList nl = tempRoot.getChildNodes();
+    private void setRoot(final String rootNodeName) {
+        final Node tempRoot = doc.getDocumentElement();
+        final NodeList nl = tempRoot.getChildNodes();
         for (int i = 0; i < nl.getLength(); i++) {
             if (nl.item(i).getNodeName().toLowerCase().equals(rootNodeName)) {
                 this.root = nl.item(i);
@@ -87,7 +87,7 @@ public class DOMTreeModel implements TreeModel {
      *
      * @param l Contains the TreeModelListener for TreeModelEvent data.
      */
-    public void addTreeModelListener(TreeModelListener l) {
+    public void addTreeModelListener(final TreeModelListener l) {
         this.listeners.add(l);
     }
 
@@ -100,7 +100,7 @@ public class DOMTreeModel implements TreeModel {
      *
      * @param l Contains the TreeModelListener for TreeModelEvent data.
      */
-    public void removeTreeModelListener(TreeModelListener l) {
+    public void removeTreeModelListener(final TreeModelListener l) {
         this.listeners.remove(l);
     }
 
@@ -111,8 +111,8 @@ public class DOMTreeModel implements TreeModel {
      * @param index  PARAM
      * @return The child value
      */
-    public Object getChild(Object parent, int index) {
-        Node node = (Node) parent;
+    public Object getChild(final Object parent, final int index) {
+        final Node node = (Node) parent;
         List<Node> children = this.displayableNodes.get(parent);
         if (children == null) {
             children = addDisplayable(node);
@@ -126,9 +126,9 @@ public class DOMTreeModel implements TreeModel {
      * @param parent PARAM
      * @return The childCount value
      */
-    public int getChildCount(Object parent) {
+    public int getChildCount(final Object parent) {
 
-        Node node = (Node) parent;
+        final Node node = (Node) parent;
         List<Node> children = this.displayableNodes.get(parent);
         if (children == null) {
             children = addDisplayable(node);
@@ -143,9 +143,9 @@ public class DOMTreeModel implements TreeModel {
      * @param child  PARAM
      * @return The indexOfChild value
      */
-    public int getIndexOfChild(Object parent, Object child) {
+    public int getIndexOfChild(final Object parent, final Object child) {
 
-        Node node = (Node) parent;
+        final Node node = (Node) parent;
         List<Node> children = this.displayableNodes.get(parent);
         if (children == null) {
             children = addDisplayable(node);
@@ -172,8 +172,8 @@ public class DOMTreeModel implements TreeModel {
      * @param nd PARAM
      * @return The leaf value
      */
-    public boolean isLeaf(Object nd) {
-        Node node = (Node) nd;
+    public boolean isLeaf(final Object nd) {
+        final Node node = (Node) nd;
         return !node.hasChildNodes();
     }
 
@@ -187,7 +187,7 @@ public class DOMTreeModel implements TreeModel {
      * @param newValue the new value from the TreeCellEditor
      */
     @Override
-    public void valueForPathChanged(TreePath path, Object newValue) {
+    public void valueForPathChanged(final TreePath path, final Object newValue) {
 
     }
 
@@ -197,14 +197,14 @@ public class DOMTreeModel implements TreeModel {
      * @param parent The feature to be added to the Displayable attribute
      * @return Returns
      */
-    private List<Node> addDisplayable(Node parent) {
+    private List<Node> addDisplayable(final Node parent) {
         List<Node> children = this.displayableNodes.get(parent);
         if (children == null) {
             children = new ArrayList<>();
             this.displayableNodes.put(parent, children);
-            NodeList nl = parent.getChildNodes();
+            final NodeList nl = parent.getChildNodes();
             for (int i = 0, len = nl.getLength(); i < len; i++) {
-                Node child = nl.item(i);
+                final Node child = nl.item(i);
                 if (child.getNodeType() == Node.ELEMENT_NODE ||
                         child.getNodeType() == Node.COMMENT_NODE ||
                         (child.getNodeType() == Node.TEXT_NODE && (child.getNodeValue().trim().length() > 0))) {

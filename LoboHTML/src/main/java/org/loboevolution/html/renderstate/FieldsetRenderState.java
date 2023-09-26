@@ -27,12 +27,8 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.info.BorderInfo;
-
-import java.awt.*;
 
 /**
  * <p>FieldsetRenderState class.</p>
@@ -45,7 +41,7 @@ public class FieldsetRenderState extends AbstractMarginRenderState {
      * @param prevRenderState a {@link RenderState} object.
      * @param element         a {@link HTMLElementImpl} object.
      */
-    public FieldsetRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+    public FieldsetRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
         super(prevRenderState, element);
     }
 
@@ -76,7 +72,7 @@ public class FieldsetRenderState extends AbstractMarginRenderState {
     }
 
     private HtmlInsets getDefaultPaddingInsets() {
-        HtmlInsets insets = new HtmlInsets();
+        final HtmlInsets insets = new HtmlInsets();
         final int leftRight = HtmlValues.getPixelSize("0.75em", null, element.getDocumentNode().getDefaultView(), -1);
         final int top = HtmlValues.getPixelSize("0.35em", null, element.getDocumentNode().getDefaultView(), -1);
         final int bottom = HtmlValues.getPixelSize("0.625em", null, element.getDocumentNode().getDefaultView(), -1);

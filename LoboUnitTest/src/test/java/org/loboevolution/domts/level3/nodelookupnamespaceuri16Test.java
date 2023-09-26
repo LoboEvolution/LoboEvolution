@@ -44,11 +44,11 @@ import static org.junit.Assert.assertNull;
 public class nodelookupnamespaceuri16Test extends LoboUnitTest {
 @Test
 public void runTest(){
-        Document doc;
-        Element elem;
-        Attr attr;
-        Attr attNode;
-        String namespaceURI;
+        final Document doc;
+        final Element elem;
+        final Attr attr;
+        final Attr attNode;
+        final String namespaceURI;
         doc=sampleXmlFile("hc_staff.xml");
         elem=doc.createElementNS("http://www.w3.org/1999/xhtml","dom3:p");
         attr=doc.createAttributeNS("http://www.w3.org/XML/1998/namespace","xml:lang");

@@ -47,7 +47,7 @@ public class HTMLUListElementImpl extends HTMLElementImpl implements HTMLUListEl
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new UListRenderState(prevRenderState, this);
 	}
 
@@ -66,13 +66,13 @@ public class HTMLUListElementImpl extends HTMLElementImpl implements HTMLUListEl
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCompact(boolean compact) {
+	public void setCompact(final boolean compact) {
 		setAttribute("compact", compact ? "compact" : null);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setType(String type) {
+	public void setType(final String type) {
 		setAttribute("type", type);
 	}
 

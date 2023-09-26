@@ -57,13 +57,13 @@ public class canonicalform05Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        DOMConfiguration domConfig;
-        HTMLCollection pList;
-        Element newChild;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-        List errors;
+        final Document doc;
+        final Element elem;
+        final DOMConfiguration domConfig;
+        final HTMLCollection pList;
+        final Element newChild;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final List errors;
         DOMError error;
         int errorCount = 0;
         int severity;
@@ -76,7 +76,7 @@ public class canonicalform05Test extends LoboUnitTest {
         String uri;
         String message;
         int length;
-        boolean canSet;
+        final boolean canSet;
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
@@ -91,7 +91,7 @@ public class canonicalform05Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
-            for (Object o : errors) {
+            for (final Object o : errors) {
                 error = (DOMError) o;
                 severity = error.getSeverity();
 

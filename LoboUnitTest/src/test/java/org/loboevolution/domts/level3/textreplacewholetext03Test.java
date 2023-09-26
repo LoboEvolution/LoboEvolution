@@ -47,10 +47,10 @@ import static org.junit.Assert.assertEquals;
 public class textreplacewholetext03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Text textNode;
-        Text replacedText;
-        String wholeText;
+        final Document doc;
+        final Text textNode;
+        final Text replacedText;
+        final String wholeText;
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode("New Text");
         replacedText = textNode.replaceWholeText(" a b c b ");

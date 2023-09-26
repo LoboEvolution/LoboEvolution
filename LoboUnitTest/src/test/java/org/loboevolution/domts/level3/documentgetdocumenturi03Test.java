@@ -45,17 +45,17 @@ import static org.junit.Assert.assertNull;
 public class documentgetdocumenturi03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        Document importedOwner;
-        Element docElem;
-        Node docElemImported;
-        String docURI;
-        DOMImplementation domImpl;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final Document importedOwner;
+        final Element docElem;
+        final Node docElemImported;
+        final String docURI;
+        final DOMImplementation domImpl;
+        final DocumentType nullDocType = null;
 
-        String rootNS;
-        String rootName;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
         docElem = doc.getDocumentElement();

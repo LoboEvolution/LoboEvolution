@@ -55,7 +55,7 @@ public class GoToRAction extends PDFAction {
      * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
-    public GoToRAction(PDFObject obj, PDFObject root) throws IOException {
+    public GoToRAction(final PDFObject obj, final PDFObject root) throws IOException {
         super("GoToR");
         // find the destination and parse it
         this.destination = PdfObjectParseUtil.parseDestination("D", obj, root, true);
@@ -76,7 +76,7 @@ public class GoToRAction extends PDFAction {
      * @param newWindow a {@link java.lang.String} object.
      ***********************************************************************
      */
-    public GoToRAction(PDFDestination dest, String file, boolean newWindow) {
+    public GoToRAction(final PDFDestination dest, final String file, final boolean newWindow) {
     	super("GoToR");
     	this.file = file;
     	this.destination = dest;

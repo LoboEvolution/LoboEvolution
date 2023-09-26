@@ -56,8 +56,8 @@ public class CIDFontType0 extends BuiltinFont {
 	 * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public CIDFontType0(String baseFont, PDFObject fontObj,
-			PDFFontDescriptor descriptor) throws IOException {
+	public CIDFontType0(final String baseFont, final PDFObject fontObj,
+                        final PDFFontDescriptor descriptor) throws IOException {
 		super(baseFont, fontObj, descriptor);
 	}
 	
@@ -67,10 +67,10 @@ public class CIDFontType0 extends BuiltinFont {
 	 * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public void parseToUnicodeMap(PDFObject fontObj) throws IOException {
-		PDFObject toUnicode = fontObj.getDictRef("ToUnicode");
+	public void parseToUnicodeMap(final PDFObject fontObj) throws IOException {
+		final PDFObject toUnicode = fontObj.getDictRef("ToUnicode");
 		if (toUnicode != null) {
-			PDFCMap cmap = PDFCMap.getCMap(toUnicode);
+			final PDFCMap cmap = PDFCMap.getCMap(toUnicode);
 			this.glyphLookupMap = cmap;
 		}
 	}
@@ -81,10 +81,8 @@ public class CIDFontType0 extends BuiltinFont {
 	 * Get a character from the first font in the descendant fonts array
 	 */
     @Override
-	protected PDFGlyph getGlyph(char src, String name) {
-        //TODO BROS 03.08.2011 Hack for unsupported Type0 CID based fonts
-		// If we have a toUnicodeMap then try to use that one when mapping to our build in font.
-    	// See "9.10 Extraction of Text Content" in the PDF spec.
+	protected PDFGlyph getGlyph(char src, final String glyph) {
+		String name = glyph;
         if (this.glyphLookupMap != null) {
         	src = this.glyphLookupMap.map(src);
             //The preferred method of getting the glyph should be by name. 

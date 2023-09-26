@@ -47,17 +47,17 @@ import static org.junit.Assert.assertTrue;
 public class textiselementcontentwhitespace05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection bodyList;
         Element bodyElem;
-        Text textNode;
-        Text nonBlankNode;
-        Node returnedNode;
-        boolean isElemContentWhitespace;
-        DOMConfiguration domConfig;
-        boolean canSetValidation;
-        Node refChild;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Text textNode;
+        final Text nonBlankNode;
+        final Node returnedNode;
+        final boolean isElemContentWhitespace;
+        final DOMConfiguration domConfig;
+        final boolean canSetValidation;
+        final Node refChild;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();

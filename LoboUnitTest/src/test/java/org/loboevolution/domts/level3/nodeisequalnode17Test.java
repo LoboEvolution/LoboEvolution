@@ -51,19 +51,19 @@ public class nodeisequalnode17Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Attr attr1;
-        Attr attr2;
-        boolean isEqual;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Attr attr1;
+        final Attr attr2;
+        final boolean isEqual;
+        final DocumentType nullDocType = null;
 
-        String nullNSURI = null;
+        final String nullNSURI = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

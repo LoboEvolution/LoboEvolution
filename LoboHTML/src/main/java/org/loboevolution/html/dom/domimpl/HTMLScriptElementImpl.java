@@ -45,7 +45,6 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.loboevolution.html.dom.UserDataHandler;
-import sun.net.www.protocol.file.FileURLConnection;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -89,7 +88,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 
 	/** {@inheritDoc} */
 	@Override
-	protected void appendInnerTextImpl(StringBuilder buffer) {
+	protected void appendInnerTextImpl(final StringBuilder buffer) {
 		// nop
 	}
 
@@ -100,8 +99,8 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	}
 
 	@Override
-	public void setAsync(boolean async) {
-// TODO Auto-generated method stub
+	public void setAsync(final boolean async) {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -111,7 +110,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	}
 
 	@Override
-	public void setCrossOrigin(String crossOrigin) {
+	public void setCrossOrigin(final String crossOrigin) {
 		// TODO Auto-generated method stub
 	}
 
@@ -179,24 +178,24 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			ctx.setLanguageVersion(Context.VERSION_1_8);
 			ctx.setOptimizationLevel(-1);
 			final String src = getSrc();
-			Instant start = Instant.now();
+			final Instant start = Instant.now();
 			try {
 
 				if (Strings.isNotBlank(src)) {
-					TimingInfo info = new TimingInfo();
+					final TimingInfo info = new TimingInfo();
 					final URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
 					final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
 					final URL u = new URL(scriptURI);
 					info.setName(u.getFile());
 
-					URLConnection connection = u.openConnection();
+					final URLConnection connection = u.openConnection();
 					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 					connection.getHeaderField("Set-Cookie");
-					try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-							Reader reader = new InputStreamReader(in, "utf-8")) {
-						BufferedReader br = new BufferedReader(reader);
+					try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+                         final Reader reader = new InputStreamReader(in, "utf-8")) {
+						final BufferedReader br = new BufferedReader(reader);
 						ctx.evaluateReader(scope, br, scriptURI, 1, null);
-					} catch (SocketTimeoutException e) {
+					} catch (final SocketTimeoutException e) {
 						if (connection instanceof HttpURLConnection) {
 							final HttpURLConnection urlConnection = (HttpURLConnection) u.openConnection();
 							info.setHttpResponse(urlConnection.getResponseCode());
@@ -205,15 +204,15 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						}
 
 						logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
-				    } catch (Exception e) {
+				    } catch (final Exception e) {
 						if (e instanceof MissingResourceException) {
 							logger.log(Level.INFO, e.getMessage());
 						} else{
 							logger.log(Level.SEVERE, e.getMessage(), e);
 						}
 					} finally {
-						Instant finish = Instant.now();
-						long timeElapsed = Duration.between(start, finish).toMillis();
+						final Instant finish = Instant.now();
+						final long timeElapsed = Duration.between(start, finish).toMillis();
 						info.setTimeElapsed(timeElapsed);
 						info.setPath(scriptURI);
 						info.setType(connection.getContentType());
@@ -230,14 +229,14 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						htmlPanel.getBrowserPanel().getTimingList.add(info);
 					}
 				} else {
-					String scriptURI = doc.getBaseURI();
+					final String scriptURI = doc.getBaseURI();
 					text = getText();
 					ctx.evaluateString(scope, text, scriptURI, 1, null);
 				}
 			} catch (final RhinoException ecmaError) {
 				final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();
 				logger.log(Level.WARNING, "Javascript error at " + error, ecmaError.getMessage());
-			} catch (MissingResourceException mre) {
+			} catch (final MissingResourceException mre) {
 				logger.log(Level.WARNING, mre.getMessage());
 			} catch (final Throwable err) {
 				logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);
@@ -249,43 +248,43 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDefer(boolean defer) {
+	public void setDefer(final boolean defer) {
 		this.defer = defer;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setEvent(String event) {
+	public void setEvent(final String event) {
 		setAttribute("event", event);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHtmlFor(String htmlFor) {
+	public void setHtmlFor(final String htmlFor) {
 		setAttribute("htmlFor", htmlFor);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSrc(String src) {
+	public void setSrc(final String src) {
 		setAttribute("src", src);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.text = text;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setType(String type) {
+	public void setType(final String type) {
 		setAttribute("type", type);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Object setUserData(String key, Object data, UserDataHandler handler) {
+	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		if (XHtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			processScript();
 		}
@@ -298,7 +297,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	}
 
 	@Override
-	public void setIntegrity(String integrity) {
+	public void setIntegrity(final String integrity) {
 		// TODO Auto-generated method stub
 	}
 
@@ -309,7 +308,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	}
 
 	@Override
-	public void setNoModule(boolean noModule) {
+	public void setNoModule(final boolean noModule) {
 		// TODO Auto-generated method stub
 	}
 
@@ -320,13 +319,13 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	}
 
 	@Override
-	public void setReferrerPolicy(String referrerPolicy) {
+	public void setReferrerPolicy(final String referrerPolicy) {
 		// TODO Auto-generated method stub
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_NONE);
 	}
 

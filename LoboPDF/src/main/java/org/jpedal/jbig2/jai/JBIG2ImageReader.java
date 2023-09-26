@@ -70,14 +70,14 @@ public class JBIG2ImageReader extends ImageReader {
 	 *
 	 * @param originatingProvider a {@link javax.imageio.spi.ImageReaderSpi} object.
 	 */
-	protected JBIG2ImageReader(ImageReaderSpi originatingProvider) {
+	protected JBIG2ImageReader(final ImageReaderSpi originatingProvider) {
 		// Save the identity of the ImageReaderSpi subclass that invoked this
 		// constructor.
 		super(originatingProvider);
 	}
 
 	/** {@inheritDoc} */
-	public void setInput(Object input, boolean seekForwardOnly, boolean ignoreMetadata) {
+	public void setInput(final Object input, final boolean seekForwardOnly, final boolean ignoreMetadata) {
 		super.setInput(input, seekForwardOnly, ignoreMetadata);
 
 		if (input == null) {
@@ -98,7 +98,7 @@ public class JBIG2ImageReader extends ImageReader {
 	}
 
 	/** {@inheritDoc} */
-	public BufferedImage read(int imageIndex, ImageReadParam param) throws IOException {
+	public BufferedImage read(final int imageIndex, final ImageReadParam param) throws IOException {
 
 		BufferedImage dst = null;
 		try {
@@ -123,10 +123,10 @@ public class JBIG2ImageReader extends ImageReader {
 			// 2.3 param.getSubsamplingYOffset() is added to the region's y
 			// coordinate and subtracted from its height.
 
-			int width = getWidth(imageIndex);
-			int height = getHeight(imageIndex);
+			final int width = getWidth(imageIndex);
+			final int height = getHeight(imageIndex);
 
-			Rectangle sourceRegion = getSourceRegion(param, width, height);
+			final Rectangle sourceRegion = getSourceRegion(param, width, height);
 
 			// Source subsampling is used to return a scaled-down source image.
 			// Default 1 values for X and Y subsampling indicate that a
@@ -175,16 +175,16 @@ public class JBIG2ImageReader extends ImageReader {
 
 			// Create a WritableRaster for the destination.
 
-			WritableRaster wrDst = dst.getRaster();
+			final WritableRaster wrDst = dst.getRaster();
 
-			JBIG2Bitmap bitmap = decoder.getPageAsJBIG2Bitmap(imageIndex).getSlice(sourceRegion.x, sourceRegion.y, sourceRegion.width, sourceRegion.height);
+			final JBIG2Bitmap bitmap = decoder.getPageAsJBIG2Bitmap(imageIndex).getSlice(sourceRegion.x, sourceRegion.y, sourceRegion.width, sourceRegion.height);
 
-			BufferedImage image = bitmap.getBufferedImage();
+			final BufferedImage image = bitmap.getBufferedImage();
 
-			int newWidth = (int) (image.getWidth() * (1 / (double) sourceXSubsampling));
-			int newHeight = (int) (image.getHeight() * (1 / (double) sourceYSubsampling));
+			final int newWidth = (int) (image.getWidth() * (1 / (double) sourceXSubsampling));
+			final int newHeight = (int) (image.getHeight() * (1 / (double) sourceYSubsampling));
 
-			BufferedImage scaledImage = scaleImage(image.getRaster(), newWidth, newHeight, 1, 1);
+			final BufferedImage scaledImage = scaleImage(image.getRaster(), newWidth, newHeight, 1, 1);
 
 			Raster raster = null;
 
@@ -195,7 +195,7 @@ public class JBIG2ImageReader extends ImageReader {
 
 			wrDst.setRect(destinationOffset.x, destinationOffset.y, raster);
 
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 
@@ -204,7 +204,7 @@ public class JBIG2ImageReader extends ImageReader {
 	}
 
 	/** {@inheritDoc} */
-	public IIOMetadata getImageMetadata(int imageIndex) throws IOException {
+	public IIOMetadata getImageMetadata(final int imageIndex) throws IOException {
 		return null;
 	}
 
@@ -219,7 +219,7 @@ public class JBIG2ImageReader extends ImageReader {
 	}
 
 	/** {@inheritDoc} */
-	public Iterator<ImageTypeSpecifier> getImageTypes(int imageIndex) throws IOException {
+	public Iterator<ImageTypeSpecifier> getImageTypes(final int imageIndex) throws IOException {
 		readFile();
 
 		checkIndex(imageIndex);
@@ -230,7 +230,7 @@ public class JBIG2ImageReader extends ImageReader {
 		// to return an appropriate BufferedImage that contains the decoded
 		// image, and is accessed by an application.
 
-		List<ImageTypeSpecifier> l = new ArrayList<>();
+		final List<ImageTypeSpecifier> l = new ArrayList<>();
 
 		// The JBIG2 reader only uses a single List entry. This entry describes
 		// a
@@ -244,14 +244,14 @@ public class JBIG2ImageReader extends ImageReader {
 	}
 
 	/** {@inheritDoc} */
-	public int getNumImages(boolean allowSearch) throws IOException {
+	public int getNumImages(final boolean allowSearch) throws IOException {
 		readFile();
 
 		return decoder.getNumberOfPages();
 	}
 
 	/** {@inheritDoc} */
-	public int getHeight(int imageIndex) throws IOException {
+	public int getHeight(final int imageIndex) throws IOException {
 		readFile();
 
 		checkIndex(imageIndex);
@@ -260,7 +260,7 @@ public class JBIG2ImageReader extends ImageReader {
 	}
 
 	/** {@inheritDoc} */
-	public int getWidth(int imageIndex) throws IOException {
+	public int getWidth(final int imageIndex) throws IOException {
 		readFile();
 
 		checkIndex(imageIndex);
@@ -268,16 +268,19 @@ public class JBIG2ImageReader extends ImageReader {
 		return decoder.getPageAsJBIG2Bitmap(imageIndex).getWidth();
 	}
 
-	private void checkIndex(int imageIndex) {
-		int noOfPages = decoder.getNumberOfPages();
+	private void checkIndex(final int imageIndex) {
+		final int noOfPages = decoder.getNumberOfPages();
 		if (imageIndex < 0 || imageIndex > noOfPages)
 			throw new IndexOutOfBoundsException("Bad index!");
 	}
 
-	private static BufferedImage scaleImage(Raster ras, int pX, int pY, int comp, int d) {
+	private static BufferedImage scaleImage(final Raster ras, final int pX, final int pY, final int dComp, final int dBufferedImage) {
 
 		int w = ras.getWidth();
 		int h = ras.getHeight();
+		int d = dBufferedImage;
+		final int g= dBufferedImage;
+		int comp = dComp;
 
 		byte[] data = ((DataBufferByte) ras.getDataBuffer()).getData();
 
@@ -285,8 +288,8 @@ public class JBIG2ImageReader extends ImageReader {
 		int newW = w, newH = h;
 
 		int sampling = 1;
-		int smallestH = pY << 2; // double so comparison works
-		int smallestW = pX << 2;
+		final int smallestH = pY << 2; // double so comparison works
+		final int smallestW = pX << 2;
 
 		// cannot be smaller than page
 		while (newW > smallestW && newH > smallestH) {
@@ -316,13 +319,13 @@ public class JBIG2ImageReader extends ImageReader {
 
 			if (d == 1) {
 
-				int size = newW * newH;
+				final int size = newW * newH;
 
-				byte[] newData = new byte[size];
+				final byte[] newData = new byte[size];
 
 				final int[] flag = { 1, 2, 4, 8, 16, 32, 64, 128 };
 
-				int origLineLength = (w + 7) >> 3;
+				final int origLineLength = (w + 7) >> 3;
 
 				int bit;
 				byte currentByte;
@@ -335,8 +338,8 @@ public class JBIG2ImageReader extends ImageReader {
 
 						// allow for edges in number of pixels left
 						int wCount = sampling, hCount = sampling;
-						int wGapLeft = w - x;
-						int hGapLeft = h - y;
+						final int wGapLeft = w - x;
+						final int hGapLeft = h - y;
 						if (wCount > wGapLeft)
 							wCount = wGapLeft;
 						if (hCount > hGapLeft)
@@ -358,7 +361,7 @@ public class JBIG2ImageReader extends ImageReader {
 						}
 
 						// set value as white or average of pixels
-						int offset = x + (newW * y);
+						final int offset = x + (newW * y);
 						if (count > 0) {
 							newData[offset] = (byte) ((255 * bytes) / count);
 						} else {
@@ -384,7 +387,7 @@ public class JBIG2ImageReader extends ImageReader {
 					if (w * h == data.length)
 						comp = 1;
 
-					byte[] newData = new byte[newW * newH * comp];
+					final byte[] newData = new byte[newW * newH * comp];
 
 					// System.err.println(w+" "+h+" "+data.length+"
 					// comp="+comp+" scaling="+sampling+" "+decodeColorData);
@@ -401,8 +404,8 @@ public class JBIG2ImageReader extends ImageReader {
 
 							// allow for edges in number of pixels left
 							int wCount = sampling, hCount = sampling;
-							int wGapLeft = w - x;
-							int hGapLeft = h - y;
+							final int wGapLeft = w - x;
+							final int hGapLeft = h - y;
 							if (wCount > wGapLeft)
 								wCount = wGapLeft;
 							if (hCount > hGapLeft)
@@ -442,7 +445,7 @@ public class JBIG2ImageReader extends ImageReader {
 					h = newH;
 					w = newW;
 
-				} catch (Exception e) {
+				} catch (final Exception e) {
 
 					// <start-full><start-demo>
 					System.err.println("xx=" + xx + " yy=" + yy + " jj=" + jj + " ptr=" + ((yy + (y * sampling)) * origLineLength) + (((x * sampling) + (xx * comp) + jj)) + '/' + data.length);
@@ -464,9 +467,9 @@ public class JBIG2ImageReader extends ImageReader {
 			// data.length);
 			// WritableRaster raster =Raster.createPackedRaster(new
 			// DataBufferByte(newData, newData.length), newW, newH, 1, null);
-			Raster raster = Raster.createInterleavedRaster(new DataBufferByte(data, data.length), w, h, w, 1, bands, null);
+			final Raster raster = Raster.createInterleavedRaster(new DataBufferByte(data, data.length), w, h, w, 1, bands, null);
 
-			BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_BYTE_GRAY);
+			final BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_BYTE_GRAY);
 			image.setData(raster);
 
 			return image;
@@ -491,11 +494,11 @@ public class JBIG2ImageReader extends ImageReader {
 		decoder = new JBIG2Decoder();
 
 		try {
-			byte[] data;
-			int size = (int) stream.length();
+			final byte[] data;
+			final int size = (int) stream.length();
 			if (size == -1) {
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				byte[] temp = new byte[8192];
+				final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+				final byte[] temp = new byte[8192];
 				for (int len = 0; (len = stream.read(temp)) > 0;) {
 					bos.write(temp, 0, len);
 				}
@@ -508,14 +511,10 @@ public class JBIG2ImageReader extends ImageReader {
 
 			decoder.decodeJBIG2(data);
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		} catch (JBIG2Exception e) {
-			// TODO Auto-generated catch block
+		} catch (final IOException | JBIG2Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 
-		readFile = true;
+        readFile = true;
 	}
 }

@@ -52,20 +52,20 @@ import static org.junit.Assert.assertTrue;
 public class wellformed02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        String nullString = null;
+        final DOMImplementation domImpl;
+        final String nullString = null;
 
-        DocumentType nullDoctype = null;
+        final DocumentType nullDoctype = null;
 
-        Document doc;
+        final Document doc;
         Element elem;
-        Node retval;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Node retval;
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        List<DOMError> errors;
+        final List<DOMError> errors;
 
-        boolean canSet;
+        final boolean canSet;
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument(nullString, nullString, nullDoctype);
 
@@ -73,7 +73,7 @@ public class wellformed02Test extends LoboUnitTest {
             boolean success = false;
             try {
                 elem = doc.createElementNS("http://www.example.org/domts/wellformed02", "LegalNameࢎ");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("xml10InvalidName", success);
@@ -82,7 +82,7 @@ public class wellformed02Test extends LoboUnitTest {
         try {
             doc.setXmlVersion("1.1");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             if (ex.getCode() == 9) {
                 return;
             }

@@ -110,7 +110,7 @@ public class SearchEngineStore implements Serializable {
 	 * @return the url
 	 * @throws java.net.MalformedURLException if any.
 	 */
-	public URL getURL(String query) throws MalformedURLException {
+	public URL getURL(final String query) throws MalformedURLException {
 		final String baseUrl = this.baseUrl;
 		final int qmIdx = baseUrl.indexOf('?');
 		final char join = qmIdx == -1 ? '?' : '&';
@@ -135,7 +135,7 @@ public class SearchEngineStore implements Serializable {
 	 *
 	 * @param baseUrl the baseUrl to set
 	 */
-	public void setBaseUrl(String baseUrl) {
+	public void setBaseUrl(final String baseUrl) {
 		this.baseUrl = baseUrl;
 	}
 
@@ -144,7 +144,7 @@ public class SearchEngineStore implements Serializable {
 	 *
 	 * @param description the description to set
 	 */
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -153,7 +153,7 @@ public class SearchEngineStore implements Serializable {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -162,7 +162,7 @@ public class SearchEngineStore implements Serializable {
 	 *
 	 * @param queryParameter the queryParameter to set
 	 */
-	public void setQueryParameter(String queryParameter) {
+	public void setQueryParameter(final String queryParameter) {
 		this.queryParameter = queryParameter;
 	}
 
@@ -171,7 +171,7 @@ public class SearchEngineStore implements Serializable {
 	 *
 	 * @param isSelected the isSelected to set
 	 */
-	public void setSelected(boolean isSelected) {
+	public void setSelected(final boolean isSelected) {
 		this.isSelected = isSelected;
 	}
 
@@ -180,7 +180,7 @@ public class SearchEngineStore implements Serializable {
 	 *
 	 * @param type the type to set
 	 */
-	public void setType(String type) {
+	public void setType(final String type) {
 		this.type = type;
 	}
 

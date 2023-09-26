@@ -59,13 +59,13 @@ public class documentcreateelementNS06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DocumentType docType = null;
+        final Document doc;
+        final Document newDoc;
+        final DocumentType docType = null;
 
-        DOMImplementation domImpl;
-        String namespaceURI = "http://www.w3.org/xml/1998/namespace ";
-        String qualifiedName = "xml:root";
+        final DOMImplementation domImpl;
+        final String namespaceURI = "http://www.w3.org/xml/1998/namespace ";
+        final String qualifiedName = "xml:root";
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();
@@ -74,7 +74,7 @@ public class documentcreateelementNS06Test extends LoboUnitTest {
         boolean success = false;
         try {
             newDoc.createElementNS(namespaceURI, qualifiedName);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("documentcreateelementNS06", success);

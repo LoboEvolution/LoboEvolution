@@ -122,14 +122,14 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
-	public BaseElementRenderable(RenderableContainer container, ModelNode modelNode, UserAgentContext ucontext) {
+	public BaseElementRenderable(final RenderableContainer container, final ModelNode modelNode, final UserAgentContext ucontext) {
 		super(container, modelNode);
 		this.userAgentContext = ucontext;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Component addComponent(Component component) {
+	public Component addComponent(final Component component) {
 		Collection<Component> gc = this.guiComponents;
 		if (gc == null) {
 			gc = new HashSet<>(1);
@@ -150,7 +150,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	/** {@inheritDoc} */
 	@Override
-	public void addDelayedPair(DelayedPair pair) {
+	public void addDelayedPair(final DelayedPair pair) {
 		List<DelayedPair> gc = this.delayedPairs;
 		if (gc == null) {
 			gc = new LinkedList<>();
@@ -165,10 +165,10 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * @param availWidth a int.
 	 * @param availHeight a int.
 	 */
-	protected void applyStyle(int availWidth, int availHeight) {
+	protected void applyStyle(final int availWidth, final int availHeight) {
 		final Object rootNode = this.modelNode;
-		HTMLElementImpl rootElement;
-		boolean isRootBlock;
+		final HTMLElementImpl rootElement;
+		final boolean isRootBlock;
 
 		if (rootNode instanceof HTMLDocumentImpl) {
 			isRootBlock = true;
@@ -203,7 +203,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		}
 	}
 
-	private void backgroundApplyStyle(RenderState rs) {
+	private void backgroundApplyStyle(final RenderState rs) {
 		binfo = rs.getBackgroundInfo();
 		this.backgroundColor = binfo == null ? null : binfo.getBackgroundColor();
 		final URL backgroundImageUri = binfo == null ? null : binfo.getBackgroundImage();
@@ -212,8 +212,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			this.lastBackgroundImageUri = null;
 		} else if (!Objects.equals(backgroundImageUri, this.lastBackgroundImageUri)) {
 			this.lastBackgroundImageUri = backgroundImageUri;
-			HTMLImageElementImpl img = new HTMLImageElementImpl();
-			TimingInfo info = new TimingInfo();
+			final HTMLImageElementImpl img = new HTMLImageElementImpl();
+			final TimingInfo info = new TimingInfo();
 			img.setSrc(lastBackgroundImageUri.toString());
 			backgroundImage = HttpNetwork.getImage(img, info, false);
 			if (backgroundImage != null) {
@@ -232,10 +232,10 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		}
 	}
 
-	private void insetsApplyStyle(RenderState rs, int availWidth, int availHeight, boolean isRootBlock) {
+	private void insetsApplyStyle(final RenderState rs, final int availWidth, final int availHeight, final boolean isRootBlock) {
 		borderInsets(rs, availWidth, availHeight);
-		Insets paddingInsets = paddingInsets(rs, availWidth, availHeight);
-		Insets tentativeMarginInsets = marginInsets(rs, availWidth, availHeight);
+		final Insets paddingInsets = paddingInsets(rs, availWidth, availHeight);
+		final Insets tentativeMarginInsets = marginInsets(rs, availWidth, availHeight);
 
 		if (isRootBlock) {
 			final int top = paddingInsets.top + tentativeMarginInsets.top;
@@ -251,13 +251,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		}
 	}
 
-	private void borderInsets(RenderState rs, int availWidth, int availHeight) {
+	private void borderInsets(final RenderState rs, final int availWidth, final int availHeight) {
 		Insets ins = null;
 		final BorderInfo borderInfo = rs.getBorderInfo();
 		this.borderInfo = borderInfo;
 
 		if (borderInfo != null) {
-			HtmlInsets html = (HtmlInsets) borderInfo.getInsets();
+			final HtmlInsets html = (HtmlInsets) borderInfo.getInsets();
 			if (html == null) {
 				ins = RBlockViewport.ZERO_INSETS;
 			} else {
@@ -277,9 +277,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		this.borderInsets = ins;
 	}
 
-	private Insets marginInsets(RenderState rs, int availWidth, int availHeight) {
-		Insets ins;
-		HtmlInsets html = rs.getMarginInsets();
+	private Insets marginInsets(final RenderState rs, final int availWidth, final int availHeight) {
+		final Insets ins;
+		final HtmlInsets html = rs.getMarginInsets();
 		if (html == null) {
 			ins = RBlockViewport.ZERO_INSETS;
 		} else {
@@ -288,9 +288,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		return ins;
 	}
 
-	private Insets paddingInsets(RenderState rs, int availWidth, int availHeight) {
-		Insets ins;
-		HtmlInsets html = rs.getPaddingInsets();
+	private Insets paddingInsets(final RenderState rs, final int availWidth, final int availHeight) {
+		final Insets ins;
+		final HtmlInsets html = rs.getPaddingInsets();
 		if (html == null) {
 			ins = RBlockViewport.ZERO_INSETS;
 		} else {
@@ -299,11 +299,11 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		return ins;
 	}
 
-	private void zIndexApplyStyle(CSSStyleDeclaration props) {
+	private void zIndexApplyStyle(final CSSStyleDeclaration props) {
 		final String zIndex = props.getzIndex();
 		if (Strings.isNotBlank(zIndex) && this.modelNode instanceof HTMLElementImpl) {
-			HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
-			HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
+			final HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
+			final HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
 			try {
 				this.zIndex =  HtmlValues.getPixelSize(zIndex, null, doc.getDefaultView(), 0);
 			} catch (final NumberFormatException err) {
@@ -340,7 +340,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 *
 	 * @param isRootBlock a boolean.
 	 */
-	protected void clearStyle(boolean isRootBlock) {
+	protected void clearStyle(final boolean isRootBlock) {
 		this.borderInfo = null;
 		this.borderInsets = null;
 		this.borderTopColor = null;
@@ -364,8 +364,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	private void setupRelativePosition(final RenderState rs, final int availWidth, final int availHeight) {
 		if (rs.getPosition() == RenderState.POSITION_RELATIVE) {
-			HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
-			HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
+			final HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
 			final String leftText = rs.getLeft();
 			final String rightText = rs.getRight();
 			int left = 0;
@@ -402,7 +402,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * @param availHeight a int.
 	 * @param sizeOnly a boolean.
 	 */
-	protected abstract void doLayout(int availWidth, int availHeight, boolean sizeOnly);
+	protected abstract void doLayout(int availWidth, final int availHeight, boolean sizeOnly);
 
 	private Color getBorderBottomColor() {
 		final Color c = this.borderBottomColor;
@@ -502,7 +502,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * @param actualAvailHeight a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	public Integer getDeclaredHeight(int actualAvailHeight) {
+	public Integer getDeclaredHeight(final int actualAvailHeight) {
 		Integer dh = this.declaredHeight;
 		if (INVALID_SIZE.equals(dh) || actualAvailHeight != this.lastAvailHeightForDeclared) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
@@ -523,7 +523,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * @param actualAvailWidth a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	protected Integer getDeclaredWidth(int actualAvailWidth) {
+	protected Integer getDeclaredWidth(final int actualAvailWidth) {
 		Integer dw = this.declaredWidth;
 		if (INVALID_SIZE.equals(dw) || actualAvailWidth != this.lastAvailWidthForDeclared) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
@@ -549,12 +549,12 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	public int getInnerWidth() {
 		final Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLDocumentImpl) {
-			HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
 			return doc.getHtmlRendererContext().getInnerWidth();
 		}
 
 		if (rootNode instanceof HTMLElementImpl) {
-			HTMLElementImpl elem = (HTMLElementImpl) rootNode;
+			final HTMLElementImpl elem = (HTMLElementImpl) rootNode;
 			return elem.getHtmlRendererContext().getInnerWidth();
 		}
 
@@ -566,12 +566,12 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	public int getInnerHeight() {
 		final Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLDocumentImpl) {
-			HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
 			return doc.getHtmlRendererContext().getInnerHeight();
 		}
 
 		if (rootNode instanceof HTMLElementImpl) {
-			HTMLElementImpl elem = (HTMLElementImpl) rootNode;
+			final HTMLElementImpl elem = (HTMLElementImpl) rootNode;
 			return elem.getHtmlRendererContext().getInnerHeight();
 		}
 
@@ -706,7 +706,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
+	public boolean imageUpdate(final Image img, final int infoflags, final int x, final int y, final int w, final int h) {
 		// This is so that a loading image doesn't cause
 		// too many repaint events.
 		if ((infoflags & ImageObserver.ALLBITS) != 0 || (infoflags & ImageObserver.FRAMEBITS) != 0) {
@@ -722,7 +722,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * instead of this one.
 	 */
 	@Override
-	public void layout(int availWidth, int availHeight, boolean sizeOnly) {
+	public void layout(final int availWidth, final int availHeight, final boolean sizeOnly) {
 		// Must call doLayout regardless of validity state.
 		try {
 			doLayout(availWidth, availHeight, sizeOnly);
@@ -758,7 +758,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	
 	  /** {@inheritDoc} */
 	@Override
-	  public Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
+	  public Point translateDescendentPoint(final BoundableRenderable descendent, final int x, final int y) {
 	    final Point p = descendent.getOriginRelativeTo(this);
 	    p.translate(x, y);
 	    return p;
@@ -822,7 +822,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		final Collection<DelayedPair> gc = this.delayedPairs;
 		if (gc != null) {
 			final RenderableContainer rc = this.container;
-			for (DelayedPair pair : gc) {
+			for (final DelayedPair pair : gc) {
 				if (pair.getContainingBlock() != this) {
 					rc.addDelayedPair(pair);
 				}
@@ -837,7 +837,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		final Collection<Component> gc = this.guiComponents;
 		if (gc != null) {
 			final RenderableContainer rc = this.container;
-			for (Component component : gc) {
+			for (final Component component : gc) {
 				rc.addComponent(component);
 			}
 		}
@@ -863,7 +863,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 */
-	protected void prePaint(Graphics g) {
+	protected void prePaint(final Graphics g) {
 		final int startWidth = this.getWidth();
 		final int startHeight = this.getHeight();
 		int totalWidth = startWidth;
@@ -876,7 +876,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			final Object rootNode = this.modelNode;
 			RenderState rs = null;
 			if (rootNode instanceof HTMLElementImpl) {
-				HTMLElementImpl element = (HTMLElementImpl) rootNode;
+				final HTMLElementImpl element = (HTMLElementImpl) rootNode;
 				rs = element.getRenderState();
 			}
 
@@ -894,7 +894,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	}
 
-	private void prePaintBackground(Graphics g, ModelNode node, int totalWidth, int totalHeight, int startX, int startY) {
+	private void prePaintBackground(final Graphics g, final ModelNode node, final int totalWidth, final int totalHeight, final int startX, final int startY) {
 		final RenderState rs = node.getRenderState();
 		final Graphics clientG = g.create(startX, startY, totalWidth, totalHeight);
 		try {
@@ -930,13 +930,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 					switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.getBackgroundRepeat()) {
 						case BackgroundInfo.BR_NO_REPEAT:
-							int _imageX;
+							final int _imageX;
 							if (binfo.isBackgroundXPositionAbsolute()) {
 								_imageX = binfo.getBackgroundXPosition();
 							} else {
 								_imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
 							}
-							int _imageY;
+							final int _imageY;
 							if (binfo.isBackgroundYPositionAbsolute()) {
 								_imageY = binfo.getBackgroundYPosition();
 							} else {
@@ -975,7 +975,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		}
 	}
 
-	private void prePaintBorder(Graphics g, int totalWidth, int totalHeight, int startX, int startY) {
+	private void prePaintBorder(final Graphics g, final int totalWidth, final int totalHeight, final int startX, final int startY) {
 
 		final Insets borderInsets = this.borderInsets;
 
@@ -1061,7 +1061,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		}
 	}
 
-	private void paintBorder(Graphics g, int x1, int y1, int x2, int y2, int dashSize, int width, int borderStyle) {
+	private void paintBorder(final Graphics g, final int x1, final int y1, final int x2, final int y2, final int dashSize, final int width, final int borderStyle) {
 
 		switch (borderStyle) {
 			case BorderInsets.BORDER_STYLE_DASHED:

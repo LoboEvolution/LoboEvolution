@@ -231,7 +231,7 @@ public class OpCodes {
   static final int LAST_NODESET_OP = 25;
 
   /**
-   * [OP_ARGUMENT] (Function argument.) [length] {expression}
+   * [OP_ARGUMENT] (final Function argument.) [length] {expression}
    *
    * <p>returns: XNodeSet XNumber XString XBoolean XRTree XObject
    */

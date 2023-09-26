@@ -80,13 +80,13 @@ public class HiFiBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
 			g.translate(x, y);
 
-			Color hiFrameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 14);
-			Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 6);
-			Color loFrameColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 50);
+			final Color hiFrameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 14);
+			final Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 6);
+			final Color loFrameColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 50);
 
 			g.setColor(hiFrameColor);
 			g.drawLine(1, 0, w - 3, 0);
@@ -95,7 +95,7 @@ public class HiFiBorders extends BaseBorders {
 			g.drawLine(w - 2, 0, w - 2, h - 2);
 			g.drawLine(1, h - 2, w - 3, h - 2);
 
-			Composite composite = g2D.getComposite();
+			final Composite composite = g2D.getComposite();
 			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 			g2D.setComposite(alpha);
 			g2D.setColor(loFrameColor);
@@ -127,9 +127,9 @@ public class HiFiBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			boolean active = isActive(c);
-			int th = getTitleHeight(c);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final boolean active = isActive(c);
+			final int th = getTitleHeight(c);
 			Color titleColor = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors()[0];
 			Color borderColor = AbstractLookAndFeel.getWindowInactiveTitleColorDark();
 			Color frameColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
@@ -186,11 +186,11 @@ public class HiFiBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite composite = g2D.getComposite();
-			Color c1;
-			Color c2;
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite composite = g2D.getComposite();
+			final Color c1;
+			final Color c2;
 			if (JTattooUtilities.isActive((JComponent) c)) {
 				c1 = ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 60);
 				c2 = AbstractLookAndFeel.getFrameColor();
@@ -233,8 +233,8 @@ public class HiFiBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Color frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Color frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
 			JTattooUtilities.draw3DBorder(g, frameColor, ColorHelper.brighter(frameColor, 10), x, y, w, h);
 		}
 
@@ -264,8 +264,8 @@ public class HiFiBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Color frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Color frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
 			JTattooUtilities.draw3DBorder(g, frameColor, ColorHelper.brighter(frameColor, 10), x, y, w, h);
 		}
 
@@ -282,7 +282,7 @@ public class HiFiBorders extends BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c) {
-			Insets insets = new Insets(2, 2, 2, 2);
+			final Insets insets = new Insets(2, 2, 2, 2);
 			if (((JToolBar) c).isFloatable()) {
 				if (((JToolBar) c).getOrientation() == HORIZONTAL) {
 					if (JTattooUtilities.isLeftToRight(c)) {
@@ -294,7 +294,7 @@ public class HiFiBorders extends BaseBorders {
 					insets.top = 15;
 				}
 			}
-			Insets margin = ((JToolBar) c).getMargin();
+			final Insets margin = ((JToolBar) c).getMargin();
 			if (margin != null) {
 				insets.left += margin.left;
 				insets.top += margin.top;
@@ -306,7 +306,7 @@ public class HiFiBorders extends BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets insets = getBorderInsets(c);
+			final Insets insets = getBorderInsets(c);
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -315,15 +315,15 @@ public class HiFiBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 			if (((JToolBar) c).isFloatable()) {
 				if (((JToolBar) c).getOrientation() == HORIZONTAL) {
-					int x1 = 4;
-					int y1 = (h - HOR_RUBBER_ICON.getIconHeight()) / 2;
+					final int x1 = 4;
+					final int y1 = (h - HOR_RUBBER_ICON.getIconHeight()) / 2;
 					HOR_RUBBER_ICON.paintIcon(c, g, x1, y1);
 				} else {
-					int x1 = (w - VER_RUBBER_ICON.getIconWidth()) / 2 + 2;
-					int y1 = 4;
+					final int x1 = (w - VER_RUBBER_ICON.getIconWidth()) / 2 + 2;
+					final int y1 = 4;
 					VER_RUBBER_ICON.paintIcon(c, g, x1, y1);
 				}
 			}

@@ -51,13 +51,13 @@ import static org.junit.Assert.assertTrue;
 public class noderemovechild21Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        Element parent;
-        Element child;
-        Element removed;
-        String removedName;
-        Node removedNode;
+        final Document doc;
+        final Element docElem;
+        final Element parent;
+        final Element child;
+        final Element removed;
+        final String removedName;
+        final Node removedNode;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
@@ -73,7 +73,7 @@ public class noderemovechild21Test extends LoboUnitTest {
             boolean success = false;
             try {
                 removedNode = docElem.removeChild(child);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

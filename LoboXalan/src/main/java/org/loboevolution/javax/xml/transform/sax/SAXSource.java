@@ -39,17 +39,17 @@ public class SAXSource
         throw new RuntimeException("Stub!");
     }
 
-    public SAXSource(XMLReader reader, InputSource inputSource)
+    public SAXSource(final XMLReader reader, final InputSource inputSource)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public SAXSource(InputSource inputSource)
+    public SAXSource(final InputSource inputSource)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setXMLReader(XMLReader reader)
+    public void setXMLReader(final XMLReader reader)
     {
         throw new RuntimeException("Stub!");
     }
@@ -59,7 +59,7 @@ public class SAXSource
         throw new RuntimeException("Stub!");
     }
 
-    public void setInputSource(InputSource inputSource)
+    public void setInputSource(final InputSource inputSource)
     {
         throw new RuntimeException("Stub!");
     }
@@ -69,7 +69,7 @@ public class SAXSource
         throw new RuntimeException("Stub!");
     }
 
-    public void setSystemId(String systemId)
+    public void setSystemId(final String systemId)
     {
         throw new RuntimeException("Stub!");
     }
@@ -79,7 +79,7 @@ public class SAXSource
         throw new RuntimeException("Stub!");
     }
 
-    public static InputSource sourceToInputSource(Source source)
+    public static InputSource sourceToInputSource(final Source source)
     {
         throw new RuntimeException("Stub!");
     }

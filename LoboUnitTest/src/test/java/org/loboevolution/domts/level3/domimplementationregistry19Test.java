@@ -56,13 +56,13 @@ public class domimplementationregistry19Test extends LoboUnitTest {
     public void runTest() {
        
         DOMImplementation domImpl;
-        DOMImplementation baseImpl;
+        final DOMImplementation baseImpl;
         boolean hasFeature;
-        String nullVersion = null;
+        final String nullVersion = null;
 
-        DOMImplementationList domImplList;
-        int length;
-         DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationList domImplList;
+        final int length;
+         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("SVG");
         length = (int) domImplList.getLength();

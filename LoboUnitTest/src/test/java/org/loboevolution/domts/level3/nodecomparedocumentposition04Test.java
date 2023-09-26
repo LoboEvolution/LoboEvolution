@@ -46,8 +46,8 @@ public class nodecomparedocumentposition04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        int documentPosition;
+        final Document doc;
+        final int documentPosition;
         doc = sampleXmlFile("hc_staff.xml");
         documentPosition = doc.compareDocumentPosition(doc);
         assertEquals("nodecomparedocumentpositionNoFlags04", 0, documentPosition);

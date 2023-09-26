@@ -52,7 +52,7 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 	protected class BaseFileView extends BasicFileView {
 
 		@Override
-		public Icon getIcon(File f) {
+		public Icon getIcon(final File f) {
 			Icon icon = getCachedIcon(f);
 			if (icon != null) {
 				return icon;
@@ -88,14 +88,14 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 	 *
 	 * @param fileChooser a {@link javax.swing.JFileChooser} object.
 	 */
-	public BaseFileChooserUI(JFileChooser fileChooser) {
+	public BaseFileChooserUI(final JFileChooser fileChooser) {
 		super(fileChooser);
 		fileView = new BaseFileView();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public FileView getFileView(JFileChooser fc) {
+	public FileView getFileView(final JFileChooser fc) {
 		return fileView;
 	}
 
@@ -107,9 +107,9 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 	 * preferred size recommended by the file chooser's layout manager.
 	 */
 	@Override
-	public Dimension getPreferredSize(JComponent c) {
-		int prefWidth = PREF_SIZE.width;
-		Dimension d = c.getLayout().preferredLayoutSize(c);
+	public Dimension getPreferredSize(final JComponent c) {
+		final int prefWidth = PREF_SIZE.width;
+		final Dimension d = c.getLayout().preferredLayoutSize(c);
 		if (d != null) {
 			return new Dimension(d.width < prefWidth ? prefWidth : d.width,
 					d.height < PREF_SIZE.height ? PREF_SIZE.height : d.height);
@@ -120,24 +120,24 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void installListeners(JFileChooser fc) {
+	protected void installListeners(final JFileChooser fc) {
 		super.installListeners(fc);
 		ancestorListener = new AncestorListener() {
 
 			@Override
-			public void ancestorAdded(AncestorEvent event) {
-				Window w = SwingUtilities.getWindowAncestor(getFileChooser());
+			public void ancestorAdded(final AncestorEvent event) {
+				final Window w = SwingUtilities.getWindowAncestor(getFileChooser());
 				if (w != null) {
 					w.setMinimumSize(getPreferredSize(getFileChooser()));
 				}
 			}
 
 			@Override
-			public void ancestorMoved(AncestorEvent event) {
+			public void ancestorMoved(final AncestorEvent event) {
 			}
 
 			@Override
-			public void ancestorRemoved(AncestorEvent event) {
+			public void ancestorRemoved(final AncestorEvent event) {
 			}
 		};
 
@@ -146,7 +146,7 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void uninstallListeners(JFileChooser fc) {
+	protected void uninstallListeners(final JFileChooser fc) {
 		super.uninstallListeners(fc);
 		fc.removeAncestorListener(ancestorListener);
 	}

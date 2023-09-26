@@ -72,16 +72,16 @@ public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 
 	@Override
 	public SVGRect getBBox() {
-		Shape shape = createShape(null);
+		final Shape shape = createShape(null);
 		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(AffineTransform transform) {
-		GeneralPath path = new GeneralPath();
+	public Shape createShape(final AffineTransform transform) {
+		final GeneralPath path = new GeneralPath();
 		if (hasChildNodes()) {
-			NodeListImpl children = (NodeListImpl)getChildNodes();
+			final NodeListImpl children = (NodeListImpl)getChildNodes();
 			children.forEach(child -> {
 				Shape childShape = null;
 				if (child instanceof SVGGElementImpl) {
@@ -95,7 +95,7 @@ public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 					SVGRect bbox = ((SVGUseElement) child).getBBox();
 					childShape = new Rectangle2D.Float(bbox.getX(), bbox.getY(), bbox.getWidth(), bbox.getHeight());
 				} else if (child instanceof SVGSVGElementImpl) {
-					SVGSVGElement svg = (SVGSVGElement) child;
+					SVGSVGElement svg = ( SVGSVGElement) child;
 					AffineTransform ctm = getCTM().getAffineTransform();
 					AffineTransform inverseTransform;
 					try {

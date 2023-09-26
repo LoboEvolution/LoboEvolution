@@ -47,14 +47,14 @@ public class JavaClassWrapper {
 	 *
 	 * @param class1 a {@link java.lang.Class} object.
 	 */
-	public JavaClassWrapper(Class class1) {
+	public JavaClassWrapper(final Class class1) {
 		this.javaClass = class1;
 		scanMethods();
 	}
 
-	private void ensurePropertyKnown(String methodName, Method method) {
-		String capPropertyName;
-		String propertyName;
+	private void ensurePropertyKnown(final String methodName, final Method method) {
+		final String capPropertyName;
+		final String propertyName;
 		boolean getter = false;
 		boolean setter = false;
 		if (methodName.startsWith("get")) {
@@ -104,7 +104,7 @@ public class JavaClassWrapper {
 	 * @param name a {@link java.lang.String} object.
 	 * @return a {@link org.mozilla.javascript.Function} object.
 	 */
-	public Function getFunction(String name) {
+	public Function getFunction(final String name) {
 		return this.functions.get(name);
 	}
 
@@ -132,21 +132,21 @@ public class JavaClassWrapper {
 	 * @param name a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.info.PropertyInfo} object.
 	 */
-	public PropertyInfo getProperty(String name) {
+	public PropertyInfo getProperty(final String name) {
 		return this.properties.get(name);
 	}
 
-	private boolean isIntegerIndexer(String name, Method method) {
+	private boolean isIntegerIndexer(final String name, final Method method) {
 		return "item".equals(name) && method.getParameterTypes().length == 1
 				|| "setItem".equals(name) && method.getParameterTypes().length == 2;
 	}
 
-	private boolean isNameIndexer(String name, Method method) {
+	private boolean isNameIndexer(final String name, final Method method) {
 		return "namedItem".equals(name) && method.getParameterTypes().length == 1
 				|| "setNamedItem".equals(name) && method.getParameterTypes().length == 2;
 	}
 
-	private boolean isPropertyMethod(String name, Method method) {
+	private boolean isPropertyMethod(final String name, final Method method) {
 		if ((name.startsWith("get") || name.startsWith("is")) &&
 				!name.equals("getBoundingClientRect") &&
 				!name.equals("getClientRects") &&
@@ -175,7 +175,7 @@ public class JavaClassWrapper {
 		return this.javaClass.newInstance();
 	}
 
-	private String propertyUncapitalize(String text) {
+	private String propertyUncapitalize(final String text) {
 		try {
 			if ("NodeFilter".equals(text) || "Node".equals(text) ||
 					(text.length() > 1 && Character.isUpperCase(text.charAt(1)))) {
@@ -215,7 +215,7 @@ public class JavaClassWrapper {
 		return this.javaClass.getName();
 	}
 
-	private void updateIntegerIndexer(String methodName, Method method) {
+	private void updateIntegerIndexer(final String methodName, final Method method) {
 		boolean getter = true;
 		if (methodName.startsWith("set")) {
 			getter = false;
@@ -233,7 +233,7 @@ public class JavaClassWrapper {
 		}
 	}
 
-	private void updateNameIndexer(String methodName, Method method) {
+	private void updateNameIndexer(final String methodName, final Method method) {
 		boolean getter = true;
 		if (methodName.startsWith("set")) {
 			getter = false;

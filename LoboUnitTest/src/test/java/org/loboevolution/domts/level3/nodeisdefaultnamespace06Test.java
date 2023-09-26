@@ -48,9 +48,9 @@ import static org.junit.Assert.assertTrue;
 public class nodeisdefaultnamespace06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        HTMLCollection elemList;
+        final Document doc;
+        final Element elem;
+        final HTMLCollection elemList;
         boolean isDefault;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");

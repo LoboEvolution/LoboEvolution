@@ -35,7 +35,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -61,14 +60,14 @@ public class importNode15Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        Text text;
-        Node aNode;
-        Document ownerDocument;
-        DocumentType docType;
-        String system;
-        String value;
+        final Document doc;
+        final Document aNewDoc;
+        final Text text;
+        final Node aNode;
+        final Document ownerDocument;
+        final DocumentType docType;
+        final String system;
+        final String value;
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
         text = aNewDoc.createTextNode("this is text data");

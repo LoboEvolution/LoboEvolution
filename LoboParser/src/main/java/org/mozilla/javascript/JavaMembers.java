@@ -533,7 +533,8 @@ class JavaMembers {
             Map<String, BeanProperty> toAdd = new HashMap<>();
 
             // Now, For each member, make "bean" properties.
-            for (String name : ht.keySet()) {
+            for (Map.Entry<String,Object> entry : ht.entrySet()) {
+                String name = entry.getKey();
                 // Is this a getter?
                 boolean memberIsGetMethod = name.startsWith("get");
                 boolean memberIsSetMethod = name.startsWith("set");

@@ -55,9 +55,9 @@ public class nodeissupported04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        EntityReference entRef;
-        boolean success;
+        final Document doc;
+        final EntityReference entRef;
+        final boolean success;
         doc = sampleXmlFile("staffNS.xml");
         entRef = doc.createEntityReference("ent1");
         assertNotNull("createdEntRefNotNull", entRef);

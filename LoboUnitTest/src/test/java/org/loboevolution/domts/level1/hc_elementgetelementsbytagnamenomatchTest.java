@@ -54,8 +54,8 @@ public class hc_elementgetelementsbytagnamenomatchTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
+        final Document doc;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("noMatch");
         assertEquals("elementGetElementsByTagNameNoMatchNoMatchAssert", 0, elementList.getLength());

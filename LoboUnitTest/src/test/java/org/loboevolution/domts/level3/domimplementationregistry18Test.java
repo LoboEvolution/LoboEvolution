@@ -51,9 +51,9 @@ public class domimplementationregistry18Test extends LoboUnitTest {
     @SneakyThrows
     public void runTest() {
 
-        DOMImplementationList domImplList;
-        int length;
-         DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationList domImplList;
+        final int length;
+         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("http://www.example.com/bogus-feature 99.0");
         length = domImplList.getLength();

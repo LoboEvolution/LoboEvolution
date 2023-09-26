@@ -33,8 +33,6 @@ import org.loboevolution.menu.tools.AbstractToolsUI;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,16 +55,16 @@ public class TimingPageUI extends AbstractToolsUI {
      *
      * @param frame a {@link BrowserFrame} object.
      */
-    public TimingPageUI(BrowserFrame frame) {
+    public TimingPageUI(final BrowserFrame frame) {
         add(infoContent(frame));
     }
 
-    private JScrollPane infoContent(BrowserFrame frame) {
+    private JScrollPane infoContent(final BrowserFrame frame) {
         try {
             final Object[] columnNames = {"Name", "Type", "State", "Time(ms)"};
             final List<String[]> values = new ArrayList<>();
 
-            for (TimingInfo info : frame.getPanel().getTimingList) {
+            for (final TimingInfo info : frame.getPanel().getTimingList) {
                 values.add(new String[]{info.getName(),
                         info.getType(),
                         String.valueOf(info.getHttpResponse()),

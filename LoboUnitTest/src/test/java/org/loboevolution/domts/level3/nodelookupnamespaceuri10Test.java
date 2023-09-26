@@ -47,11 +47,11 @@ import static org.junit.Assert.assertEquals;
 public class nodelookupnamespaceuri10Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element parent;
-        Element child;
-        String namespaceURI;
-        Node appendedChild;
+        final Document doc;
+        final Element parent;
+        final Element child;
+        final String namespaceURI;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:body");
         child = doc.createElement("p");

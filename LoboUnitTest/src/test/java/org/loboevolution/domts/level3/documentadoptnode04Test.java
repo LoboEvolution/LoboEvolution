@@ -47,22 +47,22 @@ public class documentadoptnode04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Attr newAttr;
-        Attr adoptedAttr;
-        String nodeName;
-        String nodeNamespaceURI;
-        String nodePrefix;
-        Node attrOwnerElem;
-        boolean isSpecified;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Attr newAttr;
+        final Attr adoptedAttr;
+        final String nodeName;
+        final String nodeNamespaceURI;
+        final String nodePrefix;
+        final Node attrOwnerElem;
+        final boolean isSpecified;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
-        String xmlNS = "http://www.w3.org/XML/1998/namespace";
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
+        final String xmlNS = "http://www.w3.org/XML/1998/namespace";
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();

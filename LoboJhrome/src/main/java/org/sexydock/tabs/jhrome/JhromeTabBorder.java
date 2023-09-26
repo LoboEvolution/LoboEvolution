@@ -48,11 +48,11 @@ public class JhromeTabBorder implements Border {
         return flip;
     }
 
-    public void setFlip(boolean flip) {
+    public void setFlip(final boolean flip) {
         this.flip = flip;
     }
 
-    private void updatePaths(int x, int y, int width, int height) {
+    private void updatePaths(final int x, final int y, final int width, final int height) {
         if (width < attrs.insets.left + attrs.insets.right) {
             return;
         }
@@ -72,7 +72,7 @@ public class JhromeTabBorder implements Border {
         closedPath.closePath();
     }
 
-    public boolean contains(Point p) {
+    public boolean contains(final Point p) {
         if (closedPath != null) {
             return closedPath.contains(p);
         }
@@ -80,20 +80,20 @@ public class JhromeTabBorder implements Border {
     }
 
     @Override
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+    public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
         if (width < attrs.insets.left + attrs.insets.right) {
             return;
         }
 
-        Graphics2D g2 = (Graphics2D) g;
+        final Graphics2D g2 = (Graphics2D) g;
 
         updatePaths(x, y, width, height);
 
-        Object prevAntialias = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+        final Object prevAntialias = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        Stroke prevStroke = g2.getStroke();
-        Paint prevPaint = g2.getPaint();
+        final Stroke prevStroke = g2.getStroke();
+        final Paint prevPaint = g2.getPaint();
 
         if (attrs.topShadowVisible) {
             g2.setStroke(attrs.shadowStroke);
@@ -116,7 +116,7 @@ public class JhromeTabBorder implements Border {
     }
 
     @Override
-    public Insets getBorderInsets(Component c) {
+    public Insets getBorderInsets(final Component c) {
         return (Insets) attrs.insets.clone();
     }
 

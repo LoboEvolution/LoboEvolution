@@ -47,17 +47,17 @@ import static org.junit.Assert.assertEquals;
 public class nodeinsertbefore18Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Element newElem;
-        Comment newComment;
-        ProcessingInstruction newPI;
-        CDATASection newCDATA;
-        Comment insertedNode;
-        String data;
+        final Document doc;
+        final Element element;
+        final Element newElem;
+        final Comment newComment;
+        final ProcessingInstruction newPI;
+        final CDATASection newCDATA;
+        final Comment insertedNode;
+        final String data;
         String target;
         Node appendedChild;
-        Node inserted;
+        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         element = doc.createElement("element");
         newElem = doc.createElementNS("http://www.w3.org/DOM", "dom3:elem");

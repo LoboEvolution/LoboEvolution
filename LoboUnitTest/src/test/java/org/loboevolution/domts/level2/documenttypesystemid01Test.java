@@ -54,11 +54,11 @@ public class documenttypesystemid01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        DOMImplementation domImpl;
-        String publicId;
-        String systemId;
+        final Document doc;
+        final DocumentType docType;
+        final DOMImplementation domImpl;
+        final String publicId;
+        final String systemId;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();

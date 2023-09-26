@@ -50,7 +50,7 @@ public class TabbedHtml {
 	 * @param url a {@link java.lang.String} object.
 	 * @param index a int.
 	 */
-	public void tab(BrowserPanel panel, String url, int index) {
+	public void tab(final BrowserPanel panel, final String url, final int index) {
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();

@@ -77,8 +77,8 @@ public class HiFiComboBoxUI extends BaseComboBoxUI {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
 			g.translate(x, y);
 
 			g.setColor(FRAME_LO_COLOR);
@@ -88,8 +88,8 @@ public class HiFiComboBoxUI extends BaseComboBoxUI {
 			g.drawLine(w - 1, 1, w - 1, h - 2);
 			g.drawLine(2, h - 1, w - 2, h - 1);
 
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 			g2D.setComposite(alpha);
 			g.setColor(FRAME_LOWEST_COLOR);
 			g.drawLine(2, 1, w - 2, 1);
@@ -111,7 +111,7 @@ public class HiFiComboBoxUI extends BaseComboBoxUI {
 	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
-		JButton button = new NoFocusButton(HiFiIcons.getComboBoxIcon());
+		final JButton button = new NoFocusButton(HiFiIcons.getComboBoxIcon());
 		button.setBorder(new ArrowButtonBorder());
 		return button;
 	}

@@ -312,14 +312,14 @@ public enum CSSValues {
 	private static final Map<String, CSSValues> ENUM_MAP;
 	
 	static {
-		Map<String, CSSValues> map = new HashMap<>();
-		for (CSSValues instance : CSSValues.values()) {
+		final Map<String, CSSValues> map = new HashMap<>();
+		for (final CSSValues instance : CSSValues.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	CSSValues(String value) {
+	CSSValues(final String value) {
 		this.value = value;
 	}
 
@@ -338,7 +338,7 @@ public enum CSSValues {
 	 * @param value a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public boolean isEqual(String value) {
+	public boolean isEqual(final String value) {
 		return this.value.equals(value);
 	}
 
@@ -348,8 +348,8 @@ public enum CSSValues {
 	 * @param actionName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.CSSValues} object.
 	 */
-	public static CSSValues get(String actionName) {
-		CSSValues value = ENUM_MAP.get(actionName != null ? actionName.toLowerCase() : "");
+	public static CSSValues get(final String actionName) {
+		final CSSValues value = ENUM_MAP.get(actionName != null ? actionName.toLowerCase() : "");
 		return value == null ? CSSValues.DEFAULT : value;
 	}
 }

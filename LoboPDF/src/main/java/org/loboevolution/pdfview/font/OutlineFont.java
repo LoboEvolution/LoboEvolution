@@ -54,13 +54,13 @@ public abstract class OutlineFont extends PDFFont {
      * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      * @throws java.io.IOException if any.
      */
-    public OutlineFont(String baseFont, PDFObject fontObj,
-            PDFFontDescriptor descriptor) throws IOException {
+    public OutlineFont(final String baseFont, final PDFObject fontObj,
+                       final PDFFontDescriptor descriptor) throws IOException {
         super(baseFont, descriptor);
 
-        PDFObject firstCharObj = fontObj.getDictRef("FirstChar");
-        PDFObject lastCharObj = fontObj.getDictRef("LastChar");
-        PDFObject widthArrayObj = fontObj.getDictRef("Widths");
+        final PDFObject firstCharObj = fontObj.getDictRef("FirstChar");
+        final PDFObject lastCharObj = fontObj.getDictRef("LastChar");
+        final PDFObject widthArrayObj = fontObj.getDictRef("Widths");
 
         if (firstCharObj != null) {
             this.firstChar = firstCharObj.getIntValue();
@@ -70,7 +70,7 @@ public abstract class OutlineFont extends PDFFont {
         }
 
         if (widthArrayObj != null) {
-            PDFObject[] widthArray = widthArrayObj.getArray();
+            final PDFObject[] widthArray = widthArrayObj.getArray();
 
             this.widths = new float[widthArray.length];
 
@@ -123,8 +123,8 @@ public abstract class OutlineFont extends PDFFont {
      * @param name a {@link java.lang.String} object.
      * @return a float.
      */
-    public float getWidth(char code, String name) {
-        int idx = (code & 0xff) - getFirstChar();
+    public float getWidth(final char code, final String name) {
+        final int idx = (code & 0xff) - getFirstChar();
 
         // make sure we're in range
         if (idx < 0 || this.widths == null || idx >= this.widths.length) {
@@ -152,9 +152,9 @@ public abstract class OutlineFont extends PDFFont {
 	 * Note this method must *always* return a glyph.
 	 */
     @Override
-	protected PDFGlyph getGlyph(char src, String name) {
+	protected PDFGlyph getGlyph(final char src, final String name) {
         GeneralPath outline = null;
-        float width = getWidth(src, name);
+        final float width = getWidth(src, name);
 
         // first try by name
         if (name != null) {
@@ -167,7 +167,7 @@ public abstract class OutlineFont extends PDFFont {
         }
 
         // calculate the advance
-        Point2D.Float advance = new Point2D.Float(width, 0);
+        final Point2D.Float advance = new Point2D.Float(width, 0);
         return new PDFGlyph(src, name, outline, advance);
     }
 
@@ -178,7 +178,7 @@ public abstract class OutlineFont extends PDFFont {
      * @return the glyph outline, or null if unavailable
      * @param width a float.
      */
-    protected abstract GeneralPath getOutline(String name, float width);
+    protected abstract GeneralPath getOutline(final String name, final float width);
 
     /**
      * Get a glyph outline by character code
@@ -189,5 +189,5 @@ public abstract class OutlineFont extends PDFFont {
      * @return the glyph outline
      * @param width a float.
      */
-    protected abstract GeneralPath getOutline(char src, float width);
+    protected abstract GeneralPath getOutline(char src, final float width);
 }

@@ -60,11 +60,11 @@ public class characterdatareplacedatabeginingTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        CharacterData child;
-        String childData;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final CharacterData child;
+        final String childData;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         nameNode = elementList.item(0);

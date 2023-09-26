@@ -32,44 +32,41 @@ import java.util.Properties;
 //            TransformerException, Source, Result, URIResolver, 
 //            ErrorListener
 
-public abstract class Transformer
-{
+public abstract class Transformer {
 
-    protected Transformer()
-    {
+    protected Transformer() {
         throw new RuntimeException("Stub!");
     }
 
-    public void reset()
-    {
+    public void reset() {
         throw new RuntimeException("Stub!");
     }
 
     public abstract void transform(Source source, Result result)
-        throws TransformerException;
+            throws TransformerException;
 
-    public abstract void setParameter(String s, Object obj);
+    public abstract void setParameter(final String s, Object obj);
 
-    public abstract Object getParameter(String s);
+    public abstract Object getParameter(final String s);
 
     public abstract void clearParameters();
 
-    public abstract void setURIResolver(URIResolver uriresolver);
-
     public abstract URIResolver getURIResolver();
 
-    public abstract void setOutputProperties(Properties properties);
+    public abstract void setURIResolver(URIResolver uriresolver);
 
     public abstract Properties getOutputProperties();
 
-    public abstract void setOutputProperty(String s, String s1)
-        throws IllegalArgumentException;
+    public abstract void setOutputProperties(Properties properties);
 
-    public abstract String getOutputProperty(String s)
-        throws IllegalArgumentException;
+    public abstract void setOutputProperty(final String s, final String s1)
+            throws IllegalArgumentException;
 
-    public abstract void setErrorListener(ErrorListener errorlistener)
-        throws IllegalArgumentException;
+    public abstract String getOutputProperty(final String s)
+            throws IllegalArgumentException;
 
     public abstract ErrorListener getErrorListener();
+
+    public abstract void setErrorListener(ErrorListener errorlistener)
+            throws IllegalArgumentException;
 }

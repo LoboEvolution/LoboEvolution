@@ -52,7 +52,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public ShowDowlaodWindow(BrowserFrame frame) {
+    public ShowDowlaodWindow(final BrowserFrame frame) {
         createAndShowGUI();
     }
 
@@ -66,7 +66,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
         final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("download.png"));
         setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
-        LoboLabel label_6 = new LoboLabel("");
+        final LoboLabel label_6 = new LoboLabel("");
         label_6.setOpaque(true);
         label_6.setBounds(0, 11, 592, 8);
         contentPane.add(label_6);
@@ -74,24 +74,24 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
         listHost(contentPane);
     }
 
-    private void listHost(Container contentPane) {
-        LoboSeparator separator_7 = new LoboSeparator();
+    private void listHost(final Container contentPane) {
+        final LoboSeparator separator_7 = new LoboSeparator();
         separator_7.setBounds(0, 98, 550, 12);
         contentPane.add(separator_7);
 
-        LoboPanel panel = new LoboPanel();
+        final LoboPanel panel = new LoboPanel();
         panel.setLayout(null);
         panel.setBounds(0, 40, 500, 50);
         contentPane.add(panel);
 
-        LoboLabel url = new LoboLabel("Download");
+        final LoboLabel url = new LoboLabel("Download");
         url.setFont(new Font("Tahoma", Font.BOLD, 14));
         url.setBounds(100, 18, 160, 17);
         panel.add(url);
 
-        LoboPanel panelGeneralViewAllItems = new LoboPanel();
+        final LoboPanel panelGeneralViewAllItems = new LoboPanel();
         panelGeneralViewAllItems.setBounds(10, 100, 555, 313);
-        JScrollPane spViewallItems = new JScrollPane();
+        final JScrollPane spViewallItems = new JScrollPane();
         spViewallItems.setBorder(null);
         spViewallItems.setViewportView(createItemPanel());
 
@@ -104,7 +104,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
 
     private LoboPanel createItemPanel() {
 
-        LoboPanel panel_3 = new LoboPanel();
+        final LoboPanel panel_3 = new LoboPanel();
         panel_3.setLayout(null);
         panel_3.setBounds(0, 191, 300, 70);
 
@@ -112,13 +112,13 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
         int debutCpTitle = 15;
         int debutCpUrl = 15;
         int debutCpSeparator = 58;
-        int incrementNouvelleLigne = 67;
+        final int incrementNouvelleLigne = 67;
 
         try {
             final DownloadStore store = new DownloadStore();
             final List<String> hostEntries = store.getDownload();
             for (final String host : hostEntries) {
-                LoboTextField url = new LoboTextField();
+                final LoboTextField url = new LoboTextField();
                 url.setText(host);
                 url.setToolTipText(host);
                 url.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -128,11 +128,11 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
                 url.setBounds(12, debutCpDesc, 420, 22);
                 panel_3.add(url);
 
-                LoboSeparator separatorItem = new LoboSeparator();
+                final LoboSeparator separatorItem = new LoboSeparator();
                 separatorItem.setBounds(0, debutCpSeparator, 600, 7);
                 panel_3.add(separatorItem);
                 
-                LoboButton dwnl = new LoboButton();
+                final LoboButton dwnl = new LoboButton();
                 dwnl.setText("Download");
                 dwnl.setActionCommand("dwnlButton");
                 dwnl.setBounds(440, debutCpUrl, 80, 40);
@@ -145,7 +145,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
                 debutCpSeparator = debutCpSeparator + incrementNouvelleLigne;
             }
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

@@ -57,7 +57,7 @@ public class GenericRegionSegment extends RegionSegment {
      * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
      * @param inlineImage a boolean.
      */
-    public GenericRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage) {
+    public GenericRegionSegment(final JBIG2StreamDecoder streamDecoder, final boolean inlineImage) {
         super(streamDecoder);
 
         this.inlineImage = inlineImage;
@@ -79,11 +79,11 @@ public class GenericRegionSegment extends RegionSegment {
         /** read text region Segment flags */
         readGenericRegionFlags();
 
-        boolean useMMR = genericRegionFlags.getFlagValue(GenericRegionFlags.MMR) != 0;
-        int template = genericRegionFlags.getFlagValue(GenericRegionFlags.GB_TEMPLATE);
+        final boolean useMMR = genericRegionFlags.getFlagValue(GenericRegionFlags.MMR) != 0;
+        final int template = genericRegionFlags.getFlagValue(GenericRegionFlags.GB_TEMPLATE);
         
-        short[] genericBAdaptiveTemplateX = new short[4];
-    	short[] genericBAdaptiveTemplateY = new short[4];
+        final short[] genericBAdaptiveTemplateX = new short[4];
+    	final short[] genericBAdaptiveTemplateY = new short[4];
         
         if (!useMMR) {
         	if (template == 0) {
@@ -104,7 +104,7 @@ public class GenericRegionSegment extends RegionSegment {
         	arithmeticDecoder.start();
         }
         
-        boolean typicalPredictionGenericDecodingOn = genericRegionFlags.getFlagValue(GenericRegionFlags.TPGDON) != 0;
+        final boolean typicalPredictionGenericDecodingOn = genericRegionFlags.getFlagValue(GenericRegionFlags.TPGDON) != 0;
         int length = segmentHeader.getSegmentDataLength();
         int bytesRead = 0;
 
@@ -116,8 +116,8 @@ public class GenericRegionSegment extends RegionSegment {
         	
         	unknownLength = true;
         	
-        	short match1;
-        	short match2;
+        	final short match1;
+        	final short match2;
         	
         	if (useMMR) {
         		// look for 0x00 0x00 (0, 0)
@@ -133,11 +133,11 @@ public class GenericRegionSegment extends RegionSegment {
         	
         	
     		while(true) {
-    			short bite1 = decoder.readByte();
+    			final short bite1 = decoder.readByte();
     			bytesRead++;
     			
     			if (bite1 == match1) {
-    				short bite2 = decoder.readByte();
+    				final short bite2 = decoder.readByte();
     				bytesRead++;
     				
     				if (bite2 == match2) {
@@ -150,16 +150,16 @@ public class GenericRegionSegment extends RegionSegment {
     		decoder.movePointer(-bytesRead);
         }
         
-        JBIG2Bitmap bitmap = new JBIG2Bitmap(regionBitmapWidth, regionBitmapHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
+        final JBIG2Bitmap bitmap = new JBIG2Bitmap(regionBitmapWidth, regionBitmapHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
         bitmap.clear(0);
         bitmap.readBitmap(useMMR, template, typicalPredictionGenericDecodingOn, false, null, genericBAdaptiveTemplateX, genericBAdaptiveTemplateY, useMMR ? bytesRead : length - 18);
         
         
         if (inlineImage) {
-            PageInformationSegment pageSegment = decoder.findPageSegement(segmentHeader.getPageAssociation());
-            JBIG2Bitmap pageBitmap = pageSegment.getPageBitmap();
+            final PageInformationSegment pageSegment = decoder.findPageSegement(segmentHeader.getPageAssociation());
+            final JBIG2Bitmap pageBitmap = pageSegment.getPageBitmap();
 
-            int extCombOp = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
+            final int extCombOp = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
             
             if (pageSegment.getPageBitmapHeight() == -1 && regionBitmapYLocation + regionBitmapHeight > pageBitmap.getHeight()) {
             	pageBitmap.expand(regionBitmapYLocation + regionBitmapHeight, 
@@ -181,7 +181,7 @@ public class GenericRegionSegment extends RegionSegment {
 
     private void readGenericRegionFlags() throws IOException {
         /** extract text region Segment flags */
-        short genericRegionFlagsField = decoder.readByte();
+        final short genericRegionFlagsField = decoder.readByte();
 
         genericRegionFlags.setFlags(genericRegionFlagsField);
         

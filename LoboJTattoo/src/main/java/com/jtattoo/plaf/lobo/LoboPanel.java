@@ -54,9 +54,9 @@ public class LoboPanel extends JPanel implements LoboLookAndFeel {
 	 *
 	 * @param title a {@link java.lang.String} object.
 	 */
-	public LoboPanel(String title) {
+	public LoboPanel(final String title) {
 		setBackground(background());
-		TitledBorder border = new TitledBorder(new LineBorder(foreground()), title);
+		final TitledBorder border = new TitledBorder(new LineBorder(foreground()), title);
 		border.setTitleColor(foreground());
 		setBorder(border);
 	}
@@ -67,10 +67,10 @@ public class LoboPanel extends JPanel implements LoboLookAndFeel {
 	 * @param layout a {@link java.awt.LayoutManager} object.
 	 * @param title a {@link java.lang.String} object.
 	 */
-	public LoboPanel(LayoutManager layout, String title) {
+	public LoboPanel(final LayoutManager layout, final String title) {
 		super(layout);
 		setBackground(background());
-		TitledBorder border = new TitledBorder(new LineBorder(foreground()), title);
+		final TitledBorder border = new TitledBorder(new LineBorder(foreground()), title);
 		border.setTitleColor(foreground());
 		setBorder(border);
 	}

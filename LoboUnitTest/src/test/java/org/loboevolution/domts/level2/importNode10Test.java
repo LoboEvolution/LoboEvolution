@@ -36,7 +36,6 @@ import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -64,14 +63,14 @@ public class importNode10Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        EntityReference entRef;
-        Node aNode;
-        Document ownerDocument;
-        DocumentType docType;
-        String system;
-        String name;
+        final Document doc;
+        final Document aNewDoc;
+        final EntityReference entRef;
+        final Node aNode;
+        final Document ownerDocument;
+        final DocumentType docType;
+        final String system;
+        final String name;
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
         entRef = aNewDoc.createEntityReference("entRef1");
@@ -80,7 +79,7 @@ public class importNode10Test extends LoboUnitTest {
         boolean success = false;
         try {
             entRef.setNodeValue("entRef1Value");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
         assertTrue("throw_INVALID_MODIFICATION_ERR", success);

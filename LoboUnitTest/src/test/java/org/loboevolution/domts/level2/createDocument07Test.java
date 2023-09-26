@@ -29,13 +29,11 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -61,15 +59,15 @@ public class createDocument07Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.ecommerce.org/schema";
-        String qualifiedName = "y:x";
-        Document doc;
-        DocumentType docType = null;
+        final String namespaceURI = "http://www.ecommerce.org/schema";
+        final String qualifiedName = "y:x";
+        final Document doc;
+        final DocumentType docType = null;
 
-        DOMImplementation domImpl;
-        Document aNewDoc;
-        String nodeName;
-        String nodeValue;
+        final DOMImplementation domImpl;
+        final Document aNewDoc;
+        final String nodeName;
+        final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();

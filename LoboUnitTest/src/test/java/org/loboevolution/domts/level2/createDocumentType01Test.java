@@ -61,11 +61,11 @@ public class createDocumentType01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String publicId = "STAFF";
-        String systemId = "staff.xml";
-        String malformedName = "prefix::local";
-        Document doc;
-        DOMImplementation domImpl;
+        final String publicId = "STAFF";
+        final String systemId = "staff.xml";
+        final String malformedName = "prefix::local";
+        final Document doc;
+        final DOMImplementation domImpl;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();
@@ -73,7 +73,7 @@ public class createDocumentType01Test extends LoboUnitTest {
         boolean success = false;
         try {
             domImpl.createDocumentType(malformedName, publicId, systemId);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("throw_NAMESPACE_ERR", success);

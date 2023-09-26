@@ -57,7 +57,7 @@ public class RoundedCornerBorder extends AbstractBorder {
 
 	/** {@inheritDoc} */
 	@Override
-	public Insets getBorderInsets(Component c, Insets insets) {
+	public Insets getBorderInsets(final Component c, final Insets insets) {
 		insets.set(4, 8, 4, 8);
 		return insets;
 	}
@@ -71,14 +71,14 @@ public class RoundedCornerBorder extends AbstractBorder {
 	 * @param h a int.
 	 * @return a {@link java.awt.Shape} object.
 	 */
-	public Shape getBorderShape(int x, int y, int w, int h) {
+	public Shape getBorderShape(final int x, final int y, final int w, final int h) {
 		final int r = h;
 		return new RoundRectangle2D.Double(x, y, w, h, r, r);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+	public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
 		final Graphics2D g2 = (Graphics2D) g.create();
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		final Shape border = getBorderShape(x, y, width - 1, height - 1);

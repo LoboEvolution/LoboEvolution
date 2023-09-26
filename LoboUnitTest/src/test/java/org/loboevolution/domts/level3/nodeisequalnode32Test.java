@@ -47,10 +47,10 @@ import static org.junit.Assert.assertTrue;
 public class nodeisequalnode32Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        ProcessingInstruction pi1;
-        ProcessingInstruction pi2;
-        ProcessingInstruction pi3;
+        final Document doc;
+        final ProcessingInstruction pi1;
+        final ProcessingInstruction pi2;
+        final ProcessingInstruction pi3;
         boolean isEqual;
         doc = sampleXmlFile("hc_staff.xml");
         pi1 = doc.createProcessingInstruction("Target1", "pi");

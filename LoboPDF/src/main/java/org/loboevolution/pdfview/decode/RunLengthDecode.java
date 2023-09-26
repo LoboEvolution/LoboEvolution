@@ -46,7 +46,7 @@ public class RunLengthDecode {
 	/**
 	 * initialize the decoder with an array of bytes in RunLength format
 	 */
-	private RunLengthDecode(ByteBuffer buf) {
+	private RunLengthDecode(final ByteBuffer buf) {
 		this.buf = buf;
 	}
 
@@ -60,16 +60,16 @@ public class RunLengthDecode {
 		this.buf.rewind();
 
 		// allocate the output buffer
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		int dupAmount;
-		byte[] buffer = new byte[128];
+		final byte[] buffer = new byte[128];
 		while ((dupAmount = this.buf.get()&0xFF) != RUN_LENGTH_EOD) {
 			if (dupAmount >= 0 && dupAmount <= 127) {
-				int amountToCopy = dupAmount + 1;
+				final int amountToCopy = dupAmount + 1;
 				this.buf.get(buffer, 0, amountToCopy);
 				baos.write(buffer, 0, amountToCopy);
 			} else {
-				byte dupByte = this.buf.get();
+				final byte dupByte = this.buf.get();
 				for (int i = 0; i < 257 - dupAmount; i++) {
 					baos.write(dupByte);
 				}
@@ -95,8 +95,8 @@ public class RunLengthDecode {
 	 * @return the decoded bytes
 	 * @throws org.loboevolution.pdfview.PDFParseException if any.
 	 */
-	public static ByteBuffer decode(ByteBuffer buf, PDFObject params) throws PDFParseException {
-		RunLengthDecode me = new RunLengthDecode(buf);
+	public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params) throws PDFParseException {
+		final RunLengthDecode me = new RunLengthDecode(buf);
 		return me.decode();
 	}
 }

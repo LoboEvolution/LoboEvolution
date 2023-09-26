@@ -56,11 +56,11 @@ public class createElementNS05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.nist.gov";
-        String qualifiedName = "GOV:FACULTY";
-        Document doc;
-        Element newElement;
-        String elementName;
+        final String namespaceURI = "http://www.nist.gov";
+        final String qualifiedName = "GOV:FACULTY";
+        final Document doc;
+        final Element newElement;
+        final String elementName;
         doc = sampleXmlFile("staffNS.xml");
         newElement = doc.createElementNS(namespaceURI, qualifiedName);
         elementName = newElement.getTagName();

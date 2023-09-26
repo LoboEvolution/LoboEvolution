@@ -47,11 +47,11 @@ import static org.junit.Assert.assertEquals;
 public class nodelookupprefix12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Element elem;
-        Element renamedNode;
-        String prefix;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Element elem;
+        final Element renamedNode;
+        final String prefix;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");

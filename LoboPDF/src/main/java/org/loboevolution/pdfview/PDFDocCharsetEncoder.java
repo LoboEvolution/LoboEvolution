@@ -51,7 +51,7 @@ public class PDFDocCharsetEncoder extends CharsetEncoder {
      * @param ch the character
      * @return whether the character is identity encoded
      */
-    public static boolean isIdentityEncoding(char ch) {
+    public static boolean isIdentityEncoding(final char ch) {
         return ch >= 0 && ch <= 255 && IDENT_PDF_DOC_ENCODING_MAP[ch];
 
     }
@@ -91,7 +91,7 @@ public class PDFDocCharsetEncoder extends CharsetEncoder {
 
 	/** {@inheritDoc} */
     @Override
-	protected CoderResult encodeLoop(CharBuffer in, ByteBuffer out) {
+	protected CoderResult encodeLoop(final CharBuffer in, final ByteBuffer out) {
         while (in.remaining() > 0) {
             if (out.remaining() < 1) {
                 return CoderResult.OVERFLOW;
@@ -113,7 +113,7 @@ public class PDFDocCharsetEncoder extends CharsetEncoder {
 
     /** {@inheritDoc} */
     @Override
-    public boolean isLegalReplacement(byte[] repl) {
+    public boolean isLegalReplacement(final byte[] repl) {
         // avoid referencing the non-existent character set
         return true;
     }    

@@ -54,14 +54,14 @@ public class WebStore {
 	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getValue(String key, int session, int index) {
+	public static String getValue(final String key, final int session, final int index) {
 		String name = null;
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_VALUE)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_VALUE)) {
 			pstmt.setString(1, key);
 			pstmt.setInt(2, session);
 			pstmt.setInt(3, index);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					name = rs.getString(1);
 				}
@@ -79,13 +79,13 @@ public class WebStore {
 	 * @param index a {@link java.lang.Integer} object.
 	 * @param session a {@link java.lang.Integer} object.
 	 */
-	public static Map<String, String> getMapStorage(int index,  int session) {
-		Map<String, String> map = new HashMap<>();
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_MAP)) {
+	public static Map<String, String> getMapStorage(final int index, final int session) {
+		final Map<String, String> map = new HashMap<>();
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_MAP)) {
 			pstmt.setInt(1, index);
 			pstmt.setInt(2, session);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					map.put(rs.getString(1), rs.getString(2));
 				}
@@ -104,15 +104,15 @@ public class WebStore {
 	 * @param session a int.
 	 * @param tabIndex a int.
 	 */
-	public static void insertStorage(String name, String value, int session, int tabIndex) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE)) {
+	public static void insertStorage(final String name, final String value, final int session, final int tabIndex) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE)) {
 			pstmt.setString(1, name);
 			pstmt.setString(2, value);
 			pstmt.setInt(3, session);
 			pstmt.setInt(4, tabIndex);
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
@@ -124,14 +124,14 @@ public class WebStore {
 	 * @param session int object
 	 * @param index int object.
 	 */
-	public static void deleteStorage(String name, int session, int index) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_DELETE_KEY)) {
+	public static void deleteStorage(final String name, final int session, final int index) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_DELETE_KEY)) {
 			pstmt.setString(1, name);
 			pstmt.setInt(2, session);
 			pstmt.setInt(3, index);
 			pstmt.executeUpdate();
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 	}
@@ -142,13 +142,13 @@ public class WebStore {
 	 * @param session int object.
 	 * @param index int object.
 	 */
-	public static void deleteStorage(int session, int index) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_WEBSTORAGE)) {
+	public static void deleteStorage(final int session, final int index) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_WEBSTORAGE)) {
 			pstmt.setInt(1, session);
 			pstmt.setInt(2, index);
 			pstmt.executeUpdate();
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 	}
@@ -157,11 +157,11 @@ public class WebStore {
 	 * <p>deleteSessionStorage.</p>
 	 */
 	public static void deleteSessionStorage() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_ALL_WEBSTORAGE)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_ALL_WEBSTORAGE)) {
 			pstmt.setInt(1, 1);
 			pstmt.executeUpdate();
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 	}
@@ -172,17 +172,17 @@ public class WebStore {
 	 * @param index int object.
 	 * @return a int object.
 	 */
-	public static int countStorage(int index) {
+	public static int countStorage(final int index) {
 		int check = 0;
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_SIZE)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_SIZE)) {
 			pstmt.setInt(1, index);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					check = rs.getInt(1);
 				}
 			}
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 		return check;

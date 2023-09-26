@@ -46,8 +46,8 @@ public abstract class Flags {
 	 * @param key a {@link java.lang.String} object.
 	 * @return a int.
 	 */
-	public int getFlagValue(String key) {
-		Integer value = flags.get(key);
+	public int getFlagValue(final String key) {
+		final Integer value = flags.get(key);
 		return value;
 	}
 

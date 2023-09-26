@@ -62,8 +62,8 @@ public class ClearDataAction extends AbstractAction {
 	 * @param navigation a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
 	 * @param bookmark a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
 	 */
-	public ClearDataAction(LoboCheckBox cache, LoboCheckBox cookie, LoboCheckBox navigation,
-			LoboCheckBox bookmark) {
+	public ClearDataAction(final LoboCheckBox cache, final LoboCheckBox cookie, final LoboCheckBox navigation,
+                           final LoboCheckBox bookmark) {
 		this.cache = cache;
 		this.cookie = cookie;
 		this.navigation = navigation;

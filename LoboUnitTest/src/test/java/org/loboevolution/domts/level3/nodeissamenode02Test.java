@@ -46,10 +46,10 @@ import static org.junit.Assert.assertTrue;
 public class nodeissamenode02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType1;
-        DocumentType docType2;
-        boolean isSame;
+        final Document doc;
+        final DocumentType docType1;
+        final DocumentType docType2;
+        final boolean isSame;
         doc = sampleXmlFile("hc_staff.xml");
         docType1 = doc.getDoctype();
         docType2 = doc.getDoctype();

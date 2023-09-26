@@ -76,7 +76,7 @@ public class PositionedRenderable implements Renderable {
 			final Point or = originalParent.getOriginRelativeTo(rparent);
 			final Point orNoScroll = originalParent.getOriginRelativeToNoScroll(rparent);
 			final Rectangle bounds = getRelativeBounds();
-			Graphics g2;
+			final Graphics g2;
 			if (bounds != null) {
 				final int tx = bounds.x + orNoScroll.x;
 				final int ty = bounds.y + orNoScroll.y;

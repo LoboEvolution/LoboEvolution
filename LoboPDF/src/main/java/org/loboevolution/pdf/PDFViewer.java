@@ -147,12 +147,12 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * @param useThumbs
 	 *            true if the thumb panel should exist, false if not.
 	 */
-	public PDFViewer(boolean useThumbs) {
+	public PDFViewer(final boolean useThumbs) {
 		super(TITLE);
 		createAndShowGUI(useThumbs);
 	}
 
-	private void createAndShowGUI(boolean useThumbs) {
+	private void createAndShowGUI(final boolean useThumbs) {
 		doThumb = useThumbs;
 		pageSetupAction = new SetupAction(this);
 		printAction = new PrintAction(this); 
@@ -190,14 +190,14 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		navToolbar.setFloatable(false);
 		add(navToolbar, BorderLayout.SOUTH);
 		
-		JMenuBar mb = new JMenuBar();
-		JMenu file = new JMenu("File");
+		final JMenuBar mb = new JMenuBar();
+		final JMenu file = new JMenu("File");
 		file.add(pageSetupAction);
 		file.addSeparator();
 		file.add(printAction);
 		mb.add(file);
 		
-		JMenu jmZoom = new JMenu("Zoom");
+		final JMenu jmZoom = new JMenu("Zoom");
 		jmZoom.add(fitHeightAction);
 		jmZoom.addSeparator();
 		jmZoom.add(fitAction);
@@ -207,7 +207,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		jmZoom.add(zoomOutAction);
 		mb.add(jmZoom);
 		
-		JMenu nav = new JMenu("Navigation");
+		final JMenu nav = new JMenu("Navigation");
 		nav.add(outAction);
 		nav.addSeparator();
 		nav.add(closeOutline);
@@ -218,18 +218,18 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		setEnabling();
 		pack();
 		
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (screen.width - getWidth()) / 2;
-		int y = (screen.height - getHeight()) / 2;
+		final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		final int x = (screen.width - getWidth()) / 2;
+		final int y = (screen.height - getHeight()) / 2;
 		setLocation(x, y);
 		if (SwingUtilities.isEventDispatchThread()) {
 			setVisible(true);
 		} else {
 			try {
 				SwingUtilities.invokeAndWait(() -> setVisible(true));
-			} catch (InvocationTargetException e) {
+			} catch (final InvocationTargetException e) {
 				logger.log(Level.SEVERE, e.getMessage(), e);
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 				Thread.currentThread().interrupt();
 			}
 		}
@@ -242,7 +242,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * presenter.
 	 */
 	@Override
-	public void gotoPage(int pagenum) {
+	public void gotoPage(final int pagenum) {
 		int tmpPagenum = pagenum;
 		if (tmpPagenum < 0) {
 			tmpPagenum = 0;
@@ -258,7 +258,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * @param pagenum
 	 *            the page to display
 	 */
-	public void forceGotoPage(int pagenum) {
+	public void forceGotoPage(final int pagenum) {
 		int tmpPagenum = pagenum;
 		if (tmpPagenum <= 0) {
 			tmpPagenum = 0;
@@ -269,7 +269,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		curpage = tmpPagenum;
 		// update the page text field
 		// fetch the page and show it in the appropriate place
-		PDFPage pg = curFile.getPage(tmpPagenum + 1);
+		final PDFPage pg = curFile.getPage(tmpPagenum + 1);
 		if (fspp != null) {
 			fspp.showPage(pg);
 			fspp.requestFocus();
@@ -294,9 +294,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * Enable or disable all of the actions based on the current state.
 	 */
 	public void setEnabling() {
-		boolean fileavailable = curFile != null;
-		boolean pageshown = fspp != null ? fspp.getPage() != null : page.getPage() != null;
-		boolean printable = fileavailable && curFile.isPrintable();
+		final boolean fileavailable = curFile != null;
+		final boolean pageshown = fspp != null ? fspp.getPage() != null : page.getPage() != null;
+		final boolean printable = fileavailable && curFile.isPrintable();
 
 		printAction.setEnabled(printable);
 
@@ -316,14 +316,14 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *            the url
 	 * @throws java.io.IOException if any.
 	 */
-    public void openFile(URL url) throws IOException {
+    public void openFile(final URL url) throws IOException {
         final URLConnection connection = url.openConnection();
         connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 		connection.getHeaderField("Set-Cookie");
-        try (InputStream inputStream = HttpNetwork.openConnectionCheckRedirects(connection)) {
-            ByteBuffer byteBuffer = BytesUtilities.readStream(inputStream);
+        try (final InputStream inputStream = HttpNetwork.openConnectionCheckRedirects(connection)) {
+            final ByteBuffer byteBuffer = BytesUtilities.readStream(inputStream);
             openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
@@ -342,13 +342,13 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *            the file to open
 	 * @throws java.io.IOException if any.
 	 */
-	public void openFile(File file) throws IOException {
+	public void openFile(final File file) throws IOException {
 		// first open the file for random access
-		try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
+		try (final RandomAccessFile raf = new RandomAccessFile(file, "r")) {
 			// extract a file channel
-			FileChannel channel = raf.getChannel();
+			final FileChannel channel = raf.getChannel();
 			// now memory-map a byte-buffer
-			ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
+			final ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
 			openPDFByteBuffer(buf, file.getPath(), file.getName());
 		}
 	}
@@ -363,14 +363,14 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * @param name
 	 *            the name
 	 */
-	private void openPDFByteBuffer(ByteBuffer buf, String path, String name) {
+	private void openPDFByteBuffer(final ByteBuffer buf, final String path, final String name) {
 		
 		// create a PDFFile from the data
-		PDFFile newfile;
+		final PDFFile newfile;
 		
 		try {
 			newfile = new PDFFile(buf);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			openError(path + " doesn't appear to be a PDF file.");
 			return;
 		}
@@ -398,7 +398,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * @param message
 	 *            the message
 	 */
-	public void openError(String message) {
+	public void openError(final String message) {
 		JOptionPane.showMessageDialog(split, message, "Error opening file", JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -408,13 +408,13 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * @param name
 	 *            the name of the file to open
 	 */
-	public void doOpen(String name) {
+	public void doOpen(final String name) {
 		try {
 			openFile(new URL(name));
-		} catch (IOException ioe) {
+		} catch (final IOException ioe) {
 			try {
 				openFile(new File(name));
-			} catch (IOException ex) {
+			} catch (final IOException ex) {
 				ex.printStackTrace();
 			}
 		}
@@ -424,7 +424,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * Posts the Page Setup dialog.
 	 */
 	public void doPageSetup() {
-		PrinterJob pjob = PrinterJob.getPrinterJob();
+		final PrinterJob pjob = PrinterJob.getPrinterJob();
 		pformat = pjob.pageDialog(pformat);
 	}
 	
@@ -433,10 +433,10 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * Print the current document.
 	 */
 	public void doPrint() {
-		PrinterJob pjob = PrinterJob.getPrinterJob();
+		final PrinterJob pjob = PrinterJob.getPrinterJob();
 		pjob.setJobName(docName);
-		Book book = new Book();
-		PDFPrintPage pages = new PDFPrintPage(curFile);
+		final Book book = new Book();
+		final PDFPrintPage pages = new PDFPrintPage(curFile);
 		book.append(pages, pformat, curFile.getNumPages());
 		pjob.setPageable(book);
 		if (pjob.printDialog()) {
@@ -450,10 +450,10 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * @param width a boolean.
 	 * @param height a boolean.
 	 */
-	public void doFit(boolean width, boolean height) {
+	public void doFit(final boolean width, final boolean height) {
 		assert width || height;
 
-		Dimension viewSize = scrollPage.getViewport().getSize();
+		final Dimension viewSize = scrollPage.getViewport().getSize();
 
 		// calculate viewSize without scrollbars
 		if (scrollPage.getHorizontalScrollBar().isVisible()) {
@@ -463,8 +463,8 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 			viewSize.width += scrollPage.getVerticalScrollBar().getWidth();
 		}
 
-		Dimension imageSize = page.getPage().getUnstretchedSize(width ? viewSize.width : 1000000, height ? viewSize.height : 1000000, null);
-		Dimension realImageSize = (Dimension)imageSize.clone();
+		final Dimension imageSize = page.getPage().getUnstretchedSize(width ? viewSize.width : 1000000, height ? viewSize.height : 1000000, null);
+		final Dimension realImageSize = (Dimension)imageSize.clone();
 
 		// avoid horizontal scrollbar if vertical scrollbar expected
 		// and vice versa
@@ -485,9 +485,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * @param show
 	 *            the show
 	 */
-	public void doThumbs(boolean show) {
+	public void doThumbs(final boolean show) {
 		if (show) {
-			int divLoc = thumbs.getPreferredSize().width + thumbscroll.getVerticalScrollBar().getWidth() + 4;
+			final int divLoc = thumbs.getPreferredSize().width + thumbscroll.getVerticalScrollBar().getWidth() + 4;
 			split.setDividerLocation(divLoc);
 		} else {
 			split.setDividerLocation(0);
@@ -500,7 +500,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * @param factor
 	 *            the factor
 	 */
-	public void doZoom(float factor) {
+	public void doZoom(final float factor) {
         final int MIN_ZOOM_SIZE = 100;
         final int MAX_ZOOM_SIZE = 4000;
 		page.setPreferredSize(new Dimension(
@@ -548,17 +548,17 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		// if the PDF has an outline, display it.
 		try {
 			outline = curFile.getOutline();
-		} catch (IOException ioe) {
+		} catch (final IOException ioe) {
 		}
 		if (outline != null && olf == null) {
 			if (outline.getChildCount() > 0) {
 				olf = new JDialog(this, "Outline");
 				olf.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 				olf.setLocation(this.getLocation());
-				JTree jt = new JTree(outline);
+				final JTree jt = new JTree(outline);
 				jt.setRootVisible(false);
 				jt.addTreeSelectionListener(this);
-				JScrollPane jsp = new JScrollPane(jt);
+				final JScrollPane jsp = new JScrollPane(jt);
 				olf.getContentPane().add(jsp);
 				olf.pack();
 				olf.setVisible(true);
@@ -588,7 +588,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * Handle a key press for navigation.
 	 */
 	@Override
-	public void keyPressed(KeyEvent evt) {
+	public void keyPressed(final KeyEvent evt) {
 		final int code = evt.getKeyCode();
 		final char keyChar = evt.getKeyChar();
 		switch (code) {
@@ -622,7 +622,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 
 	/** {@inheritDoc} */
 	@Override
-	public void keyReleased(KeyEvent evt) {
+	public void keyReleased(final KeyEvent evt) {
 		// Method not implemented
 	}
 
@@ -632,10 +632,10 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * gets key presses and tries to build a page if they're numeric.
 	 */
 	@Override
-	public void keyTyped(KeyEvent evt) {
-		char key = evt.getKeyChar();
+	public void keyTyped(final KeyEvent evt) {
+		final char key = evt.getKeyChar();
 		if (key >= '0' && key <= '9') {
-			int val = key - '0';
+			final int val = key - '0';
 			pb.keyTyped(val);
 		}
 	}
@@ -646,32 +646,32 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 * Someone changed the selection of the outline tree. Go to the new page.
 	 */
 	@Override
-	public void valueChanged(TreeSelectionEvent e) {
+	public void valueChanged(final TreeSelectionEvent e) {
 		if (e.isAddedPath()) {
-			OutlineNode node = (OutlineNode) e.getPath().getLastPathComponent();
+			final OutlineNode node = (OutlineNode) e.getPath().getLastPathComponent();
 			if (node == null) {
 				return;
 			}
 			try {
-				PDFAction action = node.getAction();
+				final PDFAction action = node.getAction();
 				if (action == null) {
 					return;
 				}
 				if (action instanceof GoToAction) {
-					PDFDestination dest = ((GoToAction) action).getDestination();
+					final PDFDestination dest = ((GoToAction) action).getDestination();
 					if (dest == null) {
 						return;
 					}
-					PDFObject page = dest.getPage();
+					final PDFObject page = dest.getPage();
 					if (page == null) {
 						return;
 					}
-					int pageNum = curFile.getPageNumber(page);
+					final int pageNum = curFile.getPageNumber(page);
 					if (pageNum >= 0) {
 						gotoPage(pageNum);
 					}
 				}
-			} catch (IOException eio) {
+			} catch (final IOException eio) {
 				logger.log(Level.SEVERE, eio.getMessage(), eio);
 			}
 		}
@@ -684,13 +684,13 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *            the name of the icon
 	 * @return the icon, or null if the icon wasn't found.
 	 */
-	public Icon getIcon(String name) {
+	public Icon getIcon(final String name) {
 		Icon icon = null;
-		URL url;
+		final URL url;
 		try {
 			url = getClass().getResource(name);
 			icon = new ImageIcon(url);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return icon;

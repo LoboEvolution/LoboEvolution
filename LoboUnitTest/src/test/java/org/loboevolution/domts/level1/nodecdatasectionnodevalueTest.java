@@ -60,12 +60,12 @@ public class nodecdatasectionnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element cdataName;
-        NodeList childList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element cdataName;
+        final NodeList childList;
         Node child;
-        String cdataNodeValue;
+        final String cdataNodeValue;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("name");
         cdataName = (Element) elementList.item(1);

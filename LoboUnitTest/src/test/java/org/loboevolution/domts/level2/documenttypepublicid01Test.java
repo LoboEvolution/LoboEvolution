@@ -55,11 +55,11 @@ public class documenttypepublicid01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        DOMImplementation domImpl;
-        String publicId;
-        String nullNS = null;
+        final Document doc;
+        final DocumentType docType;
+        final DOMImplementation domImpl;
+        final String publicId;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         

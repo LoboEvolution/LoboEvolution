@@ -49,18 +49,18 @@ import static org.junit.Assert.assertTrue;
 public class nodeisdefaultnamespace05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        DOMImplementation domImpl;
-        Document newDoc;
+        final Document doc;
+        final Element elem;
+        final DOMImplementation domImpl;
+        final Document newDoc;
         boolean isDefault;
-        DocumentType nullDocType = null;
+        final DocumentType nullDocType = null;
 
-        String nullNSURI = null;
+        final String nullNSURI = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

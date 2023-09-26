@@ -64,10 +64,10 @@ public class textindexsizeerroffsetoutofboundsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        Text textNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final Text textNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("name");
         nameNode = elementList.item(2);
@@ -77,7 +77,7 @@ public class textindexsizeerroffsetoutofboundsTest extends LoboUnitTest {
             boolean success = false;
             try {
                 textNode.splitText(300);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }
             assertTrue("throw_INDEX_SIZE_ERR", success);

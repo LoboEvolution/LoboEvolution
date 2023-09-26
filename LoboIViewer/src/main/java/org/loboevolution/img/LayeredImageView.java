@@ -46,7 +46,7 @@ public class LayeredImageView {
 	 *
 	 * @param theImage a {@link org.loboevolution.img.ImageComponent} object.
 	 */
-	public LayeredImageView(ImageComponent theImage) {
+	public LayeredImageView(final ImageComponent theImage) {
 		this.theImage = theImage;
 		layeredPane = new ScrollableLayeredPane(this);
 		layeredPane.setLayout(new OverlayLayout(this));
@@ -72,10 +72,10 @@ public class LayeredImageView {
 	 *            the layer to add the overlay to; higher layers are on top of lower
 	 *            layers; the image resides in layer 0
 	 */
-	public void addOverlay(Overlay overlay, int layer) {
+	public void addOverlay(final Overlay overlay, final int layer) {
 		if (overlay == null)
 			throw new NullPointerException();
-		OverlayComponent c = new OverlayComponent(overlay, getTheImage());
+		final OverlayComponent c = new OverlayComponent(overlay, getTheImage());
 		overlay.addOverlayComponent(c);
 		layeredPane.add(c, Integer.valueOf(layer));
 		layeredPane.revalidate();
@@ -90,10 +90,10 @@ public class LayeredImageView {
 	 * @throws java.lang.IllegalArgumentException
 	 *             if the overlay is not in the image viewer
 	 */
-	public void removeOverlay(Overlay overlay) {
+	public void removeOverlay(final Overlay overlay) {
 		if (overlay == null)
 			throw new NullPointerException();
-		for (Component c : layeredPane.getComponents()) {
+		for (final Component c : layeredPane.getComponents()) {
 			if (c instanceof OverlayComponent && ((OverlayComponent) c).getOverlay() == overlay) {
 				overlay.removeOverlayComponent((OverlayComponent) c);
 				layeredPane.remove(c);

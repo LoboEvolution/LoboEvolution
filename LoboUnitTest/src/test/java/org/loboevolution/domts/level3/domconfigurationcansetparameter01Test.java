@@ -47,14 +47,14 @@ import static org.junit.Assert.assertTrue;
 public class domconfigurationcansetparameter01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
-        boolean canSet;
-        Comment newCommentNode;
-        Element docElem;
-        Node appendedChild;
-        Node lastChild;
-        String commentValue;
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final boolean canSet;
+        final Comment newCommentNode;
+        final Element docElem;
+        final Node appendedChild;
+        final Node lastChild;
+        final String commentValue;
         doc = sampleXmlFile("hc_staff.xml");
         newCommentNode = doc.createComment("This is a new Comment node");
         docElem = doc.getDocumentElement();

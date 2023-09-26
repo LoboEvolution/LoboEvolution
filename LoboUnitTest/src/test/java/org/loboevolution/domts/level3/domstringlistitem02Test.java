@@ -51,9 +51,9 @@ import static org.junit.Assert.assertNull;
 public class domstringlistitem02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMStringList paramList;
-        DOMConfiguration domConfig;
+        final Document doc;
+        final DOMStringList paramList;
+        final DOMConfiguration domConfig;
         int listSize;
         String retStr;
         doc = sampleXmlFile("hc_staff.xml");

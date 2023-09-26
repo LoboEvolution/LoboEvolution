@@ -76,5 +76,5 @@ public interface ITabbedPane {
      * @param tip       Tooltip.
      * @param index     Zero-based index.
      */
-    void insertTab(String title, Icon icon, Component component, String tip, int index);
+    void insertTab(final String title, Icon icon, Component component, final String tip, final int index);
 }

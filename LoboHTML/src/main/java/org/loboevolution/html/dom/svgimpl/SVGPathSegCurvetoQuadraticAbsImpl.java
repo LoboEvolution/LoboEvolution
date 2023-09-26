@@ -52,7 +52,7 @@ public class SVGPathSegCurvetoQuadraticAbsImpl implements SVGPathSegCurvetoQuadr
 	 * @param x1 a float.
 	 * @param y1 a float.
 	 */
-	public SVGPathSegCurvetoQuadraticAbsImpl(float x, float y, float x1, float y1) {
+	public SVGPathSegCurvetoQuadraticAbsImpl(final float x, final float y, final float x1, final float y1) {
 		this.x = x;
 		this.y = y;
 		this.x1 = x1;
@@ -79,7 +79,7 @@ public class SVGPathSegCurvetoQuadraticAbsImpl implements SVGPathSegCurvetoQuadr
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 
@@ -103,7 +103,7 @@ public class SVGPathSegCurvetoQuadraticAbsImpl implements SVGPathSegCurvetoQuadr
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX1(float x1) {
+	public void setX1(final float x1) {
 		this.x1 = x1;
 	}
 
@@ -115,7 +115,7 @@ public class SVGPathSegCurvetoQuadraticAbsImpl implements SVGPathSegCurvetoQuadr
 
 	/** {@inheritDoc} */
 	@Override
-	public void setY1(float y1) {
+	public void setY1(final float y1) {
 		this.y1 = y1;
 	}
 

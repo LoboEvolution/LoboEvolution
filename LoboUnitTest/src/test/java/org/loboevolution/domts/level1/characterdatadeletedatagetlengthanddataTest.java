@@ -66,12 +66,12 @@ public class characterdatadeletedatagetlengthanddataTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        CharacterData child;
-        String childData;
-        int childLength;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final CharacterData child;
+        final String childData;
+        final int childLength;
 
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");

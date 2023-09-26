@@ -48,16 +48,16 @@ public class documentrenamenode21Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Attr attr;
-        Node renamedNode;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Attr attr;
+        final Node renamedNode;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
@@ -69,7 +69,7 @@ public class documentrenamenode21Test extends LoboUnitTest {
         boolean success = false;
         try {
             renamedNode = newDoc.renameNode(attr, "http://www.w3.org/2000/XMLNS/", "xmlns:xml");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("throw_NAMESPACE_ERR", success);

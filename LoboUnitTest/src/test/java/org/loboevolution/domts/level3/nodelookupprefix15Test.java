@@ -50,14 +50,14 @@ public class nodelookupprefix15Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element bodyElem;
-        Element elem;
-        Comment comment;
-        Comment clonedComment;
-        String prefix;
+        final Document doc;
+        final Element bodyElem;
+        final Element elem;
+        final Comment comment;
+        final Comment clonedComment;
+        final String prefix;
         Node appendedChild;
-        HTMLCollection bodyList;
+        final HTMLCollection bodyList;
         doc = sampleXmlFile("hc_staff.xml");
         bodyList = doc.getElementsByTagName("body");
         bodyElem = (Element) bodyList.item(0);

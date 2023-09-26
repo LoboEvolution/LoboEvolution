@@ -37,7 +37,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 
     private final CSSRuleListImpl cssRuleList;
 
-    public CSSStyleSheetImpl(org.htmlunit.cssparser.dom.CSSStyleSheetImpl cssStyleSheet) {
+    public CSSStyleSheetImpl(final org.htmlunit.cssparser.dom.CSSStyleSheetImpl cssStyleSheet) {
         super(cssStyleSheet);
         this.cssStyleSheet = cssStyleSheet;
         this.cssRuleList = new CSSRuleListImpl(cssStyleSheet.getCssRules());
@@ -58,14 +58,14 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 
     /** {@inheritDoc} */
     @Override
-    public long insertRule(String rule, int index) {
+    public long insertRule(final String rule, final int index) {
         try {
             this.cssStyleSheet.insertRule(rule, index);
             this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
-        } catch (IndexOutOfBoundsException e){
+        } catch (final IndexOutOfBoundsException e){
             throw new DOMException(
                     DOMException.INDEX_SIZE_ERR, e.getMessage());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return 0;
         }
         return index;
@@ -73,17 +73,17 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 
     /** {@inheritDoc} */
     @Override
-    public void deleteRule(int index) {
+    public void deleteRule(final int index) {
         try {
             cssStyleSheet.deleteRule(index);
             this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new DOMException(
                     DOMException.INDEX_SIZE_ERR, e.getMessage());
         }
     }
 
-    public void setDisabled(boolean disabled) {
+    public void setDisabled(final boolean disabled) {
         cssStyleSheet.setDisabled(disabled);
     }
 

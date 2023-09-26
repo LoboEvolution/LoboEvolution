@@ -41,7 +41,7 @@ final class PushAsNumber implements PostScriptOperation {
 	 * @param numberToken
 	 ***********************************************************************
 	 */
-	public PushAsNumber(String numberToken) {
+	public PushAsNumber(final String numberToken) {
 		super();
 		this.token = numberToken;
 	}
@@ -55,11 +55,11 @@ final class PushAsNumber implements PostScriptOperation {
 	 ***********************************************************************
 	 */
 	@Override
-	public void eval(Stack<Object> environment) {
+	public void eval(final Stack<Object> environment) {
 		try {
-			double number = Double.parseDouble(this.token);
+			final double number = Double.parseDouble(this.token);
 			environment.push(number);
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			throw new IllegalArgumentException("PS token is not supported "+this.token); 
 		}	}
 

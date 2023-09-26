@@ -109,7 +109,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 * @param htmlPanel a {@link HtmlPanel} object.
 	 * @param config a {@link HtmlRendererConfig} object.
 	 */
-	public HtmlRendererContextImpl(HtmlPanel htmlPanel, HtmlRendererContext parentRcontext, HtmlRendererConfig config) {
+	public HtmlRendererContextImpl(final HtmlPanel htmlPanel, final HtmlRendererContext parentRcontext, final HtmlRendererConfig config) {
 		this.htmlPanel = htmlPanel;
 		this.parentRcontext = parentRcontext;
 		this.bcontext = parentRcontext == null ? null : parentRcontext.getUserAgentContext();
@@ -123,7 +123,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 * @param ucontext a {@link UserAgentContext} object.
 	 * @param config a {@link HtmlRendererConfig} object.
 	 */
-	public HtmlRendererContextImpl(HtmlPanel htmlPanel, UserAgentContext ucontext, HtmlRendererConfig config) {
+	public HtmlRendererContextImpl(final HtmlPanel htmlPanel, final UserAgentContext ucontext, final HtmlRendererConfig config) {
 		this.htmlPanel = htmlPanel;
 		this.parentRcontext = null;
 		this.bcontext = ucontext;
@@ -132,7 +132,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void alert(String message) {
+	public void alert(final String message) {
 		JOptionPane.showMessageDialog(this.htmlPanel, message);
 	}
 
@@ -146,12 +146,12 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		final JTextField addressBar = toolbar.getAddressBar();
 		String url = addressBar.getText();
 		tabbedPane.setComponentPopupMenu(bpanel);
-		NavigationStore nh = new NavigationStore();
+		final NavigationStore nh = new NavigationStore();
         final int indexPanel = tabbedPane.getSelectedIndex();
-        List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
+        final List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
 		for (int i = 0; i < tabsById.size(); i++) {
-			BookmarkInfo info = tabsById.get(i);
-			String tab = info.getUrl();
+			final BookmarkInfo info = tabsById.get(i);
+			final String tab = info.getUrl();
 			if (tab.equals(url) && i > 0) {
 				url = tabsById.get(i - 1).getUrl();
 			}
@@ -184,7 +184,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean confirm(String message) {
+	public boolean confirm(final String message) {
 		final int retValue = JOptionPane.showConfirmDialog(this.htmlPanel, message, "Confirm",
 				JOptionPane.YES_NO_OPTION);
 		return retValue == JOptionPane.YES_OPTION;
@@ -192,7 +192,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void error(String message) {
+	public void error(final String message) {
 		if (logger.isLoggable(Level.SEVERE)) {
 			logger.log(Level.SEVERE, message);
 		}
@@ -200,7 +200,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void error(String message, Throwable throwable) {
+	public void error(final String message, final Throwable throwable) {
 		if (logger.isLoggable(Level.SEVERE)) {
 			logger.log(Level.SEVERE, message, throwable);
 		}
@@ -222,12 +222,12 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		final JTextField addressBar = toolbar.getAddressBar();
 		String url = addressBar.getText();
 		tabbedPane.setComponentPopupMenu(bpanel);
-		NavigationStore nh = new NavigationStore();
+		final NavigationStore nh = new NavigationStore();
         final int indexPanel = tabbedPane.getSelectedIndex();
-        List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
+        final List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
 		for (int i = 0; i < tabsById.size(); i++) {
-			BookmarkInfo info = tabsById.get(i);
-			String tab = info.getUrl();
+			final BookmarkInfo info = tabsById.get(i);
+			final String tab = info.getUrl();
 			if (tab.equals(url) && i < tabsById.size() - 1) {
 				url = tabsById.get(i + 1).getUrl();
 			}
@@ -249,12 +249,12 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public String getCurrentURL() {
-		HtmlPanel html = htmlPanel;
-		IBrowserPanel panel = html.getBrowserPanel();
+		final HtmlPanel html = htmlPanel;
+		final IBrowserPanel panel = html.getBrowserPanel();
 		if (panel != null) {
-			IBrowserFrame frame = panel.getBrowserFrame();
-			IToolBar toolbar = frame.getToolbar();
-			JTextField jtf = toolbar.getAddressBar();
+			final IBrowserFrame frame = panel.getBrowserFrame();
+			final IToolBar toolbar = frame.getToolbar();
+			final JTextField jtf = toolbar.getAddressBar();
 			return jtf.getText();
 		} else {
 			return "";
@@ -317,23 +317,23 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isVisitedLink(HTMLLinkElement link) {
+	public boolean isVisitedLink(final HTMLLinkElement link) {
 		return LinkStore.isVisited(link.getHref());
 	}
 
 
 	/** {@inheritDoc} */
 	@Override
-	public void linkClicked(URL url, boolean isNewTab) {
-		String fullURL = url.toString();
+	public void linkClicked(final URL url, final boolean isNewTab) {
+		final String fullURL = url.toString();
 		if (fullURL.endsWith(".pdf")) {
-			PDFViewer viewer = new PDFViewer(true);
+			final PDFViewer viewer = new PDFViewer(true);
 			viewer.doOpen(fullURL);
 		} else {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
 			final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 			tabbedPane.setComponentPopupMenu(bpanel);
-			int index;
+			final int index;
 
 			if (isNewTab) {
 				index = TabStore.getTabs().size();
@@ -359,7 +359,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void moveInHistory(int offset) {
+	public void moveInHistory(final int offset) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, "moveInHistory() does nothing, unless overridden.");
 		}
@@ -391,43 +391,43 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void navigate(String fullURL) throws Exception {
+	public void navigate(final String fullURL) throws Exception {
 		final URL href = Urls.createURL(null, fullURL);
 		this.navigate(href, "_this");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void navigate(final URL href, String target) {
+	public void navigate(final URL href, final String target) {
 		submitForm("GET", href, target, null, null);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
-		HTMLElementImpl elem = (HTMLElementImpl) element;
-		HTMLImageElementImpl elmImg = new HTMLImageElementImpl();
+	public boolean onContextMenu(HTMLElement element, final MouseEvent event) {
+		final HTMLElementImpl elem = (HTMLElementImpl) element;
+		final HTMLImageElementImpl elmImg = new HTMLImageElementImpl();
 		if (elem.getCurrentStyle() != null && Strings.isNotBlank(elem.getCurrentStyle().getBackgroundImage())) {
 			final String backgroundImageText = elem.getCurrentStyle().getBackgroundImage();
-			String start = "url(";
-			int startIdx = start.length() + 1;
-			int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
-			String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
+			final String start = "url(";
+			final int startIdx = start.length() + 1;
+			final int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
+			final String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
 			elmImg.setSrc(quotedUri);
 			element = elmImg;
 		}
-		HtmlContextMenu menu = new HtmlContextMenu(element, this);
+		final HtmlContextMenu menu = new HtmlContextMenu(element, this);
 		
 		if (element instanceof HTMLImageElementImpl) {
-			JPopupMenu popupMenuImage = menu.popupMenuImage(htmlPanel.getBrowserPanel());
+			final JPopupMenu popupMenuImage = menu.popupMenuImage(htmlPanel.getBrowserPanel());
 			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		} else if (element instanceof HTMLLinkElementImpl) {
-			JPopupMenu popupMenuLink = menu.popupMenuLink(htmlPanel.getBrowserPanel());
+			final JPopupMenu popupMenuLink = menu.popupMenuLink(htmlPanel.getBrowserPanel());
 			popupMenuLink.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		} else if (element instanceof HTMLElementImpl) {
-			JPopupMenu popupMenuAbstract = menu.popupMenuAbstractUI();
+			final JPopupMenu popupMenuAbstract = menu.popupMenuAbstractUI();
 			popupMenuAbstract.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		}
@@ -436,12 +436,12 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
+	public HtmlRendererContext open(final URL url, final String windowName, final String windowFeatures, final boolean replace) {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
 		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(bpanel);
-		int index = TabStore.getTabs().size();
-		String fullURL = url.toString();
+		final int index = TabStore.getTabs().size();
+		final String fullURL = url.toString();
 		final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(bpanel, fullURL);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
@@ -458,7 +458,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void openImageViewer(URL srcUrl) {
+	public void openImageViewer(final URL srcUrl) {
 		try {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
 			final ITabbedPane tabbedPane = bpanel.getTabbedPane();
@@ -466,23 +466,23 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			final BufferedImage img = ImageIO.read(srcUrl);
 			final ImageViewer viewer = new ImageViewer(img);
 			final String title = "Image Viewer";
-			String fullURL = srcUrl.toString();
-			int index = TabStore.getTabs().size();
-			JPanel jPanel = new JPanel();
+			final String fullURL = srcUrl.toString();
+			final int index = TabStore.getTabs().size();
+			final JPanel jPanel = new JPanel();
 			jPanel.add(viewer.getComponent());
 			browserFrame.getToolbar().getAddressBar().setText(fullURL);
 			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
 			TabStore.insertTab(index, fullURL, title);
 			LinkStore.insertLinkVisited(fullURL);
 			bpanel.getScroll().getViewport().add((Component)tabbedPane);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void openImageViewer(String fullURL, InputStream stream) {
+	public void openImageViewer(final String fullURL, final InputStream stream) {
 		try {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
 			final ITabbedPane tabbedPane = bpanel.getTabbedPane();
@@ -490,20 +490,20 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			final BufferedImage img = ImageIO.read(stream);
 			final ImageViewer viewer = new ImageViewer(img);
 			final String title = "Image Viewer";
-			int index = TabStore.getTabs().size();
-			JPanel jPanel = new JPanel();
+			final int index = TabStore.getTabs().size();
+			final JPanel jPanel = new JPanel();
 			jPanel.add(viewer.getComponent());
 			browserFrame.getToolbar().getAddressBar().setText(fullURL);
 			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
 			bpanel.getScroll().getViewport().add((Component)tabbedPane);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String prompt(String message, String inputDefault) {
+	public String prompt(final String message, final String inputDefault) {
 		return JOptionPane.showInputDialog(this.htmlPanel, message);
 	}
 
@@ -523,7 +523,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void resizeBy(double byWidth, double byHeight) {
+	public void resizeBy(final double byWidth, final double byHeight) {
 		final Window window = getWindow(this.htmlPanel);
 		if (window != null) {
 			window.setSize(window.getWidth() + (int)byWidth, window.getHeight() + (int)byHeight);
@@ -532,7 +532,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void resizeTo(double width, double height) {
+	public void resizeTo(final double width, final double height) {
 		final Window window = getWindow(this.htmlPanel);
 		if (window != null) {
 			window.setSize((int)width, (int)height);
@@ -586,13 +586,13 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void scroll(double x, double y) {
+	public void scroll(final double x, final double y) {
 		this.htmlPanel.scroll(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void scrollBy(double x, double y) {
+	public void scrollBy(final double x, final double y) {
 		this.htmlPanel.scrollBy(x, y);
 	}
 
@@ -604,7 +604,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setScrollx(double scrollx) {
+	public void setScrollx(final double scrollx) {
 		this.scrollx = scrollx;
 	}
 
@@ -616,38 +616,38 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setScrolly(double scrolly) {
+	public void setScrolly(final double scrolly) {
 		this.scrolly = scrolly;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDefaultStatus(String message) {
+	public void setDefaultStatus(final String message) {
 		this.warn("setDefaultStatus(): Not overridden.");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHtmlPanel(HtmlPanel panel) {
+	public void setHtmlPanel(final HtmlPanel panel) {
 		this.htmlPanel = panel;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setOpener(HtmlRendererContext opener) {
+	public void setOpener(final HtmlRendererContext opener) {
 		this.opener = opener;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setStatus(String message) {
+	public void setStatus(final String message) {
 		this.warn("setStatus(): Not overridden");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-    public void setCursor(Optional<Cursor> cursorOpt) {
-        Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
+    public void setCursor(final Optional<Cursor> cursorOpt) {
+        final Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
         htmlPanel.setCursor(cursor);
     }
 
@@ -696,7 +696,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void warn(String message) {
+	public void warn(final String message) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, message);
 		}
@@ -704,7 +704,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public void warn(String message, Throwable throwable) {
+	public void warn(final String message, final Throwable throwable) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, message, throwable);
 		}
@@ -717,7 +717,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		return "";
 	}
 
-	private static Window getWindow(Component c) {
+	private static Window getWindow(final Component c) {
 		Component current = c;
 		while (current != null && !(current instanceof Window)) {
 			current = current.getParent();
@@ -725,13 +725,13 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		return (Window) current;
 	}
 
-	private HTMLDocumentImpl createDocument(InputSource inputSource) throws Exception {
+	private HTMLDocumentImpl createDocument(final InputSource inputSource) throws Exception {
 		final HtmlRendererConfig config = new HtmlRendererConfigImpl();
 		final DocumentBuilderImpl builder = new DocumentBuilderImpl(getUserAgentContext(), this, config);
 		return (HTMLDocumentImpl) builder.createDocument(inputSource);
 	}
 
-	private Charset getDocumentCharset(URLConnection connection) {
+	private Charset getDocumentCharset(final URLConnection connection) {
 		final String encoding = Urls.getCharset(connection);
 		return encoding == null ? StandardCharsets.UTF_8 : Charset.forName(encoding);
 	}
@@ -740,10 +740,10 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		return Proxy.NO_PROXY;
 	}
 
-	private void submitFormSync(final String method, final java.net.URL action, final String target, String enctype,
+	private void submitFormSync(final String method, final java.net.URL action, final String target, final String enctype,
 								final FormInput[] formInputs) throws Exception {
 		final String actualMethod = method.toUpperCase();
-		URL resolvedURL;
+		final URL resolvedURL;
 		if ("GET".equals(actualMethod) && formInputs != null) {
 			boolean firstParam = true;
 			final URL noRefAction = new URL(action.getProtocol(), action.getHost(), action.getPort(), action.getFile());
@@ -858,14 +858,14 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 					if (location == null) {
 						logger.warning("No Location header in redirect from " + action + ".");
 					} else {
-						URL href;
+						final URL href;
 						href = Urls.createURL(action, location);
 						navigate(href, target);
 					}
 					return;
 				}
 			}
-			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
+			try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
 				final RecordedInputStream rin = new RecordedInputStream(in, 1000000);
 				final InputStream bin = new BufferedInputStream(rin, 8192);
 				final String actualURI = urlForLoading.toExternalForm();
@@ -881,7 +881,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				if (ref != null && ref.length() != 0) {
 					panel.scrollToElement(ref);
 				}
-			} catch (SocketTimeoutException e) {
+			} catch (final SocketTimeoutException e) {
 				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
 			}
 		} finally {

@@ -61,7 +61,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 	 *
 	 * @param frame a {@link javax.swing.JFrame} object.
 	 */
-	public StorageManager(JFrame frame) {
+	public StorageManager(final JFrame frame) {
 		this.frame = frame;
 	}
 
@@ -78,7 +78,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 			ClassLoader.getSystemClassLoader();
 			int count = 1;
 			for (final String name : getList()) {
-				try (InputStream input = ClassLoader.getSystemResourceAsStream(name)) {
+				try (final InputStream input = ClassLoader.getSystemResourceAsStream(name)) {
 					if (name.contains("storage")) {
 						populateDatabase(Files.getResourceAsFile(input));
 					} else if (name.contains(DesktopConfig.PATH_WELCOME)) {
@@ -157,13 +157,13 @@ public class StorageManager extends SwingWorker<Void, Void> {
 		return files;
 	}
 
-	private void populateDatabase(File fl) {
-		try (Connection conn = DriverManager.getConnection(DatabseSQLite.getDatabaseDirectory());
-				Statement stmt = conn.createStatement()) {
+	private void populateDatabase(final File fl) {
+		try (final Connection conn = DriverManager.getConnection(DatabseSQLite.getDatabaseDirectory());
+             final Statement stmt = conn.createStatement()) {
 			String s;
 			final StringBuilder sb = new StringBuilder();
 			final boolean isTable = "table.sql".equals(fl.getName());
-			try (FileReader fr = new FileReader(fl); BufferedReader br = new BufferedReader(fr)) {
+			try (final FileReader fr = new FileReader(fl); final BufferedReader br = new BufferedReader(fr)) {
 				while ((s = br.readLine()) != null) {
 					sb.append(s);
 				}

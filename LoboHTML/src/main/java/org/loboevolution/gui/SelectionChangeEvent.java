@@ -47,7 +47,7 @@ public class SelectionChangeEvent extends EventObject {
 	 * @param source a {@link java.lang.Object} object.
 	 * @param hasSelection a boolean.
 	 */
-	public SelectionChangeEvent(Object source, boolean hasSelection) {
+	public SelectionChangeEvent(final Object source, final boolean hasSelection) {
 		super(source);
 		this.hasSelection = hasSelection;
 	}

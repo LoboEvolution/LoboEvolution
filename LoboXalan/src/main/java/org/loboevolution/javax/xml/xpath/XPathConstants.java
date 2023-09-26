@@ -28,13 +28,7 @@ package org.loboevolution.javax.xml.xpath;
 
 import org.loboevolution.javax.xml.namespace.QName;
 
-public class XPathConstants
-{
-
-    XPathConstants()
-    {
-        throw new RuntimeException("Stub!");
-    }
+public class XPathConstants {
 
     public static final QName BOOLEAN = null;
     public static final String DOM_OBJECT_MODEL = "http://java.sun.com/jaxp/xpath/dom";
@@ -42,5 +36,8 @@ public class XPathConstants
     public static final QName NODESET = null;
     public static final QName NUMBER = null;
     public static final QName STRING = null;
+    XPathConstants() {
+        throw new RuntimeException("Stub!");
+    }
 
 }

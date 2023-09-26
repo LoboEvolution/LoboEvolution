@@ -61,7 +61,7 @@ public class HiFiIcons extends BaseIcons {
 	// ----------------------------------------------------------------------------------------------------------------------
 // inner classes
 //----------------------------------------------------------------------------------------------------------------------
-	private static class CheckBoxIcon implements Icon, UIResource, Serializable {
+	private final static class CheckBoxIcon implements Icon, UIResource, Serializable {
 
 		/**
 		 *
@@ -94,7 +94,7 @@ public class HiFiIcons extends BaseIcons {
 
 		@Override
 		public int getIconWidth() {
-			int w;
+			final int w;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				w = 15;
 			} else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
@@ -106,15 +106,16 @@ public class HiFiIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+int x = iconX;
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += GAP;
 			}
-			int w = getIconWidth() - GAP;
-			int h = getIconHeight();
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Graphics2D g2D = (Graphics2D) g;
+			final int w = getIconWidth() - GAP;
+			final int h = getIconHeight();
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Graphics2D g2D = (Graphics2D) g;
 			if (button.isEnabled()) {
 				if (button.isRolloverEnabled() && model.isRollover()) {
 					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x + 1,
@@ -133,22 +134,22 @@ public class HiFiIcons extends BaseIcons {
 						w - 1, h - 1);
 			}
 
-			Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 6);
-			Color loFrameColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 50);
+			final Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 6);
+			final Color loFrameColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 50);
 
 			g.setColor(frameColor);
 			g.drawRect(x, y, w, h);
-			Composite savedComposite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+			final Composite savedComposite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 			g2D.setComposite(alpha);
 			g.setColor(loFrameColor);
 			g.drawLine(x + 1, y + 1, x + w - 1, y + 1);
 			g.drawLine(x + 1, y + 1, x + 1, y + h - 1);
 			g2D.setComposite(savedComposite);
 
-			Icon checkIcon;
-			Icon checkDisabledIcon;
-			Icon checkInverseIcon;
+			final Icon checkIcon;
+			final Icon checkDisabledIcon;
+			final Icon checkInverseIcon;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				checkIcon = SMALL_CHECK_ICON;
 				checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
@@ -162,13 +163,13 @@ public class HiFiIcons extends BaseIcons {
 				checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
 				checkInverseIcon = LARGE_CHECK_INVERSE_ICON;
 			}
-			int xi = x + (w - checkIcon.getIconWidth()) / 2 + 1;
-			int yi = y + (h - checkIcon.getIconHeight()) / 2;
-			int gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getButtonForegroundColor());
+			final int xi = x + (w - checkIcon.getIconWidth()) / 2 + 1;
+			final int yi = y + (h - checkIcon.getIconHeight()) / 2;
+			final int gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getButtonForegroundColor());
 			if (model.isPressed() && model.isArmed()) {
-				Color bc = gv > 128 ? AbstractLookAndFeel.getTheme().getSelectionForegroundColor()
+				final Color bc = gv > 128 ? AbstractLookAndFeel.getTheme().getSelectionForegroundColor()
 						: AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
-				Color fc = gv > 128 ? ColorHelper.brighter(bc, 20) : ColorHelper.darker(bc, 40);
+				final Color fc = gv > 128 ? ColorHelper.brighter(bc, 20) : ColorHelper.darker(bc, 40);
 				g.setColor(fc);
 				g.drawRect(x + 4, y + 4, w - 8, h - 8);
 				g.setColor(bc);
@@ -209,7 +210,7 @@ public class HiFiIcons extends BaseIcons {
 
 		@Override
 		public int getIconWidth() {
-			int w;
+			final int w;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				w = 14;
 			} else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
@@ -221,17 +222,18 @@ public class HiFiIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+int x = iconX;
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += GAP;
 			}
-			int w = getIconWidth() - GAP;
-			int h = getIconHeight();
+			final int w = getIconWidth() - GAP;
+			final int h = getIconHeight();
 
-			Graphics2D g2D = (Graphics2D) g;
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Color[] colors;
+			final Graphics2D g2D = (Graphics2D) g;
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Color[] colors;
 			if (button.isEnabled()) {
 				if (button.isRolloverEnabled() && model.isRollover() || model.isPressed() && model.isArmed()) {
 					colors = AbstractLookAndFeel.getTheme().getRolloverColors();
@@ -246,9 +248,9 @@ public class HiFiIcons extends BaseIcons {
 				colors = AbstractLookAndFeel.getTheme().getDisabledColors();
 			}
 
-			Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 6);
-			Shape savedClip = g.getClip();
-			Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
+			final Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 6);
+			final Shape savedClip = g.getClip();
+			final Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
 			if (savedClip != null) {
 				clipArea.intersect(new Area(savedClip));
 			}
@@ -256,14 +258,14 @@ public class HiFiIcons extends BaseIcons {
 			JTattooUtilities.fillHorGradient(g, colors, x, y, w, h);
 			g2D.setClip(savedClip);
 
-			Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g.setColor(frameColor);
 			g.drawOval(x, y, w, h);
 
 			if (model.isSelected()) {
 				if (model.isEnabled()) {
-					Color fc = AbstractLookAndFeel.getForegroundColor();
+					final Color fc = AbstractLookAndFeel.getForegroundColor();
 					if (ColorHelper.getGrayValue(colors[0]) < 128) {
 						if (ColorHelper.getGrayValue(fc) < 128) {
 							g2D.setColor(Color.white);
@@ -314,9 +316,9 @@ public class HiFiIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				closeIcon = new MacCloseIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				closeIcon = new BaseIcons.CloseSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(-1, -1, 0, 0));
 			}
@@ -361,9 +363,9 @@ public class HiFiIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				iconIcon = new MacIconIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				iconIcon = new BaseIcons.IconSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(-1, -1, 0, 0));
 			}
@@ -399,9 +401,9 @@ public class HiFiIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				maxIcon = new MacMaxIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				maxIcon = new BaseIcons.MaxSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(-1, -1, 0, 0));
 			}
@@ -432,9 +434,9 @@ public class HiFiIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				minIcon = new MacMinIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				minIcon = new BaseIcons.MinSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(-1, -1, 0, 0));
 			}

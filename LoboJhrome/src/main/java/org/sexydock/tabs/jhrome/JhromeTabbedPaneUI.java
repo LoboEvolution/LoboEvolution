@@ -121,11 +121,11 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     public JhromeTabbedPaneUI() {
     }
 
-    public static JhromeTabbedPaneUI createUI(JComponent c) {
+    public static JhromeTabbedPaneUI createUI(final JComponent c) {
         return new JhromeTabbedPaneUI();
     }
 
-    public static void insertTab(JTabbedPane tabbedPane, int index, Tab tab) {
+    public static void insertTab(final JTabbedPane tabbedPane, final int index, final Tab tab) {
         tabbedPane.insertTab(tab.getTitle(), tab.getIcon(), tab.getContent(), tab.getToolTipText(), index);
         tabbedPane.setTabComponentAt(index, tab.getTabComponent());
         tabbedPane.setEnabledAt(index, tab.isEnabled());
@@ -147,25 +147,25 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private static void put(ActionMap map, Action action) {
+    private static void put(final ActionMap map, final Action action) {
         map.put(action.getValue(Action.NAME), action);
     }
 
-    private static void log(Exception e) {
+    private static void log(final Exception e) {
         if (LOG_EXCEPTIONS) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void installUI(JComponent c) {
+    public void installUI(final JComponent c) {
         checkEDT();
         tabbedPane = (JTabbedPane) c;
         init();
     }
 
     @Override
-    public void uninstallUI(JComponent c) {
+    public void uninstallUI(final JComponent c) {
         if (c != tabbedPane) {
             throw new IllegalArgumentException("Cannot uninstall from a different component than this was installed on");
         }
@@ -198,11 +198,11 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
         newTabButton = new JButton();
 
-        ActionListener newTabButtonListener = e -> {
+        final ActionListener newTabButtonListener = e -> {
             if (tabFactory == null) {
                 return;
             }
-            Tab newTab = tabFactory.createTabWithContent();
+            final Tab newTab = tabFactory.createTabWithContent();
             if (newTab != null) {
                 tabbedPane.addTab(newTab.getTitle(), newTab.getContent());
                 tabbedPane.setSelectedComponent(newTab.getContent());
@@ -219,7 +219,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         rightButtonsPanel.setLayout(new GridBagLayout());
         rightButtonsPanel.setOpaque(false);
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(1, 2, 0, 0);
         rightButtonsPanel.add(newTabButton, gbc);
@@ -255,19 +255,19 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * @return the hoverable tab under {@code p}, or {@code null} if no such tab exists.
      * @see Tab#isHoverableAt(Point)
      */
-    public Tab getHoverableTabAt(Point p) {
+    public Tab getHoverableTabAt(final Point p) {
         checkEDT();
 
         for (int i = -1; i < tabs.size(); i++) {
-            TabInfo info = i < 0 ? selectedTab : tabs.get(i);
+            final TabInfo info = i < 0 ? selectedTab : tabs.get(i);
             if (info == null || info.isBeingRemoved) {
                 continue;
             }
             if (info == selectedTab && i >= 0) {
                 continue;
             }
-            Tab tab = info.tab;
-            Point converted = SwingUtilities.convertPoint(tabbedPane, p, tab);
+            final Tab tab = info.tab;
+            final Point converted = SwingUtilities.convertPoint(tabbedPane, p, tab);
             if (tab.contains(converted)) {
                 if (tab.isHoverableAt(converted)) {
                     return tab;
@@ -282,19 +282,19 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * @return the draggable tab under {@code p}, or {@code null} if no such tab exists.
      * @see Tab#isDraggableAt(Point)
      */
-    public Tab getDraggableTabAt(Point p) {
+    public Tab getDraggableTabAt(final Point p) {
         checkEDT();
 
         for (int i = -1; i < tabs.size(); i++) {
-            TabInfo info = i < 0 ? selectedTab : tabs.get(i);
+            final TabInfo info = i < 0 ? selectedTab : tabs.get(i);
             if (info == null || info.isBeingRemoved) {
                 continue;
             }
             if (info == selectedTab && i >= 0) {
                 continue;
             }
-            Tab tab = info.tab;
-            Point converted = SwingUtilities.convertPoint(tabbedPane, p, tab);
+            final Tab tab = info.tab;
+            final Point converted = SwingUtilities.convertPoint(tabbedPane, p, tab);
             if (tab.contains(converted)) {
                 if (tab.isDraggableAt(converted)) {
                     return tab;
@@ -309,19 +309,19 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * @return the selectable tab under {@code p}, or {@code null} if no such tab exists.
      * @see Tab#isSelectableAt(Point)
      */
-    public Tab getSelectableTabAt(Point p) {
+    public Tab getSelectableTabAt(final Point p) {
         checkEDT();
 
         for (int i = -1; i < tabs.size(); i++) {
-            TabInfo info = i < 0 ? selectedTab : tabs.get(i);
+            final TabInfo info = i < 0 ? selectedTab : tabs.get(i);
             if (info == null || info.isBeingRemoved) {
                 continue;
             }
             if (info == selectedTab && i >= 0) {
                 continue;
             }
-            Tab tab = info.tab;
-            Point converted = SwingUtilities.convertPoint(tabbedPane, p, tab);
+            final Tab tab = info.tab;
+            final Point converted = SwingUtilities.convertPoint(tabbedPane, p, tab);
             if (tab.contains(converted)) {
                 if (tab.isSelectableAt(converted)) {
                     return tab;
@@ -331,10 +331,10 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         return null;
     }
 
-    private int getInfoIndex(Tab tab) {
+    private int getInfoIndex(final Tab tab) {
         checkEDT();
         for (int i = 0; i < tabs.size(); i++) {
-            TabInfo info = tabs.get(i);
+            final TabInfo info = tabs.get(i);
             if (info.tab == tab) {
                 return i;
             }
@@ -342,10 +342,10 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         return -1;
     }
 
-    private TabInfo getInfo(Tab tab) {
+    private TabInfo getInfo(final Tab tab) {
         checkEDT();
 
-        for (TabInfo info : tabs) {
+        for (final TabInfo info : tabs) {
             if (info.tab == tab) {
                 return info;
             }
@@ -353,7 +353,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         return null;
     }
 
-    private int actualizeIndex(int index) {
+    private int actualizeIndex(final int index) {
         checkEDT();
 
         int virtual = 0;
@@ -370,7 +370,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         return actual;
     }
 
-    private int virtualizeIndex(int index) {
+    private int virtualizeIndex(final int index) {
         checkEDT();
 
         int virtual = 0;
@@ -390,7 +390,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         checkEDT();
 
         int count = 0;
-        for (TabInfo tab : tabs) {
+        for (final TabInfo tab : tabs) {
             if (!tab.isBeingRemoved) {
                 count++;
             }
@@ -404,8 +404,8 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     public List<Tab> getTabs() {
         checkEDT();
 
-        List<Tab> result = new ArrayList<>();
-        for (TabInfo info : tabs) {
+        final List<Tab> result = new ArrayList<>();
+        for (final TabInfo info : tabs) {
             if (!info.isBeingRemoved) {
                 result.add(info.tab);
             }
@@ -420,7 +420,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * @param tab    the tab to add.
      * @throws IllegalArgumentException if {@code index} is less than 0 or greater than the tab count, or {@code tab} is already a member of this tabbed pane.
      */
-    private void addTabInternal(int vIndex, final Tab tab) {
+    private void addTabInternal(final int vIndex, final Tab tab) {
         addTabInternal(vIndex, tab, true);
     }
 
@@ -432,14 +432,14 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * @param expand whether to animate the new tab expansion. If {@code false}, the new tab will immediately appear at full size.
      * @throws IllegalArgumentException if {@code index} is less than 0 or greater than the tab count, or {@code tab} is already a member of this tabbed pane.
      */
-    private void addTabInternal(int vIndex, final Tab tab, boolean expand) {
+    private void addTabInternal(final int vIndex, final Tab tab, final boolean expand) {
         checkEDT();
 
-        int tabCount = getTabCount();
+        final int tabCount = getTabCount();
         if (vIndex < 0 || vIndex > tabCount) {
             throw new IndexOutOfBoundsException(String.format("Invalid insertion index: %d (tab count: %d)", vIndex, tabCount));
         }
-        TabInfo existing = getInfo(tab);
+        final TabInfo existing = getInfo(tab);
 
         if (existing != null) {
             if (existing.isBeingRemoved) {
@@ -449,21 +449,21 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             }
         }
 
-        TabAddedEvent event = new TabAddedEvent(tabbedPane, System.currentTimeMillis(), tab, vIndex);
+        final TabAddedEvent event = new TabAddedEvent(tabbedPane, System.currentTimeMillis(), tab, vIndex);
 
-        int index = actualizeIndex(vIndex);
+        final int index = actualizeIndex(vIndex);
 
-        boolean transpose = tabbedPane.getTabPlacement() == JTabbedPane.LEFT || tabbedPane.getTabPlacement() == JTabbedPane.RIGHT;
+        final boolean transpose = tabbedPane.getTabPlacement() == SwingConstants.LEFT || tabbedPane.getTabPlacement() == SwingConstants.RIGHT;
 
-        TabInfo info = new TabInfo();
+        final TabInfo info = new TabInfo();
         info.tab = tab;
         info.prefSize = tab.getPreferredSize();
-        int prefWidth = transpose ? info.prefSize.height : info.prefSize.width;
+        final int prefWidth = transpose ? info.prefSize.height : info.prefSize.width;
         info.vCurrentWidth = expand ? 0 : prefWidth;
         info.isBeingRemoved = false;
 
         if (index > 0) {
-            TabInfo prev = tabs.get(index - 1);
+            final TabInfo prev = tabs.get(index - 1);
             info.vCurrentX = prev.vCurrentX + prev.vCurrentWidth - overlap;
         }
         tabs.add(index, info);
@@ -477,7 +477,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         notifyTabbedPaneListeners(event);
     }
 
-    public void addTab(int vIndex, Tab tab, boolean expand) {
+    public void addTab(final int vIndex, final Tab tab, final boolean expand) {
         addTabInternal(vIndex, tab, expand);
         handler.disable = true;
         try {
@@ -495,29 +495,29 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * @param vNewIndex the index to move the tab to. Like {@link List#add(int, Object)}, this method will insert {@code tab} before the tab at {@code newIndex}.
      * @throws IllegalArgumentException if {@code newIndex} is less than 0, greater than the tab count, or {@code tab} is not a member of this tabbed pane.
      */
-    private void moveTabInternal(Tab tab, int vNewIndex) {
-        int tabCount = getTabCount();
+    private void moveTabInternal(final Tab tab, final int vNewIndex) {
+        final int tabCount = getTabCount();
         if (vNewIndex < 0 || vNewIndex > tabCount) {
             throw new IndexOutOfBoundsException(String.format("Invalid new index: %d (tab count: %d)", vNewIndex, tabCount));
         }
 
         int actualNewIndex = actualizeIndex(vNewIndex);
-        int currentIndex = getInfoIndex(tab);
+        final int currentIndex = getInfoIndex(tab);
 
         if (currentIndex < 0) {
             throw new IllegalArgumentException("Tab is not a member of this tabbed pane: " + tab);
         }
 
-        TabInfo info = tabs.get(currentIndex);
+        final TabInfo info = tabs.get(currentIndex);
 
         if (info.isBeingRemoved) {
             throw new IllegalArgumentException("Tab is not a member of this tabbed pane: " + tab);
         }
 
         if (actualNewIndex != currentIndex) {
-            int vCurrentIndex = virtualizeIndex(currentIndex);
+            final int vCurrentIndex = virtualizeIndex(currentIndex);
 
-            TabMovedEvent event = new TabMovedEvent(tabbedPane, System.currentTimeMillis(), info.tab, vCurrentIndex, vNewIndex);
+            final TabMovedEvent event = new TabMovedEvent(tabbedPane, System.currentTimeMillis(), info.tab, vCurrentIndex, vNewIndex);
 
             actualNewIndex = Math.min(actualNewIndex, tabs.size() - 1);
             tabs.remove(info);
@@ -538,12 +538,12 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * @param vCurrentIndex the current index of the tab to move.
      * @param vNewIndex     the index to move the tab to.
      */
-    public void moveTab(int vCurrentIndex, int vNewIndex) {
-        TabInfo info = tabs.get(actualizeIndex(vCurrentIndex));
+    public void moveTab(final int vCurrentIndex, final int vNewIndex) {
+        final TabInfo info = tabs.get(actualizeIndex(vCurrentIndex));
 
         handler.disable = true;
         try {
-            int index = tabbedPane.indexOfComponent(info.tab.getContent());
+            final int index = tabbedPane.indexOfComponent(info.tab.getContent());
             if (index >= 0 && index != vNewIndex) {
                 tabbedPane.removeTabAt(index);
                 insertTab(tabbedPane, vNewIndex, info.tab);
@@ -566,34 +566,34 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * <p>
      * {@code tab} the tab to remove. If {@code tab} is not a member of this tabbed pane, this method has no effect.
      */
-    private void removeTabInternal(Tab tab) {
+    private void removeTabInternal(final Tab tab) {
         removeTabInternal(tab, true);
     }
 
-    private void removeTabInternal(Tab tab, boolean startTimer) {
+    private void removeTabInternal(final Tab tab, final boolean startTimer) {
         checkEDT();
 
-        int removedIndex = getInfoIndex(tab);
+        final int removedIndex = getInfoIndex(tab);
 
         if (removedIndex >= 0) {
-            TabInfo info = tabs.get(removedIndex);
+            final TabInfo info = tabs.get(removedIndex);
             if (info.isBeingRemoved) {
                 return;
             }
 
-            TabRemovedEvent event = new TabRemovedEvent(tabbedPane, System.currentTimeMillis(), tab, virtualizeIndex(removedIndex));
+            final TabRemovedEvent event = new TabRemovedEvent(tabbedPane, System.currentTimeMillis(), tab, virtualizeIndex(removedIndex));
 
             if (info == selectedTab) {
                 if (tabs.size() == 1) {
                     setSelectedTabInternal(null);
                 } else {
-                    int index = tabs.indexOf(info);
+                    final int index = tabs.indexOf(info);
 
                     // select the closest tab that is not being removed
                     TabInfo newSelectedTab = null;
 
                     for (int i = index + 1; i < tabs.size(); i++) {
-                        TabInfo adjTab = tabs.get(i);
+                        final TabInfo adjTab = tabs.get(i);
                         if (!adjTab.isBeingRemoved) {
                             newSelectedTab = adjTab;
                             break;
@@ -601,7 +601,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                     }
                     if (newSelectedTab == null) {
                         for (int i = index - 1; i >= 0; i--) {
-                            TabInfo adjTab = tabs.get(i);
+                            final TabInfo adjTab = tabs.get(i);
                             if (!adjTab.isBeingRemoved) {
                                 newSelectedTab = adjTab;
                                 break;
@@ -630,15 +630,15 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      *
      * @param tab the tab to remove. If {@code tab} is not a member of this tabbed pane, this method has no effect.
      */
-    private void removeTabImmediatelyInternal(Tab tab) {
+    private void removeTabImmediatelyInternal(final Tab tab) {
         removeTabInternal(tab, false);
         actuallyRemoveTab(tab);
     }
 
-    private void actuallyRemoveTab(Tab tab) {
+    private void actuallyRemoveTab(final Tab tab) {
         checkEDT();
 
-        TabInfo info = getInfo(tab);
+        final TabInfo info = getInfo(tab);
         if (info != null) {
             tabLayeredPane.remove(tab);
             tabs.remove(info);
@@ -653,24 +653,24 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     private void removeAllTabsInternal() {
         checkEDT();
 
-        long time = System.currentTimeMillis();
+        final long time = System.currentTimeMillis();
 
         setSelectedTabInternal(null);
 
-        List<Tab> removedTabs = new ArrayList<>();
+        final List<Tab> removedTabs = new ArrayList<>();
 
         while (!tabs.isEmpty()) {
-            TabInfo info = tabs.get(0);
+            final TabInfo info = tabs.get(0);
             removedTabs.add(info.tab);
             removeTabImmediatelyInternal(info.tab);
         }
 
-        TabsClearedEvent event = new TabsClearedEvent(tabbedPane, time, Collections.unmodifiableList(removedTabs));
+        final TabsClearedEvent event = new TabsClearedEvent(tabbedPane, time, Collections.unmodifiableList(removedTabs));
 
         notifyTabbedPaneListeners(event);
     }
 
-    private void setSelectedIndexInternal(int vIndex) {
+    private void setSelectedIndexInternal(final int vIndex) {
         if (vIndex < 0) {
             setSelectedTabInternal(null);
         } else {
@@ -678,17 +678,17 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private void setSelectedTabInternal(TabInfo info) {
+    private void setSelectedTabInternal(final TabInfo info) {
         checkEDT();
 
         if (selectedTab != info) {
-            int prevIndex = selectedTab != null ? virtualizeIndex(tabs.indexOf(selectedTab)) : -1;
-            int newIndex = info != null ? virtualizeIndex(tabs.indexOf(info)) : -1;
+            final int prevIndex = selectedTab != null ? virtualizeIndex(tabs.indexOf(selectedTab)) : -1;
+            final int newIndex = info != null ? virtualizeIndex(tabs.indexOf(info)) : -1;
 
-            Tab prevTab = selectedTab != null ? selectedTab.tab : null;
-            Tab newTab = info != null ? info.tab : null;
+            final Tab prevTab = selectedTab != null ? selectedTab.tab : null;
+            final Tab newTab = info != null ? info.tab : null;
 
-            TabSelectedEvent event = new TabSelectedEvent(tabbedPane, System.currentTimeMillis(), prevTab, prevIndex, newTab, newIndex);
+            final TabSelectedEvent event = new TabSelectedEvent(tabbedPane, System.currentTimeMillis(), prevTab, prevIndex, newTab, newIndex);
 
             if (selectedTab != null) {
                 selectedTab.tab.setSelected(false);
@@ -710,7 +710,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private void setContentInternal(Component newContent) {
+    private void setContentInternal(final Component newContent) {
         checkEDT();
 
         if (currentContent != newContent) {
@@ -740,12 +740,12 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         tabbedPane.validate();
     }
 
-    private void setDragState(Tab draggedTab, double grabX, int dragX) {
+    private void setDragState(final Tab draggedTab, final double grabX, final int dragX) {
         checkEDT();
 
         boolean validate = false;
 
-        for (TabInfo info : tabs) {
+        for (final TabInfo info : tabs) {
             if (info.tab == draggedTab) {
                 if (!info.isBeingDragged || info.grabX != grabX || info.dragX != dragX) {
                     info.isBeingDragged = true;
@@ -793,7 +793,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
         try {
             removeAllTabsInternal();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -812,33 +812,33 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         tabbedPane = null;
     }
 
-    private int animate(int value, int target, double animFactor) {
+    private int animate(final int value, final int target, final double animFactor) {
         int d = value - target;
         d = (int) (d * animFactor);
         return d == 0 ? target : target + d;
     }
 
-    private int animate(int value, int target, double animFactor, BooleanHolder animNeeded) {
-        int newValue = animate(value, target, animFactor);
+    private int animate(final int value, final int target, final double animFactor, final BooleanHolder animNeeded) {
+        final int newValue = animate(value, target, animFactor);
         if (newValue != value) {
             animNeeded.value = true;
         }
         return newValue;
     }
 
-    private int animateShrinkingOnly(int value, int target, double animFactor, BooleanHolder animNeeded) {
-        int newValue = value < target ? target : animate(value, target, animFactor);
+    private int animateShrinkingOnly(final int value, final int target, final double animFactor, final BooleanHolder animNeeded) {
+        final int newValue = value < target ? target : animate(value, target, animFactor);
         if (newValue != value) {
             animNeeded.value = true;
         }
         return newValue;
     }
 
-    private TabDragInfo getDragInfo(Transferable t) {
+    private TabDragInfo getDragInfo(final Transferable t) {
         Object it = null;
         try {
             it = transferableStore.getTransferableData(t);
-        } catch (UnsupportedFlavorException | IOException e) {
+        } catch (final UnsupportedFlavorException | IOException e) {
             log(e);
         }
         if (it instanceof TabDragInfo) {
@@ -847,17 +847,17 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         return null;
     }
 
-    private boolean isTearAwayAllowed(Tab tab) {
+    private boolean isTearAwayAllowed(final Tab tab) {
         return tabbedPane.isEnabled() && dndPolicy != null && dndPolicy.isTearAwayAllowed(tabbedPane, tab);
     }
 
-    private boolean isSnapInAllowed(Tab tab) {
+    private boolean isSnapInAllowed(final Tab tab) {
         return tabbedPane.isEnabled() && dndPolicy != null && dndPolicy.isSnapInAllowed(tabbedPane, tab);
     }
 
-    private void dragOut(Component dragComponent, TabDragInfo dragInfo) {
+    private void dragOut(final Component dragComponent, final TabDragInfo dragInfo) {
         if (dragInfo != null) {
-            JhromeTabbedPaneUI draggedParent = SwingUtils.getJTabbedPaneAncestorUI(dragInfo.tab);
+            final JhromeTabbedPaneUI draggedParent = SwingUtils.getJTabbedPaneAncestorUI(dragInfo.tab);
             if (draggedParent != null && dragComponent == draggedParent.tabbedPane && draggedParent.isTearAwayAllowed(dragInfo.tab)) {
                 if (dragInfo.floatingTabHandler != null) {
                     dragInfo.floatingTabHandler.onFloatingBegin(dragInfo.tab, dragInfo.getGrabPoint());
@@ -868,13 +868,13 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private void removeDraggedTabFromParent(TabDragInfo dragInfo) {
-        JhromeTabbedPaneUI draggedParent = SwingUtils.getJTabbedPaneAncestorUI(dragInfo.tab);
+    private void removeDraggedTabFromParent(final TabDragInfo dragInfo) {
+        final JhromeTabbedPaneUI draggedParent = SwingUtils.getJTabbedPaneAncestorUI(dragInfo.tab);
         if (draggedParent != null) {
             draggedParent.setDragState(null, 0, 0);
-            Component draggedTabComponent = dragInfo.tab.getTabComponent();
+            final Component draggedTabComponent = dragInfo.tab.getTabComponent();
             draggedParent.removeTabImmediatelyInternal(dragInfo.tab);
-            int tabIndex = draggedParent.tabbedPane.indexOfComponent(dragInfo.tab.getContent());
+            final int tabIndex = draggedParent.tabbedPane.indexOfComponent(dragInfo.tab.getContent());
             if (tabIndex < 0) {
                 return;
             }
@@ -883,12 +883,12 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private void dragOver(DropTargetDragEvent dtde) {
-        TabDragInfo dragInfo = getDragInfo(dtde.getTransferable());
+    private void dragOver(final DropTargetDragEvent dtde) {
+        final TabDragInfo dragInfo = getDragInfo(dtde.getTransferable());
         if (dragInfo != null) {
-            JhromeTabbedPaneUI tabbedPaneUI = SwingUtils.getJTabbedPaneAncestorUI(dtde.getDropTargetContext().getComponent());
+            final JhromeTabbedPaneUI tabbedPaneUI = SwingUtils.getJTabbedPaneAncestorUI(dtde.getDropTargetContext().getComponent());
 
-            Point p = dtde.getLocation();
+            final Point p = dtde.getLocation();
             dragInfo.setGrabPoint(SwingUtilities.convertPoint(dtde.getDropTargetContext().getComponent(), p, tabbedPaneUI.tabbedPane));
 
             if (!Utils.contains(tabbedPaneUI.dropZone, p)) {
@@ -911,15 +911,15 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
                 // tabbedPane.mouseOverTopZone = true;
 
-                Window ancestor = SwingUtilities.getWindowAncestor(tabbedPaneUI.tabbedPane);
+                final Window ancestor = SwingUtilities.getWindowAncestor(tabbedPaneUI.tabbedPane);
                 if (ancestor != null) {
                     ancestor.toFront();
                     ancestor.requestFocus();
                 }
 
-                int dragX = dtde.getLocation().x;
+                final int dragX = dtde.getLocation().x;
 
-                int newIndex = tabbedPaneUI.layout.getInsertIndex(dragInfo.tab, dragInfo.grabX, dragX);
+                final int newIndex = tabbedPaneUI.layout.getInsertIndex(dragInfo.tab, dragInfo.grabX, dragX);
                 tabbedPaneUI.addTab(newIndex, dragInfo.tab, false);
                 if (dragInfo.tab.isEnabled()) {
                     tabbedPaneUI.tabbedPane.setSelectedIndex(newIndex);
@@ -927,13 +927,13 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
                 tabbedPaneUI.setDragState(dragInfo.tab, dragInfo.grabX, dragX);
             } else {
-                TabInfo info = tabbedPaneUI.getInfo(dragInfo.tab);
+                final TabInfo info = tabbedPaneUI.getInfo(dragInfo.tab);
                 if (info != null) {
-                    int dragX = dtde.getLocation().x;
+                    final int dragX = dtde.getLocation().x;
                     tabbedPaneUI.setDragState(dragInfo.tab, dragInfo.grabX, dragX);
 
-                    int newIndex = tabbedPaneUI.layout.getInsertIndex(dragInfo.tab, dragInfo.grabX, dragX);
-                    int currentIndex = tabbedPaneUI.getInfoIndex(dragInfo.tab);
+                    final int newIndex = tabbedPaneUI.layout.getInsertIndex(dragInfo.tab, dragInfo.grabX, dragX);
+                    final int currentIndex = tabbedPaneUI.getInfoIndex(dragInfo.tab);
                     tabbedPaneUI.moveTab(currentIndex, newIndex);
                     if (dragInfo.tab.isEnabled()) {
                         tabbedPaneUI.tabbedPane.setSelectedComponent(dragInfo.tab.getContent());
@@ -943,40 +943,40 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    public Image createDragImage(Tab tab) {
-        Component rend = tab;
+    public Image createDragImage(final Tab tab) {
+        final Component rend = tab;
 
-        int width = tabbedPane.getWidth();
-        int height = tabbedPane.getHeight();
+        final int width = tabbedPane.getWidth();
+        final int height = tabbedPane.getHeight();
 
         if (width == 0 || height == 0) {
             return null;
         }
 
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = (Graphics2D) image.getGraphics();
 
-        AffineTransform origXform = g2.getTransform();
+        final AffineTransform origXform = g2.getTransform();
 
         if (contentPanelBorder != null) {
             contentPanelBorder.paintBorder(tabbedPane, g2, contentPanelBounds.x, contentPanelBounds.y, contentPanelBounds.width, contentPanelBounds.height);
         }
         if (tab.getContent() != null) {
-            Insets contentInsets = contentPanelBorder == null ? new Insets(0, 0, 0, 0) : contentPanelBorder.getBorderInsets(tabbedPane);
+            final Insets contentInsets = contentPanelBorder == null ? new Insets(0, 0, 0, 0) : contentPanelBorder.getBorderInsets(tabbedPane);
             g2.translate(contentPanelBounds.x + contentInsets.left, contentPanelBounds.y + contentInsets.top);
             tab.getContent().paint(g2);
         }
 
         g2.setTransform(origXform);
 
-        int tabX = tabLayeredPane.getX() + tab.getX();
-        int tabY = tabLayeredPane.getY() + tab.getY();
+        final int tabX = tabLayeredPane.getX() + tab.getX();
+        final int tabY = tabLayeredPane.getY() + tab.getY();
 
         g2.translate(tabX, tabY);
         rend.paint(g2);
 
-        BufferedImage rescaled = new BufferedImage(width * 3 / 4, height * 3 / 4, BufferedImage.TYPE_INT_ARGB);
+        final BufferedImage rescaled = new BufferedImage(width * 3 / 4, height * 3 / 4, BufferedImage.TYPE_INT_ARGB);
 
         g2 = (Graphics2D) rescaled.getGraphics();
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
@@ -987,21 +987,21 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         return rescaled;
     }
 
-    private void notifyTabbedPaneListeners(TabbedPaneEvent event) {
-        for (ITabbedPaneListener listener : tabListeners) {
+    private void notifyTabbedPaneListeners(final TabbedPaneEvent event) {
+        for (final ITabbedPaneListener listener : tabListeners) {
             listener.onEvent(event);
         }
     }
 
     @Override
-    public void paint(Graphics g, JComponent c) {
+    public void paint(final Graphics g, final JComponent c) {
         if (contentPanelBorder != null) {
             contentPanelBorder.paintBorder(c, g, contentPanelBounds.x, contentPanelBounds.y, contentPanelBounds.width, contentPanelBounds.height);
         }
     }
 
     @Override
-    public void update(Graphics g, JComponent c) {
+    public void update(final Graphics g, final JComponent c) {
         updateTabs();
         super.update(g, c);
 
@@ -1010,31 +1010,31 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    public int tabForCoordinate(JTabbedPane pane, int x, int y) {
-        Tab tab = getHoverableTabAt(new Point(x, y));
+    public int tabForCoordinate(final JTabbedPane pane, final int x, final int y) {
+        final Tab tab = getHoverableTabAt(new Point(x, y));
         return virtualizeIndex(getInfoIndex(tab));
     }
 
     @Override
-    public Rectangle getTabBounds(JTabbedPane pane, int vIndex) {
-        TabInfo info = tabs.get(actualizeIndex(vIndex));
+    public Rectangle getTabBounds(final JTabbedPane pane, final int vIndex) {
+        final TabInfo info = tabs.get(actualizeIndex(vIndex));
         return info != null ? info.tab.getBounds() : null;
     }
 
     @Override
-    public int getTabRunCount(JTabbedPane pane) {
+    public int getTabRunCount(final JTabbedPane pane) {
         return 1;
     }
 
     private void updateTabs() {
-        List<Tab> toRemove = new LinkedList<>();
-        for (TabInfo info : tabs) {
+        final List<Tab> toRemove = new LinkedList<>();
+        for (final TabInfo info : tabs) {
             if (tabbedPane.indexOfComponent(info.tab.getContent()) < 0) {
                 toRemove.add(info.tab);
             }
         }
 
-        for (Tab tab : toRemove) {
+        for (final Tab tab : toRemove) {
             removeTabInternal(tab);
         }
 
@@ -1043,20 +1043,20 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private void updateTab(int vIndex, boolean createIfNecessary) {
-        String title = tabbedPane.getTitleAt(vIndex);
-        Icon icon = tabbedPane.getIconAt(vIndex);
-        Component content = tabbedPane.getComponentAt(vIndex);
-        Component tabComponent = tabbedPane.getTabComponentAt(vIndex);
-        int mnemonic = tabbedPane.getMnemonicAt(vIndex);
-        int displayedMnemonicIndex = tabbedPane.getDisplayedMnemonicIndexAt(vIndex);
-        Color background = tabbedPane.getBackgroundAt(vIndex);
-        Color foreground = tabbedPane.getForegroundAt(vIndex);
-        boolean selected = tabbedPane.getSelectedIndex() == vIndex;
-        boolean enabled = tabbedPane.isEnabledAt(vIndex);
+    private void updateTab(final int vIndex, final boolean createIfNecessary) {
+        final String title = tabbedPane.getTitleAt(vIndex);
+        final Icon icon = tabbedPane.getIconAt(vIndex);
+        final Component content = tabbedPane.getComponentAt(vIndex);
+        final Component tabComponent = tabbedPane.getTabComponentAt(vIndex);
+        final int mnemonic = tabbedPane.getMnemonicAt(vIndex);
+        final int displayedMnemonicIndex = tabbedPane.getDisplayedMnemonicIndexAt(vIndex);
+        final Color background = tabbedPane.getBackgroundAt(vIndex);
+        final Color foreground = tabbedPane.getForegroundAt(vIndex);
+        final boolean selected = tabbedPane.getSelectedIndex() == vIndex;
+        final boolean enabled = tabbedPane.isEnabledAt(vIndex);
 
         Tab tab = null;
-        TabInfo info = contentMap.get(content);
+        final TabInfo info = contentMap.get(content);
         if (info != null) {
             tab = info.tab;
         } else if (createIfNecessary) {
@@ -1095,7 +1095,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         updateMnemonics();
     }
 
-    InputMap getInputMap(int condition) {
+    InputMap getInputMap(final int condition) {
         if (condition == JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT) {
             return (InputMap) UIManager.get("TabbedPane.ancestorInputMap", tabbedPane.getLocale());
         } else if (condition == JComponent.WHEN_FOCUSED) {
@@ -1119,7 +1119,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     private void updateMnemonics() {
         resetMnemonics();
         for (int counter = tabbedPane.getTabCount() - 1; counter >= 0; counter--) {
-            int mnemonic = tabbedPane.getMnemonicAt(counter);
+            final int mnemonic = tabbedPane.getMnemonicAt(counter);
 
             if (mnemonic > 0) {
                 addMnemonic(counter, mnemonic);
@@ -1140,11 +1140,11 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     /**
      * Adds the specified mnemonic at the specified index.
      */
-    private void addMnemonic(int index, int mnemonic) {
+    private void addMnemonic(final int index, final int mnemonic) {
         if (mnemonicToIndexMap == null) {
             initMnemonics();
         }
-        mnemonicInputMap.put(KeyStroke.getKeyStroke(mnemonic, ActionEvent.ALT_MASK), "setSelectedIndex");
+        mnemonicInputMap.put(KeyStroke.getKeyStroke(mnemonic, InputEvent.ALT_MASK), "setSelectedIndex");
         mnemonicToIndexMap.put(mnemonic, index);
     }
 
@@ -1159,7 +1159,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     }
 
     ActionMap loadActionMap() {
-        ActionMap map = new ActionMapUIResource();
+        final ActionMap map = new ActionMapUIResource();
         put(map, new Actions(Actions.NEXT));
         put(map, new Actions(Actions.PREVIOUS));
         put(map, new Actions(Actions.RIGHT));
@@ -1194,21 +1194,21 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         return false;
     }
 
-    private Component compositeRequestFocus(Component component) {
+    private Component compositeRequestFocus(final Component component) {
         if (component instanceof Container) {
-            Container container = (Container)component;
+            final Container container = (Container)component;
             if (container.isFocusCycleRoot()) {
-                FocusTraversalPolicy policy = container.getFocusTraversalPolicy();
-                Component comp = policy.getDefaultComponent(container);
+                final FocusTraversalPolicy policy = container.getFocusTraversalPolicy();
+                final Component comp = policy.getDefaultComponent(container);
                 if (comp!=null) {
                     comp.requestFocus();
                     return comp;
                 }
             }
-            Container rootAncestor = container.getFocusCycleRootAncestor();
+            final Container rootAncestor = container.getFocusCycleRootAncestor();
             if (rootAncestor!=null) {
-                FocusTraversalPolicy policy = rootAncestor.getFocusTraversalPolicy();
-                Component comp = policy.getComponentAfter(rootAncestor, container);
+                final FocusTraversalPolicy policy = rootAncestor.getFocusTraversalPolicy();
+                final Component comp = policy.getComponentAfter(rootAncestor, container);
 
                 if (comp!=null && SwingUtilities.isDescendingFrom(comp, container)) {
                     comp.requestFocus();
@@ -1273,12 +1273,12 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         double grabX;
     }
 
-    private class MouseManager extends RecursiveListener {
+    private final class MouseManager extends RecursiveListener {
         final MouseAdapter adapter = new MouseAdapter() {
-            private void updateHoldTabScale(MouseEvent e) {
+            private void updateHoldTabScale(final MouseEvent e) {
                 Point p = e.getPoint();
                 p = SwingUtilities.convertPoint((Component) e.getSource(), p, tabbedPane);
-                boolean newMouseOver = Utils.contains(topZone, p);
+                final boolean newMouseOver = Utils.contains(topZone, p);
                 if (newMouseOver != mouseOverTopZone) {
                     mouseOverTopZone = newMouseOver;
                     tabbedPane.invalidate();
@@ -1287,40 +1287,40 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(final MouseEvent e) {
                 updateHoldTabScale(e);
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(final MouseEvent e) {
                 updateHoldTabScale(e);
             }
 
             @Override
-            public void mouseMoved(MouseEvent e) {
+            public void mouseMoved(final MouseEvent e) {
                 updateHoldTabScale(e);
 
                 if (!tabbedPane.isEnabled()) {
                     return;
                 }
 
-                Point p = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), tabbedPane);
-                Tab tab = getHoverableTabAt(p);
-                for (TabInfo info : tabs) {
+                final Point p = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), tabbedPane);
+                final Tab tab = getHoverableTabAt(p);
+                for (final TabInfo info : tabs) {
                     info.tab.setRollover(info.tab.isEnabled() && info.tab == tab);
                 }
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 if (!tabbedPane.isEnabled()) {
                     return;
                 }
 
-                Point p = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), tabbedPane);
-                Tab tab = getSelectableTabAt(p);
+                final Point p = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), tabbedPane);
+                final Tab tab = getSelectableTabAt(p);
                 if (tab != null) {
-                    int vIndex = virtualizeIndex(getInfoIndex(tab));
+                    final int vIndex = virtualizeIndex(getInfoIndex(tab));
                     if (tabbedPane.getSelectedComponent() != tab.getContent() && tabbedPane.isEnabledAt(vIndex)) {
                         tabbedPane.setSelectedComponent(tab.getContent());
                     } else if (tabbedPane.isRequestFocusEnabled()) {
@@ -1331,13 +1331,13 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         };
 
         @Override
-        protected void install(Component c) {
+        protected void install(final Component c) {
             c.addMouseListener(adapter);
             c.addMouseMotionListener(adapter);
         }
 
         @Override
-        protected void uninstall(Component c) {
+        protected void uninstall(final Component c) {
             c.removeMouseListener(adapter);
             c.removeMouseMotionListener(adapter);
         }
@@ -1347,7 +1347,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
     }
 
-    private class TabLayoutManager implements LayoutManager {
+    private final class TabLayoutManager implements LayoutManager {
         /**
          * The sustained total width of the tab zone in virtual coordinate space. This does not include the overlap area of the last tab.
          */
@@ -1360,7 +1360,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
         private boolean finishAnimation = false;
 
-        private int getInsertIndex(Tab tab, double grabX, int dragX) {
+        private int getInsertIndex(final Tab tab, final double grabX, final int dragX) {
             checkEDT();
 
             int targetWidth = useUniformWidth ? maxUniformWidth : tab.getPreferredSize().width;
@@ -1372,7 +1372,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
             int vTargetX = 0;
 
-            for (TabInfo info : tabs) {
+            for (final TabInfo info : tabs) {
                 if (info.tab == tab || info.isBeingRemoved) {
                     continue;
                 }
@@ -1389,43 +1389,43 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void addLayoutComponent(String name, Component comp) {
+        public void addLayoutComponent(final String name, final Component comp) {
         }
 
         @Override
-        public void removeLayoutComponent(Component comp) {
+        public void removeLayoutComponent(final Component comp) {
         }
 
         @Override
-        public Dimension preferredLayoutSize(Container parent) {
+        public Dimension preferredLayoutSize(final Container parent) {
             return layoutSize(parent, PREFERRED);
         }
 
         @Override
-        public Dimension minimumLayoutSize(Container parent) {
+        public Dimension minimumLayoutSize(final Container parent) {
             return layoutSize(parent, MINIMUM);
         }
 
-        private Dimension layoutSize(Container parent, int sizeType) {
-            boolean transpose = tabbedPane.getTabPlacement() == JTabbedPane.LEFT || tabbedPane.getTabPlacement() == JTabbedPane.RIGHT;
+        private Dimension layoutSize(final Container parent, final int sizeType) {
+            final boolean transpose = tabbedPane.getTabPlacement() == SwingConstants.LEFT || tabbedPane.getTabPlacement() == SwingConstants.RIGHT;
 
             int contentWidth = 0;
             int contentHeight = 0;
             for (int i = 0; i < tabbedPane.getTabCount(); i++) {
-                Component content = tabbedPane.getComponentAt(i);
-                Dimension size = getSize(content, sizeType);
+                final Component content = tabbedPane.getComponentAt(i);
+                final Dimension size = getSize(content, sizeType);
                 contentWidth = Math.max(contentWidth, size.width);
                 contentHeight = Math.max(contentHeight, size.height);
             }
 
             int tabsHeight = 0;
 
-            for (TabInfo info : tabs) {
+            for (final TabInfo info : tabs) {
                 info.prefSize = info.tab.getPreferredSize();
                 tabsHeight = Math.max(tabsHeight, transpose ? info.prefSize.width : info.prefSize.height);
             }
 
-            Insets insets = tabbedPane.getInsets();
+            final Insets insets = tabbedPane.getInsets();
             int width = insets.left + insets.right + contentWidth;
             int height = insets.top + insets.bottom + contentHeight;
 
@@ -1435,7 +1435,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                 height += tabsHeight;
             }
             if (contentPanelBorder != null) {
-                Insets contentInsets = contentPanelBorder.getBorderInsets(tabbedPane);
+                final Insets contentInsets = contentPanelBorder.getBorderInsets(tabbedPane);
                 width += contentInsets.left + contentInsets.right;
                 height += contentInsets.top + contentInsets.bottom;
             }
@@ -1443,7 +1443,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             return new Dimension(width, height);
         }
 
-        private Dimension getSize(Component comp, int sizeType) {
+        private Dimension getSize(final Component comp, final int sizeType) {
             switch (sizeType) {
                 case MINIMUM:
                     return comp.getMinimumSize();
@@ -1457,29 +1457,29 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void layoutContainer(Container parent) {
+        public void layoutContainer(final Container parent) {
             checkEDT();
 
-            boolean reset = finishAnimation;
+            final boolean reset = finishAnimation;
             finishAnimation = false;
 
-            double animFactor = reset ? 0.0 : JhromeTabbedPaneUI.this.animFactor;
+            final double animFactor = reset ? 0.0 : JhromeTabbedPaneUI.this.animFactor;
 
-            boolean transpose = tabbedPane.getTabPlacement() == JTabbedPane.LEFT || tabbedPane.getTabPlacement() == JTabbedPane.RIGHT;
+            final boolean transpose = tabbedPane.getTabPlacement() == SwingConstants.LEFT || tabbedPane.getTabPlacement() == SwingConstants.RIGHT;
 
-            int parentWidth = parent.getWidth();
-            int parentHeight = parent.getHeight();
+            final int parentWidth = parent.getWidth();
+            final int parentHeight = parent.getHeight();
 
-            Insets insets = parent.getInsets();
+            final Insets insets = parent.getInsets();
 
-            Dimension rightButtonsPanelPrefSize = rightButtonsPanel.getPreferredSize();
+            final Dimension rightButtonsPanelPrefSize = rightButtonsPanel.getPreferredSize();
 
-            int availWidth = parentWidth - insets.left - insets.right;
-            int availHeight = parentHeight - insets.top - insets.bottom;
-            int tabMargin = 2;
-            int availTopZoneWidth = (transpose ? availHeight : availWidth) - tabMargin * 2;
-            int availTabZoneWidth = availTopZoneWidth - rightButtonsPanelPrefSize.width;
-            BooleanHolder animNeeded = new BooleanHolder(false);
+            final int availWidth = parentWidth - insets.left - insets.right;
+            final int availHeight = parentHeight - insets.top - insets.bottom;
+            final int tabMargin = 2;
+            final int availTopZoneWidth = (transpose ? availHeight : availWidth) - tabMargin * 2;
+            final int availTabZoneWidth = availTopZoneWidth - rightButtonsPanelPrefSize.width;
+            final BooleanHolder animNeeded = new BooleanHolder(false);
             int vTargetX = 0;
             int vTargetTabZoneWidth = 0;
             int vCurrentTabZoneWidth = 0;
@@ -1489,7 +1489,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             boolean anyDragging = false;
 
             for (int i = 0; i < tabs.size(); i++) {
-                TabInfo info = tabs.get(i);
+                final TabInfo info = tabs.get(i);
                 info.vTargetX = vTargetX;
 
                 info.prefSize = info.tab.getPreferredSize();
@@ -1516,9 +1516,9 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                 info.tab.getContent().setVisible(tabbedPane.getSelectedIndex() == virtualizeIndex(i));
             }
 
-            TabInfo lastInfo = tabs.isEmpty() ? null : tabs.get(tabs.size() - 1);
+            final TabInfo lastInfo = tabs.isEmpty() ? null : tabs.get(tabs.size() - 1);
 
-            int vTargetRightButtonsPanelX = lastInfo != null ? lastInfo.vCurrentX == lastInfo.vTargetX ? lastInfo.vCurrentX + lastInfo.vCurrentWidth : lastInfo.vTargetX + lastInfo.vCurrentWidth : 0;
+            final int vTargetRightButtonsPanelX = lastInfo != null ? lastInfo.vCurrentX == lastInfo.vTargetX ? lastInfo.vCurrentX + lastInfo.vCurrentWidth : lastInfo.vTargetX + lastInfo.vCurrentWidth : 0;
             if (reset || vCurrentTabZoneWidth > vSustainedTabZoneWidth) {
                 vSustainedTabZoneWidth = vCurrentTabZoneWidth;
             } else if (!mouseOverTopZone && !anyDragging && vSustainedTabZoneWidth > vTargetTabZoneWidth) {
@@ -1531,36 +1531,36 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
             // Adjust width scale as necessary so that no tab (except those being removed) is narrower than its minimum width
             double adjWidthScale = widthScale;
-            for (TabInfo info : tabs) {
+            for (final TabInfo info : tabs) {
                 if (info.isBeingRemoved) {
                     continue;
                 }
-                Dimension minSize = info.tab.getMinimumSize();
+                final Dimension minSize = info.tab.getMinimumSize();
                 if (minSize != null && info.vCurrentWidth >= minSize.width) {
-                    int prefWidth = transpose ? info.prefSize.height : info.prefSize.width;
-                    int targetWidth = useUniformWidth ? maxUniformWidth : prefWidth;
+                    final int prefWidth = transpose ? info.prefSize.height : info.prefSize.width;
+                    final int targetWidth = useUniformWidth ? maxUniformWidth : prefWidth;
                     adjWidthScale = Math.max(adjWidthScale, minSize.width / (double) targetWidth);
                 }
             }
             widthScale = adjWidthScale;
 
-            int currentTabHeight = transpose ? tabZone.width : tabZone.height;
+            final int currentTabHeight = transpose ? tabZone.width : tabZone.height;
             int newTabHeight = targetTabHeight;
             if (currentTabHeight > 0) {
                 newTabHeight = animate(currentTabHeight, targetTabHeight, animFactor, animNeeded);
             }
-            int extraDropZoneSpace = 25;
+            final int extraDropZoneSpace = 25;
             /**
              * How many pixels the content panel overlaps the tabs. This is necessary with the Google Chrome appearance to make the selected tab and the content panel
              * look like a contiguous object
              */
-            int contentPanelOverlap = 1;
+            final int contentPanelOverlap = 1;
             if (transpose) {
                 topZone.setFrame(insets.left, insets.top + tabMargin, newTabHeight, availTopZoneWidth);
                 tabZone.setFrame(insets.left, insets.top + tabMargin, topZone.height, availTabZoneWidth);
                 dropZone.setFrame(insets.left, insets.top + tabMargin, Math.min(availWidth, currentTabHeight + extraDropZoneSpace), availTopZoneWidth);
 
-                if (tabbedPane.getTabPlacement() == JTabbedPane.RIGHT) {
+                if (tabbedPane.getTabPlacement() == SwingConstants.RIGHT) {
                     topZone.x = insets.left + availWidth - topZone.width - 1;
                     tabZone.x = insets.left + availWidth - tabZone.width - 1;
                     dropZone.x = insets.left + availWidth - dropZone.width - 1;
@@ -1575,7 +1575,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                 tabZone.setFrame(insets.left + tabMargin, insets.top, availTabZoneWidth, topZone.height);
                 dropZone.setFrame(insets.left + tabMargin, insets.top, availTopZoneWidth, Math.min(availHeight, tabZone.height + extraDropZoneSpace));
 
-                if (tabbedPane.getTabPlacement() == JTabbedPane.BOTTOM) {
+                if (tabbedPane.getTabPlacement() == SwingConstants.BOTTOM) {
                     topZone.y = insets.top + availHeight - topZone.height - 1;
                     tabZone.y = insets.top + availHeight - tabZone.height - 1;
                     dropZone.y = insets.top + availHeight - dropZone.height - 1;
@@ -1587,20 +1587,20 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                 }
             }
 
-            int tabZoneX = transpose ? tabZone.y : tabZone.x;
-            int topZoneX = transpose ? topZone.y : topZone.x;
-            int topZoneY = transpose ? topZone.x : topZone.y;
-            int topZoneWidth = transpose ? topZone.height : topZone.width;
-            int topZoneHeight = transpose ? topZone.width : topZone.height;
-            int tabZoneHeight = transpose ? tabZone.width : tabZone.height;
-            int tabLayeredPaneY = transpose ? tabLayeredPane.getX() : tabLayeredPane.getY();
+            final int tabZoneX = transpose ? tabZone.y : tabZone.x;
+            final int topZoneX = transpose ? topZone.y : topZone.x;
+            final int topZoneY = transpose ? topZone.x : topZone.y;
+            final int topZoneWidth = transpose ? topZone.height : topZone.width;
+            final int topZoneHeight = transpose ? topZone.width : topZone.height;
+            final int tabZoneHeight = transpose ? tabZone.width : tabZone.height;
+            final int tabLayeredPaneY = transpose ? tabLayeredPane.getX() : tabLayeredPane.getY();
 
             // now, lay out the tabs
-            for (TabInfo info : tabs) {
+            for (final TabInfo info : tabs) {
                 int x = topZoneX + (int) (info.vCurrentX * widthScale);
-                int targetX = topZoneX + (int) (info.vTargetX * widthScale);
-                int width = (int) (info.vCurrentWidth * widthScale) + overlap;
-                int targetWidth = (int) (info.vTargetWidth * widthScale) + overlap;
+                final int targetX = topZoneX + (int) (info.vTargetX * widthScale);
+                final int width = (int) (info.vCurrentWidth * widthScale) + overlap;
+                final int targetWidth = (int) (info.vTargetWidth * widthScale) + overlap;
 
                 if (info.isBeingDragged) {
                     x = info.dragX - (int) (info.grabX * width);
@@ -1612,14 +1612,14 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             }
 
             // lay out the content panel and right button panel
-            Insets contentInsets = contentPanelBorder == null ? new Insets(0, 0, 0, 0) : contentPanelBorder.getBorderInsets(tabbedPane);
+            final Insets contentInsets = contentPanelBorder == null ? new Insets(0, 0, 0, 0) : contentPanelBorder.getBorderInsets(tabbedPane);
 
-            int contentX = contentPanelBounds.x + contentInsets.left;
-            int contentW = contentPanelBounds.width - contentInsets.left - contentInsets.right;
-            int contentY = contentPanelBounds.y + contentInsets.top;
-            int contentH = contentPanelBounds.height - contentInsets.top - contentInsets.bottom;
+            final int contentX = contentPanelBounds.x + contentInsets.left;
+            final int contentW = contentPanelBounds.width - contentInsets.left - contentInsets.right;
+            final int contentY = contentPanelBounds.y + contentInsets.top;
+            final int contentH = contentPanelBounds.height - contentInsets.top - contentInsets.bottom;
 
-            for (Component comp : tabbedPane.getComponents()) {
+            for (final Component comp : tabbedPane.getComponents()) {
                 if (comp != tabLayeredPane) {
                     comp.setBounds(contentX, contentY, contentW, contentH);
                 }
@@ -1636,7 +1636,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             rightButtonsPanel.setBounds(rightButtonsPanelX, topZoneY - tabLayeredPaneY, rightButtonsPanelPrefSize.width, topZoneHeight);
 
             for (int i = tabs.size() - 1; i >= 0; i--) {
-                TabInfo info = tabs.get(i);
+                final TabInfo info = tabs.get(i);
                 if (info.isBeingRemoved && info.vCurrentWidth == 0) {
                     actuallyRemoveTab(info.tab);
                 }
@@ -1649,14 +1649,14 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             if (selectedTab != null) {
                 try {
                     tabLayeredPane.setComponentZOrder(selectedTab.tab, layer++);
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
             // setComponentZOrder( contentPanel , layer++ );
 
-            for (TabInfo info : tabs) {
+            for (final TabInfo info : tabs) {
                 if (info == selectedTab) {
                     continue;
                 }
@@ -1678,7 +1678,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private class DragHandler implements DragSourceListener, DragSourceMotionListener, DragGestureListener {
+    private final class DragHandler implements DragSourceListener, DragSourceMotionListener, DragGestureListener {
         final DragSource source;
 
         final DragGestureRecognizer dragGestureRecognizer;
@@ -1687,7 +1687,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
         TabDragInfo dragInfo;
 
-        public DragHandler(Component comp, int actions) {
+        public DragHandler(final Component comp, final int actions) {
             source = new DragSource();
             dragGestureRecognizer = source.createDefaultDragGestureRecognizer(comp, actions, this);
             source.addDragSourceMotionListener(this);
@@ -1701,22 +1701,22 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void dragGestureRecognized(DragGestureEvent dge) {
+        public void dragGestureRecognized(final DragGestureEvent dge) {
             if (!tabbedPane.isEnabled()) {
                 return;
             }
 
             dragOrigin = dge.getDragOrigin();
 
-            Tab draggedTab = getDraggableTabAt(dragOrigin);
+            final Tab draggedTab = getDraggableTabAt(dragOrigin);
             if (draggedTab != null) {
-                Window window = SwingUtilities.getWindowAncestor(tabbedPane);
+                final Window window = SwingUtilities.getWindowAncestor(tabbedPane);
                 Dimension sourceWindowSize = null;
                 if (window != null) {
                     sourceWindowSize = window.getSize();
                 }
-                Point p = SwingUtilities.convertPoint(tabbedPane, dragOrigin, draggedTab);
-                double grabX = p.x / (double) draggedTab.getWidth();
+                final Point p = SwingUtilities.convertPoint(tabbedPane, dragOrigin, draggedTab);
+                final double grabX = p.x / (double) draggedTab.getWidth();
 
                 dragInfo = new TabDragInfo(draggedTab, dragOrigin, grabX, floatingTabHandler, sourceWindowSize);
                 source.startDrag(dge, Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR), transferableStore.createTransferable(dragInfo), this);
@@ -1724,23 +1724,23 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void dragEnter(DragSourceDragEvent dsde) {
+        public void dragEnter(final DragSourceDragEvent dsde) {
         }
 
         @Override
-        public void dragExit(DragSourceEvent dse) {
+        public void dragExit(final DragSourceEvent dse) {
         }
 
         @Override
-        public void dragOver(DragSourceDragEvent dsde) {
+        public void dragOver(final DragSourceDragEvent dsde) {
         }
 
         @Override
-        public void dragMouseMoved(DragSourceDragEvent dsde) {
+        public void dragMouseMoved(final DragSourceDragEvent dsde) {
             if (dragInfo != null) {
-                JhromeTabbedPaneUI draggedParent = SwingUtils.getJTabbedPaneAncestorUI(dragInfo.tab);
+                final JhromeTabbedPaneUI draggedParent = SwingUtils.getJTabbedPaneAncestorUI(dragInfo.tab);
                 if (draggedParent != null) {
-                    Point p = dsde.getLocation();
+                    final Point p = dsde.getLocation();
                     SwingUtilities.convertPointFromScreen(p, draggedParent.tabbedPane);
                     if (!Utils.contains(draggedParent.dropZone, p)) {
                         dragOut(dsde.getDragSourceContext().getComponent(), dragInfo);
@@ -1754,7 +1754,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void dropActionChanged(DragSourceDragEvent dsde) {
+        public void dropActionChanged(final DragSourceDragEvent dsde) {
         }
 
         @Override
@@ -1764,7 +1764,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                     dragInfo.floatingTabHandler.onFloatingEnd();
                 }
 
-                JhromeTabbedPaneUI draggedParent = SwingUtils.getJTabbedPaneAncestorUI(dragInfo.tab);
+                final JhromeTabbedPaneUI draggedParent = SwingUtils.getJTabbedPaneAncestorUI(dragInfo.tab);
 
                 if (dragInfo.tab != null && draggedParent == null && tabDropFailureHandler != null) {
                     tabDropFailureHandler.onDropFailure(dsde, dragInfo.tab, dragInfo.sourceWindowSize);
@@ -1780,39 +1780,39 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private class DropHandler implements DropTargetListener {
+    private final class DropHandler implements DropTargetListener {
         private TabDragInfo dragInfo = null;
 
-        public DropHandler(Component comp) {
+        public DropHandler(final Component comp) {
             new DropTarget(comp, this);
         }
 
         @Override
-        public void dragEnter(DropTargetDragEvent dtde) {
+        public void dragEnter(final DropTargetDragEvent dtde) {
             dragInfo = getDragInfo(dtde.getTransferable());
         }
 
         @Override
-        public void dragOver(DropTargetDragEvent dtde) {
+        public void dragOver(final DropTargetDragEvent dtde) {
             JhromeTabbedPaneUI.this.dragOver(dtde);
         }
 
         @Override
-        public void dragExit(DropTargetEvent dte) {
+        public void dragExit(final DropTargetEvent dte) {
             dragOut(dte.getDropTargetContext().getComponent(), dragInfo);
             dragInfo = null;
         }
 
         @Override
-        public void dropActionChanged(DropTargetDragEvent dtde) {
+        public void dropActionChanged(final DropTargetDragEvent dtde) {
 
         }
 
         @Override
-        public void drop(DropTargetDropEvent dtde) {
+        public void drop(final DropTargetDropEvent dtde) {
             setDragState(null, 0, 0);
 
-            TabDragInfo dragInfo = getDragInfo(dtde.getTransferable());
+            final TabDragInfo dragInfo = getDragInfo(dtde.getTransferable());
             if (dragInfo != null) {
                 if (dragInfo.tab != null && Utils.contains(dropZone, dtde.getLocation()) && isSnapInAllowed(dragInfo.tab)) {
                     dtde.acceptDrop(dtde.getDropAction());
@@ -1827,11 +1827,11 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
-    private class Handler implements PropertyChangeListener, ContainerListener, ChangeListener, FocusListener {
+    private final class Handler implements PropertyChangeListener, ContainerListener, ChangeListener, FocusListener {
         boolean disable = false;
 
         @Override
-        public void propertyChange(PropertyChangeEvent evt) {
+        public void propertyChange(final PropertyChangeEvent evt) {
             if (disable) {
                 return;
             }
@@ -1848,7 +1848,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             } else if (NEW_TAB_BUTTON_VISIBLE.equals(evt.getPropertyName())) {
                 newTabButton.setVisible(PropertyGetter.get(Boolean.class, tabbedPane, NEW_TAB_BUTTON_VISIBLE, null, false));
             } else if (NEW_TAB_BUTTON_UI.equals(evt.getPropertyName())) {
-                ButtonUI ui = PropertyGetter.get(ButtonUI.class, tabbedPane, NEW_TAB_BUTTON_UI, (String) null);
+                final ButtonUI ui = PropertyGetter.get(ButtonUI.class, tabbedPane, NEW_TAB_BUTTON_UI, (String) null);
                 if (ui != null) {
                     newTabButton.setUI(ui);
                 }
@@ -1875,7 +1875,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void stateChanged(ChangeEvent e) {
+        public void stateChanged(final ChangeEvent e) {
             if (disable) {
                 return;
             }
@@ -1883,7 +1883,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void componentAdded(ContainerEvent e) {
+        public void componentAdded(final ContainerEvent e) {
             if (disable) {
                 return;
             }
@@ -1891,7 +1891,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void componentRemoved(ContainerEvent e) {
+        public void componentRemoved(final ContainerEvent e) {
             if (disable) {
                 return;
             }
@@ -1900,17 +1900,17 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
 
         @Override
-        public void focusGained(FocusEvent e) {
+        public void focusGained(final FocusEvent e) {
             tabbedPane.repaint();
         }
 
         @Override
-        public void focusLost(FocusEvent e) {
+        public void focusLost(final FocusEvent e) {
             tabbedPane.repaint();
         }
     }
 
-    private class Actions extends AbstractAction {
+    private final class Actions extends AbstractAction {
         final static String NEXT = "navigateNext";
         final static String PREVIOUS = "navigatePrevious";
         final static String RIGHT = "navigateRight";
@@ -1926,15 +1926,15 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         final static String SCROLL_FORWARD = "scrollTabsForwardAction";
         final static String SCROLL_BACKWARD = "scrollTabsBackwardAction";
 
-        private String key;
+        private final String key;
 
-        Actions(String key){
+        Actions(final String key){
             this.key = key;
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            JTabbedPane pane = (JTabbedPane) e.getSource();
+        public void actionPerformed(final ActionEvent e) {
+            final JTabbedPane pane = (JTabbedPane) e.getSource();
 
             switch (key) {
                 case REQUEST_FOCUS:
@@ -1944,14 +1944,14 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                     requestFocusForVisibleComponent();
                     break;
                 case SET_SELECTED:
-                    String command = e.getActionCommand();
+                    final String command = e.getActionCommand();
 
                     if (command != null && command.length() > 0) {
                         int mnemonic = e.getActionCommand().charAt(0);
                         if (mnemonic >= 'a' && mnemonic <= 'z') {
                             mnemonic -= ('a' - 'A');
                         }
-                        Integer index = mnemonicToIndexMap.get(mnemonic);
+                        final Integer index = mnemonicToIndexMap.get(mnemonic);
                         if (index != null && pane.isEnabledAt(index)) {
                             pane.setSelectedIndex(index);
                         }

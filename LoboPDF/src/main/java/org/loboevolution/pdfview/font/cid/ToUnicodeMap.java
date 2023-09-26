@@ -59,12 +59,12 @@ public class ToUnicodeMap extends PDFCMap {
 		final char srcStart;
 		final char srcEnd;
 		
-		CodeRangeMapping(char srcStart, char srcEnd) {
+		CodeRangeMapping(final char srcStart, final char srcEnd) {
 			this.srcStart = srcStart;
 			this.srcEnd = srcEnd;
 		}
 		
-		boolean contains(char c) {
+		boolean contains(final char c) {
 			return this.srcStart <= c 
 								&& c <= this.srcEnd;
 		}
@@ -80,18 +80,18 @@ public class ToUnicodeMap extends PDFCMap {
 		final char srcEnd;
 		final char destStart;
 		
-		CharRangeMapping(char srcStart, char srcEnd, char destStart) {
+		CharRangeMapping(final char srcStart, final char srcEnd, final char destStart) {
 			this.srcStart = srcStart;
 			this.srcEnd = srcEnd;
 			this.destStart = destStart;
 		}
 		
-		boolean contains(char c) {
+		boolean contains(final char c) {
 			return this.srcStart <= c 
 								&& c <= this.srcEnd;
 		}
 		
-		char map(char src) {
+		char map(final char src) {
 			return (char) (this.destStart + (src-this.srcStart));
 		}
 		
@@ -108,7 +108,7 @@ public class ToUnicodeMap extends PDFCMap {
 	 * @param map a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public ToUnicodeMap(PDFObject map) throws IOException {
+	public ToUnicodeMap(final PDFObject map) throws IOException {
 		super();
 		this.singleCharMappings = new HashMap<>();
 		this.charRangeMappings = new ArrayList<>();
@@ -121,10 +121,10 @@ public class ToUnicodeMap extends PDFCMap {
 	 * @throws IOException 
 	 ************************************************************************/
 	
-	private void parseMappings(PDFObject map) throws IOException {
+	private void parseMappings(final PDFObject map) throws IOException {
 		try {
-			StringReader reader = new StringReader(new String(map.getStream(), "ASCII"));
-			BufferedReader bf = new BufferedReader(reader);
+			final StringReader reader = new StringReader(new String(map.getStream(), "ASCII"));
+			final BufferedReader bf = new BufferedReader(reader);
 			String line = bf.readLine();
 			while (line != null) {
 				if (line.contains("beginbfchar") || line.contains("begincidchar")) {
@@ -138,7 +138,7 @@ public class ToUnicodeMap extends PDFCMap {
 				}
 				line = bf.readLine();
 			}
-		} catch (UnsupportedEncodingException e) {
+		} catch (final UnsupportedEncodingException e) {
 			throw new IOException(e);
 		} 
 	}
@@ -148,7 +148,7 @@ public class ToUnicodeMap extends PDFCMap {
 	 * @throws IOException 
 	 ************************************************************************/
 	
-	private void parseCharRangeMappingSection(BufferedReader bf, boolean isCid) throws IOException {
+	private void parseCharRangeMappingSection(final BufferedReader bf, final boolean isCid) throws IOException {
 		String line = bf.readLine();
 		while (line != null) {
 			if (line.contains("endbfrange") || line.contains("endcidrange")) {
@@ -159,8 +159,8 @@ public class ToUnicodeMap extends PDFCMap {
 		}
 	}
 
-	private void parseCodeRangeMappingSection(BufferedReader bf, String line) throws IOException {
-		//check if the prev line contains "endcodespacerange"
+	private void parseCodeRangeMappingSection(final BufferedReader bf, final String ln) throws IOException {
+		String line = ln;
 		if (line.contains("endcodespacerange")) {
 			int indexOf = line.indexOf("endcodespacerange");
 			line = line.substring(0, indexOf);
@@ -187,12 +187,12 @@ public class ToUnicodeMap extends PDFCMap {
 	 * @return
 	 ************************************************************************/
 	
-	private void parseRangeLine(String line, boolean isCid) {
-		String[] mapping = line.split(" ");
+	private void parseRangeLine(final String line, final boolean isCid) {
+		final String[] mapping = line.split(" ");
 		if (mapping.length == 3) {
-			Character srcStart = parseChar(mapping[0]);
-			Character srcEnd = parseChar(mapping[1]);
-			Character destStart;
+			final Character srcStart = parseChar(mapping[0]);
+			final Character srcEnd = parseChar(mapping[1]);
+			final Character destStart;
 			if (isCid) {
 				destStart = (char)Integer.parseInt(mapping[2]);
 			}
@@ -202,42 +202,42 @@ public class ToUnicodeMap extends PDFCMap {
 			this.charRangeMappings.add(new CharRangeMapping(srcStart, srcEnd, destStart));
 		}
 		else {
-			int indexOf1 = line.indexOf(">");
-			String substring1 = line.substring(0, indexOf1+1);
+			final int indexOf1 = line.indexOf(">");
+			final String substring1 = line.substring(0, indexOf1+1);
 			
-			int indexOf2 = line.indexOf("<", indexOf1);
-			int indexOf3 = line.indexOf(">", indexOf2);
-			String substring2 = line.substring(indexOf2, indexOf3+1);
+			final int indexOf2 = line.indexOf("<", indexOf1);
+			final int indexOf3 = line.indexOf(">", indexOf2);
+			final String substring2 = line.substring(indexOf2, indexOf3+1);
 			
-			int indexOf4 = line.indexOf("<", indexOf3);
-			String substring3 = line.substring(indexOf4);
+			final int indexOf4 = line.indexOf("<", indexOf3);
+			final String substring3 = line.substring(indexOf4);
 			
 			if (!substring1.isEmpty() && !substring2.isEmpty() && !substring3.isEmpty()) {
-				Character srcStart = parseChar(substring1);
-				Character srcEnd = parseChar(substring2);
-				Character destStart = parseChar(substring3);
+				final Character srcStart = parseChar(substring1);
+				final Character srcEnd = parseChar(substring2);
+				final Character destStart = parseChar(substring3);
 				this.charRangeMappings.add(new CharRangeMapping(srcStart, srcEnd, destStart));
 			}
 		}
 	}
 
-	private void parseCodeRangeLine(String line) {
-		String[] mapping = line.split(" ");
+	private void parseCodeRangeLine(final String line) {
+		final String[] mapping = line.split(" ");
 		if (mapping.length == 2) {
-			Character srcStart = parseChar(mapping[0]);
-			Character srcEnd = parseChar(mapping[1]);
+			final Character srcStart = parseChar(mapping[0]);
+			final Character srcEnd = parseChar(mapping[1]);
 			this.codeRangeMappings.add(new CodeRangeMapping(srcStart, srcEnd));
 		}
 		else {
-			int indexOf1 = line.indexOf(">");
-			String substring1 = line.substring(0, indexOf1+1);
+			final int indexOf1 = line.indexOf(">");
+			final String substring1 = line.substring(0, indexOf1+1);
 			
-			int indexOf2 = line.indexOf("<", indexOf1);
-			String substring2 = line.substring(indexOf2);
+			final int indexOf2 = line.indexOf("<", indexOf1);
+			final String substring2 = line.substring(indexOf2);
 			
 			if (!substring1.isEmpty() && !substring2.isEmpty()) {
-				Character srcStart = parseChar(substring1);
-				Character srcEnd = parseChar(substring2);
+				final Character srcStart = parseChar(substring1);
+				final Character srcEnd = parseChar(substring2);
 				this.codeRangeMappings.add(new CodeRangeMapping(srcStart, srcEnd));
 			}
 		}
@@ -248,7 +248,7 @@ public class ToUnicodeMap extends PDFCMap {
 	 * @throws IOException 
 	 ************************************************************************/
 	
-	private void parseSingleCharMappingSection(BufferedReader bf, boolean isCID) throws IOException {
+	private void parseSingleCharMappingSection(final BufferedReader bf, final boolean isCID) throws IOException {
 		String line = bf.readLine();
 		while (line != null) {
 			if (line.contains("endbfchar") || line.contains("endcidchar")) {
@@ -264,8 +264,8 @@ public class ToUnicodeMap extends PDFCMap {
 	 * @return
 	 ************************************************************************/
 	
-	private void parseSingleCharMappingLine(String line, boolean isCID) {
-		String[] mapping = line.split(" ");
+	private void parseSingleCharMappingLine(final String line, final boolean isCID) {
+		final String[] mapping = line.split(" ");
 		if (mapping.length == 2) {
 			if (isCID) {
 				this.singleCharMappings.put(parseChar(mapping[0]), (char)Integer.parseInt(mapping[1]));
@@ -278,11 +278,12 @@ public class ToUnicodeMap extends PDFCMap {
 
 	/*************************************************************************
 	 * Parse a string of the format <0F3A> to a char.
-	 * @param charDef
+	 * @param chardef
 	 * @return
 	 ************************************************************************/
 	
-	private Character parseChar(String charDef) {
+	private Character parseChar(final String chardef) {
+		String charDef = chardef;
 		if (charDef.startsWith("<")) {
 			charDef = charDef.substring(1);
 		}
@@ -290,9 +291,9 @@ public class ToUnicodeMap extends PDFCMap {
 			charDef = charDef.substring(0, charDef.length()-1);
 		}
 		try {
-			long result = Long.decode("0x"+charDef);
+			final long result = Long.decode("0x"+charDef);
 			return (char) result;
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return ' ';
 		}
 	}
@@ -306,9 +307,9 @@ public class ToUnicodeMap extends PDFCMap {
 	 ***********************************************************************
 	 */
 	@Override
-	public char map(char src) {
+	public char map(final char src) {
 		Character mappedChar = null;
-		for (CodeRangeMapping codeRange : this.codeRangeMappings) {
+		for (final CodeRangeMapping codeRange : this.codeRangeMappings) {
 			if (codeRange.contains(src)) {
 				mappedChar = this.singleCharMappings.get(src);
 				if (mappedChar == null) {
@@ -329,9 +330,9 @@ public class ToUnicodeMap extends PDFCMap {
 	 * @return
 	 ************************************************************************/
 	
-	private Character lookupInRanges(char src) {
+	private Character lookupInRanges(final char src) {
 		Character mappedChar = null;
-		for (CharRangeMapping rangeMapping : this.charRangeMappings) {
+		for (final CharRangeMapping rangeMapping : this.charRangeMappings) {
 			if (rangeMapping.contains(src)) {
 				mappedChar = rangeMapping.map(src);
 				break;

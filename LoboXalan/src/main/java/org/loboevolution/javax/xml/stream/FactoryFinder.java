@@ -73,16 +73,16 @@ class FactoryFinder {
         // Use try/catch block to support applets, which throws
         // SecurityException out of this code.
         try {
-            String val = ss.getSystemProperty("jaxp.debug");
+            final String val = ss.getSystemProperty("jaxp.debug");
             // Allow simply setting the prop to turn on debug
             debug = val != null && !"false".equals(val);
         }
-        catch (SecurityException se) {
+        catch (final SecurityException se) {
             debug = false;
         }
     }
 
-    private static void dPrint(String msg) {
+    private static void dPrint(final String msg) {
         if (debug) {
             System.err.println("JAXP: " + msg);
         }
@@ -99,8 +99,8 @@ class FactoryFinder {
      *
      * Use bootstrap classLoader if cl = null and useBSClsLoader is true
      */
-    static private Class getProviderClass(String className, ClassLoader cl,
-            boolean doFallback, boolean useBSClsLoader) throws ClassNotFoundException
+    static private Class getProviderClass(final String className, ClassLoader cl,
+                                          final boolean doFallback, final boolean useBSClsLoader) throws ClassNotFoundException
     {
         try {
             if (cl == null) {
@@ -120,7 +120,7 @@ class FactoryFinder {
                 return Class.forName(className, false, cl);
             }
         }
-        catch (ClassNotFoundException e1) {
+        catch (final ClassNotFoundException e1) {
             if (doFallback) {
                 // Use current class loader - should always be bootstrap CL
                 return Class.forName(className, false, FactoryFinder.class.getClassLoader());
@@ -147,7 +147,7 @@ class FactoryFinder {
      * @param doFallback True if the current ClassLoader should be tried as
      * a fallback if the class is not found using cl
      */
-    static <T> T newInstance(Class<T> type, String className, ClassLoader cl, boolean doFallback)
+    static <T> T newInstance(final Class<T> type, final String className, final ClassLoader cl, final boolean doFallback)
         throws FactoryConfigurationError
     {
         return newInstance(type, className, cl, doFallback, false);
@@ -172,8 +172,8 @@ class FactoryFinder {
      * @param useBSClsLoader True if cl=null actually meant bootstrap classLoader. This parameter
      * is needed since DocumentBuilderFactory/SAXParserFactory defined null as context classLoader.
      */
-    static <T> T newInstance(Class<T> type, String className, ClassLoader cl,
-                              boolean doFallback, boolean useBSClsLoader)
+    static <T> T newInstance(final Class<T> type, final String className, ClassLoader cl,
+                             final boolean doFallback, boolean useBSClsLoader)
         throws FactoryConfigurationError
     {
         assert type != null;
@@ -187,22 +187,22 @@ class FactoryFinder {
         }
 
         try {
-            Class<?> providerClass = getProviderClass(className, cl, doFallback, useBSClsLoader);
+            final Class<?> providerClass = getProviderClass(className, cl, doFallback, useBSClsLoader);
             if (!type.isAssignableFrom(providerClass)) {
                 throw new ClassCastException(className + " cannot be cast to " + type.getName());
             }
-            Object instance = providerClass.newInstance();
+            final Object instance = providerClass.newInstance();
             if (debug) {    // Extra check to avoid computing cl strings
                 dPrint("created new instance of " + providerClass +
                        " using ClassLoader: " + cl);
             }
             return type.cast(instance);
         }
-        catch (ClassNotFoundException x) {
+        catch (final ClassNotFoundException x) {
             throw new FactoryConfigurationError(
                 "Provider " + className + " not found", x);
         }
-        catch (Exception x) {
+        catch (final Exception x) {
             throw new FactoryConfigurationError(
                 "Provider " + className + " could not be instantiated: " + x,
                 x);
@@ -222,7 +222,7 @@ class FactoryFinder {
      *
      * Package private so this code can be shared.
      */
-    static <T> T find(Class<T> type, String fallbackClassName)
+    static <T> T find(final Class<T> type, final String fallbackClassName)
         throws FactoryConfigurationError
     {
         return find(type, type.getName(), null, fallbackClassName);
@@ -247,7 +247,7 @@ class FactoryFinder {
      *
      * Package private so this code can be shared.
      */
-    static <T> T find(Class<T> type, String factoryId, ClassLoader cl, String fallbackClassName)
+    static <T> T find(final Class<T> type, final String factoryId, final ClassLoader cl, final String fallbackClassName)
         throws FactoryConfigurationError
     {
         dPrint("find factoryId =" + factoryId);
@@ -266,7 +266,7 @@ class FactoryFinder {
                 return newInstance(type, systemProp, cl, true);
             }
         }
-        catch (SecurityException se) {
+        catch (final SecurityException se) {
             throw new FactoryConfigurationError(
                     "Failed to read factoryId '" + factoryId + "'", se);
         }
@@ -305,7 +305,7 @@ class FactoryFinder {
                 return newInstance(type, factoryClassName, cl, true);
             }
         }
-        catch (Exception ex) {
+        catch (final Exception ex) {
             if (debug) ex.printStackTrace();
         }
 
@@ -357,7 +357,7 @@ class FactoryFinder {
                     }
                 }
             });
-        } catch(ServiceConfigurationError e) {
+        } catch(final ServiceConfigurationError e) {
             // It is not possible to wrap an error directly in
             // FactoryConfigurationError - so we need to wrap the
             // ServiceConfigurationError in a RuntimeException.

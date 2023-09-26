@@ -55,7 +55,7 @@ public class PrintThread extends Thread {
 	 *            the pjob
 	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public PrintThread(PDFPrintPage pages, PrinterJob pjob, PDFViewer dialog) {
+	public PrintThread(final PDFPrintPage pages, final PrinterJob pjob, final PDFViewer dialog) {
 		ptPages = pages;
 		ptPjob = pjob;
 		setName(getClass().getName());
@@ -68,7 +68,7 @@ public class PrintThread extends Thread {
 		try {
 			ptPages.show(ptPjob);
 			ptPjob.print();
-		} catch (PrinterException pe) {
+		} catch (final PrinterException pe) {
 			JOptionPane.showMessageDialog(dialog, "Printing Error: " + pe.getMessage(), "Print Aborted",
 					JOptionPane.ERROR_MESSAGE);
 		}

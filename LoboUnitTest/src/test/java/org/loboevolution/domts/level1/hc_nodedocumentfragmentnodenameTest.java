@@ -55,9 +55,9 @@ public class hc_nodedocumentfragmentnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        String documentFragmentName;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final String documentFragmentName;
         doc = sampleXmlFile("hc_staff.xml");
         docFragment = doc.createDocumentFragment();
         documentFragmentName = docFragment.getNodeName();

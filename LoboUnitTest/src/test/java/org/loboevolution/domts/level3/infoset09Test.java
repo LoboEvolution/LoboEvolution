@@ -49,13 +49,13 @@ public class infoset09Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element elem;
-        Comment newComment;
-        Node lastChild;
-        String nodeName;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Comment newComment;
+        final Node lastChild;
+        final String nodeName;
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         HTMLCollection pList;
         doc = sampleXmlFile("barfoo.xml");

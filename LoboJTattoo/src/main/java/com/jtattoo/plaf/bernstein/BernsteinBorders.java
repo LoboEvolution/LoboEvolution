@@ -75,9 +75,9 @@ public class BernsteinBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Color cHi = MetalLookAndFeel.getControlDarkShadow();
-			Color cLo = ColorHelper.darker(cHi, 8);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Color cHi = MetalLookAndFeel.getControlDarkShadow();
+			final Color cLo = ColorHelper.darker(cHi, 8);
 			JTattooUtilities.draw3DBorder(g, cHi, cLo, x, y, w, h);
 		}
 
@@ -94,7 +94,10 @@ public class BernsteinBorders extends BaseBorders {
 				new Color(247, 225, 0), new Color(243, 216, 0), new Color(229, 187, 0), };
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int wBorder, final int hBorder) {
+			int w = wBorder;
+			int h = hBorder;
+
 			if (!isResizable(c)) {
 				Color cHi = ColorHelper.brighter(BORDER_COLOR, 40);
 				Color cLo = ColorHelper.darker(BORDER_COLOR, 20);
@@ -108,12 +111,12 @@ public class BernsteinBorders extends BaseBorders {
 				}
 				return;
 			}
-			int dt = w / 3;
-			int db = w * 2 / 3;
+			final int dt = w / 3;
+			final int db = w * 2 / 3;
 			h--;
 			w--;
 
-			Color cr = BORDER_COLOR;
+			final Color cr = BORDER_COLOR;
 			g.setColor(FRAME_COLORS[0]);
 			g.drawLine(x, y, x, y + h);
 			g.setColor(FRAME_COLORS[1]);
@@ -253,9 +256,9 @@ public class BernsteinBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			if (model.isEnabled()) {
 				if (model.isRollover()) {
 					JTattooUtilities.draw3DBorder(g, FRAME_HI_COLOR, FRAME_LO_COLOR, x, y, w - 1, h);

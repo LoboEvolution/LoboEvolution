@@ -59,12 +59,12 @@ public class hc_textsplittextfourTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node addressNode;
-        Text textNode;
-        Text splitNode;
-        String value;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node addressNode;
+        final Text textNode;
+        final Text splitNode;
+        final String value;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         addressNode = elementList.item(0);

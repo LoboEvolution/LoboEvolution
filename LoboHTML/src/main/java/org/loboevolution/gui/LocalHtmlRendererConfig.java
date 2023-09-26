@@ -27,34 +27,17 @@ package org.loboevolution.gui;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.loboevolution.common.Urls;
-import org.loboevolution.component.IBrowserFrame;
-import org.loboevolution.component.IBrowserPanel;
-import org.loboevolution.component.IToolBar;
 import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.config.HtmlRendererConfig;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLLinkElement;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.input.FormInput;
-import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.info.TabInfo;
 import org.loboevolution.net.Cookie;
 import org.loboevolution.net.HttpNetwork;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.Proxy;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.*;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Data
 @AllArgsConstructor
@@ -62,27 +45,27 @@ public class LocalHtmlRendererConfig implements HtmlRendererConfig {
 
 
     @Override
-    public void deleteInput(String text, String baseUrl) {
+    public void deleteInput(final String text, final String baseUrl) {
 
     }
 
     @Override
-    public void insertLogin(String type, String value, String baseUrl, boolean navigationEnabled) {
+    public void insertLogin(final String type, final String value, final String baseUrl, final boolean navigationEnabled) {
 
     }
 
     @Override
-    public String getSourceCache(String baseUrl, String type, boolean test) {
+    public String getSourceCache(final String baseUrl, final String type, final boolean test) {
         return HttpNetwork.sourceResponse(baseUrl, type);
     }
 
     @Override
-    public List<String> getStyles(String href, String baseUrl) {
+    public List<String> getStyles(final String href, final String baseUrl) {
         return new ArrayList<>();
     }
 
     @Override
-    public void insertStyle(String title, String href, String baseUrl, int enable) {
+    public void insertStyle(final String title, final String href, final String baseUrl, final int enable) {
 
     }
 
@@ -92,31 +75,31 @@ public class LocalHtmlRendererConfig implements HtmlRendererConfig {
     }
 
     @Override
-    public int countStorage(int index) {
+    public int countStorage(final int index) {
         return 0;
     }
 
     @Override
-    public Map<String, String> getMapStorage(int index, int i) {
+    public Map<String, String> getMapStorage(final int index, final int i) {
         return new HashMap<>();
     }
 
     @Override
-    public Object getValue(String key, int i, int index) {
+    public Object getValue(final String key, final int i, final int index) {
         return null;
     }
 
     @Override
-    public void deleteStorage(String keyName, int i, int index) {
+    public void deleteStorage(final String keyName, final int i, final int index) {
     }
 
     @Override
-    public void deleteStorage(int session, int index) {
+    public void deleteStorage(final int session, final int index) {
 
     }
 
     @Override
-    public void insertStorage(String keyName, String keyValue, int i, int index) {
+    public void insertStorage(final String keyName, final String keyValue, final int i, final int index) {
 
     }
 
@@ -126,27 +109,27 @@ public class LocalHtmlRendererConfig implements HtmlRendererConfig {
     }
 
     @Override
-    public List<String> autocomplete(String type, String text, String baseUrl) {
+    public List<String> autocomplete(final String type, final String text, final String baseUrl) {
         return new ArrayList<>();
     }
 
     @Override
-    public URL getResourceFile(String fileName) {
+    public URL getResourceFile(final String fileName) {
         return  DesktopConfig.getResourceFile(fileName);
     }
 
     @Override
-    public boolean isVisited(String href) {
+    public boolean isVisited(final String href) {
         return false;
     }
 
     @Override
-    public void saveCookie(String toString, String cookieSpec) {
+    public void saveCookie(final String toString, final String cookieSpec) {
 
     }
 
     @Override
-    public List<Cookie> getCookies(String host, String path) {
+    public List<Cookie> getCookies(final String host, final String path) {
         return new ArrayList<>();
     }
 

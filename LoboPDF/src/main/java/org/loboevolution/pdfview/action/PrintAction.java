@@ -49,7 +49,7 @@ public class PrintAction extends AbstractAction {
 	 *
 	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public PrintAction(PDFViewer dialog) {
+	public PrintAction(final PDFViewer dialog) {
 		super("Print...", dialog.getIcon("/org/loboevolution/images/print.png"));
 		this.dialog = dialog;
 	}

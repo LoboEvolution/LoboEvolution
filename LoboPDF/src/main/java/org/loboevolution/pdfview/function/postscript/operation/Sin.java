@@ -41,8 +41,8 @@ final class Sin implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck
 	 */
-	public void eval(Stack<Object> environment) {
-	    double radians = Math.toRadians((Double)environment.pop());
+	public void eval(final Stack<Object> environment) {
+	    final double radians = Math.toRadians((Double)environment.pop());
 	    environment.push(Math.toDegrees(Math.sin(radians)));
 	}
 }

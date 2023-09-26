@@ -62,7 +62,7 @@ public class isSupported12Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        java.util.List features = new java.util.ArrayList();
+        final java.util.List features = new java.util.ArrayList();
         features.add("Core");
         features.add("XML");
         features.add("HTML");
@@ -79,8 +79,8 @@ public class isSupported12Test extends LoboUnitTest {
         features.add("Traversal");
         features.add("bogus.bogus.bogus");
 
-        Document doc;
-        Node rootNode;
+        final Document doc;
+        final Node rootNode;
         String featureElement;
         boolean state;
         doc = sampleXmlFile("staff.xml");

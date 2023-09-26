@@ -53,7 +53,7 @@ public class AluminiumSplitPaneDivider extends BaseSplitPaneDivider {
 	 *
 	 * @param ui a {@link com.jtattoo.plaf.aluminium.AluminiumSplitPaneUI} object.
 	 */
-	public AluminiumSplitPaneDivider(AluminiumSplitPaneUI ui) {
+	public AluminiumSplitPaneDivider(final AluminiumSplitPaneUI ui) {
 		super(ui);
 	}
 
@@ -64,9 +64,9 @@ public class AluminiumSplitPaneDivider extends BaseSplitPaneDivider {
 			super.paint(g);
 		} else {
 			AluminiumUtils.fillComponent(g, this);
-			Graphics2D g2D = (Graphics2D) g;
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f);
 			g2D.setComposite(alpha);
 			super.paint(g);
 			g2D.setComposite(composite);

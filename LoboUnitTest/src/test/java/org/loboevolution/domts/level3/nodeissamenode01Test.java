@@ -45,9 +45,9 @@ import static org.junit.Assert.assertFalse;
 public class nodeissamenode01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc1;
-        Document doc2;
-        boolean isSame;
+        final Document doc1;
+        final Document doc2;
+        final boolean isSame;
         doc1 = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         isSame = doc1.isSameNode(doc2);

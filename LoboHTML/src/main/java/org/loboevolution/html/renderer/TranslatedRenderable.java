@@ -311,7 +311,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
 
     /** {@inheritDoc} */
     @Override
-    public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
+    public boolean extractSelectionText(final StringBuilder buffer, final boolean inSelection, final RenderableSpot startPoint, final RenderableSpot endPoint) {
         return translatedChild.extractSelectionText(buffer, inSelection, startPoint, endPoint);
     }
 
@@ -356,7 +356,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
 
     /** {@inheritDoc} */
     @Override
-    public void updateWidgetBounds(int guiX, int guiY) {
+    public void updateWidgetBounds(final int guiX, final int guiY) {
         if (translatedChild instanceof RCollection) {
             final RCollection tc = (RCollection) translatedChild;
             tc.updateWidgetBounds(guiX, guiY);
@@ -394,7 +394,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
 
     /** {@inheritDoc} */
     @Override
-    public BoundableRenderable getRenderable(int x, int y) {
+    public BoundableRenderable getRenderable(final int x, final int y) {
         if (translatedChild instanceof RCollection) {
             final RCollection tc = (RCollection) translatedChild;
             return tc.getRenderable(x, y);

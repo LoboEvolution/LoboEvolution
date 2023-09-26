@@ -62,14 +62,14 @@ public class ImagePageUI extends AbstractToolsUI {
      *
      * @param frame a {@link BrowserFrame} object.
      */
-    public ImagePageUI(BrowserFrame frame) {
+    public ImagePageUI(final BrowserFrame frame) {
         final ToolBar toolbar = frame.getToolbar();
         final Document doc = NavigationManager.getDocument(toolbar.getAddressBar().getText());
         final HtmlContent htmlcontent = new HtmlContent(doc);
         add(mediaContent(htmlcontent.getMediaList()));
     }
 
-    private Component mediaContent(List<MetaInfo> mediaList) {
+    private Component mediaContent(final List<MetaInfo> mediaList) {
         try {
             final Object[] columnNames = { "" };
             final List<String[]> values = new ArrayList<>();
@@ -99,7 +99,7 @@ public class ImagePageUI extends AbstractToolsUI {
                 for (final int element : selectedRow) {
                     for (final int selectedColumn : selectedColumns) {
                         final String href = (String) jtable.getValueAt(element, selectedColumn);
-                        HTMLImageElementImpl img = new HTMLImageElementImpl();
+                        final HTMLImageElementImpl img = new HTMLImageElementImpl();
                         img.setSrc(href);
                         jPanelImg.add(new JLabel(new ImageIcon(HttpNetwork.getImage(img, new TimingInfo(), false))));
                         jPanelImg.repaint();

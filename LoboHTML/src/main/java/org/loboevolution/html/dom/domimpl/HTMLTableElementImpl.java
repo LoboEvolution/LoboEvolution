@@ -29,7 +29,6 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
@@ -38,7 +37,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableRenderState;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -75,14 +73,14 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	public HTMLElement createCaption() {
 		final Document doc = this.document;
 		if (doc == null ) return null;
-		HTMLElement newChild = (HTMLElement) doc.createElement("caption");
+		final HTMLElement newChild = (HTMLElement) doc.createElement("caption");
 		appendChild(newChild);
 		return newChild;
 	}
 	
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new TableRenderState(prevRenderState, this);
 	}
 
@@ -91,7 +89,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	public HTMLElement createTFoot() {		
 		final Document doc = this.document;
 		if (doc == null ) return null;
-		HTMLElement newChild = (HTMLElement) doc.createElement("tfoot");
+		final HTMLElement newChild = (HTMLElement) doc.createElement("tfoot");
 		appendChild(newChild);
 		return newChild;
 	}
@@ -101,7 +99,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	public HTMLElement createTHead() {
 		final Document doc = this.document;
 		if (doc == null ) return null;
-		HTMLElement newChild = (HTMLElement) doc.createElement("thead");
+		final HTMLElement newChild = (HTMLElement) doc.createElement("thead");
 		appendChild(newChild);
 		return newChild;
 	}
@@ -111,7 +109,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	public HTMLElement createTBody() {		
 		final Document doc = this.document;
 		if (doc == null ) return null;
-		HTMLElement newChild = (HTMLElement) doc.createElement("tbody");
+		final HTMLElement newChild = (HTMLElement) doc.createElement("tbody");
 		appendChild(newChild);
 		return newChild;
 	}
@@ -124,10 +122,10 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
 	/** {@inheritDoc} */
 	@Override
-	public void deleteRow(int index) {
+	public void deleteRow(final int index) {
 		int trcount = 0;
-		for (Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
-			Node node = i.next();
+		for (final Iterator<Node> i = nodeList.iterator(); i.hasNext();) {
+			final Node node = i.next();
 			if ("TR".equalsIgnoreCase(node.getNodeName())) {
 				if (trcount == index) {
 					removeChildAt(nodeList.indexOf(node));
@@ -171,9 +169,9 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	/** {@inheritDoc} */
 	@Override
 	public String getBorder() {
-		boolean isBorder = hasAttribute("border");
+		final boolean isBorder = hasAttribute("border");
 		if (isBorder) {
-			String border = getAttribute("border");
+			final String border = getAttribute("border");
 			return "border".equals(border) ? "1" : border;
 		}
 		return null;
@@ -220,7 +218,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	@Override
 	public HTMLTableCaptionElement getCaption() {
 		if (this.caption == null) {
-			Node node = getFirstChildByFilter(new ElementFilter("CAPTION"));
+			final Node node = getFirstChildByFilter(new ElementFilter("CAPTION"));
 			if (node == null) {
 				return null;
 			} else {
@@ -240,7 +238,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	@Override
 	public HTMLTableSectionElement gettFoot() {
 		if (this.tfoot == null) {
-			Node node = getFirstChildByFilter(new ElementFilter("TFOOT"));
+			final Node node = getFirstChildByFilter(new ElementFilter("TFOOT"));
 			if (node == null) {
 				return null;
 			} else {
@@ -255,7 +253,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	@Override
 	public HTMLTableSectionElement gettHead() {
 		if (this.thead == null) {
-			Node node = getFirstChildByFilter(new ElementFilter("THEAD"));
+			final Node node = getFirstChildByFilter(new ElementFilter("THEAD"));
 			if (node == null) {
 				return null;
 			} else {
@@ -279,11 +277,11 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	 * the row is appended as the last row.
 	 */
 	@Override
-	public HTMLTableRowElement insertRow(int index) throws Exception {
+	public HTMLTableRowElement insertRow(final int index) throws Exception {
 		return this.insertRow(index, "TR");
 	}
 	
-	private HTMLTableRowElementImpl insertRow(Object objIndex, String tagName)  throws Exception {
+	private HTMLTableRowElementImpl insertRow(final Object objIndex, final String tagName)  throws Exception {
 		final Document doc = this.document;
 		if (doc == null) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
@@ -303,9 +301,9 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 		
 		if (index  == 0 || index  == - 1) {
 			appendChild(rowElement);
-			AtomicInteger cellIndex = new AtomicInteger(-1);
+			final AtomicInteger cellIndex = new AtomicInteger(-1);
 			if (index == -1) {				
-				NodeListImpl childNodes = (NodeListImpl) getChildNodes();
+				final NodeListImpl childNodes = (NodeListImpl) getChildNodes();
 				childNodes.forEach(node -> {
 					if (node instanceof HTMLTableRowElement) {
 						cellIndex.incrementAndGet();
@@ -316,7 +314,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 			return rowElement;
 		}
 
-		AtomicInteger trcount = new AtomicInteger();
+		final AtomicInteger trcount = new AtomicInteger();
 		nodeList.forEach(node -> {
 			if (node instanceof HTMLTableRowElement) {
 				trcount.incrementAndGet();
@@ -347,73 +345,73 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	
 	/** {@inheritDoc} */
 	@Override
-	public void setAlign(String align) {
+	public void setAlign(final String align) {
 		setAttribute("align", align);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBgColor(String bgColor) {
+	public void setBgColor(final String bgColor) {
 		setAttribute("bgcolor", bgColor);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBorder(String border) {
+	public void setBorder(final String border) {
 		setAttribute("border", border);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCaption(HTMLTableCaptionElement caption) {
+	public void setCaption(final HTMLTableCaptionElement caption) {
 		this.caption = caption;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCellPadding(String cellPadding) {
+	public void setCellPadding(final String cellPadding) {
 		setAttribute("cellpadding", cellPadding);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCellSpacing(String cellSpacing) {
+	public void setCellSpacing(final String cellSpacing) {
 		setAttribute("cellspacing", cellSpacing);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFrame(String frame) {
+	public void setFrame(final String frame) {
 		setAttribute("frame", frame);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRules(String rules) {
+	public void setRules(final String rules) {
 		setAttribute("rules", rules);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSummary(String summary) {
+	public void setSummary(final String summary) {
 		setAttribute("summary", summary);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void settFoot(HTMLTableSectionElement tFoot) throws DOMException {
+	public void settFoot(final HTMLTableSectionElement tFoot) throws DOMException {
 		this.tfoot = tFoot;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void settHead(HTMLTableSectionElement tHead) throws DOMException {
+	public void settHead(final HTMLTableSectionElement tHead) throws DOMException {
 		this.thead = tHead;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(String width) {
+	public void setWidth(final String width) {
 		setAttribute("width", width);
 	}
 

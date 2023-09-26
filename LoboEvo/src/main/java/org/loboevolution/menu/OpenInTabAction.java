@@ -59,7 +59,7 @@ public class OpenInTabAction extends AbstractAction {
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 * @param address a {@link java.lang.String} object.
 	 */
-	public OpenInTabAction(BrowserFrame frame, String address) {
+	public OpenInTabAction(final BrowserFrame frame, final String address) {
 		this.frame = frame;
 		this.address = address;
 	}

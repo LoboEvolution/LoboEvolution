@@ -379,7 +379,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
         add(", oSelect.options[2]", false, true, messages);
     }
 
-    private void add(final String param, final boolean empty, final boolean multi, String[] messages) {
+    private void add(final String param, final boolean empty, final boolean multi, final String[] messages) {
         String html
                 = "<html>\n"
                 + "<head>\n"
@@ -488,7 +488,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
         get("10", false, messages);
     }
 
-    private void get(final String pos, final boolean empty, String[] messages) {
+    private void get(final String pos, final boolean empty, final String[] messages) {
         String html
                 = "<html>\n"
                 + "<head>\n"
@@ -700,7 +700,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
         put("10", "opt", false, true, messages);
     }
 
-    private void put(final String pos, final String param, final boolean empty, final boolean multi, String[] messages) {
+    private void put(final String pos, final String param, final boolean empty, final boolean multi, final String[] messages) {
         String html
                 = "<html>\n"
                 + "<head>\n"
@@ -882,7 +882,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
         remove("10", false, true, messages);
     }
 
-    private void remove(final String pos, final boolean empty, final boolean multi, String[] messages) {
+    private void remove(final String pos, final boolean empty, final boolean multi, final String[] messages) {
         String html
                 = "<html>\n"
                 + "<head>\n"
@@ -1009,7 +1009,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
         setLength("10", messages);
     }
 
-    private void setLength(final String lenght, String[] messages) {
+    private void setLength(final String lenght, final String[] messages) {
         final String html
                 = "<html><head><title>foo</title><script>\n"
                 + "function test() {\n"

@@ -56,9 +56,9 @@ public class nodedocumentfragmentnodetypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment documentFragmentNode;
-        int nodeType;
+        final Document doc;
+        final DocumentFragment documentFragmentNode;
+        final int nodeType;
         doc = sampleXmlFile("staff.xml");
         documentFragmentNode = doc.createDocumentFragment();
         nodeType = documentFragmentNode.getNodeType();

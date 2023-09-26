@@ -57,7 +57,7 @@ public class TextRegionHuffmanFlags extends Flags {
 	public static final String SB_HUFF_RSIZE = "SB_HUFF_RSIZE";
 
 	/** {@inheritDoc} */
-	public void setFlags(int flagsAsInt) {
+	public void setFlags(final int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract SB_HUFF_FS */

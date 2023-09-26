@@ -35,7 +35,6 @@ import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -58,9 +57,9 @@ public class documenttypegetnotationstypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notationList;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notationList;
         Node notation;
         int notationType;
         doc = sampleXmlFile("staff.xml");

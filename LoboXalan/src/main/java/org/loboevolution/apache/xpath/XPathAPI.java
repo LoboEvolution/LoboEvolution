@@ -59,7 +59,7 @@ public class XPathAPI {
    * @return The first node found that matches the XPath, or null.
    * @throws TransformerException in case of error
    */
-  public static Node selectSingleNode(Node contextNode, String str) throws TransformerException {
+  public static Node selectSingleNode(final Node contextNode, final String str) throws TransformerException {
     return selectSingleNode(contextNode, str, contextNode);
   }
 
@@ -73,11 +73,11 @@ public class XPathAPI {
    * @return The first node found that matches the XPath, or null.
    * @throws TransformerException in case of error
    */
-  public static Node selectSingleNode(Node contextNode, String str, Node namespaceNode)
+  public static Node selectSingleNode(final Node contextNode, final String str, final Node namespaceNode)
       throws TransformerException {
 
     // Have the XObject return its result as a NodeSetDTM.
-    NodeIterator nl = selectNodeIterator(contextNode, str, namespaceNode);
+    final NodeIterator nl = selectNodeIterator(contextNode, str, namespaceNode);
 
     // Return the first node, or null
     return nl.nextNode();
@@ -92,7 +92,7 @@ public class XPathAPI {
    * @return A NodeIterator, should never be null.
    * @throws TransformerException in case of error
    */
-  public static NodeIterator selectNodeIterator(Node contextNode, String str)
+  public static NodeIterator selectNodeIterator(final Node contextNode, final String str)
       throws TransformerException {
     return selectNodeIterator(contextNode, str, contextNode);
   }
@@ -107,11 +107,11 @@ public class XPathAPI {
    * @return A NodeIterator, should never be null.
    * @throws TransformerException in case of error
    */
-  public static NodeIterator selectNodeIterator(Node contextNode, String str, Node namespaceNode)
+  public static NodeIterator selectNodeIterator(final Node contextNode, final String str, final Node namespaceNode)
       throws TransformerException {
 
     // Execute the XPath, and have it return the result
-    XObject list = eval(contextNode, str, namespaceNode);
+    final XObject list = eval(contextNode, str, namespaceNode);
 
     // Have the XObject return its result as a NodeSetDTM.
     return list.nodeset();
@@ -126,7 +126,7 @@ public class XPathAPI {
    * @return A NodeIterator, should never be null.
    * @throws TransformerException in case of error
    */
-  public static NodeList selectNodeList(Node contextNode, String str) throws TransformerException {
+  public static NodeList selectNodeList(final Node contextNode, final String str) throws TransformerException {
     return selectNodeList(contextNode, str, contextNode);
   }
 
@@ -140,11 +140,11 @@ public class XPathAPI {
    * @return A NodeIterator, should never be null.
    * @throws TransformerException in case of error
    */
-  public static NodeList selectNodeList(Node contextNode, String str, Node namespaceNode)
+  public static NodeList selectNodeList(final Node contextNode, final String str, final Node namespaceNode)
       throws TransformerException {
 
     // Execute the XPath, and have it return the result
-    XObject list = eval(contextNode, str, namespaceNode);
+    final XObject list = eval(contextNode, str, namespaceNode);
 
     // Return a NodeList.
     return list.nodelist();
@@ -164,7 +164,7 @@ public class XPathAPI {
    * @see org.loboevolution.apache.xpath.objects.XString
    * @throws TransformerException in case of error
    */
-  public static XObject eval(Node contextNode, String str) throws TransformerException {
+  public static XObject eval(final Node contextNode, final String str) throws TransformerException {
     return eval(contextNode, str, contextNode);
   }
 
@@ -185,7 +185,7 @@ public class XPathAPI {
    * @see org.loboevolution.apache.xpath.objects.XString
    * @throws TransformerException in case of error
    */
-  public static XObject eval(Node contextNode, String str, Node namespaceNode)
+  public static XObject eval(final Node contextNode, final String str, final Node namespaceNode)
       throws TransformerException {
 
     // Since we don't have a XML Parser involved here, install some default support
@@ -195,24 +195,24 @@ public class XPathAPI {
     // XPathContext should be done away with.)
     // Create an XPathContext that doesn't support pushing and popping of
     // variable resolution scopes. Sufficient for simple XPath 1.0 expressions.
-    XPathContext xpathSupport = new XPathContext(false);
+    final XPathContext xpathSupport = new XPathContext(false);
 
     // Create an object to resolve namespace prefixes.
     // XPath namespaces are resolved from the input context node's document element
     // if it is a root node, or else the current context node (for lack of a better
     // resolution space, given the simplicity of this sample code).
-    PrefixResolverDefault prefixResolver =
+    final PrefixResolverDefault prefixResolver =
         new PrefixResolverDefault(
             (namespaceNode.getNodeType() == Node.DOCUMENT_NODE)
                 ? ((Document) namespaceNode).getDocumentElement()
                 : namespaceNode);
 
     // Create the XPath object.
-    XPath xpath = new XPath(str, prefixResolver, XPath.SELECT, null);
+    final XPath xpath = new XPath(str, prefixResolver, XPath.SELECT, null);
 
     // Execute the XPath, and have it return the result
     // return xpath.execute(xpathSupport, contextNode, prefixResolver);
-    int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
+    final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
 
     return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
   }
@@ -235,7 +235,7 @@ public class XPathAPI {
    * @see org.loboevolution.apache.xpath.objects.XString
    * @throws TransformerException in case of error
    */
-  public static XObject eval(Node contextNode, String str, PrefixResolver prefixResolver)
+  public static XObject eval(final Node contextNode, final String str, final PrefixResolver prefixResolver)
       throws TransformerException {
 
     // Since we don't have a XML Parser involved here, install some default support
@@ -244,14 +244,14 @@ public class XPathAPI {
     // because XPathContext is weak in a number of areas... perhaps
     // XPathContext should be done away with.)
     // Create the XPath object.
-    XPath xpath = new XPath(str, prefixResolver, XPath.SELECT, null);
+    final XPath xpath = new XPath(str, prefixResolver, XPath.SELECT, null);
 
     // Create an XPathContext that doesn't support pushing and popping of
     // variable resolution scopes. Sufficient for simple XPath 1.0 expressions.
-    XPathContext xpathSupport = new XPathContext(false);
+    final XPathContext xpathSupport = new XPathContext(false);
 
     // Execute the XPath, and have it return the result
-    int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
+    final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
 
     return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
   }

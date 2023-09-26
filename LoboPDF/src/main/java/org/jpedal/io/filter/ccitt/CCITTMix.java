@@ -32,8 +32,8 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 
 	private int fillBits = 0;
 
-	public CCITTMix(byte[] rawData, int width, int height,
-					boolean blackIsOne, boolean isByteAligned) {
+	public CCITTMix(final byte[] rawData, final int width, final int height,
+                    final boolean blackIsOne, final boolean isByteAligned) {
 
 		super(rawData, width, height, blackIsOne, isByteAligned);
 
@@ -50,7 +50,7 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 			int[] prev = new int[width + 1];
 			int[] curr = new int[width + 1];
 
-			int[] currentChangeElement = new int[2];
+			final int[] currentChangeElement = new int[2];
 
 			// The data must start with an EOL code
 			if( readEOL( true ) != 1 )
@@ -67,7 +67,7 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 				if( readEOL( false ) == 0 ){
 
 					//swap
-					int[] temp = prev;
+					final int[] temp = prev;
 					prev = curr;
 					curr = temp;
 
@@ -79,12 +79,12 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 					decode1DRun(curr);
 				}
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 		//put it all together
-		byte[] buffer=creatOutputFromBitset();
+		final byte[] buffer=creatOutputFromBitset();
 
 		//by default blackIs1 is false so black pixels do not need to be set
 		// invert image if needed -
@@ -97,7 +97,7 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 		return buffer;
 	}
 
-	void decode1DRun(int[] curr) throws Exception
+	void decode1DRun(final int[] curr) throws Exception
 	{
 		int bitOffset=0;
 
@@ -137,7 +137,7 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 
 					bitReached=bitReached- (4 - bits);
 				}else if( bits == 0 || bits == 15){ // ERROR
-					throw new Exception(( "1Derror" ) );
+					throw new Exception(("1Derror" ) );
 				}else{
 					code = ( entry >>> 5 ) & 0x07ff;
 					bitOffset += code;
@@ -193,7 +193,7 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 						bitReached=bitReached- (4 - bits);
 					}else if( bits == 15 )
 						// EOL code
-						throw new IOException(( "1D error" ) );
+						throw new IOException(("1D error" ) );
 					else{
 						out.set(outPtr,outPtr+ code,true);
 						outPtr=outPtr+ code;
@@ -238,15 +238,15 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 		curr[changingElemSize++] = bitOffset;
 	}
 
-	private int readEOL( boolean isFirstEOL ) throws IOException{
+	private int readEOL(final boolean isFirstEOL ) throws IOException{
 
 		if( fillBits == 0 ){
-			int next12Bits = get1DBits( 12 );
+			final int next12Bits = get1DBits( 12 );
 
 			bitReached=bitReached+12;
 			if( isFirstEOL && next12Bits == 0 ){
 
-				int aa=get1DBits( 4 );
+				final int aa=get1DBits( 4 );
 
 				bitReached=bitReached+4;
 
@@ -256,20 +256,20 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 				}
 			}
 			if( next12Bits != 1 )
-				throw new IOException(( "EOL error1" ) );
+				throw new IOException(("EOL error1" ) );
 		}else if( fillBits == 1 ){
 
-			int bitsLeft = bitReached & 7;
+			final int bitsLeft = bitReached & 7;
 
-			int rr=get1DBits( bitsLeft );
+			final int rr=get1DBits( bitsLeft );
 
 			bitReached=bitReached+bitsLeft;
 
 			if( rr != 0 )
-				throw new IOException(( "EOL error2" ) );
+				throw new IOException(("EOL error2" ) );
 
 			if( bitsLeft < 4 ){
-				int rr2=get1DBits( 8 );
+				final int rr2=get1DBits( 8 );
 
 				bitReached=bitReached+8;
 
@@ -291,7 +291,7 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 			}
 		}
 
-		int r= get1DBits( 1 );
+		final int r= get1DBits( 1 );
 
 		bitReached=bitReached+1;
 		return r;

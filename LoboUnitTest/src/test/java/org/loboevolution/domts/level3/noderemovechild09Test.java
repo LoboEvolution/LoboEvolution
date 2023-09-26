@@ -47,11 +47,11 @@ import static org.junit.Assert.assertEquals;
 public class noderemovechild09Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        ProcessingInstruction pi;
-        ProcessingInstruction removedPi;
-        String target;
-        Node appendedChild;
+        final Document doc;
+        final ProcessingInstruction pi;
+        final ProcessingInstruction removedPi;
+        final String target;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         pi = doc.createProcessingInstruction("PIT", "PID");
         appendedChild = doc.appendChild(pi);

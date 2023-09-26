@@ -49,13 +49,13 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild26Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
-        Element docElem;
-        Element elem;
-        Node firstChild;
+        final Document doc;
+        final HTMLCollection childList;
+        final Element docElem;
+        final Element elem;
+        final Node firstChild;
         String nodeName;
-        Node replaced;
+        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         childList = doc.getElementsByTagName("p");
@@ -66,7 +66,7 @@ public class nodereplacechild26Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = elem.replaceChild(docElem, firstChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

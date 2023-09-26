@@ -48,9 +48,9 @@ import static org.junit.Assert.assertTrue;
 public class domstringlistcontains01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMStringList paramList;
-        DOMConfiguration domConfig;
+        final Document doc;
+        final DOMStringList paramList;
+        final DOMConfiguration domConfig;
         boolean contains;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();

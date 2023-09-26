@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -57,16 +56,16 @@ public class importNode12Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        DocumentType doc1Type;
-        NamedNodeMap entityList;
-        EntityReference entity2;
-        EntityReference entity1;
-        Document ownerDocument;
-        DocumentType docType;
-        String system;
-        String entityName;
+        final Document doc;
+        final Document aNewDoc;
+        final DocumentType doc1Type;
+        final NamedNodeMap entityList;
+        final EntityReference entity2;
+        final EntityReference entity1;
+        final Document ownerDocument;
+        final DocumentType docType;
+        final String system;
+        final String entityName;
         Node child;
         String childName;
         doc = sampleXmlFile("staffNS.xml");

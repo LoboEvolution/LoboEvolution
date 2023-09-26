@@ -50,9 +50,9 @@ public class hc_elementgettagnameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element root;
-        String tagname;
+        final Document doc;
+        final Element root;
+        final String tagname;
         doc = sampleXmlFile("hc_staff.xml");
         root = doc.getDocumentElement();
         tagname = root.getTagName();

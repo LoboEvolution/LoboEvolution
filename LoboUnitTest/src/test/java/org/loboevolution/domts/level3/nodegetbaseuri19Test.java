@@ -53,13 +53,13 @@ public class nodegetbaseuri19Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        String baseURI;
+        final Document doc;
+        final String baseURI;
         String entBaseURI;
-        EntityReference entRef;
-        HTMLCollection pList;
-        Element pElem;
-        Text textNode;
+        final EntityReference entRef;
+        final HTMLCollection pList;
+        final Element pElem;
+        final Text textNode;
         doc = sampleXmlFile("external_barfoo.xml");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);

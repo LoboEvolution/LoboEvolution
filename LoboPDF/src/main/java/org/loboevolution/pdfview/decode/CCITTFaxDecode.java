@@ -33,7 +33,6 @@ import org.jpedal.io.filter.ccitt.CCITT1D;
 import org.jpedal.io.filter.ccitt.CCITT2D;
 import org.jpedal.io.filter.ccitt.CCITTDecoder;
 import org.jpedal.io.filter.ccitt.CCITTMix;
-import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFObject;
 
 /**
@@ -50,10 +49,10 @@ public class CCITTFaxDecode {
 	 * @return a {@link java.nio.ByteBuffer} object.
 	 * @throws java.io.IOException if any.
 	 */
-	protected static ByteBuffer decode(PDFObject dict, ByteBuffer buf,
-            PDFObject params) throws IOException {
+	protected static ByteBuffer decode(final PDFObject dict, final ByteBuffer buf,
+                                       final PDFObject params) throws IOException {
 
-		byte[] bytes = new byte[buf.remaining()];
+		final byte[] bytes = new byte[buf.remaining()];
 	    buf.get(bytes, 0, bytes.length);
 		return ByteBuffer.wrap(decode(dict, bytes));
 	}
@@ -67,7 +66,7 @@ public class CCITTFaxDecode {
 	 * @return an array of {@link byte} objects.
 	 * @throws java.io.IOException if any.
 	 */
-	protected static byte[] decode(PDFObject dict, byte[] source) throws IOException {
+	protected static byte[] decode(final PDFObject dict, final byte[] source) throws IOException {
 		int width = 1728;
 		PDFObject widthDef = dict.getDictRef("Width");
 		if (widthDef == null) {
@@ -85,13 +84,13 @@ public class CCITTFaxDecode {
 			height = heightDef.getIntValue();
 		}
 
-		int columns = getOptionFieldInt(dict, "Columns", width);
-		int rows = getOptionFieldInt(dict, "Rows", height);
-		int k = getOptionFieldInt(dict, "K", 0);
-		boolean align = getOptionFieldBoolean(dict, "EncodedByteAlign", false);
-		boolean blackIsOne = getOptionFieldBoolean(dict, "BlackIs1", false);
+		final int columns = getOptionFieldInt(dict, "Columns", width);
+		final int rows = getOptionFieldInt(dict, "Rows", height);
+		final int k = getOptionFieldInt(dict, "K", 0);
+		final boolean align = getOptionFieldBoolean(dict, "EncodedByteAlign", false);
+		final boolean blackIsOne = getOptionFieldBoolean(dict, "BlackIs1", false);
 
-		CCITTDecoder decoder;
+		final CCITTDecoder decoder;
 		if (k == 0){
 			// Pure 1D decoding, group3
 			decoder = new CCITT1D(source, columns, rows, blackIsOne, align);
@@ -107,7 +106,7 @@ public class CCITTFaxDecode {
 		byte[] result;
 		try {
 			result = decoder.decode();
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			System.out.println("Error decoding CCITTFax image k: "+ k);
 			if (k >= 0) {
 				result = new CCITT2D(source, columns, rows, blackIsOne, align).decode();
@@ -128,14 +127,14 @@ public class CCITTFaxDecode {
 	 * @return a int.
 	 * @throws java.io.IOException if any.
 	 */
-	public static int getOptionFieldInt(PDFObject dict, String name, int defaultValue) throws IOException {
+	public static int getOptionFieldInt(final PDFObject dict, final String name, final int defaultValue) throws IOException {
 
-        PDFObject dictParams = getDecodeParams(dict);
+        final PDFObject dictParams = getDecodeParams(dict);
 
 		if (dictParams == null) {
 			return defaultValue;
 		}
-		PDFObject value = dictParams.getDictRef(name);
+		final PDFObject value = dictParams.getDictRef(name);
 		if (value == null) {
 			return defaultValue;
 		}
@@ -151,22 +150,22 @@ public class CCITTFaxDecode {
 	 * @return a boolean.
 	 * @throws java.io.IOException if any.
 	 */
-	public static boolean getOptionFieldBoolean(PDFObject dict, String name, boolean defaultValue) throws IOException {
+	public static boolean getOptionFieldBoolean(final PDFObject dict, final String name, final boolean defaultValue) throws IOException {
 
-        PDFObject dictParams = getDecodeParams(dict);
+        final PDFObject dictParams = getDecodeParams(dict);
 
 		if (dictParams == null) {
 			return defaultValue;
 		}
-		PDFObject value = dictParams.getDictRef(name);
+		final PDFObject value = dictParams.getDictRef(name);
 		if (value == null) {
 			return defaultValue;
 		}
 		return value.getBooleanValue();
 	}
 
-    private static PDFObject getDecodeParams(PDFObject dict) throws IOException {
-        PDFObject decdParams = dict.getDictRef("DecodeParms");
+    private static PDFObject getDecodeParams(final PDFObject dict) throws IOException {
+        final PDFObject decdParams = dict.getDictRef("DecodeParms");
         if (decdParams != null && decdParams.getType() == PDFObject.ARRAY) {
             return decdParams.getArray()[0];
         }

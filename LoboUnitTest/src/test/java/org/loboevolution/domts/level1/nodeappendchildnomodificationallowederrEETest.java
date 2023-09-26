@@ -60,10 +60,10 @@ public class nodeappendchildnomodificationallowederrEETest extends LoboUnitTest 
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node entRef;
-        Node createdNode;
-        Node appendedNode;
+        final Document doc;
+        final Node entRef;
+        final Node createdNode;
+        final Node appendedNode;
         doc = sampleXmlFile("staff.xml");
         entRef = doc.createEntityReference("ent4");
         assertNotNull("createdEntRefNotNull", entRef);
@@ -73,7 +73,7 @@ public class nodeappendchildnomodificationallowederrEETest extends LoboUnitTest 
             boolean success = false;
             try {
                 appendedNode = entRef.appendChild(createdNode);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

@@ -53,20 +53,25 @@ public class SVGViewBoxImpl {
 	 * @param height a float.
 	 * @param r a float.
 	 */
-	public SVGViewBoxImpl(SVGSVGElement svgElem, float x, float y, float width, float height, float r) {
+	public SVGViewBoxImpl(final SVGSVGElement svgElem, final float svgX, final float svgY, final float svgWidth, final float svgHeight, final float svgR) {
+		float x = svgX;
+		float y = svgY;
+		float r = svgR;
+		float width = svgWidth;
+		float height = svgHeight;
 
-		float svgWidth = svgElem.getWidth().getBaseVal().getValue();
-		float svgHeigth = svgElem.getHeight().getBaseVal().getValue();
-		float vbx = svgElem.getViewBox().getBaseVal().getX();
-		float vby = svgElem.getViewBox().getBaseVal().getY();
-		float vbw = svgElem.getViewBox().getBaseVal().getWidth();
-		float vbh = svgElem.getViewBox().getBaseVal().getHeight();
-		float xUnit = svgWidth / vbx;
-		float yUnit = svgHeigth / vby;
-		float widthUnit = svgWidth / vbw;
-		float heigthUnit = svgHeigth / vbh;
+		final float sWidth = svgElem.getWidth().getBaseVal().getValue();
+		final float svgHeigth = svgElem.getHeight().getBaseVal().getValue();
+		final float vbx = svgElem.getViewBox().getBaseVal().getX();
+		final float vby = svgElem.getViewBox().getBaseVal().getY();
+		final float vbw = svgElem.getViewBox().getBaseVal().getWidth();
+		final float vbh = svgElem.getViewBox().getBaseVal().getHeight();
+		final float xUnit = sWidth / vbx;
+		final float yUnit = svgHeigth / vby;
+		final float widthUnit = sWidth / vbw;
+		final float heigthUnit = svgHeigth / vbh;
 
-		if (xUnit != svgWidth) {
+		if (xUnit != sWidth) {
 			x = x * widthUnit;
 		}
 
@@ -74,7 +79,7 @@ public class SVGViewBoxImpl {
 			y = y * heigthUnit;
 		}
 
-		if (widthUnit != svgWidth) {
+		if (widthUnit != sWidth) {
 			width = width * widthUnit;
 		}
 
@@ -104,7 +109,7 @@ public class SVGViewBoxImpl {
 	 *
 	 * @param x a float.
 	 */
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 
@@ -140,7 +145,7 @@ public class SVGViewBoxImpl {
 	 *
 	 * @param width a float.
 	 */
-	public void setWidth(float width) {
+	public void setWidth(final float width) {
 		this.width = width;
 	}
 
@@ -158,7 +163,7 @@ public class SVGViewBoxImpl {
 	 *
 	 * @param height a float.
 	 */
-	public void setHeight(float height) {
+	public void setHeight(final float height) {
 		this.height = height;
 	}
 
@@ -176,7 +181,7 @@ public class SVGViewBoxImpl {
 	 *
 	 * @param r a float.
 	 */
-	public void setR(float r) {
+	public void setR(final float r) {
 		this.r = r;
 	}
 }

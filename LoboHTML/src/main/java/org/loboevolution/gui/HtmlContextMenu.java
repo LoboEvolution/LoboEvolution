@@ -86,7 +86,7 @@ public class HtmlContextMenu {
 	 * @param context
 	 *            the context
 	 */
-	public HtmlContextMenu(HTMLElement element, HtmlRendererContext context) {
+	public HtmlContextMenu(final HTMLElement element, final HtmlRendererContext context) {
 		this.element = element;
 		this.context = context;
 	}
@@ -97,41 +97,41 @@ public class HtmlContextMenu {
 	 * @return the j popup menu
 	 * @param bpanel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 */
-	public JPopupMenu popupMenuImage(IBrowserPanel bpanel) {
+	public JPopupMenu popupMenuImage(final IBrowserPanel bpanel) {
 
-		JPopupMenu popupMenu = new JPopupMenu();
+		final JPopupMenu popupMenu = new JPopupMenu();
 		final HTMLImageElementImpl img = (HTMLImageElementImpl) element;
 		final String href = img.getSrc();
-		JMenuItem menuItem = new JMenuItem("View image");
+		final JMenuItem menuItem = new JMenuItem("View image");
 		menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
 		menuItem.addActionListener(e -> {
 			if (href.contains(";base64,")) {
 				final String base64 = href.split(";base64,")[1];
-				byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-				try (InputStream stream = new ByteArrayInputStream(decodedBytes)) {
+				final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+				try (final InputStream stream = new ByteArrayInputStream(decodedBytes)) {
 					context.openImageViewer(href, stream);
-				} catch (Exception e1) {
+				} catch (final Exception e1) {
 					e1.printStackTrace();
 				}
 			} else {
 				try {
 					context.openImageViewer(img.getFullURL(href));
-				} catch (Exception e1) {
+				} catch (final Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
 		popupMenu.add(menuItem);
 
-		JMenuItem copyImageURL = new JMenuItem("Copy Image URL");
+		final JMenuItem copyImageURL = new JMenuItem("Copy Image URL");
 		copyImageURL.setIcon(IconFactory.getInstance().getIcon(COPY));
 		copyImageURL.addActionListener(e -> {
-			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 			String clip = "";
 			if (!href.contains(";base64,")) {
 				try {
 					clip = img.getFullURL(href).toExternalForm();
-				} catch (Exception e1) {
+				} catch (final Exception e1) {
 					e1.printStackTrace();
 				}
 			} else {
@@ -141,20 +141,20 @@ public class HtmlContextMenu {
 		});
 		popupMenu.add(copyImageURL);
 
-		JMenuItem saveImage = new JMenuItem("Save Image");
+		final JMenuItem saveImage = new JMenuItem("Save Image");
 		saveImage.setIcon(IconFactory.getInstance().getIcon(SAVE));
 		saveImage.addActionListener(e -> {
 			try {
-				IDownload d = bpanel.getBrowserFrame().getDownload();
+				final IDownload d = bpanel.getBrowserFrame().getDownload();
 				if (!href.contains(";base64,")) {
-					URL scriptURL = Urls.createURL(new URL(img.getBaseURI()), href);
+					final URL scriptURL = Urls.createURL(new URL(img.getBaseURI()), href);
 					d.downloadFile(scriptURL);
 				} else {
 					final String base64 = href.split(";base64,")[1];
-					byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+					final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
 					d.downloadFile(new ByteArrayInputStream(decodedBytes));
 				}
-			} catch (Exception e1) {
+			} catch (final Exception e1) {
 				e1.printStackTrace();
 			}
 		});
@@ -168,34 +168,34 @@ public class HtmlContextMenu {
 	 * @return the j popup menu
 	 * @param bpanel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 */
-	public JPopupMenu popupMenuLink(IBrowserPanel bpanel) {
-		JPopupMenu popupMenu = new JPopupMenu();
-		HTMLLinkElementImpl link = (HTMLLinkElementImpl) element;
-		JMenuItem menuItem = new JMenuItem("Open link in new tab");
+	public JPopupMenu popupMenuLink(final IBrowserPanel bpanel) {
+		final JPopupMenu popupMenu = new JPopupMenu();
+		final HTMLLinkElementImpl link = (HTMLLinkElementImpl) element;
+		final JMenuItem menuItem = new JMenuItem("Open link in new tab");
 		menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
 		menuItem.addActionListener(e -> {
 			try {
 				final URL url = new URL(link.getAbsoluteHref());
 				context.linkClicked(url, true);
-			} catch (Exception e0) {
+			} catch (final Exception e0) {
 				logger.severe(e0.getMessage());
 			}
 		});
 		popupMenu.add(menuItem);
-		JMenuItem copyLinkURL = new JMenuItem("Copy link URL");
+		final JMenuItem copyLinkURL = new JMenuItem("Copy link URL");
 		copyLinkURL.setIcon(IconFactory.getInstance().getIcon(COPY));
 		copyLinkURL.addActionListener(e -> {
-			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 			clipboard.setContents(new StringSelection(link.getAbsoluteHref()), null);
 		});
 		popupMenu.add(copyLinkURL);
-		JMenuItem saveImage = new JMenuItem("Save destination");
+		final JMenuItem saveImage = new JMenuItem("Save destination");
 		saveImage.setIcon(IconFactory.getInstance().getIcon(SAVE));
 		saveImage.addActionListener(e -> {
 			try {
-				IDownload d = bpanel.getBrowserFrame().getDownload();
+				final IDownload d = bpanel.getBrowserFrame().getDownload();
 				d.downloadFile(new URL(link.getAbsoluteHref()));
-			} catch (Exception e1) {
+			} catch (final Exception e1) {
 				e1.printStackTrace();
 			}
 		});
@@ -210,9 +210,9 @@ public class HtmlContextMenu {
 	 */
 	public JPopupMenu popupMenuAbstractUI() {
 
-		JPopupMenu popupMenu = new JPopupMenu();
+		final JPopupMenu popupMenu = new JPopupMenu();
 
-		JMenuItem menuBack = new JMenuItem("Back");
+		final JMenuItem menuBack = new JMenuItem("Back");
 		menuBack.setIcon(IconFactory.getInstance().getIcon(BACK));
 		menuBack.addActionListener(e -> context.back());
 
@@ -220,12 +220,12 @@ public class HtmlContextMenu {
 
 		popupMenu.add(menuBack);
 
-		JMenuItem menuReload = new JMenuItem("Reload");
+		final JMenuItem menuReload = new JMenuItem("Reload");
 		menuReload.setIcon(IconFactory.getInstance().getIcon(RELOD));
 		menuReload.addActionListener(e -> context.reload());
 		popupMenu.add(menuReload);
 
-		JMenuItem menuForward = new JMenuItem("Forward");
+		final JMenuItem menuForward = new JMenuItem("Forward");
 		menuForward.setIcon(IconFactory.getInstance().getIcon(FORWARD));
 		menuForward.addActionListener(e -> context.forward());
 

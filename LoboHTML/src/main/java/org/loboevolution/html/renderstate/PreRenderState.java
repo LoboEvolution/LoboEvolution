@@ -39,7 +39,7 @@ public class PreRenderState extends BlockRenderState {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public PreRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+	public PreRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
@@ -52,7 +52,7 @@ public class PreRenderState extends BlockRenderState {
 		}
 		final CSSStyleDeclaration props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
-		int wsValue;
+		final int wsValue;
 		if (Strings.isBlank(whiteSpaceText)) {
 			wsValue = WS_PRE;
 		} else {

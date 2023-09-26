@@ -52,8 +52,8 @@ public class CollectionsTest extends LoboUnitTest {
 
     @Test
     public void testDocumentElement() throws DOMException {
-        Document xmlDoc = sampleXmlFile("entities.xhtml");
-        Element docelm = xmlDoc.getDocumentElement();
+        final Document xmlDoc = sampleXmlFile("entities.xhtml");
+        final Element docelm = xmlDoc.getDocumentElement();
         NodeList list = docelm.getChildNodes();
         assertEquals(2, list.getLength());
         Node fcNode = docelm.getFirstChild();
@@ -72,7 +72,7 @@ public class CollectionsTest extends LoboUnitTest {
         assertSame(lcNode, fcElement.getNextElementSibling());
         assertSame(fcNode, list.item(0));
         assertSame(lcNode, list.item(1));
-        Element element = fcElement;
+        final Element element = fcElement;
         list = element.getChildNodes();
         assertEquals(4, list.getLength());
         fcNode = element.getFirstChild();
@@ -99,15 +99,15 @@ public class CollectionsTest extends LoboUnitTest {
         compareToReferenceDocumentBuilder(false);
     }
 
-    private void compareToReferenceDocumentBuilder(boolean ignoreElementContentWhitespace) {
-        Document xmlDoc = sampleXmlFile("entities.xhtml");
-        DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
+    private void compareToReferenceDocumentBuilder(final boolean ignoreElementContentWhitespace) {
+        final Document xmlDoc = sampleXmlFile("entities.xhtml");
+        final DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
         dbFac.setIgnoringElementContentWhitespace(ignoreElementContentWhitespace);
         dbFac.setNamespaceAware(true);
-        Document refdoc = sampleXmlFile("entities.xhtml");
+        final Document refdoc = sampleXmlFile("entities.xhtml");
         refdoc.setDocumentURI("http://www.example.com/xml/entities.xhtml");
-        DocumentType refdoctype = refdoc.getDoctype();
-        DocumentType doctype = xmlDoc.getDoctype();
+        final DocumentType refdoctype = refdoc.getDoctype();
+        final DocumentType doctype = xmlDoc.getDoctype();
         if (refdoctype == null) {
             assertNull(doctype);
         } else {
@@ -115,10 +115,10 @@ public class CollectionsTest extends LoboUnitTest {
             assertEquals(refdoctype.getSystemId(), doctype.getSystemId());
             assertEquals(refdoctype.getPublicId(), doctype.getPublicId());
         }
-        Element refde = refdoc.getDocumentElement();
-        Element de = xmlDoc.getDocumentElement();
-        Node head = refdoc.getDocumentElement().getElementsByTagName("head").item(0);
-        Element first = xmlDoc.getDocumentElement().getFirstElementChild();
+        final Element refde = refdoc.getDocumentElement();
+        final Element de = xmlDoc.getDocumentElement();
+        final Node head = refdoc.getDocumentElement().getElementsByTagName("head").item(0);
+        final Element first = xmlDoc.getDocumentElement().getFirstElementChild();
         compareNodes(refde, de);
         compareNodeIterators(refdoc, refdoc, xmlDoc, xmlDoc, NodeFilter.SHOW_ALL, null);
         compareNodeIterators(refdoc, refdoc, xmlDoc, xmlDoc, NodeFilter.SHOW_ELEMENT, null);
@@ -127,7 +127,7 @@ public class CollectionsTest extends LoboUnitTest {
         compareNodeIterators(refdoc, head, xmlDoc, first, NodeFilter.SHOW_ELEMENT, null);
         compareNodeIterators(refdoc, head, xmlDoc, first, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, null);
         compareNodeIterators(refdoc, head, xmlDoc, first, NodeFilter.SHOW_COMMENT, null);
-        NodeFilter filter = new ElementNameFilter("ul");
+        final NodeFilter filter = new ElementNameFilter("ul");
         compareNodeIterators(refdoc, refdoc, xmlDoc, xmlDoc, NodeFilter.SHOW_COMMENT, filter);
         compareTreeWalkers(refdoc, refdoc, xmlDoc, xmlDoc, NodeFilter.SHOW_ALL, null);
         compareTreeWalkers(refdoc, refdoc, xmlDoc, xmlDoc, NodeFilter.SHOW_ELEMENT, null);
@@ -149,31 +149,31 @@ public class CollectionsTest extends LoboUnitTest {
         compareTreeWalkersChild(refdoc, head, xmlDoc, first, NodeFilter.SHOW_ELEMENT);
     }
 
-    private void compareNodes(Node refde, Node de) {
+    private void compareNodes(final Node refde, final Node de) {
         compareNodesBasic(refde, de);
         // Attributes
-        NamedNodeMap refnnm = refde.getAttributes();
+        final NamedNodeMap refnnm = refde.getAttributes();
         if (refnnm != null) {
             compareAttributes(refnnm, de.getAttributes());
         }
         // Child nodes
-        Node reffcNode = refde.getFirstChild();
-        Node reflcNode = refde.getLastChild();
-        Node fcNode = de.getFirstChild();
-        Node lcNode = de.getLastChild();
+        final Node reffcNode = refde.getFirstChild();
+        final Node reflcNode = refde.getLastChild();
+        final Node fcNode = de.getFirstChild();
+        final Node lcNode = de.getLastChild();
         if (reffcNode != null) {
             assertNotNull(fcNode);
             compareNodesBasic(reffcNode, fcNode);
             compareNodesBasic(reflcNode, lcNode);
-            NodeList list = de.getChildNodes();
-            NodeList reflist = refde.getChildNodes();
-            int len = list.getLength();
+            final NodeList list = de.getChildNodes();
+            final NodeList reflist = refde.getChildNodes();
+            final int len = list.getLength();
             assertEquals(reflist.getLength(), len);
             assertSame(fcNode, list.item(0));
             assertSame(lcNode, list.item(len - 1));
             if (de.getNodeType() == Node.ELEMENT_NODE) {
-                Element fcElement = ((Element) de).getFirstElementChild();
-                Element lcElement = ((Element) de).getLastElementChild();
+                final Element fcElement = ((Element) de).getFirstElementChild();
+                final Element lcElement = ((Element) de).getLastElementChild();
                 if (fcNode.getNodeType() == Node.ELEMENT_NODE) {
                     assertSame(fcNode, fcElement);
                 }
@@ -188,20 +188,20 @@ public class CollectionsTest extends LoboUnitTest {
         }
     }
 
-    private void compareNodesBasic(Node refde, Node de) {
+    private void compareNodesBasic(final Node refde, final Node de) {
         assertEquals(refde.getNodeType(), de.getNodeType());
         assertEquals(refde.getNodeName(), de.getNodeName());
     }
 
-    private void compareAttributes(NamedNodeMap refnnm, NamedNodeMap nnm) {
+    private void compareAttributes(final NamedNodeMap refnnm, final NamedNodeMap nnm) {
         assertNotNull(nnm);
-        int nnmlen = nnm.getLength();
+        final int nnmlen = nnm.getLength();
         for (int i = 0; i < nnmlen; i++) {
-            Attr refitem = (Attr) refnnm.item(i);
-            Node named = nnm.getNamedItemNS(refitem.getNamespaceURI(), refitem.getLocalName());
+            final Attr refitem = (Attr) refnnm.item(i);
+            final Node named = nnm.getNamedItemNS(refitem.getNamespaceURI(), refitem.getLocalName());
             if (refitem.isSpecified() || named != null) {
                 assertNotNull(named);
-                Node named2 = nnm.getNamedItem(named.getNodeName());
+                final Node named2 = nnm.getNamedItem(named.getNodeName());
                 assertSame(named, named2);
                 assertSame(refitem, refnnm.getNamedItem(named.getNodeName()));
                 compareNodesBasic(refitem, named);
@@ -212,56 +212,56 @@ public class CollectionsTest extends LoboUnitTest {
         }
     }
 
-    private void compareNodeIterators(Document refDoc, Node refroot, Document doc, Node root, int whatToShow, NodeFilter filter) {
+    private void compareNodeIterators(final Document refDoc, final Node refroot, final Document doc, final Node root, final int whatToShow, final NodeFilter filter) {
 
 
-        NodeIteratorImpl refit = (NodeIteratorImpl) refDoc.createNodeIterator(refroot, whatToShow, filter);
-        NodeIteratorImpl nodeIterator = (NodeIteratorImpl) doc.createNodeIterator(root, whatToShow, filter);
-        Iterator<Node> it = nodeIterator.iterator();
-        ListIterator<Node> listIterator = nodeIterator.listIterator();
+        final NodeIteratorImpl refit = (NodeIteratorImpl) refDoc.createNodeIterator(refroot, whatToShow, filter);
+        final NodeIteratorImpl nodeIterator = (NodeIteratorImpl) doc.createNodeIterator(root, whatToShow, filter);
+        final Iterator<Node> it = nodeIterator.iterator();
+        final ListIterator<Node> listIterator = nodeIterator.listIterator();
 
         while (it.hasNext()) {
-            Node node = it.next();
-            Node refnode = refit.nextNode();
+            final Node node = it.next();
+            final Node refnode = refit.nextNode();
             assertNotNull(refnode);
             compareNodesBasic(refnode, node);
         }
 
         while (listIterator.hasPrevious()) {
-            Node node = listIterator.previous();
-            Node refnode = refit.previousNode();
+            final Node node = listIterator.previous();
+            final Node refnode = refit.previousNode();
             assertNotNull(refnode);
             compareNodesBasic(refnode, node);
         }
         assertNull(refit.previousNode());
     }
 
-    private void compareTreeWalkers(Document refDoc, Node refroot, Document doc, Node root,
-                                    int whatToShow, NodeFilter filter) {
-        TreeWalker reftw = refDoc.createTreeWalker(refroot, whatToShow, filter);
-        TreeWalker tw = doc.createTreeWalker(root, whatToShow, filter);
+    private void compareTreeWalkers(final Document refDoc, final Node refroot, final Document doc, final Node root,
+                                    final int whatToShow, final NodeFilter filter) {
+        final TreeWalker reftw = refDoc.createTreeWalker(refroot, whatToShow, filter);
+        final TreeWalker tw = doc.createTreeWalker(root, whatToShow, filter);
         Node node;
         while ((node = tw.nextNode()) != null) {
-            Node refnode = reftw.nextNode();
+            final Node refnode = reftw.nextNode();
             assertNotNull(refnode);
             compareNodesBasic(refnode, node);
         }
         assertNull(reftw.nextNode());
         while ((node = tw.previousNode()) != null) {
-            Node refnode = reftw.previousNode();
+            final Node refnode = reftw.previousNode();
             assertNotNull(refnode);
             compareNodesBasic(refnode, node);
         }
         assertNull(reftw.previousNode());
     }
 
-    private void compareTreeWalkers2(Document refDoc, Node refroot, Document doc, Node root,
-                                     int whatToShow, NodeFilter filter) {
-        TreeWalker reftw = refDoc.createTreeWalker(refroot, whatToShow, filter);
-        TreeWalker tw = doc.createTreeWalker(root, whatToShow, filter);
+    private void compareTreeWalkers2(final Document refDoc, final Node refroot, final Document doc, final Node root,
+                                     final int whatToShow, final NodeFilter filter) {
+        final TreeWalker reftw = refDoc.createTreeWalker(refroot, whatToShow, filter);
+        final TreeWalker tw = doc.createTreeWalker(root, whatToShow, filter);
         Node node;
         while ((node = tw.nextNode()) != null) {
-            Node refnode = reftw.nextNode();
+            final Node refnode = reftw.nextNode();
             assertNotNull(refnode);
             compareNodesBasic(refnode, node);
             compareSiblings(reftw, tw);
@@ -270,7 +270,7 @@ public class CollectionsTest extends LoboUnitTest {
         }
         assertNull(reftw.nextNode());
         while ((node = tw.previousNode()) != null) {
-            Node refnode = reftw.previousNode();
+            final Node refnode = reftw.previousNode();
             assertNotNull(refnode);
             compareNodesBasic(refnode, node);
             compareSiblings(reftw, tw);
@@ -280,7 +280,7 @@ public class CollectionsTest extends LoboUnitTest {
         assertNull(reftw.previousNode());
     }
 
-    private void compareSiblings(TreeWalker reftw, TreeWalker tw) {
+    private void compareSiblings(final TreeWalker reftw, final TreeWalker tw) {
         Node sibling, refsibling;
         while ((sibling = tw.nextSibling()) != null) {
             refsibling = reftw.nextSibling();
@@ -294,13 +294,13 @@ public class CollectionsTest extends LoboUnitTest {
         }
     }
 
-    private void compareTreeWalkersChild(Document refDoc, Node refroot, Document doc, Node root,
-                                         int whatToShow) {
-        TreeWalker reftw = refDoc.createTreeWalker(refroot, whatToShow, null);
-        TreeWalker tw = doc.createTreeWalker(root, whatToShow, null);
+    private void compareTreeWalkersChild(final Document refDoc, final Node refroot, final Document doc, final Node root,
+                                         final int whatToShow) {
+        final TreeWalker reftw = refDoc.createTreeWalker(refroot, whatToShow, null);
+        final TreeWalker tw = doc.createTreeWalker(root, whatToShow, null);
         Node node;
         while ((node = tw.nextNode()) != null) {
-            Node refnode = reftw.nextNode();
+            final Node refnode = reftw.nextNode();
             assertNotNull(refnode);
             compareNodesBasic(refnode, node);
             compareChild(reftw, tw);
@@ -309,7 +309,7 @@ public class CollectionsTest extends LoboUnitTest {
         }
         assertNull(reftw.nextNode());
         while ((node = tw.previousNode()) != null) {
-            Node refnode = reftw.previousNode();
+            final Node refnode = reftw.previousNode();
             assertNotNull(refnode);
             compareNodesBasic(refnode, node);
             compareChild(reftw, tw);
@@ -319,7 +319,7 @@ public class CollectionsTest extends LoboUnitTest {
         assertNull(reftw.previousNode());
     }
 
-    private void compareChild(TreeWalker reftw, TreeWalker tw) {
+    private void compareChild(final TreeWalker reftw, final TreeWalker tw) {
         Node child, refchild;
         while ((child = tw.firstChild()) != null) {
             refchild = reftw.firstChild();

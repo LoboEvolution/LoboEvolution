@@ -46,20 +46,20 @@ import static org.junit.Assert.assertEquals;
 public class documentadoptnode27Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element docElem;
-        Element newElem;
-        Element newImpElem;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Node adoptedNode;
-        String adoptedName;
-        String adoptedNS;
-        Node appendedChild;
-        DocumentType nullDocType = null;
+        final Element newElem;
+        final Element newImpElem;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Node adoptedNode;
+        final String adoptedName;
+        final String adoptedNS;
+        final Node appendedChild;
+        final DocumentType nullDocType = null;
 
-        String rootNS;
-        String rootTagname;
+        final String rootNS;
+        final String rootTagname;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

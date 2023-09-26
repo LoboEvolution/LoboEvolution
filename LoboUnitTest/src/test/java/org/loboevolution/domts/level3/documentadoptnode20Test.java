@@ -48,17 +48,17 @@ public class documentadoptnode20Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        DocumentType docType;
-        NamedNodeMap notationMap;
-        Notation notation;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final DocumentType docType;
+        final NamedNodeMap notationMap;
+        final Notation notation;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
@@ -72,7 +72,7 @@ public class documentadoptnode20Test extends LoboUnitTest {
         boolean success = false;
         try {
             newDoc.adoptNode(notation);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
         assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

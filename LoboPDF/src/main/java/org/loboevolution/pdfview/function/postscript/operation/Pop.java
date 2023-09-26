@@ -32,7 +32,7 @@ import java.util.Stack;
 final class Pop implements PostScriptOperation {
 	/** {@inheritDoc} */
 	@Override
-	public void eval(Stack<Object> environment) {   // discard top element
+	public void eval(final Stack<Object> environment) {   // discard top element
 	    environment.pop();
 	}
 }

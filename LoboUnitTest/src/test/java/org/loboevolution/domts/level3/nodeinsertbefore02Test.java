@@ -47,23 +47,23 @@ import static org.junit.Assert.assertEquals;
 public class nodeinsertbefore02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        DocumentType newDocType;
-        Comment newComment;
-        Comment insertedComment;
-        String data;
-        ProcessingInstruction newPI;
-        ProcessingInstruction insertedPI;
-        String target;
-        String nullPubId = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final DocumentType newDocType;
+        final Comment newComment;
+        final Comment insertedComment;
+        final String data;
+        final ProcessingInstruction newPI;
+        final ProcessingInstruction insertedPI;
+        final String target;
+        final String nullPubId = null;
 
-        String nullSysId = null;
+        final String nullSysId = null;
 
-        String rootNS;
-        String rootName;
-        Element docElem;
+        final String rootNS;
+        final String rootName;
+        final Element docElem;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

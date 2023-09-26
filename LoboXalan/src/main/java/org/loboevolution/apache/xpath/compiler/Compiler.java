@@ -75,7 +75,7 @@ public class Compiler extends OpMap {
    *     sent to System err.
    * @param fTable The FunctionTable object where the xpath build-in functions are stored.
    */
-  public Compiler(ErrorListener errorHandler, FunctionTable fTable) {
+  public Compiler(final ErrorListener errorHandler, final FunctionTable fTable) {
     m_errorHandler = errorHandler;
     m_functionTable = fTable;
   }
@@ -87,9 +87,9 @@ public class Compiler extends OpMap {
    * @return The result of the XPath.
    * @throws TransformerException if there is a syntax or other error.
    */
-  public Expression compile(int opPos) throws TransformerException {
+  public Expression compile(final int opPos) throws TransformerException {
 
-    int op = getOp(opPos);
+    final int op = getOp(opPos);
 
     Expression expr = null;
     // System.out.println(getPatternString()+"op: "+op);
@@ -202,10 +202,10 @@ public class Compiler extends OpMap {
    * @return reference to {@link Operation} instance.
    * @throws TransformerException if there is a syntax or other error.
    */
-  private Expression compileOperation(Operation operation, int opPos) throws TransformerException {
+  private Expression compileOperation(final Operation operation, final int opPos) throws TransformerException {
 
-    int leftPos = getFirstChildPos(opPos);
-    int rightPos = getNextOpPos(leftPos);
+    final int leftPos = getFirstChildPos(opPos);
+    final int rightPos = getNextOpPos(leftPos);
 
     operation.setLeftRight(compile(leftPos), compile(rightPos));
 
@@ -220,9 +220,9 @@ public class Compiler extends OpMap {
    * @return The unary argument.
    * @throws TransformerException if syntax or other error occurs.
    */
-  private Expression compileUnary(UnaryOperation unary, int opPos) throws TransformerException {
+  private Expression compileUnary(final UnaryOperation unary, final int opPos) throws TransformerException {
 
-    int rightPos = getFirstChildPos(opPos);
+    final int rightPos = getFirstChildPos(opPos);
 
     unary.setRight(compile(rightPos));
 
@@ -236,7 +236,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Or} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression or(int opPos) throws TransformerException {
+  protected Expression or(final int opPos) throws TransformerException {
     return compileOperation(new Or(), opPos);
   }
 
@@ -247,7 +247,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link And} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression and(int opPos) throws TransformerException {
+  protected Expression and(final int opPos) throws TransformerException {
     return compileOperation(new And(), opPos);
   }
 
@@ -258,7 +258,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link NotEquals} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression notequals(int opPos) throws TransformerException {
+  protected Expression notequals(final int opPos) throws TransformerException {
     return compileOperation(new NotEquals(), opPos);
   }
 
@@ -269,7 +269,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Equals} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression equals(int opPos) throws TransformerException {
+  protected Expression equals(final int opPos) throws TransformerException {
     return compileOperation(new Equals(), opPos);
   }
 
@@ -280,7 +280,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Lte} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression lte(int opPos) throws TransformerException {
+  protected Expression lte(final int opPos) throws TransformerException {
     return compileOperation(new Lte(), opPos);
   }
 
@@ -291,7 +291,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Lt} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression lt(int opPos) throws TransformerException {
+  protected Expression lt(final int opPos) throws TransformerException {
     return compileOperation(new Lt(), opPos);
   }
 
@@ -302,7 +302,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Gte} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression gte(int opPos) throws TransformerException {
+  protected Expression gte(final int opPos) throws TransformerException {
     return compileOperation(new Gte(), opPos);
   }
 
@@ -313,7 +313,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Gt} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression gt(int opPos) throws TransformerException {
+  protected Expression gt(final int opPos) throws TransformerException {
     return compileOperation(new Gt(), opPos);
   }
 
@@ -324,7 +324,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Plus} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression plus(int opPos) throws TransformerException {
+  protected Expression plus(final int opPos) throws TransformerException {
     return compileOperation(new Plus(), opPos);
   }
 
@@ -335,7 +335,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Minus} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression minus(int opPos) throws TransformerException {
+  protected Expression minus(final int opPos) throws TransformerException {
     return compileOperation(new Minus(), opPos);
   }
 
@@ -346,7 +346,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Mult} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression mult(int opPos) throws TransformerException {
+  protected Expression mult(final int opPos) throws TransformerException {
     return compileOperation(new Mult(), opPos);
   }
 
@@ -357,7 +357,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Div} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression div(int opPos) throws TransformerException {
+  protected Expression div(final int opPos) throws TransformerException {
     return compileOperation(new Div(), opPos);
   }
 
@@ -368,7 +368,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Mod} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression mod(int opPos) throws TransformerException {
+  protected Expression mod(final int opPos) throws TransformerException {
     return compileOperation(new Mod(), opPos);
   }
 
@@ -379,7 +379,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link Neg} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression neg(int opPos) throws TransformerException {
+  protected Expression neg(final int opPos) throws TransformerException {
     return compileUnary(new Neg(), opPos);
   }
 
@@ -390,7 +390,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link org.loboevolution.apache.xpath.operations.String} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression string(int opPos) throws TransformerException {
+  protected Expression string(final int opPos) throws TransformerException {
     return compileUnary(new org.loboevolution.apache.xpath.operations.String(), opPos);
   }
 
@@ -401,7 +401,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link org.loboevolution.apache.xpath.operations.Bool} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression bool(int opPos) throws TransformerException {
+  protected Expression bool(final int opPos) throws TransformerException {
     return compileUnary(new org.loboevolution.apache.xpath.operations.Bool(), opPos);
   }
 
@@ -412,7 +412,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link org.loboevolution.apache.xpath.operations.Number} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression number(int opPos) throws TransformerException {
+  protected Expression number(final int opPos) throws TransformerException {
     return compileUnary(new org.loboevolution.apache.xpath.operations.Number(), opPos);
   }
 
@@ -422,11 +422,8 @@ public class Compiler extends OpMap {
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.loboevolution.apache.xpath.objects.XString} instance.
    */
-  protected Expression literal(int opPos) {
-
-    opPos = getFirstChildPos(opPos);
-
-    return (XString) getTokenQueue().elementAt(getOp(opPos));
+  protected Expression literal(final int opPos) {
+    return (XString) getTokenQueue().elementAt(getOp(getFirstChildPos(opPos)));
   }
 
   /**
@@ -435,11 +432,8 @@ public class Compiler extends OpMap {
    * @param opPos The current position in the m_opMap array.
    * @return reference to {@link org.loboevolution.apache.xpath.objects.XNumber} instance.
    */
-  protected Expression numberlit(int opPos) {
-
-    opPos = getFirstChildPos(opPos);
-
-    return (XNumber) getTokenQueue().elementAt(getOp(opPos));
+  protected Expression numberlit(final int opPos) {
+    return (XNumber) getTokenQueue().elementAt(getOp(getFirstChildPos(opPos)));
   }
 
   /**
@@ -449,7 +443,7 @@ public class Compiler extends OpMap {
    * @return reference to the contained expression.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression group(int opPos) throws TransformerException {
+  protected Expression group(final int opPos) throws TransformerException {
 
     // no-op
     return compile(opPos + 2);
@@ -462,7 +456,7 @@ public class Compiler extends OpMap {
    * @return reference to the argument expression.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression arg(int opPos) throws TransformerException {
+  protected Expression arg(final int opPos) throws TransformerException {
 
     // no-op
     return compile(opPos + 2);
@@ -476,7 +470,7 @@ public class Compiler extends OpMap {
    * @return reference to {@link org.loboevolution.apache.xpath.axes.LocPathIterator} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression union(int opPos) throws TransformerException {
+  protected Expression union(final int opPos) throws TransformerException {
     locPathDepth++;
     try {
       return UnionPathIterator.createUnionIterator(this, opPos);
@@ -509,10 +503,10 @@ public class Compiler extends OpMap {
    * @return reference to {@link org.loboevolution.apache.xpath.axes.LocPathIterator} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  public Expression locationPath(int opPos) throws TransformerException {
+  public Expression locationPath(final int opPos) throws TransformerException {
     locPathDepth++;
     try {
-      DTMIterator iter = WalkerFactory.newDTMIterator(this, opPos, locPathDepth == 0);
+      final DTMIterator iter = WalkerFactory.newDTMIterator(this, opPos, locPathDepth == 0);
       return (Expression) iter; // cast OK, I guess.
     } finally {
       locPathDepth--;
@@ -526,7 +520,7 @@ public class Compiler extends OpMap {
    * @return the contained predicate expression.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  public Expression predicate(int opPos) throws TransformerException {
+  public Expression predicate(final int opPos) throws TransformerException {
     return compile(opPos + 2);
   }
 
@@ -537,7 +531,8 @@ public class Compiler extends OpMap {
    * @return reference to {@link UnionPattern} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected Expression matchPattern(int opPos) throws TransformerException {
+  protected Expression matchPattern(final int oPos) throws TransformerException {
+    int opPos = oPos;
     locPathDepth++;
     try {
       // First, count...
@@ -550,8 +545,8 @@ public class Compiler extends OpMap {
 
       if (i == 1) return compile(opPos);
 
-      UnionPattern up = new UnionPattern();
-      StepPattern[] patterns = new StepPattern[i];
+      final UnionPattern up = new UnionPattern();
+      final StepPattern[] patterns = new StepPattern[i];
 
       for (i = 0; getOp(opPos) == OpCodes.OP_LOCATIONPATHPATTERN; i++) {
         nextOpPos = getNextOpPos(opPos);
@@ -574,11 +569,8 @@ public class Compiler extends OpMap {
    * @return reference to {@link StepPattern} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  public Expression locationPathPattern(int opPos) throws TransformerException {
-
-    opPos = getFirstChildPos(opPos);
-
-    return stepPattern(opPos, 0, null);
+  public Expression locationPathPattern(final int opPos) throws TransformerException {
+    return stepPattern(getFirstChildPos(opPos), 0, null);
   }
 
   /**
@@ -589,10 +581,10 @@ public class Compiler extends OpMap {
    * @return {@link org.loboevolution.html.node.traversal.NodeFilter} bit set that tells what to show for a given
    *     node test.
    */
-  public int getWhatToShow(int opPos) {
+  public int getWhatToShow(final int opPos) {
 
-    int axesType = getOp(opPos);
-    int testType = getOp(opPos + 3);
+    final int axesType = getOp(opPos);
+    final int testType = getOp(opPos + 3);
 
     // System.out.println("testType: "+testType);
     switch (testType) {
@@ -660,23 +652,24 @@ public class Compiler extends OpMap {
    * @return reference to {@link StepPattern} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  protected StepPattern stepPattern(int opPos, int stepCount, StepPattern ancestorPattern)
+  protected StepPattern stepPattern(final int oPos, final int stepCount, final StepPattern ancestorPattern)
       throws TransformerException {
 
-    int startOpPos = opPos;
-    int stepType = getOp(opPos);
+    int opPos = oPos;
+    final int startOpPos = opPos;
+    final int stepType = getOp(opPos);
 
     if (OpCodes.ENDOP == stepType) {
       return null;
     }
 
-    int endStep = getNextOpPos(opPos);
+    final int endStep = getNextOpPos(opPos);
 
     // int nextStepType = getOpMap()[endStep];
-    StepPattern pattern;
+    final StepPattern pattern;
 
     // boolean isSimple = ((OpCodes.ENDOP == nextStepType) && (stepCount == 0));
-    int argLen;
+    final int argLen;
 
     switch (stepType) {
       case OpCodes.OP_FUNCTION:
@@ -764,7 +757,7 @@ public class Compiler extends OpMap {
       pattern.setRelativePathPattern(ancestorPattern);
     }
 
-    StepPattern relativePathPattern = stepPattern(endStep, stepCount + 1, pattern);
+    final StepPattern relativePathPattern = stepPattern(endStep, stepCount + 1, pattern);
 
     return (null != relativePathPattern) ? relativePathPattern : pattern;
   }
@@ -776,12 +769,12 @@ public class Compiler extends OpMap {
    * @return reference to array of {@link Expression} instances.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  public Expression[] getCompiledPredicates(int opPos) throws TransformerException {
+  public Expression[] getCompiledPredicates(final int opPos) throws TransformerException {
 
-    int count = countPredicates(opPos);
+    final int count = countPredicates(opPos);
 
     if (count > 0) {
-      Expression[] predicates = new Expression[count];
+      final Expression[] predicates = new Expression[count];
 
       compilePredicates(opPos, predicates);
 
@@ -798,13 +791,12 @@ public class Compiler extends OpMap {
    * @return The number of predicates for this step.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  public int countPredicates(int opPos) throws TransformerException {
+  public int countPredicates(final int oPos) throws TransformerException {
 
     int count = 0;
-
+    int opPos = oPos;
     while (OpCodes.OP_PREDICATE == getOp(opPos)) {
       count++;
-
       opPos = getNextOpPos(opPos);
     }
 
@@ -819,8 +811,8 @@ public class Compiler extends OpMap {
    *     Expression}s, that will be filled in.
    * @throws TransformerException if any
    */
-  private void compilePredicates(int opPos, Expression[] predicates) throws TransformerException {
-
+  private void compilePredicates(final int oPos, final Expression[] predicates) throws TransformerException {
+    int opPos = oPos;
     for (int i = 0; OpCodes.OP_PREDICATE == getOp(opPos); i++) {
       predicates[i] = predicate(opPos);
       opPos = getNextOpPos(opPos);
@@ -834,18 +826,18 @@ public class Compiler extends OpMap {
    * @return reference to {@link Function} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
-  Expression compileFunction(int opPos) throws TransformerException {
-
-    int endFunc = opPos + getOp(opPos + 1) - 1;
+  Expression compileFunction(final int oPos) throws TransformerException {
+    int opPos = oPos;
+    final int endFunc = opPos + getOp(opPos + 1) - 1;
 
     opPos = getFirstChildPos(opPos);
 
-    int funcID = getOp(opPos);
+    final int funcID = getOp(opPos);
 
     opPos++;
 
     if (-1 != funcID) {
-      Function func = m_functionTable.getFunction(funcID);
+      final Function func = m_functionTable.getFunction(funcID);
 
       /*
        It is a trick for function-available. Since the function table is an instance field, insert
@@ -868,8 +860,8 @@ public class Compiler extends OpMap {
         }
 
         func.checkNumberArgs(i);
-      } catch (WrongNumberArgsException wnae) {
-        String name = m_functionTable.getFunctionName(funcID);
+      } catch (final WrongNumberArgsException wnae) {
+        final String name = m_functionTable.getFunctionName(funcID);
 
         error(XPATHErrorResources.ER_ONLY_ALLOWS, new Object[] {name, wnae.getMessage()});
       }
@@ -882,9 +874,9 @@ public class Compiler extends OpMap {
 
   /** {@inheritDoc} */
   @Override
-  public void error(String msg, Object[] args) throws TransformerException {
+  public void error(final String msg, final Object[] args) throws TransformerException {
 
-    String fmsg = XPATHMessages.createXPATHMessage(msg, args);
+    final String fmsg = XPATHMessages.createXPATHMessage(msg, args);
 
     if (null != m_errorHandler) {
       m_errorHandler.fatalError(new TransformerException(fmsg));
@@ -910,7 +902,7 @@ public class Compiler extends OpMap {
    *
    * @param pr The resolver for prefixes in the XPath expression.
    */
-  public void setNamespaceContext(PrefixResolver pr) {
+  public void setNamespaceContext(final PrefixResolver pr) {
     m_currentPrefixResolver = pr;
   }
 

@@ -30,18 +30,15 @@ package org.loboevolution.javax.xml.xpath;
 // Referenced classes of package org.loboevolution.javax.xml.xpath:
 //            XPathException
 
-public class XPathFactoryConfigurationException extends XPathException
-{
+public class XPathFactoryConfigurationException extends XPathException {
 
-    public XPathFactoryConfigurationException(String message)
-    {
-        super((String)null);
+    public XPathFactoryConfigurationException(final String message) {
+        super((String) null);
         throw new RuntimeException("Stub!");
     }
 
-    public XPathFactoryConfigurationException(Throwable cause)
-    {
-        super((String)null);
+    public XPathFactoryConfigurationException(final Throwable cause) {
+        super((String) null);
         throw new RuntimeException("Stub!");
     }
 }

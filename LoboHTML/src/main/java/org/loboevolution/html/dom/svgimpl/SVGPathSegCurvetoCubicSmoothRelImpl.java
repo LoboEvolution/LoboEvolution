@@ -52,7 +52,7 @@ public class SVGPathSegCurvetoCubicSmoothRelImpl implements SVGPathSegCurvetoCub
 	 * @param x2 a float.
 	 * @param y2 a float.
 	 */
-	public SVGPathSegCurvetoCubicSmoothRelImpl(float x, float y, float x2, float y2) {
+	public SVGPathSegCurvetoCubicSmoothRelImpl(final float x, final float y, final float x2, final float y2) {
 		this.x = x;
 		this.y = y;
 		this.x2 = x2;
@@ -79,7 +79,7 @@ public class SVGPathSegCurvetoCubicSmoothRelImpl implements SVGPathSegCurvetoCub
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 
@@ -103,7 +103,7 @@ public class SVGPathSegCurvetoCubicSmoothRelImpl implements SVGPathSegCurvetoCub
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX2(float x2) {
+	public void setX2(final float x2) {
 		this.x2 = x2;
 	}
 
@@ -115,7 +115,7 @@ public class SVGPathSegCurvetoCubicSmoothRelImpl implements SVGPathSegCurvetoCub
 
 	/** {@inheritDoc} */
 	@Override
-	public void setY2(float y2) {
+	public void setY2(final float y2) {
 		this.y2 = y2;
 	}
 

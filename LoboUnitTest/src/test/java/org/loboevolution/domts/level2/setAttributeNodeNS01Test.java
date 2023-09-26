@@ -68,16 +68,16 @@ public class setAttributeNodeNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.newattr.com";
-        String qualifiedName = "newAttr";
-        Document doc;
-        Element newElement;
-        Attr newAttr;
-        HTMLCollection elementList;
-        Node testAddr;
-        Node appendedChild;
-        Attr setAttr1;
-        Attr setAttr2;
+        final String namespaceURI = "http://www.newattr.com";
+        final String qualifiedName = "newAttr";
+        final Document doc;
+        final Element newElement;
+        final Attr newAttr;
+        final HTMLCollection elementList;
+        final Node testAddr;
+        final Node appendedChild;
+        final Attr setAttr1;
+        final Attr setAttr2;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
@@ -91,7 +91,7 @@ public class setAttributeNodeNS01Test extends LoboUnitTest {
             boolean success = false;
             try {
                 setAttr2 = ((Element) testAddr).setAttributeNodeNS(newAttr);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }
             assertTrue("throw_INUSE_ATTRIBUTE_ERR", success);

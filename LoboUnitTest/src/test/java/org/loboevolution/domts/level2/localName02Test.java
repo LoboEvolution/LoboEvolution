@@ -57,9 +57,9 @@ public class localName02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node createdNode;
-        String localName;
+        final Document doc;
+        final Node createdNode;
+        final String localName;
         doc = sampleXmlFile("staffNS.xml");
         createdNode = doc.createElement("test:employee");
         localName = createdNode.getLocalName();

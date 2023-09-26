@@ -49,9 +49,9 @@ import static org.junit.Assert.assertNotNull;
 public class nodegetbaseuri06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element newElement;
-        String baseURI;
+        final Document doc;
+        final Element newElement;
+        final String baseURI;
         doc = sampleXmlFile("barfoo.xml");
         newElement = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
         baseURI = doc.getBaseURI();

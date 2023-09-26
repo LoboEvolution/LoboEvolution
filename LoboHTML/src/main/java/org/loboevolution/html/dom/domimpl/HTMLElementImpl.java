@@ -81,7 +81,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	/** {@inheritDoc} */
 	@Override
-	public void assignAttributeField(String normalName, String value) {
+	public void assignAttributeField(final String normalName, final String value) {
 		if (!this.notificationsSuspended) {
 			informInvalidAttibute(normalName);
 		} else {
@@ -95,7 +95,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new StyleSheetRenderState(prevRenderState, this);
 	}
 
@@ -115,7 +115,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 *
 	 * @param deep a boolean.
 	 */
-	protected final void forgetStyle(boolean deep) {
+	protected final void forgetStyle(final boolean deep) {
 		synchronized (this) {
 			this.currentStyleDeclarationState = null;
 			this.computedStyles = null;
@@ -135,7 +135,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param javaClass a {@link java.lang.Class} object.
 	 * @return a {@link java.lang.Object} object.
 	 */
-	protected Object getAncestorForJavaClass(Class<?> javaClass) {
+	protected Object getAncestorForJavaClass(final Class<?> javaClass) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj == null || javaClass.isInstance(nodeObj)) {
 			return nodeObj;
@@ -152,7 +152,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param name a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public boolean getAttributeAsBoolean(String name) {
+	public boolean getAttributeAsBoolean(final String name) {
 		return getAttribute(name) != null;
 	}
 
@@ -163,9 +163,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param defaultValue a int.
 	 * @return a int.
 	 */
-	protected int getAttributeAsInt(String name, int defaultValue) {
+	protected int getAttributeAsInt(final String name, final int defaultValue) {
 		final String value = getAttribute(name);
-		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
 		return HtmlValues.getPixelSize(value, null, doc.getDefaultView(), defaultValue);
 	}
 
@@ -186,10 +186,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/**
 	 * <p>getComputedStyle.</p>
 	 *
-	 * @param pseudoElement a {@link java.lang.String} object.
+	 * @param pseudoElem a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.css.ComputedCSSStyleDeclaration} object.
 	 */
-	public ComputedCSSStyleDeclaration getComputedStyle(String pseudoElement) {
+	public ComputedCSSStyleDeclaration getComputedStyle(final String pseudoElem) {
+		String pseudoElement = pseudoElem;
 
 		if (pseudoElement == null) {
 			pseudoElement = "";
@@ -284,7 +285,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param elementTL a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public HTMLElementImpl getParent(String elementTL) {
+	public HTMLElementImpl getParent(final String elementTL) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
 			final HTMLElementImpl parentElement = (HTMLElementImpl) nodeObj;
@@ -342,7 +343,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 *
 	 * @param normalName a {@link java.lang.String} object.
 	 */
-	public void informInvalidAttibute(String normalName) {
+	public void informInvalidAttibute(final String normalName) {
 		if ("style".equals(normalName)) {
 			this.forgetLocalStyle();
 		}
@@ -353,11 +354,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	private void informInvalidRecursive() {
 		super.informInvalid();
-		NodeListImpl nodeList = this.getNodeList();
+		final NodeListImpl nodeList = this.getNodeList();
 		if (nodeList != null) {
 			nodeList.forEach(n -> {
 				if (n instanceof HTMLElementImpl) {
-					HTMLElementImpl htmlElementImpl = (HTMLElementImpl) n;
+					final HTMLElementImpl htmlElementImpl = (HTMLElementImpl) n;
 					htmlElementImpl.informInvalidRecursive();
 				}
 			});
@@ -369,7 +370,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 *
 	 * @param charset a {@link java.lang.String} object.
 	 */
-	public void setCharset(String charset) {
+	public void setCharset(final String charset) {
 		setAttribute("charset", charset);
 	}
 	
@@ -378,7 +379,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 *
 	 * @param mouseOver a boolean.
 	 */
-	public void setMouseOver(boolean mouseOver) {
+	public void setMouseOver(final boolean mouseOver) {
 		if (hasMouseOver) {
 			if (mouseOver) {
 				currentStyleDeclarationState = addStyleSheetDeclarations(true, getTagName());
@@ -398,32 +399,32 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param value a {@link java.lang.String} object.
 	 *
 	 */
-	public void setStyle(String value) {
+	public void setStyle(final String value) {
 		this.setAttribute("style", value);
 	}
 	
     /** {@inheritDoc} */
     @Override
     public String getContentEditable() {
-        String contenteditable = this.getAttribute("contenteditable");
+        final String contenteditable = this.getAttribute("contenteditable");
         return Strings.isBlank(contenteditable) ? "true" : contenteditable;
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setContentEditable(String contenteditable) {
+    public void setContentEditable(final String contenteditable) {
         this.setAttribute("contenteditable", contenteditable);
     }
  
 	/** {@inheritDoc} */
 	@Override
-	public void warn(String message) {
+	public void warn(final String message) {
 		logger.log(Level.WARNING, message);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void warn(String message, Throwable err) {
+	public void warn(final String message, final Throwable err) {
 		logger.log(Level.WARNING, message, err);
 	}
 
@@ -451,10 +452,10 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/** {@inheritDoc} */
 	@Override
 	public Element getOffsetParent() {
-		Node node = getParentNode();
+		final Node node = getParentNode();
 		if (node instanceof HTMLElement) {
 			final HTMLElementImpl element = (HTMLElementImpl) node;
-			ComputedCSSStyleDeclaration style = element.getComputedStyle();
+			final ComputedCSSStyleDeclaration style = element.getComputedStyle();
 			if (!CSSValues.STATIC.isEqual(style.getPosition())) {
 				return element;
 			}
@@ -493,40 +494,40 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAccessKey(String accessKey) {
+	public void setAccessKey(final String accessKey) {
 		setAttribute("accessKey", accessKey);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAutocapitalize(String autocapitalize) {
+	public void setAutocapitalize(final String autocapitalize) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDraggable(boolean draggable) {
+	public void setDraggable(final boolean draggable) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHidden(boolean hidden) {
+	public void setHidden(final boolean hidden) {
 		setAttribute("hidden", String.valueOf(hidden));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSpellcheck(boolean spellcheck) {
+	public void setSpellcheck(final boolean spellcheck) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTranslate(boolean translate) {
+	public void setTranslate(final boolean translate) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -545,7 +546,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param mouseOver a {@link java.lang.Boolean } object.
 	 * @return a {@link java.util.List} object.
 	 */
-	public final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes, boolean mouseOver) {
+	public final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(final String elementName, final String[] classes, final boolean mouseOver) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 
 		if (doc == null) {
@@ -564,14 +565,14 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param mouseOver a {@link java.lang.Boolean } object.
 	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 */
-	private CSSStyleDeclaration addStyleSheetDeclarations(boolean mouseOver, String elementName) {
+	private CSSStyleDeclaration addStyleSheetDeclarations(final boolean mouseOver, final String elementName) {
 
-		CSSStyleDeclarationImpl localStyleDeclarationState = new CSSStyleDeclarationImpl(this);
+		final CSSStyleDeclarationImpl localStyleDeclarationState = new CSSStyleDeclarationImpl(this);
 		final String classNames = getClassName();
 		final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
 
 		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray, mouseOver);
-		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
+		for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
 			localStyleDeclarationState.getProperties().addAll(entry.getRule().getStyle().getProperties());
 		}
 		return propertyValueProcessed(localStyleDeclarationState);
@@ -581,7 +582,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		final List<PropertyCssInfo> properties3 = new ArrayList<>();
 		final List<Property> properties = localStyleDeclarationState.getProperties();
 		properties.forEach(prop -> {
-			CSSValueImpl propertyValue = prop.getValue();
+			final CSSValueImpl propertyValue = prop.getValue();
 			properties3.add(new PropertyCssInfo(prop.getName(), propertyValue != null ? propertyValue.getCssText() : null, prop.isImportant()));
 		});
 

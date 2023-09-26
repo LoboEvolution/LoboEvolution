@@ -67,12 +67,12 @@ public class FunctionType4 extends PDFFunction {
 	 * Read the function information from a PDF Object
 	 */
     @Override
-	protected void parse(PDFObject obj) throws IOException {
-    	ByteBuffer buf = obj.getStreamBuffer();
+	protected void parse(final PDFObject obj) throws IOException {
+    	final ByteBuffer buf = obj.getStreamBuffer();
     	
-    	byte[] byteA = new byte[buf.remaining()];
+    	final byte[] byteA = new byte[buf.remaining()];
     	buf.get(byteA);
-    	String scriptContent = new String(byteA, "UTF-8");
+    	final String scriptContent = new String(byteA, "UTF-8");
     	this.tokens = new PostScriptParser().parse(scriptContent);
     }
 
@@ -85,10 +85,10 @@ public class FunctionType4 extends PDFFunction {
 	 * range.
 	 */
     @Override
-	protected void doFunction(float[] inputs, int inputOffset, float[] outputs, int outputOffset) {
+	protected void doFunction(final float[] inputs, final int inputOffset, final float[] outputs, final int outputOffset) {
     	prepareInitialStack(inputs, inputOffset);
-        for (String token : this.tokens) {
-            PostScriptOperation op = OperationSet.getInstance().getOperation(token);
+        for (final String token : this.tokens) {
+            final PostScriptOperation op = OperationSet.getInstance().getOperation(token);
             op.eval(this.stack);
         }
     	assertResultIsCorrect(outputs, outputOffset);
@@ -99,7 +99,7 @@ public class FunctionType4 extends PDFFunction {
 	 * @param outputs
 	 * @param outputOffset
 	 ************************************************************************/
-	private void prepareResult(float[] outputs, int outputOffset) {
+	private void prepareResult(final float[] outputs, final int outputOffset) {
 		for (int i = outputOffset; i < outputs.length; i++) {
     		outputs[outputs.length-i-1] = ((Double)this.stack.pop()).floatValue();
 		}
@@ -112,7 +112,7 @@ public class FunctionType4 extends PDFFunction {
 	 * @param inputOffset
 	 ************************************************************************/
 	
-	private void prepareInitialStack(float[] inputs, int inputOffset) {
+	private void prepareInitialStack(final float[] inputs, final int inputOffset) {
 		this.stack = new Stack<>();
     	for (int i = inputOffset; i < inputs.length; i++) {
     		this.stack.push((double) inputs[i]);
@@ -124,8 +124,8 @@ public class FunctionType4 extends PDFFunction {
 	 * @param outputOffset
 	 ************************************************************************/
 	
-	private void assertResultIsCorrect(float[] outputs, int outputOffset) {
-		int expectedResults = outputs.length-outputOffset;
+	private void assertResultIsCorrect(final float[] outputs, final int outputOffset) {
+		final int expectedResults = outputs.length-outputOffset;
 		if (this.stack.size() != expectedResults) {
         	throw new IllegalStateException("Output does not match result "+expectedResults+"/"+this.stack);
     	}

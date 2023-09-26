@@ -36,6 +36,11 @@ import org.loboevolution.driver.LoboUnitTest;
 public class HTMLAnchorElementTest extends LoboUnitTest {
 
     /**
+     * <p>urExample.</p>
+     */
+    private final String urExample = "http://www.example.com/";
+
+    /**
      * <p>attributes.</p>
      */
     @Test
@@ -93,7 +98,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
      * <p>getAttribute_and_href.</p>
      */
     @Test
-    public void getAttribute_and_href() {
+    public void getAttributeAndHref() {
         final String html
                 = "<html><head><title>AnchorTest</title>\n"
                 + "<script>\n"
@@ -307,10 +312,10 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <a id='link' href='" + URL_SECOND + "'>link</a>\n"
+                + "  <a id='link' href='" + urExample + "'>link</a>\n"
                 + "</body></html>";
 
-        final String[] messages = {URL_SECOND, "object"};
+        final String[] messages = {urExample, "object"};
         checkHtmlAlert(html, messages);
     }
 
@@ -337,13 +342,13 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <a id='idWithout' href='" + URL_SECOND + "'>link</a>\n"
-                + "  <a id='idEmpty' href='" + URL_SECOND + "' type=''>link</a>\n"
-                + "  <a id='idText' href='" + URL_SECOND + "' type='text/html'>link</a>\n"
-                + "  <a id='idCase' href='" + URL_SECOND + "' type='TExT/hTMl'>link</a>\n"
-                + "  <a id='idWhitespace' href='" + URL_SECOND + "' type=' text/html '>link</a>\n"
-                + "  <a id='idPdf' href='" + URL_SECOND + "' type='application/pdf'>link</a>\n"
-                + "  <a id='idUnknown' href='" + URL_SECOND + "' type='unknown'>link</a>\n"
+                + "  <a id='idWithout' href='" + urExample + "'>link</a>\n"
+                + "  <a id='idEmpty' href='" + urExample + "' type=''>link</a>\n"
+                + "  <a id='idText' href='" + urExample + "' type='text/html'>link</a>\n"
+                + "  <a id='idCase' href='" + urExample + "' type='TExT/hTMl'>link</a>\n"
+                + "  <a id='idWhitespace' href='" + urExample + "' type=' text/html '>link</a>\n"
+                + "  <a id='idPdf' href='" + urExample + "' type='application/pdf'>link</a>\n"
+                + "  <a id='idUnknown' href='" + urExample + "' type='unknown'>link</a>\n"
                 + "</body></html>";
 
         final String[] messages = {null, "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"};
@@ -381,7 +386,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <a id='id' href='" + URL_SECOND + "' type='text/html'>link</a>\n"
+                + "  <a id='id' href='" + urExample + "' type='text/html'>link</a>\n"
                 + "</body></html>";
 
         final String[] messages = {"text/html", "", " TExT/hTMl  ", "unknown", "application/pdf"};

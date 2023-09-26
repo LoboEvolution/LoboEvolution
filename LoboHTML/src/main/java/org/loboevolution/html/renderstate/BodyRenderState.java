@@ -45,7 +45,7 @@ public class BodyRenderState extends StyleSheetRenderState {
      * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
      * @param element         a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      */
-    public BodyRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+    public BodyRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
         super(prevRenderState, element);
     }
 
@@ -89,7 +89,7 @@ public class BodyRenderState extends StyleSheetRenderState {
         if (c != null) {
             return c;
         }
-        String tcolor = this.element.getAttribute("text");
+        final String tcolor = this.element.getAttribute("text");
 
         if (Strings.isNotBlank(tcolor)) {
             c = ColorFactory.getInstance().getColor(tcolor);

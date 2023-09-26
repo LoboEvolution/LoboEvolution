@@ -64,7 +64,7 @@ public class PDFXref {
      * @param id a int.
      * @param gen a int.
      */
-    public PDFXref(int id, int gen) {
+    public PDFXref(final int id, final int gen) {
         this.id = id;
         this.generation = gen;
         this.compressed = false;
@@ -77,7 +77,7 @@ public class PDFXref {
      * @param gen a int.
      * @param compressed a boolean.
      */
-    public PDFXref(int id, int gen, boolean compressed) {
+    public PDFXref(final int id, final int gen, final boolean compressed) {
         this.id = id;
         this.generation = gen;
         this.compressed = compressed;
@@ -89,7 +89,7 @@ public class PDFXref {
      *
      * @param line an array of {@link byte} objects.
      */
-    public PDFXref(byte[] line) {
+    public PDFXref(final byte[] line) {
         if (line == null) {
             this.id = -1;
             this.generation = -1;
@@ -165,7 +165,7 @@ public class PDFXref {
      *
      * @param obj a {@link org.loboevolution.pdfview.PDFObject} object.
      */
-    public void setObject(PDFObject obj) {
+    public void setObject(final PDFObject obj) {
         this.reference = new SoftReference<>(obj);
     }
     

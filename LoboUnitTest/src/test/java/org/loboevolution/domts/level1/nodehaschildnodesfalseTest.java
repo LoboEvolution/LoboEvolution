@@ -58,13 +58,13 @@ public class nodehaschildnodesfalseTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node child;
-        NodeList employeeIdList;
-        Node employeeNode;
-        Node textNode;
-        boolean state;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node child;
+        final NodeList employeeIdList;
+        final Node employeeNode;
+        final Node textNode;
+        final boolean state;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         child = elementList.item(1);

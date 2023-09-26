@@ -61,7 +61,7 @@ public class MenuBar extends JMenuBar {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public MenuBar(BrowserFrame frame) {
+	public MenuBar(final BrowserFrame frame) {
 		add(getFileMenu(frame));
 		add(getViewMenu(frame));
 		add(getBookmarksMenu(frame));
@@ -76,7 +76,7 @@ public class MenuBar extends JMenuBar {
 	 * @return the bookmarks menu
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public JMenu getBookmarksMenu(BrowserFrame frame) {
+	public JMenu getBookmarksMenu(final BrowserFrame frame) {
 		final JMenu menu = new JMenu("Bookmarks");
 		menu.setMnemonic('B');
 		menu.add(menuItem("Add Bookmark", 'A', "ctrl shift a", new AddBookmarkAction(frame)));
@@ -90,7 +90,7 @@ public class MenuBar extends JMenuBar {
 	 * @return the chronology menu
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public JMenu getChronologyMenu(BrowserFrame frame) {
+	public JMenu getChronologyMenu(final BrowserFrame frame) {
 		final JMenu menu = new JMenu("Recent");
 		menu.add(menuItem("Hosts", new ShowRecentHostsAction(frame)));
 		menu.add(menuItem("Download", new ShowRecentDownloadAction(frame)));
@@ -104,7 +104,7 @@ public class MenuBar extends JMenuBar {
 	 *
 	 * @return the file menu
 	 */
-	private JMenu getFileMenu(BrowserFrame frame) {
+	private JMenu getFileMenu(final BrowserFrame frame) {
 		final JMenu menu = new JMenu("File");
 		menu.setMnemonic('F');
 		menu.add(menuItem("Open File...", 'F', "ctrl O", new OpenFileAction(frame)));
@@ -123,7 +123,7 @@ public class MenuBar extends JMenuBar {
 	 * @return the help menu
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public JMenu getHelpMenu(BrowserFrame frame) {
+	public JMenu getHelpMenu(final BrowserFrame frame) {
 		final String homePage = "http://sourceforge.net/projects/loboevolution/";
 		final String development = "https://github.com/oswetto/Loboevolution/";
 		final String bug = "https://github.com/oswetto/Loboevolution/issues/";
@@ -152,7 +152,7 @@ public class MenuBar extends JMenuBar {
 	 * @return the tools menu
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public JMenu getToolsMenu(BrowserFrame frame) {
+	public JMenu getToolsMenu(final BrowserFrame frame) {
 		final JMenu menu = new JMenu("Tools");
 		menu.setMnemonic('T');
 		menu.add(menuItem("Preferences...", 'P', new PreferencesAction(frame)));
@@ -168,7 +168,7 @@ public class MenuBar extends JMenuBar {
 	 * @return the view menu
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public JMenu getViewMenu(BrowserFrame frame) {
+	public JMenu getViewMenu(final BrowserFrame frame) {
 		final JMenu menu = new JMenu("View");
 		menu.setMnemonic('V');
 		menu.add(menuItem("Style", ' ', new StyleAction(frame)));
@@ -183,7 +183,7 @@ public class MenuBar extends JMenuBar {
 	 * @param action the action
 	 * @return the j menu item
 	 */
-	private JMenuItem menuItem(String title, Action action) {
+	private JMenuItem menuItem(final String title, final Action action) {
 		return menuItem(title, (char) 0, (KeyStroke) null, action);
 	}
 
@@ -195,7 +195,7 @@ public class MenuBar extends JMenuBar {
 	 * @param action   the action
 	 * @return the j menu item
 	 */
-	private JMenuItem menuItem(String title, char mnemonic, Action action) {
+	private JMenuItem menuItem(final String title, final char mnemonic, final Action action) {
 		return menuItem(title, mnemonic, (KeyStroke) null, action);
 	}
 
@@ -208,7 +208,7 @@ public class MenuBar extends JMenuBar {
 	 * @param action      the action
 	 * @return the j menu item
 	 */
-	private JMenuItem menuItem(String title, char mnemonic, KeyStroke accelerator, Action action) {
+	private JMenuItem menuItem(final String title, final char mnemonic, final KeyStroke accelerator, final Action action) {
 		final JMenuItem item = new JMenuItem();
 		item.setAction(action);
 		item.setText(title);
@@ -230,7 +230,7 @@ public class MenuBar extends JMenuBar {
 	 * @param action      the action
 	 * @return the j menu item
 	 */
-	private JMenuItem menuItem(String title, char mnemonic, String accelerator, Action action) {
+	private JMenuItem menuItem(final String title, final char mnemonic, final String accelerator, final Action action) {
 		final KeyStroke keyStroke = accelerator == null ? null : KeyStroke.getKeyStroke(accelerator);
 		return menuItem(title, mnemonic, keyStroke, action);
 	}
@@ -243,7 +243,7 @@ public class MenuBar extends JMenuBar {
 	 * @param action      the action
 	 * @return the j menu item
 	 */
-	private JMenuItem menuItemBlank(String title, char mnemonic, Action action) {
+	private JMenuItem menuItemBlank(final String title, final char mnemonic, final Action action) {
 		final KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK);
 		return menuItem(title, mnemonic, keyStroke, action);
 	}

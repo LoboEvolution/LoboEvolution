@@ -61,7 +61,7 @@ public class SVGPathSegArcAbsImpl implements SVGPathSegArcAbs {
 	 * @param largeArcFlag a boolean.
 	 * @param sweepFlag a boolean.
 	 */
-	public SVGPathSegArcAbsImpl(float x, float y, float r1, float r2, float angle, boolean largeArcFlag, boolean sweepFlag) {
+	public SVGPathSegArcAbsImpl(final float x, final float y, final float r1, final float r2, final float angle, final boolean largeArcFlag, final boolean sweepFlag) {
 		this.x = x;
 		this.y = y;
 		this.r1 = r1;
@@ -91,7 +91,7 @@ public class SVGPathSegArcAbsImpl implements SVGPathSegArcAbs {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 
@@ -115,7 +115,7 @@ public class SVGPathSegArcAbsImpl implements SVGPathSegArcAbs {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setR1(float r1) {
+	public void setR1(final float r1) {
 		this.r1 = r1;
 	}
 
@@ -127,7 +127,7 @@ public class SVGPathSegArcAbsImpl implements SVGPathSegArcAbs {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setR2(float r2) {
+	public void setR2(final float r2) {
 		this.r2 = r2;
 	}
 
@@ -139,7 +139,7 @@ public class SVGPathSegArcAbsImpl implements SVGPathSegArcAbs {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAngle(float angle) {
+	public void setAngle(final float angle) {
 		this.angle = angle;
 	}
 
@@ -151,7 +151,7 @@ public class SVGPathSegArcAbsImpl implements SVGPathSegArcAbs {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setLargeArcFlag(boolean largeArcFlag) {
+	public void setLargeArcFlag(final boolean largeArcFlag) {
 		this.largeArcFlag = largeArcFlag;
 	}
 
@@ -163,7 +163,7 @@ public class SVGPathSegArcAbsImpl implements SVGPathSegArcAbs {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSweepFlag(boolean sweepFlag) {
+	public void setSweepFlag(final boolean sweepFlag) {
 		this.sweepFlag = sweepFlag;
 	}
 }

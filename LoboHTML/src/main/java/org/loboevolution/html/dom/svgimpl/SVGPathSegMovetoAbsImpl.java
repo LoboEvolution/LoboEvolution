@@ -30,9 +30,6 @@ import org.loboevolution.html.dom.svg.SVGPathSegMovetoAbs;
 
 /**
  * <p>SVGPathSegMovetoAbsImpl class.</p>
- *
- *
- *
  */
 public class SVGPathSegMovetoAbsImpl implements SVGPathSegMovetoAbs {
 
@@ -46,7 +43,7 @@ public class SVGPathSegMovetoAbsImpl implements SVGPathSegMovetoAbs {
 	 * @param x a float.
 	 * @param y a float.
 	 */
-	public SVGPathSegMovetoAbsImpl(float x, float y) {
+	public SVGPathSegMovetoAbsImpl(final float x, final float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -71,7 +68,7 @@ public class SVGPathSegMovetoAbsImpl implements SVGPathSegMovetoAbs {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 

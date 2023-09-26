@@ -47,7 +47,7 @@ public class CancelAction<T> extends AbstractAction {
 	 *
 	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemEditor} object.
 	 */
-	public CancelAction(ItemEditor<T> item) {
+	public CancelAction(final ItemEditor<T> item) {
 		this.item = item;
 	}
 

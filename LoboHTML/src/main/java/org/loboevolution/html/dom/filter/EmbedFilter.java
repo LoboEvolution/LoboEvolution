@@ -35,8 +35,8 @@ public class EmbedFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public short acceptNode(Node node) {
-		String nodeName = node.getNodeName();
+	public short acceptNode(final Node node) {
+		final String nodeName = node.getNodeName();
 		return "EMBED".equalsIgnoreCase(nodeName) ?
 				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}

@@ -50,9 +50,9 @@ public class documentrenamenode29Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        Node renamed;
+        final Document doc;
+        final Element docElem;
+        final Node renamed;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
 
@@ -60,7 +60,7 @@ public class documentrenamenode29Test extends LoboUnitTest {
             boolean success = false;
             try {
                 renamed = doc.renameNode(docElem, "http://www.w3.org/DOM/Test", "@");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("documentrenamenode29_ENTITY_NOT_SUPPORTED_ERR", success);

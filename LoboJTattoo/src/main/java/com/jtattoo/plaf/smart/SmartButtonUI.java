@@ -55,13 +55,13 @@ public class SmartButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
-		int w = b.getWidth();
-		int h = b.getHeight();
-		Graphics2D g2D = (Graphics2D) g;
-		Shape savedClip = g.getClip();
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
+		final int w = b.getWidth();
+		final int h = b.getHeight();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Shape savedClip = g.getClip();
 		if (b.getBorder() != null && b.isBorderPainted() && b.getBorder() instanceof UIResource) {
-			Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
+			final Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
 			if (savedClip != null) {
 				clipArea.intersect(new Area(savedClip));
 			}
@@ -71,7 +71,7 @@ public class SmartButtonUI extends BaseButtonUI {
 		if (b.isContentAreaFilled() && b.isRolloverEnabled() && b.getModel().isRollover() && b.isBorderPainted()
 				&& b.getBorder() != null) {
 			g.setColor(AbstractLookAndFeel.getTheme().getFocusColor());
-			Insets ins = b.getBorder().getBorderInsets(b);
+			final Insets ins = b.getBorder().getBorderInsets(b);
 			if (ins.top == 0) {
 				g.drawLine(1, 0, w - 1, 0);
 				g.drawLine(1, 1, w - 1, 1);

@@ -46,10 +46,10 @@ public class documentadoptnode30Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Text newText;
-        Text adoptedText;
-        String nodeValue;
+        final Document doc;
+        final Text newText;
+        final Text adoptedText;
+        final String nodeValue;
         doc = sampleXmlFile("hc_staff.xml");
         newText = doc.createTextNode("Document.adoptNode test for a TEXT_NODE");
         adoptedText = (Text) doc.adoptNode(newText);

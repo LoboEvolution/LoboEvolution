@@ -49,16 +49,16 @@ import static org.junit.Assert.*;
 public class elementcontentwhitespace02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection bodyList;
-        Element body;
-        DOMConfiguration domConfig;
-        boolean canSet;
-        boolean canSetValidate;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final HTMLCollection bodyList;
+        final Element body;
+        final DOMConfiguration domConfig;
+        final boolean canSet;
+        final boolean canSetValidate;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node child;
-        String childName;
+        final String childName;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.FALSE);

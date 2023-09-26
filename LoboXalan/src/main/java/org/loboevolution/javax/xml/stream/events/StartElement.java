@@ -53,7 +53,6 @@ package org.loboevolution.javax.xml.stream.events;
 import org.loboevolution.javax.xml.namespace.QName;
 import org.loboevolution.javax.xml.namespace.NamespaceContext;
 
-import java.util.Map;
 import java.util.Iterator;
 
 public interface StartElement extends XMLEvent {
@@ -126,5 +125,5 @@ public interface StartElement extends XMLEvent {
    * @param prefix the prefix to lookup
    * @return the uri bound to the prefix or null
    */
-  public String getNamespaceURI(String prefix);
+  public String getNamespaceURI(final String prefix);
 }

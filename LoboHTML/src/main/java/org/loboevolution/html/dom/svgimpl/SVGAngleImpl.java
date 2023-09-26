@@ -49,7 +49,7 @@ public class SVGAngleImpl implements SVGAngle {
 	/**
 	 * Creates and new SVGAngleImpl. Initialized to value degrees.
 	 */
-	public SVGAngleImpl(float value) {
+	public SVGAngleImpl(final float value) {
 		unitType = SVG_ANGLETYPE_DEG;
 		setValue(value);
 	}
@@ -60,7 +60,7 @@ public class SVGAngleImpl implements SVGAngle {
 	 * @param valueAndUnit
 	 *            The String representation of the angle. eg. 90deg
 	 */
-	public SVGAngleImpl(String valueAndUnit) {
+	public SVGAngleImpl(final String valueAndUnit) {
 		setCSSText(valueAndUnit);
 	}
 
@@ -79,7 +79,7 @@ public class SVGAngleImpl implements SVGAngle {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValue(float value) {
+	public void setValue(final float value) {
 		this.value = value;
 		valueInSpecifiedUnits = convertFromDegrees(value, unitType);
 		valueAsString = String.valueOf(valueInSpecifiedUnits);
@@ -94,7 +94,7 @@ public class SVGAngleImpl implements SVGAngle {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValueInSpecifiedUnits(float valueInSpecifiedUnits) {
+	public void setValueInSpecifiedUnits(final float valueInSpecifiedUnits) {
 		this.valueInSpecifiedUnits = valueInSpecifiedUnits;
 		valueAsString = String.valueOf(valueInSpecifiedUnits);
 		value = convertToDegrees(valueInSpecifiedUnits, unitType);
@@ -108,7 +108,7 @@ public class SVGAngleImpl implements SVGAngle {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValueAsString(String valueAsString) {
+	public void setValueAsString(final String valueAsString) {
 		this.valueAsString = valueAsString;
 		valueInSpecifiedUnits = Float.parseFloat(valueAsString);
 		value = convertToDegrees(valueInSpecifiedUnits, unitType);
@@ -116,20 +116,20 @@ public class SVGAngleImpl implements SVGAngle {
 
 	/** {@inheritDoc} */
 	@Override
-	public void newValueSpecifiedUnits(short unitType, float valueInSpecifiedUnits) {
+	public void newValueSpecifiedUnits(final short unitType, final float valueInSpecifiedUnits) {
 		this.unitType = unitType;
 		setValueInSpecifiedUnits(valueInSpecifiedUnits);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void convertToSpecifiedUnits(short unitType) {
+	public void convertToSpecifiedUnits(final short unitType) {
 		this.unitType = unitType;
 		setValue(value);
 	}
 
-	void setCSSText(String cssText) {
-		String text = cssText.trim();
+	void setCSSText(final String cssText) {
+		final String text = cssText.trim();
 		int index = -1;
 		for (int i = 0; i < text.length(); i++) {
 			if (!Character.isDigit(text.charAt(i)) && text.charAt(i) != '.' && text.charAt(i) != '-'
@@ -146,7 +146,7 @@ public class SVGAngleImpl implements SVGAngle {
 
 		} else { // there was a unit
 
-			String unit = text.substring(index);
+			final String unit = text.substring(index);
 			unitType = getUnitTypeConst(unit);
 			valueAsString = text.substring(0, index);
 			valueInSpecifiedUnits = Float.parseFloat(valueAsString);
@@ -154,7 +154,7 @@ public class SVGAngleImpl implements SVGAngle {
 		}
 	}
 
-	private float convertToDegrees(float value, short unitType) {
+	private float convertToDegrees(final float value, final short unitType) {
 		switch (unitType) {
 			case SVG_ANGLETYPE_RAD:
 				return (float) Math.toDegrees(value);
@@ -167,7 +167,7 @@ public class SVGAngleImpl implements SVGAngle {
 		}
 	}
 
-	private float convertFromDegrees(float value, short unitType) {
+	private float convertFromDegrees(final float value, final short unitType) {
 		switch (unitType) {
 			case SVG_ANGLETYPE_RAD:
 				return (float) Math.toRadians(value);
@@ -180,7 +180,7 @@ public class SVGAngleImpl implements SVGAngle {
 		}
 	}
 
-	private static short getUnitTypeConst(String unit) {
+	private static short getUnitTypeConst(final String unit) {
 		if (unit == null) {
 			return SVG_ANGLETYPE_UNSPECIFIED;
 		}

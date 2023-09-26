@@ -87,7 +87,7 @@ public interface UIControl {
 	 * @param availWidth a int.
 	 * @param availHeight a int.
 	 */
-	void reset(int availWidth, int availHeight);
+	void reset(int availWidth, final int availHeight);
 
 	/**
 	 * <p>setBounds.</p>
@@ -97,7 +97,7 @@ public interface UIControl {
 	 * @param width a int.
 	 * @param height a int.
 	 */
-	void setBounds(int x, int y, int width, int height);
+	void setBounds(int x, final int y, final int width, final int height);
 
 	/**
 	 * <p>setRUIControl.</p>

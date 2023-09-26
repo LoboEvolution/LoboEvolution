@@ -47,13 +47,13 @@ public class BaseTreeUI extends BasicTreeUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintHorizontalLine(Graphics g, JComponent c, int y, int left, int right) {
+	protected void paintHorizontalLine(final Graphics g, final JComponent c, final int y, final int left, final int right) {
 		drawDashedHorizontalLine(g, y, left, right);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintVerticalLine(Graphics g, JComponent c, int x, int top, int bottom) {
+	protected void paintVerticalLine(final Graphics g, final JComponent c, final int x, final int top, final int bottom) {
 		drawDashedVerticalLine(g, x, top, bottom);
 	}
 

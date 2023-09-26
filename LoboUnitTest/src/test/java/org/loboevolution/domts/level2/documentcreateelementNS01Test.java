@@ -54,15 +54,15 @@ public class documentcreateelementNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        String namespaceURI = "http://www.w3.org/DOM/Test/level2";
-        String qualifiedName = "XML:XML";
-        String nodeName;
-        String nsURI;
-        String localName;
-        String prefix;
-        String tagName;
+        final Document doc;
+        final Element element;
+        final String namespaceURI = "http://www.w3.org/DOM/Test/level2";
+        final String qualifiedName = "XML:XML";
+        final String nodeName;
+        final String nsURI;
+        final String localName;
+        final String prefix;
+        final String tagName;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS(namespaceURI, qualifiedName);
         nodeName = element.getNodeName();

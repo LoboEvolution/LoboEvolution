@@ -109,7 +109,7 @@ public class PatternType1 extends PDFPattern {
 	 * Note the resources passed in are ignored...
 	 */
     @Override
-	protected void parse(PDFObject patternObj, Map rsrc) throws IOException
+	protected void parse(final PDFObject patternObj, final Map rsrc) throws IOException
     {
         this.data = patternObj.getStream();
         
@@ -117,7 +117,7 @@ public class PatternType1 extends PDFPattern {
         this.paintType = patternObj.getDictRef("PaintType").getIntValue();
         this.tilingType = patternObj.getDictRef("TilingType").getIntValue();
         
-        PDFObject bboxObj = patternObj.getDictRef("BBox");
+        final PDFObject bboxObj = patternObj.getDictRef("BBox");
 	this.bbox= new Rectangle2D.Float(bboxObj.getAt(0).getFloatValue(),
                                     bboxObj.getAt(1).getFloatValue(),
                                     bboxObj.getAt(2).getFloatValue(),
@@ -136,7 +136,7 @@ public class PatternType1 extends PDFPattern {
 	 * TexturePaint to use in the PDFPaint.
 	 */
     @Override
-	public PDFPaint getPaint(PDFPaint basePaint) {
+	public PDFPaint getPaint(final PDFPaint basePaint) {
       
         
         // now create a page bounded by the pattern's user space size
@@ -149,26 +149,26 @@ public class PatternType1 extends PDFPattern {
         }
         
         // now parse the pattern contents
-        PDFParser prc = new PDFParser(page, this.data, getResources());
+        final PDFParser prc = new PDFParser(page, this.data, getResources());
         prc.go(true);
                 
         // get actual image
-		Paint paint = new Paint() {
+		final Paint paint = new Paint() {
 			@Override
-			public PaintContext createContext(ColorModel cm, Rectangle deviceBounds, Rectangle2D userBounds,
-					AffineTransform xform, RenderingHints hints) {
-				ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
-				ColorModel model = new ComponentColorModel(cs, true, false, Transparency.TRANSLUCENT,
+			public PaintContext createContext(final ColorModel cm, final Rectangle deviceBounds, final Rectangle2D userBounds,
+                                              final AffineTransform xform, final RenderingHints hints) {
+				final ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+				final ColorModel model = new ComponentColorModel(cs, true, false, Transparency.TRANSLUCENT,
 						DataBuffer.TYPE_BYTE);
 
-				Rectangle2D devBBox = xform.createTransformedShape(userBounds).getBounds2D();
+				final Rectangle2D devBBox = xform.createTransformedShape(userBounds).getBounds2D();
 
-				double[] steps = new double[] { getXStep(), getYStep() };
+				final double[] steps = new double[] { getXStep(), getYStep() };
 				xform.deltaTransform(steps, 0, steps, 0, 1);
 
-				int width = (int) Math.ceil(devBBox.getWidth());
-				int height = (int) Math.ceil(devBBox.getHeight());
-				BufferedImage img = (BufferedImage) page.getImage(width, height, null, null, false, true);
+				final int width = (int) Math.ceil(devBBox.getWidth());
+				final int height = (int) Math.ceil(devBBox.getHeight());
+				final BufferedImage img = (BufferedImage) page.getImage(width, height, null, null, false, true);
 				return new Type1PaintContext(model, devBBox, (float) steps[0], (float) steps[1], img.getData());
 			}
 
@@ -244,7 +244,7 @@ public class PatternType1 extends PDFPattern {
         private final PatternType1 pattern;
         
         /** Create a tiling pattern paint */
-        public TilingPatternPaint(Paint paint, PatternType1 pattern) {
+        public TilingPatternPaint(final Paint paint, final PatternType1 pattern) {
             super (paint);
             
             this.pattern = pattern;
@@ -257,8 +257,8 @@ public class PatternType1 extends PDFPattern {
          * @param s the path to fill
          */
         @Override
-		public Rectangle2D fill(PDFRenderer state, Graphics2D g,
-                                GeneralPath s) {                        
+		public Rectangle2D fill(final PDFRenderer state, final Graphics2D g,
+                                final GeneralPath s) {
             // first transform s into device space
             AffineTransform at = g.getTransform();
             Shape xformed = s.createTransformedShape(at);
@@ -274,7 +274,7 @@ public class PatternType1 extends PDFPattern {
             // now figure out where the shape should be
             try {
                 at = state.getTransform().createInverse();
-            } catch (NoninvertibleTransformException nte) {
+            } catch (final NoninvertibleTransformException nte) {
                 // oh well (?)
             }
             xformed = at.createTransformedShape(xformed);
@@ -315,8 +315,8 @@ public class PatternType1 extends PDFPattern {
         /**
          * Create a paint context
          */
-        Type1PaintContext(ColorModel colorModel, Rectangle2D bbox,
-                          float xstep, float ystep, Raster data) 
+        Type1PaintContext(final ColorModel colorModel, final Rectangle2D bbox,
+                          final float xstep, final float ystep, final Raster data)
         {
             this.colorModel = colorModel;
             this.bbox = bbox;
@@ -338,21 +338,21 @@ public class PatternType1 extends PDFPattern {
         }
         
         @Override
-		public Raster getRaster(int x, int y, int w, int h) {
-            ColorSpace cs = getColorModel().getColorSpace();
+		public Raster getRaster(final int x, final int y, final int w, final int h) {
+            final ColorSpace cs = getColorModel().getColorSpace();
        
-            int numComponents = cs.getNumComponents();
+            final int numComponents = cs.getNumComponents();
   
             // all the data, plus alpha channel
-            int[] imgData = new int[w * h * (numComponents + 1)];
+            final int[] imgData = new int[w * h * (numComponents + 1)];
   
 	    // the x and y step, as ints	
-            int useXStep = (int) Math.abs(Math.ceil(this.xstep));
-	    int useYStep = (int) Math.abs(Math.ceil(this.ystep));
+            final int useXStep = (int) Math.abs(Math.ceil(this.xstep));
+	    final int useYStep = (int) Math.abs(Math.ceil(this.ystep));
          
             // a completely transparent pixel (alpha of 0)
-            int[] emptyPixel = new int[numComponents + 1];
-            int[] usePixel = new int[numComponents + 1];
+            final int[] emptyPixel = new int[numComponents + 1];
+            final int[] usePixel = new int[numComponents + 1];
        
             // for each device coordinate
             for (int j = 0; j < h; j++) {
@@ -392,16 +392,16 @@ public class PatternType1 extends PDFPattern {
                         pixel = this.data.getPixel(xloc, yloc, usePixel); 
                     } 
                             
-                    int base = (j * w + i) * (numComponents + 1);
-                    System.arraycopy(pixel, 0, imgData, base + 0, pixel.length);
+                    final int base = (j * w + i) * (numComponents + 1);
+                    System.arraycopy(pixel, 0, imgData, base, pixel.length);
                 }
             }
             
-            WritableRaster raster =
+            final WritableRaster raster =
                 getColorModel().createCompatibleWritableRaster(w, h);
             raster.setPixels(0, 0, w, h, imgData);
           
-            Raster child = raster.createTranslatedChild(x, y);
+            final Raster child = raster.createTranslatedChild(x, y);
       
             return child;
         }

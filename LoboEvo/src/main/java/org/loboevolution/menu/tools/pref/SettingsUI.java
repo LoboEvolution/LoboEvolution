@@ -134,7 +134,7 @@ public class SettingsUI extends AbstractToolsUI {
 	 *
 	 * @return the box
 	 */
-	private Component getBox(String title, LoboCheckBox mozillaPanel, LoboCheckBox chromePanel ,LoboButton button) {
+	private Component getBox(final String title, final LoboCheckBox mozillaPanel, final LoboCheckBox chromePanel , final LoboButton button) {
 		final LoboPanel groupBox = new LoboPanel(title);
 		groupBox.setPreferredSize(new Dimension(420,75));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));

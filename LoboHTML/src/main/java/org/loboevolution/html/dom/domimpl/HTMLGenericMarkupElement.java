@@ -28,9 +28,6 @@ package org.loboevolution.html.dom.domimpl;
 
 /**
  * <p>HTMLGenericMarkupElement class.</p>
- *
- *
- *
  */
 public class HTMLGenericMarkupElement extends HTMLElementImpl {
 	/**
@@ -38,7 +35,7 @@ public class HTMLGenericMarkupElement extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLGenericMarkupElement(String name) {
+	public HTMLGenericMarkupElement(final String name) {
 		super(name);
 	}
 }

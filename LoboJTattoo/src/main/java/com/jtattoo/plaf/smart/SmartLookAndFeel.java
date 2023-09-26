@@ -431,7 +431,7 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
 	 * @param name a {@link java.lang.String} object.
 	 * @return a {@link java.util.Properties} object.
 	 */
-	public static Properties getThemeProperties(String name) {
+	public static Properties getThemeProperties(final String name) {
 		return themesMap.get(name);
 	}
 
@@ -449,7 +449,7 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
 	 *
 	 * @param themesProps a {@link java.util.Properties} object.
 	 */
-	public static void setCurrentTheme(Properties themesProps) {
+	public static void setCurrentTheme(final Properties themesProps) {
 		setTheme(themesProps);
 	}
 
@@ -458,7 +458,7 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
 	 *
 	 * @param themesProps a {@link java.util.Properties} object.
 	 */
-	public static void setTheme(Properties themesProps) {
+	public static void setTheme(final Properties themesProps) {
 		currentThemeName = "smartTheme";
 		if (myTheme == null) {
 			myTheme = new SmartDefaultTheme();
@@ -476,7 +476,7 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
 	 *
 	 * <p>setTheme.</p>
 	 */
-	public static void setTheme(String name) {
+	public static void setTheme(final String name) {
 		setTheme(themesMap.get(name));
 		if (myTheme != null) {
 			AbstractTheme.setInternalName(name);
@@ -490,8 +490,8 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
 	 * @param licenseKey a {@link java.lang.String} object.
 	 * @param logoString a {@link java.lang.String} object.
 	 */
-	public static void setTheme(String name, String licenseKey, String logoString) {
-		Properties props = themesMap.get(name);
+	public static void setTheme(final String name, final String licenseKey, final String logoString) {
+		final Properties props = themesMap.get(name);
 		if (props != null) {
 			props.put("licenseKey", licenseKey);
 			props.put("logoString", logoString);
@@ -543,12 +543,12 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void initClassDefaults(UIDefaults table) {
+	protected void initClassDefaults(final UIDefaults table) {
 		if (!"smartTheme".equals(currentThemeName)) {
 			setTheme("Default");
 		}
 		super.initClassDefaults(table);
-		Object[] uiDefaults = {
+		final Object[] uiDefaults = {
 				// BaseLookAndFeel classes
 				"LabelUI", BaseLabelUI.class.getName(), "SeparatorUI", BaseSeparatorUI.class.getName(), "TextFieldUI",
 				BaseTextFieldUI.class.getName(), "TextAreaUI", BaseTextAreaUI.class.getName(), "EditorPaneUI",

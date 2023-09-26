@@ -53,16 +53,16 @@ public class entities03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection pList;
         Element pElem;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node child;
-        String childName;
-        EntityReference entRef;
-        int childType;
+        final String childName;
+        final EntityReference entRef;
+        final int childType;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("entities", Boolean.FALSE);

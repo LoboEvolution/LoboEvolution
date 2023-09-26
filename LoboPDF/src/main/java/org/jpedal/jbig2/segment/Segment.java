@@ -101,7 +101,7 @@ public abstract class Segment {
 	 *
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 */
-	public Segment(JBIG2StreamDecoder streamDecoder) {
+	public Segment(final JBIG2StreamDecoder streamDecoder) {
 		this.decoder = streamDecoder;
 
 //		try {
@@ -125,7 +125,7 @@ public abstract class Segment {
 	 */
 	protected short readATValue() throws IOException {
 		short atValue;
-		short c0 = atValue = decoder.readByte();
+		final short c0 = atValue = decoder.readByte();
 
 		if ((c0 & 0x80) != 0) {
 			atValue |= -1 - 0xff;
@@ -148,7 +148,7 @@ public abstract class Segment {
 	 *
 	 * @param segmentHeader a {@link org.jpedal.jbig2.segment.SegmentHeader} object.
 	 */
-	public void setSegmentHeader(SegmentHeader segmentHeader) {
+	public void setSegmentHeader(final SegmentHeader segmentHeader) {
 		this.segmentHeader = segmentHeader;
 	}
 

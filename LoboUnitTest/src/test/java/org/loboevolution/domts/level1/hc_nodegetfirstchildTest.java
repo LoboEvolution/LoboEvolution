@@ -56,11 +56,11 @@ public class hc_nodegetfirstchildTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        Node fchildNode;
-        String childName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final Node fchildNode;
+        final String childName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);

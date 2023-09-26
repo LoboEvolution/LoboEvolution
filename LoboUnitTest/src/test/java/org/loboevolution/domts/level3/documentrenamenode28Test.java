@@ -50,14 +50,14 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode28Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entityNodeMap;
-        NamedNodeMap notationNodeMap;
-        Node entity;
-        Notation notation;
-        Node renamedEntityNode;
-        Node renamedNotationNode;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entityNodeMap;
+        final NamedNodeMap notationNodeMap;
+        final Node entity;
+        final Notation notation;
+        final Node renamedEntityNode;
+        final Node renamedNotationNode;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entityNodeMap = docType.getEntities();
@@ -68,7 +68,7 @@ public class documentrenamenode28Test extends LoboUnitTest {
         boolean success = false;
         try {
             renamedEntityNode = doc.renameNode(entity, "http://www.w3.org/DOM/Test", "beta");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("documentrenamenode28_ENTITY_NOT_SUPPORTED_ERR", success);
@@ -77,7 +77,7 @@ public class documentrenamenode28Test extends LoboUnitTest {
         success = false;
         try {
             renamedNotationNode = doc.renameNode(notation, "http://www.w3.org/DOM/Test", "notation2");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("documentrenamenode28_NOTATION_NOT_SUPPORTED_ERR", success);

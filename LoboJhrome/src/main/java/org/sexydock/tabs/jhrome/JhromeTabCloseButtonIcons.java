@@ -69,10 +69,10 @@ public class JhromeTabCloseButtonIcons {
         return createIcon(12, 2.5f, new Color(237, 233, 233), new BasicStroke(1.2f), new Color(67, 30, 32));
     }
 
-    public static ImageIcon createIcon(int size, float xLength, Color xColor, Stroke xStroke, Color circleColor) {
-        BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+    public static ImageIcon createIcon(final int size, final float xLength, final Color xColor, final Stroke xStroke, final Color circleColor) {
+        final BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
 
-        Graphics2D g2 = (Graphics2D) image.getGraphics();
+        final Graphics2D g2 = (Graphics2D) image.getGraphics();
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -84,7 +84,7 @@ public class JhromeTabCloseButtonIcons {
         g2.setColor(xColor);
         g2.setStroke(xStroke);
 
-        int size2 = (int) Math.ceil(size / 2.0);
+        final int size2 = (int) Math.ceil(size / 2.0);
 
         g2.draw(new Line2D.Float(size2 - xLength, size2 - xLength, size2 + xLength, size2 + xLength));
         g2.draw(new Line2D.Float(size2 - xLength, size2 + xLength, size2 + xLength, size2 - xLength));

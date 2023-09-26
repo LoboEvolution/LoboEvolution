@@ -50,16 +50,16 @@ import static org.junit.Assert.assertTrue;
 public class nodeinsertbefore13Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document docAlt;
-        DocumentFragment docFrag;
-        Element elemAlt;
-        Element elem;
-        Node appendedChild;
-        Node inserted;
-        Element docElem;
-        String rootNS;
-        String rootTagname;
+        final Document doc;
+        final Document docAlt;
+        final DocumentFragment docFrag;
+        final Element elemAlt;
+        final Element elem;
+        final Node appendedChild;
+        final Node inserted;
+        final Element docElem;
+        final String rootNS;
+        final String rootTagname;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
@@ -74,7 +74,7 @@ public class nodeinsertbefore13Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = docFrag.insertBefore(elemAlt, elem);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }
             assertTrue("throw_WRONG_DOCUMENT_ERR", success);

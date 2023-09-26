@@ -49,13 +49,13 @@ public class BernsteinInternalFrameUI extends BaseInternalFrameUI {
 	 *
 	 * @param b a {@link javax.swing.JInternalFrame} object.
 	 */
-	public BernsteinInternalFrameUI(JInternalFrame b) {
+	public BernsteinInternalFrameUI(final JInternalFrame b) {
 		super(b);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected JComponent createNorthPane(JInternalFrame w) {
+	protected JComponent createNorthPane(final JInternalFrame w) {
 		titlePane = new BernsteinInternalFrameTitlePane(w);
 		return titlePane;
 	}

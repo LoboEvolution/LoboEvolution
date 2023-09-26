@@ -36,7 +36,6 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NodeList;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -60,10 +59,10 @@ public class CDataSectionNormalizeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection nameList;
-        Element lChild;
-        NodeList childNodes;
+        final Document doc;
+        final HTMLCollection nameList;
+        final Element lChild;
+        final NodeList childNodes;
         CDATASection cdataN;
         String data;
         doc = sampleXmlFile("staff.xml");

@@ -45,7 +45,7 @@ public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteEl
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new QuoteRenderState(prevRenderState, this);
 	}
 
@@ -60,13 +60,13 @@ public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteEl
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCite(String cite) {
+	public void setCite(final String cite) {
 		setAttribute("cite", cite);
 	}
 
 	@Override
 	public int getClientHeight() {
-		int clientHeight = super.getClientHeight();
+		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 17 : clientHeight;
 	}
 

@@ -53,18 +53,18 @@ public class McWinToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
 			return;
 		}
 		super.paintBackground(g, b);
-		int width = b.getWidth();
-		int height = b.getHeight();
-		Graphics2D g2D = (Graphics2D) g;
-		Composite composite = g2D.getComposite();
+		final int width = b.getWidth();
+		final int height = b.getHeight();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite composite = g2D.getComposite();
 		g2D.setColor(Color.lightGray);
 		g2D.drawRect(0, 0, width - 2, height - 1);
-		AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+		final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 		g2D.setComposite(alpha);
 		g2D.setColor(Color.white);
 		g2D.drawLine(width - 1, 0, width - 1, height - 1);

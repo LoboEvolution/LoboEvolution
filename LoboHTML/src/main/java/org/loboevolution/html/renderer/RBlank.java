@@ -48,20 +48,19 @@ final class RBlank extends BaseBoundableRenderable {
 	 * @param width a int.
 	 * @param height a int.
 	 */
-	public RBlank(ModelNode me, FontMetrics fm, RenderableContainer container, int ascentPlusLeading, int width,
-			int height) {
+	public RBlank(final ModelNode me, final FontMetrics fm, final RenderableContainer container, final int ascentPlusLeading, final int width,
+				  final int height) {
 		super(container, me);
 		this.fontMetrics = fm;
 		this.ascentPlusLeading = ascentPlusLeading;
-		// Dimensions set when constructed.
 		this.setWidth(width);
 		this.setHeight(height);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
-			RenderableSpot endPoint) {
+	public boolean extractSelectionText(final StringBuilder buffer, final boolean inSelection, final RenderableSpot startPoint,
+										final RenderableSpot endPoint) {
 		if (this == startPoint.renderable || this == endPoint.renderable) {
 			if (inSelection) {
 				return false;
@@ -75,7 +74,7 @@ final class RBlank extends BaseBoundableRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public RenderableSpot getLowestRenderableSpot(int x, int y) {
+	public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
 		return new RenderableSpot(this, x, y);
 	}
 
@@ -137,7 +136,7 @@ final class RBlank extends BaseBoundableRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
+	public boolean paintSelection(final Graphics g, final boolean inSelection, final RenderableSpot startPoint, final RenderableSpot endPoint) {
 		if (this == startPoint.renderable || this == endPoint.renderable) {
 			if (inSelection) {
 				return false;

@@ -62,8 +62,8 @@ public class PDFDecoder {
      * @return a boolean.
      * @throws java.io.IOException if any.
      */
-    public static boolean isLastFilter(PDFObject dict, Set<String> filters) throws IOException {
-        PDFObject filter = dict.getDictRef("Filter");
+    public static boolean isLastFilter(final PDFObject dict, final Set<String> filters) throws IOException {
+        final PDFObject filter = dict.getDictRef("Filter");
         if (filter == null) {
             return false;
         } else if (filter.getType() == PDFObject.NAME) {
@@ -83,7 +83,7 @@ public class PDFDecoder {
         PDFObject[] ary;
         PDFObject[] params;
 
-        private FilterSpec(PDFObject dict, PDFObject filter) throws IOException {
+        private FilterSpec(final PDFObject dict, final PDFObject filter) throws IOException {
             if (filter.getType() == PDFObject.NAME) {
                 ary = new PDFObject[1];
                 ary[0] = filter;
@@ -91,7 +91,7 @@ public class PDFDecoder {
                 params[0] = dict.getDictRef("DecodeParms");
             } else {
                 ary = filter.getArray();
-                PDFObject parmsobj = dict.getDictRef("DecodeParms");
+                final PDFObject parmsobj = dict.getDictRef("DecodeParms");
                 if (parmsobj != null) {
                     params = parmsobj.getArray();
                 } else {
@@ -112,21 +112,21 @@ public class PDFDecoder {
      * @return a {@link java.nio.ByteBuffer} object.
      * @throws java.io.IOException if any.
      */
-    public static ByteBuffer decodeStream(PDFObject dict, ByteBuffer streamBuf, Set<String> filterLimits)
+    public static ByteBuffer decodeStream(final PDFObject dict, ByteBuffer streamBuf, final Set<String> filterLimits)
             throws IOException {
 
-        PDFObject filter = dict.getDictRef("Filter");
+        final PDFObject filter = dict.getDictRef("Filter");
         if (filter == null) {
             // just apply default decryption
             return dict.getDecrypter().decryptBuffer(null, dict, streamBuf);
         } else {
             // apply filters
-            FilterSpec spec = new FilterSpec(dict, filter);
+            final FilterSpec spec = new FilterSpec(dict, filter);
 
             // determine whether default encryption applies or if there's a
             // specific Crypt filter; it must be the first filter according to
             // the errata for PDF1.7
-            boolean specificCryptFilter =
+            final boolean specificCryptFilter =
                     spec.ary.length != 0 && spec.ary[0].getStringValue().equals("Crypt");
             if (!specificCryptFilter) {
                 // No Crypt filter, so should apply default decryption (if
@@ -136,7 +136,7 @@ public class PDFDecoder {
             }
 
             for (int i = 0; i < spec.ary.length; i++) {
-                String enctype = spec.ary[i].getStringValue();
+                final String enctype = spec.ary[i].getStringValue();
                 try {
                     if (filterLimits.contains(enctype)) {
                         break;
@@ -172,7 +172,7 @@ public class PDFDecoder {
                     } else {
                         throw new PDFParseException("Unknown coding method:" + spec.ary[i].getStringValue());
                     }
-                }catch(Exception e) {
+                }catch(final Exception e) {
                     throw new PDFParseException("Problem decoding "+enctype+" encoded stream!", e);
                 }
 
@@ -188,7 +188,7 @@ public class PDFDecoder {
      * @return the name of the crypt filter to apply
      * @throws IOException if there's a problem reading the objects
      */
-    private static String getCryptFilterName(PDFObject param) throws IOException {
+    private static String getCryptFilterName(final PDFObject param) throws IOException {
         String cfName = PDFDecrypterFactory.CF_IDENTITY;
         if (param != null) {
             final PDFObject nameObj = param.getDictRef("Name");
@@ -207,29 +207,29 @@ public class PDFDecoder {
      * @return whether the stream is encrypted
      * @throws java.io.IOException if any.
      */
-    public static boolean isEncrypted(PDFObject dict)
+    public static boolean isEncrypted(final PDFObject dict)
             throws IOException {
 
-        PDFObject filter = dict.getDictRef("Filter");
+        final PDFObject filter = dict.getDictRef("Filter");
         if (filter == null) {
             // just apply default decryption
             return dict.getDecrypter().isEncryptionPresent();
         } else {
 
             // apply filters
-            FilterSpec spec = new FilterSpec(dict, filter);
+            final FilterSpec spec = new FilterSpec(dict, filter);
 
             // determine whether default encryption applies or if there's a
             // specific Crypt filter; it must be the first filter according to
             // the errata for PDF1.7
-            boolean specificCryptFilter = spec.ary.length != 0 &&
+            final boolean specificCryptFilter = spec.ary.length != 0 &&
                     spec.ary[0].getStringValue().equals("Crypt");
             if (!specificCryptFilter) {
                 // No Crypt filter, so we just need to refer to
                 // the default decrypter
                 return dict.getDecrypter().isEncryptionPresent();
             } else {
-                String cfName = getCryptFilterName(spec.params[0]);
+                final String cfName = getCryptFilterName(spec.params[0]);
                 // see whether the specified crypt filter really decrypts
                 return dict.getDecrypter().isEncryptionPresent(cfName);
             }

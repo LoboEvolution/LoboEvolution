@@ -63,16 +63,16 @@ public class nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node refChild;
-        Node newChild;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node refChild;
+        final Node newChild;
         Node child;
-        int length;
+        final int length;
         String childName;
-        List<String> expectedWhitespace = new ArrayList<>();
+        final List<String> expectedWhitespace = new ArrayList<>();
         expectedWhitespace.add("#text");
         expectedWhitespace.add("#text");
         expectedWhitespace.add("name");
@@ -87,7 +87,7 @@ public class nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         expectedWhitespace.add("ADDRESS");
         expectedWhitespace.add("#text");
 
-        List<String> expectedNoWhitespace = new ArrayList<String>();
+        final List<String> expectedNoWhitespace = new ArrayList<String>();
         expectedNoWhitespace.add("EMPLOYEEID");
         expectedNoWhitespace.add("NAME");
         expectedNoWhitespace.add("POSITION");
@@ -95,8 +95,8 @@ public class nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         expectedNoWhitespace.add("GENDER");
         expectedNoWhitespace.add("ADDRESS");
 
-        List<String> expected;
-        List<String> result = new ArrayList<>();
+        final List<String> expected;
+        final List<String> result = new ArrayList<>();
 
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");

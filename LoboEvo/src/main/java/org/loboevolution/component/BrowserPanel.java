@@ -57,7 +57,7 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	 *
 	 * @param browserFrame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public BrowserPanel(BrowserFrame browserFrame) {
+	public BrowserPanel(final BrowserFrame browserFrame) {
 		super(new BorderLayout());
 		this.browserFrame = browserFrame;
 		this.scroll = new JScrollPane();

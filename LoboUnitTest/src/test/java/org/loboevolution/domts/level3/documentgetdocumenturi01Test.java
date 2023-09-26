@@ -44,8 +44,8 @@ import static org.junit.Assert.assertNotNull;
 public class documentgetdocumenturi01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String docURI;
+        final Document doc;
+        final String docURI;
         doc = sampleXmlFile("hc_staff.xml");
         docURI = doc.getDocumentURI();
         assertNotNull("documentgetdocumenturi01", docURI);

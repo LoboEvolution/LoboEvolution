@@ -54,14 +54,14 @@ public class documentadoptnode23Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
-        Node adoptedNode;
-        Node acronymElem;
-        int acronymElemLen;
-        int adoptedLen;
-        NodeList acronymElemChild;
-        NodeList adoptedNodeChild;
+        final Document doc;
+        final HTMLCollection childList;
+        final Node adoptedNode;
+        final Node acronymElem;
+        final int acronymElemLen;
+        final int adoptedLen;
+        final NodeList acronymElemChild;
+        final NodeList adoptedNodeChild;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("acronym");
         acronymElem = childList.item(0);

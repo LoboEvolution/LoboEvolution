@@ -40,7 +40,7 @@ public enum ReadyStateType {
 
     private final Integer value;
 
-    ReadyStateType(Integer value) {
+    ReadyStateType(final Integer value) {
         this.value = value;
     }
 

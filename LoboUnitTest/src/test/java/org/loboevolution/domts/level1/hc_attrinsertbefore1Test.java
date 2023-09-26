@@ -52,13 +52,13 @@ public class hc_attrinsertbefore1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection acronymList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr titleAttr;
-        Text textNode;
-        Node refChild = null;
+        final Document doc;
+        final HTMLCollection acronymList;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr titleAttr;
+        final Text textNode;
+        final Node refChild = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
@@ -70,7 +70,7 @@ public class hc_attrinsertbefore1Test extends LoboUnitTest {
         boolean success = false;
         try {
             titleAttr.insertBefore(textNode, refChild);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("throw_NOT_SUPPORTED_ERR", success);

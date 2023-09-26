@@ -50,14 +50,14 @@ import static org.junit.Assert.*;
 public class elementsetidattributens03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element employeeIdElem;
-        NamedNodeMap attributesMap;
-        Attr attr;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element employeeIdElem;
+        final NamedNodeMap attributesMap;
+        final Attr attr;
         boolean id = false;
-        Element elem;
-        String elemName;
+        final Element elem;
+        final String elemName;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("em");
         employeeIdElem = (Element) elemList.item(0);

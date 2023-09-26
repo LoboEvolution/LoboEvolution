@@ -49,13 +49,13 @@ public abstract class HTMLBasicInputElement extends HTMLElementImpl {
 
     private int minlength = 0;
 
-    public HTMLBasicInputElement(String name) {
+    public HTMLBasicInputElement(final String name) {
         super(name);
     }
 
     public abstract String getValue();
 
-    public abstract void setValue(String value);
+    public abstract void setValue(final String value);
 
     public boolean isDisabled() {
         final String disabled = getAttribute("disabled");
@@ -73,7 +73,7 @@ public abstract class HTMLBasicInputElement extends HTMLElementImpl {
     }
 
     public boolean isAutocomplete() {
-        String autocomplete = this.getAttribute("autocomplete");
+        final String autocomplete = this.getAttribute("autocomplete");
         return "on".equalsIgnoreCase(autocomplete);
     }
 
@@ -154,7 +154,7 @@ public abstract class HTMLBasicInputElement extends HTMLElementImpl {
         try {
             final String maxLength = getAttribute("maxlength");
             return Integer.parseInt(maxLength.trim());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return Integer.MAX_VALUE;
         }
     }
@@ -167,7 +167,7 @@ public abstract class HTMLBasicInputElement extends HTMLElementImpl {
         try {
             final String maxLength = getAttribute("minlength");
             return Integer.parseInt(maxLength.trim());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return -1;
         }
     }
@@ -177,87 +177,87 @@ public abstract class HTMLBasicInputElement extends HTMLElementImpl {
     }
 
 
-    public void setDisabled(boolean disabled) {
+    public void setDisabled(final boolean disabled) {
         setAttribute("disabled", String.valueOf(disabled));
     }
 
-    public void setAutocomplete(String autocomplete) {
+    public void setAutocomplete(final String autocomplete) {
         this.setAttribute("autocomplete", String.valueOf(autocomplete));
     }
 
-    public void setAutofocus(boolean autofocus) {
+    public void setAutofocus(final boolean autofocus) {
         this.setAttribute("autofocus", String.valueOf(autofocus));
     }
 
-    public void setRequired(boolean required) {
+    public void setRequired(final boolean required) {
         this.setAttribute("required", String.valueOf(required));
     }
 
-    public void setDefaultValue(String defaultValue) {
+    public void setDefaultValue(final String defaultValue) {
         // TODO Auto-generated method stub
 
     }
 
-    public void setDirName(String dirName) {
+    public void setDirName(final String dirName) {
         // TODO Auto-generated method stub
 
     }
 
-    public void setPlaceholder(String placeholder) {
+    public void setPlaceholder(final String placeholder) {
         this.setAttribute("placeholder", placeholder);
 
     }
 
-    public void setSelectionDirection(String selectionDirection) {
+    public void setSelectionDirection(final String selectionDirection) {
         // TODO Auto-generated method stub
 
     }
 
-    public void setCustomValidity(String error) {
+    public void setCustomValidity(final String error) {
         // TODO Auto-generated method stub
 
     }
 
-    public void setRangeText(String replacement) {
+    public void setRangeText(final String replacement) {
         // TODO Auto-generated method stub
     }
 
-    public void setRangeText(String replacement, int start, int end) {
+    public void setRangeText(final String replacement, final int start, final int end) {
         // TODO Auto-generated method stub
     }
 
-    public void setSelectionRange(int start, int end, Direction direction) {
+    public void setSelectionRange(final int start, final int end, final Direction direction) {
         // TODO Auto-generated method stub
     }
 
-    public void setReadOnly(boolean readOnly) {
+    public void setReadOnly(final boolean readOnly) {
         setAttribute("readonly", String.valueOf(readOnly));
 
     }
 
-    public void setFocusable(boolean focusable) {
+    public void setFocusable(final boolean focusable) {
         this.focusable = focusable;
     }
 
-    public void setSelectionStart(int start) {
+    public void setSelectionStart(final int start) {
         this.selectionStart = start;
     }
 
-    public void setSelectionEnd(int end) {
+    public void setSelectionEnd(final int end) {
         this.selectionEnd = end;
     }
 
-    public void setSelectionRange(int start, int end) {
+    public void setSelectionRange(final int start, final int end) {
         setSelectionStart(start);
         setSelectionEnd(end);
     }
 
-    public void setMaxLength(int value) {
+    public void setMaxLength(final int value) {
         this.maxlength = value;
         this.isMaxSet = true;
     }
 
-    public void setMinLength(int value) {
+    public void setMinLength(final int value) {
         this.minlength = value;
         this.isMinSet = true;
     }

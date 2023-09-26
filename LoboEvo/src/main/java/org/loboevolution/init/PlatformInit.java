@@ -44,7 +44,7 @@ public class PlatformInit {
 	 *
 	 * @param args a {@link java.lang.String} object.
 	 */
-	public static void main(String... args) {
+	public static void main(final String... args) {
 		SwingUtilities.invokeLater(() -> {
 			try {
 				new GuiInit().install();

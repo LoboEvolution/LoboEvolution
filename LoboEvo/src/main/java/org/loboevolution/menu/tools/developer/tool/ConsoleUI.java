@@ -53,7 +53,7 @@ public class ConsoleUI extends AbstractToolsUI {
     private RTextScrollPane addTextArea() {
         final RSyntaxTextArea textArea = new RSyntaxTextArea();
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL);
-        SessionStorage storage = new SessionStorage(new HtmlRendererConfigImpl());
+        final SessionStorage storage = new SessionStorage(new HtmlRendererConfigImpl());
         textArea.setText(String.valueOf(storage.getItem("log")));
 
         final RTextScrollPane scrollBar = new RTextScrollPane(textArea);

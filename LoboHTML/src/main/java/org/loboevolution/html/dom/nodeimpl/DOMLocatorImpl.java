@@ -41,7 +41,7 @@ public class DOMLocatorImpl implements DOMLocator {
     private final Node relatedNode;
     private final String uri;
 
-    public DOMLocatorImpl(DOMLocator src) {
+    public DOMLocatorImpl(final DOMLocator src) {
         this.lineNumber = src.getLineNumber();
         this.columnNumber = src.getColumnNumber();
         this.byteOffset = src.getByteOffset();

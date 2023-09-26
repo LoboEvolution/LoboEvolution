@@ -52,7 +52,7 @@ public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension getPreferredSize(JComponent c) {
+	public Dimension getPreferredSize(final JComponent c) {
 		return SIZE;
 	}
 
@@ -62,7 +62,7 @@ public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 		if (c != null) {
 			boolean horizontal = true;
 			if (c instanceof JSeparator) {
-				JSeparator sep = (JSeparator) c;
+				final JSeparator sep = (JSeparator) c;
 				horizontal = sep.getOrientation() == SwingConstants.HORIZONTAL;
 			}
 			if (horizontal) {

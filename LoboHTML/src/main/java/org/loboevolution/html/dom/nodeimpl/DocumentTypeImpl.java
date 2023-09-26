@@ -54,7 +54,7 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	 * @param publicId a {@link java.lang.String} object.
 	 * @param systemId a {@link java.lang.String} object.
 	 */
-	public DocumentTypeImpl(String qname, String publicId, String systemId) {
+	public DocumentTypeImpl(final String qname, final String publicId, final String systemId) {
 		this.qualifiedName = qname;
 		this.publicId = publicId;
 		this.systemId = systemId;
@@ -91,7 +91,7 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	}
 
 	@Override
-	public Node appendChild(Node newChild) {
+	public Node appendChild(final Node newChild) {
 		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append node.");
 	}
 
@@ -120,7 +120,7 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		builder.append("<!DOCTYPE");
 		if (Strings.isNotBlank(getName())) {
 			builder.append(" ");

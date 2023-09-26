@@ -55,11 +55,11 @@ public class hc_nodegetprevioussiblingTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        Node psNode;
-        String psName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final Node psNode;
+        final String psName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("strong");
         nameNode = elementList.item(1);

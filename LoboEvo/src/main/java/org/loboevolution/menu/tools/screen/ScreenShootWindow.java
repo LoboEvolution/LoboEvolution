@@ -27,14 +27,10 @@
 package org.loboevolution.menu.tools.screen;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import org.loboevolution.component.BrowserFrame;
-import org.loboevolution.img.ImageViewer;
 
 /**
  * <p>ScreenShootWindow class.</p>
@@ -51,20 +47,20 @@ public class ScreenShootWindow extends JFrame {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public ScreenShootWindow(BrowserFrame frame) {
+    public ScreenShootWindow(final BrowserFrame frame) {
 		initLayout();
 		initComponents(frame);
     }
 
-    private void initComponents(BrowserFrame frame) {
+    private void initComponents(final BrowserFrame frame) {
         add(new CapturePane(frame));
     }
 
     private void initLayout() {
         setUndecorated(true);
         setBackground(new Color(0, 0, 0, 0));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Rectangle bounds = getVirtualBounds();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        final Rectangle bounds = getVirtualBounds();
         setLocation(bounds.getLocation());
         setSize(bounds.getSize());
         setAlwaysOnTop(true);
@@ -72,10 +68,10 @@ public class ScreenShootWindow extends JFrame {
     }
 
     public static Rectangle getVirtualBounds() {
-        Rectangle bounds = new Rectangle(0, 0, 0, 0);
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice lstGDs[] = ge.getScreenDevices();
-        for (GraphicsDevice gd : lstGDs) {
+        final Rectangle bounds = new Rectangle(0, 0, 0, 0);
+        final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        final GraphicsDevice[] lstGDs = ge.getScreenDevices();
+        for (final GraphicsDevice gd : lstGDs) {
             bounds.add(gd.getDefaultConfiguration().getBounds());
         }
         return bounds;

@@ -61,11 +61,11 @@ public class hc_namednodemapremovenameditemTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddress;
-        NamedNodeMap attributes;
-        Attr streetAttr;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddress;
+        final NamedNodeMap attributes;
+        final Attr streetAttr;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddress = (Element) elementList.item(2);

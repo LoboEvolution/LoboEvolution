@@ -51,12 +51,12 @@ public class canonicalform10Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection divList;
-        Element div;
-        DOMConfiguration domConfig;
-        boolean canSet;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final HTMLCollection divList;
+        final Element div;
+        final DOMConfiguration domConfig;
+        final boolean canSet;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node node;
         doc = sampleXmlFile("canonicalform03.xml");

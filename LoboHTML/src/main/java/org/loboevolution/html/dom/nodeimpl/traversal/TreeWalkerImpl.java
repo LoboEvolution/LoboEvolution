@@ -51,7 +51,7 @@ public class TreeWalkerImpl implements TreeWalker {
 
     private int whatToShow;
 
-    public TreeWalkerImpl(Node root, int whatToShow, NodeFilter filter) {
+    public TreeWalkerImpl(final Node root, final int whatToShow, final NodeFilter filter) {
         this.currentNode = root;
         this.root = root;
         this.whatToShow = whatToShow;
@@ -62,8 +62,8 @@ public class TreeWalkerImpl implements TreeWalker {
     public Node firstChild() {
         if (currentNode == null) return null;
 
-        Node node = currentNode.getFirstChild();
-        if (node !=null) {
+        final Node node = currentNode.getFirstChild();
+        if (node != null) {
             currentNode = node;
         }
         return node;
@@ -73,7 +73,7 @@ public class TreeWalkerImpl implements TreeWalker {
     public Node lastChild() {
         if (currentNode == null) return null;
 
-        Node node = currentNode.getLastChild();
+        final Node node = currentNode.getLastChild();
         if (node !=null) {
             currentNode = node;
         }
@@ -116,7 +116,7 @@ public class TreeWalkerImpl implements TreeWalker {
     public Node nextSibling() {
         if (currentNode == null) return null;
 
-        Node node = currentNode.getNextSibling();
+        final Node node = currentNode.getNextSibling();
         if (node !=null) {
             currentNode = node;
         }
@@ -127,7 +127,7 @@ public class TreeWalkerImpl implements TreeWalker {
     public Node parentNode() {
         if (currentNode == null) return null;
 
-        Node node = currentNode.getParentNode();
+        final Node node = currentNode.getParentNode();
         if (node !=null) {
             currentNode = node;
         }
@@ -172,7 +172,7 @@ public class TreeWalkerImpl implements TreeWalker {
     public Node previousSibling() {
         if (currentNode == null) return null;
 
-        Node node = currentNode.getPreviousSibling();
+        final Node node = currentNode.getPreviousSibling();
         if (node !=null) {
             currentNode = node;
         }

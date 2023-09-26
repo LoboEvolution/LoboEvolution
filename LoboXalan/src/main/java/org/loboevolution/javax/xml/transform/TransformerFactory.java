@@ -26,57 +26,48 @@
 
 package org.loboevolution.javax.xml.transform;
 
+public abstract class TransformerFactory {
 
-// Referenced classes of package org.loboevolution.javax.xml.transform:
-//            TransformerFactoryConfigurationError, TransformerConfigurationException, Source, Transformer, 
-//            Templates, URIResolver, ErrorListener
-
-public abstract class TransformerFactory
-{
-
-    protected TransformerFactory()
-    {
+    protected TransformerFactory() {
         throw new RuntimeException("Stub!");
     }
 
     public static TransformerFactory newInstance()
-        throws TransformerFactoryConfigurationError
-    {
+            throws TransformerFactoryConfigurationError {
         throw new RuntimeException("Stub!");
     }
 
-    public static TransformerFactory newInstance(String factoryClassName, ClassLoader classLoader)
-        throws TransformerFactoryConfigurationError
-    {
+    public static TransformerFactory newInstance(final String factoryClassName, final ClassLoader classLoader)
+            throws TransformerFactoryConfigurationError {
         throw new RuntimeException("Stub!");
     }
 
     public abstract Transformer newTransformer(Source source)
-        throws TransformerConfigurationException;
+            throws TransformerConfigurationException;
 
     public abstract Transformer newTransformer()
-        throws TransformerConfigurationException;
+            throws TransformerConfigurationException;
 
     public abstract Templates newTemplates(Source source)
-        throws TransformerConfigurationException;
+            throws TransformerConfigurationException;
 
-    public abstract Source getAssociatedStylesheet(Source source, String s, String s1, String s2)
-        throws TransformerConfigurationException;
-
-    public abstract void setURIResolver(URIResolver uriresolver);
+    public abstract Source getAssociatedStylesheet(Source source, final String s, final String s1, final String s2)
+            throws TransformerConfigurationException;
 
     public abstract URIResolver getURIResolver();
 
-    public abstract void setFeature(String s, boolean flag)
-        throws TransformerConfigurationException;
+    public abstract void setURIResolver(URIResolver uriresolver);
 
-    public abstract boolean getFeature(String s);
+    public abstract void setFeature(final String s, boolean flag)
+            throws TransformerConfigurationException;
 
-    public abstract void setAttribute(String s, Object obj);
+    public abstract boolean getFeature(final String s);
 
-    public abstract Object getAttribute(String s);
+    public abstract void setAttribute(final String s, Object obj);
 
-    public abstract void setErrorListener(ErrorListener errorlistener);
+    public abstract Object getAttribute(final String s);
 
     public abstract ErrorListener getErrorListener();
+
+    public abstract void setErrorListener(ErrorListener errorlistener);
 }

@@ -50,7 +50,7 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public void deleteRow(int index) throws DOMException {
+	public void deleteRow(final int index) throws DOMException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -87,7 +87,7 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLTableRowElement insertRow(int index) throws DOMException {
+	public HTMLTableRowElement insertRow(final int index) throws DOMException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -101,36 +101,36 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlign(String align) {
+	public void setAlign(final String align) {
 		setAttribute("align", align);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCh(String ch) {
+	public void setCh(final String ch) {
 		setAttribute("ch", ch);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setChOff(String chOff) {
+	public void setChOff(final String chOff) {
 		setAttribute("choff", chOff);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setvAlign(String vAlign) {
+	public void setvAlign(final String vAlign) {
 		setAttribute("valign", vAlign);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		final String name = getNodeName();
-		int state;
+		final int state;
 		switch (name) {
 			case "TFOOT":
 				state = RenderState.DISPLAY_TABLE_FOOTER_GROUP;

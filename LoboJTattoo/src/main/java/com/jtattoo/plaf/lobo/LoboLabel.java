@@ -43,7 +43,7 @@ public class LoboLabel extends JLabel implements LoboLookAndFeel {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public LoboLabel(String name) {
+	public LoboLabel(final String name) {
 		super(name);
 		setForeground(foreground());
 	}

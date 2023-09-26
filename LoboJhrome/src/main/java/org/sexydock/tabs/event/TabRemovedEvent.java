@@ -33,7 +33,7 @@ import javax.swing.*;
 public class TabRemovedEvent extends TabbedPaneEvent {
     public final Tab removedTab;
     public final int removedIndex;
-    public TabRemovedEvent(JTabbedPane tabbedPane, long timestamp, Tab removedTab, int removedIndex) {
+    public TabRemovedEvent(final JTabbedPane tabbedPane, final long timestamp, final Tab removedTab, final int removedIndex) {
         super(tabbedPane, timestamp);
         this.removedTab = removedTab;
         this.removedIndex = removedIndex;

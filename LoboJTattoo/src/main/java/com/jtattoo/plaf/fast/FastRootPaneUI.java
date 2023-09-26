@@ -46,7 +46,7 @@ public class FastRootPaneUI extends BaseRootPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public JComponent createTitlePane(JRootPane root) {
+	public JComponent createTitlePane(final JRootPane root) {
 		return new FastTitlePane(root, this);
 	}
 

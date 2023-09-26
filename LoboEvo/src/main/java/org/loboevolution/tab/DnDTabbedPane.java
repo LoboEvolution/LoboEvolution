@@ -53,11 +53,11 @@ public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 	 *
 	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 */
-	public DnDTabbedPane(IBrowserPanel browserPanel) {
+	public DnDTabbedPane(final IBrowserPanel browserPanel) {
 		init(browserPanel);
 	}
 
-	private void init(IBrowserPanel browserPanel) {
+	private void init(final IBrowserPanel browserPanel) {
 		setUI(new JhromeTabbedPaneUI());
 		putClientProperty(JhromeTabbedPaneUI.NEW_TAB_BUTTON_VISIBLE, false);
 		putClientProperty(JhromeTabbedPaneUI.TAB_CLOSE_BUTTONS_VISIBLE, true);
@@ -66,8 +66,8 @@ public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 		this.browserPanel = browserPanel;
 		final ChangeListener changeListener = changeEvent -> {
 			final JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
-			IBrowserFrame browserFrame = browserPanel.getBrowserFrame();
-			String uri = TabStore.getTab(sourceTabbedPane.getSelectedIndex());
+			final IBrowserFrame browserFrame = browserPanel.getBrowserFrame();
+			final String uri = TabStore.getTab(sourceTabbedPane.getSelectedIndex());
 			if (browserFrame.getToolbar() != null && Strings.isNotBlank(uri)) {
 				browserFrame.getToolbar().getAddressBar().setText(uri);
 			}
@@ -90,7 +90,7 @@ public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 	 *
 	 * @param index the index to set
 	 */
-	public void setIndex(int index) {
+	public void setIndex(final int index) {
 		this.index = index;
 	}
 

@@ -60,16 +60,16 @@ public class importNode13Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        DocumentType doc1Type;
-        NamedNodeMap notationList;
-        Notation notation;
-        Notation aNode;
-        Document ownerDocument;
-        DocumentType docType;
+        final Document doc;
+        final Document aNewDoc;
+        final DocumentType doc1Type;
+        final NamedNodeMap notationList;
+        final Notation notation;
+        final Notation aNode;
+        final Document ownerDocument;
+        final DocumentType docType;
         String system;
-        String publicVal;
+        final String publicVal;
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
         doc1Type = aNewDoc.getDoctype();

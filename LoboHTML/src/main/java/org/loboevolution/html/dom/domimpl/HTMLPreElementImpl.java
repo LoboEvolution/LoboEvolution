@@ -48,7 +48,7 @@ public class HTMLPreElementImpl extends HTMLElementImpl implements HTMLPreElemen
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new PreRenderState(prevRenderState, this);
 	}
 
@@ -56,19 +56,19 @@ public class HTMLPreElementImpl extends HTMLElementImpl implements HTMLPreElemen
 	@Override
 	public double getWidth() {
 		final String widthText = getAttribute("width");
-		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
 		return HtmlValues.getPixelSize(widthText, null, doc.getDefaultView(), 0);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(double width) {
+	public void setWidth(final double width) {
 		setAttribute("width", String.valueOf(width));
 	}
 
 	@Override
 	public int getClientHeight() {
-		int clientHeight = super.getClientHeight();
+		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 15 : clientHeight;
 	}
 

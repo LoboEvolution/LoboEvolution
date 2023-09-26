@@ -47,9 +47,9 @@ import static org.junit.Assert.assertNull;
 public class documentsetdocumenturi02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String docURI;
-        String nullValue = null;
+        final Document doc;
+        final String docURI;
+        final String nullValue = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         doc.setDocumentURI(nullValue);

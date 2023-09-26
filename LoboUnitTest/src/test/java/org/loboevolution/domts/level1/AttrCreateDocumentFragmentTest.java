@@ -53,13 +53,13 @@ public class AttrCreateDocumentFragmentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        Element newOne;
-        Element domesticNode;
-        NamedNodeMap domesticAttr;
-        Attr attrs;
-        String attrName;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final Element newOne;
+        final Element domesticNode;
+        final NamedNodeMap domesticAttr;
+        final Attr attrs;
+        final String attrName;
         doc = sampleXmlFile("staff.xml");
         docFragment = doc.createDocumentFragment();
         newOne = doc.createElement("newElement");

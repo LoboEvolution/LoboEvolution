@@ -62,11 +62,11 @@ public class elementgetelementemptyTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr newAttribute;
-        HTMLCollection elementList;
-        Element testEmployee;
-        String attrValue;
+        final Document doc;
+        final Attr newAttribute;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final String attrValue;
         doc = sampleXmlFile("staff.xml");
         newAttribute = doc.createAttribute("district");
         elementList = doc.getElementsByTagName("address");

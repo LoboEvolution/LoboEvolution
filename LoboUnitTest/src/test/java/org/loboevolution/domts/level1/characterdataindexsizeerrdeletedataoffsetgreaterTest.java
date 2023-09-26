@@ -66,10 +66,10 @@ public class characterdataindexsizeerrdeletedataoffsetgreaterTest extends LoboUn
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        CharacterData child;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final CharacterData child;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         nameNode = elementList.item(0);
@@ -79,7 +79,7 @@ public class characterdataindexsizeerrdeletedataoffsetgreaterTest extends LoboUn
             boolean success = false;
             try {
                 child.deleteData(40, 3);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }
             assertTrue("throw_INDEX_SIZE_ERR", success);

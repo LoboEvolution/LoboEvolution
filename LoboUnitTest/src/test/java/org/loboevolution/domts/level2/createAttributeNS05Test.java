@@ -56,11 +56,11 @@ public class createAttributeNS05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.ecommerce.org/";
-        String qualifiedName = "econm:local";
-        Document doc;
-        Attr newAttr;
-        String attrName;
+        final String namespaceURI = "http://www.ecommerce.org/";
+        final String qualifiedName = "econm:local";
+        final Document doc;
+        final Attr newAttr;
+        final String attrName;
         doc = sampleXmlFile("staffNS.xml");
         newAttr = doc.createAttributeNS(namespaceURI, qualifiedName);
         attrName = newAttr.getName();

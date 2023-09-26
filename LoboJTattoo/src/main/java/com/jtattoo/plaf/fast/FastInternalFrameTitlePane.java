@@ -51,13 +51,13 @@ public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public FastInternalFrameTitlePane(JInternalFrame f) {
+	public FastInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
 		} else {
@@ -68,7 +68,7 @@ public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintPalette(Graphics g) {
+	public void paintPalette(final Graphics g) {
 		if (JTattooUtilities.isFrameActive(this)) {
 			g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
 		} else {

@@ -35,7 +35,7 @@ public class SVGFontFaceElementImpl extends SVGElementImpl implements SVGFontFac
      *
      * @param name a {@link String} object.
      */
-    public SVGFontFaceElementImpl(String name) {
+    public SVGFontFaceElementImpl(final String name) {
         super(name);
     }
 }

@@ -66,7 +66,7 @@ public final class PositionOptions {
 	 *
 	 * @param timeout	the "timeout" value.
 	 */
-	public void setTimeout(long timeout) {
+	public void setTimeout(final long timeout) {
 		this.timeout = timeout;
 	}
 	
@@ -86,7 +86,7 @@ public final class PositionOptions {
 	 *
 	 * @param maximumAge	the "maximum age" value.
 	 */
-	public void setMaximumAge(long maximumAge) {
+	public void setMaximumAge(final long maximumAge) {
 		this.maximumAge = maximumAge;
 	}
     

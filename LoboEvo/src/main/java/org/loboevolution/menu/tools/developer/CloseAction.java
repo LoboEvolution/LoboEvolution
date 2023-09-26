@@ -44,7 +44,7 @@ public class CloseAction extends AbstractAction {
 	 *
 	 * @param window a {@link DeveloperToolsWindow} object.
 	 */
-	public CloseAction(DeveloperToolsWindow window) {
+	public CloseAction(final DeveloperToolsWindow window) {
 		this.window = window;
 	}
 

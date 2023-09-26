@@ -54,7 +54,7 @@ public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public GraphiteInternalFrameTitlePane(JInternalFrame f) {
+	public GraphiteInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
@@ -78,7 +78,7 @@ public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (isActive()) {
 			g.setColor(ColorHelper.darker(AbstractLookAndFeel.getWindowBorderColor(), 10));
 		} else {
@@ -89,12 +89,12 @@ public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
-		Graphics2D g2D = (Graphics2D) g;
-		Color fc = isActive() ? AbstractLookAndFeel.getWindowTitleForegroundColor()
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Color fc = isActive() ? AbstractLookAndFeel.getWindowTitleForegroundColor()
 				: AbstractLookAndFeel.getWindowInactiveTitleForegroundColor();
 		if (fc.equals(Color.white)) {
-			Color bc = isActive() ? AbstractLookAndFeel.getWindowTitleColorDark()
+			final Color bc = isActive() ? AbstractLookAndFeel.getWindowTitleColorDark()
 					: AbstractLookAndFeel.getWindowInactiveTitleColorDark();
 			g2D.setColor(bc);
 			JTattooUtilities.drawString(frame, g, title, x - 1, y - 1);

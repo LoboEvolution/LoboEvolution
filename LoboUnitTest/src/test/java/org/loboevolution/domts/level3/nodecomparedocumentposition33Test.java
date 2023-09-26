@@ -51,15 +51,15 @@ import static org.junit.Assert.assertNotEquals;
 public class nodecomparedocumentposition33Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        Attr attr;
-        int position1;
-        int position2;
-        int position3;
-        int position4;
-        int position5;
-        Attr replacedAttr;
+        final Document doc;
+        final Element elem;
+        final Attr attr;
+        final int position1;
+        final int position2;
+        final int position3;
+        final int position4;
+        final int position5;
+        final Attr replacedAttr;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");

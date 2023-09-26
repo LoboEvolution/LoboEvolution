@@ -42,7 +42,7 @@ final class True implements PostScriptOperation {
 	 *
 	 * errors: stackoverflow
 	 */
-	public void eval(Stack<Object> environment) {
+	public void eval(final Stack<Object> environment) {
 	    environment.push(true);
 	}
 }

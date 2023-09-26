@@ -36,25 +36,22 @@ import org.loboevolution.pdfview.font.PDFGlyph;
 
 /**
  * a class encapsulating the text state
- *
  * Author Mike Wessler
-  *
  */
 public class PDFTextFormat implements Cloneable {
     /** character spacing */
-    private float tc = 0;
+    private float tc;
     /** word spacing */
-    private float tw = 0;
+    private float tw;
     /** horizontal scaling */
     private float th = 1;
     /** leading */
     private float tl = 0;
     /** rise amount */
-    private float tr = 0;
+    private float tr;
     /** text mode */
     private int tm = PDFShapeCmd.FILL;
-    /** text knockout */
-    private float tk = 0;
+
     /** current matrix transform */
     private final AffineTransform cur;
     /** matrix transform at start of line */
@@ -68,9 +65,7 @@ public class PDFTextFormat implements Cloneable {
     // private Object array[]= new Object[1];
     /** build text rep of word */
     private final StringBuilder word = new StringBuilder();
-    // this is where we build and keep the word list for this page.
-    /** start location of the hunk of text */
-    private final Point2D.Float wordStart;
+
     /** location of the end of the previous hunk of text */
     private final Point2D.Float prevEnd;
 
@@ -80,11 +75,8 @@ public class PDFTextFormat implements Cloneable {
     public PDFTextFormat() {
         this.cur = new AffineTransform();
         this.line = new AffineTransform();
-        this.wordStart = new Point2D.Float(-100, -100);
         this.prevEnd = new Point2D.Float(-100, -100);
-        this.tc = this.tw = this.tr = this.tk = 0;
-        this.tm = PDFShapeCmd.FILL;
-        this.th = 1;
+        this.tc = this.tw = this.tr = 0;
     }
 
     /**
@@ -118,7 +110,7 @@ public class PDFTextFormat implements Cloneable {
      *
      * @param spc a float.
      */
-    public void setCharSpacing(float spc) {
+    public void setCharSpacing(final float spc) {
         this.tc = spc;
     }
 
@@ -136,7 +128,7 @@ public class PDFTextFormat implements Cloneable {
      *
      * @param spc a float.
      */
-    public void setWordSpacing(float spc) {
+    public void setWordSpacing(final float spc) {
         this.tw = spc;
     }
 
@@ -155,7 +147,7 @@ public class PDFTextFormat implements Cloneable {
      * @param scl
      * the horizontal scale, in percent (100=normal)
      */
-    public void setHorizontalScale(float scl) {
+    public void setHorizontalScale(final float scl) {
         this.th = scl / 100;
     }
 
@@ -173,7 +165,7 @@ public class PDFTextFormat implements Cloneable {
      *
      * @param spc a float.
      */
-    public void setLeading(float spc) {
+    public void setLeading(final float spc) {
         this.tl = spc;
     }
 
@@ -201,7 +193,7 @@ public class PDFTextFormat implements Cloneable {
      * @param f a {@link org.loboevolution.pdfview.font.PDFFont} object.
      * @param size a float.
      */
-    public void setFont(PDFFont f, float size) {
+    public void setFont(final PDFFont f, final float size) {
         this.font = f;
         this.fsize = size;
     }
@@ -218,7 +210,6 @@ public class PDFTextFormat implements Cloneable {
     /**
      * set the mode of the text. The correspondence of m to mode is
      * show in the following table. m is a value from 0-7 in binary:
-     *
      * 000 Fill
      * 001 Stroke
      * 010 Fill + Stroke
@@ -227,14 +218,12 @@ public class PDFTextFormat implements Cloneable {
      * 101 Stroke + Clip
      * 110 Fill + Stroke + Clip
      * 111 Clip
-     *
      * Therefore: Fill corresponds to the low bit being 0; Clip
      * corresponds to the hight bit being 1; and Stroke corresponds
      * to the middle xor low bit being 1.
-     *
      * @param m a int.
      */
-    public void setMode(int m) {
+    public void setMode(final int m) {
         int mode = 0;
         if ((m & 0x1) == 0) {
             mode |= PDFShapeCmd.FILL;
@@ -255,7 +244,7 @@ public class PDFTextFormat implements Cloneable {
      * the text render mode using the
      * codes from PDFShapeCmd and not the wacky PDF codes
      */
-    public void setTextFormatMode(int mode) {
+    public void setTextFormatMode(final int mode) {
         this.tm = mode;
     }
 
@@ -273,7 +262,7 @@ public class PDFTextFormat implements Cloneable {
      *
      * @param spc a float.
      */
-    public void setRise(float spc) {
+    public void setRise(final float spc) {
         this.tr = spc;
     }
 
@@ -291,7 +280,7 @@ public class PDFTextFormat implements Cloneable {
      * @param x a float.
      * @param y a float.
      */
-    public void carriageReturn(float x, float y) {
+    public void carriageReturn(final float x, final float y) {
         this.line.concatenate(AffineTransform.getTranslateInstance(x, y));
         this.cur.setTransform(this.line);
     }
@@ -310,7 +299,7 @@ public class PDFTextFormat implements Cloneable {
      *
      * @param matrix an array of {@link float} objects.
      */
-    public void setMatrix(float[] matrix) {
+    public void setMatrix(final float[] matrix) {
         this.line = new AffineTransform(matrix);
         this.cur.setTransform(this.line);
     }
@@ -324,19 +313,19 @@ public class PDFTextFormat implements Cloneable {
      * the text to add
      * @param autoAdjustStroke a boolean.
      */
-    public void doText(PDFPage cmds, String text, boolean autoAdjustStroke) {
-        Point2D.Float zero = new Point2D.Float();
-        AffineTransform scale = new AffineTransform(this.fsize * this.th, 0, /* 0 */
+    public void doText(final PDFPage cmds, final String text, final boolean autoAdjustStroke) {
+        final Point2D.Float zero = new Point2D.Float();
+        final AffineTransform scale = new AffineTransform(this.fsize * this.th, 0, /* 0 */
         0, this.fsize, /* 0 */
         0, this.tr /* 1 */);
-        AffineTransform at = new AffineTransform();
-        List<PDFGlyph> l = this.font.getGlyphs(text);
+        final AffineTransform at = new AffineTransform();
+        final List<PDFGlyph> l = this.font.getGlyphs(text);
         if (PDFDebugger.SHOW_TEXT_ANCHOR) {
             if (PDFDebugger.DEBUG_TEXT) {
                 PDFDebugger.debug("POINT count: " + l.size());
             }
         }
-        for (PDFGlyph glyph : l) {
+        for (final PDFGlyph glyph : l) {
             at.setTransform(this.cur);
             at.concatenate(scale);
             if (PDFDebugger.SHOW_TEXT_REGIONS) {
@@ -351,7 +340,7 @@ public class PDFTextFormat implements Cloneable {
                 if (PDFDebugger.DEBUG_TEXT) {
                     PDFDebugger.debug("BOX " + path.getBounds());
                 }
-                PDFCmd lastColor = cmds.findLastCommand(PDFFillPaintCmd.class);
+                final PDFCmd lastColor = cmds.findLastCommand(PDFFillPaintCmd.class);
                 if (PDFDebugger.DEBUG_TEXT) {
                     PDFDebugger.debug("BOX " + lastColor);
                 }
@@ -371,7 +360,7 @@ public class PDFTextFormat implements Cloneable {
             }
             advanceX *= this.th;
             if (PDFDebugger.SHOW_TEXT_ANCHOR) {
-                AffineTransform at2 = new AffineTransform();
+                final AffineTransform at2 = new AffineTransform();
                 at2.setTransform(this.cur);
                 GeneralPath path = new GeneralPath();
                 path.moveTo(0, 0);
@@ -384,7 +373,7 @@ public class PDFTextFormat implements Cloneable {
                 if (PDFDebugger.DEBUG_TEXT) {
                     PDFDebugger.debug("POINT " + advance);
                 }
-                PDFCmd lastColor = cmds.findLastCommand(PDFFillPaintCmd.class);
+                final PDFCmd lastColor = cmds.findLastCommand(PDFFillPaintCmd.class);
                 cmds.addFillPaint(PDFPaint.getColorPaint(new Color(255, 0, 0)));
                 cmds.addPath(path, PDFShapeCmd.FILL, autoAdjustStroke);
                 if (lastColor != null) {
@@ -408,12 +397,12 @@ public class PDFTextFormat implements Cloneable {
      * @param autoAdjustStroke a boolean.
      * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
-    public void doText(PDFPage cmds, Object[] ary, boolean autoAdjustStroke) throws PDFParseException {
-        for (Object o : ary) {
+    public void doText(final PDFPage cmds, final Object[] ary, final boolean autoAdjustStroke) throws PDFParseException {
+        for (final Object o : ary) {
             if (o instanceof String) {
                 doText(cmds, (String) o, autoAdjustStroke);
             } else if (o instanceof Double) {
-                float val = ((Double) o).floatValue() / 1000f;
+                final float val = ((Double) o).floatValue() / 1000f;
                 this.cur.translate(-val * this.fsize * this.th, 0);
             } else {
                 throw new PDFParseException("Bad element in TJ array");
@@ -434,19 +423,15 @@ public class PDFTextFormat implements Cloneable {
      * Clone the text format
      */
     @Override
-    public Object clone() {
-        PDFTextFormat newFormat = new PDFTextFormat();
-        // copy values
+    public Object clone() throws CloneNotSupportedException {
+        final PDFTextFormat newFormat = new PDFTextFormat();
         newFormat.setCharSpacing(getCharSpacing());
         newFormat.setWordSpacing(getWordSpacing());
         newFormat.setHorizontalScale(getHorizontalScale());
         newFormat.setLeading(getLeading());
         newFormat.setTextFormatMode(getMode());
         newFormat.setRise(getRise());
-        // copy immutable fields
         newFormat.setFont(getFont(), getFontSize());
-        // clone transform (mutable)
-        // newFormat.getTransform().setTransform(getTransform());
         return newFormat;
     }
 }

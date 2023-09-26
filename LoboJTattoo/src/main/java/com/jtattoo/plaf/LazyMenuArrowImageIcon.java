@@ -55,12 +55,12 @@ public class LazyMenuArrowImageIcon implements Icon {
 	 * @param leftToRightName a {@link java.lang.String} object.
 	 * @param rightToLefttName a {@link java.lang.String} object.
 	 */
-	public LazyMenuArrowImageIcon(String leftToRightName, String rightToLefttName) {
+	public LazyMenuArrowImageIcon(final String leftToRightName, final String rightToLefttName) {
 		this.leftToRightName = leftToRightName;
 		this.rightToLefttName = rightToLefttName;
 	}
 
-	private Icon getIcon(Component c) {
+	private Icon getIcon(final Component c) {
 		if (JTattooUtilities.isLeftToRight(c)) {
 			return getLeftToRightIcon();
 		} else {
@@ -71,7 +71,7 @@ public class LazyMenuArrowImageIcon implements Icon {
 	/** {@inheritDoc} */
 	@Override
 	public int getIconHeight() {
-		Icon ico = getIcon(null);
+		final Icon ico = getIcon(null);
 		if (ico != null) {
 			return ico.getIconHeight();
 		} else {
@@ -82,7 +82,7 @@ public class LazyMenuArrowImageIcon implements Icon {
 	/** {@inheritDoc} */
 	@Override
 	public int getIconWidth() {
-		Icon ico = getIcon(null);
+		final Icon ico = getIcon(null);
 		if (ico != null) {
 			return ico.getIconWidth();
 		} else {
@@ -94,7 +94,7 @@ public class LazyMenuArrowImageIcon implements Icon {
 		if (leftToRightIcon == null) {
 			try {
 				leftToRightIcon = new ImageIcon(LazyMenuArrowImageIcon.class.getResource(leftToRightName));
-			} catch (Throwable t) {
+			} catch (final Throwable t) {
 				logger.severe("ERROR: loading image " + leftToRightName + " failed!");
 			}
 		}
@@ -105,7 +105,7 @@ public class LazyMenuArrowImageIcon implements Icon {
 		if (rightToLeftIcon == null) {
 			try {
 				rightToLeftIcon = new ImageIcon(LazyMenuArrowImageIcon.class.getResource(rightToLefttName));
-			} catch (Throwable t) {
+			} catch (final Throwable t) {
 				logger.severe("ERROR: loading image " + rightToLefttName + " failed!");
 			}
 		}
@@ -114,8 +114,9 @@ public class LazyMenuArrowImageIcon implements Icon {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintIcon(Component c, Graphics g, int x, int y) {
-		Icon ico = getIcon(c);
+	public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+final int x = iconX;
+		final Icon ico = getIcon(c);
 		if (ico != null) {
 			ico.paintIcon(c, g, x, y);
 		} else {

@@ -46,7 +46,7 @@ public class SVGPathSegCurvetoQuadraticSmoothAbsImpl implements SVGPathSegCurvet
 	 * @param x a float.
 	 * @param y a float.
 	 */
-	public SVGPathSegCurvetoQuadraticSmoothAbsImpl(float x, float y) {
+	public SVGPathSegCurvetoQuadraticSmoothAbsImpl(final float x, final float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -71,7 +71,7 @@ public class SVGPathSegCurvetoQuadraticSmoothAbsImpl implements SVGPathSegCurvet
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 

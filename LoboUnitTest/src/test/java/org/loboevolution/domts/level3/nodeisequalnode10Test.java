@@ -47,11 +47,11 @@ import static org.junit.Assert.assertFalse;
 public class nodeisequalnode10Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem1;
-        Element elem2;
-        HTMLCollection employeeList;
-        boolean isEqual;
+        final Document doc;
+        final Element elem1;
+        final Element elem2;
+        final HTMLCollection employeeList;
+        final boolean isEqual;
         doc = sampleXmlFile("hc_staff.xml");
         employeeList = doc.getElementsByTagName("em");
         elem1 = (Element) employeeList.item(0);

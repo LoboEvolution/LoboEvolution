@@ -59,11 +59,11 @@ public class createAttributeNS03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.wedding.com/";
+        final String namespaceURI = "http://www.wedding.com/";
         String qualifiedName;
-        Document doc;
+        final Document doc;
         Attr newAttr;
-        java.util.List illegalQNames = new java.util.ArrayList();
+        final java.util.List illegalQNames = new java.util.ArrayList();
         illegalQNames.add("person:{");
         illegalQNames.add("person:}");
         illegalQNames.add("person:~");
@@ -100,7 +100,7 @@ public class createAttributeNS03Test extends LoboUnitTest {
                 boolean success = false;
                 try {
                     newAttr = doc.createAttributeNS(namespaceURI, qualifiedName);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }
                 assertTrue("throw_INVALID_CHARACTER_ERR", success);

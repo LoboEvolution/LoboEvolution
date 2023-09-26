@@ -51,14 +51,14 @@ import static org.junit.Assert.assertFalse;
 public class typeinfoisderivedfrom63Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element acronymElem;
-        boolean retValue;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element acronymElem;
+        final boolean retValue;
         String typeNamespace;
-        String nullName = null;
+        final String nullName = null;
 
-        TypeInfo elemTypeInfo;
+        final TypeInfo elemTypeInfo;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("acronym");
         acronymElem = (Element) elemList.item(0);

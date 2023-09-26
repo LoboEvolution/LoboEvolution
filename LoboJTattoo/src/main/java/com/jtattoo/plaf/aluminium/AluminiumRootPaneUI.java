@@ -47,7 +47,7 @@ public class AluminiumRootPaneUI extends BaseRootPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public JComponent createTitlePane(JRootPane root) {
+	public JComponent createTitlePane(final JRootPane root) {
 		return new AluminiumTitlePane(root, this);
 	}
 

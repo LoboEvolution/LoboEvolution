@@ -52,14 +52,14 @@ import static org.junit.Assert.assertNull;
 public class documentrenamenode16Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        HTMLCollection childList;
-        Node renamedclass;
-        String nodeName;
-        int nodeType;
-        String namespaceURI;
-        String nullNSURI = null;
+        final Document doc;
+        final Element element;
+        final HTMLCollection childList;
+        final Node renamedclass;
+        final String nodeName;
+        final int nodeType;
+        final String namespaceURI;
+        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("acronym");

@@ -62,18 +62,18 @@ public class nodeinsertbeforedocfragmentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node refChild;
-        DocumentFragment newdocFragment;
-        Node newChild1;
-        Node newChild2;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node refChild;
+        final DocumentFragment newdocFragment;
+        final Node newChild1;
+        final Node newChild2;
         Node child;
         String childName;
         Node appendedChild;
-        Node insertedNode;
+        final Node insertedNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);

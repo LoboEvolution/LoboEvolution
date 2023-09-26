@@ -91,8 +91,8 @@ public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLoc
 	public SVGMatrix getScreenCTM() {
 
 		AffineTransform screenCTM = getCTM().getAffineTransform();
-		SVGSVGElementImpl root = (SVGSVGElementImpl)getOwnerSVGElement();
-		SVGSVGElementImpl parentSVGElement = (SVGSVGElementImpl) getOwnerSVGElement();
+		SVGSVGElementImpl root = ( SVGSVGElementImpl)getOwnerSVGElement();
+		SVGSVGElementImpl parentSVGElement = ( SVGSVGElementImpl) getOwnerSVGElement();
 
 		if (parentSVGElement != null) {
 
@@ -112,11 +112,11 @@ public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLoc
 				SVGMatrix ctmMatrix = ((SVGLocatable) parentSVGElement.getParentNode()).getCTM();
 				AffineTransform ctm = ctmMatrix.getAffineTransform();
 				screenCTM.preConcatenate(ctm);
-				parentSVGElement = (SVGSVGElementImpl) ((SVGElement) parentSVGElement.getParentNode())
+				parentSVGElement = ( SVGSVGElementImpl) ((SVGElement) parentSVGElement.getParentNode())
 						.getOwnerSVGElement();
 
 			} else if (parentSVGElement.getParentNode() instanceof SVGSVGElementImpl) {
-				parentSVGElement = (SVGSVGElementImpl) parentSVGElement.getParentNode();
+				parentSVGElement = ( SVGSVGElementImpl) parentSVGElement.getParentNode();
 			} else {
 				parentSVGElement = null;
 			}
@@ -146,7 +146,7 @@ public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLoc
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix getTransformToElement(SVGElement element) throws SVGException {
+	public SVGMatrix getTransformToElement(final SVGElement element) throws SVGException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -53,15 +53,15 @@ public class BernsteinSliderUI extends BaseSliderUI {
 	 *
 	 * @param slider a {@link javax.swing.JSlider} object.
 	 */
-	public BernsteinSliderUI(JSlider slider) {
+	public BernsteinSliderUI(final JSlider slider) {
 		super(slider);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g, JComponent c) {
+	public void paintBackground(final Graphics g, final JComponent c) {
 		if (c.isOpaque()) {
-			Component parent = c.getParent();
+			final Component parent = c.getParent();
 			if (parent != null && parent.getBackground() instanceof ColorUIResource) {
 				BernsteinUtils.fillComponent(g, c);
 			} else {

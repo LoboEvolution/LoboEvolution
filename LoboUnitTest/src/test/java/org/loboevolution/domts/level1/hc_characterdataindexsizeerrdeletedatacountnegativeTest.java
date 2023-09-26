@@ -61,11 +61,11 @@ public class hc_characterdataindexsizeerrdeletedatacountnegativeTest extends Lob
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        CharacterData child;
-        String childSubstring;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final CharacterData child;
+        final String childSubstring;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         nameNode = elementList.item(0);
@@ -75,7 +75,7 @@ public class hc_characterdataindexsizeerrdeletedatacountnegativeTest extends Lob
             boolean success = false;
             try {
                 childSubstring = child.substringData(10, -3);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }
             assertTrue("throws_INDEX_SIZE_ERR", success);

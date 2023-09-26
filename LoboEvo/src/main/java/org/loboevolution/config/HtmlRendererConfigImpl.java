@@ -78,9 +78,9 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
 
     public HtmlRendererConfigImpl() {
 
-        try (Connection conn = DriverManager.getConnection(DB_PATH);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(
+        try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final Statement stmt = conn.createStatement();
+             final ResultSet rs = stmt.executeQuery(
                      " SELECT DISTINCT acryl, aero, aluminium, bernstein, fast, graphite," +
                              " 	    		 hiFi,luna, mcWin, mint, noire, smart, texture," +
                              "	 			 subscript, superscript, underline, italic, strikethrough," +
@@ -117,28 +117,28 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
     }
 
     @Override
-    public void deleteInput(String text, String baseUrl) {
+    public void deleteInput(final String text, final String baseUrl) {
         InputStore.deleteInput(text, baseUrl);
     }
 
     @Override
-    public void insertLogin(String type, String value, String baseUrl, boolean navigationEnabled) {
+    public void insertLogin(final String type, final String value, final String baseUrl, final boolean navigationEnabled) {
         InputStore.insertLogin(type, value, baseUrl, navigationEnabled);
     }
 
     @Override
-    public String getSourceCache(String baseUrl, String type, boolean test) {
+    public String getSourceCache(final String baseUrl, final String type, final boolean test) {
         return ExternalResourcesStore.getSourceCache(baseUrl, type, test);
     }
 
     @Override
-    public List<String> getStyles(String href, String baseUrl) {
-        StyleStore styleStore = new StyleStore();
+    public List<String> getStyles(final String href, final String baseUrl) {
+        final StyleStore styleStore = new StyleStore();
         return styleStore.getStyles(href, baseUrl);
     }
 
-    public void insertStyle(String title, String href, String baseUrl, int enable) {
-        StyleStore styleStore = new StyleStore();
+    public void insertStyle(final String title, final String href, final String baseUrl, final int enable) {
+        final StyleStore styleStore = new StyleStore();
         styleStore.insertStyle(title, href, baseUrl, enable);
     }
 
@@ -148,32 +148,32 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
     }
 
     @Override
-    public int countStorage(int index) {
+    public int countStorage(final int index) {
         return WebStore.countStorage(index);
     }
 
     @Override
-    public Map<String, String> getMapStorage(int index, int i) {
+    public Map<String, String> getMapStorage(final int index, final int i) {
         return WebStore.getMapStorage(index, i);
     }
 
     @Override
-    public Object getValue(String key, int i, int index) {
+    public Object getValue(final String key, final int i, final int index) {
         return WebStore.getValue(key, i, index);
     }
 
     @Override
-    public void deleteStorage(String keyName, int i, int index) {
+    public void deleteStorage(final String keyName, final int i, final int index) {
         WebStore.deleteStorage(keyName, i, index);
     }
 
     @Override
-    public void deleteStorage(int session, int index) {
+    public void deleteStorage(final int session, final int index) {
         WebStore.deleteStorage(session, index);
     }
 
     @Override
-    public void insertStorage(String keyName, String keyValue, int i, int index) {
+    public void insertStorage(final String keyName, final String keyValue, final int i, final int index) {
         WebStore.insertStorage(keyName, keyValue, i, index);
     }
 
@@ -183,27 +183,27 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
     }
 
     @Override
-    public List<String> autocomplete(String type, String text, String baseUrl) {
+    public List<String> autocomplete(final String type, final String text, final String baseUrl) {
         return InputStore.autocomplete(type, text, baseUrl);
     }
 
     @Override
-    public URL getResourceFile(String fileName) {
+    public URL getResourceFile(final String fileName) {
         return DesktopConfig.getResourceFile(fileName);
     }
 
     @Override
-    public boolean isVisited(String href) {
+    public boolean isVisited(final String href) {
         return LinkStore.isVisited(href);
     }
 
     @Override
-    public void saveCookie(String toString, String cookieSpec) {
+    public void saveCookie(final String toString, final String cookieSpec) {
         CookieStore.saveCookie(toString, cookieSpec);
     }
 
     @Override
-    public List<Cookie> getCookies(String host, String path) {
+    public List<Cookie> getCookies(final String host, final String path) {
         return CookieStore.getCookies(host,path);
     }
 

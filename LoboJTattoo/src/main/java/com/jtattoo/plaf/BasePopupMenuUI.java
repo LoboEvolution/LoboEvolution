@@ -59,23 +59,23 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 
 		private BasePopupMenuUI popupMenuUI = null;
 
-		public MyPopupMenuListener(BasePopupMenuUI aPopupMenuUI) {
+		public MyPopupMenuListener(final BasePopupMenuUI aPopupMenuUI) {
 			popupMenuUI = aPopupMenuUI;
 		}
 
 		@Override
-		public void popupMenuCanceled(PopupMenuEvent e) {
+		public void popupMenuCanceled(final PopupMenuEvent e) {
 		}
 
 		@Override
-		public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+		public void popupMenuWillBecomeInvisible(final PopupMenuEvent e) {
 			if (popupMenuUI.screenImage != null) {
-				JPopupMenu popup = (JPopupMenu) e.getSource();
-				JRootPane root = popup.getRootPane();
+				final JPopupMenu popup = (JPopupMenu) e.getSource();
+				final JRootPane root = popup.getRootPane();
 				if (popup.isShowing() && root.isShowing()) {
-					Point ptPopup = popup.getLocationOnScreen();
-					Point ptRoot = root.getLocationOnScreen();
-					Graphics g = popup.getRootPane().getGraphics();
+					final Point ptPopup = popup.getLocationOnScreen();
+					final Point ptRoot = root.getLocationOnScreen();
+					final Graphics g = popup.getRootPane().getGraphics();
 					g.drawImage(popupMenuUI.screenImage, ptPopup.x - ptRoot.x, ptPopup.y - ptRoot.y, null);
 					popupMenuUI.resetScreenImage();
 				}
@@ -83,7 +83,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 		}
 
 		@Override
-		public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+		public void popupMenuWillBecomeVisible(final PopupMenuEvent e) {
 		}
 
 	} // end of class MyPopupMenuListener
@@ -102,22 +102,22 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public Popup getPopup(JPopupMenu popupMenu, int x, int y) {
-		Popup popup = super.getPopup(popupMenu, x, y);
+	public Popup getPopup(final JPopupMenu popupMenu, final int x, final int y) {
+		final Popup popup = super.getPopup(popupMenu, x, y);
 		if (!isMenuOpaque()) {
 			try {
-				Dimension size = popupMenu.getPreferredSize();
+				final Dimension size = popupMenu.getPreferredSize();
 				if (size.width > 0 && size.height > 0) {
-					Rectangle screenRect = new Rectangle(x, y, size.width, size.height);
+					final Rectangle screenRect = new Rectangle(x, y, size.width, size.height);
 					screenImage = getRobot().createScreenCapture(screenRect);
 				}
 				for (int i = 0; i < popupMenu.getComponentCount(); i++) {
 					if (popupMenu.getComponent(i) instanceof JPanel) {
-						JPanel panel = (JPanel) popupMenu.getComponent(i);
+						final JPanel panel = (JPanel) popupMenu.getComponent(i);
 						panel.setOpaque(true);
 					}
 				}
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				screenImage = null;
 			}
 		}
@@ -128,7 +128,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 		if (robot == null) {
 			try {
 				robot = new Robot();
-			} catch (AWTException ex) {
+			} catch (final AWTException ex) {
 			}
 		}
 		return robot;
@@ -146,7 +146,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installUI(JComponent c) {
+	public void installUI(final JComponent c) {
 		super.installUI(c);
 		popupMenu.setOpaque(false);
 		popupMenu.setLightWeightPopupEnabled(false);
@@ -171,14 +171,14 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void uninstallUI(JComponent c) {
+	public void uninstallUI(final JComponent c) {
 		super.uninstallUI(c);
 		c.setOpaque(true);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(Graphics g, JComponent c) {
+	public void update(final Graphics g, final JComponent c) {
 		if (screenImage != null) {
 			g.drawImage(screenImage, 0, 0, null);
 		} else {

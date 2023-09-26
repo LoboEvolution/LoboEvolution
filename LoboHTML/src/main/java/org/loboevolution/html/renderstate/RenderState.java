@@ -246,7 +246,7 @@ public interface RenderState {
 	 * @param nesting a int.
 	 * @return a int.
 	 */
-	int getCount(String counter, int nesting);
+	int getCount(final String counter, final int nesting);
 
 	/**
 	 * <p>getDisplay.</p>
@@ -416,7 +416,7 @@ public interface RenderState {
 	 * @param word a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.info.WordInfo} object.
 	 */
-	WordInfo getWordInfo(String word);
+	WordInfo getWordInfo(final String word);
 
 	/**
 	 * <p>incrementCount.</p>
@@ -425,7 +425,7 @@ public interface RenderState {
 	 * @param nesting a int.
 	 * @return a int.
 	 */
-	int incrementCount(String counter, int nesting);
+	int incrementCount(final String counter, final int nesting);
 
 	/**
 	 * <p>invalidate.</p>
@@ -446,7 +446,7 @@ public interface RenderState {
 	 * @param nesting a int.
 	 * @param value a int.
 	 */
-	void resetCount(String counter, int nesting, int value);
+	void resetCount(final String counter, final int nesting, final int value);
 
 	/**
 	 * <p>setHighlight.</p>

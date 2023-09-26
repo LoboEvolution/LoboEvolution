@@ -75,8 +75,8 @@ public class GeneralStore implements Serializable {
 	 * <p>deleteBounds.</p>
 	 */
 	public static void deleteBounds() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_SIZE)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_SIZE)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -87,8 +87,8 @@ public class GeneralStore implements Serializable {
 	 * <p>deleteNetwork.</p>
 	 */
 	public static void deleteNetwork() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_NETWORK)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_NETWORK)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -99,8 +99,8 @@ public class GeneralStore implements Serializable {
 	 * <p>deleteStartUpUrl.</p>
 	 */
 	public static void deleteStartUpUrl() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_STARTUP)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_STARTUP)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -117,9 +117,9 @@ public class GeneralStore implements Serializable {
 		if (DatabseSQLite.storeExist()) {
 			int width = -1;
 			int height = -1;
-			try (Connection conn = DriverManager.getConnection(DB_PATH);
-				 PreparedStatement pstmt = conn.prepareStatement(SIZE)) {
-				try (ResultSet rs = pstmt.executeQuery()) {
+			try (final Connection conn = DriverManager.getConnection(DB_PATH);
+                 final PreparedStatement pstmt = conn.prepareStatement(SIZE)) {
+				try (final ResultSet rs = pstmt.executeQuery()) {
 					while (rs != null && rs.next()) {
 						width = rs.getInt(1);
 						height = rs.getInt(2);
@@ -143,9 +143,9 @@ public class GeneralStore implements Serializable {
 	public static GeneralInfo getGeneralInfo() {
 		final GeneralInfo setting = new GeneralInfo();
 		if (DatabseSQLite.storeExist()) {
-			try (Connection conn = DriverManager.getConnection(DB_PATH);
-				 PreparedStatement pstmt = conn.prepareStatement(NETWORK)) {
-				try (ResultSet rs = pstmt.executeQuery()) {
+			try (final Connection conn = DriverManager.getConnection(DB_PATH);
+                 final PreparedStatement pstmt = conn.prepareStatement(NETWORK)) {
+				try (final ResultSet rs = pstmt.executeQuery()) {
 					while (rs != null && rs.next()) {
 						setting.setJs(rs.getInt(1) == 1);
 						setting.setCss(rs.getInt(2) == 1);
@@ -170,9 +170,9 @@ public class GeneralStore implements Serializable {
 	public static List<String> getStartupURLs() {
 		final List<String> urls = new ArrayList<>();
 		if (DatabseSQLite.storeExist()) {
-			try (Connection conn = DriverManager.getConnection(DB_PATH);
-				 PreparedStatement pstmt = conn.prepareStatement(STARTUP)) {
-				try (ResultSet rs = pstmt.executeQuery()) {
+			try (final Connection conn = DriverManager.getConnection(DB_PATH);
+                 final PreparedStatement pstmt = conn.prepareStatement(STARTUP)) {
+				try (final ResultSet rs = pstmt.executeQuery()) {
 					while (rs != null && rs.next()) {
 						urls.add(rs.getString(1));
 					}
@@ -189,9 +189,9 @@ public class GeneralStore implements Serializable {
 	 *
 	 * @param rect a {@link java.awt.Rectangle} object.
 	 */
-	public static void insertBounds(Rectangle rect) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(INSERT_SIZE)) {
+	public static void insertBounds(final Rectangle rect) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(INSERT_SIZE)) {
 			pstmt.setInt(1, rect.width);
 			pstmt.setInt(2, rect.height);
 			pstmt.executeUpdate();
@@ -209,9 +209,9 @@ public class GeneralStore implements Serializable {
 	 * @param cache a {@link java.lang.Boolean} object.
 	 * @param navigation a {@link java.lang.Boolean} object.
 	 */
-	public static void insertNetwork(boolean js, boolean css, boolean image, boolean cookie, boolean cache, boolean navigation) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(INSERT_NETWORK)) {
+	public static void insertNetwork(final boolean js, final boolean css, final boolean image, final boolean cookie, final boolean cache, final boolean navigation) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(INSERT_NETWORK)) {
 			pstmt.setInt(1, js ? 1 : 0);
 			pstmt.setInt(2, css ? 1 : 0);
 			pstmt.setInt(3, cookie ? 1 : 0);
@@ -229,9 +229,9 @@ public class GeneralStore implements Serializable {
 	 *
 	 * @param url a {@link java.lang.String} object.
 	 */
-	public static void insertStartupUrl(String url) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(INSERT_STARTUP)) {
+	public static void insertStartupUrl(final String url) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(INSERT_STARTUP)) {
 			pstmt.setString(1, url);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {

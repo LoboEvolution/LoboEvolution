@@ -50,7 +50,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public BaseRCollection(RenderableContainer container, ModelNode modelNode) {
+	public BaseRCollection(final RenderableContainer container, final ModelNode modelNode) {
 		super(container, modelNode);
 	}
 
@@ -71,10 +71,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
-			RenderableSpot endPoint) {
+	public boolean extractSelectionText(final StringBuilder buffer, final boolean isSelection, final RenderableSpot startPoint,
+										final RenderableSpot endPoint) {
 		Point checkPoint1 = null;
 		Point checkPoint2 = null;
+		boolean inSelection = isSelection;
 		if (!inSelection) {
 			final boolean isStart = startPoint.renderable == this;
 			final boolean isEnd = endPoint.renderable == this;
@@ -147,7 +148,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	}
 
 	/** {@inheritDoc} */
-	public BoundableRenderable getRenderable(int x, int y) {
+	public BoundableRenderable getRenderable(final int x, final int y) {
 		final Iterator<Renderable> i = getRenderables();
 		if (i != null) {
 			while (i.hasNext()) {
@@ -188,11 +189,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	@Override
-	public void onMouseMoved(final MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
+	public void onMouseMoved(final MouseEvent event, final int x, final int y, final boolean triggerEvent, final ModelNode limit) {
 		super.onMouseMoved(event, x, y, triggerEvent, limit);
 		final BoundableRenderable oldRenderable = this.renderableWithMouse;
 		final BoundableRenderable newRenderable = getRenderable(x, y);
-		ModelNode newLimit;
+		final ModelNode newLimit;
 		if (isContainedByNode()) {
 			newLimit = this.modelNode;
 		} else {
@@ -213,12 +214,12 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	@Override
-	public void onMouseOut(final MouseEvent event, int x, int y, ModelNode limit) {
+	public void onMouseOut(final MouseEvent event, final int x, final int y, final ModelNode limit) {
 		super.onMouseOut(event, x, y, limit);
 		final BoundableRenderable oldRenderable = this.renderableWithMouse;
 		if (oldRenderable != null) {
 			this.renderableWithMouse = null;
-			ModelNode newLimit;
+			final ModelNode newLimit;
 			if (isContainedByNode()) {
 				newLimit = this.modelNode;
 			} else {
@@ -230,7 +231,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onRightClick(final MouseEvent event, int x, int y) {
+	public boolean onRightClick(final MouseEvent event, final int x, final int y) {
 		final BoundableRenderable br = getRenderable(x, y);
 		if (br == null) {
 			return HtmlController.getInstance().onContextMenu(this.modelNode, event, x, y);
@@ -241,7 +242,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
+	public boolean paintSelection(final Graphics g, boolean inSelection, final RenderableSpot startPoint, final RenderableSpot endPoint) {
 		// TODO: Does this work with renderables that are absolutely positioned?
 		Point checkPoint1 = null;
 		Point checkPoint2 = null;
@@ -321,7 +322,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	 * Updates bounds of all descendent's GUI components, based on root bounds.
 	 */
 	@Override
-	public void updateWidgetBounds(int guiX, int guiY) {
+	public void updateWidgetBounds(final int guiX, final int guiY) {
 		final Iterator<Renderable> i = getRenderables();
 		if (i != null) {
 			while (i.hasNext()) {
@@ -344,10 +345,10 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	 * @param availWidth a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	public int getDeclaredWidthImpl(HTMLElementImpl element, int availWidth) {
-		HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
-		CSSStyleDeclaration props = element.getCurrentStyle();
-		RenderState renderState = element.getRenderState();
+	public int getDeclaredWidthImpl(final HTMLElementImpl element, final int availWidth) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
+		final CSSStyleDeclaration props = element.getCurrentStyle();
+		final RenderState renderState = element.getRenderState();
 		if (props == null) {
 			return -1;
 		}
@@ -371,8 +372,8 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 
 		if (width == -1 && Strings.isNotBlank(textContent) && (renderState.getPosition() == RenderState.POSITION_ABSOLUTE || renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK)) {
-			HtmlInsets paddingInsets = renderState.getPaddingInsets();
-			HtmlInsets marginInsets = renderState.getMarginInsets();
+			final HtmlInsets paddingInsets = renderState.getPaddingInsets();
+			final HtmlInsets marginInsets = renderState.getMarginInsets();
 			int right = 0;
 			int left = 0;
 
@@ -389,7 +390,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 
 		if (Strings.isNotBlank(props.getMaxWidth())) {
-			int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), renderState, doc.getDefaultView(), -1, availWidth);
+			final int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), renderState, doc.getDefaultView(), -1, availWidth);
 
 			if (width == -1 || width > maxWidth) {
 				width = maxWidth;
@@ -398,7 +399,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 		if (Strings.isNotBlank(props.getMinWidth())) {
 			if (width == -1 && "100%".equals(props.getMinWidth())) {width = element.getClientHeight();}
-			int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
+			final int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
 			if (width == 0 || width < minWidth) {
 				width = minWidth;
 			}
@@ -413,13 +414,13 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	 * @param availHeight a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	public int getDeclaredHeightImpl(HTMLElementImpl element, int availHeight) {
-		CSSStyleDeclaration props = element.getCurrentStyle();
-		RenderState renderState = element.getRenderState();
+	public int getDeclaredHeightImpl(final HTMLElementImpl element, final int availHeight) {
+		final CSSStyleDeclaration props = element.getCurrentStyle();
+		final RenderState renderState = element.getRenderState();
 		if (props == null) {
 			return -1;
 		}
-		HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getDocumentNode();
 		String heightText = props.getHeight() != null ? props.getHeight() : "";
 
 		switch (heightText.trim()) {
@@ -450,7 +451,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 
 		if (props.getMaxHeight() != null) {
-			int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getDefaultView(), -1, availHeight);
+			final int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getDefaultView(), -1, availHeight);
 			if (height == 0 || height > maxHeight) {
 				height = maxHeight;
 			}
@@ -458,7 +459,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 		if (props.getMinHeight() != null) {
 			if (height == -1 && "100%".equals(props.getMinHeight())) {height = element.getClientHeight();}
-			int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(), -1, availHeight);
+			final int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(), -1, availHeight);
 			if (height == 0 || height < minHeight) {
 				height = minHeight;
 			}
@@ -466,7 +467,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		return height;
 	}
 	
-	private boolean checkEndSelection(Rectangle bounds, Point selectionPoint) {
+	private boolean checkEndSelection(final Rectangle bounds, final Point selectionPoint) {
 		if (bounds.y > selectionPoint.y) {
 			return true;
 		} else if (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
@@ -477,7 +478,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 	}
 
-	private boolean checkStartSelection(Rectangle bounds, Point selectionPoint) {
+	private boolean checkStartSelection(final Rectangle bounds, final Point selectionPoint) {
 		if (bounds.y > selectionPoint.y) {
 			return true;
 		} else return selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height

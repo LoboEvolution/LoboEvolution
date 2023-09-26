@@ -57,7 +57,7 @@ public interface HtmlObject {
 	 * @param availableWidth a int.
 	 * @param availableHeight a int.
 	 */
-	void reset(int availableWidth, int availableHeight);
+	void reset(int availableWidth, final int availableHeight);
 
 	/**
 	 * <p>resume.</p>

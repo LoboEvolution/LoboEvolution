@@ -45,8 +45,7 @@ public class HTMLAllCollectionImpl extends AbstractList<Node> implements HTMLAll
 
     private final NodeImpl rootNode;
 
-    /** {@inheritDoc} */
-    public HTMLAllCollectionImpl(NodeImpl rootNode, List<Node> nodeList) {
+    public HTMLAllCollectionImpl(final NodeImpl rootNode, final List<Node> nodeList) {
         super(nodeList);
         this.rootNode = rootNode;
     }
@@ -59,22 +58,22 @@ public class HTMLAllCollectionImpl extends AbstractList<Node> implements HTMLAll
 
     /** {@inheritDoc} */
     @Override
-    public Node item(Object index) {
+    public Node item(final Object index) {
         try {
-            double idx = Double.parseDouble(index.toString());
+            final double idx = Double.parseDouble(index.toString());
             if (idx >= getLength() || idx == -1) return null;
             return this.get((int) idx);
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             return this.get(0);
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public Object namedItem(String name) {
+    public Object namedItem(final String name) {
         final List<Node> list = new ArrayList<>();
-        for (Node node : this) {
-            Element elm = (Element) node;
+        for (final Node node : this) {
+            final Element elm = (Element) node;
             if (name.equals(elm.getId()) || name.equals(elm.getAttribute("name"))) {
                 list.add(elm);
             }
@@ -83,7 +82,7 @@ public class HTMLAllCollectionImpl extends AbstractList<Node> implements HTMLAll
         if (list.size() > 1) {
             return new HTMLAllCollectionImpl(null, list);
         } else if (list.size() == 1) {
-            Optional<Node> node = list.stream().findFirst();
+            final Optional<Node> node = list.stream().findFirst();
             return node.orElse(null);
         } else {
             return null;
@@ -97,14 +96,14 @@ public class HTMLAllCollectionImpl extends AbstractList<Node> implements HTMLAll
      * @return a {@link HTMLAllCollection} object.
      */
     @Override
-    public HTMLAllCollection tags(String tag) {
+    public HTMLAllCollection tags(final String tag) {
         final Document doc = this.rootNode.getOwnerDocument();
         if (doc == null) {
             return null;
         }
 
         final HTMLAllCollection list =  (HTMLAllCollection) doc.getElementsByTagName(tag);
-        if(list.getLength() == 0){
+        if (list.getLength() == 0) {
             throw new DOMException(DOMException.NOT_FOUND_ERR, "is not a valid tag name.");
         }
 

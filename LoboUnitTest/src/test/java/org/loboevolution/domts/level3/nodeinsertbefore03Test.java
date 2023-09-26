@@ -49,10 +49,10 @@ import static org.junit.Assert.assertTrue;
 public class nodeinsertbefore03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        Attr newAttr;
-        Node inserted;
+        final Document doc;
+        final DocumentType docType;
+        final Attr newAttr;
+        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         newAttr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
@@ -61,7 +61,7 @@ public class nodeinsertbefore03Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = doc.insertBefore(newAttr, docType);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

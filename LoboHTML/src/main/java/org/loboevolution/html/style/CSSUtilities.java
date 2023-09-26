@@ -57,7 +57,7 @@ public final class CSSUtilities {
 	 * @param scriptURI a {@link java.lang.String} object.
 	 * @return a {@link InputSource} object.
 	 */
-	public static InputSource getCssInputSourceForStyleSheet(String text, String scriptURI) {
+	public static InputSource getCssInputSourceForStyleSheet(final String text, final String scriptURI) {
 		final Reader reader = new StringReader(text);
 		final InputSource is = new InputSource(reader);
 		is.setURI(scriptURI);
@@ -71,7 +71,7 @@ public final class CSSUtilities {
 	 * @return a {@link MediaListImpl} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static MediaListImpl parseMedia(String mediaString) throws Exception {
+	public static MediaListImpl parseMedia(final String mediaString) throws Exception {
 		final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 		return new MediaListImpl(parser.parseMedia(mediaString));
 	}
@@ -83,7 +83,7 @@ public final class CSSUtilities {
 	 * @param window a {@link org.loboevolution.html.node.js.Window} object.
 	 * @return a boolean.
 	 */
-	public static boolean matchesMedia(String mediaValues, Window window) {
+	public static boolean matchesMedia(final String mediaValues, final Window window) {
 		if (Strings.isBlank(mediaValues)) {
 			return true;
 		}
@@ -94,9 +94,9 @@ public final class CSSUtilities {
 			mediaName = mediaName.trim();
 			if ("screen".equals(mediaName) || "all".equals(mediaName) || "only".equals(mediaName) || "print".equals(mediaName)) {
 				try {
-					MediaQueryList media = window.matchMedia(mediaValues);
+					final MediaQueryList media = window.matchMedia(mediaValues);
 					return media.isMatches();
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -114,11 +114,11 @@ public final class CSSUtilities {
 	 * @return a {@link CSSStyleSheetImpl} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static CSSStyleSheetImpl parseCssExternal(HtmlRendererConfig config, String href, URL scriptURL, String baseURI, boolean test) throws Exception {
-		CSSOMParser parser = new CSSOMParser();
-		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
-		String source = config.getSourceCache(scriptURI, "CSS", test);
-		InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
+	public static CSSStyleSheetImpl parseCssExternal(final HtmlRendererConfig config, final String href, final URL scriptURL, final String baseURI, final boolean test) throws Exception {
+		final CSSOMParser parser = new CSSOMParser();
+		final String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
+		final String source = config.getSourceCache(scriptURI, "CSS", test);
+		final InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
 		return parser.parseStyleSheet(is, null);
 	}
 	
@@ -140,7 +140,7 @@ public final class CSSUtilities {
 	 * @param text a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String preProcessCss(String text) {
+	public static String preProcessCss(final String text) {
 		try {
 			final BufferedReader reader = new BufferedReader(new StringReader(text));
 			String line;

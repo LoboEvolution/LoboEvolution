@@ -51,14 +51,14 @@ import static org.junit.Assert.assertTrue;
 public class nodegetbaseuri02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
         String baseURI;
-        String rootNS;
-        String rootName;
-        Element docElem;
-        DocumentType nullDocType = null;
+        final String rootNS;
+        final String rootName;
+        final Element docElem;
+        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();

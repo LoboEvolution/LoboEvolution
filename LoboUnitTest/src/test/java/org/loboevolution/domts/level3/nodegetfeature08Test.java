@@ -46,9 +46,9 @@ public class nodegetfeature08Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Node node;
-        String nullVersion = null;
+        final Document doc;
+        final Node node;
+        final String nullVersion = null;
 
         Node featureImpl;
         boolean isSupported;

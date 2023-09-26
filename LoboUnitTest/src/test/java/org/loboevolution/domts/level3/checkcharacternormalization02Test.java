@@ -55,18 +55,18 @@ public class checkcharacternormalization02Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element docElem;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        HTMLCollection pList;
-        Element pElem;
-        Text text;
+        final HTMLCollection pList;
+        final Element pElem;
+        final Text text;
         String textValue;
-        Node retval;
-        boolean canSet;
-        List<DOMError> errors;
+        final Node retval;
+        final boolean canSet;
+        final List<DOMError> errors;
 
         DOMError error;
         int severity;

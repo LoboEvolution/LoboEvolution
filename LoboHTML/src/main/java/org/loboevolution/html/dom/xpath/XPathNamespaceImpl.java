@@ -91,7 +91,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	/**
 	 * Constructor for XPathNamespaceImpl.
 	 */
-	XPathNamespaceImpl(Node node) {
+	XPathNamespaceImpl(final Node node) {
 		m_attributeNode = node;
 	}
 
@@ -115,7 +115,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String arg0) {
+	public void setNodeValue(final String arg0) {
 		// Method not implemented
 	}
 
@@ -169,37 +169,37 @@ public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node insertBefore(Node arg0, Node arg1) {
+	public Node insertBefore(final Node arg0, final Node arg1) {
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node replaceChild(Node arg0, Node arg1) {
+	public Node replaceChild(final Node arg0, final Node arg1) {
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node removeChild(Node arg0) {
+	public Node removeChild(final Node arg0) {
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node appendChild(Node arg0) {
+	public Node appendChild(final Node arg0) {
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node prependChild(Node newChild) {
+	public Node prependChild(final Node newChild) {
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node prepend(Node newChild) {
+	public Node prepend(final Node newChild) {
 		return null;
 	}
 
@@ -211,7 +211,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node cloneNode(boolean arg0) {
+	public Node cloneNode(final boolean arg0) {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, null);
 	}
 
@@ -235,7 +235,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setPrefix(String arg0) {
+	public void setPrefix(final String arg0) {
 		// Method not implemented
 	}
 
@@ -254,12 +254,12 @@ public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** {@inheritDoc} */
 	@Override
-	public short compareDocumentPosition(Node other) {
+	public short compareDocumentPosition(final Node other) {
 		return 0;
 	}
 
 	@Override
-	public boolean isSupported(String xml, String s) {
+	public boolean isSupported(final String xml, final String s) {
 		return false;
 	}
 
@@ -269,7 +269,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	}
 
 	@Override
-	public Node getFeature(String name, String version) {
+	public Node getFeature(final String name, final String version) {
 		return null;
 	}
 
@@ -286,49 +286,49 @@ public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTextContent(String textContent) {
+	public void setTextContent(final String textContent) {
 		this.textContent = textContent;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isSameNode(Node other) {
+	public boolean isSameNode(final Node other) {
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String lookupPrefix(String namespaceURI) {
+	public String lookupPrefix(final String namespaceURI) {
 		return ""; // PENDING
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isDefaultNamespace(String namespaceURI) {
+	public boolean isDefaultNamespace(final String namespaceURI) {
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String lookupNamespaceURI(String prefix) {
+	public String lookupNamespaceURI(final String prefix) {
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isEqualNode(Node arg) {
+	public boolean isEqualNode(final Node arg) {
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Object setUserData(String key, Object data, UserDataHandler handler) {
+	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		return null; // PENDING
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Object getUserData(String key) {
+	public Object getUserData(final String key) {
 		return null;
 	}
 
@@ -357,52 +357,52 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	}
 
 	@Override
-	public void setOwnerDocument(Document document) {
+	public void setOwnerDocument(final Document document) {
 		m_attributeNode.setOwnerDocument(document);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean contains(Node other) {
+	public boolean contains(final Node other) {
 		return m_attributeNode.contains(other);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void addEventListener(String type, Function listener) {
+	public void addEventListener(final String type, final Function listener) {
 		m_attributeNode.addEventListener(type, listener);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void addEventListener(String type, Function listener, boolean useCapture) {
+	public void addEventListener(final String type, final Function listener, final boolean useCapture) {
 		m_attributeNode.addEventListener(type, listener, useCapture);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeEventListener(String script, Function function) {
-		m_attributeNode.removeEventListener(script, function);
+	public void removeEventListener(final String type, final Function listener) {
+		m_attributeNode.removeEventListener(type, listener);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeEventListener(String type, Function listener, boolean useCapture) {
+	public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
 		m_attributeNode.removeEventListener(type, listener, useCapture);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean dispatchEvent(Node element, Event evt) {
+	public boolean dispatchEvent(final Node element, final Event evt) {
 		return m_attributeNode.dispatchEvent(element, evt);
 	}
 
 	@Override
-	public boolean dispatchEvent(Event evt) throws EventException {
+	public boolean dispatchEvent(final Event evt) throws EventException {
 		return m_attributeNode.dispatchEvent(evt);
 	}
 }

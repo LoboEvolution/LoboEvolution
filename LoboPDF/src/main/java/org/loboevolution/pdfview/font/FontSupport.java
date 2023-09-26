@@ -387,7 +387,7 @@ public class FontSupport {
      * @return the index of the name in the table, or -1 if the name
      * cannot be found in the table
      */
-    public static int findName (String name, String[] table) {
+    public static int findName (final String name, final String[] table) {
         for (int i = 0; i < table.length; i++) {
             if (name.equals (table[i])) {
                 return i;
@@ -403,7 +403,7 @@ public class FontSupport {
      * @param table the charset table
      * @return the index of the name in the charset.
      */
-    public static int findName (String name, int[] table) {
+    public static int findName (final String name, final int[] table) {
         for (int i = 0; i < table.length; i++) {
             if (name.equals (getName (table[i]))) {
                 return i;
@@ -420,7 +420,7 @@ public class FontSupport {
      * @return the index of the name in stdNames, or -1 if the name doesn't
      * appear in stdNames.
      */
-    public static int getStrIndex (String name) {
+    public static int getStrIndex (final String name) {
         for (int i = 0; i < stdNames.length; i++) {
             if (name.equals (stdNames[i])) {
                 return i;

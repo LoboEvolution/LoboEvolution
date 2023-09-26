@@ -55,17 +55,17 @@ public class FastScrollButton extends BaseScrollButton {
 	 * @param direction a int.
 	 * @param width a int.
 	 */
-	public FastScrollButton(int direction, int width) {
+	public FastScrollButton(final int direction, final int width) {
 		super(direction, width);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		boolean isPressed = getModel().isPressed();
+		final boolean isPressed = getModel().isPressed();
 
-		int width = getWidth();
-		int height = getHeight();
+		final int width = getWidth();
+		final int height = getHeight();
 
 		Color backColor = AbstractLookAndFeel.getTheme().getControlBackgroundColor();
 		if (!JTattooUtilities.isActive(this)) {
@@ -74,37 +74,37 @@ public class FastScrollButton extends BaseScrollButton {
 		if (isPressed) {
 			backColor = ColorHelper.darker(backColor, 10);
 		}
-		Color hiColor = ColorHelper.brighter(backColor, 40);
-		Color loColor = ColorHelper.darker(backColor, 30);
+		final Color hiColor = ColorHelper.brighter(backColor, 40);
+		final Color loColor = ColorHelper.darker(backColor, 30);
 		g.setColor(backColor);
 		g.fillRect(0, 0, width, height);
 
 		switch (getDirection()) {
 		case NORTH: {
-			Icon upArrow = BaseIcons.getUpArrowIcon();
-			int x = width / 2 - upArrow.getIconWidth() / 2;
-			int y = height / 2 - upArrow.getIconHeight() / 2 - 1;
+			final Icon upArrow = BaseIcons.getUpArrowIcon();
+			final int x = width / 2 - upArrow.getIconWidth() / 2;
+			final int y = height / 2 - upArrow.getIconHeight() / 2 - 1;
 			upArrow.paintIcon(this, g, x, y);
 			break;
 		}
 		case SOUTH: {
-			Icon downArrow = BaseIcons.getDownArrowIcon();
-			int x = width / 2 - downArrow.getIconWidth() / 2;
-			int y = height / 2 - downArrow.getIconHeight() / 2;
+			final Icon downArrow = BaseIcons.getDownArrowIcon();
+			final int x = width / 2 - downArrow.getIconWidth() / 2;
+			final int y = height / 2 - downArrow.getIconHeight() / 2;
 			downArrow.paintIcon(this, g, x, y);
 			break;
 		}
 		case WEST: {
-			Icon leftArrow = BaseIcons.getLeftArrowIcon();
-			int x = width / 2 - leftArrow.getIconWidth() / 2 - 1;
-			int y = height / 2 - leftArrow.getIconHeight() / 2;
+			final Icon leftArrow = BaseIcons.getLeftArrowIcon();
+			final int x = width / 2 - leftArrow.getIconWidth() / 2 - 1;
+			final int y = height / 2 - leftArrow.getIconHeight() / 2;
 			leftArrow.paintIcon(this, g, x, y);
 			break;
 		}
 		default: {
-			Icon rightArrow = BaseIcons.getRightArrowIcon();
-			int x = width / 2 - rightArrow.getIconWidth() / 2;
-			int y = height / 2 - rightArrow.getIconHeight() / 2;
+			final Icon rightArrow = BaseIcons.getRightArrowIcon();
+			final int x = width / 2 - rightArrow.getIconWidth() / 2;
+			final int y = height / 2 - rightArrow.getIconHeight() / 2;
 			rightArrow.paintIcon(this, g, x, y);
 			break;
 		}

@@ -51,14 +51,14 @@ import static org.junit.Assert.fail;
 public class nodeinsertbefore10Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element elem;
-        Element newElem;
-        Node inserted;
-        Element docElem;
-        String rootNS;
-        String rootTagname;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element elem;
+        final Element newElem;
+        final Node inserted;
+        final Element docElem;
+        final String rootNS;
+        final String rootTagname;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
@@ -71,7 +71,7 @@ public class nodeinsertbefore10Test extends LoboUnitTest {
             inserted = doc.insertBefore(newElem, elem);
             fail("throw_DOMException");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 3:
                 case 8:

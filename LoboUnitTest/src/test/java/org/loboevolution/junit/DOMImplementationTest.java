@@ -45,38 +45,38 @@ public class DOMImplementationTest extends LoboUnitTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-        UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
+        final UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
         context.setUserAgentEnabled(false);
         domImpl = new DOMImplementationImpl(context);
     }
 
     @Test
     public void testCreateDocument2() {
-        DocumentType doctype = domImpl.createDocumentType("html", null, null);
+        final DocumentType doctype = domImpl.createDocumentType("html", null, null);
         assertNull(doctype.getNextSibling());
         assertNull(doctype.getPreviousSibling());
         assertNull(doctype.getParentNode());
         assertNull(doctype.getOwnerDocument());
-        Document document = domImpl.createDocument(null, null, doctype);
+        final Document document = domImpl.createDocument(null, null, doctype);
         assertNull(doctype.getNextSibling());
         assertNull(doctype.getPreviousSibling());
 		assertSame(document, doctype.getOwnerDocument());
         try {
             domImpl.createDocument(null, null, doctype);
             fail("Must throw an exception");
-        } catch (DOMException e) {
+        } catch (final DOMException e) {
             assertEquals(DOMException.WRONG_DOCUMENT_ERR, e.getCode());
         }
     }
 
     @Test
     public void testCreateDocument3() {
-        DocumentType doctype = domImpl.createDocumentType("html", null, null);
+        final DocumentType doctype = domImpl.createDocumentType("html", null, null);
         assertNull(doctype.getNextSibling());
         assertNull(doctype.getPreviousSibling());
-        Document document = domImpl.createDocument(null, "html", doctype);
+        final Document document = domImpl.createDocument(null, "html", doctype);
         assertEquals("CSS1Compat", document.getCompatMode());
-        Element docelm = document.getDocumentElement();
+        final Element docelm = document.getDocumentElement();
         assertNotNull(docelm);
 		assertSame(docelm, doctype.getNextSibling());
         assertNull(doctype.getPreviousSibling());

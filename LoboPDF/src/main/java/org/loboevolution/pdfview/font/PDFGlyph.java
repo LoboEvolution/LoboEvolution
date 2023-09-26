@@ -59,7 +59,7 @@ public class PDFGlyph {
      * @param shape a {@link java.awt.geom.GeneralPath} object.
      * @param advance a {@link java.awt.geom.Point2D.Float} object.
      */
-    public PDFGlyph(char src, String name, GeneralPath shape, Point2D.Float advance) {
+    public PDFGlyph(final char src, final String name, final GeneralPath shape, final Point2D.Float advance) {
         this.shape = shape;
         this.advance = advance;
         this.src = src;
@@ -74,7 +74,7 @@ public class PDFGlyph {
      * @param page a {@link org.loboevolution.pdfview.PDFPage} object.
      * @param advance a {@link java.awt.geom.Point2D} object.
      */
-    public PDFGlyph(char src, String name, PDFPage page, Point2D advance) {
+    public PDFGlyph(final char src, final String name, final PDFPage page, final Point2D advance) {
         this.page = page;
         this.advance = advance;
         this.src = src;
@@ -125,9 +125,9 @@ public class PDFGlyph {
      * @param mode a int.
      * @return a {@link java.awt.geom.Point2D} object.
      */
-    public Point2D addCommands(PDFPage cmds, AffineTransform transform, int mode) {
+    public Point2D addCommands(final PDFPage cmds, final AffineTransform transform, final int mode) {
         if (this.shape != null) {
-            GeneralPath outline = (GeneralPath) this.shape.createTransformedShape(transform);
+            final GeneralPath outline = (GeneralPath) this.shape.createTransformedShape(transform);
             cmds.addCommand(new PDFShapeCmd(outline, mode, false));
         } else if (this.page != null) {
             cmds.addCommands(this.page, transform);
@@ -147,7 +147,7 @@ public class PDFGlyph {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder();
+        final StringBuilder str = new StringBuilder();
         str.append(this.name);
         return str.toString();
     }

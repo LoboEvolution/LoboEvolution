@@ -49,7 +49,7 @@ public class OkAction<T> extends AbstractAction {
 	 *
 	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemEditor} object.
 	 */
-	public OkAction(ItemEditor<T> item) {
+	public OkAction(final ItemEditor<T> item) {
 		this.item = item;
 	}
 

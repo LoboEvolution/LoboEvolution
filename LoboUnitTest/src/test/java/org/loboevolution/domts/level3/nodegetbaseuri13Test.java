@@ -50,12 +50,12 @@ import static org.junit.Assert.assertEquals;
 public class nodegetbaseuri13Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notationsMap;
-        Notation notation;
-        String baseURI;
-        String docURI;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notationsMap;
+        final Notation notation;
+        final String baseURI;
+        final String docURI;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         notationsMap = docType.getNotations();
@@ -63,7 +63,7 @@ public class nodegetbaseuri13Test extends LoboUnitTest {
         baseURI = notation.getBaseURI();
         docURI = doc.getDocumentURI();
         assertEquals("sameAsDocURI", docURI, baseURI);
-        assertURIEquals("entityBase", null, null, null, null, "hc_staff", null, null, Boolean.TRUE, baseURI);
+        assertURIEquals(new URIEquals("entityBase", null, null, null, null, "hc_staff", null, null, true, baseURI));
     }
 }
 

@@ -45,7 +45,7 @@ public class PDFSegment {
 	 *
 	 * @param bite a short.
 	 */
-	public void writeToHeader(short bite) {
+	public void writeToHeader(final short bite) {
 		header.write(bite);
 	}
 
@@ -55,8 +55,8 @@ public class PDFSegment {
 	 * @param bites an array of {@link short} objects.
 	 * @throws java.io.IOException if any.
 	 */
-	public void writeToHeader(short[] bites) throws IOException {
-		for (short bite : bites) {
+	public void writeToHeader(final short[] bites) throws IOException {
+		for (final short bite : bites) {
 			header.write(bite);
 		}	
 	}
@@ -66,7 +66,7 @@ public class PDFSegment {
 	 *
 	 * @param bite a short.
 	 */
-	public void writeToData(short bite) {
+	public void writeToData(final short bite) {
 		data.write(bite);
 	}
 
@@ -93,7 +93,7 @@ public class PDFSegment {
 	 *
 	 * @param segmentDataLength a int.
 	 */
-	public void setDataLength(int segmentDataLength) {
+	public void setDataLength(final int segmentDataLength) {
 		this.segmentDataLength = segmentDataLength;
 
 	}

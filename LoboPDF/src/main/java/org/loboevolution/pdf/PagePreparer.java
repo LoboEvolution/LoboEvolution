@@ -51,7 +51,7 @@ class PagePreparer extends Thread {
 	 *            the current page number, 0 based
 	 * @param PDFViewer a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public PagePreparer(int waitforPage, PDFViewer PDFViewer) {
+	public PagePreparer(final int waitforPage, final PDFViewer PDFViewer) {
 		setDaemon(true);
 		setName(getClass().getName());
 		this.waitforPage = waitforPage;
@@ -83,7 +83,7 @@ class PagePreparer extends Thread {
 			size = page.getCurSize();
 		}
 		if (waitforPage == curpage) {
-			PDFPage pdfPage = curFile.getPage(prepPage + 1, true);
+			final PDFPage pdfPage = curFile.getPage(prepPage + 1, true);
 			if (pdfPage != null && waitforPage == curpage) {
 				pdfPage.getImage(size.width, size.height, null, null, true, true);
 			}

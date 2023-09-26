@@ -82,9 +82,9 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final Graphics2D g2D = (Graphics2D) g;
 			Color frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
 			if (!JTattooUtilities.isFrameActive(button)) {
 				frameColor = ColorHelper.brighter(frameColor, 40);
@@ -108,7 +108,7 @@ public class LunaBorders extends BaseBorders {
 				g2D.setColor(frameColor);
 				g2D.drawRect(x, y, w - 2, h - 2);
 			} else {
-				Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+				final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 				g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				if (button.getRootPane() != null && button.equals(button.getRootPane().getDefaultButton())) {
 					if (!button.getModel().isRollover()) {
@@ -158,7 +158,9 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			int width = w;
+			int height = h;
 			width--;
 			height--;
 			g.setColor(BORDER_COLOR);
@@ -179,9 +181,9 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			boolean active = isActive(c);
-			int th = getTitleHeight(c);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final boolean active = isActive(c);
+			final int th = getTitleHeight(c);
 			Color titleColor = AbstractLookAndFeel.getWindowTitleColorLight();
 			Color borderColor = AbstractLookAndFeel.getWindowBorderColor();
 			if (!active) {
@@ -238,24 +240,24 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed() || model.isSelected()) {
-					Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getToolbarBackgroundColor(), 20);
+					final Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getToolbarBackgroundColor(), 20);
 					g.setColor(frameColor);
 					g.drawRect(x, y, w - 1, h - 1);
 
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.black);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);
 					g2D.setComposite(composite);
 				} else if (model.isRollover()) {
-					Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
+					final Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
 					Color frameHiColor = ColorHelper.darker(frameColor, 5);
 					Color frameLoColor = ColorHelper.darker(frameColor, 30);
 					JTattooUtilities.draw3DBorder(g, frameHiColor, frameLoColor, x, y, w, h);
@@ -263,17 +265,17 @@ public class LunaBorders extends BaseBorders {
 					frameLoColor = ColorHelper.brighter(frameLoColor, 60);
 					JTattooUtilities.draw3DBorder(g, frameHiColor, frameLoColor, x + 1, y + 1, w - 2, h - 2);
 
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f);
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.white);
 					g.fillRect(x + 2, y + 2, w - 4, h - 4);
 					g2D.setComposite(composite);
 				} else if (model.isSelected()) {
-					Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
-					Color frameHiColor = Color.white;
-					Color frameLoColor = ColorHelper.darker(frameColor, 30);
+					final Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
+					final Color frameHiColor = Color.white;
+					final Color frameLoColor = ColorHelper.darker(frameColor, 30);
 					JTattooUtilities.draw3DBorder(g, frameLoColor, frameHiColor, x, y, w, h);
 				}
 			}
@@ -292,7 +294,7 @@ public class LunaBorders extends BaseBorders {
 		private static final Insets TABLE_INSETS = new Insets(1, 1, 1, 1);
 		private boolean tableBorder = false;
 
-		public ScrollPaneBorder(boolean tableBorder) {
+		public ScrollPaneBorder(final boolean tableBorder) {
 			this.tableBorder = tableBorder;
 		}
 
@@ -307,7 +309,7 @@ public class LunaBorders extends BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets ins = getBorderInsets(c);
+			final Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
 			borderInsets.right = ins.right;
@@ -316,7 +318,7 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 			g.setColor(BORDER_COLOR);
 			g.drawRect(x, y, w - 1, h - 1);
 			g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getBackgroundColor(), 50));
@@ -348,7 +350,7 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 			g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getControlBackgroundColor(), 40));
 			g.drawLine(0, 0, 0, h - 1);
 			g.setColor(ColorHelper.darker(AbstractLookAndFeel.getControlBackgroundColor(), 20));
@@ -383,7 +385,9 @@ public class LunaBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			int width = w;
+			int height = h;
 			width--;
 			height--;
 			g.setColor(BORDER_COLOR);

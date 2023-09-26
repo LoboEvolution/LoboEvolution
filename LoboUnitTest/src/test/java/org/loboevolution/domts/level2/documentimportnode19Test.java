@@ -29,11 +29,9 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -59,17 +57,17 @@ public class documentimportnode19Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docTypeNull = null;
+        final Document doc;
+        final DocumentType docTypeNull = null;
 
-        Document docImp;
-        DOMImplementation domImpl;
-        DocumentType docType;
-        NamedNodeMap nodeMap;
-        EntityReference entity2;
-        EntityReference entity6;
-        EntityReference entityImp2;
-        EntityReference entityImp6;
+        final Document docImp;
+        final DOMImplementation domImpl;
+        final DocumentType docType;
+        final NamedNodeMap nodeMap;
+        final EntityReference entity2;
+        final EntityReference entity6;
+        final EntityReference entityImp2;
+        final EntityReference entityImp6;
         String nodeName;
         String systemId;
         String notationName;

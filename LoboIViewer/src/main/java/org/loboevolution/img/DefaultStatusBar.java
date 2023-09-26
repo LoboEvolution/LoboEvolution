@@ -36,36 +36,36 @@ public class DefaultStatusBar extends PixelInfoStatusBar implements ImageMouseMo
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseMoved(ImageMouseEvent e) {
+	public void mouseMoved(final ImageMouseEvent e) {
 		setPixel(e.getX(), e.getY());
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseExited(ImageMouseEvent e) {
+	public void mouseExited(final ImageMouseEvent e) {
 		setPixel(-1, -1);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseEntered(ImageMouseEvent e) {
+	public void mouseEntered(final ImageMouseEvent e) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void mouseDragged(ImageMouseEvent e) {
+	public void mouseDragged(final ImageMouseEvent e) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void register(ImageViewer viewer) {
+	protected void register(final ImageViewer viewer) {
 		super.register(viewer);
 		viewer.addImageMouseMotionListener(this);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void unregister(ImageViewer viewer) {
+	protected void unregister(final ImageViewer viewer) {
 		super.unregister(viewer);
 		viewer.removeImageMouseMotionListener(this);
 	}

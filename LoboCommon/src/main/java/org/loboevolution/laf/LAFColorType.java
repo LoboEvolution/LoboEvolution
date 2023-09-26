@@ -51,14 +51,14 @@ public enum LAFColorType {
 	private static final Map<String, LAFColorType> ENUM_MAP;
 
 	static {
-		Map<String, LAFColorType> map = new HashMap<>();
-		for (LAFColorType instance : LAFColorType.values()) {
+		final Map<String, LAFColorType> map = new HashMap<>();
+		for (final LAFColorType instance : LAFColorType.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	LAFColorType(String value) {
+	LAFColorType(final String value) {
 		this.value = value;
 	}
 
@@ -81,7 +81,7 @@ public enum LAFColorType {
 	 * @param value a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public boolean isEqual(String value) {
+	public boolean isEqual(final String value) {
 		return this.value.equals(value);
 	}
 
@@ -93,7 +93,7 @@ public enum LAFColorType {
 	 * @param actionName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.laf.LAFColorType} object.
 	 */
-	public static LAFColorType get(String actionName) {
+	public static LAFColorType get(final String actionName) {
 		return ENUM_MAP.get(actionName);
 	}
 }

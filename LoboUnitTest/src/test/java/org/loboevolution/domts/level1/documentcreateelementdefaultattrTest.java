@@ -35,7 +35,6 @@ import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -63,12 +62,12 @@ public class documentcreateelementdefaultattrTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element newElement;
-        NamedNodeMap defaultAttr;
-        Node child;
-        String name;
-        String value;
+        final Document doc;
+        final Element newElement;
+        final NamedNodeMap defaultAttr;
+        final Node child;
+        final String name;
+        final String value;
         doc = sampleXmlFile("staff.xml");
         newElement = doc.createElement("address");
         defaultAttr = newElement.getAttributes();

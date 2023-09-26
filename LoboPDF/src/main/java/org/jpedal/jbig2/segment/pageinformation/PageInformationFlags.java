@@ -45,7 +45,7 @@ public class PageInformationFlags extends Flags {
 	public static final String DEFAULT_COMBINATION_OPERATOR = "DEFAULT_COMBINATION_OPERATOR";
 
 	/** {@inheritDoc} */
-	public void setFlags(int flagsAsInt) {
+	public void setFlags(final int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract DEFAULT_PIXEL_VALUE */

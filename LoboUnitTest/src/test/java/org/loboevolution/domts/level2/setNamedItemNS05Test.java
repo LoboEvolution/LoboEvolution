@@ -58,15 +58,15 @@ public class setNamedItemNS05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.usa.com";
-        String qualifiedName = "dmstc:domestic";
-        Document doc;
-        Attr arg;
-        HTMLCollection elementList;
-        Element testAddress;
-        NamedNodeMap attributes;
-        Node retnode;
-        String value;
+        final String namespaceURI = "http://www.usa.com";
+        final String qualifiedName = "dmstc:domestic";
+        final Document doc;
+        final Attr arg;
+        final HTMLCollection elementList;
+        final Element testAddress;
+        final NamedNodeMap attributes;
+        final Node retnode;
+        final String value;
         doc = sampleXmlFile("staffNS.xml");
         arg = doc.createAttributeNS(namespaceURI, qualifiedName);
         arg.setNodeValue("newValue");

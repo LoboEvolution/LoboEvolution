@@ -46,14 +46,14 @@ import static org.junit.Assert.assertEquals;
 public class nodeinsertbefore11Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Element elem;
-        ProcessingInstruction pi;
-        Comment comment;
-        Text txt;
-        CDATASection cdata;
-        EntityReference eRef;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Element elem;
+        final ProcessingInstruction pi;
+        final Comment comment;
+        final Text txt;
+        final CDATASection cdata;
+        final EntityReference eRef;
         Node inserted;
         String insertedVal;
         Node appendedChild;

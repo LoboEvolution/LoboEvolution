@@ -53,7 +53,7 @@ import java.beans.VetoableChangeSupport;
  *  public class ABean extends JavaBean {
  *    private String foo;
  *
- *    public void setFoo(String newFoo) {
+ *    public void setFoo(final String newFoo) {
  *      String old = getFoo();
  *      this.foo = newFoo;
  *      firePropertyChange("foo", old, getFoo());
@@ -92,7 +92,7 @@ import java.beans.VetoableChangeSupport;
  *  public class ABean extends JavaBean {
  *    private String foo;
  *
- *    public void setFoo(String newFoo) throws PropertyVetoException {
+ *    public void setFoo(final String newFoo) throws PropertyVetoException {
  *      String old = getFoo();
  *      this.foo = newFoo;
  *      fireVetoableChange("foo", old, getFoo());
@@ -163,10 +163,10 @@ public abstract class AbstractBean {
 	 */
 	protected AbstractBean(final PropertyChangeSupport pcs, final VetoableChangeSupport vcs) {
 		if (pcs == null) {
-			throw new IllegalArgumentException ("PropertyChangeSupport must not be null");
+			throw new IllegalArgumentException("PropertyChangeSupport must not be null");
 		}
 		if (vcs == null) {
-			throw new IllegalArgumentException ("VetoableChangeSupport must not be null");
+			throw new IllegalArgumentException("VetoableChangeSupport must not be null");
 		}
 		this.pcs = pcs;
 		this.vcs = vcs;

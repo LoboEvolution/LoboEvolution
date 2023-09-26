@@ -58,11 +58,11 @@ public class nodetextnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddr;
-        Node textNode;
-        String textValue;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddr;
+        final Node textNode;
+        final String textValue;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);

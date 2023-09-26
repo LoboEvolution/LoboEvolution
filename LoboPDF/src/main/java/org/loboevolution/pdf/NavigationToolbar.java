@@ -73,7 +73,7 @@ public class NavigationToolbar extends JToolBar {
 	 *
 	 * @param PDFViewer a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public NavigationToolbar(PDFViewer PDFViewer) {
+	public NavigationToolbar(final PDFViewer PDFViewer) {
 		this.PDFViewer = PDFViewer;
 
 		add(Box.createHorizontalGlue());
@@ -102,7 +102,7 @@ public class NavigationToolbar extends JToolBar {
 	 *
 	 * @param noOfPages a int.
 	 */
-	public void setTotalNoOfPages(int noOfPages) {
+	public void setTotalNoOfPages(final int noOfPages) {
 		totalNoOfPages.setText("of " + noOfPages);
 	}
 
@@ -111,12 +111,12 @@ public class NavigationToolbar extends JToolBar {
 	 *
 	 * @param currentPage a int.
 	 */
-	public void setCurrentPage(int currentPage) {
+	public void setCurrentPage(final int currentPage) {
 		currentPageBox.setText(String.valueOf(currentPage));
 	}
 
-    private void addButton(String tooltip, String url, final int type) {
-		JButton button = new JButton();
+    private void addButton(final String tooltip, final String url, final int type) {
+		final JButton button = new JButton();
 		button.setIcon(new ImageIcon(getClass().getResource(url)));
 		button.setToolTipText(tooltip);
 		button.addActionListener(actionEvent -> executeCommand(type));
@@ -129,7 +129,7 @@ public class NavigationToolbar extends JToolBar {
 	 *
 	 * @param type a int.
 	 */
-	public void executeCommand(int type) {
+	public void executeCommand(final int type) {
 		switch (type) {
 		case FIRSTPAGE:
 			PDFViewer.doFirst();
@@ -155,7 +155,7 @@ public class NavigationToolbar extends JToolBar {
 			final int curpage = PDFViewer.curpage;
 			try {
 				pagenum = Integer.parseInt(currentPageBox.getText()) - 1;
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 			}
 			if (pagenum >= curFile.getNumPages()) {
 				pagenum = curFile.getNumPages() - 1;

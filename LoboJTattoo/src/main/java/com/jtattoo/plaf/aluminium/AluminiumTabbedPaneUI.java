@@ -57,8 +57,8 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
-		Color backColor = tabPane.getBackgroundAt(tabIndex);
+	protected Color[] getTabColors(final int tabIndex, final boolean isSelected, final boolean isRollover) {
+		final Color backColor = tabPane.getBackgroundAt(tabIndex);
 		if (backColor instanceof UIResource && isSelected) {
 			if (tabPane.getTabPlacement() == BOTTOM) {
 				return BOTTOM_SELECTED_TAB_COLORS;
@@ -71,7 +71,7 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Font getTabFont(boolean isSelected) {
+	protected Font getTabFont(final boolean isSelected) {
 		if (isSelected) {
 			return super.getTabFont(isSelected).deriveFont(Font.BOLD);
 		} else {
@@ -91,25 +91,25 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 		super.installDefaults();
 		tabAreaInsets = new Insets(2, 6, 2, 6);
 		contentBorderInsets = new Insets(0, 0, 0, 0);
-		Color c = AbstractLookAndFeel.getTheme().getBackgroundColor();
-		Color cHi = ColorHelper.brighter(c, 20);
-		Color cLo = ColorHelper.darker(c, 10);
+		final Color c = AbstractLookAndFeel.getTheme().getBackgroundColor();
+		final Color cHi = ColorHelper.brighter(c, 20);
+		final Color cLo = ColorHelper.darker(c, 10);
 		TOP_SELECTED_TAB_COLORS = ColorHelper.createColorArr(cHi, c, 20);
 		BOTTOM_SELECTED_TAB_COLORS = ColorHelper.createColorArr(c, cLo, 20);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
-			boolean isSelected) {
-		Color backColor = tabPane.getBackgroundAt(tabIndex);
+	protected void paintTabBackground(final Graphics g, final int tabPlacement, final int tabIndex, final int x, final int y, final int w, final int h,
+			final boolean isSelected) {
+		final Color backColor = tabPane.getBackgroundAt(tabIndex);
 		if (!(backColor instanceof UIResource)) {
 			super.paintTabBackground(g, tabPlacement, tabIndex, x, y, w, h, isSelected);
 			return;
 		}
 		if (JTattooUtilities.isMac() || !AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
 			if (isSelected) {
-				Color[] colorArr = getTabColors(tabIndex, isSelected, tabIndex == rolloverIndex);
+				final Color[] colorArr = getTabColors(tabIndex, isSelected, tabIndex == rolloverIndex);
 				switch (tabPlacement) {
 				case LEFT:
 					JTattooUtilities.fillHorGradient(g, colorArr, x + 1, y + 1, w + 1, h - 1);

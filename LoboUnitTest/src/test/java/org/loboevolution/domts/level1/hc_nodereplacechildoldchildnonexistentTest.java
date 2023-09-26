@@ -61,12 +61,12 @@ public class hc_nodereplacechildoldchildnonexistentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node oldChild;
-        Node newChild;
-        HTMLCollection elementList;
-        Node elementNode;
-        Node replacedNode;
+        final Document doc;
+        final Node oldChild;
+        final Node newChild;
+        final HTMLCollection elementList;
+        final Node elementNode;
+        final Node replacedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createElement("br");
         oldChild = doc.createElement("b");
@@ -77,7 +77,7 @@ public class hc_nodereplacechildoldchildnonexistentTest extends LoboUnitTest {
             boolean success = false;
             try {
                 replacedNode = elementNode.replaceChild(newChild, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

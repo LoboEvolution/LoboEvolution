@@ -52,17 +52,17 @@ import static org.junit.Assert.*;
 public class domconfigschemalocation1Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        Document doc;
-        DOMConfiguration domConfig;
-        DocumentType nullDocType = null;
+        final DOMImplementation domImpl;
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final DocumentType nullDocType = null;
 
         boolean canSet;
         String state;
-        String parameter = "sChEma-location";
-        String nullSchemaLocation = null;
+        final String parameter = "sChEma-location";
+        final String nullSchemaLocation = null;
 
-        String sampleSchemaLocation = "http://www.example.com/schemas/sampleschema.xsd";
+        final String sampleSchemaLocation = "http://www.example.com/schemas/sampleschema.xsd";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
@@ -73,7 +73,7 @@ public class domconfigschemalocation1Test extends LoboUnitTest {
             state = (String) domConfig.getParameter(parameter);
             assertNull("defaultSchemaLocation", state);
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             if (ex.getCode() == 8) {
                 return;
             }

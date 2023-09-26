@@ -49,17 +49,17 @@ import static org.junit.Assert.assertNotEquals;
 public class nodecomparedocumentposition05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        int documentPosition1;
-        int documentPosition2;
-        int documentPosition3;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final int documentPosition1;
+        final int documentPosition2;
+        final int documentPosition3;
+        final DocumentType nullDocType = null;
 
-        String rootName;
-        String rootNS;
-        Element docElem;
+        final String rootName;
+        final String rootNS;
+        final Element docElem;
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();

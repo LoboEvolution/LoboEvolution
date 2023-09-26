@@ -99,7 +99,7 @@ public interface RenderableContainer {
 	 * @param width a int.
 	 * @param height a int.
 	 */
-	void repaint(int x, int y, int width, int height);
+	void repaint(int x, final int y, final int width, final int height);
 
 	/**
 	 * <p>updateAllWidgetBounds.</p>
@@ -173,7 +173,7 @@ public interface RenderableContainer {
      * @param y a int.
      * @return a {@link java.awt.Point} object.
      */
-    Point getGUIPoint(int x, int y);
+    Point getGUIPoint(int x, final int y);
     
     /**
      * <p>translateDescendentPoint.</p>
@@ -183,7 +183,7 @@ public interface RenderableContainer {
      * @param y a int.
      * @return a {@link java.awt.Point} object.
      */
-    Point translateDescendentPoint(BoundableRenderable descendent, int x, int y);
+    Point translateDescendentPoint(BoundableRenderable descendent, final int x, final int y);
 
 	/**
 	 * <p>getOriginRelativeToAbs.</p>

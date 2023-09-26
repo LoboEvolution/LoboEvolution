@@ -58,13 +58,13 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 	 *
 	 * @param m a {@link java.lang.reflect.Method} object.
 	 */
-	public void addMethod(Method m) {
+	public void addMethod(final Method m) {
 		this.methods.add(m);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+	public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
 		final JavaObjectWrapper jcw = (JavaObjectWrapper) thisObj;
 		final Method method = getBestMethod(args);
 		if (method == null) {
@@ -104,11 +104,11 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 
 	/** {@inheritDoc} */
 	@Override
-	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
+	public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
 		throw new UnsupportedOperationException();
 	}
 
-	private Method getBestMethod(Object[] args) {
+	private Method getBestMethod(final Object[] args) {
 		final List<Method> methods = this.methods;
 		final int size = methods.size();
 		int matchingNumParams = 0;
@@ -143,7 +143,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 
 	/** {@inheritDoc} */
 	@Override
-	public Object getDefaultValue(Class hint) {
+	public Object getDefaultValue(final Class hint) {
 		if (hint == null || String.class.equals(hint)) {
 			return "function " + this.methodName;
 		} else {
@@ -151,7 +151,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		}
 	}
 	
-	private boolean areAssignableTo(Object[] objects, Class[] types) {
+	private boolean areAssignableTo(final Object[] objects, final Class[] types) {
         final int length = objects.length;
         if (length != types.length) {
             return false;
@@ -164,7 +164,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
         return true;
     }
 	
-	private boolean isAssignableOrBox(Object value, Class clazz) {
+	private boolean isAssignableOrBox(final Object value, final Class clazz) {
         if (clazz.isInstance(value)) {
             return true;
         }

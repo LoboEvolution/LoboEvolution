@@ -125,7 +125,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    *     </tr>
    *     <tr>
    *       <td> ATTRIBUTE  </td>
-   *       <td> QName name , String value </td>
+   *       <td> QName name , final String value </td>
    *       <td> QName type </td>
    *       <td> An attribute is written using the same algorithm
    *            to find the lexical form as used in START_ELEMENT.
@@ -136,7 +136,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    *     </tr>
    *     <tr>
    *       <td> NAMESPACE  </td>
-   *       <td> String prefix, String namespaceURI,
+   *       <td> String prefix, final String namespaceURI,
    *            boolean isDefaultNamespaceDeclaration
    *      </td>
    *       <td> None  </td>
@@ -152,7 +152,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    *     <tr>
    *       <td> PROCESSING_INSTRUCTION  </td>
    *       <td>   None</td>
-   *       <td>   String target, String data</td>
+   *       <td>   String target, final String data</td>
    *       <td>   The data does not need to be present and may be
    *              null.  Target is required and many not be null.
    *              The writer
@@ -172,7 +172,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    *     <tr>
    *       <td> START_DOCUMENT  </td>
    *       <td> None  </td>
-   *       <td> String encoding , boolean standalone, String version  </td>
+   *       <td> String encoding , boolean standalone, final String version  </td>
    *       <td> A START_DOCUMENT event is not required to be written to the
    *             stream.  If present the attributes are written inside
    *             the appropriate XML declaration syntax
@@ -215,7 +215,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * @param uri the uri to look up
    * @throws XMLStreamException
    */
-  public String getPrefix(String uri) throws XMLStreamException;
+  public String getPrefix(final String uri) throws XMLStreamException;
 
   /**
    * Sets the prefix the uri is bound to.  This prefix is bound
@@ -226,7 +226,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * @param uri the uri to bind to the prefix
    * @throws XMLStreamException
    */
-  public void setPrefix(String prefix, String uri) throws XMLStreamException;
+  public void setPrefix(final String prefix, final String uri) throws XMLStreamException;
 
   /**
    * Binds a URI to the default namespace
@@ -237,7 +237,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * @param uri the uri to bind to the default namespace
    * @throws XMLStreamException
    */
-  public void setDefaultNamespace(String uri) throws XMLStreamException;
+  public void setDefaultNamespace(final String uri) throws XMLStreamException;
 
   /**
    * Sets the current namespace context for prefix and uri bindings.

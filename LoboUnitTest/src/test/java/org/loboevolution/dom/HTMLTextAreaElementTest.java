@@ -137,7 +137,7 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
         selection(10, 5, messages);
     }
 
-    private void selection(final int selectionStart, final int selectionEnd, String[] messages) {
+    private void selection(final int selectionStart, final int selectionEnd, final String[] messages) {
         final String html
                 = "<html>\n"
                 + "<head><title>foo</title></head>\n"

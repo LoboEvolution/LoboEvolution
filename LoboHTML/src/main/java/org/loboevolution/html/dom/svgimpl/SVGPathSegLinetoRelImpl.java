@@ -46,7 +46,7 @@ public class SVGPathSegLinetoRelImpl implements SVGPathSegLinetoRel {
 	 * @param x a float.
 	 * @param y a float.
 	 */
-	public SVGPathSegLinetoRelImpl(float x, float y) {
+	public SVGPathSegLinetoRelImpl(final float x, final float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -71,7 +71,7 @@ public class SVGPathSegLinetoRelImpl implements SVGPathSegLinetoRel {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 

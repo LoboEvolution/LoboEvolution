@@ -56,11 +56,11 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 
 	/** {@inheritDoc} */
 	@Override
-	public void addEventListener(String type, Function listener, boolean useCapture) {
+	public void addEventListener(final String type, final Function listener, final boolean useCapture) {
 		if ("load".equals(type) || "DOMContentLoaded".equals(type)) {
 			onloadEvent(listener);
 		} else {
-			List<Function> handlerList = new ArrayList<>();
+			final List<Function> handlerList = new ArrayList<>();
 			handlerList.add(listener);
 			final Map<String, List<Function>> onEventListeners = new HashMap<>();
 			onEventListeners.put(type, handlerList);
@@ -68,24 +68,24 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 		}
 	}
 	
-	private void onloadEvent(Function onloadHandler) {
+	private void onloadEvent(final Function onloadHandler) {
 		Executor.executeFunction(this, onloadHandler, null, new Object[0]);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeEventListener(String script, Function function) {
-		removeEventListener(script, function, true);
+	public void removeEventListener(final String type, final Function listener) {
+		removeEventListener(type, listener, true);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeEventListener(String type, Function listener, boolean useCapture) {
-		Set<NodeImpl> keySet = onEventHandlers.keySet();
-		for (NodeImpl htmlElementImpl : keySet) {
-			Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
+	public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
+		final Set<NodeImpl> keySet = onEventHandlers.keySet();
+		for (final NodeImpl htmlElementImpl : keySet) {
+			final Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
 			if (map != null) {
-				List<Function> list = map.get(type);
+				final List<Function> list = map.get(type);
 				if (list != null) {
 					list.remove(listener);
 				}
@@ -98,8 +98,8 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean dispatchEvent(Node htmlElementImpl, Event evt) {
-		Function f = getFunction(htmlElementImpl, evt);
+	public boolean dispatchEvent(final Node htmlElementImpl, final Event evt) {
+		final Function f = getFunction(htmlElementImpl, evt);
 		if (f != null) {
 			if (!clicked.contains(htmlElementImpl)) {
 				Executor.executeFunction(this, f, evt, new Object[0]);
@@ -111,13 +111,13 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 		return false;
 	}
 
-	public Function getFunction(Node htmlElementImpl, Event evt) {
-		Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
+	public Function getFunction(final Node htmlElementImpl, final Event evt) {
+		final Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
 		if (map != null) {
-			String evType = evt.getType();
-			List<Function> handlers = map.get(evType.startsWith("on") ? evType.substring(2) : evType);
+			final String evType = evt.getType();
+			final List<Function> handlers = map.get(evType.startsWith("on") ? evType.substring(2) : evType);
 			if (handlers != null && handlers.size() > 0) {
-				Optional<Function> optional = handlers.stream().findFirst();
+				final Optional<Function> optional = handlers.stream().findFirst();
 				return optional.get();
 			}
 		}
@@ -125,7 +125,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	}
 
 	@Override
-	public boolean dispatchEvent(Event evt) throws EventException {
+	public boolean dispatchEvent(final Event evt) throws EventException {
 		return false;
 	}
 
@@ -142,7 +142,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	}
 
 	@Override
-	public boolean equalAttributes(Node arg) {
+	public boolean equalAttributes(final Node arg) {
 		return false;
 	}
 
@@ -160,7 +160,7 @@ public class EventTargetImpl extends NodeImpl implements EventTarget {
 	
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) throws DOMException {
+	public void setNodeValue(final String nodeValue) throws DOMException {
 		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "Cannot set node value of document");
 	}
 

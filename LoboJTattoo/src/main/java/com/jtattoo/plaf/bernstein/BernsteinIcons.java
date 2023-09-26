@@ -77,12 +77,13 @@ public class BernsteinIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+int x = iconX;
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += 2;
 			}
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			if (button.isEnabled()) {
 				if (model.isPressed() && model.isArmed()) {
 					checkPressedIcon.paintIcon(c, g, x, y);
@@ -140,12 +141,13 @@ public class BernsteinIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+int x = iconX;
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += 2;
 			}
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			if (button.isEnabled()) {
 				if (model.isSelected()) {
 					if (button.isRolloverEnabled() && model.isRollover()) {

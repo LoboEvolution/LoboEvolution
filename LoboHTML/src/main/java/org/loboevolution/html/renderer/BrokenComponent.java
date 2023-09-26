@@ -56,7 +56,7 @@ public class BrokenComponent extends Component {
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(Graphics g) {
+	public void update(final Graphics g) {
 		paint(g);
 	}
 }

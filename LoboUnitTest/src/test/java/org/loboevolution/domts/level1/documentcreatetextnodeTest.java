@@ -54,11 +54,11 @@ public class documentcreatetextnodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Text newTextNode;
-        String newTextName;
-        String newTextValue;
-        int newTextType;
+        final Document doc;
+        final Text newTextNode;
+        final String newTextName;
+        final String newTextValue;
+        final int newTextType;
         doc = sampleXmlFile("staff.xml");
         newTextNode = doc.createTextNode("This is a new Text node");
         newTextValue = newTextNode.getNodeValue();

@@ -49,18 +49,18 @@ public class nodelookupprefix11Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Document newDoc;
-        Element elem;
-        Element importedNode;
-        String prefix;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Document newDoc;
+        final Element elem;
+        final Element importedNode;
+        final String prefix;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
-        String qname;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
+        final String qname;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

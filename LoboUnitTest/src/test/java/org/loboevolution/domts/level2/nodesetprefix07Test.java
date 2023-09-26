@@ -56,8 +56,8 @@ public class nodesetprefix07Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr attribute;
+        final Document doc;
+        final Attr attribute;
         doc = sampleXmlFile("staffNS.xml");
         attribute = doc.createAttributeNS("http://www.w3.org/DOM/Test/L2", "abc:elem");
 
@@ -65,7 +65,7 @@ public class nodesetprefix07Test extends LoboUnitTest {
             boolean success = false;
             try {
                 attribute.setPrefix("xmlns");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
             assertTrue("throw_NAMESPACE_ERR", success);

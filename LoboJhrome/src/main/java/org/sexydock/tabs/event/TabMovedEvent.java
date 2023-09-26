@@ -34,7 +34,7 @@ public class TabMovedEvent extends TabbedPaneEvent {
     public final Tab movedTab;
     public final int prevIndex;
     public final int newIndex;
-    public TabMovedEvent(JTabbedPane tabbedPane, long timestamp, Tab movedTab, int prevIndex, int newIndex) {
+    public TabMovedEvent(final JTabbedPane tabbedPane, final long timestamp, final Tab movedTab, final int prevIndex, final int newIndex) {
         super(tabbedPane, timestamp);
         this.movedTab = movedTab;
         this.prevIndex = prevIndex;

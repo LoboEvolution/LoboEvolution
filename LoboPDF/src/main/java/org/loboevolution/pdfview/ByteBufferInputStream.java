@@ -46,13 +46,13 @@ public class ByteBufferInputStream extends InputStream {
      * @param buffer the buffer to present as an input stream, positioned
      *  at the current read position of the byte buffer
      */
-    public ByteBufferInputStream(ByteBuffer buffer) {
+    public ByteBufferInputStream(final ByteBuffer buffer) {
         this.buffer = buffer;
     }
 
     /** {@inheritDoc} */
     @Override
-    public int read(byte[] b, int off, int len) throws IOException {
+    public int read(final byte[] b, final int off, final int len) throws IOException {
 
         if (b == null) {
 	    throw new NullPointerException();
@@ -76,7 +76,7 @@ public class ByteBufferInputStream extends InputStream {
 
     /** {@inheritDoc} */
     @Override
-    public long skip(long n) throws IOException {
+    public long skip(final long n) throws IOException {
         if (n <= 0) {
             return 0;
         } else {
@@ -105,7 +105,7 @@ public class ByteBufferInputStream extends InputStream {
 
     /** {@inheritDoc} */
     @Override
-    public void mark(int readlimit) {
+    public void mark(final int readlimit) {
         buffer.mark();
     }
 

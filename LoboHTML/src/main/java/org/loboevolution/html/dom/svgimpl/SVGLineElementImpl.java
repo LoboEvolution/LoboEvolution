@@ -52,7 +52,7 @@ public class SVGLineElementImpl extends SVGGraphic implements SVGLineElement {
 
 	@Override
 	public SVGRect getBBox() {
-		Shape shape = createShape(null);
+		final Shape shape = createShape(null);
 		return new SVGRectImpl(shape.getBounds2D());
 	}
 
@@ -91,7 +91,7 @@ public class SVGLineElementImpl extends SVGGraphic implements SVGLineElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(AffineTransform transform) {
+	public Shape createShape(final AffineTransform transform) {
 		AffineTransform inverseTransform;
 		try {
 			inverseTransform = transform.createInverse();

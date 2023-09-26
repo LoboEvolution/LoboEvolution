@@ -50,7 +50,7 @@ public class ImgSvgControl extends BaseControl {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLImageElementImpl} object.
 	 */
-	public ImgSvgControl(HTMLImageElementImpl modelNode) {
+	public ImgSvgControl(final HTMLImageElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;

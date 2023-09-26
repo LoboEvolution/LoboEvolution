@@ -40,13 +40,13 @@ public class HTMLDListElementImpl extends HTMLElementImpl implements HTMLDListEl
      *
      * @param name a {@link String} object.
      */
-    public HTMLDListElementImpl(String name) {
+    public HTMLDListElementImpl(final String name) {
         super(name);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new DListRenderState(prevRenderState, this);
     }
 
@@ -66,7 +66,6 @@ public class HTMLDListElementImpl extends HTMLElementImpl implements HTMLDListEl
      * @param compact a boolean.
      */
     @Override
-    public void setCompact(boolean compact) {
-
+    public void setCompact(final boolean compact) {
     }
 }

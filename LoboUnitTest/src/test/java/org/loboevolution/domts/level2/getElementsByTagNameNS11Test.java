@@ -63,14 +63,14 @@ public class getElementsByTagNameNS11Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        HTMLCollection elementList;
+        final Document doc;
+        final Element docElem;
+        final HTMLCollection elementList;
         Node child;
         String childName;
-        List<String> result = new ArrayList<>();
+        final List<String> result = new ArrayList<>();
 
-        List<String> expectedResult = new ArrayList<>();
+        final List<String> expectedResult = new ArrayList<>();
         expectedResult.add("ADDRESS");
         expectedResult.add("ADDRESS");
         expectedResult.add("ADDRESS");

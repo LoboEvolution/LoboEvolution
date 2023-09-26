@@ -46,9 +46,6 @@ import java.util.logging.Logger;
  * <p>LoboWebDriver class.</p>
  */
 public class LoboWebDriver {
-	
-	/** The Constant logger. */
-	protected static final Logger logger = Logger.getLogger(LoboWebDriver.class.getName());
 
 	/**
 	 * <p>loadHtml.</p>
@@ -56,20 +53,20 @@ public class LoboWebDriver {
 	 * @param html a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
-	protected HTMLDocumentImpl loadHtml(String html) {
+	protected HTMLDocumentImpl loadHtml(final String html) {
 		final String url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html").toString();
 		HTMLDocumentImpl doc = null;
 		try {
-			WritableLineReader wis = new WritableLineReader(new StringReader(html));
+			final WritableLineReader wis = new WritableLineReader(new StringReader(html));
 			final HtmlRendererConfig config = new LocalHtmlRendererConfig();
 			final UserAgentContext ucontext = new UserAgentContext(config, true);
-			HtmlPanel panel = new HtmlPanel();
+			final HtmlPanel panel = new HtmlPanel();
 			panel.setPreferredSize(new Dimension(800, 400));
 			final HtmlRendererContext rendererContext = new LocalHtmlRendererContext(panel, ucontext);
 			ucontext.setUserAgentEnabled(true);
 			doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, url);
 			doc.load();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		return doc;
@@ -82,19 +79,19 @@ public class LoboWebDriver {
 	 * @param url a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
-	protected static HTMLDocumentImpl loadHtml(InputStream in, String url) {
+	protected static HTMLDocumentImpl loadHtml(final InputStream in, final String url) {
 		HTMLDocumentImpl doc = null;
 		try {
-			WritableLineReader wis = new WritableLineReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+			final WritableLineReader wis = new WritableLineReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 			final HtmlRendererConfig config = new LocalHtmlRendererConfig();
 			final UserAgentContext ucontext = new UserAgentContext(config, true);
-			HtmlPanel panel = new HtmlPanel();
+			final HtmlPanel panel = new HtmlPanel();
 			panel.setPreferredSize(new Dimension(800, 400));
 			final HtmlRendererContext rendererContext = new LocalHtmlRendererContext(panel, ucontext);
 			ucontext.setUserAgentEnabled(true);
 			doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, url);
 			doc.load();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		return doc;

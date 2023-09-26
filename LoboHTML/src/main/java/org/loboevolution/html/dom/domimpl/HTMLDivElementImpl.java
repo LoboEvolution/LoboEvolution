@@ -46,7 +46,7 @@ public class HTMLDivElementImpl extends HTMLElementImpl implements HTMLDivElemen
 
 	/** {@inheritDoc} */
 	@Override
-	protected void appendInnerTextImpl(StringBuilder buffer) {
+	protected void appendInnerTextImpl(final StringBuilder buffer) {
 		final int length = buffer.length();
 		int lineBreaks;
 		if (length == 0) {
@@ -73,7 +73,7 @@ public class HTMLDivElementImpl extends HTMLElementImpl implements HTMLDivElemen
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new BlockRenderState(prevRenderState, this);
 	}
 
@@ -85,7 +85,7 @@ public class HTMLDivElementImpl extends HTMLElementImpl implements HTMLDivElemen
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlign(String align) {
+	public void setAlign(final String align) {
 		setAttribute("align", align);
 	}
 	

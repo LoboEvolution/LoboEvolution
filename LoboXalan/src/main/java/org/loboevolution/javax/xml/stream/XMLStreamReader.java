@@ -107,7 +107,7 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * @param localName the localName of the event, may be null
    * @throws XMLStreamException if the required values are not matched.
    */
-  public void require(int type, String namespaceURI, String localName) throws XMLStreamException;
+  public void require(int type, final String namespaceURI, final String localName) throws XMLStreamException;
 
   /**
    * Reads the content of a text-only element, an exception is thrown if this is
@@ -221,7 +221,7 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * @return the uri bound to the given prefix or null if it is not bound
    * @throws IllegalArgumentException if the prefix is null
    */
-  public String getNamespaceURI(String prefix);
+  public String getNamespaceURI(final String prefix);
 
   /**
    * Returns true if the cursor points to a start tag (otherwise false)
@@ -259,7 +259,7 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * @return returns the value of the attribute , returns null if not found
    * @throws IllegalStateException if this is not a START_ELEMENT or ATTRIBUTE
    */
-  public String getAttributeValue(String namespaceURI,
+  public String getAttributeValue(final String namespaceURI,
                                   String localName);
 
   /**
@@ -461,7 +461,7 @@ public interface XMLStreamReader extends XMLStreamConstants {
    * @throws UnsupportedOperationException if this method is not supported
    * @throws NullPointerException is if target is null
    */
-   public int getTextCharacters(int sourceStart, char[] target, int targetStart, int length)
+   public int getTextCharacters(int sourceStart, char[] target, final int targetStart, final int length)
      throws XMLStreamException;
 
   /**

@@ -36,6 +36,7 @@ import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Base64;
 
 /**
@@ -53,7 +54,7 @@ public class TableRenderState extends StyleSheetRenderState {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public TableRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+	public TableRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
@@ -87,7 +88,7 @@ public class TableRenderState extends StyleSheetRenderState {
 				if (background.contains(";base64,")) {
                     final String base64 = background.split(";base64,")[1];
                     final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-                    background = String.valueOf(decodedBytes);
+                    background = Arrays.toString(decodedBytes);
                 }
 				binfo.setBackgroundImage(this.document.getFullURL(background));
 			}
@@ -113,7 +114,7 @@ public class TableRenderState extends StyleSheetRenderState {
 
 				String border;
 				if (element instanceof HTMLTableElement) {
-					HTMLTableElement table = (HTMLTableElement) element;
+					final HTMLTableElement table = (HTMLTableElement) element;
 					border = table.getBorder();
 				} else {
 					border = element.getAttribute("border");
@@ -122,7 +123,7 @@ public class TableRenderState extends StyleSheetRenderState {
 				if (border != null) {
 					border = border.trim();
 					int value;
-					int valueType;
+					final int valueType;
 					if (border.endsWith("%")) {
 						valueType = HtmlInsets.TYPE_PERCENT;
 						try {

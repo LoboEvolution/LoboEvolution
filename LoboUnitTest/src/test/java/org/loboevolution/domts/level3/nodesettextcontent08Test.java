@@ -49,12 +49,12 @@ import static org.junit.Assert.assertEquals;
 public class nodesettextcontent08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection elemList;
-        Element elem;
-        ProcessingInstruction pi;
-        String textContent;
-        Node appendedChild;
+        final Element elem;
+        final ProcessingInstruction pi;
+        final String textContent;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
         pi = doc.createProcessingInstruction("PIT", "PID");

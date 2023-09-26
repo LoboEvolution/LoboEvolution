@@ -50,7 +50,7 @@ public class Identity8BitCharsetEncoder extends CharsetEncoder {
 
 	/** {@inheritDoc} */
     @Override
-	protected CoderResult encodeLoop(CharBuffer in, ByteBuffer out) {
+	protected CoderResult encodeLoop(final CharBuffer in, final ByteBuffer out) {
         while (in.remaining() > 0) {
             if (out.remaining() < 1) {
                 return CoderResult.OVERFLOW;
@@ -67,7 +67,7 @@ public class Identity8BitCharsetEncoder extends CharsetEncoder {
 
     /** {@inheritDoc} */
     @Override
-    public boolean isLegalReplacement(byte[] repl) {
+    public boolean isLegalReplacement(final byte[] repl) {
         // avoid referencing the non-existent character set
         return true;
     }

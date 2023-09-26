@@ -64,17 +64,17 @@ public class importNode01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        Attr newAttr;
-        Node aNode;
-        Document ownerDocument;
-        Node attrOwnerElement;
-        DocumentType docType;
-        String system;
-        boolean specified;
-        String nodeName;
-        String childValue;
+        final Document doc;
+        final Document aNewDoc;
+        final Attr newAttr;
+        final Node aNode;
+        final Document ownerDocument;
+        final Node attrOwnerElement;
+        final DocumentType docType;
+        final String system;
+        final boolean specified;
+        final String nodeName;
+        final String childValue;
 
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");

@@ -66,16 +66,16 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        DOMConfiguration domConfig;
-        HTMLCollection elemList;
+        final Document doc;
+        final Element elem;
+        final DOMConfiguration domConfig;
+        final HTMLCollection elemList;
         CDATASection newChild;
-        Node oldChild;
-        Node retval;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Node oldChild;
+        final Node retval;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        List<DOMError> errors;
+        final List<DOMError> errors;
 
         DOMError error;
         int splittedCount = 0;
@@ -92,8 +92,8 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
         Object relatedException;
         Object relatedData;
         int length;
-        int nodeType;
-        String nodeValue;
+        final int nodeType;
+        final String nodeValue;
         doc = sampleXmlFile("barfoo.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(0);
@@ -112,7 +112,7 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
                 (nodeType == 4 & (nodeValue.indexOf("]]>") >= 0))
         );
         errors = errorMonitor.getErrors();
-        for (Object o : errors) {
+        for (final Object o : errors) {
             error = (DOMError) o;
             type = error.getType();
             severity = error.getSeverity();

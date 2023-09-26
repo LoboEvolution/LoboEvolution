@@ -52,8 +52,8 @@ public class nodevalue03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        EntityReference newNode;
+        final Document doc;
+        final EntityReference newNode;
         String newValue;
         doc = sampleXmlFile("staff.xml");
         newNode = doc.createEntityReference("ent1");
@@ -63,7 +63,7 @@ public class nodevalue03Test extends LoboUnitTest {
         boolean success = false;
         try {
             newNode.setNodeValue("This should have no effect");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
         assertTrue("throw_INVALID_MODIFICATION_ERR", success);

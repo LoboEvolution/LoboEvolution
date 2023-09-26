@@ -39,12 +39,12 @@ public class SAXResult
         throw new RuntimeException("Stub!");
     }
 
-    public SAXResult(ContentHandler handler)
+    public SAXResult(final ContentHandler handler)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setHandler(ContentHandler handler)
+    public void setHandler(final ContentHandler handler)
     {
         throw new RuntimeException("Stub!");
     }
@@ -54,7 +54,7 @@ public class SAXResult
         throw new RuntimeException("Stub!");
     }
 
-    public void setLexicalHandler(LexicalHandler handler)
+    public void setLexicalHandler(final LexicalHandler handler)
     {
         throw new RuntimeException("Stub!");
     }
@@ -64,7 +64,7 @@ public class SAXResult
         throw new RuntimeException("Stub!");
     }
 
-    public void setSystemId(String systemId)
+    public void setSystemId(final String systemId)
     {
         throw new RuntimeException("Stub!");
     }

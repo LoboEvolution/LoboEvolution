@@ -34,7 +34,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -56,15 +55,15 @@ public class nodegetprefix03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Element qelement;
-        Attr attr;
-        Attr qattr;
-        String elemNoPrefix;
-        String elemPrefix;
-        String attrNoPrefix;
-        String attrPrefix;
+        final Document doc;
+        final Element element;
+        final Element qelement;
+        final Attr attr;
+        final Attr qattr;
+        final String elemNoPrefix;
+        final String elemPrefix;
+        final String attrNoPrefix;
+        final String attrPrefix;
         doc = sampleXmlFile("staff.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test/elem", "elem");
         qelement = doc.createElementNS("http://www.w3.org/DOM/Test/elem", "qual:qelem");

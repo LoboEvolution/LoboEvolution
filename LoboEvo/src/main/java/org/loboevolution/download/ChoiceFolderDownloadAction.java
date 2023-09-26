@@ -42,16 +42,16 @@ public class ChoiceFolderDownloadAction extends AbstractAction {
 
     private final DownloadWindow action;
 
-    ChoiceFolderDownloadAction(DownloadWindow action) {
+    ChoiceFolderDownloadAction(final DownloadWindow action) {
         this.action = action;
     }
 
     /** {@inheritDoc} */
     public void actionPerformed(final ActionEvent e) {
-        JFileChooser chooser = new JFileChooser();
+        final JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (chooser.showSaveDialog(action) == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
+            final File file = chooser.getSelectedFile();
             action.setDestinationFile(chooser.getSelectedFile());
             action.destinationField.setValue(file.getAbsolutePath());
             action.destinationField.setToolTip(file.getAbsolutePath());

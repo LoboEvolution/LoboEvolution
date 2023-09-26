@@ -84,48 +84,48 @@ public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTabl
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlign(String align) {
+	public void setAlign(final String align) {
 		setAttribute("align", align);
-		
+
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCh(String ch) {
+	public void setCh(final String ch) {
 		setAttribute("ch", ch);
-		
+
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setChOff(String chOff) {
+	public void setChOff(final String chOff) {
 		setAttribute("choff", chOff);
-		
+
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSpan(int span) {
+	public void setSpan(final int span) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setvAlign(String vAlign) {
+	public void setvAlign(final String vAlign) {
 		setAttribute("valign", vAlign);
-		
+
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(String width) {
+	public void setWidth(final String width) {
 		// TODO Auto-generated method stub
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_COLUMN);
 	}
 

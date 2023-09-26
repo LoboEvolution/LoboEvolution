@@ -46,7 +46,7 @@ public class UnionPattern extends Expression {
   @Override
   public boolean canTraverseOutsideSubtree() {
     if (null != m_patterns) {
-      for (StepPattern m_pattern : m_patterns) {
+      for (final StepPattern m_pattern : m_patterns) {
         if (m_pattern.canTraverseOutsideSubtree()) return true;
       }
     }
@@ -58,10 +58,10 @@ public class UnionPattern extends Expression {
    *
    * @param patterns the contained step patterns to be tested.
    */
-  public void setPatterns(StepPattern[] patterns) {
+  public void setPatterns(final StepPattern[] patterns) {
     m_patterns = patterns;
     if (null != patterns) {
-      for (StepPattern pattern : patterns) {
+      for (final StepPattern pattern : patterns) {
         pattern.exprSetParent(this);
       }
     }
@@ -69,11 +69,11 @@ public class UnionPattern extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
 
     XObject bestScore = null;
-    for (StepPattern m_pattern : m_patterns) {
-      XObject score = m_pattern.execute(xctxt);
+    for (final StepPattern m_pattern : m_patterns) {
+      final XObject score = m_pattern.execute(xctxt);
 
       if (score != NodeTest.SCORE_NONE) {
         if (null == bestScore) bestScore = score;
@@ -90,10 +90,10 @@ public class UnionPattern extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     visitor.visitUnionPattern();
     if (null != m_patterns) {
-      for (StepPattern m_pattern : m_patterns) {
+      for (final StepPattern m_pattern : m_patterns) {
         m_pattern.callVisitors(visitor);
       }
     }
@@ -101,13 +101,13 @@ public class UnionPattern extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!isSameClass(expr)) return false;
 
-    UnionPattern up = (UnionPattern) expr;
+    final UnionPattern up = (UnionPattern) expr;
 
     if (null != m_patterns) {
-      int n = m_patterns.length;
+      final int n = m_patterns.length;
       if ((null == up.m_patterns) || (up.m_patterns.length != n)) return false;
 
       for (int i = 0; i < n; i++) {

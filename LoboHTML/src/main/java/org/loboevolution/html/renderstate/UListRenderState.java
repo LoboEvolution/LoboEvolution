@@ -38,7 +38,7 @@ public class UListRenderState extends BlockRenderState {
      * @param prevRenderState a {@link RenderState} object.
      * @param element         a {@link HTMLElementImpl} object.
      */
-    public UListRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+    public UListRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
         super(prevRenderState, element);
     }
 
@@ -75,7 +75,7 @@ public class UListRenderState extends BlockRenderState {
 
 
     private HtmlInsets getDefaultMarginInsets() {
-        HtmlInsets insets = new HtmlInsets();
+        final HtmlInsets insets = new HtmlInsets();
         final int topBottom = HtmlValues.getPixelSize("1rem", null, element.getDocumentNode().getDefaultView(), -1);
         insets.setTop(topBottom);
         insets.setBottom(topBottom);
@@ -85,7 +85,7 @@ public class UListRenderState extends BlockRenderState {
     }
 
     private HtmlInsets getDefaultPaddingInsets() {
-        HtmlInsets insets = new HtmlInsets();
+        final HtmlInsets insets = new HtmlInsets();
         insets.setLeft(HtmlValues.getPixelSize("40px", null, element.getDocumentNode().getDefaultView(), -1));
         insets.setLeftType(HtmlInsets.TYPE_PIXELS);
         return insets;

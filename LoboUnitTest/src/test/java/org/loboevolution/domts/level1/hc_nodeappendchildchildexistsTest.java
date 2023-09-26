@@ -63,19 +63,19 @@ public class hc_nodeappendchildchildexistsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        HTMLCollection childList;
-        Node childNode;
-        Node newChild;
+        final Document doc;
+        final HTMLCollection elementList;
+        final HTMLCollection childList;
+        final Node childNode;
+        final Node newChild;
         Node memberNode;
         String memberName;
-        java.util.List<String> refreshedActual = new java.util.ArrayList<>();
+        final java.util.List<String> refreshedActual = new java.util.ArrayList<>();
 
-        java.util.List<String> actual = new java.util.ArrayList<>();
+        final java.util.List<String> actual = new java.util.ArrayList<>();
 
         int nodeType;
-        List<String> expected = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("STRONG");
         expected.add("CODE");
         expected.add("SUP");
@@ -95,7 +95,7 @@ public class hc_nodeappendchildchildexistsTest extends LoboUnitTest {
             actual.add(memberName);
         }
         assertEquals("liveByTagName", expected, actual);
-        NodeList childList2 = childNode.getChildNodes();
+        final NodeList childList2 = childNode.getChildNodes();
         for (int indexN1009C = 0; indexN1009C < childList2.getLength(); indexN1009C++) {
             memberNode = childList2.item(indexN1009C);
             nodeType = memberNode.getNodeType();

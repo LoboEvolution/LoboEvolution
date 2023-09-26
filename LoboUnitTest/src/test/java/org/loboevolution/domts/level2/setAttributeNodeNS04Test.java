@@ -36,7 +36,6 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -63,12 +62,12 @@ public class setAttributeNodeNS04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        HTMLCollection elementList;
-        Document doc;
-        Node testAddr;
-        Attr newAttr;
-        Attr newAddrAttr;
-        String newName;
+        final HTMLCollection elementList;
+        final Document doc;
+        final Node testAddr;
+        final Attr newAttr;
+        final Attr newAddrAttr;
+        final String newName;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("emp:address");
         testAddr = elementList.item(0);

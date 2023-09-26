@@ -43,7 +43,7 @@ public class LoboCheckBox extends JCheckBox implements LoboLookAndFeel {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public LoboCheckBox(String name) {
+	public LoboCheckBox(final String name) {
 		super(name);
 		setBackground(background());
 		setForeground(foreground());

@@ -28,10 +28,7 @@ package org.loboevolution.pdfview.font.ttf;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * <p>NameTable class.</p>
@@ -115,10 +112,10 @@ public class NameTable extends TrueTypeTable {
      * @param nameID a short.
      * @param value a {@link java.lang.String} object.
      */
-    public void addRecord(short platformID, short platformSpecificID,
-                          short languageID, short nameID,
-                          String value) {
-        NameRecord rec = new NameRecord(platformID, platformSpecificID,
+    public void addRecord(final short platformID, final short platformSpecificID,
+                          final short languageID, final short nameID,
+                          final String value) {
+        final NameRecord rec = new NameRecord(platformID, platformSpecificID,
                                         languageID, nameID);
         this.records.put(rec, value);
     }
@@ -132,10 +129,10 @@ public class NameTable extends TrueTypeTable {
      * @param nameID a short.
      * @return a {@link java.lang.String} object.
      */
-    public String getRecord(short platformID, short platformSpecificID,
-                            short languageID, short nameID) {
+    public String getRecord(final short platformID, final short platformSpecificID,
+                            final short languageID, final short nameID) {
     
-        NameRecord rec = new NameRecord(platformID, platformSpecificID,
+        final NameRecord rec = new NameRecord(platformID, platformSpecificID,
                                         languageID, nameID);
         return this.records.get(rec);
     }
@@ -148,9 +145,9 @@ public class NameTable extends TrueTypeTable {
      * @param languageID a short.
      * @param nameID a short.
      */
-    public void removeRecord(short platformID, short platformSpecificID,
-                             short languageID, short nameID) {
-        NameRecord rec = new NameRecord(platformID, platformSpecificID,
+    public void removeRecord(final short platformID, final short platformSpecificID,
+                             final short languageID, final short nameID) {
+        final NameRecord rec = new NameRecord(platformID, platformSpecificID,
                                         languageID, nameID);
         this.records.remove(rec);
     }
@@ -161,8 +158,9 @@ public class NameTable extends TrueTypeTable {
      * @param platformID a short.
      * @return a boolean.
      */
-    public boolean hasRecords(short platformID) {
-        for (NameRecord rec : this.records.keySet()) {
+    public boolean hasRecords(final short platformID) {
+        for (final Map.Entry<NameRecord, String> entry : this.records.entrySet()) {
+            final NameRecord rec = entry.getKey();
             if (rec.platformID == platformID) {
                 return true;
             }
@@ -179,8 +177,9 @@ public class NameTable extends TrueTypeTable {
      * @param platformSpecificID a short.
      * @return a boolean.
      */
-    public boolean hasRecords(short platformID, short platformSpecificID) {
-        for (NameRecord rec : this.records.keySet()) {
+    public boolean hasRecords(final short platformID, final short platformSpecificID) {
+        for (final Map.Entry<NameRecord, String> entry : this.records.entrySet()) {
+            final NameRecord rec = entry.getKey();
             if (rec.platformID == platformID &&
                     rec.platformSpecificID == platformSpecificID) {
                 return true;
@@ -196,37 +195,37 @@ public class NameTable extends TrueTypeTable {
 	 * Read the table from data
 	 */
     @Override
-	public void setData(ByteBuffer data) {
+	public void setData(final ByteBuffer data) {
         //read table header
         setFormat(data.getShort());
-        int count = data.getShort();
-        int stringOffset = data.getShort();
+        final int count = data.getShort();
+        final int stringOffset = data.getShort();
         
         // read the records
         for (int i = 0; i < count; i++) {
-            short platformID = data.getShort();
-            short platformSpecificID = data.getShort();
-            short languageID = data.getShort();
-            short nameID = data.getShort();
+            final short platformID = data.getShort();
+            final short platformSpecificID = data.getShort();
+            final short languageID = data.getShort();
+            final short nameID = data.getShort();
             
-            int length = data.getShort() & 0xFFFF;
-            int offset = data.getShort() & 0xFFFF;
+            final int length = data.getShort() & 0xFFFF;
+            final int offset = data.getShort() & 0xFFFF;
             
             // read the String data
             data.mark();
             data.position(stringOffset + offset);
             
-            ByteBuffer stringBuf = data.slice();
+            final ByteBuffer stringBuf = data.slice();
             stringBuf.limit(length);
             
             data.reset();
             
             // choose the character set
-            String charsetName = getCharsetName(platformID, platformSpecificID);
-            Charset charset = Charset.forName(charsetName);
+            final String charsetName = getCharsetName(platformID, platformSpecificID);
+            final Charset charset = Charset.forName(charsetName);
             
             // parse the data as a string
-            String value = charset.decode(stringBuf).toString();
+            final String value = charset.decode(stringBuf).toString();
         
             // add to the mix
             addRecord(platformID, platformSpecificID, languageID, nameID, value);
@@ -241,10 +240,10 @@ public class NameTable extends TrueTypeTable {
     @Override
 	public ByteBuffer getData() {
         // alocate the output buffer
-        ByteBuffer buf = ByteBuffer.allocate(getLength());
+        final ByteBuffer buf = ByteBuffer.allocate(getLength());
         
         // the start of string data
-        short headerLength = (short) (6 + (12 * getCount()));
+        final short headerLength = (short) (6 + (12 * getCount()));
         
         // write the header
         buf.putShort(getFormat());
@@ -255,17 +254,18 @@ public class NameTable extends TrueTypeTable {
         short curOffset = 0;
         
         // add the size of each record
-        for (NameRecord rec : this.records.keySet()) {
-            String value = this.records.get(rec);
+        for (final Map.Entry<NameRecord, String> entry : this.records.entrySet()) {
+            final NameRecord rec = entry.getKey();
+            final String value = this.records.get(rec);
 
             // choose the charset
-            String charsetName = getCharsetName(rec.platformID,
+            final String charsetName = getCharsetName(rec.platformID,
                     rec.platformSpecificID);
-            Charset charset = Charset.forName(charsetName);
+            final Charset charset = Charset.forName(charsetName);
 
             // encode
-            ByteBuffer strBuf = charset.encode(value);
-            short strLen = (short) (strBuf.remaining() & 0xFFFF);
+            final ByteBuffer strBuf = charset.encode(value);
+            final short strLen = (short) (strBuf.remaining() & 0xFFFF);
 
             // write the IDs
             buf.putShort(rec.platformID);
@@ -310,16 +310,17 @@ public class NameTable extends TrueTypeTable {
         int length = 6 + (12 * getCount());
         
         // add the size of each record
-        for (NameRecord rec : this.records.keySet()) {
-            String value = this.records.get(rec);
+        for (final Map.Entry<NameRecord, String> entry : this.records.entrySet()) {
+            final NameRecord rec = entry.getKey();
+            final String value = this.records.get(rec);
 
             // choose the charset
-            String charsetName = getCharsetName(rec.platformID,
+            final String charsetName = getCharsetName(rec.platformID,
                     rec.platformSpecificID);
-            Charset charset = Charset.forName(charsetName);
+            final Charset charset = Charset.forName(charsetName);
 
             // encode
-            ByteBuffer buf = charset.encode(value);
+            final ByteBuffer buf = charset.encode(value);
 
             // add the size of the coded buffer
             length += buf.remaining();
@@ -342,7 +343,7 @@ public class NameTable extends TrueTypeTable {
      *
      * @param format a short.
      */
-    public void setFormat(short format) {
+    public void setFormat(final short format) {
         this.format = format;
     }
     
@@ -362,7 +363,7 @@ public class NameTable extends TrueTypeTable {
      * @param encodingID a int.
      * @return a {@link java.lang.String} object.
      */
-    public static String getCharsetName(int platformID, int encodingID) {
+    public static String getCharsetName(final int platformID, final int encodingID) {
         String charset = "";   
             
         switch (platformID) {
@@ -385,13 +386,14 @@ public class NameTable extends TrueTypeTable {
 	 */
     @Override
 	public String toString() {
-        StringBuilder buf = new StringBuilder();
-        String indent = "    ";
+        final StringBuilder buf = new StringBuilder();
+        final String indent = "    ";
         
         buf.append(indent).append("Format: ").append(getFormat()).append("\n");
         buf.append(indent).append("Count : ").append(getCount()).append("\n");
 
-        for (NameRecord rec : this.records.keySet()) {
+        for (final Map.Entry<NameRecord, String> entry : this.records.entrySet()) {
+            final NameRecord rec = entry.getKey();
             buf.append(indent).append(" platformID: ").append(rec.platformID);
             buf.append(" platformSpecificID: ").append(rec.platformSpecificID);
             buf.append(" languageID: ").append(rec.languageID);
@@ -439,8 +441,8 @@ public class NameTable extends TrueTypeTable {
         /**
          * Create a new record
          */
-        NameRecord(short platformID, short platformSpecificID,
-                   short languageID, short nameID) {
+        NameRecord(final short platformID, final short platformSpecificID,
+                   final short languageID, final short nameID) {
             this.platformID = platformID;
             this.platformSpecificID = platformSpecificID;
             this.languageID = languageID;
@@ -452,7 +454,7 @@ public class NameTable extends TrueTypeTable {
          * Compare two records
          */
         @Override
-		public boolean equals(Object o) {
+		public boolean equals(final Object o) {
             return (compareTo(o) == 0);
         }
         
@@ -460,12 +462,12 @@ public class NameTable extends TrueTypeTable {
          * Compare two records
          */
         @Override
-		public int compareTo(Object obj) {
+		public int compareTo(final Object obj) {
             if (!(obj instanceof NameRecord)) {
                 return -1;
             }
             
-            NameRecord rec = (NameRecord) obj;
+            final NameRecord rec = (NameRecord) obj;
             
             if (this.platformID > rec.platformID) {
                 return 1;
@@ -479,13 +481,7 @@ public class NameTable extends TrueTypeTable {
                 return 1;
             } else if (this.languageID < rec.languageID) {
                 return -1;
-            } else if (this.nameID > rec.nameID) {
-                return 1;
-            } else if (this.nameID < rec.nameID) {
-                return -1;
-            } else {
-                return 0;
-            }
+            } else return Short.compare(this.nameID, rec.nameID);
         }
         
         

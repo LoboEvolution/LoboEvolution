@@ -56,15 +56,15 @@ public class documentimportnode06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document docImported;
+        final Document doc;
+        final Document docImported;
         doc = sampleXmlFile("staffNS.xml");
 
         {
             boolean success = false;
             try {
                 docImported = (Document) doc.importNode(doc, false);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
             assertTrue("throw_NOT_SUPPORTED_ERR", success);

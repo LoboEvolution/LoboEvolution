@@ -45,7 +45,7 @@ public class BitmapPointer {
 	 *
 	 * @param bitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
 	 */
-	public BitmapPointer(JBIG2Bitmap bitmap) {
+	public BitmapPointer(final JBIG2Bitmap bitmap) {
 		this.bitmap = bitmap;
 		this.height = bitmap.getHeight();
 		this.width = bitmap.getWidth();
@@ -57,7 +57,7 @@ public class BitmapPointer {
 	 * @param x a int.
 	 * @param y a int.
 	 */
-	public void setPointer(int x, int y) {
+	public void setPointer(final int x, final int y) {
 		this.x = x;
 		this.y = y;
 		output = this.y >= 0 && this.y < height && this.x < width;

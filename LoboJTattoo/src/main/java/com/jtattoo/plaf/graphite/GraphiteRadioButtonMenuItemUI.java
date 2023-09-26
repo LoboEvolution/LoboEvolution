@@ -52,9 +52,9 @@ public class GraphiteRadioButtonMenuItemUI extends BaseRadioButtonMenuItemUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
-		JMenuItem mi = (JMenuItem) c;
-		ButtonModel model = mi.getModel();
+	protected void paintBackground(final Graphics g, final JComponent c, final int x, final int y, final int w, final int h) {
+		final JMenuItem mi = (JMenuItem) c;
+		final ButtonModel model = mi.getModel();
 		if (model.isArmed() || c instanceof JMenu && model.isSelected()) {
 			JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getMenuSelectionColors(), x, y, w, h);
 		} else {

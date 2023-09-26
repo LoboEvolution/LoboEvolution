@@ -142,6 +142,7 @@ public class LAFSettings implements Serializable {
     /**
      * The Color .
      */
+    @Builder.Default
     private Color color = Color.BLACK;
 
     /**
@@ -207,11 +208,13 @@ public class LAFSettings implements Serializable {
     /**
      * The Font .
      */
+    @Builder.Default
     private String font = "TimesNewRoman";
 
     /**
      * The Font Size .
      */
+    @Builder.Default
     private float fontSize = 16.0f;
 
     private final String LOOK_AND_FEEL =
@@ -227,12 +230,12 @@ public class LAFSettings implements Serializable {
      * @param type a {@link java.lang.String} object.
      * @return an array of {@link java.lang.String} objects.
      */
-    public static String[] getFonts(String type) {
+    public static String[] getFonts(final String type) {
         final List<String> fonts = new ArrayList<>();
         final String query = "SELECT name FROM " + type;
-        try (Connection conn = DriverManager.getConnection(DatabseSQLite.getDatabaseDirectory());
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+        try (final Connection conn = DriverManager.getConnection(DatabseSQLite.getDatabaseDirectory());
+             final Statement stmt = conn.createStatement();
+             final ResultSet rs = stmt.executeQuery(query)) {
             while (rs != null && rs.next()) {
                 fonts.add(rs.getString(1));
             }
@@ -249,9 +252,9 @@ public class LAFSettings implements Serializable {
      */
     public LAFSettings getInstance() {
         LAFSettings laf = null;
-        try (Connection conn = DriverManager.getConnection(DB_PATH);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(this.LOOK_AND_FEEL)) {
+        try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final Statement stmt = conn.createStatement();
+             final ResultSet rs = stmt.executeQuery(this.LOOK_AND_FEEL)) {
             while (rs != null && rs.next()) {
                 laf = LAFSettings.builder().
                         acryl(rs.getInt(1) == 1).

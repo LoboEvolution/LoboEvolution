@@ -51,7 +51,7 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     private JTextComponent jComponent;
 
     @Override
-    public void focusGained(FocusEvent e) {
+    public void focusGained(final FocusEvent e) {
         if (element.getOnfocus() != null) {
             Executor.executeFunction(element, element.getOnfocus(), null, new Object[]{});
         }
@@ -62,15 +62,15 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     }
 
     @Override
-    public void focusLost(FocusEvent event) {
+    public void focusLost(final FocusEvent event) {
         final boolean autocomplete = element.isAutocomplete();
         final String baseUrl = element.getBaseURI();
         final String type = element instanceof HTMLInputElement ? ((HTMLInputElement)element).getType() : "";
 
-        String selectedText = jComponent.getSelectedText();
+        final String selectedText = jComponent.getSelectedText();
         if (Strings.isNotBlank(selectedText) && Strings.isNotBlank(element.getValue())) {
-            Pattern word = Pattern.compile(selectedText);
-            Matcher match = word.matcher(element.getValue());
+            final Pattern word = Pattern.compile(selectedText);
+            final Matcher match = word.matcher(element.getValue());
 
             while (match.find()) {
                 element.setSelectionRange(match.start(), match.end() - 1);
@@ -78,9 +78,9 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         }
 
         if (autocomplete || "password".equals(type)) {
-            HTMLInputElementImpl im =  (HTMLInputElementImpl)element;
-            WindowImpl win = (WindowImpl) im.getDocumentNode().getDefaultView();
-            HtmlRendererConfig config = win.getConfig();
+            final HTMLInputElementImpl im =  (HTMLInputElementImpl)element;
+            final WindowImpl win = (WindowImpl) im.getDocumentNode().getDefaultView();
+            final HtmlRendererConfig config = win.getConfig();
             final String text = jComponent.getText();
             final boolean isNavigation = element.getUserAgentContext().isNavigationEnabled();
             config.deleteInput(text, baseUrl);
@@ -98,7 +98,7 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(final KeyEvent e) {
         if (element.getOnkeydown() != null) {
             Executor.executeFunction(element, element.getOnkeydown(), null, new Object[]{});
         }
@@ -114,19 +114,19 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(final KeyEvent e) {
 
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(final KeyEvent e) {
         if (element.getOnkeyup() != null) {
             Executor.executeFunction(element, element.getOnkeyup(), null, new Object[]{});
         }
     }
 
     @Override
-    public void caretUpdate(CaretEvent e) {
+    public void caretUpdate(final CaretEvent e) {
         final int dot = e.getDot();
         final int mark = e.getMark();
 
@@ -172,7 +172,7 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         return element;
     }
 
-    public void setElement(HTMLBasicInputElement element) {
+    public void setElement(final HTMLBasicInputElement element) {
         this.element = element;
     }
 
@@ -180,7 +180,7 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         return jComponent;
     }
 
-    public void setjComponent(JTextComponent jComponent) {
+    public void setjComponent(final JTextComponent jComponent) {
         this.jComponent = jComponent;
     }
 }

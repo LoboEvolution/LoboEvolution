@@ -46,7 +46,7 @@ public class PDFErrorHandler {
      *
      * @param e a {@link java.lang.Throwable} object.
      */
-    public void publishException(Throwable e) {
+    public void publishException(final Throwable e) {
        logger.log(Level.SEVERE, e.getMessage(), e); 
     }
 }

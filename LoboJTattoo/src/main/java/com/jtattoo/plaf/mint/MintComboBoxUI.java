@@ -60,7 +60,7 @@ public class MintComboBoxUI extends BaseComboBoxUI {
 
 		@Override
 		public void paint(final Graphics g) {
-			Dimension size = getSize();
+			final Dimension size = getSize();
 			if (isEnabled()) {
 				if (getModel().isArmed() && getModel().isPressed()) {
 					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getPressedColors(), 0, 0,
@@ -79,9 +79,9 @@ public class MintComboBoxUI extends BaseComboBoxUI {
 				JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDisabledColors(), 0, 0,
 						size.width, size.height);
 			}
-			Icon icon = BaseIcons.getComboBoxIcon();
-			int x = (size.width - icon.getIconWidth()) / 2;
-			int y = (size.height - icon.getIconHeight()) / 2;
+			final Icon icon = BaseIcons.getComboBoxIcon();
+			final int x = (size.width - icon.getIconWidth()) / 2;
+			final int y = (size.height - icon.getIconHeight()) / 2;
 			if (getModel().isPressed() && getModel().isArmed()) {
 				icon.paintIcon(this, g, x + 2, y + 1);
 			} else {
@@ -100,12 +100,12 @@ public class MintComboBoxUI extends BaseComboBoxUI {
 	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
-		ArrowButton button = new ArrowButton();
+		final ArrowButton button = new ArrowButton();
 		if (JTattooUtilities.isLeftToRight(comboBox)) {
-			Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		} else {
-			Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		}
 		return button;

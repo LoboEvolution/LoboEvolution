@@ -38,19 +38,19 @@ public class HTMLDDElementImpl extends HTMLElementImpl {
      *
      * @param name a {@link String} object.
      */
-    public HTMLDDElementImpl(String name) {
+    public HTMLDDElementImpl(final String name) {
         super(name);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new DDRenderState(prevRenderState, this);
     }
 
     @Override
     public int getClientHeight() {
-        int clientHeight = super.getClientHeight();
+        final int clientHeight = super.getClientHeight();
         return clientHeight == 0 ? 17 : clientHeight;
     }
 

@@ -56,7 +56,7 @@ public class PageInformationSegment extends Segment {
 	 *
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 */
-	public PageInformationSegment(JBIG2StreamDecoder streamDecoder) {
+	public PageInformationSegment(final JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
@@ -112,7 +112,7 @@ public class PageInformationSegment extends Segment {
 			logger.info("Resolution = " + xResolution + 'x' + yResolution);
 
 		/** extract page information flags */
-		short pageInformationFlagsField = decoder.readByte();
+		final short pageInformationFlagsField = decoder.readByte();
 
 		pageInformationFlags.setFlags(pageInformationFlagsField);
 
@@ -126,9 +126,9 @@ public class PageInformationSegment extends Segment {
 		if (JBIG2StreamDecoder.debug)
 			logger.info("Page Striping = " + pageStriping);
 
-		int defPix = pageInformationFlags.getFlagValue(PageInformationFlags.DEFAULT_PIXEL_VALUE);
+		final int defPix = pageInformationFlags.getFlagValue(PageInformationFlags.DEFAULT_PIXEL_VALUE);
 
-		int height;
+		final int height;
 
 		if (pageBitmapHeight == -1) {
 			height = pageStriping & 0x7fff;

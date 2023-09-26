@@ -60,11 +60,11 @@ public class hc_attrcreatetextnodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection addressList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr streetAttr;
+        final Document doc;
+        final HTMLCollection addressList;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr streetAttr;
         String value;
         doc = sampleXmlFile("hc_staff.xml");
         addressList = doc.getElementsByTagName("acronym");

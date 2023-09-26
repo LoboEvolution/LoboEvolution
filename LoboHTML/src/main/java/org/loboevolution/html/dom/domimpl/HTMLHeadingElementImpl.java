@@ -45,7 +45,7 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 
 	/** {@inheritDoc} */
 	@Override
-	protected void appendInnerTextImpl(StringBuilder buffer) {
+	protected void appendInnerTextImpl(final StringBuilder buffer) {
 		final int length = buffer.length();
 		int lineBreaks;
 		if (length == 0) {
@@ -72,7 +72,7 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new HeadingRenderState(prevRenderState, this);
 	}
 
@@ -84,7 +84,7 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlign(String align) {
+	public void setAlign(final String align) {
 		setAttribute("align", align);
 	}
 	

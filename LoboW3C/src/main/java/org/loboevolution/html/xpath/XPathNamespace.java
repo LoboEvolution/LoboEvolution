@@ -26,7 +26,6 @@
 
 package org.loboevolution.html.xpath;
 
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
 /**

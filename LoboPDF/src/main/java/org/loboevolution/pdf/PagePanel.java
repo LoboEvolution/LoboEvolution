@@ -83,7 +83,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 	 *
 	 * @param page the PDFPage to draw.
 	 */
-	public synchronized void showPage(PDFPage page) {
+	public synchronized void showPage(final PDFPage page) {
 		// stop drawing the previous page
 		if (page != null && size != null) {
 			page.stop(size.width, size.height, null);
@@ -101,8 +101,8 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 
 			// image should fit preferred size
 			// image should fit size if panel is smaller than preferred size
-			int width  = Math.min(getPreferredSize().width,  getSize().width );
-			int height = Math.min(getPreferredSize().height, getSize().height);
+			final int width  = Math.min(getPreferredSize().width,  getSize().width );
+			final int height = Math.min(getPreferredSize().height, getSize().height);
 
 			if (width + height > 0) {
 				this.size = page.getUnstretchedSize(width, height, null);
@@ -113,7 +113,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 	}
 
 	/** {@inheritDoc} */
-	public void setPreferredSize(Dimension size) {
+	public void setPreferredSize(final Dimension size) {
 		if (super.getPreferredSize() != size) {
 			super.setPreferredSize(size);
 			this.image = null;
@@ -138,7 +138,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 	 * Draw the image.
 	 */
 	public void paint(final Graphics g) {
-		Dimension sz = getSize();
+		final Dimension sz = getSize();
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 		if (image == null) {
@@ -151,8 +151,8 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 			}
 		} else {
 			// draw the image
-			int imageWidth  = image.getWidth (null);
-			int imageHeight = image.getHeight(null);
+			final int imageWidth  = image.getWidth (null);
+			final int imageHeight = image.getHeight(null);
 
 			if (imageWidth <= sz.width && imageHeight <= sz.height) {
 				// draw it centered within the panel
@@ -200,7 +200,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 	 * Handles notification of the fact that some part of the image
 	 * changed.  Repaints that portion.
 	 */
-	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+	public boolean imageUpdate(final Image img, final int infoflags, final int x, final int y, final int width, final int height) {
 		if ((infoflags & (SOMEBITS | ALLBITS)) != 0) {
 			repaint(x + offx, y + offy, width, height);
 		}

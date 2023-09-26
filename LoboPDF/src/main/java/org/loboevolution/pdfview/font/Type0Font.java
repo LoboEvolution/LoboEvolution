@@ -52,16 +52,16 @@ public class Type0Font extends PDFFont {
      * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      * @throws java.io.IOException if any.
      */
-    public Type0Font(String baseFont, PDFObject fontObj,
-                     PDFFontDescriptor descriptor) throws IOException {
+    public Type0Font(final String baseFont, final PDFObject fontObj,
+                     final PDFFontDescriptor descriptor) throws IOException {
         super (baseFont, descriptor);
                          
-        PDFObject[] descendantFonts = fontObj.getDictRef("DescendantFonts").getArray();
+        final PDFObject[] descendantFonts = fontObj.getDictRef("DescendantFonts").getArray();
         
         this.fonts = new PDFFont[descendantFonts.length];
         
         for (int i = 0; i < descendantFonts.length; i++) {
-            PDFFont descFont = PDFFont.getFont(descendantFonts[i], null);
+            final PDFFont descFont = PDFFont.getFont(descendantFonts[i], null);
             if (descFont instanceof CIDFontType0) {
             	((CIDFontType0)descFont).parseToUnicodeMap(fontObj);
             }
@@ -75,7 +75,7 @@ public class Type0Font extends PDFFont {
      * @param fontID a int.
      * @return a {@link org.loboevolution.pdfview.font.PDFFont} object.
      */
-    public PDFFont getDescendantFont(int fontID) {
+    public PDFFont getDescendantFont(final int fontID) {
         return this.fonts[fontID];
     }
     
@@ -85,7 +85,7 @@ public class Type0Font extends PDFFont {
 	 * Get a character from the first font in the descendant fonts array
 	 */
     @Override
-	protected PDFGlyph getGlyph(char src, String name) {
+	protected PDFGlyph getGlyph(final char src, final String name) {
         return (getDescendantFont(0).getGlyph(src, name));
     }
 }

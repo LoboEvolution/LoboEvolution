@@ -56,16 +56,16 @@ public class elementsetattributenodens02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Element element2;
-        Attr attribute;
-        Attr attributeCloned;
-        Attr newAttr;
-        HTMLCollection elementList;
-        String attrName;
-        String attrValue;
-        String nullNS = null;
+        final Document doc;
+        final Element element;
+        final Element element2;
+        final Attr attribute;
+        final Attr attributeCloned;
+        final Attr newAttr;
+        final HTMLCollection elementList;
+        final String attrName;
+        final String attrValue;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName( "address");

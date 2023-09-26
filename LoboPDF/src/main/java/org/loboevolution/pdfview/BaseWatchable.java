@@ -110,7 +110,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                             int laststatus = Watchable.RUNNING;
                             while ((getStatus() == Watchable.RUNNING) && (this.gate == null || !this.gate.iterate())) {
                                 // update the status based on this iteration
-                                int status = iterate();
+                                final int status = iterate();
                                 if (status != laststatus) {
                                     // update status only when necessary, this increases performance
                                     setStatus(status);
@@ -123,7 +123,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                             if (getStatus() == Watchable.RUNNING) {
                                 setStatus(Watchable.PAUSED);
                             }
-                        } catch (Exception ex) {
+                        } catch (final Exception ex) {
                             setError(ex);
                         }
                     } else {
@@ -132,7 +132,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                             if (!isExecutable()) {
                                 try {
                                     this.statusLock.wait();
-                                } catch (InterruptedException ie) {
+                                } catch (final InterruptedException ie) {
                                     // ignore
                                 }
                             }
@@ -145,7 +145,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 
                 cleanup();
             }
-        } catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             PDFDebugger.debug("Interrupted.");
         }
         // notify that we are no longer running
@@ -169,7 +169,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      * @return a boolean.
      */
     public boolean isFinished() {
-        int s = getStatus();
+        final int s = getStatus();
         return (s == Watchable.COMPLETED ||
                 s == Watchable.ERROR);
     }
@@ -218,7 +218,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      *
      * @param synchronous if true, run in this thread
      */
-    public synchronized void go(boolean synchronous) {
+    public synchronized void go(final boolean synchronous) {
         this.gate = null;
 
         execute(synchronous);
@@ -231,7 +231,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 	 * finished or stopped.
 	 */
     @Override
-	public synchronized void go(int steps) {
+	public synchronized void go(final int steps) {
         this.gate = new Gate();
         this.gate.setStopIterations(steps);
 
@@ -245,7 +245,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 	 * finished or stopped.
 	 */
     @Override
-	public synchronized void go(long millis) {
+	public synchronized void go(final long millis) {
         this.gate = new Gate();
         this.gate.setStopTime(millis);
 
@@ -260,7 +260,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
             while (!isFinished() && getStatus() != Watchable.STOPPED) {
                 try {
                     this.statusLock.wait();
-                } catch (InterruptedException ex) {
+                } catch (final InterruptedException ex) {
                     // ignore
                 }
             }
@@ -272,7 +272,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      *
      * @param synchronous if true, run in this thread
      */
-    protected synchronized void execute(boolean synchronous) {
+    protected synchronized void execute(final boolean synchronous) {
         // see if we're already running
         if (this.thread != null) {
             // we're already running. Make sure we wake up on any change.
@@ -295,12 +295,12 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         	this.thread.setName(getClass().getName());
         	//Fix for NPE: Taken from http://java.net/jira/browse/PDF_RENDERER-46
         	synchronized (statusLock) {
-        	    Thread.UncaughtExceptionHandler h = (th, ex) -> PDFDebugger.debug( "Uncaught exception: " + ex );
+        	    final Thread.UncaughtExceptionHandler h = (th, ex) -> PDFDebugger.debug( "Uncaught exception: " + ex );
                 thread.setUncaughtExceptionHandler( h );
         		thread.start();
         		try {
         			statusLock.wait();
-        		} catch (InterruptedException ex) {
+        		} catch (final InterruptedException ex) {
         			// ignore
         		}
         	}
@@ -312,7 +312,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      *
      * @param status a int.
      */
-    protected void setStatus(int status) {
+    protected void setStatus(final int status) {
         synchronized (this.statusLock) {
             this.status = status;
 
@@ -334,7 +334,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      *
      * @param suppressTrace a boolean.
      */
-    public static void setSuppressSetErrorStackTrace(boolean suppressTrace) {
+    public static void setSuppressSetErrorStackTrace(final boolean suppressTrace) {
         SuppressSetErrorStackTrace = suppressTrace;
     }
 
@@ -343,7 +343,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      *
      * @param error a {@link java.lang.Exception} object.
      */
-    protected void setError(Exception error) {
+    protected void setError(final Exception error) {
     	exception = error;
         if (!SuppressSetErrorStackTrace) {
             errorHandler.publishException(error);
@@ -372,13 +372,13 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         private long nextGate;
 
         /** set the stop time */
-        public void setStopTime(long millisFromNow) {
+        public void setStopTime(final long millisFromNow) {
             this.timeBased = true;
             this.nextGate = System.currentTimeMillis() + millisFromNow;
         }
 
         /** set the number of iterations until we stop */
-        public void setStopIterations(int iterations) {
+        public void setStopIterations(final int iterations) {
             this.timeBased = false;
             this.nextGate = iterations;
         }
@@ -410,7 +410,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      *
      * @param e a {@link org.loboevolution.pdfview.PDFErrorHandler} object.
      */
-    public static void setErrorHandler(PDFErrorHandler e) {
+    public static void setErrorHandler(final PDFErrorHandler e) {
         errorHandler = e;
     }
     

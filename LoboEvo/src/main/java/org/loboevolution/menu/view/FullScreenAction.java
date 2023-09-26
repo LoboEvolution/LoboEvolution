@@ -57,7 +57,7 @@ public class FullScreenAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public FullScreenAction(BrowserFrame frame) {
+	public FullScreenAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 

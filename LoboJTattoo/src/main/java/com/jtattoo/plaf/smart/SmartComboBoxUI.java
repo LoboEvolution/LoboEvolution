@@ -73,12 +73,12 @@ public class SmartComboBoxUI extends BaseComboBoxUI {
 	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
-		ArrowButton button = new ArrowButton();
+		final ArrowButton button = new ArrowButton();
 		if (JTattooUtilities.isLeftToRight(comboBox)) {
-			Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		} else {
-			Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		}
 		return button;

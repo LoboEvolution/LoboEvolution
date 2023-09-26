@@ -48,16 +48,16 @@ public class nodegettextcontent16Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Element elem;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Element elem;
         Element elemChild;
-        Text txt;
-        Comment comment;
-        EntityReference entRef;
-        CDATASection cdata;
-        ProcessingInstruction pi;
-        String textContent;
+        final Text txt;
+        final Comment comment;
+        final EntityReference entRef;
+        final CDATASection cdata;
+        final ProcessingInstruction pi;
+        final String textContent;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();

@@ -73,7 +73,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 	 * @param imageViewer
 	 *            the viewer this popup menu belongs to
 	 */
-	public DefaultViewerPopup(ImageViewer imageViewer) {
+	public DefaultViewerPopup(final ImageViewer imageViewer) {
 		viewer = imageViewer;
 		createAndShowGUI(); 
 	}
@@ -89,7 +89,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 
 		/** Zoom menu **/
 
-		JMenu zoomMenu = new JMenu("Zoom");
+		final JMenu zoomMenu = new JMenu("Zoom");
 		final JRadioButtonMenuItem zoomOriginalSize = new JRadioButtonMenuItem("Original size",
 				viewer.getResizeStrategy() == ResizeStrategy.NO_RESIZE);
 		zoomOriginalSize.addActionListener(e -> viewer.setResizeStrategy(ResizeStrategy.NO_RESIZE));
@@ -104,7 +104,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 			private final double value;
 			private final JRadioButtonMenuItem menuItem;
 
-			private CustomZoomEntry(String label, double value) {
+			private CustomZoomEntry(final String label, final double value) {
 				this.value = value;
 				menuItem = new JRadioButtonMenuItem(label,
 						viewer.getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM && viewer.getZoomFactor() == value);
@@ -128,7 +128,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 		zoomMenu.add(zoomShrinkToFit);
 		zoomMenu.add(zoomResizeToFit);
 		zoomMenu.add(new JSeparator());
-		for (CustomZoomEntry cze : customZoomEntries) {
+		for (final CustomZoomEntry cze : customZoomEntries) {
 			zoomMenu.add(cze.menuItem);
 			group.add(cze.menuItem);
 		}
@@ -146,7 +146,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 				break;
 			case CUSTOM_ZOOM:
 				group.clearSelection();
-				for (CustomZoomEntry cze : customZoomEntries) {
+				for (final CustomZoomEntry cze : customZoomEntries) {
 					if (cze.value == viewer.getZoomFactor()) {
 						cze.menuItem.setSelected(true);
 						break;
@@ -160,7 +160,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 		viewer.addPropertyChangeListener("zoomFactor", evt -> {
 			if (viewer.getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM) {
 				group.clearSelection();
-				for (CustomZoomEntry cze : customZoomEntries) {
+				for (final CustomZoomEntry cze : customZoomEntries) {
 					if (cze.value == viewer.getZoomFactor()) {
 						cze.menuItem.setSelected(true);
 						break;
@@ -171,7 +171,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 
 		/** Save command **/
 
-		JMenuItem saveImageMenuItem = new JMenuItem("Save image...");
+		final JMenuItem saveImageMenuItem = new JMenuItem("Save image...");
 		saveImageMenuItem.addActionListener(e -> saveImageAction());
 
 		/** Pixelated zoom toggle **/
@@ -222,11 +222,11 @@ public class DefaultViewerPopup extends JPopupMenu {
 		saveChooser.getAccessory().add(saveChooserHelpButton);
 		if (JFileChooser.APPROVE_OPTION == saveChooser.showSaveDialog(viewer.getComponent())) {
 			File f = saveChooser.getSelectedFile();
-			BufferedImage image = viewer.getImage();
+			final BufferedImage image = viewer.getImage();
 			if (image == null) {
 				JOptionPane.showMessageDialog(viewer.getComponent(), "No image", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
-				String name = f.getName().toLowerCase();
+				final String name = f.getName().toLowerCase();
 				try {
 					if (name.endsWith(".jpg")) {
 						ImageIO.write(image, "jpg", f);
@@ -236,7 +236,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 						f = new File(f.getPath() + ".png");
 						ImageIO.write(image, "png", f);
 					}
-				} catch (IOException ex) {
+				} catch (final IOException ex) {
 					JOptionPane.showMessageDialog(viewer.getComponent(),
 							"<html>Cannot write image to " + f.getAbsolutePath() + ":<br>" + ex.getMessage(), "Error",
 							JOptionPane.ERROR_MESSAGE);

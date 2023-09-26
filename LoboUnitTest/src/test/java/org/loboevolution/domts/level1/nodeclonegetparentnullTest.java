@@ -57,11 +57,11 @@ public class nodeclonegetparentnullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        Node clonedNode;
-        Node parentNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final Node clonedNode;
+        final Node parentNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);

@@ -44,7 +44,7 @@ public abstract class DocumentBuilderFactory
         throw new RuntimeException("Stub!");
     }
 
-    public static DocumentBuilderFactory newInstance(String factoryClassName, ClassLoader classLoader)
+    public static DocumentBuilderFactory newInstance(final String factoryClassName, final ClassLoader classLoader)
     {
         throw new RuntimeException("Stub!");
     }
@@ -52,32 +52,32 @@ public abstract class DocumentBuilderFactory
     public abstract DocumentBuilder newDocumentBuilder()
         throws ParserConfigurationException;
 
-    public void setNamespaceAware(boolean awareness)
+    public void setNamespaceAware(final boolean awareness)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setValidating(boolean validating)
+    public void setValidating(final boolean validating)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setIgnoringElementContentWhitespace(boolean whitespace)
+    public void setIgnoringElementContentWhitespace(final boolean whitespace)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setExpandEntityReferences(boolean expandEntityRef)
+    public void setExpandEntityReferences(final boolean expandEntityRef)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setIgnoringComments(boolean ignoreComments)
+    public void setIgnoringComments(final boolean ignoreComments)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setCoalescing(boolean coalescing)
+    public void setCoalescing(final boolean coalescing)
     {
         throw new RuntimeException("Stub!");
     }
@@ -112,16 +112,16 @@ public abstract class DocumentBuilderFactory
         throw new RuntimeException("Stub!");
     }
 
-    public abstract void setAttribute(String s, Object obj)
+    public abstract void setAttribute(final String s, Object obj)
         throws IllegalArgumentException;
 
-    public abstract Object getAttribute(String s)
+    public abstract Object getAttribute(final String s)
         throws IllegalArgumentException;
 
-    public abstract void setFeature(String s, boolean flag)
+    public abstract void setFeature(final String s, boolean flag)
         throws ParserConfigurationException;
 
-    public abstract boolean getFeature(String s)
+    public abstract boolean getFeature(final String s)
         throws ParserConfigurationException;
 
     public Schema getSchema()
@@ -129,12 +129,12 @@ public abstract class DocumentBuilderFactory
         throw new RuntimeException("Stub!");
     }
 
-    public void setSchema(Schema schema)
+    public void setSchema(final Schema schema)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setXIncludeAware(boolean state)
+    public void setXIncludeAware(final boolean state)
     {
         throw new RuntimeException("Stub!");
     }

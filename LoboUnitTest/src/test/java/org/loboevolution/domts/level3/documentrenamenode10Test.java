@@ -55,14 +55,14 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode10Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String textEntry = "hello";
-        Text textNode;
+        final Document doc;
+        final String textEntry = "hello";
+        final Text textNode;
         Node renamedNode;
         String qualifiedName;
-        DocumentType nullDocType = null;
+        final DocumentType nullDocType = null;
 
-        java.util.List qualifiedNames = new java.util.ArrayList();
+        final java.util.List qualifiedNames = new java.util.ArrayList();
         qualifiedNames.add("_:");
         qualifiedNames.add(":0");
         qualifiedNames.add(":");
@@ -72,14 +72,14 @@ public class documentrenamenode10Test extends LoboUnitTest {
 
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode(textEntry);
-        for (Object name : qualifiedNames) {
+        for (final Object name : qualifiedNames) {
             qualifiedName = (String) name;
 
             {
                 boolean success = false;
                 try {
                     renamedNode = doc.renameNode(textNode, "http://www.w3.org/XML/1998/namespace", qualifiedName);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
                 assertTrue("documentrenamenode10_NOT_SUPPORTED_ERR", success);

@@ -55,11 +55,11 @@ public class attrisid07Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element acronymElem;
-        Attr attr;
-        Attr attrImported;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element acronymElem;
+        final Attr attr;
+        final Attr attrImported;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagNameNS("*", "acronym");
         acronymElem = (Element) elemList.item(2);

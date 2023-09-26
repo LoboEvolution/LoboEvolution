@@ -41,7 +41,7 @@ final class RFloatInfo implements Renderable {
 	 * @param element a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
 	 * @param leftFloat a boolean.
 	 */
-	public RFloatInfo(ModelNode node, BoundableRenderable element, boolean leftFloat) {
+	public RFloatInfo(final ModelNode node, final BoundableRenderable element, final boolean leftFloat) {
 		this.modelNode = node;
 		this.element = element;
 		this.leftFloat = leftFloat;

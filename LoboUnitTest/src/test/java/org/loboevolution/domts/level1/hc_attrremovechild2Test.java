@@ -50,12 +50,12 @@ public class hc_attrremovechild2Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection acronymList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr titleAttr;
-        Text textNode;
+        final Document doc;
+        final HTMLCollection acronymList;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr titleAttr;
+        final Text textNode;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
@@ -65,7 +65,7 @@ public class hc_attrremovechild2Test extends LoboUnitTest {
         boolean success = false;
         try {
             titleAttr.removeChild(textNode);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
         assertTrue("throw_NOT_FOUND_ERR", success);

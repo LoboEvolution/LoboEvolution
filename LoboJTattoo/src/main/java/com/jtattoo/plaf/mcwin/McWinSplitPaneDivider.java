@@ -48,7 +48,7 @@ public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
 	 *
 	 * @param ui a {@link com.jtattoo.plaf.mcwin.McWinSplitPaneUI} object.
 	 */
-	public McWinSplitPaneDivider(McWinSplitPaneUI ui) {
+	public McWinSplitPaneDivider(final McWinSplitPaneUI ui) {
 		super(ui);
 	}
 

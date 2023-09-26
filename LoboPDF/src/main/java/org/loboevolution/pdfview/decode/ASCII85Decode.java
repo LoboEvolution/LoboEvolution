@@ -38,14 +38,14 @@ import org.loboevolution.pdfview.PDFParseException;
  * Author Mike Wessler
   *
  */
-public class ASCII85Decode {
+public final class ASCII85Decode {
 
     private final ByteBuffer buf;
 
     /**
      * initialize the decoder with byte buffer in ASCII85 format
      */
-    private ASCII85Decode(ByteBuffer buf) {
+    private ASCII85Decode(final ByteBuffer buf) {
         this.buf = buf;
     }
 
@@ -57,7 +57,7 @@ public class ASCII85Decode {
         // skip whitespace
         // returns next character, or -1 if end of stream
         while (this.buf.remaining() > 0) {
-            char c = (char) this.buf.get();
+            final char c = (char) this.buf.get();
 
             if (!PDFFile.isWhiteSpace(c)) {
                 return c;
@@ -76,10 +76,10 @@ public class ASCII85Decode {
      *        correct position
      * @return false when finished, or true otherwise.
      */
-    private boolean decode5(ByteArrayOutputStream baos)
+    private boolean decode5(final ByteArrayOutputStream baos)
             throws PDFParseException {
         // stream ends in ~>
-        int[] five = new int[5];
+        final int[] five = new int[5];
         int i;
         for (i = 0; i < 5; i++) {
             five[i] = nextChar();
@@ -107,7 +107,7 @@ public class ASCII85Decode {
             i -= 1;
         }
 
-        int value =
+        final int value =
                 five[0] * 85 * 85 * 85 * 85 +
                 five[1] * 85 * 85 * 85 +
                 five[2] * 85 * 85 +
@@ -115,7 +115,7 @@ public class ASCII85Decode {
                 five[4];
 
         for (int j = 0; j < i; j++) {
-            int shift = 8 * (3 - j);
+            final int shift = 8 * (3 - j);
             baos.write((byte) ((value >> shift) & 0xff));
         }
 
@@ -131,7 +131,7 @@ public class ASCII85Decode {
         this.buf.rewind();
 
         // allocate the output buffer
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         // decode the bytes 
         while (decode5(baos)) {
@@ -152,9 +152,9 @@ public class ASCII85Decode {
      * @return the decoded bytes
      * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
-    public static ByteBuffer decode(ByteBuffer buf, PDFObject params)
+    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
             throws PDFParseException {
-        ASCII85Decode me = new ASCII85Decode(buf);
+        final ASCII85Decode me = new ASCII85Decode(buf);
         return me.decode();
     }
 }

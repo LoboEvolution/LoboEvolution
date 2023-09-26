@@ -52,7 +52,7 @@ public class SmallRenderState extends RenderStateDelegator {
      * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      */
-    public SmallRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+    public SmallRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
         super(prevRenderState);
         this.element = element;
         this.prevRenderState = prevRenderState;
@@ -64,7 +64,7 @@ public class SmallRenderState extends RenderStateDelegator {
         final CSSStyleDeclaration props = element.getCurrentStyle();
         final HtmlRendererConfig config = element.getHtmlRendererConfig();
         final String fontSize = props == null ? null : props.getFontSize();
-        FontKey key = FontValues.getDefaultFontKey(config);
+        final FontKey key = FontValues.getDefaultFontKey(config);
         final String fSize = Strings.isNotBlank(fontSize) ? fontSize : CSSValues.SMALLER.getValue();
         key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), prevRenderState));
         return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, props, prevRenderState));

@@ -48,15 +48,15 @@ import static org.junit.Assert.*;
 public class elementsetidattributens02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element addressElem;
-        NamedNodeMap attributesMap;
-        Attr attr;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element addressElem;
+        final NamedNodeMap attributesMap;
+        final Attr attr;
         boolean id = false;
-        Element elem;
-        String elemName;
-        String xsiNS = "http://www.w3.org/2001/XMLSchema-instance";
+        final Element elem;
+        final String elemName;
+        final String xsiNS = "http://www.w3.org/2001/XMLSchema-instance";
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagNameNS("*", "acronym");
         addressElem = (Element) elemList.item(2);

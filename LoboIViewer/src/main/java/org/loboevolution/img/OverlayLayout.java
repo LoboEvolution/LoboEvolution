@@ -48,35 +48,35 @@ public class OverlayLayout implements LayoutManager {
 	 *
 	 * @param layeredImageView a {@link org.loboevolution.img.LayeredImageView} object.
 	 */
-	public OverlayLayout(LayeredImageView layeredImageView) {
+	public OverlayLayout(final LayeredImageView layeredImageView) {
 		this.layeredImageView = layeredImageView;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void addLayoutComponent(String name, Component comp) {
+	public void addLayoutComponent(final String name, final Component comp) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeLayoutComponent(Component comp) {
+	public void removeLayoutComponent(final Component comp) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension preferredLayoutSize(Container parent) {
+	public Dimension preferredLayoutSize(final Container parent) {
 		return layeredImageView.getTheImage().getPreferredSize();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension minimumLayoutSize(Container parent) {
+	public Dimension minimumLayoutSize(final Container parent) {
 		return layeredImageView.getTheImage().getMinimumSize();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void layoutContainer(Container parent) {
+	public void layoutContainer(final Container parent) {
 		for (int i = 0; i < parent.getComponentCount(); i++) {
 			parent.getComponent(i).setBounds(0, 0, parent.getWidth(), parent.getHeight());
 		}

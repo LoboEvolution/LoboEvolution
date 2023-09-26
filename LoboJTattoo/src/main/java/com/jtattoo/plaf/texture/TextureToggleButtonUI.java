@@ -60,8 +60,8 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
-			Rectangle iconRect) {
+	protected void paintFocus(final Graphics g, final AbstractButton b, final Rectangle viewRect, final Rectangle textRect,
+                              final Rectangle iconRect) {
 		if (!AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
 			g.setColor(AbstractLookAndFeel.getFocusColor());
 			BasicGraphicsUtils.drawDashedRect(g, 3, 2, b.getWidth() - 6, b.getHeight() - 5);
@@ -71,12 +71,12 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {
-		AbstractButton b = (AbstractButton) c;
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
+	protected void paintIcon(final Graphics g, final JComponent c, final Rectangle iconRect) {
+		final AbstractButton b = (AbstractButton) c;
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
 		if (!b.isContentAreaFilled()) {
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9f);
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9f);
 			g2D.setComposite(alpha);
 		}
 		super.paintIcon(g, c, iconRect);
@@ -85,12 +85,12 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
-		ButtonModel model = b.getModel();
-		FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-		int mnemIndex = b.getDisplayedMnemonicIndex();
+	protected void paintText(final Graphics g, final AbstractButton b, final Rectangle textRect, final String text) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
+		final ButtonModel model = b.getModel();
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
+		final int mnemIndex = b.getDisplayedMnemonicIndex();
 		if (model.isEnabled()) {
 			int offs = 0;
 			if (model.isArmed() && model.isPressed()) {
@@ -105,7 +105,7 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
 				}
 			}
 			if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(foreground) > 164) {
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 				g2D.setComposite(alpha);
 				g.setColor(Color.black);
 				JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs,
@@ -116,7 +116,7 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
 			JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs,
 					textRect.y + offs + fm.getAscent());
 		} else {
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
 			g2D.setComposite(alpha);
 			Color fc = b.getForeground();
 			if (ColorHelper.getGrayValue(fc) > 164) {

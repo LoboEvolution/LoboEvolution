@@ -46,7 +46,7 @@ public class ArrayUtilities {
 	 * @param collection a {@link java.util.Collection} object.
 	 * @return a boolean.
 	 */
-	public static boolean isBlank(Collection<?> collection) {
+	public static boolean isBlank(final Collection<?> collection) {
 		return collection == null || collection.isEmpty();
 	}
 
@@ -56,7 +56,7 @@ public class ArrayUtilities {
 	 * @param collection a {@link java.util.Collection} object.
 	 * @return a boolean.
 	 */
-	public static boolean isNotBlank(Collection<?> collection) {
+	public static boolean isNotBlank(final Collection<?> collection) {
 		return collection != null && !collection.isEmpty();
 	}
 
@@ -68,7 +68,7 @@ public class ArrayUtilities {
 	 * @param length a int.
 	 * @return a {@link java.util.Iterator} object.
 	 */
-	public static Iterator iterator(Object[] array, int offset, int length) {
+	public static Iterator iterator(final Object[] array, final int offset, final int length) {
 		return new ArrayIterator(array, offset, length);
 	}
 
@@ -80,7 +80,7 @@ public class ArrayUtilities {
 	 * @param list a {@link java.util.List} object.
 	 * @param <T> a T object.
 	 */
-	public static <T> void moveItem(int sourceIndex, int targetIndex, List<T> list) {
+	public static <T> void moveItem(final int sourceIndex, final int targetIndex, final List<T> list) {
 	    if (sourceIndex <= targetIndex) {
 	        Collections.rotate(list.subList(sourceIndex, targetIndex + 1), -1);
 	    } else {
@@ -131,11 +131,11 @@ public class ArrayUtilities {
 	 * @param index a {@link java.lang.Integer} object
 	 * @return an array of {@link java.awt.Color} objects.
 	 */
-	public static Color[] removeColor(Color[] arr, int index) {
+	public static Color[] removeColor(final Color[] arr, final int index) {
 		if (arr == null || index < 0 || index >= arr.length) {
 			return arr;
 		}
-		Color[] anotherArray = new Color[arr.length - 1];
+		final Color[] anotherArray = new Color[arr.length - 1];
 		System.arraycopy(arr, 0, anotherArray, 0, index);
 		System.arraycopy(arr, index + 1, anotherArray, index, arr.length - index - 1);
 		return anotherArray;
@@ -148,11 +148,11 @@ public class ArrayUtilities {
 	 * @param index a {@link java.lang.Integer} object
 	 * @return an array of {@link java.lang.Float} objects.
 	 */
-	public static float[] removeFloat(float[] arr, int index) {
+	public static float[] removeFloat(final float[] arr, final int index) {
 		if (arr == null || index < 0 || index >= arr.length) {
 			return arr;
 		}
-		float[] anotherArray = new float[arr.length - 1];
+		final float[] anotherArray = new float[arr.length - 1];
 		System.arraycopy(arr, 0, anotherArray, 0, index);
 		System.arraycopy(arr, index + 1, anotherArray, index, arr.length - index - 1);
 		return anotherArray;

@@ -34,6 +34,9 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 
@@ -60,19 +63,18 @@ public class hc_nodeclonenodetrueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        Node clonedNode;
-        NodeList clonedList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final Node clonedNode;
+        final NodeList clonedList;
         Node clonedChild;
         String clonedChildName;
-        NodeList origList;
+        final NodeList origList;
         Node origChild;
         String origChildName;
-        java.util.List result = new java.util.ArrayList();
-
-        java.util.List expected = new java.util.ArrayList();
+        final List<String> result = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");

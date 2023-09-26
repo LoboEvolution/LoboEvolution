@@ -57,12 +57,12 @@ public class CDataSectionGetDataTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection nameList;
-        Node child;
-        Node lastChild;
-        String data;
-        int nodeType;
+        final Document doc;
+        final HTMLCollection nameList;
+        final Node child;
+        final Node lastChild;
+        final String data;
+        final int nodeType;
         doc = sampleXmlFile("staff.xml");
         nameList = doc.getElementsByTagName("name");
         child = nameList.item(1);

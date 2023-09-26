@@ -25,15 +25,10 @@
  */
 package org.loboevolution.pdfview;
 
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.logging.Logger;
 
 /**
  * <p>HexDump class.</p>
- *
-  *
-  *
  */
 public class HexDump {
 	
@@ -43,11 +38,11 @@ public class HexDump {
      *
      * @param data an array of {@link byte} objects.
      */
-    public static void printData(byte[] data) {
-        char[] parts = new char[17];
+    public static void printData(final byte[] data) {
+        final char[] parts = new char[17];
         int partsloc = 0;
         for (int i = 0; i < data.length; i++) {
-            int d = (data[i]) & 0xff;
+            final int d = (data[i]) & 0xff;
             if (d == 0) {
                 parts[partsloc++] = '.';
             } else if (d < 32 || d >= 127) {
@@ -56,8 +51,8 @@ public class HexDump {
                 parts[partsloc++] = (char) d;
             }
             if (i % 16 == 0) {
-                int start = Integer.toHexString(data.length).length();
-                int end = Integer.toHexString(i).length();
+                final int start = Integer.toHexString(data.length).length();
+                final int end = Integer.toHexString(i).length();
 
                 for (int j = start; j > end; j--) {
                 	logger.info("0");
@@ -78,31 +73,6 @@ public class HexDump {
             } else if ((i & 1) == 1) {
             	logger.info(" ");
             }
-        }
-    }
-
-    /**
-     * <p>main.</p>
-     *
-     * @param args an array of {@link java.lang.String} objects.
-     */
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            logger.info("Usage: ");
-            logger.info("    HexDump <filename>");
-            System.exit(-1);
-        }
-
-        try {
-            RandomAccessFile raf = new RandomAccessFile(args[0], "r");
-
-            int size = (int) raf.length();
-            byte[] data = new byte[size];
-
-            raf.readFully(data);
-            printData(data);
-        } catch (IOException ioe) {
-            BaseWatchable.getErrorHandler().publishException(ioe);
         }
     }
 }

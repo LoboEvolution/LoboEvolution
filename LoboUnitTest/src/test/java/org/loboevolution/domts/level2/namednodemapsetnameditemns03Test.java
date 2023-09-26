@@ -62,16 +62,16 @@ public class namednodemapsetnameditemns03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document docAlt;
-        NamedNodeMap attributes;
-        NamedNodeMap attributesAlt;
-        HTMLCollection elementList;
-        HTMLCollection elementListAlt;
-        Element element;
-        Element elementAlt;
-        Attr attr;
-        String nullNS = null;
+        final Document doc;
+        final Document docAlt;
+        final NamedNodeMap attributes;
+        final NamedNodeMap attributesAlt;
+        final HTMLCollection elementList;
+        final HTMLCollection elementListAlt;
+        final Element element;
+        final Element elementAlt;
+        final Attr attr;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "address");
@@ -86,13 +86,13 @@ public class namednodemapsetnameditemns03Test extends LoboUnitTest {
 
         try {
             attributesAlt.removeNamedItemNS(nullNS, "street");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND);
         }
 
         try {
             attributes.setNamedItemNS(attr);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);

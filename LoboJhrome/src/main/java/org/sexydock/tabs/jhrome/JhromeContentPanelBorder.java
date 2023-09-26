@@ -37,12 +37,12 @@ public class JhromeContentPanelBorder implements Border {
     final Color backgroundColor = JhromeTabBorderAttributes.SELECTED_BORDER.bottomColor;
 
     @Override
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-        Graphics2D g2 = (Graphics2D) g;
+    public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
+        final Graphics2D g2 = (Graphics2D) g;
 
-        int inset = Math.max(thickness - 1, 0);
+        final int inset = Math.max(thickness - 1, 0);
 
-        Path2D path = new Path2D.Double();
+        final Path2D path = new Path2D.Double();
         path.moveTo(x + inset, y + height - inset - inset);
         path.lineTo(x + inset, y + inset + roundness);
         path.curveTo(x + inset, y + inset, x + inset, y + inset, x + inset + roundness, y + inset);
@@ -51,9 +51,9 @@ public class JhromeContentPanelBorder implements Border {
         path.lineTo(x + width - inset - inset, y + height - inset - inset);
         path.closePath();
 
-        Stroke prevStroke = g2.getStroke();
-        Paint prevPaint = g2.getPaint();
-        Object prevAntialias = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+        final Stroke prevStroke = g2.getStroke();
+        final Paint prevPaint = g2.getPaint();
+        final Object prevAntialias = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2.setStroke(new BasicStroke(thickness));
@@ -69,7 +69,7 @@ public class JhromeContentPanelBorder implements Border {
     }
 
     @Override
-    public Insets getBorderInsets(Component c) {
+    public Insets getBorderInsets(final Component c) {
         return new Insets(roundness + thickness, roundness + thickness, roundness + thickness, roundness + thickness);
     }
 

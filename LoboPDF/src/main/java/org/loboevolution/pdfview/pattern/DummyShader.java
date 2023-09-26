@@ -45,13 +45,13 @@ public class DummyShader extends PDFShader {
 	 *
 	 * @param type a int.
 	 */
-	protected DummyShader(int type) {
+	protected DummyShader(final int type) {
 		super(type);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void parse(PDFObject shareObj) throws IOException {
+	public void parse(final PDFObject shareObj) throws IOException {
 		
 	}
 

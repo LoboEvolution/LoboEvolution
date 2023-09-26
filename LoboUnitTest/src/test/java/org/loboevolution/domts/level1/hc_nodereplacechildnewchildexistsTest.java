@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertSame;
 
 
 /**
@@ -59,24 +58,24 @@ public class hc_nodereplacechildnewchildexistsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
         HTMLCollection childList;
-        Node oldChild;
-        Node newChild;
+        final Node oldChild;
+        final Node newChild;
         String childName;
         Node childNode;
-        List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<String>();
 
-        List<String> expected = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("STRONG");
         expected.add("CODE");
         expected.add("SUP");
         expected.add("VAR");
         expected.add("EM");
 
-        Node replacedChild;
+        final Node replacedChild;
         int nodeType;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");

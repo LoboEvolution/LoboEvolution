@@ -57,7 +57,7 @@ public class TextureInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public TextureInternalFrameTitlePane(JInternalFrame f) {
+	public TextureInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
@@ -81,29 +81,29 @@ public class TextureInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		TextureUtils.fillComponent(g, this, TextureUtils.WINDOW_TEXTURE_TYPE);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintPalette(Graphics g) {
+	public void paintPalette(final Graphics g) {
 		TextureUtils.fillComponent(g, this, TextureUtils.WINDOW_TEXTURE_TYPE);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
-		Graphics2D g2D = (Graphics2D) g;
-		Shape savedClip = g2D.getClip();
-		Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Shape savedClip = g2D.getClip();
+		final Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
 		if (fc.equals(Color.white)) {
-			Color bc = AbstractLookAndFeel.getWindowTitleColorDark();
+			final Color bc = AbstractLookAndFeel.getWindowTitleColorDark();
 			g2D.setColor(bc);
 			JTattooUtilities.drawString(frame, g, title, x - 1, y - 1);
 			g2D.setColor(ColorHelper.darker(bc, 30));
@@ -112,7 +112,7 @@ public class TextureInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.setColor(fc);
 		JTattooUtilities.drawString(frame, g, title, x, y);
 
-		Area clipArea = new Area(new Rectangle2D.Double(x, getHeight() / 2, getWidth(), getHeight()));
+		final Area clipArea = new Area(new Rectangle2D.Double(x, getHeight() / 2, getWidth(), getHeight()));
 		if (savedClip != null) {
 			clipArea.intersect(new Area(savedClip));
 		}

@@ -52,17 +52,17 @@ public class createAttributeNS06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.example.com/";
+        final String namespaceURI = "http://www.example.com/";
         String qualifiedName;
-        Document doc;
-        Attr newAttr;
+        final Document doc;
+        final Attr newAttr;
         doc = sampleXmlFile("hc_staff.xml");
 
         {
             boolean success = false;
             try {
                 newAttr = doc.createAttributeNS(namespaceURI, "");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

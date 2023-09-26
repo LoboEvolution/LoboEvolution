@@ -41,15 +41,15 @@ public class DOMParserImpl extends AbstractScriptableDelegate implements DOMPars
 
 	private final HTMLDocumentImpl document;
 
-	public DOMParserImpl(HTMLDocumentImpl document){
+	public DOMParserImpl(final HTMLDocumentImpl document){
 		this.document = document;
 	}
 
 
 	/** {@inheritDoc} */
 	@Override
-	public Document parseFromString(String html, String type) {
-		Element element = document.createElement("DIV");
+	public Document parseFromString(final String html, final String type) {
+		final Element element = document.createElement("DIV");
 		element.setInnerHTML(html);
 		if (!"text/html".equals(type) &&
 				!"text/xml".equals(type) &&
@@ -58,7 +58,7 @@ public class DOMParserImpl extends AbstractScriptableDelegate implements DOMPars
 				!"image/svg+xml".equals(type)) {
 			throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
 		}
-		XMLDocument document = new XMLDocument();
+		final XMLDocument document = new XMLDocument();
 		document.loadXML(element.getInnerHTML());
 		return document;
 	}

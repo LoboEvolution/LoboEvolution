@@ -47,10 +47,10 @@ import static org.junit.Assert.assertTrue;
 public class nodeisequalnode31Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        CDATASection cdata1;
-        CDATASection cdata2;
-        CDATASection cdata3;
+        final Document doc;
+        final CDATASection cdata1;
+        final CDATASection cdata2;
+        final CDATASection cdata3;
         boolean isEqual;
         doc = sampleXmlFile("hc_staff.xml");
         cdata1 = doc.createCDATASection("cdata");

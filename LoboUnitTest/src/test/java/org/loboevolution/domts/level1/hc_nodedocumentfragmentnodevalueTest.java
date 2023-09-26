@@ -58,9 +58,9 @@ public class hc_nodedocumentfragmentnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        String value;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final String value;
         doc = sampleXmlFile("hc_staff.xml");
         docFragment = doc.createDocumentFragment();
         value = docFragment.getNodeValue();

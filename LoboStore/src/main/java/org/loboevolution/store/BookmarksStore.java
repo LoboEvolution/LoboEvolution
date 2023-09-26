@@ -59,8 +59,8 @@ public class BookmarksStore implements Serializable {
 	 * <p>deleteBookmarks.</p>
 	 */
 	public void deleteBookmarks() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -72,9 +72,9 @@ public class BookmarksStore implements Serializable {
 	 *
 	 * @param url a {@link java.lang.String} object.
 	 */
-	public void deleteBookmark(String url) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS_BY_URL)) {
+	public void deleteBookmark(final String url) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS_BY_URL)) {
 			pstmt.setString(1, url.trim());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -88,7 +88,7 @@ public class BookmarksStore implements Serializable {
 	 * @return bookmarks
 	 * @param num a {@link java.lang.Integer} object.
 	 */
-	public List<BookmarkInfo> getBookmarks(Integer num) {
+	public List<BookmarkInfo> getBookmarks(final Integer num) {
 		synchronized (this) {
 			final List<BookmarkInfo> values = new ArrayList<>();
 			if (DatabseSQLite.storeExist()) {
@@ -97,9 +97,9 @@ public class BookmarksStore implements Serializable {
 				if (num != null) {
 					query = query + " LIMIT " + num;
 				}
-				try (Connection conn = DriverManager.getConnection(DB_PATH);
-					 Statement stmt = conn.createStatement();
-					 ResultSet rs = stmt.executeQuery(query)) {
+				try (final Connection conn = DriverManager.getConnection(DB_PATH);
+                     final Statement stmt = conn.createStatement();
+                     final ResultSet rs = stmt.executeQuery(query)) {
 					while (rs != null && rs.next()) {
 						final BookmarkInfo info = new BookmarkInfo();
 						info.setTitle(rs.getString(1));
@@ -121,9 +121,9 @@ public class BookmarksStore implements Serializable {
 	 *
 	 * @param info a {@link org.loboevolution.info.BookmarkInfo} object.
 	 */
-	public void insertBookmark(BookmarkInfo info) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_BOOKMARKS)) {
+	public void insertBookmark(final BookmarkInfo info) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.INSERT_BOOKMARKS)) {
 			pstmt.setString(1, info.getTitle());
 			pstmt.setString(2, info.getDescription());
 			pstmt.setString(3, info.getUrl());

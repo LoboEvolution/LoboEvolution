@@ -54,7 +54,7 @@ public class AlternateColorSpace extends PDFColorSpace {
      * @param alternate a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
      * @param function a {@link org.loboevolution.pdfview.function.PDFFunction} object.
      */
-    public AlternateColorSpace(PDFColorSpace alternate, PDFFunction function) {
+    public AlternateColorSpace(final PDFColorSpace alternate, final PDFFunction function) {
         super(null);
         
         this.alternate = alternate;
@@ -80,12 +80,13 @@ public class AlternateColorSpace extends PDFColorSpace {
      * get the PDFPaint representing the color described by the
      * given color components
      */
-    @Override public PDFPaint getPaint(float[] components) {
+    @Override
+    public PDFPaint getPaint(float[] components) {
         if (this.function != null) {
             // translate values using function
             components = this.function.calculate(components);
         }
-        
+
         return this.alternate.getPaint(components);
     }
     

@@ -46,9 +46,9 @@ import static org.junit.Assert.assertTrue;
 public class domconfignamespaces2Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
-        boolean state;
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final boolean state;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         state = ((Boolean) domConfig.getParameter("namespaces"));

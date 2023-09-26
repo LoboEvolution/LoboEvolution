@@ -62,12 +62,12 @@ public class createDocumentType02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String publicId = "http://www.localhost.com/";
-        String systemId = "myDoc.dtd";
-        Document doc;
+        final String publicId = "http://www.localhost.com/";
+        final String systemId = "myDoc.dtd";
+        final Document doc;
 
         DOMImplementation domImpl;
-        List<String> illegalQNames = new ArrayList<String>();
+        final List<String> illegalQNames = new ArrayList<String>();
         illegalQNames.add("edi:{");
         illegalQNames.add("edi:}");
         illegalQNames.add("edi:~");
@@ -98,12 +98,12 @@ public class createDocumentType02Test extends LoboUnitTest {
 
         doc = sampleXmlFile("staffNS.xml");
         
-        for (String qualifiedName : illegalQNames) {
+        for (final String qualifiedName : illegalQNames) {
             domImpl = doc.getImplementation();
             boolean success = false;
             try {
                 domImpl.createDocumentType(qualifiedName, publicId, systemId);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

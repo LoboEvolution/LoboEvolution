@@ -49,14 +49,14 @@ import static org.junit.Assert.assertNotEquals;
 public class nodecomparedocumentposition16Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Attr attr;
-        Attr attrCloned;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Attr attr;
+        final Attr attrCloned;
         int docFragPosition;
-        int position1;
-        int position2;
-        int position3;
+        final int position1;
+        final int position2;
+        final int position3;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");

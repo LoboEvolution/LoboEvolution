@@ -41,7 +41,7 @@ public class TextureCheckBoxUI extends TextureRadioButtonUI {
 	private static TextureCheckBoxUI checkBoxUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent b) {
+	public static ComponentUI createUI(final JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new TextureCheckBoxUI();
 		}
@@ -50,7 +50,7 @@ public class TextureCheckBoxUI extends TextureRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installDefaults(AbstractButton b) {
+	public void installDefaults(final AbstractButton b) {
 		super.installDefaults(b);
 		icon = UIManager.getIcon("CheckBox.icon");
 	}

@@ -80,9 +80,9 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void draw3DBorder(Graphics g, Color c1, Color c2, int x, int y, int w, int h) {
-		int x2 = x + w - 1;
-		int y2 = y + h - 1;
+	public static void draw3DBorder(final Graphics g, final Color c1, final Color c2, final int x, final int y, final int w, final int h) {
+		final int x2 = x + w - 1;
+		final int y2 = y + h - 1;
 		g.setColor(c1);
 		g.drawLine(x, y, x2 - 1, y);
 		g.drawLine(x, y + 1, x, y2);
@@ -101,7 +101,7 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void drawBorder(Graphics g, Color c, int x, int y, int w, int h) {
+	public static void drawBorder(final Graphics g, final Color c, final int x, final int y, final int w, final int h) {
 		g.setColor(c);
 		g.drawRect(x, y, w - 1, h - 1);
 	}
@@ -117,17 +117,17 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void drawRound3DBorder(Graphics g, Color c1, Color c2, int x, int y, int w, int h) {
-		Graphics2D g2D = (Graphics2D) g;
-		int x2 = x + w;
-		int y2 = y + h;
-		int d = h;
-		int r = h / 2;
-		Color cm = ColorHelper.median(c1, c2);
-		Color c1m = ColorHelper.median(c1, cm);
-		Color c2m = ColorHelper.median(c2, cm);
+	public static void drawRound3DBorder(final Graphics g, final Color c1, final Color c2, final int x, final int y, final int w, final int h) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final int x2 = x + w;
+		final int y2 = y + h;
+		final int d = h;
+		final int r = h / 2;
+		final Color cm = ColorHelper.median(c1, c2);
+		final Color c1m = ColorHelper.median(c1, cm);
+		final Color c2m = ColorHelper.median(c2, cm);
 
-		Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+		final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		// oben
 		g2D.setColor(c1);
@@ -172,9 +172,9 @@ public class JTattooUtilities {
 	 * @param h a int.
 	 * @param r a int.
 	 */
-	public static void drawRoundBorder(Graphics g, Color c, int x, int y, int w, int h, int r) {
-		Graphics2D g2D = (Graphics2D) g;
-		Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+	public static void drawRoundBorder(final Graphics g, final Color c, final int x, final int y, final int w, final int h, final int r) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2D.setColor(c);
 		g2D.drawRoundRect(x, y, w - 1, h - 1, r, r);
@@ -190,8 +190,8 @@ public class JTattooUtilities {
 	 * @param x a int.
 	 * @param y a int.
 	 */
-	public static void drawString(JComponent c, Graphics g, String text, int x, int y) {
-		Graphics2D g2D = (Graphics2D) g;
+	public static void drawString(final JComponent c, final Graphics g, final String text, final int x, final int y) {
+		final Graphics2D g2D = (Graphics2D) g;
 		Object savedRenderingHint = null;
 		if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 			savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -214,9 +214,9 @@ public class JTattooUtilities {
 	 * @param x a int.
 	 * @param y a int.
 	 */
-	public static void drawStringUnderlineCharAt(JComponent c, Graphics g, String text, int underlinedIndex, int x,
-			int y) {
-		Graphics2D g2D = (Graphics2D) g;
+	public static void drawStringUnderlineCharAt(final JComponent c, final Graphics g, final String text, final int underlinedIndex, final int x,
+                                                 final int y) {
+		final Graphics2D g2D = (Graphics2D) g;
 		Object savedRenderingHint = null;
 		if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 			savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -236,15 +236,15 @@ public class JTattooUtilities {
 	 * @param c a {@link java.awt.Component} object.
 	 * @param texture a {@link javax.swing.Icon} object.
 	 */
-	public static void fillComponent(Graphics g, Component c, Icon texture) {
+	public static void fillComponent(final Graphics g, final Component c, final Icon texture) {
 		int x = 0;
 		int y = 0;
-		int w = c.getWidth();
-		int h = c.getHeight();
+		final int w = c.getWidth();
+		final int h = c.getHeight();
 		if (texture != null) {
-			int tw = texture.getIconWidth();
-			int th = texture.getIconHeight();
-			Point p = JTattooUtilities.getRelLocation(c);
+			final int tw = texture.getIconWidth();
+			final int th = texture.getIconHeight();
+			final Point p = JTattooUtilities.getRelLocation(c);
 			y = -p.y;
 			while (y < h) {
 				x = -p.x;
@@ -270,14 +270,14 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void fillHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
+	public static void fillHorGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
-			int steps = colors.length;
-			double dy = (double) h / (double) steps;
+			final int steps = colors.length;
+			final double dy = (double) h / (double) steps;
 			if (dy <= 2.001) {
 				int y1 = y;
 				for (int i = 0; i < steps; i++) {
-					int y2 = y + (int) Math.round(i * dy);
+					final int y2 = y + (int) Math.round(i * dy);
 					g.setColor(colors[i]);
 					if (i == steps - 1) {
 						g.fillRect(x, y1, w, y + h - y1);
@@ -302,14 +302,14 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void fillInverseHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
+	public static void fillInverseHorGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
-			int steps = colors.length;
-			double dy = (double) h / (double) steps;
+			final int steps = colors.length;
+			final double dy = (double) h / (double) steps;
 			if (dy <= 2.001) {
 				int y1 = y;
 				for (int i = 0; i < steps; i++) {
-					int y2 = y + (int) Math.round(i * dy);
+					final int y2 = y + (int) Math.round(i * dy);
 					g.setColor(colors[colors.length - i - 1]);
 					if (i == steps - 1) {
 						g.fillRect(x, y1, w, y + h - y1);
@@ -334,13 +334,13 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void fillInverseVerGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
+	public static void fillInverseVerGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
-			int steps = colors.length;
-			double dx = (double) w / (double) steps;
+			final int steps = colors.length;
+			final double dx = (double) w / (double) steps;
 			int x1 = x;
 			for (int i = 0; i < steps; i++) {
-				int x2 = x + (int) Math.round(i * dx);
+				final int x2 = x + (int) Math.round(i * dx);
 				g.setColor(colors[colors.length - i - 1]);
 				if (i == steps - 1) {
 					g.fillRect(x1, y, x + w - x1, h);
@@ -362,13 +362,13 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void fillVerGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
+	public static void fillVerGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
-			int steps = colors.length;
-			double dx = (double) w / (double) steps;
+			final int steps = colors.length;
+			final double dx = (double) w / (double) steps;
 			int x1 = x;
 			for (int i = 0; i < steps; i++) {
-				int x2 = x + (int) Math.round(i * dx);
+				final int x2 = x + (int) Math.round(i * dx);
 				g.setColor(colors[i]);
 				if (i == steps - 1) {
 					g.fillRect(x1, y, x + w - x1, h);
@@ -388,11 +388,11 @@ public class JTattooUtilities {
 	 * @param maxWidth a int.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getClippedText(String text, FontMetrics fm, int maxWidth) {
+	public static String getClippedText(final String text, final FontMetrics fm, final int maxWidth) {
 		if (text == null || text.length() == 0) {
 			return "";
 		}
-		int width = SwingUtilities.computeStringWidth(fm, text);
+		final int width = SwingUtilities.computeStringWidth(fm, text);
 		if (width > maxWidth) {
 			int totalWidth = SwingUtilities.computeStringWidth(fm, ELLIPSIS);
 			for (int i = 0; i < text.length(); i++) {
@@ -413,7 +413,7 @@ public class JTattooUtilities {
 	 * @param f a {@link java.awt.Font} object.
 	 * @return a {@link java.awt.FontMetrics} object.
 	 */
-	public static FontMetrics getFontMetrics(JComponent c, Graphics g, Font f) {
+	public static FontMetrics getFontMetrics(final JComponent c, Graphics g, final Font f) {
 		FontMetrics fm = null;
 		if (fm == null) {
 			if (g == null) {
@@ -444,8 +444,8 @@ public class JTattooUtilities {
 	 * @param c a {@link java.awt.Component} object.
 	 * @return a {@link java.awt.Dimension} object.
 	 */
-	public static Dimension getFrameSize(Component c) {
-		Container parent = getRootContainer(c);
+	public static Dimension getFrameSize(final Component c) {
+		final Container parent = getRootContainer(c);
 		if (parent != null) {
 			return parent.getSize();
 		}
@@ -460,8 +460,8 @@ public class JTattooUtilities {
 	public static double getJavaVersion() {
 		if (javaVersion == null) {
 			try {
-				String ver = System.getProperty("java.version");
-				StringBuilder version = new StringBuilder();
+				final String ver = System.getProperty("java.version");
+				final StringBuilder version = new StringBuilder();
 				boolean firstPoint = true;
 				for (int i = 0; i < ver.length(); i++) {
 					if (ver.charAt(i) == '.') {
@@ -474,7 +474,7 @@ public class JTattooUtilities {
 					}
 				}
 				javaVersion = Double.valueOf(version.toString());
-			} catch (NumberFormatException ex) {
+			} catch (final NumberFormatException ex) {
 				javaVersion = 1.3;
 			}
 		}
@@ -489,8 +489,8 @@ public class JTattooUtilities {
 	public static double getOSVersion() {
 		if (osVersion == null) {
 			try {
-				String ver = System.getProperties().getProperty("os.version");
-				StringBuilder version = new StringBuilder();
+				final String ver = System.getProperties().getProperty("os.version");
+				final StringBuilder version = new StringBuilder();
 				boolean firstPoint = true;
 				for (int i = 0; i < ver.length(); i++) {
 					if (ver.charAt(i) == '.') {
@@ -503,7 +503,7 @@ public class JTattooUtilities {
 					}
 				}
 				osVersion = Double.valueOf(version.toString());
-			} catch (NumberFormatException ex) {
+			} catch (final NumberFormatException ex) {
 				osVersion = 1.0;
 			}
 		}
@@ -516,15 +516,15 @@ public class JTattooUtilities {
 	 * @param c a {@link java.awt.Component} object.
 	 * @return a {@link java.awt.Point} object.
 	 */
-	public static Point getRelLocation(Component c) {
+	public static Point getRelLocation(final Component c) {
 		if (c == null || !c.isShowing()) {
 			return new Point(0, 0);
 		}
 
-		Container parent = getRootContainer(c);
+		final Container parent = getRootContainer(c);
 		if (parent != null && parent.isShowing() && c.isShowing()) {
-			Point p1 = c.getLocationOnScreen();
-			Point p2 = parent.getLocationOnScreen();
+			final Point p1 = c.getLocationOnScreen();
+			final Point p2 = parent.getLocationOnScreen();
 			return new Point(p1.x - p2.x, p1.y - p2.y);
 		}
 
@@ -537,7 +537,7 @@ public class JTattooUtilities {
 	 * @param c a {@link java.awt.Component} object.
 	 * @return a {@link java.awt.Container} object.
 	 */
-	public static Container getRootContainer(Component c) {
+	public static Container getRootContainer(final Component c) {
 		if (c == null) {
 			return null;
 		}
@@ -555,7 +555,7 @@ public class JTattooUtilities {
 	 * @param c a {@link javax.swing.JComponent} object.
 	 * @return a boolean.
 	 */
-	public static boolean isActive(JComponent c) {
+	public static boolean isActive(final JComponent c) {
 		if (c == null) {
 			return false;
 		}
@@ -594,11 +594,11 @@ public class JTattooUtilities {
 	 * @param c a {@link java.awt.Component} object.
 	 * @return a boolean.
 	 */
-	public static boolean isFrameActive(Component c) {
+	public static boolean isFrameActive(final Component c) {
 		if (c == null) {
 			return false;
 		}
-		Window w = SwingUtilities.getWindowAncestor(c);
+		final Window w = SwingUtilities.getWindowAncestor(c);
 		if (w != null) {
 			if (w.getClass().getName().contains("Popup")) {
 				return true;
@@ -643,7 +643,7 @@ public class JTattooUtilities {
 	 * @param c a {@link java.awt.Component} object.
 	 * @return a boolean.
 	 */
-	public static boolean isLeftToRight(Component c) {
+	public static boolean isLeftToRight(final Component c) {
 		if (c == null) {
 			return true;
 		}
@@ -707,15 +707,15 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void smoothFillHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
+	public static void smoothFillHorGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
-			Graphics2D g2D = (Graphics2D) g;
-			Paint savedPaint = g2D.getPaint();
-			int steps = colors.length;
-			double dy = (double) h / (double) (steps - 1);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Paint savedPaint = g2D.getPaint();
+			final int steps = colors.length;
+			final double dy = (double) h / (double) (steps - 1);
 			int y1 = y;
 			for (int i = 0; i < steps; i++) {
-				int y2 = y + (int) Math.round(i * dy);
+				final int y2 = y + (int) Math.round(i * dy);
 				if (i == steps - 1) {
 					g2D.setPaint(null);
 					g2D.setColor(colors[i]);
@@ -740,15 +740,15 @@ public class JTattooUtilities {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void smoothFillInverseHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
+	public static void smoothFillInverseHorGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
-			Graphics2D g2D = (Graphics2D) g;
-			Paint savedPaint = g2D.getPaint();
-			int steps = colors.length;
-			double dy = (double) h / (double) steps;
+			final Graphics2D g2D = (Graphics2D) g;
+			final Paint savedPaint = g2D.getPaint();
+			final int steps = colors.length;
+			final double dy = (double) h / (double) steps;
 			int y1 = y;
 			for (int i = 0; i < steps; i++) {
-				int y2 = y + (int) Math.round(i * dy);
+				final int y2 = y + (int) Math.round(i * dy);
 				g.setColor(colors[colors.length - i - 1]);
 				if (i == steps - 1) {
 					g2D.setPaint(null);

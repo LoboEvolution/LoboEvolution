@@ -84,17 +84,17 @@ public class GraphiteBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
-			AbstractButton button = (AbstractButton) c;
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
+			final AbstractButton button = (AbstractButton) c;
 			Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 30);
 			if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && button.hasFocus()) {
 				frameColor = AbstractLookAndFeel.getTheme().getFocusFrameColor();
 			}
 
 			if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
-				Composite savedComposite = g2D.getComposite();
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+				final Composite savedComposite = g2D.getComposite();
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 				g2D.setComposite(alpha);
 				g2D.setColor(Color.white);
 				g2D.drawRect(x, y, w - 1, h - 1);
@@ -115,10 +115,10 @@ public class GraphiteBorders extends BaseBorders {
 					g2D.drawRect(x, y, w - 2, h - 2);
 				}
 			} else {
-				Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+				final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 				g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				Composite savedComposite = g2D.getComposite();
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+				final Composite savedComposite = g2D.getComposite();
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 				g2D.setComposite(alpha);
 				g2D.setColor(Color.white);
 				g2D.drawRoundRect(x, y, w - 1, h - 1, 6, 6);
@@ -170,8 +170,8 @@ public class GraphiteBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			int th = getTitleHeight(c);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final int th = getTitleHeight(c);
 			Color titleColor = AbstractLookAndFeel.getWindowTitleColorLight();
 			Color borderColor = AbstractLookAndFeel.getWindowTitleColorDark();
 			Color frameColor = AbstractLookAndFeel.getWindowBorderColor();
@@ -242,10 +242,10 @@ public class GraphiteBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			JMenuItem b = (JMenuItem) c;
-			ButtonModel model = b.getModel();
-			Color borderColor = ColorHelper.darker(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 20);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final JMenuItem b = (JMenuItem) c;
+			final ButtonModel model = b.getModel();
+			final Color borderColor = ColorHelper.darker(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 20);
 			g.setColor(borderColor);
 			if (c.getParent() instanceof JMenuBar) {
 				if (model.isArmed() || model.isSelected()) {
@@ -271,13 +271,13 @@ public class GraphiteBorders extends BaseBorders {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Color borderColor = ColorHelper.darker(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 20);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Color borderColor = ColorHelper.darker(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 20);
 			if (JTattooUtilities.isLeftToRight(c)) {
-				int dx = getBorderInsets(c).left;
-				Color logoColorHi = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColorDark();
-				Color logoColorLo = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColor();
-				Color[] colors = ColorHelper.createColorArr(logoColorHi, logoColorLo, 32);
+				final int dx = getBorderInsets(c).left;
+				final Color logoColorHi = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColorDark();
+				final Color logoColorLo = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColor();
+				final Color[] colors = ColorHelper.createColorArr(logoColorHi, logoColorLo, 32);
 				JTattooUtilities.fillHorGradient(g, colors, x, y, dx - 1, h - 1);
 				paintLogo(c, g, x, y, w, h);
 				// - highlight
@@ -300,10 +300,10 @@ public class GraphiteBorders extends BaseBorders {
 				// - logo separator
 				g.drawLine(x + dx - 1, y + 1, x + dx - 1, y + h - 1);
 			} else {
-				int dx = getBorderInsets(c).right;
-				Color logoColorHi = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColorDark();
-				Color logoColorLo = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColor();
-				Color[] colors = ColorHelper.createColorArr(logoColorHi, logoColorLo, 32);
+				final int dx = getBorderInsets(c).right;
+				final Color logoColorHi = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColorDark();
+				final Color logoColorLo = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColor();
+				final Color[] colors = ColorHelper.createColorArr(logoColorHi, logoColorLo, 32);
 				JTattooUtilities.fillHorGradient(g, colors, x + w - dx, y, dx, h - 1);
 				paintLogo(c, g, x, y, w, h);
 				// - highlight
@@ -354,27 +354,27 @@ public class GraphiteBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Color loColor = ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 50);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Color loColor = ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 50);
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed() || model.isSelected()) {
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
 					g.setColor(loColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.15f);
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.15f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.black);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);
 					g2D.setComposite(composite);
 				} else if (model.isRollover()) {
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
 					g.setColor(loColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.white);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);

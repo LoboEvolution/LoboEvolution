@@ -51,7 +51,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	 * @param owner a {@link org.loboevolution.html.node.Node} object.
 	 * @param attribs a {@link org.loboevolution.html.dom.nodeimpl.NodeListImpl} object.
 	 */
-	public NamedNodeMapImpl(Node owner, NodeListImpl attribs) {
+	public NamedNodeMapImpl(final Node owner, final NodeListImpl attribs) {
 		this.owner = owner;
 		 attribs.forEach(attr -> {
 			final String name = attr.getLocalName();
@@ -73,11 +73,11 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Node getNamedItem(String name) {
-		AtomicReference<Node> atomicReference = new AtomicReference<>();
+	public Node getNamedItem(final String name) {
+		final AtomicReference<Node> atomicReference = new AtomicReference<>();
 		if (Strings.isNotBlank(name)) {
 			attributes.forEach(attr -> {
-				String key = attr.getNodeName();
+				final String key = attr.getNodeName();
 				if (name.equalsIgnoreCase(key)) {
 					atomicReference.set(attr);
 				}
@@ -88,12 +88,12 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Node getNamedItemNS(String namespaceURI, String localName) {
-		AtomicReference<Node> atomicReference = new AtomicReference<>();
+	public Node getNamedItemNS(final String namespaceURI, final String localName) {
+		final AtomicReference<Node> atomicReference = new AtomicReference<>();
 		if (Strings.isNotBlank(localName)) {
 			attributes.forEach(attr -> {
-				String namespace = attr.getNamespaceURI();
-				String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
+				final String namespace = attr.getNamespaceURI();
+				final String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
 
 					if (Strings.isBlank(namespaceURI) || "*".equals(namespaceURI) || namespaceURI.equals(namespace) || namespaceURI.equals(parentNamespace)) {
 					if (attr.getLocalName().equalsIgnoreCase(localName)) {
@@ -107,9 +107,9 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Node item(int index) {
-		AtomicReference<Node> atomicReference = new AtomicReference<>();
-		AtomicInteger atomIndex = new AtomicInteger(0);
+	public Node item(final int index) {
+		final AtomicReference<Node> atomicReference = new AtomicReference<>();
+		final AtomicInteger atomIndex = new AtomicInteger(0);
 		attributes.forEach(attr -> {
 			if (atomIndex.getAndIncrement() == index && index > -1) {
 				atomicReference.set(attr);
@@ -120,16 +120,16 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Node removeNamedItem(String name) throws DOMException {
-		AtomicReference<Node> atomicReference = new AtomicReference<>();
+	public Node removeNamedItem(final String name) throws DOMException {
+		final AtomicReference<Node> atomicReference = new AtomicReference<>();
 		attributes.forEach(attr -> {
-			String key = attr.getNodeName();
+			final String key = attr.getNodeName();
 			if (key.equalsIgnoreCase(name)) {
 				atomicReference.set(attr);
 			}
 		});
 
-		boolean removed = this.attributes.remove(atomicReference.get());
+		final boolean removed = this.attributes.remove(atomicReference.get());
 		if (!removed) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not found.");
 		}
@@ -138,12 +138,12 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Node removeNamedItemNS(String namespaceURI, String localName) throws DOMException {
+	public Node removeNamedItemNS(final String namespaceURI, final String localName) throws DOMException {
 
-		AtomicReference<Node> atomicReference = new AtomicReference<>(null);
+		final AtomicReference<Node> atomicReference = new AtomicReference<>(null);
 		attributes.forEach(attr -> {
-			String namespace = attr.getNamespaceURI();
-			String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
+			final String namespace = attr.getNamespaceURI();
+			final String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
 			if (namespaceURI != null && ("*".equals(namespaceURI) || namespaceURI.equals(namespace) || namespaceURI.equals(parentNamespace))) {
 				if (attr.getLocalName().equalsIgnoreCase(localName)) {
 					atomicReference.set(attr);
@@ -151,7 +151,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			}
 		});
 
-		Node node = atomicReference.get();
+		final Node node = atomicReference.get();
 		if (node != null) {
 			attributes.remove(node);
 			return node;
@@ -162,8 +162,8 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Node setNamedItem(Node node) {
-		Node element = node instanceof Attr ? ((Attr) node).getOwnerElement() : null;
+	public Node setNamedItem(final Node node) {
+		final Node element = node instanceof Attr ? ((Attr) node).getOwnerElement() : null;
 
 		if (node == null) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "The Node is null");
@@ -183,12 +183,12 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 		}
 
 		if (node instanceof Attr) {
-			Attr attr = (Attr) node;
+			final Attr attr = (Attr) node;
 			final TextImpl t = new TextImpl(attr.getValue());
 			t.setOwnerDocument(attr.getOwnerDocument());
 			t.setParentImpl(attr.getParentNode());
 			attr.appendChild(t);
-			Node check = getNamedItem(attr.getNodeName());
+			final Node check = getNamedItem(attr.getNodeName());
 			if (check != null) {
 				this.attributes.remove(check);
 				this.attributes.add(node);
@@ -202,8 +202,8 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	/** {@inheritDoc} */
 	@Override
-	public Node setNamedItemNS(Node node) throws DOMException {
-		Node element = node instanceof Attr ? ((Attr) node).getOwnerElement() : null;
+	public Node setNamedItemNS(final Node node) throws DOMException {
+		final Node element = node instanceof Attr ? ((Attr) node).getOwnerElement() : null;
 
 		if (owner.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
@@ -218,12 +218,12 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 		}
 
 		if (node instanceof Attr) {
-			Attr attr = (Attr) node;
+			final Attr attr = (Attr) node;
 			final TextImpl t = new TextImpl(attr.getValue());
 			t.setOwnerDocument(attr.getOwnerDocument());
 			t.setParentImpl(attr.getParentNode());
 			attr.appendChild(t);
-			Node check = getNamedItemNS(attr.getNamespaceURI(), attr.getLocalName());
+			final Node check = getNamedItemNS(attr.getNamespaceURI(), attr.getLocalName());
 			if (check != null) {
 				this.attributes.remove(check);
 				this.attributes.add(node);

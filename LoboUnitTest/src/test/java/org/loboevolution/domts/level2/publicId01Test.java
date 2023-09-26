@@ -55,9 +55,9 @@ public class publicId01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        String publicId;
+        final Document doc;
+        final DocumentType docType;
+        final String publicId;
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         publicId = docType.getPublicId();

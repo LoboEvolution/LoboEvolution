@@ -59,11 +59,11 @@ public class documentimportnode15Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document docImp;
-        Node textImport;
-        Node textToImport;
-        String nodeValue;
+        final Document doc;
+        final Document docImp;
+        final Node textImport;
+        final Node textToImport;
+        final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
         docImp = sampleXmlFile("staffNS.xml");
         textToImport = doc.createTextNode("Document.importNode test for a TEXT_NODE");

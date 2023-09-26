@@ -49,14 +49,14 @@ import static org.junit.Assert.assertTrue;
 public class nodeinsertbefore25Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        EntityReference eRef;
-        Element span;
-        Text spanText;
-        Element newNode;
-        HTMLCollection childList;
-        Node inserted;
+        final Document doc;
+        final Element element;
+        final EntityReference eRef;
+        final Element span;
+        final Text spanText;
+        final Element newNode;
+        final HTMLCollection childList;
+        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("var");
         element = (Element) childList.item(2);
@@ -71,7 +71,7 @@ public class nodeinsertbefore25Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = span.insertBefore(newNode, spanText);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

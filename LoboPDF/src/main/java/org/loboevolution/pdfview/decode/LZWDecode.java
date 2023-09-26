@@ -89,7 +89,7 @@ public class LZWDecode {
      * initialize this decoder with an array of encoded bytes
      * @param buf the buffer of bytes
      */
-    private LZWDecode(ByteBuffer buf) throws PDFParseException {
+    private LZWDecode(final ByteBuffer buf) throws PDFParseException {
         for (int i = 0; i < 256; i++) {
             this.dict[i] = new byte[1];
             this.dict[i][0] = (byte) i;
@@ -119,7 +119,7 @@ public class LZWDecode {
             return -1;
         }
         while (fillbits > 0) {
-            int nextbits = this.buf.get(this.bytepos);  // bitsource
+            final int nextbits = this.buf.get(this.bytepos);  // bitsource
             int bitsfromhere = 8 - this.bitpos;  // how many bits can we take?
             if (bitsfromhere > fillbits) { // don't take more than we need
                 bitsfromhere = fillbits;
@@ -145,9 +145,9 @@ public class LZWDecode {
         // http://www.rasip.fer.hr/research/compress/algorithms/fund/lz/lzw.html
         // and the PDFReference
         int cW = CLEARDICT;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {
-            int pW = cW;
+            final int pW = cW;
             cW = nextCode();
             if (cW == -1) {
                 throw new PDFParseException("Missed the stop code in LZWDecode!");
@@ -162,7 +162,7 @@ public class LZWDecode {
             } else {
                 if (cW < this.dictlen) {  // it's a code in the dictionary
                     baos.write(this.dict[cW], 0, this.dict[cW].length);
-                    byte[] p = new byte[this.dict[pW].length + 1];
+                    final byte[] p = new byte[this.dict[pW].length + 1];
                     System.arraycopy(this.dict[pW], 0, p, 0, this.dict[pW].length);
                     p[this.dict[pW].length] = this.dict[cW][0];
                     this.dict[this.dictlen++] = p;
@@ -170,7 +170,7 @@ public class LZWDecode {
                     //		    if (cW!=dictlen) {
                     //			logger.info("Got a bouncy code: "+cW+" (dictlen="+dictlen+")");
                     //		    }
-                    byte[] p = new byte[this.dict[pW].length + 1];
+                    final byte[] p = new byte[this.dict[pW].length + 1];
                     System.arraycopy(this.dict[pW], 0, p, 0, this.dict[pW].length);
                     p[this.dict[pW].length] = p[0];
                     baos.write(p, 0, p.length);
@@ -192,15 +192,15 @@ public class LZWDecode {
      * @return the decoded uncompressed bytes
      * @throws java.io.IOException if any.
      */
-    public static ByteBuffer decode(ByteBuffer buf, PDFObject params)
+    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
             throws IOException {
         // decode the array
-        LZWDecode me = new LZWDecode(buf);
+        final LZWDecode me = new LZWDecode(buf);
         ByteBuffer outBytes = me.decode();
 
         // undo a predictor algorithm, if any was used
         if (params != null && params.getDictionary().containsKey("Predictor")) {
-            Predictor predictor = Predictor.getPredictor(params);
+            final Predictor predictor = Predictor.getPredictor(params);
             if (predictor != null) {
                 outBytes = predictor.unpredict(outBytes);
             }

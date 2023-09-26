@@ -50,7 +50,7 @@ public class ClearHistoryAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public ClearHistoryAction(BrowserFrame frame) {
+	public ClearHistoryAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 

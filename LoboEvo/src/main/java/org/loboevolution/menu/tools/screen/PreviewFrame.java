@@ -56,7 +56,7 @@ public class PreviewFrame extends JFrame implements LoboLookAndFeel {
 
     private LoboLabel imageDisplay;
 
-    public PreviewFrame(CapturePane pane, BrowserFrame frame) {
+    public PreviewFrame(final CapturePane pane, final BrowserFrame frame) {
         this.pane = pane;
         this.frame = frame;
         initComponents();
@@ -70,13 +70,13 @@ public class PreviewFrame extends JFrame implements LoboLookAndFeel {
         setLayout(new BorderLayout());
         imageDisplay = new LoboLabel("");
         imageDisplay.setHorizontalAlignment(JLabel.CENTER);
-        LoboPanel buttonPanel = new LoboPanel();
+        final LoboPanel buttonPanel = new LoboPanel();
 
-        LoboButton redoButton = new LoboButton();
+        final LoboButton redoButton = new LoboButton();
         redoButton.setText("Redo");
         redoButton.addActionListener(e -> redoPicture());
 
-        LoboButton saveButton = new LoboButton();
+        final LoboButton saveButton = new LoboButton();
         saveButton.setText("Save");
         saveButton.addActionListener(e -> saveImage());
 
@@ -92,7 +92,7 @@ public class PreviewFrame extends JFrame implements LoboLookAndFeel {
         setTitle(TITLE);
         setBackground(background());
         setMinimumSize(new Dimension(500, 500));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(pane);
         setVisible(true);
     }
@@ -131,7 +131,7 @@ public class PreviewFrame extends JFrame implements LoboLookAndFeel {
             final BufferedImage buffered = (BufferedImage) image.getImage();
             ImageIO.write(buffered, "png", new File(sFile.getAbsolutePath()));
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         } finally {
             setVisible(false);
@@ -141,7 +141,7 @@ public class PreviewFrame extends JFrame implements LoboLookAndFeel {
     /**
      * sets image to preview and packs the components to fit
      */
-    public void setImage(ImageIcon image) {
+    public void setImage(final ImageIcon image) {
         this.image = image;
         imageDisplay.setIcon(image);
         pack();

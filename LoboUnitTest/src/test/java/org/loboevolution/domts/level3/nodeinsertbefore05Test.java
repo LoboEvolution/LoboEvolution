@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.fail;
 
@@ -50,14 +49,14 @@ import static org.junit.Assert.fail;
 public class nodeinsertbefore05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        DOMImplementation domImpl;
-        DocumentType newDocType;
-        String nullPubId = null;
-        String nullSysId = null;
+        final Document doc;
+        final DocumentType docType;
+        final DOMImplementation domImpl;
+        final DocumentType newDocType;
+        final String nullPubId = null;
+        final String nullSysId = null;
 
-        String rootName;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         rootName = docType.getName();
@@ -68,7 +67,7 @@ public class nodeinsertbefore05Test extends LoboUnitTest {
             doc.insertBefore(newDocType, docType);
             fail("throw_DOMException");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 3:
                 case 9:

@@ -54,13 +54,13 @@ public class createDocumentType04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String publicId = "http://www.example.com/";
-        String systemId = "myDoc.dtd";
-        DOMImplementation domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
+        final String publicId = "http://www.example.com/";
+        final String systemId = "myDoc.dtd";
+        final DOMImplementation domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         boolean success = false;
         try {
             domImpl.createDocumentType("", publicId, systemId);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
         assertTrue("throw_INVALID_CHARACTER_ERR", success);

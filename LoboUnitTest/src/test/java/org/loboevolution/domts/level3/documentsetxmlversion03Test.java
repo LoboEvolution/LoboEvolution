@@ -48,15 +48,15 @@ import static org.junit.Assert.assertEquals;
 public class documentsetxmlversion03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String versionValue;
-        Document newDoc;
-        DOMImplementation domImpl;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final String versionValue;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

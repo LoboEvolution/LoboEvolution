@@ -61,7 +61,7 @@ public class SymbolDictionaryFlags extends Flags {
 	public static final String SD_R_TEMPLATE = "SD_R_TEMPLATE";
 
 	/** {@inheritDoc} */
-	public void setFlags(int flagsAsInt) {
+	public void setFlags(final int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract SD_HUFF */

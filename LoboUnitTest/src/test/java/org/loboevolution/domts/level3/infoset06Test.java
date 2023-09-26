@@ -54,18 +54,18 @@ import static org.junit.Assert.*;
 public class infoset06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        String nullString = null;
+        final DOMImplementation domImpl;
+        final String nullString = null;
 
-        DocumentType nullDoctype = null;
+        final DocumentType nullDoctype = null;
 
-        Document doc;
+        final Document doc;
         Element elem;
-        Node retval;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Node retval;
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        List<DOMError> errors;
+        final List<DOMError> errors;
         int severity;
         String type;
         DOMLocator locator;
@@ -77,7 +77,7 @@ public class infoset06Test extends LoboUnitTest {
             boolean success = false;
             try {
                 elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("xml10InvalidName", success);
@@ -86,7 +86,7 @@ public class infoset06Test extends LoboUnitTest {
         try {
             doc.setXmlVersion("1.1");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             if (ex.getCode() == 9) {
                 return;
             }
@@ -101,7 +101,7 @@ public class infoset06Test extends LoboUnitTest {
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
         errors = errorMonitor.getErrors();
-        for (DOMError error : errors) {
+        for (final DOMError error : errors) {
             severity = error.getSeverity();
             assertEquals("severity", 2, severity);
             type = error.getType();

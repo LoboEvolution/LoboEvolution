@@ -44,61 +44,61 @@ public abstract class SAXParser
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(InputStream is, HandlerBase hb)
+    public void parse(final InputStream is, final HandlerBase hb)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(InputStream is, HandlerBase hb, String systemId)
+    public void parse(final InputStream is, final HandlerBase hb, final String systemId)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(InputStream is, DefaultHandler dh)
+    public void parse(final InputStream is, final DefaultHandler dh)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(InputStream is, DefaultHandler dh, String systemId)
+    public void parse(final InputStream is, final DefaultHandler dh, final String systemId)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(String uri, HandlerBase hb)
+    public void parse(final String uri, final HandlerBase hb)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(String uri, DefaultHandler dh)
+    public void parse(final String uri, final DefaultHandler dh)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(File f, HandlerBase hb)
+    public void parse(final File f, final HandlerBase hb)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(File f, DefaultHandler dh)
+    public void parse(final File f, final DefaultHandler dh)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(InputSource is, HandlerBase hb)
+    public void parse(final InputSource is, final HandlerBase hb)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void parse(InputSource is, DefaultHandler dh)
+    public void parse(final InputSource is, final DefaultHandler dh)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
@@ -114,10 +114,10 @@ public abstract class SAXParser
 
     public abstract boolean isValidating();
 
-    public abstract void setProperty(String s, Object obj)
+    public abstract void setProperty(final String s, Object obj)
         throws SAXNotRecognizedException, SAXNotSupportedException;
 
-    public abstract Object getProperty(String s)
+    public abstract Object getProperty(final String s)
         throws SAXNotRecognizedException, SAXNotSupportedException;
 
     public Schema getSchema()

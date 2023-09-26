@@ -59,7 +59,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * @param classWrapper the class wrapper
 	 * @param delegate     the delegate
 	 */
-	public JavaObjectWrapper(JavaClassWrapper classWrapper, Object delegate) {
+	public JavaObjectWrapper(final JavaClassWrapper classWrapper, final Object delegate) {
 		if (delegate == null) {
 			throw new IllegalArgumentException("Argument delegate cannot be null.");
 		}
@@ -86,26 +86,26 @@ public class JavaObjectWrapper extends ScriptableObject {
 
 	/** {@inheritDoc} */
 	@Override
-	public Object get(int index, Scriptable start) {
-		PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
+	public Object get(final int index, final Scriptable start) {
+		final PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
 		if (pinfo == null) {
 			return super.get(index, start);
 		} else {
 			try {
-				Method getter = pinfo.getGetter();
+				final Method getter = pinfo.getGetter();
 				if (getter == null) {
 					throw new EvaluatorException("Indexer is write-only");
 				}
 				// Cannot retain delegate with a strong reference.
-				Object javaObject = this.getJavaObject();
+				final Object javaObject = this.getJavaObject();
 				if (javaObject == null) {
 					throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");
 				}
-				Object raw = getter.invoke(javaObject, index);
+				final Object raw = getter.invoke(javaObject, index);
 				if (raw != null) {
 					return JavaScript.getInstance().getJavascriptObject(raw, this.getParentScope());
 				}
-			} catch (Exception err) {
+			} catch (final Exception err) {
 				logger.log(Level.SEVERE, err.getMessage(), err);
 			}
 		}
@@ -114,55 +114,55 @@ public class JavaObjectWrapper extends ScriptableObject {
 
 	/** {@inheritDoc} */
 	@Override
-	public Object get(String name, Scriptable start) {
-		PropertyInfo pinfo = this.classWrapper.getProperty(name);
+	public Object get(final String name, final Scriptable start) {
+		final PropertyInfo pinfo = this.classWrapper.getProperty(name);
 		if (pinfo != null) {
-			Method getter = pinfo.getGetter();
+			final Method getter = pinfo.getGetter();
 			if (getter == null) {
 				throw new EvaluatorException("Property '" + name + "' is not readable");
 			}
 			try {
 				// Cannot retain delegate with a strong reference.
-				Object javaObject = this.getJavaObject();
+				final Object javaObject = this.getJavaObject();
 				if (javaObject == null) {
 					throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");
 				}
-				Object val = getter.invoke(javaObject, (Object[]) null);
+				final Object val = getter.invoke(javaObject, (Object[]) null);
 				return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
-			} catch (Exception err) {
+			} catch (final Exception err) {
 				logger.log(Level.SEVERE, err.getMessage(), err);
 				return new Object();
 			}
 		} else {
-			Function f = this.classWrapper.getFunction(name);
+			final Function f = this.classWrapper.getFunction(name);
 			if (f != null) {
 				return f;
 			} else {
 				// Should check properties set in context
 				// first. Consider element IDs should not
 				// override Window variables set by user.
-				Object result = super.get(name, start);
+				final Object result = super.get(name, start);
 				if (result != Scriptable.NOT_FOUND) {
 					return result;
 				}
-				PropertyInfo ni = this.classWrapper.getNameIndexer();
+				final PropertyInfo ni = this.classWrapper.getNameIndexer();
 				if (ni != null) {
-					Method getter = ni.getGetter();
+					final Method getter = ni.getGetter();
 					if (getter != null) {
 						// Cannot retain delegate with a strong reference.
-						Object javaObject = this.getJavaObject();
+						final Object javaObject = this.getJavaObject();
 						if (javaObject == null) {
 							throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");
 						}
 						try {
-							Object val = getter.invoke(javaObject, name);
+							final Object val = getter.invoke(javaObject, name);
 							if (val == null) {
 								// There might not be an indexer setter.
 								return super.get(name, start);
 							} else {
 								return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
 							}
-						} catch (Exception err) {
+						} catch (final Exception err) {
 							logger.log(Level.SEVERE, err.getMessage(), err);
 						}
 					}
@@ -174,20 +174,20 @@ public class JavaObjectWrapper extends ScriptableObject {
 
 	/** {@inheritDoc} */
 	@Override
-	public void put(int index, Scriptable start, Object value) {
-		PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
+	public void put(final int index, final Scriptable start, final Object value) {
+		final PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
 		if (pinfo == null) {
 			super.put(index, start, value);
 		} else {
 			try {
-				Method setter = pinfo.getSetter();
+				final Method setter = pinfo.getSetter();
 				if (setter == null) {
 					throw new EvaluatorException("Indexer is read-only");
 				}
-				Object actualValue;
+				final Object actualValue;
 				actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 				setter.invoke(this.getJavaObject(), index, actualValue);
-			} catch (Exception err) {
+			} catch (final Exception err) {
 				logger.log(Level.SEVERE, err.getMessage(), err);
 			}
 		}
@@ -195,32 +195,32 @@ public class JavaObjectWrapper extends ScriptableObject {
 
 	/** {@inheritDoc} */
 	@Override
-	public void put(String name, Scriptable start, Object value) {
+	public void put(final String name, final Scriptable start, final Object value) {
 		if (value instanceof org.mozilla.javascript.Undefined) {
 			super.put(name, start, value);
 		} else {
-			PropertyInfo pinfo = this.classWrapper.getProperty(name);
+			final PropertyInfo pinfo = this.classWrapper.getProperty(name);
 			if (pinfo != null) {
-				Method setter = pinfo.getSetter();
+				final Method setter = pinfo.getSetter();
 				if (setter != null) {
 					try {
-						Object actualValue;
+						final Object actualValue;
 						actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 						setter.invoke(this.getJavaObject(), actualValue);
-					} catch (Exception err) {
+					} catch (final Exception err) {
 						logger.log(Level.SEVERE, err.getMessage(), err);
 					}
 				}
 			} else {
-				PropertyInfo ni = this.classWrapper.getNameIndexer();
+				final PropertyInfo ni = this.classWrapper.getNameIndexer();
 				if (ni != null) {
-					Method setter = ni.getSetter();
+					final Method setter = ni.getSetter();
 					if (setter != null) {
 						try {
-							Object actualValue;
+							final Object actualValue;
 							actualValue = JavaScript.getInstance().getJavaObject(value, ni.getPropertyType());
 							setter.invoke(this.getJavaObject(), name, actualValue);
-						} catch (Exception err) {
+						} catch (final Exception err) {
 							logger.log(Level.SEVERE, err.getMessage(), err);
 						}
 					} else {
@@ -236,15 +236,15 @@ public class JavaObjectWrapper extends ScriptableObject {
 
 	/** {@inheritDoc} */
 	@Override
-	public Object getDefaultValue(Class hint) {
+	public Object getDefaultValue(final Class hint) {
 		if (hint == null || String.class.equals(hint)) {
-			Object javaObject = this.getJavaObject();
+			final Object javaObject = this.getJavaObject();
 			if (javaObject == null) {
 				throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");
 			}
 			return javaObject.toString();
 		} else if (Number.class.isAssignableFrom(hint)) {
-			Object javaObject = this.getJavaObject();
+			final Object javaObject = this.getJavaObject();
 			if (javaObject instanceof Number) {
 				return javaObject;
 			} else if (javaObject instanceof String) {
@@ -260,8 +260,8 @@ public class JavaObjectWrapper extends ScriptableObject {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		Object javaObject = this.getJavaObject();
-		String type = javaObject == null ? "<null>" : javaObject.getClass().getName();
+		final Object javaObject = this.getJavaObject();
+		final String type = javaObject == null ? "<null>" : javaObject.getClass().getName();
 		return "JavaObjectWrapper[object=" + this.getJavaObject() + ",type=" + type + "]";
 	}
 }

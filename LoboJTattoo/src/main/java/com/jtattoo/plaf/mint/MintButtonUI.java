@@ -59,14 +59,14 @@ public class MintButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
 			return;
 		}
 
 		if (b.getWidth() < 32 || b.getHeight() < 16 || !(b.isBorderPainted() && b.getBorder() instanceof UIResource)
 				|| AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
-			ButtonModel model = b.getModel();
+			final ButtonModel model = b.getModel();
 			Color color = AbstractLookAndFeel.getTheme().getButtonBackgroundColor();
 			if (model.isPressed() && model.isArmed()) {
 				color = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
@@ -83,17 +83,17 @@ public class MintButtonUI extends BaseButtonUI {
 			return;
 		}
 
-		Graphics2D g2D = (Graphics2D) g;
-		int width = b.getWidth() - 2;
-		int height = b.getHeight() - 2;
-		ButtonModel model = b.getModel();
+		final Graphics2D g2D = (Graphics2D) g;
+		final int width = b.getWidth() - 2;
+		final int height = b.getHeight() - 2;
+		final ButtonModel model = b.getModel();
 
 		if (model.isPressed() && model.isArmed()) {
-			Color color = AbstractLookAndFeel.getTheme().getPressedBackgroundColor();
+			final Color color = AbstractLookAndFeel.getTheme().getPressedBackgroundColor();
 			g2D.setColor(color);
 			g2D.fillRoundRect(0, 0, width, height, height, height);
 			g2D.setColor(ColorHelper.darker(color, 40));
-			Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2D.drawRoundRect(0, 0, width - 1, height - 1, height, height);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
@@ -104,16 +104,16 @@ public class MintButtonUI extends BaseButtonUI {
 		if (!model.isEnabled()) {
 			colors = AbstractLookAndFeel.getTheme().getDisabledColors();
 		} else if (b.isRolloverEnabled() && model.isRollover()) {
-			Color[] src = AbstractLookAndFeel.getTheme().getRolloverColors();
+			final Color[] src = AbstractLookAndFeel.getTheme().getRolloverColors();
 			colors = new Color[src.length];
 			System.arraycopy(src, 0, colors, 0, colors.length);
 			colors[colors.length - 2] = ColorHelper.darker(colors[colors.length - 2], 15);
 		}
 
-		Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+		final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		// Paint shadow
-		Color color = b.getParent().getBackground();
+		final Color color = b.getParent().getBackground();
 		g2D.setColor(ColorHelper.darker(color, 6));
 		g2D.drawRoundRect(2, 2, width - 1, height - 1, height, height);
 		g2D.setColor(ColorHelper.darker(color, 18));
@@ -144,21 +144,21 @@ public class MintButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
-			Rectangle iconRect) {
-		Graphics2D g2D = (Graphics2D) g;
-		int width = b.getWidth();
-		int height = b.getHeight();
+	protected void paintFocus(final Graphics g, final AbstractButton b, final Rectangle viewRect, final Rectangle textRect,
+                              final Rectangle iconRect) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final int width = b.getWidth();
+		final int height = b.getHeight();
 		if (AbstractLookAndFeel.getTheme().doDrawSquareButtons() || !b.isContentAreaFilled()
 				|| !(b.getBorder() instanceof UIResource)
 				|| (width < 64 || height < 16) && (b.getText() == null || b.getText().length() == 0)) {
 			g.setColor(AbstractLookAndFeel.getFocusColor());
 			BasicGraphicsUtils.drawDashedRect(g, 4, 3, width - 8, height - 6);
 		} else {
-			Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2D.setColor(AbstractLookAndFeel.getFocusColor());
-			int d = height - 6;
+			final int d = height - 6;
 			g2D.drawRoundRect(2, 2, width - 7, height - 7, d, d);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRenderingHint);
 		}

@@ -47,7 +47,7 @@ public class RSSControl extends BaseControl {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.rss.RSSElementImpl} object.
 	 */
-	public RSSControl(RSSElementImpl modelNode) {
+	public RSSControl(final RSSElementImpl modelNode) {
 		super(modelNode);
 		this.modelNode = modelNode;
 	}
@@ -56,7 +56,7 @@ public class RSSControl extends BaseControl {
 	@Override
 	public void paint(final Graphics g) {
 		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
+		final Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		modelNode.draw(g2d);
 	}

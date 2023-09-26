@@ -38,7 +38,7 @@ public class BlockRenderState extends StyleSheetRenderState {
 	 *
 	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
-	public BlockRenderState(HTMLDocumentImpl document) {
+	public BlockRenderState(final HTMLDocumentImpl document) {
 		super(document);
 	}
 
@@ -48,7 +48,7 @@ public class BlockRenderState extends StyleSheetRenderState {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public BlockRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+	public BlockRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 

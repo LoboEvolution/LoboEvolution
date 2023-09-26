@@ -76,16 +76,16 @@ public class SelectOption {
 	 * @param modelNode the model node
 	 * @param control a {@link org.loboevolution.html.control.SelectControl} object.
 	 */
-	public SelectOption(HTMLSelectElementImpl modelNode, SelectControl control) {
+	public SelectOption(final HTMLSelectElementImpl modelNode, final SelectControl control) {
 		this.control = control;
 		final JComboBox<OptionItem> comboBox = new JComboBox<>();
 		comboBox.addItemListener(e -> {
-			OptionItem item = (OptionItem) e.getItem();
+			final OptionItem item = (OptionItem) e.getItem();
 			if (item != null) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					if (!suspendSelections) {
 
-						int selectedIndex = comboBox.getSelectedIndex();
+						final int selectedIndex = comboBox.getSelectedIndex();
 						modelNode.setSelectedIndex(selectedIndex);
 						HtmlController.getInstance().onChange(modelNode);
 					}
@@ -100,12 +100,12 @@ public class SelectOption {
 			if (!e.getValueIsAdjusting() && !suspendSelections) {
 				boolean changed = false;
 
-				int modelSize = listModel.getSize();
+				final int modelSize = listModel.getSize();
 				for (int i = 0; i < modelSize; i++) {
-					OptionItem item = listModel.get(i);
+					final OptionItem item = listModel.get(i);
 					if (item != null) {
-						boolean oldIsSelected = item.isSelected();
-						boolean newIsSelected = list.isSelectedIndex(i);
+						final boolean oldIsSelected = item.isSelected();
+						final boolean newIsSelected = list.isSelectedIndex(i);
 						if (oldIsSelected != newIsSelected) {
 							changed = true;
 							item.setSelected(newIsSelected);
@@ -139,12 +139,12 @@ public class SelectOption {
 	 *
 	 * @param selectElement a {@link org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl} object.
 	 */
-	public void resetItemList(HTMLSelectElementImpl selectElement) {
-		boolean isMultiple = selectElement.isMultiple();
+	public void resetItemList(final HTMLSelectElementImpl selectElement) {
+		final boolean isMultiple = selectElement.isMultiple();
 		if (isMultiple && this.state != STATE_LIST) {
 			this.state = STATE_LIST;
 			control.removeAll();
-			JScrollPane scrollPane = new JScrollPane(this.list);
+			final JScrollPane scrollPane = new JScrollPane(this.list);
 			control.add(scrollPane);
 		} else if (!isMultiple && this.state != STATE_COMBO) {
 			this.state = STATE_COMBO;
@@ -154,16 +154,16 @@ public class SelectOption {
 
 		this.suspendSelections = true;
 		try {
-			HTMLOptionsCollection optionElements = selectElement.getOptions();
+			final HTMLOptionsCollection optionElements = selectElement.getOptions();
 			if (this.state == STATE_COMBO) {
-				JComboBox<OptionItem> comboBox = this.comboBox;
+				final JComboBox<OptionItem> comboBox = this.comboBox;
 				// First determine current selected option
 				HTMLOptionElement priorSelectedOption = null;
-				int priorIndex = selectElement.getSelectedIndex();
+				final int priorIndex = selectElement.getSelectedIndex();
 				if (priorIndex != -1) {
-					int numOptions = optionElements.getLength();
+					final int numOptions = optionElements.getLength();
 					for (int index = 0; index < numOptions; index++) {
-						HTMLOptionElement option = (HTMLOptionElement) optionElements.item(index);
+						final HTMLOptionElement option = (HTMLOptionElement) optionElements.item(index);
 						if (index == priorIndex) {
 							priorSelectedOption = option;
 						}
@@ -173,11 +173,11 @@ public class SelectOption {
 				OptionItem defaultItem = null;
 				OptionItem selectedItem = null;
 				OptionItem firstItem = null;
-				int numOptions = optionElements.getLength();
+				final int numOptions = optionElements.getLength();
 				for (int index = 0; index < numOptions; index++) {
-					HTMLOptionElement option = (HTMLOptionElement) optionElements.item(index);
+					final HTMLOptionElement option = (HTMLOptionElement) optionElements.item(index);
 					if (option != null) {
-						OptionItem item = new OptionItem(option);
+						final OptionItem item = new OptionItem(option);
 						if (firstItem == null) {
 							firstItem = item;
 							comboBox.addItem(item);
@@ -207,16 +207,16 @@ public class SelectOption {
 					comboBox.setSelectedItem(firstItem);
 				}
 			} else {
-				JList<OptionItem> list = this.list;
+				final JList<OptionItem> list = this.list;
 				Collection<Integer> defaultSelectedIndexes = null;
 				Collection<Integer> selectedIndexes = null;
 				OptionItem firstItem = null;
-				DefaultListModel<OptionItem> listModel = this.listModel;
+				final DefaultListModel<OptionItem> listModel = this.listModel;
 				listModel.clear();
-				int numOptions = optionElements.getLength();
+				final int numOptions = optionElements.getLength();
 				for (int index = 0; index < numOptions; index++) {
-					HTMLOptionElement option = (HTMLOptionElement) optionElements.item(index);
-					OptionItem item = new OptionItem(option);
+					final HTMLOptionElement option = (HTMLOptionElement) optionElements.item(index);
+					final OptionItem item = new OptionItem(option);
 					if (firstItem == null) {
 						firstItem = item;
 						listModel.addElement(item);
@@ -239,11 +239,11 @@ public class SelectOption {
 					}
 				}
 				if (ArrayUtilities.isNotBlank(selectedIndexes)) {
-					for (Integer si : selectedIndexes) {
+					for (final Integer si : selectedIndexes) {
 						list.addSelectionInterval(si, si);
 					}
 				} else if (ArrayUtilities.isNotBlank(defaultSelectedIndexes)) {
-					for (Integer si : defaultSelectedIndexes) {
+					for (final Integer si : defaultSelectedIndexes) {
 						list.addSelectionInterval(si, si);
 					}
 				}
@@ -267,7 +267,7 @@ public class SelectOption {
 	 *
 	 * @param value a int.
 	 */
-	public void setVisibleSize(int value) {
+	public void setVisibleSize(final int value) {
 		this.comboBox.setMaximumRowCount(value);
 	}
 
@@ -295,9 +295,9 @@ public class SelectOption {
 		 *
 		 * @param option the option
 		 */
-		public OptionItem(HTMLOptionElement option) {
+		public OptionItem(final HTMLOptionElement option) {
 			this.option = option;
-			String label = option.getLabel();
+			final String label = option.getLabel();
 			if (label == null) {
 				this.caption = option.getText();
 			} else {
@@ -310,7 +310,7 @@ public class SelectOption {
 		 *
 		 * @param value the new selected
 		 */
-		public void setSelected(boolean value) {
+		public void setSelected(final boolean value) {
 			this.option.setSelected(value);
 		}
 
@@ -348,7 +348,7 @@ public class SelectOption {
 	 * @param dir the dir
 	 * @return the component orientation
 	 */
-	private ComponentOrientation direction(String dir) {
+	private ComponentOrientation direction(final String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {
 			return ComponentOrientation.LEFT_TO_RIGHT;

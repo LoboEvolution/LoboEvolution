@@ -55,10 +55,10 @@ public class getNamedItemNS03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entities;
-        EntityReference entity;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entities;
+        final EntityReference entity;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();

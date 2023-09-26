@@ -58,7 +58,7 @@ import com.jtattoo.plaf.LazyImageIcon;
 public class AcrylIcons extends BaseIcons {
 
 	// ----------------------------------------------------------------------------------------------------------------------
-	private static class CheckBoxIcon implements Icon {
+	private final static class CheckBoxIcon implements Icon {
 
 		private static final int GAP = 2;
 
@@ -94,7 +94,7 @@ public class AcrylIcons extends BaseIcons {
 
 		@Override
 		public int getIconWidth() {
-			int w;
+			final int w;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				w = 14;
 			} else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
@@ -106,14 +106,16 @@ public class AcrylIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+			int x = iconX;
+
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += GAP;
 			}
-			int w = getIconWidth() - GAP;
-			int h = getIconHeight();
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+			final int w = getIconWidth() - GAP;
+			final int h = getIconHeight();
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			Color frameColor = AbstractLookAndFeel.getFrameColor();
 			if (button.isEnabled()) {
 				if (button.isRolloverEnabled() && model.isRollover()) {
@@ -143,9 +145,9 @@ public class AcrylIcons extends BaseIcons {
 			g.drawLine(x, y + 1, x, y + h - 2);
 			g.drawLine(x + w - 1, y + 1, x + w - 1, y + h - 2);
 
-			Icon checkIcon;
-			Icon checkDisabledIcon;
-			Icon checkInverseIcon;
+			final Icon checkIcon;
+			final Icon checkDisabledIcon;
+			final Icon checkInverseIcon;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				checkIcon = SMALL_CHECK_ICON;
 				checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
@@ -159,15 +161,15 @@ public class AcrylIcons extends BaseIcons {
 				checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
 				checkInverseIcon = LARGE_CHECK_INVERSE_ICON;
 			}
-			int gv = model.isRollover()
+			final int gv = model.isRollover()
 					? ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getRolloverColorDark())
 					: ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getControlColorDark());
-			int xi = x + (w - checkIcon.getIconWidth()) / 2;
-			int yi = y + (h - checkIcon.getIconHeight()) / 2;
+			final int xi = x + (w - checkIcon.getIconWidth()) / 2;
+			final int yi = y + (h - checkIcon.getIconHeight()) / 2;
 			if (model.isPressed() && model.isArmed()) {
-				Color bc = gv > 128 ? AbstractLookAndFeel.getTheme().getSelectionBackgroundColor()
+				final Color bc = gv > 128 ? AbstractLookAndFeel.getTheme().getSelectionBackgroundColor()
 						: AbstractLookAndFeel.getTheme().getSelectionForegroundColor();
-				Color fc = gv > 128 ? ColorHelper.darker(bc, 40) : ColorHelper.brighter(bc, 20);
+				final Color fc = gv > 128 ? ColorHelper.darker(bc, 40) : ColorHelper.brighter(bc, 20);
 				g.setColor(fc);
 				g.drawRect(x + 4, y + 4, w - 9, h - 9);
 				g.setColor(bc);
@@ -187,7 +189,7 @@ public class AcrylIcons extends BaseIcons {
 	}
 
 	// ----------------------------------------------------------------------------------------------------------------------
-	private static class RadioButtonIcon implements Icon {
+	private final static class RadioButtonIcon implements Icon {
 
 		private static final int GAP = 2;
 
@@ -204,7 +206,7 @@ public class AcrylIcons extends BaseIcons {
 
 		@Override
 		public int getIconWidth() {
-			int w;
+			final int w;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				w = 14;
 			} else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
@@ -216,21 +218,23 @@ public class AcrylIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+			int x = iconX;
+
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += GAP;
 			}
-			int w = getIconWidth() - GAP;
-			int h = getIconHeight();
-			Graphics2D g2D = (Graphics2D) g;
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+			final int w = getIconWidth() - GAP;
+			final int h = getIconHeight();
+			final Graphics2D g2D = (Graphics2D) g;
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			Color frameColor = AbstractLookAndFeel.getFrameColor();
-			Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-			Shape savedClip = g.getClip();
+			final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Shape savedClip = g.getClip();
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-			Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
+			final Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
 			if (savedClip != null) {
 				clipArea.intersect(new Area(savedClip));
 			}
@@ -260,7 +264,7 @@ public class AcrylIcons extends BaseIcons {
 					g.setColor(AbstractLookAndFeel.getTheme().getDisabledForegroundColor());
 					g.fillOval(x + w / 2 - 2, y + h / 2 - 2, 5, 5);
 				} else {
-					int gv;
+					final int gv;
 					if (model.isRollover()) {
 						gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getRolloverColorDark());
 					} else {
@@ -299,7 +303,7 @@ public class AcrylIcons extends BaseIcons {
 		public static final int CLOSE_ICON_TYP = 3;
 		private int iconTyp = ICON_ICON_TYP;
 
-		public TitleButtonIcon(int typ) {
+		public TitleButtonIcon(final int typ) {
 			iconTyp = typ;
 		}
 
@@ -314,18 +318,18 @@ public class AcrylIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			int w = c.getWidth();
-			int h = c.getHeight();
+		public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
+			final int w = c.getWidth();
+			final int h = c.getHeight();
 
-			JButton b = (JButton) c;
-			Graphics2D g2D = (Graphics2D) g;
+			final JButton b = (JButton) c;
+			final Graphics2D g2D = (Graphics2D) g;
 
-			boolean isPressed = b.getModel().isPressed();
-			boolean isArmed = b.getModel().isArmed();
-			boolean isRollover = b.getModel().isRollover();
+			final boolean isPressed = b.getModel().isPressed();
+			final boolean isArmed = b.getModel().isArmed();
+			final boolean isRollover = b.getModel().isRollover();
 
-			Color cFrame = AbstractLookAndFeel.getTheme().getWindowBorderColor();
+			final Color cFrame = AbstractLookAndFeel.getTheme().getWindowBorderColor();
 			Color cFrameInner = ColorHelper.brighter(cFrame, 60);
 			Color cHi = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getWindowTitleColorLight(), 40);
 			Color cLo = ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10);
@@ -336,7 +340,7 @@ public class AcrylIcons extends BaseIcons {
 			}
 
 			if (isPressed && isArmed) {
-				Color cTemp = ColorHelper.darker(cLo, 10);
+				final Color cTemp = ColorHelper.darker(cLo, 10);
 				cLo = ColorHelper.darker(cHi, 10);
 				cHi = cTemp;
 				g2D.setPaint(new GradientPaint(0, 0, cHi, w, h, cLo));

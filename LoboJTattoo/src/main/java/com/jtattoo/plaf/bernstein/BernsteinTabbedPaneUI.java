@@ -51,7 +51,7 @@ public class BernsteinTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getContentBorderColors(int tabPlacement) {
+	protected Color[] getContentBorderColors(final int tabPlacement) {
 		return SEP_COLORS;
 	}
 

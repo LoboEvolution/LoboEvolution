@@ -46,20 +46,20 @@ import static org.junit.Assert.*;
 public class entities04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection pList;
         Element pElem;
-        DOMConfiguration domConfig;
+        final DOMConfiguration domConfig;
         boolean canSet;
         boolean canSetValidate;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node child;
-        String childName;
-        EntityReference entRef;
-        NamedNodeMap entities;
-        Node ent2;
-        DocumentType doctype;
+        final String childName;
+        final EntityReference entRef;
+        final NamedNodeMap entities;
+        final Node ent2;
+        final DocumentType doctype;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("entities", Boolean.FALSE);

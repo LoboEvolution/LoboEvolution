@@ -70,7 +70,7 @@ public interface Renderable {
 	 * @param root a {@link org.loboevolution.html.renderer.RCollection} object.
 	 * @return a {@link org.loboevolution.html.renderer.Renderable} object.
 	 */
-	default Renderable findHtmlRenderable(RCollection root) {
+	default Renderable findHtmlRenderable(final RCollection root) {
 		final Iterator<? extends Renderable> rs = root.getRenderables();
 		if (rs != null) {
 			while (rs.hasNext()) {

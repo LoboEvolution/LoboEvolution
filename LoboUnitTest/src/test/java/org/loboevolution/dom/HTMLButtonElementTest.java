@@ -35,6 +35,10 @@ import org.loboevolution.driver.LoboUnitTest;
  */
 public class HTMLButtonElementTest extends LoboUnitTest {
 
+    /**
+     * <p>urExample.</p>
+     */
+    private final String urExample = "http://www.example.com/";
 
     /**
      * <p>readWriteAccessKey.</p>
@@ -106,7 +110,7 @@ public class HTMLButtonElementTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  <p>hello world</p>\n"
-                + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+                + "  <form id='myForm' action='" + urExample + "'>\n"
                 + "    <button id='myNone'></button>\n"
                 + "    <button type='' id='myEmpty'></button>\n"
                 + "    <button type='submit' id='mySubmit'></button>\n"
@@ -152,7 +156,7 @@ public class HTMLButtonElementTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  <p>hello world</p>\n"
-                + "  <form id='myFormId' action='" + URL_SECOND + "'>\n"
+                + "  <form id='myFormId' action='" + urExample + "'>\n"
                 + "    <button id='myNone'></button>\n"
                 + "    <button form='' id='myEmptyInside'></button>\n"
                 + "    <button form='myFormId' id='myForm'></button>\n"
@@ -161,7 +165,7 @@ public class HTMLButtonElementTest extends LoboUnitTest {
                 + "    <button form='unknown' id='myUnknown'></button>\n"
                 + "    <button form='myForm2Id' id='myFormOther'></button>\n"
                 + "  </form>\n"
-                + "  <form id='myForm2Id' action='" + URL_SECOND + "'>\n"
+                + "  <form id='myForm2Id' action='" + urExample + "'>\n"
                 + "  </form>\n"
                 + "  <button form='myFormId' id='myOutside'></button>\n"
                 + "  <button form='' id='myEmptyOutside'></button>\n"

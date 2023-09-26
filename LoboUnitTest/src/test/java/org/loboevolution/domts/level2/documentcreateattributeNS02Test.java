@@ -54,13 +54,13 @@ public class documentcreateattributeNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr attribute1;
-        Attr attribute2;
+        final Document doc;
+        final Attr attribute1;
+        final Attr attribute2;
         String name;
         String nodeName;
         String nodeValue;
-        String prefix;
+        final String prefix;
         String namespaceURI;
         doc = sampleXmlFile("staffNS.xml");
         attribute1 = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:xml");

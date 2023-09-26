@@ -42,8 +42,8 @@ final class Dup implements PostScriptOperation {
 	 *
 	 * errors: stackoverflow, stackunderflow
 	 */
-	public void eval(Stack<Object> environment) {
-	    Object obj = environment.pop();
+	public void eval(final Stack<Object> environment) {
+	    final Object obj = environment.pop();
 	    environment.push(obj);
 	    environment.push(obj);
 	}

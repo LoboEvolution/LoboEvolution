@@ -49,12 +49,12 @@ import static org.junit.Assert.assertEquals;
 public class nodegettextcontent12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection elemList;
-        Element elem;
-        Comment comment;
-        String textContent;
-        Node appendedChild;
+        final Element elem;
+        final Comment comment;
+        final String textContent;
+        final Node appendedChild;
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "body");
         comment = doc.createComment("Comment");

@@ -41,7 +41,7 @@ public class McWinCheckBoxUI extends McWinRadioButtonUI {
 	private static McWinCheckBoxUI checkBoxUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent b) {
+	public static ComponentUI createUI(final JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new McWinCheckBoxUI();
 		}
@@ -50,7 +50,7 @@ public class McWinCheckBoxUI extends McWinRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installDefaults(AbstractButton b) {
+	public void installDefaults(final AbstractButton b) {
 		super.installDefaults(b);
 		icon = UIManager.getIcon("CheckBox.icon");
 	}

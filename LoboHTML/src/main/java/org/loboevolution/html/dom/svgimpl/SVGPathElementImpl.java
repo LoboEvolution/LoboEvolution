@@ -55,7 +55,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	@Override
 	public SVGRect getBBox() {
-		Shape shape = createShape(null);
+		final Shape shape = createShape(null);
 		return new SVGRectImpl(shape.getBounds2D());
 	}
 
@@ -98,14 +98,14 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint getPointAtLength(float distance) {
+	public SVGPoint getPointAtLength(final float distance) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public int getPathSegAtLength(float distance) {
+	public int getPathSegAtLength(final float distance) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -118,118 +118,118 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegMovetoAbs createSVGPathSegMovetoAbs(float x, float y) {
+	public SVGPathSegMovetoAbs createSVGPathSegMovetoAbs(final float x, final float y) {
 		return new SVGPathSegMovetoAbsImpl(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegMovetoRel createSVGPathSegMovetoRel(float x, float y) {
+	public SVGPathSegMovetoRel createSVGPathSegMovetoRel(final float x, final float y) {
 		return new SVGPathSegMovetoRelImpl(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegLinetoAbs createSVGPathSegLinetoAbs(float x, float y) {
+	public SVGPathSegLinetoAbs createSVGPathSegLinetoAbs(final float x, final float y) {
 		return new SVGPathSegLinetoAbsImpl(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegLinetoRel createSVGPathSegLinetoRel(float x, float y) {
+	public SVGPathSegLinetoRel createSVGPathSegLinetoRel(final float x, final float y) {
 		return new SVGPathSegLinetoRelImpl(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegCurvetoCubicAbs createSVGPathSegCurvetoCubicAbs(float x, float y, float x1, float y1, float x2, float y2) {
+	public SVGPathSegCurvetoCubicAbs createSVGPathSegCurvetoCubicAbs(final float x, final float y, final float x1, final float y1, final float x2, final float y2) {
 		return new SVGPathSegCurvetoCubicAbsImpl(x, y, x1, y1, x2, y2);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegCurvetoCubicRel createSVGPathSegCurvetoCubicRel(float x, float y, float x1, float y1, float x2, float y2) {
+	public SVGPathSegCurvetoCubicRel createSVGPathSegCurvetoCubicRel(final float x, final float y, final float x1, final float y1, final float x2, final float y2) {
 		return new SVGPathSegCurvetoCubicRelImpl(x, y, x1, y1, x2, y2);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegCurvetoQuadraticAbs createSVGPathSegCurvetoQuadraticAbs(float x, float y, float x1, float y1) {
+	public SVGPathSegCurvetoQuadraticAbs createSVGPathSegCurvetoQuadraticAbs(final float x, final float y, final float x1, final float y1) {
 		return new SVGPathSegCurvetoQuadraticAbsImpl(x, y, x1, y1);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegCurvetoQuadraticRel createSVGPathSegCurvetoQuadraticRel(float x, float y, float x1, float y1) {
+	public SVGPathSegCurvetoQuadraticRel createSVGPathSegCurvetoQuadraticRel(final float x, final float y, final float x1, final float y1) {
 		return new SVGPathSegCurvetoQuadraticRelImpl(x, y, x1, y1);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegArcAbs createSVGPathSegArcAbs(float x, float y, float r1, float r2, float angle,
-												   boolean largeArcFlag, boolean sweepFlag) {
+	public SVGPathSegArcAbs createSVGPathSegArcAbs(final float x, final float y, final float r1, final float r2, final float angle,
+                                                   final boolean largeArcFlag, final boolean sweepFlag) {
 		return new SVGPathSegArcAbsImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegArcRel createSVGPathSegArcRel(float x, float y, float r1, float r2, float angle,
-												   boolean largeArcFlag, boolean sweepFlag) {
+	public SVGPathSegArcRel createSVGPathSegArcRel(final float x, final float y, final float r1, final float r2, final float angle,
+                                                   final boolean largeArcFlag, final boolean sweepFlag) {
 		return new SVGPathSegArcRelImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegLinetoHorizontalAbs createSVGPathSegLinetoHorizontalAbs(float x) {
+	public SVGPathSegLinetoHorizontalAbs createSVGPathSegLinetoHorizontalAbs(final float x) {
 		return new SVGPathSegLinetoHorizontalAbsImpl(x);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegLinetoHorizontalRel createSVGPathSegLinetoHorizontalRel(float x) {
+	public SVGPathSegLinetoHorizontalRel createSVGPathSegLinetoHorizontalRel(final float x) {
 		return new SVGPathSegLinetoHorizontalRelImpl(x);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegLinetoVerticalAbs createSVGPathSegLinetoVerticalAbs(float y) {
+	public SVGPathSegLinetoVerticalAbs createSVGPathSegLinetoVerticalAbs(final float y) {
 		return new SVGPathSegLinetoVerticalAbsImpl(y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegLinetoVerticalRel createSVGPathSegLinetoVerticalRel(float y) {
+	public SVGPathSegLinetoVerticalRel createSVGPathSegLinetoVerticalRel(final float y) {
 		return new SVGPathSegLinetoVerticalRelImpl(y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegCurvetoCubicSmoothAbs createSVGPathSegCurvetoCubicSmoothAbs(float x, float y, float x2, float y2) {
+	public SVGPathSegCurvetoCubicSmoothAbs createSVGPathSegCurvetoCubicSmoothAbs(final float x, final float y, final float x2, final float y2) {
 		return new SVGPathSegCurvetoCubicSmoothAbsImpl(x, y, x2, y2);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegCurvetoCubicSmoothRel createSVGPathSegCurvetoCubicSmoothRel(float x, float y, float x2, float y2) {
+	public SVGPathSegCurvetoCubicSmoothRel createSVGPathSegCurvetoCubicSmoothRel(final float x, final float y, final float x2, final float y2) {
 		return new SVGPathSegCurvetoCubicSmoothRelImpl(x, y, x2, y2);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegCurvetoQuadraticSmoothAbs createSVGPathSegCurvetoQuadraticSmoothAbs(float x, float y) {
+	public SVGPathSegCurvetoQuadraticSmoothAbs createSVGPathSegCurvetoQuadraticSmoothAbs(final float x, final float y) {
 		return new SVGPathSegCurvetoQuadraticSmoothAbsImpl(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSegCurvetoQuadraticSmoothRel createSVGPathSegCurvetoQuadraticSmoothRel(float x, float y) {
+	public SVGPathSegCurvetoQuadraticSmoothRel createSVGPathSegCurvetoQuadraticSmoothRel(final float x, final float y) {
 		return new SVGPathSegCurvetoQuadraticSmoothRelImpl(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void draw(final Graphics2D graphics) {
-		String attribute = getAttribute("d");
+		final String attribute = getAttribute("d");
 		if(Strings.isNotBlank(attribute)) {
 			constructPathSegList(attribute);
 			final Shape shape = createShape(null);
@@ -240,15 +240,15 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(AffineTransform transform) {
-		GeneralPath path = new GeneralPath();
+	public Shape createShape(final AffineTransform transform) {
+		final GeneralPath path = new GeneralPath();
 		float lastX = 0;
 		float lastY = 0;
 		Point2D lastControlPoint = null;
-		int numPathSegs = pathSegList.getNumberOfItems();
+		final int numPathSegs = pathSegList.getNumberOfItems();
 		boolean startOfSubPath = true;
 		SVGPoint subPathStartPoint = null;
-		SVGPointList points = new SVGPointListImpl();
+		final SVGPointList points = new SVGPointListImpl();
 
 		for (int i = 0; i < numPathSegs; i++) {
 			SVGPathSeg seg = pathSegList.getItem(i);
@@ -262,16 +262,16 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 				if (isMoved) {
 					if (seg.getPathSegType() == SVGPathSeg.PATHSEG_MOVETO_REL) {
-						float x = ((SVGPathSegMovetoRel) seg).getX();
-						float y = ((SVGPathSegMovetoRel) seg).getY();
+						final float x = ((SVGPathSegMovetoRel) seg).getX();
+						final float y = ((SVGPathSegMovetoRel) seg).getY();
 						path.moveTo(x + lastX, y + lastY);
 						subPathStartPoint = new SVGPointImpl(x + lastX, y + lastY);
 						points.appendItem(subPathStartPoint);
 						lastX += x;
 						lastY += y;
 					} else if (seg.getPathSegType() == SVGPathSeg.PATHSEG_MOVETO_ABS) {
-						float x = ((SVGPathSegMovetoAbs) seg).getX();
-						float y = ((SVGPathSegMovetoAbs) seg).getY();
+						final float x = ((SVGPathSegMovetoAbs) seg).getX();
+						final float y = ((SVGPathSegMovetoAbs) seg).getY();
 						path.moveTo(x, y);
 						subPathStartPoint = new SVGPointImpl(x, y);
 						points.appendItem(subPathStartPoint);
@@ -297,8 +297,8 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_MOVETO_ABS: {
-						float x = ((SVGPathSegMovetoAbs) seg).getX();
-						float y = ((SVGPathSegMovetoAbs) seg).getY();
+						final float x = ((SVGPathSegMovetoAbs) seg).getX();
+						final float y = ((SVGPathSegMovetoAbs) seg).getY();
 						path.moveTo(x, y);
 						lastX = x;
 						lastY = y;
@@ -308,8 +308,8 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_MOVETO_REL: {
-						float x = ((SVGPathSegMovetoRel) seg).getX();
-						float y = ((SVGPathSegMovetoRel) seg).getY();
+						final float x = ((SVGPathSegMovetoRel) seg).getX();
+						final float y = ((SVGPathSegMovetoRel) seg).getY();
 						path.moveTo(x + lastX, y + lastY);
 						lastX += x;
 						lastY += y;
@@ -319,8 +319,8 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_LINETO_ABS: {
-						float x = ((SVGPathSegLinetoAbs) seg).getX();
-						float y = ((SVGPathSegLinetoAbs) seg).getY();
+						final float x = ((SVGPathSegLinetoAbs) seg).getX();
+						final float y = ((SVGPathSegLinetoAbs) seg).getY();
 						path.lineTo(x, y);
 						lastX = x;
 						lastY = y;
@@ -330,8 +330,8 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_LINETO_REL: {
-						float x = ((SVGPathSegLinetoRel) seg).getX();
-						float y = ((SVGPathSegLinetoRel) seg).getY();
+						final float x = ((SVGPathSegLinetoRel) seg).getX();
+						final float y = ((SVGPathSegLinetoRel) seg).getY();
 						path.lineTo(x + lastX, y + lastY);
 						lastX += x;
 						lastY += y;
@@ -341,7 +341,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_LINETO_HORIZONTAL_ABS: {
-						float x = ((SVGPathSegLinetoHorizontalAbs) seg).getX();
+						final float x = ((SVGPathSegLinetoHorizontalAbs) seg).getX();
 						path.lineTo(x, lastY);
 						lastX = x;
 						lastControlPoint = null;
@@ -350,7 +350,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_LINETO_HORIZONTAL_REL: {
-						float x = ((SVGPathSegLinetoHorizontalRel) seg).getX();
+						final float x = ((SVGPathSegLinetoHorizontalRel) seg).getX();
 						path.lineTo(x + lastX, lastY);
 						lastX += x;
 						lastControlPoint = null;
@@ -359,7 +359,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_LINETO_VERTICAL_ABS: {
-						float y = ((SVGPathSegLinetoVerticalAbs) seg).getY();
+						final float y = ((SVGPathSegLinetoVerticalAbs) seg).getY();
 						path.lineTo(lastX, y);
 						lastY = y;
 						lastControlPoint = null;
@@ -368,7 +368,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_LINETO_VERTICAL_REL: {
-						float y = ((SVGPathSegLinetoVerticalRel) seg).getY();
+						final float y = ((SVGPathSegLinetoVerticalRel) seg).getY();
 						path.lineTo(lastX, y + lastY);
 						lastY += y;
 						lastControlPoint = null;
@@ -377,12 +377,12 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_CURVETO_CUBIC_ABS: {
-						float x = ((SVGPathSegCurvetoCubicAbs) seg).getX();
-						float y = ((SVGPathSegCurvetoCubicAbs) seg).getY();
-						float x1 = ((SVGPathSegCurvetoCubicAbs) seg).getX1();
-						float y1 = ((SVGPathSegCurvetoCubicAbs) seg).getY1();
-						float x2 = ((SVGPathSegCurvetoCubicAbs) seg).getX2();
-						float y2 = ((SVGPathSegCurvetoCubicAbs) seg).getY2();
+						final float x = ((SVGPathSegCurvetoCubicAbs) seg).getX();
+						final float y = ((SVGPathSegCurvetoCubicAbs) seg).getY();
+						final float x1 = ((SVGPathSegCurvetoCubicAbs) seg).getX1();
+						final float y1 = ((SVGPathSegCurvetoCubicAbs) seg).getY1();
+						final float x2 = ((SVGPathSegCurvetoCubicAbs) seg).getX2();
+						final float y2 = ((SVGPathSegCurvetoCubicAbs) seg).getY2();
 						path.curveTo(x1, y1, x2, y2, x, y);
 						lastControlPoint = new Point2D.Float(x2, y2);
 						lastX = x;
@@ -392,12 +392,12 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_CURVETO_CUBIC_REL: {
-						float x = ((SVGPathSegCurvetoCubicRel) seg).getX();
-						float y = ((SVGPathSegCurvetoCubicRel) seg).getY();
-						float x1 = ((SVGPathSegCurvetoCubicRel) seg).getX1();
-						float y1 = ((SVGPathSegCurvetoCubicRel) seg).getY1();
-						float x2 = ((SVGPathSegCurvetoCubicRel) seg).getX2();
-						float y2 = ((SVGPathSegCurvetoCubicRel) seg).getY2();
+						final float x = ((SVGPathSegCurvetoCubicRel) seg).getX();
+						final float y = ((SVGPathSegCurvetoCubicRel) seg).getY();
+						final float x1 = ((SVGPathSegCurvetoCubicRel) seg).getX1();
+						final float y1 = ((SVGPathSegCurvetoCubicRel) seg).getY1();
+						final float x2 = ((SVGPathSegCurvetoCubicRel) seg).getX2();
+						final float y2 = ((SVGPathSegCurvetoCubicRel) seg).getY2();
 						path.curveTo(lastX + x1, lastY + y1, lastX + x2, lastY + y2, lastX + x, lastY + y);
 						lastControlPoint = new Point2D.Float(lastX + x2, lastY + y2);
 						lastX += x;
@@ -407,10 +407,10 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS: {
-						float x = ((SVGPathSegCurvetoCubicSmoothAbs) seg).getX();
-						float y = ((SVGPathSegCurvetoCubicSmoothAbs) seg).getY();
-						float x2 = ((SVGPathSegCurvetoCubicSmoothAbs) seg).getX2();
-						float y2 = ((SVGPathSegCurvetoCubicSmoothAbs) seg).getY2();
+						final float x = ((SVGPathSegCurvetoCubicSmoothAbs) seg).getX();
+						final float y = ((SVGPathSegCurvetoCubicSmoothAbs) seg).getY();
+						final float x2 = ((SVGPathSegCurvetoCubicSmoothAbs) seg).getX2();
+						final float y2 = ((SVGPathSegCurvetoCubicSmoothAbs) seg).getY2();
 						if (lastControlPoint == null) {
 							lastControlPoint = new Point2D.Float(lastX, lastY);
 						}
@@ -424,10 +424,10 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_REL: {
-						float x = ((SVGPathSegCurvetoCubicSmoothRel) seg).getX();
-						float y = ((SVGPathSegCurvetoCubicSmoothRel) seg).getY();
-						float x2 = ((SVGPathSegCurvetoCubicSmoothRel) seg).getX2();
-						float y2 = ((SVGPathSegCurvetoCubicSmoothRel) seg).getY2();
+						final float x = ((SVGPathSegCurvetoCubicSmoothRel) seg).getX();
+						final float y = ((SVGPathSegCurvetoCubicSmoothRel) seg).getY();
+						final float x2 = ((SVGPathSegCurvetoCubicSmoothRel) seg).getX2();
+						final float y2 = ((SVGPathSegCurvetoCubicSmoothRel) seg).getY2();
 						if (lastControlPoint == null) {
 							lastControlPoint = new Point2D.Float(lastX, lastY);
 						}
@@ -441,10 +441,10 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_ABS: {
-						float x = ((SVGPathSegCurvetoQuadraticAbs) seg).getX();
-						float y = ((SVGPathSegCurvetoQuadraticAbs) seg).getY();
-						float x1 = ((SVGPathSegCurvetoQuadraticAbs) seg).getX1();
-						float y1 = ((SVGPathSegCurvetoQuadraticAbs) seg).getY1();
+						final float x = ((SVGPathSegCurvetoQuadraticAbs) seg).getX();
+						final float y = ((SVGPathSegCurvetoQuadraticAbs) seg).getY();
+						final float x1 = ((SVGPathSegCurvetoQuadraticAbs) seg).getX1();
+						final float y1 = ((SVGPathSegCurvetoQuadraticAbs) seg).getY1();
 						path.quadTo(x1, y1, x, y);
 						lastControlPoint = new Point2D.Float(x1, y1);
 						lastX = x;
@@ -454,10 +454,10 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_REL: {
-						float x = ((SVGPathSegCurvetoQuadraticRel) seg).getX();
-						float y = ((SVGPathSegCurvetoQuadraticRel) seg).getY();
-						float x1 = ((SVGPathSegCurvetoQuadraticRel) seg).getX1();
-						float y1 = ((SVGPathSegCurvetoQuadraticRel) seg).getY1();
+						final float x = ((SVGPathSegCurvetoQuadraticRel) seg).getX();
+						final float y = ((SVGPathSegCurvetoQuadraticRel) seg).getY();
+						final float x1 = ((SVGPathSegCurvetoQuadraticRel) seg).getX1();
+						final float y1 = ((SVGPathSegCurvetoQuadraticRel) seg).getY1();
 						path.quadTo(lastX + x1, lastY + y1, lastX + x, lastY + y);
 						lastControlPoint = new Point2D.Float(lastX + x1, lastY + y1);
 						lastX += x;
@@ -467,12 +467,12 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS: {
-						float x = ((SVGPathSegCurvetoQuadraticSmoothAbs) seg).getX();
-						float y = ((SVGPathSegCurvetoQuadraticSmoothAbs) seg).getY();
+						final float x = ((SVGPathSegCurvetoQuadraticSmoothAbs) seg).getX();
+						final float y = ((SVGPathSegCurvetoQuadraticSmoothAbs) seg).getY();
 						if (lastControlPoint == null) {
 							lastControlPoint = new Point2D.Float(lastX, lastY);
 						}
-						Point2D nextControlPoint = new Point2D.Float(2 * lastX - (float) lastControlPoint.getX(), 2 * lastY - (float) lastControlPoint.getY());
+						final Point2D nextControlPoint = new Point2D.Float(2 * lastX - (float) lastControlPoint.getX(), 2 * lastY - (float) lastControlPoint.getY());
 
 						path.quadTo((float) nextControlPoint.getX(), (float) nextControlPoint.getY(), x, y);
 						lastControlPoint = nextControlPoint;
@@ -483,12 +483,12 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 
 					case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL: {
-						float x = ((SVGPathSegCurvetoQuadraticSmoothRel) seg).getX();
-						float y = ((SVGPathSegCurvetoQuadraticSmoothRel) seg).getY();
+						final float x = ((SVGPathSegCurvetoQuadraticSmoothRel) seg).getX();
+						final float y = ((SVGPathSegCurvetoQuadraticSmoothRel) seg).getY();
 						if (lastControlPoint == null) {
 							lastControlPoint = new Point2D.Float(lastX, lastY);
 						}
-						Point2D nextControlPoint = new Point2D.Float(2 * lastX - (float) lastControlPoint.getX(), 2 * lastY - (float) lastControlPoint.getY());
+						final Point2D nextControlPoint = new Point2D.Float(2 * lastX - (float) lastControlPoint.getX(), 2 * lastY - (float) lastControlPoint.getY());
 
 						path.quadTo((float) nextControlPoint.getX(), (float) nextControlPoint.getY(), lastX + x, lastY + y);
 						lastControlPoint = nextControlPoint;
@@ -500,20 +500,20 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 					case SVGPathSeg.PATHSEG_ARC_ABS: {
 
-						float x1 = lastX;
-						float y1 = lastY;
-						float x2 = ((SVGPathSegArcAbs) seg).getX();
-						float y2 = ((SVGPathSegArcAbs) seg).getY();
-						float rx = Math.abs(((SVGPathSegArcAbs) seg).getR1());
-						float ry = Math.abs(((SVGPathSegArcAbs) seg).getR2());
-						float angle = (float) Math.toRadians(((SVGPathSegArcAbs) seg).getAngle());
-						boolean fA = ((SVGPathSegArcAbs) seg).getLargeArcFlag();
-						boolean fS = ((SVGPathSegArcAbs) seg).getSweepFlag();
+						final float x1 = lastX;
+						final float y1 = lastY;
+						final float x2 = ((SVGPathSegArcAbs) seg).getX();
+						final float y2 = ((SVGPathSegArcAbs) seg).getY();
+						final float rx = Math.abs(((SVGPathSegArcAbs) seg).getR1());
+						final float ry = Math.abs(((SVGPathSegArcAbs) seg).getR2());
+						final float angle = (float) Math.toRadians(((SVGPathSegArcAbs) seg).getAngle());
+						final boolean fA = ((SVGPathSegArcAbs) seg).getLargeArcFlag();
+						final boolean fS = ((SVGPathSegArcAbs) seg).getSweepFlag();
 
 						if (rx == 0 || ry == 0) {
 							path.lineTo(x2, y2);
 						} else {
-							Shape arc = createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
+							final Shape arc = createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
 							path.append(arc, true);
 						}
 						lastX = x2;
@@ -524,20 +524,20 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					}
 					case SVGPathSeg.PATHSEG_ARC_REL: {
 
-						float x1 = lastX;
-						float y1 = lastY;
-						float x2 = lastX + ((SVGPathSegArcRel) seg).getX();
-						float y2 = lastY + ((SVGPathSegArcRel) seg).getY();
-						float rx = Math.abs(((SVGPathSegArcRel) seg).getR1());
-						float ry = Math.abs(((SVGPathSegArcRel) seg).getR2());
-						float angle = (float) Math.toRadians(((SVGPathSegArcRel) seg).getAngle());
-						boolean fA = ((SVGPathSegArcRel) seg).getLargeArcFlag();
-						boolean fS = ((SVGPathSegArcRel) seg).getSweepFlag();
+						final float x1 = lastX;
+						final float y1 = lastY;
+						final float x2 = lastX + ((SVGPathSegArcRel) seg).getX();
+						final float y2 = lastY + ((SVGPathSegArcRel) seg).getY();
+						final float rx = Math.abs(((SVGPathSegArcRel) seg).getR1());
+						final float ry = Math.abs(((SVGPathSegArcRel) seg).getR2());
+						final float angle = (float) Math.toRadians(((SVGPathSegArcRel) seg).getAngle());
+						final boolean fA = ((SVGPathSegArcRel) seg).getLargeArcFlag();
+						final boolean fS = ((SVGPathSegArcRel) seg).getSweepFlag();
 
 						if (rx == 0 || ry == 0) {
 							path.lineTo(x2, y2);
 						} else {
-							Shape arc = createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
+							final Shape arc = createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
 							path.append(arc, true);
 						}
 						lastX = x2;
@@ -555,17 +555,19 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		return path;
 	}
 
-	private Shape createArc(float x1, float y1, float x2, float y2, float rx, float ry, float angle, boolean fA, boolean fS) {
-		double cosAngle = Math.cos(angle);
-		double sinAngle = Math.sin(angle);
-		double x1prime = cosAngle * (x1 - x2) / 2 + sinAngle * (y1 - y2) / 2;
-		double y1prime = -sinAngle * (x1 - x2) / 2 + cosAngle * (y1 - y2) / 2;
+	private Shape createArc(final float x1, final float y1, final float x2, final float y2, final float rxArc, final float ryArc, final float angle, final boolean fA, final boolean fS) {
+		float rx = rxArc;
+		float ry = ryArc;
+		final double cosAngle = Math.cos(angle);
+		final double sinAngle = Math.sin(angle);
+		final double x1prime = cosAngle * (x1 - x2) / 2 + sinAngle * (y1 - y2) / 2;
+		final double y1prime = -sinAngle * (x1 - x2) / 2 + cosAngle * (y1 - y2) / 2;
 		double rx2 = rx * rx;
 		double ry2 = ry * ry;
-		double x1prime2 = x1prime * x1prime;
-		double y1prime2 = y1prime * y1prime;
+		final double x1prime2 = x1prime * x1prime;
+		final double y1prime2 = y1prime * y1prime;
 
-		double radiiCheck = x1prime2 / rx2 + y1prime2 / ry2;
+		final double radiiCheck = x1prime2 / rx2 + y1prime2 / ry2;
 		if (radiiCheck > 1) {
 			rx = (float) Math.sqrt(radiiCheck) * rx;
 			ry = (float) Math.sqrt(radiiCheck) * ry;
@@ -581,10 +583,10 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		if (fA == fS) {
 			squaredThing = -squaredThing;
 		}
-		double cXprime = squaredThing * rx * y1prime / ry;
-		double cYprime = squaredThing * -(ry * x1prime / rx);
-		double cx = cosAngle * cXprime - sinAngle * cYprime + (x1 + x2) / 2;
-		double cy = sinAngle * cXprime + cosAngle * cYprime + (y1 + y2) / 2;
+		final double cXprime = squaredThing * rx * y1prime / ry;
+		final double cYprime = squaredThing * -(ry * x1prime / rx);
+		final double cx = cosAngle * cXprime - sinAngle * cYprime + (x1 + x2) / 2;
+		final double cy = sinAngle * cXprime + cosAngle * cYprime + (y1 + y2) / 2;
 		double ux = 1;
 		double uy = 0;
 		double vx = (x1prime - cXprime) / rx;
@@ -608,7 +610,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 
 		double angleExtentDegrees = Math.toDegrees(angleExtent);
-		double numCircles = Math.abs(angleExtentDegrees / 360.0);
+		final double numCircles = Math.abs(angleExtentDegrees / 360.0);
 		if (numCircles > 1) {
 			if (angleExtentDegrees > 0) {
 				angleExtentDegrees -= 360 * Math.floor(numCircles);
@@ -629,10 +631,10 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		return arc;
 	}
 
-	private void constructPathSegList(String d) {
+	private void constructPathSegList(final String d) {
 		pathSegList = new SVGPathSegListImpl();
-		String commands = "ZzMmLlCcQqAaHhVvSsTt";
-		StringTokenizer st = new StringTokenizer(d, commands, true);
+		final String commands = "ZzMmLlCcQqAaHhVvSsTt";
+		final StringTokenizer st = new StringTokenizer(d, commands, true);
 		while (st.hasMoreTokens()) {
 			String command = st.nextToken();
 			while (!commands.contains(command) && st.hasMoreTokens()) {
@@ -643,7 +645,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					addCommand(command, null);
 				} else {
 					if (st.hasMoreTokens()) {
-						String parameters = st.nextToken();
+						final String parameters = st.nextToken();
 						addCommand(command, parameters);
 					}
 				}
@@ -651,11 +653,11 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addCommand(String command, String parameters) {
+	private void addCommand(final String command, final String parameters) {
 		switch (command) {
 			case "Z":
 			case "z":
-				SVGPathSeg seg = new SVGPathSegClosePathImpl();
+				final SVGPathSeg seg = new SVGPathSegClosePathImpl();
 				pathSegList.appendItem(seg);
 				break;
 
@@ -709,17 +711,17 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addMoveTo(String command, String parameters) {
-		boolean absolute = !command.equals("m");
+	private void addMoveTo(final String command, final String param) {
+		final boolean absolute = !command.equals("m");
 		boolean firstPoint = true;
-		parameters = trimCommas(parameters);
-		String delims = " ,-\n\t\r";
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
+		final String parameters = trimCommas(param);
+		final String delims = " ,-\n\t\r";
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 		while (st.hasMoreTokens()) {
 			String token = getNextToken(st, delims);
-			float x = Float.parseFloat(token);
+			final float x = Float.parseFloat(token);
 			token = getNextToken(st, delims);
-			float y = Float.parseFloat(token);
+			final float y = Float.parseFloat(token);
 			if (firstPoint) {
 				if (absolute) {
 					pathSegList.appendItem(new SVGPathSegMovetoAbsImpl(x, y));
@@ -737,20 +739,20 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addLineTo(String command, String parameters) {
-		boolean absolute = !command.equals("l");
-		String delims = " ,-\n\t\r";
-		parameters = trimCommas(parameters);
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
+	private void addLineTo(final String command, final String param) {
+		final boolean absolute = !command.equals("l");
+		final String delims = " ,-\n\t\r";
+		final String parameters = trimCommas(param);
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 		while (st.hasMoreTokens()) {
 
 			// get x coordinate
 			String token = getNextToken(st, delims);
-			float x = Float.parseFloat(token);
+			final float x = Float.parseFloat(token);
 
 			// get y coordinate
 			token = getNextToken(st, delims);
-			float y = Float.parseFloat(token);
+			final float y = Float.parseFloat(token);
 
 			// add new seg to path seg list
 			if (absolute) {
@@ -761,38 +763,35 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addCurveTo(String command, String parameters) {
-		boolean absolute = !command.equals("c");
-		String delims = " ,-\n\t\r";
-		parameters = trimCommas(parameters);
-
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
-
+	private void addCurveTo(final String command, final String param) {
+		final boolean absolute = !command.equals("c");
+		final String delims = " ,-\n\t\r";
+		final String parameters = trimCommas(param);
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 		while (st.hasMoreTokens()) {
-
 			// get x1 coordinate
 			String token = getNextToken(st, delims);
-			float x1 = Float.parseFloat(token);
+			final float x1 = Float.parseFloat(token);
 
 			// get y1 coordinate
 			token = getNextToken(st, delims);
-			float y1 = Float.parseFloat(token);
+			final float y1 = Float.parseFloat(token);
 
 			// get x2 coordinate
 			token = getNextToken(st, delims);
-			float x2 = Float.parseFloat(token);
+			final float x2 = Float.parseFloat(token);
 
 			// get y2 coordinate
 			token = getNextToken(st, delims);
-			float y2 = Float.parseFloat(token);
+			final float y2 = Float.parseFloat(token);
 
 			// get x coordinate
 			token = getNextToken(st, delims);
-			float x = Float.parseFloat(token);
+			final float x = Float.parseFloat(token);
 
 			// get y coordinate
 			token = getNextToken(st, delims);
-			float y = Float.parseFloat(token);
+			final float y = Float.parseFloat(token);
 
 			// add new seg to path seg list
 			if (absolute) {
@@ -803,29 +802,29 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addSmoothCurveTo(String command, String parameters) {
-		boolean absolute = !command.equals("s");
-		String delims = " ,-\n\t\r";
-		parameters = trimCommas(parameters);
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
+	private void addSmoothCurveTo(final String command, final String param) {
+		final boolean absolute = !command.equals("s");
+		final String delims = " ,-\n\t\r";
+		final String parameters = trimCommas(param);
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 
 		while (st.hasMoreTokens()) {
 
 			// get x2 coordinate
 			String token = getNextToken(st, delims);
-			float x2 = Float.parseFloat(token);
+			final float x2 = Float.parseFloat(token);
 
 			// get y2 coordinate
 			token = getNextToken(st, delims);
-			float y2 = Float.parseFloat(token);
+			final float y2 = Float.parseFloat(token);
 
 			// get x coordinate
 			token = getNextToken(st, delims);
-			float x = Float.parseFloat(token);
+			final float x = Float.parseFloat(token);
 
 			// get y coordinate
 			token = getNextToken(st, delims);
-			float y = Float.parseFloat(token);
+			final float y = Float.parseFloat(token);
 
 			// add new seg to path seg list
 			if (absolute) {
@@ -836,17 +835,17 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addHorizontalLineTo(String command, String parameters) {
-		boolean absolute = !command.equals("h");
-		String delims = " ,-\n\t\r";
-		parameters = trimCommas(parameters);
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
+	private void addHorizontalLineTo(final String command, final String param) {
+		final boolean absolute = !command.equals("h");
+		final String delims = " ,-\n\t\r";
+		final String parameters = trimCommas(param);
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 
 		while (st.hasMoreTokens()) {
 
 			// get x coordinate
-			String token = getNextToken(st, delims);
-			float x = Float.parseFloat(token);
+			final String token = getNextToken(st, delims);
+			final float x = Float.parseFloat(token);
 
 			// add new seg to path seg list
 			if (absolute) {
@@ -857,17 +856,17 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addVerticalLineTo(String command, String parameters) {
-		boolean absolute = !command.equals("v");
-		String delims = " ,-\n\t\r";
-		parameters = trimCommas(parameters);
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
+	private void addVerticalLineTo(final String command, final String param) {
+		final boolean absolute = !command.equals("v");
+		final String delims = " ,-\n\t\r";
+		final String parameters = trimCommas(param);
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 
 		while (st.hasMoreTokens()) {
 
 			// get y coordinate
-			String token = getNextToken(st, delims);
-			float y = Float.parseFloat(token);
+			final String token = getNextToken(st, delims);
+			final float y = Float.parseFloat(token);
 
 			// add new seg to path seg list
 			if (absolute) {
@@ -878,40 +877,40 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addEllipticArc(String command, String parameters) {
-		boolean absolute = !command.equals("a");
-		String delims = " ,-\n\t\r";
-		parameters = trimCommas(parameters);
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
+	private void addEllipticArc(final String command, final String param) {
+		final boolean absolute = !command.equals("a");
+		final String delims = " ,-\n\t\r";
+		final String parameters = trimCommas(param);
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 		while (st.hasMoreTokens()) {
 
 			// get rx coordinate
 			String token = getNextToken(st, delims);
-			float r1 = Float.parseFloat(token);
+			final float r1 = Float.parseFloat(token);
 
 			// get ry coordinate
 			token = getNextToken(st, delims);
-			float r2 = Float.parseFloat(token);
+			final float r2 = Float.parseFloat(token);
 
 			// get x-axis-rotation
 			token = getNextToken(st, delims);
-			float angle = Float.parseFloat(token);
+			final float angle = Float.parseFloat(token);
 
 			// get large-arc-flag
 			token = getNextToken(st, delims);
-			float largeArc = Float.parseFloat(token);
+			final float largeArc = Float.parseFloat(token);
 
 			// get sweep-flag
 			token = getNextToken(st, delims);
-			float sweepFlag = Float.parseFloat(token);
+			final float sweepFlag = Float.parseFloat(token);
 
 			// get x coordinate
 			token = getNextToken(st, delims);
-			float x = Float.parseFloat(token);
+			final float x = Float.parseFloat(token);
 
 			// get y coordinate
 			token = getNextToken(st, delims);
-			float y = Float.parseFloat(token);
+			final float y = Float.parseFloat(token);
 
 			// add new seg to path seg list
 			if (absolute) {
@@ -922,28 +921,28 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addQuadraticBezierCurveTo(String command, String parameters) {
-		boolean absolute = !command.equals("q");
-		String delims = " ,-\n\t\r";
-		parameters = trimCommas(parameters);
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
+	private void addQuadraticBezierCurveTo(final String command, final String param) {
+		final boolean absolute = !command.equals("q");
+		final String delims = " ,-\n\t\r";
+		final String parameters = trimCommas(param);
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 		while (st.hasMoreTokens()) {
 
 			// get x1 coordinate
 			String token = getNextToken(st, delims);
-			float x1 = Float.parseFloat(token);
+			final float x1 = Float.parseFloat(token);
 
 			// get y1 coordinate
 			token = getNextToken(st, delims);
-			float y1 = Float.parseFloat(token);
+			final float y1 = Float.parseFloat(token);
 
 			// get x coordinate
 			token = getNextToken(st, delims);
-			float x = Float.parseFloat(token);
+			final float x = Float.parseFloat(token);
 
 			// get y coordinate
 			token = getNextToken(st, delims);
-			float y = Float.parseFloat(token);
+			final float y = Float.parseFloat(token);
 
 			// add new seg to path seg list
 			if (absolute) {
@@ -954,22 +953,22 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private void addTruetypeQuadraticBezierCurveTo(String command, String parameters) {
-		boolean absolute = !command.equals("t");
-		String delims = " ,-\n\t\r";
-		parameters = trimCommas(parameters);
+	private void addTruetypeQuadraticBezierCurveTo(final String command, final String param) {
+		final boolean absolute = !command.equals("t");
+		final String delims = " ,-\n\t\r";
+		final String parameters = trimCommas(param);
 
-		StringTokenizer st = new StringTokenizer(parameters, delims, true);
+		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
 
 		while (st.hasMoreTokens()) {
 
 			// get x coordinate
 			String token = getNextToken(st, delims);
-			float x = Float.parseFloat(token);
+			final float x = Float.parseFloat(token);
 
 			// get y coordinate
 			token = getNextToken(st, delims);
-			float y = Float.parseFloat(token);
+			final float y = Float.parseFloat(token);
 
 			// add new seg to path seg list
 			if (absolute) {
@@ -980,7 +979,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		}
 	}
 
-	private String getNextToken(StringTokenizer st, String delims) {
+	private String getNextToken(final StringTokenizer st, final String delims) {
 
 		String token;
 		boolean neg = false;
@@ -993,7 +992,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 			if (delims.contains(token)) {
 				token = "0";
 			}
-		} catch (NoSuchElementException e) {
+		} catch (final NoSuchElementException e) {
 			token = "0";
 		}
 
@@ -1007,14 +1006,14 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 				String exponent = st.nextToken(); // get the '-'
 				exponent += st.nextToken(); // get the exponent digits
 				token += exponent;
-			} catch (NoSuchElementException e) {
+			} catch (final NoSuchElementException e) {
 				token += '0';
 			}
 		}
 		return token;
 	}
 
-	private String trimCommas(String params) {
+	private String trimCommas(final String params) {
 		String result = params;
 		while (result.startsWith(",")) {
 			result = result.substring(1);

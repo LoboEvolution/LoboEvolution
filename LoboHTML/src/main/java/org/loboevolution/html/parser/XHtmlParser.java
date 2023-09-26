@@ -94,7 +94,7 @@ public class XHtmlParser {
 
 	private boolean needRoot = false;
 
-	private Map<String, String> namespaces = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+	private final Map<String, String> namespaces = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
 	/**
 	 * Constructs a XHtmlParser.
@@ -102,7 +102,7 @@ public class XHtmlParser {
 	 * @param ucontext The user agent context.
 	 * @param document A W3C Document instance.
 	 */
-	public XHtmlParser(UserAgentContext ucontext, Document document) {
+	public XHtmlParser(final UserAgentContext ucontext, final Document document) {
 		this.ucontext = ucontext;
 		this.document = document;
 	}
@@ -114,7 +114,7 @@ public class XHtmlParser {
 	 * @param document     An W3C Document instance.
 	 * @param needRoot a boolean.
 	 */
-	public XHtmlParser(UserAgentContext ucontext, Document document, final boolean needRoot) {
+	public XHtmlParser(final UserAgentContext ucontext, final Document document, final boolean needRoot) {
 		this.ucontext = ucontext;
 		this.document = document;
 		this.needRoot = needRoot;
@@ -126,7 +126,7 @@ public class XHtmlParser {
 	 * @param elementName a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public static boolean isDecodeEntities(String elementName) {
+	public static boolean isDecodeEntities(final String elementName) {
 		final ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
 		return einfo == null || einfo.isDecodeEntities();
 	}
@@ -219,11 +219,11 @@ public class XHtmlParser {
 			final String text = textSb.toString();
 			if (Strings.isNotBlank(text.trim())) {
 
-				StringBuilder ent = new StringBuilder();
-				StringBuilder txt = new StringBuilder();
-				StringBuilder cdata = new StringBuilder();
-				AtomicBoolean isEnt = new AtomicBoolean(false);
-				AtomicBoolean isCda = new AtomicBoolean(false);
+				final StringBuilder ent = new StringBuilder();
+				final StringBuilder txt = new StringBuilder();
+				final StringBuilder cdata = new StringBuilder();
+				final AtomicBoolean isEnt = new AtomicBoolean(false);
+				final AtomicBoolean isCda = new AtomicBoolean(false);
 
 				try {
 					text.chars()
@@ -298,14 +298,14 @@ public class XHtmlParser {
 							safeAppendChild(parent, doc.createComment(decText.toString()));
 							return TOKEN_COMMENT;
 						case "!DOCTYPE":
-							String doctypeStr = this.parseEndOfTag(reader);
+							final String doctypeStr = this.parseEndOfTag(reader);
 							String qName = null;
 							String publicId = null;
 							String systemId = null;
 							if (Strings.containsIgnoreCase(doctypeStr, "public")) {
-								String[] publics = Strings.splitIgnoreCase(doctypeStr, "public");
-								String[] result = publics[1].replace("[", "").split("\"");
-								List<String> list = Arrays.stream(result)
+								final String[] publics = Strings.splitIgnoreCase(doctypeStr, "public");
+								final String[] result = publics[1].replace("[", "").split("\"");
+								final List<String> list = Arrays.stream(result)
 										.filter(s -> Strings.isNotBlank(s) && s.length() > 1)
 										.collect(Collectors.toList());
 
@@ -323,7 +323,7 @@ public class XHtmlParser {
 							}
 
 							if (qName == null && Strings.containsIgnoreCase(doctypeStr, "svg")) {
-								String[] publics = Strings.splitIgnoreCase(doctypeStr, "svg");
+								final String[] publics = Strings.splitIgnoreCase(doctypeStr, "svg");
 								qName = publics[0];
 								this.document.setXml(true);
 							}
@@ -332,7 +332,7 @@ public class XHtmlParser {
 								qName = "html";
 							}
 
-							DocumentType docType = new DocumentTypeImpl(qName, publicId, systemId);
+							final DocumentType docType = new DocumentTypeImpl(qName, publicId, systemId);
 							docType.setOwnerDocument(htmlDoc);
 							htmlDoc.setDoctype(docType);
 							needRoot = false;
@@ -341,7 +341,7 @@ public class XHtmlParser {
 							String doctypeStr2 = this.parseEndOfTag(reader);
 							doctypeStr2 = doctypeStr2.substring(0, doctypeStr2.length() - 1);
 							String[] sp = doctypeStr2.split("\"");
-							EntityReferenceImpl reference;
+							final EntityReferenceImpl reference;
 
 							if (sp.length == 2) {
 								reference = new EntityReferenceImpl(null, null, sp[0].trim(), sp[1], null);
@@ -353,9 +353,9 @@ public class XHtmlParser {
 							if (sp.length > 2) {
 								sp = doctypeStr2.split("[\"\\s+]");
 
-								AtomicInteger ai = new AtomicInteger(0);
-								AtomicBoolean isPublic = new AtomicBoolean(false);
-								AtomicBoolean isNotation = new AtomicBoolean(false);
+								final AtomicInteger ai = new AtomicInteger(0);
+								final AtomicBoolean isPublic = new AtomicBoolean(false);
+								final AtomicBoolean isNotation = new AtomicBoolean(false);
 
 								Arrays.stream(sp).forEach(s -> {
 
@@ -387,11 +387,11 @@ public class XHtmlParser {
 							return TOKEN_BAD;
 						case "!NOTATION":
 							final String notationStr = this.parseEndOfTag(reader);
-							NotationImpl not = new NotationImpl();
+							final NotationImpl not = new NotationImpl();
 
 							if (notationStr.contains("PUBLIC")) {
-								String[] split = notationStr.split("PUBLIC");
-								AtomicInteger ai = new AtomicInteger(0);
+								final String[] split = notationStr.split("PUBLIC");
+								final AtomicInteger ai = new AtomicInteger(0);
 								Arrays.stream(split).forEach(s -> {
 									if(ai.get() == 0) {
 										not.setNodeName(s.trim());
@@ -408,8 +408,8 @@ public class XHtmlParser {
 							}
 
 							if (notationStr.contains("SYSTEM")) {
-								String[] split = notationStr.split("SYSTEM");
-								AtomicInteger ai = new AtomicInteger(0);
+								final String[] split = notationStr.split("SYSTEM");
+								final AtomicInteger ai = new AtomicInteger(0);
 								Arrays.stream(split).forEach(s -> {
 									if(ai.get() == 0) {
 										not.setNodeName(s.trim());
@@ -442,7 +442,7 @@ public class XHtmlParser {
 					if (!tag.equals("xml")) {
 						String processData = data.toString();
 						processData = processData.substring(0, processData.length() - 1);
-						ProcessingInstruction pi = doc.createProcessingInstruction(tag, processData);
+						final ProcessingInstruction pi = doc.createProcessingInstruction(tag, processData);
 						parent.appendChild(pi);
 						return TOKEN_FULL_ELEMENT;
 					} else {
@@ -450,7 +450,7 @@ public class XHtmlParser {
 						return TOKEN_TEXT;
 					}
 				} else {
-					List<AttributeInfo> attributeInfo = new ArrayList<>();
+					final List<AttributeInfo> attributeInfo = new ArrayList<>();
 					ElementImpl element = null;
 					try {
 						if (!this.justReadTagEnd) {
@@ -459,18 +459,18 @@ public class XHtmlParser {
 							}
 						}
 						if (this.document.isXml()) {
-							AtomicReference<String> atomicReference = new AtomicReference<>(normalTag);
-							AtomicReference<String> reference = new AtomicReference<>();
-							String elm = atomicReference.get();
+							final AtomicReference<String> atomicReference = new AtomicReference<>(normalTag);
+							final AtomicReference<String> reference = new AtomicReference<>();
+							final String elm = atomicReference.get();
 
 							if (attributeInfo.isEmpty()) {
 								reference.set(getNamespaces().get(elm.contains(":") ? elm.split(":")[0] : ""));
 							}
 
 							attributeInfo.forEach(info -> {
-								String attribute = info.getAttributeName();
-								int index = attribute.contains("xmlns") ? 1 : 0;
-								String attributeSplit = attribute.contains(":") ? attribute.split(":")[index] : attribute;
+								final String attribute = info.getAttributeName();
+								final int index = attribute.contains("xmlns") ? 1 : 0;
+								final String attributeSplit = attribute.contains(":") ? attribute.split(":")[index] : attribute;
 
 								if (attribute.equals("xmlns") ||
 										(attributeSplit.equalsIgnoreCase((elm.contains(":") ? elm.split(":")[0] : elm).toLowerCase()))) {
@@ -492,7 +492,7 @@ public class XHtmlParser {
 						element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 
 						safeAppendChild(parent, element);
-						AtomicReference<ElementImpl> atomicReference = new AtomicReference<>(element);
+						final AtomicReference<ElementImpl> atomicReference = new AtomicReference<>(element);
 
 						attributeInfo.forEach(info -> {
 							setAttributeNode(atomicReference.get(), info.getAttributeName(), info.getAttributeValue());
@@ -527,7 +527,7 @@ public class XHtmlParser {
 								try {
 									for (;;) {
 										try {
-											int token;
+											final int token;
 											if ((einfo != null) && einfo.isNoScriptElement()) {
 												final UserAgentContext ucontext = this.ucontext;
 												if ((ucontext == null) || ucontext.isScriptingEnabled()) {
@@ -657,8 +657,8 @@ public class XHtmlParser {
 	 * Assumes that the content is completely made up of text, and parses until an
 	 * ending tag is found.
 	 */
-	private int parseForEndTag(Node parent, final LineNumberReader reader, final String tagName,
-							   final boolean addTextNode, final boolean decodeEntities) throws IOException {
+	private int parseForEndTag(final Node parent, final LineNumberReader reader, final String tagName,
+                               final boolean addTextNode, final boolean decodeEntities) throws IOException {
 		final Document doc = this.document;
 		int intCh;
 		StringBuilder sb = new StringBuilder();
@@ -736,7 +736,7 @@ public class XHtmlParser {
 		return XHtmlParser.TOKEN_EOD;
 	}
 
-	private static void readCData(LineNumberReader reader, StringBuilder sb) throws IOException {
+	private static void readCData(final LineNumberReader reader, final StringBuilder sb) throws IOException {
 
 		int next = reader.read();
 
@@ -764,13 +764,13 @@ public class XHtmlParser {
 
 	// Tries to read at most n characters.
 	private static String readN(final LineNumberReader reader, final int n) {
-		char[] chars = new char[n];
+		final char[] chars = new char[n];
 		int i = 0;
 		while (i < n) {
-			int ich;
+			final int ich;
 			try {
 				ich = reader.read();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				break;
 			}
 			if (ich >= 0) {
@@ -844,7 +844,7 @@ public class XHtmlParser {
 					while ((chInt = reader.read()) == '<') {
 						ltText.append('<');
 					}
-					String text = ltText.toString();
+					final String text = ltText.toString();
 					final Node textNode = text.trim().startsWith("&") ? this.document.createEntityReference(text) : this.document.createTextNode(text);
 					try {
 						parent.appendChild(textNode);
@@ -871,7 +871,7 @@ public class XHtmlParser {
 						}
 						ltText.append(ch);
 					}
-					String text = ltText.toString();
+					final String text = ltText.toString();
 					final Node textNode = text.trim().startsWith("&") ? this.document.createEntityReference(text) : this.document.createTextNode(text);
 					try {
 						parent.appendChild(textNode);
@@ -997,7 +997,7 @@ public class XHtmlParser {
 		if (this.justReadTagEnd) {
 			return "";
 		}
-		StringBuilder result = new StringBuilder();
+		final StringBuilder result = new StringBuilder();
 		boolean readSomething = false;
 		for (;;) {
 			final int chInt = reader.read();
@@ -1058,7 +1058,7 @@ public class XHtmlParser {
 		return pidata;
 	}
 
-	private boolean readAttribute(final LineNumberReader reader, List<AttributeInfo> attributes)
+	private boolean readAttribute(final LineNumberReader reader, final List<AttributeInfo> attributes)
 			throws IOException {
 		if (this.justReadTagEnd) {
 			return false;
@@ -1257,7 +1257,7 @@ public class XHtmlParser {
 	}
 
 	private void ensureBodyAppendChild(final Node parent, final Node child) {
-		Node newParent = parent;
+		final Node newParent = parent;
 		if (needRoot) {
 			final String nodeNameTU = child.getNodeName().toUpperCase();
 			if ("BODY".equals(nodeNameTU)) {
@@ -1351,12 +1351,12 @@ public class XHtmlParser {
 		return c;
 	}
 
-	private void setAttributeNode(ElementImpl element, String attributeName, String attributeValue) {
+	private void setAttributeNode(final ElementImpl element, final String attributeName, final String attributeValue) {
 
 		if (this.document.isXml()) {
 			String namespaceURI = null;
 
-			String key = attributeName.contains(":") ?
+			final String key = attributeName.contains(":") ?
 					attributeName.split(":")[attributeName.contains("xmlns") ? 1 : 0] :
 					attributeName;
 

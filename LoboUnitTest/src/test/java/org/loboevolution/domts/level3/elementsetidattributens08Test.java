@@ -48,9 +48,9 @@ import static org.junit.Assert.assertTrue;
 public class elementsetidattributens08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element employeeElem;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element employeeElem;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         employeeElem = (Element) elemList.item(1);
@@ -59,7 +59,7 @@ public class elementsetidattributens08Test extends LoboUnitTest {
             boolean success = false;
             try {
                 employeeElem.setIdAttributeNS("http://www.usa.com", "usa", true);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

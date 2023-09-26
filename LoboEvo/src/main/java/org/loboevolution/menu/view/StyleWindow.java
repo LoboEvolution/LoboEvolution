@@ -56,42 +56,42 @@ public class StyleWindow extends JFrame {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public StyleWindow(BrowserFrame frame) {
+	public StyleWindow(final BrowserFrame frame) {
 		createAndShowGUI(frame);
 	}
 
-	private void createAndShowGUI(BrowserFrame frame) {
-		JScrollPane spViewallItems = new JScrollPane();
+	private void createAndShowGUI(final BrowserFrame frame) {
+		final JScrollPane spViewallItems = new JScrollPane();
 		spViewallItems.setBorder(null);
 		spViewallItems.setViewportView(getStyleBox(frame));
 		add(spViewallItems);
 	}
 
-	private Component getStyleBox(BrowserFrame frame) {
+	private Component getStyleBox(final BrowserFrame frame) {
 		final LoboPanel styleBox = new LoboPanel("Choice Style");
 		styleBox.setLayout(new BoxLayout(styleBox, BoxLayout.Y_AXIS));
-		List<String> list = createListModel(frame) ;
+		final List<String> list = createListModel(frame) ;
 		list.forEach( name -> styleBox.add(getCheckBox(frame, name)));
 		return styleBox;
 	}
 
-	private Component getCheckBox(BrowserFrame frame, String name) {
-		LoboCheckBox checkbox = new LoboCheckBox(name);
+	private Component getCheckBox(final BrowserFrame frame, final String name) {
+		final LoboCheckBox checkbox = new LoboCheckBox(name);
 		checkbox.setActionCommand(name);
 		checkbox.setToolTipText("Open current site with style " + name);
-		ChangeListener changeListener = changeEvent -> {
-			AbstractButton abstractButton = (AbstractButton) changeEvent.getSource();
-			ButtonModel buttonModel = abstractButton.getModel();
+		final ChangeListener changeListener = changeEvent -> {
+			final AbstractButton abstractButton = (AbstractButton) changeEvent.getSource();
+			final ButtonModel buttonModel = abstractButton.getModel();
 			if (buttonModel.isPressed() && buttonModel.isSelected()) {
-				String fullURL = frame.getToolbar().getAddressBar().getText();
-				StyleStore style = new StyleStore();
+				final String fullURL = frame.getToolbar().getAddressBar().getText();
+				final StyleStore style = new StyleStore();
 				style.selectStyle(buttonModel.getActionCommand());
 
 				final IBrowserPanel panel = frame.getPanel();
 				final ITabbedPane tabbedPane = panel.getTabbedPane();
 				tabbedPane.setComponentPopupMenu(panel);
 				final int indexPanel = tabbedPane.getSelectedIndex();
-				HtmlPanel htmlPanel = NavigatorFrame.createHtmlPanel(panel, fullURL);
+				final HtmlPanel htmlPanel = NavigatorFrame.createHtmlPanel(panel, fullURL);
 				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 				final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 				tabbedPane.remove(indexPanel);
@@ -107,11 +107,9 @@ public class StyleWindow extends JFrame {
 		return checkbox;
 	}
 
-	private List<String> createListModel(BrowserFrame frame) {
-		List<String> listModel = new ArrayList<>();
-		StyleStore style = new StyleStore();
-		String url = frame.getToolbar().getAddressBar().getText();
-		listModel.addAll(style.getStylesAll(url));
-		return listModel;
+	private List<String> createListModel(final BrowserFrame frame) {
+        final StyleStore style = new StyleStore();
+		final String url = frame.getToolbar().getAddressBar().getText();
+        return new ArrayList<>(style.getStylesAll(url));
 	}
 }

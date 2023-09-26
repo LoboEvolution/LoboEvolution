@@ -49,13 +49,13 @@ import static org.junit.Assert.assertFalse;
 public class nodeisequalnode27Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entitiesMap;
-        NamedNodeMap notationsMap;
-        Node alpha;
-        Notation notation1;
-        boolean isEqual;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entitiesMap;
+        final NamedNodeMap notationsMap;
+        final Node alpha;
+        final Notation notation1;
+        final boolean isEqual;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();

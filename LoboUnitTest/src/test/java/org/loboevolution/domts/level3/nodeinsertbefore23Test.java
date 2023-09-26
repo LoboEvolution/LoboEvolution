@@ -50,14 +50,14 @@ import static org.junit.Assert.assertTrue;
 public class nodeinsertbefore23Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document doc2;
-        Element element;
-        Element refNode;
-        Text newNode;
+        final Document doc;
+        final Document doc2;
+        final Element element;
+        final Element refNode;
+        final Text newNode;
         HTMLCollection childList;
-        Node appendedChild;
-        Node inserted;
+        final Node appendedChild;
+        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         element = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:body");
@@ -69,7 +69,7 @@ public class nodeinsertbefore23Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = element.insertBefore(newNode, refNode);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }
             assertTrue("throw_WRONG_DOCUMENT_ERR", success);

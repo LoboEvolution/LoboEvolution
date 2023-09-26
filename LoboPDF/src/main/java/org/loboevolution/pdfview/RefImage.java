@@ -34,9 +34,6 @@ import java.awt.image.BufferedImage;
  * someone holds a reference to this image, and createGraphics() and
  * getGraphics() can be called multiple times safely, and will always return
  * the same graphics object.
- *
-  *
-  *
  */
 public class RefImage extends BufferedImage {
 
@@ -50,7 +47,7 @@ public class RefImage extends BufferedImage {
      * @param height a int.
      * @param type a int.
      */
-    public RefImage(int width, int height, int type) {
+    public RefImage(final int width, final int height, final int type) {
         super(width, height, type);
     }
 

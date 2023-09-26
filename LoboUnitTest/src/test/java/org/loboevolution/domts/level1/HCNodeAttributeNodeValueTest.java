@@ -58,11 +58,11 @@ public class HCNodeAttributeNodeValueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddr;
-        Attr addrAttr;
-        String attrValue;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddr;
+        final Attr addrAttr;
+        final String attrValue;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddr = (Element) elementList.item(0);

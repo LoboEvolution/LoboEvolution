@@ -58,8 +58,8 @@ public class getElementsByTagNameNS06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
+        final Document doc;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("http://www.nomatch.com", "address");
         assertEquals("matchSize", 0, elementList.getLength());

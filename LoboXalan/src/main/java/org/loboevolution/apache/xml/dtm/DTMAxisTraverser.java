@@ -59,7 +59,7 @@ public abstract class DTMAxisTraverser {
    *     from.
    * @return the first node in the traversal.
    */
-  public int first(int context) {
+  public int first(final int context) {
     return next(context, context);
   }
 
@@ -75,7 +75,7 @@ public abstract class DTMAxisTraverser {
    * @param extendedTypeID The extended type ID that must match.
    * @return the first node in the traversal.
    */
-  public int first(int context, int extendedTypeID) {
+  public int first(final int context, final int extendedTypeID) {
     return next(context, context, extendedTypeID);
   }
 
@@ -91,7 +91,7 @@ public abstract class DTMAxisTraverser {
    * @return the next node in the iteration, or DTM.NULL.
    * @see #first(int)
    */
-  public abstract int next(int context, int current);
+  public abstract int next(int context, final int current);
 
   /**
    * Traverse to the next node after the current node that is matched by the extended type ID.
@@ -106,5 +106,5 @@ public abstract class DTMAxisTraverser {
    * @return the next node in the iteration, or DTM.NULL.
    * @see #first(int,int)
    */
-  public abstract int next(int context, int current, int extendedTypeID);
+  public abstract int next(int context, final int current, final int extendedTypeID);
 }

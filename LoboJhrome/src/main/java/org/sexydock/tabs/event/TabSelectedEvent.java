@@ -35,7 +35,7 @@ public class TabSelectedEvent extends TabbedPaneEvent {
     public final int prevSelectedIndex;
     public final Tab newSelected;
     public final int newSelectedIndex;
-    public TabSelectedEvent(JTabbedPane tabbedPane, long timestamp, Tab prevSelected, int prevSelectedIndex, Tab newSelected, int newSelectedIndex) {
+    public TabSelectedEvent(final JTabbedPane tabbedPane, final long timestamp, final Tab prevSelected, final int prevSelectedIndex, final Tab newSelected, final int newSelectedIndex) {
         super(tabbedPane, timestamp);
         this.prevSelected = prevSelected;
         this.prevSelectedIndex = prevSelectedIndex;

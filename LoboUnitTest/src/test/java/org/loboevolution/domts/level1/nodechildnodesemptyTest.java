@@ -58,13 +58,13 @@ public class nodechildnodesemptyTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node secondCNode;
-        Node textNode;
-        NodeList childNodesList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node secondCNode;
+        final Node textNode;
+        final NodeList childNodesList;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);

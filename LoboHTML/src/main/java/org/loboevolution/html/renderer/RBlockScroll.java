@@ -53,7 +53,7 @@ public class RBlockScroll {
      *
      * @param rBlock a {@link org.loboevolution.html.renderer.RBlock} object.
      */
-    public RBlockScroll(RBlock rBlock) {
+    public RBlockScroll(final RBlock rBlock) {
         this.rBlock = rBlock;
     }
 
@@ -62,7 +62,7 @@ public class RBlockScroll {
      *
      * @param g a {@link java.awt.Graphics} object.
      */
-    public void paintSroll(Graphics g) {
+    public void paintSroll(final Graphics g) {
         final JScrollBar hsb = getHScrollBar();
         final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
         if (hsb != null) {
@@ -92,7 +92,7 @@ public class RBlockScroll {
         if (sb == null) {
             sb = new JScrollBar(JScrollBar.VERTICAL);
             sb.addAdjustmentListener(new LocalAdjustmentListener(JScrollBar.VERTICAL));
-            BoundedRangeModel model = sb.getModel();
+            final BoundedRangeModel model = sb.getModel();
             model.addChangeListener(new BoundedChangeListener(JScrollBar.VERTICAL));
             this.vScrollBar = sb;
         }
@@ -107,7 +107,7 @@ public class RBlockScroll {
         if (sb == null) {
             sb = new JScrollBar(JScrollBar.HORIZONTAL);
             sb.addAdjustmentListener(new LocalAdjustmentListener(JScrollBar.HORIZONTAL));
-            BoundedRangeModel model = sb.getModel();
+            final BoundedRangeModel model = sb.getModel();
             model.addChangeListener(new BoundedChangeListener(JScrollBar.HORIZONTAL));
             this.hScrollBar = sb;
         }
@@ -132,7 +132,7 @@ public class RBlockScroll {
      * <p>resetScrollBars.</p>
      * Changes scroll bar state to match viewport origin.
      */
-    protected void resetScrollBars(RenderState renderState) {
+    protected void resetScrollBars(final RenderState renderState) {
         this.resettingScrollBars = true;
         try {
             final RBlockViewport bodyLayout = rBlock.bodyLayout;
@@ -165,7 +165,7 @@ public class RBlockScroll {
     /**
      * <p>updateWidgetBounds.</p>
      */
-    protected void updateWidgetBounds(int guiX, int guiY) {
+    protected void updateWidgetBounds(final int guiX, final int guiY) {
         final boolean hscroll = rBlock.hasHScrollBar;
         final boolean vscroll = rBlock.hasVScrollBar;
         if (hscroll || vscroll) {
@@ -201,7 +201,7 @@ public class RBlockScroll {
      * @param offset a {@link java.lang.Integer} object.
      * @return a a {@link java.lang.Boolean} object.
      */
-    public boolean scrollBy(int orientation, double offset) {
+    public boolean scrollBy(final int orientation, final double offset) {
         switch (orientation) {
             case JScrollBar.HORIZONTAL:
                 return scrollHorizontalTo(- offset);
@@ -213,7 +213,7 @@ public class RBlockScroll {
         return false;
     }
 
-    private void scrollToSBValue(int orientation, double value) {
+    private void scrollToSBValue(final int orientation, final double value) {
         final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
         switch (orientation) {
             case JScrollBar.HORIZONTAL:
@@ -227,7 +227,7 @@ public class RBlockScroll {
         }
     }
 
-    private boolean scrollVerticalTo(double newY) {
+    private boolean scrollVerticalTo(final double newY) {
         final RBlockViewport bodyLayout = rBlock.bodyLayout;
         if (bodyLayout != null) {
             final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
@@ -256,7 +256,7 @@ public class RBlockScroll {
         return false;
     }
 
-    private boolean scrollHorizontalTo(double newX) {
+    private boolean scrollHorizontalTo(final double newX) {
         final RBlockViewport bodyLayout = rBlock.bodyLayout;
         if (bodyLayout != null) {
             final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
@@ -280,18 +280,18 @@ public class RBlockScroll {
     }
 
 
-    private class BoundedChangeListener implements ChangeListener {
+    private final class BoundedChangeListener implements ChangeListener {
 
         private final int orientation;
 
-        BoundedChangeListener(int orientation) {
+        BoundedChangeListener(final int orientation) {
             this.orientation = orientation;
         }
 
-        public void stateChanged(ChangeEvent changeEvent) {
-            Object source = changeEvent.getSource();
+        public void stateChanged(final ChangeEvent changeEvent) {
+            final Object source = changeEvent.getSource();
             if (source instanceof BoundedRangeModel) {
-                BoundedRangeModel aModel = (BoundedRangeModel) source;
+                final BoundedRangeModel aModel = (BoundedRangeModel) source;
                 if (!aModel.getValueIsAdjusting()) {
                     if (orientation == JScrollBar.HORIZONTAL) rBlock.rendererContext.setScrollx(aModel.getValue());
                     if (orientation == JScrollBar.VERTICAL) rBlock.rendererContext.setScrolly(aModel.getValue());
@@ -300,15 +300,15 @@ public class RBlockScroll {
         }
     }
 
-    private class LocalAdjustmentListener implements AdjustmentListener {
+    private final class LocalAdjustmentListener implements AdjustmentListener {
         private final int orientation;
 
-        public LocalAdjustmentListener(int orientation) {
+        public LocalAdjustmentListener(final int orientation) {
             this.orientation = orientation;
         }
 
         @Override
-        public void adjustmentValueChanged(AdjustmentEvent evt) {
+        public void adjustmentValueChanged(final AdjustmentEvent evt) {
             if (evt.getValueIsAdjusting()) {
                 return;
             }

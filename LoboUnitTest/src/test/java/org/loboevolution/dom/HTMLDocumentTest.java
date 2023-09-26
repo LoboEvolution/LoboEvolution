@@ -523,7 +523,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         }
     }
 
-    private void doTestQuerySelectorAll_badSelector(final String selector, String msg) {
+    private void doTestQuerySelectorAll_badSelector(final String selector, final String msg) {
         final String html = "<html><body><script>\n"
                 + "try {\n"
                 + "  document.querySelectorAll('" + selector + "');\n"
@@ -546,7 +546,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         }
     }
 
-    private void doTestQuerySelector_badSelector(final String selector, String msg) {
+    private void doTestQuerySelector_badSelector(final String selector, final String msg) {
         final String html = "<html><body><script>\n"
                 + "try {\n"
                 + "  document.querySelector('" + selector + "');\n"

@@ -50,7 +50,7 @@ public class FreetextAnnotation extends StampAnnotation {
 	 * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public FreetextAnnotation(PDFObject annotObject) throws IOException {
+	public FreetextAnnotation(final PDFObject annotObject) throws IOException {
 		super(annotObject, ANNOTATION_TYPE.FREETEXT);
 		
 	}

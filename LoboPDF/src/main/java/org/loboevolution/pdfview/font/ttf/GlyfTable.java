@@ -51,13 +51,13 @@ public class GlyfTable extends TrueTypeTable {
      *
      * @param ttf a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
-    protected GlyfTable(TrueTypeFont ttf) {
+    protected GlyfTable(final TrueTypeFont ttf) {
         super (TrueTypeTable.GLYF_TABLE);
     
         this.loca = (LocaTable) ttf.getTable("loca");
         
-        MaxpTable maxp = (MaxpTable) ttf.getTable("maxp");
-        int numGlyphs = maxp.getNumGlyphs();
+        final MaxpTable maxp = (MaxpTable) ttf.getTable("maxp");
+        final int numGlyphs = maxp.getNumGlyphs();
         
         this.glyphs = new Object[numGlyphs]; 
     }
@@ -68,14 +68,14 @@ public class GlyfTable extends TrueTypeTable {
      * @param index a int.
      * @return a {@link org.loboevolution.pdfview.font.ttf.Glyf} object.
      */
-    public Glyf getGlyph(int index) {
-        Object o = this.glyphs[index];
+    public Glyf getGlyph(final int index) {
+        final Object o = this.glyphs[index];
         if (o == null) {
             return null;
         }
         
         if (o instanceof ByteBuffer) {
-            Glyf g = Glyf.getGlyf((ByteBuffer) o);
+            final Glyf g = Glyf.getGlyf((ByteBuffer) o);
             this.glyphs[index] = g;
             
             return g;
@@ -91,12 +91,12 @@ public class GlyfTable extends TrueTypeTable {
 	 */
     @Override
 	public ByteBuffer getData() {
-        int size = getLength();
+        final int size = getLength();
         
-        ByteBuffer buf = ByteBuffer.allocate(size);
+        final ByteBuffer buf = ByteBuffer.allocate(size);
         
         // write the offsets
-        for (Object o : this.glyphs) {
+        for (final Object o : this.glyphs) {
             if (o == null) {
                 continue;
             }
@@ -125,10 +125,10 @@ public class GlyfTable extends TrueTypeTable {
 	 * Initialize this structure from a ByteBuffer
 	 */
     @Override
-	public void setData(ByteBuffer data) {
+	public void setData(final ByteBuffer data) {
         for (int i = 0; i < this.glyphs.length; i++) {
-            int location = this.loca.getOffset(i);
-            int length = this.loca.getSize(i);
+            final int location = this.loca.getOffset(i);
+            final int length = this.loca.getSize(i);
             
             if (length == 0) {
                 // undefined glyph
@@ -136,7 +136,7 @@ public class GlyfTable extends TrueTypeTable {
             }
             
             data.position(location);
-            ByteBuffer glyfData = data.slice();
+            final ByteBuffer glyfData = data.slice();
             glyfData.limit(length);
             
             this.glyphs[i] = glyfData;
@@ -152,7 +152,7 @@ public class GlyfTable extends TrueTypeTable {
 	public int getLength() {
         int length = 0;
 
-        for (Object o : this.glyphs) {
+        for (final Object o : this.glyphs) {
             if (o == null) {
                 continue;
             }
@@ -174,8 +174,8 @@ public class GlyfTable extends TrueTypeTable {
 	 */
     @Override
 	public String toString() {
-        StringBuilder buf = new StringBuilder();
-        String indent = "    ";
+        final StringBuilder buf = new StringBuilder();
+        final String indent = "    ";
      
         buf.append(indent).append("Glyf Table: (").append(this.glyphs.length).append(" glyphs)\n");
         buf.append(indent).append("  Glyf 0: ").append(getGlyph(0));

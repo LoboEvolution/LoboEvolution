@@ -52,8 +52,8 @@ public class hc_nodegetownerdocumentnullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document ownerDocument;
+        final Document doc;
+        final Document ownerDocument;
         doc = sampleXmlFile("hc_staff.xml");
         ownerDocument = doc.getOwnerDocument();
         assertNull("nodeGetOwnerDocumentNullAssert1", ownerDocument);

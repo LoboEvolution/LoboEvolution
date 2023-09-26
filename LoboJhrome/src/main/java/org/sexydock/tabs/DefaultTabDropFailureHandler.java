@@ -35,18 +35,18 @@ import java.awt.dnd.DragSourceDropEvent;
 public class DefaultTabDropFailureHandler implements ITabDropFailureHandler {
     final ITabbedPaneWindowFactory windowFactory;
 
-    public DefaultTabDropFailureHandler(ITabbedPaneWindowFactory windowFactory) {
+    public DefaultTabDropFailureHandler(final ITabbedPaneWindowFactory windowFactory) {
         this.windowFactory = windowFactory;
     }
 
     @Override
-    public void onDropFailure(DragSourceDropEvent dsde, Tab draggedTab, Dimension dragSourceWindowSize) {
-        ITabbedPaneWindow newJhromeWindow = windowFactory.createWindow();
-        Window newWindow = newJhromeWindow.getWindow();
-        JTabbedPane tabbedPane = newJhromeWindow.getTabbedPane();
+    public void onDropFailure(final DragSourceDropEvent dsde, final Tab draggedTab, final Dimension dragSourceWindowSize) {
+        final ITabbedPaneWindow newJhromeWindow = windowFactory.createWindow();
+        final Window newWindow = newJhromeWindow.getWindow();
+        final JTabbedPane tabbedPane = newJhromeWindow.getTabbedPane();
 
         if (tabbedPane.getUI() instanceof JhromeTabbedPaneUI) {
-            JhromeTabbedPaneUI ui = (JhromeTabbedPaneUI) tabbedPane.getUI();
+            final JhromeTabbedPaneUI ui = (JhromeTabbedPaneUI) tabbedPane.getUI();
             ui.addTab(tabbedPane.getTabCount(), draggedTab, false);
             ui.finishAnimation();
         } else {
@@ -70,9 +70,9 @@ public class DefaultTabDropFailureHandler implements ITabDropFailureHandler {
         newWindow.toFront();
         newWindow.requestFocus();
 
-        Point loc = newWindow.getLocation();
-        Component renderer = draggedTab.getRenderer();
-        Point tabPos = new Point(renderer.getWidth() / 2, renderer.getHeight() / 2);
+        final Point loc = newWindow.getLocation();
+        final Component renderer = draggedTab.getRenderer();
+        final Point tabPos = new Point(renderer.getWidth() / 2, renderer.getHeight() / 2);
         SwingUtilities.convertPointToScreen(tabPos, renderer);
 
         loc.x += dsde.getX() - tabPos.x;

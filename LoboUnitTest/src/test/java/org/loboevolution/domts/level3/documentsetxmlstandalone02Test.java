@@ -49,15 +49,15 @@ import static org.junit.Assert.assertTrue;
 public class documentsetxmlstandalone02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
         boolean standalone;
-        DocumentType nullDocType = null;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

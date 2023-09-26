@@ -37,7 +37,7 @@ public class SVGAnimatedPreserveAspectRatioImpl extends SVGAnimatedValue impleme
 
     private SVGPreserveAspectRatio baseVal;
 
-    public SVGAnimatedPreserveAspectRatioImpl(SVGPreserveAspectRatio baseVal, SVGElementImpl owner) {
+    public SVGAnimatedPreserveAspectRatioImpl(final SVGPreserveAspectRatio baseVal, final SVGElementImpl owner) {
         this.owner = owner;
         this.baseVal = baseVal;
     }
@@ -47,7 +47,7 @@ public class SVGAnimatedPreserveAspectRatioImpl extends SVGAnimatedValue impleme
         return baseVal;
     }
 
-    void setBaseVal(SVGPreserveAspectRatio baseVal) throws DOMException {
+    void setBaseVal(final SVGPreserveAspectRatio baseVal) throws DOMException {
         this.baseVal = baseVal;
     }
 
@@ -56,11 +56,11 @@ public class SVGAnimatedPreserveAspectRatioImpl extends SVGAnimatedValue impleme
         if (animations == null) {
             return baseVal;
         } else {
-            int numAnimations = animations.size();
+            final int numAnimations = animations.size();
             SVGPreserveAspectRatio result = null;
             for (int i = 0; i < numAnimations; i++) {
-                SVGAnimationElementImpl animation = (SVGAnimationElementImpl) animations.elementAt(i);
-                SVGPreserveAspectRatio animVal = (SVGPreserveAspectRatio) animation.getCurrentValue(ANIMTYPE_PRESERVEASPECTRATIO);
+                final SVGAnimationElementImpl animation = ( SVGAnimationElementImpl) animations.elementAt(i);
+                final SVGPreserveAspectRatio animVal = ( SVGPreserveAspectRatio) animation.getCurrentValue(ANIMTYPE_PRESERVEASPECTRATIO);
                 if (animVal != null) {
                     result = animVal;
                     break;

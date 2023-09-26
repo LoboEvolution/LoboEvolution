@@ -51,8 +51,8 @@ final class RWord extends BaseBoundableRenderable {
 	 * @param height a int.
 	 * @param textTransform a int.
 	 */
-	public RWord(ModelNode me, String word, RenderableContainer container, FontMetrics fontMetrics, int descent,
-			int ascentPlusLeading, int height, int textTransform) {
+	public RWord(final ModelNode me, final String word, final RenderableContainer container, final FontMetrics fontMetrics, final int descent,
+				 final int ascentPlusLeading, final int height, final int textTransform) {
 		super(container, me);
 		final String renderedWord = textTransform == RenderState.TEXTTRANSFORM_NONE ? word
 				: transformText(word, textTransform);
@@ -66,8 +66,8 @@ final class RWord extends BaseBoundableRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
-			RenderableSpot endPoint) {
+	public boolean extractSelectionText(final StringBuilder buffer, final boolean inSelection, final RenderableSpot startPoint,
+										final RenderableSpot endPoint) {
 		int startX = -1;
 		int endX = -1;
 		if (this == startPoint.renderable) {
@@ -136,7 +136,7 @@ final class RWord extends BaseBoundableRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public RenderableSpot getLowestRenderableSpot(int x, int y) {
+	public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
 		return new RenderableSpot(this, x, y);
 	}
 
@@ -208,7 +208,7 @@ final class RWord extends BaseBoundableRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
+	public boolean paintSelection(final Graphics g, final boolean inSelection, final RenderableSpot startPoint, final RenderableSpot endPoint) {
 		int startX = -1;
 		int endX = -1;
 		if (this == startPoint.renderable) {
@@ -283,8 +283,8 @@ final class RWord extends BaseBoundableRenderable {
 		return "RWord[word=" + this.shownWord + "]";
 	}
 
-	private String transformText(String word, int textTransform) {
-		String string;
+	private String transformText(final String word, final int textTransform) {
+		final String string;
 		switch (textTransform) {
 		case RenderState.TEXTTRANSFORM_CAPITALIZE:
 			string = Character.toTitleCase(word.charAt(0)) + word.substring(1).toLowerCase();

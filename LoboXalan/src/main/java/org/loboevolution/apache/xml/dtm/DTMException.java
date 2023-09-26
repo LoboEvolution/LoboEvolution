@@ -47,7 +47,7 @@ public class DTMException extends RuntimeException {
 
   /** {@inheritDoc} */
   @Override
-  public synchronized Throwable initCause(Throwable cause) {
+  public synchronized Throwable initCause(final Throwable cause) {
 
     if ((this.containedException == null) && (cause != null)) {
       throw new IllegalStateException(
@@ -70,7 +70,7 @@ public class DTMException extends RuntimeException {
    *
    * @param message The error or warning message.
    */
-  public DTMException(String message) {
+  public DTMException(final String message) {
 
     super(message);
 
@@ -85,7 +85,7 @@ public class DTMException extends RuntimeException {
 
   /** {@inheritDoc} */
   @Override
-  public void printStackTrace(java.io.PrintStream s) {
+  public void printStackTrace(final java.io.PrintStream s) {
     printStackTrace(new java.io.PrintWriter(s));
   }
 }

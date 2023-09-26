@@ -45,12 +45,12 @@ public class UserAgentContext {
 
 	private boolean userAgentEnabled = false;
 
-	public UserAgentContext(HtmlRendererConfig config){
+	public UserAgentContext(final HtmlRendererConfig config){
 		this.config = config;
 		settings = config.getGeneralInfo();
 	}
 
-	public UserAgentContext(HtmlRendererConfig config, boolean test) {
+	public UserAgentContext(final HtmlRendererConfig config, final boolean test) {
 		this.config = config;
 		settings = !test ? config.getGeneralInfo() : new GeneralInfo();
 		if (settings == null) settings = new GeneralInfo();
@@ -93,7 +93,7 @@ public class UserAgentContext {
 	}
 
 
-	public void setUserAgentEnabled(boolean userAgentEnabled) {
+	public void setUserAgentEnabled(final boolean userAgentEnabled) {
 		this.userAgentEnabled = userAgentEnabled;
 	}
 
@@ -112,10 +112,10 @@ public class UserAgentContext {
 	 * @param url a {@link java.net.URL} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getCookie(URL url) {
-		List<Cookie> cookies = config.getCookies(url.getHost(), url.getPath());
-		StringBuilder cookieText = new StringBuilder();
-		for (Cookie cookie : cookies) {
+	public String getCookie(final URL url) {
+		final List<Cookie> cookies = config.getCookies(url.getHost(), url.getPath());
+		final StringBuilder cookieText = new StringBuilder();
+		for (final Cookie cookie : cookies) {
 			cookieText.append(cookie.getName());
 			cookieText.append('=');
 			cookieText.append(cookie.getValue());
@@ -130,7 +130,7 @@ public class UserAgentContext {
 	 * @param url a {@link java.net.URL} object.
 	 * @param cookieSpec a {@link java.lang.String} object.
 	 */
-	public void setCookie(URL url, String cookieSpec) {
+	public void setCookie(final URL url, final String cookieSpec) {
 		config.saveCookie(url.toString(), cookieSpec);
 	}
 }

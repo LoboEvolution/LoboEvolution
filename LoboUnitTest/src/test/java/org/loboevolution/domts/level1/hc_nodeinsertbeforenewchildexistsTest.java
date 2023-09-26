@@ -63,15 +63,15 @@ public class hc_nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        HTMLCollection childList;
-        Node refChild;
-        Node newChild;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final HTMLCollection childList;
+        final Node refChild;
+        final Node newChild;
         Node child;
         String childName;
-        List<String> expected = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("STRONG");
         expected.add("CODE");
         expected.add("SUP");
@@ -79,7 +79,7 @@ public class hc_nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         expected.add("EM");
         expected.add("ACRONYM");
 
-        List<String> result = new ArrayList<>();
+        final List<String> result = new ArrayList<>();
 
         int nodeType;
         doc = sampleXmlFile("hc_staff.xml");

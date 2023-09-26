@@ -46,17 +46,17 @@ public class ClassNameFilter implements NodeFilter {
 	 *
 	 * @param className a {@link java.lang.String} object.
 	 */
-	public ClassNameFilter(String className) {
+	public ClassNameFilter(final String className) {
 		this.className = className;
 	}
 
 	/** {@inheritDoc} */
-	public short acceptNode(Node node) {
+	public short acceptNode(final Node node) {
 		if (node instanceof Element) {
-			String classAttribute = ((Element) node).getAttribute("class");
+			final String classAttribute = ((Element) node).getAttribute("class");
 			if (Strings.isNotBlank(classAttribute) && Strings.isNotBlank(className)) {
 				final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
-				for (String aClassName : classNames) {
+				for (final String aClassName : classNames) {
 					if (!classAttribute.contains(aClassName)) {
 						return NodeFilter.FILTER_REJECT;
 					}

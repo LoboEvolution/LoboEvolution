@@ -39,13 +39,13 @@ import java.nio.ByteBuffer;
  * Author Mike Wessler
   *
  */
-public class ASCIIHexDecode {
+public final class ASCIIHexDecode {
     private final ByteBuffer buf;
     
     /**
      * initialize the decoder with an array of bytes in ASCIIHex format
      */
-    private ASCIIHexDecode(ByteBuffer buf) {
+    private ASCIIHexDecode(final ByteBuffer buf) {
 	this.buf = buf;
     }
 
@@ -93,14 +93,14 @@ public class ASCIIHexDecode {
         buf.rewind();
 
         // allocate the output buffer
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         while (true) {
-            int first = readHexDigit();
+            final int first = readHexDigit();
             if (first == -1) {
                 break;
             }
-            int second = readHexDigit();
+            final int second = readHexDigit();
 
             if (second == -1) {
                 baos.write((byte) (first << 4));
@@ -126,10 +126,9 @@ public class ASCIIHexDecode {
      * @return the decoded bytes
      * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
-    public static ByteBuffer decode(ByteBuffer buf, PDFObject params)
-	throws PDFParseException 
-    {
-	ASCIIHexDecode me = new ASCIIHexDecode(buf);
-	return me.decode();
+    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
+            throws PDFParseException {
+        final ASCIIHexDecode me = new ASCIIHexDecode(buf);
+        return me.decode();
     }
 }

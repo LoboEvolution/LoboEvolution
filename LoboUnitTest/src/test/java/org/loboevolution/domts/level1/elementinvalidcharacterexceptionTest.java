@@ -61,9 +61,9 @@ public class elementinvalidcharacterexceptionTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddress;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddress;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(0);
@@ -72,7 +72,7 @@ public class elementinvalidcharacterexceptionTest extends LoboUnitTest {
             boolean success = false;
             try {
                 testAddress.setAttribute("invalid^Name", "value");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

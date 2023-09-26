@@ -61,14 +61,14 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 	protected class MyDividerLayout implements LayoutManager {
 
 		@Override
-		public void addLayoutComponent(String string, Component c) {
+		public void addLayoutComponent(final String string, final Component c) {
 		}
 
 		@Override
-		public void layoutContainer(Container c) {
+		public void layoutContainer(final Container c) {
 			if (leftButton != null && rightButton != null && c == BaseSplitPaneDivider.this) {
 				if (splitPane.isOneTouchExpandable()) {
-					Insets insets = getInsets();
+					final Insets insets = getInsets();
 					int blockSize = 11;
 					int xOffs = 0;
 					int yOffs = 0;
@@ -79,21 +79,21 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 					}
 
 					if (orientation == JSplitPane.VERTICAL_SPLIT) {
-						int extraX = insets != null ? insets.left : 0;
+						final int extraX = insets != null ? insets.left : 0;
 						if (insets != null) {
 							blockSize -= insets.top + insets.bottom;
 							blockSize = Math.max(blockSize, 0);
 						}
-						int y = (c.getSize().height - blockSize) / 2;
+						final int y = (c.getSize().height - blockSize) / 2;
 						leftButton.setBounds(xOffs + extraX, y, blockSize * 2, blockSize);
 						rightButton.setBounds(xOffs + extraX + blockSize * 2 + 1, y, blockSize * 2, blockSize);
 					} else {
-						int extraY = insets != null ? insets.top : 0;
+						final int extraY = insets != null ? insets.top : 0;
 						if (insets != null) {
 							blockSize -= insets.left + insets.right;
 							blockSize = Math.max(blockSize, 0);
 						}
-						int x = (c.getSize().width - blockSize) / 2;
+						final int x = (c.getSize().width - blockSize) / 2;
 						leftButton.setBounds(x, yOffs + extraY, blockSize, blockSize * 2);
 						rightButton.setBounds(x, yOffs + extraY + blockSize * 2 + 1, blockSize, blockSize * 2);
 					}
@@ -105,7 +105,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 		}
 
 		@Override
-		public Dimension minimumLayoutSize(Container c) {
+		public Dimension minimumLayoutSize(final Container c) {
 			// NOTE: This isn't really used, refer to
 			// BasicSplitPaneDivider.getPreferredSize for the reason.
 			// I leave it in hopes of having this used at some point.
@@ -118,7 +118,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 				buttonMinSize = leftButton.getMinimumSize();
 			}
 
-			Insets insets = getInsets();
+			final Insets insets = getInsets();
 			int width = getDividerSize();
 			int height = width;
 
@@ -145,12 +145,12 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 		}
 
 		@Override
-		public Dimension preferredLayoutSize(Container c) {
+		public Dimension preferredLayoutSize(final Container c) {
 			return minimumLayoutSize(c);
 		}
 
 		@Override
-		public void removeLayoutComponent(Component c) {
+		public void removeLayoutComponent(final Component c) {
 		}
 
 	} // end of class MyDividerLayout
@@ -168,13 +168,13 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 	 *
 	 * @param ui a {@link javax.swing.plaf.basic.BasicSplitPaneUI} object.
 	 */
-	public BaseSplitPaneDivider(BasicSplitPaneUI ui) {
+	public BaseSplitPaneDivider(final BasicSplitPaneUI ui) {
 		super(ui);
 		if (UIManager.get("SplitPane.centerOneTouchButtons") != null) {
 			centerOneTouchButtons = UIManager.getBoolean("SplitPane.centerOneTouchButtons");
 		}
 		setLayout(new MyDividerLayout());
-		Object flatModeProperty = ui.getSplitPane().getClientProperty("flatMode");
+		final Object flatModeProperty = ui.getSplitPane().getClientProperty("flatMode");
 		if (flatModeProperty instanceof Boolean) {
 			flatMode = (Boolean) flatModeProperty;
 		}
@@ -183,7 +183,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 	/** {@inheritDoc} */
 	@Override
 	protected JButton createLeftOneTouchButton() {
-		JButton b = new JButton() {
+		final JButton b = new JButton() {
 
 			/**
 			 *
@@ -191,15 +191,10 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public boolean isFocusTraversable() {
-				return false;
-			}
-
-			@Override
 			public void paint(final Graphics g) {
-				Color color = getBackground();
-				int w = getSize().width;
-				int h = getSize().height;
+				final Color color = getBackground();
+				final int w = getSize().width;
+				final int h = getSize().height;
 				if (getModel().isPressed() && getModel().isArmed()) {
 					g.setColor(ColorHelper.darker(color, 40));
 					g.fillRect(0, 0, w, h);
@@ -207,16 +202,16 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 					g.setColor(getRolloverColor());
 					g.fillRect(0, 0, w, h);
 				}
-				Icon icon;
+				final Icon icon;
 				if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
-					AbstractLookAndFeel lf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
+					final AbstractLookAndFeel lf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
 					if (orientation == JSplitPane.HORIZONTAL_SPLIT) {
 						icon = lf.getIconFactory().getSplitterLeftArrowIcon();
 					} else {
 						icon = lf.getIconFactory().getSplitterUpArrowIcon();
 					}
-					int x = (w - icon.getIconWidth()) / 2;
-					int y = (h - icon.getIconHeight()) / 2;
+					final int x = (w - icon.getIconWidth()) / 2;
+					final int y = (h - icon.getIconHeight()) / 2;
 					icon.paintIcon(this, g, x, y);
 				}
 				if (getModel().isArmed()) {
@@ -241,7 +236,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 	/** {@inheritDoc} */
 	@Override
 	protected JButton createRightOneTouchButton() {
-		JButton b = new JButton() {
+		final JButton b = new JButton() {
 
 			/**
 			 *
@@ -249,15 +244,10 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public boolean isFocusTraversable() {
-				return false;
-			}
-
-			@Override
 			public void paint(final Graphics g) {
-				Color color = getBackground();
-				int w = getSize().width;
-				int h = getSize().height;
+				final Color color = getBackground();
+				final int w = getSize().width;
+				final int h = getSize().height;
 				if (getModel().isPressed() && getModel().isArmed()) {
 					g.setColor(ColorHelper.darker(color, 40));
 					g.fillRect(0, 0, w, h);
@@ -265,16 +255,16 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 					g.setColor(getRolloverColor());
 					g.fillRect(0, 0, w, h);
 				}
-				Icon icon;
+				final Icon icon;
 				if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
-					AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
+					final AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
 					if (orientation == JSplitPane.HORIZONTAL_SPLIT) {
 						icon = laf.getIconFactory().getSplitterRightArrowIcon();
 					} else {
 						icon = laf.getIconFactory().getSplitterDownArrowIcon();
 					}
-					int x = (w - icon.getIconWidth()) / 2;
-					int y = (h - icon.getIconHeight()) / 2;
+					final int x = (w - icon.getIconWidth()) / 2;
+					final int y = (h - icon.getIconHeight()) / 2;
 					icon.paintIcon(this, g, x, y);
 				}
 				if (getModel().isArmed()) {
@@ -324,10 +314,10 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 	@Override
 	public void paint(final Graphics g) {
 		if (!isFlatMode()) {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
-			int width = getSize().width;
-			int height = getSize().height;
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
+			final int width = getSize().width;
+			final int height = getSize().height;
 			int dx = 0;
 			int dy = 0;
 			if (width % 2 == 1) {
@@ -336,49 +326,49 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 			if (height % 2 == 1) {
 				dy = 1;
 			}
-			Color color = AbstractLookAndFeel.getBackgroundColor();
-			Color cHi = ColorHelper.brighter(color, 25);
-			Color cLo = ColorHelper.darker(color, 5);
-			Color[] colors = ColorHelper.createColorArr(cHi, cLo, 10);
+			final Color color = AbstractLookAndFeel.getBackgroundColor();
+			final Color cHi = ColorHelper.brighter(color, 25);
+			final Color cLo = ColorHelper.darker(color, 5);
+			final Color[] colors = ColorHelper.createColorArr(cHi, cLo, 10);
 
 			if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
-				AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
+				final AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
 				if (orientation == JSplitPane.HORIZONTAL_SPLIT) {
 					JTattooUtilities.fillVerGradient(g, colors, 0, 0, width, height);
-					Icon horBumps = laf.getIconFactory().getSplitterHorBumpIcon();
+					final Icon horBumps = laf.getIconFactory().getSplitterHorBumpIcon();
 					if (horBumps != null && width > horBumps.getIconWidth()) {
-						AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
+						final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
 						g2D.setComposite(alpha);
 
 						if (splitPane.isOneTouchExpandable() && centerOneTouchButtons) {
-							int centerY = height / 2;
-							int x = (width - horBumps.getIconWidth()) / 2 + dx;
+							final int centerY = height / 2;
+							final int x = (width - horBumps.getIconWidth()) / 2 + dx;
 							int y = centerY - horBumps.getIconHeight() - 40;
 							horBumps.paintIcon(this, g, x, y);
 							y = centerY + 40;
 							horBumps.paintIcon(this, g, x, y);
 						} else {
-							int x = (width - horBumps.getIconWidth()) / 2 + dx;
-							int y = (height - horBumps.getIconHeight()) / 2;
+							final int x = (width - horBumps.getIconWidth()) / 2 + dx;
+							final int y = (height - horBumps.getIconHeight()) / 2;
 							horBumps.paintIcon(this, g, x, y);
 						}
 					}
 				} else {
 					JTattooUtilities.fillHorGradient(g, colors, 0, 0, width, height);
-					Icon verBumps = laf.getIconFactory().getSplitterVerBumpIcon();
+					final Icon verBumps = laf.getIconFactory().getSplitterVerBumpIcon();
 					if (verBumps != null && height > verBumps.getIconHeight()) {
-						AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
+						final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
 						g2D.setComposite(alpha);
 						if (splitPane.isOneTouchExpandable() && centerOneTouchButtons) {
-							int centerX = width / 2;
+							final int centerX = width / 2;
 							int x = centerX - verBumps.getIconWidth() - 40;
-							int y = (height - verBumps.getIconHeight()) / 2 + dy;
+							final int y = (height - verBumps.getIconHeight()) / 2 + dy;
 							verBumps.paintIcon(this, g, x, y);
 							x = centerX + 40;
 							verBumps.paintIcon(this, g, x, y);
 						} else {
-							int x = (width - verBumps.getIconWidth()) / 2;
-							int y = (height - verBumps.getIconHeight()) / 2 + dy;
+							final int x = (width - verBumps.getIconWidth()) / 2;
+							final int y = (height - verBumps.getIconHeight()) / 2 + dy;
 							verBumps.paintIcon(this, g, x, y);
 						}
 					}
@@ -394,7 +384,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 	 *
 	 * @param flatMode a boolean.
 	 */
-	public void setFlatMode(boolean flatMode) {
+	public void setFlatMode(final boolean flatMode) {
 		this.flatMode = flatMode;
 	}
 

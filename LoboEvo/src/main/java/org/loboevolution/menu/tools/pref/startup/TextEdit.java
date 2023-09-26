@@ -138,7 +138,7 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 	 *
 	 * @param text the new caption
 	 */
-	public void setCaption(String text) {
+	public void setCaption(final String text) {
 		this.captionLabel.setText(text);
 	}
 
@@ -148,8 +148,8 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 	 * @param resultingText a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String setResultingText(String resultingText) {
-		return this.resultingText = resultingText;
+	public void setResultingText(final String resultingText) {
+		this.resultingText = resultingText;
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 	 *
 	 * @param text the new text
 	 */
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.textArea.setText(text);
 	}
 }

@@ -47,7 +47,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public ImageRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+	public ImageRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
@@ -69,7 +69,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 				if (border != null) {
 					border = border.trim();
 					int value;
-					int valueType;
+					final int valueType;
 					if (border.endsWith("%")) {
 						valueType = HtmlInsets.TYPE_PERCENT;
 						try {

@@ -37,9 +37,6 @@ import java.util.List;
 
 /**
  * <p>SVGPathSegListImpl class.</p>
- *
- *
- *
  */
 public class SVGPathSegListImpl implements SVGPathSegList {
 
@@ -57,178 +54,178 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 	 *
 	 * @param pathSegList a {@link org.loboevolution.html.dom.svg.SVGPathSegList} object.
 	 */
-	public SVGPathSegListImpl(SVGPathSegList pathSegList) {
+	public SVGPathSegListImpl(final SVGPathSegList pathSegList) {
 		pointList = new ArrayList<>();
-		for (SVGPathSeg seg : pointList) {
+		for (final SVGPathSeg seg : pointList) {
 			switch (seg.getPathSegType()) {
 			case SVGPathSeg.PATHSEG_CLOSEPATH: {
-				SVGPathSeg newSeg = new SVGPathSegClosePathImpl();
+				final SVGPathSeg newSeg = new SVGPathSegClosePathImpl();
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_MOVETO_ABS: {
-				float x = ((SVGPathSegMovetoAbsImpl) seg).getX();
-				float y = ((SVGPathSegMovetoAbsImpl) seg).getY();
-				SVGPathSeg newSeg = new SVGPathSegMovetoAbsImpl(x, y);
+				final float x = ((SVGPathSegMovetoAbsImpl) seg).getX();
+				final float y = ((SVGPathSegMovetoAbsImpl) seg).getY();
+				final SVGPathSeg newSeg = new SVGPathSegMovetoAbsImpl(x, y);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_MOVETO_REL: {
-				float x = ((SVGPathSegMovetoRelImpl) seg).getX();
-				float y = ((SVGPathSegMovetoRelImpl) seg).getY();
-				SVGPathSeg newSeg = new SVGPathSegMovetoRelImpl(x, y);
+				final float x = ((SVGPathSegMovetoRelImpl) seg).getX();
+				final float y = ((SVGPathSegMovetoRelImpl) seg).getY();
+				final SVGPathSeg newSeg = new SVGPathSegMovetoRelImpl(x, y);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_LINETO_ABS: {
-				float x = ((SVGPathSegLinetoAbsImpl) seg).getX();
-				float y = ((SVGPathSegLinetoAbsImpl) seg).getY();
-				SVGPathSeg newSeg = new SVGPathSegLinetoAbsImpl(x, y);
+				final float x = ((SVGPathSegLinetoAbsImpl) seg).getX();
+				final float y = ((SVGPathSegLinetoAbsImpl) seg).getY();
+				final SVGPathSeg newSeg = new SVGPathSegLinetoAbsImpl(x, y);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_LINETO_REL: {
-				float x = ((SVGPathSegLinetoRelImpl) seg).getX();
-				float y = ((SVGPathSegLinetoRelImpl) seg).getY();
-				SVGPathSeg newSeg = new SVGPathSegLinetoRelImpl(x, y);
+				final float x = ((SVGPathSegLinetoRelImpl) seg).getX();
+				final float y = ((SVGPathSegLinetoRelImpl) seg).getY();
+				final SVGPathSeg newSeg = new SVGPathSegLinetoRelImpl(x, y);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_LINETO_HORIZONTAL_ABS: {
-				float x = ((SVGPathSegLinetoHorizontalAbsImpl) seg).getX();
-				SVGPathSeg newSeg = new SVGPathSegLinetoHorizontalAbsImpl(x);
+				final float x = ((SVGPathSegLinetoHorizontalAbsImpl) seg).getX();
+				final SVGPathSeg newSeg = new SVGPathSegLinetoHorizontalAbsImpl(x);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_LINETO_HORIZONTAL_REL: {
-				float x = ((SVGPathSegLinetoHorizontalRelImpl) seg).getX();
-				SVGPathSeg newSeg = new SVGPathSegLinetoHorizontalRelImpl(x);
+				final float x = ((SVGPathSegLinetoHorizontalRelImpl) seg).getX();
+				final SVGPathSeg newSeg = new SVGPathSegLinetoHorizontalRelImpl(x);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_LINETO_VERTICAL_ABS: {
-				float y = ((SVGPathSegLinetoVerticalAbsImpl) seg).getY();
-				SVGPathSeg newSeg = new SVGPathSegLinetoVerticalAbsImpl(y);
+				final float y = ((SVGPathSegLinetoVerticalAbsImpl) seg).getY();
+				final SVGPathSeg newSeg = new SVGPathSegLinetoVerticalAbsImpl(y);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_LINETO_VERTICAL_REL: {
-				float y = ((SVGPathSegLinetoVerticalRelImpl) seg).getY();
-				SVGPathSeg newSeg = new SVGPathSegLinetoVerticalRelImpl(y);
+				final float y = ((SVGPathSegLinetoVerticalRelImpl) seg).getY();
+				final SVGPathSeg newSeg = new SVGPathSegLinetoVerticalRelImpl(y);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_CURVETO_CUBIC_ABS: {
-				float x = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX();
-				float y = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY();
-				float x1 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX1();
-				float y1 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY1();
-				float x2 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX2();
-				float y2 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY2();
-				SVGPathSeg newSeg = new SVGPathSegCurvetoCubicAbsImpl(x, y, x1, y1, x2, y2);
+				final float x = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX();
+				final float y = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY();
+				final float x1 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX1();
+				final float y1 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY1();
+				final float x2 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX2();
+				final float y2 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY2();
+				final SVGPathSeg newSeg = new SVGPathSegCurvetoCubicAbsImpl(x, y, x1, y1, x2, y2);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_CURVETO_CUBIC_REL: {
-				float x = ((SVGPathSegCurvetoCubicRelImpl) seg).getX();
-				float y = ((SVGPathSegCurvetoCubicRelImpl) seg).getY();
-				float x1 = ((SVGPathSegCurvetoCubicRelImpl) seg).getX1();
-				float y1 = ((SVGPathSegCurvetoCubicRelImpl) seg).getY1();
-				float x2 = ((SVGPathSegCurvetoCubicRelImpl) seg).getX2();
-				float y2 = ((SVGPathSegCurvetoCubicRelImpl) seg).getY2();
-				SVGPathSeg newSeg = new SVGPathSegCurvetoCubicRelImpl(x, y, x1, y1, x2, y2);
+				final float x = ((SVGPathSegCurvetoCubicRelImpl) seg).getX();
+				final float y = ((SVGPathSegCurvetoCubicRelImpl) seg).getY();
+				final float x1 = ((SVGPathSegCurvetoCubicRelImpl) seg).getX1();
+				final float y1 = ((SVGPathSegCurvetoCubicRelImpl) seg).getY1();
+				final float x2 = ((SVGPathSegCurvetoCubicRelImpl) seg).getX2();
+				final float y2 = ((SVGPathSegCurvetoCubicRelImpl) seg).getY2();
+				final SVGPathSeg newSeg = new SVGPathSegCurvetoCubicRelImpl(x, y, x1, y1, x2, y2);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS: {
-				float x = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getX();
-				float y = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getY();
-				float x2 = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getX2();
-				float y2 = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getY2();
-				SVGPathSeg newSeg = new SVGPathSegCurvetoCubicSmoothAbsImpl(x, y, x2, y2);
+				final float x = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getX();
+				final float y = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getY();
+				final float x2 = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getX2();
+				final float y2 = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getY2();
+				final SVGPathSeg newSeg = new SVGPathSegCurvetoCubicSmoothAbsImpl(x, y, x2, y2);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_REL: {
-				float x = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getX();
-				float y = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getY();
-				float x2 = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getX2();
-				float y2 = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getY2();
-				SVGPathSeg newSeg = new SVGPathSegCurvetoCubicSmoothRelImpl(x, y, x2, y2);
+				final float x = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getX();
+				final float y = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getY();
+				final float x2 = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getX2();
+				final float y2 = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getY2();
+				final SVGPathSeg newSeg = new SVGPathSegCurvetoCubicSmoothRelImpl(x, y, x2, y2);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_ABS: {
-				float x = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getX();
-				float y = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getY();
-				float x1 = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getX1();
-				float y1 = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getY1();
-				SVGPathSeg newSeg = new SVGPathSegCurvetoQuadraticAbsImpl(x, y, x1, y1);
+				final float x = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getX();
+				final float y = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getY();
+				final float x1 = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getX1();
+				final float y1 = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getY1();
+				final SVGPathSeg newSeg = new SVGPathSegCurvetoQuadraticAbsImpl(x, y, x1, y1);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_REL: {
-				float x = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getX();
-				float y = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getY();
-				float x1 = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getX1();
-				float y1 = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getY1();
-				SVGPathSeg newSeg = new SVGPathSegCurvetoQuadraticRelImpl(x, y, x1, y1);
+				final float x = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getX();
+				final float y = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getY();
+				final float x1 = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getX1();
+				final float y1 = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getY1();
+				final SVGPathSeg newSeg = new SVGPathSegCurvetoQuadraticRelImpl(x, y, x1, y1);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS: {
-				float x = ((SVGPathSegCurvetoQuadraticSmoothAbsImpl) seg).getX();
-				float y = ((SVGPathSegCurvetoQuadraticSmoothAbsImpl) seg).getY();
-				SVGPathSeg newSeg = new SVGPathSegCurvetoQuadraticSmoothAbsImpl(x, y);
+				final float x = ((SVGPathSegCurvetoQuadraticSmoothAbsImpl) seg).getX();
+				final float y = ((SVGPathSegCurvetoQuadraticSmoothAbsImpl) seg).getY();
+				final SVGPathSeg newSeg = new SVGPathSegCurvetoQuadraticSmoothAbsImpl(x, y);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL: {
-				float x = ((SVGPathSegCurvetoQuadraticSmoothRelImpl) seg).getX();
-				float y = ((SVGPathSegCurvetoQuadraticSmoothRelImpl) seg).getY();
-				SVGPathSeg newSeg = new SVGPathSegCurvetoQuadraticSmoothRelImpl(x, y);
+				final float x = ((SVGPathSegCurvetoQuadraticSmoothRelImpl) seg).getX();
+				final float y = ((SVGPathSegCurvetoQuadraticSmoothRelImpl) seg).getY();
+				final SVGPathSeg newSeg = new SVGPathSegCurvetoQuadraticSmoothRelImpl(x, y);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_ARC_ABS: {
-				float x = ((SVGPathSegArcAbsImpl) seg).getX();
-				float y = ((SVGPathSegArcAbsImpl) seg).getY();
-				float r1 = ((SVGPathSegArcAbsImpl) seg).getR1();
-				float r2 = ((SVGPathSegArcAbsImpl) seg).getR2();
-				float angle = ((SVGPathSegArcAbsImpl) seg).getAngle();
-				boolean largeArcFlag = ((SVGPathSegArcAbsImpl) seg).getLargeArcFlag();
-				boolean sweepFlag = ((SVGPathSegArcAbsImpl) seg).getSweepFlag();
-				SVGPathSeg newSeg = new SVGPathSegArcAbsImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
+				final float x = ((SVGPathSegArcAbsImpl) seg).getX();
+				final float y = ((SVGPathSegArcAbsImpl) seg).getY();
+				final float r1 = ((SVGPathSegArcAbsImpl) seg).getR1();
+				final float r2 = ((SVGPathSegArcAbsImpl) seg).getR2();
+				final float angle = ((SVGPathSegArcAbsImpl) seg).getAngle();
+				final boolean largeArcFlag = ((SVGPathSegArcAbsImpl) seg).getLargeArcFlag();
+				final boolean sweepFlag = ((SVGPathSegArcAbsImpl) seg).getSweepFlag();
+				final SVGPathSeg newSeg = new SVGPathSegArcAbsImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
 				appendItem(newSeg);
 				break;
 			}
 
 			case SVGPathSeg.PATHSEG_ARC_REL: {
-				float x = ((SVGPathSegArcRelImpl) seg).getX();
-				float y = ((SVGPathSegArcRelImpl) seg).getY();
-				float r1 = ((SVGPathSegArcRelImpl) seg).getR1();
-				float r2 = ((SVGPathSegArcRelImpl) seg).getR2();
-				float angle = ((SVGPathSegArcRelImpl) seg).getAngle();
-				boolean largeArcFlag = ((SVGPathSegArcRelImpl) seg).getLargeArcFlag();
-				boolean sweepFlag = ((SVGPathSegArcRelImpl) seg).getSweepFlag();
-				SVGPathSeg newSeg = new SVGPathSegArcRelImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
+				final float x = ((SVGPathSegArcRelImpl) seg).getX();
+				final float y = ((SVGPathSegArcRelImpl) seg).getY();
+				final float r1 = ((SVGPathSegArcRelImpl) seg).getR1();
+				final float r2 = ((SVGPathSegArcRelImpl) seg).getR2();
+				final float angle = ((SVGPathSegArcRelImpl) seg).getAngle();
+				final boolean largeArcFlag = ((SVGPathSegArcRelImpl) seg).getLargeArcFlag();
+				final boolean sweepFlag = ((SVGPathSegArcRelImpl) seg).getSweepFlag();
+				final SVGPathSeg newSeg = new SVGPathSegArcRelImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
 				appendItem(newSeg);
 				break;
 			}
@@ -252,7 +249,7 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSeg initialize(SVGPathSeg newItem) throws DOMException, SVGException {
+	public SVGPathSeg initialize(final SVGPathSeg newItem) throws DOMException, SVGException {
 		pointList = new ArrayList<>();
 		pointList.add(newItem);
 		return newItem;
@@ -260,13 +257,13 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSeg getItem(int index) {
+	public SVGPathSeg getItem(final int index) {
 		return pointList.get(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSeg insertItemBefore(SVGPathSeg newItem, int index) throws DOMException, SVGException {
+	public SVGPathSeg insertItemBefore(final SVGPathSeg newItem, final int index) throws DOMException, SVGException {
 
         pointList.remove(newItem);
 
@@ -282,7 +279,7 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSeg replaceItem(SVGPathSeg newItem, int index) throws DOMException, SVGException {
+	public SVGPathSeg replaceItem(final SVGPathSeg newItem, final int index) throws DOMException, SVGException {
 
         pointList.remove(newItem);
 
@@ -297,13 +294,13 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSeg removeItem(int index) {
+	public SVGPathSeg removeItem(final int index) {
 		return pointList.remove(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPathSeg appendItem(SVGPathSeg newItem) throws DOMException, SVGException {
+	public SVGPathSeg appendItem(final SVGPathSeg newItem) throws DOMException, SVGException {
 		pointList.add(newItem);
 		return newItem;
 	}

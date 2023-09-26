@@ -48,13 +48,13 @@ public class McWinMenuBarUI extends BaseMenuBarUI {
 	private static final Color[] SHADOW_COLORS = ColorHelper.createColorArr(Color.white, new Color(240, 240, 240), 8);
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent x) {
+	public static ComponentUI createUI(final JComponent x) {
 		return new McWinMenuBarUI();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void installUI(JComponent c) {
+	public void installUI(final JComponent c) {
 		super.installUI(c);
 		if (c != null && c instanceof JMenuBar) {
 			c.setBorder(BaseBorders.getMenuBarBorder());

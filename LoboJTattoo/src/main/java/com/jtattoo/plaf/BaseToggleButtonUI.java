@@ -26,6 +26,8 @@
 
 package com.jtattoo.plaf;
 
+import org.loboevolution.common.Strings;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
@@ -62,19 +64,19 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 	private static final Rectangle iconRect = new Rectangle();
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent b) {
+	public static ComponentUI createUI(final JComponent b) {
 		return new BaseToggleButtonUI();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected BasicButtonListener createButtonListener(AbstractButton b) {
+	protected BasicButtonListener createButtonListener(final AbstractButton b) {
 		return new BaseButtonListener(b);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void installDefaults(AbstractButton b) {
+	public void installDefaults(final AbstractButton b) {
 		super.installDefaults(b);
 		b.setOpaque(false);
 		b.setRolloverEnabled(true);
@@ -83,12 +85,12 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g, final JComponent c) {
-		Graphics2D g2D = (Graphics2D) g;
+		final Graphics2D g2D = (Graphics2D) g;
 
-		AbstractButton b = (AbstractButton) c;
+		final AbstractButton b = (AbstractButton) c;
 		g.setFont(b.getFont());
-		FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-		Insets insets = c.getInsets();
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
+		final Insets insets = c.getInsets();
 
 		viewRect.x = insets.left;
 		viewRect.y = insets.top;
@@ -98,9 +100,9 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 		textRect.x = textRect.y = textRect.width = textRect.height = 0;
 		iconRect.x = iconRect.y = iconRect.width = iconRect.height = 0;
 
-		int iconTextGap = b.getIconTextGap();
+		final int iconTextGap = b.getIconTextGap();
 
-		String text = SwingUtilities.layoutCompoundLabel(c, fm, b.getText(), b.getIcon(), b.getVerticalAlignment(),
+		final String text = SwingUtilities.layoutCompoundLabel(c, fm, b.getText(), b.getIcon(), b.getVerticalAlignment(),
 				b.getHorizontalAlignment(), b.getVerticalTextPosition(), b.getHorizontalTextPosition(), viewRect,
 				iconRect, textRect, b.getText() == null ? 0 : iconTextGap);
 
@@ -108,8 +110,8 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
 		if (b.getIcon() != null) {
 			if (!b.isEnabled()) {
-				Composite savedComposite = g2D.getComposite();
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+				final Composite savedComposite = g2D.getComposite();
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 				g2D.setComposite(alpha);
 				paintIcon(g, c, iconRect);
 				g2D.setComposite(savedComposite);
@@ -118,8 +120,8 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 			}
 		}
 
-		if (text != null && !text.equals("") && textRect != null) {
-			View v = (View) c.getClientProperty(BasicHTML.propertyKey);
+		if (Strings.isNotBlank(text)) {
+			final View v = (View) c.getClientProperty(BasicHTML.propertyKey);
 			if (v != null) {
 				Object savedRenderingHint = null;
 				if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
@@ -147,18 +149,18 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param b a {@link javax.swing.AbstractButton} object.
 	 */
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
 			return;
 		}
 
-		int width = b.getWidth();
-		int height = b.getHeight();
+		final int width = b.getWidth();
+		final int height = b.getHeight();
 
-		ButtonModel model = b.getModel();
-		Color[] colors;
+		final ButtonModel model = b.getModel();
+		final Color[] colors;
 		if (b.isEnabled()) {
-			Color background = b.getBackground();
+			final Color background = b.getBackground();
 			if (background instanceof ColorUIResource) {
 				if (b.isRolloverEnabled() && model.isRollover()) {
 					colors = AbstractLookAndFeel.getTheme().getRolloverColors();
@@ -198,21 +200,21 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
-			Rectangle iconRect) {
+	protected void paintFocus(final Graphics g, final AbstractButton b, final Rectangle viewRect, final Rectangle textRect,
+                              final Rectangle iconRect) {
 		g.setColor(AbstractLookAndFeel.getFocusColor());
 		BasicGraphicsUtils.drawDashedRect(g, 4, 3, b.getWidth() - 8, b.getHeight() - 6);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
-		ButtonModel model = b.getModel();
-		FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-		int mnemIndex = b.getDisplayedMnemonicIndex();
+	protected void paintText(final Graphics g, final AbstractButton b, final Rectangle textRect, final String text) {
+		final ButtonModel model = b.getModel();
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
+		final int mnemIndex = b.getDisplayedMnemonicIndex();
 		if (model.isEnabled()) {
 			Color foreground = b.getForeground();
-			Color background = b.getBackground();
+			final Color background = b.getBackground();
 			int offs = 0;
 			if (model.isArmed() && model.isPressed() || model.isSelected()) {
 				offs = 1;
@@ -225,7 +227,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 					foreground = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
 				}
 			}
-			Object sc = b.getClientProperty("shadowColor");
+			final Object sc = b.getClientProperty("shadowColor");
 			if (sc instanceof Color) {
 				g.setColor((Color) sc);
 				JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs,
@@ -245,7 +247,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void uninstallDefaults(AbstractButton b) {
+	public void uninstallDefaults(final AbstractButton b) {
 		super.uninstallDefaults(b);
 		b.setOpaque(true);
 		b.setRolloverEnabled(false);

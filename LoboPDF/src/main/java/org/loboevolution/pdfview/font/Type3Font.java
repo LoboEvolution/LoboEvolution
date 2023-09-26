@@ -74,8 +74,8 @@ public class Type3Font extends PDFFont {
      * @param descriptor the descriptor for this font
      * @throws java.io.IOException if any.
      */
-    public Type3Font(String baseFont, PDFObject fontObj,
-            HashMap<String,PDFObject> resources, PDFFontDescriptor descriptor) throws IOException {
+    public Type3Font(final String baseFont, final PDFObject fontObj,
+                     final HashMap<String,PDFObject> resources, final PDFFontDescriptor descriptor) throws IOException {
         super(baseFont, descriptor);
 
         this.rsrc = new HashMap<>();
@@ -85,18 +85,18 @@ public class Type3Font extends PDFFont {
         }
 
         // get the transform matrix
-        PDFObject matrix = fontObj.getDictRef("FontMatrix");
-        float[] matrixAry = new float[6];
+        final PDFObject matrix = fontObj.getDictRef("FontMatrix");
+        final float[] matrixAry = new float[6];
         for (int i = 0; i < 6; i++) {
             matrixAry[i] = matrix.getAt(i).getFloatValue();
         }
         this.at = new AffineTransform(matrixAry);
 
         // get the scale from the matrix
-        float scale = matrixAry[0] + matrixAry[2];
+        final float scale = matrixAry[0] + matrixAry[2];
 
         // put all the resources in a Hash
-        PDFObject rsrcObj = fontObj.getDictRef("Resources");
+        final PDFObject rsrcObj = fontObj.getDictRef("Resources");
         if (rsrcObj != null) {
             this.rsrc.putAll(rsrcObj.getDictionary());
         }
@@ -111,7 +111,7 @@ public class Type3Font extends PDFFont {
         }
 
         // get the widths
-        PDFObject[] widthArray = fontObj.getDictRef("Widths").getArray();
+        final PDFObject[] widthArray = fontObj.getDictRef("Widths").getArray();
         this.widths = new float[widthArray.length];
         for (int i = 0; i < widthArray.length; i++) {
             this.widths[i] = widthArray[i].getFloatValue();
@@ -153,32 +153,32 @@ public class Type3Font extends PDFFont {
 	 * Note this method must *always* return a glyph.
 	 */
     @Override
-	protected PDFGlyph getGlyph(char src, String name) {
+	protected PDFGlyph getGlyph(final char src, final String name) {
         if (name == null) {
             throw new IllegalArgumentException("Glyph name required for Type3 font!" +
                     "Source character: " + (int) src);
         }
 
-        PDFObject pageObj = (PDFObject) this.charProcs.get(name);
+        final PDFObject pageObj = (PDFObject) this.charProcs.get(name);
         if (pageObj == null) {
             // glyph not found.  Return an empty glyph...
             return new PDFGlyph(src, name, new GeneralPath(), new Point2D.Float(0, 0));
         }
 
         try {
-            PDFPage page = new PDFPage(this.bbox, 0);
+            final PDFPage page = new PDFPage(this.bbox, 0);
             page.addXform(this.at);
 
-            PDFParser prc = new PDFParser(page, pageObj.getStream(), this.rsrc);
+            final PDFParser prc = new PDFParser(page, pageObj.getStream(), this.rsrc);
             prc.go(true);
 
-            float width = this.widths[src - this.firstChar];
+            final float width = this.widths[src - this.firstChar];
 
             Point2D advance = new Point2D.Float(width, 0);
             advance = this.at.transform(advance, null);
 
             return new PDFGlyph(src, name, page, advance);
-        } catch (IOException ioe) {
+        } catch (final IOException ioe) {
             // help!
             PDFDebugger.debug("IOException in Type3 font: " + ioe);
             BaseWatchable.getErrorHandler().publishException(ioe);

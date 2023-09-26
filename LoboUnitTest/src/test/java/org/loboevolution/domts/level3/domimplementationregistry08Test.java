@@ -52,16 +52,16 @@ public class domimplementationregistry08Test extends LoboUnitTest {
     @SneakyThrows
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        boolean hasFeature;
-        String nullVersion = null;
+        final DOMImplementation domImpl;
+        final boolean hasFeature;
+        final String nullVersion = null;
 
-        DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImpl = domImplRegistry.getDOMImplementation("SVG");
 
         if ((domImpl == null)) {
-            DOMImplementationImpl baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
+            final DOMImplementationImpl baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasFeature = baseImpl.hasFeature("SVG", null);
             assertFalse("baseImplSupportsSVG", hasFeature);
         } else {

@@ -55,16 +55,16 @@ public class noderemovechildnodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node oldChild;
-        Node child;
-        String childName;
-        int length;
-        Node removedChild;
-        String removedName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node oldChild;
+        final Node child;
+        final String childName;
+        final int length;
+        final Node removedChild;
+        final String removedName;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);

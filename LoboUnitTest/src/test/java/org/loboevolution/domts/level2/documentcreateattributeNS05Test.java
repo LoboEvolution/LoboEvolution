@@ -57,14 +57,14 @@ public class documentcreateattributeNS05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DocumentType docType = null;
+        final Document doc;
+        final Document newDoc;
+        final DocumentType docType = null;
 
-        DOMImplementation domImpl;
-        String namespaceURI = null;
+        final DOMImplementation domImpl;
+        final String namespaceURI = null;
 
-        String qualifiedName = "abc:def";
+        final String qualifiedName = "abc:def";
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();
@@ -73,7 +73,7 @@ public class documentcreateattributeNS05Test extends LoboUnitTest {
         boolean success = false;
         try {
             newDoc.createAttributeNS(namespaceURI, qualifiedName);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("documentcreateattributeNS05", success);

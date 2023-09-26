@@ -50,16 +50,16 @@ import static org.junit.Assert.fail;
 public class nodereplacechild08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document doc2;
-        Element docElem;
-        Element elem;
+        final Document doc;
+        final Document doc2;
+        final Element docElem;
+        final Element elem;
         String nodeName;
-        Node replaced;
-        String rootNS;
-        String rootName;
-        DOMImplementation domImpl;
-        DocumentType nullDocType = null;
+        final Node replaced;
+        final String rootNS;
+        final String rootName;
+        final DOMImplementation domImpl;
+        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
@@ -73,7 +73,7 @@ public class nodereplacechild08Test extends LoboUnitTest {
             replaced = doc.replaceChild(elem, docElem);
             fail("throw_WRONG_DOCUMENT_OR_NOT_SUPPORTED");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 4:
                     break;

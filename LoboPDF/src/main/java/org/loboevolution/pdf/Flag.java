@@ -60,7 +60,7 @@ public class Flag {
 		if (!isSet) {
 			try {
 				wait();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 				Thread.currentThread().interrupt();
 			}
 		}

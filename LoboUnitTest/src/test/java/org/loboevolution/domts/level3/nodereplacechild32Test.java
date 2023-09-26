@@ -46,18 +46,18 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild32Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
-        Element elem;
-        Attr parent;
+        final Document doc;
+        final HTMLCollection childList;
+        final Element elem;
+        final Attr parent;
         Node oldChild;
-        Text newChild;
-        Node replaced;
-        String nodeName;
+        final Text newChild;
+        final Node replaced;
+        final String nodeName;
         int nodeType;
-        EntityReference enRef;
-        EntityReference enRefChild;
-        String reference = "entity1";
+        final EntityReference enRef;
+        final EntityReference enRefChild;
+        final String reference = "entity1";
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createTextNode("Text");
         childList = doc.getElementsByTagNameNS("*", "acronym");

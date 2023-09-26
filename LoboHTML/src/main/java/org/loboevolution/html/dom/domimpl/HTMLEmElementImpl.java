@@ -44,7 +44,7 @@ public class HTMLEmElementImpl extends HTMLElementImpl {
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new FontStyleRenderState(prevRenderState, this, LAFType.ITALIC);
 	}
 	

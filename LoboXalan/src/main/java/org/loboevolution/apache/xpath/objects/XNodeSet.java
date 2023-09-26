@@ -51,7 +51,7 @@ public class XNodeSet extends NodeSequence {
    *
    * @param val Value of the XNodeSet object
    */
-  public XNodeSet(DTMIterator val) {
+  public XNodeSet(final DTMIterator val) {
     super();
     if (val instanceof XNodeSet) {
       final XNodeSet nodeSet = (XNodeSet) val;
@@ -71,7 +71,7 @@ public class XNodeSet extends NodeSequence {
    * Construct an empty XNodeSet object. This is used to create a mutable nodeset to which random
    * nodes may be added.
    */
-  public XNodeSet(DTMManager dtmMgr) {
+  public XNodeSet(final DTMManager dtmMgr) {
     this(DTM.NULL, dtmMgr);
   }
 
@@ -80,7 +80,7 @@ public class XNodeSet extends NodeSequence {
    *
    * @param n Node to add to the new XNodeSet object
    */
-  public XNodeSet(int n, DTMManager dtmMgr) {
+  public XNodeSet(final int n, final DTMManager dtmMgr) {
 
     super(new NodeSetDTM(dtmMgr));
     m_dtmMgr = dtmMgr;
@@ -109,8 +109,8 @@ public class XNodeSet extends NodeSequence {
    * @param n Node to convert
    * @return numeric value of the string conversion from a single node.
    */
-  public double getNumberFromNode(int n) {
-    XString xstr = m_dtmMgr.getDTM(n).getStringValue(n);
+  public double getNumberFromNode(final int n) {
+    final XString xstr = m_dtmMgr.getDTM(n).getStringValue(n);
     return xstr.toDouble();
   }
 
@@ -118,14 +118,14 @@ public class XNodeSet extends NodeSequence {
   @Override
   public double num() {
 
-    int node = item(0);
+    final int node = item(0);
     return (node != DTM.NULL) ? getNumberFromNode(node) : Double.NaN;
   }
 
   /** {@inheritDoc} */
   @Override
   public double numWithSideEffects() {
-    int node = nextNode();
+    final int node = nextNode();
 
     return (node != DTM.NULL) ? getNumberFromNode(node) : Double.NaN;
   }
@@ -148,7 +148,7 @@ public class XNodeSet extends NodeSequence {
    * @param n Node to convert
    * @return the string conversion from a single node.
    */
-  public XString getStringFromNode(int n) {
+  public XString getStringFromNode(final int n) {
     // %OPT%
     // I guess we'll have to get a static instance of the DTM manager...
     if (DTM.NULL != n) {
@@ -160,14 +160,14 @@ public class XNodeSet extends NodeSequence {
   /** {@inheritDoc} */
   @Override
   public XString xstr() {
-    int node = item(0);
+    final int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node) : XString.EMPTYSTRING;
   }
 
   /** {@inheritDoc} */
   @Override
   public String str() {
-    int node = item(0);
+    final int node = item(0);
     return (node != DTM.NULL) ? getStringFromNode(node).toString() : "";
   }
 
@@ -189,13 +189,13 @@ public class XNodeSet extends NodeSequence {
   /** {@inheritDoc} */
   @Override
   public NodeList nodelist() throws TransformerException {
-    DTMNodeList nodelist =
+    final DTMNodeList nodelist =
         new DTMNodeList(this);
     // Creating a DTMNodeList has the side-effect that it will create a clone
     // XNodeSet with cache and run m_iter to the end. You cannot get any node
     // from m_iter after this call. As a fix, we call SetVector() on the clone's
     // cache. See Bugzilla 14406.
-    XNodeSet clone = (XNodeSet) nodelist.getDTMIterator();
+    final XNodeSet clone = (XNodeSet) nodelist.getDTMIterator();
     SetVector(clone.getVector());
     return nodelist;
   }
@@ -213,7 +213,7 @@ public class XNodeSet extends NodeSequence {
         return cloneWithReset();
       }
       return this; // don't bother to clone... won't do any good!
-    } catch (CloneNotSupportedException cnse) {
+    } catch (final CloneNotSupportedException cnse) {
       throw new RuntimeException(cnse.getMessage());
     }
   }
@@ -221,7 +221,7 @@ public class XNodeSet extends NodeSequence {
   /** {@inheritDoc} */
   @Override
   public NodeSetDTM mutableNodeset() {
-    NodeSetDTM mnl;
+    final NodeSetDTM mnl;
 
     if (m_obj instanceof NodeSetDTM) {
       mnl = (NodeSetDTM) m_obj;
@@ -260,11 +260,11 @@ public class XNodeSet extends NodeSequence {
    * @return See the comments below for each object type comparison
    * @throws TransformerException in case of error
    */
-  public boolean compare(XObject obj2, Comparator comparator)
+  public boolean compare(final XObject obj2, final Comparator comparator)
       throws TransformerException {
 
     boolean result = false;
-    int type = obj2.getType();
+    final int type = obj2.getType();
 
     if (XObject.CLASS_NODESET == type) {
       // %OPT% This should be XMLString based instead of string based...
@@ -280,19 +280,19 @@ public class XNodeSet extends NodeSequence {
       // is true if and only if some node in $x has the string-value
       // foo; the latter is true if and only if all nodes in $x have
       // the string-value foo.
-      DTMIterator list1 = iterRaw();
-      DTMIterator list2 = ((XNodeSet) obj2).iterRaw();
+      final DTMIterator list1 = iterRaw();
+      final DTMIterator list2 = ((XNodeSet) obj2).iterRaw();
       int node1;
       List<XString> node2Strings = null;
 
       while (DTM.NULL != (node1 = list1.nextNode())) {
-        XString s1 = getStringFromNode(node1);
+        final XString s1 = getStringFromNode(node1);
 
         if (null == node2Strings) {
           int node2;
 
           while (DTM.NULL != (node2 = list2.nextNode())) {
-            XString s2 = getStringFromNode(node2);
+            final XString s2 = getStringFromNode(node2);
 
             if (comparator.compareStrings(s1, s2)) {
               result = true;
@@ -305,7 +305,7 @@ public class XNodeSet extends NodeSequence {
             node2Strings.add(s2);
           }
         } else {
-          for (XString node2String : node2Strings) {
+          for (final XString node2String : node2Strings) {
             if (comparator.compareStrings(s1, node2String)) {
               result = true;
 
@@ -324,8 +324,8 @@ public class XNodeSet extends NodeSequence {
       // performing the comparison on the boolean and on the result of
       // converting the node-set to a boolean using the boolean function
       // is true.
-      double num1 = bool() ? 1.0 : 0.0;
-      double num2 = obj2.num();
+      final double num1 = bool() ? 1.0 : 0.0;
+      final double num2 = obj2.num();
 
       result = comparator.compareNumbers(num1, num2);
     } else if (XObject.CLASS_NUMBER == type) {
@@ -337,12 +337,12 @@ public class XNodeSet extends NodeSequence {
       // comparison on the number to be compared and on the result of
       // converting the string-value of that node to a number using
       // the number function is true.
-      DTMIterator list1 = iterRaw();
-      double num2 = obj2.num();
+      final DTMIterator list1 = iterRaw();
+      final double num2 = obj2.num();
       int node;
 
       while (DTM.NULL != (node = list1.nextNode())) {
-        double num1 = getNumberFromNode(node);
+        final double num1 = getNumberFromNode(node);
 
         if (comparator.compareNumbers(num1, num2)) {
           result = true;
@@ -352,12 +352,12 @@ public class XNodeSet extends NodeSequence {
       }
       list1.reset();
     } else if (XObject.CLASS_RTREEFRAG == type) {
-      XString s2 = obj2.xstr();
-      DTMIterator list1 = iterRaw();
+      final XString s2 = obj2.xstr();
+      final DTMIterator list1 = iterRaw();
       int node;
 
       while (DTM.NULL != (node = list1.nextNode())) {
-        XString s1 = getStringFromNode(node);
+        final XString s1 = getStringFromNode(node);
 
         if (comparator.compareStrings(s1, s2)) {
           result = true;
@@ -374,12 +374,12 @@ public class XNodeSet extends NodeSequence {
       // is a node in the node-set such that the result of performing
       // the comparison on the string-value of the node and the other
       // string is true.
-      XString s2 = obj2.xstr();
-      DTMIterator list1 = iterRaw();
+      final XString s2 = obj2.xstr();
+      final DTMIterator list1 = iterRaw();
       int node;
 
       while (DTM.NULL != (node = list1.nextNode())) {
-        XString s1 = getStringFromNode(node);
+        final XString s1 = getStringFromNode(node);
         if (comparator.compareStrings(s1, s2)) {
           result = true;
 
@@ -396,41 +396,41 @@ public class XNodeSet extends NodeSequence {
 
   /** {@inheritDoc} */
   @Override
-  public boolean lessThan(XObject obj2) throws TransformerException {
+  public boolean lessThan(final XObject obj2) throws TransformerException {
     return compare(obj2, S_LT);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean lessThanOrEqual(XObject obj2) throws TransformerException {
+  public boolean lessThanOrEqual(final XObject obj2) throws TransformerException {
     return compare(obj2, S_LTE);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean greaterThan(XObject obj2) throws TransformerException {
+  public boolean greaterThan(final XObject obj2) throws TransformerException {
     return compare(obj2, S_GT);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean greaterThanOrEqual(XObject obj2) throws TransformerException {
+  public boolean greaterThanOrEqual(final XObject obj2) throws TransformerException {
     return compare(obj2, S_GTE);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean equals(XObject obj2) {
+  public boolean equals(final XObject obj2) {
     try {
       return compare(obj2, S_EQ);
-    } catch (org.loboevolution.javax.xml.transform.TransformerException te) {
+    } catch (final org.loboevolution.javax.xml.transform.TransformerException te) {
       throw new WrappedRuntimeException(te);
     }
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean notEquals(XObject obj2) throws TransformerException {
+  public boolean notEquals(final XObject obj2) throws TransformerException {
     return compare(obj2, S_NEQ);
   }
 }
@@ -462,14 +462,14 @@ class LessThanComparator extends Comparator {
 
   /** {@inheritDoc} */
   @Override
-  boolean compareStrings(XString s1, XString s2) {
+  boolean compareStrings(final XString s1, final XString s2) {
     return s1.toDouble() < s2.toDouble();
     // return s1.compareTo(s2) < 0;
   }
 
   /** {@inheritDoc} */
   @Override
-  boolean compareNumbers(double n1, double n2) {
+  boolean compareNumbers(final double n1, final double n2) {
     return n1 < n2;
   }
 }
@@ -479,14 +479,14 @@ class LessThanOrEqualComparator extends Comparator {
 
   /** {@inheritDoc} */
   @Override
-  boolean compareStrings(XString s1, XString s2) {
+  boolean compareStrings(final XString s1, final XString s2) {
     return s1.toDouble() <= s2.toDouble();
     // return s1.compareTo(s2) <= 0;
   }
 
   /** {@inheritDoc} */
   @Override
-  boolean compareNumbers(double n1, double n2) {
+  boolean compareNumbers(final double n1, final double n2) {
     return n1 <= n2;
   }
 }
@@ -496,14 +496,14 @@ class GreaterThanComparator extends Comparator {
 
   /** {@inheritDoc} */
   @Override
-  boolean compareStrings(XString s1, XString s2) {
+  boolean compareStrings(final XString s1, final XString s2) {
     return s1.toDouble() > s2.toDouble();
     // return s1.compareTo(s2) > 0;
   }
 
   /** {@inheritDoc} */
   @Override
-  boolean compareNumbers(double n1, double n2) {
+  boolean compareNumbers(final double n1, final double n2) {
     return n1 > n2;
   }
 }
@@ -513,14 +513,14 @@ class GreaterThanOrEqualComparator extends Comparator {
 
   /** {@inheritDoc} */
   @Override
-  boolean compareStrings(XString s1, XString s2) {
+  boolean compareStrings(final XString s1, final XString s2) {
     return s1.toDouble() >= s2.toDouble();
     // return s1.compareTo(s2) >= 0;
   }
 
   /** {@inheritDoc} */
   @Override
-  boolean compareNumbers(double n1, double n2) {
+  boolean compareNumbers(final double n1, final double n2) {
     return n1 >= n2;
   }
 }
@@ -530,13 +530,13 @@ class EqualComparator extends Comparator {
 
   /** {@inheritDoc} */
   @Override
-  boolean compareStrings(XString s1, XString s2) {
+  boolean compareStrings(final XString s1, final XString s2) {
     return s1.equals(s2);
   }
 
   /** {@inheritDoc} */
   @Override
-  boolean compareNumbers(double n1, double n2) {
+  boolean compareNumbers(final double n1, final double n2) {
     return n1 == n2;
   }
 }
@@ -546,13 +546,13 @@ class NotEqualComparator extends Comparator {
 
   /** {@inheritDoc} */
   @Override
-  boolean compareStrings(XString s1, XString s2) {
+  boolean compareStrings(final XString s1, final XString s2) {
     return !s1.equals(s2);
   }
 
   /** {@inheritDoc} */
   @Override
-  boolean compareNumbers(double n1, double n2) {
+  boolean compareNumbers(final double n1, final double n2) {
     return n1 != n2;
   }
 }

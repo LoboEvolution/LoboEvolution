@@ -57,14 +57,14 @@ public class createAttributeNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = null;
-        String qualifiedName = "prefix:local";
-        Document doc;
+        final String namespaceURI = null;
+        final String qualifiedName = "prefix:local";
+        final Document doc;
         doc = sampleXmlFile("staffNS.xml");
         boolean success = false;
         try {
             doc.createAttributeNS(namespaceURI, qualifiedName);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("throw_NAMESPACE_ERR", success);

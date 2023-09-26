@@ -67,7 +67,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform initialize(SVGTransform newItem) throws SVGException {
+	public SVGTransform initialize(final SVGTransform newItem) throws SVGException {
 		transList = new ArrayList<>();
 		transList.add(newItem);
 		return newItem;
@@ -75,13 +75,13 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform getItem(int index) {
+	public SVGTransform getItem(final int index) {
 		return transList.get(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform insertItemBefore(SVGTransform newItem, int index) throws SVGException {
+	public SVGTransform insertItemBefore(final SVGTransform newItem, final int index) throws SVGException {
 
         transList.remove(newItem);
 
@@ -97,7 +97,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform replaceItem(SVGTransform newItem, int index) throws SVGException {
+	public SVGTransform replaceItem(final SVGTransform newItem, final int index) throws SVGException {
 
         transList.remove(newItem);
 
@@ -112,21 +112,21 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform removeItem(int index) {
+	public SVGTransform removeItem(final int index) {
 		return transList.remove(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform appendItem(SVGTransform newItem) throws SVGException {
+	public SVGTransform appendItem(final SVGTransform newItem) throws SVGException {
 		transList.add(newItem);
 		return newItem;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix) {
-		SVGTransform transform = new SVGTransformImpl();
+	public SVGTransform createSVGTransformFromMatrix(final SVGMatrix matrix) {
+		final SVGTransform transform = new SVGTransformImpl();
 		transform.setMatrix(matrix);
 		return transform;
 	}
@@ -134,16 +134,16 @@ public class SVGTransformListImpl implements SVGTransformList {
 	/** {@inheritDoc} */
 	@Override
 	public SVGTransform consolidate() {
-		int numTransforms = getNumberOfItems();
+		final int numTransforms = getNumberOfItems();
 		if (numTransforms == 0) {
 			return null;
 		}
-		SVGTransform transform = getItem(0);
+		final SVGTransform transform = getItem(0);
 		SVGMatrix result = transform.getMatrix();
-		for (SVGTransform svgTransform : transList) {
+		for (final SVGTransform svgTransform : transList) {
 			result = result.multiply(svgTransform.getMatrix());
 		}
-		SVGTransform newTransform = new SVGTransformImpl();
+		final SVGTransform newTransform = new SVGTransformImpl();
 		newTransform.setMatrix(result);
 		initialize(newTransform);
 		return newTransform;
@@ -155,7 +155,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 	 * @return a {@link java.awt.geom.AffineTransform} object.
 	 */
 	protected AffineTransform getAffineTransform() {
-		int numTransforms = getNumberOfItems();
+		final int numTransforms = getNumberOfItems();
 		if (numTransforms == 0) {
 			return new AffineTransform();
 		}
@@ -175,45 +175,46 @@ public class SVGTransformListImpl implements SVGTransformList {
 	 * @param transformString a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransformList} object.
 	 */
-	public static SVGTransformList createTransformList(String transformString) {
-		String SCALE = "scale";
-		String TRANSLATE = "translate";
-		String MATRIX = "matrix";
-		String ROTATE = "rotate";
-		String SKEW_X = "skewX";
-		String SKEW_Y = "skewY";
+	public static SVGTransformList createTransformList(final String transformStr) {
+		String transformString = transformStr;
+		final String SCALE = "scale";
+		final String TRANSLATE = "translate";
+		final String MATRIX = "matrix";
+		final String ROTATE = "rotate";
+		final String SKEW_X = "skewX";
+		final String SKEW_Y = "skewY";
 
 		if (transformString == null) {
 			return null;
 		}
 
 		transformString = transformString.trim();
-		SVGTransformListImpl transformList = new SVGTransformListImpl();
-		StringTokenizer st = new StringTokenizer(transformString, "()", false);
+		final SVGTransformListImpl transformList = new SVGTransformListImpl();
+		final StringTokenizer st = new StringTokenizer(transformString, "()", false);
 		while (st.hasMoreTokens()) {
-			String transformType = st.nextToken().trim();
+			final String transformType = st.nextToken().trim();
 			if (!st.hasMoreTokens()) {
 				break;
 			}
-			String transformArgs = st.nextToken().trim();
+			final String transformArgs = st.nextToken().trim();
 			if (transformType.contains(MATRIX)) {
-				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
-				int numArgs = st1.countTokens();
+				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
+				final int numArgs = st1.countTokens();
 				if (numArgs == 6) {
-					float a = Float.parseFloat(st1.nextToken());
-					float b = Float.parseFloat(st1.nextToken());
-					float c = Float.parseFloat(st1.nextToken());
-					float d = Float.parseFloat(st1.nextToken());
-					float e = Float.parseFloat(st1.nextToken());
-					float f = Float.parseFloat(st1.nextToken());
-					SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_MATRIX);
-					SVGMatrixImpl matrix = new SVGMatrixImpl(a, b, c, d, e, f);
+					final float a = Float.parseFloat(st1.nextToken());
+					final float b = Float.parseFloat(st1.nextToken());
+					final float c = Float.parseFloat(st1.nextToken());
+					final float d = Float.parseFloat(st1.nextToken());
+					final float e = Float.parseFloat(st1.nextToken());
+					final float f = Float.parseFloat(st1.nextToken());
+					final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_MATRIX);
+					final SVGMatrixImpl matrix = new SVGMatrixImpl(a, b, c, d, e, f);
 					transform.setMatrix(matrix);
 					transformList.appendItem(transform);
 				}
 			} else if (transformType.contains(TRANSLATE)) {
-				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
-				int numArgs = st1.countTokens();
+				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
+				final int numArgs = st1.countTokens();
 				float tx = 0;
 				float ty = 0;
 				if (numArgs == 1) {
@@ -227,12 +228,12 @@ public class SVGTransformListImpl implements SVGTransformList {
 						ty = Float.parseFloat(st1.nextToken());
 					}
 				}
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_TRANSLATE);
+				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_TRANSLATE);
 				transform.setTranslate(tx, ty);
 				transformList.appendItem(transform);
 			} else if (transformType.contains(SCALE)) {
-				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
-				int numArgs = st1.countTokens();
+				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
+				final int numArgs = st1.countTokens();
 				float sx = 0;
 				float sy = 0;
 				if (numArgs == 1) {
@@ -247,12 +248,12 @@ public class SVGTransformListImpl implements SVGTransformList {
 						sy = Float.parseFloat(st1.nextToken());
 					}
 				}
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SCALE);
+				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SCALE);
 				transform.setScale(sx, sy);
 				transformList.appendItem(transform);
 			} else if (transformType.contains(ROTATE)) {
-				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
-				int numArgs = st1.countTokens();
+				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
+				final int numArgs = st1.countTokens();
 				float angle = 0;
 				float cx = 0;
 				float cy = 0;
@@ -271,17 +272,17 @@ public class SVGTransformListImpl implements SVGTransformList {
 						cy = Float.parseFloat(st1.nextToken());
 					}
 				}
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_ROTATE);
+				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_ROTATE);
 				transform.setRotate(angle, cx, cy);
 				transformList.appendItem(transform);
 			} else if (transformType.contains(SKEW_X)) {
-				float skewAngle = Float.parseFloat(transformArgs);
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWX);
+				final float skewAngle = Float.parseFloat(transformArgs);
+				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWX);
 				transform.setSkewX(skewAngle);
 				transformList.appendItem(transform);
 			} else if (transformType.contains(SKEW_Y)) {
-				float skewAngle = Float.parseFloat(transformArgs);
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWY);
+				final float skewAngle = Float.parseFloat(transformArgs);
+				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWY);
 				transform.setSkewY(skewAngle);
 				transformList.appendItem(transform);
 			}

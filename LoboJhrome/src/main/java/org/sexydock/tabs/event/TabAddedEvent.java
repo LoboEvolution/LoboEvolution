@@ -33,7 +33,7 @@ import javax.swing.*;
 public class TabAddedEvent extends TabbedPaneEvent {
     public final Tab addedTab;
     public final int insertIndex;
-    public TabAddedEvent(JTabbedPane tabbedPane, long timestamp, Tab addedTab, int insertIndex) {
+    public TabAddedEvent(final JTabbedPane tabbedPane, final long timestamp, final Tab addedTab, final int insertIndex) {
         super(tabbedPane, timestamp);
         this.addedTab = addedTab;
         this.insertIndex = insertIndex;

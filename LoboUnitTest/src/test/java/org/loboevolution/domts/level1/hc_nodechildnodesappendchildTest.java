@@ -66,16 +66,16 @@ public class hc_nodechildnodesappendchildTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node createdNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node createdNode;
         Node childNode;
         String childName;
         int childType;
-        List<String> actual = new ArrayList<>();
-        List<String> expected = new ArrayList<>();
+        final List<String> actual = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("EM");
         expected.add("STRONG");
         expected.add("CODE");

@@ -111,10 +111,10 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	 * @param elem a {@link org.loboevolution.html.dom.svgimpl.SVGElementImpl} object.
 	 * @param animate a {@link org.loboevolution.html.dom.svgimpl.SVGAnimateElementImpl} object.
 	 */
-	public SVGAnimateImpl(SVGElementImpl elem, SVGAnimateElementImpl animate) {
+	public SVGAnimateImpl(final SVGElementImpl elem, final SVGAnimateElementImpl animate) {
 		this.elem = elem;
 		this.animate = animate;
-		SVGSVGElementImpl ownerSVGElement = (SVGSVGElementImpl) elem.getOwnerSVGElement();
+		final SVGSVGElementImpl ownerSVGElement = ( SVGSVGElementImpl) elem.getOwnerSVGElement();
 		if (!ownerSVGElement.isPainted()) {
 			dur = System.currentTimeMillis();
 			timer = new Timer(timerDelay(animate), this);
@@ -152,7 +152,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		}
 	}
 
-	private void animateSize(SVGElementImpl elem, String type) {
+	private void animateSize(final SVGElementImpl elem, final String type) {
 		if (counter == 0) {
 			from = Float.parseFloat(animate.getFrom());
 			to = Float.parseFloat(animate.getTo());
@@ -179,10 +179,10 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		counter++;
 	}
 	
-	private void animateColor(SVGElementImpl elem) {
+	private void animateColor(final SVGElementImpl elem) {
 		if (counter == 0) {
-			Color from_color = ColorFactory.getInstance().getColor(animate.getFrom());
-			Color to_color = ColorFactory.getInstance().getColor(animate.getTo());
+			final Color from_color = ColorFactory.getInstance().getColor(animate.getFrom());
+			final Color to_color = ColorFactory.getInstance().getColor(animate.getTo());
 			
 			f_red = from_color.getRed();
 			f_green = from_color.getGreen();
@@ -211,10 +211,10 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		if (f_blue < t_blue)
 			f_blue++;
 
-		String rgb = "rgb(" + f_red + "," + f_green + "," + f_blue + ")";
+		final String rgb = "rgb(" + f_red + "," + f_green + "," + f_blue + ")";
 		elem.setAttribute("fill", rgb);
 		
-		boolean end = (++counter > 255);
+		final boolean end = (++counter > 255);
 				
 		if (animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)) {
 			timer.stop();
@@ -227,15 +227,15 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	
 	
 	
-	private void animateTransform(SVGElementImpl elem) {
+	private void animateTransform(final SVGElementImpl elem) {
 		String transformString = "";
 		if (counter == 0) {
 			from_trans = animate.getFrom();
 			to_trans = animate.getTo();
 		}
 		
-		StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
-		StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+		final StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
+		final StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
 
 		switch (animate.getType()) {
 		case SVGTransform.SVG_TRANSFORM_TRANSLATE:
@@ -384,7 +384,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	 * <p>restart.</p>
 	 */
 	public void restart() {
-		SVGSVGElementImpl ownerSVGElement = (SVGSVGElementImpl) elem.getOwnerSVGElement();
+		final SVGSVGElementImpl ownerSVGElement = ( SVGSVGElementImpl) elem.getOwnerSVGElement();
 		ownerSVGElement.setPainted(false);
 		new SVGAnimateImpl(elem, animate);
 	}
@@ -396,7 +396,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	 * @param animate a {@link org.loboevolution.html.dom.svgimpl.SVGAnimationImpl} object.
 	 * @return a int.
 	 */
-	public int timerDelay(SVGAnimationImpl animate) {
+	public int timerDelay(final SVGAnimationImpl animate) {
 		if (animate.getDur() == 0)
 			return 5;
 
@@ -409,37 +409,37 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		}
 	}
 	
-	private int begin(SVGAnimationImpl animate) {
-		TimeList begin = animate.getBegin();
-		TimeImpl time = (TimeImpl)begin.item(0);
+	private int begin(final SVGAnimationImpl animate) {
+		final TimeList begin = animate.getBegin();
+		final TimeImpl time = (TimeImpl)begin.item(0);
 		return Double.valueOf(time.getResolvedOffset()).intValue();
 	}
 
-	private int timerDelayFloat(SVGAnimationImpl animate) {
-		float dur = animate.getDur();
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		float range = to - from;
+	private int timerDelayFloat(final SVGAnimationImpl animate) {
+		final float dur = animate.getDur();
+		final float from = Float.parseFloat(animate.getFrom());
+		final float to = Float.parseFloat(animate.getTo());
+		final float range = to - from;
 		return Math.round(dur / range);
 	}
 
-	private int timerDelayColor(SVGAnimationImpl animate) {
-		float dur = animate.getDur();
-		Color from = ColorFactory.getInstance().getColor(animate.getFrom());
-		Color to = ColorFactory.getInstance().getColor(animate.getTo());
-		float range = (to.getRed() - from.getRed()) + (to.getBlue() - from.getBlue()) + (to.getGreen() - from.getGreen());
+	private int timerDelayColor(final SVGAnimationImpl animate) {
+		final float dur = animate.getDur();
+		final Color from = ColorFactory.getInstance().getColor(animate.getFrom());
+		final Color to = ColorFactory.getInstance().getColor(animate.getTo());
+		final float range = (to.getRed() - from.getRed()) + (to.getBlue() - from.getBlue()) + (to.getGreen() - from.getGreen());
 		if (range == 0) return 255;
 		return Math.round(dur / range);
 	}
 
-	private int timeDelayTransform(SVGAnimationImpl animate) {
-		float dur = animate.getDur();
+	private int timeDelayTransform(final SVGAnimationImpl animate) {
+		final float dur = animate.getDur();
 		float range = 0;
 		float sxFrom = 0;
 		float sxTo = 0;
-		String from_trans = animate.getFrom();
-		String to_trans = animate.getTo();
-		StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
+		final String from_trans = animate.getFrom();
+		final String to_trans = animate.getTo();
+		final StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
 		StringTokenizer stTo = null;
 		switch (animate.getAttributeType()) {
 		case SVGTransform.SVG_TRANSFORM_TRANSLATE:

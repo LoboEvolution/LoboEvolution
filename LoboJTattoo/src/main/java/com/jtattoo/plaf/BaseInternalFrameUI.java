@@ -48,26 +48,23 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  * <p>BaseInternalFrameUI class.</p>
- *
- *
- *
  */
 public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
 	// -----------------------------------------------------------------------------
 // inner classes
 //-----------------------------------------------------------------------------
-	private static class MyPropertyChangeHandler implements PropertyChangeListener {
+	private final static class MyPropertyChangeHandler implements PropertyChangeListener {
 
 		@Override
-		public void propertyChange(PropertyChangeEvent e) {
-			JInternalFrame jif = (JInternalFrame) e.getSource();
+		public void propertyChange(final PropertyChangeEvent e) {
+			final JInternalFrame jif = (JInternalFrame) e.getSource();
 			if (!(jif.getUI() instanceof BaseInternalFrameUI)) {
 				return;
 			}
 
-			BaseInternalFrameUI ui = (BaseInternalFrameUI) jif.getUI();
-			String name = e.getPropertyName();
+			final BaseInternalFrameUI ui = (BaseInternalFrameUI) jif.getUI();
+			final String name = e.getPropertyName();
 			if (name.equals(FRAME_TYPE)) {
 				if (e.getNewValue() instanceof String) {
 					if (PALETTE_FRAME.equals(e.getNewValue())) {
@@ -88,11 +85,11 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 				ui.stripContentBorder();
 			} else if (name.equals("ancestor") && !AbstractLookAndFeel.isWindowDecorationOn()) {
 				if (e.getNewValue() instanceof JDesktopPane) {
-					JDesktopPane jp = (JDesktopPane) e.getNewValue();
-					Window window = SwingUtilities.getWindowAncestor(jp);
+					final JDesktopPane jp = (JDesktopPane) e.getNewValue();
+					final Window window = SwingUtilities.getWindowAncestor(jp);
 					if (window != null) {
 						boolean doAdd = true;
-						for (WindowListener wl : window.getWindowListeners()) {
+						for (final WindowListener wl : window.getWindowListeners()) {
 							if (wl.equals(MY_WINDOW_HANDLER)) {
 								doAdd = false;
 								break;
@@ -103,8 +100,8 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 						}
 					}
 				} else if (e.getOldValue() instanceof JDesktopPane) {
-					JDesktopPane jp = (JDesktopPane) e.getOldValue();
-					Window window = SwingUtilities.getWindowAncestor(jp);
+					final JDesktopPane jp = (JDesktopPane) e.getOldValue();
+					final Window window = SwingUtilities.getWindowAncestor(jp);
 					if (window != null) {
 						window.removeWindowListener(MY_WINDOW_HANDLER);
 					}
@@ -114,16 +111,16 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 	} // end of class MyPropertyChangeHandler
 		// -----------------------------------------------------------------------------
 
-	private static class MyWindowHandler extends WindowAdapter {
+	private final static class MyWindowHandler extends WindowAdapter {
 
 		@Override
-		public void windowActivated(WindowEvent e) {
+		public void windowActivated(final WindowEvent e) {
 			e.getWindow().invalidate();
 			e.getWindow().repaint();
 		}
 
 		@Override
-		public void windowDeactivated(WindowEvent e) {
+		public void windowDeactivated(final WindowEvent e) {
 			e.getWindow().invalidate();
 			e.getWindow().repaint();
 		}
@@ -151,13 +148,13 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 	 *
 	 * @param b a {@link javax.swing.JInternalFrame} object.
 	 */
-	public BaseInternalFrameUI(JInternalFrame b) {
+	public BaseInternalFrameUI(final JInternalFrame b) {
 		super(b);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected JComponent createNorthPane(JInternalFrame w) {
+	protected JComponent createNorthPane(final JInternalFrame w) {
 		return new BaseInternalFrameTitlePane(w);
 	}
 
@@ -174,7 +171,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
-		Icon frameIcon = frame.getFrameIcon();
+		final Icon frameIcon = frame.getFrameIcon();
 		if (frameIcon == null || frameIcon instanceof LazyImageIcon) {
 			frame.setFrameIcon(UIManager.getIcon("InternalFrame.icon"));
 		}
@@ -189,9 +186,9 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installUI(JComponent c) {
+	public void installUI(final JComponent c) {
 		super.installUI(c);
-		Object paletteProp = c.getClientProperty(IS_PALETTE);
+		final Object paletteProp = c.getClientProperty(IS_PALETTE);
 		if (paletteProp != null) {
 			setPalette((Boolean) paletteProp);
 		}
@@ -203,7 +200,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 	 *
 	 * @param isPalette a boolean.
 	 */
-	public void setPalette(boolean isPalette) {
+	public void setPalette(final boolean isPalette) {
 		if (isPalette) {
 			frame.setBorder(UIManager.getBorder(FRAME_PALETTE_BORDER));
 		} else {
@@ -216,10 +213,10 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 	 * <p>stripContentBorder.</p>
 	 */
 	public void stripContentBorder() {
-		Container cp = frame.getContentPane();
+		final Container cp = frame.getContentPane();
 		if (cp instanceof JComponent) {
-			JComponent contentPane = (JComponent) cp;
-			Border contentBorder = contentPane.getBorder();
+			final JComponent contentPane = (JComponent) cp;
+			final Border contentBorder = contentPane.getBorder();
 			if (contentBorder == null || contentBorder instanceof UIResource) {
 				contentPane.setBorder(HANDY_EMPTY_BORDER);
 			}
@@ -242,10 +239,10 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void uninstallUI(JComponent c) {
-		Container cp = frame.getContentPane();
+	public void uninstallUI(final JComponent c) {
+		final Container cp = frame.getContentPane();
 		if (cp instanceof JComponent) {
-			JComponent contentPane = (JComponent) cp;
+			final JComponent contentPane = (JComponent) cp;
 			if (contentPane.getBorder() == HANDY_EMPTY_BORDER) {
 				contentPane.setBorder(null);
 			}

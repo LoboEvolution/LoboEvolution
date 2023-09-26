@@ -46,9 +46,9 @@ import static org.junit.Assert.assertNull;
 public class nodegetuserdata06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Text txt;
-        Object retUserData;
+        final Document doc;
+        final Text txt;
+        final Object retUserData;
         doc = sampleXmlFile("hc_staff.xml");
         txt = doc.createTextNode("TEXT");
         retUserData = txt.getUserData("");

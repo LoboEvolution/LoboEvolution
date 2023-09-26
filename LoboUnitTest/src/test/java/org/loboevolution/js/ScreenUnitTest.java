@@ -106,7 +106,7 @@ public class ScreenUnitTest extends LoboUnitTest {
         testNumericProperty("width", messages);
     }
 
-    private void testBooleanProperty(final String prop, String[] messages) {
+    private void testBooleanProperty(final String prop, final String[] messages) {
         final String html = "<html><head><title>test</title>\n"
                 + "  <script>\n"
                 + "    function doTest() {\n"
@@ -127,7 +127,7 @@ public class ScreenUnitTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
-    private void testNumericProperty(final String prop, String[] messages) {
+    private void testNumericProperty(final String prop, final String[] messages) {
         final String html = "<html><head><title>test</title>\n"
                 + "  <script>\n"
                 + "    function doTest() {\n"

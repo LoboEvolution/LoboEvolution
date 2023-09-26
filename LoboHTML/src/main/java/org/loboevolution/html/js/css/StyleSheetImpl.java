@@ -39,7 +39,7 @@ public class StyleSheetImpl implements StyleSheet {
 
     private Node ownerNode;
 
-    public StyleSheetImpl(CSSStyleSheetImpl cssStyleSheet) {
+    public StyleSheetImpl(final CSSStyleSheetImpl cssStyleSheet) {
         this.cssStyleSheet = cssStyleSheet;
     }
 
@@ -79,7 +79,7 @@ public class StyleSheetImpl implements StyleSheet {
         return cssStyleSheet.getDisabled();
     }
 
-    public void setOwnerNode(Node ownerNode) {
+    public void setOwnerNode(final Node ownerNode) {
         this.ownerNode = ownerNode;
     }
 

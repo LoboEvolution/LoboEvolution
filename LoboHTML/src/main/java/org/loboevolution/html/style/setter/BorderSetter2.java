@@ -44,14 +44,14 @@ public class BorderSetter2 implements SubPropertySetter {
 	 *
 	 * @param baseName a {@link java.lang.String} object.
 	 */
-	public BorderSetter2(String baseName) {
+	public BorderSetter2(final String baseName) {
 		this.name = baseName;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(CSSStyleDeclaration declaration, String value) {
-		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+	public void changeValue(final CSSStyleDeclaration declaration, final String value) {
+		final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 		properties.setProperty(this.name, value);
 		if (Strings.isNotBlank(value)) {
 			final String[] array = HtmlValues.splitCssValue(value);

@@ -30,7 +30,6 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -60,13 +59,13 @@ public class documentgetelementsbytagnameNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DocumentType docType = null;
+        final Document doc;
+        final Document newDoc;
+        final DocumentType docType = null;
 
-        DOMImplementation domImpl;
-        HTMLCollection childList;
-        String nullNS = null;
+        final DOMImplementation domImpl;
+        final HTMLCollection childList;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         

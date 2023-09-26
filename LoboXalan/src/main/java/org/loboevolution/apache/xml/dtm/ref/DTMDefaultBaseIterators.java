@@ -49,7 +49,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
    * @param doIndexing true if the caller considers it worth it to use indexing schemes.
    */
   public DTMDefaultBaseIterators(
-          DTMManager mgr, Source source, int dtmIdentity, boolean doIndexing) {
+          final DTMManager mgr, final Source source, final int dtmIdentity, final boolean doIndexing) {
     super(mgr, source, dtmIdentity, doIndexing);
   }
 
@@ -57,7 +57,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
   @Override
   public DTMAxisIterator getAxisIterator(final int axis) {
 
-    DTMAxisIterator iterator;
+    final DTMAxisIterator iterator;
 
     switch (axis) {
       case Axis.SELF:
@@ -153,7 +153,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public int next() {
       if (_currentNode != DTM.NULL) {
-        int node = _currentNode;
+        final int node = _currentNode;
         _currentNode = _nextsib(node);
         return returnNode(makeNodeHandle(node));
       }
@@ -184,7 +184,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     /** {@inheritDoc} */
     @Override
     public int next() {
-      int result = _currentNode;
+      final int result = _currentNode;
 
       /* The extended type ID that was requested. */
 
@@ -222,7 +222,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public int next() {
 
-      int node = _currentNode;
+      final int node = _currentNode;
 
       if (DTM.NULL != node) _currentNode = getNextNamespaceNode(_startNode, node, true);
 
@@ -241,7 +241,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
     /** {@inheritDoc} */
     @Override
-    public void setStartNode(int node) {
+    public void setStartNode(final int node) {
 
       if (_isRestartable) {
         _startNode = getDocumentRoot(node);
@@ -346,7 +346,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
           return;
         }
 
-        int type = m_expandedNameTable.getType(_exptype(node));
+        final int type = m_expandedNameTable.getType(_exptype(node));
         if (ExpandedNameTable.ATTRIBUTE == type || ExpandedNameTable.NAMESPACE == type) {
           _currentNode = node;
         } else {
@@ -409,7 +409,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         // return clone.reset();
         return clone;
-      } catch (CloneNotSupportedException e) {
+      } catch (final CloneNotSupportedException e) {
         throw new DTMException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null));
@@ -504,7 +504,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public int next() {
 
-      int node = _currentNode;
+      final int node = _currentNode;
 
       _currentNode = m_traverser.next(_startNode, _currentNode);
 
@@ -540,7 +540,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
 
         // return clone.reset();
         return clone;
-      } catch (CloneNotSupportedException e) {
+      } catch (final CloneNotSupportedException e) {
         throw new DTMException(
             XPATHMessages.createXPATHMessage(
                 XPATHErrorResources.ER_ITERATOR_CLONE_NOT_SUPPORTED, null));
@@ -591,9 +591,9 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
     @Override
     public int next() {
 
-      int next = _currentNode;
+      final int next = _currentNode;
 
-      int pos = --m_ancestorsPos;
+      final int pos = --m_ancestorsPos;
 
       _currentNode = (pos >= 0) ? m_ancestors.elementAt(m_ancestorsPos) : DTM.NULL;
 
@@ -633,7 +633,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
      * @param identity The index number of the node in question.
      * @return true if the index is a descendant of _startNode.
      */
-    protected boolean isDescendant(int identity) {
+    protected boolean isDescendant(final int identity) {
       return (_parent(identity) >= _startNode) || (_startNode == identity);
     }
 
@@ -695,7 +695,7 @@ public abstract class DTMDefaultBaseIterators extends DTMDefaultBaseTraversers {
      * @param node the node handle to return.
      * @param constant (Not sure what this is yet. -sb)
      */
-    public SingletonIterator(int node, boolean constant) {
+    public SingletonIterator(final int node, final boolean constant) {
       _currentNode = _startNode = node;
       _isConstant = constant;
     }

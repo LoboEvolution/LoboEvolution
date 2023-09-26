@@ -59,11 +59,11 @@ public class getElementsByTagNameNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection newList;
-        Element newElement;
-        String prefix;
-        String lname;
+        final Document doc;
+        final HTMLCollection newList;
+        final Element newElement;
+        final String prefix;
+        final String lname;
         doc = sampleXmlFile("staffNS.xml");
         newList = doc.getElementsByTagNameNS("*", "employee");
         assertEquals( "employeeCount", 5, newList.getLength());

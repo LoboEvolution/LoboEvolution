@@ -56,10 +56,10 @@ public class elementretrieveattrvalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddress;
-        String attrValue;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddress;
+        final String attrValue;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(2);

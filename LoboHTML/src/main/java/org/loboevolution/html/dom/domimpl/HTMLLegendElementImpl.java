@@ -41,13 +41,13 @@ public class HTMLLegendElementImpl extends HTMLElementImpl implements HTMLLegend
      *
      * @param name a {@link String} object.
      */
-    public HTMLLegendElementImpl(String name) {
+    public HTMLLegendElementImpl(final String name) {
         super(name);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new LegendRenderState(prevRenderState, this);
     }
 
@@ -67,7 +67,7 @@ public class HTMLLegendElementImpl extends HTMLElementImpl implements HTMLLegend
      * @param align a {@link String} object.
      */
     @Override
-    public void setAlign(String align) {
+    public void setAlign(final String align) {
 
     }
 

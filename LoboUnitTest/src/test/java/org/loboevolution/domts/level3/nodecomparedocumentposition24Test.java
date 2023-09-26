@@ -48,12 +48,12 @@ import static org.junit.Assert.assertEquals;
 public class nodecomparedocumentposition24Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notaionsMap;
-        Notation notation;
-        Notation notation2;
-        int notationPosition;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notaionsMap;
+        final Notation notation;
+        final Notation notation2;
+        final int notationPosition;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         notaionsMap = docType.getNotations();

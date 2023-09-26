@@ -46,7 +46,7 @@ public class ScreenShotAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public ScreenShotAction(BrowserFrame frame) {
+	public ScreenShotAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 

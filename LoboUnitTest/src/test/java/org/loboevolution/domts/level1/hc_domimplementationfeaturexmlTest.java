@@ -54,9 +54,9 @@ public class hc_domimplementationfeaturexmlTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        boolean state;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final boolean state;
         doc = sampleXmlFile("hc_staff.xml");
         
         domImpl = doc.getImplementation();

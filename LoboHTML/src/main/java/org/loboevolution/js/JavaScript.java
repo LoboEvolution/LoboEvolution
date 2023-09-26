@@ -53,7 +53,7 @@ public class JavaScript {
 		return instance;
 	}
 
-	private static String getStringValue(Object object) {
+	private static String getStringValue(final Object object) {
 		if (object instanceof Undefined) {
 			return "undefined";
 		} else if (object instanceof Scriptable) {
@@ -75,7 +75,7 @@ public class JavaScript {
 	 * @param type a {@link java.lang.Class} object.
 	 * @return a {@link java.lang.Object} object.
 	 */
-	public Object getJavaObject(Object javascriptObject, Class<?> type) {
+	public Object getJavaObject(final Object javascriptObject, final Class<?> type) {
 		if (javascriptObject instanceof JavaObjectWrapper) {
 			final Object rawJavaObject = ((JavaObjectWrapper) javascriptObject).getJavaObject();
 			if (String.class == type) {
@@ -126,7 +126,7 @@ public class JavaScript {
 	 * @param scope a {@link org.mozilla.javascript.Scriptable} object.
 	 * @return a {@link java.lang.Object} object.
 	 */
-	public Object getJavascriptObject(Object raw, Scriptable scope) {
+	public Object getJavascriptObject(final Object raw, final Scriptable scope) {
 		if (raw instanceof String || raw instanceof Scriptable) {
 			return raw;
 		} else if (raw == null) {
@@ -172,26 +172,26 @@ public class JavaScript {
 		}
 	}
 
-	public void defineElementClass(Scriptable scope, final Document document, final String jsClassName, final String elementName, Class<?> javaClass) {
-		JavaInstantiator ji = () -> {
-			Document d = document;
+	public void defineElementClass(final Scriptable scope, final Document document, final String jsClassName, final String elementName, final Class<?> javaClass) {
+		final JavaInstantiator ji = () -> {
+			final Document d = document;
 			if (d == null) {
 				throw new IllegalStateException("Document not set in current context.");
 			}
 			return d.createElement(elementName);
 		};
-		JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
-		Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, ji);
+		final JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
+		final Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, ji);
 		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
 	}
 
-	public void defineJsObject(Scriptable scope, final String jsClassName, Class<?> javaClass, JavaInstantiator instantiator) {
-		JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
-		Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, instantiator);
+	public void defineJsObject(final Scriptable scope, final String jsClassName, final Class<?> javaClass, final JavaInstantiator instantiator) {
+		final JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
+		final Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, instantiator);
 		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
 	}
 	
-	private boolean isBoxClass(Class clazz) {
+	private boolean isBoxClass(final Class clazz) {
         return clazz == Integer.class || clazz == Boolean.class || clazz == Double.class || clazz == Float.class
                 || clazz == Long.class || clazz == Byte.class || clazz == Short.class || clazz == Character.class;
     }

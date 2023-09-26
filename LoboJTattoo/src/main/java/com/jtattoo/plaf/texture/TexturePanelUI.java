@@ -53,7 +53,7 @@ public class TexturePanelUI extends BasePanelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(Graphics g, JComponent c) {
+	public void update(final Graphics g, final JComponent c) {
 		if (c.isOpaque() && c.getBackground() instanceof ColorUIResource
 				&& c.getClientProperty("backgroundTexture") == null) {
 			TextureUtils.fillComponent(g, c, TextureUtils.getTextureType(c));

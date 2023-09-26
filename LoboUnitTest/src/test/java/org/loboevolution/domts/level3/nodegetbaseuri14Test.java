@@ -47,18 +47,18 @@ import static org.junit.Assert.assertNull;
 public class nodegetbaseuri14Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        Element docElem;
-        String docElemNS;
-        String docElemName;
-        DOMImplementation domImpl;
-        DocumentType docType;
-        NamedNodeMap notationsMap;
-        Notation notation;
-        Notation notationImported;
-        String baseURI;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final Element docElem;
+        final String docElemNS;
+        final String docElemName;
+        final DOMImplementation domImpl;
+        final DocumentType docType;
+        final NamedNodeMap notationsMap;
+        final Notation notation;
+        final Notation notationImported;
+        final String baseURI;
+        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();

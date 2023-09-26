@@ -34,7 +34,7 @@ public class Number extends UnaryOperation {
 
   /** {@inheritDoc} */
   @Override
-  public XObject operate(XObject right) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject operate(final XObject right) throws org.loboevolution.javax.xml.transform.TransformerException {
 
     if (XObject.CLASS_NUMBER == right.getType()) {
       return right;
@@ -44,7 +44,7 @@ public class Number extends UnaryOperation {
 
   /** {@inheritDoc} */
   @Override
-  public double num(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public double num(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
 
     return m_right.num(xctxt);
   }

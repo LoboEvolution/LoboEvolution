@@ -120,7 +120,7 @@ public class HeadTable extends TrueTypeTable {
 	 * Parse the data before it is set
 	 */
     @Override
-	public void setData(ByteBuffer data) {
+	public void setData(final ByteBuffer data) {
         if (data.remaining() < 54) {
             throw new IllegalArgumentException("Bad Head table size " + data.remaining());
         }
@@ -150,7 +150,7 @@ public class HeadTable extends TrueTypeTable {
 	 */
     @Override
 	public ByteBuffer getData() {
-        ByteBuffer buf = ByteBuffer.allocate(getLength());
+        final ByteBuffer buf = ByteBuffer.allocate(getLength());
         
         buf.putInt(getVersion());
         buf.putInt(getFontRevision());
@@ -344,7 +344,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param xMax New value of property XMax.
      */
-    public void setXMax(short xMax) {
+    public void setXMax(final short xMax) {
         this.xMax = xMax;
     }
     
@@ -353,7 +353,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param xMin New value of property XMin.
      */
-    public void setXMin(short xMin) {
+    public void setXMin(final short xMin) {
         this.xMin = xMin;
     }
     
@@ -362,7 +362,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param yMax New value of property YMax.
      */
-    public void setYMax(short yMax) {
+    public void setYMax(final short yMax) {
         this.yMax = yMax;
     }
     
@@ -371,7 +371,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param yMin New value of property YMin.
      */
-    public void setYMin(short yMin) {
+    public void setYMin(final short yMin) {
         this.yMin = yMin;
     }
     
@@ -380,7 +380,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param checksumAdjustment New value of property checksumAdjustment.
      */
-    public void setChecksumAdjustment(int checksumAdjustment) {
+    public void setChecksumAdjustment(final int checksumAdjustment) {
         this.checksumAdjustment = checksumAdjustment;
     }
     
@@ -389,7 +389,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param created New value of property created.
      */
-    public void setCreated(long created) {
+    public void setCreated(final long created) {
         this.created = created;
     }
     
@@ -398,7 +398,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param flags New value of property flags.
      */
-    public void setFlags(short flags) {
+    public void setFlags(final short flags) {
         this.flags = flags;
     }
     
@@ -407,7 +407,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param fontDirectionHint New value of property fontDirectionHint.
      */
-    public void setFontDirectionHint(short fontDirectionHint) {
+    public void setFontDirectionHint(final short fontDirectionHint) {
         this.fontDirectionHint = fontDirectionHint;
     }
     
@@ -416,7 +416,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param fontRevision New value of property fontRevision.
      */
-    public void setFontRevision(int fontRevision) {
+    public void setFontRevision(final int fontRevision) {
         this.fontRevision = fontRevision;
     }
     
@@ -425,7 +425,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param glyphDataFormat New value of property glyphDataFormat.
      */
-    public void setGlyphDataFormat(short glyphDataFormat) {
+    public void setGlyphDataFormat(final short glyphDataFormat) {
         this.glyphDataFormat = glyphDataFormat;
     }
     
@@ -434,7 +434,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param indexToLocFormat New value of property indexToLocFormat.
      */
-    public void setIndexToLocFormat(short indexToLocFormat) {
+    public void setIndexToLocFormat(final short indexToLocFormat) {
         this.indexToLocFormat = indexToLocFormat;
     }
     
@@ -443,7 +443,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param lowestRecPPem New value of property lowestRecPPem.
      */
-    public void setLowestRecPPem(short lowestRecPPem) {
+    public void setLowestRecPPem(final short lowestRecPPem) {
         this.lowestRecPPem = lowestRecPPem;
     }
     
@@ -452,7 +452,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param macStyle New value of property macStyle.
      */
-    public void setMacStyle(short macStyle) {
+    public void setMacStyle(final short macStyle) {
         this.macStyle = macStyle;
     }
     
@@ -461,7 +461,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param magicNumber New value of property magicNumber.
      */
-    public void setMagicNumber(int magicNumber) {
+    public void setMagicNumber(final int magicNumber) {
         this.magicNumber = magicNumber;
     }
     
@@ -470,7 +470,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param modified New value of property modified.
      */
-    public void setModified(long modified) {
+    public void setModified(final long modified) {
         this.modified = modified;
     }
     
@@ -479,7 +479,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param unitsPerEm New value of property unitsPerEm.
      */
-    public void setUnitsPerEm(short unitsPerEm) {
+    public void setUnitsPerEm(final short unitsPerEm) {
         this.unitsPerEm = unitsPerEm;
     }
     
@@ -488,7 +488,7 @@ public class HeadTable extends TrueTypeTable {
      *
      * @param version New value of property version.
      */
-    public void setVersion(int version) {
+    public void setVersion(final int version) {
         this.version = version;
     }
     
@@ -499,8 +499,8 @@ public class HeadTable extends TrueTypeTable {
 	 */
     @Override
 	public String toString() {
-        StringBuilder buf = new StringBuilder();
-        String indent = "    ";
+        final StringBuilder buf = new StringBuilder();
+        final String indent = "    ";
         
         buf.append(indent).append("Version          : ").append(Integer.toHexString(getVersion())).append("\n");
         buf.append(indent).append("Revision         : ").append(Integer.toHexString(getFontRevision())).append("\n");

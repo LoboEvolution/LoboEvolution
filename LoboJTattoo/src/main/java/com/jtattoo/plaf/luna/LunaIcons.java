@@ -67,7 +67,7 @@ public class LunaIcons extends BaseIcons {
 
 		private int iconTyp = ICON_ICON_TYP;
 
-		public TitleButtonIcon(int typ) {
+		public TitleButtonIcon(final int typ) {
 			iconTyp = typ;
 		}
 
@@ -82,19 +82,20 @@ public class LunaIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			int w = c.getWidth();
-			int h = c.getHeight();
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+final int x = iconX;
+			final int w = c.getWidth();
+			final int h = c.getHeight();
 
-			JButton b = (JButton) c;
-			Graphics2D g2D = (Graphics2D) g;
+			final JButton b = (JButton) c;
+			final Graphics2D g2D = (Graphics2D) g;
 
-			boolean isActive = JTattooUtilities.isActive(b);
-			boolean isPressed = b.getModel().isPressed();
-			boolean isArmed = b.getModel().isArmed();
-			boolean isRollover = b.getModel().isRollover();
+			final boolean isActive = JTattooUtilities.isActive(b);
+			final boolean isPressed = b.getModel().isPressed();
+			final boolean isArmed = b.getModel().isArmed();
+			final boolean isRollover = b.getModel().isRollover();
 
-			Color fc = BLUE_FRAME_COLOR;
+			final Color fc = BLUE_FRAME_COLOR;
 			Color cHi = BLUE_COLOR_LIGHT;
 			Color cLo = BLUE_COLOR_DARK;
 			if (iconTyp == CLOSE_ICON_TYP) {
@@ -107,7 +108,7 @@ public class LunaIcons extends BaseIcons {
 				cLo = ColorHelper.brighter(cLo, 10);
 			}
 			if (isPressed && isArmed) {
-				Color cTemp = ColorHelper.darker(cLo, 10);
+				final Color cTemp = ColorHelper.darker(cLo, 10);
 				cLo = ColorHelper.darker(cHi, 10);
 				cHi = cTemp;
 			} else if (isRollover) {
@@ -123,8 +124,8 @@ public class LunaIcons extends BaseIcons {
 			g.drawLine(0, 1, 0, h - 2);
 			g.drawLine(1, h - 1, w - 2, h - 1);
 			g.drawLine(w - 1, 1, w - 1, h - 2);
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f);
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f);
 			g2D.setComposite(alpha);
 			g2D.setColor(cLo);
 			g.drawLine(2, 1, w - 2, 1);

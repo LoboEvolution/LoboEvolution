@@ -46,7 +46,7 @@ public class CanvasTextMetricsImpl implements TextMetrics {
 	 * @param width a double.
 	 * @param height a double.
 	 */
-	public CanvasTextMetricsImpl(double width, double height) {
+	public CanvasTextMetricsImpl(final double width, final double height) {
 		this.width = width;
 		this.height = height;
 	}

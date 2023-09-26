@@ -48,12 +48,12 @@ import static org.junit.Assert.assertEquals;
 public class textwholetext03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        Text text1;
-        Text text2;
+        final Document doc;
+        final Element elem;
+        final Text text1;
+        final Text text2;
         Node appendedChild;
-        String combinedText;
+        final String combinedText;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         text1 = doc.createTextNode("Text I");

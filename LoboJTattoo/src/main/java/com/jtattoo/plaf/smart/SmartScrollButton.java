@@ -49,7 +49,7 @@ public class SmartScrollButton extends BaseScrollButton {
 	 * @param direction a int.
 	 * @param width a int.
 	 */
-	public SmartScrollButton(int direction, int width) {
+	public SmartScrollButton(final int direction, final int width) {
 		super(direction, width);
 	}
 

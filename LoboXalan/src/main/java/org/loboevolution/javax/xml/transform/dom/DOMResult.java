@@ -30,63 +30,51 @@ import org.loboevolution.javax.xml.transform.Result;
 import org.loboevolution.html.node.Node;
 
 public class DOMResult
-    implements Result
-{
-
-    public DOMResult()
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public DOMResult(Node node)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public DOMResult(Node node, String systemId)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public DOMResult(Node node, Node nextSibling)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public DOMResult(Node node, Node nextSibling, String systemId)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public void setNode(Node node)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public Node getNode()
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public void setNextSibling(Node nextSibling)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public Node getNextSibling()
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public void setSystemId(String systemId)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public String getSystemId()
-    {
-        throw new RuntimeException("Stub!");
-    }
+        implements Result {
 
     public static final String FEATURE = "http://org.loboevolution.javax.xml.transform.dom.DOMResult/feature";
+
+    public DOMResult() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public DOMResult(final Node node) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public DOMResult(final Node node, final String systemId) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public DOMResult(final Node node, final Node nextSibling) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public DOMResult(final Node node, final Node nextSibling, final String systemId) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public Node getNode() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public void setNode(final Node node) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public Node getNextSibling() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public void setNextSibling(final Node nextSibling) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public String getSystemId() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public void setSystemId(final String systemId) {
+        throw new RuntimeException("Stub!");
+    }
 }

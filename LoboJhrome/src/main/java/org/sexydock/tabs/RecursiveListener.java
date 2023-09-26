@@ -42,47 +42,47 @@ public abstract class RecursiveListener {
 
     private final HashSet<Component> excluded = new HashSet<>();
 
-    public void addExcludedComponent(Component c) {
+    public void addExcludedComponent(final Component c) {
         excluded.add(c);
     }
 
-    public void removeExcludedComponent(Component c) {
+    public void removeExcludedComponent(final Component c) {
         excluded.remove(c);
     }
 
-    public void installRecursively(Component c) {
+    public void installRecursively(final Component c) {
         if (excluded.contains(c)) {
             return;
         }
         install(c);
         if (c instanceof Container) {
-            Container cont = (Container) c;
+            final Container cont = (Container) c;
             cont.addContainerListener(containerListener);
             installRecursively(cont);
         }
     }
 
-    public void uninstallRecursively(Component c) {
+    public void uninstallRecursively(final Component c) {
         uninstall(c);
         if (c instanceof Container) {
-            Container cont = (Container) c;
+            final Container cont = (Container) c;
             cont.removeContainerListener(containerListener);
             uninstallRecursively(cont);
         }
     }
 
-    protected abstract void install(Component c);
+    protected abstract void install(final Component c);
 
-    protected abstract void uninstall(Component c);
+    protected abstract void uninstall(final Component c);
 
-    private class HierarchyChangeListener implements ContainerListener {
+    private final class HierarchyChangeListener implements ContainerListener {
         @Override
-        public void componentAdded(ContainerEvent e) {
+        public void componentAdded(final ContainerEvent e) {
             installRecursively(e.getChild());
         }
 
         @Override
-        public void componentRemoved(ContainerEvent e) {
+        public void componentRemoved(final ContainerEvent e) {
             uninstallRecursively(e.getChild());
         }
     }

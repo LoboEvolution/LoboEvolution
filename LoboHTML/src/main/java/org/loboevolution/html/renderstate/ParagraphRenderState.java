@@ -39,7 +39,7 @@ public class ParagraphRenderState extends AbstractMarginRenderState {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public ParagraphRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+	public ParagraphRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 

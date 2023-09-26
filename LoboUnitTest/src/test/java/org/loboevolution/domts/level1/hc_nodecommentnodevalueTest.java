@@ -57,8 +57,8 @@ public class hc_nodecommentnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NodeList elementList;
+        final Document doc;
+        final NodeList elementList;
         Node commentNode;
         String commentName;
         String commentValue;

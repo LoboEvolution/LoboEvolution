@@ -57,10 +57,10 @@ public class localName04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        String employeeLocalName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final String employeeLocalName;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         testEmployee = (Element)elementList.item(0);

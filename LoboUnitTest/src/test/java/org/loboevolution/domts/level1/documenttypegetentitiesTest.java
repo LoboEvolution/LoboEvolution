@@ -36,9 +36,9 @@ import org.loboevolution.html.node.Node;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -62,27 +62,18 @@ public class documenttypegetentitiesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entityList;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entityList;
         String name;
-        java.util.Collection expectedResult = new java.util.ArrayList();
+        final List<String> expectedResult = new ArrayList<>();
         expectedResult.add("ent1");
         expectedResult.add("ent2");
         expectedResult.add("ent3");
         expectedResult.add("ent4");
         expectedResult.add("ent5");
 
-        java.util.Collection expectedResultSVG = new java.util.ArrayList();
-        expectedResultSVG.add("ent1");
-        expectedResultSVG.add("ent2");
-        expectedResultSVG.add("ent3");
-        expectedResultSVG.add("ent4");
-        expectedResultSVG.add("ent5");
-        expectedResultSVG.add("svgunit");
-        expectedResultSVG.add("svgtest");
-
-        Collection nameList = new ArrayList();
+        final List<String> nameList = new ArrayList<>();
 
         Node entity;
         doc = sampleXmlFile("staff.xml");

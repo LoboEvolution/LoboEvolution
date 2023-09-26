@@ -66,7 +66,7 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 	}
 
 	/** {@inheritDoc} */
-	public boolean canDecodeInput(Object input) throws IOException {
+	public boolean canDecodeInput(final Object input) throws IOException {
 
 		// The input source must be an ImageInputStream because the constructor
 		// passes STANDARD_INPUT_TYPE (an array consisting of ImageInputStream)
@@ -76,10 +76,10 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 		if (!(input instanceof ImageInputStream))
 			return false;
 
-		ImageInputStream stream = (ImageInputStream) input;
+		final ImageInputStream stream = (ImageInputStream) input;
 
 		/** Read and validate the input source's header. */
-		byte[] header = new byte[8];
+		final byte[] header = new byte[8];
 		try {
 			// The input source's current position must be preserved so that
 			// other ImageReaderSpis can determine if they can decode the input
@@ -91,17 +91,17 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 			stream.mark();
 			stream.read(header);
 			stream.reset();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			return false;
 		}
 
-		byte[] controlHeader = new byte[] { (byte) 151, 74, 66, 50, 13, 10, 26, 10 };
+		final byte[] controlHeader = new byte[] { (byte) 151, 74, 66, 50, 13, 10, 26, 10 };
 
 		return Arrays.equals(controlHeader, header);
 	}
 
 	/** {@inheritDoc} */
-	public ImageReader createReaderInstance(Object extension) throws IOException {
+	public ImageReader createReaderInstance(final Object extension) throws IOException {
 		// Inform the JBIG2 image reader that this JBIG2 image reader SPI is the
 		// originating provider -- the object that creates the JBIG2 image
 		// reader.
@@ -109,7 +109,7 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 	}
 
 	/** {@inheritDoc} */
-	public String getDescription(java.util.Locale locale) {
+	public String getDescription(final java.util.Locale locale) {
 		return "JPedal JBIG2 Image Decoder provided by IDRsolutions.  See http://www.jpedal.org/jbig.php";
 	}
 }

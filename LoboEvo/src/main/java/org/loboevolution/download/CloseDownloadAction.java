@@ -41,7 +41,7 @@ public class CloseDownloadAction extends AbstractAction {
 
     private final DownloadWindow action;
 
-    CloseDownloadAction(DownloadWindow action) {
+    CloseDownloadAction(final DownloadWindow action) {
         this.action = action;
 
     }

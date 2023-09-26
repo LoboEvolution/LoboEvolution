@@ -54,9 +54,9 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode13Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String textEntry = "hello";
-        Text textNode;
+        final Document doc;
+        final String textEntry = "hello";
+        final Text textNode;
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode(textEntry);
 
@@ -64,7 +64,7 @@ public class documentrenamenode13Test extends LoboUnitTest {
             boolean success = false;
             try {
                 doc.renameNode(textNode, "http://www.w3.org/XML/1998/namespace", "xmlns:prefix");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
             assertTrue("documentrenamenode13_NOT_SUPPORTED_ERR", success);

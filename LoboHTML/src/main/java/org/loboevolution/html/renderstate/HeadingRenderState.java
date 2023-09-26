@@ -51,7 +51,7 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public HeadingRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+	public HeadingRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
 		super(prevRenderState, element);
 		this.element = element;
 		this.prevRenderState = prevRenderState;
@@ -117,7 +117,7 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 	@Override
 	public Font getFont() {
 		final HtmlRendererConfig config = element.getHtmlRendererConfig();
-		FontKey key = FontValues.getDefaultFontKey(config);
+		final FontKey key = FontValues.getDefaultFontKey(config);
 		key.setFontWeight(CSSValues.BOLD.getValue());
 		key.setFontSize(FontValues.getFontSize(getHeadingFontSize(), element.getDocumentNode().getDefaultView(), prevRenderState));
 		return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, this.getCssProperties(), prevRenderState));

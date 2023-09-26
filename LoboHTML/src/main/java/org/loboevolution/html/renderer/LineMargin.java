@@ -37,7 +37,7 @@ class LineMargin {
 	 * @param cleary a int.
 	 * @param totalXOffset a int.
 	 */
-	public LineMargin(LineMargin next, int cleary, int totalXOffset) {
+	public LineMargin(final LineMargin next, final int cleary, final int totalXOffset) {
 		super();
 		this.next = next;
 		this.clearY = cleary;
@@ -46,7 +46,7 @@ class LineMargin {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(final Object other) {
 		if (!(other instanceof LineMargin)) {
 			return false;
 		}
@@ -89,7 +89,7 @@ class LineMargin {
 	 * @param xoffset a int.
 	 * @return a {@link org.loboevolution.html.renderer.LineMargin} object.
 	 */
-	public LineMargin translated(int yoffset, int xoffset) {
+	public LineMargin translated(final int yoffset, final int xoffset) {
 		final int newClearY = this.clearY - yoffset;
 		int newOffsetX = this.clearX - xoffset;
 		if (newOffsetX < 0) {

@@ -54,10 +54,10 @@ public class elementhasattribute04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        boolean state;
-        Attr attribute;
+        final Document doc;
+        final Element element;
+        final boolean state;
+        final Attr attribute;
         doc = sampleXmlFile("staff.xml");
         element = doc.createElement("address");
         attribute = doc.createAttribute("domestic");

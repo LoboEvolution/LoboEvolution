@@ -40,7 +40,7 @@ public class AttributeIterator extends ChildTestIterator {
    *     this itterator.
    * @throws org.loboevolution.javax.xml.transform.TransformerException if any
    */
-  AttributeIterator(Compiler compiler, int opPos, int analysis)
+  AttributeIterator(final Compiler compiler, final int opPos, final int analysis)
       throws org.loboevolution.javax.xml.transform.TransformerException {
     super(compiler, opPos, analysis);
   }

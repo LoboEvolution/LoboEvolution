@@ -52,7 +52,7 @@ public abstract class RegionSegment extends Segment {
 	 *
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 */
-	public RegionSegment(JBIG2StreamDecoder streamDecoder) {
+	public RegionSegment(final JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
@@ -86,7 +86,7 @@ public abstract class RegionSegment extends Segment {
 			logger.info("Bitmap location = " + regionBitmapXLocation + ',' + regionBitmapYLocation);
 
 		/** extract region Segment flags */
-		short regionFlagsField = decoder.readByte();
+		final short regionFlagsField = decoder.readByte();
 
 		regionFlags.setFlags(regionFlagsField);
 

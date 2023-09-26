@@ -43,7 +43,7 @@ public class SVGPathSegLinetoVerticalRelImpl implements SVGPathSegLinetoVertical
 	 *
 	 * @param y a float.
 	 */
-	public SVGPathSegLinetoVerticalRelImpl(float y) {
+	public SVGPathSegLinetoVerticalRelImpl(final float y) {
 		this.y = y;
 	}
 

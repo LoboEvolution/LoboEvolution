@@ -60,14 +60,14 @@ public class documentimportnode12Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
-        Node imported;
-        Node addressElem;
-        NodeList addressElemChildren;
-        NodeList importedChildren;
-        int addressElemLen;
-        int importedLen;
+        final Document doc;
+        final HTMLCollection childList;
+        final Node imported;
+        final Node addressElem;
+        final NodeList addressElemChildren;
+        final NodeList importedChildren;
+        final int addressElemLen;
+        final int importedLen;
         doc = sampleXmlFile("staffNS.xml");
         childList = doc.getElementsByTagNameNS("*", "address");
         addressElem = childList.item(0);

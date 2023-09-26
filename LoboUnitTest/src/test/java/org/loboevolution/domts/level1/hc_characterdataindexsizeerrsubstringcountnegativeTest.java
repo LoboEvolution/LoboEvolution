@@ -61,11 +61,11 @@ public class hc_characterdataindexsizeerrsubstringcountnegativeTest extends Lobo
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        CharacterData child;
-        String badSubstring;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final CharacterData child;
+        final String badSubstring;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         nameNode = elementList.item(0);
@@ -75,7 +75,7 @@ public class hc_characterdataindexsizeerrsubstringcountnegativeTest extends Lobo
             boolean success = false;
             try {
                 badSubstring = child.substringData(10, -3);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }
             assertTrue("throws_INDEX_SIZE_ERR", success);

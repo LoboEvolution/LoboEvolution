@@ -43,7 +43,7 @@ public final class IteratorPool {
    *
    * @param original The original iterator from which all others will be cloned.
    */
-  public IteratorPool(DTMIterator original) {
+  public IteratorPool(final DTMIterator original) {
     m_orig = original;
     m_freeStack = new ArrayList<>();
   }
@@ -76,7 +76,7 @@ public final class IteratorPool {
       // Create a new object if so.
       try {
         return (DTMIterator) m_orig.clone();
-      } catch (Exception ex) {
+      } catch (final Exception ex) {
         throw new WrappedRuntimeException(ex);
       }
     }
@@ -89,7 +89,7 @@ public final class IteratorPool {
    *
    * @param obj Object to add.
    */
-  public synchronized void freeInstance(DTMIterator obj) {
+  public synchronized void freeInstance(final DTMIterator obj) {
     m_freeStack.add(obj);
   }
 }

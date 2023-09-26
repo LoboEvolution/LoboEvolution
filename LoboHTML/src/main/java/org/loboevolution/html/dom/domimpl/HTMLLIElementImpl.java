@@ -51,7 +51,7 @@ public class HTMLLIElementImpl extends HTMLElementImpl implements HTMLLIElement 
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_LIST_ITEM);
 	}
 
@@ -65,19 +65,19 @@ public class HTMLLIElementImpl extends HTMLElementImpl implements HTMLLIElement 
 	@Override
 	public int getValue() {
 		final String valueText = getAttribute("value");
-		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
 		return HtmlValues.getPixelSize(valueText, null, doc.getDefaultView(), 0);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setType(String type) {
+	public void setType(final String type) {
 		setAttribute("type", type);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValue(int value) {
+	public void setValue(final int value) {
 		setAttribute("value", String.valueOf(value));
 	}
 	

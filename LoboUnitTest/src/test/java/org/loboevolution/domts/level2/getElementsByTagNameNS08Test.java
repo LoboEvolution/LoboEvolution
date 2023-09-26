@@ -55,9 +55,9 @@ public class getElementsByTagNameNS08Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        HTMLCollection newList;
+        final Document doc;
+        final Element docElem;
+        final HTMLCollection newList;
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
         newList = docElem.getElementsByTagNameNS("*", "*");

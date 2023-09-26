@@ -62,11 +62,11 @@ public class AttrNotSpecifiedValueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc = sampleXmlFile("staff.xml");
-        HTMLCollection addressList = doc.getElementsByTagName("address");
-        Element testNode = (Element) addressList.item(1);
-        NamedNodeMap attributes = testNode.getAttributes();
-        Attr streetAttr = (Attr) attributes.getNamedItem("street");
+        final Document doc = sampleXmlFile("staff.xml");
+        final HTMLCollection addressList = doc.getElementsByTagName("address");
+        final Element testNode = (Element) addressList.item(1);
+        final NamedNodeMap attributes = testNode.getAttributes();
+        final Attr streetAttr = (Attr) attributes.getNamedItem("street");
         assertFalse("streetNotSpecified", streetAttr.isSpecified());
     }
 }

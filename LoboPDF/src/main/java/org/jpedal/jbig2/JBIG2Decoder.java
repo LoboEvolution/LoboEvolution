@@ -30,11 +30,11 @@ import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
-import java.io.DataInput;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
@@ -66,7 +66,7 @@ public class JBIG2Decoder {
 	 * @param data global data
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 */
-	public void setGlobalData(byte[] data) throws JBIG2Exception {
+	public void setGlobalData(final byte[] data) throws JBIG2Exception {
 		streamDecoder.setGlobalData(data);
 	}
 
@@ -77,7 +77,7 @@ public class JBIG2Decoder {
 	 * @throws java.io.IOException if any.
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 */
-	public void decodeJBIG2(File file) throws IOException, JBIG2Exception {
+	public void decodeJBIG2(final File file) throws IOException, JBIG2Exception {
 		decodeJBIG2(file.getAbsolutePath());
 	}
 
@@ -88,8 +88,8 @@ public class JBIG2Decoder {
 	 * @throws java.io.IOException if any.
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 */
-	public void decodeJBIG2(String file) throws IOException, JBIG2Exception {
-		decodeJBIG2(new FileInputStream(file));
+	public void decodeJBIG2(final String file) throws IOException, JBIG2Exception {
+		decodeJBIG2(Files.newInputStream(Paths.get(file)));
 	}
 
 	/**
@@ -99,10 +99,10 @@ public class JBIG2Decoder {
 	 * @throws java.io.IOException if any.
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 */
-	public void decodeJBIG2(InputStream inputStream) throws IOException, JBIG2Exception {
-		int availiable = inputStream.available();
+	public void decodeJBIG2(final InputStream inputStream) throws IOException, JBIG2Exception {
+		final int availiable = inputStream.available();
 
-		byte[] bytes = new byte[availiable];
+		final byte[] bytes = new byte[availiable];
 		inputStream.read(bytes);
 
 		decodeJBIG2(bytes);
@@ -115,7 +115,7 @@ public class JBIG2Decoder {
 	 * @throws java.io.IOException if any.
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 */
-	public void decodeJBIG2(byte[] data) throws IOException, JBIG2Exception {
+	public void decodeJBIG2(final byte[] data) throws IOException, JBIG2Exception {
 		streamDecoder.decodeJBIG2(data);
 	}
 
@@ -127,27 +127,27 @@ public class JBIG2Decoder {
 	 */
 	public BufferedImage getPageAsBufferedImage(int page) {
 		page++;
-		JBIG2Bitmap pageBitmap = streamDecoder.findPageSegement(page).getPageBitmap();
+		final JBIG2Bitmap pageBitmap = streamDecoder.findPageSegement(page).getPageBitmap();
 
-		byte[] bytes = pageBitmap.getData(true);
+		final byte[] bytes = pageBitmap.getData(true);
 
 		if (bytes == null)
 			return null;
 
 		// make a a DEEP copy so we cant alter
-		int len = bytes.length;
-		byte[] copy = new byte[len];
+		final int len = bytes.length;
+		final byte[] copy = new byte[len];
 		System.arraycopy(bytes, 0, copy, 0, len);
 
 		// byte[] data = pageBitmap.getData(true).clone();
-		int width = pageBitmap.getWidth();
-		int height = pageBitmap.getHeight();
+		final int width = pageBitmap.getWidth();
+		final int height = pageBitmap.getHeight();
 
 		/** create an image from the raw data */
-		DataBuffer db = new DataBufferByte(copy, copy.length);
+		final DataBuffer db = new DataBufferByte(copy, copy.length);
 
-		WritableRaster raster = Raster.createPackedRaster(db, width, height, 1, null);
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
+		final WritableRaster raster = Raster.createPackedRaster(db, width, height, 1, null);
+		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
 		image.setData(raster);
 
 
@@ -169,14 +169,14 @@ public class JBIG2Decoder {
 	 * @return a int.
 	 */
 	public int getNumberOfPages() {
-		int pages = streamDecoder.getNumberOfPages();
+		final int pages = streamDecoder.getNumberOfPages();
 		if (streamDecoder.isNumberOfPagesKnown() && pages != 0)
 			return pages;
 
 		int noOfPages = 0;
 
-		List<Segment> segments = getAllSegments();
-		for (Segment segment : segments) {
+		final List<Segment> segments = getAllSegments();
+		for (final Segment segment : segments) {
 			if (segment.getSegmentHeader().getSegmentType() == Segment.PAGE_INFORMATION)
 				noOfPages++;
 		}
@@ -210,7 +210,7 @@ public class JBIG2Decoder {
 	 * @param segmentNumber a int.
 	 * @return a {@link org.jpedal.jbig2.segment.Segment} object.
 	 */
-	public Segment findSegment(int segmentNumber) {
+	public Segment findSegment(final int segmentNumber) {
 		return streamDecoder.findSegment(segmentNumber);
 	}
 

@@ -62,13 +62,13 @@ public class getNamedItemNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.usa.com";
-        String localName = "domest";
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        NamedNodeMap attributes;
-        Attr newAttr;
+        final String namespaceURI = "http://www.usa.com";
+        final String localName = "domest";
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final NamedNodeMap attributes;
+        final Attr newAttr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element)elementList.item(1);

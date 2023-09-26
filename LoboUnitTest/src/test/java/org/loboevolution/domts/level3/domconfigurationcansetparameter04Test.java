@@ -52,13 +52,13 @@ import static org.junit.Assert.assertTrue;
 public class domconfigurationcansetparameter04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
-        HTMLCollection acronymList;
-        Node acronymElem;
-        int nodeType;
-        Node first;
-        boolean canSet;
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final HTMLCollection acronymList;
+        final Node acronymElem;
+        final int nodeType;
+        final Node first;
+        final boolean canSet;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("entities", Boolean.FALSE);

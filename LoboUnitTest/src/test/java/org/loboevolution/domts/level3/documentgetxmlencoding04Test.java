@@ -45,8 +45,8 @@ import static org.junit.Assert.assertNull;
 public class documentgetxmlencoding04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String encodingName;
+        final Document doc;
+        final String encodingName;
         doc = sampleXmlFile("hc_staff.xml");
         encodingName = doc.getXmlEncoding();
         assertNull("documentgetxmlencoding04", encodingName);

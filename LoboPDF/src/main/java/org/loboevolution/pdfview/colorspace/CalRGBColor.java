@@ -72,7 +72,7 @@ public class CalRGBColor extends ColorSpace {
      * an array of 9 Numbers for "Matrix".
      * @throws java.io.IOException if any.
      */
-    public CalRGBColor(PDFObject obj) throws IOException {
+    public CalRGBColor(final PDFObject obj) throws IOException {
 	// obj is a dictionary that has the following parts:
 	// WhitePoint [a b c]
 	// BlackPoint [a b c]
@@ -112,10 +112,10 @@ public class CalRGBColor extends ColorSpace {
         // create a scale matrix relative to the 50 CIE color space.
         // see http://www.brucelindbloom.com/Eqn_RGB_XYZ_Matrix.html
         // we use the Von Kries cone response domain
-        float[] cieWhite = rgbCS.toCIEXYZ(new float[] { 1f, 1f, 1f });
+        final float[] cieWhite = rgbCS.toCIEXYZ(new float[] { 1f, 1f, 1f });
      
-        float[] sourceWhite = matrixMult(this.white, vonKriesM, 3);
-        float[] destWhite = matrixMult(cieWhite,  vonKriesM, 3);
+        final float[] sourceWhite = matrixMult(this.white, vonKriesM, 3);
+        final float[] destWhite = matrixMult(cieWhite,  vonKriesM, 3);
         
         this.scale = new float[] { destWhite[0] / sourceWhite[0], 0, 0,
                               0, destWhite[1] / sourceWhite[1], 0,
@@ -142,13 +142,13 @@ public class CalRGBColor extends ColorSpace {
 	 * convert from Calibrated RGB to standard RGB
 	 */
     @Override
-	public float[] toRGB(float[] comp) {
+	public float[] toRGB(final float[] comp) {
 	if (comp.length==3) {
             // compute r', g' and b' by raising the given values to the
             // correct gamma
-	    float a = (float)Math.pow(comp[0], this.gamma[0]);
-	    float b = (float)Math.pow(comp[1], this.gamma[1]);
-	    float c = (float)Math.pow(comp[2], this.gamma[2]);
+	    final float a = (float)Math.pow(comp[0], this.gamma[0]);
+	    final float b = (float)Math.pow(comp[1], this.gamma[1]);
+	    final float c = (float)Math.pow(comp[2], this.gamma[2]);
 	    
             // now multiply by the matrix to get X, Y and Z values
             float[] xyz = new float[] {
@@ -160,7 +160,7 @@ public class CalRGBColor extends ColorSpace {
             xyz = matrixMult(xyz, this.scale, 3);
             
             // convert to RGB
-            float[] rgb = ciexyzToSRGB(xyz);
+            final float[] rgb = ciexyzToSRGB(xyz);
             
             // cheat -- scale based on max
             for (int i = 0; i < rgb.length; i++) {
@@ -181,8 +181,8 @@ public class CalRGBColor extends ColorSpace {
     /**
      * Convert from CIEXYZ, with scale and gamma calculated to sRGB
      */
-    private float[] ciexyzToSRGB(float[] xyz) {
-          float[] rgb = matrixMult(xyz, xyzToSRGB, 3);
+    private float[] ciexyzToSRGB(final float[] xyz) {
+          final float[] rgb = matrixMult(xyz, xyzToSRGB, 3);
           
           for (int i = 0; i < rgb.length; i++) {
               if (rgb[i] < 0.0) {
@@ -208,7 +208,7 @@ public class CalRGBColor extends ColorSpace {
 	 * convert from RGB to Calibrated RGB.  NOT IMPLEMENTED
 	 */
     @Override
-	public float[] fromRGB(float[] rgbvalue) {
+	public float[] fromRGB(final float[] rgbvalue) {
 	return new float[3];
     }
 
@@ -218,7 +218,7 @@ public class CalRGBColor extends ColorSpace {
 	 * convert from CIEXYZ to Calibrated RGB.  NOT IMPLEMENTED
 	 */
     @Override
-	public float[] fromCIEXYZ(float[] colorvalue) {
+	public float[] fromCIEXYZ(final float[] colorvalue) {
 	return new float[3];
     }
 
@@ -237,7 +237,7 @@ public class CalRGBColor extends ColorSpace {
 	 * convert from Calibrated RGB to CIEXYZ.  NOT IMPLEMENTED
 	 */
     @Override
-	public float[] toCIEXYZ(float[] colorvalue) {
+	public float[] toCIEXYZ(final float[] colorvalue) {
 	return new float[3];
     }
     
@@ -249,11 +249,11 @@ public class CalRGBColor extends ColorSpace {
      * @param len the size of each row.  All matrix lengths must be a 
      *            multiple of len.
      */
-    float[] matrixMult(float[] a, float[] b, int len) {
-        int rows = a.length / len;
-        int cols = b.length / len;
+    float[] matrixMult(final float[] a, final float[] b, final int len) {
+        final int rows = a.length / len;
+        final int cols = b.length / len;
         
-        float[] out = new float[rows * cols];
+        final float[] out = new float[rows * cols];
         
         for (int i = 0; i < rows; i++) {
             for (int k = 0; k < cols; k++) {

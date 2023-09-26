@@ -61,7 +61,7 @@ public class JhromeTabBorderAttributes {
     public JhromeTabBorderAttributes() {
     }
 
-    public JhromeTabBorderAttributes(JhromeTabBorderAttributes other) {
+    public JhromeTabBorderAttributes(final JhromeTabBorderAttributes other) {
         copyAttributes(other);
     }
 
@@ -70,7 +70,7 @@ public class JhromeTabBorderAttributes {
         return new JhromeTabBorderAttributes(this);
     }
 
-    public void copyAttributes(JhromeTabBorderAttributes other) {
+    public void copyAttributes(final JhromeTabBorderAttributes other) {
         insets.set(other.insets.top, other.insets.left, other.insets.bottom, other.insets.right);
 
         topShadowVisible = other.topShadowVisible;
@@ -85,7 +85,7 @@ public class JhromeTabBorderAttributes {
         bottomColor = other.bottomColor;
     }
 
-    public void interpolateColors(JhromeTabBorderAttributes a, JhromeTabBorderAttributes b, float f) {
+    public void interpolateColors(final JhromeTabBorderAttributes a, final JhromeTabBorderAttributes b, final float f) {
         shadowColor = Utils.interpolate(a.shadowColor, b.shadowColor, f);
         outlineColor = Utils.interpolate(a.outlineColor, b.outlineColor, f);
         topColor = Utils.interpolate(a.topColor, b.topColor, f);

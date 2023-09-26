@@ -45,8 +45,8 @@ import static org.junit.Assert.assertEquals;
 public class documentgetxmlencoding03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String encodingName;
+        final Document doc;
+        final String encodingName;
         doc = sampleXmlFile("barfoo_utf16.xml");
         encodingName = doc.getXmlEncoding();
         assertEquals("documentgetxmlencoding03", "uTf-16", encodingName);

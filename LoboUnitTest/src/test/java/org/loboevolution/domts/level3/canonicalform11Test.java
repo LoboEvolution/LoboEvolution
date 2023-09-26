@@ -50,16 +50,16 @@ public class canonicalform11Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element elem;
-        DOMConfiguration domConfig;
-        boolean canSet;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element elem;
+        final DOMConfiguration domConfig;
+        final boolean canSet;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        Attr attr;
-        String attrValue;
-        boolean attrSpecified;
+        final Attr attr;
+        final String attrValue;
+        final boolean attrSpecified;
         doc = sampleXmlFile("canonicalform03.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("canonical-form", Boolean.TRUE);

@@ -45,14 +45,14 @@ public class DOMStringListImpl implements DOMStringList {
 	 *
 	 * @param sourceList a {@link java.util.Set} object.
 	 */
-	public DOMStringListImpl(Set<String> sourceList) {
+	public DOMStringListImpl(final Set<String> sourceList) {
 		final List<String> list = new ArrayList<>(sourceList);
 		this.sourceList = list;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean contains(String str) {
+	public boolean contains(final String str) {
 		return this.sourceList.contains(str);
 	}
 
@@ -64,8 +64,8 @@ public class DOMStringListImpl implements DOMStringList {
 
 	/** {@inheritDoc} */
 	@Override
-	public String item(int index) {
-        int size = this.sourceList.size();
+	public String item(final int index) {
+        final int size = this.sourceList.size();
         if (size > index && index > -1) {
             return this.sourceList.get(index);
         } else {

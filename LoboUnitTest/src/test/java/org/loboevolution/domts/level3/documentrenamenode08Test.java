@@ -48,17 +48,17 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Element element;
-        Attr attr;
-        HTMLCollection childList;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Element element;
+        final Attr attr;
+        final HTMLCollection childList;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String docElemNS;
-        String docElemName;
+        final Element docElem;
+        final String docElemNS;
+        final String docElemName;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("p");
         element = (Element) childList.item(3);
@@ -72,7 +72,7 @@ public class documentrenamenode08Test extends LoboUnitTest {
         boolean success = false;
         try {
             newDoc.renameNode(attr, "http://www.w3.org/XML/1998/namespace", "xml:lang");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue("documentrenamenode08_WRONG_DOCUMENT_ERR", success);

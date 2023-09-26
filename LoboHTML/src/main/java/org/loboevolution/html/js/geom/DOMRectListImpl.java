@@ -48,7 +48,7 @@ public class DOMRectListImpl extends AbstractList<DOMRect>  implements DOMRectLi
      * @return a {@link DOMRect} object.
      */
     @Override
-    public DOMRect item(int index) {
+    public DOMRect item(final int index) {
         return this.get(index);
     }
 

@@ -78,18 +78,18 @@ public class AeroBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			if (model.isEnabled()) {
 				g.setColor(AbstractLookAndFeel.getFrameColor());
 			} else {
 				g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 30));
 			}
 			g.drawRect(x, y, w - 2, h - 2);
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 			g2D.setComposite(alpha);
 			g.setColor(Color.white);
 			g.drawLine(x + w - 1, y + 1, x + w - 1, y + h);
@@ -104,7 +104,10 @@ public class AeroBorders extends BaseBorders {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int borderW, final int borderH) {
+			int w = borderW;
+			int h = borderH;
+
 			Color borderColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
 			if (isActive(c)) {
 				borderColor = AbstractLookAndFeel.getWindowBorderColor();
@@ -121,13 +124,13 @@ public class AeroBorders extends BaseBorders {
 					g.drawRect(i, i, w - 2 * i - 1, h - 2 * i - 1);
 				}
 			} else {
-				int dt = w / 3;
-				int db = w * 2 / 3;
+				final int dt = w / 3;
+				final int db = w * 2 / 3;
 				h--;
 				w--;
 
-				Color cl = ColorHelper.brighter(borderColor, 10);
-				Color cr = AbstractLookAndFeel.getWindowInactiveBorderColor();
+				final Color cl = ColorHelper.brighter(borderColor, 10);
+				final Color cr = AbstractLookAndFeel.getWindowInactiveBorderColor();
 				g.setColor(cl);
 				g.drawLine(x, y, x, y + h);
 				g.setColor(ColorHelper.brighter(cl, 60));
@@ -271,27 +274,27 @@ public class AeroBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Color loColor = AbstractLookAndFeel.getFrameColor();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Color loColor = AbstractLookAndFeel.getFrameColor();
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed() || model.isSelected()) {
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
 					g.setColor(loColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.15f);
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.15f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.black);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);
 					g2D.setComposite(composite);
 				} else if (model.isRollover()) {
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
 					g.setColor(loColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.white);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);

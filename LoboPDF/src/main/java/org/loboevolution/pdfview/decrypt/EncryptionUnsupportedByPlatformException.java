@@ -43,7 +43,7 @@ public class EncryptionUnsupportedByPlatformException
      *
      * @param message a {@link java.lang.String} object.
      */
-    public EncryptionUnsupportedByPlatformException(String message) {
+    public EncryptionUnsupportedByPlatformException(final String message) {
         super(message);
     }
 
@@ -53,7 +53,7 @@ public class EncryptionUnsupportedByPlatformException
      * @param message a {@link java.lang.String} object.
      * @param cause a {@link java.lang.Throwable} object.
      */
-    public EncryptionUnsupportedByPlatformException(String message, Throwable cause) {
+    public EncryptionUnsupportedByPlatformException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

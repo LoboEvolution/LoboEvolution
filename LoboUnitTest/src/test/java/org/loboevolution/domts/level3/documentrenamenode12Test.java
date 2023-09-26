@@ -55,10 +55,10 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Node renamedNode;
-        String textEntry = "hello";
-        Text textNode;
+        final Document doc;
+        final Node renamedNode;
+        final String textEntry = "hello";
+        final Text textNode;
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode(textEntry);
 
@@ -66,7 +66,7 @@ public class documentrenamenode12Test extends LoboUnitTest {
             boolean success = false;
             try {
                 renamedNode = doc.renameNode(textNode, "http://www.w3.org/XML/1999/namespace", "xml:prefix");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
             assertTrue("documentrenamenode12_NOT_SUPPORTED_ERR", success);

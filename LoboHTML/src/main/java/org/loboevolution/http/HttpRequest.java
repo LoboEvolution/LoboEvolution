@@ -84,7 +84,7 @@ public class HttpRequest {
 	 * <p>Constructor for HttpRequest.</p>
 	 * @param proxy a {@link java.net.Proxy} object.
 	 */
-	public HttpRequest(Proxy proxy) {
+	public HttpRequest(final Proxy proxy) {
 		this.proxy = proxy;
 	}
 
@@ -92,7 +92,7 @@ public class HttpRequest {
 	 * <p>abort.</p>
 	 */
 	public void abort() {
-		URLConnection c;
+		final URLConnection c;
 		synchronized (this) {
 			c = this.connection;
 		}
@@ -162,7 +162,7 @@ public class HttpRequest {
 	 * @param headerName a {@link java.lang.String} object.
 	 * @return a {@link java.util.List} object.
 	 */
-	public synchronized List<String> getResponseHeader(String headerName) {
+	public synchronized List<String> getResponseHeader(final String headerName) {
 		final Map<String, List<String>> headers = this.responseHeadersMap;
 		return headers == null ? null : headers.get(headerName);
 	}
@@ -200,7 +200,7 @@ public class HttpRequest {
 		}
 		final InputStream in = new ByteArrayInputStream(bytes);
 		try {
-			XMLDocumentBuilder builder = new XMLDocumentBuilder();
+			final XMLDocumentBuilder builder = new XMLDocumentBuilder();
 			return builder.parse(new InputSourceImpl(in, "", StandardCharsets.UTF_8));
 		} catch (final Exception err) {
 			logger.log(Level.WARNING, "Unable to parse response as XML.", err);
@@ -235,7 +235,7 @@ public class HttpRequest {
 	 * @param userName a {@link java.lang.String} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public void open(String method, java.net.URL url, boolean asyncFlag, String userName) throws IOException {
+	public void open(final String method, final java.net.URL url, final boolean asyncFlag, final String userName) throws IOException {
 		this.open(method, url, asyncFlag, userName, null);
 	}
 
@@ -246,7 +246,7 @@ public class HttpRequest {
 	 * @param url a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, String url) throws Exception {
+	public void open(final String method, final String url) throws Exception {
 		this.open(method, url, true);
 	}
 
@@ -258,7 +258,7 @@ public class HttpRequest {
 	 * @param asyncFlag a boolean.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, String url, boolean asyncFlag) throws Exception {
+	public void open(final String method, final String url, final boolean asyncFlag) throws Exception {
 		final URL urlObj = Urls.createURL(null, url);
 		this.open(method, urlObj, asyncFlag, null);
 	}
@@ -270,7 +270,7 @@ public class HttpRequest {
 	 * @param url a {@link java.net.URL} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, URL url) throws Exception {
+	public void open(final String method, final URL url) throws Exception {
 		this.open(method, url, true, null, null);
 	}
 
@@ -282,7 +282,7 @@ public class HttpRequest {
 	 * @param asyncFlag a boolean.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, URL url, boolean asyncFlag) throws Exception {
+	public void open(final String method, final URL url, final boolean asyncFlag) throws Exception {
 		this.open(method, url, asyncFlag, null, null);
 	}
 
@@ -296,8 +296,8 @@ public class HttpRequest {
 	 * @param password  The password of the request (not supported.)
 	 * @throws java.io.IOException if any.
 	 */
-	public void open(final String method, final URL url, boolean asyncFlag, final String userName,
-			final String password) throws IOException {
+	public void open(final String method, final URL url, final boolean asyncFlag, final String userName,
+                     final String password) throws IOException {
 		abort();
 		final Proxy proxy = this.proxy;
 		final URLConnection c = proxy == null || proxy == Proxy.NO_PROXY ? url.openConnection() : url.openConnection(proxy);
@@ -321,7 +321,7 @@ public class HttpRequest {
 	 * @param content POST content or null if there's no such content.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void send(final String content, int timeout) throws Exception {
+	public void send(final String content, final int timeout) throws Exception {
 		final URL url = this.requestURL;
 		if (url == null) {
 			throw new Exception("No URL has been provided.");
@@ -349,10 +349,10 @@ public class HttpRequest {
 	 * @param content POST content if any. It may be null.
 	 * @throws java.lang.Exception if any.
 	 */
-	private void sendSync(String content, int timeout) throws Exception {
+	private void sendSync(final String content, final int timeout) throws Exception {
 		try {
 			changeState(ReadyStateType.LOADING, 0, null, null);
-			URLConnection c;
+			final URLConnection c;
 			synchronized (this) {
 				c = this.connection;
 			}
@@ -360,16 +360,16 @@ public class HttpRequest {
 			c.getHeaderField("Set-Cookie");
 
 			if (Strings.isNotBlank(requestUserName) && Strings.isNotBlank(requestPassword)) {
-				String userpass = requestUserName + ":" + requestPassword;
-				String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+				final String userpass = requestUserName + ":" + requestPassword;
+				final String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
 				c.setRequestProperty("Authorization", basicAuth);
 			}
 
 			c.setConnectTimeout(timeout);
 			c.setReadTimeout(timeout);
 
-			int istatus;
-			String istatusText;
+			final int istatus;
+			final String istatusText;
 			if (c instanceof HttpURLConnection) {
 				final HttpURLConnection hc = (HttpURLConnection) c;
 				String method = this.requestMethod;
@@ -401,7 +401,7 @@ public class HttpRequest {
 				changeState(ReadyStateType.HEADERS_RECEIVED, istatus, istatusText, null);
 			}
 
-			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(c)) {
+			try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(c)) {
 				final int contentLength = c.getContentLength();
 				final byte[] bytes = IORoutines.load(in, contentLength == -1 ? 4096 : contentLength);
 				changeState(ReadyStateType.DONE, istatus, istatusText, bytes);
@@ -414,7 +414,7 @@ public class HttpRequest {
 		}
 	}
 
-	private void changeState(ReadyStateType readyState, int status, String statusMessage, byte[] bytes) {
+	private void changeState(final ReadyStateType readyState, final int status, final String statusMessage, final byte[] bytes) {
 		synchronized (this) {
 			this.readyState = readyState;
 			this.status = status;
@@ -424,7 +424,7 @@ public class HttpRequest {
 		this.readyEvent.fireEvent(null);
 	}
 
-	private String getAllResponseHeaders(URLConnection c) {
+	private String getAllResponseHeaders(final URLConnection c) {
 		int idx = 0;
 		String value;
 		final StringBuilder buf = new StringBuilder();

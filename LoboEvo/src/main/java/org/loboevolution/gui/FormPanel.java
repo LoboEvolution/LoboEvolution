@@ -67,7 +67,7 @@ public class FormPanel extends JComponent {
 	 *
 	 * @param field the field
 	 */
-	public void addField(FormField field) {
+	public void addField(final FormField field) {
 		// Call in GUI thread only.
 		this.fields.add(field);
 		this.fieldsInvalid = true;
@@ -186,7 +186,7 @@ public class FormPanel extends JComponent {
 	 *
 	 * @param minLabelWidth the new min label width
 	 */
-	public void setMinLabelWidth(int minLabelWidth) {
+	public void setMinLabelWidth(final int minLabelWidth) {
 		this.minLabelWidth = minLabelWidth;
 	}
 }

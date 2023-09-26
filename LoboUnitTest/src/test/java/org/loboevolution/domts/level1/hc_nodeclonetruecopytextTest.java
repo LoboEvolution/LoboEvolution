@@ -57,12 +57,12 @@ public class hc_nodeclonetruecopytextTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node childNode;
-        Node clonedNode;
-        Node lastChildNode;
-        String childValue;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node childNode;
+        final Node clonedNode;
+        final Node lastChildNode;
+        final String childValue;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("sup");
         childNode = elementList.item(1);

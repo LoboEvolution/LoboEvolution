@@ -52,16 +52,16 @@ public class hc_attrappendchild6Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr titleAttr;
-        Text textNode;
+        final Document doc;
+        final Attr titleAttr;
+        final Text textNode;
         doc = sampleXmlFile("hc_staff.xml");
         titleAttr = doc.createAttribute("title");
         textNode = doc.createTextNode("Yesterday");
         boolean success = false;
         try {
             titleAttr.appendChild(textNode);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("throw_NOT_SUPPORTED_ERR", success);

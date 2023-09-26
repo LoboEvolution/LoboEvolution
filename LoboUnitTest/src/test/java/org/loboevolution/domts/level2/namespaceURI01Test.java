@@ -59,11 +59,11 @@ public class namespaceURI01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddr;
-        Attr addrAttr;
-        String attrNamespaceURI;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddr;
+        final Attr addrAttr;
+        final String attrNamespaceURI;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("emp:address");
         testAddr = (Element) elementList.item(0);

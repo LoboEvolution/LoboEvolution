@@ -46,14 +46,14 @@ public class LocaTable extends TrueTypeTable {
      *
      * @param ttf a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
-    protected LocaTable(TrueTypeFont ttf) {
+    protected LocaTable(final TrueTypeFont ttf) {
         super (TrueTypeTable.LOCA_TABLE);
     
-        MaxpTable maxp = (MaxpTable) ttf.getTable("maxp");
-        int numGlyphs = maxp.getNumGlyphs();
+        final MaxpTable maxp = (MaxpTable) ttf.getTable("maxp");
+        final int numGlyphs = maxp.getNumGlyphs();
         
-        HeadTable head = (HeadTable) ttf.getTable("head");
-        short format = head.getIndexToLocFormat();
+        final HeadTable head = (HeadTable) ttf.getTable("head");
+        final short format = head.getIndexToLocFormat();
         this.isLong = (format == 1);
         
         this.offsets = new int[numGlyphs + 1]; 
@@ -66,7 +66,7 @@ public class LocaTable extends TrueTypeTable {
      * @param glyphID a int.
      * @return a int.
      */
-    public int getOffset(int glyphID) {
+    public int getOffset(final int glyphID) {
         return this.offsets[glyphID];
     }
       
@@ -76,7 +76,7 @@ public class LocaTable extends TrueTypeTable {
      * @param glyphID a int.
      * @return a int.
      */
-    public int getSize(int glyphID) {
+    public int getSize(final int glyphID) {
         return this.offsets[glyphID + 1] - this.offsets[glyphID];
     }
     
@@ -98,12 +98,12 @@ public class LocaTable extends TrueTypeTable {
 	 */
     @Override
 	public ByteBuffer getData() {
-        int size = getLength();
+        final int size = getLength();
         
-        ByteBuffer buf = ByteBuffer.allocate(size);
+        final ByteBuffer buf = ByteBuffer.allocate(size);
         
         // write the offsets
-        for (int offset : this.offsets) {
+        for (final int offset : this.offsets) {
             if (isLongFormat()) {
                 buf.putInt(offset);
             } else {
@@ -123,7 +123,7 @@ public class LocaTable extends TrueTypeTable {
 	 * Initialize this structure from a ByteBuffer
 	 */
     @Override
-	public void setData(ByteBuffer data) {
+	public void setData(final ByteBuffer data) {
         for (int i = 0; i < this.offsets.length; i++) {
             if (isLongFormat()) {
                 this.offsets[i] = data.getInt();

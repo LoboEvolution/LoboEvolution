@@ -51,14 +51,14 @@ public class DOMImplementationImpl implements DOMImplementation {
 	 *
 	 * @param context a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
-	public DOMImplementationImpl(UserAgentContext context) {
+	public DOMImplementationImpl(final UserAgentContext context) {
 		this.context = context;
 	}
 
     /** {@inheritDoc} */
 	@Override
-	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException{
-		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
+	public Document createDocument(final String namespaceURI, final String qualifiedName, final DocumentType doctype) throws DOMException{
+		final HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
 		doc.setDoctype(doctype);
 
 		if (Strings.isNotBlank(namespaceURI)) {
@@ -77,7 +77,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 		if (Strings.isNotBlank(qualifiedName)) {
 
 			if (qualifiedName.contains(":")) {
-				String[] split = qualifiedName.split(":");
+				final String[] split = qualifiedName.split(":");
 				if (split.length != 2) {
 					throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 				}
@@ -95,7 +95,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 			}
 
 
-			ElementImpl elem;
+			final ElementImpl elem;
 			if (Strings.isNotBlank(namespaceURI)) {
 				elem = (ElementImpl) doc.createElementNS(namespaceURI, qualifiedName);
 			} else {
@@ -113,14 +113,15 @@ public class DOMImplementationImpl implements DOMImplementation {
 	/** {@inheritDoc} */
 	@Override
 	public Document createHTMLDocument() {
-		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
+		final HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
 		final Element body = doc.createElement("BODY");
 		doc.setBody((HTMLElementImpl)body);
 		return doc;
 	}
 
 	@Override
-	public boolean hasFeature(String feature, String version) {
+	public boolean hasFeature(final String ftr, final String version) {
+		String feature = ftr;
 		if(Strings.isNotBlank(feature)) feature = feature.toLowerCase();
 		if(Strings.isNotBlank(feature) && feature.startsWith("+")) feature = feature.substring(1).toLowerCase();
 		return "core".equals(feature) || "xml".equals(feature)
@@ -128,7 +129,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 	}
 
 	@Override
-	public Object getFeature(String core, String s) {
+	public Object getFeature(final String core, final String s) {
 		return null;
 	}
 
@@ -137,24 +138,24 @@ public class DOMImplementationImpl implements DOMImplementation {
 	 *
 	 * <p>createHTMLDocument.</p>
 	 */
-	public Document createHTMLDocument(String title) {
-		DocumentImpl doc = (DocumentImpl) createHTMLDocument();
+	public Document createHTMLDocument(final String title) {
+		final DocumentImpl doc = (DocumentImpl) createHTMLDocument();
 		doc.setTitle(title);
 		return doc;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public DocumentType createDocumentType(String qualifiedName, String publicId, String systemId) {
+	public DocumentType createDocumentType(final String qualifiedName, final String publicId, final String systemId) {
 
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
-		int prefixSeparator = qualifiedName.lastIndexOf(":");
+		final int prefixSeparator = qualifiedName.lastIndexOf(":");
 		if (prefixSeparator != -1) {
-			String prefix = qualifiedName.substring(0, prefixSeparator);
-			String localName = qualifiedName.substring(prefixSeparator + 1);
+			final String prefix = qualifiedName.substring(0, prefixSeparator);
+			final String localName = qualifiedName.substring(prefixSeparator + 1);
 
 			if (!Strings.isXMLIdentifier(prefix)) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, qualifiedName);

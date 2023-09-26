@@ -47,7 +47,7 @@ public class StreamReader {
 	 *
 	 * @param data an array of {@link byte} objects.
 	 */
-	public StreamReader(byte[] data) {
+	public StreamReader(final byte[] data) {
 		this.data = data;
 	}
 
@@ -57,8 +57,8 @@ public class StreamReader {
 	 * @param pdfSeg a {@link org.jpedal.jbig2.pdf.PDFSegment} object.
 	 * @return a short.
 	 */
-	public short readByte(PDFSegment pdfSeg) {
-		short bite = (short) (data[bytePointer++] & 255);
+	public short readByte(final PDFSegment pdfSeg) {
+		final short bite = (short) (data[bytePointer++] & 255);
 
 		if (pdfSeg != null)
 			pdfSeg.writeToHeader(bite);
@@ -73,7 +73,7 @@ public class StreamReader {
 	 * @param pdfSeg a {@link org.jpedal.jbig2.pdf.PDFSegment} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public void readByte(short[] buf, PDFSegment pdfSeg) throws IOException {
+	public void readByte(final short[] buf, final PDFSegment pdfSeg) throws IOException {
 		for (int i = 0; i < buf.length; i++) {
 			buf[i] = (short) (data[bytePointer++] & 255);
 		}
@@ -88,7 +88,7 @@ public class StreamReader {
 	 * @return a short.
 	 */
 	public short readByte() {
-		short bite = (short) (data[bytePointer++] & 255);
+		final short bite = (short) (data[bytePointer++] & 255);
 
 		return bite;
 	}
@@ -98,7 +98,7 @@ public class StreamReader {
 	 *
 	 * @param buf an array of {@link short} objects.
 	 */
-	public void readByte(short[] buf) {
+	public void readByte(final short[] buf) {
 		for (int i = 0; i < buf.length; i++) {
 			buf[i] = (short) (data[bytePointer++] & 255);
 		}
@@ -110,10 +110,10 @@ public class StreamReader {
 	 * @return a int.
 	 */
 	public int readBit() {
-		short buf = readByte();
-		short mask = (short) (1 << bitPointer);
+		final short buf = readByte();
+		final short mask = (short) (1 << bitPointer);
 
-		int bit = (buf & mask) >> bitPointer;
+		final int bit = (buf & mask) >> bitPointer;
 
 		bitPointer--;
 		if (bitPointer == -1) {
@@ -131,7 +131,7 @@ public class StreamReader {
 	 * @param num a int.
 	 * @return a int.
 	 */
-	public int readBits(int num) {
+	public int readBits(final int num) {
 		int result = 0;
 
 		for (int i = 0; i < num; i++) {
@@ -146,7 +146,7 @@ public class StreamReader {
 	 *
 	 * @param ammount a int.
 	 */
-	public void movePointer(int ammount) {
+	public void movePointer(final int ammount) {
 		bytePointer += ammount;
 	}
 

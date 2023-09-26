@@ -75,7 +75,7 @@ public class HTMLDListElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
         final String[] messages = {"false", "true", "true", "true", null, "", "blah", "2",
-                "true", "false", "true", "false", "", null, "", null};;
+                "true", "false", "true", "false", "", null, "", null};
         checkHtmlAlert(html, messages);
     }
 

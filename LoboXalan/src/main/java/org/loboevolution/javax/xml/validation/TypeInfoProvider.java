@@ -28,11 +28,9 @@ package org.loboevolution.javax.xml.validation;
 
 import org.loboevolution.html.node.TypeInfo;
 
-public abstract class TypeInfoProvider
-{
+public abstract class TypeInfoProvider {
 
-    protected TypeInfoProvider()
-    {
+    protected TypeInfoProvider() {
         throw new RuntimeException("Stub!");
     }
 

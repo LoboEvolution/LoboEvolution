@@ -46,13 +46,13 @@ import static org.junit.Assert.assertEquals;
 public class nodecomparedocumentposition34Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elemMain;
-        Element elem;
-        Text txt;
-        ProcessingInstruction pi;
-        int elementToTxtPosition;
-        int txtToPiPosition;
+        final Document doc;
+        final Element elemMain;
+        final Element elem;
+        final Text txt;
+        final ProcessingInstruction pi;
+        final int elementToTxtPosition;
+        final int txtToPiPosition;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elemMain = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");

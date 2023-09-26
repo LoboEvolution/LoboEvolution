@@ -47,14 +47,14 @@ import static org.junit.Assert.assertFalse;
 public class nodeisdefaultnamespace04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        Node entity;
-        Notation notation;
-        NamedNodeMap entitiesMap;
-        NamedNodeMap notationsMap;
+        final Document doc;
+        final DocumentType docType;
+        final Node entity;
+        final Notation notation;
+        final NamedNodeMap entitiesMap;
+        final NamedNodeMap notationsMap;
         boolean isDefault;
-        String nullNSURI = null;
+        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();

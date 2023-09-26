@@ -35,14 +35,14 @@ public class FuncQname extends FunctionDef1Arg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
 
-    int context = getArg0AsNode(xctxt);
-    XObject val;
+    final int context = getArg0AsNode(xctxt);
+    final XObject val;
 
     if (DTM.NULL != context) {
-      DTM dtm = xctxt.getDTM(context);
-      String qname = dtm.getNodeNameX(context);
+      final DTM dtm = xctxt.getDTM(context);
+      final String qname = dtm.getNodeNameX(context);
       val = (null == qname) ? XString.EMPTYSTRING : new XString(qname);
     } else {
       val = XString.EMPTYSTRING;

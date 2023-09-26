@@ -52,7 +52,7 @@ public class UriAction extends PDFAction {
 	 * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public UriAction(PDFObject obj, PDFObject root) throws IOException {
+	public UriAction(final PDFObject obj, final PDFObject root) throws IOException {
 		super("URI");
 		this.uri = PdfObjectParseUtil.parseStringFromDict("URI", obj, true);
 	}
@@ -64,7 +64,7 @@ public class UriAction extends PDFAction {
 	 * @param uri a {@link java.lang.String} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public UriAction(String uri) throws IOException {
+	public UriAction(final String uri) throws IOException {
 		super("URI");
 		this.uri = uri;
 	}

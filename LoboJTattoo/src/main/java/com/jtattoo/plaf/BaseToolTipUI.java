@@ -67,7 +67,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void installListeners(JComponent c) {
+	protected void installListeners(final JComponent c) {
 		super.installListeners(c);
 
 		// We must set the popup window to opaque because it is cached and reused within
@@ -75,8 +75,8 @@ public class BaseToolTipUI extends MetalToolTipUI {
 		popupWindowListener = new ComponentAdapter() {
 
 			@Override
-			public void componentHidden(ComponentEvent e) {
-				Window window = (Window) e.getComponent();
+			public void componentHidden(final ComponentEvent e) {
+				final Window window = (Window) e.getComponent();
 				DecorationHelper.setTranslucentWindow(window, false);
 				window.removeComponentListener(popupWindowListener);
 			}
@@ -85,17 +85,17 @@ public class BaseToolTipUI extends MetalToolTipUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installUI(JComponent c) {
+	public void installUI(final JComponent c) {
 		super.installUI(c);
-		int borderSize = AbstractLookAndFeel.getTheme().getTooltipBorderSize();
-		int shadowSize = AbstractLookAndFeel.getTheme().getTooltipShadowSize();
+		final int borderSize = AbstractLookAndFeel.getTheme().getTooltipBorderSize();
+		final int shadowSize = AbstractLookAndFeel.getTheme().getTooltipShadowSize();
 		fancyLayout = DecorationHelper.isTranslucentWindowSupported()
 				&& ToolTipManager.sharedInstance().isLightWeightPopupEnabled();
 		if (fancyLayout) {
 			c.setBorder(BorderFactory.createEmptyBorder(borderSize, borderSize + shadowSize, borderSize + shadowSize,
 					borderSize + shadowSize));
 			c.setOpaque(false);
-			Container parent = c.getParent();
+			final Container parent = c.getParent();
 			if (parent instanceof JPanel) {
 				((JPanel) c.getParent()).setOpaque(false);
 			}
@@ -107,17 +107,17 @@ public class BaseToolTipUI extends MetalToolTipUI {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g, final JComponent c) {
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposit = g2D.getComposite();
-		Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposit = g2D.getComposite();
+		final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		int borderSize = AbstractLookAndFeel.getTheme().getTooltipBorderSize();
-		int shadowSize = AbstractLookAndFeel.getTheme().getTooltipShadowSize();
+		final int borderSize = AbstractLookAndFeel.getTheme().getTooltipBorderSize();
+		final int shadowSize = AbstractLookAndFeel.getTheme().getTooltipShadowSize();
 
-		int w = c.getWidth();
-		int h = c.getHeight();
-		Color backColor = AbstractLookAndFeel.getTheme().getTooltipBackgroundColor();
+		final int w = c.getWidth();
+		final int h = c.getHeight();
+		final Color backColor = AbstractLookAndFeel.getTheme().getTooltipBackgroundColor();
 
 		// We can't draw the fancyLayout if popup is medium weight
 		boolean mediumWeight = false;
@@ -136,7 +136,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
 			while (parent != null) {
 				if (parent.getClass().getName().indexOf("HeavyWeightWindow") > 0 && parent instanceof Window) {
 					// Make the popup transparent
-					Window window = (Window) parent;
+					final Window window = (Window) parent;
 					// Add a component listener to revert this operation if popup is closed
 					window.addComponentListener(popupWindowListener);
 					DecorationHelper.setTranslucentWindow(window, true);
@@ -146,8 +146,8 @@ public class BaseToolTipUI extends MetalToolTipUI {
 			}
 			// draw the shadow
 			g2D.setColor(AbstractLookAndFeel.getTheme().getShadowColor());
-			float[] composites = { 0.01f, 0.02f, 0.04f, 0.06f, 0.08f, 0.12f };
-			int shadowOffset = AbstractLookAndFeel.getTheme().isTooltipCastShadow() ? shadowSize : 0;
+			final float[] composites = { 0.01f, 0.02f, 0.04f, 0.06f, 0.08f, 0.12f };
+			final int shadowOffset = AbstractLookAndFeel.getTheme().isTooltipCastShadow() ? shadowSize : 0;
 			for (int i = 0; i < shadowSize; i++) {
 				g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 						composites[i >= composites.length ? composites.length - 1 : i]));
@@ -179,12 +179,12 @@ public class BaseToolTipUI extends MetalToolTipUI {
 			// Draw the text. This must be done within an offscreen image because of a bug
 			// in the jdk, wich causes ugly antialiased font rendering when background is
 			// transparent and popup is heavy weight.
-			BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-			Graphics2D big = bi.createGraphics();
+			final BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+			final Graphics2D big = bi.createGraphics();
 			big.setClip(0, 0, w, h);
-			Paint savedPaint = big.getPaint();
-			Color cHi;
-			Color cLo;
+			final Paint savedPaint = big.getPaint();
+			final Color cHi;
+			final Color cLo;
 			if (ColorHelper.getGrayValue(backColor) < 128) {
 				cHi = ColorHelper.brighter(backColor, 10);
 				cLo = ColorHelper.darker(backColor, 20);
@@ -199,7 +199,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
 			big.setPaint(savedPaint);
 
 			if (c instanceof JToolTip) {
-				JToolTip tip = (JToolTip) c;
+				final JToolTip tip = (JToolTip) c;
 				if (tip.getComponent() != null && tip.getComponent().isEnabled()) {
 					c.setForeground(AbstractLookAndFeel.getTheme().getTooltipForegroundColor());
 				} else {
@@ -225,9 +225,9 @@ public class BaseToolTipUI extends MetalToolTipUI {
 			g2D.drawRect(borderSize - 1, borderSize - 1, w - (2 * borderSize - 1), h - (2 * borderSize - 1));
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
 
-			Paint savedPaint = g2D.getPaint();
-			Color cHi;
-			Color cLo;
+			final Paint savedPaint = g2D.getPaint();
+			final Color cHi;
+			final Color cLo;
 			if (ColorHelper.getGrayValue(backColor) < 128) {
 				cHi = ColorHelper.brighter(backColor, 10);
 				cLo = ColorHelper.darker(backColor, 20);

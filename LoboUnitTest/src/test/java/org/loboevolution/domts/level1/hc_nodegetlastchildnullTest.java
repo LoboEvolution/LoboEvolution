@@ -55,11 +55,11 @@ public class hc_nodegetlastchildnullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection emList;
-        Node emNode;
-        CharacterData emText;
-        Node nullChild;
+        final Document doc;
+        final HTMLCollection emList;
+        final Node emNode;
+        final CharacterData emText;
+        final Node nullChild;
         doc = sampleXmlFile("hc_staff.xml");
         emList = doc.getElementsByTagName("em");
         emNode = emList.item(0);

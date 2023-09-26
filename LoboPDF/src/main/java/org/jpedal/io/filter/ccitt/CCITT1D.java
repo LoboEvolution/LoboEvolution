@@ -349,8 +349,8 @@ public class CCITT1D implements CCITTDecoder {
             }};
 
 
-    public CCITT1D(byte[] rawData, int width, int height,
-                   boolean blackIsOne, boolean isByteAligned) {
+    public CCITT1D(final byte[] rawData, final int width, final int height,
+                   final boolean blackIsOne, final boolean isByteAligned) {
 
         this.data = rawData;
         this.bitReached = 0;
@@ -399,7 +399,7 @@ public class CCITT1D implements CCITTDecoder {
 
     byte[] creatOutputFromBitset() {
 
-        byte[] output = new byte[bytesNeeded];
+        final byte[] output = new byte[bytesNeeded];
 
         //assemble all tokens into a decompressed output data block
         int bytePtr = 0, bitPtr = 7, mask;
@@ -410,7 +410,7 @@ public class CCITT1D implements CCITTDecoder {
             if (out.get(j)) {
                 mask = 1 << bitPtr;
 
-                entry |= mask;
+                entry |= (byte) mask;
                 bitPtr--;
             } else {
                 bitPtr--;
@@ -451,10 +451,10 @@ public class CCITT1D implements CCITTDecoder {
             }
 
             //remember state as getPixelCount will alter
-            boolean pixelIsWhite = isWhite;
+            final boolean pixelIsWhite = isWhite;
 
             //decode the next codeword and get how many pixels written out
-            int pixelCount = getCodeWord();
+            final int pixelCount = getCodeWord();
 
             //set bits
             if (pixelCount > 0) {
@@ -510,9 +510,9 @@ public class CCITT1D implements CCITTDecoder {
         return pixelCount;
     }
 
-    private int processCodeWord(int itemFound, int code, int bits) {
-        int pixelCount;
-        boolean isT;
+    private int processCodeWord(final int itemFound, final int code, final int bits) {
+        final int pixelCount;
+        final boolean isT;
 
         //values in ther table
         if (isWhite) {
@@ -562,8 +562,8 @@ public class CCITT1D implements CCITTDecoder {
         if (cRTC != 6 && isEndOfLine && isByteAligned) {
 
             //get bits over 8 and align to byte boundary
-            int iPart = (bitReached) % 8;
-            int iDrop = 8 - (iPart);
+            final int iPart = (bitReached) % 8;
+            final int iDrop = 8 - (iPart);
             if (iPart > 0) {
                 bitReached = bitReached + iDrop;
             }
@@ -573,11 +573,11 @@ public class CCITT1D implements CCITTDecoder {
     }
 
     //2D version
-    int get1DBits(int bitsToGet) {
+    int get1DBits(final int bitsToGet) {
         return get1DBits(bitsToGet, false);
     }
 
-    private int get1DBits(int bitsToGet, boolean is1D) {
+    private int get1DBits(final int bitsToGet, final boolean is1D) {
 
         int tmp = 0;
 
@@ -597,10 +597,10 @@ public class CCITT1D implements CCITTDecoder {
         return tmp;
     }
 
-    private static int checkTables(int possCode, int bitLength, boolean isWhite) {
+    private static int checkTables(final int possCode, final int bitLength, final boolean isWhite) {
 
         int itemFound = -1;
-        int[][] table;
+        final int[][] table;
 
         if (isWhite) {
             table = w[bitLength - 4];
@@ -608,7 +608,7 @@ public class CCITT1D implements CCITTDecoder {
             table = b[bitLength - 2];
         }
 
-        int size = table.length;
+        final int size = table.length;
 
         for (int z = 0; z < size; z++) {
             if (possCode == table[z][0]) {
@@ -620,14 +620,14 @@ public class CCITT1D implements CCITTDecoder {
         return itemFound;
     }
 
-    private static BitSet fromByteArray(byte[] bytes, int bitsNeeded) {
+    private static BitSet fromByteArray(final byte[] bytes, final int bitsNeeded) {
 
         int bitSetPtr = 0, value;
         byte tmp;
 
-        BitSet bits = new BitSet(bitsNeeded);
-        for (int i = 0; i < bytes.length; i++) {
-            tmp = bytes[i];
+        final BitSet bits = new BitSet(bitsNeeded);
+        for (final byte aByte : bytes) {
+            tmp = aByte;
             for (int z = 7; z >= 0; z--) {
 
                 value = (tmp & (1 << z));

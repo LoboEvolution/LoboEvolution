@@ -35,6 +35,9 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 
@@ -60,22 +63,18 @@ public class hc_namednodemapreturnfirstitemTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddress;
-        NamedNodeMap attributes;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddress;
+        final NamedNodeMap attributes;
         Node child;
         String nodeName;
-        java.util.Collection<String> htmlExpected = new java.util.ArrayList<String>();
-        htmlExpected.add("title");
-        htmlExpected.add("class");
 
-        java.util.Collection<String> expected = new java.util.ArrayList<String>();
+        final List<String> expected = new ArrayList<>();
         expected.add("title");
         expected.add("class");
         expected.add("dir");
-
-        java.util.Collection<String> actual = new java.util.ArrayList<>();
+        final List<String> actual = new ArrayList<>();
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");

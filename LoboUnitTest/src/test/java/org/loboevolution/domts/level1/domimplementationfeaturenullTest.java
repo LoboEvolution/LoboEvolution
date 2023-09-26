@@ -29,7 +29,6 @@ package org.loboevolution.domts.level1;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 
@@ -52,10 +51,10 @@ public class domimplementationfeaturenullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        boolean state;
-        String nullVersion = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final boolean state;
+        final String nullVersion = null;
         doc = sampleXmlFile("staff.xml");
         domImpl = doc.getImplementation();
         state = domImpl.hasFeature("XML", nullVersion);

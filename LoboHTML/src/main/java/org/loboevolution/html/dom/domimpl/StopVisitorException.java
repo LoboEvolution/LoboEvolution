@@ -48,7 +48,7 @@ class StopVisitorException extends RuntimeException {
 	 *
 	 * @param tag a {@link java.lang.Object} object.
 	 */
-	public StopVisitorException(Object tag) {
+	public StopVisitorException(final Object tag) {
 		this.tag = tag;
 	}
 
@@ -57,7 +57,7 @@ class StopVisitorException extends RuntimeException {
 	 *
 	 * @param message a {@link java.lang.String} object.
 	 */
-	public StopVisitorException(String message) {
+	public StopVisitorException(final String message) {
 		super(message);
 		this.tag = null;
 	}
@@ -68,7 +68,7 @@ class StopVisitorException extends RuntimeException {
 	 * @param message a {@link java.lang.String} object.
 	 * @param cause a {@link java.lang.Throwable} object.
 	 */
-	public StopVisitorException(String message, Throwable cause) {
+	public StopVisitorException(final String message, final Throwable cause) {
 		super(message, cause);
 		this.tag = null;
 	}
@@ -78,7 +78,7 @@ class StopVisitorException extends RuntimeException {
 	 *
 	 * @param cause a {@link java.lang.Throwable} object.
 	 */
-	public StopVisitorException(Throwable cause) {
+	public StopVisitorException(final Throwable cause) {
 		super(cause);
 		this.tag = null;
 	}

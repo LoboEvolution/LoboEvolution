@@ -39,7 +39,7 @@ public class BinaryOperation {
 	public static final int RIGHT_SHIFT = 1;
 	
 	/** Constant <code>LONGMASK=0xffffffffl</code> */
-	public static final long LONGMASK = 0xffffffffl; // 1111 1111 1111 1111 1111 1111 1111 1111
+	public static final long LONGMASK = 0xffffffffL; // 1111 1111 1111 1111 1111 1111 1111 1111
 	/** Constant <code>INTMASK=0xff</code> */
 	public static final int INTMASK = 0xff; // 1111 1111
 
@@ -70,7 +70,7 @@ public class BinaryOperation {
 	 * @param shift a int.
 	 * @return a long.
 	 */
-	public static long bit32ShiftL(long number, int shift) {
+	public static long bit32ShiftL(final long number, final int shift) {
 		//return (number << shift) & LONGMASK;
 		return number << shift;
 	}
@@ -82,12 +82,12 @@ public class BinaryOperation {
 	 * @param shift a int.
 	 * @return a long.
 	 */
-	public static long bit32ShiftR(long number, int shift) {
+	public static long bit32ShiftR(final long number, final int shift) {
 		//return (number >> shift) & LONGMASK;
 		return number >> shift;
 	}
 
-	/*public static final  long bit32Shift(long number, int shift, int direction) {
+	/*public static final  long bit32Shift(long number, final int shift, final int direction) {
 		if (direction == LEFT_SHIFT)
 			number <<= shift;
 		else
@@ -104,7 +104,7 @@ public class BinaryOperation {
 	 * @param direction a int.
 	 * @return a int.
 	 */
-	public static int bit8Shift(int number, int shift, int direction) {
+	public static int bit8Shift(int number, final int shift, final int direction) {
 		if (direction == LEFT_SHIFT)
 			number <<= shift;
 		else

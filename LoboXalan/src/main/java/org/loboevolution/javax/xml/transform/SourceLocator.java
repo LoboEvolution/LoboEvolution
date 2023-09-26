@@ -27,8 +27,7 @@
 package org.loboevolution.javax.xml.transform;
 
 
-public interface SourceLocator
-{
+public interface SourceLocator {
 
     public abstract String getPublicId();
 

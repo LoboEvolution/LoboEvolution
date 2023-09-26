@@ -39,7 +39,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void align_thead() {
-        String[] messages = {null, "hello", "left", "hi", "right"};
+        final String[] messages = {null, "hello", "left", "hi", "right"};
         align("th", messages);
     }
 
@@ -48,7 +48,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void align_tbody() {
-        String[] messages = {null, "hello", "left", "hi", "right"};
+        final String[] messages = {null, "hello", "left", "hi", "right"};
         align("tb", messages);
     }
 
@@ -57,7 +57,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void align_tfoot() {
-        String[] messages = {null, "hello", "left", "hi", "right"};
+        final String[] messages = {null, "hello", "left", "hi", "right"};
         align("tf", messages);
     }
 
@@ -104,7 +104,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void vAlign_thead() {
-        String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
+        final String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
         vAlign("th", messages);
     }
 
@@ -113,7 +113,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void vAlign_tbody() {
-        String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
+        final String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
         vAlign("tb", messages);
     }
 
@@ -122,7 +122,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void vAlign_tfoot() {
-        String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
+        final String[] messages = {"top", "baseline", "3", "middle", "8", "BOTtom"};
         vAlign("tf", messages);
     }
 
@@ -181,7 +181,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void ch_thead() {
-        String[] messages = {"p", "po", "", "u", "8", "U8"};
+        final String[] messages = {"p", "po", "", "u", "8", "U8"};
         ch("th", messages);
     }
 
@@ -190,7 +190,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void ch_tbody() {
-        String[] messages = {"p", "po", "", "u", "8", "U8"};
+        final String[] messages = {"p", "po", "", "u", "8", "U8"};
         ch("tb", messages);
     }
 
@@ -199,7 +199,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void ch_tfoot() {
-        String[] messages = {"p", "po", "", "u", "8", "U8"};
+        final String[] messages = {"p", "po", "", "u", "8", "U8"};
         ch("tf", messages);
     }
 
@@ -258,7 +258,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void chOff_thead() {
-        String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
+        final String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
         chOff("th", messages);
     }
 
@@ -267,7 +267,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void chOff_tbody() {
-        String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
+        final String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
         chOff("tb", messages);
     }
 
@@ -276,7 +276,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
      */
     @Test
     public void chOff_tfoot() {
-        String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
+        final String[] messages = {"0", "4", "", "5.2", "-3", "abc"};
         chOff("tf", messages);
     }
 

@@ -51,7 +51,7 @@ class PageBuilder implements Serializable, Runnable {
 	 *
 	 * @param PDFViewer a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public PageBuilder(PDFViewer PDFViewer) {
+	public PageBuilder(final PDFViewer PDFViewer) {
 		this.PDFViewer = PDFViewer;
 	}
 
@@ -61,7 +61,7 @@ class PageBuilder implements Serializable, Runnable {
 	 * @param keyval
 	 *            the keyval
 	 */
-	public synchronized void keyTyped(int keyval) {
+	public synchronized void keyTyped(final int keyval) {
 		value = value * 10 + keyval;
 		timeout = System.currentTimeMillis() + 500;
 		if (anim == null) {
@@ -88,7 +88,7 @@ class PageBuilder implements Serializable, Runnable {
 		while (now < then) {
 			try {
 				Thread.sleep(timeout - now);
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 				Thread.currentThread().interrupt();
 			}
 			synchronized (this) {

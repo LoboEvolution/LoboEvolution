@@ -36,8 +36,8 @@ public class BorderSetter1 implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
-		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+	public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
+		final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 		properties.setProperty(BORDER, newValue);
 		properties.setPropertyValueProcessed(BORDER_TOP, newValue, false);
 		properties.setPropertyValueProcessed(BORDER_LEFT, newValue, false);

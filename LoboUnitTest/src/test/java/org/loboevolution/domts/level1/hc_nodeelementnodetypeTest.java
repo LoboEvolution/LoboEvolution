@@ -53,9 +53,9 @@ public class hc_nodeelementnodetypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element rootNode;
-        int nodeType;
+        final Document doc;
+        final Element rootNode;
+        final int nodeType;
         doc = sampleXmlFile("hc_staff.xml");
         rootNode = doc.getDocumentElement();
         nodeType = rootNode.getNodeType();

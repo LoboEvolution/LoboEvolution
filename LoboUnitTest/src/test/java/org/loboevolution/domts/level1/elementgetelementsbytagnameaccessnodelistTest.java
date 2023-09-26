@@ -53,13 +53,13 @@ public class elementgetelementsbytagnameaccessnodelistTest extends LoboUnitTest 
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
         Node child;
-        String childName;
-        String childValue;
-        int childType;
+        final String childName;
+        final String childValue;
+        final int childType;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         testEmployee = (Element) elementList.item(3);

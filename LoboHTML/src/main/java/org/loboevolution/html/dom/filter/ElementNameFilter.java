@@ -44,16 +44,16 @@ public class ElementNameFilter implements NodeFilter {
 	 * @param name
 	 *            the name
 	 */
-	public ElementNameFilter(String name) {
+	public ElementNameFilter(final String name) {
 		this.name = name;
 	}
 
 
 	/** {@inheritDoc} */
 	@Override
-	public short acceptNode(Node node) {
+	public short acceptNode(final Node node) {
 		if (node instanceof Element) {
-			Element elm = (Element)node;
+			final Element elm = (Element)node;
 			if (elm != null && this.name != null) {
 				return this.name.equals(elm.getAttribute("name")) ?
 						NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;

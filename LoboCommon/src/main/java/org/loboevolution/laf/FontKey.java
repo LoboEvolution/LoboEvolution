@@ -87,8 +87,8 @@ public class FontKey {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean equals(Object other) {
-		FontKey ors;
+	public boolean equals(final Object other) {
+		final FontKey ors;
 		if (other instanceof FontKey) {
 			ors = (FontKey) other;
 		} else {

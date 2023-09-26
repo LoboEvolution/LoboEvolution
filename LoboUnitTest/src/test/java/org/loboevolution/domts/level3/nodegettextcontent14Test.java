@@ -48,10 +48,10 @@ import static org.junit.Assert.assertEquals;
 public class nodegettextcontent14Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element elem;
-        String textContent;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element elem;
+        final String textContent;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(2);

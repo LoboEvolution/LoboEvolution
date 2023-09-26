@@ -57,7 +57,7 @@ public class NodeListImpl extends AbstractList<Node> implements NodeList {
 	 *
 	 * @param collection a {@link java.util.List} object.
 	 */
-	public NodeListImpl(List<Node> collection) {
+	public NodeListImpl(final List<Node> collection) {
 		super(collection);
 	}
 
@@ -69,8 +69,8 @@ public class NodeListImpl extends AbstractList<Node> implements NodeList {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node item(int index) {
-		int size = this.size();
+	public Node item(final int index) {
+		final int size = this.size();
 		if (size > index && index > -1) {
 			return this.get(index);
 		} else {
@@ -99,7 +99,7 @@ public class NodeListImpl extends AbstractList<Node> implements NodeList {
 	/** {@inheritDoc} */
 	@Override
 	public void forEach(final Function function) {
-		AtomicInteger integer = new AtomicInteger(0);
+		final AtomicInteger integer = new AtomicInteger(0);
 		this.forEach(node -> {
 			final int i = integer.getAndIncrement();
 			final NodeImpl n = (NodeImpl) node;

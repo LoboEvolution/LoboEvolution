@@ -46,14 +46,14 @@ import static org.junit.Assert.*;
 public class nodegetfeature10Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Node node;
-        String nullVersion = null;
+        final Document doc;
+        final Node node;
+        final String nullVersion = null;
 
         Node featureImpl;
         boolean isSupported;
-        HTMLCollection nodeList;
-        Element elem;
+        final HTMLCollection nodeList;
+        final Element elem;
         doc = sampleXmlFile("barfoo.xml");
         nodeList = doc.getElementsByTagName("p");
         elem = (Element) nodeList.item(0);

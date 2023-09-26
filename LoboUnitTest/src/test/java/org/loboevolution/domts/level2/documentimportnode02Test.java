@@ -36,7 +36,6 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -63,16 +62,16 @@ public class documentimportnode02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document docImported;
-        Element element;
-        Attr attr;
-        Node importedAttr;
-        String nodeName;
-        int nodeType;
-        String nodeValue;
-        HTMLCollection addresses;
-        Node attrsParent;
+        final Document doc;
+        final Document docImported;
+        final Element element;
+        final Attr attr;
+        final Node importedAttr;
+        final String nodeName;
+        final int nodeType;
+        final String nodeValue;
+        final HTMLCollection addresses;
+        final Node attrsParent;
         doc = sampleXmlFile("staffNS.xml");
         docImported = sampleXmlFile("staff.xml");
         addresses = doc.getElementsByTagName( "address");

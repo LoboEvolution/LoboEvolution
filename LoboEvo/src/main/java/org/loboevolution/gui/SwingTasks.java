@@ -53,7 +53,7 @@ public class SwingTasks {
 	 * @param title       the title
 	 * @return the box
 	 */
-	public static Box createGroupBox(int orientation, String title) {
+	public static Box createGroupBox(final int orientation, final String title) {
 		final Box box = new Box(orientation);
 		box.setBorder(new TitledBorder(new EtchedBorder(), title));
 		return box;
@@ -89,7 +89,7 @@ public class SwingTasks {
 	 * @param component the component
 	 * @param enabled   the enabled
 	 */
-	private static void setEnabledRecursive(JComponent component, boolean enabled) {
+	private static void setEnabledRecursive(final JComponent component, final boolean enabled) {
 		component.setEnabled(enabled);
 		final int count = component.getComponentCount();
 		for (int i = 0; i < count; i++) {
@@ -114,7 +114,7 @@ public class SwingTasks {
 	 * @param component the component
 	 * @param enabled   the enabled
 	 */
-	public static void setNestedEnabled(JComponent component, boolean enabled) {
+	public static void setNestedEnabled(final JComponent component, final boolean enabled) {
 		final Boolean nestedEnabling = (Boolean) component.getClientProperty(NESTED_ENABLING);
 		if (nestedEnabling == null || nestedEnabling != enabled) {
 			component.putClientProperty(NESTED_ENABLING, enabled);

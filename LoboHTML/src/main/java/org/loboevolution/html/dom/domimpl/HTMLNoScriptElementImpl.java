@@ -38,12 +38,12 @@ public class HTMLNoScriptElementImpl extends HTMLElementImpl{
      *
      * @param name a {@link String} object.
      */
-    public HTMLNoScriptElementImpl(String name) {
+    public HTMLNoScriptElementImpl(final String name) {
         super(name);
     }
 
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_NONE);
     }
 }

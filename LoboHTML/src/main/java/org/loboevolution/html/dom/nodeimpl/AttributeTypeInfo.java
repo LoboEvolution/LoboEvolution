@@ -81,7 +81,7 @@ public class AttributeTypeInfo implements TypeInfo {
      * {@inheritDoc}
      */
     @Override
-    public boolean isDerivedFrom(String typeNamespaceArg, String typeNameArg, int derivationMethod) {
+    public boolean isDerivedFrom(final String typeNamespaceArg, final String typeNameArg, final int derivationMethod) {
 
         if (typeNameArg == null)
             return false;

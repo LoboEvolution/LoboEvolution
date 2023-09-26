@@ -54,11 +54,11 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	class MyTitlePaneLayout extends TitlePaneLayout {
 
 		@Override
-		public void addLayoutComponent(String name, Component c) {
+		public void addLayoutComponent(final String name, final Component c) {
 		}
 
 		@Override
-		public void layoutContainer(Container c) {
+		public void layoutContainer(final Container c) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				layoutMacStyle(c);
 			} else {
@@ -66,20 +66,20 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 			}
 		}
 
-		public void layoutDefault(Container c) {
-			boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
+		public void layoutDefault(final Container c) {
+			final boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
 
-			int spacing = getHorSpacing();
-			int w = getWidth();
-			int h = getHeight();
+			final int spacing = getHorSpacing();
+			final int w = getWidth();
+			final int h = getHeight();
 
 			// assumes all buttons have the same dimensions these dimensions include the
 			// borders
-			int buttonHeight = h - getVerSpacing() - 1;
-			int buttonWidth = buttonHeight;
+			final int buttonHeight = h - getVerSpacing() - 1;
+			final int buttonWidth = buttonHeight;
 
 			int x = leftToRight ? w - spacing : 0;
-			int y = Math.max(0, (h - buttonHeight) / 2 - 1);
+			final int y = Math.max(0, (h - buttonHeight) / 2 - 1);
 
 			if (frame.isClosable()) {
 				x += leftToRight ? -buttonWidth : spacing;
@@ -109,31 +109,31 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 			if (customTitlePanel != null) {
 				int maxWidth = w - buttonsWidth - spacing - 20;
-				Icon icon = frame.getFrameIcon();
+				final Icon icon = frame.getFrameIcon();
 				if (icon != null) {
 					maxWidth -= icon.getIconWidth();
 					maxWidth -= spacing;
 				}
-				int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
-				int cph = h;
-				int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
-				int cpy = 0;
+				final int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
+				final int cph = h;
+				final int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
+				final int cpy = 0;
 				customTitlePanel.setBounds(cpx, cpy, cpw, cph);
 				buttonsWidth += customTitlePanel.getPreferredSize().width;
 			}
 		}
 
-		private void layoutMacStyle(Container c) {
-			int spacing = getHorSpacing();
-			int h = getHeight();
+		private void layoutMacStyle(final Container c) {
+			final int spacing = getHorSpacing();
+			final int h = getHeight();
 
 			// assumes all buttons have the same dimensions these dimensions include the
 			// borders
-			int btnHeight = h - getVerSpacing();
-			int btnWidth = btnHeight;
+			final int btnHeight = h - getVerSpacing();
+			final int btnWidth = btnHeight;
 
 			int x = 0;
-			int y = 0;
+			final int y = 0;
 
 			if (frame.isClosable()) {
 				closeButton.setBounds(x, y, btnWidth, btnHeight);
@@ -151,17 +151,17 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 			buttonsWidth = x;
 
 			if (customTitlePanel != null) {
-				int cpx = buttonsWidth + 5;
-				int cpy = 0;
-				int cpw = customTitlePanel.getPreferredSize().width;
-				int cph = h;
+				final int cpx = buttonsWidth + 5;
+				final int cpy = 0;
+				final int cpw = customTitlePanel.getPreferredSize().width;
+				final int cph = h;
 				customTitlePanel.setBounds(cpx, cpy, cpw, cph);
 				buttonsWidth += cpw + 5;
 			}
 		}
 
 		@Override
-		public Dimension minimumLayoutSize(Container c) {
+		public Dimension minimumLayoutSize(final Container c) {
 			int width = 30;
 			if (frame.isClosable()) {
 				width += 21;
@@ -172,13 +172,13 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 			if (frame.isIconifiable()) {
 				width += 16 + (frame.isMaximizable() ? 2 : frame.isClosable() ? 10 : 4);
 			}
-			FontMetrics fm = JTattooUtilities.getFontMetrics(McWinInternalFrameTitlePane.this, null, getFont());
-			String frameTitle = frame.getTitle();
-			int title_w = frameTitle != null ? fm.stringWidth(frameTitle) : 0;
-			int title_length = frameTitle != null ? frameTitle.length() : 0;
+			final FontMetrics fm = JTattooUtilities.getFontMetrics(McWinInternalFrameTitlePane.this, null, getFont());
+			final String frameTitle = frame.getTitle();
+			final int title_w = frameTitle != null ? fm.stringWidth(frameTitle) : 0;
+			final int title_length = frameTitle != null ? frameTitle.length() : 0;
 
 			if (title_length > 2) {
-				int subtitle_w = fm.stringWidth(frame.getTitle().substring(0, 2) + "...");
+				final int subtitle_w = fm.stringWidth(frame.getTitle().substring(0, 2) + "...");
 				width += title_w < subtitle_w ? title_w : subtitle_w;
 			} else {
 				width += title_w;
@@ -186,8 +186,8 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 			int height = paletteTitleHeight;
 			if (!isPalette) {
-				int fontHeight = fm.getHeight() + 5;
-				Icon icon = isMacStyleWindowDecoration() ? null : frame.getFrameIcon();
+				final int fontHeight = fm.getHeight() + 5;
+				final Icon icon = isMacStyleWindowDecoration() ? null : frame.getFrameIcon();
 				int iconHeight = 0;
 				if (icon != null) {
 					iconHeight = Math.min(icon.getIconHeight(), 18);
@@ -199,12 +199,12 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		}
 
 		@Override
-		public Dimension preferredLayoutSize(Container c) {
+		public Dimension preferredLayoutSize(final Container c) {
 			return minimumLayoutSize(c);
 		}
 
 		@Override
-		public void removeLayoutComponent(Component c) {
+		public void removeLayoutComponent(final Component c) {
 		}
 
 	} // end of class MyTitlePaneLayout
@@ -219,7 +219,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public McWinInternalFrameTitlePane(JInternalFrame f) {
+	public McWinInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
@@ -231,7 +231,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (JTattooUtilities.isActive(this)) {
 			g.setColor(AbstractLookAndFeel.getWindowBorderColor());
 		} else {
@@ -242,7 +242,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
 			g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowTitleColorLight(), 40));
 			JTattooUtilities.drawString(frame, g, title, x, y - 1);

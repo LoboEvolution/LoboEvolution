@@ -46,10 +46,10 @@ public class CMapFormat0 extends CMap {
      *
      * @param language a short.
      */
-    protected CMapFormat0(short language) {
+    protected CMapFormat0(final short language) {
         super((short) 0, language);
     
-        byte[] initialIndex = new byte[256];
+        final byte[] initialIndex = new byte[256];
         for (int i = 0; i < initialIndex.length; i++) {
             initialIndex[i] = (byte) i;
         }
@@ -72,8 +72,8 @@ public class CMapFormat0 extends CMap {
 	 * Map from a byte
 	 */
     @Override
-	public byte map(byte src) {
-        int i = 0xff & src;
+	public byte map(final byte src) {
+        final int i = 0xff & src;
         
         return this.glyphIndex[i];
     }
@@ -84,7 +84,7 @@ public class CMapFormat0 extends CMap {
 	 * Cannot map from short
 	 */
     @Override
-	public char map(char src) {
+	public char map(final char src) {
         if (src  < 0 || src > 255) {
             // out of range
             return (char) 0;
@@ -100,7 +100,7 @@ public class CMapFormat0 extends CMap {
 	 * Get the src code which maps to the given glyphID
 	 */
     @Override
-	public char reverseMap(short glyphID) {
+	public char reverseMap(final short glyphID) {
         for (int i = 0; i < this.glyphIndex.length; i++) {
             if ((this.glyphIndex[i] & 0xff) == glyphID) {
                 return (char) i;
@@ -115,7 +115,7 @@ public class CMapFormat0 extends CMap {
      *
      * @param glyphIndex an array of {@link byte} objects.
      */
-    public void setMap(byte[] glyphIndex) {
+    public void setMap(final byte[] glyphIndex) {
         if (glyphIndex.length != 256) {
             throw new IllegalArgumentException("Glyph map must be size 256!");
         }
@@ -129,8 +129,8 @@ public class CMapFormat0 extends CMap {
      * @param src a byte.
      * @param dest a byte.
      */
-    public void setMap(byte src, byte dest) {
-        int i = 0xff & src;
+    public void setMap(final byte src, final byte dest) {
+        final int i = 0xff & src;
         
         this.glyphIndex[i] = dest;
     }
@@ -151,7 +151,7 @@ public class CMapFormat0 extends CMap {
 	 */
     @Override
 	public ByteBuffer getData() {
-        ByteBuffer buf = ByteBuffer.allocate(262);
+        final ByteBuffer buf = ByteBuffer.allocate(262);
         
         buf.putShort(getFormat());
         buf.putShort(getLength());
@@ -170,7 +170,7 @@ public class CMapFormat0 extends CMap {
 	 * Read the map in from a byte buffer
 	 */
     @Override
-	public void setData(int length, ByteBuffer data) {
+	public void setData(final int length, final ByteBuffer data) {
         if (length != 262) {
             throw new IllegalArgumentException("Bad length for CMap format 0");
         }
@@ -179,7 +179,7 @@ public class CMapFormat0 extends CMap {
             throw new IllegalArgumentException("Wrong amount of data for CMap format 0");
         }
         
-        byte[] map = new byte[256];
+        final byte[] map = new byte[256];
         data.get(map);
         
         setMap(map);

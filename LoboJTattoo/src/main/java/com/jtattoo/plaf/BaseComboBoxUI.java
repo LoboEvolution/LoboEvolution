@@ -67,8 +67,8 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
 		@Override
 		public void paint(final Graphics g) {
-			Dimension size = getSize();
-			Color[] colors;
+			final Dimension size = getSize();
+			final Color[] colors;
 			if (isEnabled()) {
 				if (getModel().isArmed() && getModel().isPressed()) {
 					colors = AbstractLookAndFeel.getTheme().getPressedColors();
@@ -82,14 +82,14 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 			}
 			JTattooUtilities.fillHorGradient(g, colors, 0, 0, size.width, size.height);
 
-			boolean inverse = ColorHelper.getGrayValue(colors) < 128;
+			final boolean inverse = ColorHelper.getGrayValue(colors) < 128;
 
-			Icon icon = inverse ? BaseIcons.getComboBoxInverseIcon() : BaseIcons.getComboBoxIcon();
-			int x = (size.width - icon.getIconWidth()) / 2;
-			int y = (size.height - icon.getIconHeight()) / 2;
+			final Icon icon = inverse ? BaseIcons.getComboBoxInverseIcon() : BaseIcons.getComboBoxIcon();
+			final int x = (size.width - icon.getIconWidth()) / 2;
+			final int y = (size.height - icon.getIconHeight()) / 2;
 
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
 			g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
 			if (getModel().isPressed() && getModel().isArmed()) {
 				icon.paintIcon(this, g, x + 2, y + 1);
@@ -105,8 +105,8 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 	public class PropertyChangeHandler implements PropertyChangeListener {
 
 		@Override
-		public void propertyChange(PropertyChangeEvent e) {
-			String name = e.getPropertyName();
+		public void propertyChange(final PropertyChangeEvent e) {
+			final String name = e.getPropertyName();
 			if (name.equals("componentOrientation")) {
 				setButtonBorder();
 			}
@@ -130,12 +130,12 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
-		JButton button = new ArrowButton();
+		final JButton button = new ArrowButton();
 		if (JTattooUtilities.isLeftToRight(comboBox)) {
-			Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		} else {
-			Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		}
 		return button;
@@ -143,13 +143,13 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension getPreferredSize(JComponent c) {
-		Dimension size = super.getPreferredSize(c);
+	public Dimension getPreferredSize(final JComponent c) {
+		final Dimension size = super.getPreferredSize(c);
 		if (comboBox.getGraphics() != null) {
-			FontMetrics fm = JTattooUtilities.getFontMetrics(comboBox, comboBox.getGraphics(), comboBox.getFont());
+			final FontMetrics fm = JTattooUtilities.getFontMetrics(comboBox, comboBox.getGraphics(), comboBox.getFont());
 			size.height = fm.getHeight() + 2;
 			if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
-				AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
+				final AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
 				size.height = Math.max(size.height, laf.getIconFactory().getDownArrowIcon().getIconHeight() + 2);
 			}
 		}
@@ -167,25 +167,25 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 			myFocusListener = new FocusListener() {
 
 				@Override
-				public void focusGained(FocusEvent e) {
+				public void focusGained(final FocusEvent e) {
 					if (comboBox != null) {
 						orgBorder = comboBox.getBorder();
 						orgBackgroundColor = comboBox.getBackground();
-						LookAndFeel laf = UIManager.getLookAndFeel();
+						final LookAndFeel laf = UIManager.getLookAndFeel();
 						if (laf instanceof AbstractLookAndFeel) {
 							if (orgBorder instanceof UIResource) {
-								Border focusBorder = ((AbstractLookAndFeel) laf).getBorderFactory()
+								final Border focusBorder = ((AbstractLookAndFeel) laf).getBorderFactory()
 										.getFocusFrameBorder();
 								comboBox.setBorder(focusBorder);
 							}
-							Color backgroundColor = AbstractLookAndFeel.getTheme().getFocusBackgroundColor();
+							final Color backgroundColor = AbstractLookAndFeel.getTheme().getFocusBackgroundColor();
 							comboBox.setBackground(backgroundColor);
 						}
 					}
 				}
 
 				@Override
-				public void focusLost(FocusEvent e) {
+				public void focusLost(final FocusEvent e) {
 					if (comboBox != null) {
 						if (orgBorder instanceof UIResource) {
 							comboBox.setBorder(orgBorder);
@@ -200,7 +200,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installUI(JComponent c) {
+	public void installUI(final JComponent c) {
 		super.installUI(c);
 		comboBox.setRequestFocusEnabled(true);
 		comboBox.setLightWeightPopupEnabled(false);
@@ -217,10 +217,10 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 	 */
 	protected void setButtonBorder() {
 		if (JTattooUtilities.isLeftToRight(comboBox)) {
-			Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
 			arrowButton.setBorder(border);
 		} else {
-			Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
 			arrowButton.setBorder(border);
 		}
 	}

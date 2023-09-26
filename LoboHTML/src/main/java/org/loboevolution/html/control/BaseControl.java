@@ -47,7 +47,7 @@ public abstract class BaseControl extends JComponent implements UIControl {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public BaseControl(HTMLElementImpl modelNode) {
+	public BaseControl(final HTMLElementImpl modelNode) {
 		this.controlElement = modelNode;
 	}
 
@@ -77,7 +77,7 @@ public abstract class BaseControl extends JComponent implements UIControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRUIControl(RUIControl ruicontrol) {
+	public void setRUIControl(final RUIControl ruicontrol) {
 		this.ruicontrol = ruicontrol;
 	}
 	

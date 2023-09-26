@@ -150,10 +150,10 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByPlatformException if any.
      */
     public StandardDecrypter(
-            EncryptionAlgorithm encryptionAlgorithm,
-            PDFObject documentId, int keyBitLength,
-            int revision, byte[] oValue, byte[] uValue, int pValue,
-            boolean encryptMetadata, PDFPassword password)
+            final EncryptionAlgorithm encryptionAlgorithm,
+            final PDFObject documentId, final int keyBitLength,
+            final int revision, final byte[] oValue, final byte[] uValue, final int pValue,
+            final boolean encryptMetadata, final PDFPassword password)
             throws
             IOException,
             EncryptionUnsupportedByProductException,
@@ -193,7 +193,7 @@ public class StandardDecrypter implements PDFDecrypter {
 
                 }
             }
-        } catch (GeneralSecurityException e) {
+        } catch (final GeneralSecurityException e) {
             // Unexpected, as our test of JCE availability should have caught
             // problems with cipher availability.
             // It may well be a problem with document content?
@@ -212,7 +212,7 @@ public class StandardDecrypter implements PDFDecrypter {
 	/** {@inheritDoc} */
     @Override
 	public ByteBuffer decryptBuffer(
-            String cryptFilterName, PDFObject streamObj, ByteBuffer streamBuf)
+            final String cryptFilterName, final PDFObject streamObj, final ByteBuffer streamBuf)
             throws PDFParseException {
 
         if (cryptFilterName != null) {
@@ -238,7 +238,7 @@ public class StandardDecrypter implements PDFDecrypter {
 
 	/** {@inheritDoc} */
     @Override
-	public String decryptString(int objNum, int objGen, String inputBasicString)
+	public String decryptString(final int objNum, final int objGen, final String inputBasicString)
             throws PDFParseException {
         final byte[] crypted = PDFStringUtil.asBytes(inputBasicString);
         final byte[] decryptionKey = getObjectSaltedDecryptionKey(objNum, objGen);
@@ -260,7 +260,7 @@ public class StandardDecrypter implements PDFDecrypter {
     
 	/** {@inheritDoc} */
     @Override
-	public boolean isEncryptionPresent(String cryptFilterName) {
+	public boolean isEncryptionPresent(final String cryptFilterName) {
         return true;
     }
 
@@ -278,7 +278,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws PDFParseException if there's an internal error while testing
      * cipher availability
      */
-    private void testJceAvailability(int keyBitLength)
+    private void testJceAvailability(final int keyBitLength)
             throws
             EncryptionUnsupportedByPlatformException, PDFParseException {
 
@@ -296,28 +296,28 @@ public class StandardDecrypter implements PDFDecrypter {
             createAndInitialiseContentCipher(
                     ByteBuffer.wrap(junkBuffer),
                     junkKey);
-        } catch (PDFParseException e) {
+        } catch (final PDFParseException e) {
             throw new PDFParseException("Internal error; " +
                     "failed to produce test cipher: " + e.getMessage());
-        } catch (NoSuchAlgorithmException e) {
+        } catch (final NoSuchAlgorithmException e) {
             throw new EncryptionUnsupportedByPlatformException(
                     "JCE does not offer required cipher", e);
-        } catch (NoSuchPaddingException e) {
+        } catch (final NoSuchPaddingException e) {
             throw new EncryptionUnsupportedByPlatformException(
                     "JCE does not offer required padding", e);
-        } catch (InvalidKeyException e) {
+        } catch (final InvalidKeyException e) {
             throw new EncryptionUnsupportedByPlatformException(
                     "JCE does accept key size of " +
                             (getSaltedContentKeyByteLength() * 8) +
                             " bits- could it be a policy restriction?", e);
-        } catch (InvalidAlgorithmParameterException e) {
+        } catch (final InvalidAlgorithmParameterException e) {
             throw new EncryptionUnsupportedByPlatformException(
                     "JCE did not accept cipher parameter", e);
         }
 
         try {
             createMD5Digest();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (final NoSuchAlgorithmException e) {
             throw new EncryptionUnsupportedByPlatformException(
                     "No MD5 digest available from JCE", e);
         }
@@ -327,7 +327,7 @@ public class StandardDecrypter implements PDFDecrypter {
             final Cipher rc4;
             try {
                 rc4 = createRC4Cipher();
-            } catch (GeneralSecurityException e) {
+            } catch (final GeneralSecurityException e) {
                 throw new EncryptionUnsupportedByPlatformException(
                         "JCE did not offer RC4 cipher", e);
             }
@@ -336,7 +336,7 @@ public class StandardDecrypter implements PDFDecrypter {
             Arrays.fill(junkKey, (byte) 0xAE);
             try {
                 initDecryption(rc4, createRC4Key(rc4JunkKey));
-            } catch (InvalidKeyException ex) {
+            } catch (final InvalidKeyException ex) {
                 throw new EncryptionUnsupportedByPlatformException(
                         "JCE did not accept 40-bit RC4 key; " +
                                 "policy problem?",
@@ -354,14 +354,14 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws PDFParseException if there's a problem decrypting the content
      */
     private ByteBuffer decryptBuffer(
-            ByteBuffer encrypted, byte[] decryptionKeyBytes)
+            final ByteBuffer encrypted, final byte[] decryptionKeyBytes)
             throws PDFParseException {
 
         final Cipher cipher;
         try {
             cipher = createAndInitialiseContentCipher(
                     encrypted, decryptionKeyBytes);
-        } catch (GeneralSecurityException e) {
+        } catch (final GeneralSecurityException e) {
             // we should have caught this earlier in testCipherAvailability
             throw new PDFParseException(
                     "Unable to create cipher due to platform limitation: " +
@@ -377,7 +377,7 @@ public class StandardDecrypter implements PDFDecrypter {
             cipher.doFinal(encrypted, decryptedBuf);
             decryptedBuf.flip();
             return decryptedBuf;
-        } catch (GeneralSecurityException e) {
+        } catch (final GeneralSecurityException e) {
             throw new PDFParseException(
                     "Could not decrypt: " + e.getMessage(), e);
         }
@@ -402,8 +402,8 @@ public class StandardDecrypter implements PDFDecrypter {
      * bad
      */
     private Cipher createAndInitialiseContentCipher(
-            ByteBuffer encrypted,
-            byte[] decryptionKeyBytes)
+            final ByteBuffer encrypted,
+            final byte[] decryptionKeyBytes)
             throws
             PDFParseException,
             NoSuchAlgorithmException,
@@ -459,14 +459,14 @@ public class StandardDecrypter implements PDFDecrypter {
      *         numbered so
      * @throws PDFParseException if the MD5 digest is not available
      */
-    private byte[] getObjectSaltedDecryptionKey(int objNum, int objGen)
+    private byte[] getObjectSaltedDecryptionKey(final int objNum, final int objGen)
             throws PDFParseException {
 
-        byte[] decryptionKeyBytes;
+        final byte[] decryptionKeyBytes;
         final MessageDigest md5;
         try {
             md5 = createMD5Digest();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (final NoSuchAlgorithmException e) {
             // unexpected, as we will already have tested availability
             throw new PDFParseException("Unable to get MD5 digester", e);
         }
@@ -502,7 +502,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @param generalKeyByteLength the length of the general key, in bytes
      * @return byte length of salted keys
      */
-    private int getSaltedContentKeyByteLength(int generalKeyByteLength) {
+    private int getSaltedContentKeyByteLength(final int generalKeyByteLength) {
         return Math.min(generalKeyByteLength + 5, 16);
     }
 
@@ -516,7 +516,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws PDFParseException if the object numbering indicates that they
      * aren't true object numbers
      */
-    private void checkNums(int objNum, int objGen)
+    private void checkNums(final int objNum, final int objGen)
             throws PDFParseException {
         if (objNum < 0) {
             throw new PDFParseException(
@@ -544,7 +544,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * supported
      */
     private byte[] calculateUValue(
-            byte[] generalKey, byte[] firstDocIdValue, int revision)
+            final byte[] generalKey, final byte[] firstDocIdValue, final int revision)
             throws
             GeneralSecurityException,
             EncryptionUnsupportedByProductException {
@@ -562,8 +562,8 @@ public class StandardDecrypter implements PDFDecrypter {
             // Algorithm 3.2, using an RC4 encryption function with the
             // encryption key from the preceding step.
 
-            Cipher rc4 = createRC4Cipher();
-            SecretKey key = createRC4Key(generalKey);
+            final Cipher rc4 = createRC4Cipher();
+            final SecretKey key = createRC4Key(generalKey);
             initEncryption(rc4, key);
             return crypt(rc4, PW_PADDING);
 
@@ -579,7 +579,7 @@ public class StandardDecrypter implements PDFDecrypter {
             // Step 2: Initialize the MD5 hash function and pass the 32-byte
             // padding string shown in step 1 of Algorithm 3.2 as input to this
             // function
-            MessageDigest md5 = createMD5Digest();
+            final MessageDigest md5 = createMD5Digest();
             md5.update(PW_PADDING);
 
             // Step 3: Pass the first element of the fileâs file identifier
@@ -593,8 +593,8 @@ public class StandardDecrypter implements PDFDecrypter {
 
             // Step 4: Encrypt the 16-byte result of the hash, using an RC4
             // encryption function with the encryption key from step 1.
-            Cipher rc4 = createRC4Cipher();
-            SecretKey key = createRC4Key(generalKey);
+            final Cipher rc4 = createRC4Cipher();
+            final SecretKey key = createRC4Key(generalKey);
             initEncryption(rc4, key);
             final byte[] v = crypt(rc4, hash);
 
@@ -640,8 +640,8 @@ public class StandardDecrypter implements PDFDecrypter {
      *  inappropriately used
      */
     private byte[] calculuateOValue(
-            byte[] ownerPassword, byte[] userPassword,
-            int keyBitLength, int revision)
+            final byte[] ownerPassword, final byte[] userPassword,
+            final int keyBitLength, final int revision)
             throws GeneralSecurityException {
 
         // Steps 1-4
@@ -655,7 +655,7 @@ public class StandardDecrypter implements PDFDecrypter {
         // 1 of Algorithm 3.2.
         // Step 6: Encrypt the result of step 5, using an RC4 encryption
         // function with the encryption key obtained in step 4.
-        byte[] pwvalue = crypt(rc4, padPassword(userPassword));
+        final byte[] pwvalue = crypt(rc4, padPassword(userPassword));
 
         // Step 7: (Revision 3 or greater) Do the following 19 times: Take the
         // output from the previous invocation of the RC4 function and pass it
@@ -694,9 +694,9 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws PDFParseException if the document is malformed
      */
     private byte[] checkOwnerPassword(
-            byte[] ownerPassword, byte[] firstDocIdValue, int keyBitLength,
-            int revision, byte[] oValue, byte[] uValue, int pValue,
-            boolean encryptMetadata)
+            final byte[] ownerPassword, final byte[] firstDocIdValue, final int keyBitLength,
+            final int revision, final byte[] oValue, final byte[] uValue, final int pValue,
+            final boolean encryptMetadata)
             throws
             GeneralSecurityException,
             EncryptionUnsupportedByProductException,
@@ -759,7 +759,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws GeneralSecurityException if there's a problem wranling ciphers
      */
     private byte[] getInitialOwnerPasswordKeyBytes(
-            byte[] ownerPassword, int keyBitLength, int revision)
+            final byte[] ownerPassword, final int keyBitLength, final int revision)
             throws GeneralSecurityException {
 
         final MessageDigest md5 = createMD5Digest();
@@ -814,9 +814,9 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws PDFParseException if the document is improperly constructed
      */
     private byte[] checkUserPassword(
-            byte[] userPassword, byte[] firstDocIdValue, int keyBitLength,
-            int revision, byte[] oValue, byte[] uValue, int pValue,
-            boolean encryptMetadata)
+            final byte[] userPassword, final byte[] firstDocIdValue, final int keyBitLength,
+            final int revision, final byte[] oValue, final byte[] uValue, final int pValue,
+            final boolean encryptMetadata)
             throws
             GeneralSecurityException,
             EncryptionUnsupportedByProductException,
@@ -879,8 +879,8 @@ public class StandardDecrypter implements PDFDecrypter {
      *  and operating ciphers/digests
      */
     private byte[] calculateGeneralEncryptionKey(
-            byte[] userPassword, byte[] firstDocIdValue, int keyBitLength,
-            int revision, byte[] oValue, int pValue, boolean encryptMetadata)
+            final byte[] userPassword, final byte[] firstDocIdValue, final int keyBitLength,
+            final int revision, final byte[] oValue, final int pValue, final boolean encryptMetadata)
             throws GeneralSecurityException {
 
         // Algorithm 3.2: Computing an encryption key
@@ -890,7 +890,7 @@ public class StandardDecrypter implements PDFDecrypter {
 
         // Step 2: Initialize the MD5 hash function and pass the result of step
         // 1 as input to this function.
-        MessageDigest md5 = createMD5Digest();
+        final MessageDigest md5 = createMD5Digest();
         md5.reset();
         md5.update(paddedPassword);
 
@@ -923,7 +923,7 @@ public class StandardDecrypter implements PDFDecrypter {
         }
 
         // Step 7: finish the hash
-        byte[] hash = md5.digest();
+        final byte[] hash = md5.digest();
 
         final int keyLen = revision == 2 ? 5 : (keyBitLength / 8);
         final byte[] key = new byte[keyLen];
@@ -972,7 +972,7 @@ public class StandardDecrypter implements PDFDecrypter {
         // the password string is empty (zero-length), meaning there is no user
         // password, substitute the entire padding string in its place.
 
-        byte[] padded = new byte[32];
+        final byte[] padded = new byte[32];
         // limit password to 32 bytes
         final int numContributingPasswordBytes =
                 password.length > padded.length ?
@@ -995,7 +995,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws BadPaddingException if there's bad padding
      * @throws IllegalBlockSizeException if the block size is bad
      */
-    private byte[] crypt(Cipher cipher, byte[] input)
+    private byte[] crypt(final Cipher cipher, final byte[] input)
             throws IllegalBlockSizeException, BadPaddingException {
         return cipher.doFinal(input);
     }
@@ -1007,7 +1007,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @param key the encryption key
      * @throws InvalidKeyException if the key is invalid for the cipher
      */
-    private void initEncryption(Cipher cipher, SecretKey key)
+    private void initEncryption(final Cipher cipher, final SecretKey key)
             throws InvalidKeyException {
         cipher.init(Cipher.ENCRYPT_MODE, key);
     }
@@ -1023,7 +1023,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws GeneralSecurityException if there's a problem with cipher
      *  operation
      */
-    private void rc4shuffle(byte[] shuffle, byte[] key, Cipher rc4)
+    private void rc4shuffle(final byte[] shuffle, final byte[] key, final Cipher rc4)
             throws GeneralSecurityException {
 
         final byte[] shuffleKey = new byte[key.length];
@@ -1046,7 +1046,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws GeneralSecurityException if there's a problem with cipher
      *  operation
      */
-    private void rc4unshuffle(Cipher rc4, byte[] shuffle, byte[] key)
+    private void rc4unshuffle(final Cipher rc4, final byte[] shuffle, final byte[] key)
             throws GeneralSecurityException {
 
         // there's an extra unshuffle at the end with the original key -
@@ -1070,7 +1070,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws ShortBufferException if an inappropriate cipher is used
      * @throws BadPaddingException if an inappropriate cipher is used
      */
-    private void cryptInPlace(Cipher rc4, byte[] buffer)
+    private void cryptInPlace(final Cipher rc4, final byte[] buffer)
             throws IllegalBlockSizeException, ShortBufferException, BadPaddingException {
         rc4.doFinal(buffer, 0, buffer.length, buffer);
     }
@@ -1082,7 +1082,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws InvalidKeyException if the key is of an unacceptable size or
      *  doesn't belong to the cipher
      */
-    private void initDecryption(Cipher cipher, Key aKey)
+    private void initDecryption(final Cipher cipher, final Key aKey)
             throws InvalidKeyException {
         cipher.init(Cipher.DECRYPT_MODE, aKey);
     }
@@ -1129,7 +1129,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @param keyBytes the bytes for the key
      * @return the key
      */
-    private SecretKeySpec createRC4Key(byte[] keyBytes) {
+    private SecretKeySpec createRC4Key(final byte[] keyBytes) {
         return new SecretKeySpec(keyBytes, KEY_RC4);
     }
 
@@ -1140,7 +1140,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @throws GeneralSecurityException if there's a problem hashing; e.g.,
      *  if the buffer is too small
      */
-    private void digestTo(MessageDigest md5, byte[] hash)
+    private void digestTo(final MessageDigest md5, final byte[] hash)
                 throws GeneralSecurityException {
         md5.digest(hash, 0, hash.length);
     }

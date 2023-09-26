@@ -60,12 +60,12 @@ public class hc_attrspecifiedvaluechangedTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection addressList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr streetAttr;
-        boolean state;
+        final Document doc;
+        final HTMLCollection addressList;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr streetAttr;
+        final boolean state;
         doc = sampleXmlFile("hc_staff.xml");
         addressList = doc.getElementsByTagName("acronym");
         testNode = (Element) addressList.item(2);

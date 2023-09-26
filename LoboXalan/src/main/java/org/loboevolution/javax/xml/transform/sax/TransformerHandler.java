@@ -33,13 +33,12 @@ import org.xml.sax.DTDHandler;
 import org.xml.sax.ext.LexicalHandler;
 
 public interface TransformerHandler
-    extends ContentHandler, LexicalHandler, DTDHandler
-{
+        extends ContentHandler, LexicalHandler, DTDHandler {
 
     public abstract void setResult(Result result)
-        throws IllegalArgumentException;
+            throws IllegalArgumentException;
 
-    public abstract void setSystemId(String s);
+    public abstract void setSystemId(final String s);
 
     public abstract String getSystemId();
 

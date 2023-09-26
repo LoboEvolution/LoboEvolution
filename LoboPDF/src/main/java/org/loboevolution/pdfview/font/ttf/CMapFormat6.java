@@ -51,7 +51,7 @@ public class CMapFormat6 extends CMap {
      *
      * @param language a short.
      */
-    protected CMapFormat6(short language) {
+    protected CMapFormat6(final short language) {
         super((short) 6, language);
     }
 
@@ -76,8 +76,8 @@ public class CMapFormat6 extends CMap {
 	 * Cannot map from a byte
 	 */
     @Override
-	public byte map(byte src) {
-        char c = map((char) src);
+	public byte map(final byte src) {
+        final char c = map((char) src);
         if (c < Byte.MIN_VALUE || c > Byte.MAX_VALUE) {
             // out of range
             return 0;
@@ -91,7 +91,7 @@ public class CMapFormat6 extends CMap {
 	 * Map from char
 	 */
     @Override
-	public char map(char src) {
+	public char map(final char src) {
 
         // find first segment with endcode > src
         if (src < this.firstCode || src > (this.firstCode + this.entryCount)) {
@@ -108,8 +108,8 @@ public class CMapFormat6 extends CMap {
 	 * Get the src code which maps to the given glyphID
 	 */
     @Override
-	public char reverseMap(short glyphID) {
-        Short result = this.glyphLookup.get(glyphID);
+	public char reverseMap(final short glyphID) {
+        final Short result = this.glyphLookup.get(glyphID);
         if (result == null) {
             return '\000';
         }
@@ -123,7 +123,7 @@ public class CMapFormat6 extends CMap {
 	 * Get the data in this map as a ByteBuffer
 	 */
     @Override
-	public void setData(int length, ByteBuffer data) {
+	public void setData(final int length, final ByteBuffer data) {
         // read the table size values
         this.firstCode = data.getShort();
         this.entryCount = data.getShort();
@@ -143,7 +143,7 @@ public class CMapFormat6 extends CMap {
 	 */
     @Override
 	public ByteBuffer getData() {
-        ByteBuffer buf = ByteBuffer.allocate(getLength());
+        final ByteBuffer buf = ByteBuffer.allocate(getLength());
 
         // write the header
         buf.putShort(getFormat());
@@ -155,7 +155,7 @@ public class CMapFormat6 extends CMap {
         buf.putShort(this.entryCount);
 
         // write the endCodes
-        for (short value : this.glyphIndexArray) {
+        for (final short value : this.glyphIndexArray) {
             buf.putShort(value);
         }
         // reset the data pointer

@@ -50,14 +50,14 @@ public class hc_attrappendchild5Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection acronymList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr titleAttr;
-        Node textNode;
-        Node retval;
-        Document otherDoc;
+        final Document doc;
+        final HTMLCollection acronymList;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr titleAttr;
+        final Node textNode;
+        final Node retval;
+        final Document otherDoc;
         doc = sampleXmlFile("hc_staff.xml");
         otherDoc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
@@ -68,7 +68,7 @@ public class hc_attrappendchild5Test extends LoboUnitTest {
         boolean success = false;
         try {
             retval = titleAttr.appendChild(textNode);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);

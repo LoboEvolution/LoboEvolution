@@ -49,14 +49,14 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode23Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         doc = sampleXmlFile("hc_staff.xml");
 
         {
             boolean success = false;
             try {
                 doc.renameNode(doc, "http://www.w3.org/DOM/Test", "root");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
             assertTrue("documentrenamenode23_NOT_SUPPORTED_ERR", success);

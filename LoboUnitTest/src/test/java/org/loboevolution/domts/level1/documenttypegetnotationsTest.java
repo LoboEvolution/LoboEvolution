@@ -34,8 +34,10 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -59,14 +61,14 @@ public class documenttypegetnotationsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notationList;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notationList;
         Node notation;
         String notationName;
-        java.util.Collection actual = new java.util.ArrayList();
+        final List<String> actual = new ArrayList<>();
 
-        java.util.Collection expected = new java.util.ArrayList();
+        final List<String> expected = new ArrayList<>();
         expected.add("notation1");
         expected.add("notation2");
 

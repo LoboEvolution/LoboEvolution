@@ -50,12 +50,12 @@ public class nodelookupprefix17Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        HTMLCollection elemList;
-        NamedNodeMap attributesMap;
-        Attr attr;
-        String prefix;
+        final Document doc;
+        final Element elem;
+        final HTMLCollection elemList;
+        final NamedNodeMap attributesMap;
+        final Attr attr;
+        final String prefix;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("acronym");
         elem = (Element) elemList.item(2);

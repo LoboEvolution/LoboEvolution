@@ -66,12 +66,12 @@ public class hc_nodeinsertbeforeinvalidnodetypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element rootNode;
-        Node newChild;
-        HTMLCollection elementList;
-        Node refChild;
-        Node insertedNode;
+        final Document doc;
+        final Element rootNode;
+        final Node newChild;
+        final HTMLCollection elementList;
+        final Node refChild;
+        final Node insertedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createAttribute("title");
         elementList = doc.getElementsByTagName("p");
@@ -82,7 +82,7 @@ public class hc_nodeinsertbeforeinvalidnodetypeTest extends LoboUnitTest {
             boolean success = false;
             try {
                 insertedNode = rootNode.insertBefore(newChild, refChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

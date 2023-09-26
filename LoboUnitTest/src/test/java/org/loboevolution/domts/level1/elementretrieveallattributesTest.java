@@ -61,10 +61,10 @@ public class elementretrieveallattributesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection addressList;
-        Element testAddress;
-        NamedNodeMap attributes;
+        final Document doc;
+        final HTMLCollection addressList;
+        final Element testAddress;
+        final NamedNodeMap attributes;
         doc = sampleXmlFile("staff.xml");
         addressList = doc.getElementsByTagName("address");
         testAddress = (Element) addressList.item(1);

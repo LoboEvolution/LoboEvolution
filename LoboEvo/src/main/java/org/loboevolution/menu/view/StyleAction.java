@@ -49,13 +49,13 @@ public class StyleAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public StyleAction(BrowserFrame frame) {
+	public StyleAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(final ActionEvent arg0) {
 		final StyleWindow clear = new StyleWindow(this.frame);
 		clear.setLocationByPlatform(true);
 		clear.setResizable(false);

@@ -57,7 +57,7 @@ public class ImportDataAction extends AbstractAction {
 	 * @param mozilla a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
 	 * @param action a {@link java.lang.String} object.
 	 */
-	public ImportDataAction(LoboCheckBox chrome, LoboCheckBox mozilla, String action) {
+	public ImportDataAction(final LoboCheckBox chrome, final LoboCheckBox mozilla, final String action) {
 		this.chrome = chrome;
 		this.mozilla = mozilla;
 		this.action = action;
@@ -65,7 +65,7 @@ public class ImportDataAction extends AbstractAction {
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent evt) {
+	public void actionPerformed(final ActionEvent evt) {
 		switch (this.action) {
 		case "HISTORY":
 			importHistory();

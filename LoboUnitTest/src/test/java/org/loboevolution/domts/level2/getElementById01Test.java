@@ -56,9 +56,9 @@ public class getElementById01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        String tagname;
+        final Document doc;
+        final Element element;
+        final String tagname;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getElementById("CANADA");
         tagname = element.getTagName();

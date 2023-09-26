@@ -63,7 +63,7 @@ public class NavigatorFrame {
      * @param connection a {@link java.net.URLConnection} object.
      * @return a {@link HtmlPanel} object.
      */
-    public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri, URLConnection connection) {
+    public static HtmlPanel createHtmlPanel(final IBrowserPanel browserPanel, final String uri, final URLConnection connection) {
         try {
             return createPanel(browserPanel, connection, uri);
         } catch (final Exception e) {
@@ -79,7 +79,7 @@ public class NavigatorFrame {
      * @param uri a {@link java.lang.String} object.
      * @return a {@link HtmlPanel} object.
      */
-    public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri) {
+    public static HtmlPanel createHtmlPanel(final IBrowserPanel browserPanel, final String uri) {
         URLConnection connection = null;
         try {
             final URL url = new URL(uri);
@@ -94,11 +94,11 @@ public class NavigatorFrame {
         }
     }
 
-    private static HtmlPanel createPanel(IBrowserPanel browserPanel, URLConnection connection, String uri) throws Exception {
+    private static HtmlPanel createPanel(final IBrowserPanel browserPanel, final URLConnection connection, final String uri) throws Exception {
         final HtmlPanel panel = new HtmlPanel();
         panel.setBrowserPanel(browserPanel);
-        try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-             Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+        try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+             final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
 
             final InputSource is = new InputSourceImpl(reader, uri);
             final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
@@ -108,7 +108,7 @@ public class NavigatorFrame {
             final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext, config);
             final Document document = builder.parse(is);
             panel.setDocument(document, rendererContext);
-        } catch (SocketTimeoutException e) {
+        } catch (final SocketTimeoutException e) {
             logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
         }
         return panel;
@@ -123,12 +123,12 @@ public class NavigatorFrame {
      * @param exception    a {@link java.lang.Exception} object.
      * @return a {@link HtmlPanel} object.
      */
-    public static HtmlPanel getErrorComponent(IBrowserPanel browserPanel, URLConnection connection, String uri, Exception exception) {
+    public static HtmlPanel getErrorComponent(final IBrowserPanel browserPanel, final URLConnection connection, final String uri, final Exception exception) {
         final HtmlPanel panel = new HtmlPanel();
         panel.setBrowserPanel(browserPanel);
         panel.setName("Blu Screen Error");
-        try (InputStream in = new ByteArrayInputStream(getErrorHtml(connection, exception).getBytes());
-             Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+        try (final InputStream in = new ByteArrayInputStream(getErrorHtml(connection, exception).getBytes());
+             final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
 
             final InputSource is = new InputSourceImpl(reader, uri);
             final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
@@ -138,7 +138,7 @@ public class NavigatorFrame {
             final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext, config);
             final Document document = builder.parse(is);
             panel.setDocument(document, rendererContext);
-        } catch (IOException | SAXException ex) {
+        } catch (final IOException | SAXException ex) {
             throw new RuntimeException(ex);
         }
         return panel;
@@ -195,7 +195,7 @@ public class NavigatorFrame {
         } else if (cause instanceof SocketException) {
             return "Indicates there was an error in the underlying protocol, e.g. TCP/IP.";
         } else if (cause instanceof IOException) {
-            HttpURLConnection httpcon = (HttpURLConnection) connection;
+            final HttpURLConnection httpcon = (HttpURLConnection) connection;
             switch (httpcon.getResponseCode()) {
                 case 400:
                     return "The server could not understand the request due to invalid syntax.";

@@ -58,13 +58,13 @@ public class nodesetprefix02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Attr attribute;
-        Attr newAttribute;
-        HTMLCollection elementList;
-        String attrName;
-        String newAttrName;
+        final Document doc;
+        final Element element;
+        final Attr attribute;
+        final Attr newAttribute;
+        final HTMLCollection elementList;
+        final String attrName;
+        final String newAttrName;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         element = (Element) elementList.item(1);

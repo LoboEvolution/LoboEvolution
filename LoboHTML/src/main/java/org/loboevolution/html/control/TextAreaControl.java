@@ -47,7 +47,7 @@ public class TextAreaControl extends BaseControl {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl} object.
 	 */
-	public TextAreaControl(HTMLTextAreaElementImpl modelNode) {
+	public TextAreaControl(final HTMLTextAreaElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;
@@ -66,7 +66,7 @@ public class TextAreaControl extends BaseControl {
 	 * @param dir a {@link java.lang.String} object.
 	 * @return a {@link java.awt.ComponentOrientation} object.
 	 */
-	public ComponentOrientation direction(String dir) {
+	public ComponentOrientation direction(final String dir) {
 		if ("ltr".equalsIgnoreCase(dir)) {
 			return ComponentOrientation.LEFT_TO_RIGHT;
 		} else if ("rtl".equalsIgnoreCase(dir)) {

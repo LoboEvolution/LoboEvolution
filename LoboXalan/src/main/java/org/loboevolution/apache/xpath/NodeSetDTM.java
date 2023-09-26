@@ -54,7 +54,7 @@ public class NodeSetDTM extends NodeVector
     implements /* NodeList, NodeIterator, */ DTMIterator, Cloneable {
 
   /** Create an empty nodelist. */
-  public NodeSetDTM(DTMManager dtmManager) {
+  public NodeSetDTM(final DTMManager dtmManager) {
     super();
     m_manager = dtmManager;
   }
@@ -64,7 +64,7 @@ public class NodeSetDTM extends NodeVector
    *
    * @param ni Iterator which yields Nodes to be made members of the new set.
    */
-  public NodeSetDTM(DTMIterator ni) {
+  public NodeSetDTM(final DTMIterator ni) {
 
     super();
 
@@ -87,7 +87,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public void setRoot(int context, Object environment) {
+  public void setRoot(final int context, final Object environment) {
     // no-op, I guess... (-sb)
   }
 
@@ -102,7 +102,7 @@ public class NodeSetDTM extends NodeVector
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 
-    NodeSetDTM clone = (NodeSetDTM) clone();
+    final NodeSetDTM clone = (NodeSetDTM) clone();
 
     clone.reset();
 
@@ -129,7 +129,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public DTM getDTM(int nodeHandle) {
+  public DTM getDTM(final int nodeHandle) {
 
     return m_manager.getDTM(nodeHandle);
   }
@@ -149,7 +149,7 @@ public class NodeSetDTM extends NodeVector
   public int nextNode() {
 
     if (m_next < this.size()) {
-      int next = this.elementAt(m_next);
+      final int next = this.elementAt(m_next);
 
       m_next++;
 
@@ -179,7 +179,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public void allowDetachToRelease(boolean allowRelease) {
+  public void allowDetachToRelease(final boolean allowRelease) {
     // no action for right now.
   }
 
@@ -191,7 +191,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public void runTo(int index) {
+  public void runTo(final int index) {
 
     if (!m_cacheNodes)
       throw new RuntimeException(
@@ -203,7 +203,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public int item(int index) {
+  public int item(final int index) {
 
     runTo(index);
 
@@ -225,7 +225,7 @@ public class NodeSetDTM extends NodeVector
    * @param n Node to be added
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
-  public void addNode(int n) {
+  public void addNode(final int n) {
     this.addElement(n);
   }
 
@@ -236,7 +236,7 @@ public class NodeSetDTM extends NodeVector
    * @param iterator DTMIterator which yields the nodes to be added.
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
-  public void addNodes(DTMIterator iterator) {
+  public void addNodes(final DTMIterator iterator) {
     if (null != iterator) // defensive to fix a bug that Sanjiva reported.
     {
       int obj;
@@ -257,7 +257,7 @@ public class NodeSetDTM extends NodeVector
    * @param support The XPath runtime context.
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
-  public void addNodeInDocOrder(int node, boolean test, XPathContext support) {
+  public void addNodeInDocOrder(final int node, final boolean test, final XPathContext support) {
     int insertIndex = -1;
 
     if (test) {
@@ -265,10 +265,11 @@ public class NodeSetDTM extends NodeVector
       // This needs to do a binary search, but a binary search
       // is somewhat tough because the sequence test involves
       // two nodes.
-      int size = size(), i;
+      final int size = size();
+        int i;
 
-      for (i = size - 1; i >= 0; i--) {
-        int child = elementAt(i);
+        for (i = size - 1; i >= 0; i--) {
+        final int child = elementAt(i);
 
         if (child == node) {
           i = -2; // Duplicate, suppress insert
@@ -276,7 +277,7 @@ public class NodeSetDTM extends NodeVector
           break;
         }
 
-        DTM dtm = support.getDTM(node);
+        final DTM dtm = support.getDTM(node);
         if (!dtm.isNodeAfter(node, child)) {
           break;
         }
@@ -313,13 +314,13 @@ public class NodeSetDTM extends NodeVector
    * @param support The XPath runtime context.
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
-  public void addNodeInDocOrder(int node, XPathContext support) {
+  public void addNodeInDocOrder(final int node, final XPathContext support) {
     addNodeInDocOrder(node, true, support);
   } // end addNodeInDocOrder(Vector v, Object obj)
 
   /** {@inheritDoc} */
   @Override
-  public int elementAt(int i) {
+  public int elementAt(final int i) {
 
     runTo(i);
 
@@ -328,7 +329,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public boolean contains(int s) {
+  public boolean contains(final int s) {
 
     runTo(-1);
 
@@ -337,7 +338,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public int indexOf(int elem, int index) {
+  public int indexOf(final int elem, final int index) {
 
     runTo(-1);
 
@@ -346,7 +347,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public int indexOf(int elem) {
+  public int indexOf(final int elem) {
 
     runTo(-1);
 
@@ -364,7 +365,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public void setCurrentPos(int i) {
+  public void setCurrentPos(final int i) {
 
     if (!m_cacheNodes)
       throw new RuntimeException(
@@ -380,12 +381,12 @@ public class NodeSetDTM extends NodeVector
     if (!m_cacheNodes)
       throw new RuntimeException("This NodeSetDTM can not do indexing or counting functions!");
 
-    int saved = m_next;
+    final int saved = m_next;
     // because nextNode always increments
     // But watch out for copy29, where the root iterator didn't
     // have nextNode called on it.
-    int current = (m_next > 0) ? m_next - 1 : m_next;
-    int n = (current < m_firstFree) ? elementAt(current) : DTM.NULL;
+    final int current = (m_next > 0) ? m_next - 1 : m_next;
+    final int n = (current < m_firstFree) ? elementAt(current) : DTM.NULL;
     m_next = saved; // HACK: I think this is a bit of a hack. -sb
     return n;
   }
@@ -402,7 +403,7 @@ public class NodeSetDTM extends NodeVector
 
   /** {@inheritDoc} */
   @Override
-  public void setShouldCacheNodes(boolean b) {
+  public void setShouldCacheNodes(final boolean b) {
 
     if (!isFresh())
       throw new RuntimeException(

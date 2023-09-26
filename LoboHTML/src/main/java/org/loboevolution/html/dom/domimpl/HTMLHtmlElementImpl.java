@@ -53,7 +53,7 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 	}
 
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new BlockRenderState(prevRenderState, this);
 	}
 
@@ -65,7 +65,7 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setVersion(String version) {
+	public void setVersion(final String version) {
 		setAttribute("version", version);
 	}
 

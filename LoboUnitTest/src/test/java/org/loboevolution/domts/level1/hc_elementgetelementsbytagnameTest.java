@@ -56,8 +56,8 @@ public class hc_elementgetelementsbytagnameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
+        final Document doc;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         assertEquals("elementGetElementsByTagNameAssert", 5, elementList.getLength());

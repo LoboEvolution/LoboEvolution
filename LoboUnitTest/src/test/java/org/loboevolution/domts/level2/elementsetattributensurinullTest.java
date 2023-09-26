@@ -59,17 +59,17 @@ public class elementsetattributensurinullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String qualifiedName = "qualifiedName";
-        Document doc;
-        HTMLCollection elementList;
-        Node testAddr;
+        final String qualifiedName = "qualifiedName";
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node testAddr;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         testAddr = elementList.item(0);
         boolean success = false;
         try {
             ((Element) testAddr).setAttributeNS(null, qualifiedName, "newValue");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("throw_NAMESPACE_ERR", success);

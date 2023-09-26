@@ -59,9 +59,9 @@ public class nodecdatasectionnodetypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testName;
         Node cdataNode;
         int nodeType;
         doc = sampleXmlFile("staff.xml");

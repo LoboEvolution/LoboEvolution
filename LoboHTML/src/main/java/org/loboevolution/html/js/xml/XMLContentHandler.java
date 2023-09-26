@@ -47,7 +47,7 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
 
     /** {@inheritDoc} */
     @Override
-    public void setDocumentLocator(Locator locator) {
+    public void setDocumentLocator(final Locator locator) {
         this.lastLocator = locator;
     }
 
@@ -65,15 +65,15 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
 
     /** {@inheritDoc} */
     @Override
-    public void startPrefixMapping(String prefix, String uri) {}
+    public void startPrefixMapping(final String prefix, final String uri) {}
 
     /** {@inheritDoc} */
     @Override
-    public void endPrefixMapping(String prefix) {}
+    public void endPrefixMapping(final String prefix) {}
 
     /** {@inheritDoc} */
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
+    public void startElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
         if (document == null) {
             documentElement(uri, localName, qName, atts);
         } else {
@@ -83,41 +83,41 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
 
     /** {@inheritDoc} */
     @Override
-    public void endElement(String uri, String localName, String qName) {
+    public void endElement(final String uri, final String localName, final String qName) {
         currentNode = currentNode.getParentNode();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void characters(char[] ch, int start, int length) {}
+    public void characters(final char[] ch, final int start, final int length) {}
 
     /** {@inheritDoc} */
     @Override
-    public void ignorableWhitespace(char[] ch, int start, int length) {}
+    public void ignorableWhitespace(final char[] ch, final int start, final int length) {}
 
     /** {@inheritDoc} */
     @Override
-    public void processingInstruction(String target, String data) {}
+    public void processingInstruction(final String target, final String data) {}
 
     /** {@inheritDoc} */
     @Override
-    public void skippedEntity(String name) {}
+    public void skippedEntity(final String name) {}
 
     /** {@inheritDoc} */
     @Override
-    public void warning(SAXParseException exception) {}
+    public void warning(final SAXParseException exception) {}
 
     /** {@inheritDoc} */
     @Override
-    public void error(SAXParseException exception) {}
+    public void error(final SAXParseException exception) {}
 
     /** {@inheritDoc} */
     @Override
-    public void fatalError(SAXParseException exception) {}
+    public void fatalError(final SAXParseException exception) {}
 
     /** {@inheritDoc} */
     @Override
-    public void startDTD(String name, String publicId, String systemId) {}
+    public void startDTD(final String name, final String publicId, final String systemId) {}
 
     /** {@inheritDoc} */
     @Override
@@ -125,11 +125,11 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
 
     /** {@inheritDoc} */
     @Override
-    public void startEntity(String name) {}
+    public void startEntity(final String name) {}
 
     /** {@inheritDoc} */
     @Override
-    public void endEntity(String name) {}
+    public void endEntity(final String name) {}
 
     /** {@inheritDoc} */
     @Override
@@ -141,15 +141,15 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
 
     /** {@inheritDoc} */
     @Override
-    public void comment(char[] ch, int start, int length) {}
+    public void comment(final char[] ch, final int start, final int length) {}
 
     public Document getDocument() {
         return this.document;
     }
 
-    private void documentElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
+    private void documentElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
         document = createDocument(uri, qName);
-        Element element = document.getDocumentElement();
+        final Element element = document.getDocumentElement();
         currentNode = element;
         setAttributes(element, atts);
 
@@ -158,20 +158,20 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
         }
     }
 
-    private void newElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
-        Element element = document.createElementNS(uri, qName);
+    private void newElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
+        final Element element = document.createElementNS(uri, qName);
         setAttributes(element, atts);
         appendChild(element);
         currentNode = element;
     }
 
-    private void setAttributes(Element element, Attributes atts) {
-        int len = atts.getLength();
+    private void setAttributes(final Element element, final Attributes atts) {
+        final int len = atts.getLength();
         for (int i = 0; i < len; i++) {
-            String namespaceURI = atts.getURI(i);
-            String value = atts.getValue(i);
-            String attrQName = atts.getQName(i);
-            Attr attr = document.createAttributeNS(namespaceURI, attrQName);
+            final String namespaceURI = atts.getURI(i);
+            final String value = atts.getValue(i);
+            final String attrQName = atts.getQName(i);
+            final Attr attr = document.createAttributeNS(namespaceURI, attrQName);
             attr.setValue(value);
             element.getAttributes().setNamedItem(attr);
             if ("ID".equals(atts.getType(i))
@@ -181,23 +181,23 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
         }
     }
 
-    private Document createDocument(String uri, String qName) {
-        UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig());
+    private Document createDocument(final String uri, final String qName) {
+        final UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig());
         context.setUserAgentEnabled(false);
-        DOMImplementationImpl domImpl = new DOMImplementationImpl(context);
-        DocumentType doctype = domImpl.createDocumentType("HTML", null, null);
+        final DOMImplementationImpl domImpl = new DOMImplementationImpl(context);
+        final DocumentType doctype = domImpl.createDocumentType("HTML", null, null);
         return domImpl.createDocument(uri, "HTML", doctype);
     }
 
-    private void appendChild(Node node) throws SAXException {
+    private void appendChild(final Node node) throws SAXException {
         try {
             document.appendChild(node);
-        } catch (DOMException e) {
+        } catch (final DOMException e) {
             error("Error appending child " + node.getNodeName() + " to " + currentNode.getNodeName(), e);
         }
     }
 
-    private void error(String message, Exception ex) throws SAXException {
+    private void error(final String message, final Exception ex) throws SAXException {
         if (lastLocator == null) {
             throw new SAXException(message, ex);
         } else {

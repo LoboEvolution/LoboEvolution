@@ -50,14 +50,14 @@ public class HiFiScrollButton extends XPScrollButton {
 	 * @param direction a int.
 	 * @param width a int.
 	 */
-	public HiFiScrollButton(int direction, int width) {
+	public HiFiScrollButton(final int direction, final int width) {
 		super(direction, width);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Color getFrameColor() {
-		Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 8);
+		final Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 8);
 		if (getModel().isPressed()) {
 			return ColorHelper.darker(frameColor, 8);
 		} else if (getModel().isRollover()) {

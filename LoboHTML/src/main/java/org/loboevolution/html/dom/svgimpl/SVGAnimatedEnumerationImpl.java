@@ -44,7 +44,7 @@ public class SVGAnimatedEnumerationImpl implements SVGAnimatedEnumeration {
 	 *
 	 * @param baseVal a short.
 	 */
-	public SVGAnimatedEnumerationImpl(short baseVal) {
+	public SVGAnimatedEnumerationImpl(final short baseVal) {
 		this.baseVal = baseVal;
 	}
 
@@ -56,7 +56,7 @@ public class SVGAnimatedEnumerationImpl implements SVGAnimatedEnumeration {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBaseVal(short baseVal) {
+	public void setBaseVal(final short baseVal) {
 		this.baseVal = baseVal;
 	}
 

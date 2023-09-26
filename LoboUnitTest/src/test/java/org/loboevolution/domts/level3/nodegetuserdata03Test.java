@@ -48,10 +48,10 @@ import static org.junit.Assert.assertTrue;
 public class nodegetuserdata03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Object retUserData;
-        boolean success;
-        Element elem;
+        final Document doc;
+        final Object retUserData;
+        final boolean success;
+        final Element elem;
 
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "body");

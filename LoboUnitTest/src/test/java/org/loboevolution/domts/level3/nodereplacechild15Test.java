@@ -45,17 +45,17 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild15Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Element elem;
-        Element elem2;
-        Element replaced;
-        DOMImplementation domImpl;
-        String title;
-        Node appendedChild;
-        Element docElem;
-        String rootName;
-        String rootNS;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Element elem;
+        final Element elem2;
+        final Element replaced;
+        final DOMImplementation domImpl;
+        final String title;
+        final Node appendedChild;
+        final Element docElem;
+        final String rootName;
+        final String rootNS;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();

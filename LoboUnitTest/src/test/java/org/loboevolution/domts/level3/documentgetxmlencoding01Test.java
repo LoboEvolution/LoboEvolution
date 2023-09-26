@@ -45,8 +45,8 @@ import static org.junit.Assert.assertEquals;
 public class documentgetxmlencoding01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String encodingName;
+        final Document doc;
+        final String encodingName;
         doc = sampleXmlFile("barfoo_utf8.xml");
         encodingName = doc.getXmlEncoding();
         assertEquals("documentgetxmlencoding01", "UTF-8", encodingName);

@@ -49,12 +49,12 @@ import static org.junit.Assert.assertEquals;
 public class nodegetbaseuri07Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element newElement;
-        String baseURI;
-        HTMLCollection bodyList;
-        Element bodyElem;
-        String htmlNS = "http://www.w3.org/1999/xhtml";
+        final Document doc;
+        final Element newElement;
+        final String baseURI;
+        final HTMLCollection bodyList;
+        final Element bodyElem;
+        final String htmlNS = "http://www.w3.org/1999/xhtml";
         doc = sampleXmlFile("barfoo_base.xml");
         bodyList = doc.getElementsByTagName("body");
         bodyElem = (Element) bodyList.item(0);

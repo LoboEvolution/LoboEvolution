@@ -41,7 +41,7 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 	 *
 	 * @param text a {@link java.lang.String} object.
 	 */
-	public CommentImpl(String text) {
+	public CommentImpl(final String text) {
 		super(text);
 	}
 
@@ -71,12 +71,12 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) {
+	public void setNodeValue(final String nodeValue) {
 		setTextContent(nodeValue);
 	}
 
 	@Override
-	public Node appendChild(Node newChild) {
+	public Node appendChild(final Node newChild) {
 		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "This node type does not support this method.");
 	}
 

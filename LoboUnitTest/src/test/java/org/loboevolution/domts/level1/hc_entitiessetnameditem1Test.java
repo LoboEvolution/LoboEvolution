@@ -52,11 +52,11 @@ public class hc_entitiessetnameditem1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap entities;
-        DocumentType docType;
-        Node retval;
-        Element elem;
+        final Document doc;
+        final NamedNodeMap entities;
+        final DocumentType docType;
+        final Node retval;
+        final Element elem;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);
@@ -68,7 +68,7 @@ public class hc_entitiessetnameditem1Test extends LoboUnitTest {
             retval = entities.setNamedItem(elem);
             fail("throw_HIER_OR_NO_MOD_ERR");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 3:
                 case 7:

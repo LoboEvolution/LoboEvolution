@@ -49,10 +49,10 @@ import static org.junit.Assert.assertTrue;
 public class textreplacewholetext08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection itemList;
-        Element p;
-        EntityReference entRef;
+        final Document doc;
+        final HTMLCollection itemList;
+        final Element p;
+        final EntityReference entRef;
         Node node;
         doc = sampleXmlFile("barfoo.xml");
         itemList = doc.getElementsByTagName("p");
@@ -65,7 +65,7 @@ public class textreplacewholetext08Test extends LoboUnitTest {
             boolean success = false;
             try {
                 ((Text) node).replaceWholeText("yo");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

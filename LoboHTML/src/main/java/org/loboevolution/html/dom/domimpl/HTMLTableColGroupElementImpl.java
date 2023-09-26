@@ -45,7 +45,7 @@ public class HTMLTableColGroupElementImpl extends HTMLElementImpl {
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_COLUMN_GROUP);
 	}
 

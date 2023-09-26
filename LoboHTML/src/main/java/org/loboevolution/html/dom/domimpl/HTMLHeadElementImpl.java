@@ -57,12 +57,12 @@ public class HTMLHeadElementImpl extends HTMLElementImpl implements HTMLHeadElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setProfile(String profile) {
+	public void setProfile(final String profile) {
 		this.setAttribute("profile", profile);
 	}
 
 	@Override
-	public Node appendChild(Node newChild) {
+	public Node appendChild(final Node newChild) {
 
 		if (newChild instanceof HTMLHtmlElement) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append html");

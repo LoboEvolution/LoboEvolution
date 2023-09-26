@@ -62,7 +62,7 @@ public class HTMLLinkElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {"", null, null, null, "test.css", "text/css", "stylesheet", "stylesheet1"};;
+        final String[] messages = {"", null, null, null, "test.css", "text/css", "stylesheet", "stylesheet1"};
         checkHtmlAlert(html, messages);
     }
 

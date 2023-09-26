@@ -59,7 +59,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getContentBorderColors(int tabPlacement) {
+	protected Color[] getContentBorderColors(final int tabPlacement) {
 		if (sepColors == null) {
 			sepColors = new Color[5];
 			sepColors[0] = getLoBorderColor(0);
@@ -73,7 +73,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color getLoBorderColor(int tabIndex) {
+	protected Color getLoBorderColor(final int tabIndex) {
 		if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
 			return AbstractLookAndFeel.getControlColorDark();
 		}
@@ -82,7 +82,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Font getTabFont(boolean isSelected) {
+	protected Font getTabFont(final boolean isSelected) {
 		if (isSelected) {
 			return super.getTabFont(isSelected).deriveFont(Font.BOLD);
 		} else {
@@ -99,8 +99,8 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,
-			Rectangle iconRect, Rectangle textRect, boolean isSelected) {
+	protected void paintFocusIndicator(final Graphics g, final int tabPlacement, final Rectangle[] rects, final int tabIndex,
+                                       final Rectangle iconRect, final Rectangle textRect, final boolean isSelected) {
 		if (tabPane.isRequestFocusEnabled() && tabPane.hasFocus() && isSelected && tabIndex >= 0
 				&& textRect.width > 8) {
 			g.setColor(AbstractLookAndFeel.getTheme().getFocusColor());
@@ -112,20 +112,20 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
-			Rectangle textRect, boolean isSelected) {
+	protected void paintText(final Graphics g, final int tabPlacement, final Font font, final FontMetrics metrics, final int tabIndex, final String title,
+			final Rectangle textRect, final boolean isSelected) {
 		if (AbstractLookAndFeel.getTheme().isTextShadowOn()) {
 			if (isSelected && tabPane.isEnabledAt(tabIndex)
 					&& tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource
 					&& getTextViewForTab(tabIndex) == null) {
 				g.setFont(font);
-				Color selColor = AbstractLookAndFeel.getTabSelectionForegroundColor();
+				final Color selColor = AbstractLookAndFeel.getTabSelectionForegroundColor();
 				if (ColorHelper.getGrayValue(selColor) > 164) {
 					g.setColor(Color.black);
 				} else {
 					g.setColor(Color.white);
 				}
-				int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
+				final int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 				JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x,
 						textRect.y + 1 + metrics.getAscent());
 			}

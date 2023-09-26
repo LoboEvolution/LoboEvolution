@@ -63,18 +63,18 @@ public class nodeclonenodetrueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node clonedNode;
-        NodeList clonedList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node clonedNode;
+        final NodeList clonedList;
         Node clonedChild;
         String clonedChildName;
-        int length;
-        List<String> result = new ArrayList<>();
+        final int length;
+        final List<String> result = new ArrayList<>();
 
-        List<String> expectedWhitespace = new ArrayList<>();
+        final List<String> expectedWhitespace = new ArrayList<>();
         expectedWhitespace.add("#text");
         expectedWhitespace.add("employeeId");
         expectedWhitespace.add("#text");
@@ -89,7 +89,7 @@ public class nodeclonenodetrueTest extends LoboUnitTest {
         expectedWhitespace.add("ADDRESS");
         expectedWhitespace.add("#text");
 
-        List<String> expectedNoWhitespace = new ArrayList<>();
+        final List<String> expectedNoWhitespace = new ArrayList<>();
         expectedNoWhitespace.add("EMPLOYEEID");
         expectedNoWhitespace.add("NAME");
         expectedNoWhitespace.add("POSITION");

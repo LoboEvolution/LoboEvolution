@@ -46,7 +46,7 @@ public class ImageEvent extends EventObject {
 	 * @param source a {@link java.lang.Object} object.
 	 * @param image a {@link java.awt.Image} object.
 	 */
-	public ImageEvent(Object source, java.awt.Image image) {
+	public ImageEvent(final Object source, final java.awt.Image image) {
 		super(source);
 		this.image = image;
 	}

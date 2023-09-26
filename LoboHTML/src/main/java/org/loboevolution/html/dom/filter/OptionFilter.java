@@ -36,7 +36,7 @@ public class OptionFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public short acceptNode(Node node) {
+	public short acceptNode(final Node node) {
 		return node instanceof HTMLOptionElement ?
 				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}

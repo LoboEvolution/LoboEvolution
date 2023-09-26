@@ -44,7 +44,7 @@ class SizeExceededException extends RuntimeException {
 	 *
 	 * @param message a {@link java.lang.String} object.
 	 */
-	public SizeExceededException(String message) {
+	public SizeExceededException(final String message) {
 		super(message);
 	}
 
@@ -54,7 +54,7 @@ class SizeExceededException extends RuntimeException {
 	 * @param message a {@link java.lang.String} object.
 	 * @param cause a {@link java.lang.Throwable} object.
 	 */
-	public SizeExceededException(String message, Throwable cause) {
+	public SizeExceededException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
 
@@ -63,7 +63,7 @@ class SizeExceededException extends RuntimeException {
 	 *
 	 * @param cause a {@link java.lang.Throwable} object.
 	 */
-	public SizeExceededException(Throwable cause) {
+	public SizeExceededException(final Throwable cause) {
 		super(cause);
 	}
 }

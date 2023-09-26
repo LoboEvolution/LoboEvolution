@@ -55,8 +55,8 @@ public class hc_documentgetelementsbytagnamelengthTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection nameList;
+        final Document doc;
+        final HTMLCollection nameList;
         doc = sampleXmlFile("hc_staff.xml");
         nameList = doc.getElementsByTagName("strong");
         assertEquals("documentGetElementsByTagNameLengthAssert", 5, nameList.getLength());

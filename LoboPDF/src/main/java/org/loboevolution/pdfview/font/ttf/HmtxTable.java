@@ -48,16 +48,16 @@ public class HmtxTable extends TrueTypeTable {
      *
      * @param ttf a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
-    protected HmtxTable(TrueTypeFont ttf) {
+    protected HmtxTable(final TrueTypeFont ttf) {
         super (TrueTypeTable.HMTX_TABLE);
 
         // the number of glyphs stored in the maxp table may be incorrect
         // in the case of subsetted fonts produced by some pdf generators
-        MaxpTable maxp = (MaxpTable) ttf.getTable("maxp");
-        int numGlyphs = maxp.getNumGlyphs();
+        final MaxpTable maxp = (MaxpTable) ttf.getTable("maxp");
+        final int numGlyphs = maxp.getNumGlyphs();
         
-        HheaTable hhea = (HheaTable) ttf.getTable("hhea");
-        int numOfLongHorMetrics = hhea.getNumOfLongHorMetrics();
+        final HheaTable hhea = (HheaTable) ttf.getTable("hhea");
+        final int numOfLongHorMetrics = hhea.getNumOfLongHorMetrics();
         
         this.advanceWidths = new short[numOfLongHorMetrics];
         this.leftSideBearings = new short[numGlyphs]; 
@@ -69,7 +69,7 @@ public class HmtxTable extends TrueTypeTable {
      * @param glyphID a int.
      * @return a short.
      */
-    public short getAdvance(int glyphID) {
+    public short getAdvance(final int glyphID) {
         if (glyphID < this.advanceWidths.length) {
             return this.advanceWidths[glyphID];
         } else {
@@ -83,7 +83,7 @@ public class HmtxTable extends TrueTypeTable {
      * @param glyphID a int.
      * @return a short.
      */
-    public short getLeftSideBearing(int glyphID) {
+    public short getLeftSideBearing(final int glyphID) {
         return this.leftSideBearings[glyphID];
     }
     
@@ -94,9 +94,9 @@ public class HmtxTable extends TrueTypeTable {
 	 */
     @Override
 	public ByteBuffer getData() {
-        int size = getLength();
+        final int size = getLength();
         
-        ByteBuffer buf = ByteBuffer.allocate(size);
+        final ByteBuffer buf = ByteBuffer.allocate(size);
         
         // write the metrics
         for (int i = 0; i < this.leftSideBearings.length; i++) {
@@ -119,7 +119,7 @@ public class HmtxTable extends TrueTypeTable {
 	 * Initialize this structure from a ByteBuffer
 	 */
     @Override
-	public void setData(ByteBuffer data) {
+	public void setData(final ByteBuffer data) {
         // some PDF writers subset the font but don't update the number of glyphs in the maxp table,
         // this would appear to break the TTF spec.
         // A better solution might be to try and override the numGlyphs in the maxp table based

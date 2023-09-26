@@ -49,19 +49,19 @@ public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 	 *
 	 * @param layeredImageView a {@link org.loboevolution.img.LayeredImageView} object.
 	 */
-	public ScrollableLayeredPane(LayeredImageView layeredImageView) {
+	public ScrollableLayeredPane(final LayeredImageView layeredImageView) {
 		this.layeredImageView = layeredImageView;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+	public int getScrollableUnitIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
 		return 10;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+	public int getScrollableBlockIncrement(final Rectangle visibleRect, final int orientation, final int direction) {
 		return 50;
 	}
 

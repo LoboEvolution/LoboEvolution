@@ -47,7 +47,7 @@ public class BernsteinSplitPaneDivider extends BaseSplitPaneDivider {
 	 *
 	 * @param ui a {@link com.jtattoo.plaf.bernstein.BernsteinSplitPaneUI} object.
 	 */
-	public BernsteinSplitPaneDivider(BernsteinSplitPaneUI ui) {
+	public BernsteinSplitPaneDivider(final BernsteinSplitPaneUI ui) {
 		super(ui);
 	}
 

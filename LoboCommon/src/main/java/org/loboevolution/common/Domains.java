@@ -65,8 +65,9 @@ public final class Domains {
 	 * @param hostName a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public static boolean isValidCookieDomain(String domain, String hostName) {
-		String plainDomain;
+	public static boolean isValidCookieDomain(final String dmain, final String hostName) {
+		final String plainDomain;
+		String domain = dmain;
 		if (!domain.startsWith(".")) {
 			// Valid domains must start with a dot
 			// according to RFC 2109, but

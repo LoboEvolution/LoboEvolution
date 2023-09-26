@@ -59,14 +59,14 @@ public class hc_namednodemapinuseattributeerrTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection elementList;
-        Element firstNode;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr domesticAttr;
-        Attr setAttr;
-        Node setNode;
+        final Element firstNode;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr domesticAttr;
+        final Attr setAttr;
+        final Node setNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         firstNode = (Element) elementList.item(0);
@@ -81,7 +81,7 @@ public class hc_namednodemapinuseattributeerrTest extends LoboUnitTest {
             boolean success = false;
             try {
                 setNode = attributes.setNamedItem(domesticAttr);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }
             assertTrue("throw_INUSE_ATTRIBUTE_ERR", success);

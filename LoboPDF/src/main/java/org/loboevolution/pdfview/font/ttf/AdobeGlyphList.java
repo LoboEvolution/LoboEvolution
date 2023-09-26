@@ -38,7 +38,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AdobeGlyphList {
+public final class AdobeGlyphList {
 	
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(AdobeGlyphList.class.getName());
@@ -74,10 +74,10 @@ public class AdobeGlyphList {
 				StringTokenizer codeTokens;
 				String glyphName;
 				StringTokenizer tokens;
-				ArrayList<String> unicodes = new ArrayList<>();
-				URL resource = getClass().getResource("/org/loboevolution/pdfview/font/ttf/resource/glyphlist.txt");
-				try (InputStream istr = resource.openStream()) {
-					BufferedReader reader = new BufferedReader(new InputStreamReader(istr));
+				final ArrayList<String> unicodes = new ArrayList<>();
+				final URL resource = getClass().getResource("/org/loboevolution/pdfview/font/ttf/resource/glyphlist.txt");
+				try (final InputStream istr = resource.openStream()) {
+					final BufferedReader reader = new BufferedReader(new InputStreamReader(istr));
 					String line = "";
 					while (line != null) {
 						try {
@@ -103,11 +103,11 @@ public class AdobeGlyphList {
 								glyphToUnicodes.put(glyphName, codes);
 							}
 
-						} catch (IOException ex) {
+						} catch (final IOException ex) {
 							break;
 						}
 					}
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					logger.log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
@@ -125,12 +125,12 @@ public class AdobeGlyphList {
      * @param glyphName a {@link java.lang.String} object.
      * @return int[]
      */
-    public static int[] getUnicodeValues(String glyphName) {
+    public static int[] getUnicodeValues(final String glyphName) {
         while (glyphLoaderThread != null && glyphLoaderThread.isAlive()) {
             synchronized (glyphToUnicodes) {
                 try {
                     glyphToUnicodes.wait(250);
-                } catch (InterruptedException ex) {
+                } catch (final InterruptedException ex) {
                     // ignore
                 }
             }
@@ -144,8 +144,8 @@ public class AdobeGlyphList {
      * @param glyphName a {@link java.lang.String} object.
      * @return Integer
      */
-    public static Integer getGlyphNameIndex(String glyphName) {
-        int [] unicodes = getUnicodeValues(glyphName);
+    public static Integer getGlyphNameIndex(final String glyphName) {
+        final int [] unicodes = getUnicodeValues(glyphName);
         if (unicodes == null) {
             return null;
         } else {
@@ -160,12 +160,12 @@ public class AdobeGlyphList {
      * @param unicode a int.
      * @return String
      */
-    public static String getGlyphName(int unicode) {
+    public static String getGlyphName(final int unicode) {
         while (glyphLoaderThread != null && glyphLoaderThread.isAlive()) {
             synchronized (glyphToUnicodes) {
                 try {
                     glyphToUnicodes.wait(250);
-                } catch (InterruptedException ex) {
+                } catch (final InterruptedException ex) {
                     // ignore
                 }
             }

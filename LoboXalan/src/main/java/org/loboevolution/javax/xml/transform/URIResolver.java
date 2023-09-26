@@ -33,6 +33,6 @@ package org.loboevolution.javax.xml.transform;
 public interface URIResolver
 {
 
-    public abstract Source resolve(String s, String s1)
+    public abstract Source resolve(final String s, final String s1)
         throws TransformerException;
 }

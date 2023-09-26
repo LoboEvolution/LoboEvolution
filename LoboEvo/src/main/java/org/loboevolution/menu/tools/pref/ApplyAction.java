@@ -45,7 +45,7 @@ public class ApplyAction extends AbstractAction {
 	 *
 	 * @param prefer a {@link org.loboevolution.menu.tools.pref.PreferenceWindow} object.
 	 */
-	public ApplyAction(PreferenceWindow prefer) {
+	public ApplyAction(final PreferenceWindow prefer) {
 		this.prefer = prefer;
 	}
 

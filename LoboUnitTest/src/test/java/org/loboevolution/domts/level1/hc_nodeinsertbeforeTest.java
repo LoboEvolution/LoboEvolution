@@ -62,18 +62,18 @@ public class hc_nodeinsertbeforeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node refChild;
-        Node newChild;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node refChild;
+        final Node newChild;
         Node child;
         String childName;
-        Node insertedNode;
-        List<String> actual = new ArrayList<>();
+        final Node insertedNode;
+        final List<String> actual = new ArrayList<>();
 
-        List<String> expected = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("EM");
         expected.add("STRONG");
         expected.add("CODE");

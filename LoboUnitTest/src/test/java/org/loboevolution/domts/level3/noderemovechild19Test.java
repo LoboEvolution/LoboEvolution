@@ -52,14 +52,14 @@ import static org.junit.Assert.*;
 public class noderemovechild19Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection parentList;
-        Element parent;
-        EntityReference child;
-        EntityReference removed;
-        String removedName;
+        final Document doc;
+        final HTMLCollection parentList;
+        final Element parent;
+        final EntityReference child;
+        final EntityReference removed;
+        final String removedName;
         Node removedNode;
-        Node entRefChild;
+        final Node entRefChild;
         doc = sampleXmlFile("hc_staff.xml");
         parentList = doc.getElementsByTagName("acronym");
         parent = (Element) parentList.item(1);
@@ -72,7 +72,7 @@ public class noderemovechild19Test extends LoboUnitTest {
             removedNode = child.removeChild(parent);
             fail("throw_DOMException");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 7:
                 case 8:
@@ -89,7 +89,7 @@ public class noderemovechild19Test extends LoboUnitTest {
                 boolean success = false;
                 try {
                     removedNode = child.removeChild(entRefChild);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
                 }
                 assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

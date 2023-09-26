@@ -56,10 +56,10 @@ public class getElementsByTagNameNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "*";
-        String localName = "*";
-        Document doc;
-        HTMLCollection newList;
+        final String namespaceURI = "*";
+        final String localName = "*";
+        final Document doc;
+        final HTMLCollection newList;
         doc = sampleXmlFile("staffNS.xml");
         newList = doc.getElementsByTagNameNS(namespaceURI, localName);
         assertEquals( "throw_Size", 36, newList.getLength());

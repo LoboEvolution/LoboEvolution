@@ -49,7 +49,7 @@ public class HTMLFieldsetElementImpl extends HTMLElementImpl implements HTMLFiel
 
     /** {@inheritDoc} */
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new FieldsetRenderState(prevRenderState, this);
     }
 
@@ -61,7 +61,7 @@ public class HTMLFieldsetElementImpl extends HTMLElementImpl implements HTMLFiel
 
     /** {@inheritDoc} */
     @Override
-    public void setDisabled(boolean disabled) {
+    public void setDisabled(final boolean disabled) {
 
     }
 
@@ -85,7 +85,7 @@ public class HTMLFieldsetElementImpl extends HTMLElementImpl implements HTMLFiel
 
     /** {@inheritDoc} */
     @Override
-    public void setName(String name) {
+    public void setName(final String name) {
 
     }
 
@@ -127,7 +127,7 @@ public class HTMLFieldsetElementImpl extends HTMLElementImpl implements HTMLFiel
 
     /** {@inheritDoc} */
     @Override
-    public void setCustomValidity(String error) {
+    public void setCustomValidity(final String error) {
 
     }
 

@@ -85,7 +85,7 @@ public class McWinIcons extends BaseIcons {
 
 		@Override
 		public int getIconWidth() {
-			int w;
+			final int w;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				w = 13;
 			} else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
@@ -97,15 +97,16 @@ public class McWinIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+int x = iconX;
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += GAP;
 			}
-			int w = getIconWidth() - GAP;
-			int h = getIconHeight();
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Color[] colors;
+			final int w = getIconWidth() - GAP;
+			final int h = getIconHeight();
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Color[] colors;
 			Color frameColor = AbstractLookAndFeel.getFrameColor();
 			if (button.isEnabled()) {
 				if (button.isRolloverEnabled() && model.isRollover()) {
@@ -131,8 +132,8 @@ public class McWinIcons extends BaseIcons {
 				g.drawLine(x + w - 1, y + 1, x + w - 1, y + h - 2);
 			}
 
-			Icon checkIcon;
-			Icon checkDisabledIcon;
+			final Icon checkIcon;
+			final Icon checkDisabledIcon;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				checkIcon = SMALL_CHECK_ICON;
 				checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
@@ -144,15 +145,15 @@ public class McWinIcons extends BaseIcons {
 				checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
 			}
 			if (model.isPressed() && model.isArmed()) {
-				Color bc = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
-				Color fc = ColorHelper.darker(bc, 40);
+				final Color bc = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
+				final Color fc = ColorHelper.darker(bc, 40);
 				g.setColor(fc);
 				g.drawRect(x + 3, y + 3, w - 6, h - 6);
 				g.setColor(bc);
 				g.fillRect(x + 4, y + 4, w - 7, h - 7);
 			} else if (model.isSelected()) {
-				int xi = x + (w - checkIcon.getIconWidth()) / 2 + 4;
-				int yi = y + (h - checkIcon.getIconHeight()) / 2;
+				final int xi = x + (w - checkIcon.getIconWidth()) / 2 + 4;
+				final int yi = y + (h - checkIcon.getIconHeight()) / 2;
 				if (model.isEnabled()) {
 					checkIcon.paintIcon(c, g, xi, yi);
 				} else {
@@ -183,7 +184,7 @@ public class McWinIcons extends BaseIcons {
 
 		@Override
 		public int getIconWidth() {
-			int w;
+			final int w;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				w = 14;
 			} else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
@@ -195,16 +196,17 @@ public class McWinIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+int x = iconX;
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += GAP;
 			}
-			int w = getIconWidth() - GAP;
-			int h = getIconHeight();
-			Graphics2D g2D = (Graphics2D) g;
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Color[] colors;
+			final int w = getIconWidth() - GAP;
+			final int h = getIconHeight();
+			final Graphics2D g2D = (Graphics2D) g;
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Color[] colors;
 			if (button.isEnabled()) {
 				if (button.isRolloverEnabled() && model.isRollover() || model.isPressed() && model.isArmed()) {
 					colors = AbstractLookAndFeel.getTheme().getRolloverColors();
@@ -219,8 +221,8 @@ public class McWinIcons extends BaseIcons {
 				colors = AbstractLookAndFeel.getTheme().getDisabledColors();
 			}
 
-			Shape savedClip = g.getClip();
-			Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
+			final Shape savedClip = g.getClip();
+			final Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
 			if (savedClip != null) {
 				clipArea.intersect(new Area(savedClip));
 			}
@@ -233,13 +235,13 @@ public class McWinIcons extends BaseIcons {
 			} else {
 				g2D.setColor(ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 20));
 			}
-			Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2D.drawOval(x, y, w, h);
 
 			if (model.isSelected()) {
 				if (model.isEnabled()) {
-					int gv = ColorHelper.getGrayValue(colors[0]);
+					final int gv = ColorHelper.getGrayValue(colors[0]);
 					if (gv > 128) {
 						g.setColor(Color.black);
 					} else {
@@ -270,7 +272,7 @@ public class McWinIcons extends BaseIcons {
 		private static final  int HEIGHT = 15;
 		private boolean isRollover = false;
 
-		public ThumbIcon(boolean isRollover) {
+		public ThumbIcon(final boolean isRollover) {
 			this.isRollover = isRollover;
 		}
 
@@ -285,9 +287,10 @@ public class McWinIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			Graphics2D g2D = (Graphics2D) g;
-			Color[] colors;
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+final int x = iconX;
+			final Graphics2D g2D = (Graphics2D) g;
+			final Color[] colors;
 			if (isRollover) {
 				colors = AbstractLookAndFeel.getTheme().getRolloverColors();
 			} else {
@@ -298,21 +301,21 @@ public class McWinIcons extends BaseIcons {
 				}
 			}
 
-			Shape savedClip = g2D.getClip();
+			final Shape savedClip = g2D.getClip();
 			if (savedClip != null) {
-				Area clipArea = new Area(new Ellipse2D.Double(x + 1, y + 1, WIDTH, HEIGHT));
+				final Area clipArea = new Area(new Ellipse2D.Double(x + 1, y + 1, WIDTH, HEIGHT));
 				clipArea.intersect(new Area(savedClip));
 				g2D.setClip(clipArea);
 				JTattooUtilities.fillHorGradient(g, colors, x + 1, y + 1, WIDTH, HEIGHT);
 				g2D.setClip(savedClip);
 			} else {
-				Area ellipseArea = new Area(new Ellipse2D.Double(x + 1, y + 1, WIDTH, HEIGHT));
+				final Area ellipseArea = new Area(new Ellipse2D.Double(x + 1, y + 1, WIDTH, HEIGHT));
 				g2D.setClip(ellipseArea);
 				JTattooUtilities.fillHorGradient(g, colors, x, y, WIDTH, HEIGHT);
 				g2D.setClip(null);
 			}
 			g2D.setColor(AbstractLookAndFeel.getFrameColor());
-			Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2D.drawOval(x + 1, y + 1, WIDTH - 1, HEIGHT - 1);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);

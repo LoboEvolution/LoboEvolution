@@ -66,14 +66,15 @@ public class DTMChildIterNodeList extends DTMNodeListBase {
    * @param parentDTM The DTM containing this node
    * @param parentHandle DTM node-handle integer
    */
-  public DTMChildIterNodeList(DTM parentDTM, int parentHandle) {
+  public DTMChildIterNodeList(final DTM parentDTM, final int parentHandle) {
     m_parentDTM = parentDTM;
     m_firstChild = parentDTM.getFirstChild(parentHandle);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Node item(int index) {
+  public Node item(final int idx) {
+    int index = idx;
     int handle = m_firstChild;
     while (--index >= 0 && handle != DTM.NULL) {
       handle = m_parentDTM.getNextSibling(handle);

@@ -57,11 +57,11 @@ public class namednodemapsetnameditemns06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         NamedNodeMap attributes;
-        HTMLCollection elementList;
+        final HTMLCollection elementList;
         Element element;
-        Attr attr;
+        final Attr attr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(0);
@@ -72,7 +72,7 @@ public class namednodemapsetnameditemns06Test extends LoboUnitTest {
         boolean success = false;
         try {
             attributes.setNamedItemNS(attr);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
         }
         assertTrue("namednodemapsetnameditemns06", success);

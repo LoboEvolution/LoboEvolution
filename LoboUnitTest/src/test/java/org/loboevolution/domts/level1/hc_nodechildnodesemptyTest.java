@@ -58,12 +58,12 @@ public class hc_nodechildnodesemptyTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        NodeList childList;
-        Node employeeNode;
-        Node textNode;
-        int length;
+        final Document doc;
+        final HTMLCollection elementList;
+        final NodeList childList;
+        final Node employeeNode;
+        final Node textNode;
+        final int length;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("em");
         employeeNode = elementList.item(1);

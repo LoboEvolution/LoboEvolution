@@ -49,7 +49,7 @@ public class FitAction extends AbstractAction {
 	 *
 	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public FitAction(PDFViewer dialog) {
+	public FitAction(final PDFViewer dialog) {
 		super("Fit", dialog.getIcon("/org/loboevolution/images/fit.png"));
 		this.dialog = dialog;
 	}

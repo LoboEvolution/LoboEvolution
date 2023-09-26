@@ -52,19 +52,19 @@ public class StorageUI  extends AbstractToolsUI {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public StorageUI(BrowserFrame frame, int session) {
+    public StorageUI(final BrowserFrame frame, final int session) {
         int index = TabStore.getTabs().size();
         if(index > 0) index = index -1;
         add(createAndShowGUI(index, session));
     }
 
-    private Component createAndShowGUI(int index, int session) {
+    private Component createAndShowGUI(final int index, final int session) {
         final Map<String, String> map = WebStore.getMapStorage(index, session);
         final Object[] columnNames = { "Key", "Value"};
         final List<String[]> values = new ArrayList<>();
         final Set<Map.Entry<String, String>> set = map.entrySet();
         final List<Map.Entry<String, String>> list = new ArrayList<>(set);
-        for(Map.Entry<String, String> entry : list) {
+        for(final Map.Entry<String, String> entry : list) {
             values.add(new String[] { entry.getKey(), entry.getValue() });
         }
 

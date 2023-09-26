@@ -46,7 +46,7 @@ public class LunaRootPaneUI extends BaseRootPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public JComponent createTitlePane(JRootPane root) {
+	public JComponent createTitlePane(final JRootPane root) {
 		return new LunaTitlePane(root, this);
 	}
 

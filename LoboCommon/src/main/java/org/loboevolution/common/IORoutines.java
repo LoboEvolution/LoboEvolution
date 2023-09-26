@@ -37,13 +37,8 @@ import java.util.zip.GZIPInputStream;
 
 /**
  * <p>IORoutines class.</p>
- *
- * Author J. H. S.
- *
  */
 public class IORoutines {
-
-
 
 	/**
 	 * Load as text.
@@ -56,7 +51,7 @@ public class IORoutines {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public static String loadAsText(InputStream in, String encoding) throws IOException {
+	public static String loadAsText(final InputStream in, final String encoding) throws IOException {
 		return loadAsText(in, encoding, 4096);
 	}
 
@@ -73,19 +68,19 @@ public class IORoutines {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public static String loadAsText(InputStream in, String encoding, int bufferSize) throws IOException {
-		InputStreamReader reader = new InputStreamReader(in, encoding);
+	public static String loadAsText(final InputStream in, final String encoding, final int bufferSize) throws IOException {
+		final InputStreamReader reader = new InputStreamReader(in, encoding);
 		char[] buffer = new char[bufferSize];
 		int offset = 0;
 		while (true) {
 			int remain = buffer.length - offset;
 			if (remain <= 0) {
-				char[] newBuffer = new char[buffer.length * 2];
+				final char[] newBuffer = new char[buffer.length * 2];
 				System.arraycopy(buffer, 0, newBuffer, 0, offset);
 				buffer = newBuffer;
 				remain = buffer.length - offset;
 			}
-			int numRead = reader.read(buffer, offset, remain);
+			final int numRead = reader.read(buffer, offset, remain);
 			if (numRead == -1) {
 				break;
 			}
@@ -100,11 +95,12 @@ public class IORoutines {
 	 * <p>load.</p>
 	 *
 	 * @param in a {@link java.io.InputStream} object.
-	 * @param initialBufferSize a int.
+	 * @param initialBufferSize a {@link java.lang.Integer} object.
 	 * @return an array of {@link byte} objects.
 	 * @throws java.io.IOException if any.
 	 */
-	public static byte[] load(InputStream in, int initialBufferSize) throws IOException {
+	public static byte[] load(final InputStream in, final int initBufferSize) throws IOException {
+		int initialBufferSize = initBufferSize;
 		if (initialBufferSize == 0) {
 			initialBufferSize = 1;
 		}
@@ -140,7 +136,7 @@ public class IORoutines {
 	 * @return a {@link java.io.InputStream} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public static InputStream getInputStream(URLConnection connection) throws IOException {
+	public static InputStream getInputStream(final URLConnection connection) throws IOException {
 		InputStream in;
 		if (connection instanceof HttpURLConnection) {
 			in = IORoutines.getGzipStreamError(((HttpURLConnection) connection));
@@ -153,8 +149,8 @@ public class IORoutines {
 		return in;
 	}
 	
-	private static InputStream getGzipStream(URLConnection con) throws IOException {
-		InputStream cis = con.getInputStream();
+	private static InputStream getGzipStream(final URLConnection con) throws IOException {
+		final InputStream cis = con.getInputStream();
 		if (cis != null) {
 			if ("gzip".equals(con.getContentEncoding())) {
 				return new GZIPInputStream(con.getInputStream());
@@ -166,8 +162,8 @@ public class IORoutines {
 		}
 	}
 
-	private static InputStream getGzipStreamError(HttpURLConnection con) throws IOException {
-		InputStream cis = con.getErrorStream();
+	private static InputStream getGzipStreamError(final HttpURLConnection con) throws IOException {
+		final InputStream cis = con.getErrorStream();
 		if (cis != null) {
 			if ("gzip".equals(con.getContentEncoding())) {
 				return new GZIPInputStream(con.getErrorStream());

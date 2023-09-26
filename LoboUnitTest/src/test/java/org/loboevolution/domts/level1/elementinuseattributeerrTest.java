@@ -65,11 +65,11 @@ public class elementinuseattributeerrTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr newAttribute;
-        HTMLCollection addressElementList;
-        Element testAddress;
-        Element newElement;
+        final Document doc;
+        final Attr newAttribute;
+        final HTMLCollection addressElementList;
+        final Element testAddress;
+        final Element newElement;
         doc = sampleXmlFile("staff.xml");
         addressElementList = doc.getElementsByTagName("address");
         testAddress = (Element) addressElementList.item(1);
@@ -82,7 +82,7 @@ public class elementinuseattributeerrTest extends LoboUnitTest {
             boolean success = false;
             try {
                 testAddress.setAttributeNode(newAttribute);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }
             assertTrue("throw_INUSE_ATTRIBUTE_ERR", success);

@@ -59,12 +59,12 @@ public class documentimportnode18Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document docImp;
-        ProcessingInstruction piImport;
-        ProcessingInstruction piToImport;
-        String piData;
-        String piTarget;
+        final Document doc;
+        final Document docImp;
+        final ProcessingInstruction piImport;
+        final ProcessingInstruction piToImport;
+        final String piData;
+        final String piTarget;
         doc = sampleXmlFile("staffNS.xml");
         docImp = sampleXmlFile("staffNS.xml");
         piToImport = doc.createProcessingInstruction("Target", "Data");

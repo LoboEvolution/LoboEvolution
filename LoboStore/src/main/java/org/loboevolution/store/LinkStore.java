@@ -50,17 +50,17 @@ public class LinkStore {
 	 * @param link a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public static boolean isVisited(String link) {
+	public static boolean isVisited(final String link) {
         boolean vis = false;
-    	try (Connection conn = DriverManager.getConnection(DB_PATH);
-			PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.LINK)) {
+    	try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.LINK)) {
     		pstmt.setString(1, link);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					vis = rs.getInt(1) > 0;
 				}
 			}
-        } catch (Exception e) {
+        } catch (final Exception e) {
         	logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return vis;
@@ -71,12 +71,12 @@ public class LinkStore {
 	 *
 	 * @param link a {@link java.lang.String} object.
 	 */
-	public static void insertLinkVisited(String link) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_LINK)) {
+	public static void insertLinkVisited(final String link) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_LINK)) {
 			pstmt.setString(1, link);
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
@@ -85,10 +85,10 @@ public class LinkStore {
 	 * <p>deleteLinks.</p>
 	 */
 	public static void deleteLinks() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_LINK)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_LINK)) {
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}

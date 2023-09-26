@@ -55,9 +55,9 @@ public class documentgetrootnodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element root;
-        String rootName;
+        final Document doc;
+        final Element root;
+        final String rootName;
         doc = sampleXmlFile("staff.xml");
         root = doc.getDocumentElement();
         rootName = root.getNodeName();

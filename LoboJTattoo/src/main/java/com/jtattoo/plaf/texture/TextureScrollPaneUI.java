@@ -50,14 +50,14 @@ public class TextureScrollPaneUI extends BaseScrollPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installDefaults(JScrollPane p) {
+	public void installDefaults(final JScrollPane p) {
 		super.installDefaults(p);
 		p.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(Graphics g, JComponent c) {
+	public void update(final Graphics g, final JComponent c) {
 		if (c.getBackground() instanceof ColorUIResource) {
 			if (c.isOpaque()) {
 				TextureUtils.fillComponent(g, c, TextureUtils.getTextureType(c));

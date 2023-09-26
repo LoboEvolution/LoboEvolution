@@ -65,13 +65,13 @@ public class removeNamedItemNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.usa.com";
-        String localName = "domest";
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddress;
-        NamedNodeMap attributes;
-        Node removedNode;
+        final String namespaceURI = "http://www.usa.com";
+        final String localName = "domest";
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddress;
+        final NamedNodeMap attributes;
+        final Node removedNode;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(1);
@@ -81,7 +81,7 @@ public class removeNamedItemNS02Test extends LoboUnitTest {
             boolean success = false;
             try {
                 removedNode = attributes.removeNamedItemNS(namespaceURI, localName);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

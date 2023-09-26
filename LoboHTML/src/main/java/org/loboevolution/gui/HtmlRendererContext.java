@@ -149,21 +149,21 @@ public interface HtmlRendererContext {
      * @param message a {@link java.lang.String} object.
      * @return a boolean.
      */
-    boolean confirm(String message);
+    boolean confirm(final String message);
 
     /**
      * Opens a simple message dialog.
      *
      * @param message a {@link java.lang.String} object.
      */
-    void alert(String message);
+    void alert(final String message);
 
     /**
      * <p>error.</p>
      *
      * @param message a {@link java.lang.String} object.
      */
-    void error(String message);
+    void error(final String message);
 
     /**
      * <p>error.</p>
@@ -171,7 +171,7 @@ public interface HtmlRendererContext {
      * @param message a {@link java.lang.String} object.
      * @param throwable a {@link java.lang.Throwable} object.
      */
-    void error(String message, Throwable throwable);
+    void error(final String message, Throwable throwable);
 
 
     /**
@@ -215,7 +215,7 @@ public interface HtmlRendererContext {
      *                       replaced.
      * @return a {@link HtmlRendererContext} object.
      */
-    HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace);
+    HtmlRendererContext open(URL url, final String windowName, final String windowFeatures, boolean replace);
 
     /**
      * <p>isVisitedLink.</p>
@@ -257,7 +257,7 @@ public interface HtmlRendererContext {
      * @param fullURL The absolute URL of the document.
      * @see #navigate(URL, String)
      */
-    void navigate(String fullURL) throws Exception;
+    void navigate(final String fullURL) throws Exception;
 
     /**
      * Implements simple navigation with incremental rendering by invoking
@@ -267,7 +267,7 @@ public interface HtmlRendererContext {
      * @param href a {@link java.net.URL} object.
      * @param target a {@link java.lang.String} object.
      */
-    void navigate(final URL href, String target);
+    void navigate(final URL href, final String target);
 
     /**
      * <p>openImageViewer.</p>
@@ -282,7 +282,7 @@ public interface HtmlRendererContext {
      * @param fullURL a {@link java.lang.String} object.
      * @param stream a {@link java.io.InputStream} object.
      */
-    void openImageViewer(String fullURL, InputStream stream);
+    void openImageViewer(final String fullURL, InputStream stream);
 
     /**
      * Shows a simple prompt dialog.
@@ -291,7 +291,7 @@ public interface HtmlRendererContext {
      * @param inputDefault a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    String prompt(String message, String inputDefault);
+    String prompt(final String message, final String inputDefault);
 
     /**
      * Implements reload as navigation to current URL. Override to implement a more
@@ -321,7 +321,7 @@ public interface HtmlRendererContext {
      *
      * @param message a {@link java.lang.String} object.
      */
-    void warn(String message);
+    void warn(final String message);
 
     /**
      * <p>warn.</p>
@@ -329,7 +329,7 @@ public interface HtmlRendererContext {
      * @param message a {@link java.lang.String} object.
      * @param throwable a {@link java.lang.Throwable} object.
      */
-    void warn(String message, Throwable throwable);
+    void warn(final String message, Throwable throwable);
 
 
     /**
@@ -337,7 +337,7 @@ public interface HtmlRendererContext {
      *
      * @param message a {@link java.lang.String} object.
      */
-    void setDefaultStatus(String message);
+    void setDefaultStatus(final String message);
 
     /**
      * <p>Setter for the field htmlPanel.</p>
@@ -358,7 +358,7 @@ public interface HtmlRendererContext {
      *
      * @param message a {@link java.lang.String} object.
      */
-    void setStatus(String message);
+    void setStatus(final String message);
 
     /**
      * <p>setCursor.</p>

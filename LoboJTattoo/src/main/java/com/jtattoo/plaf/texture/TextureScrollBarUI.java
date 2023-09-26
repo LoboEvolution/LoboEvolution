@@ -48,7 +48,7 @@ public class TextureScrollBarUI extends XPScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected JButton createDecreaseButton(int orientation) {
+	protected JButton createDecreaseButton(final int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 			return super.createDecreaseButton(orientation);
 		} else {

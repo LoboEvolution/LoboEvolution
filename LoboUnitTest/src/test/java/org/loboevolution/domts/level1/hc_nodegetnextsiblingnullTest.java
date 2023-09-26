@@ -55,11 +55,11 @@ public class hc_nodegetnextsiblingnullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        Node lcNode;
-        Node nsNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final Node lcNode;
+        final Node nsNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);

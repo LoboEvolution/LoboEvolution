@@ -60,16 +60,16 @@ public class nodelisttraverselistTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList employeeList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList employeeList;
         Node child;
         String childName;
-        java.util.List<String> result = new java.util.ArrayList<String>();
+        final java.util.List<String> result = new java.util.ArrayList<String>();
 
-        int length;
-        java.util.List<String> expectedWhitespace = new java.util.ArrayList<>();
+        final int length;
+        final java.util.List<String> expectedWhitespace = new java.util.ArrayList<>();
         expectedWhitespace.add("#text");
         expectedWhitespace.add("employeeId");
         expectedWhitespace.add("#text");
@@ -84,7 +84,7 @@ public class nodelisttraverselistTest extends LoboUnitTest {
         expectedWhitespace.add("ADDRESS");
         expectedWhitespace.add("#text");
 
-        List<String> expectedNoWhitespace = new ArrayList<>();
+        final List<String> expectedNoWhitespace = new ArrayList<>();
         expectedNoWhitespace.add("EMPLOYEEID");
         expectedNoWhitespace.add("NAME");
         expectedNoWhitespace.add("POSITION");

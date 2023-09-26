@@ -48,13 +48,13 @@ import com.jtattoo.plaf.BaseBorders;
 public class TextureMenuBarUI extends BasicMenuBarUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent x) {
+	public static ComponentUI createUI(final JComponent x) {
 		return new TextureMenuBarUI();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void installUI(JComponent c) {
+	public void installUI(final JComponent c) {
 		super.installUI(c);
 		if (c != null && c instanceof JMenuBar) {
 			c.setBorder(BaseBorders.getMenuBarBorder());
@@ -68,8 +68,8 @@ public class TextureMenuBarUI extends BasicMenuBarUI {
 		TextureUtils.fillComponent(g, c, TextureUtils.MENUBAR_TEXTURE_TYPE);
 
 		if (AbstractLookAndFeel.getTheme().isDarkTexture()) {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
 			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
 			g2D.setColor(Color.black);

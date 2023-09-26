@@ -53,17 +53,17 @@ public class DOMTreeCellRenderer extends DefaultTreeCellRenderer {
      * @param hasFocus a {@link java.lang.Boolean} object.
      * @return The treeCellRendererComponent value
      */
-    public Component getTreeCellRendererComponent(JTree tree, Object value,
-                                                  boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+    public Component getTreeCellRendererComponent(final JTree tree, Object value,
+                                                  final boolean selected, final boolean expanded, final boolean leaf, final int row, final boolean hasFocus) {
 
-        Node node = (Node) value;
+        final Node node = (Node) value;
 
         if (node.getNodeType() == Node.ELEMENT_NODE) {
 
             String cls = "";
-            ElementImpl element = (ElementImpl) node;
+            final ElementImpl element = (ElementImpl) node;
             if (element.hasAttributes()) {
-                Node cn = element.getAttributes().getNamedItem("class");
+                final Node cn = element.getAttributes().getNamedItem("class");
                 if (cn != null) {
                     cls = " class='" + cn.getNodeValue() + "'";
                 }
@@ -83,7 +83,7 @@ public class DOMTreeCellRenderer extends DefaultTreeCellRenderer {
             value = "<!-- " + node.getNodeValue() + " -->";
         }
 
-        DefaultTreeCellRenderer tcr = (DefaultTreeCellRenderer) super.getTreeCellRendererComponent(tree, value, selected,
+        final DefaultTreeCellRenderer tcr = (DefaultTreeCellRenderer) super.getTreeCellRendererComponent(tree, value, selected,
                                                                                             expanded, leaf, row, hasFocus);
         tcr.setOpenIcon(null);
         tcr.setClosedIcon(null);

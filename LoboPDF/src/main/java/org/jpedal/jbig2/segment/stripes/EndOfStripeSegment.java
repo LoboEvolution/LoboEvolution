@@ -44,7 +44,7 @@ public class EndOfStripeSegment extends Segment {
 	 *
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 */
-	public EndOfStripeSegment(JBIG2StreamDecoder streamDecoder) {
+	public EndOfStripeSegment(final JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 

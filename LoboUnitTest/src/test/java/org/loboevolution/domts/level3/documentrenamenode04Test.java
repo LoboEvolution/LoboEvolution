@@ -50,11 +50,11 @@ import static org.junit.Assert.assertNull;
 public class documentrenamenode04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr attr;
-        Node renamedNode;
-        String nodeName;
-        String namespaceURI;
+        final Document doc;
+        final Attr attr;
+        final Node renamedNode;
+        final String nodeName;
+        final String namespaceURI;
         doc = sampleXmlFile("hc_staff.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         renamedNode = doc.renameNode(attr, "", "title");

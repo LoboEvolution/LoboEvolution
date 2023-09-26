@@ -56,9 +56,9 @@ public class nodeparentnodenullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element createdNode;
-        Node parentNode;
+        final Document doc;
+        final Element createdNode;
+        final Node parentNode;
         doc = sampleXmlFile("staff.xml");
         createdNode = doc.createElement("employee");
         parentNode = createdNode.getParentNode();

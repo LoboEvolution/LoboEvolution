@@ -49,7 +49,7 @@ public class OutlineAction extends AbstractAction {
 	 *
 	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public OutlineAction(PDFViewer dialog) {
+	public OutlineAction(final PDFViewer dialog) {
 		super("Open Outline");
 		this.dialog = dialog;
 	}

@@ -53,8 +53,8 @@ public class documentgetdoctypenodtdTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
+        final Document doc;
+        final DocumentType docType;
         doc = sampleXmlFile("hc_nodtdstaff.xml");
         docType = doc.getDoctype();
         assertNull("documentGetDocTypeNoDTDAssert", docType);

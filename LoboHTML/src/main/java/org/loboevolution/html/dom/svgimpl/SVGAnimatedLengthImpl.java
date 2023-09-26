@@ -45,7 +45,7 @@ public class SVGAnimatedLengthImpl implements SVGAnimatedLength {
 	 *
 	 * @param baseValue a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 */
-	public SVGAnimatedLengthImpl(SVGLength baseValue) {
+	public SVGAnimatedLengthImpl(final SVGLength baseValue) {
 		this.baseValue = baseValue;
 		this.animValue = baseValue;
 	}

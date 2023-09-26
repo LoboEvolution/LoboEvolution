@@ -54,8 +54,8 @@ public class nodesetprefix03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
+        final Document doc;
+        final Element element;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElement("address");
 
@@ -63,7 +63,7 @@ public class nodesetprefix03Test extends LoboUnitTest {
             boolean success = false;
             try {
                 element.setPrefix("test");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
             assertTrue("throw_NAMESPACE_ERR", success);

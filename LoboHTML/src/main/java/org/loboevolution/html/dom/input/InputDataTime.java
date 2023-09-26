@@ -50,7 +50,7 @@ public class InputDataTime extends BasicInput {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputDataTime(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputDataTime(final HTMLInputElementImpl modelNode, final InputControl ic) {
 
 		try {
 			final String type = modelNode.getType();
@@ -89,7 +89,7 @@ public class InputDataTime extends BasicInput {
 			tf.addCaretListener(this);
 			tf.addMouseListener(this);
 
-		} catch (ParseException err) {
+		} catch (final ParseException err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 	}

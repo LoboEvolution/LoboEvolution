@@ -62,11 +62,11 @@ public class documentgetelementsbytagnameNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        Element element;
-        HTMLCollection childList;
-        Node appendedChild;
+        final Document doc;
+        final Element docElem;
+        final Element element;
+        final HTMLCollection childList;
+        final Node appendedChild;
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
         element = doc.createElementNS("test", "employeeId");

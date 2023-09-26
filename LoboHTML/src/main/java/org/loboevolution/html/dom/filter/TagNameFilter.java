@@ -27,7 +27,6 @@ package org.loboevolution.html.dom.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.util.Objects;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
@@ -44,7 +43,7 @@ public class TagNameFilter implements NodeFilter {
      * {@inheritDoc}
      */
     @Override
-    public short acceptNode(Node node) {
+    public short acceptNode(final Node node) {
         if (!(node instanceof Element)) {
             return NodeFilter.FILTER_REJECT;
         }

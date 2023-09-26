@@ -29,17 +29,16 @@ package org.loboevolution.javax.xml.datatype;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
+
 import org.loboevolution.javax.xml.namespace.QName;
 
 // Referenced classes of package org.loboevolution.javax.xml.datatype:
 //            Duration
 
 public abstract class XMLGregorianCalendar
-    implements Cloneable
-{
+        implements Cloneable {
 
-    public XMLGregorianCalendar()
-    {
+    public XMLGregorianCalendar() {
         throw new RuntimeException("Stub!");
     }
 
@@ -47,38 +46,15 @@ public abstract class XMLGregorianCalendar
 
     public abstract void reset();
 
-    public abstract void setYear(BigInteger biginteger);
-
-    public abstract void setYear(int i);
-
-    public abstract void setMonth(int i);
-
-    public abstract void setDay(int i);
-
-    public abstract void setTimezone(int i);
-
-    public void setTime(int hour, int minute, int second)
-    {
+    public void setTime(final int hour, final int minute, final int second) {
         throw new RuntimeException("Stub!");
     }
 
-    public abstract void setHour(int i);
-
-    public abstract void setMinute(int i);
-
-    public abstract void setSecond(int i);
-
-    public abstract void setMillisecond(int i);
-
-    public abstract void setFractionalSecond(BigDecimal bigdecimal);
-
-    public void setTime(int hour, int minute, int second, BigDecimal fractional)
-    {
+    public void setTime(final int hour, final int minute, final int second, final BigDecimal fractional) {
         throw new RuntimeException("Stub!");
     }
 
-    public void setTime(int hour, int minute, int second, int millisecond)
-    {
+    public void setTime(final int hour, final int minute, final int second, final int millisecond) {
         throw new RuntimeException("Stub!");
     }
 
@@ -86,38 +62,55 @@ public abstract class XMLGregorianCalendar
 
     public abstract int getYear();
 
+    public abstract void setYear(BigInteger biginteger);
+
+    public abstract void setYear(int i);
+
     public abstract BigInteger getEonAndYear();
 
     public abstract int getMonth();
 
+    public abstract void setMonth(int i);
+
     public abstract int getDay();
+
+    public abstract void setDay(int i);
 
     public abstract int getTimezone();
 
+    public abstract void setTimezone(int i);
+
     public abstract int getHour();
+
+    public abstract void setHour(int i);
 
     public abstract int getMinute();
 
+    public abstract void setMinute(int i);
+
     public abstract int getSecond();
 
-    public int getMillisecond()
-    {
+    public abstract void setSecond(int i);
+
+    public int getMillisecond() {
         throw new RuntimeException("Stub!");
     }
 
+    public abstract void setMillisecond(int i);
+
     public abstract BigDecimal getFractionalSecond();
+
+    public abstract void setFractionalSecond(BigDecimal bigdecimal);
 
     public abstract int compare(XMLGregorianCalendar xmlgregoriancalendar);
 
     public abstract XMLGregorianCalendar normalize();
 
-    public boolean equals(Object obj)
-    {
+    public boolean equals(final Object obj) {
         throw new RuntimeException("Stub!");
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         throw new RuntimeException("Stub!");
     }
 
@@ -125,8 +118,7 @@ public abstract class XMLGregorianCalendar
 
     public abstract QName getXMLSchemaType();
 
-    public String toString()
-    {
+    public String toString() {
         throw new RuntimeException("Stub!");
     }
 

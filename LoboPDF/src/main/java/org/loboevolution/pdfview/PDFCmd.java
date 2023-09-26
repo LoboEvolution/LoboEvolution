@@ -53,8 +53,8 @@ public abstract class PDFCmd {
      */
     @Override
     public String toString() {
-        String name = getClass().getName();
-        int lastDot = name.lastIndexOf('.');
+        final String name = getClass().getName();
+        final int lastDot = name.lastIndexOf('.');
         if (lastDot >= 0) {
             return name.substring(lastDot + 1);
         } else {

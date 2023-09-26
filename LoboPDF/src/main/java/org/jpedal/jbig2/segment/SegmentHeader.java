@@ -56,7 +56,7 @@ public class SegmentHeader {
 	 *
 	 * @param SegmentNumber a int.
 	 */
-	public void setSegmentNumber(int SegmentNumber) {
+	public void setSegmentNumber(final int SegmentNumber) {
 		this.segmentNumber = SegmentNumber;
 	}
 
@@ -65,7 +65,7 @@ public class SegmentHeader {
 	 *
 	 * @param SegmentHeaderFlags a short.
 	 */
-	public void setSegmentHeaderFlags(short SegmentHeaderFlags) {
+	public void setSegmentHeaderFlags(final short SegmentHeaderFlags) {
 		segmentType = SegmentHeaderFlags & 63; // 63 = 00111111
 		pageAssociationSizeSet = (SegmentHeaderFlags & 64) == 64; // 64 = // 01000000
 		deferredNonRetainSet = (SegmentHeaderFlags & 80) == 80; // 64 = 10000000
@@ -82,7 +82,7 @@ public class SegmentHeader {
 	 *
 	 * @param referredToSegmentCount a int.
 	 */
-	public void setReferredToSegmentCount(int referredToSegmentCount) {
+	public void setReferredToSegmentCount(final int referredToSegmentCount) {
 		this.referredToSegmentCount = referredToSegmentCount;
 	}
 
@@ -91,7 +91,7 @@ public class SegmentHeader {
 	 *
 	 * @param rententionFlags an array of {@link short} objects.
 	 */
-	public void setRententionFlags(short[] rententionFlags) {
+	public void setRententionFlags(final short[] rententionFlags) {
 		this.rententionFlags = rententionFlags;
 	}
 
@@ -100,7 +100,7 @@ public class SegmentHeader {
 	 *
 	 * @param referredToSegments an array of {@link int} objects.
 	 */
-	public void setReferredToSegments(int[] referredToSegments) {
+	public void setReferredToSegments(final int[] referredToSegments) {
 		this.referredToSegments = referredToSegments;
 	}
 
@@ -181,7 +181,7 @@ public class SegmentHeader {
 	 *
 	 * @param pageAssociation a int.
 	 */
-	public void setPageAssociation(int pageAssociation) {
+	public void setPageAssociation(final int pageAssociation) {
 		this.pageAssociation = pageAssociation;
 	}
 
@@ -190,7 +190,7 @@ public class SegmentHeader {
 	 *
 	 * @param dataLength a int.
 	 */
-	public void setDataLength(int dataLength) {
+	public void setDataLength(final int dataLength) {
 		this.dataLength = dataLength;
 	}
 
@@ -199,7 +199,7 @@ public class SegmentHeader {
 	 *
 	 * @param type a int.
 	 */
-	public void setSegmentType(int type) {
+	public void setSegmentType(final int type) {
 		this.segmentType = type;
 	}
 

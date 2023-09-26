@@ -50,13 +50,13 @@ import static org.junit.Assert.assertEquals;
 public class nodelookupprefix14Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element bodyElem;
-        Element elem;
-        CDATASection cdata;
-        String prefix;
+        final Document doc;
+        final Element bodyElem;
+        final Element elem;
+        final CDATASection cdata;
+        final String prefix;
         Node appendedChild;
-        HTMLCollection bodyList;
+        final HTMLCollection bodyList;
         doc = sampleXmlFile("hc_staff.xml");
         bodyList = doc.getElementsByTagName("body");
         bodyElem = (Element) bodyList.item(0);

@@ -112,7 +112,7 @@ public class MaxpTable extends TrueTypeTable {
 	 * Set the values from data
 	 */
     @Override
-	public void setData(ByteBuffer data) {
+	public void setData(final ByteBuffer data) {
         if (data.remaining() != 32) {
             throw new IllegalArgumentException("Bad size for Maxp table");
         }
@@ -141,7 +141,7 @@ public class MaxpTable extends TrueTypeTable {
 	 */
     @Override
 	public ByteBuffer getData() {
-        ByteBuffer buf = ByteBuffer.allocate(getLength());
+        final ByteBuffer buf = ByteBuffer.allocate(getLength());
         
         buf.putInt(getVersion());
         buf.putShort((short) getNumGlyphs());
@@ -189,7 +189,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param version New value of property version.
      */
-    public void setVersion(int version) {
+    public void setVersion(final int version) {
         this.version = version;
     }
     
@@ -207,7 +207,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param numGlyphs New value of property numGlyphs.
      */
-    public void setNumGlyphs(int numGlyphs) {
+    public void setNumGlyphs(final int numGlyphs) {
         this.numGlyphs = numGlyphs;
     }
     
@@ -225,7 +225,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxPoints New value of property maxPoints.
      */
-    public void setMaxPoints(int maxPoints) {
+    public void setMaxPoints(final int maxPoints) {
         this.maxPoints = maxPoints;
     }
     
@@ -243,7 +243,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxContours New value of property maxContours.
      */
-    public void setMaxContours(int maxContours) {
+    public void setMaxContours(final int maxContours) {
         this.maxContours = maxContours;
     }
     
@@ -261,7 +261,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxComponentPoints New value of property maxComponentPoints.
      */
-    public void setMaxComponentPoints(int maxComponentPoints) {
+    public void setMaxComponentPoints(final int maxComponentPoints) {
         this.maxComponentPoints = maxComponentPoints;
     }
     
@@ -279,7 +279,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxComponentContours New value of property maxComponentContours.
      */
-    public void setMaxComponentContours(int maxComponentContours) {
+    public void setMaxComponentContours(final int maxComponentContours) {
         this.maxComponentContours = maxComponentContours;
     }
     
@@ -297,7 +297,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxZones New value of property maxZones.
      */
-    public void setMaxZones(int maxZones) {
+    public void setMaxZones(final int maxZones) {
         this.maxZones = maxZones;
     }
     
@@ -315,7 +315,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxTwilightPoints New value of property maxTwilightPoints.
      */
-    public void setMaxTwilightPoints(int maxTwilightPoints) {
+    public void setMaxTwilightPoints(final int maxTwilightPoints) {
         this.maxTwilightPoints = maxTwilightPoints;
     }
     
@@ -333,7 +333,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxStorage New value of property maxStorage.
      */
-    public void setMaxStorage(int maxStorage) {
+    public void setMaxStorage(final int maxStorage) {
         this.maxStorage = maxStorage;
     }
     
@@ -351,7 +351,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxFunctionDefs New value of property maxFunctionDefs.
      */
-    public void setMaxFunctionDefs(int maxFunctionDefs) {
+    public void setMaxFunctionDefs(final int maxFunctionDefs) {
         this.maxFunctionDefs = maxFunctionDefs;
     }
     
@@ -369,7 +369,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxInstructionDefs New value of property maxInstructionDefs.
      */
-    public void setMaxInstructionDefs(int maxInstructionDefs) {
+    public void setMaxInstructionDefs(final int maxInstructionDefs) {
         this.maxInstructionDefs = maxInstructionDefs;
     }
     
@@ -387,7 +387,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxStackElements New value of property maxStackElements.
      */
-    public void setMaxStackElements(int maxStackElements) {
+    public void setMaxStackElements(final int maxStackElements) {
         this.maxStackElements = maxStackElements;
     }
     
@@ -405,7 +405,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxSizeOfInstructions New value of property maxSizeOfInstructions.
      */
-    public void setMaxSizeOfInstructions(int maxSizeOfInstructions) {
+    public void setMaxSizeOfInstructions(final int maxSizeOfInstructions) {
         this.maxSizeOfInstructions = maxSizeOfInstructions;
     }
     
@@ -423,7 +423,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxComponentElements New value of property maxComponentElements.
      */
-    public void setMaxComponentElements(int maxComponentElements) {
+    public void setMaxComponentElements(final int maxComponentElements) {
         this.maxComponentElements = maxComponentElements;
     }
     
@@ -441,7 +441,7 @@ public class MaxpTable extends TrueTypeTable {
      *
      * @param maxComponentDepth New value of property maxComponentDepth.
      */
-    public void setMaxComponentDepth(int maxComponentDepth) {
+    public void setMaxComponentDepth(final int maxComponentDepth) {
         this.maxComponentDepth = maxComponentDepth;
     }
     
@@ -452,8 +452,8 @@ public class MaxpTable extends TrueTypeTable {
 	 */
     @Override
 	public String toString() {
-        StringBuilder buf = new StringBuilder();
-        String indent = "    ";
+        final StringBuilder buf = new StringBuilder();
+        final String indent = "    ";
         
         buf.append(indent).append("Version          : ").append(Integer.toHexString(getVersion())).append("\n");
         buf.append(indent).append("NumGlyphs        : ").append(getNumGlyphs()).append("\n");

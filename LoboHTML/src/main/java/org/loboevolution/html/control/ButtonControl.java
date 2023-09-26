@@ -43,7 +43,7 @@ private static final long serialVersionUID = 1L;
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl} object.
 	 */
-	public ButtonControl(HTMLButtonElementImpl modelNode) {
+	public ButtonControl(final HTMLButtonElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;

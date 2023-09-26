@@ -53,17 +53,17 @@ public class documentadoptnode31Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Document newDoc;
-        Text newText;
-        Text adoptedText;
-        String nodeValue;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Document newDoc;
+        final Text newText;
+        final Text adoptedText;
+        final String nodeValue;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();

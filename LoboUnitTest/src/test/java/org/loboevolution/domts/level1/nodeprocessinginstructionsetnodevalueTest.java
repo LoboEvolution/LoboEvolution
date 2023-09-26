@@ -55,9 +55,9 @@ public class nodeprocessinginstructionsetnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NodeList testList;
-        Node piNode;
+        final Document doc;
+        final NodeList testList;
+        final Node piNode;
         String piValue;
         doc = sampleXmlFile("staff.xml");
         testList = doc.getChildNodes();

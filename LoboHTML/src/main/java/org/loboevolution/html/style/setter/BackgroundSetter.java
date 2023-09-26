@@ -40,8 +40,8 @@ public class BackgroundSetter implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
-		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+	public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
+		final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 		properties.setProperty(BACKGROUND, newValue);
 		if (Strings.isNotBlank(newValue)) {
 			final String[] tokens = HtmlValues.splitCssValue(newValue);
@@ -50,7 +50,7 @@ public class BackgroundSetter implements SubPropertySetter {
 			String color = null;
 			String image = null;
 			String backgroundRepeat = null;
-			String position = null;
+			StringBuilder position = null;
 			for (final String token : tokens) {
 				if (ColorFactory.getInstance().isColor(token) || CSSValues.INITIAL.equals(CSSValues.get(token))) {
 					color = token;
@@ -60,11 +60,11 @@ public class BackgroundSetter implements SubPropertySetter {
 					backgroundRepeat = token;
 				} else if (HtmlValues.isBackgroundPosition(token)) {
 					if (hasXPosition && !hasYPosition) {
-						position += " " + token;
+						position.append(" ").append(token);
 						hasYPosition = true;
 					} else {
 						hasXPosition = true;
-						position = token;
+						position = new StringBuilder(token);
 					}
 				}
 			}
@@ -81,7 +81,7 @@ public class BackgroundSetter implements SubPropertySetter {
 				properties.setProperty(BACKGROUND_REPEAT, backgroundRepeat);
 			}
 			if (position != null) {
-				properties.setProperty(BACKGROUND_POSITION, position);
+				properties.setProperty(BACKGROUND_POSITION, position.toString());
 			}
 		}
 	}

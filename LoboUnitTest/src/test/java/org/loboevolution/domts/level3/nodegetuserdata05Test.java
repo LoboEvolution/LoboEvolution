@@ -46,15 +46,15 @@ import static org.junit.Assert.assertNull;
 public class nodegetuserdata05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entities;
-        Node entity;
-        Attr attr;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entities;
+        final Node entity;
+        final Attr attr;
         Object userData;
-        Object retUserData;
+        final Object retUserData;
 
-        Object prevUserData;
+        final Object prevUserData;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();

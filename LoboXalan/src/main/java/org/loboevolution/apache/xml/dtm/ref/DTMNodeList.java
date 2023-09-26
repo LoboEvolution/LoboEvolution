@@ -62,12 +62,12 @@ public class DTMNodeList extends DTMNodeListBase {
    *
    * @param dtmIterator the iterator to get the nodes from
    */
-  public DTMNodeList(DTMIterator dtmIterator) {
+  public DTMNodeList(final DTMIterator dtmIterator) {
     if (dtmIterator != null) {
-      int pos = dtmIterator.getCurrentPos();
+      final int pos = dtmIterator.getCurrentPos();
       try {
         m_iter = dtmIterator.cloneWithReset();
-      } catch (CloneNotSupportedException cnse) {
+      } catch (final CloneNotSupportedException cnse) {
         m_iter = dtmIterator;
       }
       m_iter.setShouldCacheNodes(true);
@@ -88,9 +88,9 @@ public class DTMNodeList extends DTMNodeListBase {
 
   /** {@inheritDoc} */
   @Override
-  public Node item(int index) {
+  public Node item(final int index) {
     if (m_iter != null) {
-      int handle = m_iter.item(index);
+      final int handle = m_iter.item(index);
       if (handle == DTM.NULL) {
         return null;
       }

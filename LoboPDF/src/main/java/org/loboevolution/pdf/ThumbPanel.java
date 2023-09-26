@@ -112,14 +112,14 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 *
 	 * @param file a {@link org.loboevolution.pdfview.PDFFile} object.
 	 */
-	public ThumbPanel(PDFFile file) {
+	public ThumbPanel(final PDFFile file) {
 		createAndShowGUI(file);
 	}
 
-	private void createAndShowGUI(PDFFile file) {
+	private void createAndShowGUI(final PDFFile file) {
 		this.file = file;
 		if (file != null) {
-			int count = file.getNumPages();
+			final int count = file.getNumPages();
 			images = new Image[count];
 			xloc = new int[count];
 			setPreferredSize(new Dimension(defaultWidth, 200));
@@ -174,12 +174,12 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 
 			// build the page
 			try {
-				int pagetoread = workingon + 1;
-				PDFPage p = file.getPage(pagetoread, true);
-				int wid = (int) Math.ceil((lineheight - border) * p.getAspectRatio());
-				int pagetowrite = workingon;
+				final int pagetoread = workingon + 1;
+				final PDFPage p = file.getPage(pagetoread, true);
+				final int wid = (int) Math.ceil((lineheight - border) * p.getAspectRatio());
+				final int pagetowrite = workingon;
 
-				Image i = p.getImage(wid, lineheight - border, null, this, true, true);
+				final Image i = p.getImage(wid, lineheight - border, null, this, true, true);
 				images[pagetowrite] = i;
 
 				if (defaultNotSet) {
@@ -187,10 +187,10 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 					setDefaultWidth(wid);
 				}
 				repaint();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logger.log(Level.SEVERE, e.getMessage(), e);
 
-				int size = lineheight - border;
+				final int size = lineheight - border;
 				images[workingon] = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_BINARY);
 			}
 		}
@@ -201,7 +201,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 *
 	 * @param pl a {@link org.loboevolution.pdf.PageChangeListener} object.
 	 */
-	public void addPageChangeListener(PageChangeListener pl) {
+	public void addPageChangeListener(final PageChangeListener pl) {
 		// [[MW: should be an array list instead of only one]]
 		setListener(pl);
 	}
@@ -230,7 +230,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 *            the new guesstimate of the width of a thumbnail that hasn't
 	 *            been processed yet
 	 */
-	public void setDefaultWidth(int width) {
+	public void setDefaultWidth(final int width) {
 		defaultWidth = width;
 		// setPreferredSize(new Dimension(width, lineheight));
 	}
@@ -244,9 +244,9 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * @param y
 	 *            the y coordinate of the mouse click
 	 */
-	public void handleClick(int x, int y) {
+	public void handleClick(final int x, final int y) {
 		int linecount = -1;
-		int line = y / lineheight;
+		final int line = y / lineheight;
 		// run through the thumbnail locations, counting new lines
 		// until the appropriate line is reached.
 		for (int i = 0; i < xloc.length; i++) {
@@ -266,7 +266,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 *
 	 * @param pagenum a int.
 	 */
-	public void pageShown(int pagenum) {
+	public void pageShown(final int pagenum) {
 		if (showing != pagenum) {
 			// FIND THE SELECTION RECTANGLE
 			// getViewPort.scrollRectToVisible(r);
@@ -277,7 +277,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 						y += lineheight;
 					}
 				}
-				Rectangle r = new Rectangle(xloc[pagenum], y,
+				final Rectangle r = new Rectangle(xloc[pagenum], y,
 						images[pagenum] == null ? defaultWidth : images[pagenum].getWidth(null), lineheight);
 				scrollRectToVisible(r);
 			}
@@ -293,7 +293,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 *
 	 * @param pagenum a int.
 	 */
-	public void showPage(int pagenum) {
+	public void showPage(final int pagenum) {
 		pageShown(pagenum);
 		SwingUtilities.invokeLater(new GotoLater(pagenum, this));
 	}
@@ -308,9 +308,9 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 		int x = 0;
 		int y = 0;
 		int maxwidth = 0;
-		Rectangle clip = g.getClipBounds();
+		final Rectangle clip = g.getClipBounds();
 		g.setColor(Color.gray);
-		int width = getWidth();
+		final int width = getWidth();
 		g.fillRect(0, 0, width, getHeight());
 
 		for (int i = 0; i < images.length; i++) {
@@ -359,7 +359,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 		if (maxwidth == 0) {
 			maxwidth = defaultWidth;
 		}
-		Dimension d = getPreferredSize();
+		final Dimension d = getPreferredSize();
 		if (d.height != y + lineheight || d.width != maxwidth) {
 			setPreferredSize(new Dimension(maxwidth, y + lineheight));
 			revalidate();
@@ -372,7 +372,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * Handles notification of any image updates. Not used any more.
 	 */
 	@Override
-	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+	public boolean imageUpdate(final Image img, final int infoflags, final int x, final int y, final int width, final int height) {
 		// if ((infoflags & ALLBITS)!=0) {
 		// flag.set();
 		// }
@@ -387,7 +387,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 
 	/** {@inheritDoc} */
 	@Override
-	public int getScrollableBlockIncrement(Rectangle visrect, int orientation, int direction) {
+	public int getScrollableBlockIncrement(final Rectangle visrect, final int orientation, final int direction) {
 		return Math.max(lineheight, visrect.height / lineheight * lineheight);
 	}
 
@@ -405,7 +405,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 
 	/** {@inheritDoc} */
 	@Override
-	public int getScrollableUnitIncrement(Rectangle visrect, int orientation, int direction) {
+	public int getScrollableUnitIncrement(final Rectangle visrect, final int orientation, final int direction) {
 		return lineheight;
 	}
 
@@ -423,7 +423,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 *
 	 * @param listener the listener to set
 	 */
-	public void setListener(PageChangeListener listener) {
+	public void setListener(final PageChangeListener listener) {
 		this.listener = listener;
 	}
 }

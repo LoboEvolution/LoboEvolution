@@ -431,7 +431,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
      */
     @Test
     public void insertCellEmpty() {
-        String[] messages = {"2", "3", "2"};
+        final String[] messages = {"2", "3", "2"};
         insertCell("", messages);
     }
 
@@ -440,7 +440,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
      */
     @Test
     public void insertCell_MinusTwo() {
-        String[] messages = {"2", "exception"};
+        final String[] messages = {"2", "exception"};
         insertCell("-2", messages);
     }
 
@@ -449,7 +449,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
      */
     @Test
     public void insertCell_MinusOne() {
-        String[] messages = {"2", "3", "2"};
+        final String[] messages = {"2", "3", "2"};
         insertCell("-1", messages);
     }
 
@@ -458,7 +458,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
      */
     @Test
     public void insertCell_Zero() {
-        String[] messages = {"2", "3", "0"};
+        final String[] messages = {"2", "3", "0"};
         insertCell("0", messages);
     }
 
@@ -467,7 +467,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
      */
     @Test
     public void insertCell_One() {
-        String[] messages = {"2", "3", "1"};
+        final String[] messages = {"2", "3", "1"};
         insertCell("1", messages);
     }
 
@@ -476,7 +476,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
      */
     @Test
     public void insertCell_Two() {
-        String[] messages = {"2", "3", "2"};
+        final String[] messages = {"2", "3", "2"};
         insertCell("2", messages);
     }
 
@@ -485,7 +485,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
      */
     @Test
     public void insertCell_Three() {
-        String[] messages = {"2", "exception"};
+        final String[] messages = {"2", "exception"};
         insertCell("3", messages);
     }
 

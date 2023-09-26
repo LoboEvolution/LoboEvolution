@@ -37,7 +37,7 @@ public class ColumnsFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public final short acceptNode(Node node) {
+	public final short acceptNode(final Node node) {
         if (node instanceof HTMLElementImpl) {
             final HTMLElementImpl elem = (HTMLElementImpl) node;
             return elem.getRenderState().getDisplay() == RenderState.DISPLAY_TABLE_CELL ?

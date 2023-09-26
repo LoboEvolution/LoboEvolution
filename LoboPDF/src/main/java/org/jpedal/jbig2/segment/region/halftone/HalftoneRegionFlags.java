@@ -51,7 +51,7 @@ public class HalftoneRegionFlags extends Flags {
     public static final String H_DEF_PIXEL = "H_DEF_PIXEL";
 
     /** {@inheritDoc} */
-    public void setFlags(int flagsAsInt) {
+    public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
 
         /** extract H_MMR */

@@ -61,15 +61,15 @@ public class hc_documentinvalidcharacterexceptioncreateattributeTest extends Lob
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr createdAttr;
+        final Document doc;
+        final Attr createdAttr;
         doc = sampleXmlFile("hc_staff.xml");
 
         {
             boolean success = false;
             try {
                 createdAttr = doc.createAttribute("invalid^Name");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

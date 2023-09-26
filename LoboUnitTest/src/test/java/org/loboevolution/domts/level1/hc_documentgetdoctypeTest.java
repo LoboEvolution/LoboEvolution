@@ -33,7 +33,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -51,10 +50,10 @@ public class hc_documentgetdoctypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        String docTypeName;
-        String nodeValue;
+        final Document doc;
+        final DocumentType docType;
+        final String docTypeName;
+        final String nodeValue;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 

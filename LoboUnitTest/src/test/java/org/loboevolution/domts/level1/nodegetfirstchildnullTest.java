@@ -57,13 +57,13 @@ public class nodegetfirstchildnullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList employeeList;
-        Node secondChildNode;
-        Node textNode;
-        Node noChildNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList employeeList;
+        final Node secondChildNode;
+        final Node textNode;
+        final Node noChildNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(0);

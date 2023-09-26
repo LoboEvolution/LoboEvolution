@@ -39,13 +39,13 @@ public class HTMLDialogElementImpl extends  HTMLElementImpl implements HTMLDialo
      *
      * @param name a {@link String} object.
      */
-    public HTMLDialogElementImpl(String name) {
+    public HTMLDialogElementImpl(final String name) {
         super(name);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_NONE);
     }
 
@@ -55,7 +55,7 @@ public class HTMLDialogElementImpl extends  HTMLElementImpl implements HTMLDialo
     }
 
     @Override
-    public void setOpen(boolean open) {
+    public void setOpen(final boolean open) {
 
     }
 
@@ -65,12 +65,12 @@ public class HTMLDialogElementImpl extends  HTMLElementImpl implements HTMLDialo
     }
 
     @Override
-    public void setReturnValue(String returnValue) {
+    public void setReturnValue(final String returnValue) {
 
     }
 
     @Override
-    public void close(String returnValue) {
+    public void close(final String returnValue) {
 
     }
 

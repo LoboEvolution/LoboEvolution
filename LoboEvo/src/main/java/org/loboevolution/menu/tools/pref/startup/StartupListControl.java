@@ -118,7 +118,7 @@ public class StartupListControl extends JComponent {
 	 *
 	 * @param caption the new edit list caption
 	 */
-	public void setEditListCaption(String caption) {
+	public void setEditListCaption(final String caption) {
 		this.editListCaption = caption;
 	}
 
@@ -127,7 +127,7 @@ public class StartupListControl extends JComponent {
 	 *
 	 * @param strings the String.valueOfs
 	 */
-	public void setStrings(List<String> strings) {
+	public void setStrings(final List<String> strings) {
 		this.strings = strings;
 		final JComboBox<String> comboBox = this.comboBox;
 		comboBox.removeAllItems();
@@ -141,7 +141,7 @@ public class StartupListControl extends JComponent {
 	 *
 	 * @param text the String.valueOfs from text
 	 */
-	public void setStringsFromText(String text) {
+	public void setStringsFromText(final String text) {
 		try {
 			final BufferedReader reader = new BufferedReader(new StringReader(text));
 			String line;

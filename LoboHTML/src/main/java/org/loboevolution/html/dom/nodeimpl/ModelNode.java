@@ -44,7 +44,7 @@ public interface ModelNode {
 	 * @param name a {@link java.lang.String} object.
 	 * @return a {@link java.lang.Object} object.
 	 */
-	Object getDocumentItem(String name);
+	Object getDocumentItem(final String name);
 
 	/**
 	 * <p>getFullURL.</p>
@@ -53,7 +53,7 @@ public interface ModelNode {
 	 * @return a {@link java.net.URL} object.
 	 * @throws java.net.MalformedURLException if any.
 	 */
-	URL getFullURL(String spec) throws MalformedURLException;
+	URL getFullURL(final String spec) throws MalformedURLException;
 
 	/**
 	 * <p>getParentModelNode.</p>
@@ -84,7 +84,7 @@ public interface ModelNode {
 	 * @param name a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.Object} object.
 	 */
-	void setDocumentItem(String name, Object value);
+	void setDocumentItem(final String name, Object value);
 
 	/**
 	 * <p>warn.</p>
@@ -92,5 +92,5 @@ public interface ModelNode {
 	 * @param message a {@link java.lang.String} object.
 	 * @param err a {@link java.lang.Throwable} object.
 	 */
-	void warn(String message, Throwable err);
+	void warn(final String message, Throwable err);
 }

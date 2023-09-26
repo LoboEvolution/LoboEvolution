@@ -53,12 +53,12 @@ import static org.junit.Assert.assertTrue;
 public class domconfigurationcansetparameter06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
+        final Document doc;
+        final DOMConfiguration domConfig;
         HTMLCollection itemList;
         Element elementStrong;
         Text textNode;
-        boolean canSet;
+        final boolean canSet;
         boolean hasWhitespace;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();

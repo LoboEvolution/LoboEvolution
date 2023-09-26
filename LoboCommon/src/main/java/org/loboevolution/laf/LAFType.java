@@ -75,14 +75,14 @@ public enum LAFType {
 	private static final Map<String, LAFType> ENUM_MAP;
 	
 	static {
-		Map<String, LAFType> map = new HashMap<>();
-		for (LAFType instance : LAFType.values()) {
+		final Map<String, LAFType> map = new HashMap<>();
+		for (final LAFType instance : LAFType.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	LAFType(String value) {
+	LAFType(final String value) {
 		this.value = value;
 	}
 
@@ -101,7 +101,7 @@ public enum LAFType {
 	 * @param actionName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.laf.LAFType} object.
 	 */
-	public static LAFType get(String actionName) {
+	public static LAFType get(final String actionName) {
 		return ENUM_MAP.get(actionName);
 	}
 }

@@ -34,7 +34,7 @@ public class CSSRuleImpl implements CSSRule {
 
     private final AbstractCSSRuleImpl abstractCSSRule;
 
-    public CSSRuleImpl(AbstractCSSRuleImpl abstractCSSRule) {
+    public CSSRuleImpl(final AbstractCSSRuleImpl abstractCSSRule) {
         this.abstractCSSRule = abstractCSSRule;
     }
 
@@ -47,7 +47,7 @@ public class CSSRuleImpl implements CSSRule {
     /** {@inheritDoc} */
     @Override
     public CSSRule getParentRule() {
-        AbstractCSSRuleImpl parent = abstractCSSRule.getParentRule();
+        final AbstractCSSRuleImpl parent = abstractCSSRule.getParentRule();
         if (parent != null) {
             return new CSSRuleImpl(parent);
         }

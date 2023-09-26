@@ -61,12 +61,12 @@ public class hc_elementreplaceexistingattributeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        Attr newAttribute;
-        String strong;
-        Attr setAttr;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final Attr newAttribute;
+        final String strong;
+        final Attr setAttr;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);

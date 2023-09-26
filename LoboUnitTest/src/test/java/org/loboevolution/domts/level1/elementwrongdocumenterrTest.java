@@ -66,11 +66,11 @@ public class elementwrongdocumenterrTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc1;
-        Document doc2;
-        Attr newAttribute;
-        HTMLCollection addressElementList;
-        Element testAddress;
+        final Document doc1;
+        final Document doc2;
+        final Attr newAttribute;
+        final HTMLCollection addressElementList;
+        final Element testAddress;
         doc1 = sampleXmlFile("staff.xml");
         doc2 = sampleXmlFile("staff.xml");
         newAttribute = doc2.createAttribute("newAttribute");
@@ -80,7 +80,7 @@ public class elementwrongdocumenterrTest extends LoboUnitTest {
         boolean success = false;
         try {
             testAddress.setAttributeNode(newAttribute);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);

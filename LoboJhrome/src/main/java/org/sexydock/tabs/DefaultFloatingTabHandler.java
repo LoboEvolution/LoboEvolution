@@ -39,26 +39,26 @@ public class DefaultFloatingTabHandler implements IFloatingTabHandler {
     private int xOffs;
     private int yOffs;
 
-    public void initialize(Tab draggedTab, Point grabPoint) {
-        JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(draggedTab);
-        JhromeTabbedPaneUI tabbedPaneUI = SwingUtils.getJTabbedPaneAncestorUI(draggedTab);
+    public void initialize(final Tab draggedTab, final Point grabPoint) {
+        final JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(draggedTab);
+        final JhromeTabbedPaneUI tabbedPaneUI = SwingUtils.getJTabbedPaneAncestorUI(draggedTab);
 
         if (tabbedPaneUI != null) {
             dragImage = tabbedPaneUI.createDragImage(draggedTab);
             switch (tabbedPane.getTabPlacement()) {
-                case JTabbedPane.TOP:
+                case SwingConstants.TOP:
                     xOffs = -grabPoint.x * 3 / 4;
                     yOffs = 10;
                     break;
-                case JTabbedPane.BOTTOM:
+                case SwingConstants.BOTTOM:
                     xOffs = -grabPoint.x * 3 / 4;
                     yOffs = -dragImage.getHeight(null) - 10;
                     break;
-                case JTabbedPane.LEFT:
+                case SwingConstants.LEFT:
                     xOffs = 10;
                     yOffs = -grabPoint.y * 3 / 4;
                     break;
-                case JTabbedPane.RIGHT:
+                case SwingConstants.RIGHT:
                     xOffs = -dragImage.getWidth(null) - 10;
                     yOffs = -grabPoint.y * 3 / 4;
                     break;
@@ -67,15 +67,15 @@ public class DefaultFloatingTabHandler implements IFloatingTabHandler {
     }
 
     @Override
-    public void onFloatingBegin(Tab draggedTab, Point grabPoint) {
+    public void onFloatingBegin(final Tab draggedTab, final Point grabPoint) {
         initialize(draggedTab, grabPoint);
 
         if (dragImage != null) {
             if (dragImageWindow == null) {
                 dragImageWindow = new Window(null) {
                     @Override
-                    public void paint(Graphics g) {
-                        Graphics2D g2 = (Graphics2D) g;
+                    public void paint(final Graphics g) {
+                        final Graphics2D g2 = (Graphics2D) g;
 
                         if (dragImage != null) {
                             g2.drawImage(dragImage, 0, 0, null);
@@ -92,9 +92,9 @@ public class DefaultFloatingTabHandler implements IFloatingTabHandler {
     }
 
     @Override
-    public void onFloatingTabDragged(DragSourceDragEvent dsde, Tab draggedTab, double grabX) {
+    public void onFloatingTabDragged(final DragSourceDragEvent dsde, final Tab draggedTab, final double grabX) {
         if (dragImageWindow != null) {
-            Point p = new Point(dsde.getX() + xOffs, dsde.getY() + yOffs);
+            final Point p = new Point(dsde.getX() + xOffs, dsde.getY() + yOffs);
             dragImageWindow.setLocation(p);
             dragImageWindow.setVisible(true);
         }

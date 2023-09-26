@@ -60,7 +60,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
    * @param dtm The DTM Reference, must be non-null.
    * @param element The DTM element handle.
    */
-  public DTMNamedNodeMap(DTM dtm, int element) {
+  public DTMNamedNodeMap(final DTM dtm, final int element) {
     this.dtm = dtm;
     this.element = element;
   }
@@ -84,7 +84,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Attr getNamedItem(String name) {
+  public Attr getNamedItem(final String name) {
 
     for (int n = dtm.getFirstAttribute(element); n != DTM.NULL; n = dtm.getNextAttribute(n)) {
       if (dtm.getNodeName(n).equals(name)) return (Attr) dtm.getNode(n);
@@ -95,7 +95,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Attr item(int i) {
+  public Attr item(final int i) {
 
     int count = 0;
 
@@ -109,17 +109,17 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Attr removeNamedItem(String name) {
+  public Attr removeNamedItem(final String name) {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Attr getNamedItemNS(String namespaceURI, String localName) {
+  public Attr getNamedItemNS(final String namespaceURI, final String localName) {
     Node retNode = null;
     for (int n = dtm.getFirstAttribute(element); n != DTM.NULL; n = dtm.getNextAttribute(n)) {
       if (localName.equals(dtm.getLocalName(n))) {
-        String nsURI = dtm.getNamespaceURI(n);
+        final String nsURI = dtm.getNamespaceURI(n);
         if ((namespaceURI == null && nsURI == null)
             || (namespaceURI != null && namespaceURI.equals(nsURI))) {
           retNode = dtm.getNode(n);
@@ -132,18 +132,18 @@ public class DTMNamedNodeMap implements NamedNodeMap {
 
   /** {@inheritDoc} */
   @Override
-  public Node setNamedItemNS(Node arg) throws DOMException {
+  public Node setNamedItemNS(final Node arg) throws DOMException {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
   /** {@inheritDoc} */
   @Override
-  public Attr removeNamedItemNS(String namespaceURI, String localName) throws DOMException {
+  public Attr removeNamedItemNS(final String namespaceURI, final String localName) throws DOMException {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
   @Override
-  public Attr setNamedItem(Node attr) {
+  public Attr setNamedItem(final Node attr) {
     throw new DTMException(DTMException.NO_MODIFICATION_ALLOWED_ERR);
   }
 
@@ -155,7 +155,7 @@ public class DTMNamedNodeMap implements NamedNodeMap {
      *
      * @param code the code
      */
-    public DTMException(short code) {
+    public DTMException(final short code) {
       super(code, "");
     }
   }

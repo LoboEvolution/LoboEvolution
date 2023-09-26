@@ -49,16 +49,16 @@ import static org.junit.Assert.assertNotNull;
 public class nodegetbaseuri20Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String baseURI;
-        HTMLCollection pList;
-        Element pElem;
+        final Document doc;
+        final String baseURI;
+        final HTMLCollection pList;
+        final Element pElem;
         doc = sampleXmlFile("external_barfoo.xml");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(2);
         assertNotNull("pElemNotNull", pElem);
         baseURI = pElem.getBaseURI();
-        assertURIEquals("equalsExternalBarFoo", null, null, null, null, "external_widget", null, null, Boolean.TRUE, baseURI);
+        assertURIEquals(new URIEquals("equalsExternalBarFoo", null, null, null, null, "external_widget", null, null, true, baseURI));
     }
 }
 

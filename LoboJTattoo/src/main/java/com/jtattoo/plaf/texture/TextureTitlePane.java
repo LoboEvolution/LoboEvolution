@@ -59,7 +59,7 @@ public class TextureTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public TextureTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public TextureTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
@@ -83,23 +83,23 @@ public class TextureTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		TextureUtils.fillComponent(g, this, TextureUtils.WINDOW_TEXTURE_TYPE);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
-		Graphics2D g2D = (Graphics2D) g;
-		Shape savedClip = g2D.getClip();
-		Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Shape savedClip = g2D.getClip();
+		final Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
 		if (fc.equals(Color.white)) {
-			Color bc = AbstractLookAndFeel.getWindowTitleColorDark();
+			final Color bc = AbstractLookAndFeel.getWindowTitleColorDark();
 			g2D.setColor(bc);
 			JTattooUtilities.drawString(rootPane, g, title, x - 1, y - 1);
 			g2D.setColor(ColorHelper.darker(bc, 30));

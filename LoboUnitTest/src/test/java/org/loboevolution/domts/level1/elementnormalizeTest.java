@@ -59,12 +59,12 @@ public class elementnormalizeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element root;
-        HTMLCollection elementList;
-        Element testName;
-        Node firstChild;
-        String childValue;
+        final Document doc;
+        final Element root;
+        final HTMLCollection elementList;
+        final Element testName;
+        final Node firstChild;
+        final String childValue;
         doc = sampleXmlFile("staff.xml");
         root = doc.getDocumentElement();
         root.normalize();

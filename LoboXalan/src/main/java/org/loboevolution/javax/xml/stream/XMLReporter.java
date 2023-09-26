@@ -75,6 +75,6 @@ public interface XMLReporter {
      * @throws XMLStreamException
 
      */
-    public void report(String message, String errorType, Object relatedInformation, Location location)
+    public void report(final String message, final String errorType, Object relatedInformation, Location location)
             throws XMLStreamException;
 }

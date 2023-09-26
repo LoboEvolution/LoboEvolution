@@ -60,13 +60,13 @@ public class normalize01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element root;
-        HTMLCollection elementList;
-        Node firstChild;
-        NodeList textList;
-        CharacterData textNode;
-        String data;
+        final Document doc;
+        final Element root;
+        final HTMLCollection elementList;
+        final Node firstChild;
+        final NodeList textList;
+        final CharacterData textNode;
+        final String data;
         doc = sampleXmlFile("staff.xml");
         root = doc.getDocumentElement();
         root.normalize();

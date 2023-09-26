@@ -50,15 +50,15 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild27Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document doc2;
-        HTMLCollection childList;
-        HTMLCollection childList2;
-        Element elem2;
-        Element elem;
-        Node firstChild;
+        final Document doc;
+        final Document doc2;
+        final HTMLCollection childList;
+        final HTMLCollection childList2;
+        final Element elem2;
+        final Element elem;
+        final Node firstChild;
         String nodeName;
-        Node replaced;
+        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagNameNS("*", "p");
         elem = (Element) childList.item(0);
@@ -71,7 +71,7 @@ public class nodereplacechild27Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = elem.replaceChild(elem2, firstChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }
             assertTrue("WRONG_DOCUMENT_ERR_nodereplacechild27", success);

@@ -59,18 +59,18 @@ public class setAttributeNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.nist.gov";
-        String qualifiedName = "qual?name";
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddr;
+        final String namespaceURI = "http://www.nist.gov";
+        final String qualifiedName = "qual?name";
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         testAddr = (Element) elementList.item(0);
         boolean success = false;
         try {
             testAddr.setAttributeNS(namespaceURI, qualifiedName, "newValue");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
         assertTrue("throw_INVALID_CHARACTER_ERR", success);

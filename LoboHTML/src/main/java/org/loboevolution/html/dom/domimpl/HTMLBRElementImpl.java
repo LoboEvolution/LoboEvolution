@@ -45,7 +45,7 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 
 	/** {@inheritDoc} */
 	@Override
-	protected void appendInnerTextImpl(StringBuilder buffer) {
+	protected void appendInnerTextImpl(final StringBuilder buffer) {
 		buffer.append("\r\n");
 		super.appendInnerTextImpl(buffer);
 	}
@@ -58,12 +58,12 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 
 	/** {@inheritDoc} */
 	@Override
-	public void setClear(String clear) {
+	public void setClear(final String clear) {
 		setAttribute("clear", clear);
 	}
 
 	@Override
-	public Node appendChild(Node newChild) {
+	public Node appendChild(final Node newChild) {
 		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "readonly node");
 	}
 

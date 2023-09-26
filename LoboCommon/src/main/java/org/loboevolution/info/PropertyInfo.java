@@ -25,7 +25,6 @@
  */
 package org.loboevolution.info;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.lang.reflect.Method;
@@ -54,7 +53,7 @@ public class PropertyInfo {
 	 * @param name a {@link java.lang.String} object.
 	 * @param propType a {@link java.lang.Class} object.
 	 */
-	public PropertyInfo(String name, Class propType) {
+	public PropertyInfo(final String name, final Class propType) {
 		super();
 		this.name = name;
 		this.propertyType = propType;

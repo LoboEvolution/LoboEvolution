@@ -67,15 +67,15 @@ public class NavigationManager {
 	 * @param uri a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Document} object.
 	 */
-	public static Document getDocument(String uri) {
+	public static Document getDocument(final String uri) {
 		final HtmlPanel panel = new HtmlPanel();
 		try {
 			final URL url = new URL(uri);
 			final URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			connection.getHeaderField("Set-Cookie");
-			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-					Reader reader = new InputStreamReader(in, "utf-8")) {
+			try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+                 final Reader reader = new InputStreamReader(in, "utf-8")) {
 
 				final InputSource is = new InputSourceImpl(reader, uri);
 				final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
@@ -83,7 +83,7 @@ public class NavigationManager {
 				final HtmlRendererContext rendererContext = new HtmlRendererContextImpl(panel, ucontext, config);
 				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext, config);
 				return builder.parse(is);
-			} catch (SocketTimeoutException e) {
+			} catch (final SocketTimeoutException e) {
 				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
 		    }
 		} catch (final Exception e) {
@@ -99,7 +99,7 @@ public class NavigationManager {
 	 * @param title a {@link java.lang.String} object.
 	 * @param index a int.
 	 */
-	public static void insertHistory(String uri, String title, int index) {
+	public static void insertHistory(final String uri, final String title, final int index) {
 		final NavigationStore history = new NavigationStore();
 		CookieManager.putCookies(uri);
 		history.deleteHost(uri);
@@ -113,7 +113,7 @@ public class NavigationManager {
 	 * @param search a {@link java.lang.String} object.
 	 * @return a {@link HtmlPanel} object.
 	 */
-	public static HtmlPanel getHtmlPanelSearch(IBrowserPanel browserPanel, String search) {
+	public static HtmlPanel getHtmlPanelSearch(final IBrowserPanel browserPanel, final String search) {
 		final ToolsStore tools = new ToolsStore();
 		final List<SearchEngineStore> searchEngineStores = tools.getSearchEngines();
 		for (final SearchEngineStore searchEngineStore : searchEngineStores) {
@@ -123,7 +123,7 @@ public class NavigationManager {
 			}
 		}
 
-		SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
+		final SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
 		final String uri = searchEngine + search.replace(" ", "%20");
 		return NavigatorFrame.createHtmlPanel(browserPanel, uri);
 	}

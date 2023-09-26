@@ -49,8 +49,8 @@ import static org.junit.Assert.assertNull;
 public class domconfigurationgetparameter01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
+        final Document doc;
+        final DOMConfiguration domConfig;
         Object param;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();

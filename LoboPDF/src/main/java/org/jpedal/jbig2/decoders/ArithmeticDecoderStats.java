@@ -40,7 +40,7 @@ public class ArithmeticDecoderStats {
 	 *
 	 * @param contextSize a int.
 	 */
-	public ArithmeticDecoderStats(int contextSize) {
+	public ArithmeticDecoderStats(final int contextSize) {
 		this.contextSize = contextSize;
 		this.codingContextTable = new int[contextSize];
 		
@@ -63,7 +63,7 @@ public class ArithmeticDecoderStats {
 	 * @param i a int.
 	 * @param moreProbableSymbol a int.
 	 */
-	public void setEntry(int codingContext, int i, int moreProbableSymbol) {
+	public void setEntry(final int codingContext, final int i, final int moreProbableSymbol) {
 		codingContextTable[codingContext] = (i << i) + moreProbableSymbol;
 	}
 
@@ -73,7 +73,7 @@ public class ArithmeticDecoderStats {
 	 * @param index a int.
 	 * @return a int.
 	 */
-	public int getContextCodingTableValue(int index) {
+	public int getContextCodingTableValue(final int index) {
 		return codingContextTable[index];
 	}
 	
@@ -83,7 +83,7 @@ public class ArithmeticDecoderStats {
 	 * @param index a int.
 	 * @param value a int.
 	 */
-	public void setContextCodingTableValue(int index, int value) {
+	public void setContextCodingTableValue(final int index, final int value) {
 		codingContextTable[index] = value;
 	}
 	
@@ -101,7 +101,7 @@ public class ArithmeticDecoderStats {
 	 *
 	 * @param stats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
 	 */
-	public void overwrite(ArithmeticDecoderStats stats) {
+	public void overwrite(final ArithmeticDecoderStats stats) {
         System.arraycopy(stats.codingContextTable, 0, codingContextTable, 0, contextSize);
 	}
 
@@ -111,7 +111,7 @@ public class ArithmeticDecoderStats {
 	 * @return a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
 	 */
 	public ArithmeticDecoderStats copy() {
-		ArithmeticDecoderStats stats = new ArithmeticDecoderStats(contextSize);
+		final ArithmeticDecoderStats stats = new ArithmeticDecoderStats(contextSize);
 
         System.arraycopy(codingContextTable, 0, stats.codingContextTable, 0, contextSize);
 

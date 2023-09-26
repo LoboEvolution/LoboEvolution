@@ -50,10 +50,10 @@ import static org.junit.Assert.assertTrue;
 public class noderemovechild14Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Node removed;
-        EntityReference eRef;
-        ProcessingInstruction pi;
+        final Document doc;
+        final Node removed;
+        final EntityReference eRef;
+        final ProcessingInstruction pi;
         String entName;
         doc = sampleXmlFile("hc_staff.xml");
         eRef = doc.createEntityReference("ent4");
@@ -64,7 +64,7 @@ public class noderemovechild14Test extends LoboUnitTest {
             boolean success = false;
             try {
                 removed = eRef.removeChild(pi);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

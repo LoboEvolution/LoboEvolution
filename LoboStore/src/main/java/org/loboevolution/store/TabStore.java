@@ -66,7 +66,7 @@ public class TabStore {
 	 * @param index a {@link java.lang.Integer} object.
 	 * @param url a {@link java.lang.String} object.
 	 */
-	public static void insertTab(Integer index, String url) {
+	public static void insertTab(final Integer index, final String url) {
 		insertTab(index, url, null);
 	}
 	
@@ -77,9 +77,9 @@ public class TabStore {
 	 * @param url a {@link java.lang.String} object.
 	 * @param title a {@link java.lang.String} object.
 	 */
-	public static void insertTab(Integer index, String url, String title) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(INSERT_TAB)) {
+	public static void insertTab(final Integer index, final String url, final String title) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(INSERT_TAB)) {
 			pstmt.setInt(1, index);
 			pstmt.setString(2, url);
 			pstmt.setString(3, title);
@@ -94,9 +94,9 @@ public class TabStore {
 	 *
 	 * @param index a {@link java.lang.Integer} object.
 	 */
-	public static void deleteTab(Integer index) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB)) {
+	public static void deleteTab(final Integer index) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB)) {
 			pstmt.setInt(1, index);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -108,8 +108,8 @@ public class TabStore {
 	 * <p>deleteAll.</p>
 	 */
 	public static void deleteAll() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB_ALL)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB_ALL)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -122,13 +122,13 @@ public class TabStore {
 	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getTab(Integer index) {
+	public static String getTab(final Integer index) {
 		String url = "";
 		if (DatabseSQLite.storeExist()) {
-			try (Connection conn = DriverManager.getConnection(DB_PATH);
-				 PreparedStatement pstmt = conn.prepareStatement(TAB)) {
+			try (final Connection conn = DriverManager.getConnection(DB_PATH);
+                 final PreparedStatement pstmt = conn.prepareStatement(TAB)) {
 				pstmt.setInt(1, index);
-				try (ResultSet rs = pstmt.executeQuery()) {
+				try (final ResultSet rs = pstmt.executeQuery()) {
 					while (rs != null && rs.next()) {
 						url = rs.getString(1);
 					}
@@ -146,10 +146,10 @@ public class TabStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<TabInfo> getTabs() {
-		List<TabInfo> urls = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-			 PreparedStatement pstmt = conn.prepareStatement(TABS);
-			 ResultSet rs = pstmt.executeQuery()) {
+		final List<TabInfo> urls = new ArrayList<>();
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(TABS);
+             final ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				urls.add(TabInfo.builder()
 						.indexTab(rs.getString(1))
@@ -169,10 +169,10 @@ public class TabStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<String> getUrls() {
-		List<String> urls = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-			 PreparedStatement pstmt = conn.prepareStatement(TAB_URL);
-			 ResultSet rs = pstmt.executeQuery()) {
+		final List<String> urls = new ArrayList<>();
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(TAB_URL);
+             final ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				urls.add(rs.getString(1));
 			}

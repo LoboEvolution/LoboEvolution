@@ -74,8 +74,8 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 	protected void installKeyboardActions() {
 		super.installKeyboardActions();
 		if (JTattooUtilities.isMac()) {
-			InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
-			int commandKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+			final InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
+			final int commandKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, commandKey), DefaultEditorKit.copyAction);
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, commandKey), DefaultEditorKit.pasteAction);
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, commandKey), DefaultEditorKit.cutAction);
@@ -95,12 +95,12 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 			focusListener = new FocusListener() {
 
 				@Override
-				public void focusGained(FocusEvent e) {
+				public void focusGained(final FocusEvent e) {
 					if (getComponent() != null) {
 						orgBorder = getComponent().getBorder();
-						LookAndFeel laf = UIManager.getLookAndFeel();
+						final LookAndFeel laf = UIManager.getLookAndFeel();
 						if (laf instanceof AbstractLookAndFeel && orgBorder instanceof UIResource) {
-							Border focusBorder = ((AbstractLookAndFeel) laf).getBorderFactory().getFocusFrameBorder();
+							final Border focusBorder = ((AbstractLookAndFeel) laf).getBorderFactory().getFocusFrameBorder();
 							getComponent().setBorder(focusBorder);
 						}
 						getComponent().invalidate();
@@ -109,7 +109,7 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 				}
 
 				@Override
-				public void focusLost(FocusEvent e) {
+				public void focusLost(final FocusEvent e) {
 					if (getComponent() != null) {
 						if (orgBorder instanceof UIResource) {
 							getComponent().setBorder(orgBorder);
@@ -125,7 +125,7 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g) {
+	protected void paintBackground(final Graphics g) {
 		g.setColor(getComponent().getBackground());
 		if (AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
 			if (getComponent().hasFocus() && getComponent().isEditable()) {
@@ -144,7 +144,7 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 	}
 
 	private void updateBackground() {
-		JTextComponent c = getComponent();
+		final JTextComponent c = getComponent();
 		if (c.getBackground() instanceof UIResource) {
 			if (!c.isEnabled() || !c.isEditable()) {
 				c.setBackground(AbstractLookAndFeel.getDisabledBackgroundColor());

@@ -89,7 +89,7 @@ public class DelayedPair {
 		if (isRelative) {
 			final RElement rChild = (RElement) this.child;
 			rChild.setupRelativePosition(this.immediateContainingBlock);
-			TranslatedRenderable tr = new TranslatedRenderable(rChild);
+			final TranslatedRenderable tr = new TranslatedRenderable(rChild);
 			rChild.setDelegator(tr);
 			return tr;
 		}
@@ -177,9 +177,9 @@ public class DelayedPair {
 			final int avail) {
 		if (spec != null) {
 			Window window = null;
-			ModelNode node  = getModelNode();
+			final ModelNode node  = getModelNode();
 			if (node instanceof HTMLDocument) {
-				HTMLDocumentImpl doc = (HTMLDocumentImpl)node;
+				final HTMLDocumentImpl doc = (HTMLDocumentImpl)node;
 				window = doc.getDefaultView();
 			}
 			return "auto".equals(spec) ? null : HtmlValues.getPixelSize(spec, rs, window, errorValue, avail);

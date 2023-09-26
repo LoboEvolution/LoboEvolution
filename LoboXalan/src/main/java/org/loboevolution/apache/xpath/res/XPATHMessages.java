@@ -40,7 +40,7 @@ public class XPATHMessages {
    * @param args The arguments to be used as replacement text in the message created.
    * @return The formatted message string.
    */
-  public static String createXPATHMessage(String msgKey, Object[] args) // throws Exception
+  public static String createXPATHMessage(final String msgKey, final Object[] args) // throws Exception
       {
     if (XPATHBundle == null) XPATHBundle = new XPATHErrorResources();
 
@@ -60,7 +60,7 @@ public class XPATHMessages {
    * @return The formatted message string.
    */
   private static String createXPATHMsg(
-      ListResourceBundle fResourceBundle, String msgKey, Object[] args) {
+          final ListResourceBundle fResourceBundle, final String msgKey, final Object[] args) {
 
     String fmsg;
     boolean throwex = false;
@@ -78,14 +78,14 @@ public class XPATHMessages {
         // Do this to keep format from crying.
         // This is better than making a bunch of conditional
         // code all over the place.
-        int n = args.length;
+        final int n = args.length;
 
         for (int i = 0; i < n; i++) {
           if (null == args[i]) args[i] = "";
         }
 
         fmsg = java.text.MessageFormat.format(msg, args);
-      } catch (Exception e) {
+      } catch (final Exception e) {
         fmsg = fResourceBundle.getString(XPATHErrorResources.FORMAT_FAILED);
         fmsg += " " + msg;
       }

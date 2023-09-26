@@ -51,9 +51,9 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode24Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Node renamedNode;
-        String nullNSURI = null;
+        final Document doc;
+        final Node renamedNode;
+        final String nullNSURI = null;
 
         Document docowner;
         doc = sampleXmlFile("hc_staff.xml");
@@ -62,7 +62,7 @@ public class documentrenamenode24Test extends LoboUnitTest {
         boolean success = false;
         try {
             renamedNode = doc.renameNode(doc, nullNSURI, "doc:root");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("documentrenamenode24_NOT_SUPPORTED_ERR", success);

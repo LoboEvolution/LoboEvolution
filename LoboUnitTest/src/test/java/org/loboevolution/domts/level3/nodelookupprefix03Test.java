@@ -45,10 +45,10 @@ import static org.junit.Assert.assertNull;
 public class nodelookupprefix03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        String prefix;
-        String nullNSURI = null;
+        final Document doc;
+        final DocumentType docType;
+        final String prefix;
+        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();

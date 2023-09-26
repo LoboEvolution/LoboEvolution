@@ -44,7 +44,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *
    * @param locPathIterator non-null reference to the parent iterator.
    */
-  public AxesWalker(LocPathIterator locPathIterator, int axis) {
+  public AxesWalker(final LocPathIterator locPathIterator, final int axis) {
     super(locPathIterator);
     m_axis = axis;
   }
@@ -61,7 +61,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    * @param stepType The type of location step.
    * @throws org.loboevolution.javax.xml.transform.TransformerException if any
    */
-  public void init(Compiler compiler, int opPos, int stepType)
+  public void init(final Compiler compiler, final int opPos, final int stepType)
       throws org.loboevolution.javax.xml.transform.TransformerException {
 
     initPredicateInfo(compiler, opPos);
@@ -85,7 +85,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *     even vectors.
    * @return non-null clone, which may be a new clone, or may be a clone contained on the cloneList.
    */
-  AxesWalker cloneDeep(WalkingIterator cloneOwner, Vector<AxesWalker> cloneList)
+  AxesWalker cloneDeep(final WalkingIterator cloneOwner, final Vector<AxesWalker> cloneList)
       throws CloneNotSupportedException {
     AxesWalker clone = findClone(this, cloneList);
     if (null != clone) return clone;
@@ -118,10 +118,10 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *     vectors, may be null.
    * @return A clone that corresponds to the key, or null if key not found.
    */
-  static AxesWalker findClone(AxesWalker key, Vector<AxesWalker> cloneList) {
+  static AxesWalker findClone(final AxesWalker key, final Vector<AxesWalker> cloneList) {
     if (null != cloneList) {
       // First, look for clone on list.
-      int n = cloneList.size();
+      final int n = cloneList.size();
       for (int i = 0; i < n; i += 2) {
         if (key == cloneList.elementAt(i)) return cloneList.elementAt(i + 1);
       }
@@ -156,7 +156,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
   /** {@inheritDoc} */
   @Override
   public int getAnalysisBits() {
-    int axis = getAxis();
+    final int axis = getAxis();
     return WalkerFactory.getAnalysisBitFromAxes(axis);
   }
 
@@ -165,9 +165,9 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *
    * @param root The context node of this step.
    */
-  public void setRoot(int root) {
+  public void setRoot(final int root) {
     // %OPT% Get this directly from the lpi.
-    XPathContext xctxt = wi().getXPathContext();
+    final XPathContext xctxt = wi().getXPathContext();
     m_dtm = xctxt.getDTM(root);
     m_traverser = m_dtm.getAxisTraverser(m_axis);
     m_isFresh = true;
@@ -189,7 +189,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *
    * @param walker Reference to AxesWalker derivative, or may be null.
    */
-  public void setNextWalker(AxesWalker walker) {
+  public void setNextWalker(final AxesWalker walker) {
     m_nextWalker = walker;
   }
 
@@ -207,7 +207,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *
    * @param walker Reference to previous walker reference in the location step chain, or null.
    */
-  public void setPrevWalker(AxesWalker walker) {
+  public void setPrevWalker(final AxesWalker walker) {
     m_prevWalker = walker;
   }
 
@@ -267,7 +267,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
           // return walker.returnNextNode(nextNode);
           break;
         } else {
-          AxesWalker prev = walker;
+          final AxesWalker prev = walker;
 
           walker = walker.m_nextWalker;
 
@@ -287,15 +287,15 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
 
   /** {@inheritDoc} */
   @Override
-  public int getLastPos(XPathContext xctxt) {
+  public int getLastPos(final XPathContext xctxt) {
 
     int pos = getProximityPosition();
 
-    AxesWalker walker;
+    final AxesWalker walker;
 
     try {
       walker = (AxesWalker) clone();
-    } catch (CloneNotSupportedException cnse) {
+    } catch (final CloneNotSupportedException cnse) {
       return -1;
     }
 
@@ -303,8 +303,8 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
     walker.setNextWalker(null);
     walker.setPrevWalker(null);
 
-    WalkingIterator lpi = wi();
-    AxesWalker savedWalker = lpi.getLastUsedWalker();
+    final WalkingIterator lpi = wi();
+    final AxesWalker savedWalker = lpi.getLastUsedWalker();
 
     try {
       lpi.setLastUsedWalker(walker);
@@ -336,7 +336,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *
    * @return Non-null reference to a DTM.
    */
-  public DTM getDTM(int node) {
+  public DTM getDTM(final int node) {
     //
     return wi().getXPathContext().getDTM(node);
   }
@@ -352,7 +352,7 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     if (visitor.visitStep()) {
       callPredicateVisitors(visitor);
       if (null != m_nextWalker) {
@@ -363,10 +363,10 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
-    AxesWalker walker = (AxesWalker) expr;
+    final AxesWalker walker = (AxesWalker) expr;
     return this.m_axis == walker.m_axis;
   }
 

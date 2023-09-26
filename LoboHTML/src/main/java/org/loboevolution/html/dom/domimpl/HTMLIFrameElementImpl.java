@@ -60,7 +60,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new IFrameRenderState(prevRenderState, this);
 	}
 
@@ -90,7 +90,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	/** {@inheritDoc} */
 	@Override
 	public String getHeight() {
-		String heightText = this.getAttribute("height");
+		final String heightText = this.getAttribute("height");
 		if (Strings.isBlank(heightText)) {
 			return String.valueOf(getClientHeight());
 		}
@@ -137,7 +137,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	/** {@inheritDoc} */
 	@Override
 	public String getWidth() {
-		String widthText = this.getAttribute("width");
+		final String widthText = this.getAttribute("width");
 		if (Strings.isBlank(widthText)) {
 			return String.valueOf(getClientWidth());
 		}
@@ -147,7 +147,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 
 	@Override
 	public int getClientHeight() {
-		int clientHeight = super.getClientHeight();
+		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 150 : clientHeight;
 	}
 
@@ -158,7 +158,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 
 	@Override
 	public Integer getClientWidth() {
-		int clientWidth = super.getClientWidth();
+		final int clientWidth = super.getClientWidth();
 		return clientWidth == 0 ? 300 : clientWidth;
 	}
 
@@ -169,7 +169,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlign(String align) {
+	public void setAlign(final String align) {
 		setAttribute("align", align);
 	}
 
@@ -179,7 +179,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	}
 
 	@Override
-	public void setAllow(String allow) {
+	public void setAllow(final String allow) {
 
 	}
 
@@ -189,7 +189,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	}
 
 	@Override
-	public void setAllowFullscreen(boolean allowFullscreen) {
+	public void setAllowFullscreen(final boolean allowFullscreen) {
 
 	}
 
@@ -199,43 +199,43 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	}
 
 	@Override
-	public void setAllowPaymentRequest(boolean allowPaymentRequest) {
+	public void setAllowPaymentRequest(final boolean allowPaymentRequest) {
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFrameBorder(String frameBorder) {
+	public void setFrameBorder(final String frameBorder) {
 		setAttribute("frameborder", frameBorder);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHeight(String height) {
+	public void setHeight(final String height) {
 		setAttribute("height", height);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setLongDesc(String longDesc) {
+	public void setLongDesc(final String longDesc) {
 		setAttribute("longdesc", longDesc);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setMarginHeight(String marginHeight) {
+	public void setMarginHeight(final String marginHeight) {
 		setAttribute("marginHeight", marginHeight);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setMarginWidth(String marginWidth) {
+	public void setMarginWidth(final String marginWidth) {
 		setAttribute("marginWidth", marginWidth);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setName(String name) {
+	public void setName(final String name) {
 		setAttribute("name", name);
 	}
 
@@ -246,13 +246,13 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 
 	/** {@inheritDoc} */
 	@Override
-	public void setScrolling(String scrolling) {
+	public void setScrolling(final String scrolling) {
 		setAttribute("scrolling", scrolling);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSrc(String src) {
+	public void setSrc(final String src) {
 		setAttribute("src", src);
 	}
 
@@ -262,13 +262,13 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	}
 
 	@Override
-	public void setSrcdoc(String srcdoc) {
+	public void setSrcdoc(final String srcdoc) {
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(String width) {
+	public void setWidth(final String width) {
 		setAttribute("width", width);
 	}
 
@@ -282,31 +282,31 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	 *
 	 * @param frameControl a {@link org.loboevolution.html.control.FrameControl} object.
 	 */
-	public void draw(FrameControl frameControl) {
+	public void draw(final FrameControl frameControl) {
 		try {
 			if (Strings.isBlank(getSrc())) {
 				frameControl.add(new HtmlPanel());
 			} else {
-				HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
-				URL baseURL = new URL(doc.getBaseURI());
-				URL createURL = Urls.createURL(baseURL, getSrc());
-				URLConnection connection = createURL.openConnection();
+				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+				final URL baseURL = new URL(doc.getBaseURI());
+				final URL createURL = Urls.createURL(baseURL, getSrc());
+				final URLConnection connection = createURL.openConnection();
 				connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 				connection.getHeaderField("Set-Cookie");
 				connection.connect();
-				HtmlPanel panel = new HtmlPanel();
+				final HtmlPanel panel = new HtmlPanel();
 				panel.setBrowserPanel(null);
-				HtmlPanel newpanel = HtmlPanel.createlocalPanel(connection, panel, doc.getHtmlRendererContext(), doc.getHtmlRendererConfig(), createURL.toString());
-				String width = getWidth();
-				String height = getHeight();
+				final HtmlPanel newpanel = HtmlPanel.createlocalPanel(connection, panel, doc.getHtmlRendererContext(), doc.getHtmlRendererConfig(), createURL.toString());
+				final String width = getWidth();
+				final String height = getHeight();
 				if (Strings.isNotBlank(width) && Strings.isNotBlank(height)) {
-					int w = HtmlValues.getPixelSize(width, doc.getRenderState(), doc.getDefaultView(), -1);
-					int h = HtmlValues.getPixelSize(height, doc.getRenderState(), doc.getDefaultView(), -1);
+					final int w = HtmlValues.getPixelSize(width, doc.getRenderState(), doc.getDefaultView(), -1);
+					final int h = HtmlValues.getPixelSize(height, doc.getRenderState(), doc.getDefaultView(), -1);
 					newpanel.setPreferredSize(new Dimension(w, h));
 				}
 				frameControl.add(newpanel);
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}

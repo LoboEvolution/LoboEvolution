@@ -46,10 +46,10 @@ import static org.junit.Assert.assertNotNull;
 public class domimplementationgetfeature03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        DOMImplementation domImplReturned;
-        String nullVersion = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final DOMImplementation domImplReturned;
+        final String nullVersion = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();

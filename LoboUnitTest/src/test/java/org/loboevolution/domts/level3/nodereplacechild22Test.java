@@ -49,11 +49,11 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild22Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        EntityReference entRefMain;
-        EntityReference entRef;
-        Element elem;
-        Node appendedChild;
+        final Document doc;
+        final EntityReference entRefMain;
+        final EntityReference entRef;
+        final Element elem;
+        final Node appendedChild;
         Node replacedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
@@ -65,7 +65,7 @@ public class nodereplacechild22Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replacedChild = entRefMain.replaceChild(elem, entRef);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_1", success);
@@ -75,7 +75,7 @@ public class nodereplacechild22Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replacedChild = entRefMain.replaceChild(entRef, elem);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_2", success);
@@ -85,7 +85,7 @@ public class nodereplacechild22Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replacedChild = entRefMain.replaceChild(entRefMain, entRef);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_3", success);

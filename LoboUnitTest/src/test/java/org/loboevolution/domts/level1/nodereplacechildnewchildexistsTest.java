@@ -34,8 +34,10 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertSame;
 
 
 /**
@@ -57,29 +59,28 @@ public class nodereplacechildnewchildexistsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
         Node oldChild = null;
 
         Node newChild = null;
 
         String childName;
         Node childNode;
-        int length;
-        java.util.List actual = new java.util.ArrayList();
+        final int length;
+        final List<String> actual = new ArrayList<>();
+        final List<String> expected;
 
-        java.util.List expected = new java.util.ArrayList();
-
-        java.util.List expectedWithoutWhitespace = new java.util.ArrayList();
+        final List<String> expectedWithoutWhitespace = new ArrayList<>();
         expectedWithoutWhitespace.add("name");
         expectedWithoutWhitespace.add("position");
         expectedWithoutWhitespace.add("salary");
         expectedWithoutWhitespace.add("gender");
         expectedWithoutWhitespace.add("employeeId");
 
-        java.util.List expectedWithWhitespace = new java.util.ArrayList();
+        final List<String> expectedWithWhitespace = new ArrayList<>();
         expectedWithWhitespace.add("#text");
         expectedWithWhitespace.add("#text");
         expectedWithWhitespace.add("name");
@@ -93,7 +94,7 @@ public class nodereplacechildnewchildexistsTest extends LoboUnitTest {
         expectedWithWhitespace.add("employeeId");
         expectedWithWhitespace.add("#text");
 
-        Node replacedChild;
+        final Node replacedChild;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);

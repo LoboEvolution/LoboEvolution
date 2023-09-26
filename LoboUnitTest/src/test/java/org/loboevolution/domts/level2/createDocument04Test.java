@@ -60,12 +60,12 @@ public class createDocument04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.ecommerce.org/schema";
-        String qualifiedName = "namespaceURI:x";
-        Document doc;
-        DocumentType docType;
-        DOMImplementation domImpl;
-        Document aNewDoc;
+        final String namespaceURI = "http://www.ecommerce.org/schema";
+        final String qualifiedName = "namespaceURI:x";
+        final Document doc;
+        final DocumentType docType;
+        final DOMImplementation domImpl;
+        final Document aNewDoc;
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
@@ -73,7 +73,7 @@ public class createDocument04Test extends LoboUnitTest {
         boolean success = false;
         try {
             domImpl.createDocument(namespaceURI, qualifiedName, docType);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);

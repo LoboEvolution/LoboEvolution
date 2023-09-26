@@ -74,7 +74,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param x1 a {@link java.lang.Object} object.
 	 * @param y1 a {@link java.lang.Object} object.
 	 */
-	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
+	public CanvasGradientImpl(final Object x0, final Object y0, final Object x1, final Object y1) {
 		fractions = new ArrayList<>();
 		colors = new ArrayList<>();
 		this.linearX = Double.valueOf(x0.toString());
@@ -93,7 +93,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param r1 a {@link java.lang.Object} object.
 	 * @param r2 a {@link java.lang.Object} object.
 	 */
-	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
+	public CanvasGradientImpl(final Object x0, final Object y0, final Object x1, final Object y1, final Object r1, final Object r2) {
 		fractions = new ArrayList<>();
 		colors = new ArrayList<>();
 		this.linearX = Double.valueOf(x0.toString());
@@ -106,7 +106,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 
 	/** {@inheritDoc} */
 	@Override
-	public void addColorStop(String offset, String color) {
+	public void addColorStop(final String offset, final String color) {
 		fractions.add(Float.valueOf(offset));
 		colors.add(ColorFactory.getInstance().getColor(color));
 	}
@@ -119,17 +119,17 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 */
 	protected Paint gradient() {
 
-        float[] floatArray = new float[fractions.size()];
+        final float[] floatArray = new float[fractions.size()];
 		int i = 0;
 
-		for (Float f : fractions) {
+		for (final Float f : fractions) {
 			floatArray[i++] = f != null ? f : Float.NaN;
 		}
 
-		Color[] colorArray = new Color[colors.size()];
+		final Color[] colorArray = new Color[colors.size()];
 		int a = 0;
 
-		for (Color c : colors) {
+		for (final Color c : colors) {
 			colorArray[a++] = c;
 		}
 
@@ -161,7 +161,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param fractions
 	 *            the new fractions
 	 */
-	public void setFractions(List<Float> fractions) {
+	public void setFractions(final List<Float> fractions) {
 		this.fractions = fractions;
 	}
 
@@ -180,7 +180,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param colors
 	 *            the new colors
 	 */
-	public void setColors(List<Color> colors) {
+	public void setColors(final List<Color> colors) {
 		this.colors = colors;
 	}
 
@@ -199,7 +199,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param linearX
 	 *            the new linear x
 	 */
-	public void setLinearX(Double linearX) {
+	public void setLinearX(final Double linearX) {
 		this.linearX = linearX;
 	}
 
@@ -218,7 +218,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param linearX1
 	 *            the new linear x1
 	 */
-	public void setLinearX1(Double linearX1) {
+	public void setLinearX1(final Double linearX1) {
 		this.linearX1 = linearX1;
 	}
 
@@ -237,7 +237,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param linearY
 	 *            the new linear y
 	 */
-	public void setLinearY(Double linearY) {
+	public void setLinearY(final Double linearY) {
 		this.linearY = linearY;
 	}
 
@@ -256,7 +256,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param linearY1
 	 *            the new linear y1
 	 */
-	public void setLinearY1(Double linearY1) {
+	public void setLinearY1(final Double linearY1) {
 		this.linearY1 = linearY1;
 	}
 
@@ -275,7 +275,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param r1
 	 *            the r1 to set
 	 */
-	public void setR1(Double r1) {
+	public void setR1(final Double r1) {
 		this.r1 = r1;
 	}
 
@@ -294,7 +294,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param r2
 	 *            the r2 to set
 	 */
-	public void setR2(Double r2) {
+	public void setR2(final Double r2) {
 		this.r2 = r2;
 	}
 }

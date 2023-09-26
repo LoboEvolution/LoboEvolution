@@ -64,8 +64,8 @@ public class ToolsStore implements Serializable {
 	 * <p>deleteSearchEngine.</p>
 	 */
 	public void deleteSearchEngine() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_SEARCH)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -79,9 +79,9 @@ public class ToolsStore implements Serializable {
 	 */
 	public List<SearchEngineStore> getSearchEngines() {
 		final List<SearchEngineStore> searchEngineStores = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(this.SEARCH2)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final Statement stmt = conn.createStatement();
+             final ResultSet rs = stmt.executeQuery(this.SEARCH2)) {
 			while (rs != null && rs.next()) {
 				final SearchEngineStore se = new SearchEngineStore();
 				se.setName(rs.getString(1));
@@ -122,9 +122,9 @@ public class ToolsStore implements Serializable {
 	 * @param queryParameter a {@link java.lang.String} object.
 	 * @param selected a boolean.
 	 */
-	public void insertSearch(String name, String description, String baseUrl, String queryParameter, boolean selected) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_SEARCH)) {
+	public void insertSearch(final String name, final String description, final String baseUrl, final String queryParameter, final boolean selected) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.INSERT_SEARCH)) {
 			pstmt.setString(1, name);
 			pstmt.setString(2, description);
 			pstmt.setString(3, "SEARCH_ENGINE");
@@ -150,9 +150,9 @@ public class ToolsStore implements Serializable {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public void selectedSearch(String name) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH2)) {
+	public void selectedSearch(final String name) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH2)) {
 			pstmt.setString(1, name);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -164,8 +164,8 @@ public class ToolsStore implements Serializable {
 	 * <p>unselectedSearch.</p>
 	 */
 	public void unselectedSearch() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

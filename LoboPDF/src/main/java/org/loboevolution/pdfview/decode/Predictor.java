@@ -63,7 +63,7 @@ public abstract class Predictor {
      *
      * @param algorithm a int.
      */
-    protected Predictor(int algorithm) {
+    protected Predictor(final int algorithm) {
         this.algorithm = algorithm;
     }
     
@@ -85,16 +85,16 @@ public abstract class Predictor {
      * @return a {@link org.loboevolution.pdfview.decode.Predictor} object.
      * @throws java.io.IOException if any.
      */
-    public static Predictor getPredictor(PDFObject params)
+    public static Predictor getPredictor(final PDFObject params)
         throws IOException
     {
         // get the algorithm (required)
-        PDFObject algorithmObj = params.getDictRef("Predictor");
+        final PDFObject algorithmObj = params.getDictRef("Predictor");
         if (algorithmObj == null) {
             // no predictor
             return null;
         }
-        int algorithm = algorithmObj.getIntValue();
+        final int algorithm = algorithmObj.getIntValue();
     
         // create the predictor object
         Predictor predictor = null;
@@ -118,19 +118,19 @@ public abstract class Predictor {
         }
         
         // read the colors (optional)
-        PDFObject colorsObj = params.getDictRef("Colors");
+        final PDFObject colorsObj = params.getDictRef("Colors");
         if (colorsObj != null) {
             predictor.setColors(colorsObj.getIntValue());
         }
         
         // read the bits per component (optional)
-        PDFObject bpcObj = params.getDictRef("BitsPerComponent");
+        final PDFObject bpcObj = params.getDictRef("BitsPerComponent");
         if (bpcObj != null) {
             predictor.setBitsPerComponent(bpcObj.getIntValue());
         }
         
         // read the columns (optional)
-        PDFObject columnsObj = params.getDictRef("Columns");
+        final PDFObject columnsObj = params.getDictRef("Columns");
         if (columnsObj != null) {
             predictor.setColumns(columnsObj.getIntValue());
         }
@@ -162,7 +162,7 @@ public abstract class Predictor {
      *
      * @param colors a int.
      */
-    protected void setColors(int colors) {
+    protected void setColors(final int colors) {
         this.colors = colors;
     }
     
@@ -180,7 +180,7 @@ public abstract class Predictor {
      *
      * @param bpc a int.
      */
-    public void setBitsPerComponent(int bpc) {
+    public void setBitsPerComponent(final int bpc) {
         this.bpc = bpc;
     }
     
@@ -198,7 +198,7 @@ public abstract class Predictor {
      *
      * @param columns a int.
      */
-    public void setColumns(int columns) {
+    public void setColumns(final int columns) {
         this.columns = columns;
     }
 }

@@ -63,12 +63,12 @@ public class createDocument01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.ecommerce.org/";
-        String malformedName = "prefix::local";
-        Document doc;
-        DocumentType docType = null;
+        final String namespaceURI = "http://www.ecommerce.org/";
+        final String malformedName = "prefix::local";
+        final Document doc;
+        final DocumentType docType = null;
 
-        DOMImplementation domImpl;
+        final DOMImplementation domImpl;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();
@@ -76,7 +76,7 @@ public class createDocument01Test extends LoboUnitTest {
         boolean success = false;
         try {
             domImpl.createDocument(namespaceURI, malformedName, docType);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("throw_NAMESPACE_ERR", success);

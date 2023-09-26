@@ -54,9 +54,9 @@ public class SVGNumberListImpl implements SVGNumberList {
 	 *
 	 * @param numb a {@link java.lang.String} object.
 	 */
-	public SVGNumberListImpl(String numb) {
+	public SVGNumberListImpl(final String numb) {
 		pointList = new ArrayList<>();
-		SVGNumber number = new SVGNumberImpl(numb);
+		final SVGNumber number = new SVGNumberImpl(numb);
 		pointList.add(number);
 	}
 
@@ -74,7 +74,7 @@ public class SVGNumberListImpl implements SVGNumberList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGNumber initialize(SVGNumber newItem) throws DOMException, SVGException {
+	public SVGNumber initialize(final SVGNumber newItem) throws DOMException, SVGException {
 		pointList = new ArrayList<>();
 		pointList.add(newItem);
 		return newItem;
@@ -82,13 +82,13 @@ public class SVGNumberListImpl implements SVGNumberList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGNumber getItem(int index) {
+	public SVGNumber getItem(final int index) {
 		return pointList.get(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGNumber insertItemBefore(SVGNumber newItem, int index) throws DOMException, SVGException {
+	public SVGNumber insertItemBefore(final SVGNumber newItem, final int index) throws DOMException, SVGException {
 
         pointList.remove(newItem);
 
@@ -104,7 +104,7 @@ public class SVGNumberListImpl implements SVGNumberList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGNumber replaceItem(SVGNumber newItem, int index) throws DOMException, SVGException {
+	public SVGNumber replaceItem(final SVGNumber newItem, final int index) throws DOMException, SVGException {
 
         pointList.remove(newItem);
 
@@ -119,13 +119,13 @@ public class SVGNumberListImpl implements SVGNumberList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGNumber removeItem(int index) {
+	public SVGNumber removeItem(final int index) {
 		return pointList.remove(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGNumber appendItem(SVGNumber newItem) throws DOMException, SVGException {
+	public SVGNumber appendItem(final SVGNumber newItem) throws DOMException, SVGException {
 		pointList.add(newItem);
 		return newItem;
 	}

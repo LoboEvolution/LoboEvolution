@@ -56,12 +56,12 @@ public class elementsetattributens05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc = sampleXmlFile("staffNS.xml");
-        Element element = doc.createElementNS("http://www.w3.org/DOM/Test/L2", "dom:elem");
+        final Document doc = sampleXmlFile("staffNS.xml");
+        final Element element = doc.createElementNS("http://www.w3.org/DOM/Test/L2", "dom:elem");
         boolean success = false;
         try {
             element.setAttributeNS(null, "dom:root", "test");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("elementsetattributens05", success);

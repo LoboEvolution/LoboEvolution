@@ -48,11 +48,11 @@ import static org.junit.Assert.assertEquals;
 public class textwholetext01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection itemList;
-        Element elementName;
-        Text textNode;
-        String nameWholeText;
+        final Document doc;
+        final HTMLCollection itemList;
+        final Element elementName;
+        final Text textNode;
+        final String nameWholeText;
         doc = sampleXmlFile("hc_staff.xml");
         itemList = doc.getElementsByTagName("strong");
         elementName = (Element) itemList.item(0);

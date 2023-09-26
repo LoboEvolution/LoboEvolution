@@ -66,7 +66,7 @@ public class GlyfCompound extends Glyf {
      *
      * Set the data for this glyf.
      */
-    @Override public void setData(ByteBuffer data) {
+    @Override public void setData(final ByteBuffer data) {
         // int pos = data.position();
         // byte[] prdata = new byte[data.remaining()];
         // data.get(prdata);
@@ -74,7 +74,7 @@ public class GlyfCompound extends Glyf {
         // data.position(pos);
               
         // read the contour end points
-        List<GlyfComponent> comps = new ArrayList<>();
+        final List<GlyfComponent> comps = new ArrayList<>();
         GlyfComponent cur = null;
         boolean hasInstructions = false;
         
@@ -122,14 +122,14 @@ public class GlyfCompound extends Glyf {
             comps.add(cur);
         } while ((cur.flags & MORE_COMPONENTS) != 0);
 
-        GlyfComponent[] componentArray = new GlyfComponent[comps.size()];
+        final GlyfComponent[] componentArray = new GlyfComponent[comps.size()];
         comps.toArray(componentArray);
         setComponents(componentArray);
         
         byte[] instr = null;
         if (hasInstructions) {
             // read the instructions
-            short numInstructions = data.getShort();
+            final short numInstructions = data.getShort();
             instr = new byte[numInstructions];
             for (int i = 0; i < instr.length; i++) {
                 instr[i] = data.get();
@@ -146,7 +146,7 @@ public class GlyfCompound extends Glyf {
      * Get the data in this glyf as a byte buffer.  Not implemented.
      */
     @Override public ByteBuffer getData() {
-        ByteBuffer buf = super.getData();
+        final ByteBuffer buf = super.getData();
         
         // don't flip the buffer, since it may be used by subclasses
         return buf;
@@ -160,7 +160,7 @@ public class GlyfCompound extends Glyf {
     @Override public short getLength() {
         
         // start with the length of the superclass
-        short length = super.getLength();
+        final short length = super.getLength();
         return length;
     }
     
@@ -179,7 +179,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a short.
      */
-    public short getFlag(int index) {
+    public short getFlag(final int index) {
         return this.components[index].flags;
     }
     
@@ -189,7 +189,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a int.
      */
-    public int getGlyphIndex(int index) {
+    public int getGlyphIndex(final int index) {
         return this.components[index].glyphIndex;
     }
     
@@ -200,21 +200,21 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return an array of {@link double} objects.
      */
-    public double[] getTransform(int index) {
-        GlyfComponent gc = this.components[index];
+    public double[] getTransform(final int index) {
+        final GlyfComponent gc = this.components[index];
 
         float m = Math.max(Math.abs(gc.a), Math.abs(gc.b));
-        if (Math.abs(Math.abs(gc.a) - Math.abs(gc.c)) < (33 / 65536)) {
+        if (Math.abs(Math.abs(gc.a) - Math.abs(gc.c)) < ((float) 33 / 65536)) {
             m *= 2;
         }
 
 	float n = Math.max(Math.abs(gc.c), Math.abs(gc.d));
-        if (Math.abs(Math.abs(gc.c) - Math.abs(gc.d)) < (33 / 65536)) {
+        if (Math.abs(Math.abs(gc.c) - Math.abs(gc.d)) < ((float) 33 / 65536)) {
             n *= 2;
         }
         
-        float e = m * gc.e;
-        float f = n * gc.f;
+        final float e = m * gc.e;
+        final float f = n * gc.f;
         
         return new double[] { gc.a, gc.b, gc.c, gc.d, e, f }; 
     }
@@ -225,7 +225,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a int.
      */
-    public int getCompoundPoint(int index) {
+    public int getCompoundPoint(final int index) {
         return this.components[index].compoundPoint;
     }
     
@@ -235,7 +235,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a int.
      */
-    public int getComponentPoint(int index) {
+    public int getComponentPoint(final int index) {
         return this.components[index].componentPoint;
     }
  
@@ -245,7 +245,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    public boolean argsAreWords(int index) {
+    public boolean argsAreWords(final int index) {
         return ((getFlag(index) & ARG_1_AND_2_ARE_WORDS) != 0);
     }
     
@@ -255,7 +255,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    public boolean argsAreXYValues(int index) {
+    public boolean argsAreXYValues(final int index) {
         return ((getFlag(index) & ARGS_ARE_XY_VALUES) != 0);
     }
     
@@ -265,7 +265,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    public boolean roundXYToGrid(int index) {
+    public boolean roundXYToGrid(final int index) {
         return ((getFlag(index) & ROUND_XY_TO_GRID) != 0);
     }
     
@@ -275,7 +275,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    public boolean hasAScale(int index) {
+    public boolean hasAScale(final int index) {
         return ((getFlag(index) & WE_HAVE_A_SCALE) != 0);
     }
     
@@ -285,7 +285,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    protected boolean moreComponents(int index) {
+    protected boolean moreComponents(final int index) {
         return ((getFlag(index) & MORE_COMPONENTS) != 0);
     }
     
@@ -295,7 +295,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    protected boolean hasXYScale(int index) {
+    protected boolean hasXYScale(final int index) {
         return ((getFlag(index) & WE_HAVE_AN_X_AND_Y_SCALE) != 0);
     }
     
@@ -305,7 +305,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    protected boolean hasTwoByTwo(int index) {
+    protected boolean hasTwoByTwo(final int index) {
         return ((getFlag(index) & WE_HAVE_A_TWO_BY_TWO) != 0);
     }
     
@@ -315,7 +315,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    protected boolean hasInstructions(int index) {
+    protected boolean hasInstructions(final int index) {
         return ((getFlag(index) & WE_HAVE_INSTRUCTIONS) != 0);
     }
     
@@ -325,7 +325,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    public boolean useMetrics(int index) {
+    public boolean useMetrics(final int index) {
         return ((getFlag(index) & USE_MY_METRICS) != 0);
     }
     
@@ -335,14 +335,14 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a boolean.
      */
-    public boolean overlapCompound(int index) {
+    public boolean overlapCompound(final int index) {
         return ((getFlag(index) & OVERLAP_COMPOUND) != 0);
     }
     
     /**
      * Set the components
      */
-    void setComponents(GlyfComponent[] components) {
+    void setComponents(final GlyfComponent[] components) {
         this.components = components;
     }
     
@@ -361,7 +361,7 @@ public class GlyfCompound extends Glyf {
      * @param index a int.
      * @return a byte.
      */
-    public byte getInstruction(int index) {
+    public byte getInstruction(final int index) {
         return this.instructions[index];
     }
     
@@ -370,7 +370,7 @@ public class GlyfCompound extends Glyf {
      *
      * @param instructions an array of {@link byte} objects.
      */
-    protected void setInstructions(byte[] instructions) {
+    protected void setInstructions(final byte[] instructions) {
         this.instructions = instructions;
     }
     

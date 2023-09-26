@@ -54,12 +54,12 @@ public class hc_elementnormalizeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element root;
+        final Document doc;
+        final Element root;
         HTMLCollection elementList;
         Element testName;
-        Node firstChild;
-        String childValue;
+        final Node firstChild;
+        final String childValue;
         Text textNode;
         Node retNode;
         doc = sampleXmlFile("hc_staff.xml");

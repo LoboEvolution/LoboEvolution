@@ -41,7 +41,7 @@ public class GraphiteCheckBoxUI extends GraphiteRadioButtonUI {
 	private static GraphiteCheckBoxUI checkBoxUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent b) {
+	public static ComponentUI createUI(final JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new GraphiteCheckBoxUI();
 		}
@@ -50,7 +50,7 @@ public class GraphiteCheckBoxUI extends GraphiteRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installDefaults(AbstractButton b) {
+	public void installDefaults(final AbstractButton b) {
 		super.installDefaults(b);
 		icon = UIManager.getIcon("CheckBox.icon");
 	}

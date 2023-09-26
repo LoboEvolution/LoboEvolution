@@ -47,7 +47,7 @@ public class OkCancelAction extends AbstractAction {
 	 *
 	 * @param prefer a {@link org.loboevolution.menu.tools.pref.PreferenceWindow} object.
 	 */
-	public OkCancelAction(PreferenceWindow prefer) {
+	public OkCancelAction(final PreferenceWindow prefer) {
 		this.prefer = prefer;
 	}
 

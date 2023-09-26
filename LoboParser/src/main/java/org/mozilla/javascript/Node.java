@@ -8,6 +8,7 @@ package org.mozilla.javascript;
 
 import java.math.BigInteger;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import org.mozilla.javascript.ast.Comment;
 import org.mozilla.javascript.ast.FunctionNode;
@@ -16,6 +17,7 @@ import org.mozilla.javascript.ast.Name;
 import org.mozilla.javascript.ast.NumberLiteral;
 import org.mozilla.javascript.ast.Scope;
 import org.mozilla.javascript.ast.ScriptNode;
+import org.mozilla.javascript.ast.Symbol;
 
 /**
  * This class implements the root of the intermediate representation.
@@ -1065,7 +1067,8 @@ public class Node implements Iterable<Node> {
                     sb.append(" [scope ");
                     appendPrintId(this, printIds, sb);
                     sb.append(": ");
-                    for (String s : ((Scope) this).getSymbolTable().keySet()) {
+                    for (Map.Entry<String, Symbol> entry : ((Scope) this).getSymbolTable().entrySet()) {
+                        String s = entry.getKey();
                         sb.append(s);
                         sb.append(" ");
                     }

@@ -48,7 +48,7 @@ public class MaskColorSpace extends ColorSpace {
      *
      * @param paint a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
-    public MaskColorSpace(PDFPaint paint) {
+    public MaskColorSpace(final PDFPaint paint) {
         super (TYPE_RGB, 1);
         
         this.paint = paint;
@@ -56,12 +56,12 @@ public class MaskColorSpace extends ColorSpace {
     
 	/** {@inheritDoc} */
     @Override
-	public float[] fromCIEXYZ(float[] colorvalue) {
-        float x = colorvalue[0];
-        float y = colorvalue[1];
-        float z = colorvalue[2];
+	public float[] fromCIEXYZ(final float[] colorvalue) {
+        final float x = colorvalue[0];
+        final float y = colorvalue[1];
+        final float z = colorvalue[2];
         
-        float[] mask = new float[1];
+        final float[] mask = new float[1];
         
         if (Math.round(x) > 0 || Math.round(y) > 0 || Math.round(z) > 0) {
             mask[0] = 1;
@@ -74,12 +74,12 @@ public class MaskColorSpace extends ColorSpace {
     
 	/** {@inheritDoc} */
     @Override
-	public float[] fromRGB(float[] rgbvalue) {
-        float r = rgbvalue[0];
-        float g = rgbvalue[1];
-        float b = rgbvalue[2];
+	public float[] fromRGB(final float[] rgbvalue) {
+        final float r = rgbvalue[0];
+        final float g = rgbvalue[1];
+        final float b = rgbvalue[2];
         
-        float[] mask = new float[1];
+        final float[] mask = new float[1];
         
         if (Math.round(r) > 0 || Math.round(g) > 0 || Math.round(b) > 0) {
             mask[0] = 1;
@@ -96,7 +96,7 @@ public class MaskColorSpace extends ColorSpace {
 
 	/** {@inheritDoc} */
     @Override
-	public float[] toCIEXYZ(float[] colorvalue) {
+	public float[] toCIEXYZ(final float[] colorvalue) {
 	if (colorvalue[0]==1) {
 	    return this.prev1;
 	} else if (colorvalue[0]==0) {
@@ -108,7 +108,7 @@ public class MaskColorSpace extends ColorSpace {
     
 	/** {@inheritDoc} */
     @Override
-	public float[] toRGB(float[] colorvalue) {
+	public float[] toRGB(final float[] colorvalue) {
         return ((Color) this.paint.getPaint()).getRGBColorComponents(null);
     }
 

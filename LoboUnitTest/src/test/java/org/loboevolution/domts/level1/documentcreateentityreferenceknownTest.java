@@ -61,8 +61,8 @@ public class documentcreateentityreferenceknownTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc = sampleXmlFile("staff.xml");
-        EntityReference newEntRefNode = doc.createEntityReference("ent3");
+        final Document doc = sampleXmlFile("staff.xml");
+        final EntityReference newEntRefNode = doc.createEntityReference("ent3");
         assertNotNull("createdEntRefNotNull", newEntRefNode);
         assertTrue(newEntRefNode.getChildNodes().getLength() == 0);
     }

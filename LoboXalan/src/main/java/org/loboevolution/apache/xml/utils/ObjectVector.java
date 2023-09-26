@@ -52,7 +52,7 @@ public class ObjectVector implements Cloneable {
    * @param blocksize Size of block to allocate
    * @param increaseSize the size to inc
    */
-  public ObjectVector(int blocksize, int increaseSize) {
+  public ObjectVector(final int blocksize, final int increaseSize) {
 
     m_blocksize = increaseSize;
     m_mapSize = blocksize;
@@ -64,7 +64,7 @@ public class ObjectVector implements Cloneable {
    *
    * @param v Existing ObjectVector to copy
    */
-  public ObjectVector(ObjectVector v) {
+  public ObjectVector(final ObjectVector v) {
     m_map = new Object[v.m_mapSize];
     m_mapSize = v.m_mapSize;
     m_firstFree = v.m_firstFree;
@@ -86,12 +86,12 @@ public class ObjectVector implements Cloneable {
    *
    * @param value Object to add to the list
    */
-  public final void addElement(Object value) {
+  public final void addElement(final Object value) {
 
     if ((m_firstFree + 1) >= m_mapSize) {
       m_mapSize += m_blocksize;
 
-      Object[] newMap = new Object[m_mapSize];
+      final Object[] newMap = new Object[m_mapSize];
 
       System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
 
@@ -113,7 +113,7 @@ public class ObjectVector implements Cloneable {
    * @param value object to set
    * @param index Index of where to set the object
    */
-  public final void setElementAt(Object value, int index) {
+  public final void setElementAt(final Object value, final int index) {
     m_map[index] = value;
   }
 
@@ -123,7 +123,7 @@ public class ObjectVector implements Cloneable {
    * @param i index of object to get
    * @return object at given index
    */
-  public final Object elementAt(int i) {
+  public final Object elementAt(final int i) {
     return m_map[i];
   }
 
@@ -132,9 +132,9 @@ public class ObjectVector implements Cloneable {
    *
    * @param size
    */
-  public final void setToSize(int size) {
+  public final void setToSize(final int size) {
 
-    Object[] newMap = new Object[size];
+    final Object[] newMap = new Object[size];
 
     System.arraycopy(m_map, 0, newMap, 0, m_firstFree);
     m_mapSize = size;

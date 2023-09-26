@@ -47,14 +47,14 @@ import static org.junit.Assert.assertNotNull;
 public class nodecomparedocumentposition29Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        EntityReference entRef1;
-        EntityReference entRef2;
-        Element entRefChild1;
-        ProcessingInstruction entRefChild2;
-        int entRefChild1Position;
-        int entRefChild2Position;
+        final Document doc;
+        final Element docElem;
+        final EntityReference entRef1;
+        final EntityReference entRef2;
+        final Element entRefChild1;
+        final ProcessingInstruction entRefChild2;
+        final int entRefChild1Position;
+        final int entRefChild2Position;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         entRef1 = doc.createEntityReference("ent4");

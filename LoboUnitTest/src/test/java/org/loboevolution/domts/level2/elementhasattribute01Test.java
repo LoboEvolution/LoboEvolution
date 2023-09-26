@@ -52,9 +52,9 @@ public class elementhasattribute01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        boolean state;
+        final Document doc;
+        final Element element;
+        final boolean state;
         doc = sampleXmlFile("staff.xml");
         element = doc.getDocumentElement();
         state = element.hasAttribute("");

@@ -53,10 +53,10 @@ import static org.junit.Assert.assertTrue;
 public class elementsetidattributens11Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element pElem1;
-        Element pElem2;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element pElem1;
+        final Element pElem2;
         NamedNodeMap attributesMap;
         Attr attr;
         boolean id = false;

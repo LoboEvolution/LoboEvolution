@@ -44,7 +44,7 @@ public class HTMLCenterElementImpl extends HTMLElementImpl {
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
         return new AlignXRenderState(prevRenderState, this, 50);
 	}
 	

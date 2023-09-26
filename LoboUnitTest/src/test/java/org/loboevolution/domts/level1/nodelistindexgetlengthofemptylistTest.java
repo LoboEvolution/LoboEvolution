@@ -58,13 +58,13 @@ public class nodelistindexgetlengthofemptylistTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList employeeList;
-        Node childNode;
-        Node textNode;
-        NodeList textList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList employeeList;
+        final Node childNode;
+        final Node textNode;
+        final NodeList textList;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(2);

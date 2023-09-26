@@ -52,7 +52,7 @@ public class ShowBookmarksAction extends AbstractAction {
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 * @param num a {@link java.lang.Integer} object.
 	 */
-	public ShowBookmarksAction(BrowserFrame frame, Integer num) {
+	public ShowBookmarksAction(final BrowserFrame frame, final Integer num) {
 		this.frame = frame;
 		this.num = num;
 	}

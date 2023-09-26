@@ -35,7 +35,7 @@ public interface TemplatesHandler
 
     public abstract Templates getTemplates();
 
-    public abstract void setSystemId(String s);
+    public abstract void setSystemId(final String s);
 
     public abstract String getSystemId();
 }

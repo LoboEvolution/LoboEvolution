@@ -34,7 +34,6 @@ import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -62,13 +61,13 @@ public class importNode11Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        EntityReference entRef;
-        Node aNode;
-        String name;
-        Node child;
-        String childValue;
+        final Document doc;
+        final Document aNewDoc;
+        final EntityReference entRef;
+        final Node aNode;
+        final String name;
+        final Node child;
+        final String childValue;
         doc = sampleXmlFile("staff.xml");
         aNewDoc = sampleXmlFile("staff.xml");
         entRef = aNewDoc.createEntityReference("ent3");

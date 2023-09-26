@@ -50,15 +50,15 @@ public class hc_attrremovechild1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection acronymList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr titleAttr;
+        final Document doc;
+        final HTMLCollection acronymList;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr titleAttr;
         String value;
-        Text textNode;
-        Node retval;
-        Node firstChild;
+        final Text textNode;
+        final Node retval;
+        final Node firstChild;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);

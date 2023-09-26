@@ -31,7 +31,7 @@ import javax.swing.*;
 public class TabbedPaneEvent {
     public final JTabbedPane tabbedPane;
     public final long timestamp;
-    public TabbedPaneEvent(JTabbedPane tabbedPane, long timestamp) {
+    public TabbedPaneEvent(final JTabbedPane tabbedPane, final long timestamp) {
         this.timestamp = timestamp;
         this.tabbedPane = tabbedPane;
     }

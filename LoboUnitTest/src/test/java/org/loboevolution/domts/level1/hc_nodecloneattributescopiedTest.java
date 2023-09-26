@@ -60,20 +60,16 @@ public class hc_nodecloneattributescopiedTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node addressNode;
-        Element clonedNode;
-        NamedNodeMapImpl attributes;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node addressNode;
+        final Element clonedNode;
+        final NamedNodeMapImpl attributes;
         Node attributeNode;
         String attributeName;
-        Collection<String> result = new ArrayList<>();
+        final Collection<String> result = new ArrayList<>();
 
-        Collection<String> htmlExpected = new ArrayList<>();
-        htmlExpected.add("class");
-        htmlExpected.add("title");
-
-        Collection<String> expected = new ArrayList<>();
+        final Collection<String> expected = new ArrayList<>();
         expected.add("title");
         expected.add("class");
         expected.add("dir");

@@ -56,20 +56,20 @@ public class BernsteinTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public BernsteinTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public BernsteinTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		if (backgroundImage != null) {
 			g.drawImage(backgroundImage, 0, 0, null);
 		} else {
 			BernsteinUtils.fillComponent(g, this);
 		}
-		Graphics2D g2D = (Graphics2D) g;
-		Composite composite = g2D.getComposite();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite composite = g2D.getComposite();
 		AlphaComposite alpha = null;
 		if (backgroundImage != null) {
 			alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue);
@@ -84,7 +84,7 @@ public class BernsteinTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getTheme().getWindowBorderColor());
 		} else {

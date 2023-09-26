@@ -62,9 +62,9 @@ public class isSupported06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node rootNode;
-        boolean state;
+        final Document doc;
+        final Node rootNode;
+        final boolean state;
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();
         state = rootNode.isSupported("xml", "2.0");

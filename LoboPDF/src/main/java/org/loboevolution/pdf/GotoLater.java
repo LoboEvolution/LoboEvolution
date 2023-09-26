@@ -44,7 +44,7 @@ public class GotoLater implements Runnable {
 	 * @param pagenum a int.
 	 * @param thumb a {@link org.loboevolution.pdf.ThumbPanel} object.
 	 */
-	public GotoLater(int pagenum,  ThumbPanel thumb) {
+	public GotoLater(final int pagenum, final ThumbPanel thumb) {
 		page = pagenum;
 		this.thumb = thumb;
 	}

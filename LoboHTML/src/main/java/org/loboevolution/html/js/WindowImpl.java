@@ -149,7 +149,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	 * @param rcontext a {@link HtmlRendererContext} object.
 	 * @return a {@link org.loboevolution.html.js.WindowImpl} object.
 	 */
-	public static WindowImpl getWindow(HtmlRendererContext rcontext, final HtmlRendererConfig config) {
+	public static WindowImpl getWindow(final HtmlRendererContext rcontext, final HtmlRendererConfig config) {
 		if (rcontext == null) {
 			return null;
 		}
@@ -228,12 +228,12 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			return null;
 		}
 
-		HTMLAllCollectionImpl all = (HTMLAllCollectionImpl) doc.getAll();
-		AtomicReference<Node> find = new AtomicReference<>();
+		final HTMLAllCollectionImpl all = (HTMLAllCollectionImpl) doc.getAll();
+		final AtomicReference<Node> find = new AtomicReference<>();
 		all.forEach(node -> {
 			if (node.hasAttributes()) {
-				NamedNodeMap attributes = node.getAttributes();
-				for (Node attribute : Nodes.iterable(attributes)) {
+				final NamedNodeMap attributes = node.getAttributes();
+				for (final Node attribute : Nodes.iterable(attributes)) {
 					if (name.equals(attribute.getNodeValue())) {
 						find.set(node);
 					}
@@ -247,12 +247,12 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		return find.get();
 	}
 
-	private void findChild(Node node, AtomicReference<Node> find) {
-		NodeListImpl childNodes = (NodeListImpl) node.getChildNodes();
+	private void findChild(final Node node, final AtomicReference<Node> find) {
+		final NodeListImpl childNodes = (NodeListImpl) node.getChildNodes();
 		childNodes.forEach(nde -> {
 			if (nde.hasAttributes()) {
-				NamedNodeMap attributes = nde.getAttributes();
-				for (Node attribute : Nodes.iterable(attributes)) {
+				final NamedNodeMap attributes = nde.getAttributes();
+				for (final Node attribute : Nodes.iterable(attributes)) {
 					if (name.equals(attribute.getNodeValue())) {
 						find.set(nde);
 					}
@@ -277,7 +277,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 				return windowScope;
 			}
 
-			try(Context ctx = Context.enter()) {
+			try(final Context ctx = Context.enter()) {
 				windowScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this, null);
 				windowScope = ctx.initSafeStandardObjects((ScriptableObject)windowScope);
 				this.windowScope = windowScope;
@@ -454,7 +454,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			return this.length;
 		} else {
 			final HTMLDocumentImpl doc = this.document;
-			HTMLCollection collection = new HTMLCollectionImpl(doc, new BodyFilter());
+			final HTMLCollection collection = new HTMLCollectionImpl(doc, new BodyFilter());
 			return collection.getLength();
 		}
 	}
@@ -598,7 +598,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	@Override
 	public WindowImpl open(final String relativeUrl, final String windowName, final String windowFeatures, final boolean replace) {
 		final HtmlRendererContext rcontext = this.rcontext;
-		URL url;
+		final URL url;
 		final HTMLDocumentImpl document = this.document;
 		if (document != null) {
 			url = document.getFullURL(relativeUrl);
@@ -637,7 +637,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	/** {@inheritDoc} */
 	@Override
-	public void resizeBy(double byWidth, final double byHeight) {
+	public void resizeBy(final double byWidth, final double byHeight) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
 			rcontext.resizeBy(byWidth, byHeight);
@@ -688,12 +688,12 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		ActionListener task = null;
 
 		if(aFunction instanceof Function){
-			Function function = (Function) aFunction;
+			final Function function = (Function) aFunction;
 			task = new FunctionTimerTask(this, timeIDInt, function, false);
 		}
 
 		if(aFunction instanceof String){
-			String aExpression = (String) aFunction;
+			final String aExpression = (String) aFunction;
 			task = new ExpressionTimerTask(this, timeIDInt, aExpression, false);
 		}
 
@@ -784,12 +784,12 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		ActionListener task = null;
 
 		if(function instanceof Function) {
-			Function fun = (Function) function;
+			final Function fun = (Function) function;
 			task = new FunctionTimerTask(this, timeIDInt, fun, true);
 		}
 
 		if(function instanceof String){
-			String expr = (String)function;
+			final String expr = (String)function;
 			task = new ExpressionTimerTask(this, timeIDInt, expr, true);
 		}
 
@@ -862,7 +862,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	 * @param innerHeight a boolean.
 	 */
 	@Override
-	public void setInnerHeight(double innerHeight) {
+	public void setInnerHeight(final double innerHeight) {
 		this.innerHeight = Double.valueOf(innerHeight).intValue();
 	}
 
@@ -886,7 +886,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	 * @param innerWidth a boolean.
 	 */
 	@Override
-	public void setInnerWidth(double innerWidth) {
+	public void setInnerWidth(final double innerWidth) {
 		this.innerWidth = Double.valueOf(innerWidth).intValue();
 	}
 
@@ -910,7 +910,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	 * @param outerHeight a boolean.
 	 */
 	@Override
-	public void setOuterHeight(double outerHeight) {
+	public void setOuterHeight(final double outerHeight) {
 		this.outerHeight = Double.valueOf(outerHeight).intValue();
 	}
 
@@ -933,7 +933,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	 * @param outerWidth a boolean.
 	 */
 	@Override
-	public void setOuterWidth(double outerWidth) {
+	public void setOuterWidth(final double outerWidth) {
 		this.outerWidth = Double.valueOf(outerWidth).intValue();
 	}
 
@@ -945,7 +945,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	/** {@inheritDoc} */
 	@Override
-	public String atob(String encodedString) throws DOMException {
+	public String atob(final String encodedString) throws DOMException {
 		final int l = encodedString.length();
 		for (int i = 0; i < l; i++) {
 			if (encodedString.charAt(i) > 255) {
@@ -959,7 +959,8 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	/** {@inheritDoc} */
 	@Override
-	public String btoa(String rawString) {
+	public String btoa(final String rString) {
+		String rawString = rString;
 		if(rawString == null) {
 			rawString = "null";
 		}
@@ -1225,13 +1226,13 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	private void initWindowScope(final Document doc) {
 		final Scriptable ws = this.getWindowScope();
 		final JavaScript js = JavaScript.getInstance();
-		JavaInstantiator jiXhttp = () -> {
-			HTMLDocumentImpl hd = (HTMLDocumentImpl) doc;
+		final JavaInstantiator jiXhttp = () -> {
+			final HTMLDocumentImpl hd = (HTMLDocumentImpl) doc;
 			return new XMLHttpRequest(getUaContext(), hd.getDocumentURL(), ws);
 		};
 
-		JavaInstantiator jidomp = () -> new DOMParserImpl(document);
-		JavaInstantiator jiloc = () -> new LocalStorage(this);
+		final JavaInstantiator jidomp = () -> new DOMParserImpl(document);
+		final JavaInstantiator jiloc = () -> new LocalStorage(this);
 
 		js.defineJsObject(ws, "XMLHttpRequest", XMLHttpRequest.class, jiXhttp);
 		js.defineJsObject(ws, "DOMParser",  DOMParserImpl.class, jidomp);
@@ -1281,11 +1282,11 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	private void clearState() {
 
-		try(Context cx = Context.enter()) {
-			Scriptable s = this.getWindowScope();
+		try(final Context cx = Context.enter()) {
+			final Scriptable s = this.getWindowScope();
 			if (s != null) {
-				Object[] ids = s.getIds();
-				for (Object id : ids) {
+				final Object[] ids = s.getIds();
+				for (final Object id : ids) {
 					if (id instanceof String) {
 						s.delete((String)id);
 					} else if (id instanceof Integer) {

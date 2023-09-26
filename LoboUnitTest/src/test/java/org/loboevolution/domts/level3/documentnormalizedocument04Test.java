@@ -51,13 +51,13 @@ public class documentnormalizedocument04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element elem;
-        Comment newComment;
+        final Comment newComment;
         Node lastChild;
         String nodeName;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         HTMLCollection pList;
         doc = sampleXmlFile("barfoo.xml");

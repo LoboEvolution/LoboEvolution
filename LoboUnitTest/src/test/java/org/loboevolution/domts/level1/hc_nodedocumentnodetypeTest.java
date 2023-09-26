@@ -52,8 +52,8 @@ public class hc_nodedocumentnodetypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        int nodeType;
+        final Document doc;
+        final int nodeType;
         doc = sampleXmlFile("hc_staff.xml");
         nodeType = doc.getNodeType();
         assertEquals("nodeDocumentNodeTypeAssert1", 9, nodeType);

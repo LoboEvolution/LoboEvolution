@@ -35,7 +35,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -54,9 +53,9 @@ public class hc_nodedocumentfragmentnormalize1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        String nodeValue;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final String nodeValue;
         Text txtNode;
         Node retval;
         doc = sampleXmlFile("hc_staff.xml");

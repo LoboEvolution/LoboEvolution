@@ -48,10 +48,10 @@ import static org.junit.Assert.assertNotNull;
 public class nodesettextcontent01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String nodeName;
-        HTMLCollection elemList;
-        Element elem;
+        final Document doc;
+        final String nodeName;
+        final HTMLCollection elemList;
+        final Element elem;
         doc = sampleXmlFile("hc_staff.xml");
         doc.setTextContent("textContent");
         elemList = doc.getElementsByTagName("acronym");

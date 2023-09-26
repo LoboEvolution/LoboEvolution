@@ -54,14 +54,14 @@ public class checkcharacternormalization01Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         HTMLCollection pList;
         Element pElem;
         Text text;
-        String textValue;
+        final String textValue;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         /*DOMErrorMonitor */

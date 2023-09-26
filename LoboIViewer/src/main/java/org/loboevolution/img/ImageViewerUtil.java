@@ -49,9 +49,9 @@ public final class ImageViewerUtil {
 	 * @param others
 	 *            the other viewers
 	 */
-	public static void synchronizeViewers(ImageViewer first, ImageViewer... others) {
-		Synchronizer mainSynchronizer = first.getSynchronizer();
-		for (ImageViewer other : others) {
+	public static void synchronizeViewers(final ImageViewer first, final ImageViewer... others) {
+		final Synchronizer mainSynchronizer = first.getSynchronizer();
+		for (final ImageViewer other : others) {
 			mainSynchronizer.add(other);
 		}
 	}
@@ -63,12 +63,12 @@ public final class ImageViewerUtil {
 	 * @param viewers
 	 *            the viewers to synchronize
 	 */
-	public static void synchronizeViewers(Collection<ImageViewer> viewers) {
-		Iterator<ImageViewer> iterator = viewers.iterator();
+	public static void synchronizeViewers(final Collection<ImageViewer> viewers) {
+		final Iterator<ImageViewer> iterator = viewers.iterator();
 		if (!iterator.hasNext())
 			return;
 
-		Synchronizer mainSynchronizer = iterator.next().getSynchronizer();
+		final Synchronizer mainSynchronizer = iterator.next().getSynchronizer();
 		while (iterator.hasNext()) {
 			mainSynchronizer.add(iterator.next());
 		}
@@ -86,10 +86,10 @@ public final class ImageViewerUtil {
 	 * @param viewers
 	 *            the viewers
 	 */
-	public static void synchronizePixelInfoStatusBars(ImageViewer... viewers) {
+	public static void synchronizePixelInfoStatusBars(final ImageViewer... viewers) {
 		PixelModel model = null;
-		for (ImageViewer viewer : viewers) {
-			StatusBar bar = viewer.getStatusBar();
+		for (final ImageViewer viewer : viewers) {
+			final StatusBar bar = viewer.getStatusBar();
 			if (bar instanceof PixelInfoStatusBar) {
 				if (model == null)
 					model = ((PixelInfoStatusBar) bar).getModel();

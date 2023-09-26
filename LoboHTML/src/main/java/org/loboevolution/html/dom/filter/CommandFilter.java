@@ -37,7 +37,7 @@ public class CommandFilter implements NodeFilter {
      * {@inheritDoc}
      */
     @Override
-    public short acceptNode(Node node) {
+    public short acceptNode(final Node node) {
         return "command".equalsIgnoreCase(node.getNodeName()) ?
                 NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     }

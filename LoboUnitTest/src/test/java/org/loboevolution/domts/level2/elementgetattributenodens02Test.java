@@ -53,8 +53,8 @@ public class elementgetattributenodens02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
+        final Document doc;
+        final Element element;
         Attr attribute;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("namespaceURI", "root");

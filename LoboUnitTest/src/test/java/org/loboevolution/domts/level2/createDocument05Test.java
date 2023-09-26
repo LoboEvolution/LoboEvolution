@@ -63,13 +63,13 @@ public class createDocument05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.ecommerce.org/schema";
+        final String namespaceURI = "http://www.ecommerce.org/schema";
         String qualifiedName;
-        Document doc;
-        DocumentType docType = null;
+        final Document doc;
+        final DocumentType docType = null;
 
         DOMImplementation domImpl;
-        List<String> illegalQNames = new ArrayList<>();
+        final List<String> illegalQNames = new ArrayList<>();
         illegalQNames.add("namespaceURI:{");
         illegalQNames.add("namespaceURI:}");
         illegalQNames.add("namespaceURI:~");
@@ -108,7 +108,7 @@ public class createDocument05Test extends LoboUnitTest {
                 boolean success = false;
                 try {
                     domImpl.createDocument(namespaceURI, qualifiedName, docType);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }
                 assertTrue("throw_INVALID_CHARACTER_ERR", success);

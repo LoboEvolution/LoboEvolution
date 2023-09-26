@@ -53,13 +53,13 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public MintInternalFrameTitlePane(JInternalFrame f) {
+	public MintInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		if (JTattooUtilities.isActive(this)) {
 			setBackground(AbstractLookAndFeel.getTheme().getWindowTitleBackgroundColor());
 			JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, getWidth(),
@@ -73,7 +73,7 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		g.setColor(ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10));
 		g.drawLine(0, getHeight() - 2, getWidth(), getHeight() - 2);
 		g.setColor(Color.white);
@@ -82,7 +82,7 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintPalette(Graphics g) {
+	public void paintPalette(final Graphics g) {
 		if (JTattooUtilities.isFrameActive(this)) {
 			JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, getWidth(),
 					getHeight());

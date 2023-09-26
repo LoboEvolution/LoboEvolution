@@ -55,13 +55,13 @@ public class LunaTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getContentBorderColors(int tabPlacement) {
+	protected Color[] getContentBorderColors(final int tabPlacement) {
 		return SEP_COLOR;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
+	protected Color[] getTabColors(final int tabIndex, final boolean isSelected, final boolean isRollover) {
 		if (isSelected && tabPane.getBackgroundAt(tabIndex) instanceof UIResource) {
 			return SELECTED_TAB_COLOR;
 		} else {
@@ -71,7 +71,7 @@ public class LunaTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Font getTabFont(boolean isSelected) {
+	protected Font getTabFont(final boolean isSelected) {
 		if (isSelected) {
 			return super.getTabFont(isSelected).deriveFont(Font.BOLD);
 		} else {
@@ -102,9 +102,9 @@ public class LunaTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
-			boolean isSelected) {
-		Color backColor = tabPane.getBackgroundAt(tabIndex);
+	protected void paintTabBackground(final Graphics g, final int tabPlacement, final int tabIndex, final int x, final int y, final int w, final int h,
+			final boolean isSelected) {
+		final Color backColor = tabPane.getBackgroundAt(tabIndex);
 		if (isSelected && backColor instanceof UIResource) {
 			if (tabPane.getBackgroundAt(tabIndex) instanceof UIResource) {
 				g.setColor(AbstractLookAndFeel.getBackgroundColor());

@@ -68,8 +68,8 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 	protected void installKeyboardActions() {
 		super.installKeyboardActions();
 		if (JTattooUtilities.isMac()) {
-			InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
-			int commandKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+			final InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
+			final int commandKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, commandKey), DefaultEditorKit.copyAction);
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, commandKey), DefaultEditorKit.pasteAction);
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, commandKey), DefaultEditorKit.cutAction);
@@ -89,12 +89,12 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 			focusListener = new FocusListener() {
 
 				@Override
-				public void focusGained(FocusEvent e) {
+				public void focusGained(final FocusEvent e) {
 					if (getComponent() != null) {
 						orgBorder = getComponent().getBorder();
-						LookAndFeel laf = UIManager.getLookAndFeel();
+						final LookAndFeel laf = UIManager.getLookAndFeel();
 						if (laf instanceof AbstractLookAndFeel && orgBorder instanceof UIResource) {
-							Border focusBorder = ((AbstractLookAndFeel) laf).getBorderFactory().getFocusFrameBorder();
+							final Border focusBorder = ((AbstractLookAndFeel) laf).getBorderFactory().getFocusFrameBorder();
 							getComponent().setBorder(focusBorder);
 						}
 						getComponent().invalidate();
@@ -103,7 +103,7 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 				}
 
 				@Override
-				public void focusLost(FocusEvent e) {
+				public void focusLost(final FocusEvent e) {
 					if (getComponent() != null) {
 						if (orgBorder instanceof UIResource) {
 							getComponent().setBorder(orgBorder);
@@ -119,7 +119,7 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g) {
+	protected void paintBackground(final Graphics g) {
 		g.setColor(getComponent().getBackground());
 		if (AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
 			if (getComponent().hasFocus() && getComponent().isEditable()) {
@@ -131,8 +131,8 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintSafely(Graphics g) {
-		Graphics2D g2D = (Graphics2D) g;
+	protected void paintSafely(final Graphics g) {
+		final Graphics2D g2D = (Graphics2D) g;
 		Object savedRenderingHint = null;
 		if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 			savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);

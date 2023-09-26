@@ -29,63 +29,53 @@ package org.loboevolution.javax.xml.datatype;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+
 import org.loboevolution.javax.xml.namespace.QName;
 
 // Referenced classes of package org.loboevolution.javax.xml.datatype:
 //            DatatypeConstants
 
-public abstract class Duration
-{
+public abstract class Duration {
 
-    public Duration()
-    {
+    public Duration() {
         throw new RuntimeException("Stub!");
     }
 
-    public QName getXMLSchemaType()
-    {
+    public QName getXMLSchemaType() {
         throw new RuntimeException("Stub!");
     }
 
     public abstract int getSign();
 
-    public int getYears()
-    {
+    public int getYears() {
         throw new RuntimeException("Stub!");
     }
 
-    public int getMonths()
-    {
+    public int getMonths() {
         throw new RuntimeException("Stub!");
     }
 
-    public int getDays()
-    {
+    public int getDays() {
         throw new RuntimeException("Stub!");
     }
 
-    public int getHours()
-    {
+    public int getHours() {
         throw new RuntimeException("Stub!");
     }
 
-    public int getMinutes()
-    {
+    public int getMinutes() {
         throw new RuntimeException("Stub!");
     }
 
-    public int getSeconds()
-    {
+    public int getSeconds() {
         throw new RuntimeException("Stub!");
     }
 
-    public long getTimeInMillis(Calendar startInstant)
-    {
+    public long getTimeInMillis(final Calendar startInstant) {
         throw new RuntimeException("Stub!");
     }
 
-    public long getTimeInMillis(Date startInstant)
-    {
+    public long getTimeInMillis(final Date startInstant) {
         throw new RuntimeException("Stub!");
     }
 
@@ -97,18 +87,15 @@ public abstract class Duration
 
     public abstract void addTo(Calendar calendar);
 
-    public void addTo(Date date)
-    {
+    public void addTo(final Date date) {
         throw new RuntimeException("Stub!");
     }
 
-    public Duration subtract(Duration rhs)
-    {
+    public Duration subtract(final Duration rhs) {
         throw new RuntimeException("Stub!");
     }
 
-    public Duration multiply(int factor)
-    {
+    public Duration multiply(final int factor) {
         throw new RuntimeException("Stub!");
     }
 
@@ -120,25 +107,21 @@ public abstract class Duration
 
     public abstract int compare(Duration duration);
 
-    public boolean isLongerThan(Duration duration)
-    {
+    public boolean isLongerThan(final Duration duration) {
         throw new RuntimeException("Stub!");
     }
 
-    public boolean isShorterThan(Duration duration)
-    {
+    public boolean isShorterThan(final Duration duration) {
         throw new RuntimeException("Stub!");
     }
 
-    public boolean equals(Object duration)
-    {
+    public boolean equals(final Object duration) {
         throw new RuntimeException("Stub!");
     }
 
     public abstract int hashCode();
 
-    public String toString()
-    {
+    public String toString() {
         throw new RuntimeException("Stub!");
     }
 }

@@ -57,10 +57,10 @@ public class documentgetdoctypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        String docTypeName;
-        String nodeValue;
+        final Document doc;
+        final DocumentType docType;
+        final String docTypeName;
+        final String nodeValue;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);

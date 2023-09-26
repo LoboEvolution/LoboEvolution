@@ -29,41 +29,33 @@ package org.loboevolution.javax.xml.datatype;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-public class DatatypeConfigurationException extends Exception
-{
+public class DatatypeConfigurationException extends Exception {
 
-    public DatatypeConfigurationException()
-    {
+    public DatatypeConfigurationException() {
         throw new RuntimeException("Stub!");
     }
 
-    public DatatypeConfigurationException(String message)
-    {
+    public DatatypeConfigurationException(final String message) {
         throw new RuntimeException("Stub!");
     }
 
-    public DatatypeConfigurationException(String message, Throwable cause)
-    {
+    public DatatypeConfigurationException(final String message, final Throwable cause) {
         throw new RuntimeException("Stub!");
     }
 
-    public DatatypeConfigurationException(Throwable cause)
-    {
+    public DatatypeConfigurationException(final Throwable cause) {
         throw new RuntimeException("Stub!");
     }
 
-    public void printStackTrace()
-    {
+    public void printStackTrace() {
         throw new RuntimeException("Stub!");
     }
 
-    public void printStackTrace(PrintStream s)
-    {
+    public void printStackTrace(final PrintStream s) {
         throw new RuntimeException("Stub!");
     }
 
-    public void printStackTrace(PrintWriter s)
-    {
+    public void printStackTrace(final PrintWriter s) {
         throw new RuntimeException("Stub!");
     }
 }

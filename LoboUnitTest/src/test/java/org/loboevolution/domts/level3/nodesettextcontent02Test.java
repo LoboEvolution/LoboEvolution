@@ -48,17 +48,17 @@ import static org.junit.Assert.assertEquals;
 public class nodesettextcontent02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Document newDoc;
-        String nodeName;
-        Element elemChild;
-        Element newElem;
-        HTMLCollection elemList;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Document newDoc;
+        final String nodeName;
+        final Element elemChild;
+        final Element newElem;
+        final HTMLCollection elemList;
+        final DocumentType nullDocType = null;
 
-        Node appendedChild;
-        Element documentElem;
+        final Node appendedChild;
+        final Element documentElem;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom3:elem", nullDocType);

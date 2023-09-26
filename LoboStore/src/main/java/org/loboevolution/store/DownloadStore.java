@@ -58,9 +58,9 @@ public class DownloadStore {
 	 *
 	 * @param uri a {@link java.lang.String} object.
 	 */
-	public void addAsRecent(String uri) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(INSERT_DOWNLOAD)) {
+	public void addAsRecent(final String uri) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(INSERT_DOWNLOAD)) {
 			pstmt.setString(1, new URL(uri).toExternalForm());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -72,8 +72,8 @@ public class DownloadStore {
 	 * <p>deleteDownload.</p>
 	 */
 	public void deleteDownload() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_DOWNLOAD)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_DOWNLOAD)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -87,9 +87,9 @@ public class DownloadStore {
 	 */
 	public List<String> getDownload() {
 		final List<String> recent = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DOWNLOAD_ORDERED)) {
-			try (ResultSet rs = pstmt.executeQuery()) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DOWNLOAD_ORDERED)) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					recent.add(rs.getString(1));
 				}

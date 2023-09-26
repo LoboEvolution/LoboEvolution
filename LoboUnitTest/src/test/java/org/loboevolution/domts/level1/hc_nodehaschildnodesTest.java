@@ -55,10 +55,10 @@ public class hc_nodehaschildnodesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        boolean state;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final boolean state;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);

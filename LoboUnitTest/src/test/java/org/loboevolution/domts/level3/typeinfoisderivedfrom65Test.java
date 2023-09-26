@@ -51,11 +51,11 @@ import static org.junit.Assert.assertTrue;
 public class typeinfoisderivedfrom65Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        AttributeTypeInfo elemTypeInfo;
-        HTMLCollection elemList;
-        Element strongElem;
-        boolean retValue;
+        final Document doc;
+        final AttributeTypeInfo elemTypeInfo;
+        final HTMLCollection elemList;
+        final Element strongElem;
+        final boolean retValue;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         strongElem = (Element) elemList.item(0);

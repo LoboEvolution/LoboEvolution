@@ -60,11 +60,11 @@ public class prefix02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        Node textNode;
-        String prefix;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final Node textNode;
+        final String prefix;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employeeId");
         testEmployee = (Element)elementList.item(0);

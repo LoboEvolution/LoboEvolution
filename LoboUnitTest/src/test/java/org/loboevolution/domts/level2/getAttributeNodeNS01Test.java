@@ -60,12 +60,12 @@ public class getAttributeNodeNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.nist.gov";
-        String localName = "invalidlocalname";
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddr;
-        Attr attribute;
+        final String namespaceURI = "http://www.nist.gov";
+        final String localName = "invalidlocalname";
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddr;
+        final Attr attribute;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);

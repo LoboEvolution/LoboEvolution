@@ -53,13 +53,13 @@ class RListItem extends BaseRListElement {
 	 *
 	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RListItem(RBlockInfo info) {
+	public RListItem(final RBlockInfo info) {
 		super(info);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void doLayout(RLayoutInfo info) {
+	public void doLayout(final RLayoutInfo info) {
 		super.doLayout(info);
 		final RenderState renderState = this.modelNode.getRenderState();
 		final Integer value = getValue();
@@ -93,7 +93,7 @@ class RListItem extends BaseRListElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public int getViewportListNesting(int blockNesting) {
+	public int getViewportListNesting(final int blockNesting) {
 		return blockNesting + 1;
 	}
 

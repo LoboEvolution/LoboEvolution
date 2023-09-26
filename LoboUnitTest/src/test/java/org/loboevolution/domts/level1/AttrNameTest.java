@@ -58,11 +58,11 @@ public class AttrNameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection addressList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr streetAttr;
+        final Document doc;
+        final HTMLCollection addressList;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr streetAttr;
         String name;
         doc = sampleXmlFile("staff.xml");
         addressList = doc.getElementsByTagName("address");

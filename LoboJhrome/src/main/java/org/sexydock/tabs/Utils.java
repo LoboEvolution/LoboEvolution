@@ -29,21 +29,21 @@ package org.sexydock.tabs;
 import java.awt.*;
 
 public class Utils {
-    public static Color interpolate(Color a, Color b, float f) {
-        float rf = 1 - f;
-        int red = (int) (a.getRed() * rf + b.getRed() * f);
-        int green = (int) (a.getGreen() * rf + b.getGreen() * f);
-        int blue = (int) (a.getBlue() * rf + b.getBlue() * f);
-        int alpha = (int) (a.getAlpha() * rf + b.getAlpha() * f);
+    public static Color interpolate(final Color a, final Color b, final float f) {
+        final float rf = 1 - f;
+        final int red = (int) (a.getRed() * rf + b.getRed() * f);
+        final int green = (int) (a.getGreen() * rf + b.getGreen() * f);
+        final int blue = (int) (a.getBlue() * rf + b.getBlue() * f);
+        final int alpha = (int) (a.getAlpha() * rf + b.getAlpha() * f);
 
         return new Color(red, green, blue, alpha);
     }
 
-    public static boolean contains(Rectangle r, Point p) {
+    public static boolean contains(final Rectangle r, final Point p) {
         return p.x >= r.x && p.y >= r.y && p.x < r.x + r.width && p.y < r.y + r.height;
     }
 
-    public static boolean contains(Component c, Point p) {
+    public static boolean contains(final Component c, final Point p) {
         return contains(c.getBounds(), p);
     }
 }

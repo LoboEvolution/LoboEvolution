@@ -64,10 +64,10 @@ public class nodeappendchildinvalidnodetypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element rootNode;
-        Node newChild;
-        Node appendedChild;
+        final Document doc;
+        final Element rootNode;
+        final Node newChild;
+        final Node appendedChild;
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();
         newChild = doc.createAttribute("newAttribute");
@@ -76,7 +76,7 @@ public class nodeappendchildinvalidnodetypeTest extends LoboUnitTest {
             boolean success = false;
             try {
                 appendedChild = rootNode.appendChild(newChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

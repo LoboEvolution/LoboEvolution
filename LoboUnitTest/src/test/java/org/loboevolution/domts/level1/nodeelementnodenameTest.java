@@ -57,9 +57,9 @@ public class nodeelementnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element elementNode;
-        String elementName;
+        final Document doc;
+        final Element elementNode;
+        final String elementName;
         doc = sampleXmlFile("staff.xml");
         elementNode = doc.getDocumentElement();
         elementName = elementNode.getNodeName();

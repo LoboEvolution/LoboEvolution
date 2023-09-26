@@ -33,7 +33,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -56,11 +55,11 @@ public class hc_documentcreateelementTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element newElement;
-        String newElementName;
-        int newElementType;
-        String newElementValue;
+        final Document doc;
+        final Element newElement;
+        final String newElementName;
+        final int newElementType;
+        final String newElementValue;
         doc = sampleXmlFile("hc_staff.xml");
         newElement = doc.createElement("ACRONYM");
         newElementName = newElement.getNodeName();

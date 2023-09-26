@@ -60,7 +60,7 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getContentBorderColors(int tabPlacement) {
+	protected Color[] getContentBorderColors(final int tabPlacement) {
 		if (sepColors == null) {
 			sepColors = new Color[5];
 			sepColors[0] = ColorHelper.brighter(AbstractLookAndFeel.getControlColorDark(), 40);
@@ -74,7 +74,7 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Font getTabFont(boolean isSelected) {
+	protected Font getTabFont(final boolean isSelected) {
 		if (isSelected) {
 			return super.getTabFont(isSelected).deriveFont(Font.BOLD);
 		} else {
@@ -91,17 +91,18 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
-							 Rectangle textRect, boolean isSelected) {
-		Color backColor = tabPane.getBackgroundAt(tabIndex);
+	protected void paintText(final Graphics g, final int tabPlacement, final Font font, final FontMetrics metrics,
+							 final int tabIndex, final String title,
+							 final Rectangle textRect, final boolean isSelected) {
+		final Color backColor = tabPane.getBackgroundAt(tabIndex);
 		if (!(backColor instanceof UIResource)) {
 			super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
 		} else {
 			g.setFont(font);
-			View v = getTextViewForTab(tabIndex);
+			final View v = getTextViewForTab(tabIndex);
 			if (v != null) {
 				// html
-				Graphics2D g2D = (Graphics2D) g;
+				final Graphics2D g2D = (Graphics2D) g;
 				Object savedRenderingHint = null;
 				if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 					savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -113,11 +114,11 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
 				}
 			} else {
 				// plain text
-				int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
+				final int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 
 				if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
 					if (isSelected) {
-						Color titleColor = AbstractLookAndFeel.getTabSelectionForegroundColor();
+						final Color titleColor = AbstractLookAndFeel.getTabSelectionForegroundColor();
 						if (ColorHelper.getGrayValue(titleColor) > 164) {
 							g.setColor(Color.black);
 						} else {

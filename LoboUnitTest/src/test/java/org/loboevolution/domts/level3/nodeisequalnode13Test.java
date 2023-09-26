@@ -52,19 +52,19 @@ import static org.junit.Assert.assertTrue;
 public class nodeisequalnode13Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Document newDoc;
-        HTMLCollection employeeList;
-        Element elem1;
-        Element elem2;
-        Element elem3;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Document newDoc;
+        final HTMLCollection employeeList;
+        final Element elem1;
+        final Element elem2;
+        final Element elem3;
         boolean isEqual;
-        DocumentType nullDocType = null;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

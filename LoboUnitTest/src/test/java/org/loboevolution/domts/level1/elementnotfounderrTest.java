@@ -64,10 +64,10 @@ public class elementnotfounderrTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr oldAttribute;
-        HTMLCollection addressElementList;
-        Element testAddress;
+        final Document doc;
+        final Attr oldAttribute;
+        final HTMLCollection addressElementList;
+        final Element testAddress;
         doc = sampleXmlFile("staff.xml");
         addressElementList = doc.getElementsByTagName("address");
         testAddress = (Element) addressElementList.item(4);
@@ -76,7 +76,7 @@ public class elementnotfounderrTest extends LoboUnitTest {
         boolean success = false;
         try {
             testAddress.removeAttributeNode(oldAttribute);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
         assertTrue("throw_NOT_FOUND_ERR", success);

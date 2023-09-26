@@ -39,9 +39,6 @@ import java.io.IOException;
  * </ul>
  *
  * All three of these cases are handled by the getDestination() method.
- *
-  *
-  *
  */
 public class PDFDestination {
 
@@ -84,7 +81,7 @@ public class PDFDestination {
 	 * @param type
 	 *            the type of page this object refers to
 	 */
-	protected PDFDestination(PDFObject pageObj, int type) {
+	protected PDFDestination(final PDFObject pageObj, final int type) {
 		this.pageObj = pageObj;
 		this.type = type;
 	}
@@ -100,7 +97,8 @@ public class PDFDestination {
 	 * @return a {@link org.loboevolution.pdfview.PDFDestination} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public static PDFDestination getDestination(PDFObject obj, PDFObject root) throws IOException {
+	public static PDFDestination getDestination(final PDFObject pdfObj, final PDFObject root) throws IOException {
+		PDFObject obj = pdfObj;
 		// resolve string and name issues
 		if (obj.getType() == PDFObject.NAME) {
 			obj = getDestFromName(obj, root);
@@ -114,11 +112,11 @@ public class PDFDestination {
 		}
 
 		// the array is in the form [page type args ... ]
-		PDFObject[] destArray = obj.getArray();
+		final PDFObject[] destArray = obj.getArray();
 
 		// create the destination based on the type
 		PDFDestination dest = null;
-		String type = destArray[1].getStringValue();
+		final String type = destArray[1].getStringValue();
 		switch (type) {
 		case "XYZ":
 			dest = new PDFDestination(destArray[0], XYZ);
@@ -210,7 +208,7 @@ public class PDFDestination {
 	 *
 	 * @param left a float.
 	 */
-	public void setLeft(float left) {
+	public void setLeft(final float left) {
 		this.left = left;
 	}
 
@@ -228,7 +226,7 @@ public class PDFDestination {
 	 *
 	 * @param right a float.
 	 */
-	public void setRight(float right) {
+	public void setRight(final float right) {
 		this.right = right;
 	}
 
@@ -246,7 +244,7 @@ public class PDFDestination {
 	 *
 	 * @param top a float.
 	 */
-	public void setTop(float top) {
+	public void setTop(final float top) {
 		this.top = top;
 	}
 
@@ -264,7 +262,7 @@ public class PDFDestination {
 	 *
 	 * @param bottom a float.
 	 */
-	public void setBottom(float bottom) {
+	public void setBottom(final float bottom) {
 		this.bottom = bottom;
 	}
 
@@ -282,7 +280,7 @@ public class PDFDestination {
 	 *
 	 * @param zoom a float.
 	 */
-	public void setZoom(float zoom) {
+	public void setZoom(final float zoom) {
 		this.zoom = zoom;
 	}
 
@@ -290,9 +288,9 @@ public class PDFDestination {
 	 * Get a destination, given a name. This means the destination is in the
 	 * root node's dests dictionary.
 	 */
-	private static PDFObject getDestFromName(PDFObject name, PDFObject root) throws IOException {
+	private static PDFObject getDestFromName(final PDFObject name, final PDFObject root) throws IOException {
 		// find the dests object in the root node
-		PDFObject dests = root.getDictRef("Dests");
+		final PDFObject dests = root.getDictRef("Dests");
 		if (dests != null) {
 			// find this name in the dests dictionary
 			return dests.getDictRef(name.getStringValue());
@@ -306,15 +304,15 @@ public class PDFDestination {
 	 * Get a destination, given a string. This means the destination is in the
 	 * root node's names dictionary.
 	 */
-	private static PDFObject getDestFromString(PDFObject str, PDFObject root) throws IOException {
+	private static PDFObject getDestFromString(final PDFObject str, final PDFObject root) throws IOException {
 		// find the names object in the root node
-		PDFObject names = root.getDictRef("Names");
+		final PDFObject names = root.getDictRef("Names");
 		if (names != null) {
 			// find the dests entry in the names dictionary
-			PDFObject dests = names.getDictRef("Dests");
+			final PDFObject dests = names.getDictRef("Dests");
 			if (dests != null) {
 				// create a name tree object
-				NameTree tree = new NameTree(dests);
+				final NameTree tree = new NameTree(dests);
 
 				// find the value we're looking for
 				PDFObject obj = tree.find(str.getStringValue());

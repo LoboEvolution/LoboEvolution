@@ -59,8 +59,8 @@ public class nodecommentnodeattributesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NodeList childList;
+        final Document doc;
+        final NodeList childList;
         Node childNode;
         NamedNodeMap attrList;
         int nodeType;

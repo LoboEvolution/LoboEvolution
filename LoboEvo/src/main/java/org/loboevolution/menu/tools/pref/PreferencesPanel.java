@@ -86,7 +86,7 @@ public class PreferencesPanel extends LoboPanel {
 	 *
 	 * @param ui the new settings ui
 	 */
-	public void setSettingsUI(AbstractToolsUI ui) {
+	public void setSettingsUI(final AbstractToolsUI ui) {
 		this.setting = ui;
 		removeAll();
 		if (ui != null) {

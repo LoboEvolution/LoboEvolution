@@ -50,15 +50,15 @@ import org.loboevolution.html.node.Node;
 public class nodereplacechild10Test extends LoboUnitTest {
 @Test
 public void runTest(){
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entitiesMap;
-        Node ent;
-        Document doc1;
-        DocumentType docType1;
-        NamedNodeMap notationsMap;
-        Notation notation;
-        Node replaced;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entitiesMap;
+        final Node ent;
+        final Document doc1;
+        final DocumentType docType1;
+        final NamedNodeMap notationsMap;
+        final Notation notation;
+        final Node replaced;
         doc=sampleXmlFile("hc_staff.xml");
         docType=doc.getDoctype();
         entitiesMap=docType.getEntities();
@@ -71,7 +71,7 @@ public void runTest(){
         try{
         replaced=doc.replaceChild(notation,ent);
 
-        }catch(DOMException ex){
+        }catch(final DOMException ex){
         switch(ex.getCode()){
         case 8:
         break;

@@ -65,7 +65,7 @@ class Lexer {
    * @param resolver The prefix resolver for mapping qualified name prefixes to namespace URIs.
    * @param xpathProcessor The parser that is processing strings to opcodes.
    */
-  Lexer(Compiler compiler, PrefixResolver resolver, XPathParser xpathProcessor) {
+  Lexer(final Compiler compiler, final PrefixResolver resolver, final XPathParser xpathProcessor) {
 
     m_compiler = compiler;
     m_namespaceContext = resolver;
@@ -78,7 +78,7 @@ class Lexer {
    * @param pat XSLT Expression.
    * @throws org.loboevolution.javax.xml.transform.TransformerException if any
    */
-  void tokenize(String pat) throws org.loboevolution.javax.xml.transform.TransformerException {
+  void tokenize(final String pat) throws org.loboevolution.javax.xml.transform.TransformerException {
     tokenize(pat, null);
   }
 
@@ -89,7 +89,7 @@ class Lexer {
    * @param targetStrings Vector to hold Strings, may be null.
    * @throws org.loboevolution.javax.xml.transform.TransformerException if any
    */
-  void tokenize(String pat, List<String> targetStrings)
+  void tokenize(final String pat, final List<String> targetStrings)
       throws org.loboevolution.javax.xml.transform.TransformerException {
 
     m_compiler.m_currentPattern = pat;
@@ -99,11 +99,11 @@ class Lexer {
     // needs about five time the length of the input path expression - to a
     // maximum of MAXTOKENQUEUESIZE*5. If the OpMapVector needs to grow, grow
     // it freely (second argument to constructor).
-    int initTokQueueSize = (Math.min(pat.length(), OpMap.MAXTOKENQUEUESIZE)) * 5;
+    final int initTokQueueSize = (Math.min(pat.length(), OpMap.MAXTOKENQUEUESIZE)) * 5;
     m_compiler.m_opMap =
         new OpMapVector(initTokQueueSize, OpMap.BLOCKTOKENQUEUESIZE * 5, OpMap.MAPINDEX_LENGTH);
 
-    int nChars = pat.length();
+    final int nChars = pat.length();
     int startSubstring = -1;
     int posOfNSSep = -1;
     boolean isStartOfPat = true;
@@ -317,12 +317,12 @@ class Lexer {
    * @param isAttrName true if we have determined that this is an attribute name.
    * @return true if this is the start of a pattern.
    */
-  private boolean mapPatternElemPos(int nesting, boolean isStart, boolean isAttrName) {
+  private boolean mapPatternElemPos(final int nesting, boolean isStart, final boolean isAttrName) {
 
     if (0 == nesting) {
       if (m_patternMapSize >= m_patternMap.length) {
-        int[] patternMap = m_patternMap;
-        int len = m_patternMap.length;
+        final int[] patternMap = m_patternMap;
+        final int len = m_patternMap.length;
         m_patternMap = new int[m_patternMapSize + 100];
         System.arraycopy(patternMap, 0, m_patternMap, 0, len);
       }
@@ -346,9 +346,9 @@ class Lexer {
    * @param i The index in the m_patternMap.
    * @return the token queue position.
    */
-  private int getTokenQueuePosFromMap(int i) {
+  private int getTokenQueuePosFromMap(final int i) {
 
-    int pos = m_patternMap[i];
+    final int pos = m_patternMap[i];
 
     return (pos >= TARGETEXTRA) ? (pos - TARGETEXTRA) : pos;
   }
@@ -358,9 +358,9 @@ class Lexer {
    *
    * @param mark The new position.
    */
-  private void resetTokenMark(int mark) {
+  private void resetTokenMark(final int mark) {
 
-    int qsz = m_compiler.getTokenQueueSize();
+    final int qsz = m_compiler.getTokenQueueSize();
 
     m_processor.m_queueMark = (mark > 0) ? ((mark <= qsz) ? mark - 1 : mark) : 0;
 
@@ -380,15 +380,15 @@ class Lexer {
    * @param key The keyword.
    * @return An opcode value.
    */
-  final int getKeywordToken(String key) {
+  final int getKeywordToken(final String key) {
 
     int tok;
 
     try {
-      Integer itok = (Integer) Keywords.getKeyWord(key);
+      final Integer itok = (Integer) Keywords.getKeyWord(key);
 
       tok = (null != itok) ? itok.intValue() : 0;
-    } catch (NullPointerException | ClassCastException npe) {
+    } catch (final NullPointerException | ClassCastException npe) {
       tok = 0;
     }
 
@@ -400,14 +400,14 @@ class Lexer {
    *
    * @param targetStrings Vector of string.
    */
-  private void recordTokenString(List<String> targetStrings) {
+  private void recordTokenString(final List<String> targetStrings) {
 
     int tokPos = getTokenQueuePosFromMap(m_patternMapSize - 1);
 
     resetTokenMark(tokPos + 1);
 
     if (m_processor.lookahead('(', 1)) {
-      int tok = getKeywordToken(m_processor.m_token);
+      final int tok = getKeywordToken(m_processor.m_token);
 
       switch (tok) {
         case OpCodes.NODETYPE_COMMENT:
@@ -451,7 +451,7 @@ class Lexer {
    *
    * @param s The token.
    */
-  private void addToTokenQueue(String s) {
+  private void addToTokenQueue(final String s) {
     m_compiler.getTokenQueue().addElement(s);
   }
 
@@ -465,7 +465,7 @@ class Lexer {
    * @throws org.loboevolution.javax.xml.transform.TransformerException if any
    * @return -1 always.
    */
-  private int mapNSTokens(String pat, int startSubstring, int posOfNSSep, int posOfScan)
+  private int mapNSTokens(final String pat, final int startSubstring, final int posOfNSSep, final int posOfScan)
       throws org.loboevolution.javax.xml.transform.TransformerException {
 
     String prefix = "";
@@ -486,7 +486,7 @@ class Lexer {
           if (false) {
             addToTokenQueue(":");
 
-            String s = pat.substring(posOfNSSep + 1, posOfScan);
+            final String s = pat.substring(posOfNSSep + 1, posOfScan);
 
             if (s.length() > 0) addToTokenQueue(s);
 
@@ -495,7 +495,7 @@ class Lexer {
             uName = m_namespaceContext.getNamespaceForPrefix(prefix);
           }
         }
-      } catch (ClassCastException cce) {
+      } catch (final ClassCastException cce) {
         uName = m_namespaceContext.getNamespaceForPrefix(prefix);
       }
     } else {
@@ -506,7 +506,7 @@ class Lexer {
       addToTokenQueue(uName);
       addToTokenQueue(":");
 
-      String s = pat.substring(posOfNSSep + 1, posOfScan);
+      final String s = pat.substring(posOfNSSep + 1, posOfScan);
 
       if (s.length() > 0) addToTokenQueue(s);
     } else {

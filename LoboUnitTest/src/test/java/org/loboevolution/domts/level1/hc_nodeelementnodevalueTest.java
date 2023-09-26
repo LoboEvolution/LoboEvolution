@@ -50,9 +50,9 @@ public class hc_nodeelementnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element elementNode;
-        String elementValue;
+        final Document doc;
+        final Element elementNode;
+        final String elementValue;
         doc = sampleXmlFile("hc_staff.xml");
         elementNode = doc.getDocumentElement();
         elementValue = elementNode.getNodeValue();

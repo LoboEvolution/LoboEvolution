@@ -61,16 +61,16 @@ public class PropertiesJTable extends JTable {
      * @param col a {@link java.lang.Integer} object
      * @return The cellRenderer value
      */
-    public TableCellRenderer getCellRenderer(int row, int col) {
-        JLabel label = (JLabel) super.getCellRenderer(row, col);
+    public TableCellRenderer getCellRenderer(final int row, final int col) {
+        final JLabel label = (JLabel) super.getCellRenderer(row, col);
         label.setBackground(Color.white);
         label.setFont(defaultFont);
         if (col == 0) {
             label.setFont(propLabelFont);
         } else if (col == 2) {
-            PropertiesTableModel pmodel = (PropertiesTableModel) this.getModel();
-            Map.Entry me = (Map.Entry) pmodel.properties.entrySet().toArray()[row];
-            Color color = ColorFactory.getInstance().getColor((String) me.getValue());
+            final PropertiesTableModel pmodel = (PropertiesTableModel) this.getModel();
+            final Map.Entry me = (Map.Entry) pmodel.properties.entrySet().toArray()[row];
+            final Color color = ColorFactory.getInstance().getColor((String) me.getValue());
             if (color != null)
                 label.setBackground(color);
         }

@@ -62,12 +62,12 @@ public class GoogleChromeData extends BrowserData {
 
 	private static final String CHROME_HISTORY = "SELECT DISTINCT url, title from urls";
 
-	private static List<BookmarkInfo> getBookmarkInfo(String path) {
+	private static List<BookmarkInfo> getBookmarkInfo(final String path) {
 		final List<BookmarkInfo> listInfo = new ArrayList<>();
 		final File f = new File(path);
 
-		try (Scanner scan = new Scanner(f)) {
-			StringBuilder str = new StringBuilder();
+		try (final Scanner scan = new Scanner(f)) {
+			final StringBuilder str = new StringBuilder();
 			while (scan.hasNext()) {
 				str.append(scan.nextLine());
 			}
@@ -91,11 +91,11 @@ public class GoogleChromeData extends BrowserData {
 		return listInfo;
 	}
 
-	private static List<CookieInfo> getCookieInfo(String path) {
+	private static List<CookieInfo> getCookieInfo(final String path) {
 		final List<CookieInfo> cookies = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(CHROME_COOKIES);
-				ResultSet rs = pstmt.executeQuery()) {
+		try (final Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
+             final PreparedStatement pstmt = conn.prepareStatement(CHROME_COOKIES);
+             final ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				cookies.add(CookieInfo.builder()
 						.domain(rs.getString(2))
@@ -113,13 +113,13 @@ public class GoogleChromeData extends BrowserData {
 		return cookies;
 	}
 
-	private static List<BookmarkInfo> getHostEntries(String path) {
+	private static List<BookmarkInfo> getHostEntries(final String path) {
 		final List<BookmarkInfo> hostEntries = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
-			 PreparedStatement pstmt = conn.prepareStatement(CHROME_HISTORY);
-			 ResultSet rs = pstmt.executeQuery()) {
+		try (final Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
+             final PreparedStatement pstmt = conn.prepareStatement(CHROME_HISTORY);
+             final ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
-				BookmarkInfo info = new BookmarkInfo();
+				final BookmarkInfo info = new BookmarkInfo();
 				info.setUrl(rs.getString(1));
 				info.setTitle(rs.getString(2));
 				hostEntries.add(info);

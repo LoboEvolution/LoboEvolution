@@ -66,32 +66,32 @@ public class ElementPropertiesPanel extends JPanel {
      *
      * @param node a {@link org.loboevolution.html.node.Node} object.
      */
-    public void setForElement(Node node) {
+    public void setForElement(final Node node) {
         try {
             _properties.setModel(tableModel(node));
-            TableColumnModel model = _properties.getColumnModel();
+            final TableColumnModel model = _properties.getColumnModel();
             if (model.getColumnCount() > 0) {
                 model.getColumn(0).sizeWidthToFit();
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ex.printStackTrace();
         }
     }
 
-     private TableModel tableModel(Node node) {
+     private TableModel tableModel(final Node node) {
         if (node.getNodeType() != Node.ELEMENT_NODE) {
             Toolkit.getDefaultToolkit().beep();
             return _defaultTableModel;
         }
 
-        HTMLElementImpl elm = (HTMLElementImpl) node;
-        Map<String, String> cssProperties = new HashMap<>();
+        final HTMLElementImpl elm = (HTMLElementImpl) node;
+        final Map<String, String> cssProperties = new HashMap<>();
 
         final String classNames = elm.getClassName();
         final String elementName = elm.getTagName();
         final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = elm.findStyleDeclarations(elementName, classNameArray, false);
-        for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
+        for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
             final CSSStyleDeclarationImpl styleDeclaration = entry.getRule().getStyle();
             styleDeclaration.getProperties().forEach(prop -> {
                 final String propertyName = prop.getName();

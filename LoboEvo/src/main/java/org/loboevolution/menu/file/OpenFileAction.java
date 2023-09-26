@@ -56,7 +56,7 @@ public class OpenFileAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public OpenFileAction(BrowserFrame frame) {
+	public OpenFileAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 
@@ -73,7 +73,7 @@ public class OpenFileAction extends AbstractAction {
 			final int indexPanel = panel.getTabbedPane().getIndex() +1;
 			final ITabbedPane tabbedPane = panel.getTabbedPane();
 			tabbedPane.setComponentPopupMenu(panel);
-			HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
+			final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 			tabbedPane.insertTab(title, null, hpanel, title, indexPanel);

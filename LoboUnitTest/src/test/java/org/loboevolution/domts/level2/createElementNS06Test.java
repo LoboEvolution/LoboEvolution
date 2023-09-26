@@ -52,11 +52,11 @@ public class createElementNS06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.example.com/";
+        final String namespaceURI = "http://www.example.com/";
         String qualifiedName;
-        Document doc;
+        final Document doc;
         boolean done;
-        Element newElement;
+        final Element newElement;
         String charact;
         doc = sampleXmlFile("hc_staff.xml");
 
@@ -64,7 +64,7 @@ public class createElementNS06Test extends LoboUnitTest {
             boolean success = false;
             try {
                 newElement = doc.createElementNS(namespaceURI, "");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

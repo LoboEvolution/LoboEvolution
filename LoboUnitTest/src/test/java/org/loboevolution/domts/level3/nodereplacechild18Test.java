@@ -45,14 +45,14 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild18Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        EntityReference entRef;
-        CDATASection cdata;
-        CDATASection replacedCData;
-        EntityReference replacedEref;
-        String cdataName;
-        String erefName;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final EntityReference entRef;
+        final CDATASection cdata;
+        final CDATASection replacedCData;
+        final EntityReference replacedEref;
+        final String cdataName;
+        final String erefName;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();

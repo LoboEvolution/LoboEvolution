@@ -47,9 +47,9 @@ import static org.junit.Assert.assertNull;
 public class nodegetbaseuri03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        String baseURI;
+        final Document doc;
+        final DocumentType docType;
+        final String baseURI;
         doc = sampleXmlFile("barfoo.xml");
         docType = doc.getDoctype();
         baseURI = docType.getBaseURI();

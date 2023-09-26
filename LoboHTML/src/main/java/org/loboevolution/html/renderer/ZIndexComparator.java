@@ -38,7 +38,7 @@ public class ZIndexComparator implements Comparator<Object> {
 
 	/** {@inheritDoc} */
 	@Override
-	public int compare(Object object1, Object object2) {
+	public int compare(final Object object1, final Object object2) {
 		final PositionedRenderable element1 = (PositionedRenderable) object1;
 		final PositionedRenderable element2 = (PositionedRenderable) object2;
 		final int zIndex1 = element1.getRenderable().getZIndex();

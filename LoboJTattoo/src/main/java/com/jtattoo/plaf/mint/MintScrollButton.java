@@ -46,7 +46,7 @@ public class MintScrollButton extends XPScrollButton {
 	 * @param direction a int.
 	 * @param width a int.
 	 */
-	public MintScrollButton(int direction, int width) {
+	public MintScrollButton(final int direction, final int width) {
 		super(direction, width);
 	}
 

@@ -76,7 +76,7 @@ public class FormField {
 	 * @param type    the type
 	 * @param caption the caption
 	 */
-	public FormField(final FieldType type, String caption) {
+	public FormField(final FieldType type, final String caption) {
 		this(type, caption, true);
 	}
 
@@ -196,7 +196,7 @@ public class FormField {
 	 *
 	 * @param caption the new caption
 	 */
-	public void setCaption(String caption) {
+	public void setCaption(final String caption) {
 		getLabel().setText(caption);
 	}
 
@@ -205,7 +205,7 @@ public class FormField {
 	 *
 	 * @param editable the new editable
 	 */
-	public void setEditable(boolean editable) {
+	public void setEditable(final boolean editable) {
 		final JComponent fe = getFieldEditor();
 		if (fe instanceof JTextComponent) {
 			((JTextComponent) fe).setEditable(editable);
@@ -217,7 +217,7 @@ public class FormField {
 	 *
 	 * @param tooltip the new tool tip
 	 */
-	public void setToolTip(String tooltip) {
+	public void setToolTip(final String tooltip) {
 		getFieldEditor().setToolTipText(tooltip);
 	}
 
@@ -226,7 +226,7 @@ public class FormField {
 	 *
 	 * @param value the new value
 	 */
-	public void setValue(String value) {
+	public void setValue(final String value) {
 		final JComponent fe = getFieldEditor();
 		if (fe instanceof JTextComponent) {
 			((JTextComponent) fe).setText(value);

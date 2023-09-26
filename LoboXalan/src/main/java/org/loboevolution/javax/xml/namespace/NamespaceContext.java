@@ -28,12 +28,11 @@ package org.loboevolution.javax.xml.namespace;
 
 import java.util.Iterator;
 
-public interface NamespaceContext
-{
+public interface NamespaceContext {
 
-    public abstract String getNamespaceURI(String s);
+    public abstract String getNamespaceURI(final String s);
 
-    public abstract String getPrefix(String s);
+    public abstract String getPrefix(final String s);
 
-    public abstract Iterator getPrefixes(String s);
+    public abstract Iterator getPrefixes(final String s);
 }

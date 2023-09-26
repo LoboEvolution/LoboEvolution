@@ -57,14 +57,14 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+	protected void paintThumb(final Graphics g, final JComponent c, final Rectangle thumbBounds) {
 		if (!c.isEnabled()) {
 			return;
 		}
 
 		g.translate(thumbBounds.x, thumbBounds.y);
 
-		Color[] colors = getThumbColors();
+		final Color[] colors = getThumbColors();
 		Color frameColor = AbstractLookAndFeel.getFrameColor();
 		if (!JTattooUtilities.isActive(scrollbar)) {
 			frameColor = ColorHelper.brighter(frameColor, 80);
@@ -79,18 +79,18 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
 			JTattooUtilities.draw3DBorder(g, frameColor, ColorHelper.darker(frameColor, 15), 0, 0, thumbBounds.width,
 					thumbBounds.height);
 
-			Graphics2D g2D = (Graphics2D) g;
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 			g2D.setComposite(alpha);
 
 			if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
-				int dx = 5;
+				final int dx = 5;
 				int dy = thumbBounds.height / 2 - 3;
-				int dw = thumbBounds.width - 11;
+				final int dw = thumbBounds.width - 11;
 
-				Color c1 = Color.white;
-				Color c2 = Color.darkGray;
+				final Color c1 = Color.white;
+				final Color c2 = Color.darkGray;
 
 				for (int i = 0; i < 4; i++) {
 					g.setColor(c1);
@@ -108,17 +108,17 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
 					thumbBounds.height);
 
 			int dx = thumbBounds.width / 2 - 3;
-			int dy = 5;
-			int dh = thumbBounds.height - 11;
+			final int dy = 5;
+			final int dh = thumbBounds.height - 11;
 
-			Graphics2D g2D = (Graphics2D) g;
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 			g2D.setComposite(alpha);
 
 			if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
-				Color c1 = Color.white;
-				Color c2 = Color.darkGray;
+				final Color c1 = Color.white;
+				final Color c2 = Color.darkGray;
 
 				for (int i = 0; i < 4; i++) {
 					g.setColor(c1);

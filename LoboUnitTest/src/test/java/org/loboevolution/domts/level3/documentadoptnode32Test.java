@@ -54,11 +54,11 @@ public class documentadoptnode32Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document docAdopter;
-        Node newCDATA;
-        Node adoptedCDATA;
-        String nodeValue;
+        final Document doc;
+        final Document docAdopter;
+        final Node newCDATA;
+        final Node adoptedCDATA;
+        final String nodeValue;
         doc = sampleXmlFile("hc_staff.xml");
         docAdopter = sampleXmlFile("hc_staff.xml");
         newCDATA = doc.createCDATASection("Document.adoptNode test for a CDATASECTION_NODE");

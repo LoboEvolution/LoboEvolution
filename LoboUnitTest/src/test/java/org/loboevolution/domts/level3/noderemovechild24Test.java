@@ -47,12 +47,12 @@ import static org.junit.Assert.assertTrue;
 public class noderemovechild24Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entitiesMap;
-        Node alphaEntity;
-        Text alphaText;
-        Text removed;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entitiesMap;
+        final Node alphaEntity;
+        final Text alphaText;
+        final Text removed;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
@@ -65,7 +65,7 @@ public class noderemovechild24Test extends LoboUnitTest {
             boolean success = false;
             try {
                 removed = (Text) alphaEntity.removeChild(alphaText);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

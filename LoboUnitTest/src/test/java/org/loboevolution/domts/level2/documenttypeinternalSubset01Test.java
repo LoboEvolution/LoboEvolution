@@ -55,11 +55,11 @@ public class documenttypeinternalSubset01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        DOMImplementation domImpl;
-        String internal;
-        String nullNS = null;
+        final Document doc;
+        final DocumentType docType;
+        final DOMImplementation domImpl;
+        final String internal;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         domImpl = doc.getImplementation();

@@ -49,10 +49,10 @@ import static org.junit.Assert.assertEquals;
 public class nodegetbaseuri10Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        ProcessingInstruction newPI;
-        String baseURI;
+        final Document doc;
+        final Element docElem;
+        final ProcessingInstruction newPI;
+        final String baseURI;
         doc = sampleXmlFile("barfoo_base.xml");
         docElem = doc.getDocumentElement();
         newPI = doc.createProcessingInstruction("TARGET", "DATA");

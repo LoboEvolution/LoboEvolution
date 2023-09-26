@@ -46,15 +46,15 @@ import static org.junit.Assert.assertTrue;
 public class noderemovechild02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Document newDoc;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Document newDoc;
         Node removed;
-        DocumentType nullDocType = null;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
@@ -66,7 +66,7 @@ public class noderemovechild02Test extends LoboUnitTest {
             boolean success = false;
             try {
                 removed = doc.removeChild(newDoc);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR_1", success);
@@ -76,7 +76,7 @@ public class noderemovechild02Test extends LoboUnitTest {
             boolean success = false;
             try {
                 removed = newDoc.removeChild(doc);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR_2", success);

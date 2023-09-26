@@ -59,12 +59,12 @@ public class domimplementationregistry23Test extends LoboUnitTest {
         boolean hasXML;
         boolean hasEvents;
         boolean hasLS;
-        DOMImplementation baseImpl;
-        String nullVersion = null;
+        final DOMImplementation baseImpl;
+        final String nullVersion = null;
 
-        DOMImplementationList domImplList;
-        int length;
-         DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationList domImplList;
+        final int length;
+         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS");
         length = (int) domImplList.getLength();

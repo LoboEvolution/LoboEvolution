@@ -49,7 +49,7 @@ public class FitHeightAction extends AbstractAction {
 	 *
 	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public FitHeightAction(PDFViewer dialog) {
+	public FitHeightAction(final PDFViewer dialog) {
 		super("Fit Height", dialog.getIcon("/org/loboevolution/images/fit-height.png"));
 		this.dialog = dialog;
 	}

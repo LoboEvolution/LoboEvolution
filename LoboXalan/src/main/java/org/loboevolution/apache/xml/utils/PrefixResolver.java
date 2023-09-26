@@ -40,7 +40,7 @@ public interface PrefixResolver {
    *     Namespace.
    * @return The associated Namespace URI, or null if the prefix is undeclared in this context.
    */
-  String getNamespaceForPrefix(String prefix);
+  String getNamespaceForPrefix(final String prefix);
 
   /**
    * Given a namespace, get the corresponding prefix, based on the context node.
@@ -51,7 +51,7 @@ public interface PrefixResolver {
    * @return The associated Namespace URI as a string, or null if the prefix is undeclared in this
    *     context.
    */
-  String getNamespaceForPrefix(String prefix, org.loboevolution.html.node.Node context);
+  String getNamespaceForPrefix(final String prefix, org.loboevolution.html.node.Node context);
 
   boolean handlesNullPrefixes();
 }

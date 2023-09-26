@@ -69,15 +69,15 @@ public class PDFColorSpace {
     private static final PDFColorSpace graySpace;
 
 	static {
-		boolean useSGray = true;
+		final boolean useSGray = true;
 
 		try {
-			URL resource = PDFColorSpace.class.getResource("/org/loboevolution/pdfview/colorspace/sGray.icc");
-			try (InputStream stream = resource.openStream()) {
+			final URL resource = PDFColorSpace.class.getResource("/org/loboevolution/pdfview/colorspace/sGray.icc");
+			try (final InputStream stream = resource.openStream()) {
 				graySpace = new PDFColorSpace((!useSGray) ? ColorSpace.getInstance(ColorSpace.CS_GRAY)
 						: new ICC_ColorSpace(ICC_Profile.getInstance(stream)));
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -90,7 +90,7 @@ public class PDFColorSpace {
      *
      * @param cs the Java ColorSpace
      */
-    public PDFColorSpace(ColorSpace cs) {
+    public PDFColorSpace(final ColorSpace cs) {
         this.cs = cs;
     }
 
@@ -100,7 +100,7 @@ public class PDFColorSpace {
      * @param name the name of one of the device-dependent color spaces
      * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
      */
-    public static PDFColorSpace getColorSpace(int name) {
+    public static PDFColorSpace getColorSpace(final int name) {
         switch (name) {
         case COLORSPACE_GRAY:
         case ColorSpace.CS_GRAY:
@@ -130,7 +130,7 @@ public class PDFColorSpace {
      * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
      * @throws java.io.IOException if any.
      */
-    public static PDFColorSpace getColorSpace(PDFObject csobj, Map resources)
+    public static PDFColorSpace getColorSpace(PDFObject csobj, final Map resources)
         throws IOException {
         String name;
 
@@ -165,7 +165,7 @@ public class PDFColorSpace {
         PDFColorSpace value = null;
 
         // csobj is [/name <<dict>>]
-        PDFObject[] ary = csobj.getArray();
+        final PDFObject[] ary = csobj.getArray();
         name = ary[0].getStringValue();
 
         switch (name) {
@@ -189,20 +189,20 @@ public class PDFColorSpace {
                 break;
             case "ICCBased":
                 try {
-                    ByteArrayInputStream bais = new ByteArrayInputStream(ary[1].getStream());
-                    ICC_Profile profile = ICC_Profile.getInstance(bais);
+                    final ByteArrayInputStream bais = new ByteArrayInputStream(ary[1].getStream());
+                    final ICC_Profile profile = ICC_Profile.getInstance(bais);
                     if (profile.getColorSpaceType() == ColorSpace.CS_GRAY || profile.getColorSpaceType() == ColorSpace.TYPE_GRAY) {
                         return graySpace;
                     }
                     value = new PDFColorSpace(new ICC_ColorSpace(profile));
-                } catch (IllegalArgumentException e) {
+                } catch (final IllegalArgumentException e) {
                     return getColorSpace(COLORSPACE_RGB);
                 }
                 break;
             case "Separation":
             case "DeviceN":
-                PDFColorSpace alternate = getColorSpace(ary[2], resources);
-                PDFFunction function = PDFFunction.getFunction(ary[3]);
+                final PDFColorSpace alternate = getColorSpace(ary[2], resources);
+                final PDFFunction function = PDFFunction.getFunction(ary[3]);
                 value = new AlternateColorSpace(alternate, function);
                 break;
             case "Indexed":
@@ -210,13 +210,13 @@ public class PDFColorSpace {
                 /**
                  * 4.5.5 [/Indexed baseColor hival lookup]
                  */
-                PDFColorSpace refspace = getColorSpace(ary[1], resources);
+                final PDFColorSpace refspace = getColorSpace(ary[1], resources);
 
                 // number of indices= ary[2], data is in ary[3];
-                int count = ary[2].getIntValue();
+                final int count = ary[2].getIntValue();
                 try {
                     value = new IndexedColor(refspace, count, ary[3]);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     // there might be problems in reading the colorspace from stream,
                     // in that case use the reference colorspace
                     value = refspace;
@@ -228,7 +228,7 @@ public class PDFColorSpace {
                     return getColorSpace(COLORSPACE_PATTERN);
                 }
 
-                PDFColorSpace base = getColorSpace(ary[1], resources);
+                final PDFColorSpace base = getColorSpace(ary[1], resources);
 
                 return new PatternSpace(base);
             default:
@@ -259,8 +259,8 @@ public class PDFColorSpace {
      * @return a PDFPaint object representing the closest Color to the
      * given components.
      */
-    public PDFPaint getPaint(float[] components) {
-        float[] rgb = this.cs.toRGB(components);
+    public PDFPaint getPaint(final float[] components) {
+        final float[] rgb = this.cs.toRGB(components);
 
         return PDFPaint.getColorPaint(new Color(rgb[0], rgb[1], rgb[2]));
     }

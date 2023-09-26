@@ -51,12 +51,12 @@ public class CookieUI extends AbstractToolsUI {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public CookieUI(BrowserFrame frame) {
+    public CookieUI(final BrowserFrame frame) {
         final ToolBar toolbar = frame.getToolbar();
         add(createAndShowGUI(CookieManager.getCookieList(toolbar.getAddressBar().getText())));
     }
 
-    private JScrollPane createAndShowGUI(List<CookieInfo> cookieList) {
+    private JScrollPane createAndShowGUI(final List<CookieInfo> cookieList) {
         final Object[] columnNames = { "Key", "Value", "Expires" };
 
         final List<String[]> values = new ArrayList<>();

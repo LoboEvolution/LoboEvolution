@@ -50,11 +50,11 @@ import static org.junit.Assert.assertTrue;
 public class nodesettextcontent12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        EntityReference entRef;
+        final Document doc;
+        final Element elem;
+        final EntityReference entRef;
         String textContent;
-        Node appendedChild;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.getDocumentElement();
         entRef = doc.createEntityReference("beta");
@@ -64,7 +64,7 @@ public class nodesettextcontent12Test extends LoboUnitTest {
             boolean success = false;
             try {
                 entRef.setTextContent("NA");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("nodesettextcontent12", success);

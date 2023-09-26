@@ -48,11 +48,11 @@ public final class McWinUtils {
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Component} object.
 	 */
-	public static void fillComponent(Graphics g, Component c) {
+	public static void fillComponent(final Graphics g, final Component c) {
 		if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
-			int w = c.getWidth();
-			int h = c.getHeight();
-			Point p = JTattooUtilities.getRelLocation(c);
+			final int w = c.getWidth();
+			final int h = c.getHeight();
+			final Point p = JTattooUtilities.getRelLocation(c);
 			int y = 2 - p.y % 3;
 			g.setColor(AbstractLookAndFeel.getTheme().getBackgroundColorLight());
 			g.fillRect(0, 0, w, h);
@@ -74,14 +74,14 @@ public final class McWinUtils {
 	 * @param c a {@link java.awt.Component} object.
 	 * @param colors an array of {@link java.awt.Color} objects.
 	 */
-	public static void fillComponent(Graphics g, Component c, Color[] colors) {
-		int w = c.getWidth();
-		int h = c.getHeight();
+	public static void fillComponent(final Graphics g, final Component c, final Color[] colors) {
+		final int w = c.getWidth();
+		final int h = c.getHeight();
 		JTattooUtilities.fillHorGradient(g, colors, 0, 0, w, h);
 		if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
-			Point p = JTattooUtilities.getRelLocation(c);
+			final Point p = JTattooUtilities.getRelLocation(c);
 			int y = 2 - p.y % 3;
-			Color lc = AbstractLookAndFeel.getTheme().getBackgroundColorDark();
+			final Color lc = AbstractLookAndFeel.getTheme().getBackgroundColorDark();
 			Color lineColor = ColorHelper.brighter(ColorHelper.median(lc, colors[colors.length - 1]), 50);
 			while (y < h) {
 				g.setColor(lineColor);

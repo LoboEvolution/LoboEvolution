@@ -48,11 +48,11 @@ import static org.junit.Assert.assertEquals;
 public class nodegettextcontent18Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        Node entity;
-        NamedNodeMap entitymap;
-        String textContent;
+        final Document doc;
+        final DocumentType docType;
+        final Node entity;
+        final NamedNodeMap entitymap;
+        final String textContent;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitymap = docType.getEntities();

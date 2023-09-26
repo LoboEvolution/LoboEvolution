@@ -54,11 +54,11 @@ public class nodeentitynodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entities;
-        Node entityNode;
-        String entityValue;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entities;
+        final Node entityNode;
+        final String entityValue;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);

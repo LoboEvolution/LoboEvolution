@@ -55,14 +55,14 @@ public class attrgetownerelement01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr attr;
-        Element element;
-        Node ownerElement;
-        String ownerElementName;
-        HTMLCollection elementList;
-        NamedNodeMap attributes;
-        String nullNS = null;
+        final Document doc;
+        final Attr attr;
+        final Element element;
+        final Node ownerElement;
+        final String ownerElementName;
+        final HTMLCollection elementList;
+        final NamedNodeMap attributes;
+        final String nullNS = null;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName( "employee");
         element = (Element) elementList.item(1);

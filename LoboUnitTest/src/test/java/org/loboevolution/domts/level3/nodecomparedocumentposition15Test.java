@@ -45,15 +45,15 @@ import static org.junit.Assert.assertEquals;
 public class nodecomparedocumentposition15Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Element docElem;
-        Attr attr;
-        Node docFragChild;
-        int attrPosition;
-        int docFragChildPosition;
-        Node appendedChild;
-        Node attrNode;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Element docElem;
+        final Attr attr;
+        final Node docFragChild;
+        final int attrPosition;
+        final int docFragChildPosition;
+        final Node appendedChild;
+        final Node attrNode;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         docFrag = doc.createDocumentFragment();

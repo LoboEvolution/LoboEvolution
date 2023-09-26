@@ -65,10 +65,10 @@ public class characterdataindexsizeerrreplacedataoffsetgreaterTest extends LoboU
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        CharacterData child;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final CharacterData child;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         nameNode = elementList.item(0);
@@ -78,7 +78,7 @@ public class characterdataindexsizeerrreplacedataoffsetgreaterTest extends LoboU
             boolean success = false;
             try {
                 child.replaceData(40, 3, "ABC");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }
             assertTrue("throw_INDEX_SIZE_ERR", success);

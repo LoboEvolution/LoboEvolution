@@ -137,8 +137,8 @@ public abstract class XMLEventFactory {
    *              #newFactory(java.lang.String, java.lang.ClassLoader)}
    *              method defines no changes in behavior.
    */
-  public static XMLEventFactory newInstance(String factoryId,
-          ClassLoader classLoader)
+  public static XMLEventFactory newInstance(final String factoryId,
+                                            final ClassLoader classLoader)
           throws FactoryConfigurationError {
       //do not fallback if given classloader can't find the class, throw exception
       return FactoryFinder.find(XMLEventFactory.class, factoryId, classLoader, null);
@@ -183,7 +183,7 @@ public abstract class XMLEventFactory {
    * <p>
    * Note that this is a new method that replaces the deprecated
    *   {@link #newInstance(java.lang.String, java.lang.ClassLoader)
-   *   newInstance(String factoryId, ClassLoader classLoader)} method.
+   *   newInstance(final String factoryId, ClassLoader classLoader)} method.
    * No changes in behavior are defined by this replacement method relative
    * to the deprecated method.
    * </p>
@@ -200,8 +200,8 @@ public abstract class XMLEventFactory {
    *   java.util.ServiceConfigurationError service configuration error} or if
    *   the implementation is not available or cannot be instantiated.
    */
-  public static XMLEventFactory newFactory(String factoryId,
-                                           ClassLoader classLoader)
+  public static XMLEventFactory newFactory(final String factoryId,
+                                           final ClassLoader classLoader)
           throws FactoryConfigurationError {
       //do not fallback if given classloader can't find the class, throw exception
       return FactoryFinder.find(XMLEventFactory.class, factoryId, classLoader, null);
@@ -224,7 +224,7 @@ public abstract class XMLEventFactory {
    * @param value the attribute value to set, may not be null
    * @return the Attribute with specified values
    */
-  public abstract Attribute createAttribute(String prefix, String namespaceURI, String localName, String value);
+  public abstract Attribute createAttribute(final String prefix, final String namespaceURI, final String localName, final String value);
 
   /**
    * Create a new Attribute
@@ -232,7 +232,7 @@ public abstract class XMLEventFactory {
    * @param value the attribute value to set, may not be null
    * @return the Attribute with specified values
    */
-  public abstract Attribute createAttribute(String localName, String value);
+  public abstract Attribute createAttribute(final String localName, final String value);
 
   /**
    * Create a new Attribute
@@ -240,14 +240,14 @@ public abstract class XMLEventFactory {
    * @param value the attribute value to set, may not be null
    * @return the Attribute with specified values
    */
-  public abstract Attribute createAttribute(QName name, String value);
+  public abstract Attribute createAttribute(QName name, final String value);
 
   /**
    * Create a new default Namespace
    * @param namespaceURI the default namespace uri
    * @return the Namespace with the specified value
    */
-  public abstract Namespace createNamespace(String namespaceURI);
+  public abstract Namespace createNamespace(final String namespaceURI);
 
   /**
    * Create a new Namespace
@@ -255,7 +255,7 @@ public abstract class XMLEventFactory {
    * @param namespaceUri the attribute value is set to this value, may not be null
    * @return the Namespace with the specified values
    */
-  public abstract Namespace createNamespace(String prefix, String namespaceUri);
+  public abstract Namespace createNamespace(final String prefix, final String namespaceUri);
 
   /**
    * Create a new StartElement.  Namespaces can be added to this StartElement
@@ -284,7 +284,7 @@ public abstract class XMLEventFactory {
    * @param prefix the prefix of the QName of the new StartElement
    * @return an instance of the requested StartElement
    */
-  public abstract StartElement createStartElement(String prefix,
+  public abstract StartElement createStartElement(final String prefix,
                                                   String namespaceUri,
                                                   String localName);
   /**
@@ -302,7 +302,7 @@ public abstract class XMLEventFactory {
    * Namespace to add to the new StartElement
    * @return an instance of the requested StartElement
    */
-  public abstract StartElement createStartElement(String prefix,
+  public abstract StartElement createStartElement(final String prefix,
                                                   String namespaceUri,
                                                   String localName,
                                                   Iterator attributes,
@@ -324,7 +324,7 @@ public abstract class XMLEventFactory {
    * @param context the namespace context of this element
    * @return an instance of the requested StartElement
    */
-  public abstract StartElement createStartElement(String prefix,
+  public abstract StartElement createStartElement(final String prefix,
                                                   String namespaceUri,
                                                   String localName,
                                                   Iterator attributes,
@@ -349,7 +349,7 @@ public abstract class XMLEventFactory {
    * @param prefix the prefix of the QName of the new StartElement
    * @return an instance of the requested EndElement
    */
-  public abstract EndElement createEndElement(String prefix,
+  public abstract EndElement createEndElement(final String prefix,
                                               String namespaceUri,
                                               String localName);
   /**
@@ -361,7 +361,7 @@ public abstract class XMLEventFactory {
    * Namespace that have gone out of scope, may be null
    * @return an instance of the requested EndElement
    */
-  public abstract EndElement createEndElement(String prefix,
+  public abstract EndElement createEndElement(final String prefix,
                                               String namespaceUri,
                                               String localName,
                                               Iterator namespaces);
@@ -372,27 +372,27 @@ public abstract class XMLEventFactory {
    * @param content the string to create
    * @return a Characters event
    */
-  public abstract Characters createCharacters(String content);
+  public abstract Characters createCharacters(final String content);
 
   /**
    * Create a Characters event with the CData flag set to true
    * @param content the string to create
    * @return a Characters event
    */
-  public abstract Characters createCData(String content);
+  public abstract Characters createCData(final String content);
 
   /**
    * Create a Characters event with the isSpace flag set to true
    * @param content the content of the space to create
    * @return a Characters event
    */
-  public abstract Characters createSpace(String content);
+  public abstract Characters createSpace(final String content);
   /**
    * Create an ignorable space
    * @param content the space to create
    * @return a Characters event
    */
-  public abstract Characters createIgnorableSpace(String content);
+  public abstract Characters createIgnorableSpace(final String content);
 
   /**
    * Creates a new instance of a StartDocument event
@@ -408,7 +408,7 @@ public abstract class XMLEventFactory {
    * @param standalone the status of standalone may be set to "true" or "false"
    * @return a StartDocument event
    */
-  public abstract StartDocument createStartDocument(String encoding,
+  public abstract StartDocument createStartDocument(final String encoding,
                                                   String version,
                                                   boolean standalone);
 
@@ -419,7 +419,7 @@ public abstract class XMLEventFactory {
    * @param version the XML version
    * @return a StartDocument event
    */
-  public abstract StartDocument createStartDocument(String encoding,
+  public abstract StartDocument createStartDocument(final String encoding,
                                                   String version);
 
   /**
@@ -428,7 +428,7 @@ public abstract class XMLEventFactory {
    * @param encoding the encoding style
    * @return a StartDocument event
    */
-  public abstract StartDocument createStartDocument(String encoding);
+  public abstract StartDocument createStartDocument(final String encoding);
 
   /**
    * Creates a new instance of an EndDocument event
@@ -442,14 +442,14 @@ public abstract class XMLEventFactory {
    * @param declaration the declaration for the event
    * @return an EntityReference event
    */
-  public abstract EntityReference createEntityReference(String name,
+  public abstract EntityReference createEntityReference(final String name,
                                                         EntityDeclaration declaration);
   /**
    * Create a comment
    * @param text The text of the comment
    * a Comment event
    */
-  public abstract Comment createComment(String text);
+  public abstract Comment createComment(final String text);
 
   /**
    * Create a processing instruction
@@ -457,7 +457,7 @@ public abstract class XMLEventFactory {
    * @param data The text of the processing instruction
    * @return a ProcessingInstruction event
    */
-  public abstract ProcessingInstruction createProcessingInstruction(String target,
+  public abstract ProcessingInstruction createProcessingInstruction(final String target,
                                                                    String data);
 
   /**
@@ -467,5 +467,5 @@ public abstract class XMLEventFactory {
    * @param dtd the text of the document type definition
    * @return a DTD event
    */
-  public abstract DTD createDTD(String dtd);
+  public abstract DTD createDTD(final String dtd);
 }

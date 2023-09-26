@@ -37,7 +37,7 @@ public class HeadFilter implements NodeFilter {
      * {@inheritDoc}
      */
     @Override
-    public final short acceptNode(Node node) {
+    public final short acceptNode(final Node node) {
         return node != null && "HEAD".equalsIgnoreCase(node.getNodeName()) ?
                 NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     }

@@ -97,14 +97,14 @@ public class ShaderType3 extends PDFShader {
 	 * Parse the shader-specific data
 	 */
     @Override
-	public void parse(PDFObject shaderObj) throws IOException
+	public void parse(final PDFObject shaderObj) throws IOException
     {
         // read the axis coordinates (required)
-        PDFObject coordsObj = shaderObj.getDictRef("Coords");
+        final PDFObject coordsObj = shaderObj.getDictRef("Coords");
         if (coordsObj == null) {
             throw new PDFParseException("No coordinates found!");
         }
-        PDFObject[] coords = coordsObj.getArray();
+        final PDFObject[] coords = coordsObj.getArray();
         center1 = new Point2D.Float(coords[0].getFloatValue(),
                                           coords[1].getFloatValue());
         center2 = new Point2D.Float(coords[3].getFloatValue(),
@@ -113,29 +113,29 @@ public class ShaderType3 extends PDFShader {
         radius2 = coords[5].getFloatValue();
         
         // read the domain (optional)
-        PDFObject domainObj = shaderObj.getDictRef("Domain");
+        final PDFObject domainObj = shaderObj.getDictRef("Domain");
         if (domainObj != null) {
-            PDFObject[] domain = domainObj.getArray();
+            final PDFObject[] domain = domainObj.getArray();
             setMinT(domain[0].getFloatValue());
             setMaxT(domain[1].getFloatValue());
         }
         
         // read the functions (required)
-        PDFObject functionObj = shaderObj.getDictRef("Function");
+        final PDFObject functionObj = shaderObj.getDictRef("Function");
         if (functionObj == null) {
             throw new PDFParseException("No function defined for shader!");
         }
-        PDFObject[] functionArray = functionObj.getArray();
-        PDFFunction[] functions = new PDFFunction[functionArray.length];
+        final PDFObject[] functionArray = functionObj.getArray();
+        final PDFFunction[] functions = new PDFFunction[functionArray.length];
         for (int i = 0; i < functions.length; i++) {
             functions[i] = PDFFunction.getFunction(functionArray[i]);
         }
         setFunctions(functions);
         
         // read the extend array (optional)
-        PDFObject extendObj = shaderObj.getDictRef("Extend");
+        final PDFObject extendObj = shaderObj.getDictRef("Extend");
         if (extendObj != null) {
-            PDFObject[] extendArray = extendObj.getArray();
+            final PDFObject[] extendArray = extendObj.getArray();
             setExtendStart(extendArray[0].getBooleanValue());
             setExtendEnd(extendArray[1].getBooleanValue());
         }
@@ -166,7 +166,7 @@ public class ShaderType3 extends PDFShader {
      *
      * @param minT a float.
      */
-    protected void setMinT(float minT) {
+    protected void setMinT(final float minT) {
         this.minT = minT;
     }
     
@@ -184,7 +184,7 @@ public class ShaderType3 extends PDFShader {
      *
      * @param maxT a float.
      */
-    protected void setMaxT(float maxT) {
+    protected void setMaxT(final float maxT) {
         this.maxT = maxT;
     }
     
@@ -202,7 +202,7 @@ public class ShaderType3 extends PDFShader {
      *
      * @param extendStart a boolean.
      */
-    protected void setExtendStart(boolean extendStart) {
+    protected void setExtendStart(final boolean extendStart) {
         this.extendStart = extendStart;
     }
     
@@ -220,7 +220,7 @@ public class ShaderType3 extends PDFShader {
      *
      * @param extendEnd a boolean.
      */
-    protected void setExtendEnd(boolean extendEnd) {
+    protected void setExtendEnd(final boolean extendEnd) {
         this.extendEnd = extendEnd;
     }
     
@@ -238,7 +238,7 @@ public class ShaderType3 extends PDFShader {
      *
      * @param functions an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
      */
-    protected void setFunctions(PDFFunction[] functions) {
+    protected void setFunctions(final PDFFunction[] functions) {
         this.functions = functions;
     }
     
@@ -251,14 +251,14 @@ public class ShaderType3 extends PDFShader {
         
         /** create a paint context */
         @Override
-		public PaintContext createContext(ColorModel cm, 
-                                          Rectangle deviceBounds, 
-                                          Rectangle2D userBounds,
-                                          AffineTransform xform,
-                                          RenderingHints hints) 
+		public PaintContext createContext(final ColorModel cm,
+                                          final Rectangle deviceBounds,
+                                          final Rectangle2D userBounds,
+                                          final AffineTransform xform,
+                                          final RenderingHints hints)
         {
-            ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
-            ColorModel model = new ComponentColorModel(cs, 
+            final ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+            final ColorModel model = new ComponentColorModel(cs,
                                                        true, 
                                                        false, 
                                                        Transparency.TRANSLUCENT,
@@ -289,7 +289,7 @@ public class ShaderType3 extends PDFShader {
         /**
          * Create a paint context
          */
-        Type3PaintContext(ColorModel colorModel, AffineTransform xform) {
+        Type3PaintContext(final ColorModel colorModel, final AffineTransform xform) {
             this.colorModel = colorModel;
             
             //Precalculate some often needed values; 
@@ -302,7 +302,7 @@ public class ShaderType3 extends PDFShader {
             try {
 				this.invXform = xform.createInverse();
 			}
-			catch (NoninvertibleTransformException e) {
+			catch (final NoninvertibleTransformException e) {
 			    BaseWatchable.getErrorHandler().publishException(e);
 			}
         }
@@ -318,22 +318,22 @@ public class ShaderType3 extends PDFShader {
         }
         
         @Override
-		public Raster getRaster(int x, int y, int w, int h) {
-            ColorSpace cs = getColorModel().getColorSpace();
-            PDFColorSpace shadeCSpace = getColorSpace();
+		public Raster getRaster(final int x, final int y, final int w, final int h) {
+            final ColorSpace cs = getColorModel().getColorSpace();
+            final PDFColorSpace shadeCSpace = getColorSpace();
             
-            PDFFunction[] functions = getFunctions();
+            final PDFFunction[] functions = getFunctions();
             
-            int numComponents = cs.getNumComponents();
+            final int numComponents = cs.getNumComponents();
 
-            float[] c1 = new float[2];
+            final float[] c1 = new float[2];
             
-            float[] inputs = new float[1];
-            float[] outputs = new float[shadeCSpace.getNumComponents()];
+            final float[] inputs = new float[1];
+            final float[] outputs = new float[shadeCSpace.getNumComponents()];
             float[] outputRBG = new float[numComponents];
             
             // all the data, plus alpha channel
-            int[] data = new int[w * h * (numComponents + 1)];
+            final int[] data = new int[w * h * (numComponents + 1)];
         	float lastInput = Float.POSITIVE_INFINITY;
         	final float tol = TOLERANCE * (getMaxT() - getMinT());
             
@@ -344,7 +344,7 @@ public class ShaderType3 extends PDFShader {
             		//Get point in user space
             		invXform.transform(new float[]{x + i, y + j}, 0, c1, 0, 1);
             		boolean render = true;
-            		float[] s = calculateInputValues(c1[0], c1[1]);
+            		final float[] s = calculateInputValues(c1[0], c1[1]);
             		//s[0] <= s[1] holds
             		//if (s[0] >= 0 && s[1] <= 1) s[1] = s[1];
             		if (s[1] >= 0 && s[1] <= 1) s[1] = s[1];
@@ -361,7 +361,7 @@ public class ShaderType3 extends PDFShader {
             		else render = false;
             		
             		if (render) {
-            			float t = (getMinT() + s[1]*(getMaxT() - getMinT()));
+            			final float t = (getMinT() + s[1]*(getMaxT() - getMinT()));
             			// calculate the pixel values at t
             			inputs[0] = t;
             			if (Math.abs(lastInput - t) > tol) {
@@ -382,7 +382,7 @@ public class ShaderType3 extends PDFShader {
 
         					lastInput = t;
             			}
-        				int base = (j * w + i) * (numComponents + 1);
+        				final int base = (j * w + i) * (numComponents + 1);
         				for (int c = 0; c < numComponents; c++) {
         					data[base + c] = (int) (outputRBG[c] * 255);
         				}
@@ -391,11 +391,11 @@ public class ShaderType3 extends PDFShader {
             	}
             }
             
-            WritableRaster raster =
+            final WritableRaster raster =
                 getColorModel().createCompatibleWritableRaster(w, h);
             raster.setPixels(0, 0, w, h, data);
           
-            Raster child = raster.createTranslatedChild(x, y);
+            final Raster child = raster.createTranslatedChild(x, y);
             return child;
         }
         
@@ -412,12 +412,12 @@ public class ShaderType3 extends PDFShader {
          * 
          * @return Two possible values of s with s[0] <= s[1]
          */                 
-        private float[] calculateInputValues(float x, float y) {
-        	double p = -(x - center1.getX())*dx1x0 -(y - center1.getY())*dy1y0 - radius1*dr1r0;
-            double q = (Math.pow(x - center1.getX(), 2) + Math.pow(y - center1.getY(), 2) - sqr0);
-            double root = Math.sqrt(p*p - denom*q);
-            float root1 = (float) ((-p + root)/denom);
-            float root2 = (float) ((-p - root)/denom);
+        private float[] calculateInputValues(final float x, final float y) {
+        	final double p = -(x - center1.getX())*dx1x0 -(y - center1.getY())*dy1y0 - radius1*dr1r0;
+            final double q = (Math.pow(x - center1.getX(), 2) + Math.pow(y - center1.getY(), 2) - sqr0);
+            final double root = Math.sqrt(p*p - denom*q);
+            final float root1 = (float) ((-p + root)/denom);
+            final float root2 = (float) ((-p - root)/denom);
             if (denom < 0) return new float[]{root1, root2};
             else return new float[]{root2, root1};
         }

@@ -34,7 +34,6 @@ import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.NodeList;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -56,13 +55,13 @@ public class documentcreatedocumentfragmentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment newDocFragment;
-        NodeList children;
-        int length;
-        String newDocFragmentName;
-        int newDocFragmentType;
-        String newDocFragmentValue;
+        final Document doc;
+        final DocumentFragment newDocFragment;
+        final NodeList children;
+        final int length;
+        final String newDocFragmentName;
+        final int newDocFragmentType;
+        final String newDocFragmentValue;
         doc = sampleXmlFile("staff.xml");
         newDocFragment = doc.createDocumentFragment();
         children = newDocFragment.getChildNodes();

@@ -46,11 +46,11 @@ import static org.junit.Assert.assertFalse;
 public class nodeisequalnode19Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr attr1;
-        Attr attr2;
-        boolean isEqual;
-        String nullNSURI = null;
+        final Document doc;
+        final Attr attr1;
+        final Attr attr2;
+        final boolean isEqual;
+        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         attr1 = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "lang");

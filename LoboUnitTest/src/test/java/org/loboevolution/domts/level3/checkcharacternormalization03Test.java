@@ -53,15 +53,15 @@ public class checkcharacternormalization03Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         HTMLCollection pList;
         Element pElem;
         Text text;
-        String textValue;
-        boolean canSet;
+        final String textValue;
+        final boolean canSet;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("check-character-normalization", Boolean.TRUE);

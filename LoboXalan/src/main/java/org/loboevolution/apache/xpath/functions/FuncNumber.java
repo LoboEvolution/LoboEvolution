@@ -34,7 +34,7 @@ public class FuncNumber extends FunctionDef1Arg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
     return new XNumber(getArg0AsNumber(xctxt));
   }
 }

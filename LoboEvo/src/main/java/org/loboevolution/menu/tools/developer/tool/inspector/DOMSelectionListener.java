@@ -37,9 +37,9 @@ import javax.swing.event.TreeSelectionListener;
  */
 public class DOMSelectionListener implements TreeSelectionListener {
 
-    private JTree tree;
+    private final JTree tree;
 
-    private ElementPropertiesPanel elemPropPanel;
+    private final ElementPropertiesPanel elemPropPanel;
 
     /**
      * <p>Constructor for DOMSelectionListener.</p>
@@ -47,7 +47,7 @@ public class DOMSelectionListener implements TreeSelectionListener {
      * @param tree a {@link javax.swing.JTree} object.
      * @param panel a {@link ElementPropertiesPanel} object.
      */
-    public DOMSelectionListener(JTree tree, ElementPropertiesPanel panel) {
+    public DOMSelectionListener(final JTree tree, final ElementPropertiesPanel panel) {
         this.tree = tree;
         this.elemPropPanel = panel;
     }
@@ -57,8 +57,8 @@ public class DOMSelectionListener implements TreeSelectionListener {
      *
      * @param e a {@link javax.swing.event.TreeSelectionEvent} object.
      */
-    public void valueChanged(TreeSelectionEvent e) {
-        Node node = (Node) this.tree.getLastSelectedPathComponent();
+    public void valueChanged(final TreeSelectionEvent e) {
+        final Node node = (Node) this.tree.getLastSelectedPathComponent();
 
         if (node == null) {
             return;

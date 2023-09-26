@@ -55,11 +55,11 @@ public class hc_nodeparentnodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        Node parentNode;
-        String parentName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final Node parentNode;
+        final String parentName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);

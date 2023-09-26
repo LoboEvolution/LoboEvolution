@@ -35,7 +35,7 @@ public class ParserConfigurationException extends Exception
         throw new RuntimeException("Stub!");
     }
 
-    public ParserConfigurationException(String msg)
+    public ParserConfigurationException(final String msg)
     {
         throw new RuntimeException("Stub!");
     }

@@ -40,7 +40,7 @@ public class NetRoutines {
 	 * @param host a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public static boolean isLocalAddress(String host) {
+	public static boolean isLocalAddress(final String host) {
 		try {
 			final InetAddress address = InetAddress.getByName(host);
 			return address.isAnyLocalAddress() || address.isLinkLocalAddress() || address.isLoopbackAddress()

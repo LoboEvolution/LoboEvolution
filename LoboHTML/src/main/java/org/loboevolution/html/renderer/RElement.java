@@ -98,7 +98,7 @@ public interface RElement extends RCollection, UINode {
 	 * @param availHeight The available height from the parent's canvas.
 	 * @param sizeOnly    Whether the layout is for sizing determination only.
 	 */
-	void layout(int availWidth, int availHeight, boolean sizeOnly);
+	void layout(int availWidth, final int availHeight, boolean sizeOnly);
 
 	/**
 	 * <p>setupRelativePosition.</p>

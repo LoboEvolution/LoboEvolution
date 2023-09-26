@@ -48,8 +48,8 @@ public class RImgControl extends RUIControl {
 	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
-	public RImgControl(ModelNode me, UIControl widget, RenderableContainer container, FrameContext frameContext,
-			UserAgentContext ucontext) {
+	public RImgControl(final ModelNode me, final UIControl widget, final RenderableContainer container, final FrameContext frameContext,
+					   final UserAgentContext ucontext) {
 		super(me, widget, container, frameContext, ucontext);
 	}
 
@@ -61,7 +61,7 @@ public class RImgControl extends RUIControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
+	public void doLayout(final int availWidth, final int availHeight, final boolean sizeOnly) {
 		super.doLayout(availWidth, availHeight, sizeOnly);
 		final boolean widthConstrained =  (this.declaredWidth == -1);
 		final boolean heightConstrained = (this.declaredHeight == -1);

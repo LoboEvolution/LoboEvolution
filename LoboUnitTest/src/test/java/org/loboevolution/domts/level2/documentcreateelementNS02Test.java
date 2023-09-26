@@ -55,18 +55,18 @@ public class documentcreateelementNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        String namespaceURI = null;
+        final Document doc;
+        final Element element;
+        final String namespaceURI = null;
 
-        String qualifiedName = "^^";
+        final String qualifiedName = "^^";
         doc = sampleXmlFile("staffNS.xml");
 
         {
             boolean success = false;
             try {
                 element = doc.createElementNS(namespaceURI, qualifiedName);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("documentcreateelementNS02", success);

@@ -29,7 +29,6 @@ package org.loboevolution.common;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
@@ -44,7 +43,7 @@ public class Nodes {
 	 * @param node2 a {@link org.loboevolution.html.node.Node} object.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
-	public static Node getCommonAncestor(Node node1, Node node2) {
+	public static Node getCommonAncestor(final Node node1, final Node node2) {
 		if (node1 == null || node2 == null) {
 			return null;
 		}
@@ -65,7 +64,7 @@ public class Nodes {
 	 * @param child a {@link org.loboevolution.html.node.Node} object.
 	 * @return a boolean.
 	 */
-	public static boolean isSameOrAncestorOf(Node node, Node child) {
+	public static boolean isSameOrAncestorOf(final Node node, final Node child) {
 		if (child.isSameNode(node)) {
 			return true;
 		}

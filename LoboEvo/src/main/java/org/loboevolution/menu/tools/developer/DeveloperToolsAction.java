@@ -46,7 +46,7 @@ public class DeveloperToolsAction extends AbstractAction {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public DeveloperToolsAction(BrowserFrame frame) {
+    public DeveloperToolsAction(final BrowserFrame frame) {
         this.frame = frame;
     }
 

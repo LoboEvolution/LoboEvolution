@@ -52,9 +52,9 @@ public class nodegetnextsiblingTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeIdNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeIdNode;
         Node nsNode;
         String nsName;
         doc = sampleXmlFile("staff.xml");

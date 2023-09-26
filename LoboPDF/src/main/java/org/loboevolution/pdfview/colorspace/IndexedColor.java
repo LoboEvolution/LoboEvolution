@@ -57,21 +57,22 @@ public class IndexedColor extends PDFColorSpace {
      * n is the number of components in that color space.
      *
      * @param base the color space in which the data is interpreted
-     * @param count the number of colors in the table
+     * @param cnt the number of colors in the table
      * @param stream a stream of bytes.  The number of bytes must be count*n,
      * where n is the number of components in the base colorspace.
      * @throws java.io.IOException if any.
      */
-    public IndexedColor(PDFColorSpace base, int count, PDFObject stream) throws IOException {
+    public IndexedColor(final PDFColorSpace base, final int cnt, final PDFObject stream) throws IOException {
         super(null);
+        int count = cnt;
         count++;
         this.count = count;
-        byte[] data = stream.getStream();
+        final byte[] data = stream.getStream();
         this.nchannels = base.getNumComponents();
-        boolean offSized = (data.length / this.nchannels) < count;
+        final boolean offSized = (data.length / this.nchannels) < count;
         this.finalcolors = new byte[3 * count];
         this.table = new Color[count];
-        float[] comps = new float[this.nchannels];
+        final float[] comps = new float[this.nchannels];
         int loc = 0;
         int finalloc = 0;
         for (int i = 0; i < count; i++) {
@@ -95,7 +96,7 @@ public class IndexedColor extends PDFColorSpace {
      * @param table an array of colors
      * @throws java.io.IOException if any.
      */
-    public IndexedColor(Color[] table) throws IOException {
+    public IndexedColor(final Color[] table) throws IOException {
         super(null);
 
         this.count = table.length;
@@ -147,7 +148,7 @@ public class IndexedColor extends PDFColorSpace {
      * get the color represented by the index.
      */
     @Override
-    public PDFPaint getPaint(float[] components) {
+    public PDFPaint getPaint(final float[] components) {
         return PDFPaint.getPaint(this.table[(int) components[0]]);
     }
 }

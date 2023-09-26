@@ -56,11 +56,11 @@ public class hc_elementreplaceattributewithselfTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        Attr streetAttr;
-        Attr replacedAttr;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final Attr streetAttr;
+        final Attr replacedAttr;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);

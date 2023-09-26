@@ -68,7 +68,7 @@ public class GoAction extends AbstractAction {
 	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 * @param addressBar a {@link javax.swing.JTextField} object.
 	 */
-	public GoAction(IBrowserPanel panel, JTextField addressBar) {
+	public GoAction(final IBrowserPanel panel, final JTextField addressBar) {
 		this.panel = panel;
 		this.addressBar = addressBar;
 	}
@@ -77,19 +77,19 @@ public class GoAction extends AbstractAction {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void actionPerformed(ActionEvent evt) {
+	public void actionPerformed(final ActionEvent evt) {
 		String addressBarText = this.addressBar.getText();
 		try {
 
 			final URL url = new URL(addressBarText);
 			final String filename = url.getFile();
-			HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+			final HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
 			httpcon.addRequestProperty("User-Agent", UserAgent.getUserAgent());
 			httpcon.getHeaderField("Set-Cookie");
 			final String mimeType = httpcon.getContentType();
 			switch (MimeType.get(mimeType)) {
 				case PDF:
-					PDFViewer viewer = new PDFViewer(true);
+					final PDFViewer viewer = new PDFViewer(true);
 					viewer.doOpen(addressBarText);
 					break;
 				case ICO:
@@ -127,20 +127,20 @@ public class GoAction extends AbstractAction {
 				default:
 					break;
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			if (!addressBarText.matches("^\\w+?://.*")) {
-				SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
+				final SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
 				addressBarText = searchEngine.getBaseUrl() + addressBarText;
 			}
 			goURL(addressBarText, null);
 		}
 	}
 
-	private void goURL(String text, HttpURLConnection httpcon) {
+	private void goURL(final String text, final HttpURLConnection httpcon) {
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(this.panel);
 		final int indexPanel = tabbedPane.getSelectedIndex();
-		HtmlPanel htmlPanel;
+		final HtmlPanel htmlPanel;
 		if (httpcon == null) {
 			htmlPanel = NavigatorFrame.createHtmlPanel(panel, text);
 		} else {
@@ -163,12 +163,12 @@ public class GoAction extends AbstractAction {
 
 	}
 
-	private void goUrlImage(BufferedImage img, String fullURL) {
+	private void goUrlImage(final BufferedImage img, final String fullURL) {
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		final ImageViewer viewer = new ImageViewer(img);
 		final String title = "Image Viewer";
 		final int indexPanel = tabbedPane.getSelectedIndex();
-		JPanel jPanel = new JPanel();
+		final JPanel jPanel = new JPanel();
 		jPanel.add(viewer.getComponent());
 		tabbedPane.remove(indexPanel);
 		tabbedPane.insertTab(title, null, viewer.getComponent(), title, indexPanel);
@@ -180,15 +180,15 @@ public class GoAction extends AbstractAction {
 	}
 
 
-	private void goUrlTxt(String fullURL, HttpURLConnection httpcon, String mimeType, String title) throws Exception {
+	private void goUrlTxt(final String fullURL, final HttpURLConnection httpcon, final String mimeType, final String title) throws Exception {
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		final int indexPanel = tabbedPane.getSelectedIndex();
-		InputStream in = httpcon.getInputStream();
-		String source = IORoutines.loadAsText(in, "UTF-8");
-		RSyntaxTextArea textArea = new RSyntaxTextArea(source);
+		final InputStream in = httpcon.getInputStream();
+		final String source = IORoutines.loadAsText(in, "UTF-8");
+		final RSyntaxTextArea textArea = new RSyntaxTextArea(source);
 		textArea.setSyntaxEditingStyle(mimeType);
 		textArea.setEditable(false);
-		JScrollPane pane = new JScrollPane(textArea);
+		final JScrollPane pane = new JScrollPane(textArea);
 		tabbedPane.remove(indexPanel);
 		tabbedPane.insertTab(title, null, pane, title, indexPanel);
 		this.addressBar.setText(fullURL);
@@ -204,7 +204,7 @@ public class GoAction extends AbstractAction {
 		final int lastDotIdx = path.lastIndexOf('.');
 		final String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
 		final String extensionTL = extension.toLowerCase();
-		String mimeType;
+		final String mimeType;
 		switch (extensionTL) {
 			case "java":
 				mimeType = SyntaxConstants.SYNTAX_STYLE_JAVA;

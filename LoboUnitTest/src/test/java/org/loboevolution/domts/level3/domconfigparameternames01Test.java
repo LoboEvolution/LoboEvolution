@@ -64,10 +64,10 @@ public class domconfigparameternames01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         DOMImplementation domImpl;
-        Document doc;
-        DOMConfiguration config;
+        final Document doc;
+        final DOMConfiguration config;
         boolean state;
-        DOMStringList parameterNames;
+        final DOMStringList parameterNames;
         String parameterName;
         int matchCount = 0;
         Object paramValue;

@@ -54,7 +54,7 @@ public interface RCollection extends BoundableRenderable {
 	 * @param guiX a int.
 	 * @param guiY a int.
 	 */
-	void updateWidgetBounds(int guiX, int guiY);
+	void updateWidgetBounds(int guiX, final int guiY);
 	
 	/**
 	 * <p>getRenderables.</p>

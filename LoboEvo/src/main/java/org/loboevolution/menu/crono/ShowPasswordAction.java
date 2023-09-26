@@ -52,7 +52,7 @@ public class ShowPasswordAction extends AbstractAction {
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 * @param num a {@link java.lang.Integer} object.
 	 */
-	public ShowPasswordAction(BrowserFrame frame, Integer num) {
+	public ShowPasswordAction(final BrowserFrame frame, final Integer num) {
 		this.frame = frame;
 		this.num = num;
 	}

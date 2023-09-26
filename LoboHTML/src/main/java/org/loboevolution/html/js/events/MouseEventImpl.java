@@ -97,10 +97,10 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	/** {@inheritDoc} */
 	@Override
-	public void initMouseEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, Window viewArg,
-			double detailArg, double screenXArg, double screenYArg, double clientXArg, double clientYArg,
-			boolean ctrlKeyArg, boolean altKeyArg, boolean shiftKeyArg, boolean metaKeyArg, int buttonArg,
-			EventTarget relatedTargetArg) {
+	public void initMouseEvent(final String typeArg, final boolean canBubbleArg, final boolean cancelableArg, final Window viewArg,
+                               final double detailArg, final double screenXArg, final double screenYArg, final double clientXArg, final double clientYArg,
+                               final boolean ctrlKeyArg, final boolean altKeyArg, final boolean shiftKeyArg, final boolean metaKeyArg, final int buttonArg,
+                               final EventTarget relatedTargetArg) {
 		super.initUIEvent(typeArg, canBubbleArg, cancelableArg, viewArg, detailArg);
 		screenX = screenXArg;
 		screenY = screenYArg;
@@ -197,7 +197,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 	 *
 	 * @param ie a {@link java.awt.event.InputEvent} object.
 	 */
-	public void setIe(InputEvent ie) {
+	public void setIe(final InputEvent ie) {
 		this.ie = ie;
 	}
 
@@ -266,7 +266,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean getModifierState(String keyArg) {
+	public boolean getModifierState(final String keyArg) {
 		// TODO Auto-generated method stub
 		return false;
 	}

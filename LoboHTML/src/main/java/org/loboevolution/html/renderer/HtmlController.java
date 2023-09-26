@@ -65,7 +65,7 @@ public class HtmlController {
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @return a boolean.
 	 */
-	public boolean onChange(ModelNode node) {
+	public boolean onChange(final ModelNode node) {
 		if (node instanceof HTMLSelectElementImpl) {
 			final HTMLSelectElementImpl uiElement = (HTMLSelectElementImpl) node;
 			final Function f = uiElement.getOnchange();
@@ -89,7 +89,7 @@ public class HtmlController {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	public boolean onContextMenu(ModelNode node, MouseEvent event, int x, int y) {
+	public boolean onContextMenu(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("onContextMenu(): node=" + node + ",class=" + node.getClass().getName());
 		}
@@ -128,7 +128,7 @@ public class HtmlController {
 	 * @param x a int.
 	 * @param y a int.
 	 */
-	public boolean onDoubleClick(ModelNode node, MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("onDoubleClick(): node=" + node + ",class=" + node.getClass().getName());
 		}
@@ -157,7 +157,7 @@ public class HtmlController {
 	 * @return True to propagate further and false if the event was consumed.
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public boolean onEnterPressed(ModelNode node) {
+	public boolean onEnterPressed(final ModelNode node) {
 		final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
 		hie.submitForm(null);
 		return false;
@@ -172,7 +172,7 @@ public class HtmlController {
 	 * @param x a int.
 	 * @param y a int.
 	 */
-	public boolean onMouseClick(ModelNode node, MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("onMouseClick(): node=" + node + ",class=" + node.getClass().getName());
 		}
@@ -224,7 +224,7 @@ public class HtmlController {
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 */
-	public boolean onMouseDisarmed(ModelNode node, MouseEvent event) {
+	public boolean onMouseDisarmed(final ModelNode node, final MouseEvent event) {
 		if (node instanceof HTMLLinkElementImpl) {
 			((HTMLLinkElementImpl) node).getCurrentStyle().setOverlayColor(null);
 			return false;
@@ -245,7 +245,7 @@ public class HtmlController {
 	 * @param x a int.
 	 * @param y a int.
 	 */
-	public boolean onMouseDown(ModelNode node, MouseEvent event, int x, int y) {
+	public boolean onMouseDown(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		boolean pass = true;
 		
 		if (node instanceof HTMLElementImpl) {
@@ -283,7 +283,8 @@ public class HtmlController {
 	 * @param y a int.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public void onMouseOut(ModelNode node, MouseEvent event, int x, int y, ModelNode limit) {
+	public void onMouseOut(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
+		ModelNode node = modelNode;
 		while (node != null) {
 			if (node == limit) {
 				break;
@@ -312,7 +313,8 @@ public class HtmlController {
 	 * @param y a int.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public void onMouseMoved(ModelNode node, MouseEvent event, int x, int y, ModelNode limit) {
+	public void onMouseMoved(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
+		ModelNode node = modelNode;
 		while (node != null) {
 			if (node instanceof HTMLElementImpl) {
 				final HTMLElementImpl uiElement = (HTMLElementImpl) node;
@@ -338,7 +340,8 @@ public class HtmlController {
 	 * @param y a int.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public void onMouseOver(ModelNode node, MouseEvent event, int x, int y, ModelNode limit) {
+	public void onMouseOver(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
+		ModelNode node = modelNode;
 		while (node != null) {
 			if (node == limit) {
 				break;
@@ -396,7 +399,7 @@ public class HtmlController {
 	 * <p>onMouseScroll.</p>
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public void onMouseScroll(ModelNode node) {
+	public void onMouseScroll(final ModelNode node) {
 		if (node instanceof HTMLElementImpl) {
 			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOnscroll();
@@ -446,7 +449,7 @@ public class HtmlController {
 	 * @param x a int.
 	 * @param y a int.
 	 */
-	public boolean onMouseUp(ModelNode node, MouseEvent event, int x, int y) {
+	public boolean onMouseUp(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		boolean pass = true;
 				
 		if (node instanceof HTMLElementImpl) {
@@ -484,7 +487,7 @@ public class HtmlController {
 	 * @return True to propagate further, false if consumed.
 	 * @param event a {@link java.awt.event.InputEvent} object.
 	 */
-	public boolean onPressed(ModelNode node, InputEvent event, int x, int y) {
+	public boolean onPressed(final ModelNode node, final InputEvent event, final int x, final int y) {
 		
 		if (node instanceof HTMLElementImpl) {
 			final HTMLElementImpl uiElement = (HTMLElementImpl) node;

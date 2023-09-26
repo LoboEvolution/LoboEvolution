@@ -57,10 +57,10 @@ public class elementhasattributens02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        boolean state;
-        Attr attribute;
+        final Document doc;
+        final Element element;
+        final boolean state;
+        final Attr attribute;
         doc = sampleXmlFile("staff.xml");
         element = doc.createElementNS("http://www.w3.org/DOM", "address");
         attribute = doc.createAttributeNS("http://www.w3.org/DOM", "domestic");

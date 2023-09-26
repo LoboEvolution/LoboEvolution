@@ -61,11 +61,11 @@ public class hc_nodeappendchildnodeancestorTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node newChild;
-        HTMLCollection elementList;
-        Node employeeNode;
-        Node appendedChild;
+        final Document doc;
+        final Node newChild;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.getDocumentElement();
         elementList = doc.getElementsByTagName("p");
@@ -75,7 +75,7 @@ public class hc_nodeappendchildnodeancestorTest extends LoboUnitTest {
             boolean success = false;
             try {
                 appendedChild = employeeNode.appendChild(newChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

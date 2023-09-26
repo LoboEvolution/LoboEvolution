@@ -51,14 +51,14 @@ import static org.junit.Assert.assertEquals;
 public class nodeinsertbefore12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        DocumentFragment docFragNew;
-        Element elem;
-        Node inserted;
-        Node appendedChild;
-        Node last;
-        String name;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final DocumentFragment docFragNew;
+        final Element elem;
+        final Node inserted;
+        final Node appendedChild;
+        final Node last;
+        final String name;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         docFragNew = doc.createDocumentFragment();

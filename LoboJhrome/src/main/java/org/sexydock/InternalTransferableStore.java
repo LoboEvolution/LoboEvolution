@@ -42,7 +42,7 @@ public final class InternalTransferableStore {
         return DefaultInstanceHolder.INSTANCE;
     }
 
-    public Transferable createTransferable(Object o) {
+    public Transferable createTransferable(final Object o) {
         String uuid = UUID.randomUUID().toString();
         while (uuid.equals(storedUUID)) {
             uuid = UUID.randomUUID().toString();
@@ -52,27 +52,27 @@ public final class InternalTransferableStore {
         return new InternalTransferable(uuid);
     }
 
-    public Object getTransferableData(Transferable t) throws UnsupportedFlavorException, IOException {
-        String uuid = (String) t.getTransferData(INTERNAL_TRANSFERABLE_FLAVOR);
+    public Object getTransferableData(final Transferable t) throws UnsupportedFlavorException, IOException {
+        final String uuid = (String) t.getTransferData(INTERNAL_TRANSFERABLE_FLAVOR);
         return uuid.equals(storedUUID) ? storedObject : null;
     }
 
-    public void cleanUp(Transferable t) {
+    public void cleanUp(final Transferable t) {
         if (t.isDataFlavorSupported(INTERNAL_TRANSFERABLE_FLAVOR)) {
             try {
-                String uuid = (String) t.getTransferData(INTERNAL_TRANSFERABLE_FLAVOR);
+                final String uuid = (String) t.getTransferData(INTERNAL_TRANSFERABLE_FLAVOR);
                 if (uuid.equals(storedUUID)) {
                     storedUUID = null;
                     storedObject = null;
                 }
-            } catch (Exception ex) {
+            } catch (final Exception ex) {
 
             }
         }
     }
 
     private static class InternalTransferable extends StringSelection {
-        public InternalTransferable(String data) {
+        public InternalTransferable(final String data) {
             super(data);
         }
 
@@ -82,12 +82,12 @@ public final class InternalTransferableStore {
         }
 
         @Override
-        public boolean isDataFlavorSupported(DataFlavor flavor) {
+        public boolean isDataFlavorSupported(final DataFlavor flavor) {
             return flavor == INTERNAL_TRANSFERABLE_FLAVOR;
         }
 
         @Override
-        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+        public Object getTransferData(final DataFlavor flavor) throws UnsupportedFlavorException, IOException {
             if (!isDataFlavorSupported(flavor)) {
                 throw new UnsupportedFlavorException(flavor);
             }

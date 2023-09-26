@@ -62,12 +62,12 @@ public class hc_nodeinsertbeforenewchilddiffdocumentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc1;
-        Document doc2;
-        Node refChild;
-        Node newChild;
-        HTMLCollection elementList;
-        Node elementNode;
+        final Document doc1;
+        final Document doc2;
+        final Node refChild;
+        final Node newChild;
+        final HTMLCollection elementList;
+        final Node elementNode;
         doc1 = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         newChild = doc1.createElement("br");
@@ -77,7 +77,7 @@ public class hc_nodeinsertbeforenewchilddiffdocumentTest extends LoboUnitTest {
         boolean success = false;
         try {
             elementNode.insertBefore(newChild, refChild);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);

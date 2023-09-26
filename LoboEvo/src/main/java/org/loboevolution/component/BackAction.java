@@ -57,22 +57,22 @@ public class BackAction extends AbstractAction {
 	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 * @param addressBar a {@link javax.swing.JTextField} object.
 	 */
-	public BackAction(IBrowserPanel panel, JTextField addressBar) {
+	public BackAction(final IBrowserPanel panel, final JTextField addressBar) {
 		this.panel = panel;
 		this.addressBar = addressBar;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent evt) {
-		NavigationStore nh = new NavigationStore();
+	public void actionPerformed(final ActionEvent evt) {
+		final NavigationStore nh = new NavigationStore();
 		final String url = this.addressBar.getText();
 		String text = url;
 		final int indexPanel = this.panel.getTabbedPane().getSelectedIndex();		
-		List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
+		final List<BookmarkInfo> tabsById = nh.getRecentHost(indexPanel, true);
 		for (int i = 0; i < tabsById.size(); i++) {
-			BookmarkInfo info = tabsById.get(i);
-			String tab = info.getUrl();
+			final BookmarkInfo info = tabsById.get(i);
+			final String tab = info.getUrl();
 			if (tab.equals(url) && i > 0) {
 				text = tabsById.get(i - 1).getUrl();
 			}

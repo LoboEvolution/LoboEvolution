@@ -47,12 +47,12 @@ import static org.junit.Assert.assertNull;
 public class nodelookupprefix04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        Node entity;
-        Notation notation;
-        NamedNodeMap entitiesMap;
-        NamedNodeMap notationsMap;
+        final Document doc;
+        final DocumentType docType;
+        final Node entity;
+        final Notation notation;
+        final NamedNodeMap entitiesMap;
+        final NamedNodeMap notationsMap;
         String prefix;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();

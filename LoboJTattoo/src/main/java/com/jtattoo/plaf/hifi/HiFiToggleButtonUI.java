@@ -59,21 +59,21 @@ public class HiFiToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
-		ButtonModel model = b.getModel();
-		FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-		int mnemIndex = b.getDisplayedMnemonicIndex();
+	protected void paintText(final Graphics g, final AbstractButton b, final Rectangle textRect, final String text) {
+		final ButtonModel model = b.getModel();
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
+		final int mnemIndex = b.getDisplayedMnemonicIndex();
 		int offs = 0;
 		if (model.isArmed() && model.isPressed()) {
 			offs = 1;
 		}
 
-		Graphics2D g2D = (Graphics2D) g;
-		Composite composite = g2D.getComposite();
-		AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite composite = g2D.getComposite();
+		final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 		g2D.setComposite(alpha);
 		Color foreground = b.getForeground();
-		Color background = b.getBackground();
+		final Color background = b.getBackground();
 		if (model.isPressed() && model.isArmed() || model.isSelected()) {
 			if (foreground instanceof ColorUIResource && background instanceof ColorUIResource) {
 				foreground = AbstractLookAndFeel.getTheme().getPressedForegroundColor();

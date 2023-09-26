@@ -58,8 +58,8 @@ public class elementsetattributens08Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
+        final Document doc;
+        final Element element;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOMTest/level2", "dom:elem");
 
@@ -67,7 +67,7 @@ public class elementsetattributens08Test extends LoboUnitTest {
             boolean success = false;
             try {
                 element.setAttributeNS("http://www.w3.org/DOMTest/level2", "xmlns", "test");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
             assertTrue("elementsetattributens08_Err1", success);
@@ -77,7 +77,7 @@ public class elementsetattributens08Test extends LoboUnitTest {
             boolean success = false;
             try {
                 element.setAttributeNS("http://www.w3.org/DOMTest/level2", "xmlns:root", "test");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
             assertTrue("elementsetattributens08_Err2", success);

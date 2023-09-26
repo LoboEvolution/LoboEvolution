@@ -60,14 +60,14 @@ public class nodeinsertbeforerefchildnullTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        Node refChild = null;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final Node refChild = null;
 
-        Node newChild;
-        Node child;
-        String childName;
+        final Node newChild;
+        final Node child;
+        final String childName;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);

@@ -47,10 +47,10 @@ import static org.junit.Assert.assertTrue;
 public class nodeisequalnode29Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Comment comment1;
-        Comment comment2;
-        Comment comment3;
+        final Document doc;
+        final Comment comment1;
+        final Comment comment2;
+        final Comment comment3;
         boolean isEqual;
         doc = sampleXmlFile("hc_staff.xml");
         comment1 = doc.createComment("comment");

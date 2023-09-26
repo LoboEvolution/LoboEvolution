@@ -73,7 +73,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 * @param text a {@link org.loboevolution.welcome.TextFieldUsername} object.
 	 */
-	public LoginButton(IBrowserPanel panel, TextFieldUsername text) {
+	public LoginButton(final IBrowserPanel panel, final TextFieldUsername text) {
 
 		setBackground(this.COLOR_BACKGROUND);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -100,7 +100,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 				panel.getTabbedPane().remove(indexPanel);
 				final ITabbedPane tabbedPane = panel.getTabbedPane();
 				tabbedPane.setComponentPopupMenu(panel);
-				HtmlPanel hpanel = NavigationManager.getHtmlPanelSearch(panel, text.getText());
+				final HtmlPanel hpanel = NavigationManager.getHtmlPanelSearch(panel, text.getText());
 				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 				final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 				tabbedPane.insertTab(title, null, hpanel, title, indexPanel);
@@ -108,15 +108,15 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 				final IBrowserPanel bpanel = hpanel.getBrowserPanel();
 				bpanel.getScroll().getViewport().add((Component)tabbedPane);
 				TabStore.deleteTab(indexPanel);
-				SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
-				String url = searchEngine.getBaseUrl() + text.getText();
+				final SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
+				final String url = searchEngine.getBaseUrl() + text.getText();
 				TabStore.insertTab(indexPanel, url, title);
 				NavigationManager.insertHistory(url, title, indexPanel);
 			}
 		});
 	}
 
-	private Graphics2D get2dGraphics(Graphics g) {
+	private Graphics2D get2dGraphics(final Graphics g) {
 		final Graphics2D g2 = (Graphics2D) g;
 		g2.addRenderingHints(new HashMap<RenderingHints.Key, Object>() {
 			private static final long serialVersionUID = 1L;
@@ -130,7 +130,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 	
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBorder(Graphics g) {
+	protected void paintBorder(final Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
 		g2.setColor(foreground());
 		g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, ROUNDNESS, ROUNDNESS);
@@ -138,7 +138,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(final Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
 		super.paintComponent(g2);
 

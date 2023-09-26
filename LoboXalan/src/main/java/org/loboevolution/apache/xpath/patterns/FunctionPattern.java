@@ -32,6 +32,7 @@ import org.loboevolution.apache.xpath.objects.XNumber;
 import org.loboevolution.apache.xpath.objects.XObject;
 import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
+import org.loboevolution.javax.xml.transform.TransformerException;
 
 /** Match pattern step that contains a function. */
 public class FunctionPattern extends StepPattern {
@@ -42,7 +43,7 @@ public class FunctionPattern extends StepPattern {
    *
    * <p>NEEDSDOC @param expr
    */
-  public FunctionPattern(Expression expr, int axis) {
+  public FunctionPattern(final Expression expr, final int axis) {
 
     super(0, null, null, axis);
 
@@ -67,10 +68,10 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt, int context)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
-
-    DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+  public XObject execute(final XPathContext xctxt, final int ctx)
+      throws TransformerException {
+    int context = ctx;
+    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
     if (null != nl) {
@@ -95,10 +96,10 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt, int context, DTM dtm, int expType)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
-
-    DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+  public XObject execute(final XPathContext xctxt, final int ctx, final DTM dtm, final int expType)
+      throws TransformerException {
+    int context = ctx;
+    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
     if (null != nl) {
@@ -122,10 +123,10 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
 
     int context = xctxt.getCurrentNode();
-    DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
+    final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);
     XNumber score = SCORE_NONE;
 
     if (null != nl) {
@@ -149,7 +150,7 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  protected void callSubtreeVisitors(XPathVisitor visitor) {
+  protected void callSubtreeVisitors(final XPathVisitor visitor) {
     m_functionExpr.callVisitors(visitor);
     super.callSubtreeVisitors(visitor);
   }

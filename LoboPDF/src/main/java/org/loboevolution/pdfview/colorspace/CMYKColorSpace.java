@@ -54,12 +54,12 @@ public class CMYKColorSpace extends ColorSpace {
 	public CMYKColorSpace() {
 		super(ColorSpace.TYPE_CMYK, 4);
 		try {
-			URL resource = CMYKColorSpace.class.getResource("/org/monte/media/jpeg/Generic_CMYK_Profile.icc");
-			try (InputStream stream = resource.openStream()) {
+			final URL resource = CMYKColorSpace.class.getResource("/org/monte/media/jpeg/Generic_CMYK_Profile.icc");
+			try (final InputStream stream = resource.openStream()) {
 				icc = ICC_Profile.getInstance(stream);
 				icc_cs = new ICC_ColorSpace(icc);
 			}			
-		} catch (IOException e) {
+		} catch (final IOException e) {
 		    BaseWatchable.getErrorHandler().publishException(e);
 		}
 	}
@@ -73,12 +73,12 @@ public class CMYKColorSpace extends ColorSpace {
 	 * @see java.awt.color.ColorSpace#fromCIEXYZ(float[])
 	 */
 	@Override
-	public float[] fromCIEXYZ(float[] p_colorvalue) {
+	public float[] fromCIEXYZ(final float[] p_colorvalue) {
 		if (icc_cs != null) {
 			return icc_cs.fromCIEXYZ(p_colorvalue);
 		}
-		ColorSpace l_cs = ColorSpace.getInstance(ColorSpace.TYPE_RGB);
-		float[] l_rgb = l_cs.toCIEXYZ(p_colorvalue);		
+		final ColorSpace l_cs = ColorSpace.getInstance(ColorSpace.TYPE_RGB);
+		final float[] l_rgb = l_cs.toCIEXYZ(p_colorvalue);
 		return fromRGB(l_rgb);
 	}
 
@@ -96,7 +96,7 @@ public class CMYKColorSpace extends ColorSpace {
 	 * @see java.awt.color.ColorSpace#fromRGB(float[])
 	 */
 	@Override
-	public float[] fromRGB(float[] p_rgbvalue) {
+	public float[] fromRGB(final float[] p_rgbvalue) {
 		if (icc_cs != null) {
 			return icc_cs.fromRGB(p_rgbvalue);
 		}
@@ -105,7 +105,7 @@ public class CMYKColorSpace extends ColorSpace {
 		 * be used and pulled out? -- At this time, it's not necessary for our
 		 * (Scantegrity's) uses.
 		 */
-		float[] l_res = {0,0,0,0};
+		final float[] l_res = {0,0,0,0};
 		if (p_rgbvalue.length >= 3) {
 			l_res[0] = (float)1.0 - p_rgbvalue[0];
 			l_res[1] = (float)1.0 - p_rgbvalue[1];
@@ -139,13 +139,13 @@ public class CMYKColorSpace extends ColorSpace {
 	 * @see java.awt.color.ColorSpace#toCIEXYZ(float[])
 	 */
 	@Override
-	public float[] toCIEXYZ(float[] p_colorvalue) {
+	public float[] toCIEXYZ(final float[] p_colorvalue) {
 		if (icc_cs != null) {
 			return icc_cs.toCIEXYZ(p_colorvalue);
 		}
 
-		float[] l_rgb = toRGB(p_colorvalue);
-		ColorSpace l_cs = ColorSpace.getInstance(ColorSpace.TYPE_RGB);
+		final float[] l_rgb = toRGB(p_colorvalue);
+		final ColorSpace l_cs = ColorSpace.getInstance(ColorSpace.TYPE_RGB);
 		return l_cs.toCIEXYZ(l_rgb);
 	}
 
@@ -162,14 +162,14 @@ public class CMYKColorSpace extends ColorSpace {
 	 * @see java.awt.color.ColorSpace#toRGB(float[])
 	 */
 	@Override
-	public float[] toRGB(float[] p_colorvalue) {
+	public float[] toRGB(final float[] p_colorvalue) {
 		if (icc_cs != null) {
 			return icc_cs.toRGB(p_colorvalue);
 		}
-		float[] l_res = {0,0,0};
+		final float[] l_res = {0,0,0};
 		if (p_colorvalue.length >= 4)
 		{
-			float l_black = (float)1.0 - p_colorvalue[3]; 
+			final float l_black = (float)1.0 - p_colorvalue[3];
 			l_res[0] = l_black * ((float)1.0 - p_colorvalue[0]);
 			l_res[1] = l_black * ((float)1.0 - p_colorvalue[1]);
 			l_res[2] = l_black * ((float)1.0 - p_colorvalue[2]);			
@@ -184,7 +184,7 @@ public class CMYKColorSpace extends ColorSpace {
 	 * @return p_colors, with any values greater than 1 set to 1, and less than
 	 * 0 set to 0.
 	 */
-	public float[] normalize(float[] p_colors) {
+	public float[] normalize(final float[] p_colors) {
 		for (int l_i = 0; l_i < p_colors.length; l_i++) {
 			if (p_colors[l_i] > (float)1.0) p_colors[l_i] = (float)1.0;
 			else if (p_colors[l_i] < (float)0.0) p_colors[l_i] = (float)0.0;

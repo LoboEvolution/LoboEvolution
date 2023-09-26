@@ -49,17 +49,17 @@ import static org.junit.Assert.assertTrue;
 public class normalizecharacters04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element docElem;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         HTMLCollection pList;
         Element pElem;
         Text text;
-        String textValue;
-        Node retval;
-        boolean canSet;
+        final String textValue;
+        final Node retval;
+        final boolean canSet;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("normalize-characters", Boolean.TRUE);

@@ -46,7 +46,7 @@ public class SVGPathSegMovetoRelImpl implements SVGPathSegMovetoRel {
 	 * @param x a float.
 	 * @param y a float.
 	 */
-	public SVGPathSegMovetoRelImpl(float x, float y) {
+	public SVGPathSegMovetoRelImpl(final float x, final float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -71,7 +71,7 @@ public class SVGPathSegMovetoRelImpl implements SVGPathSegMovetoRel {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 

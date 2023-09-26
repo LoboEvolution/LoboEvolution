@@ -65,16 +65,16 @@ public class TextureButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
 			super.paintBackground(g, b);
 		} else {
-			Graphics2D g2D = (Graphics2D) g;
-			Shape savedClip = g.getClip();
+			final Graphics2D g2D = (Graphics2D) g;
+			final Shape savedClip = g.getClip();
 			if (b.getBorder() != null && b.isBorderPainted() && b.getBorder() instanceof UIResource) {
-				int w = b.getWidth();
-				int h = b.getHeight();
-				Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
+				final int w = b.getWidth();
+				final int h = b.getHeight();
+				final Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
 				clipArea.intersect(new Area(savedClip));
 				g2D.setClip(clipArea);
 			}
@@ -85,8 +85,8 @@ public class TextureButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
-			Rectangle iconRect) {
+	protected void paintFocus(final Graphics g, final AbstractButton b, final Rectangle viewRect, final Rectangle textRect,
+                              final Rectangle iconRect) {
 		if (!AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
 			g.setColor(AbstractLookAndFeel.getFocusColor());
 			BasicGraphicsUtils.drawDashedRect(g, 3, 2, b.getWidth() - 6, b.getHeight() - 5);
@@ -96,16 +96,16 @@ public class TextureButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {
-		AbstractButton b = (AbstractButton) c;
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
+	protected void paintIcon(final Graphics g, final JComponent c, final Rectangle iconRect) {
+		final AbstractButton b = (AbstractButton) c;
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
 		if (!b.isContentAreaFilled()) {
 			if (!b.isEnabled()) {
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 				g2D.setComposite(alpha);
 			} else {
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9f);
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9f);
 				g2D.setComposite(alpha);
 			}
 		}
@@ -115,12 +115,12 @@ public class TextureButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
-		ButtonModel model = b.getModel();
-		FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-		int mnemIndex = b.getDisplayedMnemonicIndex();
+	protected void paintText(final Graphics g, final AbstractButton b, final Rectangle textRect, final String text) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
+		final ButtonModel model = b.getModel();
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
+		final int mnemIndex = b.getDisplayedMnemonicIndex();
 
 		if (model.isEnabled()) {
 			int offs = 0;
@@ -128,7 +128,7 @@ public class TextureButtonUI extends BaseButtonUI {
 				offs = 1;
 			}
 			Color foreground = b.getForeground();
-			Color background = b.getBackground();
+			final Color background = b.getBackground();
 			if (background instanceof ColorUIResource) {
 				if (model.isPressed() && model.isArmed()) {
 					foreground = AbstractLookAndFeel.getTheme().getPressedForegroundColor();
@@ -137,7 +137,7 @@ public class TextureButtonUI extends BaseButtonUI {
 				}
 			}
 			if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(foreground) > 164) {
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 				g2D.setComposite(alpha);
 				g.setColor(Color.black);
 				JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs,
@@ -145,7 +145,7 @@ public class TextureButtonUI extends BaseButtonUI {
 				g2D.setComposite(savedComposite);
 			} else {
 				if (!(model.isPressed() && model.isArmed())) {
-					Object sc = b.getClientProperty("shadowColor");
+					final Object sc = b.getClientProperty("shadowColor");
 					if (sc instanceof Color) {
 						g.setColor((Color) sc);
 						JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + 1,
@@ -157,7 +157,7 @@ public class TextureButtonUI extends BaseButtonUI {
 			JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs,
 					textRect.y + offs + fm.getAscent());
 		} else {
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
 			g2D.setComposite(alpha);
 			Color fc = b.getForeground();
 			if (ColorHelper.getGrayValue(fc) > 164) {

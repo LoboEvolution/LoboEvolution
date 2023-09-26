@@ -55,7 +55,7 @@ public class NoFocusButton extends JButton {
 	 *
 	 * @param ico a {@link javax.swing.Icon} object.
 	 */
-	public NoFocusButton(Icon ico) {
+	public NoFocusButton(final Icon ico) {
 		super(ico);
 		init();
 	}

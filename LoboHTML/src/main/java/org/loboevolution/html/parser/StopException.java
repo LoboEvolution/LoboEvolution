@@ -42,7 +42,7 @@ class StopException extends Exception {
 	 *
 	 * @param element a {@link org.loboevolution.html.node.Element} object.
 	 */
-	public StopException(Element element) {
+	public StopException(final Element element) {
 		super();
 		this.element = element;
 	}

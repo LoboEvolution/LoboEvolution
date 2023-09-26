@@ -40,7 +40,7 @@ public class ProgressBar extends JFrame {
 	 *
 	 * @param args an array of {@link java.lang.String} objects.
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.
 		SwingUtilities.invokeLater(ProgressBar::new);

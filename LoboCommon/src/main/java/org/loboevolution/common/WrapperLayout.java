@@ -54,12 +54,12 @@ public class WrapperLayout implements LayoutManager {
 
 	/** {@inheritDoc} */
 	@Override
-	public void addLayoutComponent(String arg0, Component arg1) {
+	public void addLayoutComponent(final String arg0, final Component arg1) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void layoutContainer(Container arg0) {
+	public void layoutContainer(final Container arg0) {
 		final int count = arg0.getComponentCount();
 		if (count > 0) {
 			final Component child = arg0.getComponent(0);
@@ -71,7 +71,7 @@ public class WrapperLayout implements LayoutManager {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension minimumLayoutSize(Container arg0) {
+	public Dimension minimumLayoutSize(final Container arg0) {
 		final java.awt.Insets insets = arg0.getInsets();
 		final int count = arg0.getComponentCount();
 		if (count > 0) {
@@ -84,7 +84,7 @@ public class WrapperLayout implements LayoutManager {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension preferredLayoutSize(Container arg0) {
+	public Dimension preferredLayoutSize(final Container arg0) {
 		final java.awt.Insets insets = arg0.getInsets();
 		final int count = arg0.getComponentCount();
 		if (count > 0) {
@@ -97,6 +97,6 @@ public class WrapperLayout implements LayoutManager {
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeLayoutComponent(Component arg0) {
+	public void removeLayoutComponent(final Component arg0) {
 	}
 }

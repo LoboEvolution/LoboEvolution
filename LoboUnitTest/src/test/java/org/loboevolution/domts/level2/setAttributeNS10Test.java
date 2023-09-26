@@ -55,10 +55,10 @@ public class setAttributeNS10Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.example.gov";
-        Document doc;
-        HTMLCollection elementList;
-        Node testAddr;
+        final String namespaceURI = "http://www.example.gov";
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node testAddr;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("em");
         testAddr = elementList.item(0);
@@ -67,7 +67,7 @@ public class setAttributeNS10Test extends LoboUnitTest {
             boolean success = false;
             try {
                 ((Element) testAddr).setAttributeNS(namespaceURI, "", "newValue");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

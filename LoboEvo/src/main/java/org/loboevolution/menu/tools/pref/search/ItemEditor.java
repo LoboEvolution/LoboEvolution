@@ -77,7 +77,7 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 	 * @throws java.awt.HeadlessException the headless exception
 	 * @throws java.awt.HeadlessException if any.
 	 */
-	public ItemEditor(ItemEditorFactory<T> factory) throws HeadlessException {
+	public ItemEditor(final ItemEditorFactory<T> factory) throws HeadlessException {
 		this.editor = factory.createItemEditor();
 		this.createAndShowGUI();
 	}
@@ -146,7 +146,7 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 	 *
 	 * @param caption the new caption
 	 */
-	public void setCaption(String caption) {
+	public void setCaption(final String caption) {
 		this.captionLabel.setText(caption);
 	}
 
@@ -155,7 +155,7 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 	 *
 	 * @param item the new item
 	 */
-	public void setItem(T item) {
+	public void setItem(final T item) {
 		this.getEditor().setItem(item);
 	}
 
@@ -164,7 +164,7 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 	 *
 	 * @param resultingItem the resultingItem to set
 	 */
-	public void setResultingItem(T resultingItem) {
+	public void setResultingItem(final T resultingItem) {
 		this.resultingItem = resultingItem;
 	}
 }

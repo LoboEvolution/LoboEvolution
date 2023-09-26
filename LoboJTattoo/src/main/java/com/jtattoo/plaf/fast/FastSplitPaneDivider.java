@@ -48,7 +48,7 @@ public class FastSplitPaneDivider extends BaseSplitPaneDivider {
 	 *
 	 * @param ui a {@link com.jtattoo.plaf.fast.FastSplitPaneUI} object.
 	 */
-	public FastSplitPaneDivider(FastSplitPaneUI ui) {
+	public FastSplitPaneDivider(final FastSplitPaneUI ui) {
 		super(ui);
 	}
 

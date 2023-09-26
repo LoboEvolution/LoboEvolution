@@ -57,7 +57,7 @@ public class DTMNodeListBase implements NodeList {
 
   /** {@inheritDoc} */
   @Override
-  public Node item(int index) {
+  public Node item(final int index) {
     return null;
   }
 
@@ -77,7 +77,7 @@ public class DTMNodeListBase implements NodeList {
   }
 
   @Override
-  public void forEach(Function function) {
+  public void forEach(final Function function) {
 
   }
 

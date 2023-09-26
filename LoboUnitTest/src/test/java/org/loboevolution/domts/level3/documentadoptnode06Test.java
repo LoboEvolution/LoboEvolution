@@ -49,30 +49,30 @@ public class documentadoptnode06Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Attr newAttr;
-        Text newText;
-        EntityReference newEntRef;
-        Attr adoptedAttr;
-        Text adoptText;
-        EntityReference adoptEntRef;
-        NodeList nodeList;
-        String nodeName;
-        String nodeNamespaceURI;
-        String nodePrefix;
-        Node attrOwnerElem;
-        boolean isSpecified;
-        String adoptedTextNodeValue;
-        String adoptedEntRefNodeValue;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Attr newAttr;
+        final Text newText;
+        final EntityReference newEntRef;
+        final Attr adoptedAttr;
+        final Text adoptText;
+        final EntityReference adoptEntRef;
+        final NodeList nodeList;
+        final String nodeName;
+        final String nodeNamespaceURI;
+        final String nodePrefix;
+        final Node attrOwnerElem;
+        final boolean isSpecified;
+        final String adoptedTextNodeValue;
+        final String adoptedEntRefNodeValue;
+        final DocumentType nullDocType = null;
 
         Node appendedChild;
-        Element docElem;
-        String rootNS;
-        String rootName;
-        String xmlNS = "http://www.w3.org/XML/1998/namespace";
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
+        final String xmlNS = "http://www.w3.org/XML/1998/namespace";
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();

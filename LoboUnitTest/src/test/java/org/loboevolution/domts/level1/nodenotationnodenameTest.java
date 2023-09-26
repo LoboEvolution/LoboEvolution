@@ -35,7 +35,6 @@ import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -58,11 +57,11 @@ public class nodenotationnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notations;
-        Node notationNode;
-        String notationName;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notations;
+        final Node notationNode;
+        final String notationName;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);

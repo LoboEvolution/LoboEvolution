@@ -61,11 +61,11 @@ public class hc_noderemovechildoldchildnonexistentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node oldChild;
-        HTMLCollection elementList;
-        Node elementNode;
-        Node removedChild;
+        final Document doc;
+        final Node oldChild;
+        final HTMLCollection elementList;
+        final Node elementNode;
+        final Node removedChild;
         doc = sampleXmlFile("hc_staff.xml");
         oldChild = doc.createElement("br");
         elementList = doc.getElementsByTagName("p");
@@ -75,7 +75,7 @@ public class hc_noderemovechildoldchildnonexistentTest extends LoboUnitTest {
             boolean success = false;
             try {
                 removedChild = elementNode.removeChild(oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

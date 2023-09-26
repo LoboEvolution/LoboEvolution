@@ -49,8 +49,8 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 	 * @param newY a int.
 	 * @param floatBounds a {@link org.loboevolution.html.renderer.FloatingBounds} object.
 	 */
-	public ParentFloatingBoundsSource(int blockShiftRight, int expectedWidth, int newX, int newY,
-			FloatingBounds floatBounds) {
+	public ParentFloatingBoundsSource(final int blockShiftRight, final int expectedWidth, final int newX, final int newY,
+                                      final FloatingBounds floatBounds) {
 		super();
 		this.blockShiftRight = blockShiftRight;
 		this.expectedBlockWidth = expectedWidth;
@@ -75,7 +75,7 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 
 	/** {@inheritDoc} */
 	@Override
-	public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth) {
+	public FloatingBounds getChildBlockFloatingBounds(final int apparentBlockWidth) {
 		final int actualRightShift = this.blockShiftRight + this.expectedBlockWidth - apparentBlockWidth;
 		return new ShiftedFloatingBounds(this.floatBounds, -this.newX, -actualRightShift, -this.newY);
 	}

@@ -93,22 +93,21 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(final boolean disabled) {
 		setAttribute("disabled", String.valueOf(disabled));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setName(String name) {
+	public void setName(final String name) {
 		setAttribute("name", name);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValue(String value) {
+	public void setValue(final String value) {
 		setAttribute("value", value);
-		
 	}
 
 	/**
@@ -116,7 +115,7 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 	 *
 	 * @param buttonControl a {@link org.loboevolution.html.control.ButtonControl} object.
 	 */
-	public void draw(ButtonControl buttonControl) {
+	public void draw(final ButtonControl buttonControl) {
 		final JButton button = new JButton();
 		button.setContentAreaFilled(false);
 		button.setText(getText());
@@ -130,12 +129,12 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 	 * <p>submit.</p>
 	 */
 	public void submit() {
-		FormInput[] formInputs;
+		final FormInput[] formInputs;
 		final String name = getName();
 		if (name == null) {
 			formInputs = null;
 		} else {
-			formInputs = new FormInput[] { new FormInput(name, getValue()) };
+			formInputs = new FormInput[]{new FormInput(name, getValue())};
 		}
 
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
@@ -160,7 +159,7 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 	public void resetInput() {
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
 		if (form != null && form.hasChildNodes()) {
-			NodeListImpl childNodes = (NodeListImpl) form.getChildNodes();
+			final NodeListImpl childNodes = (NodeListImpl) form.getChildNodes();
 			childNodes.forEach(node -> {
 				if (node instanceof HTMLInputElementImpl) {
 					final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
@@ -171,13 +170,13 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 	}
 
 	private String getText() {
-		StringBuilder text = new StringBuilder();
+		final StringBuilder text = new StringBuilder();
 		if (hasChildNodes()) {
-			NodeListImpl childNodes = (NodeListImpl) getChildNodes();
+			final NodeListImpl childNodes = (NodeListImpl) getChildNodes();
 			childNodes.forEach(child -> {
 				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
-					String childText;
+					final String childText;
 					nodeValue = nodeValue.replace('\n', ' ');
 					nodeValue = nodeValue.replace('\r', ' ');
 					nodeValue = nodeValue.replace('\t', ' ');
@@ -195,7 +194,7 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 	}
 
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
 	}
 
@@ -208,9 +207,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAutofocus(boolean autofocus) {
+	public void setAutofocus(final boolean autofocus) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -222,9 +220,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFormAction(String formAction) {
+	public void setFormAction(final String formAction) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -236,9 +233,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFormEnctype(String formEnctype) {
+	public void setFormEnctype(final String formEnctype) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -250,9 +246,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFormMethod(String formMethod) {
+	public void setFormMethod(final String formMethod) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -264,9 +259,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFormNoValidate(boolean formNoValidate) {
+	public void setFormNoValidate(final boolean formNoValidate) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -278,9 +272,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFormTarget(String formTarget) {
+	public void setFormTarget(final String formTarget) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -292,9 +285,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setType(String type) {
+	public void setType(final String type) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
@@ -334,26 +326,25 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCustomValidity(String error) {
+	public void setCustomValidity(final String error) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public int getClientHeight() {
-		int clientHeight = super.getClientHeight();
+		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 2 : clientHeight;
 	}
 
 	@Override
 	public Integer getClientWidth() {
-		int clientWidth = super.getClientWidth();
+		final int clientWidth = super.getClientWidth();
 		return clientWidth == 0 ? 12 : clientWidth;
 	}
 
 	@Override
 	public Integer getOffsetWidth() {
-		int offsetWidth = super.getOffsetWidth();
+		final int offsetWidth = super.getOffsetWidth();
 		return offsetWidth == 0 ? 22 : offsetWidth;
 	}
 	

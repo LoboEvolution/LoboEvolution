@@ -45,8 +45,8 @@ import static org.junit.Assert.assertNull;
 public class nodegetuserdata01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Object userData;
+        final Document doc;
+        final Object userData;
         doc = sampleXmlFile("hc_staff.xml");
         userData = doc.getUserData("key1");
         assertNull("nodegetuserdata01", userData);

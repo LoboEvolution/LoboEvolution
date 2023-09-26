@@ -52,11 +52,11 @@ public class hc_nodetextnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddr;
-        Node textNode;
-        String textName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddr;
+        final Node textNode;
+        final String textName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddr = (Element) elementList.item(0);

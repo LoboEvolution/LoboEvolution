@@ -29,7 +29,6 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -56,11 +55,11 @@ public class nodegetownerdocument01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document ownerDoc;
-        DOMImplementation domImpl;
-        DocumentType docType;
-        String nullID = null;
+        final Document doc;
+        final Document ownerDoc;
+        final DOMImplementation domImpl;
+        final DocumentType docType;
+        final String nullID = null;
 
         doc = sampleXmlFile("staff.xml");
         

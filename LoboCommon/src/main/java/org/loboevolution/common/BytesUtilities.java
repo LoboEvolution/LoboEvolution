@@ -44,30 +44,30 @@ public class BytesUtilities {
      *
      * @param inputStream a {@link java.io.InputStream} object.
      */
-    public static ByteBuffer readStream(InputStream inputStream) {
+    public static ByteBuffer readStream(final InputStream inputStream) {
         ByteBuffer buffer = null;
         if (inputStream == null) {
             return buffer;
         }
 
         try {
-            byte[] bytes = inputStreamToByteArray(inputStream);
+            final byte[] bytes = inputStreamToByteArray(inputStream);
             buffer = ByteBuffer.wrap(bytes);
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             ex.printStackTrace();
         }
 
         return buffer;
     }
 
-    private static byte[] inputStreamToByteArray(InputStream input) throws IOException {
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
+    private static byte[] inputStreamToByteArray(final InputStream input) throws IOException {
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
         copy(input, output);
         return output.toByteArray();
     }
 
-    private static void copy(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[DEFAULT_BLOCK_SIZE];
+    private static void copy(final InputStream in, final OutputStream out) throws IOException {
+        final byte[] buffer = new byte[DEFAULT_BLOCK_SIZE];
         int n;
         while ((n = in.read(buffer)) > 0) {
             out.write(buffer, 0, n);

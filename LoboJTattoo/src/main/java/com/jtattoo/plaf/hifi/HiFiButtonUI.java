@@ -64,16 +64,16 @@ public class HiFiButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
 			return;
 		}
-		int width = b.getWidth();
-		int height = b.getHeight();
-		Graphics2D g2D = (Graphics2D) g;
-		Shape savedClip = g.getClip();
+		final int width = b.getWidth();
+		final int height = b.getHeight();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Shape savedClip = g.getClip();
 		if (b.getBorder() != null && b.isBorderPainted() && b.getBorder() instanceof UIResource) {
-			Area clipArea = new Area(new Rectangle2D.Double(1, 1, width - 2, height - 2));
+			final Area clipArea = new Area(new Rectangle2D.Double(1, 1, width - 2, height - 2));
 			if (savedClip != null) {
 				clipArea.intersect(new Area(savedClip));
 			}
@@ -85,21 +85,21 @@ public class HiFiButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
-		ButtonModel model = b.getModel();
-		FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-		int mnemIndex = b.getDisplayedMnemonicIndex();
+	protected void paintText(final Graphics g, final AbstractButton b, final Rectangle textRect, final String text) {
+		final ButtonModel model = b.getModel();
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
+		final int mnemIndex = b.getDisplayedMnemonicIndex();
 		int offs = 0;
 		if (model.isArmed() && model.isPressed()) {
 			offs = 1;
 		}
 
-		Graphics2D g2D = (Graphics2D) g;
-		Composite composite = g2D.getComposite();
-		AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite composite = g2D.getComposite();
+		final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 		g2D.setComposite(alpha);
 		Color foreground = b.getForeground();
-		Color background = b.getBackground();
+		final Color background = b.getBackground();
 		if (background instanceof ColorUIResource) {
 			if (model.isPressed() && model.isArmed()) {
 				foreground = AbstractLookAndFeel.getTheme().getSelectionForegroundColor();

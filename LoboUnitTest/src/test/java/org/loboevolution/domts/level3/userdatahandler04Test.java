@@ -48,15 +48,15 @@ import static org.junit.Assert.*;
 public class userdatahandler04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Node node;
-        HTMLCollection pList;
-        UserDataHandlerImpl userDataHandlerImpl = new UserDataHandlerImpl();
+        final Document doc;
+        final Node node;
+        final HTMLCollection pList;
+        final UserDataHandlerImpl userDataHandlerImpl = new UserDataHandlerImpl();
 
         Object oldUserData;
-        String elementNS;
-        Node newNode;
-        List<UserDataNotification> notifications;
+        final String elementNS;
+        final Node newNode;
+        final List<UserDataNotification> notifications;
 
         UserDataNotification notification;
         short operation;
@@ -66,15 +66,15 @@ public class userdatahandler04Test extends LoboUnitTest {
         Node dst;
         int greetingCount = 0;
         int salutationCount = 0;
-        String hello = "Hello";
-        String mister = "Mr.";
-        Document newDoc;
-        String rootName;
-        String rootNS;
-        DOMImplementation domImpl;
-        DocumentType docType = null;
+        final String hello = "Hello";
+        final String mister = "Mr.";
+        final Document newDoc;
+        final String rootName;
+        final String rootNS;
+        final DOMImplementation domImpl;
+        final DocumentType docType = null;
 
-        Element docElem;
+        final Element docElem;
         doc = sampleXmlFile("barfoo.xml");
         domImpl = doc.getImplementation();
         docElem = doc.getDocumentElement();

@@ -50,24 +50,24 @@ class CustomViewportLayout implements LayoutManager {
 	 *
 	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public CustomViewportLayout(ImageViewer viewer) {
+	public CustomViewportLayout(final ImageViewer viewer) {
 		this.viewer = viewer;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void addLayoutComponent(String name, Component comp) {
+	public void addLayoutComponent(final String name, final Component comp) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeLayoutComponent(Component comp) {
+	public void removeLayoutComponent(final Component comp) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension preferredLayoutSize(Container parent) {
-		BufferedImage image = viewer.getImage();
+	public Dimension preferredLayoutSize(final Container parent) {
+		final BufferedImage image = viewer.getImage();
 		if (image == null)
 			return new Dimension();
 		else
@@ -76,22 +76,22 @@ class CustomViewportLayout implements LayoutManager {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension minimumLayoutSize(Container parent) {
+	public Dimension minimumLayoutSize(final Container parent) {
 		return new Dimension(4, 4);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void layoutContainer(Container parent) {
-		JViewport vp = (JViewport) parent;
-		Component view = vp.getView();
+	public void layoutContainer(final Container parent) {
+		final JViewport vp = (JViewport) parent;
+		final Component view = vp.getView();
 
 		if (view == null) {
 			return;
 		}
 
-		Dimension vpSize = vp.getSize();
-		Dimension viewSize = new Dimension(view.getPreferredSize());
+		final Dimension vpSize = vp.getSize();
+		final Dimension viewSize = new Dimension(view.getPreferredSize());
 
 		if (viewer.getResizeStrategy() == ResizeStrategy.SHRINK_TO_FIT
 				|| viewer.getResizeStrategy() == ResizeStrategy.RESIZE_TO_FIT) {

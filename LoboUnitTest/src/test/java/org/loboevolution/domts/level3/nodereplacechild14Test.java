@@ -48,17 +48,17 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild14Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        Element docElem;
-        Element elem;
-        Element elem2;
-        Node imported;
-        Element replaced;
-        DOMImplementation domImpl;
-        String nodeName;
+        final Document doc;
+        final Document newDoc;
+        final Element docElem;
+        final Element elem;
+        final Element elem2;
+        final Node imported;
+        final Element replaced;
+        final DOMImplementation domImpl;
+        final String nodeName;
         Node appendedChild;
-        DocumentType nullDocType = null;
+        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/DOM/Test", "dom3:doc1elem");

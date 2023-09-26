@@ -33,7 +33,7 @@ public class Gte extends Operation {
 
   /** {@inheritDoc} */
   @Override
-  public XObject operate(XObject left, XObject right)
+  public XObject operate(final XObject left, final XObject right)
       throws org.loboevolution.javax.xml.transform.TransformerException {
     return left.greaterThanOrEqual(right) ? XBoolean.S_TRUE : XBoolean.S_FALSE;
   }

@@ -55,13 +55,13 @@ public class FastTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public FastTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public FastTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
 			g.fillRect(0, 0, getWidth(), getHeight());
@@ -73,7 +73,7 @@ public class FastTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		Color borderColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
 		if (isActive()) {
 			borderColor = AbstractLookAndFeel.getWindowBorderColor();

@@ -30,11 +30,9 @@ package org.loboevolution.javax.xml.validation;
 // Referenced classes of package org.loboevolution.javax.xml.validation:
 //            Validator, ValidatorHandler
 
-public abstract class Schema
-{
+public abstract class Schema {
 
-    protected Schema()
-    {
+    protected Schema() {
         throw new RuntimeException("Stub!");
     }
 

@@ -32,9 +32,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
@@ -149,7 +147,7 @@ public class StyleSheetRenderState implements RenderState {
 	 *
 	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
-	public StyleSheetRenderState(HTMLDocumentImpl document) {
+	public StyleSheetRenderState(final HTMLDocumentImpl document) {
 		this.prevRenderState = null;
 		this.element = null;
 		this.document = document;
@@ -161,7 +159,7 @@ public class StyleSheetRenderState implements RenderState {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public StyleSheetRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+	public StyleSheetRenderState(final RenderState prevRenderState,final HTMLElementImpl element) {
 		this.prevRenderState = prevRenderState;
 		this.element = element;
 		this.document = (HTMLDocumentImpl) element.getOwnerDocument();
@@ -191,7 +189,7 @@ public class StyleSheetRenderState implements RenderState {
 			}
 		}
 
-		CSSValues aling = CSSValues.get(textAlign);
+		final CSSValues aling = CSSValues.get(textAlign);
 		switch (aling) {
 		case CENTER:
 			axp = 50;
@@ -222,14 +220,14 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public String getAlignItems() {
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getAlignItems();
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public String getAlignContent() {
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getAlignContent();
 	}
 	
@@ -240,7 +238,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (c != INVALID_COLOR) {
 			return c;
 		}
-		Color localColor;
+		final Color localColor;
 		final BackgroundInfo binfo = getBackgroundInfo();
 		localColor = binfo == null ? null : binfo.getBackgroundColor();
 		if (localColor == null && getDisplay() == DISPLAY_INLINE) {
@@ -286,7 +284,7 @@ public class StyleSheetRenderState implements RenderState {
 			}
 
 			if (Strings.isNotBlank(backgroundColorText)) {
-				CSSValues bc = CSSValues.get(backgroundColorText);
+				final CSSValues bc = CSSValues.get(backgroundColorText);
 				if (bc.equals(CSSValues.INHERIT)) {
 					binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
 				} else {
@@ -348,9 +346,9 @@ public class StyleSheetRenderState implements RenderState {
 		if (c != null) {
 			return c;
 		}
-		CSSStyleDeclaration props = this.getCssProperties();
-		String colorValue = props == null ? null : props.getColor();
-		CSSValues color = CSSValues.get(colorValue);
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String colorValue = props == null ? null : props.getColor();
+		final CSSValues color = CSSValues.get(colorValue);
 		switch (color) {
 		case INHERIT:
 			if (this.getPreviousRenderState() != null) {
@@ -362,7 +360,7 @@ public class StyleSheetRenderState implements RenderState {
 			return Color.BLACK;
 		default:
 			if (Strings.isBlank(colorValue)) {
-				RenderState prs = this.prevRenderState;
+				final RenderState prs = this.prevRenderState;
 				if (prs != null) {
 					c = prs.getColor();
 					this.iColor = c;
@@ -382,7 +380,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public int getCount(String counter, int nesting) {
+	public int getCount(final String counter, final int nesting) {
 		// Expected to be called only in GUI thread.
 		final RenderState prs = this.prevRenderState;
 		if (prs != null) {
@@ -494,15 +492,15 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public int getFloat() {
-		Integer p = this.cachedFloat;
+		final Integer p = this.cachedFloat;
 		if (p != null) {
 			return p;
 		}
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		int floatValue = 0;
-		String floatText = props == null ? null : props.getFloat();
+		final String floatText = props == null ? null : props.getFloat();
 		final String floatTextTL = Strings.isBlank(floatText) ? "" : floatText;
-		CSSValues flt = CSSValues.get(floatTextTL);
+		final CSSValues flt = CSSValues.get(floatTextTL);
 		switch (flt) {
 		case LEFT:
 			floatValue = FLOAT_LEFT;
@@ -526,10 +524,10 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public String getFlexDirection() {
-		CSSStyleDeclaration props = this.getCssProperties();
-		String flexDir = props == null ? null : props.getFlexDirection();
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String flexDir = props == null ? null : props.getFlexDirection();
 		final String flexDirText = Strings.isBlank(flexDir) ? "" : flexDir;
-		CSSValues flt = CSSValues.get(flexDirText);
+		final CSSValues flt = CSSValues.get(flexDirText);
 		switch (flt) {
 		case COLUMN:
 		case COLUMN_REVERSE:
@@ -544,31 +542,31 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public String getFlexWrap() {
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getFlexWrap();
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public String getFlexFlow() {
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getFlexFlow();
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public String getJustifyContent() {
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		return props == null ? null : props.getJustifyContent();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
-		CSSStyleDeclaration style = this.getCssProperties();
-		RenderState prs = this.prevRenderState;
+		final CSSStyleDeclaration style = this.getCssProperties();
+		final RenderState prs = this.prevRenderState;
 		final HtmlRendererConfig config = element != null ? element.getHtmlRendererConfig() : new LocalHtmlRendererConfig();
-		FontKey key = FontValues.getDefaultFontKey(config);
+		final FontKey key = FontValues.getDefaultFontKey(config);
 
 		if (this.iFont != null) {
 			return this.iFont;
@@ -583,7 +581,7 @@ public class StyleSheetRenderState implements RenderState {
 			return this.iFont;
 		}
 
-		Font f = FONT_FACTORY.getFont(FontValues.getFontKey(key, element, style, prs));
+		final Font f = FONT_FACTORY.getFont(FontValues.getFontKey(key, element, style, prs));
 		this.iFont = f;
 		return f;
 	}
@@ -631,7 +629,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (overflow != -1) {
 			return overflow;
 		}
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		if (props == null) {
 			overflow = OVERFLOW_NONE;
 		} else {
@@ -643,7 +641,7 @@ public class StyleSheetRenderState implements RenderState {
 					return OVERFLOW_NONE;
 				}
 			}
-			CSSValues overx = CSSValues.get(overflowText);
+			final CSSValues overx = CSSValues.get(overflowText);
 			switch (overx) {
 			case SCROLL:
 				overflow = OVERFLOW_SCROLL;
@@ -677,7 +675,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (overflow != -1) {
 			return overflow;
 		}
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		if (props == null) {
 			overflow = OVERFLOW_NONE;
 		} else {
@@ -689,7 +687,7 @@ public class StyleSheetRenderState implements RenderState {
 					return OVERFLOW_NONE;
 				}
 			}
-			CSSValues overy = CSSValues.get(overflowText);
+			final CSSValues overy = CSSValues.get(overflowText);
 			switch (overy) {
 			case SCROLL:
 				overflow = OVERFLOW_SCROLL;
@@ -760,15 +758,15 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public int getPosition() {
-		Integer p = this.cachedPosition;
+		final Integer p = this.cachedPosition;
 		if (p != null) {
 			return p;
 		}
-		CSSStyleDeclaration props = this.getCssProperties();
+		final CSSStyleDeclaration props = this.getCssProperties();
 		int position = 0;
-		String positionText = props == null ? null : props.getPosition();
+		final String positionText = props == null ? null : props.getPosition();
 		final String positionTextTL = Strings.isBlank(positionText) ? "" : positionText;
-		CSSValues pos = CSSValues.get(positionTextTL);
+		final CSSValues pos = CSSValues.get(positionTextTL);
 		switch (pos) {
 		case ABSOLUTE:
 			position = POSITION_ABSOLUTE;
@@ -806,7 +804,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (c != INVALID_COLOR) {
 			return c;
 		}
-		Color localColor;
+		final Color localColor;
 		if (getDisplay() != DISPLAY_INLINE) {
 			// Background painted by block.
 			localColor = null;
@@ -835,10 +833,10 @@ public class StyleSheetRenderState implements RenderState {
 		if (td != -1) {
 			return td;
 		}
-		CSSStyleDeclaration props = this.getCssProperties();
-		String tdText = props == null ? null : props.getTextDecoration();
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String tdText = props == null ? null : props.getTextDecoration();
 		if (tdText == null) {
-			RenderState prs = this.prevRenderState;
+			final RenderState prs = this.prevRenderState;
 			if (prs != null) {
 				td = prs.getTextDecorationMask();
 				this.iTextDecoration = td;
@@ -847,7 +845,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		td = 0;
 		if (tdText != null) {
-			StringTokenizer tok = new StringTokenizer(tdText.toLowerCase(), ", \t\n\r");
+			final StringTokenizer tok = new StringTokenizer(tdText.toLowerCase(), ", \t\n\r");
 			while (tok.hasMoreTokens()) {
 				final String token = tok.nextToken();
 				final CSSValues tkn = CSSValues.get(token);
@@ -881,7 +879,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public int getTextIndent(int availSize) {
+	public int getTextIndent(final int availSize) {
 		// No caching for this one.
 		final String tiText = getTextIndentText();
 		if (Strings.isCssBlank(tiText)) {
@@ -920,10 +918,10 @@ public class StyleSheetRenderState implements RenderState {
 		if (tt != -1) {
 			return tt;
 		}
-		CSSStyleDeclaration props = this.getCssProperties();
-		String tdText = props == null ? null : props.getTextTransform();
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String tdText = props == null ? null : props.getTextTransform();
 		if (tdText == null) {
-			RenderState prs = this.prevRenderState;
+			final RenderState prs = this.prevRenderState;
 			if (prs != null) {
 				tt = prs.getTextTransform();
 				this.iTextTransform = tt;
@@ -958,15 +956,15 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public int getVisibility() {
-		Integer v = this.cachedVisibility;
+		final Integer v = this.cachedVisibility;
 		if (v != null) {
 			return v;
 		}
-		CSSStyleDeclaration props = this.getCssProperties();
-		int visibility;
-		String visibText = props == null ? null : props.getVisibility();
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final int visibility;
+		final String visibText = props == null ? null : props.getVisibility();
 		final String visibTextTL = Strings.isBlank(visibText) ? "" : visibText;
-		CSSValues visy = CSSValues.get(visibTextTL);
+		final CSSValues visy = CSSValues.get(visibTextTL);
 		switch (visy) {
 		case HIDDEN:
 			visibility = VISIBILITY_HIDDEN;
@@ -999,9 +997,9 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		final CSSStyleDeclaration props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
-		int wsValue;
+		final int wsValue;
 		final String whiteSpaceTextTL = Strings.isBlank(whiteSpaceText) ? "" : whiteSpaceText;
-		CSSValues white = CSSValues.get(whiteSpaceTextTL);
+		final CSSValues white = CSSValues.get(whiteSpaceTextTL);
 		switch (white) {
 		case NOWRAP:
 			wsValue = WS_NOWRAP;
@@ -1029,7 +1027,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public final WordInfo getWordInfo(String word) {
+	public final WordInfo getWordInfo(final String word) {
 		// Expected to be called only in the GUI (rendering) thread.
 		// No synchronization necessary.
 		Map<String, WordInfo> map = this.iWordInfoMap;
@@ -1056,7 +1054,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public int incrementCount(String counter, int nesting) {
+	public int incrementCount(final String counter, final int nesting) {
 		// Expected to be called only in the GUI thread.
 		final RenderState prs = this.prevRenderState;
 		if (prs != null) {
@@ -1121,7 +1119,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public void resetCount(String counter, int nesting, int value) {
+	public void resetCount(final String counter, final int nesting, final int value) {
 		// Expected to be called only in the GUI thread.
 		final RenderState prs = this.prevRenderState;
 		if (prs != null) {
@@ -1143,7 +1141,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHighlight(boolean highlight) {
+	public void setHighlight(final boolean highlight) {
 		this.iHighlight = highlight;
 	}
 
@@ -1159,7 +1157,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (cachedClear == null) {
 			final CSSStyleDeclaration props = this.getCssProperties();
 			final String clearStr = props != null ? props.getClear() : "";
-			CSSValues clear = CSSValues.get(clearStr);
+			final CSSValues clear = CSSValues.get(clearStr);
 			switch (clear) {
 			case RIGHT:
 				cachedClear = LineBreak.RIGHT;
@@ -1178,10 +1176,10 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public String getBoxSizing() {
-		CSSStyleDeclaration props = this.getCssProperties();
-		String boxSizing = props != null ? props.getBoxSizing() : "";
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String boxSizing = props != null ? props.getBoxSizing() : "";
 		final String visibTextTL = Strings.isBlank(boxSizing) ? "" : boxSizing;
-		CSSValues box = CSSValues.get(visibTextTL);
+		final CSSValues box = CSSValues.get(visibTextTL);
 		switch (box) {
 		case INHERIT:
 			return this.getPreviousRenderState().getBoxSizing();
@@ -1224,7 +1222,7 @@ public class StyleSheetRenderState implements RenderState {
     
     /** {@inheritDoc} */
     @Override
-    public void setCursor(Optional<Cursor> cursor) {
+    public void setCursor(final Optional<Cursor> cursor) {
        this.cursor = cursor;
         
     }
@@ -1232,10 +1230,10 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public Optional<Cursor> getCursor() {
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		final Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Optional<Cursor> prevCursorOpt = Optional.empty();
 		if(element == null) return prevCursorOpt;
-		CSSStyleDeclaration props = element.getStyle();
+		final CSSStyleDeclaration props = element.getStyle();
 		final HtmlRendererConfig config = element.getHtmlRendererConfig();
 
 		if (this.cursor != null) {
@@ -1243,8 +1241,8 @@ public class StyleSheetRenderState implements RenderState {
 		}
 
 		if (props != null) {
-			String cursor = props.getPropertyValue("cursor");
-			CSSValues key = CSSValues.get(cursor);
+			final String cursor = props.getPropertyValue("cursor");
+			final CSSValues key = CSSValues.get(cursor);
 
 			switch (key) {
 				case AUTO:
@@ -1319,7 +1317,7 @@ public class StyleSheetRenderState implements RenderState {
    }
    
    
-   private void applyBackgroundPosition(BackgroundInfo binfo, String position) {
+   private void applyBackgroundPosition(final BackgroundInfo binfo, final String position) {
 		binfo.setBackgroundXPositionAbsolute(false);
 		binfo.setBackgroundYPositionAbsolute(false);
 		binfo.setBackgroundXPosition(50);
@@ -1335,7 +1333,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 	
-	private void applyBackgroundRepeat(BackgroundInfo binfo, String backgroundRepeatText) {
+	private void applyBackgroundRepeat(final BackgroundInfo binfo, final String backgroundRepeatText) {
 		if (binfo.getBackgroundRepeat() == BackgroundInfo.BR_REPEAT) {
 			final CSSValues rep = CSSValues.get(backgroundRepeatText);
 			switch (rep) {
@@ -1349,7 +1347,7 @@ public class StyleSheetRenderState implements RenderState {
 				binfo.setBackgroundRepeat(BackgroundInfo.BR_NO_REPEAT);
 				break;
 			case INHERIT:
-				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
+				final BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
 				if (bi != null) {
 					binfo.setBackgroundRepeat(bi.getBackgroundRepeat());
 				}
@@ -1363,13 +1361,13 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
-	private void applyBackgroundVerticalPosition(BackgroundInfo binfo, String yposition) {
+	private void applyBackgroundVerticalPosition(final BackgroundInfo binfo, final String yposition) {
 		if (yposition.endsWith("%")) {
 			binfo.setBackgroundYPositionAbsolute(false);
 			try {
 				binfo.setBackgroundYPosition(
 						(int) Double.parseDouble(yposition.substring(0, yposition.length() - 1).trim()));
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				binfo.setBackgroundYPosition(0);
 			}
 		} else {
@@ -1391,7 +1389,7 @@ public class StyleSheetRenderState implements RenderState {
 				binfo.setBackgroundYPosition(0);
 				break;
 				case INHERIT:
-				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
+				final BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
 				if (bi != null) {
 					binfo.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());
 					binfo.setBackgroundYPosition(bi.getBackgroundYPosition());
@@ -1406,12 +1404,12 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 	
-	private void applyBackgroundHorizontalPositon(BackgroundInfo binfo, String xposition) {
+	private void applyBackgroundHorizontalPositon(final BackgroundInfo binfo, final String xposition) {
 		if (xposition.endsWith("%")) {
 			binfo.setBackgroundXPositionAbsolute(false);
 			try {
 				binfo.setBackgroundXPosition((int) Double.parseDouble(xposition.substring(0, xposition.length() - 1).trim()));
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 				binfo.setBackgroundXPosition(0);
 			}
 		} else {
@@ -1433,7 +1431,7 @@ public class StyleSheetRenderState implements RenderState {
 				binfo.setBackgroundXPosition(0);
 				break;
 				case INHERIT:
-				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
+				final BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
 				if (bi != null) {
 					binfo.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());
 					binfo.setBackgroundXPosition(bi.getBackgroundXPosition());
@@ -1448,45 +1446,45 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
-	private void applyBackgroundImage(BackgroundInfo binfo, String backgroundImageText, HTMLDocumentImpl document, CSSStyleDeclaration props) {
+	private void applyBackgroundImage(final BackgroundInfo binfo, final String backgroundImageText, final HTMLDocumentImpl document,final  CSSStyleDeclaration props) {
 		if (HtmlValues.isUrl(backgroundImageText)) {
-			String start = "url(";
-			int startIdx = start.length() + 1;
-			int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
+			final String start = "url(";
+			final int startIdx = start.length() + 1;
+			final int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
 			String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
-			String[] items = {"http", "https", "file"};
+			final String[] items = {"http", "https", "file"};
 			if (Strings.containsWords(quotedUri, items)) {
 				try {
 					binfo.setBackgroundImage(linkUri(document, quotedUri, backgroundImageText));
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					binfo.setBackgroundImage(null);
 				}
 			} else {
 				if (quotedUri.contains(";base64,")) {
 					final String base64 = backgroundImageText.split(";base64,")[1];
 					final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-					quotedUri = String.valueOf(decodedBytes);
+					quotedUri = Arrays.toString(decodedBytes);
 				}
 				binfo.setBackgroundImage(linkUri(document, quotedUri, backgroundImageText));
 			}
 		} else if (HtmlValues.isGradient(backgroundImageText)) {
 			try {
-				GradientStyle style = new GradientStyle();
-				BufferedImage img = style.gradientToImg(document, props, this, backgroundImageText);
+				final GradientStyle style = new GradientStyle();
+				final BufferedImage img = style.gradientToImg(document, props, this, backgroundImageText);
 				if (img != null) {
-					File f = File.createTempFile("temp", null);
+					final File f = File.createTempFile("temp", null);
 					ImageIO.write(img, "png", f);
 					binfo.setBackgroundImage(f.toURI().toURL());
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 	}
 
-	private URL linkUri(HTMLDocumentImpl document, String quotedUri, String backgroundImageText) {
+	private URL linkUri(final HTMLDocumentImpl document, final String quotedUri, final String backgroundImageText) {
 		if (element instanceof HTMLLinkElementImpl) {
-			HTMLLinkElementImpl elm = (HTMLLinkElementImpl) element;
+			final HTMLLinkElementImpl elm = (HTMLLinkElementImpl) element;
 			final String rel = elm.getAttribute("rel");
 			if (rel != null) {
 				final String cleanRel = rel.trim().toLowerCase();

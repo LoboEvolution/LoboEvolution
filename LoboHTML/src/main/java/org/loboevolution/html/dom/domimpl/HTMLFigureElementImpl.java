@@ -39,13 +39,13 @@ public class HTMLFigureElementImpl extends HTMLElementImpl /*implements HTMLFigu
      *
      * @param name a {@link String} object.
      */
-    public HTMLFigureElementImpl(String name) {
+    public HTMLFigureElementImpl(final String name) {
         super(name);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new QuoteRenderState(prevRenderState, this);
     }
 

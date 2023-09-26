@@ -50,7 +50,7 @@ import org.loboevolution.javax.xml.transform.Result;
  * @since 1.6
  */
 public class StAXResult implements Result {
-    /** If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature(String name)}
+    /** If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature(final String name)}
      * returns true when passed this value as an argument,
      * the Transformer supports Result output of this type.
      */
@@ -70,7 +70,7 @@ public class StAXResult implements Result {
     private XMLStreamWriter xmlStreamWriter = null;
 
     /** <p>System identifier for this <code>StAXResult</code>.<p> */
-    private String systemId = null;
+    private final String systemId = null;
 
     /**
      * <p>Creates a new instance of a <code>StAXResult</code>

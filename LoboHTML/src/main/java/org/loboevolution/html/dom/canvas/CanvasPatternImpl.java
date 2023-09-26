@@ -50,7 +50,7 @@ public class CanvasPatternImpl implements CanvasPattern {
 	 * @param canvas a {@link org.loboevolution.html.dom.HTMLCanvasElement} object.
 	 * @param repetitionType a {@link java.lang.String} object.
 	 */
-	public CanvasPatternImpl(HTMLCanvasElement canvas, String repetitionType) {
+	public CanvasPatternImpl(final HTMLCanvasElement canvas, final String repetitionType) {
 		this.canvas = canvas;
 		this.repetitionType = repetitionType;
 	}
@@ -61,7 +61,7 @@ public class CanvasPatternImpl implements CanvasPattern {
 	 * @param image a {@link org.loboevolution.html.dom.HTMLImageElement} object.
 	 * @param repetitionType a {@link java.lang.String} object.
 	 */
-	public CanvasPatternImpl(HTMLImageElement image, String repetitionType) {
+	public CanvasPatternImpl(final HTMLImageElement image, final String repetitionType) {
 		this.image = image;
 		this.repetitionType = repetitionType;
 	}

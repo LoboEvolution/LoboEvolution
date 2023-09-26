@@ -51,13 +51,13 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 	 *
 	 * @param text a {@link java.lang.String} object.
 	 */
-	public CharacterDataImpl(String text) {
+	public CharacterDataImpl(final String text) {
 		this.text = text;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void appendData(String arg) {
+	public void appendData(final String arg) {
 		this.text += arg;
 		if (!this.notificationsSuspended) {
 			informInvalid();
@@ -66,8 +66,8 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 
 	/** {@inheritDoc} */
 	@Override
-	public void deleteData(int offset, int count) {
-		int dl = text.length();
+	public void deleteData(final int offset, final int count) {
+		final int dl = text.length();
 		if (offset < 0 || count < 0 || offset >= dl) {
 			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
 		}
@@ -109,8 +109,8 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 
 	/** {@inheritDoc} */
 	@Override
-	public void insertData(int offset, String arg) {
-		int dl = text.length();
+	public void insertData(final int offset, final String arg) {
+		final int dl = text.length();
 		if (offset < 0 || offset > dl) {
 			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
 		}
@@ -124,9 +124,9 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 
 	/** {@inheritDoc} */
 	@Override
-	public void replaceData(int offset, int count, String arg) {
+	public void replaceData(final int offset, final int count, final String arg) {
 		try {
-			int dl = text.length();
+			final int dl = text.length();
 			if (offset < 0 || offset > dl) {
 				throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
 			}
@@ -136,16 +136,16 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 			if (!this.notificationsSuspended) {
 				informInvalid();
 			}
-		} catch (StringIndexOutOfBoundsException e) {
+		} catch (final StringIndexOutOfBoundsException e) {
 			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setData(String data) {
+	public void setData(final String data) {
 		this.text = data;
 		if (!this.notificationsSuspended) {
 			informInvalid();
@@ -154,7 +154,7 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTextContent(String textContent) {
+	public void setTextContent(final String textContent) {
 		this.text = textContent;
 		if (!this.notificationsSuspended) {
 			informInvalid();
@@ -163,14 +163,14 @@ public class CharacterDataImpl extends EventTargetImpl implements CharacterData 
 
 	/** {@inheritDoc} */
 	@Override
-	public String substringData(int offset, int count) {
+	public String substringData(final int offset, final int count) {
 		try {
-			int dl = text.length();
+			final int dl = text.length();
 			if (offset < 0 || offset > dl || count < 0) {
 				throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
 			}
 			return this.text.substring(offset, offset + count);
-		} catch (StringIndexOutOfBoundsException e) {
+		} catch (final StringIndexOutOfBoundsException e) {
 			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
 		}
 	}

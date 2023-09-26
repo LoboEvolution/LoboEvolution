@@ -47,11 +47,11 @@ import static org.junit.Assert.assertFalse;
 public class nodeisdefaultnamespace09Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element parent;
-        Element child;
+        final Document doc;
+        final Element parent;
+        final Element child;
         boolean isDefault;
-        Node appendedChild;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:body");
         child = doc.createElement("xhtml:p");

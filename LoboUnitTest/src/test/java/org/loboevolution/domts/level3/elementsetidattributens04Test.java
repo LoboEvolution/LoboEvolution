@@ -53,14 +53,14 @@ import static org.junit.Assert.*;
 public class elementsetidattributens04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element strongElem;
-        NamedNodeMap attributesMap;
-        Attr attr;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element strongElem;
+        final NamedNodeMap attributesMap;
+        final Attr attr;
         boolean id = false;
-        Element elem;
-        String elemName;
+        final Element elem;
+        final String elemName;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagNameNS("*", "strong");
         strongElem = (Element) elemList.item(2);

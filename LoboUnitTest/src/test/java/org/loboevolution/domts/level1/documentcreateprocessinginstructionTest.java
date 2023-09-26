@@ -33,7 +33,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.ProcessingInstruction;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -63,11 +62,11 @@ public class documentcreateprocessinginstructionTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        ProcessingInstruction newPINode;
-        String piValue;
-        String piName;
-        int piType;
+        final Document doc;
+        final ProcessingInstruction newPINode;
+        final String piValue;
+        final String piName;
+        final int piType;
         doc = sampleXmlFile("staff.xml");
         newPINode = doc.createProcessingInstruction("TESTPI", "This is a new PI node");
         assertNotNull("createdPINotNull", newPINode);

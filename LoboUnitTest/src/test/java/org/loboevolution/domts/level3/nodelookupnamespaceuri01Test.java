@@ -43,9 +43,9 @@ import static org.junit.Assert.assertNull;
 public class nodelookupnamespaceuri01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String namespaceURI;
-        String nullPrefix = null;
+        final Document doc;
+        final String namespaceURI;
+        final String nullPrefix = null;
 
         doc = sampleXmlFile("barfoo_nodefaultns.xml");
         namespaceURI = doc.lookupNamespaceURI(nullPrefix);

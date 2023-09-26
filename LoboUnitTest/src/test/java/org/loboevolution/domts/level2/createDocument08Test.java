@@ -53,14 +53,14 @@ public class createDocument08Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.example.org/schema";
-        DocumentType docType = null;
-        DOMImplementation domImpl;
+        final String namespaceURI = "http://www.example.org/schema";
+        final DocumentType docType = null;
+        final DOMImplementation domImpl;
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         boolean success = false;
         try {
             domImpl.createDocument(namespaceURI, "", docType);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
         assertTrue("throw_INVALID_CHARACTER_ERR", success);

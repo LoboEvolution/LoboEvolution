@@ -29,56 +29,45 @@ package org.loboevolution.javax.xml.namespace;
 import java.io.Serializable;
 
 public class QName
-    implements Serializable
-{
+        implements Serializable {
 
-    public QName(String namespaceURI, String localPart)
-    {
+    public QName(final String namespaceURI, final String localPart) {
         throw new RuntimeException("Stub!");
     }
 
-    public QName(String namespaceURI, String localPart, String prefix)
-    {
+    public QName(final String namespaceURI, final String localPart, final String prefix) {
         throw new RuntimeException("Stub!");
     }
 
-    public QName(String localPart)
-    {
+    public QName(final String localPart) {
         throw new RuntimeException("Stub!");
     }
 
-    public String getNamespaceURI()
-    {
+    public static QName valueOf(final String qNameAsString) {
         throw new RuntimeException("Stub!");
     }
 
-    public String getLocalPart()
-    {
+    public String getNamespaceURI() {
         throw new RuntimeException("Stub!");
     }
 
-    public String getPrefix()
-    {
+    public String getLocalPart() {
         throw new RuntimeException("Stub!");
     }
 
-    public final boolean equals(Object objectToTest)
-    {
+    public String getPrefix() {
         throw new RuntimeException("Stub!");
     }
 
-    public final int hashCode()
-    {
+    public final boolean equals(final Object objectToTest) {
         throw new RuntimeException("Stub!");
     }
 
-    public String toString()
-    {
+    public final int hashCode() {
         throw new RuntimeException("Stub!");
     }
 
-    public static QName valueOf(String qNameAsString)
-    {
+    public String toString() {
         throw new RuntimeException("Stub!");
     }
 }

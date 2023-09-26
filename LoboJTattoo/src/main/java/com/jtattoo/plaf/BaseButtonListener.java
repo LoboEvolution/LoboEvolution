@@ -45,21 +45,21 @@ public class BaseButtonListener extends BasicButtonListener {
 	 *
 	 * @param b a {@link javax.swing.AbstractButton} object.
 	 */
-	public BaseButtonListener(AbstractButton b) {
+	public BaseButtonListener(final AbstractButton b) {
 		super(b);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void focusGained(FocusEvent e) {
-		AbstractButton b = (AbstractButton) e.getSource();
+	public void focusGained(final FocusEvent e) {
+		final AbstractButton b = (AbstractButton) e.getSource();
 		b.repaint();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void focusLost(FocusEvent e) {
-		AbstractButton b = (AbstractButton) e.getSource();
+	public void focusLost(final FocusEvent e) {
+		final AbstractButton b = (AbstractButton) e.getSource();
 		b.repaint();
 	}
 
@@ -67,7 +67,7 @@ public class BaseButtonListener extends BasicButtonListener {
 	@Override
 	public void mouseEntered(final MouseEvent e) {
 		super.mouseEntered(e);
-		AbstractButton button = (AbstractButton) e.getSource();
+		final AbstractButton button = (AbstractButton) e.getSource();
 		button.getModel().setRollover(true);
 	}
 
@@ -75,7 +75,7 @@ public class BaseButtonListener extends BasicButtonListener {
 	@Override
 	public void mouseExited(final MouseEvent e) {
 		super.mouseExited(e);
-		AbstractButton button = (AbstractButton) e.getSource();
+		final AbstractButton button = (AbstractButton) e.getSource();
 		button.getModel().setRollover(false);
 	}
 

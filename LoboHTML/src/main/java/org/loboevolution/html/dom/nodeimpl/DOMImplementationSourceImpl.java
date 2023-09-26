@@ -53,8 +53,8 @@ public class DOMImplementationSourceImpl implements DOMImplementationSource {
      * @return An implementation that has the desired features, or
      * <code>null</code> if this source has none.
      */
-    public DOMImplementation getDOMImplementation(String features) {
-        DOMImplementation impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), false));
+    public DOMImplementation getDOMImplementation(final String features) {
+        final DOMImplementation impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), false));
         if (testImpl(impl, features)) {
             return impl;
         }
@@ -74,8 +74,8 @@ public class DOMImplementationSourceImpl implements DOMImplementationSource {
      * @return A list of DOM implementations that support the desired
      * features.
      */
-    public DOMImplementationList getDOMImplementationList(String features) {
-        DOMImplementation impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(),false));
+    public DOMImplementationList getDOMImplementationList(final String features) {
+        final DOMImplementation impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(),false));
         final List<DOMImplementation> implementations = new ArrayList<>();
         if (testImpl(impl, features)) {
             implementations.add(impl);
@@ -84,9 +84,9 @@ public class DOMImplementationSourceImpl implements DOMImplementationSource {
         return new DOMImplementationListImpl(implementations);
     }
 
-    boolean testImpl(DOMImplementation impl, String features) {
+    boolean testImpl(final DOMImplementation impl, final String features) {
 
-        StringTokenizer st = new StringTokenizer(features);
+        final StringTokenizer st = new StringTokenizer(features);
         String feature = null;
         String version = null;
 
@@ -96,7 +96,7 @@ public class DOMImplementationSourceImpl implements DOMImplementationSource {
         while (feature != null) {
             boolean isVersion = false;
             if (st.hasMoreTokens()) {
-                char c;
+                final char c;
                 version = st.nextToken();
                 c = version.charAt(0);
                 switch (c) {
@@ -111,6 +111,9 @@ public class DOMImplementationSourceImpl implements DOMImplementationSource {
                     case '8':
                     case '9':
                         isVersion = true;
+                        break;
+                    default:
+                        break;
                 }
             } else {
                 version = null;

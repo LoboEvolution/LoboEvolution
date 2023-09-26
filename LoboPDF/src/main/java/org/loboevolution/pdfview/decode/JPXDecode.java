@@ -57,9 +57,9 @@ public class JPXDecode {
      * @return a {@link java.nio.ByteBuffer} object.
      * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
-    protected static ByteBuffer decode(PDFObject dict, ByteBuffer buf, PDFObject params) throws PDFParseException {
-        BufferedImage bimg = loadImageData(buf);
-        byte[] output = ImageDataDecoder.decodeImageData(bimg);
+    protected static ByteBuffer decode(final PDFObject dict, final ByteBuffer buf, final PDFObject params) throws PDFParseException {
+        final BufferedImage bimg = loadImageData(buf);
+        final byte[] output = ImageDataDecoder.decodeImageData(bimg);
 		return ByteBuffer.wrap(output);
     }
 
@@ -70,20 +70,20 @@ public class JPXDecode {
 	 * @throws IOException
 	 ************************************************************************/
     
-	private static BufferedImage loadImageData(ByteBuffer buf) throws PDFParseException {
+	private static BufferedImage loadImageData(final ByteBuffer buf) throws PDFParseException {
         ImageReader reader = null;
 		try {
-			byte[] input = new byte[buf.remaining()];
+			final byte[] input = new byte[buf.remaining()];
 			buf.get(input);
-			Iterator<ImageReader> readers = ImageIO.getImageReadersByMIMEType("image/jpeg2000");
+			final Iterator<ImageReader> readers = ImageIO.getImageReadersByMIMEType("image/jpeg2000");
 			if (!readers.hasNext()) {
 				throw new PDFParseException("JPXDecode failed. No reader available");
 			}
 			reader = readers.next();
 			reader.setInput(new MemoryCacheImageInputStream(new ByteArrayInputStream(input)));
-			BufferedImage bimg = reader.read(0);
+			final BufferedImage bimg = reader.read(0);
 			return bimg;
-		} catch (IOException e) {
+		} catch (final IOException e) {
             throw new PDFParseException("JPXDecode failed", e);
         } finally {
             if (reader != null) {

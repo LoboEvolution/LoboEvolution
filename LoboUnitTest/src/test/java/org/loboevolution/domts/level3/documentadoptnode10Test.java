@@ -47,15 +47,15 @@ import static org.junit.Assert.assertTrue;
 public class documentadoptnode10Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
+        final Document doc;
+        final DocumentType docType;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
         boolean success = false;
         try {
             doc.adoptNode(docType);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("throw_NOT_SUPPORTED_ERR", success);

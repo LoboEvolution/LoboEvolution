@@ -46,13 +46,13 @@ import static org.junit.Assert.*;
 public class elementcontentwhitespace03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection bodyList;
-        Element body;
-        DOMConfiguration domConfig;
-        boolean canSet;
+        final Document doc;
+        final HTMLCollection bodyList;
+        final Element body;
+        final DOMConfiguration domConfig;
+        final boolean canSet;
         boolean canSetValidate;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node child;
         String childName;

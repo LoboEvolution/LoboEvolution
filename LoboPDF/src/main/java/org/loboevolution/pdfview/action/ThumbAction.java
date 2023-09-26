@@ -55,15 +55,15 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 	 *
 	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public ThumbAction(PDFViewer dialog) {
+	public ThumbAction(final PDFViewer dialog) {
 		super("Hide thumbnails");
 		this.dialog = dialog;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		int v = (Integer) evt.getNewValue();
+	public void propertyChange(final PropertyChangeEvent evt) {
+		final int v = (Integer) evt.getNewValue();
 		if (v <= 1) {
 			isOpen = false;
 			putValue(ACTION_COMMAND_KEY, "Show thumbnails");
@@ -77,7 +77,7 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent evt) {
+	public void actionPerformed(final ActionEvent evt) {
 		dialog.doThumbs(!isOpen);
 	}
 }

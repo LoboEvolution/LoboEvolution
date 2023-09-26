@@ -51,13 +51,13 @@ import static org.junit.Assert.assertEquals;
 public class documentadoptnode28Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
-        Node adoptedNode;
-        Node employeeElem;
-        Attr attrImp;
-        String nodeName;
-        String nullNSURI = null;
+        final Document doc;
+        final HTMLCollection childList;
+        final Node adoptedNode;
+        final Node employeeElem;
+        final Attr attrImp;
+        final String nodeName;
+        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("p");

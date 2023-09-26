@@ -52,9 +52,9 @@ public class domimplementationregistry25Test extends LoboUnitTest {
     @SneakyThrows
     public void runTest() {
        
-        DOMImplementationList domImplList;
-        int length;
-         DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationList domImplList;
+        final int length;
+         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("");
         length = (int) domImplList.getLength();

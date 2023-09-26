@@ -29,11 +29,9 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -58,25 +56,25 @@ public class nodenormalize01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        DocumentType docTypeNull = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final DocumentType docTypeNull = null;
 
-        Element documentElement;
-        Element element1;
-        Element element2;
-        Element element3;
-        Element element4;
-        Element element5;
-        Element element6;
-        Element element7;
+        final Element documentElement;
+        final Element element1;
+        final Element element2;
+        final Element element3;
+        final Element element4;
+        final Element element5;
+        final Element element6;
+        final Element element7;
         Text text1;
         Text text2;
         Text text3;
-        ProcessingInstruction pi;
-        CDATASection cData;
-        Comment comment;
+        final ProcessingInstruction pi;
+        final CDATASection cData;
+        final Comment comment;
         EntityReference entRef;
         NodeList elementList;
         doc = sampleXmlFile("staffNS.xml");

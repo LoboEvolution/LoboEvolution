@@ -72,8 +72,8 @@ public class CookieManager {
 	 * <p>deleteCookies.</p>
 	 */
 	public static void deleteCookies() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_COOKIES)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_COOKIES)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -86,8 +86,8 @@ public class CookieManager {
 	 * @param address a {@link java.lang.String} object.
 	 * @return a {@link java.util.List} object.
 	 */
-	public static List<CookieInfo> getCookieList(String address) {
-		URL url;
+	public static List<CookieInfo> getCookieList(final String address) {
+		final URL url;
 		List<CookieInfo> cookies = new ArrayList<>();
 		try {
 			url = new URL(address);
@@ -99,14 +99,14 @@ public class CookieManager {
 		return cookies;
 	}
 
-	private static List<CookieInfo> getCookies(String hostName, String path) {
+	private static List<CookieInfo> getCookies(final String hostName, final String path) {
 		final List<CookieInfo> cookies = new ArrayList<>();
 		if (settings.isCookie()) {
-			try (Connection conn = DriverManager.getConnection(DB_PATH);
-					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
+			try (final Connection conn = DriverManager.getConnection(DB_PATH);
+                 final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
 				pstmt.setString(1, hostName);
 				pstmt.setString(2, path);
-				try (ResultSet rs = pstmt.executeQuery()) {
+				try (final ResultSet rs = pstmt.executeQuery()) {
 					while (rs != null && rs.next()) {
 						final CookieInfo cookie = new CookieInfo();
 						cookie.setName(rs.getString(1));
@@ -133,7 +133,7 @@ public class CookieManager {
 	 *
 	 * @param uri a {@link java.lang.String} object.
 	 */
-	public static void putCookies(String uri) {
+	public static void putCookies(final String uri) {
 		try {
 			final URL url = new URL(uri);
 			final URLConnection connection = url.openConnection();
@@ -153,7 +153,7 @@ public class CookieManager {
 		}
 	}
 
-	private static void saveCookie(String urlHostName, String cookieSpec) {
+	private static void saveCookie(final String urlHostName, final String cookieSpec) {
 		String cookieName = null;
 		String cookieValue = null;
 		String domain = null;
@@ -245,10 +245,10 @@ public class CookieManager {
 	 * @param secure a boolean.
 	 * @param httponly a boolean.
 	 */
-	public static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge,
-			boolean secure, boolean httponly) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COOKIES)) {
+	public static void saveCookie(final String domain, final String path, final String name, final Date expires, final String value, final String maxAge,
+                                  final boolean secure, final boolean httponly) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COOKIES)) {
 			final SimpleDateFormat dateFormatter = new SimpleDateFormat(PATTERN);
 			pstmt.setString(1, name);
 			pstmt.setString(2, value);
@@ -270,7 +270,7 @@ public class CookieManager {
 	 * @param url a {@link java.net.URL} object.
 	 * @param cookieSpec a {@link java.lang.String} object.
 	 */
-	public static void saveCookie(URL url, String cookieSpec) {
+	public static void saveCookie(final URL url, final String cookieSpec) {
 		saveCookie(url.getHost(), cookieSpec);
 	}
 

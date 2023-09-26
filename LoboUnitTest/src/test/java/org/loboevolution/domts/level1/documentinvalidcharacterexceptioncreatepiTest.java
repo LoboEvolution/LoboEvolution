@@ -55,13 +55,13 @@ public class documentinvalidcharacterexceptioncreatepiTest extends LoboUnitTest 
      */
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         doc = sampleXmlFile("hc_staff.xml");
 
         boolean success = false;
         try {
             doc.createProcessingInstruction("invalid^Name", "data");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
         assertTrue("throw_NOT_SUPPORTED_ERR", success);

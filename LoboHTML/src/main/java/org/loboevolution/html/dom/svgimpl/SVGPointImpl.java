@@ -58,7 +58,7 @@ public class SVGPointImpl implements SVGPoint {
 	 * @param x a float.
 	 * @param y a float.
 	 */
-	public SVGPointImpl(float x, float y) {
+	public SVGPointImpl(final float x, final float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -68,7 +68,7 @@ public class SVGPointImpl implements SVGPoint {
 	 *
 	 * @param point a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 */
-	public SVGPointImpl(SVGPoint point) {
+	public SVGPointImpl(final SVGPoint point) {
 		x = point.getX();
 		y = point.getY();
 	}
@@ -81,7 +81,7 @@ public class SVGPointImpl implements SVGPoint {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 
@@ -99,10 +99,10 @@ public class SVGPointImpl implements SVGPoint {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint matrixTransform(SVGMatrix matrix) {
-		AffineTransform transform = matrix.getAffineTransform();
-		Point2D srcPoint = new Point2D.Double(x, y);
-		Point2D dstPoint = new Point2D.Double();
+	public SVGPoint matrixTransform(final SVGMatrix matrix) {
+		final AffineTransform transform = matrix.getAffineTransform();
+		final Point2D srcPoint = new Point2D.Double(x, y);
+		final Point2D dstPoint = new Point2D.Double();
 		transform.transform(srcPoint, dstPoint);
 		return new SVGPointImpl((float) dstPoint.getX(), (float) dstPoint.getY());
 	}

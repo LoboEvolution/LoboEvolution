@@ -56,7 +56,7 @@ public class BaseTitleButton extends NoFocusButton {
 	 * @param icon a {@link javax.swing.Icon} object.
 	 * @param alpha a float.
 	 */
-	public BaseTitleButton(Action action, String accessibleName, Icon icon, float alpha) {
+	public BaseTitleButton(final Action action, final String accessibleName, final Icon icon, final float alpha) {
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		setAction(action);
@@ -73,9 +73,9 @@ public class BaseTitleButton extends NoFocusButton {
 		if (JTattooUtilities.isActive(this) || alpha >= 1.0) {
 			super.paint(g);
 		} else {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
-			AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
+			final AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
 			g2D.setComposite(alphaComposite);
 			super.paint(g);
 			g2D.setComposite(savedComposite);

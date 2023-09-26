@@ -35,6 +35,9 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 
@@ -60,15 +63,14 @@ public class nodeelementnodeattributesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddr;
-        NamedNodeMap addrAttr;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddr;
+        final NamedNodeMap addrAttr;
         Node attrNode;
         String attrName;
-        java.util.Collection attrList = new java.util.ArrayList();
-
-        java.util.Collection expected = new java.util.ArrayList();
+        final List<String> attrList = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("domestic");
         expected.add("street");
 

@@ -43,7 +43,7 @@ public class InputControl extends BaseControl {
 	 * <p>Constructor for InputControl.</p>
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 */
-	public InputControl(HTMLInputElementImpl modelNode) {
+	public InputControl(final HTMLInputElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;
@@ -62,7 +62,7 @@ public class InputControl extends BaseControl {
 	 * @param dir a {@link java.lang.String} object.
 	 * @return a {@link java.awt.ComponentOrientation} object.
 	 */
-	public ComponentOrientation direction(String dir) {
+	public ComponentOrientation direction(final String dir) {
 		if ("ltr".equalsIgnoreCase(dir)) {
 			return ComponentOrientation.LEFT_TO_RIGHT;
 		} else if ("rtl".equalsIgnoreCase(dir)) {

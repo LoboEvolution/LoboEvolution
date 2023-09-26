@@ -50,14 +50,14 @@ import static org.junit.Assert.assertEquals;
 public class nodeinsertbefore01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        Comment newComment;
-        Comment insertedComment;
-        String data;
-        ProcessingInstruction newPI;
-        ProcessingInstruction insertedPI;
-        String target;
+        final Document doc;
+        final Element docElem;
+        final Comment newComment;
+        final Comment insertedComment;
+        final String data;
+        final ProcessingInstruction newPI;
+        final ProcessingInstruction insertedPI;
+        final String target;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         newComment = doc.createComment("Comment");

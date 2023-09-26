@@ -73,7 +73,7 @@ public class ImageSequenceViewer {
 	 * @throws java.lang.IllegalArgumentException
 	 *             if the number is negative
 	 */
-	public ImageSequenceViewer(int number) {
+	public ImageSequenceViewer(final int number) {
 		this(number, 0);
 	}
 
@@ -88,12 +88,12 @@ public class ImageSequenceViewer {
 	 * @throws java.lang.IllegalArgumentException
 	 *             if the number is negative or the starting position is not valid
 	 */
-	public ImageSequenceViewer(int number, int startPos) {
+	public ImageSequenceViewer(final int number, final int startPos) {
 		imageViewer = new ImageViewer();
 		createAndShowGUI(number, startPos);
 	}
 
-	private void createAndShowGUI(int number, int startPos) {
+	private void createAndShowGUI(final int number, final int startPos) {
 		if (number <= 0 || startPos < 0 || startPos >= number)
 			throw new IllegalArgumentException();
 		
@@ -102,7 +102,7 @@ public class ImageSequenceViewer {
 		panel.add(imageViewer.getComponent(), BorderLayout.CENTER);
 		forwardButton = new JButton(">");
 		backwardButton = new JButton("<");
-		JPanel locationPanel = new JPanel(new FlowLayout());
+		final JPanel locationPanel = new JPanel(new FlowLayout());
 		locationPanel.add(backwardButton);
 		locationPanel.add(createLocationDefinition());
 		locationPanel.add(forwardButton);
@@ -151,7 +151,7 @@ public class ImageSequenceViewer {
 	 * @throws java.lang.IllegalArgumentException
 	 *             if the position is not valid
 	 */
-	public void setPosition(int pos) {
+	public void setPosition(final int pos) {
 		if (pos < 0 || pos >= number)
 			throw new IllegalArgumentException("Position " + pos + " out of range");
 		position = pos;
@@ -188,7 +188,7 @@ public class ImageSequenceViewer {
 	 * @param pos
 	 *            the current position
 	 */
-	protected void updateLocationDefinition(int pos) {
+	protected void updateLocationDefinition(final int pos) {
 		locationLabel.setText(String.format("%d/%d", pos + 1, number));
 	}
 }

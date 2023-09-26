@@ -173,7 +173,7 @@ public final class Axis {
     "filtered-list" // 20
   };
 
-  public static String getNames(int index) {
+  public static String getNames(final int index) {
     return names[index];
   }
 

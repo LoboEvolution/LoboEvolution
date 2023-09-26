@@ -48,7 +48,7 @@ public class MediaQueryListImpl implements MediaQueryList {
      * @param window a {@link org.loboevolution.html.js.WindowImpl} object.
      * @param mediaQueryString a {@link java.lang.String} object.
      */
-    public MediaQueryListImpl(WindowImpl window, String mediaQueryString) {
+    public MediaQueryListImpl(final WindowImpl window, final String mediaQueryString) {
         this.window = window;
         this.media = mediaQueryString;
     }
@@ -71,7 +71,7 @@ public class MediaQueryListImpl implements MediaQueryList {
     public boolean isMatches() throws Exception {
         final String processedText = CSSUtilities.preProcessCss(media);
         if (Strings.isBlank(processedText)) return true;
-        MediaListImpl media = CSSUtilities.parseMedia(processedText);
+        final MediaListImpl media = CSSUtilities.parseMedia(processedText);
 
         if (Strings.isBlank(media.getMediaText()) ||
                 "screen".equalsIgnoreCase(media.getMediaText()) ||

@@ -53,18 +53,18 @@ public class Tab extends JComponent {
         this(null, null);
     }
 
-    public Tab(String title) {
+    public Tab(final String title) {
         this(title, null);
     }
 
-    public Tab(String title, Component content) {
+    public Tab(final String title, final Component content) {
         setTitle(title);
         setContent(content);
 
         updateUI();
     }
 
-    private static boolean equals(Object o1, Object o2) {
+    private static boolean equals(final Object o1, final Object o2) {
         return (o1 == o2) || (o1 != null && o1.equals(o2)) || (o2 != null && o2.equals(o1));
     }
 
@@ -72,7 +72,7 @@ public class Tab extends JComponent {
         return rollover;
     }
 
-    public void setRollover(boolean rollover) {
+    public void setRollover(final boolean rollover) {
         if (this.rollover != rollover) {
             this.rollover = rollover;
             firePropertyChange("rollover", !rollover, rollover);
@@ -83,7 +83,7 @@ public class Tab extends JComponent {
         return selected;
     }
 
-    public void setSelected(boolean selected) {
+    public void setSelected(final boolean selected) {
         if (this.selected != selected) {
             this.selected = selected;
             firePropertyChange("selected", !selected, selected);
@@ -94,7 +94,7 @@ public class Tab extends JComponent {
         return (TabUI) ui;
     }
 
-    public void setUI(TabUI ui) {
+    public void setUI(final TabUI ui) {
         super.setUI(ui);
     }
 
@@ -102,9 +102,9 @@ public class Tab extends JComponent {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         if (!equals(title, this.title)) {
-            String oldValue = this.title;
+            final String oldValue = this.title;
             this.title = title;
             firePropertyChange("title", oldValue, title);
         }
@@ -114,9 +114,9 @@ public class Tab extends JComponent {
         return tabComponent;
     }
 
-    public void setTabComponent(Component overrideTitle) {
+    public void setTabComponent(final Component overrideTitle) {
         if (this.tabComponent != overrideTitle) {
-            Component oldValue = this.tabComponent;
+            final Component oldValue = this.tabComponent;
             this.tabComponent = overrideTitle;
             firePropertyChange("overrideTitle", oldValue, overrideTitle);
         }
@@ -126,9 +126,9 @@ public class Tab extends JComponent {
         return icon;
     }
 
-    public void setIcon(Icon icon) {
+    public void setIcon(final Icon icon) {
         if (this.icon != icon) {
-            Icon oldValue = this.icon;
+            final Icon oldValue = this.icon;
             this.icon = icon;
             firePropertyChange("icon", oldValue, icon);
         }
@@ -138,9 +138,9 @@ public class Tab extends JComponent {
         return mnemonic;
     }
 
-    public void setMnemonic(int mnemonic) {
+    public void setMnemonic(final int mnemonic) {
         if (this.mnemonic != mnemonic) {
-            int oldValue = this.mnemonic;
+            final int oldValue = this.mnemonic;
             this.mnemonic = mnemonic;
             firePropertyChange("mnemonic", oldValue, mnemonic);
         }
@@ -150,9 +150,9 @@ public class Tab extends JComponent {
         return displayedMnemonicIndex;
     }
 
-    public void setDisplayedMnemonicIndex(int displayedMnemonic) {
+    public void setDisplayedMnemonicIndex(final int displayedMnemonic) {
         if (this.displayedMnemonicIndex != displayedMnemonic) {
-            int oldValue = this.displayedMnemonicIndex;
+            final int oldValue = this.displayedMnemonicIndex;
             this.displayedMnemonicIndex = displayedMnemonic;
             firePropertyChange("displayedMnemonic", oldValue, displayedMnemonic);
         }
@@ -166,7 +166,7 @@ public class Tab extends JComponent {
         return content;
     }
 
-    public void setContent(Component tabContent) {
+    public void setContent(final Component tabContent) {
         this.content = tabContent;
     }
 
@@ -177,7 +177,7 @@ public class Tab extends JComponent {
      * @return {@code true} if the user can drag the jhromeTab after dragging from {@code p}. NOTE: must return {@code false} for points over the close button
      * and other operable components, or the user will be able to drag the jhromeTab from these points!
      */
-    public boolean isDraggableAt(Point p) {
+    public boolean isDraggableAt(final Point p) {
         return getUI().isDraggableAt(this, p);
     }
 
@@ -188,7 +188,7 @@ public class Tab extends JComponent {
      * @return {@code true} if the user can select the jhromeTab by pressing the mouse at {@code p}. NOTE: must return {@code false} for points over the close
      * button and other operable components, or the user will be able to select the jhromeTab by clicking these components!
      */
-    public boolean isSelectableAt(Point p) {
+    public boolean isSelectableAt(final Point p) {
         return getUI().isSelectableAt(this, p);
     }
 
@@ -200,7 +200,7 @@ public class Tab extends JComponent {
      * @param p the point the user moved the mouse over, in the renderer's coordinate system.
      * @return {@code true} if the jhromeTab should be set to the rollover state when the user moves the mouse over {@code p}.
      */
-    public boolean isHoverableAt(Point p) {
+    public boolean isHoverableAt(final Point p) {
         return getUI().isHoverableAt(this, p);
     }
 

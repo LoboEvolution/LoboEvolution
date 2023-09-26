@@ -69,7 +69,7 @@ public class PDFShapeCmd extends PDFCmd {
      * convenience, BOTH = STROKE | FILL.
      * @param autoAdjustStroke a boolean.
      */
-    public PDFShapeCmd(GeneralPath gp, int style, boolean autoAdjustStroke) {
+    public PDFShapeCmd(final GeneralPath gp, final int style, final boolean autoAdjustStroke) {
         this.gp = gp;
         this.style = style;
         this.autoAdjustStroke = autoAdjustStroke;
@@ -81,11 +81,11 @@ public class PDFShapeCmd extends PDFCmd {
      * perform the stroke and record the dirty region
      */
     @Override
-    public Rectangle2D execute(PDFRenderer state) {
+    public Rectangle2D execute(final PDFRenderer state) {
         Rectangle2D rect = null;
         if ((this.style & FILL) != 0) {
             rect = state.fill(this.gp);
-            GeneralPath strokeagain = checkOverlap(state);
+            final GeneralPath strokeagain = checkOverlap(state);
             if (strokeagain != null) {
                 state.draw(strokeagain, this.againstroke);
             }
@@ -95,7 +95,7 @@ public class PDFShapeCmd extends PDFCmd {
             }
         }
         if ((this.style & STROKE) != 0) {
-            Rectangle2D strokeRect = state.stroke(this.gp, autoAdjustStroke);
+            final Rectangle2D strokeRect = state.stroke(this.gp, autoAdjustStroke);
             if (rect == null) {
                 rect = strokeRect;
             } else {
@@ -112,12 +112,12 @@ public class PDFShapeCmd extends PDFCmd {
     * Check for overlap with the previous shape to make anti-aliased shapes
     * that are near each other look good
     */
-    private GeneralPath checkOverlap(PDFRenderer state) {
+    private GeneralPath checkOverlap(final PDFRenderer state) {
         if (this.style == FILL && this.gp != null && state.getLastShape() != null) {
             float[] mypoints = new float[16];
-            float[] prevpoints = new float[16];
-            int mycount = getPoints(this.gp, mypoints, state.getTransform());
-            int prevcount = getPoints(state.getLastShape(), prevpoints, state.getLastTransform());
+            final float[] prevpoints = new float[16];
+            final int mycount = getPoints(this.gp, mypoints, state.getTransform());
+            final int prevcount = getPoints(state.getLastShape(), prevpoints, state.getLastTransform());
             // now check mypoints against prevpoints for opposite pairs:
             if (mypoints != null && prevpoints != null) {
                 for (int i = 0; i < prevcount; i += 4) {
@@ -128,7 +128,7 @@ public class PDFShapeCmd extends PDFCmd {
                             mypoints = new float[16];
                             getPoints(this.gp, mypoints, null);// without AffineTransform
 
-                            GeneralPath strokeagain = new GeneralPath();
+                            final GeneralPath strokeagain = new GeneralPath();
                             strokeagain.moveTo(mypoints[j], mypoints[j + 1]);
                             strokeagain.lineTo(mypoints[j + 2], mypoints[j + 3]);
                             return strokeagain;
@@ -146,20 +146,20 @@ public class PDFShapeCmd extends PDFCmd {
     *
     * @return the number of points we actually got
     */
-    private int getPoints(GeneralPath path, float[] mypoints, AffineTransform at) {
+    private int getPoints(final GeneralPath path, float[] mypoints, final AffineTransform at) {
         int count = 0;
         float x = 0;
         float y = 0;
         float startx = 0;
         float starty = 0;
-        float[] coords = new float[6];
-        PathIterator pi = path.getPathIterator(at);
+        final float[] coords = new float[6];
+        final PathIterator pi = path.getPathIterator(at);
         while (!pi.isDone()) {
             if (count >= mypoints.length) {
                 mypoints = null;
                 break;
             }
-            int pathtype = pi.currentSegment(coords);
+            final int pathtype = pi.currentSegment(coords);
             switch (pathtype) {
             case PathIterator.SEG_MOVETO:
                 startx = x = coords[0];
@@ -200,8 +200,8 @@ public class PDFShapeCmd extends PDFCmd {
      */
     @Override
     public String getDetails() {
-        StringBuilder sb = new StringBuilder();
-        Rectangle2D b = this.gp.getBounds2D();
+        final StringBuilder sb = new StringBuilder();
+        final Rectangle2D b = this.gp.getBounds2D();
         sb.append("ShapeCommand at: ").append(b.getX()).append(", ").append(b.getY()).append("\n");
         sb.append("Size: ").append(b.getWidth()).append(" x ").append(b.getHeight()).append("\n");
         sb.append("Mode: ");

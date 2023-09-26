@@ -35,7 +35,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 
 /**
@@ -48,12 +47,12 @@ import static org.junit.Assert.fail;
 public class nodereplacechild39Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        String rootName;
-        String rootNS;
-        Comment newComment;
-        Element newElement;
+        final Document doc;
+        final Element docElem;
+        final String rootName;
+        final String rootNS;
+        final Comment newComment;
+        final Element newElement;
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
@@ -65,7 +64,7 @@ public class nodereplacechild39Test extends LoboUnitTest {
         boolean success = false;
         try {
             doc.replaceChild(newElement, newComment);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
         assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

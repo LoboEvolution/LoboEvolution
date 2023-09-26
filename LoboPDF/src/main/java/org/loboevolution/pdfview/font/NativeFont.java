@@ -101,24 +101,24 @@ public class NativeFont extends OutlineFont {
      * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      * @throws java.io.IOException if any.
      */
-    public NativeFont (String baseFont, PDFObject fontObj,
-                       PDFFontDescriptor descriptor)
+    public NativeFont (final String baseFont, final PDFObject fontObj,
+                       final PDFFontDescriptor descriptor)
             throws IOException {
         super (baseFont, fontObj, descriptor);
 
-        String fontName = descriptor.getFontName ();
+        final String fontName = descriptor.getFontName ();
 
-        PDFObject ttf = descriptor.getFontFile2 ();
+        final PDFObject ttf = descriptor.getFontFile2 ();
         if (ttf != null) {
-            byte[] fontdata = ttf.getStream ();
+            final byte[] fontdata = ttf.getStream ();
 
             try {
                 setFont (fontdata);
-            } catch (FontFormatException ffe) {
+            } catch (final FontFormatException ffe) {
                 throw new PDFParseException ("Font format exception: " + ffe);
             }
         } else {
-            int flags = descriptor.getFlags ();
+            final int flags = descriptor.getFlags ();
             int style = ((flags & PDFFontDescriptor.FORCEBOLD) != 0) ? Font.BOLD : Font.PLAIN;
 
             if (fontName.indexOf ("Bold") > 0) {
@@ -143,10 +143,10 @@ public class NativeFont extends OutlineFont {
 	 * Get a glyph outline by name
 	 */
     @Override
-	protected GeneralPath getOutline (String name, float width) {
+	protected GeneralPath getOutline (final String name, final float width) {
         if (this.postTable != null && this.cmapTable != null) {
             // map this character name to a glyph ID
-            short glyphID = this.postTable.getGlyphNameIndex (name);
+            final short glyphID = this.postTable.getGlyphNameIndex (name);
 
             if (glyphID == 0) {
                 // no glyph -- try by index
@@ -157,7 +157,7 @@ public class NativeFont extends OutlineFont {
             char mappedChar = 0;
 
             for (int i = 0; i < mapIDs.length; i += 2) {
-                CMap map = this.cmapTable.getCMap (mapIDs[i], mapIDs[i + 1]);
+                final CMap map = this.cmapTable.getCMap (mapIDs[i], mapIDs[i + 1]);
                 if (map != null) {
                     mappedChar = map.reverseMap (glyphID);
 
@@ -183,7 +183,7 @@ public class NativeFont extends OutlineFont {
 	 * Note this method must always return an outline
 	 */
     @Override
-	protected GeneralPath getOutline (char src, float width) {
+	protected GeneralPath getOutline (char src, final float width) {
         // some true type fonts put characters in the undefined
         // region of Unicode instead of as normal characters.
         if (!this.f.canDisplay (src) && this.f.canDisplay ((char) (src + 0xf000))) {
@@ -191,27 +191,27 @@ public class NativeFont extends OutlineFont {
         }
 
         // filter out control characters
-        for (char chr : controlChars) {
+        for (final char chr : controlChars) {
             if (chr == src) {
                 src = (char) (0xf000 | src);
                 break;
             }
         }
 
-        char[] glyph = new char[1];
+        final char[] glyph = new char[1];
         glyph[0] = src;
 
-        GlyphVector gv = this.f.createGlyphVector (this.basecontext, glyph);
-        GeneralPath gp = new GeneralPath (gv.getGlyphOutline (0));
+        final GlyphVector gv = this.f.createGlyphVector (this.basecontext, glyph);
+        final GeneralPath gp = new GeneralPath (gv.getGlyphOutline (0));
 
         // this should be gv.getGlyphMetrics(0).getAdvance(), but that is
         // broken on the Mac, so we need to read the advance from the
         // hmtx table in the font
-        CMap map = this.cmapTable.getCMap (mapIDs[0], mapIDs[1]);
-        int glyphID = map.map (src);
-        float advance = (float) this.hmtxTable.getAdvance (glyphID) / (float) this.unitsPerEm;
+        final CMap map = this.cmapTable.getCMap (mapIDs[0], mapIDs[1]);
+        final int glyphID = map.map (src);
+        final float advance = (float) this.hmtxTable.getAdvance (glyphID) / (float) this.unitsPerEm;
 
-        float widthfactor = width / advance;
+        final float widthfactor = width / advance;
         gp.transform (AffineTransform.getScaleInstance (widthfactor, -1));
 
         return gp;
@@ -222,18 +222,18 @@ public class NativeFont extends OutlineFont {
      *
      * @param f the font to use
      */
-    protected void setFont (Font f) {
+    protected void setFont (final Font f) {
         this.f = f;
 
         // if it's an OpenType font, parse the relevant tables to get
         // glyph name to code mappings
         if (f instanceof OpenType) {
-            OpenType ot = (OpenType) f;
+            final OpenType ot = (OpenType) f;
 
-            byte[] cmapData = ot.getFontTable (OpenType.TAG_CMAP);
-            byte[] postData = ot.getFontTable (OpenType.TAG_POST);
+            final byte[] cmapData = ot.getFontTable (OpenType.TAG_CMAP);
+            final byte[] postData = ot.getFontTable (OpenType.TAG_POST);
 
-            TrueTypeFont ttf = new TrueTypeFont (0x10000);
+            final TrueTypeFont ttf = new TrueTypeFont (0x10000);
 
             this.cmapTable =
             (CmapTable) TrueTypeTable.createTable (ttf, "cmap",
@@ -258,7 +258,7 @@ public class NativeFont extends OutlineFont {
             throws FontFormatException, IOException {
         try {
             // read the true type information
-            TrueTypeFont ttf = TrueTypeFont.parseFont (fontdata);
+            final TrueTypeFont ttf = TrueTypeFont.parseFont (fontdata);
 
             // get the cmap, post, and hmtx tables for later use
             this.cmapTable = (CmapTable) ttf.getTable ("cmap");
@@ -266,7 +266,7 @@ public class NativeFont extends OutlineFont {
             this.hmtxTable = (HmtxTable) ttf.getTable ("hmtx");
 
             // read the units per em from the head table
-            HeadTable headTable = (HeadTable) ttf.getTable ("head");
+            final HeadTable headTable = (HeadTable) ttf.getTable ("head");
             this.unitsPerEm = headTable.getUnitsPerEm ();
 
             /* Find out if we have the right info in our name table.
@@ -279,28 +279,28 @@ public class NativeFont extends OutlineFont {
 
             try {
                 nameTable = (NameTable) ttf.getTable ("name");
-            } catch (Exception ex) {
+            } catch (final Exception ex) {
                 PDFDebugger.debug("Error reading name table for font " + getBaseFont () + ".  Repairing!");
             }
 
-            boolean nameFixed = fixNameTable (ttf, nameTable);
+            final boolean nameFixed = fixNameTable (ttf, nameTable);
 
             /* Figure out if we need to hack the CMap table.  This might
              * be the case if we use characters that Java considers control
              * characters (0x9, 0xa and 0xd), that have to be re-mapped
              */
-            boolean cmapFixed = fixCMapTable (ttf, this.cmapTable);
+            final boolean cmapFixed = fixCMapTable (ttf, this.cmapTable);
 
             // use the parsed font instead of the original
             if (nameFixed || cmapFixed) {
                 fontdata = ttf.writeFont ();
             }
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             PDFDebugger.debug("Error parsing font : " + getBaseFont ());
             BaseWatchable.getErrorHandler().publishException(ex);
         }
 
-        ByteArrayInputStream bais = new ByteArrayInputStream (fontdata);
+        final ByteArrayInputStream bais = new ByteArrayInputStream (fontdata);
         this.f = Font.createFont (Font.TRUETYPE_FONT, bais);
         bais.close ();
     }
@@ -315,7 +315,7 @@ public class NativeFont extends OutlineFont {
      * @param name the font's name table
      * @return true if the table was fixed, or false if it was left as is
      */
-    private boolean fixNameTable (TrueTypeFont ttf, NameTable name) {
+    private boolean fixNameTable (final TrueTypeFont ttf, NameTable name) {
         // if we didn't find the table, or there was an exception,
         // just create a new one
         if (name == null) {
@@ -327,9 +327,9 @@ public class NativeFont extends OutlineFont {
         String fName = this.getBaseFont ();
         String style = "Regular";
 
-        if (fName.indexOf ("Italic") > -1 || fName.indexOf ("italic") > -1) {
+        if (fName.contains("Italic") || fName.contains("italic")) {
             style = "Italic";
-        } else if (fName.indexOf ("Bold") > -1 || fName.indexOf ("bold") > -1) {
+        } else if (fName.contains("Bold") || fName.contains("bold")) {
             style = "Bold";
         }
 
@@ -337,11 +337,11 @@ public class NativeFont extends OutlineFont {
             fName = fName.substring (0, fName.indexOf ('-'));
         }
 
-        short platID = NameTable.PLATFORMID_MICROSOFT;
-        short encID = 1;
-        short langID = 1033;
+        final short platID = NameTable.PLATFORMID_MICROSOFT;
+        final short encID = 1;
+        final short langID = 1033;
 
-        short[] nameIDs = {
+        final short[] nameIDs = {
             NameTable.NAMEID_COPYRIGHT,
             NameTable.NAMEID_FAMILY,
             NameTable.NAMEID_SUBFAMILY,
@@ -352,7 +352,7 @@ public class NativeFont extends OutlineFont {
             NameTable.NAMEID_TRADEMARK
         };
 
-        String[] defaultValues = {
+        final String[] defaultValues = {
             "No copyright",
             fName,
             style,
@@ -391,12 +391,12 @@ public class NativeFont extends OutlineFont {
      * @param cmap the CMap table
      * @return true if the font was changed, or false if it was left as-is
      */
-    private boolean fixCMapTable (TrueTypeFont ttf, CmapTable cmap) {
+    private boolean fixCMapTable (final TrueTypeFont ttf, CmapTable cmap) {
         CMapFormat4 fourMap = null;
         CMapFormat0 zeroMap = null;
 
         for (int i = 0; i < mapIDs.length; i += 2) {
-            CMap map = this.cmapTable.getCMap (mapIDs[i], mapIDs[i + 1]);
+            final CMap map = this.cmapTable.getCMap (mapIDs[i], mapIDs[i + 1]);
             if (map != null) {
                 if (fourMap == null && map instanceof CMapFormat4) {
                     fourMap = (CMapFormat4) map;
@@ -424,7 +424,7 @@ public class NativeFont extends OutlineFont {
             fourMap.addSegment ((short) 0, (short) 1, (short) 0);
 
             for (int i = getFirstChar (); i <= getLastChar (); i++) {
-                short value = (short) (zeroMap.map ((byte) i) & 0xff);
+                final short value = (short) (zeroMap.map ((byte) i) & 0xff);
                 if (value != 0) {
                     fourMap.addSegment ((short) i, (short) i,
                             (short) (value - i));
@@ -433,9 +433,9 @@ public class NativeFont extends OutlineFont {
         }
 
         // now that we have a type four map, remap control characters
-        for (char chr : controlChars) {
-            short idx = (short) (0xf000 | chr);
-            short value = (short) fourMap.map (chr);
+        for (final char chr : controlChars) {
+            final short idx = (short) (0xf000 | chr);
+            final short value = (short) fourMap.map (chr);
 
             fourMap.addSegment (idx, idx, (short) (value - idx));
         }

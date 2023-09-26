@@ -50,13 +50,13 @@ import static org.junit.Assert.assertTrue;
 public class elementsetidattributenode06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList1;
-        HTMLCollection elemList2;
-        Element nameElem;
-        Element acronymElem;
-        NamedNodeMap attributesMap;
-        Attr attr;
+        final Document doc;
+        final HTMLCollection elemList1;
+        final HTMLCollection elemList2;
+        final Element nameElem;
+        final Element acronymElem;
+        final NamedNodeMap attributesMap;
+        final Attr attr;
         Element nameElement;
         doc = sampleXmlFile("hc_staff.xml");
         elemList1 = doc.getElementsByTagName("strong");
@@ -70,7 +70,7 @@ public class elementsetidattributenode06Test extends LoboUnitTest {
             boolean success = false;
             try {
                 nameElem.setIdAttributeNode(attr, true);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

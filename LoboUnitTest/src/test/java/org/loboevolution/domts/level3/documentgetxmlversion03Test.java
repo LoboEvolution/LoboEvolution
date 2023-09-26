@@ -45,8 +45,8 @@ import static org.junit.Assert.assertEquals;
 public class documentgetxmlversion03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String versionValue;
+        final Document doc;
+        final String versionValue;
         doc = sampleXmlFile("barfoo.xml");
         versionValue = doc.getXmlVersion();
         assertEquals("documentgetxmlversion03", "1.0", versionValue);

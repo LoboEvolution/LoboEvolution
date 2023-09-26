@@ -49,11 +49,11 @@ public class GoToAction extends PDFAction {
      * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
-    public GoToAction(PDFObject obj, PDFObject root) throws IOException {
+    public GoToAction(final PDFObject obj, final PDFObject root) throws IOException {
         super("GoTo");
         
         // find the destination
-        PDFObject destObj = obj.getDictRef("D");
+        final PDFObject destObj = obj.getDictRef("D");
         if (destObj == null) {
             throw new PDFParseException("No destination in GoTo action " + obj);
         }
@@ -67,7 +67,7 @@ public class GoToAction extends PDFAction {
      *
      * @param dest a {@link org.loboevolution.pdfview.PDFDestination} object.
      */
-    public GoToAction(PDFDestination dest) {
+    public GoToAction(final PDFDestination dest) {
         super("GoTo");
     
         this.dest = dest;

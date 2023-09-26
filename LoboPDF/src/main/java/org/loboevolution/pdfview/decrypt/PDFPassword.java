@@ -76,7 +76,7 @@ public class PDFPassword {
      * @param password the password, may be null
      * @return a non-null password
      */
-    public static PDFPassword nonNullPassword(PDFPassword password) {
+    public static PDFPassword nonNullPassword(final PDFPassword password) {
         return password != null ? password : EMPTY_PASSWORD;
     }
 
@@ -90,7 +90,7 @@ public class PDFPassword {
      *
      * @param passwordBytes the password bytes
      */
-    public PDFPassword(byte[] passwordBytes) {
+    public PDFPassword(final byte[] passwordBytes) {
         this.passwordBytes =
                 passwordBytes != null ? passwordBytes : new byte[0];
     }
@@ -100,7 +100,7 @@ public class PDFPassword {
      *
      * @param passwordString the password
      */
-    public PDFPassword(String passwordString) {
+    public PDFPassword(final String passwordString) {
         this.passwordString = passwordString != null ? passwordString : "";
     }
 
@@ -111,7 +111,7 @@ public class PDFPassword {
      * String, as present for version 5 encryption, should be used
      * @return a list of possible password bytes
      */
-    List<byte[]> getPasswordBytes(boolean unicodeConversion) {
+    List<byte[]> getPasswordBytes(final boolean unicodeConversion) {
         // TODO - handle unicodeConversion when we support version 5
         if (this.passwordBytes != null || this.passwordString == null) {
             return Collections.singletonList(this.passwordBytes);
@@ -170,11 +170,11 @@ public class PDFPassword {
      * @return a list of unique possible byte representations
      */
     private static List<byte[]> generatePossiblePasswordBytes(
-            String passwordString) {
+            final String passwordString) {
 
         final List<byte[]> possibilties = new ArrayList<>();
         for (final PasswordByteGenerator generator : PASSWORD_BYTE_GENERATORS) {
-            byte[] generated = generator.generateBytes(passwordString);
+            final byte[] generated = generator.generateBytes(passwordString);
             // avoid duplicates
             boolean alreadyGenerated = false;
             for (int i = 0; !alreadyGenerated && i < possibilties.size(); ++i) {
@@ -190,7 +190,7 @@ public class PDFPassword {
         return possibilties;
     }
 
-    private boolean isAlphaNum7BitString(String string) {
+    private boolean isAlphaNum7BitString(final String string) {
         for (int i = 0; i < string.length(); ++i) {
             final char c = string.charAt(i);
             if (c >= 127 || !Character.isLetterOrDigit(c)) {
@@ -204,7 +204,7 @@ public class PDFPassword {
      * Converts a string password to a byte[] representation
      */
     private interface PasswordByteGenerator {
-        byte[] generateBytes(String password);
+        byte[] generateBytes(final String password);
     }
 
     /**
@@ -224,13 +224,13 @@ public class PDFPassword {
          * unrepresentable character, or null if unrepresentable characters
          * should just be ignored
          */
-        protected CharsetEncoderGenerator(Byte replacementByte) {
+        protected CharsetEncoderGenerator(final Byte replacementByte) {
             this.replacementByte = replacementByte;
         }
 
 
         @Override
-		public byte[] generateBytes(String password) {
+		public byte[] generateBytes(final String password) {
             final CharsetEncoder encoder = createCharsetEncoder();
             if (this.replacementByte != null) {
                 encoder.replaceWith(new byte[]{this.replacementByte});
@@ -243,7 +243,7 @@ public class PDFPassword {
                 final byte[] bytes = new byte[b.remaining()];
                 b.get(bytes);
                 return bytes;
-            } catch (CharacterCodingException e) {
+            } catch (final CharacterCodingException e) {
                 // shouldn't happen: unmappable characters should be the only
                 // problem, and we're not handling them with a report
                 return null;
@@ -260,7 +260,7 @@ public class PDFPassword {
     private static class PDFDocEncodingByteGenerator
             extends CharsetEncoderGenerator {
 
-        private PDFDocEncodingByteGenerator(Byte replacementByte) {
+        private PDFDocEncodingByteGenerator(final Byte replacementByte) {
             super(replacementByte);
         }
 
@@ -277,7 +277,7 @@ public class PDFPassword {
     private static class IdentityEncodingByteGenerator
             extends CharsetEncoderGenerator {
 
-        private IdentityEncodingByteGenerator(Byte replacementByte) {
+        private IdentityEncodingByteGenerator(final Byte replacementByte) {
             super(replacementByte);
         }
 

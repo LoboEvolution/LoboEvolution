@@ -31,9 +31,7 @@ import java.util.List;
 // Referenced classes of package org.loboevolution.javax.xml.xpath:
 //            XPathFunctionException
 
-public interface XPathFunction
-{
-
+public interface XPathFunction {
     public abstract Object evaluate(List list)
-        throws XPathFunctionException;
+            throws XPathFunctionException;
 }

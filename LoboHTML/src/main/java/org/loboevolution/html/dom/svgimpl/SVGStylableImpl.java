@@ -75,18 +75,18 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @param shape a {@link java.awt.Shape} object.
 	 * @return a {@link java.awt.Paint} object.
 	 */
-	public Paint getFillPaint(Shape shape) {
-		CSSStyleDeclaration style = getStyle();
+	public Paint getFillPaint(final Shape shape) {
+		final CSSStyleDeclaration style = getStyle();
 		Paint fillPaint = null;
 		final String fill =  Strings.isNotBlank(style.getFill()) ? style.getFill() : getAttribute("fill");
 		final String fillOpacity = Strings.isNotBlank(style.getFillOpacity()) ? style.getFillOpacity() : getAttribute("fill-opacity");
 		if (fill!= null && fill.toLowerCase().contains("url")) {
-			int hashIndex = fill.indexOf('#');
+			final int hashIndex = fill.indexOf('#');
 			if (hashIndex != -1) {
-				String idElement = fill.substring(hashIndex + 1, fill.length() - 1);
-				Element elementById = (Element) child(idElement);
+				final String idElement = fill.substring(hashIndex + 1, fill.length() - 1);
+				final Element elementById = (Element) child(idElement);
 				if (elementById instanceof SVGGradientElementImpl) {
-					SVGGradientElementImpl grad = (SVGGradientElementImpl) elementById;
+					final SVGGradientElementImpl grad = ( SVGGradientElementImpl) elementById;
 					fillPaint = grad.gradient(elementById, shape);
 				}
 			}
@@ -106,18 +106,18 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @param shape a {@link java.awt.Shape} object.
 	 * @return a {@link java.awt.Paint} object.
 	 */
-	public Paint getStrokelPaint(Shape shape) {
-		CSSStyleDeclaration style = getStyle();
+	public Paint getStrokelPaint(final Shape shape) {
+		final CSSStyleDeclaration style = getStyle();
 		Paint strokePaint = null;
 		final String stroke = Strings.isNotBlank(style.getStroke()) ? style.getStroke() : getAttribute("stroke");
 		final String strokeOpacity = Strings.isNotBlank(style.getStrokeOpacity()) ? style.getStrokeOpacity() : getAttribute("stroke-opacity");
 		if (stroke!= null && stroke.toLowerCase().contains("url")) {
-			int hashIndex = stroke.indexOf('#');
+			final int hashIndex = stroke.indexOf('#');
 			if (hashIndex != -1) {
-				String idElement = stroke.substring(hashIndex + 1, stroke.length() - 1);
-				Element elementById = (Element) child(idElement);
+				final String idElement = stroke.substring(hashIndex + 1, stroke.length() - 1);
+				final Element elementById = (Element) child(idElement);
 				if (elementById instanceof SVGGradientElementImpl) {
-					SVGGradientElementImpl grad = (SVGGradientElementImpl) elementById;
+					final SVGGradientElementImpl grad = ( SVGGradientElementImpl) elementById;
 					strokePaint = grad.gradient(elementById, shape);
 				}
 			}
@@ -137,8 +137,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a int.
 	 */
 	public int getStrokeLineCap() {
-		CSSStyleDeclaration style = getStyle();
-		int intLineCap;
+		final CSSStyleDeclaration style = getStyle();
+		final int intLineCap;
 		final String strokeLinecap = Strings.isNotBlank(style.getStrokeLineCap()) ? style.getStrokeLineCap() : getAttribute("stroke-linecap");
 		switch (Strings.isNotBlank(strokeLinecap) ? strokeLinecap : "") {
 			case "round":
@@ -163,8 +163,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a int.
 	 */
 	public int getStrokeLinejoin() {
-		CSSStyleDeclaration style = getStyle();
-		int lineJoin;
+		final CSSStyleDeclaration style = getStyle();
+		final int lineJoin;
 		final String strokeLinejoin = Strings.isNotBlank(style.getStrokeLineJoin()) ? style.getStrokeLineJoin() : getAttribute("stroke-linejoin");
 		switch (Strings.isNotBlank(strokeLinejoin) ? strokeLinejoin : "") {
 			case "miter":
@@ -186,12 +186,12 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a int.
 	 */
 	public int getStrokeWidth() {
-		CSSStyleDeclaration style = getStyle();
+		final CSSStyleDeclaration style = getStyle();
 		int strokeWidth = 1;
 		final String strokeWidthProp = Strings.isNotBlank(style.getStrokeWidth()) ? style.getStrokeWidth() : getAttribute("stroke-width");
 		if (Strings.isNotBlank(strokeWidthProp)) {
-			SVGElement ownerSVGElement = getOwnerSVGElement();
-			HTMLDocumentImpl doc =  (HTMLDocumentImpl)ownerSVGElement.getOwnerDocument();
+			final SVGElement ownerSVGElement = getOwnerSVGElement();
+			final HTMLDocumentImpl doc =  (HTMLDocumentImpl)ownerSVGElement.getOwnerDocument();
 			strokeWidth = HtmlValues.getPixelSize(strokeWidthProp, null, doc.getDefaultView(), 1);
 		}
 		return strokeWidth;
@@ -203,12 +203,12 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a int.
 	 */
 	public int getStrokeMiterlimit() {
-		CSSStyleDeclaration style = getStyle();
+		final CSSStyleDeclaration style = getStyle();
 		int miterlimit = 4;
 		final String strokeMiterlimit = Strings.isNotBlank(style.getStrokeMiterLimit()) ? style.getStrokeMiterLimit() : getAttribute("stroke-miterlimit");
 		if (Strings.isNotBlank(strokeMiterlimit)) {
-			SVGElement ownerSVGElement = getOwnerSVGElement();
-			HTMLDocumentImpl doc =  (HTMLDocumentImpl)ownerSVGElement.getOwnerDocument();
+			final SVGElement ownerSVGElement = getOwnerSVGElement();
+			final HTMLDocumentImpl doc =  (HTMLDocumentImpl)ownerSVGElement.getOwnerDocument();
 			miterlimit = HtmlValues.getPixelSize(strokeMiterlimit, null, doc.getDefaultView(), 4);
 		}
 		return miterlimit;
@@ -220,14 +220,14 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return an array of {@link float} objects.
 	 */
 	public float[] getStrokeDashArray() {
-		CSSStyleDeclaration style = getStyle();
+		final CSSStyleDeclaration style = getStyle();
 		float[] dashArray = null;
 		final String dasharray = Strings.isNotBlank(style.getStrokeDashArray()) ? style.getStrokeDashArray() : getAttribute("stroke-dasharray");
 		if (Strings.isNotBlank(dasharray) && !"none".equals(dasharray)) {
-			String[] parts = dasharray.split("\\s*,\\s*|\\s+");
+			final String[] parts = dasharray.split("\\s*,\\s*|\\s+");
 			dashArray = new float[parts.length];
 			int i = 0;
-			for (String str : parts) {
+			for (final String str : parts) {
 				dashArray[i] = Float.parseFloat(str);
 				i++;
 			}
@@ -241,7 +241,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a boolean.
 	 */
 	public boolean getVisibility() {
-		CSSStyleDeclaration style = getStyle();
+		final CSSStyleDeclaration style = getStyle();
 		final String visibility = Strings.isNotBlank(style.getVisibility()) ? style.getVisibility() : getAttribute("visibility");
 		return "visible".equals(visibility);
 	}
@@ -252,7 +252,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a boolean.
 	 */
 	public boolean getDisplay() {
-		CSSStyleDeclaration style = getStyle();
+		final CSSStyleDeclaration style = getStyle();
 		final String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
 		return !"none".equals(display);
 	}
@@ -263,7 +263,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a float.
 	 */
 	public float getOpacity() {
-		CSSStyleDeclaration style = getStyle();
+		final CSSStyleDeclaration style = getStyle();
 		final String opacityStr = Strings.isNotBlank(style.getOpacity()) ? style.getOpacity() : getAttribute("opacity");
 		float opacity = 1;
 		if (opacityStr != null) {
@@ -284,14 +284,14 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a {@link org.loboevolution.html.dom.svgimpl.SVGClipPathElementImpl} object.
 	 */
 	public SVGClipPathElementImpl getClippingPath() {
-		CSSStyleDeclaration style = getStyle();
-		String clipPathString = Strings.isNotBlank(style.getClipPath()) ? style.getClipPath() : getAttribute("clip-path");
+		final CSSStyleDeclaration style = getStyle();
+		final String clipPathString = Strings.isNotBlank(style.getClipPath()) ? style.getClipPath() : getAttribute("clip-path");
 		if (clipPathString != null) {
 			if (clipPathString.toLowerCase().contains("url")) {
-				int hashIndex = clipPathString.indexOf('#');
+				final int hashIndex = clipPathString.indexOf('#');
 				if (hashIndex != -1) {
-					String clipId = clipPathString.substring(hashIndex + 1, clipPathString.length() - 1);
-					Element clipElem = (Element) child(clipId);
+					final String clipId = clipPathString.substring(hashIndex + 1, clipPathString.length() - 1);
+					final Element clipElem = (Element) child(clipId);
 					if (clipElem instanceof SVGClipPathElementImpl) {
 						return (SVGClipPathElementImpl) clipElem;
 					}
@@ -307,8 +307,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getClipRule() {
-		CSSStyleDeclaration style = getStyle();
-		String clipRuleVal = Strings.isNotBlank(style.getClipRule()) ? style.getClipRule() : getAttribute("clip-rule");
+		final CSSStyleDeclaration style = getStyle();
+		final String clipRuleVal = Strings.isNotBlank(style.getClipRule()) ? style.getClipRule() : getAttribute("clip-rule");
 		if (clipRuleVal != null) {
 			return clipRuleVal;
 		} else {
@@ -322,10 +322,10 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a {@link java.awt.Color} object.
 	 */
 	public Color getStopColor() {
-		CSSStyleDeclaration style = getStyle();
-		String stopcolor = Strings.isNotBlank(style.getStopColor()) ? style.getStopColor() : this.getAttribute("stop-color");
+		final CSSStyleDeclaration style = getStyle();
+		final String stopcolor = Strings.isNotBlank(style.getStopColor()) ? style.getStopColor() : this.getAttribute("stop-color");
 		if (stopcolor != null) {
-			Color color = ColorFactory.getInstance().getColor(stopcolor);
+			final Color color = ColorFactory.getInstance().getColor(stopcolor);
 			return new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * Float.parseFloat(getStopOpacity())));
 		}
 		return new Color(0, 0, 0);
@@ -337,7 +337,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getStopOpacity() {
-		CSSStyleDeclaration style = getStyle();
+		final CSSStyleDeclaration style = getStyle();
 		String opacity = Strings.isNotBlank(style.getStopOpacity()) ? style.getStopOpacity() : this.getAttribute("stop-opacity");
 		if (opacity == null) {
 			opacity = "1";
@@ -361,8 +361,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @return a {@link java.awt.Font} object.
 	 */
 	public Font getFont() {
-		CSSStyleDeclaration style = getStyle();
-		FontKey key = FontValues.getDefaultFontKey(getHtmlRendererConfig());
+		final CSSStyleDeclaration style = getStyle();
+		final FontKey key = FontValues.getDefaultFontKey(getHtmlRendererConfig());
 		key.setFontStyle(CSSValues.ITALIC.getValue());
 		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
 		key.setFontWeight(CSSValues.BOLD.getValue());
@@ -378,17 +378,17 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return new SVGFontElementImpl("");
 	}
 
-	public float getFontSize(AffineTransform inverseTransform) {
-		CSSStyleDeclaration style = getStyle();
+	public float getFontSize(final AffineTransform inverseTransform) {
+		final CSSStyleDeclaration style = getStyle();
 		if (Strings.isNotBlank(style.getFontSize())) {
-			SVGLengthImpl size = new SVGLengthImpl(style.getFontSize());
+			final SVGLengthImpl size = new SVGLengthImpl(style.getFontSize());
 			return size.getTransformedLength(inverseTransform);
 		}
 		return 20;
 	}
 
 	public float getFontUnitsPerEm() {
-		SVGFontFaceElementImpl fontFace = getFontFace();
+		final SVGFontFaceElementImpl fontFace = getFontFace();
 		if (fontFace != null) {
 			String fontEmString = fontFace.getAttribute("units-per-em");
 			if (Strings.isCssBlank(fontEmString)) {
@@ -411,8 +411,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 
 	public SVGFontFaceElementImpl getFontFace() {
-		NodeListImpl children = (NodeListImpl)getChildNodes();
-		AtomicReference<SVGFontFaceElementImpl> fontFace = new AtomicReference<>();
+		final NodeListImpl children = (NodeListImpl)getChildNodes();
+		final AtomicReference<SVGFontFaceElementImpl> fontFace = new AtomicReference<>();
 		children.forEach(child -> {
 			if (child instanceof SVGFontFaceElementImpl) {
 				fontFace.set((SVGFontFaceElementImpl) child);
@@ -423,7 +423,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 
 	public float getFontAscent() {
-		SVGFontFaceElementImpl fontFace = getFontFace();
+		final SVGFontFaceElementImpl fontFace = getFontFace();
 		if (fontFace != null) {
 			String fontAscentString = fontFace.getAttribute("ascent");
 			if (Strings.isCssBlank(fontAscentString)) {
@@ -443,9 +443,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 
 	public float getFontDescent() {
-		SVGFontFaceElementImpl fontFace = getFontFace();
+		final SVGFontFaceElementImpl fontFace = getFontFace();
 		if (fontFace != null) {
-			String fontDescentString = fontFace.getAttribute("descent");
+			final String fontDescentString = fontFace.getAttribute("descent");
 			if (fontDescentString.length() > 0) {
 				return Float.parseFloat(fontDescentString);
 			}
@@ -454,7 +454,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 
 	public float getHorizAdvX() {
-		String horizAdvX = getAttribute("horiz-adv-x");
+		final String horizAdvX = getAttribute("horiz-adv-x");
 		if (horizAdvX.length() > 0) {
 			return Float.parseFloat(horizAdvX);
 		}
@@ -475,7 +475,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return new BasicStroke(strokeWidth, lineCap, lineJoin, miterlimit, dashArray, 0f);
 	}
 
-	private Color makeTransparent(Color color, Float alpha) {
+	private Color makeTransparent(final Color color, final Float alpha) {
 		return new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * alpha));
 	}
 
@@ -486,18 +486,18 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 * @param elementId a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 */
-	protected Node child(String elementId) {
-		SVGElement ownerSVGElement = getOwnerSVGElement();
-		NodeListImpl nodeList = (NodeListImpl)ownerSVGElement.getChildNodes();
-		for (Node child : nodeList) {
-			NodeListImpl nodeList1 = (NodeListImpl) child.getChildNodes();
-			for (Node child1 : nodeList1) {
+	protected Node child(final String elementId) {
+		final SVGElement ownerSVGElement = getOwnerSVGElement();
+		final NodeListImpl nodeList = (NodeListImpl)ownerSVGElement.getChildNodes();
+		for (final Node child : nodeList) {
+			final NodeListImpl nodeList1 = (NodeListImpl) child.getChildNodes();
+			for (final Node child1 : nodeList1) {
 				if (child1 instanceof Element) {
 					final Element elem1 = (Element) child1;
-					NamedNodeMap attributes2 = elem1.getAttributes();
+					final NamedNodeMap attributes2 = elem1.getAttributes();
 					if (attributes2 != null) {
-						for (Node nodeAttr : Nodes.iterable(attributes2)) {
-							Attr attr = (Attr) nodeAttr;
+						for (final Node nodeAttr : Nodes.iterable(attributes2)) {
+							final Attr attr = (Attr) nodeAttr;
 							if ("id".equals(attr.getNodeName()) && elementId.equals(attr.getNodeValue())) {
 								return child1;
 							}
@@ -508,10 +508,10 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 
 			if (child instanceof Element) {
 				final Element elem = (Element) child;
-				NamedNodeMap attributes2 = elem.getAttributes();
+				final NamedNodeMap attributes2 = elem.getAttributes();
 				if (attributes2 != null) {
-					for (Node nodeAttr : Nodes.iterable(attributes2)) {
-						Attr attr = (Attr) nodeAttr;
+					for (final Node nodeAttr : Nodes.iterable(attributes2)) {
+						final Attr attr = (Attr) nodeAttr;
 						if ("id".equals(attr.getNodeName()) && elementId.equals(attr.getNodeValue())) {
 							return child;
 						}
@@ -528,9 +528,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	 *
 	 * @param node a {@link org.loboevolution.html.node.Node} object.
 	 */
-	protected void drawStyle(Node node) {
-		CSSStyleDeclaration style = getStyle();
-		SVGElement child = (SVGElement) node;
+	protected void drawStyle(final Node node) {
+		final CSSStyleDeclaration style = getStyle();
+		final SVGElement child = ( SVGElement) node;
 
 		final String fill = Strings.isNotBlank(style.getFill()) ? style.getFill() : getAttribute("fill");
 		if (Strings.isNotBlank(fill)) {

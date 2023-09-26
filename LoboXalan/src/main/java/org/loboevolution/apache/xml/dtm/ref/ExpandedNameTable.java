@@ -124,7 +124,7 @@ public class ExpandedNameTable {
    * @param type The node type
    * @return the expanded-name id of the node.
    */
-  public int getExpandedTypeID(String namespace, String localName, int type) {
+  public int getExpandedTypeID(final String namespace, final String localName, final int type) {
     return getExpandedTypeID(namespace, localName, type, false);
   }
 
@@ -137,19 +137,21 @@ public class ExpandedNameTable {
    * <p>If searchOnly is true, we will return -1 if the name is not found in the table, otherwise
    * the name is added to the table and the expanded name id of the new entry is returned.
    *
-   * @param namespace The namespace
-   * @param localName The local name
+   * @param ns The namespace
+   * @param lName The local name
    * @param type The node type
    * @param searchOnly If it is true, we will only search for the expanded name. -1 is return is the
    *     name is not found.
    * @return the expanded-name id of the node.
    */
-  public int getExpandedTypeID(String namespace, String localName, int type, boolean searchOnly) {
+  public int getExpandedTypeID(final String ns, final String lName, final int type, final boolean searchOnly) {
+    String namespace = ns;
+    String localName = lName;
     if (null == namespace) namespace = "";
     if (null == localName) localName = "";
 
     // Calculate the hash code
-    int hash = type + namespace.hashCode() + localName.hashCode();
+    final int hash = type + namespace.hashCode() + localName.hashCode();
 
     // Redefine the hashET object to represent the new expanded name.
     hashET.redefine(type, namespace, localName, hash);
@@ -176,11 +178,11 @@ public class ExpandedNameTable {
     }
 
     // Create a new ExtendedType object
-    ExtendedType newET = new ExtendedType(type, namespace, localName, hash);
+    final ExtendedType newET = new ExtendedType(type, namespace, localName, hash);
 
     // Expand the m_extendedTypes array if necessary.
     if (m_extendedTypes.length == m_nextType) {
-      ExtendedType[] newArray = new ExtendedType[m_extendedTypes.length * 2];
+      final ExtendedType[] newArray = new ExtendedType[m_extendedTypes.length * 2];
       System.arraycopy(m_extendedTypes, 0, newArray, 0, m_extendedTypes.length);
       m_extendedTypes = newArray;
     }
@@ -189,7 +191,7 @@ public class ExpandedNameTable {
 
     // Create a new hash entry for the new ExtendedType and put it into
     // the table.
-    HashEntry entry = new HashEntry(newET, m_nextType, hash, m_table[index]);
+    final HashEntry entry = new HashEntry(newET, m_nextType, hash, m_table[index]);
     m_table[index] = entry;
 
     return m_nextType++;
@@ -201,17 +203,17 @@ public class ExpandedNameTable {
    * hashtable exceeds this hashtable's capacity and load factor.
    */
   private void rehash() {
-    int oldCapacity = m_capacity;
-    HashEntry[] oldTable = m_table;
+    final int oldCapacity = m_capacity;
+    final HashEntry[] oldTable = m_table;
 
-    int newCapacity = 2 * oldCapacity + 1;
+    final int newCapacity = 2 * oldCapacity + 1;
     m_capacity = newCapacity;
     m_threshold = (int) (newCapacity * m_loadFactor);
 
     m_table = new HashEntry[newCapacity];
     for (int i = oldCapacity - 1; i >= 0; i--) {
       for (HashEntry old = oldTable[i]; old != null; ) {
-        HashEntry e = old;
+        final HashEntry e = old;
         old = old.next;
 
         int newIndex = e.hash % newCapacity;
@@ -230,7 +232,7 @@ public class ExpandedNameTable {
    * @param type the given type
    * @return the expanded-name id of the node.
    */
-  public int getExpandedTypeID(int type) {
+  public int getExpandedTypeID(final int type) {
     return type;
   }
 
@@ -240,7 +242,7 @@ public class ExpandedNameTable {
    * @param ExpandedNameID an ID that represents an expanded-name.
    * @return The id of this local name.
    */
-  public final int getLocalNameID(int ExpandedNameID) {
+  public final int getLocalNameID(final int ExpandedNameID) {
     // ExtendedType etype = m_extendedTypes[ExpandedNameID];
     if (m_extendedTypes[ExpandedNameID].getLocalName().length() == 0) return 0;
     else return ExpandedNameID;
@@ -252,7 +254,7 @@ public class ExpandedNameTable {
    * @param ExpandedNameID an ID that represents an expanded-name.
    * @return The id of this namespace.
    */
-  public final int getNamespaceID(int ExpandedNameID) {
+  public final int getNamespaceID(final int ExpandedNameID) {
     // ExtendedType etype = m_extendedTypes[ExpandedNameID];
     if (m_extendedTypes[ExpandedNameID].getNamespace().length() == 0) return 0;
     else return ExpandedNameID;
@@ -264,7 +266,7 @@ public class ExpandedNameTable {
    * @param ExpandedNameID an ID that represents an expanded-name.
    * @return The id of this local name.
    */
-  public final short getType(int ExpandedNameID) {
+  public final short getType(final int ExpandedNameID) {
     // ExtendedType etype = m_extendedTypes[ExpandedNameID];
     return (short) m_extendedTypes[ExpandedNameID].getNodeType();
   }
@@ -279,7 +281,7 @@ public class ExpandedNameTable {
     final int hash;
     HashEntry next;
 
-    private HashEntry(ExtendedType key, int value, int hash, HashEntry next) {
+    private HashEntry(final ExtendedType key, final int value, final int hash, final HashEntry next) {
       this.key = key;
       this.value = value;
       this.hash = hash;

@@ -25,7 +25,6 @@
  */
 package org.jpedal.jbig2.decoders;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.jpedal.jbig2.io.StreamReader;
@@ -33,9 +32,6 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>MMRDecoder class.</p>
- *
-  *
-  *
  */
 public class MMRDecoder {
 	
@@ -50,7 +46,7 @@ public class MMRDecoder {
 	 *
 	 * @param reader a {@link org.jpedal.jbig2.io.StreamReader} object.
 	 */
-	public MMRDecoder(StreamReader reader) {
+	public MMRDecoder(final StreamReader reader) {
 		this.reader = reader;
 	}
 
@@ -67,9 +63,8 @@ public class MMRDecoder {
 	 * <p>skipTo.</p>
 	 *
 	 * @param length a int.
-	 * @throws java.io.IOException if any.
 	 */
-	public void skipTo(int length) throws IOException {
+	public void skipTo(final int length) {
 		while (noOfBytesRead < length) {
 			reader.readByte();
 			noOfBytesRead++;
@@ -80,9 +75,8 @@ public class MMRDecoder {
 	 * <p>get24Bits.</p>
 	 *
 	 * @return a long.
-	 * @throws java.io.IOException if any.
 	 */
-	public long get24Bits() throws IOException {
+	public long get24Bits() {
 		while (bufferLength < 24) {
 
 			buffer = ((BinaryOperation.bit32ShiftL(buffer, 8)) | (reader.readByte() & 0xff));
@@ -97,9 +91,8 @@ public class MMRDecoder {
 	 * <p>get2DCode.</p>
 	 *
 	 * @return a int.
-	 * @throws java.io.IOException if any.
 	 */
-	public int get2DCode() throws IOException {
+	public int get2DCode() {
 		int[] tuple;
 
 		if (bufferLength == 0) {
@@ -109,26 +102,26 @@ public class MMRDecoder {
 
 			noOfBytesRead++;
 
-			int lookup = (int) ((BinaryOperation.bit32ShiftR(buffer, 1)) & 0x7f);
+			final int lookup = (int) ((BinaryOperation.bit32ShiftR(buffer, 1)) & 0x7f);
 
 			tuple = twoDimensionalTable1[lookup];
 		} else if (bufferLength == 8) {
-			int lookup = (int) ((BinaryOperation.bit32ShiftR(buffer, 1)) & 0x7f);
+			final int lookup = (int) ((BinaryOperation.bit32ShiftR(buffer, 1)) & 0x7f);
 			tuple = twoDimensionalTable1[lookup];
 		} else {
-			int lookup = (int) ((BinaryOperation.bit32ShiftL(buffer, (int) (7 - bufferLength))) & 0x7f);
+			final int lookup = (int) ((BinaryOperation.bit32ShiftL(buffer, (int) (7 - bufferLength))) & 0x7f);
 
 			tuple = twoDimensionalTable1[lookup];
 			if (tuple[0] < 0 || tuple[0] > (int) bufferLength) {
-				int right = (reader.readByte() & 0xff);
+				final int right = (reader.readByte() & 0xff);
 
-				long left = (BinaryOperation.bit32ShiftL(buffer, 8));
+				final long left = (BinaryOperation.bit32ShiftL(buffer, 8));
 
 				buffer = left | right;
 				bufferLength += 8;
 				noOfBytesRead++;
 
-				int look = (int) (BinaryOperation.bit32ShiftR(buffer, (int) (bufferLength - 7)) & 0x7f);
+				final int look = (int) (BinaryOperation.bit32ShiftR(buffer, (int) (bufferLength - 7)) & 0x7f);
 
 				tuple = twoDimensionalTable1[look];
 			}
@@ -148,9 +141,8 @@ public class MMRDecoder {
 	 * <p>getWhiteCode.</p>
 	 *
 	 * @return a int.
-	 * @throws java.io.IOException if any.
 	 */
-	public int getWhiteCode() throws IOException {
+	public int getWhiteCode() {
 		int[] tuple;
 		long code;
 
@@ -175,7 +167,7 @@ public class MMRDecoder {
 					code = BinaryOperation.bit32ShiftR(buffer, (int) (bufferLength - 9));
 				}
 
-				int lookup = (int) (code & 0x1ff);
+				final int lookup = (int) (code & 0x1ff);
 				if (lookup >= 0)
 					tuple = whiteTable2[lookup];
 				else
@@ -204,9 +196,8 @@ public class MMRDecoder {
 	 * <p>getBlackCode.</p>
 	 *
 	 * @return a int.
-	 * @throws java.io.IOException if any.
 	 */
-	public int getBlackCode() throws IOException {
+	public int getBlackCode() {
 		int[] tuple;
 		long code;
 
@@ -230,7 +221,7 @@ public class MMRDecoder {
 					code = BinaryOperation.bit32ShiftR(buffer, (int) (bufferLength - 12));
 				}
 
-				int lookup = (int) ((code & 0xff) - 64);
+				final int lookup = (int) ((code & 0xff) - 64);
 				if (lookup >= 0)
 					tuple = blackTable2[lookup];
 				else
@@ -242,7 +233,7 @@ public class MMRDecoder {
 					code = BinaryOperation.bit32ShiftR(buffer, (int) (bufferLength - 6));
 				}
 
-				int lookup = (int) (code & 0x3f);
+				final int lookup = (int) (code & 0x3f);
 				if (lookup >= 0)
 					tuple = blackTable3[lookup];
 				else

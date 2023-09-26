@@ -57,8 +57,8 @@ public class commentgetcommentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NodeList elementList;
+        final Document doc;
+        final NodeList elementList;
         Node child;
         String childName;
         String childValue;

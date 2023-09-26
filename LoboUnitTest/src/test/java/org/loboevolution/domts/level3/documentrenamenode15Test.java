@@ -48,13 +48,13 @@ import static org.junit.Assert.assertEquals;
 public class documentrenamenode15Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        HTMLCollection childList;
-        Node renamedclass;
-        String nodeName;
-        int nodeType;
-        String namespaceURI;
+        final Document doc;
+        final Element element;
+        final HTMLCollection childList;
+        final Node renamedclass;
+        final String nodeName;
+        final int nodeType;
+        final String namespaceURI;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("acronym");
         element = (Element) childList.item(3);

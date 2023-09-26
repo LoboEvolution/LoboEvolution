@@ -46,7 +46,7 @@ public class DownloadFileAction extends AbstractAction implements PropertyChange
 
     private final DownloadWindow action;
 
-    DownloadFileAction(DownloadWindow action) {
+    DownloadFileAction(final DownloadWindow action) {
         this.action = action;
     }
 
@@ -54,17 +54,17 @@ public class DownloadFileAction extends AbstractAction implements PropertyChange
     public void actionPerformed(final ActionEvent e) {
         try {
             startDownload(action.getDestinationFile());
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void startDownload(File destinationFile) {
-        DownloadTask task = new DownloadTask(action, destinationFile);
+    private void startDownload(final File destinationFile) {
+        final DownloadTask task = new DownloadTask(action, destinationFile);
         task.addPropertyChangeListener(this);
         task.execute();
 
-        DownloadStore store = new DownloadStore();
+        final DownloadStore store = new DownloadStore();
         store.addAsRecent(action.getUrl().toExternalForm());
     }
 
@@ -74,9 +74,9 @@ public class DownloadFileAction extends AbstractAction implements PropertyChange
      * Update the progress bar's state whenever the progress of download changes.
      */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
+    public void propertyChange(final PropertyChangeEvent evt) {
         if ("progress".equals(evt.getPropertyName())) {
-            int progress = (Integer) evt.getNewValue();
+            final int progress = (Integer) evt.getNewValue();
             action.getProgressBar().setValue(progress);
         }
     }

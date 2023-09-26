@@ -50,9 +50,6 @@ import org.loboevolution.store.BookmarksStore;
 
 /**
  * <p>ToolBar class.</p>
- *
- *
- *
  */
 public class ToolBar extends JToolBar implements IToolBar {
 
@@ -65,7 +62,7 @@ public class ToolBar extends JToolBar implements IToolBar {
 	 *
 	 * @param panel a {@link org.loboevolution.component.BrowserPanel} object.
 	 */
-	public ToolBar(BrowserPanel panel) {
+	public ToolBar(final BrowserPanel panel) {
 		init(panel);
 	}
 
@@ -78,7 +75,7 @@ public class ToolBar extends JToolBar implements IToolBar {
 		return this.addressBar;
 	}
 
-	private void init(BrowserPanel panel) {
+	private void init(final BrowserPanel panel) {
 		setLayout(new BorderLayout());
 		setBorderPainted(true);
 		setOpaque(true);
@@ -89,7 +86,7 @@ public class ToolBar extends JToolBar implements IToolBar {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected void paintComponent(Graphics g) {
+			protected void paintComponent(final Graphics g) {
 				if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
 					final Graphics2D g2 = (Graphics2D) g.create();
 					g2.setColor(Color.LIGHT_GRAY);
@@ -107,16 +104,16 @@ public class ToolBar extends JToolBar implements IToolBar {
 			}
 		};
 		
-		BookmarksStore book = new BookmarksStore();
-		List<BookmarkInfo> bookmarks = book.getBookmarks(100);
-		List<String> hosts = new ArrayList<>();
+		final BookmarksStore book = new BookmarksStore();
+		final List<BookmarkInfo> bookmarks = book.getBookmarks(100);
+		final List<String> hosts = new ArrayList<>();
 		bookmarks.forEach(bookmark -> hosts.add(bookmark.getUrl()));
 		Autocomplete.setupAutoComplete(addressBar, hosts);
 		addressBar.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(final KeyEvent e) {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-					GoAction go = new GoAction(panel, addressBar);
+					final GoAction go = new GoAction(panel, addressBar);
 					go.actionPerformed(null);
 				}	
 			}

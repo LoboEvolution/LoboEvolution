@@ -113,24 +113,24 @@ public class FunctionType3 extends PDFFunction {
 	 * and the <b>Bounds</b> array to the domain of the corresponding function.
 	 */
     @Override
-	protected void parse(PDFObject obj) throws IOException {
+	protected void parse(final PDFObject obj) throws IOException {
         // read the Functions array (required)
-        PDFObject functionsObj = obj.getDictRef("Functions");
+        final PDFObject functionsObj = obj.getDictRef("Functions");
         if (functionsObj == null) {
             throw new PDFParseException("Functions required for function type 3!");
         }
-        PDFObject[] functionsAry = functionsObj.getArray();
+        final PDFObject[] functionsAry = functionsObj.getArray();
         functions = new PDFFunction[functionsAry.length];
         for (int i = 0; i < functionsAry.length; i++) {
         	functions[i] = PDFFunction.getFunction(functionsAry[i]);
         }
         
         // read the Bounds array (required)
-        PDFObject boundsObj = obj.getDictRef("Bounds");
+        final PDFObject boundsObj = obj.getDictRef("Bounds");
         if (boundsObj == null) {
             throw new PDFParseException("Bounds required for function type 3!");
         }
-        PDFObject[] boundsAry = boundsObj.getArray();
+        final PDFObject[] boundsAry = boundsObj.getArray();
         bounds = new float[boundsAry.length + 2];
         if (bounds.length - 2 != functions.length - 1) {
         	throw new PDFParseException("Bounds array must be of length " + (functions.length - 1));
@@ -143,11 +143,11 @@ public class FunctionType3 extends PDFFunction {
         bounds[bounds.length-1] = getDomain(1);
 
         // read the encode array (required)
-        PDFObject encodeObj = obj.getDictRef("Encode");
+        final PDFObject encodeObj = obj.getDictRef("Encode");
         if (encodeObj == null) {
             throw new PDFParseException("Encode required for function type 3!");
         }
-        PDFObject[] encodeAry = encodeObj.getArray();
+        final PDFObject[] encodeAry = encodeObj.getArray();
         encode = new float[encodeAry.length];
         if (encode.length != 2*functions.length) {
         	throw new PDFParseException("Encode array must be of length " + 2*functions.length);
@@ -159,8 +159,8 @@ public class FunctionType3 extends PDFFunction {
 
 	/** {@inheritDoc} */
     @Override
-	protected void doFunction(float[] inputs, int inputOffset,
-			float[] outputs, int outputOffset) {
+	protected void doFunction(final float[] inputs, final int inputOffset,
+                              final float[] outputs, final int outputOffset) {
     	
     	float x = inputs[inputOffset];
 
@@ -168,8 +168,8 @@ public class FunctionType3 extends PDFFunction {
     	int p = bounds.length - 2;
     	while (x < bounds[p]) p--;
     	x = interpolate(x, bounds[p], bounds[p+1], encode[2*p], encode[2*p + 1]);
-    	float[] out = functions[p].calculate(new float[]{x});
-        System.arraycopy(out, 0, outputs, 0 + outputOffset, out.length);
+    	final float[] out = functions[p].calculate(new float[]{x});
+        System.arraycopy(out, 0, outputs, outputOffset, out.length);
     }
     
     /** {@inheritDoc} */

@@ -47,8 +47,7 @@ public class YCCKColorSpace extends ColorSpace
      *
      * @param existingCmykColorSpace a {@link java.awt.color.ColorSpace} object.
      */
-    public YCCKColorSpace(ColorSpace existingCmykColorSpace)
-    {
+    public YCCKColorSpace(final ColorSpace existingCmykColorSpace) {
         super(TYPE_4CLR, 4);
         cmykColorSpace = existingCmykColorSpace;
     }
@@ -67,7 +66,7 @@ public class YCCKColorSpace extends ColorSpace
      * Convert from CIEXYZ to RGB.  NOT IMPLEMENTED
      */
     @Override
-    public float[] fromCIEXYZ(float[] colorvalue)
+    public float[] fromCIEXYZ(final float[] colorvalue)
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
@@ -78,7 +77,7 @@ public class YCCKColorSpace extends ColorSpace
      * Convert from RGB to YCCK.  NOT IMPLEMENTED
      */
     @Override
-    public float[] fromRGB(float[] rgbvalue)
+    public float[] fromRGB(final float[] rgbvalue)
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
@@ -100,7 +99,7 @@ public class YCCKColorSpace extends ColorSpace
      * the name of this color space
      */
     @Override
-    public String getName(int idx)
+    public String getName(final int idx)
     {
         return "YCCK";
     }
@@ -122,7 +121,7 @@ public class YCCKColorSpace extends ColorSpace
      * Convert from YCCK to CIEXYZ.  NOT IMPLEMENTED
      */
     @Override
-    public float[] toCIEXYZ(float[] colorvalue)
+    public float[] toCIEXYZ(final float[] colorvalue)
     {
         return cmykColorSpace.toCIEXYZ(toCmyk(colorvalue));
     }
@@ -133,14 +132,17 @@ public class YCCKColorSpace extends ColorSpace
      * Convert from YCCK to RGB.
      */
     @Override
-    public float[] toRGB(float[] colorvalue)
+    public float[] toRGB(final float[] colorvalue)
     {
         return cmykColorSpace.toRGB(toCmyk(colorvalue));
     }
 
-    private float[] toCmyk(float[] colorvalue) {
-        float y = colorvalue[0], cb = colorvalue[1], cr = colorvalue[2], k = colorvalue[3];
-        float[] cmyk = new float[4];
+    private float[] toCmyk(final float[] colorvalue) {
+        final float y = colorvalue[0];
+        float cb = colorvalue[1];
+        float cr = colorvalue[2];
+        final float k = colorvalue[3];
+        final float[] cmyk = new float[4];
         float v;
         v = (float) (1.0 - (y + 1.402 * (cr - 0.5)));
         cmyk[0] = v < 0.0f ? 0.0f : (v > 1.0f ? 1.0f : v);

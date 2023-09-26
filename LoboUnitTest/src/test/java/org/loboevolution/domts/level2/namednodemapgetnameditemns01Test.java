@@ -59,13 +59,13 @@ public class namednodemapgetnameditemns01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entities;
-        NamedNodeMap notations;
-        EntityReference entity;
-        Notation notation;
-        String nullNS = null;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entities;
+        final NamedNodeMap notations;
+        final EntityReference entity;
+        final Notation notation;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();

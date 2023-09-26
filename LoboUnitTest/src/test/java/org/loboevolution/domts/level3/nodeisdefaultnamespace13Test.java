@@ -48,12 +48,12 @@ import static org.junit.Assert.assertTrue;
 public class nodeisdefaultnamespace13Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element bodyElem;
-        Element elem;
-        Text txt;
-        boolean isDefault;
-        HTMLCollection bodyList;
+        final Document doc;
+        final Element bodyElem;
+        final Element elem;
+        final Text txt;
+        final boolean isDefault;
+        final HTMLCollection bodyList;
         doc = sampleXmlFile("hc_staff.xml");
         bodyList = doc.getElementsByTagName("body");
         bodyElem = (Element) bodyList.item(0);

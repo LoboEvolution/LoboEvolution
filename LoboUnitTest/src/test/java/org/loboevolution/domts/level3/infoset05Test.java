@@ -51,12 +51,12 @@ public class infoset05Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final Element docElem;
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        Attr xmlnsAttr;
+        final Attr xmlnsAttr;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);

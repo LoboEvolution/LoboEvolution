@@ -47,17 +47,17 @@ import org.loboevolution.html.node.EntityReference;
 public class nodegetbaseuri16Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String baseURI;
-        EntityReference entRef;
-        HTMLCollection pList;
-        Element pElem;
+        final Document doc;
+        final String baseURI;
+        final EntityReference entRef;
+        final HTMLCollection pList;
+        final Element pElem;
         doc = sampleXmlFile("external_barfoo.xml");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         entRef = (EntityReference) pElem.getLastChild();
         baseURI = entRef.getBaseURI();
-        assertURIEquals("baseURI", null, null, null, null, "external_barfoo", null, null, Boolean.TRUE, baseURI);
+        assertURIEquals(new URIEquals("baseURI", null, null, null, null, "external_barfoo", null, null, true, baseURI));
     }
 }
 

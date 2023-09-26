@@ -58,8 +58,8 @@ public class documentgetelementsbytagnameNS05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
+        final Document doc;
+        final HTMLCollection childList;
         doc = sampleXmlFile("staffNS.xml");
         childList = doc.getElementsByTagNameNS("null", "elementId");
         assertEquals("documentgetelementsbytagnameNS05", 0, childList.getLength());

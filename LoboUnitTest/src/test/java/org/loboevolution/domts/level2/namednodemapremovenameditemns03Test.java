@@ -56,14 +56,14 @@ public class namednodemapremovenameditemns03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap attributes;
-        Element element;
+        final Document doc;
+        final NamedNodeMap attributes;
+        final Element element;
         Attr attribute;
         Attr newAttribute;
-        Attr attribute1;
-        Attr attribute2;
-        String nodeName;
+        final Attr attribute1;
+        final Attr attribute2;
+        final String nodeName;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "root");
         attribute1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");

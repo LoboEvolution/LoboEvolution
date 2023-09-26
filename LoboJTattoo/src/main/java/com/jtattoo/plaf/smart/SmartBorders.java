@@ -82,9 +82,9 @@ public class SmartBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final Graphics2D g2D = (Graphics2D) g;
 			Color frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
 			if (!JTattooUtilities.isFrameActive(button)) {
 				frameColor = ColorHelper.brighter(frameColor, 40);
@@ -109,7 +109,7 @@ public class SmartBorders extends BaseBorders {
 					g2D.drawRect(x, y, w - 2, h - 2);
 				}
 			} else {
-				Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+				final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 				g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 				if (button.getRootPane() != null && button.equals(button.getRootPane().getDefaultButton())) {
@@ -141,11 +141,11 @@ public class SmartBorders extends BaseBorders {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
-			boolean active = isActive(c);
-			boolean resizable = isResizable(c);
-			int th = getTitleHeight(c);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
+			final boolean active = isActive(c);
+			final boolean resizable = isResizable(c);
+			final int th = getTitleHeight(c);
 			Color frameColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
 			Color titleColor = AbstractLookAndFeel.getWindowInactiveTitleColorLight();
 			if (active) {
@@ -154,7 +154,7 @@ public class SmartBorders extends BaseBorders {
 			}
 
 			if (!resizable) {
-				Insets bi = getBorderInsets(c);
+				final Insets bi = getBorderInsets(c);
 				g.setColor(frameColor);
 				g.drawRect(x, y, w - 1, h - 1);
 				if (active) {
@@ -173,13 +173,13 @@ public class SmartBorders extends BaseBorders {
 				g.setColor(titleColor);
 				g.fillRect(x, y + 1, w, DW - 1);
 				g.fillRect(x + 1, y + h - DW, w - 2, DW - 1);
-				Color color;
+				final Color color;
 				if (active) {
 					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, DW, DW, th + 1);
 					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - DW, DW, DW, th + 1);
 
-					Color c1 = AbstractLookAndFeel.getTheme().getWindowTitleColorDark();
-					Color c2 = AbstractLookAndFeel.getTheme().getWindowTitleColorLight();
+					final Color c1 = AbstractLookAndFeel.getTheme().getWindowTitleColorDark();
+					final Color c2 = AbstractLookAndFeel.getTheme().getWindowTitleColorLight();
 					g2D.setPaint(new GradientPaint(0, DW + th + 1, c1, 0, h - th - 2 * DW, c2));
 					g.fillRect(1, DW + th + 1, DW - 1, h - th - 2 * DW);
 					g.fillRect(w - DW, DW + th + 1, DW - 1, h - th - 2 * DW);
@@ -188,19 +188,19 @@ public class SmartBorders extends BaseBorders {
 					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, DW, DW, th + 1);
 					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - DW, DW, DW, th + 1);
 
-					Color c1 = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorDark();
-					Color c2 = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorLight();
+					final Color c1 = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorDark();
+					final Color c2 = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorLight();
 					g2D.setPaint(new GradientPaint(0, DW + th + 1, c1, 0, h - th - 2 * DW, c2));
 					g.fillRect(1, DW + th + 1, DW - 1, h - th - 2 * DW);
 					g.fillRect(w - DW, DW + th + 1, DW - 1, h - th - 2 * DW);
 					g2D.setPaint(null);
 				}
 				if (active && resizable) {
-					int d = DW + 12;
+					final int d = DW + 12;
 					// unten
 					color = AbstractLookAndFeel.getWindowTitleColorDark();
-					Color cHi = ColorHelper.brighter(color, 30);
-					Color cLo = ColorHelper.darker(color, 20);
+					final Color cHi = ColorHelper.brighter(color, 30);
+					final Color cLo = ColorHelper.darker(color, 20);
 
 					// links
 					g.setColor(color);
@@ -269,7 +269,7 @@ public class SmartBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 			if (JTattooUtilities.isFrameActive(c)) {
 				g.setColor(AbstractLookAndFeel.getFrameColor());
 			} else {
@@ -303,24 +303,24 @@ public class SmartBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed() || model.isSelected()) {
-					Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getToolbarBackgroundColor(), 30);
+					final Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getToolbarBackgroundColor(), 30);
 					g.setColor(frameColor);
 					g.drawRect(x, y, w - 1, h - 1);
 
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.black);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);
 					g2D.setComposite(composite);
 				} else if (model.isRollover()) {
-					Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
+					final Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
 					Color frameHiColor = ColorHelper.darker(frameColor, 5);
 					Color frameLoColor = ColorHelper.darker(frameColor, 20);
 					JTattooUtilities.draw3DBorder(g, frameHiColor, frameLoColor, x, y, w, h);
@@ -328,9 +328,9 @@ public class SmartBorders extends BaseBorders {
 					frameLoColor = ColorHelper.brighter(frameLoColor, 60);
 					JTattooUtilities.draw3DBorder(g, frameHiColor, frameLoColor, x + 1, y + 1, w - 2, h - 2);
 
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.white);
 					g.fillRect(x + 2, y + 2, w - 4, h - 4);
@@ -340,9 +340,9 @@ public class SmartBorders extends BaseBorders {
 					g.drawLine(x + 1, y + 1, x + w - 1, y + 1);
 					g.drawLine(x + 1, y + 2, x + w - 2, y + 2);
 				} else if (model.isSelected()) {
-					Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
-					Color frameHiColor = Color.white;
-					Color frameLoColor = ColorHelper.darker(frameColor, 30);
+					final Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
+					final Color frameHiColor = Color.white;
+					final Color frameLoColor = ColorHelper.darker(frameColor, 30);
 					JTattooUtilities.draw3DBorder(g, frameLoColor, frameHiColor, x, y, w, h);
 				}
 			}

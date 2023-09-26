@@ -53,11 +53,11 @@ public class hc_nodedocumentfragmentnormalize2Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
+        final Document doc;
+        final DocumentFragment docFragment;
         String nodeValue;
         Text txtNode;
-        Node retval;
+        final Node retval;
         doc = sampleXmlFile("hc_staff.xml");
         docFragment = doc.createDocumentFragment();
         txtNode = doc.createTextNode("");

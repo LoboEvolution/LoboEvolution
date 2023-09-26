@@ -48,11 +48,11 @@ import static org.junit.Assert.assertEquals;
 public class nodegettextcontent17Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        EntityReference entRef;
-        String textContent;
-        Node appendedChild;
+        final Document doc;
+        final Element elem;
+        final EntityReference entRef;
+        final String textContent;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.getDocumentElement();
         entRef = doc.createEntityReference("beta");

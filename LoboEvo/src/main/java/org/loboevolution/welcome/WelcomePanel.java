@@ -67,7 +67,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
      *
      * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
      */
-    public WelcomePanel(IBrowserPanel panel) {
+    public WelcomePanel(final IBrowserPanel panel) {
         this.text = new TextFieldUsername();
         this.button = new LoginButton(panel, this.text);
         setBackground(background());
@@ -80,16 +80,16 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
      * {@inheritDoc}
      */
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(final Graphics g) {
         setOpaque(false);
         if (img == null) {
-            File[] files = DesktopConfig.getResourceFolderFiles();
-            Random rand = new Random();
-            File file = files[rand.nextInt(files.length)];
-            try (InputStream is = Files.newInputStream(file.toPath())) {
+            final File[] files = DesktopConfig.getResourceFolderFiles();
+            final Random rand = new Random();
+            final File file = files[rand.nextInt(files.length)];
+            try (final InputStream is = Files.newInputStream(file.toPath())) {
                 img = resize(null, is, (int) getSize().getWidth(), (int) getSize().getHeight());
                 g.drawImage(img, 0, 0, null);
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 logger.severe(e.getMessage());
             }
             super.paintComponent(g);
@@ -124,14 +124,14 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
     }
 
 
-    private BufferedImage resize(Image image, InputStream input, int width, int height) {
+    private BufferedImage resize(final Image image, final InputStream input, final int width, final int height) {
         try {
-            BufferedImage originalImage = input != null ? ImageIO.read(input) : (BufferedImage) image;
-            BufferedImage newResizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g = newResizedImage.createGraphics();
+            final BufferedImage originalImage = input != null ? ImageIO.read(input) : (BufferedImage) image;
+            final BufferedImage newResizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+            final Graphics2D g = newResizedImage.createGraphics();
             g.setComposite(AlphaComposite.Src);
             g.fillRect(0, 0, width, height);
-            Map<RenderingHints.Key, Object> hints = new HashMap<>();
+            final Map<RenderingHints.Key, Object> hints = new HashMap<>();
             hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             hints.put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -140,7 +140,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
             g.dispose();
             return newResizedImage;
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
             logger.severe(e.getMessage());
         }
         return null;

@@ -30,8 +30,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
@@ -105,7 +103,7 @@ public class PDFParser extends BaseWatchable {
      * @param stream an array of {@link byte} objects.
      * @param resources a {@link java.util.Map} object.
      */
-    public PDFParser(PDFPage cmds, byte[] stream, Map<String, PDFObject> resources) {
+    public PDFParser(final PDFPage cmds, final byte[] stream, final Map<String, PDFObject> resources) {
         super();
         this.pageRef = new WeakReference<>(cmds);
         this.resources = resources;
@@ -212,7 +210,7 @@ public class PDFParser extends BaseWatchable {
         // examine the character:
         while (c == '%' || c == 28) {
             // skip comments
-            StringBuilder comment = new StringBuilder();
+            final StringBuilder comment = new StringBuilder();
             while (this.loc < this.stream.length && c != '\n') {
                 comment.append((char) c);
                 c = this.stream[this.loc++];
@@ -272,7 +270,7 @@ public class PDFParser extends BaseWatchable {
     * stream.
     */
     private String readName() {
-        int start = this.loc;
+        final int start = this.loc;
         while (this.loc < this.stream.length && PDFFile.isRegularCharacter(this.stream[this.loc])) {
             this.loc++;
         }
@@ -284,7 +282,7 @@ public class PDFParser extends BaseWatchable {
     */
     private double readNum() {
         int c = this.stream[this.loc++];
-        boolean neg = c == '-';
+        final boolean neg = c == '-';
         boolean sawdot = c == '.';
         double dotmult = sawdot ? 0.1 : 1;
         double value = (c >= '0' && c <= '9') ? c - '0' : 0;
@@ -298,7 +296,7 @@ public class PDFParser extends BaseWatchable {
                 sawdot = true;
                 dotmult = 0.1;
             } else if (c >= '0' && c <= '9') {
-                int val = c - '0';
+                final int val = c - '0';
                 if (sawdot) {
                     value += val * dotmult;
                     dotmult *= 0.1;
@@ -333,7 +331,7 @@ public class PDFParser extends BaseWatchable {
     */
     private String readString() {
         int parenLevel = 0;
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         while (this.loc < this.stream.length) {
             int c = this.stream[this.loc++];
             if (c == ')') {
@@ -387,12 +385,12 @@ public class PDFParser extends BaseWatchable {
     * @return the byte array
     */
     private String readByteArray() {
-        StringBuilder buf = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
         int count = 0;
         char w = (char) 0;
         // read individual bytes and format into a character array
         while ((this.loc < this.stream.length) && (this.stream[this.loc] != '>')) {
-            char c = (char) this.stream[this.loc];
+            final char c = (char) this.stream[this.loc];
             byte b = (byte) 0;
             if (c >= '0' && c <= '9') {
                 b = (byte) (c - '0');
@@ -405,8 +403,8 @@ public class PDFParser extends BaseWatchable {
                 continue;
             }
             // calculate where in the current byte this character goes
-            int offset = 1 - (count % 2);
-            w |= (0xf & b) << (offset * 4);
+            final int offset = 1 - (count % 2);
+            w |= (char) ((0xf & b) << (offset * 4));
             // increment to the next char if we've written four bytes
             if (offset == 0) {
                 buf.append(w);
@@ -461,10 +459,10 @@ public class PDFParser extends BaseWatchable {
             PDFDebugger.debug("Page gone. Stopping", 10);
             return Watchable.STOPPED;
         }
-        Object obj;
+        final Object obj;
         try {
             obj = parseObject();
-        } catch (DebugStopException e) {
+        } catch (final DebugStopException e) {
             return Watchable.STOPPED;
         }
         // if there's nothing left to parse, we're done
@@ -474,7 +472,7 @@ public class PDFParser extends BaseWatchable {
         if (obj instanceof Tok) {
             // it's a command. figure out what to do.
             // (if not, the token will be "pushed" onto the stack)
-            String cmd = ((Tok) obj).name;
+            final String cmd = ((Tok) obj).name;
             PDFDebugger.debug("Command: " + cmd + " (stack size is " + this.stack.size() + ")", 10);
             switch (cmd) {
                 case "q":
@@ -488,8 +486,8 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "cm":
                     // set transform to array of values
-                    float[] elts = popFloat(6);
-                    AffineTransform xform = new AffineTransform(elts);
+                    final float[] elts = popFloat(6);
+                    final AffineTransform xform = new AffineTransform(elts);
                     this.cmds.addXform(xform);
                     break;
                 case "w":
@@ -510,8 +508,8 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "d":
                     // set dash style and phase
-                    float phase = popFloat();
-                    float[] dashary = popFloatArray();
+                    final float phase = popFloat();
+                    final float[] dashary = popFloatArray();
                     if (!PDFDebugger.DISABLE_PATH_STROKE) {
                         this.cmds.addDash(dashary, phase);
                     }
@@ -530,44 +528,44 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "gs":
                     // set graphics state to values in a named dictionary
-                    String popString = popString();
+                    final String popString = popString();
                     PDFDebugger.debug("Set GS state " + popString, 10);
                     setGSState(popString);
                     break;
                 case "m": {
                     // path move to
-                    float y = popFloat();
-                    float x = popFloat();
+                    final float y = popFloat();
+                    final float x = popFloat();
                     this.path.moveTo(x, y);
                     PDFDebugger.logPath(path, "2 moved to " + x + ", " + y);
                     break;
                 }
                 case "l": {
                     // path line to
-                    float y = popFloat();
-                    float x = popFloat();
+                    final float y = popFloat();
+                    final float x = popFloat();
                     this.path.lineTo(x, y);
                     PDFDebugger.logPath(path, "1 line to " + x + ", " + y);
                     break;
                 }
                 case "c": {
                     // path curve to
-                    float[] a = popFloat(6);
+                    final float[] a = popFloat(6);
                     this.path.curveTo(a[0], a[1], a[2], a[3], a[4], a[5]);
                     PDFDebugger.logPath(path, "1 curve to " + Arrays.toString(a));
                     break;
                 }
                 case "v": {
                     // path curve; first control point= start
-                    float[] a = popFloat(4);
-                    Point2D cp = this.path.getCurrentPoint();
+                    final float[] a = popFloat(4);
+                    final Point2D cp = this.path.getCurrentPoint();
                     this.path.curveTo((float) cp.getX(), (float) cp.getY(), a[0], a[1], a[2], a[3]);
                     PDFDebugger.logPath(path, "2 curve to " + Arrays.toString(a) + ", " + cp.getX() + "," + cp.getY());
                     break;
                 }
                 case "y": {
                     // path curve; last control point= end
-                    float[] a = popFloat(4);
+                    final float[] a = popFloat(4);
                     this.path.curveTo(a[0], a[1], a[2], a[3], a[2], a[3]);
                     PDFDebugger.logPath(path, "3 curve to " + Arrays.toString(a));
                     break;
@@ -578,7 +576,7 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "re": {
                     // path add rectangle
-                    float[] a = popFloat(4);
+                    final float[] a = popFloat(4);
                     this.path.moveTo(a[0], a[1]);
                     PDFDebugger.logPath(path, "1 moved to " + a[0] + "," + a[1]);
                     this.path.lineTo(a[0] + a[2], a[1]);
@@ -707,10 +705,10 @@ public class PDFParser extends BaseWatchable {
                     // shade a region that is defined by the shader itself.
                     // shading the current space from a dictionary
                     // should only be used for limited-dimension shadings
-                    String gdictname = popString();
+                    final String gdictname = popString();
                     // set up the pen to do a gradient fill according
                     // to the dictionary
-                    PDFObject shobj = findResource(gdictname, "Shading");
+                    final PDFObject shobj = findResource(gdictname, "Shading");
                     if (!PDFDebugger.DISABLE_SHADER) {
                         doShader(shobj);
                     }
@@ -725,7 +723,7 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "SC": {
                     // set the stroke color
-                    int n = this.state.strokeCS.getNumComponents();
+                    final int n = this.state.strokeCS.getNumComponents();
                     this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(n)));
                     break;
                 }
@@ -734,13 +732,13 @@ public class PDFParser extends BaseWatchable {
                     if (this.state.strokeCS instanceof PatternSpace) {
                         this.cmds.addFillPaint(doPattern((PatternSpace) this.state.strokeCS));
                     } else {
-                        int n = this.state.strokeCS.getNumComponents();
+                        final int n = this.state.strokeCS.getNumComponents();
                         this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(n)));
                     }
                     break;
                 case "sc": {
                     // set the fill color
-                    int n = this.state.fillCS.getNumComponents();
+                    final int n = this.state.fillCS.getNumComponents();
                     this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(n)));
                     break;
                 }
@@ -748,7 +746,7 @@ public class PDFParser extends BaseWatchable {
                     if (this.state.fillCS instanceof PatternSpace) {
                         this.cmds.addFillPaint(doPattern((PatternSpace) this.state.fillCS));
                     } else {
-                        int n = this.state.fillCS.getNumComponents();
+                        final int n = this.state.fillCS.getNumComponents();
                         this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(n)));
                     }
                     break;
@@ -803,11 +801,11 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "Do":
                     // make a do call on the referenced object
-                    String name = popString();
+                    final String name = popString();
                     if (PDFDebugger.DEBUG_IMAGES) {
                         PDFDebugger.debug("XObject reference to " + name);
                     }
-                    PDFObject xobj = findResource(name, "XObject");
+                    final PDFObject xobj = findResource(name, "XObject");
                     doXObject(xobj);
                     break;
                 case "BT":
@@ -835,8 +833,8 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "Tf":
                     // set text font
-                    float sz = popFloat();
-                    String fontref = popString();
+                    final float sz = popFloat();
+                    final String fontref = popString();
                     this.state.textFormat.setFont(getFontFrom(fontref), sz);
                     break;
                 case "Tr":
@@ -849,15 +847,15 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "Td": {
                     // set text matrix location
-                    float y = popFloat();
-                    float x = popFloat();
+                    final float y = popFloat();
+                    final float x = popFloat();
                     this.state.textFormat.carriageReturn(x, y);
                     break;
                 }
                 case "TD": {
                     // set leading and matrix: -y TL x y Td
-                    float y = popFloat();
-                    float x = popFloat();
+                    final float y = popFloat();
+                    final float x = popFloat();
                     this.state.textFormat.setLeading(-y);
                     this.state.textFormat.carriageReturn(x, y);
                     break;
@@ -882,9 +880,9 @@ public class PDFParser extends BaseWatchable {
                 case "\"":
                     // draw string on new line with char & word spacing:
                     // aw Tw ac Tc string '
-                    String string = popString();
-                    float ac = popFloat();
-                    float aw = popFloat();
+                    final String string = popString();
+                    final float ac = popFloat();
+                    final float aw = popFloat();
                     this.state.textFormat.setWordSpacing(aw);
                     this.state.textFormat.setCharSpacing(ac);
                     this.state.textFormat.doText(this.cmds, string, this.autoAdjustStroke);
@@ -975,25 +973,25 @@ public class PDFParser extends BaseWatchable {
         try {
             this.path.closePath();
             PDFDebugger.logPath(path, "closed");
-        }catch(java.awt.geom.IllegalPathStateException e) {
+        }catch(final java.awt.geom.IllegalPathStateException e) {
             PDFDebugger.debug("Failed to close path", 1000);
         }
     }
 
     @SuppressWarnings("unused")
-    private void onNextObject(Tok obj) throws DebugStopException {
-        String progress;
+    private void onNextObject(final Tok obj) throws DebugStopException {
+        final String progress;
         if (true) {
-            double percent = (100d * this.loc) / this.stream.length;
-            NumberFormat nf = NumberFormat.getInstance();
+            final double percent = (100d * this.loc) / this.stream.length;
+            final NumberFormat nf = NumberFormat.getInstance();
             nf.setMinimumFractionDigits(1);
             nf.setMaximumFractionDigits(1);
             progress = nf.format(percent) + "%";
         } else {
             progress = this.loc + " of " + this.stream.length;
         }
-        StringBuilder operators = new StringBuilder();
-        for (Object operator : this.stack) {
+        final StringBuilder operators = new StringBuilder();
+        for (final Object operator : this.stack) {
             operators.append(operator).append(" ");
         }
         if (PDFDebugger.DEBUG_OPERATORS) {
@@ -1007,7 +1005,7 @@ public class PDFParser extends BaseWatchable {
         if (PDFDebugger.DRAW_DELAY > 0) {
             try {
                 Thread.sleep(PDFDebugger.DRAW_DELAY);
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
             }
         }
     }
@@ -1051,23 +1049,6 @@ public class PDFParser extends BaseWatchable {
         this.tok = null;
     }
 
-    /**
-     * <p>dumpStreamToError.</p>
-     */
-    public void dumpStreamToError() {
-        if (this.errorwritten) {
-            return;
-        }
-        this.errorwritten = true;
-        try {
-            File oops = File.createTempFile("PDFError", ".err");
-            FileOutputStream fos = new FileOutputStream(oops);
-            fos.write(this.stream);
-            fos.close();
-        } catch (IOException ioe) { /* Do nothing */
-        }
-    }
-
     // ///////////////////////////////////////////////////////////////
     // H E L P E R S
     // ///////////////////////////////////////////////////////////////
@@ -1081,9 +1062,9 @@ public class PDFParser extends BaseWatchable {
     * the name of the dictionary in the resources
     * @return the value of the property in the dictionary
     */
-    private PDFObject findResource(String name, String inDict) throws IOException {
+    private PDFObject findResource(final String name, final String inDict) throws IOException {
         if (inDict != null) {
-            PDFObject in = this.resources.get(inDict);
+            final PDFObject in = this.resources.get(inDict);
             if (in == null || in.getType() != PDFObject.DICTIONARY) {
                 throw new PDFParseException("No dictionary called " + inDict + " found in the resources");
             }
@@ -1101,7 +1082,7 @@ public class PDFParser extends BaseWatchable {
     * @param obj
     * the object to insert, an Image or a Form.
     */
-    private void doXObject(PDFObject obj) throws IOException {
+    private void doXObject(final PDFObject obj) throws IOException {
         String type = obj.getDictRef("Subtype").getStringValue();
         if (type == null) {
             type = obj.getDictRef("S").getStringValue();
@@ -1123,7 +1104,7 @@ public class PDFParser extends BaseWatchable {
     * contains the image data, and a dictionary describing
     * the width, height and color space of the image.
     */
-    private void doImage(PDFObject obj) throws IOException {
+    private void doImage(final PDFObject obj) throws IOException {
         if (!PDFDebugger.DISABLE_IMAGES) {
             if (PDFDebugger.DEBUG_IMAGES) {
                 final boolean jpegDecode = PDFDecoder.isLastFilter(obj, PDFDecoder.DCT_FILTERS);                
@@ -1146,33 +1127,33 @@ public class PDFParser extends BaseWatchable {
     * a stream containing the PDF commands, a transformation
     * matrix, bounding box, and resources.
     */
-    private void doForm(PDFObject obj) throws IOException {
+    private void doForm(final PDFObject obj) throws IOException {
         // check to see if we've already parsed this sucker
         PDFPage formCmds = (PDFPage) obj.getCache();
         if (formCmds == null) {
             // rats. parse it.
-            AffineTransform at;
-            Rectangle2D bbox;
-            PDFObject matrix = obj.getDictRef("Matrix");
+            final AffineTransform at;
+            final Rectangle2D bbox;
+            final PDFObject matrix = obj.getDictRef("Matrix");
             if (matrix == null) {
                 at = new AffineTransform();
             } else {
-                float[] elts = new float[6];
+                final float[] elts = new float[6];
                 for (int i = 0; i < elts.length; i++) {
                     elts[i] = (matrix.getAt(i)).getFloatValue();
                 }
                 at = new AffineTransform(elts);
             }
-            PDFObject bobj = obj.getDictRef("BBox");
+            final PDFObject bobj = obj.getDictRef("BBox");
             bbox = new Rectangle2D.Float(bobj.getAt(0).getFloatValue(), bobj.getAt(1).getFloatValue(), bobj.getAt(2).getFloatValue(), bobj.getAt(3).getFloatValue());
             formCmds = new PDFPage(bbox, 0);
             formCmds.addXform(at);
-            HashMap<String, PDFObject> r = new HashMap<>(this.resources);
-            PDFObject rsrc = obj.getDictRef("Resources");
+            final HashMap<String, PDFObject> r = new HashMap<>(this.resources);
+            final PDFObject rsrc = obj.getDictRef("Resources");
             if (rsrc != null) {
                 r.putAll(rsrc.getDictionary());
             }
-            PDFParser form = new PDFParser(formCmds, obj.getStream(), r);
+            final PDFParser form = new PDFParser(formCmds, obj.getStream(), r);
             form.go(true);
             obj.setCache(formCmds);
         }
@@ -1186,10 +1167,10 @@ public class PDFParser extends BaseWatchable {
     /**
     * Set the values into a PatternSpace
     */
-    private PDFPaint doPattern(PatternSpace patternSpace) throws IOException {
+    private PDFPaint doPattern(final PatternSpace patternSpace) throws IOException {
         float[] components = null;
-        String patternName = popString();
-        PDFObject pattern = findResource(patternName, "Pattern");
+        final String patternName = popString();
+        final PDFObject pattern = findResource(patternName, "Pattern");
         if (pattern == null) {
             throw new PDFParseException("Unknown pattern : " + patternName);
         }
@@ -1205,7 +1186,7 @@ public class PDFParser extends BaseWatchable {
     * a Tok containing a PDF command.
     */
     private Object parseObject() throws PDFParseException, DebugStopException {
-        Tok t = nextToken();
+        final Tok t = nextToken();
         if (t.type == Tok.NUM) {
             return this.tok.value;
         } else if (t.type == Tok.STR) {
@@ -1213,7 +1194,7 @@ public class PDFParser extends BaseWatchable {
         } else if (t.type == Tok.NAME) {
             return this.tok.name;
         } else if (t.type == Tok.BRKB) {
-            HashMap<String, PDFObject> hm = new HashMap<>();
+            final HashMap<String, PDFObject> hm = new HashMap<>();
             String name = null;
             Object obj;
             while ((obj = parseObject()) != null) {
@@ -1230,7 +1211,7 @@ public class PDFParser extends BaseWatchable {
             return hm;
         } else if (t.type == Tok.ARYB) {
             // build an array
-            ArrayList<Object> ary = new ArrayList<>();
+            final ArrayList<Object> ary = new ArrayList<>();
             Object obj;
             while ((obj = parseObject()) != null) {
                 ary.add(obj);
@@ -1254,9 +1235,9 @@ public class PDFParser extends BaseWatchable {
     */
     private void parseInlineImage() throws IOException, DebugStopException {
         // build dictionary until ID, then read image until EI
-        HashMap<String, PDFObject> hm = new HashMap<>();
+        final HashMap<String, PDFObject> hm = new HashMap<>();
         while (true) {
-            Tok t = nextToken();
+            final Tok t = nextToken();
             if (t.type == Tok.CMD) {
                 onNextObject(t);
                 if (t.name.equals("ID")) {
@@ -1299,7 +1280,7 @@ public class PDFParser extends BaseWatchable {
                 default:
                     break;
             }
-            Object vobj = parseObject();
+            final Object vobj = parseObject();
             hm.put(name, new PDFObject(vobj));
         }
         if (this.stream[this.loc] == '\r') {
@@ -1308,20 +1289,20 @@ public class PDFParser extends BaseWatchable {
         if (this.stream[this.loc] == '\n' || this.stream[this.loc] == ' ') {
             this.loc++;
         }
-        PDFObject imObj = hm.get("ImageMask");
+        final PDFObject imObj = hm.get("ImageMask");
         if (imObj != null && imObj.getBooleanValue()) {
             // [PATCHED by michal.busta@gmail.com] - default value according to PDF spec. is [0, 1]
             // there is no need to swap array - PDF image should handle this values
-            Double[] decode = {(double) 0, 1d};
-            PDFObject decodeObj = hm.get("Decode");
+            final Double[] decode = {(double) 0, 1d};
+            final PDFObject decodeObj = hm.get("Decode");
             if (decodeObj != null) {
                 decode[0] = decodeObj.getAt(0).getDoubleValue();
                 decode[1] = decodeObj.getAt(1).getDoubleValue();
             }
             hm.put("Decode", new PDFObject(decode));
         }
-        PDFObject obj = new PDFObject(null, PDFObject.DICTIONARY, hm);
-        int dstart = this.loc;
+        final PDFObject obj = new PDFObject(null, PDFObject.DICTIONARY, hm);
+        final int dstart = this.loc;
         // now skip data until a whitespace followed by EI
         while (!PDFFile.isWhiteSpace(this.stream[this.loc]) || this.stream[this.loc + 1] != 'E' || this.stream[this.loc + 2] != 'I') {
             this.loc++;
@@ -1330,7 +1311,7 @@ public class PDFParser extends BaseWatchable {
         if (PDFDebugger.DEBUG_IMAGES) {
             PDFDebugger.debug("InlineImage from " + dstart + " to " + this.loc);
         }
-        byte[] data = new byte[this.loc - dstart];
+        final byte[] data = new byte[this.loc - dstart];
         System.arraycopy(this.stream, dstart, data, 0, this.loc - dstart);
         obj.setStream(ByteBuffer.wrap(data));
         this.loc += 3;
@@ -1340,13 +1321,13 @@ public class PDFParser extends BaseWatchable {
     /**
     * build a shader from a dictionary.
     */
-    private void doShader(PDFObject shaderObj) throws IOException {
-        PDFShader shader = PDFShader.getShader(shaderObj, this.resources);
+    private void doShader(final PDFObject shaderObj) throws IOException {
+        final PDFShader shader = PDFShader.getShader(shaderObj, this.resources);
         if (shader == null) {
         	return;
         }
         this.cmds.addPush();
-        Rectangle2D bbox = shader.getBBox();
+        final Rectangle2D bbox = shader.getBBox();
         if (bbox != null) {
             this.cmds.addFillPaint(shader.getPaint());
             this.cmds.addPath(new GeneralPath(bbox), PDFShapeCmd.FILL, this.autoAdjustStroke);
@@ -1364,8 +1345,8 @@ public class PDFParser extends BaseWatchable {
     * @param fontref
     * the resource key for the font
     */
-    private PDFFont getFontFrom(String fontref) throws IOException {
-        PDFObject obj = findResource(fontref, "Font");
+    private PDFFont getFontFrom(final String fontref) throws IOException {
+        final PDFObject obj = findResource(fontref, "Font");
         return PDFFont.getFont(obj, (HashMap<String, PDFObject>) this.resources);
     }
 
@@ -1375,9 +1356,9 @@ public class PDFParser extends BaseWatchable {
     * @param name
     * the resource name of the graphics state dictionary
     */
-    private void setGSState(String name) throws IOException {        
+    private void setGSState(final String name) throws IOException {
         // obj must be a string that is a key to the "ExtGState" dict
-        PDFObject gsobj = findResource(name, "ExtGState");
+        final PDFObject gsobj = findResource(name, "ExtGState");
         // TODO: lots of graphic states are not yet considered, see chapter 8.4.5 of the PDF specification.  
         // get LW, LC, LJ, Font, SM, CA, ML, D, RI, FL, BM, ca
         // out of the reference, which is a dictionary
@@ -1407,8 +1388,8 @@ public class PDFParser extends BaseWatchable {
             handled = true;
         }
         if ((d = gsobj.getDictRef("D")) != null) {
-            PDFObject[] pdash = d.getAt(0).getArray();
-            float[] dash = new float[pdash.length];
+            final PDFObject[] pdash = d.getAt(0).getArray();
+            final float[] dash = new float[pdash.length];
             for (int i = 0; i < pdash.length; i++) {
                 dash[i] = pdash[i].getFloatValue();
             }
@@ -1432,7 +1413,7 @@ public class PDFParser extends BaseWatchable {
         }
         if ((d = gsobj.getDictRef("OP")) != null) {
             this.strokeOverprint = d.getBooleanValue();
-            PDFObject x = gsobj.getDictRef("OPM");
+            final PDFObject x = gsobj.getDictRef("OPM");
             if (x!= null) {
                 this.strokeOverprintMode = x.getIntValue();
             }
@@ -1440,7 +1421,7 @@ public class PDFParser extends BaseWatchable {
         }
         if ((d = gsobj.getDictRef("op")) != null) {
             this.fillOverprint = d.getBooleanValue();
-            PDFObject x = gsobj.getDictRef("OPM");
+            final PDFObject x = gsobj.getDictRef("OPM");
             if (x!= null) {
                 this.fillOverprintMode = x.getIntValue();
             }
@@ -1457,7 +1438,7 @@ public class PDFParser extends BaseWatchable {
     * the ColorSpace dictionary, or a color space name with a defining
     * dictionary or stream.
     */
-    private PDFColorSpace parseColorSpace(PDFObject csobj) throws IOException {
+    private PDFColorSpace parseColorSpace(final PDFObject csobj) throws IOException {
         if (csobj == null) {
             return this.state.fillCS;
         }
@@ -1474,7 +1455,7 @@ public class PDFParser extends BaseWatchable {
     */
     private float popFloat() throws PDFParseException {
         if (!this.stack.isEmpty()) {
-            Object obj = this.stack.pop();
+            final Object obj = this.stack.pop();
             if (obj instanceof Double) {
                 return ((Double) obj).floatValue();
             } else {
@@ -1496,8 +1477,8 @@ public class PDFParser extends BaseWatchable {
     * if any of the values popped off the
     * stack are not numbers.
     */
-    private float[] popFloat(int count) throws PDFParseException {
-        float[] ary = new float[count];
+    private float[] popFloat(final int count) throws PDFParseException {
+        final float[] ary = new float[count];
         for (int i = count - 1; i >= 0; i--) {
             ary[i] = popFloat();
         }
@@ -1512,7 +1493,7 @@ public class PDFParser extends BaseWatchable {
     * if the top of the stack isn't a number.
     */
     private int popInt() throws PDFParseException {
-        Object obj = this.stack.pop();
+        final Object obj = this.stack.pop();
         if (obj instanceof Double) {
             return ((Double) obj).intValue();
         } else {
@@ -1531,12 +1512,12 @@ public class PDFParser extends BaseWatchable {
     * stack are not numbers.
     */
     private float[] popFloatArray() throws PDFParseException {
-        Object obj = this.stack.pop();
+        final Object obj = this.stack.pop();
         if (!(obj instanceof Object[])) {
             throw new PDFParseException("Expected an [array] here.");
         }
-        Object[] source = (Object[]) obj;
-        float[] ary = new float[source.length];
+        final Object[] source = (Object[]) obj;
+        final float[] ary = new float[source.length];
         for (int i = 0; i < ary.length; i++) {
             if (source[i] instanceof Double) {
                 ary[i] = ((Double) source[i]).floatValue();
@@ -1556,7 +1537,7 @@ public class PDFParser extends BaseWatchable {
     * or STR.
     */
     private String popString() throws PDFParseException {
-        Object obj = this.stack.pop();
+        final Object obj = this.stack.pop();
         if (!(obj instanceof String)) {
             throw new PDFParseException("Expected string here: " + obj.toString());
         } else {
@@ -1573,7 +1554,7 @@ public class PDFParser extends BaseWatchable {
     * a PDFObject.
     */
     private PDFObject popObject() throws PDFParseException {
-        Object obj = this.stack.pop();
+        final Object obj = this.stack.pop();
         if (!(obj instanceof PDFObject)) {
             throw new PDFParseException("Expected a reference here: " + obj.toString());
         }
@@ -1589,7 +1570,7 @@ public class PDFParser extends BaseWatchable {
     * contain an array.
     */
     private Object[] popArray() throws PDFParseException {
-        Object obj = this.stack.pop();
+        final Object obj = this.stack.pop();
         if (!(obj instanceof Object[])) {
             throw new PDFParseException("Expected an [array] here: " + obj.toString());
         }
@@ -1613,8 +1594,8 @@ public class PDFParser extends BaseWatchable {
         * Clone the render state.
         */
         @Override
-        public Object clone() {
-            ParserState newState = new ParserState();
+        public Object clone() throws CloneNotSupportedException {
+            final ParserState newState = new ParserState();
             // no need to clone color spaces, since they are immutable
             newState.fillCS = this.fillCS;
             newState.strokeCS = this.strokeCS;
@@ -1626,7 +1607,7 @@ public class PDFParser extends BaseWatchable {
     
     /** {@inheritDoc} */
     @Override
-    protected void setStatus(int status) {
+    protected void setStatus(final int status) {
     	if (status == BaseWatchable.COMPLETED) {
     		if (!addAnnotation) {
     			// corresponding push in constructor PDFPage

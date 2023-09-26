@@ -456,7 +456,7 @@ public class LookAndFeelsSettingsUI extends AbstractToolsUI {
 		this.previewLabel.repaint();
 	}
 
-	private boolean validate(LAFSettings laf) {
+	private boolean validate(final LAFSettings laf) {
 
 		int check = 0;
 		if (laf.isAcryl()) {

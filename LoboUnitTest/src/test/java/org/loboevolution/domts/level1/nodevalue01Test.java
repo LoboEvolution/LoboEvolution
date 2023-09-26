@@ -51,8 +51,8 @@ public class nodevalue01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element newNode;
+        final Document doc;
+        final Element newNode;
         String newValue;
         doc = sampleXmlFile("staff.xml");
         newNode = doc.createElement("address");

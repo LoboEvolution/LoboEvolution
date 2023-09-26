@@ -53,7 +53,7 @@ public class AluminiumTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public AluminiumTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public AluminiumTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
@@ -65,7 +65,7 @@ public class AluminiumTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getTheme().getWindowBorderColor());
 		} else {
@@ -76,7 +76,7 @@ public class AluminiumTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
 			JTattooUtilities.drawString(rootPane, g, title, x + 1, y);

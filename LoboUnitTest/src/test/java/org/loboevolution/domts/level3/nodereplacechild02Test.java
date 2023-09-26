@@ -46,9 +46,9 @@ import org.loboevolution.html.node.Node;
 public class nodereplacechild02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        Node replaced;
+        final Document doc;
+        final DocumentType docType;
+        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         replaced = doc.replaceChild(docType, docType);

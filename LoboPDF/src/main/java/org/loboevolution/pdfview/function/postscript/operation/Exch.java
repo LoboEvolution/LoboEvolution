@@ -31,9 +31,9 @@ import java.util.Stack;
 final class Exch implements PostScriptOperation {
 	/** {@inheritDoc} */
 	@Override
-	public void eval(Stack<Object> environment) {   // <i>any1 any2</i> <b>exch</b> <i>any2 any1</i> - exchange top of stack
-	    Object any1 = environment.pop();
-	    Object any2 = environment.pop();
+	public void eval(final Stack<Object> environment) {   // <i>any1 any2</i> <b>exch</b> <i>any2 any1</i> - exchange top of stack
+	    final Object any1 = environment.pop();
+	    final Object any2 = environment.pop();
 	    environment.push(any1);
 	    environment.push(any2);
 	}

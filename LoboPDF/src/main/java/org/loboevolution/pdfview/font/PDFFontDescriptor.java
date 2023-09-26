@@ -39,7 +39,7 @@ import org.loboevolution.pdfview.PDFObject;
 public class PDFFontDescriptor {
 
     /** All glyphs have the same width. */
-    public static final  int FIXED_PITCH = 1 << (1-1);
+    public static final  int FIXED_PITCH = 1 << (0);
     /** Glyphs have serifs. */
     public static final  int SERIF = 1 << (2-1);
     /** Font contains glyphs outside the Adobe standard Latin. */
@@ -105,7 +105,7 @@ public class PDFFontDescriptor {
      *
      * @param basefont a {@link java.lang.String} object.
      */
-    public PDFFontDescriptor(String basefont) {
+    public PDFFontDescriptor(final String basefont) {
         setFontName(basefont);
     // [[MW TODO: find basefont info and fill in the rest of the
     // descriptor?]]
@@ -118,7 +118,7 @@ public class PDFFontDescriptor {
      * @param fontSubType a {@link java.lang.String} object.
      * @throws java.io.IOException if any.
      */
-    public PDFFontDescriptor(PDFObject obj, String fontSubType) throws IOException {
+    public PDFFontDescriptor(final PDFObject obj, final String fontSubType) throws IOException {
         // required parameters
         setFlags(obj.getDictRef("Flags").getIntValue());
         PDFObject fontNameObj = obj.getDictRef("FontName");
@@ -130,7 +130,7 @@ public class PDFFontDescriptor {
         setItalicAngle(obj.getDictRef("ItalicAngle").getIntValue());
         
         // conditionally required parameters
-        boolean areConditionalParametersRequired = !"Type3".equals(fontSubType)
+        final boolean areConditionalParametersRequired = !"Type3".equals(fontSubType)
                 && !Boolean.getBoolean("PDFRenderer.lenientFontDescriptorParsing");
         
     	// these values are declared as Required except for Type 3 fonts
@@ -163,8 +163,8 @@ public class PDFFontDescriptor {
 
         // font bounding box (non-optional but a NPE won't help)
         if (obj.getDictionary().containsKey("FontBBox")) {
-            PDFObject[] bboxdef = obj.getDictRef("FontBBox").getArray();
-            float[] bboxfdef = new float[4];
+            final PDFObject[] bboxdef = obj.getDictRef("FontBBox").getArray();
+            final float[] bboxfdef = new float[4];
             for (int i = 0; i < 4; i++) {
                 bboxfdef[i] = bboxdef[i].getFloatValue();
             }
@@ -229,7 +229,7 @@ public class PDFFontDescriptor {
      *
      * @param ascent New value of property ascent.
      */
-    public void setAscent(int ascent) {
+    public void setAscent(final int ascent) {
         this.ascent = ascent;
     }
 
@@ -247,7 +247,7 @@ public class PDFFontDescriptor {
      *
      * @param capHeight New value of property capHeight.
      */
-    public void setCapHeight(int capHeight) {
+    public void setCapHeight(final int capHeight) {
         this.capHeight = capHeight;
     }
 
@@ -265,7 +265,7 @@ public class PDFFontDescriptor {
      *
      * @param descent New value of property descent.
      */
-    public void setDescent(int descent) {
+    public void setDescent(final int descent) {
         this.descent = descent;
     }
 
@@ -283,7 +283,7 @@ public class PDFFontDescriptor {
      *
      * @param flags New value of property flags.
      */
-    public void setFlags(int flags) {
+    public void setFlags(final int flags) {
         this.flags = flags;
     }
 
@@ -301,7 +301,7 @@ public class PDFFontDescriptor {
      *
      * @param fontFamily New value of property fontFamily.
      */
-    public void setFontFamily(String fontFamily) {
+    public void setFontFamily(final String fontFamily) {
         this.fontFamily = fontFamily;
     }
 
@@ -319,7 +319,7 @@ public class PDFFontDescriptor {
      *
      * @param fontName New value of property fontName.
      */
-    public void setFontName(String fontName) {
+    public void setFontName(final String fontName) {
         this.fontName = fontName;
     }
 
@@ -340,7 +340,7 @@ public class PDFFontDescriptor {
      *
      * @param fontStretch New value of property fontStretch.
      */
-    public void setFontStretch(String fontStretch) {
+    public void setFontStretch(final String fontStretch) {
         this.fontStretch = fontStretch;
     }
 
@@ -360,7 +360,7 @@ public class PDFFontDescriptor {
      *
      * @param fontWeight New value of property fontWeight.
      */
-    public void setFontWeight(int fontWeight) {
+    public void setFontWeight(final int fontWeight) {
         this.fontWeight = fontWeight;
     }
 
@@ -378,7 +378,7 @@ public class PDFFontDescriptor {
      *
      * @param italicAngle New value of property italicAngle.
      */
-    public void setItalicAngle(int italicAngle) {
+    public void setItalicAngle(final int italicAngle) {
         this.italicAngle = italicAngle;
     }
 
@@ -396,7 +396,7 @@ public class PDFFontDescriptor {
      *
      * @param stemV New value of property stemV.
      */
-    public void setStemV(int stemV) {
+    public void setStemV(final int stemV) {
         this.stemV = stemV;
     }
 
@@ -414,7 +414,7 @@ public class PDFFontDescriptor {
      *
      * @param avgWidth New value of property avgWidth.
      */
-    public void setAvgWidth(int avgWidth) {
+    public void setAvgWidth(final int avgWidth) {
         this.avgWidth = avgWidth;
     }
 
@@ -432,7 +432,7 @@ public class PDFFontDescriptor {
      *
      * @param fontFile New value of property fontFile.
      */
-    public void setFontFile(PDFObject fontFile) {
+    public void setFontFile(final PDFObject fontFile) {
         this.fontFile = fontFile;
     }
 
@@ -450,7 +450,7 @@ public class PDFFontDescriptor {
      *
      * @param fontFile2 New value of property fontFile2.
      */
-    public void setFontFile2(PDFObject fontFile2) {
+    public void setFontFile2(final PDFObject fontFile2) {
         this.fontFile2 = fontFile2;
     }
 
@@ -468,7 +468,7 @@ public class PDFFontDescriptor {
      *
      * @param fontFile3 New value of property fontFile3.
      */
-    public void setFontFile3(PDFObject fontFile3) {
+    public void setFontFile3(final PDFObject fontFile3) {
         this.fontFile3 = fontFile3;
     }
 
@@ -486,7 +486,7 @@ public class PDFFontDescriptor {
      *
      * @param leading New value of property leading.
      */
-    public void setLeading(int leading) {
+    public void setLeading(final int leading) {
         this.leading = leading;
     }
 
@@ -504,7 +504,7 @@ public class PDFFontDescriptor {
      *
      * @param maxWidth New value of property maxWidth.
      */
-    public void setMaxWidth(int maxWidth) {
+    public void setMaxWidth(final int maxWidth) {
         this.maxWidth = maxWidth;
     }
 
@@ -522,7 +522,7 @@ public class PDFFontDescriptor {
      *
      * @param missingWidth New value of property misingWidth.
      */
-    public void setMissingWidth(int missingWidth) {
+    public void setMissingWidth(final int missingWidth) {
         this.missingWidth = missingWidth;
     }
 
@@ -540,7 +540,7 @@ public class PDFFontDescriptor {
      *
      * @param stemH New value of property stemH.
      */
-    public void setStemH(int stemH) {
+    public void setStemH(final int stemH) {
         this.stemH = stemH;
     }
 
@@ -558,7 +558,7 @@ public class PDFFontDescriptor {
      *
      * @param xHeight New value of property xHeight.
      */
-    public void setXHeight(int xHeight) {
+    public void setXHeight(final int xHeight) {
         this.xHeight = xHeight;
     }
 
@@ -576,7 +576,7 @@ public class PDFFontDescriptor {
      *
      * @param charSet New value of property charSet.
      */
-    public void setCharSet(PDFObject charSet) {
+    public void setCharSet(final PDFObject charSet) {
         this.charSet = charSet;
     }
 
@@ -594,7 +594,7 @@ public class PDFFontDescriptor {
      *
      * @param fontBBox New value of property fontBBox.
      */
-    public void setFontBBox(Rectangle2D.Float fontBBox) {
+    public void setFontBBox(final Rectangle2D.Float fontBBox) {
         this.fontBBox = fontBBox;
     }
 }

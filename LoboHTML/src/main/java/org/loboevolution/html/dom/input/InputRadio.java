@@ -47,7 +47,7 @@ public class InputRadio {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputRadio(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputRadio(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		radio.setOpaque(false);
 		if (modelNode.getTitle() != null) radio.setToolTipText(modelNode.getTitle());
 		radio.setVisible(!modelNode.isHidden());

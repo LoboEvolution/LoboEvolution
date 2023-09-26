@@ -48,7 +48,7 @@ public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane 
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public AluminiumInternalFrameTitlePane(JInternalFrame f) {
+	public AluminiumInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
@@ -60,7 +60,7 @@ public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane 
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getTheme().getWindowBorderColor());
 		} else {
@@ -71,7 +71,7 @@ public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane 
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
 			JTattooUtilities.drawString(frame, g, title, x + 1, y - 1);

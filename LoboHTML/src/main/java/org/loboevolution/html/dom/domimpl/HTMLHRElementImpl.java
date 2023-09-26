@@ -70,7 +70,7 @@ public class HTMLHRElementImpl extends HTMLElementImpl implements HTMLHRElement 
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlign(String align) {
+	public void setAlign(final String align) {
 		setAttribute("align", align);
 	}
 
@@ -81,31 +81,31 @@ public class HTMLHRElementImpl extends HTMLElementImpl implements HTMLHRElement 
 	}
 
 	@Override
-	public void setColor(String color) {
+	public void setColor(final String color) {
 		// TODO Auto-generated method stub
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNoShade(boolean noShade) {
+	public void setNoShade(final boolean noShade) {
 		setAttribute("noshade", noShade ? "noshade" : null);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSize(String size) {
+	public void setSize(final String size) {
 		setAttribute("size", size);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(String width) {
+	public void setWidth(final String width) {
 		setAttribute("width", width);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new HRRenderState(prevRenderState, this);
 	}
 

@@ -40,7 +40,7 @@ public class DTMDOMException extends DOMException {
    *
    * @param code
    */
-  public DTMDOMException(short code) {
+  public DTMDOMException(final short code) {
     super(code, "");
   }
 }

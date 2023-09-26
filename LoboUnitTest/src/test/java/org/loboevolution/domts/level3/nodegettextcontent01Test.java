@@ -45,8 +45,8 @@ public class nodegettextcontent01Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        String textContent;
+        final Document doc;
+        final String textContent;
         doc = sampleXmlFile("hc_staff.xml");
         textContent = doc.getTextContent();
         assertNull("nodegettextcontent01", textContent);

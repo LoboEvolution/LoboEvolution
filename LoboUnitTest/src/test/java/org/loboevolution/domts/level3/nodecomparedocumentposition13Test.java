@@ -47,12 +47,12 @@ public class nodecomparedocumentposition13Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Comment comment;
-        Element elem;
-        HTMLCollection elemList;
-        int documentPosition;
-        int commentPosition;
+        final Document doc;
+        final Comment comment;
+        final Element elem;
+        final HTMLCollection elemList;
+        final int documentPosition;
+        final int commentPosition;
         doc = sampleXmlFile("hc_staff.xml");
         comment = doc.createComment("Another Comment");
         elemList = doc.getElementsByTagName("p");

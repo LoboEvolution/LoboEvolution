@@ -58,12 +58,12 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
-        String systemId = "dom2.dtd";
+        final Document doc;
+        final DOMImplementation domImpl;
+        final String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
+        final String systemId = "dom2.dtd";
         String qualifiedName;
-        List<String> qualifiedNames = new ArrayList<>();
+        final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("{");
         qualifiedNames.add("}");
         qualifiedNames.add("'");
@@ -89,7 +89,7 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
                 boolean success = false;
                 try {
                     domImpl.createDocumentType(qualifiedName, publicId, systemId);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }
                 assertTrue("domimplementationcreatedocumenttype04", success);

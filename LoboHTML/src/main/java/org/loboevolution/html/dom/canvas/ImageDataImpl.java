@@ -50,7 +50,7 @@ public class ImageDataImpl implements ImageData {
 	 * @param sw a int.
 	 * @param sh a int.
 	 */
-	public ImageDataImpl(BufferedImage image, int sw, int sh) {
+	public ImageDataImpl(final BufferedImage image, final int sw, final int sh) {
 		this.image = image;
 		this.width = sw;
 		this.height = sh;

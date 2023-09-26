@@ -34,7 +34,6 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
 
 
 /**
@@ -60,12 +59,12 @@ public class documentimportnode11Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element docElement;
-        Node imported;
-        boolean success;
-        String nodeNameOrig;
-        String nodeNameImported;
+        final Document doc;
+        final Element docElement;
+        final Node imported;
+        final boolean success;
+        final String nodeNameOrig;
+        final String nodeNameImported;
         doc = sampleXmlFile("staffNS.xml");
         docElement = doc.getDocumentElement();
         imported = doc.importNode(docElement, false);

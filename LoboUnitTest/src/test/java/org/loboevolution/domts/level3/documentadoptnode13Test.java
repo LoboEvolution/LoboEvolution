@@ -49,12 +49,12 @@ import static org.junit.Assert.assertTrue;
 public class documentadoptnode13Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        HTMLCollection childList;
-        boolean success;
-        Node acronymNode;
-        Node adoptedDocFrag;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final HTMLCollection childList;
+        final boolean success;
+        final Node acronymNode;
+        final Node adoptedDocFrag;
         doc = sampleXmlFile("hc_staff.xml");
         docFragment = doc.createDocumentFragment();
         childList = doc.getElementsByTagName("acronym");

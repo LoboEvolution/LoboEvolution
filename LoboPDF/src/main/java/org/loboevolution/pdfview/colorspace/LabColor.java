@@ -53,7 +53,7 @@ public class LabColor extends ColorSpace {
      * "Range".
      * @throws java.io.IOException if any.
      */
-    public LabColor(PDFObject obj) throws IOException {
+    public LabColor(final PDFObject obj) throws IOException {
 	// obj is a dictionary that has the following parts:
 	// WhitePoint [a b c]
 	// BlackPoint [a b c]
@@ -95,7 +95,7 @@ public class LabColor extends ColorSpace {
      * @param s1 a float.
      * @return a float.
      */
-    public final float stage2(float s1) {
+    public final float stage2(final float s1) {
 	return (s1>=6f/29f)?s1*s1*s1:108f/841f*(s1-4f/29f);
     }
 
@@ -105,16 +105,16 @@ public class LabColor extends ColorSpace {
 	 * convert from Lab to RGB
 	 */
     @Override
-	public float[] toRGB(float[] comp) {
+	public float[] toRGB(final float[] comp) {
 	if (comp.length==3) {
-	    float l= (comp[0]+16)/116+comp[1]/500;
-	    float m= (comp[0]+16)/116;
-	    float n= (comp[0]+16)/116-comp[2]/200;
-	    float[] xyz = {
+	    final float l= (comp[0]+16)/116+comp[1]/500;
+	    final float m= (comp[0]+16)/116;
+	    final float n= (comp[0]+16)/116-comp[2]/200;
+	    final float[] xyz = {
 		this.white[0]*stage2(l),
 		this.white[0]*stage2(m),
 		this.white[0]*stage2(n)};
-	    float[] rgb = cie.fromCIEXYZ(xyz);
+	    final float[] rgb = cie.fromCIEXYZ(xyz);
 	    return rgb;
 	} else {
 	    return this.black;
@@ -127,7 +127,7 @@ public class LabColor extends ColorSpace {
 	 * convert from RGB to Lab.  NOT IMPLEMENTED
 	 */
     @Override
-	public float[] fromRGB(float[] rgbvalue) {
+	public float[] fromRGB(final float[] rgbvalue) {
 	return new float[3];
     }
 
@@ -137,7 +137,7 @@ public class LabColor extends ColorSpace {
 	 * convert from CIEXYZ to Lab.  NOT IMPLEMENTED
 	 */
     @Override
-	public float[] fromCIEXYZ(float[] colorvalue) {
+	public float[] fromCIEXYZ(final float[] colorvalue) {
 	return new float[3];
     }
 
@@ -156,7 +156,7 @@ public class LabColor extends ColorSpace {
 	 * convert from Lab to CIEXYZ.   NOT IMPLEMENTED
 	 */
     @Override
-	public float[] toCIEXYZ(float[] colorvalue) {
+	public float[] toCIEXYZ(final float[] colorvalue) {
 	return new float[3];
     }
     

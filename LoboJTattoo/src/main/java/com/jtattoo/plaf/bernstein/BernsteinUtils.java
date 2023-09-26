@@ -53,11 +53,11 @@ public final class BernsteinUtils {
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Component} object.
 	 */
-	public static void fillComponent(Graphics g, Component c) {
+	public static void fillComponent(final Graphics g, final Component c) {
 		if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
-			int w = c.getWidth();
-			int h = c.getHeight();
-			Point p = JTattooUtilities.getRelLocation(c);
+			final int w = c.getWidth();
+			final int h = c.getHeight();
+			final Point p = JTattooUtilities.getRelLocation(c);
 			int y = -p.y;
 			while (y < h) {
 				int x = -p.x;

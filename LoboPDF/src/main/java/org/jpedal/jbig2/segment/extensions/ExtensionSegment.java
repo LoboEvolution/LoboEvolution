@@ -44,7 +44,7 @@ public class ExtensionSegment extends Segment {
 	 *
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 */
-	public ExtensionSegment(JBIG2StreamDecoder streamDecoder) {
+	public ExtensionSegment(final JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 

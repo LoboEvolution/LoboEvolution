@@ -48,11 +48,11 @@ import static org.junit.Assert.assertNull;
 public class nodesetuserdata09Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        Object returned;
+        final Document doc;
+        final Element docElem;
+        final Object returned;
 
-        Object retUserData;
+        final Object retUserData;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         /*Node */

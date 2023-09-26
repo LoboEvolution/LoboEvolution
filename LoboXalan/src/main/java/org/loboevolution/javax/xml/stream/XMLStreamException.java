@@ -67,7 +67,7 @@ public class XMLStreamException extends Exception {
    *
    * @param msg the message to report
    */
-  public XMLStreamException(String msg) {
+  public XMLStreamException(final String msg) {
     super(msg);
   }
 
@@ -76,7 +76,7 @@ public class XMLStreamException extends Exception {
    *
    * @param th a nested exception
    */
-  public XMLStreamException(Throwable th) {
+  public XMLStreamException(final Throwable th) {
       super(th);
     nested = th;
   }
@@ -87,7 +87,7 @@ public class XMLStreamException extends Exception {
    * @param th a nested exception
    * @param msg the message to report
    */
-  public XMLStreamException(String msg, Throwable th) {
+  public XMLStreamException(final String msg, final Throwable th) {
     super(msg, th);
     nested = th;
   }
@@ -99,7 +99,7 @@ public class XMLStreamException extends Exception {
    * @param msg the message to report
    * @param location the location of the error
    */
-  public XMLStreamException(String msg, Location location, Throwable th) {
+  public XMLStreamException(final String msg, final Location location, final Throwable th) {
     super("ParseError at [row,col]:["+location.getLineNumber()+","+
           location.getColumnNumber()+"]\n"+
           "Message: "+msg);
@@ -113,8 +113,8 @@ public class XMLStreamException extends Exception {
    * @param msg the message to report
    * @param location the location of the error
    */
-  public XMLStreamException(String msg,
-                            Location location) {
+  public XMLStreamException(final String msg,
+                            final Location location) {
     super("ParseError at [row,col]:["+location.getLineNumber()+","+
           location.getColumnNumber()+"]\n"+
           "Message: "+msg);

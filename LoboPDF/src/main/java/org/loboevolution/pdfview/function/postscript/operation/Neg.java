@@ -43,7 +43,7 @@ final class Neg implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck
 	 */
-	public void eval(Stack<Object> environment) {
+	public void eval(final Stack<Object> environment) {
 	    environment.push(-(Double)environment.pop());
 	}
 }

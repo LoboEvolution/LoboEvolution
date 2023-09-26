@@ -58,9 +58,9 @@ public class PostScriptParser {
 	 * @return the list of tokens.
 	 ***********************************************************************
 	 */
-	public List<String> parse(String scriptContent) {
-		List<String> tokens = new LinkedList<>();
-		StringTokenizer tok = new StringTokenizer(scriptContent, " \t\n\r"); 
+	public List<String> parse(final String scriptContent) {
+		final List<String> tokens = new LinkedList<>();
+		final StringTokenizer tok = new StringTokenizer(scriptContent, " \t\n\r");
 		while (tok.hasMoreTokens()) {
 			String t = tok.nextToken();
 			t = filterBlockStart(t);
@@ -73,10 +73,11 @@ public class PostScriptParser {
 	}
 
 	/*************************************************************************
-	 * @param t
+	 * @param token
 	 * @return
 	 ************************************************************************/
-	private String filterBlockEnd(String t) {
+	private String filterBlockEnd(final String token) {
+		String t = token;
 		if (t.endsWith("}")) {
 			t = t.substring(0, t.length()-1);
 		}
@@ -87,14 +88,11 @@ public class PostScriptParser {
 	 * @param t
 	 * @return
 	 ************************************************************************/
-	private String filterBlockStart(String t) {
+	private String filterBlockStart(final String token) {
+		String t = token;
 		if (t.startsWith("{")) {
 			t = t.substring(1);
 		}
 		return t;
 	}
-	
-	
-
 }
-

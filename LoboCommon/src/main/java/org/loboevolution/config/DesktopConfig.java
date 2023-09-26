@@ -48,8 +48,8 @@ public class DesktopConfig {
      * <p>createWallpapersDirectorys.</p>
      * @param path a {@link java.lang.String} object.
      */
-    public static void createWallpapersDirectory(String path) throws Exception {
-        Path pathDir = Paths.get(System.getProperty("user.home"), "lobo", path);
+    public static void createWallpapersDirectory(final String path) throws Exception {
+        final Path pathDir = Paths.get(System.getProperty("user.home"), "lobo", path);
         if(!Files.exists(pathDir)) Files.createDirectories(pathDir);
     }
 
@@ -59,9 +59,9 @@ public class DesktopConfig {
      * @param path a {@link java.lang.String} object.
      * @param name a {@link java.lang.String} object.
      */
-    public static void createWallpapersFile(InputStream inputStream, String path, String name) throws Exception {
-        String filename = name.substring(name.lastIndexOf("/") +1, name.length());
-        Path pathFile = Files.createFile(Paths.get(System.getProperty("user.home"), "lobo", path, filename));
+    public static void createWallpapersFile(final InputStream inputStream, final String path, final String name) throws Exception {
+        final String filename = name.substring(name.lastIndexOf("/") +1, name.length());
+        final Path pathFile = Files.createFile(Paths.get(System.getProperty("user.home"), "lobo", path, filename));
         org.loboevolution.common.Files.copyInputStreamToFile(inputStream, pathFile.toFile());
     }
 
@@ -70,11 +70,11 @@ public class DesktopConfig {
      */
     public static File[] getResourceFolderFiles() {
         final Path dir = Paths.get(System.getProperty("user.home"), "lobo", PATH_WELCOME);
-        List<File> list = new ArrayList<>();
-        try (Stream<Path> paths = Files.list(dir)) {
+        final List<File> list = new ArrayList<>();
+        try (final Stream<Path> paths = Files.list(dir)) {
             paths.forEach(path -> list.add(path.toFile()));
             return list.toArray(new File[0]);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -83,11 +83,11 @@ public class DesktopConfig {
      * <p>getResourceFile.</p>
      * @param fileName a {@link java.lang.String} object.
      */
-    public static URL getResourceFile(String fileName)  {
+    public static URL getResourceFile(final String fileName)  {
         try {
             final Path dir = Paths.get(System.getProperty("user.home"), "lobo", PATH_IMAGE, fileName);
             return dir.toUri().toURL();
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }

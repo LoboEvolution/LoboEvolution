@@ -26,10 +26,7 @@
 
 package org.loboevolution.img;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.WeakHashMap;
+import java.util.*;
 
 import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
@@ -85,7 +82,7 @@ class Synchronizer {
 		boolean adjusting = false;
 
 		@Override
-		public void stateChanged(ChangeEvent e) {
+		public void stateChanged(final ChangeEvent e) {
 			if (leader != null) {
 				// ignore every scrolling event during synchronization, it will all be adjusted
 				// after the final rescroll
@@ -96,7 +93,8 @@ class Synchronizer {
 				return;
 			}
 			ImageViewer source = null;
-			for (ImageViewer viewer : viewers.keySet()) {
+			for (final Map.Entry<ImageViewer, Void> entry : viewers.entrySet()) {
+				final ImageViewer viewer = entry.getKey();
 				if (viewer.getScrollPane().getHorizontalScrollBar().getModel() == e.getSource()
 						|| viewer.getScrollPane().getVerticalScrollBar().getModel() == e.getSource()) {
 					source = viewer;
@@ -106,7 +104,8 @@ class Synchronizer {
 			if (source == null)
 				throw new AssertionError("Couldn't find the source of the scroll bar change event");
 			adjusting = true;
-			for (ImageViewer viewer : viewers.keySet()) {
+			for (final Map.Entry<ImageViewer, Void> entry : viewers.entrySet()) {
+				final ImageViewer viewer = entry.getKey();
 				updateScroll(viewer, source);
 			}
 			adjusting = false;
@@ -118,13 +117,13 @@ class Synchronizer {
 	 *
 	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public Synchronizer(ImageViewer viewer) {
+	public Synchronizer(final ImageViewer viewer) {
 		viewers.put(viewer, null);
 		viewer.getScrollPane().getHorizontalScrollBar().getModel().addChangeListener(scrollChangeListener);
 		viewer.getScrollPane().getVerticalScrollBar().getModel().addChangeListener(scrollChangeListener);
 	}
 
-	private void updateScroll(ImageViewer viewer, ImageViewer reference) {
+	private void updateScroll(final ImageViewer viewer, final ImageViewer reference) {
 		if (Objects.equals(reference, viewer))
 			return;
 		/*
@@ -142,13 +141,13 @@ class Synchronizer {
 	 *
 	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public void add(ImageViewer viewer) {
+	public void add(final ImageViewer viewer) {
 		if (viewer.getSynchronizer() == this)
 			return;
-		ImageViewer referenceViewer = viewers.keySet().iterator().next();
+		final ImageViewer referenceViewer = viewers.keySet().iterator().next();
 
-		List<ImageViewer> otherViewers = new ArrayList<>(viewer.getSynchronizer().viewers.keySet());
-		for (ImageViewer otherViewer : otherViewers) {
+		final List<ImageViewer> otherViewers = new ArrayList<>(viewer.getSynchronizer().viewers.keySet());
+		for (final ImageViewer otherViewer : otherViewers) {
 			otherViewer.getSynchronizer().remove(otherViewer);
 			otherViewer.setSynchronizer(this);
 			viewers.put(otherViewer, null);
@@ -169,7 +168,7 @@ class Synchronizer {
 	 *
 	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public void remove(ImageViewer viewer) {
+	public void remove(final ImageViewer viewer) {
 		viewers.remove(viewer);
 		viewer.getScrollPane().getHorizontalScrollBar().getModel().removeChangeListener(scrollChangeListener);
 		viewer.getScrollPane().getVerticalScrollBar().getModel().removeChangeListener(scrollChangeListener);
@@ -181,14 +180,14 @@ class Synchronizer {
 	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
 	 * @return a boolean.
 	 */
-	public boolean resizeStrategyChangedCanIRescroll(ImageViewer source) {
+	public boolean resizeStrategyChangedCanIRescroll(final ImageViewer source) {
 		if (leader != null) {
 			// leader is leading an adjustment operation; wait for it to rescroll, and then
 			// adjust everything else
 			return false;
 		}
 		leader = source;
-		for (ImageViewer viewer : viewers.keySet())
+		for (final ImageViewer viewer : viewers.keySet())
 			viewer.setResizeStrategy(source.getResizeStrategy());
 		return true;
 	}
@@ -199,14 +198,14 @@ class Synchronizer {
 	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
 	 * @return a boolean.
 	 */
-	public boolean zoomFactorChangedCanIRescroll(ImageViewer source) {
+	public boolean zoomFactorChangedCanIRescroll(final ImageViewer source) {
 		if (leader != null) {
 			// leader is leading an adjustment operation; wait for it to rescroll, and then
 			// adjust everything else
 			return false;
 		}
 		leader = source;
-		for (ImageViewer viewer : viewers.keySet())
+		for (final ImageViewer viewer : viewers.keySet())
 			viewer.setZoomFactor(source.getZoomFactor());
 		return true;
 	}
@@ -216,10 +215,11 @@ class Synchronizer {
 	 *
 	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public void doneRescrolling(ImageViewer source) {
+	public void doneRescrolling(final ImageViewer source) {
 		if (!Objects.equals(leader, source))
 			throw new AssertionError();
-		for (ImageViewer otherViewer : viewers.keySet()) {
+		for (final Map.Entry<ImageViewer, Void> entry : viewers.entrySet()) {
+			final ImageViewer otherViewer = entry.getKey();
 			if (!Objects.equals(otherViewer, leader)) {
 				((JComponent) otherViewer.getScrollPane().getViewport().getView())
 						.scrollRectToVisible(leader.getScrollPane().getViewport().getViewRect());
@@ -234,8 +234,8 @@ class Synchronizer {
 	 *
 	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public void interpolationTypeChanged(ImageViewer source) {
-		for (ImageViewer viewer : viewers.keySet())
+	public void interpolationTypeChanged(final ImageViewer source) {
+		for (final ImageViewer viewer : viewers.keySet())
 			viewer.setInterpolationType(source.getInterpolationType());
 	}
 
@@ -244,8 +244,8 @@ class Synchronizer {
 	 *
 	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public void statusBarVisibilityChanged(ImageViewer source) {
-		for (ImageViewer viewer : viewers.keySet())
+	public void statusBarVisibilityChanged(final ImageViewer source) {
+		for (final ImageViewer viewer : viewers.keySet())
 			viewer.setStatusBarVisible(source.isStatusBarVisible());
 	}
 
@@ -254,8 +254,8 @@ class Synchronizer {
 	 *
 	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public void pixelatedZoomChanged(ImageViewer source) {
-		for (ImageViewer viewer : viewers.keySet())
+	public void pixelatedZoomChanged(final ImageViewer source) {
+		for (final ImageViewer viewer : viewers.keySet())
 			viewer.setPixelatedZoom(source.isPixelatedZoom());
 	}
 }

@@ -60,8 +60,8 @@ public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getContentBorderColors(int tabPlacement) {
-		Color[] SEP_COLORS = { ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),
+	protected Color[] getContentBorderColors(final int tabPlacement) {
+		final Color[] SEP_COLORS = { ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),
 				ColorHelper.brighter(AbstractLookAndFeel.getBackgroundColor(), 20),
 				ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 20),
 				ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),
@@ -71,18 +71,18 @@ public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
-			Rectangle textRect, boolean isSelected) {
-		Color backColor = tabPane.getBackgroundAt(tabIndex);
+	protected void paintText(final Graphics g, final int tabPlacement, final Font font, final FontMetrics metrics, final int tabIndex, final String title,
+			final Rectangle textRect, final boolean isSelected) {
+		final Color backColor = tabPane.getBackgroundAt(tabIndex);
 		if (!(backColor instanceof UIResource)) {
 			super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
 			return;
 		}
 		g.setFont(font);
-		View v = getTextViewForTab(tabIndex);
+		final View v = getTextViewForTab(tabIndex);
 		if (v != null) {
 			// html
-			Graphics2D g2D = (Graphics2D) g;
+			final Graphics2D g2D = (Graphics2D) g;
 			Object savedRenderingHint = null;
 			if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 				savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -95,11 +95,11 @@ public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
 			}
 		} else {
 			// plain text
-			int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
+			final int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 
-			Graphics2D g2D = (Graphics2D) g;
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
 			Color fc = tabPane.getForegroundAt(tabIndex);
 			if (isSelected) {

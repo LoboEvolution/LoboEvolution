@@ -49,10 +49,10 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild20Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Attr attr;
-        Element elem;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Attr attr;
+        final Element elem;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
@@ -62,7 +62,7 @@ public class nodereplacechild20Test extends LoboUnitTest {
         boolean success = false;
         try {
             docFrag.replaceChild(attr, elem);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
         assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

@@ -46,10 +46,10 @@ import static org.junit.Assert.assertFalse;
 public class nodeissamenode04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element1;
-        Element element2;
-        boolean isSame;
+        final Document doc;
+        final Element element1;
+        final Element element2;
+        final boolean isSame;
         doc = sampleXmlFile("hc_staff.xml");
         element1 = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:br");
         element2 = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:br");

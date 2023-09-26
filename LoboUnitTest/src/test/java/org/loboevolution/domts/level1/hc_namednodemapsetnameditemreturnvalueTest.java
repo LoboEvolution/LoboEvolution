@@ -33,7 +33,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -65,13 +64,13 @@ public class hc_namednodemapsetnameditemreturnvalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Attr newAttribute;
-        Element testAddress;
-        NamedNodeMap attributes;
-        Node newNode;
-        String attrValue;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Attr newAttribute;
+        final Element testAddress;
+        final NamedNodeMap attributes;
+        final Node newNode;
+        final String attrValue;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddress = (Element)elementList.item(2);

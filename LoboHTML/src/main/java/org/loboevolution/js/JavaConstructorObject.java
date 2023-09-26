@@ -64,7 +64,7 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 	 * @param name a {@link java.lang.String} object.
 	 * @param classWrapper a {@link org.loboevolution.js.JavaClassWrapper} object.
 	 */
-	public JavaConstructorObject(String name, JavaClassWrapper classWrapper) {
+	public JavaConstructorObject(final String name, final JavaClassWrapper classWrapper) {
 		this.name = name;
 		this.classWrapper = classWrapper;
 		this.instantiator = new SimpleInstantiator(classWrapper);
@@ -77,7 +77,7 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 	 * @param classWrapper a {@link org.loboevolution.js.JavaClassWrapper} object.
 	 * @param instantiator a {@link org.loboevolution.js.JavaInstantiator} object.
 	 */
-	public JavaConstructorObject(String name, JavaClassWrapper classWrapper, JavaInstantiator instantiator) {
+	public JavaConstructorObject(final String name, final JavaClassWrapper classWrapper, final JavaInstantiator instantiator) {
 		this.name = name;
 		this.classWrapper = classWrapper;
 		this.instantiator = instantiator;
@@ -85,13 +85,13 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 
 	/** {@inheritDoc} */
 	@Override
-	public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+	public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
 		throw new UnsupportedOperationException();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
+	public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
 		try {
 			final Object javaObject = this.instantiator.newInstance();
 			final Scriptable newObject = new JavaObjectWrapper(this.classWrapper, javaObject);
@@ -110,7 +110,7 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 
 	/** {@inheritDoc} */
 	@Override
-	public java.lang.Object getDefaultValue(java.lang.Class hint) {
+	public java.lang.Object getDefaultValue(final java.lang.Class hint) {
 		if (String.class.equals(hint)) {
 			return "function " + this.name;
 		} else {

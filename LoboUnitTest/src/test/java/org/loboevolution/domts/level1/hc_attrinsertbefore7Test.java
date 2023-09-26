@@ -49,13 +49,13 @@ public class hc_attrinsertbefore7Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection acronymList;
-        Element testNode;
-        NamedNodeMap attributes;
-        Attr titleAttr;
-        Text terNode;
-        Node dayNode;
+        final Document doc;
+        final HTMLCollection acronymList;
+        final Element testNode;
+        final NamedNodeMap attributes;
+        final Attr titleAttr;
+        final Text terNode;
+        final Node dayNode;
 
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
@@ -65,14 +65,14 @@ public class hc_attrinsertbefore7Test extends LoboUnitTest {
         terNode = doc.createTextNode("ter");
 
         dayNode = doc.createCDATASection("day");
-        DocumentFragment docFrag = doc.createDocumentFragment();
+        final DocumentFragment docFrag = doc.createDocumentFragment();
         docFrag.appendChild(terNode);
         docFrag.appendChild(dayNode);
 
         boolean success = false;
         try {
             titleAttr.insertBefore(docFrag, null);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
         assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

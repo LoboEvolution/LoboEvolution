@@ -29,7 +29,6 @@ package org.loboevolution.domts.level3;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertEquals;
@@ -52,15 +51,15 @@ import static org.junit.Assert.assertEquals;
 public class documentrenamenode09Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Attr attr;
-        Node renamedNode;
-        Node adopted;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Attr attr;
+        final Node renamedNode;
+        final Node adopted;
+        final DocumentType nullDocType = null;
 
-        String attrNodeName;
+        final String attrNodeName;
         doc = sampleXmlFile("hc_staff.xml");
         
         domImpl = doc.getImplementation();

@@ -48,7 +48,7 @@ public class PDFPaint {
      *
      * @param p a {@link java.awt.Paint} object.
      */
-    protected PDFPaint(Paint p) {
+    protected PDFPaint(final Paint p) {
         this.mainPaint = p;
     }
 
@@ -58,7 +58,7 @@ public class PDFPaint {
      * @param c a {@link java.awt.Color} object.
      * @return a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
-    public static PDFPaint getColorPaint(Color c) {
+    public static PDFPaint getColorPaint(final Color c) {
         return getPaint(c);
     }
 
@@ -68,7 +68,7 @@ public class PDFPaint {
      * @param p a {@link java.awt.Paint} object.
      * @return a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
-    public static PDFPaint getPaint(Paint p) {
+    public static PDFPaint getPaint(final Paint p) {
         return new PDFPaint(p);
     }
 
@@ -80,8 +80,8 @@ public class PDFPaint {
      * @param s the path to fill
      * @return a {@link java.awt.geom.Rectangle2D} object.
      */
-    public Rectangle2D fill(PDFRenderer state, Graphics2D g,
-            GeneralPath s) {
+    public Rectangle2D fill(final PDFRenderer state, final Graphics2D g,
+                            final GeneralPath s) {
         g.setPaint(this.mainPaint);
         g.fill(s);
 

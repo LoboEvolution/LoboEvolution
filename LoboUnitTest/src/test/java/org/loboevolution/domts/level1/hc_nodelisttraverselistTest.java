@@ -60,16 +60,16 @@ public class hc_nodelisttraverselistTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList employeeList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList employeeList;
         Node child;
         String childName;
         int nodeType;
-        List result = new ArrayList();
+        final List<String> result = new ArrayList<>();
 
-        List expected = new ArrayList();
+        final List expected = new ArrayList();
         expected.add("EM");
         expected.add("STRONG");
         expected.add("CODE");

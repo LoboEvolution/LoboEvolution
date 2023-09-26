@@ -59,14 +59,14 @@ public class namednodemapgetnameditemns04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap attributes;
-        Element element;
-        Attr attribute;
-        Attr newAttr1;
-        Attr newAttribute;
-        HTMLCollection elementList;
-        String attrName;
+        final Document doc;
+        final NamedNodeMap attributes;
+        final Element element;
+        final Attr attribute;
+        final Attr newAttr1;
+        final Attr newAttribute;
+        final HTMLCollection elementList;
+        final String attrName;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(1);

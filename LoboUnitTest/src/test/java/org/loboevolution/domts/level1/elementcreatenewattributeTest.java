@@ -59,13 +59,13 @@ public class elementcreatenewattributeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddress;
-        Attr newAttribute;
-        Attr oldAttr;
-        Attr districtAttr;
-        String attrVal;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddress;
+        final Attr newAttribute;
+        final Attr oldAttr;
+        final Attr districtAttr;
+        final String attrVal;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(0);

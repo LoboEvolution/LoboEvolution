@@ -46,7 +46,7 @@ public class UserDataHandlerImpl implements UserDataHandler {
     }
 
     @Override
-    public void handle(short operation, String key, Object data, Node src, Node dst) {
+    public void handle(final short operation, final String key, final Object data, final Node src, final Node dst) {
         notifications.add(new UserDataNotification(operation, key, data, src, dst));
     }
 

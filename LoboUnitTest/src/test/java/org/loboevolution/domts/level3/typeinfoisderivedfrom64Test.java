@@ -49,11 +49,11 @@ import static org.junit.Assert.assertTrue;
 public class typeinfoisderivedfrom64Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element acElem;
-        Attr classAttr;
-        TypeInfo attrTypeInfo;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element acElem;
+        final Attr classAttr;
+        final TypeInfo attrTypeInfo;
         boolean retValue;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("acronym");

@@ -45,13 +45,13 @@ public class JhromeNewTabButtonUI extends BasicButtonUI {
         init();
     }
 
-    public static JhromeNewTabButtonUI createUI(JComponent c) {
+    public static JhromeNewTabButtonUI createUI(final JComponent c) {
         return new JhromeNewTabButtonUI();
     }
 
     public static Icon createNewTabButtonIcon() {
-        BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
-        Path2D path = new Path2D.Double();
+        final BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+        final Path2D path = new Path2D.Double();
         path.moveTo(3, 0);
         path.lineTo(6, 0);
         path.lineTo(6, 3);
@@ -66,7 +66,7 @@ public class JhromeNewTabButtonUI extends BasicButtonUI {
         path.lineTo(3, 3);
         path.lineTo(3, 0);
 
-        Graphics2D g2 = (Graphics2D) image.getGraphics();
+        final Graphics2D g2 = (Graphics2D) image.getGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2.setColor(Color.WHITE);
@@ -79,7 +79,7 @@ public class JhromeNewTabButtonUI extends BasicButtonUI {
     }
 
     @Override
-    public void installUI(JComponent c) {
+    public void installUI(final JComponent c) {
         super.installUI(c);
         button = (AbstractButton) c;
         button.setIcon(JhromeNewTabButtonUI.createNewTabButtonIcon());
@@ -91,7 +91,7 @@ public class JhromeNewTabButtonUI extends BasicButtonUI {
     }
 
     @Override
-    public void uninstallUI(JComponent c) {
+    public void uninstallUI(final JComponent c) {
         super.uninstallUI(c);
         button.setIcon(null);
         button.setFocusable(true);
@@ -112,18 +112,19 @@ public class JhromeNewTabButtonUI extends BasicButtonUI {
     }
 
     @Override
-    public void paint(Graphics g, JComponent c) {
+    public void paint(final Graphics g, final JComponent c) {
         button = (AbstractButton) c;
         update((AbstractButton) c);
         paintFill(g, c);
         super.paint(g, c);
     }
 
-    public void paintFill(Graphics g, JComponent c) {
+    public void paintFill(final Graphics g, final JComponent c) {
         border.paint(c, g, 0, 0, c.getWidth(), c.getHeight(), false, true);
     }
 
-    protected float animate(float current, float target) {
+    protected float animate(final float curr, final float target) {
+        float current = curr;
         if (current < target) {
             current = Math.min(target, current + highlightSpeed);
         } else if (current > target) {
@@ -132,16 +133,16 @@ public class JhromeNewTabButtonUI extends BasicButtonUI {
         return current;
     }
 
-    protected void update(AbstractButton button) {
-        JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(button);
+    protected void update(final AbstractButton button) {
+        final JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(button);
         if (tabbedPane != null) {
-            border.flip = tabbedPane.getTabPlacement() == JTabbedPane.BOTTOM || tabbedPane.getTabPlacement() == JTabbedPane.RIGHT;
+            border.flip = tabbedPane.getTabPlacement() == SwingConstants.BOTTOM || tabbedPane.getTabPlacement() == SwingConstants.RIGHT;
         }
         if (button.getModel().isPressed()) {
             border.attrs.copy(JhromeNewTabButtonBorder.PRESSED_ATTRIBUTES);
             highlightTimer.stop();
         } else {
-            float targetHighlight = button.getModel().isRollover() ? 1 : 0;
+            final float targetHighlight = button.getModel().isRollover() ? 1 : 0;
             if (highlight != targetHighlight) {
                 highlight = animate(highlight, targetHighlight);
                 highlightTimer.start();
@@ -154,17 +155,17 @@ public class JhromeNewTabButtonUI extends BasicButtonUI {
     }
 
     @Override
-    public Dimension getMinimumSize(JComponent c) {
+    public Dimension getMinimumSize(final JComponent c) {
         return new Dimension(26, 16);
     }
 
     @Override
-    public Dimension getPreferredSize(JComponent c) {
+    public Dimension getPreferredSize(final JComponent c) {
         return new Dimension(26, 16);
     }
 
     @Override
-    public Dimension getMaximumSize(JComponent c) {
+    public Dimension getMaximumSize(final JComponent c) {
         return new Dimension(26, 16);
     }
 }

@@ -56,7 +56,7 @@ public class BasePanelUI extends BasicPanelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void installDefaults(JPanel p) {
+	protected void installDefaults(final JPanel p) {
 		super.installDefaults(p);
 		p.setFont(AbstractLookAndFeel.getTheme().getControlTextFont());
 	}
@@ -64,7 +64,7 @@ public class BasePanelUI extends BasicPanelUI {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g, final JComponent c) {
-		Graphics2D g2D = (Graphics2D) g;
+		final Graphics2D g2D = (Graphics2D) g;
 		Object savedRenderingHint = null;
 		if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 			savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -79,9 +79,9 @@ public class BasePanelUI extends BasicPanelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(Graphics g, JComponent c) {
+	public void update(final Graphics g, final JComponent c) {
 		if (c.isOpaque()) {
-			Object backgroundTexture = c.getClientProperty("backgroundTexture");
+			final Object backgroundTexture = c.getClientProperty("backgroundTexture");
 			if (backgroundTexture instanceof Icon) {
 				JTattooUtilities.fillComponent(g, c, (Icon) backgroundTexture);
 			} else {

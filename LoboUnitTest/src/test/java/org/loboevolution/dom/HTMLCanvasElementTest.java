@@ -175,7 +175,7 @@ public class HTMLCanvasElementTest extends LoboUnitTest {
         getWidth("abb", messages);
     }
 
-    private void getWidth(final String value, String[] messages) {
+    private void getWidth(final String value, final String[] messages) {
         final String html =
                 "<html>\n"
                         + "  <head>\n"

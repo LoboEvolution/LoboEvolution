@@ -43,7 +43,7 @@ public class XString extends XObject {
    *
    * @param val String object this will wrap.
    */
-  public XString(String val) {
+  public XString(final String val) {
     super(val);
   }
 
@@ -88,10 +88,10 @@ public class XString extends XObject {
      * these white space characters So trim() method is used to remove leading and
      * trailing white spaces.
      */
-    XString s = trim();
+    final XString s = trim();
     double result = Double.NaN;
     for (int i = 0; i < s.length(); i++) {
-      char c = s.charAt(i);
+      final char c = s.charAt(i);
       if (c != '-' && c != '.' && (c < 0X30 || c > 0x39)) {
         // The character is not a '-' or a '.' or a digit
         // then return NaN because something is wrong.
@@ -100,7 +100,7 @@ public class XString extends XObject {
     }
     try {
       result = Double.parseDouble(s.toString());
-    } catch (NumberFormatException e) {
+    } catch (final NumberFormatException e) {
       // ignore
     }
 
@@ -145,7 +145,7 @@ public class XString extends XObject {
    * @exception IndexOutOfBoundsException if the <code>index</code> argument is negative or not less
    *     than the length of this string.
    */
-  public char charAt(int index) {
+  public char charAt(final int index) {
     return str().charAt(index);
   }
 
@@ -167,18 +167,18 @@ public class XString extends XObject {
    *
    * @exception NullPointerException if <code>dst</code> is <code>null</code>
    */
-  public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+  public void getChars(final int srcBegin, final int srcEnd, final char[] dst, final int dstBegin) {
     str().getChars(srcBegin, srcEnd, dst, dstBegin);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean equals(XObject obj2) {
+  public boolean equals(final XObject obj2) {
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the
     // nodeset function.
-    int t = obj2.getType();
+    final int t = obj2.getType();
     try {
       if (XObject.CLASS_NODESET == t) return obj2.equals(this);
       // If at least one object to be compared is a boolean, then each object
@@ -190,7 +190,7 @@ public class XString extends XObject {
       // to be compared is converted to a number as if by applying the number
       // function.
       else if (XObject.CLASS_NUMBER == t) return obj2.num() == num();
-    } catch (org.loboevolution.javax.xml.transform.TransformerException te) {
+    } catch (final org.loboevolution.javax.xml.transform.TransformerException te) {
       throw new WrappedRuntimeException(te);
     }
 
@@ -209,7 +209,7 @@ public class XString extends XObject {
    * @see String#compareTo(String)
    * @see String#equalsIgnoreCase(String)
    */
-  public boolean equals(String obj2) {
+  public boolean equals(final String obj2) {
     return str().equals(obj2);
   }
 
@@ -223,7 +223,7 @@ public class XString extends XObject {
    * @see String#compareTo(String)
    * @see String#equalsIgnoreCase(String)
    */
-  public boolean equals(XString obj2) {
+  public boolean equals(final XString obj2) {
     if (obj2 != null) {
       if (!obj2.hasString()) {
         return obj2.equals(str());
@@ -235,7 +235,7 @@ public class XString extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public boolean equals(Object obj2) {
+  public boolean equals(final Object obj2) {
 
     if (null == obj2) return false;
 
@@ -263,10 +263,10 @@ public class XString extends XObject {
    *
    * @exception NullPointerException if <code>prefix</code> is <code>null</code>.
    */
-  public boolean startsWith(XString prefix, int toffset) {
+  public boolean startsWith(final XString prefix, final int toffset) {
 
     int to = toffset;
-    int tlim = this.length();
+    final int tlim = this.length();
     int po = 0;
     int pc = prefix.length();
 
@@ -297,7 +297,7 @@ public class XString extends XObject {
    *     this <code>String</code> object as determined by the {@link #equals(Object)} method.
    * @exception NullPointerException if <code>prefix</code> is <code>null</code>.
    */
-  public boolean startsWith(XString prefix) {
+  public boolean startsWith(final XString prefix) {
     return startsWith(prefix, 0);
   }
 
@@ -321,7 +321,7 @@ public class XString extends XObject {
    *     substring, <code>-1</code> is returned.
    * @exception NullPointerException if <code>str</code> is <code>null</code>.
    */
-  public int indexOf(XString str) {
+  public int indexOf(final XString str) {
     return str().indexOf(str.toString());
   }
 
@@ -346,7 +346,7 @@ public class XString extends XObject {
    * @exception IndexOutOfBoundsException if <code>beginIndex</code> is negative or larger than the
    *     length of this <code>String</code> object.
    */
-  public XString substring(int beginIndex) {
+  public XString substring(final int beginIndex) {
     return new XString(str().substring(beginIndex));
   }
 
@@ -362,7 +362,7 @@ public class XString extends XObject {
    *     endIndex</code> is larger than the length of this <code>String</code> object, or <code>
    *     beginIndex</code> is larger than <code>endIndex</code>.
    */
-  public XString substring(int beginIndex, int endIndex) {
+  public XString substring(final int beginIndex, final int endIndex) {
     return new XString(str().substring(beginIndex, endIndex));
   }
 
@@ -383,7 +383,7 @@ public class XString extends XObject {
    * @param ch Character to check as XML whitespace.
    * @return =true if <var>ch</var> is XML whitespace; otherwise =false.
    */
-  private static boolean isSpace(char ch) {
+  private static boolean isSpace(final char ch) {
     return XMLCharacterRecognizer.isWhiteSpace(ch); // Take the easy way out for now.
   }
 
@@ -400,11 +400,11 @@ public class XString extends XObject {
    * @return The trimmed string.
    */
   public XString fixWhiteSpace(
-      boolean trimHead, boolean trimTail, boolean doublePunctuationSpaces) {
+          final boolean trimHead, final boolean trimTail, final boolean doublePunctuationSpaces) {
 
     // %OPT% !!!!!!!
-    int len = this.length();
-    char[] buf = new char[len];
+    final int len = this.length();
+    final char[] buf = new char[len];
 
     this.getChars(0, len, buf, 0);
 
@@ -422,7 +422,7 @@ public class XString extends XObject {
     boolean pres = false;
 
     for (; s < len; s++) {
-      char c = buf[s];
+      final char c = buf[s];
 
       if (isSpace(c)) {
         if (!pres) {
@@ -433,7 +433,7 @@ public class XString extends XObject {
           buf[d++] = ' ';
 
           if (doublePunctuationSpaces && (s != 0)) {
-            char prevChar = buf[s - 1];
+            final char prevChar = buf[s - 1];
 
             if (!((prevChar == '.') || (prevChar == '!') || (prevChar == '?'))) {
               pres = true;
@@ -470,7 +470,7 @@ public class XString extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     visitor.visitStringLiteral();
   }
 }

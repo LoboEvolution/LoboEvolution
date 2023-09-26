@@ -49,16 +49,16 @@ public class canonicalform03Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection elemList;
         Element elemName;
-        CDATASection cdata;
-        Text text;
+        final CDATASection cdata;
+        final Text text;
         String nodeName;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        boolean canSet;
+        final boolean canSet;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         elemName = (Element) elemList.item(1);

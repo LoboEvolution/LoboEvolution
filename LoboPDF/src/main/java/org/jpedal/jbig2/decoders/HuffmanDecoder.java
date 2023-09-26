@@ -55,7 +55,7 @@ public class HuffmanDecoder {
 	 *
 	 * @param reader a {@link org.jpedal.jbig2.io.StreamReader} object.
 	 */
-	public HuffmanDecoder(StreamReader reader) {
+	public HuffmanDecoder(final StreamReader reader) {
 		this.reader = reader;
 	}
 
@@ -66,12 +66,12 @@ public class HuffmanDecoder {
 	 * @return a {@link org.jpedal.jbig2.decoders.DecodeIntResult} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public DecodeIntResult decodeInt(int[][] table) throws IOException {
+	public DecodeIntResult decodeInt(final int[][] table) throws IOException {
 		int length = 0, prefix = 0;
 
 		for (int i = 0; table[i][2] != jbig2HuffmanEOT; i++) {
 			for (; length < table[i][1]; length++) {
-				int bit = reader.readBit();
+				final int bit = reader.readBit();
 				prefix = (prefix << 1) | bit;
 			}
 			
@@ -79,12 +79,12 @@ public class HuffmanDecoder {
 				if (table[i][2] == jbig2HuffmanOOB) {
 					return new DecodeIntResult(-1, false);
 				}
-				int decodedInt;
+				final int decodedInt;
 				if (table[i][2] == jbig2HuffmanLOW) {
-					int readBits = reader.readBits(32);
+					final int readBits = reader.readBits(32);
 					decodedInt = table[i][0] - readBits;
 				} else if (table[i][2] > 0) {
-					int readBits = reader.readBits(table[i][2]);
+					final int readBits = reader.readBits(table[i][2]);
 					decodedInt = table[i][0] + readBits;
 				} else {
 					decodedInt = table[i][0];
@@ -103,7 +103,7 @@ public class HuffmanDecoder {
 	 * @param length a int.
 	 * @return an array of {@link int} objects.
 	 */
-	public static int[][] buildTable(int[][] table, int length) {
+	public static int[][] buildTable(final int[][] table, final int length) {
 		int i, j, k, prefix;
 		int[] tab;
 

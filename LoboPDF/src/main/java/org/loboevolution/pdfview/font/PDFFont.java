@@ -95,8 +95,8 @@ public abstract class PDFFont {
      * @return a {@link org.loboevolution.pdfview.font.PDFFont} object.
      * @throws java.io.IOException if any.
      */
-    public synchronized static PDFFont getFont(PDFObject obj,
-            HashMap<String,PDFObject> resources)
+    public synchronized static PDFFont getFont(final PDFObject obj,
+                                               final HashMap<String,PDFObject> resources)
             throws IOException {
         PDFFont font = (PDFFont) obj.getCache();
         if (font != null) {
@@ -112,8 +112,8 @@ public abstract class PDFFont {
             subType = obj.getDictRef("S").getStringValue();
         }
         PDFObject baseFontObj = obj.getDictRef("BaseFont");
-        PDFObject encodingObj = obj.getDictRef("Encoding");
-        PDFObject descObj = obj.getDictRef("FontDescriptor");
+        final PDFObject encodingObj = obj.getDictRef("Encoding");
+        final PDFObject descObj = obj.getDictRef("FontDescriptor");
 
         if (baseFontObj != null) {
             baseFont = baseFontObj.getStringValue();
@@ -160,7 +160,7 @@ public abstract class PDFFont {
                     // load a TrueType font
                     try {
                         font = new TTFFont(baseFont, obj, descriptor);
-                    } catch (Exception e) {
+                    } catch (final Exception e) {
 //            		PDFRenderer.getErrorHandler().publishException(e);
                         PDFDebugger.debug("Error parsing font : " + baseFont);
                         // fake it with a built-in font
@@ -171,7 +171,7 @@ public abstract class PDFFont {
                     if (extFontFile != null) {
                         try {
                             font = new TTFFont(baseFont, obj, descriptor, extFontFile);
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
 //                		PDFRenderer.getErrorHandler().publishException(e);
                             PDFDebugger.debug("Error parsing font : " + baseFont);
                             // fake it with a built-in font
@@ -213,7 +213,7 @@ public abstract class PDFFont {
         return font;
     }
 
-    private static File findExternalTtf(String fontName) {
+    private static File findExternalTtf(final String fontName) {
         ensureNamedTtfFontFiles();
         return namedFontsToLocalTtfFiles.get(fontName);
     }
@@ -233,20 +233,20 @@ public abstract class PDFFont {
                     for (final File ttfFile : fontDir.listFiles(TTF_FILTER)) {
                         if (ttfFile.canRead()) {
                             try {
-                                byte[] fontBytes;
-                                try (RandomAccessFile fontRa = new RandomAccessFile(ttfFile, "r")) {
-                                    int size = (int) fontRa.length();
+                                final byte[] fontBytes;
+                                try (final RandomAccessFile fontRa = new RandomAccessFile(ttfFile, "r")) {
+                                    final int size = (int) fontRa.length();
                                     fontBytes = new byte[size];
                                     fontRa.readFully(fontBytes);
                                 }
 
-                                TrueTypeFont ttf = TrueTypeFont.parseFont(fontBytes);
+                                final TrueTypeFont ttf = TrueTypeFont.parseFont(fontBytes);
                                 for (final String fontName : ttf.getNames()) {
                                     if (!namedFontsToLocalTtfFiles.containsKey(fontName)) {
                                         namedFontsToLocalTtfFiles.put(fontName, ttfFile);
                                     }
                                 }
-                            } catch (Throwable t) {
+                            } catch (final Throwable t) {
                                 // I'm not sure how much confidence we should have
                                 // in the font parsing, so we'll avoid relying on
                                 // this not to fail
@@ -262,7 +262,7 @@ public abstract class PDFFont {
     }
 
     private static String[] getFontSearchPath() {
-        String pathProperty = System.getProperty("PDFRenderer.fontSearchPath");
+        final String pathProperty = System.getProperty("PDFRenderer.fontSearchPath");
         if (pathProperty != null) {
             return pathProperty.split(Pattern.quote(File.pathSeparator));
         } else {
@@ -276,7 +276,7 @@ public abstract class PDFFont {
         String osName = null;
         try {
             osName = System.getProperty("os.name");
-        } catch (SecurityException e) {
+        } catch (final SecurityException e) {
             // preserve null osName
         }
 
@@ -290,16 +290,16 @@ public abstract class PDFFont {
             // start with some reasonable default
             String path = "C:/WINDOWS/Fonts";
             try {
-                String windir = System.getenv("WINDIR");
+                final String windir = System.getenv("WINDIR");
                 if (windir != null) {
                     path = windir + "/Fonts/";
                 }
-            } catch (SecurityException secEx) {
+            } catch (final SecurityException secEx) {
                 // drop through and accept default path
             }
             return new String[] { path };
         } else if (osName != null && osName.startsWith("mac")) {
-            List<String> paths = new ArrayList<>(Arrays.asList(
+            final List<String> paths = new ArrayList<>(Arrays.asList(
                     "/Library/Fonts",
                     "/Network/Library/Fonts",
                     "/System/Library/Fonts",
@@ -307,7 +307,7 @@ public abstract class PDFFont {
             // try and add the user font dir at the front
             try {
                 paths.add(0, System.getProperty("user.home") + "/Library/Fonts");
-            } catch (SecurityException e) {
+            } catch (final SecurityException e) {
                 // I suppose we just won't use the user fonts
             }
             return paths.toArray(new String[0]);
@@ -332,7 +332,7 @@ public abstract class PDFFont {
      *
      * @param subtype a {@link java.lang.String} object.
      */
-    public void setSubtype(String subtype) {
+    public void setSubtype(final String subtype) {
         this.subtype = subtype;
     }
 
@@ -350,7 +350,7 @@ public abstract class PDFFont {
      *
      * @param baseFont the postscript name of the font
      */
-    public void setBaseFont(String baseFont) {
+    public void setBaseFont(final String baseFont) {
         this.baseFont = baseFont;
     }
 
@@ -368,7 +368,7 @@ public abstract class PDFFont {
      *
      * @param encoding a {@link org.loboevolution.pdfview.font.PDFFontEncoding} object.
      */
-    public void setEncoding(PDFFontEncoding encoding) {
+    public void setEncoding(final PDFFontEncoding encoding) {
         this.encoding = encoding;
     }
 
@@ -386,7 +386,7 @@ public abstract class PDFFont {
      *
      * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      */
-    public void setDescriptor(PDFFontDescriptor descriptor) {
+    public void setDescriptor(final PDFFontDescriptor descriptor) {
         this.descriptor = descriptor;
     }
 
@@ -404,7 +404,7 @@ public abstract class PDFFont {
      *
      * @param unicodeMap a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
      */
-    public void setUnicodeMap(PDFCMap unicodeMap) {
+    public void setUnicodeMap(final PDFCMap unicodeMap) {
         this.unicodeMap = unicodeMap;
     }
 
@@ -414,7 +414,7 @@ public abstract class PDFFont {
      * @param text the text to translate into glyphs
      * @return a {@link java.util.List} object.
      */
-    public List<PDFGlyph> getGlyphs(String text) {
+    public List<PDFGlyph> getGlyphs(final String text) {
         List<PDFGlyph> outList = null;
 
         // if we have an encoding, use it to get the commands
@@ -423,11 +423,11 @@ public abstract class PDFFont {
             outList = this.encoding.getGlyphs(this, text);
         } else {
             // use the default mapping
-            char[] arry = text.toCharArray();
+            final char[] arry = text.toCharArray();
             outList = new ArrayList<>(arry.length);
-            for (char c : arry) {
+            for (final char c : arry) {
                 // only look at 2 bytes when there is no encoding
-                char src = (char) (c & 0xff);
+                final char src = (char) (c & 0xff);
                 outList.add(getCachedGlyph(src, null));
             }
         }
@@ -443,7 +443,7 @@ public abstract class PDFFont {
      * @param name the name of the glyph, or null if the name is unknown
      * @return a glyph for this character
      */
-    public PDFGlyph getCachedGlyph(char src, String name) {
+    public PDFGlyph getCachedGlyph(final char src, final String name) {
         if (this.charCache == null) {
             this.charCache = new HashMap<>();
         }
@@ -466,7 +466,7 @@ public abstract class PDFFont {
      * @param baseFont the postscript name of this font
      * @param descriptor the descriptor for the font
      */
-    protected PDFFont(String baseFont, PDFFontDescriptor descriptor) {
+    protected PDFFont(final String baseFont, final PDFFontDescriptor descriptor) {
         setBaseFont(baseFont);
         setDescriptor(descriptor);
     }
@@ -485,7 +485,7 @@ public abstract class PDFFont {
      * @param name the name of this glyph or null if unknown
      * @return a glyph for this character
      */
-    protected abstract PDFGlyph getGlyph(char src, String name);
+    protected abstract PDFGlyph getGlyph(char src, final String name);
 
     /**
      * {@inheritDoc}
@@ -503,7 +503,7 @@ public abstract class PDFFont {
      * Compare two fonts base on the baseFont
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (!(o instanceof PDFFont)) {
             return false;
         }

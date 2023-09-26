@@ -48,7 +48,7 @@ public class ImageInfo {
      * @param height a int.
      * @param clip a {@link java.awt.geom.Rectangle2D} object.
      */
-    public ImageInfo(int width, int height, Rectangle2D clip) {
+    public ImageInfo(final int width, final int height, final Rectangle2D clip) {
         this(width, height, clip, Color.WHITE);
     }
 
@@ -60,7 +60,7 @@ public class ImageInfo {
      * @param clip a {@link java.awt.geom.Rectangle2D} object.
      * @param bgColor a {@link java.awt.Color} object.
      */
-    public ImageInfo(int width, int height, Rectangle2D clip, Color bgColor) {
+    public ImageInfo(final int width, final int height, final Rectangle2D clip, final Color bgColor) {
         this.width = width;
         this.height = height;
         this.clip = clip;
@@ -84,12 +84,12 @@ public class ImageInfo {
     // an equals method that compares values
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (!(o instanceof ImageInfo)) {
             return false;
         }
 
-        ImageInfo ii = (ImageInfo) o;
+        final ImageInfo ii = (ImageInfo) o;
 
         if (this.width != ii.width || this.height != ii.height) {
             return false;

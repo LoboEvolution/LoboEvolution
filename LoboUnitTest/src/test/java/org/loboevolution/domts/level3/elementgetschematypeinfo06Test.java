@@ -50,12 +50,12 @@ import static org.junit.Assert.assertEquals;
 public class elementgetschematypeinfo06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element strongElem;
-        TypeInfo elemTypeInfo;
-        String typeName;
-        String typeNamespace;
-        HTMLCollection elemList;
+        final Document doc;
+        final Element strongElem;
+        final TypeInfo elemTypeInfo;
+        final String typeName;
+        final String typeNamespace;
+        final HTMLCollection elemList;
         String docElemNodeName;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");

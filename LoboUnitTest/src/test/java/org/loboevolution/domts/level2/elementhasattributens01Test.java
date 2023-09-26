@@ -56,10 +56,10 @@ public class elementhasattributens01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        boolean state;
-        HTMLCollection elementList;
+        final Document doc;
+        final Element element;
+        final boolean state;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "employee");
         element = (Element) elementList.item(0);

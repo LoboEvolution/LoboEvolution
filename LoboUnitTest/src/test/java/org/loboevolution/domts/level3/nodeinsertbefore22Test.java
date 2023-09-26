@@ -49,13 +49,13 @@ import static org.junit.Assert.assertTrue;
 public class nodeinsertbefore22Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Element refNode;
-        Element ancestor;
+        final Document doc;
+        final Element element;
+        final Element refNode;
+        final Element ancestor;
         HTMLCollection childList;
         Node appendedChild;
-        Node inserted;
+        final Node inserted;
         doc = sampleXmlFile("barfoo.xml");
         element = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:body");
         refNode = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:a");
@@ -67,7 +67,7 @@ public class nodeinsertbefore22Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = element.insertBefore(ancestor, refNode);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

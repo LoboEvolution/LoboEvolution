@@ -47,15 +47,15 @@ import static org.junit.Assert.assertNull;
 public class nodegettextcontent02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Document newDoc;
-        String textContent;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Document newDoc;
+        final String textContent;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootName;
-        String rootNS;
+        final Element docElem;
+        final String rootName;
+        final String rootNS;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

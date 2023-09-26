@@ -42,5 +42,5 @@ public interface RSSDrawable {
 	 * @param graphics a {@link java.awt.Graphics2D} object.
 	 * @param yy a int.
 	 */
-	void draw(Graphics2D graphics, int yy);
+	void draw(Graphics2D graphics, final int yy);
 }

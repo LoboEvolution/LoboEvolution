@@ -52,7 +52,7 @@ public final class DateUtil {
 	 * @see SimpleDateFormat
 	 * @param loc a {@link java.util.Locale} object.
 	 */
-	public Date determineDateFormat(String dateString, Locale loc) {
+	public Date determineDateFormat(final String dateString, final Locale loc) {
 
 		final List<String> DATE_FORMAT = formatList();
 		for (final String regexp : DATE_FORMAT) {
@@ -126,7 +126,7 @@ public final class DateUtil {
 	 *                        based on the given date format pattern.
 	 * @see SimpleDateFormat
 	 */
-	private Date parse(String dateString, String dateFormat, Locale loc) throws ParseException {
+	private Date parse(final String dateString, final String dateFormat, final Locale loc) throws ParseException {
 		final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, loc);
 		simpleDateFormat.setLenient(false);
 		return simpleDateFormat.parse(dateString);

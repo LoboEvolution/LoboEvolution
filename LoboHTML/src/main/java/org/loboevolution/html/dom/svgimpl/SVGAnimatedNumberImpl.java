@@ -31,9 +31,6 @@ import org.loboevolution.html.dom.svg.SVGAnimatedNumber;
 
 /**
  * <p>SVGAnimatedNumberImpl class.</p>
- *
- *
- *
  */
 public class SVGAnimatedNumberImpl implements SVGAnimatedNumber {
 
@@ -44,7 +41,7 @@ public class SVGAnimatedNumberImpl implements SVGAnimatedNumber {
 	 *
 	 * @param svgNumber a {@link org.loboevolution.html.dom.svgimpl.SVGNumberImpl} object.
 	 */
-	public SVGAnimatedNumberImpl(SVGNumberImpl svgNumber) {
+	public SVGAnimatedNumberImpl(final SVGNumberImpl svgNumber) {
 		this.svgNumber = svgNumber;
 	}
 
@@ -56,7 +53,7 @@ public class SVGAnimatedNumberImpl implements SVGAnimatedNumber {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBaseVal(float baseVal) {
+	public void setBaseVal(final float baseVal) {
 		svgNumber.setValue(baseVal);
 
 	}

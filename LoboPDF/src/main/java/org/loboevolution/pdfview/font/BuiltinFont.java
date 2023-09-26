@@ -100,7 +100,7 @@ public class BuiltinFont extends Type1Font {
      * @param fontObj the object containing font information
      * @throws java.io.IOException if any.
      */
-    public BuiltinFont(String baseFont, PDFObject fontObj) throws IOException {
+    public BuiltinFont(final String baseFont, final PDFObject fontObj) throws IOException {
         super(baseFont, fontObj, null);
 
         parseFont(baseFont);
@@ -116,15 +116,15 @@ public class BuiltinFont extends Type1Font {
      * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      * @throws java.io.IOException if any.
      */
-    public BuiltinFont(String baseFont, PDFObject fontObj,
-            PDFFontDescriptor descriptor)
+    public BuiltinFont(final String baseFont, final PDFObject fontObj,
+                       final PDFFontDescriptor descriptor)
             throws IOException {
         super(baseFont, fontObj, descriptor);
 
-        String fontName = descriptor.getFontName();
+        final String fontName = descriptor.getFontName();
 
         // check if it's one of the 14 base fonts
-        for (String bsFont : baseFonts) {
+        for (final String bsFont : baseFonts) {
             if (fontName.equalsIgnoreCase(bsFont)) {
                 parseFont(fontName);
                 return;
@@ -139,7 +139,7 @@ public class BuiltinFont extends Type1Font {
             }
         }
 
-        int flags = descriptor.getFlags();
+        final int flags = descriptor.getFlags();
         int style = ((flags & PDFFontDescriptor.FORCEBOLD) != 0) ? Font.BOLD : Font.PLAIN;
 
         if (fontName.indexOf("Bold") > 0) {
@@ -189,12 +189,12 @@ public class BuiltinFont extends Type1Font {
     /**
      * Parse a font given only the name of a builtin font
      */
-    private void parseFont(String baseFont) throws IOException {
+    private void parseFont(final String baseFont) throws IOException {
         // load the base fonts properties files, if it isn't already loaded
 		if (props == null) {
 			props = new Properties();
-			URL resource = BuiltinFont.class.getResource("/org/loboevolution/pdfview/font/res/BaseFonts.properties");
-			try (InputStream stream = resource.openStream()) {
+			final URL resource = BuiltinFont.class.getResource("/org/loboevolution/pdfview/font/res/BaseFonts.properties");
+			try (final InputStream stream = resource.openStream()) {
 				props.load(stream);
 			}
 		}
@@ -205,18 +205,18 @@ public class BuiltinFont extends Type1Font {
         }
 
         // get the font information from the properties file
-        String file = props.getProperty(baseFont + ".file");
+        final String file = props.getProperty(baseFont + ".file");
 
         // the size of the file
-        int length = Integer.parseInt(props.getProperty(baseFont + ".length"));
+        final int length = Integer.parseInt(props.getProperty(baseFont + ".length"));
         // the size of the unencrypted portion
         int length1 = 0;
         // the size of the encrypted portion
         int length2 = 0;
 
         // read the data from the file
-        byte[] data = new byte[length];
-        InputStream fontStream = NativeFont.class.getResourceAsStream("res/" + file);
+        final byte[] data = new byte[length];
+        final InputStream fontStream = NativeFont.class.getResourceAsStream("res/" + file);
         int cur = 0;
         while (cur < length) {
             cur += fontStream.read(data, cur, length - cur);

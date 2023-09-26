@@ -53,7 +53,7 @@ public class LazyImageIcon implements Icon {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public LazyImageIcon(String name) {
+	public LazyImageIcon(final String name) {
 		this.name = name;
 	}
 
@@ -61,7 +61,7 @@ public class LazyImageIcon implements Icon {
 		if (icon == null) {
 			try {
 				icon = new ImageIcon(LazyImageIcon.class.getResource(name));
-			} catch (Throwable t) {
+			} catch (final Throwable t) {
 				logger.severe("ERROR: loading image " + name + " failed!");
 			}
 		}
@@ -102,7 +102,8 @@ public class LazyImageIcon implements Icon {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintIcon(Component c, Graphics g, int x, int y) {
+	public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+final int x = iconX;
 		if (getIcon() != null) {
 			icon.paintIcon(c, g, x, y);
 		} else {

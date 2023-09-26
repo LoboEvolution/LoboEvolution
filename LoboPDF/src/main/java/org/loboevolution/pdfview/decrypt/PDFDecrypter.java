@@ -81,7 +81,7 @@ public interface PDFDecrypter {
      * @return the decrypted string
      * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
-    String decryptString(int objNum, int objGen, String inputBasicString)
+    String decryptString(int objNum, final int objGen, final String inputBasicString)
             throws PDFParseException;
 
     /**
@@ -109,5 +109,5 @@ public interface PDFDecrypter {
      * @param cryptFilterName the crypt filter name
      * @return whether the given crypt filter decrypts or not
      */
-    boolean isEncryptionPresent(String cryptFilterName);
+    boolean isEncryptionPresent(final String cryptFilterName);
 }

@@ -54,9 +54,9 @@ public class domimplementationhasfeature02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        boolean success;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final boolean success;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();

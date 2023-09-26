@@ -45,9 +45,9 @@ import static org.junit.Assert.assertTrue;
 public class documentgetxmlencoding05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document cloned;
-        String encodingName;
+        final Document doc;
+        final Document cloned;
+        final String encodingName;
         doc = sampleXmlFile("barfoo_utf8.xml");
         cloned = (Document) doc.cloneNode(true);
         encodingName = cloned.getXmlEncoding();

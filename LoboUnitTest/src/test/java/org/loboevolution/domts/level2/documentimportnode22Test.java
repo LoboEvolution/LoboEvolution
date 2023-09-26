@@ -30,7 +30,6 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -62,24 +61,24 @@ public class documentimportnode22Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docTypeNull = null;
+        final Document doc;
+        final DocumentType docTypeNull = null;
 
-        Document docImp;
-        DOMImplementation domImpl;
-        DocumentType docType;
-        NamedNodeMap nodeMap;
-        Notation notation1;
-        Notation notation2;
-        String publicId1;
-        String publicId1Imp;
-        String publicId1NewImp;
-        String publicId2Imp;
-        String systemId1Imp;
-        String systemId1NewImp;
-        String systemId2;
-        String systemId2Imp;
-        String systemId2NewImp;
+        final Document docImp;
+        final DOMImplementation domImpl;
+        final DocumentType docType;
+        final NamedNodeMap nodeMap;
+        final Notation notation1;
+        final Notation notation2;
+        final String publicId1;
+        final String publicId1Imp;
+        final String publicId1NewImp;
+        final String publicId2Imp;
+        final String systemId1Imp;
+        final String systemId1NewImp;
+        final String systemId2;
+        final String systemId2Imp;
+        final String systemId2NewImp;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();

@@ -43,7 +43,7 @@ public class QuoteRenderState extends AbstractMarginRenderState {
      * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      */
-    public QuoteRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+    public QuoteRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
         super(prevRenderState, element);
         this.element = element;
     }

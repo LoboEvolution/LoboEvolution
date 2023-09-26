@@ -54,8 +54,8 @@ public class BaseLabelUI extends BasicLabelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-		int mnemIndex = l.getDisplayedMnemonicIndex();
+	protected void paintDisabledText(final JLabel l, final Graphics g, final String s, final int textX, final int textY) {
+		final int mnemIndex = l.getDisplayedMnemonicIndex();
 		g.setColor(Color.white);
 		JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX + 1, textY + 1);
 		g.setColor(AbstractLookAndFeel.getDisabledForegroundColor());
@@ -64,9 +64,9 @@ public class BaseLabelUI extends BasicLabelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-		int mnemIndex = l.getDisplayedMnemonicIndex();
-		Object sc = l.getClientProperty("shadowColor");
+	protected void paintEnabledText(final JLabel l, final Graphics g, final String s, final int textX, final int textY) {
+		final int mnemIndex = l.getDisplayedMnemonicIndex();
+		final Object sc = l.getClientProperty("shadowColor");
 		if (sc instanceof Color) {
 			g.setColor((Color) sc);
 			JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY + 1);

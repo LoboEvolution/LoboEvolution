@@ -46,7 +46,7 @@ class SkipVisitorException extends RuntimeException {
 	 *
 	 * @param message a {@link java.lang.String} object.
 	 */
-	public SkipVisitorException(String message) {
+	public SkipVisitorException(final String message) {
 		super(message);
 	}
 
@@ -56,7 +56,7 @@ class SkipVisitorException extends RuntimeException {
 	 * @param message a {@link java.lang.String} object.
 	 * @param cause a {@link java.lang.Throwable} object.
 	 */
-	public SkipVisitorException(String message, Throwable cause) {
+	public SkipVisitorException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
 
@@ -65,7 +65,7 @@ class SkipVisitorException extends RuntimeException {
 	 *
 	 * @param cause a {@link java.lang.Throwable} object.
 	 */
-	public SkipVisitorException(Throwable cause) {
+	public SkipVisitorException(final Throwable cause) {
 		super(cause);
 	}
 

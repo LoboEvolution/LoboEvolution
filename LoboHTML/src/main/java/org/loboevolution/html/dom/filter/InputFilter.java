@@ -36,7 +36,7 @@ public class InputFilter implements NodeFilter {
 
 	/** {@inheritDoc} */
 	@Override
-	public short acceptNode(Node node) {
+	public short acceptNode(final Node node) {
 		return HTMLFormElementImpl.isInput(node) ?
 				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}

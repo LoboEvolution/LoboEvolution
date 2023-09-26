@@ -43,7 +43,7 @@ public class PDFAuthenticationFailureException extends PDFParseException {
      *
      * @param message a {@link java.lang.String} object.
      */
-    public PDFAuthenticationFailureException(String message) {
+    public PDFAuthenticationFailureException(final String message) {
         super(message);
     }
 }

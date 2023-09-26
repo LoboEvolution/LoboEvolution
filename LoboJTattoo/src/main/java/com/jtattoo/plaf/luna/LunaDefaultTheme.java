@@ -136,15 +136,15 @@ public class LunaDefaultTheme extends AbstractTheme {
 		DISABLED_COLORS = ColorHelper.createColorArr(Color.white, Color.lightGray, 20);
 
 		// Generate the color arrays
-		Color topHi = windowTitleColorLight;
-		Color topLo = ColorHelper.darker(windowTitleColorLight, 10);
-		Color bottomHi = ColorHelper.brighter(windowTitleColorDark, 15);
-		Color bottomLo = windowTitleColorDark;
+		final Color topHi = windowTitleColorLight;
+		final Color topLo = ColorHelper.darker(windowTitleColorLight, 10);
+		final Color bottomHi = ColorHelper.brighter(windowTitleColorDark, 15);
+		final Color bottomLo = windowTitleColorDark;
 
 		WINDOW_TITLE_COLORS = new Color[20];
-		Color[] topColors = ColorHelper.createColorArr(topHi, topLo, 8);
+		final Color[] topColors = ColorHelper.createColorArr(topHi, topLo, 8);
 		System.arraycopy(topColors, 0, WINDOW_TITLE_COLORS, 0, 8);
-		Color[] bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
+		final Color[] bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
 		System.arraycopy(bottomColors, 0, WINDOW_TITLE_COLORS, 8, 12);
 
 		WINDOW_INACTIVE_TITLE_COLORS = new Color[WINDOW_TITLE_COLORS.length];

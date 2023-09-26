@@ -52,7 +52,7 @@ public class NameTree {
      *
      * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
      */
-    public NameTree(PDFObject root) {
+    public NameTree(final PDFObject root) {
         this.root = root;
     }
 
@@ -63,31 +63,31 @@ public class NameTree {
      * @return the object associated with str,  if found, or null if not
      * @throws java.io.IOException if any.
      */
-    public PDFObject find(String key) throws IOException {
+    public PDFObject find(final String key) throws IOException {
         return find(root, key);
     }
 
     /**
      * Recursively walk the name tree looking for a given value
      */
-    private PDFObject find(PDFObject root, String key)
+    private PDFObject find(final PDFObject root, final String key)
             throws IOException {
         // first, look for a Names entry, meaning this is a leaf
-        PDFObject names = root.getDictRef("Names");
+        final PDFObject names = root.getDictRef("Names");
         if (names != null) {
             return findInArray(names.getArray(), key);
         }
 
         // no names given, look for kids
-        PDFObject kidsObj = root.getDictRef("Kids");
+        final PDFObject kidsObj = root.getDictRef("Kids");
         if (kidsObj != null) {
-            PDFObject[] kids = kidsObj.getArray();
-			for (PDFObject pdfObject : kids) {
+            final PDFObject[] kids = kidsObj.getArray();
+			for (final PDFObject pdfObject : kids) {
 				// find the limits of this kid
-				PDFObject limitsObj = pdfObject.getDictRef("Limits");
+				final PDFObject limitsObj = pdfObject.getDictRef("Limits");
 				if (limitsObj != null) {
-					String lowerLimit = limitsObj.getAt(0).getStringValue();
-					String upperLimit = limitsObj.getAt(1).getStringValue();
+					final String lowerLimit = limitsObj.getAt(0).getStringValue();
+					final String upperLimit = limitsObj.getAt(1).getStringValue();
 					// are we in range?
 					if ((key.compareTo(lowerLimit) >= 0) && (key.compareTo(upperLimit) <= 0)) {
 						// we are, so find in this child
@@ -105,21 +105,21 @@ public class NameTree {
      * Find an object in a (key,value) array.  Do this by splitting in half
      * repeatedly.
      */
-    private PDFObject findInArray(PDFObject[] array, String key)
+    private PDFObject findInArray(final PDFObject[] array, final String key)
             throws IOException {
         int start = 0;
         int end = array.length / 2;
 
         while (end >= start && start >= 0 && end < array.length) {
             // find the key at the midpoint
-            int pos = start + ((end - start) / 2);
-            String posKey = array[pos * 2].getStringValue();
+            final int pos = start + ((end - start) / 2);
+            final String posKey = array[pos * 2].getStringValue();
 
             // compare the key to the key we are looking for
-            int comp = key.compareTo(posKey);
+            final int comp = key.compareTo(posKey);
             if (comp == 0) {
                 // they match.  Return the value
-        		int tmp = (pos * 2) + 1;
+        		final int tmp = (pos * 2) + 1;
         		if (array.length>tmp) {
                     return array[tmp];
         		} else {

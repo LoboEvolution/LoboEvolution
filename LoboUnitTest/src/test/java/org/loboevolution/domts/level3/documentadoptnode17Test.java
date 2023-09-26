@@ -47,10 +47,10 @@ public class documentadoptnode17Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entityMap;
-        EntityReference ent;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entityMap;
+        final EntityReference ent;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entityMap = docType.getEntities();
@@ -59,7 +59,7 @@ public class documentadoptnode17Test extends LoboUnitTest {
         boolean success = false;
         try {
             doc.adoptNode(ent);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
         assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

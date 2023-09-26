@@ -45,7 +45,7 @@ public class PatternDictionaryFlags extends Flags {
 	public static final String HD_TEMPLATE = "HD_TEMPLATE";
 
 	/** {@inheritDoc} */
-	public void setFlags(int flagsAsInt) {
+	public void setFlags(final int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract HD_MMR */

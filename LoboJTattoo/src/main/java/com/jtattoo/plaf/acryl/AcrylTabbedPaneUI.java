@@ -66,8 +66,8 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getContentBorderColors(int tabPlacement) {
-		Color[] SEP_COLORS = { ColorHelper.brighter(AbstractLookAndFeel.getControlColorLight(), 20),
+	protected Color[] getContentBorderColors(final int tabPlacement) {
+		final Color[] SEP_COLORS = { ColorHelper.brighter(AbstractLookAndFeel.getControlColorLight(), 20),
 				AbstractLookAndFeel.getControlColorLight(),
 				ColorHelper.brighter(AbstractLookAndFeel.getControlColorDark(), 20),
 				AbstractLookAndFeel.getControlColorDark(),
@@ -77,7 +77,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color getLoBorderColor(int tabIndex) {
+	protected Color getLoBorderColor(final int tabIndex) {
 		if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
 			return ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 10);
 		}
@@ -86,11 +86,11 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
+	protected Color[] getTabColors(final int tabIndex, final boolean isSelected, final boolean isRollover) {
 		if (tabIndex >= 0 && tabIndex < tabPane.getTabCount()) {
-			boolean isEnabled = tabPane.isEnabledAt(tabIndex);
-			Color backColor = tabPane.getBackgroundAt(tabIndex);
-			Color[] colorArr;
+			final boolean isEnabled = tabPane.isEnabledAt(tabIndex);
+			final Color backColor = tabPane.getBackgroundAt(tabIndex);
+			final Color[] colorArr;
 			if (backColor instanceof UIResource) {
 				if (isSelected) {
 					colorArr = AbstractLookAndFeel.getTheme().getDefaultColors();
@@ -117,7 +117,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Font getTabFont(boolean isSelected) {
+	protected Font getTabFont(final boolean isSelected) {
 		if (isSelected) {
 			return super.getTabFont(isSelected).deriveFont(Font.BOLD);
 		} else {
@@ -134,18 +134,18 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
-			Rectangle textRect, boolean isSelected) {
-		Color backColor = tabPane.getBackgroundAt(tabIndex);
+	protected void paintText(final Graphics g, final int tabPlacement, final Font font, final FontMetrics metrics, final int tabIndex, final String title,
+			final Rectangle textRect, final boolean isSelected) {
+		final Color backColor = tabPane.getBackgroundAt(tabIndex);
 		if (!(backColor instanceof UIResource)) {
 			super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
 			return;
 		}
 		g.setFont(font);
-		View v = getTextViewForTab(tabIndex);
+		final View v = getTextViewForTab(tabIndex);
 		if (v != null) {
 			// html
-			Graphics2D g2D = (Graphics2D) g;
+			final Graphics2D g2D = (Graphics2D) g;
 			Object savedRenderingHint = null;
 			if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 				savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -158,11 +158,11 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 			}
 		} else {
 			// plain text
-			int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
+			final int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 
 			if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
 				if (isSelected) {
-					Color shadowColor = ColorHelper.darker(AbstractLookAndFeel.getWindowTitleColorDark(), 30);
+					final Color shadowColor = ColorHelper.darker(AbstractLookAndFeel.getWindowTitleColorDark(), 30);
 					g.setColor(shadowColor);
 					JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x - 1,
 							textRect.y - 1 + metrics.getAscent());

@@ -52,7 +52,7 @@ public class AluminiumDesktopPaneUI extends BaseDesktopPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(Graphics g, JComponent c) {
+	public void update(final Graphics g, final JComponent c) {
 		if (c.getClientProperty("backgroundTexture") == null) {
 			AluminiumUtils.fillComponent(g, c);
 		} else {

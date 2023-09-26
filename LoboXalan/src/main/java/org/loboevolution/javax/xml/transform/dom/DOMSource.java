@@ -30,43 +30,35 @@ import org.loboevolution.javax.xml.transform.Source;
 import org.loboevolution.html.node.Node;
 
 public class DOMSource
-    implements Source
-{
-
-    public DOMSource()
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public DOMSource(Node n)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public DOMSource(Node node, String systemID)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public void setNode(Node node)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public Node getNode()
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public void setSystemId(String systemID)
-    {
-        throw new RuntimeException("Stub!");
-    }
-
-    public String getSystemId()
-    {
-        throw new RuntimeException("Stub!");
-    }
+        implements Source {
 
     public static final String FEATURE = "http://org.loboevolution.javax.xml.transform.dom.DOMSource/feature";
+
+    public DOMSource() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public DOMSource(final Node n) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public DOMSource(final Node node, final String systemID) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public Node getNode() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public void setNode(final Node node) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public String getSystemId() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public void setSystemId(final String systemID) {
+        throw new RuntimeException("Stub!");
+    }
 }

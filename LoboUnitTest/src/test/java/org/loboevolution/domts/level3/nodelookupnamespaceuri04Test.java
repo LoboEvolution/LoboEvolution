@@ -47,13 +47,13 @@ import static org.junit.Assert.assertNull;
 public class nodelookupnamespaceuri04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        Node entity;
-        Notation notation;
-        NamedNodeMap entitiesMap;
-        NamedNodeMap notationsMap;
-        String namespaceURI;
+        final Document doc;
+        final DocumentType docType;
+        final Node entity;
+        final Notation notation;
+        final NamedNodeMap entitiesMap;
+        final NamedNodeMap notationsMap;
+        final String namespaceURI;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();

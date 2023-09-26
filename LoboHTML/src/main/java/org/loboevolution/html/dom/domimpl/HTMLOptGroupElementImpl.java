@@ -40,12 +40,12 @@ public class HTMLOptGroupElementImpl extends HTMLElementImpl implements HTMLOptG
      *
      * @param name a {@link String} object.
      */
-    public HTMLOptGroupElementImpl(String name) {
+    public HTMLOptGroupElementImpl(final String name) {
         super(name);
     }
 
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new BlockRenderState(prevRenderState, this);
     }
 
@@ -55,7 +55,7 @@ public class HTMLOptGroupElementImpl extends HTMLElementImpl implements HTMLOptG
     }
 
     @Override
-    public void setDisabled(boolean disabled) {
+    public void setDisabled(final boolean disabled) {
 
     }
 
@@ -70,7 +70,7 @@ public class HTMLOptGroupElementImpl extends HTMLElementImpl implements HTMLOptG
     }
 
     @Override
-    public void setLabel(String label) {
+    public void setLabel(final String label) {
 
     }
 }

@@ -78,7 +78,7 @@ public class PDFFontEncoding {
      *
      * @param cmap a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
      */
-    public PDFFontEncoding(PDFCMap cmap) {
+    public PDFFontEncoding(final PDFCMap cmap) {
     	super();
     	this.type = TYPE_CMAP;
     	this.cmap = cmap;
@@ -91,7 +91,7 @@ public class PDFFontEncoding {
      * @param encoding a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
-    public PDFFontEncoding(String fontType, PDFObject encoding)
+    public PDFFontEncoding(final String fontType, final PDFObject encoding)
             throws IOException {
         if (encoding.getType() == PDFObject.NAME) {
             // if the encoding is a String, it is the name of an encoding
@@ -107,7 +107,7 @@ public class PDFFontEncoding {
             }
         } else {
             // loook at the "Type" entry of the encoding to determine the type
-            String typeStr = encoding.getDictRef("Type").getStringValue();
+            final String typeStr = encoding.getDictRef("Type").getStringValue();
             switch (typeStr) {
             case "Encoding":
                 // it is an encoding
@@ -133,11 +133,11 @@ public class PDFFontEncoding {
 	 * @param text a {@link java.lang.String} object.
 	 * @return a {@link java.util.List} object.
 	 */
-	public List<PDFGlyph> getGlyphs(PDFFont font, String text) {
-		List<PDFGlyph> outList = new ArrayList<>(text.length());
+	public List<PDFGlyph> getGlyphs(final PDFFont font, final String text) {
+		final List<PDFGlyph> outList = new ArrayList<>(text.length());
 
 		// go character by character through the text
-		char[] arry = text.toCharArray();
+		final char[] arry = text.toCharArray();
 		for (int i = 0; i < arry.length; i++) {
 			switch (this.type) {
 			case TYPE_ENCODING:
@@ -161,7 +161,7 @@ public class PDFFontEncoding {
     /**
      * Get a glyph from an encoding, given a font and character
      */
-    private PDFGlyph getGlyphFromEncoding(PDFFont font, char src) {
+    private PDFGlyph getGlyphFromEncoding(final PDFFont font, char src) {
         String charName = null;
 
         // only deal with one byte of source
@@ -172,7 +172,7 @@ public class PDFFontEncoding {
             charName = this.differences.get(src);
         } else if (this.baseEncoding != null) {
             // get the character name from the base encoding
-            int charID = this.baseEncoding[src];
+            final int charID = this.baseEncoding[src];
             charName = FontSupport.getName(charID);
         }
 
@@ -182,9 +182,9 @@ public class PDFFontEncoding {
     /**
      * Get a glyph from a CMap, given a Type0 font and a character
      */
-    private PDFGlyph getGlyphFromCMap(PDFFont font, char src) {
-        int fontID = this.cmap.getFontID(src);
-        char charID = this.cmap.map(src);
+    private PDFGlyph getGlyphFromCMap(PDFFont font, final char src) {
+        final int fontID = this.cmap.getFontID(src);
+        final char charID = this.cmap.map(src);
 
         if (font instanceof Type0Font) {
             font = ((Type0Font) font).getDescendantFont(fontID);
@@ -199,25 +199,25 @@ public class PDFFontEncoding {
      * @param encoding a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
-    public void parseEncoding(PDFObject encoding) throws IOException {
+    public void parseEncoding(final PDFObject encoding) throws IOException {
         this.differences = new HashMap<>();
 
         // figure out the base encoding, if one exists
-        PDFObject baseEncObj = encoding.getDictRef("BaseEncoding");
+        final PDFObject baseEncObj = encoding.getDictRef("BaseEncoding");
         if (baseEncObj != null) {
             this.baseEncoding = getBaseEncoding(baseEncObj.getStringValue());
         }
 
         // parse the differences array
-        PDFObject diffArrayObj = encoding.getDictRef("Differences");
+        final PDFObject diffArrayObj = encoding.getDictRef("Differences");
         if (diffArrayObj != null) {
-            PDFObject[] diffArray = diffArrayObj.getArray();
+            final PDFObject[] diffArray = diffArrayObj.getArray();
             int curPosition = -1;
-            for (PDFObject pdfObject : diffArray) {
+            for (final PDFObject pdfObject : diffArray) {
                 if (pdfObject.getType() == PDFObject.NUMBER) {
                     curPosition = pdfObject.getIntValue();
                 } else if (pdfObject.getType() == PDFObject.NAME) {
-                    Character key = (char) curPosition;
+                    final Character key = (char) curPosition;
                     this.differences.put(key, pdfObject.getStringValue());
                     curPosition++;
                 } else {
@@ -228,7 +228,7 @@ public class PDFFontEncoding {
     }
 
     /** Get the base encoding for a given name */
-    private int[] getBaseEncoding(String encodingName) {
+    private int[] getBaseEncoding(final String encodingName) {
         switch (encodingName) {
             case "MacRomanEncoding":
                 return FontSupport.macRomanEncoding;
@@ -254,7 +254,7 @@ public class PDFFontEncoding {
     	if (this.mapName != null) {
     		try {
 				return "OneByteIdentityH".equals(this.mapName.getStringValue());
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				PDFRenderer.getErrorHandler().publishException(e);
 			}
     	}

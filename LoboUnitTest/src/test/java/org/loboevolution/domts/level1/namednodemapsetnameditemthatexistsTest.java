@@ -66,14 +66,14 @@ public class namednodemapsetnameditemthatexistsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Attr newAttribute;
-        Element testAddress;
-        NamedNodeMap attributes;
-        Attr districtNode;
-        String attrValue;
-        Node setNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Attr newAttribute;
+        final Element testAddress;
+        final NamedNodeMap attributes;
+        final Attr districtNode;
+        final String attrValue;
+        final Node setNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(1);

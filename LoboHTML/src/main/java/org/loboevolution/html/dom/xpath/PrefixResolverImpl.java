@@ -42,13 +42,13 @@ class PrefixResolverImpl implements PrefixResolver {
 
     /** {@inheritDoc} */
     @Override
-    public String getNamespaceForPrefix(String prefix) {
+    public String getNamespaceForPrefix(final String prefix) {
         return getNamespaceForPrefix(prefix, null);
     }
 
     /** {@inheritDoc} */
     @Override
-    public String getNamespaceForPrefix(String prefix, Node context) {
+    public String getNamespaceForPrefix(final String prefix, final Node context) {
         return null;
     }
 

@@ -54,7 +54,7 @@ public abstract class PDFPattern {
      *
      * @param type a int.
      */
-    protected PDFPattern(int type) 
+    protected PDFPattern(final int type)
     {
         this.type = type;
     }
@@ -67,7 +67,7 @@ public abstract class PDFPattern {
      * @return a {@link org.loboevolution.pdfview.pattern.PDFPattern} object.
      * @throws java.io.IOException if any.
      */
-    public static PDFPattern getPattern(PDFObject patternObj, Map resources)
+    public static PDFPattern getPattern(final PDFObject patternObj, final Map resources)
         throws IOException
     {
         // see if the pattern is already cached
@@ -77,15 +77,15 @@ public abstract class PDFPattern {
         }
         
         // get the pattern type
-        int type = patternObj.getDictRef("PatternType").getIntValue();
+        final int type = patternObj.getDictRef("PatternType").getIntValue();
          
         // read the pattern transform matrix
-        PDFObject matrix = patternObj.getDictRef("Matrix");
+        final PDFObject matrix = patternObj.getDictRef("Matrix");
         AffineTransform xform = null;
         if (matrix == null) {
             xform = new AffineTransform();
         } else {
-            float[] elts = new float[6];
+            final float[] elts = new float[6];
             for (int i = 0; i < elts.length; i++) {
             	elts[i] = matrix.getAt(i).getFloatValue();
             }
@@ -139,7 +139,7 @@ public abstract class PDFPattern {
      *
      * @param xform a {@link java.awt.geom.AffineTransform} object.
      */
-    protected void setTransform(AffineTransform xform) {
+    protected void setTransform(final AffineTransform xform) {
         this.xform = xform;
     }
     

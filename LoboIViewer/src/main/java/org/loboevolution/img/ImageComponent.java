@@ -75,11 +75,11 @@ class ImageComponent extends JComponent {
 
 		public void prepare() {
 			if (image != null && hasSize()) {
-				Rectangle viewRect = getViewer().getScrollPane().getViewport().getViewRect();
+				final Rectangle viewRect = getViewer().getScrollPane().getViewport().getViewRect();
 				preparedCenter = new Point2D.Double(viewRect.getCenterX(), viewRect.getCenterY());
 				try {
 					getImageTransform().inverseTransform(preparedCenter, preparedCenter);
-				} catch (NoninvertibleTransformException e) {
+				} catch (final NoninvertibleTransformException e) {
 					throw new Error(e);
 				}
 			}
@@ -87,9 +87,9 @@ class ImageComponent extends JComponent {
 
 		public void rescroll() {
 			if (preparedCenter != null) {
-				Dimension viewSize = getViewer().getScrollPane().getViewport().getExtentSize();
+				final Dimension viewSize = getViewer().getScrollPane().getViewport().getExtentSize();
 				getImageTransform().transform(preparedCenter, preparedCenter);
-				Rectangle view = new Rectangle((int) Math.round(preparedCenter.getX() - viewSize.width / 2.0),
+				final Rectangle view = new Rectangle((int) Math.round(preparedCenter.getX() - viewSize.width / 2.0),
 						(int) Math.round(preparedCenter.getY() - viewSize.height / 2.0), viewSize.width,
 						viewSize.height);
 				preparedCenter = null;
@@ -105,7 +105,7 @@ class ImageComponent extends JComponent {
 	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
 	 * @param propertyChangeSupport a {@link java.beans.PropertyChangeSupport} object.
 	 */
-	public ImageComponent(ImageViewer viewer, PropertyChangeSupport propertyChangeSupport) {
+	public ImageComponent(final ImageViewer viewer, final PropertyChangeSupport propertyChangeSupport) {
 		this.viewer = viewer;
 		this.propertyChangeSupport = propertyChangeSupport;
 		mouseEventTranslator.register(this);
@@ -136,7 +136,7 @@ class ImageComponent extends JComponent {
 	 *
 	 * @param l a {@link org.loboevolution.img.ImageMouseMotionListener} object.
 	 */
-	public void addImageMouseMoveListener(ImageMouseMotionListener l) {
+	public void addImageMouseMoveListener(final ImageMouseMotionListener l) {
 		if (l != null)
 			getMoveListeners().add(l);
 	}
@@ -146,7 +146,7 @@ class ImageComponent extends JComponent {
 	 *
 	 * @param l a {@link org.loboevolution.img.ImageMouseMotionListener} object.
 	 */
-	public void removeImageMouseMoveListener(ImageMouseMotionListener l) {
+	public void removeImageMouseMoveListener(final ImageMouseMotionListener l) {
 		if (l != null)
 			getMoveListeners().remove(l);
 	}
@@ -156,7 +156,7 @@ class ImageComponent extends JComponent {
 	 *
 	 * @param l a {@link org.loboevolution.img.ImageMouseClickListener} object.
 	 */
-	public void addImageMouseClickListener(ImageMouseClickListener l) {
+	public void addImageMouseClickListener(final ImageMouseClickListener l) {
 		if (l != null)
 			getClickListeners().add(l);
 	}
@@ -166,7 +166,7 @@ class ImageComponent extends JComponent {
 	 *
 	 * @param l a {@link org.loboevolution.img.ImageMouseClickListener} object.
 	 */
-	public void removeImageMouseClickListener(ImageMouseClickListener l) {
+	public void removeImageMouseClickListener(final ImageMouseClickListener l) {
 		if (l != null)
 			getClickListeners().remove(l);
 	}
@@ -176,8 +176,8 @@ class ImageComponent extends JComponent {
 	 *
 	 * @param newImage a {@link java.awt.image.BufferedImage} object.
 	 */
-	public void setImage(BufferedImage newImage) {
-		BufferedImage oldImage = image;
+	public void setImage(final BufferedImage newImage) {
+		final BufferedImage oldImage = image;
 		image = newImage;
 		paintManager.notifyChanged();
 		if (!Objects.equals(oldImage, newImage) && 
@@ -243,13 +243,13 @@ class ImageComponent extends JComponent {
 	 *
 	 * @param resizeStrategy a {@link org.loboevolution.img.ResizeStrategy} object.
 	 */
-	public void setResizeStrategy(ResizeStrategy resizeStrategy) {
+	public void setResizeStrategy(final ResizeStrategy resizeStrategy) {
 		if (resizeStrategy == this.resizeStrategy)
 			return;
 		rescroller.prepare();
-		ResizeStrategy oldResizeStrategy = this.resizeStrategy;
+		final ResizeStrategy oldResizeStrategy = this.resizeStrategy;
 		this.resizeStrategy = resizeStrategy;
-		boolean canRescroll = getViewer().getSynchronizer().resizeStrategyChangedCanIRescroll(getViewer());
+		final boolean canRescroll = getViewer().getSynchronizer().resizeStrategyChangedCanIRescroll(getViewer());
 		resizeNow();
 
 		if (canRescroll) {
@@ -273,14 +273,14 @@ class ImageComponent extends JComponent {
 	 *
 	 * @param type a {@link java.lang.Object} object.
 	 */
-	public void setInterpolationType(Object type) {
+	public void setInterpolationType(final Object type) {
 		if (Objects.equals(interpolationType, type))
 			return;
 		if (type != RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR
 				&& type != RenderingHints.VALUE_INTERPOLATION_BILINEAR
 				&& type != RenderingHints.VALUE_INTERPOLATION_BICUBIC)
 			throw new IllegalArgumentException("Invalid interpolation type; use one of the RenderingHints constants");
-		Object old = this.interpolationType;
+		final Object old = this.interpolationType;
 		this.interpolationType = type;
 		getViewer().getSynchronizer().interpolationTypeChanged(getViewer());
 		paintManager.notifyChanged();
@@ -302,7 +302,7 @@ class ImageComponent extends JComponent {
 	 *
 	 * @param pixelatedZoom a boolean.
 	 */
-	public void setPixelatedZoom(boolean pixelatedZoom) {
+	public void setPixelatedZoom(final boolean pixelatedZoom) {
 		if (pixelatedZoom == this.pixelatedZoom)
 			return;
 		this.pixelatedZoom = pixelatedZoom;
@@ -339,7 +339,7 @@ class ImageComponent extends JComponent {
 	 *             if {@code newZoomFactor} is not a positive number
 	 * @param newZoomFactor a double.
 	 */
-	public void setZoomFactor(double newZoomFactor) {
+	public void setZoomFactor(final double newZoomFactor) {
 		if (zoomFactor == newZoomFactor)
 			return;
 		if (newZoomFactor <= 0 || Double.isInfinite(newZoomFactor) || Double.isNaN(newZoomFactor))
@@ -347,9 +347,9 @@ class ImageComponent extends JComponent {
 		if (getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM) {
 			rescroller.prepare();
 		}
-		double oldZoomFactor = zoomFactor;
+		final double oldZoomFactor = zoomFactor;
 		zoomFactor = newZoomFactor;
-		boolean canRescroll = getViewer().getSynchronizer().zoomFactorChangedCanIRescroll(getViewer());
+		final boolean canRescroll = getViewer().getSynchronizer().zoomFactorChangedCanIRescroll(getViewer());
 		if (getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM) {
 			resizeNow();
 			// do not rescroll if we're following another viewer; the scrolling will be
@@ -386,7 +386,7 @@ class ImageComponent extends JComponent {
 	 * @return the corresponding image pixel, or null if the point is
 	 *         outside the image
 	 */
-	public Point pointToPixel(Point p) {
+	public Point pointToPixel(final Point p) {
 		return pointToPixel(p, true);
 	}
 
@@ -408,11 +408,11 @@ class ImageComponent extends JComponent {
 	 *             if there is no image set or if the size of the viewer is 0 (for
 	 *             example because it is not in a visible component)
 	 */
-	public Point pointToPixel(Point p, boolean clipToImage) {
-		Point2D.Double fp = new Point2D.Double(p.x + .5, p.y + .5);
+	public Point pointToPixel(final Point p, final boolean clipToImage) {
+		final Point2D.Double fp = new Point2D.Double(p.x + .5, p.y + .5);
 		try {
 			getImageTransform().inverseTransform(fp, fp);
-		} catch (NoninvertibleTransformException ex) {
+		} catch (final NoninvertibleTransformException ex) {
 			throw new Error("Image transformation not invertible");
 		}
 		p.x = (int) Math.floor(fp.x);
@@ -425,7 +425,7 @@ class ImageComponent extends JComponent {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(final Graphics g) {
 		paintManager.paintComponent(g);
 	}
 
@@ -446,7 +446,7 @@ class ImageComponent extends JComponent {
 			throw new IllegalStateException("No image");
 		if (!hasSize())
 			throw new IllegalStateException("Viewer size is zero");
-		double currentZoom;
+		final double currentZoom;
 		switch (resizeStrategy) {
 		case NO_RESIZE:
 			currentZoom = 1;
@@ -463,7 +463,7 @@ class ImageComponent extends JComponent {
 		default:
 			throw new Error("Unhandled resize strategy");
 		}
-		AffineTransform tr = new AffineTransform();
+		final AffineTransform tr = new AffineTransform();
 		tr.setToTranslation((getWidth() - image.getWidth() * currentZoom) / 2.0,
 				(getHeight() - image.getHeight() * currentZoom) / 2.0);
 		tr.scale(currentZoom, currentZoom);

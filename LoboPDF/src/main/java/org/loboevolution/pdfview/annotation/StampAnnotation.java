@@ -67,7 +67,7 @@ public class StampAnnotation extends PDFAnnotation {
 	 * @param type a ANNOTATION_TYPE object.
 	 * @throws java.io.IOException if any.
 	 */
-	public StampAnnotation(PDFObject annotObject, ANNOTATION_TYPE type) throws IOException {
+	public StampAnnotation(final PDFObject annotObject, final ANNOTATION_TYPE type) throws IOException {
 		super(annotObject, type);
 		
 		parsePopupAnnotation(annotObject.getDictRef("Popup"));
@@ -82,22 +82,22 @@ public class StampAnnotation extends PDFAnnotation {
 	 * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public StampAnnotation(PDFObject annotObject) throws IOException {
+	public StampAnnotation(final PDFObject annotObject) throws IOException {
 		this(annotObject, ANNOTATION_TYPE.STAMP);
 	}
 	
-	private void parseAP(PDFObject dictRef) throws IOException {
+	private void parseAP(final PDFObject dictRef) throws IOException {
 		if (dictRef == null) {
 			return;
 		}
-		PDFObject normalAP = dictRef.getDictRef("N");
+		final PDFObject normalAP = dictRef.getDictRef("N");
 		if (normalAP == null) {
 			return;
 		}
 		if (normalAP.getType() == PDFObject.DICTIONARY) {
 			this.onAppearance = normalAP.getDictRef("On");
 			this.offAppearance = normalAP.getDictRef("Off");
-			PDFObject as = dictRef.getDictRef("AS");			
+			final PDFObject as = dictRef.getDictRef("AS");
 			this.appearanceStateOn = (as != null) && ("On".equals(as.getStringValue()));
 		} else {
 			this.onAppearance = normalAP;
@@ -116,52 +116,52 @@ public class StampAnnotation extends PDFAnnotation {
 		}
 	}
 
-	private List<PDFCmd> parseCommand(PDFObject obj) throws IOException {
+	private List<PDFCmd> parseCommand(final PDFObject obj) throws IOException {
         String type = obj.getDictRef("Subtype").getStringValue();
         if (type == null) {
             type = obj.getDictRef ("S").getStringValue ();
         }
-        ArrayList<PDFCmd> result = new ArrayList<>();
+        final ArrayList<PDFCmd> result = new ArrayList<>();
         result.add(PDFPage.createPushCmd());
         result.add(PDFPage.createPushCmd());
         if (type.equals("Image")) {
             // stamp annotation transformation
-            AffineTransform rectAt = getPositionTransformation();
+            final AffineTransform rectAt = getPositionTransformation();
             result.add(PDFPage.createXFormCmd(rectAt));
             
-        	PDFImage img = PDFImage.createImage(obj, new HashMap<>() , false);
+        	final PDFImage img = PDFImage.createImage(obj, new HashMap<>() , false);
         	result.add(PDFPage.createImageCmd(img));
         } else if (type.equals("Form")) {
         	
             // rats.  parse it.
-            PDFObject bobj = obj.getDictRef("BBox");
-            float xMin = bobj.getAt(0).getFloatValue();
-            float yMin = bobj.getAt(1).getFloatValue();
-			float xMax = bobj.getAt(2).getFloatValue();
-			float yMax = bobj.getAt(3).getFloatValue();
-			Float bbox = new Rectangle2D.Float(xMin,
+            final PDFObject bobj = obj.getDictRef("BBox");
+            final float xMin = bobj.getAt(0).getFloatValue();
+            final float yMin = bobj.getAt(1).getFloatValue();
+			final float xMax = bobj.getAt(2).getFloatValue();
+			final float yMax = bobj.getAt(3).getFloatValue();
+			final Float bbox = new Rectangle2D.Float(xMin,
                     yMin,
                     xMax - xMin,
                     yMax - yMin);
-            PDFPage formCmds = new PDFPage(bbox, 0);
+            final PDFPage formCmds = new PDFPage(bbox, 0);
             
             // stamp annotation transformation
-            AffineTransform rectAt = getPositionTransformation();           
+            final AffineTransform rectAt = getPositionTransformation();
            formCmds.addXform(rectAt);
            
-           AffineTransform rectScaled = getScalingTransformation(bbox);
+           final AffineTransform rectScaled = getScalingTransformation(bbox);
            formCmds.addXform(rectScaled);
            
            
            
 
             // form transformation
-            AffineTransform at;
-            PDFObject matrix = obj.getDictRef("Matrix");
+            final AffineTransform at;
+            final PDFObject matrix = obj.getDictRef("Matrix");
             if (matrix == null) {
                 at = new AffineTransform();
             } else {
-                float[] elts = new float[6];
+                final float[] elts = new float[6];
                 for (int i = 0; i < elts.length; i++) {
                     elts[i] = (matrix.getAt(i)).getFloatValue();
                 }
@@ -169,13 +169,13 @@ public class StampAnnotation extends PDFAnnotation {
             }
             formCmds.addXform(at);
             
-            HashMap<String,PDFObject> r = new HashMap<>(new HashMap<>());
-            PDFObject rsrc = obj.getDictRef("Resources");
+            final HashMap<String,PDFObject> r = new HashMap<>(new HashMap<>());
+            final PDFObject rsrc = obj.getDictRef("Resources");
             if (rsrc != null) {
                 r.putAll(rsrc.getDictionary());
             }
 
-            PDFParser form = new PDFParser(formCmds, obj.getStream(), r);
+            final PDFParser form = new PDFParser(formCmds, obj.getStream(), r);
             form.go(true);
 
             result.addAll(formCmds.getCommands());
@@ -192,8 +192,8 @@ public class StampAnnotation extends PDFAnnotation {
 	 * @return
 	 */
 	private AffineTransform getPositionTransformation() {
-		Float rect2 = getRect();
-		double[] f = new double[] {1,
+		final Float rect2 = getRect();
+		final double[] f = new double[] {1,
 				0,
 				0,
 				1,
@@ -202,7 +202,7 @@ public class StampAnnotation extends PDFAnnotation {
 		return new AffineTransform(f);
 	}
 
-	private void parsePopupAnnotation(PDFObject popupObj) throws IOException {
+	private void parsePopupAnnotation(final PDFObject popupObj) throws IOException {
 		this.popupAnnotation = (popupObj != null)?createAnnotation(popupObj):null;
 	}
 
@@ -279,7 +279,7 @@ public class StampAnnotation extends PDFAnnotation {
 	/** {@inheritDoc} */
 	@Override
 	public List<PDFCmd> getPageCommandsForAnnotation() {
-		List<PDFCmd> pageCommandsForAnnotation = super.getPageCommandsForAnnotation();
+		final List<PDFCmd> pageCommandsForAnnotation = super.getPageCommandsForAnnotation();
 		pageCommandsForAnnotation.addAll(getCurrentCommand());
 		return pageCommandsForAnnotation;
 	}

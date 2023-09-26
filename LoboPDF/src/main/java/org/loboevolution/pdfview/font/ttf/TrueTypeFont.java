@@ -25,10 +25,6 @@
  */
 package org.loboevolution.pdfview.font.ttf;
 
-import java.awt.Font;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,7 +33,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
-import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFDebugger;
 
 /**
@@ -59,10 +54,10 @@ public class TrueTypeFont {
      *
      * @param type a int.
      */
-    public TrueTypeFont (int type) {
+    public TrueTypeFont(final int type) {
         this.type = type;
 
-        this.tables = Collections.synchronizedSortedMap (
+        this.tables = Collections.synchronizedSortedMap(
                 new TreeMap<>());
     }
 
@@ -72,8 +67,8 @@ public class TrueTypeFont {
      * @param orig an array of {@link byte} objects.
      * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
-    public static TrueTypeFont parseFont (byte[] orig) {
-        ByteBuffer inBuf = ByteBuffer.wrap (orig);
+    public static TrueTypeFont parseFont (final byte[] orig) {
+        final ByteBuffer inBuf = ByteBuffer.wrap (orig);
         return parseFont (inBuf);
     }
 
@@ -83,18 +78,15 @@ public class TrueTypeFont {
      * @param inBuf a {@link java.nio.ByteBuffer} object.
      * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
-    public static TrueTypeFont parseFont (ByteBuffer inBuf) {
-        int type = inBuf.getInt ();
-        short numTables = inBuf.getShort ();
-        @SuppressWarnings("unused")
-        short searchRange = inBuf.getShort ();
-        @SuppressWarnings("unused")
-        short entrySelector = inBuf.getShort ();
-        @SuppressWarnings("unused")
-        short rangeShift = inBuf.getShort ();
+    public static TrueTypeFont parseFont(final ByteBuffer inBuf) {
+        final int type = inBuf.getInt();
+        final short numTables = inBuf.getShort();
+        @SuppressWarnings("unused") final short searchRange = inBuf.getShort();
+        @SuppressWarnings("unused") final short entrySelector = inBuf.getShort();
+        @SuppressWarnings("unused") final short rangeShift = inBuf.getShort();
 
-        TrueTypeFont font = new TrueTypeFont (type);
-        parseDirectories (inBuf, numTables, font);
+        final TrueTypeFont font = new TrueTypeFont(type);
+        parseDirectories(inBuf, numTables, font);
 
         return font;
     }
@@ -115,7 +107,7 @@ public class TrueTypeFont {
      *        (i.e. cmap or head)
      * @param data the data for this table, as a byte buffer
      */
-    public void addTable (String tagString, ByteBuffer data) {
+    public void addTable (final String tagString, final ByteBuffer data) {
         this.tables.put (tagString, data);
     }
 
@@ -126,7 +118,7 @@ public class TrueTypeFont {
      *        (i.e. cmap or head)
      * @param table the table
      */
-    public void addTable (String tagString, TrueTypeTable table) {
+    public void addTable (final String tagString, final TrueTypeTable table) {
         this.tables.put (tagString, table);
     }
 
@@ -138,15 +130,15 @@ public class TrueTypeFont {
      *        (i.e. cmap or head)
      * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeTable} object.
      */
-    public TrueTypeTable getTable (String tagString) {
-        Object tableObj = this.tables.get (tagString);
+    public TrueTypeTable getTable (final String tagString) {
+        final Object tableObj = this.tables.get (tagString);
 
         TrueTypeTable table = null;
 
         if (tableObj instanceof ByteBuffer) {
             // the table has not yet been parsed.  Parse it, and add the
             // parsed version to the map of tables.
-            ByteBuffer data = (ByteBuffer) tableObj;
+            final ByteBuffer data = (ByteBuffer) tableObj;
 
             table = TrueTypeTable.createTable (this, tagString, data);
             addTable (tagString, table);
@@ -163,7 +155,7 @@ public class TrueTypeFont {
      * @param tagString the name of this table, as a 4 character string
      *        (i.e. cmap or head)
      */
-    public void removeTable (String tagString) {
+    public void removeTable (final String tagString) {
         this.tables.remove (tagString);
     }
 
@@ -182,8 +174,8 @@ public class TrueTypeFont {
      * @return a short.
      */
     public short getSearchRange () {
-        double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
-        double maxPower = Math.pow (2, pow2);
+        final double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
+        final double maxPower = Math.pow (2, pow2);
 
         return (short) (16 * maxPower);
     }
@@ -194,8 +186,8 @@ public class TrueTypeFont {
      * @return a short.
      */
     public short getEntrySelector () {
-        double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
-        double maxPower = Math.pow (2, pow2);
+        final double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
+        final double maxPower = Math.pow (2, pow2);
 
         return (short) (Math.log (maxPower) / Math.log (2));
     }
@@ -206,8 +198,8 @@ public class TrueTypeFont {
      * @return a short.
      */
     public short getRangeShift () {
-        double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
-        double maxPower = Math.pow (2, pow2);
+        final double pow2 = Math.floor (Math.log (getNumTables ()) / Math.log (2));
+        final double maxPower = Math.pow (2, pow2);
 
         return (short) ((maxPower * 16) - getSearchRange ());
     }
@@ -219,7 +211,7 @@ public class TrueTypeFont {
      */
     public byte[] writeFont () {
         // allocate a buffer to hold the font
-        ByteBuffer buf = ByteBuffer.allocate (getLength ());
+        final ByteBuffer buf = ByteBuffer.allocate (getLength ());
         
         // write the font header
         buf.putInt (getType ());
@@ -232,19 +224,20 @@ public class TrueTypeFont {
         int curOffset = 12 + (getNumTables () * 16);
 
         // write the tables
-        for (String tagString : this.tables.keySet()) {
-            int tag = TrueTypeTable.stringToTag(tagString);
+        for (final Map.Entry<String,Object> entry : this.tables.entrySet()) {
+            final String tagString = entry.getKey();
+            final int tag = TrueTypeTable.stringToTag(tagString);
 
             ByteBuffer data = null;
 
-            Object tableObj = this.tables.get(tagString);
+            final Object tableObj = this.tables.get(tagString);
             if (tableObj instanceof TrueTypeTable) {
                 data = ((TrueTypeTable) tableObj).getData();
             } else {
                 data = (ByteBuffer) tableObj;
             }
 
-            int dataLen = data.remaining();
+            final int dataLen = data.remaining();
 
             // write the table directory entry
             buf.putInt(tag);
@@ -289,7 +282,7 @@ public class TrueTypeFont {
      * @param tagString the name of the data
      * @param data the data in the table
      */
-    private static int calculateChecksum (String tagString, ByteBuffer data) {
+    private static int calculateChecksum (final String tagString, final ByteBuffer data) {
         int sum = 0;
 
         data.mark ();
@@ -313,9 +306,9 @@ public class TrueTypeFont {
             if (data.remaining () > 3) {
                 sum += data.getInt ();
             } else {
-                byte b0 = (data.remaining () > 0) ? data.get () : 0;
-                byte b1 = (data.remaining () > 0) ? data.get () : 0;
-                byte b2 = (data.remaining () > 0) ? data.get () : 0;
+                final byte b0 = (data.remaining () > 0) ? data.get () : 0;
+                final byte b1 = (data.remaining () > 0) ? data.get () : 0;
+                final byte b2 = (data.remaining () > 0) ? data.get () : 0;
 
                 sum += ((0xff & b0) << 24) | ((0xff & b1) << 16) |
                         ((0xff & b2) << 8);
@@ -330,15 +323,15 @@ public class TrueTypeFont {
     /**
      * Get directory entries from a font
      */
-    private static void parseDirectories (ByteBuffer data, int numTables,
-                                          TrueTypeFont ttf) {
+    private static void parseDirectories (final ByteBuffer data, final int numTables,
+                                          final TrueTypeFont ttf) {
         for (int i = 0; i < numTables; i++) {
-            int tag = data.getInt ();
-            String tagString = TrueTypeTable.tagToString (tag);
+            final int tag = data.getInt ();
+            final String tagString = TrueTypeTable.tagToString (tag);
             PDFDebugger.debug("TTFFont.parseDirectories: " + tagString, 100);
-            int checksum = data.getInt ();
-            int offset = data.getInt ();
-            int length = data.getInt ();
+            final int checksum = data.getInt ();
+            final int offset = data.getInt ();
+            final int length = data.getInt ();
 
             // read the data
             PDFDebugger.debug("TTFFont.parseDirectories: checksum: " +
@@ -346,10 +339,10 @@ public class TrueTypeFont {
             data.mark ();
             data.position (offset);
 
-            ByteBuffer tableData = data.slice ();
+            final ByteBuffer tableData = data.slice ();
             tableData.limit (length);
 
-            int calcChecksum = calculateChecksum (tagString, tableData);
+            final int calcChecksum = calculateChecksum (tagString, tableData);
 
             if (calcChecksum == checksum) {
                 ttf.addTable (tagString, tableData);
@@ -374,7 +367,7 @@ public class TrueTypeFont {
 
         // for each directory entry, get the size,
         // and don't forget the padding!
-        for (Object tableObj : this.tables.values()) {
+        for (final Object tableObj : this.tables.values()) {
             // add the length of the entry
             if (tableObj instanceof TrueTypeTable) {
                 length += ((TrueTypeTable) tableObj).getLength();
@@ -394,23 +387,23 @@ public class TrueTypeFont {
     /**
      * Update the checksumAdj field in the head table
      */
-    private void updateChecksumAdj (ByteBuffer fontData) {
-        int checksum = calculateChecksum ("", fontData);
-        int checksumAdj = 0xb1b0afba - checksum;
+    private void updateChecksumAdj (final ByteBuffer fontData) {
+        final int checksum = calculateChecksum ("", fontData);
+        final int checksumAdj = 0xb1b0afba - checksum;
 
         // find the head table
         int offset = 12 + (getNumTables () * 16);
 
         // find the head table
-        for (String tagString : this.tables.keySet()) {
-            // adjust the checksum
+        for (final Map.Entry<String,Object> entry : this.tables.entrySet()) {
+            final String tagString = entry.getKey();
             if (tagString.equals("head")) {
                 fontData.putInt(offset + 8, checksumAdj);
                 return;
             }
 
             // add the length of the entry 
-            Object tableObj = this.tables.get(tagString);
+            final Object tableObj = this.tables.get(tagString);
             if (tableObj instanceof TrueTypeTable) {
                 offset += ((TrueTypeTable) tableObj).getLength();
             } else {
@@ -431,7 +424,7 @@ public class TrueTypeFont {
 	 */
     @Override
 	public String toString () {
-        StringBuilder buf = new StringBuilder ();
+        final StringBuilder buf = new StringBuilder ();
 
         logger.info ("Type         : " + getType ());
         logger.info ("NumTables    : " + getNumTables ());
@@ -439,7 +432,7 @@ public class TrueTypeFont {
         logger.info ("EntrySelector: " + getEntrySelector ());
         logger.info ("RangeShift   : " + getRangeShift ());
 
-        for (Map.Entry<String, Object> e : this.tables.entrySet()) {
+        for (final Map.Entry<String, Object> e : this.tables.entrySet()) {
             TrueTypeTable table = null;
             if (e.getValue() instanceof ByteBuffer) {
                 table = getTable(e.getKey());
@@ -459,45 +452,11 @@ public class TrueTypeFont {
      * @return a {@link java.util.Collection} object.
      */
     public Collection<String> getNames() {
-        NameTable table = (NameTable) getTable("name");
+        final NameTable table = (NameTable) getTable("name");
         if (table != null) {
             return table.getNames();
         } else {
             return Collections.emptyList();
-        }
-    }
-    
-    /**
-     * <p>main.</p>
-     *
-     * @param args the command line arguments
-     */
-    public static void main (String[] args) {
-        if (args.length != 1) {
-            logger.info ("Usage: ");
-            logger.info ("    TrueTypeParser <filename>");
-            System.exit (-1);
-        }
-
-        try {
-            RandomAccessFile raf = new RandomAccessFile (args[0], "r");
-
-            int size = (int) raf.length ();
-            byte[] data = new byte[size];
-
-            raf.readFully (data);
-
-            TrueTypeFont ttp = TrueTypeFont.parseFont (data);
-
-            logger.info ("ttp: " + ttp);
-
-            InputStream fontStream = new ByteArrayInputStream (ttp.writeFont ());
-
-            @SuppressWarnings("unused")
-            Font f = Font.createFont (Font.TRUETYPE_FONT, fontStream);
-            raf.close();
-        } catch (Exception e) {
-            BaseWatchable.getErrorHandler().publishException(e);
         }
     }
 }

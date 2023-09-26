@@ -64,7 +64,7 @@ public class DocumentBuilderImpl {
 	 * @param rcontext An instance of {@link HtmlRendererContext}
 	 * @param config a {@link HtmlRendererConfig} object.
 	 */
-	public DocumentBuilderImpl(UserAgentContext ucontext, HtmlRendererContext rcontext, HtmlRendererConfig config) {
+	public DocumentBuilderImpl(final UserAgentContext ucontext, final HtmlRendererContext rcontext, final HtmlRendererConfig config) {
 		this.rcontext = rcontext;
 		this.bcontext = ucontext;
 		this.config = config;
@@ -82,7 +82,7 @@ public class DocumentBuilderImpl {
 	 * @throws org.xml.sax.SAXException if any.
 	 * @throws java.io.IOException if any.
 	 */
-	public Document createDocument(InputSource is) throws SAXException, IOException {
+	public Document createDocument(final InputSource is) throws SAXException, IOException {
 		final String encoding = is.getEncoding();
 		String charset = encoding;
 		if (charset == null) {
@@ -92,7 +92,7 @@ public class DocumentBuilderImpl {
 		if (uri == null) {
 			logger.warning("parse(): InputSource has no SystemId (URI); document item URLs will not be resolvable.");
 		}
-		WritableLineReader wis;
+		final WritableLineReader wis;
 		final Reader reader = is.getCharacterStream();
 		if (reader != null) {
 			wis = new WritableLineReader(reader);
@@ -126,7 +126,7 @@ public class DocumentBuilderImpl {
 	 * @throws org.xml.sax.SAXException if any.
 	 * @throws java.io.IOException if any.
 	 */
-	public Document parse(InputSource is) throws SAXException, IOException {
+	public Document parse(final InputSource is) throws SAXException, IOException {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) createDocument(is);
 		document.load();
 		return document;

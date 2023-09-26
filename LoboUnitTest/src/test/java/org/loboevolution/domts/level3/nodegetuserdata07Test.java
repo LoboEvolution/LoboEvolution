@@ -48,13 +48,13 @@ import static org.junit.Assert.assertTrue;
 public class nodegetuserdata07Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        ProcessingInstruction pi;
+        final Document doc;
+        final ProcessingInstruction pi;
         Object userData;
-        Object retUserData;
-        boolean success;
+        final Object retUserData;
+        final boolean success;
 
-        Object prevUserData;
+        final Object prevUserData;
         doc = sampleXmlFile("hc_staff.xml");
         pi = doc.createProcessingInstruction("PITARGET", "PIDATA");
         /*Node */

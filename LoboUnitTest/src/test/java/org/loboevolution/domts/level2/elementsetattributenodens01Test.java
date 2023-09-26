@@ -59,15 +59,15 @@ public class elementsetattributenodens01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Attr attribute1;
-        Attr attribute2;
-        Attr attrNode;
-        String attrName;
-        String attrNS;
-        NamedNodeMap attributes;
-        int length;
+        final Document doc;
+        final Element element;
+        final Attr attribute1;
+        final Attr attribute2;
+        final Attr attrNode;
+        final String attrName;
+        final String attrNS;
+        final NamedNodeMap attributes;
+        final int length;
         doc = sampleXmlFile("staff.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test/Level2", "new:element");
         attribute1 = doc.createAttributeNS("http://www.w3.org/DOM/Test/att1", "p1:att");

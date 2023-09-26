@@ -46,16 +46,16 @@ import static org.junit.Assert.assertFalse;
 public class textiselementcontentwhitespace04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection pList;
-        Element pElem;
+        final Document doc;
+        final HTMLCollection pList;
+        final Element pElem;
         Text textNode;
-        Text blankNode;
+        final Text blankNode;
         Node returnedNode;
-        boolean isElemContentWhitespace;
-        DOMConfiguration domConfig;
-        boolean canSetValidation;
-        Node replacedNode;
+        final boolean isElemContentWhitespace;
+        final DOMConfiguration domConfig;
+        final boolean canSetValidation;
+        final Node replacedNode;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         canSetValidation = domConfig.canSetParameter("validate", Boolean.TRUE);

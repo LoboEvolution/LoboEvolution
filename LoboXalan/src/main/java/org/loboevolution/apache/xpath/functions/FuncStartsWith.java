@@ -34,7 +34,7 @@ public class FuncStartsWith extends Function2Args {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
     return m_arg0.execute(xctxt).xstr().startsWith(m_arg1.execute(xctxt).xstr())
         ? XBoolean.S_TRUE
         : XBoolean.S_FALSE;

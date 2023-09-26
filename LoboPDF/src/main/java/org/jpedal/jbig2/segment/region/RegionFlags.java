@@ -43,7 +43,7 @@ public class RegionFlags extends Flags {
 	public static final String EXTERNAL_COMBINATION_OPERATOR = "EXTERNAL_COMBINATION_OPERATOR";
 
 	/** {@inheritDoc} */
-	public void setFlags(int flagsAsInt) {
+	public void setFlags(final int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract EXTERNAL_COMBINATION_OPERATOR */

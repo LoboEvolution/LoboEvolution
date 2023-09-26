@@ -47,11 +47,11 @@ import static org.junit.Assert.assertEquals;
 public class nodecomparedocumentposition17Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        ProcessingInstruction pi1;
-        ProcessingInstruction pi2;
-        int pi1Position;
-        int pi2Position;
+        final Document doc;
+        final ProcessingInstruction pi1;
+        final ProcessingInstruction pi2;
+        final int pi1Position;
+        final int pi2Position;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         pi1 = doc.createProcessingInstruction("PI1", "");

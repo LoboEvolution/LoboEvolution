@@ -52,14 +52,14 @@ import static org.junit.Assert.assertTrue;
 public class domconfignamespaces1Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        Document doc;
-        DOMConfiguration domConfig;
-        DocumentType nullDocType = null;
+        final DOMImplementation domImpl;
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final DocumentType nullDocType = null;
 
         boolean canSet;
         boolean state;
-        String parameter = "nAmEspaces";
+        final String parameter = "nAmEspaces";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
@@ -79,7 +79,7 @@ public class domconfignamespaces1Test extends LoboUnitTest {
                 boolean success = false;
                 try {
                     domConfig.setParameter(parameter, Boolean.FALSE);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
                 assertTrue("throw_NOT_SUPPORTED_ERR", success);

@@ -50,7 +50,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected JButton createDecreaseButton(int orientation) {
+	protected JButton createDecreaseButton(final int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 			return super.createDecreaseButton(orientation);
 		} else {
@@ -71,7 +71,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
 	/** {@inheritDoc} */
 	@Override
 	protected Color getFrameColor() {
-		Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 8);
+		final Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 8);
 		if (isDragging) {
 			return ColorHelper.darker(frameColor, 8);
 		} else if (isRollover) {
@@ -85,7 +85,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
-		Color[] colors = AbstractLookAndFeel.getTheme().getThumbColors();
+		final Color[] colors = AbstractLookAndFeel.getTheme().getThumbColors();
 		rolloverColors = new Color[colors.length];
 		dragColors = new Color[colors.length];
 		for (int i = 0; i < colors.length; i++) {

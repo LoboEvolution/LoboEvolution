@@ -46,25 +46,25 @@ public abstract class DocumentBuilder
         throw new RuntimeException("Stub!");
     }
 
-    public Document parse(InputStream is)
+    public Document parse(final InputStream is)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public Document parse(InputStream is, String systemId)
+    public Document parse(final InputStream is, final String systemId)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public Document parse(String uri)
+    public Document parse(final String uri)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");
     }
 
-    public Document parse(File f)
+    public Document parse(final File f)
         throws IOException, SAXException
     {
         throw new RuntimeException("Stub!");

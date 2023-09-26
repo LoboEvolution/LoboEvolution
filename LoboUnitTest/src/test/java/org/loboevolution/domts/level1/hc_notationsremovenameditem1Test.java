@@ -54,10 +54,10 @@ public class hc_notationsremovenameditem1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap notations;
-        DocumentType docType;
-        Node retval;
+        final Document doc;
+        final NamedNodeMap notations;
+        final DocumentType docType;
+        final Node retval;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
@@ -69,7 +69,7 @@ public class hc_notationsremovenameditem1Test extends LoboUnitTest {
             boolean success = false;
             try {
                 retval = notations.removeNamedItem("notation1");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

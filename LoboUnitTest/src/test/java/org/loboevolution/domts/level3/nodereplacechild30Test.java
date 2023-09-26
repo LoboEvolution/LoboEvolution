@@ -45,15 +45,15 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild30Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element parent;
-        Element oldChild;
-        Element newElement;
-        Text newText;
-        Comment newComment;
-        ProcessingInstruction newPI;
-        CDATASection newCdata;
-        EntityReference newERef;
+        final Document doc;
+        final Element parent;
+        final Element oldChild;
+        final Element newElement;
+        final Text newText;
+        final Comment newComment;
+        final ProcessingInstruction newPI;
+        final CDATASection newCdata;
+        final EntityReference newERef;
         Node replaced;
         String nodeName;
         Node appendedChild;

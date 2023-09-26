@@ -46,16 +46,16 @@ import static org.junit.Assert.assertTrue;
 public class documentadoptnode12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        DocumentType docType;
-        String nullPubID = null;
-        String nullSysID = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final DocumentType docType;
+        final String nullPubID = null;
+        final String nullSysID = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
@@ -67,7 +67,7 @@ public class documentadoptnode12Test extends LoboUnitTest {
         boolean success = false;
         try {
             newDoc.adoptNode(docType);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("throw_NOT_SUPPORTED_ERR", success);

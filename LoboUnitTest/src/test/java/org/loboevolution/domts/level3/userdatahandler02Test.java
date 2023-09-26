@@ -50,15 +50,15 @@ import static org.junit.Assert.assertSame;
 public class userdatahandler02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Node node;
-        HTMLCollection pList;
-        UserDataHandlerImpl userDataHandlerImpl = new UserDataHandlerImpl();
+        final Document doc;
+        final Node node;
+        final HTMLCollection pList;
+        final UserDataHandlerImpl userDataHandlerImpl = new UserDataHandlerImpl();
 
         Object oldUserData;
-        String elementNS;
-        Node newNode;
-        List<UserDataNotification> notifications;
+        final String elementNS;
+        final Node newNode;
+        final List<UserDataNotification> notifications;
 
         UserDataNotification notification;
         short operation;
@@ -68,8 +68,8 @@ public class userdatahandler02Test extends LoboUnitTest {
         Node dst;
         int greetingCount = 0;
         int salutationCount = 0;
-        String hello = "Hello";
-        String mister = "Mr.";
+        final String hello = "Hello";
+        final String mister = "Mr.";
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         node = pList.item(0);
@@ -79,7 +79,7 @@ public class userdatahandler02Test extends LoboUnitTest {
         newNode = node.cloneNode(true);
         notifications = userDataHandlerImpl.getAllNotifications();
         assertEquals("twoNotifications", 2, notifications.size());
-        for (UserDataNotification userDataNotification : notifications) {
+        for (final UserDataNotification userDataNotification : notifications) {
             operation = userDataNotification.getOperation();
             assertEquals("operationIsClone", 1, operation);
             key = userDataNotification.getKey();

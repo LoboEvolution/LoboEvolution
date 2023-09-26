@@ -42,7 +42,7 @@ public class DecodeIntResult {
 	 * @param intResult a int.
 	 * @param booleanResult a boolean.
 	 */
-	public DecodeIntResult(int intResult, boolean booleanResult) {
+	public DecodeIntResult(final int intResult, final boolean booleanResult) {
 		this.intResult = intResult;
 		this.booleanResult = booleanResult;
 	}

@@ -60,7 +60,7 @@ public final class Strings {
 	 * @param ch   the ch
 	 * @return the int
 	 */
-	public static int countChars(String text, char ch) {
+	public static int countChars(final String text, final char ch) {
 		final int len = text.length();
 		int count = 0;
 		for (int i = 0; i < len; i++) {
@@ -78,9 +78,9 @@ public final class Strings {
 	 * @param font a {@link java.awt.Font} object.
 	 * @return a {@link java.awt.geom.Rectangle2D} object.
 	 */
-	public static Rectangle2D texMeasure(String text, Font font) {
-		AffineTransform affinetransform = new AffineTransform();
-		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+	public static Rectangle2D texMeasure(final String text, final Font font) {
+		final AffineTransform affinetransform = new AffineTransform();
+		final FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
 		return  font.getStringBounds(text, frc);
 	}
 
@@ -90,11 +90,11 @@ public final class Strings {
 	 * @param text the text
 	 * @return true, if is blank
 	 */
-	public static boolean isBlank(String text) {
-		return text == null || "".equals(text);
+	public static boolean isBlank(final String text) {
+		return text == null || text.isEmpty();
 	}
 
-	public static boolean isCssBlank(String text) {
+	public static boolean isCssBlank(final String text) {
 		return isBlank(text) || CSSValues.NONE.equals(CSSValues.get(text));
 	}
 
@@ -104,7 +104,7 @@ public final class Strings {
 	 * @param text the text
 	 * @return string
 	 */
-	public static String linearize(String text) {
+	public static String linearize(final String text) {
 		return text == null ? "" : text.replaceAll("(\r\n|\n)", "").replaceAll("\\s+", "");
 	}
 
@@ -114,32 +114,32 @@ public final class Strings {
 	 * @param text the text
 	 * @return true, if is not blank
 	 */
-	public static boolean isNotBlank(String text) {
+	public static boolean isNotBlank(final String text) {
 		return !isBlank(text);
 	}
 
-	public static boolean isCssNotBlank(String text) {
+	public static boolean isCssNotBlank(final String text) {
 		return !isBlank(text) && !CSSValues.NONE.equals(CSSValues.get(text));
 	}
 
-	public static boolean isStringBuilderNotBlack(StringBuilder text) {
+	public static boolean isStringBuilderNotBlack(final StringBuilder text) {
 		return (text != null) && (text.length() > 0);
 	}
 
 
-	public static boolean containsIgnoreCase(String text, String text1) {
+	public static boolean containsIgnoreCase(final String text, final String text1) {
 		return text != null && text1 != null && (text.contains(text1.toLowerCase()) || text.contains(text1.toUpperCase()));
 	}
 
-	public static boolean startsWithIgnoreCase(String text, String text1) {
+	public static boolean startsWithIgnoreCase(final String text, final String text1) {
 		return text != null && text1 != null && (text.startsWith(text1.toLowerCase()) || text.startsWith(text1.toUpperCase()));
 	}
 
-	public static boolean endsWithIgnoreCase(String text, String text1) {
+	public static boolean endsWithIgnoreCase(final String text, final String text1) {
 		return text != null && text1 != null && (text.endsWith(text1.toLowerCase()) || text.endsWith(text1.toUpperCase()));
 	}
 
-	public static String[] splitIgnoreCase(String text, String text1) {
+	public static String[] splitIgnoreCase(final String text, final String text1) {
 		if (text != null && text1 != null) {
 			return text.split(text1.toLowerCase()).length > 1 ? text.split(text1.toLowerCase()) :
 					text.split(text1.toUpperCase()).length > 1 ? text.split(text1.toUpperCase()) : new String[]{};
@@ -154,7 +154,7 @@ public final class Strings {
 	 * @param keyCode a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public static boolean isNumeric(String keyCode) {
+	public static boolean isNumeric(final String keyCode) {
 		try {
 			if (Strings.isBlank(keyCode)) {
 				return false;
@@ -172,7 +172,7 @@ public final class Strings {
 	 * @param phrase the phrase
 	 * @return the string[]
 	 */
-	public static String[] split(String phrase) {
+	public static String[] split(final String phrase) {
 		final ArrayList<String> wordList = new ArrayList<>();
 		StringBuilder word = null;
 		final char[] list = phrase.toCharArray();
@@ -208,7 +208,7 @@ public final class Strings {
 	 * @param delimiters a {@link java.lang.String} object.
 	 * @return an array of {@link java.lang.String} objects.
 	 */
-	public static String[] splitUsingTokenizer(String subject, String delimiters) {
+	public static String[] splitUsingTokenizer(final String subject, final String delimiters) {
 		final StringTokenizer strTkn = new StringTokenizer(subject, delimiters);
 		final ArrayList<String> arrLis = new ArrayList<>(subject.length());
 
@@ -226,7 +226,7 @@ public final class Strings {
 	 * @param quotes  the quotes
 	 * @return the string
 	 */
-	public static String strictHtmlEncode(String rawText, boolean quotes) {
+	public static String strictHtmlEncode(final String rawText, final boolean quotes) {
 		final StringBuilder output = new StringBuilder();
 		final char[] list = rawText.toCharArray();
 		for (final char ch : list) {
@@ -261,7 +261,7 @@ public final class Strings {
 	 * @param rawText the raw text
 	 * @return the string
 	 */
-	public static String trimForAlphaNumDash(String rawText) {
+	public static String trimForAlphaNumDash(final String rawText) {
 		final char[] list = rawText.toCharArray();
 		int index = 0;
 		for (final char ch : list) {
@@ -280,7 +280,7 @@ public final class Strings {
 	 * @param text the text
 	 * @return the string
 	 */
-	public static String unquote(String text) {
+	public static String unquote(final String text) {
 		final int length = text.length();
 		if (length >= 2) {
 			if (text.charAt(0) == '"' && text.charAt(length - 1) == '"') {
@@ -313,9 +313,9 @@ public final class Strings {
 	 * @param items an array of {@link java.lang.String} objects.
 	 * @return a boolean.
 	 */
-	public static boolean containsWords(String inputString, String[] items) {
+	public static boolean containsWords(final String inputString, final String[] items) {
 		boolean found = false;
-		for (String item : items) {
+		for (final String item : items) {
 			if (inputString.contains(item)) {
 				found = true;
 				break;
@@ -332,12 +332,12 @@ public final class Strings {
 	 * @return a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static String hash(String password, byte[] salt) throws Exception {
+	public static String hash(final String password, final byte[] salt) throws Exception {
         if (password == null || password.length() == 0)
             throw new IllegalArgumentException("Empty passwords are not supported.");
 
-		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 4096, 256 * 8);
-		SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+		final KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 4096, 256 * 8);
+		final SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
         return Base64.getEncoder().encodeToString(f.generateSecret(spec).getEncoded());
     }
 
@@ -348,16 +348,16 @@ public final class Strings {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String randomAlphaNumeric(int count) {
-		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		StringBuilder builder = new StringBuilder();
+		final String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		final StringBuilder builder = new StringBuilder();
 		while (count-- != 0) {
-			int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
-			builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+			final int character = (int) (Math.random() * alpha.length());
+			builder.append(alpha.charAt(character));
 		}
 		return builder.toString();
 	}
 
-	public static boolean isValidTag(String name, boolean isXml) {
+	public static boolean isValidTag(final String name, final boolean isXml) {
 		if (Strings.isBlank(name)) {
 			return false;
 		}
@@ -366,12 +366,12 @@ public final class Strings {
 	}
 
 
-	public static boolean isXMLIdentifier(String s) {
-		if (isBlank(s)) {
+	public static boolean isXMLIdentifier(final String str) {
+		if (isBlank(str)) {
 			return false;
 		}
 
-		s = s.trim();
+		final String s = str.trim();
 
 		if (!isXMLIdentifierStart(s.charAt(0))) {
 			return false;
@@ -387,11 +387,11 @@ public final class Strings {
 	}
 
 
-	private static boolean isXMLIdentifierStart(char c) {
+	private static boolean isXMLIdentifierStart(final char c) {
 		return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c == '_');
 	}
 
-	private static boolean isXMLIdentifierPart(char c) {
+	private static boolean isXMLIdentifierPart(final char c) {
 		return isXMLIdentifierStart(c) || (c >= '0' && c <= '9') || (c == '-') || (c == '.');
 	}
 }

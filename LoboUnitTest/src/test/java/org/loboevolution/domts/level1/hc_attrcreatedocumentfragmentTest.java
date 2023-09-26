@@ -55,14 +55,14 @@ public class hc_attrcreatedocumentfragmentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        Element newOne;
-        Element domesticNode;
-        NamedNodeMap attributes;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final Element newOne;
+        final Element domesticNode;
+        final NamedNodeMap attributes;
         Attr attribute;
         String attrName;
-        Node appendedChild;
+        final Node appendedChild;
         int langAttrCount = 0;
         doc = sampleXmlFile("hc_staff.xml");
         docFragment = doc.createDocumentFragment();

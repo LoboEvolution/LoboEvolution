@@ -48,7 +48,7 @@ public class ShowRecentDownloadAction extends AbstractAction {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public ShowRecentDownloadAction(BrowserFrame frame) {
+    public ShowRecentDownloadAction(final BrowserFrame frame) {
         this.frame = frame;
     }
 

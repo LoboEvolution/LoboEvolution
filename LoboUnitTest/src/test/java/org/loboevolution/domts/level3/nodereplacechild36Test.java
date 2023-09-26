@@ -46,12 +46,12 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild36Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr parent;
-        EntityReference oldChild;
-        Text newChild;
+        final Document doc;
+        final Attr parent;
+        final EntityReference oldChild;
+        final Text newChild;
         String nodeValue;
-        Node replaced;
+        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         oldChild = doc.createEntityReference("delta");
@@ -61,7 +61,7 @@ public class nodereplacechild36Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = parent.replaceChild(newChild, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

@@ -43,7 +43,7 @@ public class SVGPathSegLinetoVerticalAbsImpl implements SVGPathSegLinetoVertical
 	 *
 	 * @param y a float.
 	 */
-	public SVGPathSegLinetoVerticalAbsImpl(float y) {
+	public SVGPathSegLinetoVerticalAbsImpl(final float y) {
 		this.y = y;
 	}
 

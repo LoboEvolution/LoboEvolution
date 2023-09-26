@@ -50,11 +50,8 @@
 
 package org.loboevolution.javax.xml.stream.util;
 
-import org.loboevolution.javax.xml.namespace.QName;
-import org.loboevolution.javax.xml.namespace.NamespaceContext;
 import org.loboevolution.javax.xml.stream.XMLEventReader;
 import org.loboevolution.javax.xml.stream.events.XMLEvent;
-import org.loboevolution.javax.xml.stream.Location;
 import org.loboevolution.javax.xml.stream.XMLStreamException;
 
 public class EventReaderDelegate implements XMLEventReader {
@@ -69,7 +66,7 @@ public class EventReaderDelegate implements XMLEventReader {
    * Construct an filter with the specified parent.
    * @param reader the parent
    */
-  public EventReaderDelegate(XMLEventReader reader) {
+  public EventReaderDelegate(final XMLEventReader reader) {
     this.reader = reader;
   }
 
@@ -77,7 +74,7 @@ public class EventReaderDelegate implements XMLEventReader {
    * Set the parent of this instance.
    * @param reader the new parent
    */
-  public void setParent(XMLEventReader reader) {
+  public void setParent(final XMLEventReader reader) {
     this.reader = reader;
   }
 
@@ -128,7 +125,7 @@ public class EventReaderDelegate implements XMLEventReader {
     return reader.nextTag();
   }
 
-  public Object getProperty(java.lang.String name)
+  public Object getProperty(final java.lang.String name)
     throws java.lang.IllegalArgumentException
   {
     return reader.getProperty(name);

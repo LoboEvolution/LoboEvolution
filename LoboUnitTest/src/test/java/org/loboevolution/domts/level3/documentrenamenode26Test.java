@@ -48,15 +48,15 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode26Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
+        final Document doc;
+        final DocumentFragment docFrag;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
 
         boolean success = false;
         try {
             doc.renameNode(docFrag, "http://www.w3.org/DOM/Test", "root");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("documentrenamenode26_NOT_SUPPORTED_ERR", success);

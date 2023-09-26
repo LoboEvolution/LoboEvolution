@@ -62,7 +62,7 @@ public class ContentPageUI extends AbstractToolsUI {
      *
      * @param frame a {@link BrowserFrame} object.
      */
-    public ContentPageUI(BrowserFrame frame, String syntax){
+    public ContentPageUI(final BrowserFrame frame, final String syntax){
         final ToolBar toolbar = frame.getToolbar();
         final Document doc = NavigationManager.getDocument(toolbar.getAddressBar().getText());
         final HtmlContent htmlcontent = new HtmlContent(doc);
@@ -78,7 +78,7 @@ public class ContentPageUI extends AbstractToolsUI {
         }
     }
 
-    private JScrollPane content(List<MetaInfo> infoList, String syntax) {
+    private JScrollPane content(final List<MetaInfo> infoList, final String syntax) {
         try {
             final Object[] columnNames = { "" };
             final List<String[]> values = new ArrayList<>();
@@ -116,7 +116,7 @@ public class ContentPageUI extends AbstractToolsUI {
                             final String href = (String) jtable.getValueAt(element, selectedColumn);
                             textArea.setText(HttpNetwork.getSource(href));
                             textArea.repaint();
-                        } catch (Exception ex) {
+                        } catch (final Exception ex) {
                             ex.printStackTrace();
                         }
                     }

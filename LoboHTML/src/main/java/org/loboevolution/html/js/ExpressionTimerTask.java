@@ -51,7 +51,7 @@ class ExpressionTimerTask extends WeakWindowTask {
 	 * @param expression a {@link java.lang.String} object.
 	 * @param removeTask a boolean.
 	 */
-	public ExpressionTimerTask(WindowImpl window, Integer timeIDInt, String expression, boolean removeTask) {
+	public ExpressionTimerTask(final WindowImpl window, final Integer timeIDInt, final String expression, final boolean removeTask) {
 		super(window);
 		this.timeIDInt = timeIDInt;
 		this.expression = expression;
@@ -83,8 +83,8 @@ class ExpressionTimerTask extends WeakWindowTask {
 		}
 	}
 	
-	private Object evalInScope(WindowImpl window, final String javascript) {
-		HTMLDocumentImpl document = (HTMLDocumentImpl)window.getDocumentNode();
+	private Object evalInScope(final WindowImpl window, final String javascript) {
+		final HTMLDocumentImpl document = (HTMLDocumentImpl)window.getDocumentNode();
 		final Context ctx = Executor.createContext(document.getDocumentURL(), window.getUaContext());
 		try {
 			final String scriptURI = "window.eval";

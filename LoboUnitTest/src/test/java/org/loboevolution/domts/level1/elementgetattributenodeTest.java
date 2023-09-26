@@ -58,11 +58,11 @@ public class elementgetattributenodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        Attr domesticAttr;
-        String name;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final Attr domesticAttr;
+        final String name;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(0);

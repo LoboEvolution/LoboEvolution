@@ -213,7 +213,7 @@ public class ConnectionSettingsUI extends AbstractToolsUI {
 	@Override
 	public void save() throws RuntimeException {
 		final ConnectionStore settings = new ConnectionStore();
-		Proxy.Type proxyType;
+		final Proxy.Type proxyType;
 		if (this.noProxyRadioButton.isSelected()) {
 			proxyType = Proxy.Type.DIRECT;
 		} else if (this.httpProxyRadioButton.isSelected()) {

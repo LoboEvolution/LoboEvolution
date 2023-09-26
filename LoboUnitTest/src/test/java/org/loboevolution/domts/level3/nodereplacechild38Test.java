@@ -48,17 +48,17 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild38Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entitiesMap;
-        Node ent;
-        Text oldChild;
-        EntityReference entRef;
-        Text txt;
-        Element elem;
-        Comment comment;
-        ProcessingInstruction pi;
-        CDATASection cdata;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entitiesMap;
+        final Node ent;
+        final Text oldChild;
+        final EntityReference entRef;
+        final Text txt;
+        final Element elem;
+        final Comment comment;
+        final ProcessingInstruction pi;
+        final CDATASection cdata;
         Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
@@ -73,7 +73,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = ent.replaceChild(cdata, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR1", success);
@@ -84,7 +84,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = ent.replaceChild(pi, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR2", success);
@@ -95,7 +95,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = ent.replaceChild(comment, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR3", success);
@@ -106,7 +106,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = ent.replaceChild(txt, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR4", success);
@@ -117,7 +117,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = ent.replaceChild(elem, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR5", success);
@@ -128,7 +128,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = ent.replaceChild(entRef, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR6", success);

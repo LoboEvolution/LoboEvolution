@@ -127,7 +127,7 @@ public class HTMLInputElementTest extends LoboUnitTest {
          testValue(null, messages);
     }
 
-    private void testValue(final String value, String[] messages) {
+    private void testValue(final String value, final String[] messages) {
         final String html =
                 "<html><head><title>foo</title><script>\n"
                 + "function doTest() {\n"
@@ -325,7 +325,7 @@ public class HTMLInputElementTest extends LoboUnitTest {
         testAttribute("value", "", "abc", messages);
     }
 
-    private void testAttribute(final String property, final String attrib, final String value, String[] messages) {
+    private void testAttribute(final String property, final String attrib, final String value, final String[] messages) {
         String html
                 =
                 "<html><head><title>foo</title><script>\n"
@@ -592,7 +592,7 @@ public class HTMLInputElementTest extends LoboUnitTest {
         final String[] messages = {"text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, "
                 + "radio, hidden, password, image, reset, button, file, number, range, search, tel, url, text, text",
                 "text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, radio, "
-                        + "hidden, password, image, reset, button, file, number, range, search, tel, url, text, text"};;
+                        + "hidden, password, image, reset, button, file, number, range, search, tel, url, text, text"};
         checkHtmlAlert(html, messages);
     }
 

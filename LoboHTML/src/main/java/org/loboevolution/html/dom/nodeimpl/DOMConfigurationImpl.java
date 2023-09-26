@@ -73,7 +73,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean canSetParameter(String name, Object value) {
+	public boolean canSetParameter(final String name, final Object value) {
 		if (value == null) {
 			return true;
 		}
@@ -109,11 +109,11 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 
 	/** {@inheritDoc} */
 	@Override
-	public Object getParameter(String name) {
+	public Object getParameter(final String name) {
 		synchronized (this) {
 			if (Strings.isBlank(name)) return null;
-			String nl = name.toLowerCase();
-			Object param = parameters.get(nl);
+			final String nl = name.toLowerCase();
+			final Object param = parameters.get(nl);
 			if (param != null) {
 				return param;
 			} else if ("error-handler".equals(nl) || nl.startsWith("schema")) {
@@ -134,10 +134,10 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setParameter(String name, Object value) throws DOMException {
+	public void setParameter(final String name, final Object value) throws DOMException {
 		synchronized (this) {
 
-			String nl = name.toLowerCase();
+			final String nl = name.toLowerCase();
 
 			if ("datatype-normalization".equals(nl) && (Boolean) value) {
 				parameters.put("validate", true);

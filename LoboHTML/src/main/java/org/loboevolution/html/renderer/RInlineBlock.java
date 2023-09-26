@@ -49,7 +49,7 @@ public class RInlineBlock extends BaseElementRenderable {
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RInlineBlock(final RenderableContainer container, RBlockInfo info) {
+	public RInlineBlock(final RenderableContainer container, final RBlockInfo info) {
 		super(container, info.getModelNode(), info.getPcontext());
 		final int display = modelNode.getRenderState().getDisplay();
 		final BaseElementRenderable child = (display == RenderState.DISPLAY_INLINE_TABLE) ? new RTable(info) : new RBlock(info);
@@ -131,7 +131,7 @@ public class RInlineBlock extends BaseElementRenderable {
 
     /** {@inheritDoc} */
     @Override
-    public void layout(int availWidth, int availHeight, boolean sizeOnly) {
+    public void layout(final int availWidth, final int availHeight, final boolean sizeOnly) {
         this.doLayout(availWidth, availHeight, sizeOnly);
     }
 

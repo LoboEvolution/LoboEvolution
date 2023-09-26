@@ -55,19 +55,15 @@ public class hc_nodeelementnodeattributesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddr;
-        NamedNodeMap addrAttr;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddr;
+        final NamedNodeMap addrAttr;
         Node attrNode;
         String attrName;
-        java.util.Collection<String> attrList = new java.util.ArrayList<>();
+        final java.util.Collection<String> attrList = new java.util.ArrayList<>();
 
-        java.util.Collection<String> htmlExpected = new java.util.ArrayList<>();
-        htmlExpected.add("title");
-        htmlExpected.add("class");
-
-        java.util.Collection<String> expected = new java.util.ArrayList<>();
+        final java.util.Collection<String> expected = new java.util.ArrayList<>();
         expected.add("title");
         expected.add("class");
         expected.add("dir");

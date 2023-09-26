@@ -47,12 +47,12 @@ import static org.junit.Assert.assertTrue;
 public class nodeinsertbefore24Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        CDATASection refNode;
-        Comment newNode;
+        final Document doc;
+        final Element element;
+        final CDATASection refNode;
+        final Comment newNode;
         HTMLCollection childList;
-        Node inserted;
+        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         element = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
         refNode = doc.createCDATASection("CDATASection");
@@ -62,7 +62,7 @@ public class nodeinsertbefore24Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = element.insertBefore(newNode, refNode);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

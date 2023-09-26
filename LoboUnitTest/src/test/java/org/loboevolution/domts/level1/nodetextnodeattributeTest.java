@@ -58,11 +58,11 @@ public class nodetextnodeattributeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node testAddr;
-        Text textNode;
-        NamedNodeMap attrList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node testAddr;
+        final Text textNode;
+        final NamedNodeMap attrList;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);

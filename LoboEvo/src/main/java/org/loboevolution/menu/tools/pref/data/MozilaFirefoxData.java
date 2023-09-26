@@ -60,11 +60,11 @@ public class MozilaFirefoxData extends BrowserData {
 
 	private static final String MOZ_HISTORY = "SELECT DISTINCT places.url, places.title FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
 
-	private static List<BookmarkInfo> getBookmarkInfo(String path) {
+	private static List<BookmarkInfo> getBookmarkInfo(final String path) {
 		final List<BookmarkInfo> bookmarks = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(MOZ_BOOKMARKS);
-				ResultSet rs = pstmt.executeQuery()) {
+		try (final Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
+             final PreparedStatement pstmt = conn.prepareStatement(MOZ_BOOKMARKS);
+             final ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				final BookmarkInfo bookmark = new BookmarkInfo();
 				bookmark.setUrl(rs.getString(1));
@@ -78,11 +78,11 @@ public class MozilaFirefoxData extends BrowserData {
 		return bookmarks;
 	}
 
-	private static List<CookieInfo> getCookieInfo(String path) {
+	private static List<CookieInfo> getCookieInfo(final String path) {
 		final List<CookieInfo> cookies = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(MOZ_COOKIES);
-				ResultSet rs = pstmt.executeQuery()) {
+		try (final Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
+             final PreparedStatement pstmt = conn.prepareStatement(MOZ_COOKIES);
+             final ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				cookies.add(CookieInfo.builder()
 						.domain(rs.getString(2))
@@ -100,13 +100,13 @@ public class MozilaFirefoxData extends BrowserData {
 		return cookies;
 	}
 
-	private static List<BookmarkInfo> getHostEntries(String path) {
+	private static List<BookmarkInfo> getHostEntries(final String path) {
 		final List<BookmarkInfo> hostEntries = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(MOZ_HISTORY);
-				ResultSet rs = pstmt.executeQuery()) {
+		try (final Connection conn = DriverManager.getConnection(DatabseSQLite.JDBC_SQLITE + path);
+             final PreparedStatement pstmt = conn.prepareStatement(MOZ_HISTORY);
+             final ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
-				BookmarkInfo info = new BookmarkInfo();
+				final BookmarkInfo info = new BookmarkInfo();
 				info.setUrl(rs.getString(1));
 				info.setTitle(rs.getString(2));
 				hostEntries.add(info);

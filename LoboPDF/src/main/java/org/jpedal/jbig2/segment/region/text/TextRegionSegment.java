@@ -65,7 +65,7 @@ public class TextRegionSegment extends RegionSegment {
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 * @param inlineImage a boolean.
 	 */
-	public TextRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage) {
+	public TextRegionSegment(final JBIG2StreamDecoder streamDecoder, final boolean inlineImage) {
 		super(streamDecoder);
 
 		this.inlineImage = inlineImage;
@@ -86,26 +86,26 @@ public class TextRegionSegment extends RegionSegment {
 		/** read text region Segment flags */
 		readTextRegionFlags();
 
-		short[] buff = new short[4];
+		final short[] buff = new short[4];
 		decoder.readByte(buff);
-		int noOfSymbolInstances = BinaryOperation.getInt32(buff);
+		final int noOfSymbolInstances = BinaryOperation.getInt32(buff);
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("noOfSymbolInstances = " + noOfSymbolInstances);
 
-		int noOfReferredToSegments = segmentHeader.getReferredToSegmentCount();
-		int[] referredToSegments = segmentHeader.getReferredToSegments();
+		final int noOfReferredToSegments = segmentHeader.getReferredToSegmentCount();
+		final int[] referredToSegments = segmentHeader.getReferredToSegments();
 
 		//List codeTables = new ArrayList();
-		List<Segment> segmentsReferenced = new LinkedList<>();
+		final List<Segment> segmentsReferenced = new LinkedList<>();
 		int noOfSymbols = 0;
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("noOfReferredToSegments = " + noOfReferredToSegments);
 
 		for (int i = 0; i < noOfReferredToSegments; i++) {
-			Segment seg = decoder.findSegment(referredToSegments[i]);
-			int type = seg.getSegmentHeader().getSegmentType();
+			final Segment seg = decoder.findSegment(referredToSegments[i]);
+			final int type = seg.getSegmentHeader().getSegmentType();
 
 			if (type == Segment.SYMBOL_DICTIONARY) {
 				segmentsReferenced.add(seg);
@@ -124,11 +124,11 @@ public class TextRegionSegment extends RegionSegment {
 		}
 
 		int currentSymbol = 0;
-		JBIG2Bitmap[] symbols = new JBIG2Bitmap[noOfSymbols];
-		for (Segment seg : segmentsReferenced) {
+		final JBIG2Bitmap[] symbols = new JBIG2Bitmap[noOfSymbols];
+		for (final Segment seg : segmentsReferenced) {
 			if (seg.getSegmentHeader().getSegmentType() == Segment.SYMBOL_DICTIONARY) {
-				JBIG2Bitmap[] bitmaps = ((SymbolDictionarySegment) seg).getBitmaps();
-				for (JBIG2Bitmap jbig2Bitmap : bitmaps) {
+				final JBIG2Bitmap[] bitmaps = ((SymbolDictionarySegment) seg).getBitmaps();
+				for (final JBIG2Bitmap jbig2Bitmap : bitmaps) {
 					symbols[currentSymbol] = jbig2Bitmap;
 					currentSymbol++;
 				}
@@ -146,11 +146,11 @@ public class TextRegionSegment extends RegionSegment {
 		int[][] huffmanRDYTable = null;
 		int[][] huffmanRSizeTable = null;
 
-		boolean sbHuffman = textRegionFlags.getFlagValue(TextRegionFlags.SB_HUFF) != 0;
+		final boolean sbHuffman = textRegionFlags.getFlagValue(TextRegionFlags.SB_HUFF) != 0;
 
 		int i = 0;
 		if (sbHuffman) {
-			int sbHuffFS = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_FS);
+			final int sbHuffFS = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_FS);
 			if (sbHuffFS == 0) {
 				huffmanFSTable = HuffmanDecoder.huffmanTableF;
 			} else if (sbHuffFS == 1) {
@@ -159,7 +159,7 @@ public class TextRegionSegment extends RegionSegment {
 
 			}
 
-			int sbHuffDS = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_DS);
+			final int sbHuffDS = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_DS);
 			if (sbHuffDS == 0) {
 				huffmanDSTable = HuffmanDecoder.huffmanTableH;
 			} else if (sbHuffDS == 1) {
@@ -170,7 +170,7 @@ public class TextRegionSegment extends RegionSegment {
 				
 			}
 
-			int sbHuffDT = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_DT);
+			final int sbHuffDT = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_DT);
 			if (sbHuffDT == 0) {
 				huffmanDTTable = HuffmanDecoder.huffmanTableK;
 			} else if (sbHuffDT == 1) {
@@ -181,7 +181,7 @@ public class TextRegionSegment extends RegionSegment {
 
 			}
 
-			int sbHuffRDW = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RDW);
+			final int sbHuffRDW = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RDW);
 			if (sbHuffRDW == 0) {
 				huffmanRDWTable = HuffmanDecoder.huffmanTableN;
 			} else if (sbHuffRDW == 1) {
@@ -190,7 +190,7 @@ public class TextRegionSegment extends RegionSegment {
 
 			}
 
-			int sbHuffRDH = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RDH);
+			final int sbHuffRDH = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RDH);
 			if (sbHuffRDH == 0) {
 				huffmanRDHTable = HuffmanDecoder.huffmanTableN;
 			} else if (sbHuffRDH == 1) {
@@ -199,7 +199,7 @@ public class TextRegionSegment extends RegionSegment {
 
 			}
 
-			int sbHuffRDX = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RDX);
+			final int sbHuffRDX = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RDX);
 			if (sbHuffRDX == 0) {
 				huffmanRDXTable = HuffmanDecoder.huffmanTableN;
 			} else if (sbHuffRDX == 1) {
@@ -208,7 +208,7 @@ public class TextRegionSegment extends RegionSegment {
 
 			}
 
-			int sbHuffRDY = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RDY);
+			final int sbHuffRDY = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RDY);
 			if (sbHuffRDY == 0) {
 				huffmanRDYTable = HuffmanDecoder.huffmanTableN;
 			} else if (sbHuffRDY == 1) {
@@ -217,7 +217,7 @@ public class TextRegionSegment extends RegionSegment {
 
 			}
 
-			int sbHuffRSize = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RSIZE);
+			final int sbHuffRSize = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_RSIZE);
 			if (sbHuffRSize == 0) {
 				huffmanRSizeTable = HuffmanDecoder.huffmanTableA;
 			} else {
@@ -277,31 +277,31 @@ public class TextRegionSegment extends RegionSegment {
 			arithmeticDecoder.start();
 		}
 
-		boolean symbolRefine = textRegionFlags.getFlagValue(TextRegionFlags.SB_REFINE) != 0;
-		int logStrips = textRegionFlags.getFlagValue(TextRegionFlags.LOG_SB_STRIPES);
-		int defaultPixel = textRegionFlags.getFlagValue(TextRegionFlags.SB_DEF_PIXEL);
-		int combinationOperator = textRegionFlags.getFlagValue(TextRegionFlags.SB_COMB_OP);
-		boolean transposed = textRegionFlags.getFlagValue(TextRegionFlags.TRANSPOSED) != 0;
-		int referenceCorner = textRegionFlags.getFlagValue(TextRegionFlags.REF_CORNER);
-		int sOffset = textRegionFlags.getFlagValue(TextRegionFlags.SB_DS_OFFSET);
-		int template = textRegionFlags.getFlagValue(TextRegionFlags.SB_R_TEMPLATE);
+		final boolean symbolRefine = textRegionFlags.getFlagValue(TextRegionFlags.SB_REFINE) != 0;
+		final int logStrips = textRegionFlags.getFlagValue(TextRegionFlags.LOG_SB_STRIPES);
+		final int defaultPixel = textRegionFlags.getFlagValue(TextRegionFlags.SB_DEF_PIXEL);
+		final int combinationOperator = textRegionFlags.getFlagValue(TextRegionFlags.SB_COMB_OP);
+		final boolean transposed = textRegionFlags.getFlagValue(TextRegionFlags.TRANSPOSED) != 0;
+		final int referenceCorner = textRegionFlags.getFlagValue(TextRegionFlags.REF_CORNER);
+		final int sOffset = textRegionFlags.getFlagValue(TextRegionFlags.SB_DS_OFFSET);
+		final int template = textRegionFlags.getFlagValue(TextRegionFlags.SB_R_TEMPLATE);
 
 		if (symbolRefine) {
 			arithmeticDecoder.resetRefinementStats(template, null);
 		}
 
-		JBIG2Bitmap bitmap = new JBIG2Bitmap(regionBitmapWidth, regionBitmapHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
+		final JBIG2Bitmap bitmap = new JBIG2Bitmap(regionBitmapWidth, regionBitmapHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 
 		bitmap.readTextRegion(sbHuffman, symbolRefine, noOfSymbolInstances, logStrips, noOfSymbols, symbolCodeTable, symbolCodeLength, symbols, defaultPixel, combinationOperator, transposed, referenceCorner, sOffset, huffmanFSTable, huffmanDSTable, huffmanDTTable, huffmanRDWTable, huffmanRDHTable, huffmanRDXTable, huffmanRDYTable, huffmanRSizeTable, template, symbolRegionAdaptiveTemplateX, symbolRegionAdaptiveTemplateY, decoder);
 
 		if (inlineImage) {
-			PageInformationSegment pageSegment = decoder.findPageSegement(segmentHeader.getPageAssociation());
-			JBIG2Bitmap pageBitmap = pageSegment.getPageBitmap();
+			final PageInformationSegment pageSegment = decoder.findPageSegement(segmentHeader.getPageAssociation());
+			final JBIG2Bitmap pageBitmap = pageSegment.getPageBitmap();
 
 			if (JBIG2StreamDecoder.debug)
 				logger.info(pageBitmap + " " + bitmap);
 
-			int externalCombinationOperator = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
+			final int externalCombinationOperator = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
 			pageBitmap.combine(bitmap, regionBitmapXLocation, regionBitmapYLocation, externalCombinationOperator);
 		} else {
 			bitmap.setBitmapNumber(getSegmentHeader().getSegmentNumber());
@@ -313,7 +313,7 @@ public class TextRegionSegment extends RegionSegment {
 
 	private void readTextRegionFlags() throws IOException {
 		/** extract text region Segment flags */
-		short[] textRegionFlagsField = new short[2];
+		final short[] textRegionFlagsField = new short[2];
 		decoder.readByte(textRegionFlagsField);
 
 		int flags = BinaryOperation.getInt16(textRegionFlagsField);
@@ -322,10 +322,10 @@ public class TextRegionSegment extends RegionSegment {
 		if (JBIG2StreamDecoder.debug)
 			logger.info("text region Segment flags = " + flags);
 
-		boolean sbHuff = textRegionFlags.getFlagValue(TextRegionFlags.SB_HUFF) != 0;
+		final boolean sbHuff = textRegionFlags.getFlagValue(TextRegionFlags.SB_HUFF) != 0;
 		if (sbHuff) {
 			/** extract text region Segment Huffman flags */
-			short[] textRegionHuffmanFlagsField = new short[2];
+			final short[] textRegionHuffmanFlagsField = new short[2];
 			decoder.readByte(textRegionHuffmanFlagsField);
 
 			flags = BinaryOperation.getInt16(textRegionHuffmanFlagsField);
@@ -335,8 +335,8 @@ public class TextRegionSegment extends RegionSegment {
 				logger.info("text region segment Huffman flags = " + flags);
 		}
 
-		boolean sbRefine = textRegionFlags.getFlagValue(TextRegionFlags.SB_REFINE) != 0;
-		int sbrTemplate = textRegionFlags.getFlagValue(TextRegionFlags.SB_R_TEMPLATE);
+		final boolean sbRefine = textRegionFlags.getFlagValue(TextRegionFlags.SB_REFINE) != 0;
+		final int sbrTemplate = textRegionFlags.getFlagValue(TextRegionFlags.SB_R_TEMPLATE);
 		if (sbRefine && sbrTemplate == 0) {
 			symbolRegionAdaptiveTemplateX[0] = readATValue();
 			symbolRegionAdaptiveTemplateY[0] = readATValue();

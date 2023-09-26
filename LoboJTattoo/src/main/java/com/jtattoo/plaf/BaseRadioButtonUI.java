@@ -81,7 +81,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installDefaults(AbstractButton b) {
+	public void installDefaults(final AbstractButton b) {
 		super.installDefaults(b);
 		b.setRolloverEnabled(true);
 		icon = UIManager.getIcon("RadioButton.icon");
@@ -90,11 +90,11 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g, final JComponent c) {
-		AbstractButton b = (AbstractButton) c;
+		final AbstractButton b = (AbstractButton) c;
 		g.setFont(c.getFont());
-		FontMetrics fm = JTattooUtilities.getFontMetrics(c, g, c.getFont());
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(c, g, c.getFont());
 
-		Insets i = c.getInsets();
+		final Insets i = c.getInsets();
 		size = b.getSize(size);
 		viewRect.x = i.left;
 		viewRect.y = i.top;
@@ -102,9 +102,9 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 		viewRect.height = size.height - (i.bottom + viewRect.y);
 		iconRect.x = iconRect.y = iconRect.width = iconRect.height = 0;
 		textRect.x = textRect.y = textRect.width = textRect.height = 0;
-		Icon altIcon = b.getIcon();
-		int iconTextGap = b.getIconTextGap();
-		String text = SwingUtilities.layoutCompoundLabel(c, fm, b.getText(),
+		final Icon altIcon = b.getIcon();
+		final int iconTextGap = b.getIconTextGap();
+		final String text = SwingUtilities.layoutCompoundLabel(c, fm, b.getText(),
 				altIcon != null ? altIcon : getDefaultIcon(), b.getVerticalAlignment(), b.getHorizontalAlignment(),
 				b.getVerticalTextPosition(), b.getHorizontalTextPosition(), viewRect, iconRect, textRect, iconTextGap);
 
@@ -130,24 +130,24 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link javax.swing.JComponent} object.
 	 */
-	protected void paintBackground(Graphics g, JComponent c) {
+	protected void paintBackground(final Graphics g, final JComponent c) {
 		g.setColor(c.getBackground());
 		g.fillRect(0, 0, c.getWidth(), c.getHeight());
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintFocus(Graphics g, Rectangle t, Dimension d) {
+	protected void paintFocus(final Graphics g, final Rectangle t, final Dimension d) {
 		g.setColor(AbstractLookAndFeel.getFocusColor());
 		BasicGraphicsUtils.drawDashedRect(g, t.x, t.y - 1, t.width + 1, t.height + 1);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {
-		AbstractButton b = (AbstractButton) c;
-		ButtonModel model = b.getModel();
-		Icon ico;
+	protected void paintIcon(final Graphics g, final JComponent c, final Rectangle iconRect) {
+		final AbstractButton b = (AbstractButton) c;
+		final ButtonModel model = b.getModel();
+		final Icon ico;
 		if (!model.isEnabled()) {
 			if (b.isSelected()) {
 				ico = b.getDisabledSelectedIcon();
@@ -193,10 +193,10 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 	 * @param text a {@link java.lang.String} object.
 	 * @param textRect a {@link java.awt.Rectangle} object.
 	 */
-	protected void paintText(Graphics g, JComponent c, String text, Rectangle textRect) {
-		View v = (View) c.getClientProperty(BasicHTML.propertyKey);
+	protected void paintText(final Graphics g, final JComponent c, final String text, final Rectangle textRect) {
+		final View v = (View) c.getClientProperty(BasicHTML.propertyKey);
 		if (v != null) {
-			Graphics2D g2D = (Graphics2D) g;
+			final Graphics2D g2D = (Graphics2D) g;
 			Object savedRenderingHint = null;
 			if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 				savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -208,11 +208,11 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 				g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, savedRenderingHint);
 			}
 		} else {
-			AbstractButton b = (AbstractButton) c;
-			ButtonModel model = b.getModel();
+			final AbstractButton b = (AbstractButton) c;
+			final ButtonModel model = b.getModel();
 			g.setFont(b.getFont());
-			FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-			int mnemIndex = b.getDisplayedMnemonicIndex();
+			final FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
+			final int mnemIndex = b.getDisplayedMnemonicIndex();
 			if (model.isEnabled()) {
 				g.setColor(b.getForeground());
 				JTattooUtilities.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x,

@@ -59,17 +59,17 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 	 *
 	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 */
-	public TabbedPanePopupMenu(IBrowserPanel panel) {
+	public TabbedPanePopupMenu(final IBrowserPanel panel) {
 		add("New tab").addActionListener(e -> {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) getInvoker();
-			int index = tabbedPane.getSelectedIndex() + 1;
+			final int index = tabbedPane.getSelectedIndex() + 1;
 			newTab(index, tabbedPane, panel);
 		});
 		addSeparator();
 		this.closePage = add("Close");
 		this.closePage.addActionListener(e -> {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) getInvoker();
-			int tabidx = tabbedPane.getSelectedIndex();
+			final int tabidx = tabbedPane.getSelectedIndex();
 			tabbedPane.remove(tabidx);
 			closeTab(tabidx, tabbedPane, panel);
 		});
@@ -115,7 +115,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 
 	/** {@inheritDoc} */
 	@Override
-	public void show(Component c, int x, int y) {
+	public void show(final Component c, final int x, final int y) {
 		if (c instanceof DnDTabbedPane) {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) c;
 			this.closePage.setVisible(tabbedPane.indexAtLocation(x, y) >= 0);
@@ -129,17 +129,17 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 	}
 	
 	
-	private void newTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
+	private void newTab(final int index, final DnDTabbedPane tabbedPane, final IBrowserPanel panel) {
 		tabbedPane.insertTab("New Tab", null, new WelcomePanel(panel), null, index);
 		tabbedPane.setSelectedIndex(index);
 		TabStore.insertTab(index, "");
-		IBrowserFrame browserFrame = panel.getBrowserFrame();
+		final IBrowserFrame browserFrame = panel.getBrowserFrame();
 		browserFrame.getToolbar().getAddressBar().setText("");
 		panel.getScroll().getViewport().add(tabbedPane);
 	}
 	
-	private void closeTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
-		List<TabInfo> tabs = TabStore.getTabs();
+	private void closeTab(final int index, final DnDTabbedPane tabbedPane, final IBrowserPanel panel) {
+		final List<TabInfo> tabs = TabStore.getTabs();
 		for (int i = 0; i < tabs.size(); i++) {
 			
 			if (i == index) {
@@ -149,10 +149,10 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 			
 			if (i > index) {
 				WebStore.deleteStorage(1, index);
-				TabInfo tabInfo = tabs.get(i);
+				final TabInfo tabInfo = tabs.get(i);
 				TabStore.deleteTab(i);
 				TabStore.insertTab(i-1, tabInfo.getUrl());
-				IBrowserFrame browserFrame = panel.getBrowserFrame();
+				final IBrowserFrame browserFrame = panel.getBrowserFrame();
 				browserFrame.getToolbar().getAddressBar().setText(tabInfo.getUrl());
 			}
 		}
@@ -161,25 +161,25 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 	
 	
 	private void closeAllTab() {
-		List<TabInfo> tabs = TabStore.getTabs();
+		final List<TabInfo> tabs = TabStore.getTabs();
 		for (int i = 0; i < tabs.size(); i++) {
 			WebStore.deleteStorage(1, i);
 			TabStore.deleteTab(i);
 		}
 	}
 	
-	private void closeOtherTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
-		List<TabInfo> tabs = TabStore.getTabs();
+	private void closeOtherTab(final int index, final DnDTabbedPane tabbedPane, final IBrowserPanel panel) {
+		final List<TabInfo> tabs = TabStore.getTabs();
 		for (int i = 0; i < tabs.size(); i++) {
 			if (i != index) {
 				WebStore.deleteStorage(1, i);
 				TabStore.deleteTab(i);
 			} else {
 				WebStore.deleteStorage(1, index);
-				TabInfo tabInfo = tabs.get(index);
+				final TabInfo tabInfo = tabs.get(index);
 				TabStore.deleteTab(index);
 				TabStore.insertTab(0, tabInfo.getUrl());
-				IBrowserFrame browserFrame = panel.getBrowserFrame();
+				final IBrowserFrame browserFrame = panel.getBrowserFrame();
 				browserFrame.getToolbar().getAddressBar().setText(tabInfo.getUrl());
 			}
 		}

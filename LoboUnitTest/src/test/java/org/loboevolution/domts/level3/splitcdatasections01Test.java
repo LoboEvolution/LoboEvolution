@@ -50,14 +50,14 @@ import static org.junit.Assert.assertTrue;
 public class splitcdatasections01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        DOMConfiguration domConfig;
-        HTMLCollection elemList;
-        CDATASection newChild;
-        Node oldChild;
-        Node retval;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final Element elem;
+        final DOMConfiguration domConfig;
+        final HTMLCollection elemList;
+        final CDATASection newChild;
+        final Node oldChild;
+        final Node retval;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         List<DOMError> errors;
 

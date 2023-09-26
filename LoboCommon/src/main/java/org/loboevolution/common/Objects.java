@@ -35,17 +35,17 @@ import java.beans.PropertyDescriptor;
  */
 public class Objects {
 
-	public static <M> void merge(M target, M destination) {
+	public static <M> void merge(final M target, final M destination) {
 		try {
-			BeanInfo beanInfo = Introspector.getBeanInfo(target.getClass());
+			final BeanInfo beanInfo = Introspector.getBeanInfo(target.getClass());
 
 			// Iterate over all the attributes
-			for (PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors()) {
+			for (final PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors()) {
 
 				// Only copy writable attributes
 				if (descriptor.getWriteMethod() != null) {
-					Object originalValue = descriptor.getReadMethod().invoke(target);
-					Object defaultValue = descriptor.getReadMethod().invoke(destination);
+					final Object originalValue = descriptor.getReadMethod().invoke(target);
+					final Object defaultValue = descriptor.getReadMethod().invoke(destination);
 					if (originalValue == null || "".equals(originalValue)) {
 						descriptor.getWriteMethod().invoke(target, defaultValue);
 					} else {
@@ -56,7 +56,7 @@ public class Objects {
 
 				}
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

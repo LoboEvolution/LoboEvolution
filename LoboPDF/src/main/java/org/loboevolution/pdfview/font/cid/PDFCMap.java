@@ -58,7 +58,7 @@ public abstract class PDFCMap {
      * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
      * @throws java.io.IOException if any.
      */
-    public static PDFCMap getCMap(PDFObject map) throws IOException {
+    public static PDFCMap getCMap(final PDFObject map) throws IOException {
         if (map.getType() == PDFObject.NAME) {
             return getCMap(map.getStringValue());
         } else if (map.getType() == PDFObject.STREAM) {
@@ -75,7 +75,7 @@ public abstract class PDFCMap {
      * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
      * @throws java.io.IOException if any.
      */
-    public static PDFCMap getCMap(String mapName) throws IOException {
+    public static PDFCMap getCMap(final String mapName) throws IOException {
         if (cache == null) {
             populateCache();
         }
@@ -98,7 +98,7 @@ public abstract class PDFCMap {
         // add the Identity-H map
         cache.put("Identity-H", new PDFCMap() {
             @Override
-			public char map(char src) {
+			public char map(final char src) {
                 return src;
             }
         });
@@ -111,7 +111,7 @@ public abstract class PDFCMap {
      * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
      * @throws java.io.IOException if any.
      */
-    protected static PDFCMap parseCMap(PDFObject map) throws IOException {
+    protected static PDFCMap parseCMap(final PDFObject map) throws IOException {
        	return new ToUnicodeMap(map);
     }
     
@@ -129,7 +129,7 @@ public abstract class PDFCMap {
      * @param src a char.
      * @return a int.
      */
-    public int getFontID(char src) {
+    public int getFontID(final char src) {
         return 0;
     }
     

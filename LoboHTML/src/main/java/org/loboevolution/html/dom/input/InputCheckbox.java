@@ -49,7 +49,7 @@ public class InputCheckbox {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputCheckbox(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputCheckbox(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		checkBox.setOpaque(false);
 		if (modelNode.getTitle() != null) checkBox.setToolTipText(modelNode.getTitle());
 		checkBox.setVisible(!modelNode.isHidden());
@@ -59,7 +59,7 @@ public class InputCheckbox {
 		checkBox.setSelected(modelNode.isChecked());
 		checkBox.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		checkBox.addActionListener(event -> HtmlController.getInstance().onPressed(modelNode, null, 0, 0));
-		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
+		final MouseInputAdapter mouseHandler = new MouseInputAdapter() {
 
 			@Override
 			public void mouseEntered(final MouseEvent e) {

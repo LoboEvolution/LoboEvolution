@@ -34,7 +34,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -59,8 +58,8 @@ public class hc_commentgetcommentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NodeList elementList;
+        final Document doc;
+        final NodeList elementList;
         Node child;
         String childName;
         String childValue;

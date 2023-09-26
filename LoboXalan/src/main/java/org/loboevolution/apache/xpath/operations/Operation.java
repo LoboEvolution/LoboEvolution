@@ -64,7 +64,7 @@ public class Operation extends Expression {
    * @param l The left expression operand.
    * @param r The right expression operand.
    */
-  public void setLeftRight(Expression l, Expression r) {
+  public void setLeftRight(final Expression l, final Expression r) {
     m_left = l;
     m_right = r;
     l.exprSetParent(this);
@@ -73,12 +73,12 @@ public class Operation extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
 
-    XObject left = m_left.execute(xctxt, true);
-    XObject right = m_right.execute(xctxt, true);
+    final XObject left = m_left.execute(xctxt, true);
+    final XObject right = m_right.execute(xctxt, true);
 
-    XObject result = operate(left, right);
+    final XObject result = operate(left, right);
     left.detach();
     right.detach();
     return result;
@@ -92,14 +92,14 @@ public class Operation extends Expression {
    * @return non-null reference to the XObject that represents the result of the operation.
    * @throws org.loboevolution.javax.xml.transform.TransformerException in case of error
    */
-  public XObject operate(XObject left, XObject right)
+  public XObject operate(final XObject left, final XObject right)
       throws org.loboevolution.javax.xml.transform.TransformerException {
     return null; // no-op
   }
 
   /** {@inheritDoc} */
   @Override
-  public void callVisitors(XPathVisitor visitor) {
+  public void callVisitors(final XPathVisitor visitor) {
     if (visitor.visitBinaryOperation()) {
       m_left.callVisitors(visitor);
       m_right.callVisitors(visitor);
@@ -108,7 +108,7 @@ public class Operation extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!isSameClass(expr)) return false;
 
     if (!m_left.deepEquals(((Operation) expr).m_left)) return false;

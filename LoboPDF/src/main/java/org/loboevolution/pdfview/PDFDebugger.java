@@ -31,7 +31,6 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -98,16 +97,16 @@ public class PDFDebugger {
      * @param image a {@link java.awt.image.BufferedImage} object.
      * @param name a {@link java.lang.String} object.
      */
-    public static void debugImage(BufferedImage image, String name) {
+    public static void debugImage(final BufferedImage image, final String name) {
         if (PDFDebugger.DEBUG_IMAGES) {
             if (image == null) {
                 return;
             }
             try {
                 // retrieve image
-                File outputfile = new File("D:/tmp/PDFimages/" + name + ".png");
+                final File outputfile = new File("D:/tmp/PDFimages/" + name + ".png");
                 ImageIO.write(image, "png", outputfile);
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 BaseWatchable.getErrorHandler().publishException(e);
             }
         }
@@ -120,7 +119,7 @@ public class PDFDebugger {
      * @param msg a {@link java.lang.String} object.
      * @param level a int.
      */
-    public static void debug(String msg, int level) {
+    public static void debug(final String msg, final int level) {
         if (level > debuglevel) {
             logger.info(escape(msg));
         }
@@ -132,7 +131,7 @@ public class PDFDebugger {
      *
      * @param msg a {@link java.lang.String} object.
      */
-    public static void debug(String msg) {
+    public static void debug(final String msg) {
         debug(msg, debuglevel);
     }
 
@@ -142,8 +141,8 @@ public class PDFDebugger {
      * @param msg a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String escape(String msg) {
-        StringBuilder sb = new StringBuilder();
+    public static String escape(final String msg) {
+        final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < msg.length(); i++) {
             char c = msg.charAt(i);
             if (c != '\n' && (c < 32 || c >= 127)) {
@@ -159,7 +158,7 @@ public class PDFDebugger {
      *
      * @param level a int.
      */
-    public static void setDebugLevel(int level) {
+    public static void setDebugLevel(final int level) {
         debuglevel = level;
     }
 
@@ -170,7 +169,7 @@ public class PDFDebugger {
      * @param stream an array of {@link byte} objects.
      * @return a {@link java.lang.String} object.
      */
-    public static String dumpStream(byte[] stream) {
+    public static String dumpStream(final byte[] stream) {
         return PDFDebugger.escape(new String(stream).replace('\r', '\n'));
     }
 
@@ -180,38 +179,18 @@ public class PDFDebugger {
      * @param path a {@link java.awt.geom.GeneralPath} object.
      * @param operation a {@link java.lang.String} object.
      */
-    public static void logPath(GeneralPath path, String operation) {
+    public static void logPath(final GeneralPath path, final String operation) {
         if (PDFDebugger.DEBUG_PATH) {
             if (operation != null) {
                 logger.info("Operation: " + operation + "; ");
             }
             logger.info("Current path: ");
-            Rectangle b = path.getBounds();
+            final Rectangle b = path.getBounds();
             if (b != null)
                 logger.info("        Bounds [x=" + b.x + ",y=" + b.y + ",width=" + b.width + ",height=" + b.height + "]");
-            Point2D p = path.getCurrentPoint();
+            final Point2D p = path.getCurrentPoint();
             if (p != null)
                 logger.info("        Point  [x=" + p.getX() + ",y=" + p.getY() + "]");
-        }
-    }
-
-    /**
-     * take a byte array and write a temporary file with it's data.
-     * This is intended to capture data for analysis, like after decoders.
-     *
-     * @param ary an array of {@link byte} objects.
-     * @param name a {@link java.lang.String} object.
-     */
-    public static void emitDataFile(byte[] ary, String name) {
-        FileOutputStream ostr;
-        try {
-            File file = File.createTempFile("DateFile", name);
-            ostr = new FileOutputStream(file);
-            PDFDebugger.debug("Write: " + file.getPath());
-            ostr.write(ary);
-            ostr.close();
-        } catch (IOException ex) {
-            // ignore
         }
     }
 
@@ -221,14 +200,15 @@ public class PDFDebugger {
      * @param obj a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
-    public static void dump(PDFObject obj) throws IOException {
+    public static void dump(final PDFObject obj) throws IOException {
         PDFDebugger.debug("dumping PDF object: " + obj);
         if (obj == null) {
             return;
         }
-        Map<String, PDFObject> dict = obj.getDictionary();
+        final Map<String, PDFObject> dict = obj.getDictionary();
         PDFDebugger.debug("   dict = " + dict);
-        for (Object key : dict.keySet()) {
+        for (final Map.Entry<String, PDFObject> entry : dict.entrySet()) {
+            final String key = entry.getKey();
             PDFDebugger.debug("key = " + key + " value = " + dict.get(key));
         }
     }

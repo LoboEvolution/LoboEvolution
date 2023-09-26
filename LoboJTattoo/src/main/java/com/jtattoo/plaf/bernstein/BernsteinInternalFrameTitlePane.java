@@ -54,17 +54,17 @@ public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane 
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public BernsteinInternalFrameTitlePane(JInternalFrame f) {
+	public BernsteinInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		BernsteinUtils.fillComponent(g, this);
-		Graphics2D g2D = (Graphics2D) g;
-		Composite composite = g2D.getComposite();
-		AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite composite = g2D.getComposite();
+		final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 		g2D.setComposite(alpha);
 		JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDefaultColors(), 0, 0, getWidth(),
 				getHeight());
@@ -79,16 +79,16 @@ public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane 
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintPalette(Graphics g) {
+	public void paintPalette(final Graphics g) {
 		BernsteinUtils.fillComponent(g, this);
-		Graphics2D g2D = (Graphics2D) g;
-		Composite composite = g2D.getComposite();
-		AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite composite = g2D.getComposite();
+		final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 		g2D.setComposite(alpha);
 		JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDefaultColors(), 0, 0, getWidth(),
 				getHeight());

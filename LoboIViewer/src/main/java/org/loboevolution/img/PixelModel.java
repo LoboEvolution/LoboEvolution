@@ -49,7 +49,7 @@ public class PixelModel {
 	 * @param listener
 	 *            the listener to add
 	 */
-	public void addChangeListener(ChangeListener listener) {
+	public void addChangeListener(final ChangeListener listener) {
 		listenerList.add(ChangeListener.class, listener);
 	}
 
@@ -59,7 +59,7 @@ public class PixelModel {
 	 * @param listener
 	 *            the listener to remove
 	 */
-	public void removeChangeListener(ChangeListener listener) {
+	public void removeChangeListener(final ChangeListener listener) {
 		listenerList.remove(ChangeListener.class, listener);
 	}
 
@@ -67,8 +67,8 @@ public class PixelModel {
 	 * Notifies the registered listeners that the model has changed.
 	 */
 	protected void fireChange() {
-		Object[] listeners = listenerList.getListenerList();
-		ChangeEvent event = new ChangeEvent(this);
+		final Object[] listeners = listenerList.getListenerList();
+		final ChangeEvent event = new ChangeEvent(this);
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ChangeListener.class) {
 				((ChangeListener) listeners[i + 1]).stateChanged(event);
@@ -80,10 +80,8 @@ public class PixelModel {
 	 * Changes the pixel stored in this model. If either coordinate is negative, the
 	 * new value of the model will be (-1, -1).
 	 *
-	 * @param x
-	 *            the new x coordinate
-	 * @param y
-	 *            the new y coordinate
+	 * @param x the new x coordinate
+	 * @param y the new y coordinate
 	 */
 	public void set(int x, int y) {
 		if (x < 0 || y < 0) {

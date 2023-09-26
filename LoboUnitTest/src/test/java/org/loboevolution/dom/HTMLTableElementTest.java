@@ -180,7 +180,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    alert(rows.length);\n"
                 + "  </script>\n"
                 + "</body></html>";
-        String[] messages = {"2", "true", "3", "2", "3", "2"};
+        final String[] messages = {"2", "true", "3", "2", "3", "2"};
         checkHtmlAlert(html, messages);
     }
 

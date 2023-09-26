@@ -56,11 +56,11 @@ public class namednodemapsetnameditemns09Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entities;
-        NamedNodeMap notations;
-        Attr attr;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entities;
+        final NamedNodeMap notations;
+        final Attr attr;
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
@@ -70,7 +70,7 @@ public class namednodemapsetnameditemns09Test extends LoboUnitTest {
         boolean success = false;
         try {
             entities.setNamedItemNS(attr);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
         assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_entities", success);
@@ -78,7 +78,7 @@ public class namednodemapsetnameditemns09Test extends LoboUnitTest {
         success = false;
         try {
             notations.setNamedItemNS(attr);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
         assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_notations", success);

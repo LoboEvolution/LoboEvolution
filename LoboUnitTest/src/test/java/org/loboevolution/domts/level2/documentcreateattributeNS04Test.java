@@ -56,11 +56,11 @@ public class documentcreateattributeNS04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Attr attribute;
-        String namespaceURI = "http://www.w3.org/DOM/Test/Level2";
+        final String namespaceURI = "http://www.w3.org/DOM/Test/Level2";
         String qualifiedName;
-        java.util.List qualifiedNames = new java.util.ArrayList();
+        final java.util.List qualifiedNames = new java.util.ArrayList();
         qualifiedNames.add("_:");
         qualifiedNames.add(":0a");
         qualifiedNames.add(":");
@@ -77,7 +77,7 @@ public class documentcreateattributeNS04Test extends LoboUnitTest {
                 try {
                     attribute = doc.createAttributeNS(namespaceURI, qualifiedName);
                     fail("documentcreateattributeNS04");
-                } catch (DOMException expected) {
+                } catch (final DOMException expected) {
                 }
                 // END Android-changed
             }

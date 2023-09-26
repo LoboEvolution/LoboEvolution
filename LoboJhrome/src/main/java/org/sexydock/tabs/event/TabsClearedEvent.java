@@ -34,7 +34,7 @@ import java.util.List;
 public class TabsClearedEvent extends TabbedPaneEvent {
     public final List<Tab> removedTabs;
 
-    public TabsClearedEvent(JTabbedPane tabbedPane, long timestamp, List<Tab> removedTabs) {
+    public TabsClearedEvent(final JTabbedPane tabbedPane, final long timestamp, final List<Tab> removedTabs) {
         super(tabbedPane, timestamp);
         this.removedTabs = removedTabs;
     }

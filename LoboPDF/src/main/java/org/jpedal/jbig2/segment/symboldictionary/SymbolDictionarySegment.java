@@ -26,6 +26,7 @@
 package org.jpedal.jbig2.segment.symboldictionary;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jpedal.jbig2.JBIG2Exception;
@@ -66,7 +67,7 @@ public class SymbolDictionarySegment extends Segment {
 	 *
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 */
-	public SymbolDictionarySegment(JBIG2StreamDecoder streamDecoder) {
+	public SymbolDictionarySegment(final JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
@@ -86,12 +87,12 @@ public class SymbolDictionarySegment extends Segment {
 
 		//List codeTables = new ArrayList();
 		int numberOfInputSymbols = 0;
-		int noOfReferredToSegments = segmentHeader.getReferredToSegmentCount();
-		int[] referredToSegments = segmentHeader.getReferredToSegments();
+		final int noOfReferredToSegments = segmentHeader.getReferredToSegmentCount();
+		final int[] referredToSegments = segmentHeader.getReferredToSegments();
 
 		for (int i = 0; i < noOfReferredToSegments; i++) {
-			Segment seg = decoder.findSegment(referredToSegments[i]);
-			int type = seg.getSegmentHeader().getSegmentType();
+			final Segment seg = decoder.findSegment(referredToSegments[i]);
+			final int type = seg.getSegmentHeader().getSegmentType();
 
 			if (type == Segment.SYMBOL_DICTIONARY) {
 				numberOfInputSymbols += ((SymbolDictionarySegment) seg).noOfExportedSymbols;
@@ -107,12 +108,12 @@ public class SymbolDictionarySegment extends Segment {
 			i <<= 1;
 		}
 
-		JBIG2Bitmap[] bitmaps = new JBIG2Bitmap[numberOfInputSymbols + noOfNewSymbols];
+		final JBIG2Bitmap[] bitmaps = new JBIG2Bitmap[numberOfInputSymbols + noOfNewSymbols];
 
 		int k = 0;
 		SymbolDictionarySegment inputSymbolDictionary = null;
 		for (i = 0; i < noOfReferredToSegments; i++) {
-			Segment seg = decoder.findSegment(referredToSegments[i]);
+			final Segment seg = decoder.findSegment(referredToSegments[i]);
 			if (seg.getSegmentHeader().getSegmentType() == Segment.SYMBOL_DICTIONARY) {
 				inputSymbolDictionary = (SymbolDictionarySegment) seg;
 				for (int j = 0; j < inputSymbolDictionary.noOfExportedSymbols; j++) {
@@ -127,11 +128,11 @@ public class SymbolDictionarySegment extends Segment {
 		int[][] huffmanBMSizeTable = null;
 		int[][] huffmanAggInstTable = null;
 
-		boolean sdHuffman = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF) != 0;
-		int sdHuffmanDifferenceHeight = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF_DH);
-		int sdHuffmanDiferrenceWidth = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF_DW);
-		int sdHuffBitmapSize = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF_BM_SIZE);
-		int sdHuffAggregationInstances = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF_AGG_INST);
+		final boolean sdHuffman = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF) != 0;
+		final int sdHuffmanDifferenceHeight = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF_DH);
+		final int sdHuffmanDiferrenceWidth = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF_DW);
+		final int sdHuffBitmapSize = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF_BM_SIZE);
+		final int sdHuffAggregationInstances = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF_AGG_INST);
 
 		i = 0;
 		if (sdHuffman) {
@@ -164,8 +165,8 @@ public class SymbolDictionarySegment extends Segment {
 			}
 		}
 
-		int contextUsed = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.BITMAP_CC_USED);
-		int sdTemplate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_TEMPLATE);
+		final int contextUsed = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.BITMAP_CC_USED);
+		final int sdTemplate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_TEMPLATE);
 
 		if (!sdHuffman) {
 			if (contextUsed != 0 && inputSymbolDictionary != null) {
@@ -177,8 +178,8 @@ public class SymbolDictionarySegment extends Segment {
 			arithmeticDecoder.start();
 		}
 
-		int sdRefinementAggregate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_REF_AGG);
-		int sdRefinementTemplate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_R_TEMPLATE);
+		final int sdRefinementAggregate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_REF_AGG);
+		final int sdRefinementTemplate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_R_TEMPLATE);
 		if (sdRefinementAggregate != 0) {
 			if (contextUsed != 0 && inputSymbolDictionary != null) {
 				arithmeticDecoder.resetRefinementStats(sdRefinementTemplate, inputSymbolDictionary.refinementRegionStats);
@@ -187,7 +188,7 @@ public class SymbolDictionarySegment extends Segment {
 			}
 		}
 
-		int[] deltaWidths = new int[noOfNewSymbols];
+		final int[] deltaWidths = new int[noOfNewSymbols];
 
 		int deltaHeight = 0;
 		i = 0;
@@ -216,7 +217,7 @@ public class SymbolDictionarySegment extends Segment {
 
 				int deltaWidth = 0;
 
-				DecodeIntResult decodeIntResult;
+				final DecodeIntResult decodeIntResult;
 				if (sdHuffman) {
 					decodeIntResult = huffmanDecoder.decodeInt(huffmanDWTable);
 				} else {
@@ -266,16 +267,16 @@ public class SymbolDictionarySegment extends Segment {
 							referenceDY = arithmeticDecoder.decodeInt(arithmeticDecoder.iardyStats).intResult();
 						}
 						
-						JBIG2Bitmap referredToBitmap = bitmaps[symbolID];
+						final JBIG2Bitmap referredToBitmap = bitmaps[symbolID];
 
-						JBIG2Bitmap bitmap = new JBIG2Bitmap(symbolWidth, deltaHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
+						final JBIG2Bitmap bitmap = new JBIG2Bitmap(symbolWidth, deltaHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 						bitmap.readGenericRefinementRegion(sdRefinementTemplate, false, referredToBitmap, referenceDX, referenceDY, symbolDictionaryRAdaptiveTemplateX, 
 								symbolDictionaryRAdaptiveTemplateY);
 
 						bitmaps[numberOfInputSymbols + i] = bitmap;
 
 					} else {
-						JBIG2Bitmap bitmap = new JBIG2Bitmap(symbolWidth, deltaHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
+						final JBIG2Bitmap bitmap = new JBIG2Bitmap(symbolWidth, deltaHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 						bitmap.readTextRegion(sdHuffman, true, refAggNum, 0, numberOfInputSymbols + i, null, symbolCodeLength, bitmaps, 0, 0, false, 1, 0, 
 								HuffmanDecoder.huffmanTableF, HuffmanDecoder.huffmanTableH, HuffmanDecoder.huffmanTableK, HuffmanDecoder.huffmanTableO, HuffmanDecoder.huffmanTableO, 
 								HuffmanDecoder.huffmanTableO, HuffmanDecoder.huffmanTableO, HuffmanDecoder.huffmanTableA, sdRefinementTemplate, symbolDictionaryRAdaptiveTemplateX, 
@@ -284,7 +285,7 @@ public class SymbolDictionarySegment extends Segment {
 						bitmaps[numberOfInputSymbols + i] = bitmap;
 					}
 				} else {
-					JBIG2Bitmap bitmap = new JBIG2Bitmap(symbolWidth, deltaHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
+					final JBIG2Bitmap bitmap = new JBIG2Bitmap(symbolWidth, deltaHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 					bitmap.readBitmap(false, sdTemplate, false, false, null, symbolDictionaryAdaptiveTemplateX, symbolDictionaryAdaptiveTemplateY, 0);
 					bitmaps[numberOfInputSymbols + i] = bitmap;
 				}
@@ -293,23 +294,23 @@ public class SymbolDictionarySegment extends Segment {
 			}
 
 			if (sdHuffman && sdRefinementAggregate == 0) {
-				int bmSize = huffmanDecoder.decodeInt(huffmanBMSizeTable).intResult();
+				final int bmSize = huffmanDecoder.decodeInt(huffmanBMSizeTable).intResult();
 				decoder.consumeRemainingBits();
 
-				JBIG2Bitmap collectiveBitmap = new JBIG2Bitmap(totalWidth, deltaHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
+				final JBIG2Bitmap collectiveBitmap = new JBIG2Bitmap(totalWidth, deltaHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 
 				if (bmSize == 0) {
 
-					int padding = totalWidth % 8;
-					int bytesPerRow = (int) Math.ceil(totalWidth / 8d);
+					final int padding = totalWidth % 8;
+					final int bytesPerRow = (int) Math.ceil(totalWidth / 8d);
 
 					//short[] bitmap = new short[totalWidth];
 					//decoder.readByte(bitmap);
-                    int size = deltaHeight * ((totalWidth + 7) >> 3);
-                    short[] bitmap = new short[size];
+                    final int size = deltaHeight * ((totalWidth + 7) >> 3);
+                    final short[] bitmap = new short[size];
                     decoder.readByte(bitmap);
 
-					short[][] logicalMap = new short[deltaHeight][bytesPerRow];
+					final short[][] logicalMap = new short[deltaHeight][bytesPerRow];
 					int count = 0;
 					for (int row = 0; row < deltaHeight; row++) {
 						for (int col = 0; col < bytesPerRow; col++) {
@@ -324,10 +325,10 @@ public class SymbolDictionarySegment extends Segment {
 						for (int col = 0; col < bytesPerRow; col++) {
 							if (col == (bytesPerRow - 1)) { // this is the last
 								// byte in the row
-								short currentByte = logicalMap[row][col];
+								final short currentByte = logicalMap[row][col];
 								for (int bitPointer = 7; bitPointer >= padding; bitPointer--) {
-									short mask = (short) (1 << bitPointer);
-									int bit = (currentByte & mask) >> bitPointer;
+									final short mask = (short) (1 << bitPointer);
+									final int bit = (currentByte & mask) >> bitPointer;
 									
 									collectiveBitmap.setPixel(collectiveBitmapCol, collectiveBitmapRow, bit);
 									collectiveBitmapCol++;
@@ -335,10 +336,10 @@ public class SymbolDictionarySegment extends Segment {
 								collectiveBitmapRow++;
 								collectiveBitmapCol = 0;
 							} else {
-								short currentByte = logicalMap[row][col];
+								final short currentByte = logicalMap[row][col];
 								for (int bitPointer = 7; bitPointer >= 0; bitPointer--) {
-									short mask = (short) (1 << bitPointer);
-									int bit = (currentByte & mask) >> bitPointer;
+									final short mask = (short) (1 << bitPointer);
+									final int bit = (currentByte & mask) >> bitPointer;
 									
 									collectiveBitmap.setPixel(collectiveBitmapCol, collectiveBitmapRow, bit);
 									collectiveBitmapCol++;
@@ -385,7 +386,7 @@ public class SymbolDictionarySegment extends Segment {
 			export = !export;
 		}
 
-		int contextRetained = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.BITMAP_CC_RETAINED);
+		final int contextRetained = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.BITMAP_CC_RETAINED);
 		if (!sdHuffman && contextRetained == 1) {
             genericRegionStats = genericRegionStats.copy();
 			if (sdRefinementAggregate == 1) {
@@ -399,18 +400,18 @@ public class SymbolDictionarySegment extends Segment {
 
 	private void readSymbolDictionaryFlags() throws IOException {
 		/** extract symbol dictionary flags */
-		short[] symbolDictionaryFlagsField = new short[2];
+		final short[] symbolDictionaryFlagsField = new short[2];
 		decoder.readByte(symbolDictionaryFlagsField);
 
-		int flags = BinaryOperation.getInt16(symbolDictionaryFlagsField);
+		final int flags = BinaryOperation.getInt16(symbolDictionaryFlagsField);
 		symbolDictionaryFlags.setFlags(flags);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("symbolDictionaryFlags = " + flags);
+			logger.log(Level.INFO, () -> "symbolDictionaryFlags: " + flags);
 
 		// symbol dictionary AT flags
-		int sdHuff = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF);
-		int sdTemplate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_TEMPLATE);
+		final int sdHuff = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF);
+		final int sdTemplate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_TEMPLATE);
 		if (sdHuff == 0) {
 			if (sdTemplate == 0) {
 				symbolDictionaryAdaptiveTemplateX[0] = readATValue();
@@ -428,8 +429,8 @@ public class SymbolDictionarySegment extends Segment {
 		}
 
 		// symbol dictionary refinement AT flags
-		int refAgg = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_REF_AGG);
-		int sdrTemplate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_R_TEMPLATE);
+		final int refAgg = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_REF_AGG);
+		final int sdrTemplate = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_R_TEMPLATE);
 		if (refAgg != 0 && sdrTemplate == 0) {
 			symbolDictionaryRAdaptiveTemplateX[0] = readATValue();
 			symbolDictionaryRAdaptiveTemplateY[0] = readATValue();
@@ -438,20 +439,20 @@ public class SymbolDictionarySegment extends Segment {
 		}
 
 		/** extract no of exported symbols */
-		short[] noOfExportedSymbolsField = new short[4];
+		final short[] noOfExportedSymbolsField = new short[4];
 		decoder.readByte(noOfExportedSymbolsField);
 
-		int noOfExportedSymbols = BinaryOperation.getInt32(noOfExportedSymbolsField);
+		final int noOfExportedSymbols = BinaryOperation.getInt32(noOfExportedSymbolsField);
         this.noOfExportedSymbols = noOfExportedSymbols;
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("noOfExportedSymbols = " + noOfExportedSymbols);
 
 		/** extract no of new symbols */
-		short[] noOfNewSymbolsField = new short[4];
+		final short[] noOfNewSymbolsField = new short[4];
 		decoder.readByte(noOfNewSymbolsField);
 
-		int noOfNewSymbols = BinaryOperation.getInt32(noOfNewSymbolsField);
+		final int noOfNewSymbols = BinaryOperation.getInt32(noOfNewSymbolsField);
         this.noOfNewSymbols = noOfNewSymbols;
 
 		if (JBIG2StreamDecoder.debug)
@@ -472,7 +473,7 @@ public class SymbolDictionarySegment extends Segment {
 	 *
 	 * @param noOfExportedSymbols a int.
 	 */
-	public void setNoOfExportedSymbols(int noOfExportedSymbols) {
+	public void setNoOfExportedSymbols(final int noOfExportedSymbols) {
 		this.noOfExportedSymbols = noOfExportedSymbols;
 	}
 
@@ -490,7 +491,7 @@ public class SymbolDictionarySegment extends Segment {
 	 *
 	 * @param noOfNewSymbols a int.
 	 */
-	public void setNoOfNewSymbols(int noOfNewSymbols) {
+	public void setNoOfNewSymbols(final int noOfNewSymbols) {
 		this.noOfNewSymbols = noOfNewSymbols;
 	}
 
@@ -517,7 +518,7 @@ public class SymbolDictionarySegment extends Segment {
 	 *
 	 * @param symbolDictionaryFlags a {@link org.jpedal.jbig2.segment.symboldictionary.SymbolDictionaryFlags} object.
 	 */
-	public void setSymbolDictionaryFlags(SymbolDictionaryFlags symbolDictionaryFlags) {
+	public void setSymbolDictionaryFlags(final SymbolDictionaryFlags symbolDictionaryFlags) {
 		this.symbolDictionaryFlags = symbolDictionaryFlags;
 	}
 
@@ -535,7 +536,7 @@ public class SymbolDictionarySegment extends Segment {
 	 *
 	 * @param genericRegionStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
 	 */
-	public void setGenericRegionStats(ArithmeticDecoderStats genericRegionStats) {
+	public void setGenericRegionStats(final ArithmeticDecoderStats genericRegionStats) {
 		this.genericRegionStats = genericRegionStats;
 	}
 
@@ -544,7 +545,7 @@ public class SymbolDictionarySegment extends Segment {
 	 *
 	 * @param refinementRegionStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
 	 */
-	public void setRefinementRegionStats(ArithmeticDecoderStats refinementRegionStats) {
+	public void setRefinementRegionStats(final ArithmeticDecoderStats refinementRegionStats) {
 		this.refinementRegionStats = refinementRegionStats;
 	}
 

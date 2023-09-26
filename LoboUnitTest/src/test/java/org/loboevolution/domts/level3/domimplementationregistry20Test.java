@@ -57,12 +57,12 @@ public class domimplementationregistry20Test extends LoboUnitTest {
        
         DOMImplementation domImpl;
         boolean hasFeature;
-        DOMImplementation baseImpl;
-        String nullVersion = null;
+        final DOMImplementation baseImpl;
+        final String nullVersion = null;
 
-        DOMImplementationList domImplList;
-        int length;
-         DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationList domImplList;
+        final int length;
+         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("HTML");
         length = (int) domImplList.getLength();

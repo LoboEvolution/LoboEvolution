@@ -46,9 +46,9 @@ import static org.junit.Assert.assertNull;
 public class domimplementationgetfeature06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        DOMImplementation domImplReturned;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final DOMImplementation domImplReturned;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
         domImplReturned = (DOMImplementation) domImpl.getFeature("1-1", "*");

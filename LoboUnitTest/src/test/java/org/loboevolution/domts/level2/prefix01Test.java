@@ -57,9 +57,9 @@ public class prefix01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node createdNode;
-        String prefix;
+        final Document doc;
+        final Node createdNode;
+        final String prefix;
         doc = sampleXmlFile("staffNS.xml");
         createdNode = doc.createElement("test:employee");
         prefix = createdNode.getPrefix();

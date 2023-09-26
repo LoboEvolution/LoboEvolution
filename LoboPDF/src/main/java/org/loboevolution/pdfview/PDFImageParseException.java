@@ -40,7 +40,7 @@ public class PDFImageParseException extends IOException {
      *
      * @param msg a {@link java.lang.String} object.
      */
-    public PDFImageParseException(String msg) {
+    public PDFImageParseException(final String msg) {
         super(msg);
     }
 
@@ -50,7 +50,7 @@ public class PDFImageParseException extends IOException {
      * @param msg a {@link java.lang.String} object.
      * @param cause a {@link java.lang.Throwable} object.
      */
-    public PDFImageParseException(String msg, Throwable cause) {
+    public PDFImageParseException(final String msg, final Throwable cause) {
         this(msg);
         initCause(cause);
     }

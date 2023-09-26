@@ -73,7 +73,7 @@ public final class JBIG2Bitmap {
 	 * @param huffmanDecoder a {@link org.jpedal.jbig2.decoders.HuffmanDecoder} object.
 	 * @param mmrDecoder a {@link org.jpedal.jbig2.decoders.MMRDecoder} object.
 	 */
-	public JBIG2Bitmap(int width, int height, ArithmeticDecoder arithmeticDecoder, HuffmanDecoder huffmanDecoder, MMRDecoder mmrDecoder) {
+	public JBIG2Bitmap(final int width, final int height, final ArithmeticDecoder arithmeticDecoder, final HuffmanDecoder huffmanDecoder, final MMRDecoder mmrDecoder) {
 		this.width = width;
 		this.height = height;
 		this.arithmeticDecoder = arithmeticDecoder;
@@ -99,15 +99,15 @@ public final class JBIG2Bitmap {
 	 * @throws java.io.IOException if any.
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 */
-	public void readBitmap(boolean useMMR, int template, boolean typicalPredictionGenericDecodingOn, boolean useSkip, JBIG2Bitmap skipBitmap, short[] adaptiveTemplateX, short[] adaptiveTemplateY, int mmrDataLength) throws IOException, JBIG2Exception {
+	public void readBitmap(final boolean useMMR, final int template, final boolean typicalPredictionGenericDecodingOn, final boolean useSkip, final JBIG2Bitmap skipBitmap, final short[] adaptiveTemplateX, final short[] adaptiveTemplateY, final int mmrDataLength) throws IOException, JBIG2Exception {
 
 		if (useMMR) {
 
 			//MMRDecoder mmrDecoder = MMRDecoder.getInstance();
 			mmrDecoder.reset();
 
-			int[] referenceLine = new int[width + 2];
-			int[] codingLine = new int[width + 2];
+			final int[] referenceLine = new int[width + 2];
+			final int[] codingLine = new int[width + 2];
 			codingLine[0] = codingLine[1] = width;
 
 			for (int row = 0; row < height; row++) {
@@ -270,10 +270,14 @@ public final class JBIG2Bitmap {
 
 			//ArithmeticDecoder arithmeticDecoder = ArithmeticDecoder.getInstance();
 
-			BitmapPointer cxPtr0 = new BitmapPointer(this), cxPtr1 = new BitmapPointer(this);
-			BitmapPointer atPtr0 = new BitmapPointer(this), atPtr1 = new BitmapPointer(this), atPtr2 = new BitmapPointer(this), atPtr3 = new BitmapPointer(this);
+			final BitmapPointer cxPtr0 = new BitmapPointer(this);
+            final BitmapPointer cxPtr1 = new BitmapPointer(this);
+            final BitmapPointer atPtr0 = new BitmapPointer(this);
+            final BitmapPointer atPtr1 = new BitmapPointer(this);
+            final BitmapPointer atPtr2 = new BitmapPointer(this);
+            final BitmapPointer atPtr3 = new BitmapPointer(this);
 
-			long ltpCX = 0;
+            long ltpCX = 0;
 			if (typicalPredictionGenericDecodingOn) {
 				switch (template) {
 				case 0:
@@ -298,7 +302,7 @@ public final class JBIG2Bitmap {
 
 			for (int row = 0; row < height; row++) {
 				if (typicalPredictionGenericDecodingOn) {
-					int bit = arithmeticDecoder.decodeBit(ltpCX, arithmeticDecoder.genericRegionStats);
+					final int bit = arithmeticDecoder.decodeBit(ltpCX, arithmeticDecoder.genericRegionStats);
 					if (bit != 0) {
 						ltp = !ltp;
 					}
@@ -482,13 +486,22 @@ public final class JBIG2Bitmap {
 	 * @throws java.io.IOException if any.
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 */
-	public void readGenericRefinementRegion(int template, boolean typicalPredictionGenericRefinementOn, JBIG2Bitmap referredToBitmap, int referenceDX, int referenceDY, short[] adaptiveTemplateX, short[] adaptiveTemplateY) throws IOException, JBIG2Exception {
+	public void readGenericRefinementRegion(final int template, final boolean typicalPredictionGenericRefinementOn, final JBIG2Bitmap referredToBitmap, final int referenceDX, final int referenceDY, final short[] adaptiveTemplateX, final short[] adaptiveTemplateY) throws IOException, JBIG2Exception {
 
 		//ArithmeticDecoder arithmeticDecoder = ArithmeticDecoder.getInstance();
 
-		BitmapPointer cxPtr0, cxPtr1, cxPtr2, cxPtr3, cxPtr4, cxPtr5, cxPtr6, typicalPredictionGenericRefinementCXPtr0, typicalPredictionGenericRefinementCXPtr1, typicalPredictionGenericRefinementCXPtr2;
+		final BitmapPointer cxPtr0;
+        final BitmapPointer cxPtr1;
+        final BitmapPointer cxPtr2;
+        final BitmapPointer cxPtr3;
+        final BitmapPointer cxPtr4;
+        final BitmapPointer cxPtr5;
+        final BitmapPointer cxPtr6;
+        final BitmapPointer typicalPredictionGenericRefinementCXPtr0;
+        final BitmapPointer typicalPredictionGenericRefinementCXPtr1;
+        final BitmapPointer typicalPredictionGenericRefinementCXPtr2;
 
-		long ltpCX;
+        final long ltpCX;
 		if (template != 0) {
 			ltpCX = 0x008;
 
@@ -569,7 +582,7 @@ public final class JBIG2Bitmap {
 						typicalPredictionGenericRefinementCX1 = ((BinaryOperation.bit32ShiftL(typicalPredictionGenericRefinementCX1, 1)) | typicalPredictionGenericRefinementCXPtr1.nextPixel()) & 7;
 						typicalPredictionGenericRefinementCX2 = ((BinaryOperation.bit32ShiftL(typicalPredictionGenericRefinementCX2, 1)) | typicalPredictionGenericRefinementCXPtr2.nextPixel()) & 7;
 
-						int decodeBit = arithmeticDecoder.decodeBit(ltpCX, arithmeticDecoder.refinementRegionStats);
+						final int decodeBit = arithmeticDecoder.decodeBit(ltpCX, arithmeticDecoder.refinementRegionStats);
 						if (decodeBit != 0) {
 							ltp = !ltp;
 						}
@@ -584,7 +597,7 @@ public final class JBIG2Bitmap {
 
 					cx = (BinaryOperation.bit32ShiftL(cx0, 7)) | (cxPtr1.nextPixel() << 6) | (cxPtr2.nextPixel() << 5) | (BinaryOperation.bit32ShiftL(cx3, 2)) | cx4;
 
-					int pixel = arithmeticDecoder.decodeBit(cx, arithmeticDecoder.refinementRegionStats);
+					final int pixel = arithmeticDecoder.decodeBit(cx, arithmeticDecoder.refinementRegionStats);
 					if (pixel == 1) {
 						data.set(row*width + col);
 					}
@@ -642,7 +655,7 @@ public final class JBIG2Bitmap {
 						typicalPredictionGenericRefinementCX1 = ((BinaryOperation.bit32ShiftL(typicalPredictionGenericRefinementCX1, 1)) | typicalPredictionGenericRefinementCXPtr1.nextPixel()) & 7;
 						typicalPredictionGenericRefinementCX2 = ((BinaryOperation.bit32ShiftL(typicalPredictionGenericRefinementCX2, 1)) | typicalPredictionGenericRefinementCXPtr2.nextPixel()) & 7;
 
-						int decodeBit = arithmeticDecoder.decodeBit(ltpCX, arithmeticDecoder.refinementRegionStats);
+						final int decodeBit = arithmeticDecoder.decodeBit(ltpCX, arithmeticDecoder.refinementRegionStats);
 						if (decodeBit == 1) {
 							ltp = !ltp;
 						}
@@ -657,7 +670,7 @@ public final class JBIG2Bitmap {
 
 					cx = (BinaryOperation.bit32ShiftL(cx0, 11)) | (cxPtr1.nextPixel() << 10) | (BinaryOperation.bit32ShiftL(cx2, 8)) | (BinaryOperation.bit32ShiftL(cx3, 5)) | (BinaryOperation.bit32ShiftL(cx4, 2)) | (cxPtr5.nextPixel() << 1) | cxPtr6.nextPixel();
 
-					int pixel = arithmeticDecoder.decodeBit(cx, arithmeticDecoder.refinementRegionStats);
+					final int pixel = arithmeticDecoder.decodeBit(cx, arithmeticDecoder.refinementRegionStats);
 					if (pixel == 1) {
 						setPixel(col, row, 1);
 					}
@@ -697,12 +710,12 @@ public final class JBIG2Bitmap {
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 * @throws java.io.IOException if any.
 	 */
-	public void readTextRegion(boolean huffman, boolean symbolRefine, int noOfSymbolInstances, int logStrips, int noOfSymbols, int[][] symbolCodeTable, int symbolCodeLength, JBIG2Bitmap[] symbols, int defaultPixel, int combinationOperator, boolean transposed, int referenceCorner, int sOffset, int[][] huffmanFSTable, int[][] huffmanDSTable, int[][] huffmanDTTable, int[][] huffmanRDWTable, int[][] huffmanRDHTable, int[][] huffmanRDXTable, int[][] huffmanRDYTable, int[][] huffmanRSizeTable, int template, short[] symbolRegionAdaptiveTemplateX,
-			short[] symbolRegionAdaptiveTemplateY, JBIG2StreamDecoder decoder) throws JBIG2Exception, IOException {
+	public void readTextRegion(final boolean huffman, final boolean symbolRefine, final int noOfSymbolInstances, final int logStrips, final int noOfSymbols, final int[][] symbolCodeTable, final int symbolCodeLength, final JBIG2Bitmap[] symbols, final int defaultPixel, final int combinationOperator, final boolean transposed, final int referenceCorner, final int sOffset, final int[][] huffmanFSTable, final int[][] huffmanDSTable, final int[][] huffmanDTTable, final int[][] huffmanRDWTable, final int[][] huffmanRDHTable, final int[][] huffmanRDXTable, final int[][] huffmanRDYTable, final int[][] huffmanRSizeTable, final int template, final short[] symbolRegionAdaptiveTemplateX,
+                               final short[] symbolRegionAdaptiveTemplateY, final JBIG2StreamDecoder decoder) throws JBIG2Exception, IOException {
 
 		JBIG2Bitmap symbolBitmap;
 
-		int strips = 1 << logStrips;
+		final int strips = 1 << logStrips;
 
 		clear(defaultPixel);
 
@@ -748,7 +761,7 @@ public final class JBIG2Bitmap {
 				}
 				tt = t + dt;
 
-				long symbolID;
+				final long symbolID;
 				if (huffman) {
 					if (symbolCodeTable != null) {
 						symbolID = huffmanDecoder.decodeInt(symbolCodeTable).intResult();
@@ -765,7 +778,7 @@ public final class JBIG2Bitmap {
 				} else {
 					symbolBitmap = null;
 
-					int ri;
+					final int ri;
 					if (symbolRefine) {
 						if (huffman) {
 							ri = decoder.readBit();
@@ -777,9 +790,12 @@ public final class JBIG2Bitmap {
 					}
 					if (ri != 0) {
 
-						int refinementDeltaWidth, refinementDeltaHeight, refinementDeltaX, refinementDeltaY;
+						final int refinementDeltaWidth;
+                        final int refinementDeltaHeight;
+                        int refinementDeltaX;
+                        int refinementDeltaY;
 
-						if (huffman) {
+                        if (huffman) {
 							refinementDeltaWidth = huffmanDecoder.decodeInt(huffmanRDWTable).intResult();
 							refinementDeltaHeight = huffmanDecoder.decodeInt(huffmanRDHTable).intResult();
 							refinementDeltaX = huffmanDecoder.decodeInt(huffmanRDXTable).intResult();
@@ -804,8 +820,8 @@ public final class JBIG2Bitmap {
 						symbolBitmap = symbols[(int) symbolID];
 					}
 
-					int bitmapWidth = symbolBitmap.width - 1;
-					int bitmapHeight = symbolBitmap.height - 1;
+					final int bitmapWidth = symbolBitmap.width - 1;
+					final int bitmapHeight = symbolBitmap.height - 1;
 					if (transposed) {
 						switch (referenceCorner) {
 						case 0: // bottom left
@@ -839,7 +855,7 @@ public final class JBIG2Bitmap {
 
 				currentInstance++;
 
-				DecodeIntResult decodeIntResult;
+				final DecodeIntResult decodeIntResult;
 
 				if (huffman) {
 					decodeIntResult = huffmanDecoder.decodeInt(huffmanDSTable);
@@ -863,7 +879,7 @@ public final class JBIG2Bitmap {
 	 *
 	 * @param defPixel a int.
 	 */
-	public void clear(int defPixel) {
+	public void clear(final int defPixel) {
 		data.setAll(defPixel == 1);
 		//data.set(0, data.size(), defPixel == 1);
 	}
@@ -876,8 +892,8 @@ public final class JBIG2Bitmap {
 	 * @param y a int.
 	 * @param combOp a long.
 	 */
-	public void combine(JBIG2Bitmap bitmap, int x, int y, long combOp) {
-		int srcWidth = bitmap.width;
+	public void combine(final JBIG2Bitmap bitmap, final int x, final int y, final long combOp) {
+		final int srcWidth = bitmap.width;
 		int srcHeight = bitmap.height;
 		
 //		int maxRow = y + srcHeight;
@@ -985,8 +1001,8 @@ public final class JBIG2Bitmap {
 			for (int row = y; row < y + srcHeight; row++) {
 				indx = row * width + x;
 				for (int col = 0; col < minWidth; col++) {
-					boolean srcPixel = bitmap.data.get(srcIndx + col);
-					boolean pixel = data.get(indx);
+					final boolean srcPixel = bitmap.data.get(srcIndx + col);
+					final boolean pixel = data.get(indx);
 					data.set(indx, pixel == srcPixel);
 					indx++;
 				}
@@ -1015,28 +1031,28 @@ public final class JBIG2Bitmap {
 	/**
 	 * set a full byte of pixels
 	 */
-//	private void setPixelByte(int col, int row, byte bits) {
+//	private void setPixelByte(int col, final int row, byte bits) {
 		//data.setByte(row, col, bits);
 //	}
 
 	/**
 	 * get a byte of pixels
 	 */
-//	public byte getPixelByte(int col, int row) {
+//	public byte getPixelByte(int col, final int row) {
 		//return data.getByte(row, col);
 //	}
 
-//	public byte getPixelByte(int col, int row) {
+//	public byte getPixelByte(int col, final int row) {
 		//return data.getByte(row, col);
 //	}
-//	public byte getPixelByte(int col, int row) {
+//	public byte getPixelByte(int col, final int row) {
 		//return data.getByte(row, col);
 //	}
 
-//	public byte getPixelByte(int col, int row) {
+//	public byte getPixelByte(int col, final int row) {
 		//return data.getByte(row, col);
 //	}
-	private void duplicateRow(int yDest, int ySrc) {
+	private void duplicateRow(final int yDest, final int ySrc) {
 //		for (int i = 0; i < width;) {
 //			setPixelByte(i, yDest, getPixelByte(i, ySrc));
 //			i += 8;
@@ -1070,7 +1086,7 @@ public final class JBIG2Bitmap {
 	 * @param switchPixelColor a boolean.
 	 * @return an array of {@link byte} objects.
 	 */
-	public byte[] getData(boolean switchPixelColor) {
+	public byte[] getData(final boolean switchPixelColor) {
 //		byte[] bytes = new byte[height * line];
 //
 //		for (int i = 0; i < height; i++) {
@@ -1093,7 +1109,7 @@ public final class JBIG2Bitmap {
 //		}
 //
 //		return bytes;
-		byte[] bytes = new byte[height * line];
+		final byte[] bytes = new byte[height * line];
 
 		int count = 0, offset = 0;
 		long k = 0;
@@ -1103,8 +1119,8 @@ public final class JBIG2Bitmap {
 					k = data.w[count >>> FastBitSet.pot];
 				}
 				//if ((k & (1L << count)) != 0) {
-					int bit = 7 - (offset & 0x7);
-					bytes[offset >> 3] |= ((k >>> count) & 1) << bit;
+					final int bit = 7 - (offset & 0x7);
+					bytes[offset >> 3] |= (byte) (((k >>> count) & 1) << bit);
 				//}
 				count++;
 				offset++;
@@ -1115,7 +1131,7 @@ public final class JBIG2Bitmap {
 
 		if (switchPixelColor) {
 			for (int i = 0; i < bytes.length; i++) {
-				bytes[i] ^= 0xff;
+				bytes[i] ^= (byte) 0xff;
 			}
 		}
 
@@ -1131,7 +1147,7 @@ public final class JBIG2Bitmap {
 	 * @param height a int.
 	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
 	 */
-	public JBIG2Bitmap getSlice(int x, int y, int width, int height) {
+	public JBIG2Bitmap getSlice(final int x, final int y, final int width, final int height) {
 //		JBIG2Bitmap slice = new JBIG2Bitmap(width, height);
 //
 //		int sliceRow = 0, sliceCol = 0;
@@ -1165,7 +1181,7 @@ public final class JBIG2Bitmap {
 //		
 //		return slice;
 		
-		JBIG2Bitmap slice = new JBIG2Bitmap(width, height, arithmeticDecoder, huffmanDecoder, mmrDecoder);
+		final JBIG2Bitmap slice = new JBIG2Bitmap(width, height, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 
 /*		int sliceRow = 0, sliceCol = 0;
 		for (int row = y; row < height; row++) {
@@ -1195,64 +1211,64 @@ public final class JBIG2Bitmap {
 	}
 
 	/**
-	private static void setPixel(int col, int row, FastBitSet data, int value) {
+	private static void setPixel(int col, final int row, FastBitSet data, final int value) {
 		if (value == 1)
 			data.set(row, col);
 		else
 			data.clear(row, col);
 	}/**/
 
-//	private void setPixelByte(int col, int row, FastBitSet data, byte bits) {
+//	private void setPixelByte(int col, final int row, FastBitSet data, byte bits) {
 //		data.setByte(row, col, bits);
 //	}
 
-//	public void setPixel(int col, int row, int value) {
+//	public void setPixel(int col, final int row, final int value) {
 //		setPixel(col, row, data, value);
 //	}
 
-//	public int getPixel(int col, int row) {
+//	public int getPixel(int col, final int row) {
 //		return data.get(row, col) ? 1 : 0;
 //	}
 
 
-//	private void setPixelByte(int col, int row, FastBitSet data, byte bits) {
+//	private void setPixelByte(int col, final int row, FastBitSet data, byte bits) {
 //		data.setByte(row, col, bits);
 //	}
 
-//	public void setPixel(int col, int row, int value) {
+//	public void setPixel(int col, final int row, final int value) {
 //		setPixel(col, row, data, value);
 //	}
 
-//	public int getPixel(int col, int row) {
+//	public int getPixel(int col, final int row) {
 //		return data.get(row, col) ? 1 : 0;
 //	}
 
-//	private void setPixelByte(int col, int row, FastBitSet data, byte bits) {
+//	private void setPixelByte(int col, final int row, FastBitSet data, byte bits) {
 //		data.setByte(row, col, bits);
 //	}
 
-//	public void setPixel(int col, int row, int value) {
+//	public void setPixel(int col, final int row, final int value) {
 //		setPixel(col, row, data, value);
 //	}
 
-//	public int getPixel(int col, int row) {
+//	public int getPixel(int col, final int row) {
 //		return data.get(row, col) ? 1 : 0;
 //	}
 
 
-//	private void setPixelByte(int col, int row, FastBitSet data, byte bits) {
+//	private void setPixelByte(int col, final int row, FastBitSet data, byte bits) {
 //		data.setByte(row, col, bits);
 //	}
 
-//	public void setPixel(int col, int row, int value) {
+//	public void setPixel(int col, final int row, final int value) {
 //		setPixel(col, row, data, value);
 //	}
 
-//	public int getPixel(int col, int row) {
+//	public int getPixel(int col, final int row) {
 //		return data.get(row, col) ? 1 : 0;
 //	}
-	private void setPixel(int col, int row, FastBitSet data, int value) {
-		int index = (row * width) + col;
+	private void setPixel(final int col, final int row, final FastBitSet data, final int value) {
+		final int index = (row * width) + col;
 
 		data.set(index, value == 1);
 	}
@@ -1264,7 +1280,7 @@ public final class JBIG2Bitmap {
 	 * @param row a int.
 	 * @param value a int.
 	 */
-	public void setPixel(int col, int row, int value) {
+	public void setPixel(final int col, final int row, final int value) {
 		setPixel(col, row, data, value);
 	}
 
@@ -1275,7 +1291,7 @@ public final class JBIG2Bitmap {
 	 * @param row a int.
 	 * @return a int.
 	 */
-	public int getPixel(int col, int row) {
+	public int getPixel(final int col, final int row) {
 		return data.get((row * width) + col) ? 1 : 0;
 	}
 	
@@ -1285,7 +1301,7 @@ public final class JBIG2Bitmap {
 	 * @param newHeight a int.
 	 * @param defaultPixel a int.
 	 */
-	public void expand(int newHeight, int defaultPixel) {
+	public void expand(final int newHeight, final int defaultPixel) {
 //		logger.info("expand FastBitSet");
 //		FastBitSet newData = new FastBitSet(width, newHeight);
 //
@@ -1297,7 +1313,7 @@ public final class JBIG2Bitmap {
 //
 //		this.height = newHeight;
 //		this.data = newData;
-		FastBitSet newData = new FastBitSet(newHeight * width);
+		final FastBitSet newData = new FastBitSet(newHeight * width);
 		for (int row = 0; row < height; row++) {
 			for (int col = 0; col < width; col++) {
 				setPixel(col, row, newData, getPixel(col, row));
@@ -1313,7 +1329,7 @@ public final class JBIG2Bitmap {
 	 *
 	 * @param segmentNumber a int.
 	 */
-	public void setBitmapNumber(int segmentNumber) {
+	public void setBitmapNumber(final int segmentNumber) {
 		this.bitmapNumber = segmentNumber;
 	}
 
@@ -1332,22 +1348,22 @@ public final class JBIG2Bitmap {
 	 * @return a {@link java.awt.image.BufferedImage} object.
 	 */
 	public BufferedImage getBufferedImage() {
-		byte[] bytes = getData(true);
+		final byte[] bytes = getData(true);
 
 		if (bytes == null)
 			return null;
 
 		// make a a DEEP copy so we can't alter
-		int len = bytes.length;
-		byte[] copy = new byte[len];
+		final int len = bytes.length;
+		final byte[] copy = new byte[len];
 		System.arraycopy(bytes, 0, copy, 0, len);
 
 		/** create an image from the raw data */
-		DataBuffer db = new DataBufferByte(copy, copy.length);
+		final DataBuffer db = new DataBufferByte(copy, copy.length);
 
-		WritableRaster raster = Raster.createPackedRaster(db, width, height, 1, null);
+		final WritableRaster raster = Raster.createPackedRaster(db, width, height, 1, null);
 
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
+		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
 		image.setData(raster);
 
 		return image;
@@ -1366,18 +1382,18 @@ public final class JBIG2Bitmap {
 		final int length;
 		
 		
-		public FastBitSet(int length) {
+		public FastBitSet(final int length) {
 			this.length = length;
 			int wcount = length / Long.SIZE; 
 			if (length % Long.SIZE != 0) wcount++;
 			w = new long[wcount];
 		}
 		
-		public final int size() {
+		public int size() {
 			return length;
 		}
 
-		public void setAll(boolean value) {
+		public void setAll(final boolean value) {
 			if (value)
 				for (int i = 0; i<w.length; i++) {
 					w[i] = -1L;
@@ -1389,7 +1405,7 @@ public final class JBIG2Bitmap {
 				
 		}
 		
-		public void set(int start, int end, boolean value) {
+		public void set(final int start, final int end, final boolean value) {
 			if (value) {
 				for (int i=start; i<end; i++) {
 					set(i);
@@ -1402,7 +1418,8 @@ public final class JBIG2Bitmap {
 			}
 		}
 
-		public void or(int startindex, final FastBitSet set, int setStartIndex, final int length) {
+		public void or(int startindex, final FastBitSet set, final int startIndex, final int length) {
+			int setStartIndex = startIndex;
 			final int shift = startindex - setStartIndex;
 			long k = set.w[setStartIndex >> pot];
 			//Cyclic shift
@@ -1428,23 +1445,23 @@ public final class JBIG2Bitmap {
 			}
 		}
 		
-		public void set(int index, boolean value) {
+		public void set(final int index, final boolean value) {
 			if (value) set(index);
 			else clear(index);
 		}
 		
-		public void set(int index) {
-			int windex = index >>> pot;
+		public void set(final int index) {
+			final int windex = index >>> pot;
 			w[windex] |= (1L<<index);
 		}
 		
-		public void clear(int index) {
-			int windex = index >>> pot;
+		public void clear(final int index) {
+			final int windex = index >>> pot;
 			w[windex] &= ~(1L<<index);
 		}
 
-		public final boolean get(int index) {
-			int windex = index >>> pot;
+		public boolean get(final int index) {
+			final int windex = index >>> pot;
 			return ((w[windex] & (1L<<index)) != 0);
 		}		
 	}

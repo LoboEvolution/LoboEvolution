@@ -43,7 +43,7 @@ private static final long serialVersionUID = 1L;
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public LoboRadioButton(String name) {
+	public LoboRadioButton(final String name) {
 		super(name);
 		setBackground(background());
 		setForeground(foreground());

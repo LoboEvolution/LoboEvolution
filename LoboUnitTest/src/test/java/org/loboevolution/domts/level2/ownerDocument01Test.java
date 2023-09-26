@@ -52,8 +52,8 @@ public class ownerDocument01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document ownerDocument;
+        final Document doc;
+        final Document ownerDocument;
         doc = sampleXmlFile("staff.xml");
         ownerDocument =  doc.getOwnerDocument();
         assertNull("throw_Null", ownerDocument);

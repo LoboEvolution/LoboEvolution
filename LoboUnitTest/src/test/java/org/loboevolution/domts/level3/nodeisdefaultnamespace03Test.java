@@ -44,10 +44,10 @@ import static org.junit.Assert.assertFalse;
 public class nodeisdefaultnamespace03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        boolean isDefault;
-        String nullNSURI = null;
+        final Document doc;
+        final DocumentType docType;
+        final boolean isDefault;
+        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();

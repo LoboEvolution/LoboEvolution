@@ -42,7 +42,7 @@ public class FunctionMultiArgs extends Function3Args {
 
   /** {@inheritDoc} */
   @Override
-  public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
+  public void setArg(final Expression arg, final int argNum) throws WrongNumberArgsException {
 
     if (argNum < 3) super.setArg(arg, argNum);
     else {
@@ -52,7 +52,7 @@ public class FunctionMultiArgs extends Function3Args {
       } else {
 
         // Slow but space conservative.
-        Expression[] args = new Expression[m_args.length + 1];
+        final Expression[] args = new Expression[m_args.length + 1];
 
         System.arraycopy(m_args, 0, args, 0, m_args.length);
 
@@ -65,12 +65,12 @@ public class FunctionMultiArgs extends Function3Args {
 
   /** {@inheritDoc} */
   @Override
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {}
+  public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {}
 
   /** {@inheritDoc} */
   @Override
   protected void reportWrongNumberArgs() throws WrongNumberArgsException {
-    String fMsg =
+    final String fMsg =
         XPATHMessages.createXPATHMessage(
             XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION,
             new Object[] {
@@ -88,7 +88,7 @@ public class FunctionMultiArgs extends Function3Args {
       return true;
     }
 
-    for (Expression m_arg : m_args) {
+    for (final Expression m_arg : m_args) {
       if (m_arg.canTraverseOutsideSubtree()) {
         return true;
       }
@@ -99,10 +99,10 @@ public class FunctionMultiArgs extends Function3Args {
 
   /** {@inheritDoc} */
   @Override
-  public void callArgVisitors(XPathVisitor visitor) {
+  public void callArgVisitors(final XPathVisitor visitor) {
     super.callArgVisitors(visitor);
     if (null != m_args) {
-      for (Expression m_arg : m_args) {
+      for (final Expression m_arg : m_args) {
         m_arg.callVisitors(visitor);
       }
     }
@@ -110,12 +110,12 @@ public class FunctionMultiArgs extends Function3Args {
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
-    FunctionMultiArgs fma = (FunctionMultiArgs) expr;
+    final FunctionMultiArgs fma = (FunctionMultiArgs) expr;
     if (null != m_args) {
-      int n = m_args.length;
+      final int n = m_args.length;
       if ((null == fma) || (fma.m_args.length != n)) return false;
 
       for (int i = 0; i < n; i++) {

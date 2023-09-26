@@ -48,9 +48,9 @@ import static org.junit.Assert.assertTrue;
 public class elementsetidattribute05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element nameElem;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element nameElem;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         nameElem = (Element) elemList.item(2);
@@ -59,7 +59,7 @@ public class elementsetidattribute05Test extends LoboUnitTest {
             boolean success = false;
             try {
                 nameElem.setIdAttribute("hasMiddleName", true);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

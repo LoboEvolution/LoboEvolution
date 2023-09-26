@@ -50,12 +50,12 @@ public class elementgetschematypeinfo03Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element elem;
-        TypeInfo typeInfo;
-        String typeName;
-        String typeNS;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element elem;
+        final TypeInfo typeInfo;
+        final String typeName;
+        final String typeNS;
         doc = sampleXmlFile("hc_nodtdstaff.xml");
         elemList = doc.getElementsByTagName("em");
         elem = (Element) elemList.item(0);

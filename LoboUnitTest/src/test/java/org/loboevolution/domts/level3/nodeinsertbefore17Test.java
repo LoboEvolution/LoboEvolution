@@ -52,15 +52,15 @@ import static org.junit.Assert.assertEquals;
 public class nodeinsertbefore17Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Text newText;
-        Node refNode;
+        final Document doc;
+        final Element element;
+        final Text newText;
+        final Node refNode;
         Node firstChild;
-        Text insertedText;
-        HTMLCollection childList;
-        String nodeName;
-        Node inserted;
+        final Text insertedText;
+        final HTMLCollection childList;
+        final String nodeName;
+        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagNameNS("*", "p");
         element = (Element) childList.item(1);

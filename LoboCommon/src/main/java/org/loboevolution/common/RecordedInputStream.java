@@ -57,8 +57,7 @@ public class RecordedInputStream extends InputStream {
 	 * @param delegate a {@link java.io.InputStream} object.
 	 * @param maxBufferSize a int.
 	 */
-	public RecordedInputStream(InputStream delegate, int maxBufferSize) {
-		super();
+	public RecordedInputStream(final InputStream delegate, final int maxBufferSize) {
 		this.delegate = delegate;
 		this.maxBufferSize = maxBufferSize;
 	}
@@ -83,7 +82,7 @@ public class RecordedInputStream extends InputStream {
 	 * @throws java.io.UnsupportedEncodingException if any.
 	 * @throws org.loboevolution.common.BufferExceededException if any.
 	 */
-	public String getString(String encoding) throws java.io.UnsupportedEncodingException, BufferExceededException {
+	public String getString(final String encoding) throws java.io.UnsupportedEncodingException, BufferExceededException {
 		if (this.hasReachedMaxBufferSize) {
 			throw new BufferExceededException();
 		}
@@ -92,9 +91,9 @@ public class RecordedInputStream extends InputStream {
 
 	/** {@inheritDoc} */
 	@Override
-	public synchronized void mark(int readlimit) {
+	public synchronized void mark(final int readlimit) {
 		if (this.hasReachedMaxBufferSize) {
-			throw new java.lang.IllegalStateException("Maximum buffer size was already reached.");
+			throw new IllegalStateException("Maximum buffer size was already reached.");
 		}
 		this.markPosition = this.store.size();
 	}
@@ -129,7 +128,7 @@ public class RecordedInputStream extends InputStream {
 
 	/** {@inheritDoc} */
 	@Override
-	public int read(byte[] buffer, int offset, int length) throws IOException {
+	public int read(final byte[] buffer, final int offset, final int length) throws IOException {
 		if (this.readPosition != -1 && this.readPosition < this.resetBuffer.length) {
 			final int minLength = Math.min(this.resetBuffer.length - this.readPosition, length);
 			System.arraycopy(this.resetBuffer, this.readPosition, buffer, offset, minLength);

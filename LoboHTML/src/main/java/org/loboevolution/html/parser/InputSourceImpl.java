@@ -50,7 +50,7 @@ public class InputSourceImpl extends InputSource {
 	 * @param uri        The URI that identifies the content.
 	 * @param charset    The character set of the input stream.
 	 */
-	public InputSourceImpl(InputStream byteStream, String uri, Charset charset) {
+	public InputSourceImpl(final InputStream byteStream, final String uri, final Charset charset) {
 		super(byteStream);
 		setEncoding(charset.displayName());
 		setSystemId(uri);
@@ -62,7 +62,7 @@ public class InputSourceImpl extends InputSource {
 	 * @param characterStream The Reader where characters can be read.
 	 * @param uri             The URI of the document.
 	 */
-	public InputSourceImpl(Reader characterStream, String uri) {
+	public InputSourceImpl(final Reader characterStream, final String uri) {
 		super(characterStream);
 		setSystemId(uri);
 	}

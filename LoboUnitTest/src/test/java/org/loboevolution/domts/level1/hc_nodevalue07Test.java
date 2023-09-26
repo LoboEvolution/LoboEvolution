@@ -54,11 +54,11 @@ public class hc_nodevalue07Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node newNode;
+        final Document doc;
+        final Node newNode;
         String newValue;
-        NamedNodeMap nodeMap;
-        DocumentType docType;
+        final NamedNodeMap nodeMap;
+        final DocumentType docType;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);

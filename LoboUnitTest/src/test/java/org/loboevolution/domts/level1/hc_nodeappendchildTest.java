@@ -55,14 +55,14 @@ public class hc_nodeappendchildTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node createdNode;
-        Node lchild;
-        String childName;
-        Node appendedChild;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node createdNode;
+        final Node lchild;
+        final String childName;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);

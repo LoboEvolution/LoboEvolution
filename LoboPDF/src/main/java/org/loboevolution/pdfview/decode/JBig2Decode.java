@@ -57,10 +57,10 @@ public class JBig2Decode {
 	 * @return a {@link java.nio.ByteBuffer} object.
 	 * @throws java.io.IOException if any.
 	 */
-	protected static ByteBuffer decode(PDFObject dict, ByteBuffer buf,
-			PDFObject params) throws IOException {
+	protected static ByteBuffer decode(final PDFObject dict, final ByteBuffer buf,
+                                       final PDFObject params) throws IOException {
 
-		byte[] bytes = new byte[buf.remaining()];
+		final byte[] bytes = new byte[buf.remaining()];
 		buf.get(bytes, 0, bytes.length);
 
 		return ByteBuffer.wrap(decode(dict, bytes));
@@ -75,17 +75,17 @@ public class JBig2Decode {
 	 * @return an array of {@link byte} objects.
 	 * @throws java.io.IOException if any.
 	 */
-	protected static byte[] decode(PDFObject dict, byte[] source) throws IOException {
-		JBIG2Decoder decoder;
+	protected static byte[] decode(final PDFObject dict, final byte[] source) throws IOException {
+		final JBIG2Decoder decoder;
 		decoder = new JBIG2Decoder();
 		try {
-			byte[] globals = getOptionFieldBytes(dict, "JBIG2Globals");
+			final byte[] globals = getOptionFieldBytes(dict, "JBIG2Globals");
 			if (globals != null) {
 				decoder.setGlobalData(globals);
 			}
 			decoder.decodeJBIG2(source);
-		} catch (JBIG2Exception ex) {
-			IOException ioException;
+		} catch (final JBIG2Exception ex) {
+			final IOException ioException;
 
 			ioException = new IOException();
 			ioException.initCause(ex);
@@ -103,14 +103,14 @@ public class JBig2Decode {
 	 * @return an array of {@link byte} objects.
 	 * @throws java.io.IOException if any.
 	 */
-	public static byte[] getOptionFieldBytes(PDFObject dict, String name) throws IOException {
+	public static byte[] getOptionFieldBytes(final PDFObject dict, final String name) throws IOException {
 
-		PDFObject dictParams =  dict.getDictRef("DecodeParms");
+		final PDFObject dictParams =  dict.getDictRef("DecodeParms");
 
 		if (dictParams == null) {
 			return null;
 		}
-		PDFObject value = dictParams.getDictRef(name);
+		final PDFObject value = dictParams.getDictRef(name);
 		if (value == null) {
 			return null;
 		}

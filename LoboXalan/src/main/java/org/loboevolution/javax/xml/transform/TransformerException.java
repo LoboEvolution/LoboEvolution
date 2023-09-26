@@ -32,81 +32,65 @@ import java.io.PrintWriter;
 // Referenced classes of package org.loboevolution.javax.xml.transform:
 //            SourceLocator
 
-public class TransformerException extends Exception
-{
+public class TransformerException extends Exception {
 
-    public TransformerException(String message)
-    {
+    public TransformerException(final String message) {
         throw new RuntimeException("Stub!");
     }
 
-    public TransformerException(Throwable e)
-    {
+    public TransformerException(final Throwable e) {
         throw new RuntimeException("Stub!");
     }
 
-    public TransformerException(String message, Throwable e)
-    {
+    public TransformerException(final String message, final Throwable e) {
         throw new RuntimeException("Stub!");
     }
 
-    public TransformerException(String message, SourceLocator locator)
-    {
+    public TransformerException(final String message, final SourceLocator locator) {
         throw new RuntimeException("Stub!");
     }
 
-    public TransformerException(String message, SourceLocator locator, Throwable e)
-    {
+    public TransformerException(final String message, final SourceLocator locator, final Throwable e) {
         throw new RuntimeException("Stub!");
     }
 
-    public SourceLocator getLocator()
-    {
+    public SourceLocator getLocator() {
         throw new RuntimeException("Stub!");
     }
 
-    public void setLocator(SourceLocator location)
-    {
+    public void setLocator(final SourceLocator location) {
         throw new RuntimeException("Stub!");
     }
 
-    public Throwable getException()
-    {
+    public Throwable getException() {
         throw new RuntimeException("Stub!");
     }
 
-    public Throwable getCause()
-    {
+    public Throwable getCause() {
         throw new RuntimeException("Stub!");
     }
 
-    public synchronized Throwable initCause(Throwable cause)
-    {
+    public synchronized Throwable initCause(final Throwable cause) {
         throw new RuntimeException("Stub!");
     }
 
-    public String getMessageAndLocation()
-    {
+    public String getMessageAndLocation() {
         throw new RuntimeException("Stub!");
     }
 
-    public String getLocationAsString()
-    {
+    public String getLocationAsString() {
         throw new RuntimeException("Stub!");
     }
 
-    public void printStackTrace()
-    {
+    public void printStackTrace() {
         throw new RuntimeException("Stub!");
     }
 
-    public void printStackTrace(PrintStream s)
-    {
+    public void printStackTrace(final PrintStream s) {
         throw new RuntimeException("Stub!");
     }
 
-    public void printStackTrace(PrintWriter s)
-    {
+    public void printStackTrace(final PrintWriter s) {
         throw new RuntimeException("Stub!");
     }
 }

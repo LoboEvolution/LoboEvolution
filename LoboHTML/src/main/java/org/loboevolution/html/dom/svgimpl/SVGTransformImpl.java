@@ -52,7 +52,7 @@ public class SVGTransformImpl implements SVGTransform {
 	 *
 	 * @param transformType a short.
 	 */
-	public SVGTransformImpl(short transformType) {
+	public SVGTransformImpl(final short transformType) {
 		this.transformType = transformType;
 	}
 
@@ -77,14 +77,14 @@ public class SVGTransformImpl implements SVGTransform {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setMatrix(SVGMatrix matrix) {
+	public void setMatrix(final SVGMatrix matrix) {
 		this.matrix = matrix;
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTranslate(float tx, float ty) {
+	public void setTranslate(final float tx, final float ty) {
 		this.transformType = SVGTransform.SVG_TRANSFORM_TRANSLATE;
 		this.matrix = new SVGMatrixImpl(1, 0, 0, 1, tx, ty);
 
@@ -92,21 +92,21 @@ public class SVGTransformImpl implements SVGTransform {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setScale(float sx, float sy) {
+	public void setScale(final float sx, final float sy) {
 		this.transformType = SVGTransform.SVG_TRANSFORM_SCALE;
 		this.matrix = new SVGMatrixImpl(sx, 0.0f, 0.0f, sy, 0.0f, 0.0f);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRotate(float angle, float cx, float cy) {
+	public void setRotate(final float angle, final float cx, final float cy) {
 		this.transformType = SVGTransform.SVG_TRANSFORM_ROTATE;
 		this.matrix = new SVGMatrixImpl(angle, cx, cy, 0.0f, 0.0f, 0.0f);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSkewX(float angle) {
+	public void setSkewX(final float angle) {
 		this.transformType = SVGTransform.SVG_TRANSFORM_SKEWX;
 		this.matrix = new SVGMatrixImpl(1.0f, 0.0f, (float) Math.tan(angle), 1.0f, 0.0f, 0.0f);
 
@@ -114,7 +114,7 @@ public class SVGTransformImpl implements SVGTransform {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSkewY(float angle) {
+	public void setSkewY(final float angle) {
 		this.transformType = SVGTransform.SVG_TRANSFORM_SKEWY;
 		this.matrix = new SVGMatrixImpl(1.0f, (float) Math.tan(angle), 0.0f, 1.0f, 0.0f, 0.0f);
 

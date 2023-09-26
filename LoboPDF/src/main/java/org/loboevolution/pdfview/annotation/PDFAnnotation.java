@@ -65,7 +65,7 @@ public class PDFAnnotation{
 		private final String definition;
 		private final int internalId;
 		private final Class<?> className;
-		ANNOTATION_TYPE(String definition, int typeId, Class<?> className) {
+		ANNOTATION_TYPE(final String definition, final int typeId, final Class<?> className) {
 			this.definition = definition;
 			this.internalId = typeId;
 			this.className = className;
@@ -95,8 +95,8 @@ public class PDFAnnotation{
 		 * @param definition a {@link java.lang.String} object.
 		 * @return a {@link org.loboevolution.pdfview.annotation.PDFAnnotation.ANNOTATION_TYPE} object.
 		 */
-		public static ANNOTATION_TYPE getByDefinition(String definition) {
-			for (ANNOTATION_TYPE type : values()) {
+		public static ANNOTATION_TYPE getByDefinition(final String definition) {
+			for (final ANNOTATION_TYPE type : values()) {
 				if (type.definition.equals(definition)) {
 					return type;
 				}
@@ -125,7 +125,7 @@ public class PDFAnnotation{
 	 * @param annotObject - the PDFObject which contains the annotation description
 	 * @throws java.io.IOException if any.
 	 */
-	public PDFAnnotation(PDFObject annotObject) throws IOException{
+	public PDFAnnotation(final PDFObject annotObject) throws IOException{
 		this(annotObject, ANNOTATION_TYPE.UNKNOWN);
 	}
 
@@ -137,7 +137,7 @@ public class PDFAnnotation{
 	 * @param type a {@link org.loboevolution.pdfview.annotation.PDFAnnotation.ANNOTATION_TYPE} object.
 	 * @throws java.io.IOException if any.
 	 */
-	protected PDFAnnotation(PDFObject annotObject, ANNOTATION_TYPE type) throws IOException{
+	protected PDFAnnotation(final PDFObject annotObject, final ANNOTATION_TYPE type) throws IOException{
 		this.pdfObj = annotObject;
 		// in case a general "PdfAnnotation" is created the type is unknown
 		this.type = type;
@@ -155,19 +155,19 @@ public class PDFAnnotation{
 	 * @return PDFAnnotation a {@link org.loboevolution.pdfview.annotation.PDFAnnotation} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public static PDFAnnotation createAnnotation(PDFObject parent) throws IOException{
-		PDFObject subtypeValue = parent.getDictRef("Subtype");
+	public static PDFAnnotation createAnnotation(final PDFObject parent) throws IOException{
+		final PDFObject subtypeValue = parent.getDictRef("Subtype");
 		if (subtypeValue == null) {
 			return null;
 		}
-		String subtypeS = subtypeValue.getStringValue();
+		final String subtypeS = subtypeValue.getStringValue();
 		ANNOTATION_TYPE annotationType = ANNOTATION_TYPE.getByDefinition(subtypeS);
 		
 		//if Subtype is Widget than check if it is also a Signature
 		if (annotationType == ANNOTATION_TYPE.WIDGET) {
-			PDFObject sigType = parent.getDictRef("FT");
+			final PDFObject sigType = parent.getDictRef("FT");
 			if (sigType != null) {
-				String sigTypeS = sigType.getStringValue();
+				final String sigTypeS = sigType.getStringValue();
 				if (ANNOTATION_TYPE.getByDefinition(sigTypeS) == ANNOTATION_TYPE.SIGNATURE) {
 					annotationType = ANNOTATION_TYPE.getByDefinition(sigTypeS);
 				}
@@ -175,13 +175,13 @@ public class PDFAnnotation{
 		}
 		
 		if (displayAnnotation(annotationType)) {
-			Class<?> className = annotationType.getClassName();
+			final Class<?> className = annotationType.getClassName();
 			
-			Constructor<?> constructor;
+			final Constructor<?> constructor;
 			try {
 				constructor = className.getConstructor(PDFObject.class);
 				return (PDFAnnotation)constructor.newInstance(parent);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				throw new PDFParseException("Could not parse annotation!", e);
 			} 
 		}
@@ -189,7 +189,7 @@ public class PDFAnnotation{
 		return null;
 	}
 
-    private static boolean displayAnnotation(ANNOTATION_TYPE annotationType) {
+    private static boolean displayAnnotation(final ANNOTATION_TYPE annotationType) {
 		switch(annotationType) {
 			case STAMP: return Configuration.getInstance().isPrintStampAnnotations();
 			case WIDGET: return Configuration.getInstance().isPrintWidgetAnnotations();
@@ -209,9 +209,9 @@ public class PDFAnnotation{
      * @return a {@link java.awt.geom.Rectangle2D.Float} object.
      * @throws java.io.IOException if any.
      */
-    public Rectangle2D.Float parseRect(PDFObject obj) throws IOException {
+    public Rectangle2D.Float parseRect(final PDFObject obj) throws IOException {
         if (obj.getType() == PDFObject.ARRAY) {
-            PDFObject[] bounds = obj.getArray();
+            final PDFObject[] bounds = obj.getArray();
             if (bounds.length == 4) {
                 return new Rectangle2D.Float(bounds[0].getFloatValue(),
                         bounds[1].getFloatValue(),
@@ -280,10 +280,10 @@ public class PDFAnnotation{
 	 * @param bbox a {@link java.awt.geom.Rectangle2D.Float} object.
 	 * @return a {@link java.awt.geom.AffineTransform} object.
 	 */
-	protected AffineTransform getScalingTransformation(Float bbox) {
-		AffineTransform at = new AffineTransform();		
-		double scaleHeight = getRect().getHeight()/bbox.getHeight();
-        double scaleWidth = getRect().getWidth()/bbox.getWidth();
+	protected AffineTransform getScalingTransformation(final Float bbox) {
+		final AffineTransform at = new AffineTransform();
+		final double scaleHeight = getRect().getHeight()/bbox.getHeight();
+        final double scaleWidth = getRect().getWidth()/bbox.getWidth();
         at.scale(scaleWidth, scaleHeight);
 		return at;
 	}

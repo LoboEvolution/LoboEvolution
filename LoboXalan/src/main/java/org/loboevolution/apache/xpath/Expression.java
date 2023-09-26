@@ -67,7 +67,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @return The result of the expression in the form of a <code>XObject</code>.
    * @throws TransformerException if a runtime exception occurs.
    */
-  public XObject execute(XPathContext xctxt, int currentNode)
+  public XObject execute(final XPathContext xctxt, final int currentNode)
       throws TransformerException {
 
     // For now, the current node is already pushed.
@@ -84,7 +84,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @return The result of the expression in the form of a <code>XObject</code>.
    * @throws TransformerException if a runtime exception occurs.
    */
-  public XObject execute(XPathContext xctxt, int currentNode, DTM dtm, int expType)
+  public XObject execute(final XPathContext xctxt, final int currentNode, final DTM dtm, final int expType)
       throws TransformerException {
 
     // For now, the current node is already pushed.
@@ -111,7 +111,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @return The result of the expression in the form of a <code>XObject</code>.
    * @throws TransformerException if a runtime exception occurs.
    */
-  public XObject execute(XPathContext xctxt, boolean destructiveOK)
+  public XObject execute(final XPathContext xctxt, final boolean destructiveOK)
       throws TransformerException {
     return execute(xctxt);
   }
@@ -123,7 +123,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @return The expression evaluated as a double.
    * @throws TransformerException if any
    */
-  public double num(XPathContext xctxt) throws TransformerException {
+  public double num(final XPathContext xctxt) throws TransformerException {
     return execute(xctxt).num();
   }
 
@@ -134,7 +134,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @return false
    * @throws TransformerException if any
    */
-  public boolean bool(XPathContext xctxt) throws TransformerException {
+  public boolean bool(final XPathContext xctxt) throws TransformerException {
     return execute(xctxt).bool();
   }
 
@@ -145,8 +145,8 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @return the first node out of the nodeset, or DTM.NULL.
    * @throws TransformerException if any
    */
-  public int asNode(XPathContext xctxt) throws TransformerException {
-    DTMIterator iter = execute(xctxt).iter();
+  public int asNode(final XPathContext xctxt) throws TransformerException {
+    final DTMIterator iter = execute(xctxt).iter();
     return iter.nextNode();
   }
 
@@ -160,7 +160,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    *     is severe enough to halt processing.
    * @throws TransformerException if any
    */
-  public DTMIterator asIterator(XPathContext xctxt, int contextNode)
+  public DTMIterator asIterator(final XPathContext xctxt, final int contextNode)
       throws TransformerException {
 
     try {
@@ -199,7 +199,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    *
    * @return true of the passed in class is the exact same class as this class.
    */
-  protected final boolean isSameClass(Expression expr) {
+  protected final boolean isSameClass(final Expression expr) {
     if (null == expr) return false;
 
     return getClass() == expr.getClass();
@@ -212,10 +212,10 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @param msg The assertion message, which should be informative.
    * @throws RuntimeException if the b argument is false.
    */
-  public void assertion(boolean b, String msg) {
+  public void assertion(final boolean b, final String msg) {
 
     if (!b) {
-      String fMsg =
+      final String fMsg =
           XPATHMessages.createXPATHMessage(
               XPATHErrorResources.ER_INCORRECT_PROGRAMMER_ASSERTION, new Object[] {msg});
 
@@ -234,14 +234,14 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
    * @throws TransformerException if the current ErrorListoner determines to throw an exception.
    * @throws TransformerException if any
    */
-  public void error(XPathContext xctxt, String msg, Object[] args)
+  public void error(final XPathContext xctxt, final String msg, final Object[] args)
       throws TransformerException {
 
-    String fmsg = XPATHMessages.createXPATHMessage(msg, args);
+    final String fmsg = XPATHMessages.createXPATHMessage(msg, args);
 
     if (null != xctxt) {
-      ErrorListener eh = xctxt.getErrorListener();
-      TransformerException te = new TransformerException(fmsg, this);
+      final ErrorListener eh = xctxt.getErrorListener();
+      final TransformerException te = new TransformerException(fmsg, this);
 
       eh.fatalError(te);
     }
@@ -262,7 +262,7 @@ public abstract class Expression implements ExpressionNode, XPathVisitable {
 
   /** {@inheritDoc} */
   @Override
-  public void exprSetParent(ExpressionNode n) {
+  public void exprSetParent(final ExpressionNode n) {
     assertion(n != this, "Can not parent an expression to itself!");
     m_parent = n;
   }

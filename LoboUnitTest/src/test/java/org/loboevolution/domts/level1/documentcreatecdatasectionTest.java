@@ -56,11 +56,11 @@ public class documentcreatecdatasectionTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        CDATASection newCDATASectionNode;
-        String newCDATASectionValue;
-        String newCDATASectionName;
-        int newCDATASectionType;
+        final Document doc;
+        final CDATASection newCDATASectionNode;
+        final String newCDATASectionValue;
+        final String newCDATASectionName;
+        final int newCDATASectionType;
         doc = sampleXmlFile("staff.xml");
         newCDATASectionNode = doc.createCDATASection("This is a new CDATASection node");
         newCDATASectionValue = newCDATASectionNode.getNodeValue();

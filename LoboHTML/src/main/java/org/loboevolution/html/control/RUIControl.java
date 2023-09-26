@@ -53,7 +53,7 @@ public class RUIControl extends BaseElementRenderable {
 		public final Font font;
 		public final int whitespace;
 
-		public LayoutKey(int availWidth, int availHeight, int whitespace, Font font) {
+		public LayoutKey(final int availWidth, final int availHeight, final int whitespace, final Font font) {
 			this.availWidth = availWidth;
 			this.availHeight = availHeight;
 			this.whitespace = whitespace;
@@ -84,7 +84,7 @@ public class RUIControl extends BaseElementRenderable {
 		public final int height;
 		public final int width;
 
-		public LayoutValue(int width, int height) {
+		public LayoutValue(final int width, final int height) {
 			this.width = width;
 			this.height = height;
 		}
@@ -146,9 +146,9 @@ public class RUIControl extends BaseElementRenderable {
 		if (layoutValue == null) {
 			this.applyStyle(availWidth, availHeight);
 
-			Insets paddingInsets = this.paddingInsets == null ? RBlockViewport.ZERO_INSETS : this.paddingInsets;
-			Insets borderInsets = this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;
-			Insets marginInsets = this.marginInsets == null ? RBlockViewport.ZERO_INSETS : this.marginInsets;
+			final Insets paddingInsets = this.paddingInsets == null ? RBlockViewport.ZERO_INSETS : this.paddingInsets;
+			final Insets borderInsets = this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;
+			final Insets marginInsets = this.marginInsets == null ? RBlockViewport.ZERO_INSETS : this.marginInsets;
 
 			final int paddingWidth = paddingInsets.left - paddingInsets.right;
 			final int borderWidth = borderInsets.left - borderInsets.right;
@@ -201,8 +201,8 @@ public class RUIControl extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
-			RenderableSpot endPoint) {
+	public boolean extractSelectionText(final StringBuilder buffer, final boolean inSelection, final RenderableSpot startPoint,
+										final RenderableSpot endPoint) {
 		// No text here
 		return inSelection;
 	}
@@ -233,7 +233,7 @@ public class RUIControl extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public RenderableSpot getLowestRenderableSpot(int x, int y) {
+	public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
 		// Nothing draggable - return self
 		return new RenderableSpot(this, x, y);
 	}
@@ -300,8 +300,8 @@ public class RUIControl extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-		inSelection = super.paintSelection(g, inSelection, startPoint, endPoint);
+	public boolean paintSelection(final Graphics g, final boolean isSelection, final RenderableSpot startPoint, final RenderableSpot endPoint) {
+		final boolean inSelection = super.paintSelection(g, isSelection, startPoint, endPoint);
 		if (inSelection) {
 			final Color over = new Color(0, 0, 255, 50);
 			final Color oldColor = g.getColor();
@@ -317,7 +317,7 @@ public class RUIControl extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public void repaint(ModelNode modelNode) {
+	public void repaint(final ModelNode modelNode) {
 		final Object widget = this.widget;
 		if (widget instanceof UINode) {
 			((UINode) widget).repaint(modelNode);
@@ -328,7 +328,7 @@ public class RUIControl extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public void updateWidgetBounds(int guiX, int guiY) {
+	public void updateWidgetBounds(final int guiX, final int guiY) {
 		super.updateWidgetBounds(guiX, guiY);
         final Insets insets = this.getBorderInsets();
 		final int width = this.getWidth() - insets.left - insets.right;

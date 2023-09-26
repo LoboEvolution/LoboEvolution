@@ -62,25 +62,25 @@ public class hc_noderemovechildnodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        HTMLCollection emList;
-        Node employeeNode;
-        NodeList childList;
-        Node oldChild;
+        final Document doc;
+        final HTMLCollection elementList;
+        final HTMLCollection emList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node oldChild;
         Node child;
         String childName;
-        Node removedChild;
-        String removedName;
+        final Node removedChild;
+        final String removedName;
         int nodeType;
-        List<String> expected = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("STRONG");
         expected.add("CODE");
         expected.add("SUP");
         expected.add("VAR");
         expected.add("ACRONYM");
 
-        java.util.List<String> actual = new java.util.ArrayList<>();
+        final java.util.List<String> actual = new java.util.ArrayList<>();
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");

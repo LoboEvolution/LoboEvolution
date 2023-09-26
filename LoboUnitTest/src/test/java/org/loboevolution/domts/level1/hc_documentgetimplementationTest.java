@@ -54,9 +54,9 @@ public class hc_documentgetimplementationTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation docImpl;
-        boolean xmlstate;
+        final Document doc;
+        final DOMImplementation docImpl;
+        final boolean xmlstate;
         doc = sampleXmlFile("hc_staff.xml");
         
         docImpl = doc.getImplementation();

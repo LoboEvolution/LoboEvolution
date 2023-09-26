@@ -52,7 +52,7 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color getGapColor(int tabIndex) {
+	protected Color getGapColor(final int tabIndex) {
 		if (tabIndex == tabPane.getSelectedIndex()) {
 			return tabPane.getBackgroundAt(tabIndex);
 		}
@@ -61,7 +61,7 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Font getTabFont(boolean isSelected) {
+	protected Font getTabFont(final boolean isSelected) {
 		if (isSelected) {
 			return super.getTabFont(isSelected).deriveFont(Font.BOLD);
 		} else {
@@ -85,8 +85,8 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
-			boolean isSelected) {
+	protected void paintTabBackground(final Graphics g, final int tabPlacement, final int tabIndex, final int x, final int y, final int w, final int h,
+			final boolean isSelected) {
 		if (isSelected) {
 			g.setColor(tabPane.getBackgroundAt(tabIndex));
 			switch (tabPlacement) {

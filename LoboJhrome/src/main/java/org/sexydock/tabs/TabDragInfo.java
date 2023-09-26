@@ -35,7 +35,7 @@ public class TabDragInfo {
     public final Tab tab;
     public final Dimension sourceWindowSize;
     private Point grabPoint = null;
-    public TabDragInfo(Tab tab, Point grabPoint, double grabX, IFloatingTabHandler floatingTabHandler, Dimension sourceWindowSize) {
+    public TabDragInfo(final Tab tab, final Point grabPoint, final double grabX, final IFloatingTabHandler floatingTabHandler, final Dimension sourceWindowSize) {
         super();
         this.floatingTabHandler = floatingTabHandler;
         this.grabPoint = new Point(grabPoint);
@@ -48,7 +48,7 @@ public class TabDragInfo {
         return new Point(grabPoint);
     }
 
-    public void setGrabPoint(Point p) {
+    public void setGrabPoint(final Point p) {
         grabPoint = p == null ? null : new Point(p);
     }
 }

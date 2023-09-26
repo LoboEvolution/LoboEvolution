@@ -55,9 +55,9 @@ public class systemId01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        String systemId;
+        final Document doc;
+        final DocumentType docType;
+        final String systemId;
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         systemId = docType.getSystemId();

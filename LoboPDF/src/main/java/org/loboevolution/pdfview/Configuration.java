@@ -82,7 +82,7 @@ public class Configuration {
 	 *
 	 * @param aFlag whether greyscale images shall be converted to ARGB.
 	 */
-	public void setConvertGreyscaleImagesToArgb(boolean aFlag) {
+	public void setConvertGreyscaleImagesToArgb(final boolean aFlag) {
 		convertGreyscaleImagesToArgb = aFlag;
 	}
 
@@ -106,7 +106,7 @@ public class Configuration {
 	 *
 	 * @param aSize the height threshold at which to enable banded image rendering
 	 */
-	public void setThresholdForBandedImageRendering(int aSize) {
+	public void setThresholdForBandedImageRendering(final int aSize) {
 		thresholdForBandedImageRendering = aSize;
 	}
 
@@ -142,7 +142,7 @@ public class Configuration {
      *
      * @param avoidColorConvertOp a boolean.
      */
-    public void setAvoidColorConvertOp(boolean avoidColorConvertOp) {
+    public void setAvoidColorConvertOp(final boolean avoidColorConvertOp) {
         this.avoidColorConvertOp = avoidColorConvertOp;
     }
 
@@ -160,7 +160,7 @@ public class Configuration {
      *
      * @param useBlurResizingForImages a boolean.
      */
-    public void setUseBlurResizingForImages(boolean useBlurResizingForImages) {
+    public void setUseBlurResizingForImages(final boolean useBlurResizingForImages) {
         this.useBlurResizingForImages = useBlurResizingForImages;
     }
     
@@ -169,7 +169,7 @@ public class Configuration {
      *
      * @param printSignatureFields a boolean.
      */
-    public void setPrintSignatureFields(boolean printSignatureFields) {
+    public void setPrintSignatureFields(final boolean printSignatureFields) {
     	this.printSigantureFields = printSignatureFields;
     }
     
@@ -187,7 +187,7 @@ public class Configuration {
      *
      * @param printStampAnnotations a boolean.
      */
-    public void setPrintStampAnnotations(boolean printStampAnnotations) {
+    public void setPrintStampAnnotations(final boolean printStampAnnotations) {
     	this.printStampAnnotations = printStampAnnotations;
     }
     
@@ -205,7 +205,7 @@ public class Configuration {
      *
      * @param printWidgetAnnotations a boolean.
      */
-    public void setPrintWidgetAnnotations(boolean printWidgetAnnotations) {
+    public void setPrintWidgetAnnotations(final boolean printWidgetAnnotations) {
     	this.printWidgetAnnotations = printWidgetAnnotations;
     }
     
@@ -223,7 +223,7 @@ public class Configuration {
      *
      * @param printFreetextAnnotations a boolean.
      */
-    public void setPrintFreetextAnnotations(boolean printFreetextAnnotations) {
+    public void setPrintFreetextAnnotations(final boolean printFreetextAnnotations) {
     	this.printFreetextAnnotations = printFreetextAnnotations;
     }
     
@@ -241,7 +241,7 @@ public class Configuration {
      *
      * @param printLinkAnnotations a boolean.
      */
-    public void setPrintLinkAnnotations(boolean printLinkAnnotations) {
+    public void setPrintLinkAnnotations(final boolean printLinkAnnotations) {
     	this.printLinkAnnotations = printLinkAnnotations;
     }
     

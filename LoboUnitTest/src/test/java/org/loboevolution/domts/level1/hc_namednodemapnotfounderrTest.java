@@ -64,11 +64,11 @@ public class hc_namednodemapnotfounderrTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        NamedNodeMap attributes;
-        Node removedNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final NamedNodeMap attributes;
+        final Node removedNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);
@@ -76,7 +76,7 @@ public class hc_namednodemapnotfounderrTest extends LoboUnitTest {
         boolean success = false;
         try {
             removedNode = attributes.removeNamedItem("lang");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
         assertTrue("throw_NOT_FOUND_ERR", success);

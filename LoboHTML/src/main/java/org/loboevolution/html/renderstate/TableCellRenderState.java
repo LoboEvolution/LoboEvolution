@@ -46,6 +46,7 @@ import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Base64;
 
 /**
@@ -64,7 +65,7 @@ public class TableCellRenderState extends DisplayRenderState {
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	public TableCellRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+	public TableCellRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
 		super(prevRenderState, element, RenderState.DISPLAY_TABLE_CELL);
 	}
 
@@ -207,7 +208,7 @@ public class TableCellRenderState extends DisplayRenderState {
 				if (background.contains(";base64,")) {
                     final String base64 = background.split(";base64,")[1];
                     final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-                    background = String.valueOf(decodedBytes);
+                    background = Arrays.toString(decodedBytes);
                 }
 				binfo.setBackgroundImage(this.document.getFullURL(background));
 			}
@@ -232,8 +233,8 @@ public class TableCellRenderState extends DisplayRenderState {
 			String cellPaddingText = tableElement.getAttribute("cellpadding");
 			if (Strings.isNotBlank(cellPaddingText)) {
 				cellPaddingText = cellPaddingText.trim();
-				HTMLDocumentImpl doc =  (HTMLDocumentImpl)tableElement.getOwnerDocument();
-				int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, doc.getDefaultView(), 0);
+				final HTMLDocumentImpl doc =  (HTMLDocumentImpl)tableElement.getOwnerDocument();
+				final int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, doc.getDefaultView(), 0);
 				int cellPaddingType = HtmlInsets.TYPE_PIXELS;
 
 				if (cellPaddingText.endsWith("%")) {
@@ -320,7 +321,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			final HtmlRendererConfig config = element.getHtmlRendererConfig();
 			final String fontSize = props == null ? null : props.getFontSize();
 			final String fSize = Strings.isNotBlank(fontSize) ? fontSize : "1.2rem";
-			FontKey key = FontValues.getDefaultFontKey(config);
+			final FontKey key = FontValues.getDefaultFontKey(config);
 			key.setFontWeight(CSSValues.BOLD.getValue());
 			key.setFontSize(FontValues.getFontSize(fSize, element.getDocumentNode().getDefaultView(), prevRenderState));
 			return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, props, prevRenderState));

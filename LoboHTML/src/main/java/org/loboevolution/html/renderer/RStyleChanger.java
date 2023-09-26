@@ -45,7 +45,7 @@ final class RStyleChanger extends BaseRenderable {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public RStyleChanger(ModelNode modelNode) {
+	public RStyleChanger(final ModelNode modelNode) {
 		this.modelNode = modelNode;
 	}
 

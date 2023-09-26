@@ -54,10 +54,10 @@ public class hc_namednodemapinvalidtype1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap attributes;
-        Element docElem;
-        Node newElem;
+        final Document doc;
+        final NamedNodeMap attributes;
+        final Element docElem;
+        final Node newElem;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         attributes = docElem.getAttributes();
@@ -65,7 +65,7 @@ public class hc_namednodemapinvalidtype1Test extends LoboUnitTest {
         boolean success = false;
         try {
             attributes.setNamedItem(newElem);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
         assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

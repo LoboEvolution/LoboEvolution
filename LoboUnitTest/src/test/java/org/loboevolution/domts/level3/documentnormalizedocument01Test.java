@@ -49,12 +49,12 @@ import static org.junit.Assert.assertTrue;
 public class documentnormalizedocument01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element docElem;
-        String docElemNodeName;
-        String origDocElemNodeName;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final String docElemNodeName;
+        final String origDocElemNodeName;
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();

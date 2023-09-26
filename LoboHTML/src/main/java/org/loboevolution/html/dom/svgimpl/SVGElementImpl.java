@@ -115,7 +115,7 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 	 * @param extension a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public boolean hasExtension(String extension) {
+	public boolean hasExtension(final String extension) {
 		return extension.equalsIgnoreCase("svg");
 	}
 	
@@ -134,7 +134,7 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 	 * @param xmllang a {@link java.lang.String} object.
 	 * @throws DOMException if any.
 	 */
-	public void setXMLlang(String xmllang) {
+	public void setXMLlang(final String xmllang) {
 		setAttribute("xml:lang", xmllang);
 	}
 
@@ -153,12 +153,12 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
 	 * @param xmlspace a {@link java.lang.String} object.
 	 * @throws DOMException if any.
 	 */
-	public void setXMLspace(String xmlspace) {
+	public void setXMLspace(final String xmlspace) {
 		setAttribute("xml:space", xmlspace);
 	}
 
 	/** {@inheritDoc} */
-	public void setOwnerSVGElement(SVGSVGElement ownerSvg) {
+	public void setOwnerSVGElement(final SVGSVGElement ownerSvg) {
 		this.ownerSvg = ownerSvg;
 	}
 }

@@ -46,13 +46,13 @@ class BaseRListElement extends RBlock {
 	 *
 	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public BaseRListElement(RBlockInfo info) {
+	public BaseRListElement(final RBlockInfo info) {
 		super(info);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void applyStyle(int availWidth, int availHeight) {
+	protected void applyStyle(final int availWidth, final int availHeight) {
 		this.listStyle = null;
 		super.applyStyle(availWidth, availHeight);
 		final Object rootNode = this.modelNode;

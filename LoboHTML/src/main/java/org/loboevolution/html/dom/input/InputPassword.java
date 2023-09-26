@@ -59,7 +59,7 @@ public class InputPassword extends BasicInput {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputPassword(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputPassword(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		this.modelNode = modelNode;
 		setElement(this.modelNode);
 		setjComponent(pwd);
@@ -78,7 +78,7 @@ public class InputPassword extends BasicInput {
 		pwd.setPreferredSize(new Dimension(modelNode.getClientWidth(), modelNode.getClientHeight()));
 		final String baseUrl = modelNode.getBaseURI();
 
-		List<String> list = suggestionList(type, "", baseUrl);
+		final List<String> list = suggestionList(type, "", baseUrl);
 		Autocomplete.setupAutoComplete(pwd, list);
 
 		pwd.addFocusListener(this);
@@ -89,7 +89,7 @@ public class InputPassword extends BasicInput {
 	}
 	
 	
-	private List<String> suggestionList(String type, String text, String baseUrl) {
+	private List<String> suggestionList(final String type, final String text, final String baseUrl) {
 		final HtmlRendererConfig config = modelNode.getHtmlRendererConfig();
 		List<String> list =  config.autocomplete(type, text, baseUrl);
 		if (ArrayUtilities.isNotBlank(list)) {
@@ -101,13 +101,13 @@ public class InputPassword extends BasicInput {
 		return list;
 	}	
 	
-	private class LimitedDocument extends PlainDocument {
+	private final class LimitedDocument extends PlainDocument {
 
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-			int max = (int)modelNode.getMaxLength();
+		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {
+			final int max = (int)modelNode.getMaxLength();
 
 			final int docLength = getLength();
 			if (docLength >= max) {
@@ -132,10 +132,10 @@ public class InputPassword extends BasicInput {
 		
 	private String generatePassword() {
 		try {
-			String password = Strings.randomAlphaNumeric(8);
-			byte[] salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(32);
+			final String password = Strings.randomAlphaNumeric(8);
+			final byte[] salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(32);
 			return Base64.getEncoder().encodeToString(salt) + "$" + Strings.hash(password, salt);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			return "";
 		}
 	}

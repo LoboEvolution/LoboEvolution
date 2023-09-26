@@ -403,7 +403,7 @@ public class HTMLCollectionTest extends LoboUnitTest {
         item("'1.1'", "b2-button2");
     }
 
-    private void item(final String name, String message) {
+    private void item(final String name, final String message) {
         final String html = "<!doctype html>\n"+
                 "<html><head><title>First</title><script>\n"
                 + "  function report(result) {\n"
@@ -509,7 +509,7 @@ public class HTMLCollectionTest extends LoboUnitTest {
         arrayIndex("'2'", "undefined");
     }
 
-    private void arrayIndex(final String name, String message) {
+    private void arrayIndex(final String name, final String message) {
         final String html = "<!doctype html>\n"+
                 "<html><head><title>First</title><script>\n"
                 + "  function report(result) {\n"
@@ -616,7 +616,7 @@ public class HTMLCollectionTest extends LoboUnitTest {
         functionIndex("'2'","exception");
     }
 
-    private void functionIndex(final String name, String message) {
+    private void functionIndex(final String name, final String message) {
         final String html  = "<!doctype html>\n" +
                 "<html><head><title>First</title><script>\n"
                 + "  function report(result) {\n"
@@ -754,7 +754,7 @@ public class HTMLCollectionTest extends LoboUnitTest {
         item("'1.1'", "b2-button2");
     }
 
-    private void namedItem(final String name, String message) {
+    private void namedItem(final String name, final String message) {
         final String html = "<!doctype html>\n" +
                 "<html><head><title>First</title><script>\n"
                 + "  function report(result) {\n"

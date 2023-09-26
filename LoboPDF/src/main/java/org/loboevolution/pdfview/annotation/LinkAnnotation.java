@@ -65,10 +65,10 @@ public class LinkAnnotation extends PDFAnnotation {
 	 * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public LinkAnnotation(PDFObject annotObject) throws IOException {
+	public LinkAnnotation(final PDFObject annotObject) throws IOException {
 		super(annotObject, ANNOTATION_TYPE.LINK);
 		// a link annotation can either have an action (GoTo or URI) or a destination (DEST)
-		PDFObject actionObj = annotObject.getDictRef("A");
+		final PDFObject actionObj = annotObject.getDictRef("A");
 		if (actionObj != null) {
 			this.action = PDFAction.getAction(actionObj, annotObject.getRoot());
 		} else {

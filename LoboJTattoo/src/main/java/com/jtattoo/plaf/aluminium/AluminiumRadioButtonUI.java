@@ -54,7 +54,7 @@ public class AluminiumRadioButtonUI extends BaseRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g, JComponent c) {
+	public void paintBackground(final Graphics g, final JComponent c) {
 		if (c.isOpaque()) {
 			if (c.getBackground() instanceof ColorUIResource
 					&& c.getBackground().equals(AbstractLookAndFeel.getBackgroundColor())) {

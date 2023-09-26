@@ -74,10 +74,10 @@ import java.util.Stack;
 		 * errors: invalidaccess, rangecheck, stackoverflow,
 		 * stackunderflow, typecheck
 		 */
-		public void eval(Stack<Object> environment) {
-		    Number count = (Number) environment.pop();
+		public void eval(final Stack<Object> environment) {
+		    final Number count = (Number) environment.pop();
 // ????
-		    Object[] buffer = new Object[count.intValue()];
+		    final Object[] buffer = new Object[count.intValue()];
 		    for (int i = 0; i < buffer.length; i++) {
 		    	buffer[i] = environment.pop();
 			}

@@ -26,8 +26,6 @@
 
 package org.loboevolution.store;
 
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Connection;
@@ -65,13 +63,13 @@ public class ExternalResourcesStore {
 	 * @param type a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static String getSourceCache(String baseUrl, String type, boolean test) {
+	public static String getSourceCache(final String baseUrl, final String type, final boolean test) {
 		String source = "";
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SOURCE_CACHE)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SOURCE_CACHE)) {
 			pstmt.setString(1, baseUrl);
 			pstmt.setString(2, type);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					source = rs.getString(1);
 				}
@@ -83,60 +81,60 @@ public class ExternalResourcesStore {
 				if(!test) saveCache(baseUrl, source, type);
 			}
 
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 		return source;
 	}
 
-	private static void saveCache(String baseUrl, String source, String type) throws Exception {
+	private static void saveCache(final String baseUrl, final String source, final String type) throws Exception {
 		final URL url = new URL(baseUrl);
 		final URLConnection con = url.openConnection();
-		String eTag = con.getHeaderField("Etag");
-		long lastModified = Urls.getExpiration(con, System.currentTimeMillis());
-		int contentLenght = Integer.parseInt(con.getHeaderField("Content-Length") == null ? "0" : con.getHeaderField("Content-Length"));
-		String cacheControl = con.getHeaderField("Cache-Control");
+		final String eTag = con.getHeaderField("Etag");
+		final long lastModified = Urls.getExpiration(con, System.currentTimeMillis());
+		final int contentLenght = Integer.parseInt(con.getHeaderField("Content-Length") == null ? "0" : con.getHeaderField("Content-Length"));
+		final String cacheControl = con.getHeaderField("Cache-Control");
 		boolean isNoStore = false;
 		if (cacheControl != null) {
-			StringTokenizer tok = new StringTokenizer(cacheControl, ",");
+			final StringTokenizer tok = new StringTokenizer(cacheControl, ",");
 			while (tok.hasMoreTokens()) {
-				String token = tok.nextToken().trim().toLowerCase();
+				final String token = tok.nextToken().trim().toLowerCase();
 				if ("no-store".equals(token)) {
 					isNoStore = true;
 				}
 			}
 		}
 
-		int check = checkCache(baseUrl, contentLenght, eTag, type);
+		final int check = checkCache(baseUrl, contentLenght, eTag, type);
 		if (!isNoStore && check == 0) {
 			insertCache(baseUrl, source, contentLenght, eTag, new Date(lastModified), type);
 		}
 	}
 
-	private static int checkCache(String baseUrl, int contentLenght, String eTag, String type) {
+	private static int checkCache(final String baseUrl, final int contentLenght, final String eTag, final String type) {
 		int check = 0;
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CHECK_CACHE)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CHECK_CACHE)) {
 			pstmt.setString(1, baseUrl);
 			pstmt.setInt(2, contentLenght);
 			pstmt.setString(3, eTag);
 			pstmt.setString(3, type);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					check = rs.getInt(1);
 				}
 			}
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 		return check;
 	}
 
-	private static void insertCache(String baseUrl, String source, int contentLenght, String eTag, Date lastModified,
-			String type) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_CACHE)) {
-			SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_PATTERN);
+	private static void insertCache(final String baseUrl, final String source, final int contentLenght, final String eTag, final Date lastModified,
+                                    final String type) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_CACHE)) {
+			final SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_PATTERN);
 			pstmt.setString(1, baseUrl);
 			pstmt.setString(2, source);
 			pstmt.setInt(3, contentLenght);
@@ -144,27 +142,27 @@ public class ExternalResourcesStore {
 			pstmt.setString(5, lastModified != null ? dateFormatter.format(lastModified) : null);
 			pstmt.setString(6, type);
 			pstmt.executeUpdate();
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 	}
 
 	public static void deleteAllCache() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-			 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_ALL_CACHE)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_ALL_CACHE)) {
 			pstmt.executeUpdate();
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 	}
 
-	private static void deleteCache(String baseUrl, String type) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_SOURCE_CACHE)) {
+	private static void deleteCache(final String baseUrl, final String type) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_SOURCE_CACHE)) {
 			pstmt.setString(1, baseUrl);
 			pstmt.setString(2, type);
 			pstmt.executeUpdate();
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 		}
 	}

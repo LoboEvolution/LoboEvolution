@@ -56,16 +56,16 @@ public class McWinTitlePane extends BaseTitlePane {
 	protected class TitlePaneLayout implements LayoutManager {
 
 		@Override
-		public void addLayoutComponent(String name, Component c) {
+		public void addLayoutComponent(final String name, final Component c) {
 		}
 
 		protected int computeHeight() {
-			FontMetrics fm = JTattooUtilities.getFontMetrics(McWinTitlePane.this, null, getFont());
+			final FontMetrics fm = JTattooUtilities.getFontMetrics(McWinTitlePane.this, null, getFont());
 			return fm.getHeight() + 5;
 		}
 
 		@Override
-		public void layoutContainer(Container c) {
+		public void layoutContainer(final Container c) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				layoutMacStyle(c);
 			} else {
@@ -73,21 +73,21 @@ public class McWinTitlePane extends BaseTitlePane {
 			}
 		}
 
-		public void layoutDefault(Container c) {
-			boolean leftToRight = isLeftToRight();
+		public void layoutDefault(final Container c) {
+			final boolean leftToRight = isLeftToRight();
 
-			int w = getWidth();
-			int h = getHeight();
+			final int w = getWidth();
+			final int h = getHeight();
 
 			// assumes all buttons have the same dimensions these dimensions include the
 			// borders
-			int spacing = getHorSpacing();
-			int buttonHeight = h - getVerSpacing() - 1;
-			int buttonWidth = buttonHeight;
+			final int spacing = getHorSpacing();
+			final int buttonHeight = h - getVerSpacing() - 1;
+			final int buttonWidth = buttonHeight;
 
 			if (menuBar != null) {
-				int mw = menuBar.getPreferredSize().width;
-				int mh = menuBar.getPreferredSize().height;
+				final int mw = menuBar.getPreferredSize().width;
+				final int mh = menuBar.getPreferredSize().height;
 				if (leftToRight) {
 					menuBar.setBounds(2, (h - mh) / 2, mw, mh);
 				} else {
@@ -96,7 +96,7 @@ public class McWinTitlePane extends BaseTitlePane {
 			}
 
 			int x = leftToRight ? w - spacing : 0;
-			int y = Math.max(0, (h - buttonHeight) / 2 - 1);
+			final int y = Math.max(0, (h - buttonHeight) / 2 - 1);
 
 			if (closeButton != null) {
 				x += leftToRight ? -buttonWidth : spacing;
@@ -132,26 +132,26 @@ public class McWinTitlePane extends BaseTitlePane {
 					maxWidth -= menuBar.getPreferredSize().width;
 					maxWidth -= spacing;
 				}
-				int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
-				int cph = h;
-				int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
-				int cpy = 0;
+				final int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
+				final int cph = h;
+				final int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
+				final int cpy = 0;
 				customTitlePanel.setBounds(cpx, cpy, cpw, cph);
 				buttonsWidth += customTitlePanel.getPreferredSize().width;
 			}
 		}
 
-		private void layoutMacStyle(Container c) {
-			int spacing = getHorSpacing();
-			int h = getHeight();
+		private void layoutMacStyle(final Container c) {
+			final int spacing = getHorSpacing();
+			final int h = getHeight();
 
 			// assumes all buttons have the same dimensions these dimensions include the
 			// borders
-			int btnHeight = h - getVerSpacing();
-			int btnWidth = btnHeight;
+			final int btnHeight = h - getVerSpacing();
+			final int btnWidth = btnHeight;
 
 			int x = 0;
-			int y = 0;
+			final int y = 0;
 
 			if (closeButton != null) {
 				closeButton.setBounds(x, y, btnWidth, btnHeight);
@@ -171,28 +171,28 @@ public class McWinTitlePane extends BaseTitlePane {
 			buttonsWidth = x;
 
 			if (customTitlePanel != null) {
-				int cpx = buttonsWidth + 5;
-				int cpy = 0;
-				int cpw = customTitlePanel.getPreferredSize().width;
-				int cph = h;
+				final int cpx = buttonsWidth + 5;
+				final int cpy = 0;
+				final int cpw = customTitlePanel.getPreferredSize().width;
+				final int cph = h;
 				customTitlePanel.setBounds(cpx, cpy, cpw, cph);
 				buttonsWidth += cpw + 5;
 			}
 		}
 
 		@Override
-		public Dimension minimumLayoutSize(Container c) {
+		public Dimension minimumLayoutSize(final Container c) {
 			return preferredLayoutSize(c);
 		}
 
 		@Override
-		public Dimension preferredLayoutSize(Container c) {
-			int height = computeHeight();
+		public Dimension preferredLayoutSize(final Container c) {
+			final int height = computeHeight();
 			return new Dimension(height, height);
 		}
 
 		@Override
-		public void removeLayoutComponent(Component c) {
+		public void removeLayoutComponent(final Component c) {
 		}
 
 	} // end fo class TitlePaneLayout
@@ -208,7 +208,7 @@ public class McWinTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public McWinTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public McWinTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
@@ -220,7 +220,7 @@ public class McWinTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getTheme().getWindowBorderColor());
 		} else {
@@ -231,9 +231,9 @@ public class McWinTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
-			Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
+			final Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
 			if (ColorHelper.getGrayValue(fc) > 128) {
 				g.setColor(ColorHelper.darker(AbstractLookAndFeel.getWindowTitleColorDark(), 40));
 			} else {
@@ -243,7 +243,7 @@ public class McWinTitlePane extends BaseTitlePane {
 			g.setColor(fc);
 			JTattooUtilities.drawString(rootPane, g, title, x, y);
 		} else {
-			Color fc = AbstractLookAndFeel.getWindowInactiveTitleForegroundColor();
+			final Color fc = AbstractLookAndFeel.getWindowInactiveTitleForegroundColor();
 			if (ColorHelper.getGrayValue(fc) > 128) {
 				g.setColor(ColorHelper.darker(AbstractLookAndFeel.getWindowInactiveTitleColorDark(), 40));
 			} else {

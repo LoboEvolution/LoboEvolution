@@ -52,7 +52,7 @@ public class SVGControl extends BaseControl {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl} object.
 	 */
-	public SVGControl(SVGSVGElementImpl modelNode) {
+	public SVGControl(final SVGSVGElementImpl modelNode) {
 		super(modelNode);
 		this.modelNode = modelNode;
 		modelNode.setPainted(false);

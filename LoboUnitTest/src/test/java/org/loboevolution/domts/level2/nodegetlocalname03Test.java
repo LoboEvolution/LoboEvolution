@@ -55,15 +55,15 @@ public class nodegetlocalname03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Element qelement;
-        Attr attr;
-        Attr qattr;
-        String localElemName;
-        String localQElemName;
-        String localAttrName;
-        String localQAttrName;
+        final Document doc;
+        final Element element;
+        final Element qelement;
+        final Attr attr;
+        final Attr qattr;
+        final String localElemName;
+        final String localQElemName;
+        final String localAttrName;
+        final String localQAttrName;
         doc = sampleXmlFile("staff.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test/elem", "elem");
         qelement = doc.createElementNS("http://www.w3.org/DOM/Test/elem", "qual:qelem");

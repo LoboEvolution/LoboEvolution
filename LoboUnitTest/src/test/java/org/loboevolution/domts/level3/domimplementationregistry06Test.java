@@ -50,9 +50,9 @@ public class domimplementationregistry06Test extends LoboUnitTest {
     public void runTest() throws Exception {
         DOMImplementation domImpl = null;
         boolean hasFeature;
-        String nullVersion = null;
+        final String nullVersion = null;
 
-        DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImpl = domImplRegistry.getDOMImplementation("xMl 3.0 cOrE");
         assertNotNull("domImplNotNull", domImpl);

@@ -57,7 +57,7 @@ public class HalftoneRegionSegment extends RegionSegment {
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 * @param inlineImage a boolean.
 	 */
-	public HalftoneRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage) {
+	public HalftoneRegionSegment(final JBIG2StreamDecoder streamDecoder, final boolean inlineImage) {
 		super(streamDecoder);
 
 		this.inlineImage = inlineImage;
@@ -77,46 +77,46 @@ public class HalftoneRegionSegment extends RegionSegment {
 
 		short[] buf = new short[4];
 		decoder.readByte(buf);
-		int gridWidth = BinaryOperation.getInt32(buf);
+		final int gridWidth = BinaryOperation.getInt32(buf);
 
 		buf = new short[4];
 		decoder.readByte(buf);
-		int gridHeight = BinaryOperation.getInt32(buf);
+		final int gridHeight = BinaryOperation.getInt32(buf);
 
 		buf = new short[4];
 		decoder.readByte(buf);
-		int gridX = BinaryOperation.getInt32(buf);
+		final int gridX = BinaryOperation.getInt32(buf);
 
 		buf = new short[4];
 		decoder.readByte(buf);
-		int gridY = BinaryOperation.getInt32(buf);
+		final int gridY = BinaryOperation.getInt32(buf);
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("grid pos and size = " + gridX + ',' + gridY + ' ' + gridWidth + ',' + gridHeight);
 
 		buf = new short[2];
 		decoder.readByte(buf);
-		int stepX = BinaryOperation.getInt16(buf);
+		final int stepX = BinaryOperation.getInt16(buf);
 
 		buf = new short[2];
 		decoder.readByte(buf);
-		int stepY = BinaryOperation.getInt16(buf);
+		final int stepY = BinaryOperation.getInt16(buf);
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("step size = " + stepX + ',' + stepY);
 
-		int[] referedToSegments = segmentHeader.getReferredToSegments();
+		final int[] referedToSegments = segmentHeader.getReferredToSegments();
 		if (referedToSegments.length != 1) {
 			logger.info("Error in halftone Segment. refSegs should == 1");
 		}
 
-		Segment segment = decoder.findSegment(referedToSegments[0]);
+		final Segment segment = decoder.findSegment(referedToSegments[0]);
 		if (segment.getSegmentHeader().getSegmentType() != Segment.PATTERN_DICTIONARY) {
 			if (JBIG2StreamDecoder.debug)
 				logger.info("Error in halftone Segment. bad symbol dictionary reference");
 		}
 		
-		PatternDictionarySegment patternDictionarySegment = (PatternDictionarySegment) segment;
+		final PatternDictionarySegment patternDictionarySegment = (PatternDictionarySegment) segment;
 
 		int bitsPerValue = 0, i = 1;
 		while (i < patternDictionarySegment.getSize()) {
@@ -125,25 +125,25 @@ public class HalftoneRegionSegment extends RegionSegment {
 		}
 		
 		JBIG2Bitmap bitmap = patternDictionarySegment.getBitmaps()[0];
-		int patternWidth = bitmap.getWidth();
-		int patternHeight = bitmap.getHeight();
+		final int patternWidth = bitmap.getWidth();
+		final int patternHeight = bitmap.getHeight();
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("pattern size = " + patternWidth + ',' + patternHeight);
 
-		boolean useMMR = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_MMR) != 0;
-		int template = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_TEMPLATE);
+		final boolean useMMR = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_MMR) != 0;
+		final int template = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_TEMPLATE);
 		
 		if (!useMMR) {
 			arithmeticDecoder.resetGenericStats(template, null);
 			arithmeticDecoder.start();
 		}
 
-		int halftoneDefaultPixel = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_DEF_PIXEL);
+		final int halftoneDefaultPixel = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_DEF_PIXEL);
 		bitmap = new JBIG2Bitmap(regionBitmapWidth, regionBitmapHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 		bitmap.clear(halftoneDefaultPixel);
 
-		boolean enableSkip = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_ENABLE_SKIP) != 0;
+		final boolean enableSkip = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_ENABLE_SKIP) != 0;
 		
 		JBIG2Bitmap skipBitmap = null;
 		if (enableSkip) {
@@ -151,8 +151,8 @@ public class HalftoneRegionSegment extends RegionSegment {
 			skipBitmap.clear(0);
 			for (int y = 0; y < gridHeight; y++) {
 				for (int x = 0; x < gridWidth; x++) {
-					int xx = gridX + y * stepY + x * stepX;
-					int yy = gridY + y * stepX - x * stepY;
+					final int xx = gridX + y * stepY + x * stepX;
+					final int yy = gridY + y * stepX - x * stepY;
 					
 					if (((xx + patternWidth) >> 8) <= 0 || (xx >> 8) >= regionBitmapWidth || ((yy + patternHeight) >> 8) <= 0 || (yy >> 8) >= regionBitmapHeight) {
 						skipBitmap.setPixel(y, x, 1);
@@ -161,11 +161,12 @@ public class HalftoneRegionSegment extends RegionSegment {
 			}
 		}
 
-		int[] grayScaleImage = new int[gridWidth * gridHeight];
+		final int[] grayScaleImage = new int[gridWidth * gridHeight];
 
-		short[] genericBAdaptiveTemplateX = new short[4], genericBAdaptiveTemplateY = new short[4];
+		final short[] genericBAdaptiveTemplateX = new short[4];
+        final short[] genericBAdaptiveTemplateY = new short[4];
 
-		genericBAdaptiveTemplateX[0] = (short) (template <= 1 ? 3 : 2);
+        genericBAdaptiveTemplateX[0] = (short) (template <= 1 ? 3 : 2);
 		genericBAdaptiveTemplateY[0] = -1;
 		genericBAdaptiveTemplateX[1] = -3;
 		genericBAdaptiveTemplateY[1] = -1;
@@ -184,14 +185,14 @@ public class HalftoneRegionSegment extends RegionSegment {
 			i = 0;
 			for (int row = 0; row < gridHeight; row++) {
 				for (int col = 0; col < gridWidth; col++) {
-					int bit = grayBitmap.getPixel(col, row) ^ grayScaleImage[i] & 1;
+					final int bit = grayBitmap.getPixel(col, row) ^ grayScaleImage[i] & 1;
 					grayScaleImage[i] = (grayScaleImage[i] << 1) | bit;
 					i++;
 				}
 			}
 		}
 
-		int combinationOperator = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_COMB_OP);
+		final int combinationOperator = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_COMB_OP);
 
 		i = 0;
 		for (int col = 0; col < gridHeight; col++) {
@@ -199,7 +200,7 @@ public class HalftoneRegionSegment extends RegionSegment {
 			int yy = gridY + col * stepX;
 			for (int row = 0; row < gridWidth; row++) {
 				if (!(enableSkip && skipBitmap.getPixel(col, row) == 1)) {
-					JBIG2Bitmap patternBitmap = patternDictionarySegment.getBitmaps()[grayScaleImage[i]];
+					final JBIG2Bitmap patternBitmap = patternDictionarySegment.getBitmaps()[grayScaleImage[i]];
 					bitmap.combine(patternBitmap, xx >> 8, yy >> 8, combinationOperator);
 				}
 				
@@ -211,10 +212,10 @@ public class HalftoneRegionSegment extends RegionSegment {
 		}
 
 		if (inlineImage) {
-			PageInformationSegment pageSegment = decoder.findPageSegement(segmentHeader.getPageAssociation());
-			JBIG2Bitmap pageBitmap = pageSegment.getPageBitmap();
+			final PageInformationSegment pageSegment = decoder.findPageSegement(segmentHeader.getPageAssociation());
+			final JBIG2Bitmap pageBitmap = pageSegment.getPageBitmap();
 
-			int externalCombinationOperator = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
+			final int externalCombinationOperator = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
 			pageBitmap.combine(bitmap, regionBitmapXLocation, regionBitmapYLocation, externalCombinationOperator);
 		} else {
 			bitmap.setBitmapNumber(getSegmentHeader().getSegmentNumber());
@@ -225,7 +226,7 @@ public class HalftoneRegionSegment extends RegionSegment {
 
 	private void readHalftoneRegionFlags() throws IOException {
 		/** extract text region Segment flags */
-		short halftoneRegionFlagsField = decoder.readByte();
+		final short halftoneRegionFlagsField = decoder.readByte();
 
 		halftoneRegionFlags.setFlags(halftoneRegionFlagsField);
 

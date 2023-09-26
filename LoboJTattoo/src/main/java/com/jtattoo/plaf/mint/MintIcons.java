@@ -64,7 +64,7 @@ public class MintIcons extends BaseIcons {
 
 		private int iconTyp = ICON_ICON_TYP;
 
-		public TitleButtonIcon(int typ) {
+		public TitleButtonIcon(final int typ) {
 			iconTyp = typ;
 		}
 
@@ -79,17 +79,18 @@ public class MintIcons extends BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			int w = c.getWidth();
-			int h = c.getHeight();
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+final int x = iconX;
+			final int w = c.getWidth();
+			final int h = c.getHeight();
 
-			JButton b = (JButton) c;
-			Graphics2D g2D = (Graphics2D) g;
+			final JButton b = (JButton) c;
+			final Graphics2D g2D = (Graphics2D) g;
 
-			boolean isActive = JTattooUtilities.isActive(b);
-			boolean isPressed = b.getModel().isPressed();
-			boolean isArmed = b.getModel().isArmed();
-			boolean isRollover = b.getModel().isRollover();
+			final boolean isActive = JTattooUtilities.isActive(b);
+			final boolean isPressed = b.getModel().isPressed();
+			final boolean isArmed = b.getModel().isArmed();
+			final boolean isRollover = b.getModel().isRollover();
 
 			Color cHi = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getWindowTitleColorLight(), 40);
 			Color cLo = ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10);
@@ -108,7 +109,7 @@ public class MintIcons extends BaseIcons {
 				fcLo = ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorDark(), 10);
 			}
 			if (isPressed && isArmed) {
-				Color cTemp = ColorHelper.darker(cLo, 10);
+				final Color cTemp = ColorHelper.darker(cLo, 10);
 				cLo = ColorHelper.darker(cHi, 10);
 				cHi = cTemp;
 			} else if (isRollover) {
@@ -116,8 +117,8 @@ public class MintIcons extends BaseIcons {
 				cLo = ColorHelper.brighter(cLo, 30);
 			}
 
-			Shape savedClip = g.getClip();
-			Area area = new Area(new RoundRectangle2D.Double(1, 1, w - 1, h - 1, 3, 3));
+			final Shape savedClip = g.getClip();
+			final Area area = new Area(new RoundRectangle2D.Double(1, 1, w - 1, h - 1, 3, 3));
 			g2D.setClip(area);
 
 			g2D.setPaint(new GradientPaint(0, 0, fcLo, w, h, fcHi));

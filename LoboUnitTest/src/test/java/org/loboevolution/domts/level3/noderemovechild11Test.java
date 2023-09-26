@@ -48,12 +48,12 @@ import static org.junit.Assert.assertNull;
 public class noderemovechild11Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Text txt;
-        Text removedTxt;
-        Node appendedChild;
-        Node removedChild;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Text txt;
+        final Text removedTxt;
+        final Node appendedChild;
+        final Node removedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         txt = doc.createTextNode("TEXT");

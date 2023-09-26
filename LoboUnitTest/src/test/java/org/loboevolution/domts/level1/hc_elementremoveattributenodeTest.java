@@ -35,7 +35,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -57,12 +56,12 @@ public class hc_elementremoveattributenodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        Attr streetAttr;
-        Attr removedAttr;
-        String removedValue;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final Attr streetAttr;
+        final Attr removedAttr;
+        final String removedValue;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);

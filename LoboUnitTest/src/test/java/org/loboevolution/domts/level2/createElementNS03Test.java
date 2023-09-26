@@ -62,13 +62,32 @@ public class createElementNS03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.wedding.com/";
+        final String namespaceURI = "http://www.wedding.com/";
         String qualifiedName;
-        Document doc;
+        final Document doc;
         boolean done;
         Element newElement;
         String charact;
-        List<String> illegalQNames = new ArrayList<>();
+        final List<String> illegalQNames = getIllegalQNames();
+
+        doc = sampleXmlFile("staffNS.xml");
+        for (int indexN10098 = 0; indexN10098 < illegalQNames.size(); indexN10098++) {
+            qualifiedName = illegalQNames.get(indexN10098);
+
+            {
+                boolean success = false;
+                try {
+                    newElement = doc.createElementNS(namespaceURI, qualifiedName);
+                } catch (final DOMException ex) {
+                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
+                }
+                assertTrue("throw_INVALID_CHARACTER_ERR", success);
+            }
+        }
+    }
+
+    private static List<String> getIllegalQNames() {
+        final List<String> illegalQNames = new ArrayList<>();
         illegalQNames.add("person:{");
         illegalQNames.add("person:}");
         illegalQNames.add("person:~");
@@ -96,21 +115,7 @@ public class createElementNS03Test extends LoboUnitTest {
         illegalQNames.add("person:,");
         illegalQNames.add("person:a ");
         illegalQNames.add("person:\"");
-
-        doc = sampleXmlFile("staffNS.xml");
-        for (int indexN10098 = 0; indexN10098 < illegalQNames.size(); indexN10098++) {
-            qualifiedName = illegalQNames.get(indexN10098);
-
-            {
-                boolean success = false;
-                try {
-                    newElement = doc.createElementNS(namespaceURI, qualifiedName);
-                } catch (DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue("throw_INVALID_CHARACTER_ERR", success);
-            }
-        }
+        return illegalQNames;
     }
 }
 

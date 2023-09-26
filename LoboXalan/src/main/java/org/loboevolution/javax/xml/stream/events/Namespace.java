@@ -50,8 +50,6 @@
 
 package org.loboevolution.javax.xml.stream.events;
 
-import org.loboevolution.javax.xml.namespace.QName;
-
 public interface Namespace extends Attribute {
 
   /**

@@ -33,7 +33,7 @@ public class MediaListImpl implements MediaList {
 
     private final org.htmlunit.cssparser.dom.MediaListImpl media;
 
-    public MediaListImpl(org.htmlunit.cssparser.dom.MediaListImpl media) {
+    public MediaListImpl(final org.htmlunit.cssparser.dom.MediaListImpl media) {
         this.media = media;
     }
 
@@ -51,7 +51,7 @@ public class MediaListImpl implements MediaList {
 
     /** {@inheritDoc} */
     @Override
-    public String item(int index) {
+    public String item(final int index) {
         if (index < 0 || index >= getLength()) {
             return null;
         }
@@ -61,13 +61,13 @@ public class MediaListImpl implements MediaList {
 
     /** {@inheritDoc} */
     @Override
-    public void appendMedium(String medium) {
+    public void appendMedium(final String medium) {
 
     }
 
     /** {@inheritDoc} */
     @Override
-    public void deleteMedium(String medium) {
+    public void deleteMedium(final String medium) {
 
     }
 

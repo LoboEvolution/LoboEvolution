@@ -54,17 +54,17 @@ import static org.junit.Assert.assertTrue;
 public class wellformed04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        DocumentType nullDoctype = null;
+        final DOMImplementation domImpl;
+        final DocumentType nullDoctype = null;
 
-        Document doc;
-        Element docElem;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final Element docElem;
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        List<DOMError> errors;
-        boolean canSet;
-        String nullNS = null;
+        final List<DOMError> errors;
+        final boolean canSet;
+        final String nullNS = null;
 
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDoctype);
@@ -73,7 +73,7 @@ public class wellformed04Test extends LoboUnitTest {
         boolean success = false;
         try {
             doc.createAttributeNS(nullNS, "LegalNameࢎ");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
         assertTrue("xml10InvalidName", success);
@@ -82,7 +82,7 @@ public class wellformed04Test extends LoboUnitTest {
         try {
             doc.setXmlVersion("1.1");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             if (ex.getCode() == 9) {
                 return;
             }
@@ -99,7 +99,7 @@ public class wellformed04Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
-            for (DOMError domError : errors) {
+            for (final DOMError domError : errors) {
                 assertNull("noErrorsExpected", domError);
             }
         }

@@ -44,8 +44,8 @@ import static org.junit.Assert.assertTrue;
 public class documentgetstricterrorchecking01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        boolean strictErrorCheckingValue;
+        final Document doc;
+        final boolean strictErrorCheckingValue;
         doc = sampleXmlFile("hc_staff.xml");
         strictErrorCheckingValue = doc.getStrictErrorChecking();
         assertTrue("documentgetstricterrorchecking01", strictErrorCheckingValue);

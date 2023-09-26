@@ -62,15 +62,15 @@ public class elementgetelementsbytagnamespecialvalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element lastEmployee;
-        HTMLCollection lastempList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element lastEmployee;
+        final HTMLCollection lastempList;
         Node child;
         String childName;
-        List<String> result = new ArrayList<>();
+        final List<String> result = new ArrayList<>();
 
-        List<String> expectedResult = new ArrayList<>();
+        final List<String> expectedResult = new ArrayList<>();
         expectedResult.add("EMPLOYEEID");
         expectedResult.add("NAME");
         expectedResult.add("POSITION");

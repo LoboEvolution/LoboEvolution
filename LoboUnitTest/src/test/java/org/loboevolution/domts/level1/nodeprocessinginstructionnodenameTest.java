@@ -56,10 +56,10 @@ public class nodeprocessinginstructionnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NodeList testList;
-        Node piNode;
-        String piName;
+        final Document doc;
+        final NodeList testList;
+        final Node piNode;
+        final String piName;
         doc = sampleXmlFile("staff.xml");
         testList = doc.getChildNodes();
         piNode = testList.item(0);

@@ -55,16 +55,16 @@ public class elementgetattributenodens01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Attr attribute1;
-        Attr attribute2;
-        Attr attribute;
-        String attrValue;
-        String attrName;
-        String attNodeName;
-        String attrLocalName;
-        String attrNS;
+        final Document doc;
+        final Element element;
+        final Attr attribute1;
+        final Attr attribute2;
+        final Attr attribute;
+        final String attrValue;
+        final String attrName;
+        final String attNodeName;
+        final String attrLocalName;
+        final String attrNS;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("namespaceURI", "root");
         attribute1 = doc.createAttributeNS("http://www.w3.org/DOM/Level2", "l2:att");

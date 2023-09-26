@@ -114,7 +114,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      * @param style a {@link org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl} object.
      */
-    public CSSStyleDeclarationImpl(HTMLElementImpl element, org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style) {
+    public CSSStyleDeclarationImpl(final HTMLElementImpl element, final org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style) {
         this.element = element;
         this.style = style;
     }
@@ -124,7 +124,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      */
-    public CSSStyleDeclarationImpl(HTMLElementImpl element) {
+    public CSSStyleDeclarationImpl(final HTMLElementImpl element) {
         this.element = element;
         this.style = new org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl();
     }
@@ -134,7 +134,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
      *
      * @param style a {@link org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl} object.
      */
-    public CSSStyleDeclarationImpl(org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style) {
+    public CSSStyleDeclarationImpl(final org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style) {
         this.element = new HTMLElementImpl("");
         this.style = style;
     }
@@ -148,22 +148,22 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     @JSFunction
-    public String getPropertyValue(String property) {
+    public String getPropertyValue(final String property) {
         return style.getPropertyValue(property);
     }
 
     /** {@inheritDoc} */
     @Override
     @JSFunction
-    public String getPropertyPriority(String property) {
+    public String getPropertyPriority(final String property) {
         return style.getPropertyPriority(property);
     }
 
-    public Property getPropertyDeclaration(String property) {
+    public Property getPropertyDeclaration(final String property) {
         return style.getPropertyDeclaration(property);
     }
 
-    public boolean isPropertyPriority(String property) {
+    public boolean isPropertyPriority(final String property) {
         return Strings.isNotBlank(style.getPropertyPriority(property));
     }
 
@@ -173,8 +173,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     }
 
     @Override
-    public void setProperty(String propertyName, String value, String priority) {
+    public void setProperty(final String propertyName, final String vl, final String priority) {
         final String propertyPriority1 = getPropertyPriority(propertyName);
+        String value = vl;
 
         if(Strings.isNotBlank(propertyPriority1)) return;
 
@@ -220,7 +221,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
      * @param value a {@link java.lang.String} object.
      * @param important a {@link java.lang.Boolean} object.
      */
-    public final void setPropertyValueProcessed(String lowerCaseName, String value, boolean important) {
+    public final void setPropertyValueProcessed(final String lowerCaseName, final String value, final boolean important) {
         final SubPropertySetter setter = SUB_SETTERS.get(lowerCaseName);
         if (setter != null) {
             setter.changeValue(this, value);
@@ -229,10 +230,10 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         }
     }
 
-    public void merge(CSSStyleDeclarationImpl style) {
-        List<Property> tmp = new ArrayList<>();
-        List<Property> locals = getProperties();
-        List<Property> styles = style.getProperties();
+    public void merge(final CSSStyleDeclarationImpl style) {
+        final List<Property> tmp = new ArrayList<>();
+        final List<Property> locals = getProperties();
+        final List<Property> styles = style.getProperties();
 
         if (locals.size() == 0 && styles.size() > 0) {
             locals.addAll(styles);
@@ -263,18 +264,18 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     }
 
     @Override
-    public String item(int index) {
+    public String item(final int index) {
         try {
-            Property property = style.getProperties().get(index);
+            final Property property = style.getProperties().get(index);
             return property.getName();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return null;
         }
     }
 
     @Override
-    public String removeProperty(String property) {
-        String prop = style.removeProperty(property);
+    public String removeProperty(final String property) {
+        final String prop = style.removeProperty(property);
         return prop;
     }
 
@@ -293,13 +294,13 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     }
 
     @Override
-    public void setCssText(String text) {
+    public void setCssText(final String text) {
         style.setCssText(text);
         this.element.setStyle(text);
     }
 
     @Override
-    public void setOverlayColor(String value) {
+    public void setOverlayColor(final String value) {
         this.overlayColor = value;
         this.element.informLookInvalid();
     }
@@ -621,7 +622,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         final String fontLineHeight = this.getPropertyValue(LINE_HEIGHT);
         final String fontFamily = this.getPropertyValue(FONT_FAMILY);
 
-        StringBuilder font = new StringBuilder();
+        final StringBuilder font = new StringBuilder();
         if(Strings.isBlank(fontSize)) return "";
         if (Strings.isNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) font.append(fontStyle).append(" ");
         if (Strings.isNotBlank(fontVariant) && !fontVariant.equals(CSSValues.NORMAL.getValue())) font.append(fontVariant).append(" ");
@@ -950,7 +951,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         final String position = this.getPropertyValue(POSITION);
 
         if(Strings.isNotBlank(position)) {
-            CSSValues pos = CSSValues.get(position);
+            final CSSValues pos = CSSValues.get(position);
             if(CSSValues.DEFAULT == pos){
                 return null;
             } else{
@@ -1120,355 +1121,355 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public String getzIndex() {
-        String zIndex = this.getPropertyValue(Z_INDEX);
-        int val = HtmlValues.getPixelSize(zIndex, null, null, -1);
+        final String zIndex = this.getPropertyValue(Z_INDEX);
+        final int val = HtmlValues.getPixelSize(zIndex, null, null, -1);
         return val == -1 ? "" : String.valueOf(val);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setAzimuth(String azimuth) {
+    public void setAzimuth(final String azimuth) {
        this.setProperty(AZIMUTH, azimuth);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBackground(String background) {
+    public void setBackground(final String background) {
         new BackgroundSetter().changeValue(this, background);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBackgroundAttachment(String backgroundAttachment) {
+    public void setBackgroundAttachment(final String backgroundAttachment) {
        this.setProperty(BACKGROUND_ATTACHMENT, backgroundAttachment);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBackgroundColor(String backgroundColor) {
+    public void setBackgroundColor(final String backgroundColor) {
        this.setProperty(BACKGROUND_COLOR, backgroundColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBackgroundPosition(String backgroundPosition) {
+    public void setBackgroundPosition(final String backgroundPosition) {
        this.setProperty(BACKGROUND_POSITION, backgroundPosition);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBackgroundImage(String backgroundImage) {
+    public void setBackgroundImage(final String backgroundImage) {
         new BackgroundImageSetter().changeValue(this, backgroundImage);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBackgroundRepeat(String backgroundRepeat) {
+    public void setBackgroundRepeat(final String backgroundRepeat) {
        this.setProperty(BACKGROUND_REPEAT, backgroundRepeat);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorder(String border) {
+    public void setBorder(final String border) {
         new BorderSetter1().changeValue(this, border);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderBottom(String borderBottom) {
+    public void setBorderBottom(final String borderBottom) {
         new BorderSetter2(BORDER_BOTTOM).changeValue(this, borderBottom);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderBottomColor(String borderBottomColor) {
+    public void setBorderBottomColor(final String borderBottomColor) {
        this.setProperty(BORDER_BOTTOM_COLOR, borderBottomColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderBottomStyle(String borderBottomStyle) {
+    public void setBorderBottomStyle(final String borderBottomStyle) {
         new BorderSetter2(BORDER_BOTTOM).changeValue(this, borderBottomStyle);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderBottomWidth(String borderBottomWidth) {
+    public void setBorderBottomWidth(final String borderBottomWidth) {
         this.setProperty(BORDER_BOTTOM_WIDTH, borderBottomWidth);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderCollapse(String borderCollapse) {
+    public void setBorderCollapse(final String borderCollapse) {
        this.setProperty(BORDER_COLLAPSE, borderCollapse);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderColor(String borderColor) {
+    public void setBorderColor(final String borderColor) {
         new FourCornersSetter(BORDER_COLOR, "border-", "-color").changeValue(this, borderColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderLeft(String borderLeft) {
+    public void setBorderLeft(final String borderLeft) {
         new BorderSetter2(BORDER_LEFT).changeValue(this, borderLeft);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderLeftColor(String borderLeftColor) {
+    public void setBorderLeftColor(final String borderLeftColor) {
        this.setProperty(BORDER_LEFT_COLOR, borderLeftColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderLeftStyle(String borderLeftStyle) {
+    public void setBorderLeftStyle(final String borderLeftStyle) {
         new BorderSetter2(BORDER_LEFT).changeValue(this, borderLeftStyle);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderLeftWidth(String borderLeftWidth) {
+    public void setBorderLeftWidth(final String borderLeftWidth) {
         this.setProperty(BORDER_LEFT_WIDTH, borderLeftWidth);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderRight(String borderRight) {
+    public void setBorderRight(final String borderRight) {
         new BorderSetter2(BORDER_RIGHT).changeValue(this, borderRight);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderRightColor(String borderRightColor) {
+    public void setBorderRightColor(final String borderRightColor) {
        this.setProperty(BORDER_RIGHT_COLOR, borderRightColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderRightStyle(String borderRightStyle) {
+    public void setBorderRightStyle(final String borderRightStyle) {
         new BorderSetter2(BORDER_RIGHT).changeValue(this, borderRightStyle);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderRightWidth(String borderRightWidth) {
+    public void setBorderRightWidth(final String borderRightWidth) {
         this.setProperty(BORDER_RIGHT_WIDTH, borderRightWidth);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderSpacing(String borderSpacing) {
+    public void setBorderSpacing(final String borderSpacing) {
        this.setProperty(BORDER_SPACING, borderSpacing);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderStyle(String borderStyle) {
+    public void setBorderStyle(final String borderStyle) {
         new FourCornersSetter(BORDER_STYLE, "border-", "-style").changeValue(this, borderStyle);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderTop(String borderTop) {
+    public void setBorderTop(final String borderTop) {
         new BorderSetter2(BORDER_TOP).changeValue(this, borderTop);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderTopColor(String borderTopColor) {
+    public void setBorderTopColor(final String borderTopColor) {
        this.setProperty(BORDER_TOP_COLOR, borderTopColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderTopStyle(String borderTopStyle) {
+    public void setBorderTopStyle(final String borderTopStyle) {
         new BorderSetter2(BORDER_TOP).changeValue(this, borderTopStyle);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderTopWidth(String borderTopWidth) {
+    public void setBorderTopWidth(final String borderTopWidth) {
         this.setProperty(BORDER_TOP_WIDTH, borderTopWidth);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBorderWidth(String borderWidth) {
+    public void setBorderWidth(final String borderWidth) {
         new FourCornersSetter(BORDER_WIDTH, "border-", "-width").changeValue(this, borderWidth);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setBottom(String bottom) {
+    public void setBottom(final String bottom) {
         this.setProperty(BOTTOM, bottom);
         this.element.informPositionInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCaptionSide(String captionSide) {
+    public void setCaptionSide(final String captionSide) {
        this.setProperty(CAPTION_SIDE, captionSide);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setClear(String clear) {
+    public void setClear(final String clear) {
        this.setProperty(CLEAR, clear);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setClip(String clip) {
+    public void setClip(final String clip) {
        this.setProperty(CLIP, clip);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setClipPath(String clip) {
+    public void setClipPath(final String clip) {
        this.setProperty(CLIP_PATH,clip);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setClipRule(String clip) {
+    public void setClipRule(final String clip) {
        this.setProperty(CLIP_RULE,clip);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setColor(String color) {
+    public void setColor(final String color) {
         this.setProperty(COLOR, color);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setContent(String content) {
+    public void setContent(final String content) {
        this.setProperty(CONTENT, content);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCounterIncrement(String counterIncrement) {
+    public void setCounterIncrement(final String counterIncrement) {
        this.setProperty(COUNTER_INCREMENT, counterIncrement);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCounterReset(String counterReset) {
+    public void setCounterReset(final String counterReset) {
        this.setProperty(COUNTER_RESET, counterReset);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCssFloat(String cssFloat) {
+    public void setCssFloat(final String cssFloat) {
        this.setProperty(CSS_FLOAT, cssFloat);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCue(String cue) {
+    public void setCue(final String cue) {
        this.setProperty(CUE, cue);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCueAfter(String cueAfter) {
+    public void setCueAfter(final String cueAfter) {
        this.setProperty(CUE_AFTER, cueAfter);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCueBefore(String cueBefore) {
+    public void setCueBefore(final String cueBefore) {
        this.setProperty(CUE_BEFORE, cueBefore);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCursor(String cursor) {
+    public void setCursor(final String cursor) {
        this.setProperty(CURSOR, cursor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setDirection(String direction) {
+    public void setDirection(final String direction) {
        this.setProperty(DIRECTION, direction);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setDisplay(String display) {
+    public void setDisplay(final String display) {
        this.setProperty(DISPLAY, display);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setElevation(String elevation) {
+    public void setElevation(final String elevation) {
        this.setProperty(ELEVATION, elevation);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setEmptyCells(String emptyCells) {
+    public void setEmptyCells(final String emptyCells) {
        this.setProperty(EMPTY_CELLS, emptyCells);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setFont(String font) {
+    public void setFont(final String font) {
         new FontSetter().changeValue(this, font);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setFontFamily(String fontFamily) {
+    public void setFontFamily(final String fontFamily) {
        this.setProperty(FONT_FAMILY, fontFamily);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setFontSize(String fontSize) {
+    public void setFontSize(final String fontSize) {
         this.setProperty(FONT_SIZE, fontSize);
         this.element.informInvalid();
     }
@@ -1476,179 +1477,179 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setFontSizeAdjust(String fontSizeAdjust) {
+    public void setFontSizeAdjust(final String fontSizeAdjust) {
        this.setProperty(FONT_SIZE_ADJUST, fontSizeAdjust);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setFontStretch(String fontStretch) {
+    public void setFontStretch(final String fontStretch) {
        this.setProperty(FONT_STRETCH, fontStretch);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setFontStyle(String fontStyle) {
+    public void setFontStyle(final String fontStyle) {
        this.setProperty(FONT_STYLE, fontStyle);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setFontVariant(String fontVariant) {
+    public void setFontVariant(final String fontVariant) {
        this.setProperty(FONT_VARIANT, fontVariant);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setFontWeight(String fontWeight) {
+    public void setFontWeight(final String fontWeight) {
        this.setProperty(FONT_WEIGHT, fontWeight);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setFloat(String value) {
+    public void setFloat(final String value) {
        this.setProperty(FLOAT, value);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setHeight(String height) {
+    public void setHeight(final String height) {
         this.setProperty(HEIGHT, height);
         this.element.informSizeInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setLeft(String left) {
+    public void setLeft(final String left) {
         this.setProperty(LEFT, left);
         this.element.informPositionInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setLetterSpacing(String letterSpacing) {
+    public void setLetterSpacing(final String letterSpacing) {
         this.setProperty(LETTER_SPACING, letterSpacing);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setLineHeight(String lineHeight) {
+    public void setLineHeight(final String lineHeight) {
        this.setProperty(LINE_HEIGHT, lineHeight);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setListStyle(String listStyle) {
+    public void setListStyle(final String listStyle) {
        this.setProperty(LIST_STYLE, listStyle);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setListStyleImage(String listStyleImage) {
+    public void setListStyleImage(final String listStyleImage) {
        this.setProperty(LIST_STYLE_IMAGE, listStyleImage);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setListStylePosition(String listStylePosition) {
+    public void setListStylePosition(final String listStylePosition) {
        this.setProperty(LIST_STYLE_POSITION, listStylePosition);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setListStyleType(String listStyleType) {
+    public void setListStyleType(final String listStyleType) {
        this.setProperty(LIST_STYLE_TYPE, listStyleType);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMargin(String margin) {
+    public void setMargin(final String margin) {
         new FourCornersSetter(MARGIN, "margin-", "").changeValue(this, margin);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMarginBottom(String marginBottom) {
+    public void setMarginBottom(final String marginBottom) {
         this.setProperty(MARGIN_BOTTOM, marginBottom);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMarginLeft(String marginLeft) {
+    public void setMarginLeft(final String marginLeft) {
         this.setProperty(MARGIN_LEFT, marginLeft);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMarginRight(String marginRight) {
+    public void setMarginRight(final String marginRight) {
         this.setProperty(MARGIN_RIGHT, marginRight);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMarginTop(String marginTop) {
+    public void setMarginTop(final String marginTop) {
         this.setProperty(MARGIN_TOP, marginTop);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMarkerOffset(String markerOffset) {
+    public void setMarkerOffset(final String markerOffset) {
        this.setProperty(MARKER_OFFSET, markerOffset);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMarks(String marks) {
+    public void setMarks(final String marks) {
        this.setProperty(MARKS, marks);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMaxHeight(String maxHeight) {
+    public void setMaxHeight(final String maxHeight) {
         this.setProperty(MAX_HEIGHT, maxHeight);
         this.element.informSizeInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMaxWidth(String maxWidth) {
+    public void setMaxWidth(final String maxWidth) {
         this.setProperty(MAX_WIDTH, maxWidth);
         this.element.informSizeInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMinHeight(String minHeight) {
+    public void setMinHeight(final String minHeight) {
         this.setProperty(MIN_HEIGHT, minHeight);
         this.element.informSizeInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setMinWidth(String minWidth) {
+    public void setMinWidth(final String minWidth) {
         this.setProperty(MIN_WIDTH, minWidth);
         this.element.informSizeInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setOrphans(String orphans) {
+    public void setOrphans(final String orphans) {
         if (Strings.isNotBlank(orphans) && Integer.parseInt(orphans) > 0) {
             this.setProperty(ORPHANS, orphans);
             this.element.informInvalid();
@@ -1657,312 +1658,312 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setOutline(String outline) {
+    public void setOutline(final String outline) {
        this.setProperty(OUTLINE, outline);
        this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setOutlineColor(String outlineColor) {
+    public void setOutlineColor(final String outlineColor) {
        this.setProperty(OUTLINE_COLOR, outlineColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setOutlineStyle(String outlineStyle) {
+    public void setOutlineStyle(final String outlineStyle) {
        this.setProperty(OUTLINE_STYLE, outlineStyle);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setOutlineWidth(String outlineWidth) {
+    public void setOutlineWidth(final String outlineWidth) {
         this.setProperty(OUTLINE_WIDTH, outlineWidth);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setOverflow(String overflow) {
+    public void setOverflow(final String overflow) {
        this.setProperty(OVERFLOW, overflow);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPadding(String padding) {
+    public void setPadding(final String padding) {
         new FourCornersSetter(PADDING, "padding-", "").changeValue(this, padding);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPaddingBottom(String paddingBottom) {
+    public void setPaddingBottom(final String paddingBottom) {
         this.setProperty(PADDING_BOTTOM, paddingBottom);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPaddingLeft(String paddingLeft) {
+    public void setPaddingLeft(final String paddingLeft) {
         this.setProperty(PADDING_LEFT, paddingLeft);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPaddingRight(String paddingRight) {
+    public void setPaddingRight(final String paddingRight) {
         this.setProperty(PADDING_RIGHT, paddingRight);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPaddingTop(String paddingTop) {
+    public void setPaddingTop(final String paddingTop) {
         this.setProperty(PADDING_TOP, paddingTop);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPage(String page) {
+    public void setPage(final String page) {
        this.setProperty(PAGE, page);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPageBreakAfter(String pageBreakAfter) {
+    public void setPageBreakAfter(final String pageBreakAfter) {
        this.setProperty(PAGE_BREAK_AFTER, pageBreakAfter);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPageBreakBefore(String pageBreakBefore) {
+    public void setPageBreakBefore(final String pageBreakBefore) {
        this.setProperty(PAGE_BREAK_BEFORE, pageBreakBefore);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPageBreakInside(String pageBreakInside) {
+    public void setPageBreakInside(final String pageBreakInside) {
        this.setProperty(PAGE_BREAK_INSIDE, pageBreakInside);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPause(String pause) {
+    public void setPause(final String pause) {
        this.setProperty(PAUSE, pause);
     }
 
 
     /** {@inheritDoc} */
     @Override
-    public void setPauseAfter(String pauseAfter) {
+    public void setPauseAfter(final String pauseAfter) {
        this.setProperty(PAUSE_AFTER, pauseAfter);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPauseBefore(String pauseBefore) {
+    public void setPauseBefore(final String pauseBefore) {
        this.setProperty(PAUSE_BEFORE, pauseBefore);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPitch(String pitch) {
+    public void setPitch(final String pitch) {
        this.setProperty(PITCH, pitch);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPitchRange(String pitchRange) {
+    public void setPitchRange(final String pitchRange) {
        this.setProperty(PITCH_RANGE, pitchRange);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPlayDuring(String playDuring) {
+    public void setPlayDuring(final String playDuring) {
        this.setProperty(PLAY_DURING, playDuring);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setPosition(String position) {
+    public void setPosition(final String position) {
        this.setProperty(POSITION, position);
         this.element.informPositionInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setQuotes(String quotes) {
+    public void setQuotes(final String quotes) {
        this.setProperty(QUOTES, quotes);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setRichness(String richness) {
+    public void setRichness(final String richness) {
        this.setProperty(RICHNESS, richness);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setRight(String right) {
+    public void setRight(final String right) {
         this.setProperty(RIGHT, right);
         this.element.informPositionInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setSize(String size) {
+    public void setSize(final String size) {
        this.setProperty(SIZE, size);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setSpeak(String speak) {
+    public void setSpeak(final String speak) {
        this.setProperty(SPEAK, speak);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setSpeakHeader(String speakHeader) {
+    public void setSpeakHeader(final String speakHeader) {
        this.setProperty(SPEAK_HEADER, speakHeader);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setSpeakNumeral(String speakNumeral) {
+    public void setSpeakNumeral(final String speakNumeral) {
        this.setProperty(SPEAK_NUMERAL, speakNumeral);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setSpeakPunctuation(String speakPunctuation) {
+    public void setSpeakPunctuation(final String speakPunctuation) {
        this.setProperty(SPEAK_PUNCTUATION, speakPunctuation);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setSpeechRate(String speechRate) {
+    public void setSpeechRate(final String speechRate) {
        this.setProperty(SPEECH_RATE, speechRate);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setStress(String stress) {
+    public void setStress(final String stress) {
        this.setProperty(STRESS, stress);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setTableLayout(String tableLayout) {
+    public void setTableLayout(final String tableLayout) {
        this.setProperty(TABLE_LAYOUT, tableLayout);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setTextAlign(String textAlign) {
+    public void setTextAlign(final String textAlign) {
        this.setProperty(TEXT_ALIGN, textAlign);
         this.element.informLayoutInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setTextDecoration(String textDecoration) {
+    public void setTextDecoration(final String textDecoration) {
        this.setProperty(TEXT_DECORATION, textDecoration);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setTextIndent(String textIndent) {
+    public void setTextIndent(final String textIndent) {
         this.setProperty(TEXT_INDENT, textIndent);
         this.element.informLayoutInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setTextShadow(String textShadow) {
+    public void setTextShadow(final String textShadow) {
        this.setProperty(TEXT_SHADOW, textShadow);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setTextTransform(String textTransform) {
+    public void setTextTransform(final String textTransform) {
        this.setProperty(TEXT_TRANSFORM, textTransform);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setTop(String top) {
+    public void setTop(final String top) {
         this.setProperty(TOP, top);
         this.element.informPositionInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setUnicodeBidi(String unicodeBidi) {
+    public void setUnicodeBidi(final String unicodeBidi) {
        this.setProperty(UNICODE_BIDI, unicodeBidi);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setVerticalAlign(String verticalAlign) {
+    public void setVerticalAlign(final String verticalAlign) {
         this.setProperty(VERTICAL_ALIGN, verticalAlign);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setVisibility(String visibility) {
+    public void setVisibility(final String visibility) {
        this.setProperty(VISIBILITY, visibility);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setVoiceFamily(String voiceFamily) {
+    public void setVoiceFamily(final String voiceFamily) {
        this.setProperty(VOICE_FAMILY, voiceFamily);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setVolume(String volume) {
+    public void setVolume(final String volume) {
        this.setProperty(VOLUME, volume);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setWhiteSpace(String whiteSpace) {
+    public void setWhiteSpace(final String whiteSpace) {
        this.setProperty(WHITE_SPACE, whiteSpace);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setWidows(String widows) {
+    public void setWidows(final String widows) {
        this.setProperty(WIDOWS, widows);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setWidth(String width) {
+    public void setWidth(final String width) {
         this.setProperty(WIDTH, width);
         this.element.informSizeInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setWordSpacing(String wordSpacing) {
+    public void setWordSpacing(final String wordSpacing) {
         this.setProperty(WORD_SPACING, wordSpacing);
         this.element.informInvalid();
     }
@@ -1975,7 +1976,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setFill(String value) {
+    public void setFill(final String value) {
        this.setProperty(FILL, value);
     }
 
@@ -1987,7 +1988,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setFillOpacity(String value) {
+    public void setFillOpacity(final String value) {
        this.setProperty(FILL_OPACITY, value);
         this.element.informInvalid();
     }
@@ -2000,7 +2001,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setOpacity(String value) {
+    public void setOpacity(final String value) {
        this.setProperty(OPACITY, value);
         this.element.informInvalid();
     }
@@ -2025,7 +2026,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setStroke(String value) {
+    public void setStroke(final String value) {
        this.setProperty(STROKE, value);
         this.element.informInvalid();
     }
@@ -2038,7 +2039,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setStrokeDashArray(String value) {
+    public void setStrokeDashArray(final String value) {
        this.setProperty(STROKE_DASHARRAY, value);
         this.element.informInvalid();
     }
@@ -2051,7 +2052,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setStrokeLineCap(String value) {
+    public void setStrokeLineCap(final String value) {
        this.setProperty(STROKE_LINE_CAP, value);
         this.element.informInvalid();
     }
@@ -2064,7 +2065,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setStrokeLineJoin(String value) {
+    public void setStrokeLineJoin(final String value) {
        this.setProperty(STROKE_LINE_JOINP, value);
         this.element.informInvalid();
     }
@@ -2077,7 +2078,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setStrokeMiterLimit(String value) {
+    public void setStrokeMiterLimit(final String value) {
        this.setProperty(STROKE_MITERLIMIT, value);
         this.element.informInvalid();
     }
@@ -2090,7 +2091,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setStrokeOpacity(String value) {
+    public void setStrokeOpacity(final String value) {
        this.setProperty(STROKE_OPACITY, value);
         this.element.informInvalid();
     }
@@ -2103,7 +2104,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setStrokeWidth(String value) {
+    public void setStrokeWidth(final String value) {
        this.setProperty(STROKE_WIDTH, value);
         this.element.informInvalid();
     }
@@ -2127,17 +2128,17 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     /** {@inheritDoc} */
     @Override
-    public void setTransform(String value) {
+    public void setTransform(final String value) {
        this.setProperty(TRANSFORM, value);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setzIndex(String zIndex) {
+    public void setzIndex(final String zIndex) {
         if (Strings.isNotBlank(zIndex)) {
             if (zIndex.contains(".")) {
-                int i = Integer.parseInt(zIndex.split("\\.")[1]);
+                final int i = Integer.parseInt(zIndex.split("\\.")[1]);
                 if (i == 0) {
                     this.setProperty(Z_INDEX, zIndex);
                     this.element.informPositionInvalid();

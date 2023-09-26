@@ -73,7 +73,7 @@ public class TrueTypeTable {
      *
      * @param tag the tag for this table
      */
-    protected TrueTypeTable(int tag) {
+    protected TrueTypeTable(final int tag) {
         this.tag = tag;
     }
 
@@ -85,8 +85,8 @@ public class TrueTypeTable {
      *        (e.g. head or cmap)
      * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeTable} object.
      */
-    public static TrueTypeTable createTable(TrueTypeFont ttf,
-            String tagString) {
+    public static TrueTypeTable createTable(final TrueTypeFont ttf,
+                                            final String tagString) {
         return createTable(ttf, tagString, null);
     }
 
@@ -99,11 +99,11 @@ public class TrueTypeTable {
      * @param data the table data
      * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeTable} object.
      */
-    public static TrueTypeTable createTable(TrueTypeFont ttf,
-            String tagString, ByteBuffer data) {
+    public static TrueTypeTable createTable(final TrueTypeFont ttf,
+                                            final String tagString, final ByteBuffer data) {
         TrueTypeTable outTable = null;
 
-        int tag = stringToTag(tagString);
+        final int tag = stringToTag(tagString);
 
         switch (tag) {
             case CMAP_TABLE: // cmap table
@@ -168,7 +168,7 @@ public class TrueTypeTable {
      *
      * @param data a {@link java.nio.ByteBuffer} object.
      */
-    public void setData(ByteBuffer data) {
+    public void setData(final ByteBuffer data) {
         this.data = data;
     }
 
@@ -187,8 +187,8 @@ public class TrueTypeTable {
      * @param tag a int.
      * @return a {@link java.lang.String} object.
      */
-    public static String tagToString(int tag) {
-        char[] c = new char[4];
+    public static String tagToString(final int tag) {
+        final char[] c = new char[4];
         c[0] = (char) (0xff & (tag >> 24));
         c[1] = (char) (0xff & (tag >> 16));
         c[2] = (char) (0xff & (tag >> 8));
@@ -203,8 +203,8 @@ public class TrueTypeTable {
      * @param tag a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int stringToTag(String tag) {
-        char[] c = tag.toCharArray();
+    public static int stringToTag(final String tag) {
+        final char[] c = tag.toCharArray();
 
         if (c.length != 4) {
             throw new IllegalArgumentException("Bad tag length: " + tag);

@@ -49,7 +49,7 @@ public class ChildTestIterator extends BasicTestIterator {
    *     this itterator.
    * @throws org.loboevolution.javax.xml.transform.TransformerException if any
    */
-  ChildTestIterator(Compiler compiler, int opPos, int analysis)
+  ChildTestIterator(final Compiler compiler, final int opPos, final int analysis)
       throws org.loboevolution.javax.xml.transform.TransformerException {
     super(compiler, opPos, analysis);
   }
@@ -59,7 +59,7 @@ public class ChildTestIterator extends BasicTestIterator {
    *
    * @param traverser Traverser that tells how the KeyIterator is to be handled.
    */
-  public ChildTestIterator(DTMAxisTraverser traverser) {
+  public ChildTestIterator(final DTMAxisTraverser traverser) {
 
     super(null);
 
@@ -82,7 +82,7 @@ public class ChildTestIterator extends BasicTestIterator {
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
 
-    ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
+    final ChildTestIterator clone = (ChildTestIterator) super.cloneWithReset();
     clone.m_traverser = m_traverser;
 
     return clone;
@@ -90,7 +90,7 @@ public class ChildTestIterator extends BasicTestIterator {
 
   /** {@inheritDoc} */
   @Override
-  public void setRoot(int context, Object environment) {
+  public void setRoot(final int context, final Object environment) {
     super.setRoot(context, environment);
     m_traverser = m_cdtm.getAxisTraverser(Axis.CHILD);
   }

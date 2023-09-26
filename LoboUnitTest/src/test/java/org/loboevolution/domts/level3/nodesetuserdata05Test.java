@@ -48,14 +48,14 @@ import static org.junit.Assert.assertTrue;
 public class nodesetuserdata05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document doc2;
+        final Document doc;
+        final Document doc2;
         Object userData;
-        Object returned1;
-        Object returned2;
+        final Object returned1;
+        final Object returned2;
         Object retUserData;
-        boolean success;
-        Attr attr;
+        final boolean success;
+        final Attr attr;
 
         doc = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");

@@ -45,8 +45,8 @@ import static org.junit.Assert.assertTrue;
 public class documentgetxmlstandalone04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        boolean standalone;
+        final Document doc;
+        final boolean standalone;
         doc = sampleXmlFile("barfoo_standalone_yes.xml");
         standalone = doc.getXmlStandalone();
         assertTrue("documentgetxmlstandalone04", standalone);

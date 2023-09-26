@@ -56,7 +56,7 @@ public class BaseScrollButton extends BasicArrowButton {
 	 * @param direction a int.
 	 * @param width a int.
 	 */
-	public BaseScrollButton(int direction, int width) {
+	public BaseScrollButton(final int direction, final int width) {
 		super(direction);
 		buttonWidth = width;
 	}
@@ -100,13 +100,13 @@ public class BaseScrollButton extends BasicArrowButton {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		boolean isPressed = getModel().isPressed();
-		boolean isRollover = getModel().isRollover();
+		final boolean isPressed = getModel().isPressed();
+		final boolean isRollover = getModel().isRollover();
 
-		int width = getWidth();
-		int height = getHeight();
+		final int width = getWidth();
+		final int height = getHeight();
 
-		Color[] colors;
+		final Color[] colors;
 		if (isPressed) {
 			colors = AbstractLookAndFeel.getTheme().getPressedColors();
 		} else if (isRollover) {
@@ -115,13 +115,13 @@ public class BaseScrollButton extends BasicArrowButton {
 			colors = AbstractLookAndFeel.getTheme().getButtonColors();
 		}
 
-		boolean inverse = ColorHelper.getGrayValue(colors) < 128;
+		final boolean inverse = ColorHelper.getGrayValue(colors) < 128;
 
-		Color frameColorHi = ColorHelper.brighter(colors[0], 20);
-		Color frameColorLo = ColorHelper.darker(colors[colors.length - 1], 20);
+		final Color frameColorHi = ColorHelper.brighter(colors[0], 20);
+		final Color frameColorLo = ColorHelper.darker(colors[colors.length - 1], 20);
 
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
 		if (getDirection() == NORTH || getDirection() == SOUTH) {
 			JTattooUtilities.fillVerGradient(g2D, colors, 0, 0, width, height);
 		} else {
@@ -130,30 +130,30 @@ public class BaseScrollButton extends BasicArrowButton {
 		g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
 		switch (getDirection()) {
 		case NORTH: {
-			Icon upArrow = inverse ? BaseIcons.getUpArrowInverseIcon() : BaseIcons.getUpArrowIcon();
-			int x = width / 2 - upArrow.getIconWidth() / 2;
-			int y = height / 2 - upArrow.getIconHeight() / 2 - 1;
+			final Icon upArrow = inverse ? BaseIcons.getUpArrowInverseIcon() : BaseIcons.getUpArrowIcon();
+			final int x = width / 2 - upArrow.getIconWidth() / 2;
+			final int y = height / 2 - upArrow.getIconHeight() / 2 - 1;
 			upArrow.paintIcon(this, g2D, x, y);
 			break;
 		}
 		case SOUTH: {
-			Icon downArrow = inverse ? BaseIcons.getDownArrowInverseIcon() : BaseIcons.getDownArrowIcon();
-			int x = width / 2 - downArrow.getIconWidth() / 2;
-			int y = height / 2 - downArrow.getIconHeight() / 2;
+			final Icon downArrow = inverse ? BaseIcons.getDownArrowInverseIcon() : BaseIcons.getDownArrowIcon();
+			final int x = width / 2 - downArrow.getIconWidth() / 2;
+			final int y = height / 2 - downArrow.getIconHeight() / 2;
 			downArrow.paintIcon(this, g2D, x, y);
 			break;
 		}
 		case WEST: {
-			Icon leftArrow = inverse ? BaseIcons.getLeftArrowInverseIcon() : BaseIcons.getLeftArrowIcon();
-			int x = width / 2 - leftArrow.getIconWidth() / 2 - 1;
-			int y = height / 2 - leftArrow.getIconHeight() / 2;
+			final Icon leftArrow = inverse ? BaseIcons.getLeftArrowInverseIcon() : BaseIcons.getLeftArrowIcon();
+			final int x = width / 2 - leftArrow.getIconWidth() / 2 - 1;
+			final int y = height / 2 - leftArrow.getIconHeight() / 2;
 			leftArrow.paintIcon(this, g2D, x, y);
 			break;
 		}
 		default: {
-			Icon rightArrow = inverse ? BaseIcons.getRightArrowInverseIcon() : BaseIcons.getRightArrowIcon();
-			int x = width / 2 - rightArrow.getIconWidth() / 2;
-			int y = height / 2 - rightArrow.getIconHeight() / 2;
+			final Icon rightArrow = inverse ? BaseIcons.getRightArrowInverseIcon() : BaseIcons.getRightArrowIcon();
+			final int x = width / 2 - rightArrow.getIconWidth() / 2;
+			final int y = height / 2 - rightArrow.getIconHeight() / 2;
 			rightArrow.paintIcon(this, g2D, x, y);
 			break;
 		}

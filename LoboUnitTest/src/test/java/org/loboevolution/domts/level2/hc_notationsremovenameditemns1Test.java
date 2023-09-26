@@ -55,10 +55,10 @@ public class hc_notationsremovenameditemns1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap notations;
-        DocumentType docType;
-        Node retval;
+        final Document doc;
+        final NamedNodeMap notations;
+        final DocumentType docType;
+        final Node retval;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
@@ -70,7 +70,7 @@ public class hc_notationsremovenameditemns1Test extends LoboUnitTest {
             retval = notations.removeNamedItemNS("http://www.w3.org/1999/xhtml", "alpha");
             fail("throw_NO_MOD_OR_NOT_FOUND_ERR");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 7:
                 case 8:

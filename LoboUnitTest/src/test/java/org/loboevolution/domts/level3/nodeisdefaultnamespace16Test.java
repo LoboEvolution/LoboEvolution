@@ -47,9 +47,9 @@ import static org.junit.Assert.assertFalse;
 public class nodeisdefaultnamespace16Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr attr;
-        boolean isDefault;
+        final Document doc;
+        final Attr attr;
+        final boolean isDefault;
         doc = sampleXmlFile("barfoo.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "lang");
         isDefault = attr.isDefaultNamespace("http://www.w3.org/XML/1998/namespace");

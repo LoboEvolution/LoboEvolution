@@ -56,8 +56,8 @@ public class ColorComboBox extends JComboBox<Object> {
 		}
 
 		@Override
-		public Component getListCellRendererComponent(JList<?> list, Object obj, int row, boolean sel,
-				boolean hasFocus) {
+		public Component getListCellRendererComponent(final JList<?> list, final Object obj, final int row, final boolean sel,
+                                                      final boolean hasFocus) {
 			if (obj instanceof Color) {
 				this.m_c = (Color) obj;
 			}

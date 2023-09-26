@@ -61,7 +61,7 @@ public interface XMLStreamWriter {
    * @param localName local name of the tag, may not be null
    * @throws XMLStreamException
    */
-  public void writeStartElement(String localName)
+  public void writeStartElement(final String localName)
     throws XMLStreamException;
 
   /**
@@ -71,7 +71,7 @@ public interface XMLStreamWriter {
    * @throws XMLStreamException if the namespace URI has not been bound to a prefix and
    * org.loboevolution.javax.xml.stream.isRepairingNamespaces has not been set to true
    */
-  public void writeStartElement(String namespaceURI, String localName)
+  public void writeStartElement(final String namespaceURI, final String localName)
     throws XMLStreamException;
 
   /**
@@ -81,7 +81,7 @@ public interface XMLStreamWriter {
    * @param namespaceURI the uri to bind the prefix to, may not be null
    * @throws XMLStreamException
    */
-  public void writeStartElement(String prefix,
+  public void writeStartElement(final String prefix,
                                 String localName,
                                 String namespaceURI)
     throws XMLStreamException;
@@ -93,7 +93,7 @@ public interface XMLStreamWriter {
    * @throws XMLStreamException if the namespace URI has not been bound to a prefix and
    * org.loboevolution.javax.xml.stream.isRepairingNamespaces has not been set to true
    */
-  public void writeEmptyElement(String namespaceURI, String localName)
+  public void writeEmptyElement(final String namespaceURI, final String localName)
     throws XMLStreamException;
 
   /**
@@ -103,7 +103,7 @@ public interface XMLStreamWriter {
    * @param namespaceURI the uri to bind the tag to, may not be null
    * @throws XMLStreamException
    */
-  public void writeEmptyElement(String prefix, String localName, String namespaceURI)
+  public void writeEmptyElement(final String prefix, final String localName, final String namespaceURI)
     throws XMLStreamException;
 
   /**
@@ -111,7 +111,7 @@ public interface XMLStreamWriter {
    * @param localName local name of the tag, may not be null
    * @throws XMLStreamException
    */
-  public void writeEmptyElement(String localName)
+  public void writeEmptyElement(final String localName)
     throws XMLStreamException;
 
   /**
@@ -125,7 +125,7 @@ public interface XMLStreamWriter {
    *
    * @param data the data to write
    */
-  //  public void writeRaw(String data) throws XMLStreamException;
+  //  public void writeRaw(final String data) throws XMLStreamException;
 
   /**
    * Writes an end tag to the output relying on the internal
@@ -166,7 +166,7 @@ public interface XMLStreamWriter {
    * @throws IllegalStateException if the current state does not allow Attribute writing
    * @throws XMLStreamException
    */
-  public void writeAttribute(String localName, String value)
+  public void writeAttribute(final String localName, final String value)
     throws XMLStreamException;
 
   /**
@@ -180,7 +180,7 @@ public interface XMLStreamWriter {
    * org.loboevolution.javax.xml.stream.isRepairingNamespaces has not been set to true
    */
 
-  public void writeAttribute(String prefix,
+  public void writeAttribute(final String prefix,
                              String namespaceURI,
                              String localName,
                              String value)
@@ -195,7 +195,7 @@ public interface XMLStreamWriter {
    * @throws XMLStreamException if the namespace URI has not been bound to a prefix and
    * org.loboevolution.javax.xml.stream.isRepairingNamespaces has not been set to true
    */
-  public void writeAttribute(String namespaceURI,
+  public void writeAttribute(final String namespaceURI,
                              String localName,
                              String value)
     throws XMLStreamException;
@@ -210,7 +210,7 @@ public interface XMLStreamWriter {
    * @throws IllegalStateException if the current state does not allow Namespace writing
    * @throws XMLStreamException
    */
-  public void writeNamespace(String prefix, String namespaceURI)
+  public void writeNamespace(final String prefix, final String namespaceURI)
     throws XMLStreamException;
 
   /**
@@ -219,7 +219,7 @@ public interface XMLStreamWriter {
    * @throws IllegalStateException if the current state does not allow Namespace writing
    * @throws XMLStreamException
    */
-  public void writeDefaultNamespace(String namespaceURI)
+  public void writeDefaultNamespace(final String namespaceURI)
     throws XMLStreamException;
 
   /**
@@ -227,7 +227,7 @@ public interface XMLStreamWriter {
    * @param data the data contained in the comment, may be null
    * @throws XMLStreamException
    */
-  public void writeComment(String data)
+  public void writeComment(final String data)
     throws XMLStreamException;
 
   /**
@@ -235,7 +235,7 @@ public interface XMLStreamWriter {
    * @param target the target of the processing instruction, may not be null
    * @throws XMLStreamException
    */
-  public void writeProcessingInstruction(String target)
+  public void writeProcessingInstruction(final String target)
     throws XMLStreamException;
 
   /**
@@ -244,7 +244,7 @@ public interface XMLStreamWriter {
    * @param data the data contained in the processing instruction, may not be null
    * @throws XMLStreamException
    */
-  public void writeProcessingInstruction(String target,
+  public void writeProcessingInstruction(final String target,
                                          String data)
     throws XMLStreamException;
 
@@ -253,7 +253,7 @@ public interface XMLStreamWriter {
    * @param data the data contained in the CData Section, may not be null
    * @throws XMLStreamException
    */
-  public void writeCData(String data)
+  public void writeCData(final String data)
     throws XMLStreamException;
 
   /**
@@ -263,7 +263,7 @@ public interface XMLStreamWriter {
    * @param dtd the DTD to be written
    * @throws XMLStreamException
    */
-  public void writeDTD(String dtd)
+  public void writeDTD(final String dtd)
     throws XMLStreamException;
 
   /**
@@ -271,7 +271,7 @@ public interface XMLStreamWriter {
    * @param name the name of the entity
    * @throws XMLStreamException
    */
-  public void writeEntityRef(String name)
+  public void writeEntityRef(final String name)
     throws XMLStreamException;
 
   /**
@@ -286,7 +286,7 @@ public interface XMLStreamWriter {
    * @param version version of the xml document
    * @throws XMLStreamException
    */
-  public void writeStartDocument(String version)
+  public void writeStartDocument(final String version)
     throws XMLStreamException;
 
   /**
@@ -299,7 +299,7 @@ public interface XMLStreamWriter {
    * @throws XMLStreamException If given encoding does not match encoding
    * of the underlying stream
    */
-  public void writeStartDocument(String encoding,
+  public void writeStartDocument(final String encoding,
                                  String version)
     throws XMLStreamException;
 
@@ -308,7 +308,7 @@ public interface XMLStreamWriter {
    * @param text the value to write
    * @throws XMLStreamException
    */
-  public void writeCharacters(String text)
+  public void writeCharacters(final String text)
     throws XMLStreamException;
 
   /**
@@ -318,7 +318,7 @@ public interface XMLStreamWriter {
    * @param len the number of characters to write
    * @throws XMLStreamException
    */
-  public void writeCharacters(char[] text, int start, int len)
+  public void writeCharacters(char[] text, final int start, final int len)
     throws XMLStreamException;
 
   /**
@@ -326,7 +326,7 @@ public interface XMLStreamWriter {
    * @return the prefix or null
    * @throws XMLStreamException
    */
-  public String getPrefix(String uri)
+  public String getPrefix(final String uri)
     throws XMLStreamException;
 
   /**
@@ -338,7 +338,7 @@ public interface XMLStreamWriter {
    * @param uri the uri to bind to the prefix, may be null
    * @throws XMLStreamException
    */
-  public void setPrefix(String prefix, String uri)
+  public void setPrefix(final String prefix, final String uri)
     throws XMLStreamException;
 
 
@@ -351,7 +351,7 @@ public interface XMLStreamWriter {
    * @param uri the uri to bind to the default namespace, may be null
    * @throws XMLStreamException
    */
-  public void setDefaultNamespace(String uri)
+  public void setDefaultNamespace(final String uri)
     throws XMLStreamException;
 
   /**

@@ -48,10 +48,10 @@ import static org.junit.Assert.assertTrue;
 public class nodeisequalnode03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc1;
-        Document doc2;
-        Element docElem1;
-        Element docElem2;
+        final Document doc1;
+        final Document doc2;
+        final Element docElem1;
+        final Element docElem2;
         boolean isEqual;
         doc1 = sampleXmlFile("barfoo_utf8.xml");
         doc2 = sampleXmlFile("barfoo_utf16.xml");

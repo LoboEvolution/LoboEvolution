@@ -123,12 +123,12 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	/** {@inheritDoc} */
 	@Override
 	public double getHspace() {
-		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
 		return HtmlValues.getPixelSize(getAttribute("hspace"), null, doc.getDefaultView(), 0);
 	}
 
 	@Override
-	public void setHspace(double hspace) {
+	public void setHspace(final double hspace) {
 
 	}
 
@@ -169,7 +169,7 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	/** {@inheritDoc} */
 	@Override
 	public double getVspace() {
-		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
 		return HtmlValues.getPixelSize(getAttribute("vspace"), null, doc.getDefaultView(), 0);
 	}
 
@@ -181,7 +181,7 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlign(String align) {
+	public void setAlign(final String align) {
 		setAttribute("align", align);
 	}
 
@@ -190,55 +190,55 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	 *
 	 * @param alt a {@link java.lang.String} object.
 	 */
-	public void setAlt(String alt) {
+	public void setAlt(final String alt) {
 		setAttribute("alt", alt);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setArchive(String archive) {
+	public void setArchive(final String archive) {
 		setAttribute("archive", archive);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBorder(String border) {
+	public void setBorder(final String border) {
 		setAttribute("border", border);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCode(String code) {
+	public void setCode(final String code) {
 		setAttribute("code", code);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCodeBase(String codeBase) {
+	public void setCodeBase(final String codeBase) {
 		setAttribute("codebase", codeBase);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCodeType(String codeType) {
+	public void setCodeType(final String codeType) {
 		setAttribute("codetype", codeType);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setData(String data) {
+	public void setData(final String data) {
 		setAttribute("data", data);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDeclare(boolean declare) {
+	public void setDeclare(final boolean declare) {
 		setAttribute("declare", declare ? "declare" : null);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHeight(String height) {
+	public void setHeight(final String height) {
 		setAttribute("height", height);
 	}
 
@@ -247,7 +247,7 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 
 	/** {@inheritDoc} */
 	@Override
-	public void setName(String name) {
+	public void setName(final String name) {
 		setAttribute("name", name);
 	}
 
@@ -256,25 +256,25 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	 *
 	 * @param object a {@link java.lang.String} object.
 	 */
-	public void setObject(String object) {
+	public void setObject(final String object) {
 		setAttribute("object", object);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setStandby(String standby) {
+	public void setStandby(final String standby) {
 		setAttribute("standby", standby);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setType(String type) {
+	public void setType(final String type) {
 		setAttribute("type", type);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setUseMap(String useMap) {
+	public void setUseMap(final String useMap) {
 		setAttribute("usemap", useMap);
 	}
 
@@ -290,13 +290,13 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 
 	/** {@inheritDoc} */
 	@Override
-	public void setVspace(double vspace) {
+	public void setVspace(final double vspace) {
 		setAttribute("vspace", String.valueOf(vspace));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(String width) {
+	public void setWidth(final String width) {
 		setAttribute("width", width);
 	}
 
@@ -321,7 +321,7 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	}
 
 	@Override
-	public void setCustomValidity(String error) {
+	public void setCustomValidity(final String error) {
 
 	}
 

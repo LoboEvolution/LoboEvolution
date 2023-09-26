@@ -55,10 +55,10 @@ public class hc_elementretrieveattrvalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testAddress;
-        String attrValue;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testAddress;
+        final String attrValue;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddress = (Element) elementList.item(2);

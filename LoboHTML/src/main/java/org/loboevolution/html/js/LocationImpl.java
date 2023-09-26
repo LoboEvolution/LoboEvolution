@@ -214,7 +214,7 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 	 * replace.
 	 * </p>
 	 */
-	public void replace(String href) {
+	public void replace(final String href) {
 		setHref(href);
 	}
 
@@ -225,11 +225,11 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 	 * setHref.
 	 * </p>
 	 */
-	public void setHref(String uri) {
+	public void setHref(final String uri) {
 		final HtmlRendererContext rcontext = this.window.getHtmlRendererContext();
 		if (rcontext != null) {
 			try {
-				URL url;
+				final URL url;
 				final Document document = this.window.getDocumentNode();
 				if (document instanceof HTMLDocumentImpl) {
 					final HTMLDocumentImpl docImpl = (HTMLDocumentImpl) document;
@@ -251,7 +251,7 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 	 *
 	 * @param value a {@link java.lang.String} object.
 	 */
-	public void setTarget(String value) {
+	public void setTarget(final String value) {
 		this.target = value;
 	}
 
@@ -272,21 +272,21 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHash(String hash) {
+	public void setHash(final String hash) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHost(String host) {
+	public void setHost(final String host) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHostname(String hostname) {
+	public void setHostname(final String hostname) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -300,42 +300,42 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 
 	/** {@inheritDoc} */
 	@Override
-	public void setPathname(String pathname) {
+	public void setPathname(final String pathname) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setPort(String port) {
+	public void setPort(final String port) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setProtocol(String protocol) {
+	public void setProtocol(final String protocol) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSearch(String search) {
+	public void setSearch(final String search) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void assign(String url) {
+	public void assign(final String url) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void reload(boolean forcedReload) {
+	public void reload(final boolean forcedReload) {
 		// TODO Auto-generated method stub
 		
 	}

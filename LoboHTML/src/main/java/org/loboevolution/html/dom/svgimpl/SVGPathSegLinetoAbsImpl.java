@@ -46,7 +46,7 @@ public class SVGPathSegLinetoAbsImpl implements SVGPathSegLinetoAbs {
 	 * @param x a float.
 	 * @param y a float.
 	 */
-	public SVGPathSegLinetoAbsImpl(float x, float y) {
+	public SVGPathSegLinetoAbsImpl(final float x, final float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -71,7 +71,7 @@ public class SVGPathSegLinetoAbsImpl implements SVGPathSegLinetoAbs {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 

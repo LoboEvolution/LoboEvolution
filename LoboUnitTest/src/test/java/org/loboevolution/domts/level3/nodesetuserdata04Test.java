@@ -49,14 +49,14 @@ import static org.junit.Assert.assertTrue;
 public class nodesetuserdata04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Object userData;
-        Object returned1;
-        Object returned2;
+        final Object returned1;
+        final Object returned2;
         Object retUserData;
-        boolean success;
-        Element elem;
-        Text txt;
+        final boolean success;
+        final Element elem;
+        final Text txt;
 
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");

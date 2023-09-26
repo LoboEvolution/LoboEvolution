@@ -157,14 +157,14 @@ public enum HTMLTag {
     private static final Map<String, HTMLTag> ENUM_MAP;
 
     static {
-        Map<String, HTMLTag> map = new HashMap<>();
-        for (HTMLTag instance : HTMLTag.values()) {
+        final Map<String, HTMLTag> map = new HashMap<>();
+        for (final HTMLTag instance : HTMLTag.values()) {
             map.put(instance.getValue(), instance);
         }
         ENUM_MAP = Collections.unmodifiableMap(map);
     }
 
-    HTMLTag(String value) {
+    HTMLTag(final String value) {
         this.value = value;
     }
 
@@ -183,7 +183,7 @@ public enum HTMLTag {
      * @param value a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public boolean isEqual(String value) {
+    public boolean isEqual(final String value) {
         return this.value.equals(value);
     }
 
@@ -193,7 +193,7 @@ public enum HTMLTag {
      * @param actionName a {@link java.lang.String} object.
      * @return a {@link org.loboevolution.html.HTMLTag} object.
      */
-    public static HTMLTag get(String actionName) {
+    public static HTMLTag get(final String actionName) {
         return ENUM_MAP.get(actionName);
     }
 

@@ -57,7 +57,7 @@ public class LookAndFeelsStore {
 	 *
 	 * @return the Connection object
 	 */
-	private Connection connect(String dbPath) {
+	private Connection connect(final String dbPath) {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(dbPath);
@@ -71,8 +71,8 @@ public class LookAndFeelsStore {
 	 * <p>deleteLAF.</p>
 	 */
 	public void deleteLAF() {
-		try (Connection conn = connect(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_LAF)) {
+		try (final Connection conn = connect(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_LAF)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -84,9 +84,9 @@ public class LookAndFeelsStore {
 	 *
 	 * @param laf a {@link LAFSettings} object.
 	 */
-	public void insertLAF(LAFSettings laf) {
-		try (Connection conn = connect(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_LAF)) {
+	public void insertLAF(final LAFSettings laf) {
+		try (final Connection conn = connect(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.INSERT_LAF)) {
 
 			pstmt.setInt(1, laf.isAcryl() ? 1 : 0);
 			pstmt.setInt(2, laf.isAero() ? 1 : 0);

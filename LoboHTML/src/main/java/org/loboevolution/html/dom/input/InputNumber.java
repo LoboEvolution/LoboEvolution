@@ -51,10 +51,10 @@ public class InputNumber extends InputText {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputNumber(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputNumber(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		super(modelNode, ic);
 		numeric = this.iText;
-        String value = modelNode.getValue();
+        final String value = modelNode.getValue();
         min = modelNode.getAttribute("min");
         max = modelNode.getAttribute("max");
         if (!isNumeric(value)) {
@@ -67,9 +67,9 @@ public class InputNumber extends InputText {
 	}
 
 	private KeyListener addKeyListener() {
-		KeyListener keyListener = new KeyAdapter() {
-			public void keyPressed(KeyEvent keyEvent) {
-				JTextField num = (JTextField) keyEvent.getSource();
+		final KeyListener keyListener = new KeyAdapter() {
+			public void keyPressed(final KeyEvent keyEvent) {
+				final JTextField num = (JTextField) keyEvent.getSource();
 				if (!isNumeric(num.getText())) {
 					numeric.setBorder(BorderFactory.createLineBorder(Color.RED));
 				} else {
@@ -77,16 +77,16 @@ public class InputNumber extends InputText {
 
 					if (Strings.isNotBlank(min) && Strings.isNotBlank(max)) {
 						try {
-							int intText = Integer.parseInt(num.getText());
-							int intMin = Integer.parseInt(min);
-							int intMax = Integer.parseInt(max);
+							final int intText = Integer.parseInt(num.getText());
+							final int intMin = Integer.parseInt(min);
+							final int intMax = Integer.parseInt(max);
 
 							if (intText < intMin || intText > intMax) {
 								numeric.setBorder(BorderFactory.createLineBorder(Color.RED));
 							} else {
 								numeric.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 							}
-						} catch (NumberFormatException ex) {
+						} catch (final NumberFormatException ex) {
 							numeric.setBorder(BorderFactory.createLineBorder(Color.RED));
 						}
 					}
@@ -96,13 +96,13 @@ public class InputNumber extends InputText {
 		return keyListener;
 	}
 
-	private boolean isNumeric(String keyCode) {
+	private boolean isNumeric(final String keyCode) {
 		try {
 			if (keyCode == null || (keyCode != null && keyCode.length() == 0))
 				return true;
 			Integer.parseInt(keyCode);
 			return true;
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			return false;
 		}
 	}

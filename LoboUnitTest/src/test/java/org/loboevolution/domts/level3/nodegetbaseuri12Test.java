@@ -48,17 +48,17 @@ import org.loboevolution.html.node.Node;
 public class nodegetbaseuri12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entitiesMap;
-        Node entity;
-        String baseURI;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entitiesMap;
+        final Node entity;
+        final String baseURI;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
         entity = entitiesMap.getNamedItem("epsilon");
         baseURI = entity.getBaseURI();
-        assertURIEquals("entityBase", null, null, null, null, "hc_staff", null, null, Boolean.TRUE, baseURI);
+        assertURIEquals(new URIEquals("entityBase", null, null, null, null, "hc_staff", null, null, true, baseURI));
     }
 }
 

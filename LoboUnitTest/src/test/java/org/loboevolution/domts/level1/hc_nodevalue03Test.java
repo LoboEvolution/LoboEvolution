@@ -52,8 +52,8 @@ public class hc_nodevalue03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node newNode;
+        final Document doc;
+        final Node newNode;
         String newValue;
         doc = sampleXmlFile("hc_staff.xml");
 
@@ -65,7 +65,7 @@ public class hc_nodevalue03Test extends LoboUnitTest {
         boolean success = false;
         try {
             newNode.setNodeValue("This should have no effect");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
         assertTrue("throw_INVALID_MODIFICATION_ERR", success);

@@ -36,14 +36,14 @@ class TableMatrixEvents {
 	
 	private BoundableRenderable armedRenderable;
 	
-	private List<RTableCell> allCells;
+	private final List<RTableCell> allCells;
 	
 	/**
 	 * <p>Constructor for TableMatrixEvents.</p>
 	 *
 	 * @param allCells a {@link java.util.List} object.
 	 */
-	public TableMatrixEvents(List<RTableCell> allCells) {
+	public TableMatrixEvents(final List<RTableCell> allCells) {
 		this.allCells = allCells;
 	}
 	
@@ -55,8 +55,8 @@ class TableMatrixEvents {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
-		for (RTableCell cell : allCells) {
+	public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
+		for (final RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				if (!cell.onDoubleClick(event, x - bounds.x, y - bounds.y)) {
@@ -76,8 +76,8 @@ class TableMatrixEvents {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	public boolean onMouseClick(final MouseEvent event, int x, int y) {
-		for (RTableCell cell : allCells) {
+	public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
+		for (final RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				if (!cell.onMouseClick(event, x - bounds.x, y - bounds.y)) {
@@ -113,8 +113,8 @@ class TableMatrixEvents {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	public boolean onMousePressed(final MouseEvent event, int x, int y) {
-		for (RTableCell cell : allCells) {
+	public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
+		for (final RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				if (!cell.onMousePressed(event, x - bounds.x, y - bounds.y)) {
@@ -135,9 +135,9 @@ class TableMatrixEvents {
 	 * @param y a int.
 	 * @return a boolean.
 	 */
-	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {
 		boolean found = false;
-		for (RTableCell cell : allCells) {
+		for (final RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				found = true;

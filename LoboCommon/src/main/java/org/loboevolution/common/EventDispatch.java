@@ -49,7 +49,7 @@ public class EventDispatch {
 	 *
 	 * @param listener a {@link org.loboevolution.common.GenericEventListener} object.
 	 */
-	public final void addListener(GenericEventListener listener) {
+	public final void addListener(final GenericEventListener listener) {
 		synchronized (this) {
 			if (this.listeners == null) {
 				this.listeners = createListenerCollection();
@@ -72,7 +72,7 @@ public class EventDispatch {
 	 *
 	 * @param event a {@link java.util.EventObject} object.
 	 */
-	public final void fireEvent(EventObject event) {
+	public final void fireEvent(final EventObject event) {
 		GenericEventListener[] larray = null;
 		synchronized (this) {
 			if (this.listeners != null) {
@@ -92,7 +92,7 @@ public class EventDispatch {
 	 *
 	 * @param listener a {@link org.loboevolution.common.GenericEventListener} object.
 	 */
-	public final void removeListener(GenericEventListener listener) {
+	public final void removeListener(final GenericEventListener listener) {
 		synchronized (this) {
 			if (this.listeners != null) {
 				this.listeners.remove(listener);

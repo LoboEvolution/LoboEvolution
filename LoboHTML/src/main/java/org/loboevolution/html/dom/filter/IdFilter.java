@@ -44,17 +44,17 @@ public class IdFilter implements NodeFilter {
 	 *
 	 * @param _id a {@link java.lang.String} object.
 	 */
-	public IdFilter(String _id) {
+	public IdFilter(final String _id) {
 		this._id = _id;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public short acceptNode(Node node) {
+	public short acceptNode(final Node node) {
 		if ((node instanceof Element) && this._id != null) {
-			NamedNodeMap attributes = node.getAttributes();
-			for (Node attribute : Nodes.iterable(attributes)) {
-				Attr attr = (Attr) attribute;
+			final NamedNodeMap attributes = node.getAttributes();
+			for (final Node attribute : Nodes.iterable(attributes)) {
+				final Attr attr = (Attr) attribute;
 				if (Strings.isNotBlank(attr.getNodeValue())) {
 					if (this._id.equals(attr.getNodeValue()) && attr.isId()) {
 						return NodeFilter.FILTER_ACCEPT;

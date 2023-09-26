@@ -34,7 +34,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -56,10 +55,10 @@ public class namespaceURI03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        String employeeNamespace;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final String employeeNamespace;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         testEmployee = (Element)elementList.item(0);

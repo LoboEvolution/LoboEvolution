@@ -43,15 +43,15 @@ import static org.junit.Assert.*;
 public class nodegetfeature12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Node node;
-        String nullVersion = null;
+        final Document doc;
+        final Node node;
+        final String nullVersion = null;
 
         Node featureImpl;
         boolean isSupported;
-        DOMImplementation domImpl;
-        NamedNodeMap entities;
-        DocumentType doctype;
+        final DOMImplementation domImpl;
+        final NamedNodeMap entities;
+        final DocumentType doctype;
         doc = sampleXmlFile("barfoo.xml");
         domImpl = doc.getImplementation();
         doctype = doc.getDoctype();

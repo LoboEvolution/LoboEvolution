@@ -70,15 +70,15 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
 
 		@Override
 		public void paint(final Graphics g) {
-			Graphics2D g2D = (Graphics2D) g;
+			final Graphics2D g2D = (Graphics2D) g;
 
-			boolean isPressed = getModel().isPressed();
-			boolean isRollover = getModel().isRollover();
+			final boolean isPressed = getModel().isPressed();
+			final boolean isRollover = getModel().isRollover();
 
-			int width = getWidth();
-			int height = getHeight();
+			final int width = getWidth();
+			final int height = getHeight();
 
-			Color[] tc = AbstractLookAndFeel.getTheme().getThumbColors();
+			final Color[] tc = AbstractLookAndFeel.getTheme().getThumbColors();
 			Color c1 = tc[0];
 			Color c2 = tc[tc.length - 1];
 			if (isPressed) {
@@ -99,8 +99,8 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
 				g2D.drawRect(0, 0, width - 2, height - 1);
 			}
 
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
 			g2D.setColor(c2);
 			if (JTattooUtilities.isLeftToRight(this)) {
@@ -113,10 +113,10 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
 			g2D.setComposite(composite);
 
 			// paint the icon
-			Icon icon = LunaIcons.getComboBoxIcon();
-			int x = (width - icon.getIconWidth()) / 2;
-			int y = (height - icon.getIconHeight()) / 2;
-			int dx = JTattooUtilities.isLeftToRight(this) ? 0 : -1;
+			final Icon icon = LunaIcons.getComboBoxIcon();
+			final int x = (width - icon.getIconWidth()) / 2;
+			final int y = (height - icon.getIconHeight()) / 2;
+			final int dx = JTattooUtilities.isLeftToRight(this) ? 0 : -1;
 			if (getModel().isPressed() && getModel().isArmed()) {
 				icon.paintIcon(this, g, x + dx + 2, y + 1);
 			} else {

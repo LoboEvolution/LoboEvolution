@@ -35,6 +35,9 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 
@@ -60,16 +63,16 @@ public class nodecloneattributescopiedTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node addressNode;
-        Element clonedNode;
-        NamedNodeMap attributes;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node addressNode;
+        final Element clonedNode;
+        final NamedNodeMap attributes;
         Node attributeNode;
         String attributeName;
-        java.util.Collection result = new java.util.ArrayList();
+        final List<String> result = new ArrayList<>();
 
-        java.util.Collection expectedResult = new java.util.ArrayList();
+        final List<String> expectedResult = new ArrayList<>();
         expectedResult.add("domestic");
         expectedResult.add("street");
 

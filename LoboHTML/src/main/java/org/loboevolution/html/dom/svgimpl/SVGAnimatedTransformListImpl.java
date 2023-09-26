@@ -44,7 +44,7 @@ public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
 	 *
 	 * @param baseVal a {@link org.loboevolution.html.dom.svgimpl.SVGTransformListImpl} object.
 	 */
-	public SVGAnimatedTransformListImpl(SVGTransformListImpl baseVal) {
+	public SVGAnimatedTransformListImpl(final SVGTransformListImpl baseVal) {
 		this.baseVal = baseVal;
 	}
 

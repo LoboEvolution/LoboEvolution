@@ -52,7 +52,7 @@ abstract class BaseRenderable implements Renderable {
 	 *
 	 * @param ordinal a int.
 	 */
-	public void setOrdinal(int ordinal) {
+	public void setOrdinal(final int ordinal) {
 		this.ordinal = ordinal;
 	}
 }

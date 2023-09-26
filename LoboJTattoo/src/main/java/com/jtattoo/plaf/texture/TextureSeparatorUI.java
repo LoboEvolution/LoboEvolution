@@ -52,7 +52,7 @@ public class TextureSeparatorUI extends BasicSeparatorUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension getPreferredSize(JComponent c) {
+	public Dimension getPreferredSize(final JComponent c) {
 		if (((JSeparator) c).getOrientation() == SwingConstants.VERTICAL) {
 			return new Dimension(1, 0);
 		} else {
@@ -69,11 +69,11 @@ public class TextureSeparatorUI extends BasicSeparatorUI {
 				horizontal = ((JSeparator) c).getOrientation() == SwingConstants.HORIZONTAL;
 			}
 			if (horizontal) {
-				int w = c.getWidth();
+				final int w = c.getWidth();
 				g.setColor(AbstractLookAndFeel.getFrameColor());
 				g.drawLine(0, 0, w, 0);
 			} else {
-				int h = c.getHeight();
+				final int h = c.getHeight();
 				g.setColor(AbstractLookAndFeel.getFrameColor());
 				g.drawLine(0, 0, 0, h);
 			}

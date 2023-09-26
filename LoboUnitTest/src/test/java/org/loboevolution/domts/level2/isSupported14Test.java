@@ -49,10 +49,10 @@ public class isSupported14Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node rootNode;
-        boolean state;
-        String nullString = null;
+        final Document doc;
+        final Node rootNode;
+        final boolean state;
+        final String nullString = null;
 
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();

@@ -54,15 +54,15 @@ public class hc_nodecommentnodeattributesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Comment commentNode;
-        NodeList nodeList;
+        final NodeList nodeList;
         NamedNodeMap attrList;
         int nodeType;
         doc = sampleXmlFile("hc_staff.xml");
         nodeList = doc.getChildNodes();
         for (int indexN10043 = 0; indexN10043 < nodeList.getLength(); indexN10043++) {
-            Node n = nodeList.item(indexN10043);
+            final Node n = nodeList.item(indexN10043);
             if (n instanceof Comment) {
                 commentNode = (Comment) n;
                 nodeType = commentNode.getNodeType();

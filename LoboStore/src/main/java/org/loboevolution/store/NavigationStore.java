@@ -66,9 +66,9 @@ public class NavigationStore {
 	 * @param index a int.
 	 * @param title a {@link java.lang.String} object.
 	 */
-	public void addAsRecent(String uri, String title, int index) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(INSERT_HOST)) {
+	public void addAsRecent(final String uri, final String title, final int index) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(INSERT_HOST)) {
 			pstmt.setString(1, new URL(uri).toExternalForm());
 			pstmt.setString(2, title);
 			pstmt.setInt(3, index);
@@ -82,8 +82,8 @@ public class NavigationStore {
 	 * <p>deleteHost.</p>
 	 */
 	public void deleteHost() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -95,9 +95,9 @@ public class NavigationStore {
 	 *
 	 * @param host a {@link java.lang.String} object.
 	 */
-	public void deleteHost(String host) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST_BY_URL)) {
+	public void deleteHost(final String host) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST_BY_URL)) {
 			pstmt.setString(1, host);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
@@ -112,14 +112,14 @@ public class NavigationStore {
 	 * @param isTab a boolean.
 	 * @return a {@link java.util.List} object.
 	 */
-	public List<BookmarkInfo> getRecentHost(int index, boolean isTab) {
+	public List<BookmarkInfo> getRecentHost(final int index, final boolean isTab) {
 		final List<BookmarkInfo> recentHostEntries = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(isTab ? HOST_TAB : HOST)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(isTab ? HOST_TAB : HOST)) {
 			pstmt.setInt(1, index);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
-					BookmarkInfo info = new BookmarkInfo();
+					final BookmarkInfo info = new BookmarkInfo();
 					info.setUrl(rs.getString(1));
 					info.setTitle(rs.getString(2));
 					recentHostEntries.add(info);

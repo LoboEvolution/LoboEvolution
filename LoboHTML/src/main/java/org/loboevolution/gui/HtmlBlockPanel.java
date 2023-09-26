@@ -92,8 +92,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @param rcontext a {@link HtmlRendererContext} object.
 	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
 	 */
-	public HtmlBlockPanel(Color background, boolean opaque, UserAgentContext pcontext, HtmlRendererContext rcontext,
-						  FrameContext frameContext) {
+	public HtmlBlockPanel(final Color background, final boolean opaque, final UserAgentContext pcontext, final HtmlRendererContext rcontext,
+						  final FrameContext frameContext) {
 		setLayout(null);
 		setAutoscrolls(true);
 		this.frameContext = frameContext;
@@ -153,7 +153,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	public Component addComponent(Component component) {
+	public Component addComponent(final Component component) {
 		Set<Component> c = this.components;
 		if (c == null) {
 			c = new HashSet<>();
@@ -168,7 +168,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	public void addDelayedPair(DelayedPair pair) {
+	public void addDelayedPair(final DelayedPair pair) {
 		// NOP
 	}
 
@@ -260,7 +260,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	public Point getGUIPoint(int clientX, int clientY) {
+	public Point getGUIPoint(final int clientX, final int clientY) {
 		// This is the GUI!
 		return new Point(clientX, clientY);
 	}
@@ -274,25 +274,25 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @param relativeToScrollable see getNodeBounds.
 	 * @return the node bounds no margins
 	 */
-	private Rectangle getNodeBoundsNoMargins(Node node, boolean relativeToScrollable) {
-		RBlock block = this.rblock;
+	private Rectangle getNodeBoundsNoMargins(final Node node, final boolean relativeToScrollable) {
+		final RBlock block = this.rblock;
 		if (block == null) {
 			return null;
 		}
 
-		Node currentNode = node;
-		UINode uiNode = getUINode(currentNode);
+		final Node currentNode = node;
+		final UINode uiNode = getUINode(currentNode);
 		if (uiNode == null) {
 			return null;
 		}
 
-		Rectangle bounds;
+		final Rectangle bounds;
 
-		RCollection relativeTo = relativeToScrollable ? block.getRBlockViewport() : block;
+		final RCollection relativeTo = relativeToScrollable ? block.getRBlockViewport() : block;
 		if (Objects.equals(node, currentNode)) {
-			BoundableRenderable br = (BoundableRenderable) uiNode;
-			Point guiPoint = br.getOriginRelativeTo(relativeTo);
-			Dimension size = br.getSize();
+			final BoundableRenderable br = (BoundableRenderable) uiNode;
+			final Point guiPoint = br.getOriginRelativeTo(relativeTo);
+			final Dimension size = br.getSize();
 			bounds = new Rectangle(guiPoint, size);
 		} else {
 			bounds = this.scanNodeBounds((RCollection) uiNode, node, relativeTo);
@@ -300,9 +300,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 		/* cut off margins */
 		if (uiNode instanceof RElement) {
-			RElement el = (RElement) uiNode;
-			int top = el.getMarginTop();
-			int left = el.getMarginLeft();
+			final RElement el = (RElement) uiNode;
+			final int top = el.getMarginTop();
+			final int left = el.getMarginLeft();
 			bounds.x += left;
 			bounds.y += top;
 			bounds.width -= left + el.getMarginRight();
@@ -312,11 +312,12 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		return bounds;
 	}
 
-	private UINode getUINode(Node currentNode) {
+	private UINode getUINode(final Node cNode) {
+		Node currentNode = cNode;
 		UINode uiNode = null;
 		while (currentNode != null) {
 			if (currentNode instanceof HTMLElementImpl) {
-				HTMLElementImpl element = (HTMLElementImpl) currentNode;
+				final HTMLElementImpl element = (HTMLElementImpl) currentNode;
 				uiNode = element.getUINode();
 				if (uiNode != null) {
 					break;
@@ -477,7 +478,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	public void lostOwnership(Clipboard arg0, Transferable arg1) {
+	public void lostOwnership(final Clipboard arg0, final Transferable arg1) {
 	}
 
 	private void onMouseClick(final MouseEvent event) {
@@ -515,9 +516,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			this.mousePressTarget = null;
 			oldTarget.onMouseDisarmed(event);
 		}
-		RBlock block = this.rblock;
+		final RBlock block = this.rblock;
 		if (block != null) {
-			Point point = event.getPoint();
+			final Point point = event.getPoint();
 			block.onMouseOut(event, point.x, point.y, null);
 		}
 	}
@@ -573,7 +574,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		Renderable inner = null;
 		do {
 			if (r instanceof RCollection) {
-				RCollection rc = (RCollection) r;
+				final RCollection rc = (RCollection) r;
 				inner = rc.getRenderable(x - rc.getX(), y - rc.getY());
 				if (inner != null) {
 					r = inner;
@@ -598,7 +599,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
-	private void onMouseWheelMoved(MouseWheelEvent mwe) {
+	private void onMouseWheelMoved(final MouseWheelEvent mwe) {
 		if (mwe.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
 			final int units = mwe.getWheelRotation() * mwe.getScrollAmount();
 			final Renderable innerMostRenderable = getInnerMostRenderable(mwe.getX(), mwe.getY());
@@ -626,7 +627,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			final Graphics2D g2 = (Graphics2D) g;
 			try {
 				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
-			} catch (NoSuchFieldError e) {
+			} catch (final NoSuchFieldError e) {
 				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 			}
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -644,13 +645,13 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintChildren(Graphics g) {
+	protected void paintChildren(final Graphics g) {
 		// Overridding with NOP. For various reasons,
 		// the regular mechanism for painting children
 		// needs to be handled by Cobra.
 	}
 
-	void processDocumentNotifications(DocumentNotification[] notifications) {
+	void processDocumentNotifications(final DocumentNotification[] notifications) {
 		// Called in the GUI thread.
 		if (this.processingDocumentNotification) {
 			// This should not be possible. Even if
@@ -719,7 +720,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				revalidatePanel();
 			} else {
 				if (repainters != null) {
-					for (RElement element : repainters) {
+					for (final RElement element : repainters) {
 						element.repaint();
 					}
 				}
@@ -743,7 +744,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public void repaint(ModelNode modelNode) {
+	public void repaint(final ModelNode modelNode) {
 		// this.rblock.invalidateRenderStyle();
 		this.repaint();
 	}
@@ -762,7 +763,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * Gets an aggregate of the bounds of renderer leaf nodes.
 	 */
-	private Rectangle scanNodeBounds(RCollection root, Node node, RCollection relativeTo) {
+	private Rectangle scanNodeBounds(final RCollection root, final Node node, final RCollection relativeTo) {
 		final Iterator<Renderable> i = root.getRenderables();
 		Rectangle resultBounds = null;
 		BoundableRenderable prevBoundable = null;
@@ -810,7 +811,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @param xOffset a {@link java.lang.Double} object.
 	 * @param yOffset a {@link java.lang.Double} object.
 	 */
-	public void scrollBy(double xOffset, double yOffset) {
+	public void scrollBy(final double xOffset, final double yOffset) {
 		final RBlock block = this.rblock;
 		if (block != null) {
 			if (xOffset != 0) {
@@ -830,7 +831,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *
 	 * @param node A DOM node.
 	 */
-	public void scrollTo(Node node) {
+	public void scrollTo(final Node node) {
 		final Rectangle bounds = getNodeBoundsNoMargins(node, true);
 		if (bounds == null) {
 			return;
@@ -850,11 +851,11 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @param yIfNeeded If this parameter is true, scrolling will only occur if the
 	 *                  requested bounds are not currently visible vertically.
 	 */
-	public void scrollTo(Rectangle bounds, boolean xIfNeeded, boolean yIfNeeded) {
+	public void scrollTo(final Rectangle bounds, final boolean xIfNeeded, final boolean yIfNeeded) {
 		final RBlock block = this.rblock;
 		if (block != null) {
 			final HTMLDocumentImpl doc = (HTMLDocumentImpl) getRootNode();
-			RBlock bodyBlock = (RBlock) ((HTMLElementImpl) doc.getBody()).getUINode();
+			final RBlock bodyBlock = (RBlock) ((HTMLElementImpl) doc.getBody()).getUINode();
 			bodyBlock.scrollTo(bounds, xIfNeeded, yIfNeeded);
 		}
 	}
@@ -864,7 +865,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *
 	 * @param defaultOverflowX a int.
 	 */
-	public void setDefaultOverflowX(int defaultOverflowX) {
+	public void setDefaultOverflowX(final int defaultOverflowX) {
 		if (defaultOverflowX != this.defaultOverflowX) {
 			this.defaultOverflowX = defaultOverflowX;
 			final RBlock block = this.rblock;
@@ -880,7 +881,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *
 	 * @param defaultOverflowY a int.
 	 */
-	public void setDefaultOverflowY(int defaultOverflowY) {
+	public void setDefaultOverflowY(final int defaultOverflowY) {
 		if (this.defaultOverflowY != defaultOverflowY) {
 			this.defaultOverflowY = defaultOverflowY;
 			final RBlock block = this.rblock;
@@ -899,7 +900,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *
 	 * @param width The preferred blocked width. Use -1 to unset.
 	 */
-	public void setPreferredWidth(int width) {
+	public void setPreferredWidth(final int width) {
 		this.preferredWidth = width;
 	}
 
@@ -910,7 +911,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * dispatch thread.
 	 */
 	@Override
-	public void setRootNode(NodeImpl node) {
+	public void setRootNode(final NodeImpl node) {
 		if (node != null) {
 			final RBlock block = new RBlock(RBlockInfo.builder()
 					.modelNode(node)
@@ -937,7 +938,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *
 	 * @param rpoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
 	 */
-	public void setSelectionEnd(RenderableSpot rpoint) {
+	public void setSelectionEnd(final RenderableSpot rpoint) {
 		this.endSelection = rpoint;
 	}
 
@@ -946,7 +947,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *
 	 * @param rpoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
 	 */
-	public void setSelectionStart(RenderableSpot rpoint) {
+	public void setSelectionStart(final RenderableSpot rpoint) {
 		this.startSelection = rpoint;
 	}
 
@@ -981,7 +982,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				}
 			}
 			// Add components in set that were not previously children.
-			for (Component component : workingSet) {
+			for (final Component component : workingSet) {
 				this.add(component);
 			}
 		}
@@ -1017,13 +1018,13 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	/** {@inheritDoc} */
-	public Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
+	public Point translateDescendentPoint(final BoundableRenderable descendent, final int x, final int y) {
 		return rblock.translateDescendentPoint(descendent, x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Point getOriginRelativeToAbs(RCollection bodyLayout) {
+	public Point getOriginRelativeToAbs(final RCollection bodyLayout) {
 		return null;
 	}
 

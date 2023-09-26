@@ -55,12 +55,12 @@ public class elementgetattributenodens03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Attr attribute;
-        String attrValue;
-        HTMLCollection childList;
-        String nullNS = null;
+        final Document doc;
+        final Element element;
+        final Attr attribute;
+        final String attrValue;
+        final HTMLCollection childList;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         childList = doc.getElementsByTagName( "employee");

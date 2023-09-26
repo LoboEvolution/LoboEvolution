@@ -49,11 +49,11 @@ import static org.junit.Assert.assertNull;
 public class nodegetbaseuri17Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String baseURI;
-        Text textNode;
-        HTMLCollection pList;
-        Element pElem;
+        final Document doc;
+        final String baseURI;
+        final Text textNode;
+        final HTMLCollection pList;
+        final Element pElem;
         doc = sampleXmlFile("barfoo_base.xml");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);

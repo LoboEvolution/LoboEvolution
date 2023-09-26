@@ -29,7 +29,6 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -58,14 +57,14 @@ public class domimplementationcreatedocumenttype02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
+        final Document doc;
+        final DOMImplementation domImpl;
         DocumentType newDocType;
         Document ownerDocument;
-        String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
-        String systemId = "dom2.dtd";
+        final String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
+        final String systemId = "dom2.dtd";
         String qualifiedName;
-        java.util.List qualifiedNames = new java.util.ArrayList();
+        final java.util.List qualifiedNames = new java.util.ArrayList();
         qualifiedNames.add("_:_");
         qualifiedNames.add("_:h0");
         qualifiedNames.add("_:test");

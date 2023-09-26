@@ -51,9 +51,9 @@ public class GraphiteIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				closeIcon = new MacCloseIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				closeIcon = new BaseIcons.CloseSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(1, 1, 1, 1));
 			}
@@ -71,9 +71,9 @@ public class GraphiteIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				iconIcon = new MacIconIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				iconIcon = new BaseIcons.IconSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(1, 1, 1, 1));
 			}
@@ -91,9 +91,9 @@ public class GraphiteIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				maxIcon = new MacMaxIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				maxIcon = new BaseIcons.MaxSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(1, 1, 1, 1));
 			}
@@ -111,9 +111,9 @@ public class GraphiteIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				minIcon = new MacMinIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				minIcon = new BaseIcons.MinSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(1, 1, 1, 1));
 			}

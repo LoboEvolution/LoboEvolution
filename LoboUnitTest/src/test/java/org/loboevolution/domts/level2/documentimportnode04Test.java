@@ -30,7 +30,6 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.*;
@@ -61,18 +60,18 @@ public class documentimportnode04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DocumentType docType = null;
+        final Document doc;
+        final Document newDoc;
+        final DocumentType docType = null;
 
-        DOMImplementation domImpl;
-        Element element;
-        Attr attr;
-        HTMLCollection childList;
-        Node importedAttr;
-        String nodeName;
-        int nodeType;
-        String nodeValue;
+        final DOMImplementation domImpl;
+        final Element element;
+        final Attr attr;
+        final HTMLCollection childList;
+        final Node importedAttr;
+        final String nodeName;
+        final int nodeType;
+        final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();

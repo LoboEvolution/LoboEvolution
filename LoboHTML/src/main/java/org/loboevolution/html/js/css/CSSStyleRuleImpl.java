@@ -42,7 +42,7 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
 
     private final AbstractCSSRuleImpl abstractCSSRule;
 
-    public CSSStyleRuleImpl(AbstractCSSRuleImpl abstractCSSRule) {
+    public CSSStyleRuleImpl(final AbstractCSSRuleImpl abstractCSSRule) {
         super(abstractCSSRule);
         this.abstractCSSRule = abstractCSSRule;
     }
@@ -60,10 +60,10 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
     /** {@inheritDoc} */
     @Override
     public CSSStyleDeclaration getStyle() {
-        AtomicReference<CSSStyleDeclarationImpl> atomicReference = new AtomicReference<>();
+        final AtomicReference<CSSStyleDeclarationImpl> atomicReference = new AtomicReference<>();
         if (abstractCSSRule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl) {
             final org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule = (org.htmlunit.cssparser.dom.CSSStyleRuleImpl) abstractCSSRule;
-            List<NameValuePair> list = new ArrayList<>();
+            final List<NameValuePair> list = new ArrayList<>();
 
             styleRule.getStyle().getProperties().forEach(p -> {
                 list.add(new NameValuePair(p.getName(), p.getValue().toString()));
@@ -82,6 +82,7 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
                         break;
                     case CSSProperties.BORDER_STYLE:
                         new BorderStyleSetter(p.getName(), p.getName() + "-", "-style").changeValue(atomicReference.get(), p.getValue());
+                        break;
                     default:
                         break;
                 }

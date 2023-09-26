@@ -109,7 +109,7 @@ public class PDFImage {
 	 * @param imageObj a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @throws java.io.IOException if any.
 	 */
-	protected PDFImage(PDFObject imageObj) throws IOException {
+	protected PDFImage(final PDFObject imageObj) throws IOException {
 		this.imageObj = imageObj;
 		this.jpegDecode = PDFDecoder.isLastFilter(imageObj, PDFDecoder.DCT_FILTERS);
 	}
@@ -128,27 +128,27 @@ public class PDFImage {
 	 * @return a {@link org.loboevolution.pdfview.PDFImage} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public static PDFImage createImage(PDFObject obj, Map<String, PDFObject> resources, boolean useAsSMask)
+	public static PDFImage createImage(final PDFObject obj, final Map<String, PDFObject> resources, final boolean useAsSMask)
 			throws IOException {
 		// create the image
-		PDFImage image = new PDFImage(obj);
+		final PDFImage image = new PDFImage(obj);
 
 		// get the width (required)
-		PDFObject widthObj = obj.getDictRef("Width");
+		final PDFObject widthObj = obj.getDictRef("Width");
 		if (widthObj == null) {
 			throw new PDFParseException("Unable to read image width: " + obj);
 		}
 		image.setWidth(widthObj.getIntValue());
 
 		// get the height (required)
-		PDFObject heightObj = obj.getDictRef("Height");
+		final PDFObject heightObj = obj.getDictRef("Height");
 		if (heightObj == null) {
 			throw new PDFParseException("Unable to get image height: " + obj);
 		}
 		image.setHeight(heightObj.getIntValue());
 
 		// figure out if we are an image mask (optional)
-		PDFObject imageMaskObj = obj.getDictRef("ImageMask");
+		final PDFObject imageMaskObj = obj.getDictRef("ImageMask");
 		if (imageMaskObj != null) {
 			image.setImageMask(imageMaskObj.getBooleanValue());
 		}
@@ -164,10 +164,10 @@ public class PDFImage {
 			// handled correctly.
 			Color[] colors = useAsSMask ? new Color[] { Color.WHITE, Color.BLACK }
 					: new Color[] { Color.BLACK, Color.WHITE };
-			PDFObject imageMaskDecode = obj.getDictRef("Decode");
+			final PDFObject imageMaskDecode = obj.getDictRef("Decode");
 			if (imageMaskDecode != null) {
-				PDFObject[] decodeArray = imageMaskDecode.getArray();
-				float decode0 = decodeArray[0].getFloatValue();
+				final PDFObject[] decodeArray = imageMaskDecode.getArray();
+				final float decode0 = decodeArray[0].getFloatValue();
 				if (decode0 == 1.0f) {
 					colors = useAsSMask ? new Color[] { Color.BLACK, Color.WHITE }
 							: new Color[] { Color.WHITE, Color.BLACK };
@@ -183,27 +183,27 @@ public class PDFImage {
 			image.setColorSpace(new IndexedColor(colors));
 		} else {
 			// get the bits per component (required)
-			PDFObject bpcObj = obj.getDictRef("BitsPerComponent");
+			final PDFObject bpcObj = obj.getDictRef("BitsPerComponent");
 			if (bpcObj == null) {
 				throw new PDFParseException("Unable to get bits per component: " + obj);
 			}
 			image.setBitsPerComponent(bpcObj.getIntValue());
 
 			// get the color space (required)
-			PDFObject csObj = obj.getDictRef("ColorSpace");
+			final PDFObject csObj = obj.getDictRef("ColorSpace");
 			if (csObj == null) {
 				throw new PDFParseException("No ColorSpace for image: " + obj);
 			}
 
-			PDFColorSpace cs = PDFColorSpace.getColorSpace(csObj, resources);
+			final PDFColorSpace cs = PDFColorSpace.getColorSpace(csObj, resources);
 			image.setColorSpace(cs);
 
 			// read the decode array
-			PDFObject decodeObj = obj.getDictRef("Decode");
+			final PDFObject decodeObj = obj.getDictRef("Decode");
 			if (decodeObj != null) {
-				PDFObject[] decodeArray = decodeObj.getArray();
+				final PDFObject[] decodeArray = decodeObj.getArray();
 
-				float[] decode = new float[decodeArray.length];
+				final float[] decode = new float[decodeArray.length];
 				for (int i = 0; i < decodeArray.length; i++) {
 					decode[i] = decodeArray[i].getFloatValue();
 				}
@@ -223,9 +223,9 @@ public class PDFImage {
 			if (sMaskObj != null) {
 				if (sMaskObj.getType() == PDFObject.STREAM) {
 					try {
-						PDFImage sMaskImage = PDFImage.createImage(sMaskObj, resources, true);
+						final PDFImage sMaskImage = PDFImage.createImage(sMaskObj, resources, true);
 						image.setSMask(sMaskImage);
-					} catch (IOException ex) {
+					} catch (final IOException ex) {
 						PDFDebugger.debug("ERROR: there was a problem parsing the mask for this object");
 						PDFDebugger.dump(obj);
 						BaseWatchable.getErrorHandler().publishException(ex);
@@ -235,7 +235,7 @@ public class PDFImage {
 					// colors outside this range will not be painted.
 					try {
 						image.setColorKeyMask(sMaskObj);
-					} catch (IOException ex) {
+					} catch (final IOException ex) {
 						PDFDebugger.debug("ERROR: there was a problem parsing the color mask for this object");
 						PDFDebugger.dump(obj);
 						BaseWatchable.getErrorHandler().publishException(ex);
@@ -258,7 +258,7 @@ public class PDFImage {
 			BufferedImage bi = (BufferedImage) this.imageObj.getCache();
 
 			if (bi == null) {
-				byte[] data = imageObj.getStream();
+				final byte[] data = imageObj.getStream();
 				ByteBuffer jpegBytes = null;
 				if (this.jpegDecode) {
 					// if we're lucky, the stream will have just the DCT
@@ -272,7 +272,7 @@ public class PDFImage {
 				this.imageObj.setCache(bi);
 			}
 			return bi;
-		} catch (IOException ioe) {
+		} catch (final IOException ioe) {
 			// let the caller know that there was a problem parsing the image
 			throw new PDFImageParseException("Error reading image: "+ioe.getMessage(), ioe);
 		}
@@ -298,7 +298,7 @@ public class PDFImage {
 	 * @return a {@link java.awt.image.BufferedImage} object.
 	 * @throws java.io.IOException if any.
 	 */
-	protected BufferedImage parseData(byte[] data, ByteBuffer jpegData) throws IOException {
+	protected BufferedImage parseData(final byte[] data, ByteBuffer jpegData) throws IOException {
 		// pick a color model, based on the number of components and
 		// bits per component
 		ColorModel cm = createColorModel();
@@ -334,7 +334,7 @@ public class PDFImage {
 			IOException decodeEx = null;
 			try {
 				bi = decoder.decode();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				decodeEx = e;
 				// The native readers weren't able to process the image.
 				// One common situation is that the image is YCCK/CMYK encoded,
@@ -343,7 +343,7 @@ public class PDFImage {
 				decoder.ycckcmykDecodeMode(true);
 				try {
 					bi = decoder.decode();
-				} catch (IOException e2) {
+				} catch (final IOException e2) {
 					// It probably wasn't the YCCK/CMYK issue!
 					// try the "old" implementation
 					bi = parseData(data, null);
@@ -376,11 +376,11 @@ public class PDFImage {
 			cm = getColorModel();
 
 			// create a compatible raster
-			SampleModel sm = cm.createCompatibleSampleModel(getWidth(), getHeight());
+			final SampleModel sm = cm.createCompatibleSampleModel(getWidth(), getHeight());
 			WritableRaster raster;
 			try {
 				raster = Raster.createWritableRaster(sm, db, new Point(0, 0));
-			} catch (RasterFormatException e) {
+			} catch (final RasterFormatException e) {
 				int tempExpectedSize = getWidth() * getHeight() * getColorSpace().getNumComponents()
 						* Math.max(8, getBitsPerComponent()) / 8;
 
@@ -388,7 +388,7 @@ public class PDFImage {
 					tempExpectedSize = 3;
 				}
 				if (tempExpectedSize > data.length) {
-					byte[] tempLargerData = new byte[tempExpectedSize];
+					final byte[] tempLargerData = new byte[tempExpectedSize];
 					System.arraycopy(data, 0, tempLargerData, 0, data.length);
 					db = new DataBufferByte(tempLargerData, tempExpectedSize);
 					raster = Raster.createWritableRaster(sm, db, new Point(0, 0));
@@ -403,7 +403,7 @@ public class PDFImage {
 			 */
 			bi = null;
 			if (cm instanceof IndexColorModel) {
-				IndexColorModel icm = (IndexColorModel) cm;
+				final IndexColorModel icm = (IndexColorModel) cm;
 
 				// choose the image type based on the size
 				int type = BufferedImage.TYPE_BYTE_BINARY;
@@ -424,8 +424,8 @@ public class PDFImage {
 				// image
 
 				// Are pixels decoded?
-				int[] cc = new int[] { 0, 1 };
-				PDFObject o = imageObj.getDictRef("Decode");
+				final int[] cc = new int[] { 0, 1 };
+				final PDFObject o = imageObj.getDictRef("Decode");
 				if (o != null && o.getAt(0) != null) {
 					cc[0] = o.getAt(0).getIntValue();
 					cc[1] = o.getAt(1).getIntValue();
@@ -445,37 +445,37 @@ public class PDFImage {
 		}
 
 		// hack to avoid *very* slow conversion
-		ColorSpace cs = cm.getColorSpace();
-		ColorSpace rgbCS = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+		final ColorSpace cs = cm.getColorSpace();
+		final ColorSpace rgbCS = ColorSpace.getInstance(ColorSpace.CS_sRGB);
 		if (isGreyscale(cs) && bpc <= 8 && getDecode() == null && jpegData == null
 				&& Configuration.getInstance().isConvertGreyscaleImagesToArgb()) {
 			bi = convertGreyscaleToArgb(data, bi);
 		} else if (!isImageMask() && cs instanceof ICC_ColorSpace && !cs.equals(rgbCS)
 				&& !Configuration.getInstance().isAvoidColorConvertOp()) {
-			ColorConvertOp op = new ColorConvertOp(cs, rgbCS, null);
+			final ColorConvertOp op = new ColorConvertOp(cs, rgbCS, null);
 
-			BufferedImage converted = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+			final BufferedImage converted = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 
 			bi = op.filter(bi, converted);
 		}
 		else if (cs.getType() == ColorSpace.TYPE_CMYK) {
 			// convert to ARGB for faster drawing without ColorConvertOp
-			BufferedImage converted = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
-			Graphics2D graphics = converted.createGraphics();
+			final BufferedImage converted = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+			final Graphics2D graphics = converted.createGraphics();
 			graphics.drawImage(bi,0,0,null);
 			graphics.dispose();
 			bi = converted;
 		}
 
 		// add in the alpha data supplied by the SMask, if any
-		PDFImage sMaskImage = getSMask();
+		final PDFImage sMaskImage = getSMask();
 		if (sMaskImage != null) {
 			BufferedImage si = null;
 			try {
 				int w = bi.getWidth();
 				int h = bi.getHeight();
 				// if the bitmap is only a few pixels it just defines the color
-				boolean maskOnly = (w <= 2);
+				final boolean maskOnly = (w <= 2);
 				if (maskOnly) {
 					// use size of mask
 					si = sMaskImage.getImage();
@@ -489,10 +489,10 @@ public class PDFImage {
 	            		si = sMaskImage.getImage();
 		            	w = si.getWidth();
 		            	h = si.getHeight();
-		            	int hints = Image.SCALE_FAST;
-						Image scaledInstance = bi.getScaledInstance(w, h, hints );
+		            	final int hints = Image.SCALE_FAST;
+						final Image scaledInstance = bi.getScaledInstance(w, h, hints );
 						bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-						Graphics graphics = bi.createGraphics();
+						final Graphics graphics = bi.createGraphics();
 						graphics.drawImage(scaledInstance, 0, 0, null);
 						graphics.dispose();
 	            	}
@@ -506,10 +506,10 @@ public class PDFImage {
 	            }
 	            PDFDebugger.debugImage(si, "smask" + this.imageObj.getObjNum());
 
-    			BufferedImage outImage = new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB);
+    			final BufferedImage outImage = new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB);
     			PDFDebugger.debugImage(si, "outImage" + this.imageObj.getObjNum());
-    			int[] srcArray = new int[w];
-    			int[] maskArray = new int[w];
+    			final int[] srcArray = new int[w];
+    			final int[] maskArray = new int[w];
     
     			for (int i = 0; i < h; i++) {
     				if (maskOnly) {
@@ -524,7 +524,7 @@ public class PDFImage {
     				si.getRGB(0, i, w, 1, maskArray, 0, w);
     
     				for (int j = 0; j < w; j++) {
-    					int ac = 0xff000000;
+    					final int ac = 0xff000000;
     					// alpha from mask with color from image
     					maskArray[j] = ((maskArray[j] & 0xff) << 24) | (srcArray[j] & ~ac);
     				}
@@ -533,7 +533,7 @@ public class PDFImage {
     			}
     
     			bi = outImage;
-            } catch (PDFImageParseException e) {
+            } catch (final PDFImageParseException e) {
                 PDFDebugger.debug("Error parsing sMask image caused by:" + e.getMessage(), 100);
             }
 		}
@@ -549,28 +549,28 @@ public class PDFImage {
 	 * @return a {@link java.awt.image.BufferedImage} object.
 	 * @throws org.loboevolution.pdfview.PDFImageParseException if any.
 	 */
-	private BufferedImage scaleSMaskImage(PDFImage sMaskImage) throws PDFImageParseException {
-		BufferedImage before = sMaskImage.getImage();
-		int w = before.getWidth();
-		int h = before.getHeight();
+	private BufferedImage scaleSMaskImage(final PDFImage sMaskImage) throws PDFImageParseException {
+		final BufferedImage before = sMaskImage.getImage();
+		final int w = before.getWidth();
+		final int h = before.getHeight();
 
 		if (PDFDebugger.DEBUG_IMAGES) {
 			PDFDebugger.debug("Scaling image from " + w + "/" + h + " to " + this.width + "/" + this.height);
 		}
-		BufferedImage after = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-		AffineTransform at = new AffineTransform();
+		final BufferedImage after = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		final AffineTransform at = new AffineTransform();
 
 		at.scale(((double) this.width / w), ((double) this.height / h));
 
-		AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		final AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
 		return scaleOp.filter(before, after);
 	}
 
-	private boolean isGreyscale(ColorSpace aCs) {
+	private boolean isGreyscale(final ColorSpace aCs) {
 		return aCs == PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_GRAY).getColorSpace();
 	}
 
-	private BufferedImage convertGreyscaleToArgb(byte[] data, BufferedImage bi) {
+	private BufferedImage convertGreyscaleToArgb(final byte[] data, final BufferedImage bi) {
 		// we use an optimised greyscale colour conversion, as with scanned
 		// greyscale/mono documents consisting of nothing but page-size
 		// images, using the ICC converter is perhaps 15 times slower than this
@@ -587,7 +587,7 @@ public class PDFImage {
 		int i = 0;
 		final int[] greyToArgbMap = getGreyToArgbMap(bpc);
 		if (bpc == 1) {
-			int calculatedLineBytes = (getWidth() + 7) / 8;
+			final int calculatedLineBytes = (getWidth() + 7) / 8;
 			int rowStartByteIndex;
 			// avoid hitting the WritableRaster for the common 1 bpc case
 			if (greyToArgbMap[0] == 0 && greyToArgbMap[1] == 0xFFFFFFFF) {
@@ -640,7 +640,7 @@ public class PDFImage {
 				false, null);
 	}
 
-	private static int[] getGreyToArgbMap(int numBits) {
+	private static int[] getGreyToArgbMap(final int numBits) {
 		assert numBits <= 8;
 		int[] argbVals = GREY_TO_ARGB[numBits - 1];
 		if (argbVals == null) {
@@ -658,10 +658,10 @@ public class PDFImage {
 	 * @return a 2^bits array of standard 32-bit ARGB fits for each greyscale
 	 *         value at that bitdepth
 	 */
-	private static int[] createGreyToArgbMap(int numBits) {
+	private static int[] createGreyToArgbMap(final int numBits) {
 		final ColorSpace greyCs = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_GRAY).getColorSpace();
 
-		byte[] greyVals = new byte[1 << numBits];
+		final byte[] greyVals = new byte[1 << numBits];
 		for (int i = 0; i < greyVals.length; ++i) {
 			greyVals[i] = (byte) (i & 0xFF);
 		}
@@ -701,9 +701,9 @@ public class PDFImage {
 
 		final byte[] bufferO = ((DataBufferByte) raster.getDataBuffer()).getData();
 
-		BufferedImage converted = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_GRAY);
+		final BufferedImage converted = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_GRAY);
 
-		byte[] buffer = ((DataBufferByte) converted.getRaster().getDataBuffer()).getData();
+		final byte[] buffer = ((DataBufferByte) converted.getRaster().getDataBuffer()).getData();
 		int i = 0;
 		final int height = converted.getHeight();
 		final int width = converted.getWidth();
@@ -770,7 +770,7 @@ public class PDFImage {
 	 *
 	 * @param height a int.
 	 */
-	protected void setHeight(int height) {
+	protected void setHeight(final int height) {
 		this.height = height;
 	}
 
@@ -780,10 +780,10 @@ public class PDFImage {
 	 * 
 	 * @param maskArrayObject
 	 */
-	private void setColorKeyMask(PDFObject maskArrayObject) throws IOException {
-		PDFObject[] maskObjects = maskArrayObject.getArray();
+	private void setColorKeyMask(final PDFObject maskArrayObject) throws IOException {
+		final PDFObject[] maskObjects = maskArrayObject.getArray();
 		this.colorKeyMask = null;
-		int[] masks = new int[maskObjects.length];
+		final int[] masks = new int[maskObjects.length];
 		for (int i = 0; i < masks.length; i++) {
 			masks[i] = maskObjects[i].getIntValue();
 		}
@@ -804,7 +804,7 @@ public class PDFImage {
 	 *
 	 * @param colorSpace a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
 	 */
-	protected void setColorSpace(PDFColorSpace colorSpace) {
+	protected void setColorSpace(final PDFColorSpace colorSpace) {
 		this.colorSpace = colorSpace;
 	}
 
@@ -822,7 +822,7 @@ public class PDFImage {
 	 *
 	 * @param bpc a int.
 	 */
-	protected void setBitsPerComponent(int bpc) {
+	protected void setBitsPerComponent(final int bpc) {
 		this.bpc = bpc;
 	}
 
@@ -840,7 +840,7 @@ public class PDFImage {
 	 *
 	 * @param imageMask a boolean.
 	 */
-	public void setImageMask(boolean imageMask) {
+	public void setImageMask(final boolean imageMask) {
 		this.imageMask = imageMask;
 	}
 
@@ -858,7 +858,7 @@ public class PDFImage {
 	 *
 	 * @param sMask a {@link org.loboevolution.pdfview.PDFImage} object.
 	 */
-	protected void setSMask(PDFImage sMask) {
+	protected void setSMask(final PDFImage sMask) {
 		this.sMask = sMask;
 	}
 
@@ -876,7 +876,7 @@ public class PDFImage {
 	 *
 	 * @param decode an array of {@link float} objects.
 	 */
-	protected void setDecode(float[] decode) {
+	protected void setDecode(final float[] decode) {
 		this.decode = decode;
 	}
 
@@ -886,25 +886,25 @@ public class PDFImage {
 	 *
 	 */
 	private ColorModel getColorModel() {
-		PDFColorSpace cs = getColorSpace();
+		final PDFColorSpace cs = getColorSpace();
 
 		if (cs instanceof IndexedColor) {
-			IndexedColor ics = (IndexedColor) cs;
+			final IndexedColor ics = (IndexedColor) cs;
 
 			byte[] components = ics.getColorComponents();
 			int num = ics.getCount();
 
 			// process the decode array
 			if (this.decode != null) {
-				byte[] normComps = new byte[components.length];
+				final byte[] normComps = new byte[components.length];
 
 				// move the components array around
 				for (int i = 0; i < num; i++) {
-					byte[] orig = new byte[1];
+					final byte[] orig = new byte[1];
 					orig[0] = (byte) i;
 
-					float[] res = normalize(orig, null, 0);
-					int idx = (int) res[0];
+					final float[] res = normalize(orig, null, 0);
+					final int idx = (int) res[0];
 
 					normComps[i * 3] = components[idx * 3];
 					normComps[(i * 3) + 1] = components[(idx * 3) + 1];
@@ -916,9 +916,9 @@ public class PDFImage {
 
 			// make sure the size of the components array is 2 ^ numBits
 			// since if it's not, Java will complain
-			int correctCount = 1 << getBitsPerComponent();
+			final int correctCount = 1 << getBitsPerComponent();
 			if (correctCount < num) {
-				byte[] fewerComps = new byte[correctCount * 3];
+				final byte[] fewerComps = new byte[correctCount * 3];
 
 				System.arraycopy(components, 0, fewerComps, 0, correctCount * 3);
 
@@ -928,7 +928,7 @@ public class PDFImage {
 			if (this.colorKeyMask == null || this.colorKeyMask.length == 0) {
 				return new IndexColorModel(getBitsPerComponent(), num, components, 0, false);
 			} else {
-				byte[] aComps = new byte[num * 4];
+				final byte[] aComps = new byte[num * 4];
 				int idx = 0;
 				for (int i = 0; i < num; i++) {
 					aComps[idx++] = components[(i * 3)];
@@ -946,20 +946,20 @@ public class PDFImage {
 		} else if (cs instanceof AlternateColorSpace) {
 			// ColorSpace altCS = new AltColorSpace(((AlternateColorSpace)
 			// cs).getFunktion(), cs.getColorSpace());
-			ColorSpace altCS = cs.getColorSpace();
-			int[] bits = new int[altCS.getNumComponents()];
+			final ColorSpace altCS = cs.getColorSpace();
+			final int[] bits = new int[altCS.getNumComponents()];
 			Arrays.fill(bits, getBitsPerComponent());
 			return new DecodeComponentColorModel(altCS, bits);
 		} else {
 			// If the image is a JPEG, then CMYK color space has been converted to RGB in DCTDecode
 			if (this.jpegDecode && cs.getColorSpace().getType() == ColorSpace.TYPE_CMYK) {
-				ColorSpace rgbCS = ColorSpace.getInstance(ColorSpace.CS_sRGB);
-				int[] bits = new int[rgbCS.getNumComponents()];
+				final ColorSpace rgbCS = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+				final int[] bits = new int[rgbCS.getNumComponents()];
 				Arrays.fill(bits, getBitsPerComponent());
 				return new DecodeComponentColorModel(rgbCS, bits);
 			}
-			ColorSpace colorSpace = cs.getColorSpace();
-			int[] bits = new int[colorSpace.getNumComponents()];
+			final ColorSpace colorSpace = cs.getColorSpace();
+			final int[] bits = new int[colorSpace.getNumComponents()];
 			Arrays.fill(bits, getBitsPerComponent());
 
 			return new DecodeComponentColorModel(cs.getColorSpace(), bits);
@@ -969,18 +969,18 @@ public class PDFImage {
 	/**
 	 * Normalize an array of values to match the decode array
 	 */
-	private float[] normalize(byte[] pixels, float[] normComponents, int normOffset) {
+	private float[] normalize(final byte[] pixels, float[] normComponents, final int normOffset) {
 		if (normComponents == null) {
 			normComponents = new float[normOffset + pixels.length];
 		}
 
-		float[] decodeArray = getDecode();
+		final float[] decodeArray = getDecode();
 
 		for (int i = 0; i < pixels.length; i++) {
-			int val = pixels[i] & 0xff;
-			int pow = ((int) Math.pow(2, getBitsPerComponent())) - 1;
-			float ymin = decodeArray[i * 2];
-			float ymax = decodeArray[(i * 2) + 1];
+			final int val = pixels[i] & 0xff;
+			final int pow = ((int) Math.pow(2, getBitsPerComponent())) - 1;
+			final float ymin = decodeArray[i * 2];
+			final float ymax = decodeArray[(i * 2) + 1];
 
 			normComponents[normOffset + i] = FunctionType0.interpolate(val, 0, pow, ymin, ymax);
 		}
@@ -994,7 +994,7 @@ public class PDFImage {
 	 */
 	class DecodeComponentColorModel extends ComponentColorModel {
 
-		public DecodeComponentColorModel(ColorSpace cs, int[] bpc) {
+		public DecodeComponentColorModel(final ColorSpace cs, final int[] bpc) {
 			super(cs, bpc, false, false, Transparency.OPAQUE, DataBuffer.TYPE_BYTE);
 
 			if (bpc != null) {
@@ -1003,7 +1003,7 @@ public class PDFImage {
 		}
 
 		@Override
-		public SampleModel createCompatibleSampleModel(int width, int height) {
+		public SampleModel createCompatibleSampleModel(final int width, final int height) {
 			// workaround -- create a MultiPixelPackedSample models for
 			// single-sample, less than 8bpp color models
 			if (getNumComponents() == 1 && getPixelSize() < 8) {
@@ -1014,9 +1014,9 @@ public class PDFImage {
 		}
 
 		@Override
-		public boolean isCompatibleRaster(Raster raster) {
+		public boolean isCompatibleRaster(final Raster raster) {
 			if (getNumComponents() == 1 && getPixelSize() < 8) {
-				SampleModel sm = raster.getSampleModel();
+				final SampleModel sm = raster.getSampleModel();
 
 				if (sm instanceof MultiPixelPackedSampleModel) {
 					return (sm.getSampleSize(0) == getPixelSize());
@@ -1029,7 +1029,7 @@ public class PDFImage {
 		}
 
 		@Override
-		public float[] getNormalizedComponents(Object pixel, float[] normComponents, int normOffset) {
+		public float[] getNormalizedComponents(final Object pixel, final float[] normComponents, final int normOffset) {
 			if (getDecode() == null) {
 				return super.getNormalizedComponents(pixel, normComponents, normOffset);
 			}
@@ -1044,25 +1044,25 @@ public class PDFImage {
 	 *
 	 */
 	private ColorModel createColorModel() {
-		PDFColorSpace cs = getColorSpace();
+		final PDFColorSpace cs = getColorSpace();
 
 		if (cs instanceof IndexedColor) {
-			IndexedColor ics = (IndexedColor) cs;
+			final IndexedColor ics = (IndexedColor) cs;
 
 			byte[] components = ics.getColorComponents();
 			int num = ics.getCount();
 
 			// process the decode array
 			if (decode != null) {
-				byte[] normComps = new byte[components.length];
+				final byte[] normComps = new byte[components.length];
 
 				// move the components array around
 				for (int i = 0; i < num; i++) {
-					byte[] orig = new byte[1];
+					final byte[] orig = new byte[1];
 					orig[0] = (byte) i;
 
-					float[] res = normalize(orig, null, 0);
-					int idx = (int) res[0];
+					final float[] res = normalize(orig, null, 0);
+					final int idx = (int) res[0];
 
 					normComps[i * 3] = components[idx * 3];
 					normComps[(i * 3) + 1] = components[(idx * 3) + 1];
@@ -1074,9 +1074,9 @@ public class PDFImage {
 
 			// make sure the size of the components array is 2 ^ numBits
 			// since if it's not, Java will complain
-			int correctCount = 1 << getBitsPerComponent();
+			final int correctCount = 1 << getBitsPerComponent();
 			if (correctCount < num) {
-				byte[] fewerComps = new byte[correctCount * 3];
+				final byte[] fewerComps = new byte[correctCount * 3];
 
 				System.arraycopy(components, 0, fewerComps, 0, correctCount * 3);
 
@@ -1086,7 +1086,7 @@ public class PDFImage {
 			if (colorKeyMask == null || colorKeyMask.length == 0) {
 				return new IndexColorModel(getBitsPerComponent(), num, components, 0, false);
 			} else {
-				byte[] aComps = new byte[num * 4];
+				final byte[] aComps = new byte[num * 4];
 				int idx = 0;
 				for (int i = 0; i < num; i++) {
 					aComps[idx++] = components[(i * 3)];
@@ -1102,7 +1102,7 @@ public class PDFImage {
 				return new IndexColorModel(getBitsPerComponent(), num, aComps, 0, true);
 			}
 		} else {
-			int[] bits = new int[cs.getNumComponents()];
+			final int[] bits = new int[cs.getNumComponents()];
 			for (int i = 0; i < bits.length; i++) {
 				bits[i] = getBitsPerComponent();
 			}
@@ -1117,7 +1117,7 @@ public class PDFImage {
 	 * Users should use {@link #getColorModel()} to see which color model should
 	 * now be used after a successful decode.
 	 */
-	private class JpegDecoder {
+	private final class JpegDecoder {
 		/** The jpeg bytes */
 		private final ByteBuffer jpegData;
 		/** The color model employed */
@@ -1133,7 +1133,7 @@ public class PDFImage {
 		 * @param cm
 		 *            the color model as presented in the PDF
 		 */
-		private JpegDecoder(ByteBuffer jpegData, ColorModel cm) {
+		private JpegDecoder(final ByteBuffer jpegData, final ColorModel cm) {
 			this.jpegData = jpegData;
 			this.cm = cm;
 		}
@@ -1147,7 +1147,7 @@ public class PDFImage {
 		 * 
 		 * @param ycckcmykDecodeMode
 		 */
-		public void ycckcmykDecodeMode(boolean ycckcmykDecodeMode) {
+		public void ycckcmykDecodeMode(final boolean ycckcmykDecodeMode) {
 			this.ycckcmykDecodeMode = ycckcmykDecodeMode;
 		}
 
@@ -1175,12 +1175,12 @@ public class PDFImage {
 				// we have to allocate our own buffered image so that we can
 				// install our colour model which will do the desired decode
 				readParam = new ImageReadParam();
-				SampleModel sm = cm.createCompatibleSampleModel(getWidth(), getHeight());
+				final SampleModel sm = cm.createCompatibleSampleModel(getWidth(), getHeight());
 				final WritableRaster raster = Raster.createWritableRaster(sm, new Point(0, 0));
 				readParam.setDestination(new BufferedImage(cm, raster, true, null));
 			}
 
-			Iterator<ImageReader> jpegReaderIt = ImageIO.getImageReadersByFormatName("jpeg");
+			final Iterator<ImageReader> jpegReaderIt = ImageIO.getImageReadersByFormatName("jpeg");
 			IIOException lastIioEx = null;
 			while (jpegReaderIt.hasNext()) {
 				try {
@@ -1189,7 +1189,7 @@ public class PDFImage {
 							false);
 					try {
 						return readImage(jpegReader, readParam);
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						if (e instanceof IIOException) {
 							throw (IIOException) e;
 						}
@@ -1208,7 +1208,7 @@ public class PDFImage {
 					} finally {
 						jpegReader.dispose();
 					}
-				} catch (IIOException e) {
+				} catch (final IIOException e) {
 					// its most likely complaining about an unsupported image
 					// type; hopefully the next image reader will be able to
 					// understand it
@@ -1221,7 +1221,7 @@ public class PDFImage {
 
 		}
 
-		private BufferedImage readImage(ImageReader jpegReader, ImageReadParam param) throws IOException {
+		private BufferedImage readImage(final ImageReader jpegReader, final ImageReadParam param) throws IOException {
 			if (ycckcmykDecodeMode) {
 				// The standard Oracle Java JPEG readers can't deal with CMYK
 				// YCCK encoded images
@@ -1288,11 +1288,11 @@ public class PDFImage {
 					// otherwise we'll create a new buffered image with the
 					// desired color model
 					//return new BufferedImage(cm, jpegReader.read(0, param).getRaster(), true, null);
-					BufferedImage bi = jpegReader.read(0, param);
+					final BufferedImage bi = jpegReader.read(0, param);
 					try {
 						return new BufferedImage(cm, bi.getRaster(), true, null);
-					} catch (IllegalArgumentException raster_ByteInterleavedRaster) {
-						BufferedImage bi2 = new BufferedImage(bi.getWidth(), bi.getHeight(),
+					} catch (final IllegalArgumentException raster_ByteInterleavedRaster) {
+						final BufferedImage bi2 = new BufferedImage(bi.getWidth(), bi.getHeight(),
 								BufferedImage.TYPE_BYTE_INDEXED,
 								new IndexColorModel(8, 1, new byte[] { 0 }, new byte[] { 0 }, new byte[] { 0 }, 0));
 						cm = bi2.getColorModel();
@@ -1313,7 +1313,7 @@ public class PDFImage {
 		 * @return the first direct child node with that name or null if it
 		 *         doesn't exist
 		 */
-		private Node getChild(Node aNode, String aChildName) {
+		private Node getChild(final Node aNode, final String aChildName) {
 			for (int i = 0; i < aNode.getChildNodes().getLength(); ++i) {
 				final Node child = aNode.getChildNodes().item(i);
 				if (child.getNodeName().equals(aChildName)) {
@@ -1332,7 +1332,7 @@ public class PDFImage {
 
 		final int bitsPerComponent;
 
-		public PdfComponentColorModel(ColorSpace cs, int[] bpc) {
+		public PdfComponentColorModel(final ColorSpace cs, final int[] bpc) {
 			super(cs, bpc, false, false, Transparency.OPAQUE, DataBuffer.TYPE_BYTE);
 
 			pixel_bits = bpc.length * bpc[0];
@@ -1340,12 +1340,12 @@ public class PDFImage {
 		}
 
 		@Override
-		public SampleModel createCompatibleSampleModel(int width, int height) {
+		public SampleModel createCompatibleSampleModel(final int width, final int height) {
 
 			if (bitsPerComponent >= 8) {
 				assert bitsPerComponent == 8 || bitsPerComponent == 16;
 				final int numComponents = getNumComponents();
-				int[] bandOffsets = new int[numComponents];
+				final int[] bandOffsets = new int[numComponents];
 				for (int i = 0; i < numComponents; i++) {
 					bandOffsets[i] = i;
 				}
@@ -1374,9 +1374,9 @@ public class PDFImage {
 		}
 
 		@Override
-		public boolean isCompatibleRaster(Raster raster) {
+		public boolean isCompatibleRaster(final Raster raster) {
 			if (bitsPerComponent < 8 || getNumComponents() == 1) {
-				SampleModel sm = raster.getSampleModel();
+				final SampleModel sm = raster.getSampleModel();
 				return sm.getSampleSize(0) == bitsPerComponent;
 			}
 			return super.isCompatibleRaster(raster);

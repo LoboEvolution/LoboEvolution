@@ -100,7 +100,7 @@ public final class TextureUtils {
 	 * @param c a {@link java.awt.Component} object.
 	 * @param textureType a int.
 	 */
-	public static void fillComponent(Graphics g, Component c, int textureType) {
+	public static void fillComponent(final Graphics g, final Component c, final int textureType) {
 		JTattooUtilities.fillComponent(g, c, getTexture(textureType));
 	}
 
@@ -115,19 +115,19 @@ public final class TextureUtils {
 	 * @param h a int.
 	 * @param textureType a int.
 	 */
-	public static void fillComponent(Graphics g, Component c, int x, int y, int w, int h, int textureType) {
-		Graphics2D g2D = (Graphics2D) g;
-		Shape savedClip = g2D.getClip();
-		Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
+	public static void fillComponent(final Graphics g, final Component c, final int x, final int y, final int w, final int h, final int textureType) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Shape savedClip = g2D.getClip();
+		final Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
 		if (savedClip != null) {
 			clipArea.intersect(new Area(savedClip));
 		}
 		g2D.setClip(clipArea);
-		Icon texture = getTexture(textureType);
+		final Icon texture = getTexture(textureType);
 		if (texture != null) {
-			int tw = texture.getIconWidth();
-			int th = texture.getIconHeight();
-			Point p = JTattooUtilities.getRelLocation(c);
+			final int tw = texture.getIconWidth();
+			final int th = texture.getIconHeight();
+			final Point p = JTattooUtilities.getRelLocation(c);
 			int ys = y - p.y;
 			while (ys < y + h) {
 				int xs = x - p.x;
@@ -155,18 +155,18 @@ public final class TextureUtils {
 	 * @param h a int.
 	 * @param textureType a int.
 	 */
-	public static void fillRect(Graphics g, Component c, int x, int y, int w, int h, int textureType) {
-		Graphics2D g2D = (Graphics2D) g;
-		Shape savedClip = g2D.getClip();
-		Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
+	public static void fillRect(final Graphics g, final Component c, final int x, final int y, final int w, final int h, final int textureType) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Shape savedClip = g2D.getClip();
+		final Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
 		if (savedClip != null) {
 			clipArea.intersect(new Area(savedClip));
 		}
 		g2D.setClip(clipArea);
-		Icon texture = getTexture(textureType);
+		final Icon texture = getTexture(textureType);
 		if (texture != null) {
-			int tw = texture.getIconWidth();
-			int th = texture.getIconHeight();
+			final int tw = texture.getIconWidth();
+			final int th = texture.getIconHeight();
 			int ys = y;
 			while (ys < y + h) {
 				int xs = x;
@@ -189,7 +189,7 @@ public final class TextureUtils {
 	 * @param textureType a int.
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public static Icon getTexture(int textureType) {
+	public static Icon getTexture(final int textureType) {
 		Icon texture = null;
 		switch (textureType) {
 		case WINDOW_TEXTURE_TYPE:
@@ -228,11 +228,11 @@ public final class TextureUtils {
 	 * @param c a {@link javax.swing.JComponent} object.
 	 * @return a int.
 	 */
-	public static int getTextureType(JComponent c) {
+	public static int getTextureType(final JComponent c) {
 		int textureType = TextureUtils.BACKGROUND_TEXTURE_TYPE;
-		Object textureProperty = c.getClientProperty("textureType");
+		final Object textureProperty = c.getClientProperty("textureType");
 		if (textureProperty instanceof Integer) {
-			int bt = (Integer) textureProperty;
+			final int bt = (Integer) textureProperty;
 			if (bt >= 0 && bt <= TextureUtils.LAST_TEXTURE_TYPE) {
 				textureType = bt;
 			}

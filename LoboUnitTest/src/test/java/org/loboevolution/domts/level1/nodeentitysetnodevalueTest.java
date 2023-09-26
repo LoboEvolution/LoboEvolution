@@ -54,11 +54,11 @@ public class nodeentitysetnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entities;
-        Node entityNode;
-        String entityValue;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entities;
+        final Node entityNode;
+        final String entityValue;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);
@@ -69,7 +69,7 @@ public class nodeentitysetnodevalueTest extends LoboUnitTest {
         boolean success = false;
         try {
             entityNode.setNodeValue("This should have no effect");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
         assertTrue("throw_INVALID_MODIFICATION_ERR", success);

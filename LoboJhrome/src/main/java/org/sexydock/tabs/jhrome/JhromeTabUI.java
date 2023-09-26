@@ -36,7 +36,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -64,7 +63,7 @@ public class JhromeTabUI extends BasicTabUI {
         init();
     }
 
-    public static JhromeTabUI createUI(JComponent c) {
+    public static JhromeTabUI createUI(final JComponent c) {
         return new JhromeTabUI();
     }
 
@@ -76,11 +75,11 @@ public class JhromeTabUI extends BasicTabUI {
 
         highlightTimer = new javax.swing.Timer(30, this::onHighlightTimerEvent);
 
-        JLabel label = getLabel();
+        final JLabel label = getLabel();
         label.setFont(label.getFont().deriveFont(Font.PLAIN));
         label.setForeground(unselectedLabelColor);
 
-        JButton closeButton = getCloseButton();
+        final JButton closeButton = getCloseButton();
         closeButton.setText("");
         closeButton.setUI(new BasicButtonUI());
         closeButton.setBorderPainted(false);
@@ -92,17 +91,17 @@ public class JhromeTabUI extends BasicTabUI {
         closeButton.setPreferredSize(new Dimension(closeButton.getIcon().getIconWidth() + 1, closeButton.getIcon().getIconHeight() + 1));
     }
 
-    protected void onHighlightTimerEvent(ActionEvent e) {
-        Tab tab = getTab();
+    protected void onHighlightTimerEvent(final ActionEvent e) {
+        final Tab tab = getTab();
         if (tab != null) {
             tab.repaint();
         }
     }
 
     @Override
-    public void installUI(JComponent c) {
+    public void installUI(final JComponent c) {
         super.installUI(c);
-        Tab tab = getTab();
+        final Tab tab = getTab();
 
         tab.setBorder(compoundBorder);
         tab.setOpaque(false);
@@ -111,13 +110,13 @@ public class JhromeTabUI extends BasicTabUI {
         getTab().addPropertyChangeListener(propertyChangeHandler);
     }
 
-    public void update(Graphics g, JComponent c) {
+    public void update(final Graphics g, final JComponent c) {
         paint(g, c);
     }
 
     @Override
-    public void uninstallUI(JComponent c) {
-        Tab tab = getTab();
+    public void uninstallUI(final JComponent c) {
+        final Tab tab = getTab();
         if (c != tab) {
             throw new IllegalArgumentException("c is not the Tab this UI is bound to");
         }
@@ -133,18 +132,18 @@ public class JhromeTabUI extends BasicTabUI {
     protected void update() {
         super.update();
 
-        Tab tab = getTab();
-        JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(tab);
+        final Tab tab = getTab();
+        final JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(tab);
 
         if (tabbedPane != null) {
-            outerBorder.setFlip(tabbedPane.getTabPlacement() == JTabbedPane.BOTTOM || tabbedPane.getTabPlacement() == JTabbedPane.RIGHT);
+            outerBorder.setFlip(tabbedPane.getTabPlacement() == SwingConstants.BOTTOM || tabbedPane.getTabPlacement() == SwingConstants.RIGHT);
         }
 
         if (tab.isSelected()) {
             outerBorder.attrs.copyAttributes(selectedAttributes);
             highlightTimer.stop();
         } else {
-            float targetHighlight = tab.isRollover() ? 1f : 0f;
+            final float targetHighlight = tab.isRollover() ? 1f : 0f;
             if (highlightAmount != targetHighlight) {
                 highlightAmount = animate(highlightAmount, targetHighlight);
                 highlightTimer.start();
@@ -156,17 +155,18 @@ public class JhromeTabUI extends BasicTabUI {
         }
     }
 
-    protected float animate(float current, float target) {
-        if (current < target) {
-            current = Math.min(target, current + highlightSpeed);
+    protected float animate(final float current, final float target) {
+        float crt = current;
+        if (crt < target) {
+            crt = Math.min(target, crt + highlightSpeed);
         } else if (current > target) {
-            current = Math.max(target, current - highlightSpeed);
+            crt = Math.max(target, crt - highlightSpeed);
         }
-        return current;
+        return crt;
     }
 
     @Override
-    public boolean isHoverableAt(Tab tab, Point p) {
+    public boolean isHoverableAt(final Tab tab, final Point p) {
         return outerBorder.contains(p);
     }
 
@@ -174,7 +174,7 @@ public class JhromeTabUI extends BasicTabUI {
         return selectedAttributes;
     }
 
-    public void setSelectedAttributes(JhromeTabBorderAttributes selectedAttributes) {
+    public void setSelectedAttributes(final JhromeTabBorderAttributes selectedAttributes) {
         this.selectedAttributes = selectedAttributes;
     }
 
@@ -182,7 +182,7 @@ public class JhromeTabUI extends BasicTabUI {
         return rolloverAttributes;
     }
 
-    public void setRolloverAttributes(JhromeTabBorderAttributes rolloverAttributes) {
+    public void setRolloverAttributes(final JhromeTabBorderAttributes rolloverAttributes) {
         this.rolloverAttributes = rolloverAttributes;
     }
 
@@ -190,7 +190,7 @@ public class JhromeTabUI extends BasicTabUI {
         return normalAttributes;
     }
 
-    public void setNormalAttributes(JhromeTabBorderAttributes normalAttributes) {
+    public void setNormalAttributes(final JhromeTabBorderAttributes normalAttributes) {
         this.normalAttributes = normalAttributes;
     }
 
@@ -198,7 +198,7 @@ public class JhromeTabUI extends BasicTabUI {
         return highlightSpeed;
     }
 
-    public void setHighlightSpeed(float highlightSpeed) {
+    public void setHighlightSpeed(final float highlightSpeed) {
         this.highlightSpeed = highlightSpeed;
     }
 
@@ -206,7 +206,7 @@ public class JhromeTabUI extends BasicTabUI {
         return selectedLabelColor;
     }
 
-    public void setSelectedLabelColor(Color selectedLabelColor) {
+    public void setSelectedLabelColor(final Color selectedLabelColor) {
         this.selectedLabelColor = selectedLabelColor;
     }
 
@@ -214,13 +214,13 @@ public class JhromeTabUI extends BasicTabUI {
         return unselectedLabelColor;
     }
 
-    public void setUnselectedLabelColor(Color unselectedLabelColor) {
+    public void setUnselectedLabelColor(final Color unselectedLabelColor) {
         this.unselectedLabelColor = unselectedLabelColor;
     }
 
-    private class PropertyChangeHandler implements PropertyChangeListener {
+    private final class PropertyChangeHandler implements PropertyChangeListener {
         @Override
-        public void propertyChange(PropertyChangeEvent evt) {
+        public void propertyChange(final PropertyChangeEvent evt) {
             if (evt.getSource() == getTab()) {
                 if ("rollover".equals(evt.getPropertyName()) || "selected".equals(evt.getPropertyName())) {
                     update();

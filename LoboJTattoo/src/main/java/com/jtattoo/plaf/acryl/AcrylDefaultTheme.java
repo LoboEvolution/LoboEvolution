@@ -149,7 +149,7 @@ public class AcrylDefaultTheme extends AbstractTheme {
 
 		ACTIVE_COLORS = DEFAULT_COLORS;
 		if (controlColorLight.equals(new ColorUIResource(96, 98, 100))) {
-			ROLLOVER_COLORS = new Color[] { new Color(194, 207, 233), new Color(185, 201, 231),
+			ROLLOVER_COLORS = new Color[]{new Color(194, 207, 233), new Color(185, 201, 231),
 					new Color(176, 195, 228), new Color(168, 189, 226), new Color(158, 182, 223),
 					new Color(148, 176, 220), new Color(138, 169, 217), new Color(132, 169, 217),
 					new Color(124, 169, 218), new Color(116, 167, 218), new Color(104, 160, 218),
@@ -157,7 +157,7 @@ public class AcrylDefaultTheme extends AbstractTheme {
 					new Color(89, 157, 224), new Color(100, 165, 230), new Color(110, 172, 235),
 					new Color(120, 180, 240), new Color(127, 186, 247), new Color(134, 193, 254),
 					new Color(142, 202, 254), new Color(151, 211, 255), new Color(158, 218, 255),
-					new Color(166, 226, 255), new Color(177, 239, 255), new Color(188, 252, 255), };
+					new Color(166, 226, 255), new Color(177, 239, 255), new Color(188, 252, 255),};
 		} else {
 			topHi = ColorHelper.brighter(rolloverColorLight, 20);
 			topLo = ColorHelper.brighter(rolloverColorLight, 30);

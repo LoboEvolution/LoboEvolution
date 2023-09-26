@@ -64,11 +64,11 @@ public class characterdataindexsizeerrsubstringoffsetgreaterTest extends LoboUni
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        CharacterData child;
-        String badString;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final CharacterData child;
+        final String badString;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         nameNode = elementList.item(0);
@@ -78,7 +78,7 @@ public class characterdataindexsizeerrsubstringoffsetgreaterTest extends LoboUni
             boolean success = false;
             try {
                 badString = child.substringData(40, 3);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }
             assertTrue("throw_INDEX_SIZE_ERR", success);

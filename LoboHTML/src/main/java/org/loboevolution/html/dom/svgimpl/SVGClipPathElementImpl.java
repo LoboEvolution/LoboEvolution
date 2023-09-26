@@ -51,8 +51,8 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 
 	@Override
 	public SVGRect getBBox() {
-		Shape clipShape = getClippingShape(this.getOwnerSVGElement());
-		Rectangle2D bounds = clipShape.getBounds2D();
+		final Shape clipShape = getClippingShape(this.getOwnerSVGElement());
+		final Rectangle2D bounds = clipShape.getBounds2D();
 		return new SVGRectImpl(bounds);
 	}
 
@@ -68,35 +68,35 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 	 * @param clippedElement a {@link org.loboevolution.html.dom.svg.SVGElement} object.
 	 * @return a {@link java.awt.Shape} object.
 	 */
-	protected Shape getClippingShape(SVGElement clippedElement) {
+	protected Shape getClippingShape(final SVGElement clippedElement) {
 		Area clipArea = null;
-		AffineTransform clipTransform = new AffineTransform();
+		final AffineTransform clipTransform = new AffineTransform();
 		if (hasChildNodes()) {
-			NodeListImpl children = (NodeListImpl) getChildNodes();
-			for (Node child : children) {
+			final NodeListImpl children = (NodeListImpl) getChildNodes();
+			for (final Node child : children) {
 				if (child instanceof SVGUseElementImpl) {
-					String href = ((SVGUseElementImpl) child).getHref().getAnimVal();
+					final String href = ((SVGUseElementImpl) child).getHref().getAnimVal();
 					if (href.length() > 0) {
-						int index = href.indexOf('#');
+						final int index = href.indexOf('#');
 						if (index != -1) {
-							String id = href.substring(index + 1).trim();
-							Element ref = (Element) child(id);
+							final String id = href.substring(index + 1).trim();
+							final Element ref = (Element) child(id);
 							if (ref != null) {
-								Shape childShape = ((Drawable) ref).createShape(clipTransform);
+								final Shape childShape = ((Drawable) ref).createShape(clipTransform);
 
 								if (childShape != null) {
-									AffineTransform childAffineTransform = clipTransform;
+									final AffineTransform childAffineTransform = clipTransform;
 									if (ref instanceof SVGTransformable) {
-										SVGTransformListImpl childTransform = (SVGTransformListImpl) ((SVGTransformable) ref).getTransform().getAnimVal();
+										final SVGTransformListImpl childTransform = ( SVGTransformListImpl) ((SVGTransformable) ref).getTransform().getAnimVal();
 										if (childTransform != null) {
 											childAffineTransform.concatenate(childTransform.getAffineTransform());
 										}
 									}
 
-									GeneralPath path = new GeneralPath(childShape);
+									final GeneralPath path = new GeneralPath(childShape);
 									path.transform(childAffineTransform);
-									String clipRule = ((SVGStylableImpl) child).getClipRule();
-									SVGClipPathElementImpl clipPath = ((SVGStylableImpl) child).getClippingPath();
+									final String clipRule = ((SVGStylableImpl) child).getClipRule();
+									final SVGClipPathElementImpl clipPath = ((SVGStylableImpl) child).getClippingPath();
 
 									if (clipRule.equals("evenodd")) {
 										path.setWindingRule(Path2D.WIND_EVEN_ODD);
@@ -104,9 +104,9 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 										path.setWindingRule(Path2D.WIND_NON_ZERO);
 									}
 
-									Area childClipArea = new Area(path);
+									final Area childClipArea = new Area(path);
 									if (clipPath != null) {
-										Shape clipShape = clipPath.getClippingShape(clippedElement);
+										final Shape clipShape = clipPath.getClippingShape(clippedElement);
 										if (clipShape != null) {
 											childClipArea.intersect(new Area(clipShape));
 										}
@@ -122,10 +122,10 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 						}
 					}
 				} else if (child instanceof Drawable) {
-					Shape childShape = ((Drawable) child).createShape(clipTransform);
+					final Shape childShape = ((Drawable) child).createShape(clipTransform);
 					if (childShape != null) {
 						if (child instanceof SVGTransformable) {
-							SVGAnimatedTransformListImpl childTransform = (SVGAnimatedTransformListImpl) ((SVGTransformable) child)
+							final SVGAnimatedTransformListImpl childTransform = ( SVGAnimatedTransformListImpl) ((SVGTransformable) child)
 									.getTransform();
 							if (childTransform != null) {
 								clipTransform.concatenate(
@@ -133,11 +133,11 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 							}
 						}
 
-						GeneralPath path = new GeneralPath(childShape);
+						final GeneralPath path = new GeneralPath(childShape);
 						path.transform(clipTransform);
 
-						String clipRule = ((SVGStylableImpl) child).getClipRule();
-						SVGClipPathElementImpl clipPath = ((SVGStylableImpl) child).getClippingPath();
+						final String clipRule = ((SVGStylableImpl) child).getClipRule();
+						final SVGClipPathElementImpl clipPath = ((SVGStylableImpl) child).getClippingPath();
 
 						if (clipRule.equals("evenodd")) {
 							path.setWindingRule(Path2D.WIND_EVEN_ODD);
@@ -145,11 +145,11 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 							path.setWindingRule(Path2D.WIND_NON_ZERO);
 						}
 
-						Area childClipArea = new Area(path);
+						final Area childClipArea = new Area(path);
 
 						// see if child has a clipPath property
 						if (clipPath != null) {
-							Shape clipShape = clipPath.getClippingShape(clippedElement);
+							final Shape clipShape = clipPath.getClippingShape(clippedElement);
 							if (clipShape != null) {
 								childClipArea.intersect(new Area(clipShape));
 							}
@@ -166,11 +166,11 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 			}
 		}
 
-		SVGClipPathElementImpl clipPath = getClippingPath();
+		final SVGClipPathElementImpl clipPath = getClippingPath();
 		getClipRule();
 
 		if (clipPath != null) {
-			Shape clipShape = clipPath.getClippingShape(clippedElement);
+			final Shape clipShape = clipPath.getClippingShape(clippedElement);
 			if (clipShape != null) {
 				if (clipArea == null) {
 					clipArea = new Area(clipShape);
@@ -185,12 +185,12 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 			if (getClipPathUnits().getAnimVal() == SVG_UNIT_TYPE_OBJECTBOUNDINGBOX) {
 				SVGRectImpl bbox = null;
 				if (clippedElement instanceof SVGTransformable) {
-					bbox = (SVGRectImpl) ((SVGTransformable) clippedElement).getBBox();
+					bbox = ( SVGRectImpl) ((SVGTransformable) clippedElement).getBBox();
 				} else if (clippedElement instanceof SVGSVGElementImpl) {
-					bbox = (SVGRectImpl) ((SVGSVGElementImpl) clippedElement).getBBox();
+					bbox = ( SVGRectImpl) ((SVGSVGElementImpl) clippedElement).getBBox();
 				}
 				if (bbox != null) {
-					AffineTransform clipTrans = AffineTransform.getTranslateInstance(bbox.getX(), bbox.getY());
+					final AffineTransform clipTrans = AffineTransform.getTranslateInstance(bbox.getX(), bbox.getY());
 					clipTrans.scale(bbox.getWidth(), bbox.getHeight());
 					clipShape = clipTrans.createTransformedShape(clipShape);
 					return clipShape;

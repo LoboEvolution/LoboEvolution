@@ -50,13 +50,13 @@ import org.loboevolution.html.node.Node;
 public class noderemovechild27Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entitiesMap;
-        NamedNodeMap notationsMap;
-        Node child;
-        Notation parent;
-        Node removed;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entitiesMap;
+        final NamedNodeMap notationsMap;
+        final Node child;
+        final Notation parent;
+        final Node removed;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
@@ -67,7 +67,7 @@ public class noderemovechild27Test extends LoboUnitTest {
         try {
             removed = parent.removeChild(child);
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 8:
                 case 7:

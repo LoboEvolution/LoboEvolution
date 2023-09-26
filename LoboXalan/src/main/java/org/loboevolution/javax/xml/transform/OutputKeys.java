@@ -27,13 +27,7 @@
 package org.loboevolution.javax.xml.transform;
 
 
-public class OutputKeys
-{
-
-    OutputKeys()
-    {
-        throw new RuntimeException("Stub!");
-    }
+public class OutputKeys {
 
     public static final String CDATA_SECTION_ELEMENTS = "cdata-section-elements";
     public static final String DOCTYPE_PUBLIC = "doctype-public";
@@ -45,4 +39,7 @@ public class OutputKeys
     public static final String OMIT_XML_DECLARATION = "omit-xml-declaration";
     public static final String STANDALONE = "standalone";
     public static final String VERSION = "version";
+    OutputKeys() {
+        throw new RuntimeException("Stub!");
+    }
 }

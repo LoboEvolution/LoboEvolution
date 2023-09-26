@@ -30,16 +30,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URLConnection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
 /**
  * Execute file download in a background thread and update the progress.
- *
- * Author www.codejava.net
- *
  */
 public class DownloadTask extends SwingWorker<Void, Void> {
+
+    /** The Constant logger. */
+    protected static final Logger logger = Logger.getLogger(DownloadTask.class.getName());
 
     private final DownloadWindow action;
 
@@ -51,7 +53,7 @@ public class DownloadTask extends SwingWorker<Void, Void> {
      * @param action a {@link org.loboevolution.download.DownloadWindow} object.
      * @param destinationFile a {@link java.io.File} object.
      */
-    public DownloadTask(DownloadWindow action, File destinationFile) {
+    public DownloadTask(final DownloadWindow action, final File destinationFile) {
         this.action = action;
         this.destinationFile = destinationFile;
     }
@@ -65,56 +67,52 @@ public class DownloadTask extends SwingWorker<Void, Void> {
     protected Void doInBackground() {
         try {
             String fileName = "";
-            long downloadBaseTimestamp = System.currentTimeMillis();
-            URLConnection httpConn = this.action.getHttpConn();
-            String disposition = httpConn.getHeaderField("Content-Disposition");
+            final long downloadBaseTimestamp = System.currentTimeMillis();
+            final URLConnection httpConn = this.action.getHttpConn();
+            final String disposition = httpConn.getHeaderField("Content-Disposition");
             if (disposition != null) {
                 // extracts file name from header field
-                int index = disposition.indexOf("filename=");
+                final int index = disposition.indexOf("filename=");
                 if (index > 0) {
                     fileName = disposition.substring(index + 10, disposition.length() - 1);
                 }
             } else {
-                String fileURL = action.getUrl().getFile();
+                final String fileURL = action.getUrl().getFile();
                 fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1);
             }
 
-            // opens input stream from the HTTP connection
-            InputStream inputStream = httpConn.getInputStream();
-            String saveFilePath = destinationFile.getPath() + "\\" + fileName;
+            final String saveFilePath = destinationFile.getPath() + "\\" + fileName;
 
-            // opens an output stream to save into file
-            FileOutputStream outputStream = new FileOutputStream(saveFilePath);
+            try (final InputStream inputStream = httpConn.getInputStream();
+                 final FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
 
-            long totalBytesRead = 0;
-            int percentCompleted;
-            long fileSize = httpConn.getContentLength();
+                long totalBytesRead = 0;
+                int percentCompleted;
+                final long fileSize = httpConn.getContentLength();
 
-            int bytesRead;
-            byte[] buffer = new byte[4096];
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                long elapsed = System.currentTimeMillis() - downloadBaseTimestamp;
-                if (elapsed > 0) {
-                    double transferRate = (double) fileSize / elapsed;
-                    action.getTransferRateField().setValue(TimingDowload.round1(transferRate) + " Kb/sec");
-                } else {
-                    action.getTransferRateField().setValue("N/A");
+                int bytesRead;
+                final byte[] buffer = new byte[4096];
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    final long elapsed = System.currentTimeMillis() - downloadBaseTimestamp;
+                    if (elapsed > 0) {
+                        final double transferRate = (double) fileSize / elapsed;
+                        action.getTransferRateField().setValue(TimingDowload.round1(transferRate) + " Kb/sec");
+                    } else {
+                        action.getTransferRateField().setValue("N/A");
+                    }
+
+                    outputStream.write(buffer, 0, bytesRead);
+                    totalBytesRead += bytesRead;
+                    percentCompleted = (int) (totalBytesRead * 100 / fileSize);
+                    setProgress(percentCompleted);
+                    action.getTransferSizeField().setValue(TimingDowload.getSizeText(totalBytesRead));
                 }
-
-                outputStream.write(buffer, 0, bytesRead);
-                totalBytesRead += bytesRead;
-                percentCompleted = (int) (totalBytesRead * 100 / fileSize);
-                setProgress(percentCompleted);
-                action.getTransferSizeField().setValue(TimingDowload.getSizeText(totalBytesRead));
             }
 
-            outputStream.close();
-            inputStream.close();
-
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             JOptionPane.showMessageDialog(action, "Error downloading file: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.toString());
             setProgress(0);
             cancel(true);
         }

@@ -47,7 +47,7 @@ public class FourCornersSetter implements SubPropertySetter {
 	 * @param prefix a {@link java.lang.String} object.
 	 * @param suffix a {@link java.lang.String} object.
 	 */
-	public FourCornersSetter(String property, String prefix, String suffix) {
+	public FourCornersSetter(final String property, final String prefix, final String suffix) {
 		this.prefix = prefix;
 		this.suffix = suffix;
 		this.property = property;
@@ -55,8 +55,8 @@ public class FourCornersSetter implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
-		CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+	public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
+		final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 		
 		if (Strings.isNotBlank(newValue)) {
 			properties.setProperty(this.property, newValue);
@@ -87,6 +87,7 @@ public class FourCornersSetter implements SubPropertySetter {
 				properties.setProperty(prefix + "right" + suffix,  array[1]);
 				properties.setProperty(prefix + "bottom" + suffix, array[2]);
 				properties.setProperty(prefix + "left" + suffix, array[3]);
+				break;
 			default:
 				break;
 			}

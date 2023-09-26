@@ -58,7 +58,7 @@ public class SVGPathSegCurvetoCubicRelImpl implements SVGPathSegCurvetoCubicRel 
 	 * @param x2 a float.
 	 * @param y2 a float.
 	 */
-	public SVGPathSegCurvetoCubicRelImpl(float x, float y, float x1, float y1, float x2, float y2) {
+	public SVGPathSegCurvetoCubicRelImpl(final float x, final float y, final float x1, final float y1, final float x2, final float y2) {
 		this.x = x;
 		this.y = y;
 		this.x1 = x1;
@@ -87,7 +87,7 @@ public class SVGPathSegCurvetoCubicRelImpl implements SVGPathSegCurvetoCubicRel 
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 
@@ -111,7 +111,7 @@ public class SVGPathSegCurvetoCubicRelImpl implements SVGPathSegCurvetoCubicRel 
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX1(float x1) {
+	public void setX1(final float x1) {
 		this.x1 = x1;
 	}
 
@@ -123,7 +123,7 @@ public class SVGPathSegCurvetoCubicRelImpl implements SVGPathSegCurvetoCubicRel 
 
 	/** {@inheritDoc} */
 	@Override
-	public void setY1(float y1) {
+	public void setY1(final float y1) {
 		this.y1 = y1;
 	}
 
@@ -135,7 +135,7 @@ public class SVGPathSegCurvetoCubicRelImpl implements SVGPathSegCurvetoCubicRel 
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX2(float x2) {
+	public void setX2(final float x2) {
 		this.x2 = x2;
 	}
 
@@ -147,7 +147,7 @@ public class SVGPathSegCurvetoCubicRelImpl implements SVGPathSegCurvetoCubicRel 
 
 	/** {@inheritDoc} */
 	@Override
-	public void setY2(float y2) {
+	public void setY2(final float y2) {
 		this.y2 = y2;
 	}
 }

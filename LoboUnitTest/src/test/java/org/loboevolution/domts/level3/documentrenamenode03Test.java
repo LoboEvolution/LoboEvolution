@@ -49,12 +49,12 @@ import static org.junit.Assert.assertEquals;
 public class documentrenamenode03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr attr;
-        Node renamedNode;
-        String nodeName;
-        String namespaceURI;
-        String nullNSURI = null;
+        final Document doc;
+        final Attr attr;
+        final Node renamedNode;
+        final String nodeName;
+        final String namespaceURI;
+        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         attr = doc.createAttributeNS(nullNSURI, "test");

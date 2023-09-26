@@ -55,10 +55,10 @@ public class hc_notationssetnameditemns1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap notations;
-        DocumentType docType;
-        Element elem;
+        final Document doc;
+        final NamedNodeMap notations;
+        final DocumentType docType;
+        final Element elem;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
@@ -71,7 +71,7 @@ public class hc_notationssetnameditemns1Test extends LoboUnitTest {
             notations.setNamedItemNS(elem);
             fail("throw_HIER_OR_NO_MOD_ERR");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 3:
                 case 7:

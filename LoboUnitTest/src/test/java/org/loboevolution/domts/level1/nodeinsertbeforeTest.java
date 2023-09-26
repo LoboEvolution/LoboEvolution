@@ -60,18 +60,18 @@ public class nodeinsertbeforeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node refChild;
-        Node newChild;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node refChild;
+        final Node newChild;
         Node child;
         String childName;
-        int length;
-        List<String> actual = new java.util.ArrayList<>();
+        final int length;
+        final List<String> actual = new java.util.ArrayList<>();
 
-        List<String> expectedWithWhitespace = new ArrayList<>();
+        final List<String> expectedWithWhitespace = new ArrayList<>();
         expectedWithWhitespace.add("#text");
         expectedWithWhitespace.add("employeeId");
         expectedWithWhitespace.add("#text");
@@ -87,7 +87,7 @@ public class nodeinsertbeforeTest extends LoboUnitTest {
         expectedWithWhitespace.add("ADDRESS");
         expectedWithWhitespace.add("#text");
 
-        List<String> expectedWithoutWhitespace = new ArrayList<>();
+        final List<String> expectedWithoutWhitespace = new ArrayList<>();
         expectedWithoutWhitespace.add("EMPLOYEEID");
         expectedWithoutWhitespace.add("NAME");
         expectedWithoutWhitespace.add("POSITION");
@@ -96,7 +96,7 @@ public class nodeinsertbeforeTest extends LoboUnitTest {
         expectedWithoutWhitespace.add("GENDER");
         expectedWithoutWhitespace.add("ADDRESS");
 
-        List<String> expected;
+        final List<String> expected;
 
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");

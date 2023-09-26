@@ -45,10 +45,10 @@ import static org.junit.Assert.assertTrue;
 public class nodeisdefaultnamespace01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        boolean isDefault;
-        Element docElem;
-        String docElemNS;
+        final Document doc;
+        final boolean isDefault;
+        final Element docElem;
+        final String docElemNS;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         docElemNS = docElem.getNamespaceURI();

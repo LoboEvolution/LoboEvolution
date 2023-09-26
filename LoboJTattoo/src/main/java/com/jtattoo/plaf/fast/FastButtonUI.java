@@ -53,10 +53,10 @@ public class FastButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (b.isContentAreaFilled() && !(b.getParent() instanceof JMenuBar)) {
 			Color backColor = b.getBackground();
-			ButtonModel model = b.getModel();
+			final ButtonModel model = b.getModel();
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed()) {
 					backColor = ColorHelper.darker(backColor, 30);

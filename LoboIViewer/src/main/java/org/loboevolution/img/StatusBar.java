@@ -61,7 +61,7 @@ public abstract class StatusBar {
 	 *
 	 * @param imageViewer a {@link org.loboevolution.img.ImageViewer} object.
 	 */
-	public final void setImageViewer(ImageViewer imageViewer) {
+	public final void setImageViewer(final ImageViewer imageViewer) {
 		if (this.imageViewer != null)
 			unregister(this.imageViewer);
 		this.imageViewer = imageViewer;
@@ -76,7 +76,7 @@ public abstract class StatusBar {
 	 * @param viewer
 	 *            the new viewer associated with this status bar
 	 */
-	protected void register(ImageViewer viewer) {
+	protected void register(final ImageViewer viewer) {
 	}
 
 	/**
@@ -86,6 +86,6 @@ public abstract class StatusBar {
 	 * @param viewer
 	 *            the viewer that this status bar is removed from
 	 */
-	protected void unregister(ImageViewer viewer) {
+	protected void unregister(final ImageViewer viewer) {
 	}
 }

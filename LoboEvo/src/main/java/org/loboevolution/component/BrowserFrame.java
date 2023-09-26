@@ -36,9 +36,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.download.DownloadWindow;
@@ -64,9 +62,9 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 	 *
 	 * @param title a {@link java.lang.String} object.
 	 */
-	public BrowserFrame(String title) {
+	public BrowserFrame(final String title) {
 		super(title);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		final Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
@@ -94,12 +92,12 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 
 		addComponentListener(new ComponentAdapter() {
 			@Override
-			public void componentResized(ComponentEvent e) {
-				BrowserPanel bpanel = BrowserFrame.this.panel;
+			public void componentResized(final ComponentEvent e) {
+				final BrowserPanel bpanel = BrowserFrame.this.panel;
 				final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-				JTextField addressBar = browserFrame.getToolbar().getAddressBar();
+				final JTextField addressBar = browserFrame.getToolbar().getAddressBar();
 				if (Strings.isNotBlank(addressBar.getText())) {
-					GoAction go = new GoAction(panel, browserFrame.getToolbar().getAddressBar());
+					final GoAction go = new GoAction(panel, browserFrame.getToolbar().getAddressBar());
 					go.actionPerformed(null);
 				} else {
 					final IWelcomePanel welcome = bpanel.getWelcome();
@@ -113,10 +111,10 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent e) {
+			public void windowClosing(final WindowEvent e) {
 				TabStore.deleteAll();
 				WebStore.deleteSessionStorage();
-				StyleStore style = new StyleStore();
+				final StyleStore style = new StyleStore();
 				style.deleteStyle();
 			}
 		});
@@ -145,7 +143,7 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 	 *
 	 * @param panel the panel to set
 	 */
-	public void setPanel(BrowserPanel panel) {
+	public void setPanel(final BrowserPanel panel) {
 		this.panel = panel;
 	}
 
@@ -154,7 +152,7 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 	 *
 	 * @param toolbar the toolbar to set
 	 */
-	public void setToolbar(ToolBar toolbar) {
+	public void setToolbar(final ToolBar toolbar) {
 		this.toolbar = toolbar;
 	}
 

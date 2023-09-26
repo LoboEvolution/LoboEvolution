@@ -51,16 +51,16 @@ public class datatypenormalization04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
+        final Document doc;
+        final HTMLCollection elemList;
         Element element;
-        DOMConfiguration domConfig;
+        final DOMConfiguration domConfig;
         String str;
-        boolean canSetNormalization;
-        boolean canSetValidate;
-        boolean canSetXMLSchema;
-        String xsdNS = "http://www.w3.org/2001/XMLSchema";
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final boolean canSetNormalization;
+        final boolean canSetValidate;
+        final boolean canSetXMLSchema;
+        final String xsdNS = "http://www.w3.org/2001/XMLSchema";
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("datatype_normalization.xml");
         domConfig = doc.getDomConfig();

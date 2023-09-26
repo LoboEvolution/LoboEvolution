@@ -72,13 +72,13 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	public BaseBoundableRenderable(RenderableContainer container, ModelNode modelNode) {
+	public BaseBoundableRenderable(final RenderableContainer container, final ModelNode modelNode) {
 		this.container = container;
 		this.modelNode = modelNode;
 	}
 
 	/** {@inheritDoc} */
-	public boolean contains(int x, int y) {
+	public boolean contains(final int x, final int y) {
 		final int mx = this.getX();
 		final int my = this.getY();
 		return (x >= mx) && (y >= my) && (x < (mx + this.getVisualWidth())) && (y < (my + this.getVisualHeight()));
@@ -128,7 +128,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public Point getGUIPoint(int clientX, int clientY) {
+	public Point getGUIPoint(final int clientX, final int clientY) {
 		final Renderable parent = getParent();
 		if (parent instanceof BoundableRenderable) {
 			return ((BoundableRenderable) parent).getGUIPoint(clientX + this.getX(), clientY + this.getY());
@@ -173,7 +173,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public Point getOriginRelativeTo(RCollection ancestor) {
+	public Point getOriginRelativeTo(final RCollection ancestor) {
 		int x = this.getX();
 		int y = this.getY();
 		RCollection parent = this.parent;
@@ -255,7 +255,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public Point getRenderablePoint(int guiX, int guiY) {
+	public Point getRenderablePoint(final int guiX, final int guiY) {
 		final Renderable parent = getParent();
 		if (parent instanceof BoundableRenderable) {
 			return ((BoundableRenderable) parent).getRenderablePoint(guiX - this.getX(), guiY - this.getY());
@@ -324,7 +324,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onDoubleClick(me, event, x, y);
@@ -335,7 +335,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseClick(final MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseClick(me, event, x, y);
@@ -357,7 +357,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMousePressed(final MouseEvent event, int x, int y) {
+	public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseDown(me, event, x, y);
@@ -368,7 +368,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseUp(me, event, x, y);
@@ -379,7 +379,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onRightClick(final MouseEvent event, int x, int y) {
+	public boolean onRightClick(final MouseEvent event, final int x, final int y) {
 		final ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onContextMenu(me, event, x, y);
@@ -390,7 +390,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public void onMouseMoved(final MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
+	public void onMouseMoved(final MouseEvent event, final int x, final int y, final boolean triggerEvent, final ModelNode limit) {
 		if (triggerEvent) {
 			if (isContainedByNode()) {
 				HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
@@ -403,7 +403,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public void onMouseOut(final MouseEvent event, int x, int y, ModelNode limit) {
+	public void onMouseOut(final MouseEvent event, final int x, final int y, final ModelNode limit) {
 		if (isContainedByNode()) {
 			HtmlController.getInstance().onMouseOut(this.modelNode, event, x, y, limit);
 		}
@@ -444,7 +444,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public final void paintTranslated(Graphics g) {
+	public final void paintTranslated(final Graphics g) {
 		final int x = this.getX();
 		final int y = this.getY();
 		g.translate(x, y);
@@ -482,7 +482,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 		}
 	}
 
-	private void relayoutImpl(boolean invalidateLocal, boolean onlyIfValid) {
+	private void relayoutImpl(final boolean invalidateLocal, final boolean onlyIfValid) {
 		if (onlyIfValid && !this.layoutUpTreeCanBeInvalidated) {
 			return;
 		}
@@ -533,13 +533,13 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	/** {@inheritDoc} */
 	@Override
-	public void setOriginalParent(RCollection origParent) {
+	public void setOriginalParent(final RCollection origParent) {
 		this.originalParent = origParent;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setParent(RCollection parent) {
+	public void setParent(final RCollection parent) {
 		this.parent = parent;
 	}
 

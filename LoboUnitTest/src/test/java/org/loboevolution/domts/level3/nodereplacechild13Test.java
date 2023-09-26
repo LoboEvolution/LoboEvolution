@@ -49,19 +49,19 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild13Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        DocumentType newDocType;
-        DocumentType replaced;
-        DOMImplementation domImpl;
-        String nodeName;
-        String nullPubId = null;
+        final Document doc;
+        final DocumentType docType;
+        final DocumentType newDocType;
+        final DocumentType replaced;
+        final DOMImplementation domImpl;
+        final String nodeName;
+        final String nullPubId = null;
 
-        String nullSysId = null;
+        final String nullSysId = null;
 
-        Element docElem;
-        String docElemName;
-        String docElemNS;
+        final Element docElem;
+        final String docElemName;
+        final String docElemNS;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         docElemName = docElem.getTagName();
@@ -73,7 +73,7 @@ public class nodereplacechild13Test extends LoboUnitTest {
         try {
             replaced = (DocumentType) doc.replaceChild(newDocType, docType);
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 9:
                     return;

@@ -61,7 +61,7 @@ public class DOMInspectorUI extends AbstractToolsUI {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public DOMInspectorUI(BrowserFrame frame) {
+    public DOMInspectorUI(final BrowserFrame frame) {
         final ToolBar toolbar = frame.getToolbar();
         doc = NavigationManager.getDocument(toolbar.getAddressBar().getText());
 
@@ -69,7 +69,7 @@ public class DOMInspectorUI extends AbstractToolsUI {
 
         this.tree = new JTree();
         this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        JScrollPane scroll = new JScrollPane(tree);
+        final JScrollPane scroll = new JScrollPane(tree);
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         splitPane.setOneTouchExpandable(true);
@@ -82,7 +82,7 @@ public class DOMInspectorUI extends AbstractToolsUI {
     }
 
     private void initForCurrentDocument() {
-        TreeModel model = new DOMTreeModel(doc);
+        final TreeModel model = new DOMTreeModel(doc);
         tree.setModel(model);
         if (!(tree.getCellRenderer() instanceof DOMTreeCellRenderer)) {
             tree.setCellRenderer(new DOMTreeCellRenderer());

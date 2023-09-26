@@ -26,42 +26,22 @@
 
 package org.loboevolution.pdf;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.print.Book;
-import java.awt.print.PageFormat;
-import java.awt.print.Paper;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-
-import javax.swing.AbstractAction;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-
 import org.loboevolution.pdfview.PDFFile;
 import org.loboevolution.pdfview.PDFPage;
 import org.loboevolution.pdfview.PDFRenderer;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 
 /**
  * A class representing a print job for a particular PDFFile. The class
  * maintains a status dialog as it prints, allowing the user to cancel the print
  * job.
- *
-  *
-  *
  */
 public class PDFPrintPage implements Printable {
 
@@ -86,62 +66,8 @@ public class PDFPrintPage implements Printable {
 	 * @param file
 	 *            the PDFFile to be printed.
 	 */
-	public PDFPrintPage(PDFFile file) {
+	public PDFPrintPage(final PDFFile file) {
 		this.file = file;
-	}
-
-	/**
-	 * An example method to print a file.
-	 *
-	 * @param filename
-	 *            The path of the PDF file to print.
-	 * @param setupPaper
-	 *            true to post a page setup dialog
-	 * @throws java.io.IOException if any.
-	 */
-	public void printFile(String filename, boolean setupPaper) throws IOException {
-		FileInputStream fis = null;
-		try {
-			File file = new File(filename);
-			fis = new FileInputStream(file);
-			FileChannel fc = fis.getChannel();
-			ByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-			PDFFile pdfFile = new PDFFile(bb); // Create PDF Print Page
-
-			PDFPrintPage pages = new PDFPrintPage(pdfFile);
-
-			// Create Print Job.
-			// We set the margins to 0, on the default 8.5 x 11 paper
-
-			PrinterJob pjob = PrinterJob.getPrinterJob();
-			PageFormat pfDefault = PrinterJob.getPrinterJob().defaultPage();
-			Paper defaultPaper = new Paper();
-			defaultPaper.setImageableArea(0, 0, defaultPaper.getWidth(), defaultPaper.getHeight());
-			pfDefault.setPaper(defaultPaper);
-			if (setupPaper) {
-				pfDefault = PrinterJob.getPrinterJob().pageDialog(pfDefault);
-			}
-			pjob.setJobName(file.getName());
-			if (pjob.printDialog()) {
-				// validate the page against the chosen printer to correct
-				// paper settings and margins
-				pfDefault = pjob.validatePage(pfDefault);
-				Book book = new Book();
-
-				book.append(pages, pfDefault, pdfFile.getNumPages());
-				pjob.setPageable(book);
-
-				try {
-					pjob.print();
-				} catch (PrinterException exc) {
-					exc.printStackTrace();
-				}
-			}
-		} finally {
-			if (fis != null) {
-				fis.close();
-			}
-		}
 	}
 
 	/**
@@ -149,11 +75,11 @@ public class PDFPrintPage implements Printable {
 	 */
 	private void createPrintDialog() {
 		pd = new JDialog((Frame) null, "Printing...", false);
-		Container top = pd.getContentPane();
-		Box lines = Box.createVerticalBox();
+		final Container top = pd.getContentPane();
+		final Box lines = Box.createVerticalBox();
 		Box line = Box.createHorizontalBox();
 		line.add(new JLabel("Now printing: "));
-		JLabel title = new JLabel("file.pdf");
+		final JLabel title = new JLabel("file.pdf");
 		line.add(title);
 		lines.add(line);
 
@@ -163,20 +89,20 @@ public class PDFPrintPage implements Printable {
 		pagenumlabel = new JLabel("1");
 		line.add(pagenumlabel);
 		line.add(new JLabel(" of "));
-		JLabel totalpages = new JLabel(String.valueOf(file.getNumPages()));
+		final JLabel totalpages = new JLabel(String.valueOf(file.getNumPages()));
 		line.add(totalpages);
 		lines.add(line);
 
 		top.add(lines, BorderLayout.CENTER);
 
-		Box cancelbox = Box.createHorizontalBox();
+		final Box cancelbox = Box.createHorizontalBox();
 		cancelbox.add(Box.createHorizontalGlue());
 		cancel = new JButton(new AbstractAction("Cancel") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void actionPerformed(ActionEvent evt) {
+			public void actionPerformed(final ActionEvent evt) {
 				doCancel();
 			}
 		});
@@ -190,7 +116,7 @@ public class PDFPrintPage implements Printable {
 	 * @param pjob
 	 *            the PrinterJob representing the print job
 	 */
-	public void show(PrinterJob pjob) {
+	public void show(final PrinterJob pjob) {
 		this.pjob = pjob;
 		if (pd == null) {
 			createPrintDialog();
@@ -220,8 +146,8 @@ public class PDFPrintPage implements Printable {
 	// to draw into, the page format, and the page number.
 	/** {@inheritDoc} */
 	@Override
-	public int print(Graphics g, PageFormat format, int index) throws PrinterException {
-		int pagenum = index + 1;
+	public int print(final Graphics g, final PageFormat format, final int index) throws PrinterException {
+		final int pagenum = index + 1;
 
 		// don't bother if the page number is out of range.
 		if (pagenum >= 1 && pagenum <= file.getNumPages()) {
@@ -232,12 +158,12 @@ public class PDFPrintPage implements Printable {
 			}
 
 			// fit the PDFPage into the printing area
-			Graphics2D g2 = (Graphics2D) g;
-			PDFPage page = file.getPage(pagenum);
+			final Graphics2D g2 = (Graphics2D) g;
+			final PDFPage page = file.getPage(pagenum);
 			double pwidth = format.getImageableWidth();
 			double pheight = format.getImageableHeight();
 
-			double aspect = page.getAspectRatio();
+			final double aspect = page.getAspectRatio();
 
 			// handle page orientation matching
 			double paperaspect = pwidth / pheight;
@@ -258,9 +184,9 @@ public class PDFPrintPage implements Printable {
 				paperaspect = pwidth / pheight;
 			}
 
-			Rectangle imgbounds;
-			int width;
-			int height;
+			final Rectangle imgbounds;
+			final int width;
+			final int height;
 			if (aspect > paperaspect) {
 				// paper is too tall / pdfpage is too wide
 				height = (int) (pwidth / aspect);
@@ -273,11 +199,11 @@ public class PDFPrintPage implements Printable {
 			imgbounds = new Rectangle((int) format.getImageableX(), (int) format.getImageableY(), width, height);
 
 			// render the page
-			PDFRenderer pgs = new PDFRenderer(page, g2, imgbounds, null, null);
+			final PDFRenderer pgs = new PDFRenderer(page, g2, imgbounds, null, null);
 			try {
 				page.waitForFinish();
 				pgs.run();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 				Thread.currentThread().interrupt();
 			}
 			return PAGE_EXISTS;

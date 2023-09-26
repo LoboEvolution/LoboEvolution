@@ -85,7 +85,7 @@ public class PixelInfoStatusBar extends StatusBar {
 	 * @throws java.lang.NullPointerException in case of error
 	 *             if {@code newModel} is {@code null}
 	 */
-	public final void setModel(PixelModel newModel) {
+	public final void setModel(final PixelModel newModel) {
 		if (newModel == null)
 			throw new NullPointerException();
 
@@ -123,7 +123,7 @@ public class PixelInfoStatusBar extends StatusBar {
 	 * @param y
 	 *            the y coordinate of the pixel
 	 */
-	public void setPixel(int x, int y) {
+	public void setPixel(final int x, final int y) {
 		model.set(x, y);
 	}
 
@@ -133,7 +133,7 @@ public class PixelInfoStatusBar extends StatusBar {
 	 * to indicate that the message should be updated for some different reason.
 	 */
 	protected final void update() {
-		BufferedImage image = getImageViewer() == null ? null : getImageViewer().getImage();
+		final BufferedImage image = getImageViewer() == null ? null : getImageViewer().getImage();
 		if (image == null || model.isInvalid() || model.getX() >= image.getWidth() || model.getY() >= image.getHeight())
 			updateLabelNoData();
 		else
@@ -168,17 +168,17 @@ public class PixelInfoStatusBar extends StatusBar {
 	 *            the maximum label width that can be displayed; you can use this
 	 *            parameter to specify a shorter message if there is not enough room
 	 */
-	protected void updateLabel(BufferedImage image, int x, int y, int availableWidth) {
+	protected void updateLabel(final BufferedImage image, final int x, final int y, final int availableWidth) {
 		if (image.getRaster().getNumBands() == 1) {
 			label.setText(String.format("%d, %d; intensity %d", x, y, image.getRaster().getSample(x, y, 0)));
 		} else if (image.getRaster().getNumBands() == 4) {
-			int rgb = image.getRGB(x, y);
-			Color c = new Color(rgb, true);
+			final int rgb = image.getRGB(x, y);
+			final Color c = new Color(rgb, true);
 			label.setText(String.format("%d, %d; color %d,%d,%d, alpha %d", x, y, c.getRed(), c.getGreen(), c.getBlue(),
 					c.getAlpha()));
 		} else {
-			int rgb = image.getRGB(x, y);
-			Color c = new Color(rgb);
+			final int rgb = image.getRGB(x, y);
+			final Color c = new Color(rgb);
 			label.setText(String.format("%d, %d; color %d,%d,%d", x, y, c.getRed(), c.getGreen(), c.getBlue()));
 		}
 
@@ -187,13 +187,13 @@ public class PixelInfoStatusBar extends StatusBar {
 			if (image.getRaster().getNumBands() == 1) {
 				label.setText(String.format("%d, %d; %d", x, y, image.getRaster().getSample(x, y, 0)));
 			} else if (image.getRaster().getNumBands() == 4) {
-				int rgb = image.getRGB(x, y);
-				Color c = new Color(rgb, true);
+				final int rgb = image.getRGB(x, y);
+				final Color c = new Color(rgb, true);
 				label.setText(String.format("%d, %d; (%d,%d,%d,%d)", x, y, c.getRed(), c.getGreen(), c.getBlue(),
 						c.getAlpha()));
 			} else {
-				int rgb = image.getRGB(x, y);
-				Color c = new Color(rgb);
+				final int rgb = image.getRGB(x, y);
+				final Color c = new Color(rgb);
 				label.setText(String.format("%d, %d; (%d,%d,%d)", x, y, c.getRed(), c.getGreen(), c.getBlue()));
 			}
 		}
@@ -201,14 +201,14 @@ public class PixelInfoStatusBar extends StatusBar {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void register(ImageViewer viewer) {
+	protected void register(final ImageViewer viewer) {
 		viewer.addPropertyChangeListener("image", propertyChangeListener);
 		update();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void unregister(ImageViewer viewer) {
+	protected void unregister(final ImageViewer viewer) {
 		viewer.removePropertyChangeListener("image", propertyChangeListener);
 	}
 

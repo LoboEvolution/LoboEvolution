@@ -32,9 +32,6 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>ArithmeticDecoder class.</p>
- *
-  *
-  *
  */
 public class ArithmeticDecoder {
 
@@ -71,7 +68,7 @@ public class ArithmeticDecoder {
 	 *
 	 * @param reader a {@link org.jpedal.jbig2.io.StreamReader} object.
 	 */
-	public ArithmeticDecoder(StreamReader reader) {
+	public ArithmeticDecoder(final StreamReader reader) {
 		this.reader = reader;
 
 		genericRegionStats = new ArithmeticDecoderStats(1 << 1);
@@ -98,7 +95,7 @@ public class ArithmeticDecoder {
 	 *
 	 * @param symbolCodeLength a int.
 	 */
-	public void resetIntStats(int symbolCodeLength) {
+	public void resetIntStats(final int symbolCodeLength) {
 		iadhStats.reset();
 		iadwStats.reset();
 		iaexStats.reset();
@@ -126,8 +123,8 @@ public class ArithmeticDecoder {
 	 * @param template a int.
 	 * @param previousStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
 	 */
-	public void resetGenericStats(int template, ArithmeticDecoderStats previousStats) {
-		int size = contextSize[template];
+	public void resetGenericStats(final int template, final ArithmeticDecoderStats previousStats) {
+		final int size = contextSize[template];
 
 		if (previousStats != null && previousStats.getContextSize() == size) {
 			if (genericRegionStats.getContextSize() == size) {
@@ -150,8 +147,8 @@ public class ArithmeticDecoder {
 	 * @param template a int.
 	 * @param previousStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
 	 */
-	public void resetRefinementStats(int template, ArithmeticDecoderStats previousStats) {
-		int size = referredToContextSize[template];
+	public void resetRefinementStats(final int template, final ArithmeticDecoderStats previousStats) {
+		final int size = referredToContextSize[template];
 		if (previousStats != null && previousStats.getContextSize() == size) {
 			if (refinementRegionStats.getContextSize() == size) {
 				refinementRegionStats.overwrite(previousStats);
@@ -180,7 +177,7 @@ public class ArithmeticDecoder {
 		readByte();
 		c = BinaryOperation.bit32ShiftL(c, 7);
 		counter -= 7;
-		a = 0x80000000l;
+		a = 0x80000000L;
 	}
 
 	/**
@@ -190,11 +187,11 @@ public class ArithmeticDecoder {
 	 * @return a {@link org.jpedal.jbig2.decoders.DecodeIntResult} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public DecodeIntResult decodeInt(ArithmeticDecoderStats stats) throws IOException {
+	public DecodeIntResult decodeInt(final ArithmeticDecoderStats stats) throws IOException {
 		long value;
 
 		previous = 1;
-		int s = decodeIntBit(stats);
+		final int s = decodeIntBit(stats);
 		if (decodeIntBit(stats) != 0) {
 			if (decodeIntBit(stats) != 0) {
 				if (decodeIntBit(stats) != 0) {
@@ -238,7 +235,7 @@ public class ArithmeticDecoder {
 			value = BinaryOperation.bit32ShiftL(value, 1) | decodeIntBit(stats);
 		}
 
-		int decodedInt;
+		final int decodedInt;
 		if (s != 0) {
 			if (value == 0) {
 				return new DecodeIntResult((int) value, false);
@@ -259,14 +256,14 @@ public class ArithmeticDecoder {
 	 * @return a long.
 	 * @throws java.io.IOException if any.
 	 */
-	public long decodeIAID(long codeLen, ArithmeticDecoderStats stats) throws IOException {
+	public long decodeIAID(final long codeLen, final ArithmeticDecoderStats stats) throws IOException {
 		previous = 1;
 		for (long i = 0; i < codeLen; i++) {
-			int bit = decodeBit(previous, stats);
+			final int bit = decodeBit(previous, stats);
 			previous = BinaryOperation.bit32ShiftL(previous, 1) | bit;
 		}
 
-		return previous - (1 << codeLen);
+		return previous - (1L << codeLen);
 	}
 
 	/**
@@ -277,16 +274,16 @@ public class ArithmeticDecoder {
 	 * @return a int.
 	 * @throws java.io.IOException if any.
 	 */
-	public int decodeBit(long context, ArithmeticDecoderStats stats) throws IOException {
-		int iCX = BinaryOperation.bit8Shift(stats.getContextCodingTableValue((int) context), 1, BinaryOperation.RIGHT_SHIFT);
-		int mpsCX = stats.getContextCodingTableValue((int) context) & 1;
-		int qe = qeTable[iCX];
+	public int decodeBit(final long context, final ArithmeticDecoderStats stats) throws IOException {
+		final int iCX = BinaryOperation.bit8Shift(stats.getContextCodingTableValue((int) context), 1, BinaryOperation.RIGHT_SHIFT);
+		final int mpsCX = stats.getContextCodingTableValue((int) context) & 1;
+		final int qe = qeTable[iCX];
 
 		a -= qe;
 
-		int bit;
+		final int bit;
 		if (c < a) {
-			if ((a & 0x80000000) != 0) {
+			if ((a & 0x80000000L) != 0) {
 				bit = mpsCX;
 			} else {
 				if (a < qe) {
@@ -309,7 +306,7 @@ public class ArithmeticDecoder {
 					c = BinaryOperation.bit32ShiftL(c, 1);
 
 					counter--;
-				} while ((a & 0x80000000) == 0);
+				} while ((a & 0x80000000L) == 0);
 			}
 		} else {
 			c -= a;
@@ -336,7 +333,7 @@ public class ArithmeticDecoder {
 				c = BinaryOperation.bit32ShiftL(c, 1);
 
 				counter--;
-			} while ((a & 0x80000000) == 0);
+			} while ((a & 0x80000000L) == 0);
 		}
 		return bit;
 	}
@@ -359,8 +356,8 @@ public class ArithmeticDecoder {
 		}
 	}
 
-	private int decodeIntBit(ArithmeticDecoderStats stats) throws IOException {
-		int bit;
+	private int decodeIntBit(final ArithmeticDecoderStats stats) throws IOException {
+		final int bit;
 
 		bit = decodeBit(previous, stats);
 		if (previous < 0x100) {

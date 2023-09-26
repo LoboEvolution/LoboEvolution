@@ -57,18 +57,18 @@ public class BernsteinButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
 			return;
 		}
 
-		int width = b.getWidth();
-		int height = b.getHeight();
+		final int width = b.getWidth();
+		final int height = b.getHeight();
 
-		ButtonModel model = b.getModel();
+		final ButtonModel model = b.getModel();
 		Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 		if (b.isEnabled()) {
-			Color background = b.getBackground();
+			final Color background = b.getBackground();
 			if (background instanceof ColorUIResource) {
 				if (model.isPressed() && model.isArmed()) {
 					colors = AbstractLookAndFeel.getTheme().getPressedColors();
@@ -99,11 +99,11 @@ public class BernsteinButtonUI extends BaseButtonUI {
 		}
 
 		if (b.isBorderPainted() && b.getBorder() != null) {
-			Insets insets = b.getBorder().getBorderInsets(b);
-			int x = insets.left > 0 ? 1 : 0;
-			int y = insets.top > 0 ? 1 : 0;
-			int w = insets.right > 0 ? width - 1 : width;
-			int h = insets.bottom > 0 ? height - 1 : height;
+			final Insets insets = b.getBorder().getBorderInsets(b);
+			final int x = insets.left > 0 ? 1 : 0;
+			final int y = insets.top > 0 ? 1 : 0;
+			final int w = insets.right > 0 ? width - 1 : width;
+			final int h = insets.bottom > 0 ? height - 1 : height;
 			JTattooUtilities.fillHorGradient(g, colors, x, y, w - x, h - y);
 		} else {
 			JTattooUtilities.fillHorGradient(g, colors, 0, 0, width, height);

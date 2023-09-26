@@ -27,11 +27,9 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Nodes;
 import org.loboevolution.gui.HtmlRendererContext;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLFormControlsCollection;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.filter.FormFilter;
-import org.loboevolution.html.dom.filter.InputFilter;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
@@ -47,10 +45,8 @@ import org.mozilla.javascript.Function;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <p>HTMLFormElementImpl class.</p>
@@ -65,7 +61,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	 * @param node a {@link org.loboevolution.html.node.Node} object.
 	 * @return a boolean.
 	 */
-	public static boolean isInput(Node node) {
+	public static boolean isInput(final Node node) {
 		final String name = node.getNodeName().toLowerCase();
 		return name.equals("input") || name.equals("textarea") || name.equals("select");
 	}
@@ -102,12 +98,12 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	@Override
 	public HTMLFormControlsCollection getElements() {
 		if (this.elements == null) {
-			HTMLFormControlsCollectionImpl elements = new HTMLFormControlsCollectionImpl((NodeImpl) this.getDocumentNode().getRootNode(), new FormFilter());
-			List<Node> list = new ArrayList<>();
+			final HTMLFormControlsCollectionImpl elements = new HTMLFormControlsCollectionImpl((NodeImpl) this.getDocumentNode().getRootNode(), new FormFilter());
+			final List<Node> list = new ArrayList<>();
 			elements.forEach(node -> {
 				if (node.hasAttributes()) {
-					NamedNodeMap attributes = node.getAttributes();
-					for (Node attribute : Nodes.iterable(attributes)) {
+					final NamedNodeMap attributes = node.getAttributes();
+					for (final Node attribute : Nodes.iterable(attributes)) {
 						if (getName().equals(attribute.getNodeValue())) {
 							System.out.println(getName());
 							list.add(node);
@@ -126,12 +122,12 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 		return this.elements;
 	}
 
-	private void findChild(Node node, List<Node> list) {
-		NodeListImpl childNodes = (NodeListImpl) node.getChildNodes();
+	private void findChild(final Node node, final List<Node> list) {
+		final NodeListImpl childNodes = (NodeListImpl) node.getChildNodes();
 		childNodes.forEach(nde -> {
 			if (nde.hasAttributes()) {
-				NamedNodeMap attributes = nde.getAttributes();
-				for (Node attribute : Nodes.iterable(attributes)) {
+				final NamedNodeMap attributes = nde.getAttributes();
+				for (final Node attribute : Nodes.iterable(attributes)) {
 					if (getName().equals(attribute.getNodeValue())) {
 						System.out.println(getName());
 						list.add(node);
@@ -173,8 +169,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 		final String name = getAttribute("name");
 		return name == null ? "" : name;
 	}
-	
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String getTarget() {
@@ -193,7 +188,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 				private int current = 0;
 
 				@Override
-				public void visit(Node node) {
+				public void visit(final Node node) {
 					if (HTMLFormElementImpl.isInput(node)) {
 						if (this.current == index) {
 							throw new StopVisitorException(node);
@@ -253,37 +248,37 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAcceptCharset(String acceptCharset) {
+	public void setAcceptCharset(final String acceptCharset) {
 		setAttribute("acceptCharset", acceptCharset);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAction(String action) {
+	public void setAction(final String action) {
 		setAttribute("action", action);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setEnctype(String enctype) {
+	public void setEnctype(final String enctype) {
 		setAttribute("enctype", enctype);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setMethod(String method) {
+	public void setMethod(final String method) {
 		setAttribute("method", method);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setName(String name) {
+	public void setName(final String name) {
 		setAttribute("name", name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTarget(String target) {
+	public void setTarget(final String target) {
 		setAttribute("target", target);
 	}
 
@@ -348,7 +343,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAutocomplete(String autocomplete) {
+	public void setAutocomplete(final String autocomplete) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -362,7 +357,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setEncoding(String encoding) {
+	public void setEncoding(final String encoding) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -376,7 +371,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNoValidate(boolean noValidate) {
+	public void setNoValidate(final boolean noValidate) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -397,7 +392,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new BlockRenderState(prevRenderState, this);
 	}
 	

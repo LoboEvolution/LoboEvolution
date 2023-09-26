@@ -40,7 +40,7 @@ public final class ExtendedType {
    * @param namespace Namespace of the node
    * @param localName Local name of the node
    */
-  public ExtendedType(int nodetype, String namespace, String localName) {
+  public ExtendedType(final int nodetype, final String namespace, final String localName) {
     this.nodetype = nodetype;
     this.namespace = namespace;
     this.localName = localName;
@@ -55,7 +55,7 @@ public final class ExtendedType {
    * @param localName Local name of the node
    * @param hash The given hash code
    */
-  public ExtendedType(int nodetype, String namespace, String localName, int hash) {
+  public ExtendedType(final int nodetype, final String namespace, final String localName, final int hash) {
     this.nodetype = nodetype;
     this.namespace = namespace;
     this.localName = localName;
@@ -66,7 +66,7 @@ public final class ExtendedType {
    * Redefine this ExtendedType object to represent a different extended type. This is intended to
    * be used ONLY on the hashET object. Using it elsewhere will mess up existing hashtable entries!
    */
-  void redefine(int nodetype, String namespace, String localName, int hash) {
+  void redefine(final int nodetype, final String namespace, final String localName, final int hash) {
     this.nodetype = nodetype;
     this.namespace = namespace;
     this.localName = localName;
@@ -85,12 +85,12 @@ public final class ExtendedType {
    * @param other The other ExtendedType object to test for equality
    * @return true if the two ExtendedType objects are equal.
    */
-  public boolean equals(ExtendedType other) {
+  public boolean equals(final ExtendedType other) {
     try {
       return other.nodetype == this.nodetype
           && other.localName.equals(this.localName)
           && other.namespace.equals(this.namespace);
-    } catch (NullPointerException e) {
+    } catch (final NullPointerException e) {
       return false;
     }
   }

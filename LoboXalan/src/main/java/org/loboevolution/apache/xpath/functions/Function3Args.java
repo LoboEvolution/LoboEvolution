@@ -41,7 +41,7 @@ public class Function3Args extends Function2Args {
 
   /** {@inheritDoc} */
   @Override
-  public void setArg(Expression arg, int argNum) throws WrongNumberArgsException {
+  public void setArg(final Expression arg, final int argNum) throws WrongNumberArgsException {
 
     if (argNum < 2) super.setArg(arg, argNum);
     else if (2 == argNum) {
@@ -52,7 +52,7 @@ public class Function3Args extends Function2Args {
 
   /** {@inheritDoc} */
   @Override
-  public void checkNumberArgs(int argNum) throws WrongNumberArgsException {
+  public void checkNumberArgs(final int argNum) throws WrongNumberArgsException {
     if (argNum != 3) reportWrongNumberArgs();
   }
 
@@ -70,14 +70,14 @@ public class Function3Args extends Function2Args {
 
   /** {@inheritDoc} */
   @Override
-  public void callArgVisitors(XPathVisitor visitor) {
+  public void callArgVisitors(final XPathVisitor visitor) {
     super.callArgVisitors(visitor);
     if (null != m_arg2) m_arg2.callVisitors(visitor);
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean deepEquals(Expression expr) {
+  public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
 
     if (null != m_arg2) {

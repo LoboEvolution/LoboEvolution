@@ -48,9 +48,9 @@ public class BaseDesktopPaneUI extends BasicDesktopPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(Graphics g, JComponent c) {
+	public void update(final Graphics g, final JComponent c) {
 		if (c.isOpaque()) {
-			Object backgroundTexture = c.getClientProperty("backgroundTexture");
+			final Object backgroundTexture = c.getClientProperty("backgroundTexture");
 			if (backgroundTexture instanceof Icon) {
 				JTattooUtilities.fillComponent(g, c, (Icon) backgroundTexture);
 			} else {

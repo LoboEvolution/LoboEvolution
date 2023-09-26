@@ -873,7 +873,7 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         addOptionMethod(", oSelect.options[3]", false, true, messages);
     }
 
-    private void addOptionMethod(final String param, final boolean empty, final boolean multi, String[] messages) {
+    private void addOptionMethod(final String param, final boolean empty, final boolean multi, final String[] messages) {
         String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
@@ -1266,7 +1266,7 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         removeOptionMethod("oSelect.options[3]", false, true, messages);
     }
 
-    private void removeOptionMethod(final String param, final boolean empty, final boolean multi, String[] messages) {
+    private void removeOptionMethod(final String param, final boolean empty, final boolean multi, final String[] messages) {
         String html = "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
@@ -1734,7 +1734,7 @@ public class HTMLSelectElementTest extends LoboUnitTest {
          defaultSelectedValue("x", true, messages);
     }
 
-    private void defaultSelectedValue(final String size, final boolean multiple, String[] messages) {
+    private void defaultSelectedValue(final String size, final boolean multiple, final String[] messages) {
         final String html =  "<html>\n"
                         + "<body onload='test()'>\n"
                         + "<script>\n"

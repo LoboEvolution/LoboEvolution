@@ -60,15 +60,15 @@ public class importNode06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        Element element;
-        Node aNode;
-        boolean hasChild;
-        String name;
-        Node child;
-        String value;
-        HTMLCollection addresses;
+        final Document doc;
+        final Document aNewDoc;
+        final Element element;
+        final Node aNode;
+        final boolean hasChild;
+        final String name;
+        final Node child;
+        final String value;
+        final HTMLCollection addresses;
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
         addresses = aNewDoc.getElementsByTagName("address");

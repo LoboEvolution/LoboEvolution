@@ -35,7 +35,6 @@ import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -59,9 +58,9 @@ public class documenttypegetentitiestypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entityList;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entityList;
         Node entity;
         int entityType;
         doc = sampleXmlFile("staff.xml");

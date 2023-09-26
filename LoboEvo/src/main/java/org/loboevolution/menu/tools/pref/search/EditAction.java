@@ -53,7 +53,7 @@ public class EditAction<T> extends AbstractAction {
 	 * @param add the add
 	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemListControl} object.
 	 */
-	public EditAction(boolean add, ItemListControl<T> item) {
+	public EditAction(final boolean add, final ItemListControl<T> item) {
 		this.add = add;
 		this.item = item;
 	}
@@ -61,7 +61,7 @@ public class EditAction<T> extends AbstractAction {
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
-		ItemEditor<T> dialog = new ItemEditor<>(this.item.getItemEditorFactory());
+		final ItemEditor<T> dialog = new ItemEditor<>(this.item.getItemEditorFactory());
 		dialog.setTitle(this.add ? "Add Item" : "Edit Item");
 		dialog.setCaption(this.item.getEditListCaption());
 		dialog.pack();
@@ -89,7 +89,7 @@ public class EditAction<T> extends AbstractAction {
 	 *
 	 * @param item the item
 	 */
-	private void addItem(T item) {
+	private void addItem(final T item) {
 		this.item.getComboBox().addItem(item);
 		this.item.getComboBox().setSelectedItem(item);
 	}
@@ -109,7 +109,7 @@ public class EditAction<T> extends AbstractAction {
 	 *
 	 * @param item
 	 */
-	private void replaceSelectedItem(T item) {
+	private void replaceSelectedItem(final T item) {
 		final int index = this.item.getComboBox().getSelectedIndex();
 		if (index != -1) {
 			this.item.getComboBox().removeItemAt(index);

@@ -65,12 +65,12 @@ public class hc_namednodemapwrongdocumenterrTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc1;
-        Document doc2;
-        HTMLCollection elementList;
-        Element testAddress;
-        NamedNodeMap attributes;
-        Attr newAttribute;
+        final Document doc1;
+        final Document doc2;
+        final HTMLCollection elementList;
+        final Element testAddress;
+        final NamedNodeMap attributes;
+        final Attr newAttribute;
         doc1 = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         elementList = doc1.getElementsByTagName("acronym");
@@ -80,7 +80,7 @@ public class hc_namednodemapwrongdocumenterrTest extends LoboUnitTest {
         boolean success = false;
         try {
             attributes.setNamedItem(newAttribute);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);

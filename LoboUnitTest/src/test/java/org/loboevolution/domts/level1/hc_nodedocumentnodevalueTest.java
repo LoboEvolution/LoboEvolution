@@ -53,8 +53,8 @@ public class hc_nodedocumentnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        String documentValue;
+        final Document doc;
+        final String documentValue;
         doc = sampleXmlFile("hc_staff.xml");
         documentValue = doc.getNodeValue();
         assertNull("documentNodeValue", documentValue);

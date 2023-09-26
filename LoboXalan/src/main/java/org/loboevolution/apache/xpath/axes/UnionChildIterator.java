@@ -54,7 +54,7 @@ public class UnionChildIterator extends ChildTestIterator {
    * @param test reference to a NodeTest, which will be added directly to the list of node tests (in
    *     other words, it will not be cloned). The parent of this test will be set to this object.
    */
-  public void addNodeTest(PredicatedNodeTest test) {
+  public void addNodeTest(final PredicatedNodeTest test) {
 
     // Increase array size by only 1 at a time. Fix this
     // if it looks to be a problem.
@@ -62,8 +62,8 @@ public class UnionChildIterator extends ChildTestIterator {
       m_nodeTests = new PredicatedNodeTest[1];
       m_nodeTests[0] = test;
     } else {
-      PredicatedNodeTest[] tests = m_nodeTests;
-      int len = m_nodeTests.length;
+      final PredicatedNodeTest[] tests = m_nodeTests;
+      final int len = m_nodeTests.length;
 
       m_nodeTests = new PredicatedNodeTest[len + 1];
 
@@ -76,12 +76,12 @@ public class UnionChildIterator extends ChildTestIterator {
 
   /** {@inheritDoc} */
   @Override
-  public short acceptNode(int n) {
-    XPathContext xctxt = getXPathContext();
+  public short acceptNode(final int n) {
+    final XPathContext xctxt = getXPathContext();
     try {
       xctxt.pushCurrentNode(n);
-      for (PredicatedNodeTest pnt : m_nodeTests) {
-        XObject score = pnt.execute(xctxt, n);
+      for (final PredicatedNodeTest pnt : m_nodeTests) {
+        final XObject score = pnt.execute(xctxt, n);
         if (score != NodeTest.SCORE_NONE) {
           // Note that we are assuming there are no positional predicates!
           if (pnt.getPredicateCount() > 0) {
@@ -89,7 +89,7 @@ public class UnionChildIterator extends ChildTestIterator {
           } else return DTMIterator.FILTER_ACCEPT;
         }
       }
-    } catch (org.loboevolution.javax.xml.transform.TransformerException se) {
+    } catch (final org.loboevolution.javax.xml.transform.TransformerException se) {
 
       // TODO: Fix this.
       throw new RuntimeException(se.getMessage());

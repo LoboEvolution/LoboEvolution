@@ -44,13 +44,13 @@ public final class ElementFilter implements NodeFilter {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public ElementFilter(String name) {
+	public ElementFilter(final String name) {
 		this.elementName = name;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public short acceptNode(Node node) {
+	public short acceptNode(final Node node) {
 		if (Strings.isNotBlank(elementName)) {
 			if (this.elementName.equalsIgnoreCase(node.getNodeName())) {
 				return NodeFilter.FILTER_ACCEPT;

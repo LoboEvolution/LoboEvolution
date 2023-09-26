@@ -55,24 +55,24 @@ public class canonicalform06Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        String nullString = null;
+        final DOMImplementation domImpl;
+        final String nullString = null;
 
-        DocumentType nullDoctype = null;
+        final DocumentType nullDoctype = null;
 
-        Document doc;
+        final Document doc;
         Element elem;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        List<DOMError> errors;
+        final List<DOMError> errors;
 
         DOMError error;
         int severity;
         String type;
         DOMLocator locator;
         Node relatedNode;
-        boolean canSet;
+        final boolean canSet;
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument(nullString, nullString, nullDoctype);
 
@@ -80,7 +80,7 @@ public class canonicalform06Test extends LoboUnitTest {
             boolean success = false;
             try {
                 elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("xml10InvalidName", success);
@@ -89,7 +89,7 @@ public class canonicalform06Test extends LoboUnitTest {
         try {
             doc.setXmlVersion("1.1");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             if (ex.getCode() == 9) {
                 return;
             }
@@ -107,7 +107,7 @@ public class canonicalform06Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
-            for (Object o : errors) {
+            for (final Object o : errors) {
                 error = (DOMError) o;
                 severity = error.getSeverity();
                 assertEquals("severity", 2, severity);

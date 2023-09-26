@@ -49,11 +49,11 @@ import static org.junit.Assert.assertNull;
 public class nodelookupnamespaceuri08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        HTMLCollection elemList;
-        String namespaceURI;
-        String namespaceURIEmpty;
+        final Document doc;
+        final Element elem;
+        final HTMLCollection elemList;
+        final String namespaceURI;
+        final String namespaceURIEmpty;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(0);

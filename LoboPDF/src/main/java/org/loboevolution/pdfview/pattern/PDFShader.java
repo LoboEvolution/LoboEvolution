@@ -114,7 +114,7 @@ public abstract class PDFShader {
      *
      * @param type a int.
      */
-    protected PDFShader(int type) {
+    protected PDFShader(final int type) {
         this.type = type;
     }
     
@@ -127,7 +127,7 @@ public abstract class PDFShader {
      * @return a {@link org.loboevolution.pdfview.pattern.PDFShader} object.
      * @throws java.io.IOException if any.
      */
-    public static PDFShader getShader(PDFObject shaderObj, Map resources)
+    public static PDFShader getShader(final PDFObject shaderObj, final Map resources)
         throws IOException
     {
         // first see if the shader is already cached
@@ -137,11 +137,11 @@ public abstract class PDFShader {
         }
         
         // read the type (required)
-        PDFObject typeObj = shaderObj.getDictRef("ShadingType");
+        final PDFObject typeObj = shaderObj.getDictRef("ShadingType");
         if (typeObj == null) {
             throw new PDFParseException("No shader type defined!");
         }
-        int type = typeObj.getIntValue();
+        final int type = typeObj.getIntValue();
         
         // create the shader
         switch (type) {
@@ -163,35 +163,35 @@ public abstract class PDFShader {
         }
         
         // read the color space (required)
-        PDFObject csObj = shaderObj.getDictRef("ColorSpace");
+        final PDFObject csObj = shaderObj.getDictRef("ColorSpace");
         if (csObj == null) {
             throw new PDFParseException("No colorspace defined!");
         }
-        PDFColorSpace cs = PDFColorSpace.getColorSpace(csObj, resources);
+        final PDFColorSpace cs = PDFColorSpace.getColorSpace(csObj, resources);
         shader.setColorSpace(cs);
         
         // read the background color (optional)
-        PDFObject bgObj = shaderObj.getDictRef("Background");
+        final PDFObject bgObj = shaderObj.getDictRef("Background");
         if (bgObj != null) {
-            PDFObject[] bgObjs = bgObj.getArray();
-            float[] bgArray = new float[bgObjs.length];
+            final PDFObject[] bgObjs = bgObj.getArray();
+            final float[] bgArray = new float[bgObjs.length];
             for (int i = 0; i < bgArray.length; i++) {
                 bgArray[i] = bgObjs[i].getFloatValue();
             }
-            PDFPaint paint = cs.getPaint(bgArray);
+            final PDFPaint paint = cs.getPaint(bgArray);
             shader.setBackground(paint);          
         }
         
         // read the bounding box (optional)
-        PDFObject bboxObj = shaderObj.getDictRef("BBox");
+        final PDFObject bboxObj = shaderObj.getDictRef("BBox");
         if (bboxObj != null) {
-            PDFObject[] rectObj = bboxObj.getArray();
-            float minX = rectObj[0].getFloatValue();
-            float minY = rectObj[1].getFloatValue();
-            float maxX = rectObj[2].getFloatValue();
-            float maxY = rectObj[3].getFloatValue();
+            final PDFObject[] rectObj = bboxObj.getArray();
+            final float minX = rectObj[0].getFloatValue();
+            final float minY = rectObj[1].getFloatValue();
+            final float maxX = rectObj[2].getFloatValue();
+            final float maxY = rectObj[3].getFloatValue();
             
-            Rectangle2D bbox = 
+            final Rectangle2D bbox =
                 new Rectangle2D.Float(minX, minY,  maxX - minX, maxY - minY);
             shader.setBBox(bbox);
         }
@@ -228,7 +228,7 @@ public abstract class PDFShader {
      *
      * @param colorSpace a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
      */
-    protected void setColorSpace(PDFColorSpace colorSpace) {
+    protected void setColorSpace(final PDFColorSpace colorSpace) {
         this.colorSpace = colorSpace;
     }
     
@@ -246,7 +246,7 @@ public abstract class PDFShader {
      *
      * @param background a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
-    protected void setBackground(PDFPaint background) {
+    protected void setBackground(final PDFPaint background) {
         this.background = background;
     }
     
@@ -264,7 +264,7 @@ public abstract class PDFShader {
      *
      * @param bbox a {@link java.awt.geom.Rectangle2D} object.
      */
-    protected void setBBox(Rectangle2D bbox) {
+    protected void setBBox(final Rectangle2D bbox) {
         this.bbox = bbox;
     }
     

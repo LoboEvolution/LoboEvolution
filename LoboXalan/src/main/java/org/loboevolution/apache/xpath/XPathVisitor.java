@@ -76,7 +76,7 @@ public class XPathVisitor {
    * @param pred The predicate object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitPredicate(Expression pred) {
+  public boolean visitPredicate(final Expression pred) {
     return true;
   }
 
@@ -104,7 +104,7 @@ public class XPathVisitor {
    * @param func The function reference object.
    * @return true if the sub expressions should be traversed.
    */
-  public boolean visitFunction(Function func) {
+  public boolean visitFunction(final Function func) {
     return true;
   }
 

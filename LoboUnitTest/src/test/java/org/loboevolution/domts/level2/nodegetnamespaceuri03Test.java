@@ -34,7 +34,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -58,16 +57,16 @@ public class nodegetnamespaceuri03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Element elementNS;
-        Attr attr;
-        Attr attrNS;
-        String elemNSURI;
-        String elemNSURINull;
-        String attrNSURI;
-        String attrNSURINull;
-        String nullNS = null;
+        final Document doc;
+        final Element element;
+        final Element elementNS;
+        final Attr attr;
+        final Attr attrNS;
+        final String elemNSURI;
+        final String elemNSURINull;
+        final String attrNSURI;
+        final String attrNSURINull;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staff.xml");
         element = doc.createElementNS(nullNS, "elem");

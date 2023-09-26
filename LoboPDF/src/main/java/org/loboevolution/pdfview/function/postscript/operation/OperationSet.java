@@ -67,7 +67,7 @@ public final class OperationSet {
      * @param token a {@link java.lang.String} object.
      * @return a {@link org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation} object.
      */
-    public PostScriptOperation getOperation(String token) {
+    public PostScriptOperation getOperation(final String token) {
     	PostScriptOperation result = this.operationSet.get(token.trim().toLowerCase());
     	if (result == null) {
     		result = new PushAsNumber(token);

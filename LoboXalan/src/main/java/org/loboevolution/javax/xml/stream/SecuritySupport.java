@@ -26,10 +26,9 @@
 
 package org.loboevolution.javax.xml.stream;
 
+import java.nio.file.Files;
 import java.security.*;
-import java.net.*;
 import java.io.*;
-import java.util.*;
 
 /**
  * This class is duplicated for each JAXP subpackage so keep it in sync.
@@ -72,12 +71,8 @@ class SecuritySupport  {
     {
         try {
             return (FileInputStream)
-                AccessController.doPrivileged(new PrivilegedExceptionAction() {
-                    public Object run() throws FileNotFoundException {
-                        return new FileInputStream(file);
-                    }
-                });
-        } catch (PrivilegedActionException e) {
+                AccessController.doPrivileged((PrivilegedExceptionAction) () -> Files.newInputStream(file.toPath()));
+        } catch (final PrivilegedActionException e) {
             throw (FileNotFoundException)e.getException();
         }
     }
@@ -86,26 +81,20 @@ class SecuritySupport  {
                                            final String name)
     {
         return (InputStream)
-            AccessController.doPrivileged(new PrivilegedAction() {
-                public Object run() {
-                    InputStream ris;
-                    if (cl == null) {
-                        ris = Object.class.getResourceAsStream(name);
-                    } else {
-                        ris = cl.getResourceAsStream(name);
-                    }
-                    return ris;
+            AccessController.doPrivileged((PrivilegedAction) () -> {
+                final InputStream ris;
+                if (cl == null) {
+                    ris = Object.class.getResourceAsStream(name);
+                } else {
+                    ris = cl.getResourceAsStream(name);
                 }
+                return ris;
             });
     }
 
     boolean doesFileExist(final File f) {
-    return ((Boolean)
-            AccessController.doPrivileged(new PrivilegedAction() {
-                public Object run() {
-                    return new Boolean(f.exists());
-                }
-            })).booleanValue();
+    return (Boolean)
+            AccessController.doPrivileged((PrivilegedAction) () -> f.exists());
     }
 
 }

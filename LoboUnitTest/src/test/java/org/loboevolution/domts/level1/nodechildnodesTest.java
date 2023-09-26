@@ -54,16 +54,16 @@ public class nodechildnodesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childNodes;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childNodes;
         Node childNode;
         int childType;
         String childName;
-        List<String> elementNames = new ArrayList<>();
+        final List<String> elementNames = new ArrayList<>();
 
-        List<String> expectedElementNames = new ArrayList<>();
+        final List<String> expectedElementNames = new ArrayList<>();
         expectedElementNames.add("EMPLOYEEID");
         expectedElementNames.add("NAME");
         expectedElementNames.add("POSITION");

@@ -28,33 +28,7 @@ package org.loboevolution.javax.xml.datatype;
 
 import org.loboevolution.javax.xml.namespace.QName;
 
-public final class DatatypeConstants
-{
-    public static final class Field
-    {
-
-        public String toString()
-        {
-            throw new RuntimeException("Stub!");
-        }
-
-        public int getId()
-        {
-            throw new RuntimeException("Stub!");
-        }
-
-        Field(String str, int id)
-        {
-            throw new RuntimeException("Stub!");
-        }
-    }
-
-
-    DatatypeConstants()
-    {
-        throw new RuntimeException("Stub!");
-    }
-
+public final class DatatypeConstants {
     public static final int APRIL = 4;
     public static final int AUGUST = 8;
     public static final QName DATE = null;
@@ -91,5 +65,23 @@ public final class DatatypeConstants
     public static final int SEPTEMBER = 9;
     public static final QName TIME = null;
     public static final Field YEARS = null;
+    DatatypeConstants() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public static final class Field {
+
+        Field(final String str, final int id) {
+            throw new RuntimeException("Stub!");
+        }
+
+        public String toString() {
+            throw new RuntimeException("Stub!");
+        }
+
+        public int getId() {
+            throw new RuntimeException("Stub!");
+        }
+    }
 
 }

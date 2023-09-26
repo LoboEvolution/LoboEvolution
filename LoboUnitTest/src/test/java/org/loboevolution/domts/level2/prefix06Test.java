@@ -60,9 +60,9 @@ public class prefix06Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(0);
@@ -71,7 +71,7 @@ public class prefix06Test extends LoboUnitTest {
             boolean success = false;
             try {
                 employeeNode.setPrefix("pre^fix xmlns='http//www.nist.gov'");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

@@ -41,7 +41,7 @@ public class BernsteinCheckBoxUI extends BernsteinRadioButtonUI {
 	private static BernsteinCheckBoxUI checkBoxUI = null;
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent b) {
+	public static ComponentUI createUI(final JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new BernsteinCheckBoxUI();
 		}
@@ -50,7 +50,7 @@ public class BernsteinCheckBoxUI extends BernsteinRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installDefaults(AbstractButton b) {
+	public void installDefaults(final AbstractButton b) {
 		super.installDefaults(b);
 		icon = UIManager.getIcon("CheckBox.icon");
 	}

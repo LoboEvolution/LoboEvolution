@@ -45,7 +45,7 @@ public class SVGAnimatedRectImpl implements SVGAnimatedRect {
 	 *
 	 * @param baseVal a {@link org.loboevolution.html.dom.svg.SVGRect} object.
 	 */
-	public SVGAnimatedRectImpl(SVGRect baseVal) {
+	public SVGAnimatedRectImpl(final SVGRect baseVal) {
 		this.baseVal = baseVal;
 	}
 
@@ -55,7 +55,7 @@ public class SVGAnimatedRectImpl implements SVGAnimatedRect {
 		return baseVal;
 	}
 
-	void setBaseVal(SVGRect baseVal) {
+	void setBaseVal(final SVGRect baseVal) {
 		this.baseVal = baseVal;
 	}
 

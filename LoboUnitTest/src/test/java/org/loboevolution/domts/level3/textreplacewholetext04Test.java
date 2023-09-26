@@ -47,9 +47,9 @@ public class textreplacewholetext04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Text textNode;
-        Text replacedText;
+        final Document doc;
+        final Text textNode;
+        final Text replacedText;
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode("New Text");
         replacedText = textNode.replaceWholeText("");

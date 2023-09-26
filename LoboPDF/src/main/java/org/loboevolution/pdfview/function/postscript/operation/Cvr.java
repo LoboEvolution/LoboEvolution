@@ -48,7 +48,7 @@ final class Cvr implements PostScriptOperation {
 	 * errors: invalidaccess, limitcheck, stackunderflow,
 	 *         syntaxerror, typecheck, undefinedresult
 	 */
-	public void eval(Stack<Object> environment) {
+	public void eval(final Stack<Object> environment) {
 	    // YOUR CODE IN THIS SPACE
 	}
 }

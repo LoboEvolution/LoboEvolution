@@ -50,14 +50,14 @@ public class DocumentFragmentImpl extends EventTargetImpl implements DocumentFra
 	}
 
 	@Override
-	public Node appendChild(Node newChild) {
+	public Node appendChild(final Node newChild) {
 		if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a fragment.");
 		}
 		return super.appendChild(newChild);
 	}
 	@Override
-	public Node prependChild(Node newChild) {
+	public Node prependChild(final Node newChild) {
 		if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a fragment.");
 		}

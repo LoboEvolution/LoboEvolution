@@ -37,7 +37,7 @@ abstract class WeakWindowTask implements ActionListener {
 	 *
 	 * @param window a {@link org.loboevolution.html.js.WindowImpl} object.
 	 */
-	public WeakWindowTask(WindowImpl window) {
+	public WeakWindowTask(final WindowImpl window) {
 		this.windowRef = new WeakReference<>(window);
 	}
 

@@ -52,13 +52,13 @@ public class DOMErrorMonitor implements DOMErrorHandler {
      * adds copy of error to list for later retrieval.
      */
     @Override
-    public boolean handleError(DOMError error) {
+    public boolean handleError(final DOMError error) {
         errors.add(new DOMErrorImpl(error));
         return true;
     }
 
-    public boolean assertLowerSeverity(int severity) {
-        for (DOMError error : errors) {
+    public boolean assertLowerSeverity(final int severity) {
+        for (final DOMError error : errors) {
             if (error.getSeverity() >= severity) {
                 return false;
             }

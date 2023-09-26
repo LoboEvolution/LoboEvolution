@@ -49,7 +49,7 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
     /**
      * Copy constructor.
      */
-    public SVGPreserveAspectRatioImpl(SVGPreserveAspectRatio preserveAspectRatio) {
+    public SVGPreserveAspectRatioImpl(final SVGPreserveAspectRatio preserveAspectRatio) {
         this.align = preserveAspectRatio.getAlign();
         this.meetOrSlice = preserveAspectRatio.getMeetOrSlice();
     }
@@ -73,7 +73,7 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
      *            The value to set the alginment to.
      */
     @Override
-    public void setAlign(short align) {
+    public void setAlign(final short align) {
         this.align = align;
     }
 
@@ -96,7 +96,7 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
      *            The value to set the meetOrSlice to.
      */
     @Override
-    public void setMeetOrSlice(short meetOrSlice) {
+    public void setMeetOrSlice(final short meetOrSlice) {
         this.meetOrSlice = meetOrSlice;
     }
 
@@ -108,7 +108,7 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
      *            The alignment string.
      * @return The alignment constant.
      */
-    public static short getAlignConst(String alignString) {
+    public static short getAlignConst(final String alignString) {
 
         if (alignString.equalsIgnoreCase("none")) {
             return SVG_PRESERVEASPECTRATIO_NONE;
@@ -151,7 +151,7 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
      *            The meetOrSlice string.
      * @return The meetOrSlice constant.
      */
-    public static short getMeetOrSliceConst(String meetOrSliceString) {
+    public static short getMeetOrSliceConst(final String meetOrSliceString) {
         if (meetOrSliceString.equalsIgnoreCase("meet")) {
             return SVG_MEETORSLICE_MEET;
         }
@@ -163,7 +163,7 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
         return SVG_MEETORSLICE_MEET;
     }
 
-    public static String getAlignString(short align) {
+    public static String getAlignString(final short align) {
         switch (align) {
             case SVG_PRESERVEASPECTRATIO_NONE:
                 return "none";
@@ -190,7 +190,7 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
         }
     }
 
-    public static String getMeetOrSliceString(short meetOrSlice) {
+    public static String getMeetOrSliceString(final short meetOrSlice) {
         switch (meetOrSlice) {
             case SVG_MEETORSLICE_MEET:
                 return "meet";

@@ -49,13 +49,13 @@ public class McWinInternalFrameUI extends BaseInternalFrameUI {
 	 *
 	 * @param b a {@link javax.swing.JInternalFrame} object.
 	 */
-	public McWinInternalFrameUI(JInternalFrame b) {
+	public McWinInternalFrameUI(final JInternalFrame b) {
 		super(b);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected JComponent createNorthPane(JInternalFrame w) {
+	protected JComponent createNorthPane(final JInternalFrame w) {
 		titlePane = new McWinInternalFrameTitlePane(w);
 		return titlePane;
 	}

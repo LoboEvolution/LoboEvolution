@@ -54,7 +54,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void assignAttributeField(String normalName, String value) {
+	public void assignAttributeField(final String normalName, final String value) {
 		if ("onload".equals(normalName)) {
 			final Function onload = getEventFunction(null, normalName);
 			if (onload != null) {
@@ -67,7 +67,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new BodyRenderState(prevRenderState, this);
 	}
 
@@ -123,19 +123,19 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setALink(String aLink) {
+	public void setALink(final String aLink) {
 		setAttribute("alink", aLink);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBackground(String background) {
+	public void setBackground(final String background) {
 		setAttribute("background", background);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBgColor(String bgColor) {
+	public void setBgColor(final String bgColor) {
 		setAttribute("bgcolor", bgColor);
 	}
 
@@ -146,13 +146,13 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	}
 
 	@Override
-	public void setBgProperties(String bgProperties) {
+	public void setBgProperties(final String bgProperties) {
 		// TODO Auto-generated method stub
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setLink(String link) {
+	public void setLink(final String link) {
 		setAttribute("link", link);
 	}
 
@@ -162,7 +162,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	}
 
 	@Override
-	public void setNoWrap(boolean noWrap) {
+	public void setNoWrap(final boolean noWrap) {
 
 	}
 
@@ -171,7 +171,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	 *
 	 * <p>setOnload.</p>
 	 */
-	public void setOnload(Function onload) {
+	public void setOnload(final Function onload) {
 		final Object document = this.document;
 		if (document instanceof HTMLDocumentImpl) {
 			// Note that body.onload overrides
@@ -182,7 +182,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setOwnerDocument(Document value) {
+	public void setOwnerDocument(final Document value) {
 		super.setOwnerDocument(value);
 		if (value instanceof HTMLDocument) {
 			((HTMLDocument) value).setBody(this);
@@ -191,7 +191,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setOwnerDocument(Document value, boolean deep) {
+	public void setOwnerDocument(final Document value, final boolean deep) {
 		super.setOwnerDocument(value, deep);
 		if (value instanceof HTMLDocument) {
 			((HTMLDocument) value).setBody(this);
@@ -200,18 +200,18 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setText(String text) {
+	public void setText(final String text) {
 		setAttribute("text", text);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setVLink(String vLink) {
+	public void setVLink(final String vLink) {
 		setAttribute("vlink", vLink);
 	}
 
 	@Override
-	public Node appendChild(Node newChild) {
+	public Node appendChild(final Node newChild) {
 
 		if (newChild instanceof HTMLHtmlElement) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append html");

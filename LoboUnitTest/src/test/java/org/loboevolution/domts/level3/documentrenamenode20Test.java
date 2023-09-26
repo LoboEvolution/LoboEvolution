@@ -50,9 +50,9 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode20Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Node renamedNode;
+        final Document doc;
+        final Element element;
+        final Node renamedNode;
         Element docElem;
         String rootNS;
         String rootTagname;
@@ -69,7 +69,7 @@ public class documentrenamenode20Test extends LoboUnitTest {
             boolean success = false;
             try {
                 renamedNode = doc.renameNode(element, "http://www.example.com/xml", "xml:html");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
             assertTrue("throw_NAMESPACE_ERR", success);

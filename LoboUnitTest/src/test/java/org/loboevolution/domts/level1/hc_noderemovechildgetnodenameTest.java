@@ -35,7 +35,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -60,14 +59,14 @@ public class hc_noderemovechildgetnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node oldChild;
-        Node removedChild;
-        String childName;
-        String oldName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node oldChild;
+        final Node removedChild;
+        final String childName;
+        final String oldName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);

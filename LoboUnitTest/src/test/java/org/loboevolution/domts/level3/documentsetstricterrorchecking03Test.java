@@ -45,8 +45,8 @@ import static org.junit.Assert.assertFalse;
 public class documentsetstricterrorchecking03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        boolean strictErrorCheckingValue;
+        final Document doc;
+        final boolean strictErrorCheckingValue;
         doc = sampleXmlFile("hc_staff.xml");
         doc.setStrictErrorChecking(false);
         strictErrorCheckingValue = doc.getStrictErrorChecking();

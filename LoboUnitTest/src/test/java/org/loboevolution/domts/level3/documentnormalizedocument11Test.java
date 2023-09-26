@@ -55,12 +55,12 @@ import static org.junit.Assert.assertNotNull;
 public class documentnormalizedocument11Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection elemList;
         Element elemName;
-        String nodeName;
-        boolean canSet;
-        DOMConfiguration domConfig;
+        final String nodeName;
+        final boolean canSet;
+        final DOMConfiguration domConfig;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("namespace-declarations", Boolean.TRUE);

@@ -55,8 +55,8 @@ public class getElementById02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
+        final Document doc;
+        final Element element;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getElementById("Cancun");
         assertNull("throw_Null", element);

@@ -54,7 +54,7 @@ public class TextEditOkAction extends AbstractAction {
 	 * @param textArea a {@link javax.swing.JTextArea} object.
 	 * @param search a {@link org.loboevolution.menu.tools.pref.startup.TextEdit} object.
 	 */
-	public TextEditOkAction(JTextArea textArea, TextEdit search) {
+	public TextEditOkAction(final JTextArea textArea, final TextEdit search) {
 		this.textArea = textArea;
 		this.search = search;
 	}

@@ -46,7 +46,7 @@ public class OutlineNode extends DefaultMutableTreeNode {
      *
      * @param title the node's visible name in the tree
      */
-    public OutlineNode(String title) {
+    public OutlineNode(final String title) {
         this.title = title;
     }
 
@@ -64,7 +64,7 @@ public class OutlineNode extends DefaultMutableTreeNode {
      *
      * @param action a {@link org.loboevolution.pdfview.action.PDFAction} object.
      */
-    public void setAction(PDFAction action) {
+    public void setAction(final PDFAction action) {
         setUserObject(action);
     }
 

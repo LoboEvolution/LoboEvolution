@@ -51,7 +51,7 @@ public class SetAsDefaultAction<T> extends AbstractAction {
 	 *
 	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemListControl} object.
 	 */
-	public SetAsDefaultAction(ItemListControl<T> item) {
+	public SetAsDefaultAction(final ItemListControl<T> item) {
 		this.item = item;
 	}
 

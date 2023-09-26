@@ -91,7 +91,7 @@ public class BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets ins = getBorderInsets(c);
+			final Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
 			borderInsets.right = ins.right;
@@ -99,31 +99,31 @@ public class BaseBorders {
 			return borderInsets;
 		}
 
-		public int getTitleHeight(Component c) {
+		public int getTitleHeight(final Component c) {
 			int th = 21;
-			int fh = getBorderInsets(c).top + getBorderInsets(c).bottom;
+			final int fh = getBorderInsets(c).top + getBorderInsets(c).bottom;
 			if (c instanceof JDialog) {
-				JDialog dialog = (JDialog) c;
+				final JDialog dialog = (JDialog) c;
 				th = dialog.getSize().height - dialog.getContentPane().getSize().height - fh - 1;
 				if (dialog.getJMenuBar() != null) {
 					th -= dialog.getJMenuBar().getSize().height;
 				}
 			} else if (c instanceof JInternalFrame) {
-				JInternalFrame frame = (JInternalFrame) c;
+				final JInternalFrame frame = (JInternalFrame) c;
 				th = frame.getSize().height - frame.getRootPane().getSize().height - fh - 1;
 				if (frame.getJMenuBar() != null) {
 					th -= frame.getJMenuBar().getSize().height;
 				}
 			} else if (c instanceof JRootPane) {
-				JRootPane jp = (JRootPane) c;
+				final JRootPane jp = (JRootPane) c;
 				if (jp.getParent() instanceof JFrame) {
-					JFrame frame = (JFrame) c.getParent();
+					final JFrame frame = (JFrame) c.getParent();
 					th = frame.getSize().height - frame.getContentPane().getSize().height - fh - 1;
 					if (frame.getJMenuBar() != null) {
 						th -= frame.getJMenuBar().getSize().height;
 					}
 				} else if (jp.getParent() instanceof JDialog) {
-					JDialog dialog = (JDialog) c.getParent();
+					final JDialog dialog = (JDialog) c.getParent();
 					th = dialog.getSize().height - dialog.getContentPane().getSize().height - fh - 1;
 					if (dialog.getJMenuBar() != null) {
 						th -= dialog.getJMenuBar().getSize().height;
@@ -133,7 +133,7 @@ public class BaseBorders {
 			return th;
 		}
 
-		public boolean isActive(Component c) {
+		public boolean isActive(final Component c) {
 			if (c instanceof JComponent) {
 				return JTattooUtilities.isActive((JComponent) c);
 			} else {
@@ -141,21 +141,21 @@ public class BaseBorders {
 			}
 		}
 
-		public boolean isResizable(Component c) {
+		public boolean isResizable(final Component c) {
 			boolean resizable = true;
 			if (c instanceof JDialog) {
-				JDialog dialog = (JDialog) c;
+				final JDialog dialog = (JDialog) c;
 				resizable = dialog.isResizable();
 			} else if (c instanceof JInternalFrame) {
-				JInternalFrame frame = (JInternalFrame) c;
+				final JInternalFrame frame = (JInternalFrame) c;
 				resizable = frame.isResizable();
 			} else if (c instanceof JRootPane) {
-				JRootPane jp = (JRootPane) c;
+				final JRootPane jp = (JRootPane) c;
 				if (jp.getParent() instanceof JFrame) {
-					JFrame frame = (JFrame) c.getParent();
+					final JFrame frame = (JFrame) c.getParent();
 					resizable = frame.isResizable();
 				} else if (jp.getParent() instanceof JDialog) {
-					JDialog dialog = (JDialog) c.getParent();
+					final JDialog dialog = (JDialog) c.getParent();
 					resizable = dialog.isResizable();
 				}
 			}
@@ -201,7 +201,7 @@ public class BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets ins = getBorderInsets(c);
+			final Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
 			borderInsets.right = ins.right;
@@ -217,15 +217,15 @@ public class BaseBorders {
 			return ColorHelper.darker(AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColor(), 20);
 		}
 
-		public boolean hasLogo(Component c) {
+		public boolean hasLogo(final Component c) {
 			return AbstractLookAndFeel.getTheme().getLogoString() != null
 					&& AbstractLookAndFeel.getTheme().getLogoString().length() > 0;
 		}
 
-		public boolean isMenuBarPopup(Component c) {
+		public boolean isMenuBarPopup(final Component c) {
 			boolean menuBarPopup = false;
 			if (c instanceof JPopupMenu) {
-				JPopupMenu pm = (JPopupMenu) c;
+				final JPopupMenu pm = (JPopupMenu) c;
 				if (pm.getInvoker() != null) {
 					menuBarPopup = pm.getInvoker().getParent() instanceof JMenuBar;
 				}
@@ -234,13 +234,13 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Color logoColor = AbstractLookAndFeel.getMenuSelectionBackgroundColor();
-			Color borderColorLo = AbstractLookAndFeel.getFrameColor();
-			Color borderColorHi = ColorHelper.brighter(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 40);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Color logoColor = AbstractLookAndFeel.getMenuSelectionBackgroundColor();
+			final Color borderColorLo = AbstractLookAndFeel.getFrameColor();
+			final Color borderColorHi = ColorHelper.brighter(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 40);
 			g.setColor(logoColor);
 			if (JTattooUtilities.isLeftToRight(c)) {
-				int dx = getBorderInsets(c).left;
+				final int dx = getBorderInsets(c).left;
 				g.fillRect(x, y, dx - 1, h - 1);
 				paintLogo(c, g, x, y, w, h);
 				// - highlight
@@ -265,7 +265,7 @@ public class BaseBorders {
 				// - logo separator
 				g.drawLine(x + dx - 1, y + 1, x + dx - 1, y + h - 1);
 			} else {
-				int dx = getBorderInsets(c).right;
+				final int dx = getBorderInsets(c).right;
 				g.fillRect(x + w - dx, y, dx, h - 1);
 				paintLogo(c, g, x, y, w, h);
 				// - highlight
@@ -291,20 +291,20 @@ public class BaseBorders {
 			}
 		}
 
-		public void paintLogo(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintLogo(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 			if (hasLogo(c)) {
-				Graphics2D g2D = (Graphics2D) g;
+				final Graphics2D g2D = (Graphics2D) g;
 
-				Font savedFont = g2D.getFont();
+				final Font savedFont = g2D.getFont();
 				g.setFont(logoFont);
-				FontMetrics fm = JTattooUtilities.getFontMetrics((JComponent) c, g, c.getFont());
-				String logo = JTattooUtilities.getClippedText(AbstractLookAndFeel.getTheme().getLogoString(), fm,
+				final FontMetrics fm = JTattooUtilities.getFontMetrics((JComponent) c, g, c.getFont());
+				final String logo = JTattooUtilities.getClippedText(AbstractLookAndFeel.getTheme().getLogoString(), fm,
 						h - 16);
 
-				AffineTransform savedTransform = g2D.getTransform();
+				final AffineTransform savedTransform = g2D.getTransform();
 
-				Color fc = getLogoColorHi();
-				Color bc = getLogoColorLo();
+				final Color fc = getLogoColorHi();
+				final Color bc = getLogoColorLo();
 
 				if (JTattooUtilities.isLeftToRight(c)) {
 					g2D.translate(fm.getAscent() + 1, h - shadowSize - 4);
@@ -341,18 +341,18 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
 			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 					AbstractLookAndFeel.getTheme().getMenuAlpha());
 			g2D.setComposite(alpha);
-			Color logoColor = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColor();
-			Color borderColorLo = AbstractLookAndFeel.getFrameColor();
-			Color borderColorHi = ColorHelper.brighter(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 40);
+			final Color logoColor = AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColor();
+			final Color borderColorLo = AbstractLookAndFeel.getFrameColor();
+			final Color borderColorHi = ColorHelper.brighter(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 40);
 			g.setColor(logoColor);
 			if (JTattooUtilities.isLeftToRight(c)) {
-				int dx = getBorderInsets(c).left;
+				final int dx = getBorderInsets(c).left;
 				g.fillRect(x, y, dx - 1, h - 1 - shadowSize);
 				paintLogo(c, g, x, y, w, h);
 				// - highlight
@@ -377,7 +377,7 @@ public class BaseBorders {
 				// - logo separator
 				g.drawLine(x + dx - 1, y + 1, x + dx - 1, y + h - shadowSize - 1);
 			} else {
-				int dx = getBorderInsets(c).right - shadowSize;
+				final int dx = getBorderInsets(c).right - shadowSize;
 				g.fillRect(x + w - dx - shadowSize, y, dx - 1, h - 1 - shadowSize);
 				paintLogo(c, g, x, y, w, h);
 				// - highlight
@@ -441,7 +441,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
 			g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
 			g.drawRect(x, y, width - 1, height - 1);
 		}
@@ -471,8 +471,8 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Color frameColor = AbstractLookAndFeel.getTheme().getBackgroundColor();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Color frameColor = AbstractLookAndFeel.getTheme().getBackgroundColor();
 			JTattooUtilities.draw3DBorder(g, ColorHelper.darker(frameColor, 20), ColorHelper.brighter(frameColor, 80),
 					x, y, w, h);
 		}
@@ -505,9 +505,9 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			Color hiColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 60);
-			Color loColor = AbstractLookAndFeel.getTheme().getFocusFrameColor();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
+			final Color hiColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 60);
+			final Color loColor = AbstractLookAndFeel.getTheme().getFocusFrameColor();
 			g.setColor(loColor);
 			g.drawRect(x, y, width - 1, height - 1);
 			g.setColor(hiColor);
@@ -539,11 +539,11 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			JMenuItem b = (JMenuItem) c;
-			ButtonModel model = b.getModel();
-			Color borderColorLo = AbstractLookAndFeel.getFrameColor();
-			Color borderColorHi = ColorHelper.brighter(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 40);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final JMenuItem b = (JMenuItem) c;
+			final ButtonModel model = b.getModel();
+			final Color borderColorLo = AbstractLookAndFeel.getFrameColor();
+			final Color borderColorHi = ColorHelper.brighter(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 40);
 			if (c.getParent() instanceof JMenuBar) {
 				if (model.isArmed() || model.isSelected()) {
 					g.setColor(borderColorLo);
@@ -590,7 +590,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 			if (JTattooUtilities.isFrameActive(c)) {
 				g.setColor(AbstractLookAndFeel.getWindowBorderColor());
 			} else {
@@ -612,7 +612,7 @@ public class BaseBorders {
 
 		private boolean tableBorder = false;
 
-		public ScrollPaneBorder(boolean tableBorder) {
+		public ScrollPaneBorder(final boolean tableBorder) {
 			this.tableBorder = tableBorder;
 		}
 
@@ -627,7 +627,7 @@ public class BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets ins = getBorderInsets(c);
+			final Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
 			borderInsets.right = ins.right;
@@ -636,7 +636,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 			g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
 			g.drawRect(x, y, w - 1, h - 1);
 			g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getBackgroundColor(), 50));
@@ -668,7 +668,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
 			g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
 			g.drawRect(x, y, width - 1, height - 1);
 		}
@@ -698,13 +698,13 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
 			g2D.setComposite(alpha);
-			Color cHi = AbstractLookAndFeel.getTheme().getControlHighlightColor();
-			Color cLo = AbstractLookAndFeel.getTheme().getControlShadowColor();
+			final Color cHi = AbstractLookAndFeel.getTheme().getControlHighlightColor();
+			final Color cLo = AbstractLookAndFeel.getTheme().getControlShadowColor();
 			JTattooUtilities.draw3DBorder(g, cHi, cLo, x, y, w, h);
 			g2D.setComposite(savedComposite);
 		}
@@ -734,7 +734,7 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
 			g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
 			g.drawRect(x, y, width - 1, height - 1);
 		}
@@ -751,7 +751,7 @@ public class BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c) {
-			Insets insets = new Insets(2, 2, 2, 2);
+			final Insets insets = new Insets(2, 2, 2, 2);
 			if (((JToolBar) c).isFloatable()) {
 				if (((JToolBar) c).getOrientation() == HORIZONTAL) {
 					if (JTattooUtilities.isLeftToRight(c)) {
@@ -763,7 +763,7 @@ public class BaseBorders {
 					insets.top = 15;
 				}
 			}
-			Insets margin = ((JToolBar) c).getMargin();
+			final Insets margin = ((JToolBar) c).getMargin();
 			if (margin != null) {
 				insets.left += margin.left;
 				insets.top += margin.top;
@@ -775,7 +775,7 @@ public class BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets insets = getBorderInsets(c);
+			final Insets insets = getBorderInsets(c);
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -784,11 +784,12 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int borderX, final int y, final int w, final int h) {
+			int x = borderX;
 			if (((JToolBar) c).isFloatable()) {
-				Graphics2D g2D = (Graphics2D) g;
-				Composite savedComposite = g2D.getComposite();
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+				final Graphics2D g2D = (Graphics2D) g;
+				final Composite savedComposite = g2D.getComposite();
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 				g2D.setComposite(alpha);
 				if (((JToolBar) c).getOrientation() == HORIZONTAL) {
 					if (!JTattooUtilities.isLeftToRight(c)) {
@@ -842,12 +843,12 @@ public class BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
-			Color frameHiColor = ColorHelper.brighter(frameColor, 10);
-			Color frameLoColor = ColorHelper.darker(frameColor, 30);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
+			final Color frameHiColor = ColorHelper.brighter(frameColor, 10);
+			final Color frameLoColor = ColorHelper.darker(frameColor, 30);
 			JTattooUtilities.draw3DBorder(g, frameHiColor, frameLoColor, x, y, w, h);
 			if (model.isPressed() && model.isArmed() || model.isSelected()) {
 				JTattooUtilities.draw3DBorder(g, frameLoColor, frameHiColor, x, y, w, h);

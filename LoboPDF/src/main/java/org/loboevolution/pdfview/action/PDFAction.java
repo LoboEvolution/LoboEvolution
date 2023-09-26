@@ -49,7 +49,7 @@ public class PDFAction {
      *
      * @param type a {@link java.lang.String} object.
      */
-    public PDFAction(String type) {
+    public PDFAction(final String type) {
         this.type = type;
     }
     
@@ -61,18 +61,18 @@ public class PDFAction {
      * @return a {@link org.loboevolution.pdfview.action.PDFAction} object.
      * @throws java.io.IOException if any.
      */
-    public static PDFAction getAction(PDFObject obj, PDFObject root)
+    public static PDFAction getAction(final PDFObject obj, final PDFObject root)
         throws IOException
     {
         // figure out the action type
-        PDFObject typeObj = obj.getDictRef("S");
+        final PDFObject typeObj = obj.getDictRef("S");
         if (typeObj == null) {
             throw new PDFParseException("No action type in object: " + obj);
         }
         
         // create the action based on the type
         PDFAction action = null;
-        String type = typeObj.getStringValue();
+        final String type = typeObj.getStringValue();
         switch (type) {
             case "GoTo":
                 action = new GoToAction(obj, root);
@@ -95,7 +95,7 @@ public class PDFAction {
         }
         
         // figure out if there is a next action
-        PDFObject nextObj = obj.getDictRef("Next");
+        final PDFObject nextObj = obj.getDictRef("Next");
         if (nextObj != null) {
             action.setNext(nextObj);
         }
@@ -127,7 +127,7 @@ public class PDFAction {
      *
      * @param next a {@link org.loboevolution.pdfview.PDFObject} object.
      */
-    public void setNext(PDFObject next) {
+    public void setNext(final PDFObject next) {
         this.next = next;
     }
     

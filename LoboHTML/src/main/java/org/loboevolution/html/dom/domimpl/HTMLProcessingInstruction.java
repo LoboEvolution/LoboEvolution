@@ -49,7 +49,7 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLProcessingInstruction(String name) {
+	public HTMLProcessingInstruction(final String name) {
 		super(name);
 	}
 
@@ -91,13 +91,13 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 
 	/** {@inheritDoc} */
 	@Override
-	public void setData(String data) {
+	public void setData(final String data) {
 		this.data = data;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) {
+	public void setNodeValue(final String nodeValue) {
 		this.data = nodeValue;
 	}
 
@@ -106,7 +106,7 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 	 *
 	 * @param target a {@link java.lang.String} object.
 	 */
-	public void setTarget(String target) {
+	public void setTarget(final String target) {
 		this.target = target;
 	}
 
@@ -119,47 +119,47 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 
 	/** {@inheritDoc} */
 	@Override
-	public void appendData(String data) {
+	public void appendData(final String data) {
 		// TODO Auto-generated method stub
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void deleteData(int offset, int count) {
+	public void deleteData(final int offset, final int count) {
 		// TODO Auto-generated method stub
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void insertData(int offset, String data) {
+	public void insertData(final int offset, final String data) {
 		// TODO Auto-generated method stub
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void replaceData(int offset, int count, String data) {
+	public void replaceData(final int offset, final int count, final String data) {
 		// TODO Auto-generated method stub
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String substringData(int offset, int count) {
+	public String substringData(final int offset, final int count) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int getClientHeight() {
-		int clientHeight = super.getClientHeight();
+		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 16 : clientHeight;
 	}
 
 	@Override
-	public Node appendChild(Node newChild) {
+	public Node appendChild(final Node newChild) {
 		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append node.");
 	}
 

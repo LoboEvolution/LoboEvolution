@@ -56,11 +56,11 @@ public class nodesetprefix01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        Element element;
-        String elementTagName;
-        String elementNodeName;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final Element element;
+        final String elementTagName;
+        final String elementNodeName;
         doc = sampleXmlFile("staff.xml");
         docFragment = doc.createDocumentFragment();
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "address");

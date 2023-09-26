@@ -50,7 +50,6 @@
 
 package org.loboevolution.javax.xml.stream.util;
 
-import java.io.Reader;
 import org.loboevolution.javax.xml.namespace.QName;
 import org.loboevolution.javax.xml.namespace.NamespaceContext;
 import org.loboevolution.javax.xml.stream.XMLStreamReader;
@@ -69,7 +68,7 @@ public class StreamReaderDelegate implements XMLStreamReader {
    * Construct an filter with the specified parent.
    * @param reader the parent
    */
-  public StreamReaderDelegate(XMLStreamReader reader) {
+  public StreamReaderDelegate(final XMLStreamReader reader) {
     this.reader = reader;
   }
 
@@ -77,7 +76,7 @@ public class StreamReaderDelegate implements XMLStreamReader {
    * Set the parent of this instance.
    * @param reader the new parent
    */
-  public void setParent(XMLStreamReader reader) {
+  public void setParent(final XMLStreamReader reader) {
     this.reader = reader;
   }
 
@@ -107,7 +106,7 @@ public class StreamReaderDelegate implements XMLStreamReader {
     return reader.getElementText();
   }
 
-  public void require(int type, String namespaceURI, String localName)
+  public void require(final int type, final String namespaceURI, final String localName)
     throws XMLStreamException
   {
     reader.require(type,namespaceURI,localName);
@@ -125,7 +124,7 @@ public class StreamReaderDelegate implements XMLStreamReader {
     reader.close();
   }
 
-  public String getNamespaceURI(String prefix)
+  public String getNamespaceURI(final String prefix)
   {
     return reader.getNamespaceURI(prefix);
   }
@@ -150,8 +149,8 @@ public class StreamReaderDelegate implements XMLStreamReader {
     return reader.isWhiteSpace();
   }
 
-  public String getAttributeValue(String namespaceUri,
-                                  String localName)
+  public String getAttributeValue(final String namespaceUri,
+                                  final String localName)
   {
     return reader.getAttributeValue(namespaceUri,localName);
   }
@@ -160,31 +159,31 @@ public class StreamReaderDelegate implements XMLStreamReader {
     return reader.getAttributeCount();
   }
 
-  public QName getAttributeName(int index) {
+  public QName getAttributeName(final int index) {
     return reader.getAttributeName(index);
   }
 
-  public String getAttributePrefix(int index) {
+  public String getAttributePrefix(final int index) {
     return reader.getAttributePrefix(index);
   }
 
-  public String getAttributeNamespace(int index) {
+  public String getAttributeNamespace(final int index) {
     return reader.getAttributeNamespace(index);
   }
 
-  public String getAttributeLocalName(int index) {
+  public String getAttributeLocalName(final int index) {
     return reader.getAttributeLocalName(index);
   }
 
-  public String getAttributeType(int index) {
+  public String getAttributeType(final int index) {
     return reader.getAttributeType(index);
   }
 
-  public String getAttributeValue(int index) {
+  public String getAttributeValue(final int index) {
     return reader.getAttributeValue(index);
   }
 
-  public boolean isAttributeSpecified(int index) {
+  public boolean isAttributeSpecified(final int index) {
     return reader.isAttributeSpecified(index);
   }
 
@@ -192,11 +191,11 @@ public class StreamReaderDelegate implements XMLStreamReader {
     return reader.getNamespaceCount();
   }
 
-  public String getNamespacePrefix(int index) {
+  public String getNamespacePrefix(final int index) {
     return reader.getNamespacePrefix(index);
   }
 
-  public String getNamespaceURI(int index) {
+  public String getNamespaceURI(final int index) {
     return reader.getNamespaceURI(index);
   }
 
@@ -208,10 +207,10 @@ public class StreamReaderDelegate implements XMLStreamReader {
     return reader.getText();
   }
 
-  public int getTextCharacters(int sourceStart,
-                               char[] target,
-                               int targetStart,
-                               int length)
+  public int getTextCharacters(final int sourceStart,
+                               final char[] target,
+                               final int targetStart,
+                               final int length)
     throws XMLStreamException {
     return reader.getTextCharacters(sourceStart,
                                     target,
@@ -288,7 +287,7 @@ public class StreamReaderDelegate implements XMLStreamReader {
     return reader.getPIData();
   }
 
-  public Object getProperty(String name) {
+  public Object getProperty(final String name) {
     return reader.getProperty(name);
   }
 }

@@ -68,7 +68,7 @@ public class NodeVector implements Cloneable {
   @Override
   public Object clone() throws CloneNotSupportedException {
 
-    NodeVector clone = (NodeVector) super.clone();
+    final NodeVector clone = (NodeVector) super.clone();
 
     if ((null != this.m_map) && (this.m_map == clone.m_map)) {
       clone.m_map = new int[this.m_map.length];
@@ -93,7 +93,7 @@ public class NodeVector implements Cloneable {
    *
    * @param value Node to add to the vector
    */
-  public void addElement(int value) {
+  public void addElement(final int value) {
 
     if ((m_firstFree + 1) >= m_mapSize) {
       if (null == m_map) {
@@ -102,7 +102,7 @@ public class NodeVector implements Cloneable {
       } else {
         m_mapSize += m_blocksize;
 
-        int[] newMap = new int[m_mapSize];
+        final int[] newMap = new int[m_mapSize];
 
         System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
 
@@ -133,7 +133,7 @@ public class NodeVector implements Cloneable {
    * @param value Node to insert
    * @param at Position where to insert
    */
-  public void insertElementAt(int value, int at) {
+  public void insertElementAt(final int value, final int at) {
 
     if (null == m_map) {
       m_map = new int[m_blocksize];
@@ -141,7 +141,7 @@ public class NodeVector implements Cloneable {
     } else if ((m_firstFree + 1) >= m_mapSize) {
       m_mapSize += m_blocksize;
 
-      int[] newMap = new int[m_mapSize];
+      final int[] newMap = new int[m_mapSize];
 
       System.arraycopy(m_map, 0, newMap, 0, m_firstFree + 1);
 
@@ -171,7 +171,7 @@ public class NodeVector implements Cloneable {
    * @param i Index of node to get
    * @return Node at specified index
    */
-  public int elementAt(int i) {
+  public int elementAt(final int i) {
 
     if (null == m_map) return DTM.NULL;
 
@@ -184,12 +184,12 @@ public class NodeVector implements Cloneable {
    * @param s Node to look for
    * @return True if the given node was found.
    */
-  public boolean contains(int s) {
+  public boolean contains(final int s) {
 
     if (null == m_map) return false;
 
     for (int i = 0; i < m_firstFree; i++) {
-      int node = m_map[i];
+      final int node = m_map[i];
 
       if (node == s) return true;
     }
@@ -206,12 +206,12 @@ public class NodeVector implements Cloneable {
    * @return the index of the first occurrence of the object argument in this vector at position
    *     index or later in the vector; returns -1 if the object is not found.
    */
-  public int indexOf(int elem, int index) {
+  public int indexOf(final int elem, final int index) {
 
     if (null == m_map) return -1;
 
     for (int i = index; i < m_firstFree; i++) {
-      int node = m_map[i];
+      final int node = m_map[i];
 
       if (node == elem) return i;
     }
@@ -227,12 +227,12 @@ public class NodeVector implements Cloneable {
    * @return the index of the first occurrence of the object argument in this vector at position
    *     index or later in the vector; returns -1 if the object is not found.
    */
-  public int indexOf(int elem) {
+  public int indexOf(final int elem) {
 
     if (null == m_map) return -1;
 
     for (int i = 0; i < m_firstFree; i++) {
-      int node = m_map[i];
+      final int node = m_map[i];
 
       if (node == elem) return i;
     }

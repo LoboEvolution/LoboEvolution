@@ -53,15 +53,15 @@ import static org.junit.Assert.assertTrue;
 public class domconfigurationcansetparameter02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
-        HTMLCollection strongList;
-        NodeList childList;
-        Node strongElem;
-        Node cdata1;
-        Node cdata2;
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final HTMLCollection strongList;
+        final NodeList childList;
+        final Node strongElem;
+        final Node cdata1;
+        final Node cdata2;
         int nodeType;
-        boolean canSet;
+        final boolean canSet;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("cdata-sections", Boolean.FALSE);

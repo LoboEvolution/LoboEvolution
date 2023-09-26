@@ -34,9 +34,6 @@ import java.awt.*;
 
 /**
  * <p>UIControlWrapper class.</p>
- *
- *
- *
  */
 public class UIControlWrapper implements UIControl {
 	private final Component component;
@@ -47,9 +44,9 @@ public class UIControlWrapper implements UIControl {
 	 *
 	 * @param ho a {@link org.loboevolution.html.HtmlObject} object.
 	 */
-	public UIControlWrapper(HtmlObject ho) {
+	public UIControlWrapper(final HtmlObject ho) {
 		this.htmlObject = ho;
-		Component c;
+		final Component c;
 		if (ho == null) {
 			c = new BrokenComponent();
 		} else {
@@ -98,7 +95,7 @@ public class UIControlWrapper implements UIControl {
 	 * @param endPoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
 	 * @return a boolean.
 	 */
-	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
+	public boolean paintSelection(final Graphics g, final boolean inSelection, final RenderableSpot startPoint, final RenderableSpot endPoint) {
 		// Does not paint selection
 		return inSelection;
 	}
@@ -111,13 +108,13 @@ public class UIControlWrapper implements UIControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBounds(int x, int y, int width, int height) {
+	public void setBounds(final int x, final int y, final int width, final int height) {
 		this.component.setBounds(x, y, width, height);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRUIControl(RUIControl ruicontrol) {
+	public void setRUIControl(final RUIControl ruicontrol) {
 		// Not doing anything with this.
 	}
 }

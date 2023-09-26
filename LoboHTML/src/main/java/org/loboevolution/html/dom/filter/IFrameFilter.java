@@ -41,8 +41,8 @@ public class IFrameFilter implements NodeFilter {
      * @return a boolean.
      */
     @Override
-    public short acceptNode(Node node) {
-        String nodeName = node.getNodeName();
+    public short acceptNode(final Node node) {
+        final String nodeName = node.getNodeName();
         return "iframe".equalsIgnoreCase(nodeName) ?
                 NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     }

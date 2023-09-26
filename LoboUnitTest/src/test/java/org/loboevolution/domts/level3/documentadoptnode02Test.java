@@ -49,28 +49,28 @@ public class documentadoptnode02Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Element attrOwnerElem;
-        Element element;
-        Attr attr;
-        HTMLCollection childList;
-        Node adoptedclass;
-        String nodeName;
-        int nodeType;
-        String nodeValue;
-        boolean isSpecified;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Element attrOwnerElem;
+        final Element element;
+        final Attr attr;
+        final HTMLCollection childList;
+        final Node adoptedclass;
+        final String nodeName;
+        final int nodeType;
+        final String nodeValue;
+        final boolean isSpecified;
+        final DocumentType nullDocType = null;
 
-        Text firstChild;
-        String firstChildValue;
-        EntityReference secondChild;
-        int secondChildType;
-        String secondChildName;
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Text firstChild;
+        final String firstChildValue;
+        final EntityReference secondChild;
+        final int secondChildType;
+        final String secondChildName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();

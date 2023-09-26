@@ -48,18 +48,18 @@ import static org.junit.Assert.assertFalse;
 public class documentgetxmlstandalone05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DocumentType newDocType;
-        DOMImplementation domImpl;
-        boolean standalone;
-        String nullPubId = null;
+        final Document doc;
+        final Document newDoc;
+        final DocumentType newDocType;
+        final DOMImplementation domImpl;
+        final boolean standalone;
+        final String nullPubId = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
-        DocumentType docType;
-        String sysId;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
+        final DocumentType docType;
+        final String sysId;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

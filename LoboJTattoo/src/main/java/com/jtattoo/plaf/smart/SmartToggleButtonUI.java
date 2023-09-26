@@ -50,7 +50,7 @@ public class SmartToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		super.paintBackground(g, b);
 		if (b.isContentAreaFilled() && b.isRolloverEnabled() && b.getModel().isRollover() && b.isBorderPainted()
 				&& b.getBorder() != null) {

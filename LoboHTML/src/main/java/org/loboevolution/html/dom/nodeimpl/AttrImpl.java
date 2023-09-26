@@ -127,12 +127,12 @@ public class AttrImpl extends EventTargetImpl implements Attr {
      * {@inheritDoc}
      */
     @Override
-    public void setNodeValue(String nodeValue) {
+    public void setNodeValue(final String nodeValue) {
         this.value = nodeValue;
     }
 
     @Override
-    public Node insertBefore(Node newChild, Node refChild) {
+    public Node insertBefore(final Node newChild, final Node refChild) {
         if (newChild instanceof Attr) {
             throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
         } else {
@@ -141,7 +141,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
     }
 
     @Override
-    public Node removeChild(Node oldChild) {
+    public Node removeChild(final Node oldChild) {
         if (oldChild instanceof Attr) {
             throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
         } else {
@@ -150,7 +150,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
     }
 
     @Override
-    public Node replaceChild(Node newChild, Node oldChild) {
+    public Node replaceChild(final Node newChild, final Node oldChild) {
         if (newChild instanceof Attr) {
             throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
         } else {
@@ -161,10 +161,10 @@ public class AttrImpl extends EventTargetImpl implements Attr {
     @Override
     public Node getNextSibling() {
         if (ownerElement != null) {
-            NamedNodeMap attributes = ownerElement.getAttributes();
+            final NamedNodeMap attributes = ownerElement.getAttributes();
             boolean next = false;
-            for (Node nodeAttr : Nodes.iterable(attributes)) {
-                Attr attr = (Attr) nodeAttr;
+            for (final Node nodeAttr : Nodes.iterable(attributes)) {
+                final Attr attr = (Attr) nodeAttr;
                 if (next) {
                     return attr;
                 }
@@ -180,10 +180,10 @@ public class AttrImpl extends EventTargetImpl implements Attr {
     @Override
     public Node getPreviousSibling() {
         if (ownerElement != null) {
-            NamedNodeMap attributes = ownerElement.getAttributes();
+            final NamedNodeMap attributes = ownerElement.getAttributes();
             Attr previus = null;
-            for (Node nodeAttr : Nodes.iterable(attributes)) {
-                Attr attr = (Attr) nodeAttr;
+            for (final Node nodeAttr : Nodes.iterable(attributes)) {
+                final Attr attr = (Attr) nodeAttr;
 
                 if (Objects.equals(attr, this) && !Objects.equals(previus, this)) {
                     return previus;
@@ -196,10 +196,10 @@ public class AttrImpl extends EventTargetImpl implements Attr {
     }
 
     @Override
-    public short compareDocumentPosition(Node other) {
+    public short compareDocumentPosition(final Node other) {
         short comparison = super.compareDocumentPosition(other);
         if (other instanceof Attr) {
-            AttrImpl otherImpl = (AttrImpl) other;
+            final AttrImpl otherImpl = (AttrImpl) other;
             if (otherImpl.getOwnerElement().isSameNode(this.ownerElement)) {
                 comparison += Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
             }
@@ -207,7 +207,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
         return comparison;
     }
 
-    public void setOwnerElement(Node ownerElement) {
+    public void setOwnerElement(final Node ownerElement) {
         this.ownerElement = ownerElement;
         setParentImpl(ownerElement);
     }

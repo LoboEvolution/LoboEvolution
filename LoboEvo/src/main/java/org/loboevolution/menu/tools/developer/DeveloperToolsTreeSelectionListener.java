@@ -46,13 +46,13 @@ public class DeveloperToolsTreeSelectionListener implements TreeSelectionListene
      *
      * @param window a {@link org.loboevolution.menu.tools.developer.DeveloperToolsWindow} object.
      */
-    public DeveloperToolsTreeSelectionListener(DeveloperToolsWindow window) {
+    public DeveloperToolsTreeSelectionListener(final DeveloperToolsWindow window) {
         this.window = window;
     }
 
     /** {@inheritDoc} */
     @Override
-    public void valueChanged(TreeSelectionEvent evt) {
+    public void valueChanged(final TreeSelectionEvent evt) {
         final TreePath path = evt.getPath();
         final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
         if(node.getUserObject() instanceof ToolsInfo){
@@ -61,7 +61,7 @@ public class DeveloperToolsTreeSelectionListener implements TreeSelectionListene
         }
     }
 
-    private void updateDeveloperPanel(ToolsInfo settingsInfo) {
+    private void updateDeveloperPanel(final ToolsInfo settingsInfo) {
         if (settingsInfo != null) {
             final AbstractToolsUI newUI = settingsInfo.createSettingsUI();
             this.window.getDeveloperPanel().setSettingsUI(newUI);

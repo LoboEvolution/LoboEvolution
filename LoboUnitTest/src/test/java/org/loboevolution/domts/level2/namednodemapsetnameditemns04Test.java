@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertTrue;
@@ -60,16 +59,16 @@ public class namednodemapsetnameditemns04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Document docAlt;
-        DocumentType docType = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Document docAlt;
+        final DocumentType docType = null;
 
-        NamedNodeMap attributes;
-        HTMLCollection elementList;
-        Element element;
-        Attr attrAlt;
-        String nullNS = null;
+        final NamedNodeMap attributes;
+        final HTMLCollection elementList;
+        final Element element;
+        final Attr attrAlt;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         
@@ -83,7 +82,7 @@ public class namednodemapsetnameditemns04Test extends LoboUnitTest {
         boolean success = false;
         try {
             attributes.setNamedItemNS(attrAlt);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);

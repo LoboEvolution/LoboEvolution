@@ -60,33 +60,33 @@ public class XMLDocumentBuilder {
             parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             parserFactory.setXIncludeAware(false);
             parserFactory.setNamespaceAware(true);
-        } catch (SAXNotRecognizedException | SAXNotSupportedException | ParserConfigurationException e) {
+        } catch (final SAXNotRecognizedException | SAXNotSupportedException | ParserConfigurationException e) {
             logger.severe(e.getMessage());
         }
     }
 
-    public Document parse(InputSource is) throws SAXException, IOException {
+    public Document parse(final InputSource is) throws SAXException, IOException {
         try {
-            SAXParser saxParser = parserFactory.newSAXParser();
+            final SAXParser saxParser = parserFactory.newSAXParser();
             return parse(is, saxParser.getXMLReader());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
         return null;
     }
 
-    private Document parse(InputSource is, XMLReader xmlReader) {
+    private Document parse(final InputSource is, final XMLReader xmlReader) {
         try {
-            XMLContentHandler handler = new XMLContentHandler();
+            final XMLContentHandler handler = new XMLContentHandler();
             xmlReader.setContentHandler(handler);
             xmlReader.setErrorHandler(handler);
             xmlReader.setProperty("http://xml.org/sax/properties/lexical-handler", handler);
             xmlReader.parse(is);
-            Document document = handler.getDocument();
+            final Document document = handler.getDocument();
             document.setDocumentURI(is.getSystemId());
             return document;
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             logger.severe(e.getMessage());
         }
         return null;

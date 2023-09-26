@@ -60,10 +60,10 @@ public class processinginstructiongetdataTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NodeList childNodes;
-        ProcessingInstruction piNode;
-        String data;
+        final Document doc;
+        final NodeList childNodes;
+        final ProcessingInstruction piNode;
+        final String data;
         doc = sampleXmlFile("staff.xml");
         childNodes = doc.getChildNodes();
         piNode = (ProcessingInstruction) childNodes.item(0);

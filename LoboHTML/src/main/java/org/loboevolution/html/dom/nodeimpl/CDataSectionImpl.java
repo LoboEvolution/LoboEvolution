@@ -48,7 +48,7 @@ public class CDataSectionImpl extends TextImpl implements CDATASection {
 	 *
 	 * @param text a {@link java.lang.String} object.
 	 */
-	public CDataSectionImpl(String text) {
+	public CDataSectionImpl(final String text) {
 		super(text);
 	}
 

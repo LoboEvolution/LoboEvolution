@@ -46,7 +46,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 	}
 
 	@Override
-	public Object getCurrentValue(short animtype) {
+	public Object getCurrentValue(final short animtype) {
 		Object currentValue = null;
 		switch (animtype) {
 			case SVGAnimatedValue.ANIMTYPE_LENGTH:
@@ -81,27 +81,27 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 	private SVGLength getCurrentLengthValue() {
 
-		float currentTime = getCurrentTime();
-		float startTime = getStartTime();
+		final float currentTime = getCurrentTime();
+		final float startTime = getStartTime();
 		float duration = getSimpleDuration();
 		if (duration == -1) {
-			float endTime = getEndTime();
+			final float endTime = getEndTime();
 			if (endTime != -1) {
 				duration = endTime - startTime;
 			}
 		}
 
-		float numRepeats = getNumRepeats(duration);
-		boolean repeatForever = getRepeatForever();
+		final float numRepeats = getNumRepeats(duration);
+		final boolean repeatForever = getRepeatForever();
 
-		float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
+		final float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
 		if (percentageComplete < 0) {
 			return null;
 		}
 
 		if (getAttribute("values").length() > 0) {
 
-			String values = getAttribute("values");
+			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
 			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
@@ -138,7 +138,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				switch (calcMode) {
 					case "linear":
 					case "paced":
-						float lengthVal = beforeLength.getValue()
+						final float lengthVal = beforeLength.getValue()
 								+ percentBetween * (afterLength.getValue() - beforeLength.getValue());
 						return new SVGLengthImpl(lengthVal);
 					case "discrete":
@@ -149,7 +149,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 						}
 					case "spline":
 						percentBetween = getSplineValueAt(splineIndex, percentBetween);
-						float length = beforeLength.getValue() + percentBetween * (afterLength.getValue() - beforeLength.getValue());
+						final float length = beforeLength.getValue() + percentBetween * (afterLength.getValue() - beforeLength.getValue());
 						return new SVGLengthImpl(length);
 					default:
 						break;
@@ -163,25 +163,25 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
-			String to = getAttribute("to");
-			String by = getAttribute("by");
+			final String to = getAttribute("to");
+			final String by = getAttribute("by");
 
 			if (from.length() > 0 && to.length() > 0) { // is a from-to or to
 				// anim
-				SVGLengthImpl fromLength = new SVGLengthImpl(from);
-				SVGLengthImpl toLength = new SVGLengthImpl(to);
-				float fromValue = fromLength.getValue();
-				float toValue = toLength.getValue();
-				float value = fromValue + percentageComplete * (toValue - fromValue);
+				final SVGLengthImpl fromLength = new SVGLengthImpl(from);
+				final SVGLengthImpl toLength = new SVGLengthImpl(to);
+				final float fromValue = fromLength.getValue();
+				final float toValue = toLength.getValue();
+				final float value = fromValue + percentageComplete * (toValue - fromValue);
 				return new SVGLengthImpl(value);
 
 			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
 				// or to anim
-				SVGLengthImpl fromLength = new SVGLengthImpl(from);
-				SVGLengthImpl byLength = new SVGLengthImpl(by);
-				float fromValue = fromLength.getValue();
-				float byValue = byLength.getValue();
-				float value = fromValue + percentageComplete * byValue;
+				final SVGLengthImpl fromLength = new SVGLengthImpl(from);
+				final SVGLengthImpl byLength = new SVGLengthImpl(by);
+				final float fromValue = fromLength.getValue();
+				final float byValue = byLength.getValue();
+				final float value = fromValue + percentageComplete * byValue;
 				return new SVGLengthImpl(value);
 			}
 		}
@@ -190,26 +190,26 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 	private SVGLengthList getCurrentLengthListValue() {
 
-		float currentTime = getCurrentTime();
-		float startTime = getStartTime();
+		final float currentTime = getCurrentTime();
+		final float startTime = getStartTime();
 		float duration = getSimpleDuration();
 		if (duration == -1) {
-			float endTime = getEndTime();
+			final float endTime = getEndTime();
 			if (endTime != -1) {
 				duration = endTime - startTime;
 			}
 		}
-		float numRepeats = getNumRepeats(duration);
-		boolean repeatForever = getRepeatForever();
+		final float numRepeats = getNumRepeats(duration);
+		final boolean repeatForever = getRepeatForever();
 
-		float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
+		final float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
 		if (percentageComplete < 0) {
 			return null; // indicates to use the baseVal
 		}
 
 		if (getAttribute("values").length() > 0) {
 
-			String values = getAttribute("values");
+			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
 			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear";
@@ -248,12 +248,12 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 							// adjust the percentBetween by the spline value
 							percentBetween = getSplineValueAt(splineIndex, percentBetween);
 						}
-						SVGLengthList currentList = new SVGLengthListImpl();
-						int numItems = beforeLengthList.getNumberOfItems();
+						final SVGLengthList currentList = new SVGLengthListImpl();
+						final int numItems = beforeLengthList.getNumberOfItems();
 						for (int i = 0; i < numItems; i++) {
-							float beforeValue = beforeLengthList.getItem(i).getValue();
-							float afterValue = afterLengthList.getItem(i).getValue();
-							float value = beforeValue + percentBetween * (afterValue - beforeValue);
+							final float beforeValue = beforeLengthList.getItem(i).getValue();
+							final float afterValue = afterLengthList.getItem(i).getValue();
+							final float value = beforeValue + percentBetween * (afterValue - beforeValue);
 							currentList.appendItem(new SVGLengthImpl(value));
 						}
 						return currentList;
@@ -279,19 +279,19 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
-			String to = getAttribute("to");
-			String by = getAttribute("by");
+			final String to = getAttribute("to");
+			final String by = getAttribute("by");
 
 			if (from.length() > 0 && to.length() > 0) { // is a from-to anim
-				SVGLengthList fromLengthList = makeLengthList(from);
-				SVGLengthList toLengthList = makeLengthList(to);
+				final SVGLengthList fromLengthList = makeLengthList(from);
+				final SVGLengthList toLengthList = makeLengthList(to);
 				if (fromLengthList.getNumberOfItems() == toLengthList.getNumberOfItems()) {
-					SVGLengthList currentList = new SVGLengthListImpl();
-					int numItems = fromLengthList.getNumberOfItems();
+					final SVGLengthList currentList = new SVGLengthListImpl();
+					final int numItems = fromLengthList.getNumberOfItems();
 					for (int i = 0; i < numItems; i++) {
-						float fromValue = fromLengthList.getItem(i).getValue();
-						float toValue = toLengthList.getItem(i).getValue();
-						float value = fromValue + percentageComplete * (toValue - fromValue);
+						final float fromValue = fromLengthList.getItem(i).getValue();
+						final float toValue = toLengthList.getItem(i).getValue();
+						final float value = fromValue + percentageComplete * (toValue - fromValue);
 						currentList.appendItem(new SVGLengthImpl(value));
 					}
 					return currentList;
@@ -302,14 +302,14 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
 				// anim
-				SVGLengthList fromLengthList = makeLengthList(from);
-				SVGLengthList byLengthList = makeLengthList(by);
+				final SVGLengthList fromLengthList = makeLengthList(from);
+				final SVGLengthList byLengthList = makeLengthList(by);
 				if (fromLengthList.getNumberOfItems() == byLengthList.getNumberOfItems()) {
-					SVGLengthList currentList = new SVGLengthListImpl();
-					int numItems = fromLengthList.getNumberOfItems();
+					final SVGLengthList currentList = new SVGLengthListImpl();
+					final int numItems = fromLengthList.getNumberOfItems();
 					for (int i = 0; i < numItems; i++) {
-						float fromValue = fromLengthList.getItem(i).getValue();
-						float byValue = byLengthList.getItem(i).getValue();
+						final float fromValue = fromLengthList.getItem(i).getValue();
+						final float byValue = byLengthList.getItem(i).getValue();
 						currentList.appendItem(new SVGLengthImpl(fromValue + percentageComplete * byValue));
 					}
 					return currentList;
@@ -322,11 +322,11 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 		return null;
 	}
 
-	private SVGLengthList makeLengthList(String lengthListString) {
-		SVGLengthListImpl lengthList = new SVGLengthListImpl();
-		StringTokenizer st = new StringTokenizer(lengthListString, " ,");
+	private SVGLengthList makeLengthList(final String lengthListString) {
+		final SVGLengthListImpl lengthList = new SVGLengthListImpl();
+		final StringTokenizer st = new StringTokenizer(lengthListString, " ,");
 		while (st.hasMoreTokens()) {
-			SVGLengthImpl length = new SVGLengthImpl(st.nextToken());
+			final SVGLengthImpl length = new SVGLengthImpl(st.nextToken());
 			lengthList.appendItem(length);
 		}
 		return lengthList;
@@ -334,26 +334,26 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 	private Boolean getCurrentBooleanValue() {
 
-		float currentTime = getCurrentTime();
-		float startTime = getStartTime();
+		final float currentTime = getCurrentTime();
+		final float startTime = getStartTime();
 		float duration = getSimpleDuration();
 		if (duration == -1) {
-			float endTime = getEndTime();
+			final float endTime = getEndTime();
 			if (endTime != -1) {
 				duration = endTime - startTime;
 			}
 		}
-		float numRepeats = getNumRepeats(duration);
-		boolean repeatForever = getRepeatForever();
+		final float numRepeats = getNumRepeats(duration);
+		final boolean repeatForever = getRepeatForever();
 
-		float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
+		final float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
 		if (percentageComplete < 0) {
 			return null; // indicates to use the baseVal
 		}
 
 		if (getAttribute("values").length() > 0) {
 
-			String values = getAttribute("values");
+			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
 			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
@@ -379,7 +379,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			}
 
 			if (beforeBool != null && afterBool != null) {
-				float percentBetween = (percentageComplete - beforeTime) / (afterTime - beforeTime);
+				final float percentBetween = (percentageComplete - beforeTime) / (afterTime - beforeTime);
 				if (percentBetween < 1) {
 					return beforeBool;
 				} else {
@@ -392,19 +392,19 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 	private String getCurrentStringValue() {
 
-		float currentTime = getCurrentTime();
-		float startTime = getStartTime();
+		final float currentTime = getCurrentTime();
+		final float startTime = getStartTime();
 		float duration = getSimpleDuration();
 		if (duration == -1) {
-			float endTime = getEndTime();
+			final float endTime = getEndTime();
 			if (endTime != -1) {
 				duration = endTime - startTime;
 			}
 		}
-		float numRepeats = getNumRepeats(duration);
-		boolean repeatForever = getRepeatForever();
+		final float numRepeats = getNumRepeats(duration);
+		final boolean repeatForever = getRepeatForever();
 
-		float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
+		final float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
 		if (percentageComplete < 0) {
 			return null; // indicates to use the baseVal
 		}
@@ -414,7 +414,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
-			String to = getAttribute("to");
+			final String to = getAttribute("to");
 			if (!finished) {
 				return from;
 			} else {
@@ -423,7 +423,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 		} else if (getAttribute("values").length() > 0) {
 
-			String values = getAttribute("values");
+			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
 			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
@@ -454,7 +454,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			}
 
 			if (beforeString != null && afterString != null) {
-				float percentBetween = (percentageComplete - beforeTime) / (afterTime - beforeTime);
+				final float percentBetween = (percentageComplete - beforeTime) / (afterTime - beforeTime);
 				if (percentBetween < 1) {
 					return beforeString;
 				} else {
@@ -467,26 +467,26 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 	private Float getCurrentNumberValue() {
 
-		float currentTime = getCurrentTime();
-		float startTime = getStartTime();
+		final float currentTime = getCurrentTime();
+		final float startTime = getStartTime();
 		float duration = getSimpleDuration();
 		if (duration == -1) {
-			float endTime = getEndTime();
+			final float endTime = getEndTime();
 			if (endTime != -1) {
 				duration = endTime - startTime;
 			}
 		}
-		float numRepeats = getNumRepeats(duration);
-		boolean repeatForever = getRepeatForever();
+		final float numRepeats = getNumRepeats(duration);
+		final boolean repeatForever = getRepeatForever();
 
-		float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
+		final float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
 		if (percentageComplete < 0) {
 			return null; // indicates to use the baseVal
 		}
 
 		if (getAttribute("values").length() > 0) {
 
-			String values = getAttribute("values");
+			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
 			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
@@ -555,22 +555,22 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
-			String to = getAttribute("to");
-			String by = getAttribute("by");
+			final String to = getAttribute("to");
+			final String by = getAttribute("by");
 
 			if (from.length() > 0 && to.length() > 0) { // is a from-to anim
-				Float fromNumber = new Float(from);
-				Float toNumber = new Float(to);
-				float fromValue = fromNumber;
-				float toValue = toNumber;
+				final Float fromNumber = new Float(from);
+				final Float toNumber = new Float(to);
+				final float fromValue = fromNumber;
+				final float toValue = toNumber;
 				return fromValue + percentageComplete * (toValue - fromValue);
 
 			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
 				// anim
-				Float fromNumber = new Float(from);
-				Float byNumber = new Float(by);
-				float fromValue = fromNumber;
-				float byValue = byNumber;
+				final Float fromNumber = new Float(from);
+				final Float byNumber = new Float(by);
+				final float fromValue = fromNumber;
+				final float byValue = byNumber;
 				return fromValue + percentageComplete * byValue;
 
 			}
@@ -580,26 +580,26 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 	private SVGNumberList getCurrentNumberListValue() {
 
-		float currentTime = getCurrentTime();
-		float startTime = getStartTime();
+		final float currentTime = getCurrentTime();
+		final float startTime = getStartTime();
 		float duration = getSimpleDuration();
 		if (duration == -1) {
-			float endTime = getEndTime();
+			final float endTime = getEndTime();
 			if (endTime != -1) {
 				duration = endTime - startTime;
 			}
 		}
-		float numRepeats = getNumRepeats(duration);
-		boolean repeatForever = getRepeatForever();
+		final float numRepeats = getNumRepeats(duration);
+		final boolean repeatForever = getRepeatForever();
 
-		float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
+		final float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
 		if (percentageComplete < 0) {
 			return null; // indicates to use the baseVal
 		}
 
 		if (getAttribute("values").length() > 0) {
 
-			String values = getAttribute("values");
+			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
 			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
@@ -639,12 +639,12 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 							// adjust the percentBetween by the spline value
 							percentBetween = getSplineValueAt(splineIndex, percentBetween);
 						}
-						SVGNumberList currentList = new SVGNumberListImpl();
-						int numItems = beforeNumberList.getNumberOfItems();
+						final SVGNumberList currentList = new SVGNumberListImpl();
+						final int numItems = beforeNumberList.getNumberOfItems();
 						for (int i = 0; i < numItems; i++) {
-							float beforeValue = beforeNumberList.getItem(i).getValue();
-							float afterValue = afterNumberList.getItem(i).getValue();
-							float value = beforeValue + percentBetween * (afterValue - beforeValue);
+							final float beforeValue = beforeNumberList.getItem(i).getValue();
+							final float afterValue = afterNumberList.getItem(i).getValue();
+							final float value = beforeValue + percentBetween * (afterValue - beforeValue);
 							currentList.appendItem(new SVGNumberImpl(value));
 						}
 						return currentList;
@@ -670,19 +670,19 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
-			String to = getAttribute("to");
-			String by = getAttribute("by");
+			final String to = getAttribute("to");
+			final String by = getAttribute("by");
 
 			if (from.length() > 0 && to.length() > 0) { // is a from-to anim
-				SVGNumberList fromNumberList = new SVGNumberListImpl(from);
-				SVGNumberList toNumberList = new SVGNumberListImpl(to);
+				final SVGNumberList fromNumberList = new SVGNumberListImpl(from);
+				final SVGNumberList toNumberList = new SVGNumberListImpl(to);
 				if (fromNumberList.getNumberOfItems() == toNumberList.getNumberOfItems()) {
-					SVGNumberList currentList = new SVGNumberListImpl();
-					int numItems = fromNumberList.getNumberOfItems();
+					final SVGNumberList currentList = new SVGNumberListImpl();
+					final int numItems = fromNumberList.getNumberOfItems();
 					for (int i = 0; i < numItems; i++) {
-						float fromValue = fromNumberList.getItem(i).getValue();
-						float toValue = toNumberList.getItem(i).getValue();
-						float value = fromValue + percentageComplete * (toValue - fromValue);
+						final float fromValue = fromNumberList.getItem(i).getValue();
+						final float toValue = toNumberList.getItem(i).getValue();
+						final float value = fromValue + percentageComplete * (toValue - fromValue);
 						currentList.appendItem(new SVGNumberImpl(value));
 					}
 					return currentList;
@@ -693,15 +693,15 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
 				// anim
-				SVGNumberList fromNumberList = new SVGNumberListImpl(from);
-				SVGNumberList byNumberList = new SVGNumberListImpl(by);
+				final SVGNumberList fromNumberList = new SVGNumberListImpl(from);
+				final SVGNumberList byNumberList = new SVGNumberListImpl(by);
 				if (fromNumberList.getNumberOfItems() == byNumberList.getNumberOfItems()) {
-					SVGNumberList currentList = new SVGNumberListImpl();
-					int numItems = fromNumberList.getNumberOfItems();
+					final SVGNumberList currentList = new SVGNumberListImpl();
+					final int numItems = fromNumberList.getNumberOfItems();
 					for (int i = 0; i < numItems; i++) {
-						float fromValue = fromNumberList.getItem(i).getValue();
-						float byValue = byNumberList.getItem(i).getValue();
-						float value = fromValue + percentageComplete * byValue;
+						final float fromValue = fromNumberList.getItem(i).getValue();
+						final float byValue = byNumberList.getItem(i).getValue();
+						final float value = fromValue + percentageComplete * byValue;
 						currentList.appendItem(new SVGNumberImpl(value));
 					}
 					return currentList;
@@ -716,26 +716,26 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 
 	private SVGAngle getCurrentAngleValue() {
 
-		float currentTime = getCurrentTime();
-		float startTime = getStartTime();
+		final float currentTime = getCurrentTime();
+		final float startTime = getStartTime();
 		float duration = getSimpleDuration();
 		if (duration == -1) {
-			float endTime = getEndTime();
+			final float endTime = getEndTime();
 			if (endTime != -1) {
 				duration = endTime - startTime;
 			}
 		}
-		float numRepeats = getNumRepeats(duration);
-		boolean repeatForever = getRepeatForever();
+		final float numRepeats = getNumRepeats(duration);
+		final boolean repeatForever = getRepeatForever();
 
-		float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
+		final float percentageComplete = checkStatus(currentTime, startTime, duration, numRepeats, repeatForever);
 		if (percentageComplete < 0) {
 			return null; // indicates to use the baseVal
 		}
 
 		if (getAttribute("values").length() > 0) {
 
-			String values = getAttribute("values");
+			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
 			if (Strings.isCssBlank(calcMode)) {
 				calcMode = "linear"; // set to default linear
@@ -772,7 +772,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				switch (calcMode) {
 					case "linear":
 					case "paced": {
-						float angleVal = beforeAngle.getValue()
+						final float angleVal = beforeAngle.getValue()
 								+ percentBetween * (afterAngle.getValue() - beforeAngle.getValue());
 						return new SVGAngleImpl(angleVal);
 
@@ -787,7 +787,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 					case "spline": {
 						// adjust the percentBetween by the spline value
 						percentBetween = getSplineValueAt(splineIndex, percentBetween);
-						float angleVal = beforeAngle.getValue()
+						final float angleVal = beforeAngle.getValue()
 								+ percentBetween * (afterAngle.getValue() - beforeAngle.getValue());
 						return new SVGAngleImpl(angleVal);
 					}
@@ -802,21 +802,21 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
-			String to = getAttribute("to");
-			String by = getAttribute("by");
+			final String to = getAttribute("to");
+			final String by = getAttribute("by");
 
 			if (from.length() > 0 && to.length() > 0) { // is a from-to anim
-				SVGAngleImpl fromAngle = new SVGAngleImpl(from);
-				SVGAngleImpl toAngle = new SVGAngleImpl(to);
-				float fromValue = fromAngle.getValue();
-				float toValue = toAngle.getValue();
+				final SVGAngleImpl fromAngle = new SVGAngleImpl(from);
+				final SVGAngleImpl toAngle = new SVGAngleImpl(to);
+				final float fromValue = fromAngle.getValue();
+				final float toValue = toAngle.getValue();
 				return new SVGAngleImpl(fromValue + percentageComplete * (toValue - fromValue));
 
 			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
-				SVGAngleImpl fromAngle = new SVGAngleImpl(from);
-				SVGAngleImpl byAngle = new SVGAngleImpl(by);
-				float fromValue = fromAngle.getValue();
-				float byValue = byAngle.getValue();
+				final SVGAngleImpl fromAngle = new SVGAngleImpl(from);
+				final SVGAngleImpl byAngle = new SVGAngleImpl(by);
+				final float fromValue = fromAngle.getValue();
+				final float byValue = byAngle.getValue();
 				return new SVGAngleImpl(fromValue + percentageComplete * byValue);
 			}
 		}

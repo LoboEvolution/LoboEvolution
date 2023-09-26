@@ -50,17 +50,17 @@ public class OverlayComponent extends JComponent {
 	 * @param overlay a {@link org.loboevolution.img.Overlay} object.
 	 * @param image a {@link org.loboevolution.img.ImageComponent} object.
 	 */
-	public OverlayComponent(Overlay overlay, ImageComponent image) {
+	public OverlayComponent(final Overlay overlay, final ImageComponent image) {
 		this.overlay = overlay;
 		this.theImage = image;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintComponent(Graphics g) {
-		BufferedImage image = theImage.getImage();
+	protected void paintComponent(final Graphics g) {
+		final BufferedImage image = theImage.getImage();
 		if (image != null) {
-			Graphics2D gg = (Graphics2D) g.create();
+			final Graphics2D gg = (Graphics2D) g.create();
 			overlay.paint(gg, image, theImage.getImageTransform());
 			gg.dispose();
 		}
@@ -86,7 +86,7 @@ public class OverlayComponent extends JComponent {
 	 *
 	 * @param overlay the overlay to set
 	 */
-	public void setOverlay(Overlay overlay) {
+	public void setOverlay(final Overlay overlay) {
 		this.overlay = overlay;
 	}
 
@@ -104,7 +104,7 @@ public class OverlayComponent extends JComponent {
 	 *
 	 * @param theImage the theImage to set
 	 */
-	public void setTheImage(ImageComponent theImage) {
+	public void setTheImage(final ImageComponent theImage) {
 		this.theImage = theImage;
 	}
 }

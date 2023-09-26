@@ -53,7 +53,7 @@ public class FastScrollBarUI extends BaseScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected JButton createDecreaseButton(int orientation) {
+	protected JButton createDecreaseButton(final int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 			return super.createDecreaseButton(orientation);
 		} else {
@@ -73,7 +73,7 @@ public class FastScrollBarUI extends BaseScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+	protected void paintThumb(final Graphics g, final JComponent c, final Rectangle thumbBounds) {
 		if (!c.isEnabled()) {
 			return;
 		}
@@ -84,8 +84,8 @@ public class FastScrollBarUI extends BaseScrollBarUI {
 		if (!JTattooUtilities.isActive(c)) {
 			backColor = ColorHelper.brighter(backColor, 50);
 		}
-		Color frameColorHi = ColorHelper.brighter(backColor, 40);
-		Color frameColorLo = ColorHelper.darker(backColor, 30);
+		final Color frameColorHi = ColorHelper.brighter(backColor, 40);
+		final Color frameColorLo = ColorHelper.darker(backColor, 30);
 		g.setColor(backColor);
 		g.fillRect(1, 1, thumbBounds.width - 1, thumbBounds.height - 1);
 		g.setColor(frameColorLo);
@@ -98,7 +98,7 @@ public class FastScrollBarUI extends BaseScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+	protected void paintTrack(final Graphics g, final JComponent c, final Rectangle trackBounds) {
 		g.setColor(AbstractLookAndFeel.getControlColorLight());
 		g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
 	}

@@ -49,7 +49,7 @@ public class SourceViewerUI  extends AbstractToolsUI {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public SourceViewerUI(BrowserFrame frame) {
+    public SourceViewerUI(final BrowserFrame frame) {
         try {
             final ToolBar toolbar = frame.getToolbar();
             add(addTextArea(HttpNetwork.getSource(toolbar.getAddressBar().getText())));
@@ -58,7 +58,7 @@ public class SourceViewerUI  extends AbstractToolsUI {
         }
     }
 
-    private RTextScrollPane addTextArea(String text) {
+    private RTextScrollPane addTextArea(final String text) {
         final RSyntaxTextArea textArea = new RSyntaxTextArea();
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_HTML);
         textArea.setText(text);

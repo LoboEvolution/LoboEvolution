@@ -55,10 +55,10 @@ public class namespaceURI04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        String employeeNamespace;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final String employeeNamespace;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         testEmployee = (Element)elementList.item(3);

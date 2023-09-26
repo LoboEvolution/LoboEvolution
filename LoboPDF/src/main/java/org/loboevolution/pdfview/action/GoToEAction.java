@@ -60,7 +60,7 @@ public class GoToEAction extends PDFAction {
 	 * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public GoToEAction(PDFObject obj, PDFObject root) throws IOException {
+	public GoToEAction(final PDFObject obj, final PDFObject root) throws IOException {
 		super("GoToE");
 		// find the destination and parse it
 		this.destination = PdfObjectParseUtil.parseDestination("D", obj, root, true);
@@ -72,8 +72,8 @@ public class GoToEAction extends PDFAction {
 		this.newWindow = PdfObjectParseUtil.parseBooleanFromDict("NewWindow", obj, false);
 
 		// parse the target dictionary
-		PDFObject targetObj = obj.getDictRef("T");
-		ArrayList<GoToETarget> list = new ArrayList<>();
+		final PDFObject targetObj = obj.getDictRef("T");
+		final ArrayList<GoToETarget> list = new ArrayList<>();
 		this.target = parseTargetDistionary(targetObj, list);
 	}
 
@@ -85,7 +85,7 @@ public class GoToEAction extends PDFAction {
 	 * 					of this method will stop).
 	 * @throws IOException - in case a value can not be parsed 
 	 ************************************************************************/
-	private GoToETarget parseTargetDistionary(PDFObject targetObj, ArrayList<GoToETarget> list) throws IOException {
+	private GoToETarget parseTargetDistionary(final PDFObject targetObj, final ArrayList<GoToETarget> list) throws IOException {
 		GoToETarget target = null;
 		if (targetObj != null) {
 			target = new GoToETarget();
@@ -111,13 +111,13 @@ public class GoToEAction extends PDFAction {
 			target.setAnnotNo(annot);
 			
 			//find target dictionary and parse it
-			PDFObject subTargetObj = targetObj.getDictRef("T");
+			final PDFObject subTargetObj = targetObj.getDictRef("T");
 			if (subTargetObj != null) {
 				// call this method recursive, in case the target was not already contained in the 
 				// list (this is checked for not getting into an infinite loop)
 				if (!list.contains(target)) {
 					list.add(target);
-					GoToETarget subTargetDictionary = parseTargetDistionary(subTargetObj, list);
+					final GoToETarget subTargetDictionary = parseTargetDistionary(subTargetObj, list);
 					target.setTargetDictionary(subTargetDictionary);
 				}
 			}
@@ -138,7 +138,7 @@ public class GoToEAction extends PDFAction {
 	 * @param newWindow a {@link java.lang.Boolean} object.
 	 ***********************************************************************
 	 */
-	public GoToEAction(PDFDestination dest, String file, boolean newWindow) {
+	public GoToEAction(final PDFDestination dest, final String file, final boolean newWindow) {
 		super("GoToR");
 		this.file = file;
 		this.destination = dest;
@@ -216,7 +216,7 @@ public class GoToEAction extends PDFAction {
 		 * Relation between current document and the target. Can either be "P" or "C"
 		 * @param relation a {@link java.lang.String} object.
 		 ************************************************************************/
-		public void setRelation(String relation) {
+		public void setRelation(final String relation) {
 			this.relation = relation;
 		}
 
@@ -232,7 +232,7 @@ public class GoToEAction extends PDFAction {
 		 * The file name in the embedded files tree
 		 * @param nameInTree a {@link java.lang.String} object.
 		 ************************************************************************/
-		public void setNameInTree(String nameInTree) {
+		public void setNameInTree(final String nameInTree) {
 			this.nameInTree = nameInTree;
 		}
 
@@ -258,7 +258,7 @@ public class GoToEAction extends PDFAction {
 		 * 
 		 * @param pageNo a {@link java.lang.String} object.
 		 ************************************************************************/
-		public void setPageNo(String pageNo) {
+		public void setPageNo(final String pageNo) {
 			this.pageNo = pageNo;
 		}
 
@@ -274,7 +274,7 @@ public class GoToEAction extends PDFAction {
 		 * The index of the according annotation in the annotations array
 		 * @param annotNo a {@link java.lang.String} object.
 		 ************************************************************************/
-		public void setAnnotNo(String annotNo) {
+		public void setAnnotNo(final String annotNo) {
 			this.annotNo = annotNo;
 		}
 
@@ -292,7 +292,7 @@ public class GoToEAction extends PDFAction {
 		 * the current document is the target file containing the destination.
 		 * @param targetDictionary a {@link GoToETarget} object.
 		 ************************************************************************/
-		public void setTargetDictionary(GoToETarget targetDictionary) {
+		public void setTargetDictionary(final GoToETarget targetDictionary) {
 			this.targetDictionary = targetDictionary;
 		}
 
@@ -304,7 +304,7 @@ public class GoToEAction extends PDFAction {
 			if (super.equals(obj)) {
 				return true;
 			}			
-			GoToETarget that = (GoToETarget)obj;
+			final GoToETarget that = (GoToETarget)obj;
 			// compare the strng values, as the attributes may also be null
 			return String.valueOf(this.annotNo).equals(String.valueOf(that.annotNo))
 				&& String.valueOf(this.nameInTree).equals(String.valueOf(that.nameInTree))

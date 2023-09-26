@@ -66,12 +66,12 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 			focusListener = new FocusListener() {
 
 				@Override
-				public void focusGained(FocusEvent e) {
+				public void focusGained(final FocusEvent e) {
 					if (getComponent() != null) {
 						orgBorder = getComponent().getBorder();
-						LookAndFeel laf = UIManager.getLookAndFeel();
+						final LookAndFeel laf = UIManager.getLookAndFeel();
 						if (laf instanceof AbstractLookAndFeel && orgBorder instanceof UIResource) {
-							Border focusBorder = ((AbstractLookAndFeel) laf).getBorderFactory().getFocusFrameBorder();
+							final Border focusBorder = ((AbstractLookAndFeel) laf).getBorderFactory().getFocusFrameBorder();
 							getComponent().setBorder(focusBorder);
 						}
 						getComponent().invalidate();
@@ -80,7 +80,7 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 				}
 
 				@Override
-				public void focusLost(FocusEvent e) {
+				public void focusLost(final FocusEvent e) {
 					if (getComponent() != null) {
 						if (orgBorder instanceof UIResource) {
 							getComponent().setBorder(orgBorder);
@@ -96,7 +96,7 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g) {
+	protected void paintBackground(final Graphics g) {
 		g.setColor(getComponent().getBackground());
 		if (AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
 			if (getComponent().hasFocus() && getComponent().isEditable()) {
@@ -108,8 +108,8 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintSafely(Graphics g) {
-		Graphics2D g2D = (Graphics2D) g;
+	protected void paintSafely(final Graphics g) {
+		final Graphics2D g2D = (Graphics2D) g;
 		Object savedRenderingHint = null;
 		if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 			savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);

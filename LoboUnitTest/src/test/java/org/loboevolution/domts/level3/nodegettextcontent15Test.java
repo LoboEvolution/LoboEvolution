@@ -47,14 +47,14 @@ import static org.junit.Assert.assertEquals;
 public class nodegettextcontent15Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        Text txt;
-        Comment comment;
-        EntityReference entRef;
-        CDATASection cdata;
-        ProcessingInstruction pi;
-        String textContent;
+        final Document doc;
+        final Element elem;
+        final Text txt;
+        final Comment comment;
+        final EntityReference entRef;
+        final CDATASection cdata;
+        final ProcessingInstruction pi;
+        final String textContent;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/DOM/Test", "dom3:elem");

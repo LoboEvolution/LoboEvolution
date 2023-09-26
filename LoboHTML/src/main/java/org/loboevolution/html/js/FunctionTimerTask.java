@@ -52,7 +52,7 @@ class FunctionTimerTask extends WeakWindowTask {
 	 * @param function a {@link org.mozilla.javascript.Function} object.
 	 * @param removeTask a boolean.
 	 */
-	public FunctionTimerTask(WindowImpl window, Integer timeIDInt, Function function, boolean removeTask) {
+	public FunctionTimerTask(final WindowImpl window, final Integer timeIDInt, final Function function, final boolean removeTask) {
 		super(window);
 		this.timeIDInt = timeIDInt;
 		this.functionRef = new WeakReference<>(function);

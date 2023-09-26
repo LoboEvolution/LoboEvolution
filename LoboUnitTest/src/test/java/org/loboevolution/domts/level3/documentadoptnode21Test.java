@@ -55,15 +55,15 @@ public class documentadoptnode21Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element attrOwnerElem;
-        Element element;
-        Attr attr;
-        HTMLCollection childList;
-        Node adoptedTitle;
-        String nodeName;
-        int nodeType;
-        String nodeValue;
+        final Document doc;
+        final Element attrOwnerElem;
+        final Element element;
+        final Attr attr;
+        final HTMLCollection childList;
+        final Node adoptedTitle;
+        final String nodeName;
+        final int nodeType;
+        final String nodeValue;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("acronym");
         element = (Element) childList.item(0);

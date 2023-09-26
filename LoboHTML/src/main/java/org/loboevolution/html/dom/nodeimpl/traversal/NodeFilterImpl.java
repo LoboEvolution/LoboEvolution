@@ -172,7 +172,7 @@ public class NodeFilterImpl implements NodeFilter {
     }
 
     @Override
-    public short acceptNode(Node node) {
+    public short acceptNode(final Node node) {
         return 0;
     }
 }

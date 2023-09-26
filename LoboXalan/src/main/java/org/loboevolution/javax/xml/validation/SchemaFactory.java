@@ -28,78 +28,68 @@ package org.loboevolution.javax.xml.validation;
 
 import java.io.File;
 import java.net.URL;
+
 import org.loboevolution.javax.xml.transform.Source;
 import org.xml.sax.*;
-public abstract class SchemaFactory
-{
 
-    protected SchemaFactory()
-    {
+public abstract class SchemaFactory {
+
+    protected SchemaFactory() {
         throw new RuntimeException("Stub!");
     }
 
-    public static SchemaFactory newInstance(String schemaLanguage)
-    {
+    public static SchemaFactory newInstance(final String schemaLanguage) {
         throw new RuntimeException("Stub!");
     }
 
-    public static SchemaFactory newInstance(String schemaLanguage, String factoryClassName, ClassLoader classLoader)
-    {
+    public static SchemaFactory newInstance(final String schemaLanguage, final String factoryClassName, final ClassLoader classLoader) {
         throw new RuntimeException("Stub!");
     }
 
-    public abstract boolean isSchemaLanguageSupported(String s);
+    public abstract boolean isSchemaLanguageSupported(final String s);
 
-    public boolean getFeature(String name)
-        throws SAXNotRecognizedException, SAXNotSupportedException
-    {
+    public boolean getFeature(final String name)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         throw new RuntimeException("Stub!");
     }
 
-    public void setFeature(String name, boolean value)
-        throws SAXNotRecognizedException, SAXNotSupportedException
-    {
+    public void setFeature(final String name, final boolean value)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         throw new RuntimeException("Stub!");
     }
 
-    public void setProperty(String name, Object object)
-        throws SAXNotRecognizedException, SAXNotSupportedException
-    {
+    public void setProperty(final String name, final Object object)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         throw new RuntimeException("Stub!");
     }
 
-    public Object getProperty(String name)
-        throws SAXNotRecognizedException, SAXNotSupportedException
-    {
+    public Object getProperty(final String name)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         throw new RuntimeException("Stub!");
     }
-
-    public abstract void setErrorHandler(ErrorHandler errorhandler);
 
     public abstract ErrorHandler getErrorHandler();
 
+    public abstract void setErrorHandler(ErrorHandler errorhandler);
 
-    public Schema newSchema(Source schema)
-        throws SAXException
-    {
+    public Schema newSchema(final Source schema)
+            throws SAXException {
         throw new RuntimeException("Stub!");
     }
 
-    public Schema newSchema(File schema)
-        throws SAXException
-    {
+    public Schema newSchema(final File schema)
+            throws SAXException {
         throw new RuntimeException("Stub!");
     }
 
-    public Schema newSchema(URL schema)
-        throws SAXException
-    {
+    public Schema newSchema(final URL schema)
+            throws SAXException {
         throw new RuntimeException("Stub!");
     }
 
     public abstract Schema newSchema(Source asource[])
-        throws SAXException;
+            throws SAXException;
 
     public abstract Schema newSchema()
-        throws SAXException;
+            throws SAXException;
 }

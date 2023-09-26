@@ -49,7 +49,7 @@ public class RemoveAction<T> extends AbstractAction {
 	 *
 	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemListControl} object.
 	 */
-	public RemoveAction(ItemListControl<T> item) {
+	public RemoveAction(final ItemListControl<T> item) {
 		this.item = item;
 	}
 

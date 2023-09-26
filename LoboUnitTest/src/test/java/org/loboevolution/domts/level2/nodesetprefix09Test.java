@@ -53,9 +53,9 @@ public class nodesetprefix09Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        String value = "#$%&'()@";
-        Element element;
+        final Document doc;
+        final String value = "#$%&'()@";
+        final Element element;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test/L2", "dom:elem");
 
@@ -63,7 +63,7 @@ public class nodesetprefix09Test extends LoboUnitTest {
             boolean success = false;
             try {
                 element.setPrefix(value);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

@@ -73,8 +73,8 @@ public class SmartToolBarUI extends AbstractToolBarUI {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g, final JComponent c) {
-		int w = c.getWidth();
-		int h = c.getHeight();
+		final int w = c.getWidth();
+		final int h = c.getHeight();
 		JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getToolBarColors(), 0, 0, w, h - 2);
 		if (toolBar.getOrientation() == SwingConstants.HORIZONTAL && isToolbarDecorated() && isToolBarUnderMenubar()) {
 			g.setColor(Color.white);

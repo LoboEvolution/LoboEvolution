@@ -65,22 +65,18 @@ public class hc_namednodemapreturnlastitemTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        NamedNodeMap attributes;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final NamedNodeMap attributes;
         Node child;
         String nodeName;
-        List<String> htmlExpected = new ArrayList<>();
-        htmlExpected.add("title");
-        htmlExpected.add("class");
-
-        List<String> expected = new ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("title");
         expected.add("class");
         expected.add("dir");
 
-        List<String> actual = new ArrayList<>();
+        final List<String> actual = new ArrayList<>();
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");

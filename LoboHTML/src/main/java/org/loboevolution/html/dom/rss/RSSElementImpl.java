@@ -54,10 +54,10 @@ public class RSSElementImpl extends RSSElement {
 	 */
 	public void draw(final Graphics2D graphics) {
 		if (hasChildNodes()) {
-			NodeListImpl children = (NodeListImpl)getChildNodes();
+			final NodeListImpl children = (NodeListImpl)getChildNodes();
 			children.forEach(child -> {
 				if (child instanceof RSSChanelElementImpl) {
-					RSSChanelElementImpl channel = (RSSChanelElementImpl) child;
+					final RSSChanelElementImpl channel = (RSSChanelElementImpl) child;
 					channel.draw(graphics);
 				}
 			});

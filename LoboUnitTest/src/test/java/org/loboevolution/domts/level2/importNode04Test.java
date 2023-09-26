@@ -58,14 +58,14 @@ public class importNode04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        DocumentFragment docFrag;
-        Comment comment;
+        final Document doc;
+        final Document aNewDoc;
+        final DocumentFragment docFrag;
+        final Comment comment;
         Node aNode;
-        NodeList children;
-        Node child;
-        String childValue;
+        final NodeList children;
+        final Node child;
+        final String childValue;
         doc = sampleXmlFile("staff.xml");
         aNewDoc = sampleXmlFile("staff.xml");
         docFrag = aNewDoc.createDocumentFragment();

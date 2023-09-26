@@ -64,7 +64,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @param codeSource a {@link java.net.URL} object.
 	 * @param scope a {@link org.mozilla.javascript.Scriptable} object.
 	 */
-	public XMLHttpRequest(UserAgentContext pcontext, java.net.URL codeSource, Scriptable scope) {
+	public XMLHttpRequest(final UserAgentContext pcontext, final java.net.URL codeSource, final Scriptable scope) {
 		this.request = pcontext.createHttpRequest();
 		this.pcontext = pcontext;
 		this.scope = scope;
@@ -86,7 +86,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 				try {
 					final Scriptable newScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(XMLHttpRequest.this, this.scope);
 					f.call(ctx, newScope, newScope, new Object[0]);
-				} catch (MissingResourceException mre) {
+				} catch (final MissingResourceException mre) {
 					logger.log(Level.WARNING, mre.getMessage());
 				} finally {
 					Context.exit();
@@ -106,7 +106,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 		return this.request.getAllResponseHeaders();
 	}
 
-	private URL getFullURL(String relativeUrl) throws Exception {
+	private URL getFullURL(final String relativeUrl) throws Exception {
 		return Urls.createURL(this.codeSource, relativeUrl);
 	}
 
@@ -145,7 +145,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @param headerName a {@link java.lang.String} object.
 	 * @return a {@link java.util.List} object.
 	 */
-	public List<String> getResponseHeader(String headerName) {
+	public List<String> getResponseHeader(final String headerName) {
 		return this.request.getResponseHeader(headerName);
 	}
 
@@ -192,7 +192,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @param url a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, String url) throws Exception {
+	public void open(final String method, final String url) throws Exception {
 		this.request.open(method, getFullURL(url));
 	}
 
@@ -204,7 +204,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @param asyncFlag a boolean.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, String url, boolean asyncFlag) throws Exception {
+	public void open(final String method, final String url, final boolean asyncFlag) throws Exception {
 		this.request.open(method, getFullURL(url), asyncFlag);
 	}
 
@@ -217,7 +217,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @param userName a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, String url, boolean asyncFlag, String userName) throws Exception {
+	public void open(final String method, final String url, final boolean asyncFlag, final String userName) throws Exception {
 		this.request.open(method, getFullURL(url), asyncFlag, userName);
 	}
 
@@ -231,7 +231,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @param password a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, String url, boolean asyncFlag, String userName, String password) throws Exception {
+	public void open(final String method, final String url, final boolean asyncFlag, final String userName, final String password) throws Exception {
 		this.request.open(method, getFullURL(url), asyncFlag, userName, password);
 	}
 
@@ -241,7 +241,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @param content a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void send(String content) throws Exception {
+	public void send(final String content) throws Exception {
 		this.request.send(content, timeout);
 	}
 	
@@ -273,7 +273,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 		return timeout;
 	}
 
-	public void setTimeout(int timeout) {
+	public void setTimeout(final int timeout) {
 		this.timeout = timeout;
 	}
 }

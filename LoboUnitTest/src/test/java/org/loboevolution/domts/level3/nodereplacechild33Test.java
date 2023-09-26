@@ -46,14 +46,14 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild33Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
-        Element elem;
-        Attr parent;
-        Node oldChild;
-        EntityReference newChild;
-        Node replaced;
-        String nodeValue;
+        final Document doc;
+        final HTMLCollection childList;
+        final Element elem;
+        final Attr parent;
+        final Node oldChild;
+        final EntityReference newChild;
+        final Node replaced;
+        final String nodeValue;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createEntityReference("delta");
         childList = doc.getElementsByTagName("p");

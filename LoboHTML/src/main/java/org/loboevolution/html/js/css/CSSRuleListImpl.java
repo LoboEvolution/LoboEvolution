@@ -38,16 +38,16 @@ public class CSSRuleListImpl extends AbstractList<CSSStyleRule>  implements CSSR
 
     private final org.htmlunit.cssparser.dom.CSSRuleListImpl cssRuleList;
 
-    public CSSRuleListImpl(org.htmlunit.cssparser.dom.CSSRuleListImpl cssRuleList) {
+    public CSSRuleListImpl(final org.htmlunit.cssparser.dom.CSSRuleListImpl cssRuleList) {
         this.cssRuleList = cssRuleList;
     }
 
     /** {@inheritDoc} */
     @Override
-    public CSSStyleRule item(int index) {
+    public CSSStyleRule item(final int index) {
         try{
             return this.get(index);
-        } catch (Exception e){
+        } catch (final Exception e){
             return null;
         }
     }
@@ -62,7 +62,7 @@ public class CSSRuleListImpl extends AbstractList<CSSStyleRule>  implements CSSR
      * <p> addStyleRule. </p>
      * @param newList a {@link org.htmlunit.cssparser.dom.CSSRuleListImpl} object.
      */
-    public void addStyleRule(org.htmlunit.cssparser.dom.CSSRuleListImpl newList){
+    public void addStyleRule(final org.htmlunit.cssparser.dom.CSSRuleListImpl newList){
         List<AbstractCSSRuleImpl> ruls =  null;
         if (newList != null) {
             clear();

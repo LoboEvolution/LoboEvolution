@@ -53,16 +53,16 @@ public class documentnormalizedocument03Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element elem;
-        CDATASection newCdata;
-        CDATASection cdata;
-        Node text;
+        final CDATASection newCdata;
+        final CDATASection cdata;
+        final Node text;
         String nodeName;
-        String nodeValue;
-        DOMConfiguration domConfig;
+        final String nodeValue;
+        final DOMConfiguration domConfig;
         HTMLCollection pList;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");

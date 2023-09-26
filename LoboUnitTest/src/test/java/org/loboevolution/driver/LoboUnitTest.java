@@ -26,18 +26,22 @@
 
 package org.loboevolution.driver;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -45,7 +49,9 @@ import static org.junit.Assert.assertNotNull;
  */
 public class LoboUnitTest extends LoboWebDriver {
 
-    public final String URL_SECOND = "http://www.example.com/";
+
+    /** The Constant logger. */
+     private final Logger logger = Logger.getLogger(LoboWebDriver.class.getName());
 
     /**
      * <p>checkSelectorsTest.</p>
@@ -55,31 +61,34 @@ public class LoboUnitTest extends LoboWebDriver {
      * @param result2 a {@link java.lang.String} object.
      */
     public void checkSelectorsTest(final String html, final String result1, final String result2) {
-        HTMLDocumentImpl doc = loadHtml(html);
-        HTMLElementImpl div = (HTMLElementImpl)doc.getElementById("myId");
-        HTMLElementImpl div2 = (HTMLElementImpl)doc.getElementById("myId2");
-        ComputedCSSStyleDeclaration computedStyle = div.getComputedStyle();
-        ComputedCSSStyleDeclaration computedStyle2 = div2.getComputedStyle();
+        final HTMLDocumentImpl doc = loadHtml(html);
+        final HTMLElementImpl div = (HTMLElementImpl) doc.getElementById("myId");
+        final HTMLElementImpl div2 = (HTMLElementImpl) doc.getElementById("myId2");
+        final ComputedCSSStyleDeclaration computedStyle = div.getComputedStyle();
+        final ComputedCSSStyleDeclaration computedStyle2 = div2.getComputedStyle();
         assertEquals(result1, computedStyle.getColor());
         assertEquals(result2, computedStyle2.getColor());
     }
 
     /**
      * <p>sampleHtmlFile.</p>.
+     * @return a {@link org.loboevolution.html.node.Document} object.
      */
     public static Document sampleHtmlFile() {
         final String url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html").toString();
-        DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/html/htmlsample.html"), url);
+        final DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/html/htmlsample.html"), url);
         doc.setTest(true);
         return doc;
     }
 
     /**
      * <p>sampleHtmlFile.</p>.
+     * @param fileName a {@link java.lang.String} object.
+     * @return a {@link org.loboevolution.html.node.Document} object.
      */
-    public static Document sampleXmlFile(String fileName) {
-        final String url = LoboWebDriver.class.getResource("/org/lobo/xml/" + fileName).toString();
-        DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/xml/" + fileName), url);
+    public static Document sampleXmlFile(final String fileName) {
+        final String url = Objects.requireNonNull(LoboWebDriver.class.getResource("/org/lobo/xml/" + fileName)).toString();
+        final DocumentImpl doc = LoboWebDriver.loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/xml/" + fileName), url);
         doc.setTest(true);
         doc.setXml(true);
         return doc;
@@ -92,41 +101,53 @@ public class LoboUnitTest extends LoboWebDriver {
      * @param messages an array of {@link java.lang.String} objects.
      */
     public void checkHtmlAlert(final String html, final String[] messages) {
-    	Window window = null;
+        Window window = null;
         List<String> alerts = null;
 
         try {
-            HTMLDocumentImpl doc = loadHtml(html);
+            final HTMLDocumentImpl doc = loadHtml(html);
             window = doc.getDefaultView();
             alerts = messages != null ? Arrays.asList(messages) : null;
             assertEquals(alerts, window.getMsg());
-        } catch (AssertionError e) {
+        } catch (final AssertionError e) {
             throw new AssertionError("Result expected: " +  alerts + " Result: " + window.getMsg());
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ex.printStackTrace();
             logger.severe(ex.getMessage());
         }
     }
 
-    public void assertURIEquals(
-            String assertID, String scheme, String path, String host,
-            String file, String name, String query, String fragment, Boolean isAbsolute, String actual) {
+    /**
+     * <p>assertURIEquals.</p>
+     * @param uriEquals a {@link org.loboevolution.driver.LoboUnitTest.URIEquals} object.
+     */
+    public void assertURIEquals(final URIEquals uriEquals) {
 
-        assertNotNull(assertID, actual);
+        assertNotNull(uriEquals.getAssertID(), uriEquals.getActual());
 
-        String uri = actual;
+        String uri = uriEquals.getActual();
+        final String actual = uriEquals.getActual();
+        final String fragment = uriEquals.getFragment();
+        final String assertID = uriEquals.getAssertID();
+        final String query = uriEquals.getQuery();
+        final String scheme = uriEquals.getScheme();
+        final String path = uriEquals.getPath();
+        final String host = uriEquals.getHost();
+        final String file = uriEquals.getFile();
+        final String name = uriEquals.getName();
+        final Boolean isAbsolute = uriEquals.getAbsolute();
 
-        int lastPound = actual.lastIndexOf("#");
+        final int lastPound = actual.lastIndexOf('#');
         String actualFragment = "";
         if (lastPound != -1) {
             uri = actual.substring(0, lastPound);
             actualFragment = actual.substring(lastPound + 1);
         }
-        if (fragment != null) {
+        if (Strings.isNotBlank(fragment)) {
             assertEquals(assertID, fragment, actualFragment);
 
         }
-        int lastQuestion = uri.lastIndexOf("?");
+        final int lastQuestion = uri.lastIndexOf('?');
         String actualQuery = "";
         if (lastQuestion != -1) {
             uri = actual.substring(0, lastQuestion);
@@ -136,8 +157,8 @@ public class LoboUnitTest extends LoboWebDriver {
             assertEquals(assertID, query, actualQuery);
 
         }
-        int firstColon = uri.indexOf(":");
-        int firstSlash = uri.indexOf("/");
+        final int firstColon = uri.indexOf(':');
+        final int firstSlash = uri.indexOf('/');
         String actualPath = uri;
         String actualScheme = "";
         if (firstColon != -1 && firstColon < firstSlash) {
@@ -145,18 +166,18 @@ public class LoboUnitTest extends LoboWebDriver {
             actualPath = uri.substring(firstColon + 1);
         }
 
-        if (scheme != null) {
+        if (Strings.isNotBlank(scheme)) {
             assertEquals(assertID, scheme, actualScheme);
         }
 
-        if (path != null) {
+        if (Strings.isNotBlank(path)) {
             assertEquals(assertID, path, actualPath);
         }
 
-        if (host != null) {
+        if (Strings.isNotBlank(host)) {
             String actualHost = "";
             if (actualPath.startsWith("//")) {
-                int termSlash = actualPath.indexOf("/", 2);
+                final int termSlash = actualPath.indexOf("/", 2);
                 actualHost = actualPath.substring(0, termSlash);
             }
             assertEquals(assertID, host, actualHost);
@@ -164,7 +185,7 @@ public class LoboUnitTest extends LoboWebDriver {
 
         String actualFile = actualPath;
         if (file != null || name != null) {
-            int finalSlash = actualPath.lastIndexOf("/");
+            final int finalSlash = actualPath.lastIndexOf("/");
             if (finalSlash != -1) {
                 actualFile = actualPath.substring(finalSlash + 1);
             }
@@ -175,7 +196,7 @@ public class LoboUnitTest extends LoboWebDriver {
 
         if (name != null) {
             String actualName = actualFile;
-            int finalPeriod = actualFile.lastIndexOf(".");
+            final int finalPeriod = actualFile.lastIndexOf(".");
             if (finalPeriod != -1) {
                 actualName = actualFile.substring(0, finalPeriod);
             }
@@ -185,8 +206,53 @@ public class LoboUnitTest extends LoboWebDriver {
         if (isAbsolute != null) {
             assertEquals(
                     assertID,
-                    isAbsolute.booleanValue(),
+                    isAbsolute,
                     actualPath.startsWith("/") || actualPath.startsWith("file:/"));
         }
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public class URIEquals {
+        /**
+         * <p>assertID.</p>
+         */
+        private String assertID;
+        /**
+         * <p>scheme.</p>
+         */
+        private String scheme;
+        /**
+         * <p>path.</p>
+         */
+        private String path;
+        /**
+         * <p>host.</p>
+         */
+        private String host;
+        /**
+         * <p>file.</p>
+         */
+        private String file;
+        /**
+         * <p>name.</p>
+         */
+        private String name;
+        /**
+         * <p>query.</p>
+         */
+        private String query;
+        /**
+         * <p>fragment.</p>
+         */
+        private String fragment;
+        /**
+         * <p>isAbsolute.</p>
+         */
+        private Boolean absolute;
+        /**
+         * <p>actual.</p>
+         */
+        private String actual;
     }
 }

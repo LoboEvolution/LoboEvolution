@@ -53,10 +53,10 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
+	protected Color[] getTabColors(final int tabIndex, final boolean isSelected, final boolean isRollover) {
 		Color[] colorArr = AbstractLookAndFeel.getTheme().getTabColors();
 		if (tabIndex >= 0 && tabIndex < tabPane.getTabCount()) {
-			Color backColor = tabPane.getBackgroundAt(tabIndex);
+			final Color backColor = tabPane.getBackgroundAt(tabIndex);
 			if (backColor instanceof UIResource) {
 				if (isSelected) {
 					colorArr = AbstractLookAndFeel.getTheme().getSelectedColors();
@@ -91,10 +91,10 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
-			boolean isSelected) {
+	protected void paintTabBackground(final Graphics g, final int tabPlacement, final int tabIndex, final int x, final int y, final int w, final int h,
+			final boolean isSelected) {
 		if (isTabOpaque() || isSelected) {
-			Color[] colorArr = getTabColors(tabIndex, isSelected, false);
+			final Color[] colorArr = getTabColors(tabIndex, isSelected, false);
 			g.setColor(colorArr[0]);
 			switch (tabPlacement) {
 			case TOP:

@@ -47,7 +47,7 @@ public class LocalWritableLineReader extends WritableLineReader {
 	 * @param reader a {@link java.io.LineNumberReader} object.
 	 * @param doc a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
-	public LocalWritableLineReader(HTMLDocumentImpl doc, LineNumberReader reader) {
+	public LocalWritableLineReader(final HTMLDocumentImpl doc, final LineNumberReader reader) {
 		super(reader);
 		this.doc = doc;
 	}
@@ -57,20 +57,20 @@ public class LocalWritableLineReader extends WritableLineReader {
 	 *
 	 * @param reader a {@link java.io.Reader} object.
 	 */
-	public LocalWritableLineReader(Reader reader) {
+	public LocalWritableLineReader(final Reader reader) {
 		super(reader);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void write(String text) throws IOException {
+	public void write(final String text) throws IOException {
 		super.write(text);
 		if ("".equals(text)) {
 			openBufferChanged(text);
 		}
 	}
 	
-	private void openBufferChanged(String text) {
+	private void openBufferChanged(final String text) {
 		final XHtmlParser parser = new XHtmlParser(doc.getUcontext(), doc, true);
 		final StringReader strReader = new StringReader(text);
 		try {

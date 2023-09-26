@@ -56,9 +56,9 @@ public class elementgetelementsbytagnamens05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        HTMLCollection elementList;
+        final Document doc;
+        final Element element;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getDocumentElement();
         elementList = element.getElementsByTagNameNS("http://www.altavista.com", "*");

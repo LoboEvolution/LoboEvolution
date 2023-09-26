@@ -46,8 +46,8 @@ import static org.junit.Assert.assertTrue;
 public class hasFeature03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation impl;
-        boolean state;
+        final DOMImplementation impl;
+        final boolean state;
         impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         state = impl.hasFeature("+cOrE", "3.0");
         assertTrue("hasPlusCore30", state);

@@ -43,7 +43,7 @@ public class EncryptionUnsupportedByProductException
      *
      * @param message a {@link java.lang.String} object.
      */
-    public EncryptionUnsupportedByProductException(String message) {
+    public EncryptionUnsupportedByProductException(final String message) {
         super(message);
     }
 }

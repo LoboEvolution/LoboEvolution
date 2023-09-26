@@ -57,7 +57,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 	 *
 	 * @param ic a {@link org.loboevolution.img.ImageComponent} object.
 	 */
-	public MouseEventTranslator(ImageComponent ic) {
+	public MouseEventTranslator(final ImageComponent ic) {
 		this.ic = ic;
 	}
 
@@ -66,21 +66,21 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 	 *
 	 * @param ic a {@link org.loboevolution.img.ImageComponent} object.
 	 */
-	protected void register(ImageComponent ic) {
+	protected void register(final ImageComponent ic) {
 		ic.addMouseListener(this);
 		ic.addMouseMotionListener(this);
 		ic.getPropertyChangeSupport().addPropertyChangeListener(this);
 		ic.addComponentListener(new ComponentAdapter() {
 
 			@Override
-			public void componentResized(ComponentEvent e) {
+			public void componentResized(final ComponentEvent e) {
 				correctionalFire();
 			}
 
 		});
 	}
 
-	private void handleMouseAt(Point position, MouseEvent event) {
+	private void handleMouseAt(Point position, final MouseEvent event) {
 		if (ic.getImage() == null) {
 			if (on) {
 				on = false;
@@ -113,7 +113,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 	public void mouseClicked(final MouseEvent e) {
 		if (ic.getImage() == null || !on)
 			return;
-		Point p = ic.pointToPixel(e.getPoint());
+		final Point p = ic.pointToPixel(e.getPoint());
 		if (p != null) {
 			fireMouseClickedAtPixel(p.x, p.y, e);
 		}
@@ -123,7 +123,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 	@Override
 	public void mouseEntered(final MouseEvent e) {
 		if (ic.getImage() != null) {
-			Point p = ic.pointToPixel(e.getPoint());
+			final Point p = ic.pointToPixel(e.getPoint());
 			if (p != null) {
 				on = true;
 				fireMouseEnter(p.x, p.y, e);
@@ -152,13 +152,13 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 	public void mouseDragged(final MouseEvent e) {
 		if (ic.getImage() == null)
 			return;
-		Point p = ic.pointToPixel(e.getPoint(), false);
+		final Point p = ic.pointToPixel(e.getPoint(), false);
 		fireMouseDrag(p.x, p.y, e);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(final PropertyChangeEvent evt) {
 		if ("image".equals(evt.getPropertyName()) || "resizeStrategy".equals(evt.getPropertyName())
 				|| (ic.getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM
 						&& "zoomFactor".equals(evt.getPropertyName()))) {
@@ -180,27 +180,27 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 		handleMouseAt(ic.getParent().getMousePosition(true), null);
 	}
 
-	private void fireMouseAtPixel(int x, int y, MouseEvent ev) {
+	private void fireMouseAtPixel(final int x, final int y, final MouseEvent ev) {
 		ImageMouseEvent e = null;
-		for (ImageMouseMotionListener imageMouseMoveListener : ic.getMoveListeners()) {
+		for (final ImageMouseMotionListener imageMouseMoveListener : ic.getMoveListeners()) {
 			if (e == null)
 				e = new ImageMouseEvent(ic.getViewer(), ic.getImage(), x, y, ev);
 			imageMouseMoveListener.mouseMoved(e);
 		}
 	}
 
-	private void fireMouseClickedAtPixel(int x, int y, MouseEvent ev) {
+	private void fireMouseClickedAtPixel(final int x, final int y, final MouseEvent ev) {
 		ImageMouseEvent e = null;
-		for (ImageMouseClickListener imageMouseClickListener : ic.getClickListeners()) {
+		for (final ImageMouseClickListener imageMouseClickListener : ic.getClickListeners()) {
 			if (e == null)
 				e = new ImageMouseEvent(ic.getViewer(), ic.getImage(), x, y, ev);
 			imageMouseClickListener.mouseClicked(e);
 		}
 	}
 
-	private void fireMouseEnter(int x, int y, MouseEvent ev) {
+	private void fireMouseEnter(final int x, final int y, final MouseEvent ev) {
 		ImageMouseEvent e = null;
-		for (ImageMouseMotionListener imageMouseMoveListener : ic.getMoveListeners()) {
+		for (final ImageMouseMotionListener imageMouseMoveListener : ic.getMoveListeners()) {
 			if (e == null)
 				e = new ImageMouseEvent(ic.getViewer(), ic.getImage(), x, y, ev);
 			imageMouseMoveListener.mouseEntered(e);
@@ -209,16 +209,16 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 
 	private void fireMouseExit() {
 		ImageMouseEvent e = null;
-		for (ImageMouseMotionListener imageMouseMoveListener : ic.getMoveListeners()) {
+		for (final ImageMouseMotionListener imageMouseMoveListener : ic.getMoveListeners()) {
 			if (e == null)
 				e = new ImageMouseEvent(ic.getViewer(), ic.getImage(), -1, -1, null);
 			imageMouseMoveListener.mouseExited(e);
 		}
 	}
 
-	private void fireMouseDrag(int x, int y, MouseEvent ev) {
+	private void fireMouseDrag(final int x, final int y, final MouseEvent ev) {
 		ImageMouseEvent e = null;
-		for (ImageMouseMotionListener imageMouseMoveListener : ic.getMoveListeners()) {
+		for (final ImageMouseMotionListener imageMouseMoveListener : ic.getMoveListeners()) {
 			if (e == null)
 				e = new ImageMouseEvent(ic.getViewer(), ic.getImage(), x, y, ev);
 			imageMouseMoveListener.mouseDragged(e);

@@ -67,7 +67,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	/** {@inheritDoc} */
 	@Override
-	protected void appendInnerTextImpl(StringBuilder buffer) {
+	protected void appendInnerTextImpl(final StringBuilder buffer) {
 		// nop
 	}
 
@@ -97,7 +97,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(final boolean disabled) {
 		this.disabled = disabled;
 		final CSSStyleSheetImpl sheet = this.styleSheet;
 		if (sheet != null) {
@@ -107,19 +107,19 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	/** {@inheritDoc} */
 	@Override
-	public void setMedia(String media) {
+	public void setMedia(final String media) {
 		setAttribute("media", media);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setType(String type) {
+	public void setType(final String type) {
 		setAttribute("type", type);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Object setUserData(String key, Object data, UserDataHandler handler) {
+	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		if (XHtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			processStyle();
 		}
@@ -143,7 +143,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 					final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
 					sheet.setHref(baseURI);
 					sheet.setDisabled(this.disabled);
-					CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
+					final CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
 					cssStyleSheet.setOwnerNode(this);
 
 					if(! (this.getParentNode() instanceof SVGSVGElement))

@@ -60,7 +60,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 		private Component editor = null;
 
 		@Override
-		public void addLayoutComponent(String name, Component c) {
+		public void addLayoutComponent(final String name, final Component c) {
 			if ("Next".equals(name)) {
 				nextButton = c;
 			} else if ("Previous".equals(name)) {
@@ -71,15 +71,15 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 		}
 
 		@Override
-		public void layoutContainer(Container parent) {
-			int width = parent.getWidth();
-			int height = parent.getHeight();
+		public void layoutContainer(final Container parent) {
+			final int width = parent.getWidth();
+			final int height = parent.getHeight();
 
-			Insets insets = parent.getInsets();
-			Dimension nextD = preferredSize(nextButton);
-			Dimension previousD = preferredSize(previousButton);
-			int buttonsWidth = Math.max(nextD.width, previousD.width);
-			int editorHeight = height - (insets.top + insets.bottom);
+			final Insets insets = parent.getInsets();
+			final Dimension nextD = preferredSize(nextButton);
+			final Dimension previousD = preferredSize(previousButton);
+			final int buttonsWidth = Math.max(nextD.width, previousD.width);
+			final int editorHeight = height - (insets.top + insets.bottom);
 
 			// The arrowButtonInsets value is used instead of the JSpinner's
 			// insets if not null. Defining this to be (0, 0, 0, 0) causes the
@@ -92,8 +92,10 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 			}
 
 			// Deal with the spinner's componentOrientation property.
-			int editorX, editorWidth, buttonsX;
-			if (parent.getComponentOrientation().isLeftToRight()) {
+			final int editorX;
+            int editorWidth;
+            final int buttonsX;
+            if (parent.getComponentOrientation().isLeftToRight()) {
 				editorX = insets.left;
 				editorWidth = width - insets.left - buttonsWidth - buttonInsets.right;
 				buttonsX = width - buttonsWidth - buttonInsets.right;
@@ -103,10 +105,10 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 				editorWidth = width - buttonInsets.left - buttonsWidth - insets.right;
 			}
 
-			int nextY = buttonInsets.top;
-			int nextHeight = height / 2 + height % 2 - nextY;
-			int previousY = buttonInsets.top + nextHeight;
-			int previousHeight = height - previousY - buttonInsets.bottom;
+			final int nextY = buttonInsets.top;
+			final int nextHeight = height / 2 + height % 2 - nextY;
+			final int previousY = buttonInsets.top + nextHeight;
+			final int previousHeight = height - previousY - buttonInsets.bottom;
 
 			setBounds(editor, editorX, insets.top, editorWidth, editorHeight);
 			setBounds(nextButton, buttonsX, nextY, buttonsWidth, nextHeight);
@@ -114,33 +116,33 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 		}
 
 		@Override
-		public Dimension minimumLayoutSize(Container parent) {
+		public Dimension minimumLayoutSize(final Container parent) {
 			return preferredLayoutSize(parent);
 		}
 
 		@Override
-		public Dimension preferredLayoutSize(Container parent) {
-			Dimension nextD = preferredSize(nextButton);
-			Dimension previousD = preferredSize(previousButton);
-			Dimension editorD = preferredSize(editor);
+		public Dimension preferredLayoutSize(final Container parent) {
+			final Dimension nextD = preferredSize(nextButton);
+			final Dimension previousD = preferredSize(previousButton);
+			final Dimension editorD = preferredSize(editor);
 
 			// Force the editors height to be a multiple of 2
 			editorD.height = (editorD.height + 1) / 2 * 2;
 
-			Dimension size = new Dimension(editorD.width, editorD.height);
+			final Dimension size = new Dimension(editorD.width, editorD.height);
 			size.width += Math.max(nextD.width, previousD.width);
-			Insets insets = parent.getInsets();
+			final Insets insets = parent.getInsets();
 			size.width += insets.left + insets.right;
 			size.height += insets.top + insets.bottom + 4;
 			return size;
 		}
 
-		private Dimension preferredSize(Component c) {
+		private Dimension preferredSize(final Component c) {
 			return c == null ? zeroSize : c.getPreferredSize();
 		}
 
 		@Override
-		public void removeLayoutComponent(Component c) {
+		public void removeLayoutComponent(final Component c) {
 			if (c == nextButton) {
 				nextButton = null;
 			} else if (c == previousButton) {
@@ -150,7 +152,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 			}
 		}
 
-		private void setBounds(Component c, int x, int y, int width, int height) {
+		private void setBounds(final Component c, final int x, final int y, final int width, final int height) {
 			if (c != null) {
 				c.setBounds(x, y, width, height);
 			}
@@ -170,7 +172,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 		private static final Dimension minSize = new Dimension(14, 12);
 		private int direction = SwingConstants.NORTH;
 
-		public SpinButton(int aDirection) {
+		public SpinButton(final int aDirection) {
 			super();
 			setInheritsPopupMenu(true);
 			direction = aDirection;
@@ -178,7 +180,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 
 		@Override
 		public Dimension getPreferredSize() {
-			Dimension size = super.getPreferredSize();
+			final Dimension size = super.getPreferredSize();
 			size.width = Math.max(size.width, minSize.width);
 			size.height = Math.max(size.height, minSize.height);
 			return size;
@@ -186,7 +188,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 
 		@Override
 		public void paint(final Graphics g) {
-			Color[] colors;
+			final Color[] colors;
 			if (isEnabled()) {
 				if (getModel().isPressed() && getModel().isArmed()) {
 					colors = AbstractLookAndFeel.getTheme().getPressedColors();
@@ -205,10 +207,10 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 			JTattooUtilities.fillHorGradient(g, colors, 0, 0, getWidth(), getHeight());
 			paintBorder(g);
 			g.setColor(getForeground());
-			int w = 4;
-			int h = 3;
-			int x = (getWidth() - w) / 2;
-			int y = (getHeight() - h) / 2;
+			final int w = 4;
+			final int h = 3;
+			final int x = (getWidth() - w) / 2;
+			final int y = (getHeight() - h) / 2;
 			if (direction == SwingConstants.NORTH) {
 				for (int i = 0; i < h; i++) {
 					g.drawLine(x + h - i - 1, y + i, x + w - (h - i) + 1, y + i);
@@ -264,12 +266,12 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 	/** {@inheritDoc} */
 	@Override
 	protected Component createNextButton() {
-		JButton button = new SpinButton(SwingConstants.NORTH);
+		final JButton button = new SpinButton(SwingConstants.NORTH);
 		if (JTattooUtilities.isLeftToRight(spinner)) {
-			Border border = BorderFactory.createMatteBorder(0, 1, 1, 0, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 1, 1, 0, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		} else {
-			Border border = BorderFactory.createMatteBorder(0, 0, 1, 1, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 0, 1, 1, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		}
 		installNextButtonListeners(button);
@@ -279,12 +281,12 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 	/** {@inheritDoc} */
 	@Override
 	protected Component createPreviousButton() {
-		JButton button = new SpinButton(SwingConstants.SOUTH);
+		final JButton button = new SpinButton(SwingConstants.SOUTH);
 		if (JTattooUtilities.isLeftToRight(spinner)) {
-			Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		} else {
-			Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
+			final Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, AbstractLookAndFeel.getFrameColor());
 			button.setBorder(border);
 		}
 		installPreviousButtonListeners(button);

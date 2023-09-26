@@ -48,8 +48,8 @@ import static org.junit.Assert.assertTrue;
 public class documentsetstricterrorchecking01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr newAttr;
+        final Document doc;
+        final Attr newAttr;
         doc = sampleXmlFile("hc_staff.xml");
         doc.setStrictErrorChecking(false);
         doc.setStrictErrorChecking(true);
@@ -58,7 +58,7 @@ public class documentsetstricterrorchecking01Test extends LoboUnitTest {
             boolean success = false;
             try {
                 newAttr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "@");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("INVALID_CHARACTER_ERR_documentsetstricterrorchecking01", success);

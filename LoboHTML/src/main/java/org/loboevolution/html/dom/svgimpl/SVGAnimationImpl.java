@@ -63,7 +63,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAttributeName(String attributeName) {
+	public void setAttributeName(final String attributeName) {
 		this.setAttribute("attributeName", attributeName);		
 	}
 	
@@ -73,7 +73,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	 * @return a short.
 	 */
 	public short getType() {
-		String type = this.getAttribute("type");
+		final String type = this.getAttribute("type");
 			
 		switch (type) {
 		case "translate":
@@ -94,7 +94,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	/** {@inheritDoc} */
 	@Override
 	public short getAttributeType() {
-		String type = this.getAttribute("attributeType");
+		final String type = this.getAttribute("attributeType");
 		if (type == null)
 			return ElementTargetAttributes.ATTRIBUTE_TYPE_AUTO;
 
@@ -112,23 +112,23 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAttributeType(short attributeType) {
+	public void setAttributeType(final short attributeType) {
 		this.setAttribute("attributeType", String.valueOf(attributeType));
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public TimeList getBegin() {
-		ArrayList<Time> beginTimeList = new ArrayList<>();
-		String begin = this.getAttribute("begin");
+		final ArrayList<Time> beginTimeList = new ArrayList<>();
+		final String begin = this.getAttribute("begin");
 
 		if (begin != null) {
-			String[] beginTimeStringList = begin.split(";");
+			final String[] beginTimeStringList = begin.split(";");
 
-			for (String beginTimeString : beginTimeStringList) {
+			for (final String beginTimeString : beginTimeStringList) {
 				try {
 					beginTimeList.add(new TimeImpl(beginTimeString));
-				} catch (IllegalArgumentException e) {
+				} catch (final IllegalArgumentException e) {
 				}
 			}
 		}
@@ -142,16 +142,16 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	/** {@inheritDoc} */
 	@Override
 	public TimeList getEnd() {
-		ArrayList<Time> beginTimeList = new ArrayList<>();
-		String begin = this.getAttribute("end");
+		final ArrayList<Time> beginTimeList = new ArrayList<>();
+		final String begin = this.getAttribute("end");
 
 		if (begin != null) {
-			String[] beginTimeStringList = begin.split(";");
+			final String[] beginTimeStringList = begin.split(";");
 
-			for (String beginTimeString : beginTimeStringList) {
+			for (final String beginTimeString : beginTimeStringList) {
 				try {
 					beginTimeList.add(new TimeImpl(beginTimeString));
-				} catch (IllegalArgumentException e) {
+				} catch (final IllegalArgumentException e) {
 				}
 			}
 		}
@@ -165,13 +165,13 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	/** {@inheritDoc} */
 	@Override
 	public float getDur() {
-		String duration = this.getAttribute("dur");
+		final String duration = this.getAttribute("dur");
 		return TimeImpl.getClockMilliSecs(duration);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDur(float dur) {
+	public void setDur(final float dur) {
 		this.setAttribute("dur", String.valueOf(dur));
 	}
 
@@ -183,14 +183,14 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFill(String fill) {
+	public void setFill(final String fill) {
 		this.setAttribute("fill", fill);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public float getRepeatCount() {
-		String rc = this.getAttribute("repeatCount");
+		final String rc = this.getAttribute("repeatCount");
 		if (rc == null) return 0;
 		if ("indefinite".equals(rc)) return Float.MAX_VALUE;
 		return Float.parseFloat(rc);
@@ -198,14 +198,14 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRepeatCount(float repeatCount) {
+	public void setRepeatCount(final float repeatCount) {
 		this.setAttribute("repeatCount", String.valueOf(repeatCount));
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public float getRepeatDur() {
-		String rd = this.getAttribute("repeatDur");
+		final String rd = this.getAttribute("repeatDur");
 		if (rd == null) return 5000;
 		if ("indefinite".equals(rd)) return Float.MAX_VALUE;
 		return TimeImpl.getClockMilliSecs(rd);
@@ -213,16 +213,16 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRepeatDur(float repeatDur) {
+	public void setRepeatDur(final float repeatDur) {
 		this.setAttribute("repeatDur", String.valueOf(repeatDur));
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean beginElement() {
-		String restart = getAttribute("restart");
+		final String restart = getAttribute("restart");
 		if (!("never").equalsIgnoreCase(restart)) {
-			SVGAnimateImpl anime = getAnimate();
+			final SVGAnimateImpl anime = getAnimate();
 			anime.restart();
 			return true;
 		}
@@ -238,14 +238,14 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean beginElementAt(float offset) {
+	public boolean beginElementAt(final float offset) {
 		setDur(offset);
 		return beginElement();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean endElementAt(float offset) {
+	public boolean endElementAt(final float offset) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -258,7 +258,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValues(String values) {
+	public void setValues(final String values) {
 		this.setAttribute("values", values);
 	}
 
@@ -270,7 +270,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFrom(String from) {
+	public void setFrom(final String from) {
 		this.setAttribute("from", from);	
 	}
 
@@ -282,7 +282,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTo(String to) {
+	public void setTo(final String to) {
 		this.setAttribute("to", to);
 	}
 
@@ -294,7 +294,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBy(String by) {
+	public void setBy(final String by) {
 		this.setAttribute("by", by);
 	}
 	
@@ -313,7 +313,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	 *
 	 * @param animate a {@link org.loboevolution.html.dom.svgimpl.SVGAnimateImpl} object.
 	 */
-	protected void setAnimate(SVGAnimateImpl animate) {
+	protected void setAnimate(final SVGAnimateImpl animate) {
 		this.animate = animate;
 	}
 }

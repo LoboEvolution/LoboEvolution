@@ -49,18 +49,18 @@ public class SVGPolylineElementImpl extends SVGPolygonElementImpl implements SVG
 
 	@Override
 	public SVGRect getBBox() {
-		GeneralPath shape = createShape();
+		final GeneralPath shape = createShape();
 		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	private GeneralPath createShape() {
-		GeneralPath path = new GeneralPath();
-		SVGPointList points = getAnimatedPoints();
-		int numPoints = points.getNumberOfItems();
+		final GeneralPath path = new GeneralPath();
+		final SVGPointList points = getAnimatedPoints();
+		final int numPoints = points.getNumberOfItems();
 		for (int i = 0; i < numPoints; i++) {
-			SVGPoint point = points.getItem(i);
-			float x = point.getX();
-			float y = point.getY();
+			final SVGPoint point = points.getItem(i);
+			final float x = point.getX();
+			final float y = point.getY();
 			if (i == 0) {
 				path.moveTo(x, y);
 			} else {

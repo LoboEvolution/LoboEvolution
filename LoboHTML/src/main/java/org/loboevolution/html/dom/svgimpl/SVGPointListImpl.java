@@ -66,7 +66,7 @@ public class SVGPointListImpl implements SVGPointList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint initialize(SVGPoint newItem) throws DOMException, SVGException {
+	public SVGPoint initialize(final SVGPoint newItem) throws DOMException, SVGException {
 		pointList = new ArrayList<>();
 		pointList.add(newItem);
 		return newItem;
@@ -74,13 +74,13 @@ public class SVGPointListImpl implements SVGPointList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint getItem(int index) {
+	public SVGPoint getItem(final int index) {
 		return pointList.get(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint insertItemBefore(SVGPoint newItem, int index) throws DOMException, SVGException {
+	public SVGPoint insertItemBefore(final SVGPoint newItem, final int index) throws DOMException, SVGException {
 
         pointList.remove(newItem);
 
@@ -96,7 +96,7 @@ public class SVGPointListImpl implements SVGPointList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint replaceItem(SVGPoint newItem, int index) throws DOMException, SVGException {
+	public SVGPoint replaceItem(final SVGPoint newItem, final int index) throws DOMException, SVGException {
 
         pointList.remove(newItem);
 
@@ -111,13 +111,13 @@ public class SVGPointListImpl implements SVGPointList {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint removeItem(int index) {
+	public SVGPoint removeItem(final int index) {
 		return pointList.remove(index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint appendItem(SVGPoint newItem) throws DOMException, SVGException {
+	public SVGPoint appendItem(final SVGPoint newItem) throws DOMException, SVGException {
 		pointList.add(newItem);
 		return newItem;
 	}

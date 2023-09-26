@@ -33,7 +33,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -52,9 +51,9 @@ public class nodedocumenttypenodetypeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType documentTypeNode;
-        int nodeType;
+        final Document doc;
+        final DocumentType documentTypeNode;
+        final int nodeType;
         doc = sampleXmlFile("staff.xml");
         documentTypeNode = doc.getDoctype();
         assertNotNull("doctypeNotNull", documentTypeNode);

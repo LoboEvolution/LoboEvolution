@@ -35,19 +35,19 @@ public class HTMLVideoElementImpl extends HTMLElementImpl implements HTMLVideoEl
      *
      * @param name a {@link String} object.
      */
-    public HTMLVideoElementImpl(String name) {
+    public HTMLVideoElementImpl(final String name) {
         super(name);
     }
 
     @Override
     public int getClientHeight() {
-        int clientHeight = super.getClientHeight();
+        final int clientHeight = super.getClientHeight();
         return clientHeight == 0 ? 150 : clientHeight;
     }
 
     @Override
     public Integer getClientWidth() {
-        int clientWidth = super.getClientWidth();
+        final int clientWidth = super.getClientWidth();
         return clientWidth == 0 ? 300 : clientWidth;
     }
 

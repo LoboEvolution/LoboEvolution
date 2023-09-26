@@ -46,7 +46,7 @@ public class RenderableSpot {
 	 * @param x a int.
 	 * @param y a int.
 	 */
-	public RenderableSpot(BoundableRenderable renderable, int x, int y) {
+	public RenderableSpot(final BoundableRenderable renderable, final int x, final int y) {
 		super();
 		this.renderable = renderable;
 		this.x = x;
@@ -55,7 +55,7 @@ public class RenderableSpot {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(final Object other) {
 		if (!(other instanceof RenderableSpot)) {
 			return false;
 		}

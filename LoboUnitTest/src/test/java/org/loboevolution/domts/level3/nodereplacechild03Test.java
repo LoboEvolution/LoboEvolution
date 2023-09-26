@@ -48,12 +48,12 @@ import org.loboevolution.html.node.Node;
 public class nodereplacechild03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final DocumentType nullDocType = null;
 
-        Node replaced;
+        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM", "dom3:doc", nullDocType);
@@ -61,7 +61,7 @@ public class nodereplacechild03Test extends LoboUnitTest {
         try {
             replaced = doc.replaceChild(newDoc, doc);
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 8:
                 case 3:

@@ -81,26 +81,26 @@ public class XPathExpressionImpl implements XPathExpression {
 	 *            The document to be searched, to parallel the case where'' the
 	 *            XPathEvaluator is obtained by casting the document.
 	 */
-	XPathExpressionImpl(XPath xpath, Document doc) {
+	XPathExpressionImpl(final XPath xpath, final Document doc) {
 		m_xpath = xpath;
 		m_doc = doc;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Object evaluate(Node contextNode, short type, Object result) throws XPathException, DOMException {
+	public Object evaluate(final Node contextNode, final short type, final Object result) throws XPathException, DOMException {
 
 		// If the XPathEvaluator was determined by "casting" the document
 		if (m_doc != null) {
 
 			// Check that the context node is owned by the same document
 			if (!Objects.equals(contextNode, m_doc) && !contextNode.getOwnerDocument().equals(m_doc)) {
-				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_DOCUMENT, null);
+				final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_DOCUMENT, null);
 				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, fmsg);
 			}
 
 			// Check that the context node is an acceptable node type
-			int nodeType = contextNode.getNodeType();
+			final int nodeType = contextNode.getNodeType();
 			
 			switch (nodeType) {
 			case Node.DOCUMENT_NODE:
@@ -112,18 +112,18 @@ public class XPathExpressionImpl implements XPathExpression {
 			case Node.PROCESSING_INSTRUCTION_NODE:
 				break;
 			default:
-				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_NODETYPE, null);
+				final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_NODETYPE, null);
 				throw new UnsupportedOperationException(fmsg);
 			}
 		}
 
 		if (!XPathResultImpl.isValidType(type)) {
-			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
+			final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
 					new Object[] {(int) type});
 			throw new XPathException(XPathException.TYPE_ERR, fmsg);
 		}
 
-		XPathContext xpathSupport = new XPathContext(false);
+		final XPathContext xpathSupport = new XPathContext(false);
 		XObject xobj = null;
 
 		if (null != m_doc) {
@@ -132,7 +132,7 @@ public class XPathExpressionImpl implements XPathExpression {
 
 		try {
 			xobj = m_xpath.execute(xpathSupport, contextNode, null);
-		} catch (TransformerException te) {
+		} catch (final TransformerException te) {
 			throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, te.getMessageAndLocation());
 		}
 

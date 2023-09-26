@@ -49,7 +49,7 @@ public class DefaultErrorHandler implements ErrorListener {
    *
    * @param throwExceptionOnError boolean for throwExceptionOnError
    */
-  public DefaultErrorHandler(boolean throwExceptionOnError) {
+  public DefaultErrorHandler(final boolean throwExceptionOnError) {
     // Defer creation of a PrintWriter until it's actually needed
     m_throwExceptionOnError = throwExceptionOnError;
   }
@@ -71,31 +71,31 @@ public class DefaultErrorHandler implements ErrorListener {
 
   /** {@inheritDoc} */
   @Override
-  public void warning(TransformerException exception) throws TransformerException {
-    PrintWriter pw = getErrorWriter();
+  public void warning(final TransformerException exception) throws TransformerException {
+    final PrintWriter pw = getErrorWriter();
     pw.println(exception.getMessage());
   }
 
   /** {@inheritDoc} */
   @Override
-  public void error(TransformerException exception) throws TransformerException {
+  public void error(final TransformerException exception) throws TransformerException {
     // If the m_throwExceptionOnError flag is true, rethrow the exception.
     // Otherwise report the error to System.err.
     if (m_throwExceptionOnError) throw exception;
     else {
-      PrintWriter pw = getErrorWriter();
+      final PrintWriter pw = getErrorWriter();
       pw.println(exception.getMessage());
     }
   }
 
   /** {@inheritDoc} */
   @Override
-  public void fatalError(TransformerException exception) throws TransformerException {
+  public void fatalError(final TransformerException exception) throws TransformerException {
     // If the m_throwExceptionOnError flag is true, rethrow the exception.
     // Otherwise report the error to System.err.
     if (m_throwExceptionOnError) throw exception;
     else {
-      PrintWriter pw = getErrorWriter();
+      final PrintWriter pw = getErrorWriter();
       pw.println(exception.getMessage());
     }
   }

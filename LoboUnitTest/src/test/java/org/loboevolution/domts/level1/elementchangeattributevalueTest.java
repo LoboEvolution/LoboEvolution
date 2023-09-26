@@ -61,10 +61,10 @@ public class elementchangeattributevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        String attrValue;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final String attrValue;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(3);

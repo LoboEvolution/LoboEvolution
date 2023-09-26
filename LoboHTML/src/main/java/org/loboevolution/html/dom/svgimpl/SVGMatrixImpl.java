@@ -55,7 +55,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 	 *
 	 * @param matrix a {@link org.loboevolution.html.dom.svgimpl.SVGMatrixImpl} object.
 	 */
-	public SVGMatrixImpl(SVGMatrixImpl matrix) {
+	public SVGMatrixImpl(final SVGMatrixImpl matrix) {
 		transform = new AffineTransform(matrix.transform);
 	}
 
@@ -69,7 +69,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 	 * @param e a float.
 	 * @param f a float.
 	 */
-	public SVGMatrixImpl(float a, float b, float c, float d, float e, float f) {
+	public SVGMatrixImpl(final float a, final float b, final float c, final float d, final float e, final float f) {
 		transform = new AffineTransform(a, b, c, d, e, f);
 	}
 
@@ -81,7 +81,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setA(float a) {
+	public void setA(final float a) {
 		final float b = getB();
 		final float c = getC();
 		final float d = getD();
@@ -99,7 +99,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setB(float b) {
+	public void setB(final float b) {
 		final float a = getA();
 		final float c = getC();
 		final float d = getD();
@@ -117,7 +117,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setC(float c) {
+	public void setC(final float c) {
 		final float a = getA();
 		final float b = getB();
 		final float d = getD();
@@ -135,7 +135,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setD(float d) {
+	public void setD(final float d) {
 		final float a = getA();
 		final float b = getB();
 		final float c = getC();
@@ -153,7 +153,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setE(float e) {
+	public void setE(final float e) {
 		final float a = getA();
 		final float b = getB();
 		final float c = getC();
@@ -171,7 +171,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setF(float f) {
+	public void setF(final float f) {
 		final float a = getA();
 		final float b = getB();
 		final float c = getC();
@@ -182,8 +182,8 @@ public class SVGMatrixImpl implements SVGMatrix {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix multiply(SVGMatrix secondMatrix) {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
+	public SVGMatrix multiply(final SVGMatrix secondMatrix) {
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
 		result.transform.concatenate(((SVGMatrixImpl) secondMatrix).transform);
 		return result;
 	}
@@ -191,53 +191,53 @@ public class SVGMatrixImpl implements SVGMatrix {
 	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix inverse() throws SVGException {
-		AffineTransform inverse;
+		final AffineTransform inverse;
 		try {
 			inverse = this.transform.createInverse();
-		} catch (NoninvertibleTransformException e) {
+		} catch (final NoninvertibleTransformException e) {
 			return null;
 		}
 
-		SVGMatrixImpl result = new SVGMatrixImpl();
+		final SVGMatrixImpl result = new SVGMatrixImpl();
 		result.transform = new AffineTransform(inverse);
 		return result;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix translate(float x, float y) {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
+	public SVGMatrix translate(final float x, final float y) {
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
 		result.transform.translate(x, y);
 		return result;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix scale(float scaleFactor) {
+	public SVGMatrix scale(final float scaleFactor) {
 		return scaleNonUniform(scaleFactor, scaleFactor);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix scaleNonUniform(float scaleFactorX, float scaleFactorY) {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
+	public SVGMatrix scaleNonUniform(final float scaleFactorX, final float scaleFactorY) {
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
 		result.transform.scale(scaleFactorX, scaleFactorY);
 		return result;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix rotate(float angle) {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
+	public SVGMatrix rotate(final float angle) {
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
 		result.transform.rotate(Math.toRadians(angle));
 		return result;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix rotateFromVector(float x, float y) throws SVGException {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
-		double angle = Math.atan(y / x);
+	public SVGMatrix rotateFromVector(final float x, final float y) throws SVGException {
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
+		final double angle = Math.atan(y / x);
 		result.transform.rotate(angle);
 		return result;
 	}
@@ -245,7 +245,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix flipX() {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
 		result.transform.concatenate(new AffineTransform(-1, 0, 0, 1, 0, 0));
 		return result;
 	}
@@ -253,23 +253,23 @@ public class SVGMatrixImpl implements SVGMatrix {
 	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix flipY() {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
 		result.transform.concatenate(new AffineTransform(1, 0, 0, -1, 0, 0));
 		return result;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix skewX(float angle) {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
+	public SVGMatrix skewX(final float angle) {
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
 		result.transform.concatenate(new AffineTransform(1, 0, Math.tan(Math.toRadians(angle)), 1, 0, 0));
 		return result;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGMatrix skewY(float angle) {
-		SVGMatrixImpl result = new SVGMatrixImpl(this);
+	public SVGMatrix skewY(final float angle) {
+		final SVGMatrixImpl result = new SVGMatrixImpl(this);
 		result.transform.concatenate(new AffineTransform(1, Math.tan(Math.toRadians(angle)), 0, 1, 0, 0));
 		return result;
 	}

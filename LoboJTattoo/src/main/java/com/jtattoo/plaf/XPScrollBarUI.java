@@ -80,7 +80,7 @@ public class XPScrollBarUI extends BaseScrollBarUI {
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
-		Color[] colors = AbstractLookAndFeel.getTheme().getThumbColors();
+		final Color[] colors = AbstractLookAndFeel.getTheme().getThumbColors();
 		rolloverColors = new Color[colors.length];
 		dragColors = new Color[colors.length];
 		for (int i = 0; i < colors.length; i++) {
@@ -91,31 +91,31 @@ public class XPScrollBarUI extends BaseScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+	protected void paintThumb(final Graphics g, final JComponent c, final Rectangle thumbBounds) {
 		if (!c.isEnabled()) {
 			return;
 		}
 
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
 
-		int x = thumbBounds.x;
-		int y = thumbBounds.y;
-		int width = thumbBounds.width;
-		int height = thumbBounds.height;
+		final int x = thumbBounds.x;
+		final int y = thumbBounds.y;
+		final int width = thumbBounds.width;
+		final int height = thumbBounds.height;
 
 		g.translate(x, y);
 
-		Color[] colors = getThumbColors();
+		final Color[] colors = getThumbColors();
 		if (scrollbar.getOrientation() == Adjustable.VERTICAL) {
 			JTattooUtilities.fillVerGradient(g, colors, 0, 0, width, height);
 			if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
-				int dx = 6;
+				final int dx = 6;
 				int dy = height / 2 - 3;
-				int dw = width - 13;
-				Color c1 = ColorHelper.brighter(colors[0], 60);
-				Color c2 = ColorHelper.darker(colors[0], 30);
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+				final int dw = width - 13;
+				final Color c1 = ColorHelper.brighter(colors[0], 60);
+				final Color c2 = ColorHelper.darker(colors[0], 30);
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 				g2D.setComposite(alpha);
 				for (int i = 0; i < 4; i++) {
 					g.setColor(c1);
@@ -130,11 +130,11 @@ public class XPScrollBarUI extends BaseScrollBarUI {
 			JTattooUtilities.fillHorGradient(g, colors, 0, 0, width, height);
 			if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 				int dx = width / 2 - 3;
-				int dy = 6;
-				int dh = height - 13;
-				Color c1 = ColorHelper.brighter(colors[0], 60);
-				Color c2 = ColorHelper.darker(colors[0], 30);
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
+				final int dy = 6;
+				final int dh = height - 13;
+				final Color c1 = ColorHelper.brighter(colors[0], 60);
+				final Color c2 = ColorHelper.darker(colors[0], 30);
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
 				g2D.setComposite(alpha);
 				for (int i = 0; i < 4; i++) {
 					g.setColor(c1);
@@ -155,7 +155,7 @@ public class XPScrollBarUI extends BaseScrollBarUI {
 
 		AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 		g2D.setComposite(alpha);
-		Color fc = colors[colors.length - 1];
+		final Color fc = colors[colors.length - 1];
 		g2D.setColor(fc);
 		g.drawLine(2, 2, width - 3, 2);
 		g.drawLine(2, 3, 2, height - 3);

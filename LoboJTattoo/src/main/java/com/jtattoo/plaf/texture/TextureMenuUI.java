@@ -66,9 +66,9 @@ public class TextureMenuUI extends BaseMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
-		JMenuItem mi = (JMenuItem) c;
-		ButtonModel model = mi.getModel();
+	protected void paintBackground(final Graphics g, final JComponent c, final int x, final int y, final int w, final int h) {
+		final JMenuItem mi = (JMenuItem) c;
+		final ButtonModel model = mi.getModel();
 		if (c.getParent() instanceof JMenuBar) {
 			if (model.isRollover() || model.isArmed() || c instanceof JMenu && model.isSelected()) {
 				TextureUtils.fillComponent(g, c, TextureUtils.ROLLOVER_TEXTURE_TYPE);
@@ -88,14 +88,14 @@ public class TextureMenuUI extends BaseMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
+	protected void paintText(final Graphics g, final JMenuItem menuItem, final Rectangle textRect, final String text) {
 		if (!AbstractLookAndFeel.getTheme().isDarkTexture()) {
 			super.paintText(g, menuItem, textRect, text);
 			return;
 		}
-		ButtonModel model = menuItem.getModel();
-		FontMetrics fm = JTattooUtilities.getFontMetrics(menuItem, g, menuItem.getFont());
-		int mnemIndex = menuItem.getDisplayedMnemonicIndex();
+		final ButtonModel model = menuItem.getModel();
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(menuItem, g, menuItem.getFont());
+		final int mnemIndex = menuItem.getDisplayedMnemonicIndex();
 		if (!model.isEnabled()) {
 			// *** paint the text disabled
 			g.setColor(Color.black);

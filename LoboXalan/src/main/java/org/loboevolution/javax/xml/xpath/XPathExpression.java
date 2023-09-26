@@ -32,18 +32,17 @@ import org.xml.sax.InputSource;
 // Referenced classes of package org.loboevolution.javax.xml.xpath:
 //            XPathExpressionException
 
-public interface XPathExpression
-{
+public interface XPathExpression {
 
     public abstract Object evaluate(Object obj, QName qname)
-        throws XPathExpressionException;
+            throws XPathExpressionException;
 
     public abstract String evaluate(Object obj)
-        throws XPathExpressionException;
+            throws XPathExpressionException;
 
     public abstract Object evaluate(InputSource inputsource, QName qname)
-        throws XPathExpressionException;
+            throws XPathExpressionException;
 
     public abstract String evaluate(InputSource inputsource)
-        throws XPathExpressionException;
+            throws XPathExpressionException;
 }

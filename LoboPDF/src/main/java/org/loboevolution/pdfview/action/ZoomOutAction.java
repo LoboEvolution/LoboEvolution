@@ -52,14 +52,14 @@ public class ZoomOutAction extends AbstractAction {
 	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 * @param factor a float.
 	 */
-	public ZoomOutAction(PDFViewer dialog, float factor) {
+	public ZoomOutAction(final PDFViewer dialog, final float factor) {
 		super("Zoom out", dialog.getIcon("/org/loboevolution/images/zoomout.png"));
 		zoomfactor = factor;
 		this.dialog = dialog;
 	}
 
 	/** {@inheritDoc} */
-	public void actionPerformed(ActionEvent evt) {
+	public void actionPerformed(final ActionEvent evt) {
 		dialog.doZoom(zoomfactor);
 	}
 }

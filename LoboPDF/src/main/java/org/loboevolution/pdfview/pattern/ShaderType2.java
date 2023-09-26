@@ -89,45 +89,45 @@ public class ShaderType2 extends PDFShader {
 	 * Parse the shader-specific data
 	 */
     @Override
-	public void parse(PDFObject shaderObj) throws IOException
+	public void parse(final PDFObject shaderObj) throws IOException
     {
         // read the axis coordinates (required)
-        PDFObject coordsObj = shaderObj.getDictRef("Coords");
+        final PDFObject coordsObj = shaderObj.getDictRef("Coords");
         if (coordsObj == null) {
             throw new PDFParseException("No coordinates found!");
         }
-        PDFObject[] coords = coordsObj.getArray();
-        Point2D start = new Point2D.Float(coords[0].getFloatValue(),
+        final PDFObject[] coords = coordsObj.getArray();
+        final Point2D start = new Point2D.Float(coords[0].getFloatValue(),
                                           coords[1].getFloatValue());
-        Point2D end   = new Point2D.Float(coords[2].getFloatValue(),
+        final Point2D end   = new Point2D.Float(coords[2].getFloatValue(),
                                           coords[3].getFloatValue());
         setAxisStart(start);
         setAxisEnd(end);
         
         // read the domain (optional)
-        PDFObject domainObj = shaderObj.getDictRef("Domain");
+        final PDFObject domainObj = shaderObj.getDictRef("Domain");
         if (domainObj != null) {
-            PDFObject[] domain = domainObj.getArray();
+            final PDFObject[] domain = domainObj.getArray();
             setMinT(domain[0].getFloatValue());
             setMaxT(domain[1].getFloatValue());
         }
         
         // read the functions (required)
-        PDFObject functionObj = shaderObj.getDictRef("Function");
+        final PDFObject functionObj = shaderObj.getDictRef("Function");
         if (functionObj == null) {
             throw new PDFParseException("No function defined for shader!");
         }
-        PDFObject[] functionArray = functionObj.getArray();
-        PDFFunction[] functions = new PDFFunction[functionArray.length];
+        final PDFObject[] functionArray = functionObj.getArray();
+        final PDFFunction[] functions = new PDFFunction[functionArray.length];
         for (int i = 0; i < functions.length; i++) {
             functions[i] = PDFFunction.getFunction(functionArray[i]);
         }
         setFunctions(functions);
         
         // read the extend array (optional)
-        PDFObject extendObj = shaderObj.getDictRef("Extend");
+        final PDFObject extendObj = shaderObj.getDictRef("Extend");
         if (extendObj != null) {
-            PDFObject[] extendArray = extendObj.getArray();
+            final PDFObject[] extendArray = extendObj.getArray();
             setExtendStart(extendArray[0].getBooleanValue());
             setExtendEnd(extendArray[1].getBooleanValue());
         }
@@ -158,7 +158,7 @@ public class ShaderType2 extends PDFShader {
      *
      * @param axisStart a {@link java.awt.geom.Point2D} object.
      */
-    protected void setAxisStart(Point2D axisStart) {
+    protected void setAxisStart(final Point2D axisStart) {
         this.axisStart = axisStart;
     }
     
@@ -176,7 +176,7 @@ public class ShaderType2 extends PDFShader {
      *
      * @param axisEnd a {@link java.awt.geom.Point2D} object.
      */
-    protected void setAxisEnd(Point2D axisEnd) {
+    protected void setAxisEnd(final Point2D axisEnd) {
         this.axisEnd = axisEnd;
     }
     
@@ -194,7 +194,7 @@ public class ShaderType2 extends PDFShader {
      *
      * @param minT a float.
      */
-    protected void setMinT(float minT) {
+    protected void setMinT(final float minT) {
         this.minT = minT;
     }
     
@@ -212,7 +212,7 @@ public class ShaderType2 extends PDFShader {
      *
      * @param maxT a float.
      */
-    protected void setMaxT(float maxT) {
+    protected void setMaxT(final float maxT) {
         this.maxT = maxT;
     }
     
@@ -230,7 +230,7 @@ public class ShaderType2 extends PDFShader {
      *
      * @param extendStart a boolean.
      */
-    protected void setExtendStart(boolean extendStart) {
+    protected void setExtendStart(final boolean extendStart) {
         this.extendStart = extendStart;
     }
     
@@ -248,7 +248,7 @@ public class ShaderType2 extends PDFShader {
      *
      * @param extendEnd a boolean.
      */
-    protected void setExtendEnd(boolean extendEnd) {
+    protected void setExtendEnd(final boolean extendEnd) {
         this.extendEnd = extendEnd;
     }
     
@@ -266,7 +266,7 @@ public class ShaderType2 extends PDFShader {
      *
      * @param functions an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
      */
-    protected void setFunctions(PDFFunction[] functions) {
+    protected void setFunctions(final PDFFunction[] functions) {
         this.functions = functions;
     }
     
@@ -279,21 +279,21 @@ public class ShaderType2 extends PDFShader {
         
         /** create a paint context */
         @Override
-		public PaintContext createContext(ColorModel cm, 
-                                          Rectangle deviceBounds, 
-                                          Rectangle2D userBounds,
-                                          AffineTransform xform,
-                                          RenderingHints hints) 
+		public PaintContext createContext(final ColorModel cm,
+                                          final Rectangle deviceBounds,
+                                          final Rectangle2D userBounds,
+                                          final AffineTransform xform,
+                                          final RenderingHints hints)
         {
-            ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
-            ColorModel model = new ComponentColorModel(cs, 
+            final ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+            final ColorModel model = new ComponentColorModel(cs,
                                                        true, 
                                                        false, 
                                                        Transparency.TRANSLUCENT,
                                                        DataBuffer.TYPE_BYTE);
             
-            Point2D devStart = xform.transform(getAxisStart(), null);
-            Point2D devEnd = xform.transform(getAxisEnd(), null);
+            final Point2D devStart = xform.transform(getAxisStart(), null);
+            final Point2D devEnd = xform.transform(getAxisEnd(), null);
           
             return new Type2PaintContext(model, devStart, devEnd);
         }
@@ -327,7 +327,7 @@ public class ShaderType2 extends PDFShader {
         /**
          * Create a paint context
          */
-        Type2PaintContext(ColorModel colorModel, Point2D start, Point2D end) {
+        Type2PaintContext(final ColorModel colorModel, final Point2D start, final Point2D end) {
             this.colorModel = colorModel;
             this.start = start;
             this.end = end;
@@ -350,30 +350,30 @@ public class ShaderType2 extends PDFShader {
         }
         
         @Override
-        public Raster getRaster(int x, int y, int w, int h) {
-        	ColorSpace cs = getColorModel().getColorSpace();
-            PDFColorSpace shadeCSpace = getColorSpace();
+        public Raster getRaster(final int x, final int y, final int w, final int h) {
+        	final ColorSpace cs = getColorModel().getColorSpace();
+            final PDFColorSpace shadeCSpace = getColorSpace();
 
 
-        	PDFFunction[] functions = getFunctions();
-        	int numComponents = cs.getNumComponents();
+        	final PDFFunction[] functions = getFunctions();
+        	final int numComponents = cs.getNumComponents();
 
-        	float x0 = (float) this.start.getX();
-        	float y0 = (float) this.start.getY();
+        	final float x0 = (float) this.start.getX();
+        	final float y0 = (float) this.start.getY();
 
-        	float[] inputs = new float[1];
-            float[] outputs = new float[shadeCSpace.getNumComponents()];
+        	final float[] inputs = new float[1];
+            final float[] outputs = new float[shadeCSpace.getNumComponents()];
             float[] outputRBG = new float[numComponents];
 
         	// all the data, plus alpha channel
-        	int[] data = new int[w * h * (numComponents + 1)];
+        	final int[] data = new int[w * h * (numComponents + 1)];
 
         	// for each device coordinate
         	for (int j = 0; j < h; j++) {
         		for (int i = 0; i < w; i += 1) {
         			boolean render = true;
         			// find t for that user coordinate
-        			float xp = getXPrime(i + x, j + y, x0, y0);
+        			final float xp = getXPrime(i + x, j + y, x0, y0);
         			float t = 0;
         			if (xp >= 0 && xp <= 1) t = getMinT() + (dt1t0 * xp);
         			else if (xp < 0 && extendStart) t = getMinT();
@@ -396,7 +396,7 @@ public class ShaderType2 extends PDFShader {
         				}
         				else outputRBG = outputs;
 
-        				int base = (j * w + i) * (numComponents + 1);
+        				final int base = (j * w + i) * (numComponents + 1);
         				for (int c = 0; c < numComponents; c++) {
         					data[base + c] = (int) (outputRBG[c] * 255);
         				}
@@ -405,11 +405,11 @@ public class ShaderType2 extends PDFShader {
         		}
         	}
 
-            WritableRaster raster =
+            final WritableRaster raster =
                 getColorModel().createCompatibleWritableRaster(w, h);
             raster.setPixels(0, 0, w, h, data);
           
-            Raster child = raster.createTranslatedChild(x, y);
+            final Raster child = raster.createTranslatedChild(x, y);
             return child;
         }
         
@@ -418,9 +418,9 @@ public class ShaderType2 extends PDFShader {
          *      -------------------------------------------
          *               (x1 - x0)^2 + (y1 - y0)^2
          */
-        private float getXPrime(float x, float y, float x0, float y0) {
+        private float getXPrime(final float x, final float y, final float x0, final float y0) {
            
-            double tp = ((dx1x0* (x - x0)) + (dy1y0 * (y - y0))) / sqdx1x0psqdy1y0;
+            final double tp = ((dx1x0* (x - x0)) + (dy1y0 * (y - y0))) / sqdx1x0psqdy1y0;
         
             return (float) tp;
         }
@@ -428,7 +428,7 @@ public class ShaderType2 extends PDFShader {
         /**
          * t = t0 + (t1 - t0) x x'
          */
-        private float getT(float xp) {
+        private float getT(final float xp) {
         	
             if (xp < 0) {
                 return getMinT();

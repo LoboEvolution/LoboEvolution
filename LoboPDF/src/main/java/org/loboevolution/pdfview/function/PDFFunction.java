@@ -92,7 +92,7 @@ public abstract class PDFFunction {
      *
      * @param type a int.
      */
-    protected PDFFunction (int type) {
+    protected PDFFunction (final int type) {
         this.type = type;
     }
 
@@ -103,15 +103,15 @@ public abstract class PDFFunction {
      * @return a {@link org.loboevolution.pdfview.function.PDFFunction} object.
      * @throws java.io.IOException if any.
      */
-    public static PDFFunction getFunction (PDFObject obj)
+    public static PDFFunction getFunction (final PDFObject obj)
             throws IOException {
-        PDFFunction function;
-        int type;
+        final PDFFunction function;
+        final int type;
         float[] domain = null;
         float[] range = null;
 
         // read the function type (required)
-        PDFObject typeObj = obj.getDictRef ("FunctionType");
+        final PDFObject typeObj = obj.getDictRef ("FunctionType");
         if (typeObj == null) {
             throw new PDFParseException (
                     "No FunctionType specified in function!");
@@ -119,21 +119,21 @@ public abstract class PDFFunction {
         type = typeObj.getIntValue ();
 
         // read the function's domain (required)
-        PDFObject domainObj = obj.getDictRef ("Domain");
+        final PDFObject domainObj = obj.getDictRef ("Domain");
         if (domainObj == null) {
             throw new PDFParseException ("No Domain specified in function!");
         }
 
-        PDFObject[] domainAry = domainObj.getArray ();
+        final PDFObject[] domainAry = domainObj.getArray ();
         domain = new float[domainAry.length];
         for (int i = 0; i < domainAry.length; i++) {
             domain[i] = domainAry[i].getFloatValue ();
         }
 
         // read the function's range (optional)
-        PDFObject rangeObj = obj.getDictRef ("Range");
+        final PDFObject rangeObj = obj.getDictRef ("Range");
         if (rangeObj != null) {
-            PDFObject[] rangeAry = rangeObj.getArray ();
+            final PDFObject[] rangeAry = rangeObj.getArray ();
             range = new float[rangeAry.length];
             for (int i = 0; i < rangeAry.length; i++) {
                 range[i] = rangeAry[i].getFloatValue ();
@@ -191,8 +191,8 @@ public abstract class PDFFunction {
 	 * @param ymax the maximum y value
 	 * @return the y value interpolated from the given x
 	 */
-	public static float interpolate(float x, float xmin, float xmax,
-			float ymin, float ymax) {
+	public static float interpolate(final float x, final float xmin, final float xmax,
+                                    final float ymin, final float ymax) {
 			    float value = (ymax - ymin) / (xmax - xmin);
 			    value *= x - xmin;
 			    value += ymin;
@@ -238,7 +238,7 @@ public abstract class PDFFunction {
      *           2<i>i</i> + 1
      * @return the <i>i</i>th entry in the domain array
      */
-    protected float getDomain (int i) {
+    protected float getDomain (final int i) {
         return this.domain[i];
     }
 
@@ -247,7 +247,7 @@ public abstract class PDFFunction {
      *
      * @param domain an array of {@link float} objects.
      */
-    protected void setDomain (float[] domain) {
+    protected void setDomain (final float[] domain) {
         this.domain = domain;
     }
 
@@ -259,7 +259,7 @@ public abstract class PDFFunction {
      *           2<i>i</i> + 1
      * @return the <i>i</i>th entry in the range array
      */
-    protected float getRange (int i) {
+    protected float getRange (final int i) {
         if (this.range == null) {
             if ((i % 2) == 0) {
                 return Float.MIN_VALUE;
@@ -275,7 +275,7 @@ public abstract class PDFFunction {
      *
      * @param range an array of {@link float} objects.
      */
-    protected void setRange (float[] range) {
+    protected void setRange (final float[] range) {
         this.range = range;
     }
 
@@ -288,8 +288,8 @@ public abstract class PDFFunction {
      * @param inputs an array of {@literal >}= <i>m</i> input values
      * @return the array of <i>n</i> output values
      */
-    public float[] calculate (float[] inputs) {
-        float[] outputs = new float[getNumOutputs ()];
+    public float[] calculate (final float[] inputs) {
+        final float[] outputs = new float[getNumOutputs ()];
         calculate (inputs, 0, outputs, 0);
         return outputs;
     }
@@ -307,8 +307,8 @@ public abstract class PDFFunction {
      * @param outputOffset the offset into the output array to write to
      * @return the array of <i>n</i> output values
      */
-    public float[] calculate (float[] inputs, int inputOffset,
-                              float[] outputs, int outputOffset) {
+    public float[] calculate (final float[] inputs, final int inputOffset,
+                              final float[] outputs, final int outputOffset) {
         // check the inputs
         if (inputs.length - inputOffset < getNumInputs ()) {
             throw new IllegalArgumentException (
@@ -353,8 +353,8 @@ public abstract class PDFFunction {
      * @param outputOffset the offset into the output array to write to
      * @param inputs an array of {@link float} objects.
      */
-    protected abstract void doFunction (float[] inputs, int inputOffset,
-                                        float[] outputs, int outputOffset);
+    protected abstract void doFunction (float[] inputs, final int inputOffset,
+                                        float[] outputs, final int outputOffset);
 
     /**
      * Read the function information from a PDF Object

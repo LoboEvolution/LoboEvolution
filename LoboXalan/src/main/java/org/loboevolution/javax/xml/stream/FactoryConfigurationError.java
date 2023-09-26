@@ -65,7 +65,7 @@ public class FactoryConfigurationError extends Error {
    *
    * @param e the exception to nest
    */
-  public FactoryConfigurationError(java.lang.Exception e){
+  public FactoryConfigurationError(final java.lang.Exception e){
     nested = e;
   }
 
@@ -76,7 +76,7 @@ public class FactoryConfigurationError extends Error {
    * @param e the exception to nest
    * @param msg the message to report
    */
-  public FactoryConfigurationError(java.lang.Exception e, java.lang.String msg){
+  public FactoryConfigurationError(final java.lang.Exception e, final java.lang.String msg){
     super(msg);
     nested = e;
   }
@@ -88,7 +88,7 @@ public class FactoryConfigurationError extends Error {
    * @param msg the message to report
    * @param e the exception to nest
    */
-  public FactoryConfigurationError(java.lang.String msg, java.lang.Exception e){
+  public FactoryConfigurationError(final java.lang.String msg, final java.lang.Exception e){
     super(msg);
     nested = e;
   }
@@ -98,7 +98,7 @@ public class FactoryConfigurationError extends Error {
    *
    * @param msg the message to report
    */
-  public FactoryConfigurationError(java.lang.String msg) {
+  public FactoryConfigurationError(final java.lang.String msg) {
     super(msg);
   }
 

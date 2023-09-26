@@ -50,13 +50,13 @@ import static org.junit.Assert.assertNotNull;
 public class nodereplacechild12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        ProcessingInstruction pi;
+        final Document doc;
+        final ProcessingInstruction pi;
         Node replaced;
-        Comment comment;
-        Node lastChild;
+        final Comment comment;
+        final Node lastChild;
         String nodeName;
-        Node replacedNode;
+        final Node replacedNode;
         Node appendedChild;
         doc = sampleXmlFile("barfoo.xml");
         comment = doc.createComment("dom3:doc");

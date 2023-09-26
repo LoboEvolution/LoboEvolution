@@ -64,17 +64,17 @@ public final class AluminiumUtils {
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Component} object.
 	 */
-	public static void fillComponent(Graphics g, Component c) {
-		Graphics2D g2D = (Graphics2D) g;
-		int w = c.getWidth();
-		int h = c.getHeight();
+	public static void fillComponent(final Graphics g, final Component c) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final int w = c.getWidth();
+		final int h = c.getHeight();
 		if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
 			// pattern
-			Point p = JTattooUtilities.getRelLocation(c);
-			Dimension d = JTattooUtilities.getFrameSize(c);
+			final Point p = JTattooUtilities.getRelLocation(c);
+			final Dimension d = JTattooUtilities.getFrameSize(c);
 			int y = -p.y;
-			int iw = BG_IMAGE.getIconWidth();
-			int ih = BG_IMAGE.getIconHeight();
+			final int iw = BG_IMAGE.getIconWidth();
+			final int ih = BG_IMAGE.getIconHeight();
 			while (y < h) {
 				int x = -p.x;
 				while (x < w) {
@@ -87,18 +87,18 @@ public final class AluminiumUtils {
 			if (backgroundImage == null || backgroundImage.getWidth(null) != d.width
 					|| backgroundImage.getHeight(null) != d.height) {
 				backgroundImage = c.createImage(d.width, d.height);
-				Graphics2D ig2D = (Graphics2D) backgroundImage.getGraphics();
-				Point pt1 = new Point(0, 0);
-				Point pt2 = new Point(d.width, 0);
-				float[] fractions = { 0.0f, 0.5f, 1.0f };
-				Color c1 = new Color(220, 220, 220);
-				Color[] colors = { c1, Color.white, c1 };
+				final Graphics2D ig2D = (Graphics2D) backgroundImage.getGraphics();
+				final Point pt1 = new Point(0, 0);
+				final Point pt2 = new Point(d.width, 0);
+				final float[] fractions = { 0.0f, 0.5f, 1.0f };
+				final Color c1 = new Color(220, 220, 220);
+				final Color[] colors = { c1, Color.white, c1 };
 				ig2D.setPaint(new LinearGradientPaint(pt1, pt2, fractions, colors));
 				ig2D.fillRect(0, 0, d.width, d.height);
 				ig2D.dispose();
 			}
 
-			Composite savedComposite = g2D.getComposite();
+			final Composite savedComposite = g2D.getComposite();
 			g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
 			g2D.drawImage(backgroundImage, -p.x, 0, null);
 			g2D.setComposite(savedComposite);
@@ -118,10 +118,10 @@ public final class AluminiumUtils {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	public static void fillComponent(Graphics g, Component c, int x, int y, int w, int h) {
-		Graphics2D g2D = (Graphics2D) g;
-		Shape savedClip = g2D.getClip();
-		Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
+	public static void fillComponent(final Graphics g, final Component c, final int x, final int y, final int w, final int h) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Shape savedClip = g2D.getClip();
+		final Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
 		if (savedClip != null) {
 			clipArea.intersect(new Area(savedClip));
 		}

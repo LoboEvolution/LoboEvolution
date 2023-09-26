@@ -50,10 +50,10 @@ import static org.junit.Assert.assertNull;
 public class noderemovechild12Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        EntityReference eRef;
-        EntityReference removedERef;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final EntityReference eRef;
+        final EntityReference removedERef;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         eRef = doc.createEntityReference("ent1");
@@ -64,7 +64,7 @@ public class noderemovechild12Test extends LoboUnitTest {
 
         try {
             eRef.removeChild(docFrag);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 8:
                 case 7:

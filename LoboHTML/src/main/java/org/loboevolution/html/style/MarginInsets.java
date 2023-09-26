@@ -44,7 +44,7 @@ public class MarginInsets {
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
-	public static HtmlInsets getMarginInsets(CSSStyleDeclaration cssProperties, HTMLElementImpl element, RenderState renderState) {
+	public static HtmlInsets getMarginInsets(final CSSStyleDeclaration cssProperties, final HTMLElementImpl element, final RenderState renderState) {
 		final CSSStyleDeclaration props = element.getParentStyle();
 		if (props == null) {
 			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
@@ -64,7 +64,7 @@ public class MarginInsets {
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
-	public static HtmlInsets getPaddingInsets(CSSStyleDeclaration cssProperties, HTMLElementImpl element, RenderState renderState) {
+	public static HtmlInsets getPaddingInsets(final CSSStyleDeclaration cssProperties, final HTMLElementImpl element, final RenderState renderState) {
 		final CSSStyleDeclaration props = element.getParentStyle();
 		if (props == null) {
 			return HtmlInsets.getInsets("0px", "0px", "0px", "0px", element, renderState);
@@ -76,7 +76,7 @@ public class MarginInsets {
 		return HtmlInsets.getInsets(topText, leftText, bottomText, rightText, element, renderState);
 	}
 
-	private static boolean isInherit(String value) {
+	private static boolean isInherit(final String value) {
 		return CSSValues.INHERIT.equals(CSSValues.get(value));
 	}
 }

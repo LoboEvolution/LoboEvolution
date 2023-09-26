@@ -48,15 +48,15 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode22Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr attr;
+        final Document doc;
+        final Attr attr;
         doc = sampleXmlFile("hc_staff.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
 
         boolean success = false;
         try {
             doc.renameNode(attr, "http://www.w3.org/1999/xmlns/", "xmlns");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
         assertTrue("throw_NAMESPACE_ERR", success);

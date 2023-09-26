@@ -47,16 +47,16 @@ import org.loboevolution.html.node.Node;
 public class nodereplacechild04Test extends LoboUnitTest {
 @Test
 public void runTest(){
-        Document doc;
-        Element docElem;
-        Node replaced;
+        final Document doc;
+        final Element docElem;
+        final Node replaced;
         doc=sampleXmlFile("hc_staff.xml");
         docElem=doc.getDocumentElement();
 
         try{
         replaced=doc.replaceChild(doc,docElem);
 
-        }catch(DOMException ex){
+        }catch(final DOMException ex){
         switch(ex.getCode()){
         case 8:
         break;

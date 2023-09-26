@@ -47,10 +47,10 @@ import static org.junit.Assert.assertFalse;
 public class documentadoptnode15Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        boolean success;
-        Node adoptedDocFrag;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final boolean success;
+        final Node adoptedDocFrag;
         doc = sampleXmlFile("hc_staff.xml");
         docFragment = doc.createDocumentFragment();
         adoptedDocFrag = doc.adoptNode(docFragment);

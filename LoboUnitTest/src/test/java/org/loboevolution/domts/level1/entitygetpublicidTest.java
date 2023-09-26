@@ -35,7 +35,6 @@ import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.NamedNodeMap;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -61,12 +60,12 @@ public class entitygetpublicidTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entityList;
-        EntityReference entityNode;
-        String publicId;
-        String notation;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entityList;
+        final EntityReference entityNode;
+        final String publicId;
+        final String notation;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);

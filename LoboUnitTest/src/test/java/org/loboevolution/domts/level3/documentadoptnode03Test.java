@@ -50,15 +50,15 @@ public class documentadoptnode03Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Attr newAttr;
-        Attr adoptedAttr;
-        String nodeName;
-        String nodeNamespaceURI;
-        String nodePrefix;
-        Node attrOwnerElem;
-        boolean isSpecified;
-        String xmlNS = "http://www.w3.org/XML/1998/namespace";
+        final Document doc;
+        final Attr newAttr;
+        final Attr adoptedAttr;
+        final String nodeName;
+        final String nodeNamespaceURI;
+        final String nodePrefix;
+        final Node attrOwnerElem;
+        final boolean isSpecified;
+        final String xmlNS = "http://www.w3.org/XML/1998/namespace";
         doc = sampleXmlFile("hc_staff.xml");
         newAttr = doc.createAttributeNS(xmlNS, "xml:lang");
         adoptedAttr = (Attr) doc.adoptNode(newAttr);

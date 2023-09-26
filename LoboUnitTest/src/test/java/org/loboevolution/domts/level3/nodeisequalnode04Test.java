@@ -46,10 +46,10 @@ import static org.junit.Assert.assertTrue;
 public class nodeisequalnode04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document ownerDoc;
-        Element elem;
-        boolean isEqual;
+        final Document doc;
+        final Document ownerDoc;
+        final Element elem;
+        final boolean isEqual;
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
         ownerDoc = elem.getOwnerDocument();

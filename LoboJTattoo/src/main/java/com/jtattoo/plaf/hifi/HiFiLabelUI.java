@@ -57,8 +57,8 @@ public class HiFiLabelUI extends BasicLabelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-		int mnemIndex = l.getDisplayedMnemonicIndex();
+	protected void paintDisabledText(final JLabel l, final Graphics g, final String s, final int textX, final int textY) {
+		final int mnemIndex = l.getDisplayedMnemonicIndex();
 		g.setColor(Color.black);
 		JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX + 1, textY + 1);
 		g.setColor(AbstractLookAndFeel.getDisabledForegroundColor());
@@ -67,9 +67,9 @@ public class HiFiLabelUI extends BasicLabelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-		int mnemIndex = l.getDisplayedMnemonicIndex();
-		Color fc = l.getForeground();
+	protected void paintEnabledText(final JLabel l, final Graphics g, final String s, final int textX, final int textY) {
+		final int mnemIndex = l.getDisplayedMnemonicIndex();
+		final Color fc = l.getForeground();
 		if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 128) {
 			g.setColor(Color.black);
 			JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX + 1, textY + 1);

@@ -49,12 +49,12 @@ import static org.junit.Assert.assertEquals;
 public class elementgetschematypeinfo05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element acElem;
-        TypeInfo elemTypeInfo;
-        String typeName;
-        String typeNamespace;
-        HTMLCollection elemList;
+        final Document doc;
+        final Element acElem;
+        final TypeInfo elemTypeInfo;
+        final String typeName;
+        final String typeNamespace;
+        final HTMLCollection elemList;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("span");
         acElem = (Element) elemList.item(0);

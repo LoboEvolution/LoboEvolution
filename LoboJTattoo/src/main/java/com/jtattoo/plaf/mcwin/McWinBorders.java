@@ -65,7 +65,7 @@ public class McWinBorders extends BaseBorders {
 		}
 
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets insets = getBorderInsets(c);
+			final Insets insets = getBorderInsets(c);
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -79,7 +79,7 @@ public class McWinBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 		}
 
 	} // end of class ButtonBorder
@@ -92,10 +92,10 @@ public class McWinBorders extends BaseBorders {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			boolean active = isActive(c);
-			boolean resizable = isResizable(c);
-			int th = getTitleHeight(c);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final boolean active = isActive(c);
+			final boolean resizable = isResizable(c);
+			final int th = getTitleHeight(c);
 			Color frameColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
 			Color titleColor = AbstractLookAndFeel.getWindowInactiveTitleColorLight();
 			Color borderColor = AbstractLookAndFeel.getWindowInactiveTitleColorDark();
@@ -105,7 +105,7 @@ public class McWinBorders extends BaseBorders {
 				borderColor = AbstractLookAndFeel.getWindowTitleColorDark();
 			}
 			if (!resizable) {
-				Insets borderInsets = getBorderInsets(c);
+				final Insets borderInsets = getBorderInsets(c);
 				g.setColor(frameColor);
 				g.drawRect(x, y, w - 1, h - 1);
 				if (active) {
@@ -172,9 +172,9 @@ public class McWinBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 40);
 			if (model.isPressed() && model.isArmed() || model.isSelected()) {
 				frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 20);

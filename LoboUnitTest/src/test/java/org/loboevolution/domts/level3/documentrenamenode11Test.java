@@ -55,13 +55,13 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode11Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String textEntry = "hello";
-        Text textNode;
-        Node renamedNode;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final String textEntry = "hello";
+        final Text textNode;
+        final Node renamedNode;
+        final DocumentType nullDocType = null;
 
-        String nullNSURI = null;
+        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode(textEntry);
@@ -70,7 +70,7 @@ public class documentrenamenode11Test extends LoboUnitTest {
         boolean success = false;
         try {
             renamedNode = doc.renameNode(textNode, nullNSURI, "pre:fix");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("documentrenamenode11_NOT_SUPPORTED_ERR", success);

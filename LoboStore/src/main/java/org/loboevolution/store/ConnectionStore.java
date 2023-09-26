@@ -93,9 +93,9 @@ public class ConnectionStore implements Serializable {
 	 */
 	public static ConnectionStore getConnection() {
 		final ConnectionStore setting = new ConnectionStore();
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(CONNECTIONS)) {
-			try (ResultSet rs = pstmt.executeQuery()) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(CONNECTIONS)) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					setting.setProxyType(Proxy.Type.valueOf(rs.getString(1)));
 					setting.setUserName(rs.getString(2));
@@ -116,8 +116,8 @@ public class ConnectionStore implements Serializable {
 	 * <p>deleteConnection.</p>
 	 */
 	public void deleteConnection() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(DELETE_CONNECTIONS)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_CONNECTIONS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -162,7 +162,7 @@ public class ConnectionStore implements Serializable {
 	 * @param host the host
 	 * @return the proxy
 	 */
-	public Proxy getProxy(String host) {
+	public Proxy getProxy(final String host) {
 		synchronized (this) {
 			if (this.proxy == null) {
 				final InetSocketAddress sa = this.socketAddress;
@@ -202,8 +202,8 @@ public class ConnectionStore implements Serializable {
 	 * <p>insertConnection.</p>
 	 */
 	public void insertConnection() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(INSERT_CONNECTIONS)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(INSERT_CONNECTIONS)) {
 			pstmt.setString(1, getProxyType().name());
 			pstmt.setString(2, getUserName());
 			pstmt.setString(3, getPassword());
@@ -257,7 +257,7 @@ public class ConnectionStore implements Serializable {
 	 *
 	 * @param authenticated the new authenticated
 	 */
-	public void setAuthenticated(boolean authenticated) {
+	public void setAuthenticated(final boolean authenticated) {
 		this.authenticated = authenticated;
 		synchronized (this) {
 			this.proxy = null;
@@ -270,7 +270,7 @@ public class ConnectionStore implements Serializable {
 	 * @param disableProxyForLocalAddresses the new disable proxy for local
 	 *                                      addresses
 	 */
-	public void setDisableProxyForLocalAddresses(boolean disableProxyForLocalAddresses) {
+	public void setDisableProxyForLocalAddresses(final boolean disableProxyForLocalAddresses) {
 		this.disableProxyForLocalAddresses = disableProxyForLocalAddresses;
 		synchronized (this) {
 			this.proxy = null;
@@ -282,7 +282,7 @@ public class ConnectionStore implements Serializable {
 	 *
 	 * @param socketAddress the new inet socket address
 	 */
-	public void setInetSocketAddress(InetSocketAddress socketAddress) {
+	public void setInetSocketAddress(final InetSocketAddress socketAddress) {
 		this.socketAddress = socketAddress;
 		synchronized (this) {
 			this.proxy = null;
@@ -294,7 +294,7 @@ public class ConnectionStore implements Serializable {
 	 *
 	 * @param password the new password
 	 */
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 		synchronized (this) {
 			this.proxy = null;
@@ -306,7 +306,7 @@ public class ConnectionStore implements Serializable {
 	 *
 	 * @param proxyType the new proxy type
 	 */
-	public void setProxyType(Proxy.Type proxyType) {
+	public void setProxyType(final Proxy.Type proxyType) {
 		this.proxyType = proxyType;
 		synchronized (this) {
 			this.proxy = null;
@@ -318,7 +318,7 @@ public class ConnectionStore implements Serializable {
 	 *
 	 * @param userName the new user name
 	 */
-	public void setUserName(String userName) {
+	public void setUserName(final String userName) {
 		this.userName = userName;
 		synchronized (this) {
 			this.proxy = null;

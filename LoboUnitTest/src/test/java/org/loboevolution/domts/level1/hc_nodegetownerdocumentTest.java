@@ -52,12 +52,12 @@ public class hc_nodegetownerdocumentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node docNode;
-        Document ownerDocument;
-        Element docElement;
-        String elementName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node docNode;
+        final Document ownerDocument;
+        final Element docElement;
+        final String elementName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         docNode = elementList.item(1);

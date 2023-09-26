@@ -56,11 +56,11 @@ public class hc_characterdatagetdataTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        CharacterData child;
-        String childData;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final CharacterData child;
+        final String childData;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("strong");
         nameNode = elementList.item(0);

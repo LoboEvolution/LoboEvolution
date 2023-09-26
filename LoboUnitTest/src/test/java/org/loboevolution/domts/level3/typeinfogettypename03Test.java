@@ -52,12 +52,12 @@ import static org.junit.Assert.assertEquals;
 public class typeinfogettypename03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Attr attrid;
-        Element acElem;
-        TypeInfo attrTypeInfo;
-        String typeName;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Attr attrid;
+        final Element acElem;
+        final TypeInfo attrTypeInfo;
+        final String typeName;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("acronym");
         acElem = (Element) elemList.item(2);

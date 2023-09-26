@@ -46,8 +46,8 @@ public class attrisid06Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Attr attr;
+        final Document doc;
+        final Attr attr;
         boolean id = false;
         doc = sampleXmlFile("hc_staff.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");

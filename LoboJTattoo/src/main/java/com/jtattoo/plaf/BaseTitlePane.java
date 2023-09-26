@@ -138,11 +138,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	protected class PropertyChangeHandler implements PropertyChangeListener {
 
 		@Override
-		public void propertyChange(PropertyChangeEvent pce) {
-			String name = pce.getPropertyName();
+		public void propertyChange(final PropertyChangeEvent pce) {
+			final String name = pce.getPropertyName();
 			// Frame.state isn't currently bound.
 			if ("resizable".equals(name) || "state".equals(name)) {
-				Frame frame = getFrame();
+				final Frame frame = getFrame();
 				if (frame != null) {
 					setState(getFrame().getExtendedState(), true);
 				}
@@ -224,7 +224,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 
 		protected int computeHeight() {
-			FontMetrics fm = JTattooUtilities.getFontMetrics(this, null, getFont());
+			final FontMetrics fm = JTattooUtilities.getFontMetrics(this, null, getFont());
 			return fm.getHeight() + 6;
 		}
 
@@ -235,14 +235,14 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
 		@Override
 		public Dimension getPreferredSize() {
-			Dimension size = super.getPreferredSize();
-			Image image = getFrameIconImage();
+			final Dimension size = super.getPreferredSize();
+			final Image image = getFrameIconImage();
 			if (image != null) {
 				int iw = image.getWidth(null);
 				int ih = image.getHeight(null);
-				int th = computeHeight();
+				final int th = computeHeight();
 				if (ih > th) {
-					double scale = (double) th / (double) ih;
+					final double scale = (double) th / (double) ih;
 					iw = (int) (scale * iw);
 					ih = (int) (scale * ih);
 				}
@@ -254,17 +254,17 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
 		@Override
 		public void paint(final Graphics g) {
-			Image image = getFrameIconImage();
+			final Image image = getFrameIconImage();
 			if (image != null) {
-				Graphics2D g2D = (Graphics2D) g;
-				Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
+				final Graphics2D g2D = (Graphics2D) g;
+				final Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
 				g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-				int x = 0;
+				final int x = 0;
 				int y = 0;
 				int iw = image.getWidth(null);
 				int ih = image.getHeight(null);
 				if (ih > getHeight()) {
-					double scale = (double) (getHeight() - 2) / (double) ih;
+					final double scale = (double) (getHeight() - 2) / (double) ih;
 					iw = (int) (scale * iw);
 					ih = (int) (scale * ih);
 				} else {
@@ -275,7 +275,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 					g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, savedHint);
 				}
 			} else {
-				Icon icon = UIManager.getIcon("InternalFrame.icon");
+				final Icon icon = UIManager.getIcon("InternalFrame.icon");
 				if (icon != null) {
 					icon.paintIcon(this, g, 2, 2);
 				}
@@ -287,16 +287,16 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	protected class TitlePaneLayout implements LayoutManager {
 
 		@Override
-		public void addLayoutComponent(String name, Component c) {
+		public void addLayoutComponent(final String name, final Component c) {
 		}
 
 		protected int computeHeight() {
-			FontMetrics fm = JTattooUtilities.getFontMetrics(BaseTitlePane.this, null, getFont());
+			final FontMetrics fm = JTattooUtilities.getFontMetrics(BaseTitlePane.this, null, getFont());
 			return fm.getHeight() + 6;
 		}
 
 		@Override
-		public void layoutContainer(Container c) {
+		public void layoutContainer(final Container c) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				layoutMacStyle(c);
 			} else {
@@ -304,21 +304,21 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 			}
 		}
 
-		public void layoutDefault(Container c) {
-			boolean leftToRight = isLeftToRight();
+		public void layoutDefault(final Container c) {
+			final boolean leftToRight = isLeftToRight();
 
-			int spacing = getHorSpacing();
-			int w = getWidth();
-			int h = getHeight();
+			final int spacing = getHorSpacing();
+			final int w = getWidth();
+			final int h = getHeight();
 
 			// assumes all buttons have the same dimensions these dimensions include the
 			// borders
-			int btnHeight = h - getVerSpacing();
-			int btnWidth = btnHeight;
+			final int btnHeight = h - getVerSpacing();
+			final int btnWidth = btnHeight;
 
 			if (menuBar != null) {
-				int mw = menuBar.getPreferredSize().width;
-				int mh = menuBar.getPreferredSize().height;
+				final int mw = menuBar.getPreferredSize().width;
+				final int mh = menuBar.getPreferredSize().height;
 				if (leftToRight) {
 					menuBar.setBounds(2, (h - mh) / 2, mw, mh);
 				} else {
@@ -327,7 +327,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 			}
 
 			int x = leftToRight ? w - spacing : 0;
-			int y = Math.max(0, (h - btnHeight) / 2 - 1);
+			final int y = Math.max(0, (h - btnHeight) / 2 - 1);
 
 			if (closeButton != null) {
 				x += leftToRight ? -btnWidth : spacing;
@@ -363,27 +363,27 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 					maxWidth -= menuBar.getPreferredSize().width;
 					maxWidth -= spacing;
 				}
-				int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
-				int cph = h;
-				int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
-				int cpy = 0;
+				final int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
+				final int cph = h;
+				final int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
+				final int cpy = 0;
 				customTitlePanel.setBounds(cpx, cpy, cpw, cph);
 				buttonsWidth += customTitlePanel.getPreferredSize().width;
 			}
 		}
 
-		public void layoutMacStyle(Container c) {
-			int spacing = getHorSpacing();
+		public void layoutMacStyle(final Container c) {
+			final int spacing = getHorSpacing();
 			getWidth();
-			int h = getHeight();
+			final int h = getHeight();
 
 			// assumes all buttons have the same dimensions these dimensions include the
 			// borders
-			int btnHeight = h - getVerSpacing() - 1;
-			int btnWidth = btnHeight;
+			final int btnHeight = h - getVerSpacing() - 1;
+			final int btnWidth = btnHeight;
 
 			int x = 2;
-			int y = centerButtons() ? Math.max(0, (h - btnHeight) / 2 - 1) : 0;
+			final int y = centerButtons() ? Math.max(0, (h - btnHeight) / 2 - 1) : 0;
 
 			if (closeButton != null) {
 				closeButton.setBounds(x, y, btnWidth, btnHeight);
@@ -403,28 +403,28 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 			buttonsWidth = x;
 
 			if (customTitlePanel != null) {
-				int cpx = buttonsWidth + 5;
-				int cpy = 0;
-				int cpw = customTitlePanel.getPreferredSize().width;
-				int cph = h;
+				final int cpx = buttonsWidth + 5;
+				final int cpy = 0;
+				final int cpw = customTitlePanel.getPreferredSize().width;
+				final int cph = h;
 				customTitlePanel.setBounds(cpx, cpy, cpw, cph);
 				buttonsWidth += cpw + 5;
 			}
 		}
 
 		@Override
-		public Dimension minimumLayoutSize(Container c) {
+		public Dimension minimumLayoutSize(final Container c) {
 			return preferredLayoutSize(c);
 		}
 
 		@Override
-		public Dimension preferredLayoutSize(Container c) {
-			int height = computeHeight();
+		public Dimension preferredLayoutSize(final Container c) {
+			final int height = computeHeight();
 			return new Dimension(height, height);
 		}
 
 		@Override
-		public void removeLayoutComponent(Component c) {
+		public void removeLayoutComponent(final Component c) {
 		}
 	}
 
@@ -432,17 +432,17 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	protected class WindowHandler extends WindowAdapter {
 
 		@Override
-		public void windowActivated(WindowEvent ev) {
+		public void windowActivated(final WindowEvent ev) {
 			setActive(true);
 		}
 
 		@Override
-		public void windowDeactivated(WindowEvent ev) {
+		public void windowDeactivated(final WindowEvent ev) {
 			setActive(false);
 		}
 
 		@Override
-		public void windowDeiconified(WindowEvent e) {
+		public void windowDeiconified(final WindowEvent e) {
 			// Workarround to avoid a bug within OSX and Java 1.7
 			if (JTattooUtilities.isMac() && JTattooUtilities.getJavaVersion() >= 1.7 && wasMaximized) {
 				SwingUtilities.invokeLater(BaseTitlePane.this::maximize);
@@ -463,15 +463,15 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/** Constant CLOSE="Close" */
 	public static final String CLOSE = "Close";
 
-	static int getInt(Object key, int defaultValue) {
-		Object value = UIManager.get(key);
+	static int getInt(final Object key, final int defaultValue) {
+		final Object value = UIManager.get(key);
 		if (value instanceof Integer) {
 			return (Integer) value;
 		}
 		if (value instanceof String) {
 			try {
 				return Integer.parseInt((String) value);
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 			}
 		}
 		return defaultValue;
@@ -533,7 +533,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public BaseTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public BaseTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		rootPane = root;
 		rootPaneUI = ui;
 		state = -1;
@@ -571,10 +571,10 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * @param frame a {@link java.awt.Frame} object.
 	 * @return a {@link java.awt.Rectangle} object.
 	 */
-	protected Rectangle calculateMaxBounds(Frame frame) {
-		GraphicsConfiguration gc = frame.getGraphicsConfiguration();
-		Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-		Rectangle maxBounds = gc.getBounds();
+	protected Rectangle calculateMaxBounds(final Frame frame) {
+		final GraphicsConfiguration gc = frame.getGraphicsConfiguration();
+		final Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
+		final Rectangle maxBounds = gc.getBounds();
 		maxBounds.x = Math.max(0, screenInsets.left);
 		maxBounds.y = Math.max(0, screenInsets.top);
 		maxBounds.width -= screenInsets.left + screenInsets.right;
@@ -641,8 +641,8 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 */
 	protected void createMenuBar() {
 		menuBar = new SystemMenuBar();
-		if (rootPane.getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
-			JMenu menu = new JMenu("   ");
+		if (rootPane.getWindowDecorationStyle() == JRootPane.FRAME) {
+			final JMenu menu = new JMenu("   ");
 
 			JMenuItem mi = menu.add(restoreAction);
 			int mnemonic = getInt("MetalTitlePane.restoreMnemonic", -1);
@@ -756,13 +756,13 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * @return a int.
 	 */
 	protected int getIconWidth() {
-		Image image = getFrameIconImage();
+		final Image image = getFrameIconImage();
 		if (image != null) {
-			int h = getHeight();
+			final int h = getHeight();
 			int ih = image.getHeight(null);
 			int iw = image.getWidth(null);
 			if (ih > h) {
-				double fac = (double) iw / (double) ih;
+				final double fac = (double) iw / (double) ih;
 				ih = h;
 				iw = (int) (fac * ih);
 			}
@@ -812,7 +812,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/** {@inheritDoc} */
 	@Override
 	public void iconify() {
-		Frame frame = getFrame();
+		final Frame frame = getFrame();
 		if (frame != null) {
 			if (JTattooUtilities.isMac() && JTattooUtilities.getJavaVersion() >= 1.7) {
 				// Workarround to avoid a bug within OSX and Java 1.7
@@ -845,7 +845,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	private void installSubcomponents() {
 		createActions();
 		createButtons();
-		if (rootPane.getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
+		if (rootPane.getWindowDecorationStyle() == JRootPane.FRAME) {
 			if (!isMacStyleWindowDecoration()) {
 				createMenuBar();
 				add(menuBar);
@@ -887,15 +887,15 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/** {@inheritDoc} */
 	@Override
 	public void maximize() {
-		Frame frame = getFrame();
+		final Frame frame = getFrame();
 		if (frame != null) {
 			validateMaximizedBounds();
-			PropertyChangeListener[] pcl = frame.getPropertyChangeListeners();
-			for (PropertyChangeListener pcl1 : pcl) {
+			final PropertyChangeListener[] pcl = frame.getPropertyChangeListeners();
+			for (final PropertyChangeListener pcl1 : pcl) {
 				pcl1.propertyChange(new PropertyChangeEvent(this, "windowMaximize", Boolean.FALSE, Boolean.FALSE));
 			}
 			frame.setExtendedState(state | BaseRootPaneUI.MAXIMIZED_BOTH);
-			for (PropertyChangeListener pcl1 : pcl) {
+			for (final PropertyChangeListener pcl1 : pcl) {
 				pcl1.propertyChange(new PropertyChangeEvent(this, "windowMaximized", Boolean.FALSE, Boolean.FALSE));
 			}
 
@@ -907,13 +907,13 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 */
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		if (isActive()) {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
 			if (backgroundImage != null) {
 				g.drawImage(backgroundImage, 0, 0, null);
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue);
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue);
 				g2D.setComposite(alpha);
 			}
 			JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, getWidth(),
@@ -927,7 +927,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintComponent(Graphics g) {
+	public void paintComponent(final Graphics g) {
 		if (getFrame() != null) {
 			setState(getFrame().getExtendedState());
 		}
@@ -935,40 +935,40 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		paintBackground(g);
 
 		g.setFont(getFont());
-		FontMetrics fm = JTattooUtilities.getFontMetrics(this, g, getFont());
-		int width = getWidth();
-		int height = getHeight();
+		final FontMetrics fm = JTattooUtilities.getFontMetrics(this, g, getFont());
+		final int width = getWidth();
+		final int height = getHeight();
 		int x = 0;
-		int y = (height - fm.getHeight()) / 2 + fm.getAscent();
+		final int y = (height - fm.getHeight()) / 2 + fm.getAscent();
 		int titleWidth = width - buttonsWidth - 4;
 		String frameTitle = getTitle();
 		if (isLeftToRight()) {
 			if (isMacStyleWindowDecoration()) {
-				int iconWidth = getIconWidth();
+				final int iconWidth = getIconWidth();
 				titleWidth -= iconWidth + 4;
 				frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
-				int titleLength = fm.stringWidth(frameTitle);
+				final int titleLength = fm.stringWidth(frameTitle);
 				x += buttonsWidth + (titleWidth - titleLength) / 2;
 				paintIcon(g, x);
 				x += iconWidth + 4;
 			} else {
 				if (getWindow() instanceof JDialog) {
-					int iconWidth = paintIcon(g, x);
+					final int iconWidth = paintIcon(g, x);
 					titleWidth -= iconWidth + 4;
 					frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
 					if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
-						int titleLength = fm.stringWidth(frameTitle);
+						final int titleLength = fm.stringWidth(frameTitle);
 						x += iconWidth + 4;
 						x += (titleWidth - titleLength) / 2;
 					} else {
 						x += iconWidth + 4;
 					}
 				} else {
-					int menuBarWidth = menuBar == null ? 0 : menuBar.getWidth();
+					final int menuBarWidth = menuBar == null ? 0 : menuBar.getWidth();
 					titleWidth -= menuBarWidth + 4;
 					frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
 					if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
-						int titleLength = fm.stringWidth(frameTitle);
+						final int titleLength = fm.stringWidth(frameTitle);
 						x += menuBarWidth + 4;
 						x += (titleWidth - titleLength) / 2;
 					} else {
@@ -977,11 +977,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 				}
 			}
 		} else {
-			int iconWidth = getIconWidth();
+			final int iconWidth = getIconWidth();
 			if (isMacStyleWindowDecoration()) {
 				titleWidth -= iconWidth + 4;
 				frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
-				int titleLength = fm.stringWidth(frameTitle);
+				final int titleLength = fm.stringWidth(frameTitle);
 				x = buttonsWidth + 4 + (titleWidth - titleLength) / 2;
 				paintIcon(g, x + titleLength + 4);
 			} else {
@@ -990,17 +990,17 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 					paintIcon(g, x);
 					titleWidth -= iconWidth + 4;
 					frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
-					int titleLength = fm.stringWidth(frameTitle);
+					final int titleLength = fm.stringWidth(frameTitle);
 					if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
 						x = buttonsWidth + 4 + (titleWidth - titleLength) / 2;
 					} else {
 						x = width - iconWidth - 4 - titleLength;
 					}
 				} else {
-					int menuBarWidth = menuBar == null ? 0 : menuBar.getWidth();
+					final int menuBarWidth = menuBar == null ? 0 : menuBar.getWidth();
 					titleWidth -= menuBarWidth + 4;
 					frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
-					int titleLength = fm.stringWidth(frameTitle);
+					final int titleLength = fm.stringWidth(frameTitle);
 					if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
 						x = buttonsWidth + 4 + (titleWidth - titleLength) / 2;
 					} else {
@@ -1019,19 +1019,19 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * @param x a int.
 	 * @return a int.
 	 */
-	protected int paintIcon(Graphics g, int x) {
-		Image image = getFrameIconImage();
+	protected int paintIcon(final Graphics g, final int x) {
+		final Image image = getFrameIconImage();
 		if (image != null) {
-			Graphics2D g2D = (Graphics2D) g;
-			Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
 			g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-			int h = getHeight() - 2;
+			final int h = getHeight() - 2;
 			int ih = image.getHeight(null);
 			int iw = image.getWidth(null);
 			if (ih <= h) {
 				g2D.drawImage(image, x, (h - ih) / 2, iw, ih, null);
 			} else {
-				double fac = (double) iw / (double) ih;
+				final double fac = (double) iw / (double) ih;
 				ih = h;
 				iw = (int) (fac * ih);
 				g2D.drawImage(image, x, 0, iw, ih, null);
@@ -1052,7 +1052,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * @param y a int.
 	 * @param title a {@link java.lang.String} object.
 	 */
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
 		} else {
@@ -1072,11 +1072,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/** {@inheritDoc} */
 	@Override
 	public void restore() {
-		Frame frame = getFrame();
+		final Frame frame = getFrame();
 		if (frame != null) {
 			wasMaximizeError = false;
-			PropertyChangeListener[] pcl = frame.getPropertyChangeListeners();
-			for (PropertyChangeListener pcl1 : pcl) {
+			final PropertyChangeListener[] pcl = frame.getPropertyChangeListeners();
+			for (final PropertyChangeListener pcl1 : pcl) {
 				pcl1.propertyChange(new PropertyChangeEvent(this, "windowRestore", Boolean.FALSE, Boolean.FALSE));
 			}
 			if ((state & Frame.ICONIFIED) != 0) {
@@ -1084,7 +1084,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 			} else {
 				frame.setExtendedState(state & ~BaseRootPaneUI.MAXIMIZED_BOTH);
 			}
-			for (PropertyChangeListener pcl1 : pcl) {
+			for (final PropertyChangeListener pcl1 : pcl) {
 				pcl1.propertyChange(new PropertyChangeEvent(this, "windowRestored", Boolean.FALSE, Boolean.FALSE));
 			}
 		}
@@ -1095,9 +1095,9 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 *
 	 * @param flag a boolean.
 	 */
-	protected void setActive(boolean flag) {
-		if (rootPane.getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
-			Boolean active = flag ? Boolean.TRUE : Boolean.FALSE;
+	protected void setActive(final boolean flag) {
+		if (rootPane.getWindowDecorationStyle() == JRootPane.FRAME) {
+			final Boolean active = flag ? Boolean.TRUE : Boolean.FALSE;
 			iconifyButton.putClientProperty(PAINT_ACTIVE, active);
 			closeButton.putClientProperty(PAINT_ACTIVE, active);
 			maxButton.putClientProperty(PAINT_ACTIVE, active);
@@ -1110,7 +1110,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 *
 	 * @param alpha a float.
 	 */
-	public void setAlphaTransparency(float alpha) {
+	public void setAlphaTransparency(final float alpha) {
 		alphaValue = alpha;
 	}
 
@@ -1119,7 +1119,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 *
 	 * @param bgImage a {@link java.awt.image.BufferedImage} object.
 	 */
-	public void setBackgroundImage(BufferedImage bgImage) {
+	public void setBackgroundImage(final BufferedImage bgImage) {
 		backgroundImage = bgImage;
 	}
 
@@ -1128,7 +1128,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 *
 	 * @param panel a {@link javax.swing.JPanel} object.
 	 */
-	public void setCustomizedTitlePanel(JPanel panel) {
+	public void setCustomizedTitlePanel(final JPanel panel) {
 		if (customTitlePanel != null) {
 			remove(customTitlePanel);
 			customTitlePanel = null;
@@ -1147,7 +1147,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 *
 	 * @param state a int.
 	 */
-	protected void setState(int state) {
+	protected void setState(final int state) {
 		setState(state, false);
 	}
 
@@ -1157,8 +1157,8 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * @param state a int.
 	 * @param updateRegardless a boolean.
 	 */
-	protected void setState(int state, boolean updateRegardless) {
-		if (window != null && rootPane.getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
+	protected void setState(final int state, final boolean updateRegardless) {
+		if (window != null && rootPane.getWindowDecorationStyle() == JRootPane.FRAME) {
 			if (this.state == state && !updateRegardless) {
 				return;
 			}
@@ -1208,7 +1208,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 					validateMaximizedBounds();
 					rootPane.setBorder(null);
 					SwingUtilities.invokeLater(() -> {
-						Rectangle maxBounds = calculateMaxBounds(frame);
+						final Rectangle maxBounds = calculateMaxBounds(frame);
 						if (frame.getWidth() != maxBounds.width || frame.getHeight() != maxBounds.height) {
 							restore();
 							wasMaximizeError = true;
@@ -1254,7 +1254,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * @param action a {@link javax.swing.Action} object.
 	 * @param icon a {@link javax.swing.Icon} object.
 	 */
-	protected void updateMaxButton(Action action, Icon icon) {
+	protected void updateMaxButton(final Action action, final Icon icon) {
 		maxButton.setAction(action);
 		maxButton.setIcon(icon);
 	}
@@ -1263,9 +1263,9 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * <p>validateMaximizedBounds.</p>
 	 */
 	protected void validateMaximizedBounds() {
-		Frame frame = getFrame();
+		final Frame frame = getFrame();
 		if (frame != null && !wasMaximizeError) {
-			Rectangle maxBounds = calculateMaxBounds(frame);
+			final Rectangle maxBounds = calculateMaxBounds(frame);
 			frame.setMaximizedBounds(maxBounds);
 		}
 	}

@@ -47,16 +47,16 @@ public class ImageDataDecoder {
 	 * @return
 	 ************************************************************************/
     
-	static byte[] decodeImageData(BufferedImage bimg) {
+	static byte[] decodeImageData(final BufferedImage bimg) {
 		byte[] output = null;
 	
-		int type = bimg.getType();
+		final int type = bimg.getType();
 
 		if (type == BufferedImage.TYPE_INT_RGB) {
 			// read back the data
-			DataBufferInt db = (DataBufferInt) bimg.getData()
+			final DataBufferInt db = (DataBufferInt) bimg.getData()
 					.getDataBuffer();
-			int[] data = db.getData();
+			final int[] data = db.getData();
 
 			output = new byte[data.length * 3];
 			for (int i = 0, offset = 0; i < data.length; i++, offset += 3) {
@@ -65,14 +65,14 @@ public class ImageDataDecoder {
 				output[offset + 2] = (byte) (data[i]);
 			}
 		} else if (type == BufferedImage.TYPE_BYTE_GRAY) {
-			DataBufferByte db = (DataBufferByte) bimg.getData()
+			final DataBufferByte db = (DataBufferByte) bimg.getData()
 					.getDataBuffer();
 			output = db.getData();
 		} else if (type == BufferedImage.TYPE_INT_ARGB) {
 			// read back the data
-			DataBufferInt db = (DataBufferInt) bimg.getData()
+			final DataBufferInt db = (DataBufferInt) bimg.getData()
 					.getDataBuffer();
-			int[] data = db.getData();
+			final int[] data = db.getData();
 
 			output = new byte[data.length * 4];
 			for (int i = 0, offset = 0; i < data.length; i++, offset += 4) {
@@ -84,15 +84,15 @@ public class ImageDataDecoder {
 		} else {
 			// The raster is in some other format.
 			// We have to convert it into TYPE_INT_RGB before we can use it.
-			BufferedImage tmp = new BufferedImage(bimg.getWidth(),
+			final BufferedImage tmp = new BufferedImage(bimg.getWidth(),
 					bimg.getHeight(), BufferedImage.TYPE_INT_RGB);
-			Graphics g = tmp.createGraphics();
+			final Graphics g = tmp.createGraphics();
 			g.drawImage(bimg, 0, 0, null);
 			g.dispose();
 			// read back the data
-			DataBufferInt db = (DataBufferInt) tmp.getData()
+			final DataBufferInt db = (DataBufferInt) tmp.getData()
 					.getDataBuffer();
-			int[] data = db.getData();
+			final int[] data = db.getData();
 
 			output = new byte[data.length * 3];
 			for (int i = 0, offset = 0; i < data.length; i++, offset += 3) {

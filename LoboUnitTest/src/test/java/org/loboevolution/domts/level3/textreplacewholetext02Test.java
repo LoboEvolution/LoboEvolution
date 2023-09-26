@@ -49,11 +49,11 @@ import static org.junit.Assert.assertNull;
 public class textreplacewholetext02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection itemList;
-        Element elementName;
-        Text textNode;
-        Text replacedText;
+        final Document doc;
+        final HTMLCollection itemList;
+        final Element elementName;
+        final Text textNode;
+        final Text replacedText;
         doc = sampleXmlFile("hc_staff.xml");
         itemList = doc.getElementsByTagName("strong");
         elementName = (Element) itemList.item(0);

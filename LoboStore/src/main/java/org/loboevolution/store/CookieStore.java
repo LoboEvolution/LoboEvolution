@@ -66,7 +66,7 @@ public class CookieStore {
 	 * @param urlHostName a {@link java.lang.String} object.
 	 * @param cookieSpec a {@link java.lang.String} object.
 	 */
-	public static void saveCookie(String urlHostName, String cookieSpec) {
+	public static void saveCookie(final String urlHostName, final String cookieSpec) {
 		String cookieName = null;
 		String cookieValue = null;
 		String domain = null;
@@ -76,11 +76,11 @@ public class CookieStore {
 		String secure = null;
 		String httpOnly = null;
 		boolean hasCookieName = false;
-		String[] splitUsingTokenizer = Strings.splitUsingTokenizer(cookieSpec, ";");
-		for (String token : splitUsingTokenizer) {
-			int idx = token.indexOf('=');
-			String name = idx == -1 ? token.trim() : token.substring(0, idx).trim();
-			String value = idx == -1 ? "" : Strings.unquote(token.substring(idx + 1).trim());
+		final String[] splitUsingTokenizer = Strings.splitUsingTokenizer(cookieSpec, ";");
+		for (final String token : splitUsingTokenizer) {
+			final int idx = token.indexOf('=');
+			final String name = idx == -1 ? token.trim() : token.substring(0, idx).trim();
+			final String value = idx == -1 ? "" : Strings.unquote(token.substring(idx + 1).trim());
 			if (!hasCookieName) {
 				cookieName = name;
 				cookieValue = value;
@@ -126,11 +126,11 @@ public class CookieStore {
 			if (maxAge != null) {
 				try {
 					expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
-				} catch (NumberFormatException e) {
+				} catch (final NumberFormatException e) {
 					logger.log(Level.SEVERE, e.getMessage(), e);
 				}
 			} else if (expires != null) {
-				DateUtil du = new DateUtil();
+				final DateUtil du = new DateUtil();
 				expiresDate = du.determineDateFormat(expires, Locale.US);
 			}
 
@@ -157,10 +157,10 @@ public class CookieStore {
 	 * @param secure a boolean.
 	 * @param httponly a boolean.
 	 */
-	public static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge, boolean secure, boolean httponly) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COOKIES)) {
-			SimpleDateFormat dateFormatter = new SimpleDateFormat(PATTERN);
+	public static void saveCookie(final String domain, final String path, final String name, final Date expires, final String value, final String maxAge, final boolean secure, final boolean httponly) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COOKIES)) {
+			final SimpleDateFormat dateFormatter = new SimpleDateFormat(PATTERN);
 			pstmt.setString(1, name);
 			pstmt.setString(2, value);
 			pstmt.setString(3, domain);
@@ -170,7 +170,7 @@ public class CookieStore {
 			pstmt.setInt(7, secure ? 1 : 0);
 			pstmt.setInt(8, httponly ? 1 : 0);
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
@@ -182,16 +182,16 @@ public class CookieStore {
 	 * @param path a {@link java.lang.String} object.
 	 * @return a {@link java.util.List} object.
 	 */
-	public static List<Cookie> getCookies(String hostName, String path) {
-		List<Cookie> cookies = new ArrayList<>();
+	public static List<Cookie> getCookies(final String hostName, final String path) {
+		final List<Cookie> cookies = new ArrayList<>();
 		if (settings.isCookie()) {
-			try (Connection conn = DriverManager.getConnection(DB_PATH);
-					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
+			try (final Connection conn = DriverManager.getConnection(DB_PATH);
+                 final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
 				pstmt.setString(1, hostName);
 				pstmt.setString(2, path);
-				try (ResultSet rs = pstmt.executeQuery()) {
+				try (final ResultSet rs = pstmt.executeQuery()) {
 					while (rs != null && rs.next()) {
-						Cookie cookie = new Cookie("", "");
+						final Cookie cookie = new Cookie("", "");
 						cookie.setName((rs.getString(1)));
 						cookie.setValue((rs.getString(2)));
 						cookie.setDomain((rs.getString(3)));
@@ -203,7 +203,7 @@ public class CookieStore {
 						cookies.add(cookie);
 					}
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logger.log(Level.SEVERE, e.getMessage(), e);
 				return null;
 			}

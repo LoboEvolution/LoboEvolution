@@ -50,7 +50,7 @@ public class PreferencesAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public PreferencesAction(BrowserFrame frame) {
+	public PreferencesAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 

@@ -27,7 +27,6 @@
 package org.loboevolution.html.dom.nodeimpl;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.DOMLocator;
@@ -52,7 +51,7 @@ public class DOMErrorImpl implements DOMError {
    * Public constructor
    *
    */
-  public DOMErrorImpl(DOMError src) {
+  public DOMErrorImpl(final DOMError src) {
     this.severity = src.getSeverity();
     this.message = src.getMessage();
     this.type = src.getType();

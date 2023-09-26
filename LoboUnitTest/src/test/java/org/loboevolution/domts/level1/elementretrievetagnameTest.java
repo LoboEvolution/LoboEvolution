@@ -57,9 +57,9 @@ public class elementretrievetagnameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
         String name;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("position");

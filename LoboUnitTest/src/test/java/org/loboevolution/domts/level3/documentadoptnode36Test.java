@@ -46,20 +46,20 @@ public class documentadoptnode36Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Document newDoc;
-        ProcessingInstruction newPI1;
-        ProcessingInstruction newPI2;
-        ProcessingInstruction adoptedPI1;
-        ProcessingInstruction adoptedPI2;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Document newDoc;
+        final ProcessingInstruction newPI1;
+        final ProcessingInstruction newPI2;
+        final ProcessingInstruction adoptedPI1;
+        final ProcessingInstruction adoptedPI2;
         String piTarget;
         String piData;
-        DocumentType nullDocType = null;
+        final DocumentType nullDocType = null;
 
-        Element docElem;
-        String rootNS;
-        String rootName;
+        final Element docElem;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();

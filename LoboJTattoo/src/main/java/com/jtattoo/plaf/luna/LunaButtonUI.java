@@ -58,13 +58,13 @@ public class LunaButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
-		int w = b.getWidth();
-		int h = b.getHeight();
-		Graphics2D g2D = (Graphics2D) g;
-		Shape savedClip = g.getClip();
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
+		final int w = b.getWidth();
+		final int h = b.getHeight();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Shape savedClip = g.getClip();
 		if (b.getBorder() != null && b.isBorderPainted() && b.getBorder() instanceof UIResource) {
-			Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
+			final Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
 			if (savedClip != null) {
 				clipArea.intersect(new Area(savedClip));
 			}
@@ -74,7 +74,7 @@ public class LunaButtonUI extends BaseButtonUI {
 		if (b.isContentAreaFilled() && b.isRolloverEnabled() && b.getModel().isRollover() && b.getBorder() != null
 				&& b.isBorderPainted()) {
 			g.setColor(AbstractLookAndFeel.getTheme().getFocusColor());
-			Insets ins = b.getBorder().getBorderInsets(b);
+			final Insets ins = b.getBorder().getBorderInsets(b);
 			if (ins.top == 0 && ins.left == 1) {
 				g.drawRect(1, 0, w - 2, h - 1);
 				g.drawRect(2, 1, w - 4, h - 3);
@@ -88,8 +88,8 @@ public class LunaButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
-			Rectangle iconRect) {
+	protected void paintFocus(final Graphics g, final AbstractButton b, final Rectangle viewRect, final Rectangle textRect,
+                              final Rectangle iconRect) {
 		g.setColor(Color.black);
 		BasicGraphicsUtils.drawDashedRect(g, 3, 3, b.getWidth() - 6, b.getHeight() - 6);
 	}

@@ -47,7 +47,7 @@ class DocumentNotification {
 	 * @param type a int.
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
-	public DocumentNotification(int type, NodeImpl node) {
+	public DocumentNotification(final int type, final NodeImpl node) {
 		this.type = type;
 		this.node = node;
 	}

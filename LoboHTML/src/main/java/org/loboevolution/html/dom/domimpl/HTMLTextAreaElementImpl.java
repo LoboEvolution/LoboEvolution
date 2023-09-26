@@ -61,9 +61,9 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public int getCols() {	
-		String cols = this.getAttribute("cols");
+		final String cols = this.getAttribute("cols");
 		if (Strings.isNotBlank(cols)  && Strings.isNumeric(cols)) {
-			float rowsInt = Float.parseFloat(cols);
+			final float rowsInt = Float.parseFloat(cols);
 			if (rowsInt > -1) {
 				return (int) rowsInt;
 			} else {
@@ -93,9 +93,9 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public int getRows() {
-		String rows = this.getAttribute("rows");
+		final String rows = this.getAttribute("rows");
 		if (Strings.isNotBlank(rows)  && Strings.isNumeric(rows)) {
-			float rowsInt = Float.parseFloat(rows);
+			final float rowsInt = Float.parseFloat(rows);
 			if (rowsInt > -1) {
 				return (int) rowsInt;
 			} else {
@@ -120,27 +120,27 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCols(Integer cols) {
+	public void setCols(final Integer cols) {
 		setAttribute("cols", String.valueOf(cols));
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setName(String name) {
+	public void setName(final String name) {
 		setAttribute("name", name);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRows(Integer rows) {
+	public void setRows(final Integer rows) {
 		setAttribute("rows", String.valueOf(rows));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValue(String value) {
+	public void setValue(final String value) {
 		this.value = Strings.isBlank(value) ? "" : value;
 		this.isSet = true;
 		setSelectionStart(Strings.isBlank(value) ? 0 : value.length());
@@ -166,19 +166,19 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 	 *
 	 * @param ic a {@link org.loboevolution.html.control.TextAreaControl} object.
 	 */
-	public void draw(TextAreaControl ic) {
+	public void draw(final TextAreaControl ic) {
 		textArea = new TextArea(this, ic);
 	}
 	
 	
 	private String getText() {
-		StringBuilder text = new StringBuilder();
+		final StringBuilder text = new StringBuilder();
 		if (hasChildNodes()) {
-			NodeListImpl children = (NodeListImpl)getChildNodes();
+			final NodeListImpl children = (NodeListImpl)getChildNodes();
 			children.forEach(child -> {
 				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
-					String childText;
+					final String childText;
 					nodeValue = nodeValue.replace('\n', ' ');
 					nodeValue = nodeValue.replace('\r', ' ');
 					nodeValue = nodeValue.replace('\t', ' ');
@@ -204,31 +204,31 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWrap(String wrap) {
+	public void setWrap(final String wrap) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public int getClientHeight() {
-		int clientHeight = super.getClientHeight();
+		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 34 : clientHeight;
 	}
 
 	@Override
 	public Integer getClientWidth() {
-		int clientWidth = super.getClientWidth();
+		final int clientWidth = super.getClientWidth();
 		return clientWidth == 0 ? 168 : clientWidth;
 	}
 
 	@Override
 	public Integer getOffsetWidth() {
-		int offsetWidth = super.getOffsetWidth();
+		final int offsetWidth = super.getOffsetWidth();
 		return offsetWidth == 0 ? 183 : offsetWidth;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
 	}
 

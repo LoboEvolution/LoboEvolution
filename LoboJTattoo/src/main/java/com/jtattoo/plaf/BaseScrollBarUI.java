@@ -81,7 +81,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		public void mouseEntered(final MouseEvent e) {
 			super.mouseEntered(e);
 			isRollover = true;
-			Rectangle r = getTrackBounds();
+			final Rectangle r = getTrackBounds();
 			scrollbar.repaint(r.x, r.y, r.width, r.height);
 		}
 
@@ -89,21 +89,21 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		public void mouseExited(final MouseEvent e) {
 			super.mouseExited(e);
 			isRollover = false;
-			Rectangle r = getTrackBounds();
+			final Rectangle r = getTrackBounds();
 			scrollbar.repaint(r.x, r.y, r.width, r.height);
 		}
 
 		@Override
 		public void mousePressed(final MouseEvent e) {
 			super.mousePressed(e);
-			Rectangle r = getTrackBounds();
+			final Rectangle r = getTrackBounds();
 			scrollbar.repaint(r.x, r.y, r.width, r.height);
 		}
 
 		@Override
 		public void mouseReleased(final MouseEvent e) {
 			super.mouseReleased(e);
-			Rectangle r = getTrackBounds();
+			final Rectangle r = getTrackBounds();
 			scrollbar.repaint(r.x, r.y, r.width, r.height);
 		}
 
@@ -124,7 +124,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected JButton createDecreaseButton(int orientation) {
+	protected JButton createDecreaseButton(final int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 			return new InvisibleScrollButton();
 		} else {
@@ -156,7 +156,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension getPreferredSize(JComponent c) {
+	public Dimension getPreferredSize(final JComponent c) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 			if (scrollbar.getOrientation() == Adjustable.VERTICAL) {
 				return new Dimension(scrollBarWidth + 1, scrollBarWidth * 3);
@@ -200,7 +200,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		// handle scaling for sizeVarients for special case components. The
 		// key "JComponent.sizeVariant" scales for large/small/mini
 		// components are based on Apples LAF
-		String scaleKey = (String) scrollbar.getClientProperty("JComponent.sizeVariant");
+		final String scaleKey = (String) scrollbar.getClientProperty("JComponent.sizeVariant");
 		switch (scaleKey != null ? scaleKey : "") {
 			case "large":
 				scrollBarWidth = (int) (scrollBarWidth * 1.15);
@@ -224,25 +224,25 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void layoutHScrollbar(JScrollBar sb) {
+	protected void layoutHScrollbar(final JScrollBar sb) {
 		if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn() && incrButton.isVisible()
 				&& decrButton.isVisible()) {
-			Dimension sbSize = sb.getSize();
-			Insets sbInsets = sb.getInsets();
-			int sizeW = sbSize.width - sbInsets.left - sbInsets.right;
+			final Dimension sbSize = sb.getSize();
+			final Insets sbInsets = sb.getInsets();
+			final int sizeW = sbSize.width - sbInsets.left - sbInsets.right;
 
 			/*
 			 * Height and top edge of the buttons and thumb.
 			 */
-			int itemY = sbInsets.top;
-			int itemH = sbSize.height - (sbInsets.top + sbInsets.bottom);// Math.min(itemW, sizeH / 2);
-			int itemW = Math.min(itemH, sizeW / 2);// sbSize.width - (sbInsets.left + sbInsets.right);
+			final int itemY = sbInsets.top;
+			final int itemH = sbSize.height - (sbInsets.top + sbInsets.bottom);// Math.min(itemW, sizeH / 2);
+			final int itemW = Math.min(itemH, sizeW / 2);// sbSize.width - (sbInsets.left + sbInsets.right);
 
 			/*
 			 * Nominal locations of the buttons, assuming their preferred size will fit.
 			 */
-			int decrButtonX = sbSize.width - sbInsets.right - itemW - itemW + 1;
-			int incrButtonX = sbSize.width - sbInsets.right - itemW;
+			final int decrButtonX = sbSize.width - sbInsets.right - itemW - itemW + 1;
+			final int incrButtonX = sbSize.width - sbInsets.right - itemW;
 
 			/*
 			 * Compute the width and origin of the thumb. The case where the thumb is at the
@@ -250,22 +250,22 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 			 * thumbX. Enforce the thumbs min/max dimensions. If the thumb doesn't fit in
 			 * the track (trackW) we'll hide it later.
 			 */
-			float trackW = sbSize.width - sbInsets.left - sbInsets.right - itemH - itemH + 1;
-			float min = sb.getMinimum();
-			float max = sb.getMaximum();
-			float extent = sb.getVisibleAmount();
-			float range = max - min;
-			float value = sb.getValue();
+			final float trackW = sbSize.width - sbInsets.left - sbInsets.right - itemH - itemH + 1;
+			final float min = sb.getMinimum();
+			final float max = sb.getMaximum();
+			final float extent = sb.getVisibleAmount();
+			final float range = max - min;
+			final float value = sb.getValue();
 
-			int maxThumbW = getMaximumThumbSize().width;
-			int minThumbW = getMinimumThumbSize().width;
+			final int maxThumbW = getMaximumThumbSize().width;
+			final int minThumbW = getMinimumThumbSize().width;
 			int thumbW = range <= 0 ? maxThumbW : (int) (trackW * (extent / range));
 			thumbW = Math.max(thumbW, minThumbW);
 			thumbW = Math.min(thumbW, maxThumbW);
 
 			int thumbX = decrButtonX - thumbW;
 			if (value < max - extent) {
-				float thumbRange = trackW - thumbW;
+				final float thumbRange = trackW - thumbW;
 				thumbX = (int) (0.5f + thumbRange * ((value - min) / (range - extent)));
 			}
 
@@ -294,25 +294,25 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void layoutVScrollbar(JScrollBar sb) {
+	protected void layoutVScrollbar(final JScrollBar sb) {
 		if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn() && incrButton.isVisible()
 				&& decrButton.isVisible()) {
-			Dimension sbSize = sb.getSize();
-			Insets sbInsets = sb.getInsets();
-			int sizeH = sbSize.height - sbInsets.top - sbInsets.bottom;
+			final Dimension sbSize = sb.getSize();
+			final Insets sbInsets = sb.getInsets();
+			final int sizeH = sbSize.height - sbInsets.top - sbInsets.bottom;
 
 			/*
 			 * Width and left edge of the buttons and thumb.
 			 */
-			int itemX = sbInsets.left;
-			int itemW = sbSize.width - (sbInsets.left + sbInsets.right);
-			int itemH = Math.min(itemW, sizeH / 2);
+			final int itemX = sbInsets.left;
+			final int itemW = sbSize.width - (sbInsets.left + sbInsets.right);
+			final int itemH = Math.min(itemW, sizeH / 2);
 
 			/*
 			 * Nominal locations of the buttons, assuming their preferred size will fit.
 			 */
-			int decrButtonY = sbSize.height - sbInsets.bottom - itemH - itemH + 1;
-			int incrButtonY = sbSize.height - sbInsets.bottom - itemH;
+			final int decrButtonY = sbSize.height - sbInsets.bottom - itemH - itemH + 1;
+			final int incrButtonY = sbSize.height - sbInsets.bottom - itemH;
 
 			/*
 			 * Compute the height and origin of the thumb. The case where the thumb is at
@@ -320,22 +320,22 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 			 * thumbY. Enforce the thumbs min/max dimensions. If the thumb doesn't fit in
 			 * the track (trackH) we'll hide it later.
 			 */
-			float trackH = sbSize.height - sbInsets.top - sbInsets.bottom - itemW - itemW + 1;
-			float min = sb.getMinimum();
-			float max = sb.getMaximum();
-			float extent = sb.getVisibleAmount();
-			float range = max - min;
-			float value = sb.getValue();
+			final float trackH = sbSize.height - sbInsets.top - sbInsets.bottom - itemW - itemW + 1;
+			final float min = sb.getMinimum();
+			final float max = sb.getMaximum();
+			final float extent = sb.getVisibleAmount();
+			final float range = max - min;
+			final float value = sb.getValue();
 
-			int maxThumbH = getMaximumThumbSize().height;
-			int minThumbH = getMinimumThumbSize().height;
+			final int maxThumbH = getMaximumThumbSize().height;
+			final int minThumbH = getMinimumThumbSize().height;
 			int thumbH = range <= 0 ? maxThumbH : (int) (trackH * (extent / range));
 			thumbH = Math.max(thumbH, minThumbH);
 			thumbH = Math.min(thumbH, maxThumbH);
 
 			int thumbY = decrButtonY - thumbH;
 			if (value < max - extent) {
-				float thumbRange = trackH - thumbH;
+				final float thumbRange = trackH - thumbH;
 				thumbY = (int) (0.5f + thumbRange * ((value - min) / (range - extent)));
 			}
 
@@ -364,14 +364,14 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+	protected void paintThumb(final Graphics g, final JComponent c, final Rectangle thumbBounds) {
 		if (c.isEnabled()) {
 			g.translate(thumbBounds.x, thumbBounds.y);
-			Color[] colors = getThumbColors();
-			Color frameColorHi = ColorHelper.brighter(colors[1], 20);
-			Color frameColorLo = ColorHelper.darker(colors[colors.length - 1], 10);
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
+			final Color[] colors = getThumbColors();
+			final Color frameColorHi = ColorHelper.brighter(colors[1], 20);
+			final Color frameColorLo = ColorHelper.darker(colors[colors.length - 1], 10);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
 			if (scrollbar.getOrientation() == Adjustable.VERTICAL) {
 				JTattooUtilities.fillVerGradient(g, colors, 1, 1, thumbBounds.width - 1, thumbBounds.height - 1);
 				JTattooUtilities.draw3DBorder(g, frameColorLo, ColorHelper.darker(frameColorLo, 15), 0, 0, thumbBounds.width, thumbBounds.height);
@@ -381,12 +381,12 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 				g.drawLine(1, 1, 1, thumbBounds.height - 2);
 
 				if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
-					int dx = 5;
+					final int dx = 5;
 					int dy = thumbBounds.height / 2 - 3;
-					int dw = thumbBounds.width - 11;
+					final int dw = thumbBounds.width - 11;
 
-					Color c1 = Color.white;
-					Color c2 = Color.darkGray;
+					final Color c1 = Color.white;
+					final Color c2 = Color.darkGray;
 
 					for (int i = 0; i < 4; i++) {
 						g.setColor(c1);
@@ -408,11 +408,11 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 				if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 					int dx = thumbBounds.width / 2 - 3;
-					int dy = 5;
-					int dh = thumbBounds.height - 11;
+					final int dy = 5;
+					final int dh = thumbBounds.height - 11;
 
-					Color c1 = Color.white;
-					Color c2 = Color.darkGray;
+					final Color c1 = Color.white;
+					final Color c2 = Color.darkGray;
 
 					for (int i = 0; i < 4; i++) {
 						g.setColor(c1);
@@ -431,11 +431,11 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
-		int w = c.getWidth();
-		int h = c.getHeight();
+	protected void paintTrack(final Graphics g, final JComponent c, final Rectangle trackBounds) {
+		final int w = c.getWidth();
+		final int h = c.getHeight();
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
-			Color bc = ColorHelper.darker(AbstractLookAndFeel.getTheme().getBackgroundColor(), 4);
+			final Color bc = ColorHelper.darker(AbstractLookAndFeel.getTheme().getBackgroundColor(), 4);
 			g.setColor(bc);
 			g.fillRect(0, 0, w, h);
 		} else {

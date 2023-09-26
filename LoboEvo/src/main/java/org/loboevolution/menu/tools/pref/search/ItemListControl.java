@@ -63,7 +63,7 @@ public class ItemListControl<T> extends JComponent {
 	 *
 	 * @param ief the ief
 	 */
-	public ItemListControl(ItemEditorFactory<T> ief) {
+	public ItemListControl(final ItemEditorFactory<T> ief) {
 		this.itemEditorFactory = ief;
 		this.comboBox = new JComboBox<>();
 		createAndShowGUI();
@@ -137,7 +137,7 @@ public class ItemListControl<T> extends JComponent {
 	 *
 	 * @param editListCaption the editListCaption to set
 	 */
-	public void setEditListCaption(String editListCaption) {
+	public void setEditListCaption(final String editListCaption) {
 		this.editListCaption = editListCaption;
 	}
 
@@ -146,7 +146,7 @@ public class ItemListControl<T> extends JComponent {
 	 *
 	 * @param caption the new editor caption
 	 */
-	public void setEditorCaption(String caption) {
+	public void setEditorCaption(final String caption) {
 		this.setEditListCaption(caption);
 	}
 
@@ -155,7 +155,7 @@ public class ItemListControl<T> extends JComponent {
 	 *
 	 * @param items the new items
 	 */
-	public void setItems(Collection<T> items) {
+	public void setItems(final Collection<T> items) {
 		final JComboBox<T> comboBox = this.getComboBox();
 		comboBox.removeAllItems();
 		for (final T item : items) {

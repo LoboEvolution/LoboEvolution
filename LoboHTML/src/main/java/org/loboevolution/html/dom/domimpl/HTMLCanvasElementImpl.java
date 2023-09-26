@@ -55,11 +55,11 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	/** {@inheritDoc} */
 	@Override
 	public int getWidth() {
-		String widthText = this.getAttribute("width");
+		final String widthText = this.getAttribute("width");
 		if (Strings.isBlank(widthText)) {
 			return getClientWidth();
 		}
-		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		return HtmlValues.getPixelSize(widthText, null, doc.getDefaultView(), 1);
 	}
 
@@ -72,17 +72,17 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	/** {@inheritDoc} */
 	@Override
 	public int getHeight() {
-		String heightText = this.getAttribute("height");
+		final String heightText = this.getAttribute("height");
 		if (Strings.isBlank(heightText)) {
 			return getClientHeight();
 		}
-		HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		return HtmlValues.getPixelSize(heightText, null, doc.getDefaultView(), 1);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHeight(int height) {
+	public void setHeight(final int height) {
 		this.setAttribute("height", String.valueOf(height));
 	}
 
@@ -95,42 +95,41 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 
 	/** {@inheritDoc} */
 	@Override
-	public String toDataURL(String type, Object... args) {
+	public String toDataURL(final String type, final Object... args) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void toBlob(FileCallback callback) {
+	public void toBlob(final FileCallback callback) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void toBlob(FileCallback callback, String type, Object... args) {
+	public void toBlob(final FileCallback callback, final String type, final Object... args) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public CanvasRenderingContext2D getContext(String contextId) {
-		CanvasRenderingImpl canvas = new CanvasRenderingImpl(this);
+	public CanvasRenderingContext2D getContext(final String contextId) {
+		final CanvasRenderingImpl canvas = new CanvasRenderingImpl(this);
 		image = canvas.getImage();
 		return canvas;
 	}
 
 	@Override
 	public int getClientHeight() {
-		int clientHeight = super.getClientHeight();
+		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 150 : clientHeight;
 	}
 
 	@Override
 	public Integer getClientWidth() {
-		int clientWidth = super.getClientWidth();
+		final int clientWidth = super.getClientWidth();
 		return clientWidth == 0 ? 300 : clientWidth;
 	}
 

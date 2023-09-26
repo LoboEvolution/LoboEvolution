@@ -49,9 +49,9 @@ import static org.junit.Assert.assertTrue;
 public class documentsetxmlversion01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         String versionValue;
-        List<String> illegalVersion = new ArrayList<>();
+        final List<String> illegalVersion = new ArrayList<>();
         illegalVersion.add("{");
         illegalVersion.add("}");
         illegalVersion.add("~");
@@ -89,7 +89,7 @@ public class documentsetxmlversion01Test extends LoboUnitTest {
                 boolean success = false;
                 try {
                     doc.setXmlVersion(versionValue);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
                 assertTrue("NOT_SUPPORTED_ERR_documentsetversion01", success);

@@ -81,11 +81,11 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 * @param num a {@link java.lang.Integer} object.
 	 */
-	public ShowPasswordWindow(BrowserFrame frame, Integer num) {
+	public ShowPasswordWindow(final BrowserFrame frame, final Integer num) {
 		createAndShowGUI(frame, num);
 	}
 	
-	private void createAndShowGUI(BrowserFrame frame, Integer num) {
+	private void createAndShowGUI(final BrowserFrame frame, final Integer num) {
 		final Container contentPane = getContentPane();
 		contentPane.setLayout(null);
 		contentPane.setBackground(background());
@@ -95,12 +95,12 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("bookmark.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
-		LoboLabel label_6 = new LoboLabel("");
+		final LoboLabel label_6 = new LoboLabel("");
 		label_6.setOpaque(true);
 		label_6.setBounds(0, 11, 792, 8);
 		contentPane.add(label_6);
 
-		LoboLabel label_1 = new LoboLabel("");
+		final LoboLabel label_1 = new LoboLabel("");
 		label_1.setOpaque(true);
 		label_1.setBounds(797, 11, 403, 9);
 		contentPane.add(label_1);
@@ -110,23 +110,23 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 
 	}
 
-	private void savePassword(BrowserFrame frame, Container contentPane) {
-		LoboPanel panel2 = new LoboPanel();
+	private void savePassword(final BrowserFrame frame, final Container contentPane) {
+		final LoboPanel panel2 = new LoboPanel();
 		panel2.setLayout(null);
 		panel2.setBounds(510, 40, 403, 436);
 		contentPane.add(panel2);
 
-		LoboSeparator separator_2 = new LoboSeparator();
+		final LoboSeparator separator_2 = new LoboSeparator();
 		separator_2.setBounds(0, 58, 403, 12);
 		panel2.add(separator_2);
 		
-		LoboLabel editPassword = new LoboLabel("Password");
+		final LoboLabel editPassword = new LoboLabel("Password");
 		editPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		editPassword.setFont(new Font("Tahoma", Font.BOLD, 17));
 		editPassword.setBounds(70, 18, 167, 22);
 		panel2.add(editPassword);
 
-		LoboLabel lblType = new LoboLabel("Type");
+		final LoboLabel lblType = new LoboLabel("Type");
 		lblType.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblType.setBounds(12, 70, 282, 16);
 		panel2.add(lblType);
@@ -139,11 +139,11 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		type.setBounds(12, 98, 350, 16);
 		panel2.add(type);
 
-		LoboSeparator separator_9 = new LoboSeparator();
+		final LoboSeparator separator_9 = new LoboSeparator();
 		separator_9.setBounds(12, 115, 350, 12);
 		panel2.add(separator_9);
 
-		LoboLabel titleLbl = new LoboLabel("Value");
+		final LoboLabel titleLbl = new LoboLabel("Value");
 		titleLbl.setFont(new Font("Tahoma", Font.BOLD, 14));
 		titleLbl.setBounds(12, 139, 282, 16);
 		panel2.add(titleLbl);
@@ -155,11 +155,11 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		valueEditTxtFld.setBounds(12, 167, 350, 16);
 		panel2.add(valueEditTxtFld);
 
-		LoboSeparator separator_10 = new LoboSeparator();
+		final LoboSeparator separator_10 = new LoboSeparator();
 		separator_10.setBounds(12, 184, 350, 12);
 		panel2.add(separator_10);
 		
-		LoboLabel url_1 = new LoboLabel("Url");
+		final LoboLabel url_1 = new LoboLabel("Url");
 		url_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		url_1.setBounds(12, 200, 282, 16);
 		panel2.add(url_1);
@@ -172,11 +172,11 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		urlEditTxtFld.setBounds(12, 230, 275, 16);
 		panel2.add(urlEditTxtFld);
 		
-		LoboSeparator separator_11 = new LoboSeparator();
+		final LoboSeparator separator_11 = new LoboSeparator();
 		separator_11.setBounds(12, 250, 350, 12);
 		panel2.add(separator_11);
 
-		LoboButton okButton = new LoboButton();
+		final LoboButton okButton = new LoboButton();
 		okButton.setText("Save");
 		okButton.setActionCommand("okButton");
 		okButton.setBounds(12, 280, 200, 40);
@@ -190,7 +190,7 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		});
 		panel2.add(okButton);
 
-		LoboButton closeButton = new LoboButton();
+		final LoboButton closeButton = new LoboButton();
 		closeButton.setText("Close");
 		closeButton.setActionCommand("closeButton");
 		closeButton.addActionListener(e -> {
@@ -202,34 +202,34 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		
 	}
 
-	private void listPassword(BrowserFrame frame, Container contentPane) {
-		LoboSeparator separator_7 = new LoboSeparator();
+	private void listPassword(final BrowserFrame frame, final Container contentPane) {
+		final LoboSeparator separator_7 = new LoboSeparator();
 		separator_7.setBounds(0, 98, 510, 12);
 		contentPane.add(separator_7);
 		
-		LoboPanel panel = new LoboPanel();
+		final LoboPanel panel = new LoboPanel();
 		panel.setLayout(null);
 		panel.setBounds(0, 40, 510, 50);
 		contentPane.add(panel);
 		
-		LoboLabel description = new LoboLabel("Type");
+		final LoboLabel description = new LoboLabel("Type");
 		description.setFont(new Font("Tahoma", Font.BOLD, 14));
 		description.setBounds(30, 18, 211, 16);
 		panel.add(description);
 
-		LoboLabel title = new LoboLabel("Value");
+		final LoboLabel title = new LoboLabel("Value");
 		title.setFont(new Font("Tahoma", Font.BOLD, 14));
 		title.setBounds(200, 18, 150, 17);
 		panel.add(title);
 		
-		LoboLabel action = new LoboLabel("Action");
+		final LoboLabel action = new LoboLabel("Action");
 		action.setFont(new Font("Tahoma", Font.BOLD, 14));
 		action.setBounds(400, 18, 160, 17);
 		panel.add(action);
 		
-		LoboPanel panelGeneralViewAllItems = new LoboPanel();
+		final LoboPanel panelGeneralViewAllItems = new LoboPanel();
 		panelGeneralViewAllItems.setBounds(10, 100, 500, 313);
-		JScrollPane spViewallItems = new JScrollPane();
+		final JScrollPane spViewallItems = new JScrollPane();
 		spViewallItems.setBorder(null);
 		spViewallItems.setViewportView(createItemPanel(frame));
 		panelGeneralViewAllItems.setLayout(new BorderLayout());
@@ -237,9 +237,9 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		contentPane.add(panelGeneralViewAllItems);
 	}
 	
-	private LoboPanel createItemPanel(BrowserFrame frame) {
+	private LoboPanel createItemPanel(final BrowserFrame frame) {
 
-		LoboPanel panel_3 = new LoboPanel();
+		final LoboPanel panel_3 = new LoboPanel();
 		panel_3.setLayout(null);
 		panel_3.setBounds(0, 191, 700, 70);
 
@@ -247,14 +247,14 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		int debutCpTitle = 15;
 		int debutCpUrl = 15;
 		int debutCpSeparator = 58;
-		int incrementNouvelleLigne = 67;
+		final int incrementNouvelleLigne = 67;
 
 		try {
 			final InputStore store = new InputStore();
 			final List<BookmarkInfo> allEntries = store.getPassword(100);
 			for (final BookmarkInfo binfo : allEntries) {
 
-				LoboTextField description = new LoboTextField();
+				final LoboTextField description = new LoboTextField();
 				description.setText(binfo.getDescription());
 				description.setToolTipText(binfo.getDescription());
 				description.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -264,7 +264,7 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 				description.setBounds(12, debutCpDesc, 190, 22);
 				panel_3.add(description);
 
-				LoboTextField value = new LoboTextField();
+				final LoboTextField value = new LoboTextField();
 				value.setText(binfo.getTitle());
 				value.setToolTipText(binfo.getTitle());
 				value.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -274,11 +274,11 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 				value.setBounds(190, debutCpTitle, 180, 22);
 				panel_3.add(value);
 			
-				LoboSeparator separatorItem = new LoboSeparator();
+				final LoboSeparator separatorItem = new LoboSeparator();
 				separatorItem.setBounds(0, debutCpSeparator, 500, 7);
 				panel_3.add(separatorItem);
 
-				LoboButton edit = new LoboButton();
+				final LoboButton edit = new LoboButton();
 				edit.setText("Edit");
 				edit.setActionCommand("okButton");
 				edit.setBounds(370, debutCpUrl, 40, 40);
@@ -291,7 +291,7 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 				});
 				panel_3.add(edit);
 				
-				LoboButton delete = new LoboButton();
+				final LoboButton delete = new LoboButton();
 				delete.setText("Delete");
 				delete.setActionCommand("okButton");
 				delete.setBounds(410, debutCpUrl, 50, 40);
@@ -311,7 +311,7 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 				debutCpSeparator = debutCpSeparator + incrementNouvelleLigne;
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 

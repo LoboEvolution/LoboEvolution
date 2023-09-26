@@ -43,7 +43,7 @@ public class HTMLFormControlsCollectionImpl extends HTMLCollectionImpl implement
      * @param rootNode a {@link NodeImpl} object.
      * @param filter   a {@link NodeFilter} object.
      */
-    public HTMLFormControlsCollectionImpl(NodeImpl rootNode, NodeFilter filter) {
+    public HTMLFormControlsCollectionImpl(final NodeImpl rootNode, final NodeFilter filter) {
         super(rootNode, filter);
     }
 }

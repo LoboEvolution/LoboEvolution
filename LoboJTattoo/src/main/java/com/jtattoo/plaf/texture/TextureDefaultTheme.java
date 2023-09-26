@@ -210,8 +210,8 @@ public class TextureDefaultTheme extends AbstractTheme {
 		COL_HEADER_COLORS = BUTTON_COLORS;
 
 		THUMB_COLORS = ColorHelper.createColorArr(backgroundColorLight, backgroundColorDark, 24);
-		Color hiColor = ColorHelper.brighter(backgroundColor, 30);
-		Color loColor = ColorHelper.brighter(backgroundColor, 10);
+		final Color hiColor = ColorHelper.brighter(backgroundColor, 30);
+		final Color loColor = ColorHelper.brighter(backgroundColor, 10);
 		TRACK_COLORS = ColorHelper.createColorArr(loColor, hiColor, 24);
 
 		SLIDER_COLORS = THUMB_COLORS;

@@ -93,7 +93,7 @@ public final class ImageViewer {
 	 * @param image
 	 *            the image to display; if {@code null} then no image is displayed
 	 */
-	public ImageViewer(BufferedImage image) {
+	public ImageViewer(final BufferedImage image) {
 		this(image, true);
 	}
 
@@ -108,7 +108,7 @@ public final class ImageViewer {
 	 *            registered for the viewer
 	 * @see #setImage(BufferedImage)
 	 */
-	public ImageViewer(BufferedImage image, boolean defaultPopupMenu) {
+	public ImageViewer(final BufferedImage image, final boolean defaultPopupMenu) {
 		propertyChangeSupport = new PropertyChangeSupport(this);
 		panel = new JPanel(new BorderLayout());
 		scroller = new JScrollPane() {
@@ -194,12 +194,12 @@ public final class ImageViewer {
 	 *             if the status bar has already been added to a different image
 	 *             viewer
 	 */
-	public void setStatusBar(StatusBar statusBar) {
+	public void setStatusBar(final StatusBar statusBar) {
 		if (statusBar == this.statusBar)
 			return;
 		if (statusBar.getImageViewer() != null)
 			throw new IllegalArgumentException("Status bar already added to an image viewer");
-		StatusBar oldStatusBar = this.statusBar;
+		final StatusBar oldStatusBar = this.statusBar;
 		if (oldStatusBar != null) {
 			panel.remove(oldStatusBar.getComponent());
 			oldStatusBar.setImageViewer(null);
@@ -232,7 +232,7 @@ public final class ImageViewer {
 	 * @param statusBarVisible
 	 *            true, if the status bar should be visible; false otherwise
 	 */
-	public void setStatusBarVisible(boolean statusBarVisible) {
+	public void setStatusBarVisible(final boolean statusBarVisible) {
 		if (this.statusBarVisible == statusBarVisible)
 			return;
 		if (statusBar != null) {
@@ -243,7 +243,7 @@ public final class ImageViewer {
 			panel.revalidate();
 			panel.repaint();
 		}
-		boolean prev = this.statusBarVisible;
+		final boolean prev = this.statusBarVisible;
 		this.statusBarVisible = statusBarVisible;
 		synchronizer.statusBarVisibilityChanged(this);
 		propertyChangeSupport.firePropertyChange("statusBarVisible", prev, statusBarVisible);
@@ -278,7 +278,7 @@ public final class ImageViewer {
 	 *            the new image to display; if null then no image is
 	 *            displayed
 	 */
-	public void setImage(BufferedImage image) {
+	public void setImage(final BufferedImage image) {
 		theImage.setImage(image);
 	}
 
@@ -298,7 +298,7 @@ public final class ImageViewer {
 	 * @param resizeStrategy
 	 *            the new resize strategy
 	 */
-	public void setResizeStrategy(ResizeStrategy resizeStrategy) {
+	public void setResizeStrategy(final ResizeStrategy resizeStrategy) {
 		theImage.setResizeStrategy(resizeStrategy);
 	}
 
@@ -319,7 +319,7 @@ public final class ImageViewer {
 	 * @param pixelatedZoom
 	 *            the new value of the pixelatedZoom property
 	 */
-	public void setPixelatedZoom(boolean pixelatedZoom) {
+	public void setPixelatedZoom(final boolean pixelatedZoom) {
 		theImage.setPixelatedZoom(pixelatedZoom);
 	}
 
@@ -366,7 +366,7 @@ public final class ImageViewer {
 	 * @throws java.lang.IllegalArgumentException
 	 *             if the parameter is not one of the allowed values
 	 */
-	public void setInterpolationType(Object type) {
+	public void setInterpolationType(final Object type) {
 		theImage.setInterpolationType(type);
 	}
 
@@ -391,7 +391,7 @@ public final class ImageViewer {
 	 * @throws java.lang.IllegalArgumentException
 	 *             if {@code newZoomFactor} is not a positive number
 	 */
-	public void setZoomFactor(double newZoomFactor) {
+	public void setZoomFactor(final double newZoomFactor) {
 		theImage.setZoomFactor(newZoomFactor);
 	}
 
@@ -420,7 +420,7 @@ public final class ImageViewer {
 	 *            the layer to add the overlay to; higher layers are on top of lower
 	 *            layers; the image resides in layer 0
 	 */
-	public void addOverlay(Overlay overlay, int layer) {
+	public void addOverlay(final Overlay overlay, final int layer) {
 		view.addOverlay(overlay, layer);
 	}
 
@@ -430,7 +430,7 @@ public final class ImageViewer {
 	 * @param overlay
 	 *            the overlay to add
 	 */
-	public void addOverlay(Overlay overlay) {
+	public void addOverlay(final Overlay overlay) {
 		addOverlay(overlay, 1);
 	}
 
@@ -442,7 +442,7 @@ public final class ImageViewer {
 	 * @throws java.lang.IllegalArgumentException
 	 *             if the overlay is not in the image viewer
 	 */
-	public void removeOverlay(Overlay overlay) {
+	public void removeOverlay(final Overlay overlay) {
 		view.removeOverlay(overlay);
 	}
 
@@ -454,7 +454,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the mouse listener
 	 */
-	public void addMouseListener(MouseListener l) {
+	public void addMouseListener(final MouseListener l) {
 		theImage.addMouseListener(l);
 	}
 
@@ -469,7 +469,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the mouse motion listener
 	 */
-	public void removeMouseListener(MouseListener l) {
+	public void removeMouseListener(final MouseListener l) {
 		theImage.removeMouseListener(l);
 	}
 
@@ -481,7 +481,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the mouse listener
 	 */
-	public void addMouseMotionListener(MouseMotionListener l) {
+	public void addMouseMotionListener(final MouseMotionListener l) {
 		theImage.addMouseMotionListener(l);
 	}
 
@@ -496,7 +496,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the mouse motion listener
 	 */
-	public void removeMouseMotionListener(MouseMotionListener l) {
+	public void removeMouseMotionListener(final MouseMotionListener l) {
 		theImage.removeMouseMotionListener(l);
 	}
 
@@ -509,7 +509,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the image mouse motion listener
 	 */
-	public void addImageMouseMotionListener(ImageMouseMotionListener l) {
+	public void addImageMouseMotionListener(final ImageMouseMotionListener l) {
 		theImage.addImageMouseMoveListener(l);
 	}
 
@@ -524,7 +524,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the mouse motion listener
 	 */
-	public void removeImageMouseMotionListener(ImageMouseMotionListener l) {
+	public void removeImageMouseMotionListener(final ImageMouseMotionListener l) {
 		theImage.removeImageMouseMoveListener(l);
 	}
 
@@ -537,7 +537,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the image mouse motion listener
 	 */
-	public void addImageMouseClickListener(ImageMouseClickListener l) {
+	public void addImageMouseClickListener(final ImageMouseClickListener l) {
 		theImage.addImageMouseClickListener(l);
 	}
 
@@ -552,7 +552,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the mouse motion listener
 	 */
-	public void removeImageMouseClickListener(ImageMouseClickListener l) {
+	public void removeImageMouseClickListener(final ImageMouseClickListener l) {
 		theImage.removeImageMouseClickListener(l);
 	}
 
@@ -565,7 +565,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the listener to be added
 	 */
-	public void addPropertyChangeListener(PropertyChangeListener l) {
+	public void addPropertyChangeListener(final PropertyChangeListener l) {
 		propertyChangeSupport.addPropertyChangeListener(l);
 	}
 
@@ -579,7 +579,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the listener to remove
 	 */
-	public void removePropertyChangeListener(PropertyChangeListener l) {
+	public void removePropertyChangeListener(final PropertyChangeListener l) {
 		propertyChangeSupport.removePropertyChangeListener(l);
 	}
 
@@ -596,7 +596,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the listener to add
 	 */
-	public void addPropertyChangeListener(String name, PropertyChangeListener l) {
+	public void addPropertyChangeListener(final String name, final PropertyChangeListener l) {
 		propertyChangeSupport.addPropertyChangeListener(name, l);
 	}
 
@@ -612,7 +612,7 @@ public final class ImageViewer {
 	 * @param l
 	 *            the listener to remove
 	 */
-	public void removePropertyChangeListener(String name, PropertyChangeListener l) {
+	public void removePropertyChangeListener(final String name, final PropertyChangeListener l) {
 		propertyChangeSupport.removePropertyChangeListener(name, l);
 	}
 
@@ -639,7 +639,7 @@ public final class ImageViewer {
 	 *
 	 * @param newSync a {@link org.loboevolution.img.Synchronizer} object.
 	 */
-	public void setSynchronizer(Synchronizer newSync) {
+	public void setSynchronizer(final Synchronizer newSync) {
 		synchronizer = newSync;
 	}
 
@@ -661,7 +661,7 @@ public final class ImageViewer {
 	 *             if there is no image set or if the size of the viewer is 0 (for
 	 *             example because it is not in a visible component)
 	 */
-	public Point pointToPixel(Point p, boolean clipToImage) {
+	public Point pointToPixel(final Point p, final boolean clipToImage) {
 		return theImage.pointToPixel(p, clipToImage);
 	}
 }

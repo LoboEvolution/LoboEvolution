@@ -43,7 +43,7 @@ public class SVGPathSegLinetoHorizontalRelImpl implements SVGPathSegLinetoHorizo
 	 *
 	 * @param x a float.
 	 */
-	public SVGPathSegLinetoHorizontalRelImpl(float x) {
+	public SVGPathSegLinetoHorizontalRelImpl(final float x) {
 		this.x = x;
 	}
 
@@ -67,7 +67,7 @@ public class SVGPathSegLinetoHorizontalRelImpl implements SVGPathSegLinetoHorizo
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 }

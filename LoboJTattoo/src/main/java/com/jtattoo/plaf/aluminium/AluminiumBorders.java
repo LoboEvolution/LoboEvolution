@@ -66,7 +66,7 @@ public class AluminiumBorders extends BaseBorders {
 		}
 
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets insets = getBorderInsets(c);
+			final Insets insets = getBorderInsets(c);
 			borderInsets.left = insets.left;
 			borderInsets.top = insets.top;
 			borderInsets.right = insets.right;
@@ -80,7 +80,7 @@ public class AluminiumBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 		}
 
 	} // end of class ButtonBorder
@@ -90,13 +90,13 @@ public class AluminiumBorders extends BaseBorders {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final Graphics2D g2D = (Graphics2D) g;
 			Color titleColor = AbstractLookAndFeel.getWindowInactiveTitleBackgroundColor();
 			if (isActive(c)) {
 				titleColor = AbstractLookAndFeel.getWindowTitleBackgroundColor();
 			}
-			int th = getTitleHeight(c);
+			final int th = getTitleHeight(c);
 
 			g.setColor(titleColor);
 			g.fillRect(1, 1, w, DW);
@@ -107,8 +107,8 @@ public class AluminiumBorders extends BaseBorders {
 						th + 1);
 				JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - DW, DW,
 						DW, th + 1);
-				Color c1 = AbstractLookAndFeel.getTheme().getWindowTitleColorDark();
-				Color c2 = AbstractLookAndFeel.getTheme().getWindowTitleColorLight();
+				final Color c1 = AbstractLookAndFeel.getTheme().getWindowTitleColorDark();
+				final Color c2 = AbstractLookAndFeel.getTheme().getWindowTitleColorLight();
 				g2D.setPaint(new GradientPaint(0, DW + th + 1, c1, 0, h - th - 2 * DW, c2));
 				g.fillRect(1, DW + th + 1, DW - 1, h - th - 2 * DW);
 				g.fillRect(w - DW, DW + th + 1, DW - 1, h - th - 2 * DW);
@@ -118,8 +118,8 @@ public class AluminiumBorders extends BaseBorders {
 						DW, DW, th + 1);
 				JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(),
 						w - DW, DW, DW, th + 1);
-				Color c1 = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorDark();
-				Color c2 = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorLight();
+				final Color c1 = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorDark();
+				final Color c2 = AbstractLookAndFeel.getTheme().getWindowInactiveTitleColorLight();
 				g2D.setPaint(new GradientPaint(0, DW + th + 1, c1, 0, h - th - 2 * DW, c2));
 				g.fillRect(1, DW + th + 1, DW - 1, h - th - 2 * DW);
 				g.fillRect(w - DW, DW + th + 1, DW - 1, h - th - 2 * DW);
@@ -166,27 +166,27 @@ public class AluminiumBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Color loColor = AbstractLookAndFeel.getFrameColor();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Color loColor = AbstractLookAndFeel.getFrameColor();
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed() || model.isSelected()) {
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
 					g.setColor(loColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.15f);
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.15f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.black);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);
 					g2D.setComposite(composite);
 				} else if (model.isRollover()) {
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
 					g.setColor(loColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 					g2D.setComposite(alpha);
 					g.setColor(AbstractLookAndFeel.getTheme().getSelectionBackgroundColor());
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);

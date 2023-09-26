@@ -35,7 +35,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -60,12 +59,12 @@ public class hc_elementreplaceexistingattributegevalueTest extends LoboUnitTest 
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        Attr newAttribute;
-        Attr streetAttr;
-        String value;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final Attr newAttribute;
+        final Attr streetAttr;
+        final String value;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);

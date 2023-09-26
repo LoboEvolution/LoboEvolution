@@ -74,8 +74,8 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
-		RenderState tmpRenderState = prevRenderState;
+	protected RenderState createRenderState(final RenderState prevRenderState) {
+		final RenderState tmpRenderState = prevRenderState;
 		if (hasAttribute("href")) {
 			return new LinkRenderState(prevRenderState, getHtmlRendererContext(), this);
 		}
@@ -148,10 +148,10 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 				if ((isStyleSheet || isAltStyleSheet)) {
 					String title = getAttribute("title");
-					URL baseURL = new URL(baseURI);
-					URL scriptURL = Urls.createURL(baseURL, href);
+					final URL baseURL = new URL(baseURI);
+					final URL scriptURL = Urls.createURL(baseURL, href);
 					if (Strings.isBlank(title)) {
-						URI uri = scriptURL.toURI();
+						final URI uri = scriptURL.toURI();
 						if (Urls.isLocalFile(scriptURL)) {
 							title = Paths.get(uri).getFileName().toString();
 						} else {
@@ -175,17 +175,17 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 						if (uacontext.isExternalCSSEnabled()) {
 							final String media = getMedia();
 							if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
-								Instant start = Instant.now();
-								TimingInfo info = new TimingInfo();
+								final Instant start = Instant.now();
+								final TimingInfo info = new TimingInfo();
 								final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHtmlRendererConfig(), href, scriptURL, baseURI, rcontext.isTestEnabled());
 								sheet.setHref(scriptURL == null ? href : scriptURL.toExternalForm());
 								sheet.setDisabled(this.disabled);
-								CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
+								final CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
 								cssStyleSheet.setOwnerNode(this);
 								doc.addStyleSheet(cssStyleSheet);
 								this.styleSheet = cssStyleSheet;
-								Instant finish = Instant.now();
-								long timeElapsed = Duration.between(start, finish).toMillis();
+								final Instant finish = Instant.now();
+								final long timeElapsed = Duration.between(start, finish).toMillis();
 								info.setName(title);
 								info.setTimeElapsed(timeElapsed);
 								info.setPath(scriptURL.toExternalForm());
@@ -213,7 +213,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	}
 
 	@Override
-	public void setAs(String as) {
+	public void setAs(final String as) {
 
 	}
 
@@ -223,7 +223,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	}
 
 	@Override
-	public void setCrossOrigin(String crossOrigin) {
+	public void setCrossOrigin(final String crossOrigin) {
 
 	}
 
@@ -283,7 +283,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(final boolean disabled) {
 		this.disabled = disabled;
 		final CSSStyleSheetImpl sheet = this.styleSheet;
 		if (sheet != null) {
@@ -293,13 +293,13 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHref(String href) {
+	public void setHref(final String href) {
 		setAttribute("href", href);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHreflang(String hreflang) {
+	public void setHreflang(final String hreflang) {
 		setAttribute("hreflang", hreflang);
 	}
 
@@ -309,7 +309,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	}
 
 	@Override
-	public void setImageSizes(String imageSizes) {
+	public void setImageSizes(final String imageSizes) {
 
 	}
 
@@ -319,7 +319,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	}
 
 	@Override
-	public void setImageSrcset(String imageSrcset) {
+	public void setImageSrcset(final String imageSrcset) {
 
 	}
 
@@ -329,13 +329,13 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	}
 
 	@Override
-	public void setIntegrity(String integrity) {
+	public void setIntegrity(final String integrity) {
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setMedia(String media) {
+	public void setMedia(final String media) {
 		setAttribute("media", media);
 	}
 
@@ -345,13 +345,13 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	}
 
 	@Override
-	public void setReferrerPolicy(String referrerPolicy) {
+	public void setReferrerPolicy(final String referrerPolicy) {
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRel(String rel) {
+	public void setRel(final String rel) {
 		setAttribute("rel", rel);
 	}
 
@@ -362,7 +362,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRev(String rev) {
+	public void setRev(final String rev) {
 		setAttribute("rev", rev);
 	}
 
@@ -373,13 +373,13 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTarget(String target) {
+	public void setTarget(final String target)  {
 		setAttribute("target", target);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setType(String type) {
+	public void setType(final String type) {
 		setAttribute("type", type);
 	}
 
@@ -387,7 +387,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	@Override
 	public StyleSheet getSheet() {
 		if ("stylesheet".equals(getRel())) {
-			org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = new org.htmlunit.cssparser.dom.CSSStyleSheetImpl();
+			final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = new org.htmlunit.cssparser.dom.CSSStyleSheetImpl();
 			styleSheet = new CSSStyleSheetImpl(sheet);
 		}
 
@@ -396,7 +396,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	/** {@inheritDoc} */
 	@Override
-	public Object setUserData(String key, Object data, UserDataHandler handler) {
+	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		if (XHtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			processLink();
 		}

@@ -54,7 +54,7 @@ public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public LunaInternalFrameTitlePane(JInternalFrame f) {
+	public LunaInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
@@ -72,7 +72,7 @@ public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (!JTattooUtilities.isActive(this)) {
 			g.setColor(ColorHelper.brighter(FRAME_COLOR, 20));
 		} else {
@@ -83,7 +83,7 @@ public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
 			g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getWindowBorderColor(), 10));
 			JTattooUtilities.drawString(frame, g, title, x - 1, y - 2);

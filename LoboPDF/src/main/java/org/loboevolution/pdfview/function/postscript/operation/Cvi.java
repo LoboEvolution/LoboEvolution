@@ -50,7 +50,7 @@ final class Cvi implements PostScriptOperation {
 	 * errors: invalidaccess, rangecheck, stackunderflow,
 	 *         syntaxError, typecheck,
 	 */
-	public void eval(Stack<Object> environment) {
+	public void eval(final Stack<Object> environment) {
 	    environment.push(environment.pop());
 	}
 }

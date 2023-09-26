@@ -91,7 +91,7 @@ public class HheaTable extends TrueTypeTable {
 	 * Parse the data before it is set
 	 */
     @Override
-	public void setData(ByteBuffer data) {
+	public void setData(final ByteBuffer data) {
         if (data.remaining() != 36) {
             throw new IllegalArgumentException("Bad Head table size");
         }
@@ -124,7 +124,7 @@ public class HheaTable extends TrueTypeTable {
 	 */
     @Override
 	public ByteBuffer getData() {
-        ByteBuffer buf = ByteBuffer.allocate(getLength());
+        final ByteBuffer buf = ByteBuffer.allocate(getLength());
         
         buf.putInt(getVersion());
         buf.putShort(getAscent());
@@ -177,7 +177,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param version New value of property version.
      */
-    public void setVersion(int version) {
+    public void setVersion(final int version) {
         this.version = version;
     }
     
@@ -188,8 +188,8 @@ public class HheaTable extends TrueTypeTable {
 	 */
     @Override
 	public String toString() {
-        StringBuilder buf = new StringBuilder();
-        String indent = "    ";
+        final StringBuilder buf = new StringBuilder();
+        final String indent = "    ";
         
         buf.append(indent).append("Version             : ").append(Integer.toHexString(getVersion())).append("\n");
         buf.append(indent).append("Ascent              : ").append(getAscent()).append("\n");
@@ -221,7 +221,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param ascent New value of property ascent.
      */
-    public void setAscent(short ascent) {
+    public void setAscent(final short ascent) {
         this.ascent = ascent;
     }
     
@@ -239,7 +239,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param descent New value of property descent.
      */
-    public void setDescent(short descent) {
+    public void setDescent(final short descent) {
         this.descent = descent;
     }
     
@@ -257,7 +257,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param lineGap New value of property lineGap.
      */
-    public void setLineGap(short lineGap) {
+    public void setLineGap(final short lineGap) {
         this.lineGap = lineGap;
     }
     
@@ -275,7 +275,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param advanceWidthMax New value of property advanceWidthMax.
      */
-    public void setAdvanceWidthMax(short advanceWidthMax) {
+    public void setAdvanceWidthMax(final short advanceWidthMax) {
         this.advanceWidthMax = advanceWidthMax;
     }
     
@@ -293,7 +293,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param minLeftSideBearing New value of property minLeftSideBearing.
      */
-    public void setMinLeftSideBearing(short minLeftSideBearing) {
+    public void setMinLeftSideBearing(final short minLeftSideBearing) {
         this.minLeftSideBearing = minLeftSideBearing;
     }
     
@@ -311,7 +311,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param minRightSideBearing New value of property minRIghtSideBearing.
      */
-    public void setMinRightSideBearing(short minRightSideBearing) {
+    public void setMinRightSideBearing(final short minRightSideBearing) {
         this.minRightSideBearing = minRightSideBearing;
     }
     
@@ -329,7 +329,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param xMaxExtent New value of property xMaxExtent.
      */
-    public void setXMaxExtent(short xMaxExtent) {
+    public void setXMaxExtent(final short xMaxExtent) {
         this.xMaxExtent = xMaxExtent;
     }
     
@@ -347,7 +347,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param caretSlopeRise New value of property caretSlopeRise.
      */
-    public void setCaretSlopeRise(short caretSlopeRise) {
+    public void setCaretSlopeRise(final short caretSlopeRise) {
         this.caretSlopeRise = caretSlopeRise;
     }
     
@@ -365,7 +365,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param caretSlopeRun New value of property caretSlopeRun.
      */
-    public void setCaretSlopeRun(short caretSlopeRun) {
+    public void setCaretSlopeRun(final short caretSlopeRun) {
         this.caretSlopeRun = caretSlopeRun;
     }
     
@@ -383,7 +383,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param caretOffset New value of property caretOffset.
      */
-    public void setCaretOffset(short caretOffset) {
+    public void setCaretOffset(final short caretOffset) {
         this.caretOffset = caretOffset;
     }
     
@@ -401,7 +401,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param metricDataFormat New value of property metricDataFormat.
      */
-    public void setMetricDataFormat(short metricDataFormat) {
+    public void setMetricDataFormat(final short metricDataFormat) {
         this.metricDataFormat = metricDataFormat;
     }
     
@@ -419,7 +419,7 @@ public class HheaTable extends TrueTypeTable {
      *
      * @param numOfLongHorMetrics New value of property numOfLongHorMetrics.
      */
-    public void setNumOfLongHorMetrics(short numOfLongHorMetrics) {
+    public void setNumOfLongHorMetrics(final short numOfLongHorMetrics) {
         this.numOfLongHorMetrics = numOfLongHorMetrics;
     }
     

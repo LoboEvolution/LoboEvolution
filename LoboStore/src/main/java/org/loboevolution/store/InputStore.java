@@ -56,19 +56,19 @@ public class InputStore {
 	 * @param type a {@link java.lang.String} object.
 	 * @param baseUrl a {@link java.lang.String} object.
 	 */
-	public static List<String> autocomplete(String type, String value, String baseUrl) {
-        List<String> autoList = new ArrayList<>();
-    	try (Connection conn = DriverManager.getConnection(DB_PATH);
-			PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT)) {
+	public static List<String> autocomplete(final String type, final String value, final String baseUrl) {
+        final List<String> autoList = new ArrayList<>();
+    	try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT)) {
     		pstmt.setString(1, type);
 			pstmt.setString(2, "%"+value+"%");
 			pstmt.setString(3, baseUrl);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
 					autoList.add(rs.getString(1));
 				}
 			}
-        } catch (Exception e) {
+        } catch (final Exception e) {
         	logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return autoList;
@@ -80,21 +80,21 @@ public class InputStore {
 	 * @param maxNumItems a int.
 	 * @return a {@link java.util.List} object.
 	 */
-	public List<BookmarkInfo> getPassword(int maxNumItems) {
-        List<BookmarkInfo> autoList = new ArrayList<>();
-    	try (Connection conn = DriverManager.getConnection(DB_PATH);
-			PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT_LIMIT)) {
+	public List<BookmarkInfo> getPassword(final int maxNumItems) {
+        final List<BookmarkInfo> autoList = new ArrayList<>();
+    	try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT_LIMIT)) {
     		pstmt.setInt(1, maxNumItems);
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (final ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
-					BookmarkInfo info = new BookmarkInfo();
+					final BookmarkInfo info = new BookmarkInfo();
 					info.setDescription(rs.getString(1));
 					info.setTitle(rs.getString(2));
 					info.setUrl(rs.getString(3));
 					autoList.add(info);
 				}
 			}
-        } catch (Exception e) {
+        } catch (final Exception e) {
         	logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return autoList;
@@ -108,15 +108,15 @@ public class InputStore {
 	 * @param navigationEnabled a boolean.
 	 * @param baseUrl a {@link java.lang.String} object.
 	 */
-	public static void insertLogin(String type, String value, String baseUrl, boolean navigationEnabled) {
+	public static void insertLogin(final String type, final String value, final String baseUrl, final boolean navigationEnabled) {
 		if (navigationEnabled) {
-			try (Connection conn = DriverManager.getConnection(DB_PATH);
-					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_INPUT)) {
+			try (final Connection conn = DriverManager.getConnection(DB_PATH);
+                 final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_INPUT)) {
 				pstmt.setString(1, type);
 				pstmt.setString(2, value);
 				pstmt.setString(3, baseUrl);
 				pstmt.executeUpdate();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
@@ -126,10 +126,10 @@ public class InputStore {
 	 * <p>deleteInput.</p>
 	 */
 	public static void deleteInput() {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT)) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT)) {
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
@@ -140,13 +140,13 @@ public class InputStore {
 	 * @param value a {@link java.lang.String} object.
 	 * @param baseUrl a {@link java.lang.String} object.
 	 */
-	public static void deleteInput(String value, String baseUrl) {
-		try (Connection conn = DriverManager.getConnection(DB_PATH);
-				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT2)) {
+	public static void deleteInput(final String value, final String baseUrl) {
+		try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT2)) {
 			pstmt.setString(1, value);
 			pstmt.setString(2, baseUrl);
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}

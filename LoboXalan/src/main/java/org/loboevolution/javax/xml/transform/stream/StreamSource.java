@@ -75,7 +75,7 @@ public class StreamSource implements Source {
      *
      * @param inputStream A valid InputStream reference to an XML stream.
      */
-    public StreamSource(InputStream inputStream) {
+    public StreamSource(final InputStream inputStream) {
         setInputStream(inputStream);
     }
 
@@ -92,7 +92,7 @@ public class StreamSource implements Source {
      * @param inputStream A valid InputStream reference to an XML stream.
      * @param systemId Must be a String that conforms to the URI syntax.
      */
-    public StreamSource(InputStream inputStream, String systemId) {
+    public StreamSource(final InputStream inputStream, final String systemId) {
         setInputStream(inputStream);
         setSystemId(systemId);
     }
@@ -107,7 +107,7 @@ public class StreamSource implements Source {
      *
      * @param reader A valid Reader reference to an XML character stream.
      */
-    public StreamSource(Reader reader) {
+    public StreamSource(final Reader reader) {
         setReader(reader);
     }
 
@@ -122,7 +122,7 @@ public class StreamSource implements Source {
      * @param reader A valid Reader reference to an XML character stream.
      * @param systemId Must be a String that conforms to the URI syntax.
      */
-    public StreamSource(Reader reader, String systemId) {
+    public StreamSource(final Reader reader, final String systemId) {
         setReader(reader);
         setSystemId(systemId);
     }
@@ -132,7 +132,7 @@ public class StreamSource implements Source {
      *
      * @param systemId Must be a String that conforms to the URI syntax.
      */
-    public StreamSource(String systemId) {
+    public StreamSource(final String systemId) {
         this.systemId = systemId;
     }
 
@@ -141,7 +141,7 @@ public class StreamSource implements Source {
      *
      * @param f Must a non-null File reference.
      */
-    public StreamSource(File f) {
+    public StreamSource(final File f) {
         //convert file to appropriate URI, f.toURI().toASCIIString()
         //converts the URI to string as per rule specified in
         //RFC 2396,
@@ -160,7 +160,7 @@ public class StreamSource implements Source {
      *
      * @param inputStream A valid InputStream reference to an XML stream.
      */
-    public void setInputStream(InputStream inputStream) {
+    public void setInputStream(final InputStream inputStream) {
         this.inputStream = inputStream;
     }
 
@@ -184,7 +184,7 @@ public class StreamSource implements Source {
      *
      * @param reader A valid Reader reference to an XML CharacterStream.
      */
-    public void setReader(Reader reader) {
+    public void setReader(final Reader reader) {
         this.reader = reader;
     }
 
@@ -207,7 +207,7 @@ public class StreamSource implements Source {
      *
      * @param publicId The public identifier as a string.
      */
-    public void setPublicId(String publicId) {
+    public void setPublicId(final String publicId) {
         this.publicId = publicId;
     }
 
@@ -233,7 +233,7 @@ public class StreamSource implements Source {
      *
      * @param systemId The system identifier as a URL string.
      */
-    public void setSystemId(String systemId) {
+    public void setSystemId(final String systemId) {
         this.systemId = systemId;
     }
 
@@ -252,7 +252,7 @@ public class StreamSource implements Source {
      *
      * @param f Must a non-null File reference.
      */
-    public void setSystemId(File f) {
+    public void setSystemId(final File f) {
         //convert file to appropriate URI, f.toURI().toASCIIString()
         //converts the URI to string as per rule specified in
         //RFC 2396,

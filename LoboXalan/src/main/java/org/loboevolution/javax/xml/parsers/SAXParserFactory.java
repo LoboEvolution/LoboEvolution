@@ -45,7 +45,7 @@ public abstract class SAXParserFactory
         throw new RuntimeException("Stub!");
     }
 
-    public static SAXParserFactory newInstance(String factoryClassName, ClassLoader classLoader)
+    public static SAXParserFactory newInstance(final String factoryClassName, final ClassLoader classLoader)
     {
         throw new RuntimeException("Stub!");
     }
@@ -53,12 +53,12 @@ public abstract class SAXParserFactory
     public abstract SAXParser newSAXParser()
         throws ParserConfigurationException, SAXException;
 
-    public void setNamespaceAware(boolean awareness)
+    public void setNamespaceAware(final boolean awareness)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setValidating(boolean validating)
+    public void setValidating(final boolean validating)
     {
         throw new RuntimeException("Stub!");
     }
@@ -73,10 +73,10 @@ public abstract class SAXParserFactory
         throw new RuntimeException("Stub!");
     }
 
-    public abstract void setFeature(String s, boolean flag)
+    public abstract void setFeature(final String s, boolean flag)
         throws ParserConfigurationException, SAXNotRecognizedException, SAXNotSupportedException;
 
-    public abstract boolean getFeature(String s)
+    public abstract boolean getFeature(final String s)
         throws ParserConfigurationException, SAXNotRecognizedException, SAXNotSupportedException;
 
     public Schema getSchema()
@@ -84,12 +84,12 @@ public abstract class SAXParserFactory
         throw new RuntimeException("Stub!");
     }
 
-    public void setSchema(Schema schema)
+    public void setSchema(final Schema schema)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public void setXIncludeAware(boolean state)
+    public void setXIncludeAware(final boolean state)
     {
         throw new RuntimeException("Stub!");
     }

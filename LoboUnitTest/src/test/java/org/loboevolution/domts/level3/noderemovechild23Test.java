@@ -51,13 +51,13 @@ import static org.junit.Assert.assertTrue;
 public class noderemovechild23Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element parent;
-        ProcessingInstruction child;
-        ProcessingInstruction removed;
-        String removedName;
-        Node removedNode;
-        Node appendedChild;
+        final Document doc;
+        final Element parent;
+        final ProcessingInstruction child;
+        final ProcessingInstruction removed;
+        final String removedName;
+        final Node removedNode;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         child = doc.createProcessingInstruction("TARGET", "DATA");
@@ -70,7 +70,7 @@ public class noderemovechild23Test extends LoboUnitTest {
             boolean success = false;
             try {
                 removedNode = parent.removeChild(child);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

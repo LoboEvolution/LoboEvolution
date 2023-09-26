@@ -55,15 +55,15 @@ import static org.junit.Assert.*;
 public class documentnormalizedocument05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        DOMConfiguration domConfig;
-        HTMLCollection pList;
-        Element newChild;
-        Element retval;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final Element elem;
+        final DOMConfiguration domConfig;
+        final HTMLCollection pList;
+        final Element newChild;
+        final Element retval;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        List<DOMError> errors;
+        final List<DOMError> errors;
 
         DOMError error;
         int errorCount = 0;

@@ -56,7 +56,7 @@ public final class HtmlLength {
 	 *
 	 * @param pixels a int.
 	 */
-	public HtmlLength(int pixels) {
+	public HtmlLength(final int pixels) {
 		this.lengthType = PIXELS;
 		this.value = pixels;
 	}
@@ -70,24 +70,24 @@ public final class HtmlLength {
 	 * @throws java.lang.IndexOutOfBoundsException if any.
 	 * @throws java.lang.NumberFormatException if any.
 	 */
-	public HtmlLength(String spec, HTMLDocumentImpl doc) throws IndexOutOfBoundsException, NumberFormatException {
-		spec = spec.trim();
-		final int length = spec.length();
-		final char lastChar = spec.charAt(length - 1);
-		String parseable;
+	public HtmlLength(final String spec, final HTMLDocumentImpl doc) throws IndexOutOfBoundsException, NumberFormatException {
+		final String specTrim = spec.trim();
+		final int length = specTrim.length();
+		final char lastChar = specTrim.charAt(length - 1);
+		final String parseable;
 		if (lastChar == '%') {
 			this.lengthType = LENGTH;
-			parseable = spec.substring(0, length - 1).trim();
+			parseable = specTrim.substring(0, length - 1).trim();
 		} else if (lastChar == '*') {
 			this.lengthType = MULTI_LENGTH;
 			if (length <= 1) {
 				parseable = "1";
 			} else {
-				parseable = spec.substring(0, length - 1).trim();
+				parseable = specTrim.substring(0, length - 1).trim();
 			}
 		} else {
 			this.lengthType = PIXELS;
-			parseable = spec;
+			parseable = specTrim;
 		}
 		this.value = HtmlValues.getPixelSize(parseable, null, doc.getDefaultView(), -1);
 	}
@@ -97,7 +97,7 @@ public final class HtmlLength {
 	 *
 	 * @param denominator a int.
 	 */
-	public void divideBy(int denominator) {
+	public void divideBy(final int denominator) {
 		int val = this.value;
 		val = val / denominator;
 		this.value = val;
@@ -109,7 +109,7 @@ public final class HtmlLength {
 	 * @param availLength a int.
 	 * @return a int.
 	 */
-	public int getLength(int availLength) {
+	public int getLength(final int availLength) {
 		final int lt = this.lengthType;
 		if (lt == LENGTH) {
 			return availLength * this.value / 100;
@@ -142,7 +142,7 @@ public final class HtmlLength {
 	 * @param otherLength a {@link org.loboevolution.html.style.HtmlLength} object.
 	 * @return a boolean.
 	 */
-	public boolean isPreferredOver(HtmlLength otherLength) {
+	public boolean isPreferredOver(final HtmlLength otherLength) {
 		if (otherLength == null) {
 			return true;
 		}

@@ -55,14 +55,14 @@ import static org.junit.Assert.assertEquals;
 public class textreplacewholetext06Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection itemList;
-        Element elementStrong;
+        final Document doc;
+        final HTMLCollection itemList;
+        final Element elementStrong;
         Text textNode;
-        EntityReference erefNode;
-        Text replacedText;
+        final EntityReference erefNode;
+        final Text replacedText;
         Node appendedChild;
-        String nodeValue;
+        final String nodeValue;
         doc = sampleXmlFile("hc_staff.xml");
         itemList = doc.getElementsByTagName("strong");
         elementStrong = (Element) itemList.item(0);

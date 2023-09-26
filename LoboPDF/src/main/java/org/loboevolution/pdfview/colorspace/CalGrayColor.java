@@ -51,7 +51,7 @@ public class CalGrayColor extends ColorSpace {
      * for "WhitePoint" and "BlackPoint", and a Number for "Gamma"
      * @throws java.io.IOException if any.
      */
-    public CalGrayColor(PDFObject obj) throws IOException {
+    public CalGrayColor(final PDFObject obj) throws IOException {
 	// obj is a dictionary that has the following parts:
 	// WhitePoint [a b c]
 	// BlackPoint [a b c]
@@ -69,7 +69,7 @@ public class CalGrayColor extends ColorSpace {
 		this.black[i]= ary.getAt(i).getFloatValue();
 	    }
 	}
-	PDFObject g= obj.getDictRef("Gamma");
+	final PDFObject g= obj.getDictRef("Gamma");
 	if (g!=null) {
 	    this.gamma= g.getFloatValue();
 	}
@@ -98,14 +98,14 @@ public class CalGrayColor extends ColorSpace {
 	 * convert from Calibrated Gray to RGB.
 	 */
     @Override
-	public float[] toRGB(float[] comp) {
+	public float[] toRGB(final float[] comp) {
 	if (comp.length==1) {
-	    float mul= (float)Math.pow(comp[0], this.gamma);
-	    float[] xyz = {
+	    final float mul= (float)Math.pow(comp[0], this.gamma);
+	    final float[] xyz = {
 		this.white[0]*mul,
 		0,
 		0};
-	    float[] rgb = cie.fromCIEXYZ(xyz);
+	    final float[] rgb = cie.fromCIEXYZ(xyz);
 	    return rgb;
 	} else {
 	    return this.black;
@@ -118,7 +118,7 @@ public class CalGrayColor extends ColorSpace {
 	 * convert from RGB to Calibrated Gray.  NOT IMPLEMENTED
 	 */
     @Override
-	public float[] fromRGB(float[] rgbvalue) {
+	public float[] fromRGB(final float[] rgbvalue) {
 	return new float[1];
     }
 
@@ -128,7 +128,7 @@ public class CalGrayColor extends ColorSpace {
 	 * convert from CIEXYZ to Calibrated Gray.  NOT IMPLEMENTED
 	 */
     @Override
-	public float[] fromCIEXYZ(float[] colorvalue) {
+	public float[] fromCIEXYZ(final float[] colorvalue) {
 	return new float[1];
     }
 
@@ -147,7 +147,7 @@ public class CalGrayColor extends ColorSpace {
 	 * convert from Calibrated Gray to CIEXYZ.  NOT IMPLEMENTED
 	 */
     @Override
-	public float[] toCIEXYZ(float[] colorvalue) {
+	public float[] toCIEXYZ(final float[] colorvalue) {
 	return new float[3];
     }
     

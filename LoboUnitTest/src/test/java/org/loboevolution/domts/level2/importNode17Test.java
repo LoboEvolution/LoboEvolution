@@ -60,9 +60,9 @@ public class importNode17Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document anotherDoc;
-        Node node;
+        final Document doc;
+        final Document anotherDoc;
+        final Node node;
         doc = sampleXmlFile("staffNS.xml");
         anotherDoc = sampleXmlFile("staffNS.xml");
 
@@ -70,7 +70,7 @@ public class importNode17Test extends LoboUnitTest {
             boolean success = false;
             try {
                 node = doc.importNode(anotherDoc, false);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
             assertTrue("throw_NOT_SUPPORTED_ERR", success);

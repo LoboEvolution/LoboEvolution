@@ -58,12 +58,12 @@ public class namednodemapremovenameditemns09Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap attributes;
-        NamedNodeMap newAttributes;
-        Element element;
-        Attr attribute;
-        HTMLCollection elementList;
+        final Document doc;
+        final NamedNodeMap attributes;
+        final NamedNodeMap newAttributes;
+        final Element element;
+        final Attr attribute;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("http://www.nist.gov", "address");
         element = (Element) elementList.item(1);

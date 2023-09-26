@@ -48,14 +48,14 @@ import static org.junit.Assert.assertTrue;
 public class elementsetidattributenode09Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element varElem;
-        EntityReference entRef;
-        Element entElement;
-        NamedNodeMap attributesMap;
-        Attr attr;
-        DOMConfiguration domConfig;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element varElem;
+        final EntityReference entRef;
+        final Element entElement;
+        final NamedNodeMap attributesMap;
+        final Attr attr;
+        final DOMConfiguration domConfig;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("entities", Boolean.TRUE);
@@ -71,7 +71,7 @@ public class elementsetidattributenode09Test extends LoboUnitTest {
             boolean success = false;
             try {
                 entElement.setIdAttributeNode(attr, true);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

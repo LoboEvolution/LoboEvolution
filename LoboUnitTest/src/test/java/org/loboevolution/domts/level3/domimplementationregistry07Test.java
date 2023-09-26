@@ -50,9 +50,9 @@ public class domimplementationregistry07Test extends LoboUnitTest {
     @SneakyThrows
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
+        final DOMImplementation domImpl;
 
-        DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImpl = domImplRegistry.getDOMImplementation("http://www.example.com/bogus-feature 99.0");
         assertNull("domImplNull", domImpl);

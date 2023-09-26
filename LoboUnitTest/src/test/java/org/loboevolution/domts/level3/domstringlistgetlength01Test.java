@@ -51,10 +51,10 @@ import static org.junit.Assert.assertNotNull;
 public class domstringlistgetlength01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMStringList paramList;
-        DOMConfiguration domConfig;
-        int listSize;
+        final Document doc;
+        final DOMStringList paramList;
+        final DOMConfiguration domConfig;
+        final int listSize;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         paramList = domConfig.getParameterNames();

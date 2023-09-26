@@ -57,13 +57,13 @@ public class elementsetattributenodens03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element1;
-        Element element2;
-        Attr attribute;
-        Attr newAttribute;
-        HTMLCollection elementList;
-        String nullNS = null;
+        final Document doc;
+        final Element element1;
+        final Element element2;
+        final Attr attribute;
+        final Attr newAttribute;
+        final HTMLCollection elementList;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName( "address");
@@ -75,7 +75,7 @@ public class elementsetattributenodens03Test extends LoboUnitTest {
             boolean success = false;
             try {
                 newAttribute = element2.setAttributeNodeNS(attribute);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }
             assertTrue("elementsetattributenodens03", success);

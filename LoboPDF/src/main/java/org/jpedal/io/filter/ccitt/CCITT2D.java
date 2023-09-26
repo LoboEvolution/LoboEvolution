@@ -30,8 +30,8 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 	int changingElemSize = 0;
 	boolean is2D =true;
 
-	public CCITT2D(byte[] rawData, int width, int height,
-				   boolean blackIsOne, boolean isByteAligned) {
+	public CCITT2D(final byte[] rawData, final int width, final int height,
+                   final boolean blackIsOne, final boolean isByteAligned) {
 
 		super(rawData, width, height, blackIsOne, isByteAligned);
 	}
@@ -40,7 +40,7 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 
 		decode2DRun();
 
-		byte[] output=creatOutputFromBitset();
+		final byte[] output=creatOutputFromBitset();
 
 		//by default blackIs1 is false so black pixels do not need to be set
 		// invert image if needed -
@@ -67,7 +67,7 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 
 		int byteReached = 0;
 
-		int[] currentChangeElement = new int[2];
+		final int[] currentChangeElement = new int[2];
 
 		for( int lines = 0;lines < height;lines++ ){
 
@@ -75,15 +75,15 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 			if(isByteAligned && bitReached >0){
 
 				//get bits over 8 and align to byte boundary
-				int iPart = (bitReached)%8;
-				int iDrop = 8-(iPart);
+				final int iPart = (bitReached)%8;
+				final int iDrop = 8-(iPart);
 				if(iPart>0){
 					bitReached = bitReached +iDrop;
 				}
 			}
 
 			//swap cur and pre
-			int[] temp = prev;
+			final int[] temp = prev;
 			prev = curr;
 			curr = temp;
 
@@ -100,7 +100,7 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 		}
 	}
 
-	void set2D(int[] prev, int[] curr, int changingElemSize, int[] currentChangeElement) {
+	void set2D(final int[] prev, final int[] curr, final int changingElemSize, final int[] currentChangeElement) {
 
 		// reset to defaults on each line
 		isWhite = true;
@@ -179,7 +179,7 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 				case 11: //other cases
 
 
-					int nextValue=get1DBits(3);
+					final int nextValue=get1DBits(3);
 					bitReached=bitReached+3;
 
 					if( nextValue != 7 )
@@ -507,7 +507,7 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 						length += code;
 						updatePointer( 4 - bits );
 					}else if( bits == 15 )
-						throw new RuntimeException(( "CCITT unexpected EOL" ) );
+						throw new RuntimeException(("CCITT unexpected EOL" ) );
 					else {
 						length += code;
 						updatePointer( 9 - bits );
@@ -583,7 +583,7 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 		return length;
 	}
 
-	private static void getNextChangingElement(int a0, boolean isWhite, int[] ret, int[] prevChangingElems, int changingElemSize){
+	private static void getNextChangingElement(final int a0, final boolean isWhite, final int[] ret, final int[] prevChangingElems, final int changingElemSize){
 
 		// If the previous match was at an odd element, we still
 		// have to search the preceeding element.
@@ -596,7 +596,7 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 
 		int i = start;
 		for( ;i < changingElemSize;i += 2 ){
-			int temp = prevChangingElems[i];
+			final int temp = prevChangingElems[i];
 			if( temp > a0 )
 			{
 				ret[0] = temp;
@@ -609,7 +609,7 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 	}
 
 	// Move pointer backwards by given amount of bits
-	private void updatePointer( int bitsToMoveBack )
+	private void updatePointer(final int bitsToMoveBack )
 	{
 
 		bitReached=bitReached-bitsToMoveBack;

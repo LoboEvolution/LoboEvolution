@@ -46,7 +46,7 @@ public class BernsteinRootPaneUI extends BaseRootPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public JComponent createTitlePane(JRootPane root) {
+	public JComponent createTitlePane(final JRootPane root) {
 		return new BernsteinTitlePane(root, this);
 	}
 

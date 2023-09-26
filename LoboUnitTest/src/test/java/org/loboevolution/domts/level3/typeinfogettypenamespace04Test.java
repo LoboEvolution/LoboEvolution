@@ -51,11 +51,11 @@ import static org.junit.Assert.assertEquals;
 public class typeinfogettypenamespace04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element emElem;
-        TypeInfo elemTypeInfo;
-        String typeNamespace;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element emElem;
+        final TypeInfo elemTypeInfo;
+        final String typeNamespace;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("em");
         emElem = (Element) elemList.item(0);

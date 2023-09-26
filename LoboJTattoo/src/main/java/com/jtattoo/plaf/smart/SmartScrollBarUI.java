@@ -51,7 +51,7 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected JButton createDecreaseButton(int orientation) {
+	protected JButton createDecreaseButton(final int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
 			return super.createDecreaseButton(orientation);
 		} else {
@@ -71,7 +71,7 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+	protected void paintThumb(final Graphics g, final JComponent c, final Rectangle thumbBounds) {
 		super.paintThumb(g, c, thumbBounds);
 		if (isRollover) {
 			g.setColor(AbstractLookAndFeel.getFocusColor());

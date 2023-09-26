@@ -32,45 +32,39 @@ import org.xml.sax.*;
 //            TypeInfoProvider
 
 public abstract class ValidatorHandler
-    implements ContentHandler
-{
+        implements ContentHandler {
 
-    protected ValidatorHandler()
-    {
+    protected ValidatorHandler() {
         throw new RuntimeException("Stub!");
     }
-
-    public abstract void setContentHandler(ContentHandler contenthandler);
 
     public abstract ContentHandler getContentHandler();
 
-    public abstract void setErrorHandler(ErrorHandler errorhandler);
+    public abstract void setContentHandler(ContentHandler contenthandler);
 
     public abstract ErrorHandler getErrorHandler();
 
+    public abstract void setErrorHandler(ErrorHandler errorhandler);
+
     public abstract TypeInfoProvider getTypeInfoProvider();
 
-    public boolean getFeature(String name)
-        throws SAXNotRecognizedException, SAXNotSupportedException
-    {
+    public boolean getFeature(final String name)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         throw new RuntimeException("Stub!");
     }
 
-    public void setFeature(String name, boolean value)
-        throws SAXNotRecognizedException, SAXNotSupportedException
-    {
+    public void setFeature(final String name, final boolean value)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         throw new RuntimeException("Stub!");
     }
 
-    public void setProperty(String name, Object object)
-        throws SAXNotRecognizedException, SAXNotSupportedException
-    {
+    public void setProperty(final String name, final Object object)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         throw new RuntimeException("Stub!");
     }
 
-    public Object getProperty(String name)
-        throws SAXNotRecognizedException, SAXNotSupportedException
-    {
+    public Object getProperty(final String name)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
         throw new RuntimeException("Stub!");
     }
 }

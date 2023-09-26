@@ -347,7 +347,7 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<String> getThemes() {
-		ArrayList<String> themes = new ArrayList<>();
+		final ArrayList<String> themes = new ArrayList<>();
 		themes.add(getTheme().getName());
 		return themes;
 	}
@@ -519,7 +519,7 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 	 *
 	 * @param theme a {@link com.jtattoo.plaf.AbstractTheme} object.
 	 */
-	public static void setTheme(AbstractTheme theme) {
+	public static void setTheme(final AbstractTheme theme) {
 		if (theme == null) {
 			return;
 		}
@@ -541,7 +541,7 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 	 *
 	 * @param name the name of the theme
 	 */
-	public static void setTheme(String name) {
+	public static void setTheme(final String name) {
 		// Overwrite this in derived classes
 	}
 
@@ -588,40 +588,40 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void initComponentDefaults(UIDefaults table) {
+	protected void initComponentDefaults(final UIDefaults table) {
 		super.initComponentDefaults(table);
 
 		BaseBorders.initDefaults();
 		BaseIcons.initDefaults();
 
-		Object textFieldBorder = getBorderFactory().getTextFieldBorder();
-		Object comboBoxBorder = getBorderFactory().getComboBoxBorder();
-		Object scrollPaneBorder = getBorderFactory().getScrollPaneBorder();
-		Object tableScrollPaneBorder = getBorderFactory().getTableScrollPaneBorder();
-		Object tabbedPaneBorder = getBorderFactory().getTabbedPaneBorder();
-		Object buttonBorder = getBorderFactory().getButtonBorder();
-		Object toggleButtonBorder = getBorderFactory().getToggleButtonBorder();
-		Object titledBorderBorder = new UIDefaults.ProxyLazyValue(
-				"javax.swing.plaf.BorderUIResource$LineBorderUIResource", new Object[] { getFrameColor() });
-		Object menuBarBorder = getBorderFactory().getMenuBarBorder();
-		Object popupMenuBorder = getBorderFactory().getPopupMenuBorder();
-		Object menuItemBorder = getBorderFactory().getMenuItemBorder();
-		Object toolBarBorder = getBorderFactory().getToolBarBorder();
-		Object progressBarBorder = getBorderFactory().getProgressBarBorder();
-		Object toolTipBorder = new UIDefaults.ProxyLazyValue("javax.swing.plaf.BorderUIResource$LineBorderUIResource",
-				new Object[] { getFrameColor() });
-		Object focusCellHighlightBorder = new UIDefaults.ProxyLazyValue(
-				"javax.swing.plaf.BorderUIResource$LineBorderUIResource", new Object[] { getFocusCellColor() });
-		Object optionPaneBorder = BorderFactory.createEmptyBorder(0, 0, 0, 0);
-		Object optionPaneMessageAreaBorder = BorderFactory.createEmptyBorder(8, 8, 8, 8);
-		Object optionPaneButtonAreaBorder = BorderFactory.createEmptyBorder(0, 8, 8, 8);
-		Object windowBorder = getBorderFactory().getInternalFrameBorder();
+		final Object textFieldBorder = getBorderFactory().getTextFieldBorder();
+		final Object comboBoxBorder = getBorderFactory().getComboBoxBorder();
+		final Object scrollPaneBorder = getBorderFactory().getScrollPaneBorder();
+		final Object tableScrollPaneBorder = getBorderFactory().getTableScrollPaneBorder();
+		final Object tabbedPaneBorder = getBorderFactory().getTabbedPaneBorder();
+		final Object buttonBorder = getBorderFactory().getButtonBorder();
+		final Object toggleButtonBorder = getBorderFactory().getToggleButtonBorder();
+		final Object titledBorderBorder = new UIDefaults.ProxyLazyValue(
+				"javax.swing.plaf.BorderUIResource$LineBorderUIResource", new Object[]{getFrameColor()});
+		final Object menuBarBorder = getBorderFactory().getMenuBarBorder();
+		final Object popupMenuBorder = getBorderFactory().getPopupMenuBorder();
+		final Object menuItemBorder = getBorderFactory().getMenuItemBorder();
+		final Object toolBarBorder = getBorderFactory().getToolBarBorder();
+		final Object progressBarBorder = getBorderFactory().getProgressBarBorder();
+		final Object toolTipBorder = new UIDefaults.ProxyLazyValue("javax.swing.plaf.BorderUIResource$LineBorderUIResource",
+				new Object[]{getFrameColor()});
+		final Object focusCellHighlightBorder = new UIDefaults.ProxyLazyValue(
+				"javax.swing.plaf.BorderUIResource$LineBorderUIResource", new Object[]{getFocusCellColor()});
+		final Object optionPaneBorder = BorderFactory.createEmptyBorder(0, 0, 0, 0);
+		final Object optionPaneMessageAreaBorder = BorderFactory.createEmptyBorder(8, 8, 8, 8);
+		final Object optionPaneButtonAreaBorder = BorderFactory.createEmptyBorder(0, 8, 8, 8);
+		final Object windowBorder = getBorderFactory().getInternalFrameBorder();
 
-		Color c = getBackgroundColor();
-		ColorUIResource progressBarBackground = new ColorUIResource(ColorHelper.brighter(c, 20));
+		final Color c = getBackgroundColor();
+		final ColorUIResource progressBarBackground = new ColorUIResource(ColorHelper.brighter(c, 20));
 
 		// DEFAULTS TABLE
-		Object[] defaults = { "controlTextFont", getControlTextFont(), "systemTextFont ", getSystemTextFont(),
+		final Object[] defaults = {"controlTextFont", getControlTextFont(), "systemTextFont ", getSystemTextFont(),
 				"userTextFont", getUserTextFont(), "menuTextFont", getMenuTextFont(), "windowTitleFont",
 				getWindowTitleFont(), "subTextFont", getSubTextFont(), "Label.font", getUserTextFont(),
 				"Label.background", getBackgroundColor(), "Label.foreground", getForegroundColor(),
@@ -860,23 +860,23 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void initSystemColorDefaults(UIDefaults table) {
-		Object[] systemColors = { "desktop", getDesktopColor(), // Color of the desktop background
+	protected void initSystemColorDefaults(final UIDefaults table) {
+		final Object[] systemColors = {"desktop", getDesktopColor(), // Color of the desktop background
 
 				"activeCaption", getWindowTitleBackgroundColor(), // Color for captions (title bars) when they are
-																	// active.
+				// active.
 				"activeCaptionLight", getWindowTitleColorLight(), "activeCaptionDark", getWindowTitleColorDark(),
 				"activeCaptionText", getWindowTitleForegroundColor(), // Text color for text in captions (title bars).
 				"activeCaptionBorder", getWindowBorderColor(), // Border color for caption (title bar) window borders.
 
 				"inactiveCaption", getWindowInactiveTitleBackgroundColor(), // Color for captions (title bars) when not
-																			// active.
+				// active.
 				"inactiveCaptionLight", getWindowInactiveTitleColorLight(), //
 				"inactiveCaptionDark", getWindowInactiveTitleColorDark(), //
 				"inactiveCaptionText", getWindowInactiveTitleForegroundColor(), // Text color for text in inactive
-																				// captions (title bars).
+				// captions (title bars).
 				"inactiveCaptionBorder", getWindowInactiveBorderColor(), // Border color for inactive caption (title
-																			// bar) window borders.
+				// bar) window borders.
 
 				"window", getInputBackgroundColor(), // Default color for the interior of windows, list, tree etc
 				"windowBorder", getBackgroundColor(), // ???

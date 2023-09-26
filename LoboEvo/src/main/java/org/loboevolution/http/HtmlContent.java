@@ -49,7 +49,7 @@ public class HtmlContent {
 	 *
 	 * @param document a {@link org.loboevolution.html.node.Document} object.
 	 */
-	public HtmlContent(Document document) {
+	public HtmlContent(final Document document) {
 		this.document = document;
 	}
 

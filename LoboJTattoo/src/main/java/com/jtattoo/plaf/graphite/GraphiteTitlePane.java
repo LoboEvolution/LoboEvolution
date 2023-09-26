@@ -56,7 +56,7 @@ public class GraphiteTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public GraphiteTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public GraphiteTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
@@ -80,7 +80,7 @@ public class GraphiteTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (isActive()) {
 			g.setColor(ColorHelper.darker(AbstractLookAndFeel.getWindowBorderColor(), 10));
 		} else {
@@ -91,12 +91,12 @@ public class GraphiteTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
-		Graphics2D g2D = (Graphics2D) g;
-		Color fc = isActive() ? AbstractLookAndFeel.getWindowTitleForegroundColor()
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final Color fc = isActive() ? AbstractLookAndFeel.getWindowTitleForegroundColor()
 				: AbstractLookAndFeel.getWindowInactiveTitleForegroundColor();
 		if (fc.equals(Color.white)) {
-			Color bc = isActive() ? AbstractLookAndFeel.getWindowTitleColorDark()
+			final Color bc = isActive() ? AbstractLookAndFeel.getWindowTitleColorDark()
 					: AbstractLookAndFeel.getWindowInactiveTitleColorDark();
 			g2D.setColor(bc);
 			JTattooUtilities.drawString(rootPane, g, title, x - 1, y - 1);

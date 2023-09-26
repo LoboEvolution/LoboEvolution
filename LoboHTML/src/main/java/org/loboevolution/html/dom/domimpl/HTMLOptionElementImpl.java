@@ -142,25 +142,25 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDefaultSelected(boolean defaultSelected) {
+	public void setDefaultSelected(final boolean defaultSelected) {
 		setAttribute("selected", defaultSelected ? "selected" : null);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(final boolean disabled) {
 		// TODO Unsupported
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setLabel(String label) {
+	public void setLabel(final String label) {
 		setAttribute("label", label);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSelected(Object selected) {
+	public void setSelected(final Object selected) {
 		if (selected instanceof Boolean) {
 			this.selected = selected;
 		} else{
@@ -175,20 +175,20 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 *
 	 * <p>setText.</p>
 	 */
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.text = text;
 		setTextContent(text);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setValue(String value) {
+	public void setValue(final String value) {
 		setAttribute("value", value);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new BlockRenderState(prevRenderState, this);
 	}
 

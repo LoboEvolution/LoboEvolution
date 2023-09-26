@@ -86,7 +86,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
      * @param url a {@link java.net.URL} object.
      * @throws java.io.IOException if any.
      */
-    public DownloadWindow(URL url) throws IOException {
+    public DownloadWindow(final URL url) throws IOException {
         final Container contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
         contentPane.setBackground(background());
@@ -99,10 +99,10 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         this.url = url;
         httpConn = url.openConnection();
 
-        FormPanel topFormPanel = new FormPanel();
-        FormField documentField = new FormField(FieldType.TEXT, false);
-        FormField sizeField = new FormField(FieldType.TEXT, false);
-        FormField mimeTypeField = new FormField(FieldType.TEXT, false);
+        final FormPanel topFormPanel = new FormPanel();
+        final FormField documentField = new FormField(FieldType.TEXT, false);
+        final FormField sizeField = new FormField(FieldType.TEXT, false);
+        final FormField mimeTypeField = new FormField(FieldType.TEXT, false);
 
         documentField.setCaption("Document:");
         mimeTypeField.setCaption("MIME type:");
@@ -116,16 +116,16 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         this.progressBar.setStringPainted(true);
         this.progressBar.setValue(0);
 
-        String urlStr = url.toExternalForm();
-        String fileName = urlStr.substring(urlStr.lastIndexOf('/')+1);
+        final String urlStr = url.toExternalForm();
+        final String fileName = urlStr.substring(urlStr.lastIndexOf('/')+1);
         documentField.setValue(fileName);
         documentField.setToolTip(url.toExternalForm());
         mimeTypeField.setValue(httpConn.getContentType());
         sizeField.setValue(TimingDowload.getSizeText(httpConn.getContentLength()));
-        String estTimeText = TimingDowload.getElapsedText(httpConn.getContentLength());
+        final String estTimeText = TimingDowload.getElapsedText(httpConn.getContentLength());
         this.timeLeftField.setValue(estTimeText);
 
-        Box rootPanel = new Box(BoxLayout.Y_AXIS);
+        final Box rootPanel = new Box(BoxLayout.Y_AXIS);
         rootPanel.add(topFormPanel);
         rootPanel.add(Box.createVerticalStrut(8));
         rootPanel.add(this.getButtonsPanel());
@@ -140,7 +140,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         topFormPanel.addField(this.transferRateField);
         topFormPanel.addField(this.transferSizeField);
 
-        Dimension topPanelPs = topFormPanel.getPreferredSize();
+        final Dimension topPanelPs = topFormPanel.getPreferredSize();
         topFormPanel.setPreferredSize(new Dimension(400, topPanelPs.height));
 
         contentPane.add(rootPanel);
@@ -148,20 +148,20 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
     }
 
     private Component getButtonsPanel() {
-        JButton saveButton = this.saveButton;
+        final JButton saveButton = this.saveButton;
         saveButton.setAction(new DownloadFileAction(this));
         saveButton.setText("Download File");
         saveButton.setToolTipText("You must select a file before download begins.");
 
-        JButton closeButton = this.closeButton;
+        final JButton closeButton = this.closeButton;
         closeButton.setAction(new CloseDownloadAction(this));
         closeButton.setText("Cancel");
 
-        JButton openFolderButton = this.openFolderButton;
+        final JButton openFolderButton = this.openFolderButton;
         openFolderButton.setAction(new ChoiceFolderDownloadAction(this));
         openFolderButton.setText("Choice Folder");
 
-        Box box = new Box(BoxLayout.X_AXIS);
+        final Box box = new Box(BoxLayout.X_AXIS);
         box.add(Box.createHorizontalStrut(4));
         box.add(openFolderButton);
         box.add(Box.createHorizontalStrut(4));
@@ -173,11 +173,11 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
 
     /** {@inheritDoc} */
     @Override
-    public void downloadFile(URL url) {
+    public void downloadFile(final URL url) {
         try {
-            DownloadWindow d = new DownloadWindow(url);
+            final DownloadWindow d = new DownloadWindow(url);
             d.setVisible(true);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
@@ -187,34 +187,34 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
      *
      * @param url a {@link java.lang.String} object.
      */
-    public void downloadFile(String url)  {
+    public void downloadFile(final String url)  {
     	try {
-            DownloadWindow d = new DownloadWindow(new URL(url));
+            final DownloadWindow d = new DownloadWindow(new URL(url));
             d.setVisible(true);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public void downloadFile(InputStream inputStream) {
+    public void downloadFile(final InputStream inputStream) {
         try {
             final String PREFIX = "stream2file";
             final String SUFFIX = ".tmp";
             final File tempFile = File.createTempFile(PREFIX, SUFFIX);
             copyInputStreamToFile(inputStream, tempFile);
-            DownloadWindow d = new DownloadWindow(tempFile.toURI().toURL());
+            final DownloadWindow d = new DownloadWindow(tempFile.toURI().toURL());
             d.setVisible(true);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void copyInputStreamToFile(InputStream inputStream, File file) throws IOException {
-        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+    private static void copyInputStreamToFile(final InputStream inputStream, final File file) throws IOException {
+        try (final FileOutputStream outputStream = new FileOutputStream(file)) {
             int read;
-            byte[] bytes = new byte[1024];
+            final byte[] bytes = new byte[1024];
             while ((read = inputStream.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, read);
             }
@@ -235,7 +235,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
      *
      * @param destinationFile a {@link java.io.File} object.
      */
-    public void setDestinationFile(File destinationFile) {
+    public void setDestinationFile(final File destinationFile) {
         this.destinationFile = destinationFile;
     }
 

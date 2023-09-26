@@ -47,7 +47,7 @@ public class FrameControl extends BaseControl {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl} object.
 	 */
-	public FrameControl(HTMLIFrameElementImpl modelNode) {
+	public FrameControl(final HTMLIFrameElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;

@@ -47,13 +47,13 @@ import static org.junit.Assert.assertTrue;
 public class nodesetuserdata07Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notations;
-        Notation notation;
-        Comment comment;
-        Object returned;
-        boolean success;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notations;
+        final Notation notation;
+        final Comment comment;
+        final Object returned;
+        final boolean success;
 
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();

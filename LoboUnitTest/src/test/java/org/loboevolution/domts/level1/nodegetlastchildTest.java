@@ -52,9 +52,9 @@ public class nodegetlastchildTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
         Node lchildNode;
         String childName;
         doc = sampleXmlFile("staff.xml");

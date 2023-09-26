@@ -56,19 +56,19 @@ public class nodeissupported01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        String version = "";
-        String version1 = "1.0";
-        String version2 = "2.0";
+        final Document doc;
+        final Element element;
+        final String version = "";
+        final String version1 = "1.0";
+        final String version2 = "2.0";
         String featureCore;
         String featureXML;
         boolean success;
-        java.util.List featuresXML = new java.util.ArrayList();
+        final java.util.List featuresXML = new java.util.ArrayList();
         featuresXML.add("XML");
         featuresXML.add("xmL");
 
-        java.util.List featuresCore = new java.util.ArrayList();
+        final java.util.List featuresCore = new java.util.ArrayList();
         featuresCore.add("Core");
         featuresCore.add("CORE");
 

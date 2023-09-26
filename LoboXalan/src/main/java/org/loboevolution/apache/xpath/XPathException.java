@@ -28,6 +28,8 @@ package org.loboevolution.apache.xpath;
 import org.loboevolution.javax.xml.transform.SourceLocator;
 import org.loboevolution.javax.xml.transform.TransformerException;
 
+import java.io.PrintWriter;
+
 /**
  * This class implements an exception object that all XPath classes will throw in case of an error.
  * This class extends TransformerException, and may hold other exceptions. In the case of nested
@@ -41,7 +43,7 @@ public class XPathException extends TransformerException {
    *
    * @param message The error message.
    */
-  public XPathException(String message, SourceLocator ex) {
+  public XPathException(final String message, final SourceLocator ex) {
     super(message);
     this.setLocator(ex);
   }
@@ -51,7 +53,7 @@ public class XPathException extends TransformerException {
    *
    * @param message The error message.
    */
-  public XPathException(String message) {
+  public XPathException(final String message) {
     super(message);
   }
 
@@ -63,26 +65,26 @@ public class XPathException extends TransformerException {
 
     try {
       super.printStackTrace(s);
-    } catch (Exception e) {
+    } catch (final Exception e) {
     }
   }
 
   /** {@inheritDoc} */
   @Override
   public String getMessage() {
-    String lastMessage = super.getMessage();
+    final String lastMessage = super.getMessage();
     return (null != lastMessage) ? lastMessage : "";
   }
 
   /** {@inheritDoc} */
   @Override
-  public void printStackTrace(java.io.PrintWriter s) {
+  public void printStackTrace(PrintWriter s) {
 
-    if (s == null) s = new java.io.PrintWriter(System.err);
+    if (s == null) s = new PrintWriter(System.err);
 
     try {
       super.printStackTrace(s);
-    } catch (Exception e) {
+    } catch (final Exception e) {
     }
   }
 

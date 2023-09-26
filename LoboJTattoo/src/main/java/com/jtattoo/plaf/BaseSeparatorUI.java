@@ -54,7 +54,7 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension getPreferredSize(JComponent c) {
+	public Dimension getPreferredSize(final JComponent c) {
 		return size;
 	}
 
@@ -65,10 +65,10 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
 		if (c instanceof JSeparator) {
 			horizontal = ((JSeparator) c).getOrientation() == SwingConstants.HORIZONTAL;
 		}
-		Color background = c instanceof JPopupMenu.Separator ? AbstractLookAndFeel.getMenuBackgroundColor()
+		final Color background = c instanceof JPopupMenu.Separator ? AbstractLookAndFeel.getMenuBackgroundColor()
 				: AbstractLookAndFeel.getBackgroundColor();
 		if (horizontal) {
-			int w = c.getWidth();
+			final int w = c.getWidth();
 			g.setColor(background);
 			g.drawLine(0, 0, w, 0);
 			g.setColor(ColorHelper.darker(background, 30));
@@ -76,7 +76,7 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
 			g.setColor(ColorHelper.brighter(background, 50));
 			g.drawLine(0, 2, w, 2);
 		} else {
-			int h = c.getHeight();
+			final int h = c.getHeight();
 			g.setColor(ColorHelper.darker(background, 30));
 			g.drawLine(0, 0, 0, h);
 			g.setColor(ColorHelper.brighter(background, 50));

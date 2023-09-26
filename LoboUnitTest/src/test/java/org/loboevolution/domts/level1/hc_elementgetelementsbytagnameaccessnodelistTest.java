@@ -63,14 +63,14 @@ public class hc_elementgetelementsbytagnameaccessnodelistTest extends LoboUnitTe
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
         Node firstC;
-        String childName;
+        final String childName;
         int nodeType;
-        CharacterData employeeIDNode;
-        String employeeID;
+        final CharacterData employeeIDNode;
+        final String employeeID;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         testEmployee = (Element) elementList.item(3);

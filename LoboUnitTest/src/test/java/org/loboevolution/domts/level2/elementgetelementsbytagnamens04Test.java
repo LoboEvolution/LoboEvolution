@@ -58,11 +58,11 @@ public class elementgetelementsbytagnamens04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Element child1;
-        Element child2;
-        Element child3;
+        final Document doc;
+        final Element element;
+        final Element child1;
+        final Element child2;
+        final Element child3;
         HTMLCollection elementList;
 
         doc = sampleXmlFile("staffNS.xml");

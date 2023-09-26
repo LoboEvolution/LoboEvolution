@@ -48,9 +48,9 @@ import static org.junit.Assert.assertTrue;
 public class documentsetstricterrorchecking02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr newAttr;
-        String nullValue = null;
+        final Document doc;
+        final Attr newAttr;
+        final String nullValue = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         doc.setStrictErrorChecking(true);
@@ -59,7 +59,7 @@ public class documentsetstricterrorchecking02Test extends LoboUnitTest {
             boolean success = false;
             try {
                 newAttr = doc.createAttributeNS(nullValue, "dom:test");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
             assertTrue("NAMESPACE_ERR_documentsetstricterrorchecking02", success);

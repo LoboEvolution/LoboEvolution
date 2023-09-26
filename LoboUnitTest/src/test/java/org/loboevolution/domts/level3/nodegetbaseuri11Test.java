@@ -50,14 +50,14 @@ import static org.junit.Assert.assertEquals;
 public class nodegetbaseuri11Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        ProcessingInstruction newPI;
-        ProcessingInstruction imported;
-        String baseURI;
-        String docURI;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final ProcessingInstruction newPI;
+        final ProcessingInstruction imported;
+        final String baseURI;
+        final String docURI;
+        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("barfoo_base.xml");
         domImpl = doc.getImplementation();
@@ -66,7 +66,7 @@ public class nodegetbaseuri11Test extends LoboUnitTest {
         imported = (ProcessingInstruction) doc.importNode(newPI, true);
         doc.appendChild(imported);
         baseURI = imported.getBaseURI();
-        assertURIEquals("equalsBarfooBase", null, null, null, null, "barfoo_base", null, null, Boolean.TRUE, baseURI);
+        assertURIEquals(new URIEquals("equalsBarfooBase", null, null, null, null, "barfoo_base", null, null, true, baseURI));
         docURI = doc.getDocumentURI();
         assertEquals("equalsDocURI", docURI, baseURI);
     }

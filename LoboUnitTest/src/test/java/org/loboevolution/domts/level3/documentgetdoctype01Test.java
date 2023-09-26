@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.assertNull;
 
@@ -51,15 +50,15 @@ import static org.junit.Assert.assertNull;
 public class documentgetdoctype01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        DocumentType newDocType;
-        DocumentType replacedDocType;
-        DOMImplementation domImpl;
-        String newSysID;
-        String nullPubID = null;
-        String nullSysID = null;
-        String rootName;
+        final Document doc;
+        final DocumentType docType;
+        final DocumentType newDocType;
+        final DocumentType replacedDocType;
+        final DOMImplementation domImpl;
+        final String newSysID;
+        final String nullPubID = null;
+        final String nullSysID = null;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         rootName = docType.getName();
@@ -67,7 +66,7 @@ public class documentgetdoctype01Test extends LoboUnitTest {
         newDocType = domImpl.createDocumentType(rootName, nullPubID, nullSysID);
         try {
              doc.replaceChild(newDocType, docType);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             if (ex.getCode() == 9) {
                 return;
             }

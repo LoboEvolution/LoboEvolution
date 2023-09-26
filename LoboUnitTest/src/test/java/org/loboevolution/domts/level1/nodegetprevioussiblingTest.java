@@ -52,9 +52,9 @@ public class nodegetprevioussiblingTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
         Node psNode;
         String psName;
         doc = sampleXmlFile("staff.xml");

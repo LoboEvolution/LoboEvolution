@@ -54,13 +54,13 @@ public class nodechildnodesappendchildTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
+        final Document doc;
+        final HTMLCollection elementList;
         Node employeeNode;
-        NodeList childList;
-        Node createdNode;
+        final NodeList childList;
+        final Node createdNode;
         int expectedLength;
-        int length;
+        final int length;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);

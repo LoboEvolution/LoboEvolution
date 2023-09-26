@@ -51,19 +51,19 @@ public class FuncId extends FunctionOneArg {
    * @return The usedrefs value.
    */
   private List<String> getNodesByID(
-      XPathContext xctxt,
-      int docContext,
-      String refval,
-      List<String> usedrefs,
-      NodeSetDTM nodeSet,
-      boolean mayBeMore) {
+          final XPathContext xctxt,
+          final int docContext,
+          final String refval,
+          List<String> usedrefs,
+          final NodeSetDTM nodeSet,
+          final boolean mayBeMore) {
 
     if (null != refval) {
       String ref = null;
       // DOMHelper dh = xctxt.getDOMHelper();
-      StringTokenizer tokenizer = new StringTokenizer(refval);
+      final StringTokenizer tokenizer = new StringTokenizer(refval);
       boolean hasMore = tokenizer.hasMoreTokens();
-      DTM dtm = xctxt.getDTM(docContext);
+      final DTM dtm = xctxt.getDTM(docContext);
 
       while (hasMore) {
         ref = tokenizer.nextToken();
@@ -75,7 +75,7 @@ public class FuncId extends FunctionOneArg {
           continue;
         }
 
-        int node = dtm.getElementById(ref);
+        final int node = dtm.getElementById(ref);
 
         if (DTM.NULL != node) nodeSet.addNodeInDocOrder(node, xctxt);
 
@@ -92,27 +92,27 @@ public class FuncId extends FunctionOneArg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
 
-    int context = xctxt.getCurrentNode();
-    DTM dtm = xctxt.getDTM(context);
-    int docContext = dtm.getDocument();
+    final int context = xctxt.getCurrentNode();
+    final DTM dtm = xctxt.getDTM(context);
+    final int docContext = dtm.getDocument();
 
     if (DTM.NULL == docContext) error(xctxt, XPATHErrorResources.ER_CONTEXT_HAS_NO_OWNERDOC, null);
 
-    XObject arg = m_arg0.execute(xctxt);
-    int argType = arg.getType();
-    XNodeSet nodes = new XNodeSet(xctxt.getDTMManager());
-    NodeSetDTM nodeSet = nodes.mutableNodeset();
+    final XObject arg = m_arg0.execute(xctxt);
+    final int argType = arg.getType();
+    final XNodeSet nodes = new XNodeSet(xctxt.getDTMManager());
+    final NodeSetDTM nodeSet = nodes.mutableNodeset();
 
     if (XObject.CLASS_NODESET == argType) {
-      DTMIterator ni = arg.iter();
+      final DTMIterator ni = arg.iter();
       List<String> usedrefs = null;
       int pos = ni.nextNode();
 
       while (DTM.NULL != pos) {
-        DTM ndtm = ni.getDTM(pos);
-        String refval = ndtm.getStringValue(pos).toString();
+        final DTM ndtm = ni.getDTM(pos);
+        final String refval = ndtm.getStringValue(pos).toString();
 
         pos = ni.nextNode();
         usedrefs = getNodesByID(xctxt, docContext, refval, usedrefs, nodeSet, DTM.NULL != pos);
@@ -121,7 +121,7 @@ public class FuncId extends FunctionOneArg {
     } else if (XObject.CLASS_NULL == argType) {
       return nodes;
     } else {
-      String refval = arg.str();
+      final String refval = arg.str();
 
       getNodesByID(xctxt, docContext, refval, null, nodeSet, false);
     }

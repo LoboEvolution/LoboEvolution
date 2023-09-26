@@ -54,9 +54,9 @@ public class nodeissupported03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        boolean success;
+        final Document doc;
+        final DocumentType docType;
+        final boolean success;
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         success = docType.isSupported("", "");

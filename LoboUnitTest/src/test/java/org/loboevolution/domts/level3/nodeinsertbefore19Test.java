@@ -49,13 +49,13 @@ import static org.junit.Assert.assertEquals;
 public class nodeinsertbefore19Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Node refNode;
-        EntityReference newNode;
-        EntityReference inserted;
-        HTMLCollection childList;
-        String nodeName;
-        Element element;
+        final Document doc;
+        final Node refNode;
+        final EntityReference newNode;
+        final EntityReference inserted;
+        final HTMLCollection childList;
+        final String nodeName;
+        final Element element;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("var");
         element = (Element) childList.item(2);

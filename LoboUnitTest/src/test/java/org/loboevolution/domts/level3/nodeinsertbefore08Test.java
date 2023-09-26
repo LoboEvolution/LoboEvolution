@@ -50,11 +50,11 @@ import static org.junit.Assert.assertTrue;
 public class nodeinsertbefore08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document docAlt;
-        Element docElem;
-        Comment newComment;
-        Node inserted;
+        final Document doc;
+        final Document docAlt;
+        final Element docElem;
+        final Comment newComment;
+        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         docAlt = sampleXmlFile("hc_staff.xml");
         docElem = docAlt.getDocumentElement();
@@ -64,7 +64,7 @@ public class nodeinsertbefore08Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = doc.insertBefore(newComment, docElem);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("NOT_FOUND_ERR_nodeinsertbefore08", success);

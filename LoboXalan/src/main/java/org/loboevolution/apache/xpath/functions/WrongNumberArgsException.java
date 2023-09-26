@@ -36,7 +36,7 @@ public class WrongNumberArgsException extends Exception {
    *
    * @param argsExpected Error message that tells the number of arguments that were expected.
    */
-  public WrongNumberArgsException(String argsExpected) {
+  public WrongNumberArgsException(final String argsExpected) {
 
     super(argsExpected);
   }

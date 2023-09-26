@@ -27,7 +27,6 @@
 package org.loboevolution.html.js.storage;
 
 import org.loboevolution.config.HtmlRendererConfig;
-import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.webstorage.Storage;
 
 import java.util.Map;
@@ -39,12 +38,12 @@ public class SessionStorage implements Storage {
 	
 	private int index;
 
-	private HtmlRendererConfig config;
+	private final HtmlRendererConfig config;
 	
 	/**
 	 * <p>Constructor for SessionStorage.</p>
 	 */
-	public SessionStorage(HtmlRendererConfig config) {
+	public SessionStorage(final HtmlRendererConfig config) {
 		this.config = config;
 		this.index = config.getTabs().size();
 		if(this.index > 0) this.index = this.index -1;
@@ -58,9 +57,9 @@ public class SessionStorage implements Storage {
 	
 	/** {@inheritDoc} */
 	@Override
-	public Object key(int index) {
+	public Object key(final int index) {
         int counter = 0;
-        Map<String, String> store = config.getMapStorage(index, 1);
+        final Map<String, String> store = config.getMapStorage(index, 1);
         for (final String key : store.keySet()) {
             if (counter++ == index) {
                 return key;
@@ -71,20 +70,20 @@ public class SessionStorage implements Storage {
 	
 	/** {@inheritDoc} */
 	@Override
-	public Object getItem(String key) {
+	public Object getItem(final String key) {
 		return config.getValue(key, 1, index);
 	}
 	
 	/** {@inheritDoc} */
 	@Override
-	public void setItem(String keyName, String keyValue) {
+	public void setItem(final String keyName, final String keyValue) {
 		config.deleteStorage(keyName, 1, index);
 		config.insertStorage(keyName, keyValue, 1, index);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeItem(String keyName) {
+	public void removeItem(final String keyName) {
 		config.deleteStorage(keyName, 1, index);
 
 	}

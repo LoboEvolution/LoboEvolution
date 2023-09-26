@@ -62,16 +62,16 @@ public class importNode07Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document aNewDoc;
-        Element element;
-        Element aNode;
-        NamedNodeMap attributes;
-        String name;
-        Attr attr;
-        String lname;
-        String namespaceURI = "http://www.nist.gov";
-        String qualifiedName = "employee";
+        final Document doc;
+        final Document aNewDoc;
+        final Element element;
+        final Element aNode;
+        final NamedNodeMap attributes;
+        final String name;
+        final Attr attr;
+        final String lname;
+        final String namespaceURI = "http://www.nist.gov";
+        final String qualifiedName = "employee";
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staff.xml");
         element = aNewDoc.createElementNS(namespaceURI, qualifiedName);

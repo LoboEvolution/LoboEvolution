@@ -52,22 +52,22 @@ public class EntityReferenceImpl extends EventTargetImpl implements EntityRefere
     private String notationName;
 
     @Override
-    public void setNodeValue(String nodeValue) throws DOMException {
+    public void setNodeValue(final String nodeValue) throws DOMException {
         super.setNodeValue(nodeValue);
     }
 
     @Override
-    public Node replaceChild(Node newChild, Node oldChild) {
+    public Node replaceChild(final Node newChild, final Node oldChild) {
         throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
     }
 
     @Override
-    public Node appendChild(Node newChild) {
+    public Node appendChild(final Node newChild) {
         throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
     }
 
     @Override
-    public Node insertBefore(Node newChild, Node refChild) {
+    public Node insertBefore(final Node newChild, final Node refChild) {
         throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
     }
 

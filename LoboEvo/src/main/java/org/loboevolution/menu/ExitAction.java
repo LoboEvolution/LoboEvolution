@@ -34,9 +34,6 @@ import org.loboevolution.component.BrowserFrame;
 
 /**
  * <p>ExitAction class.</p>
- *
- *
- *
  */
 public class ExitAction extends AbstractAction {
 
@@ -49,13 +46,13 @@ public class ExitAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public ExitAction(BrowserFrame frame) {
+	public ExitAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(final ActionEvent arg0) {
 		this.frame.dispose();
 
 	}

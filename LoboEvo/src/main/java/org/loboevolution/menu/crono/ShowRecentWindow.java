@@ -81,11 +81,11 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public ShowRecentWindow(BrowserFrame frame) {
+	public ShowRecentWindow(final BrowserFrame frame) {
 		createAndShowGUI(frame);
 	}
 
-	private void createAndShowGUI(BrowserFrame frame) {
+	private void createAndShowGUI(final BrowserFrame frame) {
 		final Container contentPane = getContentPane();
 		contentPane.setLayout(null);
 		contentPane.setBackground(background());
@@ -95,12 +95,12 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("host.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
-		LoboLabel label_6 = new LoboLabel("");
+		final LoboLabel label_6 = new LoboLabel("");
 		label_6.setOpaque(true);
 		label_6.setBounds(0, 11, 792, 8);
 		contentPane.add(label_6);
 
-		LoboLabel label_1 = new LoboLabel("");
+		final LoboLabel label_1 = new LoboLabel("");
 		label_1.setOpaque(true);
 		label_1.setBounds(650, 11, 403, 9);
 		contentPane.add(label_1);
@@ -109,23 +109,23 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		saveHost(frame, contentPane);
 	}
 	
-	private void saveHost(BrowserFrame frame, Container contentPane) {
-		LoboPanel panel2 = new LoboPanel();
+	private void saveHost(final BrowserFrame frame, final Container contentPane) {
+		final LoboPanel panel2 = new LoboPanel();
 		panel2.setLayout(null);
 		panel2.setBounds(550, 40, 403, 436);
 		contentPane.add(panel2);
 
-		LoboSeparator separator_2 = new LoboSeparator();
+		final LoboSeparator separator_2 = new LoboSeparator();
 		separator_2.setBounds(0, 58, 350, 12);
 		panel2.add(separator_2);
 		
-		LoboLabel editBookmark = new LoboLabel("Host");
+		final LoboLabel editBookmark = new LoboLabel("Host");
 		editBookmark.setHorizontalAlignment(SwingConstants.CENTER);
 		editBookmark.setFont(new Font("Tahoma", Font.BOLD, 17));
 		editBookmark.setBounds(70, 18, 167, 22);
 		panel2.add(editBookmark);
 		
-		LoboLabel lblUrl = new LoboLabel("URL");
+		final LoboLabel lblUrl = new LoboLabel("URL");
 		lblUrl.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblUrl.setBounds(12, 70, 282, 16);
 		panel2.add(lblUrl);
@@ -137,11 +137,11 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		urlEditTxtFld.setBounds(12, 98, 350, 16);
 		panel2.add(urlEditTxtFld);
 		
-		LoboSeparator separator_8 = new LoboSeparator();
+		final LoboSeparator separator_8 = new LoboSeparator();
 		separator_8.setBounds(12, 115, 380, 12);
 		panel2.add(separator_8);
 		
-		LoboLabel lblTitle = new LoboLabel("Title");
+		final LoboLabel lblTitle = new LoboLabel("Title");
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTitle.setBounds(12, 139, 282, 16);
 		panel2.add(lblTitle);
@@ -153,11 +153,11 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		titleEditTxtFld.setBounds(12, 167, 350, 16);
 		panel2.add(titleEditTxtFld);
 		
-		LoboSeparator separator_9 = new LoboSeparator();
+		final LoboSeparator separator_9 = new LoboSeparator();
 		separator_9.setBounds(12, 184, 380, 12);
 		panel2.add(separator_9);
 		
-		LoboButton okButton = new LoboButton();
+		final LoboButton okButton = new LoboButton();
 		okButton.setText("Save");
 		okButton.setActionCommand("okButton");
 		okButton.setBounds(25, 340, 150, 40);
@@ -172,7 +172,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		});
 		panel2.add(okButton);
 
-		LoboButton closeButton = new LoboButton();
+		final LoboButton closeButton = new LoboButton();
 		closeButton.setText("Close");
 		closeButton.setActionCommand("closeButton");
 		closeButton.addActionListener(e -> {
@@ -183,29 +183,29 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		panel2.add(closeButton);
 	}
 	
-	private void listHost(BrowserFrame frame, Container contentPane) {
-		LoboSeparator separator_7 = new LoboSeparator();
+	private void listHost(final BrowserFrame frame, final Container contentPane) {
+		final LoboSeparator separator_7 = new LoboSeparator();
 		separator_7.setBounds(0, 98, 550, 12);
 		contentPane.add(separator_7);
 		
-		LoboPanel panel = new LoboPanel();
+		final LoboPanel panel = new LoboPanel();
 		panel.setLayout(null);
 		panel.setBounds(0, 40, 650, 50);
 		contentPane.add(panel);
 		
-		LoboLabel title = new LoboLabel("Title");
+		final LoboLabel title = new LoboLabel("Title");
 		title.setFont(new Font("Tahoma", Font.BOLD, 14));
 		title.setBounds(30, 18, 211, 16);
 		panel.add(title);
 
-		LoboLabel action = new LoboLabel("Action");
+		final LoboLabel action = new LoboLabel("Action");
 		action.setFont(new Font("Tahoma", Font.BOLD, 14));
 		action.setBounds(400, 18, 160, 17);
 		panel.add(action);
 		
-		LoboPanel panelGeneralViewAllItems = new LoboPanel();
+		final LoboPanel panelGeneralViewAllItems = new LoboPanel();
 		panelGeneralViewAllItems.setBounds(10, 100, 530, 313);
-		JScrollPane spViewallItems = new JScrollPane();
+		final JScrollPane spViewallItems = new JScrollPane();
 		spViewallItems.setBorder(null);
 		spViewallItems.setViewportView(createItemPanel(frame));
 		panelGeneralViewAllItems.setLayout(new BorderLayout());
@@ -214,10 +214,10 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		
 	}
 	
-	private LoboPanel createItemPanel(BrowserFrame frame) {
+	private LoboPanel createItemPanel(final BrowserFrame frame) {
 
 
-		LoboPanel panel_3 = new LoboPanel();
+		final LoboPanel panel_3 = new LoboPanel();
 		panel_3.setLayout(null);
 		panel_3.setBounds(0, 191, 750, 70);
 
@@ -225,7 +225,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		int debutCpTitle = 15;
 		int debutCpUrl = 15;
 		int debutCpSeparator = 58;
-		int incrementNouvelleLigne = 67;
+		final int incrementNouvelleLigne = 67;
 
 		try {
 			final NavigationStore nav = new NavigationStore();
@@ -233,7 +233,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 			for (final BookmarkInfo binfo : allEntries) {
 				final String url = binfo.getUrl();
 
-				LoboTextField title = new LoboTextField();
+				final LoboTextField title = new LoboTextField();
 				title.setText(binfo.getTitle());
 				title.setToolTipText(binfo.getTitle());
 				title.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -243,7 +243,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 				title.setBounds(12, debutCpDesc, 250, 22);
 				panel_3.add(title);
 
-				LoboButton edit = new LoboButton();
+				final LoboButton edit = new LoboButton();
 				edit.setText("Edit");
 				edit.setActionCommand("okButton");
 				edit.setBounds(370, debutCpUrl, 40, 40);
@@ -255,7 +255,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 				});
 				panel_3.add(edit);
 
-				LoboButton delete = new LoboButton();
+				final LoboButton delete = new LoboButton();
 				delete.setText("Delete");
 				delete.setActionCommand("okButton");
 				delete.setBounds(410, debutCpUrl, 50, 40);
@@ -270,7 +270,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 				});
 				panel_3.add(delete);
 				
-				LoboButton go = new LoboButton();
+				final LoboButton go = new LoboButton();
 				go.setText("Go");
 				go.setActionCommand("goButton");
 				go.setBounds(460, debutCpUrl, 40, 40);
@@ -278,9 +278,9 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 					final BrowserPanel panel = frame.getPanel();
 					final int indexPanel = panel.getTabbedPane().getIndex() + 1;
 					final ITabbedPane tabbedPane = panel.getTabbedPane();
-					HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
+					final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
 					final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
-					String htmlTitle = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+					final String htmlTitle = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 					tabbedPane.setComponentPopupMenu(panel);
 					tabbedPane.insertTab(htmlTitle, null, hpanel, htmlTitle, indexPanel);
 					tabbedPane.setSelectedIndex(indexPanel);
@@ -295,7 +295,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 				debutCpSeparator = debutCpSeparator + incrementNouvelleLigne;
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 

@@ -81,37 +81,37 @@ public class FunctionType0 extends PDFFunction {
 	 * Read the function information from a PDF Object
 	 */
     @Override
-	protected void parse(PDFObject obj) throws IOException {
+	protected void parse(final PDFObject obj) throws IOException {
         // read the size array (required)
-        PDFObject sizeObj = obj.getDictRef("Size");
+        final PDFObject sizeObj = obj.getDictRef("Size");
         if (sizeObj == null) {
             throw new PDFParseException("Size required for function type 0!");
         }
-        PDFObject[] sizeAry = sizeObj.getArray();
-        int[] size = new int[sizeAry.length];
+        final PDFObject[] sizeAry = sizeObj.getArray();
+        final int[] size = new int[sizeAry.length];
         for (int i = 0; i < sizeAry.length; i++) {
             size[i] = sizeAry[i].getIntValue();
         }
         setSize(size);
     
         // read the # bits per sample (required)
-        PDFObject bpsObj = obj.getDictRef("BitsPerSample");
+        final PDFObject bpsObj = obj.getDictRef("BitsPerSample");
         if (bpsObj == null) {
             throw new PDFParseException("BitsPerSample required for function type 0!");
         }
         setBitsPerSample(bpsObj.getIntValue());
         
         // read the order (optional)
-        PDFObject orderObj = obj.getDictRef("Order");
+        final PDFObject orderObj = obj.getDictRef("Order");
         if (orderObj != null) {
             setOrder(orderObj.getIntValue());
         }
         
         // read the encode array (optional)
-        PDFObject encodeObj = obj.getDictRef("Encode");
+        final PDFObject encodeObj = obj.getDictRef("Encode");
         if (encodeObj != null) {
-            PDFObject[] encodeAry = encodeObj.getArray();
-            float[] encode = new float[encodeAry.length];
+            final PDFObject[] encodeAry = encodeObj.getArray();
+            final float[] encode = new float[encodeAry.length];
             for (int i = 0; i < encodeAry.length; i++) {
                 encode[i] = encodeAry[i].getFloatValue();
             }
@@ -119,10 +119,10 @@ public class FunctionType0 extends PDFFunction {
         }
         
         // read the decode array (optional)
-        PDFObject decodeObj = obj.getDictRef("Decode");
+        final PDFObject decodeObj = obj.getDictRef("Decode");
         if (decodeObj != null) {
-            PDFObject[] decodeAry = decodeObj.getArray();
-            float[] decode = new float[decodeAry.length];
+            final PDFObject[] decodeAry = decodeObj.getArray();
+            final float[] decode = new float[decodeAry.length];
             for (int i = 0; i < decodeAry.length; i++) {
                 decode[i] = decodeAry[i].getFloatValue();
             }
@@ -142,11 +142,11 @@ public class FunctionType0 extends PDFFunction {
 	 * range.
 	 */
     @Override
-	protected void doFunction(float[] inputs, int inputOffset, 
-                              float[] outputs, int outputOffset) 
+	protected void doFunction(final float[] inputs, final int inputOffset,
+                              final float[] outputs, final int outputOffset)
     {      
         // calculate the encoded values for each input
-        float[] encoded = new float[getNumInputs()];
+        final float[] encoded = new float[getNumInputs()];
         for (int i = 0; i < getNumInputs(); i++) {
             // encode -- interpolate(x<i>, domain<2i>, domain<2i + 1>,
             //                       encode<2i>, encode<2i + 1>)
@@ -188,7 +188,7 @@ public class FunctionType0 extends PDFFunction {
      * @param dimension the input dimension to get the size of
      * @return the number of samples in the given dimension
      */
-    protected int getSize(int dimension) {
+    protected int getSize(final int dimension) {
         return this.size[dimension];
     }
     
@@ -197,7 +197,7 @@ public class FunctionType0 extends PDFFunction {
      *
      * @param size an array of {@link int} objects.
      */
-    protected void setSize(int[] size) {
+    protected void setSize(final int[] size) {
         this.size = size;
     }
     
@@ -216,7 +216,7 @@ public class FunctionType0 extends PDFFunction {
      *
      * @param bits a int.
      */
-    protected void setBitsPerSample(int bits) {
+    protected void setBitsPerSample(final int bits) {
         this.bitsPerSample = bits;
     }
     
@@ -234,7 +234,7 @@ public class FunctionType0 extends PDFFunction {
      *
      * @param order a int.
      */
-    protected void setOrder(int order) {
+    protected void setOrder(final int order) {
         this.order = order;
     }
     
@@ -246,7 +246,7 @@ public class FunctionType0 extends PDFFunction {
      *           2<i>i</i> + 1
      * @return the encoding value if the encoding array is set, or the default
      */
-    protected float getEncode(int i) {
+    protected float getEncode(final int i) {
         if (this.encode != null) {
             return this.encode[i];
         } else if ((i % 2) == 0) {
@@ -261,7 +261,7 @@ public class FunctionType0 extends PDFFunction {
      *
      * @param encode an array of {@link float} objects.
      */
-    protected void setEncode(float[] encode) {
+    protected void setEncode(final float[] encode) {
         this.encode = encode;
     }
     
@@ -273,7 +273,7 @@ public class FunctionType0 extends PDFFunction {
      *           2<i>i</i> + 1
      * @return the decoding value if the decoding array is set, or the default
      */
-    protected float getDecode(int i) {
+    protected float getDecode(final int i) {
         if (this.decode != null) {
             return this.decode[i];
         } else {
@@ -286,7 +286,7 @@ public class FunctionType0 extends PDFFunction {
      *
      * @param decode an array of {@link float} objects.
      */
-    protected void setDecode(float[] decode) {
+    protected void setDecode(final float[] decode) {
         this.decode = decode;
     }
     
@@ -299,7 +299,7 @@ public class FunctionType0 extends PDFFunction {
      * @param od the output dimension (0 - <i>n</i>) to get the sample in
      * @return the sample for the given values and index
      */
-    protected int getSample(int[] values, int od) {
+    protected int getSample(final int[] values, final int od) {
         int mult = 1;
         int index = 0;
         for (int i = 0; i < values.length; i++) {
@@ -315,7 +315,7 @@ public class FunctionType0 extends PDFFunction {
      *
      * @param samples an array of {@link int} objects.
      */
-    protected void setSamples(int[][] samples) {
+    protected void setSamples(final int[][] samples) {
         this.samples = samples;
     }
     
@@ -324,7 +324,7 @@ public class FunctionType0 extends PDFFunction {
      * of <i>n</i> components, each of which has length <i>bitsPerSample</i>
      * bits.  The samples are arranged by dimension, then range
      */
-    private int[][] readSamples(ByteBuffer buf) {
+    private int[][] readSamples(final ByteBuffer buf) {
         // calculate the number of samples in the table
         int size = 1;
         for (int i = 0; i < getNumInputs(); i++) {
@@ -332,7 +332,7 @@ public class FunctionType0 extends PDFFunction {
         }
         
         // create the samples table
-        int[][] samples = new int[size][getNumOutputs()];
+        final int[][] samples = new int[size][getNumOutputs()];
         
         
         // the current location in the buffer, in bits from byteLoc
@@ -354,7 +354,7 @@ public class FunctionType0 extends PDFFunction {
                     byte curByte = buf.get(byteLoc);
                     
                     while (toRead > 0) {
-                        int nextBit = ((curByte >> (7 - bitLoc)) & 0x1);
+                        final int nextBit = ((curByte >> (7 - bitLoc)) & 0x1);
                         value |= nextBit << (toRead - 1);
                         
                         if (++bitLoc == 8) {
@@ -390,10 +390,10 @@ public class FunctionType0 extends PDFFunction {
      * @param encoded the encoded input values
      * @param od the output dimension
      */
-    private float multilinearInterpolate(float[] encoded, int od) {
+    private float multilinearInterpolate(final float[] encoded, final int od) {
         // first calculate the distances -- the differences between
         // each encoded value and the integer below it.
-        float[] dists = new float[encoded.length];
+        final float[] dists = new float[encoded.length];
         for (int i = 0; i < dists.length; i++) {
             dists[i] = (float) (encoded[i] - Math.floor(encoded[i]));
         }
@@ -421,7 +421,7 @@ public class FunctionType0 extends PDFFunction {
             
             // now find the sample with that axis set to 1
             map |= (0x1 << idx);
-            float cur = getSample(encoded, map, od);
+            final float cur = getSample(encoded, map, od);
             
             // calculate the value and remember it
             val += dists[idx] * (cur - prev);
@@ -441,7 +441,7 @@ public class FunctionType0 extends PDFFunction {
      * @param encoded the encoded input values
      * @param od the output dimension
      */
-    private float multicubicInterpolate(float[] encoded, int od) {
+    private float multicubicInterpolate(final float[] encoded, final int od) {
         PDFDebugger.debug("Cubic interpolation not supported!");
         return multilinearInterpolate(encoded, od);
     }
@@ -456,8 +456,8 @@ public class FunctionType0 extends PDFFunction {
      * @param map the bit map of control values
      * @param od the output dimension to read the sample for
      */
-    private float getSample(float[] encoded, int map, int od) {
-        int[] controls = new int[encoded.length];
+    private float getSample(final float[] encoded, final int map, final int od) {
+        final int[] controls = new int[encoded.length];
         
         // fill in the controls array with appropriate ints
         for (int i = 0; i < controls.length; i++) {

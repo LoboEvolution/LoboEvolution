@@ -91,7 +91,7 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setItem(SearchEngineStore item) {
+	public void setItem(final SearchEngineStore item) {
 		this.nameField.setValue(item.getName());
 		this.descriptionField.setValue(item.getDescription());
 		this.baseUrlField.setValue(item.getBaseUrl());

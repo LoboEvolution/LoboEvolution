@@ -52,16 +52,16 @@ import static org.junit.Assert.*;
 public class domconfigschematype1Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        Document doc;
-        DOMConfiguration domConfig;
-        DocumentType nullDocType = null;
+        final DOMImplementation domImpl;
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final DocumentType nullDocType = null;
 
         boolean canSet;
         String state;
-        String parameter = "sChEma-type";
-        String xmlSchemaType = "http://www.w3.org/2001/XMLSchema";
-        String dtdType = "http://www.w3.org/TR/REC-xml";
+        final String parameter = "sChEma-type";
+        final String xmlSchemaType = "http://www.w3.org/2001/XMLSchema";
+        final String dtdType = "http://www.w3.org/TR/REC-xml";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
@@ -71,7 +71,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
         try {
             state = (String) domConfig.getParameter(parameter);
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             if (ex.getCode() == 8) {
                 return;
             }
@@ -92,7 +92,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
                 try {
                     /*DOMString */
                     domConfig.setParameter(parameter, dtdType);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
                 assertTrue("throw_NOT_SUPPORTED_ERR_dtd", success);
@@ -114,7 +114,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
                 try {
                     /*DOMString */
                     domConfig.setParameter(parameter, xmlSchemaType);
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
                 assertTrue("throw_NOT_SUPPORTED_ERR_schema", success);

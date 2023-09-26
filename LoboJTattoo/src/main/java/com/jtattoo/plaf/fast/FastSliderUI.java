@@ -69,14 +69,15 @@ public class FastSliderUI extends BaseSliderUI {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			int w = WIDTH - 1;
-			int h = HEIGHT - 1;
-			int dw = WIDTH / 2;
-			Color backColor = AbstractLookAndFeel.getControlBackgroundColor();
-			Color loColor = AbstractLookAndFeel.getFrameColor();
-			Color hiColor = ColorHelper.brighter(backColor, 40);
-			Polygon poly = new Polygon();
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+final int x = iconX;
+			final int w = WIDTH - 1;
+			final int h = HEIGHT - 1;
+			final int dw = WIDTH / 2;
+			final Color backColor = AbstractLookAndFeel.getControlBackgroundColor();
+			final Color loColor = AbstractLookAndFeel.getFrameColor();
+			final Color hiColor = ColorHelper.brighter(backColor, 40);
+			final Polygon poly = new Polygon();
 			poly.addPoint(x, y);
 			poly.addPoint(x + w, y);
 			poly.addPoint(x + w, y + h - dw);
@@ -109,14 +110,15 @@ public class FastSliderUI extends BaseSliderUI {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			int w = WIDTH - 1;
-			int h = HEIGHT - 1;
-			int dh = HEIGHT / 2;
-			Color backColor = AbstractLookAndFeel.getControlBackgroundColor();
-			Color loColor = AbstractLookAndFeel.getFrameColor();
-			Color hiColor = ColorHelper.brighter(backColor, 40);
-			Polygon poly = new Polygon();
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+final int x = iconX;
+			final int w = WIDTH - 1;
+			final int h = HEIGHT - 1;
+			final int dh = HEIGHT / 2;
+			final Color backColor = AbstractLookAndFeel.getControlBackgroundColor();
+			final Color loColor = AbstractLookAndFeel.getFrameColor();
+			final Color hiColor = ColorHelper.brighter(backColor, 40);
+			final Polygon poly = new Polygon();
 			poly.addPoint(x, y);
 			poly.addPoint(x + w - dh, y);
 			poly.addPoint(x + w, y + dh);
@@ -146,7 +148,7 @@ public class FastSliderUI extends BaseSliderUI {
 	 *
 	 * @param slider a {@link javax.swing.JSlider} object.
 	 */
-	public FastSliderUI(JSlider slider) {
+	public FastSliderUI(final JSlider slider) {
 		super(slider);
 	}
 
@@ -176,11 +178,11 @@ public class FastSliderUI extends BaseSliderUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintTrack(Graphics g) {
-		boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
+	public void paintTrack(final Graphics g) {
+		final boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
 
 		g.translate(trackRect.x, trackRect.y);
-		int overhang = 5;
+		final int overhang = 5;
 		int trackLeft = 0;
 		int trackTop = 0;
 		int trackRight = 0;

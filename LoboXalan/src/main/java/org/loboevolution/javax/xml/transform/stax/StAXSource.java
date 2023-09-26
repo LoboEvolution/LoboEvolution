@@ -57,7 +57,7 @@ import org.loboevolution.javax.xml.transform.Source;
  */
 public class StAXSource implements Source {
 
-    /** If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature(String name)}
+    /** If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature(final String name)}
      * returns true when passed this value as an argument,
      * the Transformer supports Source input of this type.
      */
@@ -109,8 +109,8 @@ public class StAXSource implements Source {
         // The next event on the input stream should be
         // XMLStreamConstants.START_DOCUMENT or
         // XMLStreamConstants.START_ELEMENT.
-        XMLEvent event = xmlEventReader.peek();
-        int eventType = event.getEventType();
+        final XMLEvent event = xmlEventReader.peek();
+        final int eventType = event.getEventType();
         if (eventType != XMLStreamConstants.START_DOCUMENT
                 && eventType != XMLStreamConstants.START_ELEMENT) {
             throw new IllegalStateException(
@@ -150,7 +150,7 @@ public class StAXSource implements Source {
                     "StAXSource(XMLStreamReader) with XMLStreamReader == null");
         }
 
-        int eventType = xmlStreamReader.getEventType();
+        final int eventType = xmlStreamReader.getEventType();
         if (eventType != XMLStreamConstants.START_DOCUMENT
                 && eventType != XMLStreamConstants.START_ELEMENT) {
             throw new IllegalStateException(

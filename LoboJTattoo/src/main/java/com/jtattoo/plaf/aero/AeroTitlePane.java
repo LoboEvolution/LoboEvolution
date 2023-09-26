@@ -53,17 +53,17 @@ public class AeroTitlePane extends BaseTitlePane {
 
 		private static final long serialVersionUID = 1L;
 
-		public TitleButton(Action action, String accessibleName, Icon icon) {
+		public TitleButton(final Action action, final String accessibleName, final Icon icon) {
 			super(action, accessibleName, icon, 1.0f);
 		}
 
 		@Override
 		public void paint(final Graphics g) {
-			boolean isPressed = getModel().isPressed();
-			boolean isArmed = getModel().isArmed();
-			boolean isRollover = getModel().isRollover();
-			int width = getWidth();
-			int height = getHeight();
+			final boolean isPressed = getModel().isPressed();
+			final boolean isArmed = getModel().isArmed();
+			final boolean isRollover = getModel().isRollover();
+			final int width = getWidth();
+			final int height = getHeight();
 			Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 			if (isRollover) {
 				colors = AbstractLookAndFeel.getTheme().getRolloverColors();
@@ -89,7 +89,7 @@ public class AeroTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public AeroTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public AeroTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
@@ -119,7 +119,7 @@ public class AeroTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (isActive()) {
 			g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowTitleColorDark(), 50));
 		} else {
@@ -130,9 +130,9 @@ public class AeroTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
-			Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
+			final Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
 			if (ColorHelper.getGrayValue(titleColor) > 164) {
 				g.setColor(Color.black);
 			} else {

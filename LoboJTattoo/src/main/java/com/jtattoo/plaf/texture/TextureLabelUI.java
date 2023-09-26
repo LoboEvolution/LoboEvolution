@@ -60,11 +60,11 @@ public class TextureLabelUI extends BasicLabelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-		int mnemIndex = l.getDisplayedMnemonicIndex();
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
-		AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
+	protected void paintDisabledText(final JLabel l, final Graphics g, final String s, final int textX, final int textY) {
+		final int mnemIndex = l.getDisplayedMnemonicIndex();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
+		final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
 		g2D.setComposite(alpha);
 		Color fc = l.getForeground();
 		if (ColorHelper.getGrayValue(fc) > 164) {
@@ -82,14 +82,14 @@ public class TextureLabelUI extends BasicLabelUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-		int mnemIndex = l.getDisplayedMnemonicIndex();
-		Color fc = l.getForeground();
+	protected void paintEnabledText(final JLabel l, final Graphics g, final String s, final int textX, final int textY) {
+		final int mnemIndex = l.getDisplayedMnemonicIndex();
+		final Color fc = l.getForeground();
 		if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 164) {
 			g.setColor(Color.black);
 			JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY + 1);
 		} else {
-			Object sc = l.getClientProperty("shadowColor");
+			final Object sc = l.getClientProperty("shadowColor");
 			if (sc instanceof Color) {
 				g.setColor((Color) sc);
 				JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY + 1);

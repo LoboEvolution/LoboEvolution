@@ -102,7 +102,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Node adoptNode(Node source) {
+	public Node adoptNode(final Node source) {
 
 		if (source instanceof DocumentType || Objects.equals(this, source)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
@@ -114,13 +114,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		}
 
 
-		NodeImpl node = (NodeImpl) source;
+		final NodeImpl node = (NodeImpl) source;
 		node.setOwnerDocument(this.document, true);
 		return node;
 	}
 
 	@Override
-	public Node renameNode(Node node, String namespaceURI, String qualifiedName) {
+	public Node renameNode(final Node node, final String namespaceURI, final String qualifiedName) {
 		if (node instanceof Attr) {
 			return createAttributeNS(namespaceURI, qualifiedName);
 		}
@@ -134,8 +134,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElement(String tagName) {
-
+	public Element createElement(final String tn) {
+		String tagName = tn;
 		if (Strings.isNotBlank(tagName) && tagName.equals(":")) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
@@ -158,8 +158,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	}
 
 	@Override
-	public EntityReference createEntityReference(String entity) {
-		EntityReferenceImpl entityReference = new EntityReferenceImpl();
+	public EntityReference createEntityReference(final String entity) {
+		final EntityReferenceImpl entityReference = new EntityReferenceImpl();
 		entityReference.setNodeName(entity);
 		entityReference.setOwnerDocument(this);
 		return entityReference;
@@ -167,8 +167,10 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElementNS(String namespaceURI, String qualifiedName) {
+	public Element createElementNS(final String nUri, final String qName) {
 		String prefix = null;
+		final String qualifiedName = qName;
+		String namespaceURI = nUri;
 
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
@@ -180,7 +182,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has error.");
 			}
 
-			String[] split = qualifiedName.split(":");
+			final String[] split = qualifiedName.split(":");
 			if (split.length != 2) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name provided has an empty local name.");
 			}
@@ -211,7 +213,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				}
 			}
 		}
-		ElementImpl elem = (ElementImpl) new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
+		final ElementImpl elem = (ElementImpl) new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
 		elem.setNamespaceURI(namespaceURI);
 		if (Strings.isNotBlank(prefix) && Strings.isNotBlank(namespaceURI)) {
 			elem.setPrefix(prefix);
@@ -221,7 +223,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElementNS(String namespaceURI, String qualifiedName, String options) {
+	public Element createElementNS(final String namespaceURI, final String qualifiedName, final String options) {
 		if (Strings.isBlank(qualifiedName) || !Strings.isXMLIdentifier(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
@@ -237,13 +239,13 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByClassName(String classNames) {
+	public HTMLCollection getElementsByClassName(final String classNames) {
 		return new HTMLCollectionImpl(this, new ClassNameFilter(classNames));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByTagName(String tagname) {
+	public HTMLCollection getElementsByTagName(final String tagname) {
 		if ("*".equals(tagname)) {
 			return new HTMLCollectionImpl(this, new ElementFilter(null));
 		} else {
@@ -253,7 +255,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
+	public HTMLCollection getElementsByTagNameNS(final String namespaceURI, final String localName) {
 
 		if("*".equals(namespaceURI) && "*".equals(localName)) {
 			return new HTMLCollectionImpl(this, new ElementFilter(null));
@@ -271,8 +273,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element getLastElementChild() {
-		long count = nodeList.stream().filter(n -> n instanceof Element).count();
-		Stream<Node> stream = nodeList.stream();
+		final long count = nodeList.stream().filter(n -> n instanceof Element).count();
+		final Stream<Node> stream = nodeList.stream();
 		return (Element) stream.filter(n -> n instanceof Element).skip(count - 1).findFirst().orElse(null);
 	}
 
@@ -288,14 +290,14 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Element querySelector(String selectors) {
+	public Element querySelector(final String selectors) {
 		try {
-			SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
-			List<Element> elem = new ArrayList<>();
+			final SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+			final List<Element> elem = new ArrayList<>();
 			if (selectorList != null) {
-				NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
-					for (Selector selector : selectorList) {
+					for (final Selector selector : selectorList) {
 						if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
 							elem.add((Element) child);
 						}
@@ -303,14 +305,14 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				});
 			}
 			return elem.size() > 0 ? elem.get(0) : null;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeList querySelectorAll(String selector) {
+	public NodeList querySelectorAll(final String selector) {
 
 		final ArrayList<Node> al = new ArrayList<>();
 
@@ -327,11 +329,11 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		}
 
 		try {
-			SelectorList selectorList = CSSUtilities.getSelectorList(selector);
+			final SelectorList selectorList = CSSUtilities.getSelectorList(selector);
 			if (selectorList != null) {
-				NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
-					for (Selector select : selectorList) {
+					for (final Selector select : selectorList) {
 						if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
 							al.add(child);
 						}
@@ -340,7 +342,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			}
 			return new NodeListImpl(al);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
 	}
@@ -364,7 +366,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	 *
 	 * @param doctype a {@link org.loboevolution.html.node.DocumentType} object.
 	 */
-	public void setDoctype(DocumentType doctype) {
+	public void setDoctype(final DocumentType doctype) {
 		if (doctype != null) {
 			nodeList.add(doctype);
 		}
@@ -373,7 +375,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public Element getDocumentElement() {
-		for (Node node : nodeList) {
+		for (final Node node : nodeList) {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				return (Element) node;
 			}
@@ -383,7 +385,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Text createTextNode(String data) {
+	public Text createTextNode(final String data) {
 		if (data == null) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null data");
 		}
@@ -396,25 +398,27 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Attr createAttribute(String name) {
+	public Attr createAttribute(final String name) {
 		if (!Strings.isXMLIdentifier(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
-		AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, true);
+		final AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, true);
 		attr.setOwnerDocument(this);
 		return attr;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
+	public Attr createAttributeNS(final String nUri, final String qName) throws DOMException {
 		String prefix = null;
+		String qualifiedName = qName;
+		final String namespaceURI = nUri;
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
 		if (qualifiedName.contains(":")) {
-			String[] split = qualifiedName.split(":");
+			final String[] split = qualifiedName.split(":");
 			if (split.length != 2) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
@@ -437,7 +441,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			throw new DOMException(DOMException.NAMESPACE_ERR, "xmlns local name but not xmlns namespace");
 		}
 
-		AttrImpl attr = new AttrImpl(qualifiedName, null, "id".equalsIgnoreCase(qualifiedName), null, true);
+		final AttrImpl attr = new AttrImpl(qualifiedName, null, "id".equalsIgnoreCase(qualifiedName), null, true);
 		attr.setNamespaceURI(namespaceURI);
 		attr.setOwnerDocument(this);
 		if (Strings.isNotBlank(prefix)) {
@@ -448,22 +452,22 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public CDATASection createCDATASection(String data) {
+	public CDATASection createCDATASection(final String data) {
 		if (data == null) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null data");
 		}
-		CDataSectionImpl node = new CDataSectionImpl(data);
+		final CDataSectionImpl node = new CDataSectionImpl(data);
 		node.setOwnerDocument(this.document);
 		return node;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Comment createComment(String data) {
+	public Comment createComment(final String data) {
 		if (data == null) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null data");
 		}
-		CommentImpl node = new CommentImpl(data);
+		final CommentImpl node = new CommentImpl(data);
 		node.setOwnerDocument(this.document);
 		return node;
 	}
@@ -478,7 +482,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public ProcessingInstruction createProcessingInstruction(String target, String data) {
+	public ProcessingInstruction createProcessingInstruction(final String target, final String data) {
 
 		if (!Strings.isXMLIdentifier(target)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The target contains the invalid character");
@@ -509,8 +513,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Element getElementById(String elementId) {
-		NodeList nodeList = getNodeList(new IdFilter(elementId));
+	public Element getElementById(final String elementId) {
+		final NodeList nodeList = getNodeList(new IdFilter(elementId));
 		return nodeList != null && nodeList.getLength() > 0 ? (Element)nodeList.item(0) : null;
 	}
 
@@ -528,7 +532,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDocumentURI(String documentURI) {
+	public void setDocumentURI(final String documentURI) {
 		this.documentURI = documentURI;
 	}
 
@@ -558,7 +562,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setStrictErrorChecking(boolean strictErrorChecking) {
+	public void setStrictErrorChecking(final boolean strictErrorChecking) {
 		this.strictErrorChecking = strictErrorChecking;
 	}
 
@@ -576,44 +580,44 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXmlStandalone(boolean xmlStandalone) {
+	public void setXmlStandalone(final boolean xmlStandalone) {
 		this.xmlStandalone = xmlStandalone;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXmlVersion(String xmlVersion) {
+	public void setXmlVersion(final String xmlVersion) {
 		this.xmlVersion = xmlVersion;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Event createEvent(String eventType) {
+	public Event createEvent(final String eventType) {
 		return EventFactory.createEvent(eventType);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public XPathExpression createExpression(String expression, XPathNSResolver resolver) {
-		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
+	public XPathExpression createExpression(final String expression, final XPathNSResolver resolver) {
+		final XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
 		return evaluator.createExpression(expression, resolver);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public XPathNSResolver createNSResolver(Node nodeResolver) {
-		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
+	public XPathNSResolver createNSResolver(final Node nodeResolver) {
+		final XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
 		return evaluator.createNSResolver(nodeResolver);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public XPathResult evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result) {
+	public XPathResult evaluate(final String expression, final Node contextNode, final XPathNSResolver resolver, final short type, final Object result) {
 		return eval(expression, contextNode, resolver, type, result);
 	}
 
-	private XPathResult eval(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result) {
-		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
+	private XPathResult eval(final String expression, final Node contextNode, final XPathNSResolver resolver, final short type, final Object result) {
+		final XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
 		return (XPathResult) evaluator.evaluate(expression, contextNode, resolver, type, result);
 	}
 
@@ -641,15 +645,15 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public String getAlinkColor() {
 		final HTMLElement elem = getBody();
-		HTMLBodyElement body = (HTMLBodyElement) elem;
+		final HTMLBodyElement body = (HTMLBodyElement) elem;
 		return body.getALink();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlinkColor(String alinkColor) {
+	public void setAlinkColor(final String alinkColor) {
 		final HTMLElement elem = getBody();
-		HTMLBodyElement body = (HTMLBodyElement) elem;
+		final HTMLBodyElement body = (HTMLBodyElement) elem;
 		body.setALink(alinkColor);
 	}
 
@@ -657,15 +661,15 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public String getBgColor() {
 		final HTMLElement elem = getBody();
-		HTMLBodyElement body = (HTMLBodyElement) elem;
+		final HTMLBodyElement body = (HTMLBodyElement) elem;
 		return body.getBgColor();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBgColor(String bgColor) {
+	public void setBgColor(final String bgColor) {
 		final HTMLElement elem = getBody();
-		HTMLBodyElement body = (HTMLBodyElement) elem;
+		final HTMLBodyElement body = (HTMLBodyElement) elem;
 		body.setBgColor(bgColor);
 	}
 
@@ -705,7 +709,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCookie(String cookie) {
+	public void setCookie(final String cookie) {
 		// TODO Auto-generated method stub
 
 	}
@@ -722,7 +726,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public Window getDefaultView() {
 		return this.window;
 	}
-	public void setWindow(final HtmlRendererContext rcontext, final UserAgentContext ucontext, HtmlRendererConfig config){
+	public void setWindow(final HtmlRendererContext rcontext, final UserAgentContext ucontext, final HtmlRendererConfig config){
 		if (rcontext != null) {
 			window = WindowImpl.getWindow(rcontext, config);
 		} else {
@@ -739,7 +743,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDesignMode(String designMode) {
+	public void setDesignMode(final String designMode) {
 		// TODO Auto-generated method stub
 
 	}
@@ -753,7 +757,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDir(String dir) {
+	public void setDir(final String dir) {
 		// TODO Auto-generated method stub
 
 	}
@@ -766,7 +770,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDomain(String domain) {
+	public void setDomain(final String domain) {
 		this.domain = domain;
 	}
 
@@ -774,15 +778,15 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public String getFgColor() {
 		final HTMLElement elem = getBody();
-		HTMLBodyElement body = (HTMLBodyElement) elem;
+		final HTMLBodyElement body = (HTMLBodyElement) elem;
 		return body.getText();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFgColor(String fgColor) {
+	public void setFgColor(final String fgColor) {
 		final HTMLElement elem = getBody();
-		HTMLBodyElement body = (HTMLBodyElement) elem;
+		final HTMLBodyElement body = (HTMLBodyElement) elem;
 		body.setText(fgColor);
 	}
 
@@ -811,7 +815,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	@Override
 	public HTMLHeadElement getHead() {
 		synchronized (this) {
-			HTMLCollection collection =  new HTMLCollectionImpl(this, new HeadFilter());
+			final HTMLCollection collection =  new HTMLCollectionImpl(this, new HeadFilter());
 			if(collection.getLength() > 0) return (HTMLHeadElement)collection.item(0);
 			else return null;
 		}
@@ -822,7 +826,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	public HTMLElement getBody() {
 		synchronized (this) {
 			if(this.body != null) return this.body;
-			HTMLCollection collection =  new HTMLCollectionImpl(this, new HeadFilter());
+			final HTMLCollection collection =  new HTMLCollectionImpl(this, new HeadFilter());
 			if(collection.getLength() > 0) return (HTMLElement) collection.item(0);
 			else return null;
 		}
@@ -830,7 +834,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBody(HTMLElement body) {
+	public void setBody(final HTMLElement body) {
 		this.body = body;
 	}
 
@@ -910,7 +914,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByName(String elementName) {
+	public HTMLCollection getElementsByName(final String elementName) {
 		return new HTMLCollectionImpl(this, new ElementNameFilter(elementName));
 	}
 
@@ -929,7 +933,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setLocation(Location location) {
+	public void setLocation(final Location location) {
 		getDefaultView().setLocation(location);
 	}
 
@@ -958,7 +962,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	 *
 	 * @param value a {@link java.lang.String} object.
 	 */
-	public void setReferrer(String value) {
+	public void setReferrer(final String value) {
 		this.referrer = value;
 	}
 
@@ -977,7 +981,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -997,7 +1001,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Range caretRangeFromPoint(double x, double y) {
+	public Range caretRangeFromPoint(final double x, final double y) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -1016,7 +1020,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			if (this.reader instanceof LocalWritableLineReader) {
 				try {
 					this.reader.close();
-				} catch (IOException ioe) {
+				} catch (final IOException ioe) {
 					// ignore
 				}
 				this.reader = null;
@@ -1026,22 +1030,22 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 
 	@Override
-	public NodeIterator createNodeIterator(Node root) throws DOMException {
+	public NodeIterator createNodeIterator(final Node root) throws DOMException {
 		return new NodeIteratorImpl(root, 0,  null);
 	}
 
 	@Override
-	public NodeIterator createNodeIterator(Node root, int whatToShow) throws DOMException {
+	public NodeIterator createNodeIterator(final Node root, final int whatToShow) throws DOMException {
 		return new NodeIteratorImpl(root, whatToShow, null);
 	}
 
 	@Override
-	public NodeIterator createNodeIterator(Node root, NodeFilter filter) throws DOMException {
+	public NodeIterator createNodeIterator(final Node root, final NodeFilter filter) throws DOMException {
 		return new NodeIteratorImpl(root, 0, filter);
 	}
 
 	@Override
-	public NodeIterator createNodeIterator(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+	public NodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter) throws DOMException {
 		return new NodeIteratorImpl(root, whatToShow, filter);
 	}
 
@@ -1053,49 +1057,49 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	}
 
 	@Override
-	public TreeWalker createTreeWalker(Node root) throws DOMException {
+	public TreeWalker createTreeWalker(final Node root) throws DOMException {
 		return new TreeWalkerImpl(root, 0, null);
 	}
 
 	@Override
-	public TreeWalker createTreeWalker(Node root, int whatToShow) throws DOMException {
+	public TreeWalker createTreeWalker(final Node root, final int whatToShow) throws DOMException {
 		return new TreeWalkerImpl(root, whatToShow, null);
 	}
 
 	@Override
-	public TreeWalker createTreeWalker(Node root, NodeFilter filter) throws DOMException {
+	public TreeWalker createTreeWalker(final Node root, final NodeFilter filter) throws DOMException {
 		return new TreeWalkerImpl(root, 0, filter);
 	}
 
 	@Override
-	public TreeWalker createTreeWalker(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+	public TreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter) throws DOMException {
 		return new TreeWalkerImpl(root, whatToShow, filter);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Element elementFromPoint(double x, double y) {
+	public Element elementFromPoint(final double x, final double y) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean execCommand(String commandId, boolean showUI, String value) {
+	public boolean execCommand(final String commandId, final boolean showUI, final String value) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean execCommand(String commandId, boolean showUI) {
+	public boolean execCommand(final String commandId, final boolean showUI) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean execCommand(String commandId) {
+	public boolean execCommand(final String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -1116,10 +1120,10 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Node importNode(Node importedNode, boolean deep) throws DOMException {
+	public Node importNode(final Node importedNode, final boolean deep) throws DOMException {
 		switch (importedNode.getNodeType()) {
 			case ATTRIBUTE_NODE:
-				Attr attr;
+				final Attr attr;
 				if (Strings.isNotBlank(importedNode.getNamespaceURI())) {
 					attr = createAttributeNS(importedNode.getNamespaceURI(), importedNode.getNodeName());
 				} else {
@@ -1128,8 +1132,8 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				attr.setValue(importedNode.getNodeValue());
 				return attr;
 			case ELEMENT_NODE:
-				Element foreignElm = (Element) importedNode;
-				Element elm;
+				final Element foreignElm = (Element) importedNode;
+				final Element elm;
 
 				if (Strings.isNotBlank(foreignElm.getNamespaceURI())) {
 					elm = createElementNS(foreignElm.getNamespaceURI(), foreignElm.getNodeName());
@@ -1137,10 +1141,10 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 					elm = createElement(foreignElm.getNodeName());
 				}
 
-				NamedNodeMap attributes = foreignElm.getAttributes();
-				for (Node attribute : Nodes.iterable(attributes)) {
+				final NamedNodeMap attributes = foreignElm.getAttributes();
+				for (final Node attribute : Nodes.iterable(attributes)) {
 					if (!"xmlns".equals(attribute.getNodeName())) {
-						Attr attrNode = (Attr) importNode(attribute, true);
+						final Attr attrNode = (Attr) importNode(attribute, true);
 						elm.setAttributeNode(attrNode);
 					}
 				}
@@ -1159,7 +1163,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 			case COMMENT_NODE:
 				return createComment(importedNode.getNodeValue());
 			case DOCUMENT_FRAGMENT_NODE:
-				DocumentFragment df = createDocumentFragment();
+				final DocumentFragment df = createDocumentFragment();
 				if (deep) {
 					Node node = importedNode.getFirstChild();
 					while (node != null) {
@@ -1172,12 +1176,12 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 				return createProcessingInstruction(importedNode.getNodeName(), importedNode.getNodeValue());
 			case ENTITY_REFERENCE_NODE:
 				getDoctype().getEntities().setNamedItem(importedNode);
-				EntityReferenceImpl reference = (EntityReferenceImpl) importedNode;
+				final EntityReferenceImpl reference = (EntityReferenceImpl) importedNode;
 				reference.setOwnerDocument(this);
 				return reference;
 			case NOTATION_NODE:
 				getDoctype().getNotations().setNamedItem(importedNode);
-				NotationImpl notation = (NotationImpl) importedNode;
+				final NotationImpl notation = (NotationImpl) importedNode;
 				notation.setOwnerDocument(this);
 				return notation;
 			default:
@@ -1187,25 +1191,25 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public Document open(String url, String name, String features, boolean replace) {
+	public Document open(final String url, final String name, final String features, final boolean replace) {
 		return open();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Document open(String url, String name, String features) {
+	public Document open(final String url, final String name, final String features) {
 		return open();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Document open(String url, String name) {
+	public Document open(final String url, final String name) {
 		return open();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Document open(String url) {
+	public Document open(final String url) {
 		return open();
 	}
 
@@ -1240,35 +1244,35 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean queryCommandEnabled(String commandId) {
+	public boolean queryCommandEnabled(final String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean queryCommandIndeterm(String commandId) {
+	public boolean queryCommandIndeterm(final String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean queryCommandState(String commandId) {
+	public boolean queryCommandState(final String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean queryCommandSupported(String commandId) {
+	public boolean queryCommandSupported(final String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String queryCommandValue(String commandId) {
+	public String queryCommandValue(final String commandId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -1282,7 +1286,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void write(String text) {
+	public void write(final String text) {
 		synchronized (this) {
 			if (this.reader != null) {
 				try {
@@ -1297,7 +1301,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	/** {@inheritDoc} */
 	@Override
-	public void writeln(String text) {
+	public void writeln(final String text) {
 		synchronized (this) {
 			if (this.reader != null) {
 				try {
@@ -1323,7 +1327,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	}
 
 	@Override
-	public void setXml(boolean xml) {
+	public void setXml(final boolean xml) {
 		this.xml = xml;
 	}
 
@@ -1331,7 +1335,7 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 		return test;
 	}
 
-	public void setTest(boolean test) {
+	public void setTest(final boolean test) {
 		this.test = test;
 	}
 }

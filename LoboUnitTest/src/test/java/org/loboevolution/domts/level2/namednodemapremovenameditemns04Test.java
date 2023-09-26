@@ -53,11 +53,11 @@ public class namednodemapremovenameditemns04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap attributes;
-        Element element;
+        final Document doc;
+        final NamedNodeMap attributes;
+        final Element element;
         Node attribute;
-        HTMLCollection elementList;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS("*", "employee");
         element = (Element) elementList.item(0);

@@ -60,11 +60,11 @@ public class setAttributeNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.nist.gov";
-        String qualifiedName = "";
-        Document doc;
-        HTMLCollection elementList;
-        Node testAddr;
+        final String namespaceURI = "http://www.nist.gov";
+        final String qualifiedName = "";
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node testAddr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         testAddr = elementList.item(0);
@@ -75,7 +75,7 @@ public class setAttributeNS02Test extends LoboUnitTest {
             try {
                 ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
                 fail("throw_NAMESPACE_ERR");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
             }
             // END Android-changed
         }

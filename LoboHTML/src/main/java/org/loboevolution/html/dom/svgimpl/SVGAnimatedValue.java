@@ -54,7 +54,7 @@ public abstract class SVGAnimatedValue {
         return owner;
     }
 
-    public void addAnimation(SVGAnimationElementImpl animation) {
+    public void addAnimation(final SVGAnimationElementImpl animation) {
         if (animations == null) {
             animations = new Vector();
         }

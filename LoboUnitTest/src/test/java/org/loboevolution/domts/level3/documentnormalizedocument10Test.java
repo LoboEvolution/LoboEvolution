@@ -51,13 +51,13 @@ import static org.junit.Assert.assertTrue;
 public class documentnormalizedocument10Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        Text newText;
+        final Document doc;
+        final Element elem;
+        final Text newText;
         Text text;
         String nodeValue;
         boolean canSet;
-        DOMConfiguration domConfig;
+        final DOMConfiguration domConfig;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElement("newElem");
         newText = doc.createTextNode("Text          Node");

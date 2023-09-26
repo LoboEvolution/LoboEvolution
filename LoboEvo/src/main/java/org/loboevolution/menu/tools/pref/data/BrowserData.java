@@ -33,14 +33,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>BrowserData class.</p>
- *
- *
- *
  */
 public class BrowserData {
+
+	/** The Constant logger. */
+	protected static final Logger logger = Logger.getLogger(BrowserData.class.getName());
 
 	/**
 	 * Gets the chrome directory.
@@ -88,13 +90,12 @@ public class BrowserData {
 	 * @param fileName a {@link java.lang.String} object.
 	 * @return a {@link java.util.List} object.
 	 */
-	protected static List<String> getFiles(String directoryPath, List<String> cookieFilePaths, String fileName) {
+	protected static List<String> getFiles(final String directoryPath, List<String> cookieFilePaths, final String fileName) {
 		if (cookieFilePaths == null) {
 			cookieFilePaths = new ArrayList<>();
 		}
 
-		try {
-			final DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(directoryPath));
+		try (final DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(directoryPath))) {
 			for (final Path filePath : stream) {
 				if (filePath.getFileName().toString().equals(fileName)) {
 					cookieFilePaths.add(filePath.toAbsolutePath().toString());
@@ -102,8 +103,8 @@ public class BrowserData {
 					getFiles(filePath.toAbsolutePath().toString(), cookieFilePaths, fileName);
 				}
 			}
-		} catch (final Exception x) {
-			x.printStackTrace();
+		} catch (final Exception ex) {
+			logger.log(Level.SEVERE, ex.toString());
 		}
 		return cookieFilePaths;
 	}

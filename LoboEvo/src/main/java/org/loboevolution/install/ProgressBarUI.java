@@ -55,7 +55,7 @@ public class ProgressBarUI extends JPanel implements PropertyChangeListener {
 	 *
 	 * @param frame a {@link javax.swing.JFrame} object.
 	 */
-	public ProgressBarUI(JFrame frame) {
+	public ProgressBarUI(final JFrame frame) {
 		super(new BorderLayout());
 
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -82,7 +82,7 @@ public class ProgressBarUI extends JPanel implements PropertyChangeListener {
 
 	/** {@inheritDoc} */
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(final PropertyChangeEvent evt) {
 		if ("progress" == evt.getPropertyName()) {
 			final int progress = (Integer) evt.getNewValue();
 			this.progressBar.setValue(progress);

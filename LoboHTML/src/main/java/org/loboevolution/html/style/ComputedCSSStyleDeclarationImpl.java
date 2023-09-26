@@ -52,7 +52,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
     private final Window window;
 
-    private CSSStyleDeclaration style;
+    private final CSSStyleDeclaration style;
 
     private int availHeight = -1;
 
@@ -65,7 +65,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      **/
 
-    public ComputedCSSStyleDeclarationImpl(HTMLElementImpl element, CSSStyleDeclaration style) {
+    public ComputedCSSStyleDeclarationImpl(final HTMLElementImpl element, final CSSStyleDeclaration style) {
         this.element = element;
         this.renderState = element.getRenderState();
         this.style = style;
@@ -543,7 +543,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             return this.element.getParentNode() == null ? null : cssDisplay;
         } else {
             final RenderState rs = element.getRenderState();
-            CSSValues display;
+            final CSSValues display;
             if (rs == null) {
                 return this.element.getParentNode() == null ? null : style.getDisplay() == null ? "" : style.getDisplay();
             } else {
@@ -624,24 +624,24 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFont() {
-        StringBuilder font = new StringBuilder();
+        final StringBuilder font = new StringBuilder();
         final String fontStyle = style.getFontStyle();
         final String lineHeight = getLineHeight();
         final String fontSize = getFontSize();
         final String fontFamily = getFontFamily();
 
         if (Strings.isCssNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) {
-            font.append(CSSValues.ITALIC.getValue() + " ");
+            font.append(CSSValues.ITALIC.getValue()).append(" ");
         }
 
         font.append(fontSize);
 
         if (Strings.isCssNotBlank(lineHeight) && !lineHeight.equals(CSSValues.NORMAL.getValue())) {
-            font.append(" / " + lineHeight);
+            font.append(" / ").append(lineHeight);
         }
 
         if (Strings.isCssNotBlank(fontFamily)) {
-            font.append(" " + fontFamily);
+            font.append(" ").append(fontFamily);
         }
 
         return this.element.getParentNode() == null ? null : font.toString().trim();
@@ -655,7 +655,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getFontSize() {
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
         final CSSStyleDeclaration style = element.getStyle();
-        int fontSize;
+        final int fontSize;
 
         if (Strings.isCssBlank(style.getFontSize()) && parent != null && parent.getStyle().getLength() > 0) {
             final CSSStyleDeclaration currentStyle = parent.getStyle();
@@ -783,7 +783,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setClipPath(String clip) {
+    public void setClipPath(final String clip) {
         style.setClipPath(clip);
     }
 
@@ -791,7 +791,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setClipRule(String clip) {
+    public void setClipRule(final String clip) {
         style.setClipRule(clip);
     }
 
@@ -799,7 +799,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFloat(String flt) {
+    public void setFloat(final String flt) {
         style.setFloat(flt);
     }
 
@@ -807,7 +807,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFill(String value) {
+    public void setFill(final String value) {
         style.setFill(value);
 
     }
@@ -816,7 +816,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFillOpacity(String value) {
+    public void setFillOpacity(final String value) {
         style.setFillOpacity(value);
     }
 
@@ -824,7 +824,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setOpacity(String value) {
+    public void setOpacity(final String value) {
         style.setOpacity(value);
     }
 
@@ -832,7 +832,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setTransform(String value) {
+    public void setTransform(final String value) {
         style.setTransform(value);
     }
 
@@ -840,7 +840,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setStrokeWidth(String value) {
+    public void setStrokeWidth(final String value) {
         style.setStrokeWidth(value);
     }
 
@@ -848,7 +848,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setStrokeOpacity(String value) {
+    public void setStrokeOpacity(final String value) {
         style.setStrokeOpacity(value);
     }
 
@@ -856,7 +856,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setStrokeMiterLimit(String value) {
+    public void setStrokeMiterLimit(final String value) {
         style.setStrokeMiterLimit(value);
     }
 
@@ -864,7 +864,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setStrokeLineJoin(String value) {
+    public void setStrokeLineJoin(final String value) {
         style.setStrokeLineJoin(value);
     }
 
@@ -872,7 +872,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setStrokeDashArray(String value) {
+    public void setStrokeDashArray(final String value) {
         style.setStrokeDashArray(value);
     }
 
@@ -880,7 +880,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setStroke(String value) {
+    public void setStroke(final String value) {
         style.setStroke(value);
     }
 
@@ -888,7 +888,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setStrokeLineCap(String value) {
+    public void setStrokeLineCap(final String value) {
         style.setStrokeLineCap(value);
     }
 
@@ -1362,7 +1362,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getPosition() {
         final String position = style.getPosition();
-        CSSValues pos = CSSValues.get(position);
+        final CSSValues pos = CSSValues.get(position);
         return this.element.getParentNode() == null ? null : pos != null && pos != CSSValues.DEFAULT ? pos.getValue() : "static";
     }
 
@@ -1410,7 +1410,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setAzimuth(String azimuth) {
+    public void setAzimuth(final String azimuth) {
         style.setAzimuth(azimuth);
     }
 
@@ -1418,7 +1418,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBackground(String background) {
+    public void setBackground(final String background) {
         style.setBackground(background);
     }
 
@@ -1426,7 +1426,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBackgroundAttachment(String backgroundAttachment) {
+    public void setBackgroundAttachment(final String backgroundAttachment) {
         style.setBackgroundAttachment(backgroundAttachment);
     }
 
@@ -1434,7 +1434,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBackgroundColor(String backgroundColor) {
+    public void setBackgroundColor(final String backgroundColor) {
         style.setBackgroundColor(backgroundColor);
     }
 
@@ -1442,7 +1442,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBackgroundImage(String backgroundImage) {
+    public void setBackgroundImage(final String backgroundImage) {
         style.setBackgroundImage(backgroundImage);
     }
 
@@ -1450,7 +1450,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBackgroundPosition(String backgroundPosition) {
+    public void setBackgroundPosition(final String backgroundPosition) {
         style.setBackgroundPosition(backgroundPosition);
     }
 
@@ -1458,7 +1458,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBackgroundRepeat(String backgroundRepeat) {
+    public void setBackgroundRepeat(final String backgroundRepeat) {
         style.setBackgroundRepeat(backgroundRepeat);
     }
 
@@ -1466,7 +1466,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorder(String border) {
+    public void setBorder(final String border) {
         style.setBorder(border);
     }
 
@@ -1474,7 +1474,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderBottom(String borderBottom) {
+    public void setBorderBottom(final String borderBottom) {
         style.setBorderBottom(borderBottom);
     }
 
@@ -1482,7 +1482,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderBottomColor(String borderBottomColor) {
+    public void setBorderBottomColor(final String borderBottomColor) {
         style.setBorderBottomColor(borderBottomColor);
     }
 
@@ -1490,7 +1490,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderBottomStyle(String borderBottomStyle) {
+    public void setBorderBottomStyle(final String borderBottomStyle) {
         style.setBorderBottomStyle(borderBottomStyle);
     }
 
@@ -1498,7 +1498,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderBottomWidth(String borderBottomWidth) {
+    public void setBorderBottomWidth(final String borderBottomWidth) {
         style.setBorderBottomWidth(borderBottomWidth);
     }
 
@@ -1506,7 +1506,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderCollapse(String borderCollapse) {
+    public void setBorderCollapse(final String borderCollapse) {
         style.setBorderCollapse(borderCollapse);
     }
 
@@ -1514,7 +1514,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderColor(String borderColor) {
+    public void setBorderColor(final String borderColor) {
         style.setBorderColor(borderColor);
     }
 
@@ -1522,7 +1522,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderLeft(String borderLeft) {
+    public void setBorderLeft(final String borderLeft) {
         style.setBorderLeft(borderLeft);
     }
 
@@ -1530,7 +1530,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderLeftColor(String borderLeftColor) {
+    public void setBorderLeftColor(final String borderLeftColor) {
         style.setBorderLeftColor(borderLeftColor);
     }
 
@@ -1538,7 +1538,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderLeftStyle(String borderLeftStyle) {
+    public void setBorderLeftStyle(final String borderLeftStyle) {
         style.setBorderLeftStyle(borderLeftStyle);
     }
 
@@ -1546,7 +1546,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderLeftWidth(String borderLeftWidth) {
+    public void setBorderLeftWidth(final String borderLeftWidth) {
         style.setBorderLeftWidth(borderLeftWidth);
     }
 
@@ -1554,7 +1554,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderRight(String borderRight) {
+    public void setBorderRight(final String borderRight) {
         style.setBorderRight(borderRight);
     }
 
@@ -1562,7 +1562,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderRightColor(String borderRightColor) {
+    public void setBorderRightColor(final String borderRightColor) {
         style.setBorderRightColor(borderRightColor);
     }
 
@@ -1570,7 +1570,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderRightStyle(String borderRightStyle) {
+    public void setBorderRightStyle(final String borderRightStyle) {
         style.setBorderRightStyle(borderRightStyle);
     }
 
@@ -1578,7 +1578,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderRightWidth(String borderRightWidth) {
+    public void setBorderRightWidth(final String borderRightWidth) {
         style.setBorderRightWidth(borderRightWidth);
     }
 
@@ -1586,7 +1586,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderSpacing(String borderSpacing) {
+    public void setBorderSpacing(final String borderSpacing) {
         style.setBorderSpacing(borderSpacing);
     }
 
@@ -1594,7 +1594,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderStyle(String borderStyle) {
+    public void setBorderStyle(final String borderStyle) {
         style.setBorderStyle(borderStyle);
     }
 
@@ -1602,7 +1602,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderTop(String borderTop) {
+    public void setBorderTop(final String borderTop) {
         style.setBorderTop(borderTop);
     }
 
@@ -1610,7 +1610,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderTopColor(String borderTopColor) {
+    public void setBorderTopColor(final String borderTopColor) {
         style.setBorderTopColor(borderTopColor);
     }
 
@@ -1618,7 +1618,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderTopStyle(String borderTopStyle) {
+    public void setBorderTopStyle(final String borderTopStyle) {
         style.setBorderTopStyle(borderTopStyle);
     }
 
@@ -1626,7 +1626,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderTopWidth(String borderTopWidth) {
+    public void setBorderTopWidth(final String borderTopWidth) {
         style.setBorderTopWidth(borderTopWidth);
     }
 
@@ -1634,7 +1634,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBorderWidth(String borderWidth) {
+    public void setBorderWidth(final String borderWidth) {
         style.setBorderWidth(borderWidth);
     }
 
@@ -1642,7 +1642,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setBottom(String bottom) {
+    public void setBottom(final String bottom) {
         style.setBottom(bottom);
     }
 
@@ -1650,7 +1650,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setCaptionSide(String captionSide) {
+    public void setCaptionSide(final String captionSide) {
         style.setCaptionSide(captionSide);
     }
 
@@ -1658,7 +1658,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setClear(String clear) {
+    public void setClear(final String clear) {
         style.setClear(clear);
     }
 
@@ -1666,7 +1666,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setClip(String clip) {
+    public void setClip(final String clip) {
         style.setClip(clip);
     }
 
@@ -1674,7 +1674,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setColor(String color) {
+    public void setColor(final String color) {
         style.setColor(color);
     }
 
@@ -1682,7 +1682,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setContent(String content) {
+    public void setContent(final String content) {
         style.setContent(content);
     }
 
@@ -1690,7 +1690,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setCounterIncrement(String counterIncrement) {
+    public void setCounterIncrement(final String counterIncrement) {
         style.setCounterIncrement(counterIncrement);
     }
 
@@ -1698,7 +1698,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setCounterReset(String counterReset) {
+    public void setCounterReset(final String counterReset) {
         style.setCounterReset(counterReset);
     }
 
@@ -1706,7 +1706,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setCssFloat(String cssFloat) {
+    public void setCssFloat(final String cssFloat) {
         style.setCssFloat(cssFloat);
     }
 
@@ -1714,7 +1714,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setCue(String cue) {
+    public void setCue(final String cue) {
         style.setCue(cue);
     }
 
@@ -1722,7 +1722,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setCueAfter(String cueAfter) {
+    public void setCueAfter(final String cueAfter) {
         style.setCueAfter(cueAfter);
     }
 
@@ -1730,7 +1730,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setCueBefore(String cueBefore) {
+    public void setCueBefore(final String cueBefore) {
         style.setCueBefore(cueBefore);
     }
 
@@ -1738,7 +1738,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setCursor(String cursor) {
+    public void setCursor(final String cursor) {
         style.setCursor(cursor);
     }
 
@@ -1746,7 +1746,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setDirection(String direction) {
+    public void setDirection(final String direction) {
         style.setDirection(direction);
     }
 
@@ -1754,7 +1754,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setDisplay(String display) {
+    public void setDisplay(final String display) {
         style.setDisplay(display);
     }
 
@@ -1762,7 +1762,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setElevation(String elevation) {
+    public void setElevation(final String elevation) {
         style.setElevation(elevation);
     }
 
@@ -1770,7 +1770,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setEmptyCells(String emptyCells) {
+    public void setEmptyCells(final String emptyCells) {
         style.setEmptyCells(emptyCells);
     }
 
@@ -1778,7 +1778,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFont(String font) {
+    public void setFont(final String font) {
         style.setFont(font);
     }
 
@@ -1786,7 +1786,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFontFamily(String fontFamily) {
+    public void setFontFamily(final String fontFamily) {
         style.setFontFamily(fontFamily);
     }
 
@@ -1794,7 +1794,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFontSize(String fontSize) {
+    public void setFontSize(final String fontSize) {
         style.setFontSize(fontSize);
     }
 
@@ -1802,7 +1802,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFontSizeAdjust(String fontSizeAdjust) {
+    public void setFontSizeAdjust(final String fontSizeAdjust) {
         style.setFontSizeAdjust(fontSizeAdjust);
     }
 
@@ -1810,7 +1810,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFontStretch(String fontStretch) {
+    public void setFontStretch(final String fontStretch) {
         style.setFontStretch(fontStretch);
     }
 
@@ -1818,7 +1818,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFontStyle(String fontStyle) {
+    public void setFontStyle(final String fontStyle) {
         style.setFontStyle(fontStyle);
     }
 
@@ -1826,7 +1826,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFontVariant(String fontVariant) {
+    public void setFontVariant(final String fontVariant) {
         style.setFontVariant(fontVariant);
     }
 
@@ -1834,7 +1834,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setFontWeight(String fontWeight) {
+    public void setFontWeight(final String fontWeight) {
         style.setFontWeight(fontWeight);
     }
 
@@ -2088,7 +2088,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setTextAlign(String textAlign) {
+    public void setTextAlign(final String textAlign) {
         style.setTextAlign(textAlign);
     }
 
@@ -2096,7 +2096,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setTextDecoration(String textDecoration) {
+    public void setTextDecoration(final String textDecoration) {
 
     }
 
@@ -2104,7 +2104,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setTextIndent(String textIndent) {
+    public void setTextIndent(final String textIndent) {
 
     }
 
@@ -2112,7 +2112,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setTextShadow(String textShadow) {
+    public void setTextShadow(final String textShadow) {
 
     }
 
@@ -2120,7 +2120,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setTextTransform(String textTransform) {
+    public void setTextTransform(final String textTransform) {
 
     }
 
@@ -2128,7 +2128,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setTop(String top) {
+    public void setTop(final String top) {
 
     }
 
@@ -2136,7 +2136,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setUnicodeBidi(String unicodeBidi) {
+    public void setUnicodeBidi(final String unicodeBidi) {
 
     }
 
@@ -2144,7 +2144,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setVerticalAlign(String verticalAlign) {
+    public void setVerticalAlign(final String verticalAlign) {
 
     }
 
@@ -2152,7 +2152,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setVisibility(String visibility) {
+    public void setVisibility(final String visibility) {
 
     }
 
@@ -2160,7 +2160,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setVoiceFamily(String voiceFamily) {
+    public void setVoiceFamily(final String voiceFamily) {
 
     }
 
@@ -2168,7 +2168,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setVolume(String volume) {
+    public void setVolume(final String volume) {
 
     }
 
@@ -2176,7 +2176,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setWhiteSpace(String whiteSpace) {
+    public void setWhiteSpace(final String whiteSpace) {
 
     }
 
@@ -2184,7 +2184,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setWidows(String widows) {
+    public void setWidows(final String widows) {
 
     }
 
@@ -2192,7 +2192,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setWidth(String width) {
+    public void setWidth(final String width) {
 
     }
 
@@ -2200,7 +2200,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setWordSpacing(String wordSpacing) {
+    public void setWordSpacing(final String wordSpacing) {
 
     }
 
@@ -2208,7 +2208,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setzIndex(String zIndex) {
+    public void setzIndex(final String zIndex) {
         style.setzIndex(zIndex);
     }
 
@@ -2216,7 +2216,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setHeight(String textAlign) {
+    public void setHeight(final String textAlign) {
         style.setHeight(textAlign);
     }
 
@@ -2224,7 +2224,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setLeft(String left) {
+    public void setLeft(final String left) {
 
     }
 
@@ -2232,7 +2232,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setLineHeight(String lineHeight) {
+    public void setLineHeight(final String lineHeight) {
 
     }
 
@@ -2240,7 +2240,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setListStyle(String listStyle) {
+    public void setListStyle(final String listStyle) {
 
     }
 
@@ -2248,7 +2248,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setListStyleImage(String listStyleImage) {
+    public void setListStyleImage(final String listStyleImage) {
 
     }
 
@@ -2256,7 +2256,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setListStylePosition(String listStylePosition) {
+    public void setListStylePosition(final String listStylePosition) {
 
     }
 
@@ -2264,7 +2264,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setListStyleType(String listStyleType) {
+    public void setListStyleType(final String listStyleType) {
 
     }
 
@@ -2272,7 +2272,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMargin(String margin) {
+    public void setMargin(final String margin) {
 
     }
 
@@ -2280,7 +2280,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMarginBottom(String marginBottom) {
+    public void setMarginBottom(final String marginBottom) {
 
     }
 
@@ -2288,7 +2288,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMarginLeft(String marginLeft) {
+    public void setMarginLeft(final String marginLeft) {
 
     }
 
@@ -2296,7 +2296,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMarginRight(String marginRight) {
+    public void setMarginRight(final String marginRight) {
 
     }
 
@@ -2304,7 +2304,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMarginTop(String marginTop) {
+    public void setMarginTop(final String marginTop) {
 
     }
 
@@ -2312,7 +2312,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMarkerOffset(String markerOffset) {
+    public void setMarkerOffset(final String markerOffset) {
 
     }
 
@@ -2320,7 +2320,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMarks(String marks) {
+    public void setMarks(final String marks) {
 
     }
 
@@ -2328,7 +2328,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMaxHeight(String maxHeight) {
+    public void setMaxHeight(final String maxHeight) {
 
     }
 
@@ -2336,7 +2336,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMaxWidth(String maxWidth) {
+    public void setMaxWidth(final String maxWidth) {
 
     }
 
@@ -2344,7 +2344,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMinHeight(String minHeight) {
+    public void setMinHeight(final String minHeight) {
 
     }
 
@@ -2352,7 +2352,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setMinWidth(String minWidth) {
+    public void setMinWidth(final String minWidth) {
 
     }
 
@@ -2360,7 +2360,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setLetterSpacing(String letterSpacing) {
+    public void setLetterSpacing(final String letterSpacing) {
 
     }
 
@@ -2368,7 +2368,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setOrphans(String orphans) {
+    public void setOrphans(final String orphans) {
         style.setOrphans(orphans);
     }
 
@@ -2376,7 +2376,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setOutline(String outline) {
+    public void setOutline(final String outline) {
 
     }
 
@@ -2384,7 +2384,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setOutlineColor(String outlineColor) {
+    public void setOutlineColor(final String outlineColor) {
 
     }
 
@@ -2392,7 +2392,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setOutlineStyle(String outlineStyle) {
+    public void setOutlineStyle(final String outlineStyle) {
 
     }
 
@@ -2400,7 +2400,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setOutlineWidth(String outlineWidth) {
+    public void setOutlineWidth(final String outlineWidth) {
 
     }
 
@@ -2408,7 +2408,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setOverflow(String overflow) {
+    public void setOverflow(final String overflow) {
 
     }
 
@@ -2416,7 +2416,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPadding(String padding) {
+    public void setPadding(final String padding) {
 
     }
 
@@ -2424,7 +2424,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPaddingBottom(String paddingBottom) {
+    public void setPaddingBottom(final String paddingBottom) {
 
     }
 
@@ -2432,7 +2432,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPaddingLeft(String paddingLeft) {
+    public void setPaddingLeft(final String paddingLeft) {
 
     }
 
@@ -2440,7 +2440,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPaddingRight(String paddingRight) {
+    public void setPaddingRight(final String paddingRight) {
 
     }
 
@@ -2448,7 +2448,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPaddingTop(String paddingTop) {
+    public void setPaddingTop(final String paddingTop) {
 
     }
 
@@ -2456,7 +2456,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPage(String page) {
+    public void setPage(final String page) {
 
     }
 
@@ -2464,7 +2464,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPageBreakAfter(String pageBreakAfter) {
+    public void setPageBreakAfter(final String pageBreakAfter) {
 
     }
 
@@ -2472,7 +2472,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPageBreakBefore(String pageBreakBefore) {
+    public void setPageBreakBefore(final String pageBreakBefore) {
 
     }
 
@@ -2480,7 +2480,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPageBreakInside(String pageBreakInside) {
+    public void setPageBreakInside(final String pageBreakInside) {
 
     }
 
@@ -2488,7 +2488,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPause(String pause) {
+    public void setPause(final String pause) {
 
     }
 
@@ -2496,7 +2496,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPauseAfter(String pauseAfter) {
+    public void setPauseAfter(final String pauseAfter) {
 
     }
 
@@ -2504,7 +2504,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPauseBefore(String pauseBefore) {
+    public void setPauseBefore(final String pauseBefore) {
 
     }
 
@@ -2512,7 +2512,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPitch(String pitch) {
+    public void setPitch(final String pitch) {
 
     }
 
@@ -2520,7 +2520,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPitchRange(String pitchRange) {
+    public void setPitchRange(final String pitchRange) {
 
     }
 
@@ -2528,7 +2528,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPlayDuring(String playDuring) {
+    public void setPlayDuring(final String playDuring) {
 
     }
 
@@ -2536,7 +2536,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setPosition(String position) {
+    public void setPosition(final String position) {
 
     }
 
@@ -2544,7 +2544,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setQuotes(String quotes) {
+    public void setQuotes(final String quotes) {
 
     }
 
@@ -2552,7 +2552,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setRichness(String richness) {
+    public void setRichness(final String richness) {
 
     }
 
@@ -2560,7 +2560,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setRight(String right) {
+    public void setRight(final String right) {
 
     }
 
@@ -2568,7 +2568,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setSize(String size) {
+    public void setSize(final String size) {
 
     }
 
@@ -2576,7 +2576,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setSpeak(String speak) {
+    public void setSpeak(final String speak) {
 
     }
 
@@ -2584,7 +2584,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setSpeakHeader(String speakHeader) {
+    public void setSpeakHeader(final String speakHeader) {
 
     }
 
@@ -2592,7 +2592,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setSpeakNumeral(String speakNumeral) {
+    public void setSpeakNumeral(final String speakNumeral) {
 
     }
 
@@ -2600,7 +2600,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setSpeakPunctuation(String speakPunctuation) {
+    public void setSpeakPunctuation(final String speakPunctuation) {
 
     }
 
@@ -2608,7 +2608,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setSpeechRate(String speechRate) {
+    public void setSpeechRate(final String speechRate) {
 
     }
 
@@ -2616,7 +2616,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setStress(String stress) {
+    public void setStress(final String stress) {
 
     }
 
@@ -2624,12 +2624,12 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      * {@inheritDoc}
      */
     @Override
-    public void setTableLayout(String tableLayout) {
+    public void setTableLayout(final String tableLayout) {
 
     }
 
     @Override
-    public String getPropertyValue(String property) {
+    public String getPropertyValue(final String property) {
         return this.element.getParentNode() == null ? null : style.getPropertyValue(property);
     }
 

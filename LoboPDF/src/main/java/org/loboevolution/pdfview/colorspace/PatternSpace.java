@@ -38,28 +38,25 @@ import org.loboevolution.pdfview.pattern.PDFPattern;
  * specified in the call to getPaint().  This pattern is
  * read from the resources of the current page.  The pattern space
  * may also have a base color space which the pattern is defined in.
- *
-  *
-  *
  */
 public class PatternSpace extends PDFColorSpace {
     private PDFColorSpace base;
-    
+
     /**
      * <p>Constructor for PatternSpace.</p>
      */
     public PatternSpace() {
-	super(null);
+        super(null);
     }
-    
+
     /**
      * Create a pattern space with the given color space as a base
      *
      * @param base a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
      */
-    public PatternSpace(PDFColorSpace base) {
+    public PatternSpace(final PDFColorSpace base) {
         super(null);
-        
+
         this.base = base;
     }
 
@@ -71,14 +68,15 @@ public class PatternSpace extends PDFColorSpace {
     public PDFColorSpace getBase() {
         return this.base;
     }
-    
+
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Get the number of components we want
      */
-    @Override public int getNumComponents() {
-	if (this.base == null) {
+    @Override
+    public int getNumComponents() {
+        if (this.base == null) {
             return 0;
         } else {
             return this.base.getNumComponents();
@@ -87,41 +85,41 @@ public class PatternSpace extends PDFColorSpace {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * get the PDFPaint representing the color described by the
      * given color components
      */
-    @Override public PDFPaint getPaint(float[] components) {
+    @Override
+    public PDFPaint getPaint(final float[] components) {
         throw new IllegalArgumentException("Pattern spaces require a pattern " +
-            "name!");
+                "name!");
     }
-    
+
     /**
      * Get the paint representing a pattern, optionally with the given
      * base paint.
      *
      * @param patternObj the pattern to render
      * @param components the components of the base paint
-     * @param resources a {@link java.util.Map} object.
+     * @param resources  a {@link java.util.Map} object.
      * @return a {@link org.loboevolution.pdfview.PDFPaint} object.
      * @throws java.io.IOException if any.
      */
-    public PDFPaint getPaint(PDFObject patternObj, float[] components, 
-                             Map resources)
-        throws IOException
-    {
+    public PDFPaint getPaint(final PDFObject patternObj, final float[] components,
+                             final Map resources)
+            throws IOException {
         PDFPaint basePaint = null;
-        
+
         if (getBase() != null) {
             basePaint = getBase().getPaint(components);
         }
-        
+
         PDFPattern pattern = (PDFPattern) patternObj.getCache();
         if (pattern == null) {
             pattern = PDFPattern.getPattern(patternObj, resources);
             patternObj.setCache(pattern);
         }
-      
+
         return pattern.getPaint(basePaint);
     }
 }

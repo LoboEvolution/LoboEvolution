@@ -49,12 +49,12 @@ import static org.junit.Assert.assertEquals;
 public class nodecomparedocumentposition25Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element elemName;
-        Node entRef;
-        int elementPosition;
-        int entRefPosition;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element elemName;
+        final Node entRef;
+        final int elementPosition;
+        final int entRefPosition;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("var");
         elemName = (Element) elemList.item(2);

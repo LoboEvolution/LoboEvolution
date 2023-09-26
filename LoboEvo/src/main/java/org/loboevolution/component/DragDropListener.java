@@ -54,21 +54,21 @@ public class DragDropListener implements DropTargetListener {
 	 *
 	 * @param bpanel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 */
-	public DragDropListener(IBrowserPanel bpanel) {
+	public DragDropListener(final IBrowserPanel bpanel) {
 		this.bpanel = bpanel;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void drop(DropTargetDropEvent dtde) {
+	public void drop(final DropTargetDropEvent dtde) {
 		try {
-			Transferable tr = dtde.getTransferable();
-			DataFlavor[] flavors = tr.getTransferDataFlavors();
-			for (DataFlavor dataFlavor : flavors) {
+			final Transferable tr = dtde.getTransferable();
+			final DataFlavor[] flavors = tr.getTransferDataFlavors();
+			for (final DataFlavor dataFlavor : flavors) {
 				if (dataFlavor.isFlavorJavaFileListType()) {
 					dtde.acceptDrop(DnDConstants.ACTION_COPY);
-					List<Object> list = (List<Object>) tr.getTransferData(dataFlavor);
-					for (Object object : list) {
+					final List<Object> list = (List<Object>) tr.getTransferData(dataFlavor);
+					for (final Object object : list) {
 						openFileDrop("file:///" + object);
 					}
 					dtde.dropComplete(true);
@@ -76,45 +76,45 @@ public class DragDropListener implements DropTargetListener {
 				}
 			}
 			dtde.rejectDrop();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 			dtde.rejectDrop();
 		}
 	}
 	
-	private void openFileDrop(String fullURL) {
-		fullURL = fullURL.replace("\\", "/");
+	private void openFileDrop(final String fullURL) {
+		final String fUrl = fullURL.replace("\\", "/");
 		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(bpanel);
-		int index = TabStore.getTabs().size();
-		final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(bpanel, fullURL);
+		final int index = TabStore.getTabs().size();
+		final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(bpanel, fUrl);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.insertTab(title, null, hpanel, title, index+1);
 		tabbedPane.setSelectedIndex(index+1);
 		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-		IBrowserPanel panel = browserFrame.getPanel();
-		IWelcomePanel welcome = panel.getWelcome();
-		browserFrame.getToolbar().getAddressBar().setText(fullURL);
-		TabStore.insertTab(index+1, fullURL, title);
+		final IBrowserPanel panel = browserFrame.getPanel();
+		final IWelcomePanel welcome = panel.getWelcome();
+		browserFrame.getToolbar().getAddressBar().setText(fUrl);
+		TabStore.insertTab(index+1, fUrl, title);
 		welcome.setBackground(new Color(37, 51, 61));		
 		bpanel.getScroll().getViewport().add((Component)tabbedPane);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void dropActionChanged(DropTargetDragEvent dtde) {}
+	public void dropActionChanged(final DropTargetDragEvent dtde) {}
 
 	/** {@inheritDoc} */
 	@Override
-	public void dragEnter(DropTargetDragEvent dtde) {}
+	public void dragEnter(final DropTargetDragEvent dtde) {}
 
 	/** {@inheritDoc} */
 	@Override
-	public void dragExit(DropTargetEvent dte) {
-		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-		IBrowserPanel panel = browserFrame.getPanel();
-		IWelcomePanel welcome = panel.getWelcome();
+	public void dragExit(final DropTargetEvent dte) {
+		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+		final IBrowserPanel panel = browserFrame.getPanel();
+		final IWelcomePanel welcome = panel.getWelcome();
 		welcome.setBackground(new Color(37, 51, 61));
 		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 		bpanel.getScroll().getViewport().add((Component)tabbedPane);
@@ -122,10 +122,10 @@ public class DragDropListener implements DropTargetListener {
 
 	/** {@inheritDoc} */
 	@Override
-	public void dragOver(DropTargetDragEvent dtde) {
-		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-		IBrowserPanel panel = browserFrame.getPanel();
-		IWelcomePanel welcome = panel.getWelcome();
+	public void dragOver(final DropTargetDragEvent dtde) {
+		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+		final IBrowserPanel panel = browserFrame.getPanel();
+		final IWelcomePanel welcome = panel.getWelcome();
 		welcome.setBackground(new Color(37, 51, 61, 65));
 		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
 		bpanel.getScroll().getViewport().add((Component)tabbedPane);

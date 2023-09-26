@@ -62,20 +62,20 @@ public class FunctionType2 extends PDFFunction {
 	 * Read the zeros, ones and exponent
 	 */
     @Override
-	protected void parse(PDFObject obj) throws IOException 
+	protected void parse(final PDFObject obj) throws IOException
     {
         // read the exponent (required)
-        PDFObject nObj = obj.getDictRef("N");
+        final PDFObject nObj = obj.getDictRef("N");
         if (nObj == null) {
             throw new PDFParseException("Exponent required for function type 2!");
         }
         setN(nObj.getFloatValue());
         
         // read the zeros array (optional)
-        PDFObject cZeroObj = obj.getDictRef("C0");
+        final PDFObject cZeroObj = obj.getDictRef("C0");
         if (cZeroObj != null) {
-            PDFObject[] cZeroAry = cZeroObj.getArray();
-            float[] cZero = new float[cZeroAry.length];
+            final PDFObject[] cZeroAry = cZeroObj.getArray();
+            final float[] cZero = new float[cZeroAry.length];
             for (int i = 0; i < cZeroAry.length; i++) {
                 cZero[i] = cZeroAry[i].getFloatValue();
             }
@@ -83,10 +83,10 @@ public class FunctionType2 extends PDFFunction {
         }
         
         // read the ones array (optional)
-        PDFObject cOneObj = obj.getDictRef("C1");
+        final PDFObject cOneObj = obj.getDictRef("C1");
         if (cOneObj != null) {
-            PDFObject[] cOneAry = cOneObj.getArray();
-            float[] cOne = new float[cOneAry.length];
+            final PDFObject[] cOneAry = cOneObj.getArray();
+            final float[] cOne = new float[cOneAry.length];
             for (int i = 0; i < cOneAry.length; i++) {
                 cOne[i] = cOneAry[i].getFloatValue();
             }
@@ -102,11 +102,11 @@ public class FunctionType2 extends PDFFunction {
 	 * C0(j) + x^N * (C1(j) - C0(j))
 	 */
     @Override
-	protected void doFunction(float[] inputs, int inputOffset, 
-                              float[] outputs, int outputOffset)
+	protected void doFunction(final float[] inputs, final int inputOffset,
+                              final float[] outputs, final int outputOffset)
     {
         // read the input value
-        float input = inputs[inputOffset];
+        final float input = inputs[inputOffset];
         
         // calculate the output values
         for (int i = 0; i < getNumOutputs(); i++) {
@@ -137,7 +137,7 @@ public class FunctionType2 extends PDFFunction {
      *
      * @param n a float.
      */
-    protected void setN(float n) {
+    protected void setN(final float n) {
         this.n = n;
     }
     
@@ -147,7 +147,7 @@ public class FunctionType2 extends PDFFunction {
      * @param index a int.
      * @return a float.
      */
-    public float getC0(int index) {
+    public float getC0(final int index) {
         return this.c0[index];
     }
     
@@ -156,7 +156,7 @@ public class FunctionType2 extends PDFFunction {
      *
      * @param c0 an array of {@link float} objects.
      */
-    protected void setC0(float[] c0) {
+    protected void setC0(final float[] c0) {
         this.c0 = c0;
     }
     
@@ -166,7 +166,7 @@ public class FunctionType2 extends PDFFunction {
      * @param index a int.
      * @return a float.
      */
-    public float getC1(int index) {
+    public float getC1(final int index) {
         return this.c1[index];
     }
     
@@ -175,7 +175,7 @@ public class FunctionType2 extends PDFFunction {
      *
      * @param c1 an array of {@link float} objects.
      */
-    protected void setC1(float[] c1) {
+    protected void setC1(final float[] c1) {
         this.c1 = c1;
     }  
 }

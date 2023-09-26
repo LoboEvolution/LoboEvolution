@@ -42,7 +42,7 @@ public class HRRenderState extends BlockRenderState {
      * @param prevRenderState a {@link RenderState} object.
      * @param element         a {@link HTMLElementImpl} object.
      */
-    public HRRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+    public HRRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
         super(prevRenderState, element);
     }
 

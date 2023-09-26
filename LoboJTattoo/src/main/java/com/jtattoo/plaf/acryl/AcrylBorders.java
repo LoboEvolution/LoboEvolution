@@ -77,10 +77,10 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Graphics2D g2D = (Graphics2D) g;
 			Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
 			if (!JTattooUtilities.isFrameActive(button)) {
 				frameColor = ColorHelper.brighter(frameColor, 30);
@@ -94,7 +94,7 @@ public class AcrylBorders extends BaseBorders {
 				g2D.setColor(frameColor);
 				g2D.drawRect(x, y, w - 2, h - 2);
 			} else {
-				Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+				final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 				g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 				g2D.setColor(Color.white);
@@ -131,8 +131,8 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
+			final Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
 			g.setColor(borderColor);
 			g.drawRect(x, y, width - 1, height - 1);
 		}
@@ -151,9 +151,9 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			boolean active = isActive(c);
-			int th = getTitleHeight(c);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final boolean active = isActive(c);
+			final int th = getTitleHeight(c);
 			Color titleColor = ColorHelper.brighter(AbstractLookAndFeel.getWindowInactiveTitleColorLight(), 10);
 			Color borderColor = AbstractLookAndFeel.getWindowInactiveTitleColorLight();
 			Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getWindowInactiveBorderColor(), 10);
@@ -214,23 +214,23 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed() || model.isSelected()) {
-					Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getToolbarBackgroundColor(), 30);
+					final Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getToolbarBackgroundColor(), 30);
 					g.setColor(frameColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					Graphics2D g2D = (Graphics2D) g;
-					Composite savedComposit = g2D.getComposite();
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite savedComposit = g2D.getComposite();
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.black);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);
 					g2D.setComposite(savedComposit);
 				} else if (model.isRollover()) {
-					Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
+					final Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
 					Color frameHiColor = ColorHelper.darker(frameColor, 5);
 					Color frameLoColor = ColorHelper.darker(frameColor, 30);
 					JTattooUtilities.draw3DBorder(g, frameHiColor, frameLoColor, x, y, w, h);
@@ -238,17 +238,17 @@ public class AcrylBorders extends BaseBorders {
 					frameLoColor = ColorHelper.brighter(frameLoColor, 60);
 					JTattooUtilities.draw3DBorder(g, frameHiColor, frameLoColor, x + 1, y + 1, w - 2, h - 2);
 
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.white);
 					g.fillRect(x + 2, y + 2, w - 4, h - 4);
 					g2D.setComposite(composite);
 				} else if (model.isSelected()) {
-					Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
-					Color frameHiColor = Color.white;
-					Color frameLoColor = ColorHelper.darker(frameColor, 30);
+					final Color frameColor = AbstractLookAndFeel.getToolbarBackgroundColor();
+					final Color frameHiColor = Color.white;
+					final Color frameLoColor = ColorHelper.darker(frameColor, 30);
 					JTattooUtilities.draw3DBorder(g, frameLoColor, frameHiColor, x, y, w, h);
 				}
 			}
@@ -267,7 +267,7 @@ public class AcrylBorders extends BaseBorders {
 
 		private boolean tableBorder = false;
 
-		public ScrollPaneBorder(boolean tableBorder) {
+		public ScrollPaneBorder(final boolean tableBorder) {
 			this.tableBorder = tableBorder;
 		}
 
@@ -282,7 +282,7 @@ public class AcrylBorders extends BaseBorders {
 
 		@Override
 		public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-			Insets ins = getBorderInsets(c);
+			final Insets ins = getBorderInsets(c);
 			borderInsets.left = ins.left;
 			borderInsets.top = ins.top;
 			borderInsets.right = ins.right;
@@ -291,7 +291,7 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 			g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50));
 			g.drawRect(x, y, w - 1, h - 1);
 			g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getBackgroundColor(), 50));
@@ -323,8 +323,8 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
+			final Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
 			g.setColor(borderColor);
 			g.drawRect(x, y, width - 1, height - 1);
 		}
@@ -357,8 +357,8 @@ public class AcrylBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
+			final Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
 			g.setColor(borderColor);
 			g.drawRect(x, y, width - 1, height - 1);
 		}

@@ -29,7 +29,6 @@ package org.loboevolution.menu.tools.developer;
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboPanel;
 import org.loboevolution.component.BrowserFrame;
-import org.loboevolution.menu.tools.pref.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -57,7 +56,7 @@ public class DeveloperToolsWindow extends JFrame {
 	 *
 	 * @param frame a {@link BrowserFrame} object.
 	 */
-	public DeveloperToolsWindow(BrowserFrame frame) {
+	public DeveloperToolsWindow(final BrowserFrame frame) {
 		this.frame = frame;
 		this.developerPanel = new DeveloperToolPanel();
 		this.developerTree = new DeveloperToolTree(frame);
@@ -112,7 +111,7 @@ public class DeveloperToolsWindow extends JFrame {
 	 * @param prefsPanel the prefs panel
 	 * @return the component
 	 */
-	private Component createRightPane(Container prefsPanel) {
+	private Component createRightPane(final Container prefsPanel) {
 		final LoboPanel rightPanel = new LoboPanel("");
 		rightPanel.setPreferredSize(new Dimension(600, 280));
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
@@ -144,7 +143,7 @@ public class DeveloperToolsWindow extends JFrame {
 	 *
 	 * @param frame the frame to set
 	 */
-	public void setFrame(BrowserFrame frame) {
+	public void setFrame(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 }

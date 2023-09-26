@@ -43,12 +43,12 @@ public abstract class RRectangle extends BaseRenderable {
 
     protected RRectangle() {}
 
-    public void setOrigin(int x, int y) {
+    public void setOrigin(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
 
-    public void setBounds(int x, int y, int width, int height) {
+    public void setBounds(final int x, final int y, final int width, final int height) {
         this.x = x;
         this.y = y;
         this.width = width;

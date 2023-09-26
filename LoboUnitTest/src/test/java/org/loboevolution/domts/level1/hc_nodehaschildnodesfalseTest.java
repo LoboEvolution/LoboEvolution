@@ -57,11 +57,11 @@ public class hc_nodehaschildnodesfalseTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection emList;
-        Node emNode;
-        CharacterData emText;
-        boolean hasChild;
+        final Document doc;
+        final HTMLCollection emList;
+        final Node emNode;
+        final CharacterData emText;
+        final boolean hasChild;
         doc = sampleXmlFile("hc_staff.xml");
         emList = doc.getElementsByTagName("em");
         emNode = emList.item(0);

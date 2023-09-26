@@ -62,7 +62,7 @@ public final class JavaClassWrapperFactory {
 	 * @param clazz a {@link java.lang.Class} object.
 	 * @return a {@link org.loboevolution.js.JavaClassWrapper} object.
 	 */
-	public JavaClassWrapper getClassWrapper(Class clazz) {
+	public JavaClassWrapper getClassWrapper(final Class clazz) {
 		synchronized (this) {
 			// WeakHashMaps where the value refers to
 			// the key will retain keys. Must make it

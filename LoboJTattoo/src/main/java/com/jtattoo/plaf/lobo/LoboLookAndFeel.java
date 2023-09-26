@@ -46,7 +46,7 @@ public interface LoboLookAndFeel {
 	 * @return a {@link java.awt.Color} object.
 	 */
 	default Color background() {
-		Color color;
+		final Color color;
 		if (laf.isBlackWhite() || laf.isNoire() || laf.isHiFi() || laf.isTexture()
 				|| laf.isGraphite() || laf.isAcryl()) {
 			color = instance.getColor(LAFColorType.BACKGROUND_BLACK_WHITE);
@@ -65,7 +65,7 @@ public interface LoboLookAndFeel {
 	 * @return a {@link java.awt.Color} object.
 	 */
 	default Color foreground() {
-		Color color;
+		final Color color;
 
 		if (laf.isBlackWhite() || laf.isNoire() || laf.isHiFi() || laf.isTexture()
 				|| laf.isGraphite() || laf.isAcryl()) {
@@ -87,7 +87,7 @@ public interface LoboLookAndFeel {
 	 * @return a {@link java.awt.Color} object.
 	 */
 	default Color interactive() {
-		Color color;
+		final Color color;
 
 		if (laf.isBlackWhite() || laf.isNoire() || laf.isHiFi() || laf.isTexture()
 				|| laf.isGraphite() || laf.isAcryl()) {

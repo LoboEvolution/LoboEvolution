@@ -52,14 +52,14 @@ import static org.junit.Assert.assertTrue;
 public class domconfigcdatasections1Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        Document doc;
-        DOMConfiguration domConfig;
-        DocumentType nullDocType = null;
+        final DOMImplementation domImpl;
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final DocumentType nullDocType = null;
 
         boolean canSet;
         boolean state;
-        String parameter = "cDaTa-sections";
+        final String parameter = "cDaTa-sections";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();

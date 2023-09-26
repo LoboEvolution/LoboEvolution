@@ -46,13 +46,13 @@ public class HomeAction extends AbstractAction {
 	 *
 	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 */
-	public HomeAction(IBrowserPanel panel) {
+	public HomeAction(final IBrowserPanel panel) {
 		this.panel = panel;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent evt) {
+	public void actionPerformed(final ActionEvent evt) {
 		final int indexPanel = this.panel.getTabbedPane().getSelectedIndex();
 		this.panel.getTabbedPane().remove(indexPanel);
 		final ITabbedPane tabbedPane = panel.getTabbedPane();

@@ -71,18 +71,18 @@ public class IconFactory {
 	 *            the resource path
 	 * @return the icon
 	 */
-	public ImageIcon getIcon(String resourcePath) {
+	public ImageIcon getIcon(final String resourcePath) {
 		try {
 			synchronized (this) {
 				ImageIcon icon = this.iconMap.get(resourcePath);
 				if (icon == null) {
-					InputStream in = this.getClass().getResourceAsStream(resourcePath);
+					final InputStream in = this.getClass().getResourceAsStream(resourcePath);
 					if (in == null) {
 						logger.info("getIcon(): Resource path " + resourcePath + " not found.");
 						return null;
 					}
 					try {
-						byte[] imageBytes = IORoutines.load(in, 4096);
+						final byte[] imageBytes = IORoutines.load(in, 4096);
 						icon = new ImageIcon(imageBytes);
 						this.iconMap.put(resourcePath, icon);
 					} finally {
@@ -91,7 +91,7 @@ public class IconFactory {
 				}
 				return icon;
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}

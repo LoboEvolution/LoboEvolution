@@ -58,9 +58,9 @@ public class getElementsByTagNameNS13Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        HTMLCollection elementList;
+        final Document doc;
+        final Element docElem;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
         elementList = docElem.getElementsByTagNameNS("http://www.nomatch.com", "address");

@@ -48,9 +48,9 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode25Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        Node renamedNode;
+        final Document doc;
+        final DocumentType docType;
+        final Node renamedNode;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
@@ -58,7 +58,7 @@ public class documentrenamenode25Test extends LoboUnitTest {
             boolean success = false;
             try {
                 renamedNode = doc.renameNode(docType, "http://www.w3.org/DOM/Test", "root");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
             assertTrue("documentrenamenode25_NOT_SUPPORTED_ERR", success);

@@ -39,6 +39,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,25 +59,26 @@ public class HeadersPageUI extends AbstractToolsUI {
      *
      * @param frame a {@link BrowserFrame} object.
      */
-    public HeadersPageUI(BrowserFrame frame) {
+    public HeadersPageUI(final BrowserFrame frame) {
         final ToolBar toolbar = frame.getToolbar();
         try {
             final URL url = new URL(toolbar.getAddressBar().getText());
-            HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+            final HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
             httpcon.addRequestProperty("User-Agent", UserAgent.getUserAgent());
             httpcon.getHeaderField("Set-Cookie");
             add(infoContent(httpcon));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
-    private JScrollPane infoContent(HttpURLConnection httpcon) {
+    private JScrollPane infoContent(final HttpURLConnection httpcon) {
         try {
             final Object[] columnNames = { "Key", "Value" };
             final List<String[]> values = new ArrayList<>();
 
-            for (String name : httpcon.getHeaderFields().keySet()) {
+            for (final Map.Entry<String, List<String>> entry : httpcon.getHeaderFields().entrySet()) {
+                final String name = entry.getKey();
                 if (Strings.isNotBlank(name)) {
                     values.add(new String[]{name, httpcon.getHeaderField(name)});
                 }

@@ -27,12 +27,7 @@
 package org.loboevolution.javax.xml.xpath;
 
 import org.loboevolution.javax.xml.namespace.QName;
+public interface XPathFunctionResolver {
 
-// Referenced classes of package org.loboevolution.javax.xml.xpath:
-//            XPathFunction
-
-public interface XPathFunctionResolver
-{
-
-    public abstract XPathFunction resolveFunction(QName qname, int i);
+    public abstract XPathFunction resolveFunction(QName qname, final int i);
 }

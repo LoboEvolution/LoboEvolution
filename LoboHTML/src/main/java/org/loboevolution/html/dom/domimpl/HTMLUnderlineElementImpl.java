@@ -46,9 +46,9 @@ public class HTMLUnderlineElementImpl extends HTMLElementImpl {
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
-        prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
-		return super.createRenderState(prevRenderState);
+	protected RenderState createRenderState(final RenderState prevRenderState) {
+		final RenderState renderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
+		return super.createRenderState(renderState);
 	}
 	
 	/** {@inheritDoc} */

@@ -50,7 +50,7 @@ public class AltColorSpace extends ColorSpace {
 	 * @param fkt a {@link org.loboevolution.pdfview.function.PDFFunction} object.
 	 * @param origCs a {@link java.awt.color.ColorSpace} object.
 	 */
-	public AltColorSpace(PDFFunction fkt, ColorSpace origCs) {
+	public AltColorSpace(final PDFFunction fkt, final ColorSpace origCs) {
 		super(origCs.getType(), fkt.getNumInputs());
 		this.fkt = fkt;
 		this.origCs = origCs;
@@ -63,9 +63,8 @@ public class AltColorSpace extends ColorSpace {
 	 * @see java.awt.color.ColorSpace#fromCIEXYZ(float[])
 	 */
 	@Override
-	public float[] fromCIEXYZ(float[] p_colorvalue) {
-		p_colorvalue = this.fkt.calculate(p_colorvalue);
-		return this.origCs.fromCIEXYZ(p_colorvalue);
+	public float[] fromCIEXYZ(final float[] p_colorvalue) {
+		return this.origCs.fromCIEXYZ(this.fkt.calculate(p_colorvalue));
 	}
 
 	/**
@@ -75,9 +74,8 @@ public class AltColorSpace extends ColorSpace {
 	 * @see java.awt.color.ColorSpace#fromRGB(float[])
 	 */
 	@Override
-	public float[] fromRGB(float[] p_rgbvalue) {
-		p_rgbvalue = this.fkt.calculate(p_rgbvalue);
-		return this.origCs.fromCIEXYZ(p_rgbvalue);
+	public float[] fromRGB(final float[] p_rgbvalue) {
+		return this.origCs.fromCIEXYZ(this.fkt.calculate(p_rgbvalue));
 	}
 
 	/**
@@ -87,8 +85,8 @@ public class AltColorSpace extends ColorSpace {
 	 * @see java.awt.color.ColorSpace#toCIEXYZ(float[])
 	 */
 	@Override
-	public float[] toCIEXYZ(float[] p_colorvalue) {
-		float[] colorvalue = this.fkt.calculate(p_colorvalue);
+	public float[] toCIEXYZ(final float[] p_colorvalue) {
+		final float[] colorvalue = this.fkt.calculate(p_colorvalue);
 		return this.origCs.toCIEXYZ(colorvalue);
 	}
 
@@ -99,8 +97,8 @@ public class AltColorSpace extends ColorSpace {
 	 * @see java.awt.color.ColorSpace#toRGB(float[])
 	 */
 	@Override
-	public float[] toRGB(float[] p_colorvalue) {
-		float[] colorvalue = this.fkt.calculate(p_colorvalue);
+	public float[] toRGB(final float[] p_colorvalue) {
+		final float[] colorvalue = this.fkt.calculate(p_colorvalue);
 		return this.origCs.toRGB(colorvalue);
 	}
 }

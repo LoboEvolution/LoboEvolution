@@ -43,7 +43,7 @@ private static final long serialVersionUID = 1L;
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl} object.
 	 */
-	public SelectControl(HTMLSelectElementImpl modelNode) {
+	public SelectControl(final HTMLSelectElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;

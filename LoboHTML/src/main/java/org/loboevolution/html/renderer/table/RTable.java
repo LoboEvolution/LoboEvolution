@@ -51,7 +51,7 @@ public class RTable extends BaseElementRenderable {
 	 *
 	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RTable(RBlockInfo info) {
+	public RTable(final RBlockInfo info) {
 		super(info.getParentContainer(), info.getModelNode(), info.getPcontext());
 		this.tableMatrix = new TableMatrix(info, this);
 	}
@@ -79,7 +79,7 @@ public class RTable extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
+	public void doLayout(final int availWidth, final int availHeight, final boolean sizeOnly) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			prs.clear();
@@ -101,7 +101,7 @@ public class RTable extends BaseElementRenderable {
 		// been imported already.
 		final Collection<DelayedPair> pairs = this.delayedPairs;
 		if (pairs != null) {
-			for (DelayedPair pair : pairs) {
+			for (final DelayedPair pair : pairs) {
 				if (this == pair.getContainingBlock()) {
 					importDelayedPair(pair);
 				}
@@ -122,10 +122,10 @@ public class RTable extends BaseElementRenderable {
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public RenderableSpot getLowestRenderableSpot(int x, int y) {
+	public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			for (PositionedRenderable pr : prs) {
+			for (final PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.getRenderable();
 				final int childX = x - r.getX();
 				final int childY = y - r.getY();
@@ -154,7 +154,7 @@ public class RTable extends BaseElementRenderable {
 		final SortedSet<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			final Collection c = new LinkedList();
-			for (PositionedRenderable pr : prs) {
+			for (final PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.getRenderable();
 				c.add(r);
 			}
@@ -168,7 +168,7 @@ public class RTable extends BaseElementRenderable {
 		}
 	}
 
-	private void importDelayedPair(DelayedPair pair) {
+	private void importDelayedPair(final DelayedPair pair) {
 	    final BoundableRenderable r = pair.positionPairChild();
 	    this.addPositionedRenderable(r, false, false, pair.isFixed());
 	}
@@ -181,10 +181,10 @@ public class RTable extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			for (PositionedRenderable pr : prs) {
+			for (final PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.getRenderable();
 				final Rectangle bounds = r.getVisualBounds();
 				if (bounds.contains(x, y)) {
@@ -203,10 +203,10 @@ public class RTable extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseClick(final MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			for (PositionedRenderable pr : prs) {
+			for (final PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.getRenderable();
 				final Rectangle bounds = r.getVisualBounds();
 				if (bounds.contains(x, y)) {
@@ -229,10 +229,10 @@ public class RTable extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMousePressed(final MouseEvent event, int x, int y) {
+	public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			for (PositionedRenderable pr : prs) {
+			for (final PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.getRenderable();
 				final Rectangle bounds = r.getVisualBounds();
 				if (bounds.contains(x, y)) {
@@ -249,10 +249,10 @@ public class RTable extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			for (PositionedRenderable pr : prs) {
+			for (final PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.getRenderable();
 				final Rectangle bounds = r.getVisualBounds();
 				if (bounds.contains(x, y)) {
@@ -283,7 +283,7 @@ public class RTable extends BaseElementRenderable {
 			tm.paint(g, size);
 			final Collection<PositionedRenderable> prs = this.positionedRenderables;
 			if (prs != null) {
-				for (PositionedRenderable pr : prs) {
+				for (final PositionedRenderable pr : prs) {
 					final BoundableRenderable r = pr.getRenderable();
 					r.paintTranslated(g);
 				}
@@ -296,7 +296,7 @@ public class RTable extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public void repaint(ModelNode modelNode) {
+	public void repaint(final ModelNode modelNode) {
 		// NOP
 	}
 

@@ -44,19 +44,19 @@ public class PrefixResolverDefault implements PrefixResolver {
    *     resolved. Warning: This will not work correctly if xpathExpressionContext is an attribute
    *     node.
    */
-  public PrefixResolverDefault(Node xpathExpressionContext) {
+  public PrefixResolverDefault(final Node xpathExpressionContext) {
     m_context = xpathExpressionContext;
   }
 
   /** {@inheritDoc} */
   @Override
-  public String getNamespaceForPrefix(String prefix) {
+  public String getNamespaceForPrefix(final String prefix) {
     return getNamespaceForPrefix(prefix, m_context);
   }
 
   /** {@inheritDoc} */
   @Override
-  public String getNamespaceForPrefix(String prefix, Node namespaceContext) {
+  public String getNamespaceForPrefix(final String prefix, final Node namespaceContext) {
 
     Node parent = namespaceContext;
     String namespace = null;
@@ -72,16 +72,16 @@ public class PrefixResolverDefault implements PrefixResolver {
               || (type == Node.ENTITY_REFERENCE_NODE))) {
         if (type == Node.ELEMENT_NODE) {
           if (parent.getNodeName().indexOf(prefix + ":") == 0) return parent.getNamespaceURI();
-          NamedNodeMap nnm = parent.getAttributes();
+          final NamedNodeMap nnm = parent.getAttributes();
 
           for (int i = 0; i < nnm.getLength(); i++) {
-            Node attr = nnm.item(i);
-            String aname = attr.getNodeName();
-            boolean isPrefix = aname.startsWith("xmlns:");
+            final Node attr = nnm.item(i);
+            final String aname = attr.getNodeName();
+            final boolean isPrefix = aname.startsWith("xmlns:");
 
             if (isPrefix || aname.equals("xmlns")) {
-              int index = aname.indexOf(':');
-              String p = isPrefix ? aname.substring(index + 1) : "";
+              final int index = aname.indexOf(':');
+              final String p = isPrefix ? aname.substring(index + 1) : "";
 
               if (p.equals(prefix)) {
                 namespace = attr.getNodeValue();

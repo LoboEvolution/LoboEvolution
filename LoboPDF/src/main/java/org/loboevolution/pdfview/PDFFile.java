@@ -101,7 +101,7 @@ public class PDFFile {
      * @param buf the RandomAccessFile containing the PDF.
      * @throws java.io.IOException if any.
      */
-    public PDFFile(ByteBuffer buf) throws IOException {
+    public PDFFile(final ByteBuffer buf) throws IOException {
 	this(buf, null);
     }
 
@@ -112,7 +112,7 @@ public class PDFFile {
      * @param doNotParse a boolean.
      * @throws java.io.IOException if any.
      */
-    public PDFFile(ByteBuffer buf, boolean doNotParse) throws IOException {
+    public PDFFile(final ByteBuffer buf, final boolean doNotParse) throws IOException {
     	this.buf = buf;
     }
     
@@ -126,7 +126,7 @@ public class PDFFile {
      * @param password the user or owner password
      * @throws java.io.IOException if any.
      */
-    public PDFFile(ByteBuffer buf, PDFPassword password) throws IOException {
+    public PDFFile(final ByteBuffer buf, final PDFPassword password) throws IOException {
         this.buf = buf;
 
         this.cache = new Cache();
@@ -173,7 +173,7 @@ public class PDFFile {
     public int getNumPages() {
         try {
             return this.root.getDictRef("Pages").getDictRef("Count").getIntValue();
-        } catch (Exception ioe) {
+        } catch (final Exception ioe) {
             return 0;
         }
     }
@@ -196,9 +196,9 @@ public class PDFFile {
      * @return a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
-    public synchronized PDFObject dereference(PDFXref ref, PDFDecrypter decrypter)
+    public synchronized PDFObject dereference(final PDFXref ref, final PDFDecrypter decrypter)
             throws IOException {
-        int id = ref.getID();
+        final int id = ref.getID();
 
         // make sure the id is valid and has been read
         if (id >= this.objIdx.length || this.objIdx[id] == null) {
@@ -212,11 +212,11 @@ public class PDFFile {
         }
 
         // store the current position in the buffer
-        int startPos = this.buf.position();
+        final int startPos = this.buf.position();
 
-        boolean compressed = this.objIdx[id].getCompressed();
+        final boolean compressed = this.objIdx[id].getCompressed();
         if (!compressed) {
-	        int loc = this.objIdx[id].getFilePos();
+	        final int loc = this.objIdx[id].getFilePos();
 	        if (loc < 0) {
 	            return PDFObject.nullObj;
 	        }
@@ -228,29 +228,29 @@ public class PDFFile {
 	        obj= readObject(ref.getID(), ref.getGeneration(), decrypter);
         }
         else { // compressed
-	        int compId = this.objIdx[id].getID();
-	        int idx = this.objIdx[id].getIndex();
+	        final int compId = this.objIdx[id].getID();
+	        final int idx = this.objIdx[id].getIndex();
 	        if (idx < 0)
 	            return PDFObject.nullObj;
-	        PDFXref compRef = new PDFXref(compId, 0);
-	        PDFObject compObj = dereference(compRef, decrypter);
-	        int first = compObj.getDictionary().get("First").getIntValue();
-	        int n = compObj.getDictionary().get("N").getIntValue();
+	        final PDFXref compRef = new PDFXref(compId, 0);
+	        final PDFObject compObj = dereference(compRef, decrypter);
+	        final int first = compObj.getDictionary().get("First").getIntValue();
+	        final int n = compObj.getDictionary().get("N").getIntValue();
 	        if (idx >= n)
 	            return PDFObject.nullObj;
-	        ByteBuffer strm = compObj.getStreamBuffer();
+	        final ByteBuffer strm = compObj.getStreamBuffer();
 	        
-        	ByteBuffer oldBuf = this.buf;
+        	final ByteBuffer oldBuf = this.buf;
         	this.buf = strm;
 	        // skip other nums
 	        for (int i=0; i<idx; i++) {
 	        	readObject(-1, -1, true, IdentityDecrypter.getInstance());
 	        	readObject(-1, -1, true, IdentityDecrypter.getInstance());
 	        }
-        	PDFObject objNumPO= readObject(-1, -1, true, IdentityDecrypter.getInstance());
-        	PDFObject offsetPO= readObject(-1, -1, true, IdentityDecrypter.getInstance());
-        	int objNum = objNumPO.getIntValue();
-        	int offset = offsetPO.getIntValue();
+        	final PDFObject objNumPO= readObject(-1, -1, true, IdentityDecrypter.getInstance());
+        	final PDFObject offsetPO= readObject(-1, -1, true, IdentityDecrypter.getInstance());
+        	final int objNum = objNumPO.getIntValue();
+        	final int offset = offsetPO.getIntValue();
         	if (objNum != id)
 	            return PDFObject.nullObj;
         	
@@ -278,7 +278,7 @@ public class PDFFile {
      * @param c a int.
      * @return a boolean.
      */
-    public static boolean isWhiteSpace(int c) {
+    public static boolean isWhiteSpace(final int c) {
         return c == ' ' || c == NUL_CHAR || c == '\t' || c == '\n' || c == '\r' || c == FF_CHAR;
     	/*switch (c) { 
             case NUL_CHAR:  // Null (NULL)
@@ -301,7 +301,7 @@ public class PDFFile {
      * @param c the character to test
      * @return a boolean.
      */
-    public static boolean isDelimiter(int c) {
+    public static boolean isDelimiter(final int c) {
         switch (c) {
             case '(':   // LEFT PARENTHESIS
             case ')':   // RIGHT PARENTHESIS
@@ -325,7 +325,7 @@ public class PDFFile {
      * @param c the character to test
      * @return boolean
      */
-    public static boolean isRegularCharacter (int c) {
+    public static boolean isRegularCharacter (final int c) {
         return !(isWhiteSpace(c) || isDelimiter(c));
     }
 
@@ -340,7 +340,7 @@ public class PDFFile {
      * @param decrypter the decrypter to use
      */
     private PDFObject readObject(
-            int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
+            final int objNum, final int objGen, final PDFDecrypter decrypter) throws IOException {
 	return readObject(objNum, objGen, false, decrypter);
     }
 
@@ -358,8 +358,8 @@ public class PDFFile {
      * @param decrypter the decrypter to use
      */
     private PDFObject readObject(
-            int objNum, int objGen,
-            boolean numscan, PDFDecrypter decrypter) throws IOException {
+            final int objNum, final int objGen,
+            final boolean numscan, final PDFDecrypter decrypter) throws IOException {
         // skip whitespace
         int c;
         PDFObject obj = null;
@@ -400,17 +400,17 @@ public class PDFFile {
                     //
                     // We can't use mark/reset, since this could be called
                     // from dereference, which already is using a mark
-                    int startPos = this.buf.position();
+                    final int startPos = this.buf.position();
 
-		    PDFObject testnum= readObject(-1, -1, true, decrypter);
+		    final PDFObject testnum= readObject(-1, -1, true, decrypter);
                     if (testnum != null &&
                             testnum.getType() == PDFObject.NUMBER) {
-			PDFObject testR= readObject(-1, -1, true, decrypter);
+			final PDFObject testR= readObject(-1, -1, true, decrypter);
                         if (testR != null &&
                                 testR.getType() == PDFObject.KEYWORD &&
                                 testR.getStringValue().equals("R")) {
                             // yup.  it's a reference.
-                            PDFXref xref = new PDFXref(obj.getIntValue(),
+                            final PDFXref xref = new PDFXref(obj.getIntValue(),
                                     testnum.getIntValue());
                             // Create a placeholder that will be dereferenced
                             // as needed
@@ -448,7 +448,7 @@ public class PDFFile {
      * @param buf the buffer to read from
      * @return the next non-whitespace character
      */
-    private int nextNonWhitespaceChar(ByteBuffer buf) {
+    private int nextNonWhitespaceChar(final ByteBuffer buf) {
         int c;
         while (isWhiteSpace(c = buf.get())) {
             // nothing
@@ -463,7 +463,7 @@ public class PDFFile {
      * must be in the file
      * @return true if the next characters match; false otherwise.
      */
-    private boolean nextItemIs(String match) {
+    private boolean nextItemIs(final String match) {
         // skip whitespace
         int c = nextNonWhitespaceChar(buf);
         for (int i = 0; i < match.length(); i++) {
@@ -483,13 +483,13 @@ public class PDFFile {
      * 
      * @param versionString
      */
-    private void processVersion(String versionString) {
+    private void processVersion(final String versionString) {
         try {
-            StringTokenizer tokens = new StringTokenizer(versionString, ".");
+            final StringTokenizer tokens = new StringTokenizer(versionString, ".");
             this.majorVersion = Integer.parseInt(tokens.nextToken());
             this.minorVersion = Integer.parseInt(tokens.nextToken());
             this.versionString = versionString;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // ignore
         }
     }
@@ -507,8 +507,8 @@ public class PDFFile {
      * @return the Dictionary as a PDFObject.
      */
     private PDFObject readDictionary(
-            int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
-        HashMap<String,PDFObject> hm = new HashMap<>();
+            final int objNum, final int objGen, final PDFDecrypter decrypter) throws IOException {
+        final HashMap<String,PDFObject> hm = new HashMap<>();
         // we've already read the <<.  Now get /Name obj pairs until >>
         PDFObject name;
 	while ((name= readObject(objNum, objGen, decrypter))!=null) {
@@ -516,7 +516,7 @@ public class PDFFile {
             if (name.getType() != PDFObject.NAME) {
                 throw new PDFParseException("First item in dictionary must be a /Name.  (Was " + name + ")");
             }
-	    PDFObject value= readObject(objNum, objGen, decrypter);
+	    final PDFObject value= readObject(objNum, objGen, decrypter);
             if (value != null) {
                 hm.put(name.getStringValue(), value);
             }
@@ -563,12 +563,12 @@ public class PDFFile {
      * return its value as if there were an implicit 0 after it.
      */
     private int readHexPair() throws IOException {
-        int first = readHexDigit();
+        final int first = readHexDigit();
         if (first < 0) {
             this.buf.position(this.buf.position() - 1);
             return -1;
         }
-        int second = readHexDigit();
+        final int second = readHexDigit();
         if (second < 0) {
             this.buf.position(this.buf.position() - 1);
             return (first << 4);
@@ -588,10 +588,10 @@ public class PDFFile {
      * @param decrypter the decrypter to use
      */
     private PDFObject readHexString(
-            int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
+            final int objNum, final int objGen, final PDFDecrypter decrypter) throws IOException {
         // we've already read the <. Now get the hex bytes until >
         int val;
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         while ((val = readHexPair()) >= 0) {
             sb.append((char) val);
         }
@@ -635,14 +635,14 @@ public class PDFFile {
      * @param decrypter the decrypter to use
      */
     private PDFObject readLiteralString(
-            int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
+            final int objNum, final int objGen, final PDFDecrypter decrypter) throws IOException {
         int c;
 
         // we've already read the (.  now get the characters until a
         // *balanced* ) appears.  Translate \r \n \t \b \f \( \) \\ \ddd
         // if a cr/lf follows a backslash, ignore the cr/lf
         int parencount = 1;
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         while (buf.hasRemaining() && parencount > 0) {
             c = this.buf.get() & 0xFF;
@@ -739,14 +739,14 @@ public class PDFFile {
      * encountered.  If a '\r' is encountered, it is discarded.
      */
     private String readLine() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         while (this.buf.remaining() > 0) {
-            char c = (char) this.buf.get();
+            final char c = (char) this.buf.get();
 
             if (c == '\r') {
                 if (this.buf.remaining() > 0) {
-                    char n = (char) this.buf.get(this.buf.position());
+                    final char n = (char) this.buf.get(this.buf.position());
                     if (n == '\n') {
                         this.buf.get();
                     }
@@ -774,9 +774,9 @@ public class PDFFile {
      * @param decrypter the decrypter to use
      */
     private PDFObject readArray(
-            int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
+            final int objNum, final int objGen, final PDFDecrypter decrypter) throws IOException {
         // we've already read the [.  Now read objects until ]
-        ArrayList<PDFObject> ary = new ArrayList<>();
+        final ArrayList<PDFObject> ary = new ArrayList<>();
         PDFObject obj;
 	while((obj= readObject(objNum, objGen, decrypter))!=null) {
             ary.add(obj);
@@ -784,7 +784,7 @@ public class PDFFile {
         if (this.buf.hasRemaining() && this.buf.get() != ']') {
             throw new PDFParseException("Array should end with ']'");
         }
-        PDFObject[] objlist = new PDFObject[ary.size()];
+        final PDFObject[] objlist = new PDFObject[ary.size()];
         for (int i = 0; i < objlist.length; i++) {
             objlist[i] = ary.get(i);
         }
@@ -797,7 +797,7 @@ public class PDFFile {
     private PDFObject readName() throws IOException {
         // we've already read the / that begins the name.
         // all we have to check for is #hh hex notations.
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         int c;
         while (this.buf.hasRemaining() && isRegularCharacter(c = this.buf.get())) {
             if (c < '!' && c > '~') {
@@ -805,7 +805,7 @@ public class PDFFile {
             }
             // H.3.2.4 indicates version 1.1 did not do hex escapes
             if (c == '#' && (this.majorVersion >= 1 && this.minorVersion > 1)) {
-                int hex = readHexPair();
+                final int hex = readHexPair();
                 if (hex >= 0) {
                     c = hex;
                 } else {
@@ -822,14 +822,14 @@ public class PDFFile {
      * read a number.  The initial digit or . or - is passed in as the
      * argument.
      */
-    private PDFObject readNumber(char start) throws IOException {
+    private PDFObject readNumber(final char start) throws IOException {
         // we've read the first digit (it's passed in as the argument)
-        boolean neg = start == '-';
+        final boolean neg = start == '-';
         boolean sawdot = start == '.';
         double dotmult = sawdot ? 0.1 : 1;
         double value = (start >= '0' && start <= '9') ? start - '0' : 0;
         while (this.buf.hasRemaining()) {
-            int c = this.buf.get();
+            final int c = this.buf.get();
             if (c == '.') {
                 if (sawdot) {
                     throw new PDFParseException("Can't have two '.' in a number");
@@ -837,7 +837,7 @@ public class PDFFile {
                 sawdot = true;
                 dotmult = 0.1;
             } else if (c >= '0' && c <= '9') {
-                int val = c - '0';
+                final int val = c - '0';
                 if (sawdot) {
                     value += val * dotmult;
                     dotmult *= 0.1;
@@ -859,9 +859,9 @@ public class PDFFile {
      * read a bare keyword.  The initial character is passed in as the
      * argument.
      */
-    private PDFObject readKeyword(char start) {
+    private PDFObject readKeyword(final char start) {
         // we've read the first character (it's passed in as the argument)
-        StringBuilder sb = new StringBuilder(String.valueOf(start));
+        final StringBuilder sb = new StringBuilder(String.valueOf(start));
         int c;
         while (buf.hasRemaining() && isRegularCharacter(c = this.buf.get())) {
             sb.append((char) c);
@@ -880,11 +880,11 @@ public class PDFFile {
      * @param decrypter the decrypter to use
      */
     private PDFObject readObjectDescription(
-            int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
+            final int objNum, final int objGen, final PDFDecrypter decrypter) throws IOException {
         // we've already read the 4 0 obj bit.  Next thing up is the object.
         // object descriptions end with the keyword endobj
-        long debugpos = this.buf.position();
-        PDFObject obj = readObject(objNum, objGen, decrypter);
+        final long debugpos = this.buf.position();
+        final PDFObject obj = readObject(objNum, objGen, decrypter);
         // see if it's a dictionary.  If so, this could be a stream.
         PDFObject endkey = readObject(objNum, objGen, decrypter);
         if (endkey.getType() != PDFObject.KEYWORD && endkey.getType() != PDFObject.STREAM) {
@@ -901,7 +901,7 @@ public class PDFFile {
             endkey = readObject(objNum, objGen, decrypter);
         }
         // at this point, obj is the object, keyword should be "endobj"
-        String endcheck = endkey.getStringValue();
+        final String endcheck = endkey.getStringValue();
         if (endcheck == null || !endcheck.equals("endobj")) {
             PDFDebugger.debug("WARNING: object at " + debugpos + " didn't end with 'endobj'");
         }
@@ -916,10 +916,10 @@ public class PDFFile {
      * @param dict the dictionary associated with this stream.
      * @return a ByteBuffer with the encoded stream data
      */
-    private ByteBuffer readStream(PDFObject dict) throws IOException {
+    private ByteBuffer readStream(final PDFObject dict) throws IOException {
         // pointer is at the start of a stream.  read the stream and
         // decode, based on the entries in the dictionary
-        PDFObject lengthObj = dict.getDictRef("Length");
+        final PDFObject lengthObj = dict.getDictRef("Length");
         int length = -1;
         if (lengthObj != null) {
             length = lengthObj.getIntValue();
@@ -929,13 +929,13 @@ public class PDFFile {
         }
 
         // slice the data
-        int start = this.buf.position();
-        ByteBuffer streamBuf = this.buf.slice();
+        final int start = this.buf.position();
+        final ByteBuffer streamBuf = this.buf.slice();
         streamBuf.limit(length);
 
         // move the current position to the end of the data
         this.buf.position(this.buf.position() + length);
-        int ending = this.buf.position();
+        final int ending = this.buf.position();
 
         if (!nextItemIs("endstream")) {
             PDFDebugger.debug("read " + length + " chars from " + start + " to " + ending);
@@ -955,7 +955,7 @@ public class PDFFile {
      * and read new trailer
      * @param password
      */
-    private void readTrailer(PDFPassword password)
+    private void readTrailer(final PDFPassword password)
             throws
             IOException,
             EncryptionUnsupportedByProductException,
@@ -963,7 +963,7 @@ public class PDFFile {
         // the table of xrefs
         this.objIdx = new PDFXref[50];
 
-        int pos = this.buf.position(); 
+        final int pos = this.buf.position();
         
         PDFDecrypter newDefaultDecrypter = null;
 
@@ -997,30 +997,30 @@ public class PDFFile {
                 if (obj.getType() != PDFObject.NUMBER) {
                     throw new PDFParseException("Expected number for length of xref table");
                 }
-                int reflen = obj.getIntValue();
+                final int reflen = obj.getIntValue();
 
                 // skip a line
                 readLine();
 
                 if (refstart == 1) {// Check and try to fix incorrect Object Number Start
-                    int startPos = this.buf.position();
+                    final int startPos = this.buf.position();
                     try {
-                        byte[] refline = new byte[20];
+                        final byte[] refline = new byte[20];
                         this.buf.get(refline);
                         if (refline[17] == 'f') {// free
-                            PDFXref objIndex = new PDFXref(refline);
+                            final PDFXref objIndex = new PDFXref(refline);
                             if (objIndex.getID() == 0 && objIndex.getGeneration() == 65535) { // The highest generation number possible
                                 refstart--;
                             }
                         }
-                    } catch (Exception e) {// in case of error ignore
+                    } catch (final Exception e) {// in case of error ignore
                     }
                     this.buf.position(startPos);
                 }
 
                 // extend the objIdx table, if necessary
                 if (refstart + reflen >= this.objIdx.length) {
-                    PDFXref[] nobjIdx = new PDFXref[refstart + reflen];
+                    final PDFXref[] nobjIdx = new PDFXref[refstart + reflen];
                     System.arraycopy(this.objIdx, 0, nobjIdx, 0, this.objIdx.length);
                     this.objIdx = nobjIdx;
                 }
@@ -1028,7 +1028,7 @@ public class PDFFile {
                 // read reference lines
                 for (int refID = refstart; refID < refstart + reflen; refID++) {
                     // each reference line is 20 bytes long
-                    byte[] refline = new byte[20];
+                    final byte[] refline = new byte[20];
                     this.buf.get(refline);
 
                     // ignore this line if the object ID is already defined
@@ -1046,7 +1046,7 @@ public class PDFFile {
             }
 
             // at this point, the "trailer" word (not EOL) has been read.
-	    PDFObject trailerdict = readObject(-1, -1, IdentityDecrypter.getInstance());
+	    final PDFObject trailerdict = readObject(-1, -1, IdentityDecrypter.getInstance());
             if (trailerdict.getType() != PDFObject.DICTIONARY) {
                 throw new IOException("Expected dictionary after \"trailer\"");
             }
@@ -1089,16 +1089,16 @@ public class PDFFile {
             }
 
             // support for hybrid-PDFs containing an additional compressed-xref-stream
-            PDFObject xrefstmPos = trailerdict.getDictRef("XRefStm");
+            final PDFObject xrefstmPos = trailerdict.getDictRef("XRefStm");
             if (xrefstmPos != null) {
-                int pos14 = this.buf.position(); 
+                final int pos14 = this.buf.position();
                 this.buf.position(xrefstmPos.getIntValue());
             	readTrailer15(password);
                 this.buf.position(pos14);
             }
             
             // read the location of the previous xref table
-            PDFObject prevloc = trailerdict.getDictRef("Prev");
+            final PDFObject prevloc = trailerdict.getDictRef("Prev");
             if (prevloc != null) {
                 this.buf.position(prevloc.getIntValue());
             } else {
@@ -1118,9 +1118,9 @@ public class PDFFile {
         }
 
         if (this.encrypt != null && newDefaultDecrypter!=null) {
-            PDFObject permissions = this.encrypt.getDictRef("P");
+            final PDFObject permissions = this.encrypt.getDictRef("P");
             if (permissions!=null && !newDefaultDecrypter.isOwnerAuthorised()) {
-                int perms= permissions != null ? permissions.getIntValue() : 0;
+                final int perms= permissions != null ? permissions.getIntValue() : 0;
                 if (permissions!=null) {
                     this.printable = (perms & 4) != 0;
                     this.saveable = (perms & 16) != 0;
@@ -1143,56 +1143,56 @@ public class PDFFile {
      * and read new trailer
      * @param password
      */
-	private void readTrailer15(PDFPassword password) throws IOException,
+	private void readTrailer15(final PDFPassword password) throws IOException,
             EncryptionUnsupportedByProductException, EncryptionUnsupportedByPlatformException {
         PDFDecrypter newDefaultDecrypter = null;
         
         while (true) {
-			PDFObject xrefObj = readObject(-1, -1, IdentityDecrypter.getInstance());
+			final PDFObject xrefObj = readObject(-1, -1, IdentityDecrypter.getInstance());
 			if (xrefObj == null) {
 				break;
 			}
-			Map<String, PDFObject> trailerdict = xrefObj.getDictionary();
+			final Map<String, PDFObject> trailerdict = xrefObj.getDictionary();
 			if (trailerdict == null) {
 				break;
 			}
-			PDFObject pdfObject = trailerdict.get("W");
+			final PDFObject pdfObject = trailerdict.get("W");
 			if (pdfObject == null) {
 				break;
 			}
-			PDFObject[] wNums = pdfObject.getArray();
-			int l1 = wNums[0].getIntValue();
-			int l2 = wNums[1].getIntValue();
-			int l3 = wNums[2].getIntValue();
+			final PDFObject[] wNums = pdfObject.getArray();
+			final int l1 = wNums[0].getIntValue();
+			final int l2 = wNums[1].getIntValue();
+			final int l3 = wNums[2].getIntValue();
 	
-			int size = trailerdict.get("Size").getIntValue();
+			final int size = trailerdict.get("Size").getIntValue();
 
-			byte[] strmbuf = xrefObj.getStream();
+			final byte[] strmbuf = xrefObj.getStream();
 			int strmPos = 0;
 			
-			PDFObject idxNums = trailerdict.get("Index");
-			int[] idxArray;
+			final PDFObject idxNums = trailerdict.get("Index");
+			final int[] idxArray;
 			if (idxNums == null) {
 				idxArray = new int[]{0, size};
 			}
 			else {
-				PDFObject[] idxNumArr = idxNums.getArray();
+				final PDFObject[] idxNumArr = idxNums.getArray();
 				idxArray = new int[idxNumArr.length];
 				for (int i = 0; i < idxNumArr.length; i++) {
 					idxArray[i] = idxNumArr[i].getIntValue();
 				}
 			}
-			int idxLen = idxArray.length;
+			final int idxLen = idxArray.length;
 			int idxPos = 0;
 	
 			
 			while (idxPos<idxLen) {
-				int refstart = idxArray[idxPos++];
-				int reflen = idxArray[idxPos++];
+				final int refstart = idxArray[idxPos++];
+				final int reflen = idxArray[idxPos++];
 				
 		        // extend the objIdx table, if necessary
 		        if (refstart + reflen >= this.objIdx.length) {
-		            PDFXref[] nobjIdx = new PDFXref[refstart + reflen];
+		            final PDFXref[] nobjIdx = new PDFXref[refstart + reflen];
 		            System.arraycopy(this.objIdx, 0, nobjIdx, 0, this.objIdx.length);
 		            this.objIdx = nobjIdx;
 		        }
@@ -1200,11 +1200,11 @@ public class PDFFile {
 	            // read reference lines
 	            for (int refID = refstart; refID < refstart + reflen; refID++) {
 	            	
-					int type = readNum(strmbuf, strmPos, l1);
+					final int type = readNum(strmbuf, strmPos, l1);
 					strmPos += l1;
-					int id = readNum(strmbuf, strmPos, l2);
+					final int id = readNum(strmbuf, strmPos, l2);
 					strmPos += l2;
-					int gen = readNum(strmbuf, strmPos, l3);
+					final int gen = readNum(strmbuf, strmPos, l3);
 					strmPos += l3;
 	
 	                // ignore this line if the object ID is already defined
@@ -1261,7 +1261,7 @@ public class PDFFile {
             }
 
             // read the location of the previous xref table
-            PDFObject prevloc = trailerdict.get("Prev");
+            final PDFObject prevloc = trailerdict.get("Prev");
             if (prevloc != null) {
                 this.buf.position(prevloc.getIntValue());
             } else {
@@ -1282,9 +1282,9 @@ public class PDFFile {
 
         // check what permissions are relevant
         if (this.encrypt != null && newDefaultDecrypter != null) {
-            PDFObject permissions = this.encrypt.getDictRef("P");
+            final PDFObject permissions = this.encrypt.getDictRef("P");
             if (permissions != null && !newDefaultDecrypter.isOwnerAuthorised()) {
-                int perms = permissions.getIntValue();
+                final int perms = permissions.getIntValue();
                     this.printable = (perms & 4) != 0;
                     this.saveable = (perms & 16) != 0;
             }
@@ -1297,7 +1297,7 @@ public class PDFFile {
         this.root.dereference();
     }
 
-    private int readNum(byte[] sbuf, int pos, int numBytes) {
+    private int readNum(final byte[] sbuf, final int pos, final int numBytes) {
     	int result = 0;
     	for (int i=0; i<numBytes; i++)
     		result = (result << 8) + (sbuf[pos+i]&0xff);
@@ -1309,10 +1309,10 @@ public class PDFFile {
      * gets parsed, despite the name of this function.  Things only get
      * read and parsed when they're needed.
      */
-    private void parseFile(PDFPassword password) throws IOException {
+    private void parseFile(final PDFPassword password) throws IOException {
         // start at the begining of the file
         this.buf.rewind();
-        String versionLine = readLine();
+        final String versionLine = readLine();
         if (versionLine.startsWith(VERSION_COMMENT)) {
             processVersion(versionLine.substring(VERSION_COMMENT.length()));
         }
@@ -1320,7 +1320,7 @@ public class PDFFile {
 
         // back up about 32 characters from the end of the file to find
         // startxref\n
-        byte[] scan = new byte[32];
+        final byte[] scan = new byte[32];
         int scanPos = this.buf.remaining() - scan.length;
         int loc = 0;
 
@@ -1329,7 +1329,7 @@ public class PDFFile {
             this.buf.get(scan);
 
             // find startxref in scan
-            String scans = new String(scan);
+            final String scans = new String(scan);
             loc = scans.indexOf("startxref");
             if (loc >= 0) {
                 if (scanPos + loc + scan.length <= this.buf.limit()) {
@@ -1348,7 +1348,7 @@ public class PDFFile {
 
         this.buf.position(scanPos);
         this.buf.get(scan);
-        String scans = new String(scan);
+        final String scans = new String(scan);
 
         loc += 10;  // skip over "startxref" and first EOL char
         if (scans.charAt(loc) < 32) {
@@ -1358,18 +1358,18 @@ public class PDFFile {
             loc++;
         } // skip over possible leading blanks
         // read number
-        int numstart = loc;
+        final int numstart = loc;
         while (loc < scans.length() &&
                 scans.charAt(loc) >= '0' &&
                 scans.charAt(loc) <= '9') {
             loc++;
         }
-        int xrefpos = Integer.parseInt(scans.substring(numstart, loc));
+        final int xrefpos = Integer.parseInt(scans.substring(numstart, loc));
         this.buf.position(xrefpos);
 
         try {
             readTrailer(password);
-        } catch (UnsupportedEncryptionException e) {
+        } catch (final UnsupportedEncryptionException e) {
             throw new PDFParseException(e.getMessage(), e);
         }
     }
@@ -1384,7 +1384,7 @@ public class PDFFile {
      */
     public OutlineNode getOutline() throws IOException {
         // find the outlines entry in the root object
-        PDFObject oroot = this.root.getDictRef("Outlines");
+        final PDFObject oroot = this.root.getDictRef("Outlines");
         OutlineNode work;
         OutlineNode outline = null;
         if (oroot != null) {
@@ -1395,31 +1395,31 @@ public class PDFFile {
             // scan each sibling in turn
             while (scan != null) {
                 // add the new node with it's name
-                String title = scan.getDictRef("Title").getTextStringValue();
-                OutlineNode build = new OutlineNode(title);
+                final String title = scan.getDictRef("Title").getTextStringValue();
+                final OutlineNode build = new OutlineNode(title);
                 work.add(build);
 
                 // find the action
                 PDFAction action = null;
 
-                PDFObject actionObj = scan.getDictRef("A");
+                final PDFObject actionObj = scan.getDictRef("A");
                 if (actionObj != null) {
                     try {
                         action = PDFAction.getAction(actionObj, getRoot());
                     }
-                    catch (PDFParseException e) {
+                    catch (final PDFParseException e) {
                     	// oh well
                     }
                 } else {
                     // try to create an action from a destination
-                    PDFObject destObj = scan.getDictRef("Dest");
+                    final PDFObject destObj = scan.getDictRef("Dest");
                     if (destObj != null) {
                         try {
-                            PDFDestination dest =
+                            final PDFDestination dest =
                                     PDFDestination.getDestination(destObj, getRoot());
 
                             action = new GoToAction(dest);
-                        } catch (IOException ioe) {
+                        } catch (final IOException ioe) {
                             // oh well
                         }
                     }
@@ -1431,7 +1431,7 @@ public class PDFFile {
                 }
 
                 // find the first child of this node
-                PDFObject kid = scan.getDictRef("First");
+                final PDFObject kid = scan.getDictRef("First");
                 if (kid != null) {
                     work = build;
                     scan = kid;
@@ -1470,23 +1470,23 @@ public class PDFFile {
         }
 
         // now we've got a page.  Make sure.
-        PDFObject typeObj = page.getDictRef("Type");
+        final PDFObject typeObj = page.getDictRef("Type");
         if (typeObj == null || !typeObj.getStringValue().equals("Page")) {
             return 0;
         }
 
         int count = 0;
         while (true) {
-            PDFObject parent = page.getDictRef("Parent");
+            final PDFObject parent = page.getDictRef("Parent");
             if (parent == null) {
                 break;
             }
-            PDFObject[] kids = parent.getDictRef("Kids").getArray();
-            for (PDFObject pdfObject : kids) {
+            final PDFObject[] kids = parent.getDictRef("Kids").getArray();
+            for (final PDFObject pdfObject : kids) {
                 if (pdfObject.equals(page)) {
                     break;
                 } else {
-                    PDFObject kcount = pdfObject.getDictRef("Count");
+                    final PDFObject kcount = pdfObject.getDictRef("Count");
                     if (kcount != null) {
                         count += kcount.getIntValue();
                     } else {
@@ -1505,7 +1505,7 @@ public class PDFFile {
      * @param pagenum the number of the page to get commands for
      * @return a {@link org.loboevolution.pdfview.PDFPage} object.
      */
-    public PDFPage getPage(int pagenum) {
+    public PDFPage getPage(final int pagenum) {
         return getPage(pagenum, false);
     }
 
@@ -1516,10 +1516,10 @@ public class PDFFile {
      * @param wait if true, do not exit until the page is complete.
      * @return a {@link org.loboevolution.pdfview.PDFPage} object.
      */
-    public PDFPage getPage(int pagenum, boolean wait) {
-        Integer key = pagenum;
-        HashMap<String,PDFObject> resources;
-        PDFObject pageObj;
+    public PDFPage getPage(final int pagenum, final boolean wait) {
+        final Integer key = pagenum;
+        final HashMap<String,PDFObject> resources;
+        final PDFObject pageObj;
 
         PDFPage page = this.cache.getPage(key);
         PDFParser parser = this.cache.getPageParser(key);
@@ -1528,7 +1528,7 @@ public class PDFFile {
                 // hunt down the page!
                 resources = new HashMap<>();
 
-                PDFObject topPagesObj = this.root.getDictRef("Pages");
+                final PDFObject topPagesObj = this.root.getDictRef("Pages");
                 pageObj = findPage(topPagesObj, 0, pagenum, resources);
 
                 if (pageObj == null) {
@@ -1537,11 +1537,11 @@ public class PDFFile {
 
                 page = createPage(pagenum, pageObj);
 
-                byte[] stream = getContents(pageObj);
+                final byte[] stream = getContents(pageObj);
                 parser = new PDFParser(page, stream, resources);
 
                 this.cache.addPage(key, page, parser);
-            } catch (IOException ioe) {
+            } catch (final IOException ioe) {
                 return null;
             }
         }
@@ -1563,8 +1563,8 @@ public class PDFFile {
      *
      * @param pageNum a int.
      */
-    public void stop(int pageNum) {
-        PDFParser parser = this.cache.getPageParser(pageNum);
+    public void stop(final int pageNum) {
+        final PDFParser parser = this.cache.getPageParser(pageNum);
         if (parser != null) {
             // stop it
             parser.stop();
@@ -1578,14 +1578,14 @@ public class PDFFile {
      * @return a concatenation of any content streams for the requested
      * page.
      */
-    private byte[] getContents(PDFObject pageObj) throws IOException {
+    private byte[] getContents(final PDFObject pageObj) throws IOException {
         // concatenate all the streams
-        PDFObject contentsObj = pageObj.getDictRef("Contents");
+        final PDFObject contentsObj = pageObj.getDictRef("Contents");
         if (contentsObj == null) {
             return new byte[0];
         }
 
-        PDFObject[] contents = contentsObj.getArray();
+        final PDFObject[] contents = contentsObj.getArray();
 
         // see if we have only one stream (the easy case)
         if (contents.length == 1) {
@@ -1594,8 +1594,8 @@ public class PDFFile {
 
         // first get the total length of all the streams
         int len = 0;
-		for (PDFObject pdfObject : contents) {
-			byte[] data = pdfObject.getStream();
+		for (final PDFObject pdfObject : contents) {
+			final byte[] data = pdfObject.getStream();
 			if (data == null) {
 				throw new PDFParseException("No stream on content " + pdfObject);
 			}
@@ -1603,10 +1603,10 @@ public class PDFFile {
 		}
 
         // now assemble them all into one object
-        byte[] stream = new byte[len];
+        final byte[] stream = new byte[len];
         len = 0;
-        for (PDFObject pdfObject : contents) {
-            byte[] data = pdfObject.getStream();
+        for (final PDFObject pdfObject : contents) {
+            final byte[] data = pdfObject.getStream();
             System.arraycopy(data, 0, stream, len, data.length);
             len += data.length;
         }
@@ -1619,55 +1619,55 @@ public class PDFFile {
      *
      * @param pageObj the PDF object for the page to be created
      */
-    private PDFPage createPage(int pagenum, PDFObject pageObj)
+    private PDFPage createPage(final int pagenum, final PDFObject pageObj)
             throws IOException {
         int rotation = 0;
         Rectangle2D mediabox = null; // third choice, if no crop
         Rectangle2D cropbox = null; // second choice
         Rectangle2D trimbox = null; // first choice
 
-        PDFObject mediaboxObj = getInheritedValue(pageObj, "MediaBox");
+        final PDFObject mediaboxObj = getInheritedValue(pageObj, "MediaBox");
         if (mediaboxObj != null) {
             mediabox = parseNormalisedRectangle(mediaboxObj);
         }
 
-        PDFObject cropboxObj = getInheritedValue(pageObj, "CropBox");
+        final PDFObject cropboxObj = getInheritedValue(pageObj, "CropBox");
         if (cropboxObj != null) {
             cropbox = parseNormalisedRectangle(cropboxObj);
         }
 
-        PDFObject trimboxObj = getInheritedValue(pageObj, "TrimBox");
+        final PDFObject trimboxObj = getInheritedValue(pageObj, "TrimBox");
         if (trimboxObj != null) {
             trimbox = parseNormalisedRectangle(trimboxObj);
         }
 
-        PDFObject rotateObj = getInheritedValue(pageObj, "Rotate");
+        final PDFObject rotateObj = getInheritedValue(pageObj, "Rotate");
         if (rotateObj != null) {
             rotation = rotateObj.getIntValue();
         }
 
         // read annotations and add them to the PDF page
-        PDFObject annots = getInheritedValue(pageObj, "Annots");
-        List<PDFAnnotation> annotationList = new ArrayList<>();
+        final PDFObject annots = getInheritedValue(pageObj, "Annots");
+        final List<PDFAnnotation> annotationList = new ArrayList<>();
         if (annots != null) {
             if (annots.getType() != PDFObject.ARRAY) {
                 throw new PDFParseException("Can't parse annotations: " + annots);
             }
-        	PDFObject[] array = annots.getArray();
-        	for (PDFObject object : array) {
+        	final PDFObject[] array = annots.getArray();
+        	for (final PDFObject object : array) {
                 try {
-            		PDFAnnotation pdfAnnot = PDFAnnotation.createAnnotation(object);
+            		final PDFAnnotation pdfAnnot = PDFAnnotation.createAnnotation(object);
             		if (pdfAnnot != null) {
                 		annotationList.add(pdfAnnot);
             		}
-                }catch (PDFParseException e) {
+                }catch (final PDFParseException e) {
         			// do nothing, annotations could not be parsed and links will not be displayed.
         		}
 			}            
         }
         
-        Rectangle2D bbox = (trimbox == null ? ((cropbox == null) ? mediabox : cropbox) : trimbox);
-        PDFPage page = new PDFPage(pagenum, bbox, rotation, this.cache);
+        final Rectangle2D bbox = (trimbox == null ? ((cropbox == null) ? mediabox : cropbox) : trimbox);
+        final PDFPage page = new PDFPage(pagenum, bbox, rotation, this.cache);
         page.setAnnots(annotationList);
         return page;
     }
@@ -1684,28 +1684,28 @@ public class PDFFile {
      * @param resources a HashMap that will be filled with any resource
      *                  definitions encountered on the search for the page
      */
-    private PDFObject findPage(PDFObject pagedict, int start, int getPage,
-            Map<String,PDFObject> resources) throws IOException {
-        PDFObject rsrcObj = pagedict.getDictRef("Resources");
+    private PDFObject findPage(final PDFObject pagedict, int start, final int getPage,
+                               final Map<String,PDFObject> resources) throws IOException {
+        final PDFObject rsrcObj = pagedict.getDictRef("Resources");
         if (rsrcObj != null) {
             resources.putAll(rsrcObj.getDictionary());
         }
 
-        PDFObject typeObj = pagedict.getDictRef("Type");
+        final PDFObject typeObj = pagedict.getDictRef("Type");
         if (typeObj != null && typeObj.getStringValue().equals("Page")) {
             // we found our page!
             return pagedict;
         }
 
         // find the first child for which (start + count) > getPage
-        PDFObject kidsObj = pagedict.getDictRef("Kids");
+        final PDFObject kidsObj = pagedict.getDictRef("Kids");
         if (kidsObj != null) {
-            PDFObject[] kids = kidsObj.getArray();
-            for (PDFObject pdfObject : kids) {
+            final PDFObject[] kids = kidsObj.getArray();
+            for (final PDFObject pdfObject : kids) {
                 int count = 1;
                 // BUG: some PDFs (T1Format.pdf) don't have the Type tag.
                 // use the Count tag to indicate a Pages dictionary instead.
-                PDFObject countItem = pdfObject.getDictRef("Count");
+                final PDFObject countItem = pdfObject.getDictRef("Count");
                 if (countItem != null) {
                     count = countItem.getIntValue();
                 }
@@ -1729,16 +1729,16 @@ public class PDFFile {
      * @param pageObj the object representing the page
      * @param propName the name of the property we are looking for
      */
-    private PDFObject getInheritedValue(PDFObject pageObj, String propName)
+    private PDFObject getInheritedValue(final PDFObject pageObj, final String propName)
             throws IOException {
         // see if we have the property
-        PDFObject propObj = pageObj.getDictRef(propName);
+        final PDFObject propObj = pageObj.getDictRef(propName);
         if (propObj != null) {
             return propObj;
         }
 
         // recursively see if any of our parent have it
-        PDFObject parentObj = pageObj.getDictRef("Parent");
+        final PDFObject parentObj = pageObj.getDictRef("Parent");
         if (parentObj != null) {
             return getInheritedValue(parentObj, propName);
         }
@@ -1754,12 +1754,12 @@ public class PDFFile {
      * @return a {@link java.awt.geom.Rectangle2D} object.
      * @throws java.io.IOException if any.
      */
-    public static Rectangle2D parseNormalisedRectangle(PDFObject obj)
+    public static Rectangle2D parseNormalisedRectangle(final PDFObject obj)
             throws IOException {
 
         if (obj != null) {
             if (obj.getType() == PDFObject.ARRAY) {
-                PDFObject[] bounds = obj.getArray();
+                final PDFObject[] bounds = obj.getArray();
                 if (bounds.length == 4) {
                     final double x0 = bounds[0].getDoubleValue();
                     final double y0 = bounds[1].getDoubleValue();

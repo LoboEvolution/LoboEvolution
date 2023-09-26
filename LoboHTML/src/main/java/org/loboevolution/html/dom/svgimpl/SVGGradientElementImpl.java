@@ -91,14 +91,14 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 	 * @param shape2d a {@link java.awt.Shape} object.
 	 * @return a {@link java.awt.Paint} object.
 	 */
-	public Paint gradient(Element gradient, Shape shape2d) {
+	public Paint gradient(final Element gradient, final Shape shape2d) {
 		if (gradient instanceof SVGRadialGradientElementImpl) {
-			SVGRadialGradientElementImpl radial = (SVGRadialGradientElementImpl) gradient;
+			final SVGRadialGradientElementImpl radial = (SVGRadialGradientElementImpl) gradient;
 			return radial(shape2d, radial, fractions(radial), colors(radial));
 		}
 
 		if (gradient instanceof SVGLinearGradientElementImpl) {
-			SVGLinearGradientElementImpl linear = (SVGLinearGradientElementImpl) gradient;
+			final SVGLinearGradientElementImpl linear = (SVGLinearGradientElementImpl) gradient;
 			return new LinearGradientPaint(linear.getX1().getBaseVal().getValue(),
 					linear.getY1().getBaseVal().getValue(), linear.getX2().getBaseVal().getValue(),
 					linear.getY2().getBaseVal().getValue(), fractions(linear), colors(linear));
@@ -106,17 +106,17 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 		return null;
 	}
 
-	private Paint radial(Shape shape, SVGRadialGradientElementImpl radial, float[] fractions, Color[] colors) {
-		float x = radial.getCx().getBaseVal().getValue();
-		float y = radial.getCy().getBaseVal().getValue();
-		float radius = radial.getR().getBaseVal().getValue();
-		double w = shape.getBounds2D().getWidth();
-		double h = shape.getBounds2D().getHeight();
-		Point2D.Float center = new Point2D.Float(x / 100, y / 100);
-		double cx = w * center.getX() + shape.getBounds2D().getX();
-		double cy = h * center.getY() + shape.getBounds2D().getY();
+	private Paint radial(final Shape shape, final SVGRadialGradientElementImpl radial, final float[] fractions, final Color[] colors) {
+		final float x = radial.getCx().getBaseVal().getValue();
+		final float y = radial.getCy().getBaseVal().getValue();
+		final float radius = radial.getR().getBaseVal().getValue();
+		final double w = shape.getBounds2D().getWidth();
+		final double h = shape.getBounds2D().getHeight();
+		final Point2D.Float center = new Point2D.Float(x / 100, y / 100);
+		final double cx = w * center.getX() + shape.getBounds2D().getX();
+		final double cy = h * center.getY() + shape.getBounds2D().getY();
 		final Point2D newCenter = new Point2D.Double(cx, cy);
-		double delta = newCenter.distance(new Point2D.Double(shape.getBounds2D().getCenterX(), shape.getBounds2D().getCenterY()));
+		final double delta = newCenter.distance(new Point2D.Double(shape.getBounds2D().getCenterX(), shape.getBounds2D().getCenterY()));
 		final double r = Math.sqrt(w * w + h * h) / 2;
 		final float newRadius = (float) (delta + r * (radius / 100));
 		return new RadialGradientPaint(newCenter, newRadius, newCenter, fractions, colors,
@@ -125,38 +125,38 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 
 	}
 
-	private float[] fractions(Element elem) {
-		ArrayList<Float> fractions = new ArrayList<>();
-		NodeListImpl children = (NodeListImpl)elem.getChildNodes();
+	private float[] fractions(final Element elem) {
+		final ArrayList<Float> fractions = new ArrayList<>();
+		final NodeListImpl children = (NodeListImpl)elem.getChildNodes();
 		children.forEach(child -> {
 			if (child instanceof SVGStopElementImpl) {
-				SVGStopElementImpl stop = (SVGStopElementImpl)child;
+				final SVGStopElementImpl stop = (SVGStopElementImpl)child;
 				fractions.add(stop.getOffset().getBaseVal());
 			}
 		});
-		float[] floatArray = new float[fractions.size()];
+		final float[] floatArray = new float[fractions.size()];
 		int i = 0;
 
-		for (Float f : fractions) {
+		for (final Float f : fractions) {
 			floatArray[i++] = f != null ? f : Float.NaN;
 		}
 		Arrays.sort(floatArray);
 		return floatArray;
 	}
 
-	private Color[] colors(Element elem) {
-		ArrayList<Color> colors = new ArrayList<>();
-		NodeListImpl children = (NodeListImpl)elem.getChildNodes();
+	private Color[] colors(final Element elem) {
+		final ArrayList<Color> colors = new ArrayList<>();
+		final NodeListImpl children = (NodeListImpl)elem.getChildNodes();
 		children.forEach(child -> {
 			if (child instanceof SVGStopElementImpl) {
-				SVGStopElementImpl stop = (SVGStopElementImpl) child;
-				Color stopColor = stop.getStopColor();
+				final SVGStopElementImpl stop = (SVGStopElementImpl) child;
+				final Color stopColor = stop.getStopColor();
 				colors.add(stopColor);
 			}
 		});
-		Color[] colorArray = new Color[colors.size()];
+		final Color[] colorArray = new Color[colors.size()];
 		int i = 0;
-		for (Color c : colors) {
+		for (final Color c : colors) {
 			colorArray[i++] = c;
 		}
 		return colorArray;

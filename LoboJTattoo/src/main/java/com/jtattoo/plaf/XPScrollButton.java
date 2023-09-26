@@ -57,13 +57,13 @@ public abstract class XPScrollButton extends BaseScrollButton {
 	 * @param direction a int.
 	 * @param width a int.
 	 */
-	public XPScrollButton(int direction, int width) {
+	public XPScrollButton(final int direction, final int width) {
 		super(direction, width);
 	}
 
 	private Icon getDownArrowIcon() {
 		if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
-			AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
+			final AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
 			return laf.getIconFactory().getDownArrowIcon();
 		}
 		return null;
@@ -80,7 +80,7 @@ public abstract class XPScrollButton extends BaseScrollButton {
 
 	private Icon getLeftArrowIcon() {
 		if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
-			AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
+			final AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
 			return laf.getIconFactory().getLeftArrowIcon();
 		}
 		return null;
@@ -102,7 +102,7 @@ public abstract class XPScrollButton extends BaseScrollButton {
 
 	private Icon getRightArrowIcon() {
 		if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
-			AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
+			final AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
 			return laf.getIconFactory().getRightArrowIcon();
 		}
 		return null;
@@ -110,7 +110,7 @@ public abstract class XPScrollButton extends BaseScrollButton {
 
 	private Icon getUpArrowIcon() {
 		if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
-			AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
+			final AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();
 			return laf.getIconFactory().getUpArrowIcon();
 		}
 		return null;
@@ -119,17 +119,17 @@ public abstract class XPScrollButton extends BaseScrollButton {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
-		Paint savedPaint = g2D.getPaint();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
+		final Paint savedPaint = g2D.getPaint();
 
-		boolean isPressed = getModel().isPressed();
-		boolean isRollover = getModel().isRollover();
+		final boolean isPressed = getModel().isPressed();
+		final boolean isRollover = getModel().isRollover();
 
-		int width = getWidth();
-		int height = getHeight();
+		final int width = getWidth();
+		final int height = getHeight();
 
-		Color[] tc = AbstractLookAndFeel.getTheme().getThumbColors();
+		final Color[] tc = AbstractLookAndFeel.getTheme().getThumbColors();
 		Color c1 = tc[0];
 		Color c2 = tc[tc.length - 1];
 		if (isPressed) {
@@ -166,9 +166,9 @@ public abstract class XPScrollButton extends BaseScrollButton {
 
 		g2D.setComposite(savedComposite);
 
-		int x;
-		int y;
-		Icon icon;
+		final int x;
+		final int y;
+		final Icon icon;
 		// paint the icon
 		switch (getDirection()) {
 		case NORTH:

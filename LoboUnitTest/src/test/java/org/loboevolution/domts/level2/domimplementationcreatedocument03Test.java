@@ -29,7 +29,6 @@ package org.loboevolution.domts.level2;
 
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -60,14 +59,14 @@ public class domimplementationcreatedocument03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
+        final Document doc;
+        final DOMImplementation domImpl;
         Document newDoc;
-        DocumentType docType = null;
+        final DocumentType docType = null;
 
-        String namespaceURI = "http://www.w3.org/DOMTest/L2";
+        final String namespaceURI = "http://www.w3.org/DOMTest/L2";
         String qualifiedName;
-        List<String> qualifiedNames = new ArrayList<>();
+        final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("_:_");
         qualifiedNames.add("_:h0");
         qualifiedNames.add("_:test");
@@ -81,7 +80,7 @@ public class domimplementationcreatedocument03Test extends LoboUnitTest {
 
         doc = sampleXmlFile("staffNS.xml");
         domImpl = doc.getImplementation();
-        for (Object name : qualifiedNames) {
+        for (final Object name : qualifiedNames) {
             qualifiedName = (String) name;
             newDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
             assertNotNull("domimplementationcreatedocument03", newDoc);

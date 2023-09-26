@@ -69,8 +69,8 @@ public class Glyf {
      * @param data a {@link java.nio.ByteBuffer} object.
      * @return a {@link org.loboevolution.pdfview.font.ttf.Glyf} object.
      */
-    public static Glyf getGlyf(ByteBuffer data) {
-        short numContours = data.getShort();
+    public static Glyf getGlyf(final ByteBuffer data) {
+        final short numContours = data.getShort();
         
         Glyf g = null;
         if (numContours == 0) {
@@ -105,7 +105,7 @@ public class Glyf {
      *
      * @param data a {@link java.nio.ByteBuffer} object.
      */
-    public void setData(ByteBuffer data) {
+    public void setData(final ByteBuffer data) {
         return;
     }
     
@@ -118,7 +118,7 @@ public class Glyf {
      * @return a {@link java.nio.ByteBuffer} object.
      */
     public ByteBuffer getData() {
-        ByteBuffer buf = ByteBuffer.allocate(getLength());
+        final ByteBuffer buf = ByteBuffer.allocate(getLength());
         
         buf.putShort(getNumContours());
         buf.putShort(getMinX());
@@ -154,7 +154,7 @@ public class Glyf {
      *
      * @param isCompound a boolean.
      */
-    protected void setCompound(boolean isCompound) {
+    protected void setCompound(final boolean isCompound) {
         this.isCompound = isCompound;
     }
     
@@ -172,7 +172,7 @@ public class Glyf {
      *
      * @param numContours a short.
      */
-    protected void setNumContours(short numContours) {
+    protected void setNumContours(final short numContours) {
         this.numContours = numContours;
     }
     
@@ -190,7 +190,7 @@ public class Glyf {
      *
      * @param minX a short.
      */
-    protected void setMinX(short minX) {
+    protected void setMinX(final short minX) {
         this.minX = minX;
     }
     
@@ -208,7 +208,7 @@ public class Glyf {
      *
      * @param minY a short.
      */
-    protected void setMinY(short minY) {
+    protected void setMinY(final short minY) {
         this.minY = minY;
     }
     /**
@@ -225,7 +225,7 @@ public class Glyf {
      *
      * @param maxX a short.
      */
-    protected void setMaxX(short maxX) {
+    protected void setMaxX(final short maxX) {
         this.maxX = maxX;
     }
     
@@ -243,7 +243,7 @@ public class Glyf {
      *
      * @param maxY a short.
      */
-    protected void setMaxY(short maxY) {
+    protected void setMaxY(final short maxY) {
         this.maxY = maxY;
     }
 }

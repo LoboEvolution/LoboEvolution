@@ -54,11 +54,11 @@ public class hc_elementgetattributenodeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        Attr domesticAttr;
-        String nodeName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final Attr domesticAttr;
+        final String nodeName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(0);

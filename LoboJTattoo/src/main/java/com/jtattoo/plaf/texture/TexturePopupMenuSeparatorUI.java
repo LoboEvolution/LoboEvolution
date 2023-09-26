@@ -56,10 +56,10 @@ public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 		return new TexturePopupMenuSeparatorUI();
 	}
 
-	private void drawLine(Graphics g, int y, int w, Color color) {
+	private void drawLine(final Graphics g, final int y, final int w, final Color color) {
 		g.setColor(color);
-		int dw = 3;
-		int dx = 2;
+		final int dw = 3;
+		final int dx = 2;
 		int x = dx;
 		while (x < w) {
 			g.drawLine(x, y, x + dw - 1, y);
@@ -69,7 +69,7 @@ public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public Dimension getPreferredSize(JComponent c) {
+	public Dimension getPreferredSize(final JComponent c) {
 		return PREF_SIZE;
 	}
 
@@ -78,19 +78,19 @@ public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 	public void paint(final Graphics g, final JComponent c) {
 		TextureUtils.fillComponent(g, c, TextureUtils.MENUBAR_TEXTURE_TYPE);
 		if (AbstractLookAndFeel.getTheme().getTextureSet().equals("Default")) {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
-			int w = c.getWidth();
+			final int w = c.getWidth();
 			drawLine(g, 2, w, BORDER_COLORS[0]);
 			drawLine(g, 3, w, BORDER_COLORS[1]);
 			drawLine(g, 4, w, BORDER_COLORS[2]);
 			drawLine(g, 5, w, BORDER_COLORS[3]);
 			g2D.setComposite(savedComposite);
 		} else {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite savedComposite = g2D.getComposite();
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite savedComposite = g2D.getComposite();
 			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
 			if (AbstractLookAndFeel.getTheme().isDarkTexture()) {

@@ -35,7 +35,7 @@ public class XPathProcessorException extends XPathException {
    *
    * @param message The error message.
    */
-  public XPathProcessorException(String message) {
+  public XPathProcessorException(final String message) {
     super(message);
   }
 }

@@ -48,14 +48,14 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild31Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
-        Element elem;
-        Element span;
-        EntityReference ent4Ref;
-        Text spanText;
-        Element newChild;
-        Node replaced;
+        final Document doc;
+        final HTMLCollection childList;
+        final Element elem;
+        final Element span;
+        final EntityReference ent4Ref;
+        final Text spanText;
+        final Element newChild;
+        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("var");
         elem = (Element) childList.item(2);
@@ -70,7 +70,7 @@ public class nodereplacechild31Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = span.replaceChild(newChild, spanText);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

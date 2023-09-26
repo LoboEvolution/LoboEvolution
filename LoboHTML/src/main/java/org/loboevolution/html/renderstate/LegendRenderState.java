@@ -41,7 +41,7 @@ public class LegendRenderState extends BlockRenderState {
      * @param prevRenderState a {@link RenderState} object.
      * @param element         a {@link HTMLElementImpl} object.
      */
-    public LegendRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+    public LegendRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
         super(prevRenderState, element);
     }
 
@@ -60,7 +60,7 @@ public class LegendRenderState extends BlockRenderState {
     }
 
     private HtmlInsets getDefaultPaddingInsets() {
-        HtmlInsets insets = new HtmlInsets();
+        final HtmlInsets insets = new HtmlInsets();
         final int leftRight = HtmlValues.getPixelSize("2px", null, element.getDocumentNode().getDefaultView(), -1);
         insets.setLeft(leftRight);
         insets.setRight(leftRight);

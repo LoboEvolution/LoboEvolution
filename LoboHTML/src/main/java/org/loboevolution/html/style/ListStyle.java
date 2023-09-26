@@ -69,7 +69,7 @@ public class ListStyle {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getRomanNumerals(int num) {
-		LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<>();
+		final LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<>();
 		roman_numerals.put("M", 1000);
 		roman_numerals.put("CM", 900);
 		roman_numerals.put("D", 500);
@@ -83,16 +83,16 @@ public class ListStyle {
 		roman_numerals.put("V", 5);
 		roman_numerals.put("IV", 4);
 		roman_numerals.put("I", 1);
-		StringBuilder res = new StringBuilder();
-		for (Map.Entry<String, Integer> entry : roman_numerals.entrySet()) {
-			int matches = num / entry.getValue();
+		final StringBuilder res = new StringBuilder();
+		for (final Map.Entry<String, Integer> entry : roman_numerals.entrySet()) {
+			final int matches = num / entry.getValue();
 			res.append(repeat(entry.getKey(), matches));
 			num = num % entry.getValue();
 		}
 		return res.toString();
 	}
 
-	private static String repeat(String s, int n) {
+	private static String repeat(final String s, final int n) {
 		if (s == null) {
 			return null;
 		}
@@ -135,7 +135,7 @@ public class ListStyle {
 	 *
 	 * @param image the image to set
 	 */
-	public void setImage(Image image) {
+	public void setImage(final Image image) {
 		this.image = image;
 	}
 
@@ -144,7 +144,7 @@ public class ListStyle {
 	 *
 	 * @param position the position to set
 	 */
-	public void setPosition(int position) {
+	public void setPosition(final int position) {
 		this.position = position;
 	}
 
@@ -153,7 +153,7 @@ public class ListStyle {
 	 *
 	 * @param type the type to set
 	 */
-	public void setType(int type) {
+	public void setType(final int type) {
 		this.type = type;
 	}
 

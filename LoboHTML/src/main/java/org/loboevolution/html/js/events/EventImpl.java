@@ -50,7 +50,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	 * @param canBubbleArg a boolean.
 	 * @param cancelableArg a boolean.
 	 */
-	public EventImpl(String eventTypeArg, boolean canBubbleArg, boolean cancelableArg) {
+	public EventImpl(final String eventTypeArg, final boolean canBubbleArg, final boolean cancelableArg) {
 		eventType = eventTypeArg;
 		canBubble = canBubbleArg;
 		cancelable = cancelableArg;
@@ -67,7 +67,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	
 	/** {@inheritDoc} */
 	@Override
-	public void initEvent(String eventTypeArg, boolean canBubbleArg, boolean cancelableArg) {
+	public void initEvent(final String eventTypeArg, final boolean canBubbleArg, final boolean cancelableArg) {
 		eventType = eventTypeArg;
 		canBubble = canBubbleArg;
 		cancelable = cancelableArg;
@@ -127,7 +127,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCancelBubble(boolean cancelBubble) {
+	public void setCancelBubble(final boolean cancelBubble) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -169,7 +169,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(final boolean returnValue) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -190,14 +190,14 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
 	/** {@inheritDoc} */
 	@Override
-	public void initEvent(String type, boolean bubbles) {
+	public void initEvent(final String type, final boolean bubbles) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void initEvent(String type) {
+	public void initEvent(final String type) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -43,7 +43,7 @@ public final class ColorHelper {
 	 * @param p the factor of the brightness in percent from 0 to 100
 	 * @return a new color value that is a brighter version of the color parameter c
 	 */
-	public static Color brighter(Color c, double p) {
+	public static Color brighter(final Color c, final double p) {
 		if (c == null) {
 			return null;
 		}
@@ -52,9 +52,9 @@ public final class ColorHelper {
 		double g = c.getGreen();
 		double b = c.getBlue();
 
-		double rd = 255.0 - r;
-		double gd = 255.0 - g;
-		double bd = 255.0 - b;
+		final double rd = 255.0 - r;
+		final double gd = 255.0 - g;
+		final double bd = 255.0 - b;
 
 		r += rd * p / 100.0;
 		g += gd * p / 100.0;
@@ -70,7 +70,7 @@ public final class ColorHelper {
 	 * @param b the Blue component
 	 * @return a color object
 	 */
-	public static Color createColor(int r, int g, int b) {
+	public static Color createColor(final int r, final int g, final int b) {
 		return new Color((r & 0xFF) << 16 | (g & 0xFF) << 8 | b & 0xFF);
 	}
 
@@ -84,18 +84,18 @@ public final class ColorHelper {
 	 *              array)
 	 * @return the array of color values
 	 */
-	public static Color[] createColorArr(Color c1, Color c2, int steps) {
+	public static Color[] createColorArr(final Color c1, final Color c2, final int steps) {
 		if (c1 == null || c2 == null) {
 			return null;
 		}
 
-		Color[] colors = new Color[steps];
+		final Color[] colors = new Color[steps];
 		double r = c1.getRed();
 		double g = c1.getGreen();
 		double b = c1.getBlue();
-		double dr = (c2.getRed() - r) / steps;
-		double dg = (c2.getGreen() - g) / steps;
-		double db = (c2.getBlue() - b) / steps;
+		final double dr = (c2.getRed() - r) / steps;
+		final double dg = (c2.getGreen() - g) / steps;
+		final double db = (c2.getBlue() - b) / steps;
 		colors[0] = c1;
 		for (int i = 1; i < steps - 1; i++) {
 			r += dr;
@@ -114,7 +114,7 @@ public final class ColorHelper {
 	 * @param p the factor to shade the color c in percent from 0 to 100
 	 * @return a new color value that is a darker version of the color parameter c
 	 */
-	public static Color darker(Color c, double p) {
+	public static Color darker(final Color c, final double p) {
 		if (c == null) {
 			return null;
 		}
@@ -137,14 +137,14 @@ public final class ColorHelper {
 	 * @param c the color you want to calculate the gray value
 	 * @return the gray value
 	 */
-	public static int getGrayValue(Color c) {
+	public static int getGrayValue(final Color c) {
 		if (c == null) {
 			return 0;
 		}
 
-		double r = c.getRed();
-		double g = c.getGreen();
-		double b = c.getBlue();
+		final double r = c.getRed();
+		final double g = c.getGreen();
+		final double b = c.getBlue();
 		return Math.min(255, (int) (r * 0.28 + g * 0.59 + b * 0.13));
 	}
 
@@ -155,9 +155,9 @@ public final class ColorHelper {
 	 * @param ca the color array you want to calculate the gray value
 	 * @return the gray value
 	 */
-	public static int getGrayValue(Color[] ca) {
+	public static int getGrayValue(final Color[] ca) {
 		int sum = 0;
-		for (Color color : ca) {
+		for (final Color color : ca) {
 			sum += getGrayValue(color);
 		}
 		return sum / ca.length;
@@ -170,14 +170,14 @@ public final class ColorHelper {
 	 * @param c2 the second color
 	 * @return the median color value of the two colors c1 and c1
 	 */
-	public static Color median(Color c1, Color c2) {
+	public static Color median(final Color c1, final Color c2) {
 		if (c1 == null || c2 == null) {
 			return null;
 		}
 
-		int r = (c1.getRed() + c2.getRed()) / 2;
-		int g = (c1.getGreen() + c2.getGreen()) / 2;
-		int b = (c1.getBlue() + c2.getBlue()) / 2;
+		final int r = (c1.getRed() + c2.getRed()) / 2;
+		final int g = (c1.getGreen() + c2.getGreen()) / 2;
+		final int b = (c1.getBlue() + c2.getBlue()) / 2;
 		return createColor(r, g, b);
 	}
 
@@ -188,12 +188,12 @@ public final class ColorHelper {
 	 * @param c the color
 	 * @return a gray version of the color parameter c.
 	 */
-	public static Color toGray(Color c) {
+	public static Color toGray(final Color c) {
 		if (c == null) {
 			return null;
 		}
 
-		int gray = getGrayValue(c);
+		final int gray = getGrayValue(c);
 		return new Color(gray, gray, gray, c.getAlpha());
 	}
 

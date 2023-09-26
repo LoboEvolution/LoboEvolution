@@ -65,7 +65,7 @@ public final class PixelMarkerOverlay extends Overlay {
 	 * @throws java.lang.IllegalArgumentException
 	 *             if {@code newSize} is negative
 	 */
-	public void setSize(int newSize) {
+	public void setSize(final int newSize) {
 		if (newSize < 0)
 			throw new IllegalArgumentException("Negative size");
 		size = newSize;
@@ -80,7 +80,7 @@ public final class PixelMarkerOverlay extends Overlay {
 	 * @throws java.lang.NullPointerException in case of error
 	 *             if {@code color} is {@code null}
 	 */
-	public void setColor(Color color) {
+	public void setColor(final Color color) {
 		if (color == null)
 			throw new NullPointerException();
 		this.color = color;
@@ -95,7 +95,7 @@ public final class PixelMarkerOverlay extends Overlay {
 	 * @throws java.lang.NullPointerException in case of error
 	 *             if {@code p} is {@code null}
 	 */
-	public void addPoint(Point p) {
+	public void addPoint(final Point p) {
 		if (p == null)
 			throw new NullPointerException();
 		points.add(new Point(p));
@@ -109,7 +109,7 @@ public final class PixelMarkerOverlay extends Overlay {
 	 *            the point to mark; if {@code null}, then no points will be
 	 *            selected
 	 */
-	public void setPoint(Point p) {
+	public void setPoint(final Point p) {
 		points.clear();
 		if (p != null) {
 			points.add(new Point(p));
@@ -125,11 +125,11 @@ public final class PixelMarkerOverlay extends Overlay {
 	 * @throws java.lang.NullPointerException in case of error
 	 *             if {@code points} or any individual point is {@code null}
 	 */
-	public void setPoints(Iterable<Point> points) {
+	public void setPoints(final Iterable<Point> points) {
 		if (points == null)
 			throw new NullPointerException();
 		this.points.clear();
-		for (Point p : points) {
+		for (final Point p : points) {
 			this.points.add(new Point(p));
 		}
 		repaint();
@@ -147,12 +147,12 @@ public final class PixelMarkerOverlay extends Overlay {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paint(Graphics2D g, BufferedImage image, AffineTransform transform) {
+	public void paint(final Graphics2D g, final BufferedImage image, final AffineTransform transform) {
 		g.setColor(color);
-		Point2D p2d = new Point2D.Double();
-		int currentSize = Math.max(size, (int) Math.ceil(transform.getScaleX() / Math.sqrt(2)));
+		final Point2D p2d = new Point2D.Double();
+		final int currentSize = Math.max(size, (int) Math.ceil(transform.getScaleX() / Math.sqrt(2)));
 
-		for (Point p : points) {
+		for (final Point p : points) {
 			p2d.setLocation(p.x + .5, p.y + .5);
 			transform.transform(p2d, p2d);
 			g.drawOval((int) p2d.getX() - currentSize, (int) p2d.getY() - currentSize, 2 * currentSize + 1,

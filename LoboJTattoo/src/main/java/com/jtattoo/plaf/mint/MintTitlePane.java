@@ -59,7 +59,7 @@ public class MintTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public MintTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public MintTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
@@ -73,13 +73,13 @@ public class MintTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
+	public void paintBackground(final Graphics g) {
 		if (isActive()) {
-			Graphics2D g2D = (Graphics2D) g;
-			Composite composite = g2D.getComposite();
+			final Graphics2D g2D = (Graphics2D) g;
+			final Composite composite = g2D.getComposite();
 			if (backgroundImage != null) {
 				g.drawImage(backgroundImage, 0, 0, null);
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue);
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue);
 				g2D.setComposite(alpha);
 			}
 			JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, getWidth(),
@@ -93,7 +93,7 @@ public class MintTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		g.setColor(ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10));
 		g.drawLine(0, getHeight() - 2, getWidth(), getHeight() - 2);
 		g.setColor(Color.white);

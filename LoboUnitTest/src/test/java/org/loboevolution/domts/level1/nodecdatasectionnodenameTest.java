@@ -59,12 +59,12 @@ public class nodecdatasectionnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element cdataName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element cdataName;
         Node cdataNode;
-        int nodeType;
-        String cdataNodeName;
+        final int nodeType;
+        final String cdataNodeName;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("name");
         cdataName = (Element) elementList.item(1);

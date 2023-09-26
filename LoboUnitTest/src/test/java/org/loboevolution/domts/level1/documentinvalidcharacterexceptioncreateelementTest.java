@@ -62,15 +62,15 @@ public class documentinvalidcharacterexceptioncreateelementTest extends LoboUnit
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element badElement;
+        final Document doc;
+        final Element badElement;
         doc = sampleXmlFile("staff.xml");
 
         {
             boolean success = false;
             try {
                 badElement = doc.createElement("invalid^Name");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("throw_INVALID_CHARACTER_ERR", success);

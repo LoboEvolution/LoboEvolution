@@ -47,15 +47,15 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode18Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        Element element;
-        Node renamedNode;
-        Element docElem;
-        String rootNS;
-        String rootTagname;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final Element element;
+        final Node renamedNode;
+        final Element docElem;
+        final String rootNS;
+        final String rootTagname;
+        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
@@ -69,7 +69,7 @@ public class documentrenamenode18Test extends LoboUnitTest {
             boolean success = false;
             try {
                 renamedNode = doc.renameNode(element, "http://www.w3.org/1999/xhtml", "head");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }
             assertTrue("documentrenamenode18_WRONG_DOCUMENT_ERR", success);

@@ -78,14 +78,14 @@ public enum ListValues {
 	private static final Map<Integer, ListValues> ENUM_MAP;
 	
 	static {
-		Map<Integer, ListValues> map = new HashMap<>();
-		for (ListValues instance : ListValues.values()) {
+		final Map<Integer, ListValues> map = new HashMap<>();
+		for (final ListValues instance : ListValues.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	ListValues(Integer value) {
+	ListValues(final Integer value) {
 		this.value = value;
 	}
 
@@ -104,7 +104,7 @@ public enum ListValues {
 	 * @param value a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
-	public boolean isEqual(Integer value) {
+	public boolean isEqual(final Integer value) {
 		return this.value == value;
 	}
 
@@ -114,8 +114,8 @@ public enum ListValues {
 	 * @param actionName a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.ListValues} object.
 	 */
-	public static ListValues get(Integer actionName) {
-		ListValues value = ENUM_MAP.get(actionName);
+	public static ListValues get(final Integer actionName) {
+		final ListValues value = ENUM_MAP.get(actionName);
 		return value == null ? ListValues.NONE : value;
 	}
 }

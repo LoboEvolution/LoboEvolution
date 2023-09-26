@@ -56,12 +56,12 @@ public class hasAttributeNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String localName = "nomatch";
-        String namespaceURI = "http://www.usa.com";
-        Document doc;
-        HTMLCollection elementList;
-        Element testNode;
-        boolean state;
+        final String localName = "nomatch";
+        final String namespaceURI = "http://www.usa.com";
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testNode;
+        final boolean state;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         testNode = (Element) elementList.item(0);

@@ -55,7 +55,7 @@ public class PatternDictionarySegment extends Segment {
 	 *
 	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
 	 */
-	public PatternDictionarySegment(JBIG2StreamDecoder streamDecoder) {
+	public PatternDictionarySegment(final JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);
 	}
 
@@ -75,24 +75,25 @@ public class PatternDictionarySegment extends Segment {
 		if (JBIG2StreamDecoder.debug)
 			logger.info("pattern dictionary size = " + width + " , " + height);
 
-		short[] buf = new short[4];
+		final short[] buf = new short[4];
 		decoder.readByte(buf);
 		grayMax = BinaryOperation.getInt32(buf);
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("grey max = " + grayMax);
 
-		boolean useMMR = patternDictionaryFlags.getFlagValue(PatternDictionaryFlags.HD_MMR) == 1;
-		int template = patternDictionaryFlags.getFlagValue(PatternDictionaryFlags.HD_TEMPLATE);
+		final boolean useMMR = patternDictionaryFlags.getFlagValue(PatternDictionaryFlags.HD_MMR) == 1;
+		final int template = patternDictionaryFlags.getFlagValue(PatternDictionaryFlags.HD_TEMPLATE);
 
 		if (!useMMR) {
 			arithmeticDecoder.resetGenericStats(template, null);
 			arithmeticDecoder.start();
 		}
 
-		short[] genericBAdaptiveTemplateX = new short[4], genericBAdaptiveTemplateY = new short[4];
+		final short[] genericBAdaptiveTemplateX = new short[4];
+        final short[] genericBAdaptiveTemplateY = new short[4];
 
-		genericBAdaptiveTemplateX[0] = (short) -width;
+        genericBAdaptiveTemplateX[0] = (short) -width;
 		genericBAdaptiveTemplateY[0] = 0;
 		genericBAdaptiveTemplateX[1] = -3;
 		genericBAdaptiveTemplateY[1] = -1;
@@ -103,11 +104,11 @@ public class PatternDictionarySegment extends Segment {
 
 		size = grayMax + 1;
 
-		JBIG2Bitmap bitmap = new JBIG2Bitmap(size * width, height, arithmeticDecoder, huffmanDecoder, mmrDecoder);
+		final JBIG2Bitmap bitmap = new JBIG2Bitmap(size * width, height, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 		bitmap.clear(0);
 		bitmap.readBitmap(useMMR, template, false, false, null, genericBAdaptiveTemplateX, genericBAdaptiveTemplateY, segmentHeader.getSegmentDataLength() - 7);
 
-		JBIG2Bitmap[] bitmaps = new JBIG2Bitmap[size];
+		final JBIG2Bitmap[] bitmaps = new JBIG2Bitmap[size];
 
 		int x = 0;
 		for (int i = 0; i < size; i++) {
@@ -129,7 +130,7 @@ public class PatternDictionarySegment extends Segment {
 	}
 
 	private void readPatternDictionaryFlags() throws IOException {
-		short patternDictionaryFlagsField = decoder.readByte();
+		final short patternDictionaryFlagsField = decoder.readByte();
 
 		patternDictionaryFlags.setFlags(patternDictionaryFlagsField);
 

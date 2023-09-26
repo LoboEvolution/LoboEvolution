@@ -34,7 +34,6 @@ import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 
 /**
@@ -58,15 +57,15 @@ public class createDocumentType03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String qualifiedName = "prefix:myDoc";
-        String publicId = "http://www.localhost.com";
-        String systemId = "myDoc.dtd";
-        Document doc;
-        DOMImplementation domImpl;
-        DocumentType newType;
+        final String qualifiedName = "prefix:myDoc";
+        final String publicId = "http://www.localhost.com";
+        final String systemId = "myDoc.dtd";
+        final Document doc;
+        final DOMImplementation domImpl;
+        final DocumentType newType;
 
-        String nodeName;
-        String nodeValue;
+        final String nodeName;
+        final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();

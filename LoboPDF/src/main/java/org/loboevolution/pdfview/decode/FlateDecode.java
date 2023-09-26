@@ -54,15 +54,15 @@ public class FlateDecode {
      * @param dict a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
-    public static ByteBuffer decode(PDFObject dict, ByteBuffer buf,
-            PDFObject params) throws IOException {
-        Inflater inf = new Inflater(false);
+    public static ByteBuffer decode(final PDFObject dict, final ByteBuffer buf,
+                                    final PDFObject params) throws IOException {
+        final Inflater inf = new Inflater(false);
 
-        int bufSize = buf.remaining();
+        final int bufSize = buf.remaining();
 
         // copy the data, since the array() method is not supported
         // on raf-based ByteBuffers
-        byte[] data = new byte[bufSize];
+        final byte[] data = new byte[bufSize];
         buf.get(data);
 
         // set the input to the inflater
@@ -70,8 +70,8 @@ public class FlateDecode {
 
         // output to a byte-array output stream, since we don't
         // know how big the output will be
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        byte[] decomp = new byte[bufSize];
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final byte[] decomp = new byte[bufSize];
         int read = 0;
 
         try {        	
@@ -87,7 +87,7 @@ public class FlateDecode {
                 }
                 baos.write(decomp, 0, read);
             }
-        } catch (DataFormatException dfe) {
+        } catch (final DataFormatException dfe) {
             throw new PDFParseException("Data format exception:" + dfe.getMessage());
         }
 
@@ -96,7 +96,7 @@ public class FlateDecode {
 
         // undo a predictor algorithm, if any was used
         if (params != null && params.getDictionary().containsKey("Predictor")) {
-            Predictor predictor = Predictor.getPredictor(params);
+            final Predictor predictor = Predictor.getPredictor(params);
             if (predictor != null) {
                 outBytes = predictor.unpredict(outBytes);
             }

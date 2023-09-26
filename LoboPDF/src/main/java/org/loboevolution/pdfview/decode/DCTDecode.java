@@ -66,12 +66,12 @@ public class DCTDecode {
      * @return the decoded buffer
      * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
-    protected static ByteBuffer decode(PDFObject dict, ByteBuffer buf, PDFObject params) throws PDFParseException {
+    protected static ByteBuffer decode(final PDFObject dict, final ByteBuffer buf, final PDFObject params) throws PDFParseException {
         // BEGIN PATCH W. Randelshofer Completely rewrote decode routine in
         // order to
         // support JPEG images in the CMYK color space.
-        BufferedImage bimg = loadImageData(buf);
-        byte[] output = ImageDataDecoder.decodeImageData(bimg);
+        final BufferedImage bimg = loadImageData(buf);
+        final byte[] output = ImageDataDecoder.decodeImageData(bimg);
         return ByteBuffer.wrap(output);
         // END PATCH W. Randelshofer Completely rewrote decode routine in order
         // to
@@ -86,28 +86,28 @@ public class DCTDecode {
      * @throws PDFParseException in case of error
      ************************************************************************/
 
-    private static BufferedImage loadImageData(ByteBuffer buf)
+    private static BufferedImage loadImageData(final ByteBuffer buf)
             throws PDFParseException {
         buf.rewind();
-        byte[] input = new byte[buf.remaining()];
+        final byte[] input = new byte[buf.remaining()];
         buf.get(input);
         BufferedImage bimg;
         try {
             try {
                 bimg = ImageIO.read(new ByteArrayInputStream(input));
-            } catch (IllegalArgumentException colorProfileMismatch) {
+            } catch (final IllegalArgumentException colorProfileMismatch) {
                 // we experienced this problem with an embedded jpeg
                 // that specified a icc color profile with 4 components
                 // but the raster had only 3 bands (apparently YCC encoded)
-                Image img = Toolkit.getDefaultToolkit().createImage(input);
+                final Image img = Toolkit.getDefaultToolkit().createImage(input);
                 // wait until image is loaded using ImageIcon for convenience
-                ImageIcon imageIcon = new ImageIcon(img);
+                final ImageIcon imageIcon = new ImageIcon(img);
                 // copy to buffered image
                 bimg = new BufferedImage(imageIcon.getIconWidth(), imageIcon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
                 bimg.getGraphics().drawImage(img, 0, 0, null);
             }
-        } catch (Exception ex) {
-            PDFParseException ex2 = new PDFParseException("DCTDecode failed");
+        } catch (final Exception ex) {
+            final PDFParseException ex2 = new PDFParseException("DCTDecode failed");
             ex2.initCause(ex);
             throw ex2;
         }
@@ -130,7 +130,7 @@ class MyTracker implements ImageObserver {
       *
       * @param img a {@link java.awt.Image} object.
       */
-    public MyTracker(Image img) {
+    public MyTracker(final Image img) {
         img.getWidth(this);
     }
 
@@ -139,8 +139,8 @@ class MyTracker implements ImageObserver {
      * More information has come in about the image.
      */
     @Override
-    public boolean imageUpdate(Image img, int infoflags, int x, int y,
-                               int width, int height) {
+    public boolean imageUpdate(final Image img, final int infoflags, final int x, final int y,
+                               final int width, final int height) {
         if ((infoflags & (ALLBITS | ERROR | ABORT)) != 0) {
             synchronized (this) {
                 this.done = true;
@@ -158,7 +158,7 @@ class MyTracker implements ImageObserver {
         if (!this.done) {
             try {
                 wait();
-            } catch (InterruptedException ie) {
+            } catch (final InterruptedException ie) {
             }
         }
     }

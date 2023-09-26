@@ -55,9 +55,9 @@ public class hc_entitiesremovenameditemns1Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        NamedNodeMap entities;
-        DocumentType docType;
+        final Document doc;
+        final NamedNodeMap entities;
+        final DocumentType docType;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
@@ -69,7 +69,7 @@ public class hc_entitiesremovenameditemns1Test extends LoboUnitTest {
             entities.removeNamedItemNS("http://www.w3.org/1999/xhtml", "alpha");
             fail("throw_NO_MOD_OR_NOT_FOUND_ERR");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 7:
                 case 8:

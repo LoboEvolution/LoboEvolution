@@ -58,16 +58,16 @@ public class nodeappendchildchildexistsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node childNode;
-        Node newChild;
-        Node lchild;
-        Node fchild;
-        String lchildName;
-        String fchildName;
-        Node appendedChild;
-        String initialName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node childNode;
+        final Node newChild;
+        final Node lchild;
+        final Node fchild;
+        final String lchildName;
+        final String fchildName;
+        final Node appendedChild;
+        final String initialName;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         childNode = elementList.item(1);

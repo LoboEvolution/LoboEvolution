@@ -47,7 +47,7 @@ public class UIEventImpl extends EventImpl implements UIEvent {
 	 * @param detailArg a int.
 	 * @param viewArg a {@link org.loboevolution.html.node.views.AbstractView} object.
 	 */
-	public UIEventImpl(String eventTypeArg, double detailArg, Window viewArg) {
+	public UIEventImpl(final String eventTypeArg, final double detailArg, final Window viewArg) {
 		super(eventTypeArg, false, false);
 		abstractView = viewArg;
 		detail = detailArg;
@@ -75,7 +75,7 @@ public class UIEventImpl extends EventImpl implements UIEvent {
 
 	/** {@inheritDoc} */
 	@Override
-	public void initUIEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, Window viewArg, double detailArg) {
+	public void initUIEvent(final String typeArg, final boolean canBubbleArg, final boolean cancelableArg, final Window viewArg, final double detailArg) {
 		super.initEvent(typeArg, canBubbleArg, cancelableArg);
 		abstractView = viewArg;
 		detail = detailArg;

@@ -54,11 +54,11 @@ public class elementsetattributens01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Attr attribute;
-        String attrName;
-        String attrValue;
+        final Document doc;
+        final Element element;
+        final Attr attribute;
+        final String attrName;
+        final String attrValue;
         doc = sampleXmlFile("staff.xml");
         element = doc.createElementNS("http://www.w3.org/DOM", "dom:elem");
         element.setAttributeNS("http://www.w3.org/DOM/Test/setAttributeNS", "attr", "value");

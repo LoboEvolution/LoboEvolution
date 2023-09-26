@@ -51,8 +51,8 @@ public class hc_nodevalue01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element newNode;
+        final Document doc;
+        final Element newNode;
         String newValue;
         doc = sampleXmlFile("hc_staff.xml");
         newNode = doc.createElement("acronym");

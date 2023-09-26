@@ -53,17 +53,17 @@ import static org.junit.Assert.*;
 public class wellformed03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
-        DocumentType nullDoctype = null;
+        final DOMImplementation domImpl;
+        final DocumentType nullDoctype = null;
 
-        Document doc;
-        Element docElem;
+        final Document doc;
+        final Element docElem;
         Attr attr;
         Node retval;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        List<DOMError> errors;
+        final List<DOMError> errors;
 
         DOMError error;
         int severity;
@@ -78,7 +78,7 @@ public class wellformed03Test extends LoboUnitTest {
             boolean success = false;
             try {
                 attr = doc.createAttribute("LegalNameࢎ");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue("xml10InvalidName", success);
@@ -87,7 +87,7 @@ public class wellformed03Test extends LoboUnitTest {
         try {
             doc.setXmlVersion("1.1");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             if (ex.getCode() == 9) {
                 return;
             }
@@ -102,7 +102,7 @@ public class wellformed03Test extends LoboUnitTest {
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
         errors = errorMonitor.getErrors();
-        for (DOMError domError : errors) {
+        for (final DOMError domError : errors) {
             error = domError;
             severity = error.getSeverity();
             assertEquals("severity", 2, severity);

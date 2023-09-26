@@ -47,21 +47,21 @@ import static org.junit.Assert.assertTrue;
 public class documentadoptnode14Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
+        final Document doc;
+        final Document newDoc;
         Element docElem;
-        DOMImplementation domImpl;
-        DocumentFragment docFragment;
-        HTMLCollection childList;
-        boolean success;
-        Node acronymNode;
-        Node adoptedDocFrag;
+        final DOMImplementation domImpl;
+        final DocumentFragment docFragment;
+        final HTMLCollection childList;
+        final boolean success;
+        final Node acronymNode;
+        final Node adoptedDocFrag;
         Node appendedChild;
-        DocumentType nullDocType = null;
+        final DocumentType nullDocType = null;
 
-        Node imported;
-        String rootNS;
-        String rootName;
+        final Node imported;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();

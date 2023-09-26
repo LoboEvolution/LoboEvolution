@@ -55,19 +55,19 @@ public class LoboTree extends JTree implements LoboLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(final Graphics g) {
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 		if (getSelectionCount() > 0) {
 			g.setColor(foreground());
-			for (int i : getSelectionRows()) {
-				Rectangle r = getRowBounds(i);
+			for (final int i : getSelectionRows()) {
+				final Rectangle r = getRowBounds(i);
 				g.fillRect(r.x, r.y, getWidth() - r.x, r.height);
 			}
 		}
 		super.paintComponent(g);
 		if (getLeadSelectionPath() != null) {
-			Rectangle r = getRowBounds(getRowForPath(getLeadSelectionPath()));
+			final Rectangle r = getRowBounds(getRowForPath(getLeadSelectionPath()));
 			g.setColor(hasFocus() ? foreground() : null);
 			g.drawRect(r.x, r.y, getWidth() - r.x - 1, r.height - 1);
 		}
@@ -77,9 +77,9 @@ public class LoboTree extends JTree implements LoboLookAndFeel {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded,
-				boolean leaf, int row, boolean hasFocus) {
-			JLabel l = (JLabel) super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, false);
+		public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected, final boolean expanded,
+                                                      final boolean leaf, final int row, final boolean hasFocus) {
+			final JLabel l = (JLabel) super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, false);
 			l.setBackground(background());
 			l.setForeground(foreground());
 			l.setOpaque(true);

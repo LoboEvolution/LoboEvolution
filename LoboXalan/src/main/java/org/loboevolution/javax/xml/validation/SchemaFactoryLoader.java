@@ -30,13 +30,11 @@ package org.loboevolution.javax.xml.validation;
 // Referenced classes of package org.loboevolution.javax.xml.validation:
 //            SchemaFactory
 
-public abstract class SchemaFactoryLoader
-{
+public abstract class SchemaFactoryLoader {
 
-    protected SchemaFactoryLoader()
-    {
+    protected SchemaFactoryLoader() {
         throw new RuntimeException("Stub!");
     }
 
-    public abstract SchemaFactory newFactory(String s);
+    public abstract SchemaFactory newFactory(final String s);
 }

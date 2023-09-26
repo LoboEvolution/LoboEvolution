@@ -48,7 +48,7 @@ public class Files {
 	 * @param in a {@link java.io.InputStream} object.
 	 * @return a {@link java.io.File} object.
 	 */
-	public static File getResourceAsFile(InputStream in) {
+	public static File getResourceAsFile(final InputStream in) {
 		try {
 			if (in == null) {
 				return null;
@@ -57,7 +57,7 @@ public class Files {
 			final File tempFile = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
 			tempFile.deleteOnExit();
 
-			try (FileOutputStream out = new FileOutputStream(tempFile)) {
+			try (final FileOutputStream out = new FileOutputStream(tempFile)) {
 				// copy stream
 				final byte[] buffer = new byte[1024];
 				int bytesRead;
@@ -72,13 +72,13 @@ public class Files {
 		}
 	}
 
-	public static void copyInputStreamToFile(InputStream inputStream, File file)
+	public static void copyInputStreamToFile(final InputStream inputStream, final File file)
 			throws IOException {
 
 		// append = false
-		try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
+		try (final FileOutputStream outputStream = new FileOutputStream(file, false)) {
 			int read;
-			byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
+			final byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
 			while ((read = inputStream.read(bytes)) != -1) {
 				outputStream.write(bytes, 0, read);
 			}

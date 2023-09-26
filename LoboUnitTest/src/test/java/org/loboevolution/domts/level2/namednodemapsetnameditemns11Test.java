@@ -60,13 +60,13 @@ public class namednodemapsetnameditemns11Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notations;
-        NamedNodeMap attributes;
-        Notation notation;
-        Element element;
-        HTMLCollection elementList;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notations;
+        final NamedNodeMap attributes;
+        final Notation notation;
+        final Element element;
+        final HTMLCollection elementList;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
@@ -79,7 +79,7 @@ public class namednodemapsetnameditemns11Test extends LoboUnitTest {
         boolean success = false;
         try {
             attributes.setNamedItemNS(notation);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
         assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

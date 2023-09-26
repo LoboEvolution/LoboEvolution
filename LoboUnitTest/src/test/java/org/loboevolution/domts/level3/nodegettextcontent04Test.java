@@ -46,16 +46,16 @@ import static org.junit.Assert.assertNull;
 public class nodegettextcontent04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        DocumentType docType;
-        String textContent;
-        String nullPubId = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final DocumentType docType;
+        final String textContent;
+        final String nullPubId = null;
 
-        String nullSysId = null;
+        final String nullSysId = null;
 
-        DocumentType oldDocType;
-        String rootName;
+        final DocumentType oldDocType;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         oldDocType = doc.getDoctype();
         rootName = oldDocType.getName();

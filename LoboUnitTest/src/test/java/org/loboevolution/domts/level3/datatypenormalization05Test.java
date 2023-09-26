@@ -52,16 +52,16 @@ public class datatypenormalization05Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
+        final Document doc;
+        final HTMLCollection elemList;
         Element element;
-        DOMConfiguration domConfig;
+        final DOMConfiguration domConfig;
         String str;
-        boolean canSetNormalization;
-        boolean canSetValidate;
-        boolean canSetXMLSchema;
-        String xsdNS = "http://www.w3.org/2001/XMLSchema";
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final boolean canSetNormalization;
+        final boolean canSetValidate;
+        final boolean canSetXMLSchema;
+        final String xsdNS = "http://www.w3.org/2001/XMLSchema";
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("datatype_normalization.xml");
         domConfig = doc.getDomConfig();
@@ -83,21 +83,21 @@ public class datatypenormalization05Test extends LoboUnitTest {
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:value");
             assertEquals("firstValue", "2004-01-21T15:30:00-05:00", str);
-            str = element.getAttribute("data:union");;
+            str = element.getAttribute("data:union");
             assertEquals("firstUnion", "2004-01-21T20:30:00-05:00", str);
             str = element.getTextContent();
             assertEquals("firstList", "2004-01-21T15:30:00 2004-01-21T15:30:00Z", str);
             element = (Element) elemList.item(1);
             str = element.getAttribute("data:value");
             assertEquals("secondValue", "2004-01-21T15:30:00.0000-05:00", str);
-            str = element.getAttribute("data:union");;
+            str = element.getAttribute("data:union");
             assertEquals("secondUnion", "2004-01-21T15:30:00.0000-05:00", str);
             str = element.getTextContent();
             assertEquals("secondList", "2004-01-21T15:30:00.0000", str);
             element = (Element) elemList.item(2);
             str = element.getAttribute("data:value");
             assertEquals("thirdValue", "2004-01-21T15:30:00.0001-05:00", str);
-            str = element.getAttribute("data:union");;
+            str = element.getAttribute("data:union");
             assertEquals("thirdUnion", "2004-01-21T15:30:00.0001-05:00", str);
             str = element.getTextContent();
             assertEquals("thirdList", "2004-01-21T15:30:00.0001", str);

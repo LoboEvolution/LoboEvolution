@@ -59,11 +59,11 @@ public class documentcreateentityreferenceTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        EntityReference newEntRefNode;
-        String entRefValue;
-        String entRefName;
-        int entRefType;
+        final Document doc;
+        final EntityReference newEntRefNode;
+        final String entRefValue;
+        final String entRefName;
+        final int entRefType;
         doc = sampleXmlFile("staff.xml");
         newEntRefNode = doc.createEntityReference("ent1");
         assertNotNull("createdEntRefNotNull", newEntRefNode);

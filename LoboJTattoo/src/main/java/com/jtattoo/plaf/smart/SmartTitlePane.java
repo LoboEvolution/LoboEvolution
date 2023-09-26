@@ -64,7 +64,7 @@ public class SmartTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public SmartTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public SmartTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
@@ -78,12 +78,12 @@ public class SmartTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
-		Graphics2D g2D = (Graphics2D) g;
-		int width = getWidth();
-		int height = getHeight();
-		Color backColor;
-		Color frameColor;
+	public void paintBackground(final Graphics g) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final int width = getWidth();
+		final int height = getHeight();
+		final Color backColor;
+		final Color frameColor;
 		if (JTattooUtilities.isActive(this)) {
 			backColor = AbstractLookAndFeel.getTheme().getWindowTitleColors()[10];
 			frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
@@ -102,25 +102,25 @@ public class SmartTitlePane extends BaseTitlePane {
 		}
 
 		int titleWidth = 0;
-		String frameTitle = getTitle();
+		final String frameTitle = getTitle();
 		if (frameTitle != null) {
-			Font f = getFont();
+			final Font f = getFont();
 			g.setFont(f);
-			FontMetrics fm = g.getFontMetrics();
+			final FontMetrics fm = g.getFontMetrics();
 			titleWidth = fm.stringWidth(
 					JTattooUtilities.getClippedText(getTitle(), fm, getWidth() - iconWidth - buttonsWidth - 15)) + 10;
 			if (getWindow() instanceof JDialog) {
-				Image image = getFrameIconImage();
+				final Image image = getFrameIconImage();
 				if (image != null) {
 					titleWidth += getHeight();
 				}
 			}
 		}
 
-		int dx;
-		int dw;
-		boolean leftToRight = isLeftToRight();
-		int xOffset = leftToRight ? iconWidth + 10 + titleWidth : width - 10 - iconWidth - titleWidth;
+		final int dx;
+		final int dw;
+		final boolean leftToRight = isLeftToRight();
+		final int xOffset = leftToRight ? iconWidth + 10 + titleWidth : width - 10 - iconWidth - titleWidth;
 
 		if (leftToRight) {
 			dw = width - buttonsWidth - xOffset - 10;
@@ -133,14 +133,14 @@ public class SmartTitlePane extends BaseTitlePane {
 
 		if (!AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()
 				&& !AbstractLookAndFeel.getTheme().isCenterWindowTitleOn() && dw > 0) {
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
 
-			float dc1 = 50.0f;
+			final float dc1 = 50.0f;
 			float dc2 = 5.0f;
 
-			Color c1 = ColorHelper.brighter(backColor, dc1);
+			final Color c1 = ColorHelper.brighter(backColor, dc1);
 			Color c2;
 			while (dy + 5 < height) {
 				c2 = ColorHelper.darker(backColor, dc2);
@@ -160,7 +160,7 @@ public class SmartTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
 		} else {
@@ -171,9 +171,9 @@ public class SmartTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
-			Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
+			final Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
 			if (ColorHelper.getGrayValue(titleColor) > 164) {
 				g.setColor(Color.black);
 				JTattooUtilities.drawString(rootPane, g, title, x + 1, y + 1);

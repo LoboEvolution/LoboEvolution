@@ -61,11 +61,11 @@ public class hc_textindexsizeerrnegativeoffsetTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        Text textNode;
-        Text splitNode;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final Text textNode;
+        final Text splitNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("strong");
         nameNode = elementList.item(2);
@@ -75,7 +75,7 @@ public class hc_textindexsizeerrnegativeoffsetTest extends LoboUnitTest {
             boolean success = false;
             try {
                 splitNode = textNode.splitText(-69);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }
             assertTrue("throws_INDEX_SIZE_ERR", success);

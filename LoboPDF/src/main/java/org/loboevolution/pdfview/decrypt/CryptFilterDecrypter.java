@@ -65,9 +65,9 @@ public class CryptFilterDecrypter implements PDFDecrypter {
      * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
     public CryptFilterDecrypter(
-            Map<String, PDFDecrypter> decrypters,
-            String defaultStreamCryptName,
-            String defaultStringCryptName)
+            final Map<String, PDFDecrypter> decrypters,
+            final String defaultStreamCryptName,
+            final String defaultStringCryptName)
             throws PDFParseException {
 
         this.decrypters = decrypters;
@@ -90,7 +90,7 @@ public class CryptFilterDecrypter implements PDFDecrypter {
 	/** {@inheritDoc} */
     @Override
 	public ByteBuffer decryptBuffer(
-            String cryptFilterName, PDFObject streamObj, ByteBuffer streamBuf)
+            final String cryptFilterName, final PDFObject streamObj, final ByteBuffer streamBuf)
             throws PDFParseException {
         final PDFDecrypter decrypter;
         if (cryptFilterName == null) {
@@ -115,7 +115,7 @@ public class CryptFilterDecrypter implements PDFDecrypter {
 
 	/** {@inheritDoc} */
     @Override
-	public String decryptString(int objNum, int objGen, String inputBasicString)
+	public String decryptString(final int objNum, final int objGen, final String inputBasicString)
             throws PDFParseException {
         return defaultStringDecrypter.decryptString(objNum, objGen, inputBasicString);
     }
@@ -133,8 +133,8 @@ public class CryptFilterDecrypter implements PDFDecrypter {
 
 	/** {@inheritDoc} */
     @Override
-	public boolean isEncryptionPresent(String cryptFilterName) {
-        PDFDecrypter decrypter = decrypters.get(cryptFilterName);
+	public boolean isEncryptionPresent(final String cryptFilterName) {
+        final PDFDecrypter decrypter = decrypters.get(cryptFilterName);
         return decrypter != null && decrypter.isEncryptionPresent(cryptFilterName);
     }
 

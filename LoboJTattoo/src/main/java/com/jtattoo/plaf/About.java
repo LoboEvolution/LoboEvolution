@@ -38,8 +38,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * <p>About class.</p>
@@ -68,46 +66,23 @@ public class About extends JDialog {
 	private static final int DLG_POS_Y = SCREEN_SIZE.height / 2 - DLG_SIZE.height / 2;
 
 	/**
-	 * Starten der Anwendung
-	 *
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-			About dlg = new About();
-			dlg.setSize(DLG_SIZE);
-			dlg.setLocation(DLG_POS_X, DLG_POS_Y);
-			dlg.setVisible(true);
-		} catch (ClassNotFoundException ex) {
-			ex.printStackTrace();
-		} catch (IllegalAccessException ex) {
-			ex.printStackTrace();
-		} catch (InstantiationException ex) {
-			ex.printStackTrace();
-		} catch (UnsupportedLookAndFeelException ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	/**
 	 * <p>Constructor for About.</p>
 	 */
 	public About() {
 		super((JFrame) null, "About JTattoo");
-		JPanel contentPanel = new JPanel(null);
-		JLabel titleLabel = new JLabel("JTattoo " + JTATTOO_VERSION);
+		final JPanel contentPanel = new JPanel(null);
+		final JLabel titleLabel = new JLabel("JTattoo " + JTATTOO_VERSION);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		titleLabel.setBounds(0, 20, DLG_SIZE.width - 8, 36);
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(titleLabel);
 
-		JLabel copyrightLabel = new JLabel("(c) 2002 and later by MH Software-Entwicklung");
+		final JLabel copyrightLabel = new JLabel("(c) 2002 and later by MH Software-Entwicklung");
 		copyrightLabel.setBounds(0, 80, DLG_SIZE.width - 8, 20);
 		copyrightLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(copyrightLabel);
 
-		JButton okButton = new JButton("OK");
+		final JButton okButton = new JButton("OK");
 		okButton.setBounds((DLG_SIZE.width - 80) / 2, 170, 80, 24);
 		contentPanel.add(okButton);
 
@@ -116,7 +91,7 @@ public class About extends JDialog {
 		addWindowListener(new WindowAdapter() {
 
 			@Override
-			public void windowClosing(WindowEvent ev) {
+			public void windowClosing(final WindowEvent ev) {
 				System.exit(0);
 			}
 		});

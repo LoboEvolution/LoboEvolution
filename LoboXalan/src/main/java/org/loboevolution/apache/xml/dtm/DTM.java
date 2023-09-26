@@ -166,7 +166,7 @@ public interface DTM {
    * @return The attribute node handle with the specified name ( <code>nodeName</code>) or <code>
    *     DTM.NULL</code> if there is no such attribute.
    */
-  int getAttributeNode(int elementHandle, String namespaceURI, String name);
+  int getAttributeNode(int elementHandle, final String namespaceURI, final String name);
 
   /**
    * Given a node handle, get the index of the node's first attribute.
@@ -222,7 +222,7 @@ public interface DTM {
    *     inScope
    * @return handle of next namespace, or DTM.NULL to indicate none exists.
    */
-  int getNextNamespaceNode(int baseHandle, int namespaceHandle, boolean inScope);
+  int getNextNamespaceNode(int baseHandle, final int namespaceHandle, boolean inScope);
 
   /**
    * Given a node handle, find its parent node.
@@ -290,7 +290,7 @@ public interface DTM {
    *
    * @return the expanded-name id of the node.
    */
-  int getExpandedTypeID(String namespace, String localName, int type);
+  int getExpandedTypeID(final String namespace, final String localName, final int type);
 
   /**
    * Given a node handle, return its DOM-style node name. This will include names such as #text or
@@ -379,7 +379,7 @@ public interface DTM {
    * @param elementId The unique <code>id</code> value for an element.
    * @return The handle of the matching element.
    */
-  int getElementById(String elementId);
+  int getElementById(final String elementId);
 
   // ============== Boolean methods ================
 
@@ -401,7 +401,7 @@ public interface DTM {
    *     this as <code>(firstNode.documentOrderPosition &lt;= secondNode.documentOrderPosition)
    *     </code>.
    */
-  boolean isNodeAfter(int firstNodeHandle, int secondNodeHandle);
+  boolean isNodeAfter(int firstNodeHandle, final int secondNodeHandle);
 
   /**
    * Return an DOM node for the given node.

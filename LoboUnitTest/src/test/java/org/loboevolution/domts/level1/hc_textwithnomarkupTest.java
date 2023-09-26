@@ -60,11 +60,11 @@ public class hc_textwithnomarkupTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node nameNode;
-        Node nodeV;
-        String value;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node nameNode;
+        final Node nodeV;
+        final String value;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("strong");
         nameNode = elementList.item(2);

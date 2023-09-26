@@ -49,13 +49,13 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild35Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Attr parent;
-        EntityReference oldChild;
-        Attr newChild;
+        final Document doc;
+        final Attr parent;
+        final EntityReference oldChild;
+        final Attr newChild;
         String nodeValue;
-        Node appendedChild;
-        Node replaced;
+        final Node appendedChild;
+        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         oldChild = doc.createEntityReference("delta");
@@ -66,7 +66,7 @@ public class nodereplacechild35Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = parent.replaceChild(newChild, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

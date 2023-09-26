@@ -44,35 +44,35 @@ public class CapturePane extends JPanel {
     private Point clickPoint;
     private PreviewFrame preview;
 
-    public CapturePane(BrowserFrame frame) {
+    public CapturePane(final BrowserFrame frame) {
         setOpaque(false);
-        MouseAdapter mouseHandler = new MouseAdapter() {
+        final MouseAdapter mouseHandler = new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(final MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
                     System.exit(0);
                 }
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(final MouseEvent e) {
                 clickPoint = e.getPoint();
                 captureBounds = null;
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(final MouseEvent e) {
                 clickPoint = null;
                 takeScreenShot(frame);
             }
 
             @Override
-            public void mouseDragged(MouseEvent e) {
-                Point dragPoint = e.getPoint();
-                int x = Math.min(clickPoint.x, dragPoint.x);
-                int y = Math.min(clickPoint.y, dragPoint.y);
-                int width = Math.max(clickPoint.x - dragPoint.x, dragPoint.x - clickPoint.x);
-                int height = Math.max(clickPoint.y - dragPoint.y, dragPoint.y - clickPoint.y);
+            public void mouseDragged(final MouseEvent e) {
+                final Point dragPoint = e.getPoint();
+                final int x = Math.min(clickPoint.x, dragPoint.x);
+                final int y = Math.min(clickPoint.y, dragPoint.y);
+                final int width = Math.max(clickPoint.x - dragPoint.x, dragPoint.x - clickPoint.x);
+                final int height = Math.max(clickPoint.y - dragPoint.y, dragPoint.y - clickPoint.y);
                 captureBounds = new Rectangle(x, y, width, height);
                 repaint();
             }
@@ -84,12 +84,12 @@ public class CapturePane extends JPanel {
     /**
      * Takes a screenshot using awt.robot to use native screenshot command
      */
-    private void takeScreenShot(BrowserFrame frame) {
+    private void takeScreenShot(final BrowserFrame frame) {
         try {
-            Robot r = new Robot();
-            BufferedImage img = r.createScreenCapture(captureBounds);
+            final Robot r = new Robot();
+            final BufferedImage img = r.createScreenCapture(captureBounds);
             displayPreview(img, frame);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
@@ -99,7 +99,7 @@ public class CapturePane extends JPanel {
      *
      * @param img
      */
-    private void displayPreview(BufferedImage img, BrowserFrame frame) {
+    private void displayPreview(final BufferedImage img, final BrowserFrame frame) {
         if (preview == null) {
             preview = new PreviewFrame(this, frame);
         }
@@ -112,12 +112,12 @@ public class CapturePane extends JPanel {
      * Overrides frame painting, draws the rectangle cut out frame to show area of screenshot
      */
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g.create();
+        final Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(new Color(255, 255, 255, 128));
 
-        Area fill = new Area(new Rectangle(new Point(0, 0), getSize()));
+        final Area fill = new Area(new Rectangle(new Point(0, 0), getSize()));
         if (captureBounds != null) {
             fill.subtract(new Area(captureBounds));
         }

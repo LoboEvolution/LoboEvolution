@@ -48,7 +48,7 @@ public class OpMapVector {
    *
    * @param blocksize Size of block to allocate
    */
-  public OpMapVector(int blocksize, int increaseSize, int lengthPos) {
+  public OpMapVector(final int blocksize, final int increaseSize, final int lengthPos) {
 
     m_blocksize = increaseSize;
     m_mapSize = blocksize;
@@ -62,7 +62,7 @@ public class OpMapVector {
    * @param i index of object to get
    * @return object at given index
    */
-  public final int elementAt(int i) {
+  public final int elementAt(final int i) {
     return m_map[i];
   }
 
@@ -76,13 +76,13 @@ public class OpMapVector {
    * @param value object to set
    * @param index Index of where to set the object
    */
-  public final void setElementAt(int value, int index) {
+  public final void setElementAt(final int value, final int index) {
     if (index >= m_mapSize) {
-      int oldSize = m_mapSize;
+      final int oldSize = m_mapSize;
 
       m_mapSize += m_blocksize;
 
-      int[] newMap = new int[m_mapSize];
+      final int[] newMap = new int[m_mapSize];
 
       System.arraycopy(m_map, 0, newMap, 0, oldSize);
 
@@ -97,9 +97,9 @@ public class OpMapVector {
    *
    * @param size The size to trim to.
    */
-  public final void setToSize(int size) {
+  public final void setToSize(final int size) {
 
-    int[] newMap = new int[size];
+    final int[] newMap = new int[size];
 
     System.arraycopy(m_map, 0, newMap, 0, m_map[m_lengthPos]);
 

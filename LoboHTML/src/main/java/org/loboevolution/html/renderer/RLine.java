@@ -72,8 +72,8 @@ class RLine extends BaseRCollection {
 	 * @param height a int.
 	 * @param initialAllowOverflow a boolean.
 	 */
-	public RLine(ModelNode modelNode, RenderableContainer container, int x, int y, int desiredMaxWidth, int height,
-			boolean initialAllowOverflow) {
+	public RLine(final ModelNode modelNode, final RenderableContainer container, final int x, final int y, final int desiredMaxWidth, final int height,
+				 final boolean initialAllowOverflow) {
 		// Note that in the case of RLine, modelNode is the context node
 		// at the beginning of the line, not a node that encloses the whole line.
 		super(container, modelNode);
@@ -93,7 +93,7 @@ class RLine extends BaseRCollection {
 	 * @param renderable a {@link org.loboevolution.html.renderer.Renderable} object.
 	 * @throws org.loboevolution.html.renderer.OverflowException if any.
 	 */
-	public final void add(Renderable renderable) throws OverflowException {
+	public final void add(final Renderable renderable) throws OverflowException {
 		if (renderable instanceof RWord) {
 			addWord((RWord) renderable);
 		} else if (renderable instanceof RBlank) {
@@ -116,7 +116,7 @@ class RLine extends BaseRCollection {
 	 *
 	 * @param rblank a {@link org.loboevolution.html.renderer.RBlank} object.
 	 */
-	public final void addBlank(RBlank rblank) {
+	public final void addBlank(final RBlank rblank) {
 		// NOTE: Blanks may be added without concern for wrapping (?)
 		final int x = this.xoffset;
 		final int width = rblank.getWidth();
@@ -127,7 +127,7 @@ class RLine extends BaseRCollection {
 		this.xoffset = x + width;
 	}
 
-	private void addElement(RElement relement) throws OverflowException {
+	private void addElement(final RElement relement) throws OverflowException {
 		// Check if it fits horizontally
 		final int origXOffset = this.xoffset;
 		final int desiredMaxWidth = this.desiredMaxWidth;
@@ -144,7 +144,7 @@ class RLine extends BaseRCollection {
 		// it's needed for height readjustment.
 		final int boundsh = this.getHeight();
 		final int ph = relement.getHeight();
-		int requiredHeight;
+		final int requiredHeight;
 		final int valign = relement.getVAlign();
 		final AlignValues key = AlignValues.get(valign);
 		switch (key) {
@@ -176,7 +176,7 @@ class RLine extends BaseRCollection {
 	 *
 	 * @param rblank a {@link org.loboevolution.html.renderer.RSpacing} object.
 	 */
-	public final void addSpacing(RSpacing rblank) {
+	public final void addSpacing(final RSpacing rblank) {
 		final int x = this.xoffset;
 		final int width = rblank.getWidth();
 		rblank.setOrigin(x, (this.getHeight() - rblank.getHeight()) / 2);
@@ -190,7 +190,7 @@ class RLine extends BaseRCollection {
 	 *
 	 * @param sc a {@link org.loboevolution.html.renderer.RStyleChanger} object.
 	 */
-	public final void addStyleChanger(RStyleChanger sc) {
+	public final void addStyleChanger(final RStyleChanger sc) {
 		this.renderables.add(sc);
 	}
 
@@ -200,7 +200,7 @@ class RLine extends BaseRCollection {
 	 * @param rword a {@link org.loboevolution.html.renderer.RWord} object.
 	 * @throws org.loboevolution.html.renderer.OverflowException if any.
 	 */
-	public final void addWord(RWord rword) throws OverflowException {
+	public final void addWord(final RWord rword) throws OverflowException {
 		// Check if it fits horzizontally
 		int offset = this.xoffset;
 		final int wiwidth = rword.getWidth();
@@ -292,7 +292,7 @@ class RLine extends BaseRCollection {
 	 * @param elementHeight
 	 * @param valign
 	 */
-	private void adjustHeight(int newHeight, int elementHeight, int valign) {
+	private void adjustHeight(final int newHeight, final int elementHeight, final int valign) {
 		// Set new line height
 		// int oldHeight = this.height;
 		this.setHeight(newHeight);
@@ -316,8 +316,8 @@ class RLine extends BaseRCollection {
 			}
 		}
 		final int textHeight = maxDescent + maxAscentPlusLeading;
-		int baseline;
-		AlignValues key = AlignValues.get(valign);
+		final int baseline;
+		final AlignValues key = AlignValues.get(valign);
 		switch (key) {
 		case ABSBOTTOM:
 			baseline = newHeight - maxDescent;
@@ -366,15 +366,15 @@ class RLine extends BaseRCollection {
 	 * @param x a int.
 	 * @param desiredMaxWidth a int.
 	 */
-	public void changeLimits(int x, int desiredMaxWidth) {
+	public void changeLimits(final int x, final int desiredMaxWidth) {
 		this.setX(x);
 		this.desiredMaxWidth = desiredMaxWidth;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
-			RenderableSpot endPoint) {
+	public boolean extractSelectionText(final StringBuilder buffer, final boolean inSelection, final RenderableSpot startPoint,
+										final RenderableSpot endPoint) {
 		final boolean result = super.extractSelectionText(buffer, inSelection, startPoint, endPoint);
 		if (result) {
 			final LineBreak br = this.lineBreak;
@@ -417,7 +417,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public RenderableSpot getLowestRenderableSpot(int x, int y) {
+	public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable br = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (br != null) {
@@ -468,7 +468,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onDoubleClick(final MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -481,7 +481,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseClick(final MouseEvent event, int x, int y) {
+	public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -506,7 +506,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMousePressed(final MouseEvent event, int x, int y) {
+	public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -520,7 +520,7 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean onMouseReleased(final MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -582,7 +582,7 @@ class RLine extends BaseRCollection {
 	 *
 	 * @param flag a boolean.
 	 */
-	public void setAllowOverflow(boolean flag) {
+	public void setAllowOverflow(final boolean flag) {
 		if (flag != this.allowOverflow) {
 			this.allowOverflow = flag;
 			if (flag) {
@@ -599,9 +599,9 @@ class RLine extends BaseRCollection {
 	 * @param elementHeight The required new line height.
 	 * @param valign
 	 */
-	private void setElementY(RElement relement, int elementHeight, int valign) {
-		int yoffset;
-		AlignValues key = AlignValues.get(valign);
+	private void setElementY(final RElement relement, final int elementHeight, final int valign) {
+		final int yoffset;
+		final AlignValues key = AlignValues.get(valign);
 		switch (key) {
 			case BOTTOM:
 				yoffset = this.getHeight() - elementHeight;
@@ -624,7 +624,7 @@ class RLine extends BaseRCollection {
 	 *
 	 * @param lineBreak a {@link org.loboevolution.html.renderer.LineBreak} object.
 	 */
-	public void setLineBreak(LineBreak lineBreak) {
+	public void setLineBreak(final LineBreak lineBreak) {
 		this.lineBreak = lineBreak;
 	}
 
@@ -633,7 +633,7 @@ class RLine extends BaseRCollection {
 	 *
 	 * @param r a {@link org.loboevolution.html.renderer.Renderable} object.
 	 */
-	public final void simplyAdd(Renderable r) {
+	public final void simplyAdd(final Renderable r) {
 		this.renderables.add(r);
 	}
 

@@ -45,7 +45,7 @@ public class DatabseSQLite {
      * <p>createDatabaseDirectory.</p>
      */
     public static void createDatabaseDirectory() throws Exception {
-        Path path = Paths.get(System.getProperty("user.home"), "lobo", "store");
+        final Path path = Paths.get(System.getProperty("user.home"), "lobo", "store");
         if(!Files.exists(path)) Files.createDirectories(path);
     }
 
@@ -56,10 +56,10 @@ public class DatabseSQLite {
      */
     public static String getDatabaseDirectory() {
         try {
-            Path path = Paths.get(System.getProperty("user.home"), "lobo", "store", LOBO_DB);
+            final Path path = Paths.get(System.getProperty("user.home"), "lobo", "store", LOBO_DB);
             if (!storeExist()) Files.createFile(path);
             return JDBC_SQLITE + path;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return "";
         }
     }

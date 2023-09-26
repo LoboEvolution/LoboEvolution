@@ -61,11 +61,11 @@ public class hc_elementremoveattributeaftercreateTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
-        Attr newAttribute;
-        NamedNodeMap attributes;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
+        final Attr newAttribute;
+        final NamedNodeMap attributes;
         Attr districtAttr;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");

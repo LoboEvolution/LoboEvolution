@@ -35,7 +35,7 @@ public class HTMLNonStandardElement extends HTMLElementImpl {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public HTMLNonStandardElement(String name) {
+	public HTMLNonStandardElement(final String name) {
 		super(name);
 	}
 

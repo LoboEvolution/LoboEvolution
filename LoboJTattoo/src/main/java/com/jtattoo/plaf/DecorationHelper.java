@@ -52,7 +52,7 @@ public class DecorationHelper {
 	 * @param wnd a {@link java.awt.Window} object.
 	 * @param translucent a boolean.
 	 */
-	public static void setTranslucentWindow(Window wnd, boolean translucent) {
+	public static void setTranslucentWindow(final Window wnd, final boolean translucent) {
 		if (isTranslucentWindowSupported()) {
 			if (JTattooUtilities.getJavaVersion() >= 1.7) {
 				if (translucent) {

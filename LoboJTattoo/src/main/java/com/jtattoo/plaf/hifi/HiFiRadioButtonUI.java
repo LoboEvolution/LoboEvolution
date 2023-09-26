@@ -63,7 +63,7 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g, JComponent c) {
+	public void paintBackground(final Graphics g, final JComponent c) {
 		if (c.isOpaque()) {
 			if (c.getBackground() instanceof ColorUIResource
 					&& c.getBackground().equals(AbstractLookAndFeel.getBackgroundColor())) {
@@ -77,18 +77,18 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, JComponent c, String text, Rectangle textRect) {
-		View v = (View) c.getClientProperty(BasicHTML.propertyKey);
+	protected void paintText(final Graphics g, final JComponent c, final String text, final Rectangle textRect) {
+		final View v = (View) c.getClientProperty(BasicHTML.propertyKey);
 		if (v != null) {
 			v.paint(g, textRect);
 		} else {
-			AbstractButton b = (AbstractButton) c;
-			ButtonModel model = b.getModel();
-			int mnemIndex = b.getDisplayedMnemonicIndex();
+			final AbstractButton b = (AbstractButton) c;
+			final ButtonModel model = b.getModel();
+			final int mnemIndex = b.getDisplayedMnemonicIndex();
 			g.setFont(b.getFont());
-			FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
+			final FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
 			if (model.isEnabled()) {
-				Color fc = b.getForeground();
+				final Color fc = b.getForeground();
 				if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 128) {
 					g.setColor(Color.black);
 					JTattooUtilities.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x + 1,

@@ -74,7 +74,7 @@ public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 		setText(PLACEHOLDER_TEXT_USERNAME);
 		addFocusListener(new FocusListener() {
 			@Override
-			public void focusGained(FocusEvent e) {
+			public void focusGained(final FocusEvent e) {
 				if (getText().equals(TextFieldUsername.this.PLACEHOLDER_TEXT_USERNAME)) {
 					setText("");
 				}
@@ -83,7 +83,7 @@ public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 			}
 
 			@Override
-			public void focusLost(FocusEvent e) {
+			public void focusLost(final FocusEvent e) {
 				if (getText().isEmpty()) {
 					setText(TextFieldUsername.this.PLACEHOLDER_TEXT_USERNAME);
 					setForeground(TextFieldUsername.this.COLOR_OUTLINE);
@@ -94,7 +94,7 @@ public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 		});
 	}
 
-	private Graphics2D get2dGraphics(Graphics g) {
+	private Graphics2D get2dGraphics(final Graphics g) {
 		final Graphics2D g2 = (Graphics2D) g;
 		g2.addRenderingHints(new HashMap<RenderingHints.Key, Object>() {
 			private static final long serialVersionUID = 1L;
@@ -108,7 +108,7 @@ public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBorder(Graphics g) {
+	protected void paintBorder(final Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
 		g2.setColor(borderColor);
 		g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, ROUNDNESS, ROUNDNESS);
@@ -116,7 +116,7 @@ public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(final Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
 		g2.setColor(getBackground());
 		g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, ROUNDNESS, ROUNDNESS);
@@ -128,7 +128,7 @@ public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 	 *
 	 * @param color a {@link java.awt.Color} object.
 	 */
-	protected void setBorderColor(Color color) {
+	protected void setBorderColor(final Color color) {
 		borderColor = color;
 		repaint();
 	}

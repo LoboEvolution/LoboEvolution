@@ -48,11 +48,11 @@ public class PaintManager {
 	 *
 	 * @param ic a {@link org.loboevolution.img.ImageComponent} object.
 	 */
-	public PaintManager(ImageComponent ic) {
+	public PaintManager(final ImageComponent ic) {
 		this.ic = ic; 
 	}
 
-	private void doPaint(Graphics2D gg, AffineTransform imageTransform) {
+	private void doPaint(final Graphics2D gg, final AffineTransform imageTransform) {
 		gg.setColor(ic.getBackground());
 		gg.fillRect(0, 0, ic.getWidth(), ic.getHeight());
 
@@ -65,8 +65,8 @@ public class PaintManager {
 		gg.drawImage(ic.getImage(), imageTransform, ic);
 	}
 
-	private void ensureCachedValid(AffineTransform imageTransform) {
-		boolean cacheValid;
+	private void ensureCachedValid(final AffineTransform imageTransform) {
+		final boolean cacheValid;
 
 		// create the image if necessary; if the existing one is sufficiently large, use
 		// it
@@ -78,7 +78,7 @@ public class PaintManager {
 		}
 
 		if (!cacheValid) {
-			Graphics2D gg = cachedImage.createGraphics();
+			final Graphics2D gg = cachedImage.createGraphics();
 			doPaint(gg, imageTransform);
 			gg.dispose();
 			cachedImageChanged = false;
@@ -100,16 +100,16 @@ public class PaintManager {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 */
-	public void paintComponent(Graphics g) {
+	public void paintComponent(final Graphics g) {
 		if (ic.getImage() == null) {
-			Graphics2D gg = (Graphics2D) g.create();
+			final Graphics2D gg = (Graphics2D) g.create();
 			gg.setColor(ic.getBackground());
 			gg.fillRect(0, 0, ic.getWidth(), ic.getHeight());
 			gg.dispose();
 			return;
 		}
 
-		AffineTransform imageTransform = ic.getImageTransform();
+		final AffineTransform imageTransform = ic.getImageTransform();
 
 		if (imageTransform.getScaleX() < 1
 				&& ic.getInterpolationType() != RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR) {
@@ -121,7 +121,7 @@ public class PaintManager {
 			g.drawImage(cachedImage, 0, 0, ic);
 		} else {
 			// draw the image directly
-			Graphics2D gg = (Graphics2D) g.create();
+			final Graphics2D gg = (Graphics2D) g.create();
 			doPaint(gg, imageTransform);
 			gg.dispose();
 		}

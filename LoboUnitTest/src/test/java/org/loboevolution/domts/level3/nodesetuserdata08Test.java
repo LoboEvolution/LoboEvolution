@@ -47,16 +47,16 @@ import static org.junit.Assert.assertFalse;
 public class nodesetuserdata08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        EntityReference entRef;
-        CDATASection cData;
+        final Document doc;
+        final Element docElem;
+        final EntityReference entRef;
+        final CDATASection cData;
         HTMLCollection elemList;
         Element elemName;
         Object userData;
-        Object returned1;
-        Object returned2;
-        boolean success;
+        final Object returned1;
+        final Object returned2;
+        final boolean success;
         Object retUserData;
 
         doc = sampleXmlFile("hc_staff.xml");

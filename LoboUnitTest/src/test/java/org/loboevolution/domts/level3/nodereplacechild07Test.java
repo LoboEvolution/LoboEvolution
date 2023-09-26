@@ -48,14 +48,14 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild07Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        Element replaced;
-        Element elem;
-        String nodeName;
-        Node replacedNode;
-        String rootNS;
-        String rootName;
+        final Document doc;
+        final Element docElem;
+        final Element replaced;
+        final Element elem;
+        final String nodeName;
+        final Node replacedNode;
+        final String rootNS;
+        final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
@@ -65,7 +65,7 @@ public class nodereplacechild07Test extends LoboUnitTest {
         try {
             replacedNode = doc.replaceChild(elem, docElem);
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 9:
                     return;

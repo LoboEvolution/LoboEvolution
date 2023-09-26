@@ -42,9 +42,9 @@ final class Exp implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck, undefinedresult
 	 */
-	public void eval(Stack<Object> environment) {
-	    double exponent = (Double)environment.pop();
-	    double base = (Double)environment.pop();
+	public void eval(final Stack<Object> environment) {
+	    final double exponent = (Double)environment.pop();
+	    final double base = (Double)environment.pop();
 	    environment.push(Math.pow(exponent, base));
 	}
 	

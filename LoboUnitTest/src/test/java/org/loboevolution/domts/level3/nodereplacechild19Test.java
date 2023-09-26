@@ -45,12 +45,12 @@ import static org.junit.Assert.assertEquals;
 public class nodereplacechild19Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        EntityReference entRef;
-        Element elem;
-        Node replaced;
-        String nodeName;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final EntityReference entRef;
+        final Element elem;
+        final Node replaced;
+        final String nodeName;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");

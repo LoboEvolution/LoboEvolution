@@ -124,24 +124,24 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(AffineTransform transform) {
-		String href = getHref().getBaseVal();
+	public Shape createShape(final AffineTransform transform) {
+		final String href = getHref().getBaseVal();
 		if (href.toLowerCase().indexOf("#") != -1) {
-			int hashIndex = href.indexOf('#');
+			final int hashIndex = href.indexOf('#');
 			if (hashIndex != -1) {
-				String idElement = href.substring(hashIndex + 1);
-				Element elementById = (Element) child(idElement);
+				final String idElement = href.substring(hashIndex + 1);
+				final Element elementById = (Element) child(idElement);
 				if (elementById instanceof SVGSymbolElementImpl) {
-					SVGSymbolElementImpl symbol = (SVGSymbolElementImpl) elementById;
-					NodeListImpl children = (NodeListImpl) symbol.getChildNodes();
+					final SVGSymbolElementImpl symbol = ( SVGSymbolElementImpl) elementById;
+					final NodeListImpl children = (NodeListImpl) symbol.getChildNodes();
 					children.forEach(child -> {
 						if (child instanceof Drawable) {
-							Drawable drawable = (Drawable) child;
+							final Drawable drawable = (Drawable) child;
 							drawable.draw(graphics);
 						}
 					});
 				} else if (elementById instanceof Drawable) {
-					Drawable drawable = (Drawable) elementById;
+					final Drawable drawable = (Drawable) elementById;
 					drawable.draw(graphics);
 				}
 			}

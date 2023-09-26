@@ -57,11 +57,11 @@ public class documentcreateattributeTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr newAttrNode;
-        String attrValue;
-        String attrName;
-        int attrType;
+        final Document doc;
+        final Attr newAttrNode;
+        final String attrValue;
+        final String attrName;
+        final int attrType;
         doc = sampleXmlFile("staff.xml");
         newAttrNode = doc.createAttribute("district");
         attrValue = newAttrNode.getNodeValue();

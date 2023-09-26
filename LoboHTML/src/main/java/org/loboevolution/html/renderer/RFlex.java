@@ -45,7 +45,7 @@ public class RFlex {
 	 *
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */
-	public RFlex(RenderState renderState) {
+	public RFlex(final RenderState renderState) {
 		this.renderState = renderState;
 	}
 
@@ -94,9 +94,9 @@ public class RFlex {
 	 *
 	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	protected void flexAlign(HTMLElementImpl markupElement) {
+	protected void flexAlign(final HTMLElementImpl markupElement) {
 		final String justText = renderState.getJustifyContent();
-		CSSValues flex = CSSValues.get(justText);
+		final CSSValues flex = CSSValues.get(justText);
 		
 		if (CSSValues.FLEX_END.equals(flex)) {
 			markupElement.getCurrentStyle().setTextAlign("right");

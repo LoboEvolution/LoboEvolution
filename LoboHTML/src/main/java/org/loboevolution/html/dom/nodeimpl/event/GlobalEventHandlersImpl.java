@@ -695,7 +695,7 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 	 *
 	 * @param functionByAttribute the functionByAttribute to set
 	 */
-	public void setFunctionByAttribute(Map<String, Function> functionByAttribute) {
+	public void setFunctionByAttribute(final Map<String, Function> functionByAttribute) {
 		this.functionByAttribute = functionByAttribute;
 	}
 
@@ -1282,8 +1282,8 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 	 * @param normalName a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.String} object.
 	 */
-	protected void assignAttributeField(String normalName, String value) {
-		ElementImpl elem = (ElementImpl)this;
+	protected void assignAttributeField(final String normalName, final String value) {
+		final ElementImpl elem = (ElementImpl)this;
 		elem.assignAttributeField(normalName, value);
 		if (normalName.startsWith("on")) {
 			synchronized (this) {
@@ -1305,7 +1305,7 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 	 * @param normalAttributeName a {@link java.lang.String} object.
 	 * @return a {@link org.mozilla.javascript.Function} object.
 	 */
-	protected Function getEventFunction(Function varValue, String normalAttributeName) {
+	protected Function getEventFunction(final Function varValue, final String normalAttributeName) {
 		if (varValue != null) {
 			return varValue;
 		}
@@ -1321,7 +1321,7 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 			}
 
 			if (uac.isScriptingEnabled() && this instanceof ElementImpl) {								
-				ElementImpl elem = (ElementImpl)this;
+				final ElementImpl elem = (ElementImpl)this;
 				final String attributeValue = elem.getAttribute(normalAttributeName);
 				if (Strings.isCssNotBlank(attributeValue)) {
 					final String functionCode = "function " + normalAttributeName + "_" + System.identityHashCode(this) + "() { " + attributeValue + " }";
@@ -1330,7 +1330,7 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 						throw new IllegalStateException("Element does not belong to a document.");
 					}
 
-					try (Context ctx = Executor.createContext(getDocumentURL(), uac)) {
+					try (final Context ctx = Executor.createContext(getDocumentURL(), uac)) {
 						final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
 						if (scope == null) {
 							throw new IllegalStateException("Scriptable (scope) instance was expected to be keyed as UserData to document using " + Executor.SCOPE_KEY);

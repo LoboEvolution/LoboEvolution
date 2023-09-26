@@ -47,11 +47,11 @@ import static org.junit.Assert.assertNotEquals;
 public class nodecomparedocumentposition03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document docComp;
-        int documentPosition1;
-        int documentPosition2;
-        int documentPosition3;
+        final Document doc;
+        final Document docComp;
+        final int documentPosition1;
+        final int documentPosition2;
+        final int documentPosition3;
         doc = sampleXmlFile("hc_staff.xml");
         docComp = sampleXmlFile("hc_staff.xml");
         documentPosition1 = doc.compareDocumentPosition(docComp);

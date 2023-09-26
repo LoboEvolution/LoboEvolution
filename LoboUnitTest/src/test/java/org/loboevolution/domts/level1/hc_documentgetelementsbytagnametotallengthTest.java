@@ -57,9 +57,9 @@ public class hc_documentgetelementsbytagnametotallengthTest extends LoboUnitTest
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection nameList;
-        List<String> expectedNames = new ArrayList<>();
+        final Document doc;
+        final HTMLCollection nameList;
+        final List<String> expectedNames = new ArrayList<>();
         expectedNames.add("HTML");
         expectedNames.add("HEAD");
         expectedNames.add("META");
@@ -101,51 +101,7 @@ public class hc_documentgetelementsbytagnametotallengthTest extends LoboUnitTest
         expectedNames.add("VAR");
         expectedNames.add("ACRONYM");
 
-        List<String> svgExpectedNames = new ArrayList<>();
-        svgExpectedNames.add("SVG");
-        svgExpectedNames.add("RECT");
-        svgExpectedNames.add("SCRIPT");
-        svgExpectedNames.add("HEAD");
-        svgExpectedNames.add("META");
-        svgExpectedNames.add("TITLE");
-        svgExpectedNames.add("BODY");
-        svgExpectedNames.add("P");
-        svgExpectedNames.add("EM");
-        svgExpectedNames.add("STRONG");
-        svgExpectedNames.add("CODE");
-        svgExpectedNames.add("SUP");
-        svgExpectedNames.add("VAR");
-        svgExpectedNames.add("ACRONYM");
-        svgExpectedNames.add("P");
-        svgExpectedNames.add("EM");
-        svgExpectedNames.add("STRONG");
-        svgExpectedNames.add("CODE");
-        svgExpectedNames.add("SUP");
-        svgExpectedNames.add("VAR");
-        svgExpectedNames.add("ACRONYM");
-        svgExpectedNames.add("P");
-        svgExpectedNames.add("EM");
-        svgExpectedNames.add("STRONG");
-        svgExpectedNames.add("CODE");
-        svgExpectedNames.add("SUP");
-        svgExpectedNames.add("VAR");
-        svgExpectedNames.add("ACRONYM");
-        svgExpectedNames.add("P");
-        svgExpectedNames.add("EM");
-        svgExpectedNames.add("STRONG");
-        svgExpectedNames.add("CODE");
-        svgExpectedNames.add("SUP");
-        svgExpectedNames.add("VAR");
-        svgExpectedNames.add("ACRONYM");
-        svgExpectedNames.add("P");
-        svgExpectedNames.add("EM");
-        svgExpectedNames.add("STRONG");
-        svgExpectedNames.add("CODE");
-        svgExpectedNames.add("SUP");
-        svgExpectedNames.add("VAR");
-        svgExpectedNames.add("ACRONYM");
-
-        java.util.List<String> actualNames = new java.util.ArrayList<String>();
+        final List<String> actualNames = new ArrayList<>();
 
         Element thisElement;
         String thisTag;

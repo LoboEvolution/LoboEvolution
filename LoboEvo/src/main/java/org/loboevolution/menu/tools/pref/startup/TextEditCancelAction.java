@@ -49,7 +49,7 @@ public class TextEditCancelAction extends AbstractAction {
 	 *
 	 * @param search a {@link org.loboevolution.menu.tools.pref.startup.TextEdit} object.
 	 */
-	public TextEditCancelAction(TextEdit search) {
+	public TextEditCancelAction(final TextEdit search) {
 		this.search = search;
 	}
 

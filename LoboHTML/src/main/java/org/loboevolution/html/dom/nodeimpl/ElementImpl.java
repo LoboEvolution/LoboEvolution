@@ -93,7 +93,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean equalAttributes(Node arg) {
+	public boolean equalAttributes(final Node arg) {
 		if (arg instanceof ElementImpl) {
 			return Objects.equals(map, arg.getAttributes());
 		} else {
@@ -104,7 +104,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	@JSFunction
-	public String getAttribute(String name) {
+	public String getAttribute(final String name) {
 		final Attr attr = getAttributeNode(name);
 		return attr == null ? null : attr.getValue();
 	}
@@ -112,7 +112,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	@JSFunction
-	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
+	public String getAttributeNS(final String namespaceURI, final String localName) throws DOMException {
 		final Attr attr = getAttributeNodeNS(namespaceURI, localName);
 		if (attr != null) {
 			return attr.getValue();
@@ -123,8 +123,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	@JSFunction
-	public Attr getAttributeNode(String name) {
-		AttrImpl attribute = (AttrImpl) map.getNamedItem(name);
+	public Attr getAttributeNode(final String name) {
+		final AttrImpl attribute = (AttrImpl) map.getNamedItem(name);
 		if (attribute != null) {
 			attribute.setSpecified(true);
 			return attribute;
@@ -135,14 +135,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	@JSFunction
-	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
+	public Attr getAttributeNodeNS(final String namespaceURI, final String localName) throws DOMException {
 
 		if (Strings.isBlank(namespaceURI)) {
 			return getAttributeNode(localName);
 		}
 
-		String local = localName.contains(":") ? localName.split(":")[1] : localName;
-		AttrImpl attribute = (AttrImpl) map.getNamedItemNS(namespaceURI, local);
+		final String local = localName.contains(":") ? localName.split(":")[1] : localName;
+		final AttrImpl attribute = (AttrImpl) map.getNamedItemNS(namespaceURI, local);
 		if (attribute != null) {
 			attribute.setSpecified(true);
 			return attribute;
@@ -153,23 +153,23 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeAttribute(String name) {
+	public void removeAttribute(final String name) {
 		try {
 			map.removeNamedItem(name);
-		} catch (DOMException ex) {
+		} catch (final DOMException ex) {
 			logger.severe(ex.getMessage());
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeAttributeNS(String namespaceURI, String localName) throws DOMException {
+	public void removeAttributeNS(final String namespaceURI, final String localName) throws DOMException {
 		map.removeNamedItemNS(namespaceURI, localName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr removeAttributeNode(Attr oldAttr) {
+	public Attr removeAttributeNode(final Attr oldAttr) {
 
 		if (oldAttr.getOwnerElement() == null) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
@@ -178,10 +178,10 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		oldAttr.setOwnerElement(null);
 		try {
 			return (Attr) map.removeNamedItem(oldAttr.getLocalName());
-		} catch (DOMException ex) {
+		} catch (final DOMException ex) {
 			try {
 				return (Attr) map.removeNamedItemNS("*", oldAttr.getLocalName());
-			} catch (DOMException ex1) {
+			} catch (final DOMException ex1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
 			}
 		}
@@ -190,7 +190,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/**
 	 * @param normalName a {@link java.lang.String} object.
 	 */
-	public void removeAttributeField(String normalName) {
+	public void removeAttributeField(final String normalName) {
 		final Map<String, Function> fba = this.getFunctionByAttribute();
 		if (fba != null) {
 			fba.remove("on"+normalName);
@@ -199,14 +199,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAttribute(String name, String value) {
+	public void setAttribute(final String attrName, final String value) {
 		String prefix = null;
+		String name = attrName;
 		if (Strings.isBlank(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
 		}
 
 		if (name.contains(":")) {
-			String[] split = name.split(":");
+			final String[] split = name.split(":");
 			if (split.length != 2) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
@@ -226,13 +227,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			}
 		}
 
-		Node node = map.getNamedItem(name);
+		final Node node = map.getNamedItem(name);
 		if (node != null) {
 			removeAttributeNode((AttrImpl) node);
 		}
 
 		final AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
-		Document doc = getOwnerDocument();
+		final Document doc = getOwnerDocument();
 		attr.setOwnerDocument(doc);
 		attr.setNamespaceURI(getNamespaceURI() != null ? getNamespaceURI() : doc != null ? doc.getNamespaceURI() : getParentNode() != null ? getParentNode().getNamespaceURI() : null);
 		if (Strings.isNotBlank(prefix) && Strings.isNotBlank(attr.getNamespaceURI())) {
@@ -244,15 +245,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAttributeNS(String namespaceURI, String qualifiedName, String value) throws DOMException {
+	public void setAttributeNS(final String namespaceURI, final String qName, final String value) throws DOMException {
 		String prefix = null;
-
+		String qualifiedName = qName;
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains null value");
 		}
 
 		if (qualifiedName.contains(":")) {
-			String[] split = qualifiedName.split(":");
+			final String[] split = qualifiedName.split(":");
 			if (split.length != 2) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
@@ -278,7 +279,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			}
 		}
 
-		Node node = map.getNamedItemNS(namespaceURI, qualifiedName);
+		final Node node = map.getNamedItemNS(namespaceURI, qualifiedName);
 
 		if (node != null && Strings.isNotBlank(namespaceURI) && namespaceURI.equals(node.getNamespaceURI())) {
 			removeAttributeNode((AttrImpl) node);
@@ -294,7 +295,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setIdAttribute(String localName, boolean isId) throws DOMException {
+	public void setIdAttribute(final String localName, final boolean isId) throws DOMException {
 		final AttrImpl attr = (AttrImpl) getAttributeNode(localName);
 		if (attr != null) {
 			attr.setNameId(isId);
@@ -307,7 +308,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
+	public void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId) throws DOMException {
 		final AttrImpl attr = (AttrImpl) getAttributeNodeNS(namespaceURI, localName);
 		if (attr != null) {
 			attr.setNameId(isId);
@@ -318,8 +319,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setIdAttributeNode(Attr idAttr, boolean isId) {
-		Attr checkAttr = getAttributeNode(idAttr.getName());
+	public void setIdAttributeNode(final Attr idAttr, final boolean isId) {
+		final Attr checkAttr = getAttributeNode(idAttr.getName());
 
 		if(checkAttr == null) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
@@ -330,8 +331,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr setAttributeNode(Attr newAttr) {
-		Attr checkAttr = getAttributeNode(newAttr.getName());
+	public Attr setAttributeNode(final Attr newAttr) {
+		final Attr checkAttr = getAttributeNode(newAttr.getName());
 
 		if (checkAttr == null && Objects.equals(newAttr.getOwnerElement(), this)) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
@@ -353,8 +354,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr setAttributeNodeNS(Attr newAttr) throws DOMException {
-		Attr checkAttr = getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
+	public Attr setAttributeNodeNS(final Attr newAttr) throws DOMException {
+		final Attr checkAttr = getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
 		if (checkAttr == null && Objects.equals(newAttr.getOwnerElement(), this)) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
 					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
@@ -420,7 +421,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		if (Strings.isNotBlank(getPrefix())) {
 			builder.append(getPrefix()).append(":");
 		}
@@ -441,9 +442,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 * @param includeComment a boolean.
 	 * @return a {@link java.lang.String} object.
 	 */
-	protected String getRawInnerText(boolean includeComment) {
+	protected String getRawInnerText(final boolean includeComment) {
 		StringBuilder sb = null;
-		for (Node node : nodeList) {
+		for (final Node node : nodeList) {
 			if (node instanceof Text) {
 				final Text tn = (Text) node;
 				final String txt = tn.getNodeValue();
@@ -494,13 +495,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean hasAttribute(String name) {
+	public boolean hasAttribute(final String name) {
 		return map.getNamedItem(name) != null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean hasAttributeNS(String namespaceURI, String localName) throws DOMException {
+	public boolean hasAttributeNS(final String namespaceURI, final String localName) throws DOMException {
 
 		if (Strings.isBlank(localName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "null localName");
@@ -517,7 +518,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	protected String htmlEncodeChildText(String text) {
+	protected String htmlEncodeChildText(final String text) {
 		if (XHtmlParser.isDecodeEntities(this.name)) {
 			return Strings.strictHtmlEncode(text, false);
 		} else {
@@ -530,13 +531,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 *
 	 * @param dir a {@link java.lang.String} object.
 	 */
-	public void setDir(String dir) {
+	public void setDir(final String dir) {
 		setAttribute("dir", dir);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setId(String id) {
+	public void setId(final String id) {
 		setAttribute("id", id);
 	}
 
@@ -545,7 +546,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 *
 	 * @param newText a {@link java.lang.String} object.
 	 */
-	public void setInnerText(String newText) {
+	public void setInnerText(final String newText) {
 		final Document document = this.document;
 		if (document != null) {
 			this.nodeList.clear();
@@ -561,13 +562,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 *
 	 * @param lang a {@link java.lang.String} object.
 	 */
-	public void setLang(String lang) {
+	public void setLang(final String lang) {
 		setAttribute("lang", lang);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) {
+	public void setNodeValue(final String nodeValue) {
 		// nop
 	}
 
@@ -576,19 +577,19 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 *
 	 * @param title a {@link java.lang.String} object.
 	 */
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		setAttribute("title", title);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setInnerHTML(String newHtml) {
+	public void setInnerHTML(final String newHtml) {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 		if (document != null) {
 			final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
 			this.nodeList.clear();
 			try {
-				try (Reader reader = new StringReader(newHtml)) {
+				try (final Reader reader = new StringReader(newHtml)) {
 					parser.parse(reader, this);
 				}
 			} catch (final Exception thrown) {
@@ -613,18 +614,18 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 *
 	 * @param outer the outer to set
 	 */
-	public void setOuter(String outer) {
+	public void setOuter(final String outer) {
 		this.outer = outer;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public DOMTokenList getClassList() {
-		DOMTokenListImpl tokList = new DOMTokenListImpl(this);
+		final DOMTokenListImpl tokList = new DOMTokenListImpl(this);
 		final String className = getClassName();
 		if(Strings.isNotBlank(className)){
 			final String[] listString = className.split(" ");
-			List<String> names = Arrays.asList(listString);
+			final List<String> names = Arrays.asList(listString);
 			names.forEach(tokList::populate);
 		}
         return tokList;
@@ -639,7 +640,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setClassName(String className) {
+	public void setClassName(final String className) {
 		setAttribute("class", className);
 	}
 
@@ -653,7 +654,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public int getClientLeft() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		return HtmlValues.getPixelSize(currentStyle.getBorderLeftWidth(), null, doc.getDefaultView(), 0);
 	}
 
@@ -661,7 +662,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public int getClientTop() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		return HtmlValues.getPixelSize(currentStyle.getBorderTopWidth(), null, doc.getDefaultView(), 0);
 	}
 
@@ -683,7 +684,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setOuterHTML(String newHtml) {
+	public void setOuterHTML(final String newHtml) {
 		this.outer = outerNewHtml(newHtml);
 		if (this.outer != null) {
 			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
@@ -691,7 +692,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
 				this.nodeList.clear();
 				try {
-					try (Reader reader = new StringReader(newHtml)) {
+					try (final Reader reader = new StringReader(newHtml)) {
 						parser.parse(reader, this);
 					}
 				} catch (final Exception thrown) {
@@ -712,14 +713,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSlot(String slot) {
+	public void setSlot(final String slot) {
 		// TODO Auto-generated method stub
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public <E extends Element> E closest(String selector) {
+	public <E extends Element> E closest(final String selector) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -733,36 +734,36 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean hasPointerCapture(int pointerId) {
+	public boolean hasPointerCapture(final int pointerId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean matches(String selectors) {
+	public boolean matches(final String selectors) {
 		if (Strings.isBlank(selectors)) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "The provided selector is empty.");
 		}
 
 		try {
-			SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+			final SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
 			if (selectorList != null) {
-				for (Selector select : selectorList) {
+				for (final Selector select : selectorList) {
 					if (StyleSheetAggregator.selects(select, this, null)) {
 						return true;
 					}
 				}
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void releasePointerCapture(int pointerId) {
+	public void releasePointerCapture(final int pointerId) {
 		// TODO Auto-generated method stub
 
 	}
@@ -776,20 +777,20 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void scroll(int x, int y) {
+	public void scroll(final int x, final int y) {
 		setScrollLeft(x);
 		setScrollTop(y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void scrollBy(int x, int y) {
+	public void scrollBy(final int x, final int y) {
 		scroll(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void scrollIntoView(boolean arg) {
+	public void scrollIntoView(final boolean arg) {
 		// TODO Auto-generated method stub
 
 	}
@@ -803,7 +804,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void scrollTo(int x, int y) {
+	public void scrollTo(final int x, final int y) {
 		scroll(x, y);
 	}
 
@@ -817,22 +818,23 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
     public double getScrollLeft() {
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-        HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+        final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
         return isHScrollable() ? htmlRendererContext.getScrollx() : 0;
     }
 
 	/** {@inheritDoc} */
 	@Override
-    public void setScrollLeft(double scrollLeft) {
+    public void setScrollLeft(final double left) {
+		double scrollLeft = left;
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-        HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+        final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 
         if (scrollLeft < 0 || !isHScrollable()) {
             scrollLeft = 0;
         }
 
         htmlRendererContext.setScrollx(scrollLeft);
-        RBlock bodyBlock = (RBlock) this.getUINode();
+        final RBlock bodyBlock = (RBlock) this.getUINode();
         if (bodyBlock != null && bodyBlock.getScroll() != null)
             bodyBlock.getScroll().scrollBy(JScrollBar.HORIZONTAL, scrollLeft);
     }
@@ -843,7 +845,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
     @Override
     public double getScrollTop() {
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-        HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+        final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		return isVScrollable() ? htmlRendererContext.getScrolly() : 0;
     }
 
@@ -851,16 +853,17 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
      * {@inheritDoc}
      */
     @Override
-    public void setScrollTop(double scrollTop) {
+    public void setScrollTop(final double scroll) {
+		double scrollTop = scroll;
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-        HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+        final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 
         if (scrollTop < 0 || !isVScrollable()) {
             scrollTop = 0;
         }
 
         htmlRendererContext.setScrolly(scrollTop);
-        RBlock bodyBlock = (RBlock) this.getUINode();
+        final RBlock bodyBlock = (RBlock) this.getUINode();
         if (bodyBlock != null && bodyBlock.getScroll() != null)
             bodyBlock.getScroll().scrollBy(JScrollBar.VERTICAL, scrollTop);
     }
@@ -873,40 +876,41 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setPointerCapture(int pointerId) {
+	public void setPointerCapture(final int pointerId) {
 		// TODO Auto-generated method stub
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean toggleAttribute(String qualifiedName, boolean force) {
+	public boolean toggleAttribute(final String qualifiedName, final boolean force) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean toggleAttribute(String qualifiedName) {
+	public boolean toggleAttribute(final String qualifiedName) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Node insertAdjacentElement(String where, Node insertedElement) {
+	public Node insertAdjacentElement(final String where, final Node insertedElement) {
 		switch (where.toLowerCase()) {
 			case "afterbegin":
 				return prepend(insertedElement);
 			case "beforebegin":
 				if (this.parentNode != null) {
-					NodeListImpl list = ((NodeListImpl) this.parentNode.getChildNodes());
-					int idx = list.indexOf(this);
-					Node d = list.get(idx);
+					final NodeListImpl list = ((NodeListImpl) this.parentNode.getChildNodes());
+					final int idx = list.indexOf(this);
+					final Node d = list.get(idx);
 					list.remove(idx);
 					list.add(idx, insertedElement);
 					list.add(idx + 1, d);
 					return insertedElement;
 				}
+				break;
 			case "beforeend":
 				return appendChild(insertedElement);
 			case "afterend":
@@ -919,34 +923,34 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 
 	@Override
-	public void insertAdjacentHTML(String position, String text) {
+	public void insertAdjacentHTML(final String position, final String text) {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 		if (document != null) {
 			final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
-			try (Reader reader = new StringReader(text)) {
+			try (final Reader reader = new StringReader(text)) {
 				switch (position) {
 					case "afterbegin":
 						parser.parse(reader, this);
-						NodeListImpl list = ((NodeListImpl) this.getChildNodes());
-						Node last  = getChildNodes().item(getChildNodes().getLength()-1);
+						final NodeListImpl list = ((NodeListImpl) this.getChildNodes());
+						final Node last  = getChildNodes().item(getChildNodes().getLength()-1);
 						list.remove(last);
 						insertBefore(last, getFirstChild());
 						break;
 					case "beforebegin":
 						parser.parse(reader, this);
-						NodeListImpl nodeList = ((NodeListImpl) this.getChildNodes());
-						Node nodeLast = getChildNodes().item(getChildNodes().getLength() - 1);
+						final NodeListImpl nodeList = ((NodeListImpl) this.getChildNodes());
+						final Node nodeLast = getChildNodes().item(getChildNodes().getLength() - 1);
 						nodeList.remove(nodeLast);
-						NodeListImpl parentList = ((NodeListImpl) this.parentNode.getChildNodes());
-						int idx = parentList.indexOf(this);
-						Node d = parentList.get(idx);
+						final NodeListImpl parentList = ((NodeListImpl) this.parentNode.getChildNodes());
+						final int idx = parentList.indexOf(this);
+						final Node d = parentList.get(idx);
 						parentList.remove(idx);
 						parentList.add(idx, nodeLast);
 						parentList.add(idx + 1, d);
 						break;
 					case "beforeend":
-						NodeListImpl beforeEndList = ((NodeListImpl) this.getChildNodes());
-						Node beforeEndLast = getChildNodes().item(getChildNodes().getLength() - 1);
+						final NodeListImpl beforeEndList = ((NodeListImpl) this.getChildNodes());
+						final Node beforeEndLast = getChildNodes().item(getChildNodes().getLength() - 1);
 						beforeEndList.remove(beforeEndLast);
 
 						parser.parse(reader, this);
@@ -954,8 +958,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 						break;
 					case "afterend":
 						parser.parse(reader, this);
-						NodeListImpl nodeList2 = ((NodeListImpl) this.getChildNodes());
-						Node nodeLast2 = getChildNodes().item(getChildNodes().getLength() - 1);
+						final NodeListImpl nodeList2 = ((NodeListImpl) this.getChildNodes());
+						final Node nodeLast2 = getChildNodes().item(getChildNodes().getLength() - 1);
 						nodeList2.remove(nodeLast2);
 						appendChild(nodeLast2);
 						break;
@@ -963,7 +967,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 						break;
 
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				throw new RuntimeException(e);
 			}
 		}
@@ -973,13 +977,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	@Override
 	public DOMRect getBoundingClientRect() {
 
-		CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final Window win = doc.getDefaultView();
 		final RenderState rs  = doc.getRenderState();
 		int width = calculateWidth(true, true);
-		int height = calculateHeight(true, true);
-		String position = currentStyle.getPosition();
+		final int height = calculateHeight(true, true);
+		final String position = currentStyle.getPosition();
 		int marginLeft =  HtmlValues.getPixelSize(currentStyle.getMarginLeft(), rs, win, 0);
 		int marginTop =  HtmlValues.getPixelSize(currentStyle.getMarginTop(), rs, win, 0);
 
@@ -992,9 +996,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		if(CSSValues.ABSOLUTE.isEqual(position)){
-			int topLeft = HtmlValues.getPixelSize(currentStyle.getWidth(), rs, win, 0);
+			final int topLeft = HtmlValues.getPixelSize(currentStyle.getWidth(), rs, win, 0);
 			top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
-			String leftTxt = currentStyle.getLeft();
+			final String leftTxt = currentStyle.getLeft();
 
 			if (Strings.isBlank(leftTxt)) {
 				left = topLeft > 0 ? topLeft / 2 : topLeft;
@@ -1008,15 +1012,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 			if (!(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
 
-				HTMLElementImpl p = (HTMLElementImpl) n;
-				CSSStyleDeclaration pCurrentStyle = p.getCurrentStyle();
-				String positionTxt = pCurrentStyle.getPosition();
+				final HTMLElementImpl p = (HTMLElementImpl) n;
+				final CSSStyleDeclaration pCurrentStyle = p.getCurrentStyle();
+				final String positionTxt = pCurrentStyle.getPosition();
 				if (CSSValues.ABSOLUTE.isEqual(positionTxt)) {
 
-					String topTxt = pCurrentStyle.getTop();
-					String leftTxt = pCurrentStyle.getLeft();
-					int scrollTop = (int) p.getScrollTop();
-					int scrollLeft = (int) p.getScrollLeft();
+					final String topTxt = pCurrentStyle.getTop();
+					final String leftTxt = pCurrentStyle.getLeft();
+					final int scrollTop = (int) p.getScrollTop();
+					final int scrollLeft = (int) p.getScrollLeft();
 
 					if (Strings.isNotBlank(topTxt)) {
 						top = HtmlValues.getPixelSize(topTxt, rs, win, 0);
@@ -1055,14 +1059,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public DOMRectList getClientRects() {
-		DOMRectListImpl list = new DOMRectListImpl();
-		CSSStyleDeclaration style = ((HTMLElementImpl) this).getCurrentStyle();
+		final DOMRectListImpl list = new DOMRectListImpl();
+		final CSSStyleDeclaration style = ((HTMLElementImpl) this).getCurrentStyle();
 		String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
 		if (!"none".equals(display)) {
 			for (Node n = getParentNode(); n != null; n = n.getPreviousSibling()) {
 				if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
-					HTMLElementImpl p = (HTMLElementImpl) n;
-					CSSStyleDeclaration st = p.getCurrentStyle();
+					final HTMLElementImpl p = (HTMLElementImpl) n;
+					final CSSStyleDeclaration st = p.getCurrentStyle();
 					display = st.getDisplay();
 				}
 			}
@@ -1083,13 +1087,13 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByClassName(String classNames) {
+	public HTMLCollection getElementsByClassName(final String classNames) {
 		return new HTMLCollectionImpl(this, new ClassNameFilter(classNames));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByTagName(String tagname) {
+	public HTMLCollection getElementsByTagName(final String tagname) {
 		if ("*".equals(tagname)) {
 			return new HTMLCollectionImpl(this, new ElementFilter(null));
 		} else {
@@ -1099,7 +1103,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
+	public HTMLCollection getElementsByTagNameNS(final String namespaceURI, final String localName) {
 
 		if("*".equals(namespaceURI) && "*".equals(localName)) {
 			return new HTMLCollectionImpl(this, new ElementFilter(null));
@@ -1119,7 +1123,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	public Element getLastElementChild() {
 		long count = nodeList.stream().filter(n -> n instanceof Element).count();
 		if(count == 0) count = 1;
-		Stream<Node> stream = nodeList.stream();
+		final Stream<Node> stream = nodeList.stream();
 		return (Element) stream.filter(n -> n instanceof Element).skip(count - 1).findFirst().orElse(null);
 	}
 
@@ -1131,14 +1135,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public Element querySelector(String selectors) {
+	public Element querySelector(final String selectors) {
 		try {
-			SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
-			List<Element> elem = new ArrayList<>();
+			final SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+			final List<Element> elem = new ArrayList<>();
 			if (selectorList != null) {
-				NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
-					for (Selector selector : selectorList) {
+					for (final Selector selector : selectorList) {
 						if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
 							elem.add((Element) child);
 						}
@@ -1146,14 +1150,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				});
 			}
 			return elem.size() > 0 ? elem.get(0) : null;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeList querySelectorAll(String selector) {
+	public NodeList querySelectorAll(final String selector) {
 
 		final ArrayList<Node> al = new ArrayList<>();
 
@@ -1170,11 +1174,11 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		try {
-			SelectorList selectorList = CSSUtilities.getSelectorList(selector);
+			final SelectorList selectorList = CSSUtilities.getSelectorList(selector);
 			if (selectorList != null) {
-				NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
-					for (Selector select : selectorList) {
+					for (final Selector select : selectorList) {
 						if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
 							al.add(child);
 						}
@@ -1182,14 +1186,14 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				});
 			}
 			return new NodeListImpl(al);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void assignAttributeField(String normalName, String value) {
+	public void assignAttributeField(final String normalName, final String value) {
 		boolean isName = false;
 		if ("id".equalsIgnoreCase(normalName) || (isName = "name".equals(normalName))) {
 			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
@@ -1207,30 +1211,30 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 
 	@Override
-	public boolean isEqualNode(Node arg) {
+	public boolean isEqualNode(final Node arg) {
 		if (!super.isEqualNode(arg)) {
 			return false;
 		}
 
-		boolean hasAttrs = hasAttributes();
+		final boolean hasAttrs = hasAttributes();
 		if (hasAttrs != arg.hasAttributes()) {
 			return false;
 		}
 		if (hasAttrs) {
-			NamedNodeMap map = getAttributes();
-			NamedNodeMap mapArg = arg.getAttributes();
+			final NamedNodeMap map = getAttributes();
+			final NamedNodeMap mapArg = arg.getAttributes();
 			if (map.getLength() != mapArg.getLength()) {
 				return false;
 			}
 
-			for (Node n1 : Nodes.iterable(map)) {
+			for (final Node n1 : Nodes.iterable(map)) {
 				if (n1.getLocalName() == null) {
-					Node n2 = mapArg.getNamedItem(n1.getNodeName());
+					final Node n2 = mapArg.getNamedItem(n1.getNodeName());
 					if (n2 == null || !n1.isEqualNode(n2)) {
 						return false;
 					}
 				} else {
-					Node n2 = mapArg.getNamedItemNS(n1.getNamespaceURI(), n1.getLocalName());
+					final Node n2 = mapArg.getNamedItemNS(n1.getNamespaceURI(), n1.getLocalName());
 					if (n2 == null || !n1.isEqualNode(n2)) {
 						return false;
 					}
@@ -1246,12 +1250,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	 *
 	 * @param buffer a {@link java.lang.StringBuilder} object.
 	 */
-	public void appendOuterHTMLImpl(StringBuilder buffer) {
+	public void appendOuterHTMLImpl(final StringBuilder buffer) {
 		final String tagName = getTagName().toUpperCase();
 		buffer.append('<');
 		buffer.append(tagName);
-		for (Node attrNode : Nodes.iterable(map)) {
-			Attr attr = (Attr) attrNode;
+		for (final Node attrNode : Nodes.iterable(map)) {
+			final Attr attr = (Attr) attrNode;
 			buffer.append(' ');
 			buffer.append(attr.getName());
 			buffer.append("=\"");
@@ -1278,15 +1282,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 	}
 
     private boolean isHScrollable() {
-        String overflow;
-        CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+        final String overflow;
+        final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
         overflow = currentStyle.getOverflow();
         int widthChild = 0;
 
         for (final Node child : (NodeListImpl) this.getChildNodes()) {
 			if (child instanceof HTMLElementImpl) {
-				CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
-				Integer cliInteger =  ((HTMLElementImpl) child).getClientWidth();
+				final CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+				final Integer cliInteger =  ((HTMLElementImpl) child).getClientWidth();
 				if(cliInteger != null) widthChild += cliInteger;
 				widthChild += HtmlValues.getPixelSize(pCurrentStyle.getLeft(), null, document.getDefaultView(), 0);
 				widthChild += HtmlValues.getPixelSize(pCurrentStyle.getRight(), null, document.getDefaultView(), 0);
@@ -1296,15 +1300,15 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
     }
 
     private boolean isVScrollable() {
-        String overflow;
-        CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+        final String overflow;
+        final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
         overflow = currentStyle.getOverflow();
         int heightChild = 0;
 
 		for (final Node child : (NodeListImpl) this.getChildNodes()) {
 			if (child instanceof HTMLElementImpl) {
 				heightChild += ((HTMLElementImpl) child).getClientHeight();
-				CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+				final CSSStyleDeclaration pCurrentStyle = ((HTMLElementImpl)child).getCurrentStyle();
 				heightChild += HtmlValues.getPixelSize(pCurrentStyle.getTop(), null, document.getDefaultView(), 0);
 			}
 		}
@@ -1312,7 +1316,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
     }
 
-	public int calculateWidth(boolean border, boolean padding) {
+	public int calculateWidth(final boolean isBorder, final boolean isPadding) {
+		boolean border = isBorder;
+		boolean padding = isPadding;
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
@@ -1320,12 +1326,12 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		final ComputedCSSStyleDeclaration computedStyle = ((HTMLElementImpl)this).getComputedStyle();
 		String width = currentStyle.getWidth();
-		String borderLeftWidth = currentStyle.getBorderLeftWidth();
-		String borderRightWidth = currentStyle.getBorderRightWidth();
-		String boxSizing = currentStyle.getBoxSizing();
-		String display = computedStyle.getDisplay();
-		int paddingRight = HtmlValues.getPixelSize(currentStyle.getPaddingRight(), null, doc.getDefaultView(), 0);
-		int paddingLeft = HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), null, doc.getDefaultView(), 0);
+		final String borderLeftWidth = currentStyle.getBorderLeftWidth();
+		final String borderRightWidth = currentStyle.getBorderRightWidth();
+		final String boxSizing = currentStyle.getBoxSizing();
+		final String display = computedStyle.getDisplay();
+		final int paddingRight = HtmlValues.getPixelSize(currentStyle.getPaddingRight(), null, doc.getDefaultView(), 0);
+		final int paddingLeft = HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), null, doc.getDefaultView(), 0);
 		int sizeWidth = preferredSize.width;
 
 		if (this instanceof HTMLHeadElement) {
@@ -1372,9 +1378,9 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			width = "-1px";
 		}
 
-		Node nodeObj = getParentNode();
+		final Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
-			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
+			final HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
 			final int client = elem.getClientWidth();
 			if(client > 0) {
 				sizeWidth = client;
@@ -1405,18 +1411,20 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return widthSize;
 	}
 
-	public int calculateHeight(boolean border, boolean padding) {
+	public int calculateHeight(final boolean isBorder, final boolean isPadding) {
+		boolean border = isBorder;
+		boolean padding = isPadding;
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
 		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
 		String height = currentStyle.getHeight();
-		String borderTopWidth = currentStyle.getBorderTopWidth();
-		String borderBottomWidth = currentStyle.getBorderBottomWidth();
-		String boxSizing = currentStyle.getBoxSizing();
-		String dispaly = currentStyle.getDisplay();
-		String position = currentStyle.getPosition();
+		final String borderTopWidth = currentStyle.getBorderTopWidth();
+		final String borderBottomWidth = currentStyle.getBorderBottomWidth();
+		final String boxSizing = currentStyle.getBoxSizing();
+		final String dispaly = currentStyle.getDisplay();
+		final String position = currentStyle.getPosition();
 		int sizeHeight = preferredSize.height;
 
 		if (getParentNode() == null || CSSValues.NONE.isEqual(dispaly)) {
@@ -1437,7 +1445,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 		final Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
-			HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
+			final HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
 			final int client = elem.getClientHeight();
 			if(client!= -1) {
 				sizeHeight = client;
@@ -1453,8 +1461,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 
 		if (padding) {
-			String paddingTop = currentStyle.getPaddingTop();
-			String paddingBottom = currentStyle.getPaddingBottom();
+			final String paddingTop = currentStyle.getPaddingTop();
+			final String paddingBottom = currentStyle.getPaddingBottom();
 			heightSize += HtmlValues.getPixelSize(paddingTop, null, doc.getDefaultView(), 0);
 			heightSize += HtmlValues.getPixelSize(paddingBottom, null, doc.getDefaultView(), 0);
 		}
@@ -1467,8 +1475,8 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return heightSize;
 	}
 
-	private int textHeight(ElementImpl elm, String position) {
-		AtomicInteger h = new AtomicInteger(CSSValues.ABSOLUTE.isEqual(position) ? -1 : 0);
+	private int textHeight(final ElementImpl elm, final String position) {
+		final AtomicInteger h = new AtomicInteger(CSSValues.ABSOLUTE.isEqual(position) ? -1 : 0);
 		if (elm instanceof HTMLTextAreaElement ||
 				elm instanceof HTMLBaseFontElement ||
 				elm instanceof HTMLScriptElement ||
@@ -1490,6 +1498,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 				case Node.ELEMENT_NODE:
 					final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)child).getCurrentStyle();
 					h.addAndGet(textHeight((ElementImpl) child, currentStyle.getPosition()));
+					break;
 				default:
 					break;
 			}

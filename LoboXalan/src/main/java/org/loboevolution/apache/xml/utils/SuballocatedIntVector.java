@@ -78,7 +78,7 @@ public class SuballocatedIntVector {
    * @param blocksize Size of block to allocate
    * @param numblocks Number of blocks to allocate
    */
-  public SuballocatedIntVector(int blocksize, int numblocks) {
+  public SuballocatedIntVector(int blocksize, final int numblocks) {
     // m_blocksize = blocksize;
     for (m_SHIFT = 0; 0 != (blocksize >>>= 1); ++m_SHIFT) ;
     m_blocksize = 1 << m_SHIFT;
@@ -97,7 +97,7 @@ public class SuballocatedIntVector {
    *
    * @param blocksize Size of block to allocate
    */
-  public SuballocatedIntVector(int blocksize) {
+  public SuballocatedIntVector(final int blocksize) {
     this(blocksize, NUMBLOCKS_DEFAULT);
   }
 
@@ -115,8 +115,8 @@ public class SuballocatedIntVector {
    *
    * @param value Int to add to the list
    */
-  public void addElement(int value) {
-    int indexRelativeToCache = m_firstFree - m_buildCacheStartIndex;
+  public void addElement(final int value) {
+    final int indexRelativeToCache = m_firstFree - m_buildCacheStartIndex;
 
     // Is the new index an index into the cache row of m_map?
     if (indexRelativeToCache >= 0 && indexRelativeToCache < m_blocksize) {
@@ -130,12 +130,12 @@ public class SuballocatedIntVector {
       // long enough and catch exceptions) yield no noticable
       // improvement.
 
-      int index = m_firstFree >>> m_SHIFT;
-      int offset = m_firstFree & m_MASK;
+      final int index = m_firstFree >>> m_SHIFT;
+      final int offset = m_firstFree & m_MASK;
 
       if (index >= m_map.length) {
-        int newsize = index + m_numblocks;
-        int[][] newMap = new int[newsize][];
+        final int newsize = index + m_numblocks;
+        final int[][] newMap = new int[newsize][];
         System.arraycopy(m_map, 0, newMap, 0, m_map.length);
         m_map = newMap;
       }
@@ -162,15 +162,15 @@ public class SuballocatedIntVector {
    * @param value object to set
    * @param at Index of where to set the object
    */
-  public void setElementAt(int value, int at) {
+  public void setElementAt(final int value, final int at) {
     if (at < m_blocksize) m_map0[at] = value;
     else {
-      int index = at >>> m_SHIFT;
-      int offset = at & m_MASK;
+      final int index = at >>> m_SHIFT;
+      final int offset = at & m_MASK;
 
       if (index >= m_map.length) {
-        int newsize = index + m_numblocks;
-        int[][] newMap = new int[newsize][];
+        final int newsize = index + m_numblocks;
+        final int[][] newMap = new int[newsize][];
         System.arraycopy(m_map, 0, newMap, 0, m_map.length);
         m_map = newMap;
       }
@@ -198,7 +198,7 @@ public class SuballocatedIntVector {
    *     to create the block in that case, or return 0. Try/Catch is _supposed_ to be nearly free
    *     when not thrown to. Do we believe that? Should we have a separate safeElementAt?
    */
-  public int elementAt(int i) {
+  public int elementAt(final int i) {
     // This is actually a significant optimization!
     if (i < m_blocksize) return m_map0[i];
 
@@ -214,12 +214,12 @@ public class SuballocatedIntVector {
    * @return the index of the first occurrence of the object argument in this vector at position
    *     index or later in the vector; returns -1 if the object is not found.
    */
-  public int indexOf(int elem, int index) {
+  public int indexOf(final int elem, final int index) {
     if (index >= m_firstFree) return -1;
 
     int bindex = index >>> m_SHIFT;
     int boffset = index & m_MASK;
-    int maxindex = m_firstFree >>> m_SHIFT;
+    final int maxindex = m_firstFree >>> m_SHIFT;
     int[] block;
 
     for (; bindex < maxindex; ++bindex) {
@@ -230,7 +230,7 @@ public class SuballocatedIntVector {
       boffset = 0; // after first
     }
     // Last block may need to stop before end
-    int maxoffset = m_firstFree & m_MASK;
+    final int maxoffset = m_firstFree & m_MASK;
     block = m_map[maxindex];
     for (int offset = boffset; offset < maxoffset; ++offset)
       if (block[offset] == elem) return offset + maxindex * m_blocksize;
@@ -246,7 +246,7 @@ public class SuballocatedIntVector {
    * @return the index of the first occurrence of the object argument in this vector at position
    *     index or later in the vector; returns -1 if the object is not found.
    */
-  public int indexOf(int elem) {
+  public int indexOf(final int elem) {
     return indexOf(elem, 0);
   }
 }

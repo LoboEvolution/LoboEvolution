@@ -58,10 +58,10 @@ public class elementsetattributens04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
+        final Document doc;
+        final Element element;
         String qualifiedName;
-        List<String> qualifiedNames = new ArrayList<>();
+        final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("/");
         qualifiedNames.add("//");
         qualifiedNames.add("\\");
@@ -81,7 +81,7 @@ public class elementsetattributens04Test extends LoboUnitTest {
                 boolean success = false;
                 try {
                     element.setAttributeNS("http://www.w3.org/DOM/Test/L2", qualifiedName, "test");
-                } catch (DOMException ex) {
+                } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }
                 assertTrue("elementsetattributens04", success);

@@ -54,10 +54,10 @@ public class elementsetidattributens14Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection elemList;
-        Element pElem;
-        Element acronymElem;
+        final Element pElem;
+        final Element acronymElem;
         NamedNodeMap attributesMap;
         Attr attr;
         boolean id = false;

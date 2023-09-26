@@ -58,11 +58,11 @@ public class nodenotationnodevalueTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notations;
-        Node notationNode;
-        String notationValue;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notations;
+        final Node notationNode;
+        final String notationValue;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);

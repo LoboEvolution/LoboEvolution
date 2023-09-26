@@ -61,7 +61,7 @@ public class StreamResult implements Result {
      *
      * @param outputStream A valid OutputStream reference.
      */
-    public StreamResult(OutputStream outputStream) {
+    public StreamResult(final OutputStream outputStream) {
         setOutputStream(outputStream);
     }
 
@@ -75,7 +75,7 @@ public class StreamResult implements Result {
      *
      * @param writer  A valid Writer reference.
      */
-    public StreamResult(Writer writer) {
+    public StreamResult(final Writer writer) {
         setWriter(writer);
     }
 
@@ -84,7 +84,7 @@ public class StreamResult implements Result {
      *
      * @param systemId Must be a String that conforms to the URI syntax.
      */
-    public StreamResult(String systemId) {
+    public StreamResult(final String systemId) {
         this.systemId = systemId;
     }
 
@@ -93,7 +93,7 @@ public class StreamResult implements Result {
      *
      * @param f Must a non-null File reference.
      */
-    public StreamResult(File f) {
+    public StreamResult(final File f) {
         //convert file to appropriate URI, f.toURI().toASCIIString()
         //converts the URI to string as per rule specified in
         //RFC 2396,
@@ -108,7 +108,7 @@ public class StreamResult implements Result {
      *
      * @param outputStream A valid OutputStream reference.
      */
-    public void setOutputStream(OutputStream outputStream) {
+    public void setOutputStream(final OutputStream outputStream) {
         this.outputStream = outputStream;
     }
 
@@ -132,7 +132,7 @@ public class StreamResult implements Result {
      *
      * @param writer  A valid Writer reference.
      */
-    public void setWriter(Writer writer) {
+    public void setWriter(final Writer writer) {
         this.writer = writer;
     }
 
@@ -153,7 +153,7 @@ public class StreamResult implements Result {
      *
      * @param systemId The system identifier as a URI string.
      */
-    public void setSystemId(String systemId) {
+    public void setSystemId(final String systemId) {
         this.systemId = systemId;
     }
 
@@ -163,7 +163,7 @@ public class StreamResult implements Result {
      *
      * @param f Must a non-null File reference.
      */
-    public void setSystemId(File f) {
+    public void setSystemId(final File f) {
         //convert file to appropriate URI, f.toURI().toASCIIString()
         //converts the URI to string as per rule specified in
         //RFC 2396,

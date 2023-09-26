@@ -53,14 +53,14 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild21Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entitiesMap;
-        Node ent;
-        Document doc1;
-        DocumentType docType1;
-        NamedNodeMap notationsMap;
-        Notation notation;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entitiesMap;
+        final Node ent;
+        final Document doc1;
+        final DocumentType docType1;
+        final NamedNodeMap notationsMap;
+        final Notation notation;
         Node replacedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
@@ -75,7 +75,7 @@ public class nodereplacechild21Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replacedChild = docType.replaceChild(notation, ent);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("NO_MODIFICATION_ALLOWED_ERR1_nodereplacechild21", success);
@@ -85,7 +85,7 @@ public class nodereplacechild21Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replacedChild = docType.replaceChild(ent, docType);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("NO_MODIFICATION_ALLOWED_ERR2_nodereplacechild21", success);

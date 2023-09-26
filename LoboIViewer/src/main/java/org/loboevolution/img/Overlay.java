@@ -67,7 +67,7 @@ public abstract class Overlay {
 	 *
 	 * @param c a {@link org.loboevolution.img.OverlayComponent} object.
 	 */
-	public final void addOverlayComponent(OverlayComponent c) {
+	public final void addOverlayComponent(final OverlayComponent c) {
 		overlayComponents.add(c);
 	}
 
@@ -76,7 +76,7 @@ public abstract class Overlay {
 	 *
 	 * @param c a {@link org.loboevolution.img.OverlayComponent} object.
 	 */
-	public final void removeOverlayComponent(OverlayComponent c) {
+	public final void removeOverlayComponent(final OverlayComponent c) {
 		overlayComponents.remove(c);
 	}
 
@@ -84,7 +84,7 @@ public abstract class Overlay {
 	 * Causes the overlay to be repainted.
 	 */
 	public void repaint() {
-		for (OverlayComponent overlayComponent : overlayComponents)
+		for (final OverlayComponent overlayComponent : overlayComponents)
 			overlayComponent.repaint();
 	}
 

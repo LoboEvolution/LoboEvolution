@@ -63,12 +63,12 @@ public class hc_nodeinsertbeforerefchildnonexistentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node refChild;
-        Node newChild;
-        HTMLCollection elementList;
-        Node elementNode;
-        Node insertedNode;
+        final Document doc;
+        final Node refChild;
+        final Node newChild;
+        final HTMLCollection elementList;
+        final Node elementNode;
+        final Node insertedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createElement("br");
         refChild = doc.createElement("b");
@@ -79,7 +79,7 @@ public class hc_nodeinsertbeforerefchildnonexistentTest extends LoboUnitTest {
             boolean success = false;
             try {
                 insertedNode = elementNode.insertBefore(newChild, refChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("throw_NOT_FOUND_ERR", success);

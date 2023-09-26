@@ -31,7 +31,7 @@ import javax.swing.*;
 public class DefaultTabCloseButtonListener implements ITabCloseButtonListener {
 
     @Override
-    public void tabCloseButtonPressed(JTabbedPane tabbedPane, int tabIndex) {
+    public void tabCloseButtonPressed(final JTabbedPane tabbedPane, final int tabIndex) {
         tabbedPane.removeTabAt(tabIndex);
     }
 }

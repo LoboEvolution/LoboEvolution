@@ -51,20 +51,20 @@ import static org.junit.Assert.assertTrue;
 public class documentnormalizedocument08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element elem;
-        DOMConfiguration domConfig;
+        final DOMConfiguration domConfig;
         HTMLCollection elemList;
         CDATASection newChild;
-        Node oldChild;
+        final Node oldChild;
         Node retval;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
-        List<DOMError> errors;
+        final List<DOMError> errors;
 
         DOMError error;
-        int length;
-        NodeList childNodes;
+        final int length;
+        final NodeList childNodes;
         String type;
         int splittedCount = 0;
         int severity;

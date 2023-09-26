@@ -47,19 +47,19 @@ import static org.junit.Assert.assertTrue;
 public class nodeisequalnode22Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc1;
-        Document doc2;
-        DOMImplementation domImpl1;
-        DOMImplementation domImpl2;
-        DocumentType docType1;
-        DocumentType docType2;
-        boolean isEqual;
-        String nullPubId = null;
+        final Document doc1;
+        final Document doc2;
+        final DOMImplementation domImpl1;
+        final DOMImplementation domImpl2;
+        final DocumentType docType1;
+        final DocumentType docType2;
+        final boolean isEqual;
+        final String nullPubId = null;
 
-        String nullSysId = null;
+        final String nullSysId = null;
 
-        DocumentType oldDocType;
-        String rootName;
+        final DocumentType oldDocType;
+        final String rootName;
         doc1 = sampleXmlFile("barfoo.xml");
         oldDocType = doc1.getDoctype();
         rootName = oldDocType.getName();

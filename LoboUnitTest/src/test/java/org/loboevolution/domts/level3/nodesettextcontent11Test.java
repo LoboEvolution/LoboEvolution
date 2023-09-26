@@ -45,16 +45,16 @@ import static org.junit.Assert.assertEquals;
 public class nodesettextcontent11Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Element elem;
-        Element elemChild;
-        Text txt;
-        Comment comment;
-        EntityReference entRef;
-        CDATASection cdata;
-        ProcessingInstruction pi;
-        String textContent;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Element elem;
+        final Element elemChild;
+        final Text txt;
+        final Comment comment;
+        final EntityReference entRef;
+        final CDATASection cdata;
+        final ProcessingInstruction pi;
+        final String textContent;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");

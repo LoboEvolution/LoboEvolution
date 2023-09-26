@@ -63,13 +63,13 @@ public class setNamedItemNS01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element anotherElement;
-        NamedNodeMap anotherMap;
-        Node arg;
-        Element testAddress;
-        NamedNodeMap map;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element anotherElement;
+        final NamedNodeMap anotherMap;
+        final Node arg;
+        final Element testAddress;
+        final NamedNodeMap map;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         anotherElement = (Element) elementList.item(2);
@@ -80,7 +80,7 @@ public class setNamedItemNS01Test extends LoboUnitTest {
         boolean success = false;
         try {
             map.setNamedItemNS(arg);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
         }
         assertTrue("throw_INUSE_ATTRIBUTE_ERR", success);

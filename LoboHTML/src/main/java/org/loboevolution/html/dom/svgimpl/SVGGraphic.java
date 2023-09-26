@@ -42,7 +42,7 @@ public abstract class SVGGraphic extends SVGTransformableImpl implements SVGLang
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public SVGGraphic(String name) {
+	public SVGGraphic(final String name) {
 		super(name);
 	}
 
@@ -54,7 +54,7 @@ public abstract class SVGGraphic extends SVGTransformableImpl implements SVGLang
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXMLlang(String xmllang) {
+	public void setXMLlang(final String xmllang) {
 		setAttribute("xml:lang", xmllang);
 
 	}
@@ -67,7 +67,7 @@ public abstract class SVGGraphic extends SVGTransformableImpl implements SVGLang
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXMLspace(String xmlspace) {
+	public void setXMLspace(final String xmlspace) {
 		setAttribute("xml:space", xmlspace);
 	}
 
@@ -77,23 +77,23 @@ public abstract class SVGGraphic extends SVGTransformableImpl implements SVGLang
 	 * @param graphics a {@link java.awt.Graphics2D} object.
 	 * @param shape a {@link java.awt.Shape} object.
 	 */
-	protected void drawable(Graphics2D graphics, Shape shape) {
+	protected void drawable(final Graphics2D graphics, final Shape shape) {
 		final Paint fillPaint = getFillPaint(shape);
 		final Paint strokePaint = getStrokelPaint(shape);
 		final BasicStroke stroke = getStroke();
-		SVGClipPathElementImpl clipPath = getClippingPath();
-		SVGAnimatedTransformList animateTransformList = getTransform();
+		final SVGClipPathElementImpl clipPath = getClippingPath();
+		final SVGAnimatedTransformList animateTransformList = getTransform();
 		graphics.setStroke(stroke);
 
 		if (clipPath != null) {
-			Shape clipShape = clipPath.getClippingShape(this);
+			final Shape clipShape = clipPath.getClippingShape(this);
 			if (clipShape != null) {
 				graphics.setClip(clipShape);
 			}
 		}
 
 		if (animateTransformList != null) {
-			SVGTransformList transformList = animateTransformList.getBaseVal();
+			final SVGTransformList transformList = animateTransformList.getBaseVal();
 			if (transformList != null) {
 				transform(graphics, transformList);
 			}
@@ -115,12 +115,12 @@ public abstract class SVGGraphic extends SVGTransformableImpl implements SVGLang
 		}
 	}
 
-	private void transform(Graphics2D graphics, SVGTransformList transformList) {
-		int numPoints = transformList.getNumberOfItems();
+	private void transform(final Graphics2D graphics, final SVGTransformList transformList) {
+		final int numPoints = transformList.getNumberOfItems();
 		for (int i = 0; i < numPoints; i++) {
-			SVGTransform point = transformList.getItem(i);
-			SVGMatrixImpl mtrx = (SVGMatrixImpl) point.getMatrix();
-			AffineTransform affine = new AffineTransform();
+			final SVGTransform point = transformList.getItem(i);
+			final SVGMatrixImpl mtrx = (SVGMatrixImpl) point.getMatrix();
+			final AffineTransform affine = new AffineTransform();
 			switch (point.getType()) {
 			case SVGTransform.SVG_TRANSFORM_MATRIX:
                 case SVGTransform.SVG_TRANSFORM_SKEWY:
@@ -149,12 +149,12 @@ public abstract class SVGGraphic extends SVGTransformableImpl implements SVGLang
 	 *
 	 * @param elem a {@link org.loboevolution.html.dom.svgimpl.SVGElementImpl} object.
 	 */
-	protected void animate(SVGElementImpl elem) {
-		NodeListImpl children = (NodeListImpl)elem.getChildNodes();
+	protected void animate(final SVGElementImpl elem) {
+		final NodeListImpl children = (NodeListImpl)elem.getChildNodes();
 		children.forEach(child -> {
 			if (child instanceof SVGAnimateElement || child instanceof SVGAnimateTransformElement) {
-				SVGAnimateElementImpl svga = (SVGAnimateElementImpl) child;				
-				SVGAnimateImpl animate = new SVGAnimateImpl(elem, svga);
+				final SVGAnimateElementImpl svga = ( SVGAnimateElementImpl) child;
+				final SVGAnimateImpl animate = new SVGAnimateImpl(elem, svga);
 				svga.setAnimate(animate);
 			}
 		});

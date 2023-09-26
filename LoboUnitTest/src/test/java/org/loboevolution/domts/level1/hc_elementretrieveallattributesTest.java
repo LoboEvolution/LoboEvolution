@@ -35,6 +35,9 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 
@@ -56,18 +59,15 @@ public class hc_elementretrieveallattributesTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection addressList;
-        Element testAddress;
-        NamedNodeMap attributes;
+        final Document doc;
+        final HTMLCollection addressList;
+        final Element testAddress;
+        final NamedNodeMap attributes;
         Attr attribute;
         String attributeName;
-        java.util.Collection<String> actual = new java.util.ArrayList<>();
+        final List<String> actual = new ArrayList<>();
 
-        java.util.Collection<String> htmlExpected = new java.util.ArrayList<>();
-        htmlExpected.add("title");
-
-        java.util.Collection<String> expected = new java.util.ArrayList<>();
+        final List<String> expected = new ArrayList<>();
         expected.add("title");
         expected.add("dir");
 

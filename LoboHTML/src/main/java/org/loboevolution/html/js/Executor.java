@@ -61,7 +61,7 @@ public class Executor {
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @return a {@link org.mozilla.javascript.Context} object.
 	 */
-	public static Context createContext(URL codeSource, UserAgentContext ucontext) {
+	public static Context createContext(final URL codeSource, final UserAgentContext ucontext) {
 		final Context ctx = Context.enter();
 		ctx.setLanguageVersion(Context.VERSION_1_8);
 		ctx.setOptimizationLevel(-1);
@@ -77,7 +77,7 @@ public class Executor {
 	 * @param obj an array of {@link java.lang.Object} objects.
 	 * @return a boolean.
 	 */
-	public static boolean executeFunction(NodeImpl element, Function f, Event event, Object[] obj) {
+	public static boolean executeFunction(final NodeImpl element, final Function f, final Event event, final Object[] obj) {
 		return Executor.executeFunction(element, element, f, event, obj);
 	}
 
@@ -91,7 +91,7 @@ public class Executor {
 	 * @param obj an array of {@link java.lang.Object} objects.
 	 * @return a boolean.
 	 */
-	public static boolean executeFunction(NodeImpl element, Object thisObject, Function f, Event event, Object[] obj) {
+	public static boolean executeFunction(final NodeImpl element, final Object thisObject, final Function f, final Event event, final Object[] obj) {
 		final Document doc = element.getOwnerDocument();
 		if (doc == null) {
 			throw new IllegalStateException("Element does not belong to a document.");
@@ -114,7 +114,7 @@ public class Executor {
 					return true;
 				}
 				return (Boolean) result;
-			} catch (java.util.MissingResourceException mre) {
+			} catch (final java.util.MissingResourceException mre) {
 				logger.log(Level.WARNING, mre.getMessage());
 				return true;
 			} catch (final Throwable thrown) {
@@ -135,8 +135,8 @@ public class Executor {
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @return a boolean.
 	 */
-	public static boolean executeFunction(Scriptable thisScope, Function f, URL codeSource,
-			UserAgentContext ucontext) {
+	public static boolean executeFunction(final Scriptable thisScope, final Function f,final  URL codeSource,
+										  final UserAgentContext ucontext) {
 		final Context ctx = createContext(codeSource, ucontext);
 		try {
 			try {

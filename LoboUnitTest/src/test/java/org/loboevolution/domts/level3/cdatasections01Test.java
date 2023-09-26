@@ -52,14 +52,14 @@ public class cdatasections01Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element elem;
-        CDATASection newCdata;
-        CDATASection cdata;
-        String nodeName;
-        DOMConfiguration domConfig;
+        final CDATASection newCdata;
+        final CDATASection cdata;
+        final String nodeName;
+        final DOMConfiguration domConfig;
         HTMLCollection pList;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");

@@ -60,7 +60,7 @@ public class BaseMenuUI extends BasicMenuUI {
 		public void mouseEntered(final MouseEvent evt) {
 			super.mouseEntered(evt);
 
-			JMenu menu = (JMenu) evt.getSource();
+			final JMenu menu = (JMenu) evt.getSource();
 			if (menu.isTopLevelMenu() && menu.isRolloverEnabled()) {
 				menu.getModel().setRollover(true);
 				menuItem.repaint();
@@ -71,8 +71,8 @@ public class BaseMenuUI extends BasicMenuUI {
 		public void mouseExited(final MouseEvent evt) {
 			super.mouseExited(evt);
 
-			JMenu menu = (JMenu) evt.getSource();
-			ButtonModel model = menu.getModel();
+			final JMenu menu = (JMenu) evt.getSource();
+			final ButtonModel model = menu.getModel();
 			if (menu.isRolloverEnabled()) {
 				model.setRollover(false);
 				menuItem.repaint();
@@ -89,7 +89,7 @@ public class BaseMenuUI extends BasicMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected MouseInputListener createMouseInputListener(JComponent c) {
+	protected MouseInputListener createMouseInputListener(final JComponent c) {
 		return new MyMouseInputHandler();
 	}
 
@@ -97,7 +97,7 @@ public class BaseMenuUI extends BasicMenuUI {
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
-		Boolean isRolloverEnabled = (Boolean) UIManager.get("MenuBar.rolloverEnabled");
+		final Boolean isRolloverEnabled = (Boolean) UIManager.get("MenuBar.rolloverEnabled");
 		if (isRolloverEnabled) {
 			menuItem.setRolloverEnabled(true);
 		}
@@ -105,7 +105,7 @@ public class BaseMenuUI extends BasicMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installUI(JComponent c) {
+	public void installUI(final JComponent c) {
 		super.installUI(c);
 		c.setOpaque(false);
 	}
@@ -120,13 +120,13 @@ public class BaseMenuUI extends BasicMenuUI {
 	 * @param w a int.
 	 * @param h a int.
 	 */
-	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
-		JMenuItem mi = (JMenuItem) c;
+	protected void paintBackground(final Graphics g, final JComponent c, final int x, final int y, final int w, final int h) {
+		final JMenuItem mi = (JMenuItem) c;
 		Color backColor = mi.getBackground();
 		if (backColor == null || backColor instanceof UIResource) {
 			backColor = AbstractLookAndFeel.getMenuBackgroundColor();
 		}
-		ButtonModel model = mi.getModel();
+		final ButtonModel model = mi.getModel();
 		if (c.getParent() instanceof JMenuBar) {
 			if (model.isRollover() || model.isArmed() || c instanceof JMenu && model.isSelected()) {
 				backColor = AbstractLookAndFeel.getMenuSelectionBackgroundColor();
@@ -148,9 +148,9 @@ public class BaseMenuUI extends BasicMenuUI {
 				g.fillRect(x, y, w, h);
 				g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
 			} else if (!AbstractLookAndFeel.getTheme().isMenuOpaque()) {
-				Graphics2D g2D = (Graphics2D) g;
-				Composite savedComposite = g2D.getComposite();
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+				final Graphics2D g2D = (Graphics2D) g;
+				final Composite savedComposite = g2D.getComposite();
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 						AbstractLookAndFeel.getTheme().getMenuAlpha());
 				g2D.setComposite(alpha);
 				g2D.setColor(backColor);
@@ -167,19 +167,19 @@ public class BaseMenuUI extends BasicMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
+	protected void paintBackground(final Graphics g, final JMenuItem menuItem, final Color bgColor) {
 		if (menuItem.isOpaque()) {
-			int w = menuItem.getWidth();
-			int h = menuItem.getHeight();
+			final int w = menuItem.getWidth();
+			final int h = menuItem.getHeight();
 			paintBackground(g, menuItem, 0, 0, w, h);
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
-		ButtonModel model = menuItem.getModel();
-		Graphics2D g2D = (Graphics2D) g;
+	protected void paintText(final Graphics g, final JMenuItem menuItem, final Rectangle textRect, final String text) {
+		final ButtonModel model = menuItem.getModel();
+		final Graphics2D g2D = (Graphics2D) g;
 		Object savedRenderingHint = null;
 		if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
 			savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -207,7 +207,7 @@ public class BaseMenuUI extends BasicMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void uninstallUI(JComponent c) {
+	public void uninstallUI(final JComponent c) {
 		c.setOpaque(true);
 		super.uninstallUI(c);
 	}
@@ -218,7 +218,7 @@ public class BaseMenuUI extends BasicMenuUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void update(Graphics g, JComponent c) {
+	public void update(final Graphics g, final JComponent c) {
 		paintBackground(g, c, 0, 0, c.getWidth(), c.getHeight());
 		paint(g, c);
 	}

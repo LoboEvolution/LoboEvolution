@@ -43,8 +43,8 @@ public class SwingUtils {
         return null;
     }
 
-    public static JhromeTabbedPaneUI getJTabbedPaneAncestorUI(Component c) {
-        JTabbedPane tabbedPane = getJTabbedPaneAncestor(c);
+    public static JhromeTabbedPaneUI getJTabbedPaneAncestorUI(final Component c) {
+        final JTabbedPane tabbedPane = getJTabbedPaneAncestor(c);
         if (tabbedPane != null && tabbedPane.getUI() instanceof JhromeTabbedPaneUI) {
             return (JhromeTabbedPaneUI) tabbedPane.getUI();
         }

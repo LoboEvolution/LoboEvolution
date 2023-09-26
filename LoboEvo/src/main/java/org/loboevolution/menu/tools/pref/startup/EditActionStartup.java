@@ -48,14 +48,14 @@ public class EditActionStartup extends AbstractAction {
 	 *
 	 * @param control a {@link org.loboevolution.menu.tools.pref.startup.StartupListControl} object.
 	 */
-	public EditActionStartup(StartupListControl control) {
+	public EditActionStartup(final StartupListControl control) {
 		this.control = control;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		TextEdit dialog = new TextEdit();
+	public void actionPerformed(final ActionEvent arg0) {
+		final TextEdit dialog = new TextEdit();
 		dialog.setCaption(this.control.getEditListCaption());
 		dialog.setSize(new Dimension(400, 300));
 		dialog.setLocationByPlatform(true);

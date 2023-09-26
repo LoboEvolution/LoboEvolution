@@ -59,12 +59,12 @@ public class noderemovechildTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element rootNode;
-        NodeList childList;
-        Node childToRemove;
-        Node removedChild;
-        Node parentNode;
+        final Document doc;
+        final Element rootNode;
+        final NodeList childList;
+        final Node childToRemove;
+        final Node removedChild;
+        final Node parentNode;
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();
         childList = rootNode.getChildNodes();

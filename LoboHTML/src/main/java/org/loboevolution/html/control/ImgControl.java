@@ -73,12 +73,12 @@ public class ImgControl extends BaseControl {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLImageElementImpl} object.
 	 */
-	public ImgControl(HTMLImageElementImpl modelNode) {
+	public ImgControl(final HTMLImageElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
-		UserAgentContext bcontext = modelNode.getUserAgentContext();
+		final UserAgentContext bcontext = modelNode.getUserAgentContext();
 		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
-		TimingInfo info = new TimingInfo();
+		final TimingInfo info = new TimingInfo();
 		if (bcontext.isImagesEnabled()) {
 			image = HttpNetwork.getImage(modelNode, info, true);
 			final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
@@ -122,7 +122,7 @@ public class ImgControl extends BaseControl {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintComponent(Graphics g) {
+	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
 		final Dimension size = this.getSize();
 		final Insets insets = this.getInsets();
@@ -151,15 +151,17 @@ public class ImgControl extends BaseControl {
 	public void reset(final int availWidth, final int availHeight) {
 		super.reset(availWidth, availHeight);
 		final HTMLElementImpl element = this.controlElement;
-		CSSStyleDeclaration currentStyle = element.getCurrentStyle();
+		final CSSStyleDeclaration currentStyle = element.getCurrentStyle();
 		final int dw = getValueSize(element.getAttribute("width"), currentStyle.getWidth(), availWidth);
 		final int dh = getValueSize(element.getAttribute("height"), currentStyle.getHeight(), availHeight);
 		this.preferredSize = createPreferredSize(dw, dh);
 		this.valign = getValign(element);
 	}
 
-	private Dimension createPreferredSize(int dw, int dh) {
+	private Dimension createPreferredSize(final int width, final int height) {
 		final Image img = this.image;
+		int dw = width;
+		int dh = height;
 		if (dw == -1) {
 			if (dh != -1) {
 				final int iw = img == null ? -1 : img.getWidth(this);
@@ -199,13 +201,13 @@ public class ImgControl extends BaseControl {
 		return new Dimension(dw, dh);
 	}
 
-	private int getValign(HTMLElementImpl element) {
+	private int getValign(final HTMLElementImpl element) {
 		String alignText = element.getAttribute("align");
 
 		if (Strings.isNotBlank(alignText)) {
 			alignText = alignText.toLowerCase().trim();
-		} else{
-			CSSStyleDeclaration style = element.getCurrentStyle();
+		} else {
+			final CSSStyleDeclaration style = element.getCurrentStyle();
 			alignText = Strings.isNotBlank(style.getVerticalAlign()) ? style.getVerticalAlign() : "";
 		}
 
@@ -227,15 +229,15 @@ public class ImgControl extends BaseControl {
 	}
 	
 	
-	private int getValueSize(String attribute, String styleAttribute, int availSize) {
-		String size;
+	private int getValueSize(final String attribute, final String styleAttribute, final int availSize) {
+		final String size;
 		if (Strings.isNotBlank(attribute)) {
 			size = attribute.toLowerCase().trim();
 		} else{
 			size = Strings.isNotBlank(styleAttribute) ? styleAttribute : "";
 		}
 		final HTMLElementImpl element = this.controlElement;
-		HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
 		return  HtmlValues.getPixelSize(size, null, doc.getDefaultView(), -1, availSize);
 	}
 }

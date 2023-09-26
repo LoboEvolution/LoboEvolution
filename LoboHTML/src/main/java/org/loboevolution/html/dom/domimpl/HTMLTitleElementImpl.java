@@ -47,7 +47,7 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
 
 	/** {@inheritDoc} */
 	@Override
-	public Object setUserData(String key, Object data, UserDataHandler handler) {
+	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		if (XHtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
 			final Document document = this.document;
 			if (document instanceof HTMLDocumentImpl) {

@@ -60,7 +60,7 @@ import javax.swing.plaf.UIResource;
 public class BaseIcons {
 
 	// -----------------------------------------------------------------------------------------------------------
-	private static class CheckBoxIcon implements Icon {
+	private final static class CheckBoxIcon implements Icon {
 
 		private static final int GAP = 2;
 		private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
@@ -86,7 +86,7 @@ public class BaseIcons {
 
 		@Override
 		public int getIconWidth() {
-			int w;
+			final int w;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				w = 15;
 			} else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
@@ -98,14 +98,15 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+			int x = iconX;
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += GAP;
 			}
-			int w = getIconWidth() - GAP;
-			int h = getIconHeight();
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+			final int w = getIconWidth() - GAP;
+			final int h = getIconHeight();
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			if (c instanceof JCheckBoxMenuItem) {
 				g.setColor(Color.white);
 				g.fillRect(x, y, w, h);
@@ -135,8 +136,8 @@ public class BaseIcons {
 						}
 					}
 					if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && button.hasFocus()) {
-						Color hiColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 30);
-						Color loColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 20);
+						final Color hiColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 30);
+						final Color loColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 20);
 						g.setColor(hiColor);
 						g.drawRect(x - 1, y - 1, w + 2, h + 2);
 						g.setColor(loColor);
@@ -152,8 +153,8 @@ public class BaseIcons {
 				}
 			}
 
-			Icon checkIcon;
-			Icon checkDisabledIcon;
+			final Icon checkIcon;
+			final Icon checkDisabledIcon;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				checkIcon = SMALL_CHECK_ICON;
 				checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
@@ -164,11 +165,11 @@ public class BaseIcons {
 				checkIcon = LARGE_CHECK_ICON;
 				checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
 			}
-			int xi = x + (w - checkIcon.getIconWidth()) / 2 + 1;
-			int yi = y + (h - checkIcon.getIconHeight()) / 2 + 1;
+			final int xi = x + (w - checkIcon.getIconWidth()) / 2 + 1;
+			final int yi = y + (h - checkIcon.getIconHeight()) / 2 + 1;
 			if (model.isPressed() && model.isArmed()) {
-				Color bc = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
-				Color fc = ColorHelper.darker(bc, 40);
+				final Color bc = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
+				final Color fc = ColorHelper.darker(bc, 40);
 				g.setColor(fc);
 				g.drawRect(x + 3, y + 3, w - 6, h - 6);
 				g.setColor(bc);
@@ -193,7 +194,7 @@ public class BaseIcons {
 		private Color inactiveShadowColor = null;
 		private Insets insets = new Insets(0, 0, 0, 0);
 
-		public CloseSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor) {
+		public CloseSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -201,8 +202,8 @@ public class BaseIcons {
 			this.inactiveShadowColor = shadowColor;
 		}
 
-		public CloseSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor, Color inactiveForegroundColor,
-				Color inactiveShadowColor, Insets insets) {
+		public CloseSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor, final Color inactiveForegroundColor,
+						   final Color inactiveShadowColor, final Insets insets) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -211,7 +212,7 @@ public class BaseIcons {
 			this.insets = insets;
 		}
 
-		public CloseSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor, Insets insets) {
+		public CloseSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor, final Insets insets) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -231,12 +232,12 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int iconY) {
+            final Graphics2D g2D = (Graphics2D) g;
 			g2D.translate(insets.left, insets.top);
-			int w = c.getWidth() - insets.left - insets.right;
-			int h = c.getHeight() - insets.top - insets.bottom;
-			boolean active = JTattooUtilities.isActive((JComponent) c);
+			final int w = c.getWidth() - insets.left - insets.right;
+			final int h = c.getHeight() - insets.top - insets.bottom;
+			final boolean active = JTattooUtilities.isActive((JComponent) c);
 			Color color = foregroundColor;
 			if (!active) {
 				color = inactiveForegroundColor;
@@ -247,12 +248,12 @@ public class BaseIcons {
 				}
 			}
 			// int lw = (w / 12) + 1;
-			int lw = h > 22 ? 3 : 2;
-			int dx = w / 5 + 2;
-			int dy = dx;
+			final int lw = h > 22 ? 3 : 2;
+			final int dx = w / 5 + 2;
+			final int dy = dx;
 
-			Stroke savedStroke = g2D.getStroke();
-			Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Stroke savedStroke = g2D.getStroke();
+			final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 			g2D.setStroke(new BasicStroke(lw, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
@@ -286,7 +287,7 @@ public class BaseIcons {
 		private Color rolloverColor = null;
 		private Insets insets = new Insets(0, 0, 0, 0);
 
-		public IconSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor) {
+		public IconSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -294,8 +295,8 @@ public class BaseIcons {
 			this.inactiveShadowColor = shadowColor;
 		}
 
-		public IconSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor, Color inactiveForegroundColor,
-				Color inactiveShadowColor, Insets insets) {
+		public IconSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor, final Color inactiveForegroundColor,
+						  final Color inactiveShadowColor, final Insets insets) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -304,7 +305,7 @@ public class BaseIcons {
 			this.insets = insets;
 		}
 
-		public IconSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor, Insets insets) {
+		public IconSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor, final Insets insets) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -324,12 +325,12 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int iconY) {
+            final Graphics2D g2D = (Graphics2D) g;
 			g2D.translate(insets.left, insets.top);
-			int w = c.getWidth() - insets.left - insets.right;
-			int h = c.getHeight() - insets.top - insets.bottom;
-			boolean active = JTattooUtilities.isActive((JComponent) c);
+			final int w = c.getWidth() - insets.left - insets.right;
+			final int h = c.getHeight() - insets.top - insets.bottom;
+			final boolean active = JTattooUtilities.isActive((JComponent) c);
 			Color color = foregroundColor;
 			if (!active) {
 				color = inactiveForegroundColor;
@@ -340,12 +341,12 @@ public class BaseIcons {
 				}
 			}
 			// int lw = (w / 12) + 1;
-			int lw = h > 22 ? 3 : 2;
+			final int lw = h > 22 ? 3 : 2;
 
-			int dx = w / 5 + 2;
-			int dy = dx;
+			final int dx = w / 5 + 2;
+			final int dy = dx;
 
-			Stroke savedStroke = g2D.getStroke();
+			final Stroke savedStroke = g2D.getStroke();
 			g2D.setStroke(new BasicStroke(lw, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
 			if (shadowColor != null) {
 				if (!active) {
@@ -377,12 +378,14 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			AbstractButton btn = (AbstractButton) c;
-			ButtonModel model = btn.getModel();
-			int w = c.getWidth();
-			int h = c.getHeight();
-			Icon closerIcon;
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int iconY) {
+			int x;
+			int y;
+			final AbstractButton btn = (AbstractButton) c;
+			final ButtonModel model = btn.getModel();
+			final int w = c.getWidth();
+			final int h = c.getHeight();
+			final Icon closerIcon;
 			Icon pearlIcon;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				closerIcon = CLOSER_SMALL;
@@ -428,12 +431,14 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			AbstractButton btn = (AbstractButton) c;
-			ButtonModel model = btn.getModel();
-			int w = c.getWidth();
-			int h = c.getHeight();
-			Icon iconizerIcon;
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int iconY) {
+			int x;
+			int y;
+			final AbstractButton btn = (AbstractButton) c;
+			final ButtonModel model = btn.getModel();
+			final int w = c.getWidth();
+			final int h = c.getHeight();
+			final Icon iconizerIcon;
 			Icon pearlIcon;
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -502,12 +507,14 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			AbstractButton btn = (AbstractButton) c;
-			ButtonModel model = btn.getModel();
-			int w = c.getWidth();
-			int h = c.getHeight();
-			Icon maximizerIcon;
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int iconY) {
+			int x;
+			int y;
+			final AbstractButton btn = (AbstractButton) c;
+			final ButtonModel model = btn.getModel();
+			final int w = c.getWidth();
+			final int h = c.getHeight();
+			final Icon maximizerIcon;
 			Icon pearlIcon;
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -575,12 +582,14 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			AbstractButton btn = (AbstractButton) c;
-			ButtonModel model = btn.getModel();
-			int w = c.getWidth();
-			int h = c.getHeight();
-			Icon minimizerIcon;
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int iconY) {
+			int x;
+			int y;
+			final AbstractButton btn = (AbstractButton) c;
+			final ButtonModel model = btn.getModel();
+			final int w = c.getWidth();
+			final int h = c.getHeight();
+			final Icon minimizerIcon;
 			Icon pearlIcon;
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -645,7 +654,7 @@ public class BaseIcons {
 		private Color inactiveShadowColor = null;
 		private Insets insets = new Insets(0, 0, 0, 0);
 
-		public MaxSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor) {
+		public MaxSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -653,8 +662,8 @@ public class BaseIcons {
 			this.inactiveShadowColor = shadowColor;
 		}
 
-		public MaxSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor, Color inactiveForegroundColor,
-				Color inactiveShadowColor, Insets insets) {
+		public MaxSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor, final Color inactiveForegroundColor,
+						 final Color inactiveShadowColor, final Insets insets) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -663,7 +672,7 @@ public class BaseIcons {
 			this.insets = insets;
 		}
 
-		public MaxSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor, Insets insets) {
+		public MaxSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor, final Insets insets) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -683,12 +692,12 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
+			final Graphics2D g2D = (Graphics2D) g;
 			g2D.translate(insets.left, insets.top);
-			int w = c.getWidth() - insets.left - insets.right;
-			int h = c.getHeight() - insets.top - insets.bottom;
-			boolean active = JTattooUtilities.isActive((JComponent) c);
+			final int w = c.getWidth() - insets.left - insets.right;
+			final int h = c.getHeight() - insets.top - insets.bottom;
+			final boolean active = JTattooUtilities.isActive((JComponent) c);
 			Color color = foregroundColor;
 			if (!active) {
 				color = inactiveForegroundColor;
@@ -698,12 +707,12 @@ public class BaseIcons {
 					color = rolloverColor;
 				}
 			}
-			int lw = h > 22 ? 2 : 1;
+			final int lw = h > 22 ? 2 : 1;
 
-			int dx = w / 5 + 1;
-			int dy = h / 5 + 2;
+			final int dx = w / 5 + 1;
+			final int dy = h / 5 + 2;
 
-			Stroke savedStroke = g2D.getStroke();
+			final Stroke savedStroke = g2D.getStroke();
 			g2D.setStroke(new BasicStroke(lw, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
 			if (shadowColor != null) {
 				if (!active) {
@@ -734,7 +743,7 @@ public class BaseIcons {
 		private Color inactiveShadowColor = null;
 		private Insets insets = new Insets(0, 0, 0, 0);
 
-		public MinSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor) {
+		public MinSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -742,8 +751,8 @@ public class BaseIcons {
 			this.inactiveShadowColor = shadowColor;
 		}
 
-		public MinSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor, Color inactiveForegroundColor,
-				Color inactiveShadowColor, Insets insets) {
+		public MinSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor, final Color inactiveForegroundColor,
+						 final Color inactiveShadowColor, final Insets insets) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -752,7 +761,7 @@ public class BaseIcons {
 			this.insets = insets;
 		}
 
-		public MinSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor, Insets insets) {
+		public MinSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor, final Insets insets) {
 			this.foregroundColor = foregroundColor;
 			this.shadowColor = shadowColor;
 			this.rolloverColor = rolloverColor;
@@ -772,29 +781,29 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			Graphics2D g2D = (Graphics2D) g;
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int iconY) {
+            final Graphics2D g2D = (Graphics2D) g;
 			g2D.translate(insets.left, insets.top);
 			int w = c.getWidth() - insets.left - insets.right;
 			int h = c.getHeight() - insets.top - insets.bottom;
 
-			int lw = h > 22 ? 2 : 1;
-			int delta = w / 4;
+			final int lw = h > 22 ? 2 : 1;
+			final int delta = w / 4;
 
 			w = Math.min(w, h) - 6;
 			h = w;
 
-			int x1 = 3;
-			int y1 = 3;
-			int w1 = w - delta;
-			int h1 = h - delta;
+			final int x1 = 3;
+			final int y1 = 3;
+			final int w1 = w - delta;
+			final int h1 = h - delta;
 
-			int x2 = delta + 2;
-			int y2 = Math.max(delta + 2, y1 + 2 * lw + 1);
-			int w2 = w - delta;
-			int h2 = h - delta;
+			final int x2 = delta + 2;
+			final int y2 = Math.max(delta + 2, y1 + 2 * lw + 1);
+			final int w2 = w - delta;
+			final int h2 = h - delta;
 
-			boolean active = JTattooUtilities.isActive((JComponent) c);
+			final boolean active = JTattooUtilities.isActive((JComponent) c);
 			Color ic = foregroundColor;
 			Color sc = shadowColor;
 			if (!active) {
@@ -809,10 +818,10 @@ public class BaseIcons {
 				}
 			}
 
-			Shape savedClip = g2D.getClip();
-			Stroke savedStroke = g2D.getStroke();
+			final Shape savedClip = g2D.getClip();
+			final Stroke savedStroke = g2D.getStroke();
 			g2D.setStroke(new BasicStroke(lw, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-			Area clipArea = new Area(savedClip);
+			final Area clipArea = new Area(savedClip);
 			clipArea.subtract(new Area(new Rectangle2D.Double(x2, y2, w2, h2)));
 			g2D.setClip(clipArea);
 			paintRect(g2D, x1, y1, w1, h1, lw, ic, sc);
@@ -823,7 +832,7 @@ public class BaseIcons {
 			g2D.translate(-insets.left, -insets.top);
 		}
 
-		private void paintRect(Graphics2D g2D, int x, int y, int w, int h, int lw, Color iconColor, Color shadowColor) {
+		private void paintRect(final Graphics2D g2D, final int x, final int y, final int w, final int h, final int lw, final Color iconColor, final Color shadowColor) {
 			if (shadowColor != null) {
 				g2D.setColor(shadowColor);
 				g2D.drawRect(x + 1, y + 1, w, h);
@@ -838,7 +847,7 @@ public class BaseIcons {
 	} // end of class MinSymbol
 		// -----------------------------------------------------------------------------------------------------------
 
-	private static class RadioButtonIcon implements Icon {
+	private final static class RadioButtonIcon implements Icon {
 
 		private static final int GAP = 2;
 
@@ -855,7 +864,7 @@ public class BaseIcons {
 
 		@Override
 		public int getIconWidth() {
-			int w;
+			final int w;
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
 				w = 14;
 			} else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
@@ -867,19 +876,20 @@ public class BaseIcons {
 		}
 
 		@Override
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
+int x = iconX;
 			if (!JTattooUtilities.isLeftToRight(c)) {
 				x += GAP;
 			}
-			int w = getIconWidth() - GAP;
-			int h = getIconHeight();
-			Graphics2D g2D = (Graphics2D) g;
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
+			final int w = getIconWidth() - GAP;
+			final int h = getIconHeight();
+			final Graphics2D g2D = (Graphics2D) g;
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
 			Color cHi = Color.white;
 			Color cLo = Color.white;
 			if (!(c instanceof JRadioButtonMenuItem)) {
-				Color[] colors;
+				final Color[] colors;
 				if (button.isEnabled()) {
 					if (button.isRolloverEnabled() && model.isRollover() || model.isPressed() && model.isArmed()) {
 						colors = AbstractLookAndFeel.getTheme().getRolloverColors();
@@ -896,14 +906,14 @@ public class BaseIcons {
 				cHi = colors[0];
 				cLo = colors[colors.length - 1];
 			}
-			Paint savedPaint = g2D.getPaint();
+			final Paint savedPaint = g2D.getPaint();
 			g2D.setPaint(new GradientPaint(0, 0, cHi, 0, h, cLo));
 			g2D.fillOval(x, y, w, h);
 			g2D.setPaint(savedPaint);
 
-			Shape savedClip = g.getClip();
+			final Shape savedClip = g.getClip();
 			// Area clipArea = new Area(new Ellipse2D.Double(x + 1, y + 1, w - 1, h - 1));
-			Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
+			final Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
 			if (savedClip != null) {
 				clipArea.intersect(new Area(savedClip));
 			}
@@ -931,11 +941,11 @@ public class BaseIcons {
 			}
 			g2D.setClip(savedClip);
 
-			Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			if (!model.isRollover()) {
-				Composite savedComposite = g2D.getComposite();
-				AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+				final Composite savedComposite = g2D.getComposite();
+				final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 				g2D.setComposite(alpha);
 				g2D.setColor(Color.white);
 				g2D.drawOval(x + 1, y + 1, w - 2, h - 2);
@@ -943,8 +953,8 @@ public class BaseIcons {
 			}
 			if (button.isEnabled()) {
 				if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && button.hasFocus()) {
-					Color hiColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 30);
-					Color loColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 20);
+					final Color hiColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 30);
+					final Color loColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 20);
 					g.setColor(hiColor);
 					g.drawOval(x - 1, y - 1, w + 2, h + 2);
 					g.setColor(loColor);
@@ -960,7 +970,7 @@ public class BaseIcons {
 
 			if (model.isSelected()) {
 				if (button.isEnabled()) {
-					Color fc = AbstractLookAndFeel.getForegroundColor();
+					final Color fc = AbstractLookAndFeel.getForegroundColor();
 					if (ColorHelper.getGrayValue(cLo) < 128) {
 						if (ColorHelper.getGrayValue(fc) < 128) {
 							g2D.setColor(Color.white);
@@ -1173,8 +1183,8 @@ public class BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				closeIcon = new MacCloseIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				closeIcon = new CloseSymbol(iconColor, null, iconRolloverColor);
 			}
 		}
@@ -1343,8 +1353,8 @@ public class BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				iconIcon = new MacIconIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				iconIcon = new IconSymbol(iconColor, null, iconRolloverColor);
 			}
 		}
@@ -1397,8 +1407,8 @@ public class BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				maxIcon = new MacMaxIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				maxIcon = new MaxSymbol(iconColor, null, iconRolloverColor);
 			}
 		}
@@ -1471,8 +1481,8 @@ public class BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				minIcon = new MacMinIcon();
 			} else {
-				Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
-				Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
+				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
+				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
 				minIcon = new MinSymbol(iconColor, null, iconRolloverColor);
 			}
 		}

@@ -133,8 +133,8 @@ public abstract class XMLOutputFactory {
    *              Use the new method {@link #newFactory(java.lang.String,
    *              java.lang.ClassLoader)} instead.
    */
-  public static XMLInputFactory newInstance(String factoryId,
-          ClassLoader classLoader)
+  public static XMLInputFactory newInstance(final String factoryId,
+                                            final ClassLoader classLoader)
           throws FactoryConfigurationError {
       //do not fallback if given classloader can't find the class, throw exception
       return FactoryFinder.find(XMLInputFactory.class, factoryId, classLoader, null);
@@ -183,7 +183,7 @@ public abstract class XMLOutputFactory {
    * <p>
    *   Note that this is a new method that replaces the deprecated
    *   {@link #newInstance(java.lang.String, java.lang.ClassLoader)
-   *   newInstance(String factoryId, ClassLoader classLoader)} method.
+   *   newInstance(final String factoryId, ClassLoader classLoader)} method.
    *   The original method was incorrectly defined to return XMLInputFactory.
    * </p>
    *
@@ -195,8 +195,8 @@ public abstract class XMLOutputFactory {
    *   java.util.ServiceConfigurationError service configuration error} or if
    *   the implementation is not available or cannot be instantiated.
    */
-  public static XMLOutputFactory newFactory(String factoryId,
-          ClassLoader classLoader)
+  public static XMLOutputFactory newFactory(final String factoryId,
+                                            final ClassLoader classLoader)
           throws FactoryConfigurationError {
       //do not fallback if given classloader can't find the class, throw exception
       return FactoryFinder.find(XMLOutputFactory.class, factoryId, classLoader, null);
@@ -294,5 +294,5 @@ public abstract class XMLOutputFactory {
    * @param name The name of the property (may not be null)
    * @return true if the property is supported and false otherwise
    */
-  public abstract boolean isPropertySupported(String name);
+  public abstract boolean isPropertySupported(final String name);
 }

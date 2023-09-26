@@ -44,7 +44,7 @@ public class SVGAnimatedStringImpl implements SVGAnimatedString {
 	 *
 	 * @param baseVal a {@link java.lang.String} object.
 	 */
-	public SVGAnimatedStringImpl(String baseVal) {
+	public SVGAnimatedStringImpl(final String baseVal) {
 		this.baseVal = baseVal;
 	}
 
@@ -56,7 +56,7 @@ public class SVGAnimatedStringImpl implements SVGAnimatedString {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBaseVal(String baseVal) {
+	public void setBaseVal(final String baseVal) {
 		this.baseVal = baseVal;
 	}
 

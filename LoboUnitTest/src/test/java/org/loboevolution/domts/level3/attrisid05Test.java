@@ -50,12 +50,12 @@ import static org.junit.Assert.assertTrue;
 public class attrisid05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element acronymElem;
-        Element clonedacronymElem;
-        Element acronymParentElem;
-        Attr attr;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element acronymElem;
+        final Element clonedacronymElem;
+        final Element acronymParentElem;
+        final Attr attr;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("acronym");
         acronymElem = (Element) elemList.item(3);

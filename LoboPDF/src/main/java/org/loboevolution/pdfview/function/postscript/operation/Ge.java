@@ -49,9 +49,9 @@ final class Ge implements PostScriptOperation {
 	 *
 	 * errors: invalidaccess, stackunderflow, typecheck
 	 */
-	public void eval(Stack<Object> environment) {
-	    double num2 = (Double)environment.pop();
-	    double num1 = (Double)environment.pop();
+	public void eval(final Stack<Object> environment) {
+	    final double num2 = (Double)environment.pop();
+	    final double num1 = (Double)environment.pop();
 	    environment.push(num1 >= num2);
 	}
 }

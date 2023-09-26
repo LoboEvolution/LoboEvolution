@@ -35,7 +35,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -59,23 +58,23 @@ public class hc_textparseintolistofelementsTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node addressNode;
-        NodeList childList;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node addressNode;
+        final NodeList childList;
         Node child;
         String value;
         Node grandChild;
-        int length;
-        java.util.List<String> result = new java.util.ArrayList<>();
+        final int length;
+        final java.util.List<String> result = new java.util.ArrayList<>();
 
-        java.util.List<String> expectedNormal = new java.util.ArrayList<>();
+        final java.util.List<String> expectedNormal = new java.util.ArrayList<>();
         expectedNormal.add("\u03b2"); // Android-changed: GREEK LOWER CASE BETA
         expectedNormal.add(" Dallas, ");
         expectedNormal.add("\u03b3"); // Android-changed: GREEK LOWER CASE GAMMA
         expectedNormal.add("\n 98554");
 
-        java.util.List<String> expectedExpanded = new java.util.ArrayList<String>();
+        final java.util.List<String> expectedExpanded = new java.util.ArrayList<String>();
         expectedExpanded.add("\u03b2 Dallas, \u03b3\n 98554"); // Android-changed: GREEK LOWER CASE BETA, GREEK LOWER CASE GAMMA
 
         doc = sampleXmlFile("hc_staff.xml");

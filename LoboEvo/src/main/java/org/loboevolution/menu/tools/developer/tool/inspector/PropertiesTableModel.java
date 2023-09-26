@@ -36,16 +36,16 @@ public class PropertiesTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = 1L;
 
-    private String[] colNames = {"Property", "Text", "Value"};
+    private final String[] colNames = {"Property", "Text", "Value"};
 
-    Map<String, String> properties;
+    protected Map<String, String> properties;
 
     /**
      * Constructor for the PropertiesTableModel object
      *
      * @param cssProperties a {@link java.util.Map} object
      */
-    PropertiesTableModel(Map<String, String> cssProperties) {
+    PropertiesTableModel(final Map<String, String> cssProperties) {
         this.properties = cssProperties;
     }
 
@@ -55,7 +55,7 @@ public class PropertiesTableModel extends AbstractTableModel {
      * @param col a {@link java.lang.Integer} object
      * @return The columnName value
      */
-    public String getColumnName(int col) {
+    public String getColumnName(final int col) {
         return colNames[col];
     }
 
@@ -84,8 +84,8 @@ public class PropertiesTableModel extends AbstractTableModel {
      * @param col a {@link java.lang.Integer} object
      * @return The valueAt value
      */
-    public Object getValueAt(int row, int col) {
-        Map.Entry me = (Map.Entry) this.properties.entrySet().toArray()[row];
+    public Object getValueAt(final int row, final int col) {
+        final Map.Entry<String, String> me = (Map.Entry<String, String>) this.properties.entrySet().toArray()[row];
 
         Object val = null;
         switch (col) {
@@ -109,7 +109,7 @@ public class PropertiesTableModel extends AbstractTableModel {
      * @param col a {@link java.lang.Integer} object
      * @return The cellEditable value
      */
-    public boolean isCellEditable(int row, int col) {
+    public boolean isCellEditable(final int row, final int col) {
         return false;
     }
 }

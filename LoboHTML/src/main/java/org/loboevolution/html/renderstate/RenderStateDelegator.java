@@ -108,7 +108,7 @@ public abstract class RenderStateDelegator implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public int getCount(String counter, int nesting) {
+	public int getCount(final String counter, final int nesting) {
 		return this.delegate.getCount(counter, nesting);
 	}
 
@@ -222,7 +222,7 @@ public abstract class RenderStateDelegator implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public int getTextIndent(int availWidth) {
+	public int getTextIndent(final int availWidth) {
 		return this.delegate.getTextIndent(availWidth);
 	}
 
@@ -252,13 +252,13 @@ public abstract class RenderStateDelegator implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public WordInfo getWordInfo(String word) {
+	public WordInfo getWordInfo(final String word) {
 		return this.delegate.getWordInfo(word);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public int incrementCount(String counter, int nesting) {
+	public int incrementCount(final String counter, final int nesting) {
 		return this.delegate.incrementCount(counter, nesting);
 	}
 
@@ -276,13 +276,13 @@ public abstract class RenderStateDelegator implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public void resetCount(String counter, int nesting, int value) {
+	public void resetCount(final String counter, final int nesting, final int value) {
 		this.delegate.resetCount(counter, nesting, value);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHighlight(boolean highlight) {
+	public void setHighlight(final boolean highlight) {
 		this.delegate.setHighlight(highlight);
 	}
 	
@@ -330,7 +330,7 @@ public abstract class RenderStateDelegator implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCursor(Optional<Cursor> cursor) {
+	public void setCursor(final Optional<Cursor> cursor) {
 		this.delegate.setCursor(cursor);
 	}
 

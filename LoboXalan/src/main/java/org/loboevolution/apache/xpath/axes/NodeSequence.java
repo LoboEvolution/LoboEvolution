@@ -74,7 +74,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   }
 
   /** Set the vector where nodes will be cached. */
-  protected void SetVector(NodeVector v) {
+  protected void SetVector(final NodeVector v) {
     setObject(v);
   }
 
@@ -103,7 +103,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
    * the iterator is exhausted.
    */
   private void markCacheComplete() {
-    NodeVector nv = getVector();
+    final NodeVector nv = getVector();
     if (nv != null) {
       m_cache.setCacheComplete(true);
     }
@@ -117,7 +117,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
    *
    * @param iter The iterator that is to be contained.
    */
-  public final void setIter(DTMIterator iter) {
+  public final void setIter(final DTMIterator iter) {
     m_iter = iter;
   }
 
@@ -134,7 +134,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
    *
    * @param nodeVector
    */
-  public NodeSequence(Object nodeVector) {
+  public NodeSequence(final Object nodeVector) {
     super(nodeVector);
     if (nodeVector instanceof NodeVector) {
       SetVector((NodeVector) nodeVector);
@@ -155,8 +155,8 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  public DTM getDTM(int nodeHandle) {
-    DTMManager mgr = getDTMManager();
+  public DTM getDTM(final int nodeHandle) {
+    final DTMManager mgr = getDTMManager();
     if (null != mgr) {
       return getDTMManager().getDTM(nodeHandle);
     }
@@ -184,9 +184,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  public void setRoot(int nodeHandle, Object environment) {
+  public void setRoot(final int nodeHandle, final Object environment) {
     if (null != m_iter) {
-      XPathContext xctxt = (XPathContext) environment;
+      final XPathContext xctxt = (XPathContext) environment;
       m_dtmMgr = xctxt.getDTMManager();
       m_iter.setRoot(nodeHandle, environment);
       if (!m_iter.isDocOrdered()) {
@@ -226,12 +226,12 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   public int nextNode() {
     // If the cache is on, and the node has already been found, then
     // just return from the list.
-    NodeVector vec = getVector();
+    final NodeVector vec = getVector();
     if (null != vec) {
       // There is a cache
       if (m_next < vec.size()) {
         // The node is in the cache, so just return it.
-        int next = vec.elementAt(m_next);
+        final int next = vec.elementAt(m_next);
         m_next++;
         return next;
       } else if (cacheComplete() || (-1 != m_last) || (null == m_iter)) {
@@ -242,14 +242,14 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
     if (null == m_iter) return DTM.NULL;
 
-    int next = m_iter.nextNode();
+    final int next = m_iter.nextNode();
     if (DTM.NULL != next) {
       if (hasCache()) {
         if (m_iter.isDocOrdered()) {
           getVector().addElement(next);
           m_next++;
         } else {
-          int insertIndex = addNodeInDocOrder(next);
+          final int insertIndex = addNodeInDocOrder(next);
           if (insertIndex >= 0) m_next++;
         }
       } else m_next++;
@@ -292,7 +292,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  public void allowDetachToRelease(boolean allowRelease) {
+  public void allowDetachToRelease(final boolean allowRelease) {
     if (!allowRelease && !hasCache()) {
       setShouldCacheNodes(true);
     }
@@ -305,8 +305,8 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   @Override
   public int getCurrentNode() {
     if (hasCache()) {
-      int currentIndex = m_next - 1;
-      NodeVector vec = getVector();
+      final int currentIndex = m_next - 1;
+      final NodeVector vec = getVector();
       if ((currentIndex >= 0) && (currentIndex < vec.size())) {
         return vec.elementAt(currentIndex);
       }
@@ -327,7 +327,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  public void setShouldCacheNodes(boolean b) {
+  public void setShouldCacheNodes(final boolean b) {
     if (b) {
       if (!hasCache()) {
         SetVector(new NodeVector());
@@ -343,9 +343,9 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  public void runTo(int index) {
+  public void runTo(final int index) {
     if (-1 == index) {
-      int pos = m_next;
+      final int pos = m_next;
       while (DTM.NULL != nextNode()) ;
       m_next = pos;
     } else if (m_next == index) {
@@ -360,15 +360,15 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  public void setCurrentPos(int i) {
+  public void setCurrentPos(final int i) {
     runTo(i);
   }
 
   /** {@inheritDoc} */
   @Override
-  public int item(int index) {
+  public int item(final int index) {
     setCurrentPos(index);
-    int n = nextNode();
+    final int n = nextNode();
     m_next = index;
     return n;
   }
@@ -376,14 +376,14 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** {@inheritDoc} */
   @Override
   public int getLength() {
-    IteratorCache cache = getCache();
+    final IteratorCache cache = getCache();
 
     if (cache != null) {
       // Nodes from the iterator are cached
       if (cache.isComplete()) {
         // All of the nodes from the iterator are cached
         // so just return the number of nodes in the cache
-        NodeVector nv = cache.getVector();
+        final NodeVector nv = cache.getVector();
         return nv.size();
       }
 
@@ -395,7 +395,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
       }
 
       if (-1 == m_last) {
-        int pos = m_next;
+        final int pos = m_next;
         runTo(-1);
         m_next = pos;
       }
@@ -408,7 +408,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** {@inheritDoc} */
   @Override
   public DTMIterator cloneWithReset() throws CloneNotSupportedException {
-    NodeSequence seq = (NodeSequence) super.clone();
+    final NodeSequence seq = (NodeSequence) super.clone();
     seq.m_next = 0;
 
     return seq;
@@ -417,7 +417,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /** {@inheritDoc} */
   @Override
   public Object clone() throws CloneNotSupportedException {
-    NodeSequence clone = (NodeSequence) super.clone();
+    final NodeSequence clone = (NodeSequence) super.clone();
     if (null != m_iter) clone.m_iter = (DTMIterator) m_iter.clone();
 
     return clone;
@@ -461,20 +461,21 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
    * @return insertIndex.
    * @throws RuntimeException thrown if this NodeSetDTM is not of a mutable type.
    */
-  protected int addNodeInDocOrder(int node) {
+  protected int addNodeInDocOrder(final int node) {
     assertion(hasCache(), "addNodeInDocOrder must be done on a mutable sequence!");
 
     int insertIndex = -1;
 
-    NodeVector vec = getVector();
+    final NodeVector vec = getVector();
 
     // This needs to do a binary search, but a binary search
     // is somewhat tough because the sequence test involves
     // two nodes.
-    int size = vec.size(), i;
+    final int size = vec.size();
+      int i;
 
-    for (i = size - 1; i >= 0; i--) {
-      int child = vec.elementAt(i);
+      for (i = size - 1; i >= 0; i--) {
+      final int child = vec.elementAt(i);
 
       if (child == node) {
         i = -2; // Duplicate, suppress insert
@@ -482,7 +483,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         break;
       }
 
-      DTM dtm = m_dtmMgr.getDTM(node);
+      final DTM dtm = m_dtmMgr.getDTM(node);
       if (!dtm.isNodeAfter(node, child)) {
         break;
       }
@@ -500,14 +501,14 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
 
   /** {@inheritDoc} */
   @Override
-  protected void setObject(Object obj) {
+  protected void setObject(final Object obj) {
     if (obj instanceof NodeVector) {
       // Keep our superclass informed of the current NodeVector
       // ... if we don't the smoketest fails (don't know why).
       super.setObject(obj);
 
       // A copy of the code of what SetVector() would do.
-      NodeVector v = (NodeVector) obj;
+      final NodeVector v = (NodeVector) obj;
       if (m_cache != null) {
         m_cache.setVector(v);
       } else if (v != null) {
@@ -515,7 +516,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
         m_cache.setVector(v);
       }
     } else if (obj instanceof IteratorCache) {
-      IteratorCache cache = (IteratorCache) obj;
+      final IteratorCache cache = (IteratorCache) obj;
       m_cache = cache;
 
       // Keep our superclass informed of the current NodeVector
@@ -587,7 +588,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
      * Sets the NodeVector that holds the growing list of nodes as they are appended to the cached
      * list.
      */
-    private void setVector(NodeVector nv) {
+    private void setVector(final NodeVector nv) {
       m_vec2 = nv;
     }
 
@@ -600,7 +601,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
      * Call this method with 'true' if the iterator is exhausted and the cached list is complete, or
      * no longer growing.
      */
-    private void setCacheComplete(boolean b) {
+    private void setCacheComplete(final boolean b) {
       m_isComplete2 = b;
     }
 

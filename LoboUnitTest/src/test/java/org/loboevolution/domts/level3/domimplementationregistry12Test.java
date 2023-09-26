@@ -53,15 +53,15 @@ public class domimplementationregistry12Test extends LoboUnitTest {
     @SneakyThrows
     public void runTest() {
        
-        DOMImplementation domImpl;
-        boolean hasCore;
-        boolean hasXML;
-        boolean hasEvents;
-        boolean hasLS;
-        DOMImplementation baseImpl;
-        String nullVersion = null;
+        final DOMImplementation domImpl;
+        final boolean hasCore;
+        final boolean hasXML;
+        final boolean hasEvents;
+        final boolean hasLS;
+        final DOMImplementation baseImpl;
+        final String nullVersion = null;
 
-         DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull("domImplRegistryNotNull", domImplRegistry);
         domImpl = domImplRegistry.getDOMImplementation("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS");
 

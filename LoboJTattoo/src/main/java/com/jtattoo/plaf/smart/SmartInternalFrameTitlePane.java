@@ -58,18 +58,18 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public SmartInternalFrameTitlePane(JInternalFrame f) {
+	public SmartInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBackground(Graphics g) {
-		Graphics2D g2D = (Graphics2D) g;
-		int width = getWidth();
-		int height = getHeight();
-		Color backColor;
-		Color frameColor;
+	public void paintBackground(final Graphics g) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final int width = getWidth();
+		final int height = getHeight();
+		final Color backColor;
+		final Color frameColor;
 		if (JTattooUtilities.isActive(this)) {
 			backColor = AbstractLookAndFeel.getTheme().getWindowTitleColors()[10];
 			frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
@@ -83,25 +83,25 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		}
 
 		int iconWidth = 0;
-		Icon icon = frame.getFrameIcon();
+		final Icon icon = frame.getFrameIcon();
 		if (icon != null) {
 			iconWidth = icon.getIconWidth() + 5;
 		}
 
 		int titleWidth = 0;
-		String frameTitle = frame.getTitle();
+		final String frameTitle = frame.getTitle();
 		if (frameTitle != null) {
 			g.setFont(getFont());
-			FontMetrics fm = JTattooUtilities.getFontMetrics(this, g, getFont());
+			final FontMetrics fm = JTattooUtilities.getFontMetrics(this, g, getFont());
 			titleWidth = fm.stringWidth(
 					JTattooUtilities.getClippedText(frame.getTitle(), fm, getWidth() - iconWidth - buttonsWidth - 15))
 					+ 10;
 		}
 
-		int dx;
-		int dw;
-		boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
-		int xOffset = leftToRight ? iconWidth + 10 + titleWidth : width - 10 - iconWidth - titleWidth;
+		final int dx;
+		final int dw;
+		final boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
+		final int xOffset = leftToRight ? iconWidth + 10 + titleWidth : width - 10 - iconWidth - titleWidth;
 
 		if (leftToRight) {
 			dw = width - buttonsWidth - xOffset - 10;
@@ -114,14 +114,14 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 		if (!AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()
 				&& !AbstractLookAndFeel.getTheme().isCenterWindowTitleOn() && dw > 0) {
-			Composite composite = g2D.getComposite();
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+			final Composite composite = g2D.getComposite();
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
 
-			float dc1 = 50.0f;
+			final float dc1 = 50.0f;
 			float dc2 = 5.0f;
 
-			Color c1 = ColorHelper.brighter(backColor, dc1);
+			final Color c1 = ColorHelper.brighter(backColor, dc1);
 			Color c2;
 			while (dy + 5 < height) {
 				c2 = ColorHelper.darker(backColor, dc2);
@@ -141,17 +141,17 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintPalette(Graphics g) {
-		int width = getWidth();
-		int height = getHeight();
+	public void paintPalette(final Graphics g) {
+		final int width = getWidth();
+		final int height = getHeight();
 
-		Color backColor;
-		Color frameColor;
+		final Color backColor;
+		final Color frameColor;
 		if (JTattooUtilities.isFrameActive(this)) {
 			JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, width,
 					height);
@@ -166,17 +166,17 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.setColor(frameColor);
 		g.drawLine(0, height - 1, width, height - 1);
 
-		int dx = 8;
+		final int dx = 8;
 		int dy = 2;
-		int dw = width - buttonsWidth - 2 * 8;
-		Graphics2D g2D = (Graphics2D) g;
-		Composite composite = g2D.getComposite();
-		AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+		final int dw = width - buttonsWidth - 2 * 8;
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite composite = g2D.getComposite();
+		final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 		g2D.setComposite(alpha);
 
-		float dc1 = 50.0f;
+		final float dc1 = 50.0f;
 		float dc2 = 5.0f;
-		Color c1 = ColorHelper.brighter(backColor, dc1);
+		final Color c1 = ColorHelper.brighter(backColor, dc1);
 		Color c2;
 		while (dy + 2 < height) {
 			c2 = ColorHelper.darker(backColor, dc2);
@@ -193,9 +193,9 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		if (isActive()) {
-			Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
+			final Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
 			if (ColorHelper.getGrayValue(titleColor) > 164) {
 				g.setColor(Color.black);
 				JTattooUtilities.drawString(frame, g, title, x + 1, y);

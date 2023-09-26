@@ -58,10 +58,10 @@ public class getElementsByTagNameNS05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.nist.gov";
-        String localName = "nomatch";
-        Document doc;
-        HTMLCollection elementList;
+        final String namespaceURI = "http://www.nist.gov";
+        final String localName = "nomatch";
+        final Document doc;
+        final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS(namespaceURI, localName);
         assertEquals( "throw_Size", 0, elementList.getLength());

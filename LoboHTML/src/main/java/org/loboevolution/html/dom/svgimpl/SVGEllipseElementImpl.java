@@ -52,7 +52,7 @@ public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseEleme
 
 	@Override
 	public SVGRect getBBox() {
-		Shape shape = createShape(null);
+		final Shape shape = createShape(null);
 		return new SVGRectImpl(shape.getBounds2D());
 	}
 
@@ -91,7 +91,7 @@ public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseEleme
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(AffineTransform transform) {
+	public Shape createShape(final AffineTransform transform) {
 		AffineTransform inverseTransform;
 		try {
 			inverseTransform = transform.createInverse();

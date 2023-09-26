@@ -54,13 +54,13 @@ public class attrgetschematypeinfo07Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element acElem;
-        Attr attr;
-        TypeInfo attrTypeInfo;
-        String typeName;
-        String typeNamespace;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element acElem;
+        final Attr attr;
+        final TypeInfo attrTypeInfo;
+        final String typeName;
+        final String typeNamespace;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("acronym");
         acElem = (Element) elemList.item(3);

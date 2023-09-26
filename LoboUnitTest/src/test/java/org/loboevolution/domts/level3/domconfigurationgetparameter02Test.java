@@ -49,8 +49,8 @@ import static org.junit.Assert.assertTrue;
 public class domconfigurationgetparameter02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
+        final Document doc;
+        final DOMConfiguration domConfig;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
 
@@ -58,7 +58,7 @@ public class domconfigurationgetparameter02Test extends LoboUnitTest {
             boolean success = false;
             try {
                 domConfig.getParameter("not-found-param");
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("domconfigurationgetparameter02_NOT_FOUND_ERR", success);

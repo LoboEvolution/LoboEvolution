@@ -50,7 +50,7 @@ public class InputColorPicker {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputColorPicker(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputColorPicker(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		this.modelNode = modelNode;
 		if (modelNode.getTitle() != null) {
 			widget.setToolTipText(modelNode.getTitle());
@@ -60,14 +60,14 @@ public class InputColorPicker {
 		widget.setEnabled(!modelNode.isDisabled());
 
 		widget.addActionListener(event -> {
-			Color c = JColorChooser.showDialog(null, "Choose a Color", null);
-			String value = "#" + Integer.toHexString(c.getRGB()).substring(2);
+			final Color c = JColorChooser.showDialog(null, "Choose a Color", null);
+			final String value = "#" + Integer.toHexString(c.getRGB()).substring(2);
 			modelNode.setValue(value);
 			widget.setToolTipText(value);
 			widget.setBackground(c);
 		});
 
-		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
+		final MouseInputAdapter mouseHandler = new MouseInputAdapter() {
 
 			@Override
 			public void mouseEntered(final MouseEvent e) {
@@ -85,8 +85,8 @@ public class InputColorPicker {
 	 * <p>reset.</p>
 	 */
 	public void reset() {
-		Color c = Color.BLACK;
-		String value = "#" + Integer.toHexString(c.getRGB()).substring(2);
+		final Color c = Color.BLACK;
+		final String value = "#" + Integer.toHexString(c.getRGB()).substring(2);
 		modelNode.setValue(value);
 		widget.setToolTipText(value);
 		widget.setBackground(c);

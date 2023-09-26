@@ -47,8 +47,8 @@ public class JhromeNewTabButtonBorder implements Border {
     public final Attributes attrs = new Attributes();
     public boolean flip;
 
-    public void paint(Component c, Graphics g, int x, int y, int width, int height, boolean paintBorder, boolean paintBackground) {
-        Path2D path = new Path2D.Float();
+    public void paint(final Component c, final Graphics g, final int x, final int y, final int width, final int height, final boolean paintBorder, final boolean paintBackground) {
+        final Path2D path = new Path2D.Float();
         path.moveTo(x, y);
         path.lineTo(x + width - 1 - attrs.slant * 2, y);
         path.curveTo(x + width - 1 - attrs.slant, y, x + width - 1 - attrs.slant, y, x + width - 1, y + height - 1);
@@ -59,13 +59,13 @@ public class JhromeNewTabButtonBorder implements Border {
             path.transform(new AffineTransform(1, 0, 0, -1, 0, height - 1));
         }
 
-        Graphics2D g2 = (Graphics2D) g;
+        final Graphics2D g2 = (Graphics2D) g;
 
-        Object prevAntialias = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+        final Object prevAntialias = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        Stroke prevStroke = g2.getStroke();
-        Paint prevPaint = g2.getPaint();
+        final Stroke prevStroke = g2.getStroke();
+        final Paint prevPaint = g2.getPaint();
 
         if (paintBackground) {
             g2.setColor(attrs.fillColor);
@@ -85,13 +85,13 @@ public class JhromeNewTabButtonBorder implements Border {
     }
 
     @Override
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+    public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
         paint(c, g, x, y, width, height, true, false);
     }
 
     @Override
-    public Insets getBorderInsets(Component c) {
-        int i = 2;
+    public Insets getBorderInsets(final Component c) {
+        final int i = 2;
         return new Insets(i, i + (int) attrs.slant, i, i + (int) attrs.slant);
     }
 
@@ -111,11 +111,11 @@ public class JhromeNewTabButtonBorder implements Border {
 
         }
 
-        public Attributes(Attributes other) {
+        public Attributes(final Attributes other) {
             copy(other);
         }
 
-        public void copy(Attributes other) {
+        public void copy(final Attributes other) {
             slant = other.slant;
             fillColor = other.fillColor;
             borderColor = other.borderColor;
@@ -127,7 +127,7 @@ public class JhromeNewTabButtonBorder implements Border {
             return new Attributes(this);
         }
 
-        public void interpolateColors(Attributes a, Attributes b, float f) {
+        public void interpolateColors(final Attributes a, final Attributes b, final float f) {
             borderColor = Utils.interpolate(a.borderColor, b.borderColor, f);
             fillColor = Utils.interpolate(a.fillColor, b.fillColor, f);
         }

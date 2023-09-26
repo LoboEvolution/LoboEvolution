@@ -53,10 +53,10 @@ public class nodehasattributes03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        HTMLCollection elementList;
-        boolean hasAttributes;
+        final Document doc;
+        final Element element;
+        final HTMLCollection elementList;
+        final boolean hasAttributes;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(0);

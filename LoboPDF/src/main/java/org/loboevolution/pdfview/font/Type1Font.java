@@ -72,15 +72,15 @@ public class Type1Font extends OutlineFont {
      * @param descriptor the descriptor for this font
      * @throws java.io.IOException if any.
      */
-    public Type1Font(String baseName, PDFObject src,
-            PDFFontDescriptor descriptor) throws IOException {
+    public Type1Font(final String baseName, final PDFObject src,
+                     final PDFFontDescriptor descriptor) throws IOException {
         super(baseName, src, descriptor);
 
         if (descriptor != null && descriptor.getFontFile() != null) {
             // parse that file, filling name2outline and chr2name
-            int start = descriptor.getFontFile().getDictRef("Length1").getIntValue();
-            int len = descriptor.getFontFile().getDictRef("Length2").getIntValue();
-            byte[] font = descriptor.getFontFile().getStream();
+            final int start = descriptor.getFontFile().getDictRef("Length1").getIntValue();
+            final int len = descriptor.getFontFile().getDictRef("Length2").getIntValue();
+            final byte[] font = descriptor.getFontFile().getStream();
 
             parseFont(font, start, len);
         }
@@ -93,13 +93,13 @@ public class Type1Font extends OutlineFont {
      * @param start a int.
      * @param len a int.
      */
-    protected void parseFont(byte[] font, int start, int len) {
+    protected void parseFont(final byte[] font, final int start, final int len) {
         this.name2width = new HashMap<>();
 
         byte[] data = null;
 
         if (isASCII(font, start)) {
-            byte[] bData = readASCII(font, start, start + len);
+            final byte[] bData = readASCII(font, start, start + len);
             data = decrypt(bData, 0, bData.length, 55665, 4);
         } else {
             data = decrypt(font, start, start + len, 55665, 4);
@@ -107,8 +107,8 @@ public class Type1Font extends OutlineFont {
 
         // encoding is in cleartext area
         this.chr2name = readEncoding(font);
-        int lenIVLoc = findSlashName(data, "lenIV");
-        PSParser psp = new PSParser(data, 0);
+        final int lenIVLoc = findSlashName(data, "lenIV");
+        final PSParser psp = new PSParser(data, 0);
         if (lenIVLoc < 0) {
             this.lenIV = 4;
         } else {
@@ -116,14 +116,14 @@ public class Type1Font extends OutlineFont {
             this.lenIV = Integer.parseInt(psp.readThing());
         }
         this.password = 4330;
-        int matrixloc = findSlashName(font, "FontMatrix");
+        final int matrixloc = findSlashName(font, "FontMatrix");
         if (matrixloc < 0) {
             PDFDebugger.debug("No FontMatrix!");
             this.at = new AffineTransform(0.001f, 0, 0, 0.001f, 0, 0);
         } else {
-            PSParser psp2 = new PSParser(font, matrixloc + 11);
+            final PSParser psp2 = new PSParser(font, matrixloc + 11);
             // read [num num num num num num]
-            float[] xf = psp2.readArray(6);
+            final float[] xf = psp2.readArray(6);
             this.at = new AffineTransform(xf);
         }
 
@@ -137,9 +137,9 @@ public class Type1Font extends OutlineFont {
      * @param d the font definition stream
      * @return an array of the glyphs corresponding to each byte
      */
-    private String[] readEncoding(byte[] d) {
-        byte[][] ary = readArray(d, "Encoding", "def");
-        String[] res = new String[256];
+    private String[] readEncoding(final byte[] d) {
+        final byte[][] ary = readArray(d, "Encoding", "def");
+        final String[] res = new String[256];
         for (int i = 0; i < ary.length; i++) {
             if (ary[i] != null) {
                 if (ary[i][0] == '/') {
@@ -159,7 +159,7 @@ public class Type1Font extends OutlineFont {
      * @param d the font definition stream
      * @return an array of the subroutines, each as a byte array.
      */
-    private byte[][] readSubrs(byte[] d) {
+    private byte[][] readSubrs(final byte[] d) {
         return readArray(d, "Subrs", "index");
     }
 
@@ -175,7 +175,7 @@ public class Type1Font extends OutlineFont {
      * @param end a string that appears at the end of the array
      * @return an array consisting of a byte array for each entry
      */
-    private byte[][] readArray(byte[] d, String key, String end) {
+    private byte[][] readArray(final byte[] d, final String key, final String end) {
         int i = findSlashName(d, key);
         if (i < 0) {
             // not found.
@@ -183,35 +183,35 @@ public class Type1Font extends OutlineFont {
         }
         // now find things that look like "dup id elt put"
         // end at "def"
-        PSParser psp = new PSParser(d, i);
+        final PSParser psp = new PSParser(d, i);
         String type = psp.readThing();     // read the key (i is the start of the key)
         double val;
         type = psp.readThing();
         if (type.equals("StandardEncoding")) {
-            byte[][] stdenc = new byte[FontSupport.standardEncoding.length][];
+            final byte[][] stdenc = new byte[FontSupport.standardEncoding.length][];
             for (i = 0; i < stdenc.length; i++) {
                 stdenc[i] = FontSupport.getName(FontSupport.standardEncoding[i]).getBytes();
             }
             return stdenc;
         }
-        int len = Integer.parseInt(type);
-        byte[][] out = new byte[len][];
+        final int len = Integer.parseInt(type);
+        final byte[][] out = new byte[len][];
         byte[] line;
         while (true) {
-            String s = psp.readThing();
+            final String s = psp.readThing();
             if (s.equals("dup")) {
-                String thing = psp.readThing();
+                final String thing = psp.readThing();
                 int id = 0;
                 try {
                     id = Integer.parseInt(thing);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     break;
                 }
-                String elt = psp.readThing();
+                final String elt = psp.readThing();
                 line = elt.getBytes();
                 if (Character.isDigit(elt.charAt(0))) {
-                    int hold = Integer.parseInt(elt);
-                    String special = psp.readThing();
+                    final int hold = Integer.parseInt(elt);
+                    final String special = psp.readThing();
                     if (special.equals("-|") || special.equals("RD")) {
                         psp.setLoc(psp.getLoc() + 1);
                         line = psp.getNEncodedBytes(hold, this.password, this.lenIV);
@@ -235,18 +235,20 @@ public class Type1Font extends OutlineFont {
      * @return the decrypted bytes.  The length of this array will be
      * (start-end-skip) bytes long
      */
-    private byte[] decrypt(byte[] d, int start, int end, int key, int skip) {
+    private byte[] decrypt(final byte[] d, final int start, final int end, final int key, final int skipdecrypt) {
+        int skip = skipdecrypt;
+
         if (end - start - skip < 0) {
             skip = 0;
         }
-        byte[] o = new byte[end - start - skip];
+        final byte[] o = new byte[end - start - skip];
         int r = key;
         int ipos;
-        int c1 = 52845;
-        int c2 = 22719;
+        final int c1 = 52845;
+        final int c2 = 22719;
         for (ipos = start; ipos < end; ipos++) {
-            int c = d[ipos] & 0xff;
-            int p = (c ^ (r >> 8)) & 0xff;
+            final int c = d[ipos] & 0xff;
+            final int p = (c ^ (r >> 8)) & 0xff;
             r = ((c + r) * c1 + c2) & 0xffff;
             if (ipos - start - skip >= 0) {
                 o[ipos - start - skip] = (byte) p;
@@ -262,16 +264,16 @@ public class Type1Font extends OutlineFont {
      * @param start where in the array to start decrypting
      * @param end where in the array to stop decrypting
      */
-    private byte[] readASCII(byte[] data, int start, int end) {
+    private byte[] readASCII(final byte[] data, final int start, final int end) {
         // each byte of output is derived from one character (two bytes) of
         // input
-        byte[] o = new byte[(end - start) / 2];
+        final byte[] o = new byte[(end - start) / 2];
 
         int count = 0;
         int bit = 0;
 
         for (int loc = start; loc < end; loc++) {
-            char c = (char) (data[loc] & 0xff);
+            final char c = (char) (data[loc] & 0xff);
             byte b = (byte) 0;
 
             if (c >= '0' && c <= '9') {
@@ -302,11 +304,11 @@ public class Type1Font extends OutlineFont {
      * 'A' - 'F' or 'a' - 'f'), then the data is binary.  Otherwise it is
      * ASCII
      */
-    private boolean isASCII(byte[] data, int start) {
+    private boolean isASCII(final byte[] data, final int start) {
         // look at the first 4 bytes
         for (int i = start; i < start + 4; i++) {
             // get the byte as a character
-            char c = (char) (data[i] & 0xff);
+            final char c = (char) (data[i] & 0xff);
 
             if (c >= '0' && c <= '9') {
                 continue;
@@ -338,7 +340,7 @@ public class Type1Font extends OutlineFont {
          * @param data the bytes of the postscript information
          * @param start an initial offset into the data
          */
-        public PSParser(byte[] data, int start) {
+        public PSParser(final byte[] data, final int start) {
             this.data = data;
             this.loc = start;
         }
@@ -355,14 +357,14 @@ public class Type1Font extends OutlineFont {
                 this.loc++;
             }
             // read thing
-            int start = this.loc;
+            final int start = this.loc;
             while (!PDFFile.isWhiteSpace(this.data[this.loc])) {
                 this.loc++;
                 if (!PDFFile.isRegularCharacter(this.data[this.loc])) {
                     break;  // leave with the delimiter included
                 }
             }
-            String s = new String(this.data, start, this.loc - start);
+            final String s = new String(this.data, start, this.loc - start);
             return s;
         }
 
@@ -373,8 +375,8 @@ public class Type1Font extends OutlineFont {
          * @param count the number of items to read
          * @return an array of count floats
          */
-        public float[] readArray(int count) {
-            float[] ary = new float[count];
+        public float[] readArray(final int count) {
+            final float[] ary = new float[count];
             int idx = 0;
             while (idx < count) {
                 String thing = readThing();
@@ -401,7 +403,7 @@ public class Type1Font extends OutlineFont {
         /**
          * set the current location within the input stream
          */
-        public void setLoc(int loc) {
+        public void setLoc(final int loc) {
             this.loc = loc;
         }
 
@@ -415,8 +417,8 @@ public class Type1Font extends OutlineFont {
          * @return an array of decrypted bytes.  The length of the array
          * will be n-skip.
          */
-        public byte[] getNEncodedBytes(int n, int key, int skip) {
-            byte[] result = decrypt(this.data, this.loc, this.loc + n, key, skip);
+        public byte[] getNEncodedBytes(final int n, final int key, final int skip) {
+            final byte[] result = decrypt(this.data, this.loc, this.loc + n, key, skip);
             this.loc += n;
             return result;
         }
@@ -428,7 +430,7 @@ public class Type1Font extends OutlineFont {
      * @param name the name to look for, without the initial /
      * @return the index of the first occurance of /name in the array.
      */
-    private int findSlashName(byte[] d, String name) {
+    private int findSlashName(final byte[] d, final String name) {
         int i;
         for (i = 0; i < d.length; i++) {
             if (d[i] == '/') {
@@ -454,26 +456,26 @@ public class Type1Font extends OutlineFont {
      * @return a HashMap that maps string glyph names to byte arrays of
      * decoded font data.
      */
-    private Map<String,byte[]> readChars(byte[] d) {
+    private Map<String,byte[]> readChars(final byte[] d) {
         // skip thru data until we find "/"+key
-        HashMap<String,byte[]> hm = new HashMap<>();
-        int i = findSlashName(d, "CharStrings");
+        final HashMap<String,byte[]> hm = new HashMap<>();
+        final int i = findSlashName(d, "CharStrings");
         if (i < 0) {
             // not found
             return hm;
         }
-        PSParser psp = new PSParser(d, i);
+        final PSParser psp = new PSParser(d, i);
         // read /name len -| [len bytes] |-
         // until "end"
         while (true) {
-            String s = psp.readThing();
-            char c = s.charAt(0);
+            final String s = psp.readThing();
+            final char c = s.charAt(0);
             if (c == '/') {
-                int len = Integer.parseInt(psp.readThing());
-                String go = psp.readThing();  // it's -| or RD
+                final int len = Integer.parseInt(psp.readThing());
+                final String go = psp.readThing();  // it's -| or RD
                 if (go.equals("-|") || go.equals("RD")) {
                     psp.setLoc(psp.getLoc() + 1);
-                    byte[] line = psp.getNEncodedBytes(len, this.password, this.lenIV);
+                    final byte[] line = psp.getNEncodedBytes(len, this.password, this.lenIV);
                     hm.put(s.substring(1), line);
                 }
             } else if (s.equals("end")) {
@@ -504,11 +506,11 @@ public class Type1Font extends OutlineFont {
      * @param pt a FlPoint object that will be used to generate the path
      * @param wid a FlPoint into which the advance width will be placed.
      */
-    private void parse(byte[] cs, GeneralPath gp, FlPoint pt, FlPoint wid) {
+    private void parse(final byte[] cs, final GeneralPath gp, final FlPoint pt, final FlPoint wid) {
         int loc = 0;
         float x1, x2, x3, y1, y2, y3;
         boolean flexMode = false;
-        float[] flexArray = new float[16];
+        final float[] flexArray = new float[16];
         int flexPt = 0;
         while (loc < cs.length) {
             int v = (cs[loc++]) & 0xff;
@@ -581,7 +583,7 @@ public class Type1Font extends OutlineFont {
                         this.sloc = 0;
                         break;
                     case 10:  // n callsubr
-                        int n = (int) pop();
+                        final int n = (int) pop();
                         if (n == 1) {
                         	flexMode = true;
                         	flexPt = 0;
@@ -631,10 +633,10 @@ public class Type1Font extends OutlineFont {
                     case 12:  // ext...
                         v = (cs[loc++]) & 0xff;
                         if (v == 6) {  // s x y a b seac
-                        char a = (char) pop();
-                            char b = (char) pop();
-                            float y = pop();
-                            float x = pop();
+                        final char a = (char) pop();
+                            final char b = (char) pop();
+                            final float y = pop();
+                            final float x = pop();
                             buildAccentChar(x, y, a, b, gp);
                             this.sloc = 0;
                         } else if (v == 7) {  // x y w h sbw
@@ -644,8 +646,8 @@ public class Type1Font extends OutlineFont {
                             pt.x = pop();
                             this.sloc = 0;
                         } else if (v == 12) {  // a b div -> a/b
-                            float b = pop();
-                            float a = pop();
+                            final float b = pop();
+                            final float a = pop();
                             this.stack[this.sloc++] = a / b;
                         } else if (v == 33) {  // a b setcurrentpoint
                             pt.y = pop();
@@ -659,8 +661,8 @@ public class Type1Font extends OutlineFont {
                         } else if (v == 2) {  // hstem3
                             this.sloc = 0;
                         } else if (v == 16) {  // n callothersubr
-                            int cn = (int) pop();
-                            int countargs = (int) pop();
+                            final int cn = (int) pop();
+                            final int countargs = (int) pop();
 
                             switch (cn) {
                                 case 0:
@@ -779,8 +781,8 @@ public class Type1Font extends OutlineFont {
      * @param gp the GeneralPath into which the combined glyph will be
      * written.
      */
-    private void buildAccentChar(float x, float y, char a, char b,
-            GeneralPath gp) {
+    private void buildAccentChar(final float x, final float y, final char a, final char b,
+                                 final GeneralPath gp) {
         // get the outline of the accent
         GeneralPath pathA = getOutline(a, getWidth(a, null));
         // don't manipulate the original glyph
@@ -794,16 +796,16 @@ public class Type1Font extends OutlineFont {
             // and the definition of the seac-Command in http://partners.adobe.com/public/developer/en/font/T1_SPEC.PDF
             final AffineTransform xformA2 = AffineTransform.getTranslateInstance(0, y);
             pathA.transform(xformA2);
-        } catch (NoninvertibleTransformException nte) {
+        } catch (final NoninvertibleTransformException nte) {
             pathA.transform(AffineTransform.getTranslateInstance(x, y));
         }
 
-        GeneralPath pathB = getOutline(b, getWidth(b, null));
+        final GeneralPath pathB = getOutline(b, getWidth(b, null));
 
         try {
-            AffineTransform xformB = this.at.createInverse();
+            final AffineTransform xformB = this.at.createInverse();
             pathB.transform(xformB);
-        } catch (NoninvertibleTransformException nte) {
+        } catch (final NoninvertibleTransformException nte) {
             // ignore
         }
 
@@ -820,7 +822,7 @@ public class Type1Font extends OutlineFont {
      * populated (as for one of the 14 base fonts)
      */
     @Override
-    public float getWidth(char code, String name) {
+    public float getWidth(final char code, final String name) {
         // we don't have first and last chars, so therefore no width array
         if (getFirstChar() == -1 || getLastChar() == -1) {
             String key = this.chr2name[code & 0xff];
@@ -837,7 +839,7 @@ public class Type1Font extends OutlineFont {
                     getOutline(key, 0);
                 }
 
-                FlPoint width = this.name2width.get(key);
+                final FlPoint width = this.name2width.get(key);
                 if (width != null) {
                     return width.x / getDefaultWidth();
                 }
@@ -853,10 +855,10 @@ public class Type1Font extends OutlineFont {
     /**
      * Decrypt a glyph stored in byte form
      */
-    private synchronized GeneralPath parseGlyph(byte[] cs, FlPoint advance,
-            AffineTransform at) {
-        GeneralPath gp = new GeneralPath();
-        FlPoint curpoint = new FlPoint();
+    private synchronized GeneralPath parseGlyph(final byte[] cs, final FlPoint advance,
+                                                final AffineTransform at) {
+        final GeneralPath gp = new GeneralPath();
+        final FlPoint curpoint = new FlPoint();
 
         this.sloc = 0;
         parse(cs, gp, curpoint, advance);
@@ -871,32 +873,32 @@ public class Type1Font extends OutlineFont {
 	 * Get a glyph outline by name
 	 */
     @Override
-	protected GeneralPath getOutline(String name, float width) {
-        // make sure we have a valid name
+	protected GeneralPath getOutline(final String namePath, final float width) {
+        String name = namePath;
         if (name == null || !this.name2outline.containsKey(name)) {
             name = ".notdef";
         }
 
         // get whatever is stored in name. Could be a GeneralPath, could be byte[]
-        Object obj = this.name2outline.get(name);
+        final Object obj = this.name2outline.get(name);
 
         // if it's a byte array, it needs to be parsed
         // otherwise, just return the path
         if (obj instanceof GeneralPath) {
             return (GeneralPath) obj;
         } else {
-            byte[] cs = (byte[]) obj;
-            FlPoint advance = new FlPoint();
+            final byte[] cs = (byte[]) obj;
+            final FlPoint advance = new FlPoint();
 
-            GeneralPath gp = parseGlyph(cs, advance, this.at);
+            final GeneralPath gp = parseGlyph(cs, advance, this.at);
 
             if (width != 0 && advance.x != 0) {
                 // scale the glyph to fit in the width
-                Point2D p = new Point2D.Float(advance.x, advance.y);
+                final Point2D p = new Point2D.Float(advance.x, advance.y);
                 this.at.transform(p, p);
 
-                double scale = width / p.getX();
-                AffineTransform xform = AffineTransform.getScaleInstance(scale, 1.0);
+                final double scale = width / p.getX();
+                final AffineTransform xform = AffineTransform.getScaleInstance(scale, 1.0);
                 gp.transform(xform);
             }
 
@@ -915,7 +917,7 @@ public class Type1Font extends OutlineFont {
 	 * Note this method must always return an outline
 	 */
     @Override
-	protected GeneralPath getOutline(char src, float width) {
+	protected GeneralPath getOutline(final char src, final float width) {
         return getOutline(this.chr2name[src & 0xff], width);
     }
     

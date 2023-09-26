@@ -53,13 +53,13 @@ import static org.junit.Assert.assertEquals;
 public class nodeinsertbefore09Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFrag;
-        Comment newComment;
-        Comment insertComment;
-        Comment comment;
-        DocumentFragment inserted;
-        String data;
+        final Document doc;
+        final DocumentFragment docFrag;
+        final Comment newComment;
+        final Comment insertComment;
+        final Comment comment;
+        final DocumentFragment inserted;
+        final String data;
         Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         newComment = doc.createComment("Comment");

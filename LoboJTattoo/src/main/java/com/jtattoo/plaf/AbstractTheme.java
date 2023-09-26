@@ -41,9 +41,6 @@ import javax.swing.plaf.metal.MetalTheme;
 
 /**
  * <p>Abstract AbstractTheme class.</p>
- *
- *
- *
  */
 public abstract class AbstractTheme extends MetalTheme {
 
@@ -98,42 +95,42 @@ public abstract class AbstractTheme extends MetalTheme {
 	public static final ColorUIResource DARK_BLUE = new ColorUIResource(0, 64, 128);
 
 	/** Constant internalName="Default" */
-	protected static String internalName = "Default";
+	private static String internalName = "Default";
 	/** Constant windowDecoration=false */
-	protected static boolean windowDecoration = false;
+	private boolean windowDecoration = false;
 	/** Constant macStyleWindowDecoration=false */
-	protected static boolean macStyleWindowDecoration = false;
+	private boolean macStyleWindowDecoration = false;
 	/** Constant centerWindowTitle=false */
-	protected static boolean centerWindowTitle = false;
+	private boolean centerWindowTitle = false;
 	/** Constant linuxStyleScrollBar=false */
-	protected static boolean linuxStyleScrollBar = false;
+	private boolean linuxStyleScrollBar = false;
 	/** Constant macStyleScrollBar=false */
-	protected static boolean macStyleScrollBar = false;
+	private boolean macStyleScrollBar = false;
 	/** Constant dynamicLayout=false */
-	protected static boolean dynamicLayout = false;
+	private boolean dynamicLayout = false;
 	/** Constant textShadow=false */
-	protected static boolean textShadow = false;
+	protected boolean textShadow = false;
 	/** Constant textAntiAliasing=true */
-	protected static boolean textAntiAliasing = true;
+	private boolean textAntiAliasing = true;
 	/** Constant textAntiAliasingMode=TEXT_ANTIALIAS_HRGB */
 	protected static int textAntiAliasingMode = TEXT_ANTIALIAS_HRGB;
 	/** Constant backgroundPattern=true */
-	protected static boolean backgroundPattern = true;
+	protected boolean backgroundPattern = true;
 	/** Constant brightMode=false */
-	protected static boolean brightMode = false;
+	private boolean brightMode = false;
 	/** Constant showFocusFrame=false */
-	protected static boolean showFocusFrame = false;
+	protected boolean showFocusFrame = false;
 	/** Constant drawSquareButtons=false */
-	protected static boolean drawSquareButtons = false;
+	private boolean drawSquareButtons = false;
 	/** Constant toolbarDecorated=true */
-	protected static boolean toolbarDecorated = true;
+	private boolean toolbarDecorated = true;
 
 	/** Constant menuOpaque=true */
-	protected static boolean menuOpaque = true;
+	protected boolean menuOpaque = true;
 	/** Constant menuAlpha=0.9f */
 	protected static float menuAlpha = 0.9f;
 	/** Constant logoString="JTattoo" */
-	protected static String logoString = "JTattoo";
+	private String logoString = "JTattoo";
 	/** Constant controlFont */
 	protected static FontUIResource controlFont = null;
 	/** Constant systemFont */
@@ -292,7 +289,7 @@ public abstract class AbstractTheme extends MetalTheme {
 	/** Constant tooltipShadowSize=6 */
 	protected static int tooltipShadowSize = 6;
 	/** Constant tooltipCastShadow=false */
-	protected static boolean tooltipCastShadow = false;
+	private boolean tooltipCastShadow = false;
 
 	/** Constant DEFAULT_COLORS */
 	protected static Color[] DEFAULT_COLORS = null;
@@ -342,34 +339,35 @@ public abstract class AbstractTheme extends MetalTheme {
 	protected static Color[] PROGRESSBAR_COLORS = null;
 
 	/** Constant textureSet="Default" */
-	protected static String textureSet = "Default";
+	private String textureSet = "Default";
 	/** Constant darkTexture=true */
-	protected static boolean darkTexture = true;
+	private boolean darkTexture = true;
 	/** Constant windowTexture */
-	protected static Icon windowTexture = null;
+	private Icon windowTexture = null;
 	/** Constant backgroundTexture */
-	protected static Icon backgroundTexture = null;
+	private Icon backgroundTexture = null;
 	/** Constant alterBackgroundTexture */
-	protected static Icon alterBackgroundTexture = null;
+	private Icon alterBackgroundTexture = null;
 	/** Constant selectedTexture */
-	protected static Icon selectedTexture = null;
+	private Icon selectedTexture = null;
 	/** Constant rolloverTexture */
-	protected static Icon rolloverTexture = null;
+	private Icon rolloverTexture = null;
 	/** Constant pressedTexture */
-	protected static Icon pressedTexture = null;
+	private Icon pressedTexture = null;
 	/** Constant disabledTexture */
-	protected static Icon disabledTexture = null;
+	private Icon disabledTexture = null;
 	/** Constant menubarTexture */
-	protected static Icon menubarTexture = null;
+	private Icon menubarTexture = null;
 
 	/**
 	 * <p>createColor.</p>
 	 *
-	 * @param colorProp a {@link java.lang.String} object.
+	 * @param colorStr a {@link java.lang.String} object.
 	 * @param color a {@link javax.swing.plaf.ColorUIResource} object.
 	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
 	 */
-	protected static ColorUIResource createColor(String colorProp, ColorUIResource color) {
+	protected static ColorUIResource createColor(final String colorStr, final ColorUIResource color) {
+		String colorProp = colorStr;
 		if (colorProp != null && colorProp.trim().length() >= 5) {
 			colorProp = colorProp.trim();
 			int r = color.getRed();
@@ -388,7 +386,7 @@ public abstract class AbstractTheme extends MetalTheme {
 					}
 				}
 				return new ColorUIResource(r, g, b);
-			} catch (NumberFormatException ex) {
+			} catch (final NumberFormatException ex) {
 				logger.severe("Exception while parsing color property: " + colorProp);
 			}
 		}
@@ -401,7 +399,7 @@ public abstract class AbstractTheme extends MetalTheme {
 	 * @param fontProp a {@link java.lang.String} object.
 	 * @return a {@link javax.swing.plaf.FontUIResource} object.
 	 */
-	protected static FontUIResource createFont(String fontProp) {
+	protected static FontUIResource createFont(final String fontProp) {
 		if (fontProp != null && fontProp.trim().length() > 5) {
 			return new FontUIResource(Font.decode(fontProp));
 		}
@@ -415,11 +413,11 @@ public abstract class AbstractTheme extends MetalTheme {
 	 * @param defaultValue a int.
 	 * @return a int.
 	 */
-	protected static int createInt(String intProp, int defaultValue) {
+	protected static int createInt(final String intProp, final int defaultValue) {
 		int val = defaultValue;
 		try {
 			val = Integer.parseInt(intProp);
-		} catch (NumberFormatException ex) {
+		} catch (final NumberFormatException ex) {
 			logger.severe("Exception while parsing int property: " + intProp);
 		}
 		return val;
@@ -439,7 +437,7 @@ public abstract class AbstractTheme extends MetalTheme {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
-	public static void setInternalName(String name) {
+	public static void setInternalName(final String name) {
 		internalName = name;
 	}
 
@@ -1813,18 +1811,18 @@ public abstract class AbstractTheme extends MetalTheme {
 	public void loadProperties() {
 		FileInputStream in = null;
 		try {
-			String fileName = System.getProperty("user.home") + "/.jtattoo/" + getPropertyFileName();
-			Properties props = new Properties();
+			final String fileName = System.getProperty("user.home") + "/.jtattoo/" + getPropertyFileName();
+			final Properties props = new Properties();
 			in = new FileInputStream(fileName);
 			props.load(in);
 			setProperties(props);
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 		} finally {
 			try {
 				if (in != null) {
 					in.close();
 				}
-			} catch (IOException ex) {
+			} catch (final IOException ex) {
 			}
 		}
 	}
@@ -1834,7 +1832,7 @@ public abstract class AbstractTheme extends MetalTheme {
 	 *
 	 * @param props a {@link java.util.Properties} object.
 	 */
-	public void setProperties(Properties props) {
+	public void setProperties(final Properties props) {
 		if (props != null) {
 			if (props.getProperty("windowDecoration") != null) {
 				windowDecoration = props.getProperty("windowDecoration").trim().equalsIgnoreCase("on");
@@ -1861,7 +1859,7 @@ public abstract class AbstractTheme extends MetalTheme {
 				textAntiAliasing = props.getProperty("textAntiAliasing").trim().equalsIgnoreCase("on");
 			}
 			if (props.getProperty("textAntiAliasingMode") != null) {
-				String mode = props.getProperty("textAntiAliasingMode");
+				final String mode = props.getProperty("textAntiAliasingMode");
 				if (mode.equalsIgnoreCase("default")) {
 					textAntiAliasingMode = TEXT_ANTIALIAS_DEFAULT;
 				}
@@ -2191,49 +2189,49 @@ public abstract class AbstractTheme extends MetalTheme {
 				darkTexture = props.getProperty("darkTexture").trim().equalsIgnoreCase("on");
 			}
 			if (props.get("windowTexture") != null) {
-				Object texture = props.get("windowTexture");
+				final Object texture = props.get("windowTexture");
 				if (texture instanceof Icon) {
 					windowTexture = (Icon) texture;
 				}
 			}
 			if (props.get("backgroundTexture") != null) {
-				Object texture = props.get("backgroundTexture");
+				final Object texture = props.get("backgroundTexture");
 				if (texture instanceof Icon) {
 					backgroundTexture = (Icon) texture;
 				}
 			}
 			if (props.get("alterBackgroundTexture") != null) {
-				Object texture = props.get("alterBackgroundTexture");
+				final Object texture = props.get("alterBackgroundTexture");
 				if (texture instanceof Icon) {
 					alterBackgroundTexture = (Icon) texture;
 				}
 			}
 			if (props.get("selectedTexture") != null) {
-				Object texture = props.get("selectedTexture");
+				final Object texture = props.get("selectedTexture");
 				if (texture instanceof Icon) {
 					selectedTexture = (Icon) texture;
 				}
 			}
 			if (props.get("rolloverTexture") != null) {
-				Object texture = props.get("rolloverTexture");
+				final Object texture = props.get("rolloverTexture");
 				if (texture instanceof Icon) {
 					rolloverTexture = (Icon) texture;
 				}
 			}
 			if (props.get("pressedTexture") != null) {
-				Object texture = props.get("pressedTexture");
+				final Object texture = props.get("pressedTexture");
 				if (texture instanceof Icon) {
 					pressedTexture = (Icon) texture;
 				}
 			}
 			if (props.get("disabledTexture") != null) {
-				Object texture = props.get("disabledTexture");
+				final Object texture = props.get("disabledTexture");
 				if (texture instanceof Icon) {
 					disabledTexture = (Icon) texture;
 				}
 			}
 			if (props.get("menubarTexture") != null) {
-				Object texture = props.get("menubarTexture");
+				final Object texture = props.get("menubarTexture");
 				if (texture instanceof Icon) {
 					menubarTexture = (Icon) texture;
 				}

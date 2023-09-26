@@ -48,11 +48,11 @@ public class nodereplacechild29Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection childList;
-        Element elem;
-        Element oldChild;
-        Element newChild;
+        final Document doc;
+        final HTMLCollection childList;
+        final Element elem;
+        final Element oldChild;
+        final Element newChild;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("p");
         elem = (Element) childList.item(0);
@@ -62,7 +62,7 @@ public class nodereplacechild29Test extends LoboUnitTest {
         boolean success = false;
         try {
             elem.replaceChild(newChild, oldChild);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
         assertTrue("throw_NOT_FOUND_ERR", success);

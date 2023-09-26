@@ -50,7 +50,7 @@ public class AddBookmarkAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public AddBookmarkAction(BrowserFrame frame) {
+	public AddBookmarkAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 

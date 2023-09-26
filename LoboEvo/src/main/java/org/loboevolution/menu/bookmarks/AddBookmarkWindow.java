@@ -77,11 +77,11 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	 *
 	 * @param uri a {@link java.lang.String} object.
 	 */
-	public AddBookmarkWindow(String uri) {
+	public AddBookmarkWindow(final String uri) {
 		createAndShowGUI(uri);
 	}
 
-	private void createAndShowGUI(String uri) {
+	private void createAndShowGUI(final String uri) {
 		final MatteBorder border = new MatteBorder(0, 0, 1, 0, foreground());
 		
 		final Container contentPane = getContentPane();
@@ -92,18 +92,18 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 		final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("bookmark.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
-		LoboPanel panel = new LoboPanel();
+		final LoboPanel panel = new LoboPanel();
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 350, 400);
 		contentPane.add(panel);
 		
-		LoboLabel lblEditionDeCompte = new LoboLabel("Add Bookmark");
+		final LoboLabel lblEditionDeCompte = new LoboLabel("Add Bookmark");
 		lblEditionDeCompte.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEditionDeCompte.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblEditionDeCompte.setBounds(0, 0, 167, 22);
 		panel.add(lblEditionDeCompte);
 		
-		LoboLabel lbldescriptionField = new LoboLabel("Description");
+		final LoboLabel lbldescriptionField = new LoboLabel("Description");
 		lbldescriptionField.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lbldescriptionField.setBounds(12, 70, 282, 16);
 		panel.add(lbldescriptionField);
@@ -115,7 +115,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 		descriptionField.setBounds(12, 98, 350, 16);
 		panel.add(descriptionField);
 
-		LoboLabel lbltitleField = new LoboLabel("Title");
+		final LoboLabel lbltitleField = new LoboLabel("Title");
 		lbltitleField.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lbltitleField.setBounds(12, 139, 282, 16);
 		panel.add(lbltitleField);
@@ -127,7 +127,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 		titleField.setBounds(12, 167, 350, 16);
 		panel.add(titleField);
 
-		LoboLabel lblMotDePasse_1 = new LoboLabel("Tags");
+		final LoboLabel lblMotDePasse_1 = new LoboLabel("Tags");
 		lblMotDePasse_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblMotDePasse_1.setBounds(12, 208, 282, 16);
 		panel.add(lblMotDePasse_1);
@@ -139,7 +139,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 		tagsField.setBounds(12, 236, 350, 16);
 		panel.add(tagsField);
 		
-		LoboLabel lblurlField_1 = new LoboLabel("Url");
+		final LoboLabel lblurlField_1 = new LoboLabel("Url");
 		lblurlField_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblurlField_1.setBounds(12, 277, 282, 16);
 		panel.add(lblurlField_1);
@@ -152,14 +152,14 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 		urlField.setBounds(12, 300, 350, 16);
 		panel.add(urlField);
 		
-		LoboButton okButton = new LoboButton();
+		final LoboButton okButton = new LoboButton();
 		okButton.setText("Save");
 		okButton.setBounds(12, 356, 150, 40);
 		okButton.setActionCommand("save");
 		okButton.addActionListener(this);
 		panel.add(okButton);
 
-		LoboButton closeButton = new LoboButton();
+		final LoboButton closeButton = new LoboButton();
 		closeButton.setText("Close");
 		closeButton.setActionCommand("close");
 		closeButton.addActionListener(this);
@@ -170,7 +170,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
-		String actionCommand = e.getActionCommand();		
+		final String actionCommand = e.getActionCommand();
 		switch (actionCommand) {
 		case "save":
 			final BookmarksStore book = new BookmarksStore();
@@ -211,7 +211,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	 *
 	 * @param descriptionField the descriptionField to set
 	 */
-	public void setDescriptionField(LoboTextField descriptionField) {
+	public void setDescriptionField(final LoboTextField descriptionField) {
 		this.descriptionField = descriptionField;
 	}
 
@@ -229,7 +229,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	 *
 	 * @param titleField the titleField to set
 	 */
-	public void setTitleField(LoboTextField titleField) {
+	public void setTitleField(final LoboTextField titleField) {
 		this.titleField = titleField;
 	}
 
@@ -247,7 +247,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	 *
 	 * @param tagsField the tagsField to set
 	 */
-	public void setTagsField(LoboTextField tagsField) {
+	public void setTagsField(final LoboTextField tagsField) {
 		this.tagsField = tagsField;
 	}
 
@@ -265,7 +265,7 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	 *
 	 * @param urlField the urlField to set
 	 */
-	public void setUrlField(LoboTextField urlField) {
+	public void setUrlField(final LoboTextField urlField) {
 		this.urlField = urlField;
 	}
 }

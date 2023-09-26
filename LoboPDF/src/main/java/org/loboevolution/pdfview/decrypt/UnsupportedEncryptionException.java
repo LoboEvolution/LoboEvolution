@@ -42,7 +42,7 @@ public abstract class UnsupportedEncryptionException extends Exception {
      *
      * @param message a {@link java.lang.String} object.
      */
-    protected UnsupportedEncryptionException(String message) {
+    protected UnsupportedEncryptionException(final String message) {
         super(message);
     }
 
@@ -52,7 +52,7 @@ public abstract class UnsupportedEncryptionException extends Exception {
      * @param message a {@link java.lang.String} object.
      * @param cause a {@link java.lang.Throwable} object.
      */
-    protected UnsupportedEncryptionException(String message, Throwable cause) {
+    protected UnsupportedEncryptionException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

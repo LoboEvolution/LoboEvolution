@@ -79,7 +79,7 @@ public class BaseSliderUI extends BasicSliderUI {
 		public void mouseMoved(final MouseEvent e) {
 			super.mouseMoved(e);
 			if (slider.isEnabled()) {
-				boolean rollover = thumbRect.contains(e.getPoint());
+				final boolean rollover = thumbRect.contains(e.getPoint());
 				if (rollover != isRollover) {
 					isRollover = rollover;
 					slider.repaint();
@@ -101,13 +101,13 @@ public class BaseSliderUI extends BasicSliderUI {
 	 *
 	 * @param slider a {@link javax.swing.JSlider} object.
 	 */
-	public BaseSliderUI(JSlider slider) {
+	public BaseSliderUI(final JSlider slider) {
 		super(slider);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public TrackListener createTrackListener(JSlider slider) {
+	public TrackListener createTrackListener(final JSlider slider) {
 		return new MyTrackListener();
 	}
 
@@ -138,7 +138,7 @@ public class BaseSliderUI extends BasicSliderUI {
 	/** {@inheritDoc} */
 	@Override
 	protected Dimension getThumbSize() {
-		Dimension size = super.getThumbSize();
+		final Dimension size = super.getThumbSize();
 		if (getThumbHorIcon() != null && getThumbVerIcon() != null) {
 			if (slider.getOrientation() == SwingConstants.HORIZONTAL) {
 				size.width = getThumbHorIcon().getIconWidth();
@@ -200,7 +200,7 @@ public class BaseSliderUI extends BasicSliderUI {
 		paintBackground(g, c);
 		recalculateIfInsetsChanged();
 		recalculateIfOrientationChanged();
-		Rectangle clip = g.getClipBounds();
+		final Rectangle clip = g.getClipBounds();
 
 		if (!clip.intersects(trackRect) && slider.getPaintTrack()) {
 			calculateGeometry();
@@ -229,7 +229,7 @@ public class BaseSliderUI extends BasicSliderUI {
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link javax.swing.JComponent} object.
 	 */
-	public void paintBackground(Graphics g, JComponent c) {
+	public void paintBackground(final Graphics g, final JComponent c) {
 		if (c.isOpaque()) {
 			if (c.getBackground() instanceof ColorUIResource) {
 				g.setColor(AbstractLookAndFeel.getBackgroundColor());
@@ -242,8 +242,8 @@ public class BaseSliderUI extends BasicSliderUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintThumb(Graphics g) {
-		Icon icon;
+	public void paintThumb(final Graphics g) {
+		final Icon icon;
 		if (slider.getOrientation() == SwingConstants.HORIZONTAL) {
 			if ((isRollover || isDragging()) && slider.isEnabled()) {
 				icon = getThumbHorIconRollover();
@@ -257,12 +257,12 @@ public class BaseSliderUI extends BasicSliderUI {
 				icon = getThumbVerIcon();
 			}
 		}
-		Graphics2D g2D = (Graphics2D) g;
-		Composite savedComposite = g2D.getComposite();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite savedComposite = g2D.getComposite();
 		if (!slider.isEnabled()) {
 			g.setColor(AbstractLookAndFeel.getBackgroundColor());
 			g.fillRect(thumbRect.x + 1, thumbRect.y + 1, thumbRect.width - 2, thumbRect.height - 2);
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
 		}
 		icon.paintIcon(null, g, thumbRect.x, thumbRect.y);
@@ -271,9 +271,9 @@ public class BaseSliderUI extends BasicSliderUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintTicks(Graphics g) {
-		boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
-		Rectangle tickBounds = tickRect;
+	public void paintTicks(final Graphics g) {
+		final boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
+		final Rectangle tickBounds = tickRect;
 		g.setColor(slider.getForeground());
 		if (slider.getOrientation() == SwingConstants.HORIZONTAL) {
 			g.translate(0, tickBounds.y);
@@ -344,15 +344,15 @@ public class BaseSliderUI extends BasicSliderUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintTrack(Graphics g) {
-		boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
+	public void paintTrack(final Graphics g) {
+		final boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
 
 		g.translate(trackRect.x, trackRect.y);
-		int overhang = 4;
+		final int overhang = 4;
 		int trackLeft = 0;
 		int trackTop = 0;
-		int trackRight;
-		int trackBottom;
+		final int trackRight;
+		final int trackBottom;
 
 		if (slider.getOrientation() == SwingConstants.HORIZONTAL) {
 			trackBottom = trackRect.height - 1 - overhang;
@@ -373,10 +373,10 @@ public class BaseSliderUI extends BasicSliderUI {
 		g.drawRect(trackLeft, trackTop, trackRight - trackLeft - 1, trackBottom - trackTop - 1);
 
 		int middleOfThumb;
-		int fillTop;
-		int fillLeft;
-		int fillBottom;
-		int fillRight;
+		final int fillTop;
+		final int fillLeft;
+		final int fillBottom;
+		final int fillRight;
 
 		if (slider.getOrientation() == SwingConstants.HORIZONTAL) {
 			middleOfThumb = thumbRect.x + thumbRect.width / 2;
@@ -391,7 +391,7 @@ public class BaseSliderUI extends BasicSliderUI {
 				fillLeft = middleOfThumb;
 				fillRight = trackRight - 2;
 			}
-			Color[] colors;
+			final Color[] colors;
 			if (!JTattooUtilities.isActive(slider)) {
 				colors = AbstractLookAndFeel.getTheme().getInActiveColors();
 			} else {
@@ -403,8 +403,8 @@ public class BaseSliderUI extends BasicSliderUI {
 			}
 			JTattooUtilities.fillHorGradient(g, colors, fillLeft + 2, fillTop + 2, fillRight - fillLeft - 2,
 					fillBottom - fillTop - 2);
-			Color cHi = ColorHelper.darker(colors[colors.length - 1], 5);
-			Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
+			final Color cHi = ColorHelper.darker(colors[colors.length - 1], 5);
+			final Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
 			JTattooUtilities.draw3DBorder(g, cHi, cLo, fillLeft + 1, fillTop + 1, fillRight - fillLeft - 1,
 					fillBottom - fillTop - 1);
 		} else {
@@ -420,7 +420,7 @@ public class BaseSliderUI extends BasicSliderUI {
 				fillTop = trackTop + 1;
 				fillBottom = middleOfThumb;
 			}
-			Color[] colors;
+			final Color[] colors;
 			if (!JTattooUtilities.isActive(slider)) {
 				colors = AbstractLookAndFeel.getTheme().getInActiveColors();
 			} else {
@@ -432,8 +432,8 @@ public class BaseSliderUI extends BasicSliderUI {
 			}
 			JTattooUtilities.fillVerGradient(g, colors, fillLeft + 2, fillTop + 2, fillRight - fillLeft - 2,
 					fillBottom - fillTop - 2);
-			Color cHi = ColorHelper.darker(colors[colors.length - 1], 5);
-			Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
+			final Color cHi = ColorHelper.darker(colors[colors.length - 1], 5);
+			final Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
 			JTattooUtilities.draw3DBorder(g, cHi, cLo, fillLeft + 1, fillTop + 1, fillRight - fillLeft - 1,
 					fillBottom - fillTop - 1);
 		}

@@ -83,7 +83,7 @@ public class BorderInsets {
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.info.BorderInfo} object.
 	 */
-	public static BorderInfo getBorderInfo(CSSStyleDeclaration properties, HTMLElementImpl element, RenderState renderState) {
+	public static BorderInfo getBorderInfo(final CSSStyleDeclaration properties, final HTMLElementImpl element, final RenderState renderState) {
 		final BorderInfo binfo = new BorderInfo();
 		
 		final int topStyle = getBorderStyle(element, properties.getBorderTopStyle());
@@ -119,7 +119,7 @@ public class BorderInsets {
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */
-	private static void populateBorderInsets(BorderInfo binfo, CSSStyleDeclaration cssProperties, HTMLElementImpl element, RenderState renderState) {
+	private static void populateBorderInsets(final BorderInfo binfo, final CSSStyleDeclaration cssProperties, final HTMLElementImpl element, final RenderState renderState) {
 		final CSSStyleDeclaration parentStyle = element.getParentStyle();
 		String borderTopWidth = "";
 		String borderLeftWidth = "";
@@ -147,21 +147,21 @@ public class BorderInsets {
 		binfo.setInsets(HtmlInsets.getInsets(topText, leftText, bottomText, rightText, element, renderState));
 	}
 
-	private static String borderInsets(String parentStyle, int style, String value) {
+	private static String borderInsets(final String parentStyle, final int style, final String value) {
 		if (isNone(style)) return "0px";
 		if (isInherit(value)) return parentStyle;
 		return value;
 	}
 
-	private static boolean isNone(int value) {
+	private static boolean isNone(final int value) {
 		return BORDER_STYLE_NONE == value;
 	}
 
-	private static boolean isInherit(String value) {
+	private static boolean isInherit(final String value) {
 		return CSSValues.INHERIT.equals(CSSValues.get(value));
 	}
 
-	private static Color getBorderColor(HTMLElementImpl element, final String colorSpec, final RenderState renderState) {
+	private static Color getBorderColor(final HTMLElementImpl element, final String colorSpec, final RenderState renderState) {
 		final ColorFactory cf = ColorFactory.getInstance();
 		if (Strings.isNotBlank(colorSpec)) {
 	      if ("currentColor".equalsIgnoreCase(colorSpec)) {
@@ -176,7 +176,7 @@ public class BorderInsets {
 	    }
 	  }
 	
-	private static int getBorderStyle(HTMLElementImpl element, String styleText) {
+	private static int getBorderStyle(final HTMLElementImpl element, final String styleText) {
 		if (Strings.isBlank(styleText)) {
 			return BorderInsets.BORDER_STYLE_NONE;
 		}

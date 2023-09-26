@@ -59,33 +59,33 @@ public class domimplementationhasfeature01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        String version = "";
-        String version1 = "1.0";
-        String version2 = "2.0";
+        final Document doc;
+        final DOMImplementation domImpl;
+        final String version = "";
+        final String version1 = "1.0";
+        final String version2 = "2.0";
         String featureCore;
         String featureXML;
         boolean success;
-        List<String> featuresXML = new ArrayList<>();
+        final List<String> featuresXML = new ArrayList<>();
         featuresXML.add("XML");
         featuresXML.add("xmL");
 
-        List<String> featuresCore = new ArrayList<>();
+        final List<String> featuresCore = new ArrayList<>();
         featuresCore.add("Core");
         featuresCore.add("CORE");
 
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();
-        for (Object o : featuresXML) {
+        for (final Object o : featuresXML) {
             featureXML = (String) o;
             success = domImpl.hasFeature(featureXML, version);
             assertTrue("domimplementationhasfeature01_XML_1", success);
             success = domImpl.hasFeature(featureXML, version1);
             assertTrue("domimplementationhasfeature01_XML_2", success);
         }
-        for (Object o : featuresCore) {
+        for (final Object o : featuresCore) {
             featureCore = (String) o;
             success = domImpl.hasFeature(featureCore, version);
             assertTrue("domimplementationhasfeature01_Core_1", success);

@@ -56,9 +56,9 @@ public class hc_elementretrievetagnameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Element testEmployee;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Element testEmployee;
         String strong;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("code");

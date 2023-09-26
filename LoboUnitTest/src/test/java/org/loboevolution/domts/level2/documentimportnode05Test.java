@@ -60,14 +60,14 @@ public class documentimportnode05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document docImported;
-        Attr attr;
-        Node importedAttr;
-        String nodeName;
-        int nodeType;
-        String nodeValue;
-        String namespaceURI;
+        final Document doc;
+        final Document docImported;
+        final Attr attr;
+        final Node importedAttr;
+        final String nodeName;
+        final int nodeType;
+        final String nodeValue;
+        final String namespaceURI;
         doc = sampleXmlFile("staffNS.xml");
         docImported = sampleXmlFile("staff.xml");
         attr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "a:b0");

@@ -53,7 +53,7 @@ public class SVGRectElementImpl extends SVGGraphic implements SVGRectElement {
 
 	@Override
 	public SVGRect getBBox() {
-		Shape shape = createShape(null);
+		final Shape shape = createShape(null);
 		return new SVGRectImpl(shape.getBounds2D());
 	}
 
@@ -104,7 +104,7 @@ public class SVGRectElementImpl extends SVGGraphic implements SVGRectElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(AffineTransform transform) {
+	public Shape createShape(final AffineTransform transform) {
 
 		AffineTransform inverseTransform;
 		try {

@@ -130,7 +130,8 @@ public class NativeJavaMap extends NativeJavaObject {
         Context cx = Context.getCurrentContext();
         if (cx != null && cx.hasFeature(Context.FEATURE_ENABLE_JAVA_MAP_ACCESS)) {
             List<Object> ids = new ArrayList<>(map.size());
-            for (Object key : map.keySet()) {
+            for (Map.Entry<Object, Object> entry : map.entrySet()) {
+                Object key = entry.getKey();
                 if (key instanceof Integer) {
                     ids.add(key);
                 } else {

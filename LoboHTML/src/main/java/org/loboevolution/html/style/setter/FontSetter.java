@@ -42,8 +42,8 @@ public class FontSetter implements SubPropertySetter {
      * {@inheritDoc}
      */
     @Override
-    public void changeValue(CSSStyleDeclaration declaration, String newValue) {
-        CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+    public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
+        final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
         if (Strings.isNotBlank(newValue)) {
             final String fontSpecTL = newValue.toLowerCase();
             final String[] tokens = fontSpecTL.split(" ");
@@ -123,7 +123,7 @@ public class FontSetter implements SubPropertySetter {
                     continue;
                 }
 
-                String fontFamily = properties.getPropertyValue(FONT_FAMILY);
+                final String fontFamily = properties.getPropertyValue(FONT_FAMILY);
                 if(Strings.isCssBlank(fontFamily)) {
                     properties.setProperty(FONT_FAMILY, token.trim());
                 } else {
@@ -134,7 +134,7 @@ public class FontSetter implements SubPropertySetter {
         }
     }
 
-    private void setDefaultFontValus(CSSStyleDeclarationImpl properties) {
+    private void setDefaultFontValus(final CSSStyleDeclarationImpl properties) {
         properties.setProperty(FONT_STYLE, CSSValues.NORMAL.getValue());
         properties.setProperty(FONT_VARIANT, CSSValues.NORMAL.getValue());
     }

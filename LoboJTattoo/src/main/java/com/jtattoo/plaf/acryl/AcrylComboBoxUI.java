@@ -55,13 +55,13 @@ public class AcrylComboBoxUI extends BaseComboBoxUI {
 	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
-		ArrowButton button = new BaseComboBoxUI.ArrowButton();
-		Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
+		final ArrowButton button = new BaseComboBoxUI.ArrowButton();
+		final Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
 		if (JTattooUtilities.isLeftToRight(comboBox)) {
-			Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, borderColor);
+			final Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, borderColor);
 			button.setBorder(border);
 		} else {
-			Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, borderColor);
+			final Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, borderColor);
 			button.setBorder(border);
 		}
 		return button;
@@ -70,12 +70,12 @@ public class AcrylComboBoxUI extends BaseComboBoxUI {
 	/** {@inheritDoc} */
 	@Override
 	protected void setButtonBorder() {
-		Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
+		final Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
 		if (JTattooUtilities.isLeftToRight(comboBox)) {
-			Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, borderColor);
+			final Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, borderColor);
 			arrowButton.setBorder(border);
 		} else {
-			Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, borderColor);
+			final Border border = BorderFactory.createMatteBorder(0, 0, 0, 1, borderColor);
 			arrowButton.setBorder(border);
 		}
 	}

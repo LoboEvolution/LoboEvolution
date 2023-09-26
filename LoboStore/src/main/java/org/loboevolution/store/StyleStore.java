@@ -70,13 +70,13 @@ public class StyleStore implements Serializable {
      * @param baseUrl a {@link java.lang.String} object.
      * @return a {@link java.util.List} object.
      */
-    public List<String> getStyles(String href, String baseUrl) {
+    public List<String> getStyles(final String href, final String baseUrl) {
         final List<String> values = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DB_PATH);
-             PreparedStatement pstmt = conn.prepareStatement(this.STYLE)) {
+        try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.STYLE)) {
             pstmt.setString(1, href);
             pstmt.setString(1, baseUrl);
-            try (ResultSet rs = pstmt.executeQuery()) {
+            try (final ResultSet rs = pstmt.executeQuery()) {
                 while (rs != null && rs.next()) {
                     values.add(rs.getString(1));
                 }
@@ -92,12 +92,12 @@ public class StyleStore implements Serializable {
      *
      * @param title a {@link java.lang.String} object.
      */
-    public void selectStyle(String title) {
-        try (Connection conn = DriverManager.getConnection(DB_PATH);
-             PreparedStatement pstmt = conn.prepareStatement(UPDATE_STYLE_ALL)) {
+    public void selectStyle(final String title) {
+        try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(UPDATE_STYLE_ALL)) {
             pstmt.executeUpdate();
 
-            try (PreparedStatement pstmt2 = conn.prepareStatement(UPDATE_STYLE)) {
+            try (final PreparedStatement pstmt2 = conn.prepareStatement(UPDATE_STYLE)) {
                 pstmt2.setString(1, title);
                 pstmt2.executeUpdate();
 
@@ -115,12 +115,12 @@ public class StyleStore implements Serializable {
      * @param baseUrl a {@link java.lang.String} object.
      * @return a {@link java.util.List} object.
      */
-    public List<String> getStylesAll(String baseUrl) {
+    public List<String> getStylesAll(final String baseUrl) {
         final List<String> values = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DB_PATH);
-             PreparedStatement pstmt = conn.prepareStatement(this.STYLE_ALL)) {
+        try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(this.STYLE_ALL)) {
             pstmt.setString(1, baseUrl);
-            try (ResultSet rs = pstmt.executeQuery()) {
+            try (final ResultSet rs = pstmt.executeQuery()) {
                 while (rs != null && rs.next()) {
                     values.add(rs.getString(1));
                 }
@@ -139,15 +139,15 @@ public class StyleStore implements Serializable {
      * @param baseUrl a {@link java.lang.String} object.
      * @param enable a int.
      */
-    public void insertStyle(String title, String href, String baseUrl, int enable) {
+    public void insertStyle(final String title, final String href, final String baseUrl, final int enable) {
 
-        try (Connection conn = DriverManager.getConnection(DB_PATH);
-             PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE_HREF)) {
+        try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE_HREF)) {
             pstmt.setString(1, href);
             pstmt.setString(2, baseUrl);
             pstmt.executeUpdate();
 
-            try (PreparedStatement pstmt2 = conn.prepareStatement(INSERT_STYLE)) {
+            try (final PreparedStatement pstmt2 = conn.prepareStatement(INSERT_STYLE)) {
                 pstmt2.setString(1, title);
                 pstmt2.setString(2, href);
                 pstmt2.setString(3, baseUrl);
@@ -167,8 +167,8 @@ public class StyleStore implements Serializable {
      * <p>deleteStyle.</p>
      */
     public void deleteStyle() {
-        try (Connection conn = DriverManager.getConnection(DB_PATH);
-             PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE)) {
+        try (final Connection conn = DriverManager.getConnection(DB_PATH);
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE)) {
             pstmt.executeUpdate();
         } catch (final Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);

@@ -49,12 +49,12 @@ public class documentadoptnode22Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element docElement;
-        Node adoptedNode;
-        boolean success;
-        String nodeNameOrig;
-        String nodeName;
+        final Document doc;
+        final Element docElement;
+        final Node adoptedNode;
+        final boolean success;
+        final String nodeNameOrig;
+        final String nodeName;
         doc = sampleXmlFile("hc_staff.xml");
         docElement = doc.getDocumentElement();
         adoptedNode = doc.adoptNode(docElement);

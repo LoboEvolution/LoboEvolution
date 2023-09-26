@@ -55,9 +55,9 @@ public class attrgetownerelement03Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node ownerElement;
-        Attr attr;
+        final Document doc;
+        final Node ownerElement;
+        final Attr attr;
         doc = sampleXmlFile("staffNS.xml");
         attr = doc.createAttributeNS("http://www.w3.org/DOM", "dom:attr");
         ownerElement = attr.getOwnerElement();

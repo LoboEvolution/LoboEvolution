@@ -35,17 +35,17 @@ public class FactoryConfigurationError extends Error
         throw new RuntimeException("Stub!");
     }
 
-    public FactoryConfigurationError(String msg)
+    public FactoryConfigurationError(final String msg)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public FactoryConfigurationError(Exception e)
+    public FactoryConfigurationError(final Exception e)
     {
         throw new RuntimeException("Stub!");
     }
 
-    public FactoryConfigurationError(Exception e, String msg)
+    public FactoryConfigurationError(final Exception e, final String msg)
     {
         throw new RuntimeException("Stub!");
     }

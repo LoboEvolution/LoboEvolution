@@ -136,7 +136,7 @@ public class RLayout {
 	protected static class BrLayout implements MarkupLayout {
 
 		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final String clear = markupElement.getAttribute("clear");
 			bodyLayout.addLineBreak(markupElement, LineBreak.getBreakType(clear));
 		}
@@ -146,12 +146,12 @@ public class RLayout {
 	
 	    private final int display;
 
-		public CommonLayout(int defaultDisplay) {
+		public CommonLayout(final int defaultDisplay) {
 			this.display = defaultDisplay;
 		}
 
 		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final int display = calculateLayout(markupElement);
 
 			switch (display) {
@@ -195,7 +195,7 @@ public class RLayout {
 			}
 		}
 		
-		private int calculateLayout(HTMLElementImpl markupElement) {
+		private int calculateLayout(final HTMLElementImpl markupElement) {
 			final RenderState rs = markupElement.getRenderState();
 			final boolean isHidden = markupElement.isHidden();
 			final int defaultDispaly = rs == null ? this.display : rs.getDisplay();
@@ -226,16 +226,16 @@ public class RLayout {
 	    protected static final int ADD_INLINE_BLOCK = 2;
 	    private final int method;
 
-	    public CommonWidgetLayout(int method) {
+	    public CommonWidgetLayout(final int method) {
 	    	this.method = method;
 	    }
 
-	    protected abstract RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement);
+	    protected abstract RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement);
 
 	    @Override
-	    public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+	    public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 	        final UINode node = markupElement.getUINode();
-	        RElement renderable;
+	        final RElement renderable;
 	        if (node == null) {
 	            renderable = createRenderable(bodyLayout, markupElement);
 	            if (renderable == null) {
@@ -266,8 +266,8 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new CanvasControl((HTMLCanvasElementImpl) markupElement);
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
+			final UIControl control = new CanvasControl((HTMLCanvasElementImpl) markupElement);
 			return new RUIControl(markupElement,control, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
@@ -279,7 +279,7 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			UIControl control = new SVGControl((SVGSVGElementImpl) markupElement);
 			return new RUIControl(markupElement,control, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
@@ -292,8 +292,8 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new RSSControl((RSSElementImpl) markupElement);
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
+			final UIControl control = new RSSControl((RSSElementImpl) markupElement);
 			return new RUIControl(markupElement,control, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
@@ -306,9 +306,9 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control;
-			HTMLImageElementImpl image = (HTMLImageElementImpl) markupElement;
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
+			final UIControl control;
+			final HTMLImageElementImpl image = (HTMLImageElementImpl) markupElement;
 			if (image.getSrc() != null && image.getSrc().endsWith(".svg")) {
 				control = new ImgSvgControl(image);
 			} else {
@@ -326,8 +326,8 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new InputControl((HTMLInputElementImpl) markupElement);
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
+			final UIControl control = new InputControl((HTMLInputElementImpl) markupElement);
 			return new RUIControl(markupElement,control, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
@@ -339,8 +339,8 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new FrameControl((HTMLIFrameElementImpl)markupElement);
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
+			final UIControl control = new FrameControl((HTMLIFrameElementImpl)markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
 		}
@@ -360,13 +360,13 @@ public class RLayout {
 
 	protected static class NopLayout implements MarkupLayout {
 		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 		}
 	}
 
 	protected static class NoScriptLayout implements MarkupLayout {
 		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UserAgentContext ucontext = bodyLayout.userAgentContext;
 			if (!ucontext.isScriptingEnabled()) {
 				bodyLayout.layoutMarkup(markupElement);
@@ -386,20 +386,20 @@ public class RLayout {
 		/**
 		 * @param tryToRenderContent If the object is unknown, content is rendered as  HTML.
 		 */
-		public ObjectLayout(boolean tryToRenderContent) {
+		public ObjectLayout(final boolean tryToRenderContent) {
 			super(ADD_INLINE);
 			this.tryToRenderContent = tryToRenderContent;
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final HtmlObject ho = this.htmlObject.get();
 			final UIControl uiControl = new UIControlWrapper(ho);
 			return new RUIControl(markupElement, uiControl, bodyLayout.container, bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 
 		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			if (this.tryToRenderContent) {
 				bodyLayout.layoutMarkup(markupElement);
 			}
@@ -412,7 +412,7 @@ public class RLayout {
 		}
 
 		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			super.layoutMarkup(bodyLayout, markupElement);
 		}
 	}
@@ -423,8 +423,8 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new SelectControl((HTMLSelectElementImpl) markupElement);
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
+			final UIControl control = new SelectControl((HTMLSelectElementImpl) markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
 		}
@@ -454,8 +454,8 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new TextAreaControl((HTMLTextAreaElementImpl) markupElement);
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
+			final UIControl control = new TextAreaControl((HTMLTextAreaElementImpl) markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
 		}
@@ -467,8 +467,8 @@ public class RLayout {
 		}
 
 		@Override
-		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new ButtonControl((HTMLButtonElementImpl) markupElement);
+		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
+			final UIControl control = new ButtonControl((HTMLButtonElementImpl) markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
 		}

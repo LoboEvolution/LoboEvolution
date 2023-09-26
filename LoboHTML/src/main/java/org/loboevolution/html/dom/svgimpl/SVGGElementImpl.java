@@ -127,16 +127,16 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 
 	@Override
 	public SVGRect getBBox() {
-		Shape shape = createShape(null);
+		final Shape shape = createShape(null);
 		return new SVGRectImpl(shape.getBounds2D());
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(AffineTransform transform) {
-		GeneralPath path = new GeneralPath();
+	public Shape createShape(final AffineTransform transform) {
+		final GeneralPath path = new GeneralPath();
 		if (hasChildNodes()) {
-			NodeListImpl nodeList = (NodeListImpl)getChildNodes();
+			final NodeListImpl nodeList = (NodeListImpl)getChildNodes();
 			nodeList.forEach(child -> {
 				Shape childShape = null;
 				if (child instanceof SVGGElementImpl) {
@@ -154,7 +154,7 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 					childShape = new Rectangle2D.Float(bbox.getX(), bbox.getY(), bbox.getWidth(), bbox.getHeight());
 
 				} else if (child instanceof SVGSVGElementImpl) {
-					SVGSVGElement svg = (SVGSVGElement) child;
+					SVGSVGElement svg = ( SVGSVGElement) child;
 					AffineTransform ctm = getCTM().getAffineTransform();
 					AffineTransform inverseTransform;
 					try {
@@ -185,10 +185,10 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 		return path;
 	}
 	
-	private void drawChildren(Graphics2D graphics) {
-		List<Node> drawableChildren = new ArrayList<>();
+	private void drawChildren(final Graphics2D graphics) {
+		final List<Node> drawableChildren = new ArrayList<>();
 		if (hasChildNodes()) {
-			NodeListImpl childNodes = (NodeListImpl) getChildNodes();
+			final NodeListImpl childNodes = (NodeListImpl) getChildNodes();
 			childNodes.forEach(child -> {
 				if (child instanceof Drawable) {
 					drawableChildren.add(child);
@@ -196,11 +196,11 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 			});
 		}
 
-		for (Node node : drawableChildren) {
-			SVGElement selem = (SVGElement)node;
+		for (final Node node : drawableChildren) {
+			final SVGElement selem = ( SVGElement)node;
 			selem.setOwnerSVGElement(getOwnerSVGElement());
 			drawStyle(node);
-			Drawable child = (Drawable) node;
+			final Drawable child = (Drawable) node;
 			child.draw(graphics);
 		}
 	}

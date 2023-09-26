@@ -49,12 +49,12 @@ import static org.junit.Assert.assertEquals;
 public class nodelookupprefix20Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element elem;
-        HTMLCollection elemList;
-        NamedNodeMap attributesMap;
-        Attr attr;
-        String prefix;
+        final Document doc;
+        final Element elem;
+        final HTMLCollection elemList;
+        final NamedNodeMap attributesMap;
+        final Attr attr;
+        final String prefix;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(3);

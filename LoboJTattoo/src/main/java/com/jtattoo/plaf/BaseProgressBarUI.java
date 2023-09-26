@@ -56,7 +56,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 	protected class PropertyChangeHandler implements PropertyChangeListener {
 
 		@Override
-		public void propertyChange(PropertyChangeEvent e) {
+		public void propertyChange(final PropertyChangeEvent e) {
 			if ("selectionForeground".equals(e.getPropertyName()) && e.getNewValue() instanceof Color) {
 				progressBar.invalidate();
 				progressBar.repaint();
@@ -68,7 +68,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 	} // end of class PropertyChangeHandler
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(final JComponent c) {
+	public static ComponentUI createUI() {
 		return new BaseProgressBarUI();
 	}
 
@@ -81,7 +81,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 	/** {@inheritDoc} */
 	@Override
 	protected Color getSelectionBackground() {
-		Object selectionBackground = progressBar.getClientProperty("selectionBackground");
+		final Object selectionBackground = progressBar.getClientProperty("selectionBackground");
 		if (selectionBackground instanceof Color) {
 			return (Color) selectionBackground;
 		}
@@ -95,7 +95,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 	/** {@inheritDoc} */
 	@Override
 	protected Color getSelectionForeground() {
-		Object selectionForeground = progressBar.getClientProperty("selectionForeground");
+		final Object selectionForeground = progressBar.getClientProperty("selectionForeground");
 		if (selectionForeground instanceof Color) {
 			return (Color) selectionForeground;
 		}
@@ -104,7 +104,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void installUI(JComponent c) {
+	public void installUI(final JComponent c) {
 		super.installUI(c);
 		c.setBorder(UIManager.getBorder("ProgressBar.border"));
 		propertyChangeListener = new PropertyChangeHandler();
@@ -123,19 +123,19 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintDeterminate(Graphics g, JComponent c) {
+	protected void paintDeterminate(final Graphics g, final JComponent c) {
 		if (!(g instanceof Graphics2D)) {
 			return;
 		}
 
-		Graphics2D g2D = (Graphics2D) g;
-		Insets b = progressBar.getInsets(); // area for border
-		int w = progressBar.getWidth() - (b.right + b.left);
-		int h = progressBar.getHeight() - (b.top + b.bottom);
+		final Graphics2D g2D = (Graphics2D) g;
+		final Insets b = progressBar.getInsets(); // area for border
+		final int w = progressBar.getWidth() - (b.right + b.left);
+		final int h = progressBar.getHeight() - (b.top + b.bottom);
 
 		// amount of progress to draw
-		int amountFull = getAmountFull(b, w, h);
-		Color[] colors;
+		final int amountFull = getAmountFull(b, w, h);
+		final Color[] colors;
 		if (progressBar.getForeground() instanceof UIResource) {
 			if (!JTattooUtilities.isActive(c)) {
 				colors = AbstractLookAndFeel.getTheme().getInActiveColors();
@@ -145,12 +145,12 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 				colors = AbstractLookAndFeel.getTheme().getDisabledColors();
 			}
 		} else {
-			Color hiColor = ColorHelper.brighter(progressBar.getForeground(), 40);
-			Color loColor = ColorHelper.darker(progressBar.getForeground(), 20);
+			final Color hiColor = ColorHelper.brighter(progressBar.getForeground(), 40);
+			final Color loColor = ColorHelper.darker(progressBar.getForeground(), 20);
 			colors = ColorHelper.createColorArr(hiColor, loColor, 20);
 		}
-		Color cHi = ColorHelper.darker(colors[colors.length - 1], 5);
-		Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
+		final Color cHi = ColorHelper.darker(colors[colors.length - 1], 5);
+		final Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
 		if (progressBar.getOrientation() == SwingConstants.HORIZONTAL) {
 			if (JTattooUtilities.isLeftToRight(progressBar)) {
 				JTattooUtilities.draw3DBorder(g, cHi, cLo, 1 + b.left, 2, amountFull - 2, h - 2);
@@ -183,17 +183,17 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintIndeterminate(Graphics g, JComponent c) {
+	protected void paintIndeterminate(final Graphics g, final JComponent c) {
 		if (!(g instanceof Graphics2D)) {
 			return;
 		}
-		Graphics2D g2D = (Graphics2D) g;
+		final Graphics2D g2D = (Graphics2D) g;
 
-		Insets b = progressBar.getInsets(); // area for border
-		int barRectWidth = progressBar.getWidth() - (b.right + b.left);
-		int barRectHeight = progressBar.getHeight() - (b.top + b.bottom);
+		final Insets b = progressBar.getInsets(); // area for border
+		final int barRectWidth = progressBar.getWidth() - (b.right + b.left);
+		final int barRectHeight = progressBar.getHeight() - (b.top + b.bottom);
 
-		Color[] colors;
+		final Color[] colors;
 		if (progressBar.getForeground() instanceof UIResource) {
 			if (!JTattooUtilities.isActive(c)) {
 				colors = AbstractLookAndFeel.getTheme().getInActiveColors();
@@ -203,16 +203,16 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 				colors = AbstractLookAndFeel.getTheme().getDisabledColors();
 			}
 		} else {
-			Color hiColor = ColorHelper.brighter(progressBar.getForeground(), 40);
-			Color loColor = ColorHelper.darker(progressBar.getForeground(), 20);
+			final Color hiColor = ColorHelper.brighter(progressBar.getForeground(), 40);
+			final Color loColor = ColorHelper.darker(progressBar.getForeground(), 20);
 			colors = ColorHelper.createColorArr(hiColor, loColor, 20);
 		}
 
-		Color cHi = ColorHelper.darker(colors[colors.length - 1], 5);
-		Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
+		final Color cHi = ColorHelper.darker(colors[colors.length - 1], 5);
+		final Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
 
 		// Paint the bouncing box.
-		Rectangle box = getBox(null);
+		final Rectangle box = getBox(null);
 		if (box != null) {
 			g2D.setColor(progressBar.getForeground());
 			JTattooUtilities.draw3DBorder(g, cHi, cLo, box.x + 1, box.y + 1, box.width - 2, box.height - 2);
@@ -244,39 +244,39 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintString(Graphics g, int x, int y, int width, int height, int amountFull, Insets b) {
-		boolean indeterminate = progressBar.isIndeterminate();
+	protected void paintString(final Graphics g, final int x, final int y, final int width, final int height, final int amountFull, final Insets b) {
+		final boolean indeterminate = progressBar.isIndeterminate();
 		if (progressBar.getOrientation() == SwingConstants.HORIZONTAL) {
 			if (JTattooUtilities.isLeftToRight(progressBar)) {
 				if (indeterminate) {
 					boxRect = getBox(boxRect);
-					paintString(g, x, y, width, height, boxRect.x, boxRect.width, b);
+					paintString(g, x, y, width, height, boxRect.x, boxRect.width);
 				} else {
-					paintString(g, x, y, width, height, x, amountFull, b);
+					paintString(g, x, y, width, height, x, amountFull);
 				}
 			} else {
-				paintString(g, x, y, width, height, x + width - amountFull, amountFull, b);
+				paintString(g, x, y, width, height, x + width - amountFull, amountFull);
 			}
 		} else {
 			if (indeterminate) {
 				boxRect = getBox(boxRect);
-				paintString(g, x, y, width, height, boxRect.y, boxRect.height, b);
+				paintString(g, x, y, width, height, boxRect.y, boxRect.height);
 			} else {
-				paintString(g, x, y, width, height, y + height - amountFull, amountFull, b);
+				paintString(g, x, y, width, height, y + height - amountFull, amountFull);
 			}
 		}
 	}
 
-	private void paintString(Graphics g, int x, int y, int width, int height, int fillStart, int amountFull, Insets b) {
+	private void paintString(final Graphics g, final int x, final int y, final int width, final int height, final int fillStart, final int amountFull) {
 		if (!(g instanceof Graphics2D)) {
 			return;
 		}
 
-		Graphics2D g2D = (Graphics2D) g;
-		String progressString = progressBar.getString();
+		final Graphics2D g2D = (Graphics2D) g;
+		final String progressString = progressBar.getString();
 		g2D.setFont(progressBar.getFont());
 		Point renderLocation = getStringPlacement(g2D, progressString, x, y, width, height);
-		Rectangle savedClip = g2D.getClipBounds();
+		final Rectangle savedClip = g2D.getClipBounds();
 
 		if (progressBar.getOrientation() == SwingConstants.HORIZONTAL) {
 			g2D.setColor(getSelectionBackground());
@@ -286,7 +286,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 			JTattooUtilities.drawString(progressBar, g2D, progressString, renderLocation.x, renderLocation.y);
 		} else { // VERTICAL
 			g2D.setColor(getSelectionBackground());
-			AffineTransform rotate = AffineTransform.getRotateInstance(Math.PI / 2);
+			final AffineTransform rotate = AffineTransform.getRotateInstance(Math.PI / 2);
 			g2D.setFont(progressBar.getFont().deriveFont(rotate));
 			renderLocation = getStringPlacement(g2D, progressString, x, y, width, height);
 			JTattooUtilities.drawString(progressBar, g2D, progressString, renderLocation.x, renderLocation.y);
@@ -299,7 +299,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 
 	/** {@inheritDoc} */
 	@Override
-	public void uninstallUI(JComponent c) {
+	public void uninstallUI(final JComponent c) {
 		c.removePropertyChangeListener(propertyChangeListener);
 		super.uninstallUI(c);
 	}

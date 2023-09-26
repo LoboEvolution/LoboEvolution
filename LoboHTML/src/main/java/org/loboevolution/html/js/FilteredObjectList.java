@@ -48,7 +48,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	 * @param list a {@link java.util.Collection} object.
 	 * @param lock a {@link java.lang.Object} object.
 	 */
-	public FilteredObjectList(ObjectFilter filter, Collection<Node> list, Object lock) {
+	public FilteredObjectList(final ObjectFilter filter, final Collection<Node> list, final Object lock) {
 		this.filter = filter;
 		this.sourceNodeList = list;
 		this.lock = lock;
@@ -62,7 +62,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	public int getLength() {
 		synchronized (this.lock) {
 			int count = 0;
-			for (Node node : sourceNodeList) {
+			for (final Node node : sourceNodeList) {
 				if (this.filter.acceptNode(node)) {
 					count++;
 				}
@@ -77,10 +77,10 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	 * @param index a int.
 	 * @return a {@link java.lang.Object} object.
 	 */
-	public Object item(int index) {
+	public Object item(final int index) {
 		synchronized (this.lock) {
 			int count = 0;
-			for (Node node : sourceNodeList) {
+			for (final Node node : sourceNodeList) {
 				if (this.filter.acceptNode(node)) {
 					if (count == index) {
 						return node;

@@ -62,13 +62,13 @@ public class hc_nodeinsertbeforenodeancestorTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node newChild;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node refChild;
-        Node insertedNode;
+        final Document doc;
+        final Node newChild;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node refChild;
+        final Node insertedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.getDocumentElement();
         elementList = doc.getElementsByTagName("p");
@@ -80,7 +80,7 @@ public class hc_nodeinsertbeforenodeancestorTest extends LoboUnitTest {
             boolean success = false;
             try {
                 insertedNode = employeeNode.insertBefore(newChild, refChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

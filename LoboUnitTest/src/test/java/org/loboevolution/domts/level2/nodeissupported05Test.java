@@ -54,9 +54,9 @@ public class nodeissupported05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        ProcessingInstruction pi;
-        boolean success;
+        final Document doc;
+        final ProcessingInstruction pi;
+        final boolean success;
         doc = sampleXmlFile("staffNS.xml");
         pi = doc.createProcessingInstruction("PITarget", "PIData");
         success = pi.isSupported("-", "+");

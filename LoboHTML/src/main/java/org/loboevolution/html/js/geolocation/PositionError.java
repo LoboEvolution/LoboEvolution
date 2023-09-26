@@ -72,7 +72,7 @@ public final class PositionError {
 	 *
 	 * @param code	the error code.
 	 */
-	public PositionError(short code) {
+	public PositionError(final short code) {
 		this(code, null);
 	}
 	
@@ -83,7 +83,7 @@ public final class PositionError {
 	 * @param code	the error code.
 	 * @param message	the error message.
 	 */
-	public PositionError(short code, final String message) {
+	public PositionError(final short code, final String message) {
 		this.code = code;
 		this.message = message;
 	}

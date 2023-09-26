@@ -27,13 +27,12 @@
 package org.loboevolution.javax.xml.transform;
 
 
-public interface Result
-{
-
-    public abstract void setSystemId(String s);
-
-    public abstract String getSystemId();
+public interface Result {
 
     public static final String PI_DISABLE_OUTPUT_ESCAPING = "org.loboevolution.javax.xml.transform.disable-output-escaping";
     public static final String PI_ENABLE_OUTPUT_ESCAPING = "org.loboevolution.javax.xml.transform.enable-output-escaping";
+
+    public abstract String getSystemId();
+
+    public abstract void setSystemId(final String s);
 }

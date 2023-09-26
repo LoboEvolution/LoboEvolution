@@ -54,7 +54,7 @@ public abstract class CMap {
      * @param format a short.
      * @param language a short.
      */
-    protected CMap (short format, short language) {
+    protected CMap (final short format, final short language) {
         this.format = format;
         this.language = language;
     }
@@ -83,7 +83,7 @@ public abstract class CMap {
      * @param language a short.
      * @return a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
      */
-    public static CMap createMap (short format, short language) {
+    public static CMap createMap (final short format, final short language) {
         CMap outMap = null;
 
         switch (format) {
@@ -126,19 +126,19 @@ public abstract class CMap {
      * @param data a {@link java.nio.ByteBuffer} object.
      * @return a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
      */
-    public static CMap getMap (ByteBuffer data) {
-        short format = data.getShort ();
-        short lengthShort = data.getShort ();
-        int length = 0xFFFF & lengthShort;
+    public static CMap getMap (final ByteBuffer data) {
+        final short format = data.getShort ();
+        final short lengthShort = data.getShort ();
+        final int length = 0xFFFF & lengthShort;
         PDFDebugger.debug("CMAP, length: " + length + ", short: " + lengthShort, 100);
 
         // make sure our slice of the data only contains up to the length
         // of this table
         data.limit (Math.min (length, data.limit ()));
 
-        short language = data.getShort ();
+        final short language = data.getShort ();
 
-        CMap outMap = createMap (format, language);
+        final CMap outMap = createMap (format, language);
         if (outMap == null) {
             return null;
         }
@@ -210,7 +210,7 @@ public abstract class CMap {
      * @param glyphID a short.
      * @return a char.
      */
-    public abstract char reverseMap (short glyphID);
+    public abstract char reverseMap (final short glyphID);
 
     /**
      * {@inheritDoc}
@@ -219,7 +219,7 @@ public abstract class CMap {
      */
     @Override
     public String toString () {
-        String indent = "        ";
+        final String indent = "        ";
 
         return indent + " format: " + getFormat () + " length: " +
                 getLength () + " language: " + getLanguage () + "\n";

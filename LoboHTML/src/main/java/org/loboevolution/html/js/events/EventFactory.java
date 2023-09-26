@@ -44,9 +44,9 @@ public class EventFactory {
 	 * @return a {@link org.loboevolution.html.node.events.Event} object.
 	 * @throws DOMException if any.
 	 */
-	public static Event createEvent(String eventType) {
+	public static Event createEvent(final String eventType) {
 		Event theEvent = null;
-		String event = Strings.isNotBlank(eventType) ? eventType.toLowerCase() : "";
+		final String event = Strings.isNotBlank(eventType) ? eventType.toLowerCase() : "";
 		switch (event) {
 		case "mouseevent":
 			theEvent = new MouseEventImpl();

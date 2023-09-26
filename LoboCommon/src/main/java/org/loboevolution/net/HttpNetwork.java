@@ -64,7 +64,7 @@ public class HttpNetwork {
 	/** Constant TIMEOUT_VALUE="2000" */
 	public static final int TIMEOUT_VALUE = 2000;
 
-	private static InputStream getGzipStream(URLConnection con) throws IOException {
+	private static InputStream getGzipStream(final URLConnection con) throws IOException {
 		final InputStream cis = con.getInputStream();
 		if (cis != null) {
 			if (GZIP_ENCODING.equals(con.getContentEncoding())) {
@@ -77,7 +77,7 @@ public class HttpNetwork {
 		}
 	}
 
-	private static InputStream getGzipStreamError(HttpURLConnection con) throws IOException {
+	private static InputStream getGzipStreamError(final HttpURLConnection con) throws IOException {
 		final InputStream cis = con.getErrorStream();
 		if (cis != null) {
 			if (GZIP_ENCODING.equals(con.getContentEncoding())) {
@@ -97,7 +97,7 @@ public class HttpNetwork {
 	 * @return a {@link java.io.InputStream} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public static InputStream getInputStream(URLConnection connection) throws IOException {
+	public static InputStream getInputStream(final URLConnection connection) throws IOException {
 		InputStream in;
 		if (connection instanceof HttpURLConnection) {
 			in = getGzipStreamError((HttpURLConnection) connection);
@@ -117,8 +117,8 @@ public class HttpNetwork {
 	 * @param useBaseUri a {@link java.lang.Boolean} object.
 	 * @return a {@link java.awt.Image} object.
 	 */
-	public static Image getImage(HTMLElement element, TimingInfo info, boolean useBaseUri) {
-		Instant start = Instant.now();
+	public static Image getImage(final HTMLElement element, final TimingInfo info, final boolean useBaseUri) {
+		final Instant start = Instant.now();
 		String href = null;
 		if(element instanceof HTMLImageElement) {
 			href = ((HTMLImageElement) element).getSrc();
@@ -128,15 +128,15 @@ public class HttpNetwork {
 			href = ((SVGImageElement) element).getHref().getBaseVal();
 		}
 
-		String baseUri = useBaseUri ? element.getBaseURI() : null;
+		final String baseUri = useBaseUri ? element.getBaseURI() : null;
 		try {
 			if (Strings.isBlank(href))
 				return null;
 
 			if (href.contains(";base64,")) {
 				final String base64 = href.split(";base64,")[1];
-				byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-				try (InputStream stream = new ByteArrayInputStream(decodedBytes)) {
+				final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+				try (final InputStream stream = new ByteArrayInputStream(decodedBytes)) {
 					return ImageIO.read(stream);
 				}
 			} else {
@@ -159,19 +159,19 @@ public class HttpNetwork {
 					connection = conn;
 				}
 
-				try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
+				try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
 					info.setType(connection.getContentType());
 
 					if (href.contains(";base64,")) {
 						final String base64 = href.split(";base64,")[1];
-						byte[] decodedBytes = Base64.getDecoder().decode(base64);
-						InputStream stream = new ByteArrayInputStream(decodedBytes);
+						final byte[] decodedBytes = Base64.getDecoder().decode(base64);
+						final InputStream stream = new ByteArrayInputStream(decodedBytes);
 						return ImageIO.read(stream);
 					} else if (href.endsWith(".svg")) {
 						return null; //TODO SVG From URL
 					} else if (href.startsWith("https")) {
 						if (in != null) {
-							BufferedImage bi = ImageIO.read(in);
+							final BufferedImage bi = ImageIO.read(in);
 							if (bi != null) {
 								return Toolkit.getDefaultToolkit().createImage(bi.getSource());
 							}
@@ -192,21 +192,21 @@ public class HttpNetwork {
 					} else {
 						return ImageIO.read(in);
 					}
-				} catch (SocketTimeoutException e) {
+				} catch (final SocketTimeoutException e) {
 					if (connection instanceof HttpURLConnection) {
 						info.setHttpResponse(((HttpURLConnection)connection).getResponseCode());
 					}
 
 					logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
-				} catch (FileNotFoundException e) {
+				} catch (final FileNotFoundException e) {
 					logger.log(Level.INFO, e.getMessage());
 				}
 			}
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		} finally {
-			Instant finish = Instant.now();
-			long timeElapsed = Duration.between(start, finish).toMillis();
+			final Instant finish = Instant.now();
+			final long timeElapsed = Duration.between(start, finish).toMillis();
 			info.setTimeElapsed(timeElapsed);
 		}
 		return null;
@@ -219,22 +219,23 @@ public class HttpNetwork {
 	 * @return a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static String getSource(String uri) throws Exception {
+	public static String getSource(final String uri) throws Exception {
 
 		final URL url = new URL(uri);
 		final URLConnection connection = url.openConnection();
 		connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 		connection.getHeaderField("Set-Cookie");
-		try (InputStream in = openConnectionCheckRedirects(connection)) {
+		try (final InputStream in = openConnectionCheckRedirects(connection)) {
 			return toString(in);
-		} catch (SocketTimeoutException e) {
+		} catch (final SocketTimeoutException e) {
 			logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
 	    }
 		return "";
 	}
 
-	public static String sourceResponse(String scriptURI, String type) {
+	public static String sourceResponse(final String sUri, final String type) {
 		URL url;
+		String scriptURI = sUri;
 		try {
 			if ("CSS".equals(type)) {
 				try {
@@ -242,8 +243,8 @@ public class HttpNetwork {
 						scriptURI = "http:" + scriptURI;
 					}
 					url = new URL(scriptURI);
-				} catch (MalformedURLException mfu) {
-					int idx = scriptURI.indexOf(':');
+				} catch (final MalformedURLException mfu) {
+					final int idx = scriptURI.indexOf(':');
 					if (idx == -1 || idx == 1) {
 						url = new URL("file:" + scriptURI);
 					} else {
@@ -252,12 +253,12 @@ public class HttpNetwork {
 				}
 			} else {
 				url = new URL(scriptURI);
-				URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
+				final URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
 				url = uri.toURL();
 			}
 
 			return getSource(url.toString());
-		} catch (Exception err) {
+		} catch (final Exception err) {
 			logger.log(Level.SEVERE, err.getMessage(), err);
 			return "";
 		}
@@ -317,17 +318,17 @@ public class HttpNetwork {
 	 * @return a {@link java.lang.String} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public static String toString(InputStream inputStream) throws IOException {
-		InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-		Stream<String> lines = new BufferedReader(inputStreamReader).lines();
-		String text = lines.collect(Collectors.joining("\n"));
+	public static String toString(final InputStream inputStream) throws IOException {
+		final InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+		final Stream<String> lines = new BufferedReader(inputStreamReader).lines();
+		final String text = lines.collect(Collectors.joining("\n"));
 		return removeNonASCIIChar(text);
 	}
 	
-	private static String removeNonASCIIChar(String str) {
-		StringBuilder buff = new StringBuilder();
-		char[] chars = str.toCharArray();
-		for (char c : chars) {
+	private static String removeNonASCIIChar(final String str) {
+		final StringBuilder buff = new StringBuilder();
+		final char[] chars = str.toCharArray();
+		for (final char c : chars) {
 			if (0 < c && c < 127) {
 				buff.append(c);
 			}

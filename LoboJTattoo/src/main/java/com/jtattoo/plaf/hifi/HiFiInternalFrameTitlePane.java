@@ -52,7 +52,7 @@ public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 *
 	 * @param f a {@link javax.swing.JInternalFrame} object.
 	 */
-	public HiFiInternalFrameTitlePane(JInternalFrame f) {
+	public HiFiInternalFrameTitlePane(final JInternalFrame f) {
 		super(f);
 	}
 
@@ -64,12 +64,12 @@ public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintBorder(Graphics g) {
+	public void paintBorder(final Graphics g) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		g.setColor(Color.black);
 		JTattooUtilities.drawString(frame, g, title, x + 1, y);
 		if (isActive()) {

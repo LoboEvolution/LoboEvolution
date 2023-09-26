@@ -30,18 +30,15 @@ package org.loboevolution.javax.xml.xpath;
 // Referenced classes of package org.loboevolution.javax.xml.xpath:
 //            XPathException
 
-public class XPathExpressionException extends XPathException
-{
+public class XPathExpressionException extends XPathException {
 
-    public XPathExpressionException(String message)
-    {
-        super((String)null);
+    public XPathExpressionException(final String message) {
+        super((String) null);
         throw new RuntimeException("Stub!");
     }
 
-    public XPathExpressionException(Throwable cause)
-    {
-        super((String)null);
+    public XPathExpressionException(final Throwable cause) {
+        super((String) null);
         throw new RuntimeException("Stub!");
     }
 }

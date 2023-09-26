@@ -47,16 +47,16 @@ import com.jtattoo.plaf.ColorHelper;
 public class FastToggleButtonUI extends BaseToggleButtonUI {
 
 	/** {@inheritDoc} */
-	public static ComponentUI createUI(JComponent b) {
+	public static ComponentUI createUI(final JComponent b) {
 		return new FastToggleButtonUI();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (b.isContentAreaFilled() && !(b.getParent() instanceof JMenuBar)) {
 			Color backColor = b.getBackground();
-			ButtonModel model = b.getModel();
+			final ButtonModel model = b.getModel();
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed() || model.isSelected()) {
 					backColor = ColorHelper.darker(backColor, 10);

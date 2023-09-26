@@ -60,14 +60,14 @@ public class hc_nodereplacechildnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elementList;
-        Node employeeNode;
-        HTMLCollection childList;
-        Node oldChild;
-        Node newChild;
-        Node replacedNode;
-        String childName;
+        final Document doc;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final HTMLCollection childList;
+        final Node oldChild;
+        final Node newChild;
+        final Node replacedNode;
+        final String childName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);

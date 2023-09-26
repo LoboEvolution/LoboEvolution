@@ -41,13 +41,13 @@ public class DOMImplementationListImpl implements DOMImplementationList {
 
     private List<DOMImplementation> domImplementations = new ArrayList<>();
 
-    public DOMImplementationListImpl(List<DOMImplementation> implementations) {
+    public DOMImplementationListImpl(final List<DOMImplementation> implementations) {
         this.domImplementations = implementations;
     }
 
     /** {@inheritDoc} */
     @Override
-    public DOMImplementation item(int index) {
+    public DOMImplementation item(final int index) {
         final int length = getLength();
         if (index >= 0 && index < length) {
             return (DOMImplementation) domImplementations.get(index);

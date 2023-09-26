@@ -49,13 +49,13 @@ import static org.junit.Assert.assertTrue;
 public class nodesetuserdata03Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Object userData;
-        Object retUserData;
-        Object returnedUserData;
-        boolean success;
-        Element elem;
-        Text txt;
+        final Object retUserData;
+        final Object returnedUserData;
+        final boolean success;
+        final Element elem;
+        final Text txt;
 
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");

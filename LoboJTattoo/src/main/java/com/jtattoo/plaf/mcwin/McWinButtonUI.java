@@ -66,7 +66,7 @@ public class McWinButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBackground(Graphics g, AbstractButton b) {
+	protected void paintBackground(final Graphics g, final AbstractButton b) {
 		if (b.getParent() instanceof JToolBar) {
 			b.setContentAreaFilled(true);
 		}
@@ -74,8 +74,8 @@ public class McWinButtonUI extends BaseButtonUI {
 			return;
 		}
 
-		int width = b.getWidth();
-		int height = b.getHeight();
+		final int width = b.getWidth();
+		final int height = b.getHeight();
 
 		if (!(b.isBorderPainted() && b.getBorder() instanceof UIResource) || b.getParent() instanceof JToolBar) {
 			super.paintBackground(g, b);
@@ -88,15 +88,15 @@ public class McWinButtonUI extends BaseButtonUI {
 			return;
 		}
 
-		ButtonModel model = b.getModel();
-		Graphics2D g2D = (Graphics2D) g;
-		Composite composite = g2D.getComposite();
-		Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+		final ButtonModel model = b.getModel();
+		final Graphics2D g2D = (Graphics2D) g;
+		final Composite composite = g2D.getComposite();
+		final Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 		if (b.isEnabled()) {
-			Color background = b.getBackground();
+			final Color background = b.getBackground();
 			if (background instanceof ColorUIResource) {
 				if (model.isPressed() && model.isArmed()) {
 					colors = AbstractLookAndFeel.getTheme().getPressedColors();
@@ -146,19 +146,19 @@ public class McWinButtonUI extends BaseButtonUI {
 		if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
 				|| (width < 64 || height < 16) && (b.getText() == null || b.getText().length() == 0)) {
 			JTattooUtilities.fillHorGradient(g, colors, 0, 0, width - 1, height - 1);
-			Color frameColor = colors[colors.length / 2];
+			final Color frameColor = colors[colors.length / 2];
 			g2D.setColor(ColorHelper.darker(frameColor, 25));
 			g2D.drawRect(0, 0, width - 1, height - 1);
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 			g2D.setComposite(alpha);
 			g2D.setColor(Color.white);
 			g2D.drawRect(1, 1, width - 3, height - 3);
 		} else {
-			int d = height - 2;
-			Color frameColor = colors[colors.length / 2];
+			final int d = height - 2;
+			final Color frameColor = colors[colors.length / 2];
 
-			Shape savedClip = g.getClip();
-			Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, d, d));
+			final Shape savedClip = g.getClip();
+			final Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, d, d));
 			if (savedClip != null) {
 				clipArea.intersect(new Area(savedClip));
 			}
@@ -169,7 +169,7 @@ public class McWinButtonUI extends BaseButtonUI {
 			g2D.setColor(ColorHelper.darker(frameColor, 25));
 			g2D.drawRoundRect(0, 0, width - 1, height - 1, d, d);
 
-			AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+			final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 			g2D.setComposite(alpha);
 			g2D.setColor(Color.white);
 			g2D.drawRoundRect(1, 1, width - 3, height - 3, d - 2, d - 2);
@@ -181,21 +181,21 @@ public class McWinButtonUI extends BaseButtonUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
-			Rectangle iconRect) {
-		Graphics2D g2D = (Graphics2D) g;
-		int width = b.getWidth();
-		int height = b.getHeight();
+	protected void paintFocus(final Graphics g, final AbstractButton b, final Rectangle viewRect, final Rectangle textRect,
+                              final Rectangle iconRect) {
+		final Graphics2D g2D = (Graphics2D) g;
+		final int width = b.getWidth();
+		final int height = b.getHeight();
 		if (AbstractLookAndFeel.getTheme().doDrawSquareButtons() || !b.isContentAreaFilled()
 				|| !(b.getBorder() instanceof UIResource)
 				|| (width < 64 || height < 16) && (b.getText() == null || b.getText().length() == 0)) {
 			g.setColor(AbstractLookAndFeel.getFocusColor());
 			BasicGraphicsUtils.drawDashedRect(g, 4, 3, width - 8, height - 6);
 		} else {
-			Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+			final Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2D.setColor(AbstractLookAndFeel.getFocusColor());
-			int d = b.getHeight() - 4;
+			final int d = b.getHeight() - 4;
 			g2D.drawRoundRect(2, 2, b.getWidth() - 5, b.getHeight() - 5, d, d);
 			g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRenderingHint);
 		}

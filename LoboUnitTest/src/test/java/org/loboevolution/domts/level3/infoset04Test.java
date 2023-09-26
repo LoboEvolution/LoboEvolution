@@ -51,17 +51,17 @@ public class infoset04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element elem;
-        CDATASection newCdata;
+        final CDATASection newCdata;
         CDATASection cdata;
-        Node text;
-        String nodeName;
-        String nodeValue;
-        Node appendedChild;
-        DOMConfiguration domConfig;
+        final Node text;
+        final String nodeName;
+        final String nodeValue;
+        final Node appendedChild;
+        final DOMConfiguration domConfig;
         HTMLCollection pList;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");

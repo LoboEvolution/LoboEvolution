@@ -40,13 +40,13 @@ public class HTMLDetailsElementImpl extends HTMLElementImpl implements HTMLDetai
      *
      * @param name a {@link String} object.
      */
-    public HTMLDetailsElementImpl(String name) {
+    public HTMLDetailsElementImpl(final String name) {
         super(name);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
+    protected RenderState createRenderState(final RenderState prevRenderState) {
         return new BlockRenderState(prevRenderState, this);
     }
 
@@ -56,7 +56,7 @@ public class HTMLDetailsElementImpl extends HTMLElementImpl implements HTMLDetai
     }
 
     @Override
-    public void setOpen(boolean open) {
+    public void setOpen(final boolean open) {
 
     }
 }

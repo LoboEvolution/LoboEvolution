@@ -44,7 +44,7 @@ class OverflowException extends Exception {
 	 *
 	 * @param renderables a {@link java.util.Collection} object.
 	 */
-	public OverflowException(Collection<Renderable> renderables) {
+	public OverflowException(final Collection<Renderable> renderables) {
 		this.renderables = renderables;
 	}
 

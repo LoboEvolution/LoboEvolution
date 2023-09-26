@@ -40,7 +40,7 @@ public class AlignXRenderState extends BlockRenderState {
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      * @param alignXPercent a int.
      */
-    public AlignXRenderState(final RenderState prevRenderState, HTMLElementImpl element, int alignXPercent) {
+    public AlignXRenderState(final RenderState prevRenderState, final HTMLElementImpl element, final int alignXPercent) {
         super(prevRenderState, element);
 		this.alignXPercent = alignXPercent;
 	}

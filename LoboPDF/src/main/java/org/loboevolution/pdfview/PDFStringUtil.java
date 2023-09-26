@@ -87,7 +87,7 @@ public class PDFStringUtil {
      *  PDFObject#getStringValue()}
      * @return either the original input, or the input decoded as UTF-16
      */
-    public static String asTextString(String basicString) {
+    public static String asTextString(final String basicString) {
         if (basicString == null) {
             return null;
         }
@@ -112,7 +112,7 @@ public class PDFStringUtil {
      *  PDFObject#getStringValue()}
      * @return the decoding of the string's bytes in PDFDocEncoding
      */
-    public static String asPDFDocEncoded(String basicString) {
+    public static String asPDFDocEncoded(final String basicString) {
         final StringBuilder buf = new StringBuilder(basicString.length());
         for (int i = 0; i < basicString.length(); ++i) {
             final char c = PDF_DOC_ENCODING_MAP[basicString.charAt(i) & 0xFF];
@@ -128,7 +128,7 @@ public class PDFStringUtil {
      * @return an array of {@link byte} objects.
      * @throws java.nio.charset.CharacterCodingException if any.
      */
-    public byte[] toPDFDocEncoded(String string)
+    public byte[] toPDFDocEncoded(final String string)
             throws CharacterCodingException {
         // we can just grab array since we know that if charset completes
         // without error then there's the output buffer will be exactly
@@ -146,11 +146,11 @@ public class PDFStringUtil {
      *  PDFObject#getStringValue()}
      * @return the decoding of the string's bytes in UTF16-BE
      */
-    public static String asUTF16BEEncoded(String basicString) {
+    public static String asUTF16BEEncoded(final String basicString) {
         try {
             return new String(asBytes(basicString),
                     2, basicString.length() - 2, "UTF-16BE");
-        } catch (UnsupportedEncodingException e) {
+        } catch (final UnsupportedEncodingException e) {
             // UTF-16BE should always be available
             throw new RuntimeException("No UTF-16BE charset!");
         }
@@ -165,7 +165,7 @@ public class PDFStringUtil {
      *  PDFObject#getStringValue()}
      * @return the bytes corresponding to its characters
      */
-    public static byte[] asBytes(String basicString) {
+    public static byte[] asBytes(final String basicString) {
         final byte[] b = new byte[basicString.length()];
         for (int i = 0; i < b.length; ++i) {
             b[i] = (byte) basicString.charAt(i);
@@ -183,7 +183,7 @@ public class PDFStringUtil {
      * @return the corresponding string
      */
     public static String asBasicString(
-            byte[] bytes, int offset, int length) {
+            final byte[] bytes, final int offset, final int length) {
         final char[] c = new char[length];
         for (int i = 0; i < c.length; ++i) {
             c[i] = (char) bytes[i + offset];
@@ -198,7 +198,7 @@ public class PDFStringUtil {
      * @param bytes the bytes, all of which are used
      * @return the corresponding string
      */
-    public static String asBasicString(byte[] bytes) {
+    public static String asBasicString(final byte[] bytes) {
         return asBasicString(bytes, 0, bytes.length);
     }
 

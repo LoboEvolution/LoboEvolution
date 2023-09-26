@@ -49,43 +49,43 @@ public class ConsoleImpl implements Console {
 
     private final SessionStorage sessionStorage;
 
-    public ConsoleImpl(HtmlRendererConfig config) {
+    public ConsoleImpl(final HtmlRendererConfig config) {
         this.sessionStorage = new SessionStorage(config);
     }
 
 	/** {@inheritDoc}*/
 	@Override
-    public void log(Object message) {
+    public void log(final Object message) {
 		logging(message);
 	}
 
 	/** {@inheritDoc}*/
 	@Override
-    public void debug(Object message) {
+    public void debug(final Object message) {
 		logging(message);
 	}
 
 	/** {@inheritDoc}*/
 	@Override
-    public void info(Object message) {
+    public void info(final Object message) {
 		logging(message);
     }
 
 	/** {@inheritDoc}*/
 	@Override
-    public void warn(Object message) {
+    public void warn(final Object message) {
         logging(message);
 	}
 
 	/** {@inheritDoc}*/
 	@Override
-    public void error(Object message) {
+    public void error(final Object message) {
 		logging(message);
     }
 
 	/** {@inheritDoc}*/
 	@Override
-	public void trace(Object message) {
+	public void trace(final Object message) {
 		logging(message);
 	}
 
@@ -94,7 +94,7 @@ public class ConsoleImpl implements Console {
      *
      * <p>time.</p>
      */
-    public void time(String name) {
+    public void time(final String name) {
         time = new Date();
        // logger.info(name + ": timer started");
         strTime = name;
@@ -106,10 +106,10 @@ public class ConsoleImpl implements Console {
      *
      * <p>timeEnd.</p>
      */
-    public void timeEnd(String name) {
+    public void timeEnd(final String name) {
         if (name.equals(strTime)) {
-            Date date = new Date();
-            Date result = new Date(time.getTime() - date.getTime());
+            final Date date = new Date();
+            final Date result = new Date(time.getTime() - date.getTime());
            // logger.info(strTime + ": " + result);
         }
 
@@ -127,7 +127,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void count(String label) {
+    public void count(final String label) {
         // TODO Auto-generated method stub
 
     }
@@ -154,7 +154,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void group(String groupTitle) {
+    public void group(final String groupTitle) {
         // TODO Auto-generated method stub
 
     }
@@ -172,7 +172,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void groupCollapsed(String groupTitle) {
+    public void groupCollapsed(final String groupTitle) {
         // TODO Auto-generated method stub
 
     }
@@ -199,7 +199,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void markTimeline(String label) {
+    public void markTimeline(final String label) {
         // TODO Auto-generated method stub
 
     }
@@ -217,7 +217,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void profile(String reportName) {
+    public void profile(final String reportName) {
         // TODO Auto-generated method stub
 
     }
@@ -235,7 +235,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void profileEnd(String reportName) {
+    public void profileEnd(final String reportName) {
         // TODO Auto-generated method stub
 
     }
@@ -271,7 +271,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void timeStamp(String label) {
+    public void timeStamp(final String label) {
         // TODO Auto-generated method stub
 
     }
@@ -289,7 +289,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void timeline(String label) {
+    public void timeline(final String label) {
         // TODO Auto-generated method stub
 
     }
@@ -307,7 +307,7 @@ public class ConsoleImpl implements Console {
      * {@inheritDoc}
      */
     @Override
-    public void timelineEnd(String label) {
+    public void timelineEnd(final String label) {
         // TODO Auto-generated method stub
 
     }
@@ -321,7 +321,7 @@ public class ConsoleImpl implements Console {
 
     }
 
-	private void logging(Object message){
+	private void logging(final Object message){
 		final Object log = sessionStorage.getItem("log");
 		if (log == null) {
 			sessionStorage.setItem("log", String.valueOf(message));

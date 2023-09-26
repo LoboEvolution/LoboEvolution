@@ -47,8 +47,8 @@ import static org.junit.Assert.assertEquals;
 public class documentsetdocumenturi01Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        String docURI;
+        final Document doc;
+        final String docURI;
         doc = sampleXmlFile("hc_staff.xml");
         doc.setDocumentURI("file:///test");
         docURI = doc.getDocumentURI();

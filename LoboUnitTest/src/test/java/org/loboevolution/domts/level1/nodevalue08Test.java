@@ -54,11 +54,11 @@ public class nodevalue08Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        Node newNode;
+        final Document doc;
+        final DocumentType docType;
+        final Node newNode;
         String newValue;
-        NamedNodeMap nodeMap;
+        final NamedNodeMap nodeMap;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull("docTypeNotNull", docType);
@@ -72,7 +72,7 @@ public class nodevalue08Test extends LoboUnitTest {
         boolean success = false;
         try {
             newNode.setNodeValue("This should have no effect");
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
 

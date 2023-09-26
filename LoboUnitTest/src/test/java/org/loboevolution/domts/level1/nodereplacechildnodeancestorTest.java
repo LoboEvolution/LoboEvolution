@@ -64,13 +64,13 @@ public class nodereplacechildnodeancestorTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Node newChild;
-        HTMLCollection elementList;
-        Node employeeNode;
-        NodeList childList;
-        Node oldChild;
-        Node replacedNode;
+        final Document doc;
+        final Node newChild;
+        final HTMLCollection elementList;
+        final Node employeeNode;
+        final NodeList childList;
+        final Node oldChild;
+        final Node replacedNode;
         doc = sampleXmlFile("staff.xml");
         newChild = doc.getDocumentElement();
         elementList = doc.getElementsByTagName("employee");
@@ -82,7 +82,7 @@ public class nodereplacechildnodeancestorTest extends LoboUnitTest {
             boolean success = false;
             try {
                 replacedNode = employeeNode.replaceChild(newChild, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
             assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

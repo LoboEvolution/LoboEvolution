@@ -33,23 +33,25 @@ import java.awt.Stroke;
 
 /**
  * <p>GUITasks class.</p>
- *
- *
- *
  */
 public class GUITasks {
 	/**
 	 * <p>drawDashed.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x1 a int.
-	 * @param y1 a int.
-	 * @param x2 a int.
-	 * @param y2 a int.
-	 * @param dashSize a int.
-	 * @param gapSize a int.
+	 * @param xDashed1 a {@link java.lang.Integer} object.
+	 * @param yDashed1 a {@link java.lang.Integer} object.
+	 * @param xDashed2 a {@link java.lang.Integer} object.
+	 * @param yDashed2 a {@link java.lang.Integer} object.
+	 * @param dashSize a {@link java.lang.Integer} object.
+	 * @param gapSize a {@link java.lang.Integer} object.
 	 */
-	public static void drawDashed(Graphics g, int x1, int y1, int x2, int y2, int dashSize, int gapSize) {
+	public static void drawDashed(final Graphics g, final int xDashed1, final int yDashed1, final int xDashed2, final int yDashed2, final int dashSize, final int gapSize) {
+		int x1 = xDashed1;
+		int y1 = yDashed1;
+		int x2 = xDashed2;
+		int y2 = yDashed2;
+
 		if (x2 < x1) {
 			final int temp = x1;
 			x1 = x2;

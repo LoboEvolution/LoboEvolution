@@ -55,11 +55,11 @@ public class getNamedItemNS04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notations;
-        Notation notation;
-        String nullNS = null;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notations;
+        final Notation notation;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();

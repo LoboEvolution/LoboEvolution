@@ -52,17 +52,17 @@ import static org.junit.Assert.assertEquals;
 public class documentadoptnode24Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DOMImplementation domImpl;
-        HTMLCollection childList;
-        Node adoptedNode;
-        Element codeElem;
-        NodeList codeElemChildren;
-        NodeList adoptedChildren;
-        int codeElemLen;
-        int adoptedLen;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final Document newDoc;
+        final DOMImplementation domImpl;
+        final HTMLCollection childList;
+        final Node adoptedNode;
+        final Element codeElem;
+        final NodeList codeElemChildren;
+        final NodeList adoptedChildren;
+        final int codeElemLen;
+        final int adoptedLen;
+        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();

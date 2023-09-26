@@ -28,21 +28,21 @@ package org.loboevolution.apache.xpath.operations;
 import org.loboevolution.apache.xpath.XPathContext;
 import org.loboevolution.apache.xpath.objects.XNumber;
 import org.loboevolution.apache.xpath.objects.XObject;
+import org.loboevolution.javax.xml.transform.TransformerException;
 
 /** The 'div' operation expression executer. */
 public class Div extends Operation {
 
   /** {@inheritDoc} */
   @Override
-  public XObject operate(XObject left, XObject right)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject operate(final XObject left, final XObject right)
+      throws TransformerException {
     return new XNumber(left.num() / right.num());
   }
 
   /** {@inheritDoc} */
   @Override
-  public double num(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
-
+  public double num(final XPathContext xctxt) throws TransformerException {
     return m_left.num(xctxt) / m_right.num(xctxt);
   }
 }

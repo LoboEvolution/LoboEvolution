@@ -32,9 +32,6 @@ import org.jpedal.jbig2.segment.Flags;
 
 /**
  * <p>RefinementRegionFlags class.</p>
- *
-  *
-  *
  */
 public class RefinementRegionFlags extends Flags {
 	
@@ -45,7 +42,7 @@ public class RefinementRegionFlags extends Flags {
 	public static final String TPGDON = "TPGDON";
 
 	/** {@inheritDoc} */
-	public void setFlags(int flagsAsInt) {
+	public void setFlags(final int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract GR_TEMPLATE */

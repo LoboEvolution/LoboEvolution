@@ -53,13 +53,13 @@ public class documentadoptnode07Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         doc = sampleXmlFile("hc_staff.xml");
 
         boolean success = false;
         try {
             doc.adoptNode(doc);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue("throw_NOT_SUPPORTED_ERR", success);

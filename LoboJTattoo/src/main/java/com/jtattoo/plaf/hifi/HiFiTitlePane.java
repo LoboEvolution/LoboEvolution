@@ -54,7 +54,7 @@ public class HiFiTitlePane extends BaseTitlePane {
 	 * @param root a {@link javax.swing.JRootPane} object.
 	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
 	 */
-	public HiFiTitlePane(JRootPane root, BaseRootPaneUI ui) {
+	public HiFiTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
@@ -66,12 +66,12 @@ public class HiFiTitlePane extends BaseTitlePane {
 
 	/** {@inheritDoc} */
 	@Override
-	protected void paintBorder(Graphics g) {
+	protected void paintBorder(final Graphics g) {
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintText(Graphics g, int x, int y, String title) {
+	public void paintText(final Graphics g, final int x, final int y, final String title) {
 		g.setColor(Color.black);
 		JTattooUtilities.drawString(rootPane, g, title, x + 1, y + 1);
 		if (isActive()) {

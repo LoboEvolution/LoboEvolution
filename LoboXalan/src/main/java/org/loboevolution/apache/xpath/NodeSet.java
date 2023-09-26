@@ -52,12 +52,12 @@ import java.util.List;
 public class NodeSet extends AbstractList<Node> implements HTMLCollection {
 
 
-    public NodeSet(List<Node> listVector) {
+    public NodeSet(final List<Node> listVector) {
         super(listVector);
     }
 
     @Override
-    public Element namedItem(String name) {return null;}
+    public Element namedItem(final String name) {return null;}
 
     @Override
     public int getLength() {
@@ -65,18 +65,18 @@ public class NodeSet extends AbstractList<Node> implements HTMLCollection {
     }
 
     @Override
-    public Node item(Object index) {
+    public Node item(final Object index) {
         try {
-            double idx = Double.parseDouble(index.toString());
+            final double idx = Double.parseDouble(index.toString());
             if (idx >= getLength() || idx == -1) return null;
             return this.get((int) idx);
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             return this.get(0);
         }
     }
 
     @Override
-    public void setItem(Integer index, Node node) {
+    public void setItem(final Integer index, final Node node) {
         set(index, node);
     }
 }

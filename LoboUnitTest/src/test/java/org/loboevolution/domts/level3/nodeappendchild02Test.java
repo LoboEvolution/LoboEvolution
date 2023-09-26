@@ -32,10 +32,8 @@ import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 
 /**
@@ -48,11 +46,11 @@ import static org.junit.Assert.fail;
 public class nodeappendchild02Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Element newElem;
-        String tagName;
-        String rootNS;
-        Element docElem;
+        final Document doc;
+        final Element newElem;
+        final String tagName;
+        final String rootNS;
+        final Element docElem;
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         tagName = docElem.getTagName();
@@ -62,7 +60,7 @@ public class nodeappendchild02Test extends LoboUnitTest {
         boolean success = false;
         try {
             doc.appendChild(newElem);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
         assertTrue("throw_HIERARCHY_REQUEST_ERR", success);

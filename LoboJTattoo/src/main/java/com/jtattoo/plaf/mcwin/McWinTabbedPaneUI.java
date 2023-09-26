@@ -54,11 +54,11 @@ public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */
 	@Override
-	protected Color[] getContentBorderColors(int tabPlacement) {
+	protected Color[] getContentBorderColors(final int tabPlacement) {
 		Color controlColorLight = AbstractLookAndFeel.getTheme().getControlColorLight();
 		if (!controlColorLight.equals(new ColorUIResource(106, 150, 192))) {
 			controlColorLight = ColorHelper.brighter(controlColorLight, 6);
-			Color controlColorDark = AbstractLookAndFeel.getTheme().getControlColorDark();
+			final Color controlColorDark = AbstractLookAndFeel.getTheme().getControlColorDark();
 			if (sepColors == null) {
 				sepColors = new Color[5];
 				sepColors[0] = controlColorDark;
@@ -71,7 +71,7 @@ public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
 		} else {
 			if (tabPlacement == TOP || tabPlacement == LEFT) {
 				if (sepColors == null) {
-					int len = AbstractLookAndFeel.getTheme().getDefaultColors().length;
+					final int len = AbstractLookAndFeel.getTheme().getDefaultColors().length;
 					sepColors = new Color[5];
 					sepColors[0] = AbstractLookAndFeel.getTheme().getDefaultColors()[0];
 					sepColors[1] = AbstractLookAndFeel.getTheme().getDefaultColors()[len - 6];

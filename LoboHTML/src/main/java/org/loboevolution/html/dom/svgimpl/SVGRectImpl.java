@@ -52,7 +52,7 @@ public class SVGRectImpl implements SVGRect {
 	 * @param width a {@link java.lang.Float} object.
 	 * @param height a {@link java.lang.Float} object.
 	 */
-	public SVGRectImpl(float x, float y, float width, float height) {
+	public SVGRectImpl(final float x, final float y, final float width, final float height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -64,7 +64,7 @@ public class SVGRectImpl implements SVGRect {
 	 *
 	 * @param rect a {@link java.awt.geom.Rectangle2D} object.
 	 */
-	public SVGRectImpl(Rectangle2D rect) {
+	public SVGRectImpl(final Rectangle2D rect) {
 		x = (float) rect.getX();
 		y = (float) rect.getY();
 		width = (float) rect.getWidth();
@@ -79,7 +79,7 @@ public class SVGRectImpl implements SVGRect {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setX(float x) {
+	public void setX(final float x) {
 		this.x = x;
 	}
 
@@ -103,7 +103,7 @@ public class SVGRectImpl implements SVGRect {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setWidth(float width) {
+	public void setWidth(final float width) {
 		this.width = width;
 	}
 
@@ -115,7 +115,7 @@ public class SVGRectImpl implements SVGRect {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setHeight(float height) {
+	public void setHeight(final float height) {
 		this.height = height;
 	}
 

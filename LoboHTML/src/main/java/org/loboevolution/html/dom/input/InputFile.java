@@ -48,7 +48,7 @@ public class InputFile extends BasicInput {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputFile(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputFile(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		control = ic;
 		setElement(modelNode);
 		setjComponent(textField);
@@ -69,14 +69,14 @@ public class InputFile extends BasicInput {
 		textField.addCaretListener(this);
 		textField.addMouseListener(this);
 
-		Box buttonBar = Box.createHorizontalBox();
+		final Box buttonBar = Box.createHorizontalBox();
 		buttonBar.add(Box.createHorizontalGlue());
 		buttonBar.add(textField);
 		buttonBar.add(browseButton);
 		ic.add(buttonBar, BorderLayout.SOUTH);
 	}
 	
-	private class BrowseAction extends AbstractAction {
+	private final class BrowseAction extends AbstractAction {
 
 		private static final long serialVersionUID = 1L;
 
@@ -84,7 +84,7 @@ public class InputFile extends BasicInput {
 		public void actionPerformed(final ActionEvent e) {
 			final JFileChooser chooser = new JFileChooser();
 			if (chooser.showOpenDialog(control) == JFileChooser.APPROVE_OPTION) {
-				String paths = chooser.getSelectedFile().getAbsolutePath();
+				final String paths = chooser.getSelectedFile().getAbsolutePath();
 				textField.setText(paths);
 			} else {
 				textField.setText("");

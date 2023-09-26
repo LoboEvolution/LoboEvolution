@@ -34,12 +34,12 @@ public class And extends Operation {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
 
-    XObject expr1 = m_left.execute(xctxt);
+    final XObject expr1 = m_left.execute(xctxt);
 
     if (expr1.bool()) {
-      XObject expr2 = m_right.execute(xctxt);
+      final XObject expr2 = m_right.execute(xctxt);
 
       return expr2.bool() ? XBoolean.S_TRUE : XBoolean.S_FALSE;
     }
@@ -48,7 +48,7 @@ public class And extends Operation {
 
   /** {@inheritDoc} */
   @Override
-  public boolean bool(XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public boolean bool(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
     return m_left.bool(xctxt) && m_right.bool(xctxt);
   }
 }

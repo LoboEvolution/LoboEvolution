@@ -49,7 +49,7 @@ public class SetupAction extends AbstractAction {
 	 *
 	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
 	 */
-	public SetupAction(PDFViewer dialog) {
+	public SetupAction(final PDFViewer dialog) {
 		super("Page setup...");
 		this.dialog = dialog;
 	}

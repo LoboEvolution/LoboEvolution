@@ -66,7 +66,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 	 *
 	 * @param window a {@link org.loboevolution.html.node.js.Window} object.
 	 */
-	public Geolocation(WindowImpl window) {
+	public Geolocation(final WindowImpl window) {
 		this.window = window;
 	}
 
@@ -92,7 +92,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 	public void getCurrentPosition(final Function success, final Function error) {
 		try {
 			getCurrentPosition(success);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			geoError(error, e);
 		}
 	}
@@ -105,12 +105,12 @@ public class Geolocation extends AbstractScriptableDelegate {
 	 */
 	public long watchPosition(final Function success) {
 		final long watchId = System.currentTimeMillis();
-		Thread t = new Thread(() -> {
+		final Thread t = new Thread(() -> {
 			while (true) {
 				try {
 					getCurrentPosition(success);
 					Thread.sleep(500);
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					logger.log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
@@ -128,12 +128,12 @@ public class Geolocation extends AbstractScriptableDelegate {
 	 */
 	public long watchPosition(final Function success, final Function error) {
 		final long watchId = System.currentTimeMillis();
-		Thread t = new Thread(() -> {
+		final Thread t = new Thread(() -> {
 			while (true) {
 				try {
 					getCurrentPosition(success, error);
 					Thread.sleep(500);
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					geoError(error, e);
 					break;
 				}
@@ -143,7 +143,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 		return watchId;
 	}
 
-	private void geoError(final Function error, Exception e) {
+	private void geoError(final Function error, final Exception e) {
 		final NodeImpl node = (NodeImpl) window.getDocumentNode();
 		PositionError pError = null;
 		if (e instanceof UnknownHostException) {

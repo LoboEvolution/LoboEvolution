@@ -46,7 +46,7 @@ public class WritableLineReader extends LineNumberReader {
 	 *
 	 * @param reader a {@link java.io.Reader} object.
 	 */
-	public WritableLineReader(Reader reader) {
+	public WritableLineReader(final Reader reader) {
 		super(reader);
 	}
 
@@ -56,7 +56,7 @@ public class WritableLineReader extends LineNumberReader {
 	 * @param reader a {@link java.io.Reader} object.
 	 * @param bufferSize a int.
 	 */
-	public WritableLineReader(Reader reader, int bufferSize) {
+	public WritableLineReader(final Reader reader, final int bufferSize) {
 		super(reader, bufferSize);
 	}
 
@@ -87,7 +87,7 @@ public class WritableLineReader extends LineNumberReader {
 
 	/** {@inheritDoc} */
 	@Override
-	public int read(char[] b, int off, int len) throws IOException {
+	public int read(final char[] b, final int off, final int len) throws IOException {
 		final StringBuilder sb = this.writeBuffer;
 		if (sb != null && sb.length() > 0) {
 			final int srcEnd = Math.min(sb.length(), len);
@@ -117,7 +117,7 @@ public class WritableLineReader extends LineNumberReader {
 	 * @param text a {@link java.lang.String} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public void write(String text) throws IOException {
+	public void write(final String text) throws IOException {
 		// Document overrides this to know that new data is coming.
 		StringBuilder sb = this.writeBuffer;
 		if (sb == null) {

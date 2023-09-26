@@ -26,572 +26,562 @@
 
 package org.loboevolution.html;
 
+import lombok.Getter;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * <p>Entities class.</p>
- *
- *
- *
  */
+@Getter
 public enum Entities {
-	
-	amp("amp"),
 
-	lt("lt"),
+    AMP("amp"),
 
-	gt("gt"),
+    LT("lt"),
 
-	quot("quot"),
+    GT("gt"),
 
-	nbsp("nbsp"),
+    QUOT("quot"),
 
-	lsquo("lsquo"),
+    NBSP("nbsp"),
 
-	rsquo("rsquo"),
+    LSQUO("lsquo"),
 
+    RSQUO("rsquo"),
 
-	frasl("frasl"),
 
-	ndash("ndash"),
+    FRASL("frasl"),
 
-	mdash("mdash"),
+    NDASH("ndash"),
 
-	iexcl("iexcl"),
+    MDASH("mdash"),
 
-	cent("cent"),
+    IEXCL("iexcl"),
 
-	pound("pound"),
+    CENT("cent"),
 
-	curren("curren"),
+    POUND("pound"),
 
-	yen("yen"),
+    CURREN("curren"),
 
-	brvbar("brvbar"),
+    YEN("yen"),
 
-	brkbar("brkbar"),
+    BRVBAR("brvbar"),
 
-	sect("sect"),
+    BRKBAR("brkbar"),
 
-	uml("uml"),
+    SECT("sect"),
 
-	die("die"),
+    UML("uml"),
 
-	copy("copy"),
+    DIE("die"),
 
-	ordf("ordf"),
+    COPY("copy"),
 
-	laquo("laquo"),
+    ORDF("ordf"),
 
-	not("not"),
+    LAQUO("laquo"),
 
-	shy("shy"),
+    NOT("not"),
 
-	reg("reg"),
+    SHY("shy"),
 
-	macr("macr"),
+    REG("reg"),
 
-	hibar("hibar"),
+    MACR("macr"),
 
-	deg("deg"),
+    HIBAR("hibar"),
 
-	plusmn("plusmn"),
+    DEG("deg"),
 
-	sup2("sup2"),
+    PLUSMN("plusmn"),
 
-	sup3("sup3"),
+    SUP2("sup2"),
 
-	acute("acute"),
+    SUP3("sup3"),
 
-	micro("micro"),
+    ACUTE("acute"),
 
-	para("para"),
+    MICRO("micro"),
 
-	middot("middot"),
+    PARA("para"),
 
-	cedil("cedil"),
+    MIDDOT("middot"),
 
-	sup1("sup1"),
+    CEDIL("cedil"),
 
-	ordm("ordm"),
+    SUP1("sup1"),
 
-	raquo("raquo"),
+    ORDM("ordm"),
 
-	frac14("frac14"),
+    RAQUO("raquo"),
 
-	frac12("frac12"),
+    FRAC14("frac14"),
 
-	frac34("frac34"),
+    FRAC12("frac12"),
 
-	iquest("iquest"),
+    FRAC34("frac34"),
 
-	Agrave("Agrave"),
+    IQUEST("iquest"),
 
-	Aacute("Aacute"),
+	AGRAVE_UP("Agrave"),
 
-	Acirc("Acirc"),
+	AACUTE_UP("Aacute"),
 
-	Atilde("Atilde"),
+	ACIRC_UP("Acirc"),
 
-	Auml("Auml"),
+	ATILDE_UP("Atilde"),
 
-	Aring("Aring"),
+	AUML_UP("Auml"),
 
-	AElig("AElig"),
+	ARING_UP("Aring"),
 
-	Ccedil("Ccedil"),
+	AELIG_UP("AElig"),
 
-	Egrave("Egrave"),
+	CCEDIL_UP("Ccedil"),
 
-	Eacute("Eacute"),
+	EGRAVE_UP("Egrave"),
 
-	Ecirc("Ecirc"),
+	EACUTE_UP("Eacute"),
 
-	Euml("Euml"),
+	ECIRC_UP("Ecirc"),
 
-	Igrave("Igrave"),
+	EUML_UP("Euml"),
 
-	Iacute("Iacute"),
+	IGRAVE_UP("Igrave"),
 
-	Icirc("Icirc"),
+	IACUTE_UP("Iacute"),
 
-	Iuml("Iuml"),
+	ICIRC_UP("Icirc"),
 
-	ETH("ETH"),
+	IUML_UP("Iuml"),
 
-	Ntilde("Ntilde"),
+	ETH_UP("ETH"),
 
-	Ograve("Ograve"),
+	NTILDE_UP("Ntilde"),
 
-	Oacute("Oacute"),
+	OGRAVE_UP("Ograve"),
 
-	Ocirc("Ocirc"),
+	OACUTE_UP("Oacute"),
 
-	Otilde("Otilde"),
+	OCIRC_UP("Ocirc"),
 
-	Ouml("Ouml"),
+	OTILDE_UP("Otilde"),
 
-	times("times"),
+	OUML_UP("Ouml"),
 
-	Oslash("Oslash"),
+	TIMES("times"),
 
-	Ugrave("Ugrave"),
+	OSLASH_UP("Oslash"),
 
-	Uacute("Uacute"),
+	UGRAVE_UP("Ugrave"),
 
-	Ucirc("Ucirc"),
+	UACUTE_UP("Uacute"),
 
-	Uuml("Uuml"),
+	UCIRC_UP("Ucirc"),
 
-	Yacute("Yacute"),
+	UUML_UP("Uuml"),
 
-	THORN("THORN"),
+	YACUTE_UP("Yacute"),
 
-	szlig("szlig"),
+    THORN_UP("THORN"),
 
-	agrave("agrave"),
+    SZLIG("szlig"),
 
-	aacute("aacute"),
+    AGRAVE("agrave"),
 
-	acirc("acirc"),
+    AACUTE("aacute"),
 
-	atilde("atilde"),
+    ACIRC("acirc"),
 
-	auml("auml"),
+    ATILDE("atilde"),
 
-	aring("aring"),
+    AUML("auml"),
 
-	aelig("aelig"),
+    ARING("aring"),
 
-	ccedil("ccedil"),
+    AELIG("aelig"),
 
-	egrave("egrave"),
+    CCEDIL("ccedil"),
 
-	eacute("eacute"),
+    EGRAVE("egrave"),
 
-	ecirc("ecirc"),
+    EACUTE("eacute"),
 
-	euml("euml"),
+    ECIRC("ecirc"),
 
-	igrave("igrave"),
+    EUML("euml"),
 
-	iacute("iacute"),
+    IGRAVE("igrave"),
 
-	icirc("icirc"),
+    IACUTE("iacute"),
 
-	iuml("iuml"),
+    ICIRC("icirc"),
 
-	eth("eth"),
+    IUML("iuml"),
 
-	ntilde("ntilde"),
+    ETH("eth"),
 
-	ograve("ograve"),
+    NTILDE("ntilde"),
 
-	oacute("oacute"),
+    OGRAVE("ograve"),
 
-	ocirc("ocirc"),
+    OACUTE("oacute"),
 
-	otilde("otilde"),
+    OCIRC("ocirc"),
 
-	ouml("ouml"),
+    OTILDE("otilde"),
 
-	divide("divide"),
+    OUML("ouml"),
 
-	oslash("oslash"),
+    DIVIDE("divide"),
 
-	ugrave("ugrave"),
+    OSLASH("oslash"),
 
-	uacute("uacute"),
+    UGRAVE("ugrave"),
 
-	ucirc("ucirc"),
+    UACUTE("uacute"),
 
-	uuml("uuml"),
+    UCIRC("ucirc"),
 
-	yacute("yacute"),
+    UUML("uuml"),
 
-	thorn("thorn"),
+    YACUTE("yacute"),
 
-	yuml("yuml"),
+    THORN("thorn"),
 
-	Alpha("Alpha"),
+    YUML("yuml"),
 
-	Beta("Beta"),
+	ALPHA_UP("Alpha"),
 
-	Gamma("Gamma"),
+	BETA_UP("Beta"),
 
-	Delta("Delta"),
+	GAMMA_UP("Gamma"),
 
-	Epsilon("Epsilon"),
+	DELTA_UP("Delta"),
 
-	Zeta("Zeta"),
+	EPSILON_UP("Epsilon"),
 
-	Eta("Eta"),
+	ZETA_UP("Zeta"),
 
-	Theta("Theta"),
+	ETA_UP("Eta"),
 
-	Iota("Iota"),
+	THETA_UP("Theta"),
 
-	Kappa("Kappa"),
+	IOTA_UP("Iota"),
 
-	Lambda("Lambda"),
+	KAPPA_UP("Kappa"),
 
-	Mu("Mu"),
+	LAMBDA_UP("Lambda"),
 
-	Nu("Nu"),
+	MU_UP("Mu"),
 
-	Xi("Xi"),
+	NU_UP("Nu"),
 
-	Omicron("Omicron"),
+	XI_UP("Xi"),
 
-	Pi("Pi"),
+	OMICRON_UP("Omicron"),
 
-	Rho("Rho"),
+	PI_UP("Pi"),
 
-	Sigma("Sigma"),
+	RHO_UP("Rho"),
 
-	Sigmaf("Sigmaf"),
+	SIGMA_UP("Sigma"),
 
-	Tau("Tau"),
+	SIGMAF_UP("Sigmaf"),
 
-	Upsilon("Upsilon"),
+	TAU_UP("Tau"),
 
-	Phi("Phi"),
+	UPSILON_UP("Upsilon"),
 
-	Chi("Chi"),
+	PHI_UP("Phi"),
 
-	Psi("Psi"),
+	CHI_UP("Chi"),
 
-	Omega("Omega"),
+	PSI_UP("Psi"),
 
-	alpha("alpha"),
+	OMEGA_UP("Omega"),
 
-	beta("beta"),
+    ALPHA("alpha"),
 
-	gamma("gamma"),
+    BETA("beta"),
 
-	delta("delta"),
+    GAMMA("gamma"),
 
-	epsilon("epsilon"),
+    DELTA("delta"),
 
-	zeta("zeta"),
+    EPSILON("epsilon"),
 
-	eta("eta"),
+    ZETA("zeta"),
 
-	theta("theta"),
+    ETA("eta"),
 
-	iota("iota"),
+    THETA("theta"),
 
-	kappa("kappa"),
+    IOTA("iota"),
 
-	lambda("lambda"),
+    KAPPA("kappa"),
 
-	mu("mu"),
+    LAMBDA("lambda"),
 
-	nu("nu"),
+    MU("mu"),
 
-	xi("xi"),
+    NU("nu"),
 
-	omicron("omicron"),
+    XI("xi"),
 
-	pi("pi"),
+    OMICRON("omicron"),
 
-	rho("rho"),
+    PI("pi"),
 
-	sigma("sigma"),
+    RHO("rho"),
 
-	sigmaf("sigmaf"),
+    SIGMA("sigma"),
 
-	tau("tau"),
+    SIGMAF("sigmaf"),
 
-	upsilon("upsilon"),
+    TAU("tau"),
 
-	phi("phi"),
+    UPSILON("upsilon"),
 
-	chi("chi"),
+    PHI("phi"),
 
-	psi("psi"),
+    CHI("chi"),
 
-	omega("omega"),
+    PSI("psi"),
 
-	thetasym("thetasym"),
+    OMEGA("omega"),
 
-	upsih("upsih"),
+    THETASYM("thetasym"),
 
-	piv("piv"),
+    UPSIH("upsih"),
 
-	forall("forall"),
+    PIV("piv"),
 
-	part("part"),
+    FORALL("forall"),
 
-	exist("exist"),
+    PART("part"),
 
-	empty("empty"),
+    EXIST("exist"),
 
-	nabla("nabla"),
+    EMPTY("empty"),
 
-	isin("isin"),
+    NABLA("nabla"),
 
-	notin("notin"),
+    ISIN("isin"),
 
-	ni("ni"),
+    NOTIN("notin"),
 
-	prod("prod"),
+    NI("ni"),
 
-	sum("sum"),
+    PROD("prod"),
 
-	minus("minus"),
+    SUM("sum"),
 
-	lowast("lowast"),
+    MINUS("minus"),
 
-	radic("radic"),
+    LOWAST("lowast"),
 
-	prop("prop"),
+    RADIC("radic"),
 
-	infin("infin"),
+    PROP("prop"),
 
-	ang("ang"),
+    INFIN("infin"),
 
-	and("and"),
+    ANG("ang"),
 
-	or("or"),
+    AND("and"),
 
-	cap("cap"),
+    OR("or"),
 
-	cup("cup"),
+    CAP("cap"),
 
-	int_("int"),
+    CUP("cup"),
 
-	there4("there4"),
+    INT_("int"),
 
-	sim("sim"),
+    THERE4("there4"),
 
-	cong("cong"),
+    SIM("sim"),
 
-	asymp("asymp"),
+    CONG("cong"),
 
-	ne("ne"),
+    ASYMP("asymp"),
 
-	equiv("equiv"),
+    NE("ne"),
 
-	le("le"),
+    EQUIV("equiv"),
 
-	ge("ge"),
+    LE("le"),
 
-	sub("sub"),
+    GE("ge"),
 
-	sup("sup"),
+    SUB("sub"),
 
-	nsub("nsub"),
+    SUP("sup"),
 
-	sube("sube"),
+    NSUB("nsub"),
 
-	supe("supe"),
+    SUBE("sube"),
 
-	oplus("oplus"),
+    SUPE("supe"),
 
-	otimes("otimes"),
+    OPLUS("oplus"),
 
-	perp("perp"),
+    OTIMES("otimes"),
 
-	sdot("sdot"),
+    PERP("perp"),
 
-	loz("loz"),
+    SDOT("sdot"),
 
-	lceil("lceil"),
+    LOZ("loz"),
 
-	rceil("rceil"),
+    LCEIL("lceil"),
 
-	lfloor("lfloor"),
+    RCEIL("rceil"),
 
-	rfloor("rfloor"),
+    LFLOOR("lfloor"),
 
-	lang("lang"),
+    RFLOOR("rfloor"),
 
-	rang("rang"),
+    LANG("lang"),
 
-	larr("larr"),
+    RANG("rang"),
 
-	uarr("uarr"),
+    LARR("larr"),
 
-	rarr("rarr"),
+    UARR("uarr"),
 
-	darr("darr"),
+    RARR("rarr"),
 
-	harr("harr"),
+    DARR("darr"),
 
-	crarr("crarr"),
+    HARR("harr"),
 
-	lArr("lArr"),
+    CRARR("crarr"),
 
-	uArr("uArr"),
+    LARR_UP("lArr"),
 
-	rArr("rArr"),
+    UARR_UP("uArr"),
 
-	dArr("dArr"),
+    RARR_UP("rArr"),
 
-	hArr("hArr"),
+    DARR_UP("dArr"),
 
-	bull("bull"),
+    HARR_UP("hArr"),
 
-	prime("prime"),
+    BULL("bull"),
 
-	Prime("Prime"),
+    PRIME("prime"),
 
-	oline("oline"),
+    PRIME_UP("Prime"),
 
-	weierp("weierp"),
+    OLINE("oline"),
 
-	image("image"),
+    WEIERP_UP("weierp"),
 
-	real("real"),
+    IMAGE("image"),
 
-	trade("trade"),
+    REAL("real"),
 
-	euro("euro"),
+    TRADE("trade"),
 
-	alefsym("alefsym"),
+    EURO("euro"),
 
-	spades("spades"),
+    ALEFSYM("alefsym"),
 
-	clubs("clubs"),
+    SPADES("spades"),
 
-	hearts("hearts"),
+    CLUBS("clubs"),
 
-	diams("diams"),
+    HEARTS("hearts"),
 
-	OElig("OElig"),
+    DIAMS("diams"),
 
-	oelig("oelig"),
+    OELIG_UP("OElig"),
 
-	Scaron("Scaron"),
+    OELIG("oelig"),
 
-	scaron("scaron"),
+    SCARON_UP("Scaron"),
 
-	fnof("fnof"),
+    SCARON("scaron"),
 
-	ensp("ensp"),
+    FNOF("fnof"),
 
-	emsp("emsp"),
+    ENSP("ensp"),
 
-	thinsp("thinsp"),
+    EMSP("emsp"),
 
-	zwnj("zwnj"),
+    THINSP("thinsp"),
 
-	zwj("zwj"),
+    ZWNJ("zwnj"),
 
-	lrm("lrm"),
+    ZWJ("zwj"),
 
-	rlm("rlm"),
+    LRM("lrm"),
 
-	sbquo("sbquo"),
+    RLM("rlm"),
 
-	ldquo("ldquo"),
+    SBQUO("sbquo"),
 
-	rdquo("rdquo"),
+    LDQUO("ldquo"),
 
-	bdquo("bdquo"),
+    RDQUO("rdquo"),
 
-	dagger("dagger"),
+    BDQUO("bdquo"),
 
-	Dagger("Dagger"),
+    DAGGER("dagger"),
 
-	hellip("hellip"),
+    DAGGER_UP("Dagger"),
 
-	permil("permil"),
+    HELLIP("hellip"),
 
-	lsaquo("lsaquo"),
+    PERMIL("permil"),
 
-	rsaquo("rsaquo"),
+    LSAQUO("lsaquo"),
 
-	circ("circ"),
+    RSAQUO("rsaquo"),
 
-	tilde("tilde");
-	
-	
-	private final String value;
-	private static final Map<String, Entities> ENUM_MAP;
+    CIRC("circ"),
 
-	static {
-		Map<String, Entities> map = new HashMap<>();
-		for (Entities instance : Entities.values()) {
-			map.put(instance.getValue(), instance);
-		}
-		ENUM_MAP = Collections.unmodifiableMap(map);
-	}
+    TILDE("tilde");
 
-	Entities(String value) {
-		this.value = value;
-	}
+    private final String value;
+    private static final Map<String, Entities> ENUM_MAP;
 
-	/**
-	 * <p>Getter for the field value.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getValue() {
-		return value;
-	}
+    static {
+        final Map<String, Entities> map = new HashMap<>();
+        for (final Entities instance : Entities.values()) {
+            map.put(instance.getValue(), instance);
+        }
+        ENUM_MAP = Collections.unmodifiableMap(map);
+    }
 
-	/**
-	 * <p>isEqual.</p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public boolean isEqual(String value) {
-		return this.value.equals(value);
-	}
+    Entities(final String value) {
+        this.value = value;
+    }
 
-	/**
-	 * <p>get.</p>
-	 *
-	 * @param actionName a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.Entities} object.
-	 */
-	public static Entities get(String actionName) {
-		return ENUM_MAP.get(actionName);
-	}
+    /**
+     * <p>isEqual.</p>
+     *
+     * @param value a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public boolean isEqual(final String value) {
+        return this.value.equals(value);
+    }
+
+    /**
+     * <p>get.</p>
+     *
+     * @param actionName a {@link java.lang.String} object.
+     * @return a {@link org.loboevolution.html.Entities} object.
+     */
+    public static Entities get(final String actionName) {
+        return ENUM_MAP.get(actionName);
+    }
 
 }

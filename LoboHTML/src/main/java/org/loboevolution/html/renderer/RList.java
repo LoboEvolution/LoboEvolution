@@ -40,13 +40,13 @@ class RList extends BaseRListElement {
 	 *
 	 * @param info a {@link org.loboevolution.html.renderer.info.RBlockInfo} object.
 	 */
-	public RList(RBlockInfo info) {
+	public RList(final RBlockInfo info) {
 		super(info);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected void applyStyle(int availWidth, int availHeight) {
+	protected void applyStyle(final int availWidth, final int availHeight) {
 		super.applyStyle(availWidth, availHeight);
 		ListStyle listStyle = this.listStyle;
 		if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
@@ -78,16 +78,16 @@ class RList extends BaseRListElement {
 	}
 	/** {@inheritDoc} */
 	@Override
-	public void doLayout(RLayoutInfo info) {
+	public void doLayout(final RLayoutInfo info) {
 		final RenderState renderState = this.modelNode.getRenderState();
 
 		final Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 
 			final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-			HTMLDocumentImpl doc = (HTMLDocumentImpl) rootElement.getDocumentNode();
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootElement.getDocumentNode();
 			final String startText = rootElement.getAttribute("start");
-			int counterStart = HtmlValues.getPixelSize(startText, renderState, doc.getDefaultView(), 0);
+			final int counterStart = HtmlValues.getPixelSize(startText, renderState, doc.getDefaultView(), 0);
 
 			renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, counterStart);
 			super.doLayout(info);

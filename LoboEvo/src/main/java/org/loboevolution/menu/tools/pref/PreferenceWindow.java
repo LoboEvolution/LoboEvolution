@@ -65,7 +65,7 @@ public class PreferenceWindow extends JFrame {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public PreferenceWindow(BrowserFrame frame) {
+	public PreferenceWindow(final BrowserFrame frame) {
 		this.frame = frame;
 		this.preferencesPanel = new PreferencesPanel();
 		this.preferencesTree = new PreferencesTree();
@@ -135,7 +135,7 @@ public class PreferenceWindow extends JFrame {
 	 * @param prefsPanel the prefs panel
 	 * @return the component
 	 */
-	private Component createRightPane(Container prefsPanel) {
+	private Component createRightPane(final Container prefsPanel) {
 		final LoboPanel rightPanel = new LoboPanel("");
 		rightPanel.setPreferredSize(new Dimension(420, 280));
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
@@ -167,7 +167,7 @@ public class PreferenceWindow extends JFrame {
 	 *
 	 * @param frame the frame to set
 	 */
-	public void setFrame(BrowserFrame frame) {
+	public void setFrame(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 }

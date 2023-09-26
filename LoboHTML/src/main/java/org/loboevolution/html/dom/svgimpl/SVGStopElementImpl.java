@@ -48,7 +48,7 @@ public class SVGStopElementImpl extends SVGStylableImpl implements SVGStopElemen
 	public SVGAnimatedNumber getOffset() {
 		final String value = this.getAttribute("offset");
 		float number = 0;
-		int index = value.indexOf('%');
+		final int index = value.indexOf('%');
 		if (index != -1) {
 			number = Float.parseFloat(value.substring(0, index)) / 100;
 		} else {

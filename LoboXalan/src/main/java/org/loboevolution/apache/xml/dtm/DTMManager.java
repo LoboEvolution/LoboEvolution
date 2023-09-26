@@ -122,7 +122,7 @@ public abstract class DTMManager {
    * @param pos The position in the expression.
    * @return The newly created <code>DTMIterator</code>.
    */
-  public abstract DTMIterator createDTMIterator(Object xpathCompiler, int pos);
+  public abstract DTMIterator createDTMIterator(Object xpathCompiler, final int pos);
 
   /**
    * Create a new <code>DTMIterator</code> based on an XPath <a
@@ -135,7 +135,7 @@ public abstract class DTMManager {
    * @param presolver An object that can resolve prefixes to namespace URLs.
    * @return The newly created <code>DTMIterator</code>.
    */
-  public abstract DTMIterator createDTMIterator(String xpathString, PrefixResolver presolver);
+  public abstract DTMIterator createDTMIterator(final String xpathString, PrefixResolver presolver);
 
   /**
    * Create a new <code>DTMIterator</code> based only on a whatToShow and a DTMFilter. The traversal
@@ -163,8 +163,8 @@ public abstract class DTMManager {
   static {
     try {
       /* Temp debug code - this will be removed after we test everything */
-      boolean debug = System.getProperty("dtm.debug") != null;
-    } catch (SecurityException ex) {
+      final boolean debug = System.getProperty("dtm.debug") != null;
+    } catch (final SecurityException ex) {
     }
   }
 

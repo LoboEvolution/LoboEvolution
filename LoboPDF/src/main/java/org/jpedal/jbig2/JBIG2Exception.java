@@ -40,7 +40,7 @@ public class JBIG2Exception extends Exception {
 	 *
 	 * @param ex a {@link java.lang.Exception} object.
 	 */
-	public JBIG2Exception(Exception ex) {
+	public JBIG2Exception(final Exception ex) {
 		super(ex);
 	}
 
@@ -57,7 +57,7 @@ public class JBIG2Exception extends Exception {
 	 * @param message
 	 *            a message describing the exception
 	 */
-	public JBIG2Exception(String message) {
+	public JBIG2Exception(final String message) {
 		super(message);
 	}
 }

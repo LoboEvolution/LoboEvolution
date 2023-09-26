@@ -52,7 +52,7 @@ public class DeveloperToolTree extends LoboTree {
 	 * Instantiates a new preferences tree.
 	 * @param frame a {@link BrowserFrame} object.
 	 */
-	public DeveloperToolTree(BrowserFrame frame) {
+	public DeveloperToolTree(final BrowserFrame frame) {
 		this.frame = frame;
 		createAndShowGUI();
 	}

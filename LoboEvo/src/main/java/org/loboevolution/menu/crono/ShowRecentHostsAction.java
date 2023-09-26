@@ -49,7 +49,7 @@ public class ShowRecentHostsAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public ShowRecentHostsAction(BrowserFrame frame) {
+	public ShowRecentHostsAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 

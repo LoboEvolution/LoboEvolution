@@ -49,16 +49,16 @@ import static org.junit.Assert.assertTrue;
 public class normalizecharacters05Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element docElem;
-        DOMConfiguration domConfig;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final DOMConfiguration domConfig;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         HTMLCollection pList;
         Element pElem;
         Text text;
-        String textValue;
-        Node retval;
+        final String textValue;
+        final Node retval;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("normalize-characters", Boolean.FALSE);

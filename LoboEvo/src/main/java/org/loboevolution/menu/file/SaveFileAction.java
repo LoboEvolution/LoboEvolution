@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -59,7 +60,7 @@ public class SaveFileAction extends AbstractAction {
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public SaveFileAction(BrowserFrame frame) {
+	public SaveFileAction(final BrowserFrame frame) {
 		this.frame = frame;
 	}
 
@@ -88,23 +89,16 @@ public class SaveFileAction extends AbstractAction {
 					return;
 				}
 			}
-			final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			try {
+
+			try (final ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 				final String source = HttpNetwork.getSource(toolbar.getAddressBar().getText());
 				baos.write(source.getBytes());
-				final OutputStream ops = new FileOutputStream(selectedFile);
+				final OutputStream ops = Files.newOutputStream(selectedFile.toPath());
 				baos.writeTo(ops);
 				baos.flush();
 			} catch (final Exception e1) {
 				e1.printStackTrace();
-			} finally {
-				try {
-					baos.close();
-				} catch (final IOException e1) {
-					e1.printStackTrace();
-				}
 			}
-
 		}
 	}
 
@@ -115,7 +109,7 @@ public class SaveFileAction extends AbstractAction {
 	 * @param c the c
 	 * @return the selected file with extension
 	 */
-	private File getSelectedFileWithExtension(JFileChooser c) {
+	private File getSelectedFileWithExtension(final JFileChooser c) {
 		File file = c.getSelectedFile();
 		if (c.getFileFilter() instanceof FileNameExtensionFilter) {
 			final String[] exts = ((FileNameExtensionFilter) c.getFileFilter()).getExtensions();

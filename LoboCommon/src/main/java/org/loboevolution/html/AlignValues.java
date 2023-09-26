@@ -52,14 +52,14 @@ public enum AlignValues {
 	private static final Map<Integer, AlignValues> ENUM_MAP;
 	
 	static {
-		Map<Integer, AlignValues> map = new HashMap<>();
-		for (AlignValues instance : AlignValues.values()) {
+		final Map<Integer, AlignValues> map = new HashMap<>();
+		for (final AlignValues instance : AlignValues.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	AlignValues(Integer value) {
+	AlignValues(final Integer value) {
 		this.value = value;
 	}
 
@@ -78,7 +78,7 @@ public enum AlignValues {
 	 * @param value a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
-	public boolean isEqual(Integer value) {
+	public boolean isEqual(final Integer value) {
 		return this.value == value;
 	}
 
@@ -88,8 +88,8 @@ public enum AlignValues {
 	 * @param actionName a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.AlignValues} object.
 	 */
-	public static AlignValues get(Integer actionName) {
-		AlignValues value = ENUM_MAP.get(actionName);
+	public static AlignValues get(final Integer actionName) {
+		final AlignValues value = ENUM_MAP.get(actionName);
 		return value == null ? AlignValues.NONE : value;
 	}
 }

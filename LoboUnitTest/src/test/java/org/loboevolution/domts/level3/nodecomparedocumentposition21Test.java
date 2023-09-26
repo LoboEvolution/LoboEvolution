@@ -55,14 +55,14 @@ public class nodecomparedocumentposition21Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element elemName1;
-        Element elemName2;
-        Text txt1;
-        Text txt2;
-        int txt1Position;
-        int txt2Position;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element elemName1;
+        final Element elemName2;
+        final Text txt1;
+        final Text txt2;
+        final int txt1Position;
+        final int txt2Position;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         elemName1 = (Element) elemList.item(0);

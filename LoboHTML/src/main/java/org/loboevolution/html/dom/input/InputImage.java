@@ -59,24 +59,24 @@ public class InputImage {
 	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
-	public InputImage(HTMLInputElementImpl modelNode, InputControl ic) {
+	public InputImage(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		this.modelNode = modelNode;
-		TimingInfo info = new TimingInfo();
-		BufferedImage image = toBufferedImage(HttpNetwork.getImage(modelNode, info, true));
+		final TimingInfo info = new TimingInfo();
+		final BufferedImage image = toBufferedImage(HttpNetwork.getImage(modelNode, info, true));
 		final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		htmlPanel.getBrowserPanel().getTimingList.add(info);
-		JLabel wIcon = new JLabel(new ImageIcon(image));
+		final JLabel wIcon = new JLabel(new ImageIcon(image));
 		ic.add(wIcon);
 	}
 
 	private BufferedImage toBufferedImage(Image image) {
 		image = new ImageIcon(image).getImage();
-		boolean hasAlpha = hasAlpha(image);
+		final boolean hasAlpha = hasAlpha(image);
 		BufferedImage bimage = null;
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		try {
-			HTMLDocumentImpl doc = (HTMLDocumentImpl)modelNode.getDocumentNode();
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl)modelNode.getDocumentNode();
 			final int dw = HtmlValues.getPixelSize(modelNode.getAttribute("width"), null, doc.getDefaultView(), image.getWidth(null), 0);
 			final int dh = HtmlValues.getPixelSize(modelNode.getAttribute("height"), null, doc.getDefaultView(), image.getHeight(null), 0);
 
@@ -84,10 +84,10 @@ public class InputImage {
 			if (hasAlpha) {
 				transparency = Transparency.BITMASK;
 			}
-			GraphicsDevice gs = ge.getDefaultScreenDevice();
-			GraphicsConfiguration gc = gs.getDefaultConfiguration();
+			final GraphicsDevice gs = ge.getDefaultScreenDevice();
+			final GraphicsConfiguration gc = gs.getDefaultConfiguration();
 			bimage = gc.createCompatibleImage(dw, dh, transparency);
-		} catch (HeadlessException e) {
+		} catch (final HeadlessException e) {
 			// The system does not have a screen
 		}
 
@@ -99,26 +99,26 @@ public class InputImage {
 			bimage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
 		}
 
-		Graphics g = bimage.createGraphics();
+		final Graphics g = bimage.createGraphics();
 		g.drawImage(image, 0, 0, null);
 		g.dispose();
 		return bimage;
 	}
 
-	private static boolean hasAlpha(Image image) {
+	private static boolean hasAlpha(final Image image) {
 		if (image instanceof BufferedImage) {
-			BufferedImage bimage = (BufferedImage) image;
+			final BufferedImage bimage = (BufferedImage) image;
 			return bimage.getColorModel().hasAlpha();
 		}
 
-		PixelGrabber pg = new PixelGrabber(image, 0, 0, 1, 1, false);
+		final PixelGrabber pg = new PixelGrabber(image, 0, 0, 1, 1, false);
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 
-		ColorModel cm = pg.getColorModel();
+		final ColorModel cm = pg.getColorModel();
 		return cm.hasAlpha();
 	}
 }

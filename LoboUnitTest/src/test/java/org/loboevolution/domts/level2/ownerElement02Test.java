@@ -56,9 +56,9 @@ public class ownerElement02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Attr newAttr;
-        Node elementNode;
+        final Document doc;
+        final Attr newAttr;
+        final Node elementNode;
         doc = sampleXmlFile("staff.xml");
         newAttr = doc.createAttribute("newAttribute");
         elementNode = newAttr.getOwnerElement();

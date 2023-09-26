@@ -56,13 +56,13 @@ public class attrgetownerelement02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element element;
-        Node ownerElement;
-        String ownerElementName;
+        final Document doc;
+        final Element element;
+        final Node ownerElement;
+        final String ownerElementName;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElement("root");
-        Attr attr = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");
+        final Attr attr = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");
         element.setAttributeNodeNS(attr);
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();

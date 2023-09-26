@@ -73,7 +73,7 @@ public class PDFDecrypterFactory {
      * @throws org.loboevolution.pdfview.decrypt.PDFAuthenticationFailureException if any.
      */
     public static PDFDecrypter createDecryptor
-            (PDFObject encryptDict, PDFObject documentId, PDFPassword password)
+            (final PDFObject encryptDict, final PDFObject documentId, PDFPassword password)
             throws
             IOException,
             EncryptionUnsupportedByPlatformException,
@@ -87,12 +87,12 @@ public class PDFDecrypterFactory {
             // No encryption specified
             return IdentityDecrypter.getInstance();
         } else {
-            PDFObject filter = encryptDict.getDictRef("Filter");
+            final PDFObject filter = encryptDict.getDictRef("Filter");
             // this means that we'll fail if, for example, public key
             // encryption is employed
             if (filter != null && "Standard".equals(filter.getStringValue())) {
                 final PDFObject vObj = encryptDict.getDictRef("V");
-                int v = vObj != null ? vObj.getIntValue() : 0;
+                final int v = vObj != null ? vObj.getIntValue() : 0;
                 if (v == 1 || v == 2) {
                     final PDFObject lengthObj =
                             encryptDict.getDictRef("Length");
@@ -140,10 +140,10 @@ public class PDFDecrypterFactory {
      *  not currently support the specified encryption
      */
     private static PDFDecrypter createCryptFilterDecrypter(
-            PDFObject encryptDict,
-            PDFObject documentId,
-            PDFPassword password,
-            int v)
+            final PDFObject encryptDict,
+            final PDFObject documentId,
+            final PDFPassword password,
+            final int v)
             throws
             PDFAuthenticationFailureException,
             IOException,
@@ -217,11 +217,11 @@ public class PDFDecrypterFactory {
         // Identity filter sneakily declared in the CF entry
         cfDecrypters.put(CF_IDENTITY, IdentityDecrypter.getInstance());
 
-        PDFObject stmFObj = encryptDict.getDictRef("StmF");
+        final PDFObject stmFObj = encryptDict.getDictRef("StmF");
         final String defaultStreamFilter =
                 stmFObj != null ? stmFObj.getStringValue() : CF_IDENTITY;
 
-        PDFObject strFObj = encryptDict.getDictRef("StrF");
+        final PDFObject strFObj = encryptDict.getDictRef("StrF");
         final String defaultStringFilter =
                 strFObj != null ? strFObj.getStringValue() : CF_IDENTITY;
 
@@ -256,12 +256,12 @@ public class PDFDecrypterFactory {
      *
      */
     private static PDFDecrypter createStandardDecrypter(
-            PDFObject encryptDict,
-            PDFObject documentId,
-            PDFPassword password,
+            final PDFObject encryptDict,
+            final PDFObject documentId,
+            final PDFPassword password,
             Integer keyLength,
-            boolean encryptMetadata,
-            StandardDecrypter.EncryptionAlgorithm encryptionAlgorithm)
+            final boolean encryptMetadata,
+            final StandardDecrypter.EncryptionAlgorithm encryptionAlgorithm)
             throws
             PDFAuthenticationFailureException,
             IOException,
@@ -328,12 +328,12 @@ public class PDFDecrypterFactory {
      * @param encryptDict the Encrypt dict as found in the document's trailer.
      * @return true if the Filter exist in the current dictionary
      */
-    public static boolean isFilterExist(PDFObject encryptDict) {
+    public static boolean isFilterExist(final PDFObject encryptDict) {
         if (encryptDict != null) {
             try {
-                PDFObject filter = encryptDict.getDictRef("Filter");
+                final PDFObject filter = encryptDict.getDictRef("Filter");
                 return filter != null;
-            } catch (IOException e) {
+            } catch (final IOException e) {
             }
         }
         return false;

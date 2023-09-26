@@ -46,20 +46,20 @@ public class LocalTreeSelectionListener implements TreeSelectionListener {
 	 *
 	 * @param preferenceWindow a {@link org.loboevolution.menu.tools.pref.PreferenceWindow} object.
 	 */
-	public LocalTreeSelectionListener(PreferenceWindow preferenceWindow) {
+	public LocalTreeSelectionListener(final PreferenceWindow preferenceWindow) {
 		this.preferenceWindow = preferenceWindow;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void valueChanged(TreeSelectionEvent evt) {
+	public void valueChanged(final TreeSelectionEvent evt) {
 		final TreePath path = evt.getPath();
 		final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
 		final ToolsInfo si = node == null ? null : (ToolsInfo) node.getUserObject();
 		updatePreferencesPanel(si);
 	}
 
-	private void updatePreferencesPanel(ToolsInfo settingsInfo) {
+	private void updatePreferencesPanel(final ToolsInfo settingsInfo) {
 		if (settingsInfo != null) {
 			final AbstractToolsUI newUI = settingsInfo.createSettingsUI();
 			this.preferenceWindow.getPreferencesPanel().setSettingsUI(newUI);

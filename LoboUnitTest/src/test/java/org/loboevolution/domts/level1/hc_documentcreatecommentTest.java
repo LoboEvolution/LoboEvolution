@@ -54,11 +54,11 @@ public class hc_documentcreatecommentTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Comment newCommentNode;
-        String newCommentValue;
-        String newCommentName;
-        int newCommentType;
+        final Document doc;
+        final Comment newCommentNode;
+        final String newCommentValue;
+        final String newCommentName;
+        final int newCommentType;
         doc = sampleXmlFile("hc_staff.xml");
         newCommentNode = doc.createComment("This is a new Comment node");
         newCommentValue = newCommentNode.getNodeValue();

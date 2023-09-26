@@ -49,23 +49,23 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
      * {@inheritDoc}
      */
     @Override
-    public String serializeToString(Node node) {
+    public String serializeToString(final Node node) {
         try {
-            StringBuffer buff = new StringBuffer();
+            final StringBuffer buff = new StringBuffer();
 			if (node instanceof Document) {
-				NodeListImpl children = (NodeListImpl)node.getChildNodes();
+				final NodeListImpl children = (NodeListImpl)node.getChildNodes();
 				children.forEach(elem -> getXString((Element) elem, true, buff, true));
 			} else{
 				getXString((Element) node, true, buff, true);
 			}
             return buff.toString();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.severe(e.getMessage());
         }
         return "";
     }
 
-    public static void getXString(Element node, boolean withoutNamespaces, StringBuffer buff, boolean endTag) {
+    public static void getXString(final Element node, final boolean withoutNamespaces, final StringBuffer buff, boolean endTag) {
         try {
 
             buff.append("<")
@@ -74,11 +74,11 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
             if (node.hasAttributes()) {
                 buff.append(" ");
 
-				NamedNodeMap attributes = node.getAttributes();
-                for (Node nodeAttr : Nodes.iterable(attributes)) {
-                    Attr attrItem = (Attr) nodeAttr;
-                    String name = namespace(attrItem.getNodeName(), withoutNamespaces);
-                    String value = attrItem.getNodeValue();
+				final NamedNodeMap attributes = node.getAttributes();
+                for (final Node nodeAttr : Nodes.iterable(attributes)) {
+                    final Attr attrItem = (Attr) nodeAttr;
+                    final String name = namespace(attrItem.getNodeName(), withoutNamespaces);
+                    final String value = attrItem.getNodeValue();
 
                     buff.append(name)
                             .append("=")
@@ -91,11 +91,11 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
             if (node.hasChildNodes()) {
                 buff.append(">");
 
-                NodeList children = node.getChildNodes();
-                int childrenCount = children.getLength();
+                final NodeList children = node.getChildNodes();
+                final int childrenCount = children.getLength();
 
                 if (childrenCount == 1) {
-                    Node item = children.item(0);
+                    final Node item = children.item(0);
                     if (item.getNodeType() == Node.TEXT_NODE) {
                         if (item.getNodeValue() == null) {
                             buff.append("/>");
@@ -110,8 +110,8 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
                     }
                 }
 
-				NodeListImpl child = (NodeListImpl) children;
-				AtomicBoolean tag = new AtomicBoolean(endTag);
+				final NodeListImpl child = (NodeListImpl) children;
+				final AtomicBoolean tag = new AtomicBoolean(endTag);
 				child.forEach(item -> {
 					final int itemType = item.getNodeType();
 					if (itemType == Node.DOCUMENT_NODE || itemType == Node.ELEMENT_NODE) {
@@ -138,12 +138,12 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
                         .append(">");
             }
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.severe(e.getMessage());
         }
     }
 
-    private static String namespace(String str, boolean withoutNamespace) {
+    private static String namespace(final String str, final boolean withoutNamespace) {
         if (withoutNamespace && str.contains(":")) {
             return str.substring(str.indexOf(":") + 1);
         }

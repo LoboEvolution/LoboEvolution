@@ -50,9 +50,9 @@ import static org.junit.Assert.assertTrue;
 public class noderemovechild04Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        DocumentType removedDocType;
+        final Document doc;
+        final DocumentType docType;
+        final DocumentType removedDocType;
         Node removed;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
@@ -64,7 +64,7 @@ public class noderemovechild04Test extends LoboUnitTest {
             boolean success = false;
             try {
                 removed = docType.removeChild(doc);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
             assertTrue("NOT_FOUND_ERR_noderemovechild04", success);

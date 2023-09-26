@@ -59,14 +59,14 @@ public class InfoPageUI extends AbstractToolsUI {
      *
      * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    public InfoPageUI(BrowserFrame frame){
+    public InfoPageUI(final BrowserFrame frame){
         final ToolBar toolbar = frame.getToolbar();
         final Document doc = NavigationManager.getDocument(toolbar.getAddressBar().getText());
         final HtmlContent htmlcontent = new HtmlContent(doc);
         add(infoContent(htmlcontent.getMetaList()));
     }
 
-    private JScrollPane infoContent(List<MetaInfo> infoList) {
+    private JScrollPane infoContent(final List<MetaInfo> infoList) {
         try {
             final Object[] columnNames = { "Key", "Value" };
             final List<String[]> values = new ArrayList<>();

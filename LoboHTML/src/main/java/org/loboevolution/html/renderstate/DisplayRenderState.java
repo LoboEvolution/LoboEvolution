@@ -40,7 +40,7 @@ public class DisplayRenderState extends StyleSheetRenderState {
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param defaultDisplay a int.
 	 */
-	public DisplayRenderState(RenderState prevRenderState, HTMLElementImpl element, final int defaultDisplay) {
+	public DisplayRenderState(final RenderState prevRenderState, final HTMLElementImpl element, final int defaultDisplay) {
 		super(prevRenderState, element);
 		this.defaultDisplay = defaultDisplay;
 	}

@@ -138,7 +138,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public float getSubStringLength(int charnum, int nchars) {
+	public float getSubStringLength(final int charnum, final int nchars) {
 		String text = getText();
 		text = text.substring(charnum, nchars);
 		return text.length();
@@ -146,42 +146,42 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint getStartPositionOfChar(int charnum) {
+	public SVGPoint getStartPositionOfChar(final int charnum) {
 		// TODO Auto-generated method stub
 		return new SVGPointImpl();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGPoint getEndPositionOfChar(int charnum) {
+	public SVGPoint getEndPositionOfChar(final int charnum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGRect getExtentOfChar(int charnum) {
+	public SVGRect getExtentOfChar(final int charnum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public float getRotationOfChar(int charnum) {
+	public float getRotationOfChar(final int charnum) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public int getCharNumAtPosition(SVGPoint point) {
+	public int getCharNumAtPosition(final SVGPoint point) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void selectSubString(int charnum, int nchars) {
+	public void selectSubString(final int charnum, final int nchars) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -197,7 +197,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(AffineTransform transform) {
+	public Shape createShape(final AffineTransform transform) {
 		AffineTransform inverseTransform;
 		try {
 			inverseTransform = transform.createInverse();
@@ -235,13 +235,13 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 	}
 	
 	private String getText() {
-		StringBuilder text = new StringBuilder();
-		String xmlSpace = getXMLspace();
+		final StringBuilder text = new StringBuilder();
+		final String xmlSpace = getXMLspace();
 		if (Strings.isNotBlank(xmlSpace)) {
 			setXMLspace("default");
 		}
 		if (hasChildNodes()) {
-			NodeListImpl children = (NodeListImpl)getChildNodes();
+			final NodeListImpl children = (NodeListImpl)getChildNodes();
 			children.forEach(child -> {
 				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
@@ -259,7 +259,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 						}
 
 						nodeValue = nodeValue.replace('\t', ' ');
-						StringTokenizer st = new StringTokenizer(nodeValue);
+						final StringTokenizer st = new StringTokenizer(nodeValue);
 						while (st.hasMoreTokens()) {
 							childText.append(st.nextToken()).append(" ");
 						}

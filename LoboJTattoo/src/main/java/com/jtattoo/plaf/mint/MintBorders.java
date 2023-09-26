@@ -77,7 +77,7 @@ public class MintBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
 		}
 
 	} // end of class ButtonBorder
@@ -90,17 +90,19 @@ public class MintBorders extends BaseBorders {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			boolean active = isActive(c);
-			boolean resizable = isResizable(c);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
+			int w = width;
+			int h = height;
+			final boolean active = isActive(c);
+			final boolean resizable = isResizable(c);
 			if (!resizable) {
-				Color frameColor = AbstractLookAndFeel.getFrameColor();
+				final Color frameColor = AbstractLookAndFeel.getFrameColor();
 				Color borderColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
 				if (active) {
 					borderColor = AbstractLookAndFeel.getWindowBorderColor();
 				}
-				Color cHi = ColorHelper.brighter(frameColor, 40);
-				Color cLo = frameColor;
+				final Color cHi = ColorHelper.brighter(frameColor, 40);
+				final Color cLo = frameColor;
 				JTattooUtilities.draw3DBorder(g, cHi, cLo, x, y, w, h);
 				g.setColor(borderColor);
 				for (int i = 1; i < DW; i++) {
@@ -189,27 +191,27 @@ public class MintBorders extends BaseBorders {
 		}
 
 		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-			Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getToolbarBackgroundColor(), 20);
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int w, final int h) {
+			final AbstractButton button = (AbstractButton) c;
+			final ButtonModel model = button.getModel();
+			final Color frameColor = ColorHelper.darker(AbstractLookAndFeel.getToolbarBackgroundColor(), 20);
 			if (model.isEnabled()) {
 				if (model.isPressed() && model.isArmed() || model.isSelected()) {
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
 					g.setColor(frameColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.15f);
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.15f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.black);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);
 					g2D.setComposite(composite);
 				} else if (model.isRollover()) {
-					Graphics2D g2D = (Graphics2D) g;
-					Composite composite = g2D.getComposite();
+					final Graphics2D g2D = (Graphics2D) g;
+					final Composite composite = g2D.getComposite();
 					g.setColor(frameColor);
 					g.drawRect(x, y, w - 1, h - 1);
-					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
 					g2D.setComposite(alpha);
 					g.setColor(Color.white);
 					g.fillRect(x + 1, y + 1, w - 2, h - 2);

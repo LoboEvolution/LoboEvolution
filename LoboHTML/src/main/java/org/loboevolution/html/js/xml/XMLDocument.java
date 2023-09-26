@@ -43,13 +43,13 @@ import org.loboevolution.html.xpath.XPathResult;
 import org.loboevolution.type.DocumentReadyState;
 import org.loboevolution.type.VisibilityState;
 import org.mozilla.javascript.Function;
-import org.loboevolution.html.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
 import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.logging.Logger;
 
 /**
@@ -68,8 +68,8 @@ public class XMLDocument implements Document {
 	 * @param fileName name of file in file system
 	 * @return XMLDocument
 	 */
-	public static XMLDocument load(String fileName) {
-		XMLDocument ret = new XMLDocument();
+	public static XMLDocument load(final String fileName) {
+		final XMLDocument ret = new XMLDocument();
 		ret.loadFile(fileName);
 		return ret;
 	}
@@ -80,7 +80,7 @@ public class XMLDocument implements Document {
 	 * @param fileName name of file in file system
 	 * @return XML String
 	 */
-	public String loadXML(String fileName) {
+	public String loadXML(final String fileName) {
 		loadFile(fileName);
 		return getXML();
 	}
@@ -90,21 +90,21 @@ public class XMLDocument implements Document {
 	 * 
 	 * @param fileStr name of in file system
 	 */
-	private synchronized void loadFile(String fileStr) {
+	private synchronized void loadFile(final String fileStr) {
 		try {
-			File f = new File(fileStr);
-			XMLDocumentBuilder builder = new XMLDocumentBuilder();
+			final File f = new File(fileStr);
+			final XMLDocumentBuilder builder = new XMLDocumentBuilder();
 			if (f.isFile()) {
-				doc = builder.parse(new InputSourceImpl(new FileInputStream(f), "", StandardCharsets.UTF_8));
+				doc = builder.parse(new InputSourceImpl(Files.newInputStream(f.toPath()), "", StandardCharsets.UTF_8));
 			} else {
-				InputStream in = new ByteArrayInputStream(fileStr.getBytes());
+				final InputStream in = new ByteArrayInputStream(fileStr.getBytes());
 				doc = builder.parse(new InputSourceImpl(in, "", StandardCharsets.UTF_8));
 			}
-		} catch (SAXException e) {
+		} catch (final SAXException e) {
 			logger.warning("A DOCTYPE was passed into the XML document");
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			logger.severe("IOException occurred, XXE may still possible: " + e.getMessage());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.severe(e.getMessage());
 		}
 	}
@@ -122,19 +122,19 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByTagName(String tagname) {
+	public HTMLCollection getElementsByTagName(final String tagname) {
 		return doc.getElementsByTagName(tagname);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Element getElementById(String id) {
+	public Element getElementById(final String id) {
 		return doc.getElementById(id);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node appendChild(Node newChild) {
+	public Node appendChild(final Node newChild) {
 		return doc.appendChild(newChild);
 	}
 
@@ -145,7 +145,7 @@ public class XMLDocument implements Document {
 	 * @return a {@link Node} object.
 	 */
 	@Override
-	public Node prependChild(Node newChild) {
+	public Node prependChild(final Node newChild) {
 		return doc.prependChild(newChild);
 	}
 
@@ -157,24 +157,24 @@ public class XMLDocument implements Document {
 	 * @return a {@link Node} object.
 	 */
 	@Override
-	public Node prepend(Node newChild) {
+	public Node prepend(final Node newChild) {
 		return doc.prepend(newChild);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node cloneNode(boolean deep) {
+	public Node cloneNode(final boolean deep) {
 		return doc.cloneNode(deep);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public short compareDocumentPosition(Node other) {
+	public short compareDocumentPosition(final Node other) {
 		return doc.compareDocumentPosition(other);
 	}
 
 	@Override
-	public boolean isSupported(String xml, String s) {
+	public boolean isSupported(final String xml, final String s) {
 		return false;
 	}
 
@@ -184,7 +184,7 @@ public class XMLDocument implements Document {
 	}
 
 	@Override
-	public Node getFeature(String name, String version) {
+	public Node getFeature(final String name, final String version) {
 		return doc.getFeature(name, version);
 	}
 
@@ -280,7 +280,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Object getUserData(String key) {
+	public Object getUserData(final String key) {
 		return doc.getUserData(key);
 	}
 
@@ -292,37 +292,37 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node insertBefore(Node newChild, Node refChild) {
+	public Node insertBefore(final Node newChild, final Node refChild) {
 		return doc.insertBefore(newChild, refChild);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isDefaultNamespace(String namespaceURI) {
+	public boolean isDefaultNamespace(final String namespaceURI) {
 		return doc.isDefaultNamespace(namespaceURI);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isEqualNode(Node arg) {
+	public boolean isEqualNode(final Node arg) {
 		return doc.isEqualNode(arg);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isSameNode(Node other) {
+	public boolean isSameNode(final Node other) {
 		return doc.isSameNode(other);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String lookupNamespaceURI(String prefix) {
+	public String lookupNamespaceURI(final String prefix) {
 		return doc.lookupNamespaceURI(prefix);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String lookupPrefix(String namespaceURI) {
+	public String lookupPrefix(final String namespaceURI) {
 		return doc.lookupPrefix(namespaceURI);
 	}
 
@@ -334,13 +334,13 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node removeChild(Node oldChild) {
+	public Node removeChild(final Node oldChild) {
 		return doc.removeChild(oldChild);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node replaceChild(Node newChild, Node oldChild) {
+	public Node replaceChild(final Node newChild, final Node oldChild) {
 		return doc.replaceChild(newChild, oldChild);
 	}
 
@@ -351,65 +351,65 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(String nodeValue) {
+	public void setNodeValue(final String nodeValue) {
 		doc.setNodeValue(nodeValue);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setPrefix(String prefix) {
+	public void setPrefix(final String prefix) {
 		doc.setPrefix(prefix);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTextContent(String textContent) {
+	public void setTextContent(final String textContent) {
 		doc.setTextContent(textContent);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Object setUserData(String key, Object data, UserDataHandler handler) {
+	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		return doc.setUserData(key, data, handler);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Node adoptNode(Node source) {
+	public Node adoptNode(final Node source) {
 		return doc.adoptNode(source);
 	}
 
 	@Override
-	public EntityReference createEntityReference(String ent1) {
+	public EntityReference createEntityReference(final String ent1) {
 		return doc.createEntityReference(ent1);
 	}
 
 	@Override
-	public Node renameNode(Node node, String namespaceURI, String qualifiedName) {
+	public Node renameNode(final Node node, final String namespaceURI, final String qualifiedName) {
 		return doc.renameNode(node, namespaceURI, qualifiedName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr createAttribute(String name) {
+	public Attr createAttribute(final String name) {
 		return doc.createAttribute(name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr createAttributeNS(String namespaceURI, String qualifiedName) {
+	public Attr createAttributeNS(final String namespaceURI, final String qualifiedName) {
 		return doc.createAttributeNS(namespaceURI, qualifiedName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public CDATASection createCDATASection(String data) {
+	public CDATASection createCDATASection(final String data) {
 		return doc.createCDATASection(data);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Comment createComment(String data) {
+	public Comment createComment(final String data) {
 		return doc.createComment(data);
 	}
 
@@ -421,25 +421,25 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElement(String tagName) {
+	public Element createElement(final String tagName) {
 		return doc.createElement(tagName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElementNS(String namespaceURI, String qualifiedName) {
+	public Element createElementNS(final String namespaceURI, final String qualifiedName) {
 		return doc.createElementNS(namespaceURI, qualifiedName);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public ProcessingInstruction createProcessingInstruction(String target, String data) {
+	public ProcessingInstruction createProcessingInstruction(final String target, final String data) {
 		return doc.createProcessingInstruction(target, data);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Text createTextNode(String data) {
+	public Text createTextNode(final String data) {
 		return doc.createTextNode(data);
 	}
 
@@ -469,7 +469,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByTagNameNS(String namespaceURI, String localName) {
+	public HTMLCollection getElementsByTagNameNS(final String namespaceURI, final String localName) {
 		return doc.getElementsByTagNameNS(namespaceURI, localName);
 	}
 
@@ -513,7 +513,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Node importNode(Node importedNode, boolean deep) {
+	public Node importNode(final Node importedNode, final boolean deep) {
 		return doc.importNode(importedNode, deep);
 	}
 
@@ -525,25 +525,25 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDocumentURI(String documentURI) {
+	public void setDocumentURI(final String documentURI) {
 		doc.setDocumentURI(documentURI);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setStrictErrorChecking(boolean strictErrorChecking) {
+	public void setStrictErrorChecking(final boolean strictErrorChecking) {
 		doc.setStrictErrorChecking(strictErrorChecking);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXmlStandalone(boolean xmlStandalone) {
+	public void setXmlStandalone(final boolean xmlStandalone) {
 		doc.setXmlStandalone(xmlStandalone);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setXmlVersion(String xmlVersion) {
+	public void setXmlVersion(final String xmlVersion) {
 		doc.setXmlVersion(xmlVersion);
 	}
 
@@ -576,50 +576,50 @@ public class XMLDocument implements Document {
 	}
 
 	@Override
-	public void setOwnerDocument(Document document) {
+	public void setOwnerDocument(final Document document) {
 		doc.setOwnerDocument(document);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean contains(Node other) {
+	public boolean contains(final Node other) {
 
 		return doc.contains(other);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void addEventListener(String type, Function listener) {
+	public void addEventListener(final String type, final Function listener) {
 		doc.addEventListener(type, listener);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void addEventListener(String type, Function listener, boolean useCapture) {
+	public void addEventListener(final String type, final Function listener, final boolean useCapture) {
 		doc.addEventListener(type, listener, useCapture);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeEventListener(String script, Function function) {
-		doc.removeEventListener(script, function);
+	public void removeEventListener(final String type, final Function listener) {
+		doc.removeEventListener(type, listener);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void removeEventListener(String type, Function listener, boolean useCapture) {
+	public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
 		doc.removeEventListener(type, listener, useCapture);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean dispatchEvent(Node element, Event evt) {
+	public boolean dispatchEvent(final Node element, final Event evt) {
 
 		return doc.dispatchEvent(element, evt);
 	}
 
 	@Override
-	public boolean dispatchEvent(Event evt) throws EventException {
+	public boolean dispatchEvent(final Event evt) throws EventException {
 		return doc.dispatchEvent(evt);
 	}
 
@@ -653,14 +653,14 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Element querySelector(String selectors) {
+	public Element querySelector(final String selectors) {
 
 		return doc.querySelector(selectors);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeList querySelectorAll(String selectors) {
+	public NodeList querySelectorAll(final String selectors) {
 
 		return doc.querySelectorAll(selectors);
 	}
@@ -688,7 +688,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setAlinkColor(String alinkColor) {
+	public void setAlinkColor(final String alinkColor) {
 		doc.setAlinkColor(alinkColor);
 	}
 
@@ -728,7 +728,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBgColor(String bgColor) {
+	public void setBgColor(final String bgColor) {
 		doc.setBgColor(bgColor);
 	}
 
@@ -741,7 +741,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setBody(HTMLElement body) {
+	public void setBody(final HTMLElement body) {
 		doc.setBody(body);
 	}
 
@@ -782,7 +782,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCookie(String cookie) {
+	public void setCookie(final String cookie) {
 		doc.setCookie(cookie);
 	}
 
@@ -808,7 +808,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDesignMode(String designMode) {
+	public void setDesignMode(final String designMode) {
 		doc.setDesignMode(designMode);
 	}
 
@@ -821,7 +821,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDir(String dir) {
+	public void setDir(final String dir) {
 		doc.setDir(dir);
 	}
 
@@ -834,7 +834,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setDomain(String domain) {
+	public void setDomain(final String domain) {
 		doc.setDomain(domain);
 	}
 
@@ -854,7 +854,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setFgColor(String fgColor) {
+	public void setFgColor(final String fgColor) {
 		doc.setFgColor(fgColor);
 	}
 
@@ -923,7 +923,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setLocation(Location location) {
+	public void setLocation(final Location location) {
 		doc.setLocation(location);
 	}
 
@@ -978,7 +978,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		doc.setTitle(title);
 	}
 
@@ -997,7 +997,7 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Range caretRangeFromPoint(double x, double y) {
+	public Range caretRangeFromPoint(final double x, final double y) {
 
 		return doc.caretRangeFromPoint(x, y);
 	}
@@ -1018,39 +1018,39 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElementNS(String namespace, String qualifiedName, String options) {
+	public Element createElementNS(final String namespace, final String qualifiedName, final String options) {
 
 		return doc.createElementNS(namespace, qualifiedName, options);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Event createEvent(String eventInterface) {
+	public Event createEvent(final String eventInterface) {
 
 		return doc.createEvent(eventInterface);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeIterator createNodeIterator(Node root) throws DOMException {
+	public NodeIterator createNodeIterator(final Node root) throws DOMException {
 		return doc.createNodeIterator(root);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeIterator createNodeIterator(Node root, int whatToShow) throws DOMException {
+	public NodeIterator createNodeIterator(final Node root, final int whatToShow) throws DOMException {
 		return doc.createNodeIterator(root, whatToShow);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeIterator createNodeIterator(Node root, NodeFilter filter) throws DOMException {
+	public NodeIterator createNodeIterator(final Node root, final NodeFilter filter) throws DOMException {
 		return doc.createNodeIterator(root, filter);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public NodeIterator createNodeIterator(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+	public NodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter) throws DOMException {
 		return doc.createNodeIterator(root, whatToShow, filter);
 	}
 
@@ -1062,60 +1062,60 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public TreeWalker createTreeWalker(Node root) throws DOMException {
+	public TreeWalker createTreeWalker(final Node root) throws DOMException {
 		return doc.createTreeWalker(root);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public TreeWalker createTreeWalker(Node root, int whatToShow) throws DOMException {
+	public TreeWalker createTreeWalker(final Node root, final int whatToShow) throws DOMException {
 		return doc.createTreeWalker(root, whatToShow);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public TreeWalker createTreeWalker(Node root, NodeFilter filter) throws DOMException {
+	public TreeWalker createTreeWalker(final Node root, final NodeFilter filter) throws DOMException {
 		return doc.createTreeWalker(root, filter);
 	}
 
 	@Override
-	public TreeWalker createTreeWalker(Node root, int whatToShow, NodeFilter filter) throws DOMException {
+	public TreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter) throws DOMException {
 		return new TreeWalkerImpl(root, whatToShow, filter);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Element elementFromPoint(double x, double y) {
+	public Element elementFromPoint(final double x, final double y) {
 		return doc.elementFromPoint(x, y);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean execCommand(String commandId, boolean showUI, String value) {
+	public boolean execCommand(final String commandId, final boolean showUI, final String value) {
 		return doc.execCommand(commandId, showUI, value);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean execCommand(String commandId, boolean showUI) {
+	public boolean execCommand(final String commandId, final boolean showUI) {
 		return doc.execCommand(commandId, showUI);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean execCommand(String commandId) {
+	public boolean execCommand(final String commandId) {
 		return doc.execCommand(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByClassName(String classNames) {
+	public HTMLCollection getElementsByClassName(final String classNames) {
 		return doc.getElementsByClassName(classNames);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection getElementsByName(String elementName) {
+	public HTMLCollection getElementsByName(final String elementName) {
 		return doc.getElementsByName(elementName);
 	}
 
@@ -1133,25 +1133,25 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public Document open(String url, String name, String features, boolean replace) {
+	public Document open(final String url, final String name, final String features, final boolean replace) {
 		return doc.open(url, name, features, replace);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Document open(String url, String name, String features) {
+	public Document open(final String url, final String name, final String features) {
 		return doc.open(url, name, features);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Document open(String url, String name) {
+	public Document open(final String url, final String name) {
 		return doc.open(url, name);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Document open(String url) {
+	public Document open(final String url) {
 		return doc.open(url);
 	}
 
@@ -1163,31 +1163,31 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean queryCommandEnabled(String commandId) {
+	public boolean queryCommandEnabled(final String commandId) {
 		return doc.queryCommandEnabled(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean queryCommandIndeterm(String commandId) {
+	public boolean queryCommandIndeterm(final String commandId) {
 		return doc.queryCommandIndeterm(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean queryCommandState(String commandId) {
+	public boolean queryCommandState(final String commandId) {
 		return doc.queryCommandState(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean queryCommandSupported(String commandId) {
+	public boolean queryCommandSupported(final String commandId) {
 		return doc.queryCommandSupported(commandId);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public String queryCommandValue(String commandId) {
+	public String queryCommandValue(final String commandId) {
 		return doc.queryCommandValue(commandId);
 	}
 
@@ -1200,14 +1200,14 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void write(String text) {
+	public void write(final String text) {
 		doc.write(text);
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void writeln(String text) {
+	public void writeln(final String text) {
 		doc.writeln(text);
 
 	}
@@ -1221,14 +1221,14 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public XPathNSResolver createNSResolver(Node nodeResolver) {
+	public XPathNSResolver createNSResolver(final Node nodeResolver) {
 		return doc.createNSResolver(nodeResolver);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public XPathResult evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type,
-			Object result) {
+	public XPathResult evaluate(final String expression, final Node contextNode, final XPathNSResolver resolver, final short type,
+                                final Object result) {
 		return doc.evaluate(expression, contextNode, resolver, type, result);
 	}
 
@@ -1238,7 +1238,7 @@ public class XMLDocument implements Document {
 	}
 
 	@Override
-	public void setXml(boolean xml) {
+	public void setXml(final boolean xml) {
 		doc.setXml(xml);
 	}
 }

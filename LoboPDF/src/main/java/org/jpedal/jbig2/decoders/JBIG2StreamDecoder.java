@@ -83,7 +83,7 @@ public class JBIG2StreamDecoder {
 	 *
 	 * @param i a int.
 	 */
-	public void movePointer(int i) {
+	public void movePointer(final int i) {
 		reader.movePointer(i);
 	}
 	
@@ -92,7 +92,7 @@ public class JBIG2StreamDecoder {
 	 *
 	 * @param data an array of {@link byte} objects.
 	 */
-	public void setGlobalData(byte[] data) {
+	public void setGlobalData(final byte[] data) {
 		globalData = data;
 	}
 
@@ -103,12 +103,12 @@ public class JBIG2StreamDecoder {
 	 * @throws java.io.IOException if any.
 	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
 	 */
-	public void decodeJBIG2(byte[] data) throws IOException, JBIG2Exception {
+	public void decodeJBIG2(final byte[] data) throws IOException, JBIG2Exception {
 		reader = new StreamReader(data);
 
 		resetDecoder();
 
-		boolean validFile = checkHeader();
+		final boolean validFile = checkHeader();
 		if (JBIG2StreamDecoder.debug)
 			logger.info("validFile = " + validFile);
 
@@ -221,7 +221,7 @@ public class JBIG2StreamDecoder {
 		boolean finished = false;
 		while (!reader.isFinished() && !finished) {
 
-			SegmentHeader segmentHeader = new SegmentHeader();
+			final SegmentHeader segmentHeader = new SegmentHeader();
 
 			if (JBIG2StreamDecoder.debug)
 				logger.info("==== Segment Header ====");
@@ -231,9 +231,9 @@ public class JBIG2StreamDecoder {
 			// read the Segment data
 			Segment segment = null;
 
-			int segmentType = segmentHeader.getSegmentType();
-			int[] referredToSegments = segmentHeader.getReferredToSegments();
-			int noOfReferredToSegments = segmentHeader.getReferredToSegmentCount();
+			final int segmentType = segmentHeader.getSegmentType();
+			final int[] referredToSegments = segmentHeader.getReferredToSegments();
+			final int noOfReferredToSegments = segmentHeader.getReferredToSegmentCount();
 
 			switch (segmentType) {
 			case Segment.SYMBOL_DICTIONARY:
@@ -440,7 +440,7 @@ public class JBIG2StreamDecoder {
 		}
 
 		if (randomAccessOrganisation) {
-			for (Segment segment : segments) {
+			for (final Segment segment : segments) {
 				segment.readSegment();
 			}
 		}
@@ -452,9 +452,9 @@ public class JBIG2StreamDecoder {
 	 * @param page a int.
 	 * @return a {@link org.jpedal.jbig2.segment.pageinformation.PageInformationSegment} object.
 	 */
-	public PageInformationSegment findPageSegement(int page) {
-		for (Segment segment : segments) {
-			SegmentHeader segmentHeader = segment.getSegmentHeader();
+	public PageInformationSegment findPageSegement(final int page) {
+		for (final Segment segment : segments) {
+			final SegmentHeader segmentHeader = segment.getSegmentHeader();
 			if (segmentHeader.getSegmentType() == Segment.PAGE_INFORMATION && segmentHeader.getPageAssociation() == page) {
 				return (PageInformationSegment) segment;
 			}
@@ -469,8 +469,8 @@ public class JBIG2StreamDecoder {
 	 * @param segmentNumber a int.
 	 * @return a {@link org.jpedal.jbig2.segment.Segment} object.
 	 */
-	public Segment findSegment(int segmentNumber) {
-		for (Segment segment : segments) {
+	public Segment findSegment(final int segmentNumber) {
+		for (final Segment segment : segments) {
 			if (segment.getSegmentHeader().getSegmentNumber() == segmentNumber) {
 				return segment;
 			}
@@ -479,7 +479,7 @@ public class JBIG2StreamDecoder {
 		return null;
 	}
 
-	private void readSegmentHeader(SegmentHeader segmentHeader) throws IOException, JBIG2Exception {
+	private void readSegmentHeader(final SegmentHeader segmentHeader) throws IOException, JBIG2Exception {
 		handleSegmentNumber(segmentHeader);
 
 		handleSegmentHeaderFlags(segmentHeader);
@@ -494,12 +494,12 @@ public class JBIG2StreamDecoder {
 			handleSegmentDataLength(segmentHeader);
 	}
 
-	private void handlePageAssociation(SegmentHeader segmentHeader) throws IOException {
-		int pageAssociation;
+	private void handlePageAssociation(final SegmentHeader segmentHeader) throws IOException {
+		final int pageAssociation;
 
-		boolean isPageAssociationSizeSet = segmentHeader.isPageAssociationSizeSet();
+		final boolean isPageAssociationSizeSet = segmentHeader.isPageAssociationSizeSet();
 		if (isPageAssociationSizeSet) { // field is 4 bytes long
-			short[] buf = new short[4];
+			final short[] buf = new short[4];
 			reader.readByte(buf);
 			pageAssociation = BinaryOperation.getInt32(buf);
 		} else { // field is 1 byte long
@@ -512,25 +512,25 @@ public class JBIG2StreamDecoder {
 			logger.info("pageAssociation = " + pageAssociation);
 	}
 
-	private void handleSegmentNumber(SegmentHeader segmentHeader) throws IOException {
-		short[] segmentBytes = new short[4];
+	private void handleSegmentNumber(final SegmentHeader segmentHeader) throws IOException {
+		final short[] segmentBytes = new short[4];
 		reader.readByte(segmentBytes);
 
-		int segmentNumber = BinaryOperation.getInt32(segmentBytes);
+		final int segmentNumber = BinaryOperation.getInt32(segmentBytes);
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("SegmentNumber = " + segmentNumber);
 		segmentHeader.setSegmentNumber(segmentNumber);
 	}
 
-	private void handleSegmentHeaderFlags(SegmentHeader segmentHeader) throws IOException {
-		short segmentHeaderFlags = reader.readByte();
+	private void handleSegmentHeaderFlags(final SegmentHeader segmentHeader) throws IOException {
+		final short segmentHeaderFlags = reader.readByte();
 		// logger.info("SegmentHeaderFlags = " + SegmentHeaderFlags);
 		segmentHeader.setSegmentHeaderFlags(segmentHeaderFlags);
 	}
 
-	private void handleSegmentReferredToCountAndRententionFlags(SegmentHeader segmentHeader) throws IOException, JBIG2Exception {
-		short referedToSegmentCountAndRetentionFlags = reader.readByte();
+	private void handleSegmentReferredToCountAndRententionFlags(final SegmentHeader segmentHeader) throws IOException, JBIG2Exception {
+		final short referedToSegmentCountAndRetentionFlags = reader.readByte();
 
 		int referredToSegmentCount = (referedToSegmentCountAndRetentionFlags & 224) >> 5; // 224
 																							// =
@@ -538,7 +538,7 @@ public class JBIG2StreamDecoder {
 
 		short[] retentionFlags = null;
 		/** take off the first three bits of the first byte */
-		short firstByte = (short) (referedToSegmentCountAndRetentionFlags & 31); // 31 =
+		final short firstByte = (short) (referedToSegmentCountAndRetentionFlags & 31); // 31 =
 																					// 00011111
 
 		if (referredToSegmentCount <= 4) { // short form
@@ -548,7 +548,7 @@ public class JBIG2StreamDecoder {
 
 		} else if (referredToSegmentCount == 7) { // long form
 
-			short[] longFormCountAndFlags = new short[4];
+			final short[] longFormCountAndFlags = new short[4];
 			/** add the first byte of the four */
 			longFormCountAndFlags[0] = firstByte;
 
@@ -560,10 +560,10 @@ public class JBIG2StreamDecoder {
 			referredToSegmentCount = BinaryOperation.getInt32(longFormCountAndFlags);
 
 			/** calculate the number of bytes in this field */
-			int noOfBytesInField = (int) Math.ceil(4 + ((referredToSegmentCount + 1) / 8d));
+			final int noOfBytesInField = (int) Math.ceil(4 + ((referredToSegmentCount + 1) / 8d));
 			// logger.info("noOfBytesInField = " + noOfBytesInField);
 
-			int noOfRententionFlagBytes = noOfBytesInField - 4;
+			final int noOfRententionFlagBytes = noOfBytesInField - 4;
 			retentionFlags = new short[noOfRententionFlagBytes];
 			reader.readByte(retentionFlags);
 
@@ -582,29 +582,29 @@ public class JBIG2StreamDecoder {
 			logger.info("retentionFlags = ");
 
 		if (JBIG2StreamDecoder.debug) {
-			for (short s : retentionFlags) {
+			for (final short s : retentionFlags) {
 				logger.info(s + " ");
 			}
 		}
 	}
 
-	private void handleReferedToSegmentNumbers(SegmentHeader segmentHeader) throws IOException {
-		int referredToSegmentCount = segmentHeader.getReferredToSegmentCount();
-		int[] referredToSegments = new int[referredToSegmentCount];
+	private void handleReferedToSegmentNumbers(final SegmentHeader segmentHeader) throws IOException {
+		final int referredToSegmentCount = segmentHeader.getReferredToSegmentCount();
+		final int[] referredToSegments = new int[referredToSegmentCount];
 
-		int segmentNumber = segmentHeader.getSegmentNumber();
+		final int segmentNumber = segmentHeader.getSegmentNumber();
 
 		if (segmentNumber <= 256) {
 			for (int i = 0; i < referredToSegmentCount; i++)
 				referredToSegments[i] = reader.readByte();
 		} else if (segmentNumber <= 65536) {
-			short[] buf = new short[2];
+			final short[] buf = new short[2];
 			for (int i = 0; i < referredToSegmentCount; i++) {
 				reader.readByte(buf);
 				referredToSegments[i] = BinaryOperation.getInt16(buf);
 			}
 		} else {
-			short[] buf = new short[4];
+			final short[] buf = new short[4];
 			for (int i = 0; i < referredToSegmentCount; i++) {
 				reader.readByte(buf);
 				referredToSegments[i] = BinaryOperation.getInt32(buf);
@@ -615,24 +615,24 @@ public class JBIG2StreamDecoder {
 
 		if (JBIG2StreamDecoder.debug) {
 			logger.info("referredToSegments = ");
-			for (int i : referredToSegments)
+			for (final int i : referredToSegments)
 				logger.info(i + " ");
 			logger.info("");
 		}
 	}
 
 	private int getNoOfPages() throws IOException {
-		short[] noOfPages = new short[4];
+		final short[] noOfPages = new short[4];
 		reader.readByte(noOfPages);
 
 		return BinaryOperation.getInt32(noOfPages);
 	}
 
-	private void handleSegmentDataLength(SegmentHeader segmentHeader) throws IOException {
-		short[] buf = new short[4];
+	private void handleSegmentDataLength(final SegmentHeader segmentHeader) throws IOException {
+		final short[] buf = new short[4];
 		reader.readByte(buf);
 		
-		int dateLength = BinaryOperation.getInt32(buf);
+		final int dateLength = BinaryOperation.getInt32(buf);
 		segmentHeader.setDataLength(dateLength);
 
 		if (JBIG2StreamDecoder.debug)
@@ -640,22 +640,22 @@ public class JBIG2StreamDecoder {
 	}
 
 	private void setFileHeaderFlags() throws IOException {
-		short headerFlags = reader.readByte();
+		final short headerFlags = reader.readByte();
 
 		if ((headerFlags & 0xfc) != 0) {
 			logger.info("Warning, reserved bits (2-7) of file header flags are not zero " + headerFlags);
 		}
 
-		int fileOrganisation = headerFlags & 1;
+		final int fileOrganisation = headerFlags & 1;
 		randomAccessOrganisation = fileOrganisation == 0;
 
-		int pagesKnown = headerFlags & 2;
+		final int pagesKnown = headerFlags & 2;
 		noOfPagesKnown = pagesKnown == 0;
 	}
 
 	private boolean checkHeader() throws IOException {
-		short[] controlHeader = new short[] { 151, 74, 66, 50, 13, 10, 26, 10 };
-		short[] actualHeader = new short[8];
+		final short[] controlHeader = new short[] { 151, 74, 66, 50, 13, 10, 26, 10 };
+		final short[] actualHeader = new short[8];
 		reader.readByte(actualHeader);
 
 		return Arrays.equals(controlHeader, actualHeader);
@@ -668,7 +668,7 @@ public class JBIG2StreamDecoder {
 	 * @return a int.
 	 * @throws java.io.IOException if any.
 	 */
-	public int readBits(int num) throws IOException {
+	public int readBits(final int num) throws IOException {
 		return reader.readBits(num);
 	}
 
@@ -688,7 +688,7 @@ public class JBIG2StreamDecoder {
 	 * @param buff an array of {@link short} objects.
 	 * @throws java.io.IOException if any.
 	 */
-	public void readByte(short[] buff) throws IOException {
+	public void readByte(final short[] buff) throws IOException {
 		reader.readByte(buff);
 	}
 
@@ -716,7 +716,7 @@ public class JBIG2StreamDecoder {
 	 *
 	 * @param bitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
 	 */
-	public void appendBitmap(JBIG2Bitmap bitmap) {
+	public void appendBitmap(final JBIG2Bitmap bitmap) {
 		bitmaps.add(bitmap);
 	}
 
@@ -726,8 +726,8 @@ public class JBIG2StreamDecoder {
 	 * @param bitmapNumber a int.
 	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
 	 */
-	public JBIG2Bitmap findBitmap(int bitmapNumber) {
-		for (JBIG2Bitmap bitmap : bitmaps) {
+	public JBIG2Bitmap findBitmap(final int bitmapNumber) {
+		for (final JBIG2Bitmap bitmap : bitmaps) {
 			if (bitmap.getBitmapNumber() == bitmapNumber) {
 				return bitmap;
 			}
@@ -742,8 +742,8 @@ public class JBIG2StreamDecoder {
 	 * @param i a int.
 	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
 	 */
-	public JBIG2Bitmap getPageAsJBIG2Bitmap(int i) {
-		JBIG2Bitmap pageBitmap = findPageSegement(1).getPageBitmap();
+	public JBIG2Bitmap getPageAsJBIG2Bitmap(final int i) {
+		final JBIG2Bitmap pageBitmap = findPageSegement(1).getPageBitmap();
 		return pageBitmap;
 	}
 

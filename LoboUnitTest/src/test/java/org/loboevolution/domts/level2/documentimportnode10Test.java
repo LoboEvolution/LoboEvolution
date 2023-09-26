@@ -60,12 +60,12 @@ public class documentimportnode10Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentFragment docFragment;
-        HTMLCollection childList;
-        boolean success;
-        Node addressNode;
-        Node importedDocFrag;
+        final Document doc;
+        final DocumentFragment docFragment;
+        final HTMLCollection childList;
+        final boolean success;
+        final Node addressNode;
+        final Node importedDocFrag;
         doc = sampleXmlFile("staffNS.xml");
         docFragment = doc.createDocumentFragment();
         childList = doc.getElementsByTagNameNS("*", "address");

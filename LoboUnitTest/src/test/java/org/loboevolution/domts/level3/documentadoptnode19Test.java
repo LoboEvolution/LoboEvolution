@@ -34,7 +34,6 @@ import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.Assert.assertTrue;
 
@@ -50,10 +49,10 @@ import static org.junit.Assert.assertTrue;
 public class documentadoptnode19Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap notationMap;
-        Notation notation;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap notationMap;
+        final Notation notation;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         notationMap = docType.getNotations();
@@ -63,7 +62,7 @@ public class documentadoptnode19Test extends LoboUnitTest {
         boolean success = false;
         try {
             doc.adoptNode(notation);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
         assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);

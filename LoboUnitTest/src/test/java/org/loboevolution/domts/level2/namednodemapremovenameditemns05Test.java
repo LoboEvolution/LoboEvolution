@@ -59,12 +59,12 @@ public class namednodemapremovenameditemns05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        DocumentType docType;
-        NamedNodeMap entities;
-        NamedNodeMap notations;
+        final Document doc;
+        final DocumentType docType;
+        final NamedNodeMap entities;
+        final NamedNodeMap notations;
         Node removedNode;
-        String nullNS = null;
+        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
@@ -77,7 +77,7 @@ public class namednodemapremovenameditemns05Test extends LoboUnitTest {
             removedNode = entities.removeNamedItemNS(nullNS, "ent1");
             fail("entity_throw_DOMException");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 8:
                     break;
@@ -92,7 +92,7 @@ public class namednodemapremovenameditemns05Test extends LoboUnitTest {
             removedNode = notations.removeNamedItemNS(nullNS, "notation1");
             fail("notation_throw_DOMException");
 
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             switch (ex.getCode()) {
                 case 8:
                 case 7:

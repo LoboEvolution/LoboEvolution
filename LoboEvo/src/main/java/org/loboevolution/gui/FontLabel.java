@@ -48,7 +48,7 @@ public class FontLabel extends JLabel {
 	 *
 	 * @param text a {@link java.lang.String} object.
 	 */
-	public FontLabel(String text) {
+	public FontLabel(final String text) {
 		super(text, SwingConstants.CENTER);
 		createAndShowGUI();
 	}

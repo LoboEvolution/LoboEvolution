@@ -52,8 +52,8 @@ public class hc_nodedocumentnodenameTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        String documentName;
+        final Document doc;
+        final String documentName;
         doc = sampleXmlFile("hc_staff.xml");
         documentName = doc.getNodeName();
         assertEquals("documentNodeName", "[object HTMLDocument]", documentName);

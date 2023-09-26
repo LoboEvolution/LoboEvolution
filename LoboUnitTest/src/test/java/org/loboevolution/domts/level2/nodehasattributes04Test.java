@@ -30,7 +30,6 @@ package org.loboevolution.domts.level2;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.*;
 
 import static org.junit.Assert.assertTrue;
@@ -54,19 +53,19 @@ public class nodehasattributes04Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Document newDoc;
-        DocumentType docType = null;
+        final Document doc;
+        final Document newDoc;
+        final DocumentType docType = null;
 
-        DOMImplementation domImpl;
-        Element element;
-        Element elementTest;
-        Element elementDoc;
-        Attr attribute;
-        Node setNode;
-        Node appendedChild;
-        HTMLCollection elementList;
-        boolean hasAttributes;
+        final DOMImplementation domImpl;
+        final Element element;
+        final Element elementTest;
+        final Element elementDoc;
+        final Attr attribute;
+        final Node setNode;
+        final Node appendedChild;
+        final HTMLCollection elementList;
+        final boolean hasAttributes;
         doc = sampleXmlFile("staffNS.xml");
         
         domImpl = doc.getImplementation();

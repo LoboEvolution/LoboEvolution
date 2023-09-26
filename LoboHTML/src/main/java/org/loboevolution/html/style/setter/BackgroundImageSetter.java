@@ -50,10 +50,10 @@ public class BackgroundImageSetter implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(CSSStyleDeclaration declaration, String newValue) {
+	public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
 		String baseHref = null;
 		String finalValue;
-		CSSStyleDeclarationImpl props = (CSSStyleDeclarationImpl) declaration;
+		final CSSStyleDeclarationImpl props = (CSSStyleDeclarationImpl) declaration;
 		final AbstractCSSRuleImpl rule = (AbstractCSSRuleImpl) props.getParentRule();
 		if (rule != null) {
 			final CSSStyleSheetImpl ssheet = rule.getParentStyleSheet();

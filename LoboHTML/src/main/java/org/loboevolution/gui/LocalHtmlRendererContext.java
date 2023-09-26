@@ -77,7 +77,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
      * @param htmlPanel a {@link HtmlPanel} object.
      * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
      */
-    public LocalHtmlRendererContext(HtmlPanel htmlPanel, UserAgentContext ucontext) {
+    public LocalHtmlRendererContext(final HtmlPanel htmlPanel, final UserAgentContext ucontext) {
         this.htmlPanel = htmlPanel;
         this.parentRcontext = null;
         this.bcontext = ucontext;
@@ -85,7 +85,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void alert(String message) {
+    public void alert(final String message) {
         JOptionPane.showMessageDialog(this.htmlPanel, message);
     }
 
@@ -108,7 +108,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public boolean confirm(String message) {
+    public boolean confirm(final String message) {
         final int retValue = JOptionPane.showConfirmDialog(this.htmlPanel, message, "Confirm",
                 JOptionPane.YES_NO_OPTION);
         return retValue == JOptionPane.YES_OPTION;
@@ -116,7 +116,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void error(String message) {
+    public void error(final String message) {
         if (logger.isLoggable(Level.SEVERE)) {
             logger.log(Level.SEVERE, message);
         }
@@ -124,7 +124,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void error(String message, Throwable throwable) {
+    public void error(final String message, final Throwable throwable) {
         if (logger.isLoggable(Level.SEVERE)) {
             logger.log(Level.SEVERE, message, throwable);
         }
@@ -144,12 +144,12 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public String getCurrentURL() {
-        HtmlPanel html = htmlPanel;
-        IBrowserPanel panel = html.getBrowserPanel();
+        final HtmlPanel html = htmlPanel;
+        final IBrowserPanel panel = html.getBrowserPanel();
         if (panel != null) {
-            IBrowserFrame frame = panel.getBrowserFrame();
-            IToolBar toolbar = frame.getToolbar();
-            JTextField jtf = toolbar.getAddressBar();
+            final IBrowserFrame frame = panel.getBrowserFrame();
+            final IToolBar toolbar = frame.getToolbar();
+            final JTextField jtf = toolbar.getAddressBar();
             return jtf.getText();
         } else {
             return "";
@@ -212,19 +212,19 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public boolean isVisitedLink(HTMLLinkElement link) {
+    public boolean isVisitedLink(final HTMLLinkElement link) {
         return false;
     }
 
 
     /** {@inheritDoc} */
     @Override
-    public void linkClicked(URL url, boolean isNewTab) {
+    public void linkClicked(final URL url, final boolean isNewTab) {
     }
 
     /** {@inheritDoc} */
     @Override
-    public void moveInHistory(int offset) {
+    public void moveInHistory(final int offset) {
         if (logger.isLoggable(Level.WARNING)) {
             logger.log(Level.WARNING, "moveInHistory() does nothing, unless overridden.");
         }
@@ -261,41 +261,41 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void navigate(String fullURL) throws Exception {
+    public void navigate(final String fullURL) throws Exception {
         final URL href = Urls.createURL(null, fullURL);
         this.navigate(href, "_this");
     }
 
     /** {@inheritDoc} */
     @Override
-    public void navigate(final URL href, String target) {
+    public void navigate(final URL href, final String target) {
         submitForm("GET", href, target, null, null);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean onContextMenu(HTMLElement element, MouseEvent event) {
+    public boolean onContextMenu(final HTMLElement element, final MouseEvent event) {
         return false;
     }
 
     /** {@inheritDoc} */
     @Override
-    public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
+    public HtmlRendererContext open(final URL url, final String windowName, final String windowFeatures, final boolean replace) {
         return null;
     }
 
 
     /** {@inheritDoc} */
     @Override
-    public void openImageViewer(URL srcUrl) {}
+    public void openImageViewer(final URL srcUrl) {}
 
     /** {@inheritDoc} */
     @Override
-    public void openImageViewer(String fullURL, InputStream stream) { }
+    public void openImageViewer(final String fullURL, final InputStream stream) { }
 
     /** {@inheritDoc} */
     @Override
-    public String prompt(String message, String inputDefault) {
+    public String prompt(final String message, final String inputDefault) {
         return JOptionPane.showInputDialog(this.htmlPanel, message);
     }
 
@@ -315,7 +315,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void resizeBy(double byWidth, double byHeight) {
+    public void resizeBy(final double byWidth, final double byHeight) {
         final Window window = getWindow(this.htmlPanel);
         if (window != null) {
             window.setSize(window.getWidth() + (int)byWidth, window.getHeight() + (int)byHeight);
@@ -324,7 +324,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void resizeTo(double width, double height) {
+    public void resizeTo(final double width, final double height) {
         final Window window = getWindow(this.htmlPanel);
         if (window != null) {
             window.setSize((int)width, (int)height);
@@ -374,13 +374,13 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void scroll(double x, double y) {
+    public void scroll(final double x, final double y) {
         this.htmlPanel.scroll(x, y);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void scrollBy(double x, double y) {
+    public void scrollBy(final double x, final double y) {
         this.htmlPanel.scrollBy(x, y);
     }
 
@@ -392,7 +392,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void setScrollx(double scrollx) {
+    public void setScrollx(final double scrollx) {
         this.scrollx = scrollx;
     }
 
@@ -404,38 +404,38 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void setScrolly(double scrolly) {
+    public void setScrolly(final double scrolly) {
         this.scrolly = scrolly;
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setDefaultStatus(String message) {
+    public void setDefaultStatus(final String message) {
         this.warn("setDefaultStatus(): Not overridden.");
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setHtmlPanel(HtmlPanel panel) {
+    public void setHtmlPanel(final HtmlPanel panel) {
         this.htmlPanel = panel;
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setOpener(HtmlRendererContext opener) {
+    public void setOpener(final HtmlRendererContext opener) {
         this.opener = opener;
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setStatus(String message) {
+    public void setStatus(final String message) {
         this.warn("setStatus(): Not overridden");
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setCursor(Optional<Cursor> cursorOpt) {
-        Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
+    public void setCursor(final Optional<Cursor> cursorOpt) {
+        final Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
         htmlPanel.setCursor(cursor);
     }
 
@@ -446,7 +446,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void warn(String message) {
+    public void warn(final String message) {
         if (logger.isLoggable(Level.WARNING)) {
             logger.log(Level.WARNING, message);
         }
@@ -454,13 +454,13 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void warn(String message, Throwable throwable) {
+    public void warn(final String message, final Throwable throwable) {
         if (logger.isLoggable(Level.WARNING)) {
             logger.log(Level.WARNING, message, throwable);
         }
     }
 
-    private static Window getWindow(Component c) {
+    private static Window getWindow(final Component c) {
         Component current = c;
         while (current != null && !(current instanceof Window)) {
             current = current.getParent();
@@ -472,7 +472,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
         return Proxy.NO_PROXY;
     }
 
-    private void submitFormSync(final String method, final java.net.URL action, final String target, String enctype,
+    private void submitFormSync(final String method, final java.net.URL action, final String target, final String enctype,
                                 final FormInput[] formInputs) throws Exception {
     }
 

@@ -54,7 +54,7 @@ public class nodehasattributes01Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         Element element;
         HTMLCollection elementList;
         boolean hasAttributes;

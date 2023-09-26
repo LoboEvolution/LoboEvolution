@@ -48,11 +48,11 @@ public class nodecomparedocumentposition07Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        Element docElem;
-        Element newElem;
-        int documentPosition;
-        int documentElementPosition;
+        final Document doc;
+        final Element docElem;
+        final Element newElem;
+        final int documentPosition;
+        final int documentElementPosition;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         newElem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");

@@ -73,7 +73,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.renderer.RenderableSpot} object.
 	 */
-	RenderableSpot getLowestRenderableSpot(int x, int y);
+	RenderableSpot getLowestRenderableSpot(int x, final int y);
 
 	/**
 	 * <p>getGUIPoint.</p>
@@ -82,7 +82,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param clientY a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Point} object.
 	 */
-	Point getGUIPoint(int clientX, int clientY);
+	Point getGUIPoint(int clientX, final int clientY);
 
 	/**
 	 * <p>getOrigin.</p>
@@ -98,7 +98,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param guiY a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Point} object.
 	 */
-	Point getRenderablePoint(int guiX, int guiY);
+	Point getRenderablePoint(int guiX, final int guiY);
 
 	/**
 	 * <p>getOriginRelativeTo.</p>
@@ -223,7 +223,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
-	boolean onDoubleClick(final MouseEvent event, int x, int y);
+	boolean onDoubleClick(final MouseEvent event, final int x, final int y);
 
 	/**
 	 * <p>onMouseClick.</p>
@@ -233,7 +233,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
-	boolean onMouseClick(final MouseEvent event, int x, int y);
+	boolean onMouseClick(final MouseEvent event, final int x, final int y);
 
 	/**
 	 * <p>onMouseDisarmed.</p>
@@ -252,7 +252,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param triggerEvent a boolean.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	void onMouseMoved(final MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit);
+	void onMouseMoved(final MouseEvent event, final int x, final int y, boolean triggerEvent, ModelNode limit);
 
 	/**
 	 * <p>onMousePressed.</p>
@@ -262,7 +262,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
-	boolean onMousePressed(final MouseEvent event, int x, int y);
+	boolean onMousePressed(final MouseEvent event, final int x, final int y);
 
 	/**
 	 * <p>onMouseReleased.</p>
@@ -272,7 +272,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
-	boolean onMouseReleased(final MouseEvent event, int x, int y);
+	boolean onMouseReleased(final MouseEvent event, final int x, final int y);
 
 	/**
 	 * <p>onRightClick.</p>
@@ -282,7 +282,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
-	boolean onRightClick(final MouseEvent event, int x, int y);
+	boolean onRightClick(final MouseEvent event, final int x, final int y);
 
 	void onMouseScroll();
 
@@ -295,7 +295,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param endPoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
 	 * @return a boolean.
 	 */
-	boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint);
+	boolean paintSelection(final Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint);
 
 	/**
 	 * <p>extractSelectionText.</p>
@@ -322,7 +322,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param y a {@link java.lang.Integer} object.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
-	void onMouseOut(final MouseEvent event, int x, int y, ModelNode limit);
+	void onMouseOut(final MouseEvent event, final int x, final int y, ModelNode limit);
 
 	/**
 	 * <p>paintTranslated.</p>
@@ -355,7 +355,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param width a {@link java.lang.Integer} object.
 	 * @param height a {@link java.lang.Integer} object.
 	 */
-	void repaint(int x, int y, int width, int height);
+	void repaint(int x, final int y, final int width, final int height);
 
 	/**
 	 * <p>setBounds.</p>
@@ -365,7 +365,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param with a {@link java.lang.Integer} object.
 	 * @param height a {@link java.lang.Integer} object.
 	 */
-	void setBounds(int x, int y, int with, int height);
+	void setBounds(int x, final int y, final int with, final int height);
 
 	/**
 	 * <p>setHeight.</p>
@@ -387,7 +387,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
 	 */
-	void setOrigin(int x, int y);
+	void setOrigin(int x, final int y);
 
 	/**
 	 * <p>setOriginalParent.</p>

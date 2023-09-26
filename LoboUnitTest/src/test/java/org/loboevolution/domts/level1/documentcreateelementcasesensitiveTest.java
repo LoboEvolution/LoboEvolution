@@ -58,11 +58,11 @@ public class documentcreateelementcasesensitiveTest extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        Document doc;
-        Element newElement1;
-        Element newElement2;
-        String attribute1;
-        String attribute2;
+        final Document doc;
+        final Element newElement1;
+        final Element newElement2;
+        final String attribute1;
+        final String attribute2;
         doc = sampleXmlFile("staff.xml");
         newElement1 = doc.createElement("ADDRESS");
         newElement2 = doc.createElement("address");

@@ -32,7 +32,6 @@ import org.sexydock.tabs.jhrome.JhromeTabbedPaneUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -63,7 +62,7 @@ public class BasicTabUI extends TabUI {
         init();
     }
 
-    public static BasicTabUI createUI(JComponent c) {
+    public static BasicTabUI createUI(final JComponent c) {
         return new BasicTabUI();
     }
 
@@ -76,10 +75,10 @@ public class BasicTabUI extends TabUI {
         label.setOpaque(false);
 
         closeButton.addActionListener(e -> {
-            JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(tab);
-            ITabCloseButtonListener closeButtonListener = PropertyGetter.get(ITabCloseButtonListener.class, tab, CLOSE_BUTTON_LISTENER, JTabbedPane.class, JhromeTabbedPaneUI.TAB_CLOSE_BUTTON_LISTENER);
+            final JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(tab);
+            final ITabCloseButtonListener closeButtonListener = PropertyGetter.get(ITabCloseButtonListener.class, tab, CLOSE_BUTTON_LISTENER, JTabbedPane.class, JhromeTabbedPaneUI.TAB_CLOSE_BUTTON_LISTENER);
             if (closeButtonListener != null) {
-                int index = tabbedPane.indexOfComponent(tab.getContent());
+                final int index = tabbedPane.indexOfComponent(tab.getContent());
                 if (index >= 0) {
                     closeButtonListener.tabCloseButtonPressed(tabbedPane, index);
                 }
@@ -91,14 +90,14 @@ public class BasicTabUI extends TabUI {
         return tab;
     }
 
-    protected void onHighlightTimerEvent(ActionEvent e) {
+    protected void onHighlightTimerEvent(final ActionEvent e) {
         if (tab != null) {
             tab.repaint();
         }
     }
 
     @Override
-    public void installUI(JComponent c) {
+    public void installUI(final JComponent c) {
         super.installUI(c);
         tab = (Tab) c;
 
@@ -110,7 +109,7 @@ public class BasicTabUI extends TabUI {
     }
 
     @Override
-    public void uninstallUI(JComponent c) {
+    public void uninstallUI(final JComponent c) {
         if (c != tab) {
             throw new IllegalArgumentException("c is not the Tab this UI is bound to");
         }
@@ -128,7 +127,7 @@ public class BasicTabUI extends TabUI {
     }
 
     @Override
-    public void paint(Graphics g, JComponent c) {
+    public void paint(final Graphics g, final JComponent c) {
         tab = (Tab) c;
         update();
         super.paint(g, c);
@@ -140,9 +139,9 @@ public class BasicTabUI extends TabUI {
         label.setDisplayedMnemonic(tab.getMnemonic());
         label.setDisplayedMnemonicIndex(tab.getDisplayedMnemonicIndex());
 
-        JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(tab);
+        final JTabbedPane tabbedPane = SwingUtils.getJTabbedPaneAncestor(tab);
 
-        boolean enabled = tab.isEnabled() && (tabbedPane == null || tabbedPane.isEnabled());
+        final boolean enabled = tab.isEnabled() && (tabbedPane == null || tabbedPane.isEnabled());
 
         closeButton.setVisible(PropertyGetter.get(Boolean.class, tab, CLOSE_BUTTON_VISIBLE, JTabbedPane.class, JhromeTabbedPaneUI.TAB_CLOSE_BUTTONS_VISIBLE, false));
         closeButton.setEnabled(enabled);
@@ -174,19 +173,19 @@ public class BasicTabUI extends TabUI {
     }
 
     @Override
-    public boolean isDraggableAt(Tab tab, Point p) {
+    public boolean isDraggableAt(final Tab tab, final Point p) {
         return isHoverableAt(tab, p) && !closeButton.contains(SwingUtilities.convertPoint(tab, p, closeButton));
     }
 
     @Override
-    public boolean isSelectableAt(Tab tab, Point p) {
+    public boolean isSelectableAt(final Tab tab, final Point p) {
         return isDraggableAt(tab, p);
     }
 
     @Override
-    public boolean isHoverableAt(Tab tab, Point p) {
-        Insets insets = tab.getInsets();
-        Rectangle bounds = tab.getBounds();
+    public boolean isHoverableAt(final Tab tab, final Point p) {
+        final Insets insets = tab.getInsets();
+        final Rectangle bounds = tab.getBounds();
         bounds.x = insets.left;
         bounds.width -= insets.left + insets.right;
         bounds.y = insets.top;
@@ -198,7 +197,7 @@ public class BasicTabUI extends TabUI {
         return unselectedForeground;
     }
 
-    public void setUnselectedLabelColor(Color unselectedLabelColor) {
+    public void setUnselectedLabelColor(final Color unselectedLabelColor) {
         this.unselectedForeground = unselectedLabelColor;
     }
 
@@ -244,19 +243,19 @@ public class BasicTabUI extends TabUI {
 
     private static class TabLayout extends BorderLayout {
         @Override
-        public Dimension minimumLayoutSize(Container target) {
-            Dimension minSize = super.minimumLayoutSize(target);
+        public Dimension minimumLayoutSize(final Container target) {
+            final Dimension minSize = super.minimumLayoutSize(target);
             if (minSize != null) {
-                Insets insets = target.getInsets();
+                final Insets insets = target.getInsets();
                 minSize.width = insets.left + insets.right;
             }
             return minSize;
         }
     }
 
-    private class PropertyChangeHandler implements PropertyChangeListener {
+    private final class PropertyChangeHandler implements PropertyChangeListener {
         @Override
-        public void propertyChange(PropertyChangeEvent evt) {
+        public void propertyChange(final PropertyChangeEvent evt) {
             update();
         }
     }

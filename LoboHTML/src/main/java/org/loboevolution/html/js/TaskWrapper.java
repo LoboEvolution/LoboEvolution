@@ -37,7 +37,7 @@ class TaskWrapper {
 	 * @param timer a {@link javax.swing.Timer} object.
 	 * @param retained a {@link java.lang.Object} object.
 	 */
-	public TaskWrapper(Timer timer, Object retained) {
+	public TaskWrapper(final Timer timer, final Object retained) {
 		this.timer = timer;
 	}
 }

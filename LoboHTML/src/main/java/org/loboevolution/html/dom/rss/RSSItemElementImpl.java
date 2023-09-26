@@ -56,13 +56,14 @@ public class RSSItemElementImpl extends HTMLElementImpl {
 	 * @param graphics a {@link java.awt.Graphics2D} object.
 	 * @param y a int.
 	 */
-	public void draw(Graphics2D graphics, int y) {
+	public void draw(final Graphics2D graphics, final int ydraw) {
+		int y = ydraw;
 		if (hasChildNodes()) {
-			NodeListImpl children = (NodeListImpl)getChildNodes();
-			for (Iterator<Node> i= children.iterator(); i.hasNext();) {
-				Node child = i.next();
+			final NodeListImpl children = (NodeListImpl)getChildNodes();
+			for (final Iterator<Node> i = children.iterator(); i.hasNext();) {
+				final Node child = i.next();
 				if (child instanceof RSSDrawable) {
-					RSSDrawable channel = (RSSDrawable) child;
+					final RSSDrawable channel = (RSSDrawable) child;
 					channel.draw(graphics, y);
 					y = y + 20;
 				}

@@ -42,20 +42,20 @@ public class HTMLSuperscriptElementImpl extends HTMLElementImpl {
 	 * @param name a {@link java.lang.String} object.
 	 * @param superscript a int.
 	 */
-	public HTMLSuperscriptElementImpl(String name, int superscript) {
+	public HTMLSuperscriptElementImpl(final String name, final int superscript) {
 		super(name);
 		this.superscript = superscript;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
+	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new FontStyleRenderState(prevRenderState, this, this.superscript);
 	}
 
 	@Override
 	public int getClientHeight() {
-		int clientHeight = super.getClientHeight();
+		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 15 : clientHeight;
 	}
 	

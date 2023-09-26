@@ -1616,7 +1616,7 @@ public class CSSSelectorTest extends LoboUnitTest {
         emptyAndDetached(":visited", messages);
     }
 
-    private void emptyAndDetached(final String selector, String[] messages) {
+    private void emptyAndDetached(final String selector, final String[] messages) {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"

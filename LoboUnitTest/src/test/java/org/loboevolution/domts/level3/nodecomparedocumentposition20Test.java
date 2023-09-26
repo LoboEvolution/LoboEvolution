@@ -52,13 +52,13 @@ public class nodecomparedocumentposition20Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        HTMLCollection elemList;
-        Element elemName;
-        CDATASection cdata;
-        Text txt;
-        int txtPosition;
-        int cdataPosition;
+        final Document doc;
+        final HTMLCollection elemList;
+        final Element elemName;
+        final CDATASection cdata;
+        final Text txt;
+        final int txtPosition;
+        final int cdataPosition;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         elemName = (Element) elemList.item(1);

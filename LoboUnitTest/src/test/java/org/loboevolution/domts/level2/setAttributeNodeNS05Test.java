@@ -66,13 +66,13 @@ public class setAttributeNodeNS05Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        String namespaceURI = "http://www.newattr.com";
-        String qualifiedName = "newAttr";
-        Document doc1;
-        Document doc2;
-        Attr newAttr;
-        HTMLCollection elementList;
-        Node testAddr;
+        final String namespaceURI = "http://www.newattr.com";
+        final String qualifiedName = "newAttr";
+        final Document doc1;
+        final Document doc2;
+        final Attr newAttr;
+        final HTMLCollection elementList;
+        final Node testAddr;
         doc1 = sampleXmlFile("staffNS.xml");
         doc2 = sampleXmlFile("staffNS.xml");
         newAttr = doc2.createAttributeNS(namespaceURI, qualifiedName);
@@ -81,7 +81,7 @@ public class setAttributeNodeNS05Test extends LoboUnitTest {
         boolean success = false;
         try {
             ((Element) testAddr).setAttributeNodeNS(newAttr);
-        } catch (DOMException ex) {
+        } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue("throw_WRONG_DOCUMENT_ERR", success);

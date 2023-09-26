@@ -50,14 +50,14 @@ public enum FontType {
 	private static final Map<String, FontType> ENUM_MAP;
 	
 	static {
-		Map<String, FontType> map = new HashMap<>();
-		for (FontType instance : FontType.values()) {
+		final Map<String, FontType> map = new HashMap<>();
+		for (final FontType instance : FontType.values()) {
 			map.put(instance.getValue(), instance);
 		}
 		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	FontType(String value) {
+	FontType(final String value) {
 		this.value = value;
 	}
 
@@ -76,7 +76,7 @@ public enum FontType {
 	 * @param value a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public boolean isEqual(String value) {
+	public boolean isEqual(final String value) {
 		return this.value.equals(value);
 	}
 
@@ -86,7 +86,7 @@ public enum FontType {
 	 * @param actionName a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.laf.FontType} object.
 	 */
-	public static FontType get(String actionName) {
+	public static FontType get(final String actionName) {
 		return ENUM_MAP.get(actionName);
 	}
 

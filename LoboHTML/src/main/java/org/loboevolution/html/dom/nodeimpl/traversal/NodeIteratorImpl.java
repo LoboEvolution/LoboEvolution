@@ -56,7 +56,7 @@ public class NodeIteratorImpl extends AbstractList<Node> implements NodeIterator
 
     private int whatToShow;
 
-    public NodeIteratorImpl(Node root, int whatToShow, NodeFilter filter) {
+    public NodeIteratorImpl(final Node root, final int whatToShow, final NodeFilter filter) {
         this.root = root;
         this.whatToShow = whatToShow;
         this.filter = filter;
@@ -136,7 +136,7 @@ public class NodeIteratorImpl extends AbstractList<Node> implements NodeIterator
         return null;
     }
 
-    private Node nextNode(Node node, boolean visitChildren) {
+    private Node nextNode(final Node node, final boolean visitChildren) {
 
         if (node == null) return root;
 
@@ -169,7 +169,7 @@ public class NodeIteratorImpl extends AbstractList<Node> implements NodeIterator
         return null;
     }
 
-    private Node previousNode(Node node) {
+    private Node previousNode(final Node node) {
         Node result;
         if (node == root) return null;
 
@@ -189,7 +189,7 @@ public class NodeIteratorImpl extends AbstractList<Node> implements NodeIterator
         return result;
     }
 
-    boolean acceptNode(Node node) {
+    boolean acceptNode(final Node node) {
 
         if (filter == null) {
             return ( whatToShow & (1 << node.getNodeType()-1)) != 0 ;

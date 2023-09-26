@@ -47,14 +47,14 @@ import static org.junit.Assert.assertTrue;
 public class nodereplacechild37Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        Document doc2;
-        Attr parent;
-        Text oldChild;
-        EntityReference newChild;
+        final Document doc;
+        final Document doc2;
+        final Attr parent;
+        final Text oldChild;
+        final EntityReference newChild;
         String nodeValue;
-        Node replaced;
-        Node appendedChild;
+        final Node replaced;
+        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
@@ -66,7 +66,7 @@ public class nodereplacechild37Test extends LoboUnitTest {
             boolean success = false;
             try {
                 replaced = parent.replaceChild(newChild, oldChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }
             assertTrue("throw_WRONG_DOCUMENT_ERR", success);

@@ -49,14 +49,14 @@ import static org.junit.Assert.assertTrue;
 public class nodeinsertbefore15Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        EntityReference entRef;
-        Node elemChild;
-        Text txt;
-        Element elem;
-        Comment comment;
-        ProcessingInstruction pi;
-        CDATASection cdata;
+        final Document doc;
+        final EntityReference entRef;
+        final Node elemChild;
+        final Text txt;
+        final Element elem;
+        final Comment comment;
+        final ProcessingInstruction pi;
+        final CDATASection cdata;
         Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         entRef = doc.createEntityReference("delta");
@@ -67,7 +67,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = entRef.insertBefore(cdata, elemChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_1", success);
@@ -78,7 +78,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = entRef.insertBefore(pi, elemChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_2", success);
@@ -89,7 +89,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = entRef.insertBefore(comment, elemChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_3", success);
@@ -100,7 +100,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = entRef.insertBefore(txt, elemChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_4", success);
@@ -111,7 +111,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             boolean success = false;
             try {
                 inserted = entRef.insertBefore(elem, elemChild);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_5", success);

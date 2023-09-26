@@ -48,13 +48,13 @@ import static org.junit.Assert.assertEquals;
 public class nodegettextcontent08Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
+        final Document doc;
         HTMLCollection elemList;
-        Element elem;
-        Attr att;
-        Attr attr;
-        Attr replacedAttr;
-        String textContent;
+        final Element elem;
+        final Attr att;
+        final Attr attr;
+        final Attr replacedAttr;
+        final String textContent;
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         att = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");

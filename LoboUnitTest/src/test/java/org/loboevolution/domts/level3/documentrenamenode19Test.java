@@ -53,12 +53,12 @@ import static org.junit.Assert.assertTrue;
 public class documentrenamenode19Test extends LoboUnitTest {
     @Test
     public void runTest() {
-        Document doc;
-        DOMImplementation domImpl;
-        Element element;
-        DocumentType nullDocType = null;
+        final Document doc;
+        final DOMImplementation domImpl;
+        final Element element;
+        final DocumentType nullDocType = null;
 
-        List<String> qualifiedNames = new ArrayList<>();
+        final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("a_:");
         qualifiedNames.add("_:");
         qualifiedNames.add(":");
@@ -69,11 +69,11 @@ public class documentrenamenode19Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         domImpl.createDocument("http://www.w3.org/DOM/Test", "newD", nullDocType);
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "test");
-        for (String qualifiedName : qualifiedNames) {
+        for (final String qualifiedName : qualifiedNames) {
             boolean success = false;
             try {
                 doc.renameNode(element, "http://www.w3.org/2000/XMLNS", qualifiedName);
-            } catch (DOMException ex) {
+            } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
             assertTrue("documentrenamenode19_NAMESPACE_ERR", success);

@@ -50,10 +50,10 @@ public class canonicalform08Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
-        Document doc;
-        DOMConfiguration domConfig;
-        boolean canSet;
-        DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
+        final Document doc;
+        final DOMConfiguration domConfig;
+        final boolean canSet;
+        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node node;
         String nodeValue;

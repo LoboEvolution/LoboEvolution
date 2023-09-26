@@ -43,7 +43,7 @@ public class NavigatorImpl extends AbstractScriptableDelegate implements Navigat
 	 *
 	 * @param window a {@link org.loboevolution.html.js.WindowImpl} object.
 	 */
-	public NavigatorImpl(WindowImpl window) {
+	public NavigatorImpl(final WindowImpl window) {
 		this.window = window;
 	}
 
@@ -156,14 +156,14 @@ public class NavigatorImpl extends AbstractScriptableDelegate implements Navigat
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean vibrate(int pattern) {
+	public boolean vibrate(final int pattern) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean vibrate(int... pattern) {
+	public boolean vibrate(final int... pattern) {
 		// TODO Auto-generated method stub
 		return false;
 	}

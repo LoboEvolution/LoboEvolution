@@ -47,7 +47,7 @@ public class VirtualCell {
 	 * @param cell a {@link org.loboevolution.html.renderer.table.RTableCell} object.
 	 * @param isTopLeft a boolean.
 	 */
-	public VirtualCell(RTableCell cell, boolean isTopLeft) {
+	public VirtualCell(final RTableCell cell, final boolean isTopLeft) {
 		this.actualCell = cell;
 		this.isTopLeft = isTopLeft;
 	}
@@ -78,9 +78,9 @@ public class VirtualCell {
 	public HtmlLength getHeightLength() {
 		final RTableCell cell = this.actualCell;
 		final String heightText = cell.getHeightText();
-		HTMLElementImpl elem = cell.getCellElement();
+		final HTMLElementImpl elem = cell.getCellElement();
 		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getOwnerDocument();
-		HtmlLength length = heightText == null ? null : new HtmlLength(heightText, doc);
+		final HtmlLength length = heightText == null ? null : new HtmlLength(heightText, doc);
 		if (length != null) {
 			length.divideBy(cell.getRowSpan());
 		}
@@ -104,9 +104,9 @@ public class VirtualCell {
 	public HtmlLength getWidthLength() {
 		final RTableCell cell = this.actualCell;
 		final String widthText = cell.getWidthText();
-		HTMLElementImpl elem = cell.getCellElement();
+		final HTMLElementImpl elem = cell.getCellElement();
 		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getOwnerDocument();
-		HtmlLength length = widthText == null ? null : new HtmlLength(widthText, doc);
+		final HtmlLength length = widthText == null ? null : new HtmlLength(widthText, doc);
 		if (length != null) {
 			length.divideBy(cell.getColSpan());
 		}
@@ -127,7 +127,7 @@ public class VirtualCell {
 	 *
 	 * @param column The column to set.
 	 */
-	public void setColumn(int column) {
+	public void setColumn(final int column) {
 		this.column = column;
 	}
 
@@ -136,7 +136,7 @@ public class VirtualCell {
 	 *
 	 * @param row The row to set.
 	 */
-	public void setRow(int row) {
+	public void setRow(final int row) {
 		this.row = row;
 	}
 }
